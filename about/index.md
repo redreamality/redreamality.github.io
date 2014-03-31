@@ -3,19 +3,17 @@ layout: page
 title: About
 ---
 
-<img src="/res/huntout.png" width="256" height="256" align="right">
+<img src="/res/redreamality.png" width="256" height="256" align="right">
 
-My name is Huntout Zhang. I'm a Chinese senior software engineer living in Beijing with a passion for technology.
+My name is Redreamality Xie. You can call me Remy.
 
-## Elsewhere
+## Contacts
 
-You can find me on a variety of world wild interweb sites where my username is usually "***huntout***".
+You can find me on a variety of world wild interweb sites where my username is usually "***redreamality***".
 
-- [Weibo](http://weibo.com/huntout) · [Twitter](http://twitter.com/huntout) — a good way to make contact
-- [GitHub](https://github.com/huntout) — code, juicy code
-- [Instagram](http://instagram.com/huntout/) — short stories via photo snapshots
-- [Flickr](http://www.flickr.com/photos/huntout/) — photography
-- [Facebook](http://www.facebook.com/huntout) — friends and foes
+- [Email](redreamality[a t]gmail.com)
+- [Weibo](http://weibo.com/redreamality)  — a good way to make contact
+- [GitHub](https://github.com/redreamality) — code, juicy code
+- [Facebook](http://www.facebook.com/redreamality) — friends and foes
 
-### [<img src="http://www.sinaimg.cn/blog/developer/wiki/LOGO_32x32.png" width="29" height="29" style="display:inline-block;vertical-align:middle">](http://weibo.com/huntout) · [<img src="/res/twitter.png" width="29" height="20" style="display:inline-block;vertical-align:middle">](http://twitter.com/huntout) @huntout
 
