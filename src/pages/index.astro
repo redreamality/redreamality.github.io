@@ -1,11 +1,27 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="首页">
+  <div class="text-center">
+    <h1 class="text-4xl font-bold mb-4 dark:text-white">欢迎来到我的个人网站</h1>
+    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">这里是我的项目展示、博客文章和演讲分享的地方</p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <a href="/projects" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">项目展示</h2>
+        <p class="font-normal text-gray-700 dark:text-gray-400">查看我的开源项目和个人作品</p>
+      </a>
+      
+      <a href="/blog" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">博客文章</h2>
+        <p class="font-normal text-gray-700 dark:text-gray-400">阅读我的技术博客和心得分享</p>
+      </a>
+      
+      <a href="/talks" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">演讲分享</h2>
+        <p class="font-normal text-gray-700 dark:text-gray-400">观看我的技术演讲和分享内容</p>
+      </a>
+    </div>
+  </div>
 </Layout>

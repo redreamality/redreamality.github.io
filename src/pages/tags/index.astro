@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const tags = [...new Set(posts.flatMap(post => post.data.tags || []))].sort();
+
+// 计算每个标签的文章数量
+const tagCounts = tags.reduce((acc, tag) => {
+  acc[tag] = posts.filter(post => post.data.tags?.includes(tag)).length;
+  return acc;
+}, {} as Record<string, number>);
+---
+
+<Layout title="标签 | Tags">
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8">标签列表</h1>
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {tags.map((tag) => (
+        <a 
+          href={`/tags/${tag}`}
+          class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <span class="text-2xl mr-2">🏷️</span>
+              <h2 class="text-xl font-semibold">#{tag}</h2>
+            </div>
+            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium px-3 py-1 rounded-full">
+              {tagCounts[tag]} 篇文章
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout> 

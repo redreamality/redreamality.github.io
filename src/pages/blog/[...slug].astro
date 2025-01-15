@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={`${post.data.title} | Blog`}>
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-8">
+        <a 
+          href="/blog" 
+          class="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+        >
+          <span class="mr-2">←</span>
+          返回博客列表
+        </a>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+        <h1 class="text-4xl font-bold mb-6">{post.data.title}</h1>
+        
+        <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400 mb-8">
+          <div>
+            <span class="mr-2">📅</span>
+            {post.data.pubDate.toLocaleDateString('zh-CN')}
+          </div>
+          <div>
+            <span class="mr-2">✍️</span>
+            {post.data.author}
+          </div>
+          {post.data.tags && (
+            <div class="flex gap-2">
+              <span class="mr-2">🏷️</span>
+              {post.data.tags.map((tag: string) => (
+                <a
+                  href={`/tags/${tag}`}
+                  class="hover:text-blue-600 dark:hover:text-blue-400"
+                >
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <article class="prose dark:prose-invert max-w-none">
+          <Content />
+        </article>
+      </div>
+    </div>
+  </main>
+</Layout> 

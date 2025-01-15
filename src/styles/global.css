@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 自定义基础样式 */
+@layer base {
+  body {
+    @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white;
+  }
+}
+
+/* 自定义组件样式 */
+@layer components {
+  .prose {
+    @apply max-w-none;
+  }
+  
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply text-gray-900 dark:text-white font-bold mb-4;
+  }
+  
+  .prose p {
+    @apply mb-4 text-gray-600 dark:text-gray-400;
+  }
+  
+  .prose a {
+    @apply text-blue-600 hover:underline dark:text-blue-500;
+  }
+  
+  .prose ul,
+  .prose ol {
+    @apply mb-4 ml-4;
+  }
+  
+  .prose li {
+    @apply mb-1;
+  }
+  
+  .prose code {
+    @apply bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded;
+  }
+  
+  .prose pre {
+    @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto mb-4;
+  }
+} 
