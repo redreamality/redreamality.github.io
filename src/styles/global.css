@@ -15,37 +15,131 @@
     @apply max-w-none;
   }
   
-  .prose h1,
-  .prose h2,
-  .prose h3,
-  .prose h4,
+  /* 标题样式 */
+  .prose h1 {
+    @apply text-3xl font-bold text-gray-900 dark:text-white mb-6 border-b pb-2;
+  }
+  
+  .prose h2 {
+    @apply text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4;
+  }
+  
+  .prose h3 {
+    @apply text-xl font-semibold text-gray-900 dark:text-white mt-6 mb-3;
+  }
+  
+  .prose h4 {
+    @apply text-lg font-semibold text-gray-900 dark:text-white mt-5 mb-2;
+  }
+  
   .prose h5,
   .prose h6 {
-    @apply text-gray-900 dark:text-white font-bold mb-4;
+    @apply text-base font-semibold text-gray-900 dark:text-white mt-4 mb-2;
   }
   
+  /* 段落和文本样式 */
   .prose p {
-    @apply mb-4 text-gray-600 dark:text-gray-400;
+    @apply text-base leading-7 text-gray-600 dark:text-gray-400 mb-4;
   }
   
+  .prose strong {
+    @apply font-semibold text-gray-900 dark:text-white;
+  }
+  
+  .prose em {
+    @apply italic text-gray-800 dark:text-gray-200;
+  }
+  
+  /* 链接样式 */
   .prose a {
-    @apply text-blue-600 hover:underline dark:text-blue-500;
+    @apply text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 hover:underline transition-colors duration-200;
   }
   
-  .prose ul,
+  /* 列表样式 */
+  .prose ul {
+    @apply list-disc pl-6 mb-4 space-y-2;
+  }
+  
   .prose ol {
-    @apply mb-4 ml-4;
+    @apply list-decimal pl-6 mb-4 space-y-2;
   }
   
   .prose li {
-    @apply mb-1;
+    @apply text-gray-600 dark:text-gray-400 mb-1 leading-7;
   }
   
+  .prose li > ul,
+  .prose li > ol {
+    @apply mt-2 mb-0;
+  }
+  
+  /* 引用块样式 */
+  .prose blockquote {
+    @apply pl-4 border-l-4 border-gray-300 dark:border-gray-700 my-6 italic;
+  }
+  
+  .prose blockquote p {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+  
+  /* 代码样式 */
   .prose code {
-    @apply bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded;
+    @apply bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm font-mono text-gray-800 dark:text-gray-200;
   }
   
   .prose pre {
     @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto mb-4;
+  }
+  
+  .prose pre code {
+    @apply bg-transparent p-0 text-sm leading-relaxed block;
+  }
+
+  /* LaTeX 数学公式样式 */
+  .prose .math {
+    @apply overflow-x-auto py-2;
+  }
+
+  .prose .math-inline {
+    @apply inline-block align-middle mx-1;
+  }
+
+  .prose .math-display {
+    @apply block my-4 text-center;
+  }
+
+  /* KaTeX 样式覆盖 */
+  .prose .katex {
+    @apply text-gray-900 dark:text-gray-100;
+  }
+
+  .prose .katex-display {
+    @apply my-4 overflow-x-auto overflow-y-hidden;
+  }
+
+  .prose .katex-display > .katex {
+    @apply text-lg md:text-xl;
+  }
+
+  .prose .katex-html {
+    @apply overflow-x-auto overflow-y-hidden;
+  }
+  
+  /* 水平线样式 */
+  .prose hr {
+    @apply border-t border-gray-200 dark:border-gray-800 my-8;
+  }
+  
+  /* 表格样式 */
+  .prose table {
+    @apply w-full border-collapse mb-4;
+  }
+  
+  .prose th {
+    @apply bg-gray-50 dark:bg-gray-800 text-left py-2 px-4 border border-gray-200 dark:border-gray-700 font-semibold;
+  }
+  
+  .prose td {
+    @apply py-2 px-4 border border-gray-200 dark:border-gray-700;
   }
 } 

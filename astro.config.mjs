@@ -13,4 +13,12 @@ export default defineConfig({
     }),
     mdx(),
   ],
+  markdown: {
+    shikiConfig: {
+      theme: 'dracula',
+      wrap: true
+    },
+    remarkPlugins: ['remark-math'],
+    rehypePlugins: ['rehype-katex']
+  }
 });

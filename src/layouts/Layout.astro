@@ -7,6 +7,7 @@ interface Props {
 const { title, description = "个人博客与项目展示" } = Astro.props;
 
 import '../styles/global.css';
+import 'katex/dist/katex.min.css';
 ---
 
 <!doctype html>
@@ -17,6 +18,7 @@ import '../styles/global.css';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="google-site-verification" content="NxVlZ1d8Bmz-k4XFi54AbYDxS-5atIJjnfGXeEC3eVg" />
 		<title>{title}</title>
 	</head>
 	<body class="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
