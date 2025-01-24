@@ -14,7 +14,15 @@ export default defineConfig({
       applyBaseStyles: true,
     }),
     mdx(),
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.includes('/private/'),
+      changefreq: 'weekly',
+      lastmod: new Date(),
+      serialize: (item) => ({
+        ...item,
+        priority: item.url === '/' ? 1.0 : 0.8,
+      }),
+    }),
     robotsTxt({
       policy: [
         {
