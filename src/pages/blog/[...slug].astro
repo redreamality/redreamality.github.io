@@ -12,9 +12,42 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+// 为文章准备SEO相关的元数据
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const articleImage = post.data.image || '/images/default-blog-image.png';
+const description = post.data.description || post.data.excerpt || `阅读文章：${post.data.title}`;
+
+// 准备结构化数据
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.data.title,
+  "description": description,
+  "image": articleImage,
+  "author": {
+    "@type": "Person",
+    "name": post.data.author
+  },
+  "datePublished": post.data.pubDate.toISOString(),
+  "dateModified": post.data.updatedDate?.toISOString() || post.data.pubDate.toISOString(),
+  "keywords": post.data.tags?.join(", "),
+  "url": canonicalURL.toString(),
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalURL.toString()
+  }
+};
 ---
 
-<Layout title={`${post.data.title} | Blog`}>
+<Layout 
+  title={`${post.data.title} | Blog`}
+  description={description}
+  image={articleImage}
+  canonicalURL={canonicalURL}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  
   <main class="container mx-auto px-4 py-8">
     <div class="max-w-4xl mx-auto">
       <div class="mb-8">
@@ -27,37 +60,45 @@ const { Content } = await post.render();
         </a>
       </div>
 
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-        <h1 class="text-4xl font-bold mb-6">{post.data.title}</h1>
-        
-        <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400 mb-8">
-          <div>
-            <span class="mr-2">📅</span>
-            {post.data.pubDate.toLocaleDateString('zh-CN')}
-          </div>
-          <div>
-            <span class="mr-2">✍️</span>
-            {post.data.author}
-          </div>
-          {post.data.tags && (
-            <div class="flex gap-2">
-              <span class="mr-2">🏷️</span>
-              {post.data.tags.map((tag: string) => (
-                <a
-                  href={`/tags/${tag}`}
-                  class="hover:text-blue-600 dark:hover:text-blue-400"
-                >
-                  #{tag}
-                </a>
-              ))}
+      <article class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+        <header>
+          <h1 class="text-4xl font-bold mb-6">{post.data.title}</h1>
+          
+          <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400 mb-8">
+            <time datetime={post.data.pubDate.toISOString()}>
+              <span class="mr-2">📅</span>
+              {post.data.pubDate.toLocaleDateString('zh-CN')}
+            </time>
+            {post.data.updatedDate && (
+              <time datetime={post.data.updatedDate.toISOString()}>
+                <span class="mr-2">🔄</span>
+                更新于: {post.data.updatedDate.toLocaleDateString('zh-CN')}
+              </time>
+            )}
+            <div>
+              <span class="mr-2">✍️</span>
+              {post.data.author}
             </div>
-          )}
-        </div>
+            {post.data.tags && (
+              <div class="flex gap-2">
+                <span class="mr-2">🏷️</span>
+                {post.data.tags.map((tag: string) => (
+                  <a
+                    href={`/tags/${tag}`}
+                    class="hover:text-blue-600 dark:hover:text-blue-400"
+                  >
+                    #{tag}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </header>
 
         <article class="prose dark:prose-invert max-w-none">
           <Content />
         </article>
-      </div>
+      </article>
     </div>
   </main>
 </Layout> 
