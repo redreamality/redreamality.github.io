@@ -8,6 +8,8 @@ import robotsTxt from 'astro-robots-txt';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://redreamality.github.io',
+  base: '/',
+  trailingSlash: 'always',
   integrations: [
     tailwind({
       // 启用 JIT 模式
