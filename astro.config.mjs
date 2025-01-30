@@ -9,7 +9,7 @@ import robotsTxt from 'astro-robots-txt';
 export default defineConfig({
   site: 'https://redreamality.com',
   base: '/',
-  trailingSlash: 'always',
+  trailingSlash: 'ignore',
   integrations: [
     tailwind({
       // 启用 JIT 模式
