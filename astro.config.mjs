@@ -7,7 +7,7 @@ import robotsTxt from 'astro-robots-txt';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://redreamality.github.io',
+  site: 'https://redreamality.com',
   base: '/',
   trailingSlash: 'always',
   integrations: [
@@ -35,7 +35,6 @@ export default defineConfig({
         },
       ],
       sitemap: true,
-      host: 'https://redreamality.github.io',
     }),
   ],
   markdown: {
