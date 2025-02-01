@@ -50,23 +50,29 @@ $f(3x) = f(x + x + x) = f(x) + f(x) + f(x) = 3f(x)$
 
 矩阵是线性代数中的一个核心概念，它将线性变换表示为数值表格。具体来说，一个矩阵是一个由数排列成的矩形阵列。例如：
 
-$$ A = \begin{bmatrix} 
+$$ 
+A = \begin{bmatrix} 
 2 & 1 \\
 3 & 4
-\end{bmatrix} $$
+\end{bmatrix} 
+$$
 
 这个2×2矩阵可以看作是一个线性变换,它将平面上的每一个点$(x,y)$映射到新的点:
 
-$$ \begin{bmatrix}
+$$ 
+\begin{bmatrix}
 2 & 1 \\
 3 & 4
-\end{bmatrix} \begin{bmatrix}
+\end{bmatrix} 
+\begin{bmatrix}
 x \\
 y
-\end{bmatrix} = \begin{bmatrix}
+\end{bmatrix} = 
+\begin{bmatrix}
 2x + y \\
 3x + 4y
-\end{bmatrix} $$
+\end{bmatrix} 
+$$
 
 矩阵的重要性在于:
 
@@ -118,10 +124,32 @@ y
 1. 旋转变换
    - 假设我们有一条直线 y = 2x
    - 将其绕原点逆时针旋转45度，可以用矩阵表示:
-     $$ \begin{bmatrix} \cos 45° & -\sin 45° \\ \sin 45° & \cos 45° \end{bmatrix} = \begin{bmatrix} \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \end{bmatrix} $$
+     $$ 
+     \begin{bmatrix} 
+     \cos 45° & -\sin 45° \\ 
+     \sin 45° & \cos 45° 
+     \end{bmatrix} = 
+     \begin{bmatrix} 
+     \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2} \\ 
+     \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} 
+     \end{bmatrix} 
+     $$
    - 变换后得到的仍然是一条直线，斜率从2变为 $\frac{2\cos 45° + \sin 45°}{\cos 45° - 2\sin 45°}=\frac{\sqrt{2}}{2}$
    - 假设单位向量[1,0]ᵀ经过变换后变为[x,y]ᵀ，则有：
-     $$ \begin{bmatrix} \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} = \begin{bmatrix} \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} \end{bmatrix} $$
+     $$ 
+     \begin{bmatrix} 
+     \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2} \\ 
+     \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} 
+     \end{bmatrix} 
+     \begin{bmatrix} 
+     1 \\ 
+     0 
+     \end{bmatrix} = 
+     \begin{bmatrix} 
+     \frac{\sqrt{2}}{2} \\ 
+     \frac{\sqrt{2}}{2} 
+     \end{bmatrix} 
+     $$
    - 这个矩阵变换保持了直线的线性特性
 
 

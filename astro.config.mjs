@@ -4,6 +4,8 @@ import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,7 +17,20 @@ export default defineConfig({
       // 启用 JIT 模式
       applyBaseStyles: true,
     }),
-    mdx(),
+    mdx({
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [[rehypeKatex, {
+        // KaTeX options
+        strict: false,
+        macros: {
+          "\\bmatrix": "\\begin{bmatrix}#1\\end{bmatrix}",
+          "\\pmatrix": "\\begin{pmatrix}#1\\end{pmatrix}",
+          "\\vmatrix": "\\begin{vmatrix}#1\\end{vmatrix}",
+          "\\Vmatrix": "\\begin{Vmatrix}#1\\end{Vmatrix}",
+          "\\matrix": "\\begin{matrix}#1\\end{matrix}"
+        }
+      }]]
+    }),
     sitemap({
       filter: (page) => !page.includes('/private/'),
       changefreq: 'weekly',
@@ -42,7 +57,17 @@ export default defineConfig({
       theme: 'dracula',
       wrap: true
     },
-    remarkPlugins: ['remark-math'],
-    rehypePlugins: ['rehype-katex']
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [[rehypeKatex, {
+      // KaTeX options
+      strict: false,
+      macros: {
+        "\\bmatrix": "\\begin{bmatrix}#1\\end{bmatrix}",
+        "\\pmatrix": "\\begin{pmatrix}#1\\end{pmatrix}",
+        "\\vmatrix": "\\begin{vmatrix}#1\\end{vmatrix}",
+        "\\Vmatrix": "\\begin{Vmatrix}#1\\end{Vmatrix}",
+        "\\matrix": "\\begin{matrix}#1\\end{matrix}"
+      }
+    }]]
   }
 });
