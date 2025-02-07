@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import TableOfContents from '../../components/TableOfContents.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -11,7 +12,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 
 // 为文章准备SEO相关的元数据
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -53,7 +54,7 @@ const articleSchema = {
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   
   <main class="container mx-auto px-4 py-8">
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-6xl mx-auto relative">
       <div class="mb-8">
         <a 
           href="/blog" 
@@ -64,7 +65,9 @@ const articleSchema = {
         </a>
       </div>
 
-      <article class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+      <TableOfContents headings={headings} />
+
+      <article class="max-w-3xl bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
         <header>
           <h1 class="text-4xl font-bold mb-6">{post.data.title}</h1>
           
@@ -105,4 +108,91 @@ const articleSchema = {
       </article>
     </div>
   </main>
-</Layout> 
+</Layout>
+
+<script>
+  // 添加平滑滚动效果和偏移量处理
+  document.addEventListener('DOMContentLoaded', () => {
+    // 设置顶部偏移量（导航栏高度 + 额外空间）
+    const SCROLL_OFFSET = 100;
+
+    // 处理目录点击事件
+    document.querySelectorAll('.table-of-contents a').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = anchor.getAttribute('href')?.slice(1);
+        if (targetId) {
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            // 获取目标元素的位置
+            const targetPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = targetPosition + window.pageYOffset - SCROLL_OFFSET;
+
+            // 平滑滚动到目标位置
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+
+            // 更新 URL，但不触发滚动
+            history.pushState(null, '', `#${targetId}`);
+          }
+        }
+      });
+    });
+
+    // 处理直接通过 URL hash 跳转的情况
+    window.addEventListener('load', () => {
+      if (location.hash) {
+        setTimeout(() => {
+          const targetElement = document.getElementById(location.hash.slice(1));
+          if (targetElement) {
+            const targetPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = targetPosition + window.pageYOffset - SCROLL_OFFSET;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }, 0);
+      }
+    });
+
+    // 监听滚动事件，高亮当前可见的标题
+    let headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6'))
+      .filter(heading => heading.id); // 只选择有 id 的标题
+
+    let tocLinks = document.querySelectorAll('.table-of-contents a');
+    
+    function highlightTableOfContents() {
+      if (headings.length === 0) return;
+
+      // 找到当前可见的标题
+      let current = headings[0];
+      for (const heading of headings) {
+        const rect = heading.getBoundingClientRect();
+        if (rect.top <= SCROLL_OFFSET + 50) {
+          current = heading;
+        } else {
+          break;
+        }
+      }
+
+      // 移除所有高亮
+      tocLinks.forEach(link => {
+        link.classList.remove('text-blue-600', 'dark:text-blue-400');
+        link.classList.add('hover:text-blue-600', 'dark:hover:text-blue-400');
+      });
+
+      // 添加当前标题的高亮
+      const currentLink = document.querySelector(`.table-of-contents a[href="#${current.id}"]`);
+      if (currentLink) {
+        currentLink.classList.add('text-blue-600', 'dark:text-blue-400');
+        currentLink.classList.remove('hover:text-blue-600', 'dark:hover:text-blue-400');
+      }
+    }
+
+    // 添加滚动监听
+    window.addEventListener('scroll', highlightTableOfContents, { passive: true });
+  });
+</script> 

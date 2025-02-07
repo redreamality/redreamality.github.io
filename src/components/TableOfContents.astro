@@ -1,0 +1,95 @@
+---
+interface Props {
+  headings: {
+    depth: number;
+    slug: string;
+    text: string;
+  }[];
+}
+
+const { headings } = Astro.props;
+
+// 根据标题深度设置样式
+function getHeadingStyle(depth: number) {
+  const styles = {
+    // 字体大小随层级递减
+    fontSize: depth === 1 ? 'text-lg' : 
+             depth === 2 ? 'text-base' : 
+             'text-sm',
+    // 缩进随层级增加
+    padding: `ml-${(depth - 1) * 6}`,
+    // 颜色随层级变浅
+    color: depth === 1 ? 'text-gray-900 dark:text-gray-100' : 
+           depth === 2 ? 'text-gray-800 dark:text-gray-200' : 
+           'text-gray-600 dark:text-gray-300',
+    // 字重随层级递减
+    fontWeight: depth === 1 ? 'font-bold' : 
+                depth === 2 ? 'font-semibold' : 
+                'font-normal'
+  };
+  return `${styles.fontSize} ${styles.padding} ${styles.color} ${styles.fontWeight}`;
+}
+---
+
+<nav class="table-of-contents fixed right-4 top-24 w-80 max-h-[calc(100vh-8rem)] overflow-y-auto bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm p-6 rounded-lg shadow-lg hidden lg:block border border-gray-100 dark:border-gray-700">
+  <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2">目录</h2>
+  <ul class="space-y-3">
+    {
+      headings.map((heading) => (
+        <li>
+          <a
+            href={`#${heading.slug}`}
+            class={`block hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150 ${getHeadingStyle(heading.depth)}`}
+          >
+            <span class="inline-flex items-center">
+              {heading.depth > 1 && (
+                <span class="inline-block opacity-60 mr-1.5">
+                  {heading.depth === 2 ? '◆' : '▸'}
+                </span>
+              )}
+              {heading.text}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .table-of-contents {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  }
+  
+  .table-of-contents::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .table-of-contents::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .table-of-contents::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 2px;
+  }
+
+  /* 添加悬停时的阴影效果 */
+  .table-of-contents {
+    transition: all 0.3s ease;
+  }
+  
+  .table-of-contents:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 添加层级缩进的过渡效果 */
+  .table-of-contents a {
+    transition: padding-left 0.2s ease;
+  }
+  
+  .table-of-contents a:hover {
+    padding-left: 0.5rem;
+  }
+</style> 
