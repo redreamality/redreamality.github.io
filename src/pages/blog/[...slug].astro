@@ -41,10 +41,14 @@ const articleSchema = {
 ---
 
 <Layout 
-  title={`${post.data.title} | Blog`}
+  title={`${post.data.title} | Redreamality's Blog`}
   description={description}
   image={articleImage}
   canonicalURL={canonicalURL}
+  type="article"
+  publishDate={post.data.pubDate.toISOString()}
+  tags={post.data.tags || []}
+  author={post.data.author}
 >
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   

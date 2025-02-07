@@ -8,8 +8,14 @@ const {
 	title = "Redreamality's Blog", 
 	description = "个人博客与项目展示",
 	image = "/images/default-og.png",
-	canonicalURL = new URL(Astro.url.pathname, Astro.site)
+	canonicalURL = new URL(Astro.url.pathname, Astro.site),
+	type = "website",
+	publishDate,
+	tags = [],
+	author = "Redreamality"
 } = Astro.props;
+
+const socialImageURL = new URL(image, Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -26,33 +32,57 @@ const {
 		<link rel="canonical" href={canonicalURL} />
 		
 		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={type} />
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content={image} />
+		<meta property="og:image" content={socialImageURL} />
+		<meta property="og:site_name" content="Redreamality's Blog" />
+		<meta property="og:locale" content="zh_CN" />
+		{publishDate && <meta property="article:published_time" content={publishDate} />}
+		{tags.map((tag) => (
+			<meta property="article:tag" content={tag} />
+		))}
 		
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content={canonicalURL} />
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content={image} />
+		<meta property="twitter:image" content={socialImageURL} />
+		<meta name="twitter:creator" content="@redreamality" />
 		
 		<!-- Other Meta Tags -->
 		<meta name="generator" content={Astro.generator} />
 		<meta name="google-site-verification" content="NxVlZ1d8Bmz-k4XFi54AbYDxS-5atIJjnfGXeEC3eVg" />
-		<meta name="robots" content="index, follow" />
-		<meta name="author" content="Redreamality" />
+		<meta name="robots" content="index, follow, max-image-preview:large" />
+		<meta name="author" content={author} />
+		<meta name="keywords" content={tags.join(', ')} />
 		
 		<!-- JSON-LD -->
 		<script type="application/ld+json">
 			{
 				"@context": "https://schema.org",
-				"@type": "WebSite",
-				"name": "Redreamality's Blog",
-				"url": "https://redreamality.com",
-				"description": description
+				"@type": type === "article" ? "BlogPosting" : "WebSite",
+				"headline": title,
+				"description": description,
+				"image": socialImageURL,
+				"url": canonicalURL,
+				"author": {
+					"@type": "Person",
+					"name": author,
+					"url": "https://redreamality.com/about"
+				},
+				"publisher": {
+					"@type": "Organization",
+					"name": "Redreamality's Blog",
+					"url": "https://redreamality.com"
+				},
+				...(type === "article" && publishDate ? {
+					"datePublished": publishDate,
+					"keywords": tags.join(', ')
+				} : {}),
+				"inLanguage": "zh-CN"
 			}
 		</script>
 	</head>
