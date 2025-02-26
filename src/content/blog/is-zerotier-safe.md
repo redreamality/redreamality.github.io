@@ -31,7 +31,7 @@ ZeroTier’s security is built on a foundation of modern cryptography, zero-trus
 ### **1. End-to-End Encryption with AES-256-GCM**
 
 ZeroTier employs **AES-256-GCM**, a military-grade encryption standard, to secure data in transit. Every packet is encrypted from sender to receiver—even if it’s relayed through intermediary nodes. This means that whether your data is traveling directly between peers or via encrypted relay nodes (used when NAT or firewall restrictions apply), it remains protected from eavesdropping or tampering.  
-> *“256-bit encryption provides robust protection similar to traditional VPNs, but with the added benefits of automation and integrated network management.”* citeturn0search3
+> *“256-bit encryption provides robust protection similar to traditional VPNs, but with the added benefits of automation and integrated network management.”* 
 
 Key aspects include:
 - **Peer-to-Peer (P2P) Connections:** Whenever possible, ZeroTier establishes direct, encrypted connections between devices, minimizing exposure to third-party servers.
@@ -75,7 +75,7 @@ ZeroTier’s flexibility means that security is highly dependent on proper confi
 
 No software is immune to flaws. For instance, ZeroTier experienced a vulnerability in 2020 (**CVE-2020-15163**), where certain certificate checks could be bypassed by malicious nodes.  
 - **Swift Patch Management:** The ZeroTier team addressed this issue rapidly, reinforcing the importance of staying current with software updates.  
-- **Continuous Auditing:** Being open source, ZeroTier benefits from community and expert audits, enhancing its overall security posture. citeturn0search6
+- **Continuous Auditing:** Being open source, ZeroTier benefits from community and expert audits, enhancing its overall security posture. 
 
 ---
 
@@ -93,7 +93,7 @@ How does ZeroTier compare to traditional VPN solutions like OpenVPN or WireGuard
   While tools like WireGuard may offer faster speeds in some scenarios due to their lean design, ZeroTier’s peer-to-peer architecture also minimizes latency by establishing direct connections when possible.
 
 - **Granular Control:**  
-  ZeroTier’s rule engine allows administrators to define precise network flows, segment traffic, and even “tap” or monitor specific data flows for security purposes. citeturn0search4
+  ZeroTier’s rule engine allows administrators to define precise network flows, segment traffic, and even “tap” or monitor specific data flows for security purposes.
 
 Each solution has its trade-offs, and the choice often comes down to the specific use case and the security requirements of the organization.
 
@@ -121,7 +121,7 @@ To fully harness ZeroTier’s capabilities while minimizing risks, consider thes
    - Keep both your ZeroTier client and controller updated to incorporate the latest security patches.
 
 4. **Implement Granular Flow Rules:**  
-   - Use ZeroTier’s flow rule engine to define strict policies for network traffic. This can include whitelisting specific IP addresses, restricting communication between nodes, and even copying (or “teeing”) traffic for analysis by intrusion detection systems. citeturn0search4
+   - Use ZeroTier’s flow rule engine to define strict policies for network traffic. This can include whitelisting specific IP addresses, restricting communication between nodes, and even copying (or “teeing”) traffic for analysis by intrusion detection systems. 
 
 5. **Segment Your Network:**  
    - Divide your network into subnets to isolate sensitive resources, reducing the risk of lateral movement in case of a breach.
