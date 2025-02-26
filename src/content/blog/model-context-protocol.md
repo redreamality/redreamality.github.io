@@ -1,11 +1,8 @@
 ---
 title: '深入解析 Model Context Protocol (MCP) - 人工智能应用的标准化协议'
-pubDate: '2024-03-21'
+pubDate:  2025-02-18T00:00:00.000Z
 description: '详细介绍 Model Context Protocol (MCP)，这个为 AI 应用提供标准化上下文传输的开放协议'
-author: 'ReamDreality'
-image:
-    url: '/blog-placeholder-1.jpg'
-    alt: 'Model Context Protocol Logo'
+author: 'Remy'
 tags: ["AI", "LLM", "Protocol", "Integration"]
 ---
 

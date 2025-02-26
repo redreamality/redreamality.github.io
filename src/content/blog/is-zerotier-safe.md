@@ -1,6 +1,6 @@
 ---
 title: "Is ZeroTier Safe? A Comprehensive Security Analysis"
-pubDate: 2024-03-21T00:00:00.000Z
+pubDate:  2025-02-26T00:00:00.000Z
 description: "A deep dive into ZeroTier's security architecture, potential risks, and best practices for secure deployment"
 author: "Redreamality"
 tags: ["zerotier", "security", "networking", "vpn"]
