@@ -88,14 +88,89 @@ tags: ['多智能体系统', '人工智能', '深度求索', '约束满足问题
 
 ### 3.4 效果评测方法、数据集与指标
 - 基准测试
-  - 公开的benchmark
-  - 自研benchmark
+  - 公开的benchmark\
+    - ToolBench:  GitHub - OpenBMB/ToolBench: [ICLR'24 spotlight] An open platform for training, serving, and evaluati\
+      大规模工具调用指令数据集，支持多步推理与真实API集成	
+    - SWE-bench: https://github.com/princeton-nlp/SWE-bench\
+      评估LLM解决GitHub问题的基准，含2,294个Python代码修复任务	
+    - Mind2Web: https://huggingface.co/datasets/osunlp/Mind2Web\
+      通用网页交互数据集，覆盖多样化DOM操作与用户轨迹	
+    - WebArena: GitHub - web-arena-x/webarena: Code repo for "WebArena: A Realistic Web Environment for Building Aut\
+      真实网页环境测试平台，集成4个应用与工具库		
+    - AgentInstruct: https://huggingface.co/datasets/THUDM/AgentInstruct\
+      高质量智能体指令数据集，增强模型任务泛化能力		
+      
 - 评测指标
   - 性能指标
-  - 效率指标
-  - 可扩展性指标
-  - 可靠性指标
+    - 任务解决率（% Resolved）
+      - 核心效能指标，反映系统解决问题的能力
 
+    - 定位准确性（F1 Score）
+      - 代码缺陷定位的精确率与召回率平衡
+
+    - 视觉必要性影响（Visual Necessity Impact）
+      - 图像输入对任务解决率的提升幅度
+
+    - 图像类型敏感度（Image Type Sensitivity）
+      - 对不同类型图像（代码截图/UI图/图表）的适应性
+
+    - 代码修改复杂度（Patch Complexity）
+      - 参考解决方案的修改规模（文件数/行数/函数数）
+
+    - 任务难度分布（Task Difficulty Distribution）
+      - 不同耗时任务的占比（简单/中等/困难/极难）
+    - 任务成功率
+      - 参考：https://www.restack.io/p/multi-agent-systems-answer-llm-evaluation-cat-ai
+      - 该指标衡量代理成功完成的任务的百分比，直接表明整体效率。
+      - **公式**：
+        $$ \text{Task Success Rate} = \frac{\text{成功完成的任务数}}{\text{总任务数}} \times 100\% $$
+    - 协作效率
+      - 参考：https://www.restack.io/p/multi-agent-systems-answer-llm-evaluation-cat-ai
+      - 评估多个代理如何有效地合作以实现共同目标
+    - 任务分配准确性（Task Allocation Accuracy）
+      - 参考：https://www.restack.io/p/multi-agent-systems-answer-llm-evaluation-cat-ai
+      - 任务是否分配给最合适的代理
+      - **公式**：
+        $$ \text{Task Allocation Accuracy} = \frac{\text{正确分配的任务数}}{\text{总任务数}} \times 100\% $$  
+    - 任务完成准确率（Task Completion Accuracy）
+      - 参考：https://www.restack.io/p/multi-agent-systems-answer-llm-evaluation-cat-ai
+      - 输出结果的准确性
+      - **公式**：
+        $$ \text{Task Completion Accuracy} = \frac{\text{输出正确的结果数}}{\text{总完成任务数}} \times 100\% $$
+    - 输出连贯性（Output Coherence）
+      - 参考：https://www.restack.io/p/multi-agent-systems-answer-llm-evaluation-cat-ai
+      - 生成内容的逻辑一致性。
+    - 进度率（Progress Rate）
+      - 参考：AgentBoard https://arxiv.org/pdf/2401.13178
+      - 通过子目标匹配或状态相似度计算的连续指标，反映任务完成过程中的渐进进展（0到1）
+      - **公式**：
+        - **连续任务**（如状态匹配）：
+          $$ r_t^{\text{match}} = \max_{0 \leq i \leq t} f(s_i, g) $$
+          其中，$f(s_i, g)$ 是当前状态 $s_i$ 与目标状态 $g$ 的相似度函数（如表格单元格匹配比例）。
+
+        - **离散子目标任务**（如多步规划）：  
+          $$ r_t^{\text{subgoal}} = \max_{0 \leq i \leq t} \frac{1}{K} \sum_{k=1}^K f(s_i, g_k) $$  
+          其中，$g_k$ 是人工标注的第 $k$ 个子目标，$f(s_i, g_k) \in \{0,1\}$ 表示是否完成子目标。
+  - 效率指标
+    - 平均成本（$ Avg. Cost）
+      - 单任务推理的经济成本
+    - 异常终止率（Abnormal Termination Rate）
+      - 因成本超限或错误导致任务中断的比例（反映资源浪费）
+    - 通信延迟（Communication Latency）：代理响应时间（毫秒）。
+    - 任务完成时间（Task Completion Time）
+  - 可扩展性指标
+    - 跨文件类型修改（Multi-file Type Editing）
+      - 同时修改多种文件类型（TS/HTML/CSS）的任务占比
+
+    - 语言适应性对比
+      - Python-centric系统在JavaScript任务中的解决率衰减（
+
+  - 可靠性指标
+    - 测试一致性（Test Consistency）
+      - 同一补丁多次运行的通过一致性
+
+    - 错误恢复能力
+      - 任务终止后自动重试或回滚机制的有效性
 ## 4. 应用领域
 
 ### 4.1 多智能体的特点与适用场景
@@ -111,7 +186,7 @@ tags: ['多智能体系统', '人工智能', '深度求索', '约束满足问题
 ## 5. 参考文献
 
 
-
+![Prompt-To-Agent: Create custom engineering agents for your code](image.png)
 
 
 

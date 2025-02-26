@@ -18,7 +18,12 @@ nrm 是一个 npm 源管理工具，可以方便地切换 npm 源。
 
 ```bash
 npm install -g nrm
+nrm ls 
+npm use xxx
 ```
+
+用npm查看设置： `npm config get registry`
+
 
 
 ## 包管理
