@@ -3,7 +3,6 @@ title: "量化交易策略分享"
 description: "分享一些基础的量化交易策略和实践经验"
 date: 2024-01-20
 location: "线上技术分享会"
-slides: "https://slides.example.com/quant-trading"
 ---
 
 # 量化交易策略分享
@@ -26,7 +25,3 @@ slides: "https://slides.example.com/quant-trading"
 - 回测系统搭建
 - 风险控制
 - 实盘经验
-
-## 参考资源
-- [量化交易入门指南](https://example.com/guide)
-- [策略代码示例](https://github.com/example/quant) 
