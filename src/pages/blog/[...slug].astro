@@ -17,7 +17,7 @@ const { Content, headings } = await post.render();
 // 为文章准备SEO相关的元数据
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const articleImage = post.data.image || '/images/default-blog-image.png';
-const description = post.data.description || post.data.excerpt || `阅读文章：${post.data.title}`;
+const description = post.data.description || `阅读文章：${post.data.title}`;
 
 // 准备结构化数据
 const articleSchema = {
