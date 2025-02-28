@@ -69,33 +69,31 @@ const socialImageURL = new URL(image, Astro.site);
 		<meta name="keywords" content={tags.join(', ')} />
 		
 		<!-- JSON-LD -->
-		<script type="application/ld+json">
-			{
-				"@context": "https://schema.org",
-				"@type": "BlogPosting",
-				"headline": title,
-				"description": description,
-				"image": socialImageURL,
-				"url": canonicalURL,
-				"author": {
-					"@type": "Person",
-					"name": author,
-					"url": "https://redreamality.com/about"
-				},
-				"publisher": {
-					"@type": "Organization",
-					"name": "Redreamality's Blog",
-					"url": "https://redreamality.com"
-				},
-				"mainEntityOfPage": {
-					"@type": "WebPage",
-					"@id": canonicalURL
-				},
-				"datePublished": type === "article" && publishDate ? publishDate : undefined,
-				"keywords": type === "article" && publishDate ? tags.join(', ') : undefined,
-				"inLanguage": "zh-CN"
-			}
-		</script>
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": type === "article" ? "BlogPosting" : "WebSite",
+			"headline": title,
+			"description": description,
+			"image": socialImageURL.toString(),
+			"url": canonicalURL.toString(),
+			"author": {
+				"@type": "Person",
+				"name": author,
+				"url": "https://redreamality.com/about"
+			},
+			"publisher": {
+				"@type": "Organization",
+				"name": "Redreamality's Blog",
+				"url": "https://redreamality.com"
+			},
+			"mainEntityOfPage": {
+				"@type": "WebPage",
+				"@id": canonicalURL.toString()
+			},
+			"datePublished": type === "article" && publishDate ? publishDate : undefined,
+			"keywords": type === "article" && publishDate ? tags.join(', ') : undefined,
+			"inLanguage": "zh-CN"
+		})} />
 		<script>
 			(function(d,t) {
 				var BASE_URL="https://app.chatwoot.com";
