@@ -72,7 +72,7 @@ const socialImageURL = new URL(image, Astro.site);
 		<script type="application/ld+json">
 			{
 				"@context": "https://schema.org",
-				"@type": type === "article" ? "BlogPosting" : "WebSite",
+				"@type": "BlogPosting",
 				"headline": title,
 				"description": description,
 				"image": socialImageURL,
@@ -86,6 +86,10 @@ const socialImageURL = new URL(image, Astro.site);
 					"@type": "Organization",
 					"name": "Redreamality's Blog",
 					"url": "https://redreamality.com"
+				},
+				"mainEntityOfPage": {
+					"@type": "WebPage",
+					"@id": canonicalURL
 				},
 				"datePublished": type === "article" && publishDate ? publishDate : undefined,
 				"keywords": type === "article" && publishDate ? tags.join(', ') : undefined,
