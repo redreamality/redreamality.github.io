@@ -1,5 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// 获取最新的博客文章和演讲
+const posts = await getCollection('blog');
+const talks = await getCollection('talks');
+
+// 按日期排序并获取最新的3篇
+const recentPosts = posts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 20);
+
+const recentTalks = talks
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 20);
 ---
 
 <Layout title="首页">
@@ -7,7 +21,7 @@ import Layout from '../layouts/Layout.astro';
     <h1 class="text-4xl font-bold mb-4 dark:text-white">欢迎来到Remy的个人网站</h1>
     <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">这里是我的项目展示、博客文章和演讲分享的地方</p>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
       <a href="/projects" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">项目展示</h2>
         <p class="font-normal text-gray-700 dark:text-gray-400">查看我的开源项目和个人作品</p>
@@ -22,6 +36,91 @@ import Layout from '../layouts/Layout.astro';
         <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">演讲分享</h2>
         <p class="font-normal text-gray-700 dark:text-gray-400">观看我的技术演讲和分享内容</p>
       </a>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- 最新博客 -->
+        <div>
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold dark:text-white">最新博客</h2>
+            <a href="/blog" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+              查看全部 →
+            </a>
+          </div>
+          <div class="space-y-4">
+            {recentPosts.map((post) => (
+              <article class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                <h3 class="text-xl font-semibold mb-2">
+                  <a 
+                    href={`/blog/${post.slug}`}
+                    class="hover:text-blue-600 dark:hover:text-blue-400"
+                  >
+                    {post.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">{post.data.description}</p>
+                <div class="flex flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400">
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    <span class="mr-1">📅</span>
+                    {post.data.pubDate.toLocaleDateString('zh-CN')}
+                  </time>
+                  {post.data.tags && (
+                    <div class="flex gap-1">
+                      <span class="mr-1">🏷️</span>
+                      {post.data.tags.slice(0, 2).map((tag: string) => (
+                        <a
+                          href={`/tags/${tag}`}
+                          class="hover:text-blue-600 dark:hover:text-blue-400"
+                        >
+                          #{tag}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <!-- 最新演讲 -->
+        <div>
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold dark:text-white">最新演讲</h2>
+            <a href="/talks" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+              查看全部 →
+            </a>
+          </div>
+          <div class="space-y-4">
+            {recentTalks.map((talk) => (
+              <article class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                <h3 class="text-xl font-semibold mb-2">
+                  <a 
+                    href={`/talks/${talk.slug}`}
+                    class="hover:text-blue-600 dark:hover:text-blue-400"
+                  >
+                    {talk.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">{talk.data.description}</p>
+                <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
+                  <time datetime={talk.data.date.toISOString()}>
+                    <span class="mr-1">📅</span>
+                    {talk.data.date.toLocaleDateString('zh-CN')}
+                  </time>
+                  {talk.data.location && (
+                    <div>
+                      <span class="mr-1">📍</span>
+                      {talk.data.location}
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </Layout>
