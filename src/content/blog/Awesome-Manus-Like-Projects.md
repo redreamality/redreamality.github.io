@@ -40,6 +40,7 @@ Manus' likely technical stack includes:
   - [Model Evaluation \& Benchmarking](#model-evaluation--benchmarking)
   - [Model Training \& Fine-tuning](#model-training--fine-tuning)
   - [Specialized Agent Applications](#specialized-agent-applications)
+  - [MISC](#misc)
   - [Contributing](#contributing)
   - [License](#license)
 
@@ -174,11 +175,16 @@ Manus' likely technical stack includes:
 - [ResearchGPT](https://github.com/mukulpatnaik/researchgpt) - Academic research assistant agent
 - [AutoPR](https://github.com/irgolic/AutoPR) - Automated pull request generation agent
 
+## MISC
+
+- [awesome-manus-replay](https://github.com/agenaiguy/awesome-manus-replay) Manus Replay is a feature that allows users to view and replay the process by which Manus executes tasks. This functionality enables users to understand how Manus approaches specific tasks, including its thought processes and the steps it takes. This serves as a valuable learning tool for users, helping them comprehend the workings and decision-making processes of the AI agent.
+
 
 
 ## Contributing
 
-Contributions welcome! Please feel free to submit a Pull Request.
+Contributions welcome! Please feel free to submit a Pull Request at https://github.com/redreamality/awesome-manus.
+This list will also be exhibited in https://redreamality.com/blog/awesome-manus-like-projects/
 
 ## License
 
