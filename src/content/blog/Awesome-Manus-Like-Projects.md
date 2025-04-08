@@ -1,6 +1,6 @@
 ---
 title: 'Awesome Manus-Like Projects'
-pubDate: 2025-01-31T00:00:00.000Z
+pubDate: 2025-04-07T00:00:00.000Z
 description: 'A curated list of open-source projects related to Manus technology stack'
 author: 'Remy'
 tags: ['AI', 'agents','multimodal', 'tools','多智能体系统', '人工智能', ]
