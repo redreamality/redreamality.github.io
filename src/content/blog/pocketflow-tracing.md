@@ -112,6 +112,7 @@ class DataProcessingFlow(Flow):
         super().__init__(start=DataProcessingNode())
 ```
 
+
 **The difference is striking**: Your code stays clean and focused on business logic, while comprehensive tracing happens automatically behind the scenes.
 
 ## Installation and Setup
@@ -134,14 +135,14 @@ Create a `.env` file in your project root:
 # Langfuse Configuration
 LANGFUSE_SECRET_KEY=sk-lf-your-secret-key-here
 LANGFUSE_PUBLIC_KEY=pk-lf-your-public-key-here
-LANGFUSE_HOST=https://cloud.langfuse.com
+LANGFUSE_HOST=https://your-self-hosted-langfuse
 
 # Optional: Enable debug mode for development
 POCKETFLOW_TRACING_DEBUG=true
 ```
 
 **Getting Langfuse Credentials:**
-1. Sign up for a free account at [langfuse.com](https://langfuse.com)
+1. Sign up for a free account at [langfuse.com](https://langfuse.com) or your self-hosted URL
 2. Create a new project
 3. Copy your API keys from the project settings
 4. Use `https://cloud.langfuse.com` for the hosted version, or your self-hosted URL
