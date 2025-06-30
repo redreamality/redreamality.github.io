@@ -1,6 +1,6 @@
 ---
 title: 'Applying Monte Carlo Tree Search for Enhanced Customer Engagement in Chat Analysis'
-pubDate: 2025-01-31T00:00:00.000Z
+pubDate: 2025-06-07T00:00:00.000Z
 description: 'Learn how to leverage MCTS algorithms to improve customer interactions in chat systems'
 author: 'Remy'
 tags: ['algorithms', 'customer-engagement', 'mcts', 'chat-analysis']
