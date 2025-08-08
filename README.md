@@ -113,6 +113,188 @@ tags: ['标签1', '标签2']
 
 注意：`pubDate` 必须使用 ISO 8601 格式的日期（例如：`2024-01-15T00:00:00.000Z`）。
 
+## Admin Interface
+
+This project includes an admin interface for creating and managing blog posts and talks.
+
+### Accessing the Admin Interface
+
+1. Navigate to `/admin` in your browser
+2. Enter the admin password when prompted
+3. Use the dashboard to create new content
+
+### Admin Features
+
+- **Create Blog Posts**: Write and generate blog post markdown files
+- **Create Talks**: Add new presentations and talks
+- **Automatic Frontmatter**: Automatically generates proper frontmatter with metadata
+- **File Download**: Downloads generated markdown files for manual placement
+
+### Using the Admin Interface
+
+1. **Create a Blog Post**:
+   - Go to `/admin` and click "Create Blog Post"
+   - Fill in the title, description, tags, and content
+   - Select the source language (Chinese or English)
+   - Click "Create Post" to generate and download the markdown file
+   - Save the downloaded file to `src/content/blog/` directory
+   - Commit and push to deploy
+
+2. **Create a Talk**:
+   - Go to `/admin` and click "Create Talk"
+   - Fill in the talk details including title, description, date, and optional fields
+   - Add the content in Markdown format
+   - Click "Create Talk" to generate and download the markdown file
+   - Save the downloaded file to `src/content/talks/` directory
+   - Commit and push to deploy
+
+## API Documentation
+
+### Admin Authentication
+
+The admin interface uses simple client-side authentication. In production, you should implement proper server-side authentication.
+
+### Content Creation API (Future Enhancement)
+
+The following API endpoints are planned for future implementation:
+
+#### Create Blog Post
+
+```http
+POST /api/admin/create-post
+Content-Type: application/json
+Authorization: Bearer <token>
+
+{
+  "title": "My New Blog Post",
+  "description": "This is a sample blog post",
+  "content": "# Hello World\n\nThis is my first post!",
+  "language": "en",
+  "tags": "javascript, web-development, tutorial"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Blog post created successfully",
+  "filename": "my-new-blog-post.md",
+  "slug": "my-new-blog-post"
+}
+```
+
+#### Create Talk
+
+```http
+POST /api/admin/create-talk
+Content-Type: application/json
+Authorization: Bearer <token>
+
+{
+  "title": "My Awesome Talk",
+  "description": "This is a sample talk about web development",
+  "content": "# Introduction\n\nWelcome to my talk!",
+  "date": "2024-01-15",
+  "language": "en",
+  "location": "Tech Conference 2024",
+  "slides": "https://example.com/slides.pdf",
+  "video": "https://youtube.com/watch?v=example"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Talk created successfully",
+  "filename": "my-awesome-talk.md",
+  "slug": "my-awesome-talk"
+}
+```
+
+### Authentication API
+
+#### Login
+
+```http
+POST /api/admin/login
+Content-Type: application/json
+
+{
+  "password": "your-admin-password"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Login successful"
+}
+```
+
+#### Logout
+
+```http
+POST /api/admin/logout
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Logged out successfully"
+}
+```
+
+### Error Responses
+
+All API endpoints return error responses in the following format:
+
+```json
+{
+  "success": false,
+  "error": "Error message",
+  "details": ["Detailed error information"]
+}
+```
+
+Common HTTP status codes:
+- `200`: Success
+- `201`: Created
+- `400`: Bad Request (validation errors)
+- `401`: Unauthorized
+- `409`: Conflict (duplicate content)
+- `500`: Internal Server Error
+
+### Content Structure
+
+#### Blog Post Frontmatter
+
+```yaml
+---
+title: 'Post Title'
+pubDate: 2024-01-15T00:00:00.000Z
+description: 'Brief description of the post'
+author: 'Remy'
+tags: ['tag1', 'tag2', 'tag3']
+---
+```
+
+#### Talk Frontmatter
+
+```yaml
+---
+title: 'Talk Title'
+description: 'Brief description of the talk'
+date: 2024-01-15T00:00:00.000Z
+location: 'Event Location'
+slides: 'https://example.com/slides.pdf'
+video: 'https://youtube.com/watch?v=example'
+---
+```
+
 ## 许可证
 
 MIT

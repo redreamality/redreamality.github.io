@@ -1,19 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getBlogPosts, getTalks, t } from '../utils/i18n';
 
-// 获取最新的博客文章和演讲
-const posts = await getCollection('blog');
-const talks = await getCollection('talks');
+// 获取最新的博客文章和演讲 (中文版本)
+const posts = await getBlogPosts('zh');
+const talks = await getTalks('zh');
 
-// 按日期排序并获取最新的3篇
-const recentPosts = posts
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 20);
-
-const recentTalks = talks
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 20);
+// 按日期排序并获取最新的20篇
+const recentPosts = posts.slice(0, 20);
+const recentTalks = talks.slice(0, 20);
 ---
 
 <Layout title="首页">

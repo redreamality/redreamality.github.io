@@ -1,31 +1,66 @@
 import { defineCollection, z } from 'astro:content';
 
+const blogSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  pubDate: z.date(),
+  author: z.string(),
+  tags: z.array(z.string()).optional(),
+  image: z.string().optional(),
+  updatedDate: z.date().optional(),
+  lang: z.enum(['zh', 'en']).optional(),
+  translatedFrom: z.string().optional(), // Reference to original post slug
+});
+
+const talksSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  date: z.date(),
+  location: z.string().optional(),
+  slides: z.string().optional(),
+  video: z.string().optional(),
+  lang: z.enum(['zh', 'en']).optional(),
+  translatedFrom: z.string().optional(), // Reference to original talk slug
+});
+
+// Chinese content collections
+const blogCnCollection = defineCollection({
+  type: 'content',
+  schema: blogSchema,
+});
+
+const talksCnCollection = defineCollection({
+  type: 'content',
+  schema: talksSchema,
+});
+
+// English content collections
+const blogEnCollection = defineCollection({
+  type: 'content',
+  schema: blogSchema,
+});
+
+const talksEnCollection = defineCollection({
+  type: 'content',
+  schema: talksSchema,
+});
+
+// Legacy collections (for backward compatibility)
 const blogCollection = defineCollection({
   type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    pubDate: z.date(),
-    author: z.string(),
-    tags: z.array(z.string()).optional(),
-    image: z.string().optional(),
-    updatedDate: z.date().optional(),
-  }),
+  schema: blogSchema,
 });
 
 const talksCollection = defineCollection({
   type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.date(),
-    location: z.string().optional(),
-    slides: z.string().optional(),
-    video: z.string().optional(),
-  }),
+  schema: talksSchema,
 });
 
 export const collections = {
   'blog': blogCollection,
   'talks': talksCollection,
-}; 
+  'blog-cn': blogCnCollection,
+  'blog-en': blogEnCollection,
+  'talks-cn': talksCnCollection,
+  'talks-en': talksEnCollection,
+};

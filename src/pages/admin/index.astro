@@ -1,0 +1,529 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Admin Dashboard">
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <!-- Authentication Check -->
+    <div id="auth-check" class="hidden">
+      <div class="min-h-screen flex items-center justify-center">
+        <div class="max-w-md w-full space-y-8">
+          <div>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
+              GitHub Authentication Required
+            </h2>
+            <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+              Please enter your GitHub Personal Access Token to continue
+            </p>
+            <div class="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+              <p class="text-sm text-blue-700 dark:text-blue-300">
+                <strong>How to get your GitHub PAT:</strong><br>
+                1. Go to GitHub Settings → Developer settings → Personal access tokens<br>
+                2. Generate a new token with 'repo' permissions<br>
+                3. Copy and paste the token below
+              </p>
+            </div>
+          </div>
+
+          <form id="auth-form" class="mt-8 space-y-6">
+            <div>
+              <label for="admin-password" class="sr-only">Password</label>
+              <input
+                id="github-token"
+                name="githubToken"
+                type="password"
+                required
+                class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-800 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="GitHub Personal Access Token (ghp_...)"
+              />
+            </div>
+            <div id="auth-error" class="hidden text-red-600 dark:text-red-400 text-sm text-center"></div>
+            <div>
+              <button
+                type="submit"
+                class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
+                Authenticate with GitHub
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="hidden">
+      <div class="container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
+          <!-- Header -->
+          <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
+            <button
+              id="logout-btn"
+              class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            >
+              Logout
+            </button>
+          </div>
+
+        <!-- Dashboard Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <!-- Create Blog Post Card -->
+          <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Create Blog Post</h2>
+                <p class="text-gray-600 dark:text-gray-400">Write and publish new blog articles</p>
+              </div>
+            </div>
+            <a 
+              href="/admin/create-post" 
+              class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Create Post
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Create Talk Card -->
+          <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-4">
+                <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Create Talk</h2>
+                <p class="text-gray-600 dark:text-gray-400">Add new presentation or talk</p>
+              </div>
+            </div>
+            <a 
+              href="/admin/create-talk" 
+              class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            >
+              Create Talk
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Actions</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <a 
+              href="/blog" 
+              class="flex items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+            >
+              <svg class="w-8 h-8 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              <div>
+                <div class="font-medium text-gray-900 dark:text-white">View Blog</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Browse all posts</div>
+              </div>
+            </a>
+            
+            <a
+              href="/talks"
+              class="flex items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+            >
+              <svg class="w-8 h-8 text-green-600 dark:text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+              </svg>
+              <div>
+                <div class="font-medium text-gray-900 dark:text-white">View Talks</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Browse all talks</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Content Management Section -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Content Management</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <button
+              id="manage-blogs-btn"
+              class="flex items-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
+            >
+              <svg class="w-8 h-8 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+              </svg>
+              <div class="text-left">
+                <div class="font-medium text-gray-900 dark:text-white">Manage Blog Posts</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Edit, delete, and organize blog posts</div>
+              </div>
+            </button>
+
+            <button
+              id="manage-talks-btn"
+              class="flex items-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg hover:bg-green-100 dark:hover:bg-green-900/30 transition-colors"
+            >
+              <svg class="w-8 h-8 text-green-600 dark:text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+              </svg>
+              <div class="text-left">
+                <div class="font-medium text-gray-900 dark:text-white">Manage Talks</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Edit, delete, and organize talks</div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Content List Modal -->
+        <div id="content-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+          <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
+              <div class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
+                <h3 id="modal-title" class="text-lg font-semibold text-gray-900 dark:text-white">Content Management</h3>
+                <button id="close-modal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="p-6 overflow-y-auto max-h-[60vh]">
+                <div id="content-list" class="space-y-4">
+                  <!-- Content will be loaded here -->
+                </div>
+              </div>
+            </div>
+            
+            <a 
+              href="/" 
+              class="flex items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+            >
+              <svg class="w-8 h-8 text-purple-600 dark:text-purple-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+              </svg>
+              <div>
+                <div class="font-medium text-gray-900 dark:text-white">View Site</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Go to homepage</div>
+              </div>
+            </a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // GitHub-based authentication (client-side)
+    const authCheck = document.getElementById('auth-check');
+    const adminDashboard = document.getElementById('admin-dashboard');
+    const authForm = document.getElementById('auth-form');
+    const authError = document.getElementById('auth-error');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    let currentUser = null;
+    let githubToken = null;
+
+    // Check if already authenticated
+    function checkAuth() {
+      const storedToken = localStorage.getItem('github-token');
+      const storedUser = localStorage.getItem('github-user');
+
+      if (storedToken && storedUser) {
+        githubToken = storedToken;
+        currentUser = JSON.parse(storedUser);
+        showDashboard();
+      } else {
+        showAuthForm();
+      }
+    }
+
+    // Validate GitHub token
+    async function validateGitHubToken(token) {
+      try {
+        const response = await fetch('https://api.github.com/user', {
+          headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+
+        if (response.ok) {
+          const user = await response.json();
+
+          // Check if user has access to the repository
+          const repoResponse = await fetch('https://api.github.com/repos/redreamality/redreamality.github.io', {
+            headers: {
+              'Authorization': `token ${token}`,
+              'Accept': 'application/vnd.github.v3+json'
+            }
+          });
+
+          if (repoResponse.ok) {
+            return {
+              success: true,
+              user: {
+                login: user.login,
+                name: user.name || user.login,
+                email: user.email || '',
+                avatar_url: user.avatar_url
+              }
+            };
+          } else {
+            return {
+              success: false,
+              error: 'Token does not have access to the repository'
+            };
+          }
+        } else {
+          return {
+            success: false,
+            error: 'Invalid GitHub token'
+          };
+        }
+      } catch (error) {
+        console.error('GitHub validation error:', error);
+        return {
+          success: false,
+          error: 'Network error validating token'
+        };
+      }
+    }
+
+    function showAuthForm() {
+      authCheck.classList.remove('hidden');
+      adminDashboard.classList.add('hidden');
+    }
+
+    function showDashboard() {
+      authCheck.classList.add('hidden');
+      adminDashboard.classList.remove('hidden');
+
+      // Update dashboard with user info
+      if (currentUser) {
+        const userInfo = document.querySelector('#admin-dashboard h1');
+        if (userInfo) {
+          userInfo.textContent = `Admin Dashboard - Welcome, ${currentUser.name || currentUser.login}`;
+        }
+      }
+    }
+
+    function showAuthError(message) {
+      authError.textContent = message;
+      authError.classList.remove('hidden');
+    }
+
+    function hideAuthError() {
+      authError.classList.add('hidden');
+    }
+
+    // GitHub authentication form handler
+    authForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const tokenInput = document.getElementById('github-token');
+      const token = tokenInput.value.trim();
+
+      if (!token) {
+        showAuthError('Please enter your GitHub Personal Access Token');
+        return;
+      }
+
+      // Show loading state
+      const submitBtn = authForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Authenticating...';
+      submitBtn.disabled = true;
+
+      try {
+        const result = await validateGitHubToken(token);
+
+        if (result.success && result.user) {
+          // Store token and user info
+          localStorage.setItem('github-token', token);
+          localStorage.setItem('github-user', JSON.stringify(result.user));
+
+          githubToken = token;
+          currentUser = result.user;
+          showDashboard();
+          hideAuthError();
+
+          // Clear the token input for security
+          tokenInput.value = '';
+        } else {
+          showAuthError(result.error || 'Authentication failed');
+        }
+      } catch (error) {
+        console.error('Authentication error:', error);
+        showAuthError('Network error. Please try again.');
+      } finally {
+        // Reset button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+
+    // Logout functionality
+    logoutBtn?.addEventListener('click', () => {
+      // Clear stored credentials
+      localStorage.removeItem('github-token');
+      localStorage.removeItem('github-user');
+
+      githubToken = null;
+      currentUser = null;
+      showAuthForm();
+    });
+
+    // Content management functionality
+    const manageBlogsBtn = document.getElementById('manage-blogs-btn');
+    const manageTalksBtn = document.getElementById('manage-talks-btn');
+    const contentModal = document.getElementById('content-modal');
+    const closeModal = document.getElementById('close-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const contentList = document.getElementById('content-list');
+
+    // Show content management modal
+    async function showContentModal(type, title) {
+      modalTitle.textContent = title;
+      contentModal.classList.remove('hidden');
+
+      // Load content
+      await loadContent(type);
+    }
+
+    // Load content list from GitHub
+    async function loadContent(type) {
+      try {
+        contentList.innerHTML = '<div class="text-center py-4">Loading...</div>';
+
+        if (!githubToken) {
+          contentList.innerHTML = '<div class="text-center py-4 text-red-500">Not authenticated</div>';
+          return;
+        }
+
+        const contentPath = type === 'blog' ? 'src/content/blog' : 'src/content/talks';
+
+        const response = await fetch(`https://api.github.com/repos/redreamality/redreamality.github.io/contents/${contentPath}`, {
+          headers: {
+            'Authorization': `token ${githubToken}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+
+        if (response.ok) {
+          const files = await response.json();
+          const mdFiles = files.filter(file => file.name.endsWith('.md'));
+
+          if (mdFiles.length === 0) {
+            contentList.innerHTML = '<div class="text-center py-4 text-gray-500">No content found</div>';
+            return;
+          }
+
+          contentList.innerHTML = mdFiles.map(file => `
+            <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+              <div>
+                <div class="font-medium text-gray-900 dark:text-white">${file.name.replace('.md', '')}</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">${file.path}</div>
+              </div>
+              <div class="flex space-x-2">
+                <button
+                  onclick="editContent('${type}', '${file.name.replace('.md', '')}')"
+                  class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+                >
+                  Edit
+                </button>
+                <button
+                  onclick="deleteContent('${type}', '${file.name.replace('.md', '')}', '${file.sha}')"
+                  class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-sm"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          contentList.innerHTML = '<div class="text-center py-4 text-red-500">Failed to load content</div>';
+        }
+      } catch (error) {
+        console.error('Load content error:', error);
+        contentList.innerHTML = '<div class="text-center py-4 text-red-500">Error loading content</div>';
+      }
+    }
+
+    // Edit content function
+    window.editContent = function(type, slug) {
+      // For now, just show an alert. In a full implementation, this would open an editor
+      alert(`Edit ${type}: ${slug}\n\nThis feature will open a content editor in the next update.`);
+    };
+
+    // Delete content function
+    window.deleteContent = async function(type, slug, sha) {
+      if (!confirm(`Are you sure you want to delete this ${type}? This action cannot be undone.`)) {
+        return;
+      }
+
+      try {
+        if (!githubToken) {
+          alert('Not authenticated');
+          return;
+        }
+
+        const contentPath = type === 'blog' ? 'src/content/blog' : 'src/content/talks';
+        const filePath = `${contentPath}/${slug}.md`;
+
+        const response = await fetch(`https://api.github.com/repos/redreamality/redreamality.github.io/contents/${filePath}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `token ${githubToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: `Delete ${type}: ${slug}`,
+            sha: sha
+          })
+        });
+
+        if (response.ok) {
+          alert(`${type} deleted successfully!`);
+          // Reload the content list
+          await loadContent(type);
+        } else {
+          const error = await response.json();
+          alert(`Failed to delete ${type}: ${error.message}`);
+        }
+      } catch (error) {
+        console.error('Delete error:', error);
+        alert('Network error. Please try again.');
+      }
+    };
+
+    // Event listeners
+    manageBlogsBtn?.addEventListener('click', () => {
+      showContentModal('blog', 'Manage Blog Posts');
+    });
+
+    manageTalksBtn?.addEventListener('click', () => {
+      showContentModal('talks', 'Manage Talks');
+    });
+
+    closeModal?.addEventListener('click', () => {
+      contentModal.classList.add('hidden');
+    });
+
+    // Close modal when clicking outside
+    contentModal?.addEventListener('click', (e) => {
+      if (e.target === contentModal) {
+        contentModal.classList.add('hidden');
+      }
+    });
+
+    // Initialize
+    checkAuth();
+  </script>
+</Layout>

@@ -6,12 +6,14 @@ import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://redreamality.com',
   base: '/',
   trailingSlash: 'ignore',
+  output: 'static',
   integrations: [
     tailwind({
       // 启用 JIT 模式
