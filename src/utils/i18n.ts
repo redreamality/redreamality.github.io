@@ -9,8 +9,8 @@ export interface I18nConfig {
 }
 
 export const i18nConfig: I18nConfig = {
-  defaultLanguage: 'zh',
-  languages: ['zh', 'en'],
+  defaultLanguage: 'en',
+  languages: ['en', 'zh'],
   labels: {
     zh: {
       // Navigation
@@ -92,7 +92,7 @@ export const i18nConfig: I18nConfig = {
 /**
  * Get translation for a key in the specified language
  */
-export function t(key: string, lang: Language = 'zh'): string {
+export function t(key: string, lang: Language = 'en'): string {
   return i18nConfig.labels[lang][key] || key;
 }
 
@@ -100,10 +100,10 @@ export function t(key: string, lang: Language = 'zh'): string {
  * Detect language from URL path
  */
 export function detectLanguageFromPath(pathname: string): Language {
-  if (pathname.startsWith('/en/') || pathname === '/en') {
-    return 'en';
+  if (pathname.startsWith('/cn/') || pathname === '/cn') {
+    return 'zh';
   }
-  return 'zh'; // Default to Chinese
+  return 'en'; // Default to English
 }
 
 /**
@@ -111,12 +111,12 @@ export function detectLanguageFromPath(pathname: string): Language {
  */
 export function getLocalizedPath(path: string, lang: Language): string {
   // Remove existing language prefix
-  const cleanPath = path.replace(/^\/(en|zh)/, '');
-  
-  if (lang === 'en') {
-    return `/en${cleanPath}`;
+  const cleanPath = path.replace(/^\/(cn|en)/, '');
+
+  if (lang === 'zh') {
+    return cleanPath === '' || cleanPath === '/' ? '/cn' : `/cn${cleanPath}`;
   }
-  
+
   return cleanPath || '/';
 }
 
@@ -132,24 +132,12 @@ export function getAlternateLanguagePath(currentPath: string, targetLang: Langua
  */
 export async function getBlogPosts(lang: Language) {
   try {
-    // Try to get language-specific collection first
-    const collectionName = `blog-${lang}` as const;
+    // Get language-specific collection
+    const collectionName = lang === 'zh' ? 'blog-cn' : 'blog-en';
     const posts = await getCollection(collectionName);
-    if (posts && posts.length > 0) {
-      return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-    }
+    return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   } catch (error) {
-    // Collection doesn't exist or is empty, continue to fallback
-  }
-
-  try {
-    // Fallback to main blog collection and filter by language
-    const allPosts = await getCollection('blog');
-    return allPosts
-      .filter(post => !post.data.lang || post.data.lang === lang)
-      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-  } catch (error) {
-    // If all fails, return empty array
+    // If collection doesn't exist, return empty array
     return [];
   }
 }
@@ -159,24 +147,12 @@ export async function getBlogPosts(lang: Language) {
  */
 export async function getTalks(lang: Language) {
   try {
-    // Try to get language-specific collection first
-    const collectionName = `talks-${lang}` as const;
+    // Get language-specific collection
+    const collectionName = lang === 'zh' ? 'talks-cn' : 'talks-en';
     const talks = await getCollection(collectionName);
-    if (talks && talks.length > 0) {
-      return talks.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-    }
+    return talks.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   } catch (error) {
-    // Collection doesn't exist or is empty, continue to fallback
-  }
-
-  try {
-    // Fallback to main talks collection and filter by language
-    const allTalks = await getCollection('talks');
-    return allTalks
-      .filter(talk => !talk.data.lang || talk.data.lang === lang)
-      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-  } catch (error) {
-    // If all fails, return empty array
+    // If collection doesn't exist, return empty array
     return [];
   }
 }
@@ -230,4 +206,103 @@ export async function getTranslationStatus(slug: string, type: 'blog' | 'talks')
   }
 
   return status;
+}
+
+/**
+ * Generate static paths for both languages
+ */
+export async function generateI18nPaths<T>(
+  contentGetter: () => Promise<T[]>,
+  pathGenerator: (item: T, lang: Language) => { params: any; props: any } | null
+): Promise<any[]> {
+  const paths = [];
+  const content = await contentGetter();
+
+  // Generate English paths (root)
+  for (const item of content) {
+    const enPath = pathGenerator(item, 'en');
+    if (enPath) paths.push(enPath);
+  }
+
+  // Generate Chinese paths (/cn/)
+  for (const item of content) {
+    const cnPath = pathGenerator(item, 'zh');
+    if (cnPath) paths.push(cnPath);
+  }
+
+  return paths;
+}
+
+/**
+ * Get content with language fallback
+ */
+export async function getLocalizedContent(
+  slug: string,
+  type: 'blog' | 'talks',
+  lang: Language
+): Promise<any> {
+  try {
+    // Try language-specific collection first
+    const collectionName = `${type}-${lang === 'zh' ? 'cn' : 'en'}` as const;
+    const collection = await getCollection(collectionName);
+    const item = collection.find(item => item.slug === slug);
+    if (item) return item;
+  } catch (error) {
+    // Collection doesn't exist, continue to fallback
+  }
+
+  try {
+    // Fallback to main collection
+    const mainCollection = await getCollection(type);
+    return mainCollection.find(item =>
+      item.slug === slug && (!item.data.lang || item.data.lang === lang)
+    );
+  } catch (error) {
+    return null;
+  }
+}
+
+/**
+ * Get hreflang alternate URLs for a page
+ */
+export function getHreflangAlternates(currentPath: string, site: string): Array<{lang: string, url: string}> {
+  const alternates = [];
+
+  // Add English version
+  const enPath = getLocalizedPath(currentPath, 'en');
+  alternates.push({
+    lang: 'en',
+    url: new URL(enPath, site).toString()
+  });
+
+  // Add Chinese version
+  const zhPath = getLocalizedPath(currentPath, 'zh');
+  alternates.push({
+    lang: 'zh',
+    url: new URL(zhPath, site).toString()
+  });
+
+  return alternates;
+}
+
+/**
+ * Get locale string for meta tags
+ */
+export function getLocaleString(lang: Language): string {
+  return lang === 'zh' ? 'zh_CN' : 'en_US';
+}
+
+/**
+ * Get language code for HTML lang attribute
+ */
+export function getLanguageCode(lang: Language): string {
+  return lang === 'zh' ? 'zh-CN' : 'en';
+}
+
+/**
+ * Generate language-aware canonical URLs
+ */
+export function getCanonicalURL(path: string, lang: Language, site: string): string {
+  const localizedPath = getLocalizedPath(path, lang);
+  return new URL(localizedPath, site).toString();
 }

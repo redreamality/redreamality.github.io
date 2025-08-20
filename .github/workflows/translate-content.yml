@@ -1,0 +1,337 @@
+name: Translate Content
+
+on:
+  workflow_dispatch:
+    inputs:
+      content_path:
+        description: 'Path to content file to translate (e.g., src/content/blog/example.md)'
+        required: true
+        type: string
+      target_language:
+        description: 'Target language for translation'
+        required: true
+        type: choice
+        options:
+          - 'en'
+          - 'zh'
+        default: 'en'
+      content_type:
+        description: 'Type of content being translated'
+        required: true
+        type: choice
+        options:
+          - 'blog'
+          - 'talks'
+        default: 'blog'
+      auto_commit:
+        description: 'Automatically commit the translated file'
+        required: false
+        type: boolean
+        default: false
+
+  repository_dispatch:
+    types: [translate-content]
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create translation script
+        run: |
+          cat > translate-script.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          // Translation configuration
+          const TRANSLATION_CONFIG = {
+            apiBase: process.env.OPENAI_API_BASE || 'https://gateway.chat.sensedeal.vip/v1',
+            apiKey: process.env.OPENAI_API_KEY,
+            model: process.env.MODEL || 'qwen2.5-32b-instruct-int4'
+          };
+
+          // Parse markdown content
+          function parseMarkdownContent(markdown) {
+            const frontmatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
+            const match = markdown.match(frontmatterRegex);
+
+            if (match) {
+              return {
+                frontmatter: match[1],
+                content: match[2].trim(),
+              };
+            }
+
+            return {
+              frontmatter: '',
+              content: markdown,
+            };
+          }
+
+          // Extract metadata from frontmatter
+          function extractMetadata(frontmatter) {
+            const metadata = {};
+            
+            const titleMatch = frontmatter.match(/title:\s*['"](.*)['"]/) || frontmatter.match(/title:\s*(.*)/);
+            if (titleMatch) metadata.title = titleMatch[1].trim();
+            
+            const descMatch = frontmatter.match(/description:\s*['"](.*)['"]/) || frontmatter.match(/description:\s*(.*)/);
+            if (descMatch) metadata.description = descMatch[1].trim();
+            
+            const tagsMatch = frontmatter.match(/tags:\s*\[(.*)\]/);
+            if (tagsMatch) {
+              metadata.tags = tagsMatch[1].split(',').map(tag => tag.trim().replace(/['"]/g, ''));
+            }
+            
+            return metadata;
+          }
+
+          // Translate content using LLM API
+          async function translateContent(content, fromLang, toLang, contentType) {
+            const fromLangName = fromLang === 'zh' ? 'Chinese' : 'English';
+            const toLangName = toLang === 'zh' ? 'Chinese' : 'English';
+
+            const systemPrompt = `You are a professional translator specializing in technical content translation from ${fromLangName} to ${toLangName}.
+
+          Your task is to translate ${contentType} content while:
+          - Maintaining technical accuracy and terminology
+          - Preserving code examples and technical concepts
+          - Ensuring natural flow in the target language
+          - Keeping all Markdown formatting intact
+          - Translating comments in code blocks when appropriate
+          - Maintaining the same tone and style`;
+
+            const userPrompt = `Translate the following ${contentType} content from ${fromLangName} to ${toLangName}:
+
+          IMPORTANT: Preserve all Markdown formatting, code blocks, links, and structure exactly as they appear.
+
+          ${content}`;
+
+            try {
+              const response = await fetch(`${TRANSLATION_CONFIG.apiBase}/chat/completions`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TRANSLATION_CONFIG.apiKey}`,
+                },
+                body: JSON.stringify({
+                  model: TRANSLATION_CONFIG.model,
+                  messages: [
+                    { role: 'system', content: systemPrompt },
+                    { role: 'user', content: userPrompt }
+                  ],
+                  temperature: 0.3,
+                  max_tokens: 4000,
+                }),
+              });
+
+              if (!response.ok) {
+                throw new Error(`Translation API error: ${response.status} ${response.statusText}`);
+              }
+
+              const data = await response.json();
+              return data.choices?.[0]?.message?.content?.trim();
+            } catch (error) {
+              console.error('Translation error:', error);
+              throw error;
+            }
+          }
+
+          // Translate metadata
+          async function translateMetadata(metadata, fromLang, toLang) {
+            const fromLangName = fromLang === 'zh' ? 'Chinese' : 'English';
+            const toLangName = toLang === 'zh' ? 'Chinese' : 'English';
+
+            const metadataText = JSON.stringify({
+              title: metadata.title || '',
+              description: metadata.description || '',
+              tags: metadata.tags || [],
+            });
+
+            const prompt = `Translate the following JSON metadata from ${fromLangName} to ${toLangName}. Maintain the JSON structure and translate only the values:
+
+          ${metadataText}
+
+          Return only the translated JSON without any additional text or formatting.`;
+
+            try {
+              const response = await fetch(`${TRANSLATION_CONFIG.apiBase}/chat/completions`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TRANSLATION_CONFIG.apiKey}`,
+                },
+                body: JSON.stringify({
+                  model: TRANSLATION_CONFIG.model,
+                  messages: [
+                    {
+                      role: 'system',
+                      content: 'You are a professional translator. Translate the provided JSON metadata accurately while preserving the structure.'
+                    },
+                    { role: 'user', content: prompt }
+                  ],
+                  temperature: 0.2,
+                  max_tokens: 1000,
+                }),
+              });
+
+              if (!response.ok) {
+                throw new Error(`Metadata translation API error: ${response.status}`);
+              }
+
+              const data = await response.json();
+              const translatedText = data.choices?.[0]?.message?.content?.trim();
+              return JSON.parse(translatedText);
+            } catch (error) {
+              console.error('Metadata translation error:', error);
+              return metadata; // Return original if translation fails
+            }
+          }
+
+          // Main translation function
+          async function translateFile(inputPath, targetLang, contentType, autoCommit) {
+            console.log(`Translating ${inputPath} to ${targetLang}...`);
+
+            // Read the original file
+            const originalContent = fs.readFileSync(inputPath, 'utf8');
+            const { frontmatter, content } = parseMarkdownContent(originalContent);
+            
+            // Determine source language
+            const sourceLang = inputPath.includes('-en/') || inputPath.includes('/en/') ? 'en' : 'zh';
+            
+            if (sourceLang === targetLang) {
+              console.log('Source and target languages are the same. Skipping translation.');
+              return;
+            }
+
+            // Extract metadata
+            const metadata = extractMetadata(frontmatter);
+            
+            // Translate content and metadata
+            console.log('Translating content...');
+            const translatedContent = await translateContent(content, sourceLang, targetLang, contentType);
+            
+            console.log('Translating metadata...');
+            const translatedMetadata = await translateMetadata(metadata, sourceLang, targetLang);
+
+            // Reconstruct frontmatter with translated metadata
+            let newFrontmatter = frontmatter;
+            if (translatedMetadata.title) {
+              newFrontmatter = newFrontmatter.replace(
+                /title:\s*['"].*['"]/, 
+                `title: '${translatedMetadata.title.replace(/'/g, "''")}'`
+              );
+            }
+            if (translatedMetadata.description) {
+              newFrontmatter = newFrontmatter.replace(
+                /description:\s*['"].*['"]/, 
+                `description: '${translatedMetadata.description.replace(/'/g, "''")}'`
+              );
+            }
+            if (translatedMetadata.tags && translatedMetadata.tags.length > 0) {
+              const tagsString = translatedMetadata.tags.map(tag => `'${tag.replace(/'/g, "''")}'`).join(', ');
+              newFrontmatter = newFrontmatter.replace(/tags:\s*\[.*\]/, `tags: [${tagsString}]`);
+            }
+
+            // Construct output path
+            const outputPath = inputPath.replace(
+              sourceLang === 'zh' ? /\/(blog|talks)\// : /\/(blog|talks)-en\//,
+              targetLang === 'en' ? `/$1-en/` : `/$1/`
+            );
+
+            // Ensure output directory exists
+            const outputDir = path.dirname(outputPath);
+            if (!fs.existsSync(outputDir)) {
+              fs.mkdirSync(outputDir, { recursive: true });
+            }
+
+            // Write translated file
+            const translatedFile = frontmatter ? 
+              `---\n${newFrontmatter}\n---\n\n${translatedContent}` : 
+              translatedContent;
+
+            fs.writeFileSync(outputPath, translatedFile, 'utf8');
+            console.log(`Translation completed: ${outputPath}`);
+
+            return outputPath;
+          }
+
+          // Run translation
+          const contentPath = process.argv[2];
+          const targetLang = process.argv[3];
+          const contentType = process.argv[4];
+          const autoCommit = process.argv[5] === 'true';
+
+          translateFile(contentPath, targetLang, contentType, autoCommit)
+            .then((outputPath) => {
+              console.log('Translation successful!');
+              if (outputPath) {
+                console.log(`::set-output name=translated_file::${outputPath}`);
+              }
+            })
+            .catch((error) => {
+              console.error('Translation failed:', error);
+              process.exit(1);
+            });
+          EOF
+
+      - name: Run translation
+        id: translate
+        env:
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE || 'https://gateway.chat.sensedeal.vip/v1' }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || 'b9df99ea41435fa7be5ce346b486c33e' }}
+          MODEL: ${{ secrets.MODEL || 'qwen2.5-32b-instruct-int4' }}
+        run: |
+          node translate-script.js "${{ github.event.inputs.content_path || github.event.client_payload.content_path }}" "${{ github.event.inputs.target_language || github.event.client_payload.target_language }}" "${{ github.event.inputs.content_type || github.event.client_payload.content_type }}" "${{ github.event.inputs.auto_commit || github.event.client_payload.auto_commit }}"
+
+      - name: Commit translated file
+        if: ${{ github.event.inputs.auto_commit == 'true' || github.event.client_payload.auto_commit == 'true' }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Add translated content: ${{ steps.translate.outputs.translated_file }}" || echo "No changes to commit"
+          git push
+
+      - name: Create Pull Request
+        if: ${{ github.event.inputs.auto_commit != 'true' && github.event.client_payload.auto_commit != 'true' }}
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Add translated content"
+          title: "🌐 Add translated content: ${{ github.event.inputs.content_path }}"
+          body: |
+            ## Automatic Translation
+
+            This PR contains automatically translated content:
+
+            - **Source**: `${{ github.event.inputs.content_path }}`
+            - **Target Language**: `${{ github.event.inputs.target_language }}`
+            - **Content Type**: `${{ github.event.inputs.content_type }}`
+            - **Model Used**: `${{ secrets.MODEL || 'qwen2.5-32b-instruct-int4' }}`
+
+            Please review the translation quality before merging.
+
+            ### Review Checklist
+            - [ ] Translation accuracy
+            - [ ] Technical terminology correctness
+            - [ ] Markdown formatting preserved
+            - [ ] Code blocks and links working
+            - [ ] Metadata (title, description, tags) properly translated
+
+          branch: translation/${{ github.event.inputs.target_language }}-${{ github.run_number }}
+          delete-branch: true

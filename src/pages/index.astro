@@ -1,54 +1,95 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getBlogPosts, getTalks, t } from '../utils/i18n';
+import { getBlogPosts, getTalks, t, type Language } from '../utils/i18n';
 
-// 获取最新的博客文章和演讲 (中文版本)
-const posts = await getBlogPosts('zh');
-const talks = await getTalks('zh');
+// This page handles the root path only (English default)
+// Chinese version will be handled by a separate /cn/index.astro file
 
-// 按日期排序并获取最新的20篇
+// This is the English homepage (root path)
+const lang: Language = 'en';
+
+// Get latest blog posts and talks for current language
+const posts = await getBlogPosts(lang);
+const talks = await getTalks(lang);
+
+// Get the latest 20 posts and talks
 const recentPosts = posts.slice(0, 20);
 const recentTalks = talks.slice(0, 20);
+
+// Language-specific content
+const content = {
+  en: {
+    title: "Welcome to Remy (Redreamality)'s Personal Website",
+    subtitle: "This is where I showcase my projects, blog articles, and presentation shares",
+    projectsTitle: "Projects",
+    projectsDesc: "View Redreamality's open source projects and personal works",
+    blogTitle: "Blog Articles",
+    blogDesc: "Read Redreamality's technical blog and insights",
+    talksTitle: "Presentations",
+    talksDesc: "Watch Redreamality's technical presentations and sharing content",
+    recentBlogTitle: "Recent Blog Posts",
+    recentTalksTitle: "Recent Presentations",
+    viewAllPosts: "View All Posts",
+    viewAllTalks: "View All Talks"
+  },
+  zh: {
+    title: "欢迎来到Remy(Redreamality)的个人网站",
+    subtitle: "这里是我的项目展示、博客文章和演讲分享的地方",
+    projectsTitle: "项目展示",
+    projectsDesc: "查看Redreamality的开源项目和个人作品",
+    blogTitle: "博客文章",
+    blogDesc: "阅读Redreamality的技术博客和心得分享",
+    talksTitle: "演讲分享",
+    talksDesc: "观看Redreamality的技术演讲和分享内容",
+    recentBlogTitle: "最新博客",
+    recentTalksTitle: "最新演讲",
+    viewAllPosts: "查看全部",
+    viewAllTalks: "查看全部"
+  }
+};
+
+const currentContent = content[lang];
+const basePath = lang === 'zh' ? '/cn' : '';
 ---
 
-<Layout title="首页">
+<Layout title={lang === 'zh' ? '首页' : 'Home'}>
   <div class="text-center">
-    <h1 class="text-4xl font-bold mb-4 dark:text-white">欢迎来到Remy(Redreamality)的个人网站</h1>
-    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">这里是我的项目展示、博客文章和演讲分享的地方</p>
-    
+    <h1 class="text-4xl font-bold mb-4 dark:text-white">{currentContent.title}</h1>
+    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">{currentContent.subtitle}</p>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
-      <a href="/projects" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">项目展示</h2>
-        <p class="font-normal text-gray-700 dark:text-gray-400">查看Redreamality的开源项目和个人作品</p>
+      <a href={`${basePath}/projects`} class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{currentContent.projectsTitle}</h2>
+        <p class="font-normal text-gray-700 dark:text-gray-400">{currentContent.projectsDesc}</p>
       </a>
-      
-      <a href="/blog" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">博客文章</h2>
-        <p class="font-normal text-gray-700 dark:text-gray-400">阅读Redreamality的技术博客和心得分享</p>
+
+      <a href={`${basePath}/blog`} class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{currentContent.blogTitle}</h2>
+        <p class="font-normal text-gray-700 dark:text-gray-400">{currentContent.blogDesc}</p>
       </a>
-      
-      <a href="/talks" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">演讲分享</h2>
-        <p class="font-normal text-gray-700 dark:text-gray-400">观看Redreamality的技术演讲和分享内容</p>
+
+      <a href={`${basePath}/talks`} class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{currentContent.talksTitle}</h2>
+        <p class="font-normal text-gray-700 dark:text-gray-400">{currentContent.talksDesc}</p>
       </a>
     </div>
 
     <div class="max-w-6xl mx-auto px-4">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- 最新博客 -->
+        <!-- Recent Blog Posts -->
         <div>
           <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold dark:text-white">最新博客</h2>
-            <a href="/blog" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-              查看全部 →
+            <h2 class="text-2xl font-bold dark:text-white">{currentContent.recentBlogTitle}</h2>
+            <a href={`${basePath}/blog`} class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+              {currentContent.viewAllPosts} →
             </a>
           </div>
           <div class="space-y-4">
             {recentPosts.map((post) => (
               <article class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
                 <h3 class="text-xl font-semibold mb-2">
-                  <a 
-                    href={`/blog/${post.slug}`}
+                  <a
+                    href={`${basePath}/blog/${post.slug}`}
                     class="hover:text-blue-600 dark:hover:text-blue-400"
                   >
                     {post.data.title}
@@ -58,14 +99,14 @@ const recentTalks = talks.slice(0, 20);
                 <div class="flex flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400">
                   <time datetime={post.data.pubDate.toISOString()}>
                     <span class="mr-1">📅</span>
-                    {post.data.pubDate.toLocaleDateString('zh-CN')}
+                    {post.data.pubDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US')}
                   </time>
                   {post.data.tags && (
                     <div class="flex gap-1">
                       <span class="mr-1">🏷️</span>
                       {post.data.tags.slice(0, 2).map((tag: string) => (
                         <a
-                          href={`/tags/${tag}`}
+                          href={`${basePath}/tags/${tag}`}
                           class="hover:text-blue-600 dark:hover:text-blue-400"
                         >
                           #{tag}
@@ -79,20 +120,20 @@ const recentTalks = talks.slice(0, 20);
           </div>
         </div>
 
-        <!-- 最新演讲 -->
+        <!-- Recent Talks -->
         <div>
           <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold dark:text-white">最新演讲</h2>
-            <a href="/talks" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-              查看全部 →
+            <h2 class="text-2xl font-bold dark:text-white">{currentContent.recentTalksTitle}</h2>
+            <a href={`${basePath}/talks`} class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+              {currentContent.viewAllTalks} →
             </a>
           </div>
           <div class="space-y-4">
             {recentTalks.map((talk) => (
               <article class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
                 <h3 class="text-xl font-semibold mb-2">
-                  <a 
-                    href={`/talks/${talk.slug}`}
+                  <a
+                    href={`${basePath}/talks/${talk.slug}`}
                     class="hover:text-blue-600 dark:hover:text-blue-400"
                   >
                     {talk.data.title}
@@ -102,7 +143,7 @@ const recentTalks = talks.slice(0, 20);
                 <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
                   <time datetime={talk.data.date.toISOString()}>
                     <span class="mr-1">📅</span>
-                    {talk.data.date.toLocaleDateString('zh-CN')}
+                    {talk.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US')}
                   </time>
                   {talk.data.location && (
                     <div>

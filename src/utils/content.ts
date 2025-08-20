@@ -26,10 +26,11 @@ export interface TalkData {
 export function generateSlug(title: string): string {
   return title
     .toLowerCase()
+    .trim() // Trim first to remove leading/trailing spaces
     .replace(/[^\w\s-]/g, '') // Remove special characters
     .replace(/\s+/g, '-') // Replace spaces with hyphens
     .replace(/-+/g, '-') // Replace multiple hyphens with single
-    .trim();
+    .replace(/^-+|-+$/g, ''); // Remove leading and trailing hyphens
 }
 
 /**
@@ -99,7 +100,7 @@ export async function createBlogPost(data: BlogPostData, language: string): Prom
   const fullContent = frontmatter + data.content;
   
   // Determine the directory based on language
-  const contentDir = language === 'zh' ? 'src/content/blog' : 'src/content/blog';
+  const contentDir = language === 'zh' ? 'src/content/blog-cn' : 'src/content/blog-en';
   const filename = `${slug}.md`;
   const filepath = path.join(process.cwd(), contentDir, filename);
   
@@ -129,7 +130,7 @@ export async function createTalk(data: TalkData, language: string): Promise<stri
   const fullContent = frontmatter + data.content;
   
   // Determine the directory based on language
-  const contentDir = language === 'zh' ? 'src/content/talks' : 'src/content/talks';
+  const contentDir = language === 'zh' ? 'src/content/talks-cn' : 'src/content/talks-en';
   const filename = `${slug}.md`;
   const filepath = path.join(process.cwd(), contentDir, filename);
   

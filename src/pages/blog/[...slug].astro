@@ -1,23 +1,69 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getBlogPosts, getLocalizedContent, t, type Language } from '../../utils/i18n';
 import TableOfContents from '../../components/TableOfContents.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map(post => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  const paths = [];
+
+  // Get all blog posts for both languages
+  const enPosts = await getBlogPosts('en');
+  const zhPosts = await getBlogPosts('zh');
+
+  // Generate English paths (root)
+  for (const post of enPosts) {
+    paths.push({
+      params: { slug: post.slug },
+      props: { post, lang: 'en' }
+    });
+  }
+
+  // Generate Chinese paths (/cn/)
+  for (const post of zhPosts) {
+    paths.push({
+      params: { slug: `cn/${post.slug}` },
+      props: { post, lang: 'zh' }
+    });
+  }
+
+  return paths;
 }
 
-const { post } = Astro.props;
+interface Props {
+  post: any;
+  lang: Language;
+}
+
+const { post, lang } = Astro.props;
 const { Content, headings } = await post.render();
 
-// 为文章准备SEO相关的元数据
+// Language-specific content
+const content = {
+  en: {
+    backToBlog: "Back to Blog",
+    publishedOn: "Published on",
+    updatedOn: "Updated on",
+    author: "Author",
+    readingTime: "min read",
+    tags: "Tags"
+  },
+  zh: {
+    backToBlog: "返回博客列表",
+    publishedOn: "发布于",
+    updatedOn: "更新于",
+    author: "作者",
+    readingTime: "分钟阅读",
+    tags: "标签"
+  }
+};
+
+const currentContent = content[lang];
+const basePath = lang === 'zh' ? '/cn' : '';
+
+// Prepare SEO metadata
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const articleImage = post.data.image || '/images/default-blog-image.png';
-const description = post.data.description || `阅读文章：${post.data.title}`;
+const description = post.data.description || (lang === 'zh' ? `阅读文章：${post.data.title}` : `Read article: ${post.data.title}`);
 
 // 准备结构化数据
 const articleSchema = {
@@ -56,12 +102,12 @@ const articleSchema = {
   <main class="container mx-auto px-4 py-8">
     <div class="max-w-6xl mx-auto relative">
       <div class="mb-8">
-        <a 
-          href="/blog" 
+        <a
+          href={`${basePath}/blog`}
           class="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
         >
           <span class="mr-2">←</span>
-          返回博客列表
+          {currentContent.backToBlog}
         </a>
       </div>
 
@@ -74,24 +120,32 @@ const articleSchema = {
           <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400 mb-8">
             <time datetime={post.data.pubDate.toISOString()}>
               <span class="mr-2">📅</span>
-              {post.data.pubDate.toLocaleDateString('zh-CN')}
+              {post.data.pubDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
             </time>
             {post.data.updatedDate && (
               <time datetime={post.data.updatedDate.toISOString()}>
                 <span class="mr-2">🔄</span>
-                更新于: {post.data.updatedDate.toLocaleDateString('zh-CN')}
+                {currentContent.updatedOn}: {post.data.updatedDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
               </time>
             )}
             <div>
               <span class="mr-2">✍️</span>
-              {post.data.author}
+              {currentContent.author}: {post.data.author}
             </div>
             {post.data.tags && (
               <div class="flex gap-2">
                 <span class="mr-2">🏷️</span>
                 {post.data.tags.map((tag: string) => (
                   <a
-                    href={`/tags/${tag}`}
+                    href={`${basePath}/tags/${tag}`}
                     class="hover:text-blue-600 dark:hover:text-blue-400"
                   >
                     #{tag}

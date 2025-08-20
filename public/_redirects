@@ -1,0 +1,19 @@
+# URL Migration Redirects for i18n Refactoring
+# This file provides redirects for Netlify hosting
+# For GitHub Pages, these redirects would need to be implemented differently
+
+# English pages: /en/* → /* (if any old /en/ URLs exist)
+/en/                    /                   301
+/en/blog                /blog               301
+/en/blog/*              /blog/:splat        301
+/en/talks               /talks              301
+/en/talks/*             /talks/:splat       301
+/en/about               /about              301
+/en/tags                /tags               301
+/en/tags/*              /tags/:splat        301
+
+# Note: For GitHub Pages hosting, redirects should be implemented using:
+# 1. Meta refresh redirects in HTML files
+# 2. JavaScript redirects
+# 3. Jekyll redirect plugin (if using Jekyll)
+# 4. Custom 404.html page with redirect logic

@@ -1,0 +1,554 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { generateContentSyncReport } from '../../utils/content-sync';
+
+const syncReport = await generateContentSyncReport();
+const itemsNeedingTranslation = syncReport.items.filter(item => 
+  item.needsTranslation.toEnglish || item.needsTranslation.toChinese
+);
+---
+
+<Layout title="Content Translation - Admin">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Content Translation</h1>
+          <p class="mt-2 text-gray-600 dark:text-gray-400">
+            Automatically translate content using AI-powered translation
+          </p>
+        </div>
+        <div class="flex space-x-4">
+          <a 
+            href="/admin" 
+            class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+          >
+            ← Back to Admin
+          </a>
+          <a 
+            href="/admin/content-sync" 
+            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            📊 Sync Report
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Translation Status Overview -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-yellow-100 dark:bg-yellow-900">
+            <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Needs Translation</p>
+            <p class="text-2xl font-semibold text-gray-900 dark:text-white">{itemsNeedingTranslation.length}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-red-100 dark:bg-red-900">
+            <svg class="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">High Priority</p>
+            <p class="text-2xl font-semibold text-gray-900 dark:text-white">
+              {itemsNeedingTranslation.filter(item => item.priority === 'high').length}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-green-100 dark:bg-green-900">
+            <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Coverage</p>
+            <p class="text-2xl font-semibold text-gray-900 dark:text-white">{syncReport.translationCoverage}%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Batch Translation Interface -->
+    <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-lg p-6 mb-8">
+      <h3 class="text-lg font-semibold text-purple-900 dark:text-purple-100 mb-4">
+        🚀 Batch Translation
+      </h3>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Batch Settings -->
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Target Language
+              </label>
+              <select
+                id="batch-target-language"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+              >
+                <option value="en">English</option>
+                <option value="zh">Chinese</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Priority Filter
+              </label>
+              <select
+                id="batch-priority"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+              >
+                <option value="high">High Priority Only</option>
+                <option value="medium">Medium Priority Only</option>
+                <option value="low">Low Priority Only</option>
+                <option value="all">All Priorities</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Content Type
+              </label>
+              <select
+                id="batch-content-type"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+              >
+                <option value="all">All Content</option>
+                <option value="blog">Blog Posts Only</option>
+                <option value="talks">Talks Only</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Max Items
+              </label>
+              <input
+                type="number"
+                id="batch-max-items"
+                min="1"
+                max="10"
+                value="5"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+              >
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <label class="flex items-center">
+              <input
+                type="checkbox"
+                id="batch-auto-commit"
+                class="rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+              >
+              <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                Auto-commit translations (skip review)
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Batch Actions -->
+        <div class="space-y-4">
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+            <h4 class="font-medium text-gray-900 dark:text-white mb-3">Quick Batch Actions</h4>
+            <div class="space-y-2">
+              <button
+                id="batch-translate-high-priority"
+                class="w-full flex items-center justify-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm"
+              >
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                Batch Translate High Priority
+              </button>
+              <button
+                id="batch-translate-all"
+                class="w-full flex items-center justify-center px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm"
+              >
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                Batch Translate All Missing
+              </button>
+              <button
+                id="batch-translate-custom"
+                class="w-full flex items-center justify-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm"
+              >
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                Custom Batch Translation
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4">
+            <div class="flex items-start">
+              <svg class="w-5 h-5 text-yellow-600 dark:text-yellow-400 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+              </svg>
+              <div class="text-sm text-yellow-800 dark:text-yellow-200">
+                <p class="font-medium">Batch Translation Notes:</p>
+                <ul class="mt-1 space-y-1 text-xs">
+                  <li>• Translations are processed with 3-second delays to avoid rate limiting</li>
+                  <li>• Large batches may take several minutes to complete</li>
+                  <li>• Review translations before merging for quality assurance</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Individual Translation Interface -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden mb-8">
+      <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Individual Translation</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">Translate specific content items</p>
+      </div>
+      
+      <div class="p-6">
+        <form id="translation-form" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="content-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Select Content
+              </label>
+              <select 
+                id="content-select" 
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                required
+              >
+                <option value="">Choose content to translate...</option>
+                {itemsNeedingTranslation.map(item => (
+                  <option 
+                    value={JSON.stringify({
+                      slug: item.slug,
+                      type: item.type,
+                      title: item.title,
+                      needsEnglish: item.needsTranslation.toEnglish,
+                      needsChinese: item.needsTranslation.toChinese,
+                      priority: item.priority
+                    })}
+                  >
+                    [{item.type.toUpperCase()}] {item.title} 
+                    ({item.needsTranslation.toEnglish ? 'Need EN' : 'Need ZH'}) 
+                    - {item.priority.toUpperCase()}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label for="target-language" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Target Language
+              </label>
+              <select 
+                id="target-language" 
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                required
+              >
+                <option value="">Select target language...</option>
+                <option value="en">English</option>
+                <option value="zh">Chinese</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <label class="flex items-center">
+              <input 
+                type="checkbox" 
+                id="auto-commit" 
+                class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              >
+              <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                Auto-commit translation (skip review)
+              </span>
+            </label>
+          </div>
+
+          <div class="flex space-x-4">
+            <button
+              type="submit"
+              class="flex items-center px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+              </svg>
+              Start Translation
+            </button>
+            <button
+              type="button"
+              id="preview-translation"
+              class="flex items-center px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+              disabled
+            >
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>
+              Preview Translation
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Translation Queue -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+      <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Translation Queue</h3>
+          <button 
+            id="refresh-queue"
+            class="text-blue-600 dark:text-blue-400 hover:underline text-sm"
+          >
+            🔄 Refresh
+          </button>
+        </div>
+      </div>
+      
+      <div id="translation-queue" class="p-6">
+        <div class="text-center text-gray-500 dark:text-gray-400">
+          No active translations
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Messages -->
+    <div id="status-messages" class="fixed bottom-4 right-4 space-y-2 z-50">
+      <!-- Status messages will be inserted here -->
+    </div>
+  </div>
+
+  <script>
+    // Check GitHub authentication
+    function checkAuth() {
+      const githubToken = localStorage.getItem('github-token');
+      const githubUser = localStorage.getItem('github-user');
+      
+      if (!githubToken || !githubUser) {
+        window.location.href = '/admin';
+        return false;
+      }
+      return true;
+    }
+
+    // Show status message
+    function showStatus(message, type = 'info') {
+      const statusContainer = document.getElementById('status-messages');
+      const statusDiv = document.createElement('div');
+      
+      const bgColor = {
+        success: 'bg-green-600',
+        error: 'bg-red-600',
+        warning: 'bg-yellow-600',
+        info: 'bg-blue-600'
+      }[type] || 'bg-blue-600';
+
+      statusDiv.className = `${bgColor} text-white px-4 py-2 rounded-lg shadow-lg max-w-sm`;
+      statusDiv.textContent = message;
+      
+      statusContainer.appendChild(statusDiv);
+      
+      setTimeout(() => {
+        statusDiv.remove();
+      }, 5000);
+    }
+
+    // Trigger GitHub Actions workflow
+    async function triggerTranslation(contentPath, targetLanguage, contentType, autoCommit = false) {
+      const githubToken = localStorage.getItem('github-token');
+      
+      if (!githubToken) {
+        showStatus('Not authenticated', 'error');
+        return;
+      }
+
+      try {
+        showStatus('Starting translation...', 'info');
+
+        const response = await fetch('https://api.github.com/repos/redreamality/redreamality.github.io/dispatches', {
+          method: 'POST',
+          headers: {
+            'Authorization': `token ${githubToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            event_type: 'translate-content',
+            client_payload: {
+              content_path: contentPath,
+              target_language: targetLanguage,
+              content_type: contentType,
+              auto_commit: autoCommit
+            }
+          })
+        });
+
+        if (response.ok) {
+          showStatus('Translation workflow triggered successfully!', 'success');
+          showStatus('Check GitHub Actions for progress', 'info');
+        } else {
+          throw new Error(`GitHub API error: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Translation trigger error:', error);
+        showStatus('Failed to trigger translation', 'error');
+      }
+    }
+
+    // Form submission handler
+    document.getElementById('translation-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const contentSelect = document.getElementById('content-select');
+      const targetLanguage = document.getElementById('target-language').value;
+      const autoCommit = document.getElementById('auto-commit').checked;
+
+      if (!contentSelect.value || !targetLanguage) {
+        showStatus('Please select content and target language', 'warning');
+        return;
+      }
+
+      const contentData = JSON.parse(contentSelect.value);
+      
+      // Construct content path
+      const langSuffix = contentData.needsEnglish ? '' : '-en';
+      const contentPath = `src/content/${contentData.type}${langSuffix}/${contentData.slug}.md`;
+
+      await triggerTranslation(contentPath, targetLanguage, contentData.type, autoCommit);
+    });
+
+    // Trigger batch translation workflow
+    async function triggerBatchTranslation(targetLanguage, priorityFilter, contentType, maxItems, autoCommit = false) {
+      const githubToken = localStorage.getItem('github-token');
+
+      if (!githubToken) {
+        showStatus('Not authenticated', 'error');
+        return;
+      }
+
+      try {
+        showStatus('Starting batch translation...', 'info');
+
+        const response = await fetch('https://api.github.com/repos/redreamality/redreamality.github.io/dispatches', {
+          method: 'POST',
+          headers: {
+            'Authorization': `token ${githubToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            event_type: 'batch-translate',
+            client_payload: {
+              target_language: targetLanguage,
+              priority_filter: priorityFilter,
+              content_type: contentType,
+              max_items: maxItems,
+              auto_commit: autoCommit
+            }
+          })
+        });
+
+        if (response.ok) {
+          showStatus('Batch translation workflow triggered successfully!', 'success');
+          showStatus('Check GitHub Actions for progress', 'info');
+          showStatus(`Translating up to ${maxItems} ${priorityFilter} priority ${contentType} items`, 'info');
+        } else {
+          throw new Error(`GitHub API error: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Batch translation trigger error:', error);
+        showStatus('Failed to trigger batch translation', 'error');
+      }
+    }
+
+    // Batch translation action handlers
+    document.getElementById('batch-translate-high-priority').addEventListener('click', async () => {
+      if (!confirm('This will trigger batch translation for high-priority items. Continue?')) {
+        return;
+      }
+
+      const targetLang = document.getElementById('batch-target-language').value;
+      const maxItems = parseInt(document.getElementById('batch-max-items').value) || 5;
+      const autoCommit = document.getElementById('batch-auto-commit').checked;
+
+      await triggerBatchTranslation(targetLang, 'high', 'all', maxItems, autoCommit);
+    });
+
+    document.getElementById('batch-translate-all').addEventListener('click', async () => {
+      if (!confirm('This will trigger batch translation for ALL missing content. This may take a while. Continue?')) {
+        return;
+      }
+
+      const targetLang = document.getElementById('batch-target-language').value;
+      const maxItems = parseInt(document.getElementById('batch-max-items').value) || 5;
+      const autoCommit = document.getElementById('batch-auto-commit').checked;
+
+      await triggerBatchTranslation(targetLang, 'all', 'all', maxItems, autoCommit);
+    });
+
+    document.getElementById('batch-translate-custom').addEventListener('click', async () => {
+      const targetLang = document.getElementById('batch-target-language').value;
+      const priority = document.getElementById('batch-priority').value;
+      const contentType = document.getElementById('batch-content-type').value;
+      const maxItems = parseInt(document.getElementById('batch-max-items').value) || 5;
+      const autoCommit = document.getElementById('batch-auto-commit').checked;
+
+      const confirmMessage = `This will trigger batch translation with the following settings:
+
+Target Language: ${targetLang}
+Priority: ${priority}
+Content Type: ${contentType}
+Max Items: ${maxItems}
+Auto-commit: ${autoCommit ? 'Yes' : 'No'}
+
+Continue?`;
+
+      if (!confirm(confirmMessage)) {
+        return;
+      }
+
+      await triggerBatchTranslation(targetLang, priority, contentType, maxItems, autoCommit);
+    });
+
+    // Auto-update target language based on content selection
+    document.getElementById('content-select').addEventListener('change', (e) => {
+      if (e.target.value) {
+        const contentData = JSON.parse(e.target.value);
+        const targetLangSelect = document.getElementById('target-language');
+        
+        if (contentData.needsEnglish) {
+          targetLangSelect.value = 'en';
+        } else if (contentData.needsChinese) {
+          targetLangSelect.value = 'zh';
+        }
+      }
+    });
+
+    // Check authentication on page load
+    if (!checkAuth()) {
+      // Will redirect to admin page
+    }
+  </script>
+</Layout>

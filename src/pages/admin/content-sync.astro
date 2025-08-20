@@ -1,0 +1,305 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { generateContentSyncReport } from '../../utils/content-sync';
+
+const syncReport = await generateContentSyncReport();
+---
+
+<Layout title="Content Synchronization Report - Admin">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Content Synchronization Report</h1>
+          <p class="mt-2 text-gray-600 dark:text-gray-400">
+            Track translation status and identify missing content across languages
+          </p>
+        </div>
+        <div class="flex space-x-4">
+          <a 
+            href="/admin" 
+            class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+          >
+            ← Back to Admin
+          </a>
+          <button 
+            id="refresh-report"
+            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            🔄 Refresh Report
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Statistics Overview -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-blue-100 dark:bg-blue-900">
+            <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Content</p>
+            <p class="text-2xl font-semibold text-gray-900 dark:text-white">{syncReport.totalContent}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-green-100 dark:bg-green-900">
+            <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Fully Translated</p>
+            <p class="text-2xl font-semibold text-gray-900 dark:text-white">{syncReport.translatedContent}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-yellow-100 dark:bg-yellow-900">
+            <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Missing Translations</p>
+            <p class="text-2xl font-semibold text-gray-900 dark:text-white">{syncReport.missingTranslations}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-purple-100 dark:bg-purple-900">
+            <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Coverage</p>
+            <p class="text-2xl font-semibold text-gray-900 dark:text-white">{syncReport.translationCoverage}%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Type Statistics -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Blog Posts</h3>
+        <div class="space-y-3">
+          <div class="flex justify-between">
+            <span class="text-gray-600 dark:text-gray-400">Total Posts:</span>
+            <span class="font-medium text-gray-900 dark:text-white">{syncReport.blogStats.total}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600 dark:text-gray-400">Translated:</span>
+            <span class="font-medium text-gray-900 dark:text-white">{syncReport.blogStats.translated}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600 dark:text-gray-400">Coverage:</span>
+            <span class="font-medium text-gray-900 dark:text-white">{syncReport.blogStats.coverage}%</span>
+          </div>
+          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+            <div 
+              class="bg-blue-600 h-2 rounded-full" 
+              style={`width: ${syncReport.blogStats.coverage}%`}
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Talks</h3>
+        <div class="space-y-3">
+          <div class="flex justify-between">
+            <span class="text-gray-600 dark:text-gray-400">Total Talks:</span>
+            <span class="font-medium text-gray-900 dark:text-white">{syncReport.talksStats.total}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600 dark:text-gray-400">Translated:</span>
+            <span class="font-medium text-gray-900 dark:text-white">{syncReport.talksStats.translated}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600 dark:text-gray-400">Coverage:</span>
+            <span class="font-medium text-gray-900 dark:text-white">{syncReport.talksStats.coverage}%</span>
+          </div>
+          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+            <div 
+              class="bg-green-600 h-2 rounded-full" 
+              style={`width: ${syncReport.talksStats.coverage}%`}
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommendations -->
+    {syncReport.recommendations.length > 0 && (
+      <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 mb-8">
+        <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-4">
+          📋 Recommendations
+        </h3>
+        <ul class="space-y-2">
+          {syncReport.recommendations.map(recommendation => (
+            <li class="flex items-start">
+              <span class="text-blue-600 dark:text-blue-400 mr-2">•</span>
+              <span class="text-blue-800 dark:text-blue-200">{recommendation}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <!-- Content Items Table -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+      <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Content Items</h3>
+          <div class="flex space-x-2">
+            <select id="filter-type" class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+              <option value="all">All Types</option>
+              <option value="blog">Blog Posts</option>
+              <option value="talks">Talks</option>
+            </select>
+            <select id="filter-priority" class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+              <option value="all">All Priorities</option>
+              <option value="high">High Priority</option>
+              <option value="medium">Medium Priority</option>
+              <option value="low">Low Priority</option>
+            </select>
+            <select id="filter-status" class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+              <option value="all">All Status</option>
+              <option value="complete">Fully Translated</option>
+              <option value="missing-en">Missing English</option>
+              <option value="missing-zh">Missing Chinese</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+          <thead class="bg-gray-50 dark:bg-gray-700">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Content</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Type</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Priority</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Chinese</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">English</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
+            </tr>
+          </thead>
+          <tbody id="content-table-body" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+            {syncReport.items.map(item => (
+              <tr class="content-row" 
+                  data-type={item.type} 
+                  data-priority={item.priority}
+                  data-status={item.zh.exists && item.en.exists ? 'complete' : 
+                              item.needsTranslation.toEnglish ? 'missing-en' : 'missing-zh'}>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div>
+                    <div class="text-sm font-medium text-gray-900 dark:text-white">{item.title}</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">{item.slug}</div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                    item.type === 'blog' 
+                      ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                      : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                  }`}>
+                    {item.type}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                    item.priority === 'high' 
+                      ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                      : item.priority === 'medium'
+                      ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                      : 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
+                  }`}>
+                    {item.priority}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  {item.zh.exists ? (
+                    <span class="text-green-600 dark:text-green-400">✓ Available</span>
+                  ) : (
+                    <span class="text-red-600 dark:text-red-400">✗ Missing</span>
+                  )}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  {item.en.exists ? (
+                    <span class="text-green-600 dark:text-green-400">✓ Available</span>
+                  ) : (
+                    <span class="text-red-600 dark:text-red-400">✗ Missing</span>
+                  )}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  {item.zh.exists && item.en.exists ? (
+                    <span class="text-green-600 dark:text-green-400 font-medium">Complete</span>
+                  ) : item.needsTranslation.toEnglish ? (
+                    <span class="text-yellow-600 dark:text-yellow-400 font-medium">Needs English</span>
+                  ) : (
+                    <span class="text-blue-600 dark:text-blue-400 font-medium">Needs Chinese</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Filter functionality
+    const filterType = document.getElementById('filter-type') as HTMLSelectElement;
+    const filterPriority = document.getElementById('filter-priority') as HTMLSelectElement;
+    const filterStatus = document.getElementById('filter-status') as HTMLSelectElement;
+    const contentRows = document.querySelectorAll('.content-row') as NodeListOf<HTMLTableRowElement>;
+
+    function applyFilters() {
+      const typeFilter = filterType.value;
+      const priorityFilter = filterPriority.value;
+      const statusFilter = filterStatus.value;
+
+      contentRows.forEach(row => {
+        const type = row.dataset.type;
+        const priority = row.dataset.priority;
+        const status = row.dataset.status;
+
+        const typeMatch = typeFilter === 'all' || type === typeFilter;
+        const priorityMatch = priorityFilter === 'all' || priority === priorityFilter;
+        const statusMatch = statusFilter === 'all' || status === statusFilter;
+
+        if (typeMatch && priorityMatch && statusMatch) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    filterType.addEventListener('change', applyFilters);
+    filterPriority.addEventListener('change', applyFilters);
+    filterStatus.addEventListener('change', applyFilters);
+
+    // Refresh functionality
+    const refreshBtn = document.getElementById('refresh-report');
+    refreshBtn?.addEventListener('click', () => {
+      window.location.reload();
+    });
+  </script>
+</Layout>

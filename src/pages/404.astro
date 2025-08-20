@@ -1,11 +1,38 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { detectLanguageFromPath, type Language } from '../utils/i18n';
+
+// Detect language from current path
+const lang: Language = detectLanguageFromPath(Astro.url.pathname);
+
+// Language-specific content
+const content = {
+  en: {
+    title: "404 - Page Not Found",
+    heading: "This page will be built soon",
+    message: "Thank you for your interest in me, please check out other content first.",
+    countdown: "seconds until dreaming...",
+    backHome: "Back to Reality Dream",
+    redirectMessage: "Redirecting to home page..."
+  },
+  zh: {
+    title: "404 - 页面未找到",
+    heading: "这个页面很快就会搭建好",
+    message: "谢谢你对我这么感兴趣，先看看其他内容吧。",
+    countdown: "秒后躺下做梦...",
+    backHome: "回到真实梦",
+    redirectMessage: "正在跳转到首页..."
+  }
+};
+
+const currentContent = content[lang];
+const basePath = lang === 'zh' ? '/cn' : '';
 ---
 
-<Layout title="404 - 页面未找到">
+<Layout title={currentContent.title}>
   <main class="container mx-auto px-4 min-h-[80vh] flex items-center justify-center">
     <div class="max-w-2xl mx-auto text-center relative">
-      {/* 宇航员动画 */}
+      {/* Astronaut Animation */}
       <div class="astronaut-container absolute w-full h-full">
         <div class="astronaut">
           <div class="astronaut-string"></div>
@@ -21,30 +48,30 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      {/* 404文字 */}
+      {/* 404 Text */}
       <h1 class="text-[12rem] font-bold leading-none select-none">
         <span class="inline-block transform hover:scale-110 transition-transform cursor-default text-blue-600 dark:text-blue-400">4</span>
         <span class="inline-block transform hover:scale-110 transition-transform cursor-default text-purple-600 dark:text-purple-400">0</span>
         <span class="inline-block transform hover:scale-110 transition-transform cursor-default text-blue-600 dark:text-blue-400">4</span>
       </h1>
-      
+
       <div class="mt-8 space-y-4 relative z-10">
-        <h2 class="text-3xl font-bold">这个页面很快就会搭建好</h2>
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white">{currentContent.heading}</h2>
         <p class="text-gray-600 dark:text-gray-400">
-          谢谢你对我这么感兴趣，先看看其他内容吧。
+          {currentContent.message}
         </p>
         <p class="text-sm text-gray-500 dark:text-gray-400 animate-pulse">
-          <span id="countdown">2</span> 秒后躺下做梦...
+          <span id="countdown">2</span> {currentContent.countdown}
         </p>
       </div>
 
       <div class="mt-12 space-y-4">
         <a
-          href="/"
+          href={basePath || '/'}
           class="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full hover:from-blue-700 hover:to-purple-700 dark:from-blue-500 dark:to-purple-500 dark:hover:from-blue-600 dark:hover:to-purple-600 transition-all transform hover:scale-105 hover:shadow-lg"
         >
           <span class="mr-2">💭</span>
-          回到真实梦
+          {currentContent.backHome}
         </a>
       </div>
     </div>
@@ -203,10 +230,10 @@ import Layout from '../layouts/Layout.astro';
   }
 </style>
 
-<script>
+<script define:vars={{ basePath }}>
   let count = 2;
   const countdownElement = document.getElementById('countdown');
-  
+
   const timer = setInterval(() => {
     count--;
     if (countdownElement) {
@@ -214,7 +241,7 @@ import Layout from '../layouts/Layout.astro';
     }
     if (count <= 0) {
       clearInterval(timer);
-      window.location.href = '/';
+      window.location.href = basePath || '/';
     }
   }, 1000);
-</script> 
+</script>

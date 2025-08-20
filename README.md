@@ -96,7 +96,7 @@ git push -u origin main
 
 ## 添加新博客文章
 
-1. 在 `src/content/blog/` 目录下创建新的 `.md` 或 `.mdx` 文件
+1. 在 `src/content/blog-cn/` (中文) 或 `src/content/blog-en/` (英文) 目录下创建新的 `.md` 或 `.mdx` 文件
 2. 文件开头添加 frontmatter：
 
 ```markdown

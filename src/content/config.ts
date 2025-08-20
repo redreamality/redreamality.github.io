@@ -45,20 +45,7 @@ const talksEnCollection = defineCollection({
   schema: talksSchema,
 });
 
-// Legacy collections (for backward compatibility)
-const blogCollection = defineCollection({
-  type: 'content',
-  schema: blogSchema,
-});
-
-const talksCollection = defineCollection({
-  type: 'content',
-  schema: talksSchema,
-});
-
 export const collections = {
-  'blog': blogCollection,
-  'talks': talksCollection,
   'blog-cn': blogCnCollection,
   'blog-en': blogEnCollection,
   'talks-cn': talksCnCollection,

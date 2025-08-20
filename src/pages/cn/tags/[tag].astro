@@ -1,0 +1,120 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getBlogPosts, getTags, type Language } from '../../../utils/i18n';
+
+// This is the Chinese tag detail page (/cn/tags/tag path)
+
+export async function getStaticPaths() {
+  // Get Chinese tags and posts
+  const posts = await getBlogPosts('zh');
+  const tags = await getTags('zh');
+  
+  return tags.map(tag => ({
+    params: { tag },
+    props: { 
+      posts: posts.filter(post => post.data.tags?.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+      lang: 'zh' as Language
+    },
+  }));
+}
+
+interface Props {
+  posts: any[];
+  lang: Language;
+}
+
+const { tag } = Astro.params;
+const { posts, lang } = Astro.props;
+
+// Language-specific content
+const content = {
+  en: {
+    backToTags: "Back to Tags",
+    articlesCount: "articles",
+    articleCount: "article",
+    readMore: "Read More",
+    author: "by"
+  },
+  zh: {
+    backToTags: "返回标签列表",
+    articlesCount: "篇文章",
+    articleCount: "篇文章",
+    readMore: "阅读更多",
+    author: "作者"
+  }
+};
+
+const currentContent = content[lang];
+const basePath = lang === 'zh' ? '/cn' : '';
+---
+
+<Layout title={`${tag} - ${lang === 'zh' ? '标签' : 'Tag'}`}>
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-8">
+        <nav class="mb-4">
+          <a href={`${basePath}/tags`} class="text-blue-600 dark:text-blue-400 hover:underline">
+            ← {currentContent.backToTags}
+          </a>
+        </nav>
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">#{tag}</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400">
+          {posts.length} {posts.length === 1 ? currentContent.articleCount : currentContent.articlesCount}
+        </p>
+      </div>
+
+      <!-- Posts -->
+      <div class="space-y-8">
+        {posts.map((post) => (
+          <article class="bg-white border border-gray-200 rounded-lg shadow-md p-6 dark:bg-gray-800 dark:border-gray-700">
+            <div class="flex flex-col space-y-4">
+              <div>
+                <a href={`${basePath}/blog/${post.slug}`}>
+                  <h2 class="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    {post.data.title}
+                  </h2>
+                </a>
+                <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mt-2">
+                  <span>
+                    {post.data.pubDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </span>
+                  <span>{currentContent.author} {post.data.author || 'Redreamality'}</span>
+                </div>
+              </div>
+              
+              {post.data.description && (
+                <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {post.data.description}
+                </p>
+              )}
+              
+              <div class="flex items-center justify-between">
+                <div class="flex flex-wrap gap-2">
+                  {post.data.tags?.map((postTag: string) => (
+                    <a
+                      href={`${basePath}/tags/${postTag}`}
+                      class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                    >
+                      #{postTag}
+                    </a>
+                  ))}
+                </div>
+                <a
+                  href={`${basePath}/blog/${post.slug}`}
+                  class="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                >
+                  {currentContent.readMore} →
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>

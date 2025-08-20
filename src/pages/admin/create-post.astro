@@ -255,7 +255,7 @@ tags: [${tags.map(tag => `'${tag.replace(/'/g, "''")}'`).join(', ')}]
         const fullContent = frontmatter + data.content;
 
         // Determine file path based on language
-        const contentPath = data.language === 'en' ? 'src/content/blog-en' : 'src/content/blog';
+        const contentPath = data.language === 'en' ? 'src/content/blog-en' : 'src/content/blog-cn';
         const filePath = `${contentPath}/${slug}.md`;
 
         // Create blog post via GitHub API

@@ -1,0 +1,125 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getTalks, type Language } from '../../../utils/i18n';
+
+// This is the Chinese talks detail page (/cn/talks/slug path)
+
+export async function getStaticPaths() {
+  // Get Chinese talks
+  const zhTalks = await getTalks('zh');
+  
+  return zhTalks.map(talk => ({
+    params: { slug: talk.slug },
+    props: { talk, lang: 'zh' as Language },
+  }));
+}
+
+interface Props {
+  talk: any;
+  lang: Language;
+}
+
+const { talk, lang } = Astro.props;
+const { Content } = await talk.render();
+
+// Language-specific content
+const content = {
+  en: {
+    backToTalks: "Back to Talks",
+    presentedOn: "Presented on",
+    location: "Location",
+    event: "Event",
+    slides: "Slides",
+    video: "Video",
+    viewSlides: "View Slides",
+    watchVideo: "Watch Video"
+  },
+  zh: {
+    backToTalks: "返回演讲列表",
+    presentedOn: "演讲日期",
+    location: "演讲地点",
+    event: "活动",
+    slides: "幻灯片",
+    video: "视频回放",
+    viewSlides: "查看幻灯片",
+    watchVideo: "观看视频"
+  }
+};
+
+const currentContent = content[lang];
+const basePath = lang === 'zh' ? '/cn' : '';
+---
+
+<Layout 
+  title={talk.data.title}
+  description={talk.data.description}
+  type="article"
+  publishDate={talk.data.date.toISOString()}
+>
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <nav class="mb-8">
+        <a href={`${basePath}/talks`} class="text-blue-600 dark:text-blue-400 hover:underline">
+          ← {currentContent.backToTalks}
+        </a>
+      </nav>
+
+      <article class="bg-white border border-gray-200 rounded-lg shadow-md p-8 dark:bg-gray-800 dark:border-gray-700">
+        <header class="mb-8">
+          <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            {talk.data.title}
+          </h1>
+          
+          <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+            <span>
+              {currentContent.presentedOn} {talk.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </span>
+            {talk.data.location && (
+              <span>
+                {currentContent.location}: {talk.data.location}
+              </span>
+            )}
+            {talk.data.event && (
+              <span>
+                {currentContent.event}: {talk.data.event}
+              </span>
+            )}
+          </div>
+
+          {(talk.data.slides || talk.data.video) && (
+            <div class="flex flex-wrap gap-4 mb-6">
+              {talk.data.slides && (
+                <a
+                  href={talk.data.slides}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  📊 {currentContent.viewSlides}
+                </a>
+              )}
+              {talk.data.video && (
+                <a
+                  href={talk.data.video}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  🎥 {currentContent.watchVideo}
+                </a>
+              )}
+            </div>
+          )}
+        </header>
+
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+          <Content />
+        </div>
+      </article>
+    </div>
+  </main>
+</Layout>
