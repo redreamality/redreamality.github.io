@@ -276,7 +276,11 @@ jobs:
             .then((outputPath) => {
               console.log('Translation successful!');
               if (outputPath) {
-                console.log(`::set-output name=translated_file::${outputPath}`);
+                console.log(`translated_file=${outputPath}`);
+                // Also write to GitHub Actions output file if available
+                if (process.env.GITHUB_OUTPUT) {
+                  fs.appendFileSync(process.env.GITHUB_OUTPUT, `translated_file=${outputPath}\n`);
+                }
               }
             })
             .catch((error) => {

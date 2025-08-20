@@ -237,6 +237,7 @@ jobs:
           async function batchTranslate(targetLang, priorityFilter, contentTypeFilter, maxItems) {
             console.log(`Starting batch translation to ${targetLang}...`);
             console.log(`Filters: priority=${priorityFilter}, type=${contentTypeFilter}, max=${maxItems}`);
+            console.log(`Source language: ${sourceLang}`);
 
             const sourceLang = targetLang === 'en' ? 'zh' : 'en';
             const sourceDirectories = [];
@@ -250,6 +251,7 @@ jobs:
             }
 
             const candidates = [];
+            console.log(`Scanning directories: ${sourceDirectories.join(', ')}`);
 
             // Scan for translation candidates
             for (const dir of sourceDirectories) {
@@ -259,7 +261,8 @@ jobs:
               }
 
               const files = fs.readdirSync(dir).filter(file => file.endsWith('.md'));
-              
+              console.log(`Found ${files.length} .md files in ${dir}: ${files.join(', ')}`);
+
               for (const file of files) {
                 const filePath = path.join(dir, file);
                 const content = fs.readFileSync(filePath, 'utf8');
@@ -267,18 +270,25 @@ jobs:
                 
                 if (analysis) {
                   // Check if translation already exists
-                  const targetDir = dir.replace(
-                    sourceLang === 'zh' ? /\/(blog|talks)$/ : /\/(blog|talks)-en$/,
-                    targetLang === 'en' ? '/$1-en' : '/$1'
-                  );
+                  let targetDir;
+                  if (targetLang === 'en') {
+                    // Translating to English: blog-cn -> blog-en, talks-cn -> talks-en
+                    targetDir = dir.replace(/-cn$/, '-en');
+                  } else {
+                    // Translating to Chinese: blog-en -> blog-cn, talks-en -> talks-cn
+                    targetDir = dir.replace(/-en$/, '-cn');
+                  }
                   const targetPath = path.join(targetDir, file);
                   
                   if (!fs.existsSync(targetPath)) {
+                    console.log(`  ✓ ${file} needs translation (target: ${targetPath})`);
                     candidates.push({
                       ...analysis,
                       targetPath,
                       contentType: dir.includes('blog') ? 'blog' : 'talks'
                     });
+                  } else {
+                    console.log(`  - ${file} already translated (exists: ${targetPath})`);
                   }
                 }
               }
@@ -414,9 +424,14 @@ jobs:
               const successful = results.filter(r => r.success);
               console.log(`\n🎉 Batch translation completed! ${successful.length} files translated.`);
               
-              // Set output for GitHub Actions
-              console.log(`::set-output name=translated_count::${successful.length}`);
-              console.log(`::set-output name=failed_count::${results.length - successful.length}`);
+              // Set output for GitHub Actions using environment files
+              console.log(`translated_count=${successful.length}` + '\n' + `failed_count=${results.length - successful.length}`);
+
+              // Also write to GitHub Actions output file if available
+              if (process.env.GITHUB_OUTPUT) {
+                fs.appendFileSync(process.env.GITHUB_OUTPUT, `translated_count=${successful.length}\n`);
+                fs.appendFileSync(process.env.GITHUB_OUTPUT, `failed_count=${results.length - successful.length}\n`);
+              }
             })
             .catch((error) => {
               console.error('❌ Batch translation failed:', error);
