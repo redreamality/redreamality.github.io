@@ -61,9 +61,9 @@ jobs:
 
       - name: Create batch translation script
         run: |
-          cat > batch-translate-script.js << 'EOF'
-          const fs = require('fs');
-          const path = require('path');
+          cat > batch-translate-script.mjs << 'EOF'
+          import fs from 'fs';
+          import path from 'path';
 
           // Translation configuration
           const TRANSLATION_CONFIG = {
@@ -431,7 +431,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || 'b9df99ea41435fa7be5ce346b486c33e' }}
           MODEL: ${{ secrets.MODEL || 'qwen2.5-32b-instruct-int4' }}
         run: |
-          node batch-translate-script.js "${{ github.event.inputs.target_language || github.event.client_payload.target_language }}" "${{ github.event.inputs.priority_filter || github.event.client_payload.priority_filter }}" "${{ github.event.inputs.content_type || github.event.client_payload.content_type }}" "${{ github.event.inputs.max_items || github.event.client_payload.max_items }}"
+          node batch-translate-script.mjs "${{ github.event.inputs.target_language || github.event.client_payload.target_language }}" "${{ github.event.inputs.priority_filter || github.event.client_payload.priority_filter }}" "${{ github.event.inputs.content_type || github.event.client_payload.content_type }}" "${{ github.event.inputs.max_items || github.event.client_payload.max_items }}"
 
       - name: Commit translated files
         if: ${{ github.event.inputs.auto_commit == 'true' || github.event.client_payload.auto_commit == 'true' }}

@@ -62,6 +62,7 @@
 - [x] Create translation workflow for existing content
 - [x] Add translation quality review and editing capabilities
 - [x] Fix GitHub Actions workflow package manager configuration
+- [x] Fix ES module compatibility issues in translation scripts
 - [ ] Implement translation caching for performance optimization
 - [ ] Add fallback mechanisms for translation API failures
 - [x] Create batch translation tools for bulk content processing

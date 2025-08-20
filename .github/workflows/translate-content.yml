@@ -49,9 +49,9 @@ jobs:
 
       - name: Create translation script
         run: |
-          cat > translate-script.js << 'EOF'
-          const fs = require('fs');
-          const path = require('path');
+          cat > translate-script.mjs << 'EOF'
+          import fs from 'fs';
+          import path from 'path';
 
           // Translation configuration
           const TRANSLATION_CONFIG = {
@@ -292,7 +292,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || 'b9df99ea41435fa7be5ce346b486c33e' }}
           MODEL: ${{ secrets.MODEL || 'qwen2.5-32b-instruct-int4' }}
         run: |
-          node translate-script.js "${{ github.event.inputs.content_path || github.event.client_payload.content_path }}" "${{ github.event.inputs.target_language || github.event.client_payload.target_language }}" "${{ github.event.inputs.content_type || github.event.client_payload.content_type }}" "${{ github.event.inputs.auto_commit || github.event.client_payload.auto_commit }}"
+          node translate-script.mjs "${{ github.event.inputs.content_path || github.event.client_payload.content_path }}" "${{ github.event.inputs.target_language || github.event.client_payload.target_language }}" "${{ github.event.inputs.content_type || github.event.client_payload.content_type }}" "${{ github.event.inputs.auto_commit || github.event.client_payload.auto_commit }}"
 
       - name: Commit translated file
         if: ${{ github.event.inputs.auto_commit == 'true' || github.event.client_payload.auto_commit == 'true' }}
