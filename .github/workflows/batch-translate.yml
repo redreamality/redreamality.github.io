@@ -72,22 +72,25 @@ jobs:
             model: process.env.MODEL || 'qwen2.5-32b-instruct-int4'
           };
 
-          // Debug configuration
+          // Debug configuration (avoid masking in GitHub Actions)
           console.log('🔧 Translation Configuration:');
           console.log(`- API Base: ${TRANSLATION_CONFIG.apiBase}`);
           console.log(`- Model: ${TRANSLATION_CONFIG.model}`);
-          console.log(`- API Key: ${TRANSLATION_CONFIG.apiKey ? `${TRANSLATION_CONFIG.apiKey.substring(0, 8)}...` : '[MISSING]'}`);
+          console.log(`- API Key: ${TRANSLATION_CONFIG.apiKey ? '[CONFIGURED]' : '[MISSING]'}`);
           console.log('');
 
-          // Enhanced API testing
+          // Enhanced API testing with GitHub Actions compatibility
           async function testAPI() {
             console.log('🌐 Testing API connectivity...');
 
-            // Test 1: Basic connectivity
+            // Test 1: Basic connectivity with proper headers for GitHub Actions
             try {
               const baseResponse = await fetch(TRANSLATION_CONFIG.apiBase, {
                 method: 'GET',
-                headers: { 'User-Agent': 'GitHub-Actions-Translation/1.0' }
+                headers: {
+                  'User-Agent': 'Mozilla/5.0 (compatible; GitHub-Actions-Translation/1.0)',
+                  'Accept': 'application/json'
+                }
               });
               console.log(`✅ Base URL accessible: ${baseResponse.status} ${baseResponse.statusText}`);
             } catch (error) {
@@ -95,16 +98,41 @@ jobs:
               return false;
             }
 
-            // Test 2: Models endpoint
+            // Test 2: Models endpoint with retry logic
             try {
               console.log('📋 Testing models endpoint...');
-              const modelsResponse = await fetch(`${TRANSLATION_CONFIG.apiBase}/models`, {
-                method: 'GET',
-                headers: {
-                  'Authorization': `Bearer ${TRANSLATION_CONFIG.apiKey}`,
-                  'Content-Type': 'application/json'
-                },
-              });
+
+              let modelsResponse;
+              let retryCount = 0;
+              const maxRetries = 3;
+
+              while (retryCount < maxRetries) {
+                try {
+                  modelsResponse = await fetch(`${TRANSLATION_CONFIG.apiBase}/models`, {
+                    method: 'GET',
+                    headers: {
+                      'Authorization': `Bearer ${TRANSLATION_CONFIG.apiKey}`,
+                      'Content-Type': 'application/json',
+                      'User-Agent': 'Mozilla/5.0 (compatible; GitHub-Actions-Translation/1.0)',
+                      'Accept': 'application/json'
+                    },
+                    timeout: 30000
+                  });
+                  break;
+                } catch (fetchError) {
+                  retryCount++;
+                  console.log(`⚠️  Models endpoint attempt ${retryCount} failed: ${fetchError.message}`);
+                  if (retryCount < maxRetries) {
+                    console.log(`🔄 Retrying in 2 seconds...`);
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                  }
+                }
+              }
+
+              if (!modelsResponse) {
+                console.log(`❌ Models endpoint failed after ${maxRetries} attempts`);
+                return false;
+              }
 
               console.log(`Models endpoint: ${modelsResponse.status} ${modelsResponse.statusText}`);
 
@@ -133,25 +161,50 @@ jobs:
               return false;
             }
 
-            // Test 3: Simple chat completion
+            // Test 3: Simple chat completion with retry and better error handling
             try {
               console.log('💬 Testing chat completions...');
-              const testResponse = await fetch(`${TRANSLATION_CONFIG.apiBase}/chat/completions`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TRANSLATION_CONFIG.apiKey}`,
-                },
-                body: JSON.stringify({
-                  model: TRANSLATION_CONFIG.model,
-                  messages: [
-                    { role: 'system', content: 'You are a helpful assistant. Respond with exactly "API_TEST_SUCCESS".' },
-                    { role: 'user', content: 'Test' }
-                  ],
-                  temperature: 0.1,
-                  max_tokens: 10
-                })
-              });
+
+              let testResponse;
+              let retryCount = 0;
+              const maxRetries = 3;
+
+              while (retryCount < maxRetries) {
+                try {
+                  testResponse = await fetch(`${TRANSLATION_CONFIG.apiBase}/chat/completions`, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${TRANSLATION_CONFIG.apiKey}`,
+                      'User-Agent': 'Mozilla/5.0 (compatible; GitHub-Actions-Translation/1.0)',
+                      'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      model: TRANSLATION_CONFIG.model,
+                      messages: [
+                        { role: 'system', content: 'You are a helpful assistant. Respond with exactly "API_TEST_SUCCESS".' },
+                        { role: 'user', content: 'Test' }
+                      ],
+                      temperature: 0.1,
+                      max_tokens: 10
+                    }),
+                    timeout: 60000
+                  });
+                  break;
+                } catch (fetchError) {
+                  retryCount++;
+                  console.log(`⚠️  Chat completion attempt ${retryCount} failed: ${fetchError.message}`);
+                  if (retryCount < maxRetries) {
+                    console.log(`🔄 Retrying in 3 seconds...`);
+                    await new Promise(resolve => setTimeout(resolve, 3000));
+                  }
+                }
+              }
+
+              if (!testResponse) {
+                console.log(`❌ Chat completions failed after ${maxRetries} attempts`);
+                return false;
+              }
 
               console.log(`Chat test: ${testResponse.status} ${testResponse.statusText}`);
 
@@ -275,14 +328,38 @@ jobs:
               console.log(`📝 Content length: ${content.length} characters`);
               console.log(`🤖 Using model: ${TRANSLATION_CONFIG.model}`);
 
-              const response = await fetch(`${TRANSLATION_CONFIG.apiBase}/chat/completions`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TRANSLATION_CONFIG.apiKey}`,
-                },
-                body: JSON.stringify(requestPayload),
-              });
+              let response;
+              let retryCount = 0;
+              const maxRetries = 3;
+
+              while (retryCount < maxRetries) {
+                try {
+                  response = await fetch(`${TRANSLATION_CONFIG.apiBase}/chat/completions`, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${TRANSLATION_CONFIG.apiKey}`,
+                      'User-Agent': 'Mozilla/5.0 (compatible; GitHub-Actions-Translation/1.0)',
+                      'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(requestPayload),
+                    timeout: 120000 // 2 minutes timeout for translation
+                  });
+                  break;
+                } catch (fetchError) {
+                  retryCount++;
+                  console.log(`⚠️  Translation attempt ${retryCount} failed: ${fetchError.message}`);
+                  if (retryCount < maxRetries) {
+                    const waitTime = retryCount * 5; // Progressive backoff: 5s, 10s, 15s
+                    console.log(`🔄 Retrying in ${waitTime} seconds...`);
+                    await new Promise(resolve => setTimeout(resolve, waitTime * 1000));
+                  }
+                }
+              }
+
+              if (!response) {
+                throw new Error(`Translation failed after ${maxRetries} attempts`);
+              }
 
               console.log(`📡 API Response: ${response.status} ${response.statusText}`);
 
@@ -580,6 +657,58 @@ jobs:
               process.exit(1);
             });
           EOF
+
+      - name: Debug environment before translation
+        run: |
+          echo "🔍 Pre-translation environment check:"
+          echo "OPENAI_API_BASE: ${OPENAI_API_BASE:-[NOT SET]}"
+          echo "OPENAI_API_KEY: ${OPENAI_API_KEY:+[SET - ${#OPENAI_API_KEY} chars]}"
+          echo "MODEL: ${MODEL:-[NOT SET]}"
+          echo "GitHub Actions IP: $(curl -s https://httpbin.org/ip | jq -r '.origin')"
+          echo "User Agent: Mozilla/5.0 (compatible; GitHub-Actions-Translation/1.0)"
+        env:
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE || 'https://gateway.chat.sensedeal.vip/v1' }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || 'b9df99ea41435fa7be5ce346b486c33e' }}
+          MODEL: ${{ secrets.MODEL || 'qwen2.5-32b-instruct-int4' }}
+
+      - name: Test API connectivity separately
+        env:
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE || 'https://gateway.chat.sensedeal.vip/v1' }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || 'b9df99ea41435fa7be5ce346b486c33e' }}
+          MODEL: ${{ secrets.MODEL || 'qwen2.5-32b-instruct-int4' }}
+        run: |
+          echo "🧪 Testing API connectivity independently..."
+
+          # Test 1: Basic connectivity
+          echo "📡 Testing base URL..."
+          curl -v -H "User-Agent: Mozilla/5.0 (compatible; GitHub-Actions-Translation/1.0)" \
+               -H "Accept: application/json" \
+               "${OPENAI_API_BASE}" || echo "Base URL test failed"
+
+          # Test 2: Models endpoint
+          echo "📋 Testing models endpoint..."
+          curl -v -H "Authorization: Bearer ${OPENAI_API_KEY}" \
+               -H "Content-Type: application/json" \
+               -H "User-Agent: Mozilla/5.0 (compatible; GitHub-Actions-Translation/1.0)" \
+               -H "Accept: application/json" \
+               "${OPENAI_API_BASE}/models" || echo "Models endpoint test failed"
+
+          # Test 3: Simple chat completion
+          echo "💬 Testing chat completions..."
+          curl -v -X POST "${OPENAI_API_BASE}/chat/completions" \
+               -H "Content-Type: application/json" \
+               -H "Authorization: Bearer ${OPENAI_API_KEY}" \
+               -H "User-Agent: Mozilla/5.0 (compatible; GitHub-Actions-Translation/1.0)" \
+               -H "Accept: application/json" \
+               -d '{
+                 "model": "'${MODEL}'",
+                 "messages": [
+                   {"role": "system", "content": "You are a helpful assistant. Respond with exactly \"API_TEST_SUCCESS\"."},
+                   {"role": "user", "content": "Test"}
+                 ],
+                 "temperature": 0.1,
+                 "max_tokens": 10
+               }' || echo "Chat completions test failed"
 
       - name: Run batch translation
         id: batch_translate
