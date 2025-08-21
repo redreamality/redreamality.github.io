@@ -1,0 +1,212 @@
+name: Debug Translation API
+
+on:
+  workflow_dispatch:
+    inputs:
+      debug_level:
+        description: 'Debug level (basic/detailed/full)'
+        required: false
+        type: choice
+        options:
+          - 'basic'
+          - 'detailed'
+          - 'full'
+        default: 'detailed'
+
+jobs:
+  debug-api:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Debug Environment Variables
+        run: |
+          echo "🔍 Environment Variable Debug"
+          echo "============================="
+          echo "OPENAI_API_BASE: ${OPENAI_API_BASE:-[NOT SET]}"
+          echo "OPENAI_API_KEY: ${OPENAI_API_KEY:+[SET - ${#OPENAI_API_KEY} chars]}"
+          echo "MODEL: ${MODEL:-[NOT SET]}"
+          echo ""
+          echo "🔧 Fallback Values:"
+          echo "API Base fallback: https://gateway.chat.sensedeal.vip/v1"
+          echo "API Key fallback: b9df99ea41435fa7be5ce346b486c33e"
+          echo "Model fallback: qwen2.5-32b-instruct-int4"
+        env:
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MODEL: ${{ secrets.MODEL }}
+
+      - name: Create debug script
+        run: |
+          cat > debug-api.mjs << 'EOF'
+          // Configuration with explicit fallbacks
+          const CONFIG = {
+            apiBase: process.env.OPENAI_API_BASE || 'https://gateway.chat.sensedeal.vip/v1',
+            apiKey: process.env.OPENAI_API_KEY || 'b9df99ea41435fa7be5ce346b486c33e',
+            model: process.env.MODEL || 'qwen2.5-32b-instruct-int4'
+          };
+
+          console.log('🔧 Final Configuration:');
+          console.log(`- API Base: ${CONFIG.apiBase}`);
+          console.log(`- Model: ${CONFIG.model}`);
+          console.log(`- API Key: ${CONFIG.apiKey ? `${CONFIG.apiKey.substring(0, 8)}...` : '[MISSING]'}`);
+          console.log(`- API Key Length: ${CONFIG.apiKey ? CONFIG.apiKey.length : 0} characters`);
+          console.log('');
+
+          // Test API step by step
+          async function debugAPI() {
+            console.log('🌐 Step 1: Testing base URL...');
+            try {
+              const response = await fetch(CONFIG.apiBase);
+              console.log(`✅ Base URL: ${response.status} ${response.statusText}`);
+            } catch (error) {
+              console.log(`❌ Base URL failed: ${error.message}`);
+              return false;
+            }
+
+            console.log('\n📋 Step 2: Testing models endpoint...');
+            try {
+              const response = await fetch(`${CONFIG.apiBase}/models`, {
+                headers: {
+                  'Authorization': `Bearer ${CONFIG.apiKey}`,
+                  'Content-Type': 'application/json'
+                }
+              });
+              
+              console.log(`Models endpoint: ${response.status} ${response.statusText}`);
+              
+              if (!response.ok) {
+                const errorText = await response.text();
+                console.log(`❌ Models error: ${errorText}`);
+                return false;
+              }
+              
+              const data = await response.json();
+              const models = data.data || [];
+              console.log(`✅ Found ${models.length} models`);
+              
+              const hasModel = models.some(m => m.id === CONFIG.model);
+              console.log(`Target model "${CONFIG.model}": ${hasModel ? '✅ Found' : '❌ Missing'}`);
+              
+            } catch (error) {
+              console.log(`❌ Models test failed: ${error.message}`);
+              return false;
+            }
+
+            console.log('\n💬 Step 3: Testing chat completions...');
+            try {
+              const response = await fetch(`${CONFIG.apiBase}/chat/completions`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${CONFIG.apiKey}`
+                },
+                body: JSON.stringify({
+                  model: CONFIG.model,
+                  messages: [
+                    { role: 'user', content: 'Hello' }
+                  ],
+                  max_tokens: 5
+                })
+              });
+
+              console.log(`Chat completions: ${response.status} ${response.statusText}`);
+              
+              if (!response.ok) {
+                const errorText = await response.text();
+                console.log(`❌ Chat error: ${errorText}`);
+                
+                // Try to parse error for more details
+                try {
+                  const errorData = JSON.parse(errorText);
+                  console.log('📋 Parsed error:', JSON.stringify(errorData, null, 2));
+                } catch (e) {
+                  console.log('📋 Raw error text:', errorText);
+                }
+                return false;
+              }
+              
+              const data = await response.json();
+              console.log('✅ Chat completions working');
+              console.log(`Response: ${data.choices?.[0]?.message?.content || 'No content'}`);
+              return true;
+              
+            } catch (error) {
+              console.log(`❌ Chat test failed: ${error.message}`);
+              return false;
+            }
+          }
+
+          // Run debug
+          const success = await debugAPI();
+          
+          console.log('\n📊 Debug Results');
+          console.log('================');
+          console.log(`Overall status: ${success ? '✅ SUCCESS' : '❌ FAILED'}`);
+          
+          if (!success) {
+            console.log('\n🔧 Troubleshooting suggestions:');
+            console.log('1. Check if GitHub Secrets are set correctly');
+            console.log('2. Verify API key has correct permissions');
+            console.log('3. Ensure model name is exactly correct');
+            console.log('4. Check if API endpoint is accessible from GitHub Actions');
+          }
+          
+          process.exit(success ? 0 : 1);
+          EOF
+
+      - name: Run API Debug
+        env:
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE || 'https://gateway.chat.sensedeal.vip/v1' }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || 'b9df99ea41435fa7be5ce346b486c33e' }}
+          MODEL: ${{ secrets.MODEL || 'qwen2.5-32b-instruct-int4' }}
+        run: node debug-api.mjs
+
+      - name: Test with hardcoded values
+        if: failure()
+        run: |
+          echo "🔄 Testing with hardcoded values as fallback..."
+          cat > test-hardcoded.mjs << 'EOF'
+          const CONFIG = {
+            apiBase: 'https://gateway.chat.sensedeal.vip/v1',
+            apiKey: 'b9df99ea41435fa7be5ce346b486c33e',
+            model: 'qwen2.5-32b-instruct-int4'
+          };
+
+          console.log('🧪 Testing with hardcoded configuration...');
+          
+          try {
+            const response = await fetch(`${CONFIG.apiBase}/chat/completions`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${CONFIG.apiKey}`
+              },
+              body: JSON.stringify({
+                model: CONFIG.model,
+                messages: [{ role: 'user', content: 'Test' }],
+                max_tokens: 5
+              })
+            });
+
+            console.log(`Hardcoded test: ${response.status} ${response.statusText}`);
+            
+            if (response.ok) {
+              console.log('✅ Hardcoded values work - issue is with secrets configuration');
+            } else {
+              const errorText = await response.text();
+              console.log(`❌ Even hardcoded values fail: ${errorText}`);
+            }
+          } catch (error) {
+            console.log(`❌ Hardcoded test failed: ${error.message}`);
+          }
+          EOF
+          
+          node test-hardcoded.mjs
