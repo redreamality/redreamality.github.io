@@ -2,11 +2,10 @@
 title: "GitHub Actions API 测试"
 description: "测试 GitHub Actions 环境中的 API 连接性"
 pubDate: 2025-01-21
+author: "System Test"
 tags: ["测试", "GitHub Actions", "API"]
 priority: high
 ---
-
-# GitHub Actions API 测试
 
 这是一个用于测试 GitHub Actions 环境中 API 连接性的测试文件。
 
@@ -18,7 +17,7 @@ priority: high
 
 ## 技术细节
 
-- API 基础 URL: https://gateway.chat.sensedeal.vip/v1
+- API 基础 URL: <https://gateway.chat.sensedeal.vip/v1>
 - 模型: qwen2.5-32b-instruct-int4
 - 超时设置: 120 秒
 - 重试次数: 3 次
