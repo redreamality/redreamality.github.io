@@ -235,11 +235,11 @@ jobs:
 
           // Main batch translation function
           async function batchTranslate(targetLang, priorityFilter, contentTypeFilter, maxItems) {
+            const sourceLang = targetLang === 'en' ? 'zh' : 'en';
+
             console.log(`Starting batch translation to ${targetLang}...`);
             console.log(`Filters: priority=${priorityFilter}, type=${contentTypeFilter}, max=${maxItems}`);
             console.log(`Source language: ${sourceLang}`);
-
-            const sourceLang = targetLang === 'en' ? 'zh' : 'en';
             const sourceDirectories = [];
             
             // Determine source directories
