@@ -57,8 +57,14 @@ jobs:
           const TRANSLATION_CONFIG = {
             apiBase: process.env.OPENAI_API_BASE || 'https://gateway.chat.sensedeal.vip/v1',
             apiKey: process.env.OPENAI_API_KEY,
-            model: process.env.MODEL || 'qwen2.5-32b-instruct-int4'
+            model: process.env.MODEL || 'qwen2.5-32b-instruct'
           };
+
+          // Debug configuration
+          console.log('Translation Configuration:');
+          console.log(`- API Base: ${TRANSLATION_CONFIG.apiBase}`);
+          console.log(`- Model: ${TRANSLATION_CONFIG.model}`);
+          console.log(`- API Key: ${TRANSLATION_CONFIG.apiKey ? '[CONFIGURED]' : '[MISSING]'}`);
 
           // Parse markdown content
           function parseMarkdownContent(markdown) {
@@ -118,6 +124,9 @@ jobs:
           ${content}`;
 
             try {
+              console.log(`Making API request to: ${TRANSLATION_CONFIG.apiBase}/chat/completions`);
+              console.log(`Using model: ${TRANSLATION_CONFIG.model}`);
+
               const response = await fetch(`${TRANSLATION_CONFIG.apiBase}/chat/completions`, {
                 method: 'POST',
                 headers: {
@@ -136,7 +145,9 @@ jobs:
               });
 
               if (!response.ok) {
-                throw new Error(`Translation API error: ${response.status} ${response.statusText}`);
+                const errorText = await response.text();
+                console.error(`API Error Response: ${errorText}`);
+                throw new Error(`Translation API error: ${response.status} ${response.statusText} - ${errorText}`);
               }
 
               const data = await response.json();

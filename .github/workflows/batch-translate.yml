@@ -69,8 +69,37 @@ jobs:
           const TRANSLATION_CONFIG = {
             apiBase: process.env.OPENAI_API_BASE || 'https://gateway.chat.sensedeal.vip/v1',
             apiKey: process.env.OPENAI_API_KEY,
-            model: process.env.MODEL || 'qwen2.5-32b-instruct-int4'
+            model: process.env.MODEL || 'qwen2.5-32b-instruct'
           };
+
+          // Debug configuration
+          console.log('Translation Configuration:');
+          console.log(`- API Base: ${TRANSLATION_CONFIG.apiBase}`);
+          console.log(`- Model: ${TRANSLATION_CONFIG.model}`);
+          console.log(`- API Key: ${TRANSLATION_CONFIG.apiKey ? '[CONFIGURED]' : '[MISSING]'}`);
+
+          // Test API connectivity
+          async function testAPI() {
+            try {
+              console.log('Testing API connectivity...');
+              const testResponse = await fetch(`${TRANSLATION_CONFIG.apiBase}/models`, {
+                method: 'GET',
+                headers: {
+                  'Authorization': `Bearer ${TRANSLATION_CONFIG.apiKey}`,
+                },
+              });
+              console.log(`API test response: ${testResponse.status} ${testResponse.statusText}`);
+              if (testResponse.ok) {
+                const models = await testResponse.json();
+                console.log('Available models:', models.data ? models.data.map(m => m.id).slice(0, 5) : 'Unable to parse models');
+              }
+            } catch (error) {
+              console.log('API test failed:', error.message);
+            }
+          }
+
+          // Run API test
+          await testAPI();
 
           // Content analysis functions
           function analyzeContent(filePath, content) {
@@ -154,6 +183,9 @@ jobs:
           ${content}`;
 
             try {
+              console.log(`Making API request to: ${TRANSLATION_CONFIG.apiBase}/chat/completions`);
+              console.log(`Using model: ${TRANSLATION_CONFIG.model}`);
+
               const response = await fetch(`${TRANSLATION_CONFIG.apiBase}/chat/completions`, {
                 method: 'POST',
                 headers: {
@@ -172,7 +204,9 @@ jobs:
               });
 
               if (!response.ok) {
-                throw new Error(`Translation API error: ${response.status} ${response.statusText}`);
+                const errorText = await response.text();
+                console.error(`API Error Response: ${errorText}`);
+                throw new Error(`Translation API error: ${response.status} ${response.statusText} - ${errorText}`);
               }
 
               const data = await response.json();
