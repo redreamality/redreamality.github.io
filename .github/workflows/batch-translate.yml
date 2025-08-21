@@ -73,33 +73,111 @@ jobs:
           };
 
           // Debug configuration
-          console.log('Translation Configuration:');
+          console.log('🔧 Translation Configuration:');
           console.log(`- API Base: ${TRANSLATION_CONFIG.apiBase}`);
           console.log(`- Model: ${TRANSLATION_CONFIG.model}`);
-          console.log(`- API Key: ${TRANSLATION_CONFIG.apiKey ? '[CONFIGURED]' : '[MISSING]'}`);
+          console.log(`- API Key: ${TRANSLATION_CONFIG.apiKey ? `${TRANSLATION_CONFIG.apiKey.substring(0, 8)}...` : '[MISSING]'}`);
+          console.log('');
 
-          // Test API connectivity
+          // Enhanced API testing
           async function testAPI() {
+            console.log('🌐 Testing API connectivity...');
+
+            // Test 1: Basic connectivity
             try {
-              console.log('Testing API connectivity...');
-              const testResponse = await fetch(`${TRANSLATION_CONFIG.apiBase}/models`, {
+              const baseResponse = await fetch(TRANSLATION_CONFIG.apiBase, {
+                method: 'GET',
+                headers: { 'User-Agent': 'GitHub-Actions-Translation/1.0' }
+              });
+              console.log(`✅ Base URL accessible: ${baseResponse.status} ${baseResponse.statusText}`);
+            } catch (error) {
+              console.log(`❌ Base URL not accessible: ${error.message}`);
+              return false;
+            }
+
+            // Test 2: Models endpoint
+            try {
+              console.log('📋 Testing models endpoint...');
+              const modelsResponse = await fetch(`${TRANSLATION_CONFIG.apiBase}/models`, {
                 method: 'GET',
                 headers: {
                   'Authorization': `Bearer ${TRANSLATION_CONFIG.apiKey}`,
+                  'Content-Type': 'application/json'
                 },
               });
-              console.log(`API test response: ${testResponse.status} ${testResponse.statusText}`);
-              if (testResponse.ok) {
-                const models = await testResponse.json();
-                console.log('Available models:', models.data ? models.data.map(m => m.id).slice(0, 5) : 'Unable to parse models');
+
+              console.log(`Models endpoint: ${modelsResponse.status} ${modelsResponse.statusText}`);
+
+              if (modelsResponse.ok) {
+                const models = await modelsResponse.json();
+                console.log(`✅ Found ${models.data?.length || 0} models`);
+
+                if (models.data && Array.isArray(models.data)) {
+                  const availableModels = models.data.map(m => m.id);
+                  console.log('Available models (first 5):', availableModels.slice(0, 5));
+
+                  const hasTargetModel = availableModels.includes(TRANSLATION_CONFIG.model);
+                  console.log(`Target model "${TRANSLATION_CONFIG.model}": ${hasTargetModel ? '✅ Available' : '❌ Not found'}`);
+
+                  if (!hasTargetModel) {
+                    console.log('⚠️  Consider using one of these available models:', availableModels.slice(0, 3));
+                  }
+                }
+              } else {
+                const errorText = await modelsResponse.text();
+                console.log(`❌ Models endpoint error: ${errorText}`);
+                return false;
               }
             } catch (error) {
-              console.log('API test failed:', error.message);
+              console.log(`❌ Models test failed: ${error.message}`);
+              return false;
+            }
+
+            // Test 3: Simple chat completion
+            try {
+              console.log('💬 Testing chat completions...');
+              const testResponse = await fetch(`${TRANSLATION_CONFIG.apiBase}/chat/completions`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TRANSLATION_CONFIG.apiKey}`,
+                },
+                body: JSON.stringify({
+                  model: TRANSLATION_CONFIG.model,
+                  messages: [
+                    { role: 'system', content: 'You are a helpful assistant. Respond with exactly "API_TEST_SUCCESS".' },
+                    { role: 'user', content: 'Test' }
+                  ],
+                  temperature: 0.1,
+                  max_tokens: 10
+                })
+              });
+
+              console.log(`Chat test: ${testResponse.status} ${testResponse.statusText}`);
+
+              if (testResponse.ok) {
+                const data = await testResponse.json();
+                const content = data.choices?.[0]?.message?.content;
+                console.log(`✅ Chat completions working. Response: "${content}"`);
+                return true;
+              } else {
+                const errorText = await testResponse.text();
+                console.log(`❌ Chat completions failed: ${errorText}`);
+                return false;
+              }
+            } catch (error) {
+              console.log(`❌ Chat completions test failed: ${error.message}`);
+              return false;
             }
           }
 
-          // Run API test
-          await testAPI();
+          // Run comprehensive API test
+          const apiWorking = await testAPI();
+          if (!apiWorking) {
+            console.log('❌ API tests failed. Aborting translation process.');
+            process.exit(1);
+          }
+          console.log('🎉 API tests passed! Proceeding with translation...\n');
 
           // Content analysis functions
           function analyzeContent(filePath, content) {
@@ -161,7 +239,7 @@ jobs:
             return 'low';
           }
 
-          // Translation functions (same as single translation)
+          // Enhanced translation functions with better error handling
           async function translateContent(content, fromLang, toLang, contentType) {
             const fromLangName = fromLang === 'zh' ? 'Chinese' : 'English';
             const toLangName = toLang === 'zh' ? 'Chinese' : 'English';
@@ -182,9 +260,20 @@ jobs:
 
           ${content}`;
 
+            const requestPayload = {
+              model: TRANSLATION_CONFIG.model,
+              messages: [
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: userPrompt }
+              ],
+              temperature: 0.3,
+              max_tokens: 4000,
+            };
+
             try {
-              console.log(`Making API request to: ${TRANSLATION_CONFIG.apiBase}/chat/completions`);
-              console.log(`Using model: ${TRANSLATION_CONFIG.model}`);
+              console.log(`🌍 Translating content (${fromLang} → ${toLang})`);
+              console.log(`📝 Content length: ${content.length} characters`);
+              console.log(`🤖 Using model: ${TRANSLATION_CONFIG.model}`);
 
               const response = await fetch(`${TRANSLATION_CONFIG.apiBase}/chat/completions`, {
                 method: 'POST',
@@ -192,27 +281,46 @@ jobs:
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${TRANSLATION_CONFIG.apiKey}`,
                 },
-                body: JSON.stringify({
-                  model: TRANSLATION_CONFIG.model,
-                  messages: [
-                    { role: 'system', content: systemPrompt },
-                    { role: 'user', content: userPrompt }
-                  ],
-                  temperature: 0.3,
-                  max_tokens: 4000,
-                }),
+                body: JSON.stringify(requestPayload),
               });
+
+              console.log(`📡 API Response: ${response.status} ${response.statusText}`);
 
               if (!response.ok) {
                 const errorText = await response.text();
-                console.error(`API Error Response: ${errorText}`);
-                throw new Error(`Translation API error: ${response.status} ${response.statusText} - ${errorText}`);
+                console.error(`❌ API Error Response (${response.status}): ${errorText}`);
+
+                // Provide specific error guidance
+                if (response.status === 401) {
+                  throw new Error(`Authentication failed. Check your API key.`);
+                } else if (response.status === 404) {
+                  throw new Error(`Endpoint not found. Check your API base URL: ${TRANSLATION_CONFIG.apiBase}`);
+                } else if (response.status === 429) {
+                  throw new Error(`Rate limit exceeded. Please wait before retrying.`);
+                } else if (response.status === 501) {
+                  throw new Error(`Model "${TRANSLATION_CONFIG.model}" not implemented or not available.`);
+                } else {
+                  throw new Error(`Translation API error: ${response.status} ${response.statusText} - ${errorText}`);
+                }
               }
 
               const data = await response.json();
-              return data.choices?.[0]?.message?.content?.trim();
+              const translatedContent = data.choices?.[0]?.message?.content?.trim();
+
+              if (!translatedContent) {
+                throw new Error('No translation content received from API response');
+              }
+
+              console.log(`✅ Translation completed (${translatedContent.length} characters)`);
+              return translatedContent;
+
             } catch (error) {
-              console.error('Translation error:', error);
+              console.error(`❌ Translation failed: ${error.message}`);
+              console.error(`🔧 Request details:`, {
+                model: requestPayload.model,
+                contentLength: content.length,
+                apiBase: TRANSLATION_CONFIG.apiBase
+              });
               throw error;
             }
           }
