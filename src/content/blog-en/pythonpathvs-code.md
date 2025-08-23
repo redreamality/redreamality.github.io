@@ -1,8 +1,7 @@
 ---
 title: 'Setting PYTHONPATH Environment Variable: A Comprehensive Guide for All Platforms & VS Code Development'
 pubDate: 2025-08-21T09:24:07.954Z
-description: '本文将详细介绍在Windows、macOS和Linux系统上设置PYTHONPATH的多种方法，以及在Visual Studio Code (VS Code) 中为Python项目设置模块搜索路径有几种非常方便且推荐的方法。
-'
+description: 'This article will detail various methods for setting PYTHONPATH on Windows, macOS, and Linux systems, as well as several convenient and recommended ways to set module search paths for Python projects in Visual Studio Code (VS Code).'
 author: 'Remy'
 tags: ['python']
 ---

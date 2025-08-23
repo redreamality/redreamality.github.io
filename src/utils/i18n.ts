@@ -17,6 +17,7 @@ export const i18nConfig: I18nConfig = {
       home: '首页',
       blog: '博客',
       talks: '演讲',
+      projects: '项目',
       about: '关于',
       tags: '标签',
       
@@ -54,6 +55,7 @@ export const i18nConfig: I18nConfig = {
       home: 'Home',
       blog: 'Blog',
       talks: 'Talks',
+      projects: 'Projects',
       about: 'About',
       tags: 'Tags',
       
@@ -158,6 +160,21 @@ export async function getTalks(lang: Language) {
 }
 
 /**
+ * Get projects for a specific language
+ */
+export async function getProjects(lang: Language) {
+  try {
+    // Get language-specific collection
+    const collectionName = lang === 'zh' ? 'projects-cn' : 'projects-en';
+    const projects = await getCollection(collectionName);
+    return projects.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  } catch (error) {
+    // If collection doesn't exist, return empty array
+    return [];
+  }
+}
+
+/**
  * Get all unique tags for a specific language
  */
 export async function getTags(lang: Language): Promise<string[]> {
@@ -177,7 +194,7 @@ export async function getPostsByTag(tag: string, lang: Language) {
 /**
  * Check if content exists in both languages
  */
-export async function getTranslationStatus(slug: string, type: 'blog' | 'talks') {
+export async function getTranslationStatus(slug: string, type: 'blog' | 'talks' | 'projects') {
   const status = {
     zh: false,
     en: false,
@@ -186,12 +203,12 @@ export async function getTranslationStatus(slug: string, type: 'blog' | 'talks')
 
   try {
     // Check Chinese version
-    const zhCollection = type === 'blog' ? 'blog-cn' : 'talks-cn';
+    const zhCollection = type === 'blog' ? 'blog-cn' : type === 'talks' ? 'talks-cn' : 'projects-cn';
     const zhPosts = await getCollection(zhCollection as any);
     status.zh = zhPosts.some(post => post.slug === slug);
 
     // Check English version
-    const enCollection = type === 'blog' ? 'blog-en' : 'talks-en';
+    const enCollection = type === 'blog' ? 'blog-en' : type === 'talks' ? 'talks-en' : 'projects-en';
     const enPosts = await getCollection(enCollection as any);
     status.en = enPosts.some(post => post.slug === slug);
 
@@ -238,7 +255,7 @@ export async function generateI18nPaths<T>(
  */
 export async function getLocalizedContent(
   slug: string,
-  type: 'blog' | 'talks',
+  type: 'blog' | 'talks' | 'projects',
   lang: Language
 ): Promise<any> {
   try {

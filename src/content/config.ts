@@ -23,6 +23,15 @@ const talksSchema = z.object({
   translatedFrom: z.string().optional(), // Reference to original talk slug
 });
 
+const projectsSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  pubDate: z.date(),
+  author: z.string(),
+  lang: z.enum(['zh', 'en']).optional(),
+  translatedFrom: z.string().optional(), // Reference to original project slug
+});
+
 // Chinese content collections
 const blogCnCollection = defineCollection({
   type: 'content',
@@ -45,9 +54,22 @@ const talksEnCollection = defineCollection({
   schema: talksSchema,
 });
 
+// Projects content collections
+const projectsCnCollection = defineCollection({
+  type: 'content',
+  schema: projectsSchema,
+});
+
+const projectsEnCollection = defineCollection({
+  type: 'content',
+  schema: projectsSchema,
+});
+
 export const collections = {
   'blog-cn': blogCnCollection,
   'blog-en': blogEnCollection,
   'talks-cn': talksCnCollection,
   'talks-en': talksEnCollection,
+  'projects-cn': projectsCnCollection,
+  'projects-en': projectsEnCollection,
 };

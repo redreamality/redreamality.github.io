@@ -1,0 +1,85 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { getProjects, type Language } from '../../utils/i18n';
+
+export async function getStaticPaths() {
+  // Get English projects
+  const enProjects = await getProjects('en');
+  
+  return enProjects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project, lang: 'en' as Language },
+  }));
+}
+
+type Props = {
+  project: CollectionEntry<'projects-en'>;
+  lang: Language;
+};
+
+const { project, lang } = Astro.props;
+const { Content } = await project.render();
+
+// Language-specific content
+const content = {
+  en: {
+    publishedOn: "Published on",
+    author: "Author",
+    backToProjects: "← Back to Projects"
+  },
+  zh: {
+    publishedOn: "发布于",
+    author: "作者",
+    backToProjects: "← 返回项目"
+  }
+};
+
+const currentContent = content[lang];
+const basePath = lang === 'zh' ? '/cn' : '';
+---
+
+<Layout title={project.data.title}>
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <!-- Back to projects link -->
+      <div class="mb-6">
+        <a 
+          href={`${basePath}/projects`}
+          class="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+        >
+          {currentContent.backToProjects}
+        </a>
+      </div>
+
+      <!-- Project header -->
+      <header class="mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          {project.data.title}
+        </h1>
+        
+        <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
+          <span>
+            {currentContent.publishedOn} {project.data.pubDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </span>
+          {project.data.author && (
+            <span>👤 {project.data.author}</span>
+          )}
+        </div>
+
+        <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+          {project.data.description}
+        </p>
+      </header>
+
+      <!-- Project content -->
+      <article class="prose prose-lg dark:prose-invert max-w-none">
+        <Content />
+      </article>
+    </div>
+  </main>
+</Layout>
