@@ -1,13 +1,7 @@
 ---
 title: 'Claude Agent SDK (Python) Learning Guide'
 pubDate: 2025-10-15T03:15:48.639Z
-description: '完成本指南后，你将能够：
-✅ 理解 Claude Agent SDK 的架构和工作原理
-✅ 使用 `query()` 和 `ClaudeSDKClient` 进行基本和高级查询
-✅ 创建自定义 MCP 工具扩展 Claude 的能力
-✅ 使用 Hook 系统实现自动化和权限控制
-✅ 调试和解决常见问题
-✅ 设计和实现生产级 Claude 集成'
+description: After completing this guide, you will be able to: ✅ Understand the architecture and working principles of the Claude Agent SDK ✅ Perform basic and advanced queries using `query()` and `ClaudeSDKClient` ✅ Create custom MCP tool extensions to enhance Claude's capabilities ✅ Implement automation and permission control using the Hook system ✅ Debug and resolve common issues ✅ Design and implement production-ready Claude integrations.
 author: 'Remy'
 tags: ['claude code', 'vibe coding', 'python']
 ---
