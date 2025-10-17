@@ -1,6 +1,6 @@
 ---
 title: 'Awesome npm Packages'
-pubDate: 2025-01-31T00:00:00.000Z
+pubDate: 2025-10-17T00:00:00.000Z
 description: 'A complete guide to the Claude Agent SDK, covering architecture, queries, custom MCP tool extensions, the Hook system for automation, debugging, and implementation.'
 author: 'Remy'
 tags: ['claude code', 'vibe coding', 'python']
