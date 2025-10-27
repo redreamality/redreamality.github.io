@@ -176,7 +176,11 @@ import Layout from '../../layouts/Layout.astro';
     </div>
   </div>
 
-  <script>
+  <script type="module">
+    import type { Language } from '../../utils/i18n';
+    import { parseMarkdownContent } from '../../utils/translation';
+    import { autoTranslateContentAndCreateFile, LANGUAGE_LABELS } from './auto-translate';
+
     // Check GitHub authentication
     function checkAuth() {
       const githubToken = localStorage.getItem('github-token');
@@ -231,26 +235,36 @@ import Layout from '../../layouts/Layout.astro';
       const dateObj = new Date(data.date);
       const isoDate = dateObj.toISOString();
 
-      let frontmatter = `---
-title: '${data.title.replace(/'/g, "''")}'
-description: '${data.description.replace(/'/g, "''")}'
-date: ${isoDate}`;
+      const frontmatterLines = [
+        '---',
+        `title: '${data.title.replace(/'/g, "''")}'`,
+        `description: '${data.description.replace(/'/g, "''")}'`,
+        `date: ${isoDate}`,
+      ];
 
       if (data.location) {
-        frontmatter += `\nlocation: '${data.location.replace(/'/g, "''")}'`;
+        frontmatterLines.push(`location: '${data.location.replace(/'/g, "''")}'`);
       }
 
       if (data.slides) {
-        frontmatter += `\nslides: '${data.slides}'`;
+        frontmatterLines.push(`slides: '${data.slides}'`);
       }
 
       if (data.video) {
-        frontmatter += `\nvideo: '${data.video}'`;
+        frontmatterLines.push(`video: '${data.video}'`);
       }
 
-      frontmatter += '\n---\n\n';
+      frontmatterLines.push('---', '', '');
 
-      return frontmatter;
+      return frontmatterLines.join('\n');
+    }
+
+    function toBase64(content: string): string {
+      return btoa(unescape(encodeURIComponent(content)));
+    }
+
+    function getTalkUrl(language: Language, slug: string): string {
+      return language === 'en' ? `/talks/${slug}` : `/cn/talks/${slug}`;
     }
 
     function downloadFile(content: string, filename: string) {
@@ -300,9 +314,10 @@ date: ${isoDate}`;
         const slug = generateSlug(data.title);
         const frontmatter = generateTalkFrontmatter(data);
         const fullContent = frontmatter + data.content;
+        const { frontmatter: originalFrontmatter } = parseMarkdownContent(fullContent);
 
         // Determine file path based on language
-        const contentPath = data.language === 'en' ? 'src/content/talks-en' : 'src/content/talks';
+        const contentPath = data.language === 'en' ? 'src/content/talks-en' : 'src/content/talks-cn';
         const filePath = `${contentPath}/${slug}.md`;
 
         // Create talk via GitHub API
@@ -315,30 +330,75 @@ date: ${isoDate}`;
           },
           body: JSON.stringify({
             message: `Add new talk: ${data.title}`,
-            content: btoa(unescape(encodeURIComponent(fullContent))) // Base64 encode
+            content: toBase64(fullContent)
           })
         });
 
         if (response.ok) {
-          showMessage(`Talk "${slug}" created successfully and deployed to GitHub!`, 'success');
+          const sourceLanguage = data.language as Language;
+          const targetLanguage: Language = sourceLanguage === 'en' ? 'zh' : 'en';
+          const targetLanguageLabel = LANGUAGE_LABELS[targetLanguage];
+          const sourceUrl = getTalkUrl(sourceLanguage, slug);
+          const targetUrl = getTalkUrl(targetLanguage, slug);
 
-          // Show success message with link
-          const successMessage = `
-✅ Talk created successfully!
+          showMessage(`Talk "${slug}" created. Starting automatic translation to ${targetLanguageLabel}...`, 'success');
 
-📝 Slug: ${slug}
-📁 File: ${filePath}
-🚀 Deployment will be triggered automatically
+          let translationOutcome = await autoTranslateContentAndCreateFile({
+            slug,
+            contentType: 'talks',
+            sourceLanguage,
+            targetLanguage,
+            originalContent: data.content,
+            originalFrontmatter,
+            metadata: {
+              title: data.title,
+              description: data.description,
+            },
+            githubToken,
+          }).catch((translationError) => ({
+            success: false,
+            error: translationError instanceof Error ? translationError.message : 'Unknown translation error',
+          }));
 
-The talk will be available shortly at /talks/${slug}
+          const translationMessage = translationOutcome.success
+            ? `Talk created and translated to ${targetLanguageLabel}!`
+            : `Talk created, but translation to ${targetLanguageLabel} failed: ${translationOutcome.error || 'Unknown error. Please try again later.'}`;
 
-${data.language === 'zh' ? 'Consider creating an English version as well!' : 'Consider creating a Chinese version as well!'}
-          `;
+          showMessage(translationMessage, translationOutcome.success ? 'success' : 'error');
+
+          const alertLines = [
+            '✅ Talk created successfully!',
+            '',
+            `📝 Slug: ${slug}`,
+            `📁 Source file: ${filePath}`,
+            `🔗 Source URL: ${sourceUrl}`,
+          ];
+
+          if (translationOutcome.success) {
+            if (translationOutcome.targetPath) {
+              alertLines.push(`📁 Translated file: ${translationOutcome.targetPath}`);
+            }
+            alertLines.push(`🌐 Translation: ${targetLanguageLabel}`);
+            alertLines.push(`🔗 Translated URL: ${targetUrl}`);
+          } else {
+            alertLines.push(`⚠️ Translation to ${targetLanguageLabel} failed.`);
+            if (translationOutcome.error) {
+              alertLines.push(`Error: ${translationOutcome.error}`);
+            }
+          }
+
+          alertLines.push('');
+          alertLines.push('🚀 Deployment will be triggered automatically');
+
+          const successMessage = alertLines.join('\n');
 
           setTimeout(() => {
             alert(successMessage);
-            // Reset form
             form.reset();
+            const dateInput = document.getElementById('date') as HTMLInputElement | null;
+            if (dateInput) {
+              dateInput.valueAsDate = new Date();
+            }
           }, 1000);
         } else {
           const error = await response.json();
@@ -360,7 +420,7 @@ ${data.language === 'zh' ? 'Consider creating an English version as well!' : 'Co
         showMessage('Please enter some content to preview', 'error');
         return;
       }
-      
+
       // Open preview in new window/tab
       const previewWindow = window.open('', '_blank');
       if (previewWindow) {
@@ -384,6 +444,9 @@ ${data.language === 'zh' ? 'Consider creating an English version as well!' : 'Co
     });
 
     // Set default date to today
-    document.getElementById('date').valueAsDate = new Date();
+    const dateInput = document.getElementById('date') as HTMLInputElement | null;
+    if (dateInput) {
+      dateInput.valueAsDate = new Date();
+    }
   </script>
 </Layout>

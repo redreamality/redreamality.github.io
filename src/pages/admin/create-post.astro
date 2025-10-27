@@ -135,7 +135,11 @@ import Layout from '../../layouts/Layout.astro';
     </div>
   </div>
 
-  <script>
+  <script type="module">
+    import type { Language } from '../../utils/i18n';
+    import { parseMarkdownContent } from '../../utils/translation';
+    import { autoTranslateContentAndCreateFile, LANGUAGE_LABELS } from './auto-translate';
+
     // Check GitHub authentication
     function checkAuth() {
       const githubToken = localStorage.getItem('github-token');
@@ -198,15 +202,27 @@ import Layout from '../../layouts/Layout.astro';
       const tags = parseTags(data.tags);
       const now = new Date().toISOString();
 
-      return `---
-title: '${data.title.replace(/'/g, "''")}'
-pubDate: ${now}
-description: '${data.description.replace(/'/g, "''")}'
-author: 'Remy'
-tags: [${tags.map(tag => `'${tag.replace(/'/g, "''")}'`).join(', ')}]
----
+      const frontmatterLines = [
+        '---',
+        `title: '${data.title.replace(/'/g, "''")}'`,
+        `pubDate: ${now}`,
+        `description: '${data.description.replace(/'/g, "''")}'`,
+        "author: 'Remy'",
+        `tags: [${tags.map(tag => `'${tag.replace(/'/g, "''")}'`).join(', ')}]`,
+        '---',
+        '',
+        '',
+      ];
 
-`;
+      return frontmatterLines.join('\n');
+    }
+
+    function toBase64(content: string): string {
+      return btoa(unescape(encodeURIComponent(content)));
+    }
+
+    function getBlogUrl(language: Language, slug: string): string {
+      return language === 'en' ? `/blog/${slug}` : `/cn/blog/${slug}`;
     }
 
     function downloadFile(content: string, filename: string) {
@@ -253,6 +269,7 @@ tags: [${tags.map(tag => `'${tag.replace(/'/g, "''")}'`).join(', ')}]
         const slug = generateSlug(data.title);
         const frontmatter = generateBlogFrontmatter(data);
         const fullContent = frontmatter + data.content;
+        const { frontmatter: originalFrontmatter } = parseMarkdownContent(fullContent);
 
         // Determine file path based on language
         const contentPath = data.language === 'en' ? 'src/content/blog-en' : 'src/content/blog-cn';
@@ -268,25 +285,68 @@ tags: [${tags.map(tag => `'${tag.replace(/'/g, "''")}'`).join(', ')}]
           },
           body: JSON.stringify({
             message: `Add new blog post: ${data.title}`,
-            content: btoa(unescape(encodeURIComponent(fullContent))) // Base64 encode
+            content: toBase64(fullContent)
           })
         });
 
         if (response.ok) {
-          showMessage(`Blog post "${slug}" created successfully and deployed to GitHub!`, 'success');
+          const sourceLanguage = data.language as Language;
+          const targetLanguage: Language = sourceLanguage === 'en' ? 'zh' : 'en';
+          const targetLanguageLabel = LANGUAGE_LABELS[targetLanguage];
+          const sourceUrl = getBlogUrl(sourceLanguage, slug);
+          const targetUrl = getBlogUrl(targetLanguage, slug);
 
-          // Show success message with link
-          const successMessage = `
-✅ Blog post created successfully!
+          showMessage(`Blog post "${slug}" created. Starting automatic translation to ${targetLanguageLabel}...`, 'success');
 
-📝 Slug: ${slug}
-📁 File: ${filePath}
-🚀 Deployment will be triggered automatically
+          let translationOutcome = await autoTranslateContentAndCreateFile({
+            slug,
+            contentType: 'blog',
+            sourceLanguage,
+            targetLanguage,
+            originalContent: data.content,
+            originalFrontmatter,
+            metadata: {
+              title: data.title,
+              description: data.description,
+              tags: parseTags(data.tags),
+            },
+            githubToken,
+          }).catch((translationError) => ({
+            success: false,
+            error: translationError instanceof Error ? translationError.message : 'Unknown translation error',
+          }));
 
-The post will be available shortly at /blog/${slug}
+          const translationMessage = translationOutcome.success
+            ? `Blog post created and translated to ${targetLanguageLabel}!`
+            : `Blog post created, but translation to ${targetLanguageLabel} failed: ${translationOutcome.error || 'Unknown error. Please try again later.'}`;
 
-${data.language === 'zh' ? 'Consider creating an English version as well!' : 'Consider creating a Chinese version as well!'}
-          `;
+          showMessage(translationMessage, translationOutcome.success ? 'success' : 'error');
+
+          const alertLines = [
+            '✅ Blog post created successfully!',
+            '',
+            `📝 Slug: ${slug}`,
+            `📁 Source file: ${filePath}`,
+            `🔗 Source URL: ${sourceUrl}`,
+          ];
+
+          if (translationOutcome.success) {
+            if (translationOutcome.targetPath) {
+              alertLines.push(`📁 Translated file: ${translationOutcome.targetPath}`);
+            }
+            alertLines.push(`🌐 Translation: ${targetLanguageLabel}`);
+            alertLines.push(`🔗 Translated URL: ${targetUrl}`);
+          } else {
+            alertLines.push(`⚠️ Translation to ${targetLanguageLabel} failed.`);
+            if (translationOutcome.error) {
+              alertLines.push(`Error: ${translationOutcome.error}`);
+            }
+          }
+
+          alertLines.push('');
+          alertLines.push('🚀 Deployment will be triggered automatically');
+
+          const successMessage = alertLines.join('\n');
 
           setTimeout(() => {
             alert(successMessage);
@@ -313,7 +373,7 @@ ${data.language === 'zh' ? 'Consider creating an English version as well!' : 'Co
         showMessage('Please enter some content to preview', 'error');
         return;
       }
-      
+
       // Open preview in new window/tab
       const previewWindow = window.open('', '_blank');
       if (previewWindow) {
