@@ -1,0 +1,44 @@
+name: Create Blog Post with LLM
+
+on:
+  repository_dispatch:
+    types: [create-post-with-llm]
+
+jobs:
+  generate-and-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Generate post with LLM metadata
+        run: node scripts/admin/create-post-with-llm.mjs
+        env:
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE || 'https://gateway.chat.sensedeal.vip/v1' }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MODEL: ${{ secrets.MODEL || 'qwen2.5-32b-instruct-int4' }}
+          POST_TITLE: ${{ github.event.client_payload.title }}
+          POST_CONTENT_BASE64: ${{ github.event.client_payload.content_base64 }}
+          POST_SLUG: ${{ github.event.client_payload.slug }}
+          POST_LANGUAGE_HINT: ${{ github.event.client_payload.language_hint }}
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git status --short | grep -q .; then
+            echo "No changes detected."
+            exit 0
+          fi
+          git status --short
+          git add src/content/blog-cn src/content/blog-en
+          git commit -m "Add new blog post: ${{ github.event.client_payload.title }}"
+          git push
