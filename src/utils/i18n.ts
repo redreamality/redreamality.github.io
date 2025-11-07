@@ -20,6 +20,7 @@ export const i18nConfig: I18nConfig = {
       projects: '项目',
       about: '关于',
       tags: '标签',
+      tools: '工具',
       
       // Content
       readMore: '阅读更多',
@@ -58,6 +59,7 @@ export const i18nConfig: I18nConfig = {
       projects: 'Projects',
       about: 'About',
       tags: 'Tags',
+      tools: 'Tools',
       
       // Content
       readMore: 'Read More',
