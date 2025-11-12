@@ -18,7 +18,8 @@ const content = {
     noPostsMessage: "No blog posts available yet.",
     readMore: "Read More",
     publishedOn: "Published on",
-    author: "by"
+    author: "by",
+    rssSubscribe: "Subscribe via RSS"
   },
   zh: {
     title: "博客文章",
@@ -27,7 +28,8 @@ const content = {
     noPostsMessage: "暂无博客文章。",
     readMore: "阅读更多",
     publishedOn: "发布于",
-    author: "作者"
+    author: "作者",
+    rssSubscribe: "RSS 订阅"
   }
 };
 
@@ -39,10 +41,25 @@ const basePath = lang === 'zh' ? '/cn' : '';
   <main class="container mx-auto px-4 py-8">
     <div class="max-w-4xl mx-auto">
       <div class="mb-8">
-        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{currentContent.title}</h1>
-        <p class="text-lg text-gray-600 dark:text-gray-400">
-          {currentContent.subtitle}
-        </p>
+        <div class="flex justify-between items-start">
+          <div>
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{currentContent.title}</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400">
+              {currentContent.subtitle}
+            </p>
+          </div>
+          <a 
+            href={`${basePath}/rss.xml`}
+            class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-orange-600 bg-orange-50 rounded-lg hover:bg-orange-100 dark:bg-orange-900/20 dark:text-orange-400 dark:hover:bg-orange-900/30 transition-colors"
+            title={currentContent.rssSubscribe}
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"></path>
+              <path d="M4 9a1 1 0 011-1 7 7 0 017 7 1 1 0 11-2 0 5 5 0 00-5-5 1 1 0 01-1-1zM3 15a2 2 0 114 0 2 2 0 01-4 0z"></path>
+            </svg>
+            <span class="hidden sm:inline">{currentContent.rssSubscribe}</span>
+          </a>
+        </div>
       </div>
 
       <!-- Tags -->
