@@ -1,0 +1,212 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { type Language } from '../../utils/i18n';
+
+const lang: Language = 'en';
+
+const content = {
+  en: {
+    title: 'Grid Calculator',
+    pageTitle: "Grid Calculator - Remy's Personal Website",
+    containerWidth: 'Container Width (px)',
+    gridColumns: 'Number of Columns',
+    columnGap: 'Column Gap (px)',
+    rowGap: 'Row Gap (px)',
+    columnWidth: 'Column Width (px)',
+    totalWidth: 'Total Width',
+    totalGaps: 'Total Gaps Width',
+    availableWidth: 'Available Width for Columns',
+    calculate: 'Calculate',
+    reset: 'Reset',
+    preview: 'Preview'
+  },
+  zh: {
+    title: '网格计算器',
+    pageTitle: '网格计算器 - Remy的个人网站',
+    containerWidth: '容器宽度 (px)',
+    gridColumns: '列数',
+    columnGap: '列间距 (px)',
+    rowGap: '行间距 (px)',
+    columnWidth: '列宽 (px)',
+    totalWidth: '总宽度',
+    totalGaps: '间距总宽度',
+    availableWidth: '可用宽度',
+    calculate: '计算',
+    reset: '重置',
+    preview: '预览'
+  }
+};
+
+const currentContent = content[lang];
+---
+
+<Layout title={currentContent.pageTitle}>
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8 text-center text-gray-900 dark:text-white">{currentContent.title}</h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Calculator Section -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+        <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">{currentContent.calculate}</h2>
+        
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {currentContent.containerWidth}
+            </label>
+            <input
+              type="number"
+              id="containerWidth"
+              value="1200"
+              min="0"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {currentContent.gridColumns}
+            </label>
+            <input
+              type="number"
+              id="gridColumns"
+              value="12"
+              min="1"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {currentContent.columnGap}
+            </label>
+            <input
+              type="number"
+              id="columnGap"
+              value="20"
+              min="0"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {currentContent.rowGap}
+            </label>
+            <input
+              type="number"
+              id="rowGap"
+              value="20"
+              min="0"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            />
+          </div>
+
+          <div class="flex gap-2 pt-4">
+            <button
+              id="calculateBtn"
+              class="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors"
+            >
+              {currentContent.calculate}
+            </button>
+            <button
+              id="resetBtn"
+              class="flex-1 px-4 py-2 bg-gray-400 hover:bg-gray-500 text-white font-medium rounded-md transition-colors"
+            >
+              {currentContent.reset}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Section -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+        <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">{currentContent.preview}</h2>
+        
+        <div class="space-y-4">
+          <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">{currentContent.totalWidth}</p>
+            <p class="text-lg font-semibold text-gray-900 dark:text-white" id="totalWidth">1200 px</p>
+          </div>
+
+          <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">{currentContent.totalGaps}</p>
+            <p class="text-lg font-semibold text-gray-900 dark:text-white" id="totalGaps">220 px</p>
+          </div>
+
+          <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">{currentContent.availableWidth}</p>
+            <p class="text-lg font-semibold text-gray-900 dark:text-white" id="availableWidth">980 px</p>
+          </div>
+
+          <div class="p-3 bg-blue-50 dark:bg-blue-900 rounded">
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">{currentContent.columnWidth}</p>
+            <p class="text-2xl font-bold text-blue-600 dark:text-blue-400" id="columnWidth">81.67 px</p>
+          </div>
+        </div>
+
+        <!-- Grid Visual Preview -->
+        <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <h3 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">Visual Preview</h3>
+          <div class="border border-gray-300 dark:border-gray-600 rounded p-2 bg-gray-50 dark:bg-gray-700 overflow-x-auto">
+            <div id="gridPreview" class="inline-flex" style="gap: 20px;">
+              <!-- Grid preview will be generated here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function calculate() {
+      const containerWidth = parseFloat((document.getElementById('containerWidth') as HTMLInputElement).value) || 1200;
+      const gridColumns = parseInt((document.getElementById('gridColumns') as HTMLInputElement).value) || 12;
+      const columnGap = parseFloat((document.getElementById('columnGap') as HTMLInputElement).value) || 20;
+      const rowGap = parseFloat((document.getElementById('rowGap') as HTMLInputElement).value) || 20;
+
+      // Calculate column width
+      const totalGapsWidth = columnGap * (gridColumns - 1);
+      const availableWidth = containerWidth - totalGapsWidth;
+      const columnWidth = availableWidth / gridColumns;
+
+      // Update results
+      (document.getElementById('totalWidth') as HTMLElement).textContent = `${containerWidth.toFixed(2)} px`;
+      (document.getElementById('totalGaps') as HTMLElement).textContent = `${totalGapsWidth.toFixed(2)} px`;
+      (document.getElementById('availableWidth') as HTMLElement).textContent = `${availableWidth.toFixed(2)} px`;
+      (document.getElementById('columnWidth') as HTMLElement).textContent = `${columnWidth.toFixed(2)} px`;
+
+      // Generate grid preview
+      const preview = document.getElementById('gridPreview') as HTMLElement;
+      preview.innerHTML = '';
+      
+      for (let i = 0; i < gridColumns; i++) {
+        const column = document.createElement('div');
+        column.style.width = `${columnWidth}px`;
+        column.style.height = '60px';
+        column.className = 'bg-blue-200 dark:bg-blue-800 border border-blue-400 dark:border-blue-600 rounded';
+        preview.appendChild(column);
+      }
+    }
+
+    function reset() {
+      (document.getElementById('containerWidth') as HTMLInputElement).value = '1200';
+      (document.getElementById('gridColumns') as HTMLInputElement).value = '12';
+      (document.getElementById('columnGap') as HTMLInputElement).value = '20';
+      (document.getElementById('rowGap') as HTMLInputElement).value = '20';
+      calculate();
+    }
+
+    // Event listeners
+    document.getElementById('calculateBtn')?.addEventListener('click', calculate);
+    document.getElementById('resetBtn')?.addEventListener('click', reset);
+    
+    // Real-time calculation on input change
+    ['containerWidth', 'gridColumns', 'columnGap', 'rowGap'].forEach(id => {
+      document.getElementById(id)?.addEventListener('input', calculate);
+    });
+
+    // Initial calculation
+    calculate();
+  </script>
+</Layout>
