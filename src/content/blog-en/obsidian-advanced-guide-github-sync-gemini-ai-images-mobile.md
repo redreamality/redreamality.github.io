@@ -1,9 +1,9 @@
 ---
 title: 'Advanced Obsidian Guide: Free Cloud Sync, AI Integration, Image Management and Mobile Configuration'
-pubDate: 2025-01-09T00:00:00.000Z
+pubDate: 2025-12-09T00:00:00.000Z
 description: 'A comprehensive guide to advanced Obsidian usage, including free cloud sync via GitHub, AI integration with Gemini CLI, image storage management, and mobile sync configuration to supercharge your note-taking system.'
 author: 'Remy'
-tags: ['obsidian', 'productivity', 'ai', 'github', 'sync']
+tags: ['obsidian', 'productivity']
 ---
 
 # Advanced Obsidian Guide: Free Cloud Sync, AI Integration, Image Management and Mobile Configuration

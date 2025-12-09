@@ -1,9 +1,9 @@
 ---
 title: 'Obsidian进阶使用指南：免费云同步、AI结合、图片管理及手机端配置'
-pubDate: 2025-01-09T00:00:00.000Z
+pubDate: 2025-12-09T00:00:00.000Z
 description: '详细介绍Obsidian的高级使用技巧，包括基于GitHub的免费云同步方案、与Gemini CLI的AI结合、图片存储管理以及手机端同步配置，让你的笔记系统更加强大和便捷。'
 author: 'Remy'
-tags: ['obsidian', 'productivity', 'ai', 'github', 'sync']
+tags: ['obsidian', 'productivity']
 ---
 
 # Obsidian进阶使用指南：免费云同步、AI结合、图片管理及手机端配置
