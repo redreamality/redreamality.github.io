@@ -41,9 +41,9 @@ tags: ['obsidian', 'productivity']
 我的`.gitignore`文件通常包含以下内容：
 
 ```
+.obsidian/appearance.json
 .obsidian/workspace.json
-.obsidian/workspace
-.obsidian/plugins/workspace.json
+.obsidian/workspace-mobile.json
 ```
 
 ### 自动化同步插件
