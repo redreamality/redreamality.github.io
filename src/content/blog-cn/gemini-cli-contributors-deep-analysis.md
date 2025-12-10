@@ -69,7 +69,7 @@ Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，�
 | **GitHub** | [@NTaylorMullen](https://github.com/NTaylorMullen) |
 | **位置** | Seattle, WA |
 | **公司** | Google |
-| **博客/社交** | twitter.com/NTaylorMullen |
+| **社交媒体** | [Twitter](https://twitter.com/NTaylorMullen) |
 | **GitHub 创建年份** | 2012 |
 | **公开仓库** | 66 |
 | **粉丝数** | 649 |
@@ -80,7 +80,7 @@ Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，�
 - 拥有 649 位粉丝，显示在开源社区中有相当的影响力
 - 66 个公开仓库说明是一位多才多艺的开发者
 - 自 2012 年以来在 GitHub 上活跃了 13 年以上
-- Twitter 社交账号表明其积极参与社区讨论
+- 在 Twitter 上积极分享技术见解和项目进展
 
 **贡献特征：** 核心功能实现者，CLI 交互和 API 集成的主要负责人
 
@@ -91,6 +91,7 @@ Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，�
 | 信息 | 详情 |
 |------|------|
 | **GitHub** | [@olcan](https://github.com/olcan) |
+| **社交媒体** | [Twitter](https://twitter.com/olcan) |
 | **GitHub 创建年份** | 2011 |
 | **公开仓库** | 3 |
 | **粉丝数** | 136 |
@@ -102,6 +103,7 @@ Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，�
 - 136 位粉丝反映其在特定领域的专业认可
 - 仅有的公开仓库可能表明其专注于特定项目或使用私有仓库
 - 长期的 GitHub 历史显示其对开源的持续承诺
+- 在 Twitter 上分享技术观点和开源项目更新
 
 **贡献特征：** 资深技术专家，可能在某个特定功能域（如数据处理或测试框架）有深度研究
 
@@ -232,6 +234,8 @@ Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，�
 | **GitHub** | [@allenhutchison](https://github.com/allenhutchison) |
 | **位置** | San Jose, CA |
 | **公司** | Google |
+| **个人网站** | [allen.hutchison.org](https://allen.hutchison.org) |
+| **社交媒体** | [Twitter](https://twitter.com/allen_hutchison) |
 | **GitHub 创建年份** | 2010 |
 | **公开仓库** | 15 |
 | **粉丝数** | 157 |
@@ -242,6 +246,7 @@ Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，�
 - 157 位粉丝显示其在社区中的认可度
 - 15 个公开仓库表明其全面的开源参与
 - 早期的 GitHub 注册说明其是开源的忠实拥护者
+- 维护个人网站并在 Twitter 上积极分享技术见解
 
 **贡献特征：** 可能负责跨平台兼容性、性能优化或工具链集成
 
@@ -254,8 +259,9 @@ Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，�
 | **GitHub** | [@chrstnb](https://github.com/chrstnb) |
 | **位置** | New York, NY |
 | **公司** | @google-gemini |
+| **个人网站** | [christinebetts.com](https://christinebetts.com) |
+| **社交媒体** | [Twitter](https://twitter.com/bettsoff) |
 | **个人简介** | extensibility + accessibility for Gemini CLI 🌟 |
-| **GitHub 创建年份** | 未知 |
 | **公开仓库** | 53 |
 | **粉丝数** | 90 |
 
@@ -265,6 +271,7 @@ Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，�
 - 53 个公开仓库表明其很活跃的开源社区参与者
 - 个人简介中明确提及"extensibility + accessibility"，这是其核心贡献领域
 - 90 位粉丝反映其在这些特定领域的认可度
+- 维护个人技术网站（christinebetts.com），展示其专业形象和工作成果
 
 **贡献特征：** 专注于使 CLI 更易扩展和可访问，可能负责插件系统、国际化和可访问性
 
@@ -278,8 +285,8 @@ Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，�
 |------|------|
 | **GitHub** | [@KeijiBranshi](https://github.com/KeijiBranshi) |
 | **位置** | Seattle, WA |
+| **专业页面** | [LinkedIn](https://www.linkedin.com/in/bkhorton) |
 | **个人简介** | Hello, my name is Brandon. |
-| **GitHub 创建年份** | 未知 |
 | **公开仓库** | 24 |
 | **粉丝数** | 123 |
 
@@ -288,6 +295,7 @@ Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，�
 - 123 位粉丝显示其在开源社区中的影响力
 - 24 个公开仓库表明其全面的开源参与
 - 个人简介简洁但有趣（"Hello, my name is Brandon"），反映其谦逊的风格
+- 维护 LinkedIn 专业档案，展示其职业发展历程
 - 与其他 Seattle 核心贡献者位于同一地点，可能在同一工作环境中
 
 **贡献特征：** 多功能贡献者，可能涉及多个功能模块
@@ -364,8 +372,8 @@ Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，�
 | **GitHub** | [@galz10](https://github.com/galz10) |
 | **位置** | Seattle, WA |
 | **公司** | Google |
+| **社交媒体** | [Twitter](https://twitter.com/galdawave) |
 | **个人简介** | Engineering @ Google Cloud |
-| **GitHub 创建年份** | 未知 |
 | **公开仓库** | 48 |
 | **粉丝数** | 46 |
 
@@ -374,6 +382,7 @@ Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，�
 - 来自 Seattle 办公室，与其他核心贡献者位于同一地点
 - 48 个公开仓库和 46 位粉丝表明其在云计算领域的参与
 - "Engineering @ Google Cloud" 表明其专业方向
+- 在 Twitter (@galdawave) 上分享云计算和 Gemini 相关的内容
 - 可能负责 Gemini CLI 与 Google Cloud 服务的集成
 
 **贡献特征：** Google Cloud 集成专家，可能负责云相关功能和文档

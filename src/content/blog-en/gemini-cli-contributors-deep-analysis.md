@@ -68,7 +68,7 @@ This section provides detailed profiles of the 15 most significant contributors 
 | **GitHub** | [@NTaylorMullen](https://github.com/NTaylorMullen) |
 | **Location** | Seattle, WA |
 | **Company** | Google |
-| **Blog/Social** | twitter.com/NTaylorMullen |
+| **Social Media** | [Twitter](https://twitter.com/NTaylorMullen) |
 | **GitHub Since** | 2012 |
 | **Public Repos** | 66 |
 | **Followers** | 649 |
@@ -79,7 +79,7 @@ This section provides detailed profiles of the 15 most significant contributors 
 - 649 followers demonstrate significant influence in the open source community
 - 66 public repositories show versatile development capabilities
 - Active on GitHub for 13+ years since 2012
-- Twitter social presence indicates active community engagement
+- Actively shares technical insights and project updates on Twitter
 
 **Contribution Profile:** Core feature implementer, primary responsible for CLI interaction and API integration
 
@@ -90,6 +90,7 @@ This section provides detailed profiles of the 15 most significant contributors 
 | Information | Details |
 |-------------|---------|
 | **GitHub** | [@olcan](https://github.com/olcan) |
+| **Social Media** | [Twitter](https://twitter.com/olcan) |
 | **GitHub Since** | 2011 |
 | **Public Repos** | 3 |
 | **Followers** | 136 |
@@ -101,6 +102,7 @@ This section provides detailed profiles of the 15 most significant contributors 
 - 136 followers reflect professional recognition in specific domains
 - Few public repos might indicate focus on private projects or specific initiatives
 - Long GitHub history demonstrates sustained commitment to open source
+- Actively shares technical insights and open source updates on Twitter
 
 **Contribution Profile:** Senior technical expert, likely deep expertise in specific feature domain (e.g., data processing or testing framework)
 
@@ -231,6 +233,8 @@ This section provides detailed profiles of the 15 most significant contributors 
 | **GitHub** | [@allenhutchison](https://github.com/allenhutchison) |
 | **Location** | San Jose, CA |
 | **Company** | Google |
+| **Personal Website** | [allen.hutchison.org](https://allen.hutchison.org) |
+| **Social Media** | [Twitter](https://twitter.com/allen_hutchison) |
 | **GitHub Since** | 2010 |
 | **Public Repos** | 15 |
 | **Followers** | 157 |
@@ -241,6 +245,7 @@ This section provides detailed profiles of the 15 most significant contributors 
 - 157 followers show strong community recognition
 - 15 public repositories demonstrate comprehensive open source participation
 - Early GitHub registration indicates strong open source advocacy
+- Maintains personal website and actively shares technical insights on Twitter
 
 **Contribution Profile:** Likely responsible for cross-platform compatibility, performance optimization, or toolchain integration
 
@@ -253,8 +258,9 @@ This section provides detailed profiles of the 15 most significant contributors 
 | **GitHub** | [@chrstnb](https://github.com/chrstnb) |
 | **Location** | New York, NY |
 | **Company** | @google-gemini |
+| **Personal Website** | [christinebetts.com](https://christinebetts.com) |
+| **Social Media** | [Twitter](https://twitter.com/bettsoff) |
 | **Bio** | extensibility + accessibility for Gemini CLI 🌟 |
-| **GitHub Since** | Active |
 | **Public Repos** | 53 |
 | **Followers** | 90 |
 
@@ -264,6 +270,7 @@ This section provides detailed profiles of the 15 most significant contributors 
 - 53 public repositories show active open source community participation
 - Bio explicitly mentions "extensibility + accessibility" as core contribution area
 - 90 followers reflect recognition in these specific domains
+- Maintains personal technical website (christinebetts.com) showcasing professional work and achievements
 
 **Contribution Profile:** Plugin system, internationalization, and accessibility specialist
 
@@ -277,6 +284,7 @@ This section provides detailed profiles of the 15 most significant contributors 
 |-------------|---------|
 | **GitHub** | [@KeijiBranshi](https://github.com/KeijiBranshi) |
 | **Location** | Seattle, WA |
+| **Professional Profile** | [LinkedIn](https://www.linkedin.com/in/bkhorton) |
 | **Bio** | Hello, my name is Brandon. |
 | **Public Repos** | 24 |
 | **Followers** | 123 |
@@ -286,6 +294,7 @@ This section provides detailed profiles of the 15 most significant contributors 
 - 123 followers show influence in open source community
 - 24 public repositories demonstrate comprehensive open source engagement
 - Simple, friendly bio ("Hello, my name is Brandon") reflects humble approach
+- Maintains professional LinkedIn profile showcasing career development
 - Clusters with other Seattle core contributors, possibly same work environment
 
 **Contribution Profile:** Multi-functional contributor, involved in multiple feature modules
@@ -360,6 +369,7 @@ This section provides detailed profiles of the 15 most significant contributors 
 | **GitHub** | [@galz10](https://github.com/galz10) |
 | **Location** | Seattle, WA |
 | **Company** | Google |
+| **Social Media** | [Twitter](https://twitter.com/galdawave) |
 | **Bio** | Engineering @ Google Cloud |
 | **Public Repos** | 48 |
 | **Followers** | 46 |
@@ -369,6 +379,7 @@ This section provides detailed profiles of the 15 most significant contributors 
 - Based in Seattle office with other core contributors
 - 48 public repositories and 46 followers show cloud computing domain involvement
 - "Engineering @ Google Cloud" indicates professional direction
+- Actively shares cloud computing and Gemini-related content on Twitter (@galdawave)
 - Likely responsible for Gemini CLI and Google Cloud services integration
 
 **Contribution Profile:** Google Cloud integration specialist, responsible for cloud-related features and documentation
