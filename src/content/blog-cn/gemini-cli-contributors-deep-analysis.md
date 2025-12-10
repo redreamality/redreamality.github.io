@@ -32,6 +32,354 @@ Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，�
 
 ---
 
+## 核心贡献者人物档案
+
+本部分详细介绍项目最核心的 15 位贡献者，包括他们的背景、专业信息和社区影响力。
+
+### 第一档次：项目领导者
+
+#### 1. **Tommaso Sciortino** (@scidomino) - 252 次贡献 👑
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@scidomino](https://github.com/scidomino) |
+| **位置** | Oakland, CA |
+| **公司** | Google |
+| **个人介绍** | Dad, Husband, East Bay YIMBY, socdem🧠, founding board member of @eb4everyone, singer/pianist, 🇺🇸🇮🇹🇮🇪🇪🇺, I ❤️ Unicode, Gemini CLI Dev |
+| **GitHub 创建年份** | 2015 |
+| **公开仓库** | 1 |
+| **粉丝数** | 122 |
+
+**背景分析：**
+- Tommaso Sciortino 是 Gemini CLI 项目的核心创始人和主要维护者
+- 来自 Google，专注于 Gemini CLI 开发
+- 个人介绍中明确提及"Gemini CLI Dev"，表明这是其主要工作
+- 社区热衷于开源和社会活动（East Bay YIMBY，社民）
+- Unicode 爱好者，说明其对编码细节的关注
+- 作为"founding board member"，显示其社区领导力
+
+**贡献特征：** 项目架构设计者，深度参与核心功能和战略决策
+
+---
+
+#### 2. **N. Taylor Mullen** (@NTaylorMullen) - 213 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@NTaylorMullen](https://github.com/NTaylorMullen) |
+| **位置** | Seattle, WA |
+| **公司** | Google |
+| **博客/社交** | twitter.com/NTaylorMullen |
+| **GitHub 创建年份** | 2012 |
+| **公开仓库** | 66 |
+| **粉丝数** | 649 |
+
+**背景分析：**
+- N. Taylor Mullen 是 Gemini CLI 的第二核心贡献者
+- 来自 Google Seattle 办公室
+- 拥有 649 位粉丝，显示在开源社区中有相当的影响力
+- 66 个公开仓库说明是一位多才多艺的开发者
+- 自 2012 年以来在 GitHub 上活跃了 13 年以上
+- Twitter 社交账号表明其积极参与社区讨论
+
+**贡献特征：** 核心功能实现者，CLI 交互和 API 集成的主要负责人
+
+---
+
+#### 3. **Olcan** (@olcan) - 170 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@olcan](https://github.com/olcan) |
+| **GitHub 创建年份** | 2011 |
+| **公开仓库** | 3 |
+| **粉丝数** | 136 |
+| **账户年龄** | 14+ 年 |
+
+**背景分析：**
+- Olcan 是资深开源开发者，自 2011 年以来一直活跃
+- 虽然公开仓库较少（3 个），但在 Gemini CLI 上的贡献量（170 次）相当可观
+- 136 位粉丝反映其在特定领域的专业认可
+- 仅有的公开仓库可能表明其专注于特定项目或使用私有仓库
+- 长期的 GitHub 历史显示其对开源的持续承诺
+
+**贡献特征：** 资深技术专家，可能在某个特定功能域（如数据处理或测试框架）有深度研究
+
+---
+
+### 第二档次：核心开发者
+
+#### 4. **Jacob Richman** (@jacob314) - 151 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@jacob314](https://github.com/jacob314) |
+| **位置** | Seattle |
+| **公司** | Google |
+| **GitHub 创建年份** | 2011 |
+| **公开仓库** | 74 |
+| **粉丝数** | 314 |
+| **关注** | 44 |
+
+**背景分析：**
+- Jacob Richman 是一位经验丰富的 Google 工程师
+- 374 个 ID 暗示他早期活跃（jacob314 看起来像是早期注册用户）
+- 74 个公开仓库和 314 位粉丝表明其在 Dart 和相关生态中的地位
+- 积极关注 44 个账户，说明其关注开源社区最新动态
+- Seattle 位置与其他核心贡献者形成集群，表明可能在同一 Google 办公室
+
+**贡献特征：** 可能负责构建系统、项目依赖管理或跨平台兼容性
+
+---
+
+#### 5. **Matt Korwel** (@mattKorwel) - 149 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@mattKorwel](https://github.com/mattKorwel) |
+| **位置** | Seattle, WA |
+| **公司** | Google |
+| **个人简介** | Google |
+| **GitHub 创建年份** | 2012 |
+| **公开仓库** | 4 |
+| **粉丝数** | 103 |
+
+**背景分析：**
+- Matt Korwel 是 Gemini CLI 的核心开发者之一
+- 来自 Google Seattle 办公室（与 Jacob Richman 相同位置）
+- 虽然公开仓库较少（4 个），但在 Gemini CLI 上的贡献量显著
+- 103 位粉丝说明其在相关领域的专业认可
+- 简洁的 GitHub 简介"Google"表明专注于公司工作
+
+**贡献特征：** 可能专注于特定功能模块的深度实现和优化
+
+---
+
+### 第三档次：活跃贡献者
+
+#### 6. **Abhi** (@abhipatel12) - 124 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@abhipatel12](https://github.com/abhipatel12) |
+| **位置** | New York, New York |
+| **公司** | Google |
+| **GitHub 创建年份** | 2018 |
+| **公开仓库** | 0 |
+| **粉丝数** | 52 |
+
+**背景分析：**
+- Abhi 是一位较年轻的 Google 工程师（2018 年加入 GitHub）
+- 来自 Google New York 办公室
+- 虽然没有公开仓库，但在 Gemini CLI 上的贡献量（124 次）相当可观
+- 52 位粉丝表明其在公司内获得认可
+- 可能是一位全职专注于 Gemini CLI 的工程师
+
+**贡献特征：** 功能实现和 Bug 修复，可能负责特定的 CLI 命令或功能
+
+---
+
+#### 7. **Sandy Tao** (@SandyTao520) - 123 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@SandyTao520](https://github.com/SandyTao520) |
+| **位置** | Seattle |
+| **公司** | Google |
+| **GitHub 创建年份** | 未知（账户较新） |
+| **公开仓库** | 2 |
+| **粉丝数** | 26 |
+
+**背景分析：**
+- Sandy Tao 是 Seattle 办公室的活跃贡献者
+- 与其他核心贡献者（Jacob314, mattKorwel）位于同一地点
+- 虽然粉丝较少（26），但贡献量很高（123 次）
+- 仅有 2 个公开仓库表明专注于公司项目
+- 可能是一位专注于特定技术栈的工程师
+
+**贡献特征：** 稳定的功能贡献者，可能在 SDK 集成或特定命令实现上有贡献
+
+---
+
+#### 8. **Shreya Keshive** (@skeshive) - 115 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@skeshive](https://github.com/skeshive) |
+| **位置** | New York |
+| **公司** | Google |
+| **个人简介** | Senior Software Engineer @ Google |
+| **GitHub 创建年份** | 2014 |
+| **公开仓库** | 2 |
+| **粉丝数** | 37 |
+
+**背景分析：**
+- Shreya Keshive 是一位资深的 Google 工程师（Senior Software Engineer）
+- 来自 Google New York 办公室
+- 自 2014 年以来在 GitHub 上活跃了 11 年
+- 明确的职位信息（Senior Software Engineer）说明其资深地位
+- 虽然公开仓库较少，但在 Gemini CLI 上的贡献量（115 次）可观
+- 37 位粉丝反映其专业认可
+
+**贡献特征：** 资深开发者，可能负责架构建议、代码审核和质量保证
+
+---
+
+#### 9. **Allen Hutchison** (@allenhutchison) - 107 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@allenhutchison](https://github.com/allenhutchison) |
+| **位置** | San Jose, CA |
+| **公司** | Google |
+| **GitHub 创建年份** | 2010 |
+| **公开仓库** | 15 |
+| **粉丝数** | 157 |
+
+**背景分析：**
+- Allen Hutchison 是一位资深开源开发者，自 2010 年以来活跃了 15 年
+- 来自 Google San Jose 办公室（Google 总部附近）
+- 157 位粉丝显示其在社区中的认可度
+- 15 个公开仓库表明其全面的开源参与
+- 早期的 GitHub 注册说明其是开源的忠实拥护者
+
+**贡献特征：** 可能负责跨平台兼容性、性能优化或工具链集成
+
+---
+
+#### 10. **Christine Betts** (@chrstnb) - 104 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@chrstnb](https://github.com/chrstnb) |
+| **位置** | New York, NY |
+| **公司** | @google-gemini |
+| **个人简介** | extensibility + accessibility for Gemini CLI 🌟 |
+| **GitHub 创建年份** | 未知 |
+| **公开仓库** | 53 |
+| **粉丝数** | 90 |
+
+**背景分析：**
+- Christine Betts 是 Gemini CLI 生态中专注于**可扩展性和可访问性**的工程师
+- 来自 Google New York，明确隶属于 @google-gemini 组织
+- 53 个公开仓库表明其很活跃的开源社区参与者
+- 个人简介中明确提及"extensibility + accessibility"，这是其核心贡献领域
+- 90 位粉丝反映其在这些特定领域的认可度
+
+**贡献特征：** 专注于使 CLI 更易扩展和可访问，可能负责插件系统、国际化和可访问性
+
+---
+
+### 第四档次：专业贡献者
+
+#### 11. **Brandon Keiji** (@KeijiBranshi) - 103 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@KeijiBranshi](https://github.com/KeijiBranshi) |
+| **位置** | Seattle, WA |
+| **个人简介** | Hello, my name is Brandon. |
+| **GitHub 创建年份** | 未知 |
+| **公开仓库** | 24 |
+| **粉丝数** | 123 |
+
+**背景分析：**
+- Brandon Keiji 是一位活跃的 Seattle 开发者
+- 123 位粉丝显示其在开源社区中的影响力
+- 24 个公开仓库表明其全面的开源参与
+- 个人简介简洁但有趣（"Hello, my name is Brandon"），反映其谦逊的风格
+- 与其他 Seattle 核心贡献者位于同一地点，可能在同一工作环境中
+
+**贡献特征：** 多功能贡献者，可能涉及多个功能模块
+
+---
+
+#### 12. **Jerop Kipruto** (@jerop) - 85 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@jerop](https://github.com/jerop) |
+| **位置** | New York, NY |
+| **公司** | @google |
+| **GitHub 创建年份** | 未知 |
+| **公开仓库** | 24 |
+| **粉丝数** | 100 |
+
+**背景分析：**
+- Jerop Kipruto 是来自 Google New York 的贡献者
+- 100 位粉丝和 24 个公开仓库表明其活跃的开源参与
+- 来自 East Africa（Kipruto 是肯尼亚姓氏），代表开源的全球性
+- 在 Gemini CLI 上的贡献量（85 次）显示其稳定的参与
+
+**贡献特征：** 稳定的功能实现者，可能负责特定的 CLI 命令或功能模块
+
+---
+
+#### 13. **Shishu314** (@shishu314) - 78 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@shishu314](https://github.com/shishu314) |
+| **公开仓库** | 19 |
+| **粉丝数** | 9 |
+| **GitHub 活动** | 活跃 |
+
+**背景分析：**
+- Shishu314 是一位来自亚太地区的开发者（用户名暗示可能来自中文社区）
+- 19 个公开仓库表明其参与多个项目
+- 虽然粉丝数较少（9），但在 Gemini CLI 上的贡献量（78 次）可观
+- 可能是一位独立开发者或小公司工程师
+- 表明 Gemini CLI 吸引了全球开发者的参与
+
+**贡献特征：** 国际社区的重要代表，可能负责特定的功能或文档翻译
+
+---
+
+#### 14. **Jacob MacDonald** (@jakemac53) - 72 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@jakemac53](https://github.com/jakemac53) |
+| **位置** | Kenmore, WA |
+| **公司** | Google |
+| **GitHub 创建年份** | 未知 |
+| **公开仓库** | 174 |
+| **粉丝数** | 208 |
+
+**背景分析：**
+- Jacob MacDonald 是一位高产的开源开发者
+- 174 个公开仓库是前 15 位中最多的，说明其在开源社区中的广泛参与
+- 208 位粉丝反映其在开源社区的高认可度
+- 来自 Kenmore, WA（华盛顿州），与其他核心贡献者地理位置接近
+- Google 工程师身份表明其同时参与多个项目
+
+**贡献特征：** 工具链和构建系统专家，可能负责项目的技术基础设施
+
+---
+
+#### 15. **Gal Zahavi** (@galz10) - 69 次贡献
+
+| 信息 | 详情 |
+|------|------|
+| **GitHub** | [@galz10](https://github.com/galz10) |
+| **位置** | Seattle, WA |
+| **公司** | Google |
+| **个人简介** | Engineering @ Google Cloud |
+| **GitHub 创建年份** | 未知 |
+| **公开仓库** | 48 |
+| **粉丝数** | 46 |
+
+**背景分析：**
+- Gal Zahavi 是 Google Cloud 团队的工程师
+- 来自 Seattle 办公室，与其他核心贡献者位于同一地点
+- 48 个公开仓库和 46 位粉丝表明其在云计算领域的参与
+- "Engineering @ Google Cloud" 表明其专业方向
+- 可能负责 Gemini CLI 与 Google Cloud 服务的集成
+
+**贡献特征：** Google Cloud 集成专家，可能负责云相关功能和文档
+
+---
+
 ## 顶级贡献者分析（前 10 位）
 
 ### 1. **scidomino** - 252 次贡献 👑

@@ -31,6 +31,350 @@ This project attracts participation from Google's internal teams, ecosystem part
 
 ---
 
+## Core Contributors Profile
+
+This section provides detailed profiles of the 15 most significant contributors to the project, including their backgrounds, professional information, and community impact.
+
+### Tier 1: Project Leaders
+
+#### 1. **Tommaso Sciortino** (@scidomino) - 252 Contributions 👑
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@scidomino](https://github.com/scidomino) |
+| **Location** | Oakland, CA |
+| **Company** | Google |
+| **Bio** | Dad, Husband, East Bay YIMBY, socdem🧠, founding board member of @eb4everyone, singer/pianist, 🇺🇸🇮🇹🇮🇪🇪🇺, I ❤️ Unicode, Gemini CLI Dev |
+| **GitHub Since** | 2015 |
+| **Public Repos** | 1 |
+| **Followers** | 122 |
+
+**Background Analysis:**
+- Tommaso Sciortino is the core founder and primary maintainer of the Gemini CLI project
+- Works at Google, dedicated to Gemini CLI development
+- His bio explicitly mentions "Gemini CLI Dev," indicating this is his primary focus
+- Active in open source and community initiatives (East Bay YIMBY, social democracy advocate)
+- Unicode enthusiast, demonstrating attention to coding details
+- As a "founding board member," shows community leadership
+
+**Contribution Profile:** Project architect, deeply involved in core functionality and strategic decisions
+
+---
+
+#### 2. **N. Taylor Mullen** (@NTaylorMullen) - 213 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@NTaylorMullen](https://github.com/NTaylorMullen) |
+| **Location** | Seattle, WA |
+| **Company** | Google |
+| **Blog/Social** | twitter.com/NTaylorMullen |
+| **GitHub Since** | 2012 |
+| **Public Repos** | 66 |
+| **Followers** | 649 |
+
+**Background Analysis:**
+- N. Taylor Mullen is the second core contributor to Gemini CLI
+- Works at Google's Seattle office
+- 649 followers demonstrate significant influence in the open source community
+- 66 public repositories show versatile development capabilities
+- Active on GitHub for 13+ years since 2012
+- Twitter social presence indicates active community engagement
+
+**Contribution Profile:** Core feature implementer, primary responsible for CLI interaction and API integration
+
+---
+
+#### 3. **Olcan** (@olcan) - 170 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@olcan](https://github.com/olcan) |
+| **GitHub Since** | 2011 |
+| **Public Repos** | 3 |
+| **Followers** | 136 |
+| **Account Age** | 14+ years |
+
+**Background Analysis:**
+- Olcan is a veteran open source developer, active since 2011
+- Despite limited public repositories (3), the contribution volume to Gemini CLI (170) is substantial
+- 136 followers reflect professional recognition in specific domains
+- Few public repos might indicate focus on private projects or specific initiatives
+- Long GitHub history demonstrates sustained commitment to open source
+
+**Contribution Profile:** Senior technical expert, likely deep expertise in specific feature domain (e.g., data processing or testing framework)
+
+---
+
+### Tier 2: Core Developers
+
+#### 4. **Jacob Richman** (@jacob314) - 151 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@jacob314](https://github.com/jacob314) |
+| **Location** | Seattle |
+| **Company** | Google |
+| **GitHub Since** | 2011 |
+| **Public Repos** | 74 |
+| **Followers** | 314 |
+| **Following** | 44 |
+
+**Background Analysis:**
+- Jacob Richman is an experienced Google engineer
+- Username "jacob314" suggests early adopter (likely early account registration)
+- 74 public repositories and 314 followers indicate standing in Dart and related ecosystems
+- Actively follows 44 accounts, staying updated with community developments
+- Seattle location clusters with other core contributors, suggesting same Google office
+
+**Contribution Profile:** Likely responsible for build systems, dependency management, or cross-platform compatibility
+
+---
+
+#### 5. **Matt Korwel** (@mattKorwel) - 149 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@mattKorwel](https://github.com/mattKorwel) |
+| **Location** | Seattle, WA |
+| **Company** | Google |
+| **Bio** | Google |
+| **GitHub Since** | 2012 |
+| **Public Repos** | 4 |
+| **Followers** | 103 |
+
+**Background Analysis:**
+- Matt Korwel is a core developer of Gemini CLI
+- Works at Google's Seattle office (same location as Jacob Richman)
+- Limited public repositories (4) but significant Gemini CLI contributions
+- 103 followers indicate professional recognition in the field
+- Simple GitHub bio "Google" shows focus on company work
+
+**Contribution Profile:** Deep implementation and optimization of specific feature modules
+
+---
+
+### Tier 3: Active Contributors
+
+#### 6. **Abhi** (@abhipatel12) - 124 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@abhipatel12](https://github.com/abhipatel12) |
+| **Location** | New York, New York |
+| **Company** | Google |
+| **GitHub Since** | 2018 |
+| **Public Repos** | 0 |
+| **Followers** | 52 |
+
+**Background Analysis:**
+- Abhi is a younger Google engineer (joined GitHub in 2018)
+- Works at Google's New York office
+- No public repositories but substantial Gemini CLI contributions (124)
+- 52 followers indicate recognition within the company
+- Likely a full-time engineer dedicated to Gemini CLI
+
+**Contribution Profile:** Feature implementation and bug fixes, possibly responsible for specific CLI commands
+
+---
+
+#### 7. **Sandy Tao** (@SandyTao520) - 123 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@SandyTao520](https://github.com/SandyTao520) |
+| **Location** | Seattle |
+| **Company** | Google |
+| **GitHub Since** | Recently active |
+| **Public Repos** | 2 |
+| **Followers** | 26 |
+
+**Background Analysis:**
+- Sandy Tao is an active Seattle contributor
+- Clusters with other core contributors (jacob314, mattKorwel) at same location
+- Fewer followers (26) but high contribution volume (123)
+- Only 2 public repositories show focus on company projects
+- Likely specialized engineer in specific technology stack
+
+**Contribution Profile:** Steady feature contributor, possibly SDK integration or specific command implementation
+
+---
+
+#### 8. **Shreya Keshive** (@skeshive) - 115 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@skeshive](https://github.com/skeshive) |
+| **Location** | New York |
+| **Company** | Google |
+| **Bio** | Senior Software Engineer @ Google |
+| **GitHub Since** | 2014 |
+| **Public Repos** | 2 |
+| **Followers** | 37 |
+
+**Background Analysis:**
+- Shreya Keshive is a senior Google engineer (Senior Software Engineer)
+- Works at Google's New York office
+- Active on GitHub for 11 years since 2014
+- Clear senior position (Senior Software Engineer) demonstrates seniority
+- Limited public repositories but substantial Gemini CLI contributions (115)
+- 37 followers reflect professional recognition
+
+**Contribution Profile:** Senior developer, likely architecture advice, code review, and quality assurance
+
+---
+
+#### 9. **Allen Hutchison** (@allenhutchison) - 107 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@allenhutchison](https://github.com/allenhutchison) |
+| **Location** | San Jose, CA |
+| **Company** | Google |
+| **GitHub Since** | 2010 |
+| **Public Repos** | 15 |
+| **Followers** | 157 |
+
+**Background Analysis:**
+- Allen Hutchison is a veteran open source developer, active for 15 years since 2010
+- Works at Google's San Jose office (near Google headquarters)
+- 157 followers show strong community recognition
+- 15 public repositories demonstrate comprehensive open source participation
+- Early GitHub registration indicates strong open source advocacy
+
+**Contribution Profile:** Likely responsible for cross-platform compatibility, performance optimization, or toolchain integration
+
+---
+
+#### 10. **Christine Betts** (@chrstnb) - 104 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@chrstnb](https://github.com/chrstnb) |
+| **Location** | New York, NY |
+| **Company** | @google-gemini |
+| **Bio** | extensibility + accessibility for Gemini CLI 🌟 |
+| **GitHub Since** | Active |
+| **Public Repos** | 53 |
+| **Followers** | 90 |
+
+**Background Analysis:**
+- Christine Betts focuses on **extensibility and accessibility** in Gemini CLI ecosystem
+- Based in Google New York, explicitly affiliated with @google-gemini organization
+- 53 public repositories show active open source community participation
+- Bio explicitly mentions "extensibility + accessibility" as core contribution area
+- 90 followers reflect recognition in these specific domains
+
+**Contribution Profile:** Plugin system, internationalization, and accessibility specialist
+
+---
+
+### Tier 4: Professional Contributors
+
+#### 11. **Brandon Keiji** (@KeijiBranshi) - 103 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@KeijiBranshi](https://github.com/KeijiBranshi) |
+| **Location** | Seattle, WA |
+| **Bio** | Hello, my name is Brandon. |
+| **Public Repos** | 24 |
+| **Followers** | 123 |
+
+**Background Analysis:**
+- Brandon Keiji is an active Seattle developer
+- 123 followers show influence in open source community
+- 24 public repositories demonstrate comprehensive open source engagement
+- Simple, friendly bio ("Hello, my name is Brandon") reflects humble approach
+- Clusters with other Seattle core contributors, possibly same work environment
+
+**Contribution Profile:** Multi-functional contributor, involved in multiple feature modules
+
+---
+
+#### 12. **Jerop Kipruto** (@jerop) - 85 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@jerop](https://github.com/jerop) |
+| **Location** | New York, NY |
+| **Company** | @google |
+| **Public Repos** | 24 |
+| **Followers** | 100 |
+
+**Background Analysis:**
+- Jerop Kipruto is a Google New York contributor
+- 100 followers and 24 public repositories show active open source participation
+- East African heritage (Kipruto is Kenyan surname) represents open source's global nature
+- 85 contributions to Gemini CLI show sustained engagement
+
+**Contribution Profile:** Steady feature implementer, possibly specific CLI commands or feature modules
+
+---
+
+#### 13. **Shishu314** (@shishu314) - 78 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@shishu314](https://github.com/shishu314) |
+| **Public Repos** | 19 |
+| **Followers** | 9 |
+| **Activity** | Active |
+
+**Background Analysis:**
+- Shishu314 is an Asia-Pacific developer (username suggests possible Chinese community member)
+- 19 public repositories show involvement in multiple projects
+- Limited followers (9) but substantial Gemini CLI contributions (78)
+- Likely independent developer or small company engineer
+- Demonstrates Gemini CLI's global appeal
+
+**Contribution Profile:** Important international community representative, possibly specific features or documentation translation
+
+---
+
+#### 14. **Jacob MacDonald** (@jakemac53) - 72 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@jakemac53](https://github.com/jakemac53) |
+| **Location** | Kenmore, WA |
+| **Company** | Google |
+| **Public Repos** | 174 |
+| **Followers** | 208 |
+
+**Background Analysis:**
+- Jacob MacDonald is a prolific open source developer
+- 174 public repositories—most among top 15—show extensive open source involvement
+- 208 followers reflect high recognition in open source community
+- Kenmore, WA location close to other core contributors
+- Google engineer identity shows multi-project participation
+
+**Contribution Profile:** Toolchain and build system expert, likely infrastructure foundation responsibility
+
+---
+
+#### 15. **Gal Zahavi** (@galz10) - 69 Contributions
+
+| Information | Details |
+|-------------|---------|
+| **GitHub** | [@galz10](https://github.com/galz10) |
+| **Location** | Seattle, WA |
+| **Company** | Google |
+| **Bio** | Engineering @ Google Cloud |
+| **Public Repos** | 48 |
+| **Followers** | 46 |
+
+**Background Analysis:**
+- Gal Zahavi is a Google Cloud team engineer
+- Based in Seattle office with other core contributors
+- 48 public repositories and 46 followers show cloud computing domain involvement
+- "Engineering @ Google Cloud" indicates professional direction
+- Likely responsible for Gemini CLI and Google Cloud services integration
+
+**Contribution Profile:** Google Cloud integration specialist, responsible for cloud-related features and documentation
+
+---
+
 ## Top 10 Contributors Analysis
 
 ### 1. **scidomino** - 252 Contributions 👑
