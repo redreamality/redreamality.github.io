@@ -41,9 +41,9 @@ But here's a very important detail: create a `.gitignore` file in the repository
 My `.gitignore` file typically contains:
 
 ```
+.obsidian/appearance.json
 .obsidian/workspace.json
-.obsidian/workspace
-.obsidian/plugins/workspace.json
+.obsidian/workspace-mobile.json
 ```
 
 ### Automated Sync Plugin
