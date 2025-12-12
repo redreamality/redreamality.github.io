@@ -251,7 +251,6 @@ if (activeTab.id) {
 
 WXT makes browser extension development more enjoyable and productive by providing modern tooling and excellent developer experience. With its file-based routing, automatic manifest generation, and cross-browser support, you can focus on building great features instead of dealing with configuration complexity.
 
-<!-- Image reference removed due to missing file -->
-<!-- ![Browser Extension Development](chrome_2025-03-11_18-27-41.png) -->
+![Browser Extension Development Screenshot](../assets/browser-extension-development/chrome_2025-03-11_18-27-41.png)
 
 Start building your next browser extension with WXT today!

@@ -188,8 +188,7 @@ lang: 'en'
 
 ## 5. References
 
-<!-- Image reference removed due to missing file -->
-<!-- ![Prompt-To-Agent: Create custom engineering agents for your code](image.png) -->
+![Prompt-To-Agent: Create custom engineering agents for your code](../assets/multi-agent-system/image.png)
 
 
 
