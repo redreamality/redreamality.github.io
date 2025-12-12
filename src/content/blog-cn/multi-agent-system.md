@@ -91,15 +91,15 @@ lang: 'zh'
 - 基准测试
   - 公开的benchmark\
     - ToolBench:  GitHub - OpenBMB/ToolBench: [ICLR'24 spotlight] An open platform for training, serving, and evaluati\
-      大规模工具调用指令数据集，支持多步推理与真实API集成	
+      大规模工具调用指令数据集，支持多步推理与真实API集成    
     - SWE-bench: https://github.com/princeton-nlp/SWE-bench\
-      评估LLM解决GitHub问题的基准，含2,294个Python代码修复任务	
+      评估LLM解决GitHub问题的基准，含2,294个Python代码修复任务    
     - Mind2Web: https://huggingface.co/datasets/osunlp/Mind2Web\
-      通用网页交互数据集，覆盖多样化DOM操作与用户轨迹	
+      通用网页交互数据集，覆盖多样化DOM操作与用户轨迹    
     - WebArena: GitHub - web-arena-x/webarena: Code repo for "WebArena: A Realistic Web Environment for Building Aut\
-      真实网页环境测试平台，集成4个应用与工具库		
+      真实网页环境测试平台，集成4个应用与工具库        
     - AgentInstruct: https://huggingface.co/datasets/THUDM/AgentInstruct\
-      高质量智能体指令数据集，增强模型任务泛化能力		
+      高质量智能体指令数据集，增强模型任务泛化能力        
       
 - 评测指标
   - 性能指标
@@ -186,5 +186,4 @@ lang: 'zh'
 
 ## 5. 参考文献
 
-<!-- Image reference removed due to missing file -->
-<!-- ![Prompt-To-Agent: Create custom engineering agents for your code](image.png) -->
+![Prompt-To-Agent: 为您的代码创建自定义工程智能体](../assets/multi-agent-system/image.png)
