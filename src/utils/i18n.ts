@@ -18,6 +18,7 @@ export const i18nConfig: I18nConfig = {
       blog: '博客',
       talks: '演讲',
       projects: '项目',
+      readings: '阅读收藏',
       about: '关于',
       tags: '标签',
       
@@ -56,6 +57,7 @@ export const i18nConfig: I18nConfig = {
       blog: 'Blog',
       talks: 'Talks',
       projects: 'Projects',
+      readings: 'My Readings',
       about: 'About',
       tags: 'Tags',
       
@@ -170,6 +172,19 @@ export async function getProjects(lang: Language) {
     return projects.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   } catch (error) {
     // If collection doesn't exist, return empty array
+    return [];
+  }
+}
+
+/**
+ * Get readings for a specific language
+ */
+export async function getReadings(lang: Language) {
+  try {
+    const collectionName = lang === 'zh' ? 'readings-cn' : 'readings-en';
+    const readings = await getCollection(collectionName);
+    return readings.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  } catch (error) {
     return [];
   }
 }
