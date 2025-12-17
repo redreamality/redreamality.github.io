@@ -1,0 +1,102 @@
+name: Generate Readings
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'src/pages/readings/index.mdx'
+  workflow_dispatch:
+    inputs:
+      force_regenerate:
+        description: 'Regenerate existing notes even if files already exist'
+        required: false
+        type: boolean
+        default: false
+      include_existing:
+        description: 'Process all bookmarks (default: only missing)'
+        required: false
+        type: boolean
+        default: false
+      max_items:
+        description: 'Maximum number of bookmarks to process'
+        required: false
+        type: number
+        default: 50
+      auto_commit:
+        description: 'Commit changes directly to master (otherwise create a PR)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate-readings:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.3
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate reading notes
+        env:
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MODEL: ${{ secrets.MODEL }}
+          FORCE_REGENERATE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.force_regenerate || 'false' }}
+          INCLUDE_EXISTING: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.include_existing || 'false' }}
+          MAX_ITEMS: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.max_items || '50' }}
+        run: |
+          ARGS="--max=${MAX_ITEMS}"
+          if [ "${FORCE_REGENERATE}" = "true" ]; then
+            ARGS="--force ${ARGS}"
+          fi
+          if [ "${INCLUDE_EXISTING}" = "true" ]; then
+            ARGS="--all ${ARGS}"
+          fi
+          node scripts/readings/generate-readings.mjs ${ARGS}
+
+      - name: Commit changes
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.auto_commit == 'true' }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "chore(readings): generate reading notes" || echo "No changes to commit"
+          git push
+
+      - name: Create Pull Request
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.auto_commit != 'true' }}
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(readings): generate reading notes"
+          title: "📚 Generate reading notes"
+          body: |
+            This PR was created automatically.
+
+            - Source of truth: `src/pages/readings/index.mdx`
+            - Generator: `scripts/readings/generate-readings.mjs`
+
+            If `OPENAI_API_KEY` is configured in repository secrets, the workflow will crawl, summarize, and translate into EN/ZH Markdown notes.
+          branch: readings/generate-${{ github.run_number }}
+          delete-branch: true

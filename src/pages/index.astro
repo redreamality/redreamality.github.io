@@ -27,6 +27,8 @@ const content = {
     blogDesc: "Read Redreamality's technical blog and insights",
     talksTitle: "Presentations",
     talksDesc: "Watch Redreamality's technical presentations and sharing content",
+    readingsTitle: "My Readings",
+    readingsDesc: "A curated list of links I saved, with notes and summaries",
     recentBlogTitle: "Recent Blog Posts",
     recentTalksTitle: "Recent Presentations",
     viewAllPosts: "View All Posts",
@@ -41,6 +43,8 @@ const content = {
     blogDesc: "阅读Redreamality的技术博客和心得分享",
     talksTitle: "演讲分享",
     talksDesc: "观看Redreamality的技术演讲和分享内容",
+    readingsTitle: "阅读收藏",
+    readingsDesc: "我收藏的链接清单，以及自动生成的摘要/笔记",
     recentBlogTitle: "最新博客",
     recentTalksTitle: "最新演讲",
     viewAllPosts: "查看全部",
@@ -57,7 +61,7 @@ const basePath = lang === 'zh' ? '/cn' : '';
     <h1 class="text-4xl font-bold mb-4 dark:text-white">{currentContent.title}</h1>
     <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">{currentContent.subtitle}</p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12">
       <a href={`${basePath}/projects`} class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{currentContent.projectsTitle}</h2>
         <p class="font-normal text-gray-700 dark:text-gray-400">{currentContent.projectsDesc}</p>
@@ -71,6 +75,11 @@ const basePath = lang === 'zh' ? '/cn' : '';
       <a href={`${basePath}/talks`} class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{currentContent.talksTitle}</h2>
         <p class="font-normal text-gray-700 dark:text-gray-400">{currentContent.talksDesc}</p>
+      </a>
+
+      <a href={`${basePath}/readings`} class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{currentContent.readingsTitle}</h2>
+        <p class="font-normal text-gray-700 dark:text-gray-400">{currentContent.readingsDesc}</p>
       </a>
     </div>
 
