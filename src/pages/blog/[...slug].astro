@@ -1,41 +1,16 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getBlogPosts, getLocalizedContent, t, type Language } from '../../utils/i18n';
-import TableOfContents from '../../components/TableOfContents.astro';
+import { type Language } from '../../utils/i18n';
 
 export async function getStaticPaths() {
-  const paths = [];
-
-  // Get all blog posts for both languages
-  const enPosts = await getBlogPosts('en');
-  const zhPosts = await getBlogPosts('zh');
-
-  // Generate English paths (root)
-  for (const post of enPosts) {
-    paths.push({
-      params: { slug: post.slug },
-      props: { post, lang: 'en' }
-    });
-  }
-
-  // Generate Chinese paths (/cn/)
-  for (const post of zhPosts) {
-    paths.push({
-      params: { slug: `cn/${post.slug}` },
-      props: { post, lang: 'zh' }
-    });
-  }
-
-  return paths;
+  // Return empty array since we're redirecting all requests
+  return [];
 }
 
-interface Props {
-  post: any;
-  lang: Language;
-}
+// Get the slug from the URL
+const { slug } = Astro.params;
 
-const { post, lang } = Astro.props;
-const { Content, headings } = await post.render();
+// Redirect to the new garden structure
+return Astro.redirect(`/garden/blog/${slug}`, 301);
 
 // Language-specific content
 const content = {

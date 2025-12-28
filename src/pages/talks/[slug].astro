@@ -1,26 +1,11 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getTalks, type Language } from '../../utils/i18n';
+import { type Language } from '../../utils/i18n';
 
-// This is the English talks detail page (/talks/slug path)
+// Get the slug from the URL
+const { slug } = Astro.params;
 
-export async function getStaticPaths() {
-  // Get English talks
-  const enTalks = await getTalks('en');
-
-  return enTalks.map(talk => ({
-    params: { slug: talk.slug },
-    props: { talk, lang: 'en' as Language },
-  }));
-}
-
-interface Props {
-  talk: any;
-  lang: Language;
-}
-
-const { talk, lang } = Astro.props;
-const { Content } = await talk.render();
+// Redirect to the new garden structure
+return Astro.redirect(`/garden/talks/${slug}`, 301);
 
 // Language-specific content
 const content = {

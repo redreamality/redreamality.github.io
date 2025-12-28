@@ -1,35 +1,11 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import { getTalks, type Language } from '../../../utils/i18n';
+import { type Language } from '../../../utils/i18n';
 
 // This is the Chinese talks listing (/cn/talks path)
 const lang: Language = 'zh';
 
-// Get talks for current language
-const talks = await getTalks(lang);
-
-// Language-specific content
-const content = {
-  en: {
-    title: "Presentations",
-    subtitle: "Technical talks, conference presentations, and knowledge sharing sessions",
-    noTalksMessage: "No presentations available yet.",
-    viewDetails: "View Details",
-    presentedAt: "Presented at",
-    date: "Date"
-  },
-  zh: {
-    title: "演讲分享",
-    subtitle: "技术演讲、会议分享和知识交流活动",
-    noTalksMessage: "暂无演讲分享。",
-    viewDetails: "查看详情",
-    presentedAt: "演讲地点",
-    date: "日期"
-  }
-};
-
-const currentContent = content[lang];
-const basePath = lang === 'zh' ? '/cn' : '';
+// Redirect to the new garden structure
+return Astro.redirect('/cn/garden/talks', 301);
 ---
 
 <Layout title={lang === 'zh' ? '演讲' : 'Talks'}>

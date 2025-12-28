@@ -1,26 +1,16 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import { getTalks, type Language } from '../../../utils/i18n';
-
-// This is the Chinese talks detail page (/cn/talks/slug path)
+import { type Language } from '../../../utils/i18n';
 
 export async function getStaticPaths() {
-  // Get Chinese talks
-  const zhTalks = await getTalks('zh');
-  
-  return zhTalks.map(talk => ({
-    params: { slug: talk.slug },
-    props: { talk, lang: 'zh' as Language },
-  }));
+  // Return empty array since we're redirecting all requests
+  return [];
 }
 
-interface Props {
-  talk: any;
-  lang: Language;
-}
+// Get the slug from the URL
+const { slug } = Astro.params;
 
-const { talk, lang } = Astro.props;
-const { Content } = await talk.render();
+// Redirect to the new garden structure
+return Astro.redirect(`/cn/garden/talks/${slug}`, 301);
 
 // Language-specific content
 const content = {

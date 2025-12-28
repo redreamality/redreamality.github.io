@@ -1,38 +1,11 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getBlogPosts, getTags, t, type Language } from '../../utils/i18n';
+import { type Language } from '../../utils/i18n';
 
 // This is the English blog listing (/blog path)
 const lang: Language = 'en';
 
-// Get blog posts and tags for current language
-const posts = await getBlogPosts(lang);
-const tags = await getTags(lang);
-
-// Language-specific content
-const content = {
-  en: {
-    title: "Blog Articles",
-    subtitle: "Technical insights, tutorials, and thoughts on software development",
-    tagsTitle: "Browse by Tags",
-    noPostsMessage: "No blog posts available yet.",
-    readMore: "Read More",
-    publishedOn: "Published on",
-    author: "by"
-  },
-  zh: {
-    title: "博客文章",
-    subtitle: "技术见解、教程和软件开发思考",
-    tagsTitle: "按标签浏览",
-    noPostsMessage: "暂无博客文章。",
-    readMore: "阅读更多",
-    publishedOn: "发布于",
-    author: "作者"
-  }
-};
-
-const currentContent = content[lang];
-const basePath = lang === 'zh' ? '/cn' : '';
+// Redirect to the new garden structure
+return Astro.redirect('/garden/blog', 301);
 ---
 
 <Layout title={lang === 'zh' ? '博客' : 'Blog'}>

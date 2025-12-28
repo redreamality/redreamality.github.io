@@ -1,0 +1,129 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { t, type Language } from '../../../utils/i18n';
+
+// This is the Chinese garden landing page (/cn/garden path)
+const lang: Language = 'zh';
+
+const content = {
+  en: {
+    title: "Digital Garden",
+    subtitle: "A collection of thoughts, knowledge, and insights",
+    gardenDescription: "Welcome to my digital garden - a place where ideas grow and evolve over time.",
+    sections: {
+      blog: {
+        title: "Blog Articles",
+        description: "Technical insights, tutorials, and thoughts on software development. These are polished articles meant for public consumption.",
+        cta: "Explore Blog"
+      },
+      talks: {
+        title: "Presentations & Talks",
+        description: "Technical talks, conference presentations, and knowledge sharing sessions. These represent my public speaking engagements.",
+        cta: "View Talks"
+      },
+      questions: {
+        title: "Thoughtful Questions",
+        description: "Problems I've thought about deeply. In the LLM era, the most valuable human quality is asking meaningful questions.",
+        cta: "Browse Questions"
+      },
+      notes: {
+        title: "Reading Notes",
+        description: "Notes from my reading using the ROI reading method. These are structured insights from information I've consumed.",
+        cta: "Read Notes"
+      }
+    }
+  },
+  zh: {
+    title: "数字花园",
+    subtitle: "思想、知识和见解的集合",
+    gardenDescription: "欢迎来到我的数字花园 - 一个思想不断生长和演化的地方。",
+    sections: {
+      blog: {
+        title: "博客文章",
+        description: "技术见解、教程和软件开发思考。这些是经过打磨的文章，适合公开阅读。",
+        cta: "浏览博客"
+      },
+      talks: {
+        title: "演讲分享",
+        description: "技术演讲、会议分享和知识交流活动。这些代表我的公开演讲经历。",
+        cta: "查看演讲"
+      },
+      questions: {
+        title: "思考问题",
+        description: "我深入思考过的问题。在大模型时代，人最可贵的品质是提出有价值的问题。",
+        cta: "浏览问题"
+      },
+      notes: {
+        title: "阅读笔记",
+        description: "使用ROI阅读法整理的阅读笔记。这些是我消化信息后的结构化见解。",
+        cta: "阅读笔记"
+      }
+    }
+  }
+};
+
+const currentContent = content[lang];
+const basePath = lang === 'zh' ? '/cn' : '';
+---
+
+<Layout title={currentContent.title} description={currentContent.subtitle}>
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-8 text-center">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{currentContent.title}</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400 mb-2">{currentContent.subtitle}</p>
+        <p class="text-base text-gray-500 dark:text-gray-400">{currentContent.gardenDescription}</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Blog Section -->
+        <div class="bg-white border border-gray-200 rounded-lg shadow-md p-6 dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg transition-shadow">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">{currentContent.sections.blog.title}</h2>
+          <p class="text-gray-700 dark:text-gray-300 mb-4">{currentContent.sections.blog.description}</p>
+          <a href="{basePath}/garden/blog" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors">
+            {currentContent.sections.blog.cta}
+            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Talks Section -->
+        <div class="bg-white border border-gray-200 rounded-lg shadow-md p-6 dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg transition-shadow">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">{currentContent.sections.talks.title}</h2>
+          <p class="text-gray-700 dark:text-gray-300 mb-4">{currentContent.sections.talks.description}</p>
+          <a href="{basePath}/garden/talks" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors">
+            {currentContent.sections.talks.cta}
+            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Questions Section -->
+        <div class="bg-white border border-gray-200 rounded-lg shadow-md p-6 dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg transition-shadow">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">{currentContent.sections.questions.title}</h2>
+          <p class="text-gray-700 dark:text-gray-300 mb-4">{currentContent.sections.questions.description}</p>
+          <a href="{basePath}/garden/notes" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors">
+            {currentContent.sections.questions.cta}
+            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Notes Section -->
+        <div class="bg-white border border-gray-200 rounded-lg shadow-md p-6 dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg transition-shadow">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">{currentContent.sections.notes.title}</h2>
+          <p class="text-gray-700 dark:text-gray-300 mb-4">{currentContent.sections.notes.description}</p>
+          <a href="{basePath}/garden/notes" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors">
+            {currentContent.sections.notes.cta}
+            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
