@@ -335,5 +335,62 @@ ${data.language === 'zh' ? 'Consider creating an English version as well!' : 'Co
         `);
       }
     });
+
+    // Image paste support - convert pasted images to base64 markdown
+    const contentTextarea = document.getElementById('content') as HTMLTextAreaElement;
+    
+    contentTextarea?.addEventListener('paste', async (e: ClipboardEvent) => {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+
+      for (const item of items) {
+        if (item.type.indexOf('image') === 0) {
+          e.preventDefault();
+          
+          const file = item.getAsFile();
+          if (!file) continue;
+
+          try {
+            // Convert image to base64
+            const base64 = await fileToBase64(file);
+            
+            // Generate markdown image syntax
+            const imageSyntax = `![${file.name}](${base64})`;
+            
+            // Insert at cursor position
+            insertAtCursor(contentTextarea, imageSyntax);
+            
+            showMessage('Image pasted and converted to base64!', 'success');
+            setTimeout(() => messageDiv.classList.add('hidden'), 2000);
+          } catch (error) {
+            console.error('Error processing pasted image:', error);
+            showMessage('Failed to paste image', 'error');
+          }
+          
+          break;
+        }
+      }
+    });
+
+    // Convert file to base64 string
+    function fileToBase64(file: File): Promise<string> {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Insert text at cursor position in textarea
+    function insertAtCursor(textarea: HTMLTextAreaElement, text: string) {
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const value = textarea.value;
+      
+      textarea.value = value.substring(0, start) + text + value.substring(end);
+      textarea.selectionStart = textarea.selectionEnd = start + text.length;
+      textarea.focus();
+    }
   </script>
 </Layout>
