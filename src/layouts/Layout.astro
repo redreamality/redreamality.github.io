@@ -160,7 +160,7 @@ const languageCode = getLanguageCode(currentLang);
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                                     </svg>
                                 </a>
-                                <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg dark:bg-gray-800 hidden group-hover:block z-50">
+                                <div class="nav-dropdown absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg dark:bg-gray-800 z-50">
                                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                                         <li>
                                             <a href={currentLang === 'zh' ? '/cn/garden/blog' : '/garden/blog'} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('blog', currentLang)}</a>
@@ -209,11 +209,28 @@ const languageCode = getLanguageCode(currentLang);
     </body>
 </html>
 
+
 <style>
     html,
     body {
         margin: 0;
         width: 100%;
         min-height: 100vh;
+    }
+
+    .nav-dropdown {
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 300ms ease 500ms,
+            visibility 0s linear 800ms;
+    }
+
+    .group:hover .nav-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transition:
+            opacity 300ms ease 0ms,
+            visibility 0s linear 0ms;
     }
 </style>
