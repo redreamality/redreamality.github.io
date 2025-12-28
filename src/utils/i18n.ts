@@ -15,8 +15,11 @@ export const i18nConfig: I18nConfig = {
     zh: {
       // Navigation
       home: '首页',
+      garden: '花园',
       blog: '博客',
       talks: '演讲',
+      questions: '思考问题',
+      notes: '阅读笔记',
       projects: '项目',
       about: '关于',
       tags: '标签',
@@ -53,8 +56,11 @@ export const i18nConfig: I18nConfig = {
     en: {
       // Navigation
       home: 'Home',
+      garden: 'Garden',
       blog: 'Blog',
       talks: 'Talks',
+      questions: 'Questions',
+      notes: 'Notes',
       projects: 'Projects',
       about: 'About',
       tags: 'Tags',
@@ -160,6 +166,36 @@ export async function getTalks(lang: Language) {
 }
 
 /**
+ * Get questions for a specific language
+ */
+export async function getQuestions(lang: Language) {
+  try {
+    // Get language-specific collection
+    const collectionName = lang === 'zh' ? 'questions-cn' : 'questions-en';
+    const questions = await getCollection(collectionName);
+    return questions.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  } catch (error) {
+    // If collection doesn't exist, return empty array
+    return [];
+  }
+}
+
+/**
+ * Get notes for a specific language
+ */
+export async function getNotes(lang: Language) {
+  try {
+    // Get language-specific collection
+    const collectionName = lang === 'zh' ? 'notes-cn' : 'notes-en';
+    const notes = await getCollection(collectionName);
+    return notes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  } catch (error) {
+    // If collection doesn't exist, return empty array
+    return [];
+  }
+}
+
+/**
  * Get projects for a specific language
  */
 export async function getProjects(lang: Language) {
@@ -212,7 +248,7 @@ export async function getPostsByTag(tag: string, lang: Language) {
 /**
  * Check if content exists in both languages
  */
-export async function getTranslationStatus(slug: string, type: 'blog' | 'talks' | 'projects') {
+export async function getTranslationStatus(slug: string, type: 'blog' | 'talks' | 'projects' | 'questions' | 'notes') {
   const status = {
     zh: false,
     en: false,
@@ -221,12 +257,12 @@ export async function getTranslationStatus(slug: string, type: 'blog' | 'talks' 
 
   try {
     // Check Chinese version
-    const zhCollection = type === 'blog' ? 'blog-cn' : type === 'talks' ? 'talks-cn' : 'projects-cn';
+    const zhCollection = type === 'blog' ? 'blog-cn' : type === 'talks' ? 'talks-cn' : type === 'projects' ? 'projects-cn' : type === 'questions' ? 'questions-cn' : 'notes-cn';
     const zhPosts = await getCollection(zhCollection as any);
     status.zh = zhPosts.some(post => post.slug === slug);
 
     // Check English version
-    const enCollection = type === 'blog' ? 'blog-en' : type === 'talks' ? 'talks-en' : 'projects-en';
+    const enCollection = type === 'blog' ? 'blog-en' : type === 'talks' ? 'talks-en' : type === 'projects' ? 'projects-en' : type === 'questions' ? 'questions-en' : 'notes-en';
     const enPosts = await getCollection(enCollection as any);
     status.en = enPosts.some(post => post.slug === slug);
 
@@ -273,7 +309,7 @@ export async function generateI18nPaths<T>(
  */
 export async function getLocalizedContent(
   slug: string,
-  type: 'blog' | 'talks' | 'projects',
+  type: 'blog' | 'talks' | 'projects' | 'questions' | 'notes',
   lang: Language
 ): Promise<any> {
   try {

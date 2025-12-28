@@ -1,11 +1,35 @@
 ---
-import { type Language } from '../../utils/i18n';
+import Layout from '../../../../layouts/Layout.astro';
+import { getTalks, type Language } from '../../../../utils/i18n';
 
-// This is the English talks listing (/talks path)
-const lang: Language = 'en';
+// This is the Chinese talks listing (/cn/garden/talks path)
+const lang: Language = 'zh';
 
-// Redirect to the new garden structure
-return Astro.redirect('/garden/talks', 301);
+// Get talks for current language
+const talks = await getTalks(lang);
+
+// Language-specific content
+const content = {
+  en: {
+    title: "Presentations",
+    subtitle: "Technical talks, conference presentations, and knowledge sharing sessions",
+    noTalksMessage: "No presentations available yet.",
+    viewDetails: "View Details",
+    presentedAt: "Presented at",
+    date: "Date"
+  },
+  zh: {
+    title: "演讲分享",
+    subtitle: "技术演讲、会议分享和知识交流活动",
+    noTalksMessage: "暂无演讲分享。",
+    viewDetails: "查看详情",
+    presentedAt: "演讲地点",
+    date: "日期"
+  }
+};
+
+const currentContent = content[lang];
+const basePath = lang === 'zh' ? '/cn' : '';
 ---
 
 <Layout title={lang === 'zh' ? '演讲' : 'Talks'}>
@@ -29,7 +53,7 @@ return Astro.redirect('/garden/talks', 301);
             <article class="bg-white border border-gray-200 rounded-lg shadow-md p-6 dark:bg-gray-800 dark:border-gray-700">
               <div class="flex flex-col space-y-4">
                 <div>
-                  <a href={`${basePath}/talks/${talk.slug}`}>
+                  <a href="{basePath}/garden/talks/{talk.slug}">
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                       {talk.data.title}
                     </h2>
@@ -58,7 +82,7 @@ return Astro.redirect('/garden/talks', 301);
                 <div class="flex justify-between items-center pt-4">
                   <div class="flex gap-4">
                     <a
-                      href={`${basePath}/talks/${talk.slug}`}
+                      href="{basePath}/garden/talks/{talk.slug}"
                       class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
                     >
                       {currentContent.viewDetails}

@@ -1,0 +1,129 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getLocalizedContent, t, type Language } from '../../../utils/i18n';
+
+// This is the English talk page (/garden/talks/[slug] path)
+const lang: Language = 'en';
+
+export async function getStaticPaths() {
+  // This will be handled by the content collection system
+  return [];
+}
+
+// Get the slug from the URL
+const { slug } = Astro.params;
+
+// Get the talk content
+const talk = await getLocalizedContent(slug, 'talks', lang);
+
+if (!talk) {
+  return Astro.redirect('/404', 404);
+}
+
+// Language-specific content
+const content = {
+  en: {
+    presentedOn: "Presented on",
+    location: "Location",
+    backToTalks: "Back to Talks",
+    slides: "Slides",
+    video: "Video"
+  },
+  zh: {
+    presentedOn: "演讲于",
+    location: "地点",
+    backToTalks: "返回演讲",
+    slides: "幻灯片",
+    video: "视频"
+  }
+};
+
+const currentContent = content[lang];
+const basePath = lang === 'zh' ? '/cn' : '';
+
+// Format date for meta tags
+const formattedDate = talk.data.date.toISOString();
+---
+
+<Layout 
+  title={talk.data.title} 
+  description={talk.data.description}
+  publishDate={formattedDate}
+  type="article"
+>
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <article class="prose dark:prose-invert lg:prose-xl mx-auto">
+        <header class="mb-8">
+          <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{talk.data.title}</h1>
+          <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+            <span>
+              {currentContent.presentedOn} {talk.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </span>
+            {talk.data.location && (
+              <span>
+                {currentContent.location}: {talk.data.location}
+              </span>
+            )}
+            {talk.data.event && (
+              <span>
+                🎤 {talk.data.event}
+              </span>
+            )}
+          </div>
+        </header>
+
+        <div class="prose dark:prose-invert max-w-none">
+          <slot />
+        </div>
+
+        <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+          <div class="flex flex-wrap gap-4 mb-6">
+            {talk.data.slides && (
+              <a
+                href={talk.data.slides}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500 transition-colors"
+              >
+                <span class="mr-2">📊</span>
+                {currentContent.slides}
+              </a>
+            )}
+            {talk.data.video && (
+              <a
+                href={talk.data.video}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500 transition-colors"
+              >
+                <span class="mr-2">🎥</span>
+                {currentContent.video}
+              </a>
+            )}
+          </div>
+
+          <a
+            href="{basePath}/garden/talks"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
+          >
+            {currentContent.backToTalks}
+            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+          </a>
+        </footer>
+      </article>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .prose :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
+    margin-top: 2em;
+  }
+</style>

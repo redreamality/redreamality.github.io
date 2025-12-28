@@ -23,6 +23,25 @@ const talksSchema = z.object({
   translatedFrom: z.string().optional(), // Reference to original talk slug
 });
 
+const questionsSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  date: z.date(),
+  tags: z.array(z.string()).optional(),
+  lang: z.enum(['zh', 'en']).optional(),
+  translatedFrom: z.string().optional(), // Reference to original question slug
+});
+
+const notesSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  date: z.date(),
+  source: z.string().optional(), // Original source URL or reference
+  tags: z.array(z.string()).optional(),
+  lang: z.enum(['zh', 'en']).optional(),
+  translatedFrom: z.string().optional(), // Reference to original note slug
+});
+
 const projectsSchema = z.object({
   title: z.string(),
   description: z.string(),
@@ -65,6 +84,28 @@ const projectsEnCollection = defineCollection({
   schema: projectsSchema,
 });
 
+// Questions content collections
+const questionsCnCollection = defineCollection({
+  type: 'content',
+  schema: questionsSchema,
+});
+
+const questionsEnCollection = defineCollection({
+  type: 'content',
+  schema: questionsSchema,
+});
+
+// Notes content collections
+const notesCnCollection = defineCollection({
+  type: 'content',
+  schema: notesSchema,
+});
+
+const notesEnCollection = defineCollection({
+  type: 'content',
+  schema: notesSchema,
+});
+
 export const collections = {
   'blog-cn': blogCnCollection,
   'blog-en': blogEnCollection,
@@ -72,4 +113,8 @@ export const collections = {
   'talks-en': talksEnCollection,
   'projects-cn': projectsCnCollection,
   'projects-en': projectsEnCollection,
+  'questions-cn': questionsCnCollection,
+  'questions-en': questionsEnCollection,
+  'notes-cn': notesCnCollection,
+  'notes-en': notesEnCollection,
 };
