@@ -8,15 +8,21 @@ export async function getStaticPaths() {
   // Get Chinese tags and posts
   const posts = await getBlogPosts('zh');
   const tags = await getTags('zh');
-  
-  return tags.map(tag => ({
-    params: { tag },
-    props: { 
-      posts: posts.filter(post => post.data.tags?.includes(tag))
-        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
-      lang: 'zh' as Language
-    },
-  }));
+
+  return tags
+    .filter(tag => {
+      // Only generate pages for tags with 2 or more articles
+      const postCount = posts.filter(post => post.data.tags?.includes(tag)).length;
+      return postCount >= 2;
+    })
+    .map(tag => ({
+      params: { tag },
+      props: {
+        posts: posts.filter(post => post.data.tags?.includes(tag))
+          .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+        lang: 'zh' as Language
+      },
+    }));
 }
 
 interface Props {

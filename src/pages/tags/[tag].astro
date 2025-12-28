@@ -9,14 +9,20 @@ export async function getStaticPaths() {
   const posts = await getBlogPosts('en');
   const tags = await getTags('en');
 
-  return tags.map(tag => ({
-    params: { tag },
-    props: {
-      posts: posts.filter(post => post.data.tags?.includes(tag))
-        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
-      lang: 'en' as Language
-    },
-  }));
+  return tags
+    .filter(tag => {
+      // Only generate pages for tags with 2 or more articles
+      const postCount = posts.filter(post => post.data.tags?.includes(tag)).length;
+      return postCount >= 2;
+    })
+    .map(tag => ({
+      params: { tag },
+      props: {
+        posts: posts.filter(post => post.data.tags?.includes(tag))
+          .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+        lang: 'en' as Language
+      },
+    }));
 }
 
 interface Props {

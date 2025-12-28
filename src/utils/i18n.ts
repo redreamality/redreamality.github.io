@@ -175,12 +175,30 @@ export async function getProjects(lang: Language) {
 }
 
 /**
- * Get all unique tags for a specific language
+ * Get all unique tags for a specific language, sorted by article count
  */
 export async function getTags(lang: Language): Promise<string[]> {
   const posts = await getBlogPosts(lang);
   const allTags = posts.flatMap(post => post.data.tags || []);
-  return [...new Set(allTags)].sort();
+  const uniqueTags = [...new Set(allTags)];
+  
+  // Calculate post count for each tag and sort by count (descending)
+  const tagCounts = uniqueTags.map(tag => {
+    return {
+      tag,
+      count: posts.filter(post => post.data.tags?.includes(tag)).length
+    };
+  });
+  
+  // Sort by count descending, then alphabetically for tags with same count
+  tagCounts.sort((a, b) => {
+    if (b.count !== a.count) {
+      return b.count - a.count; // Higher count first
+    }
+    return a.tag.localeCompare(b.tag); // Alphabetical for same count
+  });
+  
+  return tagCounts.map(item => item.tag);
 }
 
 /**
