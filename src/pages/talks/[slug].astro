@@ -1,6 +1,11 @@
 ---
 import { type Language } from '../../utils/i18n';
 
+export async function getStaticPaths() {
+  // Return empty array since we're redirecting all requests
+  return [];
+}
+
 // Get the slug from the URL
 const { slug } = Astro.params;
 
