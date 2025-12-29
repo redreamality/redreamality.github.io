@@ -36,7 +36,7 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/talks
 
     <div
       id="language-dropdown"
-      class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
+      class="hidden opacity-0 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-50 transition-opacity duration-300"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby="language-toggle-btn"
@@ -105,6 +105,7 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/talks
   const refreshBtn = document.getElementById('refresh-availability');
   const zhAvailability = document.getElementById('zh-availability');
   const enAvailability = document.getElementById('en-availability');
+  let closeTimeout: number | null = null;
 
   // Check content availability for current page
   async function checkContentAvailability() {
@@ -169,36 +170,109 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/talks
     }
   }
 
+  function openDropdown() {
+    if (!dropdown) return;
+    
+    // Clear any pending close timeout
+    if (closeTimeout !== null) {
+      clearTimeout(closeTimeout);
+      closeTimeout = null;
+    }
+    
+    dropdown.classList.remove('hidden');
+    // Trigger reflow to ensure transition works
+    dropdown.offsetHeight;
+    dropdown.classList.remove('opacity-0');
+    dropdown.classList.add('opacity-100');
+    toggleBtn?.setAttribute('aria-expanded', 'true');
+    
+    // Check availability when dropdown opens
+    checkContentAvailability();
+  }
+  
+  function closeDropdown() {
+    if (!dropdown) return;
+    
+    // Clear any existing timeout
+    if (closeTimeout !== null) {
+      clearTimeout(closeTimeout);
+    }
+    
+    // Start fade out
+    dropdown.classList.remove('opacity-100');
+    dropdown.classList.add('opacity-0');
+    
+    // After fade out completes, hide the element
+    closeTimeout = window.setTimeout(() => {
+      dropdown.classList.add('hidden');
+      toggleBtn?.setAttribute('aria-expanded', 'false');
+      closeTimeout = null;
+    }, 300); // Match the transition duration
+  }
+  
+  function scheduleClose() {
+    if (closeTimeout !== null) {
+      clearTimeout(closeTimeout);
+    }
+    
+    // Schedule close after 500ms delay
+    closeTimeout = window.setTimeout(() => {
+      closeDropdown();
+    }, 500);
+  }
+
   if (toggleBtn && dropdown) {
     toggleBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      const isHidden = dropdown.classList.contains('hidden');
+      const isVisible = dropdown.classList.contains('opacity-100');
 
-      if (isHidden) {
-        dropdown.classList.remove('hidden');
-        toggleBtn.setAttribute('aria-expanded', 'true');
-
-        // Check availability when dropdown opens
-        checkContentAvailability();
+      if (isVisible) {
+        closeDropdown();
       } else {
-        dropdown.classList.add('hidden');
-        toggleBtn.setAttribute('aria-expanded', 'false');
+        openDropdown();
+      }
+    });
+    
+    // Keep dropdown open when mouse enters
+    dropdown.addEventListener('mouseenter', () => {
+      if (closeTimeout !== null) {
+        clearTimeout(closeTimeout);
+        closeTimeout = null;
+      }
+    });
+    
+    // Schedule close when mouse leaves the dropdown
+    dropdown.addEventListener('mouseleave', () => {
+      scheduleClose();
+    });
+    
+    // Schedule close when mouse leaves the toggle button (if dropdown is open)
+    toggleBtn.addEventListener('mouseleave', () => {
+      const isVisible = dropdown.classList.contains('opacity-100');
+      if (isVisible) {
+        scheduleClose();
+      }
+    });
+    
+    // Cancel scheduled close when mouse enters the toggle button
+    toggleBtn.addEventListener('mouseenter', () => {
+      if (closeTimeout !== null) {
+        clearTimeout(closeTimeout);
+        closeTimeout = null;
       }
     });
 
     // Close dropdown when clicking outside
     document.addEventListener('click', (e) => {
       if (!toggleBtn.contains(e.target as Node) && !dropdown.contains(e.target as Node)) {
-        dropdown.classList.add('hidden');
-        toggleBtn.setAttribute('aria-expanded', 'false');
+        closeDropdown();
       }
     });
 
     // Close dropdown on escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        dropdown.classList.add('hidden');
-        toggleBtn.setAttribute('aria-expanded', 'false');
+        closeDropdown();
       }
     });
   }
