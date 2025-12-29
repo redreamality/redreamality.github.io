@@ -4,7 +4,7 @@ description: "理解金融市场中债券价格与利率之间基本的负相关
 date: 2025-01-15
 tags: ["债券价格", "利率", "负相关", "债券基础", "金融市场"]
 lang: "zh"
-translatedFrom">"why-bond-prices-and-interest-rates-negatively-correlated"
+translatedFrom: "why-bond-prices-and-interest-rates-negatively-correlated"
 ---
 
 # 为什么债券价格和利率呈负相关？
