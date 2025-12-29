@@ -186,4 +186,4 @@ lang: 'zh'
 
 ## 5. 参考文献
 
-![Prompt-To-Agent: 为您的代码创建自定义工程智能体](../assets/multi-agent-system/image.png)
+![Prompt-To-Agent: 为您的代码创建自定义工程智能体](/assets/multi-agent-system/image.png)

@@ -188,7 +188,7 @@ lang: 'en'
 
 ## 5. References
 
-![Prompt-To-Agent: Create custom engineering agents for your code](../assets/multi-agent-system/image.png)
+![Prompt-To-Agent: Create custom engineering agents for your code](/assets/multi-agent-system/image.png)
 
 
 

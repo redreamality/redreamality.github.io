@@ -12,4 +12,4 @@ pnpm install
 pnpm dev
 ```
 
-![WXT 浏览器扩展开发工具截图](../assets/browser-extension-development/chrome_2025-03-11_18-27-41.png)
+![WXT 浏览器扩展开发工具截图](/assets/browser-extension-development/chrome_2025-03-11_18-27-41.png)
