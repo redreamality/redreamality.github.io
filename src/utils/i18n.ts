@@ -312,11 +312,16 @@ export async function getLocalizedContent(
   type: 'blog' | 'talks' | 'projects' | 'questions' | 'notes',
   lang: Language
 ): Promise<any> {
+  // The slug from URL may not include .md extension, but content collections have it
+  const slugWithMd = slug.endsWith('.md') ? slug : `${slug}.md`;
+  
   try {
     // Try language-specific collection first
     const collectionName = `${type}-${lang === 'zh' ? 'cn' : 'en'}` as const;
     const collection = await getCollection(collectionName);
-    const item = collection.find(item => item.slug === slug);
+    const item = collection.find(item => 
+      item.slug === slug || item.slug === slugWithMd
+    );
     if (item) return item;
   } catch (error) {
     // Collection doesn't exist, continue to fallback
@@ -326,7 +331,7 @@ export async function getLocalizedContent(
     // Fallback to main collection
     const mainCollection = await getCollection(type);
     return mainCollection.find(item =>
-      item.slug === slug && (!item.data.lang || item.data.lang === lang)
+      (item.slug === slug || item.slug === slugWithMd) && (!item.data.lang || item.data.lang === lang)
     );
   } catch (error) {
     return null;

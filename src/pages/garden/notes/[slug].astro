@@ -1,20 +1,25 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 import { getLocalizedContent, t, type Language } from '../../../utils/i18n';
 
 // This is the English note page (/garden/notes/[slug] path)
 const lang: Language = 'en';
 
 export async function getStaticPaths() {
-  // This will be handled by the content collection system
-  return [];
+  const notes = await getCollection('notes-en');
+  return notes.map((note) => ({
+    params: { slug: note.slug },
+    props: { note },
+  }));
 }
 
 // Get the slug from the URL
 const { slug } = Astro.params;
 
-// Get the note content
-const note = await getLocalizedContent(slug, 'notes', lang);
+// Get the note from props or fallback to fetching by slug
+const { note: noteFromProps } = Astro.props;
+const note = noteFromProps || await getLocalizedContent(slug!, 'notes', lang);
 
 if (!note) {
   return Astro.redirect('/404', 404);

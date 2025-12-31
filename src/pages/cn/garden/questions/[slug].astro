@@ -1,20 +1,25 @@
 ---
 import Layout from '../../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 import { getLocalizedContent, t, type Language } from '../../../../utils/i18n';
 
 // This is the Chinese question page (/cn/garden/questions/[slug] path)
 const lang: Language = 'zh';
 
 export async function getStaticPaths() {
-  // This will be handled by the content collection system
-  return [];
+  const questions = await getCollection('questions-cn');
+  return questions.map((question) => ({
+    params: { slug: question.slug },
+    props: { question },
+  }));
 }
 
 // Get the slug from the URL
 const { slug } = Astro.params;
 
-// Get the question content
-const question = await getLocalizedContent(slug, 'questions', lang);
+// Get the question from props or fallback to fetching by slug
+const { question: questionFromProps } = Astro.props;
+const question = questionFromProps || await getLocalizedContent(slug!, 'questions', lang);
 
 if (!question) {
   return Astro.redirect('/cn/404', 404);
