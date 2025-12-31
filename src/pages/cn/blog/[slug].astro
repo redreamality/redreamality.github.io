@@ -1,14 +1,129 @@
 ---
+import Layout from '../../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { type Language, getTagCounts } from '../../../utils/i18n';
+
+// This is the Chinese blog post page (/cn/blog/[slug] path)
+const lang: Language = 'zh';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog-cn');
   return posts.map((post) => ({
     params: { slug: post.slug },
+    props: { post },
   }));
 }
 
+// Get the slug from the URL
 const { slug } = Astro.params;
 
-return Astro.redirect(`/cn/garden/blog/${slug}`, 301);
+// Get the post from props
+const { post } = Astro.props;
+
+if (!post) {
+  return Astro.redirect('/cn/404', 404);
+}
+
+const { Content } = await post.render();
+
+// Language-specific content
+const content = {
+  en: {
+    publishedOn: "Published on",
+    updatedOn: "Updated on",
+    author: "by",
+    backToBlog: "Back to Blog",
+    tagsTitle: "Tags:"
+  },
+  zh: {
+    publishedOn: "发布于",
+    updatedOn: "更新于",
+    author: "作者",
+    backToBlog: "返回博客",
+    tagsTitle: "标签:"
+  }
+};
+
+const currentContent = content[lang];
+const basePath = lang === 'zh' ? '/cn' : '';
+
+// Format date for meta tags
+const formattedDate = post.data.pubDate.toISOString();
+
+// Filter tags to only include those with at least 2 articles
+const tagCounts = await getTagCounts(lang);
+const filteredTags = post.data.tags?.filter(tag => tagCounts[tag] >= 2) || [];
 ---
+
+<Layout 
+  title={post.data.title} 
+  description={post.data.description}
+  publishDate={formattedDate}
+  tags={filteredTags}
+  type="article"
+>
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <article class="prose dark:prose-invert lg:prose-xl mx-auto">
+        <header class="mb-8">
+          <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{post.data.title}</h1>
+          <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+            <span>
+              {currentContent.publishedOn} {post.data.pubDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </span>
+            {post.data.updatedDate && (
+              <span>
+                {currentContent.updatedOn} {post.data.updatedDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </span>
+            )}
+            <span>{currentContent.author} {post.data.author}</span>
+          </div>
+          
+          {filteredTags.length > 0 && (
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="text-sm font-medium text-gray-600 dark:text-gray-300">{currentContent.tagsTitle}</span>
+            {filteredTags.map((tag) => (
+              <a
+                href={`${basePath}/tags/${tag}`}
+                class="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
+              >
+                #{tag}
+              </a>
+            ))}
+          </div>
+          )}
+        </header>
+
+        <div class="prose dark:prose-invert max-w-none">
+          <Content />
+        </div>
+
+        <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 not-prose">
+          <a
+            href={`${basePath}/blog`}
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
+          >
+            {currentContent.backToBlog}
+            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+          </a>
+        </footer>
+      </article>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .prose :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
+    margin-top: 2em;
+  }
+</style>
