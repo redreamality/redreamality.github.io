@@ -34,7 +34,9 @@ export default defineConfig({
       }]]
     }),
     sitemap({
-      filter: (page) => !page.includes('/private/'),
+      filter: (page) =>
+        !page.includes('/private/') &&
+        !page.includes('/garden/blog'),
       changefreq: 'weekly',
       serialize: (item) => ({
         ...item,
