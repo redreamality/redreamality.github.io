@@ -159,13 +159,29 @@ const languageCode = getLanguageCode(currentLang);
                     <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li><a href={currentLang === 'zh' ? '/cn' : '/'} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{t('home', currentLang)}</a></li>
                         <li class="relative group">
-                            <a href={currentLang === 'zh' ? '/cn/garden' : '/garden'} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent flex items-center">
+                            <button id="garden-menu-toggle" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent flex items-center w-full text-left">
                                 {t('garden', currentLang)}
-                                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <svg class="w-2.5 h-2.5 ms-2.5 garden-chevron transition-transform duration-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                                 </svg>
-                            </a>
-                            <div class="nav-dropdown absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg dark:bg-gray-800 z-50">
+                            </button>
+                            <div id="garden-dropdown" class="nav-dropdown-mobile hidden absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg dark:bg-gray-800 z-50 md:hidden">
+                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                                    <li>
+                                        <a href={currentLang === 'zh' ? '/cn/garden/blog' : '/garden/blog'} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('blog', currentLang)}</a>
+                                    </li>
+                                    <li>
+                                        <a href={currentLang === 'zh' ? '/cn/garden/talks' : '/garden/talks'} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('talks', currentLang)}</a>
+                                    </li>
+                                    <li>
+                                        <a href={currentLang === 'zh' ? '/cn/garden/questions' : '/garden/questions'} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('questions', currentLang)}</a>
+                                    </li>
+                                    <li>
+                                        <a href={currentLang === 'zh' ? '/cn/garden/notes' : '/garden/notes'} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('notes', currentLang)}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="nav-dropdown-desktop absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg dark:bg-gray-800 z-50 hidden md:block">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                                     <li>
                                         <a href={currentLang === 'zh' ? '/cn/garden/blog' : '/garden/blog'} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('blog', currentLang)}</a>
@@ -216,12 +232,35 @@ const languageCode = getLanguageCode(currentLang);
         <script>
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const navbarDefault = document.getElementById('navbar-default');
+            const gardenMenuToggle = document.getElementById('garden-menu-toggle');
+            const gardenDropdown = document.getElementById('garden-dropdown');
 
             if (mobileMenuButton && navbarDefault) {
                 mobileMenuButton.addEventListener('click', () => {
                     navbarDefault.classList.toggle('hidden');
                     const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
                     mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                });
+            }
+
+            if (gardenMenuToggle && gardenDropdown) {
+                let gardenDropdownOpen = false;
+
+                gardenMenuToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    gardenDropdownOpen = !gardenDropdownOpen;
+
+                    if (gardenDropdownOpen) {
+                        gardenDropdown.classList.remove('hidden');
+                        gardenDropdown.style.opacity = '1';
+                        gardenDropdown.style.visibility = 'visible';
+                        gardenMenuToggle.querySelector('.garden-chevron').classList.add('rotate-180');
+                    } else {
+                        gardenDropdown.classList.add('hidden');
+                        gardenDropdown.style.opacity = '0';
+                        gardenDropdown.style.visibility = 'hidden';
+                        gardenMenuToggle.querySelector('.garden-chevron').classList.remove('rotate-180');
+                    }
                 });
             }
         </script>
@@ -237,7 +276,7 @@ const languageCode = getLanguageCode(currentLang);
         min-height: 100vh;
     }
 
-    .nav-dropdown {
+    .nav-dropdown-desktop {
         opacity: 0;
         visibility: hidden;
         transition:
@@ -245,11 +284,15 @@ const languageCode = getLanguageCode(currentLang);
             visibility 0s linear 800ms;
     }
 
-    .group:hover .nav-dropdown {
+    .group:hover .nav-dropdown-desktop {
         opacity: 1;
         visibility: visible;
         transition:
             opacity 300ms ease 0ms,
             visibility 0s linear 0ms;
+    }
+
+    .garden-chevron.rotate-180 {
+        transform: rotate(180deg);
     }
 </style>
