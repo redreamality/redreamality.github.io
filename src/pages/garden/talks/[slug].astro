@@ -1,24 +1,26 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getLocalizedContent, t, type Language } from '../../../utils/i18n';
+import { getTalks, type Language } from '../../../utils/i18n';
 
 // This is the English talk page (/garden/talks/[slug] path)
 const lang: Language = 'en';
 
 export async function getStaticPaths() {
-  // This will be handled by the content collection system
-  return [];
+  const talks = await getTalks('en');
+  return talks.map((talk) => ({
+    params: { slug: talk.slug },
+    props: { talk },
+  }));
 }
 
-// Get the slug from the URL
-const { slug } = Astro.params;
-
-// Get the talk content
-const talk = await getLocalizedContent(slug, 'talks', lang);
+// Get the talk from props
+const { talk } = Astro.props;
 
 if (!talk) {
   return Astro.redirect('/404', 404);
 }
+
+const { Content } = await talk.render();
 
 // Language-specific content
 const content = {
@@ -78,7 +80,7 @@ const formattedDate = talk.data.date.toISOString();
         </header>
 
         <div class="prose dark:prose-invert max-w-none">
-          <slot />
+          <Content />
         </div>
 
         <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 not-prose">
