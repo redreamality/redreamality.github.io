@@ -10,11 +10,6 @@ export async function getStaticPaths() {
   const tags = await getTags('zh');
 
   return tags
-    .filter(tag => {
-      // Only generate pages for tags with 2 or more articles
-      const postCount = posts.filter(post => post.data.tags?.includes(tag)).length;
-      return postCount >= 2;
-    })
     .map(tag => ({
       params: { tag },
       props: {
