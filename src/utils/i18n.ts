@@ -211,30 +211,35 @@ export async function getProjects(lang: Language) {
 }
 
 /**
- * Get all unique tags for a specific language, sorted by article count
+ * Get tag counts for a specific language
  */
-export async function getTags(lang: Language): Promise<string[]> {
+export async function getTagCounts(lang: Language): Promise<Record<string, number>> {
   const posts = await getBlogPosts(lang);
   const allTags = posts.flatMap(post => post.data.tags || []);
-  const uniqueTags = [...new Set(allTags)];
-  
-  // Calculate post count for each tag and sort by count (descending)
-  const tagCounts = uniqueTags.map(tag => {
-    return {
-      tag,
-      count: posts.filter(post => post.data.tags?.includes(tag)).length
-    };
-  });
+  const counts: Record<string, number> = {};
+  for (const tag of allTags) {
+    counts[tag] = (counts[tag] || 0) + 1;
+  }
+  return counts;
+}
+
+/**
+ * Get all unique tags for a specific language, sorted by article count
+ * Default minCount is 2 as tags with count 1 don't have dedicated pages
+ */
+export async function getTags(lang: Language, minCount: number = 2): Promise<string[]> {
+  const tagCounts = await getTagCounts(lang);
+  const tags = Object.keys(tagCounts).filter(tag => tagCounts[tag] >= minCount);
   
   // Sort by count descending, then alphabetically for tags with same count
-  tagCounts.sort((a, b) => {
-    if (b.count !== a.count) {
-      return b.count - a.count; // Higher count first
+  tags.sort((a, b) => {
+    if (tagCounts[b] !== tagCounts[a]) {
+      return tagCounts[b] - tagCounts[a]; // Higher count first
     }
-    return a.tag.localeCompare(b.tag); // Alphabetical for same count
+    return a.localeCompare(b); // Alphabetical for same count
   });
   
-  return tagCounts.map(item => item.tag);
+  return tags;
 }
 
 /**

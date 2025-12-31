@@ -1,22 +1,13 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getBlogPosts, getTags, type Language } from '../../../utils/i18n';
+import { getTagCounts, getTags, type Language } from '../../../utils/i18n';
 
 // This is the Chinese tags listing (/cn/tags path)
 const lang: Language = 'zh';
 
-// Get blog posts and tags for current language
-const posts = await getBlogPosts(lang);
-const tags = await getTags(lang);
-
-// Calculate post count for each tag and filter out tags with less than 2 articles
-const tagCounts = tags.reduce((acc, tag) => {
-  acc[tag] = posts.filter(post => post.data.tags?.includes(tag)).length;
-  return acc;
-}, {} as Record<string, number>);
-
-// Filter tags to only show those with 2 or more articles
-const filteredTags = tags.filter(tag => tagCounts[tag] >= 2);
+// Get tags and counts for current language
+const tagCounts = await getTagCounts(lang);
+const filteredTags = await getTags(lang);
 
 // Language-specific content
 const content = {

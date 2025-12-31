@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getBlogPosts, getTags, type Language } from '../../../utils/i18n';
+import { getBlogPosts, getTags, getTagCounts, type Language } from '../../../utils/i18n';
 
 // This is the Chinese tag detail page (/cn/tags/tag path)
 
@@ -9,20 +9,14 @@ export async function getStaticPaths() {
   const posts = await getBlogPosts('zh');
   const tags = await getTags('zh');
 
-  return tags
-    .filter(tag => {
-      // Only generate pages for tags with 2 or more articles
-      const postCount = posts.filter(post => post.data.tags?.includes(tag)).length;
-      return postCount >= 2;
-    })
-    .map(tag => ({
-      params: { tag },
-      props: {
-        posts: posts.filter(post => post.data.tags?.includes(tag))
-          .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
-        lang: 'zh' as Language
-      },
-    }));
+  return tags.map(tag => ({
+    params: { tag },
+    props: {
+      posts: posts.filter(post => post.data.tags?.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+      lang: 'zh' as Language
+    },
+  }));
 }
 
 interface Props {
@@ -32,6 +26,9 @@ interface Props {
 
 const { tag } = Astro.params;
 const { posts, lang } = Astro.props;
+
+// Get tag counts to filter out tags with count < 2
+const tagCounts = await getTagCounts(lang);
 
 // Language-specific content
 const content = {
@@ -101,7 +98,9 @@ const basePath = lang === 'zh' ? '/cn' : '';
               
               <div class="flex items-center justify-between">
                 <div class="flex flex-wrap gap-2">
-                  {post.data.tags?.map((postTag: string) => (
+                  {post.data.tags
+                    ?.filter((postTag: string) => tagCounts[postTag] >= 2)
+                    .map((postTag: string) => (
                     <a
                       href={`${basePath}/tags/${postTag}`}
                       class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
