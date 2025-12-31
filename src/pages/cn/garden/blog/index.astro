@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../../layouts/Layout.astro';
-import { getBlogPosts, getTags, t, type Language } from '../../../../utils/i18n';
+import { getBlogPosts, getTags, getTagCounts, t, type Language } from '../../../../utils/i18n';
 
 // This is the Chinese blog listing (/cn/garden/blog path)
 const lang: Language = 'zh';
@@ -8,6 +8,7 @@ const lang: Language = 'zh';
 // Get blog posts and tags for current language
 const posts = await getBlogPosts(lang);
 const tags = await getTags(lang);
+const tagCounts = await getTagCounts(lang);
 
 // Language-specific content
 const content = {
@@ -95,7 +96,9 @@ const basePath = lang === 'zh' ? '/cn' : '';
 
                 {post.data.tags && post.data.tags.length > 0 && (
                   <div class="flex flex-wrap gap-2">
-                    {post.data.tags.map((tag) => (
+                    {post.data.tags
+                      .filter(tag => tagCounts[tag] >= 2)
+                      .map((tag) => (
                       <a
                         href={`${basePath}/tags/${tag}`}
                         class="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"

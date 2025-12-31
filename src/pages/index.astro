@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getBlogPosts, getQuestions, getTalks, type Language } from '../utils/i18n';
+import { getBlogPosts, getQuestions, getTalks, getTagCounts, type Language } from '../utils/i18n';
 
 // This page handles the root path only (English default)
 // Chinese version will be handled by a separate /cn/index.astro file
@@ -12,6 +12,7 @@ const lang: Language = 'en';
 const posts = await getBlogPosts(lang);
 const talks = await getTalks(lang);
 const questions = await getQuestions(lang);
+const tagCounts = await getTagCounts(lang);
 
 // Get the latest 20 posts, talks, and questions
 const recentPosts = posts.slice(0, 20);
@@ -112,7 +113,10 @@ const basePath = lang === 'zh' ? '/cn' : '';
                   {post.data.tags && (
                     <div class="flex gap-1">
                       <span class="mr-1">🏷️</span>
-                      {post.data.tags.slice(0, 2).map((tag: string) => (
+                      {post.data.tags
+                        .filter((tag: string) => tagCounts[tag] >= 2)
+                        .slice(0, 2)
+                        .map((tag: string) => (
                         <a
                           href={`${basePath}/tags/${tag}`}
                           class="hover:text-blue-600 dark:hover:text-blue-400"

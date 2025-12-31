@@ -1,7 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { type Language } from '../../../utils/i18n';
+import { type Language, getTagCounts } from '../../../utils/i18n';
 
 // This is the English blog post page (/garden/blog/[slug] path)
 const lang: Language = 'en';
@@ -49,13 +49,17 @@ const basePath = lang === 'zh' ? '/cn' : '';
 
 // Format date for meta tags
 const formattedDate = post.data.pubDate.toISOString();
+
+// Filter tags to only include those with at least 2 articles
+const tagCounts = await getTagCounts(lang);
+const filteredTags = post.data.tags?.filter(tag => tagCounts[tag] >= 2) || [];
 ---
 
 <Layout 
   title={post.data.title} 
   description={post.data.description}
   publishDate={formattedDate}
-  tags={post.data.tags || []}
+  tags={filteredTags}
   type="article"
 >
   <main class="container mx-auto px-4 py-8">
@@ -83,10 +87,10 @@ const formattedDate = post.data.pubDate.toISOString();
             <span>{currentContent.author} {post.data.author}</span>
           </div>
           
-          {post.data.tags && post.data.tags.length > 0 && (
+          {filteredTags.length > 0 && (
           <div class="flex flex-wrap gap-2 mb-6">
             <span class="text-sm font-medium text-gray-600 dark:text-gray-300">{currentContent.tagsTitle}</span>
-            {post.data.tags.map((tag) => (
+            {filteredTags.map((tag) => (
               <a
                 href={`${basePath}/tags/${tag}`}
                 class="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
