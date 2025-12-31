@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getBlogPosts, getTalks, t, type Language } from '../utils/i18n';
+import { getBlogPosts, getQuestions, getTalks, type Language } from '../utils/i18n';
 
 // This page handles the root path only (English default)
 // Chinese version will be handled by a separate /cn/index.astro file
@@ -8,13 +8,15 @@ import { getBlogPosts, getTalks, t, type Language } from '../utils/i18n';
 // This is the English homepage (root path)
 const lang: Language = 'en';
 
-// Get latest blog posts and talks for current language
+// Get latest blog posts, talks, and questions for current language
 const posts = await getBlogPosts(lang);
 const talks = await getTalks(lang);
+const questions = await getQuestions(lang);
 
-// Get the latest 20 posts and talks
+// Get the latest 20 posts, talks, and questions
 const recentPosts = posts.slice(0, 20);
 const recentTalks = talks.slice(0, 20);
+const recentQuestions = questions.slice(0, 20);
 
 // Language-specific content
 const content = {
@@ -29,8 +31,11 @@ const content = {
     talksDesc: "Watch Redreamality's technical presentations and sharing content",
     recentBlogTitle: "Recent Blog Posts",
     recentTalksTitle: "Recent Presentations",
+    recentQuestionsTitle: "Recent Questions",
+    noQuestionsMessage: "No questions available yet.",
     viewAllPosts: "View All Posts",
-    viewAllTalks: "View All Talks"
+    viewAllTalks: "View All Talks",
+    viewAllQuestions: "View All Questions"
   },
   zh: {
     title: "欢迎来到Remy(Redreamality)的个人网站",
@@ -43,8 +48,11 @@ const content = {
     talksDesc: "观看Redreamality的技术演讲和分享内容",
     recentBlogTitle: "最新博客",
     recentTalksTitle: "最新演讲",
+    recentQuestionsTitle: "最新思考问题",
+    noQuestionsMessage: "暂无思考问题。",
     viewAllPosts: "查看全部",
-    viewAllTalks: "查看全部"
+    viewAllTalks: "查看全部",
+    viewAllQuestions: "查看全部"
   }
 };
 
@@ -156,6 +164,45 @@ const basePath = lang === 'zh' ? '/cn' : '';
             ))}
           </div>
         </div>
+      </div>
+
+      <!-- Recent Questions -->
+      <div class="mt-12">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold dark:text-white">{currentContent.recentQuestionsTitle}</h2>
+          <a
+            href={`${basePath}/garden/questions`}
+            class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+          >
+            {currentContent.viewAllQuestions} →
+          </a>
+        </div>
+
+        {recentQuestions.length === 0 ? (
+          <p class="text-gray-500 dark:text-gray-400">{currentContent.noQuestionsMessage}</p>
+        ) : (
+          <div class="space-y-4">
+            {recentQuestions.map((question) => (
+              <article class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                <h3 class="text-xl font-semibold mb-2">
+                  <a
+                    href={`${basePath}/garden/questions/${question.slug}`}
+                    class="hover:text-blue-600 dark:hover:text-blue-400"
+                  >
+                    {question.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">{question.data.description}</p>
+                <div class="flex flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400">
+                  <time datetime={question.data.date.toISOString()}>
+                    <span class="mr-1">📅</span>
+                    {question.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US')}
+                  </time>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   </div>
