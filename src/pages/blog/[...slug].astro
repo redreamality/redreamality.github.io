@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
 import { getCollection } from 'astro:content';
 import { type Language, getTagCounts } from '../../utils/i18n';
 
@@ -24,7 +25,7 @@ if (!post) {
   return Astro.redirect('/404', 404);
 }
 
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 
 // Language-specific content
 const content = {
@@ -64,6 +65,7 @@ const filteredTags = post.data.tags?.filter(tag => tagCounts[tag] >= 2) || [];
 >
   <main class="container mx-auto px-4 py-8">
     <div class="max-w-4xl mx-auto">
+      {headings && headings.length > 0 && <TableOfContents headings={headings} />}
       <article class="prose dark:prose-invert lg:prose-xl mx-auto">
         <header class="mb-8">
           <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{post.data.title}</h1>

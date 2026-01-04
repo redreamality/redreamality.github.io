@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
 import { getProjects, type Language } from '../../utils/i18n';
 
 export async function getStaticPaths() {
@@ -19,7 +20,7 @@ type Props = {
 };
 
 const { project, lang } = Astro.props;
-const { Content } = await project.render();
+const { Content, headings } = await project.render();
 
 // Language-specific content
 const content = {
@@ -42,6 +43,7 @@ const basePath = lang === 'zh' ? '/cn' : '';
 <Layout title={project.data.title}>
   <main class="container mx-auto px-4 py-8">
     <div class="max-w-4xl mx-auto">
+      {headings && headings.length > 0 && <TableOfContents headings={headings} />}
       <!-- Back to projects link -->
       <div class="mb-6">
         <a 

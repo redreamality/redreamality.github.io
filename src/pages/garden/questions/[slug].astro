@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import TableOfContents from '../../../components/TableOfContents.astro';
 import { getQuestions, type Language } from '../../../utils/i18n';
 
 // This is the English question page (/garden/questions/[slug] path)
@@ -20,7 +21,7 @@ if (!question) {
   return Astro.redirect('/404', 404);
 }
 
-const { Content } = await question.render();
+const { Content, headings } = await question.render();
 
 // Language-specific content
 const content = {
@@ -52,6 +53,7 @@ const formattedDate = question.data.date.toISOString();
 >
   <main class="container mx-auto px-4 py-8">
     <div class="max-w-4xl mx-auto">
+      {headings && headings.length > 0 && <TableOfContents headings={headings} />}
       <article class="prose dark:prose-invert lg:prose-xl mx-auto">
         <header class="mb-8">
           <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{question.data.title}</h1>
