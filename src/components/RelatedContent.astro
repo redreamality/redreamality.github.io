@@ -1,0 +1,53 @@
+---
+import type { Language } from '../utils/i18n';
+
+type RelatedItem = {
+  href: string;
+  title: string;
+  description?: string;
+  date?: Date;
+};
+
+type Props = {
+  title: string;
+  items: RelatedItem[];
+  lang: Language;
+};
+
+const { title, items, lang } = Astro.props;
+---
+
+{items.length > 0 && (
+  <section aria-label={title}>
+    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{title}</h2>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      {items.map((item) => (
+        <a
+          href={item.href}
+          class="block bg-white border border-gray-200 rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow dark:bg-gray-800 dark:border-gray-700"
+        >
+          <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-1">
+            {item.title}
+          </h3>
+
+          {item.date && (
+            <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">
+              {item.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </p>
+          )}
+
+          {item.description && (
+            <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+              {item.description}
+            </p>
+          )}
+        </a>
+      ))}
+    </div>
+  </section>
+)}

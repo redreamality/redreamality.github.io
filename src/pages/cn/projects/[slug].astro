@@ -1,8 +1,10 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
 import TableOfContents from '../../../components/TableOfContents.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
 import { getProjects, type Language } from '../../../utils/i18n';
+import { rankRelatedContent } from '../../../utils/related';
 
 export async function getStaticPaths() {
   // Get Chinese projects
@@ -27,17 +29,28 @@ const content = {
   en: {
     publishedOn: "Published on",
     author: "Author",
-    backToProjects: "← Back to Projects"
+    backToProjects: "← Back to Projects",
+    relatedTitle: "Other Projects"
   },
   zh: {
     publishedOn: "发布于",
     author: "作者",
-    backToProjects: "← 返回项目"
+    backToProjects: "← 返回项目",
+    relatedTitle: "其他项目"
   }
 };
 
 const currentContent = content[lang];
 const basePath = lang === 'zh' ? '/cn' : '';
+
+const allProjects = await getProjects(lang);
+const relatedProjects = rankRelatedContent(allProjects, project as any, { dateField: 'pubDate', limit: 6 });
+const relatedItems = relatedProjects.map((relatedProject) => ({
+  href: `${basePath}/projects/${relatedProject.slug}`,
+  title: relatedProject.data.title,
+  description: relatedProject.data.description,
+  date: relatedProject.data.pubDate
+}));
 ---
 
 <Layout title={project.data.title}>
@@ -82,6 +95,10 @@ const basePath = lang === 'zh' ? '/cn' : '';
       <article class="prose prose-lg dark:prose-invert max-w-none">
         <Content />
       </article>
+
+      <section class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <RelatedContent title={currentContent.relatedTitle} items={relatedItems} lang={lang} />
+      </section>
     </div>
   </main>
 </Layout>

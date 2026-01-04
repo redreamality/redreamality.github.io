@@ -1,7 +1,9 @@
 ---
 import Layout from '../../../../layouts/Layout.astro';
 import TableOfContents from '../../../../components/TableOfContents.astro';
+import RelatedContent from '../../../../components/RelatedContent.astro';
 import { getTalks, type Language } from '../../../../utils/i18n';
+import { rankRelatedContent } from '../../../../utils/related';
 
 // This is the Chinese talk page (/cn/garden/talks/[slug] path)
 const lang: Language = 'zh';
@@ -30,14 +32,16 @@ const content = {
     location: "Location",
     backToTalks: "Back to Talks",
     slides: "Slides",
-    video: "Video"
+    video: "Video",
+    relatedTitle: "More Talks"
   },
   zh: {
     presentedOn: "演讲于",
     location: "地点",
     backToTalks: "返回演讲",
     slides: "幻灯片",
-    video: "视频"
+    video: "视频",
+    relatedTitle: "更多演讲"
   }
 };
 
@@ -46,6 +50,15 @@ const basePath = lang === 'zh' ? '/cn' : '';
 
 // Format date for meta tags
 const formattedDate = talk.data.date.toISOString();
+
+const allTalks = await getTalks(lang);
+const relatedTalks = rankRelatedContent(allTalks, talk, { dateField: 'date', limit: 6 });
+const relatedItems = relatedTalks.map((relatedTalk) => ({
+  href: `${basePath}/garden/talks/${relatedTalk.slug}`,
+  title: relatedTalk.data.title,
+  description: relatedTalk.data.description,
+  date: relatedTalk.data.date
+}));
 ---
 
 <Layout 
@@ -111,15 +124,19 @@ const formattedDate = talk.data.date.toISOString();
             )}
           </div>
 
-          <a
-            href={`${basePath}/garden/talks`}
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
-          >
-            {currentContent.backToTalks}
-            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg>
-          </a>
+          <RelatedContent title={currentContent.relatedTitle} items={relatedItems} lang={lang} />
+
+          <div class="mt-10">
+            <a
+              href={`${basePath}/garden/talks`}
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
+            >
+              {currentContent.backToTalks}
+              <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+              </svg>
+            </a>
+          </div>
         </footer>
       </article>
     </div>

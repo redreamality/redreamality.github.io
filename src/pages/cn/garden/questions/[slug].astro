@@ -1,7 +1,9 @@
 ---
 import Layout from '../../../../layouts/Layout.astro';
 import TableOfContents from '../../../../components/TableOfContents.astro';
+import RelatedContent from '../../../../components/RelatedContent.astro';
 import { getQuestions, type Language } from '../../../../utils/i18n';
+import { rankRelatedContent } from '../../../../utils/related';
 
 // This is the Chinese question page (/cn/garden/questions/[slug] path)
 const lang: Language = 'zh';
@@ -28,12 +30,14 @@ const content = {
   en: {
     askedOn: "Asked on",
     backToQuestions: "Back to Questions",
-    tagsTitle: "Tags:"
+    tagsTitle: "Tags:",
+    relatedTitle: "Related Questions"
   },
   zh: {
     askedOn: "提出于",
     backToQuestions: "返回问题",
-    tagsTitle: "标签:"
+    tagsTitle: "标签:",
+    relatedTitle: "相关问题"
   }
 };
 
@@ -42,6 +46,15 @@ const basePath = lang === 'zh' ? '/cn' : '';
 
 // Format date for meta tags
 const formattedDate = question.data.date.toISOString();
+
+const allQuestions = await getQuestions(lang);
+const relatedQuestions = rankRelatedContent(allQuestions, question, { dateField: 'date', limit: 6 });
+const relatedItems = relatedQuestions.map((relatedQuestion) => ({
+  href: `${basePath}/garden/questions/${relatedQuestion.slug}`,
+  title: relatedQuestion.data.title,
+  description: relatedQuestion.data.description,
+  date: relatedQuestion.data.date
+}));
 ---
 
 <Layout 
@@ -84,15 +97,19 @@ const formattedDate = question.data.date.toISOString();
         </div>
 
         <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 not-prose">
-          <a
-            href={`${basePath}/garden/questions`}
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
-          >
-            {currentContent.backToQuestions}
-            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg>
-          </a>
+          <RelatedContent title={currentContent.relatedTitle} items={relatedItems} lang={lang} />
+
+          <div class="mt-10">
+            <a
+              href={`${basePath}/garden/questions`}
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
+            >
+              {currentContent.backToQuestions}
+              <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+              </svg>
+            </a>
+          </div>
         </footer>
       </article>
     </div>
