@@ -1,7 +1,9 @@
 ---
 import Layout from '../../../../layouts/Layout.astro';
 import TableOfContents from '../../../../components/TableOfContents.astro';
+import RelatedContent from '../../../../components/RelatedContent.astro';
 import { getNotes, type Language } from '../../../../utils/i18n';
+import { rankRelatedContent } from '../../../../utils/related';
 
 // This is the Chinese note page (/cn/garden/notes/[slug] path)
 const lang: Language = 'zh';
@@ -29,13 +31,15 @@ const content = {
     createdOn: "Created on",
     backToNotes: "Back to Notes",
     source: "Source",
-    tagsTitle: "Tags:"
+    tagsTitle: "Tags:",
+    relatedTitle: "Related Notes"
   },
   zh: {
     createdOn: "创建于",
     backToNotes: "返回笔记",
     source: "来源",
-    tagsTitle: "标签:"
+    tagsTitle: "标签:",
+    relatedTitle: "相关笔记"
   }
 };
 
@@ -44,6 +48,15 @@ const basePath = lang === 'zh' ? '/cn' : '';
 
 // Format date for meta tags
 const formattedDate = note.data.date.toISOString();
+
+const allNotes = await getNotes(lang);
+const relatedNotes = rankRelatedContent(allNotes, note, { dateField: 'date', limit: 6 });
+const relatedItems = relatedNotes.map((relatedNote) => ({
+  href: `${basePath}/garden/notes/${relatedNote.slug}`,
+  title: relatedNote.data.title,
+  description: relatedNote.data.description,
+  date: relatedNote.data.date
+}));
 ---
 
 <Layout 
@@ -91,15 +104,19 @@ const formattedDate = note.data.date.toISOString();
         </div>
 
         <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 not-prose">
-          <a
-            href={`${basePath}/garden/notes`}
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
-          >
-            {currentContent.backToNotes}
-            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg>
-          </a>
+          <RelatedContent title={currentContent.relatedTitle} items={relatedItems} lang={lang} />
+
+          <div class="mt-10">
+            <a
+              href={`${basePath}/garden/notes`}
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
+            >
+              {currentContent.backToNotes}
+              <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+              </svg>
+            </a>
+          </div>
         </footer>
       </article>
     </div>

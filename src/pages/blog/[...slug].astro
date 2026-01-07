@@ -1,8 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
 import { getCollection } from 'astro:content';
 import { type Language, getTagCounts } from '../../utils/i18n';
+import { rankRelatedContent } from '../../utils/related';
 
 // This is the English blog post page (/blog/[slug] path)
 const lang: Language = 'en';
@@ -34,14 +36,16 @@ const content = {
     updatedOn: "Updated on",
     author: "by",
     backToBlog: "Back to Blog",
-    tagsTitle: "Tags:"
+    tagsTitle: "Tags:",
+    relatedTitle: "Related Articles"
   },
   zh: {
     publishedOn: "发布于",
     updatedOn: "更新于",
     author: "作者",
     backToBlog: "返回博客",
-    tagsTitle: "标签:"
+    tagsTitle: "标签:",
+    relatedTitle: "相关文章推荐"
   }
 };
 
@@ -54,6 +58,15 @@ const formattedDate = post.data.pubDate.toISOString();
 // Filter tags to only include those with at least 2 articles
 const tagCounts = await getTagCounts(lang);
 const filteredTags = post.data.tags?.filter(tag => tagCounts[tag] >= 2) || [];
+
+const allPosts = await getCollection('blog-en');
+const relatedPosts = rankRelatedContent(allPosts, post, { dateField: 'pubDate', limit: 6 });
+const relatedItems = relatedPosts.map((relatedPost) => ({
+  href: `${basePath}/blog/${relatedPost.slug}`,
+  title: relatedPost.data.title,
+  description: relatedPost.data.description,
+  date: relatedPost.data.pubDate
+}));
 ---
 
 <Layout 
@@ -109,15 +122,19 @@ const filteredTags = post.data.tags?.filter(tag => tagCounts[tag] >= 2) || [];
         </div>
 
         <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 not-prose">
-          <a
-            href={`${basePath}/blog`}
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
-          >
-            {currentContent.backToBlog}
-            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg>
-          </a>
+          <RelatedContent title={currentContent.relatedTitle} items={relatedItems} lang={lang} />
+
+          <div class="mt-10">
+            <a
+              href={`${basePath}/blog`}
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
+            >
+              {currentContent.backToBlog}
+              <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+              </svg>
+            </a>
+          </div>
         </footer>
       </article>
     </div>
