@@ -36,14 +36,15 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garde
 
     <div
       id="language-dropdown"
-      class="hidden opacity-0 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-50 transition-opacity duration-300"
+      class="hidden opacity-0 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-50 transition-opacity duration-200"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby="language-toggle-btn"
     >
       <div class="py-1" role="none">
+        <!-- Chinese language option -->
         <a
-          href={currentLang === 'zh' ? currentPath : alternatePath}
+          href={alternateLang === 'zh' ? alternatePath : currentPath}
           class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white"
           role="menuitem"
           class:list={[currentLang === 'zh' && 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white']}
@@ -59,8 +60,10 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garde
           </div>
           {currentLang === 'zh' && <span class="ml-auto text-blue-600 dark:text-blue-400">✓</span>}
         </a>
+        
+        <!-- English language option -->
         <a
-          href={currentLang === 'en' ? currentPath : alternatePath}
+          href={alternateLang === 'en' ? alternatePath : currentPath}
           class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white"
           role="menuitem"
           class:list={[currentLang === 'en' && 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white']}
@@ -105,7 +108,37 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garde
   const refreshBtn = document.getElementById('refresh-availability');
   const zhAvailability = document.getElementById('zh-availability');
   const enAvailability = document.getElementById('en-availability');
-  let closeTimeout: number | null = null;
+
+  function toggleDropdown() {
+    if (!dropdown || !toggleBtn) return;
+    
+    const isHidden = dropdown.classList.contains('hidden');
+    
+    if (isHidden) {
+      // Show dropdown
+      dropdown.classList.remove('hidden');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      // Trigger reflow for smooth transition
+      dropdown.offsetHeight;
+      dropdown.classList.remove('opacity-0');
+      dropdown.classList.add('opacity-100');
+      
+      // Check availability when dropdown opens
+      if (zhAvailability && enAvailability) {
+        checkContentAvailability();
+      }
+    } else {
+      // Hide dropdown
+      dropdown.classList.remove('opacity-100');
+      dropdown.classList.add('opacity-0');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      
+      // Hide after transition
+      setTimeout(() => {
+        dropdown.classList.add('hidden');
+      }, 200);
+    }
+  }
 
   // Check content availability for current page
   async function checkContentAvailability() {
@@ -121,9 +154,6 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garde
       // Extract content type and slug from path
       let contentType = '';
       let slug = '';
-
-      // Handle both English (root) and Chinese (/cn/) paths
-      const cleanPath = currentPath.replace(/^\/cn/, ''); // Remove /cn prefix if present
 
       if (cleanPath.includes('/blog/')) {
         contentType = 'blog';
@@ -170,109 +200,35 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garde
     }
   }
 
-  function openDropdown() {
-    if (!dropdown) return;
-    
-    // Clear any pending close timeout
-    if (closeTimeout !== null) {
-      clearTimeout(closeTimeout);
-      closeTimeout = null;
-    }
-    
-    dropdown.classList.remove('hidden');
-    // Trigger reflow to ensure transition works
-    dropdown.offsetHeight;
-    dropdown.classList.remove('opacity-0');
-    dropdown.classList.add('opacity-100');
-    toggleBtn?.setAttribute('aria-expanded', 'true');
-    
-    // Check availability when dropdown opens
-    checkContentAvailability();
-  }
-  
-  function closeDropdown() {
-    if (!dropdown) return;
-    
-    // Clear any existing timeout
-    if (closeTimeout !== null) {
-      clearTimeout(closeTimeout);
-    }
-    
-    // Start fade out
-    dropdown.classList.remove('opacity-100');
-    dropdown.classList.add('opacity-0');
-    
-    // After fade out completes, hide the element
-    closeTimeout = window.setTimeout(() => {
-      dropdown.classList.add('hidden');
-      toggleBtn?.setAttribute('aria-expanded', 'false');
-      closeTimeout = null;
-    }, 300); // Match the transition duration
-  }
-  
-  function scheduleClose() {
-    if (closeTimeout !== null) {
-      clearTimeout(closeTimeout);
-    }
-    
-    // Schedule close after 500ms delay
-    closeTimeout = window.setTimeout(() => {
-      closeDropdown();
-    }, 500);
-  }
-
+  // Event listeners
   if (toggleBtn && dropdown) {
+    // Toggle on button click
     toggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopPropagation();
-      const isVisible = dropdown.classList.contains('opacity-100');
-
-      if (isVisible) {
-        closeDropdown();
-      } else {
-        openDropdown();
-      }
-    });
-    
-    // Keep dropdown open when mouse enters
-    dropdown.addEventListener('mouseenter', () => {
-      if (closeTimeout !== null) {
-        clearTimeout(closeTimeout);
-        closeTimeout = null;
-      }
-    });
-    
-    // Schedule close when mouse leaves the dropdown
-    dropdown.addEventListener('mouseleave', () => {
-      scheduleClose();
-    });
-    
-    // Schedule close when mouse leaves the toggle button (if dropdown is open)
-    toggleBtn.addEventListener('mouseleave', () => {
-      const isVisible = dropdown.classList.contains('opacity-100');
-      if (isVisible) {
-        scheduleClose();
-      }
-    });
-    
-    // Cancel scheduled close when mouse enters the toggle button
-    toggleBtn.addEventListener('mouseenter', () => {
-      if (closeTimeout !== null) {
-        clearTimeout(closeTimeout);
-        closeTimeout = null;
-      }
+      toggleDropdown();
     });
 
     // Close dropdown when clicking outside
     document.addEventListener('click', (e) => {
-      if (!toggleBtn.contains(e.target as Node) && !dropdown.contains(e.target as Node)) {
-        closeDropdown();
+      if (!toggleBtn.contains(e.target) && !dropdown.contains(e.target)) {
+        if (!dropdown.classList.contains('hidden')) {
+          dropdown.classList.add('hidden');
+          dropdown.classList.remove('opacity-100');
+          dropdown.classList.add('opacity-0');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        }
       }
     });
 
     // Close dropdown on escape key
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeDropdown();
+      if (e.key === 'Escape' && !dropdown.classList.contains('hidden')) {
+        dropdown.classList.add('hidden');
+        dropdown.classList.remove('opacity-100');
+        dropdown.classList.add('opacity-0');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.focus();
       }
     });
   }
@@ -282,16 +238,17 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garde
     refreshBtn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      checkContentAvailability();
+      if (zhAvailability && enAvailability) {
+        checkContentAvailability();
+      }
     });
   }
 
   // Initial availability check on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    if (zhAvailability && enAvailability) {
-      checkContentAvailability();
-    }
-  });
+  if (zhAvailability && enAvailability) {
+    // Small delay to ensure page is fully loaded
+    setTimeout(checkContentAvailability, 100);
+  }
 </script>
 
 <style>
