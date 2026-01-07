@@ -44,9 +44,11 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garde
       <div class="py-1" role="none">
         <a
           href={currentLang === 'zh' ? currentPath : alternatePath}
-          class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white"
+          class:list={[
+            "flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white",
+            currentLang === 'zh' && 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white'
+          ]}
           role="menuitem"
-          class:list={[currentLang === 'zh' && 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white']}
         >
           <span class="mr-3">🇨🇳</span>
           <div class="flex flex-col">
@@ -61,9 +63,11 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garde
         </a>
         <a
           href={currentLang === 'en' ? currentPath : alternatePath}
-          class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white"
+          class:list={[
+            "flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white",
+            currentLang === 'en' && 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white'
+          ]}
           role="menuitem"
-          class:list={[currentLang === 'en' && 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white']}
         >
           <span class="mr-3">🇺🇸</span>
           <div class="flex flex-col">
