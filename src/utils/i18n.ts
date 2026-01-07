@@ -52,6 +52,7 @@ export const i18nConfig: I18nConfig = {
       language: '语言',
       switchToEnglish: 'English',
       switchToChinese: '中文',
+      toc: '目录',
     },
     en: {
       // Navigation
@@ -93,6 +94,7 @@ export const i18nConfig: I18nConfig = {
       language: 'Language',
       switchToEnglish: 'English',
       switchToChinese: '中文',
+      toc: 'Table of Contents',
     }
   }
 };

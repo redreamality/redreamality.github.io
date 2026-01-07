@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../../layouts/Layout.astro';
+import TableOfContents from '../../../../components/TableOfContents.astro';
 import { getTalks, type Language } from '../../../../utils/i18n';
 
 // This is the Chinese talk page (/cn/garden/talks/[slug] path)
@@ -20,7 +21,7 @@ if (!talk) {
   return Astro.redirect('/cn/404', 404);
 }
 
-const { Content } = await talk.render();
+const { Content, headings } = await talk.render();
 
 // Language-specific content
 const content = {
@@ -55,6 +56,7 @@ const formattedDate = talk.data.date.toISOString();
 >
   <main class="container mx-auto px-4 py-8">
     <div class="max-w-4xl mx-auto">
+      {headings && headings.length > 0 && <TableOfContents headings={headings} />}
       <article class="prose dark:prose-invert lg:prose-xl mx-auto">
         <header class="mb-8">
           <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{talk.data.title}</h1>
