@@ -330,7 +330,7 @@ date: ${isoDate}`;
 📁 File: ${filePath}
 🚀 Deployment will be triggered automatically
 
-The talk will be available shortly at /talks/${slug}
+The talk will be available shortly at ${data.language === 'zh' ? `/cn/garden/talks/${slug}` : `/garden/talks/${slug}`}
 
 ${data.language === 'zh' ? 'Consider creating an English version as well!' : 'Consider creating a Chinese version as well!'}
           `;

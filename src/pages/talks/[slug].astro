@@ -1,114 +1,15 @@
 ---
-import { type Language } from '../../utils/i18n';
+import { getTalks } from '../../utils/i18n';
 
 export async function getStaticPaths() {
-  // Return empty array since we're redirecting all requests
-  return [];
+  const talks = await getTalks('en');
+
+  return talks.map((talk) => ({
+    params: { slug: talk.slug },
+  }));
 }
 
-// Get the slug from the URL
 const { slug } = Astro.params;
 
-// Redirect to the new garden structure
 return Astro.redirect(`/garden/talks/${slug}`, 301);
-
-// Language-specific content
-const content = {
-  en: {
-    backToTalks: "Back to Talks",
-    presentedOn: "Presented on",
-    location: "Location",
-    event: "Event",
-    slides: "Slides",
-    video: "Video",
-    viewSlides: "View Slides",
-    watchVideo: "Watch Video"
-  },
-  zh: {
-    backToTalks: "返回演讲列表",
-    presentedOn: "演讲日期",
-    location: "演讲地点",
-    event: "活动",
-    slides: "幻灯片",
-    video: "视频回放",
-    viewSlides: "查看幻灯片",
-    watchVideo: "观看视频"
-  }
-};
-
-const currentContent = content[lang];
-const basePath = lang === 'zh' ? '/cn' : '';
 ---
-
-<Layout title={`${talk.data.title} | Talks`}>
-  <main class="container mx-auto px-4 py-8">
-    <div class="max-w-4xl mx-auto">
-      <div class="mb-8">
-        <a
-          href={`${basePath}/talks`}
-          class="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-        >
-          <span class="mr-2">←</span>
-          {currentContent.backToTalks}
-        </a>
-      </div>
-
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-        <h1 class="text-3xl font-bold mb-6">{talk.data.title}</h1>
-        <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">{talk.data.description}</p>
-
-        <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
-          <div>
-            <span class="mr-2">📅</span>
-            {talk.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}
-          </div>
-          {talk.data.location && (
-            <div>
-              <span class="mr-2">📍</span>
-              {talk.data.location}
-            </div>
-          )}
-          {talk.data.event && (
-            <div>
-              <span class="mr-2">🎤</span>
-              {talk.data.event}
-            </div>
-          )}
-        </div>
-
-        <div class="prose prose-lg dark:prose-invert max-w-none mb-8">
-          <Content />
-        </div>
-
-        <div class="flex gap-4 pt-6 border-t border-gray-200 dark:border-gray-700">
-          {talk.data.slides && (
-            <a
-              href={talk.data.slides}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700"
-            >
-              <span class="mr-2">📊</span>
-              {currentContent.viewSlides}
-            </a>
-          )}
-          {talk.data.video && (
-            <a
-              href={talk.data.video}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700"
-            >
-              <span class="mr-2">🎥</span>
-              {currentContent.watchVideo}
-            </a>
-          )}
-        </div>
-      </div>
-    </div>
-  </main>
-</Layout> 
