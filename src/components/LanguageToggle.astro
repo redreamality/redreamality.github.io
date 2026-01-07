@@ -13,7 +13,7 @@ const alternatePath = getAlternateLanguagePath(currentPath, alternateLang);
 
 // Check if we're on a content page to show availability
 const cleanPath = currentPath.replace(/^\/cn/, ''); // Remove /cn prefix if present
-const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/talks/');
+const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garden/talks/');
 ---
 
 <div class="language-toggle">
@@ -113,7 +113,7 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/talks
 
     const currentPath = window.location.pathname;
     const cleanPath = currentPath.replace(/^\/cn/, ''); // Remove /cn prefix if present
-    const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/talks/');
+    const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garden/talks/');
 
     if (!isContentPage) return;
 
@@ -128,9 +128,9 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/talks
       if (cleanPath.includes('/blog/')) {
         contentType = 'blog';
         slug = cleanPath.split('/blog/')[1].replace(/\/$/, '');
-      } else if (cleanPath.includes('/talks/')) {
-        contentType = 'talks';
-        slug = cleanPath.split('/talks/')[1].replace(/\/$/, '');
+      } else if (cleanPath.includes('/garden/talks/')) {
+        contentType = 'garden/talks';
+        slug = cleanPath.split('/garden/talks/')[1].replace(/\/$/, '');
       }
 
       if (!slug) return;
