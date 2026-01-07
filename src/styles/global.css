@@ -4,6 +4,14 @@
 
 /* 自定义基础样式 */
 @layer base {
+  :root {
+    --site-header-height: 4rem;
+  }
+
+  html {
+    scroll-padding-top: calc(var(--site-header-height) + 1rem);
+  }
+
   body {
     @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white;
   }
@@ -13,6 +21,10 @@
 @layer components {
   .prose {
     @apply max-w-none;
+  }
+
+  .prose :where(h1, h2, h3, h4, h5, h6) {
+    scroll-margin-top: calc(var(--site-header-height) + 1rem);
   }
   
   /* 标题样式 */

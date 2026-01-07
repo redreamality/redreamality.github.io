@@ -41,7 +41,7 @@ function getHeadingStyle(depth: number) {
       headings.map((heading) => (
         <li>
           <a
-            href={`#${heading.slug}`}
+            href={`#${encodeURIComponent(heading.slug)}`}
             class={`block hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150 ${getHeadingStyle(heading.depth)}`}
           >
             <span class="inline-flex items-center">
