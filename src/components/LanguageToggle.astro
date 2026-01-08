@@ -4,9 +4,10 @@ import { detectLanguageFromPath, getAlternateLanguagePath, t, type Language } fr
 interface Props {
   currentPath?: string;
   showAvailability?: boolean;
+  instanceId?: string;
 }
 
-const { currentPath = Astro.url.pathname, showAvailability = false } = Astro.props;
+const { currentPath = Astro.url.pathname, showAvailability = false, instanceId = 'default' } = Astro.props;
 const currentLang = detectLanguageFromPath(currentPath);
 const alternateLang: Language = currentLang === 'zh' ? 'en' : 'zh';
 const alternatePath = getAlternateLanguagePath(currentPath, alternateLang);
@@ -14,12 +15,19 @@ const alternatePath = getAlternateLanguagePath(currentPath, alternateLang);
 // Check if we're on a content page to show availability
 const cleanPath = currentPath.replace(/^\/cn/, ''); // Remove /cn prefix if present
 const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garden/talks/');
+
+// Generate unique IDs for this instance
+const toggleBtnId = `language-toggle-btn-${instanceId}`;
+const dropdownId = `language-dropdown-${instanceId}`;
+const refreshBtnId = `refresh-availability-${instanceId}`;
+const zhAvailabilityId = `zh-availability-${instanceId}`;
+const enAvailabilityId = `en-availability-${instanceId}`;
 ---
 
 <div class="language-toggle">
   <div class="relative inline-block text-left">
     <button
-      id="language-toggle-btn"
+      id={toggleBtnId}
       type="button"
       class="inline-flex items-center justify-center w-full rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
       aria-expanded="false"
@@ -35,11 +43,11 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garde
     </button>
 
     <div
-      id="language-dropdown"
+      id={dropdownId}
       class="hidden opacity-0 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-50 transition-opacity duration-200"
       role="menu"
       aria-orientation="vertical"
-      aria-labelledby="language-toggle-btn"
+      aria-labelledby={toggleBtnId}
     >
       <div class="py-1" role="none">
         <!-- Chinese language option -->
@@ -53,7 +61,7 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garde
           <div class="flex flex-col">
             <span>中文</span>
             {isContentPage && showAvailability && (
-              <span class="text-xs text-gray-500 dark:text-gray-400" id="zh-availability">
+              <span class="text-xs text-gray-500 dark:text-gray-400" id={zhAvailabilityId}>
                 检查中...
               </span>
             )}
@@ -72,7 +80,7 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garde
           <div class="flex flex-col">
             <span>English</span>
             {isContentPage && showAvailability && (
-              <span class="text-xs text-gray-500 dark:text-gray-400" id="en-availability">
+              <span class="text-xs text-gray-500 dark:text-gray-400" id={enAvailabilityId}>
                 Checking...
               </span>
             )}
@@ -86,7 +94,7 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garde
               <div class="flex items-center justify-between">
                 <span>{t('language', currentLang)}</span>
                 <button
-                  id="refresh-availability"
+                  id={refreshBtnId}
                   class="text-blue-600 dark:text-blue-400 hover:underline"
                   title="Refresh availability"
                 >
@@ -103,11 +111,11 @@ const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garde
 
 <script>
   // Language toggle dropdown functionality
-  const toggleBtn = document.getElementById('language-toggle-btn');
-  const dropdown = document.getElementById('language-dropdown');
-  const refreshBtn = document.getElementById('refresh-availability');
-  const zhAvailability = document.getElementById('zh-availability');
-  const enAvailability = document.getElementById('en-availability');
+  const toggleBtn = document.getElementById(toggleBtnId);
+  const dropdown = document.getElementById(dropdownId);
+  const refreshBtn = document.getElementById(refreshBtnId);
+  const zhAvailability = document.getElementById(zhAvailabilityId);
+  const enAvailability = document.getElementById(enAvailabilityId);
 
   function toggleDropdown() {
     if (!dropdown || !toggleBtn) return;
