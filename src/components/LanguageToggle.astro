@@ -109,7 +109,7 @@ const enAvailabilityId = `en-availability-${instanceId}`;
   </div>
 </div>
 
-<script>
+<script is:inline define:vars={{ toggleBtnId, dropdownId, refreshBtnId, zhAvailabilityId, enAvailabilityId }}>
   // Language toggle dropdown functionality
   const toggleBtn = document.getElementById(toggleBtnId);
   const dropdown = document.getElementById(dropdownId);
