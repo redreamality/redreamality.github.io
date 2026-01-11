@@ -34,7 +34,26 @@ export default defineConfig({
       }]]
     }),
     sitemap({
-      filter: (page) => !page.includes('/private/'),
+      filter: (page) => {
+        // Exclude private pages
+        if (page.includes('/private/')) return false;
+        
+        // Parse URL to get pathname for precise matching
+        const url = new URL(page);
+        const path = url.pathname;
+        
+        // Exclude redirect pages - these have noindex meta tags
+        // Redirect from /talks/* to /garden/talks/*
+        if (path === '/talks/' || path === '/talks') return false;
+        if (path.match(/^\/talks\/[^/]+\/?$/)) return false;
+        if (path === '/cn/talks/' || path === '/cn/talks') return false;
+        if (path.match(/^\/cn\/talks\/[^/]+\/?$/)) return false;
+        
+        // Redirect from /garden/blog/* to /blog/*
+        if (path.includes('/garden/blog/')) return false;
+        
+        return true;
+      },
       changefreq: 'weekly',
       serialize: (item) => ({
         ...item,
