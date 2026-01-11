@@ -1,7 +1,7 @@
 ---
 title: "OpenSpec Deep Dive: Spec-Driven Development Architecture & Practice in AI-Assisted Programming"
 description: "Explore OpenSpec's core architecture, workflows, and enterprise applications to understand how Spec-Driven Development solves context loss and hallucination in AI programming"
-date: 2025-01-10
+date: 2026-01-11
 source: "https://github.com/Fission-AI/OpenSpec"
 tags: ["AI Development", "OpenSpec", "Spec-Driven Development", "SDD", "AI Agents"]
 lang: "en"

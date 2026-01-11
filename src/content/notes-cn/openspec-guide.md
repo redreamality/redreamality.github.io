@@ -1,7 +1,7 @@
 ---
 title: "OpenSpec 深度研究报告：规格驱动开发在 AI 辅助编程中的架构与实践"
 description: "深入探索 OpenSpec 的核心架构、工作流程与企业应用，了解如何通过规格驱动开发解决 AI 编程中的上下文丢失和幻觉问题"
-date: 2025-01-10
+date: 2026-01-11
 source: "https://github.com/Fission-AI/OpenSpec"
 tags: ["AI开发", "OpenSpec", "规格驱动开发", "SDD", "AI代理"]
 lang: "zh"
