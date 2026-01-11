@@ -22,7 +22,8 @@ const {
     type = "website",
     publishDate,
     tags = [],
-    author = "Redreamality"
+    author = "Redreamality",
+    robots = "index, follow, max-image-preview:large"
 } = Astro.props;
 
 const socialImageURL = new URL(image, Astro.site);
@@ -96,7 +97,7 @@ const languageCode = getLanguageCode(currentLang);
         <!-- Other Meta Tags -->
         <meta name="generator" content={Astro.generator} />
         <meta name="google-site-verification" content="NxVlZ1d8Bmz-k4XFi54AbYDxS-5atIJjnfGXeEC3eVg" />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <meta name="robots" content={robots} />
         <meta name="author" content={author} />
         <meta name="keywords" content={tags.join(', ')} />
         
