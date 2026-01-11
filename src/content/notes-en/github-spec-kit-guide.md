@@ -1,7 +1,7 @@
 ---
 title: "GitHub Spec Kit Deep Dive: AI-Driven Specification Development Methodology"
 description: "An in-depth analysis of GitHub Spec Kit's architecture, workflows, and enterprise applications exploring how Spec-Driven Development solves context loss in AI programming"
-date: 2025-01-10
+date: 2026-01-08
 source: "https://github.com/github/spec-kit"
 tags: ["AI Development", "Spec-Driven Development", "SDD", "GitHub", "Spec Kit"]
 lang: "en"

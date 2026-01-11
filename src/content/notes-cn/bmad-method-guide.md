@@ -1,7 +1,7 @@
 ---
 title: "BMAD-METHOD 使用指南：突破性敏捷AI驱动开发方法"
 description: "深度解析 BMAD-METHOD 的核心架构、安装部署、智能体角色与四阶段敏捷方法论，帮助开发者掌握规格驱动的 AI 开发框架"
-date: 2025-01-10
+date: 2026-01-10
 source: "https://github.com/bmad-code-org/BMAD-METHOD"
 tags: ["AI开发", "敏捷开发", "BMAD", "规格驱动开发", "多智能体系统"]
 lang: "zh"

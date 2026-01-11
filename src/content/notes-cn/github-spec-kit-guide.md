@@ -1,7 +1,7 @@
 ---
 title: "GitHub Spec Kit 深度指南：AI 驱动的规范开发方法论"
 description: "深入剖析 GitHub Spec Kit 的架构设计、工作流程与企业级应用，探索规范驱动开发（SDD）如何解决 AI 编程中的上下文丢失问题"
-date: 2025-01-10
+date: 2026-01-08
 source: "https://github.com/github/spec-kit"
 tags: ["AI开发", "规范驱动开发", "SDD", "GitHub", "Spec Kit"]
 lang: "zh"
