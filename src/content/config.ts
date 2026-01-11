@@ -8,7 +8,7 @@ const blogSchema = z.object({
   tags: z.array(z.string()).optional(),
   image: z.string().optional(),
   updatedDate: z.date().optional(),
-  lang: z.enum(['zh', 'en']).optional(),
+  lang: z.enum(['zh', 'en', 'ja']).optional(),
   translatedFrom: z.string().optional(), // Reference to original post slug
 });
 
@@ -19,7 +19,7 @@ const talksSchema = z.object({
   location: z.string().optional(),
   slides: z.string().optional(),
   video: z.string().optional(),
-  lang: z.enum(['zh', 'en']).optional(),
+  lang: z.enum(['zh', 'en', 'ja']).optional(),
   translatedFrom: z.string().optional(), // Reference to original talk slug
 });
 
@@ -28,7 +28,7 @@ const questionsSchema = z.object({
   description: z.string(),
   date: z.date(),
   tags: z.array(z.string()).optional(),
-  lang: z.enum(['zh', 'en']).optional(),
+  lang: z.enum(['zh', 'en', 'ja']).optional(),
   translatedFrom: z.string().optional(), // Reference to original question slug
 });
 
@@ -38,7 +38,7 @@ const notesSchema = z.object({
   date: z.date(),
   source: z.string().optional(), // Original source URL or reference
   tags: z.array(z.string()).optional(),
-  lang: z.enum(['zh', 'en']).optional(),
+  lang: z.enum(['zh', 'en', 'ja']).optional(),
   translatedFrom: z.string().optional(), // Reference to original note slug
 });
 
@@ -47,7 +47,7 @@ const projectsSchema = z.object({
   description: z.string(),
   pubDate: z.date(),
   author: z.string(),
-  lang: z.enum(['zh', 'en']).optional(),
+  lang: z.enum(['zh', 'en', 'ja']).optional(),
   translatedFrom: z.string().optional(), // Reference to original project slug
 });
 
@@ -58,6 +58,17 @@ const blogCnCollection = defineCollection({
 });
 
 const talksCnCollection = defineCollection({
+  type: 'content',
+  schema: talksSchema,
+});
+
+// Japanese content collections
+const blogJaCollection = defineCollection({
+  type: 'content',
+  schema: blogSchema,
+});
+
+const talksJaCollection = defineCollection({
   type: 'content',
   schema: talksSchema,
 });
@@ -84,6 +95,11 @@ const projectsEnCollection = defineCollection({
   schema: projectsSchema,
 });
 
+const projectsJaCollection = defineCollection({
+  type: 'content',
+  schema: projectsSchema,
+});
+
 // Questions content collections
 const questionsCnCollection = defineCollection({
   type: 'content',
@@ -91,6 +107,11 @@ const questionsCnCollection = defineCollection({
 });
 
 const questionsEnCollection = defineCollection({
+  type: 'content',
+  schema: questionsSchema,
+});
+
+const questionsJaCollection = defineCollection({
   type: 'content',
   schema: questionsSchema,
 });
@@ -106,15 +127,25 @@ const notesEnCollection = defineCollection({
   schema: notesSchema,
 });
 
+const notesJaCollection = defineCollection({
+  type: 'content',
+  schema: notesSchema,
+});
+
 export const collections = {
   'blog-cn': blogCnCollection,
   'blog-en': blogEnCollection,
+  'blog-ja': blogJaCollection,
   'talks-cn': talksCnCollection,
   'talks-en': talksEnCollection,
+  'talks-ja': talksJaCollection,
   'projects-cn': projectsCnCollection,
   'projects-en': projectsEnCollection,
+  'projects-ja': projectsJaCollection,
   'questions-cn': questionsCnCollection,
   'questions-en': questionsEnCollection,
+  'questions-ja': questionsJaCollection,
   'notes-cn': notesCnCollection,
   'notes-en': notesEnCollection,
+  'notes-ja': notesJaCollection,
 };

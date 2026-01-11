@@ -9,8 +9,9 @@ interface Props {
 
 const { currentPath = Astro.url.pathname, showAvailability = false, instanceId = 'default' } = Astro.props;
 const currentLang = detectLanguageFromPath(currentPath);
-const alternateLang: Language = currentLang === 'zh' ? 'en' : 'zh';
-const alternatePath = getAlternateLanguagePath(currentPath, alternateLang);
+const alternateLangs: Language[] = currentLang === 'zh' ? ['en', 'ja'] : currentLang === 'ja' ? ['zh', 'en'] : ['zh', 'ja'];
+const primaryAlternateLang = alternateLangs[0];
+const alternatePath = getAlternateLanguagePath(currentPath, primaryAlternateLang);
 
 // Check if we're on a content page to show availability
 const cleanPath = currentPath.replace(/^\/cn/, ''); // Remove /cn prefix if present
@@ -22,6 +23,7 @@ const dropdownId = `language-dropdown-${instanceId}`;
 const refreshBtnId = `refresh-availability-${instanceId}`;
 const zhAvailabilityId = `zh-availability-${instanceId}`;
 const enAvailabilityId = `en-availability-${instanceId}`;
+const jaAvailabilityId = `ja-availability-${instanceId}`;
 ---
 
 <div class="language-toggle">
@@ -36,7 +38,7 @@ const enAvailabilityId = `en-availability-${instanceId}`;
       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
       </svg>
-      {currentLang === 'zh' ? '中文' : 'English'}
+      {currentLang === 'zh' ? '中文' : currentLang === 'ja' ? '日本語' : 'English'}
       <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
       </svg>
@@ -52,7 +54,7 @@ const enAvailabilityId = `en-availability-${instanceId}`;
       <div class="py-1" role="none">
         <!-- Chinese language option -->
         <a
-          href={alternateLang === 'zh' ? alternatePath : currentPath}
+          href={getAlternateLanguagePath(currentPath, 'zh')}
           class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white"
           role="menuitem"
           class:list={[currentLang === 'zh' && 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white']}
@@ -71,7 +73,7 @@ const enAvailabilityId = `en-availability-${instanceId}`;
         
         <!-- English language option -->
         <a
-          href={alternateLang === 'en' ? alternatePath : currentPath}
+          href={getAlternateLanguagePath(currentPath, 'en')}
           class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white"
           role="menuitem"
           class:list={[currentLang === 'en' && 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white']}
@@ -86,6 +88,25 @@ const enAvailabilityId = `en-availability-${instanceId}`;
             )}
           </div>
           {currentLang === 'en' && <span class="ml-auto text-blue-600 dark:text-blue-400">✓</span>}
+        </a>
+
+        <!-- Japanese language option -->
+        <a
+          href={getAlternateLanguagePath(currentPath, 'ja')}
+          class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white"
+          role="menuitem"
+          class:list={[currentLang === 'ja' && 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white']}
+        >
+          <span class="mr-3">🇯🇵</span>
+          <div class="flex flex-col">
+            <span>日本語</span>
+            {isContentPage && showAvailability && (
+              <span class="text-xs text-gray-500 dark:text-gray-400" id={jaAvailabilityId}>
+                確認中...
+              </span>
+            )}
+          </div>
+          {currentLang === 'ja' && <span class="ml-auto text-blue-600 dark:text-blue-400">✓</span>}
         </a>
 
         {isContentPage && (
@@ -109,13 +130,14 @@ const enAvailabilityId = `en-availability-${instanceId}`;
   </div>
 </div>
 
-<script is:inline define:vars={{ toggleBtnId, dropdownId, refreshBtnId, zhAvailabilityId, enAvailabilityId }}>
+<script is:inline define:vars={{ toggleBtnId, dropdownId, refreshBtnId, zhAvailabilityId, enAvailabilityId, jaAvailabilityId }}>
   // Language toggle dropdown functionality
   const toggleBtn = document.getElementById(toggleBtnId);
   const dropdown = document.getElementById(dropdownId);
   const refreshBtn = document.getElementById(refreshBtnId);
   const zhAvailability = document.getElementById(zhAvailabilityId);
   const enAvailability = document.getElementById(enAvailabilityId);
+  const jaAvailability = document.getElementById(jaAvailabilityId);
 
   function toggleDropdown() {
     if (!dropdown || !toggleBtn) return;
@@ -150,10 +172,10 @@ const enAvailabilityId = `en-availability-${instanceId}`;
 
   // Check content availability for current page
   async function checkContentAvailability() {
-    if (!zhAvailability || !enAvailability) return;
+    if (!zhAvailability || !enAvailability || !jaAvailability) return;
 
     const currentPath = window.location.pathname;
-    const cleanPath = currentPath.replace(/^\/cn/, ''); // Remove /cn prefix if present
+    const cleanPath = currentPath.replace(/^\/cn/, '').replace(/^\/ja/, ''); // Remove /cn or /ja prefix if present
     const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garden/talks/');
 
     if (!isContentPage) return;
@@ -173,10 +195,11 @@ const enAvailabilityId = `en-availability-${instanceId}`;
 
       if (!slug) return;
 
-      // Check if content exists in both languages by trying to fetch them
-      const [zhExists, enExists] = await Promise.all([
+      // Check if content exists in all three languages by trying to fetch them
+      const [zhExists, enExists, jaExists] = await Promise.all([
         checkContentExists(contentType, slug, 'zh'),
-        checkContentExists(contentType, slug, 'en')
+        checkContentExists(contentType, slug, 'en'),
+        checkContentExists(contentType, slug, 'ja')
       ]);
 
       // Update availability indicators
@@ -190,17 +213,23 @@ const enAvailabilityId = `en-availability-${instanceId}`;
         ? 'text-xs text-green-600 dark:text-green-400'
         : 'text-xs text-gray-500 dark:text-gray-400';
 
+      jaAvailability.textContent = jaExists ? '✓ 利用可能' : '✗ 利用不可';
+      jaAvailability.className = jaExists
+        ? 'text-xs text-green-600 dark:text-green-400'
+        : 'text-xs text-gray-500 dark:text-gray-400';
+
     } catch (error) {
       console.warn('Error checking content availability:', error);
       zhAvailability.textContent = '检查失败';
       enAvailability.textContent = 'Check failed';
+      jaAvailability.textContent = '確認失敗';
     }
   }
 
   // Check if content exists by attempting to fetch it
   async function checkContentExists(type, slug, lang) {
     try {
-      const path = lang === 'zh' ? `/cn/${type}/${slug}` : `/${type}/${slug}`;
+      const path = lang === 'zh' ? `/cn/${type}/${slug}` : lang === 'ja' ? `/ja/${type}/${slug}` : `/${type}/${slug}`;
       const response = await fetch(path, { method: 'HEAD' });
       return response.ok;
     } catch (error) {

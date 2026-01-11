@@ -1,0 +1,130 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import TableOfContents from '../../../../components/TableOfContents.astro';
+import RelatedContent from '../../../../components/RelatedContent.astro';
+import { getNotes, type Language } from '../../../../utils/i18n';
+import { rankRelatedContent } from '../../../../utils/related';
+
+// This is the Chinese note page (/cn/garden/notes/[slug] path)
+const lang: Language = 'zh';
+
+export async function getStaticPaths() {
+  const notes = await getNotes('zh');
+  return notes.map((note) => ({
+    params: { slug: note.slug },
+    props: { note },
+  }));
+}
+
+// Get the note from props
+const { note } = Astro.props;
+
+if (!note) {
+  return Astro.redirect('/cn/404', 404);
+}
+
+const { Content, headings } = await note.render();
+
+// Language-specific content
+const content = {
+  en: {
+    createdOn: "Created on",
+    backToNotes: "Back to Notes",
+    source: "Source",
+    tagsTitle: "Tags:",
+    relatedTitle: "Related Notes"
+  },
+  zh: {
+    createdOn: "创建于",
+    backToNotes: "返回笔记",
+    source: "来源",
+    tagsTitle: "标签:",
+    relatedTitle: "相关笔记"
+  }
+};
+
+const currentContent = content[lang];
+const basePath = lang === 'zh' ? '/cn' : '';
+
+// Format date for meta tags
+const formattedDate = note.data.date.toISOString();
+
+const allNotes = await getNotes(lang);
+const relatedNotes = rankRelatedContent(allNotes, note, { dateField: 'date', limit: 6 });
+const relatedItems = relatedNotes.map((relatedNote) => ({
+  href: `${basePath}/garden/notes/${relatedNote.slug}`,
+  title: relatedNote.data.title,
+  description: relatedNote.data.description,
+  date: relatedNote.data.date
+}));
+---
+
+<Layout 
+  title={note.data.title} 
+  description={note.data.description}
+  publishDate={formattedDate}
+  tags={note.data.tags || []}
+  type="article"
+>
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      {headings && headings.length > 0 && <TableOfContents headings={headings} />}
+      <article class="prose dark:prose-invert lg:prose-xl mx-auto">
+        <header class="mb-8">
+          <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{note.data.title}</h1>
+          <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+            <span>
+              {currentContent.createdOn} {note.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </span>
+            {note.data.source && (
+              <span>
+                {currentContent.source}: {note.data.source}
+              </span>
+            )}
+          </div>
+          
+          {note.data.tags && note.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-sm font-medium text-gray-600 dark:text-gray-300">{currentContent.tagsTitle}</span>
+              {note.data.tags.map((tag) => (
+                <span class="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded dark:bg-gray-700 dark:text-gray-300">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </header>
+
+        <div class="prose dark:prose-invert max-w-none">
+          <Content />
+        </div>
+
+        <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 not-prose">
+          <RelatedContent title={currentContent.relatedTitle} items={relatedItems} lang={lang} />
+
+          <div class="mt-10">
+            <a
+              href={`${basePath}/garden/notes`}
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
+            >
+              {currentContent.backToNotes}
+              <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+              </svg>
+            </a>
+          </div>
+        </footer>
+      </article>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .prose :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
+    margin-top: 2em;
+  }
+</style>

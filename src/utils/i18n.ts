@@ -1,6 +1,6 @@
 import { getCollection } from 'astro:content';
 
-export type Language = 'zh' | 'en';
+export type Language = 'zh' | 'en' | 'ja';
 
 export interface I18nConfig {
   defaultLanguage: Language;
@@ -10,7 +10,7 @@ export interface I18nConfig {
 
 export const i18nConfig: I18nConfig = {
   defaultLanguage: 'en',
-  languages: ['en', 'zh'],
+  languages: ['en', 'zh', 'ja'],
   labels: {
     zh: {
       // Navigation
@@ -52,6 +52,7 @@ export const i18nConfig: I18nConfig = {
       language: '语言',
       switchToEnglish: 'English',
       switchToChinese: '中文',
+      switchToJapanese: '日本語',
       toc: '目录',
     },
     en: {
@@ -94,7 +95,51 @@ export const i18nConfig: I18nConfig = {
       language: 'Language',
       switchToEnglish: 'English',
       switchToChinese: '中文',
+      switchToJapanese: '日本語',
       toc: 'Table of Contents',
+    },
+    ja: {
+      // Navigation
+      home: 'ホーム',
+      garden: 'ガーデン',
+      blog: 'ブログ',
+      talks: '講演',
+      questions: '質問',
+      notes: 'ノート',
+      projects: 'プロジェクト',
+      about: '私について',
+      tags: 'タグ',
+      
+      // Content
+      readMore: '続きを読む',
+      publishedOn: '公開日',
+      updatedOn: '更新日',
+      author: '著者',
+      location: '場所',
+      slides: 'スライド',
+      video: 'ビデオ',
+      
+      // Common
+      loading: '読み込み中...',
+      error: 'エラー',
+      notFound: '見つかりません',
+      backToHome: 'ホームに戻る',
+      
+      // Blog
+      recentPosts: '最新記事',
+      allPosts: 'すべての記事',
+      postsTaggedWith: 'タグ付き記事',
+      
+      // Talks
+      recentTalks: '最新講演',
+      allTalks: 'すべての講演',
+      
+      // Language
+      language: '言語',
+      switchToEnglish: 'English',
+      switchToChinese: '中文',
+      switchToJapanese: '日本語',
+      toc: '目次',
     }
   }
 };
@@ -113,6 +158,9 @@ export function detectLanguageFromPath(pathname: string): Language {
   if (pathname.startsWith('/cn/') || pathname === '/cn') {
     return 'zh';
   }
+  if (pathname.startsWith('/ja/') || pathname === '/ja') {
+    return 'ja';
+  }
   return 'en'; // Default to English
 }
 
@@ -121,10 +169,14 @@ export function detectLanguageFromPath(pathname: string): Language {
  */
 export function getLocalizedPath(path: string, lang: Language): string {
   // Remove existing language prefix
-  const cleanPath = path.replace(/^\/(cn|en)/, '');
+  const cleanPath = path.replace(/^\/(cn|en|ja)/, '');
 
   if (lang === 'zh') {
     return cleanPath === '' || cleanPath === '/' ? '/cn' : `/cn${cleanPath}`;
+  }
+
+  if (lang === 'ja') {
+    return cleanPath === '' || cleanPath === '/' ? '/ja' : `/ja${cleanPath}`;
   }
 
   return cleanPath || '/';
@@ -143,7 +195,7 @@ export function getAlternateLanguagePath(currentPath: string, targetLang: Langua
 export async function getBlogPosts(lang: Language) {
   try {
     // Get language-specific collection
-    const collectionName = lang === 'zh' ? 'blog-cn' : 'blog-en';
+    const collectionName = lang === 'zh' ? 'blog-cn' : lang === 'ja' ? 'blog-ja' : 'blog-en';
     const posts = await getCollection(collectionName);
     return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   } catch (error) {
@@ -158,7 +210,7 @@ export async function getBlogPosts(lang: Language) {
 export async function getTalks(lang: Language) {
   try {
     // Get language-specific collection
-    const collectionName = lang === 'zh' ? 'talks-cn' : 'talks-en';
+    const collectionName = lang === 'zh' ? 'talks-cn' : lang === 'ja' ? 'talks-ja' : 'talks-en';
     const talks = await getCollection(collectionName);
     return talks.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   } catch (error) {
@@ -173,7 +225,7 @@ export async function getTalks(lang: Language) {
 export async function getQuestions(lang: Language) {
   try {
     // Get language-specific collection
-    const collectionName = lang === 'zh' ? 'questions-cn' : 'questions-en';
+    const collectionName = lang === 'zh' ? 'questions-cn' : lang === 'ja' ? 'questions-ja' : 'questions-en';
     const questions = await getCollection(collectionName);
     return questions.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   } catch (error) {
@@ -188,7 +240,7 @@ export async function getQuestions(lang: Language) {
 export async function getNotes(lang: Language) {
   try {
     // Get language-specific collection
-    const collectionName = lang === 'zh' ? 'notes-cn' : 'notes-en';
+    const collectionName = lang === 'zh' ? 'notes-cn' : lang === 'ja' ? 'notes-ja' : 'notes-en';
     const notes = await getCollection(collectionName);
     return notes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   } catch (error) {
@@ -203,7 +255,7 @@ export async function getNotes(lang: Language) {
 export async function getProjects(lang: Language) {
   try {
     // Get language-specific collection
-    const collectionName = lang === 'zh' ? 'projects-cn' : 'projects-en';
+    const collectionName = lang === 'zh' ? 'projects-cn' : lang === 'ja' ? 'projects-ja' : 'projects-en';
     const projects = await getCollection(collectionName);
     return projects.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   } catch (error) {
@@ -259,6 +311,7 @@ export async function getTranslationStatus(slug: string, type: 'blog' | 'talks' 
   const status = {
     zh: false,
     en: false,
+    ja: false,
     originalLang: 'zh' as Language
   };
 
@@ -272,6 +325,11 @@ export async function getTranslationStatus(slug: string, type: 'blog' | 'talks' 
     const enCollection = type === 'blog' ? 'blog-en' : type === 'talks' ? 'talks-en' : type === 'projects' ? 'projects-en' : type === 'questions' ? 'questions-en' : 'notes-en';
     const enPosts = await getCollection(enCollection as any);
     status.en = enPosts.some(post => post.slug === slug);
+
+    // Check Japanese version
+    const jaCollection = type === 'blog' ? 'blog-ja' : type === 'talks' ? 'talks-ja' : type === 'projects' ? 'projects-ja' : type === 'questions' ? 'questions-ja' : 'notes-ja';
+    const jaPosts = await getCollection(jaCollection as any);
+    status.ja = jaPosts.some(post => post.slug === slug);
 
     // Check main collection for original language
     const mainPosts = await getCollection(type);
@@ -321,7 +379,7 @@ export async function getLocalizedContent(
 ): Promise<any> {
   try {
     // Try language-specific collection first
-    const collectionName = `${type}-${lang === 'zh' ? 'cn' : 'en'}` as const;
+    const collectionName = `${type}-${lang === 'zh' ? 'cn' : lang === 'ja' ? 'ja' : 'en'}` as const;
     const collection = await getCollection(collectionName);
     const item = collection.find(item => item.slug === slug);
     if (item) return item;
@@ -360,6 +418,13 @@ export function getHreflangAlternates(currentPath: string, site: string): Array<
     url: new URL(zhPath, site).toString()
   });
 
+  // Add Japanese version
+  const jaPath = getLocalizedPath(currentPath, 'ja');
+  alternates.push({
+    lang: 'ja',
+    url: new URL(jaPath, site).toString()
+  });
+
   return alternates;
 }
 
@@ -367,14 +432,30 @@ export function getHreflangAlternates(currentPath: string, site: string): Array<
  * Get locale string for meta tags
  */
 export function getLocaleString(lang: Language): string {
-  return lang === 'zh' ? 'zh_CN' : 'en_US';
+  switch (lang) {
+    case 'zh':
+      return 'zh_CN';
+    case 'ja':
+      return 'ja_JP';
+    case 'en':
+    default:
+      return 'en_US';
+  }
 }
 
 /**
  * Get language code for HTML lang attribute
  */
 export function getLanguageCode(lang: Language): string {
-  return lang === 'zh' ? 'zh-CN' : 'en';
+  switch (lang) {
+    case 'zh':
+      return 'zh-CN';
+    case 'ja':
+      return 'ja';
+    case 'en':
+    default:
+      return 'en';
+  }
 }
 
 /**

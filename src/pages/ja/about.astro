@@ -1,0 +1,136 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { type Language } from '../../utils/i18n';
+
+// This is the Chinese about page (/cn/about path)
+const lang: Language = 'zh';
+
+// Language-specific content
+const content = {
+  en: {
+    title: "About Me",
+    pageTitle: "About Me - Remy's Personal Website",
+    greeting: "Hello, I'm Remy",
+    bio: "Remy is an AI scientist, INTP, PhD graduate from Fudan University. Currently working on large language models and work automation content. Involved in how to make machines understand language, understand work tasks, and execute work tasks. The name Remy comes from Redreamality, meaning 'dream in reality'.",
+    education: "🎓 Education: Computer Science and Technology",
+    work: "💼 Work Field: AI Application Development", 
+    research: "📚 Research Direction: Large Language Model Applications, Multi-Agent Systems",
+    skillsTitle: "Professional Skills",
+    skills: [
+      "• LLM-related training, inference, fine-tuning, deployment",
+      "• Multi-agent systems",
+      "• Full-stack development (Python, TypeScript)",
+      "• Search/Recommendation/Related tech stack",
+      "• 5 years of knowledge graph/information extraction experience"
+    ],
+    interestsTitle: "Personal Interests",
+    interests: [
+      "• Passionate about everything related to automation",
+      "• Personal knowledge management and digital gardens",
+      "• Quantitative trading"
+    ],
+    contactTitle: "Contact Information",
+    githubLabel: "GitHub",
+    emailLabel: "Email"
+  },
+  zh: {
+    title: "关于我",
+    pageTitle: "关于我 - Remy的个人网站",
+    greeting: "你好，我是 Remy",
+    bio: "Remy是一名人工智能科学家，INTP，博士毕业于复旦大学。正在从事利用大模型和工作自动化内容相关的工作。涉及如何让机器理解语言、理解工作任务、执行工作任务。Remy名字的由来是 Redreamality，意为dream in reality，'真实梦'。",
+    education: "🎓 教育背景：计算机科学与技术",
+    work: "💼 工作领域：AI 应用开发",
+    research: "📚 研究方向：大语言模型应用、多智能体系统",
+    skillsTitle: "专业技能",
+    skills: [
+      "• LLM相关的训练、推理、微调、部署",
+      "• 多智能体系统",
+      "• 全栈开发（Python、Typescript）",
+      "• 搜索/推荐/相关技术栈",
+      "• 5年知识图谱/信息抽取经验"
+    ],
+    interestsTitle: "个人兴趣",
+    interests: [
+      "• 热衷一切和自动化相关的事情",
+      "• 个人知识管理和数字花园",
+      "• 量化交易"
+    ],
+    contactTitle: "联系方式",
+    githubLabel: "GitHub",
+    emailLabel: "Email"
+  }
+};
+
+const currentContent = content[lang];
+---
+
+<Layout title={currentContent.pageTitle}>
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8 text-center text-gray-900 dark:text-white">{currentContent.title}</h1>
+    
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+        <div class="w-48 h-48 relative">
+          <img
+            src="/assets/avatar.png"
+            alt={lang === 'zh' ? "Remy的头像" : "Remy's Avatar"}
+            class="rounded-full w-full h-full object-cover shadow-lg"
+            onerror="this.src='/assets/default-avatar.svg'"
+          />
+        </div>
+        
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{currentContent.greeting}</h2>
+          <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+            {lang === 'zh' ? (
+              <>
+                Remy是一名人工智能科学家，INTP，博士毕业于复旦大学。正在从事利用大模型和工作自动化内容相关的工作。涉及如何让机器理解语言、理解工作任务、执行工作任务。Remy名字的由来是 <span class="text-blue-500">Re</span><span class="text-red-500">dream</span><span class="text-blue-500">ality</span>，意为dream in reality，"真实梦"。
+              </>
+            ) : (
+              <>
+                Remy is an AI scientist, INTP, PhD graduate from Fudan University. Currently working on large language models and work automation content. Involved in how to make machines understand language, understand work tasks, and execute work tasks. The name Remy comes from <span class="text-blue-500">Re</span><span class="text-red-500">dream</span><span class="text-blue-500">ality</span>, meaning "dream in reality".
+              </>
+            )}
+          </p>
+          <div class="space-y-2 text-gray-600 dark:text-gray-300">
+            <p>{currentContent.education}</p>
+            <p>{currentContent.work}</p>
+            <p>{currentContent.research}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+        <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">{currentContent.skillsTitle}</h3>
+        <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+          {currentContent.skills.map((skill) => (
+            <li>{skill}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+        <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">{currentContent.interestsTitle}</h3>
+        <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+          {currentContent.interests.map((interest) => (
+            <li>{interest}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mt-8">
+      <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">{currentContent.contactTitle}</h3>
+      <div class="flex flex-wrap gap-4 text-gray-600 dark:text-gray-300">
+        <a href="https://github.com/redreamality" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          <svg class="mr-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> {currentContent.githubLabel}
+        </a>
+        <a href="mailto:redreamality@gmail.com" class="flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          <svg class="mr-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> {currentContent.emailLabel}
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

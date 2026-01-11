@@ -1,0 +1,123 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import TableOfContents from '../../../../components/TableOfContents.astro';
+import RelatedContent from '../../../../components/RelatedContent.astro';
+import { getQuestions, type Language } from '../../../../utils/i18n';
+import { rankRelatedContent } from '../../../../utils/related';
+
+// This is the Chinese question page (/cn/garden/questions/[slug] path)
+const lang: Language = 'zh';
+
+export async function getStaticPaths() {
+  const questions = await getQuestions('zh');
+  return questions.map((question) => ({
+    params: { slug: question.slug },
+    props: { question },
+  }));
+}
+
+// Get the question from props
+const { question } = Astro.props;
+
+if (!question) {
+  return Astro.redirect('/cn/404', 404);
+}
+
+const { Content, headings } = await question.render();
+
+// Language-specific content
+const content = {
+  en: {
+    askedOn: "Asked on",
+    backToQuestions: "Back to Questions",
+    tagsTitle: "Tags:",
+    relatedTitle: "Related Questions"
+  },
+  zh: {
+    askedOn: "提出于",
+    backToQuestions: "返回问题",
+    tagsTitle: "标签:",
+    relatedTitle: "相关问题"
+  }
+};
+
+const currentContent = content[lang];
+const basePath = lang === 'zh' ? '/cn' : '';
+
+// Format date for meta tags
+const formattedDate = question.data.date.toISOString();
+
+const allQuestions = await getQuestions(lang);
+const relatedQuestions = rankRelatedContent(allQuestions, question, { dateField: 'date', limit: 6 });
+const relatedItems = relatedQuestions.map((relatedQuestion) => ({
+  href: `${basePath}/garden/questions/${relatedQuestion.slug}`,
+  title: relatedQuestion.data.title,
+  description: relatedQuestion.data.description,
+  date: relatedQuestion.data.date
+}));
+---
+
+<Layout 
+  title={question.data.title} 
+  description={question.data.description}
+  publishDate={formattedDate}
+  tags={question.data.tags || []}
+  type="article"
+>
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      {headings && headings.length > 0 && <TableOfContents headings={headings} />}
+      <article class="prose dark:prose-invert lg:prose-xl mx-auto">
+        <header class="mb-8">
+          <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{question.data.title}</h1>
+          <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+            <span>
+              {currentContent.askedOn} {question.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </span>
+          </div>
+          
+          {question.data.tags && question.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-sm font-medium text-gray-600 dark:text-gray-300">{currentContent.tagsTitle}</span>
+              {question.data.tags.map((tag) => (
+                <span class="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded dark:bg-gray-700 dark:text-gray-300">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </header>
+
+        <div class="prose dark:prose-invert max-w-none">
+          <Content />
+        </div>
+
+        <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 not-prose">
+          <RelatedContent title={currentContent.relatedTitle} items={relatedItems} lang={lang} />
+
+          <div class="mt-10">
+            <a
+              href={`${basePath}/garden/questions`}
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
+            >
+              {currentContent.backToQuestions}
+              <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+              </svg>
+            </a>
+          </div>
+        </footer>
+      </article>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .prose :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
+    margin-top: 2em;
+  }
+</style>

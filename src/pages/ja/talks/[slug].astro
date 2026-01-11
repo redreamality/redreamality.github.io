@@ -1,0 +1,15 @@
+---
+import { getTalks } from '../../../utils/i18n';
+
+export async function getStaticPaths() {
+  const talks = await getTalks('zh');
+
+  return talks.map((talk) => ({
+    params: { slug: talk.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+return Astro.redirect(`/cn/garden/talks/${slug}`, 301);
+---
