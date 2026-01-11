@@ -1,649 +1,968 @@
 ---
-title: 'AgentSkills.io：构建智能 AI 代理的完整入门指南'
+title: '如何使用技能和工具构建 AI 代理：2025 完整新手指南'
 pubDate: 2025-01-15T10:00:00.000Z
-description: '一份全面的 AgentSkills.io 初学者指南 - 了解它是什么、如何工作，以及如何使用实用技能和工具开始构建智能 AI 代理。非常适合 AI 代理开发新手。'
+description: '学习如何使用实用技能和工具构建智能 AI 代理。包含代理技能、工具集成、计算机使用、文件操作和 Claude、OpenAI 实际示例的完整新手友好教程。'
 author: 'Remy'
-tags: ['AI', 'agents', 'tutorial', 'beginner-guide', 'agentskills']
+tags: ['AI', 'agents', 'tutorial', 'beginner-guide', 'claude', 'openai', 'llm', 'automation']
 lang: 'zh'
 translatedFrom: 'agentskills-io-starter-guide'
 ---
 
-## 什么是 AgentSkills.io？
+## 什么是 AI 代理技能？
 
-AgentSkills.io 是一个综合性平台，旨在帮助开发者构建、增强和部署具有实用技能和能力的智能 AI 代理。可以把它看作是一个工具包和知识库，将简单的语言模型转变为能够执行实际任务的智能代理。
+AI 代理技能（也称为"工具"或"函数"）是使语言模型能够与现实世界交互并执行文本生成之外操作的能力。与仅用文本响应不同，配备技能的代理可以：
 
-在快速发展的 AI 世界中，创建一个能够真正**执行任务**的代理——而不仅仅是聊天——是下一个前沿领域。AgentSkills.io 通过提供预构建的技能、集成工具和代理开发的最佳实践来填补这一空白。
+- **执行代码**进行计算或数据分析
+- **访问文件**读取、写入和管理文档
+- **搜索网络**获取实时信息
+- **与 API 交互**集成外部服务
+- **控制计算机**自动化桌面任务
+- **管理数据库**存储和检索数据
 
-## 为什么我们需要 AgentSkills.io？
+在 2025 年，Anthropic（Claude）、OpenAI（GPT）和 Google（Gemini）等主要 AI 提供商都通过各种机制支持代理技能：
 
-### 基础 AI 聊天机器人的局限性
+- **Claude**：计算机使用、bash 工具、文本编辑器工具
+- **OpenAI**：函数调用、代码解释器、文件搜索
+- **开源**：LangChain 工具、AutoGPT、自定义实现
 
-当你直接使用标准语言模型（如 GPT 或 Claude）时，你会得到：
-- ✅ 自然语言理解
-- ✅ 智能回复
-- ❌ **无法执行操作**
-- ❌ **无法访问实时数据**
-- ❌ **无法与外部工具集成**
+## 为什么代理技能在 2025 年很重要
 
-例如，如果你问一个基础聊天机器人：
-- "帮我预订一张去东京的机票" → 它只能*告诉*你如何预订，而不能真正预订
-- "今天天气怎么样？" → 它没有实时数据访问权限
-- "给我的团队发封邮件" → 它无法与你的邮件系统交互
+### 从聊天机器人到代理的演变
 
-### AgentSkills.io 的解决方案
+传统聊天机器人（2022-2023）：
+- ✅ 用预训练知识回答问题
+- ✅ 生成类人文本
+- ❌ 无法访问当前信息
+- ❌ 无法执行操作
+- ❌ 仅限于对话响应
 
-AgentSkills.io 提供：
-1. **预构建技能**：即用的能力，如网络搜索、文件操作、API 调用
-2. **工具集成框架**：将你的代理连接到数据库、API 和服务
-3. **执行环境**：代理执行操作的安全沙箱
-4. **最佳实践**：构建可靠代理的经过验证的模式
-5. **开发者资源**：文档、示例和社区支持
+现代 AI 代理（2024-2025）：
+- ✅ 聊天机器人能做的一切
+- ✅ 执行实际任务
+- ✅ 访问实时数据
+- ✅ 与你的工具和工作流集成
+- ✅ 在最少监督下自主运行
 
-## 核心概念：理解 AI 代理
+### 现实世界的影响
 
-在深入 AgentSkills.io 之前，让我们理解基本概念。
+考虑这些实际场景：
 
-### 什么是 AI 代理？
+**代理技能之前：**
+- 用户："分析这个 CSV 文件并创建摘要报告"
+- AI："我实际上无法打开文件，但你可以这样做..."
 
-AI 代理是一个能够：
-1. **感知**：理解用户请求和环境上下文
-2. **推理**：决定采取什么行动
-3. **行动**：使用可用的工具和技能执行任务
-4. **学习**：从反馈和经验中改进
+**有了代理技能：**
+- 用户："分析这个 CSV 文件并创建摘要报告"
+- AI：*打开文件、读取数据、执行分析、生成图表、创建 PDF 报告*
+- 结果：几秒钟内交付完整报告
+
+## 核心概念：理解 AI 代理和工具
+
+### 代理循环
+
+AI 代理遵循持续的决策循环：
 
 ```
-用户请求 → 代理推理 → 技能选择 → 动作执行 → 结果
+1. 感知 → 理解用户请求和上下文
+2. 规划 → 决定采取什么行动
+3. 行动 → 使用可用工具执行
+4. 观察 → 评估结果
+5. 重复 → 继续直到任务完成
 ```
 
-### 技能 vs. 工具 vs. 函数
+对话示例：
+```
+用户："找到最新的 AI 新闻并给我发邮件摘要"
 
-这些术语经常互换使用，但有细微差别：
+代理思考：
+1. 感知：用户想要新闻 + 邮件发送
+2. 规划：我需要使用 web_search 工具，然后是 email 工具
+3. 行动：执行 web_search("2025 年最新 AI 新闻")
+4. 观察：获得 10 篇相关文章
+5. 规划：总结文章，然后使用 email 工具
+6. 行动：发送带摘要的邮件
+7. 完成：向用户确认
+```
 
-- **技能（Skills）**：代理可以执行的高级能力（例如，"搜索网络"、"分析数据"）
-- **工具（Tools）**：实现技能的具体实现（例如，Google 搜索 API、Python 解释器）
-- **函数（Functions）**：工具和技能调用的底层代码（例如，`fetch()`、`writeFile()`）
+### 技能 vs. 工具 vs. 函数（术语）
 
-AgentSkills.io 主要关注**技能** - 你希望代理具备的能力。
+AI 行业在某种程度上可互换地使用这些术语：
 
-## 开始使用 AgentSkills.io
+| 术语 | 定义 | 示例 |
+|------|------|------|
+| **工具（Tool）** | 代理可以调用的能力 | `web_search`、`file_reader`、`calculator` |
+| **函数（Function）** | 工具的实现（技术术语） | JavaScript 函数、API 端点 |
+| **技能（Skill）** | 更高级别的能力（可能使用多个工具） | "研究助手"使用搜索 + 总结 + 写作 |
+| **动作（Action）** | 工具的单次调用 | 调用 `web_search("AI 趋势")` |
+
+在本指南中，我们将互换使用"工具"和"技能"。
+
+## 官方 AI 代理技能：可用功能
+
+### Claude 的官方工具（Anthropic）
+
+截至 2025 年，Claude 提供三个强大的内置工具：
+
+#### 1. 计算机使用（`computer_20241022`）
+允许 Claude 像人类一样与计算机交互：
+- 控制鼠标和键盘
+- 截屏并分析 UI
+- 导航应用程序
+- 填写表单、点击按钮、浏览网页
+
+**使用场景：**
+- 自动化测试
+- 网页抓取
+- 桌面自动化
+- UI 交互
+
+**示例：**
+```python
+import anthropic
+
+client = anthropic.Anthropic(api_key="your-api-key")
+
+response = client.messages.create(
+    model="claude-3-5-sonnet-20241022",
+    max_tokens=1024,
+    tools=[
+        {
+            "type": "computer_20241022",
+            "name": "computer",
+            "display_width_px": 1920,
+            "display_height_px": 1080,
+        }
+    ],
+    messages=[
+        {
+            "role": "user",
+            "content": "打开浏览器并搜索最新的 AI 新闻"
+        }
+    ]
+)
+```
+
+#### 2. Bash 工具（`bash_20241022`）
+在安全环境中执行 bash 命令：
+- 运行 shell 脚本
+- 安装软件包
+- 使用 CLI 工具处理文件
+- 系统操作
+
+**使用场景：**
+- DevOps 自动化
+- 文件处理
+- 数据转换
+- 系统管理
+
+**示例：**
+```python
+response = client.messages.create(
+    model="claude-3-5-sonnet-20241022",
+    max_tokens=1024,
+    tools=[
+        {
+            "type": "bash_20241022",
+            "name": "bash",
+        }
+    ],
+    messages=[
+        {
+            "role": "user",
+            "content": "列出当前目录中的所有 Python 文件并统计代码行数"
+        }
+    ]
+)
+```
+
+#### 3. 文本编辑器（`text_editor_20241022`）
+精确创建和编辑文件：
+- 查看文件内容
+- 编辑特定行
+- 创建新文件
+- 字符串替换
+
+**使用场景：**
+- 代码编辑
+- 配置管理
+- 文档生成
+- 自动化重构
+
+**示例：**
+```python
+response = client.messages.create(
+    model="claude-3-5-sonnet-20241022",
+    max_tokens=1024,
+    tools=[
+        {
+            "type": "text_editor_20241022",
+            "name": "str_replace_editor",
+        }
+    ],
+    messages=[
+        {
+            "role": "user",
+            "content": "创建一个从 API 获取天气数据的 Python 脚本"
+        }
+    ]
+)
+```
+
+### OpenAI 的函数调用
+
+OpenAI 的 GPT 模型支持自定义函数调用：
+
+```javascript
+const functions = [
+  {
+    name: "get_weather",
+    description: "获取某地的当前天气",
+    parameters: {
+      type: "object",
+      properties: {
+        location: {
+          type: "string",
+          description: "城市名称，例如：北京"
+        },
+        unit: {
+          type: "string",
+          enum: ["celsius", "fahrenheit"]
+        }
+      },
+      required: ["location"]
+    }
+  }
+];
+
+const response = await openai.chat.completions.create({
+  model: "gpt-4",
+  messages: [
+    { role: "user", content: "东京的天气怎么样？" }
+  ],
+  functions: functions,
+  function_call: "auto"
+});
+
+// 如果 GPT 想调用函数，它返回：
+// {
+//   "name": "get_weather",
+//   "arguments": "{\"location\": \"Tokyo\", \"unit\": \"celsius\"}"
+// }
+
+// 然后你执行函数并将结果返回给 GPT
+```
+
+### 流行的开源工具框架
+
+#### LangChain 工具
+LangChain 提供 100+ 个预构建工具：
+
+```python
+from langchain.agents import load_tools, initialize_agent
+from langchain.llms import OpenAI
+
+llm = OpenAI(temperature=0)
+
+# 加载内置工具
+tools = load_tools(
+    ["wikipedia", "llm-math", "python_repl"],
+    llm=llm
+)
+
+agent = initialize_agent(
+    tools,
+    llm,
+    agent="zero-shot-react-description",
+    verbose=True
+)
+
+# 使用代理
+agent.run("东京的人口是多少？计算该数字的 10%。")
+```
+
+**可用的 LangChain 工具：**
+- Wikipedia 搜索
+- Google 搜索
+- WolframAlpha
+- Python REPL
+- Shell 命令
+- SQL 数据库
+- HTTP 请求
+- 文件操作
+- 还有 90+ 个...
+
+## 使用技能构建你的第一个 AI 代理
+
+让我们一步步构建一个实用的研究助手代理。
 
 ### 前置条件
 
-在开始之前，你应该具备：
-- 基本编程知识（推荐 JavaScript/Python）
-- 了解 REST API
-- 熟悉 async/await 编程
-- 你选择的 LLM 提供商的 API 密钥（OpenAI、Anthropic 等）
+1. **Python 3.8+** 已安装
+2. 来自 Anthropic 或 OpenAI 的 **API 密钥**
+3. **基础 Python 知识**
+4. 安装所需包：
 
-### 步骤 1：理解架构
-
-使用 AgentSkills.io 构建的典型代理遵循这个架构：
-
-```
-┌─────────────────────────────────────────────┐
-│              用户输入/请求                    │
-└──────────────────┬──────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────┐
-│         语言模型（LLM 核心）                  │
-│       (GPT-4, Claude, Gemini 等)            │
-└──────────────────┬──────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────┐
-│        AgentSkills.io 框架                   │
-│  • 技能注册表                                │
-│  • 执行引擎                                  │
-│  • 安全性和验证                              │
-└──────────────────┬──────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────┐
-│              可用技能                         │
-│  • 网络搜索    • 文件操作                     │
-│  • 数据库      • API 调用                    │
-│  • 计算器      • 邮件                        │
-└──────────────────┬──────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────┐
-│          外部服务/操作                        │
-│     (API、数据库、文件系统)                   │
-└─────────────────────────────────────────────┘
+```bash
+pip install anthropic openai python-dotenv requests beautifulsoup4
 ```
 
-### 步骤 2：设置你的第一个代理
+### 步骤 1：定义你的工具
 
-这是使用 AgentSkills.io 创建代理的简化示例：
+首先，为你的代理创建自定义工具：
 
-```javascript
-import { Agent, Skills } from '@agentskills/core';
+```python
+import os
+import requests
+from bs4 import BeautifulSoup
+from datetime import datetime
 
-// 初始化你的代理
-const myAgent = new Agent({
-  name: 'MyFirstAgent',
-  description: '一个可以搜索和计算的有用助手',
-  model: 'gpt-4',
-  apiKey: process.env.OPENAI_API_KEY
-});
-
-// 为你的代理添加技能
-myAgent.addSkill(Skills.WebSearch);
-myAgent.addSkill(Skills.Calculator);
-myAgent.addSkill(Skills.CurrentDateTime);
-
-// 运行代理
-const response = await myAgent.run(
-  "东京的天气怎么样，距离新年还有多少天？"
-);
-
-console.log(response);
-```
-
-### 步骤 3：理解技能类别
-
-AgentSkills.io 将技能组织成不同类别：
-
-#### 1. **信息检索技能**
-- **网络搜索**：在互联网上搜索当前信息
-- **文档阅读**：从 PDF、文档中提取信息
-- **数据库查询**：从数据库获取数据
-- **API 集成**：调用外部 REST API
-
-**使用场景**：构建需要最新信息的研究助手
-
-#### 2. **数据处理技能**
-- **计算器**：执行数学计算
-- **数据分析**：处理和分析数据集
-- **文本处理**：提取、总结、翻译文本
-- **图像分析**：分析和描述图像
-
-**使用场景**：创建可以处理电子表格的数据分析师代理
-
-#### 3. **操作执行技能**
-- **文件操作**：创建、读取、更新、删除文件
-- **邮件**：发送和管理邮件
-- **日程安排**：创建日历事件
-- **通知**：通过各种渠道发送警报
-
-**使用场景**：构建可以管理工作流的个人助手
-
-#### 4. **通信技能**
-- **HTTP 请求**：发送网络请求
-- **Webhook 处理**：响应 webhook 事件
-- **消息格式化**：为不同平台（Slack、Discord 等）格式化输出
-
-**使用场景**：创建与团队通信工具集成的机器人
-
-## 实践示例：构建研究助手
-
-让我们构建一个能够帮助完成研究任务的实用代理。
-
-### 目标
-创建一个能够：
-1. 搜索主题相关信息
-2. 总结发现
-3. 将摘要保存到文件
-4. 通过电子邮件发送结果
-
-### 实现
-
-```javascript
-import { Agent, Skills } from '@agentskills/core';
-
-// 配置代理
-const researchAgent = new Agent({
-  name: 'ResearchAssistant',
-  description: '通过搜索、总结和组织信息来帮助研究',
-  model: 'gpt-4-turbo',
-  apiKey: process.env.OPENAI_API_KEY,
-  systemPrompt: `你是一个研究助手。当给定一个研究主题时：
-    1. 搜索可靠的信息
-    2. 将发现综合成清晰的摘要
-    3. 逻辑地组织信息
-    4. 引用你的来源`
-});
-
-// 添加必要的技能
-researchAgent.addSkill(Skills.WebSearch, {
-  maxResults: 10,
-  filterDomains: ['edu', 'gov', 'org'] // 优先选择可靠来源
-});
-
-researchAgent.addSkill(Skills.TextSummarization);
-
-researchAgent.addSkill(Skills.FileOperations, {
-  allowedOperations: ['write'],
-  basePath: './research-outputs'
-});
-
-researchAgent.addSkill(Skills.Email, {
-  provider: 'smtp',
-  config: {
-    host: process.env.SMTP_HOST,
-    port: 587,
-    secure: false
-  }
-});
-
-// 定义研究工作流
-async function conductResearch(topic, recipientEmail) {
-  const instructions = `
-    研究主题："${topic}"
+def web_search(query: str, num_results: int = 5) -> list:
+    """
+    在网络上搜索信息。
     
-    请：
-    1. 搜索关于这个主题的最新信息
-    2. 创建一个全面的摘要（500-700 字）
-    3. 包括关键发现和趋势
-    4. 将摘要保存到名为 "${topic.replace(/\s+/g, '-')}-research.md" 的文件
-    5. 将摘要通过电子邮件发送到 ${recipientEmail}
-  `;
-  
-  try {
-    const result = await researchAgent.run(instructions);
-    console.log('研究完成：', result);
-    return result;
-  } catch (error) {
-    console.error('研究失败：', error);
-    throw error;
-  }
+    参数：
+        query: 搜索查询字符串
+        num_results: 返回的结果数
+    
+    返回：
+        包含标题、URL 和摘要的搜索结果列表
+    """
+    # 使用搜索 API（以 DuckDuckGo 为例）
+    try:
+        url = f"https://html.duckduckgo.com/html/?q={query}"
+        headers = {"User-Agent": "Mozilla/5.0"}
+        response = requests.get(url, headers=headers, timeout=10)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        results = []
+        for result in soup.find_all('div', class_='result')[:num_results]:
+            title = result.find('a', class_='result__a')
+            snippet = result.find('a', class_='result__snippet')
+            
+            if title and snippet:
+                results.append({
+                    'title': title.text,
+                    'url': title['href'],
+                    'snippet': snippet.text
+                })
+        
+        return results
+    except Exception as e:
+        return [{"error": str(e)}]
+
+def save_to_file(content: str, filename: str) -> str:
+    """
+    将内容保存到文件。
+    
+    参数：
+        content: 要保存的文本内容
+        filename: 要创建的文件名
+    
+    返回：
+        带文件路径的成功消息
+    """
+    try:
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return f"✅ 内容已保存到 {filename}"
+    except Exception as e:
+        return f"❌ 保存文件错误：{str(e)}"
+
+def calculate(expression: str) -> str:
+    """
+    安全地评估数学表达式。
+    
+    参数：
+        expression: 数学表达式，如 "2 + 2" 或 "10 * 5"
+    
+    返回：
+        计算结果
+    """
+    try:
+        # 安全评估 - 只允许数字和基本运算符
+        allowed = set('0123456789+-*/(). ')
+        if not all(c in allowed for c in expression):
+            return "错误：表达式中有无效字符"
+        
+        result = eval(expression)
+        return f"{expression} = {result}"
+    except Exception as e:
+        return f"错误：{str(e)}"
+```
+
+### 步骤 2：使用 OpenAI 创建代理
+
+```python
+import openai
+import json
+from dotenv import load_dotenv
+
+load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+# 定义函数模式
+functions = [
+    {
+        "name": "web_search",
+        "description": "在网络上搜索关于某个主题的当前信息",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "搜索查询"
+                },
+                "num_results": {
+                    "type": "integer",
+                    "description": "返回的结果数（默认 5）"
+                }
+            },
+            "required": ["query"]
+        }
+    },
+    {
+        "name": "save_to_file",
+        "description": "将文本内容保存到文件",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string",
+                    "description": "要保存的内容"
+                },
+                "filename": {
+                    "type": "string",
+                    "description": "要创建的文件名"
+                }
+            },
+            "required": ["content", "filename"]
+        }
+    },
+    {
+        "name": "calculate",
+        "description": "执行数学计算",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "expression": {
+                    "type": "string",
+                    "description": "要评估的数学表达式"
+                }
+            },
+            "required": ["expression"]
+        }
+    }
+]
+
+# 将函数名映射到实际函数
+available_functions = {
+    "web_search": web_search,
+    "save_to_file": save_to_file,
+    "calculate": calculate
 }
 
-// 执行研究
-conductResearch(
-  'AI 代理框架的最新发展',
-  'team@example.com'
-);
+def run_agent(user_message: str) -> str:
+    """
+    运行支持工具的代理。
+    """
+    messages = [
+        {
+            "role": "system",
+            "content": """你是一个有工具访问权限的有用研究助手。
+            当用户要求信息时，使用 web_search 查找当前数据。
+            当被要求保存信息时，使用 save_to_file。
+            对于计算，使用 calculate 工具。
+            
+            始终解释你在做什么，并提供清晰、有帮助的响应。"""
+        },
+        {
+            "role": "user",
+            "content": user_message
+        }
+    ]
+    
+    # 代理循环 - 允许最多 5 次工具调用
+    for _ in range(5):
+        response = openai.chat.completions.create(
+            model="gpt-4",
+            messages=messages,
+            functions=functions,
+            function_call="auto"
+        )
+        
+        message = response.choices[0].message
+        
+        # 如果没有函数调用，我们完成了
+        if not message.function_call:
+            return message.content
+        
+        # 执行函数
+        function_name = message.function_call.name
+        function_args = json.loads(message.function_call.arguments)
+        
+        print(f"🔧 调用 {function_name}，参数：{function_args}")
+        
+        function_result = available_functions[function_name](**function_args)
+        
+        # 将函数调用和结果添加到对话中
+        messages.append({
+            "role": "assistant",
+            "content": None,
+            "function_call": {
+                "name": function_name,
+                "arguments": message.function_call.arguments
+            }
+        })
+        messages.append({
+            "role": "function",
+            "name": function_name,
+            "content": str(function_result)
+        })
+    
+    return "代理达到最大迭代次数"
+
+# 测试代理
+if __name__ == "__main__":
+    result = run_agent(
+        "搜索 2025 年最新的 AI 代理发展，"
+        "总结前 3 个发现，并将摘要保存到文件。"
+    )
+    print("\n📋 代理响应：")
+    print(result)
 ```
 
-### 工作原理
+### 步骤 3：使用 Claude 创建相同的代理
 
-1. **代理接收请求**：处理研究主题和指令
-2. **技能规划**：代理确定使用哪些技能以及顺序
-3. **执行**：
-   - 使用 `WebSearch` 技能查找信息
-   - 使用 `TextSummarization` 技能创建连贯的摘要
-   - 使用 `FileOperations` 技能保存摘要
-   - 使用 `Email` 技能发送结果
-4. **结果**：你收到一份经过研究、总结和交付的报告
+```python
+import anthropic
+import json
 
-## 高级功能
+client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
-### 技能链接和工作流
+# Claude 使用不同的工具格式
+claude_tools = [
+    {
+        "name": "web_search",
+        "description": "在网络上搜索关于某个主题的当前信息",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "搜索查询"
+                },
+                "num_results": {
+                    "type": "integer",
+                    "description": "返回的结果数",
+                    "default": 5
+                }
+            },
+            "required": ["query"]
+        }
+    },
+    {
+        "name": "save_to_file",
+        "description": "将文本内容保存到文件",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "content": {"type": "string"},
+                "filename": {"type": "string"}
+            },
+            "required": ["content", "filename"]
+        }
+    },
+    {
+        "name": "calculate",
+        "description": "执行数学计算",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "expression": {"type": "string"}
+            },
+            "required": ["expression"]
+        }
+    }
+]
 
-AgentSkills.io 允许你将技能链接在一起以实现复杂的工作流：
+def run_claude_agent(user_message: str) -> str:
+    """
+    使用 Claude 运行代理。
+    """
+    messages = [{"role": "user", "content": user_message}]
+    
+    # 代理循环
+    for _ in range(5):
+        response = client.messages.create(
+            model="claude-3-5-sonnet-20241022",
+            max_tokens=4096,
+            tools=claude_tools,
+            messages=messages
+        )
+        
+        # 检查 Claude 是否想使用工具
+        if response.stop_reason == "tool_use":
+            # 将助手的响应添加到消息中
+            messages.append({
+                "role": "assistant",
+                "content": response.content
+            })
+            
+            # 执行每个工具调用
+            tool_results = []
+            for content_block in response.content:
+                if content_block.type == "tool_use":
+                    tool_name = content_block.name
+                    tool_input = content_block.input
+                    
+                    print(f"🔧 Claude 调用 {tool_name}，参数：{tool_input}")
+                    
+                    # 执行工具
+                    result = available_functions[tool_name](**tool_input)
+                    
+                    tool_results.append({
+                        "type": "tool_result",
+                        "tool_use_id": content_block.id,
+                        "content": str(result)
+                    })
+            
+            # 将工具结果发送回 Claude
+            messages.append({
+                "role": "user",
+                "content": tool_results
+            })
+        else:
+            # 没有更多工具调用，返回最终响应
+            return response.content[0].text
+    
+    return "代理达到最大迭代次数"
 
-```javascript
-const workflow = researchAgent.createWorkflow('research-and-publish')
-  .step('search', Skills.WebSearch, {
-    query: (context) => context.input.topic
-  })
-  .step('analyze', Skills.DataAnalysis, {
-    data: (context) => context.steps.search.results
-  })
-  .step('summarize', Skills.TextSummarization, {
-    text: (context) => context.steps.analyze.insights
-  })
-  .step('publish', Skills.FileOperations, {
-    operation: 'write',
-    content: (context) => context.steps.summarize.output
-  });
+# 测试 Claude 代理
+if __name__ == "__main__":
+    result = run_claude_agent(
+        "研究 2025 年 AI 代理的最新发展并创建简要摘要。"
+    )
+    print("\n📋 Claude 的响应：")
+    print(result)
+```
 
-// 执行工作流
-await workflow.execute({ topic: '量子计算' });
+## 高级代理技能和模式
+
+### 多步骤工作流
+
+对于复杂任务，代理需要将多个工具链接在一起：
+
+```python
+def research_and_publish_workflow(topic: str) -> str:
+    """
+    完整工作流：研究 → 分析 → 总结 → 保存 → 邮件
+    """
+    steps = [
+        f"1. 搜索 '{topic}' 并收集信息",
+        f"2. 分析并提取关键见解",
+        f"3. 创建全面的摘要",
+        f"4. 将摘要保存到文件：{topic.replace(' ', '-')}.md",
+        f"5. 确认完成"
+    ]
+    
+    prompt = f"""执行这个研究工作流：
+    
+    主题：{topic}
+    
+    步骤：
+    {chr(10).join(steps)}
+    
+    系统地使用你的工具完成每个步骤。"""
+    
+    return run_agent(prompt)
+
+# 使用
+result = research_and_publish_workflow("2025 年 AI 代理框架")
 ```
 
 ### 错误处理和重试
 
-构建具有内置错误处理的健壮代理：
+使你的代理更加健壮：
 
-```javascript
-myAgent.configure({
-  errorHandling: {
-    maxRetries: 3,
-    retryDelay: 1000,
-    fallbackBehavior: 'notify_user',
-    onError: async (error, context) => {
-      console.error('代理错误：', error);
-      // 自定义错误处理逻辑
-      await notifyDeveloper(error);
+```python
+def safe_tool_execution(tool_func, args, max_retries=3):
+    """
+    使用自动重试执行工具。
+    """
+    for attempt in range(max_retries):
+        try:
+            result = tool_func(**args)
+            return {"success": True, "result": result}
+        except Exception as e:
+            if attempt == max_retries - 1:
+                return {
+                    "success": False,
+                    "error": str(e),
+                    "message": f"在 {max_retries} 次尝试后失败"
+                }
+            print(f"⚠️ 尝试 {attempt + 1} 失败：{e}。重试中...")
+            time.sleep(2 ** attempt)  # 指数退避
+```
+
+### 工具访问控制
+
+限制你的代理可以做什么以确保安全：
+
+```python
+class SafeAgent:
+    def __init__(self, allowed_tools=None, restricted_paths=None):
+        self.allowed_tools = allowed_tools or []
+        self.restricted_paths = restricted_paths or ['/etc', '/sys', '/root']
+    
+    def can_use_tool(self, tool_name: str) -> bool:
+        """检查工具是否被允许。"""
+        return tool_name in self.allowed_tools
+    
+    def validate_file_path(self, path: str) -> bool:
+        """检查文件路径是否被允许。"""
+        abs_path = os.path.abspath(path)
+        for restricted in self.restricted_paths:
+            if abs_path.startswith(restricted):
+                return False
+        return True
+    
+    def execute_tool(self, tool_name: str, args: dict):
+        """使用验证安全地执行工具。"""
+        if not self.can_use_tool(tool_name):
+            return {"error": f"工具 '{tool_name}' 不被允许"}
+        
+        # 如果存在，验证文件路径
+        if 'filename' in args or 'path' in args:
+            path = args.get('filename') or args.get('path')
+            if not self.validate_file_path(path):
+                return {"error": f"访问 '{path}' 受限"}
+        
+        # 执行工具
+        return available_functions[tool_name](**args)
+
+# 使用
+safe_agent = SafeAgent(
+    allowed_tools=['web_search', 'calculate'],
+    restricted_paths=['/etc', '/sys', '~/.ssh']
+)
+```
+
+## 实际使用场景和示例
+
+### 1. 客户支持代理
+
+```python
+def customer_support_agent():
+    """
+    可以搜索知识库、创建工单和发送邮件的代理。
+    """
+    tools = [
+        {
+            "name": "search_knowledge_base",
+            "description": "搜索内部文档以寻找解决方案"
+        },
+        {
+            "name": "create_ticket",
+            "description": "创建支持工单进行升级"
+        },
+        {
+            "name": "send_email",
+            "description": "向客户发送邮件"
+        },
+        {
+            "name": "check_order_status",
+            "description": "在数据库中查找订单状态"
+        }
+    ]
+    
+    system_prompt = """你是一个客户支持代理。你的目标：
+    1. 清楚地理解客户的问题
+    2. 在知识库中搜索解决方案
+    3. 如果你能解决，提供清晰的步骤
+    4. 如果你不能，创建工单并通知客户
+    5. 始终保持同理心和专业性
+    """
+    
+    return create_agent(tools, system_prompt)
+```
+
+### 2. 数据分析代理
+
+```python
+def data_analyst_agent():
+    """
+    可以查询数据库、创建可视化和生成报告的代理。
+    """
+    tools = [
+        {
+            "name": "query_database",
+            "description": "在数据库上执行 SQL 查询"
+        },
+        {
+            "name": "create_chart",
+            "description": "生成图表和可视化"
+        },
+        {
+            "name": "calculate_statistics",
+            "description": "计算统计指标"
+        },
+        {
+            "name": "export_to_excel",
+            "description": "将数据导出到 Excel 表格"
+        }
+    ]
+    
+    system_prompt = """你是一个数据分析师。当被要求分析数据时：
+    1. 查询数据库以检索相关数据
+    2. 执行统计分析
+    3. 创建适当的可视化
+    4. 用通俗语言总结见解
+    5. 如果请求，导出结果
+    """
+    
+    return create_agent(tools, system_prompt)
+```
+
+## 生产代理的最佳实践
+
+### 1. 设计清晰的工具描述
+
+```python
+# ❌ 糟糕：模糊的描述
+{
+    "name": "search",
+    "description": "搜索东西"
+}
+
+# ✅ 好：清晰、具体的描述
+{
+    "name": "web_search",
+    "description": """使用网络搜索引擎在互联网上搜索当前信息。
+    当用户询问最近的新闻、当前事件或自你的训练数据截止以来
+    可能已经改变的信息时使用此工具。
+    
+    返回：包含标题、URL 和摘要的搜索结果列表。""",
+    "parameters": {
+        "query": "具体的搜索查询（要精确）",
+        "num_results": "要返回的结果数（1-10）"
     }
-  }
-});
-```
-
-### 安全性和验证
-
-AgentSkills.io 包括安全功能：
-
-```javascript
-myAgent.addSkill(Skills.FileOperations, {
-  // 将文件操作限制在特定目录
-  allowedPaths: ['/safe-directory'],
-  // 阻止敏感文件
-  blockedPatterns: ['*.env', '*.key', 'secrets/*'],
-  // 对破坏性操作需要确认
-  confirmationRequired: ['delete', 'overwrite']
-});
-```
-
-## 构建代理的最佳实践
-
-### 1. 从简单开始
-从基本技能开始，逐步增加复杂性。不要一次性给代理太多能力。
-
-```javascript
-// 好：从 2-3 个相关技能开始
-myAgent.addSkill(Skills.WebSearch);
-myAgent.addSkill(Skills.TextSummarization);
-
-// 避免：一次添加所有东西
-// 这会使调试变得困难并增加错误
-```
-
-### 2. 编写清晰的系统提示
-代理的行为很大程度上受其系统提示的影响：
-
-```javascript
-// 好：清晰、具体的指令
-const systemPrompt = `你是一个客户支持代理。
-你的角色是：
-1. 热情地问候客户
-2. 通过提出澄清性问题来理解他们的问题
-3. 在知识库中搜索解决方案
-4. 提供清晰的分步说明
-5. 跟进以确保问题得到解决
-
-始终保持礼貌、耐心和专业。`;
-
-// 避免：模糊的提示
-const vaguePrompt = `你帮助客户。`;
-```
-
-### 3. 实施日志和监控
-
-跟踪你的代理行为：
-
-```javascript
-myAgent.on('skill_executed', (event) => {
-  console.log(`使用的技能：${event.skillName}`);
-  console.log(`输入：${JSON.stringify(event.input)}`);
-  console.log(`输出：${JSON.stringify(event.output)}`);
-  console.log(`持续时间：${event.duration}ms`);
-});
-
-myAgent.on('error', (error) => {
-  logToMonitoringService(error);
-});
-```
-
-### 4. 彻底测试
-
-为不同场景创建测试用例：
-
-```javascript
-// 测试套件示例
-describe('研究代理', () => {
-  test('应该成功搜索和总结', async () => {
-    const result = await researchAgent.run('2025 年的 AI 趋势');
-    expect(result).toContain('摘要');
-    expect(result).toContain('来源');
-  });
-
-  test('应该优雅地处理无结果情况', async () => {
-    const result = await researchAgent.run('xyzabc123nonexistent');
-    expect(result).toContain('未找到信息');
-  });
-
-  test('应该遵守速率限制', async () => {
-    // 测试速率限制行为
-  });
-});
-```
-
-### 5. 处理用户反馈
-
-基于实际使用改进你的代理：
-
-```javascript
-myAgent.addFeedbackHandler(async (interaction, feedback) => {
-  if (feedback.rating < 3) {
-    // 记录差评交互以供分析
-    await logInteraction({
-      input: interaction.input,
-      output: interaction.output,
-      rating: feedback.rating,
-      comments: feedback.comments
-    });
-  }
-});
-```
-
-## 常见使用场景
-
-### 1. **客户支持代理**
-- 技能：知识库搜索、工单创建、电子邮件通知
-- 优势：24/7 可用性、即时响应、一致的质量
-
-### 2. **数据分析代理**
-- 技能：数据库查询、数据处理、可视化、报告生成
-- 优势：自动化洞察、更快的分析、减少手动工作
-
-### 3. **内容创作代理**
-- 技能：网络研究、文本生成、图像分析、发布
-- 优势：更快的内容生产、SEO 优化、多渠道发布
-
-### 4. **个人助理代理**
-- 技能：日历管理、电子邮件处理、任务跟踪、提醒
-- 优势：提高生产力、更好的组织、节省时间
-
-### 5. **DevOps 代理**
-- 技能：服务器监控、日志分析、部署自动化、事件响应
-- 优势：更快的事件解决、主动监控、减少停机时间
-
-## 常见问题排查
-
-### 问题 1：代理不使用技能
-**问题**：代理用文本响应而不是执行技能
-
-**解决方案**：
-- 检查技能是否正确注册
-- 验证系统提示包含使用工具的指令
-- 确保 LLM 模型支持函数调用
-
-```javascript
-// 添加明确的指令
-const prompt = `你可以访问以下工具：
-- web_search：在互联网上搜索信息
-- calculator：执行计算
-
-当用户提出需要这些工具的问题时，你必须使用它们。`;
-```
-
-### 问题 2：速率限制错误
-**问题**：API 调用过多导致失败
-
-**解决方案**：实施速率限制和缓存
-
-```javascript
-myAgent.configure({
-  rateLimit: {
-    maxRequests: 10,
-    perSeconds: 60
-  },
-  caching: {
-    enabled: true,
-    ttl: 3600 // 缓存 1 小时
-  }
-});
-```
-
-### 问题 3：结果不一致
-**问题**：代理对同一问题给出不同答案
-
-**解决方案**：通过温度设置控制随机性
-
-```javascript
-myAgent.configure({
-  temperature: 0.3, // 更低 = 更一致 (0-1)
-  topP: 0.9
-});
-```
-
-## 安全考虑
-
-### 1. 输入验证
-始终验证和清理用户输入：
-
-```javascript
-myAgent.addInputValidator((input) => {
-  // 阻止 SQL 注入尝试
-  if (input.match(/DROP TABLE|DELETE FROM|INSERT INTO/i)) {
-    throw new Error('检测到无效输入');
-  }
-  
-  // 限制输入长度
-  if (input.length > 10000) {
-    throw new Error('输入过长');
-  }
-  
-  return true;
-});
-```
-
-### 2. 凭证管理
-永远不要硬编码 API 密钥：
-
-```javascript
-// 好：使用环境变量
-const agent = new Agent({
-  apiKey: process.env.OPENAI_API_KEY,
-  skills: {
-    email: {
-      password: process.env.EMAIL_PASSWORD
-    }
-  }
-});
-
-// 坏：硬编码凭证
-// const apiKey = 'sk-abc123...'; // 永远不要这样做！
-```
-
-### 3. 访问控制
-限制代理可以访问的内容：
-
-```javascript
-myAgent.setPermissions({
-  fileSystem: {
-    read: ['/public-data'],
-    write: ['/agent-outputs'],
-    delete: [] // 没有删除权限
-  },
-  network: {
-    allowedDomains: ['api.example.com', 'safe-api.org'],
-    blockedDomains: ['internal.company.com']
-  }
-});
-```
-
-## 性能优化
-
-### 1. 并行技能执行
-同时执行独立的技能：
-
-```javascript
-const results = await Promise.all([
-  myAgent.executeSkill('weather', { city: '东京' }),
-  myAgent.executeSkill('news', { topic: '技术' }),
-  myAgent.executeSkill('stocks', { symbol: 'AAPL' })
-]);
-```
-
-### 2. 技能结果缓存
-缓存频繁使用的数据：
-
-```javascript
-myAgent.addSkill(Skills.DatabaseQuery, {
-  cache: {
-    enabled: true,
-    ttl: 300, // 5 分钟
-    keyGenerator: (params) => `query:${params.sql}`
-  }
-});
-```
-
-### 3. 流式响应
-为了更好的用户体验，流式传输代理响应：
-
-```javascript
-const stream = myAgent.runStream('告诉我关于量子计算的信息');
-
-for await (const chunk of stream) {
-  process.stdout.write(chunk);
 }
 ```
 
-## 下一步
+### 2. 实施速率限制
 
-### 提升你的代理技能
+```python
+from datetime import datetime, timedelta
+from collections import defaultdict
 
-1. **探索 AgentSkills.io 文档**：深入了解所有可用技能及其配置
-2. **加入社区**：与其他构建代理的开发者联系
-3. **贡献**：创建和分享你自己的自定义技能
-4. **实验**：尝试不同的技能组合以实现独特的用例
+class RateLimiter:
+    def __init__(self, max_calls: int, time_window: int):
+        self.max_calls = max_calls
+        self.time_window = time_window  # 秒
+        self.calls = defaultdict(list)
+    
+    def can_call(self, tool_name: str) -> bool:
+        """检查工具是否可以调用。"""
+        now = datetime.now()
+        cutoff = now - timedelta(seconds=self.time_window)
+        
+        # 删除旧调用
+        self.calls[tool_name] = [
+            call_time for call_time in self.calls[tool_name]
+            if call_time > cutoff
+        ]
+        
+        return len(self.calls[tool_name]) < self.max_calls
+    
+    def record_call(self, tool_name: str):
+        """记录工具调用。"""
+        self.calls[tool_name].append(datetime.now())
 
-### 推荐的学习路径
+# 使用
+rate_limiter = RateLimiter(max_calls=10, time_window=60)
 
-**第 1 周**：基本代理设置和简单技能
-- 创建你的第一个代理
-- 添加 2-3 个基本技能（搜索、计算器、日期时间）
-- 构建一个简单的问答代理
+if rate_limiter.can_call("web_search"):
+    result = web_search("AI 新闻")
+    rate_limiter.record_call("web_search")
+else:
+    print("超过速率限制。请稍等。")
+```
 
-**第 2 周**：技能链接和工作流
-- 创建多步骤工作流
-- 实施错误处理
-- 添加日志和监控
+## 常见问题排查
 
-**第 3 周**：自定义技能开发
-- 为你的特定需求构建自定义技能
-- 与你自己的 API 集成
-- 实施高级错误恢复
+### 问题 1：代理不使用工具
 
-**第 4 周**：生产部署
-- 安全加固
-- 性能优化
-- 监控和维护
+**症状：**
+- 代理只用文本响应
+- 没有函数调用
+- 代理说"我没有访问权限"
 
-## 结论
+**解决方案：**
 
-AgentSkills.io 通过提供基于技能的结构化方法来改变我们构建 AI 代理的方式。无需从头开始构建所有内容，你可以：
+1. **检查系统提示** - 明确指示代理使用工具：
+```python
+system_prompt = """你必须使用可用工具来完成任务。
+当用户询问你没有的信息时，使用 web_search。
+当被要求保存数据时，使用 save_to_file。
+不要编造信息或拒绝你有工具可以完成的任务。"""
+```
 
-✅ 利用预构建、经过测试的技能
-✅ 专注于代理的独特价值主张
-✅ 更快、更可靠地构建
-✅ 自信地扩展
+2. **验证函数描述** - 使它们清晰具体
 
-无论你是在构建简单的聊天机器人还是复杂的自主代理，AgentSkills.io 都提供了成功所需的基础。
+3. **检查模型能力** - 确保你的模型支持函数调用：
+- ✅ GPT-4、GPT-3.5-turbo（2023 年 6 月+）
+- ✅ Claude 3 Opus、Sonnet、Haiku
+- ✅ Gemini Pro
+- ❌ 较旧的模型可能不支持工具
+
+## 结论：AI 代理的未来
+
+AI 代理技能正在改变我们与 AI 系统交互的方式。在 2025 年及以后，我们将看到：
+
+### 新兴趋势
+
+1. **多模态代理**：结合视觉、音频和文本
+2. **长时间运行的代理**：在任务上工作数小时或数天的代理
+3. **代理协作**：多个代理一起工作
+4. **改进的推理**：更好的规划和决策
+5. **领域特定代理**：医学、法律、工程等专业代理
+
+### 今天开始
+
+1. **从简单开始**：选择 2-3 个工具并构建基本代理
+2. **选择你的工具**：使用 Claude 的内置工具或 OpenAI 的函数调用
+3. **彻底测试**：在生产之前确保可靠性
+4. **密切监控**：跟踪性能和错误
+5. **快速迭代**：基于实际使用改进
 
 ### 关键要点
 
-- **AI 代理 = LLM + 技能 + 执行**：代理将语言理解与实际行动相结合
-- **从简单开始**：从 2-3 个技能开始，逐步扩展
-- **安全很重要**：始终验证输入并限制权限
-- **监控和迭代**：跟踪代理行为并基于反馈改进
-- **社区很强大**：向他人学习并分享你的经验
+✅ **代理技能 = 实际行动**：超越文本生成
+✅ **多种方法可用**：Claude、OpenAI、LangChain 都支持工具
+✅ **从现有工具开始**：不要从头开始构建所有内容
+✅ **安全至关重要**：清理输入、限制权限、沙箱执行
+✅ **监控和优化**：跟踪指标并持续改进
 
-现在轮到你了 - 今天就开始使用 AgentSkills.io 构建你的第一个智能代理吧！
+未来是代理化的 - 能够真正帮助我们完成任务的 AI 系统，而不仅仅是回答问题。今天就开始构建你的智能代理吧！
 
 ---
 
 ## 附加资源
 
-- **官方文档**：[agentskills.io/docs](https://agentskills.io/docs)
-- **GitHub 仓库**：[github.com/agentskills](https://github.com/agentskills)
-- **社区 Discord**：加入讨论并获得帮助
-- **示例项目**：浏览真实世界的代理实现
-- **技能市场**：发现和分享自定义技能
+### 官方文档
+- **Claude 代理技能**：[docs.anthropic.com/en/docs/agents-and-tools](https://docs.anthropic.com/en/docs/agents-and-tools)
+- **OpenAI 函数调用**：[platform.openai.com/docs/guides/function-calling](https://platform.openai.com/docs/guides/function-calling)
+- **LangChain 工具**：[python.langchain.com/docs/modules/agents/tools](https://python.langchain.com/docs/modules/agents/tools)
+
+### 开源项目
+- **AutoGPT**：自主 AI 代理框架
+- **LangChain**：使用 LLM 构建应用程序
+- **Semantic Kernel**：Microsoft 的代理框架
+- **CrewAI**：多代理编排
+
+### 社区
+- **r/artificial**：AI 讨论的 Reddit 社区
+- **LangChain Discord**：活跃的开发者社区
+- **Anthropic Claude Discord**：官方 Claude 社区
 
 祝你构建愉快！🤖✨
