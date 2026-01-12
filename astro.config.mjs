@@ -38,6 +38,9 @@ export default defineConfig({
         // Exclude private pages
         if (page.includes('/private/')) return false;
         
+        // Exclude 404 pages
+        if (page.includes('/404')) return false;
+        
         // Parse URL to get pathname for precise matching
         const url = new URL(page);
         const path = url.pathname;
