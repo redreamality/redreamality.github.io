@@ -50,7 +50,7 @@ const formattedDate = question.data.date.toISOString();
 const allQuestions = await getQuestions(lang);
 const relatedQuestions = rankRelatedContent(allQuestions, question, { dateField: 'date', limit: 6 });
 const relatedItems = relatedQuestions.map((relatedQuestion) => ({
-  href: `${basePath}/garden/questions/${relatedQuestion.slug}`,
+  href: `${basePath}/garden/questions/${relatedQuestion.slug}/`,
   title: relatedQuestion.data.title,
   description: relatedQuestion.data.description,
   date: relatedQuestion.data.date
@@ -101,7 +101,7 @@ const relatedItems = relatedQuestions.map((relatedQuestion) => ({
 
           <div class="mt-10">
             <a
-              href={`${basePath}/garden/questions`}
+              href={`${basePath}/garden/questions/`}
               class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
             >
               {currentContent.backToQuestions}

@@ -348,16 +348,18 @@ export function getHreflangAlternates(currentPath: string, site: string): Array<
 
   // Add English version
   const enPath = getLocalizedPath(currentPath, 'en');
+  const normalizedEnPath = normalizeCanonicalPath(enPath);
   alternates.push({
     lang: 'en',
-    url: new URL(enPath, site).toString()
+    url: new URL(normalizedEnPath, site).toString()
   });
 
   // Add Chinese version
   const zhPath = getLocalizedPath(currentPath, 'zh');
+  const normalizedZhPath = normalizeCanonicalPath(zhPath);
   alternates.push({
     lang: 'zh',
-    url: new URL(zhPath, site).toString()
+    url: new URL(normalizedZhPath, site).toString()
   });
 
   return alternates;
@@ -378,9 +380,24 @@ export function getLanguageCode(lang: Language): string {
 }
 
 /**
+ * Normalize a pathname for canonical URLs when using trailingSlash: 'always'
+ */
+function normalizeCanonicalPath(pathname: string): string {
+  if (!pathname || pathname === '/') return '/';
+
+  // Don't modify direct file URLs (e.g. /rss.xml, /favicon.svg)
+  const lastSegment = pathname.split('/').filter(Boolean).pop();
+  const isFile = Boolean(lastSegment && lastSegment.includes('.'));
+  if (isFile) return pathname;
+
+  return pathname.endsWith('/') ? pathname : `${pathname}/`;
+}
+
+/**
  * Generate language-aware canonical URLs
  */
 export function getCanonicalURL(path: string, lang: Language, site: string): string {
   const localizedPath = getLocalizedPath(path, lang);
-  return new URL(localizedPath, site).toString();
+  const normalizedPath = normalizeCanonicalPath(localizedPath);
+  return new URL(normalizedPath, site).toString();
 }
