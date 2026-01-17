@@ -7,7 +7,7 @@ lang: en
 translatedFrom: "quantitative-trading"
 ---
 
-# Quantitative Trading Strategies: Insights and Practical Experience
+## Quantitative Trading Strategies: Insights and Practical Experience
 
 ## Overview
 

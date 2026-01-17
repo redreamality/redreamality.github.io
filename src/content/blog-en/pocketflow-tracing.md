@@ -132,12 +132,12 @@ The package comes with all necessary dependencies, including Langfuse v2 SDK and
 Create a `.env` file in your project root:
 
 ```env
-# Langfuse Configuration
+## Langfuse Configuration
 LANGFUSE_SECRET_KEY=sk-lf-your-secret-key-here
 LANGFUSE_PUBLIC_KEY=pk-lf-your-public-key-here
 LANGFUSE_HOST=https://your-self-hosted-langfuse
 
-# Optional: Enable debug mode for development
+## Optional: Enable debug mode for development
 POCKETFLOW_TRACING_DEBUG=true
 ```
 
@@ -153,7 +153,7 @@ POCKETFLOW_TRACING_DEBUG=true
 from pocketflow import Node, Flow
 from pocketflow_tracing import trace_flow
 
-# Your existing node code stays exactly the same
+## Your existing node code stays exactly the same
 class MyNode(Node):
     def prep(self, shared):
         return shared["input"]
@@ -165,13 +165,13 @@ class MyNode(Node):
         shared["output"] = exec_res
         return "default"
 
-# Just add the decorator - no other changes needed!
+## Just add the decorator - no other changes needed!
 @trace_flow()
 class MyFlow(Flow):
     def __init__(self):
         super().__init__(start=MyNode())
 
-# Run your flow normally
+## Run your flow normally
 flow = MyFlow()
 shared = {"input": "Hello World"}
 flow.run(shared)
@@ -396,7 +396,7 @@ class DataPipeline(Flow):
 ```python
 from pocketflow_tracing import TracingConfig
 
-# Load custom configuration
+## Load custom configuration
 config = TracingConfig.from_env()
 config.debug = True
 config.trace_inputs = True
@@ -410,7 +410,7 @@ class MyFlow(Flow):
 ### Selective Tracing Control
 
 ```env
-# Fine-tune what gets traced
+## Fine-tune what gets traced
 POCKETFLOW_TRACE_INPUTS=true
 POCKETFLOW_TRACE_OUTPUTS=true
 POCKETFLOW_TRACE_PREP=true
@@ -425,7 +425,7 @@ POCKETFLOW_TRACE_ERRORS=true
 
 **1. "No traces appearing in dashboard"**
 ```bash
-# Enable debug mode to see what's happening
+## Enable debug mode to see what's happening
 export POCKETFLOW_TRACING_DEBUG=true
 python your_flow.py
 ```
@@ -437,10 +437,10 @@ python your_flow.py
 
 **3. "Import errors"**
 ```bash
-# Ensure package is properly installed
+## Ensure package is properly installed
 pip install pocketflow-tracing
 
-# For development installation
+## For development installation
 pip install -e ".[dev]"
 ```
 
@@ -503,10 +503,10 @@ pip install pocketflow-tracing
 
 ### 2. Set Up Your Environment
 ```bash
-# Copy the example environment file
+## Copy the example environment file
 curl -o .env https://raw.githubusercontent.com/The-Pocket/PocketFlow/main/cookbook/pocketflow-tracing/.env.example
 
-# Edit with your Langfuse credentials
+## Edit with your Langfuse credentials
 nano .env
 ```
 

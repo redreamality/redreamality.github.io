@@ -8,7 +8,7 @@ lang: "en"
 translatedFrom: "github-spec-kit-guide"
 ---
 
-# GitHub Spec Kit Deep Dive: AI-Driven Specification Development Methodology
+## GitHub Spec Kit Deep Dive: AI-Driven Specification Development Methodology
 
 ## The Software Engineering Paradigm Shift in the Generative AI Era
 

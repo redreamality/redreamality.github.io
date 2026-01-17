@@ -8,7 +8,7 @@ lang: "en"
 translatedFrom: "openspec-guide"
 ---
 
-# OpenSpec Deep Dive: Spec-Driven Development Architecture & Practice in AI-Assisted Programming
+## OpenSpec Deep Dive: Spec-Driven Development Architecture & Practice in AI-Assisted Programming
 
 ## Introduction: The Paradigm Shift in AI-Assisted Programming
 

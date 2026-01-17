@@ -6,7 +6,7 @@ tags: ["量化交易", "quantitative-trading", "alpha", "risk-premium", "market-
 lang: "en"
 ---
 
-# Where does trading profit come from?
+## Where does trading profit come from?
 
 This question sounds simple, but it’s one of the most important questions in trading. If you can’t explain where profit comes from, you’re basically hoping the market donates money to you.
 

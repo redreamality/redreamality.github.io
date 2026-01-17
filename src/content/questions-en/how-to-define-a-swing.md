@@ -6,7 +6,7 @@ tags: ["量化交易", "quantitative-trading", "price-action", "market-structure
 lang: "en"
 ---
 
-# How do you define a swing in trading?
+## How do you define a swing in trading?
 
 “Swing” sounds like a simple word, but the moment you try to code it, you realize there’s no universal definition. One trader calls a 0.5% pullback a swing, another ignores anything under 3%. One uses 5-minute candles, another uses daily.
 

@@ -8,7 +8,7 @@ lang: en
 translatedFrom: "multi-agent-system"
 ---
 
-# Multi-Agent Systems: From Theory to Practice
+## Multi-Agent Systems: From Theory to Practice
 
 ## Presentation Content
 

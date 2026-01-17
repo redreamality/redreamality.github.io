@@ -8,7 +8,7 @@ lang: "ja"
 translatedFrom: "bmad-method-guide"
 ---
 
-# BMAD-METHOD 使用ガイド：革新的なアジャイルAI駆動開発手法
+## BMAD-METHOD 使用ガイド：革新的なアジャイルAI駆動開発手法
 
 ## エグゼクティブサマリーとコア方法論
 
@@ -78,7 +78,7 @@ npx bmad-method@alpha install
 
 ```bash
 npx bmad-method install
-# または明示的に指定
+## または明示的に指定
 npx bmad-method@latest install
 ```
 
@@ -307,7 +307,7 @@ BMADの真の威力はその拡張性にあります。**BMad Builder**モジュ
 **例：「SEO専門家」エージェントの作成**
 
 ```markdown
-# Role: SEO Specialist
+## Role: SEO Specialist
 
 ## Context
 You are an expert in Search Engine Optimization for Single Page Applications (SPA).

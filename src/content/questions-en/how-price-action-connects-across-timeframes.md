@@ -6,7 +6,7 @@ tags: ["量化交易", "quantitative-trading", "multi-timeframe", "fractal", "ri
 lang: "en"
 ---
 
-# How are different timeframes connected in price action?
+## How are different timeframes connected in price action?
 
 Multi-timeframe analysis often sounds like this:
 

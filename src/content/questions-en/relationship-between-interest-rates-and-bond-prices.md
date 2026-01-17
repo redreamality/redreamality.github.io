@@ -6,7 +6,7 @@ tags: ["bonds", "interest-rates", "fixed-income", "investment-basics"]
 lang: "en"
 ---
 
-# What is the Relationship Between Interest Rates and Bond Prices?
+## What is the Relationship Between Interest Rates and Bond Prices?
 
 If you've ever dabbled in the world of investing, you've probably heard the phrase "bond prices and interest rates move in opposite directions." But what does this actually mean? Why should a boring fixed-income security care about what the Federal Reserve or other central banks are doing with interest rates? Let me walk you through this fundamental relationship that every smart investor needs to understand.
 

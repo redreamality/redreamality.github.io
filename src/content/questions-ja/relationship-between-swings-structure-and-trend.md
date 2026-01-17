@@ -7,7 +7,7 @@ lang: "ja"
 translatedFrom: "relationship-between-swings-structure-and-trend"
 ---
 
-# スイング、構造、トレンドの関係は？
+## スイング、構造、トレンドの関係は？
 
 取引サークルには3つの言葉がよく混同されて使われます：スイング、構造、トレンド。どれくらい混同されているか？よくこんな会話が起こります：
 

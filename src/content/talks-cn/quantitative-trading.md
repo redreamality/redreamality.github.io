@@ -7,7 +7,7 @@ lang: zh
 translatedFrom: "quantitative-trading"
 ---
 
-# 量化交易策略分享
+## 量化交易策略分享
 
 ## 主要内容
 

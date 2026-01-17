@@ -263,7 +263,7 @@ from langchain.llms import OpenAI
 
 llm = OpenAI(temperature=0)
 
-# 加载内置工具
+## 加载内置工具
 tools = load_tools(
     ["wikipedia", "llm-math", "python_repl"],
     llm=llm
@@ -276,7 +276,7 @@ agent = initialize_agent(
     verbose=True
 )
 
-# 使用代理
+## 使用代理
 agent.run("东京的人口是多少？计算该数字的 10%。")
 ```
 
@@ -400,7 +400,7 @@ from dotenv import load_dotenv
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# 定义函数模式
+## 定义函数模式
 functions = [
     {
         "name": "web_search",
@@ -454,7 +454,7 @@ functions = [
     }
 ]
 
-# 将函数名映射到实际函数
+## 将函数名映射到实际函数
 available_functions = {
     "web_search": web_search,
     "save_to_file": save_to_file,
@@ -521,7 +521,7 @@ def run_agent(user_message: str) -> str:
     
     return "代理达到最大迭代次数"
 
-# 测试代理
+## 测试代理
 if __name__ == "__main__":
     result = run_agent(
         "搜索 2026 年最新的 AI 代理发展，"
@@ -539,7 +539,7 @@ import json
 
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
-# Claude 使用不同的工具格式
+## Claude 使用不同的工具格式
 claude_tools = [
     {
         "name": "web_search",
@@ -637,7 +637,7 @@ def run_claude_agent(user_message: str) -> str:
     
     return "代理达到最大迭代次数"
 
-# 测试 Claude 代理
+## 测试 Claude 代理
 if __name__ == "__main__":
     result = run_claude_agent(
         "研究 2026 年 AI 代理的最新发展并创建简要摘要。"
@@ -676,7 +676,7 @@ def research_and_publish_workflow(topic: str) -> str:
     
     return run_agent(prompt)
 
-# 使用
+## 使用
 result = research_and_publish_workflow("2026 年 AI 代理框架")
 ```
 
@@ -740,7 +740,7 @@ class SafeAgent:
         # 执行工具
         return available_functions[tool_name](**args)
 
-# 使用
+## 使用
 safe_agent = SafeAgent(
     allowed_tools=['web_search', 'calculate'],
     restricted_paths=['/etc', '/sys', '~/.ssh']
@@ -828,13 +828,13 @@ def data_analyst_agent():
 ### 1. 设计清晰的工具描述
 
 ```python
-# ❌ 糟糕：模糊的描述
+## ❌ 糟糕：模糊的描述
 {
     "name": "search",
     "description": "搜索东西"
 }
 
-# ✅ 好：清晰、具体的描述
+## ✅ 好：清晰、具体的描述
 {
     "name": "web_search",
     "description": """使用网络搜索引擎在互联网上搜索当前信息。
@@ -878,7 +878,7 @@ class RateLimiter:
         """记录工具调用。"""
         self.calls[tool_name].append(datetime.now())
 
-# 使用
+## 使用
 rate_limiter = RateLimiter(max_calls=10, time_window=60)
 
 if rate_limiter.can_call("web_search"):

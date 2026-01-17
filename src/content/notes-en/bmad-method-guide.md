@@ -8,7 +8,7 @@ lang: "en"
 translatedFrom: "bmad-method-guide"
 ---
 
-# BMAD-METHOD Guide: Breakthrough Agile AI-Driven Development
+## BMAD-METHOD Guide: Breakthrough Agile AI-Driven Development
 
 ## Executive Summary & Core Methodology
 
@@ -78,7 +78,7 @@ For maintaining legacy BMAD projects or users demanding extremely high stability
 
 ```bash
 npx bmad-method install
-# Or explicitly specify
+## Or explicitly specify
 npx bmad-method@latest install
 ```
 
@@ -307,7 +307,7 @@ Users can create new .md or .yaml files in the .bmad/agents/ directory to define
 **Example: Creating an "SEO Specialist" Agent**
 
 ```markdown
-# Role: SEO Specialist
+## Role: SEO Specialist
 
 ## Context
 You are an expert in Search Engine Optimization for Single Page Applications (SPA).

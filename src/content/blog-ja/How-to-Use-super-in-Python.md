@@ -55,11 +55,11 @@ class Dog(Animal):
         self.breed = breed
         print(f"Dog {name} of breed {breed} created")
 
-# 使用例
+## 使用例
 my_dog = Dog("Buddy", "Golden Retriever")
-# 出力:
-# Animal Buddy created
-# Dog Buddy of breed Golden Retriever created
+## 出力:
+## Animal Buddy created
+## Dog Buddy of breed Golden Retriever created
 ```
 
 ### 3. 多重継承
@@ -86,14 +86,14 @@ class D(B, C):
         print("D's method")
         super().method()
 
-# 使用例
+## 使用例
 d = D()
 d.method()
-# 出力:
-# D's method
-# B's method
-# C's method
-# A's method
+## 出力:
+## D's method
+## B's method
+## C's method
+## A's method
 ```
 
 ## メソッド解決順序 (MRO)
@@ -105,7 +105,7 @@ class D(B, C):
     pass
 
 print(D.__mro__)
-# (<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>)
+## (<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>)
 ```
 
 ## ベストプラクティス
@@ -113,7 +113,7 @@ print(D.__mro__)
 ### 1. 協調継承では常にsuper()を使用する
 
 ```python
-# 良い方法
+## 良い方法
 class Parent:
     def __init__(self, value):
         self.value = value
@@ -144,12 +144,12 @@ class B(A):
 単一継承でも、`super()`は親クラスを直接呼び出すよりも優れています：
 
 ```python
-# 良い方法
+## 良い方法
 class Child(Parent):
     def method(self):
         super().method()
 
-# 避けるべき
+## 避けるべき
 class Child(Parent):
     def method(self):
         Parent.method(self)  # 柔軟性に欠ける
@@ -205,13 +205,13 @@ class Child(Left, Right):
         print("Child init")
         super().__init__()
 
-# 使用例
+## 使用例
 c = Child()
-# 出力:
-# Child init
-# Left init
-# Right init
-# Base init
+## 出力:
+## Child init
+## Left init
+## Right init
+## Base init
 ```
 
 ## まとめ

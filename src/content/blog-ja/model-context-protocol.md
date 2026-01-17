@@ -8,7 +8,7 @@ lang: 'ja'
 translatedFrom: 'model-context-protocol'
 ---
 
-# Model Context Protocol (MCP) 詳細解説 - AI アプリケーションの標準化プロトコル
+## Model Context Protocol (MCP) 詳細解説 - AI アプリケーションの標準化プロトコル
 
 ## はじめに
 

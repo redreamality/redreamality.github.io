@@ -56,11 +56,11 @@ class Dog(Animal):
         self.breed = breed
         print(f"Dog {name} of breed {breed} created")
 
-# 使用
+## 使用
 my_dog = Dog("Buddy", "Golden Retriever")
-# 输出:
-# Animal Buddy created
-# Dog Buddy of breed Golden Retriever created
+## 输出:
+## Animal Buddy created
+## Dog Buddy of breed Golden Retriever created
 ```
 
 ### 3. 多重继承
@@ -87,14 +87,14 @@ class D(B, C):
         print("D's method")
         super().method()
 
-# 使用
+## 使用
 d = D()
 d.method()
-# 输出:
-# D's method
-# B's method
-# C's method
-# A's method
+## 输出:
+## D's method
+## B's method
+## C's method
+## A's method
 ```
 
 ## 方法解析顺序 (MRO)
@@ -106,7 +106,7 @@ class D(B, C):
     pass
 
 print(D.__mro__)
-# (<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>)
+## (<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>)
 ```
 
 ## 最佳实践
@@ -114,7 +114,7 @@ print(D.__mro__)
 ### 1. 在协作继承中始终使用 super()
 
 ```python
-# 好的做法
+## 好的做法
 class Parent:
     def __init__(self, value):
         self.value = value
@@ -145,12 +145,12 @@ class B(A):
 即使是单继承，`super()` 也比直接调用父类更好：
 
 ```python
-# 好的做法
+## 好的做法
 class Child(Parent):
     def method(self):
         super().method()
 
-# 避免
+## 避免
 class Child(Parent):
     def method(self):
         Parent.method(self)  # 不够灵活
@@ -206,13 +206,13 @@ class Child(Left, Right):
         print("Child init")
         super().__init__()
 
-# 使用
+## 使用
 c = Child()
-# 输出:
-# Child init
-# Left init
-# Right init
-# Base init
+## 输出:
+## Child init
+## Left init
+## Right init
+## Base init
 ```
 
 ## 总结

@@ -7,7 +7,7 @@ tags: ['AI', 'agents', 'Parlant', 'conversational AI', 'customer engagement']
 lang: 'en'
 ---
 
-# Parlant: An In-Depth Analysis of the AI Agent Framework Designed for Customer Engagement
+## Parlant: An In-Depth Analysis of the AI Agent Framework Designed for Customer Engagement
 
 ## Introduction
 
@@ -178,7 +178,7 @@ Parlant has built-in powerful observability features:
 Parlant provides a systematic quality evaluation mechanism:
 
 ```python
-# Define evaluation scenarios
+## Define evaluation scenarios
 test_cases = [
     {
         "user_input": "I want to return an item",
@@ -187,7 +187,7 @@ test_cases = [
     }
 ]
 
-# Run evaluation
+## Run evaluation
 results = parlant.evaluate(agent, test_cases)
 ```
 
@@ -209,13 +209,13 @@ Parlant supports multiple LLM backends:
 Different models can be selected for different scenarios:
 
 ```python
-# Use GPT-3.5 for simple queries
+## Use GPT-3.5 for simple queries
 simple_agent = parlant.create_agent(
     ...,
     llm_config={"model": "gpt-3.5-turbo"}
 )
 
-# Use GPT-4 for complex reasoning
+## Use GPT-4 for complex reasoning
 complex_agent = parlant.create_agent(
     ...,
     llm_config={"model": "gpt-4"}
@@ -380,7 +380,7 @@ async def create_ticket(title: str, description: str, priority: str):
 **Single Responsibility Principle:**
 
 ```python
-# Good: Each tool does one thing
+## Good: Each tool does one thing
 @parlant.tool
 async def get_order(order_id: str):
     return db.query(f"SELECT * FROM orders WHERE id = {order_id}")
@@ -389,7 +389,7 @@ async def get_order(order_id: str):
 async def cancel_order(order_id: str):
     return db.execute(f"UPDATE orders SET status = 'cancelled' WHERE id = {order_id}")
 
-# Bad: One tool does too much
+## Bad: One tool does too much
 @parlant.tool
 async def manage_order(order_id: str, action: str):
     if action == "get":
@@ -419,7 +419,7 @@ async def charge_customer(amount: float):
 **Key Information Extraction:**
 
 ```python
-# Extract key information early in conversation
+## Extract key information early in conversation
 important_facts = [
     "customer_name",
     "order_id",
@@ -427,14 +427,14 @@ important_facts = [
     "priority"
 ]
 
-# Ensure this information is retained during context trimming
+## Ensure this information is retained during context trimming
 session.mark_as_important(important_facts)
 ```
 
 **Context Compression:**
 
 ```python
-# For long conversations, periodically summarize
+## For long conversations, periodically summarize
 if session.turn_count > 10:
     summary = await parlant.summarize_session(session)
     session.add_system_message(f"Previous conversation summary: {summary}")
@@ -445,7 +445,7 @@ if session.turn_count > 10:
 **Establish Evaluation Benchmarks:**
 
 ```python
-# Create representative test sets
+## Create representative test sets
 test_scenarios = [
     # Happy path
     {"type": "happy_path", "user_input": "Check order 123", "expected_result": "order_found"},
@@ -474,7 +474,7 @@ test_scenarios = [
 **Data Protection:**
 
 ```python
-# Mask sensitive information
+## Mask sensitive information
 @parlant.tool
 async def get_customer_info(customer_id: str):
     info = database.get_customer(customer_id)
@@ -487,7 +487,7 @@ async def get_customer_info(customer_id: str):
 **Access Control:**
 
 ```python
-# Role-based tool access control
+## Role-based tool access control
 basic_agent = parlant.create_agent(
     name="tier1_support",
     tools=["query_order", "update_shipping_address"]  # Limited permissions
@@ -502,7 +502,7 @@ senior_agent = parlant.create_agent(
 **Audit Logs:**
 
 ```python
-# Record all sensitive operations
+## Record all sensitive operations
 @parlant.tool
 async def issue_refund(order_id: str, amount: float):
     audit_log.record({
@@ -563,14 +563,14 @@ pip install parlant
 import parlant
 from parlant import Agent, tool, guideline
 
-# 1. Define tools
+## 1. Define tools
 @tool
 async def get_weather(city: str) -> dict:
     """Get city weather"""
     # Actual implementation...
     return {"city": city, "temp": 22, "condition": "sunny"}
 
-# 2. Define Guidelines
+## 2. Define Guidelines
 @guideline
 def be_helpful():
     return "Always be helpful and polite to users"
@@ -579,7 +579,7 @@ def be_helpful():
 def weather_only():
     return "Only provide weather information, do not discuss other topics"
 
-# 3. Create Agent
+## 3. Create Agent
 agent = parlant.Agent(
     name="weather_assistant",
     description="A helpful weather assistant",
@@ -592,13 +592,13 @@ agent = parlant.Agent(
     }
 )
 
-# 4. Start conversation
+## 4. Start conversation
 session = parlant.create_session(
     agent=agent,
     customer_id="user123"
 )
 
-# 5. Handle user input
+## 5. Handle user input
 async def chat():
     response = await session.send_message("What's the weather in Beijing today?")
     print(response.text)
@@ -607,7 +607,7 @@ async def chat():
     print(f"Tools called: {response.tool_calls}")
     print(f"Guidelines activated: {response.active_guidelines}")
 
-# Run
+## Run
 import asyncio
 asyncio.run(chat())
 ```
@@ -615,7 +615,7 @@ asyncio.run(chat())
 ### Advanced Configuration
 
 ```python
-# Configure more complex Agent
+## Configure more complex Agent
 advanced_agent = parlant.Agent(
     name="customer_support",
     description="Advanced customer support agent",

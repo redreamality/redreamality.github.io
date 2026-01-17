@@ -6,7 +6,7 @@ tags: ["warren-buffett", "bonds", "stocks", "investment-philosophy", "value-inve
 lang: "en"
 ---
 
-# Why Doesn't Warren Buffett Invest in Bonds?
+## Why Doesn't Warren Buffett Invest in Bonds?
 
 Warren Buffett, the legendary investor and third-richest person in the world, is famous for his stock-picking prowess. His company, Berkshire Hathaway, holds billions of dollars in stocks but relatively little in bonds. This has led many to wonder: why doesn't Buffett invest in bonds? Is he against bonds entirely, or is there a deeper strategy at play?
 

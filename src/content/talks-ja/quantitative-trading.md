@@ -7,7 +7,7 @@ lang: ja
 translatedFrom: "quantitative-trading"
 ---
 
-# クオンツトレーディング戦略の共有
+## クオンツトレーディング戦略の共有
 
 ## 主な内容
 

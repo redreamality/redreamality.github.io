@@ -7,7 +7,7 @@ tags: ["productivity", "focus", "reading"]
 lang: "en"
 ---
 
-# Notes on "Deep Work" by Cal Newport
+## Notes on "Deep Work" by Cal Newport
 
 ## ROI Reading Method Analysis
 

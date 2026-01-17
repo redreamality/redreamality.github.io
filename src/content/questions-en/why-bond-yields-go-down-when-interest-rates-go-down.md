@@ -6,7 +6,7 @@ tags: ["bond-yields", "interest-rates", "bond-prices", "fixed-income", "investme
 lang: "en"
 ---
 
-# Why Do Bond Yields Go Down When Interest Rates Go Down?
+## Why Do Bond Yields Go Down When Interest Rates Go Down?
 
 This is one of the most fundamental relationships in finance, and understanding it is essential for any investor. When we say "bond yields go down when interest rates go down," we're describing the same inverse relationship we've been discussing - just looking at it from a different angle. Let me explain exactly why this happens and what it means for bond investors.
 

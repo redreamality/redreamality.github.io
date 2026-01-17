@@ -6,7 +6,7 @@ author: 'Remy'
 tags: ['claude code', 'vibe coding', 'python']
 ---
 
-# Claude Agent SDK (Python) Learning Guide
+## Claude Agent SDK (Python) Learning Guide
 
 **Document Version**: 1.0  
 **Generated**: 2025-10-15  
@@ -121,19 +121,19 @@ After completing this guide you will be able to:
 
 ```bash
 python --version
-# Needs 3.10 or newer
+## Needs 3.10 or newer
 ```
 
 If the version is too low, upgrade:
 
 ```bash
-# Ubuntu/Debian
+## Ubuntu/Debian
 sudo apt install python3.10
 
-# macOS
+## macOS
 brew install python@3.10
 
-# Windows: download from https://python.org/downloads/
+## Windows: download from https://python.org/downloads/
 ```
 
 #### Step 2: Install Claude Code CLI
@@ -141,24 +141,24 @@ brew install python@3.10
 The CLI is a required dependency.
 
 ```bash
-# Install Claude Code CLI
+## Install Claude Code CLI
 npm install -g @anthropic-ai/claude-code
 
-# Verify
+## Verify
 claude -v
-# Should show 2.0.0 or higher
+## Should show 2.0.0 or higher
 ```
 
 #### Step 3: Set API Key
 
 ```bash
-# Linux/macOS
+## Linux/macOS
 export ANTHROPIC_API_KEY="sk-ant-api03-your-key-here"
 
-# Windows (PowerShell)
+## Windows (PowerShell)
 $env:ANTHROPIC_API_KEY = "sk-ant-api03-your-key-here"
 
-# Permanent (Linux/macOS)
+## Permanent (Linux/macOS)
 echo 'export ANTHROPIC_API_KEY="sk-ant-api03-..."' >> ~/.bashrc
 source ~/.bashrc
 ```
@@ -168,10 +168,10 @@ Obtain your key at https://console.anthropic.com/.
 #### Step 4: Install the SDK
 
 ```bash
-# Option 1: from PyPI (recommended)
+## Option 1: from PyPI (recommended)
 pip install claude-agent-sdk
 
-# Option 2: from source (dev)
+## Option 2: from source (dev)
 cd claude-agent-sdk-python
 pip install -e .
 ```
@@ -180,7 +180,7 @@ pip install -e .
 
 ```bash
 python -c "import claude_agent_sdk; print(claude_agent_sdk.__version__)"
-# Should print: 0.1.3
+## Should print: 0.1.3
 ```
 
 ### 2.3 First Example
@@ -587,13 +587,13 @@ Message = UserMessage | AssistantMessage | SystemMessage | ResultMessage | Strea
 ```python
 from claude_agent_sdk import UserMessage
 
-# Text message
+## Text message
 user_msg = UserMessage(
     content="Hello Claude",
     parent_tool_use_id=None
 )
 
-# List of content blocks
+## List of content blocks
 user_msg = UserMessage(
     content=[
         {"type": "text", "text": "Hello"},
@@ -636,7 +636,7 @@ if isinstance(message, ResultMessage):
 ```python
 from claude_agent_sdk import tool, create_sdk_mcp_server, ClaudeAgentOptions
 
-# 1. Define tool
+## 1. Define tool
 @tool("calculate_sum", "Add two numbers", {"a": float, "b": float})
 async def calculate_sum(args):
     result = args["a"] + args["b"]
@@ -644,12 +644,12 @@ async def calculate_sum(args):
         "content": [{"type": "text", "text": f"Sum: {result}"}]
     }
 
-# 2. Create server
+## 2. Create server
 server = create_sdk_mcp_server(
     name="math-tools",
     version="1.0.0",
     tools=[calculate_sum]
 )
 
-# 3. Configure
+## 3. Configure
 options = ClaudeAgent

@@ -262,7 +262,7 @@ from langchain.llms import OpenAI
 
 llm = OpenAI(temperature=0)
 
-# 組み込みツールをロード
+## 組み込みツールをロード
 tools = load_tools(
     ["wikipedia", "llm-math", "python_repl"],
     llm=llm
@@ -275,7 +275,7 @@ agent = initialize_agent(
     verbose=True
 )
 
-# エージェントを使用
+## エージェントを使用
 agent.run("東京の人口は？その数値の10%を計算してください。")
 ```
 
@@ -399,7 +399,7 @@ from dotenv import load_dotenv
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# 関数スキーマを定義
+## 関数スキーマを定義
 functions = [
     {
         "name": "web_search",
@@ -453,7 +453,7 @@ functions = [
     }
 ]
 
-# 関数名を実際の関数にマッピング
+## 関数名を実際の関数にマッピング
 available_functions = {
     "web_search": web_search,
     "save_to_file": save_to_file,

@@ -7,7 +7,7 @@ tags: ["AI开发", "敏捷开发", "BMAD", "规格驱动开发", "多智能体�
 lang: "zh"
 ---
 
-# BMAD-METHOD 使用指南：突破性敏捷AI驱动开发方法
+## BMAD-METHOD 使用指南：突破性敏捷AI驱动开发方法
 
 ## 执行摘要与核心方法论
 
@@ -77,7 +77,7 @@ npx bmad-method@alpha install
 
 ```bash
 npx bmad-method install
-# 或者显式指定
+## 或者显式指定
 npx bmad-method@latest install
 ```
 
@@ -306,7 +306,7 @@ BMAD 的真正威力在于其可扩展性。通过 **BMad Builder** 模块，用
 **示例：创建一个"SEO 专家"智能体**
 
 ```markdown
-# Role: SEO Specialist
+## Role: SEO Specialist
 
 ## Context
 You are an expert in Search Engine Optimization for Single Page Applications (SPA).

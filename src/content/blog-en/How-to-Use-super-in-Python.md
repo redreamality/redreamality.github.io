@@ -56,11 +56,11 @@ class Dog(Animal):
         self.breed = breed
         print(f"Dog {name} of breed {breed} created")
 
-# Usage
+## Usage
 my_dog = Dog("Buddy", "Golden Retriever")
-# Output:
-# Animal Buddy created
-# Dog Buddy of breed Golden Retriever created
+## Output:
+## Animal Buddy created
+## Dog Buddy of breed Golden Retriever created
 ```
 
 ### 3. Multiple Inheritance
@@ -87,14 +87,14 @@ class D(B, C):
         print("D's method")
         super().method()
 
-# Usage
+## Usage
 d = D()
 d.method()
-# Output:
-# D's method
-# B's method
-# C's method
-# A's method
+## Output:
+## D's method
+## B's method
+## C's method
+## A's method
 ```
 
 ## Method Resolution Order (MRO)
@@ -106,7 +106,7 @@ class D(B, C):
     pass
 
 print(D.__mro__)
-# (<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>)
+## (<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>)
 ```
 
 ## Best Practices
@@ -114,7 +114,7 @@ print(D.__mro__)
 ### 1. Always Use super() in Cooperative Inheritance
 
 ```python
-# Good
+## Good
 class Parent:
     def __init__(self, value):
         self.value = value
@@ -145,12 +145,12 @@ class B(A):
 Even with single inheritance, `super()` is preferred over direct parent class calls:
 
 ```python
-# Good
+## Good
 class Child(Parent):
     def method(self):
         super().method()
 
-# Avoid
+## Avoid
 class Child(Parent):
     def method(self):
         Parent.method(self)  # Less flexible
@@ -206,13 +206,13 @@ class Child(Left, Right):
         print("Child init")
         super().__init__()
 
-# Usage
+## Usage
 c = Child()
-# Output:
-# Child init
-# Left init
-# Right init
-# Base init
+## Output:
+## Child init
+## Left init
+## Right init
+## Base init
 ```
 
 ## Summary

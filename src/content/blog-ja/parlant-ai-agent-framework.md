@@ -8,7 +8,7 @@ lang: 'ja'
 translatedFrom: 'parlant-ai-agent-framework'
 ---
 
-# Parlant：顧客エンゲージメント向けに設計された AI Agent フレームワーク詳細解説
+## Parlant：顧客エンゲージメント向けに設計された AI Agent フレームワーク詳細解説
 
 ## はじめに
 
@@ -179,7 +179,7 @@ Parlant は強力な可観測性機能を内蔵：
 Parlant は体系的な品質評価メカニズムを提供：
 
 ```python
-# 評価シナリオを定義
+## 評価シナリオを定義
 test_cases = [
     {
         "user_input": "返品したい",
@@ -188,7 +188,7 @@ test_cases = [
     }
 ]
 
-# 評価を実行
+## 評価を実行
 results = parlant.evaluate(agent, test_cases)
 ```
 
@@ -210,13 +210,13 @@ Parlant は複数の LLM バックエンドをサポート：
 異なるシナリオで異なるモデルを選択可能：
 
 ```python
-# 簡単なクエリには GPT-3.5
+## 簡単なクエリには GPT-3.5
 simple_agent = parlant.create_agent(
     ...,
     llm_config={"model": "gpt-3.5-turbo"}
 )
 
-# 複雑な推論には GPT-4
+## 複雑な推論には GPT-4
 complex_agent = parlant.create_agent(
     ...,
     llm_config={"model": "gpt-4"}
@@ -381,7 +381,7 @@ async def create_ticket(title: str, description: str, priority: str):
 **単一責任原則：**
 
 ```python
-# 良い：各ツールは1つのことを行う
+## 良い：各ツールは1つのことを行う
 @parlant.tool
 async def get_order(order_id: str):
     return db.query(f"SELECT * FROM orders WHERE id = {order_id}")
@@ -390,7 +390,7 @@ async def get_order(order_id: str):
 async def cancel_order(order_id: str):
     return db.execute(f"UPDATE orders SET status = 'cancelled' WHERE id = {order_id}")
 
-# 悪い：1つのツールがあまりにも多くのことを行う
+## 悪い：1つのツールがあまりにも多くのことを行う
 @parlant.tool
 async def manage_order(order_id: str, action: str):
     if action == "get":
@@ -420,7 +420,7 @@ async def charge_customer(amount: float):
 **重要情報抽出：**
 
 ```python
-# 対話の早期段階で重要情報を抽出
+## 対話の早期段階で重要情報を抽出
 important_facts = [
     "customer_name",
     "order_id",
@@ -428,14 +428,14 @@ important_facts = [
     "priority"
 ]
 
-# コンテキストトリミング時にこれらの情報が保持されるようにする
+## コンテキストトリミング時にこれらの情報が保持されるようにする
 session.mark_as_important(important_facts)
 ```
 
 **コンテキスト圧縮：**
 
 ```python
-# 長い対話の場合、定期的に要約
+## 長い対話の場合、定期的に要約
 if session.turn_count > 10:
     summary = await parlant.summarize_session(session)
     session.add_system_message(f"Previous conversation summary: {summary}")
@@ -446,7 +446,7 @@ if session.turn_count > 10:
 **評価ベースラインを確立：**
 
 ```python
-# 代表的なテストセットを作成
+## 代表的なテストセットを作成
 test_scenarios = [
     # ハッピーパス
     {"type": "happy_path", "user_input": "注文123を照会", "expected_result": "order_found"},
@@ -475,7 +475,7 @@ test_scenarios = [
 **データ保護：**
 
 ```python
-# 機密情報のマスキング
+## 機密情報のマスキング
 @parlant.tool
 async def get_customer_info(customer_id: str):
     info = database.get_customer(customer_id)
@@ -488,7 +488,7 @@ async def get_customer_info(customer_id: str):
 **アクセス制御：**
 
 ```python
-# ロールベースのツールアクセス制御
+## ロールベースのツールアクセス制御
 basic_agent = parlant.create_agent(
     name="tier1_support",
     tools=["query_order", "update_shipping_address"]  # 限定権限
@@ -503,7 +503,7 @@ senior_agent = parlant.create_agent(
 **監査ログ：**
 
 ```python
-# すべての機密操作を記録
+## すべての機密操作を記録
 @parlant.tool
 async def issue_refund(order_id: str, amount: float):
     audit_log.record({
@@ -564,14 +564,14 @@ pip install parlant
 import parlant
 from parlant import Agent, tool, guideline
 
-# 1. ツールを定義
+## 1. ツールを定義
 @tool
 async def get_weather(city: str) -> dict:
     """都市の天気を取得"""
     # 実際の実装...
     return {"city": city, "temp": 22, "condition": "sunny"}
 
-# 2. Guidelines を定義
+## 2. Guidelines を定義
 @guideline
 def be_helpful():
     return "Always be helpful and polite to users"
@@ -580,7 +580,7 @@ def be_helpful():
 def weather_only():
     return "Only provide weather information, do not discuss other topics"
 
-# 3. Agent を作成
+## 3. Agent を作成
 agent = parlant.Agent(
     name="weather_assistant",
     description="A helpful weather assistant",
@@ -593,13 +593,13 @@ agent = parlant.Agent(
     }
 )
 
-# 4. 対話を開始
+## 4. 対話を開始
 session = parlant.create_session(
     agent=agent,
     customer_id="user123"
 )
 
-# 5. ユーザー入力を処理
+## 5. ユーザー入力を処理
 async def chat():
     response = await session.send_message("北京の今日の天気はどうですか？")
     print(response.text)
@@ -608,7 +608,7 @@ async def chat():
     print(f"Tools called: {response.tool_calls}")
     print(f"Guidelines activated: {response.active_guidelines}")
 
-# 実行
+## 実行
 import asyncio
 asyncio.run(chat())
 ```
@@ -616,7 +616,7 @@ asyncio.run(chat())
 ### 高度な設定
 
 ```python
-# より複雑な Agent を設定
+## より複雑な Agent を設定
 advanced_agent = parlant.Agent(
     name="customer_support",
     description="Advanced customer support agent",

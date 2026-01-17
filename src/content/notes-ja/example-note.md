@@ -8,7 +8,7 @@ lang: "ja"
 translatedFrom: "example-note"
 ---
 
-# 『DEEP WORK』読書ノート
+## 『DEEP WORK』読書ノート
 
 ## ROI読書法分析
 

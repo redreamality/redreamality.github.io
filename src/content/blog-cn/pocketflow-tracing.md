@@ -132,12 +132,12 @@ pip install pocketflow-tracing
 在项目根目录下创建一个`.env`文件：
 
 ```env
-# Langfuse配置
+## Langfuse配置
 LANGFUSE_SECRET_KEY=sk-lf-your-secret-key-here
 LANGFUSE_PUBLIC_KEY=pk-lf-your-public-key-here
 LANGFUSE_HOST=https://your-self-hosted-langfuse
 
-# 可选：开发时启用调试模式
+## 可选：开发时启用调试模式
 POCKETFLOW_TRACING_DEBUG=true
 ```
 
@@ -153,7 +153,7 @@ POCKETFLOW_TRACING_DEBUG=true
 from pocketflow import Node, Flow
 from pocketflow_tracing import trace_flow
 
-# 您的现有节点代码保持不变
+## 您的现有节点代码保持不变
 class MyNode(Node):
     def prep(self, shared):
         return shared["input"]
@@ -165,13 +165,13 @@ class MyNode(Node):
         shared["output"] = exec_res
         return "default"
 
-# 只需添加装饰器 - 不需要其他更改！
+## 只需添加装饰器 - 不需要其他更改！
 @trace_flow()
 class MyFlow(Flow):
     def __init__(self):
         super().__init__(start=MyNode())
 
-# 正常运行您的流
+## 正常运行您的流
 flow = MyFlow()
 shared = {"input": "Hello World"}
 flow.run(shared)
@@ -396,7 +396,7 @@ class DataPipeline(Flow):
 ```python
 from pocketflow_tracing import TracingConfig
 
-# 加载自定义配置
+## 加载自定义配置
 config = TracingConfig.from_env()
 config.debug = True
 config.trace_inputs = True
@@ -410,7 +410,7 @@ class MyFlow(Flow):
 ### 选择性跟踪控制
 
 ```env
-# 精细调整要跟踪的内容
+## 精细调整要跟踪的内容
 POCKETFLOW_TRACE_INPUTS=true
 POCKETFLOW_TRACE_OUTPUTS=true
 POCKETFLOW_TRACE_PREP=true
@@ -425,7 +425,7 @@ POCKETFLOW_TRACE_ERRORS=true
 
 **1. "仪表板中没有跟踪出现"**
 ```bash
-# 启用调试模式查看发生了什么
+## 启用调试模式查看发生了什么
 export POCKETFLOW_TRACING_DEBUG=true
 python your_flow.py
 ```
@@ -437,10 +437,10 @@ python your_flow.py
 
 **3. "导入错误"**
 ```bash
-# 确保包已正确安装
+## 确保包已正确安装
 pip install pocketflow-tracing
 
-# 对于开发安装
+## 对于开发安装
 pip install -e ".[dev]"
 ```
 
@@ -503,10 +503,10 @@ pip install pocketflow-tracing
 
 ### 2. 设置环境
 ```bash
-# 复制示例环境文件
+## 复制示例环境文件
 curl -o .env https://raw.githubusercontent.com/The-Pocket/PocketFlow/main/cookbook/pocketflow-tracing/.env.example
 
-# 使用您的Langfuse凭证编辑
+## 使用您的Langfuse凭证编辑
 nano .env
 ```
 

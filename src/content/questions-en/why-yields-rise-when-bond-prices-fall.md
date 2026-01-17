@@ -6,7 +6,7 @@ tags: ["bond-yields", "bond-prices", "rising-yields", "fixed-income", "investmen
 lang: "en"
 ---
 
-# Why Do Yields Rise When Bond Prices Fall?
+## Why Do Yields Rise When Bond Prices Fall?
 
 If you've been learning about bonds, you might have noticed something seemingly paradoxical: when bond prices fall, yields rise, and when bond prices rise, yields fall. This inverse relationship is one of the most important - and confusing - concepts in bond investing. But once you understand why this happens, it will all make perfect sense.
 

@@ -72,24 +72,24 @@ ZeroTier 使用行业标准的加密算法：
 ### 1. 网络配置
 
 ```bash
-# 使用强密码保护网络
+## 使用强密码保护网络
 zerotier-cli set [network-id] allowManaged=1
 
-# 启用访问控制
+## 启用访问控制
 zerotier-cli set [network-id] allowGlobal=0
 
-# 定期轮换网络密钥
+## 定期轮换网络密钥
 zerotier-cli set [network-id] revision=[new-revision]
 ```
 
 ### 2. 防火墙配置
 
 ```bash
-# 限制 ZeroTier 接口访问
+## 限制 ZeroTier 接口访问
 iptables -A INPUT -i zt+ -s 192.168.192.0/24 -j ACCEPT
 iptables -A INPUT -i zt+ -j DROP
 
-# 阻止不必要的出站连接
+## 阻止不必要的出站连接
 iptables -A OUTPUT -o zt+ -d 192.168.192.0/24 -j ACCEPT
 iptables -A OUTPUT -o zt+ -j DROP
 ```

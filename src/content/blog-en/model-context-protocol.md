@@ -7,7 +7,7 @@ tags: ["AI", "LLM", "Protocol", "Integration"]
 lang: 'en'
 ---
 
-# Deep Dive into Model Context Protocol (MCP) - A Standardized Protocol for AI Applications
+## Deep Dive into Model Context Protocol (MCP) - A Standardized Protocol for AI Applications
 
 ## Introduction
 

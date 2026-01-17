@@ -134,12 +134,12 @@ pip install pocketflow-tracing
 プロジェクトルートディレクトリに `.env` ファイルを作成：
 
 ```env
-# Langfuse 設定
+## Langfuse 設定
 LANGFUSE_SECRET_KEY=sk-lf-your-secret-key-here
 LANGFUSE_PUBLIC_KEY=pk-lf-your-public-key-here
 LANGFUSE_HOST=https://your-self-hosted-langfuse
 
-# オプション：開発時にデバッグモードを有効化
+## オプション：開発時にデバッグモードを有効化
 POCKETFLOW_TRACING_DEBUG=true
 ```
 
@@ -155,7 +155,7 @@ POCKETFLOW_TRACING_DEBUG=true
 from pocketflow import Node, Flow
 from pocketflow_tracing import trace_flow
 
-# 既存のノードコードはそのまま
+## 既存のノードコードはそのまま
 class MyNode(Node):
     def prep(self, shared):
         return shared["input"]
@@ -167,13 +167,13 @@ class MyNode(Node):
         shared["output"] = exec_res
         return "default"
 
-# デコレーターを追加するだけ - 他の変更は不要！
+## デコレーターを追加するだけ - 他の変更は不要！
 @trace_flow()
 class MyFlow(Flow):
     def __init__(self):
         super().__init__(start=MyNode())
 
-# 通常通りフローを実行
+## 通常通りフローを実行
 flow = MyFlow()
 shared = {"input": "Hello World"}
 flow.run(shared)
@@ -398,7 +398,7 @@ class DataPipeline(Flow):
 ```python
 from pocketflow_tracing import TracingConfig
 
-# カスタム設定をロード
+## カスタム設定をロード
 config = TracingConfig.from_env()
 config.debug = True
 config.trace_inputs = True
@@ -412,7 +412,7 @@ class MyFlow(Flow):
 ### 選択的トレーシング制御
 
 ```env
-# トレースする内容を細かく調整
+## トレースする内容を細かく調整
 POCKETFLOW_TRACE_INPUTS=true
 POCKETFLOW_TRACE_OUTPUTS=true
 POCKETFLOW_TRACE_PREP=true
@@ -427,7 +427,7 @@ POCKETFLOW_TRACE_ERRORS=true
 
 **1. "ダッシュボードにトレースが表示されない"**
 ```bash
-# デバッグモードを有効にして何が起きているかを確認
+## デバッグモードを有効にして何が起きているかを確認
 export POCKETFLOW_TRACING_DEBUG=true
 python your_flow.py
 ```
@@ -439,10 +439,10 @@ python your_flow.py
 
 **3. "インポートエラー"**
 ```bash
-# パッケージが正しくインストールされていることを確認
+## パッケージが正しくインストールされていることを確認
 pip install pocketflow-tracing
 
-# 開発インストールの場合
+## 開発インストールの場合
 pip install -e ".[dev]"
 ```
 
@@ -505,10 +505,10 @@ pip install pocketflow-tracing
 
 ### 2. 環境をセットアップ
 ```bash
-# サンプル環境ファイルをコピー
+## サンプル環境ファイルをコピー
 curl -o .env https://raw.githubusercontent.com/The-Pocket/PocketFlow/main/cookbook/pocketflow-tracing/.env.example
 
-# Langfuse 認証情報で編集
+## Langfuse 認証情報で編集
 nano .env
 ```
 

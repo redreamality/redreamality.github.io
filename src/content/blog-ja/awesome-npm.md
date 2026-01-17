@@ -10,7 +10,7 @@ translatedFrom: 'awesome-npm'
 
 
 
-# 便利な npm パッケージのメモ
+## 便利な npm パッケージのメモ
 
 > このページは長期的に更新されます
 

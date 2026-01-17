@@ -7,7 +7,7 @@ lang: "zh"
 translatedFrom: "how-price-action-connects-across-timeframes"
 ---
 
-# 不同周期的走势是如何关联的？
+## 不同周期的走势是如何关联的？
 
 多周期分析经常把人搞晕：日线趋势明明向上，5分钟怎么又在下跌？大周期支撑看着挺稳，小周期结构怎么又破了？然后大家开始纠结“到底哪个周期才是真的”。
 

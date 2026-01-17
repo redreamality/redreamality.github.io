@@ -6,7 +6,7 @@ author: 'Remy'
 tags: ['AI', 'agents', 'Parlant', 'conversational AI', 'customer engagement']
 ---
 
-# Parlant：专为客户互动设计的AI Agent框架深度解析
+## Parlant：专为客户互动设计的AI Agent框架深度解析
 
 ## 引言
 
@@ -177,7 +177,7 @@ Parlant内置了强大的可观测性功能：
 Parlant提供了系统化的质量评估机制：
 
 ```python
-# 定义评估场景
+## 定义评估场景
 test_cases = [
     {
         "user_input": "我想退货",
@@ -186,7 +186,7 @@ test_cases = [
     }
 ]
 
-# 运行评估
+## 运行评估
 results = parlant.evaluate(agent, test_cases)
 ```
 
@@ -208,13 +208,13 @@ Parlant支持多种LLM后端：
 可以根据不同场景选择不同模型：
 
 ```python
-# 简单查询用GPT-3.5
+## 简单查询用GPT-3.5
 simple_agent = parlant.create_agent(
     ...,
     llm_config={"model": "gpt-3.5-turbo"}
 )
 
-# 复杂推理用GPT-4
+## 复杂推理用GPT-4
 complex_agent = parlant.create_agent(
     ...,
     llm_config={"model": "gpt-4"}
@@ -379,7 +379,7 @@ async def create_ticket(title: str, description: str, priority: str):
 **单一职责原则：**
 
 ```python
-# 好：每个工具做一件事
+## 好：每个工具做一件事
 @parlant.tool
 async def get_order(order_id: str):
     return db.query(f"SELECT * FROM orders WHERE id = {order_id}")
@@ -388,7 +388,7 @@ async def get_order(order_id: str):
 async def cancel_order(order_id: str):
     return db.execute(f"UPDATE orders SET status = 'cancelled' WHERE id = {order_id}")
 
-# 不好：一个工具做太多事
+## 不好：一个工具做太多事
 @parlant.tool
 async def manage_order(order_id: str, action: str):
     if action == "get":
@@ -418,7 +418,7 @@ async def charge_customer(amount: float):
 **关键信息提取：**
 
 ```python
-# 在对话早期提取关键信息
+## 在对话早期提取关键信息
 important_facts = [
     "customer_name",
     "order_id",
@@ -426,14 +426,14 @@ important_facts = [
     "priority"
 ]
 
-# 确保这些信息在上下文裁剪时被保留
+## 确保这些信息在上下文裁剪时被保留
 session.mark_as_important(important_facts)
 ```
 
 **上下文压缩：**
 
 ```python
-# 对于长对话，定期进行总结
+## 对于长对话，定期进行总结
 if session.turn_count > 10:
     summary = await parlant.summarize_session(session)
     session.add_system_message(f"Previous conversation summary: {summary}")
@@ -444,7 +444,7 @@ if session.turn_count > 10:
 **建立评估基准：**
 
 ```python
-# 创建代表性测试集
+## 创建代表性测试集
 test_scenarios = [
     # 快乐路径
     {"type": "happy_path", "user_input": "查询订单123", "expected_result": "order_found"},
@@ -473,7 +473,7 @@ test_scenarios = [
 **数据保护：**
 
 ```python
-# 敏感信息脱敏
+## 敏感信息脱敏
 @parlant.tool
 async def get_customer_info(customer_id: str):
     info = database.get_customer(customer_id)
@@ -486,7 +486,7 @@ async def get_customer_info(customer_id: str):
 **访问控制：**
 
 ```python
-# 基于角色的工具访问控制
+## 基于角色的工具访问控制
 basic_agent = parlant.create_agent(
     name="tier1_support",
     tools=["query_order", "update_shipping_address"]  # 有限权限
@@ -501,7 +501,7 @@ senior_agent = parlant.create_agent(
 **审计日志：**
 
 ```python
-# 记录所有敏感操作
+## 记录所有敏感操作
 @parlant.tool
 async def issue_refund(order_id: str, amount: float):
     audit_log.record({
@@ -562,14 +562,14 @@ pip install parlant
 import parlant
 from parlant import Agent, tool, guideline
 
-# 1. 定义工具
+## 1. 定义工具
 @tool
 async def get_weather(city: str) -> dict:
     """获取城市天气"""
     # 实际实现...
     return {"city": city, "temp": 22, "condition": "sunny"}
 
-# 2. 定义Guidelines
+## 2. 定义Guidelines
 @guideline
 def be_helpful():
     return "Always be helpful and polite to users"
@@ -578,7 +578,7 @@ def be_helpful():
 def weather_only():
     return "Only provide weather information, do not discuss other topics"
 
-# 3. 创建Agent
+## 3. 创建Agent
 agent = parlant.Agent(
     name="weather_assistant",
     description="A helpful weather assistant",
@@ -591,13 +591,13 @@ agent = parlant.Agent(
     }
 )
 
-# 4. 启动对话
+## 4. 启动对话
 session = parlant.create_session(
     agent=agent,
     customer_id="user123"
 )
 
-# 5. 处理用户输入
+## 5. 处理用户输入
 async def chat():
     response = await session.send_message("北京今天天气怎么样？")
     print(response.text)
@@ -606,7 +606,7 @@ async def chat():
     print(f"Tools called: {response.tool_calls}")
     print(f"Guidelines activated: {response.active_guidelines}")
 
-# 运行
+## 运行
 import asyncio
 asyncio.run(chat())
 ```
@@ -614,7 +614,7 @@ asyncio.run(chat())
 ### 进阶配置
 
 ```python
-# 配置更复杂的Agent
+## 配置更复杂的Agent
 advanced_agent = parlant.Agent(
     name="customer_support",
     description="Advanced customer support agent",

@@ -7,7 +7,7 @@ lang: "zh"
 translatedFrom: "relationship-between-swings-structure-and-trend"
 ---
 
-# 波段、结构、趋势的关系是怎样的？
+## 波段、结构、趋势的关系是怎样的？
 
 交易圈里有三个词经常被混着用：波段、结构、趋势。混到什么程度？经常出现这种对话：
 

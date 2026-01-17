@@ -7,7 +7,7 @@ tags: ['multi-agent-systems', 'artificial-intelligence', 'ai', 'constraint-satis
 lang: 'en'
 ---
 
-# Multi-Agent Systems Research Report
+## Multi-Agent Systems Research Report
 
 ## 1. Multi-Agent Systems Overview
 - Definition: What is an agent?

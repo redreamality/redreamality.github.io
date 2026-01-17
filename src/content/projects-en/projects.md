@@ -6,7 +6,7 @@ author: "redreamality"
 lang: "en"
 ---
 
-# My Open Source Projects
+## My Open Source Projects
 
 Welcome to my collection of open source projects and research contributions. These projects span across various domains including AI/ML, web development, data processing, and research tools.
 

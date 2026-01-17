@@ -8,7 +8,7 @@ tags: ['browser-extension', 'frontend-development', 'WXT']
 
 
 
-# **The 2025 State of Browser Extension Frameworks: A Comparative Analysis of Plasmo, WXT, and CRXJS**
+## **The 2025 State of Browser Extension Frameworks: A Comparative Analysis of Plasmo, WXT, and CRXJS**
 
 ## **Section 1: Executive Summary**
 

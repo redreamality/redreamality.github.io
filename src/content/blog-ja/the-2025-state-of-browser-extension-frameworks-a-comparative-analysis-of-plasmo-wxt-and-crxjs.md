@@ -8,7 +8,7 @@ lang: 'ja'
 translatedFrom: 'the-2025-state-of-browser-extension-frameworks-a-comparative-analysis-of-plasmo-wxt-and-crxjs'
 ---
 
-# **2025年ブラウザ拡張フレームワークの現状：Plasmo、WXT、CRXJSの比較分析**
+## **2025年ブラウザ拡張フレームワークの現状：Plasmo、WXT、CRXJSの比較分析**
 
 ## **セクション1：エグゼクティブサマリー**
 

@@ -262,7 +262,7 @@ from langchain.llms import OpenAI
 
 llm = OpenAI(temperature=0)
 
-# Load built-in tools
+## Load built-in tools
 tools = load_tools(
     ["wikipedia", "llm-math", "python_repl"],
     llm=llm
@@ -275,7 +275,7 @@ agent = initialize_agent(
     verbose=True
 )
 
-# Use the agent
+## Use the agent
 agent.run("What's the population of Tokyo? Calculate 10% of that number.")
 ```
 
@@ -399,7 +399,7 @@ from dotenv import load_dotenv
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# Define function schemas
+## Define function schemas
 functions = [
     {
         "name": "web_search",
@@ -453,7 +453,7 @@ functions = [
     }
 ]
 
-# Map function names to actual functions
+## Map function names to actual functions
 available_functions = {
     "web_search": web_search,
     "save_to_file": save_to_file,
@@ -520,7 +520,7 @@ def run_agent(user_message: str) -> str:
     
     return "Agent reached maximum iterations"
 
-# Test the agent
+## Test the agent
 if __name__ == "__main__":
     result = run_agent(
         "Search for the latest AI agent developments in 2026, "
@@ -538,7 +538,7 @@ import json
 
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
-# Claude uses a different format for tools
+## Claude uses a different format for tools
 claude_tools = [
     {
         "name": "web_search",
@@ -636,7 +636,7 @@ def run_claude_agent(user_message: str) -> str:
     
     return "Agent reached maximum iterations"
 
-# Test Claude agent
+## Test Claude agent
 if __name__ == "__main__":
     result = run_claude_agent(
         "Research the latest developments in AI agents for 2026 and create a brief summary."
@@ -675,7 +675,7 @@ def research_and_publish_workflow(topic: str) -> str:
     
     return run_agent(prompt)
 
-# Usage
+## Usage
 result = research_and_publish_workflow("AI Agent Frameworks 2026")
 ```
 
@@ -739,7 +739,7 @@ class SafeAgent:
         # Execute the tool
         return available_functions[tool_name](**args)
 
-# Usage
+## Usage
 safe_agent = SafeAgent(
     allowed_tools=['web_search', 'calculate'],
     restricted_paths=['/etc', '/sys', '~/.ssh']
@@ -786,7 +786,7 @@ class AgentLogger:
         """Log errors."""
         self.logger.error(f"Error: {str(error)}", exc_info=True)
 
-# Usage
+## Usage
 logger = AgentLogger("research_assistant")
 logger.log_user_request("Search for AI news")
 logger.log_tool_call("web_search", {"query": "AI news"}, search_results)
@@ -914,13 +914,13 @@ def devops_agent():
 ### 1. Design Clear Tool Descriptions
 
 ```python
-# ❌ Bad: Vague description
+## ❌ Bad: Vague description
 {
     "name": "search",
     "description": "Search for stuff"
 }
 
-# ✅ Good: Clear, specific description
+## ✅ Good: Clear, specific description
 {
     "name": "web_search",
     "description": """Search the internet for current information using a web search engine.
@@ -964,7 +964,7 @@ class RateLimiter:
         """Record a tool call."""
         self.calls[tool_name].append(datetime.now())
 
-# Usage
+## Usage
 rate_limiter = RateLimiter(max_calls=10, time_window=60)
 
 if rate_limiter.can_call("web_search"):
@@ -1006,7 +1006,7 @@ class ToolCache:
         key = self._make_key(tool_name, args)
         self.cache[key] = (result, datetime.now().timestamp())
 
-# Usage
+## Usage
 cache = ToolCache(ttl=300)  # 5 minutes
 
 def cached_web_search(query: str):
@@ -1070,7 +1070,7 @@ class AgentMetrics:
         for tool, count in sorted(self.tool_calls.items(), key=lambda x: x[1], reverse=True):
             print(f"  {tool}: {count} calls")
 
-# Usage
+## Usage
 metrics = AgentMetrics()
 
 def monitored_agent_run(user_message: str):
@@ -1089,7 +1089,7 @@ def monitored_agent_run(user_message: str):
         response_time = time.time() - start_time
         metrics.record_request(success, response_time, tools_used)
 
-# After running many requests
+## After running many requests
 metrics.print_summary()
 ```
 
@@ -1114,10 +1114,10 @@ Do NOT make up information or refuse tasks you have tools for."""
 
 2. **Verify function descriptions** - Make them clear and specific:
 ```python
-# Bad
+## Bad
 "description": "Search"
 
-# Good
+## Good
 "description": "Search the internet for current information. Use this when you need real-time data."
 ```
 
@@ -1280,7 +1280,7 @@ class SecureConfig:
             return "****"
         return f"{secret[:4]}...{secret[-4:]}"
 
-# Usage
+## Usage
 config = SecureConfig()
 api_key = config.get('OPENAI_API_KEY')
 print(f"Using API key: {config.mask_secret(api_key)}")
@@ -1353,7 +1353,7 @@ async def parallel_agent_tasks(tasks: List[dict]):
     results = await asyncio.gather(*[execute_task(t) for t in tasks])
     return results
 
-# Usage
+## Usage
 tasks = [
     {'tool': 'web_search', 'args': {'query': 'AI news'}},
     {'tool': 'web_search', 'args': {'query': 'ML news'}},
@@ -1383,7 +1383,7 @@ def stream_agent_response(user_message: str):
             print(chunk.choices[0].delta.content, end="", flush=True)
     print()
 
-# Usage
+## Usage
 stream_agent_response("Explain AI agents in simple terms")
 ```
 

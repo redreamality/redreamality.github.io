@@ -7,7 +7,7 @@ tags: ["AI", "LLM", "Protocol", "Integration"]
 lang: 'zh'
 ---
 
-# 深入解析 Model Context Protocol (MCP) - 人工智能应用的标准化协议
+## 深入解析 Model Context Protocol (MCP) - 人工智能应用的标准化协议
 
 ## 引言
 

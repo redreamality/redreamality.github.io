@@ -7,7 +7,7 @@ tags: ["AI開発", "仕様駆動開発", "SDD", "GitHub", "Spec Kit"]
 lang: "ja"
 ---
 
-# GitHub Spec Kit 詳細ガイド：AI駆動の仕様開発方法論
+## GitHub Spec Kit 詳細ガイド：AI駆動の仕様開発方法論
 
 ## 生成AI時代におけるソフトウェアエンジニアリングのパラダイムシフト
 

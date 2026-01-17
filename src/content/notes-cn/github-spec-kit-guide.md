@@ -7,7 +7,7 @@ tags: ["AI开发", "规范驱动开发", "SDD", "GitHub", "Spec Kit"]
 lang: "zh"
 ---
 
-# GitHub Spec Kit 深度指南：AI 驱动的规范开发方法论
+## GitHub Spec Kit 深度指南：AI 驱动的规范开发方法论
 
 ## 生成式 AI 时代的软件工程范式转移
 

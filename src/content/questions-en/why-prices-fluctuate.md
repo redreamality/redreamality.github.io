@@ -6,7 +6,7 @@ tags: ["量化交易", "quantitative-trading", "trading", "market-microstructure
 lang: "en"
 ---
 
-# Why do prices fluctuate?
+## Why do prices fluctuate?
 
 When people first look at a chart, they often assume price changes must be caused by “news” or “fundamentals.” That’s sometimes true, but it’s only a small part of the story. If you want a rigorous way to think about price fluctuation (especially from a quantitative trading perspective), the cleanest starting point is this:
 
