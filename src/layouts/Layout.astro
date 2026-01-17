@@ -41,15 +41,13 @@ const isTagPage =
   normalizedPath === '/ja/tags' ||
   normalizedPath.startsWith('/ja/tags/');
 
-const ensureTrailingSlash = (path: string) => (path === '/' ? '/' : path.endsWith('/') ? path : `${path}/`);
-
-const homeHref = ensureTrailingSlash(getLocalizedPath('/', currentLang));
-const blogHref = getLocalizedPath('/blog/', currentLang);
-const talksHref = getLocalizedPath('/garden/talks/', currentLang);
-const questionsHref = getLocalizedPath('/garden/questions/', currentLang);
-const notesHref = getLocalizedPath('/garden/notes/', currentLang);
-const projectsHref = getLocalizedPath('/projects/', currentLang);
-const aboutHref = getLocalizedPath('/about/', currentLang);
+const homeHref = getLocalizedPath('/', currentLang);
+const blogHref = getLocalizedPath('/blog', currentLang);
+const talksHref = getLocalizedPath('/garden/talks', currentLang);
+const questionsHref = getLocalizedPath('/garden/questions', currentLang);
+const notesHref = getLocalizedPath('/garden/notes', currentLang);
+const projectsHref = getLocalizedPath('/projects', currentLang);
+const aboutHref = getLocalizedPath('/about', currentLang);
 ---
 
 <!DOCTYPE html>

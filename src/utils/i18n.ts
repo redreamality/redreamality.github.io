@@ -172,21 +172,33 @@ export function getLocalizedPath(path: string, lang: Language): string {
   const cleanPath = path.replace(/^\/(cn|en|ja)/, '');
 
   if (lang === 'zh') {
-    return cleanPath === '' || cleanPath === '/' ? '/cn' : `/cn${cleanPath}`;
+    const cnPath = cleanPath === '' || cleanPath === '/' ? '/cn' : `/cn${cleanPath}`;
+    return ensureTrailingSlash(cnPath);
   }
   
   if (lang === 'ja') {
-    return cleanPath === '' || cleanPath === '/' ? '/ja' : `/ja${cleanPath}`;
+    const jaPath = cleanPath === '' || cleanPath === '/' ? '/ja' : `/ja${cleanPath}`;
+    return ensureTrailingSlash(jaPath);
   }
 
-  return cleanPath || '/';
+  const enPath = cleanPath || '/';
+  return ensureTrailingSlash(enPath);
+}
+
+/**
+ * Ensure path has trailing slash for directory-like paths
+ */
+function ensureTrailingSlash(path: string): string {
+  if (path === '/') return '/';
+  return path.endsWith('/') ? path : `${path}/`;
 }
 
 /**
  * Get alternate language path
  */
 export function getAlternateLanguagePath(currentPath: string, targetLang: Language): string {
-  return getLocalizedPath(currentPath, targetLang);
+  const path = getLocalizedPath(currentPath, targetLang);
+  return ensureTrailingSlash(path);
 }
 
 /**
