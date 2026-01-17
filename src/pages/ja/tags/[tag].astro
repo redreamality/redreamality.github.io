@@ -1,0 +1,143 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getBlogPosts, getTags, getTagCounts, type Language } from '../../../utils/i18n';
+
+// This is the Japanese tag detail page (/ja/tags/[tag] path)
+
+export async function getStaticPaths() {
+  const posts = await getBlogPosts('ja');
+  const tags = await getTags('ja');
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      posts: posts
+        .filter((post) => post.data.tags?.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+      lang: 'ja' as Language,
+    },
+  }));
+}
+
+interface Props {
+  posts: any[];
+  lang: Language;
+}
+
+const { tag } = Astro.params;
+const { posts, lang } = Astro.props;
+
+const tagCounts = await getTagCounts(lang);
+
+const content = {
+  en: {
+    backToTags: 'Back to Tags',
+    articlesCount: 'articles',
+    articleCount: 'article',
+    readMore: 'Read More',
+    author: 'by'
+  },
+  zh: {
+    backToTags: '返回标签列表',
+    articlesCount: '篇文章',
+    articleCount: '篇文章',
+    readMore: '阅读更多',
+    author: '作者'
+  },
+  ja: {
+    backToTags: 'タグ一覧へ戻る',
+    articlesCount: '件の記事',
+    articleCount: '件の記事',
+    readMore: '続きを読む',
+    author: '著者'
+  }
+};
+
+const currentContent = content[lang];
+const basePath = '/ja';
+---
+
+<Layout title={`#${tag} | タグ`}>
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-8">
+        <a
+          href={`${basePath}/tags`}
+          class="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+        >
+          <span class="mr-2">←</span>
+          {currentContent.backToTags}
+        </a>
+      </div>
+
+      <div class="mb-8">
+        <h1 class="text-4xl font-bold flex items-center gap-3 text-gray-900 dark:text-white">
+          <span class="text-3xl">🏷️</span>
+          #{tag}
+          <span class="text-xl font-normal text-gray-500 dark:text-gray-400">
+            ({posts.length} {currentContent.articlesCount})
+          </span>
+        </h1>
+      </div>
+
+      <div class="space-y-8">
+        {posts.map((post) => (
+          <article class="bg-white border border-gray-200 rounded-lg shadow-md p-6 dark:bg-gray-800 dark:border-gray-700">
+            <div class="flex flex-col space-y-4">
+              <div>
+                <a href={`${basePath}/blog/${post.slug}`}>
+                  <h2 class="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    {post.data.title}
+                  </h2>
+                </a>
+                <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mt-2">
+                  <span>
+                    {post.data.pubDate.toLocaleDateString('ja-JP', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </span>
+                  <span>{currentContent.author} {post.data.author}</span>
+                </div>
+              </div>
+
+              <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{post.data.description}</p>
+
+              {post.data.tags && post.data.tags.length > 0 && (
+                <div class="flex flex-wrap gap-2">
+                  {post.data.tags
+                    .filter((t) => tagCounts[t] >= 2)
+                    .map((t) => (
+                      <a
+                        href={`${basePath}/tags/${t}`}
+                        class={`inline-block px-2 py-1 text-xs rounded transition-colors ${
+                          t === tag
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                        }`}
+                      >
+                        #{t}
+                      </a>
+                    ))}
+                </div>
+              )}
+
+              <div class="flex justify-between items-center pt-4">
+                <a
+                  href={`${basePath}/blog/${post.slug}`}
+                  class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
+                >
+                  {currentContent.readMore}
+                  <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>

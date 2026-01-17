@@ -51,6 +51,8 @@ export default defineConfig({
         if (path.match(/^\/talks\/[^/]+\/?$/)) return false;
         if (path === '/cn/talks/' || path === '/cn/talks') return false;
         if (path.match(/^\/cn\/talks\/[^/]+\/?$/)) return false;
+        if (path === '/ja/talks/' || path === '/ja/talks') return false;
+        if (path.match(/^\/ja\/talks\/[^/]+\/?$/)) return false;
         
         // Redirect from /garden/blog/* to /blog/*
         if (path.includes('/garden/blog/')) return false;

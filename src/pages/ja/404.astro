@@ -1,35 +1,34 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { detectLanguageFromPath, type Language } from '../utils/i18n';
+import Layout from '../../layouts/Layout.astro';
+import { type Language } from '../../utils/i18n';
 
-// Detect language from current path
-const lang: Language = detectLanguageFromPath(Astro.url.pathname);
+// This is the Japanese 404 page (/ja/404 path)
+const lang: Language = 'ja';
 
-// Language-specific content
 const content = {
   en: {
-    title: "404 - Page Not Found",
-    heading: "This page will be built soon",
-    message: "Thank you for your interest in me, please check out other content first.",
-    countdown: "seconds until dreaming...",
-    backHome: "Back to Reality Dream",
-    redirectMessage: "Redirecting to home page..."
+    title: '404 - Page Not Found',
+    heading: 'This page will be built soon',
+    message: 'Thank you for your interest in me, please check out other content first.',
+    countdown: 'seconds until dreaming...',
+    backHome: 'Back to Reality Dream',
+    redirectMessage: 'Redirecting to home page...'
   },
   zh: {
-    title: "404 - 页面未找到",
-    heading: "这个页面很快就会搭建好",
-    message: "谢谢你对我这么感兴趣，先看看其他内容吧。",
-    countdown: "秒后躺下做梦...",
-    backHome: "回到真实梦",
-    redirectMessage: "正在跳转到首页..."
+    title: '404 - 页面未找到',
+    heading: '这个页面很快就会搭建好',
+    message: '谢谢你对我这么感兴趣，先看看其他内容吧。',
+    countdown: '秒后躺下做梦...',
+    backHome: '回到真实梦',
+    redirectMessage: '正在跳转到首页...'
   },
   ja: {
-    title: "404 - ページが見つかりません",
-    heading: "このページはまもなく公開されます",
-    message: "興味を持ってくれてありがとう。まずは他のコンテンツをご覧ください。",
-    countdown: "秒後に夢の中へ...",
-    backHome: "ホームへ戻る",
-    redirectMessage: "ホームページへリダイレクト中..."
+    title: '404 - ページが見つかりません',
+    heading: 'このページはまもなく公開されます',
+    message: '興味を持ってくれてありがとう。まずは他のコンテンツをご覧ください。',
+    countdown: '秒後に夢の中へ...',
+    backHome: 'ホームへ戻る',
+    redirectMessage: 'ホームページへリダイレクト中...'
   }
 };
 
@@ -193,7 +192,8 @@ const basePath = lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : '';
   }
 
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translate(-50%, -50%) translateY(0) rotate(3deg);
     }
     50% {
@@ -202,7 +202,8 @@ const basePath = lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : '';
   }
 
   @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
       transform: scale(1);
     }
     50% {
@@ -211,7 +212,8 @@ const basePath = lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : '';
   }
 
   @keyframes wave {
-    0%, 100% {
+    0%,
+    100% {
       transform: rotate(-20deg);
     }
     50% {

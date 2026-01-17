@@ -33,7 +33,7 @@ const { title, items, lang } = Astro.props;
 
           {item.date && (
             <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">
-              {item.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+              {item.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja-JP' : 'en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'

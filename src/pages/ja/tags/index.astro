@@ -1,0 +1,73 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getTagCounts, getTags, type Language } from '../../../utils/i18n';
+
+// This is the Japanese tags listing (/ja/tags path)
+const lang: Language = 'ja';
+
+const tagCounts = await getTagCounts(lang);
+const filteredTags = await getTags(lang);
+
+const content = {
+  en: {
+    title: 'Tags',
+    subtitle: 'Browse articles by topic',
+    noTagsMessage: 'No tags available yet.',
+    articlesCount: 'articles',
+    articleCount: 'article'
+  },
+  zh: {
+    title: '标签列表',
+    subtitle: '按主题浏览文章',
+    noTagsMessage: '暂无标签。',
+    articlesCount: '篇文章',
+    articleCount: '篇文章'
+  },
+  ja: {
+    title: 'タグ',
+    subtitle: 'トピックで記事を探す',
+    noTagsMessage: 'まだタグがありません。',
+    articlesCount: '件の記事',
+    articleCount: '件の記事'
+  }
+};
+
+const currentContent = content[lang];
+const basePath = '/ja';
+---
+
+<Layout title="タグ">
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{currentContent.title}</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400">{currentContent.subtitle}</p>
+      </div>
+
+      {filteredTags.length === 0 ? (
+        <div class="text-center py-12">
+          <p class="text-gray-500 dark:text-gray-400 text-lg">{currentContent.noTagsMessage}</p>
+        </div>
+      ) : (
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {filteredTags.map((tag) => (
+            <a
+              href={`${basePath}/tags/${tag}`}
+              class="bg-white border border-gray-200 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <span class="text-2xl mr-2">🏷️</span>
+                  <h2 class="text-xl font-semibold text-gray-900 dark:text-white">#{tag}</h2>
+                </div>
+                <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium px-3 py-1 rounded-full">
+                  {tagCounts[tag]} {tagCounts[tag] === 1 ? currentContent.articleCount : currentContent.articlesCount}
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </main>
+</Layout>

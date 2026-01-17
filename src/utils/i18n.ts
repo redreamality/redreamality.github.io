@@ -52,6 +52,7 @@ export const i18nConfig: I18nConfig = {
       language: '语言',
       switchToEnglish: 'English',
       switchToChinese: '中文',
+      switchToJapanese: '日本語',
       toc: '目录',
     },
     en: {
@@ -94,6 +95,7 @@ export const i18nConfig: I18nConfig = {
       language: 'Language',
       switchToEnglish: 'English',
       switchToChinese: '中文',
+      switchToJapanese: '日本語',
       toc: 'Table of Contents',
     },
     ja: {
@@ -136,6 +138,7 @@ export const i18nConfig: I18nConfig = {
       language: '言語',
       switchToEnglish: 'English',
       switchToChinese: '中文',
+      switchToJapanese: '日本語',
       toc: '目次',
     }
   }
@@ -357,6 +360,12 @@ export async function generateI18nPaths<T>(
     if (cnPath) paths.push(cnPath);
   }
 
+  // Generate Japanese paths (/ja/)
+  for (const item of content) {
+    const jaPath = pathGenerator(item, 'ja');
+    if (jaPath) paths.push(jaPath);
+  }
+
   return paths;
 }
 
@@ -409,6 +418,14 @@ export function getHreflangAlternates(currentPath: string, site: string): Array<
   alternates.push({
     lang: 'zh',
     url: new URL(normalizedZhPath, site).toString()
+  });
+
+  // Add Japanese version
+  const jaPath = getLocalizedPath(currentPath, 'ja');
+  const normalizedJaPath = normalizeCanonicalPath(jaPath);
+  alternates.push({
+    lang: 'ja',
+    url: new URL(normalizedJaPath, site).toString()
   });
 
   return alternates;
