@@ -62,7 +62,7 @@ const filteredTags = post.data.tags?.filter(tag => tagCounts[tag] >= 2) || [];
 const allPosts = await getCollection('blog-en');
 const relatedPosts = rankRelatedContent(allPosts, post, { dateField: 'pubDate', limit: 6 });
 const relatedItems = relatedPosts.map((relatedPost) => ({
-  href: `${basePath}/blog/${relatedPost.slug}`,
+  href: `${basePath}/blog/${relatedPost.slug}/`,
   title: relatedPost.data.title,
   description: relatedPost.data.description,
   date: relatedPost.data.pubDate
