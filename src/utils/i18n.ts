@@ -172,11 +172,11 @@ export function getLocalizedPath(path: string, lang: Language): string {
   const cleanPath = path.replace(/^\/(cn|en|ja)/, '');
 
   if (lang === 'zh') {
-    return cleanPath === '' || cleanPath === '/' ? '/cn' : `/cn${cleanPath}`;
+    return cleanPath === '' || cleanPath === '/' ? '/cn/' : `/cn${cleanPath}`;
   }
   
   if (lang === 'ja') {
-    return cleanPath === '' || cleanPath === '/' ? '/ja' : `/ja${cleanPath}`;
+    return cleanPath === '' || cleanPath === '/' ? '/ja/' : `/ja${cleanPath}`;
   }
 
   return cleanPath || '/';
