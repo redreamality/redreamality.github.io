@@ -1,7 +1,7 @@
 ---
 title: 'Local Proxy with bypass list: a Windows Batch Script'
 pubDate: 2025-08-06T00:00:00.000Z
-description: ''
+description: 'Complete guide to configuring local proxy with bypass list using Windows batch script and netsh commands. Learn to automate proxy settings management for development and network configuration with practical examples.'
 author: 'Remy'
 tags: ['windows', 'proxy']
 ---

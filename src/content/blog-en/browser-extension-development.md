@@ -1,7 +1,7 @@
 ---
 title: 'Browser Extension Development Guide'
 pubDate: 2024-03-11T00:00:00.000Z
-description: 'This article introduces how to develop browser extensions using modern tools, including the WXT toolchain usage and development workflow.'
+description: 'Complete guide to browser extension development using modern tools and WXT toolchain. Learn best practices, development workflow, packaging, and deployment strategies for building cross-browser extensions with ease.'
 author: 'Remy'
 tags: ['browser-extension', 'frontend-development', 'WXT', 'tutorial', 'web-development']
 ---

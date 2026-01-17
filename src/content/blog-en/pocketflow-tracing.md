@@ -1,7 +1,7 @@
 ---
 title: 'Introducing PocketFlow Tracing: Effortless Observability for Your AI Workflows'
 pubDate: 2025-07-01T00:00:00.000Z
-description: 'Transform your PocketFlow workflows from black boxes into fully observable, debuggable systems with just one line of code'
+description: 'Transform your PocketFlow workflows from black boxes into fully observable, debuggable systems with just one line of code. Complete guide to implementing observability, debugging, and monitoring in AI workflow systems.'
 author: 'Remy'
 tags: ['AI', 'observability', 'tracing', 'debugging', 'workflow']
 ---

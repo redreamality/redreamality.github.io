@@ -17,7 +17,7 @@ import {
 const currentLang = detectLanguageFromPath(Astro.url.pathname);
 const {
     title = t('home', currentLang) + " - Redreamality's Blog",
-    description = currentLang === 'zh' ? "个人博客与项目展示" : currentLang === 'ja' ? "個人ブログとプロジェクト紹介" : "Personal blog and project showcase",
+    description = currentLang === 'zh' ? "探索Redreamality的个人技术博客与项目展示。深度分享AI开发、前端技术、阅读方法论等专业话题，助力技术从业者持续学习和能力提升。" : currentLang === 'ja' ? "Remy（Redreamality）の技術ブログとプロジェクト紹介。AI開発、フロントエンド技術、読書方法論など専門技術トピックを解説し、技術者の学習と成長を支援。" : "Explore Redreamality's technical blog and projects showcase. Deep insights on AI development, frontend technologies, reading methodologies, and personal growth with technical perspectives.",
     image = "/images/default-og.png",
     canonicalURL = getCanonicalURL(Astro.url.pathname, currentLang, Astro.site.toString()),
     type = "website",

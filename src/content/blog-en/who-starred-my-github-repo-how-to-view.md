@@ -1,7 +1,7 @@
 ---
 title: 'Who starred my github repo? How to view?'
 pubDate: 2025-08-22T16:18:23.681Z
-description: 'you can easily see who has starred your GitHub repository. Here''s the simplest way to do it.'
+description: 'Learn how to easily see who has starred your GitHub repository with step-by-step instructions. Discover the simplest methods to track your GitHub stars and understand your project audience.'
 author: 'Remy'
 tags: ['development']
 ---
