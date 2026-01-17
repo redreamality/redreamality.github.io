@@ -12,7 +12,7 @@ import node from '@astrojs/node';
 export default defineConfig({
   site: 'https://redreamality.com',
   base: '/',
-  trailingSlash: 'ignore',
+  trailingSlash: 'always',
   output: 'static',
   integrations: [
     tailwind({
