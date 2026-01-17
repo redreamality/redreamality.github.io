@@ -1,6 +1,6 @@
 ---
 title: "金利が上昇または下降しているときに債券を購入する方がいいのか？"
-description: "金利サイクルに基づく債券購入タイミングの包括的ガイド"
+description: "金利サイクルに基づく債券購入タイミングの包括的ガイド This comprehensive guide covers essential concepts, practical examples, and real-world applications for developers and practitioners."
 date: 2025-01-15
 tags: ["債券投資", "金利", "債券タイミング", "投資戦略", "固定収益"]
 lang: "ja"

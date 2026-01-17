@@ -1,7 +1,7 @@
 ---
 title: '如何在 Python 中使用 `super()`'
 pubDate: 2025-01-31T00:00:00.000Z
-description: '学习如何在 Python 继承中使用 super() 函数'
+description: '深入学习 Python 中 super() 函数的用法，包括继承、多态、初始化、super() 的最佳实践和常见陷阱，掌握面向对象编程的进阶技巧'
 author: 'Remy'
 tags: ['python', '继承', '面向对象编程', 'super']
 ---

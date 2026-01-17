@@ -1,7 +1,7 @@
 ---
 title: 'npm 包推荐'
 pubDate: 2025-01-31T00:00:00.000Z
-description: 'npm 包推荐'
+description: '精选的 npm 包列表，包括源管理工具 nrm、高速包管理器 pnpm、Node.js 版本管理工具 nvm 等实用开发工具，提升开发效率'
 author: 'Remy'
 tags: ['npm', '包']
 ---

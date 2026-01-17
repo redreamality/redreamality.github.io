@@ -1,6 +1,6 @@
 ---
 title: "Multi-Agent Systems: From Theory to Practice"
-description: "Multi-agent systems, from fundamentals to practical implementation"
+description: "An in-depth exploration of multi-agent systems, their architectures, communication protocols, and real-world applications in AI and distributed computing"
 date: 2025-02-28
 location: "Online Presentation"
 slides: "http://redreamality.com/multi-agent-system-slides"

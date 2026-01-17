@@ -1,6 +1,6 @@
 ---
 title: "多智能体系统"
-description: "多智能体系统，从基础到实践"
+description: "深入探讨多智能体系统的架构设计和实际应用，涵盖代理间通信、协调机制、分布式智能等核心概念，结合实际案例分享系统设计经验"
 date: 2025-02-28
 location: "线上分享"
 slides: "http://redreamality.com/multi-agent-system-slides"

@@ -1,7 +1,7 @@
 ---
 title: 'Awesome npm Packages'
 pubDate: 2025-01-31T00:00:00.000Z
-description: 'A curated list of awesome npm packages'
+description: 'A comprehensive collection of essential npm packages for JavaScript and Node.js development, featuring package managers, version control tools, and development utilities to boost your productivity'
 author: 'Remy'
 tags: ['npm', 'packages', 'javascript', 'nodejs']
 ---

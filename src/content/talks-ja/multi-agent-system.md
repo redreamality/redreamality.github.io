@@ -1,6 +1,6 @@
 ---
 title: "マルチエージェントシステム"
-description: "マルチエージェントシステム、基礎から実践まで"
+description: "マルチエージェントシステム、基礎から実践まで This comprehensive guide covers essential concepts, practical examples, and real-world applications for developers and practitioners."
 date: 2025-02-28
 location: "オンライン共有"
 slides: "http://redreamality.com/multi-agent-system-slides"

@@ -1,7 +1,7 @@
 ---
 title: 'How to Use `super()` in Python'
 pubDate: 2025-01-31T00:00:00.000Z
-description: 'Learn how to use the super() function for inheritance in Python'
+description: 'Master Python super() function for effective inheritance and object-oriented programming, including best practices, common patterns, and advanced techniques for building robust class hierarchies'
 author: 'Remy'
 tags: ['python', 'inheritance', 'oop', 'super']
 ---

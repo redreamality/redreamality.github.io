@@ -1,7 +1,7 @@
 ---
 title: 'Multi-Agent Systems'
 pubDate: 2025-02-09T00:00:00.000Z
-description: 'A comprehensive research report on multi-agent systems'
+description: 'An in-depth exploration of multi-agent systems, their architectures, communication protocols, and real-world applications in AI and distributed computing'
 author: 'Remy'
 tags: ['multi-agent-systems', 'artificial-intelligence', 'ai', 'constraint-satisfaction-problem']
 lang: 'en'

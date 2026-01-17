@@ -1,7 +1,7 @@
 ---
 title: 'Model Context Protocol (MCP) 詳細解説 - AI アプリケーションの標準化プロトコル'
 pubDate:  2025-02-18T00:00:00.000Z
-description: 'AI アプリケーションに標準化されたコンテキスト転送を提供するオープンプロトコル、Model Context Protocol (MCP) を詳しく紹介'
+description: 'A detailed introduction to Model Context Protocol (MCP), an open protocol providing standardized context transfer for AI applications and implementations'
 author: 'Remy'
 tags: ["AI", "LLM", "Protocol", "Integration"]
 lang: 'ja'

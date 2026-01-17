@@ -1,7 +1,7 @@
 ---
 title: 'Manus に似た優れたプロジェクト'
 pubDate: 2025-04-07T00:00:00.000Z
-description: 'Manus 技術スタックに関連するオープンソースプロジェクトの厳選リスト'
+description: 'A curated list of open-source projects similar to Manus, featuring AI agents, multimodal systems, and multi-agent frameworks for developers and researchers'
 author: 'Remy'
 tags: ['人工知能', 'エージェント', 'マルチモーダル', 'ツール', 'マルチエージェントシステム', 'AI']
 lang: 'ja'

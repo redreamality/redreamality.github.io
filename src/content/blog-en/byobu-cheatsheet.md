@@ -1,7 +1,7 @@
 ---
 title: 'byobu cheatsheet'
 pubDate: 2025-10-18T02:37:49.282Z
-description: 'byobu cheatsheet common commands quick reference'
+description: 'Essential byobu commands and shortcuts for terminal multiplexing, productivity enhancement, and session management on Linux systems'
 author: 'Remy'
 tags: ['terminal', 'linux', 'vibe coding']
 ---

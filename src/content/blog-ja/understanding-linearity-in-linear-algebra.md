@@ -1,7 +1,7 @@
 ---
 title: '線形代数の「線形」をどう理解するか？'
 pubDate: 2025-02-01T00:00:00.000Z
-description: '線形代数の「線形」をどう理解するか？'
+description: '線形代数の「線形」をどう理解するか？ This comprehensive guide covers essential concepts, practical examples, and real-world applications for developers and practitioners.'
 author: 'Remy'
 tags: ['線形代数', '数学']
 lang: 'ja'

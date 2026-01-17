@@ -1,7 +1,7 @@
 ---
 title: 'Who Owns the Fish?'
 pubDate: 2025-02-07T00:00:00.000Z
-description: 'Classic logic puzzle: Who owns the fish? - Python solution'
+description: "A classic logic puzzle solver demonstrating how to use Python and constraint satisfaction problems to solve the 'Who owns the fish' riddle with AI techniques"
 author: 'Remy'
 tags: ['logic-puzzle', 'CSP', 'backtracking', 'Python', 'artificial-intelligence', 'constraint-satisfaction-problem']
 ---

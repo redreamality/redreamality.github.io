@@ -1,7 +1,7 @@
 ---
 title: 'Awesome Manus-Like Projects'
 pubDate: 2025-04-07T00:00:00.000Z
-description: 'A curated list of open-source projects related to Manus technology stack'
+description: 'A curated list of open-source projects similar to Manus, featuring AI agents, multimodal systems, and multi-agent frameworks for developers and researchers'
 author: 'Remy'
 tags: ['AI', 'agents','multimodal', 'tools','multi-agent-systems', 'artificial-intelligence']
 ---

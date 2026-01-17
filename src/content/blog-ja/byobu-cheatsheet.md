@@ -1,7 +1,7 @@
 ---
 title: 'byobu チートシート'
 pubDate: 2025-10-18T02:37:49.282Z
-description: 'byobu チートシート よく使うコマンド早見表'
+description: 'Essential byobu commands and shortcuts for terminal multiplexing, productivity enhancement, and session management on Linux systems'
 author: 'Remy'
 tags: ['ターミナル', 'linux', 'vibe coding']
 lang: 'ja'

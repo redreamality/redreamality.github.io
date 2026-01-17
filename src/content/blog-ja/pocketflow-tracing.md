@@ -1,7 +1,7 @@
 ---
 title: 'PocketFlow トレーシングの紹介：AI ワークフローを簡単に観測可能に'
 pubDate: 2025-07-01T00:00:00.000Z
-description: 'わずか1行のコードで、PocketFlow ワークフローをブラックボックスから完全に観測可能でデバッグ可能なシステムに変換'
+description: 'Introduction to PocketFlow tracing: transform your AI workflows from black boxes into fully observable and debuggable systems with minimal code changes'
 author: 'Remy'
 tags: ['AI', '可観測性', 'トレーシング', 'デバッグ', 'ワークフロー']
 lang: "ja"

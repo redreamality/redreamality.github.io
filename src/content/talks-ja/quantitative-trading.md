@@ -1,6 +1,6 @@
 ---
 title: "クオンツトレーディング戦略の共有"
-description: "基本的なクオンツトレーディング戦略と実践経験を共有"
+description: "基本的なクオンツトレーディング戦略と実践経験を共有 This comprehensive guide covers essential concepts, practical examples, and real-world applications for developers and practitioners."
 date: 2024-01-20
 location: "オンライン技術共有会"
 lang: ja
