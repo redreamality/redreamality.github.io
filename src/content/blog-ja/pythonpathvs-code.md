@@ -8,8 +8,6 @@ lang: 'ja'
 translatedFrom: 'pythonpathvs-code'
 ---
 
-## グローバル PYTHONPATH 
-
 PYTHONPATHは環境変数で、ユーザーがPythonインタープリターがモジュールとパッケージを検索するパスリストに追加のディレクトリを追加できるようにします。これは開発中に特に便利で、標準ライブラリパスやインストール済みパッケージディレクトリにないカスタムモジュールをインポートする必要がある場合に役立ちます。本記事では、Windows、macOS、Linuxシステム上でPYTHONPATHを設定する様々な方法を詳しく説明します。
 
 ### いつPYTHONPATHを設定する必要があるか？

@@ -6,9 +6,6 @@ author: "Remy"
 tags: ["blockchain", "python"]
 ---
 
-
-## Jumpstarting Your Blockchain Journey: A Python Programmer's Guide to the Decentralized World
-
 So, you're a Python pro looking to dip your toes into the blockchain ocean—awesome choice! The decentralized landscape is buzzing with innovation, and with your programming chops, you're primed to make a splash. Let's map out your path from blockchain newbie to confident developer.
 
 ---
@@ -185,7 +182,7 @@ Leverage your Python skills to demystify blockchain mechanics.
 
 ---
 
-## **3. Mastering Smart Contracts**
+# **3. Mastering Smart Contracts**
 
 While Python paves the way, Solidity is your gateway to writing smart contracts on Ethereum.
 
@@ -246,7 +243,7 @@ While Python paves the way, Solidity is your gateway to writing smart contracts 
 
 ---
 
-## **4. Plug into the Community**
+# **4. Plug into the Community**
 
 Learning is amplified when shared.
 
@@ -286,7 +283,7 @@ Learning is amplified when shared.
 
 ---
 
-## **5. Essential Reads and Resources**
+# **5. Essential Reads and Resources**
 
 Expand your knowledge with curated content.
 
@@ -336,7 +333,7 @@ Expand your knowledge with curated content.
 
 ---
 
-## **6. Visualizing Your Roadmap**
+# **6. Visualizing Your Roadmap**
 
 Here's a snapshot of your potential journey:
 

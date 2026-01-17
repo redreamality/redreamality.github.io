@@ -7,10 +7,6 @@ tags: ["productivity", "focus", "reading"]
 lang: "en"
 ---
 
-## Notes on "Deep Work" by Cal Newport
-
-## ROI Reading Method Analysis
-
 ### Level 1: Core Concepts (High ROI)
 - **Deep Work Definition**: Professional activities performed in a state of distraction-free concentration that push your cognitive capabilities to their limit
 - **Shallow Work**: Non-cognitively demanding, logistical-style tasks, often performed while distracted

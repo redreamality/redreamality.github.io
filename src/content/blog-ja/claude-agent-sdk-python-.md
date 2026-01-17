@@ -7,8 +7,6 @@ tags: ['claude code', 'vibe coding', 'python']
 lang: 'ja'
 ---
 
-## Claude Agent SDK (Python) 学習ガイド
-
 **ドキュメントバージョン**: 1.0  
 **生成日**: 2025-10-15  
 **SDKバージョン**: 0.1.3  
@@ -101,15 +99,15 @@ lang: 'ja'
 1. **Claude Code CLIをインストール:**
 
 ```bash
-## Claude Code CLIを各種インストール方法でインストール
+# Claude Code CLIを各種インストール方法でインストール
 
-## オプションA: npm (推奨)
+# オプションA: npm (推奨)
 npm install -g @anthropic-ai/claude-code
 
-## オプションB: pip
+# オプションB: pip
 pip install claude
 
-## オプションC: 独立したインストーラー
+# オプションC: 独立したインストーラー
 curl -o claude https://releases.anthropic.com/claude/latest/claude-linux-amd64
 chmod +x claude
 sudo mv claude /usr/local/bin/
@@ -141,10 +139,10 @@ claude auth login
 ```python
 from claude_agent_sdk import ClaudeSDKClient
 
-## 클라이언트 초기화
+# 클라이언트 초기화
 client = ClaudeSDKClient()
 
-## 간단한 쿼리
+# 간단한 쿼리
 response = client.query("Hello, Claude! What's the weather like today?")
 print(response)
 ```
@@ -163,7 +161,7 @@ Hello! I'm Claude, an AI assistant. I don't have real-time access to weather dat
 from claude_agent_sdk import ClaudeSDKClient
 client = ClaudeSDKClient()
 
-## Create a test file
+# Create a test file
 with open("example.txt", "w") as f:
     f.write("""Artificial Intelligence is transforming software development.
 Machine learning models can now write code, debug errors, and
@@ -173,7 +171,7 @@ The impact on productivity has been significant, with some teams
 reporting 2-3x improvements in development speed when using AI assistance.
 """)
 
-## Ask Claude to read and analyze
+# Ask Claude to read and analyze
 response = client.query("Read the file example.txt and summarize the main points")
 print(response)
 ```
@@ -240,10 +238,10 @@ The Claude Agent SDK follows several key architectural principles:
 ```python
 from claude_agent_sdk import ClaudeSDKClient, AsyncClaudeSDKClient
 
-## Synchronous client (blocking)
+# Synchronous client (blocking)
 client = ClaudeSDKClient()
 
-## Asynchronous client (non-blocking)
+# Asynchronous client (non-blocking)
 import asyncio
 async def main():
     client = AsyncClaudeSDKClient()
@@ -287,7 +285,7 @@ def check_permissions(tool_info):
     if tool_info['tool_name'] == "file_delete":
         raise PermissionError("File deletion is not allowed")
 
-## Your hooks are now active
+# Your hooks are now active
 response = client.query("List files in current directory")
 ```
 
@@ -308,7 +306,7 @@ class QueryLogger:
 logger = QueryLogger()
 client.hook("before_query", logger.before_query)
 
-## Use the client... then get stats
+# Use the client... then get stats
 print(logger.get_stats())  # "Total queries: 5"
 ```
 
@@ -380,12 +378,12 @@ def get_file_info(filepath: str) -> Dict[str, Any]:
         "exists": True
     }
 
-## Register tools with the server
+# Register tools with the server
 server = MCPServer()
 server.add_tool(calculate)
 server.add_tool(get_file_info)
 
-## Attach to client
+# Attach to client
 client = ClaudeSDKClient(mcp_server=server)
 ```
 
@@ -421,7 +419,7 @@ from claude_agent_sdk import ClaudeSDKClient
 
 client = ClaudeSDKClient()
 
-## Basic query
+# Basic query
 response = client.query("What is Python?")
 print(response)
 ```
@@ -448,7 +446,7 @@ response = client.query(
     temperature=0.1  # Lower temperature for structured data
 )
 
-## Claude is good at JSON, but you should validate
+# Claude is good at JSON, but you should validate
 try:
     data = json.loads(response)
     print(json.dumps(data, indent=2))
@@ -461,7 +459,7 @@ except json.JSONDecodeError:
 **Reading Files:**
 
 ```python
-## Simple file operations through Claude
+# Simple file operations through Claude
 def read_and_analyze(filename: str) -> str:
     """Read and analyze a file using Claude."""
     client = ClaudeSDKClient()
@@ -492,7 +490,7 @@ print(analysis)
 **Writing and Modifying Files:**
 
 ```python
-## Ask Claude to create a file
+# Ask Claude to create a file
 def create_file(description: str, filename: str) -> None:
     """Use Claude to create a file based on description."""
     client = ClaudeSDKClient()
@@ -515,7 +513,7 @@ def create_file(description: str, filename: str) -> None:
     
     print(f"Created: {filename}")
 
-## Usage
+# Usage
 create_file("finds all prime numbers up to 100", "primes.py")
 ```
 
@@ -544,7 +542,7 @@ def explain_code(code_snippet: str) -> str:
     
     return response
 
-## Example
+# Example
 complex_code = """
 def fibonacci(n):
     if n <= 1:
@@ -599,7 +597,7 @@ def review_code(code: str, aspects: List[str] = None) -> dict:
     except:
         return {"raw_response": response}
 
-## Usage
+# Usage
 code_to_review = ""
 def process_data(data):
     result = []
@@ -686,7 +684,7 @@ async def batch_analyze_async(filenames: List[str]) -> List[dict]:
     results = await asyncio.gather(*tasks)
     return results
 
-## Usage
+# Usage
 import asyncio
 files_to_analyze = ["main.py", "utils.py", "config.py"]
 results = asyncio.run(batch_analyze_async(files_to_analyze))
@@ -881,18 +879,18 @@ class PermissionManager:
 **Permission Configuration:**
 
 ```python
-## Initialize with safe defaults
+# Initialize with safe defaults
 permissions = PermissionManager()
 
-## Allow read operations
+# Allow read operations
 permissions.set_permission("file_reader", "execute", "ALLOW")
 permissions.set_permission("file_reader", "write", "DENY")
 
-## Deny dangerous operations
+# Deny dangerous operations
 permissions.set_permission("file_delete", "execute", "DENY")
 permissions.set_permission("shell_exec", "execute", "DENY")
 
-## Attach to client
+# Attach to client
 client = ClaudeSDKClient(permission_manager=permissions)
 ```
 
@@ -956,7 +954,7 @@ async def retry_async(
     
     raise last_exception
 
-## Usage
+# Usage
 async def query_with_retry(client, prompt: str):
     return await retry_async(
         lambda: client.query(prompt),

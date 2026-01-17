@@ -8,8 +8,6 @@ lang: 'zh'
 translatedFrom: 'gemini-cli-contributors-deep-analysis'
 ---
 
-## 引言
-
 Google Gemini CLI 作为 Google 生成式 AI 生态中的一个关键工具，汇聚了来自全球 100+ 位开发者的贡献。这不仅仅是一个代码仓库，更是一个活跃的社区生态，体现了现代开源协作的模式和力量。
 
 本文通过深度分析项目的贡献数据，揭示了：

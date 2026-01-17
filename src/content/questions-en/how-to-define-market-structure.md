@@ -6,8 +6,6 @@ tags: ["量化交易", "quantitative-trading", "market-structure", "price-action
 lang: "en"
 ---
 
-## How do you define market structure?
-
 When traders say “structure,” they usually mean something like: “the market is making higher highs and higher lows,” or “structure broke,” or “we’re ranging.”
 
 That sounds intuitive—until you try to make it precise. How high is a “high”? Which low matters? When is a break confirmed? Is a wick enough?

@@ -7,10 +7,6 @@ tags: ["AI", "LLM", "Protocol", "Integration"]
 lang: 'en'
 ---
 
-## Deep Dive into Model Context Protocol (MCP) - A Standardized Protocol for AI Applications
-
-## Introduction
-
 In today's rapidly evolving AI landscape, Large Language Models (LLMs) have become the core driving force behind technological innovation. However, as application scenarios continue to expand, how to enable AI models to better understand and utilize contextual information, and how to achieve seamless integration with various data sources and tools, has become an urgent problem to solve. Model Context Protocol (MCP) emerges as a solution, acting like the USB-C interface of the AI application world, providing a standardized solution for connections between AI applications and various data sources and tools.
 
 ## What is MCP?

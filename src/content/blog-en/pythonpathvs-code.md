@@ -6,8 +6,6 @@ author: 'Remy'
 tags: ['python']
 ---
 
-## Global PYTHONPATH
-
 PYTHONPATH is an environment variable that allows users to add extra directories to the list of paths that the Python interpreter searches for modules and packages. This is particularly useful during development when you need to import custom modules that are not located in the standard library path or in the installed package directories. This article will detail various methods for setting PYTHONPATH on Windows, macOS, and Linux systems.
 
 ### When to Set PYTHONPATH?

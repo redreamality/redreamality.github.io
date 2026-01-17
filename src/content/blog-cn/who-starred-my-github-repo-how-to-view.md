@@ -8,8 +8,6 @@ lang: 'zh'
 translatedFrom: 'who-starred-my-github-repo-how-to-view'
 ---
 
-## 直接导航到 Stargazers 页面
-
 最直接的方法是手动在仓库 URL 的末尾添加 `/stargazers`。
 
 例如，如果您的仓库 URL 是：

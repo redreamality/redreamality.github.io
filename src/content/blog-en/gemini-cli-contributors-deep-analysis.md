@@ -7,8 +7,6 @@ tags: ['Google', 'Gemini', 'CLI', 'Open Source', 'Community Analysis']
 lang: 'en'
 ---
 
-## Introduction
-
 Google Gemini CLI, as a critical tool in Google's generative AI ecosystem, brings together contributions from 100+ developers worldwide. It represents more than just a code repository—it's an active community ecosystem that exemplifies modern open source collaboration patterns and the collective power of community-driven development.
 
 This article provides a deep analysis of the project's contribution data, revealing:

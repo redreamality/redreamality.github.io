@@ -6,8 +6,6 @@ author: 'Remy'
 tags: ['vibe coding', 'sdd', 'spec-driven coding', 'open spec', 'spec-kit', 'BMAD']
 ---
 
-## **Introduction: Beyond “Vibe Coding” — The Inevitability of Structure in AI-Driven Development**
-
 Software engineering stands at a critical inflection point. With the rise of generative AI, a practice known as “vibe coding” has emerged—an improvisational, prompt-paste-and-pray style that marks the first wave of AI-assisted development [^1]. While effective for rapid prototyping and concept validation, vibe coding collapses under the weight of production-grade complexity, yielding inconsistent outputs, lost context, and unmaintainable code [^1].
 
 To counter these pitfalls, a more rigorous and systematic methodology—**Spec-Driven Development (SDD)**—has taken shape. SDD is not merely an evolution of process but a paradigm shift: it transforms the specification from a one-time pre-development artifact into a **living, executable product**—the single source of truth shared by human developers and AI agents alike [^4].

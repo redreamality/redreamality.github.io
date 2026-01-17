@@ -7,8 +7,6 @@ lang: "zh"
 translatedFrom: "how-much-interest-receive-annually-7-percent-coupon"
 ---
 
-## 票面利率7%、面值1000美元的债券每年能获得多少利息？
-
 这是债券投资中最基本的问题之一，一旦你理解了债券的工作原理，答案就很简单了。让我带你完成计算并解释关键概念。
 
 ## 简单答案

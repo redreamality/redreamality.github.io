@@ -7,8 +7,6 @@ tags: ['open source', 'gemini', 'cli', 'community', 'npm', 'github', 'analysis']
 lang: 'ja'
 ---
 
-## Gemini CLI入門者向け深層分析：npmパッケージツールとGitHubコントリビューターのコミットを深掘りする
-
 **調査期間**: 2025-08-01 ～ 2025-09-15  
 **調査範囲**:  
 - Gemini CLI入門ツール
@@ -95,19 +93,19 @@ lang: 'ja'
 ```bash
 npm install -g @google/generative-ai-cli
 
-## 環境変数の設定
+# 環境変数の設定
 export GEMINI_API_KEY="your-api-key-here"
 
-## 基本的な使用
+# 基本的な使用
 gemini-cli prompt "Hello, how are you?"
 
-## ファイルの使用
+# ファイルの使用
 gemini-cli prompt -f input.txt
 
-## 対話モード
+# 対話モード
 gemini-cli interactive
 
-## モデルの選択
+# モデルの選択
 gemini-cli --model gemini-1.5-flash prompt "Your question here"
 ```
 
@@ -228,8 +226,8 @@ async function main() {
 ```bash
 npm install -g gemini-cli-quickstart
 
-## 基本的な使用
+# 基本的な使用
 gemini-qs "hello"
 
-## 対話モード
+# 対話モード
 ```

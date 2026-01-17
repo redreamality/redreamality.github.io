@@ -7,10 +7,6 @@ lang: zh
 translatedFrom: "quantitative-trading"
 ---
 
-## 量化交易策略分享
-
-## 主要内容
-
 ### 1. 量化交易基础
 - 什么是量化交易
 - 为什么需要量化交易

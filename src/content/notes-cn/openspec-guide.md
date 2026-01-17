@@ -7,10 +7,6 @@ tags: ["AI开发", "OpenSpec", "规格驱动开发", "SDD", "AI代理"]
 lang: "zh"
 ---
 
-## OpenSpec 深度研究报告：规格驱动开发在 AI 辅助编程中的架构与实践
-
-## 引言：AI 辅助编程的范式转移
-
 随着大语言模型（LLM）能力的指数级增长，软件工程领域正经历一场深刻的变革。开发者从传统的逐行编码（Character-by-Character）转向了意图驱动的编排（Intent-Driven Orchestration）。然而，这种转变并非没有代价。在当前的 AI 编程实践中，普遍存在一种被称为"直觉式编程"（Vibe Coding）的现象——开发者通过非结构化的自然语言对话与 AI 交互，需求散落在冗长的聊天记录中，缺乏持久性和系统性[^1]。
 
 ### "直觉式编程"的困境
@@ -187,7 +183,7 @@ OpenSpec 将开发过程重构为一个闭环的工程循环。本节将详细�
 AI 会在 changes/add-user-auth/specs/auth/spec.md 中生成如下内容：
 
 ```markdown
-## ADDED Requirements
+# ADDED Requirements
 
 ### Requirement: Two-Factor Authentication
 用户在登录时必须提供第二验证因子。

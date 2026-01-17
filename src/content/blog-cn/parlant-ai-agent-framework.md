@@ -6,10 +6,6 @@ author: 'Remy'
 tags: ['AI', 'agents', 'Parlant', 'conversational AI', 'customer engagement']
 ---
 
-## Parlant：专为客户互动设计的AI Agent框架深度解析
-
-## 引言
-
 在AI Agent技术快速发展的今天，如何构建一个既强大又易于控制的对话式AI系统成为了企业面临的重要挑战。Parlant作为一个专门针对客户互动场景设计的AI Agent框架，为开发者提供了一套完整的解决方案。本文将深入探讨Parlant的设计理念、核心架构以及实际应用，帮助读者全面理解这一创新框架[^1]。
 
 ## Parlant是什么？
@@ -177,7 +173,7 @@ Parlant内置了强大的可观测性功能：
 Parlant提供了系统化的质量评估机制：
 
 ```python
-## 定义评估场景
+# 定义评估场景
 test_cases = [
     {
         "user_input": "我想退货",
@@ -186,7 +182,7 @@ test_cases = [
     }
 ]
 
-## 运行评估
+# 运行评估
 results = parlant.evaluate(agent, test_cases)
 ```
 
@@ -208,13 +204,13 @@ Parlant支持多种LLM后端：
 可以根据不同场景选择不同模型：
 
 ```python
-## 简单查询用GPT-3.5
+# 简单查询用GPT-3.5
 simple_agent = parlant.create_agent(
     ...,
     llm_config={"model": "gpt-3.5-turbo"}
 )
 
-## 复杂推理用GPT-4
+# 复杂推理用GPT-4
 complex_agent = parlant.create_agent(
     ...,
     llm_config={"model": "gpt-4"}
@@ -515,7 +511,7 @@ async def issue_refund(order_id: str, amount: float):
     return refund_system.process(order_id, amount)
 ```
 
-## Parlant vs 其他框架
+# Parlant vs 其他框架
 
 ### 与LangChain的对比
 
@@ -548,7 +544,7 @@ async def issue_refund(order_id: str, amount: float):
 
 **总结：** Parlant的优势在于其**专注性**和**可控性**，特别适合需要高质量客户互动的企业应用[^2]。
 
-## 开始使用Parlant
+# 开始使用Parlant
 
 ### 安装
 

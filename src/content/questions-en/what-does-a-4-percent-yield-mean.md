@@ -6,8 +6,6 @@ tags: ["yield", "investment-return", "bond-yield", "financial-planning", "invest
 lang: "en"
 ---
 
-## What Does a 4% Yield Mean?
-
 If you're new to investing, you might see investments advertised with "4% yield" and wonder exactly what that means. Is it a good return? How does it compare to other investments? How is it calculated? Let me explain everything you need to know about what a 4% yield means.
 
 ## The Basic Definition

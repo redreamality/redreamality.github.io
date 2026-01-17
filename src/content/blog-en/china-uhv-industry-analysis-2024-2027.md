@@ -6,10 +6,6 @@ author: 'Remy'
 tags: ['Quantitative', 'A-Share', 'UHV', 'Investment-Strategy']
 ---
 
-## **Deep Analysis of China UHV Industry Landscape: From A-Share Core Targets to Supply Chain (2024-2027)**
-
-## **Part 1: Macro Drivers - UHV: From "National Business Card" to "Energy Superhighway"**
-
 ### **1.1 Strategic Definition: Why UHV is the Only Solution for "Renewable Energy Consumption"?**
 
 Ultra-High Voltage (UHV) transmission technology specifically refers to transmission levels of AC 1000kV, DC ±800kV and above[^1], with its core function enabling cross-regional, long-distance, low-loss power transmission[^2]. The status of this technology in China's energy strategy is undergoing a fundamental transformation, with its driving force shifting from early "technology showcase" and "national business card" to addressing the "rigid demand" of renewable energy consumption challenges.

@@ -8,10 +8,6 @@ lang: 'zh'
 translatedFrom: 'the-2025-state-of-browser-extension-frameworks-a-comparative-analysis-of-plasmo-wxt-and-crxjs'
 ---
 
-## **2025年浏览器扩展框架现状：Plasmo、WXT 和 CRXJS 的对比分析**
-
-## **第1部分：执行摘要**
-
 ### **1.1. 当前市场领导者**
 
 2025年的浏览器扩展开发生态呈现出日益复杂的特征，这种复杂性主要源于向 Manifest V3 (MV3) 的强制过渡以及跨浏览器API持续存在的不一致性。在这种充满挑战的环境中，一个明确的市场领导者已经出现。通过对可用框架、其功能集、开发者体验和生态健康的分析，**WXT** 已经确立了自己作为现代浏览器扩展开发的 definitive 领先框架的地位。这一领先地位建立在卓越的开发者体验、强大而灵活的功能集、框架无关的架构提供广泛兼容性，以及最关键的、积极可靠的开源维护记录之上。

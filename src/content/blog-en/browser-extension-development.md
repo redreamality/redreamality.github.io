@@ -6,8 +6,6 @@ author: 'Remy'
 tags: ['browser-extension', 'frontend-development', 'WXT', 'tutorial', 'web-development']
 ---
 
-## Browser Extension Development Guide
-
 Browser extensions are powerful tools that can enhance user experience and add functionality to web browsers. This guide will walk you through the modern approach to developing browser extensions using the WXT framework.
 
 ## Quick Start with WXT

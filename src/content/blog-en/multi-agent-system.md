@@ -6,10 +6,6 @@ author: 'Remy'
 tags: ['multi-agent-systems', 'artificial-intelligence', 'ai', 'constraint-satisfaction-problem']
 lang: 'en'
 ---
-
-## Multi-Agent Systems Research Report
-
-## 1. Multi-Agent Systems Overview
 - Definition: What is an agent?
 - Concept clarification: Differences and connections between workflow and (multi-)agent systems
 

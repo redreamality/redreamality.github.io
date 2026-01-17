@@ -6,8 +6,6 @@ author: 'Remy'
 tags: ['windows', 'proxy']
 ---
 
-## The Ultimate Guide to Configuring a Local Proxy with a Windows Batch Script
-
 Are you a developer, IT professional, or power user looking for a quick way to manage your Windows network settings? You might need to route your computer's internet traffic through a specific application for debugging, or perhaps a piece of software requires a custom proxy configuration to function correctly.
 
 Manually changing these settings in Windows can be a repetitive chore. Fortunately, a simple but powerful batch script can automate the entire process.

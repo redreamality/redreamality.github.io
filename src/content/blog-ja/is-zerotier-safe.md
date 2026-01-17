@@ -74,24 +74,24 @@ ZeroTier は分散型ですが、依然としてルートサーバーに依存�
 ### 1. ネットワーク設定
 
 ```bash
-## 強力なパスワードでネットワークを保護
+# 強力なパスワードでネットワークを保護
 zerotier-cli set [network-id] allowManaged=1
 
-## アクセス制御を有効化
+# アクセス制御を有効化
 zerotier-cli set [network-id] allowGlobal=0
 
-## ネットワークキーを定期的にローテーション
+# ネットワークキーを定期的にローテーション
 zerotier-cli set [network-id] revision=[new-revision]
 ```
 
 ### 2. ファイアウォール設定
 
 ```bash
-## ZeroTier インターフェースへのアクセスを制限
+# ZeroTier インターフェースへのアクセスを制限
 iptables -A INPUT -i zt+ -s 192.168.192.0/24 -j ACCEPT
 iptables -A INPUT -i zt+ -j DROP
 
-## 不要なアウトバウンド接続をブロック
+# 不要なアウトバウンド接続をブロック
 iptables -A OUTPUT -o zt+ -d 192.168.192.0/24 -j ACCEPT
 iptables -A OUTPUT -o zt+ -j DROP
 ```

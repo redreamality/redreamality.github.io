@@ -6,8 +6,6 @@ tags: ["ai", "software-development", "future"]
 lang: "en"
 ---
 
-## What is the future of AI in software development?
-
 This is a thoughtful question I've been pondering about the role of AI in software development.
 
 ## Key aspects to consider:

@@ -8,8 +8,6 @@ lang: 'ja'
 translatedFrom: 'who-starred-my-github-repo-how-to-view'
 ---
 
-## Stargazers ページへ直接移動
-
 最も直接的な方法は、リポジトリ URL の末尾に `/stargazers` を手動で追加することです。
 
 例えば、リポジトリ URL が：

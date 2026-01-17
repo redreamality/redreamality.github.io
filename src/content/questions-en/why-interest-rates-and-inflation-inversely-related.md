@@ -6,8 +6,6 @@ tags: ["interest-rates", "inflation", "inverse-relationship", "economics", "mone
 lang: "en"
 ---
 
-## Why Are Interest Rates and Inflation Inversely Related?
-
 If you've been following economic news, you've probably heard that when inflation is high, interest rates tend to be high too, and when inflation is low, interest rates tend to be low. This inverse relationship between interest rates and inflation is one of the most important concepts in economics, affecting everything from mortgage rates to savings account yields to the broader economy. Let me explain why this relationship exists and what it means for you.
 
 ## The Basic Relationship: High Inflation = High Rates, Low Inflation = Low Rates

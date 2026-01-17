@@ -7,10 +7,6 @@ tags: ["AI", "LLM", "Protocol", "Integration"]
 lang: 'zh'
 ---
 
-## 深入解析 Model Context Protocol (MCP) - 人工智能应用的标准化协议
-
-## 引言
-
 在人工智能快速发展的今天，大语言模型（LLMs）已经成为了推动技术创新的核心力量。然而，随着应用场景的不断扩展，如何让 AI 模型能够更好地理解和利用上下文信息，如何实现与各种数据源和工具的无缝集成，成为了一个亟待解决的问题。Model Context Protocol (MCP) 应运而生，它就像 AI 应用世界中的 USB-C 接口，为 AI 应用与各种数据源、工具之间的连接提供了一个标准化的解决方案。
 
 ## MCP 是什么？

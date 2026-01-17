@@ -8,10 +8,6 @@ lang: en
 translatedFrom: "multi-agent-system"
 ---
 
-## Multi-Agent Systems: From Theory to Practice
-
-## Presentation Content
-
 - [questions](/multi-agent-system-slides/questions) - Questions Overview
 - [part1](/multi-agent-system-slides/part1) - Part 1: Philosophy (Dao)
   - [what-is-agent](/multi-agent-system-slides/what-is-agent) - What is an Agent

@@ -6,8 +6,6 @@ tags: ["yield-curve-inversion", "historical-inversions", "recession", "economy",
 lang: "en"
 ---
 
-## What Is the Longest Inversion in History?
-
 When it comes to yield curve inversions, financial history has provided us with several notable examples. Understanding the longest and most significant inversions can help us learn from the past and better anticipate future economic conditions. Let me take you through the most important yield curve inversions in modern financial history.
 
 ## Understanding Yield Curve Inversion Duration

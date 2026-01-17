@@ -8,10 +8,6 @@ lang: 'ja'
 translatedFrom: 'parlant-ai-agent-framework'
 ---
 
-## Parlant：顧客エンゲージメント向けに設計された AI Agent フレームワーク詳細解説
-
-## はじめに
-
 AI Agent 技術が急速に発展する今日、強力で制御しやすい対話型 AI システムを構築することが企業にとって重要な課題となっています。Parlant は顧客エンゲージメントシナリオ専用に設計された AI Agent フレームワークとして、開発者に完全なソリューションを提供します。本記事では Parlant の設計理念、コアアーキテクチャ、実際の応用を深く探求し、この革新的なフレームワークの全体像を理解します[^1]。
 
 ## Parlant とは？
@@ -179,7 +175,7 @@ Parlant は強力な可観測性機能を内蔵：
 Parlant は体系的な品質評価メカニズムを提供：
 
 ```python
-## 評価シナリオを定義
+# 評価シナリオを定義
 test_cases = [
     {
         "user_input": "返品したい",
@@ -188,7 +184,7 @@ test_cases = [
     }
 ]
 
-## 評価を実行
+# 評価を実行
 results = parlant.evaluate(agent, test_cases)
 ```
 
@@ -210,13 +206,13 @@ Parlant は複数の LLM バックエンドをサポート：
 異なるシナリオで異なるモデルを選択可能：
 
 ```python
-## 簡単なクエリには GPT-3.5
+# 簡単なクエリには GPT-3.5
 simple_agent = parlant.create_agent(
     ...,
     llm_config={"model": "gpt-3.5-turbo"}
 )
 
-## 複雑な推論には GPT-4
+# 複雑な推論には GPT-4
 complex_agent = parlant.create_agent(
     ...,
     llm_config={"model": "gpt-4"}
@@ -517,7 +513,7 @@ async def issue_refund(order_id: str, amount: float):
     return refund_system.process(order_id, amount)
 ```
 
-## Parlant vs 他のフレームワーク
+# Parlant vs 他のフレームワーク
 
 ### LangChain との比較
 
@@ -550,7 +546,7 @@ async def issue_refund(order_id: str, amount: float):
 
 **まとめ：** Parlant の優位性はその**専門性**と**制御性**にあり、特に高品質な顧客エンゲージメントが必要な企業アプリケーションに適しています[^2]。
 
-## Parlant を始める
+# Parlant を始める
 
 ### インストール
 

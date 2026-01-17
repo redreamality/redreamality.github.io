@@ -8,8 +8,6 @@ lang: ja
 translatedFrom: "multi-agent-system"
 ---
 
-## プレゼンテーション内容
-
 - [questions](/multi-agent-system-slides/questions) - 問題概要
 - [part1](/multi-agent-system-slides/part1) - パート1：道
   - [what-is-agent](/multi-agent-system-slides/what-is-agent) - エージェントとは

@@ -7,10 +7,6 @@ tags: ['AI', 'agents', 'Parlant', 'conversational AI', 'customer engagement']
 lang: 'en'
 ---
 
-## Parlant: An In-Depth Analysis of the AI Agent Framework Designed for Customer Engagement
-
-## Introduction
-
 In today's rapidly evolving AI Agent landscape, building a powerful yet controllable conversational AI system has become a critical challenge for enterprises. Parlant, as an AI Agent framework specifically designed for customer engagement scenarios, provides developers with a comprehensive solution. This article delves into Parlant's design philosophy, core architecture, and practical applications to help readers gain a thorough understanding of this innovative framework[^1].
 
 ## What is Parlant?
@@ -178,7 +174,7 @@ Parlant has built-in powerful observability features:
 Parlant provides a systematic quality evaluation mechanism:
 
 ```python
-## Define evaluation scenarios
+# Define evaluation scenarios
 test_cases = [
     {
         "user_input": "I want to return an item",
@@ -187,7 +183,7 @@ test_cases = [
     }
 ]
 
-## Run evaluation
+# Run evaluation
 results = parlant.evaluate(agent, test_cases)
 ```
 
@@ -209,13 +205,13 @@ Parlant supports multiple LLM backends:
 Different models can be selected for different scenarios:
 
 ```python
-## Use GPT-3.5 for simple queries
+# Use GPT-3.5 for simple queries
 simple_agent = parlant.create_agent(
     ...,
     llm_config={"model": "gpt-3.5-turbo"}
 )
 
-## Use GPT-4 for complex reasoning
+# Use GPT-4 for complex reasoning
 complex_agent = parlant.create_agent(
     ...,
     llm_config={"model": "gpt-4"}
@@ -516,7 +512,7 @@ async def issue_refund(order_id: str, amount: float):
     return refund_system.process(order_id, amount)
 ```
 
-## Parlant vs Other Frameworks
+# Parlant vs Other Frameworks
 
 ### Comparison with LangChain
 
@@ -549,7 +545,7 @@ async def issue_refund(order_id: str, amount: float):
 
 **Summary:** Parlant's strengths lie in its **focus** and **controllability**, making it particularly suitable for enterprise applications requiring high-quality customer engagement[^2].
 
-## Getting Started with Parlant
+# Getting Started with Parlant
 
 ### Installation
 

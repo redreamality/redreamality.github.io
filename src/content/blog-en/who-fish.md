@@ -6,11 +6,6 @@ author: 'Remy'
 tags: ['logic-puzzle', 'CSP', 'backtracking', 'Python', 'artificial-intelligence', 'constraint-satisfaction-problem']
 ---
 
-
-
-
-## Classic Logic Puzzle: Who Owns the Fish?
-
 This is a famous Einstein puzzle, reportedly only 2% of people can solve it. The problem is as follows:
 
     1. There are 5 houses of different colors
@@ -99,17 +94,17 @@ Here's the Python implementation:
 ```python
 from itertools import permutations
 
-## Define all attribute categories
+# Define all attribute categories
 colors = ["Red", "Yellow", "Blue", "Green", "White"]
 nations = ["English", "Swedish", "Danish", "Norwegian", "German"]
 drinks = ["Milk", "Tea", "Coffee", "Water", "Beer"]
 sports = ["Hockey", "Baseball", "Polo", "Football", "Table Tennis"]
 pets = ["Cat", "Horse", "Bird", "Fish", "Dog"]
 
-## Define house positions
+# Define house positions
 houses = [1, 2, 3, 4, 5]
 
-## Define constraint condition function
+# Define constraint condition function
 def satisfies_constraints(assignment):
     # Condition 1: Englishman lives in red house
     if assignment["nations"].index("English") != assignment["colors"].index("Red"):
@@ -183,13 +178,13 @@ def satisfies_constraints(assignment):
 
     return True
 
-## Search function (optimized version)
+# Search function (optimized version)
 def solve():
     # Use constraint propagation and backtracking
     # ... (implementation details)
     pass
 
-## Execute search
+# Execute search
 solutions = solve()
 if solutions:
     for solution in solutions:

@@ -6,11 +6,6 @@ author: 'Remy'
 tags: ['逻辑谜题', 'CSP', '回溯法', 'Python', '人工智能', 'deepseek', '约束满足问题']
 ---
 
-
-
-
-## 经典的逻辑谜题：谁养鱼
-
 这是一个著名的爱因斯坦谜题，据说只有2%的人能解开。题目如下：
 
     1. 有5座不同颜色的房子
@@ -99,18 +94,18 @@ tags: ['逻辑谜题', 'CSP', '回溯法', 'Python', '人工智能', 'deepseek',
 ```python
 from itertools import permutations
 
-## 定义所有属性类别
+# 定义所有属性类别
 colors = ["红", "黄", "蓝", "绿", "白"]
 nations = ["英国", "瑞典", "丹麦", "挪威", "德国"]
 drinks = ["牛奶", "茶", "咖啡", "水", "啤酒"]
 sports = ["冰球", "棒球", "马球", "足球", "桌球"]
 pets = ["猫", "马", "鸟", "鱼", "狗"]
 
-## 定义房子位置
+# 定义房子位置
 houses = [1, 2, 3, 4, 5]
 
 
-## 定义约束条件函数
+# 定义约束条件函数
 def satisfies_constraints(assignment):
     # 条件1: 英国人住红色房子
     if assignment["nations"].index("英国") != assignment["colors"].index("红"):
@@ -185,7 +180,7 @@ def satisfies_constraints(assignment):
     return True
 
 
-## 搜索函数（优化版）
+# 搜索函数（优化版）
 def solve():
     assignments = []
     # 固定挪威人住第1间
@@ -285,9 +280,9 @@ def solve():
         return None
 
 
-## 执行搜索
+# 执行搜索
 solutions = solve()
-## 输出结果
+# 输出结果
 if solutions:
     print(len(solutions))
     for solution in solutions:

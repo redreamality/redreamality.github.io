@@ -12,8 +12,6 @@ author: 'Remy'
 tags: ['claude code', 'vibe coding', 'python']
 ---
 
-## Claude Agent SDK (Python) 学习指南
-
 **文档版本**: 1.0
 **生成时间**: 2025-10-15
 **SDK 版本**: 0.1.3
@@ -127,18 +125,18 @@ tags: ['claude code', 'vibe coding', 'python']
 
 ```bash
 python --version
-## 需要 3.10 或更高版本
+# 需要 3.10 或更高版本
 ```
 
 如果版本过低，请升级：
 ```bash
-## Ubuntu/Debian
+# Ubuntu/Debian
 sudo apt install python3.10
 
-## macOS
+# macOS
 brew install python@3.10
 
-## Windows: 从 https://python.org/downloads/ 下载
+# Windows: 从 https://python.org/downloads/ 下载
 ```
 
 #### 步骤 2: 安装 Claude Code CLI
@@ -146,24 +144,24 @@ brew install python@3.10
 Claude Code CLI 是 SDK 的必需依赖。
 
 ```bash
-## 安装 Claude Code CLI
+# 安装 Claude Code CLI
 npm install -g @anthropic-ai/claude-code
 
-## 验证安装
+# 验证安装
 claude -v
-## 应显示 2.0.0 或更高版本
+# 应显示 2.0.0 或更高版本
 ```
 
 #### 步骤 3: 设置 API Key
 
 ```bash
-## Linux/macOS
+# Linux/macOS
 export ANTHROPIC_API_KEY="sk-ant-api03-your-key-here"
 
-## Windows (PowerShell)
+# Windows (PowerShell)
 $env:ANTHROPIC_API_KEY = "sk-ant-api03-your-key-here"
 
-## 永久设置（Linux/macOS）
+# 永久设置（Linux/macOS）
 echo 'export ANTHROPIC_API_KEY="sk-ant-api03-..."' >> ~/.bashrc
 source ~/.bashrc
 ```
@@ -173,10 +171,10 @@ source ~/.bashrc
 #### 步骤 4: 安装 SDK
 
 ```bash
-## 方法 1: 从 PyPI 安装（推荐）
+# 方法 1: 从 PyPI 安装（推荐）
 pip install claude-agent-sdk
 
-## 方法 2: 从源码安装（开发环境）
+# 方法 2: 从源码安装（开发环境）
 cd claude-agent-sdk-python
 pip install -e .
 ```
@@ -185,7 +183,7 @@ pip install -e .
 
 ```bash
 python -c "import claude_agent_sdk; print(claude_agent_sdk.__version__)"
-## 应显示: 0.1.3
+# 应显示: 0.1.3
 ```
 
 ### 2.3 第一个示例
@@ -583,13 +581,13 @@ Message = UserMessage | AssistantMessage | SystemMessage | ResultMessage | Strea
 ```python
 from claude_agent_sdk import UserMessage
 
-## 文本消息
+# 文本消息
 user_msg = UserMessage(
     content="Hello Claude",
     parent_tool_use_id=None
 )
 
-## 内容块列表
+# 内容块列表
 user_msg = UserMessage(
     content=[
         {"type": "text", "text": "Hello"},
@@ -632,7 +630,7 @@ if isinstance(message, ResultMessage):
 ```python
 from claude_agent_sdk import tool, create_sdk_mcp_server, ClaudeAgentOptions
 
-## 1. 定义工具
+# 1. 定义工具
 @tool("calculate_sum", "Add two numbers", {"a": float, "b": float})
 async def calculate_sum(args):
     result = args["a"] + args["b"]
@@ -640,20 +638,20 @@ async def calculate_sum(args):
         "content": [{"type": "text", "text": f"Sum: {result}"}]
     }
 
-## 2. 创建服务器
+# 2. 创建服务器
 server = create_sdk_mcp_server(
     name="math-tools",
     version="1.0.0",
     tools=[calculate_sum]
 )
 
-## 3. 配置选项
+# 3. 配置选项
 options = ClaudeAgentOptions(
     mcp_servers={"math": server},
     allowed_tools=["mcp__math__calculate_sum"]
 )
 
-## 4. 使用
+# 4. 使用
 async with ClaudeSDKClient(options=options) as client:
     await client.query("Calculate 15 + 27")
     async for msg in client.receive_response():
@@ -663,14 +661,14 @@ async with ClaudeSDKClient(options=options) as client:
 #### 工具返回格式
 
 ```python
-## 成功返回
+# 成功返回
 return {
     "content": [
         {"type": "text", "text": "Result: 42"}
     ]
 }
 
-## 错误返回
+# 错误返回
 return {
     "content": [
         {"type": "text", "text": "Error: Division by zero"}
@@ -1223,7 +1221,7 @@ anyio.run(main)
 **解决**: 升级到 Python 3.10+
 ```bash
 python --version
-## 如果 < 3.10，安装新版本
+# 如果 < 3.10，安装新版本
 ```
 
 #### 2. Claude Code CLI 未安装
@@ -1251,11 +1249,11 @@ export ANTHROPIC_API_KEY="sk-ant-api03-..."
 
 **解决**: 使用 `async for` 消费消息
 ```python
-## ✅ 正确
+# ✅ 正确
 async for msg in client.receive_response():
     print(msg)
 
-## ❌ 错误
+# ❌ 错误
 msg = await client.receive_response()
 ```
 
@@ -1281,9 +1279,9 @@ await task
 
 **解决**: 检查配置
 ```python
-## 1. 工具必须在 allowed_tools 中
-## 2. matcher 必须匹配工具名（区分大小写）
-## 3. Hook 签名必须正确
+# 1. 工具必须在 allowed_tools 中
+# 2. matcher 必须匹配工具名（区分大小写）
+# 3. Hook 签名必须正确
 
 hooks={
     "PreToolUse": [
@@ -1298,7 +1296,7 @@ hooks={
 
 **解决**: 检查命名格式
 ```python
-## 命名格式: mcp__<server_name>__<tool_name>
+# 命名格式: mcp__<server_name>__<tool_name>
 allowed_tools=["mcp__math__calculate_sum"]
 ```
 
@@ -1308,11 +1306,11 @@ allowed_tools=["mcp__math__calculate_sum"]
 
 **解决**: 使用 `async for` 而非 `await`
 ```python
-## ✅ 正确
+# ✅ 正确
 async for msg in query("test"):
     pass
 
-## ❌ 错误
+# ❌ 错误
 msg = await query("test")
 ```
 
@@ -1334,14 +1332,14 @@ async for msg in client.receive_messages():
 
 **解决**: 使用 `async with`
 ```python
-## ✅ 正确
+# ✅ 正确
 async with ClaudeSDKClient() as client:
     pass  # 自动 disconnect
 
-## ❌ 错误
+# ❌ 错误
 client = ClaudeSDKClient()
 await client.connect()
-## 忘记 disconnect
+# 忘记 disconnect
 ```
 
 ### 8.3 调试技巧
@@ -1438,19 +1436,19 @@ python -m mypy your_script.py
 ### B. 类型定义速查
 
 ```python
-## 消息类型
+# 消息类型
 Message = UserMessage | AssistantMessage | SystemMessage | ResultMessage | StreamEvent
 
-## 内容块类型
+# 内容块类型
 ContentBlock = TextBlock | ThinkingBlock | ToolUseBlock | ToolResultBlock
 
-## 权限模式
+# 权限模式
 PermissionMode = Literal["default", "acceptEdits", "plan", "bypassPermissions"]
 
-## Hook 事件
+# Hook 事件
 HookEvent = Literal["PreToolUse", "PostToolUse", "UserPromptSubmit", "Stop", "SubagentStop", "PreCompact"]
 
-## 权限结果
+# 权限结果
 PermissionResult = PermissionResultAllow | PermissionResultDeny
 ```
 

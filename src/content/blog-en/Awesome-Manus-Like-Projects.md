@@ -6,8 +6,6 @@ author: 'Remy'
 tags: ['AI', 'agents','multimodal', 'tools','multi-agent-systems', 'artificial-intelligence']
 ---
 
-## Awesome Manus-Like Projects
-
 A curated list of open-source projects related to Manus technology stack, covering multimodal models, workflow orchestration, multi-agent systems, and tool integration.
 
 ## Technical Stack

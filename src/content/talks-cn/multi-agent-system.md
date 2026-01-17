@@ -8,9 +8,6 @@ lang: zh
 translatedFrom: "multi-agent-system"
 ---
 
-
-## 演讲内容
-
 - [questions](/multi-agent-system-slides/questions) - 问题概览
 - [part1](/multi-agent-system-slides/part1) - 第一部分:道
   - [what-is-agent](/multi-agent-system-slides/what-is-agent) - 什么是智能体

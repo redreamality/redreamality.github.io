@@ -7,10 +7,6 @@ lang: en
 translatedFrom: "quantitative-trading"
 ---
 
-## Quantitative Trading Strategies: Insights and Practical Experience
-
-## Overview
-
 This presentation covers the fundamentals of quantitative trading, from basic concepts to practical implementation strategies. Drawing from real-world experience, we'll explore various trading approaches and share insights on building robust trading systems.
 
 ## Main Content

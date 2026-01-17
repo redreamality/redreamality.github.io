@@ -8,10 +8,6 @@ lang: "en"
 translatedFrom: "openspec-guide"
 ---
 
-## OpenSpec Deep Dive: Spec-Driven Development Architecture & Practice in AI-Assisted Programming
-
-## Introduction: The Paradigm Shift in AI-Assisted Programming
-
 As Large Language Model (LLM) capabilities grow exponentially, the software engineering field is experiencing profound transformation. Developers have shifted from traditional character-by-character coding to intent-driven orchestration. However, this shift hasn't come without costs. Current AI programming practices are plagued by a phenomenon called "vibe coding"—developers interact with AI through unstructured natural language conversations, with requirements scattered across lengthy chat logs, lacking persistence and systematization[^1].
 
 ### The Predicament of "Vibe Coding"
@@ -188,7 +184,7 @@ This is the watershed separating OpenSpec from ordinary task management tools. A
 AI generates content in changes/add-user-auth/specs/auth/spec.md like:
 
 ```markdown
-## ADDED Requirements
+# ADDED Requirements
 
 ### Requirement: Two-Factor Authentication
 Users must provide a second verification factor when logging in.

@@ -6,8 +6,6 @@ tags: ["量化交易", "quantitative-trading", "risk-management", "expectancy", 
 lang: "en"
 ---
 
-## How to understand “profit and loss come from the same source” (盈亏同源)?
-
 The Chinese phrase **“盈亏同源”** literally means “profit and loss have the same origin.” Traders use it to remind themselves of a painful truth:
 
 **Your profits and your losses usually come from the same bet.**

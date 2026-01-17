@@ -7,8 +7,6 @@ author: 'Remy'
 tags: ['python']
 ---
 
-## 全局PYTHONPATH 
-
 PYTHONPATH是一个环境变量，它允许用户将额外的目录添加到Python解释器搜索模块和包的路径列表中。这在开发过程中尤其有用，当你需要导入不在标准库路径或已安装包目录中的自定义模块时。本文将详细介绍在Windows、macOS和Linux系统上设置PYTHONPATH的多种方法。
 
 ### 什么时候需要设置PYTHONPATH？

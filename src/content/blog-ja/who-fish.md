@@ -8,8 +8,6 @@ lang: 'ja'
 translatedFrom: 'who-fish'
 ---
 
-## 古典的な論理パズル：誰が魚を飼っているか
-
 これは有名なアインシュタインのパズルで、わずか2%の人しか解けないと言われています。問題は以下の通りです：
 
     1. 5つの異なる色の家がある
@@ -65,17 +63,17 @@ translatedFrom: 'who-fish'
 ```python
 from itertools import permutations
 
-## すべての属性カテゴリを定義
+# すべての属性カテゴリを定義
 colors = ["赤", "黄", "青", "緑", "白"]
 nations = ["イギリス", "スウェーデン", "デンマーク", "ノルウェー", "ドイツ"]
 drinks = ["牛乳", "茶", "コーヒー", "水", "ビール"]
 sports = ["アイスホッケー", "野球", "ポロ", "サッカー", "卓球"]
 pets = ["猫", "馬", "鳥", "魚", "犬"]
 
-## 家の位置を定義
+# 家の位置を定義
 houses = [1, 2, 3, 4, 5]
 
-## 制約条件関数を定義
+# 制約条件関数を定義
 def satisfies_constraints(assignment):
     # 条件1: イギリス人は赤い家に住む
     if assignment["nations"].index("イギリス") != assignment["colors"].index("赤"):
@@ -149,7 +147,7 @@ def satisfies_constraints(assignment):
 
     return True
 
-## 探索関数（最適化版）
+# 探索関数（最適化版）
 def solve():
     assignments = []
     # ノルウェー人が最初の家に住むことを固定
@@ -248,9 +246,9 @@ def solve():
     else:
         return None
 
-## 探索を実行
+# 探索を実行
 solutions = solve()
-## 結果を出力
+# 結果を出力
 if solutions:
     print(len(solutions))
     for solution in solutions:
