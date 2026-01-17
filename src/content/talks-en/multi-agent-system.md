@@ -3,7 +3,7 @@ title: "Multi-Agent Systems: From Theory to Practice"
 description: "Multi-agent systems, from fundamentals to practical implementation"
 date: 2025-02-28
 location: "Online Presentation"
-slides: "http://redreamality.com/multi-agent-system-slides"
+slides: "http://redreamality.com/multi-agent-system-slides/"
 lang: en
 translatedFrom: "multi-agent-system"
 ---
@@ -99,7 +99,7 @@ After this presentation, attendees will be able to:
 
 ## Resources
 
-- **Slides**: Available at [redreamality.com/multi-agent-system-slides](http://redreamality.com/multi-agent-system-slides)
+- **Slides**: Available at [redreamality.com/multi-agent-system-slides](http://redreamality.com/multi-agent-system-slides/)
 - **Code Examples**: Practical implementations of discussed patterns
 - **Further Reading**: Curated list of research papers and documentation
 

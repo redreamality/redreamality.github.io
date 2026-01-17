@@ -3,7 +3,7 @@ title: "マルチエージェントシステム"
 description: "マルチエージェントシステム、基礎から実践まで"
 date: 2025-02-28
 location: "オンライン共有"
-slides: "http://redreamality.com/multi-agent-system-slides"
+slides: "http://redreamality.com/multi-agent-system-slides/"
 lang: ja
 translatedFrom: "multi-agent-system"
 ---
@@ -47,5 +47,5 @@ translatedFrom: "multi-agent-system"
 
 ## 関連リソース
 
-- [ブログ](http://redreamality.com/blog/multi-agent-system)
-- [スライドリンク](http://redreamality.com/multi-agent-system-slides)
+- [ブログ](http://redreamality.com/blog/multi-agent-system/)
+- [スライドリンク](http://redreamality.com/multi-agent-system-slides/)
