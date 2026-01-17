@@ -1,0 +1,99 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import { getNotes, type Language } from '../../../../utils/i18n';
+
+// This is the Japanese notes listing (/ja/garden/notes path)
+const lang: Language = 'ja';
+
+const notes = await getNotes(lang);
+
+const content = {
+  en: {
+    title: 'Reading Notes',
+    subtitle: "Notes from my reading using the ROI reading method. These are structured insights from information I've consumed.",
+    noNotesMessage: 'No notes available yet.',
+    viewDetails: 'View Details',
+    source: 'Source'
+  },
+  zh: {
+    title: '阅读笔记',
+    subtitle: '使用ROI阅读法整理的阅读笔记。这些是我消化信息后的结构化见解。',
+    noNotesMessage: '暂无阅读笔记。',
+    viewDetails: '查看详情',
+    source: '来源'
+  },
+  ja: {
+    title: '読書ノート',
+    subtitle: 'ROI読書法で整理した読書ノート。読んだ情報を消化した構造化メモです。',
+    noNotesMessage: 'まだノートがありません。',
+    viewDetails: '詳細を見る',
+    source: 'ソース'
+  }
+};
+
+const currentContent = content[lang];
+const basePath = '/ja';
+---
+
+<Layout title="読書ノート">
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{currentContent.title}</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400">{currentContent.subtitle}</p>
+      </div>
+
+      {notes.length === 0 ? (
+        <div class="text-center py-12">
+          <p class="text-gray-500 dark:text-gray-400 text-lg">{currentContent.noNotesMessage}</p>
+        </div>
+      ) : (
+        <div class="space-y-8">
+          {notes.map((note) => (
+            <article class="bg-white border border-gray-200 rounded-lg shadow-md p-6 dark:bg-gray-800 dark:border-gray-700">
+              <div class="flex flex-col space-y-4">
+                <div>
+                  <a href={`${basePath}/garden/notes/${note.slug}`}>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      {note.data.title}
+                    </h2>
+                  </a>
+                  <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mt-2">
+                    <span>
+                      {note.data.date.toLocaleDateString('ja-JP', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </span>
+                    {note.data.source && (
+                      <span>
+                        📚 {currentContent.source}: {note.data.source}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{note.data.description}</p>
+
+                <div class="flex justify-between items-center pt-4">
+                  <div class="flex gap-4">
+                    <a
+                      href={`${basePath}/garden/notes/${note.slug}`}
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
+                    >
+                      {currentContent.viewDetails}
+                      <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </main>
+</Layout>

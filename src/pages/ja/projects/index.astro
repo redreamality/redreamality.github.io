@@ -1,0 +1,96 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getProjects, type Language } from '../../../utils/i18n';
+
+// This is the Japanese projects page (/ja/projects path)
+const lang: Language = 'ja';
+
+const projects = await getProjects(lang);
+
+const content = {
+  en: {
+    title: 'Projects',
+    subtitle: 'Open source projects and research contributions',
+    noProjectsMessage: 'No projects available yet.',
+    viewDetails: 'View Details'
+  },
+  zh: {
+    title: '项目展示',
+    subtitle: '开源项目和研究贡献',
+    noProjectsMessage: '暂无项目。',
+    viewDetails: '查看详情'
+  },
+  ja: {
+    title: 'プロジェクト',
+    subtitle: 'オープンソースプロジェクトと研究貢献',
+    noProjectsMessage: 'まだプロジェクトがありません。',
+    viewDetails: '詳細を見る'
+  }
+};
+
+const currentContent = content[lang];
+const basePath = '/ja';
+---
+
+<Layout title="プロジェクト">
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{currentContent.title}</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400">
+          {currentContent.subtitle}
+        </p>
+      </div>
+
+      {projects.length === 0 ? (
+        <div class="text-center py-12">
+          <p class="text-gray-500 dark:text-gray-400 text-lg">{currentContent.noProjectsMessage}</p>
+        </div>
+      ) : (
+        <div class="space-y-8">
+          {projects.map((project) => (
+            <article class="bg-white border border-gray-200 rounded-lg shadow-md p-6 dark:bg-gray-800 dark:border-gray-700">
+              <div class="flex flex-col space-y-4">
+                <div>
+                  <a href={`${basePath}/projects/${project.slug}`}>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      {project.data.title}
+                    </h2>
+                  </a>
+                  <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mt-2">
+                    <span>
+                      {project.data.pubDate.toLocaleDateString('ja-JP', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </span>
+                    {project.data.author && <span>👤 {project.data.author}</span>}
+                  </div>
+                </div>
+
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {project.data.description}
+                </p>
+
+                <div class="flex justify-between items-center pt-4">
+                  <div class="flex gap-4">
+                    <a
+                      href={`${basePath}/projects/${project.slug}`}
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
+                    >
+                      {currentContent.viewDetails}
+                      <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </main>
+</Layout>
