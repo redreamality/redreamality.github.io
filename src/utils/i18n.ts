@@ -171,15 +171,29 @@ export function getLocalizedPath(path: string, lang: Language): string {
   // Remove existing language prefix
   const cleanPath = path.replace(/^\/(cn|en|ja)/, '');
 
+  // Ensure trailing slash for all directory and content paths
+  // This matches the trailingSlash: 'always' configuration in astro.config.mjs
+  const ensureTrailingSlash = (p: string): string => {
+    if (!p || p === '/') return '/';
+
+    // Remove trailing slash first to normalize
+    const normalized = p.replace(/\/$/, '');
+
+    // Add trailing slash for all paths (trailingSlash: 'always')
+    return `${normalized}/`;
+  };
+
+  const processedPath = ensureTrailingSlash(cleanPath);
+
   if (lang === 'zh') {
-    return cleanPath === '' || cleanPath === '/' ? '/cn/' : `/cn${cleanPath}`;
-  }
-  
-  if (lang === 'ja') {
-    return cleanPath === '' || cleanPath === '/' ? '/ja/' : `/ja${cleanPath}`;
+    return processedPath === '/' ? '/cn/' : `/cn${processedPath}`;
   }
 
-  return cleanPath || '/';
+  if (lang === 'ja') {
+    return processedPath === '/' ? '/ja/' : `/ja${processedPath}`;
+  }
+
+  return processedPath;
 }
 
 /**
