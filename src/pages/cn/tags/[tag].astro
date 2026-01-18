@@ -102,7 +102,7 @@ const basePath = lang === 'zh' ? '/cn' : '';
                     ?.filter((postTag: string) => tagCounts[postTag] >= 2)
                     .map((postTag: string) => (
                     <a
-                      href={`${basePath}/tags/${postTag}`}
+                      href={`${basePath}/tags/${postTag}/`}
                       class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                     >
                       #{postTag}

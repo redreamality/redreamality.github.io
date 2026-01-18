@@ -56,7 +56,7 @@ const basePath = '/ja';
           <div class="flex flex-wrap gap-2">
             {tags.map((tag) => (
               <a
-                href={`${basePath}/tags/${tag}`}
+                href={`${basePath}/tags/${tag}/`}
                 class="inline-block px-3 py-1 text-sm bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800 transition-colors"
               >
                 #{tag}
@@ -102,13 +102,13 @@ const basePath = '/ja';
                     {post.data.tags
                       .filter((tag) => tagCounts[tag] >= 2)
                       .map((tag) => (
-                        <a
-                          href={`${basePath}/tags/${tag}`}
-                          class="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
-                        >
-                          #{tag}
-                        </a>
-                      ))}
+                      <a
+                        href={`${basePath}/tags/${tag}/`}
+                        class="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
+                      >
+                        #{tag}
+                      </a>
+                    ))}
                   </div>
                 )}
 
