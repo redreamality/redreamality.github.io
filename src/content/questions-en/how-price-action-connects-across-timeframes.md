@@ -5,9 +5,6 @@ date: 2026-01-07
 tags: ["量化交易", "quantitative-trading", "multi-timeframe", "fractal", "risk-management", "signal-design"]
 lang: "en"
 ---
-
-# How are different timeframes connected in price action?
-
 Multi-timeframe analysis often sounds like this:
 
 - “The daily trend is up, but the 5-minute is down.”

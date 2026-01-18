@@ -6,9 +6,6 @@ source: "https://www.calnewport.com/books/deep-work/"
 tags: ["生产力", "专注", "阅读"]
 lang: "zh"
 ---
-
-# 《深度工作》阅读笔记
-
 ## ROI阅读法分析
 
 ### 第一层：核心概念（高ROI）

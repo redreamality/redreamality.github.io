@@ -6,9 +6,6 @@ author: 'Remy'
 tags: ['AI', 'agents', 'Parlant', 'conversational AI', 'customer engagement']
 lang: 'en'
 ---
-
-# Parlant: An In-Depth Analysis of the AI Agent Framework Designed for Customer Engagement
-
 ## Introduction
 
 In today's rapidly evolving AI Agent landscape, building a powerful yet controllable conversational AI system has become a critical challenge for enterprises. Parlant, as an AI Agent framework specifically designed for customer engagement scenarios, provides developers with a comprehensive solution. This article delves into Parlant's design philosophy, core architecture, and practical applications to help readers gain a thorough understanding of this innovative framework[^1].

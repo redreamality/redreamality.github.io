@@ -5,9 +5,6 @@ date: 2025-01-15
 tags: ["bond-movements", "interest-rates", "bond-prices", "fixed-income-basics", "investment-education"]
 lang: "en"
 ---
-
-# Why Do Bonds Move Opposite of Interest Rates?
-
 If you've been following financial news or checking your investment accounts, you might have noticed something puzzling: when interest rates go up, bond prices go down, and vice versa. This relationship seems counterintuitive at first - why would a bond's price change just because interest rates changed? The bond's payments are fixed, after all. Let me walk you through this fundamental relationship in a way that makes sense.
 
 ## The Basic Phenomenon: Bonds and Rates Move in Opposite Directions

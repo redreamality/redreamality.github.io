@@ -5,9 +5,6 @@ date: 2025-01-15
 tags: ["bonds", "interest-rates", "fixed-income", "bond-prices", "investment-education"]
 lang: "en"
 ---
-
-# Why Are Interest Rates and Bond Prices Inversely Related?
-
 The inverse relationship between interest rates and bond prices is one of the most fundamental concepts in finance, yet it's often misunderstood by new investors. Many people wonder: if a bond pays a fixed interest rate, why should its price change? The answer lies in the time value of money, the concept of opportunity cost, and the way markets price risk. Let me break this down in detail.
 
 ## The Time Value of Money: A Dollar Today Is Worth More Than a Dollar Tomorrow

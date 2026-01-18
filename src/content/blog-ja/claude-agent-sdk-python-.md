@@ -6,9 +6,6 @@ author: 'Remy'
 tags: ['claude code', 'vibe coding', 'python']
 lang: 'ja'
 ---
-
-# Claude Agent SDK (Python) 学習ガイド
-
 **ドキュメントバージョン**: 1.0  
 **生成日**: 2025-10-15  
 **SDKバージョン**: 0.1.3  

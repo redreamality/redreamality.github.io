@@ -6,9 +6,6 @@ source: "https://www.calnewport.com/books/deep-work/"
 tags: ["productivity", "focus", "reading"]
 lang: "en"
 ---
-
-# Notes on "Deep Work" by Cal Newport
-
 ## ROI Reading Method Analysis
 
 ### Level 1: Core Concepts (High ROI)

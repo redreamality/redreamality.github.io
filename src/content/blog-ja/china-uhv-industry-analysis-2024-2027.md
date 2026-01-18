@@ -7,9 +7,6 @@ tags: ['Quantitative', 'A-Share', 'UHV', 'Investment-Strategy']
 lang: 'ja'
 translatedFrom: 'china-uhv-industry-analysis-2024-2027'
 ---
-
-# **中国UHV産業状況の詳細分析：A株コアターゲットからサプライチェーンまで（2024-2027）**
-
 ## **パート1：マクロドライバー - UHV：「国家名刺」から「エネルギー高速道路」へ**
 
 ### **1.1 戦略的定義：なぜUHVが「再生可能エネルギー消費」の唯一の解決策なのか？**

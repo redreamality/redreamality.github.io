@@ -5,9 +5,6 @@ date: 2025-01-15
 tags: ["bond-yield", "beginners-guide", "fixed-income", "investment-education", "yield-basics"]
 lang: "en"
 ---
-
-# What Is a Bond Yield for Dummies?
-
 If you're new to investing, the concept of "bond yield" can seem confusing. What exactly is yield? How is it different from the coupon rate? Why does it matter? Don't worry - I'm going to explain bond yields in the simplest possible terms, using everyday examples and clear explanations that anyone can understand.
 
 ## The Basic Definition: What Is Bond Yield?

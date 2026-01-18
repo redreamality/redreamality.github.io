@@ -6,9 +6,6 @@ location: "オンライン技術共有会"
 lang: ja
 translatedFrom: "quantitative-trading"
 ---
-
-# クオンツトレーディング戦略の共有
-
 ## 主な内容
 
 ### 1. クオンツトレーディングの基礎

@@ -5,9 +5,6 @@ date: 2025-01-15
 tags: ["yield-curve", "bonds", "interest-rates", "economy", "recession-indicator"]
 lang: "en"
 ---
-
-# Why Are Bond Prices and Yields Inverted?
-
 If you've been following financial news, you've probably heard analysts talking about "yield curve inversion" and how it might signal an impending recession. But what exactly is an inverted yield curve, and why does it matter? Let's dive deep into this fascinating phenomenon that has historically been one of the most reliable predictors of economic downturns.
 
 ## First, Let's Clarify: It's Bond Yields That Are Inverted, Not Bond Prices

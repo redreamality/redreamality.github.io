@@ -7,9 +7,6 @@ tags: ["AI Development", "OpenSpec", "Spec-Driven Development", "SDD", "AI Agent
 lang: "en"
 translatedFrom: "openspec-guide"
 ---
-
-# OpenSpec Deep Dive: Spec-Driven Development Architecture & Practice in AI-Assisted Programming
-
 ## Introduction: The Paradigm Shift in AI-Assisted Programming
 
 As Large Language Model (LLM) capabilities grow exponentially, the software engineering field is experiencing profound transformation. Developers have shifted from traditional character-by-character coding to intent-driven orchestration. However, this shift hasn't come without costs. Current AI programming practices are plagued by a phenomenon called "vibe coding"—developers interact with AI through unstructured natural language conversations, with requirements scattered across lengthy chat logs, lacking persistence and systematization[^1].
