@@ -5,9 +5,6 @@ description: 'A comprehensive guide to advanced Obsidian usage, including free c
 author: 'Remy'
 tags: ['obsidian', 'productivity']
 ---
-
-# Advanced Obsidian Guide: Free Cloud Sync, AI Integration, Image Management and Mobile Configuration
-
 As a heavy note-taker, I've been searching for the perfect note-taking solution for years. After extensive exploration and practice, I've discovered that Obsidian is not just a note-taking app, but a highly customizable knowledge management system. Today, I want to share my advanced Obsidian usage experience, covering free cloud sync, AI integration, image management, and mobile configuration.
 
 ## Why Choose Obsidian?

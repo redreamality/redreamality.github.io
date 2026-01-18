@@ -7,9 +7,6 @@ tags: ["生産性", "集中", "読書"]
 lang: "ja"
 translatedFrom: "example-note"
 ---
-
-# 『DEEP WORK』読書ノート
-
 ## ROI読書法分析
 
 ### 第一層：核心概念（高ROI）

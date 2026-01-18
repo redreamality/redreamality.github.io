@@ -6,9 +6,6 @@ source: "https://github.com/github/spec-kit"
 tags: ["AI开发", "规范驱动开发", "SDD", "GitHub", "Spec Kit"]
 lang: "zh"
 ---
-
-# GitHub Spec Kit 深度指南：AI 驱动的规范开发方法论
-
 ## 生成式 AI 时代的软件工程范式转移
 
 在软件工程的演进历程中，需求定义与代码实现之间的鸿沟始终是导致项目失败、技术债务累积以及交付延期的核心症结。从早期的瀑布模型（Waterfall）强调"预先大量设计"（Big Design Up Front），到敏捷开发（Agile）提倡的"工作软件高于详尽文档"，行业一直在寻找平衡点。然而，随着以大语言模型（LLM）为核心的 AI 辅助编程工具——如 GitHub Copilot、Claude Code、Gemini Code Assist——的爆发式普及，传统的开发范式遭遇了前所未有的挑战。

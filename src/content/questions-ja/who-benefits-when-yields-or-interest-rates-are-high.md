@@ -6,9 +6,6 @@ tags: ["interest-rates", "high-yields", "winners-losers", "bond-markets", "inves
 lang: "ja"
 translatedFrom: "who-benefits-when-yields-or-interest-rates-are-high"
 ---
-
-# 利回りや金利が高いとき、誰が利益を得るのか？
-
 金利が上昇し債券利回りが高まると、金融市場の様相は劇的に変化します。一部の投資家、機関、セクターはこうした環境で繁栄する一方、苦境に立たされる者もいます。高金利から利益を得るのは誰かを理解することで、あなたのポートフォリオやキャリアを成功に向けて位置づけることができます。高金利環境での勝者について説明しましょう。
 
 ## 貯蓄者と現金保有者

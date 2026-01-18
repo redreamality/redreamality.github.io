@@ -5,9 +5,6 @@ description: 'In-depth analysis of China UHV industry chain, including macro dri
 author: 'Remy'
 tags: ['Quantitative', 'A-Share', 'UHV', 'Investment-Strategy']
 ---
-
-# **Deep Analysis of China UHV Industry Landscape: From A-Share Core Targets to Supply Chain (2024-2027)**
-
 ## **Part 1: Macro Drivers - UHV: From "National Business Card" to "Energy Superhighway"**
 
 ### **1.1 Strategic Definition: Why UHV is the Only Solution for "Renewable Energy Consumption"?**

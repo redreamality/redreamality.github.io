@@ -5,9 +5,6 @@ date: 2025-01-15
 tags: ["bond-rules", "5-percent-rule", "bond-investing", "investment-strategy", "fixed-income"]
 lang: "en"
 ---
-
-# What Is the 5% Rule for Bonds?
-
 If you've been researching bond investing, you may have come across something called the "5% rule." This is a heuristic or guideline that some investors and financial advisors use when making decisions about bonds. But what exactly is this rule, and is it actually useful? Let me walk you through the different interpretations of the 5% rule and when each applies.
 
 ## The Multiple Interpretations of the 5% Rule

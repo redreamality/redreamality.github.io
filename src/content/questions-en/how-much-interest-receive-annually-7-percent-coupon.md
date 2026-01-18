@@ -5,9 +5,6 @@ date: 2025-01-15
 tags: ["bond-interest", "coupon-rate", "face-value", "bond-calculation", "fixed-income-basics"]
 lang: "en"
 ---
-
-# How Much Interest Will You Receive Annually on a 7% Coupon Rate Bond with a $1000 Face Value?
-
 This is one of the most fundamental questions in bond investing, and the answer is straightforward once you understand how bonds work. Let me walk you through the calculation and explain the key concepts.
 
 ## The Simple Answer

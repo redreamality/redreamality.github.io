@@ -5,9 +5,6 @@ date: 2026-01-07
 tags: ["量化交易", "quantitative-trading", "trend", "momentum", "market-structure", "time-horizon"]
 lang: "en"
 ---
-
-# How do you define a trend?
-
 “Trend” is one of the most used words in trading—and one of the most abused. People say “the trend is up” as if it’s a fact like the weather, but trend is not an objective property of a market. Trend is a *statement you make after choosing a timeframe and a definition.*
 
 A definition that is both intuitive and quant-compatible is:

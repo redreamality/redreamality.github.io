@@ -7,9 +7,6 @@ tags: ['browser-extension', 'frontend-development', 'WXT']
 lang: 'zh'
 translatedFrom: 'the-2025-state-of-browser-extension-frameworks-a-comparative-analysis-of-plasmo-wxt-and-crxjs'
 ---
-
-# **2025年浏览器扩展框架现状：Plasmo、WXT 和 CRXJS 的对比分析**
-
 ## **第1部分：执行摘要**
 
 ### **1.1. 当前市场领导者**

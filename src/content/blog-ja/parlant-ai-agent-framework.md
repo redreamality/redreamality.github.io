@@ -7,9 +7,6 @@ tags: ['AI', 'agents', 'Parlant', 'conversational AI', 'customer engagement']
 lang: 'ja'
 translatedFrom: 'parlant-ai-agent-framework'
 ---
-
-# Parlant：顧客エンゲージメント向けに設計された AI Agent フレームワーク詳細解説
-
 ## はじめに
 
 AI Agent 技術が急速に発展する今日、強力で制御しやすい対話型 AI システムを構築することが企業にとって重要な課題となっています。Parlant は顧客エンゲージメントシナリオ専用に設計された AI Agent フレームワークとして、開発者に完全なソリューションを提供します。本記事では Parlant の設計理念、コアアーキテクチャ、実際の応用を深く探求し、この革新的なフレームワークの全体像を理解します[^1]。

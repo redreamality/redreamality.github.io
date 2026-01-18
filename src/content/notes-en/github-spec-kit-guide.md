@@ -7,9 +7,6 @@ tags: ["AI Development", "Spec-Driven Development", "SDD", "GitHub", "Spec Kit"]
 lang: "en"
 translatedFrom: "github-spec-kit-guide"
 ---
-
-# GitHub Spec Kit Deep Dive: AI-Driven Specification Development Methodology
-
 ## The Software Engineering Paradigm Shift in the Generative AI Era
 
 Throughout software engineering's evolution, the chasm between requirement definition and code implementation has remained a core cause of project failures, technical debt accumulation, and delivery delays. From the early Waterfall model's emphasis on "Big Design Up Front" to Agile's advocacy of "working software over comprehensive documentation," the industry has continuously sought balance. However, with the explosive adoption of LLM-powered AI programming tools—like GitHub Copilot, Claude Code, Gemini Code Assist—traditional development paradigms face unprecedented challenges.

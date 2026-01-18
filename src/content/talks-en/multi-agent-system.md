@@ -7,9 +7,6 @@ slides: "http://redreamality.com/multi-agent-system-slides"
 lang: en
 translatedFrom: "multi-agent-system"
 ---
-
-# Multi-Agent Systems: From Theory to Practice
-
 ## Presentation Content
 
 - [questions](/multi-agent-system-slides/questions) - Questions Overview

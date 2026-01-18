@@ -6,9 +6,6 @@ source: "https://github.com/Fission-AI/OpenSpec"
 tags: ["AI开发", "OpenSpec", "规格驱动开发", "SDD", "AI代理"]
 lang: "zh"
 ---
-
-# OpenSpec 深度研究报告：规格驱动开发在 AI 辅助编程中的架构与实践
-
 ## 引言：AI 辅助编程的范式转移
 
 随着大语言模型（LLM）能力的指数级增长，软件工程领域正经历一场深刻的变革。开发者从传统的逐行编码（Character-by-Character）转向了意图驱动的编排（Intent-Driven Orchestration）。然而，这种转变并非没有代价。在当前的 AI 编程实践中，普遍存在一种被称为"直觉式编程"（Vibe Coding）的现象——开发者通过非结构化的自然语言对话与 AI 交互，需求散落在冗长的聊天记录中，缺乏持久性和系统性[^1]。

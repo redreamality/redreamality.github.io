@@ -5,9 +5,6 @@ date: 2026-01-07
 tags: ["量化交易", "quantitative-trading", "swings", "market-structure", "trend", "multi-timeframe"]
 lang: "en"
 ---
-
-# What is the relationship between swings, structure, and trend?
-
 People often use “swing,” “structure,” and “trend” interchangeably, which creates endless confusion:
 
 - One person says “trend is up” because price is above a moving average.

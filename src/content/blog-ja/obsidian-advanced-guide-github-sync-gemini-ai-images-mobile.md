@@ -7,9 +7,6 @@ tags: ['obsidian', 'productivity']
 lang: 'ja'
 translatedFrom: 'obsidian-advanced-guide-github-sync-gemini-ai-images-mobile'
 ---
-
-# Obsidian 上級使用ガイド：無料クラウド同期、AI 連携、画像管理、モバイル設定
-
 ヘビーなノートユーザーとして、私は常に完璧なノートソリューションを探してきました。長い探索と実践を経て、Obsidian は単なるノートアプリではなく、高度にカスタマイズ可能な知識管理システムであることを発見しました。今日は、無料クラウド同期、AI 連携、画像管理、モバイル設定など、私の Obsidian 上級使用心得を共有したいと思います。
 
 ## なぜ Obsidian を選ぶのか？

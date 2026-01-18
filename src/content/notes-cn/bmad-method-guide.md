@@ -6,9 +6,6 @@ source: "https://github.com/bmad-code-org/BMAD-METHOD"
 tags: ["AI开发", "敏捷开发", "BMAD", "规格驱动开发", "多智能体系统"]
 lang: "zh"
 ---
-
-# BMAD-METHOD 使用指南：突破性敏捷AI驱动开发方法
-
 ## 执行摘要与核心方法论
 
 在生成式人工智能（Generative AI）重塑软件工程格局的当下，行业正经历一场从"辅助编码"（Copilot-assisted）向"代理驱动开发"（Agentic Development）的范式转移。早期的AI辅助开发模式，被业界戏称为"氛围编码"（Vibe Coding），即开发者通过随意的提示词（Prompt）与大语言模型（LLM）进行交互，生成碎片化的代码。这种模式虽然在构建原型（Prototyping）阶段表现出极高的效率，但在面对企业级应用、复杂系统架构以及长期维护需求时，往往因为上下文丢失（Context Loss）、幻觉（Hallucination）以及缺乏系统性规划而导致项目崩溃。

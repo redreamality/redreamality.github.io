@@ -5,9 +5,6 @@ date: 2025-01-15
 tags: ["bond-prices", "interest-rates", "rising-rates", "bond-investing", "fixed-income"]
 lang: "en"
 ---
-
-# Do Bond Prices Rise With Interest?
-
 This is one of the most common questions new investors ask about bonds, and the answer might surprise you. No, bond prices do not rise with interest rates - in fact, they do the opposite. When interest rates rise, bond prices fall. When interest rates fall, bond prices rise. This is one of the most fundamental relationships in finance, and understanding it is essential for any bond investor.
 
 ## The Short Answer: No, They Do The Opposite

@@ -11,9 +11,6 @@ description: '完成本指南后，你将能够：
 author: 'Remy'
 tags: ['claude code', 'vibe coding', 'python']
 ---
-
-# Claude Agent SDK (Python) 学习指南
-
 **文档版本**: 1.0
 **生成时间**: 2025-10-15
 **SDK 版本**: 0.1.3

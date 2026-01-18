@@ -5,9 +5,6 @@ description: 'A complete guide to the Claude Agent SDK, covering architecture, q
 author: 'Remy'
 tags: ['claude code', 'vibe coding', 'python']
 ---
-
-# Claude Agent SDK (Python) Learning Guide
-
 **Document Version**: 1.0  
 **Generated**: 2025-10-15  
 **SDK Version**: 0.1.3  

@@ -7,9 +7,6 @@ tags: ["AI Development", "Agile", "BMAD", "Spec-Driven Development", "Multi-Agen
 lang: "en"
 translatedFrom: "bmad-method-guide"
 ---
-
-# BMAD-METHOD Guide: Breakthrough Agile AI-Driven Development
-
 ## Executive Summary & Core Methodology
 
 As generative AI reshapes the software engineering landscape, the industry is experiencing a paradigm shift from "copilot-assisted coding" to "agentic development." Early AI-assisted development patterns, dubbed "vibe coding" by industry insiders, involve developers engaging in ad-hoc interactions with large language models (LLMs) through casual prompts, generating fragmented code. While highly efficient for prototyping, this approach often collapses when faced with enterprise applications, complex system architectures, and long-term maintenance needs due to context loss, hallucinations, and lack of systematic planning.

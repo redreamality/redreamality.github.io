@@ -5,9 +5,6 @@ description: '深入探讨Parlant这一专为客户互动场景打造的AI Agent
 author: 'Remy'
 tags: ['AI', 'agents', 'Parlant', 'conversational AI', 'customer engagement']
 ---
-
-# Parlant：专为客户互动设计的AI Agent框架深度解析
-
 ## 引言
 
 在AI Agent技术快速发展的今天，如何构建一个既强大又易于控制的对话式AI系统成为了企业面临的重要挑战。Parlant作为一个专门针对客户互动场景设计的AI Agent框架，为开发者提供了一套完整的解决方案。本文将深入探讨Parlant的设计理念、核心架构以及实际应用，帮助读者全面理解这一创新框架[^1]。
