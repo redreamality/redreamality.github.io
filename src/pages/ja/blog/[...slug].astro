@@ -108,7 +108,7 @@ const relatedItems = relatedPosts.map((relatedPost) => ({
               <span class="text-sm font-medium text-gray-600 dark:text-gray-300">{currentContent.tagsTitle}</span>
               {filteredTags.map((tag) => (
                 <a
-                  href={`${basePath}/tags/${tag}`}
+                  href={`${basePath}/tags/${tag}/`}
                   class="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
                 >
                   #{tag}
