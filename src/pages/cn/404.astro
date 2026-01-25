@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { detectLanguageFromPath, type Language } from '../../utils/i18n';
+import { type Language } from '../../utils/i18n';
+
+Astro.response.status = 200;
 
 // This is the Chinese 404 page (/cn/404 path)
 const lang: Language = 'zh';
@@ -26,7 +28,7 @@ const content = {
 };
 
 const currentContent = content[lang];
-const basePath = lang === 'zh' ? '/cn' : '';
+const homePath = '/cn/';
 ---
 
 <Layout title={currentContent.title}>
@@ -67,7 +69,7 @@ const basePath = lang === 'zh' ? '/cn' : '';
 
       <div class="mt-12 space-y-4">
         <a
-          href={basePath || '/'}
+          href={homePath}
           class="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full hover:from-blue-700 hover:to-purple-700 dark:from-blue-500 dark:to-purple-500 dark:hover:from-blue-600 dark:hover:to-purple-600 transition-all transform hover:scale-105 hover:shadow-lg"
         >
           <span class="mr-2">💭</span>
@@ -230,7 +232,7 @@ const basePath = lang === 'zh' ? '/cn' : '';
   }
 </style>
 
-<script define:vars={{ basePath }}>
+<script define:vars={{ homePath }}>
   let count = 2;
   const countdownElement = document.getElementById('countdown');
   
@@ -241,7 +243,7 @@ const basePath = lang === 'zh' ? '/cn' : '';
     }
     if (count <= 0) {
       clearInterval(timer);
-      window.location.href = basePath || '/';
+      window.location.href = homePath;
     }
   }, 1000);
 </script>
