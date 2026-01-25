@@ -1,7 +1,7 @@
 ---
 title: 'How to Understand "Linearity" in Linear Algebra?'
 pubDate: 2025-02-01T00:00:00.000Z
-description: 'How to understand "linearity" in linear algebra?'
+description: 'Explore the core concept of "linearity" in linear algebra. Understand additivity, homogeneity, and why matrices and determinants are essential tools in mathematics.'
 author: 'Remy'
 tags: ['linear-algebra', 'mathematics', 'linearity', 'education']
 ---
