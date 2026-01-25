@@ -1,7 +1,7 @@
 ---
 title: 'npm パッケージ推薦'
 pubDate: 2025-01-31T00:00:00.000Z
-description: 'npm パッケージ推薦'
+description: 'レジストリ管理、パッケージ管理、Node.jsバージョン管理など、開発環境の最適化と効率化に役立つ厳選されたnpmパッケージのリストを紹介します。'
 author: 'Remy'
 tags: ['npm', 'パッケージ']
 lang: 'ja'

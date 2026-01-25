@@ -1,7 +1,7 @@
 ---
 title: 'バイパスリスト付きローカルプロキシ：Windows バッチスクリプト'
 pubDate: 2025-08-06T00:00:00.000Z
-description: ''
+description: 'WindowsのWinHTTPプロキシ設定をバッチスクリプトで自動化する方法を学びます。開発ワークフローを効率化するためのローカルプロキシ設定とバイパスリストの定義について解説します。'
 author: 'Remy'
 tags: ['windows', 'プロキシ']
 lang: 'ja'

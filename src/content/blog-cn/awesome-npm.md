@@ -1,7 +1,7 @@
 ---
 title: 'npm 包推荐'
 pubDate: 2025-01-31T00:00:00.000Z
-description: 'npm 包推荐'
+description: '一份精选的 npm 常用包清单，涵盖了镜像源管理、包管理以及 Node.js 版本控制等核心工具，旨在帮助开发者优化开发环境并提升工作效率。'
 author: 'Remy'
 tags: ['npm', '包']
 ---

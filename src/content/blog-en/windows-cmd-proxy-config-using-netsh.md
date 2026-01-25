@@ -1,7 +1,7 @@
 ---
 title: 'Local Proxy with bypass list: a Windows Batch Script'
 pubDate: 2025-08-06T00:00:00.000Z
-description: ''
+description: 'Automate Windows WinHTTP proxy configuration with a batch script. Learn to set a local proxy and define bypass lists to streamline your development workflow.'
 author: 'Remy'
 tags: ['windows', 'proxy']
 ---
