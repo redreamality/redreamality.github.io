@@ -119,7 +119,7 @@ title: "多智能体系统"
 description: "多智能体系统，从基础到实践"
 date: 2025-02-28
 location: "线上分享"
-slides: "http://redreamality.com/multi-agent-system-slides"
+slides: "https://redreamality.com/multi-agent-system-slides"
 lang: zh
 translatedFrom: "multi-agent-system"
 ---
@@ -133,7 +133,7 @@ title: "Multi-Agent Systems: From Theory to Practice"
 description: "Multi-agent systems, from fundamentals to practical implementation"
 date: 2025-02-28
 location: "Online Presentation"
-slides: "http://redreamality.com/multi-agent-system-slides"
+slides: "https://redreamality.com/multi-agent-system-slides"
 lang: en
 translatedFrom: "multi-agent-system"
 ---
