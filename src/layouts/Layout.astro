@@ -3,6 +3,7 @@
 import '../styles/global.css';
 import 'katex/dist/katex.min.css';
 import LanguageToggle from '../components/LanguageToggle.astro';
+import AntiAdblock from '../components/AntiAdblock.astro';
 import {
   detectLanguageFromPath,
   t,
@@ -252,6 +253,7 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
                 </div>
             </div>
         </footer>
+        <AntiAdblock />
         <script>
             const siteHeader = document.querySelector('body > nav');
 

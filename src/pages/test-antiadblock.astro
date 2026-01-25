@@ -1,0 +1,77 @@
+<!--
+  Test page for Anti-Adblock functionality
+  This page is used to test the anti-adblock detection
+-->
+
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = "Anti-Adblock Test Page";
+const description = "This page tests the anti-adblock functionality";
+---
+
+<Layout title={title} description={description}>
+  <div class="prose dark:prose-invert max-w-none">
+    <h1>Anti-Adblock Test Page</h1>
+    <p>This page is used to test the anti-adblock detection functionality.</p>
+    
+    <div class="mt-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+      <h2>Test Instructions</h2>
+      <ol class="list-decimal pl-6">
+        <li>Open this page with an ad blocker enabled</li>
+        <li>You should see a message in the bottom right corner asking to disable the ad blocker</li>
+        <li>Disable your ad blocker for this site</li>
+        <li>Refresh the page - the message should disappear</li>
+      </ol>
+    </div>
+    
+    <div class="mt-8">
+      <h2>Ad Test Section</h2>
+      <p>This section contains a test ad element that helps detect ad blockers:</p>
+      <div class="adsbox" style="display: none;">Test ad element</div>
+    </div>
+    
+    <div class="mt-8">
+      <h2>Debug Information</h2>
+      <p id="debug-info">Checking ad block status...</p>
+      
+      <script>
+        // Debug script to show detection status
+        const checkAdBlockDebug = () => {
+          const testAd = document.createElement('div');
+          testAd.innerHTML = '&nbsp;';
+          testAd.className = 'adsbox';
+          testAd.style.position = 'absolute';
+          testAd.style.top = '-9999px';
+          testAd.style.left = '-9999px';
+          testAd.style.width = '1px';
+          testAd.style.height = '1px';
+          testAd.style.overflow = 'hidden';
+          
+          document.body.appendChild(testAd);
+          
+          const isBlocked = testAd.offsetHeight === 0 || 
+                           testAd.offsetWidth === 0 || 
+                           testAd.offsetLeft === -9999 ||
+                           testAd.clientHeight === 0 ||
+                           testAd.clientWidth === 0 ||
+                           window.getComputedStyle(testAd).display === 'none';
+          
+          document.body.removeChild(testAd);
+          
+          const debugInfo = document.getElementById('debug-info');
+          if (debugInfo) {
+            debugInfo.textContent = isBlocked 
+              ? 'Ad blocker detected: YES' 
+              : 'Ad blocker detected: NO';
+            debugInfo.style.color = isBlocked ? '#dc2626' : '#10b981';
+            debugInfo.style.fontWeight = 'bold';
+          }
+        };
+        
+        // Run debug check after a short delay
+        setTimeout(checkAdBlockDebug, 500);
+      </script>
+    </div>
+  </div>
+</Layout>
