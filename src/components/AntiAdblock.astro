@@ -1,19 +1,8 @@
-<!--
-  Anti-Adblock Component
-  
-  This component detects ad blockers and shows a message to users
-  encouraging them to disable their ad blocker to support the site.
-  
-  Features:
-  - Detects common ad blockers by checking if adsbygoogle.js is blocked
-  - Shows a friendly message asking users to whitelist the site
-  - Provides instructions for different ad blockers
-  - Respects user privacy and doesn't track users
-  - Configurable behavior and styling
--->
-
 ---
-// Import configuration
+// Anti-Adblock Component
+// This component detects ad blockers and shows a modal to users
+// encouraging them to disable their ad blocker to support the site.
+
 import { getAntiAdblockConfig } from '../config/antiAdblockConfig';
 
 const config = getAntiAdblockConfig();
@@ -22,47 +11,65 @@ const config = getAntiAdblockConfig();
 <script is:inline define:vars={{ config }}>
   // Anti-adblock detection logic
   const checkAdBlock = () => {
+    if (!config.enabled) return false;
+
     // Create a test ad element
+    // We use common ad-related class names that are likely to be blocked
     const testAd = document.createElement('div');
     testAd.innerHTML = '&nbsp;';
-    testAd.className = 'adsbox';
+    testAd.className = 'adsbox ad-unit google-ads ads-placement';
     testAd.style.position = 'absolute';
-    testAd.style.top = '-9999px';
-    testAd.style.left = '-9999px';
+    testAd.style.top = '-1000px';
+    testAd.style.left = '-1000px';
     testAd.style.width = '1px';
     testAd.style.height = '1px';
-    testAd.style.overflow = 'hidden';
     
     // Add the test element to the body
     document.body.appendChild(testAd);
     
     // Check if the element is blocked by ad blockers
-    // Ad blockers typically hide or remove elements with ad-related class names
+    // We must check this while the element is in the DOM
     const isBlocked = () => {
-      return testAd.offsetHeight === 0 || 
-             testAd.offsetWidth === 0 || 
-             testAd.offsetLeft === -9999 ||
-             testAd.clientHeight === 0 ||
-             testAd.clientWidth === 0 ||
-             window.getComputedStyle(testAd).display === 'none';
+      if (!testAd.parentElement) return true; // Already removed or not added?
+      
+      const style = window.getComputedStyle(testAd);
+      const isHidden = style.display === 'none' || 
+                       style.visibility === 'hidden' || 
+                       testAd.offsetHeight === 0 || 
+                       testAd.offsetWidth === 0 || 
+                       testAd.clientHeight === 0 || 
+                       testAd.clientWidth === 0;
+                       
+      return isHidden;
     };
+    
+    const blocked = isBlocked();
     
     // Remove the test element
     document.body.removeChild(testAd);
     
-    return isBlocked();
+    return blocked;
   };
   
   // Show the anti-adblock message if ad blocker is detected
-  const showAntiAdblockMessage = () => {
+  const showAntiAdblock = () => {
     const antiAdblockElement = document.getElementById('anti-adblock-message');
+    const backdrop = document.getElementById('anti-adblock-backdrop');
+    
     if (antiAdblockElement) {
       antiAdblockElement.style.display = 'block';
+    }
+    
+    if (backdrop && config.styling.mode === 'modal') {
+      backdrop.style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
     }
   };
   
   // Initialize the anti-adblock detection
   const initAntiAdblock = () => {
+    if (!config.enabled) return;
+
     // Check if we should show the message only once per session
     if (config.showOncePerSession) {
       const sessionKey = 'antiAdblockShown';
@@ -71,15 +78,24 @@ const config = getAntiAdblockConfig();
       }
     }
     
-    // Wait a bit to allow ad blockers to process the page
-    setTimeout(() => {
+    const runCheck = () => {
       if (checkAdBlock()) {
-        showAntiAdblockMessage();
+        showAntiAdblock();
         if (config.showOncePerSession) {
           sessionStorage.setItem('antiAdblockShown', 'true');
         }
       }
-    }, 1000);
+    };
+
+    // Wait for the page to be fully loaded and then some
+    // Ad blockers often take a moment to kick in
+    if (document.readyState === 'complete') {
+      setTimeout(runCheck, 1000);
+    } else {
+      window.addEventListener('load', () => {
+        setTimeout(runCheck, 1000);
+      });
+    }
   };
   
   // Run the detection when the page loads
@@ -89,8 +105,26 @@ const config = getAntiAdblockConfig();
 </script>
 
 <style>
+  #anti-adblock-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 9998;
+  }
+
   #anti-adblock-message {
     display: none;
+    z-index: 9999;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Notification Mode */
+  #anti-adblock-message.mode-notification {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -100,68 +134,117 @@ const config = getAntiAdblockConfig();
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Modal Mode */
+  #anti-adblock-message.mode-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 550px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
   }
   
   #anti-adblock-message h3 {
     margin-top: 0;
-    color: #333;
-    font-size: 1.1rem;
+    color: #1a202c;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 20px;
   }
   
   #anti-adblock-message p {
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin-bottom: 15px;
+    color: #4a5568;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
   }
   
   #anti-adblock-message .close-btn {
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 15px;
+    right: 20px;
     background: none;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     cursor: pointer;
-    color: #999;
+    color: #a0aec0;
     padding: 0;
     line-height: 1;
   }
-  
+
   #anti-adblock-message .close-btn:hover {
-    color: #666;
+    color: #4a5568;
+  }
+
+  .mode-modal .close-btn {
+    display: none; /* Mandatory in modal mode */
   }
   
   #anti-adblock-message .instructions {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
-    font-size: 0.85rem;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+    text-align: left;
+    font-size: 0.95rem;
   }
-  
-  #anti-adblock-message .instructions a {
-    color: #0066cc;
-    text-decoration: underline;
+
+  #anti-adblock-message .instructions h4 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: #2d3748;
   }
-  
-  #anti-adblock-message .instructions a:hover {
-    color: #004499;
+
+  #anti-adblock-message .refresh-btn {
+    display: inline-block;
+    background-color: #3182ce;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px rgba(49, 130, 206, 0.2);
+  }
+
+  #anti-adblock-message .refresh-btn:hover {
+    background-color: #2b6cb0;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 8px rgba(49, 130, 206, 0.3);
+  }
+
+  #anti-adblock-message .refresh-btn:active {
+    transform: translateY(0);
   }
   
   @media (max-width: 768px) {
-    #anti-adblock-message {
+    #anti-adblock-message.mode-notification {
       bottom: 10px;
       right: 10px;
       left: 10px;
       max-width: none;
     }
+    
+    #anti-adblock-message.mode-modal {
+      padding: 30px 20px;
+    }
   }
   
+  /* Dark mode support */
   .dark #anti-adblock-message {
-    background-color: #2d3748;
-    border-color: #4a5568;
+    background-color: #1a202c;
+    border-color: #2d3748;
     color: #e2e8f0;
   }
   
@@ -172,40 +255,38 @@ const config = getAntiAdblockConfig();
   .dark #anti-adblock-message p {
     color: #cbd5e0;
   }
-  
-  .dark #anti-adblock-message .close-btn {
-    color: #a0aec0;
+
+  .dark #anti-adblock-message .instructions {
+    border-top-color: #2d3748;
   }
   
+  .dark #anti-adblock-message .instructions h4 {
+    color: #e2e8f0;
+  }
+
   .dark #anti-adblock-message .close-btn:hover {
-    color: #718096;
-  }
-  
-  .dark #anti-adblock-message .instructions a {
-    color: #63b3ed;
-  }
-  
-  .dark #anti-adblock-message .instructions a:hover {
-    color: #4299e1;
+    color: #edf2f7;
   }
 </style>
 
-<div id="anti-adblock-message">
-  <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
+<div id="anti-adblock-backdrop"></div>
+<div id="anti-adblock-message" class={`mode-${config.styling.mode}`}>
+  {config.styling.mode === 'notification' && (
+    <button class="close-btn" onclick="document.getElementById('anti-adblock-message').style.display='none'">&times;</button>
+  )}
   <h3>{config.message.title}</h3>
   <p>
     {config.message.content}
   </p>
   <div class="instructions">
-    <p>
-      {config.message.instructions}
-      Here's how:
-    </p>
-    <ul style="padding-left: 20px; margin: 10px 0;">
-      <li><strong>uBlock Origin:</strong> Click the uBlock icon → Click the power button to disable for this site</li>
-      <li><strong>AdBlock:</strong> Click the AdBlock icon → "Don't run on this page"</li>
-      <li><strong>AdGuard:</strong> Click the AdGuard icon → "Pause on this website"</li>
+    <h4>How to whitelist our site:</h4>
+    <p style="margin-bottom: 12px;">{config.message.instructions}</p>
+    <ul style="padding-left: 20px; margin: 10px 0; color: inherit;">
+      <li style="margin-bottom: 8px;"><strong>uBlock Origin:</strong> Click the uBlock icon and then the large power button.</li>
+      <li style="margin-bottom: 8px;"><strong>AdBlock:</strong> Click the AdBlock icon and select "Don't run on pages on this site".</li>
+      <li style="margin-bottom: 8px;"><strong>AdGuard:</strong> Click the AdGuard icon and toggle the protection off for this site.</li>
     </ul>
-    <p>Thank you for your support! 🙏</p>
   </div>
+  <button class="refresh-btn" onclick="window.location.reload()">I've disabled it, refresh the page</button>
+  <p style="margin-top: 20px; font-size: 0.85rem; color: #a0aec0;">Thank you for your understanding and support! 🙏</p>
 </div>
