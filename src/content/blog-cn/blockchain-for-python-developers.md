@@ -372,7 +372,7 @@ tags: ['区块链', 'python']
 
   - **Truffle Suite**：一个开发环境、测试框架和资产管道。
 
-    - **URL**：[trufflesuite.com](https://www.trufflesuite.com/)
+    - **URL**：[trufflesuite.com](https://archive.trufflesuite.com/)
 
   - **Hardhat**：一个灵活的Ethereum开发环境。
 
@@ -388,7 +388,7 @@ tags: ['区块链', 'python']
 
   - **语言**：使用Rust构建。
 
-  - **资源**：[Polkadot文档](https://wiki.polkadot.network/)
+  - **资源**：[Polkadot文档](https://wiki.polkadot.com/)
 
 - **Cosmos**：专注于使构建独立、可扩展且互操作的区块链变得容易。
 

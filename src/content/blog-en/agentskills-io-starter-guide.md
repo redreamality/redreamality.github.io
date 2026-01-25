@@ -1447,7 +1447,7 @@ The future is agentic - AI systems that can actually help us accomplish tasks, n
 ### Official Documentation
 - **Claude Agent Skills**: [docs.anthropic.com/en/docs/agents-and-tools](https://docs.anthropic.com/en/docs/agents-and-tools)
 - **OpenAI Function Calling**: [platform.openai.com/docs/guides/function-calling](https://platform.openai.com/docs/guides/function-calling)
-- **LangChain Tools**: [python.langchain.com/docs/modules/agents/tools](https://python.langchain.com/docs/modules/agents/tools)
+- **LangChain Tools**: [python.langchain.com/docs/modules/agents/tools](https://reference.langchain.com/python/langchain/agents/)
 
 ### Open Source Projects
 - **AutoGPT**: Autonomous AI agent framework

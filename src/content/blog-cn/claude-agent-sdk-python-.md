@@ -165,7 +165,7 @@ echo 'export ANTHROPIC_API_KEY="sk-ant-api03-..."' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-从 https://console.anthropic.com/ 获取 API Key。
+从 https://platform.claude.com/ 获取 API Key。
 
 #### 步骤 4: 安装 SDK
 
@@ -1101,7 +1101,7 @@ anyio.run(main)
    - 尝试不同的系统提示
 
 **推荐资源**:
-- 官方文档: https://docs.anthropic.com/en/docs/claude-code/sdk/sdk-python
+- 官方文档: https://code.claude.com/docs/en/sdk/sdk-python
 - 示例代码: `examples/quick_start.py`
 - 教程视频: (待官方发布)
 
@@ -1135,8 +1135,8 @@ anyio.run(main)
    - 构建一个多轮对话的聊天应用
 
 **推荐资源**:
-- Hook 文档: https://docs.anthropic.com/en/docs/claude-code/hooks
-- MCP 文档: https://docs.anthropic.com/en/docs/claude-code/mcp
+- Hook 文档: https://code.claude.com/docs/en/hooks
+- MCP 文档: https://code.claude.com/docs/en/mcp
 - 示例代码: `examples/` 目录
 
 ### 7.3 高级用户路径（1-2 周）
@@ -1382,10 +1382,10 @@ python -m mypy your_script.py
 
 ### 9.1 官方文档
 
-- **SDK 文档**: https://docs.anthropic.com/en/docs/claude-code/sdk/sdk-python
-- **Claude Code 文档**: https://docs.anthropic.com/en/docs/claude-code/
-- **API 参考**: https://docs.anthropic.com/en/api/agent-sdk/python
-- **迁移指南**: https://docs.anthropic.com/en/docs/claude-code/sdk/migration-guide
+- **SDK 文档**: https://code.claude.com/docs/en/sdk/sdk-python
+- **Claude Code 文档**: https://code.claude.com/docs/en/
+- **API 参考**: https://platform.claude.com/docs/en/api/agent-sdk/python
+- **迁移指南**: https://code.claude.com/docs/en/sdk/migration-guide
 
 ### 9.2 示例代码
 
@@ -1542,6 +1542,6 @@ ClaudeAgentOptions(
 **获取帮助**:
 - Discord: https://discord.com/invite/anthropic
 - GitHub Issues: https://github.com/anthropics/claude-agent-sdk-python/issues
-- 文档: https://docs.anthropic.com/
+- 文档: https://code.claude.com/docs/en/
 
 祝你使用 Claude Agent SDK 构建出色的应用！🚀

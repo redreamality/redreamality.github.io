@@ -95,7 +95,7 @@ lang: 'zh'
       通用网页交互数据集，覆盖多样化DOM操作与用户轨迹    
     - WebArena: GitHub - web-arena-x/webarena: Code repo for "WebArena: A Realistic Web Environment for Building Aut\
       真实网页环境测试平台，集成4个应用与工具库        
-    - AgentInstruct: https://huggingface.co/datasets/THUDM/AgentInstruct\
+    - AgentInstruct: https://huggingface.co/datasets/zai-org/AgentInstruct\
       高质量智能体指令数据集，增强模型任务泛化能力        
       
 - 评测指标
@@ -118,7 +118,7 @@ lang: 'zh'
     - 任务难度分布（Task Difficulty Distribution）
       - 不同耗时任务的占比（简单/中等/困难/极难）
     - 任务成功率
-      - 参考：https://www.restack.io/p/multi-agent-systems-answer-llm-evaluation-cat-ai
+      - 参考：https://restack.io/
       - 该指标衡量代理成功完成的任务的百分比，直接表明整体效率。
       - **公式**：
         $$ \text{Task Success Rate} = \frac{\text{成功完成的任务数}}{\text{总任务数}} \times 100\% $$

@@ -160,7 +160,7 @@ echo 'export ANTHROPIC_API_KEY="sk-ant-api03-..."' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-Obtain your key at https://console.anthropic.com/.
+Obtain your key at https://platform.claude.com/.
 
 #### Step 4: Install the SDK
 

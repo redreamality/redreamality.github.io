@@ -90,7 +90,7 @@ lang: 'en'
       General web interaction dataset covering diverse DOM operations and user trajectories
     - WebArena: GitHub - web-arena-x/webarena: Code repo for "WebArena: A Realistic Web Environment for Building Autonomous Agents"
       Real web environment testing platform integrating 4 applications and tool libraries
-    - AgentInstruct: https://huggingface.co/datasets/THUDM/AgentInstruct
+    - AgentInstruct: https://huggingface.co/datasets/zai-org/AgentInstruct
       High-quality agent instruction dataset enhancing model task generalization capabilities
 
 - Evaluation Metrics
@@ -114,23 +114,23 @@ lang: 'en'
       - Proportion of tasks with different time requirements (simple/medium/difficult/extremely difficult)
 
     - Task Success Rate
-      - Reference: https://www.restack.io/p/multi-agent-systems-answer-llm-evaluation-cat-ai
+      - Reference: https://restack.io/
       - This metric measures the percentage of tasks successfully completed by agents, directly indicating overall efficiency.
       - **Formula**:
         $$ \text{Task Success Rate} = \frac{\text{Number of Successfully Completed Tasks}}{\text{Total Number of Tasks}} \times 100\% $$
 
     - Collaboration Efficiency
-      - Reference: https://www.restack.io/p/multi-agent-systems-answer-llm-evaluation-cat-ai
+      - Reference: https://restack.io/
       - Evaluates how effectively multiple agents cooperate to achieve common goals
 
     - Task Allocation Accuracy
-      - Reference: https://www.restack.io/p/multi-agent-systems-answer-llm-evaluation-cat-ai
+      - Reference: https://restack.io/
       - Whether tasks are assigned to the most suitable agents
       - **Formula**:
         $$ \text{Task Allocation Accuracy} = \frac{\text{Number of Correctly Allocated Tasks}}{\text{Total Number of Tasks}} \times 100\% $$
 
     - Task Completion Accuracy
-      - Reference: https://www.restack.io/p/multi-agent-systems-answer-llm-evaluation-cat-ai
+      - Reference: https://restack.io/
       - Accuracy of output results
       - **Formula**:
         $$ \text{Task Completion Accuracy} = \frac{\text{Number of Correct Output Results}}{\text{Total Number of Completed Tasks}} \times 100\% $$

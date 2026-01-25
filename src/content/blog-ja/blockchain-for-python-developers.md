@@ -374,7 +374,7 @@ Python が道を開きますが、Solidity は Ethereum スマートコントラ
 
   - **Truffle Suite**：開発環境、テストフレームワーク、資産パイプライン。
 
-    - **URL**：[trufflesuite.com](https://www.trufflesuite.com/)
+    - **URL**：[trufflesuite.com](https://archive.trufflesuite.com/)
 
   - **Hardhat**：柔軟な Ethereum 開発環境。
 
@@ -390,7 +390,7 @@ Python が道を開きますが、Solidity は Ethereum スマートコントラ
 
   - **言語**：Rust で構築。
 
-  - **リソース**：[Polkadot ドキュメント](https://wiki.polkadot.network/)
+  - **リソース**：[Polkadot ドキュメント](https://wiki.polkadot.com/)
 
 - **Cosmos**：独立した、スケーラブルで相互運用可能なブロックチェーンの構築を容易にすることに焦点。
 
