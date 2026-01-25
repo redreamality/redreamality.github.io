@@ -19,16 +19,17 @@ const description = "This page tests the anti-adblock functionality";
       <h2>Test Instructions</h2>
       <ol class="list-decimal pl-6">
         <li>Open this page with an ad blocker enabled</li>
-        <li>You should see a message in the bottom right corner asking to disable the ad blocker</li>
+        <li>You should see a full-screen modal asking you to disable the ad blocker</li>
+        <li>You will not be able to access the page content until the ad blocker is disabled</li>
         <li>Disable your ad blocker for this site</li>
-        <li>Refresh the page - the message should disappear</li>
+        <li>Click the "I've disabled it, refresh the page" button - the modal should disappear</li>
       </ol>
     </div>
     
     <div class="mt-8">
       <h2>Ad Test Section</h2>
       <p>This section contains a test ad element that helps detect ad blockers:</p>
-      <div class="adsbox" style="display: none;">Test ad element</div>
+      <div class="adsbox ad-unit google-ads" style="display: none;">Test ad element</div>
     </div>
     
     <div class="mt-8">
@@ -40,37 +41,40 @@ const description = "This page tests the anti-adblock functionality";
         const checkAdBlockDebug = () => {
           const testAd = document.createElement('div');
           testAd.innerHTML = '&nbsp;';
-          testAd.className = 'adsbox';
+          testAd.className = 'adsbox ad-unit google-ads';
           testAd.style.position = 'absolute';
           testAd.style.top = '-9999px';
           testAd.style.left = '-9999px';
           testAd.style.width = '1px';
           testAd.style.height = '1px';
-          testAd.style.overflow = 'hidden';
           
           document.body.appendChild(testAd);
           
-          const isBlocked = testAd.offsetHeight === 0 || 
-                           testAd.offsetWidth === 0 || 
-                           testAd.offsetLeft === -9999 ||
-                           testAd.clientHeight === 0 ||
-                           testAd.clientWidth === 0 ||
-                           window.getComputedStyle(testAd).display === 'none';
+          const isBlocked = () => {
+            const style = window.getComputedStyle(testAd);
+            return testAd.offsetHeight === 0 || 
+                   testAd.offsetWidth === 0 || 
+                   testAd.clientHeight === 0 ||
+                   testAd.clientWidth === 0 ||
+                   style.display === 'none' ||
+                   style.visibility === 'hidden';
+          };
           
+          const blocked = isBlocked();
           document.body.removeChild(testAd);
           
           const debugInfo = document.getElementById('debug-info');
           if (debugInfo) {
-            debugInfo.textContent = isBlocked 
+            debugInfo.textContent = blocked 
               ? 'Ad blocker detected: YES' 
               : 'Ad blocker detected: NO';
-            debugInfo.style.color = isBlocked ? '#dc2626' : '#10b981';
+            debugInfo.style.color = blocked ? '#dc2626' : '#10b981';
             debugInfo.style.fontWeight = 'bold';
           }
         };
         
         // Run debug check after a short delay
-        setTimeout(checkAdBlockDebug, 500);
+        setTimeout(checkAdBlockDebug, 1500);
       </script>
     </div>
   </div>

@@ -19,8 +19,8 @@ describe('Anti-Adblock Configuration', () => {
     
     expect(config).toBeDefined();
     expect(config.enabled).toBe(true);
-    expect(config.message.title).toContain('Hello');
-    expect(config.showOncePerSession).toBe(true);
+    expect(config.message.title).toContain('Ad Blocker');
+    expect(config.showOncePerSession).toBe(false);
   });
 
   it('should allow custom configuration', () => {
@@ -48,7 +48,7 @@ describe('Anti-Adblock Configuration', () => {
     
     expect(updatedConfig.enabled).toBe(false);
     // Other properties should remain from default
-    expect(updatedConfig.message.title).toContain('Hello');
+    expect(updatedConfig.message.title).toContain('Ad Blocker');
   });
 });
 

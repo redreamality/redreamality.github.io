@@ -1,14 +1,15 @@
 # Anti-Adblock Module
 
-This module detects ad blockers and shows a friendly message to users encouraging them to disable their ad blocker to support the site.
+This module detects ad blockers and shows a modal message to users, encouraging them to disable their ad blocker to support the site.
 
 ## Features
 
-- **Ad Block Detection**: Detects common ad blockers by checking if ad-related elements are blocked
-- **User-Friendly Message**: Shows a polite, non-intrusive message asking users to whitelist the site
-- **Configurable**: Customize behavior, messages, and styling through configuration
-- **Privacy-Friendly**: Doesn't track users or collect personal data
-- **Session Management**: Option to show message only once per session
+- **Ad Block Detection**: Detects common ad blockers by checking if ad-related elements are blocked or hidden.
+- **Full-Screen Modal**: Shows a modal that covers the content until the ad blocker is disabled.
+- **Friendly Explanation**: Provides a polite explanation of why ads are necessary and how to whitelist the site.
+- **Configurable**: Customize behavior, messages, and styling through configuration.
+- **Privacy-Friendly**: Doesn't track users or collect personal data.
+- **Mandatory Refresh**: Once disabled, users refresh the page to access the content.
 
 ## Installation
 
@@ -36,6 +37,7 @@ export interface AntiAdblockConfig {
   
   // Styling options for the anti-adblock message
   styling: {
+    mode: 'notification' | 'modal';
     position: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
     backgroundColor: string;
     textColor: string;
@@ -52,10 +54,10 @@ export interface AntiAdblockConfig {
 
 ## How It Works
 
-1. **Detection**: The module creates a hidden test element with ad-related class names
-2. **Analysis**: Checks if the element is hidden or modified by ad blockers
-3. **Response**: If blocked, shows a friendly message with instructions
-4. **User Control**: Users can dismiss the message with the close button
+1. **Detection**: The module creates a hidden test element with common ad-related class names (e.g., `adsbox`, `ad-unit`, `google-ads`).
+2. **Analysis**: Checks if the element is hidden or removed from the DOM by ad blockers while it is still in the document.
+3. **Response**: If blocked, shows a modal that covers the whole screen and prevents interaction with the underlying content.
+4. **User Control**: In modal mode, the user must disable their ad blocker and refresh the page to continue.
 
 ## Testing
 
@@ -84,46 +86,37 @@ const defaultConfig: AntiAdblockConfig = {
 
 ## Best Practices
 
-1. **Be Polite**: The message should be friendly and non-confrontational
-2. **Explain Value**: Tell users why ads are important for your site
-3. **Provide Instructions**: Make it easy for users to whitelist your site
-4. **Respect Privacy**: Don't track users who dismiss the message
-5. **Don't Overdo It**: Show the message only once per session
+1. **Be Polite**: The message should be friendly and non-confrontational.
+2. **Explain Value**: Tell users why ads are important for your site (e.g., keeping content free).
+3. **Provide Instructions**: Make it easy for users to whitelist your site for common blockers like uBlock Origin, AdBlock, and AdGuard.
+4. **Consistency**: The current configuration enforces the modal on every page load if an ad blocker is detected to ensure support.
 
 ## Technical Details
 
 ### Detection Methods
 
 The module uses multiple detection techniques:
-- Element dimension checking (height, width)
-- Position verification
-- CSS display property checking
-- Multiple ad-related class names
+- Element dimension checking (height, width, clientHeight, clientWidth)
+- CSS display and visibility property checking
+- Multiple common ad-related class names
 
 ### Performance Impact
 
-- Minimal: The detection runs asynchronously after page load
-- Lightweight: Uses simple DOM operations
-- Non-blocking: Doesn't interfere with page rendering
+- Minimal: The detection runs asynchronously after page load or after a short delay.
+- Lightweight: Uses simple DOM operations.
+- Non-blocking: Doesn't interfere with initial page rendering.
 
 ## Troubleshooting
 
 **Issue**: Message doesn't appear even with ad blocker enabled
-- **Solution**: Check browser console for errors
-- **Solution**: Verify the component is properly imported in Layout.astro
-- **Solution**: Ensure `enabled: true` in configuration
+- **Solution**: Check browser console for errors.
+- **Solution**: Verify the component is properly imported in `Layout.astro`.
+- **Solution**: Ensure `enabled: true` in configuration.
+- **Solution**: Some ad blockers might need a few seconds to trigger; the script waits 1 second by default.
 
 **Issue**: Message appears when no ad blocker is active
-- **Solution**: Adjust sensitivity setting to 'low'
-- **Solution**: Check for other browser extensions that might interfere
-
-## Future Enhancements
-
-- Multiple message templates
-- A/B testing for different messages
-- Analytics integration (opt-in)
-- Localization support for different languages
-- Custom styling themes
+- **Solution**: Ensure no other browser extensions (like privacy extensions) are blocking elements with "ad" in their class name.
+- **Solution**: Check if the test element is being correctly added and analyzed before being removed.
 
 ## License
 

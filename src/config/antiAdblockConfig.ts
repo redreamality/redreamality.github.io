@@ -17,6 +17,7 @@ export interface AntiAdblockConfig {
   
   // Styling options for the anti-adblock message
   styling: {
+    mode: 'notification' | 'modal';
     position: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
     backgroundColor: string;
     textColor: string;
@@ -34,18 +35,19 @@ export interface AntiAdblockConfig {
 const defaultConfig: AntiAdblockConfig = {
   enabled: true,
   message: {
-    title: '👋 Hello there!',
-    content: 'It looks like you\'re using an ad blocker. We understand - ads can be annoying! However, ads help us keep this site running and provide free content.',
-    instructions: 'Please consider supporting us by whitelisting this site in your ad blocker.'
+    title: 'Ad Blocker Detected',
+    content: 'We noticed that you are using an ad blocker. This site relies on advertisements to provide free content and stay operational.',
+    instructions: 'To continue accessing our content, please disable your ad blocker or whitelist our site. Once you\'ve disabled it, please refresh the page.'
   },
   styling: {
+    mode: 'modal',
     position: 'bottom-right',
     backgroundColor: '#f8f9fa',
     textColor: '#333',
     borderColor: '#dee2e6'
   },
   sensitivity: 'medium',
-  showOncePerSession: true
+  showOncePerSession: false
 };
 
 export function getAntiAdblockConfig(): AntiAdblockConfig {
