@@ -95,7 +95,7 @@ lang: 'zh'
       通用网页交互数据集，覆盖多样化DOM操作与用户轨迹    
     - WebArena: GitHub - web-arena-x/webarena: Code repo for "WebArena: A Realistic Web Environment for Building Aut\
       真实网页环境测试平台，集成4个应用与工具库        
-    - AgentInstruct: https://huggingface.co/datasets/THUDM/AgentInstruct\
+    - AgentInstruct: https://huggingface.co/datasets/zai-org/AgentInstruct\
       高质量智能体指令数据集，增强模型任务泛化能力        
       
 - 评测指标
