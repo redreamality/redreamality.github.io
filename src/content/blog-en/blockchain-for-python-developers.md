@@ -372,7 +372,7 @@ Ready to level up? Here's where you can dive deeper.
 
   - **Truffle Suite**: A development environment, testing framework, and asset pipeline.
 
-    - **URL**: [trufflesuite.com](https://www.trufflesuite.com/)
+    - **URL**: [archive.trufflesuite.com](https://archive.trufflesuite.com/)
 
   - **Hardhat**: A flexible Ethereum development environment.
 
@@ -388,7 +388,7 @@ Ready to level up? Here's where you can dive deeper.
 
   - **Language**: Built with Rust.
 
-  - **Resource**: [Polkadot Documentation](https://wiki.polkadot.network/)
+  - **Resource**: [Polkadot Documentation](https://wiki.polkadot.com/)
 
 - **Cosmos**: Focuses on making it easy to build independent, scalable, and interoperable blockchains.
 

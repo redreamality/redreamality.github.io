@@ -950,9 +950,9 @@ AI 代理技能正在改变我们与 AI 系统交互的方式。在 2026 年及�
 ## 附加资源
 
 ### 官方文档
-- **Claude 代理技能**：[docs.anthropic.com/en/docs/agents-and-tools](https://docs.anthropic.com/en/docs/agents-and-tools)
+- **Claude 代理技能**：[platform.claude.com/docs/en/agents-and-tools/tool-use/overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)
 - **OpenAI 函数调用**：[platform.openai.com/docs/guides/function-calling](https://platform.openai.com/docs/guides/function-calling)
-- **LangChain 工具**：[python.langchain.com/docs/modules/agents/tools](https://python.langchain.com/docs/modules/agents/tools)
+- **LangChain 工具**：[reference.langchain.com/python/langchain/agents/](https://reference.langchain.com/python/langchain/agents/)
 
 ### 开源项目
 - **AutoGPT**：自主 AI 代理框架

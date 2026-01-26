@@ -53,7 +53,7 @@ const basePath = '/ja';
             <article class="bg-white border border-gray-200 rounded-lg shadow-md p-6 dark:bg-gray-800 dark:border-gray-700">
               <div class="flex flex-col space-y-4">
                 <div>
-                  <a href={`${basePath}/garden/notes/${note.slug}`}>
+                  <a href={`${basePath}/garden/notes/${note.slug}/`}>
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                       {note.data.title}
                     </h2>
@@ -79,7 +79,7 @@ const basePath = '/ja';
                 <div class="flex justify-between items-center pt-4">
                   <div class="flex gap-4">
                     <a
-                      href={`${basePath}/garden/notes/${note.slug}`}
+                      href={`${basePath}/garden/notes/${note.slug}/`}
                       class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
                     >
                       {currentContent.viewDetails}
