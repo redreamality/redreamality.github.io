@@ -1,7 +1,7 @@
 ---
 title: "GitHub Actions API テスト"
 description: "GitHub Actions 環境での API 接続性をテスト"
-pubDate: 2025-01-21
+pubDate: 2026-01-21
 author: "System Test"
 tags: ["テスト", "GitHub Actions", "API"]
 priority: high
