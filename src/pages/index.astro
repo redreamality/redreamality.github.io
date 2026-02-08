@@ -32,6 +32,8 @@ const content = {
     blogDesc: "Read Redreamality's technical blog and insights",
     talksTitle: "Presentations",
     talksDesc: "Watch Redreamality's technical presentations and sharing content",
+    benchmarkTitle: "Benchmark Papers",
+    benchmarkDesc: "A curated collection of AI/LLM benchmark papers and evaluations",
     recentBlogTitle: "Recent Blog Posts",
     recentTalksTitle: "Recent Presentations",
     recentQuestionsTitle: "Recent Questions",
@@ -52,6 +54,8 @@ const content = {
     blogDesc: "阅读Remy的技术博客和心得分享",
     talksTitle: "演讲分享",
     talksDesc: "观看Remy的技术演讲和分享内容",
+    benchmarkTitle: "基准测试论文集",
+    benchmarkDesc: "AI/LLM 基准测试论文与评估资源汇总",
     recentBlogTitle: "最新博客",
     recentTalksTitle: "最新演讲",
     recentQuestionsTitle: "最新思考问题",
@@ -74,7 +78,7 @@ const basePath = lang === 'zh' ? '/cn' : '';
     <h1 class="text-4xl font-bold mb-4 dark:text-white">{currentContent.title}</h1>
     <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">{currentContent.subtitle}</p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12">
       <a href={`${basePath}/projects/`} class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{currentContent.projectsTitle}</h2>
         <p class="font-normal text-gray-700 dark:text-gray-400">{currentContent.projectsDesc}</p>
@@ -88,6 +92,11 @@ const basePath = lang === 'zh' ? '/cn' : '';
       <a href={`${basePath}/garden/talks/`} class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{currentContent.talksTitle}</h2>
         <p class="font-normal text-gray-700 dark:text-gray-400">{currentContent.talksDesc}</p>
+      </a>
+
+      <a href="https://redreamality.com/benchmark-papers" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{currentContent.benchmarkTitle}</h2>
+        <p class="font-normal text-gray-700 dark:text-gray-400">{currentContent.benchmarkDesc}</p>
       </a>
     </div>
 

@@ -143,6 +143,16 @@ A tool to diff LaTeX files with preview versions, making it easier to track chan
 
 ## 📚 Curated Lists & Resources
 
+### Benchmark Papers
+**Website:** [redreamality.com/benchmark-papers](https://redreamality.com/benchmark-papers)
+
+A curated collection of important benchmark papers and evaluation resources in the large language model domain.
+
+**Topics Covered:**
+- LLM benchmark papers
+- Model evaluation methods and metrics
+- Industry-standard test suites
+
 ### Awesome Manus
 **Repository:** [redreamality/awesome-manus](https://github.com/redreamality/awesome-manus)  
 **Language:** Markdown | **Stars:** 1

@@ -16,7 +16,7 @@ lang: "zh"
 
 
 
-## 自动化构建智能体
+## 
 
 
 
@@ -43,7 +43,6 @@ lang: "zh"
 ### GTPlanner: AI驱动的PRD生成工具
 **代码仓库:** [OpenSQZ/GTPlanner](https://github.com/OpenSQZ/GTPlanner)
 **编程语言:** Python | **星标:** 18 | **分叉:** 12
-**网站:** [the-agent-builder.com](https://the-agent-builder.com/)
 
 GTPlanner是The Agent Builder的开源规划引擎，专为"氛围编程"设计的智能产品需求文档(PRD)生成工具，能够将自然语言描述转换为结构化技术文档。
 
@@ -146,6 +145,16 @@ PocketFlow应用程序的追踪和调试工具，提供工作流执行和性能�
 - 跨平台支持
 
 ## 📚 精选列表与资源
+
+### Benchmark Papers
+**网站:** [redreamality.com/benchmark-papers](https://redreamality.com/benchmark-papers)
+
+AI/LLM 基准测试论文精选集，收集和整理大语言模型领域的重要基准测试论文和评估资源。
+
+**涵盖内容:**
+- 大语言模型基准测试论文
+- 模型评估方法与指标
+- 行业标准测试集
 
 ### Awesome Manus
 **代码仓库:** [redreamality/awesome-manus](https://github.com/redreamality/awesome-manus)  

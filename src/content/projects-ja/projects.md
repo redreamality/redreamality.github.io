@@ -141,6 +141,16 @@ LaTeXファイルの差分をプレビューバージョンと比較するツー
 
 ## 📚 精選リストとリソース
 
+### Benchmark Papers
+**ウェブサイト:** [redreamality.com/benchmark-papers](https://redreamality.com/benchmark-papers)
+
+AI/LLMベンチマーク論文の精選集。大規模言語モデル分野の重要なベンチマーク論文と評価リソースを収集・整理しています。
+
+**カバー内容:**
+- 大規模言語モデルのベンチマーク論文
+- モデル評価方法と指標
+- 業界標準テストスイート
+
 ### Awesome Manus
 **コードリポジトリ:** [redreamality/awesome-manus](https://github.com/redreamality/awesome-manus)  
 **プログラミング言語:** Markdown | **スター:** 1
