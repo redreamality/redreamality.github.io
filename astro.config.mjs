@@ -34,6 +34,7 @@ export default defineConfig({
       }]]
     }),
     sitemap({
+      customPages: ['https://redreamality.com/benchmark-papers/'],
       filter: (page) => {
         // Exclude private pages
         if (page.includes('/private/')) return false;
