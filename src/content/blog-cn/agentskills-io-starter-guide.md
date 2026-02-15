@@ -1,6 +1,6 @@
 ---
-title: '如何使用技能和工具构建 AI 代理：2026 完整新手指南'
-pubDate: 2026-01-15T10:00:00.000Z
+title: '如何使用技能和工具构建 AI 代理：2025 完整新手指南'
+pubDate: 2025-01-15T10:00:00.000Z
 description: '学习如何使用实用技能和工具构建智能 AI 代理。包含代理技能、工具集成、计算机使用、文件操作和 Claude、OpenAI 实际示例的完整新手友好教程。'
 author: 'Remy'
 tags: ['AI', 'agents', 'tutorial', 'beginner-guide', 'claude', 'openai', 'llm', 'automation']
@@ -19,13 +19,13 @@ AI 代理技能（也称为"工具"或"函数"）是使语言模型能够与现�
 - **控制计算机**自动化桌面任务
 - **管理数据库**存储和检索数据
 
-在 2026 年，Anthropic（Claude）、OpenAI（GPT）和 Google（Gemini）等主要 AI 提供商都通过各种机制支持代理技能：
+在 2025 年，Anthropic（Claude）、OpenAI（GPT）和 Google（Gemini）等主要 AI 提供商都通过各种机制支持代理技能：
 
 - **Claude**：计算机使用、bash 工具、文本编辑器工具
 - **OpenAI**：函数调用、代码解释器、文件搜索
 - **开源**：LangChain 工具、AutoGPT、自定义实现
 
-## 为什么代理技能在 2026 年很重要
+## 为什么代理技能在 2025 年很重要
 
 ### 从聊天机器人到代理的演变
 
@@ -36,7 +36,7 @@ AI 代理技能（也称为"工具"或"函数"）是使语言模型能够与现�
 - ❌ 无法执行操作
 - ❌ 仅限于对话响应
 
-现代 AI 代理（2024-2026）：
+现代 AI 代理（2024-2025）：
 - ✅ 聊天机器人能做的一切
 - ✅ 执行实际任务
 - ✅ 访问实时数据
@@ -77,7 +77,7 @@ AI 代理遵循持续的决策循环：
 代理思考：
 1. 感知：用户想要新闻 + 邮件发送
 2. 规划：我需要使用 web_search 工具，然后是 email 工具
-3. 行动：执行 web_search("2026 年最新 AI 新闻")
+3. 行动：执行 web_search("2025 年最新 AI 新闻")
 4. 观察：获得 10 篇相关文章
 5. 规划：总结文章，然后使用 email 工具
 6. 行动：发送带摘要的邮件
@@ -101,7 +101,7 @@ AI 行业在某种程度上可互换地使用这些术语：
 
 ### Claude 的官方工具（Anthropic）
 
-截至 2026 年，Claude 提供三个强大的内置工具：
+截至 2025 年，Claude 提供三个强大的内置工具：
 
 #### 1. 计算机使用（`computer_20241022`）
 允许 Claude 像人类一样与计算机交互：
@@ -524,7 +524,7 @@ def run_agent(user_message: str) -> str:
 # 测试代理
 if __name__ == "__main__":
     result = run_agent(
-        "搜索 2026 年最新的 AI 代理发展，"
+        "搜索 2025 年最新的 AI 代理发展，"
         "总结前 3 个发现，并将摘要保存到文件。"
     )
     print("\n📋 代理响应：")
@@ -640,7 +640,7 @@ def run_claude_agent(user_message: str) -> str:
 # 测试 Claude 代理
 if __name__ == "__main__":
     result = run_claude_agent(
-        "研究 2026 年 AI 代理的最新发展并创建简要摘要。"
+        "研究 2025 年 AI 代理的最新发展并创建简要摘要。"
     )
     print("\n📋 Claude 的响应：")
     print(result)
@@ -677,7 +677,7 @@ def research_and_publish_workflow(topic: str) -> str:
     return run_agent(prompt)
 
 # 使用
-result = research_and_publish_workflow("2026 年 AI 代理框架")
+result = research_and_publish_workflow("2025 年 AI 代理框架")
 ```
 
 ### 错误处理和重试
@@ -917,7 +917,7 @@ system_prompt = """你必须使用可用工具来完成任务。
 
 ## 结论：AI 代理的未来
 
-AI 代理技能正在改变我们与 AI 系统交互的方式。在 2026 年及以后，我们将看到：
+AI 代理技能正在改变我们与 AI 系统交互的方式。在 2025 年及以后，我们将看到：
 
 ### 新兴趋势
 
