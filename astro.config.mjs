@@ -38,14 +38,20 @@ export default defineConfig({
       filter: (page) => {
         // Exclude private pages
         if (page.includes('/private/')) return false;
-        
+
         // Exclude 404 pages
         if (page.includes('/404')) return false;
-        
+
+        // Exclude admin pages
+        if (page.includes('/admin')) return false;
+
+        // Exclude test pages
+        if (page.includes('/test-')) return false;
+
         // Parse URL to get pathname for precise matching
         const url = new URL(page);
         const path = url.pathname;
-        
+
         // Exclude redirect pages - these have noindex meta tags
         // Redirect from /talks/* to /garden/talks/*
         if (path === '/talks/' || path === '/talks') return false;
@@ -54,19 +60,23 @@ export default defineConfig({
         if (path.match(/^\/cn\/talks\/[^/]+\/?$/)) return false;
         if (path === '/ja/talks/' || path === '/ja/talks') return false;
         if (path.match(/^\/ja\/talks\/[^/]+\/?$/)) return false;
-        
+
         // Redirect from /garden/blog/* to /blog/*
         if (path.includes('/garden/blog/')) return false;
-        
+
         return true;
       },
       changefreq: 'weekly',
-      serialize: (item) => ({
-        ...item,
-        priority: item.url === '/' ? 1.0 : 
-                 item.url.includes('/tags/') ? 0.3 :
-                 0.8,
-      }),
+      serialize: (item) => {
+        const url = new URL(item.url);
+        const path = url.pathname;
+        return {
+          ...item,
+          priority: path === '/' ? 1.0 :
+                   path.includes('/tags/') ? 0.3 :
+                   0.8,
+        };
+      },
     }),
     robotsTxt({
       policy: [
