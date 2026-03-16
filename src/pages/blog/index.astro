@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import HtmlPagesSection from '../../components/HtmlPagesSection.astro';
 import { getBlogPosts, getTags, getTagCounts, t, type Language } from '../../utils/i18n';
 
 // This is the English blog listing (/blog path)
@@ -45,6 +46,8 @@ const basePath = lang === 'zh' ? '/cn' : '';
           {currentContent.subtitle}
         </p>
       </div>
+
+      <HtmlPagesSection lang="en" />
 
       <!-- Tags -->
       {tags.length > 0 && (
