@@ -1,0 +1,39 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import { getHtmlPageBySlug, getHtmlPages } from '../../../../utils/html-pages';
+
+export async function getStaticPaths() {
+  return getHtmlPages('zh').map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+const page = Astro.props.page ?? getHtmlPageBySlug('zh', Astro.params.slug ?? '');
+
+if (!page) {
+  return Astro.redirect('/cn/404', 404);
+}
+---
+
+<Layout title={page.title} description={page.description} type="article">
+  <section class="mx-auto max-w-6xl py-6">
+    <div class="mb-6">
+      <div class="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-sm font-semibold text-amber-800 dark:bg-amber-900/40 dark:text-amber-200">
+        HTML 单页
+      </div>
+      <h1 class="mt-4 text-4xl font-bold text-gray-900 dark:text-white">{page.title}</h1>
+      <p class="mt-3 max-w-3xl text-lg text-gray-600 dark:text-gray-400">{page.description}</p>
+    </div>
+
+    <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800">
+      <iframe
+        title={page.title}
+        srcdoc={page.html}
+        sandbox="allow-forms allow-modals allow-popups allow-scripts"
+        loading="eager"
+        class="h-[900px] w-full border-0 bg-white"
+      ></iframe>
+    </div>
+  </section>
+</Layout>
