@@ -46,6 +46,7 @@ const ensureTrailingSlash = (path: string) => (path === '/' ? '/' : path.endsWit
 
 const homeHref = ensureTrailingSlash(getLocalizedPath('/', currentLang));
 const blogHref = getLocalizedPath('/blog/', currentLang);
+const chaosHref = getLocalizedPath('/garden/chaos/', currentLang);
 const talksHref = getLocalizedPath('/garden/talks/', currentLang);
 const questionsHref = getLocalizedPath('/garden/questions/', currentLang);
 const notesHref = getLocalizedPath('/garden/notes/', currentLang);
@@ -188,6 +189,9 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
                                         <a href={blogHref} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('blog', currentLang)}</a>
                                     </li>
                                     <li>
+                                        <a href={chaosHref} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('chaos', currentLang)} (News)</a>
+                                    </li>
+                                    <li>
                                         <a href={talksHref} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('talks', currentLang)}</a>
                                     </li>
                                     <li>
@@ -202,6 +206,9 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                                     <li>
                                         <a href={blogHref} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('blog', currentLang)}</a>
+                                    </li>
+                                    <li>
+                                        <a href={chaosHref} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('chaos', currentLang)} (News)</a>
                                     </li>
                                     <li>
                                         <a href={talksHref} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('talks', currentLang)}</a>

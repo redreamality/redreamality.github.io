@@ -11,13 +11,24 @@ const lang: Language = 'ja';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog-ja');
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  const chaosPosts = await getCollection('chaos-ja');
+  return [
+    ...posts.map((post) => ({
+      params: { slug: post.slug },
+      props: { post },
+    })),
+    ...chaosPosts.map((post) => ({
+      params: { slug: post.slug },
+      props: { redirectTo: `/ja/garden/chaos/${post.slug}/` },
+    })),
+  ];
 }
 
-const { post } = Astro.props;
+const { post, redirectTo } = Astro.props;
+
+if (redirectTo) {
+  return Astro.redirect(redirectTo, 301);
+}
 
 if (!post) {
   return Astro.redirect('/ja/404', 404);

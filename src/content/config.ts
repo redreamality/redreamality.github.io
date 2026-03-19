@@ -12,6 +12,8 @@ const blogSchema = z.object({
   translatedFrom: z.string().optional(), // Reference to original post slug
 });
 
+const chaosSchema = blogSchema;
+
 const talksSchema = z.object({
   title: z.string(),
   description: z.string(),
@@ -112,6 +114,21 @@ const blogJaCollection = defineCollection({
   schema: blogSchema,
 });
 
+const chaosCnCollection = defineCollection({
+  type: 'content',
+  schema: chaosSchema,
+});
+
+const chaosEnCollection = defineCollection({
+  type: 'content',
+  schema: chaosSchema,
+});
+
+const chaosJaCollection = defineCollection({
+  type: 'content',
+  schema: chaosSchema,
+});
+
 const talksJaCollection = defineCollection({
   type: 'content',
   schema: talksSchema,
@@ -136,6 +153,9 @@ export const collections = {
   'blog-cn': blogCnCollection,
   'blog-en': blogEnCollection,
   'blog-ja': blogJaCollection,
+  'chaos-cn': chaosCnCollection,
+  'chaos-en': chaosEnCollection,
+  'chaos-ja': chaosJaCollection,
   'talks-cn': talksCnCollection,
   'talks-en': talksEnCollection,
   'talks-ja': talksJaCollection,
