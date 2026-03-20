@@ -18,7 +18,10 @@ const languageMeta: Record<Language, { label: string; emoji: string; checkingTex
 
 // Check if we're on a content page to show availability
 const cleanPath = currentPath.replace(/^\/(cn|ja)/, ''); // Remove /cn or /ja prefix if present
-const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garden/talks/');
+const isContentPage =
+  cleanPath.includes('/blog/') ||
+  cleanPath.includes('/garden/talks/') ||
+  cleanPath.includes('/garden/chaos/');
 
 // Generate unique IDs for this instance
 const toggleBtnId = `language-toggle-btn-${instanceId}`;
@@ -155,7 +158,10 @@ const availabilityIdMap: Record<Language, string> = {
   async function checkContentAvailability() {
     const currentPath = window.location.pathname;
     const cleanPath = currentPath.replace(/^\/(cn|ja)/, '');
-    const isContentPage = cleanPath.includes('/blog/') || cleanPath.includes('/garden/talks/');
+    const isContentPage =
+      cleanPath.includes('/blog/') ||
+      cleanPath.includes('/garden/talks/') ||
+      cleanPath.includes('/garden/chaos/');
     if (!isContentPage) return;
 
     try {
@@ -165,6 +171,9 @@ const availabilityIdMap: Record<Language, string> = {
       if (cleanPath.includes('/blog/')) {
         contentType = 'blog';
         slug = cleanPath.split('/blog/')[1].replace(/\/$/, '');
+      } else if (cleanPath.includes('/garden/chaos/')) {
+        contentType = 'garden/chaos';
+        slug = cleanPath.split('/garden/chaos/')[1].replace(/\/$/, '');
       } else if (cleanPath.includes('/garden/talks/')) {
         contentType = 'garden/talks';
         slug = cleanPath.split('/garden/talks/')[1].replace(/\/$/, '');

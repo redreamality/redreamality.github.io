@@ -1,0 +1,74 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import TableOfContents from '../../../../components/TableOfContents.astro';
+import RelatedContent from '../../../../components/RelatedContent.astro';
+import { getChaosPosts, type Language } from '../../../../utils/i18n';
+import { rankRelatedContent } from '../../../../utils/related';
+
+const lang: Language = 'zh';
+
+export async function getStaticPaths() {
+  const posts = await getChaosPosts('zh');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+if (!post) {
+  return Astro.redirect('/cn/404', 404);
+}
+
+const { Content, headings } = await post.render();
+const relatedPosts = rankRelatedContent(await getChaosPosts(lang), post, { dateField: 'pubDate', limit: 6 });
+const relatedItems = relatedPosts.map((relatedPost) => ({
+  href: `/cn/garden/chaos/${relatedPost.slug}/`,
+  title: relatedPost.data.title,
+  description: relatedPost.data.description,
+  date: relatedPost.data.pubDate,
+}));
+---
+
+<Layout title={post.data.title} description={post.data.description} publishDate={post.data.pubDate.toISOString()} tags={post.data.tags || []} type="article">
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      {headings && headings.length > 0 && <TableOfContents headings={headings} />}
+      <article class="prose dark:prose-invert lg:prose-xl mx-auto">
+        <header class="mb-8">
+          <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{post.data.title}</h1>
+          <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+            <span>
+              发布于 {post.data.pubDate.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </span>
+            <span>作者 {post.data.author}</span>
+          </div>
+        </header>
+
+        <div class="prose dark:prose-invert max-w-none">
+          <Content />
+        </div>
+
+        <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 not-prose">
+          <RelatedContent title="相关文章" items={relatedItems} lang={lang} />
+          <div class="mt-10">
+            <a
+              href="/cn/garden/chaos/"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
+            >
+              返回底噪
+              <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+              </svg>
+            </a>
+          </div>
+        </footer>
+      </article>
+    </div>
+  </main>
+</Layout>

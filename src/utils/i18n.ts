@@ -17,6 +17,7 @@ export const i18nConfig: I18nConfig = {
       home: '首页',
       garden: '花园',
       blog: '博客',
+      chaos: '底噪',
       talks: '演讲',
       questions: '思考问题',
       notes: '阅读笔记',
@@ -60,6 +61,7 @@ export const i18nConfig: I18nConfig = {
       home: 'Home',
       garden: 'Garden',
       blog: 'Blog',
+      chaos: 'Chaos',
       talks: 'Talks',
       questions: 'Questions',
       notes: 'Notes',
@@ -103,6 +105,7 @@ export const i18nConfig: I18nConfig = {
       home: 'ホーム',
       garden: 'ガーデン',
       blog: 'ブログ',
+      chaos: 'カオス',
       talks: 'プレゼンテーション',
       questions: '考察',
       notes: '読書ノート',
@@ -214,6 +217,16 @@ export async function getBlogPosts(lang: Language) {
     return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   } catch (error) {
     // If collection doesn't exist, return empty array
+    return [];
+  }
+}
+
+export async function getChaosPosts(lang: Language) {
+  try {
+    const collectionName = lang === 'zh' ? 'chaos-cn' : lang === 'ja' ? 'chaos-ja' : 'chaos-en';
+    const posts = await getCollection(collectionName);
+    return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  } catch (error) {
     return [];
   }
 }
