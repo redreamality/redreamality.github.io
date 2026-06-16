@@ -182,6 +182,7 @@ const syncReport = await generateContentSyncReport();
               <option value="complete">Fully Translated</option>
               <option value="missing-en">Missing English</option>
               <option value="missing-zh">Missing Chinese</option>
+              <option value="missing-ja">Missing Japanese</option>
             </select>
           </div>
         </div>
@@ -196,6 +197,7 @@ const syncReport = await generateContentSyncReport();
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Priority</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Chinese</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">English</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Japanese</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
             </tr>
           </thead>
@@ -204,8 +206,9 @@ const syncReport = await generateContentSyncReport();
               <tr class="content-row" 
                   data-type={item.type} 
                   data-priority={item.priority}
-                  data-status={item.zh.exists && item.en.exists ? 'complete' : 
-                              item.needsTranslation.toEnglish ? 'missing-en' : 'missing-zh'}>
+                  data-status={item.zh.exists && item.en.exists && item.ja.exists ? 'complete' :
+                              item.needsTranslation.toEnglish ? 'missing-en' :
+                              item.needsTranslation.toChinese ? 'missing-zh' : 'missing-ja'}>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div>
                     <div class="text-sm font-medium text-gray-900 dark:text-white">{item.title}</div>
@@ -247,12 +250,19 @@ const syncReport = await generateContentSyncReport();
                   )}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">
-                  {item.zh.exists && item.en.exists ? (
-                    <span class="text-green-600 dark:text-green-400 font-medium">Complete</span>
-                  ) : item.needsTranslation.toEnglish ? (
-                    <span class="text-yellow-600 dark:text-yellow-400 font-medium">Needs English</span>
+                  {item.ja.exists ? (
+                    <span class="text-green-600 dark:text-green-400">✓ Available</span>
                   ) : (
-                    <span class="text-blue-600 dark:text-blue-400 font-medium">Needs Chinese</span>
+                    <span class="text-red-600 dark:text-red-400">✗ Missing</span>
+                  )}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  {item.zh.exists && item.en.exists && item.ja.exists ? (
+                    <span class="text-green-600 dark:text-green-400 font-medium">Complete</span>
+                  ) : (
+                    <span class="text-yellow-600 dark:text-yellow-400 font-medium">
+                      Needs {[item.needsTranslation.toEnglish && 'English', item.needsTranslation.toChinese && 'Chinese', item.needsTranslation.toJapanese && 'Japanese'].filter(Boolean).join(', ')}
+                    </span>
                   )}
                 </td>
               </tr>

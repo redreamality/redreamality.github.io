@@ -28,9 +28,16 @@ export interface TranslationStatus {
     title?: string;
     pubDate?: Date;
   };
+  ja: {
+    exists: boolean;
+    collection?: string;
+    title?: string;
+    pubDate?: Date;
+  };
   needsTranslation: {
     toEnglish: boolean;
     toChinese: boolean;
+    toJapanese: boolean;
   };
   priority: 'high' | 'medium' | 'low';
 }
@@ -64,8 +71,10 @@ async function getAllContentItems(): Promise<ContentItem[]> {
   const collections = [
     { name: 'blog-cn', type: 'blog' as const, lang: 'zh' as Language },
     { name: 'blog-en', type: 'blog' as const, lang: 'en' as Language },
+    { name: 'blog-ja', type: 'blog' as const, lang: 'ja' as Language },
     { name: 'talks-cn', type: 'talks' as const, lang: 'zh' as Language },
     { name: 'talks-en', type: 'talks' as const, lang: 'en' as Language },
+    { name: 'talks-ja', type: 'talks' as const, lang: 'ja' as Language },
   ];
 
   for (const collection of collections) {
@@ -145,6 +154,7 @@ export async function generateContentSyncReport(): Promise<ContentSyncReport> {
     type: 'blog' | 'talks';
     zh?: ContentItem;
     en?: ContentItem;
+    ja?: ContentItem;
   }>();
 
   for (const item of allItems) {
@@ -161,6 +171,8 @@ export async function generateContentSyncReport(): Promise<ContentSyncReport> {
     const entry = contentMap.get(key)!;
     if (item.language === 'zh') {
       entry.zh = item;
+    } else if (item.language === 'ja') {
+      entry.ja = item;
     } else {
       entry.en = item;
     }
@@ -172,13 +184,16 @@ export async function generateContentSyncReport(): Promise<ContentSyncReport> {
   for (const [, entry] of contentMap) {
     const zhExists = !!entry.zh;
     const enExists = !!entry.en;
+    const jaExists = !!entry.ja;
+    const hasAnySource = zhExists || enExists || jaExists;
     
     const priority = entry.zh ? calculateContentPriority(entry.zh) : 
-                    entry.en ? calculateContentPriority(entry.en) : 'low';
+                    entry.en ? calculateContentPriority(entry.en) :
+                    entry.ja ? calculateContentPriority(entry.ja) : 'low';
 
     translationStatuses.push({
       slug: entry.slug,
-      title: entry.zh?.title || entry.en?.title || entry.slug,
+      title: entry.zh?.title || entry.en?.title || entry.ja?.title || entry.slug,
       type: entry.type,
       zh: {
         exists: zhExists,
@@ -192,9 +207,16 @@ export async function generateContentSyncReport(): Promise<ContentSyncReport> {
         title: entry.en?.title,
         pubDate: entry.en?.pubDate || entry.en?.date,
       },
+      ja: {
+        exists: jaExists,
+        collection: entry.ja?.collection,
+        title: entry.ja?.title,
+        pubDate: entry.ja?.pubDate || entry.ja?.date,
+      },
       needsTranslation: {
-        toEnglish: zhExists && !enExists,
-        toChinese: enExists && !zhExists,
+        toEnglish: hasAnySource && !enExists,
+        toChinese: hasAnySource && !zhExists,
+        toJapanese: hasAnySource && !jaExists,
       },
       priority,
     });
@@ -203,26 +225,26 @@ export async function generateContentSyncReport(): Promise<ContentSyncReport> {
   // Calculate statistics
   const totalContent = translationStatuses.length;
   const translatedContent = translationStatuses.filter(
-    item => item.zh.exists && item.en.exists
+    item => item.zh.exists && item.en.exists && item.ja.exists
   ).length;
   const missingTranslations = totalContent - translatedContent;
   const translationCoverage = totalContent > 0 ? (translatedContent / totalContent) * 100 : 0;
 
   // Blog statistics
   const blogItems = translationStatuses.filter(item => item.type === 'blog');
-  const blogTranslated = blogItems.filter(item => item.zh.exists && item.en.exists).length;
+  const blogTranslated = blogItems.filter(item => item.zh.exists && item.en.exists && item.ja.exists).length;
   const blogCoverage = blogItems.length > 0 ? (blogTranslated / blogItems.length) * 100 : 0;
 
   // Talks statistics
   const talksItems = translationStatuses.filter(item => item.type === 'talks');
-  const talksTranslated = talksItems.filter(item => item.zh.exists && item.en.exists).length;
+  const talksTranslated = talksItems.filter(item => item.zh.exists && item.en.exists && item.ja.exists).length;
   const talksCoverage = talksItems.length > 0 ? (talksTranslated / talksItems.length) * 100 : 0;
 
   // Generate recommendations
   const recommendations: string[] = [];
   
   const highPriorityMissing = translationStatuses.filter(
-    item => item.priority === 'high' && (item.needsTranslation.toEnglish || item.needsTranslation.toChinese)
+    item => item.priority === 'high' && (item.needsTranslation.toEnglish || item.needsTranslation.toChinese || item.needsTranslation.toJapanese)
   );
   
   if (highPriorityMissing.length > 0) {
@@ -242,6 +264,11 @@ export async function generateContentSyncReport(): Promise<ContentSyncReport> {
   const englishOnlyItems = translationStatuses.filter(item => !item.zh.exists && item.en.exists);
   if (englishOnlyItems.length > 0) {
     recommendations.push(`Consider translating ${englishOnlyItems.length} English-only items to Chinese`);
+  }
+
+  const missingJapaneseItems = translationStatuses.filter(item => item.needsTranslation.toJapanese);
+  if (missingJapaneseItems.length > 0) {
+    recommendations.push(`Add Japanese translations for ${missingJapaneseItems.length} items to complete trilingual coverage`);
   }
 
   return {
@@ -283,9 +310,11 @@ export async function getItemsNeedingTranslation(targetLang: Language): Promise<
   return report.items.filter(item => {
     if (targetLang === 'en') {
       return item.needsTranslation.toEnglish;
-    } else {
-      return item.needsTranslation.toChinese;
     }
+    if (targetLang === 'ja') {
+      return item.needsTranslation.toJapanese;
+    }
+    return item.needsTranslation.toChinese;
   });
 }
 
@@ -297,6 +326,6 @@ export async function getHighPriorityTranslations(): Promise<TranslationStatus[]
   
   return report.items.filter(item => 
     item.priority === 'high' && 
-    (item.needsTranslation.toEnglish || item.needsTranslation.toChinese)
+    (item.needsTranslation.toEnglish || item.needsTranslation.toChinese || item.needsTranslation.toJapanese)
   );
 }

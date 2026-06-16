@@ -123,6 +123,7 @@ import Layout from '../../layouts/Layout.astro';
                 <option value="">Select language</option>
                 <option value="zh">Chinese (中文)</option>
                 <option value="en">English</option>
+                <option value="ja">Japanese</option>
               </select>
               <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">The system will automatically translate to the other language</p>
             </div>
@@ -332,7 +333,7 @@ date: ${isoDate}`;
 
 The talk will be available shortly at ${data.language === 'zh' ? `/cn/garden/talks/${slug}` : `/garden/talks/${slug}`}
 
-${data.language === 'zh' ? 'Consider creating an English version as well!' : 'Consider creating a Chinese version as well!'}
+${data.language === 'zh' ? 'Consider creating English and Japanese versions as well!' : data.language === 'ja' ? 'Consider creating English and Chinese versions as well!' : 'Consider creating Chinese and Japanese versions as well!'}
           `;
 
           setTimeout(() => {

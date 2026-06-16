@@ -3,8 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import { generateContentSyncReport } from '../../utils/content-sync';
 
 const syncReport = await generateContentSyncReport();
-const itemsNeedingTranslation = syncReport.items.filter(item => 
-  item.needsTranslation.toEnglish || item.needsTranslation.toChinese
+const itemsNeedingTranslation = syncReport.items.filter(item =>
+  item.needsTranslation.toEnglish || item.needsTranslation.toChinese || item.needsTranslation.toJapanese
 );
 ---
 
@@ -20,14 +20,14 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
           </p>
         </div>
         <div class="flex space-x-4">
-          <a 
-            href="/admin" 
+          <a
+            href="/admin"
             class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
           >
             ← Back to Admin
           </a>
-          <a 
-            href="/admin/content-sync" 
+          <a
+            href="/admin/content-sync"
             class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             📊 Sync Report
@@ -102,6 +102,7 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
               >
                 <option value="en">English</option>
                 <option value="zh">Chinese</option>
+                <option value="ja">Japanese</option>
               </select>
             </div>
             <div>
@@ -224,7 +225,7 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Individual Translation</h3>
         <p class="text-sm text-gray-600 dark:text-gray-400">Translate specific content items</p>
       </div>
-      
+
       <div class="p-6">
         <form id="translation-form" class="space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -232,25 +233,29 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
               <label for="content-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Select Content
               </label>
-              <select 
-                id="content-select" 
+              <select
+                id="content-select"
                 class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 required
               >
                 <option value="">Choose content to translate...</option>
                 {itemsNeedingTranslation.map(item => (
-                  <option 
+                  <option
                     value={JSON.stringify({
                       slug: item.slug,
                       type: item.type,
                       title: item.title,
                       needsEnglish: item.needsTranslation.toEnglish,
                       needsChinese: item.needsTranslation.toChinese,
+                      needsJapanese: item.needsTranslation.toJapanese,
+                      hasEnglish: item.en.exists,
+                      hasChinese: item.zh.exists,
+                      hasJapanese: item.ja.exists,
                       priority: item.priority
                     })}
                   >
-                    [{item.type.toUpperCase()}] {item.title} 
-                    ({item.needsTranslation.toEnglish ? 'Need EN' : 'Need ZH'}) 
+                    [{item.type.toUpperCase()}] {item.title}
+                    ({[item.needsTranslation.toEnglish && 'Need EN', item.needsTranslation.toChinese && 'Need ZH', item.needsTranslation.toJapanese && 'Need JA'].filter(Boolean).join(', ')})
                     - {item.priority.toUpperCase()}
                   </option>
                 ))}
@@ -261,8 +266,8 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
               <label for="target-language" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Target Language
               </label>
-              <select 
-                id="target-language" 
+              <select
+                id="target-language"
                 class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 required
               >
@@ -275,9 +280,9 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
 
           <div class="flex items-center space-x-4">
             <label class="flex items-center">
-              <input 
-                type="checkbox" 
-                id="auto-commit" 
+              <input
+                type="checkbox"
+                id="auto-commit"
                 class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
               >
               <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">
@@ -318,7 +323,7 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
       <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
         <div class="flex items-center justify-between">
           <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Translation Queue</h3>
-          <button 
+          <button
             id="refresh-queue"
             class="text-blue-600 dark:text-blue-400 hover:underline text-sm"
           >
@@ -326,7 +331,7 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
           </button>
         </div>
       </div>
-      
+
       <div id="translation-queue" class="p-6">
         <div class="text-center text-gray-500 dark:text-gray-400">
           No active translations
@@ -345,7 +350,7 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
     function checkAuth() {
       const githubToken = localStorage.getItem('github-token');
       const githubUser = localStorage.getItem('github-user');
-      
+
       if (!githubToken || !githubUser) {
         window.location.href = '/admin';
         return false;
@@ -357,7 +362,7 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
     function showStatus(message, type = 'info') {
       const statusContainer = document.getElementById('status-messages');
       const statusDiv = document.createElement('div');
-      
+
       const bgColor = {
         success: 'bg-green-600',
         error: 'bg-red-600',
@@ -367,9 +372,9 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
 
       statusDiv.className = `${bgColor} text-white px-4 py-2 rounded-lg shadow-lg max-w-sm`;
       statusDiv.textContent = message;
-      
+
       statusContainer.appendChild(statusDiv);
-      
+
       setTimeout(() => {
         statusDiv.remove();
       }, 5000);
@@ -378,7 +383,7 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
     // Trigger GitHub Actions workflow
     async function triggerTranslation(contentPath, targetLanguage, contentType, autoCommit = false) {
       const githubToken = localStorage.getItem('github-token');
-      
+
       if (!githubToken) {
         showStatus('Not authenticated', 'error');
         return;
@@ -420,7 +425,7 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
     // Form submission handler
     document.getElementById('translation-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const contentSelect = document.getElementById('content-select');
       const targetLanguage = document.getElementById('target-language').value;
       const autoCommit = document.getElementById('auto-commit').checked;
@@ -431,10 +436,11 @@ const itemsNeedingTranslation = syncReport.items.filter(item =>
       }
 
       const contentData = JSON.parse(contentSelect.value);
-      
-      // Construct content path
-      const langSuffix = contentData.needsEnglish ? '' : '-en';
-      const contentPath = `src/content/${contentData.type}${langSuffix}/${contentData.slug}.md`;
+
+      // Construct source content path from an existing language version.
+      const sourceLang = contentData.hasEnglish ? 'en' : contentData.hasChinese ? 'zh' : 'ja';
+      const sourceSuffix = sourceLang === 'en' ? '-en' : sourceLang === 'zh' ? '-cn' : '-ja';
+      const contentPath = `src/content/${contentData.type}${sourceSuffix}/${contentData.slug}.md`;
 
       await triggerTranslation(contentPath, targetLanguage, contentData.type, autoCommit);
     });
@@ -537,11 +543,13 @@ Continue?`;
       if (e.target.value) {
         const contentData = JSON.parse(e.target.value);
         const targetLangSelect = document.getElementById('target-language');
-        
+
         if (contentData.needsEnglish) {
           targetLangSelect.value = 'en';
         } else if (contentData.needsChinese) {
           targetLangSelect.value = 'zh';
+        } else if (contentData.needsJapanese) {
+          targetLangSelect.value = 'ja';
         }
       }
     });
