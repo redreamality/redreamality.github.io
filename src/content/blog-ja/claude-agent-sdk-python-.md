@@ -5,6 +5,7 @@ description: 'Claude Agent SDKのアーキテクチャ、クエリ、カスタ�
 author: 'Remy'
 tags: ['claude code', 'vibe coding', 'python']
 lang: 'ja'
+translatedFrom: 'claude-agent-sdk-python-'
 ---
 **ドキュメントバージョン**: 1.0  
 **生成日**: 2025-10-15  

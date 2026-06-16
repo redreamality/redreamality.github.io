@@ -5,6 +5,7 @@ date: 2026-01-08
 source: "https://github.com/github/spec-kit"
 tags: ["AI開発", "仕様駆動開発", "SDD", "GitHub", "Spec Kit"]
 lang: "ja"
+translatedFrom: 'github-spec-kit-guide'
 ---
 ## 生成AI時代におけるソフトウェアエンジニアリングのパラダイムシフト
 

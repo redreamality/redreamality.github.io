@@ -5,6 +5,7 @@ description: 'スキルとツールを使ってインテリジェントなAIエ�
 author: 'Remy'
 tags: ['AI', 'エージェント', 'チュートリアル', '初心者ガイド', 'claude', 'openai', 'llm', '自動化']
 lang: 'ja'
+translatedFrom: 'agentskills-io-starter-guide'
 ---
 
 ## AIエージェントスキルとは何か？

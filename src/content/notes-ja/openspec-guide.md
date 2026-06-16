@@ -5,6 +5,7 @@ date: 2026-01-11
 source: "https://github.com/Fission-AI/OpenSpec"
 tags: ["AI開発", "OpenSpec", "仕様駆動開発", "SDD", "AIエージェント"]
 lang: "ja"
+translatedFrom: 'openspec-guide'
 ---
 ## 序論：AI支援プログラミングのパラダイムシフト
 

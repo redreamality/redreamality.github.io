@@ -5,6 +5,7 @@ description: '本分析は自律ソフトウェア工学における2つの主�
 author: '研究チーム'
 tags: ['AI', 'ソフトウェア工学', '2026', '自律システム', 'Ralph Wiggum', 'オープンSpec']
 lang: 'ja'
+translatedFrom: 'ralph-wiggum-loop-vs-open-spec'
 ---
 
 # **エージェント転換：Ralph Wiggum ループとオープンSpecの自律ソフトウェア工学における方法論の包括的分析**

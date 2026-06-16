@@ -5,6 +5,7 @@ description: '2026年初頭までに、製品管理は「エージェントAI」
 author: '研究チーム'
 tags: ['AI', '製品管理', '2026', 'エージェント', 'オーケストレーター']
 lang: 'ja'
+translatedFrom: 'ai-agents-in-product-management-2026'
 ---
 
 # **オーケストレーターの時代：2026年の製品管理におけるAIエージェントの状況**

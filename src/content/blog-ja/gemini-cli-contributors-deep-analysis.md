@@ -5,6 +5,7 @@ description: 'Gemini CLI入門ツールのnpm対話分析と、コントリビ�
 author: 'Remy'
 tags: ['open source', 'gemini', 'cli', 'community', 'npm', 'github', 'analysis']
 lang: 'ja'
+translatedFrom: 'gemini-cli-contributors-deep-analysis'
 ---
 **調査期間**: 2025-08-01 ～ 2025-09-15  
 **調査範囲**:  
