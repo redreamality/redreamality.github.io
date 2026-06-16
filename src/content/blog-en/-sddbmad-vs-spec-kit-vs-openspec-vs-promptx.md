@@ -68,6 +68,8 @@ A three-level maturity model (inspired by Martin Fowler [^5]) gauges how deeply 
 
 ### **2.3. OpenSpec: The Lightweight Brownfield Specialist**
 
+For a hands-on walkthrough of installation, CLI commands, `AGENTS.md`, validation, and examples, see my [OpenSpec tutorial](/blog/openspec-tutorial-cli-commands-agents-md-examples/).
+
 * **Core Philosophy**: Bring **determinism and auditability** to AI development while staying lightweight. Its key differentiator is **brownfield-first**—acknowledging that most work happens on existing codebases (1→n) rather than greenfield (0→1) [^12].  
 * **Workflow & Features**:  
   1. **Draft Change Proposal** – initiate in `openspec/changes/`.  
