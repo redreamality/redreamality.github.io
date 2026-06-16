@@ -3,7 +3,7 @@ title: 'What Is Spec-Driven Development (SDD)? In-Depth Comparison of Open-Sourc
 pubDate: 2025-10-21T16:12:17.943Z
 description: 'This article delves into the transformative methodology of Spec-Driven Development (SDD) and provides a deep dissection and strategic comparison of four trend-setting open-source projects—BMAD-METHOD, GitHub''s spec-kit, OpenSpec, and PromptX.'
 author: 'Remy'
-tags: ['vibe coding', 'sdd', 'spec-driven coding', 'open spec', 'spec-kit', 'BMAD']
+tags: ['vibe coding', 'sdd', 'spec-driven coding', 'open spec', 'openspec', 'spec-kit', 'BMAD']
 ---
 
 ## **Introduction: Beyond “Vibe Coding” — The Inevitability of Structure in AI-Driven Development**
