@@ -1,326 +1,42 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getBlogPosts, getChaosPosts, getNotes, getQuestions, getTalks, getTagCounts, type Language } from '../utils/i18n';
+import HomeHero from '../components/home/HomeHero.astro';
+import HomeSections from '../components/home/HomeSections.astro';
+import {
+  getBlogPosts,
+  getChaosPosts,
+  getNotes,
+  getQuestions,
+  getTalks,
+  getMeditations,
+  getTagCounts,
+  type Language,
+} from '../utils/i18n';
 
-// This page handles the root path only (English default)
-// Chinese version will be handled by a separate /cn/index.astro file
-
-// This is the English homepage (root path)
+// English homepage (root path)
 const lang: Language = 'en';
 
-// Get latest blog posts, talks, and questions for current language
-const posts = await getBlogPosts(lang);
-const talks = await getTalks(lang);
-const questions = await getQuestions(lang);
-const chaosPosts = await getChaosPosts(lang);
-const notes = await getNotes(lang);
-const tagCounts = await getTagCounts(lang);
-
-// Get the latest 20 posts, talks, and questions
-const recentPosts = posts.slice(0, 20);
-const recentTalks = talks.slice(0, 20);
-const recentQuestions = questions.slice(0, 20);
-const recentChaos = chaosPosts.slice(0, 10);
-const recentNotes = notes.slice(0, 20);
-
-// Language-specific content
-const content = {
-  en: {
-    title: "Welcome to Remy (Redreamality)'s Personal Website",
-    subtitle: "This is where I showcase my projects, blog articles, and presentation shares",
-    projectsTitle: "Projects",
-    projectsDesc: "View Redreamality's open source projects and personal works",
-    blogTitle: "Blog Articles",
-    blogDesc: "Read Redreamality's technical blog and insights",
-    talksTitle: "Presentations",
-    talksDesc: "Watch Redreamality's technical presentations and sharing content",
-    benchmarkTitle: "Benchmark Papers",
-    benchmarkDesc: "A curated collection of AI/LLM benchmark papers and evaluations",
-    recentBlogTitle: "Recent Blog Posts",
-    recentTalksTitle: "Recent Presentations",
-    recentQuestionsTitle: "Recent Questions",
-    recentNotesTitle: "Recent Notes",
-    recentChaosTitle: "Chaos (News)",
-    noChaosMessage: "No chaos entries yet.",
-    viewAllChaos: "View All",
-    noQuestionsMessage: "No questions available yet.",
-    noNotesMessage: "No notes available yet.",
-    viewAllPosts: "View All Posts",
-    viewAllTalks: "View All Talks",
-    viewAllQuestions: "View All Questions",
-    viewAllNotes: "View All Notes"
-  },
-  zh: {
-    title: "欢迎来到Remy(Redreamality)的个人网站",
-    subtitle: "这里是我的项目展示、博客文章和演讲分享的地方",
-    projectsTitle: "项目展示",
-    projectsDesc: "查看Redreamality的开源项目和个人作品",
-    blogTitle: "博客文章",
-    blogDesc: "阅读Remy的技术博客和心得分享",
-    talksTitle: "演讲分享",
-    talksDesc: "观看Remy的技术演讲和分享内容",
-    benchmarkTitle: "基准测试论文集",
-    benchmarkDesc: "AI/LLM 基准测试论文与评估资源汇总",
-    recentBlogTitle: "最新博客",
-    recentTalksTitle: "最新演讲",
-    recentQuestionsTitle: "最新思考问题",
-    recentNotesTitle: "最新阅读笔记",
-    recentChaosTitle: "Chaos (新闻)",
-    noChaosMessage: "暂无 Chaos 条目。",
-    viewAllChaos: "查看全部",
-    noQuestionsMessage: "暂无思考问题。",
-    noNotesMessage: "暂无阅读笔记。",
-    viewAllPosts: "查看全部",
-    viewAllTalks: "查看全部",
-    viewAllQuestions: "查看全部",
-    viewAllNotes: "查看全部"
-  }
-};
-
-const currentContent = content[lang];
-const basePath = lang === 'zh' ? '/cn' : '';
+const [posts, talks, questions, chaos, notes, meditations, tagCounts] = await Promise.all([
+  getBlogPosts(lang),
+  getTalks(lang),
+  getQuestions(lang),
+  getChaosPosts(lang),
+  getNotes(lang),
+  getMeditations(lang),
+  getTagCounts(lang),
+]);
 ---
 
-<Layout title={lang === 'zh' ? '首页' : 'Home'}>
-  <div class="text-center">
-    <h1 class="text-4xl font-bold mb-4 dark:text-white">{currentContent.title}</h1>
-    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">{currentContent.subtitle}</p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12">
-      <a href={`${basePath}/projects/`} class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{currentContent.projectsTitle}</h2>
-        <p class="font-normal text-gray-700 dark:text-gray-400">{currentContent.projectsDesc}</p>
-      </a>
-
-      <a href={`${basePath}/blog/`} class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{currentContent.blogTitle}</h2>
-        <p class="font-normal text-gray-700 dark:text-gray-400">{currentContent.blogDesc}</p>
-      </a>
-
-      <a href={`${basePath}/garden/talks/`} class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{currentContent.talksTitle}</h2>
-        <p class="font-normal text-gray-700 dark:text-gray-400">{currentContent.talksDesc}</p>
-      </a>
-
-      <a href="https://redreamality.com/benchmark-papers" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{currentContent.benchmarkTitle}</h2>
-        <p class="font-normal text-gray-700 dark:text-gray-400">{currentContent.benchmarkDesc}</p>
-      </a>
-    </div>
-
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- Recent Blog Posts -->
-        <div>
-          <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold dark:text-white">{currentContent.recentBlogTitle}</h2>
-            <a href={`${basePath}/blog/`} class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-              {currentContent.viewAllPosts} →
-            </a>
-          </div>
-          <div class="space-y-4">
-            {recentPosts.map((post) => (
-              <article class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
-                <h3 class="text-xl font-semibold mb-2">
-                  <a
-                    href={`${basePath}/blog/${post.slug}/`}
-                    class="hover:text-blue-600 dark:hover:text-blue-400"
-                  >
-                    {post.data.title}
-                  </a>
-                </h3>
-                <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">{post.data.description}</p>
-                <div class="flex flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400">
-                  <time datetime={post.data.pubDate.toISOString()}>
-                    <span class="mr-1">📅</span>
-                    {post.data.pubDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US')}
-                  </time>
-                  {post.data.tags && (
-                    <div class="flex gap-1">
-                      <span class="mr-1">🏷️</span>
-                      {post.data.tags
-                        .filter((tag: string) => tagCounts[tag] >= 2)
-                        .slice(0, 2)
-                        .map((tag: string) => (
-                        <a
-                          href={`${basePath}/tags/${tag}/`}
-                          class="hover:text-blue-600 dark:hover:text-blue-400"
-                        >
-                          #{tag}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <!-- Right Column: Recent Talks + Recent Questions -->
-        <div class="space-y-12">
-          <!-- Recent Talks -->
-          <div>
-            <div class="flex justify-between items-center mb-6">
-              <h2 class="text-2xl font-bold dark:text-white">{currentContent.recentTalksTitle}</h2>
-              <a href={`${basePath}/garden/talks/`} class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                {currentContent.viewAllTalks} →
-              </a>
-            </div>
-            <div class="space-y-4">
-              {recentTalks.map((talk) => (
-                <article class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
-                  <h3 class="text-xl font-semibold mb-2">
-                    <a
-                      href={`${basePath}/garden/talks/${talk.slug}/`}
-                      class="hover:text-blue-600 dark:hover:text-blue-400"
-                    >
-                      {talk.data.title}
-                    </a>
-                  </h3>
-                  <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">{talk.data.description}</p>
-                  <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
-                    <time datetime={talk.data.date.toISOString()}>
-                      <span class="mr-1">📅</span>
-                      {talk.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US')}
-                    </time>
-                    {talk.data.location && (
-                      <div>
-                        <span class="mr-1">📍</span>
-                        {talk.data.location}
-                      </div>
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          <!-- Recent Questions -->
-          <div>
-            <div class="flex justify-between items-center mb-6">
-              <h2 class="text-2xl font-bold dark:text-white">{currentContent.recentQuestionsTitle}</h2>
-              <a
-                href={`${basePath}/garden/questions/`}
-                class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-              >
-                {currentContent.viewAllQuestions} →
-              </a>
-            </div>
-
-            {recentQuestions.length === 0 ? (
-              <p class="text-gray-500 dark:text-gray-400">{currentContent.noQuestionsMessage}</p>
-            ) : (
-              <div class="space-y-4">
-                {recentQuestions.map((question) => (
-                  <article class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
-                    <h3 class="text-xl font-semibold mb-2">
-                      <a
-                        href={`${basePath}/garden/questions/${question.slug}/`}
-                        class="hover:text-blue-600 dark:hover:text-blue-400"
-                      >
-                        {question.data.title}
-                      </a>
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">{question.data.description}</p>
-                    <div class="flex flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400">
-                      <time datetime={question.data.date.toISOString()}>
-                        <span class="mr-1">📅</span>
-                        {question.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US')}
-                      </time>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <!-- Recent Chaos -->
-          <div>
-            <div class="flex justify-between items-center mb-6">
-              <h2 class="text-2xl font-bold dark:text-white">{currentContent.recentChaosTitle}</h2>
-              <a
-                href={`${basePath}/garden/chaos/`}
-                class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-              >
-                {currentContent.viewAllChaos} →
-              </a>
-            </div>
-
-            {recentChaos.length === 0 ? (
-              <p class="text-gray-500 dark:text-gray-400">{currentContent.noChaosMessage}</p>
-            ) : (
-              <div class="space-y-4">
-                {recentChaos.map((post) => (
-                  <article class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
-                    <h3 class="text-xl font-semibold mb-2">
-                      <a
-                        href={`${basePath}/garden/chaos/${post.slug}/`}
-                        class="hover:text-blue-600 dark:hover:text-blue-400"
-                      >
-                        {post.data.title}
-                      </a>
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">{post.data.description}</p>
-                    <div class="flex flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400">
-                      <time datetime={post.data.pubDate.toISOString()}>
-                        {post.data.pubDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US')}
-                      </time>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <!-- Recent Notes -->
-      <div class="mt-12">
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-2xl font-bold dark:text-white">{currentContent.recentNotesTitle}</h2>
-          <a
-            href={`${basePath}/garden/notes/`}
-            class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-          >
-            {currentContent.viewAllNotes} →
-          </a>
-        </div>
-
-        {recentNotes.length === 0 ? (
-          <p class="text-gray-500 dark:text-gray-400">{currentContent.noNotesMessage}</p>
-        ) : (
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {recentNotes.map((note) => (
-              <article class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
-                <h3 class="text-xl font-semibold mb-2">
-                  <a
-                    href={`${basePath}/garden/notes/${note.slug}/`}
-                    class="hover:text-blue-600 dark:hover:text-blue-400"
-                  >
-                    {note.data.title}
-                  </a>
-                </h3>
-                {note.data.description && (
-                  <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">{note.data.description}</p>
-                )}
-                <div class="flex flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400">
-                  <time datetime={note.data.date.toISOString()}>
-                    <span class="mr-1">📅</span>
-                    {note.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US')}
-                  </time>
-                  {note.data.bookTitle && (
-                    <div>
-                      <span class="mr-1">📖</span>
-                      {note.data.bookTitle}
-                    </div>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  </div>
+<Layout title="Home">
+  <HomeHero lang={lang} />
+  <HomeSections
+    lang={lang}
+    posts={posts}
+    meditations={meditations}
+    talks={talks}
+    questions={questions}
+    chaos={chaos}
+    notes={notes}
+    tagCounts={tagCounts}
+  />
 </Layout>

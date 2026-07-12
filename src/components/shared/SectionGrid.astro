@@ -1,0 +1,91 @@
+---
+import ContentCard, { type CardBadge } from './ContentCard.astro';
+
+export interface SectionItem {
+  href: string;
+  title: string;
+  description?: string;
+  dateISO?: string;
+  dateLabel?: string;
+  tags?: string[];
+  tagBasePath?: string;
+  tagCounts?: Record<string, number>;
+  badges?: CardBadge[];
+}
+
+interface Props {
+  title: string;
+  viewAllHref?: string;
+  viewAllLabel?: string;
+  columns?: 1 | 2 | 3;
+  accent?: 'brand' | 'ink' | 'accent';
+  emptyMessage?: string;
+  items: SectionItem[];
+  id?: string;
+}
+
+const {
+  title,
+  viewAllHref,
+  viewAllLabel = 'View all',
+  columns = 1,
+  accent = 'brand',
+  emptyMessage,
+  items,
+  id,
+} = Astro.props;
+
+const gridCols: Record<number, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-1 md:grid-cols-2',
+  3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+};
+
+const accentBar: Record<string, string> = {
+  brand: 'bg-brand-gradient',
+  ink: 'bg-ink-500',
+  accent: 'bg-accent-500',
+};
+const accentLink: Record<string, string> = {
+  brand: 'text-brand-600 hover:text-brand-700 dark:text-brand-300 dark:hover:text-brand-200',
+  ink: 'text-ink-600 hover:text-ink-500 dark:text-ink-400',
+  accent: 'text-accent-600 hover:text-accent-500 dark:text-accent-400',
+};
+---
+
+<section id={id} class="scroll-mt-24">
+  <div class="flex items-center justify-between gap-4 mb-5">
+    <h2 class="flex items-center gap-3 text-2xl font-display font-bold text-surface-900 dark:text-white">
+      <span class:list={['inline-block h-6 w-1.5 rounded-full', accentBar[accent]]} aria-hidden="true"></span>
+      {title}
+    </h2>
+    {viewAllHref && (
+      <a href={viewAllHref} class:list={['shrink-0 text-sm font-medium transition-colors', accentLink[accent]]}>
+        {viewAllLabel} <span aria-hidden="true">→</span>
+      </a>
+    )}
+  </div>
+
+  {items.length === 0 ? (
+    <p class="text-surface-500 dark:text-surface-400 text-sm rounded-2xl border border-dashed border-surface-300 dark:border-surface-700 p-6 text-center">
+      {emptyMessage}
+    </p>
+  ) : (
+    <div class:list={['grid gap-4', gridCols[columns]]}>
+      {items.map((item) => (
+        <ContentCard
+          href={item.href}
+          title={item.title}
+          description={item.description}
+          dateISO={item.dateISO}
+          dateLabel={item.dateLabel}
+          tags={item.tags}
+          tagBasePath={item.tagBasePath}
+          tagCounts={item.tagCounts}
+          badges={item.badges}
+          accent={accent}
+        />
+      ))}
+    </div>
+  )}
+</section>

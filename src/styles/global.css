@@ -1,3 +1,15 @@
+/* Self-hosted fonts (no external Google Fonts request; font-display:swap built in) */
+@import '@fontsource/sora/400.css';
+@import '@fontsource/sora/600.css';
+@import '@fontsource/sora/700.css';
+@import '@fontsource/sora/800.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +25,32 @@
   }
 
   body {
-    @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white;
+    @apply bg-surface-50 text-surface-900 dark:bg-surface-950 dark:text-surface-100 font-sans antialiased;
+  }
+
+  h1, h2, h3, .font-display {
+    font-feature-settings: 'ss01', 'cv01';
+  }
+
+  /* Scroll-reveal base state.
+     Elements carry .reveal-init in markup, but are only HIDDEN when the
+     <html>.js marker is present (set synchronously by the head inline script
+     before first paint). So: no JS -> visible; reduced-motion -> visible;
+     JS + motion -> hidden first, then revealed by IntersectionObserver. */
+  .js .reveal-init {
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+  .reveal-shown {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js .reveal-init {
+      opacity: 1;
+      transform: none;
+      will-change: auto;
+    }
   }
 }
 

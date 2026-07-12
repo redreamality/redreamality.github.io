@@ -1,15 +1,13 @@
 import rss from '@astrojs/rss';
-import { getBlogPosts } from '../../utils/i18n';
+import { getBlogPosts, getMeditations } from '../../utils/i18n';
 
 export async function GET(context) {
   const posts = await getBlogPosts('zh');
+  const meditations = await getMeditations('zh');
   const siteUrl = context.site?.toString() || 'https://redreamality.com';
-  
-  return rss({
-    title: 'Redreamality 博客 - 技术见解',
-    description: '来自Redreamality的技术见解、教程和软件开发思考',
-    site: siteUrl,
-    items: posts.map((post) => ({
+
+  const items = [
+    ...posts.map((post) => ({
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.pubDate,
@@ -18,6 +16,22 @@ export async function GET(context) {
       tags: post.data.tags,
       customData: `<language>zh-CN</language>`,
     })),
+    ...meditations.map((m) => ({
+      title: m.data.title,
+      description: m.data.description,
+      pubDate: m.data.date,
+      link: `/cn/garden/meditations/${m.slug}`,
+      tags: m.data.tags,
+      categories: ['meditations'],
+      customData: `<language>zh-CN</language>`,
+    })),
+  ].sort((a, b) => new Date(b.pubDate).valueOf() - new Date(a.pubDate).valueOf());
+
+  return rss({
+    title: 'Redreamality 博客 - 技术见解',
+    description: '来自Redreamality的技术见解、教程和软件开发思考',
+    site: siteUrl,
+    items,
     xmlns: {
       atom: 'http://www.w3.org/2005/Atom',
       content: 'http://purl.org/rss/1.0/modules/content/',

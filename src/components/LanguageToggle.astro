@@ -21,7 +21,8 @@ const cleanPath = currentPath.replace(/^\/(cn|ja)/, ''); // Remove /cn or /ja pr
 const isContentPage =
   cleanPath.includes('/blog/') ||
   cleanPath.includes('/garden/talks/') ||
-  cleanPath.includes('/garden/chaos/');
+  cleanPath.includes('/garden/chaos/') ||
+  cleanPath.includes('/garden/meditations/');
 
 // Generate unique IDs for this instance
 const toggleBtnId = `language-toggle-btn-${instanceId}`;
@@ -161,7 +162,8 @@ const availabilityIdMap: Record<Language, string> = {
     const isContentPage =
       cleanPath.includes('/blog/') ||
       cleanPath.includes('/garden/talks/') ||
-      cleanPath.includes('/garden/chaos/');
+      cleanPath.includes('/garden/chaos/') ||
+      cleanPath.includes('/garden/meditations/');
     if (!isContentPage) return;
 
     try {
@@ -177,6 +179,9 @@ const availabilityIdMap: Record<Language, string> = {
       } else if (cleanPath.includes('/garden/talks/')) {
         contentType = 'garden/talks';
         slug = cleanPath.split('/garden/talks/')[1].replace(/\/$/, '');
+      } else if (cleanPath.includes('/garden/meditations/')) {
+        contentType = 'garden/meditations';
+        slug = cleanPath.split('/garden/meditations/')[1].replace(/\/$/, '');
       }
 
       if (!slug) return;

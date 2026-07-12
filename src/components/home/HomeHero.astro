@@ -1,0 +1,223 @@
+---
+import type { Language } from '../../utils/i18n';
+import { homeContent } from '../../utils/homeContent';
+
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+const c = homeContent[lang];
+const basePath = lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : '';
+
+const entries = [
+  {
+    href: `${basePath}/projects/`,
+    title: c.projectsTitle,
+    desc: c.projectsDesc,
+    accent: 'brand',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25A2.25 2.25 0 0 1 8.25 10.5H6A2.25 2.25 0 0 1 3.75 8.25V6zM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 8.25 20.25H6A2.25 2.25 0 0 1 3.75 18v-2.25zM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25A2.25 2.25 0 0 1 13.5 8.25V6zM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25z" />',
+  },
+  {
+    href: `${basePath}/blog/`,
+    title: c.blogTitle,
+    desc: c.blogDesc,
+    accent: 'accent',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9V21a1.5 1.5 0 0 1-1.5 1.5H5.25A1.5 1.5 0 0 1 3.75 21V4.5A1.5 1.5 0 0 1 5.25 3h6.75l5.25 5.25z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v4.5A1.5 1.5 0 0 0 13.5 9H18" />',
+  },
+  {
+    href: `${basePath}/garden/meditations/`,
+    title: c.meditationsTitle,
+    desc: c.meditationsDesc,
+    accent: 'ink',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 3c-1.657 0-3 1.79-3 4 0 1.38.56 2.59 1.41 3.31C9.55 11.1 9 12.3 9 13.5c0 2.21 1.343 4 3 4s3-1.79 3-4c0-1.2-.55-2.4-1.41-3.19C14.44 9.59 15 8.38 15 7c0-2.21-1.343-4-3-4z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 17.5V21M8 21h8" />',
+  },
+  {
+    href: `${basePath}/garden/talks/`,
+    title: c.talksTitle,
+    desc: c.talksDesc,
+    accent: 'brand',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h7.5a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-7.5A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25z" />',
+  },
+];
+
+const iconWrap: Record<string, string> = {
+  brand: 'bg-brand-500/10 text-brand-600 dark:text-brand-300 group-hover:bg-brand-500 group-hover:text-white',
+  accent: 'bg-accent-500/10 text-accent-600 dark:text-accent-400 group-hover:bg-accent-500 group-hover:text-white',
+  ink: 'bg-ink-500/10 text-ink-600 dark:text-ink-400 group-hover:bg-ink-500 group-hover:text-white',
+};
+---
+
+<section class="relative isolate -mt-8 pt-10 pb-12 md:pt-16 md:pb-16" data-hero>
+  <!-- Decorative animated backdrop (canvas drawn by hero script in Phase 6) -->
+  <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+    <canvas id="hero-canvas" class="absolute inset-0 h-full w-full opacity-70"></canvas>
+    <div class="absolute inset-0 bg-grid-faint [background-size:42px_42px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_60%,transparent_100%)]"></div>
+    <div class="absolute left-1/2 top-[-10%] h-72 w-72 -translate-x-1/2 rounded-full bg-brand-500/20 blur-3xl"></div>
+    <div class="absolute right-[12%] top-[20%] h-48 w-48 rounded-full bg-accent-500/15 blur-3xl"></div>
+  </div>
+
+  <div class="mx-auto max-w-4xl text-center px-4">
+    <span data-hero-kicker class="reveal-init inline-flex items-center gap-2 rounded-full border border-surface-200 dark:border-surface-700 bg-white/60 dark:bg-surface-900/60 px-4 py-1.5 text-xs font-medium tracking-wide text-surface-600 dark:text-surface-300 backdrop-blur">
+      <span class="h-1.5 w-1.5 rounded-full bg-accent-500 animate-float"></span>
+      {c.kicker}
+    </span>
+
+    <h1 data-hero-title class="mt-6 font-display text-5xl md:text-7xl font-extrabold tracking-tight text-surface-900 dark:text-white">
+      <span class="bg-brand-gradient bg-clip-text text-transparent">{c.title}</span>
+    </h1>
+
+    <p data-hero-sub class="reveal-init mx-auto mt-5 max-w-2xl text-base md:text-lg leading-relaxed text-surface-600 dark:text-surface-300">
+      {c.subtitle}
+    </p>
+  </div>
+
+  <div class="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-4 px-4 sm:grid-cols-2 lg:grid-cols-4">
+    {entries.map((e) => (
+      <a
+        href={e.href}
+        class="reveal-init group relative flex flex-col overflow-hidden rounded-2xl border border-surface-200/80 dark:border-surface-800 bg-white dark:bg-surface-900 p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
+      >
+        <span class:list={['mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl transition-colors duration-300', iconWrap[e.accent]]}>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" set:html={e.icon} />
+        </span>
+        <span class="font-display text-lg font-bold text-surface-900 dark:text-white">{e.title}</span>
+        <span class="mt-1 text-sm text-surface-500 dark:text-surface-400">{e.desc}</span>
+        <span class="mt-3 text-sm font-medium text-brand-600 dark:text-brand-300 opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+          →
+        </span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<script>
+  import { prefersReducedMotion } from '../../utils/animations';
+
+  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement | null;
+  const heroEl = document.querySelector('[data-hero]') as HTMLElement | null;
+
+  if (canvas && heroEl && !prefersReducedMotion()) {
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+      let nodes: { x: number; y: number; vx: number; vy: number }[] = [];
+      let raf = 0;
+      let running = false;
+
+      const isDark = () => document.documentElement.classList.contains('dark');
+
+      const resize = () => {
+        const rect = heroEl.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = Math.max(1, rect.width);
+        height = Math.max(1, rect.height);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+
+      const build = () => {
+        const count = Math.min(60, Math.max(22, Math.floor(width / 26)));
+        nodes = Array.from({ length: count }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
+        }));
+      };
+
+      const tick = () => {
+        ctx.clearRect(0, 0, width, height);
+        const dark = isDark();
+        const dot = dark ? 'rgba(124,135,251,0.55)' : 'rgba(91,91,240,0.5)';
+        const lineBase = dark ? '45,212,191' : '91,91,240';
+        const maxDist = 130;
+
+        for (const n of nodes) {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0 || n.x > width) n.vx *= -1;
+          if (n.y < 0 || n.y > height) n.vy *= -1;
+        }
+
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < maxDist) {
+              ctx.strokeStyle = `rgba(${lineBase},${(1 - dist / maxDist) * 0.18})`;
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        ctx.fillStyle = dot;
+        for (const n of nodes) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        raf = requestAnimationFrame(tick);
+      };
+
+      const play = () => {
+        if (running) return;
+        running = true;
+        raf = requestAnimationFrame(tick);
+      };
+      const pause = () => {
+        running = false;
+        cancelAnimationFrame(raf);
+      };
+
+      const start = () => {
+        resize();
+        build();
+        play();
+      };
+
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(start, { timeout: 600 });
+      } else {
+        setTimeout(start, 200);
+      }
+
+      let resizeTimer = 0;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(() => {
+          resize();
+          build();
+        }, 200);
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) pause();
+        else if (nodes.length) play();
+      });
+
+      // Pause when the hero scrolls out of view to save battery/CPU.
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              if (nodes.length) play();
+            } else {
+              pause();
+            }
+          }
+        },
+        { threshold: 0 }
+      );
+      io.observe(heroEl);
+    }
+  }
+</script>

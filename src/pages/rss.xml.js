@@ -1,15 +1,13 @@
 import rss from '@astrojs/rss';
-import { getBlogPosts } from '../utils/i18n';
+import { getBlogPosts, getMeditations } from '../utils/i18n';
 
 export async function GET(context) {
   const posts = await getBlogPosts('en');
+  const meditations = await getMeditations('en');
   const siteUrl = context.site?.toString() || 'https://redreamality.com';
-  
-  return rss({
-    title: 'Redreamality Blog - Technical Insights',
-    description: 'Technical insights, tutorials, and thoughts on software development from Redreamality',
-    site: siteUrl,
-    items: posts.map((post) => ({
+
+  const items = [
+    ...posts.map((post) => ({
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.pubDate,
@@ -18,6 +16,21 @@ export async function GET(context) {
       tags: post.data.tags,
       customData: post.data.lang ? `<language>${post.data.lang === 'zh' ? 'zh-CN' : post.data.lang === 'ja' ? 'ja-JP' : 'en-US'}</language>` : undefined,
     })),
+    ...meditations.map((m) => ({
+      title: m.data.title,
+      description: m.data.description,
+      pubDate: m.data.date,
+      link: `/garden/meditations/${m.slug}`,
+      tags: m.data.tags,
+      categories: ['meditations'],
+    })),
+  ].sort((a, b) => new Date(b.pubDate).valueOf() - new Date(a.pubDate).valueOf());
+
+  return rss({
+    title: 'Redreamality Blog - Technical Insights',
+    description: 'Technical insights, tutorials, and thoughts on software development from Redreamality',
+    site: siteUrl,
+    items,
     xmlns: {
       atom: 'http://www.w3.org/2005/Atom',
       content: 'http://purl.org/rss/1.0/modules/content/',

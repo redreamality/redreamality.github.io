@@ -1,0 +1,112 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import TableOfContents from '../../../components/TableOfContents.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import { getMeditations, getTagCounts, type Language } from '../../../utils/i18n';
+import { rankRelatedContent } from '../../../utils/related';
+
+const lang: Language = 'en';
+
+export async function getStaticPaths() {
+  const meditations = await getMeditations('en');
+  return meditations.map((m) => ({
+    params: { slug: m.slug },
+    props: { meditation: m },
+  }));
+}
+
+const { meditation } = Astro.props;
+if (!meditation) {
+  return Astro.redirect('/404', 404);
+}
+
+const { Content, headings } = await meditation.render();
+const basePath = '';
+const formattedDate = new Date(meditation.data.date).toISOString();
+
+const strings = {
+  back: 'Back to Meditations',
+  tagsTitle: 'Tags:',
+  relatedTitle: 'Related Reflections',
+};
+
+const all = await getMeditations(lang);
+const tagCounts = await getTagCounts(lang);
+const related = rankRelatedContent(all, meditation, { dateField: 'date', limit: 6 });
+const relatedItems = related.map((r) => ({
+  href: `${basePath}/garden/meditations/${r.slug}/`,
+  title: r.data.title,
+  description: r.data.description,
+  date: r.data.date,
+}));
+---
+
+<Layout
+  title={meditation.data.title}
+  description={meditation.data.description}
+  publishDate={formattedDate}
+  tags={meditation.data.tags || []}
+  type="article"
+>
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      {headings && headings.length > 0 && <TableOfContents headings={headings} />}
+      <article class="prose dark:prose-invert lg:prose-xl mx-auto">
+        <header class="mb-8">
+          {meditation.data.theme && (
+            <span class="not-prose inline-flex items-center gap-2 rounded-full border border-ink-500/30 bg-ink-500/10 px-3 py-1 text-xs font-medium text-ink-600 dark:text-ink-400">
+              🪷 {meditation.data.theme}
+            </span>
+          )}
+          <h1 class="text-4xl font-display font-bold text-surface-900 dark:text-white mt-4 mb-4">{meditation.data.title}</h1>
+          <div class="flex flex-wrap items-center gap-4 text-sm text-surface-500 dark:text-surface-400 mb-6">
+            <time datetime={formattedDate}>
+              {new Date(meditation.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+          </div>
+
+          {meditation.data.tags && meditation.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mb-6 not-prose">
+              <span class="text-sm font-medium text-surface-600 dark:text-surface-300">{strings.tagsTitle}</span>
+              {meditation.data.tags.map((tag) => (
+                (tagCounts[tag] ?? 0) >= 2 ? (
+                  <a href={`${basePath}/tags/${tag}/`} class="inline-block px-2 py-1 text-xs bg-surface-100 text-surface-700 rounded dark:bg-surface-800 dark:text-surface-300 hover:text-ink-600 dark:hover:text-ink-400 transition-colors">
+                    #{tag}
+                  </a>
+                ) : (
+                  <span class="inline-block px-2 py-1 text-xs bg-surface-100 text-surface-700 rounded dark:bg-surface-800 dark:text-surface-300">#{tag}</span>
+                )
+              ))}
+            </div>
+          )}
+        </header>
+
+        <div class="prose dark:prose-invert max-w-none">
+          <Content />
+        </div>
+
+        <footer class="mt-12 pt-8 border-t border-surface-200 dark:border-surface-700 not-prose">
+          <RelatedContent title={strings.relatedTitle} items={relatedItems} lang={lang} />
+
+          <div class="mt-10">
+            <a
+              href={`${basePath}/garden/meditations/`}
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-ink-500 rounded-lg hover:bg-ink-600 focus:ring-4 focus:outline-none focus:ring-ink-400/40 transition-colors"
+            >
+              {strings.back}
+              <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+              </svg>
+            </a>
+          </div>
+        </footer>
+      </article>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .prose :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
+    margin-top: 2em;
+  }
+</style>

@@ -1,0 +1,70 @@
+---
+import ContentCard, { type CardBadge } from './ContentCard.astro';
+
+export interface ListingItem {
+  href: string;
+  title: string;
+  description?: string;
+  dateISO?: string;
+  dateLabel?: string;
+  tags?: string[];
+  tagBasePath?: string;
+  tagCounts?: Record<string, number>;
+  badges?: CardBadge[];
+}
+
+interface Props {
+  kicker: string;
+  title: string;
+  subtitle: string;
+  emptyMessage: string;
+  accent?: 'brand' | 'ink' | 'accent';
+  columns?: 2 | 3;
+  items: ListingItem[];
+}
+
+const { kicker, title, subtitle, emptyMessage, accent = 'brand', columns = 2, items } = Astro.props;
+
+const pill: Record<string, string> = {
+  brand: 'border-brand-500/30 bg-brand-500/10 text-brand-600 dark:text-brand-300',
+  ink: 'border-ink-500/30 bg-ink-500/10 text-ink-600 dark:text-ink-400',
+  accent: 'border-accent-500/30 bg-accent-500/10 text-accent-600 dark:text-accent-400',
+};
+const dot: Record<string, string> = {
+  brand: 'bg-brand-500',
+  ink: 'bg-ink-500',
+  accent: 'bg-accent-500',
+};
+const grid = columns === 3 ? 'sm:grid-cols-2 lg:grid-cols-3' : 'md:grid-cols-2';
+---
+
+<div class="mx-auto max-w-6xl px-4">
+  <header class="mb-10 text-center">
+    <span class:list={['inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-medium tracking-wide', pill[accent]]}>
+      <span class:list={['h-1.5 w-1.5 rounded-full', dot[accent]]}></span>{kicker}
+    </span>
+    <h1 class="mt-5 font-display text-5xl md:text-6xl font-extrabold tracking-tight text-surface-900 dark:text-white">{title}</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-base md:text-lg leading-relaxed text-surface-600 dark:text-surface-300">{subtitle}</p>
+  </header>
+
+  {items.length === 0 ? (
+    <p class="rounded-2xl border border-dashed border-surface-300 dark:border-surface-700 p-10 text-center text-surface-500 dark:text-surface-400">{emptyMessage}</p>
+  ) : (
+    <div class:list={['grid grid-cols-1 gap-4', grid]}>
+      {items.map((item) => (
+        <ContentCard
+          href={item.href}
+          title={item.title}
+          description={item.description}
+          dateISO={item.dateISO}
+          dateLabel={item.dateLabel}
+          tags={item.tags}
+          tagBasePath={item.tagBasePath}
+          tagCounts={item.tagCounts}
+          badges={item.badges}
+          accent={accent}
+        />
+      ))}
+    </div>
+  )}
+</div>

@@ -1,0 +1,144 @@
+---
+import type { Language } from '../../utils/i18n';
+import { homeContent, localeFor } from '../../utils/homeContent';
+import SectionGrid, { type SectionItem } from '../shared/SectionGrid.astro';
+
+type Entry = { slug: string; data: Record<string, any> };
+
+interface Props {
+  lang: Language;
+  posts: Entry[];
+  meditations: Entry[];
+  talks: Entry[];
+  questions: Entry[];
+  chaos: Entry[];
+  notes: Entry[];
+  tagCounts: Record<string, number>;
+}
+
+const { lang, posts, meditations, talks, questions, chaos, notes, tagCounts } = Astro.props;
+const c = homeContent[lang];
+const basePath = lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : '';
+const locale = localeFor(lang);
+
+const fmt = (d: Date) => new Date(d).toLocaleDateString(locale);
+
+const blogItems: SectionItem[] = posts.slice(0, 12).map((p) => ({
+  href: `${basePath}/blog/${p.slug}/`,
+  title: p.data.title,
+  description: p.data.description,
+  dateISO: new Date(p.data.pubDate).toISOString(),
+  dateLabel: fmt(p.data.pubDate),
+  tags: p.data.tags,
+  tagBasePath: `${basePath}/tags`,
+  tagCounts,
+}));
+
+const meditationItems: SectionItem[] = meditations.slice(0, 4).map((m) => ({
+  href: `${basePath}/garden/meditations/${m.slug}/`,
+  title: m.data.title,
+  description: m.data.description,
+  dateISO: new Date(m.data.date).toISOString(),
+  dateLabel: fmt(m.data.date),
+  badges: m.data.theme ? [{ icon: '🪷', label: m.data.theme }] : [],
+}));
+
+const talkItems: SectionItem[] = talks.slice(0, 5).map((t) => ({
+  href: `${basePath}/garden/talks/${t.slug}/`,
+  title: t.data.title,
+  description: t.data.description,
+  dateISO: new Date(t.data.date).toISOString(),
+  dateLabel: fmt(t.data.date),
+  badges: t.data.location ? [{ icon: '📍', label: t.data.location }] : [],
+}));
+
+const questionItems: SectionItem[] = questions.slice(0, 6).map((q) => ({
+  href: `${basePath}/garden/questions/${q.slug}/`,
+  title: q.data.title,
+  description: q.data.description,
+  dateISO: new Date(q.data.date).toISOString(),
+  dateLabel: fmt(q.data.date),
+}));
+
+const chaosItems: SectionItem[] = chaos.slice(0, 6).map((p) => ({
+  href: `${basePath}/garden/chaos/${p.slug}/`,
+  title: p.data.title,
+  description: p.data.description,
+  dateISO: new Date(p.data.pubDate).toISOString(),
+  dateLabel: fmt(p.data.pubDate),
+}));
+
+const noteItems: SectionItem[] = notes.slice(0, 6).map((n) => ({
+  href: `${basePath}/garden/notes/${n.slug}/`,
+  title: n.data.title,
+  description: n.data.description,
+  dateISO: new Date(n.data.date).toISOString(),
+  dateLabel: fmt(n.data.date),
+}));
+---
+
+<div class="mx-auto max-w-6xl px-4">
+  <div class="grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-2">
+    <!-- Left: blog -->
+    <SectionGrid
+      title={c.recentBlogTitle}
+      viewAllHref={`${basePath}/blog/`}
+      viewAllLabel={c.viewAll}
+      columns={1}
+      accent="brand"
+      items={blogItems}
+    />
+
+    <!-- Right: meditations + talks + questions -->
+    <div class="space-y-12">
+      <SectionGrid
+        title={c.recentMeditationsTitle}
+        viewAllHref={`${basePath}/garden/meditations/`}
+        viewAllLabel={c.viewAll}
+        columns={1}
+        accent="ink"
+        emptyMessage={c.noMeditationsMessage}
+        items={meditationItems}
+      />
+      <SectionGrid
+        title={c.recentTalksTitle}
+        viewAllHref={`${basePath}/garden/talks/`}
+        viewAllLabel={c.viewAll}
+        columns={1}
+        accent="accent"
+        items={talkItems}
+      />
+      <SectionGrid
+        title={c.recentQuestionsTitle}
+        viewAllHref={`${basePath}/garden/questions/`}
+        viewAllLabel={c.viewAll}
+        columns={1}
+        accent="brand"
+        emptyMessage={c.noQuestionsMessage}
+        items={questionItems}
+      />
+    </div>
+  </div>
+
+  <!-- Full width: chaos + notes -->
+  <div class="mt-14 space-y-14">
+    <SectionGrid
+      title={c.recentChaosTitle}
+      viewAllHref={`${basePath}/garden/chaos/`}
+      viewAllLabel={c.viewAll}
+      columns={3}
+      accent="accent"
+      emptyMessage={c.noChaosMessage}
+      items={chaosItems}
+    />
+    <SectionGrid
+      title={c.recentNotesTitle}
+      viewAllHref={`${basePath}/garden/notes/`}
+      viewAllLabel={c.viewAll}
+      columns={3}
+      accent="brand"
+      emptyMessage={c.noNotesMessage}
+      items={noteItems}
+    />
+  </div>
+</div>

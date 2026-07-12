@@ -1,0 +1,57 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import ContentCard from '../../../../components/shared/ContentCard.astro';
+import { getMeditations, getTagCounts, type Language } from '../../../../utils/i18n';
+
+const lang: Language = 'zh';
+const meditations = await getMeditations(lang);
+const tagCounts = await getTagCounts(lang);
+const basePath = '/cn';
+
+const strings = {
+  title: '沉思录',
+  kicker: '个人感悟',
+  subtitle: '博客记录我学到的东西，沉思录记录我想明白的东西。关于工程、关于时间、关于人在 AI 加速一切之后还剩下什么——那些慢下来的念头。',
+  empty: '暂无感悟——第一批正在路上。',
+};
+const locale = 'zh-CN';
+---
+
+<Layout title={strings.title} description={strings.subtitle}>
+  <div class="mx-auto max-w-5xl px-4">
+    <header class="mb-12 text-center">
+      <span class="inline-flex items-center gap-2 rounded-full border border-ink-500/30 bg-ink-500/10 px-4 py-1.5 text-xs font-medium tracking-wide text-ink-600 dark:text-ink-400">
+        <span class="h-1.5 w-1.5 rounded-full bg-ink-500"></span>{strings.kicker}
+      </span>
+      <h1 class="mt-5 font-display text-5xl md:text-6xl font-extrabold tracking-tight text-surface-900 dark:text-white">
+        {strings.title}
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-base md:text-lg leading-relaxed text-surface-600 dark:text-surface-300">
+        {strings.subtitle}
+      </p>
+    </header>
+
+    {meditations.length === 0 ? (
+      <p class="rounded-2xl border border-dashed border-surface-300 dark:border-surface-700 p-10 text-center text-surface-500 dark:text-surface-400">
+        {strings.empty}
+      </p>
+    ) : (
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {meditations.map((m) => (
+          <ContentCard
+            href={`${basePath}/garden/meditations/${m.slug}/`}
+            title={m.data.title}
+            description={m.data.description}
+            dateISO={new Date(m.data.date).toISOString()}
+            dateLabel={new Date(m.data.date).toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' })}
+            tags={m.data.tags}
+            tagBasePath={`${basePath}/tags`}
+            tagCounts={tagCounts}
+            badges={m.data.theme ? [{ icon: '🪷', label: m.data.theme }] : []}
+            accent="ink"
+          />
+        ))}
+      </div>
+    )}
+  </div>
+</Layout>

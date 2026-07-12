@@ -3,6 +3,7 @@
 import '../styles/global.css';
 import 'katex/dist/katex.min.css';
 import LanguageToggle from '../components/LanguageToggle.astro';
+import DarkModeToggle from '../components/DarkModeToggle.astro';
 import AntiAdblock from '../components/AntiAdblock.astro';
 import {
   detectLanguageFromPath,
@@ -50,6 +51,7 @@ const chaosHref = getLocalizedPath('/garden/chaos/', currentLang);
 const talksHref = getLocalizedPath('/garden/talks/', currentLang);
 const questionsHref = getLocalizedPath('/garden/questions/', currentLang);
 const notesHref = getLocalizedPath('/garden/notes/', currentLang);
+const meditationsHref = getLocalizedPath('/garden/meditations/', currentLang);
 const projectsHref = getLocalizedPath('/projects/', currentLang);
 const aboutHref = getLocalizedPath('/about/', currentLang);
 ---
@@ -57,6 +59,19 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
 <!DOCTYPE html>
 <html lang={languageCode}>
     <head>
+        <!-- Theme + JS marker: runs synchronously before first paint to avoid FOUC -->
+        <script is:inline>
+            (function () {
+                try {
+                    document.documentElement.classList.add('js');
+                    var stored = localStorage.getItem('theme');
+                    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    if (stored === 'dark' || (!stored && prefersDark)) {
+                        document.documentElement.classList.add('dark');
+                    }
+                } catch (e) {}
+            })();
+        </script>
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-4WM6C44V4Z"></script>
         <script>
@@ -161,18 +176,21 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
             })(document,"script");
         </script>
     </head>
-    <body class="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
-        <nav class="bg-white border-gray-200 dark:bg-gray-900 fixed top-0 left-0 w-full z-50">
+    <body class="min-h-screen bg-surface-50 dark:bg-surface-950 flex flex-col">
+        <nav class="bg-surface-50/80 dark:bg-surface-950/80 backdrop-blur-md border-b border-surface-200/70 dark:border-surface-800/70 fixed top-0 left-0 w-full z-50">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href={homeHref} class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Remy's Blog</span>
+                <a href={homeHref} class="flex items-center space-x-3 rtl:space-x-reverse group">
+                    <span class="self-center text-2xl font-display font-bold whitespace-nowrap text-surface-900 dark:text-white">Remy<span class="text-brand-500 group-hover:text-accent-400 transition-colors">.</span>Blog</span>
                 </a>
+                <div class="flex items-center gap-1 md:hidden">
+                <DarkModeToggle />
                 <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false" id="mobile-menu-button">
                     <span class="sr-only">Open main menu</span>
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
                     </svg>
                 </button>
+                </div>
                 <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                     <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li><a href={homeHref} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{t('home', currentLang)}</a></li>
@@ -200,6 +218,9 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
                                     <li>
                                         <a href={notesHref} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('notes', currentLang)}</a>
                                     </li>
+                                    <li>
+                                        <a href={meditationsHref} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('meditations', currentLang)}</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="nav-dropdown-desktop absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg dark:bg-gray-800 z-50 hidden md:block">
@@ -219,6 +240,9 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
                                     <li>
                                         <a href={notesHref} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('notes', currentLang)}</a>
                                     </li>
+                                    <li>
+                                        <a href={meditationsHref} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('meditations', currentLang)}</a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -229,17 +253,18 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
                         )}
                     </ul>
                 </div>
-                {!isTagPage && (
-                    <div class="hidden md:block">
+                <div class="hidden md:flex items-center gap-2">
+                    <DarkModeToggle />
+                    {!isTagPage && (
                         <LanguageToggle currentPath={Astro.url.pathname} instanceId="desktop" />
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
         </nav>
         <main class="container mx-auto px-4 py-8 flex-grow mt-16">
             <slot />
         </main>
-        <footer class="bg-white dark:bg-gray-900 mt-auto">
+        <footer class="bg-surface-50 dark:bg-surface-950 border-t border-surface-200/70 dark:border-surface-800/70 mt-auto">
             <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
                 <div class="flex flex-col items-center justify-center space-y-2">
                     <span class="block text-sm text-gray-500 dark:text-gray-400">© {new Date().getFullYear()}. All Rights Reserved.</span>
@@ -261,6 +286,10 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
             </div>
         </footer>
         <AntiAdblock />
+        <script>
+            import { initReveals } from '../utils/animations';
+            initReveals();
+        </script>
         <script>
             const siteHeader = document.querySelector('body > nav');
 

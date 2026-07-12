@@ -1,133 +1,68 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import HtmlPagesSection from '../../../components/HtmlPagesSection.astro';
+import ContentCard from '../../../components/shared/ContentCard.astro';
 import { getBlogPosts, getTags, getTagCounts, type Language } from '../../../utils/i18n';
 
-// This is the Japanese blog listing (/ja/blog path)
 const lang: Language = 'ja';
-
 const posts = await getBlogPosts(lang);
 const tags = await getTags(lang);
 const tagCounts = await getTagCounts(lang);
 
-const content = {
-  en: {
-    title: 'Blog Articles',
-    subtitle: 'Technical insights, tutorials, and thoughts on software development',
-    tagsTitle: 'Browse by Tags',
-    noPostsMessage: 'No blog posts available yet.',
-    readMore: 'Read More',
-    author: 'by'
-  },
-  zh: {
-    title: '博客文章',
-    subtitle: '技术见解、教程和软件开发思考',
-    tagsTitle: '按标签浏览',
-    noPostsMessage: '暂无博客文章。',
-    readMore: '阅读更多',
-    author: '作者'
-  },
-  ja: {
-    title: 'ブログ記事',
-    subtitle: 'ソフトウェア開発に関する技術的な知見、チュートリアル、考察',
-    tagsTitle: 'タグで探す',
-    noPostsMessage: 'まだ記事がありません。',
-    readMore: '続きを読む',
-    author: '著者'
-  }
+const strings = {
+  kicker: '執筆 · エンジニアリング',
+  title: 'ブログ',
+  subtitle: 'ソフトウェア開発に関する技術的な知見、チュートリアル、考察。',
+  tagsTitle: 'タグで探す',
+  noPostsMessage: 'まだ記事がありません。',
 };
-
-const currentContent = content[lang];
 const basePath = '/ja';
+const locale = 'ja-JP';
 ---
 
-<Layout title="ブログ" description="Redreamalityの技術ブログへようこそ。ソフトウェア開発、AIエージェント、最新テクノロジーに関する詳細な記事、チュートリアル、考察を日本語で提供しています。">
-  <main class="container mx-auto px-4 py-8">
-    <div class="max-w-4xl mx-auto">
-      <div class="mb-8">
-        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{currentContent.title}</h1>
-        <p class="text-lg text-gray-600 dark:text-gray-400">
-          {currentContent.subtitle}
-        </p>
-      </div>
+<Layout title={strings.title} description="Redreamalityの技術ブログへようこそ。ソフトウェア開発、AIエージェント、最新テクノロジーに関する詳細な記事、チュートリアル、考察を日本語で提供しています。">
+  <div class="mx-auto max-w-6xl px-4">
+    <header class="mb-10 text-center">
+      <span class="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-4 py-1.5 text-xs font-medium tracking-wide text-brand-600 dark:text-brand-300">
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-500"></span>{strings.kicker}
+      </span>
+      <h1 class="mt-5 font-display text-5xl md:text-6xl font-extrabold tracking-tight text-surface-900 dark:text-white">{strings.title}</h1>
+      <p class="mx-auto mt-4 max-w-2xl text-base md:text-lg leading-relaxed text-surface-600 dark:text-surface-300">{strings.subtitle}</p>
+    </header>
 
-      {tags.length > 0 && (
-        <div class="mb-8">
-          <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{currentContent.tagsTitle}</h2>
-          <div class="flex flex-wrap gap-2">
-            {tags.map((tag) => (
-              <a
-                href={`${basePath}/tags/${tag}/`}
-                class="inline-block px-3 py-1 text-sm bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800 transition-colors"
-              >
-                #{tag}
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
+    <HtmlPagesSection lang="ja" />
 
-      {posts.length === 0 ? (
-        <div class="text-center py-12">
-          <p class="text-gray-500 dark:text-gray-400 text-lg">{currentContent.noPostsMessage}</p>
-        </div>
-      ) : (
-        <div class="space-y-8">
-          {posts.map((post) => (
-            <article class="bg-white border border-gray-200 rounded-lg shadow-md p-6 dark:bg-gray-800 dark:border-gray-700">
-              <div class="flex flex-col space-y-4">
-                <div>
-                  <a href={`${basePath}/blog/${post.slug}`}>
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                      {post.data.title}
-                    </h2>
-                  </a>
-                  <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mt-2">
-                    <span>
-                      {post.data.pubDate.toLocaleDateString('ja-JP', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </span>
-                    <span>{currentContent.author} {post.data.author}</span>
-                  </div>
-                </div>
-
-                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  {post.data.description}
-                </p>
-
-                {post.data.tags && post.data.tags.length > 0 && (
-                  <div class="flex flex-wrap gap-2">
-                    {post.data.tags
-                      .filter((tag) => tagCounts[tag] >= 2)
-                      .map((tag) => (
-                      <a
-                        href={`${basePath}/tags/${tag}/`}
-                        class="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
-                      >
-                        #{tag}
-                      </a>
-                    ))}
-                  </div>
-                )}
-
-                <div class="flex justify-between items-center pt-4">
-                  <a
-                    href={`${basePath}/blog/${post.slug}`}
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
-                  >
-                    {currentContent.readMore}
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </article>
+    {tags.length > 0 && (
+      <div class="mb-10">
+        <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-surface-500 dark:text-surface-400">{strings.tagsTitle}</h2>
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <a href={`${basePath}/tags/${tag}/`} class="inline-block rounded-full bg-surface-100 dark:bg-surface-800 px-3 py-1 text-sm text-surface-600 dark:text-surface-300 hover:bg-brand-500/10 hover:text-brand-600 dark:hover:text-brand-300 transition-colors">
+              #{tag}
+            </a>
           ))}
         </div>
-      )}
-    </div>
-  </main>
+      </div>
+    )}
+
+    {posts.length === 0 ? (
+      <p class="rounded-2xl border border-dashed border-surface-300 dark:border-surface-700 p-10 text-center text-surface-500 dark:text-surface-400">{strings.noPostsMessage}</p>
+    ) : (
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {posts.map((post) => (
+          <ContentCard
+            href={`${basePath}/blog/${post.slug}/`}
+            title={post.data.title}
+            description={post.data.description}
+            dateISO={new Date(post.data.pubDate).toISOString()}
+            dateLabel={new Date(post.data.pubDate).toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' })}
+            tags={post.data.tags}
+            tagBasePath={`${basePath}/tags`}
+            tagCounts={tagCounts}
+            accent="brand"
+          />
+        ))}
+      </div>
+    )}
+  </div>
 </Layout>

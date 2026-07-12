@@ -21,6 +21,7 @@ export const i18nConfig: I18nConfig = {
       talks: '演讲',
       questions: '思考问题',
       notes: '阅读笔记',
+      meditations: '沉思录',
       projects: '项目',
       about: '关于',
       tags: '标签',
@@ -65,6 +66,7 @@ export const i18nConfig: I18nConfig = {
       talks: 'Talks',
       questions: 'Questions',
       notes: 'Notes',
+      meditations: 'Meditations',
       projects: 'Projects',
       about: 'About',
       tags: 'Tags',
@@ -109,6 +111,7 @@ export const i18nConfig: I18nConfig = {
       talks: 'プレゼンテーション',
       questions: '考察',
       notes: '読書ノート',
+      meditations: '瞑想録',
       projects: 'プロジェクト',
       about: '私について',
       tags: 'タグ',
@@ -272,6 +275,19 @@ export async function getNotes(lang: Language) {
     return notes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   } catch (error) {
     // If collection doesn't exist, return empty array
+    return [];
+  }
+}
+
+/**
+ * Get meditations (个人感悟 / 沉思录) for a specific language
+ */
+export async function getMeditations(lang: Language) {
+  try {
+    const collectionName = lang === 'zh' ? 'meditations-cn' : lang === 'ja' ? 'meditations-ja' : 'meditations-en';
+    const meditations = await getCollection(collectionName);
+    return meditations.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  } catch (error) {
     return [];
   }
 }

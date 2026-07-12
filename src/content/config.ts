@@ -51,6 +51,33 @@ const projectsSchema = z.object({
   author: z.string(),
   lang: z.enum(['zh', 'en', 'ja']).optional(),
   translatedFrom: z.string().optional(), // Reference to original project slug
+  // --- Rich showcase fields (all optional so the legacy projects.md keeps validating) ---
+  // 'overview' is reserved for the legacy monolithic projects.md (slug: 'projects')
+  type: z.enum(['project', 'paper', 'tool', 'list', 'app', 'overview']).default('project'),
+  status: z.enum(['active', 'archived', 'alpha', 'beta', 'wip']).optional(),
+  year: z.number().optional(),
+  coverImage: z.string().optional(),
+  github: z.string().optional(),
+  demo: z.string().optional(),
+  paper: z.string().optional(),
+  venue: z.string().optional(), // conference / journal, e.g. "CIKM 2021"
+  techStack: z.array(z.string()).optional(),
+  stars: z.number().optional(),
+  forks: z.number().optional(),
+  role: z.string().optional(),
+  language: z.string().optional(), // primary programming language
+  featured: z.boolean().default(false),
+  order: z.number().optional(), // manual sort weight within its group
+});
+
+const meditationsSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  date: z.date(),
+  tags: z.array(z.string()).optional(),
+  theme: z.string().optional(), // optional thematic label, e.g. "成长" / "工程哲学"
+  lang: z.enum(['zh', 'en', 'ja']).optional(),
+  translatedFrom: z.string().optional(), // Reference to original meditation slug
 });
 
 // Chinese content collections
@@ -149,6 +176,22 @@ const notesJaCollection = defineCollection({
   schema: notesSchema,
 });
 
+// Meditations content collections (个人感悟 / 沉思录)
+const meditationsCnCollection = defineCollection({
+  type: 'content',
+  schema: meditationsSchema,
+});
+
+const meditationsEnCollection = defineCollection({
+  type: 'content',
+  schema: meditationsSchema,
+});
+
+const meditationsJaCollection = defineCollection({
+  type: 'content',
+  schema: meditationsSchema,
+});
+
 export const collections = {
   'blog-cn': blogCnCollection,
   'blog-en': blogEnCollection,
@@ -168,4 +211,7 @@ export const collections = {
   'notes-cn': notesCnCollection,
   'notes-en': notesEnCollection,
   'notes-ja': notesJaCollection,
+  'meditations-cn': meditationsCnCollection,
+  'meditations-en': meditationsEnCollection,
+  'meditations-ja': meditationsJaCollection,
 };

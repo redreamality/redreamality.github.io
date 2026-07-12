@@ -3,7 +3,7 @@ import type { Language } from '../utils/i18n';
 import { getHtmlPages } from '../utils/html-pages';
 
 interface Props {
-  lang: Extract<Language, 'en' | 'zh'>;
+  lang: Language;
 }
 
 const { lang } = Astro.props;
@@ -27,6 +27,13 @@ const content = {
     openLabel: '打开 HTML 页面',
     badge: 'HTML 单页',
     hrefPrefix: '/cn/blog/html',
+  },
+  ja: {
+    title: 'HTML ショーケース',
+    subtitle: 'ブログ内で直接表示できる、独立した HTML ページです。',
+    openLabel: 'HTML ページを開く',
+    badge: '単一ページ HTML',
+    hrefPrefix: '/ja/blog/html',
   },
 } as const;
 
