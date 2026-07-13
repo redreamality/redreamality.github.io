@@ -78,7 +78,19 @@ const config = getAntiAdblockConfig();
       }
     }
     
+    let hasTriggered = false;
+    let timerId;
+
+    const cleanupTriggers = () => {
+      window.clearTimeout(timerId);
+      window.removeEventListener('scroll', handleScroll);
+    };
+
     const runCheck = () => {
+      if (hasTriggered) return;
+      hasTriggered = true;
+      cleanupTriggers();
+
       if (checkAdBlock()) {
         showAntiAdblock();
         if (config.showOncePerSession) {
@@ -87,15 +99,17 @@ const config = getAntiAdblockConfig();
       }
     };
 
-    // Wait for the page to be fully loaded and then some
-    // Ad blockers often take a moment to kick in
-    if (document.readyState === 'complete') {
-      setTimeout(runCheck, 1000);
-    } else {
-      window.addEventListener('load', () => {
-        setTimeout(runCheck, 1000);
-      });
-    }
+    const handleScroll = () => {
+      if (window.scrollY >= window.innerHeight * 2) {
+        runCheck();
+      }
+    };
+
+    // Delay an intrusive prompt until the visitor has meaningfully engaged:
+    // trigger after two viewport heights of scrolling or 30 seconds, whichever comes first.
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    timerId = window.setTimeout(runCheck, 30_000);
+    handleScroll();
   };
   
   // Run the detection when the page loads
