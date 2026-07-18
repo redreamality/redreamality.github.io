@@ -1,0 +1,75 @@
+---
+import type { Language } from '../../utils/i18n';
+import { homeContent, localeFor } from '../../utils/homeContent';
+import type { VisualGalleryItem } from '../../utils/visuals';
+
+interface Props {
+  lang: Language;
+  visual?: VisualGalleryItem;
+}
+
+const { lang, visual } = Astro.props;
+const c = homeContent[lang];
+const basePath = lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : '';
+const dateLabel = visual
+  ? new Date(visual.publishedAt).toLocaleDateString(localeFor(lang), {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    })
+  : '';
+const isTyphoon = visual?.cover === 'typhoon';
+---
+
+{visual && (
+  <section data-home-latest-visual class="mx-auto max-w-6xl px-4 pb-14 md:pb-16" aria-labelledby="latest-visual-title">
+    <div class="mb-5 flex items-center justify-between gap-4">
+      <h2 id="latest-visual-title" class="flex items-center gap-3 font-display text-2xl font-bold text-surface-900 dark:text-white">
+        <span class="inline-block h-6 w-1.5 rounded-full bg-accent-500" aria-hidden="true"></span>
+        {c.latestVisualTitle}
+      </h2>
+      <a href={`${basePath}/visuals/`} class="shrink-0 text-sm font-medium text-accent-600 transition-colors hover:text-accent-500 dark:text-accent-400">
+        {c.viewAllVisuals} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <a
+      href={visual.href}
+      aria-label={visual.title}
+      class="reveal-init group grid overflow-hidden rounded-3xl border border-surface-200/80 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover dark:border-surface-800 dark:bg-surface-900 md:grid-cols-[minmax(0,1.05fr)_minmax(22rem,.95fr)]"
+    >
+      <div class="flex flex-col justify-center p-7 md:p-10">
+        <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.14em] text-accent-600 dark:text-accent-400">
+          <span>{c.visualTypeLabels[visual.type]}</span>
+          <span class="h-1 w-1 rounded-full bg-surface-300 dark:bg-surface-700" aria-hidden="true"></span>
+          <time datetime={visual.publishedAt} class="normal-case tracking-normal text-surface-500 dark:text-surface-400">{dateLabel}</time>
+        </div>
+        <h3 class="mt-4 font-display text-3xl font-extrabold tracking-tight text-surface-950 transition-colors group-hover:text-brand-600 dark:text-white dark:group-hover:text-brand-300 md:text-4xl">
+          {visual.title}
+        </h3>
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-surface-600 dark:text-surface-300 md:text-lg">{visual.description}</p>
+        <span class="mt-7 inline-flex items-center gap-2 font-semibold text-brand-600 dark:text-brand-300">
+          {c.openVisual}
+          <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+        </span>
+      </div>
+
+      <div class="relative min-h-64 overflow-hidden bg-gradient-to-br from-slate-950 via-cyan-900 to-teal-500 md:min-h-80" aria-hidden="true">
+        <div class="absolute inset-0 opacity-80 [background-image:radial-gradient(circle_at_20%_18%,rgba(255,255,255,.5)_0_2px,transparent_3px),radial-gradient(circle_at_82%_70%,rgba(255,255,255,.32)_0_3px,transparent_4px)] [background-size:72px_72px,116px_116px]"></div>
+        {isTyphoon ? (
+          <>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_54%_50%,rgba(255,255,255,.95)_0_5%,rgba(103,232,249,.42)_6%_11%,transparent_12%)]"></div>
+            <div class="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full border-[18px] border-white/15 shadow-[0_0_70px_rgba(103,232,249,.35)] motion-safe:animate-[spin_18s_linear_infinite]"></div>
+            <div class="absolute left-1/2 top-1/2 h-36 w-64 -translate-x-1/2 -translate-y-1/2 -rotate-[28deg] rounded-[50%] border-[12px] border-cyan-100/20"></div>
+            <div class="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/50 bg-slate-950/75 shadow-[inset_0_0_24px_rgba(255,255,255,.15)]"></div>
+          </>
+        ) : (
+          <div class="absolute inset-12 rounded-3xl border border-white/20 bg-white/10 shadow-[0_0_70px_rgba(103,232,249,.24)] backdrop-blur-sm"></div>
+        )}
+        <div class="absolute bottom-5 left-5 rounded-full border border-white/25 bg-black/20 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-white/90 backdrop-blur">
+          {visual.tags.slice(0, 3).join(' · ')}
+        </div>
+      </div>
+    </a>
+  </section>
+)}

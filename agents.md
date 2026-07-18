@@ -139,6 +139,69 @@ This ensures:
 - ✅ Better search engine rankings
 - ✅ Consistent user experience
 
+## 新增 Visualization 内容规范
+
+新增或修改 `/visuals/` 可视化作品时，必须遵守以下发布清单。
+
+### 1. Manifest 是唯一发布真源
+
+- 每个作品必须登记在 `src/data/visuals-manifest.json`，不要在页面、sitemap 或画廊组件中维护第二份作品列表。
+- 使用跨语言稳定的 kebab-case `slug`；发布后不要因为标题翻译变化而修改 slug。
+- 正确声明 `type`、`renderer`、`publishedAt`、`featured`、`cover`、`tags`、`status` 和 `externalResources`。
+- 三语路由必须继续从 `getVisualWorks()`、locale 的 `artifact` 和 artifact ID 派生；禁止在 `[slug].astro` 中硬编码某个作品。
+- 首页“最新可视化”必须通过 `getLatestVisual(lang)` 按 `publishedAt` 从 manifest 派生，并只展示当前语言已有 artifact 的作品；禁止在三语首页硬编码 Typhoon 或其他具体 slug。
+- 新 renderer 或 artifact 必须在共享作品渲染入口注册；未注册的 artifact 应在构建期明确失败，不能静默显示空页面。
+
+### 2. 多语言必须覆盖整个交互体验
+
+- 默认同时提供英文、中文、日文版本；每个 locale 都要有 `title`、`description`、`og.title`、`og.description`、`source` 和 `artifact`。
+- 翻译范围包括正文、标题、按钮、状态提示、错误提示、Canvas/SVG 图内标签、单位、动态拼接文案、`aria-label`、`title` 和 fallback/noscript 文案，不能只翻译画廊卡片。
+- 语言切换必须保持同一个 slug，并落到真实存在的 locale 路由。
+- 如确需渐进翻译，未完成语言不得声明 artifact；画廊必须明确展示可用语言，禁止静默回退到其他语言。
+- 已经拥有当前语言 artifact 的作品，即使 URL 带有旧的 `?missing=` 参数，也不能显示“当前语言不可用”的错误提示。
+
+### 3. 必须使用共享 Layout 和 Navigation Bar
+
+- 作品页统一使用 `Layout.astro`，保留站点顶部 Navigation Bar、语言切换、深色模式、SEO、footer 和全站间距体系。
+- 禁止发布自带站点 header、浮动 Visuals chrome 或第二套语言导航的页面。
+- 禁止使用固定高度 iframe 或 `srcdoc` 嵌套长篇作品；应把作品转换成可嵌入共享 Layout 的正文组件。
+- 全宽作品使用 Layout 的 `fullWidth` 能力，不要复制一份独立页面壳。
+
+### 4. 样式必须隔离，不能污染全站
+
+- 可视化 HTML 导入的 CSS 必须全部限定在作品根容器内，例如 `.typhoon-visual`；不能把 `:root`、`html`、`body`、`a`、`button`、`h1`、`p` 或通用 class 规则直接注入全局。
+- CSS 作用域处理必须跳过 keyframes，但媒体查询内的普通选择器仍需加作品容器前缀。
+- 作品需响应站点 `.dark` 状态；至少确保背景、正文、边框和主要控件在深色模式下可读。
+- 作用域测试应允许 `.dark .visual-root` 等站点状态祖先，但每条非 keyframe 规则最终必须受作品根容器约束。
+
+### 5. SEO 和页面结构
+
+- 每个语言版本必须恰好一个 H1；共享 Layout 不生成作品 H1 时，由作品正文提供，禁止再添加重复页面标题。
+- 页面 title/description 与 Open Graph 文案分别使用 manifest 中对应 locale 的普通字段和 `og` 字段。
+- canonical、hreflang、HTML `lang`、发布日期、标签和 sitemap 必须由共享 Layout/manifest 生成。
+- 新作品三语 URL 都应进入 sitemap；draft、缺失 locale 和已删除作品不得进入 sitemap。
+
+### 6. 无障碍、动画和资源策略
+
+- 所有交互必须可用键盘操作，控件要有本地化 accessible name；Canvas/SVG 必须提供可理解的 aria 或文字说明。
+- 动画必须支持暂停和重置，遵守 `prefers-reduced-motion`，离开视口后应停止不必要的计算。
+- 外部资源默认禁止；确有需要时只在 manifest 的 `externalResources` 中加入精确白名单，并把该白名单传给资源策略校验器。
+- 不得为了方便直接加入未登记的远程 script、stylesheet、font、iframe、image 或动态加载 URL。
+
+### 7. 选择模板还是自定义 HTML
+
+- “总览—分步解释—重新组装”类内容优先复用 `tools/visual-explainer-kit/` 或 Typhoon 的交互图解契约。
+- 地图、仪表盘、非线性叙事等特殊作品可以使用自定义 HTML/CSS/JS，但仍必须满足共享 Layout、三语、CSS 隔离、SEO、无障碍和测试契约。
+- 复用模板时复用的是结构、runtime、生命周期和构建规则，不要复制并长期维护多份完整 HTML runtime。
+
+### 8. 必测项目与完成门槛
+
+- 修改交互细节时必须新增或更新对应 Playwright E2E，不能只做构建测试。
+- 聚焦 E2E 至少覆盖：三语画廊、三语作品 200、共享 `body > nav`、单 H1、无 iframe/独立 header、核心控件本地化、暂停/重置、深色模式和 sitemap。
+- 新增作品时应验证画廊卡片数量、标题、语言标签、打开链接和 artifact 路由；删除作品时应验证旧 Visuals/Blog HTML 路由返回预期状态且 sitemap 不再收录。
+- 完成顺序：先 `pnpm build`，再 `pnpm test:run`、聚焦 Playwright，最后 `pnpm test:e2e`；构建失败时不要继续跑依赖 `dist` 的 preview E2E。
+- 交付前运行 `git diff --check`，并启动 `pnpm preview --host 127.0.0.1 --port 4321` 实际检查桌面、移动端和三种语言。
+
 ## Command and Test Pitfalls
 
 - Playwright's reduced-motion reveal test can fail transiently under a fully parallel run by observing `opacity: 0` before client initialization settles. When this happens, rerun the failing spec with `--workers=1`, then rerun the full suite before treating it as a product regression; in the observed case both reruns passed.
@@ -173,3 +236,6 @@ This ensures:
 - Do not inspect generated `dist` files while another build or Playwright webServer may recreate or clean `dist`. Wait for the producing command to finish, confirm the target with `Test-Path -LiteralPath`, and only then read it.
 - The dark-mode Playwright toggle can time out transiently during a fully parallel run while the same spec passes immediately with `--workers=1`. Rerun the focused spec single-threaded and then rerun the full suite before classifying it as a theme regression.
 - CSS isolation tests for embedded visuals must allow intentional site-state ancestors such as `.dark .typhoon-visual` while still requiring every selector to terminate at the visual container boundary. A blanket “every selector starts with `.typhoon-visual`” assertion incorrectly rejects valid dark-theme overrides.
+- Homepage components are grouped under `src/components/home/`, not directly under `src/components/`. Before reading a guessed component path, use `rg --files src/components/home` or follow the import from the page; otherwise `Get-Content` fails on paths such as `src/components/HomeHero.astro`.
+- For an intentional TDD RED run, confirm the failing assertions are only the newly requested behavior before implementation. A focused Visuals E2E that fails solely because `[data-home-latest-visual]` is absent is a valid RED state; unrelated failures must be diagnosed before proceeding.
+- Do not combine `Start-Process` and readiness polling in the same `exec` call, even when using `-WindowStyle Hidden` and no log redirection; the command policy can reject the whole process creation before execution. Run launch and polling as separate calls, or keep `pnpm preview` alive in a direct TTY session when background process creation is blocked.

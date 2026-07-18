@@ -215,3 +215,25 @@ Long-form interactive visuals need stable, indexable URLs and multilingual disco
 ### Future Considerations
 - Add filters, automated cover captures, or a creation CLI only after the number of works demonstrates the need.
 - Keep manifest validation and template negative tests current when adding renderers, locales, or demos.
+
+## Rule 7: Homepage Latest Visual Discovery
+**Date**: 2026-07-18
+**Context**: Added a localized latest-Visual feature to all three homepages
+
+### Problem
+The homepage needs to surface new visual work without hard-coding a slug, showing unavailable translations, or letting metadata drift from the Visuals manifest.
+
+### Solution
+- Derive the homepage feature from the published Visuals manifest.
+- Select the newest work that has an artifact for the current language.
+- Keep English, Chinese, and Japanese homepages structurally identical and localize all labels and links.
+- Render the work type from the manifest's `type` field using localized labels.
+
+### Implementation Requirements
+1. Use `getLatestVisual(lang)` rather than importing or naming a specific work in a homepage.
+2. Sort by `publishedAt` descending and exclude works without a current-language artifact.
+3. Link the featured card and the gallery CTA to locale-correct routes.
+4. Cover the three homepage locales and their featured links with Playwright tests.
+
+### Future Considerations
+- A new published work becomes the homepage feature by manifest metadata alone; homepage components should not require a slug-specific change except for optional artwork enhancements.

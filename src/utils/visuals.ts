@@ -107,6 +107,12 @@ export function getVisualGallery(lang: Language): VisualGalleryItem[] {
   });
 }
 
+export function getLatestVisual(lang: Language): VisualGalleryItem | undefined {
+  return getVisualGallery(lang)
+    .filter((work) => work.hasCurrentArtifact)
+    .sort((left, right) => new Date(right.publishedAt).valueOf() - new Date(left.publishedAt).valueOf())[0];
+}
+
 export function getVisualWork(slug: string): VisualWork | undefined {
   return works.find((work) => work.slug === slug);
 }

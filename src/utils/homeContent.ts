@@ -1,4 +1,5 @@
 import type { Language } from './i18n';
+import type { VisualType } from './visuals';
 
 export interface HomeStrings {
   kicker: string;
@@ -15,6 +16,10 @@ export interface HomeStrings {
   meditationsDesc: string;
   talksTitle: string;
   talksDesc: string;
+  latestVisualTitle: string;
+  visualTypeLabels: Record<VisualType, string>;
+  openVisual: string;
+  viewAllVisuals: string;
   // section headers
   recentBlogTitle: string;
   recentMeditationsTitle: string;
@@ -46,6 +51,13 @@ export const homeContent: Record<Language, HomeStrings> = {
     meditationsDesc: 'Personal reflections on engineering and time',
     talksTitle: 'Talks',
     talksDesc: 'Presentations and slides',
+    latestVisualTitle: 'Latest visual',
+    visualTypeLabels: {
+      'interactive-explainer': 'Interactive explainer',
+      'visual-story': 'Visual story',
+    },
+    openVisual: 'Explore the visual',
+    viewAllVisuals: 'View all visuals',
     recentBlogTitle: 'Recent Blog Posts',
     recentMeditationsTitle: 'From the Meditations',
     recentTalksTitle: 'Recent Talks',
@@ -72,6 +84,13 @@ export const homeContent: Record<Language, HomeStrings> = {
     meditationsDesc: '关于工程与时间的个人感悟',
     talksTitle: '演讲',
     talksDesc: '演讲与幻灯片',
+    latestVisualTitle: '最新可视化',
+    visualTypeLabels: {
+      'interactive-explainer': '交互图解',
+      'visual-story': '视觉故事',
+    },
+    openVisual: '打开可视化',
+    viewAllVisuals: '查看全部可视化',
     recentBlogTitle: '最新博客',
     recentMeditationsTitle: '沉思录摘选',
     recentTalksTitle: '最新演讲',
@@ -98,6 +117,13 @@ export const homeContent: Record<Language, HomeStrings> = {
     meditationsDesc: '工学と時間についての個人的な思索',
     talksTitle: '講演',
     talksDesc: 'プレゼンテーションとスライド',
+    latestVisualTitle: '最新ビジュアル',
+    visualTypeLabels: {
+      'interactive-explainer': 'インタラクティブ解説',
+      'visual-story': 'ビジュアルストーリー',
+    },
+    openVisual: 'ビジュアルを開く',
+    viewAllVisuals: 'すべてのビジュアルを見る',
     recentBlogTitle: '最新ブログ',
     recentMeditationsTitle: '瞑想録より',
     recentTalksTitle: '最新の講演',

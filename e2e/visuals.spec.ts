@@ -47,6 +47,49 @@ test('primary navigation and homepage expose the Visuals section', async ({ page
 
 for (const locale of [
   {
+    path: '/',
+    sectionTitle: 'Latest visual',
+    workTitle: 'How Typhoons Form',
+    workHref: '/visuals/typhoon/',
+    typeLabel: 'Interactive explainer',
+    allLabel: 'View all visuals',
+    allHref: '/visuals/',
+  },
+  {
+    path: '/cn/',
+    sectionTitle: '最新可视化',
+    workTitle: '台风如何形成',
+    workHref: '/cn/visuals/typhoon/',
+    typeLabel: '交互图解',
+    allLabel: '查看全部可视化',
+    allHref: '/cn/visuals/',
+  },
+  {
+    path: '/ja/',
+    sectionTitle: '最新ビジュアル',
+    workTitle: '台風ができるまで',
+    workHref: '/ja/visuals/typhoon/',
+    typeLabel: 'インタラクティブ解説',
+    allLabel: 'すべてのビジュアルを見る',
+    allHref: '/ja/visuals/',
+  },
+]) {
+  test(`${locale.path} features the latest localized visual`, async ({ page }) => {
+    await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
+
+    const section = page.locator('[data-home-latest-visual]');
+    await expect(section).toBeVisible();
+    await expect(section.getByRole('heading', { name: locale.sectionTitle })).toBeVisible();
+    const workLink = section.getByRole('link', { name: locale.workTitle });
+    await expect(workLink).toBeVisible();
+    await expect(workLink).toHaveAttribute('href', locale.workHref);
+    await expect(section.getByText(locale.typeLabel, { exact: true })).toBeVisible();
+    await expect(section.getByRole('link', { name: locale.allLabel })).toHaveAttribute('href', locale.allHref);
+  });
+}
+
+for (const locale of [
+  {
     path: '/visuals/typhoon/',
     htmlLang: 'en',
     title: 'How Typhoons Form',
