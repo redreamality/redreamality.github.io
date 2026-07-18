@@ -4,7 +4,7 @@ import type { Language } from './i18n';
 export type VisualRenderer = 'standalone' | 'interactive-explainer';
 export type VisualType = 'visual-story' | 'interactive-explainer';
 export type VisualStatus = 'draft' | 'published';
-export type VisualCover = 'agents' | 'typhoon';
+export type VisualCover = 'typhoon';
 
 export interface VisualLocaleRecord {
   title: string;

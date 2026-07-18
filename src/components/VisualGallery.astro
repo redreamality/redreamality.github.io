@@ -54,7 +54,7 @@ const copy = {
 
 const c = copy[lang];
 const languageList = (languages: Language[]) => languages.map((item) => c.languageNames[item]).join(' / ');
-const bannerWorks = Object.fromEntries(works.map((work) => {
+const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentArtifact).map((work) => {
   const availableLabel = languageList(work.availableLanguages);
   return [work.slug, {
     title: work.title,
@@ -96,16 +96,13 @@ const bannerWorks = Object.fromEntries(works.map((work) => {
 
       return (
         <article id={work.slug} data-visual-card={work.slug} class="group overflow-hidden rounded-3xl border border-surface-200/80 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover dark:border-surface-800 dark:bg-surface-900">
-          <div class:list={[
-            'relative h-56 overflow-hidden',
-            work.cover === 'agents' ? 'bg-gradient-to-br from-indigo-950 via-brand-800 to-cyan-600' : 'bg-gradient-to-br from-slate-950 via-cyan-900 to-teal-500',
-          ]}>
+          <div class="relative h-56 overflow-hidden bg-gradient-to-br from-slate-950 via-cyan-900 to-teal-500">
             <div class="absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_20%_20%,rgba(255,255,255,.5)_0_2px,transparent_3px),radial-gradient(circle_at_75%_65%,rgba(255,255,255,.35)_0_3px,transparent_4px)] [background-size:70px_70px,110px_110px]"></div>
             <div class="absolute inset-x-8 bottom-8 flex items-center justify-between text-white/90">
               <span class="rounded-full border border-white/25 bg-black/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider backdrop-blur">
                 {work.type === 'interactive-explainer' ? c.typeExplainer : c.typeStandalone}
               </span>
-              <span class="text-4xl" aria-hidden="true">{work.cover === 'agents' ? '◈' : '◉'}</span>
+              <span class="text-4xl" aria-hidden="true">◉</span>
             </div>
           </div>
 

@@ -2,7 +2,7 @@
 
 目标：为站点规划一个三语可视化内容专区，并判断 `C:/Users/Remy/Documents/typhoon/v2` 应作为通用模板、可选模板，还是仅作为单次 HTML 来源。
 
-当前推荐：采用“Astro 目录层 + 独立 HTML 体验层”的混合模型。把 `typhoon/v2` 提炼为可选的交互图解模板，同时保留完全自定义 HTML 作为一等发布方式。
+当前推荐：采用“Astro 共享 Layout + 可视化作品正文”的混合模型。把 `typhoon/v2` 提炼为可选的交互图解模板；作品可以保留高度自定义的 HTML/CSS/JS，但必须嵌入站点共享导航、主题与多语言框架。
 
 ## #1: 专区的内容边界和 URL 是什么？
 
@@ -66,7 +66,7 @@ Type: Prototype
 
 1. 共享结构只保存 step/demo ID；正文、控件、状态和 aria 文案全部进入 locale 数据；
 2. runtime 只负责生命周期，demo factory 通过 `copy`、`motion`、`tokens` 接收作品数据；
-3. 同一 shell/runtime/demo 生成了气象主题的英、中、日版本，以及 Agent 协作主题的英文版本；
+3. 同一 shell/runtime/demo 可生成气象主题的英、中、日版本，并支持不同步数与可选 overview；
 4. overview 可选，步骤数量可变，manifest 可以只声明实际可用的 locale；
 5. 产物保持自包含、单 H1、无外部 URL，并通过暂停、重置和 reduced-motion E2E。
 
@@ -92,9 +92,9 @@ Type: Discuss
 - 所有可见文本和无障碍文本都属于 locale，不能留在共享 demo 逻辑中；
 - 语言切换保持 slug；缺失 locale 时不得生成会 404 的切换链接。
 
-专区本身始终三语；作品允许渐进翻译，但必须显式标记可用语言。缺失语言路由返回对应语言专区，并带上作品与可用语言参数显示明确提示，不生成会落入 404 的语言切换链接，也不静默回退正文语言。
+专区本身始终三语；作品允许渐进翻译，但必须显式标记可用语言，不得静默回退正文语言。首发 Typhoon 已补齐英、中、日正文、控件、动态状态、Canvas 标签和 aria 文案，因此三种语言都直接生成作品页，不再显示缺失语言提示。
 
-实现：`src/data/visuals-manifest.json`、`src/utils/visuals.ts`、`src/utils/visual-artifacts.ts`。
+实现：`src/data/visuals-manifest.json`、`src/data/typhoon-translations.ts`、`src/utils/visuals.ts`、`src/utils/typhoon-artifact.ts`。
 
 ## #5: 专区首页应该如何呈现作品？
 
@@ -109,7 +109,7 @@ Type: Prototype
 
 已接受并实现克制的数字展览目录方向：三语标题与导语、精选作品卡片、作品类型、发布日期、语言可用性和明确的打开入口。V1 不加入搜索、筛选或动态预览，避免在只有少量作品时制造无效复杂度。
 
-实现：`src/components/VisualGallery.astro` 与三语 `/visuals/` 路由；顶级导航和首页 Hero 均提供入口。E2E 覆盖桌面入口、移动端中文导航、卡片和缺失语言提示。
+实现：`src/components/VisualGallery.astro` 与三语 `/visuals/` 路由；顶级导航和首页 Hero 均提供入口。E2E 覆盖桌面入口、移动端中文导航、单一 Typhoon 卡片和三语直接打开。
 
 ## #6: 独立 HTML 如何接入 Astro 构建和路由？
 
@@ -122,16 +122,16 @@ Type: Prototype
 
 ### Answer
 
-已验证并采用 Astro 静态 endpoint 返回原始 HTML，不使用固定高度 iframe：
+已验证并采用 Astro 静态页面嵌入作品正文，不使用固定高度 iframe，也不使用作品自带的独立导航：
 
 - 目标 URL：`/visuals/{slug}/`、`/cn/visuals/{slug}/`、`/ja/visuals/{slug}/`；
-- 产物自身包含 title、description、canonical、hreflang、单一 H1、返回专区链接和语言切换；
-- Astro 负责读取 manifest、生成专区、原始响应、站点 chrome 和 sitemap 信息；
-- 自定义 HTML 作为源码导入，模板工具生成的产物也遵循同一接入契约；
-- 可用作品 URL 从 manifest 自动派生到 sitemap `customPages`，缺失语言与旧 Blog 兼容 URL 明确排除；
-- 既有 Blog HTML URL 继续返回同一语言产物，并以 canonical 指向新的 Visuals URL，遵守站点“不破坏既有 URL”规范。
+- 作品页统一使用共享 `Layout.astro`，保留站点顶部 Navigation Bar、语言切换、深色模式、SEO 与全站视觉风格；
+- Typhoon 继续以一份中文自包含 HTML 作为交互源码，构建时提取 style/body、移除内部 header 与嵌套 main、把全部 CSS 选择器限定在作品容器内，再按 locale 精确替换正文和交互文案；
+- Astro 负责读取 manifest、生成专区、作品页和 sitemap；作品正文只负责自身叙事与交互；
+- 自定义 HTML 或模板生成物接入时也必须转换为可嵌入共享 Layout 的正文片段；
+- 明确删除的 Agent Architecture 与旧 Blog HTML 路由返回 404，不进入 sitemap。
 
-选择静态 endpoint 的原因：URL 稳定、无嵌套滚动、保留作品完整 CSS/JS 自由度，且不需要把生成物混入 `public`。sitemap 与语言可用性都从同一 manifest 派生，并由 E2E 锁定。
+选择共享 Layout 页面与正文片段的原因：URL 稳定、无嵌套滚动，同时保留作品 CSS/JS 自由度，并让顶部导航、语言切换、SEO 和主题行为与全站一致。sitemap 与语言可用性都从同一 manifest 派生，并由 E2E 锁定。
 
 ## #7: 发布质量门槛是什么？
 
@@ -146,7 +146,7 @@ Type: Discuss
 
 已接受以下发布契约：
 
-- 每个语言版本恰好一个 H1，具备独立 title、description、canonical 和正确 hreflang；
+- 每个语言版本恰好一个 H1，由共享 Layout 提供独立 title、description、canonical 和正确 hreflang；
 - 键盘可操作，图形有可理解的 aria/fallback 文案；
 - 支持 `prefers-reduced-motion`，动画可暂停和重置，离开视口停止消耗资源；
 - 桌面和移动端无裁切、无嵌套滚动；
@@ -154,7 +154,7 @@ Type: Discuss
 - gallery 路由、语言切换、作品加载及核心交互均有 E2E；
 - 构建器有 schema、缺失 demo、重复 ID 和自包含性测试。
 
-首发 E2E 已覆盖专区路由、语言切换、独立 HTML 元数据、Typhoon 14 个交互图及滑块/重置核心交互、缺失翻译、旧 URL 兼容、移动端导航与 sitemap。模板工具另有 schema、缺失 demo、重复 ID、暂停、重置、reduced-motion 和多语言 aria 覆盖。
+首发 E2E 已覆盖专区路由、共享顶部导航、三语作品页、Typhoon 14 个交互图及滑块/暂停/重置核心交互、已删除路由、移动端导航与 sitemap。模板工具另有 schema、缺失 demo、重复 ID、暂停、重置、reduced-motion 和多语言 aria 覆盖。
 
 ## #8: 第一阶段如何切片实施？
 
@@ -170,10 +170,9 @@ Type: Discuss
 第一阶段已按以下垂直切片完成：
 
 1. 建立 manifest/schema、三语专区路由和导航入口；
-2. 用 `typhoon` 完成 raw HTML 路由原型与三语契约；
+2. 用 `typhoon` 完成共享 Layout 作品页与三语契约；
 3. 提炼最小交互图解工具并迁入 `tools/visual-explainer-kit/`；
-4. 迁移现有 Agent Architecture Showcase；
-5. 补齐 SEO、语言切换、移动端、reduced-motion 与核心交互 E2E；
-6. 分类、筛选、封面自动截图和创作 CLI 延后，等作品数量证明需求后再做。
+4. 补齐 SEO、语言切换、移动端、reduced-motion 与核心交互 E2E；
+5. 分类、筛选、封面自动截图和创作 CLI 延后，等作品数量证明需求后再做。
 
 当前状态：#1–#8 均已接受；第一阶段实现完成。后续新增作品时，在“可选模板工具”与“完全自定义 HTML”之间按叙事形态选择，无需改变专区路由和发布契约。

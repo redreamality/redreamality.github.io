@@ -197,20 +197,20 @@ $enFiles | Where-Object { $_ -notin $cnFiles } | ForEach-Object { Write-Host "Mi
 **Context**: Added the multilingual Visuals section and migrated the HTML Showcase experience into a first-class content type
 
 ### Problem
-Long-form interactive HTML needs stable, indexable URLs and multilingual discovery without forcing every work into one visual template or breaking indexed legacy URLs.
+Long-form interactive visuals need stable, indexable URLs and multilingual discovery without forcing every work into one authoring template or splitting the experience away from the site's shared navigation and layout.
 
 ### Solution
 - Treat Visuals as a top-level content type with mirrored English, Chinese, and Japanese gallery routes.
 - Keep one manifest as the source of truth for publication status, metadata, locale availability, SEO copy, and artifact IDs.
 - Support two authoring paths: the optional `tools/visual-explainer-kit/` for chapter-based explainers, and fully custom self-contained HTML for other visual forms.
-- Serve artifacts as raw static endpoints without iframes. Preserve legacy URLs as compatible aliases with canonical links to the Visuals URL.
+- Render work pages through the shared `Layout.astro` without iframes. Visual-specific HTML/CSS/JS may remain highly customized, but its own site header/navigation must be removed before embedding.
 
 ### Implementation Requirements
 1. Add every work to `src/data/visuals-manifest.json`; do not hand-maintain a second list of sitemap URLs.
-2. Gallery routes must exist for `en`, `zh`, and `ja`; works may be progressively translated but must expose availability explicitly.
-3. Each published locale artifact must have one H1, description, canonical, hreflang, OG metadata, keyboard-accessible controls, and reduced-motion behavior.
+2. Gallery routes must exist for `en`, `zh`, and `ja`; works may be progressively translated but must expose availability explicitly. Typhoon is published as a complete three-language work, including visible, dynamic, Canvas, and aria copy.
+3. Each published locale page must use the shared top navigation and have one H1, description, canonical, hreflang, OG metadata, keyboard-accessible controls, and reduced-motion behavior.
 4. Interaction changes require focused Playwright coverage; route changes also require the full SEO/E2E suite.
-5. Existing public URLs remain usable. Remove them from discovery when ownership changes, but keep a canonical compatibility response rather than deleting or redirecting the content.
+5. When the product owner explicitly removes a visual, delete its artifacts and routes, return 404 for old Visuals/Blog HTML URLs, and remove it from sitemap discovery.
 
 ### Future Considerations
 - Add filters, automated cover captures, or a creation CLI only after the number of works demonstrates the need.

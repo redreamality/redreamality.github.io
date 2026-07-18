@@ -13,8 +13,8 @@ _Avoid_: HTML 展示区、Demo 列表
 _Avoid_: HTML 页面、动画文件
 
 **可视化产物（Visual Artifact）**:
-某个可视化作品在特定语言下可直接打开的完整体验。
-_Avoid_: iframe 内容、附件
+某个可视化作品在特定语言下、嵌入站点共享 Layout 后可直接打开的完整体验。
+_Avoid_: iframe 内容、独立站点导航、附件
 
 **交互图解模板（Interactive Explainer Kit）**:
 适合“总览—分步解释—重新组装”叙事结构的一类可复用创作框架。
