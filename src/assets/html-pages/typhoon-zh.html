@@ -1,0 +1,6053 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="用十三个可交互步骤理解台风如何从温暖海面上的扰动，成长为拥有台风眼、眼墙和螺旋雨带的成熟系统。">
+  <title>台风如何形成：一台由海洋驱动的热力引擎</title>
+  <style data-bundle="article">
+:root {
+  color-scheme: light;
+  --paper: #f6f7f4;
+  --paper-raised: #ffffff;
+  --ink: #182932;
+  --muted: #5b6b72;
+  --line: #d8dfdd;
+  --ocean: #176b87;
+  --ocean-deep: #123f5a;
+  --cyan: #4eb9c4;
+  --gold: #e9a83b;
+  --coral: #df695d;
+  --blue: #4d79b8;
+  --indigo: #48548f;
+  --violet: #745b9b;
+  --reading-width: 45rem;
+  --demo-width: 69rem;
+  --shadow: 0 1.5rem 4rem rgba(28, 62, 75, 0.12);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.72;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--paper);
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(78, 185, 196, 0.09), transparent 26rem),
+    var(--paper);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  color: white;
+  background: var(--ocean-deep);
+  transform: translateY(-180%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.site-header {
+  position: sticky;
+  z-index: 50;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3.75rem;
+  padding: 0.7rem clamp(1rem, 3vw, 2.5rem);
+  border-bottom: 1px solid rgba(216, 223, 221, 0.82);
+  background: rgba(246, 247, 244, 0.88);
+  backdrop-filter: blur(18px);
+}
+
+.site-mark {
+  color: var(--ocean-deep);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.reading-progress {
+  display: block;
+  width: clamp(4rem, 10vw, 8rem);
+  height: 3px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--line);
+}
+
+.reading-progress > span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--ocean);
+  transform-origin: left;
+}
+
+.motion-toggle {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--paper-raised);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.article {
+  overflow: clip;
+}
+
+.hero,
+.prose-block,
+.chapter-copy,
+.chapter-index,
+.closing {
+  width: min(calc(100% - 2rem), var(--reading-width));
+  margin-inline: auto;
+}
+
+.hero {
+  padding-block: clamp(5rem, 12vw, 10rem) clamp(4rem, 9vw, 7.5rem);
+}
+
+.eyebrow,
+.section-label,
+.chapter-number {
+  margin: 0 0 1rem;
+  color: var(--ocean);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--ocean-deep);
+  line-height: 1.09;
+  text-wrap: balance;
+}
+
+h1 {
+  max-width: 8em;
+  margin-bottom: 1.5rem;
+  font-size: clamp(3.5rem, 10vw, 7.8rem);
+  letter-spacing: -0.065em;
+}
+
+h2 {
+  margin-bottom: 1.25rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -0.045em;
+}
+
+h3 {
+  margin-bottom: 1.1rem;
+  font-size: clamp(1.75rem, 4vw, 2.7rem);
+  letter-spacing: -0.035em;
+}
+
+.hero-subtitle {
+  max-width: 32rem;
+  margin-bottom: 2.25rem;
+  color: var(--ocean);
+  font-size: clamp(1.25rem, 2.8vw, 1.75rem);
+  font-weight: 650;
+  line-height: 1.42;
+}
+
+.hero-introduction,
+.prose-block,
+.chapter-copy,
+.closing {
+  font-family: ui-serif, Georgia, "Noto Serif SC", serif;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+}
+
+.hero-introduction p,
+.chapter-copy p,
+.closing > p {
+  margin-bottom: 1.4rem;
+}
+
+.start-link {
+  display: inline-flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1.25rem;
+  color: var(--ocean-deep);
+  font-weight: 800;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.28em;
+}
+
+.overview {
+  padding-block: 5rem 7rem;
+  border-block: 1px solid var(--line);
+  background: #eef3f1;
+}
+
+.chapter-index {
+  padding-block: clamp(5rem, 10vw, 8rem);
+}
+
+.chapter-index ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.chapter-index li {
+  border-bottom: 1px solid var(--line);
+}
+
+.chapter-index li:nth-child(odd) {
+  border-right: 1px solid var(--line);
+}
+
+.chapter-index a {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  gap: 0.65rem;
+  min-height: 100%;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.chapter-index a:hover {
+  background: rgba(23, 107, 135, 0.06);
+}
+
+.chapter-index span {
+  color: var(--ocean);
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.chapter-index strong {
+  line-height: 1.35;
+}
+
+.chapter {
+  --chapter-accent: var(--ocean);
+  padding-block: clamp(5rem, 12vw, 9rem);
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 4.5rem;
+}
+
+.chapter[data-accent="gold"] { --chapter-accent: var(--gold); }
+.chapter[data-accent="cyan"] { --chapter-accent: var(--cyan); }
+.chapter[data-accent="coral"] { --chapter-accent: var(--coral); }
+.chapter[data-accent="blue"] { --chapter-accent: var(--blue); }
+.chapter[data-accent="indigo"] { --chapter-accent: var(--indigo); }
+.chapter[data-accent="violet"] { --chapter-accent: var(--violet); }
+
+.chapter-number {
+  color: var(--chapter-accent);
+}
+
+.chapter-question {
+  margin-bottom: 1rem;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 750;
+}
+
+.observation,
+.takeaway {
+  position: relative;
+  margin-top: 2rem;
+  padding: 1.2rem 1.35rem 1.25rem 1.55rem;
+  border-left: 4px solid var(--chapter-accent);
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.observation strong,
+.takeaway strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--chapter-accent);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+}
+
+interactive-figure {
+  display: block;
+  width: min(calc(100% - 1rem), var(--demo-width));
+  min-height: clamp(22rem, 58vw, 39rem);
+  margin: clamp(2.5rem, 6vw, 4.5rem) auto;
+  overflow: hidden;
+  border: 1px solid rgba(24, 41, 50, 0.12);
+  border-radius: clamp(1rem, 3vw, 2rem);
+  background: var(--paper-raised);
+  box-shadow: var(--shadow);
+}
+
+.closing {
+  padding-block: clamp(6rem, 14vw, 11rem);
+}
+
+.scientific-note {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 680px) {
+  .site-header {
+    min-height: 3.3rem;
+  }
+
+  .reading-progress {
+    display: none;
+  }
+
+  .motion-toggle {
+    padding-inline: 0.65rem;
+    font-size: 0.72rem;
+  }
+
+  .chapter-index ol {
+    grid-template-columns: 1fr;
+  }
+
+  .chapter-index li:nth-child(odd) {
+    border-right: 0;
+  }
+
+  interactive-figure {
+    width: calc(100% - 1rem);
+    min-height: 28rem;
+    border-radius: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#article">跳到正文</a>
+
+  <header class="site-header">
+    <a class="site-mark" href="#top" aria-label="返回文章开头">TYPHOON / LAB</a>
+    <div class="header-actions">
+      <span class="reading-progress" aria-hidden="true"><span data-reading-progress></span></span>
+      <button class="motion-toggle" type="button" data-global-motion aria-pressed="false">
+        <span data-motion-label>暂停所有动画</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="article">
+    <article id="top" class="article">
+      <header class="hero">
+        <p class="eyebrow">交互式气象图解</p>
+        <h1>台风如何形成</h1>
+        <p class="hero-subtitle">一台由温暖海洋、上升水汽与地球自转共同驱动的巨大热力引擎。</p>
+        <div class="hero-introduction">
+          <p>从卫星上看，成熟台风像一枚旋转的白色涡旋。但它并不是突然出现的：海洋先储存能量，水汽把能量送入高空，气压差驱动空气汇聚，地球自转再让整个系统组织起来。</p>
+          <p>下面把这条因果链拆成十三个步骤。每幅图都只回答一个问题；读完一个局部，再把它接回完整风暴。</p>
+        </div>
+        <a class="start-link" href="#overview">从整体开始 <span aria-hidden="true">↓</span></a>
+      </header>
+
+      <section id="overview" class="overview" aria-labelledby="overview-title">
+        <div class="prose-block">
+          <p class="section-label">系统全貌</p>
+          <h2 id="overview-title">先看见整体，再拆开机器</h2>
+          <p>一个成熟台风同时存在海面入流、眼墙上升、高空外流和中心下沉。接下来的章节会逐一解释这些运动从哪里获得能量，又如何彼此增强。</p>
+        </div>
+        <interactive-figure data-demo="overview" data-title="成熟台风的整体环流">
+          <noscript>启用 JavaScript 后可以查看成熟台风的整体环流示意。</noscript>
+        </interactive-figure>
+      </section>
+
+      <nav class="chapter-index" aria-label="文章章节">
+        <p class="section-label">十三个步骤</p>
+        <ol>
+          <li><a href="#step-01"><span>01</span><strong>海洋先把阳光存成热量</strong></a></li>
+          <li><a href="#step-02"><span>02</span><strong>海水蒸发，暖湿空气离开海面</strong></a></li>
+          <li><a href="#step-03"><span>03</span><strong>上升空气冷却，水汽凝结成云</strong></a></li>
+          <li><a href="#step-04"><span>04</span><strong>凝结释放潜热，云塔继续加速</strong></a></li>
+          <li><a href="#step-05"><span>05</span><strong>海面气压下降，周围空气不断涌入</strong></a></li>
+          <li><a href="#step-06"><span>06</span><strong>地球自转让入流发生偏转</strong></a></li>
+          <li><a href="#step-07"><span>07</span><strong>零散雷暴围绕共同中心组织起来</strong></a></li>
+          <li><a href="#step-08"><span>08</span><strong>风暴建立自我增强循环</strong></a></li>
+          <li><a href="#step-09"><span>09</span><strong>风速越过门槛，系统获得名字</strong></a></li>
+          <li><a href="#step-10"><span>10</span><strong>中心下沉变干，台风眼逐渐打开</strong></a></li>
+          <li><a href="#step-11"><span>11</span><strong>眼墙集中了最危险的风雨</strong></a></li>
+          <li><a href="#step-12"><span>12</span><strong>所有环流接成一台完整机器</strong></a></li>
+          <li><a href="#step-13"><span>13</span><strong>拖动三维台风，看完整环流</strong></a></li>
+        </ol>
+      </nav>
+
+      <section class="chapter" id="step-01" data-accent="gold" aria-labelledby="step-01-title">
+        <div class="chapter-copy">
+          <p class="chapter-number">步骤 01</p>
+          <p class="chapter-question">台风最初的能量从哪里来？</p>
+          <h2 id="step-01-title">海洋先把阳光存成热量</h2>
+          <p>热带海洋持续吸收太阳辐射。足够深的暖水层像一块巨大的蓄热体，即使海面被风搅动，下面仍有温暖海水能够补上来。</p>
+        </div>
+
+        <interactive-figure data-demo="step-01" data-title="步骤 01 · 海洋先把阳光存成热量">
+          <noscript>热带海洋持续吸收太阳辐射。足够深的暖水层像一块巨大的蓄热体，即使海面被风搅动，下面仍有温暖海水能够补上来。</noscript>
+        </interactive-figure>
+
+        <div class="chapter-copy">
+          <p class="observation"><strong>观察这里</strong>观察暖层如何从海面向下延伸，而不是只形成一层薄薄的热水。</p>
+          <p class="takeaway"><strong>接回整体</strong>台风不是由阳光直接吹出来的；阳光先把能量存进海洋。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="step-02" data-accent="cyan" aria-labelledby="step-02-title">
+        <div class="chapter-copy">
+          <p class="chapter-number">步骤 02</p>
+          <p class="chapter-question">储存在海里的能量怎样进入大气？</p>
+          <h2 id="step-02-title">海水蒸发，暖湿空气离开海面</h2>
+          <p>海面水分子蒸发成水汽，把热量带进空气。暖湿空气密度较低，开始上升；下方空出来的位置则由四周空气补入。</p>
+        </div>
+
+        <interactive-figure data-demo="step-02" data-title="步骤 02 · 海水蒸发，暖湿空气离开海面">
+          <noscript>海面水分子蒸发成水汽，把热量带进空气。暖湿空气密度较低，开始上升；下方空出来的位置则由四周空气补入。</noscript>
+        </interactive-figure>
+
+        <div class="chapter-copy">
+          <p class="observation"><strong>观察这里</strong>留意水汽上升与近海面空气汇入是同时发生的。</p>
+          <p class="takeaway"><strong>接回整体</strong>蒸发是海洋向风暴输送水分与能量的入口。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="step-03" data-accent="blue" aria-labelledby="step-03-title">
+        <div class="chapter-copy">
+          <p class="chapter-number">步骤 03</p>
+          <p class="chapter-question">为什么潮湿空气会长成高耸的积雨云？</p>
+          <h2 id="step-03-title">上升空气冷却，水汽凝结成云</h2>
+          <p>空气越升越高，周围气压越低，于是膨胀并冷却。当温度降到露点，水汽凝结为小水滴，松散的云逐渐向上堆叠成云塔。</p>
+        </div>
+
+        <interactive-figure data-demo="step-03" data-title="步骤 03 · 上升空气冷却，水汽凝结成云">
+          <noscript>空气越升越高，周围气压越低，于是膨胀并冷却。当温度降到露点，水汽凝结为小水滴，松散的云逐渐向上堆叠成云塔。</noscript>
+        </interactive-figure>
+
+        <div class="chapter-copy">
+          <p class="observation"><strong>观察这里</strong>沿着一团空气向上看：膨胀、降温与凝结发生在同一条路径上。</p>
+          <p class="takeaway"><strong>接回整体</strong>积雨云是上升湿空气冷却后的可见结果。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="step-04" data-accent="coral" aria-labelledby="step-04-title">
+        <div class="chapter-copy">
+          <p class="chapter-number">步骤 04</p>
+          <p class="chapter-question">云为什么不会刚形成就停止生长？</p>
+          <h2 id="step-04-title">凝结释放潜热，云塔继续加速</h2>
+          <p>水汽凝结时释放潜热，使云内空气比周围更暖、更有浮力。更快的上升又带来更多水汽凝结，形成一轮轮自我加强的循环。</p>
+        </div>
+
+        <interactive-figure data-demo="step-04" data-title="步骤 04 · 凝结释放潜热，云塔继续加速">
+          <noscript>水汽凝结时释放潜热，使云内空气比周围更暖、更有浮力。更快的上升又带来更多水汽凝结，形成一轮轮自我加强的循环。</noscript>
+        </interactive-figure>
+
+        <div class="chapter-copy">
+          <p class="observation"><strong>观察这里</strong>每次凝结释放能量后，上升气流都会变得更强，云顶也更高。</p>
+          <p class="takeaway"><strong>接回整体</strong>潜热把普通雷雨云变成能够持续运转的对流发动机。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="step-05" data-accent="indigo" aria-labelledby="step-05-title">
+        <div class="chapter-copy">
+          <p class="chapter-number">步骤 05</p>
+          <p class="chapter-question">上升运动如何在海面制造更强的风？</p>
+          <h2 id="step-05-title">海面气压下降，周围空气不断涌入</h2>
+          <p>大量空气被送往高空后，海面附近的空气变少，中心气压下降。周围较高气压处的空气受到压强梯度力驱动，持续向低压中心汇聚。</p>
+        </div>
+
+        <interactive-figure data-demo="step-05" data-title="步骤 05 · 海面气压下降，周围空气不断涌入">
+          <noscript>大量空气被送往高空后，海面附近的空气变少，中心气压下降。周围较高气压处的空气受到压强梯度力驱动，持续向低压中心汇聚。</noscript>
+        </interactive-figure>
+
+        <div class="chapter-copy">
+          <p class="observation"><strong>观察这里</strong>把俯视的水平汇聚与剖面的垂直上升对应起来。</p>
+          <p class="takeaway"><strong>接回整体</strong>中心越低压，空气流入越快；流入的湿空气又会继续上升。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="step-06" data-accent="violet" aria-labelledby="step-06-title">
+        <div class="chapter-copy">
+          <p class="chapter-number">步骤 06</p>
+          <p class="chapter-question">空气为什么不沿直线冲进低压中心？</p>
+          <h2 id="step-06-title">地球自转让入流发生偏转</h2>
+          <p>在旋转的地球上，运动空气会受到科里奥利效应影响。北半球入流向右偏，逐渐组成逆时针环流；南半球方向相反。赤道附近偏转太弱，因此很难组织出台风。</p>
+        </div>
+
+        <interactive-figure data-demo="step-06" data-title="步骤 06 · 地球自转让入流发生偏转">
+          <noscript>在旋转的地球上，运动空气会受到科里奥利效应影响。北半球入流向右偏，逐渐组成逆时针环流；南半球方向相反。赤道附近偏转太弱，因此很难组织出台风。</noscript>
+        </interactive-figure>
+
+        <div class="chapter-copy">
+          <p class="observation"><strong>观察这里</strong>先看直线入流，再比较偏转开启后轨迹怎样绕过中心。</p>
+          <p class="takeaway"><strong>接回整体</strong>科里奥利效应负责组织旋转，但它必须与压强梯度、摩擦等共同作用。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="step-07" data-accent="blue" aria-labelledby="step-07-title">
+        <div class="chapter-copy">
+          <p class="chapter-number">步骤 07</p>
+          <p class="chapter-question">什么时候，一群雷暴才算一个热带低压？</p>
+          <h2 id="step-07-title">零散雷暴围绕共同中心组织起来</h2>
+          <p>起初的云团各自生灭。只有当它们围绕共同低压中心持续旋转，并且垂直风切变足够弱、不把上下结构吹散时，系统才会变得稳定。</p>
+        </div>
+
+        <interactive-figure data-demo="step-07" data-title="步骤 07 · 零散雷暴围绕共同中心组织起来">
+          <noscript>起初的云团各自生灭。只有当它们围绕共同低压中心持续旋转，并且垂直风切变足够弱、不把上下结构吹散时，系统才会变得稳定。</noscript>
+        </interactive-figure>
+
+        <div class="chapter-copy">
+          <p class="observation"><strong>观察这里</strong>比较随机云团与有共同旋转中心的云带，两者秩序完全不同。</p>
+          <p class="takeaway"><strong>接回整体</strong>热带低压不是一朵更大的云，而是一套能够维持的环流结构。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="step-08" data-accent="coral" aria-labelledby="step-08-title">
+        <div class="chapter-copy">
+          <p class="chapter-number">步骤 08</p>
+          <p class="chapter-question">为什么有些系统会迅速增强？</p>
+          <h2 id="step-08-title">风暴建立自我增强循环</h2>
+          <p>更强的风促进蒸发，更多水汽凝结释放潜热，使中心气压继续下降；更大的气压差又带来更强的风。只要暖水、湿空气和较弱风切变持续存在，这个反馈就能运转。</p>
+        </div>
+
+        <interactive-figure data-demo="step-08" data-title="步骤 08 · 风暴建立自我增强循环">
+          <noscript>更强的风促进蒸发，更多水汽凝结释放潜热，使中心气压继续下降；更大的气压差又带来更强的风。只要暖水、湿空气和较弱风切变持续存在，这个反馈就能运转。</noscript>
+        </interactive-figure>
+
+        <div class="chapter-copy">
+          <p class="observation"><strong>观察这里</strong>同时追踪风速、蒸发量与中心气压，不要只看云转得多快。</p>
+          <p class="takeaway"><strong>接回整体</strong>增强不是单一因素造成的，而是多个量互相推动的反馈环。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="step-09" data-accent="gold" aria-labelledby="step-09-title">
+        <div class="chapter-copy">
+          <p class="chapter-number">步骤 09</p>
+          <p class="chapter-question">热带低压何时升级为热带风暴和台风？</p>
+          <h2 id="step-09-title">风速越过门槛，系统获得名字</h2>
+          <p>在西北太平洋，日本气象厅以十分钟平均最大持续风速分类：达到 17.2 m/s 为热带风暴，达到 32.7 m/s 为台风。不同机构使用的平均周期和等级名称并不完全相同。</p>
+        </div>
+
+        <interactive-figure data-demo="step-09" data-title="步骤 09 · 风速越过门槛，系统获得名字">
+          <noscript>在西北太平洋，日本气象厅以十分钟平均最大持续风速分类：达到 17.2 m/s 为热带风暴，达到 32.7 m/s 为台风。不同机构使用的平均周期和等级名称并不完全相同。</noscript>
+        </interactive-figure>
+
+        <div class="chapter-copy">
+          <p class="observation"><strong>观察这里</strong>观察风速越过阈值时，分类标签如何变化；名称是测量结果，不是风暴突然改变的开关。</p>
+          <p class="takeaway"><strong>接回整体</strong>分级方便沟通风险，但真实风暴的增强过程是连续的。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="step-10" data-accent="cyan" aria-labelledby="step-10-title">
+        <div class="chapter-copy">
+          <p class="chapter-number">步骤 10</p>
+          <p class="chapter-question">剧烈风暴中心为什么反而可能晴朗平静？</p>
+          <h2 id="step-10-title">中心下沉变干，台风眼逐渐打开</h2>
+          <p>当环流足够强并重新组织，眼墙内侧的部分空气在中心下沉。空气下沉时受压增温、相对湿度降低，云滴蒸发，于是厚云中央出现清晰的眼。</p>
+        </div>
+
+        <interactive-figure data-demo="step-10" data-title="步骤 10 · 中心下沉变干，台风眼逐渐打开">
+          <noscript>当环流足够强并重新组织，眼墙内侧的部分空气在中心下沉。空气下沉时受压增温、相对湿度降低，云滴蒸发，于是厚云中央出现清晰的眼。</noscript>
+        </interactive-figure>
+
+        <div class="chapter-copy">
+          <p class="observation"><strong>观察这里</strong>对比眼内的下沉、少云与眼墙的高速上升、暴雨。</p>
+          <p class="takeaway"><strong>接回整体</strong>台风眼的平静来自下沉空气，它并不表示风暴整体减弱。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="step-11" data-accent="coral" aria-labelledby="step-11-title">
+        <div class="chapter-copy">
+          <p class="chapter-number">步骤 11</p>
+          <p class="chapter-question">成熟台风内部哪里最危险？</p>
+          <h2 id="step-11-title">眼墙集中了最危险的风雨</h2>
+          <p>紧贴台风眼的眼墙拥有最强上升气流、最大风速和最猛烈降水。更外侧的螺旋雨带则带来一阵阵强风和暴雨，影响范围远大于台风眼。</p>
+        </div>
+
+        <interactive-figure data-demo="step-11" data-title="步骤 11 · 眼墙集中了最危险的风雨">
+          <noscript>紧贴台风眼的眼墙拥有最强上升气流、最大风速和最猛烈降水。更外侧的螺旋雨带则带来一阵阵强风和暴雨，影响范围远大于台风眼。</noscript>
+        </interactive-figure>
+
+        <div class="chapter-copy">
+          <p class="observation"><strong>观察这里</strong>从中心向外扫描：台风眼、眼墙和螺旋雨带的粒子密度与速度依次不同。</p>
+          <p class="takeaway"><strong>接回整体</strong>不能用台风眼的宁静判断风险；真正的极端天气集中在眼墙。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="step-12" data-accent="indigo" aria-labelledby="step-12-title">
+        <div class="chapter-copy">
+          <p class="chapter-number">步骤 12</p>
+          <p class="chapter-question">一个成熟台风怎样持续运转？</p>
+          <h2 id="step-12-title">所有环流接成一台完整机器</h2>
+          <p>近海面空气螺旋流入，在眼墙快速上升，到高空后向外排出；中心则有较弱的下沉运动。只要路径仍经过温暖海洋，系统就能继续获取热量和水汽。</p>
+        </div>
+
+        <interactive-figure data-demo="step-12" data-title="步骤 12 · 所有环流接成一台完整机器">
+          <noscript>近海面空气螺旋流入，在眼墙快速上升，到高空后向外排出；中心则有较弱的下沉运动。只要路径仍经过温暖海洋，系统就能继续获取热量和水汽。</noscript>
+        </interactive-figure>
+
+        <div class="chapter-copy">
+          <p class="observation"><strong>观察这里</strong>把十二个局部重新放回同一幅剖面和卫星俯视图，沿空气运动方向走一圈。</p>
+          <p class="takeaway"><strong>接回整体</strong>台风是一套开放的热力系统；冷水、陆地或强风切变都可能切断它的能量链。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="step-13" data-accent="cyan" aria-labelledby="step-13-title">
+        <div class="chapter-copy">
+          <p class="chapter-number">步骤 13</p>
+          <p class="chapter-question">俯视图和剖面图描述的空气运动，怎样连接成同一个三维结构？</p>
+          <h2 id="step-13-title">拖动三维台风，看完整环流</h2>
+          <p>成熟台风不是一张平面螺旋图，而是一套立体环流：近海面空气向中心旋转汇聚，在眼墙形成环状上升柱，到对流层上部向外扩散，台风眼内则有较弱下沉。拖动模型改变观察角度，可以看见这些路径如何围绕共同轴线连接。</p>
+        </div>
+
+        <interactive-figure data-demo="step-13" data-title="步骤 13 · 拖动三维台风，看完整环流">
+          <noscript>成熟台风不是一张平面螺旋图，而是一套立体环流：近海面空气向中心旋转汇聚，在眼墙形成环状上升柱，到对流层上部向外扩散，台风眼内则有较弱下沉。拖动模型改变观察角度，可以看见这些路径如何围绕共同轴线连接。</noscript>
+        </interactive-figure>
+
+        <div class="chapter-copy">
+          <p class="observation"><strong>观察这里</strong>水平拖动比较俯视与侧视，垂直拖动抬高或压低视角；寻找海面入流、眼墙上升、高空外流和眼内下沉四条路径。</p>
+          <p class="takeaway"><strong>接回整体</strong>台风的旋转、上升和外流不是三套独立动画，而是同一台热力引擎在三维空间中的不同部分。</p>
+        </div>
+      </section>
+
+      <footer class="closing">
+        <p class="section-label">重新组装</p>
+        <h2>从一片暖海，到一场有组织的风暴</h2>
+        <p>海洋供能、蒸发输送、凝结放热、低压汇聚、旋转组织，这些过程缺一不可。理解台风，最重要的不是记住十三个标签，而是看见能量和空气如何沿着一条闭合的因果链流动。</p>
+        <p class="scientific-note">本文动画为原理示意。真实热带气旋会受到海温、湿度、风切变、地形和大尺度环流等多种因素影响。</p>
+      </footer>
+    </article>
+  </main>
+
+  <script data-bundle="runtime">
+(() => {
+  "use strict";
+
+  const registry = new Map();
+  const figures = new Set();
+  const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const designTokens = Object.freeze({
+    ink: "#182932",
+    muted: "#5b6b72",
+    ocean: "#176b87",
+    oceanDeep: "#123f5a",
+    cyan: "#4eb9c4",
+    gold: "#e9a83b",
+    coral: "#df695d",
+    blue: "#4d79b8",
+    paper: "#f6f7f4"
+  });
+
+  let globalPaused = false;
+
+  function callLifecycle(instance, method, argument) {
+    if (instance && typeof instance[method] === "function") {
+      instance[method](argument);
+    }
+  }
+
+  class InteractiveFigure extends HTMLElement {
+    constructor() {
+      super();
+      this._mounted = false;
+      this._mounting = false;
+      this._visible = false;
+      this._localPaused = false;
+      this._instance = null;
+      this._abortController = new AbortController();
+      this._shadow = this.attachShadow({ mode: "open" });
+      this._shadow.innerHTML = `
+        <style>
+          :host { display: block; color: #182932; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+          .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: #fff; }
+          .stage { position: relative; min-height: 21rem; overflow: hidden; isolation: isolate; }
+          .status { position: absolute; inset: 0; display: grid; place-items: center; padding: 2rem; color: #5b6b72; text-align: center; background: #f8faf9; }
+          .status[hidden] { display: none; }
+          .controls { display: flex; align-items: center; justify-content: space-between; gap: .75rem; min-height: 3.25rem; padding: .55rem .75rem; border-top: 1px solid #e1e6e4; background: rgba(255,255,255,.96); }
+          .title { overflow: hidden; color: #5b6b72; font-size: .78rem; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+          .buttons { display: flex; gap: .45rem; flex: none; }
+          button { min-height: 2.15rem; padding: .4rem .7rem; border: 1px solid #d8dfdd; border-radius: 999px; color: #182932; background: #fff; font: inherit; font-size: .74rem; font-weight: 750; cursor: pointer; }
+          button:hover { border-color: #176b87; }
+          button:focus-visible { outline: 3px solid #e9a83b; outline-offset: 2px; }
+          @media (max-width: 520px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
+        </style>
+        <div class="frame">
+          <div class="stage" part="stage">
+            <div class="status" role="status">动画将在进入视口后加载。</div>
+          </div>
+          <div class="controls" part="controls">
+            <span class="title"></span>
+            <span class="buttons">
+              <button type="button" data-action="pause" aria-pressed="false">暂停</button>
+              <button type="button" data-action="reset">重置</button>
+            </span>
+          </div>
+        </div>`;
+    }
+
+    connectedCallback() {
+      if (this._connected) return;
+      this._connected = true;
+      figures.add(this);
+
+      this._stage = this._shadow.querySelector(".stage");
+      this._status = this._shadow.querySelector(".status");
+      this._title = this._shadow.querySelector(".title");
+      this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
+      this._resetButton = this._shadow.querySelector('[data-action="reset"]');
+      this._title.textContent = this.dataset.title || "交互动画";
+
+      this._pauseButton.addEventListener("click", () => {
+        this._localPaused = !this._localPaused;
+        this._syncPlayback();
+      });
+      this._resetButton.addEventListener("click", () => {
+        callLifecycle(this._instance, "reset");
+        this.dispatchEvent(new CustomEvent("demo-reset", { bubbles: true }));
+      });
+
+      this._intersectionObserver = new IntersectionObserver((entries) => {
+        this._visible = entries[0]?.isIntersecting ?? false;
+        if (this._visible) this.tryMount();
+        this._syncPlayback();
+      }, { rootMargin: "180px 0px", threshold: 0.05 });
+      this._intersectionObserver.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      figures.delete(this);
+      this._intersectionObserver?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
+      callLifecycle(this._instance, "destroy");
+    }
+
+    async tryMount() {
+      if (this._mounted || this._mounting) return;
+      const id = this.dataset.demo;
+      const factory = registry.get(id);
+      if (!factory) {
+        this._setStatus("正在等待动画模块…");
+        return;
+      }
+
+      this._mounting = true;
+      this._setStatus("正在准备动画…");
+      try {
+        const instance = await factory({
+          root: this._stage,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
+          motion: !reducedMotionQuery.matches,
+          tokens: designTokens,
+          announce: (message) => this._setStatus(message)
+        });
+        this._instance = instance || {};
+        this._mounted = true;
+        this.dataset.state = "mounted";
+        this._status.hidden = true;
+        this._resize();
+        this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", { bubbles: true, detail: { id } }));
+      } catch (error) {
+        this.dataset.state = "error";
+        this._setStatus("动画暂时无法显示，请阅读下方文字说明。", true);
+      } finally {
+        this._mounting = false;
+      }
+    }
+
+    setGlobalPaused(paused) {
+      globalPaused = Boolean(paused);
+      this._syncPlayback();
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      const rect = this.getBoundingClientRect();
+      callLifecycle(this._instance, "resize", {
+        width: rect.width,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _syncPlayback() {
+      const paused = globalPaused || this._localPaused || !this._visible || reducedMotionQuery.matches;
+      this._pauseButton.setAttribute("aria-pressed", String(this._localPaused));
+      this._pauseButton.textContent = this._localPaused ? "继续" : "暂停";
+      callLifecycle(this._instance, paused ? "pause" : "resume");
+      this.dataset.playback = paused ? "paused" : "playing";
+    }
+
+    _setStatus(message, isError = false) {
+      this._status.hidden = false;
+      this._status.textContent = message;
+      this._status.style.color = isError ? "#9b3f37" : "#5b6b72";
+    }
+  }
+
+  window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") {
+      throw new TypeError("registerDemo(id, factory) 需要有效的 ID 和 factory。 ");
+    }
+    if (registry.has(id)) {
+      throw new Error(`动画 ${id} 已注册。`);
+    }
+    registry.set(id, factory);
+    figures.forEach((figure) => {
+      if (figure.dataset.demo === id && figure._visible) figure.tryMount();
+    });
+  };
+
+  customElements.define("interactive-figure", InteractiveFigure);
+
+  const motionToggle = document.querySelector("[data-global-motion]");
+  const motionLabel = document.querySelector("[data-motion-label]");
+
+  function updateGlobalMotion(paused) {
+    globalPaused = Boolean(paused);
+    motionToggle?.setAttribute("aria-pressed", String(globalPaused));
+    if (motionLabel) motionLabel.textContent = globalPaused ? "继续所有动画" : "暂停所有动画";
+    figures.forEach((figure) => figure.setGlobalPaused(globalPaused));
+    document.dispatchEvent(new CustomEvent("article-motion-change", { detail: { paused: globalPaused } }));
+  }
+
+  motionToggle?.addEventListener("click", () => updateGlobalMotion(!globalPaused));
+  reducedMotionQuery.addEventListener("change", () => figures.forEach((figure) => figure._syncPlayback()));
+
+  const progressBar = document.querySelector("[data-reading-progress]");
+  function updateReadingProgress() {
+    if (!progressBar) return;
+    const maximum = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = maximum > 0 ? Math.min(1, Math.max(0, window.scrollY / maximum)) : 0;
+    progressBar.style.width = `${ratio * 100}%`;
+  }
+  window.addEventListener("scroll", updateReadingProgress, { passive: true });
+  window.addEventListener("resize", updateReadingProgress);
+  updateReadingProgress();
+})();
+  </script>
+  <script data-bundle="demos">
+registerDemo("overview", ({ root, shadow, signal, motion, tokens }) => {
+  root.innerHTML = `
+    <style>
+      .overview-container {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        background: ${tokens.paper};
+        font-family: sans-serif;
+        user-select: none;
+      }
+      .canvas-container {
+        flex: 1;
+        position: relative;
+        min-height: 0;
+        overflow: hidden;
+      }
+      canvas {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .labels {
+        position: absolute;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+      .label {
+        position: absolute;
+        font-size: 13px;
+        color: ${tokens.ink};
+        background: rgba(255, 255, 255, 0.85);
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid ${tokens.muted}55;
+        transform: translate(-50%, -50%);
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      }
+      .controls {
+        padding: 12px;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+        background: rgba(255, 255, 255, 0.9);
+        z-index: 10;
+        border-top: 1px solid ${tokens.muted}33;
+      }
+      button {
+        background: ${tokens.paper};
+        border: 1px solid ${tokens.muted};
+        color: ${tokens.ink};
+        padding: 6px 14px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s;
+        outline: none;
+      }
+      button:hover, button:focus-visible {
+        border-color: ${tokens.ocean};
+        box-shadow: 0 0 0 2px ${tokens.ocean}33;
+      }
+      button.active {
+        background: ${tokens.ocean};
+        color: ${tokens.paper};
+        border-color: ${tokens.oceanDeep};
+        font-weight: bold;
+      }
+    </style>
+    <div class="overview-container">
+      <div class="canvas-container">
+        <canvas></canvas>
+        <div class="labels">
+          <div class="label" id="lbl-inflow" style="left: 75%; top: 85%;">① 海面入流</div>
+          <div class="label" id="lbl-updraft" style="left: 65%; top: 50%;">② 眼墙上升</div>
+          <div class="label" id="lbl-outflow" style="left: 80%; top: 15%;">③ 高空外流</div>
+          <div class="label" id="lbl-downdraft" style="left: 50%; top: 40%;">④ 中心下沉</div>
+        </div>
+      </div>
+      <div class="controls">
+        <button data-flow="all" class="active" aria-label="显示整体循环">整体循环</button>
+        <button data-flow="inflow" aria-label="高亮海面入流">① 海面入流</button>
+        <button data-flow="updraft" aria-label="高亮眼墙上升">② 眼墙上升</button>
+        <button data-flow="outflow" aria-label="高亮高空外流">③ 高空外流</button>
+        <button data-flow="downdraft" aria-label="高亮中心下沉">④ 中心下沉</button>
+      </div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  let width = 0, height = 0, dpr = 1;
+  let isPlaying = motion;
+  let rafId = null;
+  let activeFlow = 'all';
+  let particles = [];
+
+  const colors = {
+    inflow: tokens.cyan,
+    updraft: tokens.coral,
+    outflow: tokens.gold,
+    downdraft: tokens.oceanDeep
+  };
+
+  const buttons = root.querySelectorAll('button');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFlow = btn.dataset.flow;
+      updateLabels();
+      if (!isPlaying) drawStatic();
+    });
+  });
+
+  function updateLabels() {
+    const labels = {
+      inflow: root.querySelector('#lbl-inflow'),
+      updraft: root.querySelector('#lbl-updraft'),
+      outflow: root.querySelector('#lbl-outflow'),
+      downdraft: root.querySelector('#lbl-downdraft')
+    };
+    for (const [key, el] of Object.entries(labels)) {
+      if (activeFlow === 'all' || activeFlow === key) {
+        el.style.opacity = '1';
+        el.style.transform = 'translate(-50%, -50%) scale(1.05)';
+        el.style.borderColor = colors[key];
+        el.style.color = key === 'downdraft' ? tokens.ink : colors[key];
+        el.style.fontWeight = 'bold';
+      } else {
+        el.style.opacity = '0.3';
+        el.style.transform = 'translate(-50%, -50%) scale(0.95)';
+        el.style.borderColor = `${tokens.muted}55`;
+        el.style.color = tokens.ink;
+        el.style.fontWeight = 'normal';
+      }
+    }
+  }
+
+  function initParticles() {
+    particles = [];
+    const counts = { inflow: 70, updraft: 100, outflow: 70, downdraft: 40 };
+    for (const [path, count] of Object.entries(counts)) {
+      for (let i = 0; i < count; i++) {
+        let speedBase = 0;
+        if (path === 'inflow') speedBase = 0.003;
+        if (path === 'updraft') speedBase = 0.005;
+        if (path === 'outflow') speedBase = 0.004;
+        if (path === 'downdraft') speedBase = 0.0015;
+
+        particles.push({
+          path,
+          side: i % 2 === 0 ? 1 : -1,
+          t: Math.random(),
+          speed: speedBase + Math.random() * (speedBase * 0.5),
+          offsetX: (Math.random() - 0.5) * 0.06,
+          offsetY: (Math.random() - 0.5) * 0.06,
+          length: 0.04 + Math.random() * 0.06
+        });
+      }
+    }
+  }
+
+  function bezier(p0, p1, p2, p3, t) {
+    const u = 1 - t;
+    const tt = t * t;
+    const uu = u * u;
+    const uuu = uu * u;
+    const ttt = tt * t;
+    return {
+      x: uuu * p0.x + 3 * uu * t * p1.x + 3 * u * tt * p2.x + ttt * p3.x,
+      y: uuu * p0.y + 3 * uu * t * p1.y + 3 * u * tt * p2.y + ttt * p3.y
+    };
+  }
+
+  function getPathPos(path, t) {
+    if (path === 'inflow') {
+      return { x: 1.0 - 0.8 * t, y: 0.9 - 0.05 * t };
+    } else if (path === 'updraft') {
+      const p0 = { x: 0.2, y: 0.85 };
+      const p1 = { x: 0.12, y: 0.6 };
+      const p2 = { x: 0.25, y: 0.3 };
+      const p3 = { x: 0.35, y: 0.1 };
+      return bezier(p0, p1, p2, p3, t);
+    } else if (path === 'outflow') {
+      return { x: 0.35 + 0.65 * t, y: 0.1 + 0.05 * t };
+    } else if (path === 'downdraft') {
+      return { x: 0.05 - 0.03 * t, y: 0.1 + 0.7 * t };
+    }
+    return { x: 0, y: 0 };
+  }
+
+  function drawBackground() {
+    ctx.clearRect(0, 0, width, height);
+    const cx = width / 2;
+
+    // Sea
+    ctx.fillStyle = tokens.oceanDeep;
+    ctx.globalAlpha = 0.7;
+    ctx.fillRect(0, height * 0.9, width, height * 0.1);
+
+    // Eyewall clouds
+    ctx.fillStyle = tokens.muted;
+    ctx.globalAlpha = 0.1;
+
+    // Left eyewall
+    ctx.beginPath();
+    ctx.ellipse(cx - 0.22 * (width / 2), height * 0.5, 0.12 * (width / 2), height * 0.4, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Right eyewall
+    ctx.beginPath();
+    ctx.ellipse(cx + 0.22 * (width / 2), height * 0.5, 0.12 * (width / 2), height * 0.4, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.globalAlpha = 1.0;
+  }
+
+  function drawParticles() {
+    const cx = width / 2;
+    particles.forEach(p => {
+      p.t += p.speed;
+      if (p.t > 1) {
+        p.t = 0;
+        p.offsetX = (Math.random() - 0.5) * 0.06;
+        p.offsetY = (Math.random() - 0.5) * 0.06;
+      }
+
+      const isActive = activeFlow === 'all' || activeFlow === p.path;
+      ctx.globalAlpha = isActive ? 0.8 : 0.1;
+      ctx.strokeStyle = colors[p.path];
+      ctx.lineWidth = 2 * dpr;
+      ctx.lineCap = 'round';
+
+      ctx.beginPath();
+      const startT = Math.max(0, p.t - p.length);
+      for (let t = startT; t <= p.t; t += 0.02) {
+        let pos = getPathPos(p.path, t);
+        let x = cx + (pos.x + p.offsetX) * (width / 2) * p.side;
+        let y = (pos.y + p.offsetY) * height;
+        if (t === startT) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    });
+    ctx.globalAlpha = 1.0;
+  }
+
+  function drawArrow(path, side, color, alpha) {
+    const cx = width / 2;
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = 4 * dpr;
+
+    let pts = [];
+    for (let t = 0; t <= 1; t += 0.05) {
+      let p = getPathPos(path, t);
+      pts.push({
+        x: cx + p.x * (width / 2) * side,
+        y: p.y * height
+      });
+    }
+
+    ctx.moveTo(pts[0].x, pts[0].y);
+    for (let i = 1; i < pts.length; i++) {
+      ctx.lineTo(pts[i].x, pts[i].y);
+    }
+    ctx.stroke();
+
+    let last = pts[pts.length - 1];
+    let prev = pts[pts.length - 2];
+    let angle = Math.atan2(last.y - prev.y, last.x - prev.x);
+
+    ctx.beginPath();
+    ctx.moveTo(last.x, last.y);
+    ctx.lineTo(last.x - 12 * dpr * Math.cos(angle - Math.PI / 6), last.y - 12 * dpr * Math.sin(angle - Math.PI / 6));
+    ctx.lineTo(last.x - 12 * dpr * Math.cos(angle + Math.PI / 6), last.y - 12 * dpr * Math.sin(angle + Math.PI / 6));
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.globalAlpha = 1.0;
+  }
+
+  function drawStatic() {
+    drawBackground();
+    const paths = ['inflow', 'updraft', 'outflow', 'downdraft'];
+    paths.forEach(path => {
+      const isActive = activeFlow === 'all' || activeFlow === path;
+      const alpha = isActive ? 0.9 : 0.15;
+      drawArrow(path, 1, colors[path], alpha);
+      drawArrow(path, -1, colors[path], alpha);
+    });
+  }
+
+  function loop() {
+    if (!isPlaying) return;
+    drawBackground();
+    drawParticles();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  initParticles();
+  updateLabels();
+
+  return {
+    resize(dims) {
+      width = dims.width;
+      height = dims.height;
+      dpr = dims.dpr;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+      if (!isPlaying) {
+        drawStatic();
+      }
+    },
+    pause() {
+      isPlaying = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      drawStatic();
+    },
+    resume() {
+      if (!isPlaying) {
+        isPlaying = true;
+        loop();
+      }
+    },
+    reset() {
+      activeFlow = 'all';
+      buttons.forEach(b => b.classList.remove('active'));
+      root.querySelector('button[data-flow="all"]').classList.add('active');
+      initParticles();
+      updateLabels();
+      if (!isPlaying) {
+        drawStatic();
+      }
+    },
+    destroy() {
+      isPlaying = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      root.innerHTML = '';
+    }
+  };
+});
+
+
+registerDemo("step-01", ({ root, shadow, signal, motion, tokens }) => {
+  root.innerHTML = `
+    <style>
+      .step01-wrap {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        background: ${tokens.paper};
+        color: ${tokens.ink};
+        font-family: system-ui, sans-serif;
+        user-select: none;
+      }
+      .step01-ctrl {
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        border-bottom: 1px solid ${tokens.muted}33;
+        z-index: 2;
+        background: ${tokens.paper};
+      }
+      .step01-ctrl label {
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .step01-slider {
+        flex: 1;
+        min-width: 100px;
+        max-width: 300px;
+        cursor: pointer;
+        accent-color: ${tokens.coral};
+      }
+      .step01-view {
+        flex: 1;
+        position: relative;
+        min-height: 0;
+        overflow: hidden;
+      }
+      .step01-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .step01-axis {
+        position: absolute;
+        right: 16px;
+        top: 20%;
+        height: 80%;
+        width: 60px;
+        pointer-events: none;
+        border-left: 1px dashed ${tokens.muted}66;
+      }
+      .step01-tick {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        border-top: 1px dashed ${tokens.muted}66;
+        font-size: 11px;
+        color: ${tokens.muted};
+        line-height: 1;
+        padding-left: 6px;
+        transform: translateY(-50%);
+      }
+    </style>
+    <div class="step01-wrap">
+      <div class="step01-ctrl">
+        <label for="day-slider">持续日照: <span id="day-val">0</span> 天</label>
+        <input type="range" id="day-slider" class="step01-slider" min="0" max="30" value="0" step="0.1" aria-label="日照天数">
+      </div>
+      <div class="step01-view">
+        <canvas class="step01-canvas"></canvas>
+        <div class="step01-axis">
+          <div class="step01-tick" style="top: 0%;">0m (海面)</div>
+          <div class="step01-tick" style="top: 25%;">50m</div>
+          <div class="step01-tick" style="top: 50%;">100m</div>
+          <div class="step01-tick" style="top: 75%;">150m</div>
+          <div class="step01-tick" style="top: 100%;">200m</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('.step01-canvas');
+  const ctx = canvas.getContext('2d');
+  const slider = root.querySelector('#day-slider');
+  const dayVal = root.querySelector('#day-val');
+
+  let w = 0, h = 0, dpr = 1;
+  let isPlaying = motion;
+  let days = motion ? 0 : 30;
+  let animationId = null;
+  let lastTime = performance.now();
+  let particles = [];
+
+  slider.value = days;
+  dayVal.textContent = Math.floor(days);
+
+  function mixAlpha(color, alpha) {
+    ctx.globalAlpha = alpha;
+    return color;
+  }
+
+  function drawCanvas(time, dt) {
+    ctx.clearRect(0, 0, w, h);
+
+    const oceanTop = h * 0.2;
+    const oceanHeight = h * 0.8;
+
+    ctx.fillStyle = tokens.paper;
+    ctx.fillRect(0, 0, w, oceanTop);
+
+    const sunX = w / 2;
+    const sunY = oceanTop / 2;
+
+    if (motion) {
+      ctx.save();
+      ctx.translate(sunX, sunY);
+      ctx.rotate(time * 0.0005);
+      ctx.strokeStyle = tokens.gold;
+      ctx.lineWidth = 2;
+      ctx.globalAlpha = 0.4 + 0.2 * Math.sin(time * 0.003);
+      for (let i = 0; i < 12; i++) {
+        ctx.beginPath();
+        ctx.moveTo(18, 0);
+        ctx.lineTo(h * 0.15, 0);
+        ctx.stroke();
+        ctx.rotate((Math.PI * 2) / 12);
+      }
+      ctx.restore();
+    }
+
+    ctx.beginPath();
+    ctx.arc(sunX, sunY, 14, 0, Math.PI * 2);
+    ctx.fillStyle = tokens.gold;
+    ctx.globalAlpha = 1;
+    ctx.fill();
+
+    const bgGrad = ctx.createLinearGradient(0, oceanTop, 0, h);
+    bgGrad.addColorStop(0, tokens.ocean);
+    bgGrad.addColorStop(1, tokens.oceanDeep);
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, oceanTop, w, oceanHeight);
+
+    const maxWarmDepth = oceanHeight * 0.6;
+    const warmDepth = maxWarmDepth * (days / 30);
+
+    if (warmDepth > 0) {
+      ctx.save();
+      const warmGrad = ctx.createLinearGradient(0, oceanTop, 0, oceanTop + warmDepth);
+      warmGrad.addColorStop(0, tokens.coral);
+      warmGrad.addColorStop(0.6, tokens.coral);
+      warmGrad.addColorStop(1, tokens.oceanDeep);
+
+      ctx.globalAlpha = Math.min(0.9, days / 10);
+      ctx.fillStyle = warmGrad;
+      ctx.fillRect(0, oceanTop, w, warmDepth);
+      ctx.restore();
+    }
+
+    if (motion && isPlaying && days < 30 && Math.random() < 0.4) {
+      particles.push({
+        x: Math.random() * w,
+        y: oceanTop,
+        targetY: oceanTop + Math.random() * warmDepth,
+        speed: (h * 0.001) + Math.random() * (h * 0.002),
+        alpha: 1,
+        r: 1.5 + Math.random() * 1.5
+      });
+    }
+
+    ctx.fillStyle = tokens.gold;
+    for (let i = particles.length - 1; i >= 0; i--) {
+      let p = particles[i];
+      if (dt > 0) {
+        p.y += p.speed * (dt / 16.6);
+      }
+      if (p.y >= p.targetY) {
+        p.alpha -= 0.02 * (dt / 16.6);
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+      }
+      ctx.globalAlpha = Math.max(0, p.alpha);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    if (warmDepth > h * 0.05) {
+      const bracketX = 30;
+      ctx.strokeStyle = tokens.coral;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(bracketX + 8, oceanTop + 2);
+      ctx.lineTo(bracketX, oceanTop + 2);
+      ctx.lineTo(bracketX, oceanTop + warmDepth - 2);
+      ctx.lineTo(bracketX + 8, oceanTop + warmDepth - 2);
+      ctx.stroke();
+
+      ctx.fillStyle = tokens.coral;
+      ctx.font = "bold 13px sans-serif";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      ctx.fillText("深层蓄热区", bracketX + 14, oceanTop + warmDepth / 2);
+    }
+  }
+
+  function render(time) {
+    if (!time) time = performance.now();
+    const dt = Math.min(time - lastTime, 50);
+    lastTime = time;
+
+    if (isPlaying) {
+      if (motion) {
+        days += (30 / 4000) * dt;
+        if (days >= 30) {
+          days = 30;
+          isPlaying = false;
+        }
+      } else {
+        days = 30;
+        isPlaying = false;
+      }
+      slider.value = days;
+      dayVal.textContent = Math.floor(days);
+    }
+
+    drawCanvas(time, dt);
+
+    if (isPlaying) {
+      animationId = requestAnimationFrame(render);
+    } else {
+      animationId = null;
+    }
+  }
+
+  function scheduleRender() {
+    if (!animationId) {
+      lastTime = performance.now();
+      animationId = requestAnimationFrame(render);
+    }
+  }
+
+  slider.addEventListener('input', (e) => {
+    days = parseFloat(e.target.value);
+    dayVal.textContent = Math.floor(days);
+    isPlaying = false;
+    scheduleRender();
+  });
+
+  scheduleRender();
+
+  return {
+    resize(size) {
+      w = size.width;
+      h = size.height;
+      dpr = size.dpr || 1;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.scale(dpr, dpr);
+      drawCanvas(performance.now(), 0);
+    },
+    pause() {
+      isPlaying = false;
+      if (animationId) cancelAnimationFrame(animationId);
+      animationId = null;
+    },
+    resume() {
+      if (days >= 29.9) {
+        days = 0;
+        particles = [];
+      }
+      isPlaying = true;
+      scheduleRender();
+    },
+    reset() {
+      const wasPlaying = isPlaying;
+      days = 0;
+      particles = [];
+      slider.value = 0;
+      dayVal.textContent = "0";
+      isPlaying = motion && wasPlaying;
+      if (isPlaying) {
+        scheduleRender();
+      } else {
+        if (animationId) cancelAnimationFrame(animationId);
+        animationId = null;
+        drawCanvas(performance.now(), 0);
+      }
+    },
+    destroy() {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+      root.innerHTML = '';
+    }
+  };
+});
+
+
+registerDemo("step-02", ({ root, shadow, signal, motion, tokens }) => {
+  root.innerHTML = `
+    <style>
+      .step02-wrapper {
+        position: absolute;
+        inset: 0;
+        background-color: ${tokens.paper};
+        overflow: hidden;
+        font-family: system-ui, sans-serif;
+        user-select: none;
+      }
+      .step02-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+      .step02-controls {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 12px 24px;
+        border-radius: 30px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        backdrop-filter: blur(4px);
+      }
+      .step02-label {
+        font-size: 14px;
+        color: ${tokens.ink};
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .step02-slider {
+        appearance: none;
+        width: 160px;
+        height: 6px;
+        background: ${tokens.muted};
+        border-radius: 3px;
+        outline: none;
+        cursor: pointer;
+      }
+      .step02-slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: ${tokens.coral};
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        transition: transform 0.1s;
+      }
+      .step02-slider::-webkit-slider-thumb:hover {
+        transform: scale(1.1);
+      }
+      .step02-slider:focus-visible::-webkit-slider-thumb {
+        outline: 2px solid ${tokens.blue};
+        outline-offset: 2px;
+      }
+      .step02-text-overlay {
+        position: absolute;
+        z-index: 5;
+        pointer-events: none;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: ${tokens.ink};
+        background: rgba(255, 255, 255, 0.7);
+        padding: 6px 12px;
+        border-radius: 6px;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        opacity: 0;
+        transform: translateY(10px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      }
+      .step02-text-overlay.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .step02-wrapper.is-paused .step02-text-overlay {
+        transition: none;
+      }
+    </style>
+    <div class="step02-wrapper">
+      <canvas class="step02-canvas"></canvas>
+      <div class="step02-text-overlay" id="step02-lbl-up">暖湿空气上升</div>
+      <div class="step02-text-overlay" id="step02-lbl-in-l">四周空气补入</div>
+      <div class="step02-text-overlay" id="step02-lbl-in-r">四周空气补入</div>
+
+      <div class="step02-controls">
+        <span class="step02-label">海水蒸发率</span>
+        <input type="range" class="step02-slider" id="step02-slider" min="0" max="100" value="20" aria-label="调整海水蒸发率" />
+      </div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('.step02-canvas');
+  const ctx = canvas.getContext('2d');
+  const wrapper = root.querySelector('.step02-wrapper');
+  const slider = root.querySelector('#step02-slider');
+  const lblUp = root.querySelector('#step02-lbl-up');
+  const lblInL = root.querySelector('#step02-lbl-in-l');
+  const lblInR = root.querySelector('#step02-lbl-in-r');
+
+  let isPlaying = true;
+  let animationId = null;
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+
+  let targetRate = 0.2;
+  let currentRate = 0.2;
+  let time = 0;
+
+  let particles = [];
+
+  const updateLabels = () => {
+    lblUp.style.left = `50%`;
+    lblUp.style.top = `25%`;
+    lblUp.style.transform = `translate(-50%, ${currentRate > 0.1 ? '0' : '10px'})`;
+
+    lblInL.style.left = `10%`;
+    lblInL.style.bottom = `35%`;
+
+    lblInR.style.right = `10%`;
+    lblInR.style.bottom = `35%`;
+
+    if (currentRate > 0.1) {
+      lblUp.classList.add('visible');
+      lblInL.classList.add('visible');
+      lblInR.classList.add('visible');
+    } else {
+      lblUp.classList.remove('visible');
+      lblInL.classList.remove('visible');
+      lblInR.classList.remove('visible');
+    }
+  };
+
+  const spawnParticles = () => {
+    if (!motion) return;
+
+    const spawnChance = currentRate * 3;
+    const oceanY = height * 0.75;
+
+    // Vapor (Center)
+    if (Math.random() < spawnChance) {
+      particles.push({
+        type: 'vapor',
+        x: width * 0.3 + Math.random() * width * 0.4,
+        y: oceanY,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: -1 - currentRate * 2 - Math.random(),
+        life: 100 + Math.random() * 50,
+        maxLife: 150,
+        size: 3 + Math.random() * 4 + currentRate * 3,
+        color: Math.random() > 0.5 ? tokens.coral : tokens.cyan
+      });
+    }
+
+    // Inflow (Left)
+    if (Math.random() < spawnChance * 0.8) {
+      particles.push({
+        type: 'inflow_l',
+        x: 0,
+        y: oceanY - 10 - Math.random() * 30,
+        vx: 2 + currentRate * 3 + Math.random(),
+        vy: (Math.random() - 0.5) * 0.5,
+        life: 120,
+        maxLife: 120,
+        size: 2 + Math.random() * 2,
+        color: tokens.blue
+      });
+    }
+
+    // Inflow (Right)
+    if (Math.random() < spawnChance * 0.8) {
+      particles.push({
+        type: 'inflow_r',
+        x: width,
+        y: oceanY - 10 - Math.random() * 30,
+        vx: -2 - currentRate * 3 - Math.random(),
+        vy: (Math.random() - 0.5) * 0.5,
+        life: 120,
+        maxLife: 120,
+        size: 2 + Math.random() * 2,
+        color: tokens.blue
+      });
+    }
+  };
+
+  const updateParticles = () => {
+    for (let i = particles.length - 1; i >= 0; i--) {
+      let p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life--;
+
+      if (p.type === 'inflow_l' && p.x > width * 0.4) {
+        p.vy -= 0.15;
+        p.vx *= 0.95;
+        p.color = tokens.cyan;
+        p.size += 0.05;
+      }
+      if (p.type === 'inflow_r' && p.x < width * 0.6) {
+        p.vy -= 0.15;
+        p.vx *= 0.95;
+        p.color = tokens.cyan;
+        p.size += 0.05;
+      }
+
+      if (p.life <= 0 || p.y < -50) {
+        particles.splice(i, 1);
+      }
+    }
+  };
+
+  const drawOcean = () => {
+    const oceanY = height * 0.75;
+    const waveAmp = 5 + currentRate * 10;
+    const waveFreq = 0.02;
+
+    ctx.beginPath();
+    ctx.moveTo(0, height);
+    for (let x = 0; x <= width; x += 20) {
+      let y = oceanY + Math.sin(x * waveFreq + time * (1 + currentRate * 2)) * waveAmp;
+      ctx.lineTo(x, y);
+    }
+    ctx.lineTo(width, oceanY);
+    ctx.lineTo(width, height);
+    ctx.closePath();
+
+    const gradient = ctx.createLinearGradient(0, oceanY, 0, height);
+    gradient.addColorStop(0, tokens.ocean);
+    gradient.addColorStop(1, tokens.oceanDeep);
+
+    ctx.fillStyle = gradient;
+    ctx.globalAlpha = 1;
+    ctx.fill();
+  };
+
+  const drawParticles = () => {
+    for (let p of particles) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = Math.max(0, p.life / p.maxLife);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  };
+
+  const drawStaticArrows = () => {
+    if (currentRate < 0.05) return;
+
+    const oceanY = height * 0.75;
+    const arrowAlpha = Math.min(1, currentRate * 2);
+    const arrowSize = 10 + currentRate * 10;
+
+    const drawArrow = (fromX, fromY, toX, toY, color) => {
+      ctx.beginPath();
+      ctx.moveTo(fromX, fromY);
+      ctx.lineTo(toX, toY);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = arrowSize * 0.4;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.globalAlpha = arrowAlpha;
+      ctx.stroke();
+
+      const angle = Math.atan2(toY - fromY, toX - fromX);
+      ctx.beginPath();
+      ctx.moveTo(toX, toY);
+      ctx.lineTo(toX - arrowSize * Math.cos(angle - Math.PI/6), toY - arrowSize * Math.sin(angle - Math.PI/6));
+      ctx.lineTo(toX - arrowSize * Math.cos(angle + Math.PI/6), toY - arrowSize * Math.sin(angle + Math.PI/6));
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+    };
+
+    // Upward arrows
+    drawArrow(width * 0.4, oceanY - 20, width * 0.4, oceanY - 120, tokens.coral);
+    drawArrow(width * 0.5, oceanY - 20, width * 0.5, oceanY - 150, tokens.coral);
+    drawArrow(width * 0.6, oceanY - 20, width * 0.6, oceanY - 120, tokens.coral);
+
+    // Inflow left
+    drawArrow(width * 0.1, oceanY - 30, width * 0.3, oceanY - 30, tokens.blue);
+    // Inflow right
+    drawArrow(width * 0.9, oceanY - 30, width * 0.7, oceanY - 30, tokens.blue);
+
+    ctx.globalAlpha = 1;
+  };
+
+  const render = () => {
+    ctx.clearRect(0, 0, width, height);
+
+    currentRate += (targetRate - currentRate) * 0.1;
+    time += 0.05;
+
+    drawOcean();
+
+    if (motion) {
+      spawnParticles();
+      updateParticles();
+      drawParticles();
+    } else {
+      drawStaticArrows();
+    }
+
+    updateLabels();
+  };
+
+  const loop = () => {
+    if (!isPlaying) return;
+    render();
+    animationId = requestAnimationFrame(loop);
+  };
+
+  const handleInput = (e) => {
+    targetRate = parseInt(e.target.value, 10) / 100;
+    if (!motion && !isPlaying) {
+      render();
+    }
+  };
+
+  slider.addEventListener('input', handleInput);
+
+  if (signal) {
+    signal.addEventListener('abort', () => {
+      isPlaying = false;
+      cancelAnimationFrame(animationId);
+    });
+  }
+
+  return {
+    resize(dims) {
+      width = dims.width;
+      height = dims.height;
+      dpr = dims.dpr;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+      if (!isPlaying || !motion) {
+        render();
+      }
+    },
+    pause() {
+      isPlaying = false;
+      wrapper.classList.add('is-paused');
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+    },
+    resume() {
+      if (!isPlaying && motion) {
+        wrapper.classList.remove('is-paused');
+        isPlaying = true;
+        loop();
+      }
+    },
+    reset() {
+      slider.value = 20;
+      targetRate = 0.2;
+      currentRate = 0.2;
+      particles = [];
+      time = 0;
+      if (!isPlaying || !motion) {
+        render();
+      }
+    },
+    destroy() {
+      isPlaying = false;
+      if (animationId) cancelAnimationFrame(animationId);
+      slider.removeEventListener('input', handleInput);
+      root.innerHTML = '';
+    }
+  };
+});
+
+
+registerDemo("step-03", ({ root, shadow, signal, motion, tokens }) => {
+  root.innerHTML = `
+    <style>
+      .step-03-container {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        background: ${tokens.paper};
+        font-family: system-ui, sans-serif;
+        overflow: hidden;
+        user-select: none;
+      }
+      .step-03-canvas-wrap {
+        flex: 1;
+        position: relative;
+        min-height: 0;
+      }
+      .step-03-canvas-wrap canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .step-03-controls {
+        padding: 12px 20px;
+        background: ${tokens.paper};
+        border-top: 1px solid ${tokens.muted}40;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        z-index: 10;
+      }
+      .step-03-controls label {
+        color: ${tokens.ink};
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .step-03-controls input[type="range"] {
+        flex: 1;
+        cursor: pointer;
+        accent-color: ${tokens.ocean};
+      }
+    </style>
+    <div class="step-03-container">
+      <div class="step-03-canvas-wrap">
+        <canvas></canvas>
+      </div>
+      <div class="step-03-controls">
+        <label for="step-03-slider">气块高度</label>
+        <input type="range" id="step-03-slider" min="0" max="100" value="0" aria-label="控制空气团高度">
+      </div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const slider = root.querySelector('#step-03-slider');
+
+  let cw = 0, ch = 0, cdpr = 1;
+  let progress = motion ? 0 : 1;
+  let isPlaying = motion;
+  let userInteracted = false;
+  let animationId;
+  let lastTime = 0;
+
+  const DURATION = 7000;
+
+  // 云朵粒子定义 (rx: 水平偏移比例, ry: 垂直偏移比例, rr: 半径比例, trigger: 触发生成的进度阈值)
+  const puffs = [
+    // 底部 (露点附近)
+    { rx: 0,    ry: 0,      rr: 0.12, trigger: 0.4 },
+    { rx: -0.12,ry: -0.02,  rr: 0.09, trigger: 0.42 },
+    { rx: 0.12, ry: -0.02,  rr: 0.09, trigger: 0.43 },
+    { rx: -0.2, ry: -0.05,  rr: 0.07, trigger: 0.45 },
+    { rx: 0.2,  ry: -0.05,  rr: 0.07, trigger: 0.46 },
+    // 中下部
+    { rx: -0.08,ry: -0.12,  rr: 0.11, trigger: 0.5 },
+    { rx: 0.08, ry: -0.15,  rr: 0.12, trigger: 0.55 },
+    { rx: -0.18,ry: -0.1,   rr: 0.08, trigger: 0.58 },
+    { rx: 0.18, ry: -0.1,   rr: 0.08, trigger: 0.59 },
+    // 中部
+    { rx: 0,    ry: -0.25,  rr: 0.14, trigger: 0.65 },
+    { rx: -0.1, ry: -0.3,   rr: 0.11, trigger: 0.7 },
+    { rx: 0.1,  ry: -0.32,  rr: 0.11, trigger: 0.75 },
+    // 中上部
+    { rx: 0,    ry: -0.42,  rr: 0.13, trigger: 0.8 },
+    { rx: -0.08,ry: -0.48,  rr: 0.1,  trigger: 0.85 },
+    { rx: 0.08, ry: -0.5,   rr: 0.1,  trigger: 0.88 },
+    // 顶部 (铁砧云特征)
+    { rx: 0,    ry: -0.58,  rr: 0.12, trigger: 0.95 },
+    { rx: -0.05,ry: -0.62,  rr: 0.09, trigger: 0.98 },
+    { rx: 0.05, ry: -0.62,  rr: 0.09, trigger: 0.98 },
+    { rx: -0.12,ry: -0.6,   rr: 0.08, trigger: 0.96 },
+    { rx: 0.12, ry: -0.6,   rr: 0.08, trigger: 0.96 },
+    { rx: -0.2, ry: -0.58,  rr: 0.06, trigger: 0.99 },
+    { rx: 0.2,  ry: -0.58,  rr: 0.06, trigger: 0.99 }
+  ];
+
+  function draw(p) {
+    ctx.clearRect(0, 0, cw, ch);
+
+    const minWH = Math.min(cw, ch);
+    const startY = ch * 0.85;
+    const endY = ch * 0.15;
+    const rangeY = startY - endY;
+    const centerX = cw / 2;
+    const dewPointY = startY - 0.4 * rangeY;
+
+    // 1. 绘制左侧坐标轴与背景指示
+    ctx.strokeStyle = tokens.muted;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cw * 0.1, startY);
+    ctx.lineTo(cw * 0.1, endY);
+    ctx.stroke();
+
+    // 箭头
+    ctx.beginPath();
+    ctx.moveTo(cw * 0.1 - 5, endY + 10);
+    ctx.lineTo(cw * 0.1, endY);
+    ctx.lineTo(cw * 0.1 + 5, endY + 10);
+    ctx.stroke();
+
+    ctx.fillStyle = tokens.muted;
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.fillText("高度", cw * 0.1 + 12, endY + 10);
+    ctx.fillText("气压降低", cw * 0.1 + 12, endY + 28);
+    ctx.fillText("地面", cw * 0.1 + 12, startY);
+
+    // 2. 绘制露点虚线
+    ctx.strokeStyle = tokens.ocean;
+    ctx.setLineDash([6, 6]);
+    ctx.beginPath();
+    ctx.moveTo(cw * 0.1, dewPointY);
+    ctx.lineTo(cw * 0.9, dewPointY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = tokens.ocean;
+    ctx.fillText("露点 (水汽开始凝结)", cw * 0.1 + 12, dewPointY - 10);
+
+    // 3. 绘制积雨云塔
+    // 第一遍：绘制云朵外轮廓（稍大一圈，使用海洋蓝）
+    ctx.fillStyle = tokens.ocean;
+    for (let puff of puffs) {
+      if (p > puff.trigger) {
+        let scale = Math.min(1, (p - puff.trigger) * 6);
+        scale = 1 - Math.pow(1 - scale, 3); // 缓出效果
+        let cx = centerX + puff.rx * minWH;
+        let cy = dewPointY + puff.ry * rangeY;
+        let r = puff.rr * minWH * scale;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r + 2.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    // 第二遍：绘制云朵内部（纸张白）
+    ctx.fillStyle = tokens.paper;
+    for (let puff of puffs) {
+      if (p > puff.trigger) {
+        let scale = Math.min(1, (p - puff.trigger) * 6);
+        scale = 1 - Math.pow(1 - scale, 3);
+        let cx = centerX + puff.rx * minWH;
+        let cy = dewPointY + puff.ry * rangeY;
+        let r = puff.rr * minWH * scale;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // 4. 绘制上升的空气团
+    const parcelY = startY - p * rangeY;
+    const parcelR = minWH * 0.05 + p * minWH * 0.07; // 随高度膨胀
+
+    // 暖色填充（随高度透明度降低）
+    ctx.globalAlpha = 1 - p;
+    ctx.fillStyle = tokens.coral;
+    ctx.beginPath();
+    ctx.arc(centerX, parcelY, parcelR, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 冷色填充（随高度透明度增加）
+    ctx.globalAlpha = p;
+    ctx.fillStyle = tokens.cyan;
+    ctx.beginPath();
+    ctx.arc(centerX, parcelY, parcelR, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 空气团虚线边界
+    ctx.globalAlpha = 1.0;
+    ctx.strokeStyle = tokens.ink;
+    ctx.setLineDash([4, 4]);
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(centerX, parcelY, parcelR, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // 内部温度数值
+    const temp = Math.round(25 - p * 40); // 从 25°C 降至 -15°C
+    ctx.fillStyle = tokens.ink;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = "bold 14px sans-serif";
+    ctx.fillText(`${temp}°C`, centerX, parcelY);
+
+    // 状态文字说明
+    let stateText = "膨胀冷却";
+    if (p > 0.4) stateText = "水汽凝结";
+    if (p > 0.8) stateText = "积雨云塔";
+    ctx.font = "12px sans-serif";
+    ctx.fillText(stateText, centerX, parcelY + parcelR + 14);
+  }
+
+  function loop(time) {
+    if (!lastTime) lastTime = time;
+    const dt = time - lastTime;
+    lastTime = time;
+
+    if (isPlaying && !userInteracted) {
+      progress += dt / DURATION;
+      if (progress >= 1.2) { // 顶部停留一段时间后重置
+        progress = 0;
+      }
+      const p = Math.min(1, Math.max(0, progress));
+      slider.value = p * 100;
+      draw(p);
+    }
+
+    animationId = requestAnimationFrame(loop);
+  }
+
+  slider.addEventListener('input', (e) => {
+    userInteracted = true;
+    progress = parseFloat(e.target.value) / 100;
+    draw(progress);
+  });
+
+  if (motion) {
+    animationId = requestAnimationFrame(loop);
+  } else {
+    slider.value = 100;
+  }
+
+  return {
+    pause() {
+      isPlaying = false;
+    },
+    resume() {
+      if (motion) {
+        isPlaying = true;
+        lastTime = performance.now();
+      }
+    },
+    reset() {
+      userInteracted = false;
+      progress = motion ? 0 : 1;
+      slider.value = progress * 100;
+      draw(progress);
+    },
+    destroy() {
+      cancelAnimationFrame(animationId);
+      root.innerHTML = "";
+    },
+    resize({ width, height, dpr }) {
+      cw = width;
+      ch = height;
+      cdpr = dpr;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+      draw(Math.min(1, Math.max(0, progress)));
+    }
+  };
+});
+
+
+registerDemo("step-04", ({ root, shadow, signal, motion, tokens }) => {
+    root.innerHTML = `
+        <style>
+            .step04-wrapper {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                flex-direction: row;
+                font-family: system-ui, sans-serif;
+                background: ${tokens.paper};
+                color: ${tokens.ink};
+                overflow: hidden;
+                box-sizing: border-box;
+            }
+            .step04-canvas-box {
+                flex: 1;
+                position: relative;
+                min-width: 0;
+                min-height: 0;
+            }
+            .step04-canvas-box canvas {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+            .step04-panel {
+                width: 260px;
+                padding: 20px;
+                box-sizing: border-box;
+                background: ${tokens.paper};
+                border-left: 1px solid ${tokens.muted}33;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                z-index: 10;
+                box-shadow: -4px 0 15px rgba(0,0,0,0.02);
+            }
+            .step04-title {
+                font-weight: bold;
+                font-size: 1.1em;
+                margin-bottom: 8px;
+            }
+            .step04-desc {
+                font-size: 0.85em;
+                color: ${tokens.muted};
+                line-height: 1.5;
+            }
+            .step04-meter {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+            .step04-meter-label {
+                font-size: 0.85em;
+                display: flex;
+                justify-content: space-between;
+                font-variant-numeric: tabular-nums;
+            }
+            .step04-meter-bar-bg {
+                height: 8px;
+                background: ${tokens.muted}33;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+            .step04-meter-bar-fill {
+                height: 100%;
+                transition: width 0.2s ease-out;
+            }
+            .step04-btn {
+                background: ${tokens.ocean};
+                color: #ffffff;
+                border: none;
+                padding: 12px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 0.9em;
+                transition: background 0.2s, transform 0.1s;
+                margin-top: auto;
+            }
+            .step04-btn:hover {
+                background: ${tokens.oceanDeep};
+            }
+            .step04-btn:active {
+                transform: scale(0.97);
+            }
+            .step04-line-label {
+                position: absolute;
+                left: 15px;
+                font-size: 0.75em;
+                color: ${tokens.muted};
+                border-bottom: 1px dashed ${tokens.muted}88;
+                width: calc(100% - 30px);
+                pointer-events: none;
+                padding-bottom: 4px;
+            }
+            @media (max-width: 600px) {
+                .step04-wrapper { flex-direction: column; }
+                .step04-panel {
+                    width: 100%;
+                    height: auto;
+                    border-left: none;
+                    border-top: 1px solid ${tokens.muted}33;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    padding: 15px;
+                    gap: 15px;
+                    box-shadow: 0 -4px 15px rgba(0,0,0,0.02);
+                }
+                .step04-panel > div:first-child { width: 100%; }
+                .step04-meter { flex: 1; min-width: 120px; }
+                .step04-btn { width: 100%; margin-top: 5px; }
+            }
+        </style>
+        <div class="step04-wrapper">
+            <div class="step04-canvas-box">
+                <div class="step04-line-label" style="top: 15%;">对流层顶</div>
+                <div class="step04-line-label" style="top: 75%;">凝结高度 (云底)</div>
+                <canvas></canvas>
+            </div>
+            <div class="step04-panel">
+                <div>
+                    <div class="step04-title">对流发动机</div>
+                    <div class="step04-desc">水汽凝结释放潜热，加热空气，使上升气流不断加速，云顶不断攀升。</div>
+                </div>
+                <div class="step04-meter">
+                    <div class="step04-meter-label"><span>潜热释放</span><span id="step04-val-heat">0 J/kg</span></div>
+                    <div class="step04-meter-bar-bg"><div id="step04-bar-heat" class="step04-meter-bar-fill" style="background: ${tokens.coral}; width: 0%;"></div></div>
+                </div>
+                <div class="step04-meter">
+                    <div class="step04-meter-label"><span>云内温差 (浮力)</span><span id="step04-val-temp">+0.0 °C</span></div>
+                    <div class="step04-meter-bar-bg"><div id="step04-bar-temp" class="step04-meter-bar-fill" style="background: ${tokens.gold}; width: 0%;"></div></div>
+                </div>
+                <div class="step04-meter">
+                    <div class="step04-meter-label"><span>上升气流速度</span><span id="step04-val-speed">2 m/s</span></div>
+                    <div class="step04-meter-bar-bg"><div id="step04-bar-speed" class="step04-meter-bar-fill" style="background: ${tokens.ocean}; width: 0%;"></div></div>
+                </div>
+                <button class="step04-btn" id="step04-btn-inject">注入水汽</button>
+            </div>
+        </div>
+    `;
+
+    const canvas = root.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    const btnInject = root.querySelector('#step04-btn-inject');
+    const elValHeat = root.querySelector('#step04-val-heat');
+    const elBarHeat = root.querySelector('#step04-bar-heat');
+    const elValTemp = root.querySelector('#step04-val-temp');
+    const elBarTemp = root.querySelector('#step04-bar-temp');
+    const elValSpeed = root.querySelector('#step04-val-speed');
+    const elBarSpeed = root.querySelector('#step04-bar-speed');
+
+    let width = 0, height = 0, dpr = 1;
+    let power = 0.0;
+    let particles = [];
+    let pulses = [];
+    let isPaused = false;
+    let animationId;
+    let time = 0;
+
+    const puffs = [];
+    for(let i=0; i<15; i++) {
+        puffs.push({
+            xOffset: (Math.random() - 0.5) * 160,
+            yOffset: (Math.random() - 0.5) * 20,
+            maxR: 35 + Math.random() * 30,
+            activationPower: 0
+        });
+    }
+    for(let i=0; i<35; i++) {
+        let p = i / 35;
+        puffs.push({
+            xOffset: (Math.random() - 0.5) * (120 - p * 60),
+            yOffset: -p * 100,
+            maxR: 25 + Math.random() * 30,
+            activationPower: p * 0.85
+        });
+    }
+    for(let i=0; i<10; i++) {
+        puffs.push({
+            xOffset: (Math.random() - 0.5) * 80,
+            yOffset: -100 - Math.random() * 15,
+            maxR: 25 + Math.random() * 20,
+            activationPower: 0.8 + Math.random() * 0.2
+        });
+    }
+
+    function generateStaticState() {
+        particles = [];
+        pulses = [];
+        if (width === 0 || height === 0) return;
+
+        for(let i=0; i<40; i++) {
+            particles.push({
+                x: width/2 + (Math.random() - 0.5) * 180,
+                y: height * 0.75 + Math.random() * (height * 0.25),
+                speed: 0,
+                condensed: false
+            });
+            particles.push({
+                x: width/2 + (Math.random() - 0.5) * 120,
+                y: height * 0.15 + Math.random() * (height * 0.6),
+                speed: 0,
+                condensed: true
+            });
+        }
+        for(let i=0; i<8; i++) {
+            pulses.push({
+                x: width/2 + (Math.random() - 0.5) * 100,
+                y: height * 0.3 + Math.random() * (height * 0.45),
+                r: 10 + Math.random() * 30,
+                maxR: 50,
+                alpha: Math.random() * 0.6
+            });
+        }
+    }
+
+    function updateUI() {
+        let heat = Math.round(power * 2500);
+        elValHeat.textContent = heat + " J/kg";
+        elBarHeat.style.width = (power * 100) + "%";
+
+        let temp = (power * 5.0).toFixed(1);
+        elValTemp.textContent = "+" + temp + " °C";
+        elBarTemp.style.width = (power * 100) + "%";
+
+        let speed = (2 + power * 18).toFixed(1);
+        elValSpeed.textContent = speed + " m/s";
+        elBarSpeed.style.width = (power * 100) + "%";
+    }
+
+    function update() {
+        if (width === 0 || height === 0) return;
+        time++;
+
+        if (Math.random() < 0.05 + 0.15 * power) {
+            particles.push({
+                x: width/2 + (Math.random() - 0.5) * 150,
+                y: height + 10,
+                speed: (1.5 + 3 * power) * (height / 400),
+                condensed: false
+            });
+        }
+
+        const cloudBaseY = height * 0.75;
+        const maxCloudHeight = height * 0.6;
+        let currentCloudTopY = cloudBaseY - power * maxCloudHeight;
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+            let p = particles[i];
+            p.y -= p.speed;
+
+            if (!p.condensed && p.y <= cloudBaseY) {
+                p.condensed = true;
+                pulses.push({ x: p.x, y: p.y, r: 0, maxR: 45, alpha: 1 });
+                if (power < 1.0) {
+                    power = Math.min(1.0, power + 0.006);
+                }
+            }
+
+            if (p.y < currentCloudTopY - 30) {
+                particles.splice(i, 1);
+            }
+        }
+
+        for (let i = pulses.length - 1; i >= 0; i--) {
+            let p = pulses[i];
+            p.r += 1.5;
+            p.alpha -= 0.025;
+            if (p.alpha <= 0) pulses.splice(i, 1);
+        }
+
+        updateUI();
+    }
+
+    function draw() {
+        if (width === 0 || height === 0) return;
+        ctx.clearRect(0, 0, width, height);
+
+        const cloudBaseY = height * 0.75;
+        const maxCloudHeight = height * 0.6;
+
+        ctx.save();
+        let arrowAlpha = 0.15 + 0.4 * power;
+        ctx.strokeStyle = `rgba(255, 112, 67, ${arrowAlpha})`;
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        let arrowLength = 40 + 60 * power;
+        let timeOffset = (time * 1.5) * (0.5 + power);
+
+        for(let i=-1; i<=1; i++) {
+            let ax = width/2 + i * 50;
+            let range = maxCloudHeight * power + 50;
+            if (range <= 0) range = 1;
+            let ay = cloudBaseY - ((timeOffset + i*30 + 1000) % range);
+
+            if (ay > cloudBaseY) ay = cloudBaseY;
+
+            ctx.beginPath();
+            ctx.moveTo(ax, ay);
+            ctx.lineTo(ax, ay - arrowLength);
+            ctx.lineTo(ax - 6, ay - arrowLength + 12);
+            ctx.moveTo(ax, ay - arrowLength);
+            ctx.lineTo(ax + 6, ay - arrowLength + 12);
+            ctx.stroke();
+        }
+        ctx.restore();
+
+        ctx.save();
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = `${tokens.oceanDeep}33`;
+        ctx.shadowBlur = 20;
+        ctx.shadowOffsetY = 8;
+
+        for (let puff of puffs) {
+            if (power >= puff.activationPower) {
+                let scale = 1;
+                if (puff.activationPower > 0) {
+                    scale = Math.min(1, (power - puff.activationPower) * 4);
+                    scale = Math.sin(scale * Math.PI / 2);
+                }
+                if (scale > 0.01) {
+                    let px = width/2 + puff.xOffset;
+                    let py = cloudBaseY + puff.yOffset * (maxCloudHeight / 100);
+                    ctx.beginPath();
+                    ctx.arc(px, py, puff.maxR * scale, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+        }
+        ctx.restore();
+
+        ctx.save();
+        for (let p of pulses) {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(255, 183, 77, ${p.alpha})`;
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+        }
+        ctx.restore();
+
+        ctx.save();
+        for (let p of particles) {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.condensed ? 2 : 3, 0, Math.PI * 2);
+            ctx.fillStyle = p.condensed ? '#ffffff' : tokens.ocean;
+            if (p.condensed) {
+                ctx.shadowColor = tokens.coral;
+                ctx.shadowBlur = 6;
+            }
+            ctx.fill();
+        }
+        ctx.restore();
+    }
+
+    function loop() {
+        if (!isPaused && motion !== false) {
+            update();
+            draw();
+        }
+        animationId = requestAnimationFrame(loop);
+    }
+
+    btnInject.addEventListener('click', () => {
+        if (width === 0 || height === 0) return;
+        for(let i=0; i<30; i++) {
+            particles.push({
+                x: width/2 + (Math.random() - 0.5) * 180,
+                y: height + Math.random() * 60,
+                speed: (3 + 3 * power) * (height / 400),
+                condensed: false
+            });
+        }
+    });
+
+    if (motion === false) {
+        power = 1.0;
+        updateUI();
+    } else {
+        animationId = requestAnimationFrame(loop);
+    }
+
+    return {
+        pause() {
+            isPaused = true;
+        },
+        resume() {
+            isPaused = false;
+        },
+        reset() {
+            power = 0.0;
+            particles = [];
+            pulses = [];
+            time = 0;
+            if (motion === false) {
+                power = 1.0;
+                generateStaticState();
+            }
+            updateUI();
+            if (isPaused || motion === false) {
+                draw();
+            }
+        },
+        destroy() {
+            cancelAnimationFrame(animationId);
+            root.innerHTML = '';
+        },
+        resize({ width: w, height: h, dpr: nextDpr }) {
+            width = w;
+            height = h;
+            dpr = nextDpr || 1;
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
+            ctx.scale(dpr, dpr);
+
+            if (motion === false) {
+                generateStaticState();
+                draw();
+            } else if (isPaused) {
+                draw();
+            }
+        }
+    };
+});
+
+
+registerDemo("step-05", ({ root, shadow, signal, motion, tokens }) => {
+  // 构建 DOM 和 样式
+  root.innerHTML = `
+    <style>
+      .demo-container {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        background: ${tokens.paper};
+        font-family: sans-serif;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+      .views {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        gap: 12px;
+        padding: 12px;
+      }
+      @media (min-width: 600px) {
+        .views { flex-direction: row; }
+      }
+      .view-panel {
+        flex: 1;
+        position: relative;
+        border: 1px solid ${tokens.muted};
+        border-radius: 8px;
+        background: #ffffff;
+        overflow: hidden;
+        min-height: 0;
+      }
+      canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .panel-label {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        font-size: 13px;
+        font-weight: bold;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 4px 8px;
+        border-radius: 4px;
+        z-index: 10;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+      .controls {
+        height: 64px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 0 16px;
+        border-top: 1px solid ${tokens.muted};
+        background: ${tokens.paper};
+      }
+      input[type=range] {
+        flex: 1;
+        max-width: 250px;
+        accent-color: ${tokens.oceanDeep};
+        cursor: pointer;
+      }
+      .val-display {
+        font-variant-numeric: tabular-nums;
+        width: 65px;
+        text-align: right;
+        font-weight: bold;
+        color: ${tokens.coral};
+        font-size: 14px;
+      }
+      .ctrl-label {
+        font-size: 12px;
+        color: ${tokens.ink};
+      }
+    </style>
+    <div class="demo-container">
+      <div class="views">
+        <div class="view-panel">
+          <canvas id="top-canvas"></canvas>
+          <div class="panel-label" style="color: ${tokens.oceanDeep}">俯视图：水平汇聚</div>
+        </div>
+        <div class="view-panel">
+          <canvas id="side-canvas"></canvas>
+          <div class="panel-label" style="color: ${tokens.coral}">剖面图：垂直上升</div>
+        </div>
+      </div>
+      <div class="controls">
+        <label for="pressure-slider" style="font-weight: bold; color: ${tokens.ink}; font-size: 14px;">中心气压</label>
+        <span class="ctrl-label">高</span>
+        <input type="range" id="pressure-slider" min="920" max="1010" value="1010" step="1" aria-label="调整中心气压">
+        <span class="ctrl-label">低</span>
+        <div class="val-display" id="pressure-val">1010 hPa</div>
+      </div>
+    </div>
+  `;
+
+  // 获取 DOM 元素
+  const topCanvas = root.querySelector('#top-canvas');
+  const sideCanvas = root.querySelector('#side-canvas');
+  const slider = root.querySelector('#pressure-slider');
+  const valDisplay = root.querySelector('#pressure-val');
+  const topCtx = topCanvas.getContext('2d');
+  const sideCtx = sideCanvas.getContext('2d');
+
+  // 状态变量
+  let isPlaying = true;
+  let rafId = null;
+  let pressure = 1010;
+  let topParticles = [];
+  let sideParticles = [];
+  let dpr = 1;
+  let topW = 0, topH = 0, sideW = 0, sideH = 0;
+
+  // 交互事件
+  const onSliderInput = (e) => {
+    pressure = parseInt(e.target.value, 10);
+    valDisplay.textContent = `${pressure} hPa`;
+    if (!motion) drawStaticView();
+  };
+  slider.addEventListener('input', onSliderInput);
+
+  // 计算当前气压对应的强度 (0 到 1)
+  function getIntensity() {
+    return (1010 - pressure) / 90;
+  }
+
+  // 粒子更新逻辑
+  function updateParticles() {
+    const I = getIntensity();
+    const sm = 1 + I * 4; // 速度乘数
+    const spawnRate = 0.05 + I * 0.25;
+
+    // --- 俯视图粒子 ---
+    if (Math.random() < spawnRate) {
+      const angle = Math.random() * Math.PI * 2;
+      const r = Math.max(topW, topH) * 0.6;
+      topParticles.push({ r, angle, history: [] });
+    }
+
+    for (let i = topParticles.length - 1; i >= 0; i--) {
+      let p = topParticles[i];
+      p.history.push({
+        x: topW / 2 + p.r * Math.cos(p.angle),
+        y: topH / 2 + p.r * Math.sin(p.angle)
+      });
+      if (p.history.length > 15) p.history.shift();
+
+      p.r -= 1.5 * sm;
+      p.angle += (1.2 * sm) / Math.max(p.r, 10); // 靠近中心时旋转加快
+
+      if (p.r < 5) topParticles.splice(i, 1);
+    }
+
+    // --- 剖面图粒子 ---
+    if (Math.random() < spawnRate) {
+      const side = Math.random() < 0.5 ? -1 : 1;
+      const x = sideW / 2 + side * (sideW * 0.6);
+      const y = sideH * 0.8 - Math.random() * 20;
+      sideParticles.push({ x, y, history: [], state: 'inflow' });
+    }
+
+    const cx = sideW / 2;
+    const updraftWidth = Math.min(sideW * 0.3, 100);
+    for (let i = sideParticles.length - 1; i >= 0; i--) {
+      let p = sideParticles[i];
+      p.history.push({ x: p.x, y: p.y });
+      if (p.history.length > 15) p.history.shift();
+
+      const dx = cx - p.x;
+      if (Math.abs(dx) > updraftWidth / 2) {
+        // 水平流入
+        p.x += Math.sign(dx) * 2.0 * sm;
+      } else {
+        // 垂直上升
+        p.state = 'updraft';
+        p.y -= 2.5 * sm;
+        p.x += dx * 0.05; // 逐渐向中心收敛
+      }
+
+      if (p.y < -10) sideParticles.splice(i, 1);
+    }
+  }
+
+  // 绘制俯视图（动画）
+  function drawTop() {
+    topCtx.clearRect(0, 0, topW, topH);
+    const cx = topW / 2;
+    const cy = topH / 2;
+    const I = getIntensity();
+    const maxR = Math.min(topW, topH) * 0.45;
+
+    // 绘制中心低压区背景
+    topCtx.globalAlpha = 0.05 + I * 0.15;
+    topCtx.fillStyle = tokens.coral;
+    topCtx.beginPath();
+    topCtx.arc(cx, cy, maxR * 0.3, 0, Math.PI * 2);
+    topCtx.fill();
+    topCtx.globalAlpha = 1.0;
+
+    // 绘制等压线
+    topCtx.strokeStyle = tokens.muted;
+    topCtx.lineWidth = 1;
+    const numIsobars = 3 + Math.floor(I * 6);
+    for (let i = 1; i <= numIsobars; i++) {
+      topCtx.beginPath();
+      topCtx.arc(cx, cy, maxR * (i / numIsobars), 0, Math.PI * 2);
+      topCtx.stroke();
+    }
+
+    // 绘制粒子轨迹
+    topCtx.lineWidth = 2;
+    topCtx.lineCap = 'round';
+    topCtx.lineJoin = 'round';
+    topParticles.forEach(p => {
+      if (p.history.length < 2) return;
+      // 越靠近中心颜色越偏向珊瑚红，外围是海洋蓝
+      const ratio = Math.max(0, Math.min(1, p.r / maxR));
+      topCtx.strokeStyle = ratio < 0.3 ? tokens.coral : tokens.oceanDeep;
+
+      topCtx.beginPath();
+      topCtx.moveTo(p.history[0].x, p.history[0].y);
+      for (let i = 1; i < p.history.length; i++) {
+        topCtx.lineTo(p.history[i].x, p.history[i].y);
+      }
+      topCtx.stroke();
+    });
+
+    // 绘制中心 L 标识
+    topCtx.fillStyle = tokens.coral;
+    topCtx.font = "bold 24px sans-serif";
+    topCtx.textAlign = "center";
+    topCtx.textBaseline = "middle";
+    topCtx.fillText("L", cx, cy);
+  }
+
+  // 绘制剖面图（动画）
+  function drawSide() {
+    sideCtx.clearRect(0, 0, sideW, sideH);
+    const cx = sideW / 2;
+    const groundY = sideH * 0.8;
+    const I = getIntensity();
+    const updraftWidth = Math.min(sideW * 0.3, 100);
+
+    // 绘制上升气流背景
+    sideCtx.globalAlpha = 0.05 + I * 0.15;
+    sideCtx.fillStyle = tokens.coral;
+    sideCtx.fillRect(cx - updraftWidth / 2, 0, updraftWidth, groundY);
+    sideCtx.globalAlpha = 1.0;
+
+    // 绘制海面
+    sideCtx.globalAlpha = 0.2;
+    sideCtx.fillStyle = tokens.cyan;
+    sideCtx.fillRect(0, groundY, sideW, sideH - groundY);
+    sideCtx.globalAlpha = 1.0;
+    sideCtx.strokeStyle = tokens.ocean;
+    sideCtx.lineWidth = 1;
+    sideCtx.beginPath();
+    sideCtx.moveTo(0, groundY);
+    sideCtx.lineTo(sideW, groundY);
+    sideCtx.stroke();
+
+    // 绘制粒子轨迹
+    sideCtx.lineWidth = 2;
+    sideCtx.lineCap = 'round';
+    sideCtx.lineJoin = 'round';
+    sideParticles.forEach(p => {
+      if (p.history.length < 2) return;
+      sideCtx.strokeStyle = p.state === 'updraft' ? tokens.coral : tokens.oceanDeep;
+      sideCtx.beginPath();
+      sideCtx.moveTo(p.history[0].x, p.history[0].y);
+      for (let i = 1; i < p.history.length; i++) {
+        sideCtx.lineTo(p.history[i].x, p.history[i].y);
+      }
+      sideCtx.stroke();
+    });
+
+    // 绘制 L 标识
+    sideCtx.fillStyle = tokens.coral;
+    sideCtx.font = "bold 24px sans-serif";
+    sideCtx.textAlign = "center";
+    sideCtx.textBaseline = "bottom";
+    sideCtx.fillText("L", cx, groundY - 5);
+  }
+
+  // 辅助函数：绘制带箭头的静态路径
+  function drawPathWithArrow(ctx, path, color, thickness) {
+    if (path.length < 2) return;
+    ctx.beginPath();
+    ctx.moveTo(path[0].x, path[0].y);
+    for (let i = 1; i < path.length; i++) {
+      ctx.lineTo(path[i].x, path[i].y);
+    }
+    ctx.strokeStyle = color;
+    ctx.lineWidth = thickness;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+
+    const last = path[path.length - 1];
+    const prev = path[path.length - 2];
+    const angle = Math.atan2(last.y - prev.y, last.x - prev.x);
+    const arrowLen = 6 + thickness * 1.5;
+
+    ctx.beginPath();
+    ctx.moveTo(last.x, last.y);
+    ctx.lineTo(last.x - arrowLen * Math.cos(angle - Math.PI/6), last.y - arrowLen * Math.sin(angle - Math.PI/6));
+    ctx.lineTo(last.x - arrowLen * Math.cos(angle + Math.PI/6), last.y - arrowLen * Math.sin(angle + Math.PI/6));
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+  }
+
+  // 绘制静态视图（无动画时）
+  function drawStaticView() {
+    // --- 俯视图静态 ---
+    topCtx.clearRect(0, 0, topW, topH);
+    const tcx = topW / 2;
+    const tcy = topH / 2;
+    const I = getIntensity();
+    const maxR = Math.min(topW, topH) * 0.45;
+
+    topCtx.globalAlpha = 0.05 + I * 0.15;
+    topCtx.fillStyle = tokens.coral;
+    topCtx.beginPath();
+    topCtx.arc(tcx, tcy, maxR * 0.3, 0, Math.PI * 2);
+    topCtx.fill();
+    topCtx.globalAlpha = 1.0;
+
+    topCtx.strokeStyle = tokens.muted;
+    topCtx.lineWidth = 1;
+    const numIsobars = 3 + Math.floor(I * 6);
+    for (let i = 1; i <= numIsobars; i++) {
+      topCtx.beginPath();
+      topCtx.arc(tcx, tcy, maxR * (i / numIsobars), 0, Math.PI * 2);
+      topCtx.stroke();
+    }
+
+    const numArrowsTop = 4 + Math.floor(I * 6);
+    for (let i = 0; i < numArrowsTop; i++) {
+      let angle = (i / numArrowsTop) * Math.PI * 2;
+      let r = maxR * 0.9;
+      const path = [];
+      for (let step = 0; step < 40; step++) {
+        path.push({ x: tcx + r * Math.cos(angle), y: tcy + r * Math.sin(angle) });
+        r -= 2;
+        angle += 0.15;
+        if (r < 15) break;
+      }
+      drawPathWithArrow(topCtx, path, tokens.oceanDeep, 1.5 + I * 2);
+    }
+
+    topCtx.fillStyle = tokens.coral;
+    topCtx.font = "bold 24px sans-serif";
+    topCtx.textAlign = "center";
+    topCtx.textBaseline = "middle";
+    topCtx.fillText("L", tcx, tcy);
+
+    // --- 剖面图静态 ---
+    sideCtx.clearRect(0, 0, sideW, sideH);
+    const scx = sideW / 2;
+    const groundY = sideH * 0.8;
+    const updraftWidth = Math.min(sideW * 0.3, 100);
+
+    sideCtx.globalAlpha = 0.05 + I * 0.15;
+    sideCtx.fillStyle = tokens.coral;
+    sideCtx.fillRect(scx - updraftWidth / 2, 0, updraftWidth, groundY);
+    sideCtx.globalAlpha = 1.0;
+
+    sideCtx.globalAlpha = 0.2;
+    sideCtx.fillStyle = tokens.cyan;
+    sideCtx.fillRect(0, groundY, sideW, sideH - groundY);
+    sideCtx.globalAlpha = 1.0;
+    sideCtx.strokeStyle = tokens.ocean;
+    sideCtx.lineWidth = 1;
+    sideCtx.beginPath();
+    sideCtx.moveTo(0, groundY);
+    sideCtx.lineTo(sideW, groundY);
+    sideCtx.stroke();
+
+    const numArrowsSide = 2 + Math.floor(I * 3);
+    for(let side of [-1, 1]) {
+      for (let i = 0; i < numArrowsSide; i++) {
+        let x = scx + side * (sideW * 0.45);
+        let y = groundY - 10 - i * 15;
+        const path = [];
+        for (let step = 0; step < 50; step++) {
+          path.push({x, y});
+          const dx = scx - x;
+          if (Math.abs(dx) > updraftWidth / 2) {
+            x += Math.sign(dx) * 4;
+          } else {
+            y -= 4;
+            x += dx * 0.1;
+          }
+          if (y < 20) break;
+        }
+        drawPathWithArrow(sideCtx, path, tokens.oceanDeep, 1.5 + I * 2);
+      }
+    }
+
+    sideCtx.fillStyle = tokens.coral;
+    sideCtx.font = "bold 24px sans-serif";
+    sideCtx.textAlign = "center";
+    sideCtx.textBaseline = "bottom";
+    sideCtx.fillText("L", scx, groundY - 5);
+  }
+
+  // 动画主循环
+  function loop() {
+    if (!isPlaying || !motion) return;
+    updateParticles();
+    drawTop();
+    drawSide();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  return {
+    resize({ dpr: newDpr }) {
+      dpr = newDpr || 1;
+
+      const topRect = topCanvas.getBoundingClientRect();
+      topW = topRect.width;
+      topH = topRect.height;
+      topCanvas.width = topW * dpr;
+      topCanvas.height = topH * dpr;
+      topCtx.scale(dpr, dpr);
+
+      const sideRect = sideCanvas.getBoundingClientRect();
+      sideW = sideRect.width;
+      sideH = sideRect.height;
+      sideCanvas.width = sideW * dpr;
+      sideCanvas.height = sideH * dpr;
+      sideCtx.scale(dpr, dpr);
+
+      if (!motion) {
+        drawStaticView();
+      } else if (!isPlaying) {
+        drawTop();
+        drawSide();
+      }
+    },
+    pause() {
+      isPlaying = false;
+      if (rafId) cancelAnimationFrame(rafId);
+    },
+    resume() {
+      if (!isPlaying && motion) {
+        isPlaying = true;
+        loop();
+      }
+    },
+    reset() {
+      pressure = 1010;
+      slider.value = 1010;
+      valDisplay.textContent = "1010 hPa";
+      topParticles = [];
+      sideParticles = [];
+      if (!motion) {
+        drawStaticView();
+      } else {
+        drawTop();
+        drawSide();
+      }
+    },
+    destroy() {
+      isPlaying = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      slider.removeEventListener('input', onSliderInput);
+      root.innerHTML = '';
+    }
+  };
+});
+
+
+registerDemo("step-06", ({ root, shadow, signal, motion, tokens }) => {
+  // 注入 HTML 和 CSS
+  root.innerHTML = `
+    <style>
+      .container {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        font-family: system-ui, sans-serif;
+        background: ${tokens.paper};
+        color: ${tokens.ink};
+        user-select: none;
+      }
+      .canvas-container {
+        flex: 1;
+        position: relative;
+        min-height: 0;
+        overflow: hidden;
+      }
+      canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .center-label {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        font-weight: 900;
+        font-size: 1.75rem;
+        color: ${tokens.coral};
+        text-shadow: 0 0 6px ${tokens.paper}, 0 0 6px ${tokens.paper};
+        pointer-events: none;
+        z-index: 10;
+      }
+      .controls {
+        padding: 12px 16px;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        background: ${tokens.paper};
+        border-top: 1px solid ${tokens.muted}33;
+        z-index: 20;
+        flex-wrap: wrap;
+      }
+      button {
+        padding: 8px 16px;
+        border: 1px solid ${tokens.ocean};
+        background: ${tokens.paper};
+        color: ${tokens.ocean};
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+      }
+      button[aria-pressed="true"] {
+        background: ${tokens.ocean};
+        color: ${tokens.paper};
+        box-shadow: 0 2px 8px ${tokens.ocean}40;
+      }
+      button:focus-visible {
+        outline: 2px solid ${tokens.gold};
+        outline-offset: 2px;
+      }
+    </style>
+    <div class="container">
+      <div class="canvas-container">
+        <canvas></canvas>
+        <div class="center-label" aria-label="低压中心">L</div>
+      </div>
+      <div class="controls" role="group" aria-label="半球科里奥利力偏转选择">
+        <button data-hemi="1" aria-pressed="true">北半球 (向右偏转)</button>
+        <button data-hemi="0" aria-pressed="false">赤道 (无偏转)</button>
+        <button data-hemi="-1" aria-pressed="false">南半球 (向左偏转)</button>
+      </div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const btns = root.querySelectorAll('button');
+  const label = root.querySelector('.center-label');
+  const controls = root.querySelector('.controls');
+
+  let state = {
+    hemi: 1, // 1: 北半球, 0: 赤道, -1: 南半球
+    particles: [],
+    w: 0, h: 0, cx: 0, cy: 0, R_max: 0,
+    isPlaying: false,
+    lastTime: 0,
+    rafId: null
+  };
+
+  // 创建单个气块粒子
+  function createParticle(isPrewarm) {
+    const angle = Math.random() * Math.PI * 2;
+    // 如果是预热，让粒子均匀分布在整个盘面；如果是实时生成，只在边缘生成
+    const r = isPrewarm
+      ? state.R_max * (0.15 + Math.random() * 0.85)
+      : state.R_max * (0.95 + Math.random() * 0.1);
+    return {
+      r,
+      theta: angle,
+      history: [],
+      maxHistory: 45 // 轨迹长度
+    };
+  }
+
+  // 初始化粒子系统
+  function initParticles(forcePrewarm = false) {
+    state.particles = [];
+    const count = 80;
+    const shouldPrewarm = forcePrewarm || !motion;
+
+    for (let i = 0; i < count; i++) {
+      state.particles.push(createParticle(shouldPrewarm));
+    }
+
+    // 如果处于静态模式或强制预热，预先演算物理过程，使轨迹直接呈现完整状态
+    if (shouldPrewarm) {
+      for (let step = 0; step < 150; step++) {
+        updatePhysics(0.066); // 模拟约 10 秒的演化
+      }
+    }
+  }
+
+  // 物理更新逻辑（极坐标系下的运动学简化模型）
+  function updatePhysics(dt) {
+    if (state.R_max <= 0) return;
+
+    const v_r = state.R_max * 0.15; // 径向向内速度 (气压梯度力主导)
+    const core = state.R_max * 0.12; // 中心眼区半径
+
+    state.particles.forEach(p => {
+      // 记录历史轨迹
+      const x = state.cx + p.r * Math.cos(p.theta);
+      const y = state.cy + p.r * Math.sin(p.theta);
+      p.history.push({ x, y });
+      if (p.history.length > p.maxHistory) {
+        p.history.shift();
+      }
+
+      // 更新径向位置 (向中心靠拢)
+      p.r -= v_r * dt;
+
+      // 更新角速度 (科里奥利力引起的偏转，越靠近中心角速度越快以模拟角动量守恒)
+      // hemi: 1 (逆时针), 0 (无旋转), -1 (顺时针)
+      const omega = state.hemi * 1.6 * (state.R_max * state.R_max) / (p.r * p.r + core * core);
+      p.theta += omega * dt;
+
+      // 到达中心后在边缘重生
+      if (p.r < core * 0.5) {
+        Object.assign(p, createParticle(false));
+      }
+    });
+  }
+
+  // 绘制画面
+  function draw(force = false) {
+    if (!state.isPlaying && !force) return;
+
+    ctx.clearRect(0, 0, state.w, state.h);
+
+    // 绘制等压线 (背景同心圆)
+    ctx.strokeStyle = tokens.muted;
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 6]);
+    [1, 0.7, 0.4].forEach(scale => {
+      ctx.beginPath();
+      ctx.arc(state.cx, state.cy, state.R_max * scale, 0, Math.PI * 2);
+      ctx.globalAlpha = 0.4;
+      ctx.stroke();
+    });
+    ctx.setLineDash([]);
+    ctx.globalAlpha = 1;
+
+    // 绘制粒子及其轨迹
+    state.particles.forEach(p => {
+      // 绘制渐隐轨迹
+      if (p.history.length > 1) {
+        for (let i = 1; i < p.history.length; i++) {
+          ctx.beginPath();
+          ctx.moveTo(p.history[i - 1].x, p.history[i - 1].y);
+          ctx.lineTo(p.history[i].x, p.history[i].y);
+          // 越早的历史越透明
+          ctx.globalAlpha = Math.pow(i / p.history.length, 1.5) * 0.7;
+          ctx.strokeStyle = tokens.ocean;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+      }
+      ctx.globalAlpha = 1;
+
+      // 绘制气块头部
+      const x = state.cx + p.r * Math.cos(p.theta);
+      const y = state.cy + p.r * Math.sin(p.theta);
+      ctx.beginPath();
+      ctx.arc(x, y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = tokens.cyan;
+      ctx.fill();
+    });
+  }
+
+  // 动画循环
+  function loop(time) {
+    if (!state.isPlaying) return;
+
+    // 限制单帧最大 dt 避免切后台后回来发生跳跃
+    const dt = Math.min((time - state.lastTime) / 1000, 0.1);
+    state.lastTime = time;
+
+    updatePhysics(dt);
+    draw();
+
+    state.rafId = requestAnimationFrame(loop);
+  }
+
+  // 监听按钮点击事件
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const newHemi = parseInt(btn.dataset.hemi);
+      if (state.hemi === newHemi) return;
+
+      btns.forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+      state.hemi = newHemi;
+
+      // 如果当前处于暂停状态，为了让用户立即看到改变半球的结果，强制重置并预热
+      if (!state.isPlaying) {
+        initParticles(true);
+        draw(true);
+      }
+    });
+  });
+
+  return {
+    resize({ width, height, dpr }) {
+      // 计算安全绘图区，扣除底部控件高度
+      const controlsHeight = controls.offsetHeight;
+      const canvasLogicalHeight = height - controlsHeight;
+
+      canvas.width = width * dpr;
+      canvas.height = canvasLogicalHeight * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${canvasLogicalHeight}px`;
+      ctx.scale(dpr, dpr);
+
+      state.w = width;
+      state.h = canvasLogicalHeight;
+      state.cx = width / 2;
+      state.cy = canvasLogicalHeight / 2;
+
+      // 核心图形大小基于安全区的短边，留出边缘内边距
+      state.R_max = Math.min(state.cx, state.cy) * 0.85;
+
+      // 定位中心标签
+      label.style.left = `${state.cx}px`;
+      label.style.top = `${state.cy}px`;
+
+      // 尺寸改变时重新初始化粒子以适应新比例
+      initParticles();
+      draw(true);
+    },
+    resume() {
+      if (state.isPlaying) return;
+      state.isPlaying = true;
+      state.lastTime = performance.now();
+      state.rafId = requestAnimationFrame(loop);
+    },
+    pause() {
+      state.isPlaying = false;
+      if (state.rafId) {
+        cancelAnimationFrame(state.rafId);
+        state.rafId = null;
+      }
+      draw(true); // 确保暂停时画面清晰
+    },
+    reset() {
+      // 恢复到北半球初始状态
+      state.hemi = 1;
+      btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.hemi === "1" ? 'true' : 'false'));
+      initParticles();
+      draw(true);
+    },
+    destroy() {
+      state.isPlaying = false;
+      if (state.rafId) cancelAnimationFrame(state.rafId);
+      root.innerHTML = '';
+    }
+  };
+});
+
+
+registerDemo("step-07", ({ root, shadow, signal, motion, tokens }) => {
+  function hexToRgb(hex) {
+    let c = hex.replace('#', '');
+    if (c.length === 3) c = c.split('').map(x => x + x).join('');
+    return `${parseInt(c.substring(0, 2), 16)}, ${parseInt(c.substring(2, 4), 16)}, ${parseInt(c.substring(4, 6), 16)}`;
+  }
+
+  const paperRgb = hexToRgb(tokens.paper || '#ffffff');
+  const cloudRgb = hexToRgb(tokens.oceanDeep || '#005f73');
+  const windRgb = hexToRgb(tokens.cyan || '#0a9396');
+  const centerRgb = hexToRgb(tokens.coral || '#f4a261');
+
+  root.innerHTML = `
+    <style>
+      .step07-container {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background-color: ${tokens.paper};
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+      .step07-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+      .step07-controls {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(8px);
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 320px;
+        max-width: 85vw;
+        border: 1px solid rgba(0,0,0,0.05);
+      }
+      .step07-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: ${tokens.ink};
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .step07-val {
+        font-weight: normal;
+        color: ${tokens.coral};
+        font-size: 13px;
+        background: rgba(${centerRgb}, 0.1);
+        padding: 2px 8px;
+        border-radius: 10px;
+      }
+      .step07-slider {
+        width: 100%;
+        cursor: pointer;
+        accent-color: ${tokens.coral};
+        height: 6px;
+        border-radius: 3px;
+        outline: none;
+      }
+      .step07-slider:focus-visible {
+        outline: 2px solid ${tokens.coral};
+        outline-offset: 2px;
+      }
+      .step07-ticks {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: ${tokens.muted};
+      }
+    </style>
+    <div class="step07-container">
+      <canvas class="step07-canvas"></canvas>
+      <div class="step07-controls">
+        <label for="org-slider" class="step07-label">
+          系统组织度
+          <span class="step07-val" id="step07-status">散乱云团</span>
+        </label>
+        <input type="range" id="org-slider" class="step07-slider" min="0" max="1" step="0.01" value="0" aria-label="调整系统组织度">
+        <div class="step07-ticks">
+          <span>强风切变</span>
+          <span>弱风切变</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('.step07-canvas');
+  const ctx = canvas.getContext('2d');
+  const slider = root.querySelector('#org-slider');
+  const statusLabel = root.querySelector('#step07-status');
+  const controls = root.querySelector('.step07-controls');
+
+  let width = 0;
+  let height = 0;
+  let cx = 0;
+  let cy = 0;
+  let dpr = 1;
+
+  let isPlaying = true;
+  let animationFrameId = null;
+
+  let targetOrganization = motion === false ? 1 : 0;
+  let currentOrganization = targetOrganization;
+
+  const clouds = [];
+  const windParticles = [];
+  const numClouds = 120;
+  const numWind = 250;
+
+  function createCloud(isRespawn = false) {
+    const life = isRespawn ? 0 : Math.random() * 200;
+    return {
+      x: cx + (Math.random() - 0.5) * width * 1.5,
+      y: cy + (Math.random() - 0.5) * height * 1.5,
+      vx: 0,
+      vy: 0,
+      rvx: (Math.random() - 0.5) * 1.5,
+      rvy: (Math.random() - 0.5) * 1.5,
+      life: life,
+      maxLife: 100 + Math.random() * 150,
+      size: 15 + Math.random() * 25,
+      phase: Math.random() * Math.PI * 2
+    };
+  }
+
+  function createWind(isRespawn = false) {
+    const life = isRespawn ? 0 : Math.random() * 100;
+    const x = cx + (Math.random() - 0.5) * width * 1.5;
+    const y = cy + (Math.random() - 0.5) * height * 1.5;
+    return {
+      x: x,
+      y: y,
+      px: x,
+      py: y,
+      life: life,
+      maxLife: 40 + Math.random() * 60
+    };
+  }
+
+  function initParticles() {
+    clouds.length = 0;
+    windParticles.length = 0;
+    for (let i = 0; i < numClouds; i++) clouds.push(createCloud(false));
+    for (let i = 0; i < numWind; i++) windParticles.push(createWind(false));
+  }
+
+  function updateStatusText(val) {
+    if (val < 0.3) {
+      statusLabel.textContent = "散乱云团 (各自生灭)";
+    } else if (val < 0.7) {
+      statusLabel.textContent = "逐渐旋转 (组织中)";
+    } else {
+      statusLabel.textContent = "热带低压 (共用中心)";
+    }
+  }
+
+  slider.addEventListener('input', (e) => {
+    targetOrganization = parseFloat(e.target.value);
+    updateStatusText(targetOrganization);
+  });
+
+  if (motion === false) {
+    controls.style.display = 'none';
+    slider.value = 1;
+    updateStatusText(1);
+  }
+
+  function updatePhysics() {
+    currentOrganization += (targetOrganization - currentOrganization) * 0.05;
+
+    const shearVx = (1 - currentOrganization) * 5;
+    const shearVy = 0;
+
+    for (let i = 0; i < clouds.length; i++) {
+      let c = clouds[i];
+      c.life++;
+
+      let dx = c.x - cx;
+      let dy = c.y - cy;
+      let dist = Math.sqrt(dx * dx + dy * dy);
+      let safeDist = Math.max(dist, 30);
+
+      if (currentOrganization > 0.6) {
+        let angle = Math.atan2(dy, dx);
+        let spiral = Math.sin(angle * 2 - dist * 0.02);
+        if (spiral < -0.2) {
+          c.life += 1.5;
+        }
+      }
+
+      if (c.life >= c.maxLife || c.x > cx + width || c.x < cx - width || c.y > cy + height || c.y < cy - height) {
+        clouds[i] = createCloud(true);
+        c = clouds[i];
+        if (currentOrganization < 0.5) {
+          c.x = cx - width * 0.6 + Math.random() * width * 0.4;
+        }
+        dx = c.x - cx; dy = c.y - cy; dist = Math.sqrt(dx * dx + dy * dy); safeDist = Math.max(dist, 30);
+      }
+
+      let rotSpeed = currentOrganization * (600 / safeDist);
+      let inSpeed = currentOrganization * (150 / safeDist);
+
+      let tvx = -dy / safeDist;
+      let tvy = dx / safeDist;
+      let rvx = -dx / safeDist;
+      let rvy = -dy / safeDist;
+
+      let targetVx = shearVx + tvx * rotSpeed + rvx * inSpeed + c.rvx;
+      let targetVy = shearVy + tvy * rotSpeed + rvy * inSpeed + c.rvy;
+
+      c.vx += (targetVx - c.vx) * 0.1;
+      c.vy += (targetVy - c.vy) * 0.1;
+
+      c.x += c.vx;
+      c.y += c.vy;
+    }
+
+    for (let i = 0; i < windParticles.length; i++) {
+      let w = windParticles[i];
+      w.life++;
+      w.px = w.x;
+      w.py = w.y;
+
+      if (w.life >= w.maxLife || w.x > cx + width || w.x < cx - width || w.y > cy + height || w.y < cy - height) {
+        windParticles[i] = createWind(true);
+        w = windParticles[i];
+        if (currentOrganization < 0.5) {
+          w.x = cx - width * 0.6 + Math.random() * width * 0.4;
+          w.px = w.x;
+        }
+      }
+
+      let dx = w.x - cx;
+      let dy = w.y - cy;
+      let dist = Math.sqrt(dx * dx + dy * dy);
+      let safeDist = Math.max(dist, 20);
+
+      let rotSpeed = currentOrganization * (1000 / safeDist);
+      let inSpeed = currentOrganization * (250 / safeDist);
+
+      let tvx = -dy / safeDist;
+      let tvy = dx / safeDist;
+      let rvx = -dx / safeDist;
+      let rvy = -dy / safeDist;
+
+      let vx = shearVx * 1.5 + tvx * rotSpeed + rvx * inSpeed;
+      let vy = shearVy * 1.5 + tvy * rotSpeed + rvy * inSpeed;
+
+      w.x += vx;
+      w.y += vy;
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    if (currentOrganization > 0.05) {
+      ctx.save();
+      let alpha = Math.min(1, currentOrganization * 1.5);
+      ctx.globalAlpha = alpha;
+
+      ctx.beginPath();
+      let grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 80);
+      grad.addColorStop(0, `rgba(${centerRgb}, 0.15)`);
+      grad.addColorStop(1, `rgba(${centerRgb}, 0)`);
+      ctx.fillStyle = grad;
+      ctx.arc(cx, cy, 80, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = tokens.coral;
+      ctx.font = "bold 28px system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("L", cx, cy);
+
+      ctx.strokeStyle = `rgba(${centerRgb}, 0.5)`;
+      ctx.lineWidth = 2;
+      ctx.setLineDash([6, 6]);
+      ctx.beginPath();
+      ctx.arc(cx, cy, 35, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+    }
+
+    ctx.save();
+    for (let i = 0; i < clouds.length; i++) {
+      let c = clouds[i];
+      let progress = c.life / c.maxLife;
+      let alpha = Math.sin(progress * Math.PI) * 0.4;
+
+      let pulse = Math.sin(c.phase + c.life * 0.05) * 0.1 + 0.9;
+      let r = c.size * pulse;
+
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${cloudRgb}, ${alpha})`;
+      ctx.arc(c.x, c.y, r, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${cloudRgb}, ${alpha * 1.5})`;
+      ctx.arc(c.x - r * 0.15, c.y - r * 0.15, r * 0.6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+
+    ctx.save();
+    ctx.lineWidth = 1.5;
+    ctx.lineCap = "round";
+    for (let i = 0; i < windParticles.length; i++) {
+      let w = windParticles[i];
+      let progress = w.life / w.maxLife;
+      let alpha = Math.sin(progress * Math.PI) * 0.6;
+
+      ctx.strokeStyle = `rgba(${windRgb}, ${alpha})`;
+      ctx.beginPath();
+      ctx.moveTo(w.px, w.py);
+      ctx.lineTo(w.x, w.y);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function loop() {
+    if (!isPlaying) return;
+    updatePhysics();
+    draw();
+    animationFrameId = requestAnimationFrame(loop);
+  }
+
+  if (motion === false) {
+    initParticles();
+    for(let i=0; i<150; i++) updatePhysics();
+    draw();
+  } else {
+    initParticles();
+    loop();
+  }
+
+  return {
+    pause() {
+      isPlaying = false;
+    },
+    resume() {
+      if (motion === false) return;
+      if (!isPlaying) {
+        isPlaying = true;
+        loop();
+      }
+    },
+    reset() {
+      if (motion === false) return;
+      targetOrganization = 0;
+      currentOrganization = 0;
+      slider.value = 0;
+      updateStatusText(0);
+      initParticles();
+      if (!isPlaying) {
+        draw();
+      }
+    },
+    destroy() {
+      isPlaying = false;
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      root.innerHTML = '';
+    },
+    resize(opts) {
+      width = opts.width;
+      height = opts.height;
+      dpr = opts.dpr;
+      cx = width / 2;
+      cy = height / 2;
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+
+      if (!isPlaying || motion === false) {
+        draw();
+      }
+    }
+  };
+});
+
+
+registerDemo("step-08", ({ root, shadow, signal, motion, tokens }) => {
+  root.innerHTML = `
+    <style>
+      .container {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        background: ${tokens.paper};
+        color: ${tokens.ink};
+        font-family: system-ui, sans-serif;
+        overflow: hidden;
+      }
+      .vis-area {
+        flex: 1;
+        min-height: 0;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        background: radial-gradient(circle at center, ${tokens.paper} 0%, ${tokens.muted}11 100%);
+      }
+      svg {
+        width: 100%;
+        height: 100%;
+        max-width: 450px;
+        overflow: visible;
+      }
+      .controls {
+        padding: 15px 20px;
+        background: ${tokens.paper};
+        border-top: 1px solid ${tokens.muted}33;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 10;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.02);
+      }
+      .slider-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      input[type=range] {
+        flex: 1;
+        accent-color: ${tokens.ocean};
+      }
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        text-align: center;
+      }
+      .metric-box {
+        background: ${tokens.paper};
+        padding: 8px 4px;
+        border-radius: 6px;
+        border: 1px solid ${tokens.muted}33;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        transition: border-color 0.3s;
+      }
+      .metric-name {
+        font-size: 11px;
+        color: ${tokens.muted};
+        margin-bottom: 4px;
+      }
+      .metric-val {
+        font-size: 14px;
+        font-weight: bold;
+        color: ${tokens.oceanDeep};
+        font-variant-numeric: tabular-nums;
+        transition: color 0.3s;
+      }
+      .node-text {
+        font-size: 13px;
+        fill: ${tokens.ink};
+        text-anchor: middle;
+        dominant-baseline: middle;
+        font-weight: bold;
+        pointer-events: none;
+      }
+      @media (min-width: 600px) {
+        .container { flex-direction: row; }
+        .controls {
+          border-top: none;
+          border-left: 1px solid ${tokens.muted}33;
+          width: 260px;
+          justify-content: center;
+          box-shadow: -2px 0 10px rgba(0,0,0,0.02);
+        }
+        .metrics { grid-template-columns: 1fr 1fr; gap: 12px; }
+        .metric-box { padding: 12px 8px; }
+        .metric-name { font-size: 12px; }
+        .metric-val { font-size: 16px; }
+      }
+    </style>
+    <div class="container">
+      <div class="vis-area">
+        <svg viewBox="0 0 400 400" aria-label="台风正反馈循环示意图">
+          <!-- 基础轨道 -->
+          <circle cx="200" cy="200" r="140" fill="none" stroke="${tokens.muted}" stroke-width="2" opacity="0.2" />
+          <!-- 流动轨道 -->
+          <circle id="loop-circle" cx="200" cy="200" r="140" fill="none" stroke="${tokens.cyan}" stroke-width="4" stroke-dasharray="15 15" opacity="0.6" />
+
+          <!-- 粒子容器 -->
+          <g id="particles"></g>
+
+          <!-- 中心台风符号 -->
+          <g id="hurricane-group" transform="translate(200,200) scale(0.5)">
+            <circle cx="0" cy="0" r="12" fill="${tokens.coral}" />
+            <path d="M 12,0 C 12,-30 40,-50 70,-50 C 100,-50 115,-30 100,-10" fill="none" stroke="${tokens.coral}" stroke-width="10" stroke-linecap="round"/>
+            <path d="M -12,0 C -12,30 -40,50 -70,50 C -100,50 -115,30 -100,10" fill="none" stroke="${tokens.coral}" stroke-width="10" stroke-linecap="round"/>
+          </g>
+
+          <!-- 循环节点 -->
+          <g transform="translate(200, 60)">
+            <rect x="-42" y="-16" width="84" height="32" rx="16" fill="${tokens.paper}" stroke="${tokens.ocean}" stroke-width="2" />
+            <text class="node-text">气压下降</text>
+          </g>
+          <g transform="translate(340, 200)">
+            <rect x="-42" y="-16" width="84" height="32" rx="16" fill="${tokens.paper}" stroke="${tokens.ocean}" stroke-width="2" />
+            <text class="node-text">风速增加</text>
+          </g>
+          <g transform="translate(200, 340)">
+            <rect x="-42" y="-16" width="84" height="32" rx="16" fill="${tokens.paper}" stroke="${tokens.ocean}" stroke-width="2" />
+            <text class="node-text">蒸发加剧</text>
+          </g>
+          <g transform="translate(60, 200)">
+            <rect x="-42" y="-16" width="84" height="32" rx="16" fill="${tokens.paper}" stroke="${tokens.ocean}" stroke-width="2" />
+            <text class="node-text">潜热释放</text>
+          </g>
+        </svg>
+      </div>
+      <div class="controls">
+        <div style="font-size:14px; font-weight:bold; color:${tokens.ink}; text-align:center;">
+          系统能量源 (海水温度)
+        </div>
+        <div class="slider-row">
+          <span style="font-size:12px; color:${tokens.muted}">26℃</span>
+          <input type="range" id="sst" min="26" max="31" step="0.1" value="29.0" aria-label="海水温度">
+          <span style="font-size:12px; color:${tokens.muted}">31℃</span>
+        </div>
+        <div style="font-size:12px; color:${tokens.ocean}; text-align:center; font-weight:bold;" id="sst-val">
+          当前水温: 29.0 ℃
+        </div>
+        <div class="metrics">
+          <div class="metric-box">
+            <div class="metric-name">中心气压</div>
+            <div class="metric-val" id="val-pressure">1010 hPa</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-name">最大风速</div>
+            <div class="metric-val" id="val-wind">15 m/s</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-name">蒸发速率</div>
+            <div class="metric-val" id="val-evap">1.0 倍</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-name">潜热释放</div>
+            <div class="metric-val" id="val-heat">1.0 倍</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const sstSlider = root.querySelector('#sst');
+  const sstVal = root.querySelector('#sst-val');
+  const valPressure = root.querySelector('#val-pressure');
+  const valWind = root.querySelector('#val-wind');
+  const valEvap = root.querySelector('#val-evap');
+  const valHeat = root.querySelector('#val-heat');
+  const hurricaneGroup = root.querySelector('#hurricane-group');
+  const particlesGroup = root.querySelector('#particles');
+  const loopCircle = root.querySelector('#loop-circle');
+  const metricBoxes = root.querySelectorAll('.metric-box');
+
+  const numParticles = 12;
+  let particleAngles = [];
+  let particlesHTML = '';
+  for (let i = 0; i < numParticles; i++) {
+    particlesHTML += `<circle class="particle" r="5" fill="${tokens.gold}" />`;
+    particleAngles.push((i * Math.PI * 2) / numParticles);
+  }
+  particlesGroup.innerHTML = particlesHTML;
+  const particles = root.querySelectorAll('.particle');
+
+  let intensity = 0.1;
+  let sst = 29.0;
+  let isPlaying = true;
+  let frameId;
+  let lastTime = performance.now();
+  let hurricaneAngle = 0;
+  let dashOffset = 0;
+
+  sstSlider.addEventListener('input', (e) => {
+    sst = parseFloat(e.target.value);
+    if (!motion) {
+      intensity = Math.max(0, Math.min(1, (sst - 26.5) / 4.5));
+      renderState(0, 0);
+    }
+  });
+
+  function renderState(pSpeed, dt) {
+    const pressure = Math.round(1010 - 60 * intensity);
+    const wind = Math.round(15 + 55 * intensity);
+    const evap = (1.0 + 4.0 * intensity).toFixed(1);
+    const heat = (1.0 + 4.0 * intensity).toFixed(1);
+
+    valPressure.textContent = pressure + ' hPa';
+    valWind.textContent = wind + ' m/s';
+    valEvap.textContent = evap + ' 倍';
+    valHeat.textContent = heat + ' 倍';
+    sstVal.textContent = `当前水温: ${sst.toFixed(1)} ℃`;
+
+    const dangerLevel = intensity > 0.6;
+    const activeColor = dangerLevel ? tokens.coral : tokens.oceanDeep;
+    const borderColor = dangerLevel ? `${tokens.coral}66` : `${tokens.muted}33`;
+
+    [valPressure, valWind, valEvap, valHeat].forEach(el => {
+      el.style.color = activeColor;
+    });
+    metricBoxes.forEach(box => {
+      box.style.borderColor = borderColor;
+    });
+
+    const scale = 0.4 + 0.6 * intensity;
+    hurricaneGroup.setAttribute('transform', `translate(200,200) rotate(${hurricaneAngle}) scale(${scale})`);
+
+    dashOffset -= (20 + 100 * intensity) * dt;
+    loopCircle.setAttribute('stroke-dashoffset', dashOffset);
+
+    particles.forEach((p, i) => {
+      if (motion) {
+        particleAngles[i] += pSpeed * dt;
+      }
+      const a = particleAngles[i];
+      const x = 200 + 140 * Math.cos(a);
+      const y = 200 + 140 * Math.sin(a);
+      p.setAttribute('cx', x);
+      p.setAttribute('cy', y);
+      p.setAttribute('opacity', 0.1 + 0.9 * intensity);
+    });
+  }
+
+  function update(time) {
+    if (!isPlaying) return;
+
+    let dt = (time - lastTime) / 1000;
+    if (dt > 0.1) dt = 0.1;
+    lastTime = time;
+
+    if (motion) {
+      const targetIntensity = Math.max(0, Math.min(1, (sst - 26.5) / 4.5));
+      const growthRate = 1.0 * (intensity + 0.2) * (targetIntensity - intensity);
+      intensity += growthRate * dt;
+      intensity = Math.max(0, Math.min(1, intensity));
+
+      hurricaneAngle += (50 + 300 * intensity) * dt;
+      const pSpeed = 0.5 + 3.0 * intensity;
+
+      renderState(pSpeed, dt);
+    } else {
+      intensity = Math.max(0, Math.min(1, (sst - 26.5) / 4.5));
+      renderState(0, 0);
+    }
+
+    frameId = requestAnimationFrame(update);
+  }
+
+  if (!motion) {
+    intensity = 0.8;
+    sst = 30.0;
+    sstSlider.value = 30.0;
+    renderState(0, 0);
+  } else {
+    frameId = requestAnimationFrame(update);
+  }
+
+  return {
+    pause() {
+      isPlaying = false;
+    },
+    resume() {
+      if (!isPlaying) {
+        isPlaying = true;
+        lastTime = performance.now();
+        if (motion) frameId = requestAnimationFrame(update);
+      }
+    },
+    reset() {
+      intensity = 0.1;
+      sst = 29.0;
+      sstSlider.value = 29.0;
+      hurricaneAngle = 0;
+      dashOffset = 0;
+      particleAngles = Array.from({length: numParticles}, (_, i) => (i * Math.PI * 2) / numParticles);
+
+      if (!motion) {
+        intensity = 0.8;
+        sst = 30.0;
+        sstSlider.value = 30.0;
+      }
+
+      lastTime = performance.now();
+      renderState(motion ? 0.5 + 3.0 * intensity : 0, 0);
+    },
+    destroy() {
+      isPlaying = false;
+      cancelAnimationFrame(frameId);
+      root.innerHTML = '';
+    }
+  };
+});
+
+
+registerDemo("step-09", ({ root, shadow, signal, motion, tokens }) => {
+  const state = {
+    windSpeed: motion === false ? 35 : 10,
+    isAutoPlaying: motion !== false,
+    isPlaying: true,
+    autoDir: 1,
+    width: 0,
+    height: 0,
+    dpr: 1
+  };
+
+  root.innerHTML = `
+    <style>
+      :host {
+        --c-ink: ${tokens.ink};
+        --c-muted: ${tokens.muted};
+        --c-cyan: ${tokens.cyan};
+        --c-ocean: ${tokens.ocean};
+        --c-gold: ${tokens.gold};
+        --c-coral: ${tokens.coral};
+        --c-paper: ${tokens.paper};
+      }
+      .step-09-container {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--c-paper);
+        color: var(--c-ink);
+        font-family: system-ui, sans-serif;
+        padding: 1.5rem;
+        box-sizing: border-box;
+        user-select: none;
+      }
+      .dashboard {
+        text-align: center;
+        margin-bottom: 1rem;
+        flex-shrink: 0;
+      }
+      .speed-value {
+        font-size: 3rem;
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+        line-height: 1.1;
+        transition: color 0.2s ease-out;
+      }
+      .speed-unit {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--c-muted);
+      }
+      .category-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        height: 4rem;
+      }
+      .category-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        transition: color 0.2s ease-out;
+      }
+      .naming-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        border: 1px solid currentColor;
+        transition: all 0.2s ease-out;
+        background: transparent;
+      }
+      .naming-tag.named {
+        background: var(--c-coral);
+        color: var(--c-paper) !important;
+        border-color: var(--c-coral);
+      }
+      .note {
+        font-size: 0.8rem;
+        color: var(--c-muted);
+        margin-top: 0.25rem;
+      }
+      .canvas-wrapper {
+        flex: 1;
+        min-height: 0;
+        position: relative;
+        margin: 1rem 0;
+      }
+      canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        touch-action: none;
+      }
+      .controls {
+        flex-shrink: 0;
+        padding: 0 1rem;
+      }
+      .slider-container {
+        position: relative;
+        width: 100%;
+        padding: 1rem 0 2rem 0;
+      }
+      input[type=range] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 12px;
+        border-radius: 6px;
+        background: linear-gradient(to right,
+            var(--c-cyan) 0%, var(--c-cyan) 20.57%,
+            var(--c-ocean) 20.57%, var(--c-ocean) 41.43%,
+            var(--c-gold) 41.43%, var(--c-gold) 64.86%,
+            var(--c-coral) 64.86%, var(--c-coral) 100%
+        );
+        outline: none;
+        margin: 0;
+        cursor: pointer;
+      }
+      input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--c-paper);
+        border: 4px solid var(--thumb-color, var(--c-ink));
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        transition: border-color 0.1s;
+      }
+      input[type=range]::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--c-paper);
+        border: 4px solid var(--thumb-color, var(--c-ink));
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        transition: border-color 0.1s;
+      }
+      input[type=range]:focus-visible::-webkit-slider-thumb {
+        outline: 2px solid var(--c-ink);
+        outline-offset: 2px;
+      }
+      .track-labels {
+        position: absolute;
+        width: 100%;
+        top: 2.5rem;
+        left: 0;
+        height: 20px;
+        pointer-events: none;
+      }
+      .tick {
+        position: absolute;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .tick::before {
+        content: '';
+        width: 2px;
+        height: 6px;
+        background: var(--c-muted);
+        margin-bottom: 2px;
+      }
+      .tick span {
+        font-size: 0.75rem;
+        color: var(--c-muted);
+        white-space: nowrap;
+      }
+      .tick.important span {
+        font-weight: 700;
+        color: var(--c-ink);
+      }
+      .tick.important::before {
+        background: var(--c-ink);
+        height: 8px;
+      }
+    </style>
+    <div class="step-09-container">
+      <div class="dashboard">
+        <div class="speed-value" id="speed-text">10.0 <span class="speed-unit">m/s</span></div>
+        <div class="category-info">
+          <div class="category-name" id="cat-text">热带低压 (TD)</div>
+          <div class="naming-tag" id="name-tag">未达到命名标准</div>
+        </div>
+        <div class="note">风暴增强是连续的，分级与命名是人为设定的门槛</div>
+      </div>
+
+      <div class="canvas-wrapper" id="canvas-wrapper">
+        <canvas id="cyclone-canvas" aria-label="热带气旋风速与形态的动态可视化"></canvas>
+      </div>
+
+      <div class="controls">
+        <div class="slider-container">
+          <input type="range" id="speed-slider" min="10" max="45" step="0.1" value="10" aria-label="调节风速">
+          <div class="track-labels">
+            <div class="tick" style="left: 0%;"><span>10</span></div>
+            <div class="tick important" style="left: 20.57%;"><span>17.2 命名线</span></div>
+            <div class="tick important" style="left: 64.86%;"><span>32.7 台风线</span></div>
+            <div class="tick" style="left: 100%;"><span>45</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('#cyclone-canvas');
+  const ctx = canvas.getContext('2d');
+  const wrapper = root.querySelector('#canvas-wrapper');
+  const slider = root.querySelector('#speed-slider');
+
+  const speedText = root.querySelector('#speed-text');
+  const catText = root.querySelector('#cat-text');
+  const nameTag = root.querySelector('#name-tag');
+
+  let animationFrameId;
+  const particles = [];
+  const numParticles = 400;
+
+  class Particle {
+    constructor() {
+      this.reset(true);
+    }
+    reset(randomizeRadius = false) {
+      this.theta = Math.random() * Math.PI * 2;
+      this.r = randomizeRadius ? Math.random() : 1.0 + Math.random() * 0.1;
+      this.speed = 0.002 + Math.random() * 0.008;
+      this.trail = [];
+      this.alpha = 0.1 + Math.random() * 0.4;
+      this.length = 5 + Math.floor(Math.random() * 15);
+    }
+  }
+
+  for (let i = 0; i < numParticles; i++) {
+    particles.push(new Particle());
+  }
+
+  function getCategoryInfo(speed) {
+    if (speed >= 32.7) return { color: tokens.coral, name: "台风 (TY)", named: true };
+    if (speed >= 24.5) return { color: tokens.gold, name: "强热带风暴 (STS)", named: true };
+    if (speed >= 17.2) return { color: tokens.ocean, name: "热带风暴 (TS)", named: true };
+    return { color: tokens.cyan, name: "热带低压 (TD)", named: false };
+  }
+
+  function updateDOM() {
+    const info = getCategoryInfo(state.windSpeed);
+
+    speedText.innerHTML = `${state.windSpeed.toFixed(1)} <span class="speed-unit">m/s</span>`;
+    speedText.style.color = info.color;
+
+    catText.innerText = info.name;
+    catText.style.color = info.color;
+
+    if (info.named) {
+      nameTag.innerText = "✓ 系统已获得命名";
+      nameTag.className = "naming-tag named";
+      nameTag.style.color = tokens.paper;
+    } else {
+      nameTag.innerText = "风速不足，未命名";
+      nameTag.className = "naming-tag";
+      nameTag.style.color = tokens.muted;
+    }
+
+    slider.style.setProperty('--thumb-color', info.color);
+    if (slider.value !== state.windSpeed.toFixed(1)) {
+      slider.value = state.windSpeed;
+    }
+  }
+
+  function updatePhysics() {
+    const currentEye = Math.max(0.02, (state.windSpeed - 10) * 0.006);
+    const speedMultiplier = state.windSpeed * 0.8;
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+
+      const v_theta = (p.speed * speedMultiplier) / (p.r + 0.1);
+      const v_r = -p.speed * (state.windSpeed * 0.15);
+
+      p.theta += v_theta;
+      p.r += v_r;
+
+      if (p.r < currentEye) {
+        p.reset(false);
+      }
+
+      p.trail.push({ r: p.r, theta: p.theta });
+      if (p.trail.length > p.length) {
+        p.trail.shift();
+      }
+    }
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, state.width, state.height);
+
+    const cx = state.width / 2;
+    const cy = state.height / 2;
+    const maxR = Math.min(cx, cy) * 0.95;
+    const info = getCategoryInfo(state.windSpeed);
+
+    ctx.lineWidth = 1.5 * state.dpr;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      if (p.trail.length < 2) continue;
+
+      ctx.beginPath();
+      for (let j = 0; j < p.trail.length; j++) {
+        const pt = p.trail[j];
+        const x = cx + pt.r * maxR * Math.cos(pt.theta);
+        const y = cy + pt.r * maxR * Math.sin(pt.theta);
+        if (j === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+
+      ctx.strokeStyle = info.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1.0;
+  }
+
+  function render(force = false) {
+    if (!state.isPlaying && !force) return;
+
+    if (state.isAutoPlaying && state.isPlaying) {
+      state.windSpeed += state.autoDir * 0.06;
+      if (state.windSpeed >= 44) state.autoDir = -1;
+      if (state.windSpeed <= 11) state.autoDir = 1;
+    }
+
+    updateDOM();
+    updatePhysics();
+    drawParticles();
+
+    if (state.isPlaying) {
+      animationFrameId = requestAnimationFrame(() => render());
+    }
+  }
+
+  function handleResize(size) {
+    state.dpr = size.dpr || 1;
+    state.width = size.width * state.dpr;
+    state.height = size.height * state.dpr;
+    canvas.width = state.width;
+    canvas.height = state.height;
+    if (!state.isPlaying) {
+      drawParticles();
+    }
+  }
+
+  slider.addEventListener('input', (e) => {
+    state.isAutoPlaying = false;
+    state.windSpeed = parseFloat(e.target.value);
+    if (!state.isPlaying) {
+      updateDOM();
+      for(let i=0; i<3; i++) updatePhysics();
+      drawParticles();
+    }
+  });
+
+  slider.addEventListener('pointerdown', () => {
+    state.isAutoPlaying = false;
+  });
+
+  if (motion === false) {
+    state.windSpeed = 35;
+    slider.value = 35;
+    updateDOM();
+  }
+
+  return {
+    resize(size) {
+      handleResize(size);
+      if (motion === false || !state.isPlaying) {
+        for(let i=0; i<60; i++) updatePhysics();
+        drawParticles();
+      } else if (!animationFrameId) {
+        render();
+      }
+    },
+    pause() {
+      state.isPlaying = false;
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    },
+    resume() {
+      if (motion === false) return;
+      if (!state.isPlaying) {
+        state.isPlaying = true;
+        render();
+      }
+    },
+    reset() {
+      state.windSpeed = motion === false ? 35 : 10;
+      state.isAutoPlaying = motion !== false;
+      state.autoDir = 1;
+      slider.value = state.windSpeed;
+      particles.forEach(p => p.reset(true));
+      updateDOM();
+      if (!state.isPlaying) {
+        for(let i=0; i<60; i++) updatePhysics();
+        drawParticles();
+      }
+    },
+    destroy() {
+      state.isPlaying = false;
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      root.innerHTML = '';
+    }
+  };
+});
+
+
+registerDemo("step-10", ({ root, shadow, signal, motion, tokens }) => {
+  root.innerHTML = `
+    <style>
+      .step10-container {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        background-color: ${tokens.paper};
+        font-family: system-ui, sans-serif;
+        overflow: hidden;
+        user-select: none;
+      }
+      .step10-canvas-wrap {
+        flex: 1;
+        position: relative;
+        min-height: 0;
+      }
+      .step10-canvas-wrap canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .step10-ui {
+        padding: 12px 20px;
+        background: rgba(255, 255, 255, 0.85);
+        border-top: 1px solid ${tokens.muted}40;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        z-index: 10;
+        backdrop-filter: blur(4px);
+      }
+      .step10-ui label {
+        font-size: 14px;
+        color: ${tokens.ink};
+        white-space: nowrap;
+        font-weight: bold;
+      }
+      .step10-slider {
+        flex: 1;
+        cursor: pointer;
+        accent-color: ${tokens.ocean};
+      }
+      .step10-status {
+        font-size: 13px;
+        color: ${tokens.coral};
+        width: 150px;
+        text-align: right;
+        font-weight: 500;
+      }
+    </style>
+    <div class="step10-container">
+      <div class="step10-canvas-wrap">
+        <canvas></canvas>
+      </div>
+      <div class="step10-ui">
+        <label for="step10-slider">环流与下沉气流</label>
+        <input type="range" id="step10-slider" class="step10-slider" min="0" max="1" step="0.01" value="0" aria-label="调整环流强度">
+        <div class="step10-status" id="step10-status">风暴发展中...</div>
+      </div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const slider = root.querySelector('#step10-slider');
+  const statusEl = root.querySelector('#step10-status');
+
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+
+  let intensity = 0;
+  let autoPlay = true;
+  let isPaused = false;
+  let time = 0;
+  let animationId;
+
+  const pseudoRandom = (seed) => {
+    let x = Math.sin(seed * 9999.99) * 10000;
+    return x - Math.floor(x);
+  };
+
+  const clouds = [];
+  for (let i = 1; i <= 150; i++) {
+    let type, x, y, r;
+    let rand = pseudoRandom(i);
+    if (rand < 0.4) {
+      x = -0.45 + pseudoRandom(i + 1) * 0.25;
+      y = pseudoRandom(i + 2) * 0.75;
+      r = 0.05 + pseudoRandom(i + 3) * 0.12;
+      type = 'eyewall';
+    } else if (rand < 0.8) {
+      x = 0.2 + pseudoRandom(i + 1) * 0.25;
+      y = pseudoRandom(i + 2) * 0.75;
+      r = 0.05 + pseudoRandom(i + 3) * 0.12;
+      type = 'eyewall';
+    } else {
+      x = -0.18 + pseudoRandom(i + 1) * 0.36;
+      y = pseudoRandom(i + 2) * 0.5;
+      r = 0.08 + pseudoRandom(i + 3) * 0.15;
+      type = 'center';
+    }
+    clouds.push({ x, y, r, type });
+  }
+
+  const rain = [];
+  for (let i = 1; i <= 200; i++) {
+    let isLeft = pseudoRandom(i) < 0.5;
+    let x = isLeft ? (-0.45 + pseudoRandom(i+1)*0.25) : (0.2 + pseudoRandom(i+1)*0.25);
+    rain.push({
+      x: x,
+      y: pseudoRandom(i + 2),
+      speed: 0.01 + pseudoRandom(i + 3) * 0.02,
+      length: 0.02 + pseudoRandom(i + 4) * 0.04
+    });
+  }
+
+  function updateStatus() {
+    if (intensity < 0.3) {
+      statusEl.textContent = "云团聚集，中心混乱";
+      statusEl.style.color = tokens.oceanDeep;
+    } else if (intensity < 0.7) {
+      statusEl.textContent = "环流增强，中心开始下沉";
+      statusEl.style.color = tokens.coral;
+    } else {
+      statusEl.textContent = "台风眼形成，中心晴朗";
+      statusEl.style.color = tokens.gold;
+    }
+    slider.value = intensity;
+  }
+
+  slider.addEventListener('input', (e) => {
+    intensity = parseFloat(e.target.value);
+    autoPlay = false;
+    updateStatus();
+    if (motion === false) draw();
+  });
+
+  function drawArrowHead(x, y, angle, color) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(angle);
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(-12, -7);
+    ctx.lineTo(-12, 7);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    const cx = width / 2;
+    const ground = height * 0.85;
+    const minDim = Math.min(width, height);
+
+    ctx.fillStyle = tokens.oceanDeep;
+    ctx.fillRect(0, ground, width, height - ground);
+
+    ctx.strokeStyle = tokens.ocean;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(0, ground);
+    ctx.lineTo(width, ground);
+    ctx.stroke();
+
+    ctx.globalAlpha = intensity;
+    ctx.fillStyle = tokens.gold;
+    ctx.beginPath();
+    ctx.arc(cx, height * 0.15, 35, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    ctx.fillStyle = tokens.muted;
+    clouds.forEach(c => {
+      let alpha = 0.85;
+      if (c.type === 'center') {
+        alpha = (1 - intensity) * 0.85;
+      }
+      if (alpha <= 0) return;
+
+      ctx.globalAlpha = alpha;
+      ctx.beginPath();
+      ctx.arc(cx + c.x * width, ground - c.y * height * 0.8, c.r * minDim, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+
+    ctx.strokeStyle = tokens.cyan;
+    ctx.lineWidth = 1.5;
+    rain.forEach(p => {
+      let rx = cx + p.x * width;
+      let ry = ground * p.y;
+
+      let rainAlpha = 0.2 + intensity * 0.5;
+      ctx.globalAlpha = rainAlpha;
+      ctx.beginPath();
+      ctx.moveTo(rx, ry);
+      ctx.lineTo(rx - p.length * minDim * 0.5, ry + p.length * minDim);
+      ctx.stroke();
+
+      if (!isPaused && motion !== false) {
+        p.y += p.speed * (1 + intensity);
+        p.x -= 0.002;
+        if (p.y > 1) {
+          p.y = 0;
+          p.x += 0.05;
+        }
+      }
+    });
+    ctx.globalAlpha = 1;
+
+    ctx.lineWidth = 3;
+    let dashOffset = motion === false ? 0 : -time * 40;
+    ctx.setLineDash([12, 12]);
+
+    ctx.strokeStyle = tokens.ocean;
+    ctx.lineDashOffset = -dashOffset;
+
+    ctx.beginPath();
+    ctx.moveTo(cx - width * 0.35, ground);
+    ctx.bezierCurveTo(cx - width * 0.15, height * 0.6, cx - width * 0.15, height * 0.3, cx - width * 0.3, height * 0.1);
+    ctx.stroke();
+    drawArrowHead(cx - width * 0.3, height * 0.1, -Math.PI * 0.8, tokens.ocean);
+
+    ctx.beginPath();
+    ctx.moveTo(cx + width * 0.35, ground);
+    ctx.bezierCurveTo(cx + width * 0.15, height * 0.6, cx + width * 0.15, height * 0.3, cx + width * 0.3, height * 0.1);
+    ctx.stroke();
+    drawArrowHead(cx + width * 0.3, height * 0.1, -Math.PI * 0.2, tokens.ocean);
+
+    if (intensity > 0.05) {
+      let arrowLen = height * 0.6 * intensity;
+      let startY = height * 0.1;
+
+      ctx.strokeStyle = tokens.coral;
+      ctx.lineDashOffset = dashOffset;
+      ctx.globalAlpha = intensity;
+
+      [-width * 0.08, 0, width * 0.08].forEach(dx => {
+        ctx.beginPath();
+        ctx.moveTo(cx + dx, startY);
+        ctx.lineTo(cx + dx, startY + arrowLen);
+        ctx.stroke();
+        drawArrowHead(cx + dx, startY + arrowLen, Math.PI / 2, tokens.coral);
+      });
+      ctx.globalAlpha = 1;
+    }
+    ctx.setLineDash([]);
+
+    ctx.font = "bold 15px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillStyle = tokens.oceanDeep;
+
+    ctx.fillText("眼墙上升气流", cx - width * 0.3, height * 0.85 + 20);
+    ctx.fillText("眼墙上升气流", cx + width * 0.3, height * 0.85 + 20);
+
+    ctx.font = "13px sans-serif";
+    ctx.fillText("(暴雨、厚云)", cx - width * 0.3, height * 0.85 + 40);
+    ctx.fillText("(暴雨、厚云)", cx + width * 0.3, height * 0.85 + 40);
+
+    if (intensity > 0.3) {
+      ctx.globalAlpha = intensity;
+      ctx.fillStyle = tokens.coral;
+      ctx.font = "bold 16px sans-serif";
+      ctx.fillText("台风眼", cx, ground - 60);
+      ctx.font = "14px sans-serif";
+      ctx.fillText("下沉气流受压增温", cx, ground - 35);
+      ctx.fillText("云滴蒸发，中心晴朗", cx, ground - 15);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  function loop() {
+    if (!isPaused) {
+      if (autoPlay && intensity < 1) {
+        intensity += 0.0025;
+        if (intensity >= 1) {
+          intensity = 1;
+          autoPlay = false;
+        }
+        updateStatus();
+      }
+      time += 0.016;
+      draw();
+    }
+    animationId = requestAnimationFrame(loop);
+  }
+
+  if (motion === false) {
+    intensity = 1;
+    autoPlay = false;
+    updateStatus();
+  }
+
+  return {
+    resize(size) {
+      width = size.width;
+      height = size.height;
+      dpr = size.dpr || 1;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+      if (motion === false) draw();
+    },
+    pause() {
+      isPaused = true;
+    },
+    resume() {
+      if (motion === false) return;
+      isPaused = false;
+      if (!animationId) loop();
+    },
+    reset() {
+      intensity = 0;
+      autoPlay = true;
+      time = 0;
+      updateStatus();
+      if (motion === false) {
+        intensity = 1;
+        autoPlay = false;
+        updateStatus();
+        draw();
+      }
+    },
+    destroy() {
+      isPaused = true;
+      if (animationId) cancelAnimationFrame(animationId);
+      root.innerHTML = '';
+    }
+  };
+});
+
+
+registerDemo("step-11", ({ root, shadow, signal, motion, tokens }) => {
+  // 注入 HTML 骨架
+  root.innerHTML = `
+    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; background: ${tokens.paper}; font-family: system-ui, sans-serif; overflow: hidden;">
+
+      <!-- 核心动画/画布区域 -->
+      <div id="canvas-container" style="position: relative; flex: 1; min-height: 0; overflow: hidden; background: ${tokens.paper};">
+        <canvas id="typhoon-canvas" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block;"></canvas>
+
+        <!-- 数据信息面板 -->
+        <div id="stats-panel" style="position: absolute; top: 16px; left: 16px; padding: 12px 16px; background: rgba(255, 255, 255, 0.85); border: 1px solid ${tokens.muted}; border-radius: 8px; pointer-events: none; min-width: 200px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); backdrop-filter: blur(4px);">
+          <div style="font-size: 12px; color: ${tokens.ink}; opacity: 0.7; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">当前扫描区域</div>
+          <div id="zone-name" style="font-size: 18px; font-weight: 800; margin-bottom: 12px; transition: color 0.3s;"></div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px dashed ${tokens.muted}; padding-bottom: 4px;">
+            <span style="font-size: 13px; color: ${tokens.ink};">最大风速</span>
+            <span id="wind-speed" style="font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums;"></span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 13px; color: ${tokens.ink};">降水强度</span>
+            <span id="rainfall" style="font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums;"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部控制区域 -->
+      <div style="height: 64px; padding: 0 20px; background: ${tokens.paper}; border-top: 1px solid ${tokens.muted}; display: flex; align-items: center; gap: 16px; z-index: 10;">
+        <label for="probe-slider" style="font-size: 14px; font-weight: 700; color: ${tokens.ink}; white-space: nowrap; cursor: pointer;">
+          距中心距离
+        </label>
+        <input type="range" id="probe-slider" min="0" max="100" value="22" aria-label="调整扫描半径" style="flex: 1; cursor: pointer; accent-color: ${tokens.gold};">
+        <div id="radius-val" style="font-size: 14px; font-weight: 600; color: ${tokens.ink}; width: 48px; text-align: right; font-variant-numeric: tabular-nums;">22%</div>
+      </div>
+    </div>
+  `;
+
+  // 获取 DOM 元素
+  const canvasContainer = root.querySelector('#canvas-container');
+  const canvas = root.querySelector('#typhoon-canvas');
+  const ctx = canvas.getContext('2d', { alpha: false });
+  const slider = root.querySelector('#probe-slider');
+  const zoneNameEl = root.querySelector('#zone-name');
+  const windSpeedEl = root.querySelector('#wind-speed');
+  const rainfallEl = root.querySelector('#rainfall');
+  const radiusValEl = root.querySelector('#radius-val');
+
+  // 状态变量
+  let width, height, centerX, centerY, maxRadius;
+  let dpr = 1;
+  let isPlaying = motion;
+  let rafId = null;
+  let lastTime = globalThis.performance.now();
+
+  // 粒子系统
+  const numParticles = motion ? 1500 : 800;
+  let particles = [];
+
+  function initParticles() {
+    particles = [];
+    for (let i = 0; i < numParticles; i++) {
+      particles.push({
+        r: Math.random(), // 0 到 1 的归一化半径
+        theta: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  // 获取特定半径的科学数据与视觉属性
+  function getStats(rNorm) {
+    if (rNorm < 0.15) {
+      // 台风眼 (Eye)
+      const intensity = rNorm / 0.15;
+      return {
+        zone: '台风眼 (Eye)',
+        desc: '宁静、下沉气流',
+        wind: 10 + 20 * intensity,
+        rain: 0,
+        color: tokens.cyan,
+        vTheta: 0.3 + 0.5 * intensity,
+        vR: 0,
+        alpha: 0.15
+      };
+    } else if (rNorm < 0.3) {
+      // 眼墙 (Eyewall)
+      const dist = Math.abs(rNorm - 0.225) / 0.075;
+      const intensity = 1 - dist; // 0.225处为1，边缘为0
+      return {
+        zone: '眼墙 (Eyewall)',
+        desc: '最强风雨区',
+        wind: 120 + 130 * intensity, // 最高可达 250 km/h
+        rain: 40 + 60 * intensity,   // 最高可达 100 mm/h
+        color: tokens.coral,
+        vTheta: 3.5 + 2.5 * intensity, // 极高的角速度
+        vR: -0.05, // 强烈的上升气流导致底层向内汇聚
+        alpha: 0.85
+      };
+    } else {
+      // 螺旋雨带 (Rainbands)
+      const intensity = 1 - (rNorm - 0.3) / 0.7;
+      return {
+        zone: '螺旋雨带 (Rainbands)',
+        desc: '阵发性狂风暴雨',
+        wind: 50 + 70 * intensity,
+        rain: 10 + 30 * intensity,
+        color: tokens.oceanDeep,
+        vTheta: 0.8 + 1.2 * intensity,
+        vR: -0.12, // 较快的外围流入
+        alpha: 0.6
+      };
+    }
+  }
+
+  // 尺寸适配
+  function applySize(size) {
+    width = size.width;
+    height = size.height;
+    dpr = size.dpr || 1;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+
+    centerX = width * dpr / 2;
+    centerY = height * dpr / 2;
+    // 留出一定边缘余量
+    maxRadius = Math.min(centerX, centerY) * 0.9;
+
+    if (!isPlaying) draw(globalThis.performance.now());
+  }
+
+  // 渲染函数
+  function draw(time) {
+    const dt = Math.min((time - lastTime) / 1000, 0.05);
+    lastTime = time;
+
+    // 填充背景
+    ctx.fillStyle = tokens.paper;
+    ctx.fillRect(0, 0, width * dpr, height * dpr);
+
+    // 绘制结构底色环
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, maxRadius * 0.15, 0, Math.PI * 2);
+    ctx.fillStyle = tokens.cyan + '1A'; // 10% 透明度
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, maxRadius * 0.3, 0, Math.PI * 2);
+    ctx.arc(centerX, centerY, maxRadius * 0.15, 0, Math.PI * 2, true);
+    ctx.fillStyle = tokens.coral + '1A';
+    ctx.fill();
+
+    // 更新和绘制粒子
+    for (let p of particles) {
+      const stats = getStats(p.r);
+
+      if (isPlaying && motion) {
+        p.theta += stats.vTheta * dt;
+        p.r += stats.vR * dt;
+
+        // 眼墙强上升气流：粒子到达眼墙内侧时被抽走并重新在外围生成
+        if (p.r < 0.15 && Math.random() < 0.15) {
+          p.r = 1.0;
+          p.theta = Math.random() * Math.PI * 2;
+        }
+        if (p.r < 0) p.r = 1.0;
+      }
+
+      // 计算位置
+      const rPx = p.r * maxRadius;
+      const x = centerX + rPx * Math.cos(p.theta);
+      const y = centerY + rPx * Math.sin(p.theta);
+
+      // 绘制流线（利用速度计算尾迹，静态下也能显示风向）
+      const tailDt = motion ? 0.03 : 0.06;
+      const nextTheta = p.theta + stats.vTheta * tailDt;
+      const nextR = p.r + stats.vR * tailDt;
+      const nextX = centerX + (nextR * maxRadius) * Math.cos(nextTheta);
+      const nextY = centerY + (nextR * maxRadius) * Math.sin(nextTheta);
+
+      // 螺旋臂视觉效果：在雨带区利用正弦波制造密度差异
+      let alpha = stats.alpha;
+      if (p.r > 0.3) {
+        const arm = Math.sin(3 * p.theta + 12 * p.r);
+        if (arm < 0) alpha *= 0.15; // 不在螺旋臂上的粒子变暗
+      }
+
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(nextX, nextY);
+      ctx.strokeStyle = stats.color;
+      ctx.globalAlpha = alpha;
+      ctx.lineWidth = 1.8 * dpr;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1.0;
+
+    // 绘制探针（扫描环）
+    const rNorm = slider.value / 100;
+    const probeR = rNorm * maxRadius;
+
+    // 高亮当前区域边界
+    ctx.beginPath();
+    if (rNorm < 0.15) {
+      ctx.arc(centerX, centerY, maxRadius * 0.15, 0, Math.PI * 2);
+      ctx.strokeStyle = tokens.cyan;
+    } else if (rNorm < 0.3) {
+      ctx.arc(centerX, centerY, maxRadius * 0.3, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, maxRadius * 0.15, 0, Math.PI * 2, true);
+      ctx.strokeStyle = tokens.coral;
+    } else {
+      ctx.arc(centerX, centerY, maxRadius, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, maxRadius * 0.3, 0, Math.PI * 2, true);
+      ctx.strokeStyle = tokens.oceanDeep;
+    }
+    ctx.lineWidth = 1 * dpr;
+    ctx.globalAlpha = 0.3;
+    ctx.stroke();
+
+    // 探针虚线环
+    ctx.globalAlpha = 1.0;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, probeR, 0, Math.PI * 2);
+    ctx.strokeStyle = tokens.gold;
+    ctx.lineWidth = 2 * dpr;
+    ctx.setLineDash([6 * dpr, 6 * dpr]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // 中心十字准星
+    ctx.beginPath();
+    ctx.moveTo(centerX - 8 * dpr, centerY);
+    ctx.lineTo(centerX + 8 * dpr, centerY);
+    ctx.moveTo(centerX, centerY - 8 * dpr);
+    ctx.lineTo(centerX, centerY + 8 * dpr);
+    ctx.strokeStyle = tokens.muted;
+    ctx.lineWidth = 1.5 * dpr;
+    ctx.stroke();
+
+    // 更新 DOM 数据面板
+    const currentStats = getStats(rNorm);
+    zoneNameEl.textContent = currentStats.zone;
+    zoneNameEl.style.color = currentStats.color;
+
+    windSpeedEl.textContent = `${Math.round(currentStats.wind)} km/h`;
+    windSpeedEl.style.color = currentStats.color;
+
+    rainfallEl.textContent = `${Math.round(currentStats.rain)} mm/h`;
+    rainfallEl.style.color = currentStats.color;
+
+    radiusValEl.textContent = `${slider.value}%`;
+
+    if (isPlaying && motion) {
+      rafId = requestAnimationFrame(draw);
+    }
+  }
+
+  // 交互事件
+  slider.addEventListener('input', () => {
+    if (!isPlaying) {
+      draw(globalThis.performance.now());
+    }
+  });
+
+  // 初始化
+  initParticles();
+
+  // 暴露生命周期 API
+  return {
+    resize(size) {
+      applySize(size);
+      if (motion && isPlaying && !rafId) {
+        lastTime = globalThis.performance.now();
+        rafId = requestAnimationFrame(draw);
+      }
+    },
+    pause() {
+      isPlaying = false;
+      if (rafId) cancelAnimationFrame(rafId);
+    },
+    resume() {
+      if (!motion) return;
+      isPlaying = true;
+      lastTime = globalThis.performance.now();
+      rafId = requestAnimationFrame(draw);
+    },
+    reset() {
+      slider.value = 22; // 重置到最危险的眼墙区域
+      initParticles();
+      if (!isPlaying) draw(globalThis.performance.now());
+    },
+    destroy() {
+      isPlaying = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      root.innerHTML = '';
+    }
+  };
+});
+
+
+registerDemo("step-12", ({ root, shadow, signal, motion, tokens }) => {
+  root.innerHTML = `
+    <style>
+      .step12-container {
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column;
+        background: ${tokens.paper};
+        font-family: system-ui, sans-serif;
+        color: ${tokens.ink};
+        overflow: hidden;
+      }
+      .step12-controls {
+        padding: 12px 16px;
+        display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+        border-bottom: 1px solid ${tokens.muted}40;
+        background: rgba(255, 255, 255, 0.8);
+        z-index: 10;
+      }
+      .step12-btn-group {
+        display: flex; gap: 8px;
+      }
+      .step12-btn {
+        padding: 6px 12px; border: 1px solid ${tokens.ocean};
+        background: transparent; color: ${tokens.ocean};
+        border-radius: 4px; cursor: pointer; font-size: 14px;
+        transition: all 0.2s;
+      }
+      .step12-btn.active {
+        background: ${tokens.ocean}; color: #fff;
+      }
+      .step12-slider-group {
+        display: flex; align-items: center; gap: 8px; flex: 1; min-width: 200px;
+      }
+      .step12-slider {
+        flex: 1; cursor: pointer;
+        accent-color: ${tokens.coral};
+      }
+      .step12-status {
+        font-size: 14px; font-weight: bold; color: ${tokens.coral};
+        width: 140px; text-align: right;
+      }
+      .step12-views {
+        flex: 1; display: flex; flex-direction: row; min-height: 0;
+      }
+      .step12-view {
+        flex: 1; position: relative; min-width: 0;
+        border-right: 1px solid ${tokens.muted}40;
+      }
+      .step12-view:last-child { border-right: none; }
+      .step12-canvas {
+        position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+      }
+      .step12-label {
+        position: absolute; top: 12px; left: 12px;
+        font-size: 14px; font-weight: bold; color: ${tokens.ink};
+        background: ${tokens.paper}cc; padding: 4px 8px; border-radius: 4px;
+        pointer-events: none;
+      }
+      @media (max-aspect-ratio: 4/5) {
+        .step12-views { flex-direction: column; }
+        .step12-view { border-right: none; border-bottom: 1px solid ${tokens.muted}40; }
+        .step12-view:last-child { border-bottom: none; }
+      }
+    </style>
+    <div class="step12-container">
+      <div class="step12-controls">
+        <div class="step12-btn-group">
+          <button class="step12-btn active" id="btn-ocean">温暖海洋 (供能)</button>
+          <button class="step12-btn" id="btn-land">登陆/冷水 (切断)</button>
+        </div>
+        <div class="step12-slider-group">
+          <label style="font-size:14px; white-space:nowrap;">追踪气块:</label>
+          <input type="range" class="step12-slider" id="slider-trace" min="0" max="300" value="0">
+        </div>
+        <div class="step12-status" id="status-text">近海面流入</div>
+      </div>
+      <div class="step12-views">
+        <div class="step12-view">
+          <canvas class="step12-canvas" id="canvas-top" aria-label="台风俯视图动画"></canvas>
+          <div class="step12-label">卫星俯视图</div>
+        </div>
+        <div class="step12-view">
+          <canvas class="step12-canvas" id="canvas-side" aria-label="台风垂直剖面图动画"></canvas>
+          <div class="step12-label">垂直剖面图</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const canvasTop = root.querySelector('#canvas-top');
+  const canvasSide = root.querySelector('#canvas-side');
+  const ctxTop = canvasTop.getContext('2d');
+  const ctxSide = canvasSide.getContext('2d');
+  const btnOcean = root.querySelector('#btn-ocean');
+  const btnLand = root.querySelector('#btn-land');
+  const slider = root.querySelector('#slider-trace');
+  const statusText = root.querySelector('#status-text');
+
+  let widthTop = 0, heightTop = 0, widthSide = 0, heightSide = 0;
+  let dpr = 1;
+  let reqId;
+  let isPlaying = motion;
+
+  let particles = [];
+  let eyeParticles = [];
+  let currentEnergy = 1.0;
+  let energyTarget = 1.0;
+  let tracerProgress = 0;
+  let isTracing = false;
+
+  function initParticles() {
+    particles = [];
+    eyeParticles = [];
+    if (!motion) {
+      for (let i = 0; i < 200; i++) {
+        particles.push({
+          progress: Math.random() * 3,
+          side: Math.random() > 0.5 ? 1 : -1,
+          angleOffset: Math.random() * Math.PI * 2,
+          speed: 0
+        });
+      }
+      for (let i = 0; i < 30; i++) {
+        eyeParticles.push({
+          progress: Math.random(),
+          angleOffset: Math.random() * Math.PI * 2,
+          speed: 0
+        });
+      }
+    }
+  }
+  initParticles();
+
+  function spawnParticle() {
+    particles.push({
+      progress: 0,
+      side: Math.random() > 0.5 ? 1 : -1,
+      angleOffset: Math.random() * Math.PI * 2,
+      speed: 0.004 + Math.random() * 0.004
+    });
+  }
+
+  function spawnEyeParticle() {
+    eyeParticles.push({
+      progress: 0,
+      angleOffset: Math.random() * Math.PI * 2,
+      speed: 0.002 + Math.random() * 0.002
+    });
+  }
+
+  function getParticlePos(p, angleOffset) {
+    let R, Z, theta, color;
+    if (p < 1) {
+      R = 1.0 - 0.8 * p;
+      Z = 0.05;
+      theta = angleOffset + p * 2 * Math.PI;
+      color = tokens.coral;
+    } else if (p < 2) {
+      let t = p - 1;
+      R = 0.2 + 0.05 * t * t;
+      Z = 0.05 + 0.85 * t;
+      theta = angleOffset + 2 * Math.PI + t * 2 * Math.PI;
+      color = tokens.cyan;
+    } else {
+      let t = p - 2;
+      R = 0.25 + 0.75 * t;
+      Z = 0.9 + 0.05 * t;
+      theta = angleOffset + 4 * Math.PI - t * Math.PI;
+      color = tokens.ocean;
+    }
+    return { R, Z, theta, color };
+  }
+
+  function getEyeParticlePos(p, angleOffset) {
+    let R = 0.05 + 0.08 * Math.sin(angleOffset);
+    let Z = 0.9 - 0.7 * p;
+    let theta = angleOffset + p * Math.PI;
+    return { R, Z, theta, color: tokens.gold };
+  }
+
+  function drawArrowLine(ctx, x1, y1, x2, y2) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    const angle = Math.atan2(y2 - y1, x2 - x1);
+    const headLen = 8;
+    ctx.beginPath();
+    ctx.moveTo(x2, y2);
+    ctx.lineTo(x2 - headLen * Math.cos(angle - Math.PI / 6), y2 - headLen * Math.sin(angle - Math.PI / 6));
+    ctx.lineTo(x2 - headLen * Math.cos(angle + Math.PI / 6), y2 - headLen * Math.sin(angle + Math.PI / 6));
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  function drawTracer(ctx, x, y, color) {
+    ctx.beginPath();
+    ctx.arc(x, y, 6, 0, Math.PI * 2);
+    ctx.fillStyle = '#fff';
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = color;
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(x, y, 14, 0, Math.PI * 2);
+    ctx.fillStyle = color + '50';
+    ctx.fill();
+  }
+
+  function drawTopView() {
+    ctxTop.clearRect(0, 0, widthTop, heightTop);
+    const cx = widthTop / 2;
+    const cy = heightTop / 2;
+    const maxR = Math.min(widthTop, heightTop) * 0.45;
+
+    ctxTop.strokeStyle = tokens.muted + '40';
+    ctxTop.lineWidth = 1;
+    ctxTop.beginPath();
+    ctxTop.arc(cx, cy, maxR * 0.2, 0, Math.PI * 2);
+    ctxTop.stroke();
+
+    ctxTop.strokeStyle = tokens.ink + '20';
+    ctxTop.fillStyle = tokens.ink + '20';
+    ctxTop.lineWidth = 2;
+    for (let i = 0; i < 4; i++) {
+      let a0 = i * Math.PI / 2;
+      let r1 = maxR * 0.9, r2 = maxR * 0.3;
+      let a1 = a0, a2 = a0 + Math.PI * 0.8;
+      drawArrowLine(ctxTop, cx + Math.cos(a1) * r1, cy + Math.sin(a1) * r1, cx + Math.cos(a2) * r2, cy + Math.sin(a2) * r2);
+    }
+
+    particles.forEach(p => {
+      const { R, theta, color } = getParticlePos(p.progress, p.angleOffset);
+      const r = R * maxR;
+      ctxTop.fillStyle = color;
+      ctxTop.globalAlpha = motion ? currentEnergy * 0.8 : 0.6;
+      ctxTop.beginPath();
+      ctxTop.arc(cx + Math.cos(theta) * r, cy + Math.sin(theta) * r, 2, 0, Math.PI * 2);
+      ctxTop.fill();
+    });
+    ctxTop.globalAlpha = 1.0;
+
+    if (isTracing || !motion) {
+      const { R, theta, color } = getParticlePos(tracerProgress, 0);
+      drawTracer(ctxTop, cx + Math.cos(theta) * R * maxR, cy + Math.sin(theta) * R * maxR, color);
+    }
+  }
+
+  function drawSideView() {
+    ctxSide.clearRect(0, 0, widthSide, heightSide);
+    const cx = widthSide / 2;
+    const bottomY = heightSide * 0.85;
+    const maxW = widthSide * 0.45;
+    const maxH = heightSide * 0.75;
+
+    ctxSide.fillStyle = tokens.gold + '40';
+    ctxSide.fillRect(0, bottomY, widthSide, heightSide - bottomY);
+    ctxSide.fillStyle = tokens.ocean;
+    ctxSide.globalAlpha = currentEnergy;
+    ctxSide.fillRect(0, bottomY, widthSide, heightSide - bottomY);
+    ctxSide.globalAlpha = 1.0;
+
+    ctxSide.fillStyle = tokens.muted + '20';
+    [1, -1].forEach(side => {
+      ctxSide.beginPath();
+      ctxSide.moveTo(cx + side * 0.15 * maxW, bottomY);
+      ctxSide.lineTo(cx + side * 0.25 * maxW, bottomY);
+      ctxSide.lineTo(cx + side * 0.35 * maxW, bottomY - 0.9 * maxH);
+      ctxSide.lineTo(cx + side * 0.15 * maxW, bottomY - 0.9 * maxH);
+      ctxSide.fill();
+    });
+
+    ctxSide.strokeStyle = tokens.ink + '20';
+    ctxSide.fillStyle = tokens.ink + '20';
+    ctxSide.lineWidth = 2;
+    drawArrowLine(ctxSide, cx - 0.8 * maxW, bottomY - 0.05 * maxH, cx - 0.3 * maxW, bottomY - 0.05 * maxH);
+    drawArrowLine(ctxSide, cx + 0.8 * maxW, bottomY - 0.05 * maxH, cx + 0.3 * maxW, bottomY - 0.05 * maxH);
+    drawArrowLine(ctxSide, cx - 0.22 * maxW, bottomY - 0.2 * maxH, cx - 0.25 * maxW, bottomY - 0.7 * maxH);
+    drawArrowLine(ctxSide, cx + 0.22 * maxW, bottomY - 0.2 * maxH, cx + 0.25 * maxW, bottomY - 0.7 * maxH);
+    drawArrowLine(ctxSide, cx - 0.3 * maxW, bottomY - 0.9 * maxH, cx - 0.8 * maxW, bottomY - 0.9 * maxH);
+    drawArrowLine(ctxSide, cx + 0.3 * maxW, bottomY - 0.9 * maxH, cx + 0.8 * maxW, bottomY - 0.9 * maxH);
+    drawArrowLine(ctxSide, cx, bottomY - 0.8 * maxH, cx, bottomY - 0.3 * maxH);
+
+    particles.forEach(p => {
+      const { R, Z, color } = getParticlePos(p.progress, p.angleOffset);
+      ctxSide.fillStyle = color;
+      ctxSide.globalAlpha = motion ? currentEnergy * 0.8 : 0.6;
+      ctxSide.beginPath();
+      ctxSide.arc(cx + p.side * R * maxW, bottomY - Z * maxH, 2, 0, Math.PI * 2);
+      ctxSide.fill();
+    });
+
+    eyeParticles.forEach(p => {
+      const { R, Z, color } = getEyeParticlePos(p.progress, p.angleOffset);
+      ctxSide.fillStyle = color;
+      ctxSide.globalAlpha = motion ? 0.8 : 0.6;
+      ctxSide.beginPath();
+      ctxSide.arc(cx + (Math.cos(p.angleOffset) > 0 ? 1 : -1) * R * maxW, bottomY - Z * maxH, 2, 0, Math.PI * 2);
+      ctxSide.fill();
+    });
+    ctxSide.globalAlpha = 1.0;
+
+    if (isTracing || !motion) {
+      const { R, Z, color } = getParticlePos(tracerProgress, 0);
+      drawTracer(ctxSide, cx + R * maxW, bottomY - Z * maxH, color);
+    }
+  }
+
+  function update() {
+    if (motion) {
+      currentEnergy += (energyTarget - currentEnergy) * 0.05;
+
+      if (Math.random() < currentEnergy * 0.8) spawnParticle();
+      if (Math.random() < currentEnergy * 0.15) spawnEyeParticle();
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        let p = particles[i];
+        p.progress += p.speed * (0.2 + 0.8 * currentEnergy);
+        if (p.progress >= 3) particles.splice(i, 1);
+      }
+      for (let i = eyeParticles.length - 1; i >= 0; i--) {
+        let p = eyeParticles[i];
+        p.progress += p.speed * (0.2 + 0.8 * currentEnergy);
+        if (p.progress >= 1) eyeParticles.splice(i, 1);
+      }
+    }
+    drawTopView();
+    drawSideView();
+  }
+
+  function loop() {
+    if (!isPlaying) return;
+    update();
+    reqId = requestAnimationFrame(loop);
+  }
+
+  function updateTracerText(val) {
+    if (val < 100) {
+      statusText.textContent = "近海面流入";
+      statusText.style.color = tokens.coral;
+    } else if (val < 200) {
+      statusText.textContent = "眼墙快速上升";
+      statusText.style.color = tokens.cyan;
+    } else {
+      statusText.textContent = "高空向外流出";
+      statusText.style.color = tokens.ocean;
+    }
+  }
+
+  btnOcean.addEventListener('click', () => {
+    energyTarget = 1.0;
+    btnOcean.classList.add('active');
+    btnLand.classList.remove('active');
+  });
+
+  btnLand.addEventListener('click', () => {
+    energyTarget = 0.0;
+    btnLand.classList.add('active');
+    btnOcean.classList.remove('active');
+  });
+
+  slider.addEventListener('input', (e) => {
+    isTracing = true;
+    const val = parseInt(e.target.value);
+    tracerProgress = val / 100;
+    updateTracerText(val);
+    if (!isPlaying) {
+      drawTopView();
+      drawSideView();
+    }
+  });
+
+  if (motion) loop();
+
+  return {
+    resize({ width, height, dpr: nextDpr }) {
+      dpr = nextDpr || 1;
+      const rectTop = canvasTop.parentElement.getBoundingClientRect();
+      widthTop = rectTop.width;
+      heightTop = rectTop.height;
+      canvasTop.width = widthTop * dpr;
+      canvasTop.height = heightTop * dpr;
+      ctxTop.scale(dpr, dpr);
+
+      const rectSide = canvasSide.parentElement.getBoundingClientRect();
+      widthSide = rectSide.width;
+      heightSide = rectSide.height;
+      canvasSide.width = widthSide * dpr;
+      canvasSide.height = heightSide * dpr;
+      ctxSide.scale(dpr, dpr);
+
+      if (!isPlaying) {
+        drawTopView();
+        drawSideView();
+      }
+    },
+    pause() {
+      isPlaying = false;
+    },
+    resume() {
+      if (!isPlaying && motion) {
+        isPlaying = true;
+        loop();
+      }
+    },
+    reset() {
+      initParticles();
+      currentEnergy = 1.0;
+      energyTarget = 1.0;
+      btnOcean.classList.add('active');
+      btnLand.classList.remove('active');
+      slider.value = 0;
+      tracerProgress = 0;
+      isTracing = false;
+      updateTracerText(0);
+      if (!isPlaying) {
+        drawTopView();
+        drawSideView();
+      }
+    },
+    destroy() {
+      isPlaying = false;
+      cancelAnimationFrame(reqId);
+      root.innerHTML = '';
+    }
+  };
+});
+
+
+registerDemo("step-13", ({ root, shadow, signal, motion, tokens }) => {
+  // 注入样式与 HTML
+  root.innerHTML = `
+    <style>
+      .canvas-container {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background-color: ${tokens.paper};
+      }
+      canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        touch-action: none;
+        outline: none;
+      }
+      canvas:focus-visible {
+        outline: 3px solid ${tokens.blue};
+        outline-offset: -3px;
+      }
+    </style>
+    <div class="canvas-container">
+      <canvas tabindex="0" aria-label="三维台风环流模型，支持鼠标拖拽或方向键旋转视角" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown Home"></canvas>
+    </div>
+  `;
+
+  const canvas = root.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+
+  // 状态变量
+  let playing = false;
+  let rafId = null;
+  let canvasWidth = 0;
+  let canvasHeight = 0;
+  let canvasDpr = 1;
+
+  // 视角控制
+  const defaultYaw = Math.PI / 4;
+  const defaultPitch = Math.PI / 8;
+  let yaw = defaultYaw;
+  let pitch = defaultPitch;
+  let isDragging = false;
+  let lastPointerX = 0;
+  let lastPointerY = 0;
+
+  // 物理常量与安全区
+  const Rout = 1.2;
+  const Rin = 0.3;
+  const H = 0.8;
+  const cameraZ = 3.0; // 相机距离
+  let safeScale = 100;
+  let cx = 0;
+  let cy = 0;
+
+  // 粒子系统
+  const particles = [];
+  const numMain = 350;
+  const numDown = 50;
+
+  function initParticles() {
+    particles.length = 0;
+    for (let i = 0; i < numMain; i++) {
+      particles.push({
+        type: 'main',
+        t: Math.random(),
+        speed: 0.0015 + Math.random() * 0.0015,
+        offset: Math.random() * Math.PI * 2
+      });
+    }
+    for (let i = 0; i < numDown; i++) {
+      particles.push({
+        type: 'down',
+        t: Math.random(),
+        speed: 0.001 + Math.random() * 0.001,
+        offset: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  // 获取粒子在 t 时刻的 3D 坐标与颜色
+  function getParticleState(p, t) {
+    let r, y, color;
+    let alpha = 1.0;
+    let theta = p.offset;
+
+    if (t < 0.05) alpha = t / 0.05;
+    if (t > 0.95) alpha = (1 - t) / 0.05;
+
+    if (p.type === 'main') {
+      theta += t * Math.PI * 8; // 旋转圈数
+      if (t < 0.4) {
+        // 1. 海面入流
+        let pt = t / 0.4;
+        r = Rout - (Rout - Rin) * pt;
+        y = -H / 2;
+        color = tokens.cyan;
+      } else if (t < 0.6) {
+        // 2. 眼墙上升
+        let pt = (t - 0.4) / 0.2;
+        r = Rin + Math.sin(pt * Math.PI) * 0.05; // 微微向外鼓起
+        y = -H / 2 + H * pt;
+        color = tokens.coral;
+      } else {
+        // 3. 高空外流
+        let pt = (t - 0.6) / 0.4;
+        r = Rin + (Rout - Rin) * (1 - Math.pow(1 - pt, 2)); // 减速向外
+        y = H / 2;
+        color = tokens.gold;
+      }
+    } else {
+      // 4. 眼内下沉
+      theta += t * Math.PI * 3;
+      r = (Rin * 0.5) * t;
+      y = H / 2 - H * t;
+      color = tokens.ocean;
+    }
+
+    return {
+      x: r * Math.cos(theta),
+      y: y,
+      z: r * Math.sin(theta),
+      color,
+      alpha
+    };
+  }
+
+  // 3D 投影
+  function project(x, y, z) {
+    // 偏航角旋转 (Y轴)
+    let x1 = x * Math.cos(yaw) + z * Math.sin(yaw);
+    let z1 = -x * Math.sin(yaw) + z * Math.cos(yaw);
+    // 俯仰角旋转 (X轴)
+    let y2 = y * Math.cos(pitch) - z1 * Math.sin(pitch);
+    let z2 = y * Math.sin(pitch) + z1 * Math.cos(pitch);
+
+    // 透视除法
+    let scale = cameraZ / (cameraZ + z2);
+    let px = cx + x1 * scale * safeScale;
+    let py = cy - y2 * scale * safeScale;
+
+    return { px, py, z: z2, scale };
+  }
+
+  // 绘制圆角文字背景
+  function drawLabel(text, px, py, scale, color) {
+    ctx.font = `bold ${Math.max(10, 12 * scale)}px sans-serif`;
+    const metrics = ctx.measureText(text);
+    const padX = 6 * scale;
+    const padY = 4 * scale;
+    const w = metrics.width + padX * 2;
+    const h = 16 * scale + padY * 2;
+
+    ctx.fillStyle = tokens.paper;
+    ctx.globalAlpha = 0.85;
+    ctx.beginPath();
+    ctx.roundRect(px - w / 2, py - h / 2, w, h, 4 * scale);
+    ctx.fill();
+
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.5 * scale;
+    ctx.globalAlpha = 1.0;
+    ctx.stroke();
+
+    ctx.fillStyle = tokens.ink;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, px, py);
+  }
+
+  // 主渲染循环
+  function draw() {
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    const primitives = [];
+
+    // 1. 构建底部网格 (海面参考)
+    for (let r of [Rin, (Rin+Rout)/2, Rout]) {
+      for (let i = 0; i < 36; i++) {
+        let a1 = (i * Math.PI * 2) / 36;
+        let a2 = ((i + 1) * Math.PI * 2) / 36;
+        primitives.push({
+          type: 'line',
+          x1: r * Math.cos(a1), y1: -H/2, z1: r * Math.sin(a1),
+          x2: r * Math.cos(a2), y2: -H/2, z2: r * Math.sin(a2),
+          color: tokens.muted, alpha: r === Rin ? 0.5 : 0.2, width: 1
+        });
+      }
+    }
+    // 网格放射线
+    for (let i = 0; i < 8; i++) {
+      let a = (i * Math.PI) / 4;
+      primitives.push({
+        type: 'line',
+        x1: Rin * Math.cos(a), y1: -H/2, z1: Rin * Math.sin(a),
+        x2: Rout * Math.cos(a), y2: -H/2, z2: Rout * Math.sin(a),
+        color: tokens.muted, alpha: 0.2, width: 1
+      });
+    }
+
+    // 2. 构建粒子轨迹
+    for (let p of particles) {
+      if (playing && motion !== false && !isDragging) {
+        p.t += p.speed;
+        if (p.t > 1) p.t -= 1;
+      }
+
+      let curr = getParticleState(p, p.t);
+      let prev = getParticleState(p, Math.max(0, p.t - 0.02)); // 拖尾长度
+
+      primitives.push({
+        type: 'trail',
+        x1: prev.x, y1: prev.y, z1: prev.z,
+        x2: curr.x, y2: curr.y, z2: curr.z,
+        color: curr.color, alpha: curr.alpha * 0.8, width: 2
+      });
+      primitives.push({
+        type: 'dot',
+        x: curr.x, y: curr.y, z: curr.z,
+        color: curr.color, alpha: curr.alpha, radius: 1.5
+      });
+    }
+
+    // 3. 投影与深度排序
+    const rendered = primitives.map(prim => {
+      if (prim.type === 'line' || prim.type === 'trail') {
+        let p1 = project(prim.x1, prim.y1, prim.z1);
+        let p2 = project(prim.x2, prim.y2, prim.z2);
+        return { ...prim, p1, p2, z: (p1.z + p2.z) / 2 };
+      } else {
+        let p = project(prim.x, prim.y, prim.z);
+        return { ...prim, p, z: p.z };
+      }
+    });
+
+    rendered.sort((a, b) => b.z - a.z); // 从远到近绘制
+
+    // 4. 绘制图元
+    for (let r of rendered) {
+      if (r.type === 'line' || r.type === 'trail') {
+        ctx.beginPath();
+        ctx.moveTo(r.p1.px, r.p1.py);
+        ctx.lineTo(r.p2.px, r.p2.py);
+        ctx.strokeStyle = r.color;
+        ctx.globalAlpha = r.alpha;
+        ctx.lineWidth = r.width * (r.p1.scale + r.p2.scale) / 2;
+        ctx.stroke();
+      } else if (r.type === 'dot') {
+        ctx.beginPath();
+        ctx.arc(r.p.px, r.p.py, r.radius * r.p.scale, 0, Math.PI * 2);
+        ctx.fillStyle = r.color;
+        ctx.globalAlpha = r.alpha;
+        ctx.fill();
+      }
+    }
+
+    // 5. 绘制 3D 标签 (悬浮在最上层，但具有透视缩放和位置)
+    ctx.globalAlpha = 1.0;
+    const labels = [
+      { text: "海面入流", x: Rout + 0.1, y: -H/2, z: 0, color: tokens.cyan },
+      { text: "眼墙上升", x: Rin + 0.1, y: 0, z: Rin + 0.1, color: tokens.coral },
+      { text: "高空外流", x: Rout + 0.1, y: H/2, z: 0, color: tokens.gold },
+      { text: "眼内下沉", x: 0, y: H/4, z: 0, color: tokens.oceanDeep }
+    ];
+
+    const projectedLabels = labels.map(l => ({ ...l, ...project(l.x, l.y, l.z) }));
+    projectedLabels.sort((a, b) => b.z - a.z);
+
+    for (let l of projectedLabels) {
+      drawLabel(l.text, l.px, l.py, l.scale, l.color);
+    }
+  }
+
+  function loop() {
+    if (playing && !isDragging && motion !== false) {
+      yaw += 0.002; // 自动缓慢旋转
+    }
+    draw();
+    if (playing) {
+      rafId = requestAnimationFrame(loop);
+    }
+  }
+
+  // 交互事件处理
+  function clampPitch(p) {
+    return Math.max(-Math.PI / 6, Math.min(Math.PI / 3, p));
+  }
+
+  canvas.addEventListener('pointerdown', (e) => {
+    isDragging = true;
+    lastPointerX = e.clientX;
+    lastPointerY = e.clientY;
+    canvas.setPointerCapture(e.pointerId);
+  });
+
+  canvas.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - lastPointerX;
+    const dy = e.clientY - lastPointerY;
+    lastPointerX = e.clientX;
+    lastPointerY = e.clientY;
+
+    yaw -= dx * 0.01;
+    pitch -= dy * 0.01;
+    pitch = clampPitch(pitch);
+
+    if (!playing) draw(); // 暂停时即时重绘
+  });
+
+  const endDrag = (e) => {
+    if (isDragging) {
+      isDragging = false;
+      canvas.releasePointerCapture(e.pointerId);
+    }
+  };
+  canvas.addEventListener('pointerup', endDrag);
+  canvas.addEventListener('pointercancel', endDrag);
+
+  canvas.addEventListener('keydown', (e) => {
+    const step = 0.1;
+    let handled = true;
+    switch (e.key) {
+      case 'ArrowLeft': yaw -= step; break;
+      case 'ArrowRight': yaw += step; break;
+      case 'ArrowUp': pitch += step; break;
+      case 'ArrowDown': pitch -= step; break;
+      case 'Home':
+        yaw = defaultYaw;
+        pitch = defaultPitch;
+        break;
+      default:
+        handled = false;
+    }
+    if (handled) {
+      e.preventDefault();
+      pitch = clampPitch(pitch);
+      if (!playing) draw();
+    }
+  });
+
+  initParticles();
+
+  return {
+    resize({ width, height, dpr }) {
+      canvasWidth = width;
+      canvasHeight = height;
+      canvasDpr = dpr;
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+
+      // 计算安全绘图区：扣除四周内边距和底部可能存在的控件遮挡
+      const pad = 24;
+      const controlsHeight = 40;
+      const safeWidth = width - pad * 2;
+      const safeHeight = height - pad * 2 - controlsHeight;
+
+      cx = width / 2;
+      cy = (height - controlsHeight) / 2;
+
+      // 把标签外伸计入径向包围范围，再预留允许视角内的最大透视放大倍率。
+      const radialExtent = Rout + 0.2;
+      const maxScale = cameraZ / (cameraZ - radialExtent);
+      const minDimension = Math.min(safeWidth, safeHeight);
+      safeScale = (minDimension / 2) / (radialExtent * maxScale) * 0.9;
+
+      draw();
+    },
+    pause() {
+      playing = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      draw(); // 同步重绘静态结果
+    },
+    resume() {
+      if (!playing) {
+        playing = true;
+        loop();
+      }
+    },
+    reset() {
+      yaw = defaultYaw;
+      pitch = defaultPitch;
+      initParticles();
+      if (!playing) draw();
+    },
+    destroy() {
+      playing = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      root.innerHTML = '';
+    }
+  };
+});
+  </script>
+</body>
+</html>

@@ -191,3 +191,49 @@ $enFiles | Where-Object { $_ -notin $cnFiles } | ForEach-Object { Write-Host "Mi
 - Implement automated content placement validation in CI/CD pipeline
 - Create translation workflow for the 5 identified English-only posts
 - Establish content review process before publishing to prevent misplacement
+
+## Rule 6: Visual Gallery Publishing Contract
+**Date**: 2026-07-18
+**Context**: Added the multilingual Visuals section and migrated the HTML Showcase experience into a first-class content type
+
+### Problem
+Long-form interactive visuals need stable, indexable URLs and multilingual discovery without forcing every work into one authoring template or splitting the experience away from the site's shared navigation and layout.
+
+### Solution
+- Treat Visuals as a top-level content type with mirrored English, Chinese, and Japanese gallery routes.
+- Keep one manifest as the source of truth for publication status, metadata, locale availability, SEO copy, and artifact IDs.
+- Support two authoring paths: the optional `tools/visual-explainer-kit/` for chapter-based explainers, and fully custom self-contained HTML for other visual forms.
+- Render work pages through the shared `Layout.astro` without iframes. Visual-specific HTML/CSS/JS may remain highly customized, but its own site header/navigation must be removed before embedding.
+
+### Implementation Requirements
+1. Add every work to `src/data/visuals-manifest.json`; do not hand-maintain a second list of sitemap URLs.
+2. Gallery routes must exist for `en`, `zh`, and `ja`; works may be progressively translated but must expose availability explicitly. Typhoon is published as a complete three-language work, including visible, dynamic, Canvas, and aria copy.
+3. Each published locale page must use the shared top navigation and have one H1, description, canonical, hreflang, OG metadata, keyboard-accessible controls, and reduced-motion behavior.
+4. Interaction changes require focused Playwright coverage; route changes also require the full SEO/E2E suite.
+5. When the product owner explicitly removes a visual, delete its artifacts and routes, return 404 for old Visuals/Blog HTML URLs, and remove it from sitemap discovery.
+
+### Future Considerations
+- Add filters, automated cover captures, or a creation CLI only after the number of works demonstrates the need.
+- Keep manifest validation and template negative tests current when adding renderers, locales, or demos.
+
+## Rule 7: Homepage Latest Visual Discovery
+**Date**: 2026-07-18
+**Context**: Added a localized latest-Visual feature to all three homepages
+
+### Problem
+The homepage needs to surface new visual work without hard-coding a slug, showing unavailable translations, or letting metadata drift from the Visuals manifest.
+
+### Solution
+- Derive the homepage feature from the published Visuals manifest.
+- Select the newest work that has an artifact for the current language.
+- Keep English, Chinese, and Japanese homepages structurally identical and localize all labels and links.
+- Render the work type from the manifest's `type` field using localized labels.
+
+### Implementation Requirements
+1. Use `getLatestVisual(lang)` rather than importing or naming a specific work in a homepage.
+2. Sort by `publishedAt` descending and exclude works without a current-language artifact.
+3. Link the featured card and the gallery CTA to locale-correct routes.
+4. Cover the three homepage locales and their featured links with Playwright tests.
+
+### Future Considerations
+- A new published work becomes the homepage feature by manifest metadata alone; homepage components should not require a slug-specific change except for optional artwork enhancements.

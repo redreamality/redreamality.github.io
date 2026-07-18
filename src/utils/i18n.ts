@@ -23,6 +23,7 @@ export const i18nConfig: I18nConfig = {
       notes: '阅读笔记',
       meditations: '沉思录',
       projects: '项目',
+      visuals: '可视化',
       about: '关于',
       tags: '标签',
       
@@ -68,6 +69,7 @@ export const i18nConfig: I18nConfig = {
       notes: 'Notes',
       meditations: 'Meditations',
       projects: 'Projects',
+      visuals: 'Visuals',
       about: 'About',
       tags: 'Tags',
       
@@ -113,6 +115,7 @@ export const i18nConfig: I18nConfig = {
       notes: '読書ノート',
       meditations: '瞑想録',
       projects: 'プロジェクト',
+      visuals: 'ビジュアル',
       about: '私について',
       tags: 'タグ',
       

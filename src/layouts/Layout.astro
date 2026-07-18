@@ -20,12 +20,15 @@ const currentLang = detectLanguageFromPath(Astro.url.pathname);
 const {
     title = t('home', currentLang) + " - Redreamality's Blog",
     description = currentLang === 'zh' ? "欢迎访问 Redreamality 的个人博客，这里汇集了关于软件开发、AI 智能体及各类技术创新项目的深度文章与实践经验。" : currentLang === 'ja' ? "Redreamalityのブログへようこそ。ソフトウェア開発、AIエージェント、最新テクノロジーに関する詳細な記事やプロジェクトの成果を公開しています。" : "Explore Redreamality's personal blog and project showcase, featuring in-depth articles on software development, AI agents, and innovative technology solutions.",
+    ogTitle = title,
+    ogDescription = description,
     image = "/images/default-og.png",
     canonicalURL = getCanonicalURL(Astro.url.pathname, currentLang, Astro.site.toString()),
     type = "website",
     publishDate,
     tags = [],
-    author = "Redreamality"
+    author = "Redreamality",
+    fullWidth = false
 } = Astro.props;
 
 const socialImageURL = new URL(image, Astro.site);
@@ -55,6 +58,7 @@ const questionsHref = getLocalizedPath('/garden/questions/', currentLang);
 const notesHref = getLocalizedPath('/garden/notes/', currentLang);
 const meditationsHref = getLocalizedPath('/garden/meditations/', currentLang);
 const projectsHref = getLocalizedPath('/projects/', currentLang);
+const visualsHref = getLocalizedPath('/visuals/', currentLang);
 const aboutHref = getLocalizedPath('/about/', currentLang);
 ---
 
@@ -110,8 +114,8 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content={type} />
         <meta property="og:url" content={canonicalURL} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
+        <meta property="og:title" content={ogTitle} />
+        <meta property="og:description" content={ogDescription} />
         <meta property="og:image" content={socialImageURL} />
         <meta property="og:site_name" content="Redreamality's Blog" />
         <meta property="og:locale" content={localeString} />
@@ -123,8 +127,8 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content={canonicalURL} />
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:description" content={description} />
+        <meta property="twitter:title" content={ogTitle} />
+        <meta property="twitter:description" content={ogDescription} />
         <meta property="twitter:image" content={socialImageURL} />
         <meta name="twitter:creator" content="@redreamality" />
         
@@ -248,6 +252,7 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
                                 </ul>
                             </div>
                         </li>
+                        <li><a href={visualsHref} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{t('visuals', currentLang)}</a></li>
                         <li><a href={projectsHref} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{t('projects', currentLang)}</a></li>
                         <li><a href={aboutHref} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{t('about', currentLang)}</a></li>
                         {!isTagPage && (
@@ -263,7 +268,10 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
                 </div>
             </div>
         </nav>
-        <main class="container mx-auto px-4 py-8 flex-grow mt-16">
+        <main class:list={[
+            'flex-grow mt-16',
+            fullWidth ? 'w-full' : 'container mx-auto px-4 py-8'
+        ]}>
             <slot />
         </main>
         <footer class="bg-surface-50 dark:bg-surface-950 border-t border-surface-200/70 dark:border-surface-800/70 mt-auto">

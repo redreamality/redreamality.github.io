@@ -1,4 +1,5 @@
 import type { Language } from './i18n';
+import type { VisualType } from './visuals';
 
 export interface HomeStrings {
   kicker: string;
@@ -7,12 +8,18 @@ export interface HomeStrings {
   // hero entry cards
   projectsTitle: string;
   projectsDesc: string;
+  visualsTitle: string;
+  visualsDesc: string;
   blogTitle: string;
   blogDesc: string;
   meditationsTitle: string;
   meditationsDesc: string;
   talksTitle: string;
   talksDesc: string;
+  latestVisualTitle: string;
+  visualTypeLabels: Record<VisualType, string>;
+  openVisual: string;
+  viewAllVisuals: string;
   // section headers
   recentBlogTitle: string;
   recentMeditationsTitle: string;
@@ -36,12 +43,21 @@ export const homeContent: Record<Language, HomeStrings> = {
     subtitle: 'Building with AI agents, and thinking out loud — projects, writing, talks, and reflections in one place.',
     projectsTitle: 'Projects',
     projectsDesc: 'Open-source work, tools, and research papers',
+    visualsTitle: 'Visuals',
+    visualsDesc: 'Interactive explanations and visual stories',
     blogTitle: 'Blog',
     blogDesc: 'Technical articles, tutorials, and analysis',
     meditationsTitle: 'Meditations',
     meditationsDesc: 'Personal reflections on engineering and time',
     talksTitle: 'Talks',
     talksDesc: 'Presentations and slides',
+    latestVisualTitle: 'Latest visual',
+    visualTypeLabels: {
+      'interactive-explainer': 'Interactive explainer',
+      'visual-story': 'Visual story',
+    },
+    openVisual: 'Explore the visual',
+    viewAllVisuals: 'View all visuals',
     recentBlogTitle: 'Recent Blog Posts',
     recentMeditationsTitle: 'From the Meditations',
     recentTalksTitle: 'Recent Talks',
@@ -60,12 +76,21 @@ export const homeContent: Record<Language, HomeStrings> = {
     subtitle: '用 AI 智能体构建，也把思考写下来——项目、文章、演讲与感悟，都在这里。',
     projectsTitle: '项目',
     projectsDesc: '开源作品、工具与研究论文',
+    visualsTitle: '可视化',
+    visualsDesc: '交互图解与视觉故事',
     blogTitle: '博客',
     blogDesc: '技术文章、教程与分析',
     meditationsTitle: '沉思录',
     meditationsDesc: '关于工程与时间的个人感悟',
     talksTitle: '演讲',
     talksDesc: '演讲与幻灯片',
+    latestVisualTitle: '最新可视化',
+    visualTypeLabels: {
+      'interactive-explainer': '交互图解',
+      'visual-story': '视觉故事',
+    },
+    openVisual: '打开可视化',
+    viewAllVisuals: '查看全部可视化',
     recentBlogTitle: '最新博客',
     recentMeditationsTitle: '沉思录摘选',
     recentTalksTitle: '最新演讲',
@@ -84,12 +109,21 @@ export const homeContent: Record<Language, HomeStrings> = {
     subtitle: 'AIエージェントでつくり、考えを書き留める——プロジェクト、記事、講演、そして思索を一か所に。',
     projectsTitle: 'プロジェクト',
     projectsDesc: 'オープンソース作品・ツール・研究論文',
+    visualsTitle: 'ビジュアル',
+    visualsDesc: 'インタラクティブな解説と視覚ストーリー',
     blogTitle: 'ブログ',
     blogDesc: '技術記事・チュートリアル・分析',
     meditationsTitle: '瞑想録',
     meditationsDesc: '工学と時間についての個人的な思索',
     talksTitle: '講演',
     talksDesc: 'プレゼンテーションとスライド',
+    latestVisualTitle: '最新ビジュアル',
+    visualTypeLabels: {
+      'interactive-explainer': 'インタラクティブ解説',
+      'visual-story': 'ビジュアルストーリー',
+    },
+    openVisual: 'ビジュアルを開く',
+    viewAllVisuals: 'すべてのビジュアルを見る',
     recentBlogTitle: '最新ブログ',
     recentMeditationsTitle: '瞑想録より',
     recentTalksTitle: '最新の講演',

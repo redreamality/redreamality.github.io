@@ -30,6 +30,10 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
+    "visual-kit": "uv run --no-project python -B tools/visual-explainer-kit/preview.py",
+    "visual-kit:test": "uv run --no-project python -B tools/visual-explainer-kit/test_builder.py",
+    "visual-kit:build": "uv run --no-project python -B tools/visual-explainer-kit/build.py --output dist/visual-kit/full && uv run --no-project python -B tools/visual-explainer-kit/build.py --output dist/visual-kit/minimal --locales en --no-overview --step-limit 1 && uv run --no-project python -B tools/visual-explainer-kit/build.py --manifest manifest-agents.json --output dist/visual-kit/agents --locales en",
+    "visual-kit:e2e": "pnpm visual-kit:test && pnpm visual-kit:build && playwright test --config=tools/visual-explainer-kit/playwright.config.ts",
     "trigger:rebuild": "node scripts/trigger-rebuild.mjs"
   },
   "dependencies": {
@@ -50,6 +54,8 @@
     "astro-robots-txt": "^1.0.0",
     "bcryptjs": "^3.0.2",
     "jsonwebtoken": "^9.0.2",
+    "postcss": "^8.5.19",
+    "postcss-selector-parser": "^7.1.4",
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.9.2"

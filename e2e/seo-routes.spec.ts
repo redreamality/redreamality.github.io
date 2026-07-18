@@ -14,7 +14,6 @@ const mustResolve = [
   '/blog/',
   '/blog/agents-of-chaos-ai-agent-failures/',
   '/ja/blog/',
-  '/ja/blog/html/agent-architecture-showcase/',
   '/garden/notes/',
   '/garden/chaos/',
   '/garden/questions/',

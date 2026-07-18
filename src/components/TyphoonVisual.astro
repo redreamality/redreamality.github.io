@@ -1,0 +1,17 @@
+---
+import type { Language } from '../utils/i18n';
+import { getTyphoonArtifactFragment } from '../utils/typhoon-artifact';
+
+interface Props {
+  lang: Language;
+  externalResources: string[];
+}
+
+const { lang, externalResources } = Astro.props;
+const artifact = getTyphoonArtifactFragment(lang, externalResources);
+---
+
+<style is:inline set:html={artifact.style}></style>
+<div id="typhoon-article" class="typhoon-visual" data-visual-artifact="typhoon">
+  <Fragment set:html={artifact.body} />
+</div>

@@ -1,0 +1,14 @@
+---
+import VisualWorkPage from '../../components/VisualWorkPage.astro';
+import { getVisualWorks, type VisualWork } from '../../utils/visuals';
+
+export function getStaticPaths() {
+  return getVisualWorks()
+    .filter((work) => Boolean(work.locales.en.artifact))
+    .map((work) => ({ params: { slug: work.slug }, props: { work } }));
+}
+
+const { work } = Astro.props as { work: VisualWork };
+---
+
+<VisualWorkPage lang="en" {work} />

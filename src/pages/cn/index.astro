@@ -1,7 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import HomeHero from '../../components/home/HomeHero.astro';
+import HomeLatestVisual from '../../components/home/HomeLatestVisual.astro';
 import HomeSections from '../../components/home/HomeSections.astro';
+import { getLatestVisual } from '../../utils/visuals';
 import {
   getBlogPosts,
   getChaosPosts,
@@ -15,6 +17,7 @@ import {
 
 // Chinese homepage (/cn/ path)
 const lang: Language = 'zh';
+const latestVisual = getLatestVisual(lang);
 
 const [posts, talks, questions, chaos, notes, meditations, tagCounts] = await Promise.all([
   getBlogPosts(lang),
@@ -29,6 +32,7 @@ const [posts, talks, questions, chaos, notes, meditations, tagCounts] = await Pr
 
 <Layout title="首页">
   <HomeHero lang={lang} />
+  <HomeLatestVisual lang={lang} visual={latestVisual} />
   <HomeSections
     lang={lang}
     posts={posts}
