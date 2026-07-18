@@ -7,6 +7,8 @@ export interface HomeStrings {
   // hero entry cards
   projectsTitle: string;
   projectsDesc: string;
+  visualsTitle: string;
+  visualsDesc: string;
   blogTitle: string;
   blogDesc: string;
   meditationsTitle: string;
@@ -36,6 +38,8 @@ export const homeContent: Record<Language, HomeStrings> = {
     subtitle: 'Building with AI agents, and thinking out loud — projects, writing, talks, and reflections in one place.',
     projectsTitle: 'Projects',
     projectsDesc: 'Open-source work, tools, and research papers',
+    visualsTitle: 'Visuals',
+    visualsDesc: 'Interactive explanations and visual stories',
     blogTitle: 'Blog',
     blogDesc: 'Technical articles, tutorials, and analysis',
     meditationsTitle: 'Meditations',
@@ -60,6 +64,8 @@ export const homeContent: Record<Language, HomeStrings> = {
     subtitle: '用 AI 智能体构建，也把思考写下来——项目、文章、演讲与感悟，都在这里。',
     projectsTitle: '项目',
     projectsDesc: '开源作品、工具与研究论文',
+    visualsTitle: '可视化',
+    visualsDesc: '交互图解与视觉故事',
     blogTitle: '博客',
     blogDesc: '技术文章、教程与分析',
     meditationsTitle: '沉思录',
@@ -84,6 +90,8 @@ export const homeContent: Record<Language, HomeStrings> = {
     subtitle: 'AIエージェントでつくり、考えを書き留める——プロジェクト、記事、講演、そして思索を一か所に。',
     projectsTitle: 'プロジェクト',
     projectsDesc: 'オープンソース作品・ツール・研究論文',
+    visualsTitle: 'ビジュアル',
+    visualsDesc: 'インタラクティブな解説と視覚ストーリー',
     blogTitle: 'ブログ',
     blogDesc: '技術記事・チュートリアル・分析',
     meditationsTitle: '瞑想録',

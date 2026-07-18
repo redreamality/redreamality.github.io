@@ -1,0 +1,212 @@
+from __future__ import annotations
+
+import html
+import json
+from pathlib import Path
+from typing import Any, Iterable
+
+
+SUPPORTED_LOCALES = ("en", "zh", "ja")
+REGISTERED_DEMOS = frozenset({"overview", "energy", "organization"})
+
+
+def read_text(path: Path) -> str:
+    return path.read_text(encoding="utf-8-sig")
+
+
+def load_manifest(path: Path) -> dict[str, Any]:
+    manifest = json.loads(read_text(path))
+    validate_manifest(manifest)
+    return manifest
+
+
+def validate_manifest(manifest: dict[str, Any]) -> None:
+    if not isinstance(manifest, dict):
+        raise ValueError("manifest 必须是对象。")
+    missing_top_level = {"structure", "locales"} - manifest.keys()
+    if missing_top_level:
+        raise ValueError(f"manifest 缺少字段：{sorted(missing_top_level)}")
+
+    structure = manifest["structure"]
+    if not isinstance(structure, dict) or not isinstance(structure.get("steps"), list):
+        raise ValueError("structure.steps 必须是数组。")
+    if not isinstance(structure.get("overview"), dict) or not structure["overview"].get("demo"):
+        raise ValueError("structure.overview 必须声明 demo。")
+
+    for step in structure["steps"]:
+        if not isinstance(step, dict) or not step.get("id") or not step.get("demo"):
+            raise ValueError("每个共享步骤都必须声明 id 和 demo。")
+
+    expected_steps = [step["id"] for step in structure["steps"]]
+    if len(expected_steps) != len(set(expected_steps)):
+        raise ValueError("共享步骤 ID 必须唯一。")
+
+    referenced_demos = {structure["overview"]["demo"], *(step["demo"] for step in structure["steps"])}
+    missing_demos = referenced_demos - REGISTERED_DEMOS
+    if missing_demos:
+        raise ValueError(f"引用了未注册 demo：{sorted(missing_demos)}")
+
+    if not isinstance(manifest["locales"], dict):
+        raise ValueError("locales 必须是对象。")
+    available_locales = tuple(manifest["locales"])
+    if not available_locales:
+        raise ValueError("manifest 至少需要一个 locale。")
+    unsupported = set(available_locales) - set(SUPPORTED_LOCALES)
+    if unsupported:
+        raise ValueError(f"不支持的 locale：{sorted(unsupported)}")
+
+    for locale, localized in manifest["locales"].items():
+        actual_steps = [step["id"] for step in localized["steps"]]
+        if actual_steps != expected_steps:
+            raise ValueError(f"{locale} 的步骤顺序必须与共享结构完全一致。")
+
+        required_ui = {
+            "pauseAll",
+            "resumeAll",
+            "pause",
+            "resume",
+            "reset",
+            "waiting",
+            "loading",
+            "error",
+            "figureFallback",
+            "skipToContent",
+            "languageNavigation",
+        }
+        missing_ui = required_ui - localized["ui"].keys()
+        if missing_ui:
+            raise ValueError(f"{locale} 缺少运行时文案：{sorted(missing_ui)}")
+
+
+def escaped(value: object) -> str:
+    return html.escape(str(value), quote=True)
+
+
+def json_for_attribute(value: object) -> str:
+    return escaped(json.dumps(value, ensure_ascii=False, separators=(",", ":")))
+
+
+def json_for_script(value: object) -> str:
+    return json.dumps(value, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
+
+
+def render_figure(demo: str, title: str, copy: dict[str, Any], fallback: str) -> str:
+    return (
+        f'<interactive-figure data-demo="{escaped(demo)}" '
+        f'data-title="{escaped(title)}" data-copy="{json_for_attribute(copy)}">'
+        f"<noscript>{escaped(fallback)}</noscript>"
+        "</interactive-figure>"
+    )
+
+
+def render_language_links(
+    active_locale: str,
+    labels: dict[str, str],
+    available_locales: Iterable[str],
+) -> str:
+    links = []
+    for locale in available_locales:
+        current = ' aria-current="page"' if locale == active_locale else ""
+        links.append(
+            f'<a href="../{locale}/" hreflang="{locale}"{current}>'
+            f"{escaped(labels[locale])}</a>"
+        )
+    return "\n".join(links)
+
+
+def render_document(
+    root: Path,
+    manifest: dict[str, Any],
+    locale: str,
+    *,
+    include_overview: bool,
+    step_limit: int | None,
+) -> str:
+    if locale not in SUPPORTED_LOCALES:
+        raise ValueError(f"不支持的 locale：{locale}")
+
+    structure = manifest["structure"]
+    localized = manifest["locales"][locale]
+    localized_steps = localized["steps"][:step_limit]
+    shared_steps = structure["steps"][:step_limit]
+
+    overview = ""
+    if include_overview:
+        overview_copy = localized["overview"]
+        overview = f'''<section class="overview" aria-labelledby="overview-title">
+  <div class="copy-block">
+    <p class="section-label">{escaped(localized["ui"]["overviewLabel"])}</p>
+    <h2 id="overview-title">{escaped(overview_copy["title"])}</h2>
+    <p>{escaped(overview_copy["body"])}</p>
+  </div>
+  {render_figure(structure["overview"]["demo"], overview_copy["demoTitle"], overview_copy["copy"], localized["ui"]["figureFallback"])}
+</section>'''
+
+    chapters = []
+    for shared, copy in zip(shared_steps, localized_steps, strict=True):
+        chapters.append(
+            f'''<section class="chapter" id="{escaped(shared["id"])}" aria-labelledby="{escaped(shared["id"])}-title">
+  <div class="copy-block">
+    <p class="section-label">{escaped(localized["ui"]["stepLabel"])} {escaped(copy["number"])}</p>
+    <h2 id="{escaped(shared["id"])}-title">{escaped(copy["title"])}</h2>
+    <p>{escaped(copy["body"])}</p>
+  </div>
+  {render_figure(shared["demo"], copy["demoTitle"], copy["copy"], localized["ui"]["figureFallback"])}
+</section>'''
+        )
+
+    replacements = {
+        "{{LANG}}": escaped(localized["lang"]),
+        "{{META_TITLE}}": escaped(localized["meta"]["title"]),
+        "{{DESCRIPTION}}": escaped(localized["meta"]["description"]),
+        "{{EYEBROW}}": escaped(localized["hero"]["eyebrow"]),
+        "{{TITLE}}": escaped(localized["hero"]["title"]),
+        "{{SUBTITLE}}": escaped(localized["hero"]["subtitle"]),
+        "{{SKIP_TO_CONTENT}}": escaped(localized["ui"]["skipToContent"]),
+        "{{LANGUAGE_NAVIGATION}}": escaped(localized["ui"]["languageNavigation"]),
+        "{{LANGUAGE_LINKS}}": render_language_links(
+            locale,
+            localized["languageLabels"],
+            manifest["locales"].keys(),
+        ),
+        "{{OVERVIEW}}": overview,
+        "{{CHAPTERS}}": "\n".join(chapters),
+        "{{ARTICLE_CSS}}": read_text(root / "src" / "article.css").rstrip(),
+        "{{RUNTIME_I18N}}": json_for_script(localized["ui"]),
+        "{{RUNTIME}}": read_text(root / "src" / "runtime.js").rstrip(),
+        "{{DEMOS}}": read_text(root / "src" / "demos.js").rstrip(),
+    }
+
+    output = read_text(root / "src" / "shell.html")
+    for marker, value in replacements.items():
+        output = output.replace(marker, value)
+    if "{{" in output:
+        raise ValueError("模板仍有未替换标记。")
+    return output.rstrip() + "\n"
+
+
+def build_artifacts(
+    root: Path,
+    manifest: dict[str, Any],
+    output: Path,
+    *,
+    locales: Iterable[str],
+    include_overview: bool,
+    step_limit: int | None,
+) -> list[Path]:
+    built = []
+    for locale in locales:
+        document = render_document(
+            root,
+            manifest,
+            locale,
+            include_overview=include_overview,
+            step_limit=step_limit,
+        )
+        destination = output / locale / "index.html"
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        temporary = destination.with_suffix(".html.tmp")
+        temporary.write_text(document, encoding="utf-8", newline="\n")
+        temporary.replace(destination)
+        built.append(destination)
+    return built

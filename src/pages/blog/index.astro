@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import HtmlPagesSection from '../../components/HtmlPagesSection.astro';
 import ContentCard from '../../components/shared/ContentCard.astro';
 import { getBlogPosts, getTags, getTagCounts, type Language } from '../../utils/i18n';
 
@@ -30,7 +29,6 @@ const locale = 'en-US';
       <p class="mx-auto mt-4 max-w-2xl text-base md:text-lg leading-relaxed text-surface-600 dark:text-surface-300">{strings.subtitle}</p>
     </header>
 
-    <HtmlPagesSection lang="en" />
 
     {tags.length > 0 && (
       <div class="mb-10">

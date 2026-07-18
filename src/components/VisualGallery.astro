@@ -1,0 +1,151 @@
+---
+import type { Language } from '../utils/i18n';
+import { getVisualGallery } from '../utils/visuals';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const works = getVisualGallery(lang);
+const locale = lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja-JP' : 'en-US';
+
+const copy = {
+  en: {
+    title: 'Visuals',
+    eyebrow: 'Interactive stories and visual systems',
+    introduction: 'A curated collection of visual explanations, simulations, and standalone interactive works.',
+    open: 'Open experience',
+    openLanguage: 'Open {language} version',
+    typeStandalone: 'Visual story',
+    typeExplainer: 'Interactive explainer',
+    languages: 'Languages: {language}',
+    availableOnly: '{language} only',
+    missingMessage: '{title} is not available in this language. Available in {language}.',
+    languageNames: { en: 'English', zh: 'Chinese', ja: 'Japanese' },
+  },
+  zh: {
+    title: '可视化',
+    eyebrow: '交互叙事与视觉系统',
+    introduction: '精选可视化解释、模拟器与独立交互作品。',
+    open: '打开体验',
+    openLanguage: '打开{language}版本',
+    typeStandalone: '视觉故事',
+    typeExplainer: '交互图解',
+    languages: '语言：{language}',
+    availableOnly: '仅{language}',
+    missingMessage: '{title}尚未提供当前语言版本，可使用{language}版本。',
+    languageNames: { en: '英文', zh: '中文', ja: '日文' },
+  },
+  ja: {
+    title: 'ビジュアル',
+    eyebrow: 'インタラクティブな物語と視覚システム',
+    introduction: '視覚的な解説、シミュレーション、独立したインタラクティブ作品を集めました。',
+    open: '体験を開く',
+    openLanguage: '{language}版を開く',
+    typeStandalone: 'ビジュアルストーリー',
+    typeExplainer: 'インタラクティブ解説',
+    languages: '言語：{language}',
+    availableOnly: '{language}のみ',
+    missingMessage: '{title}は現在の言語では利用できません。{language}版を利用できます。',
+    languageNames: { en: '英語', zh: '中国語', ja: '日本語' },
+  },
+} as const;
+
+const c = copy[lang];
+const languageList = (languages: Language[]) => languages.map((item) => c.languageNames[item]).join(' / ');
+const bannerWorks = Object.fromEntries(works.map((work) => {
+  const availableLabel = languageList(work.availableLanguages);
+  return [work.slug, {
+    title: work.title,
+    message: c.missingMessage
+      .replace('{title}', work.title)
+      .replace('{language}', availableLabel),
+    href: work.href,
+    openLabel: c.openLanguage.replace('{language}', availableLabel),
+  }];
+}));
+---
+
+<section class="mx-auto max-w-6xl px-4 py-8 md:py-14">
+  <header class="max-w-3xl">
+    <p class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-600 dark:text-brand-300">{c.eyebrow}</p>
+    <h1 class="mt-4 font-display text-5xl font-extrabold tracking-tight text-surface-950 dark:text-white md:text-7xl">{c.title}</h1>
+    <p class="mt-5 text-lg leading-relaxed text-surface-600 dark:text-surface-300">{c.introduction}</p>
+  </header>
+
+  <aside
+    hidden
+    role="alert"
+    tabindex="-1"
+    data-missing-visual-banner
+    class="mt-8 rounded-2xl border border-amber-300 bg-amber-50 p-5 text-amber-950 shadow-sm dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-100"
+  >
+    <p data-missing-visual-message class="font-medium"></p>
+    <a data-missing-visual-link class="mt-3 inline-flex font-semibold text-brand-700 underline underline-offset-4 dark:text-brand-300"></a>
+  </aside>
+
+  <div class="mt-12 grid gap-6 md:grid-cols-2">
+    {works.map((work) => {
+      const availableLabel = languageList(work.availableLanguages);
+      const onlyLabel = c.availableOnly.replace('{language}', availableLabel);
+      const languagesLabel = c.languages.replace('{language}', availableLabel);
+      const openLabel = work.hasCurrentArtifact
+        ? c.open
+        : c.openLanguage.replace('{language}', availableLabel);
+
+      return (
+        <article id={work.slug} data-visual-card={work.slug} class="group overflow-hidden rounded-3xl border border-surface-200/80 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover dark:border-surface-800 dark:bg-surface-900">
+          <div class:list={[
+            'relative h-56 overflow-hidden',
+            work.cover === 'agents' ? 'bg-gradient-to-br from-indigo-950 via-brand-800 to-cyan-600' : 'bg-gradient-to-br from-slate-950 via-cyan-900 to-teal-500',
+          ]}>
+            <div class="absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_20%_20%,rgba(255,255,255,.5)_0_2px,transparent_3px),radial-gradient(circle_at_75%_65%,rgba(255,255,255,.35)_0_3px,transparent_4px)] [background-size:70px_70px,110px_110px]"></div>
+            <div class="absolute inset-x-8 bottom-8 flex items-center justify-between text-white/90">
+              <span class="rounded-full border border-white/25 bg-black/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider backdrop-blur">
+                {work.type === 'interactive-explainer' ? c.typeExplainer : c.typeStandalone}
+              </span>
+              <span class="text-4xl" aria-hidden="true">{work.cover === 'agents' ? '◈' : '◉'}</span>
+            </div>
+          </div>
+
+          <div class="p-6 md:p-7">
+            <div class="flex flex-wrap items-center gap-2 text-xs text-surface-500 dark:text-surface-400">
+              <time datetime={work.publishedAt}>{new Date(work.publishedAt).toLocaleDateString(locale)}</time>
+              <span class:list={[
+                'rounded-full px-2.5 py-1 font-semibold',
+                work.hasCurrentArtifact
+                  ? 'bg-surface-100 text-surface-600 dark:bg-surface-800 dark:text-surface-300'
+                  : 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200',
+              ]}>{work.hasCurrentArtifact ? languagesLabel : onlyLabel}</span>
+            </div>
+            <h2 class="mt-4 font-display text-2xl font-bold text-surface-950 dark:text-white">{work.title}</h2>
+            <p class="mt-3 leading-relaxed text-surface-600 dark:text-surface-300">{work.description}</p>
+            <a href={work.href} class="mt-6 inline-flex items-center rounded-full bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-700 focus:outline-none focus:ring-4 focus:ring-brand-300 dark:focus:ring-brand-900" aria-label={`${work.title} — ${openLabel}`}>
+              {openLabel}<span class="ml-2" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</section>
+
+<script is:inline define:vars={{ bannerWorks }}>
+  const params = new URLSearchParams(window.location.search);
+  const missingSlug = params.get('missing');
+  const banner = document.querySelector('[data-missing-visual-banner]');
+  const item = missingSlug ? bannerWorks[missingSlug] : null;
+
+  if (banner instanceof HTMLElement && item) {
+    const message = banner.querySelector('[data-missing-visual-message]');
+    const link = banner.querySelector('[data-missing-visual-link]');
+    if (message) message.textContent = item.message;
+    if (link instanceof HTMLAnchorElement) {
+      link.href = item.href;
+      link.textContent = item.openLabel;
+    }
+    banner.hidden = false;
+    banner.focus();
+  }
+</script>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{DESCRIPTION}}">
+  <title>{{META_TITLE}}</title>
+  <style data-prototype-bundle="article">
+{{ARTICLE_CSS}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#article">{{SKIP_TO_CONTENT}}</a>
+  <header class="site-header">
+    <strong>VISUAL KIT / PROTOTYPE</strong>
+    <nav class="language-links" aria-label="{{LANGUAGE_NAVIGATION}}">
+{{LANGUAGE_LINKS}}
+    </nav>
+    <button type="button" data-global-motion aria-pressed="false"></button>
+  </header>
+  <main id="article">
+    <article>
+      <header class="hero">
+        <p class="eyebrow">{{EYEBROW}}</p>
+        <h1>{{TITLE}}</h1>
+        <p class="hero-subtitle">{{SUBTITLE}}</p>
+      </header>
+{{OVERVIEW}}
+{{CHAPTERS}}
+    </article>
+  </main>
+  <script>
+    window.__VISUAL_I18N__ = {{RUNTIME_I18N}};
+  </script>
+  <script data-prototype-bundle="runtime">
+{{RUNTIME}}
+  </script>
+  <script data-prototype-bundle="demos">
+{{DEMOS}}
+  </script>
+</body>
+</html>

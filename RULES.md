@@ -191,3 +191,27 @@ $enFiles | Where-Object { $_ -notin $cnFiles } | ForEach-Object { Write-Host "Mi
 - Implement automated content placement validation in CI/CD pipeline
 - Create translation workflow for the 5 identified English-only posts
 - Establish content review process before publishing to prevent misplacement
+
+## Rule 6: Visual Gallery Publishing Contract
+**Date**: 2026-07-18
+**Context**: Added the multilingual Visuals section and migrated the HTML Showcase experience into a first-class content type
+
+### Problem
+Long-form interactive HTML needs stable, indexable URLs and multilingual discovery without forcing every work into one visual template or breaking indexed legacy URLs.
+
+### Solution
+- Treat Visuals as a top-level content type with mirrored English, Chinese, and Japanese gallery routes.
+- Keep one manifest as the source of truth for publication status, metadata, locale availability, SEO copy, and artifact IDs.
+- Support two authoring paths: the optional `tools/visual-explainer-kit/` for chapter-based explainers, and fully custom self-contained HTML for other visual forms.
+- Serve artifacts as raw static endpoints without iframes. Preserve legacy URLs as compatible aliases with canonical links to the Visuals URL.
+
+### Implementation Requirements
+1. Add every work to `src/data/visuals-manifest.json`; do not hand-maintain a second list of sitemap URLs.
+2. Gallery routes must exist for `en`, `zh`, and `ja`; works may be progressively translated but must expose availability explicitly.
+3. Each published locale artifact must have one H1, description, canonical, hreflang, OG metadata, keyboard-accessible controls, and reduced-motion behavior.
+4. Interaction changes require focused Playwright coverage; route changes also require the full SEO/E2E suite.
+5. Existing public URLs remain usable. Remove them from discovery when ownership changes, but keep a canonical compatibility response rather than deleting or redirecting the content.
+
+### Future Considerations
+- Add filters, automated cover captures, or a creation CLI only after the number of works demonstrates the need.
+- Keep manifest validation and template negative tests current when adding renderers, locales, or demos.
