@@ -47,6 +47,7 @@ export interface VisualGalleryItem {
 
 const languages: Language[] = ['en', 'zh', 'ja'];
 const visualTypes: VisualType[] = ['visual-story', 'interactive-explainer'];
+const visualRenderers: VisualRenderer[] = ['standalone', 'interactive-explainer'];
 const visualStatuses: VisualStatus[] = ['draft', 'published'];
 
 function assertManifest(value: unknown): asserts value is VisualWork[] {
@@ -57,6 +58,7 @@ function assertManifest(value: unknown): asserts value is VisualWork[] {
     if (!work.slug || slugs.has(work.slug)) throw new TypeError(`Invalid or duplicate visual slug: ${work.slug}`);
     slugs.add(work.slug);
     if (!visualTypes.includes(work.type)) throw new TypeError(`${work.slug} has an invalid visual type.`);
+    if (!visualRenderers.includes(work.renderer)) throw new TypeError(`${work.slug} has an invalid renderer.`);
     if (!visualStatuses.includes(work.status)) throw new TypeError(`${work.slug} has an invalid status.`);
     if (!Array.isArray(work.tags) || work.tags.length === 0) throw new TypeError(`${work.slug} must declare tags.`);
     if (!Array.isArray(work.externalResources)) throw new TypeError(`${work.slug} must declare an external resource allowlist.`);

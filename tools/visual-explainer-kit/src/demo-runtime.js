@@ -17,6 +17,11 @@
   });
   let globalPaused = false;
 
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
   const call = (instance, method, value) => {
     if (instance && typeof instance[method] === "function") instance[method](value);
   };
@@ -25,8 +30,10 @@
     constructor() {
       super();
       this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
       this._instance = null;
       this._mounted = false;
+      this._mounting = false;
       this._visible = false;
       this._localPaused = false;
     }
@@ -39,7 +46,7 @@
         <style>
           :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
           .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
-          .stage { position: relative; min-height: 25rem; overflow: hidden; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
           .status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; }
           .status[hidden] { display: none; }
           .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
@@ -66,7 +73,7 @@
       this._title.textContent = this.dataset.title || "";
       this._pauseButton.textContent = ui.pause;
       this._resetButton.textContent = ui.reset;
-      this._status.textContent = ui.waiting;
+      this._setStatus(ui.waiting);
 
       this._pauseButton.addEventListener("click", () => {
         this._localPaused = !this._localPaused;
@@ -83,35 +90,72 @@
         this._syncPlayback();
       }, { rootMargin: "180px 0px", threshold: .05 });
       this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
     }
 
     disconnectedCallback() {
       figures.delete(this);
       this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
       call(this._instance, "destroy");
     }
 
     async _mount() {
-      if (this._mounted) return;
+      if (this._mounted || this._mounting) return;
       const factory = registry.get(this.dataset.demo);
       if (!factory) return;
-      this._status.textContent = ui.loading;
+      this._mounting = true;
+      this._setStatus(ui.loading);
       try {
         this._instance = await factory({
           root: this._stage,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
           copy: this._copy,
           motion: !reducedMotion.matches,
-          tokens
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._setStatus(message)
         }) || {};
         this._mounted = true;
         this.dataset.state = "mounted";
         this._status.hidden = true;
+        this._resize();
         this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
       } catch {
         this.dataset.state = "error";
-        this._status.hidden = false;
-        this._status.textContent = ui.error;
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
       }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
     }
 
     _syncPlayback() {
@@ -121,9 +165,15 @@
       if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
       call(this._instance, paused ? "pause" : "resume");
     }
+
+    _setStatus(message) {
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
   }
 
   window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
     if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
     registry.set(id, factory);
     figures.forEach((figure) => {
@@ -135,11 +185,13 @@
 
   const globalToggle = document.querySelector("[data-global-motion]");
   const syncGlobalToggle = () => {
-    globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
-    globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
     figures.forEach((figure) => figure._syncPlayback());
   };
-  globalToggle.addEventListener("click", () => {
+  globalToggle?.addEventListener("click", () => {
     globalPaused = !globalPaused;
     syncGlobalToggle();
   });
