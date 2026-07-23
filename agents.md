@@ -2,6 +2,12 @@
 
 This document contains important guidelines and best practices for AI agents working on this project. Following these guidelines ensures consistency, quality, and SEO optimization.
 
+## Project Skills
+
+- Visual creation and publishing: `.agents/skills/create-visual-work/SKILL.md`
+  - Required for any task that creates, modifies, migrates, generates, publishes, or validates a Visual work, `/visuals/` route, Visual artifact, Visual gallery behavior, or `tools/visual-explainer-kit/` workflow.
+  - Read the Skill before taking task actions, then follow its referenced Visual system documentation and validation order.
+
 ## Content Creation & Editing Guidelines
 
 ### ⚠️ CRITICAL: Avoid Duplicate H1 Tags (SEO Issue)
@@ -249,7 +255,17 @@ This ensures:
 - The visual explainer runtime owns generic Shadow DOM class names such as `.status`. New demo markup must namespace internal classes (`.contract-status`, `.evidence-status`, etc.); reusing a runtime class can inherit absolute overlay styles and silently intercept pointer events.
 - `playwright screenshot --device "iPhone ..."` can select a device browser binary that is not installed even when Chromium E2E works, and `-b chromium` may not override that device default. For inspection-only mobile captures, use `-b chromium --viewport-size "390,844"` unless the device's browser is known to be installed.
 - A yielded preview `wait(..., terminate: true)` or `Get-NetTCPConnection` cleanup can itself hang on Windows. If that happens, resolve the exact listener with `netstat -ano -p tcp | Select-String ':<port>'`, stop only the reported PID, and verify the port is gone.
+- With this pnpm version, `pnpm <script> -- --help` can forward the separator itself as a literal `"--"` argument to a Python argparse script. Invoke visual-kit Python wrappers as `pnpm visual-kit:generate --help` or pass options directly without the extra separator.
+- Do not pass optional roots that do not exist to `rg --files`, and exclude generated HTML or embedded binary/data-URL artifacts from broad content searches. Missing roots make ripgrep exit nonzero, while generated artifacts can flood and truncate the diagnostic output; probe roots with `Test-Path` and use narrow `-g` filters first.
+- Do not recursively enumerate all of `C:\Users\<name>` as a fallback for locating a known project path; large dependency and cache trees can exceed command timeouts. Confirm the exact requested path with `Test-Path`, then inspect only that subtree.
 - Markdown reference lists do not need trailing double spaces when each item already has its own indented explanation line. Those spaces make `git diff --check` fail; remove them and run the check before committing.
 - PowerShell `Remove-Item` may be rejected by command policy even for an exact repository-local push log, while native-output redirection can create a UTF-16 file that `apply_patch` cannot read. Write future push logs outside the repository in the system temporary directory; for an already-created log, validate its resolved absolute path and use `[System.IO.File]::Delete()` on that one file instead of retrying broader deletion commands.
 - `gh pr create` or a follow-up GraphQL query can fail with a transient `Post https://api.github.com/graphql: EOF` after the mutation may already have reached GitHub. Query PRs for the exact head branch before retrying creation so the workflow cannot accidentally open duplicates.
 - A Git push can succeed through the repository SSH remote while `gh pr create` fails with `must be a collaborator`, because Git and GitHub CLI may use different identities. Check `gh auth status`, temporarily switch to the configured repository-owner account for PR operations, and restore the previously active account afterward.
+- `apply_patch` verifies every hunk atomically against the current file. Large multi-hunk edits to long localized JSON can be rejected in full when even one later copy string differs from a stale excerpt. Re-read the exact target block, then patch one locale or one content object at a time with narrow structural context instead of combining broad replacements.
+- In Codex's non-interactive Windows shell, `gopass show -o newapi/gemini` may time out with `Decryption failed: exit status 1` without ever launching a `pinentry` process; starting a child PowerShell window from the same session may also fail to surface the prompt. Ask the user to run `gopass show -o newapi/gemini` once in an already-interactive PowerShell to warm the GPG agent cache, then rerun `pnpm visual-kit:generate ...`; never print or persist the recovered secret.
+- Visual authoring manifests may use an array of paragraphs for `body`; Gemini prompt compilation must normalize list values into separated text before calling `str.replace`, otherwise generation fails with `TypeError: replace() argument 2 must be str, not list`. Keep a generator unit test against a real multi-paragraph manifest.
+- Gemini demo candidates commonly reach for `document.createElement()` even when the runtime contract limits them to the injected root. Keep the generator validation fail-closed, state `root.innerHTML` plus `root.querySelector()` explicitly in the prompt, and never overwrite the existing adapter when validation rejects global DOM access.
+- Visual artifacts embed demo adapter source verbatim, so trailing spaces in a generated adapter are multiplied into every locale HTML and make `git diff --check` fail on artifact lines. Clean whitespace in the source adapter, rebuild all locale artifacts, and do not patch generated HTML directly.
+- In PowerShell interpolated strings, a variable immediately followed by `:` can be parsed as an invalid scoped-variable reference (for example, `"$file:$line"`). Use `${file}:$line` or the format operator (`'{0}:{1}' -f $file, $line`) instead.
+- An SSH `git fetch origin` can succeed while an immediately following `git ls-remote` on port 443 transiently fails with `Connection closed`. Do not misclassify this as an authentication or repository-access failure; use the refs from the successful fetch via `git for-each-ref`, or retry the remote probe before escalating.

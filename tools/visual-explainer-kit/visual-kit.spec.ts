@@ -62,6 +62,7 @@ test('pause and reset lifecycle works through the shared runtime', async ({ page
 
   const range = energy.locator('input[type="range"]');
   const scene = energy.locator('.energy-demo');
+  await expect(scene).toHaveAttribute('data-runtime-size', /^\d+x\d+@\d+(?:\.\d+)?$/);
   await range.fill('88');
   await expect(scene).toHaveAttribute('data-value', '88');
 

@@ -14,12 +14,8 @@ const { lang, work } = Astro.props;
 const localized = work.locales[lang];
 const artifactId = localized.artifact;
 const artifactComponents = {
-  'loop-engineering-en': LoopEngineeringVisual,
-  'loop-engineering-zh': LoopEngineeringVisual,
-  'loop-engineering-ja': LoopEngineeringVisual,
-  'typhoon-en': TyphoonVisual,
-  'typhoon-zh': TyphoonVisual,
-  'typhoon-ja': TyphoonVisual,
+  'loop-engineering': LoopEngineeringVisual,
+  'typhoon': TyphoonVisual,
 } as const;
 const VisualComponent = artifactId ? artifactComponents[artifactId as keyof typeof artifactComponents] : undefined;
 

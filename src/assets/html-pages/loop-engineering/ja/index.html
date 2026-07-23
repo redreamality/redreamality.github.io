@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="目標、限定された試行、独立した証拠、永続状態、停止条件によって、コーディングエージェントを信頼できるシステムにする方法を対話的に解説します。">
-  <title>Loop Engineering：コーディングエージェントの外側のループを設計する</title>
+  <meta name="description" content="目標、証拠、記憶、予算、停止経路、人の責任によって、Agent の反復作業を信頼できるループへ変える仕組みを視覚的に解説します。">
+  <title>AI Agent の Loop Engineering：やさしいインタラクティブ解説</title>
   <style data-prototype-bundle="article">
 :root {
   color-scheme: light;
@@ -16,6 +16,8 @@
   --ocean: #0f7185;
   --warm: #ee9d46;
   --coral: #d45f50;
+  --soft-ocean: color-mix(in srgb, var(--ocean) 9%, var(--surface));
+  --soft-warm: color-mix(in srgb, var(--warm) 12%, var(--surface));
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -64,10 +66,26 @@ button, input { font: inherit; }
 }
 
 .hero, .copy-block {
-  width: min(calc(100% - 2rem), 46rem);
+  width: min(calc(100% - 2rem), 54rem);
   margin-inline: auto;
 }
-.hero { padding: clamp(5rem, 14vw, 10rem) 0; }
+.hero {
+  position: relative;
+  padding: clamp(5rem, 14vw, 10rem) 0;
+}
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -12% auto auto;
+  width: clamp(9rem, 28vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ocean) 35%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem color-mix(in srgb, var(--ocean) 5%, transparent),
+    0 0 0 5rem color-mix(in srgb, var(--warm) 4%, transparent);
+  content: "";
+}
 .eyebrow, .section-label {
   margin: 0 0 1rem;
   color: var(--ocean);
@@ -78,12 +96,62 @@ button, input { font: inherit; }
 }
 h1, h2 { margin-top: 0; line-height: 1.03; text-wrap: balance; }
 h1 { max-width: 9em; margin-bottom: 1.5rem; font-size: clamp(3.2rem, 10vw, 7rem); letter-spacing: -.06em; }
-h2 { margin-bottom: 1rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
-.hero-subtitle, .copy-block > p:last-child { color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.7; }
+h2 { max-width: 16em; margin-bottom: 1.15rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+.hero-subtitle, .copy-prose { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.75; }
 .hero-subtitle { max-width: 38rem; }
+.copy-prose { margin: .8rem 0 0; }
 
-.overview, .chapter { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
-.overview { background: rgba(255, 255, 255, .35); }
+.plain-language {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .75rem 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 55%, var(--line));
+  border-radius: 1rem;
+  background: var(--soft-warm);
+}
+.plain-language strong {
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  color: var(--surface);
+  background: var(--warm);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.plain-language p { margin: 0; color: var(--ink); line-height: 1.65; }
+
+.concept-points { margin-top: 1.4rem; }
+.concept-points-label {
+  margin: 0 0 .7rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.concept-points ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.concept-card strong { display: block; margin-bottom: .45rem; }
+.concept-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+.overview, .chapter, .closing { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
+.overview { background: color-mix(in srgb, var(--surface) 42%, transparent); }
+.chapter:nth-of-type(even) { background: color-mix(in srgb, var(--surface) 22%, transparent); }
 interactive-figure {
   display: block;
   width: min(calc(100% - 2rem), 68rem);
@@ -96,11 +164,59 @@ interactive-figure {
   box-shadow: 0 1.5rem 4rem rgba(23, 51, 60, .1);
 }
 
+.closing { background: linear-gradient(150deg, var(--soft-ocean), color-mix(in srgb, var(--paper) 86%, var(--surface))); }
+.closing-copy { width: min(calc(100% - 2rem), 68rem); }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.starter-checklist, .boundary-map {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.closing h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.starter-checklist ol { display: grid; gap: .7rem; margin: 0; padding-left: 1.35rem; }
+.starter-checklist li { padding-left: .3rem; line-height: 1.55; }
+.boundary-map ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.scale-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: .2rem .8rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--surface);
+}
+.scale-card strong { grid-row: 1 / span 2; color: var(--ocean); }
+.scale-card span { color: var(--ink); font-size: .82rem; font-weight: 800; }
+.scale-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.closing blockquote {
+  margin: 2rem 0 0;
+  padding: 1.35rem clamp(1rem, 3vw, 1.8rem);
+  border-left: .32rem solid var(--ocean);
+  color: var(--ink);
+  background: var(--surface);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.55;
+}
+.source-note { margin: 1rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+article[data-visual-slug="loop-engineering"] .hero .eyebrow { color: var(--coral); }
+article[data-visual-slug="loop-engineering"] interactive-figure { box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ocean) 12%, transparent); }
+
 @media (max-width: 720px) {
   .site-header { flex-wrap: wrap; }
   .site-header strong { width: 100%; }
   .language-links { margin-right: auto; }
   interactive-figure { min-height: 32rem; border-radius: 1rem; }
+  .concept-points ul, .closing-grid { grid-template-columns: 1fr; }
+  .plain-language { grid-template-columns: 1fr; }
+  .scale-card { grid-template-columns: 5.5rem minmax(0, 1fr); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -125,59 +241,131 @@ interactive-figure {
     <button type="button" data-global-motion aria-pressed="false"></button>
   </header>
   <main id="article">
-    <article>
+    <article data-visual-slug="loop-engineering">
       <header class="hero">
-        <p class="eyebrow">エージェント型コーディングの外側のループ</p>
+        <p class="eyebrow">AGENT LOOP をやさしく理解する</p>
         <h1>ループエンジニアリング</h1>
-        <p class="hero-subtitle">人がコーディングエージェントへ次の指示を繰り返し書くのではなく、仕事を見つけ、限定された試行を実行し、独立した証拠で判定し、状態を保存し、停止や人への引き継ぎを判断するシステムを設計します。</p>
+        <p class="hero-subtitle">良い Agent Loop は、AI を永遠に働かせる仕組みではありません。目標を知り、小さな一歩を実行し、現実の証拠を読み、進捗を覚え、正しい理由で停止できる境界付きのシステムです。</p>
       </header>
 <section class="overview" aria-labelledby="overview-title">
   <div class="copy-block">
     <p class="section-label">システム全体</p>
-    <h2 id="overview-title">次のプロンプトではなく、外側のループを設計する</h2>
-    <p>コーディングエージェントには、調査・行動・観察という内側のループがあります。Loop Engineering はその外側に、仕事の選択、試行の組み立て、証拠の検証、状態の保存、結果の振り分けを加えます。</p>
+    <h2 id="overview-title">毎ターン指示する人から、システムを設計する人へ</h2>
+    <p class="copy-prose">設計された Loop がなければ、人は目標、Agent、テスト結果、次の Prompt の間で情報を運び続けます。AI が優秀でも、結果に気づき、問題を判断し、次の手を決める人がいなければ進みません。</p>
+<p class="copy-prose">Loop Engineering は、その反復調整をシステムへ外部化します。仕事を起動し、限定された試行を準備し、証拠を読み、状態を保存し、安全な経路を選びます。人は外側へ移り、契約、重大な結果の承認、失敗した Loop の改善を担当します。</p>
+    <aside class="plain-language"><strong>かんたんに言うと</strong><p>Agent と現実の間で荷物を運ぶ人を卒業し、ベルトコンベア、センサー、非常停止ボタン、人が介入する規則を設計します。</p></aside><div class="concept-points"><p class="concept-points-label">まず覚える3つ</p><ul><li class="concept-card"><strong>自動化は無人化ではない</strong><p>人が離れるのは反復的な経路判断であり、責任ではありません。</p></li><li class="concept-card"><strong>Loop はモデルの外側にある</strong><p>Prompt とツール呼び出しは、より大きな運用システムの一部です。</p></li><li class="concept-card"><strong>停止も設計対象</strong><p>成功、ブロック、引き継ぎ、予算切れはすべて正しい終点です。</p></li></ul></div>
   </div>
-  <interactive-figure data-demo="outer-loop" data-title="エージェントを囲む外側のループ" data-copy="{&quot;ariaLabel&quot;:&quot;仕事を選び、試行を組み立て、エージェントを実行し、証拠を検証して結果を保存・振り分ける外側の設計ループ&quot;,&quot;guardrailLabel&quot;:&quot;人が管理する境界&quot;,&quot;guardrails&quot;:[&quot;目標と範囲&quot;,&quot;権限&quot;,&quot;予算&quot;,&quot;停止条件&quot;,&quot;エスカレーション&quot;],&quot;nodes&quot;:[{&quot;label&quot;:&quot;仕事を選ぶ&quot;,&quot;detail&quot;:&quot;人が次のプロンプトを書くのを待たず、システムが具体的なタスクを発見または取得します。&quot;},{&quot;label&quot;:&quot;試行を組み立てる&quot;,&quot;detail&quot;:&quot;1回の実行に、目標、関連コンテキスト、許可された操作、受け入れ条件、有限の予算を与えます。&quot;},{&quot;label&quot;:&quot;Agent が実行する&quot;,&quot;detail&quot;:&quot;harness の内部で、Agent が調査、編集、ツール実行、環境観察を行います。&quot;},{&quot;label&quot;:&quot;証拠を検証する&quot;,&quot;detail&quot;:&quot;モデルの自己申告ではなく、テスト、ログ、diff、ポリシー、レビューが独立した証拠を生成します。&quot;},{&quot;label&quot;:&quot;保存して振り分ける&quot;,&quot;detail&quot;:&quot;永続状態を記録し、停止、新しい証拠で再試行、人への引き継ぎ、次の仕事の選択を行います。&quot;}]}"><noscript>JavaScript を有効にするとインタラクティブ図解を表示できます。</noscript></interactive-figure>
+  <interactive-figure data-demo="role-shift" data-title="人が操作する Loop から設計された Loop へ" data-copy="{&quot;ariaLabel&quot;:&quot;人が Agent を毎回手動で促す方法と、Agent の仕事を振り分けるシステムを人が設計する方法の比較&quot;,&quot;modeLabel&quot;:&quot;反復的な調整を誰が行うか&quot;,&quot;manualButton&quot;:&quot;人が操作する Loop&quot;,&quot;systemButton&quot;:&quot;設計された Loop&quot;,&quot;manualHuman&quot;:&quot;人がオペレーター&quot;,&quot;manualHumanDetail&quot;:&quot;結果を毎回読み、次の Prompt をその場で考えます。&quot;,&quot;systemHuman&quot;:&quot;人が Loop の所有者&quot;,&quot;systemHumanDetail&quot;:&quot;境界を定め、結果を審査し、システムを改善します。&quot;,&quot;manualSteps&quot;:[&quot;タスクをもう一度説明する&quot;,&quot;Agent を待つ&quot;,&quot;出力を確認する&quot;,&quot;失敗を新しい Prompt に移す&quot;,&quot;続けるか判断する&quot;],&quot;manualCostLabel&quot;:&quot;見えないボトルネック&quot;,&quot;manualCost&quot;:&quot;人が不在になると進捗が止まり、手順の再現、監査、拡張も難しくなります。&quot;,&quot;boundaryLabel&quot;:&quot;これらの境界は人が所有する&quot;,&quot;boundaries&quot;:[&quot;目標&quot;,&quot;権限&quot;,&quot;予算&quot;,&quot;リスク&quot;,&quot;最終判断&quot;],&quot;systemNodes&quot;:[{&quot;label&quot;:&quot;トリガー&quot;,&quot;detail&quot;:&quot;目標、イベント、予定、キューが実行を開始します。&quot;},{&quot;label&quot;:&quot;契約&quot;,&quot;detail&quot;:&quot;範囲、証拠、権限、上限が1回の試行を囲みます。&quot;},{&quot;label&quot;:&quot;Agent + Harness&quot;,&quot;detail&quot;:&quot;モデルがガードレール内で調査し、ツールを使います。&quot;},{&quot;label&quot;:&quot;証拠&quot;,&quot;detail&quot;:&quot;テスト、ログ、diff、利用者、レビューが現実を観察します。&quot;},{&quot;label&quot;:&quot;経路判断&quot;,&quot;detail&quot;:&quot;制御側が再試行、停止、ブロック、引き継ぎを選びます。&quot;},{&quot;label&quot;:&quot;状態&quot;,&quot;detail&quot;:&quot;進捗と証拠が現在の会話や Agent を越えて残ります。&quot;}],&quot;systemNote&quot;:&quot;人がすべてのメッセージを運ばなくても Loop は進みますが、重大な結果は人が所有します。&quot;,&quot;manualStatus&quot;:&quot;人そのものが Loop です。柔軟ですが、常に中断され、拡張しにくい形です。&quot;,&quot;systemStatus&quot;:&quot;人が Loop を所有します。反復調整はコード化され、観測でき、境界があります。&quot;}"><noscript>JavaScript を有効にするとインタラクティブ図解を表示できます。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="minimum-loop" aria-labelledby="minimum-loop-title">
+  <div class="copy-block">
+    <p class="section-label">設計ポイント 01</p>
+    <h2 id="minimum-loop-title">最小限で役立つ Loop から理解する</h2>
+    <p class="copy-prose">Loop とは、観察した結果が次の行動を変えることです。Agent は現在の状態を読み、行動し、環境を観察し、計画を調整し、最後に経路を判断します。</p>
+<p class="copy-prose">設計の仕事はこの循環の周囲にあります。目標を観測可能にし、行動を限定し、質の高いフィードバックを戻し、戻り矢印が無限再試行にならないようにします。</p>
+    <aside class="plain-language"><strong>かんたんに言うと</strong><p>一周した後に、システムが何かを学んでいる必要があります。同じ推測を繰り返すだけなら、Loop ではなく空回りです。</p></aside><div class="concept-points"><p class="concept-points-label">最小構造の3要素</p><ul><li class="concept-card"><strong>目標</strong><p>「改善し続ける」ではなく、比較できる結果を定めます。</p></li><li class="concept-card"><strong>現実のフィードバック</strong><p>次の行動を変えられる事実を環境から受け取ります。</p></li><li class="concept-card"><strong>経路</strong><p>各周回を再試行、停止、ブロック、引き継ぎ、取消へ結びます。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="outer-loop" data-title="1回の Agent 実行を囲む最小 Loop" data-copy="{&quot;ariaLabel&quot;:&quot;仕事を定義し、行動し、証拠を観察し、調整し、状態保存と経路判断を行う5段階の Agent Loop&quot;,&quot;guardrailLabel&quot;:&quot;循環を役立つものにする境界&quot;,&quot;guardrails&quot;:[&quot;観測可能な目標&quot;,&quot;許可された操作&quot;,&quot;試行予算&quot;,&quot;停止経路&quot;,&quot;人への引き継ぎ&quot;],&quot;nodes&quot;:[{&quot;label&quot;:&quot;仕事を定義&quot;,&quot;detail&quot;:&quot;具体的な結果と、進捗や完了を示す証拠を選びます。&quot;},{&quot;label&quot;:&quot;行動する&quot;,&quot;detail&quot;:&quot;Agent が1回の限定された試行内で調査、編集、ツール実行を行います。&quot;},{&quot;label&quot;:&quot;現実を観察&quot;,&quot;detail&quot;:&quot;テスト、ログ、ブラウザ、diff、利用者信号が実際の変化を報告します。&quot;},{&quot;label&quot;:&quot;調整する&quot;,&quot;detail&quot;:&quot;観察に基づいて次の計画を変え、同じ推測を繰り返しません。&quot;},{&quot;label&quot;:&quot;保存して振り分ける&quot;,&quot;detail&quot;:&quot;有用な状態を残し、理由付きで再試行、停止、ブロック、引き継ぎ、取消を選びます。&quot;}]}"><noscript>JavaScript を有効にするとインタラクティブ図解を表示できます。</noscript></interactive-figure>
 </section>
 <section class="chapter" id="executable-contract" aria-labelledby="executable-contract-title">
   <div class="copy-block">
-    <p class="section-label">設計ポイント 01</p>
+    <p class="section-label">設計ポイント 02</p>
     <h2 id="executable-contract-title">意図を実行可能な契約に変える</h2>
-    <p>境界のない再帰的な目標は、いつまでも空回りします。外側のループには、観測可能な成功条件、1回の試行範囲、予算、合格・再試行・人への引き継ぎの明確な経路が必要です。</p>
+    <p class="copy-prose">「チェックアウトをもっと良くする」は Agent に自由を与えますが、制御側には判断材料を与えません。最初の試行前に、意図をシステムが読める項目へ変換します。</p>
+<p class="copy-prose">実用的な実行契約には、目標、範囲、非目標、許可ツール、証拠、予算、停止条件、引き継ぎ先が必要です。法的な長文ではなく、途中で方針を発明せずに次の経路を選べる精度が重要です。</p>
+    <aside class="plain-language"><strong>かんたんに言うと</strong><p>契約はボードゲームのルールカードです。なければ Agent は手を進め続けても、勝ち、反則、費用超過を誰も判断できません。</p></aside><div class="concept-points"><p class="concept-points-label">迷走を防ぐ契約項目</p><ul><li class="concept-card"><strong>範囲と非目標</strong><p>変えてよいものと、触れてはいけないものを両方書きます。</p></li><li class="concept-card"><strong>証拠と権限</strong><p>成功を何で証明し、現実世界へどこまで作用できるかを定めます。</p></li><li class="concept-card"><strong>予算と引き継ぎ</strong><p>試行、時間、Token、並列数を制限し、次の責任者を決めます。</p></li></ul></div>
   </div>
   <interactive-figure data-demo="contract-gate" data-title="曖昧な意図から運用可能な契約へ" data-copy="{&quot;ariaLabel&quot;:&quot;曖昧な依頼と設計されたループ契約の比較&quot;,&quot;vagueButton&quot;:&quot;曖昧な依頼&quot;,&quot;engineeredButton&quot;:&quot;設計された契約&quot;,&quot;inputLabel&quot;:&quot;ループに入るタスク&quot;,&quot;gateLabel&quot;:&quot;システムが判断できること&quot;,&quot;vagueBrief&quot;:&quot;チェックアウトを、良さそうになるまで改善する。&quot;,&quot;engineeredBrief&quot;:&quot;公開 API を変えずに、チェックアウトの重複送信を修正する。&quot;,&quot;vagueChecks&quot;:[&quot;合格・不合格を観測できる信号がない&quot;,&quot;ファイル、ツール、試行回数の境界がない&quot;,&quot;停止や支援要請のルールがない&quot;],&quot;engineeredChecks&quot;:[&quot;再現テストが通り、回帰テストも維持される&quot;,&quot;変更はチェックアウトモジュールのみで、本番資格情報には触れない&quot;,&quot;最大3回試行し、その後は証拠とともに人へ引き継ぐ&quot;],&quot;vagueStatus&quot;:&quot;もっともらしい変更を続けても、収束したか判断できません。&quot;,&quot;engineeredStatus&quot;:&quot;ループは、合格・再試行・引き継ぎを根拠付きで判断できます。&quot;}"><noscript>JavaScript を有効にするとインタラクティブ図解を表示できます。</noscript></interactive-figure>
 </section>
 <section class="chapter" id="bounded-attempt" aria-labelledby="bounded-attempt-title">
   <div class="copy-block">
-    <p class="section-label">設計ポイント 02</p>
+    <p class="section-label">設計ポイント 03</p>
     <h2 id="bounded-attempt-title">1回の試行には、限定された仕事を1つだけ任せる</h2>
-    <p>内側の実行は、調査、1つの変更、検証、証拠の記録を行います。検証失敗も無駄ではありません。外側のループが、次の試行に使うより良いコンテキストへ変換します。</p>
+    <p class="copy-prose">長く動く Loop でも、1つのコンテキストウィンドウに全プロジェクトを解かせてはいけません。1回の試行は、狭い仮説を調べ、小さくできれば可逆な変更を行い、宣言した検査を実行して、学んだ事実を残します。</p>
+<p class="copy-prose">失敗したときも、価値はコードだけではありません。失敗テスト、ログ、否定された仮説、費用、残る不確実性が次の試行の良い入力になります。Loop はこの差分で収束し、同じことを繰り返しません。</p>
+    <aside class="plain-language"><strong>かんたんに言うと</strong><p>各試行を科学実験として扱います。1つを変え、結果を測り、書き残し、次の実験を証拠から始めます。</p></aside><div class="concept-points"><p class="concept-points-label">限定された試行が守るもの</p><ul><li class="concept-card"><strong>コンテキスト品質</strong><p>仕事が小さいほど、関係する事実を考える余白が残ります。</p></li><li class="concept-card"><strong>可逆性</strong><p>小さな diff は確認、取消、証拠との比較が容易です。</p></li><li class="concept-card"><strong>学習価値</strong><p>証拠が保存されれば、失敗した試行も前進になります。</p></li></ul></div>
   </div>
   <interactive-figure data-demo="iteration-trace" data-title="証拠によって収束する2回の試行" data-copy="{&quot;ariaLabel&quot;:&quot;2回の限定されたコーディングエージェント試行を順に示すトレース&quot;,&quot;nextButton&quot;:&quot;トレースを進める&quot;,&quot;attemptLabel&quot;:&quot;試行 {attempt}&quot;,&quot;phaseLabels&quot;:[&quot;調査&quot;,&quot;実装&quot;,&quot;検証&quot;,&quot;記録&quot;],&quot;changeLabel&quot;:&quot;限定された操作&quot;,&quot;evidenceLabel&quot;:&quot;環境から得た証拠&quot;,&quot;states&quot;:[{&quot;attempt&quot;:&quot;1&quot;,&quot;phase&quot;:0,&quot;change&quot;:&quot;失敗したチェックアウトテストを読み、重複リクエストの経路を追跡する。&quot;,&quot;evidence&quot;:&quot;再試行時に同じ冪等キーが別の形式でシリアライズされている。&quot;,&quot;outcome&quot;:&quot;具体的な仮説が得られました。&quot;},{&quot;attempt&quot;:&quot;1&quot;,&quot;phase&quot;:1,&quot;change&quot;:&quot;支払いアダプターへ届く前にキーを正規化する。&quot;,&quot;evidence&quot;:&quot;diff は1つのモジュールと1つの対象テストに限定されている。&quot;,&quot;outcome&quot;:&quot;変更は宣言した範囲内です。&quot;},{&quot;attempt&quot;:&quot;1&quot;,&quot;phase&quot;:2,&quot;change&quot;:&quot;再現テストとチェックアウト回帰テスト群を実行する。&quot;,&quot;evidence&quot;:&quot;再現テストは通ったが、タイムアウト再試行テストが失敗した。&quot;,&quot;outcome&quot;:&quot;独立した証拠は「未完了」と示しています。&quot;},{&quot;attempt&quot;:&quot;1&quot;,&quot;phase&quot;:3,&quot;change&quot;:&quot;失敗したテスト名、diff の要約、残る仮説を保存する。&quot;,&quot;evidence&quot;:&quot;次の試行は、最初から再調査せず失敗地点から始められる。&quot;,&quot;outcome&quot;:&quot;新しい証拠とともに再試行します。&quot;},{&quot;attempt&quot;:&quot;2&quot;,&quot;phase&quot;:0,&quot;change&quot;:&quot;目標と記録されたタイムアウト失敗を読み込む。&quot;,&quot;evidence&quot;:&quot;タイムアウト経路だけが通常のシリアライザーを迂回している。&quot;,&quot;outcome&quot;:&quot;2回目は、より鋭いコンテキストから始まります。&quot;},{&quot;attempt&quot;:&quot;2&quot;,&quot;phase&quot;:1,&quot;change&quot;:&quot;通常再試行とタイムアウト再試行を同じシリアライザーへ通す。&quot;,&quot;evidence&quot;:&quot;公開 API は変更されていない。&quot;,&quot;outcome&quot;:&quot;観測された原因に、もう1つの限定変更で対処します。&quot;},{&quot;attempt&quot;:&quot;2&quot;,&quot;phase&quot;:2,&quot;change&quot;:&quot;対象テスト、回帰テスト群、静的チェックを実行する。&quot;,&quot;evidence&quot;:&quot;宣言したすべてのチェックが通った。&quot;,&quot;outcome&quot;:&quot;完了ゲートに独立した証拠が揃いました。&quot;},{&quot;attempt&quot;:&quot;2&quot;,&quot;phase&quot;:3,&quot;change&quot;:&quot;通過したチェックと最終 diff をレビュー用に記録する。&quot;,&quot;evidence&quot;:&quot;ループには監査可能な停止理由がある。&quot;,&quot;outcome&quot;:&quot;停止して成果を引き渡します。&quot;}]}"><noscript>JavaScript を有効にするとインタラクティブ図解を表示できます。</noscript></interactive-figure>
 </section>
 <section class="chapter" id="independent-evidence" aria-labelledby="independent-evidence-title">
   <div class="copy-block">
-    <p class="section-label">設計ポイント 03</p>
+    <p class="section-label">設計ポイント 04</p>
     <h2 id="independent-evidence-title">完了を感触ではなく、判定にする</h2>
-    <p>モデルは自分の仕事を甘く評価しがちです。Loop Engineering は実行と判定を分離し、テスト、ポリシー、ログ、diff、人のレビューによる証拠で次の経路を決めます。</p>
+    <p class="copy-prose">言語モデルは、筋の通った自信ある説明を作れても、実際の環境を誤解していることがあります。そのため、実行者の「完了」は主張であり、完了信号ではありません。</p>
+<p class="copy-prose">独立した証拠には、テストやデータ不変条件のような決定的なものと、別のレビュー担当が Rubric で判断するものがあります。強い Loop は、安価な自動検査、現実的な E2E、人による意図・品質・重大結果の判断を組み合わせます。</p>
+    <aside class="plain-language"><strong>かんたんに言うと</strong><p>料理を作った人だけに、煙感知器が正常かを判断させません。センサー、別の試食者、または結果を作る行為とは独立した人の判断が必要です。</p></aside><div class="concept-points"><p class="concept-points-label">証拠は層に分ける</p><ul><li class="concept-card"><strong>決定的な検査</strong><p>テスト、型、不変条件、ポリシー規則は高速で再現できます。</p></li><li class="concept-card"><strong>現実的な観察</strong><p>ブラウザ、CI、ログ、画像、利用者フローが環境差を見つけます。</p></li><li class="concept-card"><strong>人の判断</strong><p>意図、品質感、トレードオフ、不可逆な結果は人の領域です。</p></li></ul></div>
   </div>
   <interactive-figure data-demo="evidence-gate" data-title="独立したゲートで結果を振り分ける" data-copy="{&quot;ariaLabel&quot;:&quot;エージェントの自己申告と独立検証を比較する結果ルーティングゲート&quot;,&quot;verifierLabel&quot;:&quot;誰が完了を判断するか？&quot;,&quot;selfButton&quot;:&quot;Agent の自己申告&quot;,&quot;independentButton&quot;:&quot;独立チェッカー&quot;,&quot;resultLabel&quot;:&quot;観測された結果&quot;,&quot;failButton&quot;:&quot;チェック失敗&quot;,&quot;passButton&quot;:&quot;チェック合格&quot;,&quot;uncertainButton&quot;:&quot;証拠が曖昧&quot;,&quot;selfVerdict&quot;:&quot;「完了したようだ」&quot;,&quot;selfDetail&quot;:&quot;実行者が同時に判定者になります。&quot;,&quot;independentVerdict&quot;:&quot;証拠ゲート&quot;,&quot;independentDetail&quot;:&quot;独立した信号が経路を制御します。&quot;,&quot;retryTitle&quot;:&quot;再試行&quot;,&quot;retryDetail&quot;:&quot;失敗を次の限定された試行へ渡す。&quot;,&quot;stopTitle&quot;:&quot;停止&quot;,&quot;stopDetail&quot;:&quot;宣言したチェックが通った時だけ引き渡す。&quot;,&quot;escalateTitle&quot;:&quot;人へ引き継ぐ&quot;,&quot;escalateDetail&quot;:&quot;証拠や権限が足りない時は人が判断する。&quot;,&quot;selfStatus&quot;:&quot;自己申告では、環境が反対していてもループを終了させてしまいます。&quot;,&quot;statuses&quot;:{&quot;fail&quot;:&quot;失敗したチェックを、再試行の新しいコンテキストにします。&quot;,&quot;pass&quot;:&quot;合格証拠が停止条件を満たします。&quot;,&quot;uncertain&quot;:&quot;曖昧な証拠は人の判定へ送ります。&quot;}}"><noscript>JavaScript を有効にするとインタラクティブ図解を表示できます。</noscript></interactive-figure>
 </section>
 <section class="chapter" id="durable-state" aria-labelledby="durable-state-title">
   <div class="copy-block">
-    <p class="section-label">設計ポイント 04</p>
+    <p class="section-label">設計ポイント 05</p>
     <h2 id="durable-state-title">記憶を会話の外へ移す</h2>
-    <p>長い会話は漂流し、コンテキストウィンドウもリセットされます。信頼できるループは、目標、作業キュー、テスト出力、判断、未解決の失敗を、次の実行が読める永続 artifact に保存します。</p>
+    <p class="copy-prose">コンテキストウィンドウは作業記憶であり、データベースではありません。長い会話は圧縮され、Agent は再起動し、ファイルは変わり、古い仮説は期限切れになります。進捗が会話にしかなければ、新しい試行は同じ調査や失敗を繰り返します。</p>
+<p class="copy-prose">永続状態には、現在の目標、範囲、作業キュー、試した方法、テスト出力、重要な判断、残るブロッカー、費用、前回の停止理由を保存します。Git、進捗ファイル、タスクシステム、データベースはいずれも利用できます。</p>
+    <aside class="plain-language"><strong>かんたんに言うと</strong><p>次の作業者に昨日の会話を覚えさせません。完了、失敗、変更、次に行うことが整理された作業台を残します。</p></aside><div class="concept-points"><p class="concept-points-label">永続状態は会話全文ではない</p><ul><li class="concept-card"><strong>事実を優先</strong><p>すべての思考ではなく、現在のコード、検査、判断、ブロッカーを保存します。</p></li><li class="concept-card"><strong>毎回読み直す</strong><p>古い記憶を信じず、各試行で現在の現実を再読します。</p></li><li class="concept-card"><strong>復旧できる引き継ぎ</strong><p>別の Agent や人が会話全体を再構築せず続行できます。</p></li></ul></div>
   </div>
   <interactive-figure data-demo="state-ledger" data-title="一時的な会話と永続状態" data-copy="{&quot;ariaLabel&quot;:&quot;複数の試行にわたり、薄れていく会話コンテキストと永続ループ台帳を比較する&quot;,&quot;nextButton&quot;:&quot;次の試行を開始&quot;,&quot;attemptLabel&quot;:&quot;試行 {attempt} が見るコンテキスト&quot;,&quot;transientLabel&quot;:&quot;一時的な会話&quot;,&quot;durableLabel&quot;:&quot;永続ループ状態&quot;,&quot;attempts&quot;:[{&quot;attempt&quot;:&quot;1&quot;,&quot;transient&quot;:&quot;「チェックアウトを直して。」この実行は最初から調査する。&quot;,&quot;durable&quot;:[&quot;目標と受け入れ条件&quot;,&quot;許可された範囲と予算&quot;],&quot;caption&quot;:&quot;最初の試行が、将来の実行に必要な情報を外部化します。&quot;},{&quot;attempt&quot;:&quot;2&quot;,&quot;transient&quot;:&quot;最初の実行の詳しい推論は、すでに薄れ始めている。&quot;,&quot;durable&quot;:[&quot;目標と受け入れ条件&quot;,&quot;許可された範囲と予算&quot;,&quot;失敗したタイムアウトテストと diff 要約&quot;],&quot;caption&quot;:&quot;次の実行は、会話の記憶を再構成せず証拠を読みます。&quot;},{&quot;attempt&quot;:&quot;3&quot;,&quot;transient&quot;:&quot;新しい Agent インスタンスには、以前の試行の個人的な記憶がない。&quot;,&quot;durable&quot;:[&quot;目標と受け入れ条件&quot;,&quot;許可された範囲と予算&quot;,&quot;解決済みの失敗と合格したチェック&quot;,&quot;判断ログと最終引き渡し状態&quot;],&quot;caption&quot;:&quot;状態がモデルの外にあるため、Agent が再起動しても進捗は残ります。&quot;}]}"><noscript>JavaScript を有効にするとインタラクティブ図解を表示できます。</noscript></interactive-figure>
 </section>
+<section class="chapter" id="safe-stop" aria-labelledby="safe-stop-title">
+  <div class="copy-block">
+    <p class="section-label">設計ポイント 06</p>
+    <h2 id="safe-stop-title">正しい停止経路を複数設計する</h2>
+    <p class="copy-prose">危険な Loop は成功しか終点として認めず、それ以外をすべて再試行へ変えます。信頼できる制御側は、停止を経路判断として扱い、実行前に終端状態を命名します。</p>
+<p class="copy-prose">PASS は宣言した証拠を満たした状態、BLOCKED は外部依存で進めない状態、ESCALATE は権限や判断が不足した状態、BUDGET EXHAUSTED は上限到達、CANCELLED は人やポリシーが意図的に終了した状態です。どれも無言の失敗にしてはいけません。</p>
+    <aside class="plain-language"><strong>かんたんに言うと</strong><p>非常口、鍵のかかった扉、ゴールラインは、すべて進行を止めますが理由が違います。良い Loop はどの扉に着いたかと、人が次に何をするかを記録します。</p></aside><div class="concept-points"><p class="concept-points-label">停止制御が問うこと</p><ul><li class="concept-card"><strong>証拠は合格したか</strong><p>合格なら証拠をまとめて停止し、同じ仕事を繰り返しません。</p></li><li class="concept-card"><strong>失敗は次の試行を改善するか</strong><p>新しく行動可能な情報と予算がある場合だけ再試行します。</p></li><li class="concept-card"><strong>人が判断すべきか</strong><p>曖昧さ、高リスク、権限不足、予算切れは人へ引き継ぎます。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="stop-router" data-title="5つの結果を正しい終端状態へ振り分ける" data-copy="{&quot;ariaLabel&quot;:&quot;証拠と制限を、合格、再試行、ブロック、人への引き継ぎ、予算切れへ振り分ける結果ルーター&quot;,&quot;scenarioLabel&quot;:&quot;環境からの報告を選ぶ&quot;,&quot;evidenceLabel&quot;:&quot;観測された証拠&quot;,&quot;controllerLabel&quot;:&quot;制御側の判断&quot;,&quot;routes&quot;:[{&quot;id&quot;:&quot;pass&quot;,&quot;label&quot;:&quot;合格&quot;,&quot;detail&quot;:&quot;証拠付きで引き渡す&quot;},{&quot;id&quot;:&quot;retry&quot;,&quot;label&quot;:&quot;再試行&quot;,&quot;detail&quot;:&quot;新しい情報を使う&quot;},{&quot;id&quot;:&quot;blocked&quot;,&quot;label&quot;:&quot;ブロック&quot;,&quot;detail&quot;:&quot;外部依存を待つ&quot;},{&quot;id&quot;:&quot;escalate&quot;,&quot;label&quot;:&quot;人へ引き継ぐ&quot;,&quot;detail&quot;:&quot;人の判断が必要&quot;},{&quot;id&quot;:&quot;budget&quot;,&quot;label&quot;:&quot;予算切れ&quot;,&quot;detail&quot;:&quot;上限で停止する&quot;}],&quot;scenarios&quot;:[{&quot;id&quot;:&quot;complete&quot;,&quot;label&quot;:&quot;すべての検査が合格&quot;,&quot;evidence&quot;:&quot;再現テスト、回帰グループ、静的検査、宣言した利用者フローがすべて合格しました。&quot;,&quot;decision&quot;:&quot;完了契約を満たしました。証拠パッケージを保存して停止します。&quot;,&quot;route&quot;:&quot;pass&quot;,&quot;status&quot;:&quot;成功の停止は自信ではなく証拠に基づきます。&quot;},{&quot;id&quot;:&quot;fixable&quot;,&quot;label&quot;:&quot;役立つ失敗が1つ&quot;,&quot;evidence&quot;:&quot;タイムアウトの集中テストが失敗し、正規化を通らない新しい分岐を示しました。&quot;,&quot;decision&quot;:&quot;行動可能な情報があり、予算も残っています。次の試行のコンテキストとして保存します。&quot;,&quot;route&quot;:&quot;retry&quot;,&quot;status&quot;:&quot;次の周回が新しい情報から始まるため、再試行に根拠があります。&quot;},{&quot;id&quot;:&quot;dependency&quot;,&quot;label&quot;:&quot;外部依存が停止&quot;,&quot;evidence&quot;:&quot;必要なステージングサービスが利用できず、ローカル代替環境もありません。&quot;,&quot;decision&quot;:&quot;これ以上の変更は推測になります。依存関係を記録して実行を止めます。&quot;,&quot;route&quot;:&quot;blocked&quot;,&quot;status&quot;:&quot;ブロックは正直な終端状態であり、仕事を作り出す理由ではありません。&quot;},{&quot;id&quot;:&quot;authority&quot;,&quot;label&quot;:&quot;影響の大きい操作&quot;,&quot;evidence&quot;:&quot;修正は準備できましたが、本番データ移行と不可逆な削除が必要です。&quot;,&quot;decision&quot;:&quot;Agent の権限を越えています。選択肢と証拠を人の所有者へ提示します。&quot;,&quot;route&quot;:&quot;escalate&quot;,&quot;status&quot;:&quot;結果と権限が契約を越える地点で、自律実行は終わります。&quot;},{&quot;id&quot;:&quot;exhausted&quot;,&quot;label&quot;:&quot;試行上限に到達&quot;,&quot;evidence&quot;:&quot;3回の限定試行で異なる失敗が発生し、時間と Token の上限も使い切りました。&quot;,&quot;decision&quot;:&quot;支出を止め、試した方法、証拠、不確実性、人が取るべき次の手をまとめます。&quot;,&quot;route&quot;:&quot;budget&quot;,&quot;status&quot;:&quot;予算上限は暴走を、確認可能な引き継ぎへ変えます。&quot;}]}"><noscript>JavaScript を有効にするとインタラクティブ図解を表示できます。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="failure-lab" aria-labelledby="failure-lab-title">
+  <div class="copy-block">
+    <p class="section-label">設計ポイント 07</p>
+    <h2 id="failure-lab-title">部品を1つ外して、Loop の壊れ方を見る</h2>
+    <p class="copy-prose">信頼性は複数の部品が協調して生まれます。強いモデルでも、証拠、記憶、権限境界、隔離、停止制御が欠ければ、長期的には補えません。</p>
+<p class="copy-prose">Loop Engineering を理解する最短の方法は、意図的に機械を壊すことです。各部品の欠落には特徴的な故障パターンがあり、監視と修復の対象になります。</p>
+    <aside class="plain-language"><strong>かんたんに言うと</strong><p>速いエンジンでも、ブレーキ、計器、ハンドルのない車は直せません。Agent の能力とシステムの信頼性は別の設計問題です。</p></aside><div class="concept-points"><p class="concept-points-label">故障には特徴がある</p><ul><li class="concept-card"><strong>症状を見る</strong><p>同じ試行、早すぎる完了、diff の衝突、レビュー滞留はシステム信号です。</p></li><li class="concept-card"><strong>欠けた層を直す</strong><p>すべてを長い Prompt や大きいモデルの問題にしません。</p></li><li class="concept-card"><strong>Trace から改善する</strong><p>繰り返す事故をテスト、Skill、Hook、Grader、狭い権限へ変えます。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="failure-lab" data-title="Agent Loop のフォールト注入実験" data-copy="{&quot;ariaLabel&quot;:&quot;停止規則、証拠、記憶、隔離、人の判断、改善 Loop を外した時の症状を示す対話型故障実験&quot;,&quot;controlLabel&quot;:&quot;部品を一時的に外す&quot;,&quot;healthyButton&quot;:&quot;完全な Loop&quot;,&quot;riskLabel&quot;:&quot;暴走リスク&quot;,&quot;symptomLabel&quot;:&quot;観測される症状&quot;,&quot;repairLabel&quot;:&quot;設計上の修復&quot;,&quot;healthyScore&quot;:&quot;低&quot;,&quot;healthySymptom&quot;:&quot;証拠、記憶、隔離、上限、人の境界、繰り返す失敗を改善する経路があります。&quot;,&quot;healthyRepair&quot;:&quot;Trace を保ち、費用、欠陥流出、レビュー負荷、停止理由を継続的に監視します。&quot;,&quot;healthyStatus&quot;:&quot;絶対的な正しさは保証できませんが、失敗を発見、封じ込め、学習できます。&quot;,&quot;components&quot;:[{&quot;id&quot;:&quot;stop&quot;,&quot;label&quot;:&quot;停止 + 予算&quot;,&quot;severity&quot;:&quot;重大&quot;,&quot;symptom&quot;:&quot;試行が加速し、Token が増え、有用な情報がなくなっても Agent が変更を作り続けます。&quot;,&quot;repair&quot;:&quot;測定可能な Done、最大試行、時間・Token 上限、取消、人への引き継ぎを定義します。&quot;,&quot;status&quot;:&quot;上限がなければ、「未完了」は「もう一度支払う」に変わります。&quot;},{&quot;id&quot;:&quot;evidence&quot;,&quot;label&quot;:&quot;独立した証拠&quot;,&quot;severity&quot;:&quot;高&quot;,&quot;symptom&quot;:&quot;Agent が早く成功を宣言し、既知テストに過適合し、説明の中でしか機能しません。&quot;,&quot;repair&quot;:&quot;環境の Ground Truth、固定した受け入れ条件、現実的な E2E、主観目標の独立判断を使います。&quot;,&quot;status&quot;:&quot;証拠が消えると、自己信頼が終了条件になります。&quot;},{&quot;id&quot;:&quot;memory&quot;,&quot;label&quot;:&quot;永続状態&quot;,&quot;severity&quot;:&quot;高&quot;,&quot;symptom&quot;:&quot;新しい実行が過去の調査を繰り返し、以前の修正を戻し、古い仮説で行動します。&quot;,&quot;repair&quot;:&quot;目標、進捗、試した方法、現在の事実、証拠、ブロッカー、次の推奨行動を保存します。&quot;,&quot;status&quot;:&quot;進捗が会話にしかなく、Loop は毎回スタート地点へ戻ります。&quot;},{&quot;id&quot;:&quot;isolation&quot;,&quot;label&quot;:&quot;隔離&quot;,&quot;severity&quot;:&quot;高&quot;,&quot;symptom&quot;:&quot;並列 Worker がファイルを上書きし、テストが混ざった状態を見て、最終 diff の所有者も不明になります。&quot;,&quot;repair&quot;:&quot;Worktree や sandbox、書き込み所有権、並列変更の制限、制御された統合レビューを使います。&quot;,&quot;status&quot;:&quot;可変な作業場所を共有すると、Agent の数だけ衝突が増えます。&quot;},{&quot;id&quot;:&quot;human&quot;,&quot;label&quot;:&quot;人の最終判断&quot;,&quot;severity&quot;:&quot;重大&quot;,&quot;symptom&quot;:&quot;高リスクなコード、メッセージ、DB 変更、リリースが、検査合格だけで現実へ出ます。&quot;,&quot;repair&quot;:&quot;不可逆または重大なツールの前に承認を置き、diff、証拠、費用、不確実性を人へ渡します。&quot;,&quot;status&quot;:&quot;自動化が、実際には負えない責任を引き受けています。&quot;},{&quot;id&quot;:&quot;improvement&quot;,&quot;label&quot;:&quot;Harness 改善&quot;,&quot;severity&quot;:&quot;中&quot;,&quot;symptom&quot;:&quot;同じ事故が毎日戻り、各 Agent が同じプロジェクト知識を再発見します。&quot;,&quot;repair&quot;:&quot;Trace を回帰テスト、Eval、Skill、Hook、明確なツール、安全な初期値へ変え、同じ証拠セットで再検証します。&quot;,&quot;status&quot;:&quot;タスク Loop は動いても、その周囲のシステムが学びません。&quot;}]}"><noscript>JavaScript を有効にするとインタラクティブ図解を表示できます。</noscript></interactive-figure>
+</section>
 <section class="chapter" id="engineering-layers" aria-labelledby="engineering-layers-title">
   <div class="copy-block">
-    <p class="section-label">設計ポイント 05</p>
+    <p class="section-label">設計ポイント 08</p>
     <h2 id="engineering-layers-title">Loop Engineering に含まれる5つのループを見る</h2>
-    <p>この新しい実践用語は、タスクの再試行だけを指しません。Agent の実行、独立検証、運用、Harness 改善、結果に責任を持つ人の外側のループを入れ子にします。</p>
+    <p class="copy-prose">「Loop」は複数の時間尺度で使われます。中心ではモデルが1回の実行中にツールを使い、その外で検証側が再試行を導きます。さらに運用 Loop が仕事を見つけてセッションを越えて保存し、改善 Loop が Trace から Harness を変え、最外周の人が目標、権限、リスク、結果を所有します。</p>
+<p class="copy-prose">これらは置き換えではなく入れ子です。良い Prompt は Loop の中でも必要で、Context の選択も、Harness のツールとガードレールも必要です。Loop Engineering は、それらが時間を通じて現実とどう反復するかを設計します。</p>
+    <aside class="plain-language"><strong>かんたんに言うと</strong><p>同じ地図の5段階のズームです。1回のツール呼び出し、検証付きの試行、継続運用、システム改善、そして機械全体の許可範囲を決める人です。</p></aside><div class="concept-points"><p class="concept-points-label">各層が答える質問</p><ul><li class="concept-card"><strong>Agent は行動できるか</strong><p>実行 Loop がモデル判断をツールと環境フィードバックへ接続します。</p></li><li class="concept-card"><strong>仕事は収束するか</strong><p>検証と運用が、試行を証拠に基づく継続的な進捗へ変えます。</p></li><li class="concept-card"><strong>システムは責任を持てるか</strong><p>改善と人の Loop が学習、権限、現実の結果を管理します。</p></li></ul></div>
   </div>
   <interactive-figure data-demo="layer-stack" data-title="ツール利用から人の説明責任までの5層" data-copy="{&quot;ariaLabel&quot;:&quot;Agent の実行から人の説明責任までを表す5つの入れ子ループ&quot;,&quot;detailLabel&quot;:&quot;選択したループ&quot;,&quot;layers&quot;:[{&quot;label&quot;:&quot;Agent 実行ループ&quot;,&quot;short&quot;:&quot;モデル ↔ ツールと環境&quot;,&quot;detail&quot;:&quot;1回の実行内で、Agent が状態を読み、行動を選び、ツールを使い、環境を観察して次の行動を更新します。&quot;,&quot;example&quot;:&quot;Agent を行動させますが、結果の正しさまでは証明しません。&quot;},{&quot;label&quot;:&quot;検証ループ&quot;,&quot;short&quot;:&quot;試行 ↔ 証拠と評価器&quot;,&quot;detail&quot;:&quot;テスト、rubric、ログ、レビューが試行を判定し、失敗時には行動可能なフィードバックを返します。&quot;,&quot;example&quot;:&quot;実行者と完了判定を分け、結果を収束させます。&quot;},{&quot;label&quot;:&quot;運用ループ&quot;,&quot;short&quot;:&quot;起動 → 実行 → 保存 → 次へ&quot;,&quot;detail&quot;:&quot;イベント、スケジュール、キューが仕事を選び、限定された実行が処理し、永続状態が進捗をセッション間で運びます。&quot;,&quot;example&quot;:&quot;人が次のプロンプトを手作業で送る役割を置き換える層です。&quot;},{&quot;label&quot;:&quot;Harness 改善ループ&quot;,&quot;short&quot;:&quot;Trace → Feedback → Eval → 変更&quot;,&quot;detail&quot;:&quot;本番 Trace とフィードバックを再利用可能な Eval に変え、Prompt、ツール、評価器、記憶、Harness の弱点を見つけます。&quot;,&quot;example&quot;:&quot;同じ種類の失敗を繰り返すだけで、システムが改善しない状態を防ぎます。&quot;},{&quot;label&quot;:&quot;人の外側のループ&quot;,&quot;short&quot;:&quot;目標、権限、予算、最終判断&quot;,&quot;detail&quot;:&quot;人が許容できる結果と権限を定義し、影響の大きい結果を承認し、方向を変え、出荷された結果に責任を持ちます。&quot;,&quot;example&quot;:&quot;自動化は実行を担えても、現実世界との境界は人が担います。&quot;}]}"><noscript>JavaScript を有効にするとインタラクティブ図解を表示できます。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="first-blueprint" aria-labelledby="first-blueprint-title">
+  <div class="copy-block">
+    <p class="section-label">設計ポイント 09</p>
+    <h2 id="first-blueprint-title">実際の CI 修復 Loop を順にたどる</h2>
+    <p class="copy-prose">実用的な Loop は巨大なソフトウェア工場である必要はありません。チェックアウトテストの失敗だけに反応する Routine を考えます。CI が起動し、契約が変更範囲を限定し、Agent は隔離されたブランチで作業し、独立検査が経路を決めます。</p>
+<p class="copy-prose">重要な成果物はパッチだけではありません。何が起動し、何を変え、どの検査を実行し、何が不確かで、予算をどれだけ使い、なぜ停止し、人の承認が必要かを証拠パッケージとして残します。</p>
+    <aside class="plain-language"><strong>かんたんに言うと</strong><p>退屈で反復的で測定できる仕事を1つ選び、すべての受け渡しを見えるようにします。理解できる小さな Loop は、監査できない大群より価値があります。</p></aside><div class="concept-points"><p class="concept-points-label">最初の導入に向く形</p><ul><li class="concept-card"><strong>安定した信号</strong><p>再現可能な CI 失敗のように、起動と合格条件が明確な仕事を選びます。</p></li><li class="concept-card"><strong>最小権限</strong><p>タスクに必要な権限と書き込み範囲だけを与えます。</p></li><li class="concept-card"><strong>レビュー可能な引き渡し</strong><p>小さな diff、証拠、停止理由、費用、既知の不足で終了します。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="workflow-blueprint" data-title="CI 起動からシステム改善までの10段階" data-copy="{&quot;ariaLabel&quot;:&quot;CI 失敗に反応し、修正、独立検証、状態保存、Harness 改善を行う Agent Loop の手順&quot;,&quot;nextButton&quot;:&quot;次の段階&quot;,&quot;stageLabel&quot;:&quot;{total} 段階中 {current}&quot;,&quot;actorLabel&quot;:&quot;担当またはコンポーネント&quot;,&quot;actionLabel&quot;:&quot;行うこと&quot;,&quot;artifactLabel&quot;:&quot;永続成果物&quot;,&quot;phases&quot;:[{&quot;label&quot;:&quot;起動&quot;,&quot;actor&quot;:&quot;CI イベント監視&quot;,&quot;action&quot;:&quot;main ブランチで安定したチェックアウト回帰が失敗し、1件の作業項目を作ります。&quot;,&quot;artifact&quot;:&quot;失敗 ID、commit、log、再現コマンド。&quot;,&quot;decision&quot;:&quot;具体的な信号だけを Loop に入れ、曖昧なバックログ整理は外に置きます。&quot;},{&quot;label&quot;:&quot;契約&quot;,&quot;actor&quot;:&quot;Loop 制御側&quot;,&quot;action&quot;:&quot;目標、checkout 限定範囲、非目標、許可ツール、3回上限、受け入れ条件を読みます。&quot;,&quot;artifact&quot;:&quot;作業項目に結び付く版管理された実行契約。&quot;,&quot;decision&quot;:&quot;後で、なぜ操作や停止が許可されたかを説明できます。&quot;},{&quot;label&quot;:&quot;復旧&quot;,&quot;actor&quot;:&quot;状態ローダー&quot;,&quot;action&quot;:&quot;過去の試行、現在のブランチ、未解決ブロッカー、収集済み証拠を読みます。&quot;,&quot;artifact&quot;:&quot;永続状態から作る最新の実行要約。&quot;,&quot;decision&quot;:&quot;再起動した Agent が歴史を再発見する必要はありません。&quot;},{&quot;label&quot;:&quot;調査&quot;,&quot;actor&quot;:&quot;Maker Agent&quot;,&quot;action&quot;:&quot;失敗経路、関連コード、プロジェクト規則、現在の仮説に必要な Context だけを調べます。&quot;,&quot;artifact&quot;:&quot;ファイルと観察結果を示した仮説。&quot;,&quot;decision&quot;:&quot;リポジトリ全体を Prompt に詰めず、必要時に Context を選びます。&quot;},{&quot;label&quot;:&quot;行動&quot;,&quot;actor&quot;:&quot;Worktree 内の Maker&quot;,&quot;action&quot;:&quot;小さく可逆な checkout 変更を行い、契約が許せば集中回帰テストを更新します。&quot;,&quot;artifact&quot;:&quot;隔離された diff と実行コマンド。&quot;,&quot;decision&quot;:&quot;別 Worker のファイルを静かに上書きしません。&quot;},{&quot;label&quot;:&quot;観察&quot;,&quot;actor&quot;:&quot;環境&quot;,&quot;action&quot;:&quot;再現テスト、checkout 回帰、静的検査、現実的なブラウザフローを実行します。&quot;,&quot;artifact&quot;:&quot;生のテスト出力、log、画像、終了コード。&quot;,&quot;decision&quot;:&quot;信号は現実が作り、Agent が作りません。&quot;},{&quot;label&quot;:&quot;検証&quot;,&quot;actor&quot;:&quot;Checker + 決定的ゲート&quot;,&quot;action&quot;:&quot;diff と証拠を、元の目標、非目標、ポリシー、品質 Rubric と比較します。&quot;,&quot;artifact&quot;:&quot;理由付きの合格、行動可能な失敗、曖昧さ、ポリシー違反。&quot;,&quot;decision&quot;:&quot;Maker の説明は有用ですが、完了判定ではありません。&quot;},{&quot;label&quot;:&quot;経路判断&quot;,&quot;actor&quot;:&quot;停止制御&quot;,&quot;action&quot;:&quot;合格、新しい失敗で再試行、ブロック、リスクの引き継ぎ、予算上限停止を選びます。&quot;,&quot;artifact&quot;:&quot;明示的な経路と停止理由。&quot;,&quot;decision&quot;:&quot;各周回を、暗黙の「続行」ではなく名前付き状態で終えます。&quot;},{&quot;label&quot;:&quot;引き渡し&quot;,&quot;actor&quot;:&quot;人のレビューまたはポリシーゲート&quot;,&quot;action&quot;:&quot;merge や deploy 前に、小さな diff、証拠、費用、既知の不確実性を確認します。&quot;,&quot;artifact&quot;:&quot;人の判断と監査可能な引き渡し記録。&quot;,&quot;decision&quot;:&quot;重大な結果は、適切な権限がある場合だけ境界を越えます。&quot;},{&quot;label&quot;:&quot;改善&quot;,&quot;actor&quot;:&quot;Harness 所有者&quot;,&quot;action&quot;:&quot;故障が再発するなら、Trace を回帰テスト、Skill、Hook、Grader、安全な初期値へ変えます。&quot;,&quot;artifact&quot;:&quot;同じ Eval セットで検証された版管理済みのシステム変更。&quot;,&quot;decision&quot;:&quot;次の同種タスクは、新しい Agent だけでなく、より良い Loop から始まります。&quot;}]}"><noscript>JavaScript を有効にするとインタラクティブ図解を表示できます。</noscript></interactive-figure>
+</section>
+<section class="closing" aria-labelledby="closing-title">
+  <div class="copy-block closing-copy">
+    <p class="section-label">最初の LOOP を作る</p>
+    <h2 id="closing-title">次のターンを自動化する前の7つの質問</h2>
+    <p class="copy-prose">Loop Engineering は、仕事が繰り返され、環境が意味のある証拠を返し、次の行動を限定できる時に有効です。決定的で簡単に script 化できる仕事は script を使い、成功を判定できない仕事や結果を安全に隔離できない仕事は、人を実行経路に残します。</p>
+<p class="copy-prose">1つの workflow、低い権限、見える Trace、小さな試行上限から始めます。初期実行を密に確認し、システムが何を見て、何を変え、なぜ止まり、何が不確かなのか説明できる時だけ自律性を広げます。</p>
+    <div class="closing-grid">
+      <div class="starter-checklist">
+        <h3>最初の Loop チェックリスト</h3>
+        <ol><li>どの観測可能な結果で仕事を終了するか？</li><li>Agent は何を変えられ、何が明確に範囲外か？</li><li>Agent の自己報告ではなく、環境から得る証拠は何か？</li><li>1回の試行は何を行い、試行数、時間、Token、並列数の予算はいくらか？</li><li>進捗、証拠、判断、ブロッカーを会話の外のどこへ保存するか？</li><li>どの結果を再試行、停止、ブロック、取消、人への引き継ぎへ送るか？</li><li>繰り返す失敗をテスト、Skill、Hook、Grader、ツール、安全なポリシーへどう変えるか？</li></ol>
+      </div>
+      <div class="boundary-map">
+        <h3>設計スケールを混同しない</h3>
+        <ul><li class="scale-card"><strong>Prompt</strong><span>この指示をどう表現するか？</span><p>1回の試行内の制御入力。</p></li><li class="scale-card"><strong>Context</strong><span>モデルが今見るべき情報は何か？</span><p>1回の推論に選ぶ高信号情報。</p></li><li class="scale-card"><strong>Harness</strong><span>Agent は何を安全にできるか？</span><p>モデル周囲のツール、権限、sandbox、Hook、記憶、復旧。</p></li><li class="scale-card"><strong>Loop</strong><span>仕事が時間の中でどう進み、止まるか？</span><p>起動、契約、試行、証拠、状態、経路、人の境界。</p></li><li class="scale-card"><strong>Factory</strong><span>多数の Loop をどう組織するか？</span><p>キュー、隔離、レビュー容量、ガバナンス、全体学習。</p></li></ul>
+      </div>
+    </div>
+    <blockquote>Loop Engineering は AI を永遠に働かせることではありません。次の一歩を知り、正しさを証明し、止まるべき時に止まり、失敗をより良い次回へ変える仕組みを設計することです。</blockquote>
+    <p class="source-note">用語上の注意：「Loop Engineering」は発展中の AI Agent 実践ラベルであり、単一の正式標準ではありません。本ガイドは 2024–2026 年の Anthropic / Claude、Addy Osmani、OpenAI、LangChain、IBM の公開資料を総合し、単独の絶対的発明者を主張しません。</p>
+  </div>
 </section>
     </article>
   </main>
@@ -204,6 +392,11 @@ interactive-figure {
   });
   let globalPaused = false;
 
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
   const call = (instance, method, value) => {
     if (instance && typeof instance[method] === "function") instance[method](value);
   };
@@ -212,8 +405,10 @@ interactive-figure {
     constructor() {
       super();
       this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
       this._instance = null;
       this._mounted = false;
+      this._mounting = false;
       this._visible = false;
       this._localPaused = false;
     }
@@ -226,7 +421,7 @@ interactive-figure {
         <style>
           :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
           .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
-          .stage { position: relative; min-height: 25rem; overflow: hidden; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
           .status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; }
           .status[hidden] { display: none; }
           .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
@@ -253,7 +448,7 @@ interactive-figure {
       this._title.textContent = this.dataset.title || "";
       this._pauseButton.textContent = ui.pause;
       this._resetButton.textContent = ui.reset;
-      this._status.textContent = ui.waiting;
+      this._setStatus(ui.waiting);
 
       this._pauseButton.addEventListener("click", () => {
         this._localPaused = !this._localPaused;
@@ -270,35 +465,72 @@ interactive-figure {
         this._syncPlayback();
       }, { rootMargin: "180px 0px", threshold: .05 });
       this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
     }
 
     disconnectedCallback() {
       figures.delete(this);
       this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
       call(this._instance, "destroy");
     }
 
     async _mount() {
-      if (this._mounted) return;
+      if (this._mounted || this._mounting) return;
       const factory = registry.get(this.dataset.demo);
       if (!factory) return;
-      this._status.textContent = ui.loading;
+      this._mounting = true;
+      this._setStatus(ui.loading);
       try {
         this._instance = await factory({
           root: this._stage,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
           copy: this._copy,
           motion: !reducedMotion.matches,
-          tokens
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._setStatus(message)
         }) || {};
         this._mounted = true;
         this.dataset.state = "mounted";
         this._status.hidden = true;
+        this._resize();
         this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
       } catch {
         this.dataset.state = "error";
-        this._status.hidden = false;
-        this._status.textContent = ui.error;
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
       }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
     }
 
     _syncPlayback() {
@@ -308,9 +540,15 @@ interactive-figure {
       if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
       call(this._instance, paused ? "pause" : "resume");
     }
+
+    _setStatus(message) {
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
   }
 
   window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
     if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
     registry.set(id, factory);
     figures.forEach((figure) => {
@@ -322,11 +560,13 @@ interactive-figure {
 
   const globalToggle = document.querySelector("[data-global-motion]");
   const syncGlobalToggle = () => {
-    globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
-    globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
     figures.forEach((figure) => figure._syncPlayback());
   };
-  globalToggle.addEventListener("click", () => {
+  globalToggle?.addEventListener("click", () => {
     globalPaused = !globalPaused;
     syncGlobalToggle();
   });
@@ -335,505 +575,1297 @@ interactive-figure {
 })();
   </script>
   <script data-prototype-bundle="demos">
-(() => {
-  "use strict";
+const escapeHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
 
-  const escapeHtml = (value) => String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+registerDemo("role-shift", ({ root, copy, tokens }) => {
+  const manualSteps = copy.manualSteps.map((step, index) => `
+    <li><span>${String(index + 1).padStart(2, "0")}</span>${escapeHtml(step)}</li>`).join("");
+  const systemNodes = copy.systemNodes.map((node) => `
+    <li><strong>${escapeHtml(node.label)}</strong><span>${escapeHtml(node.detail)}</span></li>`).join("");
+  const boundaries = copy.boundaries.map((boundary) => `<li>${escapeHtml(boundary)}</li>`).join("");
 
-  registerDemo("overview", ({ root, copy, motion, tokens }) => {
-    root.innerHTML = `
-      <style>
-        .overview-demo { position: relative; display: grid; place-items: center; min-height: 25rem; padding: 2rem; background: radial-gradient(circle, #e5f4f0, white 70%); }
-        .loop { position: relative; width: min(82vw, 38rem); aspect-ratio: 16 / 9; }
-        .ring { position: absolute; inset: 8% 14%; border: 3px dashed ${tokens.ocean}; border-radius: 50%; animation: spin 14s linear infinite; }
-        .node { position: absolute; display: grid; place-items: center; width: 9.5rem; min-height: 5rem; padding: 1rem; border: 1px solid #d8ddd7; border-radius: 1.25rem; color: ${tokens.ink}; background: rgba(255,255,255,.94); box-shadow: 0 .8rem 2rem rgba(23,51,60,.1); font-weight: 850; text-align: center; }
-        .node-energy { left: 0; bottom: 0; border-color: ${tokens.warm}; }
-        .node-moisture { top: 0; left: 50%; transform: translateX(-50%); border-color: ${tokens.ocean}; }
-        .node-storm { right: 0; bottom: 0; border-color: ${tokens.coral}; }
-        .caption { position: absolute; right: 1rem; bottom: 1rem; left: 1rem; margin: 0; color: ${tokens.muted}; font-size: .8rem; text-align: center; }
-        .is-paused .ring { animation-play-state: paused; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @media (max-width: 560px) { .loop { min-height: 22rem; } .node { width: 7.5rem; font-size: .8rem; } }
-      </style>
-      <div class="overview-demo${motion ? "" : " is-paused"}" role="img" aria-label="${escapeHtml(copy.ariaLabel)}">
-        <div class="loop">
-          <div class="ring" aria-hidden="true"></div>
-          <div class="node node-energy">${escapeHtml(copy.energy)}</div>
-          <div class="node node-moisture">${escapeHtml(copy.moisture)}</div>
-          <div class="node node-storm">${escapeHtml(copy.storm)}</div>
+  root.innerHTML = `
+    <style>
+      .role-shift-demo { display: grid; gap: 1.2rem; min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: radial-gradient(circle at 86% 14%, color-mix(in srgb, ${tokens.warm} 14%, transparent), transparent 18rem), ${tokens.surface}; }
+      .role-shift-switch { display: grid; gap: .55rem; justify-items: center; }
+      .role-shift-label { margin: 0; color: ${tokens.muted}; font-size: .72rem; font-weight: 850; letter-spacing: .09em; text-transform: uppercase; }
+      .role-shift-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; }
+      .role-shift-buttons button { padding: .58rem .9rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-weight: 850; cursor: pointer; }
+      .role-shift-buttons button[aria-pressed="true"] { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
+      .role-shift-buttons button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
+      .role-shift-scene { display: grid; grid-template-columns: minmax(11rem, .4fr) minmax(0, 1.6fr); gap: 1rem; align-items: stretch; }
+      .role-shift-human, .role-shift-work { min-height: 17rem; padding: 1.2rem; border: 1px solid ${tokens.line}; border-radius: 1.2rem; background: color-mix(in srgb, ${tokens.paper} 34%, ${tokens.surface}); }
+      .role-shift-human { display: grid; place-content: center; text-align: center; }
+      .role-shift-avatar { display: grid; width: 4rem; aspect-ratio: 1; margin: 0 auto .9rem; place-content: center; border-radius: 50%; color: ${tokens.surface}; background: ${tokens.coral}; font-size: 1.5rem; font-weight: 900; }
+      .role-shift-human strong { font-size: 1.05rem; }
+      .role-shift-human p { margin: .55rem 0 0; color: ${tokens.muted}; font-size: .82rem; line-height: 1.5; }
+      .role-shift-manual { display: grid; gap: .65rem; margin: 0; padding: 0; list-style: none; }
+      .role-shift-manual li { display: grid; grid-template-columns: 2rem 1fr; gap: .6rem; align-items: center; padding: .72rem; border: 1px solid ${tokens.line}; border-radius: .85rem; background: ${tokens.surface}; }
+      .role-shift-manual li span { color: ${tokens.coral}; font-size: .68rem; font-weight: 900; }
+      .role-shift-cost { margin: .8rem 0 0; padding-top: .8rem; border-top: 1px solid ${tokens.line}; color: ${tokens.muted}; font-size: .82rem; line-height: 1.5; }
+      .role-shift-boundaries { display: flex; flex-wrap: wrap; gap: .45rem; margin: 0 0 .8rem; padding: 0; list-style: none; }
+      .role-shift-boundaries li { padding: .35rem .58rem; border: 1px solid color-mix(in srgb, ${tokens.ocean} 45%, ${tokens.line}); border-radius: 999px; color: ${tokens.ocean}; font-size: .7rem; font-weight: 850; }
+      .role-shift-system { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; margin: 0; padding: 0; list-style: none; }
+      .role-shift-system li { min-height: 6.5rem; padding: .8rem; border: 1px solid ${tokens.line}; border-radius: .9rem; background: ${tokens.surface}; }
+      .role-shift-system strong, .role-shift-system span { display: block; }
+      .role-shift-system strong { margin-bottom: .35rem; }
+      .role-shift-system span { color: ${tokens.muted}; font-size: .76rem; line-height: 1.45; }
+      .role-shift-system-note { margin: .8rem 0 0; color: ${tokens.muted}; font-size: .82rem; line-height: 1.5; }
+      .role-shift-status { min-height: 1.8rem; margin: 0; color: ${tokens.muted}; font-weight: 850; text-align: center; }
+      .role-shift-demo[data-mode="manual"] .role-shift-system-view, .role-shift-demo[data-mode="system"] .role-shift-manual-view { display: none; }
+      @media (max-width: 720px) { .role-shift-scene { grid-template-columns: 1fr; } .role-shift-human { min-height: auto; } .role-shift-system { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 480px) { .role-shift-system { grid-template-columns: 1fr; } }
+    </style>
+    <div class="role-shift-demo" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="role-shift-switch">
+        <p class="role-shift-label">${escapeHtml(copy.modeLabel)}</p>
+        <div class="role-shift-buttons">
+          <button type="button" data-mode="manual" aria-pressed="true">${escapeHtml(copy.manualButton)}</button>
+          <button type="button" data-mode="system" aria-pressed="false">${escapeHtml(copy.systemButton)}</button>
         </div>
-        <p class="caption">${escapeHtml(copy.caption)}</p>
-      </div>`;
-    const scene = root.querySelector(".overview-demo");
-    return {
-      pause: () => scene.classList.add("is-paused"),
-      resume: () => scene.classList.remove("is-paused"),
-      reset: () => { scene.dataset.resetCount = String(Number(scene.dataset.resetCount || 0) + 1); },
-      destroy: () => { root.innerHTML = ""; }
-    };
-  });
-
-  registerDemo("energy", ({ root, copy, motion, tokens }) => {
-    root.innerHTML = `
-      <style>
-        .energy-demo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(14rem, 22rem); gap: 2rem; align-items: center; min-height: 25rem; padding: clamp(1.25rem, 5vw, 3rem); background: linear-gradient(160deg, #e8f5f2, white); }
-        .ocean { position: relative; min-height: 16rem; overflow: hidden; border-radius: 1.5rem; background: linear-gradient(#cfeff0 0 42%, ${tokens.ocean} 43% 100%); }
-        .sun { position: absolute; top: 1.5rem; left: 50%; width: 5rem; height: 5rem; border-radius: 50%; background: ${tokens.warm}; box-shadow: 0 0 0 1rem rgba(238,157,70,.14); animation: breathe 2.4s ease-in-out infinite alternate; }
-        .meter { height: 1rem; overflow: hidden; border-radius: 99px; background: #d8ddd7; }
-        .meter > span { display: block; width: 40%; height: 100%; background: linear-gradient(90deg, ${tokens.ocean}, ${tokens.warm}); transition: width .2s ease; }
-        .control { display: grid; gap: .8rem; }
-        .control label { font-weight: 850; }
-        .range-labels { display: flex; justify-content: space-between; color: ${tokens.muted}; font-size: .78rem; }
-        output { color: ${tokens.coral}; font-size: 1.7rem; font-weight: 900; }
-        .caption { color: ${tokens.muted}; line-height: 1.6; }
-        .is-paused .sun { animation-play-state: paused; }
-        @keyframes breathe { to { transform: scale(1.1); box-shadow: 0 0 0 1.8rem rgba(238,157,70,.08); } }
-        @media (max-width: 680px) { .energy-demo { grid-template-columns: 1fr; } .ocean { min-height: 13rem; } }
-      </style>
-      <div class="energy-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
-        <div class="ocean" aria-hidden="true"><div class="sun"></div></div>
-        <div class="control">
-          <label for="energy-range">${escapeHtml(copy.controlLabel)}</label>
-          <input id="energy-range" type="range" min="0" max="100" value="40" aria-label="${escapeHtml(copy.ariaLabel)}">
-          <div class="range-labels"><span>${escapeHtml(copy.lowLabel)}</span><span>${escapeHtml(copy.highLabel)}</span></div>
-          <div class="meter" aria-hidden="true"><span></span></div>
-          <output data-energy-value>40 ${escapeHtml(copy.unit)}</output>
-          <p class="caption">${escapeHtml(copy.caption)}</p>
+      </div>
+      <div class="role-shift-scene">
+        <div class="role-shift-human">
+          <span class="role-shift-avatar" aria-hidden="true">H</span>
+          <strong data-human-title></strong>
+          <p data-human-detail></p>
         </div>
-      </div>`;
-    const scene = root.querySelector(".energy-demo");
-    const range = root.querySelector("#energy-range");
-    const fill = root.querySelector(".meter > span");
-    const output = root.querySelector("[data-energy-value]");
-    const update = () => {
-      fill.style.width = `${range.value}%`;
-      output.textContent = `${range.value} ${copy.unit}`;
-      scene.dataset.value = range.value;
-    };
-    range.addEventListener("input", update);
-    update();
-    return {
-      pause: () => scene.classList.add("is-paused"),
-      resume: () => scene.classList.remove("is-paused"),
-      reset: () => { range.value = "40"; update(); },
-      destroy: () => { root.innerHTML = ""; }
-    };
-  });
-
-  registerDemo("organization", ({ root, copy, motion, tokens }) => {
-    root.innerHTML = `
-      <style>
-        .organization-demo { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 1rem; min-height: 25rem; padding: clamp(1.25rem, 4vw, 2.5rem); background: #f9fbfa; }
-        .switcher { display: flex; justify-content: center; gap: .6rem; }
-        .switcher button { padding: .55rem .9rem; border: 1px solid #d8ddd7; border-radius: 999px; color: ${tokens.ink}; background: white; font: inherit; font-weight: 800; cursor: pointer; }
-        .switcher button[aria-pressed="true"] { color: white; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
-        .field { position: relative; min-height: 17rem; overflow: hidden; border-radius: 1.5rem; background: radial-gradient(circle, #dff2ee, white 66%); }
-        .cell { position: absolute; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: ${tokens.coral}; box-shadow: 0 0 0 .6rem rgba(212,95,80,.12); animation: float 2.2s ease-in-out infinite alternate; transition: inset .6s ease, transform .6s ease; }
-        .cell:nth-child(1) { top: 18%; left: 16%; }
-        .cell:nth-child(2) { top: 56%; left: 27%; animation-delay: -.6s; }
-        .cell:nth-child(3) { top: 26%; right: 18%; animation-delay: -1.2s; }
-        .cell:nth-child(4) { right: 30%; bottom: 16%; animation-delay: -1.7s; }
-        .organized .cell:nth-child(1) { top: 23%; left: 48%; transform: translate(-50%, -50%); }
-        .organized .cell:nth-child(2) { top: 50%; left: 67%; transform: translate(-50%, -50%); }
-        .organized .cell:nth-child(3) { top: 70%; right: 48%; transform: translate(50%, -50%); }
-        .organized .cell:nth-child(4) { right: 67%; bottom: 50%; transform: translate(50%, 50%); }
-        .center { position: absolute; inset: 50% auto auto 50%; width: 4rem; height: 4rem; border: 2px dashed ${tokens.ocean}; border-radius: 50%; opacity: 0; transform: translate(-50%, -50%); transition: opacity .4s ease; animation: spin 5s linear infinite; }
-        .organized .center { opacity: 1; }
-        .organization-status { margin: 0; color: ${tokens.muted}; font-weight: 800; text-align: center; }
-        .caption { margin: 0; color: ${tokens.muted}; font-size: .8rem; text-align: center; }
-        .is-paused .cell, .is-paused .center { animation-play-state: paused; }
-        @keyframes float { to { translate: 0 -1rem; } }
-        @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
-      </style>
-      <div class="organization-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
-        <div class="switcher">
-          <button type="button" data-mode="scattered" aria-pressed="true">${escapeHtml(copy.scatteredButton)}</button>
-          <button type="button" data-mode="organized" aria-pressed="false">${escapeHtml(copy.organizedButton)}</button>
-        </div>
-        <div>
-          <div class="field" aria-hidden="true">
-            <span class="cell"></span><span class="cell"></span><span class="cell"></span><span class="cell"></span>
-            <span class="center"></span>
+        <div class="role-shift-work">
+          <div class="role-shift-manual-view">
+            <ol class="role-shift-manual">${manualSteps}</ol>
+            <p class="role-shift-cost"><strong>${escapeHtml(copy.manualCostLabel)}:</strong> ${escapeHtml(copy.manualCost)}</p>
           </div>
-          <p class="organization-status" aria-live="polite"></p>
+          <div class="role-shift-system-view">
+            <p class="role-shift-label">${escapeHtml(copy.boundaryLabel)}</p>
+            <ul class="role-shift-boundaries">${boundaries}</ul>
+            <ol class="role-shift-system">${systemNodes}</ol>
+            <p class="role-shift-system-note">${escapeHtml(copy.systemNote)}</p>
+          </div>
         </div>
-        <p class="caption">${escapeHtml(copy.caption)}</p>
-      </div>`;
-    const scene = root.querySelector(".organization-demo");
-    const field = root.querySelector(".field");
-    const status = root.querySelector(".organization-status");
-    const buttons = [...root.querySelectorAll("[data-mode]")];
-    const setMode = (mode) => {
-      const organized = mode === "organized";
-      field.classList.toggle("organized", organized);
-      scene.dataset.mode = mode;
-      status.textContent = organized ? copy.organizedStatus : copy.scatteredStatus;
-      buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.mode === mode)));
-    };
-    buttons.forEach((button) => button.addEventListener("click", () => setMode(button.dataset.mode)));
-    setMode("scattered");
-    return {
-      pause: () => scene.classList.add("is-paused"),
-      resume: () => scene.classList.remove("is-paused"),
-      reset: () => setMode("scattered"),
-      destroy: () => { root.innerHTML = ""; }
-    };
-  });
+      </div>
+      <p class="role-shift-status" aria-live="polite"></p>
+    </div>`;
 
-  registerDemo("outer-loop", ({ root, copy, motion, tokens }) => {
-    const nodes = copy.nodes.map((node, index) => `
-      <button type="button" class="loop-node" data-node="${index}" aria-pressed="${index === 0}">
-        <span class="node-index">${String(index + 1).padStart(2, "0")}</span>
-        <span>${escapeHtml(node.label)}</span>
-      </button>`).join("");
-    const guardrails = copy.guardrails.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
-    root.innerHTML = `
-      <style>
-        .outer-loop-demo { min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: radial-gradient(circle at 50% 35%, color-mix(in srgb, ${tokens.ocean} 15%, ${tokens.surface}), ${tokens.surface} 58%); }
-        .guardrail-label { margin: 0 0 .75rem; color: ${tokens.muted}; font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
-        .guardrails { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
-        .guardrails li { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.muted}; background: color-mix(in srgb, ${tokens.surface} 86%, transparent); font-size: .74rem; font-weight: 800; }
-        .loop-track { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .55rem; padding: 1.2rem; border: 1px solid ${tokens.line}; border-radius: 1.5rem; background: color-mix(in srgb, ${tokens.paper} 45%, ${tokens.surface}); }
-        .loop-track::after { position: absolute; right: 7%; bottom: -.8rem; left: 7%; height: 1.6rem; border: 2px solid ${tokens.ocean}; border-top: 0; border-radius: 0 0 999px 999px; content: ""; opacity: .65; }
-        .loop-node { position: relative; z-index: 1; display: grid; min-height: 6.7rem; place-content: center; gap: .45rem; padding: .8rem; border: 1px solid ${tokens.line}; border-radius: 1rem; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-weight: 800; text-align: center; cursor: pointer; }
-        .loop-node[aria-pressed="true"] { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
-        .loop-node:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
-        .node-index { color: ${tokens.muted}; font-size: .68rem; letter-spacing: .08em; }
-        .loop-node[aria-pressed="true"] .node-index { color: inherit; opacity: .78; }
-        .pulse { position: absolute; z-index: 2; top: .72rem; left: .72rem; width: .7rem; height: .7rem; border-radius: 50%; background: ${tokens.warm}; box-shadow: 0 0 0 .45rem color-mix(in srgb, ${tokens.warm} 20%, transparent); animation: travel 7s ease-in-out infinite; pointer-events: none; }
-        .detail { min-height: 3.2rem; margin: 2rem auto 0; max-width: 44rem; color: ${tokens.muted}; line-height: 1.6; text-align: center; }
-        .is-paused .pulse { animation-play-state: paused; }
-        @keyframes travel { 0%, 12% { left: 3%; } 22%, 34% { left: 23%; } 44%, 56% { left: 43%; } 66%, 78% { left: 63%; } 88%, 100% { left: 83%; } }
-        @media (max-width: 720px) { .loop-track { grid-template-columns: 1fr; } .loop-track::after, .pulse { display: none; } .loop-node { min-height: 4.2rem; } }
-      </style>
-      <div class="outer-loop-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
-        <p class="guardrail-label">${escapeHtml(copy.guardrailLabel)}</p>
-        <ul class="guardrails">${guardrails}</ul>
-        <div class="loop-track"><span class="pulse" aria-hidden="true"></span>${nodes}</div>
-        <p class="detail" aria-live="polite"></p>
-      </div>`;
-    const scene = root.querySelector(".outer-loop-demo");
-    const detail = root.querySelector(".detail");
-    const buttons = [...root.querySelectorAll("[data-node]")];
-    const select = (index) => {
-      detail.textContent = copy.nodes[index].detail;
-      scene.dataset.node = String(index);
-      buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
-    };
-    buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.node))));
-    select(0);
-    return {
-      pause: () => scene.classList.add("is-paused"),
-      resume: () => scene.classList.remove("is-paused"),
-      reset: () => select(0),
-      destroy: () => { root.innerHTML = ""; }
-    };
-  });
+  const scene = root.querySelector(".role-shift-demo");
+  const humanTitle = root.querySelector("[data-human-title]");
+  const humanDetail = root.querySelector("[data-human-detail]");
+  const status = root.querySelector(".role-shift-status");
+  const buttons = [...root.querySelectorAll("[data-mode]")];
+  const setMode = (mode) => {
+    const system = mode === "system";
+    scene.dataset.mode = mode;
+    humanTitle.textContent = system ? copy.systemHuman : copy.manualHuman;
+    humanDetail.textContent = system ? copy.systemHumanDetail : copy.manualHumanDetail;
+    status.textContent = system ? copy.systemStatus : copy.manualStatus;
+    buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.mode === mode)));
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => setMode(button.dataset.mode)));
+  setMode("manual");
 
-  registerDemo("contract-gate", ({ root, copy, tokens }) => {
-    root.innerHTML = `
-      <style>
-        .contract-demo { display: grid; grid-template-rows: auto 1fr auto; gap: 1.25rem; min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: ${tokens.surface}; }
-        .mode-switch { display: flex; flex-wrap: wrap; justify-content: center; gap: .65rem; }
-        .mode-switch button { padding: .55rem .9rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-weight: 800; cursor: pointer; }
-        .mode-switch button[aria-pressed="true"] { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
-        .mode-switch button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
-        .contract-field { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 1rem; align-items: center; }
-        .brief, .gate { min-height: 13rem; padding: 1.25rem; border: 1px solid ${tokens.line}; border-radius: 1.25rem; background: color-mix(in srgb, ${tokens.paper} 38%, ${tokens.surface}); }
-        .brief-label, .gate-label { margin: 0 0 .8rem; color: ${tokens.muted}; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-        .brief-text { margin: 0; font-size: 1.2rem; font-weight: 850; line-height: 1.45; }
-        .arrow { color: ${tokens.ocean}; font-size: 2rem; }
-        .checks { display: grid; gap: .65rem; margin: 0; padding: 0; list-style: none; }
-        .checks li { display: grid; grid-template-columns: 1.25rem 1fr; gap: .55rem; align-items: start; color: ${tokens.muted}; }
-        .checks li::before { display: grid; width: 1.15rem; height: 1.15rem; place-content: center; border: 1px solid ${tokens.line}; border-radius: 50%; content: "×"; font-size: .72rem; }
-        .is-engineered .checks li { color: ${tokens.ink}; }
-        .is-engineered .checks li::before { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; content: "✓"; }
-        .contract-status { min-height: 1.8rem; margin: 0; color: ${tokens.muted}; font-weight: 800; text-align: center; }
-        @media (max-width: 680px) { .contract-field { grid-template-columns: 1fr; } .arrow { rotate: 90deg; text-align: center; } .brief, .gate { min-height: auto; } }
-      </style>
-      <div class="contract-demo" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
-        <div class="mode-switch">
-          <button type="button" data-mode="vague" aria-pressed="true">${escapeHtml(copy.vagueButton)}</button>
-          <button type="button" data-mode="engineered" aria-pressed="false">${escapeHtml(copy.engineeredButton)}</button>
-        </div>
-        <div class="contract-field">
-          <div class="brief"><p class="brief-label">${escapeHtml(copy.inputLabel)}</p><p class="brief-text"></p></div>
-          <span class="arrow" aria-hidden="true">→</span>
-          <div class="gate"><p class="gate-label">${escapeHtml(copy.gateLabel)}</p><ul class="checks"></ul></div>
-        </div>
-        <p class="contract-status" aria-live="polite"></p>
-      </div>`;
-    const scene = root.querySelector(".contract-demo");
-    const brief = root.querySelector(".brief-text");
-    const checks = root.querySelector(".checks");
-    const status = root.querySelector(".contract-status");
-    const buttons = [...root.querySelectorAll("[data-mode]")];
-    const setMode = (mode) => {
-      const engineered = mode === "engineered";
-      scene.classList.toggle("is-engineered", engineered);
-      scene.dataset.mode = mode;
-      brief.textContent = engineered ? copy.engineeredBrief : copy.vagueBrief;
-      checks.innerHTML = (engineered ? copy.engineeredChecks : copy.vagueChecks).map((item) => `<li>${escapeHtml(item)}</li>`).join("");
-      status.textContent = engineered ? copy.engineeredStatus : copy.vagueStatus;
-      buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.mode === mode)));
-    };
-    buttons.forEach((button) => button.addEventListener("click", () => setMode(button.dataset.mode)));
-    setMode("vague");
-    return {
-      pause: () => {},
-      resume: () => {},
-      reset: () => setMode("vague"),
-      destroy: () => { root.innerHTML = ""; }
-    };
-  });
+  return {
+    pause: () => {},
+    resume: () => {},
+    reset: () => setMode("manual"),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
 
-  registerDemo("iteration-trace", ({ root, copy, motion, tokens }) => {
-    const phases = copy.phaseLabels.map((label, index) => `<li data-phase="${index}"><span>${String(index + 1).padStart(2, "0")}</span>${escapeHtml(label)}</li>`).join("");
-    root.innerHTML = `
-      <style>
-        .trace-demo { display: grid; grid-template-rows: auto auto 1fr auto; gap: 1.15rem; min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: ${tokens.surface}; }
-        .trace-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; }
-        .attempt { margin: 0; color: ${tokens.muted}; font-weight: 800; }
-        .next { padding: .6rem .95rem; border: 1px solid ${tokens.ocean}; border-radius: 999px; color: ${tokens.surface}; background: ${tokens.ocean}; font: inherit; font-weight: 800; cursor: pointer; }
-        .next:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
-        .phases { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .65rem; margin: 0; padding: 0; list-style: none; }
-        .phases li { display: grid; gap: .35rem; min-height: 5rem; place-content: center; padding: .75rem; border: 1px solid ${tokens.line}; border-radius: 1rem; color: ${tokens.muted}; background: color-mix(in srgb, ${tokens.paper} 32%, ${tokens.surface}); text-align: center; }
-        .phases li span { font-size: .68rem; letter-spacing: .08em; }
-        .phases li.is-active { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; animation: trace-pulse 1.4s ease-in-out infinite alternate; }
-        .phases li.is-complete { color: ${tokens.ink}; border-color: color-mix(in srgb, ${tokens.ocean} 55%, ${tokens.line}); }
-        .evidence { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: 1rem; align-items: stretch; }
-        .change, .observation { padding: 1.15rem; border: 1px solid ${tokens.line}; border-radius: 1.1rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); }
-        .panel-label { margin: 0 0 .65rem; color: ${tokens.muted}; font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-        .change p:last-child, .observation p:last-child { margin: 0; line-height: 1.6; }
-        .outcome { min-height: 1.8rem; margin: 0; color: ${tokens.muted}; font-weight: 800; text-align: center; }
-        .is-paused .phases li.is-active { animation-play-state: paused; }
-        @keyframes trace-pulse { to { box-shadow: 0 0 0 .45rem color-mix(in srgb, ${tokens.ocean} 18%, transparent); } }
-        @media (max-width: 680px) { .phases { grid-template-columns: 1fr 1fr; } .evidence { grid-template-columns: 1fr; } }
-      </style>
-      <div class="trace-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
-        <div class="trace-head"><p class="attempt"></p><button type="button" class="next">${escapeHtml(copy.nextButton)}</button></div>
-        <ol class="phases">${phases}</ol>
-        <div class="evidence">
-          <div class="change"><p class="panel-label">${escapeHtml(copy.changeLabel)}</p><p data-change></p></div>
-          <div class="observation"><p class="panel-label">${escapeHtml(copy.evidenceLabel)}</p><p data-evidence></p></div>
-        </div>
-        <p class="outcome" aria-live="polite"></p>
-      </div>`;
-    const scene = root.querySelector(".trace-demo");
-    const attempt = root.querySelector(".attempt");
-    const change = root.querySelector("[data-change]");
-    const evidence = root.querySelector("[data-evidence]");
-    const outcome = root.querySelector(".outcome");
-    const phaseItems = [...root.querySelectorAll("[data-phase]")];
-    let index = 0;
-    const render = () => {
-      const state = copy.states[index];
-      attempt.textContent = copy.attemptLabel.replace("{attempt}", state.attempt);
-      change.textContent = state.change;
-      evidence.textContent = state.evidence;
-      outcome.textContent = state.outcome;
-      scene.dataset.state = String(index);
-      phaseItems.forEach((item, itemIndex) => {
-        item.classList.toggle("is-active", itemIndex === state.phase);
-        item.classList.toggle("is-complete", itemIndex < state.phase);
-      });
-    };
-    root.querySelector(".next").addEventListener("click", () => { index = (index + 1) % copy.states.length; render(); });
-    render();
-    return {
-      pause: () => scene.classList.add("is-paused"),
-      resume: () => scene.classList.remove("is-paused"),
-      reset: () => { index = 0; render(); },
-      destroy: () => { root.innerHTML = ""; }
-    };
-  });
+registerDemo("outer-loop", ({ root, copy, motion, tokens }) => {
+  const nodes = copy.nodes.map((node, index) => `
+    <button type="button" class="loop-node" data-node="${index}" aria-pressed="${index === 0}">
+      <span class="node-index">${String(index + 1).padStart(2, "0")}</span>
+      <span>${escapeHtml(node.label)}</span>
+    </button>`).join("");
+  const guardrails = copy.guardrails.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+  root.innerHTML = `
+    <style>
+      .outer-loop-demo { min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: radial-gradient(circle at 50% 35%, color-mix(in srgb, ${tokens.ocean} 15%, ${tokens.surface}), ${tokens.surface} 58%); }
+      .guardrail-label { margin: 0 0 .75rem; color: ${tokens.muted}; font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+      .guardrails { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
+      .guardrails li { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.muted}; background: color-mix(in srgb, ${tokens.surface} 86%, transparent); font-size: .74rem; font-weight: 800; }
+      .loop-track { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .55rem; padding: 1.2rem; border: 1px solid ${tokens.line}; border-radius: 1.5rem; background: color-mix(in srgb, ${tokens.paper} 45%, ${tokens.surface}); }
+      .loop-track::after { position: absolute; right: 7%; bottom: -.8rem; left: 7%; height: 1.6rem; border: 2px solid ${tokens.ocean}; border-top: 0; border-radius: 0 0 999px 999px; content: ""; opacity: .65; }
+      .loop-node { position: relative; z-index: 1; display: grid; min-height: 6.7rem; place-content: center; gap: .45rem; padding: .8rem; border: 1px solid ${tokens.line}; border-radius: 1rem; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-weight: 800; text-align: center; cursor: pointer; }
+      .loop-node[aria-pressed="true"] { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
+      .loop-node:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
+      .node-index { color: ${tokens.muted}; font-size: .68rem; letter-spacing: .08em; }
+      .loop-node[aria-pressed="true"] .node-index { color: inherit; opacity: .78; }
+      .pulse { position: absolute; z-index: 2; top: .72rem; left: .72rem; width: .7rem; height: .7rem; border-radius: 50%; background: ${tokens.warm}; box-shadow: 0 0 0 .45rem color-mix(in srgb, ${tokens.warm} 20%, transparent); animation: travel 7s ease-in-out infinite; pointer-events: none; }
+      .detail { min-height: 3.2rem; margin: 2rem auto 0; max-width: 44rem; color: ${tokens.muted}; line-height: 1.6; text-align: center; }
+      .is-paused .pulse { animation-play-state: paused; }
+      @keyframes travel { 0%, 12% { left: 3%; } 22%, 34% { left: 23%; } 44%, 56% { left: 43%; } 66%, 78% { left: 63%; } 88%, 100% { left: 83%; } }
+      @media (max-width: 720px) { .loop-track { grid-template-columns: 1fr; } .loop-track::after, .pulse { display: none; } .loop-node { min-height: 4.2rem; } }
+    </style>
+    <div class="outer-loop-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <p class="guardrail-label">${escapeHtml(copy.guardrailLabel)}</p>
+      <ul class="guardrails">${guardrails}</ul>
+      <div class="loop-track"><span class="pulse" aria-hidden="true"></span>${nodes}</div>
+      <p class="detail" aria-live="polite"></p>
+    </div>`;
+  const scene = root.querySelector(".outer-loop-demo");
+  const detail = root.querySelector(".detail");
+  const buttons = [...root.querySelectorAll("[data-node]")];
+  const select = (index) => {
+    detail.textContent = copy.nodes[index].detail;
+    scene.dataset.node = String(index);
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.node))));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
 
-  registerDemo("evidence-gate", ({ root, copy, tokens }) => {
-    root.innerHTML = `
-      <style>
-        .evidence-demo { display: grid; gap: 1.25rem; min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: ${tokens.surface}; }
-        .control-group { display: grid; gap: .55rem; }
-        .control-label { margin: 0; color: ${tokens.muted}; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
-        .choice-row { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; }
-        .choice-row button { padding: .52rem .85rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-weight: 800; cursor: pointer; }
-        .choice-row button[aria-pressed="true"] { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
-        .choice-row button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
-        .routing { display: grid; grid-template-columns: minmax(0, 1fr) auto repeat(3, minmax(0, .75fr)); gap: .75rem; align-items: center; }
-        .verdict, .route { display: grid; min-height: 8rem; place-content: center; padding: 1rem; border: 1px solid ${tokens.line}; border-radius: 1.15rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); text-align: center; }
-        .verdict strong, .route strong { display: block; margin-bottom: .35rem; }
-        .verdict span, .route span { color: ${tokens.muted}; font-size: .78rem; line-height: 1.45; }
-        .routing-arrow { color: ${tokens.ocean}; font-size: 2rem; }
-        .route.is-active { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
-        .route.is-active span { color: inherit; opacity: .82; }
-        .evidence-status { min-height: 2.4rem; margin: 0; color: ${tokens.muted}; font-weight: 800; line-height: 1.5; text-align: center; }
-        @media (max-width: 760px) { .routing { grid-template-columns: 1fr; } .routing-arrow { rotate: 90deg; text-align: center; } .verdict, .route { min-height: 5.5rem; } }
-      </style>
-      <div class="evidence-demo" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
-        <div class="control-group"><p class="control-label">${escapeHtml(copy.verifierLabel)}</p><div class="choice-row">
-          <button type="button" data-verifier="self" aria-pressed="true">${escapeHtml(copy.selfButton)}</button>
-          <button type="button" data-verifier="independent" aria-pressed="false">${escapeHtml(copy.independentButton)}</button>
-        </div></div>
-        <div class="control-group"><p class="control-label">${escapeHtml(copy.resultLabel)}</p><div class="choice-row">
-          <button type="button" data-result="fail" aria-pressed="true">${escapeHtml(copy.failButton)}</button>
-          <button type="button" data-result="pass" aria-pressed="false">${escapeHtml(copy.passButton)}</button>
-          <button type="button" data-result="uncertain" aria-pressed="false">${escapeHtml(copy.uncertainButton)}</button>
-        </div></div>
-        <div class="routing">
-          <div class="verdict"><strong data-verdict-title></strong><span data-verdict-detail></span></div><span class="routing-arrow" aria-hidden="true">→</span>
-          <div class="route" data-route="retry"><strong>${escapeHtml(copy.retryTitle)}</strong><span>${escapeHtml(copy.retryDetail)}</span></div>
-          <div class="route" data-route="stop"><strong>${escapeHtml(copy.stopTitle)}</strong><span>${escapeHtml(copy.stopDetail)}</span></div>
-          <div class="route" data-route="escalate"><strong>${escapeHtml(copy.escalateTitle)}</strong><span>${escapeHtml(copy.escalateDetail)}</span></div>
-        </div>
-        <p class="evidence-status" aria-live="polite"></p>
-      </div>`;
-    const scene = root.querySelector(".evidence-demo");
-    const status = root.querySelector(".evidence-status");
-    const verdictTitle = root.querySelector("[data-verdict-title]");
-    const verdictDetail = root.querySelector("[data-verdict-detail]");
-    const verifierButtons = [...root.querySelectorAll("[data-verifier]")];
-    const resultButtons = [...root.querySelectorAll("[data-result]")];
-    const routes = [...root.querySelectorAll("[data-route]")];
-    let verifier = "self";
-    let result = "fail";
-    const render = () => {
-      const independent = verifier === "independent";
-      const route = independent ? { fail: "retry", pass: "stop", uncertain: "escalate" }[result] : "stop";
-      verdictTitle.textContent = independent ? copy.independentVerdict : copy.selfVerdict;
-      verdictDetail.textContent = independent ? copy.independentDetail : copy.selfDetail;
-      status.textContent = independent ? copy.statuses[result] : copy.selfStatus;
-      scene.dataset.verifier = verifier;
-      scene.dataset.result = result;
-      scene.dataset.route = route;
-      verifierButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.verifier === verifier)));
-      resultButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.result === result)));
-      routes.forEach((item) => item.classList.toggle("is-active", item.dataset.route === route));
-    };
-    verifierButtons.forEach((button) => button.addEventListener("click", () => { verifier = button.dataset.verifier; render(); }));
-    resultButtons.forEach((button) => button.addEventListener("click", () => { result = button.dataset.result; render(); }));
-    render();
-    return {
-      pause: () => {},
-      resume: () => {},
-      reset: () => { verifier = "self"; result = "fail"; render(); },
-      destroy: () => { root.innerHTML = ""; }
-    };
-  });
+registerDemo("contract-gate", ({ root, copy, tokens }) => {
+  root.innerHTML = `
+    <style>
+      .contract-demo { display: grid; grid-template-rows: auto 1fr auto; gap: 1.25rem; min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: ${tokens.surface}; }
+      .mode-switch { display: flex; flex-wrap: wrap; justify-content: center; gap: .65rem; }
+      .mode-switch button { padding: .55rem .9rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-weight: 800; cursor: pointer; }
+      .mode-switch button[aria-pressed="true"] { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
+      .mode-switch button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
+      .contract-field { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 1rem; align-items: center; }
+      .brief, .gate { min-height: 13rem; padding: 1.25rem; border: 1px solid ${tokens.line}; border-radius: 1.25rem; background: color-mix(in srgb, ${tokens.paper} 38%, ${tokens.surface}); }
+      .brief-label, .gate-label { margin: 0 0 .8rem; color: ${tokens.muted}; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+      .brief-text { margin: 0; font-size: 1.2rem; font-weight: 850; line-height: 1.45; }
+      .arrow { color: ${tokens.ocean}; font-size: 2rem; }
+      .checks { display: grid; gap: .65rem; margin: 0; padding: 0; list-style: none; }
+      .checks li { display: grid; grid-template-columns: 1.25rem 1fr; gap: .55rem; align-items: start; color: ${tokens.muted}; }
+      .checks li::before { display: grid; width: 1.15rem; height: 1.15rem; place-content: center; border: 1px solid ${tokens.line}; border-radius: 50%; content: "×"; font-size: .72rem; }
+      .is-engineered .checks li { color: ${tokens.ink}; }
+      .is-engineered .checks li::before { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; content: "✓"; }
+      .contract-status { min-height: 1.8rem; margin: 0; color: ${tokens.muted}; font-weight: 800; text-align: center; }
+      @media (max-width: 680px) { .contract-field { grid-template-columns: 1fr; } .arrow { rotate: 90deg; text-align: center; } .brief, .gate { min-height: auto; } }
+    </style>
+    <div class="contract-demo" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="mode-switch">
+        <button type="button" data-mode="vague" aria-pressed="true">${escapeHtml(copy.vagueButton)}</button>
+        <button type="button" data-mode="engineered" aria-pressed="false">${escapeHtml(copy.engineeredButton)}</button>
+      </div>
+      <div class="contract-field">
+        <div class="brief"><p class="brief-label">${escapeHtml(copy.inputLabel)}</p><p class="brief-text"></p></div>
+        <span class="arrow" aria-hidden="true">→</span>
+        <div class="gate"><p class="gate-label">${escapeHtml(copy.gateLabel)}</p><ul class="checks"></ul></div>
+      </div>
+      <p class="contract-status" aria-live="polite"></p>
+    </div>`;
+  const scene = root.querySelector(".contract-demo");
+  const brief = root.querySelector(".brief-text");
+  const checks = root.querySelector(".checks");
+  const status = root.querySelector(".contract-status");
+  const buttons = [...root.querySelectorAll("[data-mode]")];
+  const setMode = (mode) => {
+    const engineered = mode === "engineered";
+    scene.classList.toggle("is-engineered", engineered);
+    scene.dataset.mode = mode;
+    brief.textContent = engineered ? copy.engineeredBrief : copy.vagueBrief;
+    checks.innerHTML = (engineered ? copy.engineeredChecks : copy.vagueChecks).map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+    status.textContent = engineered ? copy.engineeredStatus : copy.vagueStatus;
+    buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.mode === mode)));
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => setMode(button.dataset.mode)));
+  setMode("vague");
+  return {
+    pause: () => {},
+    resume: () => {},
+    reset: () => setMode("vague"),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
 
-  registerDemo("state-ledger", ({ root, copy, motion, tokens }) => {
-    root.innerHTML = `
-      <style>
-        .ledger-demo { display: grid; grid-template-rows: auto 1fr auto; gap: 1.15rem; min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: ${tokens.surface}; }
-        .ledger-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; }
-        .attempt { margin: 0; color: ${tokens.muted}; font-weight: 800; }
-        .next { padding: .6rem .95rem; border: 1px solid ${tokens.ocean}; border-radius: 999px; color: ${tokens.surface}; background: ${tokens.ocean}; font: inherit; font-weight: 800; cursor: pointer; }
-        .next:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
-        .state-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .state-panel { min-height: 14rem; padding: 1.2rem; border: 1px solid ${tokens.line}; border-radius: 1.2rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); }
-        .panel-label { margin: 0 0 .85rem; color: ${tokens.muted}; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-        .transient { display: grid; min-height: 9rem; place-content: center; padding: 1rem; border: 1px dashed ${tokens.line}; border-radius: 1rem; color: ${tokens.muted}; line-height: 1.55; text-align: center; animation: context-fade 2.8s ease-in-out infinite alternate; }
-        .ledger { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
-        .ledger li { display: grid; grid-template-columns: 1.2rem 1fr; gap: .55rem; align-items: start; padding: .65rem .75rem; border: 1px solid ${tokens.line}; border-radius: .85rem; background: ${tokens.surface}; }
-        .ledger li::before { color: ${tokens.ocean}; content: "◆"; font-size: .72rem; }
-        .caption { min-height: 1.8rem; margin: 0; color: ${tokens.muted}; font-weight: 800; text-align: center; }
-        .is-paused .transient { animation-play-state: paused; }
-        @keyframes context-fade { to { opacity: .38; } }
-        @media (max-width: 680px) { .state-columns { grid-template-columns: 1fr; } }
-      </style>
-      <div class="ledger-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
-        <div class="ledger-head"><p class="attempt"></p><button type="button" class="next">${escapeHtml(copy.nextButton)}</button></div>
-        <div class="state-columns">
-          <section class="state-panel" aria-labelledby="transient-label"><p class="panel-label" id="transient-label">${escapeHtml(copy.transientLabel)}</p><div class="transient"></div></section>
-          <section class="state-panel" aria-labelledby="durable-label"><p class="panel-label" id="durable-label">${escapeHtml(copy.durableLabel)}</p><ul class="ledger"></ul></section>
-        </div>
-        <p class="caption" aria-live="polite"></p>
-      </div>`;
-    const scene = root.querySelector(".ledger-demo");
-    const attempt = root.querySelector(".attempt");
-    const transient = root.querySelector(".transient");
-    const ledger = root.querySelector(".ledger");
-    const caption = root.querySelector(".caption");
-    let index = 0;
-    const render = () => {
-      const state = copy.attempts[index];
-      attempt.textContent = copy.attemptLabel.replace("{attempt}", state.attempt);
-      transient.textContent = state.transient;
-      ledger.innerHTML = state.durable.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
-      caption.textContent = state.caption;
-      scene.dataset.attempt = state.attempt;
-    };
-    root.querySelector(".next").addEventListener("click", () => { index = (index + 1) % copy.attempts.length; render(); });
-    render();
-    return {
-      pause: () => scene.classList.add("is-paused"),
-      resume: () => scene.classList.remove("is-paused"),
-      reset: () => { index = 0; render(); },
-      destroy: () => { root.innerHTML = ""; }
-    };
-  });
+registerDemo("iteration-trace", ({ root, copy, motion, tokens }) => {
+  const phases = copy.phaseLabels.map((label, index) => `<li data-phase="${index}"><span>${String(index + 1).padStart(2, "0")}</span>${escapeHtml(label)}</li>`).join("");
+  root.innerHTML = `
+    <style>
+      .trace-demo { display: grid; grid-template-rows: auto auto 1fr auto; gap: 1.15rem; min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: ${tokens.surface}; }
+      .trace-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; }
+      .attempt { margin: 0; color: ${tokens.muted}; font-weight: 800; }
+      .next { padding: .6rem .95rem; border: 1px solid ${tokens.ocean}; border-radius: 999px; color: ${tokens.surface}; background: ${tokens.ocean}; font: inherit; font-weight: 800; cursor: pointer; }
+      .next:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
+      .phases { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .65rem; margin: 0; padding: 0; list-style: none; }
+      .phases li { display: grid; gap: .35rem; min-height: 5rem; place-content: center; padding: .75rem; border: 1px solid ${tokens.line}; border-radius: 1rem; color: ${tokens.muted}; background: color-mix(in srgb, ${tokens.paper} 32%, ${tokens.surface}); text-align: center; }
+      .phases li span { font-size: .68rem; letter-spacing: .08em; }
+      .phases li.is-active { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; animation: trace-pulse 1.4s ease-in-out infinite alternate; }
+      .phases li.is-complete { color: ${tokens.ink}; border-color: color-mix(in srgb, ${tokens.ocean} 55%, ${tokens.line}); }
+      .evidence { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: 1rem; align-items: stretch; }
+      .change, .observation { padding: 1.15rem; border: 1px solid ${tokens.line}; border-radius: 1.1rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); }
+      .panel-label { margin: 0 0 .65rem; color: ${tokens.muted}; font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+      .change p:last-child, .observation p:last-child { margin: 0; line-height: 1.6; }
+      .outcome { min-height: 1.8rem; margin: 0; color: ${tokens.muted}; font-weight: 800; text-align: center; }
+      .is-paused .phases li.is-active { animation-play-state: paused; }
+      @keyframes trace-pulse { to { box-shadow: 0 0 0 .45rem color-mix(in srgb, ${tokens.ocean} 18%, transparent); } }
+      @media (max-width: 680px) { .phases { grid-template-columns: 1fr 1fr; } .evidence { grid-template-columns: 1fr; } }
+    </style>
+    <div class="trace-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="trace-head"><p class="attempt"></p><button type="button" class="next">${escapeHtml(copy.nextButton)}</button></div>
+      <ol class="phases">${phases}</ol>
+      <div class="evidence">
+        <div class="change"><p class="panel-label">${escapeHtml(copy.changeLabel)}</p><p data-change></p></div>
+        <div class="observation"><p class="panel-label">${escapeHtml(copy.evidenceLabel)}</p><p data-evidence></p></div>
+      </div>
+      <p class="outcome" aria-live="polite"></p>
+    </div>`;
+  const scene = root.querySelector(".trace-demo");
+  const attempt = root.querySelector(".attempt");
+  const change = root.querySelector("[data-change]");
+  const evidence = root.querySelector("[data-evidence]");
+  const outcome = root.querySelector(".outcome");
+  const phaseItems = [...root.querySelectorAll("[data-phase]")];
+  let index = 0;
+  const render = () => {
+    const state = copy.states[index];
+    attempt.textContent = copy.attemptLabel.replace("{attempt}", state.attempt);
+    change.textContent = state.change;
+    evidence.textContent = state.evidence;
+    outcome.textContent = state.outcome;
+    scene.dataset.state = String(index);
+    phaseItems.forEach((item, itemIndex) => {
+      item.classList.toggle("is-active", itemIndex === state.phase);
+      item.classList.toggle("is-complete", itemIndex < state.phase);
+    });
+  };
+  root.querySelector(".next").addEventListener("click", () => { index = (index + 1) % copy.states.length; render(); });
+  render();
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => { index = 0; render(); },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
 
-  registerDemo("layer-stack", ({ root, copy, tokens }) => {
-    const layers = copy.layers.map((layer, index) => `
-      <button type="button" class="layer layer-${index}" data-layer="${index}" aria-pressed="${index === copy.layers.length - 1}">
-        <span>${escapeHtml(layer.label)}</span><small>${escapeHtml(layer.short)}</small>
-      </button>`).join("");
-    root.innerHTML = `
-      <style>
-        .layers-demo { display: grid; grid-template-columns: minmax(18rem, .9fr) minmax(0, 1.1fr); gap: 1.5rem; align-items: center; min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: ${tokens.surface}; }
-        .layer-map { display: grid; gap: .65rem; align-items: center; justify-items: center; }
-        .layer { display: grid; gap: .25rem; min-height: 3.7rem; place-content: center; padding: .65rem 1rem; border: 1px solid ${tokens.line}; border-radius: 1rem; color: ${tokens.ink}; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); font: inherit; font-weight: 800; text-align: center; cursor: pointer; }
-        .layer-0 { width: 36%; }
-        .layer-1 { width: 52%; }
-        .layer-2 { width: 68%; }
-        .layer-3 { width: 84%; }
-        .layer-4 { width: 100%; }
-        .layer small { color: ${tokens.muted}; font-size: .7rem; font-weight: 700; }
-        .layer[aria-pressed="true"] { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
-        .layer[aria-pressed="true"] small { color: inherit; opacity: .82; }
-        .layer:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
-        .layer-detail { min-height: 13rem; padding: 1.35rem; border: 1px solid ${tokens.line}; border-radius: 1.2rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); }
-        .detail-kicker { margin: 0 0 .75rem; color: ${tokens.muted}; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-        .detail-title { margin: 0 0 .8rem; font-size: 1.35rem; }
-        .detail-body { margin: 0; color: ${tokens.muted}; line-height: 1.65; }
-        .detail-example { margin: 1rem 0 0; padding-top: 1rem; border-top: 1px solid ${tokens.line}; color: ${tokens.ink}; line-height: 1.55; }
-        @media (max-width: 700px) { .layers-demo { grid-template-columns: 1fr; } .layer-map { min-width: 0; } }
-      </style>
-      <div class="layers-demo" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
-        <div class="layer-map">${layers}</div>
-        <div class="layer-detail">
-          <p class="detail-kicker">${escapeHtml(copy.detailLabel)}</p>
-          <h3 class="detail-title"></h3>
-          <p class="detail-body"></p>
-          <p class="detail-example"></p>
+registerDemo("evidence-gate", ({ root, copy, tokens }) => {
+  root.innerHTML = `
+    <style>
+      .evidence-demo { display: grid; gap: 1.25rem; min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: ${tokens.surface}; }
+      .control-group { display: grid; gap: .55rem; }
+      .control-label { margin: 0; color: ${tokens.muted}; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+      .choice-row { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; }
+      .choice-row button { padding: .52rem .85rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-weight: 800; cursor: pointer; }
+      .choice-row button[aria-pressed="true"] { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
+      .choice-row button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
+      .routing { display: grid; grid-template-columns: minmax(0, 1fr) auto repeat(3, minmax(0, .75fr)); gap: .75rem; align-items: center; }
+      .verdict, .route { display: grid; min-height: 8rem; place-content: center; padding: 1rem; border: 1px solid ${tokens.line}; border-radius: 1.15rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); text-align: center; }
+      .verdict strong, .route strong { display: block; margin-bottom: .35rem; }
+      .verdict span, .route span { color: ${tokens.muted}; font-size: .78rem; line-height: 1.45; }
+      .routing-arrow { color: ${tokens.ocean}; font-size: 2rem; }
+      .route.is-active { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
+      .route.is-active span { color: inherit; opacity: .82; }
+      .evidence-status { min-height: 2.4rem; margin: 0; color: ${tokens.muted}; font-weight: 800; line-height: 1.5; text-align: center; }
+      @media (max-width: 760px) { .routing { grid-template-columns: 1fr; } .routing-arrow { rotate: 90deg; text-align: center; } .verdict, .route { min-height: 5.5rem; } }
+    </style>
+    <div class="evidence-demo" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="control-group"><p class="control-label">${escapeHtml(copy.verifierLabel)}</p><div class="choice-row">
+        <button type="button" data-verifier="self" aria-pressed="true">${escapeHtml(copy.selfButton)}</button>
+        <button type="button" data-verifier="independent" aria-pressed="false">${escapeHtml(copy.independentButton)}</button>
+      </div></div>
+      <div class="control-group"><p class="control-label">${escapeHtml(copy.resultLabel)}</p><div class="choice-row">
+        <button type="button" data-result="fail" aria-pressed="true">${escapeHtml(copy.failButton)}</button>
+        <button type="button" data-result="pass" aria-pressed="false">${escapeHtml(copy.passButton)}</button>
+        <button type="button" data-result="uncertain" aria-pressed="false">${escapeHtml(copy.uncertainButton)}</button>
+      </div></div>
+      <div class="routing">
+        <div class="verdict"><strong data-verdict-title></strong><span data-verdict-detail></span></div><span class="routing-arrow" aria-hidden="true">→</span>
+        <div class="route" data-route="retry"><strong>${escapeHtml(copy.retryTitle)}</strong><span>${escapeHtml(copy.retryDetail)}</span></div>
+        <div class="route" data-route="stop"><strong>${escapeHtml(copy.stopTitle)}</strong><span>${escapeHtml(copy.stopDetail)}</span></div>
+        <div class="route" data-route="escalate"><strong>${escapeHtml(copy.escalateTitle)}</strong><span>${escapeHtml(copy.escalateDetail)}</span></div>
+      </div>
+      <p class="evidence-status" aria-live="polite"></p>
+    </div>`;
+  const scene = root.querySelector(".evidence-demo");
+  const status = root.querySelector(".evidence-status");
+  const verdictTitle = root.querySelector("[data-verdict-title]");
+  const verdictDetail = root.querySelector("[data-verdict-detail]");
+  const verifierButtons = [...root.querySelectorAll("[data-verifier]")];
+  const resultButtons = [...root.querySelectorAll("[data-result]")];
+  const routes = [...root.querySelectorAll("[data-route]")];
+  let verifier = "self";
+  let result = "fail";
+  const render = () => {
+    const independent = verifier === "independent";
+    const route = independent ? { fail: "retry", pass: "stop", uncertain: "escalate" }[result] : "stop";
+    verdictTitle.textContent = independent ? copy.independentVerdict : copy.selfVerdict;
+    verdictDetail.textContent = independent ? copy.independentDetail : copy.selfDetail;
+    status.textContent = independent ? copy.statuses[result] : copy.selfStatus;
+    scene.dataset.verifier = verifier;
+    scene.dataset.result = result;
+    scene.dataset.route = route;
+    verifierButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.verifier === verifier)));
+    resultButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.result === result)));
+    routes.forEach((item) => item.classList.toggle("is-active", item.dataset.route === route));
+  };
+  verifierButtons.forEach((button) => button.addEventListener("click", () => { verifier = button.dataset.verifier; render(); }));
+  resultButtons.forEach((button) => button.addEventListener("click", () => { result = button.dataset.result; render(); }));
+  render();
+  return {
+    pause: () => {},
+    resume: () => {},
+    reset: () => { verifier = "self"; result = "fail"; render(); },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("state-ledger", ({ root, copy, motion, tokens }) => {
+  root.innerHTML = `
+    <style>
+      .ledger-demo { display: grid; grid-template-rows: auto 1fr auto; gap: 1.15rem; min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: ${tokens.surface}; }
+      .ledger-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; }
+      .attempt { margin: 0; color: ${tokens.muted}; font-weight: 800; }
+      .next { padding: .6rem .95rem; border: 1px solid ${tokens.ocean}; border-radius: 999px; color: ${tokens.surface}; background: ${tokens.ocean}; font: inherit; font-weight: 800; cursor: pointer; }
+      .next:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
+      .state-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .state-panel { min-height: 14rem; padding: 1.2rem; border: 1px solid ${tokens.line}; border-radius: 1.2rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); }
+      .panel-label { margin: 0 0 .85rem; color: ${tokens.muted}; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+      .transient { display: grid; min-height: 9rem; place-content: center; padding: 1rem; border: 1px dashed ${tokens.line}; border-radius: 1rem; color: ${tokens.muted}; line-height: 1.55; text-align: center; animation: context-fade 2.8s ease-in-out infinite alternate; }
+      .ledger { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+      .ledger li { display: grid; grid-template-columns: 1.2rem 1fr; gap: .55rem; align-items: start; padding: .65rem .75rem; border: 1px solid ${tokens.line}; border-radius: .85rem; background: ${tokens.surface}; }
+      .ledger li::before { color: ${tokens.ocean}; content: "◆"; font-size: .72rem; }
+      .caption { min-height: 1.8rem; margin: 0; color: ${tokens.muted}; font-weight: 800; text-align: center; }
+      .is-paused .transient { animation-play-state: paused; }
+      @keyframes context-fade { to { opacity: .38; } }
+      @media (max-width: 680px) { .state-columns { grid-template-columns: 1fr; } }
+    </style>
+    <div class="ledger-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="ledger-head"><p class="attempt"></p><button type="button" class="next">${escapeHtml(copy.nextButton)}</button></div>
+      <div class="state-columns">
+        <section class="state-panel" aria-labelledby="transient-label"><p class="panel-label" id="transient-label">${escapeHtml(copy.transientLabel)}</p><div class="transient"></div></section>
+        <section class="state-panel" aria-labelledby="durable-label"><p class="panel-label" id="durable-label">${escapeHtml(copy.durableLabel)}</p><ul class="ledger"></ul></section>
+      </div>
+      <p class="caption" aria-live="polite"></p>
+    </div>`;
+  const scene = root.querySelector(".ledger-demo");
+  const attempt = root.querySelector(".attempt");
+  const transient = root.querySelector(".transient");
+  const ledger = root.querySelector(".ledger");
+  const caption = root.querySelector(".caption");
+  let index = 0;
+  const render = () => {
+    const state = copy.attempts[index];
+    attempt.textContent = copy.attemptLabel.replace("{attempt}", state.attempt);
+    transient.textContent = state.transient;
+    ledger.innerHTML = state.durable.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+    caption.textContent = state.caption;
+    scene.dataset.attempt = state.attempt;
+  };
+  root.querySelector(".next").addEventListener("click", () => { index = (index + 1) % copy.attempts.length; render(); });
+  render();
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => { index = 0; render(); },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("stop-router", ({ root, copy, tokens }) => {
+  const scenarios = copy.scenarios.map((scenario, index) => `
+    <button type="button" data-scenario="${index}" aria-pressed="${index === 0}">${escapeHtml(scenario.label)}</button>`).join("");
+  const routes = copy.routes.map((route) => `
+    <li data-route="${escapeHtml(route.id)}"><strong>${escapeHtml(route.label)}</strong><span>${escapeHtml(route.detail)}</span></li>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .stop-router-demo { display: grid; gap: 1.1rem; min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: ${tokens.surface}; }
+      .stop-router-label { margin: 0; color: ${tokens.muted}; font-size: .72rem; font-weight: 850; letter-spacing: .09em; text-align: center; text-transform: uppercase; }
+      .stop-router-scenarios { display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem; }
+      .stop-router-scenarios button { padding: .52rem .8rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .8rem; font-weight: 850; cursor: pointer; }
+      .stop-router-scenarios button[aria-pressed="true"] { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
+      .stop-router-scenarios button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
+      .stop-router-observation { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 1rem; align-items: center; }
+      .stop-router-panel { min-height: 9rem; padding: 1.15rem; border: 1px solid ${tokens.line}; border-radius: 1.1rem; background: color-mix(in srgb, ${tokens.paper} 34%, ${tokens.surface}); }
+      .stop-router-panel strong { display: block; margin-bottom: .65rem; color: ${tokens.muted}; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+      .stop-router-panel p { margin: 0; line-height: 1.6; }
+      .stop-router-arrow { color: ${tokens.ocean}; font-size: 2rem; }
+      .stop-router-routes { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .55rem; margin: 0; padding: 0; list-style: none; }
+      .stop-router-routes li { min-height: 6.5rem; padding: .8rem; border: 1px solid ${tokens.line}; border-radius: .9rem; background: color-mix(in srgb, ${tokens.paper} 30%, ${tokens.surface}); text-align: center; }
+      .stop-router-routes strong, .stop-router-routes span { display: block; }
+      .stop-router-routes span { margin-top: .35rem; color: ${tokens.muted}; font-size: .72rem; line-height: 1.4; }
+      .stop-router-routes li.is-active { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
+      .stop-router-routes li.is-active span { color: inherit; opacity: .82; }
+      .stop-router-status { min-height: 1.8rem; margin: 0; color: ${tokens.muted}; font-weight: 850; text-align: center; }
+      @media (max-width: 760px) { .stop-router-observation { grid-template-columns: 1fr; } .stop-router-arrow { rotate: 90deg; text-align: center; } .stop-router-routes { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 480px) { .stop-router-routes { grid-template-columns: 1fr; } }
+    </style>
+    <div class="stop-router-demo" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <p class="stop-router-label">${escapeHtml(copy.scenarioLabel)}</p>
+      <div class="stop-router-scenarios">${scenarios}</div>
+      <div class="stop-router-observation">
+        <div class="stop-router-panel"><strong>${escapeHtml(copy.evidenceLabel)}</strong><p data-evidence></p></div>
+        <span class="stop-router-arrow" aria-hidden="true">→</span>
+        <div class="stop-router-panel"><strong>${escapeHtml(copy.controllerLabel)}</strong><p data-decision></p></div>
+      </div>
+      <ul class="stop-router-routes">${routes}</ul>
+      <p class="stop-router-status" aria-live="polite"></p>
+    </div>`;
+
+  const scene = root.querySelector(".stop-router-demo");
+  const evidence = root.querySelector("[data-evidence]");
+  const decision = root.querySelector("[data-decision]");
+  const status = root.querySelector(".stop-router-status");
+  const buttons = [...root.querySelectorAll("[data-scenario]")];
+  const routeItems = [...root.querySelectorAll("[data-route]")];
+  const select = (index) => {
+    const scenario = copy.scenarios[index];
+    scene.dataset.scenario = scenario.id;
+    scene.dataset.route = scenario.route;
+    evidence.textContent = scenario.evidence;
+    decision.textContent = scenario.decision;
+    status.textContent = scenario.status;
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    routeItems.forEach((item) => item.classList.toggle("is-active", item.dataset.route === scenario.route));
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.scenario))));
+  select(0);
+
+  return {
+    pause: () => {},
+    resume: () => {},
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("failure-lab", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  root.innerHTML = `
+    <style>
+      .lab-container {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        min-height: 100%;
+        font-family: system-ui, -apple-system, sans-serif;
+        color: ${tokens.ink};
+        box-sizing: border-box;
+        padding: 16px;
+      }
+      @media (min-width: 768px) {
+        .lab-container { flex-direction: row; }
+        .control-panel { width: 340px; flex-shrink: 0; }
+      }
+      @media (max-width: 767px) {
+        .visual-panel { flex: 0 0 320px; }
+      }
+      .visual-panel {
+        flex: 1;
+        min-height: 320px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        outline: none;
+      }
+      .control-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .controls-header {
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      button {
+        background: ${tokens.surface};
+        color: ${tokens.ink};
+        border: 1px solid ${tokens.line};
+        padding: 8px 14px;
+        border-radius: 16px;
+        cursor: pointer;
+        font-size: 13px;
+        transition: all 0.2s;
+      }
+      button:hover {
+        border-color: ${tokens.muted};
+      }
+      button:focus-visible {
+        outline: 2px solid ${tokens.ocean};
+        outline-offset: 2px;
+      }
+      button[aria-pressed="true"] {
+        background: ${tokens.ocean};
+        color: ${tokens.surface};
+        border-color: ${tokens.ocean};
+      }
+      button[data-id]:not([data-id="healthy"])[aria-pressed="true"] {
+        background: ${tokens.coral};
+        border-color: ${tokens.coral};
+      }
+      .info-panel {
+        background: ${tokens.surface};
+        border: 1px solid ${tokens.line};
+        border-radius: 8px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .info-status {
+        font-weight: 600;
+        font-size: 15px;
+      }
+      .info-risk-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .risk-badge {
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+      .risk-low { background: ${tokens.ocean}; color: ${tokens.surface}; }
+      .risk-medium { background: ${tokens.warm}; color: ${tokens.surface}; }
+      .risk-critical { background: ${tokens.coral}; color: ${tokens.surface}; }
+      .info-symptom, .info-repair {
+        color: ${tokens.muted};
+      }
+      .info-symptom strong, .info-repair strong {
+        color: ${tokens.ink};
+      }
+    </style>
+    <div class="lab-container failure-lab-demo" data-component="healthy">
+      <div class="visual-panel">
+        <canvas role="img" aria-label="${copy.ariaLabel}"></canvas>
+      </div>
+      <div class="control-panel">
+        <div class="controls-header">${copy.controlLabel}</div>
+        <div class="buttons">
+          <button type="button" data-id="healthy" aria-pressed="true">${copy.healthyButton}</button>
+          ${copy.components.map(c => `<button type="button" data-id="${c.id}" aria-pressed="false">${c.label}</button>`).join('')}
         </div>
-      </div>`;
-    const scene = root.querySelector(".layers-demo");
-    const title = root.querySelector(".detail-title");
-    const body = root.querySelector(".detail-body");
-    const example = root.querySelector(".detail-example");
-    const buttons = [...root.querySelectorAll("[data-layer]")];
-    const select = (index) => {
-      const layer = copy.layers[index];
-      title.textContent = layer.label;
-      body.textContent = layer.detail;
-      example.textContent = layer.example;
-      scene.dataset.layer = String(index);
-      buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+        <div class="info-panel">
+          <div class="info-status"></div>
+          <div class="info-risk-row">
+            <span class="risk-label">${copy.riskLabel}</span>
+            <span class="risk-badge"></span>
+          </div>
+          <div class="info-symptom">
+            <strong>${copy.symptomLabel}:</strong> <span class="symptom-text"></span>
+          </div>
+          <div class="info-repair">
+            <strong>${copy.repairLabel}:</strong> <span class="repair-text"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const scene = root.querySelector('.failure-lab-demo');
+  const buttons = root.querySelectorAll('button');
+  const infoPanel = root.querySelector('.info-panel');
+  const statusEl = infoPanel.querySelector('.info-status');
+  const badgeEl = infoPanel.querySelector('.risk-badge');
+  const symptomEl = infoPanel.querySelector('.symptom-text');
+  const repairEl = infoPanel.querySelector('.repair-text');
+
+  let activeId = 'healthy';
+  let width = 0, height = 0, dpr = 1;
+  let isPlaying = true;
+  let frameId;
+  let particles = [];
+  let colors = {};
+
+  function refreshColors() {
+    colors = {
+      ink: resolveColor(tokens.ink),
+      muted: resolveColor(tokens.muted),
+      line: resolveColor(tokens.line),
+      ocean: resolveColor(tokens.ocean),
+      coral: resolveColor(tokens.coral),
+      surface: resolveColor(tokens.surface)
     };
-    buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.layer))));
-    select(copy.layers.length - 1);
-    return {
-      pause: () => {},
-      resume: () => {},
-      reset: () => select(copy.layers.length - 1),
-      destroy: () => { root.innerHTML = ""; }
+    canvas.dataset.oceanColor = colors.ocean;
+  }
+
+  const nodes = copy.components.map((c, i) => ({
+    ...c,
+    angle: (i / copy.components.length) * Math.PI * 2 - Math.PI / 2
+  }));
+
+  function updateInfo(shouldAnnounce = false) {
+    let data;
+    let badgeClass = 'risk-low';
+    let severityText = copy.healthyScore;
+
+    if (activeId === 'healthy') {
+      data = {
+        symptom: copy.healthySymptom,
+        repair: copy.healthyRepair,
+        status: copy.healthyStatus
+      };
+    } else {
+      data = copy.components.find(c => c.id === activeId);
+      severityText = data.severity;
+      if (data.id === 'stop' || data.id === 'human') badgeClass = 'risk-critical';
+      else badgeClass = 'risk-medium';
+    }
+
+    scene.dataset.component = activeId;
+    statusEl.textContent = data.status;
+    badgeEl.textContent = severityText;
+    badgeEl.className = `risk-badge ${badgeClass}`;
+    symptomEl.textContent = data.symptom;
+    repairEl.textContent = data.repair;
+
+    buttons.forEach(btn => {
+      btn.setAttribute('aria-pressed', btn.dataset.id === activeId);
+    });
+
+    if (shouldAnnounce) announce(`${data.status}. ${copy.symptomLabel}: ${data.symptom}`);
+  }
+
+  function spawnParticle() {
+    const brokenIndex = activeId === 'healthy' ? -1 : nodes.findIndex(n => n.id === activeId);
+    let spawnProgress = brokenIndex === -1
+      ? Math.random()
+      : ((brokenIndex + 1) % nodes.length) / nodes.length;
+
+    if (brokenIndex === -1 && particles.length < 100) {
+      spawnProgress = Math.random();
+    }
+
+    particles.push({
+      progress: spawnProgress,
+      travel: 0,
+      rOffset: (Math.random() - 0.5) * 16,
+      speed: 0.002 + Math.random() * 0.002,
+      state: 'normal',
+      x: 0, y: 0, vx: 0, vy: 0, alpha: 1
+    });
+  }
+
+  function updateParticles() {
+    const brokenIndex = activeId === 'healthy' ? -1 : nodes.findIndex(n => n.id === activeId);
+    const cx = width / 2;
+    const cy = height / 2;
+    const R = Math.max(50, Math.min(width, height) / 2 - 60);
+
+    if (particles.length < 150) {
+      spawnParticle();
+    }
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      let p = particles[i];
+      if (p.state === 'normal') {
+        p.progress = (p.progress + p.speed) % 1;
+        p.travel += p.speed;
+
+        if (brokenIndex !== -1 && p.travel >= (nodes.length - 1) / nodes.length) {
+          p.state = 'broken';
+          let angle = p.progress * Math.PI * 2 - Math.PI / 2;
+          let speed = 0.5 + Math.random() * 1.5;
+          let scatterAngle = angle + (Math.random() - 0.5) * Math.PI;
+          p.vx = Math.cos(scatterAngle) * speed;
+          p.vy = Math.sin(scatterAngle) * speed;
+          p.x = cx + (R + p.rOffset) * Math.cos(angle);
+          p.y = cy + (R + p.rOffset) * Math.sin(angle);
+        }
+      } else {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= 0.02;
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+    }
+  }
+
+  function draw() {
+    if (!width || !height) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+    ctx.scale(dpr, dpr);
+
+    const cx = width / 2;
+    const cy = height / 2;
+    const R = Math.max(50, Math.min(width, height) / 2 - 60);
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    ctx.strokeStyle = colors.line;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    particles.forEach(p => {
+      let px, py;
+      if (p.state === 'normal') {
+        let angle = p.progress * Math.PI * 2 - Math.PI / 2;
+        let r = R + p.rOffset;
+        px = cx + r * Math.cos(angle);
+        py = cy + r * Math.sin(angle);
+      } else {
+        px = p.x;
+        py = p.y;
+      }
+
+      ctx.fillStyle = p.state === 'normal' ? colors.ocean : colors.coral;
+      ctx.globalAlpha = p.alpha;
+      ctx.beginPath();
+      ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+
+    nodes.forEach((node) => {
+      let nx = cx + R * Math.cos(node.angle);
+      let ny = cy + R * Math.sin(node.angle);
+      let isBroken = activeId === node.id;
+
+      ctx.beginPath();
+      ctx.arc(nx, ny, 14, 0, Math.PI * 2);
+      ctx.fillStyle = colors.surface;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(nx, ny, 8, 0, Math.PI * 2);
+      ctx.fillStyle = isBroken ? colors.coral : (activeId === 'healthy' ? colors.ocean : colors.muted);
+      ctx.fill();
+
+      let align = 'center';
+      let baseline = 'middle';
+      let lx = nx, ly = ny;
+      const cosA = Math.cos(node.angle);
+      const sinA = Math.sin(node.angle);
+
+      if (Math.abs(cosA) > 0.1) {
+        align = cosA > 0 ? 'left' : 'right';
+        lx += cosA * 22;
+      } else {
+        ly += sinA * 22;
+      }
+      if (Math.abs(sinA) > 0.1 && Math.abs(cosA) <= 0.1) {
+        baseline = sinA > 0 ? 'top' : 'bottom';
+      }
+
+      ctx.textAlign = align;
+      ctx.textBaseline = baseline;
+      ctx.font = '12px system-ui, -apple-system, sans-serif';
+
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = colors.surface;
+      ctx.strokeText(node.label, lx, ly);
+
+      ctx.fillStyle = colors.ink;
+      ctx.fillText(node.label, lx, ly);
+    });
+
+    ctx.restore();
+  }
+
+  function triggerUpdate() {
+    particles = [];
+    for (let i = 0; i < 300; i++) updateParticles();
+    draw();
+  }
+
+  function loop() {
+    if (!isPlaying || !motion) return;
+    updateParticles();
+    draw();
+    frameId = requestAnimationFrame(loop);
+  }
+
+  root.querySelector('.buttons').addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    activeId = btn.dataset.id;
+    updateInfo(true);
+    triggerUpdate();
+  }, { signal });
+
+  updateInfo();
+
+  return {
+    pause() {
+      isPlaying = false;
+      cancelAnimationFrame(frameId);
+      frameId = undefined;
+      draw();
+    },
+    resume() {
+      if (isPlaying && frameId) return;
+      isPlaying = true;
+      if (motion && !frameId) {
+        frameId = requestAnimationFrame(loop);
+      }
+    },
+    reset() {
+      activeId = 'healthy';
+      updateInfo();
+      triggerUpdate();
+    },
+    destroy() {
+      cancelAnimationFrame(frameId);
+      root.innerHTML = '';
+    },
+    resize({ width: stageWidth, height: stageHeight, dpr: nextDpr }) {
+      refreshColors();
+      dpr = nextDpr;
+      width = Math.max(220, stageWidth >= 768 ? stageWidth - 396 : stageWidth - 32);
+      height = stageWidth >= 768 ? Math.max(260, stageHeight - 32) : 320;
+      canvas.width = Math.max(1, Math.round(width * dpr));
+      canvas.height = Math.max(1, Math.round(height * dpr));
+      triggerUpdate();
+    }
+  };
+});
+
+registerDemo("layer-stack", ({ root, copy, tokens }) => {
+  const layers = copy.layers.map((layer, index) => `
+    <button type="button" class="layer layer-${index}" data-layer="${index}" aria-pressed="${index === copy.layers.length - 1}">
+      <span>${escapeHtml(layer.label)}</span><small>${escapeHtml(layer.short)}</small>
+    </button>`).join("");
+  root.innerHTML = `
+    <style>
+      .layers-demo { display: grid; grid-template-columns: minmax(18rem, .9fr) minmax(0, 1.1fr); gap: 1.5rem; align-items: center; min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: ${tokens.surface}; }
+      .layer-map { display: grid; gap: .65rem; align-items: center; justify-items: center; }
+      .layer { display: grid; gap: .25rem; min-height: 3.7rem; place-content: center; padding: .65rem 1rem; border: 1px solid ${tokens.line}; border-radius: 1rem; color: ${tokens.ink}; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); font: inherit; font-weight: 800; text-align: center; cursor: pointer; }
+      .layer-0 { width: 36%; }
+      .layer-1 { width: 52%; }
+      .layer-2 { width: 68%; }
+      .layer-3 { width: 84%; }
+      .layer-4 { width: 100%; }
+      .layer small { color: ${tokens.muted}; font-size: .7rem; font-weight: 700; }
+      .layer[aria-pressed="true"] { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
+      .layer[aria-pressed="true"] small { color: inherit; opacity: .82; }
+      .layer:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
+      .layer-detail { min-height: 13rem; padding: 1.35rem; border: 1px solid ${tokens.line}; border-radius: 1.2rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); }
+      .detail-kicker { margin: 0 0 .75rem; color: ${tokens.muted}; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+      .detail-title { margin: 0 0 .8rem; font-size: 1.35rem; }
+      .detail-body { margin: 0; color: ${tokens.muted}; line-height: 1.65; }
+      .detail-example { margin: 1rem 0 0; padding-top: 1rem; border-top: 1px solid ${tokens.line}; color: ${tokens.ink}; line-height: 1.55; }
+      @media (max-width: 700px) { .layers-demo { grid-template-columns: 1fr; } .layer-map { min-width: 0; } }
+    </style>
+    <div class="layers-demo" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="layer-map">${layers}</div>
+      <div class="layer-detail">
+        <p class="detail-kicker">${escapeHtml(copy.detailLabel)}</p>
+        <h3 class="detail-title"></h3>
+        <p class="detail-body"></p>
+        <p class="detail-example"></p>
+      </div>
+    </div>`;
+  const scene = root.querySelector(".layers-demo");
+  const title = root.querySelector(".detail-title");
+  const body = root.querySelector(".detail-body");
+  const example = root.querySelector(".detail-example");
+  const buttons = [...root.querySelectorAll("[data-layer]")];
+  const select = (index) => {
+    const layer = copy.layers[index];
+    title.textContent = layer.label;
+    body.textContent = layer.detail;
+    example.textContent = layer.example;
+    scene.dataset.layer = String(index);
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.layer))));
+  select(copy.layers.length - 1);
+  return {
+    pause: () => {},
+    resume: () => {},
+    reset: () => select(copy.layers.length - 1),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("workflow-blueprint", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  root.innerHTML = `
+    <style>
+      .wb-container {
+        --wb-ink: ${tokens.ink};
+        --wb-muted: ${tokens.muted};
+        --wb-line: ${tokens.line};
+        --wb-ocean: ${tokens.ocean};
+        --wb-warm: ${tokens.warm};
+        --wb-coral: ${tokens.coral};
+        --wb-paper: ${tokens.paper};
+        --wb-surface: ${tokens.surface};
+
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        min-height: 100%;
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: var(--wb-surface);
+        color: var(--wb-ink);
+        overflow: hidden;
+      }
+      .wb-canvas-box {
+        flex: 1 1 50%;
+        position: relative;
+        min-height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .wb-canvas-box canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .wb-info-box {
+        flex: 1 1 50%;
+        max-width: 450px;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        border-left: 1px solid var(--wb-line);
+        background: var(--wb-paper);
+      }
+      .wb-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .wb-stage-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--wb-ocean);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .wb-next-btn {
+        background: var(--wb-surface);
+        color: var(--wb-ink);
+        border: 1px solid var(--wb-line);
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+      .wb-next-btn:hover {
+        border-color: var(--wb-ocean);
+        color: var(--wb-ocean);
+      }
+      .wb-next-btn:focus-visible {
+        outline: 2px solid var(--wb-ocean);
+        outline-offset: 2px;
+      }
+      .wb-phase-title {
+        margin: 0 0 1.2rem 0;
+        font-size: 1.4rem;
+        font-weight: 700;
+      }
+      .wb-detail-item {
+        margin-bottom: 0.8rem;
+      }
+      .wb-detail-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--wb-muted);
+        margin-bottom: 0.2rem;
+        font-weight: 600;
+      }
+      .wb-detail-value {
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+      .wb-decision {
+        margin-top: auto;
+        padding: 1rem;
+        background: var(--wb-surface);
+        border-left: 4px solid var(--wb-coral);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        font-style: italic;
+        border-radius: 0 4px 4px 0;
+      }
+      @media (max-width: 768px) {
+        .wb-container {
+          flex-direction: column;
+        }
+        .wb-info-box {
+          max-width: 100%;
+          border-left: none;
+          border-top: 1px solid var(--wb-line);
+          padding: 1rem;
+        }
+        .wb-canvas-box {
+          min-height: 250px;
+          flex: 0 0 250px;
+        }
+      }
+    </style>
+    <div class="wb-container workflow-demo" data-phase="0">
+      <div class="wb-canvas-box">
+        <canvas role="img"></canvas>
+      </div>
+      <div class="wb-info-box">
+        <div class="wb-header">
+          <div class="wb-stage-label workflow-stage-label" aria-live="polite"></div>
+          <button type="button" class="wb-next-btn"></button>
+        </div>
+        <h3 class="wb-phase-title"></h3>
+        <div class="wb-details">
+          <div class="wb-detail-item">
+            <div class="wb-detail-label actor-label"></div>
+            <div class="wb-detail-value actor-value"></div>
+          </div>
+          <div class="wb-detail-item">
+            <div class="wb-detail-label action-label"></div>
+            <div class="wb-detail-value action-value"></div>
+          </div>
+          <div class="wb-detail-item">
+            <div class="wb-detail-label artifact-label"></div>
+            <div class="wb-detail-value artifact-value"></div>
+          </div>
+        </div>
+        <div class="wb-decision"></div>
+      </div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const scene = root.querySelector('.workflow-demo');
+  const nextBtn = root.querySelector('.wb-next-btn');
+
+  canvas.setAttribute('aria-label', copy.ariaLabel);
+  root.querySelector('.actor-label').textContent = copy.actorLabel;
+  root.querySelector('.action-label').textContent = copy.actionLabel;
+  root.querySelector('.artifact-label').textContent = copy.artifactLabel;
+  nextBtn.textContent = copy.nextButton;
+
+  let stage = 0;
+  let prevStage = 0;
+  let isPlaying = motion !== false;
+  let lastFrameTime = 0;
+  let stageTimer = 0;
+  let transitionStart = 0;
+  let animId;
+  let width = 0, height = 0, dpr = 1;
+  let colors = {};
+
+  function refreshColors() {
+    colors = {
+      ink: resolveColor(tokens.ink),
+      line: resolveColor(tokens.line),
+      ocean: resolveColor(tokens.ocean),
+      coral: resolveColor(tokens.coral),
+      surface: resolveColor(tokens.surface)
     };
-  });
-})();
+    canvas.dataset.oceanColor = colors.ocean;
+  }
+
+  const TOTAL_STAGES = copy.phases.length;
+  const STAGE_DURATION = 4000;
+  const TRANSITION_DURATION = 600;
+
+  function updateDOM(newStage, manual = false) {
+    prevStage = stage;
+    stage = newStage;
+    transitionStart = isPlaying && motion !== false ? performance.now() : 0;
+
+    const phase = copy.phases[stage];
+    scene.dataset.phase = String(stage);
+
+    root.querySelector('.wb-stage-label').textContent = copy.stageLabel
+      .replace('{current}', stage + 1)
+      .replace('{total}', TOTAL_STAGES);
+    root.querySelector('.wb-phase-title').textContent = phase.label;
+    root.querySelector('.actor-value').textContent = phase.actor;
+    root.querySelector('.action-value').textContent = phase.action;
+    root.querySelector('.artifact-value').textContent = phase.artifact;
+    root.querySelector('.wb-decision').textContent = phase.decision;
+
+    if (manual && announce) {
+      announce(`${phase.label}: ${phase.action}`);
+    }
+  }
+
+  function getAngle(index) {
+    return index * (Math.PI * 2) / TOTAL_STAGES - Math.PI / 2;
+  }
+
+  function render(time) {
+    ctx.clearRect(0, 0, width, height);
+
+    const cx = width / 2;
+    const cy = height / 2;
+    const rx = Math.max(20, width / 2 - 35);
+    const ry = Math.max(20, height / 2 - 35);
+    const nodeRadius = 14;
+
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+    ctx.strokeStyle = colors.line;
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    let elapsed = time - transitionStart;
+    let isTransitioning = isPlaying && (motion !== false) && (elapsed < TRANSITION_DURATION) && (prevStage !== stage);
+
+    if (isTransitioning) {
+      let progress = Math.max(0, Math.min(1, elapsed / TRANSITION_DURATION));
+      progress = 1 - Math.pow(1 - progress, 3);
+
+      let startAngle = getAngle(prevStage);
+      let endAngle = getAngle(stage);
+      if (prevStage === TOTAL_STAGES - 1 && stage === 0) {
+        endAngle = startAngle + (Math.PI * 2 / TOTAL_STAGES);
+      }
+      let currentAngle = startAngle + (endAngle - startAngle) * progress;
+
+      let px = cx + rx * Math.cos(currentAngle);
+      let py = cy + ry * Math.sin(currentAngle);
+
+      ctx.beginPath();
+      ctx.arc(px, py, 5, 0, Math.PI * 2);
+      ctx.fillStyle = colors.coral;
+      ctx.fill();
+    }
+
+    for (let i = 0; i < TOTAL_STAGES; i++) {
+      let angle = getAngle(i);
+      let x = cx + rx * Math.cos(angle);
+      let y = cy + ry * Math.sin(angle);
+      let isActive = (i === stage);
+
+      ctx.beginPath();
+      ctx.arc(x, y, nodeRadius, 0, Math.PI * 2);
+      ctx.fillStyle = isActive ? colors.ocean : colors.surface;
+      ctx.fill();
+
+      ctx.strokeStyle = isActive ? colors.ocean : colors.line;
+      ctx.lineWidth = isActive ? 2 : 1.5;
+      ctx.stroke();
+
+      ctx.fillStyle = isActive ? colors.surface : colors.ink;
+      ctx.font = '11px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(i + 1, x, y);
+
+      if (isActive && motion !== false && !isTransitioning) {
+        let pulse = (Math.sin(time / 200) + 1) / 2;
+        ctx.beginPath();
+        ctx.arc(x, y, nodeRadius + 3 + pulse * 2, 0, Math.PI * 2);
+        ctx.strokeStyle = colors.ocean;
+        ctx.globalAlpha = 0.4 - pulse * 0.2;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.globalAlpha = 1.0;
+      }
+    }
+  }
+
+  function loop(time) {
+    if (!lastFrameTime) lastFrameTime = time;
+    let dt = time - lastFrameTime;
+    lastFrameTime = time;
+
+    if (isPlaying && motion !== false) {
+      stageTimer += dt;
+      if (stageTimer > STAGE_DURATION) {
+        stageTimer = 0;
+        updateDOM((stage + 1) % TOTAL_STAGES);
+      }
+    }
+
+    render(time);
+
+    let elapsed = time - transitionStart;
+    let isTransitioning = isPlaying && (motion !== false) && (elapsed < TRANSITION_DURATION);
+
+    if (isPlaying || isTransitioning) {
+      animId = requestAnimationFrame(loop);
+    } else {
+      animId = null;
+    }
+  }
+
+  nextBtn.addEventListener('click', () => {
+    stageTimer = 0;
+    updateDOM((stage + 1) % TOTAL_STAGES, true);
+    render(performance.now());
+    if (isPlaying && !animId) {
+      lastFrameTime = performance.now();
+      animId = requestAnimationFrame(loop);
+    }
+  }, { signal });
+
+  updateDOM(0);
+
+  return {
+    pause() {
+      isPlaying = false;
+      if (animId) cancelAnimationFrame(animId);
+      animId = null;
+      transitionStart = 0;
+      render(performance.now());
+    },
+    resume() {
+      if (motion !== false) {
+        if (isPlaying && animId) return;
+        isPlaying = true;
+        lastFrameTime = 0;
+        if (!animId) animId = requestAnimationFrame(loop);
+      }
+    },
+    reset() {
+      stageTimer = 0;
+      updateDOM(0);
+      prevStage = 0;
+      transitionStart = 0;
+      lastFrameTime = 0;
+      render(performance.now());
+      if (!animId && isPlaying) animId = requestAnimationFrame(loop);
+    },
+    destroy() {
+      if (animId) cancelAnimationFrame(animId);
+      root.innerHTML = '';
+    },
+    resize({ width: stageWidth, height: stageHeight, dpr: nextDpr }) {
+      refreshColors();
+      const compact = stageWidth <= 768;
+      const infoWidth = compact ? 0 : Math.min(450, stageWidth / 2);
+      width = compact ? stageWidth : Math.max(240, stageWidth - infoWidth - 1);
+      height = compact ? 250 : Math.max(300, stageHeight);
+      dpr = nextDpr;
+
+      canvas.width = Math.max(1, Math.round(width * dpr));
+      canvas.height = Math.max(1, Math.round(height * dpr));
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      render(performance.now());
+    }
+  };
+});
   </script>
 </body>
 </html>
