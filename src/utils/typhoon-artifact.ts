@@ -1,8 +1,7 @@
-import postcss from 'postcss';
-import selectorParser from 'postcss-selector-parser';
 import typhoonSource from '../assets/html-pages/typhoon-zh.html?raw';
 import { typhoonTranslations } from '../data/typhoon-translations';
 import type { Language } from './i18n';
+import { scopeVisualStyle } from './scope-visual-style';
 import { assertExternalResourcesAllowed } from './visual-resource-policy';
 
 export interface TyphoonArtifactFragment {
@@ -11,30 +10,7 @@ export interface TyphoonArtifactFragment {
 }
 
 function scopeArtifactStyle(source: string): string {
-  const stylesheet = postcss.parse(source);
-  const prefixSelectors = selectorParser((selectors) => {
-    selectors.each((selector) => {
-      const first = selector.nodes[0];
-      const targetsRoot =
-        (first?.type === 'pseudo' && first.value === ':root') ||
-        (first?.type === 'tag' && (first.value === 'html' || first.value === 'body'));
-
-      if (targetsRoot) {
-        first.replaceWith(selectorParser.className({ value: 'typhoon-visual' }));
-        return;
-      }
-
-      selector.prepend(selectorParser.combinator({ value: ' ' }));
-      selector.prepend(selectorParser.className({ value: 'typhoon-visual' }));
-    });
-  });
-
-  stylesheet.walkRules((rule) => {
-    if (rule.parent?.type === 'atrule' && /keyframes$/i.test(rule.parent.name)) return;
-    rule.selector = prefixSelectors.processSync(rule.selector);
-  });
-
-  return `${stylesheet.toString()}\n
+  return scopeVisualStyle(source, 'typhoon-visual', `
 .dark .typhoon-visual {
   color-scheme: dark;
   --paper: #0f1720;
@@ -51,7 +27,7 @@ function scopeArtifactStyle(source: string): string {
   --indigo: #8995d1;
   --violet: #a98dcc;
   --shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.34);
-}`;
+}`);
 }
 
 function applyTranslations(source: string, lang: Language): string {

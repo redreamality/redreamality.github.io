@@ -7,7 +7,17 @@ from typing import Any, Iterable
 
 
 SUPPORTED_LOCALES = ("en", "zh", "ja")
-REGISTERED_DEMOS = frozenset({"overview", "energy", "organization"})
+REGISTERED_DEMOS = frozenset({
+    "overview",
+    "energy",
+    "organization",
+    "outer-loop",
+    "contract-gate",
+    "iteration-trace",
+    "evidence-gate",
+    "state-ledger",
+    "layer-stack",
+})
 
 
 def read_text(path: Path) -> str:

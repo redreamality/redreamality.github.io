@@ -1,0 +1,933 @@
+{
+  "slug": "loop-engineering",
+  "renderer": "interactive-explainer",
+  "structure": {
+    "overview": {
+      "demo": "outer-loop"
+    },
+    "steps": [
+      {
+        "id": "executable-contract",
+        "demo": "contract-gate"
+      },
+      {
+        "id": "bounded-attempt",
+        "demo": "iteration-trace"
+      },
+      {
+        "id": "independent-evidence",
+        "demo": "evidence-gate"
+      },
+      {
+        "id": "durable-state",
+        "demo": "state-ledger"
+      },
+      {
+        "id": "engineering-layers",
+        "demo": "layer-stack"
+      }
+    ]
+  },
+  "locales": {
+    "en": {
+      "lang": "en",
+      "meta": {
+        "title": "Loop Engineering: Designing the Outer Loop for Coding Agents",
+        "description": "An interactive explanation of how goals, bounded attempts, independent evidence, durable state, and stop conditions turn coding agents into a reliable system."
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "Pause all motion",
+        "resumeAll": "Resume all motion",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset",
+        "waiting": "The visual will load when it enters the viewport.",
+        "loading": "Preparing the visual…",
+        "error": "The visual could not be displayed. Read the explanation above instead.",
+        "figureFallback": "Enable JavaScript to view this interactive explanation.",
+        "skipToContent": "Skip to content",
+        "languageNavigation": "Languages",
+        "overviewLabel": "System overview",
+        "stepLabel": "Design move"
+      },
+      "hero": {
+        "eyebrow": "THE OUTER LOOP OF AGENTIC CODING",
+        "title": "Loop Engineering",
+        "subtitle": "Stop being the person who repeatedly prompts the coding agent. Design a system that finds work, runs bounded attempts, judges independent evidence, persists state, and knows when to stop or escalate."
+      },
+      "overview": {
+        "title": "Engineer the outer loop, not just the next prompt",
+        "body": "A coding agent already has an inner loop: inspect, act, observe. Loop engineering adds an outer system that selects work, frames each attempt, checks evidence, stores what happened, and routes the result.",
+        "demoTitle": "The loop around the agent",
+        "copy": {
+          "ariaLabel": "An outer engineering loop that selects work, frames an attempt, runs an agent, verifies evidence, then persists and routes the result",
+          "guardrailLabel": "Human-owned boundaries",
+          "guardrails": [
+            "Goal and scope",
+            "Permissions",
+            "Budget",
+            "Stop condition",
+            "Escalation"
+          ],
+          "nodes": [
+            {
+              "label": "Select work",
+              "detail": "The system discovers or dequeues a concrete task instead of waiting for a person to write the next prompt."
+            },
+            {
+              "label": "Frame attempt",
+              "detail": "It supplies the goal, relevant context, allowed actions, acceptance checks, and a bounded budget for one run."
+            },
+            {
+              "label": "Agent runs",
+              "detail": "Inside the harness, the agent investigates, edits, invokes tools, and observes the environment."
+            },
+            {
+              "label": "Verify evidence",
+              "detail": "Tests, logs, diffs, policies, or review produce evidence that is independent of the model saying it is done."
+            },
+            {
+              "label": "Persist and route",
+              "detail": "The loop records durable state, then stops, retries with new evidence, escalates, or selects the next task."
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "id": "executable-contract",
+          "number": "01",
+          "title": "Turn intent into an executable contract",
+          "body": "A recursive goal without boundaries can thrash forever. The outer loop needs observable success, a scoped attempt, a budget, and explicit routes for pass, retry, and escalation.",
+          "demoTitle": "From vague intent to an operational contract",
+          "copy": {
+            "ariaLabel": "Comparison between a vague task and an engineered loop contract",
+            "vagueButton": "Vague request",
+            "engineeredButton": "Engineered contract",
+            "inputLabel": "Task entering the loop",
+            "gateLabel": "What the system can decide",
+            "vagueBrief": "Improve the checkout flow until it feels done.",
+            "engineeredBrief": "Fix duplicate checkout submission without changing the public API.",
+            "vagueChecks": [
+              "No observable pass or fail signal",
+              "No boundary on files, tools, or attempts",
+              "No rule for stopping or asking for help"
+            ],
+            "engineeredChecks": [
+              "Reproduction test passes and regression suite stays green",
+              "Only checkout module changes; no production credentials",
+              "At most three attempts, then escalate with evidence"
+            ],
+            "vagueStatus": "The agent can keep producing plausible changes without converging.",
+            "engineeredStatus": "The loop can make a defensible pass, retry, or escalate decision."
+          }
+        },
+        {
+          "id": "bounded-attempt",
+          "number": "02",
+          "title": "Let one attempt do one bounded job",
+          "body": "The inner run investigates, changes one slice, runs checks, and records evidence. A failed check is not wasted effort: the outer loop turns it into better context for the next attempt.",
+          "demoTitle": "Two attempts converging through evidence",
+          "copy": {
+            "ariaLabel": "A step-through trace of two bounded coding-agent attempts",
+            "nextButton": "Advance trace",
+            "attemptLabel": "Attempt {attempt}",
+            "phaseLabels": [
+              "Investigate",
+              "Implement",
+              "Verify",
+              "Record"
+            ],
+            "changeLabel": "Bounded action",
+            "evidenceLabel": "Environment evidence",
+            "states": [
+              {
+                "attempt": "1",
+                "phase": 0,
+                "change": "Read the failing checkout test and trace the duplicate request path.",
+                "evidence": "The same idempotency key is serialized differently on retry.",
+                "outcome": "The run now has a concrete hypothesis."
+              },
+              {
+                "attempt": "1",
+                "phase": 1,
+                "change": "Normalize the key before the request reaches the payment adapter.",
+                "evidence": "The diff touches one module and one focused test.",
+                "outcome": "The change stays inside the declared scope."
+              },
+              {
+                "attempt": "1",
+                "phase": 2,
+                "change": "Run the reproduction test and the checkout regression group.",
+                "evidence": "Reproduction passes, but a retry-with-timeout test fails.",
+                "outcome": "Independent evidence says: not done."
+              },
+              {
+                "attempt": "1",
+                "phase": 3,
+                "change": "Store the failing test name, diff summary, and remaining hypothesis.",
+                "evidence": "The next attempt can start from the failure instead of rediscovering it.",
+                "outcome": "Retry with new evidence."
+              },
+              {
+                "attempt": "2",
+                "phase": 0,
+                "change": "Reload the goal plus the recorded timeout failure.",
+                "evidence": "The timeout path bypasses the normal serializer.",
+                "outcome": "The second attempt starts with sharper context."
+              },
+              {
+                "attempt": "2",
+                "phase": 1,
+                "change": "Route both normal and timeout retries through one serializer.",
+                "evidence": "The public API remains unchanged.",
+                "outcome": "One more bounded change addresses the observed cause."
+              },
+              {
+                "attempt": "2",
+                "phase": 2,
+                "change": "Run the focused test, regression group, and static checks.",
+                "evidence": "All declared checks pass.",
+                "outcome": "The completion gate has independent evidence."
+              },
+              {
+                "attempt": "2",
+                "phase": 3,
+                "change": "Record the passing checks and final diff for review.",
+                "evidence": "The loop has an auditable reason to stop.",
+                "outcome": "Stop and deliver."
+              }
+            ]
+          }
+        },
+        {
+          "id": "independent-evidence",
+          "number": "03",
+          "title": "Make completion a verdict, not a feeling",
+          "body": "Models are generous judges of their own work. Loop engineering separates action from judgment: evidence from tests, policies, logs, diffs, or human review determines the next route.",
+          "demoTitle": "Route outcomes through an independent gate",
+          "copy": {
+            "ariaLabel": "A routing gate comparing model self-report with independent verification",
+            "verifierLabel": "Who decides whether the work is done?",
+            "selfButton": "Agent self-report",
+            "independentButton": "Independent checker",
+            "resultLabel": "Observed result",
+            "failButton": "Checks fail",
+            "passButton": "Checks pass",
+            "uncertainButton": "Evidence is ambiguous",
+            "selfVerdict": "“Looks done”",
+            "selfDetail": "The actor also acts as the judge.",
+            "independentVerdict": "Evidence gate",
+            "independentDetail": "A separate signal controls the route.",
+            "retryTitle": "Retry",
+            "retryDetail": "Feed the failure into the next bounded attempt.",
+            "stopTitle": "Stop",
+            "stopDetail": "Deliver only when declared checks pass.",
+            "escalateTitle": "Escalate",
+            "escalateDetail": "Ask a human when evidence or authority is insufficient.",
+            "selfStatus": "Self-report exits the loop even when the environment says otherwise.",
+            "statuses": {
+              "fail": "A failed check becomes new context for a retry.",
+              "pass": "Passing evidence satisfies the stop condition.",
+              "uncertain": "Ambiguous evidence goes to a human verdict."
+            }
+          }
+        },
+        {
+          "id": "durable-state",
+          "number": "04",
+          "title": "Move memory out of the conversation",
+          "body": "Long chats drift and context windows reset. Reliable loops keep the goal, work queue, test output, decisions, and remaining failures in durable artifacts that the next run can read.",
+          "demoTitle": "Transient conversation versus durable state",
+          "copy": {
+            "ariaLabel": "A comparison between fading chat context and a durable loop ledger across attempts",
+            "nextButton": "Start next attempt",
+            "attemptLabel": "Context seen by attempt {attempt}",
+            "transientLabel": "Transient conversation",
+            "durableLabel": "Durable loop state",
+            "attempts": [
+              {
+                "attempt": "1",
+                "transient": "“Please fix checkout.” The run investigates from scratch.",
+                "durable": [
+                  "Goal and acceptance checks",
+                  "Allowed scope and budget"
+                ],
+                "caption": "The first attempt externalizes what future attempts must retain."
+              },
+              {
+                "attempt": "2",
+                "transient": "The first run's detailed reasoning is already fading.",
+                "durable": [
+                  "Goal and acceptance checks",
+                  "Allowed scope and budget",
+                  "Failing timeout test and diff summary"
+                ],
+                "caption": "The next run reads evidence, not a reconstructed memory of the chat."
+              },
+              {
+                "attempt": "3",
+                "transient": "A fresh agent instance has no personal memory of earlier attempts.",
+                "durable": [
+                  "Goal and acceptance checks",
+                  "Allowed scope and budget",
+                  "Resolved failure and passing checks",
+                  "Decision log and final delivery state"
+                ],
+                "caption": "Progress survives agent restarts because state lives outside the model."
+              }
+            ]
+          }
+        },
+        {
+          "id": "engineering-layers",
+          "number": "05",
+          "title": "See the five loops inside Loop Engineering",
+          "body": "Current usage spans more than task retries. The full system nests execution, verification, operations, harness improvement, and a human outer loop that owns consequences.",
+          "demoTitle": "Five nested loops, from tool use to accountability",
+          "copy": {
+            "ariaLabel": "Five nested loops from agent execution to the human accountability layer",
+            "detailLabel": "Selected loop",
+            "layers": [
+              {
+                "label": "Agent execution loop",
+                "short": "Model ↔ tools and environment",
+                "detail": "The agent inspects state, chooses an action, uses a tool, reads the environment, and updates its next move inside one run.",
+                "example": "It makes the agent act, but does not yet prove the result is correct."
+              },
+              {
+                "label": "Verification loop",
+                "short": "Attempt ↔ evidence and grader",
+                "detail": "Tests, rubrics, logs, or review judge the attempt and return actionable feedback when it fails.",
+                "example": "It drives convergence by separating the maker from the completion verdict."
+              },
+              {
+                "label": "Operations loop",
+                "short": "Trigger → run → persist → next",
+                "detail": "Events, schedules, or queues select work; bounded runs execute it; persistent state carries progress across sessions.",
+                "example": "This is the layer that replaces a person manually sending the next prompt."
+              },
+              {
+                "label": "Harness improvement loop",
+                "short": "Traces → feedback → evals → change",
+                "detail": "Production traces and feedback become reusable evals that reveal gaps in prompts, tools, graders, memory, or the harness itself.",
+                "example": "It prevents the same class of failure from recurring without changing the system."
+              },
+              {
+                "label": "Human outer loop",
+                "short": "Goal, permission, budget, verdict",
+                "detail": "People define acceptable outcomes and authority, approve high-impact consequences, redirect the system, and remain accountable for what ships.",
+                "example": "Automation can own execution; humans still own the boundary with the real world."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "zh": {
+      "lang": "zh-CN",
+      "meta": {
+        "title": "Loop Engineering：为编码 Agent 设计外循环",
+        "description": "通过交互图解理解目标、有限尝试、独立证据、持久状态与停止条件，如何把编码 Agent 组织成可靠系统。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "暂停所有动画",
+        "resumeAll": "继续所有动画",
+        "pause": "暂停",
+        "resume": "继续",
+        "reset": "重置",
+        "waiting": "图解将在进入视口后加载。",
+        "loading": "正在准备图解…",
+        "error": "图解暂时无法显示，请阅读上方文字说明。",
+        "figureFallback": "启用 JavaScript 后可以查看交互图解。",
+        "skipToContent": "跳到正文",
+        "languageNavigation": "语言",
+        "overviewLabel": "系统全貌",
+        "stepLabel": "设计动作"
+      },
+      "hero": {
+        "eyebrow": "代理式编程的外循环",
+        "title": "Loop Engineering：设计 Agent 外循环",
+        "subtitle": "不再由人反复给编码 Agent 写下一条提示，而是设计一个系统：自动发现工作、运行有限尝试、用独立证据作判断、保存状态，并知道何时停止或升级给人。"
+      },
+      "overview": {
+        "title": "工程化外循环，而不只是优化下一条 Prompt",
+        "body": "编码 Agent 本身已有内循环：观察、行动、再观察。Loop Engineering 在外层补上任务选择、尝试装配、证据验证、状态保存与结果路由。",
+        "demoTitle": "围绕 Agent 的外循环",
+        "copy": {
+          "ariaLabel": "一个选择任务、装配尝试、运行 Agent、验证证据并保存与路由结果的外层工程循环",
+          "guardrailLabel": "由人负责的边界",
+          "guardrails": [
+            "目标与范围",
+            "权限",
+            "预算",
+            "停止条件",
+            "升级机制"
+          ],
+          "nodes": [
+            {
+              "label": "选择工作",
+              "detail": "系统发现或领取一个明确任务，不再等待人来写下一条提示。"
+            },
+            {
+              "label": "装配尝试",
+              "detail": "为一次运行提供目标、相关上下文、允许的动作、验收检查和有限预算。"
+            },
+            {
+              "label": "Agent 执行",
+              "detail": "在 harness 内部，Agent 调查、修改、调用工具，并观察环境反馈。"
+            },
+            {
+              "label": "验证证据",
+              "detail": "测试、日志、diff、策略或审查产生独立证据，而不是由模型自称“已经完成”。"
+            },
+            {
+              "label": "保存并路由",
+              "detail": "循环记录持久状态，然后停止、带着新证据重试、升级给人，或选择下一项工作。"
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "id": "executable-contract",
+          "number": "01",
+          "title": "把意图变成可执行契约",
+          "body": "没有边界的递归目标会反复打转。外循环需要可观察的成功标准、单次尝试范围、预算，以及通过、重试和升级的明确路线。",
+          "demoTitle": "从模糊意图到可运行契约",
+          "copy": {
+            "ariaLabel": "模糊任务与工程化循环契约的对比",
+            "vagueButton": "模糊请求",
+            "engineeredButton": "工程化契约",
+            "inputLabel": "进入循环的任务",
+            "gateLabel": "系统能够做出的判断",
+            "vagueBrief": "把结账流程优化到感觉完成为止。",
+            "engineeredBrief": "修复重复提交订单的问题，不改变公共 API。",
+            "vagueChecks": [
+              "没有可观察的通过或失败信号",
+              "没有文件、工具或尝试次数边界",
+              "没有停止或求助规则"
+            ],
+            "engineeredChecks": [
+              "复现测试通过，回归测试保持全绿",
+              "只改结账模块，不接触生产凭据",
+              "最多尝试三次，随后带证据升级"
+            ],
+            "vagueStatus": "Agent 可以持续产出看似合理的改动，却无法收敛。",
+            "engineeredStatus": "循环可以有依据地选择通过、重试或升级。"
+          }
+        },
+        {
+          "id": "bounded-attempt",
+          "number": "02",
+          "title": "让一次尝试只完成一个有限任务",
+          "body": "单次内循环负责调查、修改一个切片、运行检查并记录证据。检查失败不是白费：外循环会把失败转成下一次尝试所需的更好上下文。",
+          "demoTitle": "两次尝试如何借助证据收敛",
+          "copy": {
+            "ariaLabel": "逐步展示两次有限编码 Agent 尝试的轨迹",
+            "nextButton": "推进轨迹",
+            "attemptLabel": "第 {attempt} 次尝试",
+            "phaseLabels": [
+              "调查",
+              "实现",
+              "验证",
+              "记录"
+            ],
+            "changeLabel": "有限动作",
+            "evidenceLabel": "环境证据",
+            "states": [
+              {
+                "attempt": "1",
+                "phase": 0,
+                "change": "读取失败的结账测试，追踪重复请求路径。",
+                "evidence": "重试时，同一个幂等键被序列化成不同形式。",
+                "outcome": "本次运行得到一个具体假设。"
+              },
+              {
+                "attempt": "1",
+                "phase": 1,
+                "change": "在请求进入支付适配器之前统一幂等键。",
+                "evidence": "diff 只涉及一个模块和一个聚焦测试。",
+                "outcome": "改动仍处于声明范围内。"
+              },
+              {
+                "attempt": "1",
+                "phase": 2,
+                "change": "运行复现测试与结账回归测试组。",
+                "evidence": "复现测试通过，但带超时的重试测试失败。",
+                "outcome": "独立证据表明：还没完成。"
+              },
+              {
+                "attempt": "1",
+                "phase": 3,
+                "change": "保存失败测试名、diff 摘要与剩余假设。",
+                "evidence": "下一次尝试可从失败处继续，而不用重新调查。",
+                "outcome": "带着新证据重试。"
+              },
+              {
+                "attempt": "2",
+                "phase": 0,
+                "change": "重新载入目标和已记录的超时失败。",
+                "evidence": "超时路径绕过了常规序列化器。",
+                "outcome": "第二次尝试拥有更精准的上下文。"
+              },
+              {
+                "attempt": "2",
+                "phase": 1,
+                "change": "让普通重试与超时重试都走同一个序列化器。",
+                "evidence": "公共 API 保持不变。",
+                "outcome": "又一个有限改动命中了已观察到的原因。"
+              },
+              {
+                "attempt": "2",
+                "phase": 2,
+                "change": "运行聚焦测试、回归组和静态检查。",
+                "evidence": "所有声明的检查全部通过。",
+                "outcome": "完成门槛拥有独立证据。"
+              },
+              {
+                "attempt": "2",
+                "phase": 3,
+                "change": "记录通过的检查与最终 diff，交付审查。",
+                "evidence": "循环拥有可审计的停止理由。",
+                "outcome": "停止并交付。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "independent-evidence",
+          "number": "03",
+          "title": "让“完成”成为裁决，而不是感觉",
+          "body": "模型往往会宽松地评价自己的工作。Loop Engineering 把执行与裁决分离：测试、策略、日志、diff 或人工审查所产生的证据决定下一条路线。",
+          "demoTitle": "通过独立门槛路由结果",
+          "copy": {
+            "ariaLabel": "对比 Agent 自报完成与独立验证的结果路由门槛",
+            "verifierLabel": "谁来判断工作是否完成？",
+            "selfButton": "Agent 自报",
+            "independentButton": "独立检查器",
+            "resultLabel": "观察到的结果",
+            "failButton": "检查失败",
+            "passButton": "检查通过",
+            "uncertainButton": "证据模糊",
+            "selfVerdict": "“看起来完成了”",
+            "selfDetail": "行动者同时担任裁判。",
+            "independentVerdict": "证据门槛",
+            "independentDetail": "由独立信号控制路线。",
+            "retryTitle": "重试",
+            "retryDetail": "把失败反馈给下一次有限尝试。",
+            "stopTitle": "停止",
+            "stopDetail": "只有声明的检查通过才交付。",
+            "escalateTitle": "升级",
+            "escalateDetail": "证据或权限不足时交给人判断。",
+            "selfStatus": "自报完成会让循环退出，即使环境证据并不同意。",
+            "statuses": {
+              "fail": "失败检查变成下一次重试的新上下文。",
+              "pass": "通过证据满足停止条件。",
+              "uncertain": "模糊证据进入人工裁决。"
+            }
+          }
+        },
+        {
+          "id": "durable-state",
+          "number": "04",
+          "title": "把记忆移出对话窗口",
+          "body": "长对话会漂移，上下文窗口也会重置。可靠循环把目标、工作队列、测试输出、决策与未解决失败保存在持久 artifact 中，供下一次运行读取。",
+          "demoTitle": "短暂对话与持久状态",
+          "copy": {
+            "ariaLabel": "跨多次尝试对比逐渐消失的对话上下文与持久循环台账",
+            "nextButton": "开始下一次尝试",
+            "attemptLabel": "第 {attempt} 次尝试看到的上下文",
+            "transientLabel": "短暂对话",
+            "durableLabel": "持久循环状态",
+            "attempts": [
+              {
+                "attempt": "1",
+                "transient": "“请修复结账。”本次运行从头调查。",
+                "durable": [
+                  "目标与验收检查",
+                  "允许范围与预算"
+                ],
+                "caption": "第一次尝试把未来运行必须保留的信息外部化。"
+              },
+              {
+                "attempt": "2",
+                "transient": "第一次运行的详细推理已经开始消退。",
+                "durable": [
+                  "目标与验收检查",
+                  "允许范围与预算",
+                  "失败的超时测试与 diff 摘要"
+                ],
+                "caption": "下一次运行读取证据，而不是重建对话记忆。"
+              },
+              {
+                "attempt": "3",
+                "transient": "新的 Agent 实例对先前尝试没有个人记忆。",
+                "durable": [
+                  "目标与验收检查",
+                  "允许范围与预算",
+                  "已解决失败与通过检查",
+                  "决策日志与最终交付状态"
+                ],
+                "caption": "状态存在模型之外，所以进度可以跨 Agent 重启保留。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "engineering-layers",
+          "number": "05",
+          "title": "看清 Loop Engineering 里的五层循环",
+          "body": "这个新兴术语不只指任务重试。完整系统把 Agent 执行、独立验证、任务运营、Harness 改进与承担后果的人类外循环嵌套在一起。",
+          "demoTitle": "从工具调用到人类问责的五层循环",
+          "copy": {
+            "ariaLabel": "从 Agent 执行到人类问责层的五个嵌套循环",
+            "detailLabel": "当前循环",
+            "layers": [
+              {
+                "label": "Agent 执行循环",
+                "short": "模型 ↔ 工具与环境",
+                "detail": "在一次运行内，Agent 读取状态、选择动作、调用工具、观察环境，再更新下一步。",
+                "example": "它让 Agent 能行动，但还不能证明结果正确。"
+              },
+              {
+                "label": "验证循环",
+                "short": "尝试 ↔ 证据与评分器",
+                "detail": "测试、rubric、日志或审查判断尝试结果，并在失败时返回可行动反馈。",
+                "example": "它把执行者与完成裁决分开，让结果逐步收敛。"
+              },
+              {
+                "label": "任务运营循环",
+                "short": "触发 → 执行 → 保存 → 下一项",
+                "detail": "事件、定时器或队列选择工作；有限运行负责执行；持久状态让进度跨会话延续。",
+                "example": "这一层替代了人手工发送下一条 Prompt。"
+              },
+              {
+                "label": "Harness 改进循环",
+                "short": "Trace → 反馈 → Eval → 改动",
+                "detail": "生产 Trace 与反馈变成可复用 Eval，用来发现 Prompt、工具、评分器、记忆或 Harness 本身的缺口。",
+                "example": "它避免同一类失败不断重演，却从未沉淀为系统改进。"
+              },
+              {
+                "label": "人类外循环",
+                "short": "目标、权限、预算、裁决",
+                "detail": "人定义可接受结果与权限，批准高影响后果，重定向系统，并对最终交付负责。",
+                "example": "自动化可以拥有执行；人与真实世界的边界仍由人负责。"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "ja": {
+      "lang": "ja",
+      "meta": {
+        "title": "Loop Engineering：コーディングエージェントの外側のループを設計する",
+        "description": "目標、限定された試行、独立した証拠、永続状態、停止条件によって、コーディングエージェントを信頼できるシステムにする方法を対話的に解説します。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "すべての動きを停止",
+        "resumeAll": "すべての動きを再開",
+        "pause": "一時停止",
+        "resume": "再開",
+        "reset": "リセット",
+        "waiting": "表示領域に入ると図解を読み込みます。",
+        "loading": "図解を準備しています…",
+        "error": "図解を表示できません。上の説明をお読みください。",
+        "figureFallback": "JavaScript を有効にするとインタラクティブ図解を表示できます。",
+        "skipToContent": "本文へ移動",
+        "languageNavigation": "言語",
+        "overviewLabel": "システム全体",
+        "stepLabel": "設計ポイント"
+      },
+      "hero": {
+        "eyebrow": "エージェント型コーディングの外側のループ",
+        "title": "ループエンジニアリング",
+        "subtitle": "人がコーディングエージェントへ次の指示を繰り返し書くのではなく、仕事を見つけ、限定された試行を実行し、独立した証拠で判定し、状態を保存し、停止や人への引き継ぎを判断するシステムを設計します。"
+      },
+      "overview": {
+        "title": "次のプロンプトではなく、外側のループを設計する",
+        "body": "コーディングエージェントには、調査・行動・観察という内側のループがあります。Loop Engineering はその外側に、仕事の選択、試行の組み立て、証拠の検証、状態の保存、結果の振り分けを加えます。",
+        "demoTitle": "エージェントを囲む外側のループ",
+        "copy": {
+          "ariaLabel": "仕事を選び、試行を組み立て、エージェントを実行し、証拠を検証して結果を保存・振り分ける外側の設計ループ",
+          "guardrailLabel": "人が管理する境界",
+          "guardrails": [
+            "目標と範囲",
+            "権限",
+            "予算",
+            "停止条件",
+            "エスカレーション"
+          ],
+          "nodes": [
+            {
+              "label": "仕事を選ぶ",
+              "detail": "人が次のプロンプトを書くのを待たず、システムが具体的なタスクを発見または取得します。"
+            },
+            {
+              "label": "試行を組み立てる",
+              "detail": "1回の実行に、目標、関連コンテキスト、許可された操作、受け入れ条件、有限の予算を与えます。"
+            },
+            {
+              "label": "Agent が実行する",
+              "detail": "harness の内部で、Agent が調査、編集、ツール実行、環境観察を行います。"
+            },
+            {
+              "label": "証拠を検証する",
+              "detail": "モデルの自己申告ではなく、テスト、ログ、diff、ポリシー、レビューが独立した証拠を生成します。"
+            },
+            {
+              "label": "保存して振り分ける",
+              "detail": "永続状態を記録し、停止、新しい証拠で再試行、人への引き継ぎ、次の仕事の選択を行います。"
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "id": "executable-contract",
+          "number": "01",
+          "title": "意図を実行可能な契約に変える",
+          "body": "境界のない再帰的な目標は、いつまでも空回りします。外側のループには、観測可能な成功条件、1回の試行範囲、予算、合格・再試行・人への引き継ぎの明確な経路が必要です。",
+          "demoTitle": "曖昧な意図から運用可能な契約へ",
+          "copy": {
+            "ariaLabel": "曖昧な依頼と設計されたループ契約の比較",
+            "vagueButton": "曖昧な依頼",
+            "engineeredButton": "設計された契約",
+            "inputLabel": "ループに入るタスク",
+            "gateLabel": "システムが判断できること",
+            "vagueBrief": "チェックアウトを、良さそうになるまで改善する。",
+            "engineeredBrief": "公開 API を変えずに、チェックアウトの重複送信を修正する。",
+            "vagueChecks": [
+              "合格・不合格を観測できる信号がない",
+              "ファイル、ツール、試行回数の境界がない",
+              "停止や支援要請のルールがない"
+            ],
+            "engineeredChecks": [
+              "再現テストが通り、回帰テストも維持される",
+              "変更はチェックアウトモジュールのみで、本番資格情報には触れない",
+              "最大3回試行し、その後は証拠とともに人へ引き継ぐ"
+            ],
+            "vagueStatus": "もっともらしい変更を続けても、収束したか判断できません。",
+            "engineeredStatus": "ループは、合格・再試行・引き継ぎを根拠付きで判断できます。"
+          }
+        },
+        {
+          "id": "bounded-attempt",
+          "number": "02",
+          "title": "1回の試行には、限定された仕事を1つだけ任せる",
+          "body": "内側の実行は、調査、1つの変更、検証、証拠の記録を行います。検証失敗も無駄ではありません。外側のループが、次の試行に使うより良いコンテキストへ変換します。",
+          "demoTitle": "証拠によって収束する2回の試行",
+          "copy": {
+            "ariaLabel": "2回の限定されたコーディングエージェント試行を順に示すトレース",
+            "nextButton": "トレースを進める",
+            "attemptLabel": "試行 {attempt}",
+            "phaseLabels": [
+              "調査",
+              "実装",
+              "検証",
+              "記録"
+            ],
+            "changeLabel": "限定された操作",
+            "evidenceLabel": "環境から得た証拠",
+            "states": [
+              {
+                "attempt": "1",
+                "phase": 0,
+                "change": "失敗したチェックアウトテストを読み、重複リクエストの経路を追跡する。",
+                "evidence": "再試行時に同じ冪等キーが別の形式でシリアライズされている。",
+                "outcome": "具体的な仮説が得られました。"
+              },
+              {
+                "attempt": "1",
+                "phase": 1,
+                "change": "支払いアダプターへ届く前にキーを正規化する。",
+                "evidence": "diff は1つのモジュールと1つの対象テストに限定されている。",
+                "outcome": "変更は宣言した範囲内です。"
+              },
+              {
+                "attempt": "1",
+                "phase": 2,
+                "change": "再現テストとチェックアウト回帰テスト群を実行する。",
+                "evidence": "再現テストは通ったが、タイムアウト再試行テストが失敗した。",
+                "outcome": "独立した証拠は「未完了」と示しています。"
+              },
+              {
+                "attempt": "1",
+                "phase": 3,
+                "change": "失敗したテスト名、diff の要約、残る仮説を保存する。",
+                "evidence": "次の試行は、最初から再調査せず失敗地点から始められる。",
+                "outcome": "新しい証拠とともに再試行します。"
+              },
+              {
+                "attempt": "2",
+                "phase": 0,
+                "change": "目標と記録されたタイムアウト失敗を読み込む。",
+                "evidence": "タイムアウト経路だけが通常のシリアライザーを迂回している。",
+                "outcome": "2回目は、より鋭いコンテキストから始まります。"
+              },
+              {
+                "attempt": "2",
+                "phase": 1,
+                "change": "通常再試行とタイムアウト再試行を同じシリアライザーへ通す。",
+                "evidence": "公開 API は変更されていない。",
+                "outcome": "観測された原因に、もう1つの限定変更で対処します。"
+              },
+              {
+                "attempt": "2",
+                "phase": 2,
+                "change": "対象テスト、回帰テスト群、静的チェックを実行する。",
+                "evidence": "宣言したすべてのチェックが通った。",
+                "outcome": "完了ゲートに独立した証拠が揃いました。"
+              },
+              {
+                "attempt": "2",
+                "phase": 3,
+                "change": "通過したチェックと最終 diff をレビュー用に記録する。",
+                "evidence": "ループには監査可能な停止理由がある。",
+                "outcome": "停止して成果を引き渡します。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "independent-evidence",
+          "number": "03",
+          "title": "完了を感触ではなく、判定にする",
+          "body": "モデルは自分の仕事を甘く評価しがちです。Loop Engineering は実行と判定を分離し、テスト、ポリシー、ログ、diff、人のレビューによる証拠で次の経路を決めます。",
+          "demoTitle": "独立したゲートで結果を振り分ける",
+          "copy": {
+            "ariaLabel": "エージェントの自己申告と独立検証を比較する結果ルーティングゲート",
+            "verifierLabel": "誰が完了を判断するか？",
+            "selfButton": "Agent の自己申告",
+            "independentButton": "独立チェッカー",
+            "resultLabel": "観測された結果",
+            "failButton": "チェック失敗",
+            "passButton": "チェック合格",
+            "uncertainButton": "証拠が曖昧",
+            "selfVerdict": "「完了したようだ」",
+            "selfDetail": "実行者が同時に判定者になります。",
+            "independentVerdict": "証拠ゲート",
+            "independentDetail": "独立した信号が経路を制御します。",
+            "retryTitle": "再試行",
+            "retryDetail": "失敗を次の限定された試行へ渡す。",
+            "stopTitle": "停止",
+            "stopDetail": "宣言したチェックが通った時だけ引き渡す。",
+            "escalateTitle": "人へ引き継ぐ",
+            "escalateDetail": "証拠や権限が足りない時は人が判断する。",
+            "selfStatus": "自己申告では、環境が反対していてもループを終了させてしまいます。",
+            "statuses": {
+              "fail": "失敗したチェックを、再試行の新しいコンテキストにします。",
+              "pass": "合格証拠が停止条件を満たします。",
+              "uncertain": "曖昧な証拠は人の判定へ送ります。"
+            }
+          }
+        },
+        {
+          "id": "durable-state",
+          "number": "04",
+          "title": "記憶を会話の外へ移す",
+          "body": "長い会話は漂流し、コンテキストウィンドウもリセットされます。信頼できるループは、目標、作業キュー、テスト出力、判断、未解決の失敗を、次の実行が読める永続 artifact に保存します。",
+          "demoTitle": "一時的な会話と永続状態",
+          "copy": {
+            "ariaLabel": "複数の試行にわたり、薄れていく会話コンテキストと永続ループ台帳を比較する",
+            "nextButton": "次の試行を開始",
+            "attemptLabel": "試行 {attempt} が見るコンテキスト",
+            "transientLabel": "一時的な会話",
+            "durableLabel": "永続ループ状態",
+            "attempts": [
+              {
+                "attempt": "1",
+                "transient": "「チェックアウトを直して。」この実行は最初から調査する。",
+                "durable": [
+                  "目標と受け入れ条件",
+                  "許可された範囲と予算"
+                ],
+                "caption": "最初の試行が、将来の実行に必要な情報を外部化します。"
+              },
+              {
+                "attempt": "2",
+                "transient": "最初の実行の詳しい推論は、すでに薄れ始めている。",
+                "durable": [
+                  "目標と受け入れ条件",
+                  "許可された範囲と予算",
+                  "失敗したタイムアウトテストと diff 要約"
+                ],
+                "caption": "次の実行は、会話の記憶を再構成せず証拠を読みます。"
+              },
+              {
+                "attempt": "3",
+                "transient": "新しい Agent インスタンスには、以前の試行の個人的な記憶がない。",
+                "durable": [
+                  "目標と受け入れ条件",
+                  "許可された範囲と予算",
+                  "解決済みの失敗と合格したチェック",
+                  "判断ログと最終引き渡し状態"
+                ],
+                "caption": "状態がモデルの外にあるため、Agent が再起動しても進捗は残ります。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "engineering-layers",
+          "number": "05",
+          "title": "Loop Engineering に含まれる5つのループを見る",
+          "body": "この新しい実践用語は、タスクの再試行だけを指しません。Agent の実行、独立検証、運用、Harness 改善、結果に責任を持つ人の外側のループを入れ子にします。",
+          "demoTitle": "ツール利用から人の説明責任までの5層",
+          "copy": {
+            "ariaLabel": "Agent の実行から人の説明責任までを表す5つの入れ子ループ",
+            "detailLabel": "選択したループ",
+            "layers": [
+              {
+                "label": "Agent 実行ループ",
+                "short": "モデル ↔ ツールと環境",
+                "detail": "1回の実行内で、Agent が状態を読み、行動を選び、ツールを使い、環境を観察して次の行動を更新します。",
+                "example": "Agent を行動させますが、結果の正しさまでは証明しません。"
+              },
+              {
+                "label": "検証ループ",
+                "short": "試行 ↔ 証拠と評価器",
+                "detail": "テスト、rubric、ログ、レビューが試行を判定し、失敗時には行動可能なフィードバックを返します。",
+                "example": "実行者と完了判定を分け、結果を収束させます。"
+              },
+              {
+                "label": "運用ループ",
+                "short": "起動 → 実行 → 保存 → 次へ",
+                "detail": "イベント、スケジュール、キューが仕事を選び、限定された実行が処理し、永続状態が進捗をセッション間で運びます。",
+                "example": "人が次のプロンプトを手作業で送る役割を置き換える層です。"
+              },
+              {
+                "label": "Harness 改善ループ",
+                "short": "Trace → Feedback → Eval → 変更",
+                "detail": "本番 Trace とフィードバックを再利用可能な Eval に変え、Prompt、ツール、評価器、記憶、Harness の弱点を見つけます。",
+                "example": "同じ種類の失敗を繰り返すだけで、システムが改善しない状態を防ぎます。"
+              },
+              {
+                "label": "人の外側のループ",
+                "short": "目標、権限、予算、最終判断",
+                "detail": "人が許容できる結果と権限を定義し、影響の大きい結果を承認し、方向を変え、出荷された結果に責任を持ちます。",
+                "example": "自動化は実行を担えても、現実世界との境界は人が担います。"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

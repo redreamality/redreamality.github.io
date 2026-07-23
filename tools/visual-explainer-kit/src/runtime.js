@@ -6,12 +6,14 @@
   const figures = new Set();
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const tokens = Object.freeze({
-    ink: "#17333c",
-    muted: "#60747a",
-    ocean: "#0f7185",
-    warm: "#ee9d46",
-    coral: "#d45f50",
-    surface: "#fffdf8"
+    ink: "var(--visual-ink, #17333c)",
+    muted: "var(--visual-muted, #60747a)",
+    line: "var(--visual-line, #d8ddd7)",
+    ocean: "var(--visual-ocean, #0f7185)",
+    warm: "var(--visual-warm, #ee9d46)",
+    coral: "var(--visual-coral, #d45f50)",
+    paper: "var(--visual-paper, #f4f1e8)",
+    surface: "var(--visual-surface, #fffdf8)"
   });
   let globalPaused = false;
 
@@ -40,9 +42,9 @@
           .stage { position: relative; min-height: 25rem; overflow: hidden; }
           .status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; }
           .status[hidden] { display: none; }
-          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid #d8ddd7; }
+          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
           .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
-          button { padding: .42rem .7rem; border: 1px solid #d8ddd7; border-radius: 999px; color: ${tokens.ink}; background: white; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+          button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
           button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
           @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
         </style>
