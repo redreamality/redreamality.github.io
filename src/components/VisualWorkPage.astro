@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import type { Language } from '../utils/i18n';
 import type { VisualWork } from '../utils/visuals';
+import LoopEngineeringVisual from './LoopEngineeringVisual.astro';
 import TyphoonVisual from './TyphoonVisual.astro';
 
 interface Props {
@@ -13,6 +14,9 @@ const { lang, work } = Astro.props;
 const localized = work.locales[lang];
 const artifactId = localized.artifact;
 const artifactComponents = {
+  'loop-engineering-en': LoopEngineeringVisual,
+  'loop-engineering-zh': LoopEngineeringVisual,
+  'loop-engineering-ja': LoopEngineeringVisual,
   'typhoon-en': TyphoonVisual,
   'typhoon-zh': TyphoonVisual,
   'typhoon-ja': TyphoonVisual,

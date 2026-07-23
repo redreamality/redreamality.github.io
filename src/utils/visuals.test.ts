@@ -3,10 +3,10 @@ import { getLatestVisual } from './visuals';
 
 describe('getLatestVisual', () => {
   it.each([
-    ['en', '/visuals/typhoon/', 'How Typhoons Form'],
-    ['zh', '/cn/visuals/typhoon/', '台风如何形成'],
-    ['ja', '/ja/visuals/typhoon/', '台風ができるまで'],
+    ['en', '/visuals/loop-engineering/', 'What Is Loop Engineering?'],
+    ['zh', '/cn/visuals/loop-engineering/', '什么是 Loop Engineering？'],
+    ['ja', '/ja/visuals/loop-engineering/', 'Loop Engineering とは何か？'],
   ] as const)('returns the newest published %s artifact', (lang, href, title) => {
-    expect(getLatestVisual(lang)).toMatchObject({ slug: 'typhoon', href, title, hasCurrentArtifact: true });
+    expect(getLatestVisual(lang)).toMatchObject({ slug: 'loop-engineering', href, title, hasCurrentArtifact: true });
   });
 });
