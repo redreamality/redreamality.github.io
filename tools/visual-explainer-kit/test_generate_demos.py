@@ -135,6 +135,36 @@ class GeminiGenerationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "不能直接使用"):
             generate_demos.validate_adapter("energy", source)
 
+    def test_validation_rejects_runtime_owned_class_names(self) -> None:
+        source = '''registerDemo("energy", ({ root, copy }) => {
+  root.innerHTML = `<div class="controls">${copy.caption}</div>`;
+  return { pause() {}, resume() {}, reset() {}, destroy() {} };
+});'''
+
+        with self.assertRaisesRegex(ValueError, "共享运行时 class"):
+            generate_demos.validate_adapter("energy", source)
+
+    def test_validation_rejects_hard_coded_canvas_copy(self) -> None:
+        source = '''registerDemo("energy", ({ root, copy }) => {
+  root.innerHTML = `<canvas aria-label="${copy.ariaLabel}"></canvas>`;
+  const context = root.querySelector("canvas").getContext("2d");
+  context.fillText("Human", 10, 10);
+  return { pause() {}, resume() {}, reset() {}, destroy() {} };
+});'''
+
+        with self.assertRaisesRegex(ValueError, "Canvas 硬编码文案"):
+            generate_demos.validate_adapter("energy", source)
+
+    def test_validation_rejects_token_name_string_in_resolve_color(self) -> None:
+        source = '''registerDemo("energy", ({ root, copy, resolveColor }) => {
+  root.innerHTML = `<canvas aria-label="${copy.ariaLabel}"></canvas>`;
+  const color = resolveColor("ocean");
+  return { pause() {}, resume() {}, reset() {}, destroy() {} };
+});'''
+
+        with self.assertRaisesRegex(ValueError, "颜色 token 名字符串"):
+            generate_demos.validate_adapter("energy", source)
+
 
 if __name__ == "__main__":
     unittest.main()

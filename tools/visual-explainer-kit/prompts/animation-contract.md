@@ -18,6 +18,10 @@
 12. 可用设计令牌只有 `tokens.ink`、`tokens.muted`、`tokens.line`、`tokens.ocean`、`tokens.warm`、`tokens.coral`、`tokens.paper`、`tokens.surface`。CSS 可以直接使用 token；Canvas 的 `fillStyle`/`strokeStyle` 不能解析 CSS `var(...)`，必须先调用 `resolveColor(token)` 得到真实颜色。
 13. Canvas/SVG 必须有可读名称或文字回退，所有控件可用键盘操作，移动端不能裁切核心解释。
 14. 动画必须解释因果或状态变化，不能只是装饰粒子。
+15. `<style>` 中的选择器必须以 demo 自己的命名空间 class 约束。禁止复用 runtime 所有的 `.frame`、`.stage`、`.controls`、`.title`、`.status`，也禁止使用未加 demo 容器前缀的 `button`、`canvas` 等元素选择器。
+16. Canvas 的 `fillText()` / `strokeText()` 文案必须直接来自 `copy`，不能写自然语言字符串常量；需要换行时必须同时兼容空格分词语言与中日韩无空格文本。
+17. `resolveColor()` 接收的是 `tokens.ink` 等 token 值，不是 `"ink"`、`"ocean"` 之类的 token 名称字符串。所有变量都必须用 `const` 或 `let` 声明，禁止隐式创建全局变量。
+18. Runtime 的 `.stage` 采用内容驱动的自动高度。Demo 根容器禁止使用 `height: 100%`；应使用合理的 `min-height`，Canvas 需要铺满时放进有稳定最小高度的相对定位容器并使用绝对定位，避免 `ResizeObserver` 与 Canvas bitmap 尺寸形成布局反馈循环。
 
 必须采用这个形状：
 
