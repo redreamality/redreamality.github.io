@@ -38,6 +38,15 @@ FORBIDDEN_SOURCE_PATTERNS = {
     "私有尺寸观察": r"\bnew\s+ResizeObserver\b",
     "全局像素比": r"\b(?:window|globalThis)\s*\.\s*devicePixelRatio\b",
     "模块导入": r"\b(?:import|export)\s+",
+    "共享运行时 class": (
+        r'class\s*=\s*["\'][^"\']*(?<![\w-])'
+        r'(?:frame|stage|controls|title|status)(?![\w-])[^"\']*["\']'
+    ),
+    "Canvas 硬编码文案": r"\b(?:fillText|strokeText)\s*\(\s*[\"'`]",
+    "颜色 token 名字符串": (
+        r"\bresolveColor\s*\(\s*[\"']"
+        r"(?:ink|muted|line|ocean|warm|coral|paper|surface)[\"']"
+    ),
 }
 SENSITIVE_HEADER_FRAGMENTS = (
     "authorization",

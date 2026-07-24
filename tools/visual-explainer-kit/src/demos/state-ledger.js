@@ -1,51 +1,197 @@
-registerDemo("state-ledger", ({ root, copy, motion, tokens }) => {
-  root.innerHTML = `
-    <style>
-      .ledger-demo { display: grid; grid-template-rows: auto 1fr auto; gap: 1.15rem; min-height: 25rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: ${tokens.surface}; }
-      .ledger-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; }
-      .attempt { margin: 0; color: ${tokens.muted}; font-weight: 800; }
-      .next { padding: .6rem .95rem; border: 1px solid ${tokens.ocean}; border-radius: 999px; color: ${tokens.surface}; background: ${tokens.ocean}; font: inherit; font-weight: 800; cursor: pointer; }
-      .next:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 3px; }
-      .state-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-      .state-panel { min-height: 14rem; padding: 1.2rem; border: 1px solid ${tokens.line}; border-radius: 1.2rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); }
-      .panel-label { margin: 0 0 .85rem; color: ${tokens.muted}; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-      .transient { display: grid; min-height: 9rem; place-content: center; padding: 1rem; border: 1px dashed ${tokens.line}; border-radius: 1rem; color: ${tokens.muted}; line-height: 1.55; text-align: center; animation: context-fade 2.8s ease-in-out infinite alternate; }
-      .ledger { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
-      .ledger li { display: grid; grid-template-columns: 1.2rem 1fr; gap: .55rem; align-items: start; padding: .65rem .75rem; border: 1px solid ${tokens.line}; border-radius: .85rem; background: ${tokens.surface}; }
-      .ledger li::before { color: ${tokens.ocean}; content: "◆"; font-size: .72rem; }
-      .caption { min-height: 1.8rem; margin: 0; color: ${tokens.muted}; font-weight: 800; text-align: center; }
-      .is-paused .transient { animation-play-state: paused; }
-      @keyframes context-fade { to { opacity: .38; } }
-      @media (max-width: 680px) { .state-columns { grid-template-columns: 1fr; } }
-    </style>
-    <div class="ledger-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
-      <div class="ledger-head"><p class="attempt"></p><button type="button" class="next">${escapeHtml(copy.nextButton)}</button></div>
-      <div class="state-columns">
-        <section class="state-panel" aria-labelledby="transient-label"><p class="panel-label" id="transient-label">${escapeHtml(copy.transientLabel)}</p><div class="transient"></div></section>
-        <section class="state-panel" aria-labelledby="durable-label"><p class="panel-label" id="durable-label">${escapeHtml(copy.durableLabel)}</p><ul class="ledger"></ul></section>
-      </div>
-      <p class="caption" aria-live="polite"></p>
-    </div>`;
-  const scene = root.querySelector(".ledger-demo");
-  const attempt = root.querySelector(".attempt");
-  const transient = root.querySelector(".transient");
-  const ledger = root.querySelector(".ledger");
-  const caption = root.querySelector(".caption");
-  let index = 0;
-  const render = () => {
-    const state = copy.attempts[index];
-    attempt.textContent = copy.attemptLabel.replace("{attempt}", state.attempt);
-    transient.textContent = state.transient;
-    ledger.innerHTML = state.durable.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
-    caption.textContent = state.caption;
-    scene.dataset.attempt = state.attempt;
-  };
-  root.querySelector(".next").addEventListener("click", () => { index = (index + 1) % copy.attempts.length; render(); });
-  render();
-  return {
-    pause: () => scene.classList.add("is-paused"),
-    resume: () => scene.classList.remove("is-paused"),
-    reset: () => { index = 0; render(); },
-    destroy: () => { root.innerHTML = ""; }
-  };
+registerDemo("state-ledger", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+    root.innerHTML = `
+        <style>
+            .sl-wrapper {
+                display: flex; flex-direction: column; min-height: 26rem; width: 100%;
+                background: ${tokens.surface}; color: ${tokens.ink};
+                font-family: system-ui, -apple-system, sans-serif;
+                box-sizing: border-box; padding: 1.5rem; gap: 1.5rem;
+                overflow: hidden;
+            }
+            .sl-header {
+                display: flex; justify-content: space-between; align-items: center;
+                flex-wrap: wrap; gap: 1rem;
+            }
+            .sl-title {
+                margin: 0; font-size: 1.1rem; font-weight: 600; color: ${tokens.ink};
+            }
+            .sl-btn {
+                background: ${tokens.ocean}; color: ${tokens.surface};
+                border: none; padding: 0.5rem 1rem; border-radius: 4px;
+                cursor: pointer; font-weight: 500; font-size: 0.9rem;
+                transition: opacity 0.2s;
+            }
+            .sl-btn:hover { opacity: 0.9; }
+            .sl-btn:active { transform: scale(0.98); }
+            .sl-btn:focus-visible { outline: 3px solid ${tokens.ocean}; outline-offset: 2px; }
+            .sl-main {
+                display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+                flex: 1; min-height: 0; overflow-y: auto;
+            }
+            @media (max-width: 500px) {
+                .sl-main { grid-template-columns: 1fr; }
+            }
+            .sl-col { display: flex; flex-direction: column; gap: 1rem; }
+            .sl-col-title {
+                margin: 0; font-size: 0.9rem; color: ${tokens.muted};
+                text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;
+            }
+            .sl-transient-content, .sl-durable-content {
+                display: flex; flex-direction: column; gap: 0.75rem;
+            }
+            .sl-transient-bubble {
+                background: ${tokens.paper}; border: 1px solid ${tokens.line};
+                padding: 1rem; border-radius: 8px; font-size: 0.95rem; line-height: 1.5;
+                transition: opacity 0.3s ease, transform 0.3s ease;
+                opacity: 1; transform: translateY(0);
+            }
+            .sl-durable-item {
+                background: ${tokens.paper}; border-left: 4px solid ${tokens.ocean};
+                padding: 0.875rem 1rem; border-radius: 4px; font-size: 0.95rem;
+                line-height: 1.4; border-top: 1px solid ${tokens.line};
+                border-right: 1px solid ${tokens.line}; border-bottom: 1px solid ${tokens.line};
+            }
+            .sl-footer {
+                text-align: center; font-size: 0.95rem; color: ${tokens.coral};
+                font-weight: 500; min-height: 1.5em; line-height: 1.4;
+                padding-top: 0.5rem; border-top: 1px solid ${tokens.line};
+            }
+            .fade-in-anim { animation: fadeIn 0.4s ease forwards; }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(-5px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .slide-in-anim { animation: slideIn 0.4s ease-out forwards; opacity: 0; }
+            @keyframes slideIn {
+                from { opacity: 0; transform: translateX(-10px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+        </style>
+        <div class="sl-wrapper" aria-label="${copy.ariaLabel}">
+            <div class="sl-header">
+                <h3 class="sl-title"></h3>
+                <button type="button" class="sl-btn">${copy.nextButton}</button>
+            </div>
+            <div class="sl-main">
+                <div class="sl-col">
+                    <h4 class="sl-col-title">${copy.transientLabel}</h4>
+                    <div class="sl-transient-content"></div>
+                </div>
+                <div class="sl-col">
+                    <h4 class="sl-col-title">${copy.durableLabel}</h4>
+                    <div class="sl-durable-content"></div>
+                </div>
+            </div>
+            <div class="sl-footer"></div>
+        </div>
+    `;
+
+    const titleEl = root.querySelector('.sl-title');
+    const btnEl = root.querySelector('.sl-btn');
+    const transientContent = root.querySelector('.sl-transient-content');
+    const durableContent = root.querySelector('.sl-durable-content');
+    const footerEl = root.querySelector('.sl-footer');
+
+    let currentIndex = 0;
+    let timer = null;
+    let isPaused = true;
+    let userInteracted = false;
+    const TOTAL_STEPS = copy.attempts.length;
+
+    function updateView(prevIndex, newIndex, animate) {
+        const data = copy.attempts[newIndex];
+        const prevData = copy.attempts[prevIndex];
+
+        titleEl.textContent = copy.attemptLabel.replace('{attempt}', data.attempt);
+        footerEl.textContent = data.caption;
+
+        if (prevIndex !== newIndex) {
+            announce(`${titleEl.textContent}. ${data.caption}`);
+        }
+
+        const useAnim = animate && motion;
+        const transientHtml = `<div class="sl-transient-bubble ${useAnim ? 'fade-in-anim' : ''}">${data.transient}</div>`;
+
+        if (useAnim && prevIndex !== newIndex) {
+            const oldBubble = transientContent.querySelector('.sl-transient-bubble');
+            if (oldBubble) {
+                oldBubble.style.opacity = '0';
+                oldBubble.style.transform = 'translateY(5px)';
+                setTimeout(() => {
+                    if (currentIndex === newIndex && root.contains(transientContent)) {
+                        transientContent.innerHTML = transientHtml;
+                    }
+                }, 300);
+            } else {
+                transientContent.innerHTML = transientHtml;
+            }
+        } else {
+            transientContent.innerHTML = transientHtml;
+        }
+
+        let durableHtml = '';
+        const isForwardStep = useAnim && (newIndex === prevIndex + 1);
+        const baselineCount = isForwardStep ? prevData.durable.length : data.durable.length;
+
+        data.durable.forEach((itemText, i) => {
+            const isNew = i >= baselineCount;
+            const animClass = isNew ? 'slide-in-anim' : '';
+            const delay = isNew ? (i - baselineCount) * 0.15 : 0;
+            const style = isNew ? `style="animation-delay: ${delay}s"` : '';
+            durableHtml += `<div class="sl-durable-item ${animClass}" ${style}>${itemText}</div>`;
+        });
+
+        durableContent.innerHTML = durableHtml;
+    }
+
+    function goToStep(index, animate) {
+        const prev = currentIndex;
+        currentIndex = index;
+        updateView(prev, currentIndex, animate);
+    }
+
+    function scheduleNext() {
+        clearTimeout(timer);
+        if (isPaused || userInteracted) return;
+        timer = setTimeout(() => {
+            if (currentIndex < TOTAL_STEPS - 1) {
+                goToStep(currentIndex + 1, true);
+                scheduleNext();
+            }
+        }, 4000);
+    }
+
+    btnEl.addEventListener('click', () => {
+        userInteracted = true;
+        clearTimeout(timer);
+        const nextIdx = (currentIndex + 1) % TOTAL_STEPS;
+        goToStep(nextIdx, true);
+    }, { signal });
+
+    goToStep(motion ? 0 : TOTAL_STEPS - 1, false);
+    scheduleNext();
+
+    return {
+        pause() {
+            isPaused = true;
+            clearTimeout(timer);
+        },
+        resume() {
+            isPaused = false;
+            if (!userInteracted && currentIndex < TOTAL_STEPS - 1) {
+                scheduleNext();
+            }
+        },
+        reset() {
+            userInteracted = false;
+            clearTimeout(timer);
+            goToStep(motion ? 0 : TOTAL_STEPS - 1, false);
+            if (!isPaused) scheduleNext();
+        },
+        destroy() {
+            clearTimeout(timer);
+            root.innerHTML = '';
+        },
+        resize(size) {}
+    };
 });
