@@ -38,8 +38,22 @@ const languageCode = getLanguageCode(currentLang);
 
 const normalizePath = (path: string) => (path.length > 1 ? path.replace(/\/$/, '') : path);
 const normalizedPath = normalizePath(Astro.url.pathname);
-const antiAdblockExcludedPaths = new Set(['/', '/about', '/cn', '/cn/about', '/ja', '/ja/about']);
-const shouldMountAntiAdblock = !antiAdblockExcludedPaths.has(normalizedPath);
+const adFreeExactPaths = new Set(['/', '/about', '/cn', '/cn/about', '/ja', '/ja/about']);
+const adFreeRouteRoots = [
+  '/visual',
+  '/visuals',
+  '/cn/visual',
+  '/cn/visuals',
+  '/ja/visual',
+  '/ja/visuals',
+];
+const isAdFreePath =
+  adFreeExactPaths.has(normalizedPath) ||
+  adFreeRouteRoots.some(
+    (routeRoot) => normalizedPath === routeRoot || normalizedPath.startsWith(`${routeRoot}/`),
+  );
+const shouldLoadAds = !isAdFreePath;
+const shouldMountAntiAdblock = shouldLoadAds;
 const isTagPage =
   normalizedPath === '/tags' ||
   normalizedPath.startsWith('/tags/') ||
@@ -87,12 +101,14 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
 
             gtag('config', 'G-4WM6C44V4Z');
         </script>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4617864538353929"
-             crossorigin="anonymous"></script>
+        {shouldLoadAds && (
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4617864538353929"
+                 crossorigin="anonymous"></script>
+        )}
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="google-adsense-account" content="ca-pub-4617864538353929">
+        {shouldLoadAds && <meta name="google-adsense-account" content="ca-pub-4617864538353929" />}
 
         <!-- Primary Meta Tags -->
         <title>{title}</title>

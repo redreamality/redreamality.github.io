@@ -165,11 +165,11 @@ const config = getAntiAdblockConfig();
     text-align: center;
   }
   
-  #anti-adblock-message h3 {
+  #anti-adblock-message .message-label {
     margin-top: 0;
     color: #1a202c;
-    font-size: 1.75rem;
-    font-weight: 700;
+    font-size: 1.1rem;
+    font-weight: 600;
     margin-bottom: 20px;
   }
   
@@ -209,10 +209,11 @@ const config = getAntiAdblockConfig();
     font-size: 0.95rem;
   }
 
-  #anti-adblock-message .instructions h4 {
+  #anti-adblock-message .instructions-label {
     margin-top: 0;
     margin-bottom: 12px;
     font-weight: 600;
+    font-size: inherit;
     color: #2d3748;
   }
 
@@ -262,7 +263,7 @@ const config = getAntiAdblockConfig();
     color: #e2e8f0;
   }
   
-  .dark #anti-adblock-message h3 {
+  .dark #anti-adblock-message .message-label {
     color: #f7fafc;
   }
   
@@ -274,7 +275,7 @@ const config = getAntiAdblockConfig();
     border-top-color: #2d3748;
   }
   
-  .dark #anti-adblock-message .instructions h4 {
+  .dark #anti-adblock-message .instructions-label {
     color: #e2e8f0;
   }
 
@@ -288,12 +289,12 @@ const config = getAntiAdblockConfig();
   {config.styling.mode === 'notification' && (
     <button class="close-btn" onclick="document.getElementById('anti-adblock-message').style.display='none'">&times;</button>
   )}
-  <h3>{config.message.title}</h3>
+  <p class="message-label">{config.message.title}</p>
   <p>
     {config.message.content}
   </p>
   <div class="instructions">
-    <h4>How to whitelist our site:</h4>
+    <p class="instructions-label">How to whitelist our site:</p>
     <p style="margin-bottom: 12px;">{config.message.instructions}</p>
     <ul style="padding-left: 20px; margin: 10px 0; color: inherit;">
       <li style="margin-bottom: 8px;"><strong>uBlock Origin:</strong> Click the uBlock icon and then the large power button.</li>
