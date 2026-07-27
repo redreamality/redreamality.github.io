@@ -1,0 +1,1122 @@
+{
+  "slug": "air-conditioner",
+  "renderer": "interactive-explainer",
+  "structure": {
+    "overview": {
+      "demo": "ac-cycle-overview"
+    },
+    "steps": [
+      {
+        "id": "indoor-heat",
+        "demo": "ac-evaporator"
+      },
+      {
+        "id": "compression",
+        "demo": "ac-compressor"
+      },
+      {
+        "id": "outdoor-release",
+        "demo": "ac-condenser"
+      },
+      {
+        "id": "pressure-drop",
+        "demo": "ac-expansion"
+      },
+      {
+        "id": "energy-ledger",
+        "demo": "ac-energy-ledger"
+      }
+    ]
+  },
+  "locales": {
+    "en": {
+      "lang": "en",
+      "meta": {
+        "title": "How air conditioners work",
+        "description": "An interactive visual guide to the vapor-compression cycle: evaporation, compression, condensation, expansion, and the energy balance behind cooling."
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "Pause all motion",
+        "resumeAll": "Resume all motion",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset",
+        "waiting": "The visual will load when it enters the viewport.",
+        "loading": "Preparing the visual…",
+        "error": "The visual could not be displayed. Read the explanation above instead.",
+        "figureFallback": "Enable JavaScript to view this interactive explanation.",
+        "skipToContent": "Skip to content",
+        "languageNavigation": "Languages",
+        "overviewLabel": "Cooling-cycle overview",
+        "stepLabel": "Step"
+      },
+      "hero": {
+        "eyebrow": "THERMODYNAMICS / VAPOR-COMPRESSION CYCLE",
+        "title": "How air conditioning moves heat",
+        "subtitle": "An air conditioner does not create cold. It uses electricity and a circulating refrigerant to pick up heat indoors and release it outdoors."
+      },
+      "overview": {
+        "title": "Follow the refrigerant around one closed loop",
+        "body": [
+          "Cooling is a transport job. The indoor coil lets cold, low-pressure refrigerant absorb room heat. The compressor then raises the vapor's pressure and temperature so that the outdoor coil can release that heat to warmer outdoor air.",
+          "After the refrigerant gives up heat and becomes liquid, an expansion device drops its pressure. The cold mixture returns indoors and the cycle repeats. The refrigerant circulates; it is not normally consumed."
+        ],
+        "plainLanguage": {
+          "label": "Plainly",
+          "body": "The indoor unit loads heat onto the refrigerant. The outdoor unit unloads it. Electricity powers the pump that keeps the trip going."
+        },
+        "keyPointsLabel": "Keep these three ideas",
+        "keyPoints": [
+          {
+            "title": "Heat moves outward",
+            "body": "The room cools because thermal energy leaves it, not because cold is manufactured."
+          },
+          {
+            "title": "Pressure sets the stage",
+            "body": "Changing refrigerant pressure changes the temperature at which it boils or condenses."
+          },
+          {
+            "title": "The loop has two sides",
+            "body": "Low pressure serves the indoor coil; high pressure serves the outdoor coil."
+          }
+        ],
+        "demoTitle": "The four stations of a cooling cycle",
+        "copy": {
+          "ariaLabel": "An interactive four-stage air-conditioning loop connecting the indoor coil, compressor, outdoor coil, and expansion device",
+          "indoorZone": "Inside the room",
+          "outdoorZone": "Outside",
+          "heatIn": "Room heat enters",
+          "workIn": "Electric work",
+          "heatOut": "Heat leaves outdoors",
+          "stageControlLabel": "Inspect a stage of the refrigerant loop",
+          "caption": "The dashed line shows refrigerant circulation; energy crosses the system boundary as room heat, electrical work, and outdoor heat.",
+          "stages": [
+            {
+              "label": "Indoor coil",
+              "state": "Low pressure · cold mixture",
+              "detail": "Refrigerant boils while absorbing heat from room air. The blower returns cooler, drier air to the room."
+            },
+            {
+              "label": "Compressor",
+              "state": "Low-pressure vapor → hot high-pressure vapor",
+              "detail": "Electrical work squeezes the vapor. Its pressure and temperature rise enough for heat to flow to the outdoor air."
+            },
+            {
+              "label": "Outdoor coil",
+              "state": "Hot vapor → high-pressure liquid",
+              "detail": "The refrigerant releases indoor heat plus compressor work. As it cools, it condenses into liquid."
+            },
+            {
+              "label": "Expansion device",
+              "state": "High pressure → low pressure",
+              "detail": "A restriction meters the liquid into the low-pressure side. Part of it flashes into vapor, cooling the mixture before it returns indoors."
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "id": "indoor-heat",
+          "number": "01",
+          "title": "The indoor coil absorbs heat and moisture",
+          "body": [
+            "A fan pulls room air across the evaporator coil. The refrigerant inside the coil is colder than the air, so heat flows into it and makes it boil from a liquid-vapor mixture into vapor.",
+            "When the coil surface is below the air's dew point, water vapor also condenses on the coil and drains away. That is why cooling often makes humid air feel more comfortable."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "The coil is a cold heat exchanger. Air gives up heat; refrigerant receives it."
+          },
+          "keyPointsLabel": "What changes here",
+          "keyPoints": [
+            {
+              "title": "Air cools",
+              "body": "The blower sends room air across a colder metal surface."
+            },
+            {
+              "title": "Refrigerant boils",
+              "body": "Boiling absorbs a large amount of heat without requiring a huge temperature rise."
+            },
+            {
+              "title": "Water drains",
+              "body": "Moisture can condense out of the air when the coil is below the dew point."
+            }
+          ],
+          "demoTitle": "Room heat entering the evaporator",
+          "copy": {
+            "ariaLabel": "Interactive evaporator showing warm room air crossing a cold coil while refrigerant boils",
+            "roomLabel": "Indoor air path",
+            "airBefore": "Warm room air",
+            "airAfter": "Cool supply air",
+            "refrigerantIn": "Cold liquid-vapor mixture in",
+            "refrigerantOut": "Low-pressure vapor out",
+            "controlLabel": "Illustrative room heat load",
+            "lowLabel": "Lower load",
+            "highLabel": "Higher load",
+            "loadLabel": "Heat load",
+            "supplyLabel": "Illustrative supply air",
+            "loadUnit": "%",
+            "temperatureUnit": "°C",
+            "statusLow": "With a light load, less refrigerant needs to boil to carry room heat away.",
+            "statusMedium": "The coil absorbs heat steadily while the blower returns cooler air to the room.",
+            "statusHigh": "A larger heat load makes more refrigerant boil, provided airflow and refrigerant flow remain within the system's capacity.",
+            "caption": "Temperatures are illustrative; real values depend on humidity, airflow, refrigerant, equipment size, and controls."
+          }
+        },
+        {
+          "id": "compression",
+          "number": "02",
+          "title": "The compressor makes heat rejection possible",
+          "body": [
+            "The refrigerant leaves the indoor coil as low-pressure vapor. The compressor does mechanical work on that vapor, raising both pressure and temperature.",
+            "This hotter-than-outdoor vapor is essential: heat naturally flows from higher temperature to lower temperature, so the outdoor coil needs refrigerant hot enough to reject heat to the ambient air."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "The compressor does not directly cool the room. It lifts the refrigerant to a temperature where the outdoor air can take the heat."
+          },
+          "keyPointsLabel": "What the compressor adds",
+          "keyPoints": [
+            {
+              "title": "Pressure",
+              "body": "The vapor moves from the low side to the high side of the loop."
+            },
+            {
+              "title": "Temperature",
+              "body": "Compression makes the discharge vapor hotter than outdoor air."
+            },
+            {
+              "title": "Work",
+              "body": "Most of the unit's electrical input drives this pressure lift."
+            }
+          ],
+          "demoTitle": "Pressure and temperature rise together",
+          "copy": {
+            "ariaLabel": "Interactive compressor showing refrigerant vapor becoming denser, higher pressure, and hotter",
+            "machineLabel": "Compressor cylinder · conceptual view",
+            "inletLabel": "Cool low-pressure vapor",
+            "outletLabel": "Hot high-pressure vapor",
+            "controlLabel": "Relative compression level",
+            "lowLabel": "Gentler lift",
+            "highLabel": "Stronger lift",
+            "pressureLabel": "Illustrative pressure",
+            "temperatureLabel": "Illustrative discharge temperature",
+            "pressureUnit": "× inlet",
+            "temperatureUnit": "°C",
+            "statusLow": "A smaller pressure lift requires less work, but it must still make the refrigerant hot enough to reject heat outdoors.",
+            "statusMedium": "Compression raises vapor pressure and temperature; the exact values depend on operating conditions and refrigerant.",
+            "statusHigh": "A larger pressure lift raises discharge temperature and compressor work, which is why dirty coils and extreme conditions reduce efficiency.",
+            "caption": "This is a conceptual relationship, not a compressor sizing calculator."
+          }
+        },
+        {
+          "id": "outdoor-release",
+          "number": "03",
+          "title": "The outdoor coil releases more heat than the room lost",
+          "body": [
+            "Hot, high-pressure refrigerant flows through the condenser coil while an outdoor fan moves ambient air across it. Heat leaves the refrigerant, and the vapor condenses into high-pressure liquid.",
+            "The outdoor unit must reject both the heat collected indoors and the electrical work added by the compressor. That is why the air leaving an outdoor unit feels distinctly warm."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "The outdoor unit is the unloading dock: room heat and compressor work both leave there."
+          },
+          "keyPointsLabel": "Why airflow matters",
+          "keyPoints": [
+            {
+              "title": "Fan",
+              "body": "Moving outdoor air carries released heat away from the coil."
+            },
+            {
+              "title": "Condensation",
+              "body": "The refrigerant gives up heat while changing from vapor to liquid."
+            },
+            {
+              "title": "Clean path",
+              "body": "Blocked fins or recirculated hot air force the compressor to work harder."
+            }
+          ],
+          "demoTitle": "Clear versus blocked outdoor airflow",
+          "copy": {
+            "ariaLabel": "Interactive outdoor condenser comparing clear airflow with blocked airflow",
+            "outdoorUnitLabel": "Outdoor heat exchanger",
+            "equation": "room heat + compressor work → outdoor air",
+            "controlLabel": "Compare the airflow around the outdoor coil",
+            "clearButton": "Clear airflow",
+            "blockedButton": "Blocked airflow",
+            "clearTitle": "Heat leaves efficiently",
+            "blockedTitle": "Heat backs up at the coil",
+            "clearStatus": "The fan replaces warmed air with cooler ambient air, keeping the refrigerant's condensing pressure under control.",
+            "blockedStatus": "Restricted or recirculated airflow raises coil temperature and pressure, so the compressor works harder and capacity can fall.",
+            "caption": "Keep the outdoor unit's intake and discharge clear; exact service clearances come from the manufacturer."
+          }
+        },
+        {
+          "id": "pressure-drop",
+          "number": "04",
+          "title": "The expansion device resets the refrigerant for indoor cooling",
+          "body": [
+            "After condensing, the refrigerant is a warm, high-pressure liquid. A metering device—such as a thermostatic expansion valve, electronic valve, or capillary tube—restricts its flow into the low-pressure side.",
+            "The sudden pressure drop causes part of the liquid to flash into vapor. That phase change cools the remaining mixture, preparing it to absorb heat again in the indoor coil."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "The valve creates the pressure boundary. Crossing it turns warm high-pressure liquid into a cold low-pressure mixture."
+          },
+          "keyPointsLabel": "Across the restriction",
+          "keyPoints": [
+            {
+              "title": "Before",
+              "body": "High-pressure liquid arrives from the outdoor coil."
+            },
+            {
+              "title": "Through",
+              "body": "The device meters flow and separates the high and low sides."
+            },
+            {
+              "title": "After",
+              "body": "A cold liquid-vapor mixture enters the evaporator."
+            }
+          ],
+          "demoTitle": "Inspect both sides of the expansion device",
+          "copy": {
+            "ariaLabel": "Interactive expansion-device diagram comparing refrigerant before and after the pressure drop",
+            "valveLabel": "Metering restriction",
+            "upstreamShort": "From outdoor coil",
+            "downstreamShort": "To indoor coil",
+            "controlLabel": "Inspect one side of the restriction",
+            "upstreamButton": "Before the valve",
+            "downstreamButton": "After the valve",
+            "upstreamTitle": "Warm liquid on the high side",
+            "downstreamTitle": "Cold mixture on the low side",
+            "highPressure": "High pressure",
+            "warmLiquid": "Mostly liquid",
+            "lowPressure": "Low pressure",
+            "coldMixture": "Liquid + flash vapor",
+            "upstreamStatus": "The refrigerant has released heat outdoors but remains under high pressure.",
+            "downstreamStatus": "The pressure drop makes some liquid flash into vapor, cooling the mixture before it enters the evaporator.",
+            "caption": "The valve does not create energy; it establishes the low-pressure condition that lets the refrigerant boil at a low temperature."
+          }
+        },
+        {
+          "id": "energy-ledger",
+          "number": "05",
+          "title": "Cooling capacity can exceed electrical input",
+          "body": [
+            "An air conditioner is a heat pump, so its cooling output is not limited to converting electricity into an equal amount of cooling. Electricity powers the transfer of additional heat from the room.",
+            "If an illustrative unit uses 1 kW of compressor power and has a cooling COP of 3, it removes about 3 kW of heat indoors and rejects about 4 kW outdoors. Real COP changes with equipment, temperatures, humidity, airflow, and part load."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "One unit of electrical work can move several units of room heat. The outdoor side releases the sum of both."
+          },
+          "keyPointsLabel": "Read the ledger",
+          "keyPoints": [
+            {
+              "title": "Electrical work",
+              "body": "This powers the compressor and fans."
+            },
+            {
+              "title": "Room heat moved",
+              "body": "This is the useful cooling effect at the indoor coil."
+            },
+            {
+              "title": "Outdoor heat",
+              "body": "Energy conservation requires this to equal room heat plus electrical work."
+            }
+          ],
+          "demoTitle": "An illustrative cooling energy balance",
+          "copy": {
+            "ariaLabel": "Interactive air-conditioner energy ledger showing electrical work, room heat moved, and heat rejected outdoors",
+            "roomHeatShort": "room heat",
+            "workShort": "electric work",
+            "outdoorHeatShort": "outdoor heat",
+            "workLabel": "Electrical input",
+            "roomHeatLabel": "Heat removed indoors",
+            "outdoorHeatLabel": "Heat rejected outdoors",
+            "controlLabel": "Illustrative compressor power",
+            "lowLabel": "0.5 kW",
+            "highLabel": "2.0 kW",
+            "copLabel": "Illustrative cooling COP",
+            "copValue": "3.0",
+            "powerUnit": "kW",
+            "statusTemplate": "The unit uses {work} to move {room} from the room, so the outdoor coil releases {outdoor} in total.",
+            "caption": "The fixed COP is for explanation only; it is not an efficiency claim for a specific product."
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "PUT THE LOOP BACK TOGETHER",
+        "title": "Cooling works when every heat-transfer path stays open",
+        "body": [
+          "The refrigeration loop depends on two air paths and one refrigerant path. Indoor air must reach the evaporator, outdoor air must carry heat away from the condenser, and the refrigerant circuit must maintain the intended pressure difference.",
+          "Controls cycle or modulate the compressor and fans to match load, protect the equipment, and maintain temperature and humidity. A reversible heat pump uses valves to swap the roles of the indoor and outdoor coils during heating."
+        ],
+        "checklistLabel": "Practical operating checklist",
+        "checklist": [
+          "Use a reasonable setpoint instead of selecting the lowest number and expecting faster cooling.",
+          "Keep filters clean so the indoor coil receives enough airflow.",
+          "Do not block the outdoor unit's intake or hot-air discharge.",
+          "Close doors and windows when cooling so the load does not continually refill.",
+          "Call a qualified technician for icing, refrigerant leaks, electrical faults, or persistent loss of capacity."
+        ],
+        "scaleTitle": "The four thermodynamic stations",
+        "scaleItems": [
+          {
+            "term": "Evaporator",
+            "question": "Where does room heat enter?",
+            "role": "Low-pressure refrigerant boils indoors and absorbs heat."
+          },
+          {
+            "term": "Compressor",
+            "question": "How can heat leave to warmer outdoor air?",
+            "role": "Work raises vapor pressure and temperature."
+          },
+          {
+            "term": "Condenser",
+            "question": "Where does the collected energy leave?",
+            "role": "High-pressure refrigerant condenses and releases heat outdoors."
+          },
+          {
+            "term": "Expansion",
+            "question": "How is the low-pressure side restored?",
+            "role": "A restriction meters flow and creates a cold mixture for the evaporator."
+          }
+        ],
+        "finalQuote": "An air conditioner cools a room by continuously changing refrigerant pressure so heat can enter the loop indoors and leave it outdoors.",
+        "sourceNote": "Technical note: this guide shows a simplified cooling-mode vapor-compression cycle. Temperatures, pressures, COP, and component layouts are illustrative; actual systems vary by refrigerant, design, control strategy, and operating conditions."
+      }
+    },
+    "zh": {
+      "lang": "zh-CN",
+      "meta": {
+        "title": "空调的工作原理",
+        "description": "用交互图解理解蒸气压缩制冷循环：蒸发吸热、压缩、冷凝放热、节流降压，以及空调的能量账本。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "暂停所有动画",
+        "resumeAll": "继续所有动画",
+        "pause": "暂停",
+        "resume": "继续",
+        "reset": "重置",
+        "waiting": "图解将在进入视口后加载。",
+        "loading": "正在准备图解…",
+        "error": "图解暂时无法显示，请阅读上方文字说明。",
+        "figureFallback": "启用 JavaScript 后可以查看交互图解。",
+        "skipToContent": "跳到正文",
+        "languageNavigation": "语言",
+        "overviewLabel": "制冷循环全貌",
+        "stepLabel": "步骤"
+      },
+      "hero": {
+        "eyebrow": "热力学 / 蒸气压缩制冷循环",
+        "title": "空调怎样把热量搬出去",
+        "subtitle": "空调并不“制造冷气”。它消耗电能，让制冷剂循环流动，把室内热量吸收后搬到室外。"
+      },
+      "overview": {
+        "title": "先跟着制冷剂走完一个闭环",
+        "body": [
+          "制冷的本质是搬运热量。低温、低压的制冷剂在室内盘管中吸收房间热量；压缩机再把蒸气升压、升温，让它能在室外盘管中把热量交给更热的室外空气。",
+          "制冷剂放热并冷凝成液体后，膨胀装置会降低它的压力。低温混合物重新回到室内，循环不断重复。正常情况下，制冷剂是在密闭管路中循环，并不会被持续消耗。"
+        ],
+        "plainLanguage": {
+          "label": "说白了",
+          "body": "室内机把热量装上制冷剂，室外机把热量卸下来，电能驱动这趟循环。"
+        },
+        "keyPointsLabel": "先记住三件事",
+        "keyPoints": [
+          {
+            "title": "热量向外搬",
+            "body": "房间变凉，是因为热能离开了房间，而不是空调凭空制造了“冷”。"
+          },
+          {
+            "title": "压力决定沸点",
+            "body": "改变制冷剂压力，就能改变它沸腾或冷凝时的温度。"
+          },
+          {
+            "title": "循环分高低压两侧",
+            "body": "低压侧服务室内蒸发器，高压侧服务室外冷凝器。"
+          }
+        ],
+        "demoTitle": "制冷循环的四个站点",
+        "copy": {
+          "ariaLabel": "连接室内盘管、压缩机、室外盘管和膨胀装置的四阶段空调制冷循环交互图",
+          "indoorZone": "房间内",
+          "outdoorZone": "室外",
+          "heatIn": "室内热量进入",
+          "workIn": "输入电功",
+          "heatOut": "热量排到室外",
+          "stageControlLabel": "查看制冷剂循环的某个阶段",
+          "caption": "虚线表示制冷剂循环；能量以室内热量、电功和室外排热的形式穿过系统边界。",
+          "stages": [
+            {
+              "label": "室内盘管",
+              "state": "低压 · 低温两相混合物",
+              "detail": "制冷剂吸收室内空气的热量并沸腾，风机把更凉、更干燥的空气送回房间。"
+            },
+            {
+              "label": "压缩机",
+              "state": "低压蒸气 → 高温高压蒸气",
+              "detail": "电功压缩制冷剂蒸气，使它的压力和温度升高到足以向室外空气放热。"
+            },
+            {
+              "label": "室外盘管",
+              "state": "高温蒸气 → 高压液体",
+              "detail": "制冷剂释放室内热量和压缩机做功；随着放热，它冷凝成液体。"
+            },
+            {
+              "label": "膨胀装置",
+              "state": "高压 → 低压",
+              "detail": "节流装置把液体计量送入低压侧，一部分液体闪蒸成气体，使混合物降温后回到室内。"
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "id": "indoor-heat",
+          "number": "01",
+          "title": "室内盘管吸收热量，也带走水分",
+          "body": [
+            "风机让室内空气流过蒸发器盘管。盘管内的制冷剂比空气更冷，因此热量流入制冷剂，让它从气液混合物逐渐沸腾成蒸气。",
+            "当盘管表面温度低于空气露点时，水蒸气还会在盘管上凝结并通过排水管排走，所以空调制冷通常也会降低湿度。"
+          ],
+          "plainLanguage": {
+            "label": "说白了",
+            "body": "盘管是一只低温换热器：空气交出热量，制冷剂接走热量。"
+          },
+          "keyPointsLabel": "这里发生了什么",
+          "keyPoints": [
+            {
+              "title": "空气降温",
+              "body": "风机推动室内空气流过更冷的金属盘管。"
+            },
+            {
+              "title": "制冷剂沸腾",
+              "body": "相变能吸收大量热量，而不需要让制冷剂温度大幅升高。"
+            },
+            {
+              "title": "冷凝水排走",
+              "body": "盘管低于露点时，空气中的水分会凝结。"
+            }
+          ],
+          "demoTitle": "室内热量如何进入蒸发器",
+          "copy": {
+            "ariaLabel": "暖空气穿过低温盘管、制冷剂在其中沸腾的交互蒸发器图",
+            "roomLabel": "室内空气路径",
+            "airBefore": "较暖的室内空气",
+            "airAfter": "较凉的送风",
+            "refrigerantIn": "低温气液混合物进入",
+            "refrigerantOut": "低压蒸气离开",
+            "controlLabel": "示意室内热负荷",
+            "lowLabel": "负荷较低",
+            "highLabel": "负荷较高",
+            "loadLabel": "热负荷",
+            "supplyLabel": "示意送风温度",
+            "loadUnit": "%",
+            "temperatureUnit": "°C",
+            "statusLow": "热负荷较小时，只需较少制冷剂沸腾，就能把室内热量带走。",
+            "statusMedium": "盘管持续吸热，风机把降温后的空气送回房间。",
+            "statusHigh": "热负荷增大时会有更多制冷剂沸腾，前提是风量和制冷剂流量仍在系统能力范围内。",
+            "caption": "温度仅用于示意；真实数值取决于湿度、风量、制冷剂、设备容量和控制策略。"
+          }
+        },
+        {
+          "id": "compression",
+          "number": "02",
+          "title": "压缩机让热量能够排向室外",
+          "body": [
+            "制冷剂离开室内盘管时是低压蒸气。压缩机对蒸气做机械功，同时提高它的压力和温度。",
+            "这股高于室外温度的蒸气很关键：热量会从高温处流向低温处，因此室外盘管里的制冷剂必须足够热，才能把热量交给环境空气。"
+          ],
+          "plainLanguage": {
+            "label": "说白了",
+            "body": "压缩机并不直接把房间变冷；它把制冷剂“抬”到足够高的温度，好让室外空气接走热量。"
+          },
+          "keyPointsLabel": "压缩机增加了什么",
+          "keyPoints": [
+            {
+              "title": "压力",
+              "body": "制冷剂蒸气从循环的低压侧进入高压侧。"
+            },
+            {
+              "title": "温度",
+              "body": "压缩后的排气温度高于室外空气。"
+            },
+            {
+              "title": "做功",
+              "body": "空调的大部分电能用于驱动这次压力提升。"
+            }
+          ],
+          "demoTitle": "压力和温度如何一起升高",
+          "copy": {
+            "ariaLabel": "展示制冷剂蒸气被压缩后密度、压力和温度升高的交互压缩机图",
+            "machineLabel": "压缩机气缸 · 概念示意",
+            "inletLabel": "较冷的低压蒸气",
+            "outletLabel": "高温高压蒸气",
+            "controlLabel": "相对压缩程度",
+            "lowLabel": "压升较小",
+            "highLabel": "压升较大",
+            "pressureLabel": "示意压力",
+            "temperatureLabel": "示意排气温度",
+            "pressureUnit": "× 入口压力",
+            "temperatureUnit": "°C",
+            "statusLow": "较小的压升需要较少做功，但仍必须让制冷剂足够热，才能在室外放热。",
+            "statusMedium": "压缩同时提高蒸气的压力和温度；具体数值取决于工况和制冷剂。",
+            "statusHigh": "压升越大，排气温度和压缩机功耗通常越高，所以脏污盘管和极端工况会降低效率。",
+            "caption": "这里展示的是概念关系，不是压缩机选型计算器。"
+          }
+        },
+        {
+          "id": "outdoor-release",
+          "number": "03",
+          "title": "室外盘管排出的热量比房间失去的更多",
+          "body": [
+            "高温高压的制冷剂流过冷凝器盘管，室外风机推动环境空气掠过盘管。热量离开制冷剂，蒸气逐渐冷凝成高压液体。",
+            "室外机必须同时排出两部分能量：从室内收集的热量，以及压缩机输入的电功。这就是室外机吹出的空气明显偏热的原因。"
+          ],
+          "plainLanguage": {
+            "label": "说白了",
+            "body": "室外机是卸货站：室内热量和压缩机做功都从这里离开。"
+          },
+          "keyPointsLabel": "为什么风路很重要",
+          "keyPoints": [
+            {
+              "title": "风机",
+              "body": "不断用环境空气替换被加热的空气，把热量带离盘管。"
+            },
+            {
+              "title": "冷凝",
+              "body": "制冷剂在从蒸气变成液体时释放热量。"
+            },
+            {
+              "title": "保持畅通",
+              "body": "翅片堵塞或热风回流会迫使压缩机更费力。"
+            }
+          ],
+          "demoTitle": "对比畅通与受阻的室外风路",
+          "copy": {
+            "ariaLabel": "对比室外冷凝器风路畅通与受阻状态的交互图",
+            "outdoorUnitLabel": "室外换热器",
+            "equation": "室内热量 + 压缩机做功 → 室外空气",
+            "controlLabel": "比较室外盘管周围的风路",
+            "clearButton": "风路畅通",
+            "blockedButton": "风路受阻",
+            "clearTitle": "热量可以顺利离开",
+            "blockedTitle": "热量积压在盘管附近",
+            "clearStatus": "风机不断用较凉的环境空气替换被加热的空气，让制冷剂的冷凝压力保持在合理范围。",
+            "blockedStatus": "进出风受限或热风回流会抬高盘管温度和压力，使压缩机更费力，制冷能力也可能下降。",
+            "caption": "应保持室外机进风和排风畅通；具体安装净距以制造商要求为准。"
+          }
+        },
+        {
+          "id": "pressure-drop",
+          "number": "04",
+          "title": "膨胀装置把制冷剂重置为可在室内吸热的状态",
+          "body": [
+            "冷凝后，制冷剂是温度较高的高压液体。热力膨胀阀、电子膨胀阀或毛细管等节流装置，会限制并计量它进入低压侧的流量。",
+            "压力突然降低后，一部分液体会闪蒸成气体。这个相变让剩余混合物降温，为它再次进入室内盘管吸热做好准备。"
+          ],
+          "plainLanguage": {
+            "label": "说白了",
+            "body": "阀门建立高低压边界：温热的高压液体穿过后，变成低温的低压混合物。"
+          },
+          "keyPointsLabel": "节流前后",
+          "keyPoints": [
+            {
+              "title": "之前",
+              "body": "来自室外盘管的高压液体抵达节流装置。"
+            },
+            {
+              "title": "通过",
+              "body": "装置计量流量，并把循环分成高压侧和低压侧。"
+            },
+            {
+              "title": "之后",
+              "body": "低温气液混合物进入蒸发器。"
+            }
+          ],
+          "demoTitle": "查看膨胀装置的两侧",
+          "copy": {
+            "ariaLabel": "对比制冷剂在膨胀装置降压前后状态的交互图",
+            "valveLabel": "节流装置",
+            "upstreamShort": "来自室外盘管",
+            "downstreamShort": "前往室内盘管",
+            "controlLabel": "查看节流装置的一侧",
+            "upstreamButton": "阀门之前",
+            "downstreamButton": "阀门之后",
+            "upstreamTitle": "高压侧的温热液体",
+            "downstreamTitle": "低压侧的低温混合物",
+            "highPressure": "高压",
+            "warmLiquid": "以液体为主",
+            "lowPressure": "低压",
+            "coldMixture": "液体 + 闪蒸气体",
+            "upstreamStatus": "制冷剂已经在室外放热，但仍然保持高压。",
+            "downstreamStatus": "降压让一部分液体闪蒸，从而使进入蒸发器前的混合物降温。",
+            "caption": "阀门并不创造能量；它建立低压条件，让制冷剂能够在较低温度下沸腾。"
+          }
+        },
+        {
+          "id": "energy-ledger",
+          "number": "05",
+          "title": "制冷量可以大于输入电功率",
+          "body": [
+            "空调本质上是一台热泵，所以它的制冷量并不等于把电能一比一“变成冷量”。电能用来驱动系统，把额外的热量从房间搬出去。",
+            "例如，一台示意设备消耗 1 kW 压缩机功率、制冷 COP 为 3，它大约能从室内移走 3 kW 热量，并在室外排出约 4 kW 热量。真实 COP 会随设备、温度、湿度、风量和部分负荷而变化。"
+          ],
+          "plainLanguage": {
+            "label": "说白了",
+            "body": "一份电功可以搬运多份室内热量；室外侧排出的是两者之和。"
+          },
+          "keyPointsLabel": "读懂能量账本",
+          "keyPoints": [
+            {
+              "title": "输入电功",
+              "body": "它驱动压缩机和风机。"
+            },
+            {
+              "title": "搬走的室内热量",
+              "body": "这是室内盘管产生的有效制冷效果。"
+            },
+            {
+              "title": "室外排热",
+              "body": "根据能量守恒，它等于室内热量加输入电功。"
+            }
+          ],
+          "demoTitle": "一份示意制冷能量平衡",
+          "copy": {
+            "ariaLabel": "展示输入电功、搬走的室内热量和室外排热的空调交互能量账本",
+            "roomHeatShort": "室内热量",
+            "workShort": "输入电功",
+            "outdoorHeatShort": "室外排热",
+            "workLabel": "输入电功率",
+            "roomHeatLabel": "室内移走热量",
+            "outdoorHeatLabel": "室外排出热量",
+            "controlLabel": "示意压缩机功率",
+            "lowLabel": "0.5 kW",
+            "highLabel": "2.0 kW",
+            "copLabel": "示意制冷 COP",
+            "copValue": "3.0",
+            "powerUnit": "kW",
+            "statusTemplate": "设备使用 {work}，从房间搬走 {room}，因此室外盘管总共排出 {outdoor}。",
+            "caption": "固定 COP 只用于解释原理，不代表任何具体产品的能效。"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "重新组装整个循环",
+        "title": "每条换热路径都畅通，制冷循环才能正常工作",
+        "body": [
+          "制冷循环依赖两条空气路径和一条制冷剂路径：室内空气必须顺利到达蒸发器，室外空气必须带走冷凝器的热量，制冷剂回路则要维持设计所需的高低压差。",
+          "控制系统会启停或调节压缩机与风机，以匹配负荷、保护设备并维持温湿度。可逆热泵在制热时会通过换向阀交换室内外盘管的角色。"
+        ],
+        "checklistLabel": "日常使用清单",
+        "checklist": [
+          "使用合理设定温度；把数字调到最低并不会让普通定频空调瞬间制冷更快。",
+          "定期清洁过滤网，让室内盘管获得足够风量。",
+          "不要堵住室外机的进风口和热风排出口。",
+          "制冷时尽量关闭门窗，避免热负荷不断补充。",
+          "出现结冰、制冷剂泄漏、电气故障或持续制冷能力下降时，请联系合格技术人员。"
+        ],
+        "scaleTitle": "四个热力学站点",
+        "scaleItems": [
+          {
+            "term": "蒸发器",
+            "question": "室内热量从哪里进入循环？",
+            "role": "低压制冷剂在室内沸腾并吸热。"
+          },
+          {
+            "term": "压缩机",
+            "question": "怎样把热量排给更热的室外空气？",
+            "role": "输入做功提高蒸气压力和温度。"
+          },
+          {
+            "term": "冷凝器",
+            "question": "收集到的能量从哪里离开？",
+            "role": "高压制冷剂在室外冷凝并放热。"
+          },
+          {
+            "term": "膨胀装置",
+            "question": "怎样恢复低压侧？",
+            "role": "节流装置计量流量，并为蒸发器制造低温混合物。"
+          }
+        ],
+        "finalQuote": "空调通过不断改变制冷剂压力，让热量能够在室内进入循环，并在室外离开循环。",
+        "sourceNote": "技术说明：本文展示的是简化的制冷模式蒸气压缩循环。温度、压力、COP 和部件布局均为示意；真实系统会因制冷剂、设计、控制策略和运行工况而不同。"
+      }
+    },
+    "ja": {
+      "lang": "ja",
+      "meta": {
+        "title": "エアコンの仕組み",
+        "description": "蒸気圧縮冷凍サイクルをインタラクティブに解説。蒸発、圧縮、凝縮、膨張と、冷房を支えるエネルギー収支を学べます。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "すべての動きを停止",
+        "resumeAll": "すべての動きを再開",
+        "pause": "一時停止",
+        "resume": "再開",
+        "reset": "リセット",
+        "waiting": "表示領域に入ると図解を読み込みます。",
+        "loading": "図解を準備しています…",
+        "error": "図解を表示できません。上の説明をお読みください。",
+        "figureFallback": "JavaScript を有効にするとインタラクティブ図解を表示できます。",
+        "skipToContent": "本文へ移動",
+        "languageNavigation": "言語",
+        "overviewLabel": "冷凍サイクル全体",
+        "stepLabel": "ステップ"
+      },
+      "hero": {
+        "eyebrow": "熱力学 / 蒸気圧縮冷凍サイクル",
+        "title": "エアコンはどう熱を外へ運ぶのか",
+        "subtitle": "エアコンは冷気を作り出す装置ではありません。電力と循環する冷媒を使い、室内の熱を受け取って屋外へ運びます。"
+      },
+      "overview": {
+        "title": "冷媒と一緒に一つの閉じたループを巡る",
+        "body": [
+          "冷房の本質は熱の輸送です。低温・低圧の冷媒が室内コイルで部屋の熱を吸収し、圧縮機が蒸気の圧力と温度を上げることで、屋外コイルからより暖かい外気へ熱を放出できるようにします。",
+          "放熱して液体になった冷媒は、膨張装置で圧力を下げます。冷たい混合物が再び室内へ戻り、同じ循環を繰り返します。通常、冷媒は密閉配管の中を循環し、使うたびに消費されるものではありません。"
+        ],
+        "plainLanguage": {
+          "label": "ひと言で",
+          "body": "室内機が冷媒に熱を載せ、室外機がその熱を降ろします。電力はこの往復を続けるポンプを動かします。"
+        },
+        "keyPointsLabel": "覚えておく三つのこと",
+        "keyPoints": [
+          {
+            "title": "熱を外へ運ぶ",
+            "body": "部屋が冷えるのは熱エネルギーが出ていくからで、冷たさを無から作るからではありません。"
+          },
+          {
+            "title": "圧力が沸点を変える",
+            "body": "冷媒の圧力を変えると、沸騰や凝縮が起こる温度も変わります。"
+          },
+          {
+            "title": "高圧側と低圧側",
+            "body": "低圧側は室内の蒸発器、高圧側は屋外の凝縮器で働きます。"
+          }
+        ],
+        "demoTitle": "冷凍サイクルの四つのステーション",
+        "copy": {
+          "ariaLabel": "室内コイル、圧縮機、屋外コイル、膨張装置を結ぶ四段階のエアコン冷凍サイクル図",
+          "indoorZone": "室内",
+          "outdoorZone": "屋外",
+          "heatIn": "室内の熱が入る",
+          "workIn": "電気仕事",
+          "heatOut": "熱を屋外へ放出",
+          "stageControlLabel": "冷媒ループの段階を確認する",
+          "caption": "破線は冷媒の循環を示します。エネルギーは室内熱、電気仕事、屋外への放熱としてシステム境界を越えます。",
+          "stages": [
+            {
+              "label": "室内コイル",
+              "state": "低圧 · 冷たい二相混合物",
+              "detail": "冷媒は室内空気から熱を吸収しながら沸騰します。送風機はより冷たく乾いた空気を部屋へ戻します。"
+            },
+            {
+              "label": "圧縮機",
+              "state": "低圧蒸気 → 高温高圧蒸気",
+              "detail": "電気仕事で冷媒蒸気を圧縮し、屋外空気へ熱を渡せるまで圧力と温度を上げます。"
+            },
+            {
+              "label": "屋外コイル",
+              "state": "高温蒸気 → 高圧液体",
+              "detail": "冷媒は室内から運んだ熱と圧縮機の仕事を放出し、冷えるにつれて液体へ凝縮します。"
+            },
+            {
+              "label": "膨張装置",
+              "state": "高圧 → 低圧",
+              "detail": "絞りが液体を低圧側へ計量供給します。一部がフラッシュ蒸発して混合物を冷やし、室内へ戻します。"
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "id": "indoor-heat",
+          "number": "01",
+          "title": "室内コイルが熱と水分を受け取る",
+          "body": [
+            "送風機が室内空気を蒸発器コイルへ通します。コイル内の冷媒は空気より冷たいため、熱が冷媒へ流れ込み、液体と蒸気の混合状態から蒸気へ沸騰します。",
+            "コイル表面が空気の露点より低いと、水蒸気もコイル上で凝縮して排水されます。そのため冷房は湿った空気をより快適にすることがあります。"
+          ],
+          "plainLanguage": {
+            "label": "ひと言で",
+            "body": "コイルは冷たい熱交換器です。空気が熱を渡し、冷媒が受け取ります。"
+          },
+          "keyPointsLabel": "ここで変わるもの",
+          "keyPoints": [
+            {
+              "title": "空気が冷える",
+              "body": "送風機が室内空気をより冷たい金属面へ通します。"
+            },
+            {
+              "title": "冷媒が沸騰する",
+              "body": "相変化は、温度を大きく上げずに多くの熱を吸収できます。"
+            },
+            {
+              "title": "水が排出される",
+              "body": "コイルが露点より低いと、空気中の水分が凝縮します。"
+            }
+          ],
+          "demoTitle": "室内熱が蒸発器へ入る様子",
+          "copy": {
+            "ariaLabel": "暖かい室内空気が冷たいコイルを通り、冷媒が沸騰するインタラクティブ蒸発器図",
+            "roomLabel": "室内空気の流れ",
+            "airBefore": "暖かい室内空気",
+            "airAfter": "冷たい吹き出し空気",
+            "refrigerantIn": "冷たい気液混合物が入る",
+            "refrigerantOut": "低圧蒸気が出る",
+            "controlLabel": "室内熱負荷の例",
+            "lowLabel": "低い負荷",
+            "highLabel": "高い負荷",
+            "loadLabel": "熱負荷",
+            "supplyLabel": "吹き出し温度の例",
+            "loadUnit": "%",
+            "temperatureUnit": "°C",
+            "statusLow": "熱負荷が小さいと、少ない冷媒の沸騰で室内熱を運べます。",
+            "statusMedium": "コイルは安定して熱を吸収し、送風機が冷えた空気を部屋へ戻します。",
+            "statusHigh": "熱負荷が増えると、風量と冷媒流量が能力範囲内である限り、より多くの冷媒が沸騰します。",
+            "caption": "温度は説明用です。実際の値は湿度、風量、冷媒、機器容量、制御によって変わります。"
+          }
+        },
+        {
+          "id": "compression",
+          "number": "02",
+          "title": "圧縮機が屋外への放熱を可能にする",
+          "body": [
+            "冷媒は室内コイルを低圧蒸気として出ます。圧縮機がその蒸気へ機械的な仕事を加え、圧力と温度を同時に上げます。",
+            "屋外より高温になった蒸気が重要です。熱は高温側から低温側へ流れるため、屋外コイルの冷媒は外気へ熱を渡せるほど高温でなければなりません。"
+          ],
+          "plainLanguage": {
+            "label": "ひと言で",
+            "body": "圧縮機が直接部屋を冷やすのではありません。屋外空気に熱を受け取ってもらえる温度まで冷媒を持ち上げます。"
+          },
+          "keyPointsLabel": "圧縮機が加えるもの",
+          "keyPoints": [
+            {
+              "title": "圧力",
+              "body": "蒸気をループの低圧側から高圧側へ移します。"
+            },
+            {
+              "title": "温度",
+              "body": "圧縮後の吐出蒸気は屋外空気より高温になります。"
+            },
+            {
+              "title": "仕事",
+              "body": "機器の電力の多くが、この圧力上昇に使われます。"
+            }
+          ],
+          "demoTitle": "圧力と温度が一緒に上がる様子",
+          "copy": {
+            "ariaLabel": "冷媒蒸気が圧縮され、密度、圧力、温度が上がるインタラクティブ圧縮機図",
+            "machineLabel": "圧縮機シリンダー · 概念図",
+            "inletLabel": "冷たい低圧蒸気",
+            "outletLabel": "高温高圧蒸気",
+            "controlLabel": "相対的な圧縮レベル",
+            "lowLabel": "小さい圧力上昇",
+            "highLabel": "大きい圧力上昇",
+            "pressureLabel": "圧力の例",
+            "temperatureLabel": "吐出温度の例",
+            "pressureUnit": "× 吸入圧",
+            "temperatureUnit": "°C",
+            "statusLow": "圧力上昇が小さいほど仕事は少なくなりますが、屋外へ放熱できる温度には達する必要があります。",
+            "statusMedium": "圧縮は蒸気の圧力と温度を同時に上げます。実際の値は運転条件と冷媒で変わります。",
+            "statusHigh": "圧力上昇が大きいほど吐出温度と圧縮機仕事も増えやすく、汚れたコイルや極端な条件は効率を下げます。",
+            "caption": "これは概念的な関係であり、圧縮機の選定計算ではありません。"
+          }
+        },
+        {
+          "id": "outdoor-release",
+          "number": "03",
+          "title": "屋外コイルは室内で失われた以上の熱を放出する",
+          "body": [
+            "高温高圧の冷媒が凝縮器コイルを流れ、屋外ファンが周囲の空気をコイルへ通します。熱が冷媒から出ていき、蒸気は高圧液体へ凝縮します。",
+            "室外機は、室内で集めた熱と圧縮機が加えた電気仕事の両方を放出します。室外機から出る空気がはっきり暖かいのはこのためです。"
+          ],
+          "plainLanguage": {
+            "label": "ひと言で",
+            "body": "室外機は荷降ろし場です。室内熱と圧縮機の仕事がどちらもここから出ていきます。"
+          },
+          "keyPointsLabel": "なぜ風路が重要か",
+          "keyPoints": [
+            {
+              "title": "ファン",
+              "body": "暖まった空気を周囲の空気と入れ替え、熱をコイルから運び去ります。"
+            },
+            {
+              "title": "凝縮",
+              "body": "冷媒は蒸気から液体へ変わりながら熱を放出します。"
+            },
+            {
+              "title": "流れを確保",
+              "body": "フィンの詰まりや熱風の再循環は圧縮機の負担を増やします。"
+            }
+          ],
+          "demoTitle": "屋外風路が開いている場合と塞がれた場合",
+          "copy": {
+            "ariaLabel": "屋外凝縮器の風路が開いている状態と塞がれた状態を比較するインタラクティブ図",
+            "outdoorUnitLabel": "屋外熱交換器",
+            "equation": "室内熱 + 圧縮機仕事 → 屋外空気",
+            "controlLabel": "屋外コイル周辺の風路を比較する",
+            "clearButton": "風路が開いている",
+            "blockedButton": "風路が塞がれている",
+            "clearTitle": "熱を効率よく放出できる",
+            "blockedTitle": "熱がコイル周辺にたまる",
+            "clearStatus": "ファンが暖まった空気をより冷たい外気と入れ替え、冷媒の凝縮圧力を適切に保ちます。",
+            "blockedStatus": "吸排気の制限や熱風の再循環はコイル温度と圧力を上げ、圧縮機の負担を増やして能力を下げることがあります。",
+            "caption": "室外機の吸気と排気を塞がないでください。必要な設置間隔はメーカーの指示に従います。"
+          }
+        },
+        {
+          "id": "pressure-drop",
+          "number": "04",
+          "title": "膨張装置が冷媒を室内で吸熱できる状態へ戻す",
+          "body": [
+            "凝縮後の冷媒は、暖かい高圧液体です。温度式膨張弁、電子膨張弁、毛細管などの計量装置が流れを絞り、低圧側へ送ります。",
+            "急な圧力低下で液体の一部がフラッシュ蒸発します。この相変化が残りの混合物を冷やし、再び室内コイルで熱を吸収する準備を整えます。"
+          ],
+          "plainLanguage": {
+            "label": "ひと言で",
+            "body": "弁が高圧側と低圧側の境界を作ります。暖かい高圧液体は通過後、冷たい低圧混合物になります。"
+          },
+          "keyPointsLabel": "絞りの前後",
+          "keyPoints": [
+            {
+              "title": "前",
+              "body": "屋外コイルから高圧液体が到着します。"
+            },
+            {
+              "title": "通過",
+              "body": "装置が流量を計り、高圧側と低圧側を分けます。"
+            },
+            {
+              "title": "後",
+              "body": "冷たい気液混合物が蒸発器へ入ります。"
+            }
+          ],
+          "demoTitle": "膨張装置の両側を確認する",
+          "copy": {
+            "ariaLabel": "膨張装置による圧力低下の前後で冷媒状態を比較するインタラクティブ図",
+            "valveLabel": "計量絞り",
+            "upstreamShort": "屋外コイルから",
+            "downstreamShort": "室内コイルへ",
+            "controlLabel": "絞りの片側を確認する",
+            "upstreamButton": "弁の前",
+            "downstreamButton": "弁の後",
+            "upstreamTitle": "高圧側の暖かい液体",
+            "downstreamTitle": "低圧側の冷たい混合物",
+            "highPressure": "高圧",
+            "warmLiquid": "ほぼ液体",
+            "lowPressure": "低圧",
+            "coldMixture": "液体 + フラッシュ蒸気",
+            "upstreamStatus": "冷媒は屋外で放熱しましたが、まだ高圧のままです。",
+            "downstreamStatus": "圧力低下で液体の一部がフラッシュ蒸発し、蒸発器へ入る前の混合物を冷やします。",
+            "caption": "弁がエネルギーを作るわけではありません。冷媒が低温で沸騰できる低圧条件を作ります。"
+          }
+        },
+        {
+          "id": "energy-ledger",
+          "number": "05",
+          "title": "冷房能力は入力電力より大きくできる",
+          "body": [
+            "エアコンはヒートポンプなので、冷房出力は電力を同量の冷却へ変換するものではありません。電力を使って、さらに多くの熱を部屋から屋外へ移動させます。",
+            "説明用の例として、圧縮機電力が 1 kW、冷房 COP が 3 なら、室内から約 3 kW の熱を除去し、屋外で約 4 kW を放出します。実際の COP は機器、温度、湿度、風量、部分負荷で変わります。"
+          ],
+          "plainLanguage": {
+            "label": "ひと言で",
+            "body": "一つ分の電気仕事で、複数分の室内熱を運べます。屋外側はその合計を放出します。"
+          },
+          "keyPointsLabel": "エネルギー収支を読む",
+          "keyPoints": [
+            {
+              "title": "電気仕事",
+              "body": "圧縮機とファンを動かします。"
+            },
+            {
+              "title": "移動した室内熱",
+              "body": "室内コイルで得られる有効な冷房効果です。"
+            },
+            {
+              "title": "屋外への放熱",
+              "body": "エネルギー保存により、室内熱と電気仕事の合計になります。"
+            }
+          ],
+          "demoTitle": "冷房時のエネルギー収支の例",
+          "copy": {
+            "ariaLabel": "電気仕事、室内から移した熱、屋外へ放出する熱を示すエアコンのインタラクティブエネルギー収支",
+            "roomHeatShort": "室内熱",
+            "workShort": "電気仕事",
+            "outdoorHeatShort": "屋外放熱",
+            "workLabel": "入力電力",
+            "roomHeatLabel": "室内から除去する熱",
+            "outdoorHeatLabel": "屋外へ放出する熱",
+            "controlLabel": "圧縮機電力の例",
+            "lowLabel": "0.5 kW",
+            "highLabel": "2.0 kW",
+            "copLabel": "冷房 COP の例",
+            "copValue": "3.0",
+            "powerUnit": "kW",
+            "statusTemplate": "装置は {work} を使って室内から {room} を移動し、屋外コイルから合計 {outdoor} を放出します。",
+            "caption": "固定 COP は原理説明用であり、特定製品の効率を示すものではありません。"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "ループをもう一度組み立てる",
+        "title": "すべての熱交換経路が開いてこそ冷房は働く",
+        "body": [
+          "冷凍サイクルは二つの空気経路と一つの冷媒経路に依存します。室内空気は蒸発器へ届き、屋外空気は凝縮器の熱を運び去り、冷媒回路は設計された高低圧差を保つ必要があります。",
+          "制御装置は負荷に合わせて圧縮機とファンを運転・調整し、機器を保護しながら温度と湿度を保ちます。可逆式ヒートポンプは暖房時に四方弁で室内外コイルの役割を入れ替えます。"
+        ],
+        "checklistLabel": "日常運転のチェックリスト",
+        "checklist": [
+          "適切な設定温度を使います。最低温度を選んでも、一般的な定速機が瞬時に速く冷えるわけではありません。",
+          "フィルターを清潔に保ち、室内コイルへ十分な風量を確保します。",
+          "室外機の吸気口と熱風の排出口を塞がないようにします。",
+          "冷房中は扉や窓を閉め、熱負荷が入り続けないようにします。",
+          "着霜、冷媒漏れ、電気故障、能力低下が続く場合は、資格のある技術者へ相談します。"
+        ],
+        "scaleTitle": "四つの熱力学ステーション",
+        "scaleItems": [
+          {
+            "term": "蒸発器",
+            "question": "室内熱はどこから入る？",
+            "role": "低圧冷媒が室内で沸騰し、熱を吸収します。"
+          },
+          {
+            "term": "圧縮機",
+            "question": "暖かい外気へどう熱を渡す？",
+            "role": "仕事を加えて蒸気の圧力と温度を上げます。"
+          },
+          {
+            "term": "凝縮器",
+            "question": "集めたエネルギーはどこから出る？",
+            "role": "高圧冷媒が屋外で凝縮し、熱を放出します。"
+          },
+          {
+            "term": "膨張装置",
+            "question": "低圧側をどう戻す？",
+            "role": "絞りが流量を計り、蒸発器用の冷たい混合物を作ります。"
+          }
+        ],
+        "finalQuote": "エアコンは冷媒の圧力を繰り返し変え、室内で熱を受け取り、屋外でその熱を放出します。",
+        "sourceNote": "技術注記：このガイドは冷房運転時の蒸気圧縮サイクルを簡略化して示します。温度、圧力、COP、部品配置は説明用で、実際のシステムは冷媒、設計、制御方式、運転条件によって異なります。"
+      }
+    }
+  }
+}

@@ -18,6 +18,7 @@ const dateLabel = visual
       day: 'numeric',
     })
   : '';
+const isAirConditioner = visual?.cover === 'air-conditioner';
 const isTyphoon = visual?.cover === 'typhoon';
 const isLoopEngineering = visual?.cover === 'loop-engineering';
 ---
@@ -57,7 +58,19 @@ const isLoopEngineering = visual?.cover === 'loop-engineering';
 
       <div class="relative min-h-64 overflow-hidden bg-gradient-to-br from-slate-950 via-cyan-900 to-teal-500 md:min-h-80" aria-hidden="true">
         <div class="absolute inset-0 opacity-80 [background-image:radial-gradient(circle_at_20%_18%,rgba(255,255,255,.5)_0_2px,transparent_3px),radial-gradient(circle_at_82%_70%,rgba(255,255,255,.32)_0_3px,transparent_4px)] [background-size:72px_72px,116px_116px]"></div>
-        {isLoopEngineering ? (
+        {isAirConditioner ? (
+          <>
+            <div class="absolute left-[8%] top-[24%] h-36 w-44 rounded-[2rem] border border-cyan-100/30 bg-cyan-100/10 shadow-[0_0_55px_rgba(103,232,249,.2)] backdrop-blur-sm"></div>
+            <div class="absolute right-[8%] top-[24%] h-36 w-44 rounded-[2rem] border border-amber-100/30 bg-amber-100/10 shadow-[0_0_55px_rgba(251,191,36,.18)] backdrop-blur-sm"></div>
+            <div class="absolute left-[18%] top-[39%] h-16 w-16 rounded-full border-[6px] border-cyan-100/45 shadow-[inset_0_0_20px_rgba(103,232,249,.22)]"></div>
+            <div class="absolute right-[18%] top-[39%] h-16 w-16 rounded-full border-[6px] border-amber-100/45 shadow-[inset_0_0_20px_rgba(251,191,36,.2)] motion-safe:animate-[spin_3s_linear_infinite]"></div>
+            <div class="absolute left-[32%] top-[33%] h-px w-[36%] bg-gradient-to-r from-cyan-200/60 via-white/80 to-amber-200/60"></div>
+            <div class="absolute left-[32%] top-[65%] h-px w-[36%] bg-gradient-to-l from-cyan-200/60 via-white/80 to-amber-200/60"></div>
+            <div class="absolute left-[27%] top-[22%] h-[58%] w-[46%] rounded-[50%] border border-dashed border-white/30 motion-safe:animate-[spin_16s_linear_infinite]"></div>
+            <div class="absolute left-[14%] top-[17%] text-3xl text-cyan-100/75">↓</div>
+            <div class="absolute right-[14%] top-[17%] text-3xl text-amber-100/75">↑</div>
+          </>
+        ) : isLoopEngineering ? (
           <>
             <div class="absolute inset-8 rounded-[2rem] border border-white/15 bg-slate-950/25 backdrop-blur-sm"></div>
             <div class="absolute left-[12%] top-1/2 h-16 w-28 -translate-y-1/2 rounded-2xl border border-cyan-200/35 bg-cyan-100/10"></div>

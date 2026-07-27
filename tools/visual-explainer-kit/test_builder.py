@@ -57,6 +57,28 @@ class ManifestValidationTests(unittest.TestCase):
         self.assertIn('class="closing"', document)
         self.assertIn("自动化下一轮之前，先回答七个问题", document)
 
+    def test_renders_air_conditioner_content_in_all_locales(self) -> None:
+        manifest = load_manifest(ROOT / "manifest-air-conditioner.json")
+
+        for locale, title in (
+            ("en", "How air conditioning moves heat"),
+            ("zh", "空调怎样把热量搬出去"),
+            ("ja", "エアコンはどう熱を外へ運ぶのか"),
+        ):
+            document = render_document(
+                ROOT,
+                manifest,
+                locale,
+                include_overview=True,
+                step_limit=None,
+            )
+
+            self.assertEqual(document.count("<interactive-figure"), 6)
+            self.assertIn(f"<h1>{title}</h1>", document)
+            self.assertIn('data-demo="ac-cycle-overview"', document)
+            self.assertIn('data-demo="ac-energy-ledger"', document)
+            self.assertIn('class="closing"', document)
+
 
 if __name__ == "__main__":
     unittest.main()

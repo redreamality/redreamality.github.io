@@ -1,0 +1,66 @@
+---
+import type { Language } from '../utils/i18n';
+import { getAirConditionerArtifactFragment } from '../utils/air-conditioner-artifact';
+
+interface Props {
+  lang: Language;
+  externalResources: string[];
+}
+
+const { lang, externalResources } = Astro.props;
+const artifact = getAirConditionerArtifactFragment(lang, externalResources);
+const pauseAll = {
+  en: 'Pause all motion',
+  zh: '暂停所有动画',
+  ja: 'すべての動きを停止',
+} as const;
+---
+
+<style is:inline set:html={artifact.style}></style>
+<div id="air-conditioner-article" class="air-conditioner-visual" data-visual-artifact="air-conditioner">
+  <div class="air-conditioner-motion-toolbar">
+    <button type="button" data-global-motion aria-pressed="false">{pauseAll[lang]}</button>
+  </div>
+  <Fragment set:html={artifact.body} />
+</div>
+
+<style>
+  .air-conditioner-motion-toolbar {
+    position: sticky;
+    z-index: 10;
+    top: calc(var(--site-header-height) + 0.75rem);
+    display: flex;
+    justify-content: flex-end;
+    width: min(calc(100% - 2rem), 68rem);
+    margin: 1rem auto -4rem;
+    pointer-events: none;
+  }
+
+  .air-conditioner-motion-toolbar button {
+    padding: 0.55rem 0.85rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink);
+    background: color-mix(in srgb, var(--surface) 90%, transparent);
+    box-shadow: 0 0.5rem 1.5rem color-mix(in srgb, var(--ink) 10%, transparent);
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    pointer-events: auto;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+  }
+
+  .air-conditioner-motion-toolbar button:focus-visible {
+    outline: 3px solid var(--warm);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 640px) {
+    .air-conditioner-motion-toolbar {
+      position: relative;
+      top: auto;
+      margin-bottom: -3rem;
+    }
+  }
+</style>

@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import type { Language } from '../utils/i18n';
 import type { VisualWork } from '../utils/visuals';
+import AirConditionerVisual from './AirConditionerVisual.astro';
 import LoopEngineeringVisual from './LoopEngineeringVisual.astro';
 import TyphoonVisual from './TyphoonVisual.astro';
 
@@ -14,6 +15,7 @@ const { lang, work } = Astro.props;
 const localized = work.locales[lang];
 const artifactId = localized.artifact;
 const artifactComponents = {
+  'air-conditioner': AirConditionerVisual,
   'loop-engineering': LoopEngineeringVisual,
   'typhoon': TyphoonVisual,
 } as const;

@@ -5,10 +5,11 @@ test('English Visuals gallery contains the multilingual published works', async 
 
   expect(response?.status()).toBe(200);
   await expect(page.locator('h1')).toHaveText('Visuals');
-  await expect(page.locator('[data-visual-card]')).toHaveCount(2);
+  await expect(page.locator('[data-visual-card]')).toHaveCount(3);
+  await expect(page.getByRole('heading', { name: 'How Air Conditioners Work' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'What Is Loop Engineering?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'How Typhoons Form' })).toBeVisible();
-  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(2);
+  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(3);
   await expect(page.getByText('Agent Architecture Showcase')).toHaveCount(0);
   await expect(page.getByText(/not available in this language/i)).toHaveCount(0);
 });
@@ -21,8 +22,8 @@ test('stale missing-language query cannot mark multilingual Typhoon as unavailab
 });
 
 for (const locale of [
-  { path: '/cn/visuals/', title: '可视化', work: '什么是 Loop Engineering？' },
-  { path: '/ja/visuals/', title: 'ビジュアル', work: 'Loop Engineering とは何か？' },
+  { path: '/cn/visuals/', title: '可视化', work: '空调的工作原理' },
+  { path: '/ja/visuals/', title: 'ビジュアル', work: 'エアコンの仕組み' },
 ]) {
   test(`${locale.path} renders a localized Visuals gallery`, async ({ page }) => {
     const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
@@ -30,7 +31,7 @@ for (const locale of [
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toHaveText(locale.title);
     await expect(page.getByRole('heading', { name: locale.work })).toBeVisible();
-    await expect(page.locator('[data-visual-card]')).toHaveCount(2);
+    await expect(page.locator('[data-visual-card]')).toHaveCount(3);
   });
 }
 
@@ -50,8 +51,8 @@ for (const locale of [
   {
     path: '/',
     sectionTitle: 'Latest visual',
-    workTitle: 'What Is Loop Engineering?',
-    workHref: '/visuals/loop-engineering/',
+    workTitle: 'How Air Conditioners Work',
+    workHref: '/visuals/air-conditioner/',
     typeLabel: 'Interactive explainer',
     allLabel: 'View all visuals',
     allHref: '/visuals/',
@@ -59,8 +60,8 @@ for (const locale of [
   {
     path: '/cn/',
     sectionTitle: '最新可视化',
-    workTitle: '什么是 Loop Engineering？',
-    workHref: '/cn/visuals/loop-engineering/',
+    workTitle: '空调的工作原理',
+    workHref: '/cn/visuals/air-conditioner/',
     typeLabel: '交互图解',
     allLabel: '查看全部可视化',
     allHref: '/cn/visuals/',
@@ -68,8 +69,8 @@ for (const locale of [
   {
     path: '/ja/',
     sectionTitle: '最新ビジュアル',
-    workTitle: 'Loop Engineering とは何か？',
-    workHref: '/ja/visuals/loop-engineering/',
+    workTitle: 'エアコンの仕組み',
+    workHref: '/ja/visuals/air-conditioner/',
     typeLabel: 'インタラクティブ解説',
     allLabel: 'すべてのビジュアルを見る',
     allHref: '/ja/visuals/',
@@ -88,6 +89,141 @@ for (const locale of [
     await expect(section.getByRole('link', { name: locale.allLabel })).toHaveAttribute('href', locale.allHref);
   });
 }
+
+for (const locale of [
+  {
+    path: '/visuals/air-conditioner/',
+    htmlLang: 'en',
+    h1: 'How air conditioning moves heat',
+    pageTitle: 'How Air Conditioning Moves Heat',
+    visualsLink: 'Visuals',
+    pauseAll: 'Pause all motion',
+    resumeAll: 'Resume all motion',
+    compressorStage: 'Compressor',
+    compressorDetail: 'Electrical work squeezes the vapor. Its pressure and temperature rise enough for heat to flow to the outdoor air.',
+    heatLoad: 'Illustrative room heat load',
+    highLoadStatus: "A larger heat load makes more refrigerant boil, provided airflow and refrigerant flow remain within the system's capacity.",
+    compressionLevel: 'Relative compression level',
+    blockedAirflow: 'Blocked airflow',
+    blockedStatus: 'Restricted or recirculated airflow raises coil temperature and pressure, so the compressor works harder and capacity can fall.',
+    afterValve: 'After the valve',
+    afterValveStatus: 'The pressure drop makes some liquid flash into vapor, cooling the mixture before it enters the evaporator.',
+    compressorPower: 'Illustrative compressor power',
+    reset: 'Reset',
+    ogDescription: 'An interactive visual guide to the vapor-compression cycle and the energy balance behind everyday air conditioning.',
+  },
+  {
+    path: '/cn/visuals/air-conditioner/',
+    htmlLang: 'zh-CN',
+    h1: '空调怎样把热量搬出去',
+    pageTitle: '空调怎样把热量搬出去',
+    visualsLink: '可视化',
+    pauseAll: '暂停所有动画',
+    resumeAll: '继续所有动画',
+    compressorStage: '压缩机',
+    compressorDetail: '电功压缩制冷剂蒸气，使它的压力和温度升高到足以向室外空气放热。',
+    heatLoad: '示意室内热负荷',
+    highLoadStatus: '热负荷增大时会有更多制冷剂沸腾，前提是风量和制冷剂流量仍在系统能力范围内。',
+    compressionLevel: '相对压缩程度',
+    blockedAirflow: '风路受阻',
+    blockedStatus: '进出风受限或热风回流会抬高盘管温度和压力，使压缩机更费力，制冷能力也可能下降。',
+    afterValve: '阀门之后',
+    afterValveStatus: '降压让一部分液体闪蒸，从而使进入蒸发器前的混合物降温。',
+    compressorPower: '示意压缩机功率',
+    reset: '重置',
+    ogDescription: '一份交互式蒸气压缩制冷循环图解，并用能量账本解释日常空调为什么能够高效制冷。',
+  },
+  {
+    path: '/ja/visuals/air-conditioner/',
+    htmlLang: 'ja',
+    h1: 'エアコンはどう熱を外へ運ぶのか',
+    pageTitle: 'エアコンはどう熱を外へ運ぶのか',
+    visualsLink: 'ビジュアル',
+    pauseAll: 'すべての動きを停止',
+    resumeAll: 'すべての動きを再開',
+    compressorStage: '圧縮機',
+    compressorDetail: '電気仕事で冷媒蒸気を圧縮し、屋外空気へ熱を渡せるまで圧力と温度を上げます。',
+    heatLoad: '室内熱負荷の例',
+    highLoadStatus: '熱負荷が増えると、風量と冷媒流量が能力範囲内である限り、より多くの冷媒が沸騰します。',
+    compressionLevel: '相対的な圧縮レベル',
+    blockedAirflow: '風路が塞がれている',
+    blockedStatus: '吸排気の制限や熱風の再循環はコイル温度と圧力を上げ、圧縮機の負担を増やして能力を下げることがあります。',
+    afterValve: '弁の後',
+    afterValveStatus: '圧力低下で液体の一部がフラッシュ蒸発し、蒸発器へ入る前の混合物を冷やします。',
+    compressorPower: '圧縮機電力の例',
+    reset: 'リセット',
+    ogDescription: '蒸気圧縮冷凍サイクルと、日常の冷房を支えるエネルギー収支を学ぶインタラクティブ図解。',
+  },
+]) {
+  test(`${locale.path} explains air conditioning inside the shared site layout`, async ({ page }) => {
+    const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
+
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('html')).toHaveAttribute('lang', locale.htmlLang);
+    await expect(page.locator('body > nav')).toBeVisible();
+    await expect(page.locator('body > nav').getByRole('link', { name: locale.visualsLink })).toBeVisible();
+    await expect(page.locator('h1')).toHaveText(locale.h1);
+    await expect(page.locator('h1')).toHaveCount(1);
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', locale.pageTitle);
+    await expect(page.locator('meta[property="og:description"]')).toHaveAttribute('content', locale.ogDescription);
+    await expect(page.locator('iframe')).toHaveCount(0);
+    await expect(page.locator('.visual-site-chrome, .site-header')).toHaveCount(0);
+    await expect(page.locator('interactive-figure')).toHaveCount(6);
+
+    const globalMotion = page.locator('[data-global-motion]');
+    await expect(globalMotion).toHaveAccessibleName(locale.pauseAll);
+    await globalMotion.click();
+    await expect(globalMotion).toHaveText(locale.resumeAll);
+    await globalMotion.click();
+
+    const overview = page.locator('interactive-figure[data-demo="ac-cycle-overview"]');
+    await overview.scrollIntoViewIfNeeded();
+    await overview.getByRole('button', { name: locale.compressorStage }).click();
+    await expect(overview.getByText(locale.compressorDetail, { exact: true })).toBeVisible();
+
+    const evaporator = page.locator('interactive-figure[data-demo="ac-evaporator"]');
+    await evaporator.scrollIntoViewIfNeeded();
+    await evaporator.getByRole('slider', { name: locale.heatLoad }).fill('90');
+    await expect(evaporator.locator('.ac-evaporator-demo')).toHaveAttribute('data-load', '90');
+    await expect(evaporator.getByText(locale.highLoadStatus, { exact: true })).toBeVisible();
+    await evaporator.getByRole('button', { name: locale.reset }).click();
+    await expect(evaporator.locator('.ac-evaporator-demo')).toHaveAttribute('data-load', '60');
+
+    const compressor = page.locator('interactive-figure[data-demo="ac-compressor"]');
+    await compressor.scrollIntoViewIfNeeded();
+    await compressor.getByRole('slider', { name: locale.compressionLevel }).fill('5');
+    await expect(compressor.locator('.ac-compressor-demo')).toHaveAttribute('data-compression', '5');
+
+    const condenser = page.locator('interactive-figure[data-demo="ac-condenser"]');
+    await condenser.scrollIntoViewIfNeeded();
+    await condenser.getByRole('button', { name: locale.blockedAirflow }).click();
+    await expect(condenser.getByText(locale.blockedStatus, { exact: true })).toBeVisible();
+
+    const expansion = page.locator('interactive-figure[data-demo="ac-expansion"]');
+    await expansion.scrollIntoViewIfNeeded();
+    await expansion.getByRole('button', { name: locale.afterValve }).click();
+    await expect(expansion.getByText(locale.afterValveStatus, { exact: true })).toBeVisible();
+
+    const ledger = page.locator('interactive-figure[data-demo="ac-energy-ledger"]');
+    await ledger.scrollIntoViewIfNeeded();
+    await ledger.getByRole('slider', { name: locale.compressorPower }).fill('20');
+    await expect(ledger.locator('.ac-ledger-demo')).toHaveAttribute('data-power', '2');
+    await expect(ledger.locator('[data-ac-outdoor]')).toHaveText('8.0 kW');
+    await ledger.getByRole('button', { name: locale.reset }).click();
+    await expect(ledger.locator('.ac-ledger-demo')).toHaveAttribute('data-power', '1');
+  });
+}
+
+test('Air Conditioner theme follows the shared dark-mode toggle', async ({ page }) => {
+  await page.goto('/visuals/air-conditioner/', { waitUntil: 'domcontentloaded' });
+
+  const visual = page.locator('[data-visual-artifact="air-conditioner"]');
+  const initialBackground = await visual.evaluate((element) => getComputedStyle(element).backgroundColor);
+  await page.locator('body > nav .theme-toggle:visible').click();
+
+  await expect.poll(() => visual.evaluate((element) => getComputedStyle(element).backgroundColor)).not.toBe(initialBackground);
+  await expect(page.locator('body > nav')).toHaveClass(/bg-surface-50\/80/);
+});
 
 for (const locale of [
   {
@@ -461,6 +597,9 @@ test('sitemap lists every published visual locale and no Agent Architecture rout
   const xml = documents.join('\n');
 
   for (const path of [
+    '/visuals/air-conditioner/',
+    '/cn/visuals/air-conditioner/',
+    '/ja/visuals/air-conditioner/',
     '/visuals/loop-engineering/',
     '/cn/visuals/loop-engineering/',
     '/ja/visuals/loop-engineering/',

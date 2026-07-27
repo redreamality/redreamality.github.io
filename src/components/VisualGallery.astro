@@ -93,6 +93,7 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
       const openLabel = work.hasCurrentArtifact
         ? c.open
         : c.openLanguage.replace('{language}', availableLabel);
+      const isAirConditioner = work.cover === 'air-conditioner';
       const isLoopEngineering = work.cover === 'loop-engineering';
       const isTyphoon = work.cover === 'typhoon';
 
@@ -100,6 +101,17 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
         <article id={work.slug} data-visual-card={work.slug} class="group overflow-hidden rounded-3xl border border-surface-200/80 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover dark:border-surface-800 dark:bg-surface-900">
           <div class="relative h-56 overflow-hidden bg-gradient-to-br from-slate-950 via-cyan-900 to-teal-500">
             <div class="absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_20%_20%,rgba(255,255,255,.5)_0_2px,transparent_3px),radial-gradient(circle_at_75%_65%,rgba(255,255,255,.35)_0_3px,transparent_4px)] [background-size:70px_70px,110px_110px]"></div>
+            {isAirConditioner && (
+              <>
+                <div class="absolute left-[10%] top-[24%] h-24 w-32 rounded-2xl border border-cyan-100/35 bg-cyan-100/10 shadow-[0_0_35px_rgba(103,232,249,.18)] backdrop-blur-sm"></div>
+                <div class="absolute right-[10%] top-[24%] h-24 w-32 rounded-2xl border border-amber-100/35 bg-amber-100/10 shadow-[0_0_35px_rgba(251,191,36,.18)] backdrop-blur-sm"></div>
+                <div class="absolute left-[18%] top-[42%] h-10 w-10 rounded-full border-4 border-cyan-100/50"></div>
+                <div class="absolute right-[18%] top-[42%] h-10 w-10 rounded-full border-4 border-amber-100/50 motion-safe:animate-[spin_3s_linear_infinite]"></div>
+                <div class="absolute left-[34%] top-[34%] h-px w-[32%] bg-gradient-to-r from-cyan-200/70 via-white/70 to-amber-200/70"></div>
+                <div class="absolute left-[34%] top-[62%] h-px w-[32%] bg-gradient-to-l from-cyan-200/70 via-white/70 to-amber-200/70"></div>
+                <div class="absolute left-[31%] top-[29%] h-[39%] w-[38%] rounded-[50%] border border-dashed border-white/30 motion-safe:animate-[spin_14s_linear_infinite]"></div>
+              </>
+            )}
             {isLoopEngineering && (
               <>
                 <div class="absolute inset-7 rounded-3xl border border-white/15 bg-black/15 backdrop-blur-sm"></div>

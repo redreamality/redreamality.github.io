@@ -110,3 +110,40 @@ test('the same runtime and demos render a second subject', async ({ page }) => {
   await expect(energy.getByText('Shared context coverage')).toBeVisible();
   await expect(page.getByRole('link', { name: 'English' })).toHaveCount(1);
 });
+
+for (const [locale, title] of Object.entries({
+  en: 'How air conditioning moves heat',
+  zh: '空调怎样把热量搬出去',
+  ja: 'エアコンはどう熱を外へ運ぶのか',
+})) {
+  test(`${locale} air-conditioner artifact is localized and self-contained`, async ({ page }) => {
+    await page.goto(`/air-conditioner/${locale}/`, { waitUntil: 'domcontentloaded' });
+
+    await expect(page.locator('h1')).toHaveCount(1);
+    await expect(page.locator('h1')).toHaveText(title);
+    await expect(page.locator('interactive-figure')).toHaveCount(6);
+    await expect(page.locator('script[src], link[href^="http"], img[src^="http"]')).toHaveCount(0);
+  });
+}
+
+test('air-conditioner demos expose localized interaction and reset behavior', async ({ page }) => {
+  await page.goto('/air-conditioner/zh/', { waitUntil: 'domcontentloaded' });
+
+  const overview = page.locator('interactive-figure[data-demo="ac-cycle-overview"]');
+  await overview.scrollIntoViewIfNeeded();
+  await overview.getByRole('button', { name: /压缩机/ }).click();
+  await expect(overview).toHaveAttribute('data-state', 'mounted');
+  await expect(overview.getByText('电功压缩制冷剂蒸气，使它的压力和温度升高到足以向室外空气放热。')).toBeVisible();
+
+  const evaporator = page.locator('interactive-figure[data-demo="ac-evaporator"]');
+  await evaporator.scrollIntoViewIfNeeded();
+  await evaporator.getByRole('slider', { name: '示意室内热负荷' }).fill('90');
+  await expect(evaporator.locator('.ac-evaporator-demo')).toHaveAttribute('data-load', '90');
+  await evaporator.getByRole('button', { name: '重置' }).click();
+  await expect(evaporator.locator('.ac-evaporator-demo')).toHaveAttribute('data-load', '60');
+
+  const condenser = page.locator('interactive-figure[data-demo="ac-condenser"]');
+  await condenser.scrollIntoViewIfNeeded();
+  await condenser.getByRole('button', { name: '风路受阻' }).click();
+  await expect(condenser.getByText('热量积压在盘管附近')).toBeVisible();
+});

@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive visual guide to the vapor-compression cycle: evaporation, compression, condensation, expansion, and the energy balance behind cooling.">
+  <title>How air conditioners work</title>
+  <style data-prototype-bundle="article">
+:root {
+  color-scheme: light;
+  --paper: #f4f1e8;
+  --surface: #fffdf8;
+  --ink: #17333c;
+  --muted: #60747a;
+  --line: #d8ddd7;
+  --ocean: #0f7185;
+  --warm: #ee9d46;
+  --coral: #d45f50;
+  --soft-ocean: color-mix(in srgb, var(--ocean) 9%, var(--surface));
+  --soft-warm: color-mix(in srgb, var(--warm) 12%, var(--surface));
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body { margin: 0; color: var(--ink); background: radial-gradient(circle at 20% 0, #dff3ef 0, transparent 30rem), var(--paper); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .75rem;
+  left: .75rem;
+  padding: .65rem .9rem;
+  color: white;
+  background: var(--ink);
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.75rem;
+  padding: .65rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(216, 221, 215, .9);
+  background: rgba(244, 241, 232, .9);
+  backdrop-filter: blur(14px);
+}
+.site-header strong { margin-right: auto; font-size: .72rem; letter-spacing: .12em; }
+.language-links { display: flex; gap: .65rem; }
+.language-links a { color: var(--muted); font-size: .78rem; }
+.language-links a[aria-current="page"] { color: var(--ocean); font-weight: 800; }
+[data-global-motion] {
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.hero, .copy-block {
+  width: min(calc(100% - 2rem), 54rem);
+  margin-inline: auto;
+}
+.hero {
+  position: relative;
+  padding: clamp(5rem, 14vw, 10rem) 0;
+}
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -12% auto auto;
+  width: clamp(9rem, 28vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ocean) 35%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem color-mix(in srgb, var(--ocean) 5%, transparent),
+    0 0 0 5rem color-mix(in srgb, var(--warm) 4%, transparent);
+  content: "";
+}
+.eyebrow, .section-label {
+  margin: 0 0 1rem;
+  color: var(--ocean);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+h1, h2 { margin-top: 0; line-height: 1.03; text-wrap: balance; }
+h1 { max-width: 9em; margin-bottom: 1.5rem; font-size: clamp(3.2rem, 10vw, 7rem); letter-spacing: -.06em; }
+h2 { max-width: 16em; margin-bottom: 1.15rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+.hero-subtitle, .copy-prose { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.75; }
+.hero-subtitle { max-width: 38rem; }
+.copy-prose { margin: .8rem 0 0; }
+
+.plain-language {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .75rem 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 55%, var(--line));
+  border-radius: 1rem;
+  background: var(--soft-warm);
+}
+.plain-language strong {
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  color: var(--surface);
+  background: var(--warm);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.plain-language p { margin: 0; color: var(--ink); line-height: 1.65; }
+
+.concept-points { margin-top: 1.4rem; }
+.concept-points-label {
+  margin: 0 0 .7rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.concept-points ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.concept-card strong { display: block; margin-bottom: .45rem; }
+.concept-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+.overview, .chapter, .closing { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
+.overview { background: color-mix(in srgb, var(--surface) 42%, transparent); }
+.chapter:nth-of-type(even) { background: color-mix(in srgb, var(--surface) 22%, transparent); }
+interactive-figure {
+  display: block;
+  width: min(calc(100% - 2rem), 68rem);
+  min-height: 29rem;
+  margin: 3rem auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 51, 60, .14);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 1.5rem 4rem rgba(23, 51, 60, .1);
+}
+
+.closing { background: linear-gradient(150deg, var(--soft-ocean), color-mix(in srgb, var(--paper) 86%, var(--surface))); }
+.closing-copy { width: min(calc(100% - 2rem), 68rem); }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.starter-checklist, .boundary-map {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.closing h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.starter-checklist ol { display: grid; gap: .7rem; margin: 0; padding-left: 1.35rem; }
+.starter-checklist li { padding-left: .3rem; line-height: 1.55; }
+.boundary-map ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.scale-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: .2rem .8rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--surface);
+}
+.scale-card strong { grid-row: 1 / span 2; color: var(--ocean); }
+.scale-card span { color: var(--ink); font-size: .82rem; font-weight: 800; }
+.scale-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.closing blockquote {
+  margin: 2rem 0 0;
+  padding: 1.35rem clamp(1rem, 3vw, 1.8rem);
+  border-left: .32rem solid var(--ocean);
+  color: var(--ink);
+  background: var(--surface);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.55;
+}
+.source-note { margin: 1rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+article[data-visual-slug="loop-engineering"] .hero .eyebrow { color: var(--coral); }
+article[data-visual-slug="loop-engineering"] interactive-figure { box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ocean) 12%, transparent); }
+
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header strong { width: 100%; }
+  .language-links { margin-right: auto; }
+  interactive-figure { min-height: 32rem; border-radius: 1rem; }
+  .concept-points ul, .closing-grid { grid-template-columns: 1fr; }
+  .plain-language { grid-template-columns: 1fr; }
+  .scale-card { grid-template-columns: 5.5rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#article">Skip to content</a>
+  <header class="site-header">
+    <strong>VISUAL KIT / PROTOTYPE</strong>
+    <nav class="language-links" aria-label="Languages">
+<a href="../en/" hreflang="en" aria-current="page">English</a>
+<a href="../zh/" hreflang="zh">中文</a>
+<a href="../ja/" hreflang="ja">日本語</a>
+    </nav>
+    <button type="button" data-global-motion aria-pressed="false"></button>
+  </header>
+  <main id="article">
+    <article data-visual-slug="air-conditioner">
+      <header class="hero">
+        <p class="eyebrow">THERMODYNAMICS / VAPOR-COMPRESSION CYCLE</p>
+        <h1>How air conditioning moves heat</h1>
+        <p class="hero-subtitle">An air conditioner does not create cold. It uses electricity and a circulating refrigerant to pick up heat indoors and release it outdoors.</p>
+      </header>
+<section class="overview" aria-labelledby="overview-title">
+  <div class="copy-block">
+    <p class="section-label">Cooling-cycle overview</p>
+    <h2 id="overview-title">Follow the refrigerant around one closed loop</h2>
+    <p class="copy-prose">Cooling is a transport job. The indoor coil lets cold, low-pressure refrigerant absorb room heat. The compressor then raises the vapor&#x27;s pressure and temperature so that the outdoor coil can release that heat to warmer outdoor air.</p>
+<p class="copy-prose">After the refrigerant gives up heat and becomes liquid, an expansion device drops its pressure. The cold mixture returns indoors and the cycle repeats. The refrigerant circulates; it is not normally consumed.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>The indoor unit loads heat onto the refrigerant. The outdoor unit unloads it. Electricity powers the pump that keeps the trip going.</p></aside><div class="concept-points"><p class="concept-points-label">Keep these three ideas</p><ul><li class="concept-card"><strong>Heat moves outward</strong><p>The room cools because thermal energy leaves it, not because cold is manufactured.</p></li><li class="concept-card"><strong>Pressure sets the stage</strong><p>Changing refrigerant pressure changes the temperature at which it boils or condenses.</p></li><li class="concept-card"><strong>The loop has two sides</strong><p>Low pressure serves the indoor coil; high pressure serves the outdoor coil.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="ac-cycle-overview" data-title="The four stations of a cooling cycle" data-copy="{&quot;ariaLabel&quot;:&quot;An interactive four-stage air-conditioning loop connecting the indoor coil, compressor, outdoor coil, and expansion device&quot;,&quot;indoorZone&quot;:&quot;Inside the room&quot;,&quot;outdoorZone&quot;:&quot;Outside&quot;,&quot;heatIn&quot;:&quot;Room heat enters&quot;,&quot;workIn&quot;:&quot;Electric work&quot;,&quot;heatOut&quot;:&quot;Heat leaves outdoors&quot;,&quot;stageControlLabel&quot;:&quot;Inspect a stage of the refrigerant loop&quot;,&quot;caption&quot;:&quot;The dashed line shows refrigerant circulation; energy crosses the system boundary as room heat, electrical work, and outdoor heat.&quot;,&quot;stages&quot;:[{&quot;label&quot;:&quot;Indoor coil&quot;,&quot;state&quot;:&quot;Low pressure · cold mixture&quot;,&quot;detail&quot;:&quot;Refrigerant boils while absorbing heat from room air. The blower returns cooler, drier air to the room.&quot;},{&quot;label&quot;:&quot;Compressor&quot;,&quot;state&quot;:&quot;Low-pressure vapor → hot high-pressure vapor&quot;,&quot;detail&quot;:&quot;Electrical work squeezes the vapor. Its pressure and temperature rise enough for heat to flow to the outdoor air.&quot;},{&quot;label&quot;:&quot;Outdoor coil&quot;,&quot;state&quot;:&quot;Hot vapor → high-pressure liquid&quot;,&quot;detail&quot;:&quot;The refrigerant releases indoor heat plus compressor work. As it cools, it condenses into liquid.&quot;},{&quot;label&quot;:&quot;Expansion device&quot;,&quot;state&quot;:&quot;High pressure → low pressure&quot;,&quot;detail&quot;:&quot;A restriction meters the liquid into the low-pressure side. Part of it flashes into vapor, cooling the mixture before it returns indoors.&quot;}]}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="indoor-heat" aria-labelledby="indoor-heat-title">
+  <div class="copy-block">
+    <p class="section-label">Step 01</p>
+    <h2 id="indoor-heat-title">The indoor coil absorbs heat and moisture</h2>
+    <p class="copy-prose">A fan pulls room air across the evaporator coil. The refrigerant inside the coil is colder than the air, so heat flows into it and makes it boil from a liquid-vapor mixture into vapor.</p>
+<p class="copy-prose">When the coil surface is below the air&#x27;s dew point, water vapor also condenses on the coil and drains away. That is why cooling often makes humid air feel more comfortable.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>The coil is a cold heat exchanger. Air gives up heat; refrigerant receives it.</p></aside><div class="concept-points"><p class="concept-points-label">What changes here</p><ul><li class="concept-card"><strong>Air cools</strong><p>The blower sends room air across a colder metal surface.</p></li><li class="concept-card"><strong>Refrigerant boils</strong><p>Boiling absorbs a large amount of heat without requiring a huge temperature rise.</p></li><li class="concept-card"><strong>Water drains</strong><p>Moisture can condense out of the air when the coil is below the dew point.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="ac-evaporator" data-title="Room heat entering the evaporator" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive evaporator showing warm room air crossing a cold coil while refrigerant boils&quot;,&quot;roomLabel&quot;:&quot;Indoor air path&quot;,&quot;airBefore&quot;:&quot;Warm room air&quot;,&quot;airAfter&quot;:&quot;Cool supply air&quot;,&quot;refrigerantIn&quot;:&quot;Cold liquid-vapor mixture in&quot;,&quot;refrigerantOut&quot;:&quot;Low-pressure vapor out&quot;,&quot;controlLabel&quot;:&quot;Illustrative room heat load&quot;,&quot;lowLabel&quot;:&quot;Lower load&quot;,&quot;highLabel&quot;:&quot;Higher load&quot;,&quot;loadLabel&quot;:&quot;Heat load&quot;,&quot;supplyLabel&quot;:&quot;Illustrative supply air&quot;,&quot;loadUnit&quot;:&quot;%&quot;,&quot;temperatureUnit&quot;:&quot;°C&quot;,&quot;statusLow&quot;:&quot;With a light load, less refrigerant needs to boil to carry room heat away.&quot;,&quot;statusMedium&quot;:&quot;The coil absorbs heat steadily while the blower returns cooler air to the room.&quot;,&quot;statusHigh&quot;:&quot;A larger heat load makes more refrigerant boil, provided airflow and refrigerant flow remain within the system&#x27;s capacity.&quot;,&quot;caption&quot;:&quot;Temperatures are illustrative; real values depend on humidity, airflow, refrigerant, equipment size, and controls.&quot;}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="compression" aria-labelledby="compression-title">
+  <div class="copy-block">
+    <p class="section-label">Step 02</p>
+    <h2 id="compression-title">The compressor makes heat rejection possible</h2>
+    <p class="copy-prose">The refrigerant leaves the indoor coil as low-pressure vapor. The compressor does mechanical work on that vapor, raising both pressure and temperature.</p>
+<p class="copy-prose">This hotter-than-outdoor vapor is essential: heat naturally flows from higher temperature to lower temperature, so the outdoor coil needs refrigerant hot enough to reject heat to the ambient air.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>The compressor does not directly cool the room. It lifts the refrigerant to a temperature where the outdoor air can take the heat.</p></aside><div class="concept-points"><p class="concept-points-label">What the compressor adds</p><ul><li class="concept-card"><strong>Pressure</strong><p>The vapor moves from the low side to the high side of the loop.</p></li><li class="concept-card"><strong>Temperature</strong><p>Compression makes the discharge vapor hotter than outdoor air.</p></li><li class="concept-card"><strong>Work</strong><p>Most of the unit&#x27;s electrical input drives this pressure lift.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="ac-compressor" data-title="Pressure and temperature rise together" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive compressor showing refrigerant vapor becoming denser, higher pressure, and hotter&quot;,&quot;machineLabel&quot;:&quot;Compressor cylinder · conceptual view&quot;,&quot;inletLabel&quot;:&quot;Cool low-pressure vapor&quot;,&quot;outletLabel&quot;:&quot;Hot high-pressure vapor&quot;,&quot;controlLabel&quot;:&quot;Relative compression level&quot;,&quot;lowLabel&quot;:&quot;Gentler lift&quot;,&quot;highLabel&quot;:&quot;Stronger lift&quot;,&quot;pressureLabel&quot;:&quot;Illustrative pressure&quot;,&quot;temperatureLabel&quot;:&quot;Illustrative discharge temperature&quot;,&quot;pressureUnit&quot;:&quot;× inlet&quot;,&quot;temperatureUnit&quot;:&quot;°C&quot;,&quot;statusLow&quot;:&quot;A smaller pressure lift requires less work, but it must still make the refrigerant hot enough to reject heat outdoors.&quot;,&quot;statusMedium&quot;:&quot;Compression raises vapor pressure and temperature; the exact values depend on operating conditions and refrigerant.&quot;,&quot;statusHigh&quot;:&quot;A larger pressure lift raises discharge temperature and compressor work, which is why dirty coils and extreme conditions reduce efficiency.&quot;,&quot;caption&quot;:&quot;This is a conceptual relationship, not a compressor sizing calculator.&quot;}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="outdoor-release" aria-labelledby="outdoor-release-title">
+  <div class="copy-block">
+    <p class="section-label">Step 03</p>
+    <h2 id="outdoor-release-title">The outdoor coil releases more heat than the room lost</h2>
+    <p class="copy-prose">Hot, high-pressure refrigerant flows through the condenser coil while an outdoor fan moves ambient air across it. Heat leaves the refrigerant, and the vapor condenses into high-pressure liquid.</p>
+<p class="copy-prose">The outdoor unit must reject both the heat collected indoors and the electrical work added by the compressor. That is why the air leaving an outdoor unit feels distinctly warm.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>The outdoor unit is the unloading dock: room heat and compressor work both leave there.</p></aside><div class="concept-points"><p class="concept-points-label">Why airflow matters</p><ul><li class="concept-card"><strong>Fan</strong><p>Moving outdoor air carries released heat away from the coil.</p></li><li class="concept-card"><strong>Condensation</strong><p>The refrigerant gives up heat while changing from vapor to liquid.</p></li><li class="concept-card"><strong>Clean path</strong><p>Blocked fins or recirculated hot air force the compressor to work harder.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="ac-condenser" data-title="Clear versus blocked outdoor airflow" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive outdoor condenser comparing clear airflow with blocked airflow&quot;,&quot;outdoorUnitLabel&quot;:&quot;Outdoor heat exchanger&quot;,&quot;equation&quot;:&quot;room heat + compressor work → outdoor air&quot;,&quot;controlLabel&quot;:&quot;Compare the airflow around the outdoor coil&quot;,&quot;clearButton&quot;:&quot;Clear airflow&quot;,&quot;blockedButton&quot;:&quot;Blocked airflow&quot;,&quot;clearTitle&quot;:&quot;Heat leaves efficiently&quot;,&quot;blockedTitle&quot;:&quot;Heat backs up at the coil&quot;,&quot;clearStatus&quot;:&quot;The fan replaces warmed air with cooler ambient air, keeping the refrigerant&#x27;s condensing pressure under control.&quot;,&quot;blockedStatus&quot;:&quot;Restricted or recirculated airflow raises coil temperature and pressure, so the compressor works harder and capacity can fall.&quot;,&quot;caption&quot;:&quot;Keep the outdoor unit&#x27;s intake and discharge clear; exact service clearances come from the manufacturer.&quot;}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="pressure-drop" aria-labelledby="pressure-drop-title">
+  <div class="copy-block">
+    <p class="section-label">Step 04</p>
+    <h2 id="pressure-drop-title">The expansion device resets the refrigerant for indoor cooling</h2>
+    <p class="copy-prose">After condensing, the refrigerant is a warm, high-pressure liquid. A metering device—such as a thermostatic expansion valve, electronic valve, or capillary tube—restricts its flow into the low-pressure side.</p>
+<p class="copy-prose">The sudden pressure drop causes part of the liquid to flash into vapor. That phase change cools the remaining mixture, preparing it to absorb heat again in the indoor coil.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>The valve creates the pressure boundary. Crossing it turns warm high-pressure liquid into a cold low-pressure mixture.</p></aside><div class="concept-points"><p class="concept-points-label">Across the restriction</p><ul><li class="concept-card"><strong>Before</strong><p>High-pressure liquid arrives from the outdoor coil.</p></li><li class="concept-card"><strong>Through</strong><p>The device meters flow and separates the high and low sides.</p></li><li class="concept-card"><strong>After</strong><p>A cold liquid-vapor mixture enters the evaporator.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="ac-expansion" data-title="Inspect both sides of the expansion device" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive expansion-device diagram comparing refrigerant before and after the pressure drop&quot;,&quot;valveLabel&quot;:&quot;Metering restriction&quot;,&quot;upstreamShort&quot;:&quot;From outdoor coil&quot;,&quot;downstreamShort&quot;:&quot;To indoor coil&quot;,&quot;controlLabel&quot;:&quot;Inspect one side of the restriction&quot;,&quot;upstreamButton&quot;:&quot;Before the valve&quot;,&quot;downstreamButton&quot;:&quot;After the valve&quot;,&quot;upstreamTitle&quot;:&quot;Warm liquid on the high side&quot;,&quot;downstreamTitle&quot;:&quot;Cold mixture on the low side&quot;,&quot;highPressure&quot;:&quot;High pressure&quot;,&quot;warmLiquid&quot;:&quot;Mostly liquid&quot;,&quot;lowPressure&quot;:&quot;Low pressure&quot;,&quot;coldMixture&quot;:&quot;Liquid + flash vapor&quot;,&quot;upstreamStatus&quot;:&quot;The refrigerant has released heat outdoors but remains under high pressure.&quot;,&quot;downstreamStatus&quot;:&quot;The pressure drop makes some liquid flash into vapor, cooling the mixture before it enters the evaporator.&quot;,&quot;caption&quot;:&quot;The valve does not create energy; it establishes the low-pressure condition that lets the refrigerant boil at a low temperature.&quot;}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="energy-ledger" aria-labelledby="energy-ledger-title">
+  <div class="copy-block">
+    <p class="section-label">Step 05</p>
+    <h2 id="energy-ledger-title">Cooling capacity can exceed electrical input</h2>
+    <p class="copy-prose">An air conditioner is a heat pump, so its cooling output is not limited to converting electricity into an equal amount of cooling. Electricity powers the transfer of additional heat from the room.</p>
+<p class="copy-prose">If an illustrative unit uses 1 kW of compressor power and has a cooling COP of 3, it removes about 3 kW of heat indoors and rejects about 4 kW outdoors. Real COP changes with equipment, temperatures, humidity, airflow, and part load.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>One unit of electrical work can move several units of room heat. The outdoor side releases the sum of both.</p></aside><div class="concept-points"><p class="concept-points-label">Read the ledger</p><ul><li class="concept-card"><strong>Electrical work</strong><p>This powers the compressor and fans.</p></li><li class="concept-card"><strong>Room heat moved</strong><p>This is the useful cooling effect at the indoor coil.</p></li><li class="concept-card"><strong>Outdoor heat</strong><p>Energy conservation requires this to equal room heat plus electrical work.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="ac-energy-ledger" data-title="An illustrative cooling energy balance" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive air-conditioner energy ledger showing electrical work, room heat moved, and heat rejected outdoors&quot;,&quot;roomHeatShort&quot;:&quot;room heat&quot;,&quot;workShort&quot;:&quot;electric work&quot;,&quot;outdoorHeatShort&quot;:&quot;outdoor heat&quot;,&quot;workLabel&quot;:&quot;Electrical input&quot;,&quot;roomHeatLabel&quot;:&quot;Heat removed indoors&quot;,&quot;outdoorHeatLabel&quot;:&quot;Heat rejected outdoors&quot;,&quot;controlLabel&quot;:&quot;Illustrative compressor power&quot;,&quot;lowLabel&quot;:&quot;0.5 kW&quot;,&quot;highLabel&quot;:&quot;2.0 kW&quot;,&quot;copLabel&quot;:&quot;Illustrative cooling COP&quot;,&quot;copValue&quot;:&quot;3.0&quot;,&quot;powerUnit&quot;:&quot;kW&quot;,&quot;statusTemplate&quot;:&quot;The unit uses {work} to move {room} from the room, so the outdoor coil releases {outdoor} in total.&quot;,&quot;caption&quot;:&quot;The fixed COP is for explanation only; it is not an efficiency claim for a specific product.&quot;}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="closing" aria-labelledby="closing-title">
+  <div class="copy-block closing-copy">
+    <p class="section-label">PUT THE LOOP BACK TOGETHER</p>
+    <h2 id="closing-title">Cooling works when every heat-transfer path stays open</h2>
+    <p class="copy-prose">The refrigeration loop depends on two air paths and one refrigerant path. Indoor air must reach the evaporator, outdoor air must carry heat away from the condenser, and the refrigerant circuit must maintain the intended pressure difference.</p>
+<p class="copy-prose">Controls cycle or modulate the compressor and fans to match load, protect the equipment, and maintain temperature and humidity. A reversible heat pump uses valves to swap the roles of the indoor and outdoor coils during heating.</p>
+    <div class="closing-grid">
+      <div class="starter-checklist">
+        <h3>Practical operating checklist</h3>
+        <ol><li>Use a reasonable setpoint instead of selecting the lowest number and expecting faster cooling.</li><li>Keep filters clean so the indoor coil receives enough airflow.</li><li>Do not block the outdoor unit&#x27;s intake or hot-air discharge.</li><li>Close doors and windows when cooling so the load does not continually refill.</li><li>Call a qualified technician for icing, refrigerant leaks, electrical faults, or persistent loss of capacity.</li></ol>
+      </div>
+      <div class="boundary-map">
+        <h3>The four thermodynamic stations</h3>
+        <ul><li class="scale-card"><strong>Evaporator</strong><span>Where does room heat enter?</span><p>Low-pressure refrigerant boils indoors and absorbs heat.</p></li><li class="scale-card"><strong>Compressor</strong><span>How can heat leave to warmer outdoor air?</span><p>Work raises vapor pressure and temperature.</p></li><li class="scale-card"><strong>Condenser</strong><span>Where does the collected energy leave?</span><p>High-pressure refrigerant condenses and releases heat outdoors.</p></li><li class="scale-card"><strong>Expansion</strong><span>How is the low-pressure side restored?</span><p>A restriction meters flow and creates a cold mixture for the evaporator.</p></li></ul>
+      </div>
+    </div>
+    <blockquote>An air conditioner cools a room by continuously changing refrigerant pressure so heat can enter the loop indoors and leave it outdoors.</blockquote>
+    <p class="source-note">Technical note: this guide shows a simplified cooling-mode vapor-compression cycle. Temperatures, pressures, COP, and component layouts are illustrative; actual systems vary by refrigerant, design, control strategy, and operating conditions.</p>
+  </div>
+</section>
+    </article>
+  </main>
+  <script>
+    window.__VISUAL_I18N__ = {"pauseAll":"Pause all motion","resumeAll":"Resume all motion","pause":"Pause","resume":"Resume","reset":"Reset","waiting":"The visual will load when it enters the viewport.","loading":"Preparing the visual…","error":"The visual could not be displayed. Read the explanation above instead.","figureFallback":"Enable JavaScript to view this interactive explanation.","skipToContent":"Skip to content","languageNavigation":"Languages","overviewLabel":"Cooling-cycle overview","stepLabel":"Step"};
+  </script>
+  <script data-prototype-bundle="runtime">
+(() => {
+  "use strict";
+
+  const ui = Object.freeze(window.__VISUAL_I18N__);
+  const registry = new Map();
+  const figures = new Set();
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const tokens = Object.freeze({
+    ink: "var(--visual-ink, #17333c)",
+    muted: "var(--visual-muted, #60747a)",
+    line: "var(--visual-line, #d8ddd7)",
+    ocean: "var(--visual-ocean, #0f7185)",
+    warm: "var(--visual-warm, #ee9d46)",
+    coral: "var(--visual-coral, #d45f50)",
+    paper: "var(--visual-paper, #f4f1e8)",
+    surface: "var(--visual-surface, #fffdf8)"
+  });
+  let globalPaused = false;
+
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+  const call = (instance, method, value) => {
+    if (instance && typeof instance[method] === "function") instance[method](value);
+  };
+
+  class InteractiveFigure extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
+      this._instance = null;
+      this._mounted = false;
+      this._mounting = false;
+      this._visible = false;
+      this._localPaused = false;
+    }
+
+    connectedCallback() {
+      if (this._connected) return;
+      this._connected = true;
+      figures.add(this);
+      this._shadow.innerHTML = `
+        <style>
+          :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+          .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
+          .status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; }
+          .status[hidden] { display: none; }
+          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
+          .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+          button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+          button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+          @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
+        </style>
+        <div class="frame">
+          <div class="stage"><div class="status" role="status"></div></div>
+          <div class="controls">
+            <span class="title"></span>
+            <button type="button" data-action="pause" aria-pressed="false"></button>
+            <button type="button" data-action="reset"></button>
+          </div>
+        </div>`;
+
+      this._stage = this._shadow.querySelector(".stage");
+      this._status = this._shadow.querySelector(".status");
+      this._title = this._shadow.querySelector(".title");
+      this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
+      this._resetButton = this._shadow.querySelector('[data-action="reset"]');
+      this._copy = JSON.parse(this.dataset.copy || "{}");
+      this._title.textContent = this.dataset.title || "";
+      this._pauseButton.textContent = ui.pause;
+      this._resetButton.textContent = ui.reset;
+      this._setStatus(ui.waiting);
+
+      this._pauseButton.addEventListener("click", () => {
+        this._localPaused = !this._localPaused;
+        this._syncPlayback();
+      });
+      this._resetButton.addEventListener("click", () => {
+        call(this._instance, "reset");
+        this.dispatchEvent(new CustomEvent("demo-reset", { bubbles: true }));
+      });
+
+      this._observer = new IntersectionObserver((entries) => {
+        this._visible = entries[0]?.isIntersecting ?? false;
+        if (this._visible) this._mount();
+        this._syncPlayback();
+      }, { rootMargin: "180px 0px", threshold: .05 });
+      this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      figures.delete(this);
+      this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
+      call(this._instance, "destroy");
+    }
+
+    async _mount() {
+      if (this._mounted || this._mounting) return;
+      const factory = registry.get(this.dataset.demo);
+      if (!factory) return;
+      this._mounting = true;
+      this._setStatus(ui.loading);
+      try {
+        this._instance = await factory({
+          root: this._stage,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
+          copy: this._copy,
+          motion: !reducedMotion.matches,
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._setStatus(message)
+        }) || {};
+        this._mounted = true;
+        this.dataset.state = "mounted";
+        this._status.hidden = true;
+        this._resize();
+        this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
+      } catch {
+        this.dataset.state = "error";
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
+      }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
+    }
+
+    _syncPlayback() {
+      const paused = globalPaused || this._localPaused || !this._visible || reducedMotion.matches;
+      this.dataset.playback = paused ? "paused" : "playing";
+      this._pauseButton?.setAttribute("aria-pressed", String(this._localPaused));
+      if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
+      call(this._instance, paused ? "pause" : "resume");
+    }
+
+    _setStatus(message) {
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
+  }
+
+  window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
+    if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
+    registry.set(id, factory);
+    figures.forEach((figure) => {
+      if (figure.dataset.demo === id && figure._visible) figure._mount();
+    });
+  };
+
+  customElements.define("interactive-figure", InteractiveFigure);
+
+  const globalToggle = document.querySelector("[data-global-motion]");
+  const syncGlobalToggle = () => {
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
+    figures.forEach((figure) => figure._syncPlayback());
+  };
+  globalToggle?.addEventListener("click", () => {
+    globalPaused = !globalPaused;
+    syncGlobalToggle();
+  });
+  reducedMotion.addEventListener("change", syncGlobalToggle);
+  syncGlobalToggle();
+})();
+  </script>
+  <script data-prototype-bundle="demos">
+const escapeHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+registerDemo("ac-cycle-overview", ({ root, copy, motion, tokens }) => {
+  const stageButtons = copy.stages.map((stage, index) => `
+    <button type="button" class="ac-overview-stage-button" data-ac-stage="${index}" aria-pressed="${index === 0}">
+      <span>${escapeHtml(stage.label)}</span>
+      <small>${escapeHtml(stage.state)}</small>
+    </button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .ac-overview-demo { display: grid; gap: 1.25rem; min-height: 27rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: linear-gradient(135deg, color-mix(in srgb, ${tokens.ocean} 9%, ${tokens.surface}), ${tokens.surface} 52%, color-mix(in srgb, ${tokens.warm} 10%, ${tokens.surface})); }
+      .ac-overview-board { position: relative; min-height: 22rem; overflow: hidden; border: 1px solid ${tokens.line}; border-radius: 1.4rem; background: color-mix(in srgb, ${tokens.paper} 28%, ${tokens.surface}); }
+      .ac-overview-zone { position: absolute; z-index: 2; top: .9rem; margin: 0; padding: .35rem .65rem; border-radius: 999px; color: ${tokens.muted}; background: color-mix(in srgb, ${tokens.surface} 88%, transparent); font-size: .72rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+      .ac-overview-zone-indoor { left: .9rem; }
+      .ac-overview-zone-outdoor { right: .9rem; }
+      .ac-overview-svg { position: absolute; inset: 2.4rem 1rem 1rem; width: calc(100% - 2rem); height: calc(100% - 3.4rem); }
+      .ac-overview-pipe { fill: none; stroke: ${tokens.line}; stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
+      .ac-overview-flow { fill: none; stroke: ${tokens.ocean}; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 12 15; animation: ac-overview-dash 1.15s linear infinite; }
+      .ac-overview-node { position: absolute; z-index: 3; display: grid; place-items: center; width: clamp(7.3rem, 21vw, 10rem); min-height: 4.5rem; padding: .75rem; border: 1px solid ${tokens.line}; border-radius: 1rem; color: ${tokens.ink}; background: color-mix(in srgb, ${tokens.surface} 94%, transparent); box-shadow: 0 .8rem 2rem color-mix(in srgb, ${tokens.ink} 9%, transparent); font-weight: 850; text-align: center; }
+      .ac-overview-node[data-node="0"] { left: 6%; bottom: 12%; border-color: ${tokens.ocean}; }
+      .ac-overview-node[data-node="1"] { right: 6%; bottom: 12%; border-color: ${tokens.coral}; }
+      .ac-overview-node[data-node="2"] { right: 6%; top: 18%; border-color: ${tokens.warm}; }
+      .ac-overview-node[data-node="3"] { left: 6%; top: 18%; border-color: ${tokens.ocean}; }
+      .ac-overview-node.is-active { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; transform: translateY(-2px); }
+      .ac-overview-energy { position: absolute; z-index: 4; display: grid; gap: .15rem; color: ${tokens.coral}; font-size: .72rem; font-weight: 850; text-align: center; }
+      .ac-overview-energy span { font-size: 1.25rem; line-height: 1; }
+      .ac-overview-heat-in { left: 29%; bottom: 18%; }
+      .ac-overview-work-in { right: 29%; bottom: 18%; }
+      .ac-overview-heat-out { right: 28%; top: 22%; color: ${tokens.warm}; }
+      .ac-overview-controls { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .6rem; }
+      .ac-overview-stage-button { display: grid; gap: .2rem; min-height: 4.5rem; padding: .65rem; border: 1px solid ${tokens.line}; border-radius: .9rem; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; text-align: left; cursor: pointer; }
+      .ac-overview-stage-button span { font-size: .82rem; font-weight: 850; }
+      .ac-overview-stage-button small { color: ${tokens.muted}; font-size: .68rem; line-height: 1.35; }
+      .ac-overview-stage-button[aria-pressed="true"] { border-color: ${tokens.ocean}; box-shadow: inset 0 0 0 1px ${tokens.ocean}; }
+      .ac-overview-stage-button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+      .ac-overview-detail { min-height: 7rem; padding: 1rem 1.1rem; border-left: .28rem solid ${tokens.ocean}; border-radius: .8rem; background: color-mix(in srgb, ${tokens.paper} 38%, ${tokens.surface}); }
+      .ac-overview-detail strong { display: block; margin-bottom: .45rem; font-size: 1rem; }
+      .ac-overview-detail p { margin: 0; color: ${tokens.muted}; line-height: 1.6; }
+      .ac-overview-caption { margin: 0; color: ${tokens.muted}; font-size: .78rem; text-align: center; }
+      .ac-overview-demo.is-paused .ac-overview-flow { animation-play-state: paused; }
+      @keyframes ac-overview-dash { to { stroke-dashoffset: -54; } }
+      @media (max-width: 680px) {
+        .ac-overview-board { min-height: 25rem; }
+        .ac-overview-node { width: 7rem; min-height: 4rem; font-size: .74rem; }
+        .ac-overview-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .ac-overview-energy { width: 38%; padding: .2rem .3rem; border-radius: .55rem; background: color-mix(in srgb, ${tokens.surface} 84%, transparent); font-size: .58rem; line-height: 1.2; }
+        .ac-overview-energy span { font-size: 1rem; }
+        .ac-overview-heat-in { top: 54%; bottom: auto; left: 4%; }
+        .ac-overview-work-in { top: 57%; right: 4%; bottom: auto; }
+        .ac-overview-heat-out { top: 41%; right: 4%; }
+      }
+    </style>
+    <div class="ac-overview-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="ac-overview-board">
+        <p class="ac-overview-zone ac-overview-zone-indoor">${escapeHtml(copy.indoorZone)}</p>
+        <p class="ac-overview-zone ac-overview-zone-outdoor">${escapeHtml(copy.outdoorZone)}</p>
+        <svg class="ac-overview-svg" viewBox="0 0 720 340" preserveAspectRatio="none" aria-hidden="true">
+          <path class="ac-overview-pipe" d="M150 275 C85 250 85 90 150 65 H570 C635 90 635 250 570 275 Z"></path>
+          <path class="ac-overview-flow" d="M150 275 C85 250 85 90 150 65 H570 C635 90 635 250 570 275 Z"></path>
+        </svg>
+        ${copy.stages.map((stage, index) => `<div class="ac-overview-node${index === 0 ? " is-active" : ""}" data-node="${index}">${escapeHtml(stage.label)}</div>`).join("")}
+        <div class="ac-overview-energy ac-overview-heat-in"><span aria-hidden="true">↑</span>${escapeHtml(copy.heatIn)}</div>
+        <div class="ac-overview-energy ac-overview-work-in"><span aria-hidden="true">↗</span>${escapeHtml(copy.workIn)}</div>
+        <div class="ac-overview-energy ac-overview-heat-out"><span aria-hidden="true">↑</span>${escapeHtml(copy.heatOut)}</div>
+      </div>
+      <div class="ac-overview-controls" aria-label="${escapeHtml(copy.stageControlLabel)}">${stageButtons}</div>
+      <div class="ac-overview-detail" aria-live="polite"><strong></strong><p></p></div>
+      <p class="ac-overview-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".ac-overview-demo");
+  const detailTitle = root.querySelector(".ac-overview-detail strong");
+  const detailBody = root.querySelector(".ac-overview-detail p");
+  const buttons = [...root.querySelectorAll("[data-ac-stage]")];
+  const nodes = [...root.querySelectorAll("[data-node]")];
+  const select = (index) => {
+    const stage = copy.stages[index];
+    detailTitle.textContent = stage.label;
+    detailBody.textContent = stage.detail;
+    scene.dataset.stage = String(index);
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    nodes.forEach((node, nodeIndex) => node.classList.toggle("is-active", nodeIndex === index));
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.acStage))));
+  select(0);
+
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("ac-evaporator", ({ root, copy, motion, tokens }) => {
+  const bubbles = Array.from({ length: 10 }, (_, index) => `<span style="--ac-bubble-index:${index}"></span>`).join("");
+  root.innerHTML = `
+    <style>
+      .ac-evaporator-demo { --ac-load: .6; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(15rem, .8fr); gap: 1.5rem; align-items: center; min-height: 26rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: linear-gradient(145deg, color-mix(in srgb, ${tokens.warm} 10%, ${tokens.surface}), ${tokens.surface} 52%, color-mix(in srgb, ${tokens.ocean} 12%, ${tokens.surface})); }
+      .ac-evaporator-room { position: relative; min-height: 19rem; overflow: hidden; border: 1px solid ${tokens.line}; border-radius: 1.35rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); }
+      .ac-evaporator-room-label { position: absolute; top: 1rem; left: 1rem; margin: 0; color: ${tokens.muted}; font-size: .72rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+      .ac-evaporator-air { position: absolute; display: grid; gap: .2rem; align-items: center; color: ${tokens.muted}; font-size: .72rem; font-weight: 800; text-align: center; }
+      .ac-evaporator-air::before { display: block; font-size: 2.5rem; line-height: 1; content: "→"; }
+      .ac-evaporator-air-warm { top: 40%; left: 4%; color: ${tokens.coral}; }
+      .ac-evaporator-air-cool { top: 40%; right: 4%; color: ${tokens.ocean}; opacity: calc(.45 + var(--ac-load) * .55); }
+      .ac-evaporator-coil { position: absolute; top: 20%; bottom: 18%; left: 50%; width: 7.5rem; transform: translateX(-50%); }
+      .ac-evaporator-coil-line { position: absolute; inset: 0; border: .75rem solid color-mix(in srgb, ${tokens.ocean} 72%, ${tokens.surface}); border-right-width: 1.2rem; border-left-width: 1.2rem; border-radius: 2.2rem; box-shadow: inset 0 0 0 .2rem ${tokens.surface}, 0 0 2rem color-mix(in srgb, ${tokens.ocean} 20%, transparent); }
+      .ac-evaporator-bubbles { position: absolute; inset: .9rem 1.25rem; overflow: hidden; border-radius: 1rem; }
+      .ac-evaporator-bubbles span { position: absolute; bottom: -1rem; left: calc(8% + var(--ac-bubble-index) * 9%); width: calc(.35rem + var(--ac-load) * .45rem); aspect-ratio: 1; border: 2px solid ${tokens.surface}; border-radius: 50%; opacity: calc(.25 + var(--ac-load) * .65); animation: ac-evaporator-boil calc(2.8s - var(--ac-load) * 1.2s) linear infinite; animation-delay: calc(var(--ac-bubble-index) * -.23s); }
+      .ac-evaporator-refrigerant-label { position: absolute; right: 1rem; bottom: 1rem; left: 1rem; display: flex; justify-content: space-between; gap: 1rem; color: ${tokens.muted}; font-size: .68rem; font-weight: 800; }
+      .ac-evaporator-panel { display: grid; gap: .9rem; padding: 1.15rem; border: 1px solid ${tokens.line}; border-radius: 1.2rem; background: color-mix(in srgb, ${tokens.surface} 92%, transparent); }
+      .ac-evaporator-panel label { font-weight: 850; }
+      .ac-evaporator-panel input { width: 100%; accent-color: ${tokens.ocean}; }
+      .ac-evaporator-range-labels { display: flex; justify-content: space-between; color: ${tokens.muted}; font-size: .72rem; }
+      .ac-evaporator-readouts { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem; }
+      .ac-evaporator-readout { padding: .75rem; border: 1px solid ${tokens.line}; border-radius: .9rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); }
+      .ac-evaporator-readout small { display: block; margin-bottom: .3rem; color: ${tokens.muted}; font-size: .67rem; }
+      .ac-evaporator-readout output { font-size: 1.25rem; font-weight: 900; }
+      .ac-evaporator-message { min-height: 3.5rem; margin: 0; color: ${tokens.ink}; line-height: 1.55; }
+      .ac-evaporator-caption { margin: 0; color: ${tokens.muted}; font-size: .76rem; line-height: 1.5; }
+      .ac-evaporator-demo.is-paused .ac-evaporator-bubbles span { animation-play-state: paused; }
+      @keyframes ac-evaporator-boil { from { transform: translateY(0) scale(.7); } to { transform: translateY(-12rem) scale(1.2); } }
+      @media (max-width: 700px) { .ac-evaporator-demo { grid-template-columns: 1fr; } .ac-evaporator-room { min-height: 18rem; } .ac-evaporator-air::before { font-size: 1.8rem; } }
+    </style>
+    <div class="ac-evaporator-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="ac-evaporator-room" aria-hidden="true">
+        <p class="ac-evaporator-room-label">${escapeHtml(copy.roomLabel)}</p>
+        <div class="ac-evaporator-air ac-evaporator-air-warm">${escapeHtml(copy.airBefore)}</div>
+        <div class="ac-evaporator-coil"><div class="ac-evaporator-coil-line"></div><div class="ac-evaporator-bubbles">${bubbles}</div></div>
+        <div class="ac-evaporator-air ac-evaporator-air-cool">${escapeHtml(copy.airAfter)}</div>
+        <div class="ac-evaporator-refrigerant-label"><span>${escapeHtml(copy.refrigerantIn)}</span><span>${escapeHtml(copy.refrigerantOut)}</span></div>
+      </div>
+      <div class="ac-evaporator-panel">
+        <label for="ac-evaporator-load">${escapeHtml(copy.controlLabel)}</label>
+        <input id="ac-evaporator-load" type="range" min="0" max="100" value="60" aria-label="${escapeHtml(copy.controlLabel)}">
+        <div class="ac-evaporator-range-labels"><span>${escapeHtml(copy.lowLabel)}</span><span>${escapeHtml(copy.highLabel)}</span></div>
+        <div class="ac-evaporator-readouts">
+          <div class="ac-evaporator-readout"><small>${escapeHtml(copy.loadLabel)}</small><output data-ac-load></output></div>
+          <div class="ac-evaporator-readout"><small>${escapeHtml(copy.supplyLabel)}</small><output data-ac-supply></output></div>
+        </div>
+        <p class="ac-evaporator-message" aria-live="polite"></p>
+        <p class="ac-evaporator-caption">${escapeHtml(copy.caption)}</p>
+      </div>
+    </div>`;
+
+  const scene = root.querySelector(".ac-evaporator-demo");
+  const range = root.querySelector("#ac-evaporator-load");
+  const loadOutput = root.querySelector("[data-ac-load]");
+  const supplyOutput = root.querySelector("[data-ac-supply]");
+  const message = root.querySelector(".ac-evaporator-message");
+  const update = () => {
+    const value = Number(range.value);
+    const supplyTemperature = 24 - Math.round(value * .08);
+    scene.style.setProperty("--ac-load", String(value / 100));
+    scene.dataset.load = String(value);
+    loadOutput.textContent = `${value}${copy.loadUnit}`;
+    supplyOutput.textContent = `${supplyTemperature}${copy.temperatureUnit}`;
+    message.textContent = value < 34 ? copy.statusLow : value < 68 ? copy.statusMedium : copy.statusHigh;
+  };
+  range.addEventListener("input", update);
+  update();
+
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => { range.value = "60"; update(); },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("ac-compressor", ({ root, copy, motion, tokens }) => {
+  const molecules = Array.from({ length: 20 }, (_, index) => `<span style="--ac-molecule-index:${index}"></span>`).join("");
+  root.innerHTML = `
+    <style>
+      .ac-compressor-demo { --ac-compression: .5; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(15rem, .85fr); gap: 1.5rem; align-items: center; min-height: 26rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: linear-gradient(145deg, color-mix(in srgb, ${tokens.ocean} 10%, ${tokens.surface}), ${tokens.surface} 46%, color-mix(in srgb, ${tokens.coral} 12%, ${tokens.surface})); }
+      .ac-compressor-machine { position: relative; min-height: 18rem; overflow: hidden; border: 1px solid ${tokens.line}; border-radius: 1.35rem; background: color-mix(in srgb, ${tokens.paper} 30%, ${tokens.surface}); }
+      .ac-compressor-label { position: absolute; top: 1rem; left: 1rem; margin: 0; color: ${tokens.muted}; font-size: .72rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+      .ac-compressor-cylinder { position: absolute; inset: 25% 8% 20%; overflow: hidden; border: .4rem solid ${tokens.ink}; border-radius: 1.2rem; background: color-mix(in srgb, ${tokens.coral} calc(8% + var(--ac-compression) * 17%), ${tokens.surface}); box-shadow: inset 0 0 2.4rem color-mix(in srgb, ${tokens.coral} calc(var(--ac-compression) * 22%), transparent); transition: background .2s ease, box-shadow .2s ease; }
+      .ac-compressor-piston { position: absolute; z-index: 2; top: 0; bottom: 0; left: calc(7% + var(--ac-compression) * 34%); width: 1.1rem; background: ${tokens.ink}; box-shadow: -.5rem 0 0 color-mix(in srgb, ${tokens.ink} 35%, ${tokens.surface}); transition: left .2s ease; }
+      .ac-compressor-gas { position: absolute; top: .8rem; right: .8rem; bottom: .8rem; left: calc(12% + var(--ac-compression) * 34%); display: grid; grid-template-columns: repeat(5, 1fr); gap: .35rem; align-content: space-around; padding: .5rem; transition: left .2s ease; }
+      .ac-compressor-gas span { width: .55rem; aspect-ratio: 1; border-radius: 50%; background: ${tokens.coral}; box-shadow: 0 0 .8rem color-mix(in srgb, ${tokens.coral} 60%, transparent); animation: ac-compressor-jitter calc(1s - var(--ac-compression) * .45s) ease-in-out infinite alternate; animation-delay: calc(var(--ac-molecule-index) * -.04s); }
+      .ac-compressor-flow-labels { position: absolute; right: 9%; bottom: 9%; left: 9%; display: flex; justify-content: space-between; gap: 1rem; color: ${tokens.muted}; font-size: .7rem; font-weight: 800; }
+      .ac-compressor-flow-labels span:last-child { color: ${tokens.coral}; text-align: right; }
+      .ac-compressor-panel { display: grid; gap: .9rem; padding: 1.15rem; border: 1px solid ${tokens.line}; border-radius: 1.2rem; background: color-mix(in srgb, ${tokens.surface} 92%, transparent); }
+      .ac-compressor-panel label { font-weight: 850; }
+      .ac-compressor-panel input { width: 100%; accent-color: ${tokens.coral}; }
+      .ac-compressor-range-labels { display: flex; justify-content: space-between; color: ${tokens.muted}; font-size: .72rem; }
+      .ac-compressor-readouts { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem; }
+      .ac-compressor-readout { padding: .75rem; border: 1px solid ${tokens.line}; border-radius: .9rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); }
+      .ac-compressor-readout small { display: block; margin-bottom: .3rem; color: ${tokens.muted}; font-size: .67rem; }
+      .ac-compressor-readout output { color: ${tokens.coral}; font-size: 1.25rem; font-weight: 900; }
+      .ac-compressor-message { min-height: 3.5rem; margin: 0; color: ${tokens.ink}; line-height: 1.55; }
+      .ac-compressor-caption { margin: 0; color: ${tokens.muted}; font-size: .76rem; line-height: 1.5; }
+      .ac-compressor-demo.is-paused .ac-compressor-gas span { animation-play-state: paused; }
+      @keyframes ac-compressor-jitter { from { transform: translate(-2px, -2px); } to { transform: translate(3px, 2px); } }
+      @media (max-width: 700px) { .ac-compressor-demo { grid-template-columns: 1fr; } .ac-compressor-machine { min-height: 17rem; } }
+    </style>
+    <div class="ac-compressor-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="ac-compressor-machine" aria-hidden="true">
+        <p class="ac-compressor-label">${escapeHtml(copy.machineLabel)}</p>
+        <div class="ac-compressor-cylinder"><div class="ac-compressor-piston"></div><div class="ac-compressor-gas">${molecules}</div></div>
+        <div class="ac-compressor-flow-labels"><span>${escapeHtml(copy.inletLabel)}</span><span>${escapeHtml(copy.outletLabel)}</span></div>
+      </div>
+      <div class="ac-compressor-panel">
+        <label for="ac-compressor-level">${escapeHtml(copy.controlLabel)}</label>
+        <input id="ac-compressor-level" type="range" min="1" max="5" value="3" aria-label="${escapeHtml(copy.controlLabel)}">
+        <div class="ac-compressor-range-labels"><span>${escapeHtml(copy.lowLabel)}</span><span>${escapeHtml(copy.highLabel)}</span></div>
+        <div class="ac-compressor-readouts">
+          <div class="ac-compressor-readout"><small>${escapeHtml(copy.pressureLabel)}</small><output data-ac-pressure></output></div>
+          <div class="ac-compressor-readout"><small>${escapeHtml(copy.temperatureLabel)}</small><output data-ac-temperature></output></div>
+        </div>
+        <p class="ac-compressor-message" aria-live="polite"></p>
+        <p class="ac-compressor-caption">${escapeHtml(copy.caption)}</p>
+      </div>
+    </div>`;
+
+  const scene = root.querySelector(".ac-compressor-demo");
+  const range = root.querySelector("#ac-compressor-level");
+  const pressureOutput = root.querySelector("[data-ac-pressure]");
+  const temperatureOutput = root.querySelector("[data-ac-temperature]");
+  const message = root.querySelector(".ac-compressor-message");
+  const update = () => {
+    const level = Number(range.value);
+    const pressure = (1 + level * .8).toFixed(1);
+    const temperature = 35 + level * 14;
+    scene.style.setProperty("--ac-compression", String((level - 1) / 4));
+    scene.dataset.compression = String(level);
+    pressureOutput.textContent = `${pressure}${copy.pressureUnit}`;
+    temperatureOutput.textContent = `${temperature}${copy.temperatureUnit}`;
+    message.textContent = level < 3 ? copy.statusLow : level === 3 ? copy.statusMedium : copy.statusHigh;
+  };
+  range.addEventListener("input", update);
+  update();
+
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => { range.value = "3"; update(); },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("ac-condenser", ({ root, copy, motion, tokens }) => {
+  root.innerHTML = `
+    <style>
+      .ac-condenser-demo { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(15rem, .85fr); gap: 1.5rem; align-items: center; min-height: 26rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: linear-gradient(145deg, ${tokens.surface}, color-mix(in srgb, ${tokens.warm} 14%, ${tokens.surface})); }
+      .ac-condenser-unit { position: relative; min-height: 19rem; overflow: hidden; border: 1px solid ${tokens.line}; border-radius: 1.35rem; background: color-mix(in srgb, ${tokens.paper} 32%, ${tokens.surface}); }
+      .ac-condenser-unit-label { position: absolute; top: 1rem; left: 1rem; margin: 0; color: ${tokens.muted}; font-size: .72rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+      .ac-condenser-coil { position: absolute; top: 22%; right: 12%; bottom: 18%; left: 12%; border: .7rem double ${tokens.coral}; border-radius: 1.5rem; background: repeating-linear-gradient(90deg, transparent 0 1rem, color-mix(in srgb, ${tokens.coral} 28%, transparent) 1rem 1.15rem); box-shadow: 0 0 2.5rem color-mix(in srgb, ${tokens.coral} 22%, transparent); }
+      .ac-condenser-fan { position: absolute; top: 50%; left: 50%; width: 7rem; aspect-ratio: 1; transform: translate(-50%, -50%); border: .4rem solid ${tokens.ink}; border-radius: 50%; background: ${tokens.surface}; }
+      .ac-condenser-blade { position: absolute; inset: 13%; animation: ac-condenser-spin 1.35s linear infinite; }
+      .ac-condenser-blade::before, .ac-condenser-blade::after { position: absolute; inset: 40% 2%; border-radius: 999px; background: ${tokens.ocean}; content: ""; }
+      .ac-condenser-blade::after { transform: rotate(90deg); }
+      .ac-condenser-hub { position: absolute; inset: 39%; z-index: 2; border-radius: 50%; background: ${tokens.ink}; }
+      .ac-condenser-heat { position: absolute; top: 42%; color: ${tokens.coral}; font-size: 2rem; font-weight: 900; animation: ac-condenser-pulse 1.2s ease-in-out infinite alternate; }
+      .ac-condenser-heat-left { left: 3%; }
+      .ac-condenser-heat-right { right: 3%; }
+      .ac-condenser-equation { position: absolute; right: 1rem; bottom: .8rem; left: 1rem; margin: 0; color: ${tokens.muted}; font-size: .72rem; font-weight: 800; text-align: center; }
+      .ac-condenser-panel { display: grid; gap: .9rem; padding: 1.15rem; border: 1px solid ${tokens.line}; border-radius: 1.2rem; background: color-mix(in srgb, ${tokens.surface} 92%, transparent); }
+      .ac-condenser-control-label { margin: 0; font-weight: 850; }
+      .ac-condenser-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+      .ac-condenser-buttons button { min-height: 3rem; padding: .65rem; border: 1px solid ${tokens.line}; border-radius: .85rem; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-weight: 850; cursor: pointer; }
+      .ac-condenser-buttons button[aria-pressed="true"] { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
+      .ac-condenser-buttons button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+      .ac-condenser-state { padding: 1rem; border: 1px solid ${tokens.line}; border-radius: .9rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); }
+      .ac-condenser-state strong { display: block; margin-bottom: .45rem; }
+      .ac-condenser-state p { min-height: 4.6rem; margin: 0; color: ${tokens.muted}; line-height: 1.55; }
+      .ac-condenser-caption { margin: 0; color: ${tokens.muted}; font-size: .76rem; line-height: 1.5; }
+      .ac-condenser-demo.is-blocked .ac-condenser-blade { animation-duration: 4.5s; }
+      .ac-condenser-demo.is-blocked .ac-condenser-heat { opacity: .35; animation-duration: 2.6s; }
+      .ac-condenser-demo.is-blocked .ac-condenser-coil { box-shadow: 0 0 3.5rem color-mix(in srgb, ${tokens.coral} 48%, transparent); }
+      .ac-condenser-demo.is-paused .ac-condenser-blade, .ac-condenser-demo.is-paused .ac-condenser-heat { animation-play-state: paused; }
+      @keyframes ac-condenser-spin { to { transform: rotate(360deg); } }
+      @keyframes ac-condenser-pulse { to { transform: translateX(5px); opacity: .55; } }
+      @media (max-width: 700px) { .ac-condenser-demo { grid-template-columns: 1fr; } .ac-condenser-unit { min-height: 18rem; } }
+    </style>
+    <div class="ac-condenser-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="ac-condenser-unit" aria-hidden="true">
+        <p class="ac-condenser-unit-label">${escapeHtml(copy.outdoorUnitLabel)}</p>
+        <div class="ac-condenser-coil"></div>
+        <div class="ac-condenser-fan"><div class="ac-condenser-blade"></div><div class="ac-condenser-hub"></div></div>
+        <span class="ac-condenser-heat ac-condenser-heat-left">↗</span><span class="ac-condenser-heat ac-condenser-heat-right">↗</span>
+        <p class="ac-condenser-equation">${escapeHtml(copy.equation)}</p>
+      </div>
+      <div class="ac-condenser-panel">
+        <p class="ac-condenser-control-label">${escapeHtml(copy.controlLabel)}</p>
+        <div class="ac-condenser-buttons">
+          <button type="button" data-ac-airflow="clear" aria-pressed="true">${escapeHtml(copy.clearButton)}</button>
+          <button type="button" data-ac-airflow="blocked" aria-pressed="false">${escapeHtml(copy.blockedButton)}</button>
+        </div>
+        <div class="ac-condenser-state" aria-live="polite"><strong></strong><p></p></div>
+        <p class="ac-condenser-caption">${escapeHtml(copy.caption)}</p>
+      </div>
+    </div>`;
+
+  const scene = root.querySelector(".ac-condenser-demo");
+  const title = root.querySelector(".ac-condenser-state strong");
+  const message = root.querySelector(".ac-condenser-state p");
+  const buttons = [...root.querySelectorAll("[data-ac-airflow]")];
+  const select = (state) => {
+    const blocked = state === "blocked";
+    scene.classList.toggle("is-blocked", blocked);
+    scene.dataset.airflow = state;
+    title.textContent = blocked ? copy.blockedTitle : copy.clearTitle;
+    message.textContent = blocked ? copy.blockedStatus : copy.clearStatus;
+    buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.acAirflow === state)));
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(button.dataset.acAirflow)));
+  select("clear");
+
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select("clear"),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("ac-expansion", ({ root, copy, motion, tokens }) => {
+  const particles = Array.from({ length: 14 }, (_, index) => `<span style="--ac-particle-index:${index};--ac-particle-row:${index % 4}"></span>`).join("");
+  root.innerHTML = `
+    <style>
+      .ac-expansion-demo { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(15rem, .85fr); gap: 1.5rem; align-items: center; min-height: 26rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: linear-gradient(145deg, color-mix(in srgb, ${tokens.warm} 10%, ${tokens.surface}), ${tokens.surface} 48%, color-mix(in srgb, ${tokens.ocean} 14%, ${tokens.surface})); }
+      .ac-expansion-pipe-map { position: relative; min-height: 18rem; overflow: hidden; border: 1px solid ${tokens.line}; border-radius: 1.35rem; background: color-mix(in srgb, ${tokens.paper} 30%, ${tokens.surface}); }
+      .ac-expansion-label { position: absolute; top: 1rem; left: 1rem; margin: 0; color: ${tokens.muted}; font-size: .72rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+      .ac-expansion-pipe { position: absolute; top: 48%; right: 7%; left: 7%; height: 4.2rem; transform: translateY(-50%); border: .35rem solid ${tokens.ink}; border-radius: 999px; background: linear-gradient(90deg, color-mix(in srgb, ${tokens.warm} 45%, ${tokens.surface}) 0 48%, color-mix(in srgb, ${tokens.ocean} 42%, ${tokens.surface}) 52% 100%); }
+      .ac-expansion-valve { position: absolute; z-index: 3; top: 50%; left: 50%; width: 4rem; aspect-ratio: 1; transform: translate(-50%, -50%) rotate(45deg); border: .35rem solid ${tokens.ink}; border-radius: .75rem; background: ${tokens.surface}; }
+      .ac-expansion-valve::after { position: absolute; inset: 33%; border-radius: 50%; background: ${tokens.coral}; content: ""; }
+      .ac-expansion-particles { position: absolute; inset: .4rem; overflow: hidden; border-radius: 999px; }
+      .ac-expansion-particles span { position: absolute; top: calc(14% + var(--ac-particle-row) * 22%); left: -1rem; width: .55rem; aspect-ratio: 1; border-radius: 50%; background: ${tokens.ocean}; animation: ac-expansion-flow 2.4s linear infinite; animation-delay: calc(var(--ac-particle-index) * -.18s); }
+      .ac-expansion-particles span:nth-child(-n+7) { background: ${tokens.warm}; }
+      .ac-expansion-side-labels { position: absolute; right: 8%; bottom: 16%; left: 8%; display: flex; justify-content: space-between; gap: 2rem; color: ${tokens.muted}; font-size: .7rem; font-weight: 850; }
+      .ac-expansion-side-labels span:last-child { color: ${tokens.ocean}; text-align: right; }
+      .ac-expansion-panel { display: grid; gap: .9rem; padding: 1.15rem; border: 1px solid ${tokens.line}; border-radius: 1.2rem; background: color-mix(in srgb, ${tokens.surface} 92%, transparent); }
+      .ac-expansion-control-label { margin: 0; font-weight: 850; }
+      .ac-expansion-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+      .ac-expansion-buttons button { min-height: 3rem; padding: .65rem; border: 1px solid ${tokens.line}; border-radius: .85rem; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-weight: 850; cursor: pointer; }
+      .ac-expansion-buttons button[aria-pressed="true"] { color: ${tokens.surface}; border-color: ${tokens.ocean}; background: ${tokens.ocean}; }
+      .ac-expansion-buttons button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+      .ac-expansion-state { display: grid; gap: .55rem; min-height: 9.5rem; padding: 1rem; border: 1px solid ${tokens.line}; border-radius: .9rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); }
+      .ac-expansion-state strong { font-size: 1.05rem; }
+      .ac-expansion-metrics { display: flex; flex-wrap: wrap; gap: .45rem; }
+      .ac-expansion-metrics span { padding: .3rem .55rem; border-radius: 999px; color: ${tokens.muted}; background: ${tokens.surface}; font-size: .7rem; font-weight: 800; }
+      .ac-expansion-state p { margin: 0; color: ${tokens.muted}; line-height: 1.55; }
+      .ac-expansion-caption { margin: 0; color: ${tokens.muted}; font-size: .76rem; line-height: 1.5; }
+      .ac-expansion-demo[data-side="downstream"] .ac-expansion-pipe-map { box-shadow: inset -10rem 0 4rem color-mix(in srgb, ${tokens.ocean} 10%, transparent); }
+      .ac-expansion-demo.is-paused .ac-expansion-particles span { animation-play-state: paused; }
+      @keyframes ac-expansion-flow { to { transform: translateX(34rem); } }
+      @media (max-width: 700px) { .ac-expansion-demo { grid-template-columns: 1fr; } .ac-expansion-pipe-map { min-height: 17rem; } @keyframes ac-expansion-flow { to { transform: translateX(25rem); } } }
+    </style>
+    <div class="ac-expansion-demo${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="ac-expansion-pipe-map" aria-hidden="true">
+        <p class="ac-expansion-label">${escapeHtml(copy.valveLabel)}</p>
+        <div class="ac-expansion-pipe"><div class="ac-expansion-particles">${particles}</div></div>
+        <div class="ac-expansion-valve"></div>
+        <div class="ac-expansion-side-labels"><span>${escapeHtml(copy.upstreamShort)}</span><span>${escapeHtml(copy.downstreamShort)}</span></div>
+      </div>
+      <div class="ac-expansion-panel">
+        <p class="ac-expansion-control-label">${escapeHtml(copy.controlLabel)}</p>
+        <div class="ac-expansion-buttons">
+          <button type="button" data-ac-side="upstream" aria-pressed="true">${escapeHtml(copy.upstreamButton)}</button>
+          <button type="button" data-ac-side="downstream" aria-pressed="false">${escapeHtml(copy.downstreamButton)}</button>
+        </div>
+        <div class="ac-expansion-state" aria-live="polite"><strong></strong><div class="ac-expansion-metrics"></div><p></p></div>
+        <p class="ac-expansion-caption">${escapeHtml(copy.caption)}</p>
+      </div>
+    </div>`;
+
+  const scene = root.querySelector(".ac-expansion-demo");
+  const title = root.querySelector(".ac-expansion-state strong");
+  const metrics = root.querySelector(".ac-expansion-metrics");
+  const message = root.querySelector(".ac-expansion-state p");
+  const buttons = [...root.querySelectorAll("[data-ac-side]")];
+  const select = (side) => {
+    const downstream = side === "downstream";
+    scene.dataset.side = side;
+    title.textContent = downstream ? copy.downstreamTitle : copy.upstreamTitle;
+    metrics.innerHTML = downstream
+      ? `<span>${escapeHtml(copy.lowPressure)}</span><span>${escapeHtml(copy.coldMixture)}</span>`
+      : `<span>${escapeHtml(copy.highPressure)}</span><span>${escapeHtml(copy.warmLiquid)}</span>`;
+    message.textContent = downstream ? copy.downstreamStatus : copy.upstreamStatus;
+    buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.acSide === side)));
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(button.dataset.acSide)));
+  select("upstream");
+
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select("upstream"),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("ac-energy-ledger", ({ root, copy, tokens }) => {
+  root.innerHTML = `
+    <style>
+      .ac-ledger-demo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(16rem, .9fr); gap: 1.5rem; align-items: center; min-height: 26rem; padding: clamp(1rem, 4vw, 2.5rem); color: ${tokens.ink}; background: linear-gradient(145deg, color-mix(in srgb, ${tokens.ocean} 10%, ${tokens.surface}), ${tokens.surface} 52%, color-mix(in srgb, ${tokens.warm} 12%, ${tokens.surface})); }
+      .ac-ledger-chart { display: grid; gap: 1rem; min-height: 19rem; align-content: center; padding: clamp(1rem, 4vw, 2rem); border: 1px solid ${tokens.line}; border-radius: 1.35rem; background: color-mix(in srgb, ${tokens.paper} 30%, ${tokens.surface}); }
+      .ac-ledger-equation { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem; margin: 0 0 .5rem; font-weight: 900; text-align: center; }
+      .ac-ledger-equation span { padding: .5rem .7rem; border-radius: .75rem; background: ${tokens.surface}; }
+      .ac-ledger-equation b { color: ${tokens.coral}; font-size: 1.3rem; }
+      .ac-ledger-row { display: grid; grid-template-columns: 8rem minmax(0, 1fr) 4rem; gap: .65rem; align-items: center; }
+      .ac-ledger-row-label { color: ${tokens.muted}; font-size: .75rem; font-weight: 850; }
+      .ac-ledger-track { height: 1.15rem; overflow: hidden; border-radius: 999px; background: color-mix(in srgb, ${tokens.line} 70%, ${tokens.surface}); }
+      .ac-ledger-fill { display: block; width: 0; height: 100%; border-radius: inherit; transition: width .2s ease; }
+      .ac-ledger-fill-work { background: ${tokens.coral}; }
+      .ac-ledger-fill-room { background: ${tokens.ocean}; }
+      .ac-ledger-fill-outdoor { background: ${tokens.warm}; }
+      .ac-ledger-value { font-size: .78rem; font-weight: 900; text-align: right; }
+      .ac-ledger-panel { display: grid; gap: .9rem; padding: 1.15rem; border: 1px solid ${tokens.line}; border-radius: 1.2rem; background: color-mix(in srgb, ${tokens.surface} 92%, transparent); }
+      .ac-ledger-panel label { font-weight: 850; }
+      .ac-ledger-panel input { width: 100%; accent-color: ${tokens.coral}; }
+      .ac-ledger-range-labels { display: flex; justify-content: space-between; color: ${tokens.muted}; font-size: .72rem; }
+      .ac-ledger-cop { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .8rem; border: 1px solid ${tokens.line}; border-radius: .9rem; background: color-mix(in srgb, ${tokens.paper} 35%, ${tokens.surface}); }
+      .ac-ledger-cop strong { color: ${tokens.ocean}; font-size: 1.3rem; }
+      .ac-ledger-message { min-height: 4.8rem; margin: 0; color: ${tokens.ink}; line-height: 1.55; }
+      .ac-ledger-caption { margin: 0; color: ${tokens.muted}; font-size: .76rem; line-height: 1.5; }
+      @media (max-width: 700px) { .ac-ledger-demo { grid-template-columns: 1fr; } .ac-ledger-row { grid-template-columns: 6.5rem minmax(0, 1fr) 3.5rem; } }
+    </style>
+    <div class="ac-ledger-demo" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="ac-ledger-chart">
+        <p class="ac-ledger-equation"><span>${escapeHtml(copy.roomHeatShort)}</span><b>+</b><span>${escapeHtml(copy.workShort)}</span><b>=</b><span>${escapeHtml(copy.outdoorHeatShort)}</span></p>
+        <div class="ac-ledger-row"><span class="ac-ledger-row-label">${escapeHtml(copy.workLabel)}</span><span class="ac-ledger-track"><span class="ac-ledger-fill ac-ledger-fill-work"></span></span><output class="ac-ledger-value" data-ac-work></output></div>
+        <div class="ac-ledger-row"><span class="ac-ledger-row-label">${escapeHtml(copy.roomHeatLabel)}</span><span class="ac-ledger-track"><span class="ac-ledger-fill ac-ledger-fill-room"></span></span><output class="ac-ledger-value" data-ac-room></output></div>
+        <div class="ac-ledger-row"><span class="ac-ledger-row-label">${escapeHtml(copy.outdoorHeatLabel)}</span><span class="ac-ledger-track"><span class="ac-ledger-fill ac-ledger-fill-outdoor"></span></span><output class="ac-ledger-value" data-ac-outdoor></output></div>
+      </div>
+      <div class="ac-ledger-panel">
+        <label for="ac-ledger-power">${escapeHtml(copy.controlLabel)}</label>
+        <input id="ac-ledger-power" type="range" min="5" max="20" step="5" value="10" aria-label="${escapeHtml(copy.controlLabel)}">
+        <div class="ac-ledger-range-labels"><span>${escapeHtml(copy.lowLabel)}</span><span>${escapeHtml(copy.highLabel)}</span></div>
+        <div class="ac-ledger-cop"><span>${escapeHtml(copy.copLabel)}</span><strong>${escapeHtml(copy.copValue)}</strong></div>
+        <p class="ac-ledger-message" aria-live="polite"></p>
+        <p class="ac-ledger-caption">${escapeHtml(copy.caption)}</p>
+      </div>
+    </div>`;
+
+  const scene = root.querySelector(".ac-ledger-demo");
+  const range = root.querySelector("#ac-ledger-power");
+  const workFill = root.querySelector(".ac-ledger-fill-work");
+  const roomFill = root.querySelector(".ac-ledger-fill-room");
+  const outdoorFill = root.querySelector(".ac-ledger-fill-outdoor");
+  const workOutput = root.querySelector("[data-ac-work]");
+  const roomOutput = root.querySelector("[data-ac-room]");
+  const outdoorOutput = root.querySelector("[data-ac-outdoor]");
+  const message = root.querySelector(".ac-ledger-message");
+  const format = (value) => `${value.toFixed(1)} ${copy.powerUnit}`;
+  const update = () => {
+    const work = Number(range.value) / 10;
+    const roomHeat = work * 3;
+    const outdoorHeat = roomHeat + work;
+    scene.dataset.power = String(work);
+    workFill.style.width = `${work / 2 * 25}%`;
+    roomFill.style.width = `${roomHeat / 6 * 75}%`;
+    outdoorFill.style.width = `${outdoorHeat / 8 * 100}%`;
+    workOutput.textContent = format(work);
+    roomOutput.textContent = format(roomHeat);
+    outdoorOutput.textContent = format(outdoorHeat);
+    message.textContent = copy.statusTemplate
+      .replace("{room}", format(roomHeat))
+      .replace("{work}", format(work))
+      .replace("{outdoor}", format(outdoorHeat));
+  };
+  range.addEventListener("input", update);
+  update();
+
+  return {
+    pause: () => {},
+    resume: () => {},
+    reset: () => { range.value = "10"; update(); },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+  </script>
+</body>
+</html>
