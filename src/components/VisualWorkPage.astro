@@ -4,6 +4,7 @@ import type { Language } from '../utils/i18n';
 import type { VisualWork } from '../utils/visuals';
 import AirConditionerVisual from './AirConditionerVisual.astro';
 import LoopEngineeringVisual from './LoopEngineeringVisual.astro';
+import PriceVolumeRelationshipVisual from './PriceVolumeRelationshipVisual.astro';
 import TyphoonVisual from './TyphoonVisual.astro';
 
 interface Props {
@@ -17,6 +18,7 @@ const artifactId = localized.artifact;
 const artifactComponents = {
   'air-conditioner': AirConditionerVisual,
   'loop-engineering': LoopEngineeringVisual,
+  'price-volume-relationship': PriceVolumeRelationshipVisual,
   'typhoon': TyphoonVisual,
 } as const;
 const VisualComponent = artifactId ? artifactComponents[artifactId as keyof typeof artifactComponents] : undefined;

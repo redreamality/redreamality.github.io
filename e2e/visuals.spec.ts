@@ -5,11 +5,12 @@ test('English Visuals gallery contains the multilingual published works', async 
 
   expect(response?.status()).toBe(200);
   await expect(page.locator('h1')).toHaveText('Visuals');
-  await expect(page.locator('[data-visual-card]')).toHaveCount(3);
+  await expect(page.locator('[data-visual-card]')).toHaveCount(4);
+  await expect(page.getByRole('heading', { name: 'How Price and Volume Work Together' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'How Air Conditioners Work' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'What Is Loop Engineering?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'How Typhoons Form' })).toBeVisible();
-  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(3);
+  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(4);
   await expect(page.getByText('Agent Architecture Showcase')).toHaveCount(0);
   await expect(page.getByText(/not available in this language/i)).toHaveCount(0);
 });
@@ -22,8 +23,8 @@ test('stale missing-language query cannot mark multilingual Typhoon as unavailab
 });
 
 for (const locale of [
-  { path: '/cn/visuals/', title: '可视化', work: '空调的工作原理' },
-  { path: '/ja/visuals/', title: 'ビジュアル', work: 'エアコンの仕組み' },
+  { path: '/cn/visuals/', title: '可视化', work: '股市交易原理：量价关系' },
+  { path: '/ja/visuals/', title: 'ビジュアル', work: '株式取引の仕組み：価格と出来高' },
 ]) {
   test(`${locale.path} renders a localized Visuals gallery`, async ({ page }) => {
     const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
@@ -31,7 +32,7 @@ for (const locale of [
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toHaveText(locale.title);
     await expect(page.getByRole('heading', { name: locale.work })).toBeVisible();
-    await expect(page.locator('[data-visual-card]')).toHaveCount(3);
+    await expect(page.locator('[data-visual-card]')).toHaveCount(4);
   });
 }
 
@@ -51,8 +52,8 @@ for (const locale of [
   {
     path: '/',
     sectionTitle: 'Latest visual',
-    workTitle: 'How Air Conditioners Work',
-    workHref: '/visuals/air-conditioner/',
+    workTitle: 'How Price and Volume Work Together',
+    workHref: '/visuals/price-volume-relationship/',
     typeLabel: 'Interactive explainer',
     allLabel: 'View all visuals',
     allHref: '/visuals/',
@@ -60,8 +61,8 @@ for (const locale of [
   {
     path: '/cn/',
     sectionTitle: '最新可视化',
-    workTitle: '空调的工作原理',
-    workHref: '/cn/visuals/air-conditioner/',
+    workTitle: '股市交易原理：量价关系',
+    workHref: '/cn/visuals/price-volume-relationship/',
     typeLabel: '交互图解',
     allLabel: '查看全部可视化',
     allHref: '/cn/visuals/',
@@ -69,8 +70,8 @@ for (const locale of [
   {
     path: '/ja/',
     sectionTitle: '最新ビジュアル',
-    workTitle: 'エアコンの仕組み',
-    workHref: '/ja/visuals/air-conditioner/',
+    workTitle: '株式取引の仕組み：価格と出来高',
+    workHref: '/ja/visuals/price-volume-relationship/',
     typeLabel: 'インタラクティブ解説',
     allLabel: 'すべてのビジュアルを見る',
     allHref: '/ja/visuals/',
@@ -584,6 +585,274 @@ test('Agent Architecture routes are removed', async ({ request }) => {
   }
 });
 
+for (const locale of [
+  {
+    path: '/visuals/price-volume-relationship/',
+    htmlLang: 'en',
+    h1: 'Price shows where an auction moved. Volume shows how much traded there.',
+    pauseAll: 'Pause all motion',
+    reset: 'Reset',
+    control: 'Choose a synthetic liquidity condition',
+    scenarioStatus: 'consume more levels in thin displayed liquidity',
+  },
+  {
+    path: '/cn/visuals/price-volume-relationship/',
+    htmlLang: 'zh-CN',
+    h1: '价格显示竞价走到哪里，成交量显示在那里交换了多少',
+    pauseAll: '暂停所有动画',
+    reset: '重置',
+    control: '选择一种合成流动性状态',
+    scenarioStatus: '在较薄的展示流动性中消耗更多档位',
+  },
+  {
+    path: '/ja/visuals/price-volume-relationship/',
+    htmlLang: 'ja',
+    h1: '価格はオークションの到達点、出来高はそこで交換された量を示す',
+    pauseAll: 'すべての動きを停止',
+    reset: 'リセット',
+    control: '合成流動性の状態を選択',
+    scenarioStatus: '薄い表示流動性でより多くの水準を消費し',
+  },
+]) {
+  test(`${locale.path} renders the localized price-volume explainer and lifecycle`, async ({ page }) => {
+    const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('html')).toHaveAttribute('lang', locale.htmlLang);
+    await expect(page.locator('body > nav')).toBeVisible();
+    await expect(page.locator('h1')).toHaveText(locale.h1);
+    await expect(page.locator('h1')).toHaveCount(1);
+    await expect(page.locator('iframe')).toHaveCount(0);
+    await expect(page.locator('.site-header')).toHaveCount(0);
+    await expect(page.locator('interactive-figure')).toHaveCount(7);
+
+    const overview = page.locator('interactive-figure[data-demo="pv-auction-overview"]');
+    await overview.scrollIntoViewIfNeeded();
+    await expect(overview).toHaveAttribute('data-state', 'mounted');
+    await expect(overview.getByRole('group', { name: locale.control })).toBeVisible();
+    const firstScenario = overview.locator('[data-pv-scenario="0"]');
+    const secondScenario = overview.locator('[data-pv-scenario="1"]');
+    const demoStatus = overview.locator('[data-pv-status]');
+    const runtimeStatus = overview.locator('[data-runtime-status]');
+    await expect(overview.locator('.mount + [data-runtime-status]')).toHaveCount(1);
+    await expect(overview.locator('.stage > .status')).toHaveCount(0);
+    await expect(runtimeStatus).toBeAttached();
+    await expect(runtimeStatus).toBeHidden();
+    await expect(runtimeStatus).toHaveCSS('pointer-events', 'none');
+
+    await firstScenario.focus();
+    await page.keyboard.press('Tab');
+    await expect(secondScenario).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(secondScenario).toHaveAttribute('aria-pressed', 'true');
+    await expect(firstScenario).toHaveAttribute('aria-pressed', 'false');
+    await expect(demoStatus).toContainText(locale.scenarioStatus);
+    await expect(runtimeStatus).toContainText(locale.scenarioStatus);
+    await expect(runtimeStatus).toHaveAttribute('role', 'status');
+    await expect(runtimeStatus).toHaveAttribute('data-live-only', '');
+    await expect(runtimeStatus).not.toHaveAttribute('hidden', '');
+    await expect(runtimeStatus).toHaveCSS('pointer-events', 'none');
+    const runtimeStatusBox = await runtimeStatus.boundingBox();
+    expect(runtimeStatusBox).not.toBeNull();
+    expect(runtimeStatusBox!.width).toBeLessThanOrEqual(1);
+    expect(runtimeStatusBox!.height).toBeLessThanOrEqual(1);
+    await expect(overview.locator('.mount [data-pv-scenario="1"]')).toBeVisible();
+
+    await overview.getByRole('button', { name: locale.reset }).click();
+    await expect(firstScenario).toHaveAttribute('aria-pressed', 'true');
+    await expect(secondScenario).toHaveAttribute('aria-pressed', 'false');
+    await expect(demoStatus).not.toContainText(locale.scenarioStatus);
+    await page.getByRole('button', { name: locale.pauseAll }).click();
+    await expect(overview).toHaveAttribute('data-playback', 'paused');
+  });
+}
+
+test('price-volume seven-module interactions update and reset stable demo state', async ({ page }) => {
+  await page.goto('/visuals/price-volume-relationship/', { waitUntil: 'domcontentloaded' });
+
+  const mount = async (demo: string) => {
+    const figure = page.locator(`interactive-figure[data-demo="${demo}"]`);
+    await figure.scrollIntoViewIfNeeded();
+    await expect(figure).toHaveAttribute('data-state', 'mounted');
+    await expect(figure.locator('.mount')).toBeVisible();
+    await expect(figure.locator('[data-runtime-status]')).toBeHidden();
+    return figure;
+  };
+  const expectButtonInteraction = async (
+    demo: string,
+    buttonSelector: string,
+  ) => {
+    const figure = await mount(demo);
+    const status = figure.locator('[data-pv-status]');
+    const initialStatus = await status.textContent();
+    const button = figure.locator(buttonSelector);
+    await button.click();
+    await expect(button).toHaveAttribute('aria-pressed', 'true');
+    await expect(status).not.toHaveText(initialStatus ?? '');
+    const runtimeStatus = figure.locator('[data-runtime-status]');
+    await expect(runtimeStatus).toHaveText(await status.textContent() ?? '');
+    await expect(runtimeStatus).toHaveAttribute('role', 'status');
+    await expect(runtimeStatus).toHaveAttribute('data-live-only', '');
+    await expect(runtimeStatus).not.toHaveAttribute('hidden', '');
+    await expect(runtimeStatus).toHaveCSS('pointer-events', 'none');
+    const runtimeStatusBox = await runtimeStatus.boundingBox();
+    expect(runtimeStatusBox).not.toBeNull();
+    expect(runtimeStatusBox!.width).toBeLessThanOrEqual(1);
+    expect(runtimeStatusBox!.height).toBeLessThanOrEqual(1);
+    return figure;
+  };
+
+  const overview = await mount('pv-auction-overview');
+  const overviewInitial = await overview.locator('[data-pv-status]').textContent();
+  const overviewScene = overview.locator('.pv-auction');
+  const firstAskDepth = overview.locator('[data-pv-depth-side="ask"][data-pv-depth-index="0"]');
+  await expect(overviewScene).toHaveAttribute('data-liquidity', 'thick');
+  await expect(overviewScene).toHaveAttribute('data-execution-volume', '900');
+  await expect(overviewScene).toHaveAttribute('data-displacement', '0.18');
+  await expect(firstAskDepth).toHaveAttribute('data-depth', '82');
+  await overview.locator('[data-pv-scenario="1"]').click();
+  await expect(overview.locator('[data-pv-scenario="1"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(overviewScene).toHaveAttribute('data-liquidity', 'thin');
+  await expect(overviewScene).toHaveAttribute('data-execution-volume', '900');
+  await expect(overviewScene).toHaveAttribute('data-displacement', '0.92');
+  await expect(firstAskDepth).toHaveAttribute('data-depth', '22');
+  await expect(overview.locator('[data-pv-status]')).not.toHaveText(overviewInitial ?? '');
+  await overview.getByRole('button', { name: 'Reset' }).click();
+  await expect(overview.locator('[data-pv-scenario="0"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(overviewScene).toHaveAttribute('data-liquidity', 'thick');
+  await expect(overviewScene).toHaveAttribute('data-displacement', '0.18');
+  await expect(overview.locator('[data-pv-status]')).toHaveText(overviewInitial ?? '');
+
+  const relative = await mount('pv-relative-volume');
+  const relativeScene = relative.locator('.pv-relative');
+  const slider = relative.locator('[data-pv-relative-input]');
+  const initialOutput = await relative.locator('[data-pv-output]').textContent();
+  const initialRatio = await relative.locator('[data-pv-ratio]').textContent();
+  await expect(relativeScene).toHaveAttribute('data-period', 'open');
+  await expect(relativeScene).toHaveAttribute('data-baseline', '140');
+  await expect(relativeScene).toHaveAttribute('data-current', '100');
+  await expect(relativeScene).toHaveAttribute('data-ratio', '0.71');
+  await relative.locator('[data-pv-baseline="midday"]').click();
+  await expect(relativeScene).toHaveAttribute('data-period', 'midday');
+  await expect(relativeScene).toHaveAttribute('data-baseline', '65');
+  await expect(relativeScene).toHaveAttribute('data-current', '100');
+  await expect(relativeScene).toHaveAttribute('data-ratio', '1.54');
+  await slider.focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(relative.locator('[data-pv-output]')).not.toHaveText(initialOutput ?? '');
+  await expect(relativeScene).toHaveAttribute('data-current', '101');
+  await expect(relativeScene).toHaveAttribute('data-ratio', '1.55');
+  await relative.getByRole('button', { name: 'Reset' }).click();
+  await expect(relative.locator('[data-pv-baseline="open"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(relativeScene).toHaveAttribute('data-period', 'open');
+  await expect(relativeScene).toHaveAttribute('data-current', '100');
+  await expect(relative.locator('[data-pv-output]')).toHaveText(initialOutput ?? '');
+  await expect(relative.locator('[data-pv-ratio]')).toHaveText(initialRatio ?? '');
+
+  await expectButtonInteraction('pv-four-quadrants', '[data-pv-quadrant="1"]');
+  await expectButtonInteraction('pv-trade-mechanics', '[data-pv-trade="1"]');
+  await expectButtonInteraction('pv-absorption-divergence', '[data-pv-pattern="1"]');
+
+  const breakout = await mount('pv-breakout-follow-through');
+  const breakoutScene = breakout.locator('.pv-breakout');
+  const acceptedPath = breakout.locator('[data-pv-path="accepted"]');
+  const rejectedPath = breakout.locator('[data-pv-path="rejected"]');
+  const crossingStatus = await breakout.locator('[data-pv-status]').textContent();
+  await expect(breakoutScene).toHaveAttribute('data-window', 'crossing');
+  await expect(acceptedPath).toHaveAttribute('data-path-state', 'undetermined');
+  await expect(rejectedPath).toHaveAttribute('data-path-state', 'undetermined');
+  await expect(acceptedPath).toHaveAttribute('data-visible-points', '6');
+  await expect(rejectedPath).toHaveAttribute('data-visible-points', '6');
+  await breakout.locator('[data-pv-window="followThrough"]').click();
+  await expect(breakoutScene).toHaveAttribute('data-window', 'followThrough');
+  await expect(acceptedPath).toHaveAttribute('data-path-state', 'accepted');
+  await expect(rejectedPath).toHaveAttribute('data-path-state', 'rejected');
+  await expect(acceptedPath).toHaveAttribute('data-visible-points', '10');
+  await expect(rejectedPath).toHaveAttribute('data-visible-points', '10');
+  await expect(breakout.locator('[data-pv-status]')).toContainText('Only later evidence distinguishes the paths');
+  await breakout.getByRole('button', { name: 'Reset' }).click();
+  await expect(breakoutScene).toHaveAttribute('data-window', 'crossing');
+  await expect(acceptedPath).toHaveAttribute('data-path-state', 'undetermined');
+  await expect(breakout.locator('[data-pv-status]')).toHaveText(crossingStatus ?? '');
+
+  const checklist = await mount('pv-context-checklist');
+  const checklistScene = checklist.locator('.pv-checklist');
+  const checklistStatus = checklist.locator('[data-pv-status]');
+  const checklistInitial = await checklistStatus.textContent();
+  await expect(checklist.locator('[data-pv-check]')).toHaveCount(7);
+  await expect(checklistScene).toHaveAttribute('data-outcome', 'insufficient');
+  const firstCheck = checklist.locator('[data-pv-check="0"]');
+  await firstCheck.focus();
+  await page.keyboard.press('Space');
+  await expect(firstCheck).toBeChecked();
+  await expect(checklistScene).toHaveAttribute('data-checked-count', '1');
+  await expect(checklistStatus).toHaveText('Insufficient information');
+  for (const index of [1, 2, 3, 4]) await checklist.locator(`[data-pv-check="${index}"]`).check();
+  await expect(checklistScene).toHaveAttribute('data-outcome', 'waiting');
+  await expect(checklistStatus).toHaveText('Wait for later evidence');
+  await checklist.locator('[data-pv-check="5"]').check();
+  await expect(checklistScene).toHaveAttribute('data-outcome', 'limited');
+  await checklist.locator('[data-pv-check="6"]').check();
+  await expect(checklistScene).toHaveAttribute('data-outcome', 'complete');
+  await expect(checklistStatus).toHaveText('Evidence relatively complete');
+  await checklist.getByRole('button', { name: 'Reset' }).click();
+  await expect(firstCheck).not.toBeChecked();
+  await expect(checklist.locator('[data-pv-check]:checked')).toHaveCount(0);
+  await expect(checklistScene).toHaveAttribute('data-checked-count', '0');
+  await expect(checklistStatus).toHaveText(checklistInitial ?? '');
+});
+
+test('price-volume explainer has no horizontal overflow at mobile widths', async ({ page }) => {
+  for (const width of [390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto('/visuals/price-volume-relationship/', { waitUntil: 'domcontentloaded' });
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    expect(overflow, `${width}px viewport overflow`).toBeLessThanOrEqual(1);
+  }
+});
+
+test('price-volume explainer supports reduced motion and shared dark mode', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/visuals/price-volume-relationship/', { waitUntil: 'domcontentloaded' });
+
+  const visual = page.locator('[data-visual-artifact="price-volume-relationship"]');
+  const overview = page.locator('interactive-figure[data-demo="pv-auction-overview"]');
+  await overview.scrollIntoViewIfNeeded();
+  await expect(overview).toHaveAttribute('data-playback', 'paused');
+  await expect(overview.locator('.pv-auction')).toHaveClass(/is-paused/);
+
+  await page.locator('body > nav .theme-toggle:visible').click();
+  await expect(page.locator('html')).toHaveClass(/dark/);
+
+  const darkTheme = await visual.evaluate((element) => {
+    const rootStyle = getComputedStyle(element);
+    const headingStyle = getComputedStyle(element.querySelector('.hero h1')!);
+    return {
+      backgroundColor: rootStyle.backgroundColor,
+      backgroundImage: rootStyle.backgroundImage,
+      headingColor: headingStyle.color,
+    };
+  });
+  expect(darkTheme.backgroundImage).toContain('rgb(18, 49, 58)');
+  expect(darkTheme.backgroundImage).not.toMatch(/rgb\(223,\s*243,\s*239\)|#dff3ef/i);
+  expect(darkTheme.backgroundColor).toBe('rgb(8, 17, 23)');
+  expect(darkTheme.headingColor).toBe('rgb(238, 249, 251)');
+
+  const parseRgb = (value: string) => value.match(/[\d.]+/g)!.slice(0, 3).map(Number);
+  const luminance = (value: string) => {
+    const channels = parseRgb(value).map((channel) => {
+      const normalized = channel / 255;
+      return normalized <= 0.04045 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+    });
+    return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+  };
+  const contrast = (foreground: string, background: string) => {
+    const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
+    return (values[0] + 0.05) / (values[1] + 0.05);
+  };
+  expect(contrast(darkTheme.headingColor, darkTheme.backgroundColor)).toBeGreaterThanOrEqual(7);
+  expect(contrast(darkTheme.headingColor, 'rgb(18, 49, 58)')).toBeGreaterThanOrEqual(7);
+});
+
 test('sitemap lists every published visual locale and no Agent Architecture routes', async ({ request }) => {
   const indexResponse = await request.get('/sitemap-index.xml');
   expect(indexResponse.ok()).toBeTruthy();
@@ -600,6 +869,9 @@ test('sitemap lists every published visual locale and no Agent Architecture rout
     '/visuals/air-conditioner/',
     '/cn/visuals/air-conditioner/',
     '/ja/visuals/air-conditioner/',
+    '/visuals/price-volume-relationship/',
+    '/cn/visuals/price-volume-relationship/',
+    '/ja/visuals/price-volume-relationship/',
     '/visuals/loop-engineering/',
     '/cn/visuals/loop-engineering/',
     '/ja/visuals/loop-engineering/',

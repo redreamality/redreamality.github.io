@@ -21,6 +21,7 @@ const dateLabel = visual
 const isAirConditioner = visual?.cover === 'air-conditioner';
 const isTyphoon = visual?.cover === 'typhoon';
 const isLoopEngineering = visual?.cover === 'loop-engineering';
+const isPriceVolume = visual?.cover === 'price-volume';
 ---
 
 {visual && (
@@ -58,7 +59,21 @@ const isLoopEngineering = visual?.cover === 'loop-engineering';
 
       <div class="relative min-h-64 overflow-hidden bg-gradient-to-br from-slate-950 via-cyan-900 to-teal-500 md:min-h-80" aria-hidden="true">
         <div class="absolute inset-0 opacity-80 [background-image:radial-gradient(circle_at_20%_18%,rgba(255,255,255,.5)_0_2px,transparent_3px),radial-gradient(circle_at_82%_70%,rgba(255,255,255,.32)_0_3px,transparent_4px)] [background-size:72px_72px,116px_116px]"></div>
-        {isAirConditioner ? (
+        {isPriceVolume ? (
+          <>
+            <div class="absolute inset-8 rounded-[2rem] border border-white/15 bg-slate-950/35 backdrop-blur-sm"></div>
+            <div class="absolute bottom-[18%] left-[12%] flex h-[52%] w-[76%] items-end gap-3">
+              <div class="h-[28%] flex-1 rounded-t-md bg-amber-300/40"></div>
+              <div class="h-[43%] flex-1 rounded-t-md bg-amber-300/55"></div>
+              <div class="h-[36%] flex-1 rounded-t-md bg-amber-300/45"></div>
+              <div class="h-[69%] flex-1 rounded-t-md bg-amber-300/75"></div>
+              <div class="h-[56%] flex-1 rounded-t-md bg-amber-300/55"></div>
+              <div class="h-[83%] flex-1 rounded-t-md bg-amber-300/70"></div>
+            </div>
+            <div class="absolute left-[12%] top-[34%] h-[3px] w-[76%] -rotate-6 bg-cyan-200/85 shadow-[0_0_18px_rgba(165,243,252,.7)]"></div>
+            <div class="absolute right-[12%] top-[18%] rounded-full border border-rose-200/40 bg-rose-300/15 px-3 py-1 text-xs font-bold tracking-wide text-rose-100">P × V</div>
+          </>
+        ) : isAirConditioner ? (
           <>
             <div class="absolute left-[8%] top-[24%] h-36 w-44 rounded-[2rem] border border-cyan-100/30 bg-cyan-100/10 shadow-[0_0_55px_rgba(103,232,249,.2)] backdrop-blur-sm"></div>
             <div class="absolute right-[8%] top-[24%] h-36 w-44 rounded-[2rem] border border-amber-100/30 bg-amber-100/10 shadow-[0_0_55px_rgba(251,191,36,.18)] backdrop-blur-sm"></div>

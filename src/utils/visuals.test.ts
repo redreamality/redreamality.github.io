@@ -3,11 +3,11 @@ import { getLatestVisual, getVisualWork } from './visuals';
 
 describe('getLatestVisual', () => {
   it.each([
-    ['en', '/visuals/air-conditioner/', 'How Air Conditioners Work'],
-    ['zh', '/cn/visuals/air-conditioner/', '空调的工作原理'],
-    ['ja', '/ja/visuals/air-conditioner/', 'エアコンの仕組み'],
+    ['en', '/visuals/price-volume-relationship/', 'How Price and Volume Work Together'],
+    ['zh', '/cn/visuals/price-volume-relationship/', '股市交易原理：量价关系'],
+    ['ja', '/ja/visuals/price-volume-relationship/', '株式取引の仕組み：価格と出来高'],
   ] as const)('returns the newest published %s artifact', (lang, href, title) => {
-    expect(getLatestVisual(lang)).toMatchObject({ slug: 'air-conditioner', href, title, hasCurrentArtifact: true });
+    expect(getLatestVisual(lang)).toMatchObject({ slug: 'price-volume-relationship', href, title, hasCurrentArtifact: true });
   });
 });
 
@@ -15,6 +15,7 @@ describe('visual artifact registration', () => {
   it.each([
     ['air-conditioner', 'air-conditioner'],
     ['loop-engineering', 'loop-engineering'],
+    ['price-volume-relationship', 'price-volume-relationship'],
     ['typhoon', 'typhoon'],
   ] as const)('uses one stable artifact ID across locales for %s', (slug, artifact) => {
     const work = getVisualWork(slug);

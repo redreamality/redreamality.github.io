@@ -50,6 +50,14 @@ pnpm visual-kit:generate --manifest manifest-loop-engineering.json --all --inclu
 
 生成结果位于 `dist/visual-kit/`，不会自动发布到站点。要发布作品，需要把最终自包含 HTML 放入 `src/assets/html-pages/`，并在 `src/data/visuals-manifest.json` 声明对应语言产物。
 
+仓库内已发布的量价关系图解可从确定性输入重建：
+
+```powershell
+pnpm visual-kit:price-volume
+```
+
+该命令读取 `manifest-price-volume-relationship.json` 与 `src/demos/pv-*.js`，生成 `src/assets/html-pages/price-volume-relationship/{en,zh,ja}/index.html`。其中所有行情、订单簿、成交量和路径均为合成数据；作品只解释上下文证据，不输出投资建议或买卖指令。
+
 ## 契约
 
 - 共享结构只保存 step/demo ID；正文、控件、状态和 aria 文案全部由 locale 数据提供。

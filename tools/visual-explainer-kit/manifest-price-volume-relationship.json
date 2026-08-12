@@ -1,0 +1,854 @@
+{
+  "slug": "price-volume-relationship",
+  "renderer": "interactive-explainer",
+  "structure": {
+    "overview": { "demo": "pv-auction-overview" },
+    "steps": [
+      { "id": "trade-mechanics", "demo": "pv-trade-mechanics" },
+      { "id": "relative-volume", "demo": "pv-relative-volume" },
+      { "id": "four-quadrants", "demo": "pv-four-quadrants" },
+      { "id": "breakout-follow-through", "demo": "pv-breakout-follow-through" },
+      { "id": "absorption-divergence", "demo": "pv-absorption-divergence" },
+      { "id": "context-checklist", "demo": "pv-context-checklist" }
+    ]
+  },
+  "locales": {
+    "en": {
+      "lang": "en",
+      "meta": {
+        "title": "Price and volume in stock-market trading",
+        "description": "An interactive, evidence-first guide to auctions, trade prints, relative volume, price-volume quadrants, follow-through, absorption, divergence, and context."
+      },
+      "languageLabels": { "en": "English", "zh": "中文", "ja": "日本語" },
+      "ui": {
+        "pauseAll": "Pause all motion",
+        "resumeAll": "Resume all motion",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset",
+        "waiting": "The visual will load when it enters the viewport.",
+        "loading": "Preparing the visual…",
+        "error": "The visual could not be displayed. Read the explanation above instead.",
+        "figureFallback": "Enable JavaScript to explore this synthetic-data experiment. Price and volume are contextual evidence, not trading instructions.",
+        "skipToContent": "Skip to content",
+        "languageNavigation": "Languages",
+        "overviewLabel": "Auction overview",
+        "stepLabel": "Step"
+      },
+      "hero": {
+        "eyebrow": "MARKET MICROSTRUCTURE / CONTEXT, NOT CERTAINTY",
+        "title": "Price shows where an auction moved. Volume shows how much traded there.",
+        "subtitle": "Learn to read the two together as evidence about participation, liquidity, and price behavior—not as a certain signal. All sequences are synthetic, for education only, and not investment advice."
+      },
+      "overview": {
+        "title": "Every print begins with a matched auction",
+        "body": [
+          "A market is a continuous auction. Buyers advertise bids, sellers advertise asks, and a trade prints only when compatible orders meet. Price records the level of that agreement; volume records the quantity exchanged.",
+          "The same reported volume can accompany very different outcomes. Available liquidity, urgency, news, time of day, and the surrounding trend all affect how far price travels."
+        ],
+        "plainLanguage": { "label": "Plainly", "body": "Price is the location of agreement. Volume is the amount of agreement. Neither reveals motive by itself." },
+        "keyPointsLabel": "Anchor the reading",
+        "keyPoints": [
+          { "title": "Auction", "body": "Orders compete for limited liquidity at different prices." },
+          { "title": "Print", "body": "One execution contributes both a price and a quantity." },
+          { "title": "Context", "body": "Interpretation changes with baseline, location, and what happens next." }
+        ],
+        "demoTitle": "Hold synthetic execution volume constant and change liquidity depth",
+        "copy": {
+          "ariaLabel": "Interactive synthetic order-book comparison showing the same execution volume producing different price displacement in thick and thin liquidity",
+          "bidBook": "Bids · buyers",
+          "askBook": "Asks · sellers",
+          "matchLabel": "900 synthetic units matched",
+          "controlLabel": "Choose a synthetic liquidity condition",
+          "liquidityLabel": "Displayed liquidity",
+          "executionLabel": "Synthetic execution volume",
+          "displacementLabel": "Synthetic price displacement",
+          "bids": [
+            { "price": "$99.98", "size": "" },
+            { "price": "$99.96", "size": "" },
+            { "price": "$99.94", "size": "" }
+          ],
+          "asks": [
+            { "price": "$100.02", "size": "" },
+            { "price": "$100.04", "size": "" },
+            { "price": "$100.06", "size": "" }
+          ],
+          "scenarios": [
+            { "key": "thick", "label": "Thick liquidity", "liquidity": "Thick", "execution": "900 units", "executionValue": 900, "displacement": "+0.18", "displacementValue": 0.18, "impact": 18, "bidDepths": [86, 94, 100], "askDepths": [82, 92, 100], "bidSizes": ["1,240 u", "1,680 u", "2,110 u"], "askSizes": ["1,180 u", "1,590 u", "2,030 u"], "bookAria": "Thick synthetic order book with substantial displayed size at three bid and ask levels", "status": "Same synthetic execution volume, different displacement: 900 units meet thick displayed liquidity and move price by only +0.18. Equal volume does not mean equal price displacement." },
+            { "key": "thin", "label": "Thin liquidity", "liquidity": "Thin", "execution": "900 units", "executionValue": 900, "displacement": "+0.92", "displacementValue": 0.92, "impact": 92, "bidDepths": [26, 38, 48], "askDepths": [22, 34, 45], "bidSizes": ["240 u", "360 u", "470 u"], "askSizes": ["210 u", "320 u", "440 u"], "bookAria": "Thin synthetic order book with limited displayed size at three bid and ask levels", "status": "Same synthetic execution volume, different displacement: 900 units consume more levels in thin displayed liquidity and move price by +0.92. Equal volume does not mean equal price displacement." },
+            { "key": "balanced", "label": "Balanced reference", "liquidity": "Balanced", "execution": "900 units", "executionValue": 900, "displacement": "+0.36", "displacementValue": 0.36, "impact": 36, "bidDepths": [56, 70, 82], "askDepths": [52, 68, 80], "bidSizes": ["620 u", "820 u", "1,040 u"], "askSizes": ["590 u", "790 u", "980 u"], "bookAria": "Balanced synthetic order book with moderate displayed size at three bid and ask levels", "status": "The balanced synthetic reference keeps execution volume at 900 units and produces +0.36 displacement. The contrast still depends on displayed depth, not volume alone." }
+          ],
+          "syntheticNote": "All order-book depth, execution volume, and price displacement values are synthetic and educational—not live data, a forecast, recommendation, or investment advice."
+        }
+      },
+      "steps": [
+        {
+          "id": "trade-mechanics",
+          "number": "01",
+          "title": "Volume counts completed transfers, not conviction",
+          "body": [
+            "Every completed trade has both a buyer and a seller. A 10,000-share print is 10,000 shares of volume—not 20,000—and it does not prove that either side is informed.",
+            "What analysts casually call buying or selling pressure usually describes which side crossed the spread or how price responded to executions. Reported volume alone does not identify intent."
+          ],
+          "plainLanguage": { "label": "Plainly", "body": "Volume tells you how much changed hands. The path of price helps describe how the auction handled that activity." },
+          "keyPointsLabel": "Read the tape carefully",
+          "keyPoints": [
+            { "title": "One transfer", "body": "Each execution pairs a buyer with a seller." },
+            { "title": "Aggressor is partial evidence", "body": "Crossing the spread shows immediacy, not future correctness." },
+            { "title": "Response matters", "body": "Large activity with small travel differs from large activity with easy travel." }
+          ],
+          "demoTitle": "Compare synthetic trade-size and price-response sequences",
+          "copy": {
+            "ariaLabel": "Interactive synthetic trade tape comparing similar volume with different price responses",
+            "chartLabel": "Five synthetic trade groups with price labels and volume bars",
+            "controlLabel": "Choose a synthetic trade sequence",
+            "volumeUnit": "units",
+            "scenarios": [
+              { "label": "More travel", "prints": [35, 52, 64, 79, 92], "prices": ["100.0", "100.2", "100.5", "100.9", "101.4"], "status": "Synthetic sequence: activity is accompanied by progressively higher transaction prices. This describes price response, not a guaranteed continuation." },
+              { "label": "Less travel", "prints": [38, 55, 68, 82, 94], "prices": ["100.0", "100.1", "100.0", "100.1", "100.0"], "status": "Synthetic sequence: comparable activity produces little net movement. Liquidity may be absorbing flow, but motive and next direction remain unknown." }
+            ],
+            "syntheticNote": "All prices and volumes are synthetic. The experiment is educational and does not provide a trading signal or investment advice."
+          }
+        },
+        {
+          "id": "relative-volume",
+          "number": "02",
+          "title": "Volume becomes informative only against a relevant baseline",
+          "body": [
+            "A million shares can be exceptional for one stock and routine for another. Relative volume compares current activity with a chosen norm, ideally controlling for the instrument and time of day.",
+            "The baseline is a modeling choice. A quiet holiday, index rebalance, opening auction, earnings release, or data error can distort the comparison."
+          ],
+          "plainLanguage": { "label": "Plainly", "body": "Ask “high compared with what?” before calling volume unusual." },
+          "keyPointsLabel": "Build a useful comparison",
+          "keyPoints": [
+            { "title": "Same instrument", "body": "Liquidity differs dramatically across securities." },
+            { "title": "Comparable clock", "body": "Intraday volume usually has a strong time-of-day pattern." },
+            { "title": "Known events", "body": "Scheduled and structural flows can change the baseline." }
+          ],
+          "demoTitle": "Adjust one synthetic session against a baseline",
+          "copy": {
+            "ariaLabel": "Interactive synthetic relative-volume calculator with opening, midday, and closing time-of-day baselines",
+            "chartAriaTemplate": "Synthetic {period} baseline {baseline} units compared with current volume {current} units, giving relative volume {ratio} times",
+            "periodControlLabel": "Choose a synthetic time-of-day baseline",
+            "controlLabel": "Current synthetic volume",
+            "controlAria": "Adjust current synthetic volume",
+            "volumeUnit": "units",
+            "currentLabel": "Current synthetic volume",
+            "baselineLabel": "Selected baseline",
+            "ratioLabel": "Relative volume",
+            "baselines": [
+              { "key": "open", "label": "Near the open", "value": 140, "history": [128, 146, 137, 152, 133, 144, 140] },
+              { "key": "midday", "label": "Midday", "value": 65, "history": [58, 69, 63, 72, 61, 66, 65] },
+              { "key": "close", "label": "Near the close", "value": 125, "history": [116, 132, 121, 137, 119, 127, 125] }
+            ],
+            "statusTemplate": "Current synthetic volume is {current} units. Against the {period} synthetic baseline of {baseline}, relative volume is {ratio}×. The same absolute amount changes meaning when the selected baseline changes; no universal threshold is implied.",
+            "syntheticNote": "Every volume and baseline value is synthetic. The comparison is educational, uses no universal threshold, and is not investment advice."
+          }
+        },
+        {
+          "id": "four-quadrants",
+          "number": "03",
+          "title": "Four quadrants organize observations—not predictions",
+          "body": [
+            "Combining price direction with relative-volume direction creates four descriptive quadrants. They help formulate questions about participation and ease of movement.",
+            "A quadrant is not a rule such as “high volume means up.” The same quadrant can appear at trend beginnings, trend endings, noisy ranges, or event-driven gaps."
+          ],
+          "plainLanguage": { "label": "Plainly", "body": "Use the quadrant to name what happened, then investigate why and whether it persists." },
+          "keyPointsLabel": "Avoid binary color stories",
+          "keyPoints": [
+            { "title": "Direction", "body": "Arrows and words encode price direction; color is supplementary." },
+            { "title": "Participation", "body": "Patterned volume cues show rising or falling activity." },
+            { "title": "Uncertainty", "body": "Each quadrant supports multiple explanations." }
+          ],
+          "demoTitle": "Interrogate the four descriptive quadrants",
+          "copy": {
+            "ariaLabel": "Interactive four-quadrant matrix for price direction and relative-volume direction",
+            "quadrants": [
+              { "title": "Price ↑ · volume ↑", "axes": "Higher price / higher relative activity", "status": "Participation expanded as price rose. Possible explanations include broad demand, short covering, event repricing, or churn. Follow-through and location decide what the evidence means." },
+              { "title": "Price ↑ · volume ↓", "axes": "Higher price / lower relative activity", "status": "Price rose on lighter activity. The path may reflect thin supply, a quiet drift, or weakening participation; none is certain without liquidity and follow-through evidence." },
+              { "title": "Price ↓ · volume ↑", "axes": "Lower price / higher relative activity", "status": "Participation expanded as price fell. This may reflect urgent selling, forced flow, repricing, or responsive demand meeting supply. It does not guarantee further decline." },
+              { "title": "Price ↓ · volume ↓", "axes": "Lower price / lower relative activity", "status": "Price fell on lighter activity. This can be a quiet pullback, weak demand, or thin liquidity. It is descriptive—not proof of reversal or continuation." }
+            ],
+            "syntheticNote": "Conceptual quadrants using synthetic conditions. No quadrant is a buy or sell instruction."
+          }
+        },
+        {
+          "id": "breakout-follow-through",
+          "number": "04",
+          "title": "A level crossing is an event; follow-through is the test",
+          "body": [
+            "A breakout is simply price moving beyond a chosen reference. Elevated relative volume can show that more participation accompanied the crossing, but it cannot guarantee acceptance beyond the level.",
+            "Inspect subsequent closes, retests, range expansion, liquidity, and the time horizon. This synthetic experiment is educational only and must not be used as a trade trigger."
+          ],
+          "plainLanguage": { "label": "Plainly", "body": "Do not stop the film on the crossing bar. Ask what the auction does next." },
+          "keyPointsLabel": "Test the claim",
+          "keyPoints": [
+            { "title": "Define the level", "body": "Reference levels are analytical choices, not natural laws." },
+            { "title": "Observe acceptance", "body": "Repeated trade beyond a level differs from a brief excursion." },
+            { "title": "Check follow-through", "body": "Later behavior can strengthen, weaken, or invalidate the initial interpretation." }
+          ],
+          "demoTitle": "Change the observation window after a synthetic crossing",
+          "copy": {
+            "ariaLabel": "Interactive comparison of two synthetic high-relative-volume crossings with different later outcomes",
+            "referenceLevel": "Synthetic reference level",
+            "controlLabel": "Choose the observation window",
+            "stateLabels": { "undetermined": "Outcome not yet knowable", "accepted": "Later: accepted above", "rejected": "Later: rejected into range" },
+            "windows": [
+              { "key": "crossing", "label": "Crossing only", "status": "At the crossing, both synthetic paths look similar and both have high relative volume. The outcome cannot be known at this point; this evidence is not a trading trigger." },
+              { "key": "followThrough", "label": "Follow-through", "status": "Only later evidence distinguishes the paths: Path A shows acceptance above the broken area, while Path B quickly returns to the range. This retrospective distinction is not a trading trigger or investment advice." }
+            ],
+            "paths": [
+              { "key": "accepted", "label": "Synthetic path A", "result": "accepted", "crossingCount": 6, "crossingPoints": "0,165 80,145 155,155 230,120 300,125 350,70", "followThroughPoints": "0,165 80,145 155,155 230,120 300,125 350,70 410,92 470,55 530,65 600,38", "volumes": [24,31,28,42,55,92,71,66,58,63], "aria": { "crossing": "Synthetic path A through the high-relative-volume crossing only; later outcome is hidden and undetermined", "followThrough": "Synthetic path A with follow-through, showing later acceptance above the broken area" } },
+              { "key": "rejected", "label": "Synthetic path B", "result": "rejected", "crossingCount": 6, "crossingPoints": "0,168 80,146 155,152 230,122 300,126 350,68", "followThroughPoints": "0,168 80,146 155,152 230,122 300,126 350,68 410,112 470,142 530,158 600,150", "volumes": [25,30,29,41,57,89,73,64,55,49], "aria": { "crossing": "Synthetic path B through the high-relative-volume crossing only; later outcome is hidden and undetermined", "followThrough": "Synthetic path B with follow-through, showing a quick rejection back into the prior range" } }
+            ],
+            "syntheticNote": "Both paths, prices, and relative-volume observations are synthetic and educational. They are not forecasts, recommendations, trading triggers, or investment advice."
+          }
+        },
+        {
+          "id": "absorption-divergence",
+          "number": "05",
+          "title": "Effort and result can diverge without revealing the next move",
+          "body": [
+            "Absorption describes substantial execution meeting enough opposing liquidity that price travels less than expected. Divergence describes price and a chosen volume measure behaving differently across observations.",
+            "Both are hypotheses, not direct observations of hidden intent. Absorption can persist or fail; divergence can resolve through price, volume, time, or a changed baseline. It does not guarantee reversal."
+          ],
+          "plainLanguage": { "label": "Plainly", "body": "A lot of effort with little movement is worth investigating, not automatically trading." },
+          "keyPointsLabel": "Separate observation from inference",
+          "keyPoints": [
+            { "title": "Observe", "body": "Measure price travel, executed volume, spread, and time." },
+            { "title": "Hypothesize", "body": "Liquidity may be absorbing flow, but identities and motives remain uncertain." },
+            { "title": "Seek confirmation", "body": "Later behavior can support or reject the hypothesis." }
+          ],
+          "demoTitle": "Compare synthetic effort-versus-result patterns",
+          "copy": {
+            "ariaLabel": "Interactive synthetic comparison of absorption, divergence, and ordinary movement",
+            "priceLabel": "Price response",
+            "volumeLabel": "Relative activity",
+            "controlLabel": "Choose a synthetic pattern",
+            "patterns": [
+              { "label": "Possible absorption", "price": [48, 52, 50, 54, 51, 53], "volume": [28, 45, 62, 78, 90, 94], "status": "Synthetic observation: activity rises while price remains compressed. Absorption is one hypothesis; hidden orders, two-way churn, or the selected scale may also explain it." },
+              { "label": "Divergence", "price": [25, 39, 52, 65, 74, 83], "volume": [86, 72, 59, 47, 38, 31], "status": "Synthetic observation: price advances while relative activity fades. This does not imply an imminent reversal; liquidity and baseline choices can produce the same shape." },
+              { "label": "Co-movement", "price": [22, 31, 44, 58, 70, 82], "volume": [25, 35, 49, 61, 73, 86], "status": "Synthetic observation: price travel and activity expand together. It describes participation, not future return or durability." }
+            ],
+            "syntheticNote": "Synthetic dots only. “Absorption” and “divergence” are conditional interpretations, not certain signals."
+          }
+        },
+        {
+          "id": "context-checklist",
+          "number": "06",
+          "title": "Finish with a context checklist, not a trading command",
+          "body": [
+            "A disciplined reading documents the instrument, session, horizon, baseline, event calendar, liquidity regime, market backdrop, and follow-through. Missing context should lower confidence rather than invite a stronger story.",
+            "Price-volume analysis can organize questions about participation, liquidity, and price behavior. It cannot determine fair value, predict returns, or replace independent research and professional advice."
+          ],
+          "plainLanguage": { "label": "Plainly", "body": "The output is a qualified observation with known limits—not buy, sell, sizing, or return guidance." },
+          "keyPointsLabel": "Before drawing a conclusion",
+          "keyPoints": [
+            { "title": "Normalize", "body": "Choose a defensible comparison for instrument and time." },
+            { "title": "Locate", "body": "Place the observation inside trend, range, event, and liquidity context." },
+            { "title": "Recheck", "body": "Define what later evidence would change the interpretation." }
+          ],
+          "demoTitle": "Build a synthetic evidence note",
+          "copy": {
+            "ariaLabel": "Seven-item interactive context checklist for a synthetic price-volume observation",
+            "meterAria": "Documented context fields",
+            "items": [
+              { "key": "baseline", "title": "Relevant baseline", "body": "Compare like with like, including instrument and time-of-day seasonality." },
+              { "key": "structure", "title": "Structural location", "body": "Record trend, range, reference levels, gaps, and the observation horizon." },
+              { "key": "liquidity", "title": "Volatility and liquidity", "body": "Inspect volatility, spread, displayed depth, and known structural flow." },
+              { "key": "events", "title": "News and scheduled flow", "body": "Check news, earnings, auctions, and index adjustments that may change participation." },
+              { "key": "close", "title": "Closing location", "body": "Document where the interval closed relative to its range and reference area." },
+              { "key": "followThrough", "title": "Later acceptance, rejection, or reversal", "body": "Observe which later behavior supports, weakens, or contradicts the initial hypothesis." },
+              { "key": "representativeness", "title": "Data-source representativeness", "body": "Ask which venue, feed, aggregation, and missing activity the data represents." }
+            ],
+            "outcomes": { "complete": "Evidence relatively complete", "limited": "Evidence conflicting or still limited", "insufficient": "Insufficient information", "waiting": "Wait for later evidence" },
+            "educationNote": "Educational framework only. The output is an evidence-quality note—not investment advice, a buy or sell instruction, position sizing, or return guidance."
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "SYNTHESIS / EVIDENCE BEFORE STORY",
+        "title": "Read participation, liquidity, and response as a chain of conditional evidence",
+        "body": [
+          "Start with the auction, normalize activity, describe the price-volume quadrant, then observe follow-through. Separate measurements from interpretations such as absorption or divergence.",
+          "This visual is for education only and is not investment advice. Price and volume do not guarantee direction, returns, or a successful decision."
+        ],
+        "checklistLabel": "A six-question reading",
+        "checklist": [
+          "What exactly traded, where, and over what interval?",
+          "How was relative volume normalized?",
+          "How far did price travel for the activity observed?",
+          "Where is the observation in the broader structure?",
+          "What happened after the initial event?",
+          "What evidence would invalidate the interpretation?"
+        ],
+        "scaleTitle": "Three layers of evidence",
+        "scaleItems": [
+          { "term": "Print", "question": "What executed?", "role": "Price and quantity at the transaction level." },
+          { "term": "Pattern", "question": "What changed?", "role": "Relative activity and price response across a chosen window." },
+          { "term": "Context", "question": "What could explain it?", "role": "Liquidity, events, structure, baseline, and subsequent evidence." }
+        ],
+        "finalQuote": "Volume can make an observation more consequential; it cannot make an interpretation certain.",
+        "sourceNote": "All numerical sequences in this explainer are synthetic. Educational use only; not investment advice."
+      }
+    },
+    "zh": {
+      "lang": "zh-CN",
+      "meta": {
+        "title": "股市交易原理：量价关系",
+        "description": "从连续竞价、成交机制、相对成交量、量价四象限、突破跟随、吸收与背离，到上下文清单的交互图解。"
+      },
+      "languageLabels": { "en": "English", "zh": "中文", "ja": "日本語" },
+      "ui": {
+        "pauseAll": "暂停所有动画",
+        "resumeAll": "继续所有动画",
+        "pause": "暂停",
+        "resume": "继续",
+        "reset": "重置",
+        "waiting": "图解将在进入视口后加载。",
+        "loading": "正在准备图解…",
+        "error": "图解暂时无法显示，请阅读上方文字说明。",
+        "figureFallback": "启用 JavaScript 后可操作合成数据实验。量价只是上下文证据，不是交易指令。",
+        "skipToContent": "跳到正文",
+        "languageNavigation": "语言",
+        "overviewLabel": "竞价总览",
+        "stepLabel": "步骤"
+      },
+      "hero": {
+        "eyebrow": "市场微观结构 / 上下文，而非确定性",
+        "title": "价格显示竞价走到哪里，成交量显示在那里交换了多少",
+        "subtitle": "把两者结合起来，理解参与度、流动性与价格行为的上下文证据，而不是寻找确定信号。全部序列均为合成数据，仅供教育，不构成投资建议。"
+      },
+      "overview": {
+        "title": "每一笔成交，都始于买卖订单的匹配",
+        "body": [
+          "市场是一场连续竞价。买方挂出买价，卖方挂出卖价，只有兼容订单相遇时才会成交。价格记录达成交易的位置，成交量记录交换的数量。",
+          "相同成交量可能对应完全不同的价格结果。可用流动性、紧迫程度、消息、时段和既有结构，都会影响价格走多远。"
+        ],
+        "plainLanguage": { "label": "说白了", "body": "价格是成交位置，成交量是成交数量；两者都不能单独揭示交易动机。" },
+        "keyPointsLabel": "先固定三个锚点",
+        "keyPoints": [
+          { "title": "竞价", "body": "订单在不同价位争夺有限流动性。" },
+          { "title": "成交", "body": "每次执行同时产生价格和数量。" },
+          { "title": "上下文", "body": "基准、位置与后续行为会改变解释。" }
+        ],
+        "demoTitle": "保持合成执行量不变，只切换流动性深度",
+        "copy": {
+          "ariaLabel": "比较同一合成执行量在厚流动性与薄流动性中产生不同价格位移的交互订单簿",
+          "bidBook": "买盘 · 买方",
+          "askBook": "卖盘 · 卖方",
+          "matchLabel": "撮合 900 合成单位",
+          "controlLabel": "选择一种合成流动性状态",
+          "liquidityLabel": "展示流动性",
+          "executionLabel": "合成执行量",
+          "displacementLabel": "合成价格位移",
+          "bids": [
+            { "price": "¥99.98", "size": "" },
+            { "price": "¥99.96", "size": "" },
+            { "price": "¥99.94", "size": "" }
+          ],
+          "asks": [
+            { "price": "¥100.02", "size": "" },
+            { "price": "¥100.04", "size": "" },
+            { "price": "¥100.06", "size": "" }
+          ],
+          "scenarios": [
+            { "key": "thick", "label": "厚流动性", "liquidity": "较厚", "execution": "900 单位", "executionValue": 900, "displacement": "+0.18", "displacementValue": 0.18, "impact": 18, "bidDepths": [86,94,100], "askDepths": [82,92,100], "bidSizes": ["1,240 单位","1,680 单位","2,110 单位"], "askSizes": ["1,180 单位","1,590 单位","2,030 单位"], "bookAria": "三档买卖价位均有较多展示数量的厚合成订单簿", "status": "同一合成执行量，不同价格位移：900 单位遇到较厚的展示流动性，只产生 +0.18 位移。同量不等于同位移。" },
+            { "key": "thin", "label": "薄流动性", "liquidity": "较薄", "execution": "900 单位", "executionValue": 900, "displacement": "+0.92", "displacementValue": 0.92, "impact": 92, "bidDepths": [26,38,48], "askDepths": [22,34,45], "bidSizes": ["240 单位","360 单位","470 单位"], "askSizes": ["210 单位","320 单位","440 单位"], "bookAria": "三档买卖价位展示数量均有限的薄合成订单簿", "status": "同一合成执行量，不同价格位移：900 单位在较薄的展示流动性中消耗更多档位，产生 +0.92 位移。同量不等于同位移。" },
+            { "key": "balanced", "label": "平衡参考", "liquidity": "适中", "execution": "900 单位", "executionValue": 900, "displacement": "+0.36", "displacementValue": 0.36, "impact": 36, "bidDepths": [56,70,82], "askDepths": [52,68,80], "bidSizes": ["620 单位","820 单位","1,040 单位"], "askSizes": ["590 单位","790 单位","980 单位"], "bookAria": "三档买卖价位展示数量适中的平衡合成订单簿", "status": "平衡合成参考仍把执行量固定在 900 单位，并产生 +0.36 位移；差异来自展示深度，而不是成交量本身。" }
+          ],
+          "syntheticNote": "订单簿深度、执行量和价格位移均为合成数据，仅供教育；不是实时行情、预测、推荐或投资建议。"
+        }
+      },
+      "steps": [
+        {
+          "id": "trade-mechanics",
+          "number": "01",
+          "title": "成交量统计已完成的交换，不统计“信念”",
+          "body": [
+            "每笔成交同时有买方和卖方。10,000 股成交只计 10,000 股成交量，而不是 20,000 股；它也不能证明任何一方掌握更多信息。",
+            "人们口中的买压或卖压，通常在描述谁主动跨过价差，或价格如何响应成交。单看成交量无法辨认意图。"
+          ],
+          "plainLanguage": { "label": "说白了", "body": "成交量告诉你换手多少；价格路径告诉你竞价如何消化这些活动。" },
+          "keyPointsLabel": "谨慎读取成交带",
+          "keyPoints": [
+            { "title": "一次转移", "body": "每次执行都配对一位买方和一位卖方。" },
+            { "title": "主动方只是部分证据", "body": "跨过价差代表即时性，不代表未来判断正确。" },
+            { "title": "响应很重要", "body": "大量活动、位移很小，与大量活动、轻松位移并不相同。" }
+          ],
+          "demoTitle": "对比相似成交量下的合成价格响应",
+          "copy": {
+            "ariaLabel": "比较相近成交量但不同价格响应的合成交带交互图",
+            "chartLabel": "五组合成成交及其价格标签与成交量柱",
+            "controlLabel": "选择一组合成交序列",
+            "volumeUnit": "单位",
+            "scenarios": [
+              { "label": "位移较大", "prints": [35, 52, 64, 79, 92], "prices": ["100.0", "100.2", "100.5", "100.9", "101.4"], "status": "合成序列：活动伴随成交价逐步抬高。这描述价格响应，不保证后续延续。" },
+              { "label": "位移较小", "prints": [38, 55, 68, 82, 94], "prices": ["100.0", "100.1", "100.0", "100.1", "100.0"], "status": "合成序列：相近活动只产生很小净位移。流动性可能在吸收流量，但动机和下一方向仍未知。" }
+            ],
+            "syntheticNote": "全部价格与成交量均为合成数据。实验仅供教育，不提供交易信号或投资建议。"
+          }
+        },
+        {
+          "id": "relative-volume",
+          "number": "02",
+          "title": "成交量只有相对于合适基准才有信息量",
+          "body": [
+            "一百万股对一只股票可能异常，对另一只却很平常。相对成交量把当前活动与选定常态比较，最好同时控制标的与日内时段。",
+            "基准本身是一种建模选择。清淡节假日、指数调仓、开盘集合竞价、财报或数据错误，都可能扭曲比较。"
+          ],
+          "plainLanguage": { "label": "说白了", "body": "在说成交量异常前，先问“相对什么而言？”" },
+          "keyPointsLabel": "建立有意义的比较",
+          "keyPoints": [
+            { "title": "同一标的", "body": "不同证券的流动性差异巨大。" },
+            { "title": "可比时钟", "body": "日内成交量通常有明显时段季节性。" },
+            { "title": "已知事件", "body": "计划性与结构性流量会改变基准。" }
+          ],
+          "demoTitle": "把一个合成时段与基准比较",
+          "copy": {
+            "ariaLabel": "可切换开盘附近、午间和收盘附近基准的合成相对成交量计算器",
+            "chartAriaTemplate": "{period}合成基准为 {baseline} 单位，当前成交量为 {current} 单位，相对成交量为 {ratio} 倍",
+            "periodControlLabel": "选择合成日内时段基准",
+            "controlLabel": "当前合成成交量",
+            "controlAria": "调整当前合成成交量",
+            "volumeUnit": "单位",
+            "currentLabel": "当前合成成交量",
+            "baselineLabel": "所选基准",
+            "ratioLabel": "相对成交量",
+            "baselines": [
+              { "key": "open", "label": "开盘附近", "value": 140, "history": [128,146,137,152,133,144,140] },
+              { "key": "midday", "label": "午间", "value": 65, "history": [58,69,63,72,61,66,65] },
+              { "key": "close", "label": "收盘附近", "value": 125, "history": [116,132,121,137,119,127,125] }
+            ],
+            "statusTemplate": "当前合成成交量为 {current} 单位。相对于{period}的 {baseline} 单位合成基准，相对成交量为 {ratio} 倍。同一绝对量会随所选基准改变含义，这里不暗示任何通用阈值。",
+            "syntheticNote": "全部成交量与基准均为合成数据。本比较仅供教育，不采用通用阈值，也不构成投资建议。"
+          }
+        },
+        {
+          "id": "four-quadrants",
+          "number": "03",
+          "title": "量价四象限用于组织观察，不用于预测",
+          "body": [
+            "把价格方向与相对成交量方向组合，可得到四个描述性象限。它们帮助提出有关参与度和位移难易的问题。",
+            "象限不是“放量就涨”之类规则。同一象限可出现在趋势初期、末期、震荡区间或事件跳空中。"
+          ],
+          "plainLanguage": { "label": "说白了", "body": "先用象限说清发生了什么，再调查原因和是否持续。" },
+          "keyPointsLabel": "避免二元红绿叙事",
+          "keyPoints": [
+            { "title": "方向", "body": "用箭头和文字编码价格方向，颜色只是辅助。" },
+            { "title": "参与度", "body": "用带纹理的成交量提示活动增减。" },
+            { "title": "不确定性", "body": "每个象限都支持多种解释。" }
+          ],
+          "demoTitle": "逐一审问四个描述性象限",
+          "copy": {
+            "ariaLabel": "价格方向与相对成交量方向的交互四象限矩阵",
+            "quadrants": [
+              { "title": "价 ↑ · 量 ↑", "axes": "价格更高 / 相对活动更高", "status": "价格上升同时参与扩大。可能解释包括广泛需求、空头回补、事件重估或双向换手；后续与位置决定证据意义。" },
+              { "title": "价 ↑ · 量 ↓", "axes": "价格更高 / 相对活动更低", "status": "价格在较轻活动中上升。可能是供给稀薄、安静漂移或参与减弱；缺少流动性和后续证据时都不确定。" },
+              { "title": "价 ↓ · 量 ↑", "axes": "价格更低 / 相对活动更高", "status": "价格下跌同时参与扩大。可能是紧急卖出、被动流量、重估或承接需求；不保证继续下跌。" },
+              { "title": "价 ↓ · 量 ↓", "axes": "价格更低 / 相对活动更低", "status": "价格在较轻活动中下跌。可能是安静回撤、需求不足或流动性稀薄；它只是描述，不证明反转或延续。" }
+            ],
+            "syntheticNote": "四象限使用合成条件进行概念说明。任何象限都不是买卖指令。"
+          }
+        },
+        {
+          "id": "breakout-follow-through",
+          "number": "04",
+          "title": "越过价位只是事件，后续跟随才是检验",
+          "body": [
+            "突破只是价格越过所选参考位。相对成交量升高可说明更多参与伴随越位，但不能保证价格会在参考位之外被接受。",
+            "应继续观察后续收盘、回测、区间扩张、流动性与时间尺度。本合成实验仅供教育，不能作为交易触发器。"
+          ],
+          "plainLanguage": { "label": "说白了", "body": "不要把电影停在越位那根柱上，要看竞价接下来怎么走。" },
+          "keyPointsLabel": "检验这项主张",
+          "keyPoints": [
+            { "title": "定义价位", "body": "参考位是分析选择，不是自然法则。" },
+            { "title": "观察接受", "body": "反复在价位外成交，不同于短暂刺穿。" },
+            { "title": "检查跟随", "body": "后续行为可增强、削弱或否定初始解释。" }
+          ],
+          "demoTitle": "改变合成越位后的观察窗口",
+          "copy": {
+            "ariaLabel": "比较两段突破当日相似、相对成交量都较高但后续不同的合成路径",
+            "referenceLevel": "合成参考位",
+            "controlLabel": "选择观察窗口",
+            "stateLabels": { "undetermined": "此时无法预知结果", "accepted": "后续：在上方接受", "rejected": "后续：拒绝并回到区间" },
+            "windows": [
+              { "key": "crossing", "label": "仅看越位", "status": "越位当下，两条合成路径形态相似，相对成交量都较高；此时无法预知结果，也不能把这些证据当作交易触发器。" },
+              { "key": "followThrough", "label": "观察后续", "status": "只有后续证据才能区分：路径 A 显示在被突破区上方接受，路径 B 则快速回到区间。这种事后区分不构成交易触发器或投资建议。" }
+            ],
+            "paths": [
+              { "key": "accepted", "label": "合成路径 A", "result": "accepted", "crossingCount": 6, "crossingPoints": "0,165 80,145 155,155 230,120 300,125 350,70", "followThroughPoints": "0,165 80,145 155,155 230,120 300,125 350,70 410,92 470,55 530,65 600,38", "volumes": [24,31,28,42,55,92,71,66,58,63], "aria": { "crossing": "合成路径 A 只显示高相对成交量越位，隐藏后续，结果尚无法判断", "followThrough": "合成路径 A 显示后续，并在被突破区上方获得接受" } },
+              { "key": "rejected", "label": "合成路径 B", "result": "rejected", "crossingCount": 6, "crossingPoints": "0,168 80,146 155,152 230,122 300,126 350,68", "followThroughPoints": "0,168 80,146 155,152 230,122 300,126 350,68 410,112 470,142 530,158 600,150", "volumes": [25,30,29,41,57,89,73,64,55,49], "aria": { "crossing": "合成路径 B 只显示高相对成交量越位，隐藏后续，结果尚无法判断", "followThrough": "合成路径 B 显示后续，并快速拒绝回到原区间" } }
+            ],
+            "syntheticNote": "两条路径、价格与相对成交量均为合成数据，仅供教育；不是预测、推荐、交易触发器或投资建议。"
+          }
+        },
+        {
+          "id": "absorption-divergence",
+          "number": "05",
+          "title": "努力与结果可以背离，却不能泄露下一步",
+          "body": [
+            "吸收描述大量成交遇到足够反向流动性，使价格位移小于预期。背离描述价格与所选成交量指标在多次观察中走向不同。",
+            "两者都是假设，不是隐藏意图的直接观测。吸收可能延续也可能失效；背离可通过价格、成交量、时间或基准改变而化解，绝不意味着必然反转。"
+          ],
+          "plainLanguage": { "label": "说白了", "body": "努力很多、位移很小值得调查，但不能自动下单。" },
+          "keyPointsLabel": "把观察与推断分开",
+          "keyPoints": [
+            { "title": "观察", "body": "测量价格位移、成交量、价差和时间。" },
+            { "title": "提出假设", "body": "流动性可能吸收流量，但身份和动机未知。" },
+            { "title": "寻找确认", "body": "后续行为可支持或拒绝假设。" }
+          ],
+          "demoTitle": "比较合成的努力—结果模式",
+          "copy": {
+            "ariaLabel": "比较吸收、背离与普通共振的合成数据交互图",
+            "priceLabel": "价格响应",
+            "volumeLabel": "相对活动",
+            "controlLabel": "选择一种合成模式",
+            "patterns": [
+              { "label": "可能的吸收", "price": [48, 52, 50, 54, 51, 53], "volume": [28, 45, 62, 78, 90, 94], "status": "合成观察：活动上升而价格受压缩。吸收只是一种假设；隐藏订单、双向换手或所选尺度也可能解释它。" },
+              { "label": "背离", "price": [25, 39, 52, 65, 74, 83], "volume": [86, 72, 59, 47, 38, 31], "status": "合成观察：价格推进而相对活动下降。这不意味着马上反转；流动性和基准选择也可产生同样形状。" },
+              { "label": "共同扩张", "price": [22, 31, 44, 58, 70, 82], "volume": [25, 35, 49, 61, 73, 86], "status": "合成观察：价格位移与活动一起扩大。它描述参与度，不代表未来收益或持续性。" }
+            ],
+            "syntheticNote": "所有点均为合成数据。“吸收”和“背离”是有条件的解释，不是确定信号。"
+          }
+        },
+        {
+          "id": "context-checklist",
+          "number": "06",
+          "title": "用上下文清单收尾，而不是输出交易命令",
+          "body": [
+            "严谨解读应记录标的、时段、尺度、基准、事件日历、流动性环境、大盘背景与后续跟随。缺失上下文应降低信心，而不是催生更强故事。",
+            "量价分析可以组织有关参与度、流动性与价格行为的问题；它不能确定公允价值、预测收益，也不能替代独立研究和专业意见。"
+          ],
+          "plainLanguage": { "label": "说白了", "body": "输出应是带限制条件的观察，而不是买卖、仓位或收益指引。" },
+          "keyPointsLabel": "得出结论之前",
+          "keyPoints": [
+            { "title": "标准化", "body": "为标的与时段选择可辩护的比较。" },
+            { "title": "定位", "body": "把观察放进趋势、区间、事件和流动性环境。" },
+            { "title": "复查", "body": "预先定义哪些后续证据会改变解释。" }
+          ],
+          "demoTitle": "建立一份合成证据记录",
+          "copy": {
+            "ariaLabel": "面向合成量价观察的七项交互上下文清单",
+            "meterAria": "已记录的上下文项目",
+            "items": [
+              { "key": "baseline", "title": "相关基准", "body": "同类相较，同时考虑标的与日内时段季节性。" },
+              { "key": "structure", "title": "结构位置", "body": "记录趋势、区间、参考位、缺口与观察尺度。" },
+              { "key": "liquidity", "title": "波动率与流动性", "body": "检查波动率、价差、展示深度与已知结构性流量。" },
+              { "key": "events", "title": "新闻与计划性流量", "body": "检查新闻、财报、拍卖和指数调整是否改变参与。" },
+              { "key": "close", "title": "收盘位置", "body": "记录该区间收盘相对于自身区间和参考区域的位置。" },
+              { "key": "followThrough", "title": "后续接受、拒绝或反向", "body": "观察哪些后续行为支持、削弱或否定初始假设。" },
+              { "key": "representativeness", "title": "数据源代表性", "body": "核对数据代表哪些场所、行情源、聚合方式，以及遗漏了哪些活动。" }
+            ],
+            "outcomes": { "complete": "证据较完整", "limited": "证据冲突或仍有限", "insufficient": "信息不足", "waiting": "需等待后续" },
+            "educationNote": "仅为教育框架。输出只是证据质量记录，不构成投资建议，也不提供买卖、仓位或收益指令。"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "重新组装 / 证据先于故事",
+        "title": "把参与度、流动性与响应读成一条有条件的证据链",
+        "body": [
+          "从竞价开始，把活动标准化，描述量价象限，再观察后续。把测量结果与吸收、背离等解释明确分开。",
+          "本图解仅供教育，不构成投资建议。价格和成交量都不能保证方向、收益或决策成功。"
+        ],
+        "checklistLabel": "六问解读法",
+        "checklist": [
+          "究竟是什么、在哪里、以什么时间尺度成交？",
+          "相对成交量如何标准化？",
+          "观察到的活动带来多大价格位移？",
+          "该观察位于更大结构的什么位置？",
+          "初始事件之后发生了什么？",
+          "哪些证据会否定当前解释？"
+        ],
+        "scaleTitle": "三层证据",
+        "scaleItems": [
+          { "term": "成交", "question": "执行了什么？", "role": "交易层面的价格与数量。" },
+          { "term": "模式", "question": "发生了什么变化？", "role": "所选窗口内的相对活动与价格响应。" },
+          { "term": "上下文", "question": "可能怎样解释？", "role": "流动性、事件、结构、基准与后续证据。" }
+        ],
+        "finalQuote": "成交量可以让一项观察更重要，却不能让一种解释变得确定。",
+        "sourceNote": "本图解全部数值序列均为合成数据。仅供教育，不构成投资建议。"
+      }
+    },
+    "ja": {
+      "lang": "ja",
+      "meta": {
+        "title": "株式取引の仕組み：価格と出来高の関係",
+        "description": "オークション、約定、相対出来高、四象限、ブレイク後の推移、吸収・ダイバージェンス、文脈チェックを学ぶ対話型ガイド。"
+      },
+      "languageLabels": { "en": "English", "zh": "中文", "ja": "日本語" },
+      "ui": {
+        "pauseAll": "すべての動きを停止",
+        "resumeAll": "すべての動きを再開",
+        "pause": "停止",
+        "resume": "再開",
+        "reset": "リセット",
+        "waiting": "図解は表示領域に入ると読み込まれます。",
+        "loading": "図解を準備しています…",
+        "error": "図解を表示できません。上の説明をお読みください。",
+        "figureFallback": "JavaScript を有効にすると合成データ実験を操作できます。価格と出来高は文脈証拠であり、取引指示ではありません。",
+        "skipToContent": "本文へ移動",
+        "languageNavigation": "言語",
+        "overviewLabel": "オークション概要",
+        "stepLabel": "ステップ"
+      },
+      "hero": {
+        "eyebrow": "市場マイクロストラクチャー / 確実性ではなく文脈",
+        "title": "価格はオークションの到達点、出来高はそこで交換された量を示す",
+        "subtitle": "両者を参加度・流動性・値動きの文脈証拠として読み、確実なシグナルとは扱いません。全系列は合成データで、教育目的に限られ、投資助言ではありません。"
+      },
+      "overview": {
+        "title": "すべての約定は注文のマッチングから始まる",
+        "body": [
+          "市場は連続オークションです。買い手はビッド、売り手はアスクを提示し、両立する注文が出会ったときだけ約定します。価格は合意した水準、出来高は交換量を記録します。",
+          "同じ出来高でも価格結果は異なります。利用可能な流動性、緊急度、ニュース、時間帯、周囲の構造が値幅を左右します。"
+        ],
+        "plainLanguage": { "label": "ひとことで", "body": "価格は合意の場所、出来高は合意した量です。どちらも単独では動機を示しません。" },
+        "keyPointsLabel": "三つの基準",
+        "keyPoints": [
+          { "title": "オークション", "body": "異なる価格の注文が限られた流動性を競います。" },
+          { "title": "約定", "body": "一回の執行が価格と数量を同時に生みます。" },
+          { "title": "文脈", "body": "基準、位置、その後の動きで解釈が変わります。" }
+        ],
+        "demoTitle": "合成約定量を固定し、流動性の厚みだけを変える",
+        "copy": {
+          "ariaLabel": "同じ合成約定量が厚い流動性と薄い流動性で異なる価格変位を生むことを比較する注文板",
+          "bidBook": "ビッド · 買い手",
+          "askBook": "アスク · 売り手",
+          "matchLabel": "合成 900 単位を約定",
+          "controlLabel": "合成流動性の状態を選択",
+          "liquidityLabel": "表示流動性",
+          "executionLabel": "合成約定量",
+          "displacementLabel": "合成価格変位",
+          "bids": [
+            { "price": "¥99.98", "size": "" },
+            { "price": "¥99.96", "size": "" },
+            { "price": "¥99.94", "size": "" }
+          ],
+          "asks": [
+            { "price": "¥100.02", "size": "" },
+            { "price": "¥100.04", "size": "" },
+            { "price": "¥100.06", "size": "" }
+          ],
+          "scenarios": [
+            { "key": "thick", "label": "厚い流動性", "liquidity": "厚い", "execution": "900 単位", "executionValue": 900, "displacement": "+0.18", "displacementValue": 0.18, "impact": 18, "bidDepths": [86,94,100], "askDepths": [82,92,100], "bidSizes": ["1,240 単位","1,680 単位","2,110 単位"], "askSizes": ["1,180 単位","1,590 単位","2,030 単位"], "bookAria": "三つのビッド・アスク水準に十分な表示量がある厚い合成注文板", "status": "同じ合成約定量でも変位は異なります。900 単位が厚い表示流動性に当たり、価格変位は +0.18 にとどまります。同量は同変位を意味しません。" },
+            { "key": "thin", "label": "薄い流動性", "liquidity": "薄い", "execution": "900 単位", "executionValue": 900, "displacement": "+0.92", "displacementValue": 0.92, "impact": 92, "bidDepths": [26,38,48], "askDepths": [22,34,45], "bidSizes": ["240 単位","360 単位","470 単位"], "askSizes": ["210 単位","320 単位","440 単位"], "bookAria": "三つのビッド・アスク水準の表示量が限られた薄い合成注文板", "status": "同じ合成約定量でも変位は異なります。900 単位が薄い表示流動性でより多くの水準を消費し、+0.92 変位します。同量は同変位を意味しません。" },
+            { "key": "balanced", "label": "均衡した参考", "liquidity": "中程度", "execution": "900 単位", "executionValue": 900, "displacement": "+0.36", "displacementValue": 0.36, "impact": 36, "bidDepths": [56,70,82], "askDepths": [52,68,80], "bidSizes": ["620 単位","820 単位","1,040 単位"], "askSizes": ["590 単位","790 単位","980 単位"], "bookAria": "三つのビッド・アスク水準に中程度の表示量がある均衡した合成注文板", "status": "均衡した合成参考でも約定量は 900 単位に固定され、変位は +0.36 です。差は出来高だけでなく表示の厚みで生じます。" }
+          ],
+          "syntheticNote": "注文板の厚み、約定量、価格変位はすべて合成です。教育目的であり、リアルタイム市場、予測、推奨、投資助言ではありません。"
+        }
+      },
+      "steps": [
+        {
+          "id": "trade-mechanics",
+          "number": "01",
+          "title": "出来高は完了した移転を数え、確信を数えない",
+          "body": [
+            "すべての約定には買い手と売り手がいます。10,000 株の約定は出来高 10,000 株であり 20,000 株ではなく、どちらが詳しいかも証明しません。",
+            "買い圧力・売り圧力という表現は、誰がスプレッドを越えたか、または価格が執行にどう反応したかを指すことが多く、出来高だけでは意図を識別できません。"
+          ],
+          "plainLanguage": { "label": "ひとことで", "body": "出来高は交換量、価格経路は市場がその活動をどう処理したかを示します。" },
+          "keyPointsLabel": "テープを慎重に読む",
+          "keyPoints": [
+            { "title": "一つの移転", "body": "各執行は買い手一人と売り手一人を結びます。" },
+            { "title": "積極側は部分証拠", "body": "スプレッドを越すことは即時性であり、将来の正しさではありません。" },
+            { "title": "反応が重要", "body": "大きな活動で小さく動く場合と容易に動く場合は異なります。" }
+          ],
+          "demoTitle": "似た出来高で異なる合成価格反応を比較",
+          "copy": {
+            "ariaLabel": "似た出来高と異なる価格反応を比較する合成取引テープ",
+            "chartLabel": "価格ラベルと出来高バーを持つ五つの合成取引群",
+            "controlLabel": "合成取引系列を選択",
+            "volumeUnit": "単位",
+            "scenarios": [
+              { "label": "移動が大きい", "prints": [35, 52, 64, 79, 92], "prices": ["100.0", "100.2", "100.5", "100.9", "101.4"], "status": "合成系列：活動とともに取引価格が段階的に上がりました。価格反応の説明であり、継続を保証しません。" },
+              { "label": "移動が小さい", "prints": [38, 55, 68, 82, 94], "prices": ["100.0", "100.1", "100.0", "100.1", "100.0"], "status": "合成系列：同程度の活動で純移動が小さくなりました。流動性の吸収は仮説ですが、動機と次方向は不明です。" }
+            ],
+            "syntheticNote": "価格と出来高はすべて合成です。教育実験であり、取引シグナルや投資助言ではありません。"
+          }
+        },
+        {
+          "id": "relative-volume",
+          "number": "02",
+          "title": "出来高は適切な基準と比べて初めて意味を持つ",
+          "body": [
+            "100万株はある銘柄には異常でも、別の銘柄には日常的です。相対出来高は現在活動を選んだ通常値と比較し、銘柄と時間帯をそろえるのが望まれます。",
+            "基準自体がモデル選択です。休日前後、指数リバランス、寄り付き、決算、データ誤りが比較を歪めることがあります。"
+          ],
+          "plainLanguage": { "label": "ひとことで", "body": "異常と言う前に「何と比べて高いか」を確認します。" },
+          "keyPointsLabel": "有用な比較を作る",
+          "keyPoints": [
+            { "title": "同じ銘柄", "body": "証券ごとに流動性は大きく異なります。" },
+            { "title": "比較可能な時刻", "body": "日中出来高には強い時間帯パターンがあります。" },
+            { "title": "既知イベント", "body": "予定・構造フローが基準を変えます。" }
+          ],
+          "demoTitle": "一つの合成セッションを基準と比較",
+          "copy": {
+            "ariaLabel": "寄り付き付近、日中、引け付近の基準を切り替える合成相対出来高計算機",
+            "chartAriaTemplate": "{period}の合成基準 {baseline} 単位と現在出来高 {current} 単位を比較し、相対出来高は {ratio} 倍",
+            "periodControlLabel": "合成した時間帯基準を選択",
+            "controlLabel": "現在の合成出来高",
+            "controlAria": "現在の合成出来高を調整",
+            "volumeUnit": "単位",
+            "currentLabel": "現在の合成出来高",
+            "baselineLabel": "選択した基準",
+            "ratioLabel": "相対出来高",
+            "baselines": [
+              { "key": "open", "label": "寄り付き付近", "value": 140, "history": [128,146,137,152,133,144,140] },
+              { "key": "midday", "label": "日中", "value": 65, "history": [58,69,63,72,61,66,65] },
+              { "key": "close", "label": "引け付近", "value": 125, "history": [116,132,121,137,119,127,125] }
+            ],
+            "statusTemplate": "現在の合成出来高は {current} 単位です。{period}の合成基準 {baseline} に対する相対出来高は {ratio} 倍です。同じ絶対量でも選ぶ基準で意味が変わり、普遍的な閾値を示すものではありません。",
+            "syntheticNote": "出来高と基準はすべて合成です。この比較は教育目的で、普遍的な閾値を使わず、投資助言ではありません。"
+          }
+        },
+        {
+          "id": "four-quadrants",
+          "number": "03",
+          "title": "四象限は観察を整理し、予測はしない",
+          "body": [
+            "価格方向と相対出来高方向を組み合わせると四つの記述的象限になります。参加度と動きやすさへの問いを整理できます。",
+            "象限は「出来高増なら上昇」のような規則ではありません。同じ象限がトレンド初期・末期、レンジ、イベントギャップに現れます。"
+          ],
+          "plainLanguage": { "label": "ひとことで", "body": "象限で何が起きたかを表し、理由と持続を別に調べます。" },
+          "keyPointsLabel": "赤と緑だけに頼らない",
+          "keyPoints": [
+            { "title": "方向", "body": "矢印と文字で方向を示し、色は補助にします。" },
+            { "title": "参加度", "body": "模様付き出来高表示で活動増減を示します。" },
+            { "title": "不確実性", "body": "各象限には複数の説明があります。" }
+          ],
+          "demoTitle": "四つの記述的象限を検討",
+          "copy": {
+            "ariaLabel": "価格方向と相対出来高方向のインタラクティブ四象限",
+            "quadrants": [
+              { "title": "価格 ↑ · 出来高 ↑", "axes": "高い価格 / 高い相対活動", "status": "価格上昇時に参加が拡大。広い需要、ショートカバー、イベント再評価、回転売買などがあり、追随と位置で意味が変わります。" },
+              { "title": "価格 ↑ · 出来高 ↓", "axes": "高い価格 / 低い相対活動", "status": "軽い活動で価格が上昇。供給の薄さ、静かなドリフト、参加低下などがあり、流動性と追随なしには確定できません。" },
+              { "title": "価格 ↓ · 出来高 ↑", "axes": "低い価格 / 高い相対活動", "status": "価格下落時に参加が拡大。緊急売り、強制フロー、再評価、受け止める需要などがあり、続落は保証されません。" },
+              { "title": "価格 ↓ · 出来高 ↓", "axes": "低い価格 / 低い相対活動", "status": "軽い活動で価格が下落。静かな押し、需要低下、薄い流動性などがあり、反転・継続の証明ではありません。" }
+            ],
+            "syntheticNote": "合成条件による概念四象限です。どの象限も売買指示ではありません。"
+          }
+        },
+        {
+          "id": "breakout-follow-through",
+          "number": "04",
+          "title": "水準通過はイベント、その後の推移が検証",
+          "body": [
+            "ブレイクアウトは選んだ基準を価格が越えることです。相対出来高増は参加増を示せますが、基準外での定着を保証しません。",
+            "後の終値、再試行、値幅、流動性、時間軸を確認します。この合成実験は教育目的のみで、取引トリガーにはできません。"
+          ],
+          "plainLanguage": { "label": "ひとことで", "body": "通過バーで動画を止めず、市場が次に何をするかを見ます。" },
+          "keyPointsLabel": "主張を検証する",
+          "keyPoints": [
+            { "title": "水準を定義", "body": "基準水準は分析上の選択で、自然法則ではありません。" },
+            { "title": "定着を観察", "body": "水準外で繰り返し取引することは一時的な越境と異なります。" },
+            { "title": "追随を確認", "body": "後の動きが初期解釈を強め、弱め、否定します。" }
+          ],
+          "demoTitle": "合成越境後の観察窓を変更",
+          "copy": {
+            "ariaLabel": "水準通過時は似て相対出来高も高いが後の結果が異なる二つの合成経路の比較",
+            "referenceLevel": "合成基準水準",
+            "controlLabel": "観察窓を選択",
+            "stateLabels": { "undetermined": "この時点では結果不明", "accepted": "後続：上方で定着", "rejected": "後続：拒否されレンジ内へ" },
+            "windows": [
+              { "key": "crossing", "label": "通過のみ", "status": "通過時点では二つの合成経路が似ており、どちらも相対出来高が高い状態です。結果はまだ予知できず、取引トリガーにもなりません。" },
+              { "key": "followThrough", "label": "その後を観察", "status": "後続証拠で初めて区別できます。経路 A は突破領域より上で定着し、経路 B はすぐレンジ内へ戻ります。この事後的な区別も取引トリガーや投資助言ではありません。" }
+            ],
+            "paths": [
+              { "key": "accepted", "label": "合成経路 A", "result": "accepted", "crossingCount": 6, "crossingPoints": "0,165 80,145 155,155 230,120 300,125 350,70", "followThroughPoints": "0,165 80,145 155,155 230,120 300,125 350,70 410,92 470,55 530,65 600,38", "volumes": [24,31,28,42,55,92,71,66,58,63], "aria": { "crossing": "合成経路 A は高い相対出来高で水準を通過した所までを表示し、その後と結果は隠されている", "followThrough": "合成経路 A はその後も表示し、突破領域より上での定着を示す" } },
+              { "key": "rejected", "label": "合成経路 B", "result": "rejected", "crossingCount": 6, "crossingPoints": "0,168 80,146 155,152 230,122 300,126 350,68", "followThroughPoints": "0,168 80,146 155,152 230,122 300,126 350,68 410,112 470,142 530,158 600,150", "volumes": [25,30,29,41,57,89,73,64,55,49], "aria": { "crossing": "合成経路 B は高い相対出来高で水準を通過した所までを表示し、その後と結果は隠されている", "followThrough": "合成経路 B はその後も表示し、すぐ元のレンジへ拒否される動きを示す" } }
+            ],
+            "syntheticNote": "二つの経路、価格、相対出来高はすべて合成で教育目的です。予測、推奨、取引トリガー、投資助言ではありません。"
+          }
+        },
+        {
+          "id": "absorption-divergence",
+          "number": "05",
+          "title": "努力と結果はずれても、次の動きは分からない",
+          "body": [
+            "吸収は大量執行が十分な反対流動性に出会い、価格移動が予想より小さい状態を表します。ダイバージェンスは価格と選んだ出来高指標の動きが異なることです。",
+            "どちらも隠れた意図の直接観測ではなく仮説です。吸収は続くことも崩れることもあり、乖離は価格・出来高・時間・基準変更で解消し得ます。反転は保証されません。"
+          ],
+          "plainLanguage": { "label": "ひとことで", "body": "大きな努力で小さな移動なら調べる価値はありますが、自動売買の根拠ではありません。" },
+          "keyPointsLabel": "観察と推論を分ける",
+          "keyPoints": [
+            { "title": "観察", "body": "価格移動、執行出来高、スプレッド、時間を測ります。" },
+            { "title": "仮説", "body": "流動性吸収は可能でも、主体と動機は不明です。" },
+            { "title": "確認", "body": "後の動きが仮説を支持または棄却します。" }
+          ],
+          "demoTitle": "合成した努力対結果の型を比較",
+          "copy": {
+            "ariaLabel": "吸収、ダイバージェンス、共動を比較する合成データ図",
+            "priceLabel": "価格反応",
+            "volumeLabel": "相対活動",
+            "controlLabel": "合成パターンを選択",
+            "patterns": [
+              { "label": "吸収の可能性", "price": [48, 52, 50, 54, 51, 53], "volume": [28, 45, 62, 78, 90, 94], "status": "合成観察：活動増でも価格は圧縮。吸収は一仮説で、隠れ注文、双方向回転、尺度選択も説明候補です。" },
+              { "label": "ダイバージェンス", "price": [25, 39, 52, 65, 74, 83], "volume": [86, 72, 59, 47, 38, 31], "status": "合成観察：価格上昇中に相対活動低下。即時反転を意味せず、流動性や基準選択でも同形状になります。" },
+              { "label": "共動", "price": [22, 31, 44, 58, 70, 82], "volume": [25, 35, 49, 61, 73, 86], "status": "合成観察：価格移動と活動が共に拡大。参加を説明しますが、将来収益や持続性は示しません。" }
+            ],
+            "syntheticNote": "点はすべて合成です。「吸収」と「ダイバージェンス」は条件付き解釈で、確実なシグナルではありません。"
+          }
+        },
+        {
+          "id": "context-checklist",
+          "number": "06",
+          "title": "取引命令ではなく文脈チェックで終える",
+          "body": [
+            "規律ある読み方は、銘柄、時間帯、時間軸、基準、イベント、流動性環境、市場全体、追随を記録します。文脈不足は自信を下げるべきで、強い物語を作る理由ではありません。",
+            "価格・出来高分析は参加度、流動性、値動きの問いを整理できますが、公正価値や収益を予測できず、独立調査や専門助言の代わりになりません。"
+          ],
+          "plainLanguage": { "label": "ひとことで", "body": "出力は制約付き観察であり、売買、ポジション、収益指示ではありません。" },
+          "keyPointsLabel": "結論の前に",
+          "keyPoints": [
+            { "title": "正規化", "body": "銘柄と時刻に妥当な比較を選びます。" },
+            { "title": "位置づけ", "body": "トレンド、レンジ、イベント、流動性に置きます。" },
+            { "title": "再確認", "body": "解釈を変える後続証拠を先に定義します。" }
+          ],
+          "demoTitle": "合成証拠メモを作る",
+          "copy": {
+            "ariaLabel": "合成価格出来高観察の七項目インタラクティブ文脈チェックリスト",
+            "meterAria": "記録済みの文脈項目",
+            "items": [
+              { "key": "baseline", "title": "関連する基準", "body": "同条件を比較し、銘柄と時間帯の季節性を考慮します。" },
+              { "key": "structure", "title": "構造上の位置", "body": "トレンド、レンジ、基準水準、ギャップ、観察時間軸を記録します。" },
+              { "key": "liquidity", "title": "変動性と流動性", "body": "変動性、スプレッド、表示板の厚み、既知の構造フローを確認します。" },
+              { "key": "events", "title": "ニュースと予定フロー", "body": "ニュース、決算、オークション、指数調整が参加を変えていないか確認します。" },
+              { "key": "close", "title": "終値の位置", "body": "区間内および基準領域に対する終値の位置を記録します。" },
+              { "key": "followThrough", "title": "後の定着・拒否・反転", "body": "初期仮説を支持、弱化、否定する後続行動を観察します。" },
+              { "key": "representativeness", "title": "データ源の代表性", "body": "どの市場、フィード、集計方法、欠落活動を表すデータか確認します。" }
+            ],
+            "outcomes": { "complete": "証拠は比較的そろっている", "limited": "証拠が競合、またはまだ限定的", "insufficient": "情報不足", "waiting": "後続証拠を待つ必要がある" },
+            "educationNote": "教育用フレームワークです。出力は証拠品質の記録であり、投資助言、売買、ポジション量、収益の指示ではありません。"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "統合 / 物語より証拠",
+        "title": "参加度・流動性・反応を条件付き証拠の連鎖として読む",
+        "body": [
+          "オークションから始め、活動を正規化し、四象限を記述して追随を観察します。測定と吸収・乖離などの解釈を分けます。",
+          "本図解は教育目的のみで、投資助言ではありません。価格と出来高は方向、収益、意思決定成功を保証しません。"
+        ],
+        "checklistLabel": "六つの質問",
+        "checklist": [
+          "何が、どこで、どの時間軸で取引されたか？",
+          "相対出来高はどう正規化されたか？",
+          "観察活動に対して価格はどれほど移動したか？",
+          "観察は大きな構造のどこにあるか？",
+          "初期イベント後に何が起きたか？",
+          "どの証拠が現在解釈を無効にするか？"
+        ],
+        "scaleTitle": "証拠の三層",
+        "scaleItems": [
+          { "term": "約定", "question": "何が執行された？", "role": "取引水準の価格と数量。" },
+          { "term": "パターン", "question": "何が変化した？", "role": "選択窓内の相対活動と価格反応。" },
+          { "term": "文脈", "question": "何が説明できる？", "role": "流動性、イベント、構造、基準、後続証拠。" }
+        ],
+        "finalQuote": "出来高は観察を重要にできますが、解釈を確実にはできません。",
+        "sourceNote": "本図解の数値系列はすべて合成です。教育目的のみで、投資助言ではありません。"
+      }
+    }
+  }
+}

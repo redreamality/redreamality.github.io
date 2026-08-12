@@ -95,6 +95,7 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
         : c.openLanguage.replace('{language}', availableLabel);
       const isAirConditioner = work.cover === 'air-conditioner';
       const isLoopEngineering = work.cover === 'loop-engineering';
+      const isPriceVolume = work.cover === 'price-volume';
       const isTyphoon = work.cover === 'typhoon';
 
       return (
@@ -121,6 +122,21 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
                 <div class="absolute left-[24%] top-[46%] h-px w-[52%] bg-white/35"></div>
                 <div class="absolute left-1/2 top-[38%] h-[31%] w-px bg-white/35"></div>
                 <div class="absolute left-[17%] top-[15%] h-[67%] w-[66%] rounded-[50%] border border-dashed border-white/25 motion-safe:animate-[spin_18s_linear_infinite]"></div>
+              </>
+            )}
+            {isPriceVolume && (
+              <>
+                <div class="absolute inset-7 rounded-3xl border border-white/15 bg-slate-950/35 backdrop-blur-sm"></div>
+                <div class="absolute bottom-[24%] left-[15%] flex h-[43%] w-[70%] items-end gap-2">
+                  <div class="h-[32%] flex-1 rounded-t bg-amber-300/45"></div>
+                  <div class="h-[48%] flex-1 rounded-t bg-amber-300/55"></div>
+                  <div class="h-[40%] flex-1 rounded-t bg-amber-300/45"></div>
+                  <div class="h-[72%] flex-1 rounded-t bg-amber-300/75"></div>
+                  <div class="h-[58%] flex-1 rounded-t bg-amber-300/55"></div>
+                  <div class="h-[82%] flex-1 rounded-t bg-amber-300/70"></div>
+                </div>
+                <div class="absolute left-[14%] top-[33%] h-[2px] w-[72%] -rotate-6 bg-cyan-200/80 shadow-[0_0_12px_rgba(165,243,252,.6)]"></div>
+                <div class="absolute right-[15%] top-[22%] rounded-full border border-rose-200/40 bg-rose-300/15 px-2 py-1 text-xs font-bold text-rose-100">P × V</div>
               </>
             )}
             {isTyphoon && (

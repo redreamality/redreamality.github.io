@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive, evidence-first guide to auctions, trade prints, relative volume, price-volume quadrants, follow-through, absorption, divergence, and context.">
+  <title>Price and volume in stock-market trading</title>
+  <style data-prototype-bundle="article">
+:root {
+  color-scheme: light;
+  --paper: #f4f1e8;
+  --surface: #fffdf8;
+  --ink: #17333c;
+  --muted: #60747a;
+  --line: #d8ddd7;
+  --ocean: #0f7185;
+  --warm: #ee9d46;
+  --coral: #d45f50;
+  --soft-ocean: color-mix(in srgb, var(--ocean) 9%, var(--surface));
+  --soft-warm: color-mix(in srgb, var(--warm) 12%, var(--surface));
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body { margin: 0; overflow-x: clip; color: var(--ink); background: radial-gradient(circle at 20% 0, #dff3ef 0, transparent 30rem), var(--paper); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .75rem;
+  left: .75rem;
+  padding: .65rem .9rem;
+  color: white;
+  background: var(--ink);
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.75rem;
+  padding: .65rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(216, 221, 215, .9);
+  background: rgba(244, 241, 232, .9);
+  backdrop-filter: blur(14px);
+}
+.site-header strong { margin-right: auto; font-size: .72rem; letter-spacing: .12em; }
+.language-links { display: flex; gap: .65rem; }
+.language-links a { color: var(--muted); font-size: .78rem; }
+.language-links a[aria-current="page"] { color: var(--ocean); font-weight: 800; }
+[data-global-motion] {
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.hero, .copy-block {
+  width: min(calc(100% - 2rem), 54rem);
+  margin-inline: auto;
+}
+.hero {
+  position: relative;
+  padding: clamp(5rem, 14vw, 10rem) 0;
+}
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -12% auto auto;
+  width: clamp(9rem, 28vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ocean) 35%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem color-mix(in srgb, var(--ocean) 5%, transparent),
+    0 0 0 5rem color-mix(in srgb, var(--warm) 4%, transparent);
+  content: "";
+}
+.eyebrow, .section-label {
+  margin: 0 0 1rem;
+  color: var(--ocean);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+h1, h2 { margin-top: 0; line-height: 1.03; text-wrap: balance; }
+h1 { max-width: 9em; margin-bottom: 1.5rem; font-size: clamp(3.2rem, 10vw, 7rem); letter-spacing: -.06em; }
+h2 { max-width: 16em; margin-bottom: 1.15rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+.hero-subtitle, .copy-prose { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.75; }
+.hero-subtitle { max-width: 38rem; }
+.copy-prose { margin: .8rem 0 0; }
+
+.plain-language {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .75rem 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 55%, var(--line));
+  border-radius: 1rem;
+  background: var(--soft-warm);
+}
+.plain-language strong {
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  color: var(--surface);
+  background: var(--warm);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.plain-language p { margin: 0; color: var(--ink); line-height: 1.65; }
+
+.concept-points { margin-top: 1.4rem; }
+.concept-points-label {
+  margin: 0 0 .7rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.concept-points ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.concept-card strong { display: block; margin-bottom: .45rem; }
+.concept-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+.overview, .chapter, .closing { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
+.overview { background: color-mix(in srgb, var(--surface) 42%, transparent); }
+.chapter:nth-of-type(even) { background: color-mix(in srgb, var(--surface) 22%, transparent); }
+interactive-figure {
+  display: block;
+  width: min(calc(100% - 2rem), 68rem);
+  min-height: 29rem;
+  margin: 3rem auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 51, 60, .14);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 1.5rem 4rem rgba(23, 51, 60, .1);
+}
+
+.closing { background: linear-gradient(150deg, var(--soft-ocean), color-mix(in srgb, var(--paper) 86%, var(--surface))); }
+.closing-copy { width: min(calc(100% - 2rem), 68rem); }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.starter-checklist, .boundary-map {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.closing h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.starter-checklist ol { display: grid; gap: .7rem; margin: 0; padding-left: 1.35rem; }
+.starter-checklist li { padding-left: .3rem; line-height: 1.55; }
+.boundary-map ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.scale-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: .2rem .8rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--surface);
+}
+.scale-card strong { grid-row: 1 / span 2; color: var(--ocean); }
+.scale-card span { color: var(--ink); font-size: .82rem; font-weight: 800; }
+.scale-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.closing blockquote {
+  margin: 2rem 0 0;
+  padding: 1.35rem clamp(1rem, 3vw, 1.8rem);
+  border-left: .32rem solid var(--ocean);
+  color: var(--ink);
+  background: var(--surface);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.55;
+}
+.source-note { margin: 1rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+article[data-visual-slug="loop-engineering"] .hero .eyebrow { color: var(--coral); }
+article[data-visual-slug="loop-engineering"] interactive-figure { box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ocean) 12%, transparent); }
+
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header strong { width: 100%; }
+  .language-links { margin-right: auto; }
+  interactive-figure { min-height: 32rem; border-radius: 1rem; }
+  .concept-points ul, .closing-grid { grid-template-columns: 1fr; }
+  .plain-language { grid-template-columns: 1fr; }
+  .scale-card { grid-template-columns: 5.5rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#article">Skip to content</a>
+  <header class="site-header">
+    <strong>VISUAL KIT / PROTOTYPE</strong>
+    <nav class="language-links" aria-label="Languages">
+<a href="../en/" hreflang="en" aria-current="page">English</a>
+<a href="../zh/" hreflang="zh">中文</a>
+<a href="../ja/" hreflang="ja">日本語</a>
+    </nav>
+    <button type="button" data-global-motion aria-pressed="false"></button>
+  </header>
+  <main id="article">
+    <article data-visual-slug="price-volume-relationship">
+      <header class="hero">
+        <p class="eyebrow">MARKET MICROSTRUCTURE / CONTEXT, NOT CERTAINTY</p>
+        <h1>Price shows where an auction moved. Volume shows how much traded there.</h1>
+        <p class="hero-subtitle">Learn to read the two together as evidence about participation, liquidity, and price behavior—not as a certain signal. All sequences are synthetic, for education only, and not investment advice.</p>
+      </header>
+<section class="overview" aria-labelledby="overview-title">
+  <div class="copy-block">
+    <p class="section-label">Auction overview</p>
+    <h2 id="overview-title">Every print begins with a matched auction</h2>
+    <p class="copy-prose">A market is a continuous auction. Buyers advertise bids, sellers advertise asks, and a trade prints only when compatible orders meet. Price records the level of that agreement; volume records the quantity exchanged.</p>
+<p class="copy-prose">The same reported volume can accompany very different outcomes. Available liquidity, urgency, news, time of day, and the surrounding trend all affect how far price travels.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>Price is the location of agreement. Volume is the amount of agreement. Neither reveals motive by itself.</p></aside><div class="concept-points"><p class="concept-points-label">Anchor the reading</p><ul><li class="concept-card"><strong>Auction</strong><p>Orders compete for limited liquidity at different prices.</p></li><li class="concept-card"><strong>Print</strong><p>One execution contributes both a price and a quantity.</p></li><li class="concept-card"><strong>Context</strong><p>Interpretation changes with baseline, location, and what happens next.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-auction-overview" data-title="Hold synthetic execution volume constant and change liquidity depth" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive synthetic order-book comparison showing the same execution volume producing different price displacement in thick and thin liquidity&quot;,&quot;bidBook&quot;:&quot;Bids · buyers&quot;,&quot;askBook&quot;:&quot;Asks · sellers&quot;,&quot;matchLabel&quot;:&quot;900 synthetic units matched&quot;,&quot;controlLabel&quot;:&quot;Choose a synthetic liquidity condition&quot;,&quot;liquidityLabel&quot;:&quot;Displayed liquidity&quot;,&quot;executionLabel&quot;:&quot;Synthetic execution volume&quot;,&quot;displacementLabel&quot;:&quot;Synthetic price displacement&quot;,&quot;bids&quot;:[{&quot;price&quot;:&quot;$99.98&quot;,&quot;size&quot;:&quot;&quot;},{&quot;price&quot;:&quot;$99.96&quot;,&quot;size&quot;:&quot;&quot;},{&quot;price&quot;:&quot;$99.94&quot;,&quot;size&quot;:&quot;&quot;}],&quot;asks&quot;:[{&quot;price&quot;:&quot;$100.02&quot;,&quot;size&quot;:&quot;&quot;},{&quot;price&quot;:&quot;$100.04&quot;,&quot;size&quot;:&quot;&quot;},{&quot;price&quot;:&quot;$100.06&quot;,&quot;size&quot;:&quot;&quot;}],&quot;scenarios&quot;:[{&quot;key&quot;:&quot;thick&quot;,&quot;label&quot;:&quot;Thick liquidity&quot;,&quot;liquidity&quot;:&quot;Thick&quot;,&quot;execution&quot;:&quot;900 units&quot;,&quot;executionValue&quot;:900,&quot;displacement&quot;:&quot;+0.18&quot;,&quot;displacementValue&quot;:0.18,&quot;impact&quot;:18,&quot;bidDepths&quot;:[86,94,100],&quot;askDepths&quot;:[82,92,100],&quot;bidSizes&quot;:[&quot;1,240 u&quot;,&quot;1,680 u&quot;,&quot;2,110 u&quot;],&quot;askSizes&quot;:[&quot;1,180 u&quot;,&quot;1,590 u&quot;,&quot;2,030 u&quot;],&quot;bookAria&quot;:&quot;Thick synthetic order book with substantial displayed size at three bid and ask levels&quot;,&quot;status&quot;:&quot;Same synthetic execution volume, different displacement: 900 units meet thick displayed liquidity and move price by only +0.18. Equal volume does not mean equal price displacement.&quot;},{&quot;key&quot;:&quot;thin&quot;,&quot;label&quot;:&quot;Thin liquidity&quot;,&quot;liquidity&quot;:&quot;Thin&quot;,&quot;execution&quot;:&quot;900 units&quot;,&quot;executionValue&quot;:900,&quot;displacement&quot;:&quot;+0.92&quot;,&quot;displacementValue&quot;:0.92,&quot;impact&quot;:92,&quot;bidDepths&quot;:[26,38,48],&quot;askDepths&quot;:[22,34,45],&quot;bidSizes&quot;:[&quot;240 u&quot;,&quot;360 u&quot;,&quot;470 u&quot;],&quot;askSizes&quot;:[&quot;210 u&quot;,&quot;320 u&quot;,&quot;440 u&quot;],&quot;bookAria&quot;:&quot;Thin synthetic order book with limited displayed size at three bid and ask levels&quot;,&quot;status&quot;:&quot;Same synthetic execution volume, different displacement: 900 units consume more levels in thin displayed liquidity and move price by +0.92. Equal volume does not mean equal price displacement.&quot;},{&quot;key&quot;:&quot;balanced&quot;,&quot;label&quot;:&quot;Balanced reference&quot;,&quot;liquidity&quot;:&quot;Balanced&quot;,&quot;execution&quot;:&quot;900 units&quot;,&quot;executionValue&quot;:900,&quot;displacement&quot;:&quot;+0.36&quot;,&quot;displacementValue&quot;:0.36,&quot;impact&quot;:36,&quot;bidDepths&quot;:[56,70,82],&quot;askDepths&quot;:[52,68,80],&quot;bidSizes&quot;:[&quot;620 u&quot;,&quot;820 u&quot;,&quot;1,040 u&quot;],&quot;askSizes&quot;:[&quot;590 u&quot;,&quot;790 u&quot;,&quot;980 u&quot;],&quot;bookAria&quot;:&quot;Balanced synthetic order book with moderate displayed size at three bid and ask levels&quot;,&quot;status&quot;:&quot;The balanced synthetic reference keeps execution volume at 900 units and produces +0.36 displacement. The contrast still depends on displayed depth, not volume alone.&quot;}],&quot;syntheticNote&quot;:&quot;All order-book depth, execution volume, and price displacement values are synthetic and educational—not live data, a forecast, recommendation, or investment advice.&quot;}"><noscript>Enable JavaScript to explore this synthetic-data experiment. Price and volume are contextual evidence, not trading instructions.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="trade-mechanics" aria-labelledby="trade-mechanics-title">
+  <div class="copy-block">
+    <p class="section-label">Step 01</p>
+    <h2 id="trade-mechanics-title">Volume counts completed transfers, not conviction</h2>
+    <p class="copy-prose">Every completed trade has both a buyer and a seller. A 10,000-share print is 10,000 shares of volume—not 20,000—and it does not prove that either side is informed.</p>
+<p class="copy-prose">What analysts casually call buying or selling pressure usually describes which side crossed the spread or how price responded to executions. Reported volume alone does not identify intent.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>Volume tells you how much changed hands. The path of price helps describe how the auction handled that activity.</p></aside><div class="concept-points"><p class="concept-points-label">Read the tape carefully</p><ul><li class="concept-card"><strong>One transfer</strong><p>Each execution pairs a buyer with a seller.</p></li><li class="concept-card"><strong>Aggressor is partial evidence</strong><p>Crossing the spread shows immediacy, not future correctness.</p></li><li class="concept-card"><strong>Response matters</strong><p>Large activity with small travel differs from large activity with easy travel.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-trade-mechanics" data-title="Compare synthetic trade-size and price-response sequences" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive synthetic trade tape comparing similar volume with different price responses&quot;,&quot;chartLabel&quot;:&quot;Five synthetic trade groups with price labels and volume bars&quot;,&quot;controlLabel&quot;:&quot;Choose a synthetic trade sequence&quot;,&quot;volumeUnit&quot;:&quot;units&quot;,&quot;scenarios&quot;:[{&quot;label&quot;:&quot;More travel&quot;,&quot;prints&quot;:[35,52,64,79,92],&quot;prices&quot;:[&quot;100.0&quot;,&quot;100.2&quot;,&quot;100.5&quot;,&quot;100.9&quot;,&quot;101.4&quot;],&quot;status&quot;:&quot;Synthetic sequence: activity is accompanied by progressively higher transaction prices. This describes price response, not a guaranteed continuation.&quot;},{&quot;label&quot;:&quot;Less travel&quot;,&quot;prints&quot;:[38,55,68,82,94],&quot;prices&quot;:[&quot;100.0&quot;,&quot;100.1&quot;,&quot;100.0&quot;,&quot;100.1&quot;,&quot;100.0&quot;],&quot;status&quot;:&quot;Synthetic sequence: comparable activity produces little net movement. Liquidity may be absorbing flow, but motive and next direction remain unknown.&quot;}],&quot;syntheticNote&quot;:&quot;All prices and volumes are synthetic. The experiment is educational and does not provide a trading signal or investment advice.&quot;}"><noscript>Enable JavaScript to explore this synthetic-data experiment. Price and volume are contextual evidence, not trading instructions.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="relative-volume" aria-labelledby="relative-volume-title">
+  <div class="copy-block">
+    <p class="section-label">Step 02</p>
+    <h2 id="relative-volume-title">Volume becomes informative only against a relevant baseline</h2>
+    <p class="copy-prose">A million shares can be exceptional for one stock and routine for another. Relative volume compares current activity with a chosen norm, ideally controlling for the instrument and time of day.</p>
+<p class="copy-prose">The baseline is a modeling choice. A quiet holiday, index rebalance, opening auction, earnings release, or data error can distort the comparison.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>Ask “high compared with what?” before calling volume unusual.</p></aside><div class="concept-points"><p class="concept-points-label">Build a useful comparison</p><ul><li class="concept-card"><strong>Same instrument</strong><p>Liquidity differs dramatically across securities.</p></li><li class="concept-card"><strong>Comparable clock</strong><p>Intraday volume usually has a strong time-of-day pattern.</p></li><li class="concept-card"><strong>Known events</strong><p>Scheduled and structural flows can change the baseline.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-relative-volume" data-title="Adjust one synthetic session against a baseline" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive synthetic relative-volume calculator with opening, midday, and closing time-of-day baselines&quot;,&quot;chartAriaTemplate&quot;:&quot;Synthetic {period} baseline {baseline} units compared with current volume {current} units, giving relative volume {ratio} times&quot;,&quot;periodControlLabel&quot;:&quot;Choose a synthetic time-of-day baseline&quot;,&quot;controlLabel&quot;:&quot;Current synthetic volume&quot;,&quot;controlAria&quot;:&quot;Adjust current synthetic volume&quot;,&quot;volumeUnit&quot;:&quot;units&quot;,&quot;currentLabel&quot;:&quot;Current synthetic volume&quot;,&quot;baselineLabel&quot;:&quot;Selected baseline&quot;,&quot;ratioLabel&quot;:&quot;Relative volume&quot;,&quot;baselines&quot;:[{&quot;key&quot;:&quot;open&quot;,&quot;label&quot;:&quot;Near the open&quot;,&quot;value&quot;:140,&quot;history&quot;:[128,146,137,152,133,144,140]},{&quot;key&quot;:&quot;midday&quot;,&quot;label&quot;:&quot;Midday&quot;,&quot;value&quot;:65,&quot;history&quot;:[58,69,63,72,61,66,65]},{&quot;key&quot;:&quot;close&quot;,&quot;label&quot;:&quot;Near the close&quot;,&quot;value&quot;:125,&quot;history&quot;:[116,132,121,137,119,127,125]}],&quot;statusTemplate&quot;:&quot;Current synthetic volume is {current} units. Against the {period} synthetic baseline of {baseline}, relative volume is {ratio}×. The same absolute amount changes meaning when the selected baseline changes; no universal threshold is implied.&quot;,&quot;syntheticNote&quot;:&quot;Every volume and baseline value is synthetic. The comparison is educational, uses no universal threshold, and is not investment advice.&quot;}"><noscript>Enable JavaScript to explore this synthetic-data experiment. Price and volume are contextual evidence, not trading instructions.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="four-quadrants" aria-labelledby="four-quadrants-title">
+  <div class="copy-block">
+    <p class="section-label">Step 03</p>
+    <h2 id="four-quadrants-title">Four quadrants organize observations—not predictions</h2>
+    <p class="copy-prose">Combining price direction with relative-volume direction creates four descriptive quadrants. They help formulate questions about participation and ease of movement.</p>
+<p class="copy-prose">A quadrant is not a rule such as “high volume means up.” The same quadrant can appear at trend beginnings, trend endings, noisy ranges, or event-driven gaps.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>Use the quadrant to name what happened, then investigate why and whether it persists.</p></aside><div class="concept-points"><p class="concept-points-label">Avoid binary color stories</p><ul><li class="concept-card"><strong>Direction</strong><p>Arrows and words encode price direction; color is supplementary.</p></li><li class="concept-card"><strong>Participation</strong><p>Patterned volume cues show rising or falling activity.</p></li><li class="concept-card"><strong>Uncertainty</strong><p>Each quadrant supports multiple explanations.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-four-quadrants" data-title="Interrogate the four descriptive quadrants" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive four-quadrant matrix for price direction and relative-volume direction&quot;,&quot;quadrants&quot;:[{&quot;title&quot;:&quot;Price ↑ · volume ↑&quot;,&quot;axes&quot;:&quot;Higher price / higher relative activity&quot;,&quot;status&quot;:&quot;Participation expanded as price rose. Possible explanations include broad demand, short covering, event repricing, or churn. Follow-through and location decide what the evidence means.&quot;},{&quot;title&quot;:&quot;Price ↑ · volume ↓&quot;,&quot;axes&quot;:&quot;Higher price / lower relative activity&quot;,&quot;status&quot;:&quot;Price rose on lighter activity. The path may reflect thin supply, a quiet drift, or weakening participation; none is certain without liquidity and follow-through evidence.&quot;},{&quot;title&quot;:&quot;Price ↓ · volume ↑&quot;,&quot;axes&quot;:&quot;Lower price / higher relative activity&quot;,&quot;status&quot;:&quot;Participation expanded as price fell. This may reflect urgent selling, forced flow, repricing, or responsive demand meeting supply. It does not guarantee further decline.&quot;},{&quot;title&quot;:&quot;Price ↓ · volume ↓&quot;,&quot;axes&quot;:&quot;Lower price / lower relative activity&quot;,&quot;status&quot;:&quot;Price fell on lighter activity. This can be a quiet pullback, weak demand, or thin liquidity. It is descriptive—not proof of reversal or continuation.&quot;}],&quot;syntheticNote&quot;:&quot;Conceptual quadrants using synthetic conditions. No quadrant is a buy or sell instruction.&quot;}"><noscript>Enable JavaScript to explore this synthetic-data experiment. Price and volume are contextual evidence, not trading instructions.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="breakout-follow-through" aria-labelledby="breakout-follow-through-title">
+  <div class="copy-block">
+    <p class="section-label">Step 04</p>
+    <h2 id="breakout-follow-through-title">A level crossing is an event; follow-through is the test</h2>
+    <p class="copy-prose">A breakout is simply price moving beyond a chosen reference. Elevated relative volume can show that more participation accompanied the crossing, but it cannot guarantee acceptance beyond the level.</p>
+<p class="copy-prose">Inspect subsequent closes, retests, range expansion, liquidity, and the time horizon. This synthetic experiment is educational only and must not be used as a trade trigger.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>Do not stop the film on the crossing bar. Ask what the auction does next.</p></aside><div class="concept-points"><p class="concept-points-label">Test the claim</p><ul><li class="concept-card"><strong>Define the level</strong><p>Reference levels are analytical choices, not natural laws.</p></li><li class="concept-card"><strong>Observe acceptance</strong><p>Repeated trade beyond a level differs from a brief excursion.</p></li><li class="concept-card"><strong>Check follow-through</strong><p>Later behavior can strengthen, weaken, or invalidate the initial interpretation.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-breakout-follow-through" data-title="Change the observation window after a synthetic crossing" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive comparison of two synthetic high-relative-volume crossings with different later outcomes&quot;,&quot;referenceLevel&quot;:&quot;Synthetic reference level&quot;,&quot;controlLabel&quot;:&quot;Choose the observation window&quot;,&quot;stateLabels&quot;:{&quot;undetermined&quot;:&quot;Outcome not yet knowable&quot;,&quot;accepted&quot;:&quot;Later: accepted above&quot;,&quot;rejected&quot;:&quot;Later: rejected into range&quot;},&quot;windows&quot;:[{&quot;key&quot;:&quot;crossing&quot;,&quot;label&quot;:&quot;Crossing only&quot;,&quot;status&quot;:&quot;At the crossing, both synthetic paths look similar and both have high relative volume. The outcome cannot be known at this point; this evidence is not a trading trigger.&quot;},{&quot;key&quot;:&quot;followThrough&quot;,&quot;label&quot;:&quot;Follow-through&quot;,&quot;status&quot;:&quot;Only later evidence distinguishes the paths: Path A shows acceptance above the broken area, while Path B quickly returns to the range. This retrospective distinction is not a trading trigger or investment advice.&quot;}],&quot;paths&quot;:[{&quot;key&quot;:&quot;accepted&quot;,&quot;label&quot;:&quot;Synthetic path A&quot;,&quot;result&quot;:&quot;accepted&quot;,&quot;crossingCount&quot;:6,&quot;crossingPoints&quot;:&quot;0,165 80,145 155,155 230,120 300,125 350,70&quot;,&quot;followThroughPoints&quot;:&quot;0,165 80,145 155,155 230,120 300,125 350,70 410,92 470,55 530,65 600,38&quot;,&quot;volumes&quot;:[24,31,28,42,55,92,71,66,58,63],&quot;aria&quot;:{&quot;crossing&quot;:&quot;Synthetic path A through the high-relative-volume crossing only; later outcome is hidden and undetermined&quot;,&quot;followThrough&quot;:&quot;Synthetic path A with follow-through, showing later acceptance above the broken area&quot;}},{&quot;key&quot;:&quot;rejected&quot;,&quot;label&quot;:&quot;Synthetic path B&quot;,&quot;result&quot;:&quot;rejected&quot;,&quot;crossingCount&quot;:6,&quot;crossingPoints&quot;:&quot;0,168 80,146 155,152 230,122 300,126 350,68&quot;,&quot;followThroughPoints&quot;:&quot;0,168 80,146 155,152 230,122 300,126 350,68 410,112 470,142 530,158 600,150&quot;,&quot;volumes&quot;:[25,30,29,41,57,89,73,64,55,49],&quot;aria&quot;:{&quot;crossing&quot;:&quot;Synthetic path B through the high-relative-volume crossing only; later outcome is hidden and undetermined&quot;,&quot;followThrough&quot;:&quot;Synthetic path B with follow-through, showing a quick rejection back into the prior range&quot;}}],&quot;syntheticNote&quot;:&quot;Both paths, prices, and relative-volume observations are synthetic and educational. They are not forecasts, recommendations, trading triggers, or investment advice.&quot;}"><noscript>Enable JavaScript to explore this synthetic-data experiment. Price and volume are contextual evidence, not trading instructions.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="absorption-divergence" aria-labelledby="absorption-divergence-title">
+  <div class="copy-block">
+    <p class="section-label">Step 05</p>
+    <h2 id="absorption-divergence-title">Effort and result can diverge without revealing the next move</h2>
+    <p class="copy-prose">Absorption describes substantial execution meeting enough opposing liquidity that price travels less than expected. Divergence describes price and a chosen volume measure behaving differently across observations.</p>
+<p class="copy-prose">Both are hypotheses, not direct observations of hidden intent. Absorption can persist or fail; divergence can resolve through price, volume, time, or a changed baseline. It does not guarantee reversal.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>A lot of effort with little movement is worth investigating, not automatically trading.</p></aside><div class="concept-points"><p class="concept-points-label">Separate observation from inference</p><ul><li class="concept-card"><strong>Observe</strong><p>Measure price travel, executed volume, spread, and time.</p></li><li class="concept-card"><strong>Hypothesize</strong><p>Liquidity may be absorbing flow, but identities and motives remain uncertain.</p></li><li class="concept-card"><strong>Seek confirmation</strong><p>Later behavior can support or reject the hypothesis.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-absorption-divergence" data-title="Compare synthetic effort-versus-result patterns" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive synthetic comparison of absorption, divergence, and ordinary movement&quot;,&quot;priceLabel&quot;:&quot;Price response&quot;,&quot;volumeLabel&quot;:&quot;Relative activity&quot;,&quot;controlLabel&quot;:&quot;Choose a synthetic pattern&quot;,&quot;patterns&quot;:[{&quot;label&quot;:&quot;Possible absorption&quot;,&quot;price&quot;:[48,52,50,54,51,53],&quot;volume&quot;:[28,45,62,78,90,94],&quot;status&quot;:&quot;Synthetic observation: activity rises while price remains compressed. Absorption is one hypothesis; hidden orders, two-way churn, or the selected scale may also explain it.&quot;},{&quot;label&quot;:&quot;Divergence&quot;,&quot;price&quot;:[25,39,52,65,74,83],&quot;volume&quot;:[86,72,59,47,38,31],&quot;status&quot;:&quot;Synthetic observation: price advances while relative activity fades. This does not imply an imminent reversal; liquidity and baseline choices can produce the same shape.&quot;},{&quot;label&quot;:&quot;Co-movement&quot;,&quot;price&quot;:[22,31,44,58,70,82],&quot;volume&quot;:[25,35,49,61,73,86],&quot;status&quot;:&quot;Synthetic observation: price travel and activity expand together. It describes participation, not future return or durability.&quot;}],&quot;syntheticNote&quot;:&quot;Synthetic dots only. “Absorption” and “divergence” are conditional interpretations, not certain signals.&quot;}"><noscript>Enable JavaScript to explore this synthetic-data experiment. Price and volume are contextual evidence, not trading instructions.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="context-checklist" aria-labelledby="context-checklist-title">
+  <div class="copy-block">
+    <p class="section-label">Step 06</p>
+    <h2 id="context-checklist-title">Finish with a context checklist, not a trading command</h2>
+    <p class="copy-prose">A disciplined reading documents the instrument, session, horizon, baseline, event calendar, liquidity regime, market backdrop, and follow-through. Missing context should lower confidence rather than invite a stronger story.</p>
+<p class="copy-prose">Price-volume analysis can organize questions about participation, liquidity, and price behavior. It cannot determine fair value, predict returns, or replace independent research and professional advice.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>The output is a qualified observation with known limits—not buy, sell, sizing, or return guidance.</p></aside><div class="concept-points"><p class="concept-points-label">Before drawing a conclusion</p><ul><li class="concept-card"><strong>Normalize</strong><p>Choose a defensible comparison for instrument and time.</p></li><li class="concept-card"><strong>Locate</strong><p>Place the observation inside trend, range, event, and liquidity context.</p></li><li class="concept-card"><strong>Recheck</strong><p>Define what later evidence would change the interpretation.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-context-checklist" data-title="Build a synthetic evidence note" data-copy="{&quot;ariaLabel&quot;:&quot;Seven-item interactive context checklist for a synthetic price-volume observation&quot;,&quot;meterAria&quot;:&quot;Documented context fields&quot;,&quot;items&quot;:[{&quot;key&quot;:&quot;baseline&quot;,&quot;title&quot;:&quot;Relevant baseline&quot;,&quot;body&quot;:&quot;Compare like with like, including instrument and time-of-day seasonality.&quot;},{&quot;key&quot;:&quot;structure&quot;,&quot;title&quot;:&quot;Structural location&quot;,&quot;body&quot;:&quot;Record trend, range, reference levels, gaps, and the observation horizon.&quot;},{&quot;key&quot;:&quot;liquidity&quot;,&quot;title&quot;:&quot;Volatility and liquidity&quot;,&quot;body&quot;:&quot;Inspect volatility, spread, displayed depth, and known structural flow.&quot;},{&quot;key&quot;:&quot;events&quot;,&quot;title&quot;:&quot;News and scheduled flow&quot;,&quot;body&quot;:&quot;Check news, earnings, auctions, and index adjustments that may change participation.&quot;},{&quot;key&quot;:&quot;close&quot;,&quot;title&quot;:&quot;Closing location&quot;,&quot;body&quot;:&quot;Document where the interval closed relative to its range and reference area.&quot;},{&quot;key&quot;:&quot;followThrough&quot;,&quot;title&quot;:&quot;Later acceptance, rejection, or reversal&quot;,&quot;body&quot;:&quot;Observe which later behavior supports, weakens, or contradicts the initial hypothesis.&quot;},{&quot;key&quot;:&quot;representativeness&quot;,&quot;title&quot;:&quot;Data-source representativeness&quot;,&quot;body&quot;:&quot;Ask which venue, feed, aggregation, and missing activity the data represents.&quot;}],&quot;outcomes&quot;:{&quot;complete&quot;:&quot;Evidence relatively complete&quot;,&quot;limited&quot;:&quot;Evidence conflicting or still limited&quot;,&quot;insufficient&quot;:&quot;Insufficient information&quot;,&quot;waiting&quot;:&quot;Wait for later evidence&quot;},&quot;educationNote&quot;:&quot;Educational framework only. The output is an evidence-quality note—not investment advice, a buy or sell instruction, position sizing, or return guidance.&quot;}"><noscript>Enable JavaScript to explore this synthetic-data experiment. Price and volume are contextual evidence, not trading instructions.</noscript></interactive-figure>
+</section>
+<section class="closing" aria-labelledby="closing-title">
+  <div class="copy-block closing-copy">
+    <p class="section-label">SYNTHESIS / EVIDENCE BEFORE STORY</p>
+    <h2 id="closing-title">Read participation, liquidity, and response as a chain of conditional evidence</h2>
+    <p class="copy-prose">Start with the auction, normalize activity, describe the price-volume quadrant, then observe follow-through. Separate measurements from interpretations such as absorption or divergence.</p>
+<p class="copy-prose">This visual is for education only and is not investment advice. Price and volume do not guarantee direction, returns, or a successful decision.</p>
+    <div class="closing-grid">
+      <div class="starter-checklist">
+        <h3>A six-question reading</h3>
+        <ol><li>What exactly traded, where, and over what interval?</li><li>How was relative volume normalized?</li><li>How far did price travel for the activity observed?</li><li>Where is the observation in the broader structure?</li><li>What happened after the initial event?</li><li>What evidence would invalidate the interpretation?</li></ol>
+      </div>
+      <div class="boundary-map">
+        <h3>Three layers of evidence</h3>
+        <ul><li class="scale-card"><strong>Print</strong><span>What executed?</span><p>Price and quantity at the transaction level.</p></li><li class="scale-card"><strong>Pattern</strong><span>What changed?</span><p>Relative activity and price response across a chosen window.</p></li><li class="scale-card"><strong>Context</strong><span>What could explain it?</span><p>Liquidity, events, structure, baseline, and subsequent evidence.</p></li></ul>
+      </div>
+    </div>
+    <blockquote>Volume can make an observation more consequential; it cannot make an interpretation certain.</blockquote>
+    <p class="source-note">All numerical sequences in this explainer are synthetic. Educational use only; not investment advice.</p>
+  </div>
+</section>
+    </article>
+  </main>
+  <script>
+    window.__VISUAL_I18N__ = {"pauseAll":"Pause all motion","resumeAll":"Resume all motion","pause":"Pause","resume":"Resume","reset":"Reset","waiting":"The visual will load when it enters the viewport.","loading":"Preparing the visual…","error":"The visual could not be displayed. Read the explanation above instead.","figureFallback":"Enable JavaScript to explore this synthetic-data experiment. Price and volume are contextual evidence, not trading instructions.","skipToContent":"Skip to content","languageNavigation":"Languages","overviewLabel":"Auction overview","stepLabel":"Step"};
+  </script>
+  <script data-prototype-bundle="runtime">
+(() => {
+  "use strict";
+
+  const ui = Object.freeze(window.__VISUAL_I18N__);
+  const registry = new Map();
+  const figures = new Set();
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const tokens = Object.freeze({
+    ink: "var(--visual-ink, #17333c)",
+    muted: "var(--visual-muted, #60747a)",
+    line: "var(--visual-line, #d8ddd7)",
+    ocean: "var(--visual-ocean, #0f7185)",
+    warm: "var(--visual-warm, #ee9d46)",
+    coral: "var(--visual-coral, #d45f50)",
+    paper: "var(--visual-paper, #f4f1e8)",
+    surface: "var(--visual-surface, #fffdf8)"
+  });
+  let globalPaused = false;
+
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+  const call = (instance, method, value) => {
+    if (instance && typeof instance[method] === "function") instance[method](value);
+  };
+
+  class InteractiveFigure extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
+      this._instance = null;
+      this._mounted = false;
+      this._mounting = false;
+      this._visible = false;
+      this._localPaused = false;
+    }
+
+    connectedCallback() {
+      if (this._connected) return;
+      this._connected = true;
+      figures.add(this);
+      this._shadow.innerHTML = `
+        <style>
+          :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+          .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
+          .mount { min-height: inherit; }
+          .runtime-status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; pointer-events: none; }
+          .runtime-status[data-live-only] { position: absolute; inset: auto; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; background: transparent; pointer-events: none; }
+          .runtime-status[hidden] { display: none; }
+          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
+          .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+          button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+          button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+          @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
+        </style>
+        <div class="frame">
+          <div class="stage"><div class="mount"></div><div class="runtime-status" data-runtime-status role="status"></div></div>
+          <div class="controls">
+            <span class="title"></span>
+            <button type="button" data-action="pause" aria-pressed="false"></button>
+            <button type="button" data-action="reset"></button>
+          </div>
+        </div>`;
+
+      this._stage = this._shadow.querySelector(".stage");
+      this._mountRoot = this._shadow.querySelector(".mount");
+      this._status = this._shadow.querySelector("[data-runtime-status]");
+      this._title = this._shadow.querySelector(".title");
+      this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
+      this._resetButton = this._shadow.querySelector('[data-action="reset"]');
+      this._copy = JSON.parse(this.dataset.copy || "{}");
+      this._title.textContent = this.dataset.title || "";
+      this._pauseButton.textContent = ui.pause;
+      this._resetButton.textContent = ui.reset;
+      this._setStatus(ui.waiting);
+
+      this._pauseButton.addEventListener("click", () => {
+        this._localPaused = !this._localPaused;
+        this._syncPlayback();
+      });
+      this._resetButton.addEventListener("click", () => {
+        call(this._instance, "reset");
+        this.dispatchEvent(new CustomEvent("demo-reset", { bubbles: true }));
+      });
+
+      this._observer = new IntersectionObserver((entries) => {
+        this._visible = entries[0]?.isIntersecting ?? false;
+        if (this._visible) this._mount();
+        this._syncPlayback();
+      }, { rootMargin: "180px 0px", threshold: .05 });
+      this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      figures.delete(this);
+      this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
+      call(this._instance, "destroy");
+    }
+
+    async _mount() {
+      if (this._mounted || this._mounting) return;
+      const factory = registry.get(this.dataset.demo);
+      if (!factory) return;
+      this._mounting = true;
+      this._setStatus(ui.loading);
+      try {
+        this._instance = await factory({
+          root: this._mountRoot,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
+          copy: this._copy,
+          motion: !reducedMotion.matches,
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._announce(message)
+        }) || {};
+        this._mounted = true;
+        this.dataset.state = "mounted";
+        this._liveRevision = (this._liveRevision || 0) + 1;
+        this._status.removeAttribute("data-live-only");
+        this._status.textContent = "";
+        this._status.hidden = true;
+        this._resize();
+        this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
+      } catch {
+        this.dataset.state = "error";
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
+      }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
+    }
+
+    _syncPlayback() {
+      const paused = globalPaused || this._localPaused || !this._visible || reducedMotion.matches;
+      this.dataset.playback = paused ? "paused" : "playing";
+      this._pauseButton?.setAttribute("aria-pressed", String(this._localPaused));
+      if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
+      call(this._instance, paused ? "pause" : "resume");
+    }
+
+    _setStatus(message) {
+      this._liveRevision = (this._liveRevision || 0) + 1;
+      this._status.removeAttribute("data-live-only");
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
+
+    _announce(message) {
+      const revision = (this._liveRevision || 0) + 1;
+      this._liveRevision = revision;
+      this._status.hidden = false;
+      this._status.setAttribute("data-live-only", "");
+      this._status.textContent = "";
+      queueMicrotask(() => {
+        if (this._liveRevision !== revision || !this._status.isConnected) return;
+        this._status.textContent = message;
+      });
+    }
+  }
+
+  window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
+    if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
+    registry.set(id, factory);
+    figures.forEach((figure) => {
+      if (figure.dataset.demo === id && figure._visible) figure._mount();
+    });
+  };
+
+  customElements.define("interactive-figure", InteractiveFigure);
+
+  const globalToggle = document.querySelector("[data-global-motion]");
+  const syncGlobalToggle = () => {
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
+    figures.forEach((figure) => figure._syncPlayback());
+  };
+  globalToggle?.addEventListener("click", () => {
+    globalPaused = !globalPaused;
+    syncGlobalToggle();
+  });
+  reducedMotion.addEventListener("change", syncGlobalToggle);
+  syncGlobalToggle();
+})();
+  </script>
+  <script data-prototype-bundle="demos">
+const escapeHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+registerDemo("pv-auction-overview", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-auction { display:grid; gap:1rem; min-height:25rem; padding:clamp(1rem,4vw,2.25rem); color:${tokens.ink}; background:linear-gradient(145deg,color-mix(in srgb,${tokens.ocean} 11%,${tokens.surface}),${tokens.surface} 52%,color-mix(in srgb,${tokens.warm} 10%,${tokens.surface})); }
+      .pv-auction-board { display:grid; grid-template-columns:1fr auto 1fr; gap:.75rem; align-items:center; min-height:15rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1.25rem; background:color-mix(in srgb,${tokens.paper} 38%,${tokens.surface}); }
+      .pv-auction-book { display:grid; gap:.55rem; }
+      .pv-auction-book h3 { margin:0; color:${tokens.muted}; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; }
+      .pv-auction-order { position:relative; display:flex; justify-content:space-between; gap:.5rem; isolation:isolate; overflow:hidden; padding:.65rem; border:1px solid ${tokens.line}; border-radius:.65rem; background:${tokens.surface}; font-size:.78rem; }
+      .pv-auction-order::before { position:absolute; z-index:-1; inset:0 auto 0 0; width:var(--pv-depth); content:""; background:color-mix(in srgb,${tokens.ocean} 13%,transparent); transition:width .24s ease; }
+      .pv-auction-book:last-child .pv-auction-order::before { inset:0 0 0 auto; background:color-mix(in srgb,${tokens.coral} 13%,transparent); }
+      .pv-auction-order b { color:${tokens.ocean}; }
+      .pv-auction-book:last-child .pv-auction-order b { color:${tokens.coral}; }
+      .pv-auction-match { display:grid; place-items:center; width:5.4rem; aspect-ratio:1; border:2px solid ${tokens.warm}; border-radius:50%; background:color-mix(in srgb,${tokens.warm} 13%,${tokens.surface}); text-align:center; font-size:.7rem; font-weight:850; }
+      .pv-auction-pulse { width:.65rem; height:.65rem; margin:.35rem auto 0; border-radius:50%; background:${tokens.warm}; animation:pv-auction-pulse 1.4s ease-in-out infinite; }
+      .pv-auction-impact { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.55rem; }
+      .pv-auction-metric { min-width:0; padding:.7rem; border:1px solid ${tokens.line}; border-radius:.7rem; background:${tokens.surface}; text-align:center; }
+      .pv-auction-metric strong { display:block; overflow-wrap:anywhere; color:${tokens.ocean}; font-size:.92rem; }
+      .pv-auction-metric span { color:${tokens.muted}; font-size:.66rem; }
+      .pv-auction-track { position:relative; grid-column:1/-1; height:.7rem; overflow:hidden; border-radius:999px; background:color-mix(in srgb,${tokens.line} 68%,${tokens.surface}); }
+      .pv-auction-track::after { position:absolute; top:0; bottom:0; left:calc(var(--pv-impact) * 1%); width:.8rem; border-radius:999px; content:""; background:${tokens.warm}; transform:translateX(-50%); transition:left .24s ease; }
+      .pv-auction-controls { display:flex; flex-wrap:wrap; gap:.6rem; }
+      .pv-auction-controls button { flex:1 1 9rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .pv-auction-controls button[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pv-auction-controls button:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pv-auction-status { min-height:5.5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.ocean}; border-radius:.65rem; background:color-mix(in srgb,${tokens.paper} 45%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .pv-auction-note { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .pv-auction.is-paused .pv-auction-pulse { animation-play-state:paused; }
+      @keyframes pv-auction-pulse { 50% { transform:scale(1.8); opacity:.35; } }
+      @media (prefers-reduced-motion:reduce) { .pv-auction-order::before,.pv-auction-track::after { transition:none; } }
+      @media (max-width:560px) { .pv-auction-board { grid-template-columns:1fr; } .pv-auction-match { width:4.5rem; margin:auto; } .pv-auction-impact { grid-template-columns:1fr; } .pv-auction-track { grid-column:auto; } }
+    </style>
+    <div class="pv-auction${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="pv-auction-board" data-pv-book>
+        <div class="pv-auction-book"><h3>${escapeHtml(copy.bidBook)}</h3>${copy.bids.map((item, index) => `<div class="pv-auction-order" data-pv-depth-side="bid" data-pv-depth-index="${index}"><span>${escapeHtml(item.price)}</span><b data-pv-size></b></div>`).join("")}</div>
+        <div class="pv-auction-match"><span>${escapeHtml(copy.matchLabel)}<span class="pv-auction-pulse" aria-hidden="true"></span></span></div>
+        <div class="pv-auction-book"><h3>${escapeHtml(copy.askBook)}</h3>${copy.asks.map((item, index) => `<div class="pv-auction-order" data-pv-depth-side="ask" data-pv-depth-index="${index}"><span>${escapeHtml(item.price)}</span><b data-pv-size></b></div>`).join("")}</div>
+      </div>
+      <div class="pv-auction-impact"><div class="pv-auction-metric"><strong data-pv-liquidity></strong><span>${escapeHtml(copy.liquidityLabel)}</span></div><div class="pv-auction-metric"><strong data-pv-execution></strong><span>${escapeHtml(copy.executionLabel)}</span></div><div class="pv-auction-metric"><strong data-pv-displacement></strong><span>${escapeHtml(copy.displacementLabel)}</span></div><div class="pv-auction-track" data-pv-impact-track aria-hidden="true"></div></div>
+      <div class="pv-auction-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${copy.scenarios.map((item, index) => `<button type="button" data-pv-scenario="${index}" aria-pressed="${index === 0}">${escapeHtml(item.label)}</button>`).join("")}</div>
+      <p class="pv-auction-status" data-pv-status aria-live="polite"></p>
+      <p class="pv-auction-note">${escapeHtml(copy.syntheticNote)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".pv-auction");
+  const board = root.querySelector("[data-pv-book]");
+  const status = root.querySelector(".pv-auction-status");
+  const buttons = [...root.querySelectorAll("[data-pv-scenario]")];
+  const orders = [...root.querySelectorAll("[data-pv-depth-side]")];
+  const liquidity = root.querySelector("[data-pv-liquidity]");
+  const execution = root.querySelector("[data-pv-execution]");
+  const displacement = root.querySelector("[data-pv-displacement]");
+  const impactTrack = root.querySelector("[data-pv-impact-track]");
+  const select = (index, speak = false) => {
+    const item = copy.scenarios[index];
+    scene.dataset.scenario = item.key;
+    scene.dataset.liquidity = item.key;
+    scene.dataset.executionVolume = String(item.executionValue);
+    scene.dataset.displacement = String(item.displacementValue);
+    board.setAttribute("aria-label", item.bookAria);
+    liquidity.textContent = item.liquidity;
+    execution.textContent = item.execution;
+    displacement.textContent = item.displacement;
+    impactTrack.style.setProperty("--pv-impact", String(item.impact));
+    orders.forEach((order) => {
+      const side = order.dataset.pvDepthSide;
+      const depthIndex = Number(order.dataset.pvDepthIndex);
+      const depth = item[`${side}Depths`][depthIndex];
+      order.dataset.depth = String(depth);
+      order.style.setProperty("--pv-depth", `${depth}%`);
+      order.querySelector("[data-pv-size]").textContent = item[`${side}Sizes`][depthIndex];
+    });
+    status.textContent = item.status;
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    if (speak) announce(item.status);
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.pvScenario), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("pv-trade-mechanics", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-trade { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-trade-tape { display:grid; grid-template-columns:repeat(5,1fr); gap:.5rem; align-items:end; min-height:12rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); }
+      .pv-trade-print { display:grid; align-content:end; gap:.35rem; height:100%; text-align:center; color:${tokens.muted}; font-size:.68rem; }
+      .pv-trade-bar { min-height:1.4rem; height:var(--pv-height); border-radius:.5rem .5rem .15rem .15rem; background:repeating-linear-gradient(135deg,${tokens.warm} 0 8px,color-mix(in srgb,${tokens.warm} 60%,${tokens.surface}) 8px 16px); transform-origin:bottom; animation:pv-trade-rise .8s ease both; }
+      .pv-trade-print b { color:${tokens.ocean}; font-size:.76rem; }
+      .pv-trade-controls { display:flex; flex-wrap:wrap; gap:.6rem; }
+      .pv-trade-controls button { flex:1 1 10rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .pv-trade-controls button[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pv-trade-controls button:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pv-trade-status { min-height:5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.coral}; border-radius:.65rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .pv-trade-note { margin:0; color:${tokens.muted}; font-size:.75rem; text-align:center; }
+      .pv-trade.is-paused .pv-trade-bar { animation-play-state:paused; }
+      @keyframes pv-trade-rise { from { transform:scaleY(.08); opacity:.3; } }
+      @media (max-width:420px) { .pv-trade-tape { gap:.25rem; padding:.65rem; } .pv-trade-print { font-size:.58rem; } }
+    </style>
+    <div class="pv-trade${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="pv-trade-tape" aria-label="${escapeHtml(copy.chartLabel)}"></div>
+      <div class="pv-trade-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${copy.scenarios.map((item, index) => `<button type="button" data-pv-trade="${index}" aria-pressed="${index === 0}">${escapeHtml(item.label)}</button>`).join("")}</div>
+      <p class="pv-trade-status" data-pv-status aria-live="polite"></p><p class="pv-trade-note">${escapeHtml(copy.syntheticNote)}</p>
+    </div>`;
+  const scene = root.querySelector(".pv-trade");
+  const tape = root.querySelector(".pv-trade-tape");
+  const status = root.querySelector(".pv-trade-status");
+  const buttons = [...root.querySelectorAll("[data-pv-trade]")];
+  const select = (index, speak = false) => {
+    const item = copy.scenarios[index];
+    tape.innerHTML = item.prints.map((value, printIndex) => `<div class="pv-trade-print"><b>${escapeHtml(item.prices[printIndex])}</b><div class="pv-trade-bar" style="--pv-height:${value}%"></div><span>${escapeHtml(String(value))} ${escapeHtml(copy.volumeUnit)}</span></div>`).join("");
+    status.textContent = item.status;
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    if (speak) announce(item.status);
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.pvTrade), true)));
+  select(0);
+  return { pause:()=>scene.classList.add("is-paused"), resume:()=>scene.classList.remove("is-paused"), reset:()=>select(0), destroy:()=>{ root.innerHTML=""; } };
+});
+
+registerDemo("pv-relative-volume", ({ root, copy, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-relative { display:grid; gap:1rem; min-height:20rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-relative-chart { display:flex; gap:.45rem; align-items:end; min-height:11rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1rem; background:linear-gradient(to top,color-mix(in srgb,${tokens.ocean} 7%,${tokens.surface}),${tokens.surface}); }
+      .pv-relative-column { flex:1; min-width:0; border-radius:.35rem .35rem .1rem .1rem; background:repeating-linear-gradient(135deg,${tokens.warm} 0 7px,color-mix(in srgb,${tokens.warm} 55%,${tokens.surface}) 7px 14px); }
+      .pv-relative-column:last-child { background:${tokens.ocean}; }
+      .pv-relative-periods { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .pv-relative-periods button { flex:1 1 8rem; padding:.7rem; border:1px solid ${tokens.line}; border-radius:.7rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-size:.76rem; font-weight:800; cursor:pointer; }
+      .pv-relative-periods button[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pv-relative-periods button:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pv-relative-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:.6rem; }
+      .pv-relative-metric { padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; background:color-mix(in srgb,${tokens.paper} 45%,${tokens.surface}); text-align:center; }
+      .pv-relative-metric strong { display:block; color:${tokens.ocean}; font-size:1.1rem; }
+      .pv-relative-metric span { color:${tokens.muted}; font-size:.67rem; }
+      .pv-relative-control label { display:flex; justify-content:space-between; gap:1rem; color:${tokens.muted}; font-size:.78rem; font-weight:750; }
+      .pv-relative-control input { width:100%; accent-color:${tokens.ocean}; }
+      .pv-relative-status { min-height:4rem; margin:0; color:${tokens.muted}; line-height:1.55; }
+      .pv-relative-note { margin:0; color:${tokens.muted}; font-size:.74rem; text-align:center; }
+      @media (max-width:440px) { .pv-relative-metrics { grid-template-columns:1fr; } }
+    </style>
+    <div class="pv-relative" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="pv-relative-chart" data-pv-relative-chart role="img"></div>
+      <div class="pv-relative-periods" role="group" aria-label="${escapeHtml(copy.periodControlLabel)}">${copy.baselines.map((item,index)=>`<button type="button" data-pv-baseline="${item.key}" data-pv-baseline-index="${index}" aria-pressed="${index===0}">${escapeHtml(item.label)}</button>`).join("")}</div>
+      <div class="pv-relative-control"><label for="pv-relative-input"><span>${escapeHtml(copy.controlLabel)}</span><output data-pv-output></output></label><input id="pv-relative-input" data-pv-relative-input type="range" min="30" max="180" value="100" aria-label="${escapeHtml(copy.controlAria)}"></div>
+      <div class="pv-relative-metrics"><div class="pv-relative-metric"><strong data-pv-current></strong><span>${escapeHtml(copy.currentLabel)}</span></div><div class="pv-relative-metric"><strong data-pv-baseline-value></strong><span data-pv-baseline-label></span></div><div class="pv-relative-metric"><strong data-pv-ratio></strong><span>${escapeHtml(copy.ratioLabel)}</span></div></div>
+      <p class="pv-relative-status" data-pv-status aria-live="polite"></p><p class="pv-relative-note">${escapeHtml(copy.syntheticNote)}</p>
+    </div>`;
+  const scene = root.querySelector(".pv-relative");
+  const input = root.querySelector("input");
+  const output = root.querySelector("output");
+  const chart = root.querySelector(".pv-relative-chart");
+  const current = root.querySelector("[data-pv-current]");
+  const ratio = root.querySelector("[data-pv-ratio]");
+  const baselineValue = root.querySelector("[data-pv-baseline-value]");
+  const baselineLabel = root.querySelector("[data-pv-baseline-label]");
+  const baselineButtons = [...root.querySelectorAll("[data-pv-baseline]")];
+  const status = root.querySelector(".pv-relative-status");
+  let activeBaseline = 0;
+  const render = (speak = false) => {
+    const value = Number(input.value);
+    const baseline = copy.baselines[activeBaseline];
+    const rvol = value / baseline.value;
+    scene.dataset.period = baseline.key;
+    scene.dataset.baseline = String(baseline.value);
+    scene.dataset.current = String(value);
+    scene.dataset.ratio = rvol.toFixed(2);
+    output.textContent = `${value} ${copy.volumeUnit}`;
+    current.textContent = `${value}`;
+    baselineValue.textContent = `${baseline.value}`;
+    baselineLabel.textContent = `${copy.baselineLabel} · ${baseline.label}`;
+    ratio.textContent = `${rvol.toFixed(2)}×`;
+    chart.setAttribute("aria-label", copy.chartAriaTemplate.replace("{period}",baseline.label).replace("{baseline}",String(baseline.value)).replace("{current}",String(value)).replace("{ratio}",rvol.toFixed(2)));
+    chart.innerHTML = [...baseline.history, value].map((item) => `<span class="pv-relative-column" style="height:${Math.max(12,item / 1.8)}%"></span>`).join("");
+    baselineButtons.forEach((button,index)=>button.setAttribute("aria-pressed",String(index===activeBaseline)));
+    status.textContent = copy.statusTemplate.replace("{current}",String(value)).replace("{baseline}",String(baseline.value)).replace("{period}",baseline.label).replace("{ratio}",rvol.toFixed(2));
+    if (speak) announce(status.textContent);
+  };
+  baselineButtons.forEach((button)=>button.addEventListener("click",()=>{activeBaseline=Number(button.dataset.pvBaselineIndex);render(true);}));
+  input.addEventListener("input", () => render());
+  input.addEventListener("change", () => render(true));
+  render();
+  return { reset:()=>{ activeBaseline=0; input.value="100"; render(); }, destroy:()=>{ root.innerHTML=""; } };
+});
+
+registerDemo("pv-four-quadrants", ({ root, copy, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-quadrants { display:grid; gap:1rem; min-height:24rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-quadrants-grid { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+      .pv-quadrants-card { min-height:8rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:.9rem; color:${tokens.ink}; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); font:inherit; text-align:left; cursor:pointer; }
+      .pv-quadrants-card strong { display:block; margin-bottom:.45rem; color:${tokens.ocean}; }
+      .pv-quadrants-card:nth-child(2n) strong { color:${tokens.coral}; }
+      .pv-quadrants-card span { color:${tokens.muted}; font-size:.76rem; line-height:1.45; }
+      .pv-quadrants-card[aria-pressed="true"] { border-color:${tokens.warm}; box-shadow:inset 0 0 0 2px ${tokens.warm}; }
+      .pv-quadrants-card:focus-visible { outline:3px solid ${tokens.ocean}; outline-offset:2px; }
+      .pv-quadrants-status { min-height:5.5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.warm}; border-radius:.7rem; background:color-mix(in srgb,${tokens.warm} 8%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .pv-quadrants-note { margin:0; color:${tokens.muted}; font-size:.74rem; text-align:center; }
+      @media(max-width:480px){ .pv-quadrants-grid{grid-template-columns:1fr;} .pv-quadrants-card{min-height:6rem;} }
+    </style>
+    <div class="pv-quadrants" role="group" aria-label="${escapeHtml(copy.ariaLabel)}"><div class="pv-quadrants-grid">${copy.quadrants.map((item,index)=>`<button type="button" class="pv-quadrants-card" data-pv-quadrant="${index}" aria-pressed="${index===0}"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.axes)}</span></button>`).join("")}</div><p class="pv-quadrants-status" data-pv-status aria-live="polite"></p><p class="pv-quadrants-note">${escapeHtml(copy.syntheticNote)}</p></div>`;
+  const buttons=[...root.querySelectorAll("[data-pv-quadrant]")];
+  const status=root.querySelector(".pv-quadrants-status");
+  const select=(index,speak=false)=>{ status.textContent=copy.quadrants[index].status; buttons.forEach((button,i)=>button.setAttribute("aria-pressed",String(i===index))); if(speak) announce(status.textContent); };
+  buttons.forEach((button)=>button.addEventListener("click",()=>select(Number(button.dataset.pvQuadrant),true)));
+  select(0);
+  return { reset:()=>select(0), destroy:()=>{root.innerHTML="";} };
+});
+
+registerDemo("pv-breakout-follow-through", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-breakout { display:grid; gap:1rem; min-height:23rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-breakout-path-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.75rem; }
+      .pv-breakout-card { display:grid; gap:.45rem; min-width:0; padding:.65rem; border:1px solid ${tokens.line}; border-radius:1rem; background:color-mix(in srgb,${tokens.paper} 36%,${tokens.surface}); }
+      .pv-breakout-card h3 { margin:0; font-size:.78rem; }
+      .pv-breakout-state { color:${tokens.muted}; font-size:.68rem; font-weight:800; }
+      .pv-breakout-chart { position:relative; min-height:12rem; overflow:hidden; border:1px solid ${tokens.line}; border-radius:.7rem; background:repeating-linear-gradient(to bottom,transparent 0 31px,color-mix(in srgb,${tokens.line} 55%,transparent) 31px 32px); }
+      .pv-breakout-level { position:absolute; z-index:1; top:43%; left:0; right:0; border-top:2px dashed ${tokens.coral}; color:${tokens.coral}; font-size:.68rem; font-weight:800; text-align:right; }
+      .pv-breakout-path { position:absolute; inset:12% 5%; width:90%; height:76%; fill:none; stroke:${tokens.ocean}; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:520; animation:pv-breakout-draw 1.8s ease both; }
+      .pv-breakout-volume { position:absolute; inset:auto 5% 5%; display:flex; gap:.35rem; align-items:end; height:25%; }
+      .pv-breakout-volume span { flex:1; height:var(--pv-volume); border-radius:.2rem .2rem 0 0; background:${tokens.warm}; opacity:.72; }
+      .pv-breakout-controls { display:flex; gap:.6rem; flex-wrap:wrap; }
+      .pv-breakout-controls button { flex:1 1 10rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .pv-breakout-controls button[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pv-breakout-controls button:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pv-breakout-status { min-height:5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.coral}; border-radius:.65rem; color:${tokens.muted}; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); line-height:1.55; }
+      .pv-breakout-note { margin:0; color:${tokens.muted}; font-size:.74rem; text-align:center; }
+      .pv-breakout.is-paused .pv-breakout-path { animation-play-state:paused; }
+      @keyframes pv-breakout-draw { from { stroke-dashoffset:520; } to { stroke-dashoffset:0; } }
+      @media (max-width:560px) { .pv-breakout-path-grid { grid-template-columns:1fr; } }
+    </style>
+    <div class="pv-breakout${motion?"":" is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}"><div class="pv-breakout-path-grid">${copy.paths.map((path)=>`<section class="pv-breakout-card" data-pv-path="${path.key}" data-path-state="undetermined"><h3>${escapeHtml(path.label)}</h3><span class="pv-breakout-state" data-pv-path-state-label></span><div class="pv-breakout-chart" role="img"><span class="pv-breakout-level">${escapeHtml(copy.referenceLevel)}</span><svg viewBox="0 0 600 220" class="pv-breakout-path" preserveAspectRatio="none" aria-hidden="true"><polyline data-pv-polyline></polyline></svg><div class="pv-breakout-volume" data-pv-volume></div></div></section>`).join("")}</div><div class="pv-breakout-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${copy.windows.map((item,index)=>`<button type="button" data-pv-window="${item.key}" data-pv-window-index="${index}" aria-pressed="${index===0}">${escapeHtml(item.label)}</button>`).join("")}</div><p class="pv-breakout-status" data-pv-status aria-live="polite"></p><p class="pv-breakout-note">${escapeHtml(copy.syntheticNote)}</p></div>`;
+  const scene=root.querySelector(".pv-breakout"); const status=root.querySelector(".pv-breakout-status"); const buttons=[...root.querySelectorAll("[data-pv-window]")]; const cards=[...root.querySelectorAll("[data-pv-path]")];
+  const select=(index,speak=false)=>{const windowState=copy.windows[index];scene.dataset.window=windowState.key;cards.forEach((card,pathIndex)=>{const path=copy.paths[pathIndex];const crossingOnly=windowState.key==="crossing";const state=crossingOnly?"undetermined":path.result;const points=crossingOnly?path.crossingPoints:path.followThroughPoints;const volumes=crossingOnly?path.volumes.slice(0,path.crossingCount):path.volumes;card.dataset.pathState=state;card.dataset.visiblePoints=String(points.trim().split(/\s+/).length);card.querySelector("[data-pv-path-state-label]").textContent=copy.stateLabels[state];card.querySelector("[data-pv-polyline]").setAttribute("points",points);card.querySelector("[data-pv-volume]").innerHTML=volumes.map((item)=>`<span style="--pv-volume:${item}%"></span>`).join("");card.querySelector(".pv-breakout-chart").setAttribute("aria-label",path.aria[windowState.key]);});status.textContent=windowState.status;buttons.forEach((button,i)=>button.setAttribute("aria-pressed",String(i===index)));if(speak)announce(status.textContent);};
+  buttons.forEach((button)=>button.addEventListener("click",()=>select(Number(button.dataset.pvWindowIndex),true)));select(0);
+  return { pause:()=>scene.classList.add("is-paused"),resume:()=>scene.classList.remove("is-paused"),reset:()=>select(0),destroy:()=>{root.innerHTML="";} };
+});
+
+registerDemo("pv-absorption-divergence", ({ root, copy, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-absorption { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-absorption-stage { display:grid; grid-template-columns:repeat(2,1fr); gap:.7rem; }
+      .pv-absorption-panel { min-height:10rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1rem; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); }
+      .pv-absorption-panel h3 { margin:0 0 .8rem; color:${tokens.ocean}; font-size:.82rem; }
+      .pv-absorption-panel:last-child h3 { color:${tokens.coral}; }
+      .pv-absorption-track { position:relative; height:5rem; border-bottom:1px solid ${tokens.line}; }
+      .pv-absorption-track span { position:absolute; left:var(--pv-left); bottom:var(--pv-bottom); width:.55rem; height:.55rem; border-radius:50%; background:${tokens.warm}; transform:translate(-50%,50%); }
+      .pv-absorption-controls { display:flex; gap:.6rem; flex-wrap:wrap; }
+      .pv-absorption-controls button { flex:1 1 10rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .pv-absorption-controls button[aria-pressed="true"] { border-color:${tokens.warm}; box-shadow:inset 0 0 0 1px ${tokens.warm}; }
+      .pv-absorption-controls button:focus-visible { outline:3px solid ${tokens.ocean}; outline-offset:2px; }
+      .pv-absorption-status { min-height:5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.warm}; border-radius:.65rem; color:${tokens.muted}; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); line-height:1.55; }
+      .pv-absorption-note { margin:0; color:${tokens.muted}; font-size:.74rem; text-align:center; }
+      @media(max-width:500px){.pv-absorption-stage{grid-template-columns:1fr;}}
+    </style>
+    <div class="pv-absorption" role="group" aria-label="${escapeHtml(copy.ariaLabel)}"><div class="pv-absorption-stage"><div class="pv-absorption-panel"><h3>${escapeHtml(copy.priceLabel)}</h3><div class="pv-absorption-track" data-pv-price></div></div><div class="pv-absorption-panel"><h3>${escapeHtml(copy.volumeLabel)}</h3><div class="pv-absorption-track" data-pv-volume></div></div></div><div class="pv-absorption-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${copy.patterns.map((item,index)=>`<button type="button" data-pv-pattern="${index}" aria-pressed="${index===0}">${escapeHtml(item.label)}</button>`).join("")}</div><p class="pv-absorption-status" data-pv-status aria-live="polite"></p><p class="pv-absorption-note">${escapeHtml(copy.syntheticNote)}</p></div>`;
+  const price=root.querySelector("[data-pv-price]");const volume=root.querySelector("[data-pv-volume]");const status=root.querySelector(".pv-absorption-status");const buttons=[...root.querySelectorAll("[data-pv-pattern]")];
+  const points=(items)=>items.map((item,index)=>`<span style="--pv-left:${index*20}%;--pv-bottom:${item}%"></span>`).join("");
+  const select=(index,speak=false)=>{const item=copy.patterns[index];price.innerHTML=points(item.price);volume.innerHTML=points(item.volume);status.textContent=item.status;buttons.forEach((button,i)=>button.setAttribute("aria-pressed",String(i===index)));if(speak)announce(item.status);};
+  buttons.forEach((button)=>button.addEventListener("click",()=>select(Number(button.dataset.pvPattern),true)));select(0);
+  return { reset:()=>select(0),destroy:()=>{root.innerHTML="";} };
+});
+
+registerDemo("pv-context-checklist", ({ root, copy, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-checklist { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-checklist-items { display:grid; gap:.6rem; }
+      .pv-checklist-item { display:grid; grid-template-columns:auto 1fr; gap:.75rem; align-items:start; padding:.85rem; border:1px solid ${tokens.line}; border-radius:.8rem; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); cursor:pointer; }
+      .pv-checklist-item input { width:1.15rem; height:1.15rem; accent-color:${tokens.ocean}; }
+      .pv-checklist-item strong { display:block; margin-bottom:.25rem; font-size:.82rem; }
+      .pv-checklist-item span { color:${tokens.muted}; font-size:.73rem; line-height:1.45; }
+      .pv-checklist-meter { height:.65rem; overflow:hidden; border-radius:999px; background:color-mix(in srgb,${tokens.line} 65%,${tokens.surface}); }
+      .pv-checklist-meter span { display:block; width:var(--pv-width); height:100%; background:linear-gradient(90deg,${tokens.ocean},${tokens.warm}); transition:width .2s ease; }
+      .pv-checklist-status { min-height:4rem; margin:0; padding:.8rem; border-left:.3rem solid ${tokens.ocean}; border-radius:.65rem; color:${tokens.ink}; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); font-weight:800; line-height:1.55; }
+      .pv-checklist-note { margin:0; padding:.8rem; border:1px solid color-mix(in srgb,${tokens.coral} 60%,${tokens.line}); border-radius:.7rem; color:${tokens.coral}; font-size:.76rem; font-weight:750; }
+    </style>
+    <div class="pv-checklist" role="group" aria-label="${escapeHtml(copy.ariaLabel)}"><div class="pv-checklist-items">${copy.items.map((item,index)=>`<label class="pv-checklist-item"><input type="checkbox" data-pv-check="${index}" data-check-key="${item.key}"><span><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.body)}</span></span></label>`).join("")}</div><div class="pv-checklist-meter" role="progressbar" aria-label="${escapeHtml(copy.meterAria)}" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0"><span></span></div><p class="pv-checklist-status" data-pv-status aria-live="polite"></p><p class="pv-checklist-note">${escapeHtml(copy.educationNote)}</p></div>`;
+  const scene=root.querySelector(".pv-checklist");const inputs=[...root.querySelectorAll("[data-pv-check]")];const meterRoot=root.querySelector(".pv-checklist-meter");const meter=root.querySelector(".pv-checklist-meter span");const status=root.querySelector(".pv-checklist-status");
+  const render=(speak=false)=>{const checked=inputs.filter((input)=>input.checked);const count=checked.length;const keys=new Set(checked.map((input)=>input.dataset.checkKey));let outcome="limited";if(count<=2)outcome="insufficient";else if(!keys.has("followThrough"))outcome="waiting";else if(count===inputs.length)outcome="complete";scene.dataset.outcome=outcome;scene.dataset.checkedCount=String(count);meter.style.setProperty("--pv-width",`${count/inputs.length*100}%`);meterRoot.setAttribute("aria-valuenow",String(count));status.textContent=copy.outcomes[outcome];if(speak)announce(status.textContent);};
+  inputs.forEach((input)=>input.addEventListener("change",()=>render(true)));render();
+  return { reset:()=>{inputs.forEach((input)=>{input.checked=false;});render();},destroy:()=>{root.innerHTML="";} };
+});
+  </script>
+</body>
+</html>

@@ -47,8 +47,10 @@
           :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
           .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
           .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
-          .status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; }
-          .status[hidden] { display: none; }
+          .mount { min-height: inherit; }
+          .runtime-status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; pointer-events: none; }
+          .runtime-status[data-live-only] { position: absolute; inset: auto; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; background: transparent; pointer-events: none; }
+          .runtime-status[hidden] { display: none; }
           .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
           .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
           button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
@@ -56,7 +58,7 @@
           @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
         </style>
         <div class="frame">
-          <div class="stage"><div class="status" role="status"></div></div>
+          <div class="stage"><div class="mount"></div><div class="runtime-status" data-runtime-status role="status"></div></div>
           <div class="controls">
             <span class="title"></span>
             <button type="button" data-action="pause" aria-pressed="false"></button>
@@ -65,7 +67,8 @@
         </div>`;
 
       this._stage = this._shadow.querySelector(".stage");
-      this._status = this._shadow.querySelector(".status");
+      this._mountRoot = this._shadow.querySelector(".mount");
+      this._status = this._shadow.querySelector("[data-runtime-status]");
       this._title = this._shadow.querySelector(".title");
       this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
       this._resetButton = this._shadow.querySelector('[data-action="reset"]');
@@ -111,17 +114,20 @@
       this._setStatus(ui.loading);
       try {
         this._instance = await factory({
-          root: this._stage,
+          root: this._mountRoot,
           shadow: this._shadow,
           signal: this._abortController.signal,
           copy: this._copy,
           motion: !reducedMotion.matches,
           tokens,
           resolveColor: (value) => this._resolveColor(value),
-          announce: (message) => this._setStatus(message)
+          announce: (message) => this._announce(message)
         }) || {};
         this._mounted = true;
         this.dataset.state = "mounted";
+        this._liveRevision = (this._liveRevision || 0) + 1;
+        this._status.removeAttribute("data-live-only");
+        this._status.textContent = "";
         this._status.hidden = true;
         this._resize();
         this._syncPlayback();
@@ -167,8 +173,22 @@
     }
 
     _setStatus(message) {
+      this._liveRevision = (this._liveRevision || 0) + 1;
+      this._status.removeAttribute("data-live-only");
       this._status.hidden = false;
       this._status.textContent = message;
+    }
+
+    _announce(message) {
+      const revision = (this._liveRevision || 0) + 1;
+      this._liveRevision = revision;
+      this._status.hidden = false;
+      this._status.setAttribute("data-live-only", "");
+      this._status.textContent = "";
+      queueMicrotask(() => {
+        if (this._liveRevision !== revision || !this._status.isConnected) return;
+        this._status.textContent = message;
+      });
     }
   }
 

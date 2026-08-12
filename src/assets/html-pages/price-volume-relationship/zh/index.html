@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="从连续竞价、成交机制、相对成交量、量价四象限、突破跟随、吸收与背离，到上下文清单的交互图解。">
+  <title>股市交易原理：量价关系</title>
+  <style data-prototype-bundle="article">
+:root {
+  color-scheme: light;
+  --paper: #f4f1e8;
+  --surface: #fffdf8;
+  --ink: #17333c;
+  --muted: #60747a;
+  --line: #d8ddd7;
+  --ocean: #0f7185;
+  --warm: #ee9d46;
+  --coral: #d45f50;
+  --soft-ocean: color-mix(in srgb, var(--ocean) 9%, var(--surface));
+  --soft-warm: color-mix(in srgb, var(--warm) 12%, var(--surface));
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body { margin: 0; overflow-x: clip; color: var(--ink); background: radial-gradient(circle at 20% 0, #dff3ef 0, transparent 30rem), var(--paper); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .75rem;
+  left: .75rem;
+  padding: .65rem .9rem;
+  color: white;
+  background: var(--ink);
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.75rem;
+  padding: .65rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(216, 221, 215, .9);
+  background: rgba(244, 241, 232, .9);
+  backdrop-filter: blur(14px);
+}
+.site-header strong { margin-right: auto; font-size: .72rem; letter-spacing: .12em; }
+.language-links { display: flex; gap: .65rem; }
+.language-links a { color: var(--muted); font-size: .78rem; }
+.language-links a[aria-current="page"] { color: var(--ocean); font-weight: 800; }
+[data-global-motion] {
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.hero, .copy-block {
+  width: min(calc(100% - 2rem), 54rem);
+  margin-inline: auto;
+}
+.hero {
+  position: relative;
+  padding: clamp(5rem, 14vw, 10rem) 0;
+}
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -12% auto auto;
+  width: clamp(9rem, 28vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ocean) 35%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem color-mix(in srgb, var(--ocean) 5%, transparent),
+    0 0 0 5rem color-mix(in srgb, var(--warm) 4%, transparent);
+  content: "";
+}
+.eyebrow, .section-label {
+  margin: 0 0 1rem;
+  color: var(--ocean);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+h1, h2 { margin-top: 0; line-height: 1.03; text-wrap: balance; }
+h1 { max-width: 9em; margin-bottom: 1.5rem; font-size: clamp(3.2rem, 10vw, 7rem); letter-spacing: -.06em; }
+h2 { max-width: 16em; margin-bottom: 1.15rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+.hero-subtitle, .copy-prose { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.75; }
+.hero-subtitle { max-width: 38rem; }
+.copy-prose { margin: .8rem 0 0; }
+
+.plain-language {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .75rem 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 55%, var(--line));
+  border-radius: 1rem;
+  background: var(--soft-warm);
+}
+.plain-language strong {
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  color: var(--surface);
+  background: var(--warm);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.plain-language p { margin: 0; color: var(--ink); line-height: 1.65; }
+
+.concept-points { margin-top: 1.4rem; }
+.concept-points-label {
+  margin: 0 0 .7rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.concept-points ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.concept-card strong { display: block; margin-bottom: .45rem; }
+.concept-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+.overview, .chapter, .closing { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
+.overview { background: color-mix(in srgb, var(--surface) 42%, transparent); }
+.chapter:nth-of-type(even) { background: color-mix(in srgb, var(--surface) 22%, transparent); }
+interactive-figure {
+  display: block;
+  width: min(calc(100% - 2rem), 68rem);
+  min-height: 29rem;
+  margin: 3rem auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 51, 60, .14);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 1.5rem 4rem rgba(23, 51, 60, .1);
+}
+
+.closing { background: linear-gradient(150deg, var(--soft-ocean), color-mix(in srgb, var(--paper) 86%, var(--surface))); }
+.closing-copy { width: min(calc(100% - 2rem), 68rem); }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.starter-checklist, .boundary-map {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.closing h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.starter-checklist ol { display: grid; gap: .7rem; margin: 0; padding-left: 1.35rem; }
+.starter-checklist li { padding-left: .3rem; line-height: 1.55; }
+.boundary-map ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.scale-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: .2rem .8rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--surface);
+}
+.scale-card strong { grid-row: 1 / span 2; color: var(--ocean); }
+.scale-card span { color: var(--ink); font-size: .82rem; font-weight: 800; }
+.scale-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.closing blockquote {
+  margin: 2rem 0 0;
+  padding: 1.35rem clamp(1rem, 3vw, 1.8rem);
+  border-left: .32rem solid var(--ocean);
+  color: var(--ink);
+  background: var(--surface);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.55;
+}
+.source-note { margin: 1rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+article[data-visual-slug="loop-engineering"] .hero .eyebrow { color: var(--coral); }
+article[data-visual-slug="loop-engineering"] interactive-figure { box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ocean) 12%, transparent); }
+
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header strong { width: 100%; }
+  .language-links { margin-right: auto; }
+  interactive-figure { min-height: 32rem; border-radius: 1rem; }
+  .concept-points ul, .closing-grid { grid-template-columns: 1fr; }
+  .plain-language { grid-template-columns: 1fr; }
+  .scale-card { grid-template-columns: 5.5rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#article">跳到正文</a>
+  <header class="site-header">
+    <strong>VISUAL KIT / PROTOTYPE</strong>
+    <nav class="language-links" aria-label="语言">
+<a href="../en/" hreflang="en">English</a>
+<a href="../zh/" hreflang="zh" aria-current="page">中文</a>
+<a href="../ja/" hreflang="ja">日本語</a>
+    </nav>
+    <button type="button" data-global-motion aria-pressed="false"></button>
+  </header>
+  <main id="article">
+    <article data-visual-slug="price-volume-relationship">
+      <header class="hero">
+        <p class="eyebrow">市场微观结构 / 上下文，而非确定性</p>
+        <h1>价格显示竞价走到哪里，成交量显示在那里交换了多少</h1>
+        <p class="hero-subtitle">把两者结合起来，理解参与度、流动性与价格行为的上下文证据，而不是寻找确定信号。全部序列均为合成数据，仅供教育，不构成投资建议。</p>
+      </header>
+<section class="overview" aria-labelledby="overview-title">
+  <div class="copy-block">
+    <p class="section-label">竞价总览</p>
+    <h2 id="overview-title">每一笔成交，都始于买卖订单的匹配</h2>
+    <p class="copy-prose">市场是一场连续竞价。买方挂出买价，卖方挂出卖价，只有兼容订单相遇时才会成交。价格记录达成交易的位置，成交量记录交换的数量。</p>
+<p class="copy-prose">相同成交量可能对应完全不同的价格结果。可用流动性、紧迫程度、消息、时段和既有结构，都会影响价格走多远。</p>
+    <aside class="plain-language"><strong>说白了</strong><p>价格是成交位置，成交量是成交数量；两者都不能单独揭示交易动机。</p></aside><div class="concept-points"><p class="concept-points-label">先固定三个锚点</p><ul><li class="concept-card"><strong>竞价</strong><p>订单在不同价位争夺有限流动性。</p></li><li class="concept-card"><strong>成交</strong><p>每次执行同时产生价格和数量。</p></li><li class="concept-card"><strong>上下文</strong><p>基准、位置与后续行为会改变解释。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-auction-overview" data-title="保持合成执行量不变，只切换流动性深度" data-copy="{&quot;ariaLabel&quot;:&quot;比较同一合成执行量在厚流动性与薄流动性中产生不同价格位移的交互订单簿&quot;,&quot;bidBook&quot;:&quot;买盘 · 买方&quot;,&quot;askBook&quot;:&quot;卖盘 · 卖方&quot;,&quot;matchLabel&quot;:&quot;撮合 900 合成单位&quot;,&quot;controlLabel&quot;:&quot;选择一种合成流动性状态&quot;,&quot;liquidityLabel&quot;:&quot;展示流动性&quot;,&quot;executionLabel&quot;:&quot;合成执行量&quot;,&quot;displacementLabel&quot;:&quot;合成价格位移&quot;,&quot;bids&quot;:[{&quot;price&quot;:&quot;¥99.98&quot;,&quot;size&quot;:&quot;&quot;},{&quot;price&quot;:&quot;¥99.96&quot;,&quot;size&quot;:&quot;&quot;},{&quot;price&quot;:&quot;¥99.94&quot;,&quot;size&quot;:&quot;&quot;}],&quot;asks&quot;:[{&quot;price&quot;:&quot;¥100.02&quot;,&quot;size&quot;:&quot;&quot;},{&quot;price&quot;:&quot;¥100.04&quot;,&quot;size&quot;:&quot;&quot;},{&quot;price&quot;:&quot;¥100.06&quot;,&quot;size&quot;:&quot;&quot;}],&quot;scenarios&quot;:[{&quot;key&quot;:&quot;thick&quot;,&quot;label&quot;:&quot;厚流动性&quot;,&quot;liquidity&quot;:&quot;较厚&quot;,&quot;execution&quot;:&quot;900 单位&quot;,&quot;executionValue&quot;:900,&quot;displacement&quot;:&quot;+0.18&quot;,&quot;displacementValue&quot;:0.18,&quot;impact&quot;:18,&quot;bidDepths&quot;:[86,94,100],&quot;askDepths&quot;:[82,92,100],&quot;bidSizes&quot;:[&quot;1,240 单位&quot;,&quot;1,680 单位&quot;,&quot;2,110 单位&quot;],&quot;askSizes&quot;:[&quot;1,180 单位&quot;,&quot;1,590 单位&quot;,&quot;2,030 单位&quot;],&quot;bookAria&quot;:&quot;三档买卖价位均有较多展示数量的厚合成订单簿&quot;,&quot;status&quot;:&quot;同一合成执行量，不同价格位移：900 单位遇到较厚的展示流动性，只产生 +0.18 位移。同量不等于同位移。&quot;},{&quot;key&quot;:&quot;thin&quot;,&quot;label&quot;:&quot;薄流动性&quot;,&quot;liquidity&quot;:&quot;较薄&quot;,&quot;execution&quot;:&quot;900 单位&quot;,&quot;executionValue&quot;:900,&quot;displacement&quot;:&quot;+0.92&quot;,&quot;displacementValue&quot;:0.92,&quot;impact&quot;:92,&quot;bidDepths&quot;:[26,38,48],&quot;askDepths&quot;:[22,34,45],&quot;bidSizes&quot;:[&quot;240 单位&quot;,&quot;360 单位&quot;,&quot;470 单位&quot;],&quot;askSizes&quot;:[&quot;210 单位&quot;,&quot;320 单位&quot;,&quot;440 单位&quot;],&quot;bookAria&quot;:&quot;三档买卖价位展示数量均有限的薄合成订单簿&quot;,&quot;status&quot;:&quot;同一合成执行量，不同价格位移：900 单位在较薄的展示流动性中消耗更多档位，产生 +0.92 位移。同量不等于同位移。&quot;},{&quot;key&quot;:&quot;balanced&quot;,&quot;label&quot;:&quot;平衡参考&quot;,&quot;liquidity&quot;:&quot;适中&quot;,&quot;execution&quot;:&quot;900 单位&quot;,&quot;executionValue&quot;:900,&quot;displacement&quot;:&quot;+0.36&quot;,&quot;displacementValue&quot;:0.36,&quot;impact&quot;:36,&quot;bidDepths&quot;:[56,70,82],&quot;askDepths&quot;:[52,68,80],&quot;bidSizes&quot;:[&quot;620 单位&quot;,&quot;820 单位&quot;,&quot;1,040 单位&quot;],&quot;askSizes&quot;:[&quot;590 单位&quot;,&quot;790 单位&quot;,&quot;980 单位&quot;],&quot;bookAria&quot;:&quot;三档买卖价位展示数量适中的平衡合成订单簿&quot;,&quot;status&quot;:&quot;平衡合成参考仍把执行量固定在 900 单位，并产生 +0.36 位移；差异来自展示深度，而不是成交量本身。&quot;}],&quot;syntheticNote&quot;:&quot;订单簿深度、执行量和价格位移均为合成数据，仅供教育；不是实时行情、预测、推荐或投资建议。&quot;}"><noscript>启用 JavaScript 后可操作合成数据实验。量价只是上下文证据，不是交易指令。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="trade-mechanics" aria-labelledby="trade-mechanics-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 01</p>
+    <h2 id="trade-mechanics-title">成交量统计已完成的交换，不统计“信念”</h2>
+    <p class="copy-prose">每笔成交同时有买方和卖方。10,000 股成交只计 10,000 股成交量，而不是 20,000 股；它也不能证明任何一方掌握更多信息。</p>
+<p class="copy-prose">人们口中的买压或卖压，通常在描述谁主动跨过价差，或价格如何响应成交。单看成交量无法辨认意图。</p>
+    <aside class="plain-language"><strong>说白了</strong><p>成交量告诉你换手多少；价格路径告诉你竞价如何消化这些活动。</p></aside><div class="concept-points"><p class="concept-points-label">谨慎读取成交带</p><ul><li class="concept-card"><strong>一次转移</strong><p>每次执行都配对一位买方和一位卖方。</p></li><li class="concept-card"><strong>主动方只是部分证据</strong><p>跨过价差代表即时性，不代表未来判断正确。</p></li><li class="concept-card"><strong>响应很重要</strong><p>大量活动、位移很小，与大量活动、轻松位移并不相同。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-trade-mechanics" data-title="对比相似成交量下的合成价格响应" data-copy="{&quot;ariaLabel&quot;:&quot;比较相近成交量但不同价格响应的合成交带交互图&quot;,&quot;chartLabel&quot;:&quot;五组合成成交及其价格标签与成交量柱&quot;,&quot;controlLabel&quot;:&quot;选择一组合成交序列&quot;,&quot;volumeUnit&quot;:&quot;单位&quot;,&quot;scenarios&quot;:[{&quot;label&quot;:&quot;位移较大&quot;,&quot;prints&quot;:[35,52,64,79,92],&quot;prices&quot;:[&quot;100.0&quot;,&quot;100.2&quot;,&quot;100.5&quot;,&quot;100.9&quot;,&quot;101.4&quot;],&quot;status&quot;:&quot;合成序列：活动伴随成交价逐步抬高。这描述价格响应，不保证后续延续。&quot;},{&quot;label&quot;:&quot;位移较小&quot;,&quot;prints&quot;:[38,55,68,82,94],&quot;prices&quot;:[&quot;100.0&quot;,&quot;100.1&quot;,&quot;100.0&quot;,&quot;100.1&quot;,&quot;100.0&quot;],&quot;status&quot;:&quot;合成序列：相近活动只产生很小净位移。流动性可能在吸收流量，但动机和下一方向仍未知。&quot;}],&quot;syntheticNote&quot;:&quot;全部价格与成交量均为合成数据。实验仅供教育，不提供交易信号或投资建议。&quot;}"><noscript>启用 JavaScript 后可操作合成数据实验。量价只是上下文证据，不是交易指令。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="relative-volume" aria-labelledby="relative-volume-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 02</p>
+    <h2 id="relative-volume-title">成交量只有相对于合适基准才有信息量</h2>
+    <p class="copy-prose">一百万股对一只股票可能异常，对另一只却很平常。相对成交量把当前活动与选定常态比较，最好同时控制标的与日内时段。</p>
+<p class="copy-prose">基准本身是一种建模选择。清淡节假日、指数调仓、开盘集合竞价、财报或数据错误，都可能扭曲比较。</p>
+    <aside class="plain-language"><strong>说白了</strong><p>在说成交量异常前，先问“相对什么而言？”</p></aside><div class="concept-points"><p class="concept-points-label">建立有意义的比较</p><ul><li class="concept-card"><strong>同一标的</strong><p>不同证券的流动性差异巨大。</p></li><li class="concept-card"><strong>可比时钟</strong><p>日内成交量通常有明显时段季节性。</p></li><li class="concept-card"><strong>已知事件</strong><p>计划性与结构性流量会改变基准。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-relative-volume" data-title="把一个合成时段与基准比较" data-copy="{&quot;ariaLabel&quot;:&quot;可切换开盘附近、午间和收盘附近基准的合成相对成交量计算器&quot;,&quot;chartAriaTemplate&quot;:&quot;{period}合成基准为 {baseline} 单位，当前成交量为 {current} 单位，相对成交量为 {ratio} 倍&quot;,&quot;periodControlLabel&quot;:&quot;选择合成日内时段基准&quot;,&quot;controlLabel&quot;:&quot;当前合成成交量&quot;,&quot;controlAria&quot;:&quot;调整当前合成成交量&quot;,&quot;volumeUnit&quot;:&quot;单位&quot;,&quot;currentLabel&quot;:&quot;当前合成成交量&quot;,&quot;baselineLabel&quot;:&quot;所选基准&quot;,&quot;ratioLabel&quot;:&quot;相对成交量&quot;,&quot;baselines&quot;:[{&quot;key&quot;:&quot;open&quot;,&quot;label&quot;:&quot;开盘附近&quot;,&quot;value&quot;:140,&quot;history&quot;:[128,146,137,152,133,144,140]},{&quot;key&quot;:&quot;midday&quot;,&quot;label&quot;:&quot;午间&quot;,&quot;value&quot;:65,&quot;history&quot;:[58,69,63,72,61,66,65]},{&quot;key&quot;:&quot;close&quot;,&quot;label&quot;:&quot;收盘附近&quot;,&quot;value&quot;:125,&quot;history&quot;:[116,132,121,137,119,127,125]}],&quot;statusTemplate&quot;:&quot;当前合成成交量为 {current} 单位。相对于{period}的 {baseline} 单位合成基准，相对成交量为 {ratio} 倍。同一绝对量会随所选基准改变含义，这里不暗示任何通用阈值。&quot;,&quot;syntheticNote&quot;:&quot;全部成交量与基准均为合成数据。本比较仅供教育，不采用通用阈值，也不构成投资建议。&quot;}"><noscript>启用 JavaScript 后可操作合成数据实验。量价只是上下文证据，不是交易指令。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="four-quadrants" aria-labelledby="four-quadrants-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 03</p>
+    <h2 id="four-quadrants-title">量价四象限用于组织观察，不用于预测</h2>
+    <p class="copy-prose">把价格方向与相对成交量方向组合，可得到四个描述性象限。它们帮助提出有关参与度和位移难易的问题。</p>
+<p class="copy-prose">象限不是“放量就涨”之类规则。同一象限可出现在趋势初期、末期、震荡区间或事件跳空中。</p>
+    <aside class="plain-language"><strong>说白了</strong><p>先用象限说清发生了什么，再调查原因和是否持续。</p></aside><div class="concept-points"><p class="concept-points-label">避免二元红绿叙事</p><ul><li class="concept-card"><strong>方向</strong><p>用箭头和文字编码价格方向，颜色只是辅助。</p></li><li class="concept-card"><strong>参与度</strong><p>用带纹理的成交量提示活动增减。</p></li><li class="concept-card"><strong>不确定性</strong><p>每个象限都支持多种解释。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-four-quadrants" data-title="逐一审问四个描述性象限" data-copy="{&quot;ariaLabel&quot;:&quot;价格方向与相对成交量方向的交互四象限矩阵&quot;,&quot;quadrants&quot;:[{&quot;title&quot;:&quot;价 ↑ · 量 ↑&quot;,&quot;axes&quot;:&quot;价格更高 / 相对活动更高&quot;,&quot;status&quot;:&quot;价格上升同时参与扩大。可能解释包括广泛需求、空头回补、事件重估或双向换手；后续与位置决定证据意义。&quot;},{&quot;title&quot;:&quot;价 ↑ · 量 ↓&quot;,&quot;axes&quot;:&quot;价格更高 / 相对活动更低&quot;,&quot;status&quot;:&quot;价格在较轻活动中上升。可能是供给稀薄、安静漂移或参与减弱；缺少流动性和后续证据时都不确定。&quot;},{&quot;title&quot;:&quot;价 ↓ · 量 ↑&quot;,&quot;axes&quot;:&quot;价格更低 / 相对活动更高&quot;,&quot;status&quot;:&quot;价格下跌同时参与扩大。可能是紧急卖出、被动流量、重估或承接需求；不保证继续下跌。&quot;},{&quot;title&quot;:&quot;价 ↓ · 量 ↓&quot;,&quot;axes&quot;:&quot;价格更低 / 相对活动更低&quot;,&quot;status&quot;:&quot;价格在较轻活动中下跌。可能是安静回撤、需求不足或流动性稀薄；它只是描述，不证明反转或延续。&quot;}],&quot;syntheticNote&quot;:&quot;四象限使用合成条件进行概念说明。任何象限都不是买卖指令。&quot;}"><noscript>启用 JavaScript 后可操作合成数据实验。量价只是上下文证据，不是交易指令。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="breakout-follow-through" aria-labelledby="breakout-follow-through-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 04</p>
+    <h2 id="breakout-follow-through-title">越过价位只是事件，后续跟随才是检验</h2>
+    <p class="copy-prose">突破只是价格越过所选参考位。相对成交量升高可说明更多参与伴随越位，但不能保证价格会在参考位之外被接受。</p>
+<p class="copy-prose">应继续观察后续收盘、回测、区间扩张、流动性与时间尺度。本合成实验仅供教育，不能作为交易触发器。</p>
+    <aside class="plain-language"><strong>说白了</strong><p>不要把电影停在越位那根柱上，要看竞价接下来怎么走。</p></aside><div class="concept-points"><p class="concept-points-label">检验这项主张</p><ul><li class="concept-card"><strong>定义价位</strong><p>参考位是分析选择，不是自然法则。</p></li><li class="concept-card"><strong>观察接受</strong><p>反复在价位外成交，不同于短暂刺穿。</p></li><li class="concept-card"><strong>检查跟随</strong><p>后续行为可增强、削弱或否定初始解释。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-breakout-follow-through" data-title="改变合成越位后的观察窗口" data-copy="{&quot;ariaLabel&quot;:&quot;比较两段突破当日相似、相对成交量都较高但后续不同的合成路径&quot;,&quot;referenceLevel&quot;:&quot;合成参考位&quot;,&quot;controlLabel&quot;:&quot;选择观察窗口&quot;,&quot;stateLabels&quot;:{&quot;undetermined&quot;:&quot;此时无法预知结果&quot;,&quot;accepted&quot;:&quot;后续：在上方接受&quot;,&quot;rejected&quot;:&quot;后续：拒绝并回到区间&quot;},&quot;windows&quot;:[{&quot;key&quot;:&quot;crossing&quot;,&quot;label&quot;:&quot;仅看越位&quot;,&quot;status&quot;:&quot;越位当下，两条合成路径形态相似，相对成交量都较高；此时无法预知结果，也不能把这些证据当作交易触发器。&quot;},{&quot;key&quot;:&quot;followThrough&quot;,&quot;label&quot;:&quot;观察后续&quot;,&quot;status&quot;:&quot;只有后续证据才能区分：路径 A 显示在被突破区上方接受，路径 B 则快速回到区间。这种事后区分不构成交易触发器或投资建议。&quot;}],&quot;paths&quot;:[{&quot;key&quot;:&quot;accepted&quot;,&quot;label&quot;:&quot;合成路径 A&quot;,&quot;result&quot;:&quot;accepted&quot;,&quot;crossingCount&quot;:6,&quot;crossingPoints&quot;:&quot;0,165 80,145 155,155 230,120 300,125 350,70&quot;,&quot;followThroughPoints&quot;:&quot;0,165 80,145 155,155 230,120 300,125 350,70 410,92 470,55 530,65 600,38&quot;,&quot;volumes&quot;:[24,31,28,42,55,92,71,66,58,63],&quot;aria&quot;:{&quot;crossing&quot;:&quot;合成路径 A 只显示高相对成交量越位，隐藏后续，结果尚无法判断&quot;,&quot;followThrough&quot;:&quot;合成路径 A 显示后续，并在被突破区上方获得接受&quot;}},{&quot;key&quot;:&quot;rejected&quot;,&quot;label&quot;:&quot;合成路径 B&quot;,&quot;result&quot;:&quot;rejected&quot;,&quot;crossingCount&quot;:6,&quot;crossingPoints&quot;:&quot;0,168 80,146 155,152 230,122 300,126 350,68&quot;,&quot;followThroughPoints&quot;:&quot;0,168 80,146 155,152 230,122 300,126 350,68 410,112 470,142 530,158 600,150&quot;,&quot;volumes&quot;:[25,30,29,41,57,89,73,64,55,49],&quot;aria&quot;:{&quot;crossing&quot;:&quot;合成路径 B 只显示高相对成交量越位，隐藏后续，结果尚无法判断&quot;,&quot;followThrough&quot;:&quot;合成路径 B 显示后续，并快速拒绝回到原区间&quot;}}],&quot;syntheticNote&quot;:&quot;两条路径、价格与相对成交量均为合成数据，仅供教育；不是预测、推荐、交易触发器或投资建议。&quot;}"><noscript>启用 JavaScript 后可操作合成数据实验。量价只是上下文证据，不是交易指令。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="absorption-divergence" aria-labelledby="absorption-divergence-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 05</p>
+    <h2 id="absorption-divergence-title">努力与结果可以背离，却不能泄露下一步</h2>
+    <p class="copy-prose">吸收描述大量成交遇到足够反向流动性，使价格位移小于预期。背离描述价格与所选成交量指标在多次观察中走向不同。</p>
+<p class="copy-prose">两者都是假设，不是隐藏意图的直接观测。吸收可能延续也可能失效；背离可通过价格、成交量、时间或基准改变而化解，绝不意味着必然反转。</p>
+    <aside class="plain-language"><strong>说白了</strong><p>努力很多、位移很小值得调查，但不能自动下单。</p></aside><div class="concept-points"><p class="concept-points-label">把观察与推断分开</p><ul><li class="concept-card"><strong>观察</strong><p>测量价格位移、成交量、价差和时间。</p></li><li class="concept-card"><strong>提出假设</strong><p>流动性可能吸收流量，但身份和动机未知。</p></li><li class="concept-card"><strong>寻找确认</strong><p>后续行为可支持或拒绝假设。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-absorption-divergence" data-title="比较合成的努力—结果模式" data-copy="{&quot;ariaLabel&quot;:&quot;比较吸收、背离与普通共振的合成数据交互图&quot;,&quot;priceLabel&quot;:&quot;价格响应&quot;,&quot;volumeLabel&quot;:&quot;相对活动&quot;,&quot;controlLabel&quot;:&quot;选择一种合成模式&quot;,&quot;patterns&quot;:[{&quot;label&quot;:&quot;可能的吸收&quot;,&quot;price&quot;:[48,52,50,54,51,53],&quot;volume&quot;:[28,45,62,78,90,94],&quot;status&quot;:&quot;合成观察：活动上升而价格受压缩。吸收只是一种假设；隐藏订单、双向换手或所选尺度也可能解释它。&quot;},{&quot;label&quot;:&quot;背离&quot;,&quot;price&quot;:[25,39,52,65,74,83],&quot;volume&quot;:[86,72,59,47,38,31],&quot;status&quot;:&quot;合成观察：价格推进而相对活动下降。这不意味着马上反转；流动性和基准选择也可产生同样形状。&quot;},{&quot;label&quot;:&quot;共同扩张&quot;,&quot;price&quot;:[22,31,44,58,70,82],&quot;volume&quot;:[25,35,49,61,73,86],&quot;status&quot;:&quot;合成观察：价格位移与活动一起扩大。它描述参与度，不代表未来收益或持续性。&quot;}],&quot;syntheticNote&quot;:&quot;所有点均为合成数据。“吸收”和“背离”是有条件的解释，不是确定信号。&quot;}"><noscript>启用 JavaScript 后可操作合成数据实验。量价只是上下文证据，不是交易指令。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="context-checklist" aria-labelledby="context-checklist-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 06</p>
+    <h2 id="context-checklist-title">用上下文清单收尾，而不是输出交易命令</h2>
+    <p class="copy-prose">严谨解读应记录标的、时段、尺度、基准、事件日历、流动性环境、大盘背景与后续跟随。缺失上下文应降低信心，而不是催生更强故事。</p>
+<p class="copy-prose">量价分析可以组织有关参与度、流动性与价格行为的问题；它不能确定公允价值、预测收益，也不能替代独立研究和专业意见。</p>
+    <aside class="plain-language"><strong>说白了</strong><p>输出应是带限制条件的观察，而不是买卖、仓位或收益指引。</p></aside><div class="concept-points"><p class="concept-points-label">得出结论之前</p><ul><li class="concept-card"><strong>标准化</strong><p>为标的与时段选择可辩护的比较。</p></li><li class="concept-card"><strong>定位</strong><p>把观察放进趋势、区间、事件和流动性环境。</p></li><li class="concept-card"><strong>复查</strong><p>预先定义哪些后续证据会改变解释。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-context-checklist" data-title="建立一份合成证据记录" data-copy="{&quot;ariaLabel&quot;:&quot;面向合成量价观察的七项交互上下文清单&quot;,&quot;meterAria&quot;:&quot;已记录的上下文项目&quot;,&quot;items&quot;:[{&quot;key&quot;:&quot;baseline&quot;,&quot;title&quot;:&quot;相关基准&quot;,&quot;body&quot;:&quot;同类相较，同时考虑标的与日内时段季节性。&quot;},{&quot;key&quot;:&quot;structure&quot;,&quot;title&quot;:&quot;结构位置&quot;,&quot;body&quot;:&quot;记录趋势、区间、参考位、缺口与观察尺度。&quot;},{&quot;key&quot;:&quot;liquidity&quot;,&quot;title&quot;:&quot;波动率与流动性&quot;,&quot;body&quot;:&quot;检查波动率、价差、展示深度与已知结构性流量。&quot;},{&quot;key&quot;:&quot;events&quot;,&quot;title&quot;:&quot;新闻与计划性流量&quot;,&quot;body&quot;:&quot;检查新闻、财报、拍卖和指数调整是否改变参与。&quot;},{&quot;key&quot;:&quot;close&quot;,&quot;title&quot;:&quot;收盘位置&quot;,&quot;body&quot;:&quot;记录该区间收盘相对于自身区间和参考区域的位置。&quot;},{&quot;key&quot;:&quot;followThrough&quot;,&quot;title&quot;:&quot;后续接受、拒绝或反向&quot;,&quot;body&quot;:&quot;观察哪些后续行为支持、削弱或否定初始假设。&quot;},{&quot;key&quot;:&quot;representativeness&quot;,&quot;title&quot;:&quot;数据源代表性&quot;,&quot;body&quot;:&quot;核对数据代表哪些场所、行情源、聚合方式，以及遗漏了哪些活动。&quot;}],&quot;outcomes&quot;:{&quot;complete&quot;:&quot;证据较完整&quot;,&quot;limited&quot;:&quot;证据冲突或仍有限&quot;,&quot;insufficient&quot;:&quot;信息不足&quot;,&quot;waiting&quot;:&quot;需等待后续&quot;},&quot;educationNote&quot;:&quot;仅为教育框架。输出只是证据质量记录，不构成投资建议，也不提供买卖、仓位或收益指令。&quot;}"><noscript>启用 JavaScript 后可操作合成数据实验。量价只是上下文证据，不是交易指令。</noscript></interactive-figure>
+</section>
+<section class="closing" aria-labelledby="closing-title">
+  <div class="copy-block closing-copy">
+    <p class="section-label">重新组装 / 证据先于故事</p>
+    <h2 id="closing-title">把参与度、流动性与响应读成一条有条件的证据链</h2>
+    <p class="copy-prose">从竞价开始，把活动标准化，描述量价象限，再观察后续。把测量结果与吸收、背离等解释明确分开。</p>
+<p class="copy-prose">本图解仅供教育，不构成投资建议。价格和成交量都不能保证方向、收益或决策成功。</p>
+    <div class="closing-grid">
+      <div class="starter-checklist">
+        <h3>六问解读法</h3>
+        <ol><li>究竟是什么、在哪里、以什么时间尺度成交？</li><li>相对成交量如何标准化？</li><li>观察到的活动带来多大价格位移？</li><li>该观察位于更大结构的什么位置？</li><li>初始事件之后发生了什么？</li><li>哪些证据会否定当前解释？</li></ol>
+      </div>
+      <div class="boundary-map">
+        <h3>三层证据</h3>
+        <ul><li class="scale-card"><strong>成交</strong><span>执行了什么？</span><p>交易层面的价格与数量。</p></li><li class="scale-card"><strong>模式</strong><span>发生了什么变化？</span><p>所选窗口内的相对活动与价格响应。</p></li><li class="scale-card"><strong>上下文</strong><span>可能怎样解释？</span><p>流动性、事件、结构、基准与后续证据。</p></li></ul>
+      </div>
+    </div>
+    <blockquote>成交量可以让一项观察更重要，却不能让一种解释变得确定。</blockquote>
+    <p class="source-note">本图解全部数值序列均为合成数据。仅供教育，不构成投资建议。</p>
+  </div>
+</section>
+    </article>
+  </main>
+  <script>
+    window.__VISUAL_I18N__ = {"pauseAll":"暂停所有动画","resumeAll":"继续所有动画","pause":"暂停","resume":"继续","reset":"重置","waiting":"图解将在进入视口后加载。","loading":"正在准备图解…","error":"图解暂时无法显示，请阅读上方文字说明。","figureFallback":"启用 JavaScript 后可操作合成数据实验。量价只是上下文证据，不是交易指令。","skipToContent":"跳到正文","languageNavigation":"语言","overviewLabel":"竞价总览","stepLabel":"步骤"};
+  </script>
+  <script data-prototype-bundle="runtime">
+(() => {
+  "use strict";
+
+  const ui = Object.freeze(window.__VISUAL_I18N__);
+  const registry = new Map();
+  const figures = new Set();
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const tokens = Object.freeze({
+    ink: "var(--visual-ink, #17333c)",
+    muted: "var(--visual-muted, #60747a)",
+    line: "var(--visual-line, #d8ddd7)",
+    ocean: "var(--visual-ocean, #0f7185)",
+    warm: "var(--visual-warm, #ee9d46)",
+    coral: "var(--visual-coral, #d45f50)",
+    paper: "var(--visual-paper, #f4f1e8)",
+    surface: "var(--visual-surface, #fffdf8)"
+  });
+  let globalPaused = false;
+
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+  const call = (instance, method, value) => {
+    if (instance && typeof instance[method] === "function") instance[method](value);
+  };
+
+  class InteractiveFigure extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
+      this._instance = null;
+      this._mounted = false;
+      this._mounting = false;
+      this._visible = false;
+      this._localPaused = false;
+    }
+
+    connectedCallback() {
+      if (this._connected) return;
+      this._connected = true;
+      figures.add(this);
+      this._shadow.innerHTML = `
+        <style>
+          :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+          .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
+          .mount { min-height: inherit; }
+          .runtime-status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; pointer-events: none; }
+          .runtime-status[data-live-only] { position: absolute; inset: auto; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; background: transparent; pointer-events: none; }
+          .runtime-status[hidden] { display: none; }
+          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
+          .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+          button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+          button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+          @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
+        </style>
+        <div class="frame">
+          <div class="stage"><div class="mount"></div><div class="runtime-status" data-runtime-status role="status"></div></div>
+          <div class="controls">
+            <span class="title"></span>
+            <button type="button" data-action="pause" aria-pressed="false"></button>
+            <button type="button" data-action="reset"></button>
+          </div>
+        </div>`;
+
+      this._stage = this._shadow.querySelector(".stage");
+      this._mountRoot = this._shadow.querySelector(".mount");
+      this._status = this._shadow.querySelector("[data-runtime-status]");
+      this._title = this._shadow.querySelector(".title");
+      this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
+      this._resetButton = this._shadow.querySelector('[data-action="reset"]');
+      this._copy = JSON.parse(this.dataset.copy || "{}");
+      this._title.textContent = this.dataset.title || "";
+      this._pauseButton.textContent = ui.pause;
+      this._resetButton.textContent = ui.reset;
+      this._setStatus(ui.waiting);
+
+      this._pauseButton.addEventListener("click", () => {
+        this._localPaused = !this._localPaused;
+        this._syncPlayback();
+      });
+      this._resetButton.addEventListener("click", () => {
+        call(this._instance, "reset");
+        this.dispatchEvent(new CustomEvent("demo-reset", { bubbles: true }));
+      });
+
+      this._observer = new IntersectionObserver((entries) => {
+        this._visible = entries[0]?.isIntersecting ?? false;
+        if (this._visible) this._mount();
+        this._syncPlayback();
+      }, { rootMargin: "180px 0px", threshold: .05 });
+      this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      figures.delete(this);
+      this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
+      call(this._instance, "destroy");
+    }
+
+    async _mount() {
+      if (this._mounted || this._mounting) return;
+      const factory = registry.get(this.dataset.demo);
+      if (!factory) return;
+      this._mounting = true;
+      this._setStatus(ui.loading);
+      try {
+        this._instance = await factory({
+          root: this._mountRoot,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
+          copy: this._copy,
+          motion: !reducedMotion.matches,
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._announce(message)
+        }) || {};
+        this._mounted = true;
+        this.dataset.state = "mounted";
+        this._liveRevision = (this._liveRevision || 0) + 1;
+        this._status.removeAttribute("data-live-only");
+        this._status.textContent = "";
+        this._status.hidden = true;
+        this._resize();
+        this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
+      } catch {
+        this.dataset.state = "error";
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
+      }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
+    }
+
+    _syncPlayback() {
+      const paused = globalPaused || this._localPaused || !this._visible || reducedMotion.matches;
+      this.dataset.playback = paused ? "paused" : "playing";
+      this._pauseButton?.setAttribute("aria-pressed", String(this._localPaused));
+      if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
+      call(this._instance, paused ? "pause" : "resume");
+    }
+
+    _setStatus(message) {
+      this._liveRevision = (this._liveRevision || 0) + 1;
+      this._status.removeAttribute("data-live-only");
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
+
+    _announce(message) {
+      const revision = (this._liveRevision || 0) + 1;
+      this._liveRevision = revision;
+      this._status.hidden = false;
+      this._status.setAttribute("data-live-only", "");
+      this._status.textContent = "";
+      queueMicrotask(() => {
+        if (this._liveRevision !== revision || !this._status.isConnected) return;
+        this._status.textContent = message;
+      });
+    }
+  }
+
+  window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
+    if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
+    registry.set(id, factory);
+    figures.forEach((figure) => {
+      if (figure.dataset.demo === id && figure._visible) figure._mount();
+    });
+  };
+
+  customElements.define("interactive-figure", InteractiveFigure);
+
+  const globalToggle = document.querySelector("[data-global-motion]");
+  const syncGlobalToggle = () => {
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
+    figures.forEach((figure) => figure._syncPlayback());
+  };
+  globalToggle?.addEventListener("click", () => {
+    globalPaused = !globalPaused;
+    syncGlobalToggle();
+  });
+  reducedMotion.addEventListener("change", syncGlobalToggle);
+  syncGlobalToggle();
+})();
+  </script>
+  <script data-prototype-bundle="demos">
+const escapeHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+registerDemo("pv-auction-overview", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-auction { display:grid; gap:1rem; min-height:25rem; padding:clamp(1rem,4vw,2.25rem); color:${tokens.ink}; background:linear-gradient(145deg,color-mix(in srgb,${tokens.ocean} 11%,${tokens.surface}),${tokens.surface} 52%,color-mix(in srgb,${tokens.warm} 10%,${tokens.surface})); }
+      .pv-auction-board { display:grid; grid-template-columns:1fr auto 1fr; gap:.75rem; align-items:center; min-height:15rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1.25rem; background:color-mix(in srgb,${tokens.paper} 38%,${tokens.surface}); }
+      .pv-auction-book { display:grid; gap:.55rem; }
+      .pv-auction-book h3 { margin:0; color:${tokens.muted}; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; }
+      .pv-auction-order { position:relative; display:flex; justify-content:space-between; gap:.5rem; isolation:isolate; overflow:hidden; padding:.65rem; border:1px solid ${tokens.line}; border-radius:.65rem; background:${tokens.surface}; font-size:.78rem; }
+      .pv-auction-order::before { position:absolute; z-index:-1; inset:0 auto 0 0; width:var(--pv-depth); content:""; background:color-mix(in srgb,${tokens.ocean} 13%,transparent); transition:width .24s ease; }
+      .pv-auction-book:last-child .pv-auction-order::before { inset:0 0 0 auto; background:color-mix(in srgb,${tokens.coral} 13%,transparent); }
+      .pv-auction-order b { color:${tokens.ocean}; }
+      .pv-auction-book:last-child .pv-auction-order b { color:${tokens.coral}; }
+      .pv-auction-match { display:grid; place-items:center; width:5.4rem; aspect-ratio:1; border:2px solid ${tokens.warm}; border-radius:50%; background:color-mix(in srgb,${tokens.warm} 13%,${tokens.surface}); text-align:center; font-size:.7rem; font-weight:850; }
+      .pv-auction-pulse { width:.65rem; height:.65rem; margin:.35rem auto 0; border-radius:50%; background:${tokens.warm}; animation:pv-auction-pulse 1.4s ease-in-out infinite; }
+      .pv-auction-impact { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.55rem; }
+      .pv-auction-metric { min-width:0; padding:.7rem; border:1px solid ${tokens.line}; border-radius:.7rem; background:${tokens.surface}; text-align:center; }
+      .pv-auction-metric strong { display:block; overflow-wrap:anywhere; color:${tokens.ocean}; font-size:.92rem; }
+      .pv-auction-metric span { color:${tokens.muted}; font-size:.66rem; }
+      .pv-auction-track { position:relative; grid-column:1/-1; height:.7rem; overflow:hidden; border-radius:999px; background:color-mix(in srgb,${tokens.line} 68%,${tokens.surface}); }
+      .pv-auction-track::after { position:absolute; top:0; bottom:0; left:calc(var(--pv-impact) * 1%); width:.8rem; border-radius:999px; content:""; background:${tokens.warm}; transform:translateX(-50%); transition:left .24s ease; }
+      .pv-auction-controls { display:flex; flex-wrap:wrap; gap:.6rem; }
+      .pv-auction-controls button { flex:1 1 9rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .pv-auction-controls button[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pv-auction-controls button:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pv-auction-status { min-height:5.5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.ocean}; border-radius:.65rem; background:color-mix(in srgb,${tokens.paper} 45%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .pv-auction-note { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .pv-auction.is-paused .pv-auction-pulse { animation-play-state:paused; }
+      @keyframes pv-auction-pulse { 50% { transform:scale(1.8); opacity:.35; } }
+      @media (prefers-reduced-motion:reduce) { .pv-auction-order::before,.pv-auction-track::after { transition:none; } }
+      @media (max-width:560px) { .pv-auction-board { grid-template-columns:1fr; } .pv-auction-match { width:4.5rem; margin:auto; } .pv-auction-impact { grid-template-columns:1fr; } .pv-auction-track { grid-column:auto; } }
+    </style>
+    <div class="pv-auction${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="pv-auction-board" data-pv-book>
+        <div class="pv-auction-book"><h3>${escapeHtml(copy.bidBook)}</h3>${copy.bids.map((item, index) => `<div class="pv-auction-order" data-pv-depth-side="bid" data-pv-depth-index="${index}"><span>${escapeHtml(item.price)}</span><b data-pv-size></b></div>`).join("")}</div>
+        <div class="pv-auction-match"><span>${escapeHtml(copy.matchLabel)}<span class="pv-auction-pulse" aria-hidden="true"></span></span></div>
+        <div class="pv-auction-book"><h3>${escapeHtml(copy.askBook)}</h3>${copy.asks.map((item, index) => `<div class="pv-auction-order" data-pv-depth-side="ask" data-pv-depth-index="${index}"><span>${escapeHtml(item.price)}</span><b data-pv-size></b></div>`).join("")}</div>
+      </div>
+      <div class="pv-auction-impact"><div class="pv-auction-metric"><strong data-pv-liquidity></strong><span>${escapeHtml(copy.liquidityLabel)}</span></div><div class="pv-auction-metric"><strong data-pv-execution></strong><span>${escapeHtml(copy.executionLabel)}</span></div><div class="pv-auction-metric"><strong data-pv-displacement></strong><span>${escapeHtml(copy.displacementLabel)}</span></div><div class="pv-auction-track" data-pv-impact-track aria-hidden="true"></div></div>
+      <div class="pv-auction-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${copy.scenarios.map((item, index) => `<button type="button" data-pv-scenario="${index}" aria-pressed="${index === 0}">${escapeHtml(item.label)}</button>`).join("")}</div>
+      <p class="pv-auction-status" data-pv-status aria-live="polite"></p>
+      <p class="pv-auction-note">${escapeHtml(copy.syntheticNote)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".pv-auction");
+  const board = root.querySelector("[data-pv-book]");
+  const status = root.querySelector(".pv-auction-status");
+  const buttons = [...root.querySelectorAll("[data-pv-scenario]")];
+  const orders = [...root.querySelectorAll("[data-pv-depth-side]")];
+  const liquidity = root.querySelector("[data-pv-liquidity]");
+  const execution = root.querySelector("[data-pv-execution]");
+  const displacement = root.querySelector("[data-pv-displacement]");
+  const impactTrack = root.querySelector("[data-pv-impact-track]");
+  const select = (index, speak = false) => {
+    const item = copy.scenarios[index];
+    scene.dataset.scenario = item.key;
+    scene.dataset.liquidity = item.key;
+    scene.dataset.executionVolume = String(item.executionValue);
+    scene.dataset.displacement = String(item.displacementValue);
+    board.setAttribute("aria-label", item.bookAria);
+    liquidity.textContent = item.liquidity;
+    execution.textContent = item.execution;
+    displacement.textContent = item.displacement;
+    impactTrack.style.setProperty("--pv-impact", String(item.impact));
+    orders.forEach((order) => {
+      const side = order.dataset.pvDepthSide;
+      const depthIndex = Number(order.dataset.pvDepthIndex);
+      const depth = item[`${side}Depths`][depthIndex];
+      order.dataset.depth = String(depth);
+      order.style.setProperty("--pv-depth", `${depth}%`);
+      order.querySelector("[data-pv-size]").textContent = item[`${side}Sizes`][depthIndex];
+    });
+    status.textContent = item.status;
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    if (speak) announce(item.status);
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.pvScenario), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("pv-trade-mechanics", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-trade { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-trade-tape { display:grid; grid-template-columns:repeat(5,1fr); gap:.5rem; align-items:end; min-height:12rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); }
+      .pv-trade-print { display:grid; align-content:end; gap:.35rem; height:100%; text-align:center; color:${tokens.muted}; font-size:.68rem; }
+      .pv-trade-bar { min-height:1.4rem; height:var(--pv-height); border-radius:.5rem .5rem .15rem .15rem; background:repeating-linear-gradient(135deg,${tokens.warm} 0 8px,color-mix(in srgb,${tokens.warm} 60%,${tokens.surface}) 8px 16px); transform-origin:bottom; animation:pv-trade-rise .8s ease both; }
+      .pv-trade-print b { color:${tokens.ocean}; font-size:.76rem; }
+      .pv-trade-controls { display:flex; flex-wrap:wrap; gap:.6rem; }
+      .pv-trade-controls button { flex:1 1 10rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .pv-trade-controls button[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pv-trade-controls button:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pv-trade-status { min-height:5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.coral}; border-radius:.65rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .pv-trade-note { margin:0; color:${tokens.muted}; font-size:.75rem; text-align:center; }
+      .pv-trade.is-paused .pv-trade-bar { animation-play-state:paused; }
+      @keyframes pv-trade-rise { from { transform:scaleY(.08); opacity:.3; } }
+      @media (max-width:420px) { .pv-trade-tape { gap:.25rem; padding:.65rem; } .pv-trade-print { font-size:.58rem; } }
+    </style>
+    <div class="pv-trade${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="pv-trade-tape" aria-label="${escapeHtml(copy.chartLabel)}"></div>
+      <div class="pv-trade-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${copy.scenarios.map((item, index) => `<button type="button" data-pv-trade="${index}" aria-pressed="${index === 0}">${escapeHtml(item.label)}</button>`).join("")}</div>
+      <p class="pv-trade-status" data-pv-status aria-live="polite"></p><p class="pv-trade-note">${escapeHtml(copy.syntheticNote)}</p>
+    </div>`;
+  const scene = root.querySelector(".pv-trade");
+  const tape = root.querySelector(".pv-trade-tape");
+  const status = root.querySelector(".pv-trade-status");
+  const buttons = [...root.querySelectorAll("[data-pv-trade]")];
+  const select = (index, speak = false) => {
+    const item = copy.scenarios[index];
+    tape.innerHTML = item.prints.map((value, printIndex) => `<div class="pv-trade-print"><b>${escapeHtml(item.prices[printIndex])}</b><div class="pv-trade-bar" style="--pv-height:${value}%"></div><span>${escapeHtml(String(value))} ${escapeHtml(copy.volumeUnit)}</span></div>`).join("");
+    status.textContent = item.status;
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    if (speak) announce(item.status);
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.pvTrade), true)));
+  select(0);
+  return { pause:()=>scene.classList.add("is-paused"), resume:()=>scene.classList.remove("is-paused"), reset:()=>select(0), destroy:()=>{ root.innerHTML=""; } };
+});
+
+registerDemo("pv-relative-volume", ({ root, copy, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-relative { display:grid; gap:1rem; min-height:20rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-relative-chart { display:flex; gap:.45rem; align-items:end; min-height:11rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1rem; background:linear-gradient(to top,color-mix(in srgb,${tokens.ocean} 7%,${tokens.surface}),${tokens.surface}); }
+      .pv-relative-column { flex:1; min-width:0; border-radius:.35rem .35rem .1rem .1rem; background:repeating-linear-gradient(135deg,${tokens.warm} 0 7px,color-mix(in srgb,${tokens.warm} 55%,${tokens.surface}) 7px 14px); }
+      .pv-relative-column:last-child { background:${tokens.ocean}; }
+      .pv-relative-periods { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .pv-relative-periods button { flex:1 1 8rem; padding:.7rem; border:1px solid ${tokens.line}; border-radius:.7rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-size:.76rem; font-weight:800; cursor:pointer; }
+      .pv-relative-periods button[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pv-relative-periods button:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pv-relative-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:.6rem; }
+      .pv-relative-metric { padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; background:color-mix(in srgb,${tokens.paper} 45%,${tokens.surface}); text-align:center; }
+      .pv-relative-metric strong { display:block; color:${tokens.ocean}; font-size:1.1rem; }
+      .pv-relative-metric span { color:${tokens.muted}; font-size:.67rem; }
+      .pv-relative-control label { display:flex; justify-content:space-between; gap:1rem; color:${tokens.muted}; font-size:.78rem; font-weight:750; }
+      .pv-relative-control input { width:100%; accent-color:${tokens.ocean}; }
+      .pv-relative-status { min-height:4rem; margin:0; color:${tokens.muted}; line-height:1.55; }
+      .pv-relative-note { margin:0; color:${tokens.muted}; font-size:.74rem; text-align:center; }
+      @media (max-width:440px) { .pv-relative-metrics { grid-template-columns:1fr; } }
+    </style>
+    <div class="pv-relative" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="pv-relative-chart" data-pv-relative-chart role="img"></div>
+      <div class="pv-relative-periods" role="group" aria-label="${escapeHtml(copy.periodControlLabel)}">${copy.baselines.map((item,index)=>`<button type="button" data-pv-baseline="${item.key}" data-pv-baseline-index="${index}" aria-pressed="${index===0}">${escapeHtml(item.label)}</button>`).join("")}</div>
+      <div class="pv-relative-control"><label for="pv-relative-input"><span>${escapeHtml(copy.controlLabel)}</span><output data-pv-output></output></label><input id="pv-relative-input" data-pv-relative-input type="range" min="30" max="180" value="100" aria-label="${escapeHtml(copy.controlAria)}"></div>
+      <div class="pv-relative-metrics"><div class="pv-relative-metric"><strong data-pv-current></strong><span>${escapeHtml(copy.currentLabel)}</span></div><div class="pv-relative-metric"><strong data-pv-baseline-value></strong><span data-pv-baseline-label></span></div><div class="pv-relative-metric"><strong data-pv-ratio></strong><span>${escapeHtml(copy.ratioLabel)}</span></div></div>
+      <p class="pv-relative-status" data-pv-status aria-live="polite"></p><p class="pv-relative-note">${escapeHtml(copy.syntheticNote)}</p>
+    </div>`;
+  const scene = root.querySelector(".pv-relative");
+  const input = root.querySelector("input");
+  const output = root.querySelector("output");
+  const chart = root.querySelector(".pv-relative-chart");
+  const current = root.querySelector("[data-pv-current]");
+  const ratio = root.querySelector("[data-pv-ratio]");
+  const baselineValue = root.querySelector("[data-pv-baseline-value]");
+  const baselineLabel = root.querySelector("[data-pv-baseline-label]");
+  const baselineButtons = [...root.querySelectorAll("[data-pv-baseline]")];
+  const status = root.querySelector(".pv-relative-status");
+  let activeBaseline = 0;
+  const render = (speak = false) => {
+    const value = Number(input.value);
+    const baseline = copy.baselines[activeBaseline];
+    const rvol = value / baseline.value;
+    scene.dataset.period = baseline.key;
+    scene.dataset.baseline = String(baseline.value);
+    scene.dataset.current = String(value);
+    scene.dataset.ratio = rvol.toFixed(2);
+    output.textContent = `${value} ${copy.volumeUnit}`;
+    current.textContent = `${value}`;
+    baselineValue.textContent = `${baseline.value}`;
+    baselineLabel.textContent = `${copy.baselineLabel} · ${baseline.label}`;
+    ratio.textContent = `${rvol.toFixed(2)}×`;
+    chart.setAttribute("aria-label", copy.chartAriaTemplate.replace("{period}",baseline.label).replace("{baseline}",String(baseline.value)).replace("{current}",String(value)).replace("{ratio}",rvol.toFixed(2)));
+    chart.innerHTML = [...baseline.history, value].map((item) => `<span class="pv-relative-column" style="height:${Math.max(12,item / 1.8)}%"></span>`).join("");
+    baselineButtons.forEach((button,index)=>button.setAttribute("aria-pressed",String(index===activeBaseline)));
+    status.textContent = copy.statusTemplate.replace("{current}",String(value)).replace("{baseline}",String(baseline.value)).replace("{period}",baseline.label).replace("{ratio}",rvol.toFixed(2));
+    if (speak) announce(status.textContent);
+  };
+  baselineButtons.forEach((button)=>button.addEventListener("click",()=>{activeBaseline=Number(button.dataset.pvBaselineIndex);render(true);}));
+  input.addEventListener("input", () => render());
+  input.addEventListener("change", () => render(true));
+  render();
+  return { reset:()=>{ activeBaseline=0; input.value="100"; render(); }, destroy:()=>{ root.innerHTML=""; } };
+});
+
+registerDemo("pv-four-quadrants", ({ root, copy, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-quadrants { display:grid; gap:1rem; min-height:24rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-quadrants-grid { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+      .pv-quadrants-card { min-height:8rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:.9rem; color:${tokens.ink}; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); font:inherit; text-align:left; cursor:pointer; }
+      .pv-quadrants-card strong { display:block; margin-bottom:.45rem; color:${tokens.ocean}; }
+      .pv-quadrants-card:nth-child(2n) strong { color:${tokens.coral}; }
+      .pv-quadrants-card span { color:${tokens.muted}; font-size:.76rem; line-height:1.45; }
+      .pv-quadrants-card[aria-pressed="true"] { border-color:${tokens.warm}; box-shadow:inset 0 0 0 2px ${tokens.warm}; }
+      .pv-quadrants-card:focus-visible { outline:3px solid ${tokens.ocean}; outline-offset:2px; }
+      .pv-quadrants-status { min-height:5.5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.warm}; border-radius:.7rem; background:color-mix(in srgb,${tokens.warm} 8%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .pv-quadrants-note { margin:0; color:${tokens.muted}; font-size:.74rem; text-align:center; }
+      @media(max-width:480px){ .pv-quadrants-grid{grid-template-columns:1fr;} .pv-quadrants-card{min-height:6rem;} }
+    </style>
+    <div class="pv-quadrants" role="group" aria-label="${escapeHtml(copy.ariaLabel)}"><div class="pv-quadrants-grid">${copy.quadrants.map((item,index)=>`<button type="button" class="pv-quadrants-card" data-pv-quadrant="${index}" aria-pressed="${index===0}"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.axes)}</span></button>`).join("")}</div><p class="pv-quadrants-status" data-pv-status aria-live="polite"></p><p class="pv-quadrants-note">${escapeHtml(copy.syntheticNote)}</p></div>`;
+  const buttons=[...root.querySelectorAll("[data-pv-quadrant]")];
+  const status=root.querySelector(".pv-quadrants-status");
+  const select=(index,speak=false)=>{ status.textContent=copy.quadrants[index].status; buttons.forEach((button,i)=>button.setAttribute("aria-pressed",String(i===index))); if(speak) announce(status.textContent); };
+  buttons.forEach((button)=>button.addEventListener("click",()=>select(Number(button.dataset.pvQuadrant),true)));
+  select(0);
+  return { reset:()=>select(0), destroy:()=>{root.innerHTML="";} };
+});
+
+registerDemo("pv-breakout-follow-through", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-breakout { display:grid; gap:1rem; min-height:23rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-breakout-path-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.75rem; }
+      .pv-breakout-card { display:grid; gap:.45rem; min-width:0; padding:.65rem; border:1px solid ${tokens.line}; border-radius:1rem; background:color-mix(in srgb,${tokens.paper} 36%,${tokens.surface}); }
+      .pv-breakout-card h3 { margin:0; font-size:.78rem; }
+      .pv-breakout-state { color:${tokens.muted}; font-size:.68rem; font-weight:800; }
+      .pv-breakout-chart { position:relative; min-height:12rem; overflow:hidden; border:1px solid ${tokens.line}; border-radius:.7rem; background:repeating-linear-gradient(to bottom,transparent 0 31px,color-mix(in srgb,${tokens.line} 55%,transparent) 31px 32px); }
+      .pv-breakout-level { position:absolute; z-index:1; top:43%; left:0; right:0; border-top:2px dashed ${tokens.coral}; color:${tokens.coral}; font-size:.68rem; font-weight:800; text-align:right; }
+      .pv-breakout-path { position:absolute; inset:12% 5%; width:90%; height:76%; fill:none; stroke:${tokens.ocean}; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:520; animation:pv-breakout-draw 1.8s ease both; }
+      .pv-breakout-volume { position:absolute; inset:auto 5% 5%; display:flex; gap:.35rem; align-items:end; height:25%; }
+      .pv-breakout-volume span { flex:1; height:var(--pv-volume); border-radius:.2rem .2rem 0 0; background:${tokens.warm}; opacity:.72; }
+      .pv-breakout-controls { display:flex; gap:.6rem; flex-wrap:wrap; }
+      .pv-breakout-controls button { flex:1 1 10rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .pv-breakout-controls button[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pv-breakout-controls button:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pv-breakout-status { min-height:5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.coral}; border-radius:.65rem; color:${tokens.muted}; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); line-height:1.55; }
+      .pv-breakout-note { margin:0; color:${tokens.muted}; font-size:.74rem; text-align:center; }
+      .pv-breakout.is-paused .pv-breakout-path { animation-play-state:paused; }
+      @keyframes pv-breakout-draw { from { stroke-dashoffset:520; } to { stroke-dashoffset:0; } }
+      @media (max-width:560px) { .pv-breakout-path-grid { grid-template-columns:1fr; } }
+    </style>
+    <div class="pv-breakout${motion?"":" is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}"><div class="pv-breakout-path-grid">${copy.paths.map((path)=>`<section class="pv-breakout-card" data-pv-path="${path.key}" data-path-state="undetermined"><h3>${escapeHtml(path.label)}</h3><span class="pv-breakout-state" data-pv-path-state-label></span><div class="pv-breakout-chart" role="img"><span class="pv-breakout-level">${escapeHtml(copy.referenceLevel)}</span><svg viewBox="0 0 600 220" class="pv-breakout-path" preserveAspectRatio="none" aria-hidden="true"><polyline data-pv-polyline></polyline></svg><div class="pv-breakout-volume" data-pv-volume></div></div></section>`).join("")}</div><div class="pv-breakout-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${copy.windows.map((item,index)=>`<button type="button" data-pv-window="${item.key}" data-pv-window-index="${index}" aria-pressed="${index===0}">${escapeHtml(item.label)}</button>`).join("")}</div><p class="pv-breakout-status" data-pv-status aria-live="polite"></p><p class="pv-breakout-note">${escapeHtml(copy.syntheticNote)}</p></div>`;
+  const scene=root.querySelector(".pv-breakout"); const status=root.querySelector(".pv-breakout-status"); const buttons=[...root.querySelectorAll("[data-pv-window]")]; const cards=[...root.querySelectorAll("[data-pv-path]")];
+  const select=(index,speak=false)=>{const windowState=copy.windows[index];scene.dataset.window=windowState.key;cards.forEach((card,pathIndex)=>{const path=copy.paths[pathIndex];const crossingOnly=windowState.key==="crossing";const state=crossingOnly?"undetermined":path.result;const points=crossingOnly?path.crossingPoints:path.followThroughPoints;const volumes=crossingOnly?path.volumes.slice(0,path.crossingCount):path.volumes;card.dataset.pathState=state;card.dataset.visiblePoints=String(points.trim().split(/\s+/).length);card.querySelector("[data-pv-path-state-label]").textContent=copy.stateLabels[state];card.querySelector("[data-pv-polyline]").setAttribute("points",points);card.querySelector("[data-pv-volume]").innerHTML=volumes.map((item)=>`<span style="--pv-volume:${item}%"></span>`).join("");card.querySelector(".pv-breakout-chart").setAttribute("aria-label",path.aria[windowState.key]);});status.textContent=windowState.status;buttons.forEach((button,i)=>button.setAttribute("aria-pressed",String(i===index)));if(speak)announce(status.textContent);};
+  buttons.forEach((button)=>button.addEventListener("click",()=>select(Number(button.dataset.pvWindowIndex),true)));select(0);
+  return { pause:()=>scene.classList.add("is-paused"),resume:()=>scene.classList.remove("is-paused"),reset:()=>select(0),destroy:()=>{root.innerHTML="";} };
+});
+
+registerDemo("pv-absorption-divergence", ({ root, copy, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-absorption { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-absorption-stage { display:grid; grid-template-columns:repeat(2,1fr); gap:.7rem; }
+      .pv-absorption-panel { min-height:10rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1rem; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); }
+      .pv-absorption-panel h3 { margin:0 0 .8rem; color:${tokens.ocean}; font-size:.82rem; }
+      .pv-absorption-panel:last-child h3 { color:${tokens.coral}; }
+      .pv-absorption-track { position:relative; height:5rem; border-bottom:1px solid ${tokens.line}; }
+      .pv-absorption-track span { position:absolute; left:var(--pv-left); bottom:var(--pv-bottom); width:.55rem; height:.55rem; border-radius:50%; background:${tokens.warm}; transform:translate(-50%,50%); }
+      .pv-absorption-controls { display:flex; gap:.6rem; flex-wrap:wrap; }
+      .pv-absorption-controls button { flex:1 1 10rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .pv-absorption-controls button[aria-pressed="true"] { border-color:${tokens.warm}; box-shadow:inset 0 0 0 1px ${tokens.warm}; }
+      .pv-absorption-controls button:focus-visible { outline:3px solid ${tokens.ocean}; outline-offset:2px; }
+      .pv-absorption-status { min-height:5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.warm}; border-radius:.65rem; color:${tokens.muted}; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); line-height:1.55; }
+      .pv-absorption-note { margin:0; color:${tokens.muted}; font-size:.74rem; text-align:center; }
+      @media(max-width:500px){.pv-absorption-stage{grid-template-columns:1fr;}}
+    </style>
+    <div class="pv-absorption" role="group" aria-label="${escapeHtml(copy.ariaLabel)}"><div class="pv-absorption-stage"><div class="pv-absorption-panel"><h3>${escapeHtml(copy.priceLabel)}</h3><div class="pv-absorption-track" data-pv-price></div></div><div class="pv-absorption-panel"><h3>${escapeHtml(copy.volumeLabel)}</h3><div class="pv-absorption-track" data-pv-volume></div></div></div><div class="pv-absorption-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${copy.patterns.map((item,index)=>`<button type="button" data-pv-pattern="${index}" aria-pressed="${index===0}">${escapeHtml(item.label)}</button>`).join("")}</div><p class="pv-absorption-status" data-pv-status aria-live="polite"></p><p class="pv-absorption-note">${escapeHtml(copy.syntheticNote)}</p></div>`;
+  const price=root.querySelector("[data-pv-price]");const volume=root.querySelector("[data-pv-volume]");const status=root.querySelector(".pv-absorption-status");const buttons=[...root.querySelectorAll("[data-pv-pattern]")];
+  const points=(items)=>items.map((item,index)=>`<span style="--pv-left:${index*20}%;--pv-bottom:${item}%"></span>`).join("");
+  const select=(index,speak=false)=>{const item=copy.patterns[index];price.innerHTML=points(item.price);volume.innerHTML=points(item.volume);status.textContent=item.status;buttons.forEach((button,i)=>button.setAttribute("aria-pressed",String(i===index)));if(speak)announce(item.status);};
+  buttons.forEach((button)=>button.addEventListener("click",()=>select(Number(button.dataset.pvPattern),true)));select(0);
+  return { reset:()=>select(0),destroy:()=>{root.innerHTML="";} };
+});
+
+registerDemo("pv-context-checklist", ({ root, copy, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-checklist { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-checklist-items { display:grid; gap:.6rem; }
+      .pv-checklist-item { display:grid; grid-template-columns:auto 1fr; gap:.75rem; align-items:start; padding:.85rem; border:1px solid ${tokens.line}; border-radius:.8rem; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); cursor:pointer; }
+      .pv-checklist-item input { width:1.15rem; height:1.15rem; accent-color:${tokens.ocean}; }
+      .pv-checklist-item strong { display:block; margin-bottom:.25rem; font-size:.82rem; }
+      .pv-checklist-item span { color:${tokens.muted}; font-size:.73rem; line-height:1.45; }
+      .pv-checklist-meter { height:.65rem; overflow:hidden; border-radius:999px; background:color-mix(in srgb,${tokens.line} 65%,${tokens.surface}); }
+      .pv-checklist-meter span { display:block; width:var(--pv-width); height:100%; background:linear-gradient(90deg,${tokens.ocean},${tokens.warm}); transition:width .2s ease; }
+      .pv-checklist-status { min-height:4rem; margin:0; padding:.8rem; border-left:.3rem solid ${tokens.ocean}; border-radius:.65rem; color:${tokens.ink}; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); font-weight:800; line-height:1.55; }
+      .pv-checklist-note { margin:0; padding:.8rem; border:1px solid color-mix(in srgb,${tokens.coral} 60%,${tokens.line}); border-radius:.7rem; color:${tokens.coral}; font-size:.76rem; font-weight:750; }
+    </style>
+    <div class="pv-checklist" role="group" aria-label="${escapeHtml(copy.ariaLabel)}"><div class="pv-checklist-items">${copy.items.map((item,index)=>`<label class="pv-checklist-item"><input type="checkbox" data-pv-check="${index}" data-check-key="${item.key}"><span><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.body)}</span></span></label>`).join("")}</div><div class="pv-checklist-meter" role="progressbar" aria-label="${escapeHtml(copy.meterAria)}" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0"><span></span></div><p class="pv-checklist-status" data-pv-status aria-live="polite"></p><p class="pv-checklist-note">${escapeHtml(copy.educationNote)}</p></div>`;
+  const scene=root.querySelector(".pv-checklist");const inputs=[...root.querySelectorAll("[data-pv-check]")];const meterRoot=root.querySelector(".pv-checklist-meter");const meter=root.querySelector(".pv-checklist-meter span");const status=root.querySelector(".pv-checklist-status");
+  const render=(speak=false)=>{const checked=inputs.filter((input)=>input.checked);const count=checked.length;const keys=new Set(checked.map((input)=>input.dataset.checkKey));let outcome="limited";if(count<=2)outcome="insufficient";else if(!keys.has("followThrough"))outcome="waiting";else if(count===inputs.length)outcome="complete";scene.dataset.outcome=outcome;scene.dataset.checkedCount=String(count);meter.style.setProperty("--pv-width",`${count/inputs.length*100}%`);meterRoot.setAttribute("aria-valuenow",String(count));status.textContent=copy.outcomes[outcome];if(speak)announce(status.textContent);};
+  inputs.forEach((input)=>input.addEventListener("change",()=>render(true)));render();
+  return { reset:()=>{inputs.forEach((input)=>{input.checked=false;});render();},destroy:()=>{root.innerHTML="";} };
+});
+  </script>
+</body>
+</html>

@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="オークション、約定、相対出来高、四象限、ブレイク後の推移、吸収・ダイバージェンス、文脈チェックを学ぶ対話型ガイド。">
+  <title>株式取引の仕組み：価格と出来高の関係</title>
+  <style data-prototype-bundle="article">
+:root {
+  color-scheme: light;
+  --paper: #f4f1e8;
+  --surface: #fffdf8;
+  --ink: #17333c;
+  --muted: #60747a;
+  --line: #d8ddd7;
+  --ocean: #0f7185;
+  --warm: #ee9d46;
+  --coral: #d45f50;
+  --soft-ocean: color-mix(in srgb, var(--ocean) 9%, var(--surface));
+  --soft-warm: color-mix(in srgb, var(--warm) 12%, var(--surface));
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body { margin: 0; overflow-x: clip; color: var(--ink); background: radial-gradient(circle at 20% 0, #dff3ef 0, transparent 30rem), var(--paper); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .75rem;
+  left: .75rem;
+  padding: .65rem .9rem;
+  color: white;
+  background: var(--ink);
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.75rem;
+  padding: .65rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(216, 221, 215, .9);
+  background: rgba(244, 241, 232, .9);
+  backdrop-filter: blur(14px);
+}
+.site-header strong { margin-right: auto; font-size: .72rem; letter-spacing: .12em; }
+.language-links { display: flex; gap: .65rem; }
+.language-links a { color: var(--muted); font-size: .78rem; }
+.language-links a[aria-current="page"] { color: var(--ocean); font-weight: 800; }
+[data-global-motion] {
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.hero, .copy-block {
+  width: min(calc(100% - 2rem), 54rem);
+  margin-inline: auto;
+}
+.hero {
+  position: relative;
+  padding: clamp(5rem, 14vw, 10rem) 0;
+}
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -12% auto auto;
+  width: clamp(9rem, 28vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ocean) 35%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem color-mix(in srgb, var(--ocean) 5%, transparent),
+    0 0 0 5rem color-mix(in srgb, var(--warm) 4%, transparent);
+  content: "";
+}
+.eyebrow, .section-label {
+  margin: 0 0 1rem;
+  color: var(--ocean);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+h1, h2 { margin-top: 0; line-height: 1.03; text-wrap: balance; }
+h1 { max-width: 9em; margin-bottom: 1.5rem; font-size: clamp(3.2rem, 10vw, 7rem); letter-spacing: -.06em; }
+h2 { max-width: 16em; margin-bottom: 1.15rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+.hero-subtitle, .copy-prose { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.75; }
+.hero-subtitle { max-width: 38rem; }
+.copy-prose { margin: .8rem 0 0; }
+
+.plain-language {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .75rem 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 55%, var(--line));
+  border-radius: 1rem;
+  background: var(--soft-warm);
+}
+.plain-language strong {
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  color: var(--surface);
+  background: var(--warm);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.plain-language p { margin: 0; color: var(--ink); line-height: 1.65; }
+
+.concept-points { margin-top: 1.4rem; }
+.concept-points-label {
+  margin: 0 0 .7rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.concept-points ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.concept-card strong { display: block; margin-bottom: .45rem; }
+.concept-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+.overview, .chapter, .closing { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
+.overview { background: color-mix(in srgb, var(--surface) 42%, transparent); }
+.chapter:nth-of-type(even) { background: color-mix(in srgb, var(--surface) 22%, transparent); }
+interactive-figure {
+  display: block;
+  width: min(calc(100% - 2rem), 68rem);
+  min-height: 29rem;
+  margin: 3rem auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 51, 60, .14);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 1.5rem 4rem rgba(23, 51, 60, .1);
+}
+
+.closing { background: linear-gradient(150deg, var(--soft-ocean), color-mix(in srgb, var(--paper) 86%, var(--surface))); }
+.closing-copy { width: min(calc(100% - 2rem), 68rem); }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.starter-checklist, .boundary-map {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.closing h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.starter-checklist ol { display: grid; gap: .7rem; margin: 0; padding-left: 1.35rem; }
+.starter-checklist li { padding-left: .3rem; line-height: 1.55; }
+.boundary-map ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.scale-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: .2rem .8rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--surface);
+}
+.scale-card strong { grid-row: 1 / span 2; color: var(--ocean); }
+.scale-card span { color: var(--ink); font-size: .82rem; font-weight: 800; }
+.scale-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.closing blockquote {
+  margin: 2rem 0 0;
+  padding: 1.35rem clamp(1rem, 3vw, 1.8rem);
+  border-left: .32rem solid var(--ocean);
+  color: var(--ink);
+  background: var(--surface);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.55;
+}
+.source-note { margin: 1rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+article[data-visual-slug="loop-engineering"] .hero .eyebrow { color: var(--coral); }
+article[data-visual-slug="loop-engineering"] interactive-figure { box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ocean) 12%, transparent); }
+
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header strong { width: 100%; }
+  .language-links { margin-right: auto; }
+  interactive-figure { min-height: 32rem; border-radius: 1rem; }
+  .concept-points ul, .closing-grid { grid-template-columns: 1fr; }
+  .plain-language { grid-template-columns: 1fr; }
+  .scale-card { grid-template-columns: 5.5rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#article">本文へ移動</a>
+  <header class="site-header">
+    <strong>VISUAL KIT / PROTOTYPE</strong>
+    <nav class="language-links" aria-label="言語">
+<a href="../en/" hreflang="en">English</a>
+<a href="../zh/" hreflang="zh">中文</a>
+<a href="../ja/" hreflang="ja" aria-current="page">日本語</a>
+    </nav>
+    <button type="button" data-global-motion aria-pressed="false"></button>
+  </header>
+  <main id="article">
+    <article data-visual-slug="price-volume-relationship">
+      <header class="hero">
+        <p class="eyebrow">市場マイクロストラクチャー / 確実性ではなく文脈</p>
+        <h1>価格はオークションの到達点、出来高はそこで交換された量を示す</h1>
+        <p class="hero-subtitle">両者を参加度・流動性・値動きの文脈証拠として読み、確実なシグナルとは扱いません。全系列は合成データで、教育目的に限られ、投資助言ではありません。</p>
+      </header>
+<section class="overview" aria-labelledby="overview-title">
+  <div class="copy-block">
+    <p class="section-label">オークション概要</p>
+    <h2 id="overview-title">すべての約定は注文のマッチングから始まる</h2>
+    <p class="copy-prose">市場は連続オークションです。買い手はビッド、売り手はアスクを提示し、両立する注文が出会ったときだけ約定します。価格は合意した水準、出来高は交換量を記録します。</p>
+<p class="copy-prose">同じ出来高でも価格結果は異なります。利用可能な流動性、緊急度、ニュース、時間帯、周囲の構造が値幅を左右します。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>価格は合意の場所、出来高は合意した量です。どちらも単独では動機を示しません。</p></aside><div class="concept-points"><p class="concept-points-label">三つの基準</p><ul><li class="concept-card"><strong>オークション</strong><p>異なる価格の注文が限られた流動性を競います。</p></li><li class="concept-card"><strong>約定</strong><p>一回の執行が価格と数量を同時に生みます。</p></li><li class="concept-card"><strong>文脈</strong><p>基準、位置、その後の動きで解釈が変わります。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-auction-overview" data-title="合成約定量を固定し、流動性の厚みだけを変える" data-copy="{&quot;ariaLabel&quot;:&quot;同じ合成約定量が厚い流動性と薄い流動性で異なる価格変位を生むことを比較する注文板&quot;,&quot;bidBook&quot;:&quot;ビッド · 買い手&quot;,&quot;askBook&quot;:&quot;アスク · 売り手&quot;,&quot;matchLabel&quot;:&quot;合成 900 単位を約定&quot;,&quot;controlLabel&quot;:&quot;合成流動性の状態を選択&quot;,&quot;liquidityLabel&quot;:&quot;表示流動性&quot;,&quot;executionLabel&quot;:&quot;合成約定量&quot;,&quot;displacementLabel&quot;:&quot;合成価格変位&quot;,&quot;bids&quot;:[{&quot;price&quot;:&quot;¥99.98&quot;,&quot;size&quot;:&quot;&quot;},{&quot;price&quot;:&quot;¥99.96&quot;,&quot;size&quot;:&quot;&quot;},{&quot;price&quot;:&quot;¥99.94&quot;,&quot;size&quot;:&quot;&quot;}],&quot;asks&quot;:[{&quot;price&quot;:&quot;¥100.02&quot;,&quot;size&quot;:&quot;&quot;},{&quot;price&quot;:&quot;¥100.04&quot;,&quot;size&quot;:&quot;&quot;},{&quot;price&quot;:&quot;¥100.06&quot;,&quot;size&quot;:&quot;&quot;}],&quot;scenarios&quot;:[{&quot;key&quot;:&quot;thick&quot;,&quot;label&quot;:&quot;厚い流動性&quot;,&quot;liquidity&quot;:&quot;厚い&quot;,&quot;execution&quot;:&quot;900 単位&quot;,&quot;executionValue&quot;:900,&quot;displacement&quot;:&quot;+0.18&quot;,&quot;displacementValue&quot;:0.18,&quot;impact&quot;:18,&quot;bidDepths&quot;:[86,94,100],&quot;askDepths&quot;:[82,92,100],&quot;bidSizes&quot;:[&quot;1,240 単位&quot;,&quot;1,680 単位&quot;,&quot;2,110 単位&quot;],&quot;askSizes&quot;:[&quot;1,180 単位&quot;,&quot;1,590 単位&quot;,&quot;2,030 単位&quot;],&quot;bookAria&quot;:&quot;三つのビッド・アスク水準に十分な表示量がある厚い合成注文板&quot;,&quot;status&quot;:&quot;同じ合成約定量でも変位は異なります。900 単位が厚い表示流動性に当たり、価格変位は +0.18 にとどまります。同量は同変位を意味しません。&quot;},{&quot;key&quot;:&quot;thin&quot;,&quot;label&quot;:&quot;薄い流動性&quot;,&quot;liquidity&quot;:&quot;薄い&quot;,&quot;execution&quot;:&quot;900 単位&quot;,&quot;executionValue&quot;:900,&quot;displacement&quot;:&quot;+0.92&quot;,&quot;displacementValue&quot;:0.92,&quot;impact&quot;:92,&quot;bidDepths&quot;:[26,38,48],&quot;askDepths&quot;:[22,34,45],&quot;bidSizes&quot;:[&quot;240 単位&quot;,&quot;360 単位&quot;,&quot;470 単位&quot;],&quot;askSizes&quot;:[&quot;210 単位&quot;,&quot;320 単位&quot;,&quot;440 単位&quot;],&quot;bookAria&quot;:&quot;三つのビッド・アスク水準の表示量が限られた薄い合成注文板&quot;,&quot;status&quot;:&quot;同じ合成約定量でも変位は異なります。900 単位が薄い表示流動性でより多くの水準を消費し、+0.92 変位します。同量は同変位を意味しません。&quot;},{&quot;key&quot;:&quot;balanced&quot;,&quot;label&quot;:&quot;均衡した参考&quot;,&quot;liquidity&quot;:&quot;中程度&quot;,&quot;execution&quot;:&quot;900 単位&quot;,&quot;executionValue&quot;:900,&quot;displacement&quot;:&quot;+0.36&quot;,&quot;displacementValue&quot;:0.36,&quot;impact&quot;:36,&quot;bidDepths&quot;:[56,70,82],&quot;askDepths&quot;:[52,68,80],&quot;bidSizes&quot;:[&quot;620 単位&quot;,&quot;820 単位&quot;,&quot;1,040 単位&quot;],&quot;askSizes&quot;:[&quot;590 単位&quot;,&quot;790 単位&quot;,&quot;980 単位&quot;],&quot;bookAria&quot;:&quot;三つのビッド・アスク水準に中程度の表示量がある均衡した合成注文板&quot;,&quot;status&quot;:&quot;均衡した合成参考でも約定量は 900 単位に固定され、変位は +0.36 です。差は出来高だけでなく表示の厚みで生じます。&quot;}],&quot;syntheticNote&quot;:&quot;注文板の厚み、約定量、価格変位はすべて合成です。教育目的であり、リアルタイム市場、予測、推奨、投資助言ではありません。&quot;}"><noscript>JavaScript を有効にすると合成データ実験を操作できます。価格と出来高は文脈証拠であり、取引指示ではありません。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="trade-mechanics" aria-labelledby="trade-mechanics-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 01</p>
+    <h2 id="trade-mechanics-title">出来高は完了した移転を数え、確信を数えない</h2>
+    <p class="copy-prose">すべての約定には買い手と売り手がいます。10,000 株の約定は出来高 10,000 株であり 20,000 株ではなく、どちらが詳しいかも証明しません。</p>
+<p class="copy-prose">買い圧力・売り圧力という表現は、誰がスプレッドを越えたか、または価格が執行にどう反応したかを指すことが多く、出来高だけでは意図を識別できません。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>出来高は交換量、価格経路は市場がその活動をどう処理したかを示します。</p></aside><div class="concept-points"><p class="concept-points-label">テープを慎重に読む</p><ul><li class="concept-card"><strong>一つの移転</strong><p>各執行は買い手一人と売り手一人を結びます。</p></li><li class="concept-card"><strong>積極側は部分証拠</strong><p>スプレッドを越すことは即時性であり、将来の正しさではありません。</p></li><li class="concept-card"><strong>反応が重要</strong><p>大きな活動で小さく動く場合と容易に動く場合は異なります。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-trade-mechanics" data-title="似た出来高で異なる合成価格反応を比較" data-copy="{&quot;ariaLabel&quot;:&quot;似た出来高と異なる価格反応を比較する合成取引テープ&quot;,&quot;chartLabel&quot;:&quot;価格ラベルと出来高バーを持つ五つの合成取引群&quot;,&quot;controlLabel&quot;:&quot;合成取引系列を選択&quot;,&quot;volumeUnit&quot;:&quot;単位&quot;,&quot;scenarios&quot;:[{&quot;label&quot;:&quot;移動が大きい&quot;,&quot;prints&quot;:[35,52,64,79,92],&quot;prices&quot;:[&quot;100.0&quot;,&quot;100.2&quot;,&quot;100.5&quot;,&quot;100.9&quot;,&quot;101.4&quot;],&quot;status&quot;:&quot;合成系列：活動とともに取引価格が段階的に上がりました。価格反応の説明であり、継続を保証しません。&quot;},{&quot;label&quot;:&quot;移動が小さい&quot;,&quot;prints&quot;:[38,55,68,82,94],&quot;prices&quot;:[&quot;100.0&quot;,&quot;100.1&quot;,&quot;100.0&quot;,&quot;100.1&quot;,&quot;100.0&quot;],&quot;status&quot;:&quot;合成系列：同程度の活動で純移動が小さくなりました。流動性の吸収は仮説ですが、動機と次方向は不明です。&quot;}],&quot;syntheticNote&quot;:&quot;価格と出来高はすべて合成です。教育実験であり、取引シグナルや投資助言ではありません。&quot;}"><noscript>JavaScript を有効にすると合成データ実験を操作できます。価格と出来高は文脈証拠であり、取引指示ではありません。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="relative-volume" aria-labelledby="relative-volume-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 02</p>
+    <h2 id="relative-volume-title">出来高は適切な基準と比べて初めて意味を持つ</h2>
+    <p class="copy-prose">100万株はある銘柄には異常でも、別の銘柄には日常的です。相対出来高は現在活動を選んだ通常値と比較し、銘柄と時間帯をそろえるのが望まれます。</p>
+<p class="copy-prose">基準自体がモデル選択です。休日前後、指数リバランス、寄り付き、決算、データ誤りが比較を歪めることがあります。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>異常と言う前に「何と比べて高いか」を確認します。</p></aside><div class="concept-points"><p class="concept-points-label">有用な比較を作る</p><ul><li class="concept-card"><strong>同じ銘柄</strong><p>証券ごとに流動性は大きく異なります。</p></li><li class="concept-card"><strong>比較可能な時刻</strong><p>日中出来高には強い時間帯パターンがあります。</p></li><li class="concept-card"><strong>既知イベント</strong><p>予定・構造フローが基準を変えます。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-relative-volume" data-title="一つの合成セッションを基準と比較" data-copy="{&quot;ariaLabel&quot;:&quot;寄り付き付近、日中、引け付近の基準を切り替える合成相対出来高計算機&quot;,&quot;chartAriaTemplate&quot;:&quot;{period}の合成基準 {baseline} 単位と現在出来高 {current} 単位を比較し、相対出来高は {ratio} 倍&quot;,&quot;periodControlLabel&quot;:&quot;合成した時間帯基準を選択&quot;,&quot;controlLabel&quot;:&quot;現在の合成出来高&quot;,&quot;controlAria&quot;:&quot;現在の合成出来高を調整&quot;,&quot;volumeUnit&quot;:&quot;単位&quot;,&quot;currentLabel&quot;:&quot;現在の合成出来高&quot;,&quot;baselineLabel&quot;:&quot;選択した基準&quot;,&quot;ratioLabel&quot;:&quot;相対出来高&quot;,&quot;baselines&quot;:[{&quot;key&quot;:&quot;open&quot;,&quot;label&quot;:&quot;寄り付き付近&quot;,&quot;value&quot;:140,&quot;history&quot;:[128,146,137,152,133,144,140]},{&quot;key&quot;:&quot;midday&quot;,&quot;label&quot;:&quot;日中&quot;,&quot;value&quot;:65,&quot;history&quot;:[58,69,63,72,61,66,65]},{&quot;key&quot;:&quot;close&quot;,&quot;label&quot;:&quot;引け付近&quot;,&quot;value&quot;:125,&quot;history&quot;:[116,132,121,137,119,127,125]}],&quot;statusTemplate&quot;:&quot;現在の合成出来高は {current} 単位です。{period}の合成基準 {baseline} に対する相対出来高は {ratio} 倍です。同じ絶対量でも選ぶ基準で意味が変わり、普遍的な閾値を示すものではありません。&quot;,&quot;syntheticNote&quot;:&quot;出来高と基準はすべて合成です。この比較は教育目的で、普遍的な閾値を使わず、投資助言ではありません。&quot;}"><noscript>JavaScript を有効にすると合成データ実験を操作できます。価格と出来高は文脈証拠であり、取引指示ではありません。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="four-quadrants" aria-labelledby="four-quadrants-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 03</p>
+    <h2 id="four-quadrants-title">四象限は観察を整理し、予測はしない</h2>
+    <p class="copy-prose">価格方向と相対出来高方向を組み合わせると四つの記述的象限になります。参加度と動きやすさへの問いを整理できます。</p>
+<p class="copy-prose">象限は「出来高増なら上昇」のような規則ではありません。同じ象限がトレンド初期・末期、レンジ、イベントギャップに現れます。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>象限で何が起きたかを表し、理由と持続を別に調べます。</p></aside><div class="concept-points"><p class="concept-points-label">赤と緑だけに頼らない</p><ul><li class="concept-card"><strong>方向</strong><p>矢印と文字で方向を示し、色は補助にします。</p></li><li class="concept-card"><strong>参加度</strong><p>模様付き出来高表示で活動増減を示します。</p></li><li class="concept-card"><strong>不確実性</strong><p>各象限には複数の説明があります。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-four-quadrants" data-title="四つの記述的象限を検討" data-copy="{&quot;ariaLabel&quot;:&quot;価格方向と相対出来高方向のインタラクティブ四象限&quot;,&quot;quadrants&quot;:[{&quot;title&quot;:&quot;価格 ↑ · 出来高 ↑&quot;,&quot;axes&quot;:&quot;高い価格 / 高い相対活動&quot;,&quot;status&quot;:&quot;価格上昇時に参加が拡大。広い需要、ショートカバー、イベント再評価、回転売買などがあり、追随と位置で意味が変わります。&quot;},{&quot;title&quot;:&quot;価格 ↑ · 出来高 ↓&quot;,&quot;axes&quot;:&quot;高い価格 / 低い相対活動&quot;,&quot;status&quot;:&quot;軽い活動で価格が上昇。供給の薄さ、静かなドリフト、参加低下などがあり、流動性と追随なしには確定できません。&quot;},{&quot;title&quot;:&quot;価格 ↓ · 出来高 ↑&quot;,&quot;axes&quot;:&quot;低い価格 / 高い相対活動&quot;,&quot;status&quot;:&quot;価格下落時に参加が拡大。緊急売り、強制フロー、再評価、受け止める需要などがあり、続落は保証されません。&quot;},{&quot;title&quot;:&quot;価格 ↓ · 出来高 ↓&quot;,&quot;axes&quot;:&quot;低い価格 / 低い相対活動&quot;,&quot;status&quot;:&quot;軽い活動で価格が下落。静かな押し、需要低下、薄い流動性などがあり、反転・継続の証明ではありません。&quot;}],&quot;syntheticNote&quot;:&quot;合成条件による概念四象限です。どの象限も売買指示ではありません。&quot;}"><noscript>JavaScript を有効にすると合成データ実験を操作できます。価格と出来高は文脈証拠であり、取引指示ではありません。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="breakout-follow-through" aria-labelledby="breakout-follow-through-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 04</p>
+    <h2 id="breakout-follow-through-title">水準通過はイベント、その後の推移が検証</h2>
+    <p class="copy-prose">ブレイクアウトは選んだ基準を価格が越えることです。相対出来高増は参加増を示せますが、基準外での定着を保証しません。</p>
+<p class="copy-prose">後の終値、再試行、値幅、流動性、時間軸を確認します。この合成実験は教育目的のみで、取引トリガーにはできません。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>通過バーで動画を止めず、市場が次に何をするかを見ます。</p></aside><div class="concept-points"><p class="concept-points-label">主張を検証する</p><ul><li class="concept-card"><strong>水準を定義</strong><p>基準水準は分析上の選択で、自然法則ではありません。</p></li><li class="concept-card"><strong>定着を観察</strong><p>水準外で繰り返し取引することは一時的な越境と異なります。</p></li><li class="concept-card"><strong>追随を確認</strong><p>後の動きが初期解釈を強め、弱め、否定します。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-breakout-follow-through" data-title="合成越境後の観察窓を変更" data-copy="{&quot;ariaLabel&quot;:&quot;水準通過時は似て相対出来高も高いが後の結果が異なる二つの合成経路の比較&quot;,&quot;referenceLevel&quot;:&quot;合成基準水準&quot;,&quot;controlLabel&quot;:&quot;観察窓を選択&quot;,&quot;stateLabels&quot;:{&quot;undetermined&quot;:&quot;この時点では結果不明&quot;,&quot;accepted&quot;:&quot;後続：上方で定着&quot;,&quot;rejected&quot;:&quot;後続：拒否されレンジ内へ&quot;},&quot;windows&quot;:[{&quot;key&quot;:&quot;crossing&quot;,&quot;label&quot;:&quot;通過のみ&quot;,&quot;status&quot;:&quot;通過時点では二つの合成経路が似ており、どちらも相対出来高が高い状態です。結果はまだ予知できず、取引トリガーにもなりません。&quot;},{&quot;key&quot;:&quot;followThrough&quot;,&quot;label&quot;:&quot;その後を観察&quot;,&quot;status&quot;:&quot;後続証拠で初めて区別できます。経路 A は突破領域より上で定着し、経路 B はすぐレンジ内へ戻ります。この事後的な区別も取引トリガーや投資助言ではありません。&quot;}],&quot;paths&quot;:[{&quot;key&quot;:&quot;accepted&quot;,&quot;label&quot;:&quot;合成経路 A&quot;,&quot;result&quot;:&quot;accepted&quot;,&quot;crossingCount&quot;:6,&quot;crossingPoints&quot;:&quot;0,165 80,145 155,155 230,120 300,125 350,70&quot;,&quot;followThroughPoints&quot;:&quot;0,165 80,145 155,155 230,120 300,125 350,70 410,92 470,55 530,65 600,38&quot;,&quot;volumes&quot;:[24,31,28,42,55,92,71,66,58,63],&quot;aria&quot;:{&quot;crossing&quot;:&quot;合成経路 A は高い相対出来高で水準を通過した所までを表示し、その後と結果は隠されている&quot;,&quot;followThrough&quot;:&quot;合成経路 A はその後も表示し、突破領域より上での定着を示す&quot;}},{&quot;key&quot;:&quot;rejected&quot;,&quot;label&quot;:&quot;合成経路 B&quot;,&quot;result&quot;:&quot;rejected&quot;,&quot;crossingCount&quot;:6,&quot;crossingPoints&quot;:&quot;0,168 80,146 155,152 230,122 300,126 350,68&quot;,&quot;followThroughPoints&quot;:&quot;0,168 80,146 155,152 230,122 300,126 350,68 410,112 470,142 530,158 600,150&quot;,&quot;volumes&quot;:[25,30,29,41,57,89,73,64,55,49],&quot;aria&quot;:{&quot;crossing&quot;:&quot;合成経路 B は高い相対出来高で水準を通過した所までを表示し、その後と結果は隠されている&quot;,&quot;followThrough&quot;:&quot;合成経路 B はその後も表示し、すぐ元のレンジへ拒否される動きを示す&quot;}}],&quot;syntheticNote&quot;:&quot;二つの経路、価格、相対出来高はすべて合成で教育目的です。予測、推奨、取引トリガー、投資助言ではありません。&quot;}"><noscript>JavaScript を有効にすると合成データ実験を操作できます。価格と出来高は文脈証拠であり、取引指示ではありません。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="absorption-divergence" aria-labelledby="absorption-divergence-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 05</p>
+    <h2 id="absorption-divergence-title">努力と結果はずれても、次の動きは分からない</h2>
+    <p class="copy-prose">吸収は大量執行が十分な反対流動性に出会い、価格移動が予想より小さい状態を表します。ダイバージェンスは価格と選んだ出来高指標の動きが異なることです。</p>
+<p class="copy-prose">どちらも隠れた意図の直接観測ではなく仮説です。吸収は続くことも崩れることもあり、乖離は価格・出来高・時間・基準変更で解消し得ます。反転は保証されません。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>大きな努力で小さな移動なら調べる価値はありますが、自動売買の根拠ではありません。</p></aside><div class="concept-points"><p class="concept-points-label">観察と推論を分ける</p><ul><li class="concept-card"><strong>観察</strong><p>価格移動、執行出来高、スプレッド、時間を測ります。</p></li><li class="concept-card"><strong>仮説</strong><p>流動性吸収は可能でも、主体と動機は不明です。</p></li><li class="concept-card"><strong>確認</strong><p>後の動きが仮説を支持または棄却します。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-absorption-divergence" data-title="合成した努力対結果の型を比較" data-copy="{&quot;ariaLabel&quot;:&quot;吸収、ダイバージェンス、共動を比較する合成データ図&quot;,&quot;priceLabel&quot;:&quot;価格反応&quot;,&quot;volumeLabel&quot;:&quot;相対活動&quot;,&quot;controlLabel&quot;:&quot;合成パターンを選択&quot;,&quot;patterns&quot;:[{&quot;label&quot;:&quot;吸収の可能性&quot;,&quot;price&quot;:[48,52,50,54,51,53],&quot;volume&quot;:[28,45,62,78,90,94],&quot;status&quot;:&quot;合成観察：活動増でも価格は圧縮。吸収は一仮説で、隠れ注文、双方向回転、尺度選択も説明候補です。&quot;},{&quot;label&quot;:&quot;ダイバージェンス&quot;,&quot;price&quot;:[25,39,52,65,74,83],&quot;volume&quot;:[86,72,59,47,38,31],&quot;status&quot;:&quot;合成観察：価格上昇中に相対活動低下。即時反転を意味せず、流動性や基準選択でも同形状になります。&quot;},{&quot;label&quot;:&quot;共動&quot;,&quot;price&quot;:[22,31,44,58,70,82],&quot;volume&quot;:[25,35,49,61,73,86],&quot;status&quot;:&quot;合成観察：価格移動と活動が共に拡大。参加を説明しますが、将来収益や持続性は示しません。&quot;}],&quot;syntheticNote&quot;:&quot;点はすべて合成です。「吸収」と「ダイバージェンス」は条件付き解釈で、確実なシグナルではありません。&quot;}"><noscript>JavaScript を有効にすると合成データ実験を操作できます。価格と出来高は文脈証拠であり、取引指示ではありません。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="context-checklist" aria-labelledby="context-checklist-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 06</p>
+    <h2 id="context-checklist-title">取引命令ではなく文脈チェックで終える</h2>
+    <p class="copy-prose">規律ある読み方は、銘柄、時間帯、時間軸、基準、イベント、流動性環境、市場全体、追随を記録します。文脈不足は自信を下げるべきで、強い物語を作る理由ではありません。</p>
+<p class="copy-prose">価格・出来高分析は参加度、流動性、値動きの問いを整理できますが、公正価値や収益を予測できず、独立調査や専門助言の代わりになりません。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>出力は制約付き観察であり、売買、ポジション、収益指示ではありません。</p></aside><div class="concept-points"><p class="concept-points-label">結論の前に</p><ul><li class="concept-card"><strong>正規化</strong><p>銘柄と時刻に妥当な比較を選びます。</p></li><li class="concept-card"><strong>位置づけ</strong><p>トレンド、レンジ、イベント、流動性に置きます。</p></li><li class="concept-card"><strong>再確認</strong><p>解釈を変える後続証拠を先に定義します。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pv-context-checklist" data-title="合成証拠メモを作る" data-copy="{&quot;ariaLabel&quot;:&quot;合成価格出来高観察の七項目インタラクティブ文脈チェックリスト&quot;,&quot;meterAria&quot;:&quot;記録済みの文脈項目&quot;,&quot;items&quot;:[{&quot;key&quot;:&quot;baseline&quot;,&quot;title&quot;:&quot;関連する基準&quot;,&quot;body&quot;:&quot;同条件を比較し、銘柄と時間帯の季節性を考慮します。&quot;},{&quot;key&quot;:&quot;structure&quot;,&quot;title&quot;:&quot;構造上の位置&quot;,&quot;body&quot;:&quot;トレンド、レンジ、基準水準、ギャップ、観察時間軸を記録します。&quot;},{&quot;key&quot;:&quot;liquidity&quot;,&quot;title&quot;:&quot;変動性と流動性&quot;,&quot;body&quot;:&quot;変動性、スプレッド、表示板の厚み、既知の構造フローを確認します。&quot;},{&quot;key&quot;:&quot;events&quot;,&quot;title&quot;:&quot;ニュースと予定フロー&quot;,&quot;body&quot;:&quot;ニュース、決算、オークション、指数調整が参加を変えていないか確認します。&quot;},{&quot;key&quot;:&quot;close&quot;,&quot;title&quot;:&quot;終値の位置&quot;,&quot;body&quot;:&quot;区間内および基準領域に対する終値の位置を記録します。&quot;},{&quot;key&quot;:&quot;followThrough&quot;,&quot;title&quot;:&quot;後の定着・拒否・反転&quot;,&quot;body&quot;:&quot;初期仮説を支持、弱化、否定する後続行動を観察します。&quot;},{&quot;key&quot;:&quot;representativeness&quot;,&quot;title&quot;:&quot;データ源の代表性&quot;,&quot;body&quot;:&quot;どの市場、フィード、集計方法、欠落活動を表すデータか確認します。&quot;}],&quot;outcomes&quot;:{&quot;complete&quot;:&quot;証拠は比較的そろっている&quot;,&quot;limited&quot;:&quot;証拠が競合、またはまだ限定的&quot;,&quot;insufficient&quot;:&quot;情報不足&quot;,&quot;waiting&quot;:&quot;後続証拠を待つ必要がある&quot;},&quot;educationNote&quot;:&quot;教育用フレームワークです。出力は証拠品質の記録であり、投資助言、売買、ポジション量、収益の指示ではありません。&quot;}"><noscript>JavaScript を有効にすると合成データ実験を操作できます。価格と出来高は文脈証拠であり、取引指示ではありません。</noscript></interactive-figure>
+</section>
+<section class="closing" aria-labelledby="closing-title">
+  <div class="copy-block closing-copy">
+    <p class="section-label">統合 / 物語より証拠</p>
+    <h2 id="closing-title">参加度・流動性・反応を条件付き証拠の連鎖として読む</h2>
+    <p class="copy-prose">オークションから始め、活動を正規化し、四象限を記述して追随を観察します。測定と吸収・乖離などの解釈を分けます。</p>
+<p class="copy-prose">本図解は教育目的のみで、投資助言ではありません。価格と出来高は方向、収益、意思決定成功を保証しません。</p>
+    <div class="closing-grid">
+      <div class="starter-checklist">
+        <h3>六つの質問</h3>
+        <ol><li>何が、どこで、どの時間軸で取引されたか？</li><li>相対出来高はどう正規化されたか？</li><li>観察活動に対して価格はどれほど移動したか？</li><li>観察は大きな構造のどこにあるか？</li><li>初期イベント後に何が起きたか？</li><li>どの証拠が現在解釈を無効にするか？</li></ol>
+      </div>
+      <div class="boundary-map">
+        <h3>証拠の三層</h3>
+        <ul><li class="scale-card"><strong>約定</strong><span>何が執行された？</span><p>取引水準の価格と数量。</p></li><li class="scale-card"><strong>パターン</strong><span>何が変化した？</span><p>選択窓内の相対活動と価格反応。</p></li><li class="scale-card"><strong>文脈</strong><span>何が説明できる？</span><p>流動性、イベント、構造、基準、後続証拠。</p></li></ul>
+      </div>
+    </div>
+    <blockquote>出来高は観察を重要にできますが、解釈を確実にはできません。</blockquote>
+    <p class="source-note">本図解の数値系列はすべて合成です。教育目的のみで、投資助言ではありません。</p>
+  </div>
+</section>
+    </article>
+  </main>
+  <script>
+    window.__VISUAL_I18N__ = {"pauseAll":"すべての動きを停止","resumeAll":"すべての動きを再開","pause":"停止","resume":"再開","reset":"リセット","waiting":"図解は表示領域に入ると読み込まれます。","loading":"図解を準備しています…","error":"図解を表示できません。上の説明をお読みください。","figureFallback":"JavaScript を有効にすると合成データ実験を操作できます。価格と出来高は文脈証拠であり、取引指示ではありません。","skipToContent":"本文へ移動","languageNavigation":"言語","overviewLabel":"オークション概要","stepLabel":"ステップ"};
+  </script>
+  <script data-prototype-bundle="runtime">
+(() => {
+  "use strict";
+
+  const ui = Object.freeze(window.__VISUAL_I18N__);
+  const registry = new Map();
+  const figures = new Set();
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const tokens = Object.freeze({
+    ink: "var(--visual-ink, #17333c)",
+    muted: "var(--visual-muted, #60747a)",
+    line: "var(--visual-line, #d8ddd7)",
+    ocean: "var(--visual-ocean, #0f7185)",
+    warm: "var(--visual-warm, #ee9d46)",
+    coral: "var(--visual-coral, #d45f50)",
+    paper: "var(--visual-paper, #f4f1e8)",
+    surface: "var(--visual-surface, #fffdf8)"
+  });
+  let globalPaused = false;
+
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+  const call = (instance, method, value) => {
+    if (instance && typeof instance[method] === "function") instance[method](value);
+  };
+
+  class InteractiveFigure extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
+      this._instance = null;
+      this._mounted = false;
+      this._mounting = false;
+      this._visible = false;
+      this._localPaused = false;
+    }
+
+    connectedCallback() {
+      if (this._connected) return;
+      this._connected = true;
+      figures.add(this);
+      this._shadow.innerHTML = `
+        <style>
+          :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+          .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
+          .mount { min-height: inherit; }
+          .runtime-status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; pointer-events: none; }
+          .runtime-status[data-live-only] { position: absolute; inset: auto; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; background: transparent; pointer-events: none; }
+          .runtime-status[hidden] { display: none; }
+          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
+          .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+          button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+          button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+          @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
+        </style>
+        <div class="frame">
+          <div class="stage"><div class="mount"></div><div class="runtime-status" data-runtime-status role="status"></div></div>
+          <div class="controls">
+            <span class="title"></span>
+            <button type="button" data-action="pause" aria-pressed="false"></button>
+            <button type="button" data-action="reset"></button>
+          </div>
+        </div>`;
+
+      this._stage = this._shadow.querySelector(".stage");
+      this._mountRoot = this._shadow.querySelector(".mount");
+      this._status = this._shadow.querySelector("[data-runtime-status]");
+      this._title = this._shadow.querySelector(".title");
+      this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
+      this._resetButton = this._shadow.querySelector('[data-action="reset"]');
+      this._copy = JSON.parse(this.dataset.copy || "{}");
+      this._title.textContent = this.dataset.title || "";
+      this._pauseButton.textContent = ui.pause;
+      this._resetButton.textContent = ui.reset;
+      this._setStatus(ui.waiting);
+
+      this._pauseButton.addEventListener("click", () => {
+        this._localPaused = !this._localPaused;
+        this._syncPlayback();
+      });
+      this._resetButton.addEventListener("click", () => {
+        call(this._instance, "reset");
+        this.dispatchEvent(new CustomEvent("demo-reset", { bubbles: true }));
+      });
+
+      this._observer = new IntersectionObserver((entries) => {
+        this._visible = entries[0]?.isIntersecting ?? false;
+        if (this._visible) this._mount();
+        this._syncPlayback();
+      }, { rootMargin: "180px 0px", threshold: .05 });
+      this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      figures.delete(this);
+      this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
+      call(this._instance, "destroy");
+    }
+
+    async _mount() {
+      if (this._mounted || this._mounting) return;
+      const factory = registry.get(this.dataset.demo);
+      if (!factory) return;
+      this._mounting = true;
+      this._setStatus(ui.loading);
+      try {
+        this._instance = await factory({
+          root: this._mountRoot,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
+          copy: this._copy,
+          motion: !reducedMotion.matches,
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._announce(message)
+        }) || {};
+        this._mounted = true;
+        this.dataset.state = "mounted";
+        this._liveRevision = (this._liveRevision || 0) + 1;
+        this._status.removeAttribute("data-live-only");
+        this._status.textContent = "";
+        this._status.hidden = true;
+        this._resize();
+        this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
+      } catch {
+        this.dataset.state = "error";
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
+      }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
+    }
+
+    _syncPlayback() {
+      const paused = globalPaused || this._localPaused || !this._visible || reducedMotion.matches;
+      this.dataset.playback = paused ? "paused" : "playing";
+      this._pauseButton?.setAttribute("aria-pressed", String(this._localPaused));
+      if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
+      call(this._instance, paused ? "pause" : "resume");
+    }
+
+    _setStatus(message) {
+      this._liveRevision = (this._liveRevision || 0) + 1;
+      this._status.removeAttribute("data-live-only");
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
+
+    _announce(message) {
+      const revision = (this._liveRevision || 0) + 1;
+      this._liveRevision = revision;
+      this._status.hidden = false;
+      this._status.setAttribute("data-live-only", "");
+      this._status.textContent = "";
+      queueMicrotask(() => {
+        if (this._liveRevision !== revision || !this._status.isConnected) return;
+        this._status.textContent = message;
+      });
+    }
+  }
+
+  window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
+    if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
+    registry.set(id, factory);
+    figures.forEach((figure) => {
+      if (figure.dataset.demo === id && figure._visible) figure._mount();
+    });
+  };
+
+  customElements.define("interactive-figure", InteractiveFigure);
+
+  const globalToggle = document.querySelector("[data-global-motion]");
+  const syncGlobalToggle = () => {
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
+    figures.forEach((figure) => figure._syncPlayback());
+  };
+  globalToggle?.addEventListener("click", () => {
+    globalPaused = !globalPaused;
+    syncGlobalToggle();
+  });
+  reducedMotion.addEventListener("change", syncGlobalToggle);
+  syncGlobalToggle();
+})();
+  </script>
+  <script data-prototype-bundle="demos">
+const escapeHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+registerDemo("pv-auction-overview", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-auction { display:grid; gap:1rem; min-height:25rem; padding:clamp(1rem,4vw,2.25rem); color:${tokens.ink}; background:linear-gradient(145deg,color-mix(in srgb,${tokens.ocean} 11%,${tokens.surface}),${tokens.surface} 52%,color-mix(in srgb,${tokens.warm} 10%,${tokens.surface})); }
+      .pv-auction-board { display:grid; grid-template-columns:1fr auto 1fr; gap:.75rem; align-items:center; min-height:15rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1.25rem; background:color-mix(in srgb,${tokens.paper} 38%,${tokens.surface}); }
+      .pv-auction-book { display:grid; gap:.55rem; }
+      .pv-auction-book h3 { margin:0; color:${tokens.muted}; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; }
+      .pv-auction-order { position:relative; display:flex; justify-content:space-between; gap:.5rem; isolation:isolate; overflow:hidden; padding:.65rem; border:1px solid ${tokens.line}; border-radius:.65rem; background:${tokens.surface}; font-size:.78rem; }
+      .pv-auction-order::before { position:absolute; z-index:-1; inset:0 auto 0 0; width:var(--pv-depth); content:""; background:color-mix(in srgb,${tokens.ocean} 13%,transparent); transition:width .24s ease; }
+      .pv-auction-book:last-child .pv-auction-order::before { inset:0 0 0 auto; background:color-mix(in srgb,${tokens.coral} 13%,transparent); }
+      .pv-auction-order b { color:${tokens.ocean}; }
+      .pv-auction-book:last-child .pv-auction-order b { color:${tokens.coral}; }
+      .pv-auction-match { display:grid; place-items:center; width:5.4rem; aspect-ratio:1; border:2px solid ${tokens.warm}; border-radius:50%; background:color-mix(in srgb,${tokens.warm} 13%,${tokens.surface}); text-align:center; font-size:.7rem; font-weight:850; }
+      .pv-auction-pulse { width:.65rem; height:.65rem; margin:.35rem auto 0; border-radius:50%; background:${tokens.warm}; animation:pv-auction-pulse 1.4s ease-in-out infinite; }
+      .pv-auction-impact { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.55rem; }
+      .pv-auction-metric { min-width:0; padding:.7rem; border:1px solid ${tokens.line}; border-radius:.7rem; background:${tokens.surface}; text-align:center; }
+      .pv-auction-metric strong { display:block; overflow-wrap:anywhere; color:${tokens.ocean}; font-size:.92rem; }
+      .pv-auction-metric span { color:${tokens.muted}; font-size:.66rem; }
+      .pv-auction-track { position:relative; grid-column:1/-1; height:.7rem; overflow:hidden; border-radius:999px; background:color-mix(in srgb,${tokens.line} 68%,${tokens.surface}); }
+      .pv-auction-track::after { position:absolute; top:0; bottom:0; left:calc(var(--pv-impact) * 1%); width:.8rem; border-radius:999px; content:""; background:${tokens.warm}; transform:translateX(-50%); transition:left .24s ease; }
+      .pv-auction-controls { display:flex; flex-wrap:wrap; gap:.6rem; }
+      .pv-auction-controls button { flex:1 1 9rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .pv-auction-controls button[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pv-auction-controls button:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pv-auction-status { min-height:5.5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.ocean}; border-radius:.65rem; background:color-mix(in srgb,${tokens.paper} 45%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .pv-auction-note { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .pv-auction.is-paused .pv-auction-pulse { animation-play-state:paused; }
+      @keyframes pv-auction-pulse { 50% { transform:scale(1.8); opacity:.35; } }
+      @media (prefers-reduced-motion:reduce) { .pv-auction-order::before,.pv-auction-track::after { transition:none; } }
+      @media (max-width:560px) { .pv-auction-board { grid-template-columns:1fr; } .pv-auction-match { width:4.5rem; margin:auto; } .pv-auction-impact { grid-template-columns:1fr; } .pv-auction-track { grid-column:auto; } }
+    </style>
+    <div class="pv-auction${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="pv-auction-board" data-pv-book>
+        <div class="pv-auction-book"><h3>${escapeHtml(copy.bidBook)}</h3>${copy.bids.map((item, index) => `<div class="pv-auction-order" data-pv-depth-side="bid" data-pv-depth-index="${index}"><span>${escapeHtml(item.price)}</span><b data-pv-size></b></div>`).join("")}</div>
+        <div class="pv-auction-match"><span>${escapeHtml(copy.matchLabel)}<span class="pv-auction-pulse" aria-hidden="true"></span></span></div>
+        <div class="pv-auction-book"><h3>${escapeHtml(copy.askBook)}</h3>${copy.asks.map((item, index) => `<div class="pv-auction-order" data-pv-depth-side="ask" data-pv-depth-index="${index}"><span>${escapeHtml(item.price)}</span><b data-pv-size></b></div>`).join("")}</div>
+      </div>
+      <div class="pv-auction-impact"><div class="pv-auction-metric"><strong data-pv-liquidity></strong><span>${escapeHtml(copy.liquidityLabel)}</span></div><div class="pv-auction-metric"><strong data-pv-execution></strong><span>${escapeHtml(copy.executionLabel)}</span></div><div class="pv-auction-metric"><strong data-pv-displacement></strong><span>${escapeHtml(copy.displacementLabel)}</span></div><div class="pv-auction-track" data-pv-impact-track aria-hidden="true"></div></div>
+      <div class="pv-auction-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${copy.scenarios.map((item, index) => `<button type="button" data-pv-scenario="${index}" aria-pressed="${index === 0}">${escapeHtml(item.label)}</button>`).join("")}</div>
+      <p class="pv-auction-status" data-pv-status aria-live="polite"></p>
+      <p class="pv-auction-note">${escapeHtml(copy.syntheticNote)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".pv-auction");
+  const board = root.querySelector("[data-pv-book]");
+  const status = root.querySelector(".pv-auction-status");
+  const buttons = [...root.querySelectorAll("[data-pv-scenario]")];
+  const orders = [...root.querySelectorAll("[data-pv-depth-side]")];
+  const liquidity = root.querySelector("[data-pv-liquidity]");
+  const execution = root.querySelector("[data-pv-execution]");
+  const displacement = root.querySelector("[data-pv-displacement]");
+  const impactTrack = root.querySelector("[data-pv-impact-track]");
+  const select = (index, speak = false) => {
+    const item = copy.scenarios[index];
+    scene.dataset.scenario = item.key;
+    scene.dataset.liquidity = item.key;
+    scene.dataset.executionVolume = String(item.executionValue);
+    scene.dataset.displacement = String(item.displacementValue);
+    board.setAttribute("aria-label", item.bookAria);
+    liquidity.textContent = item.liquidity;
+    execution.textContent = item.execution;
+    displacement.textContent = item.displacement;
+    impactTrack.style.setProperty("--pv-impact", String(item.impact));
+    orders.forEach((order) => {
+      const side = order.dataset.pvDepthSide;
+      const depthIndex = Number(order.dataset.pvDepthIndex);
+      const depth = item[`${side}Depths`][depthIndex];
+      order.dataset.depth = String(depth);
+      order.style.setProperty("--pv-depth", `${depth}%`);
+      order.querySelector("[data-pv-size]").textContent = item[`${side}Sizes`][depthIndex];
+    });
+    status.textContent = item.status;
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    if (speak) announce(item.status);
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.pvScenario), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("pv-trade-mechanics", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-trade { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-trade-tape { display:grid; grid-template-columns:repeat(5,1fr); gap:.5rem; align-items:end; min-height:12rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); }
+      .pv-trade-print { display:grid; align-content:end; gap:.35rem; height:100%; text-align:center; color:${tokens.muted}; font-size:.68rem; }
+      .pv-trade-bar { min-height:1.4rem; height:var(--pv-height); border-radius:.5rem .5rem .15rem .15rem; background:repeating-linear-gradient(135deg,${tokens.warm} 0 8px,color-mix(in srgb,${tokens.warm} 60%,${tokens.surface}) 8px 16px); transform-origin:bottom; animation:pv-trade-rise .8s ease both; }
+      .pv-trade-print b { color:${tokens.ocean}; font-size:.76rem; }
+      .pv-trade-controls { display:flex; flex-wrap:wrap; gap:.6rem; }
+      .pv-trade-controls button { flex:1 1 10rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .pv-trade-controls button[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pv-trade-controls button:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pv-trade-status { min-height:5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.coral}; border-radius:.65rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .pv-trade-note { margin:0; color:${tokens.muted}; font-size:.75rem; text-align:center; }
+      .pv-trade.is-paused .pv-trade-bar { animation-play-state:paused; }
+      @keyframes pv-trade-rise { from { transform:scaleY(.08); opacity:.3; } }
+      @media (max-width:420px) { .pv-trade-tape { gap:.25rem; padding:.65rem; } .pv-trade-print { font-size:.58rem; } }
+    </style>
+    <div class="pv-trade${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="pv-trade-tape" aria-label="${escapeHtml(copy.chartLabel)}"></div>
+      <div class="pv-trade-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${copy.scenarios.map((item, index) => `<button type="button" data-pv-trade="${index}" aria-pressed="${index === 0}">${escapeHtml(item.label)}</button>`).join("")}</div>
+      <p class="pv-trade-status" data-pv-status aria-live="polite"></p><p class="pv-trade-note">${escapeHtml(copy.syntheticNote)}</p>
+    </div>`;
+  const scene = root.querySelector(".pv-trade");
+  const tape = root.querySelector(".pv-trade-tape");
+  const status = root.querySelector(".pv-trade-status");
+  const buttons = [...root.querySelectorAll("[data-pv-trade]")];
+  const select = (index, speak = false) => {
+    const item = copy.scenarios[index];
+    tape.innerHTML = item.prints.map((value, printIndex) => `<div class="pv-trade-print"><b>${escapeHtml(item.prices[printIndex])}</b><div class="pv-trade-bar" style="--pv-height:${value}%"></div><span>${escapeHtml(String(value))} ${escapeHtml(copy.volumeUnit)}</span></div>`).join("");
+    status.textContent = item.status;
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    if (speak) announce(item.status);
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.pvTrade), true)));
+  select(0);
+  return { pause:()=>scene.classList.add("is-paused"), resume:()=>scene.classList.remove("is-paused"), reset:()=>select(0), destroy:()=>{ root.innerHTML=""; } };
+});
+
+registerDemo("pv-relative-volume", ({ root, copy, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-relative { display:grid; gap:1rem; min-height:20rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-relative-chart { display:flex; gap:.45rem; align-items:end; min-height:11rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1rem; background:linear-gradient(to top,color-mix(in srgb,${tokens.ocean} 7%,${tokens.surface}),${tokens.surface}); }
+      .pv-relative-column { flex:1; min-width:0; border-radius:.35rem .35rem .1rem .1rem; background:repeating-linear-gradient(135deg,${tokens.warm} 0 7px,color-mix(in srgb,${tokens.warm} 55%,${tokens.surface}) 7px 14px); }
+      .pv-relative-column:last-child { background:${tokens.ocean}; }
+      .pv-relative-periods { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .pv-relative-periods button { flex:1 1 8rem; padding:.7rem; border:1px solid ${tokens.line}; border-radius:.7rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-size:.76rem; font-weight:800; cursor:pointer; }
+      .pv-relative-periods button[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pv-relative-periods button:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pv-relative-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:.6rem; }
+      .pv-relative-metric { padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; background:color-mix(in srgb,${tokens.paper} 45%,${tokens.surface}); text-align:center; }
+      .pv-relative-metric strong { display:block; color:${tokens.ocean}; font-size:1.1rem; }
+      .pv-relative-metric span { color:${tokens.muted}; font-size:.67rem; }
+      .pv-relative-control label { display:flex; justify-content:space-between; gap:1rem; color:${tokens.muted}; font-size:.78rem; font-weight:750; }
+      .pv-relative-control input { width:100%; accent-color:${tokens.ocean}; }
+      .pv-relative-status { min-height:4rem; margin:0; color:${tokens.muted}; line-height:1.55; }
+      .pv-relative-note { margin:0; color:${tokens.muted}; font-size:.74rem; text-align:center; }
+      @media (max-width:440px) { .pv-relative-metrics { grid-template-columns:1fr; } }
+    </style>
+    <div class="pv-relative" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="pv-relative-chart" data-pv-relative-chart role="img"></div>
+      <div class="pv-relative-periods" role="group" aria-label="${escapeHtml(copy.periodControlLabel)}">${copy.baselines.map((item,index)=>`<button type="button" data-pv-baseline="${item.key}" data-pv-baseline-index="${index}" aria-pressed="${index===0}">${escapeHtml(item.label)}</button>`).join("")}</div>
+      <div class="pv-relative-control"><label for="pv-relative-input"><span>${escapeHtml(copy.controlLabel)}</span><output data-pv-output></output></label><input id="pv-relative-input" data-pv-relative-input type="range" min="30" max="180" value="100" aria-label="${escapeHtml(copy.controlAria)}"></div>
+      <div class="pv-relative-metrics"><div class="pv-relative-metric"><strong data-pv-current></strong><span>${escapeHtml(copy.currentLabel)}</span></div><div class="pv-relative-metric"><strong data-pv-baseline-value></strong><span data-pv-baseline-label></span></div><div class="pv-relative-metric"><strong data-pv-ratio></strong><span>${escapeHtml(copy.ratioLabel)}</span></div></div>
+      <p class="pv-relative-status" data-pv-status aria-live="polite"></p><p class="pv-relative-note">${escapeHtml(copy.syntheticNote)}</p>
+    </div>`;
+  const scene = root.querySelector(".pv-relative");
+  const input = root.querySelector("input");
+  const output = root.querySelector("output");
+  const chart = root.querySelector(".pv-relative-chart");
+  const current = root.querySelector("[data-pv-current]");
+  const ratio = root.querySelector("[data-pv-ratio]");
+  const baselineValue = root.querySelector("[data-pv-baseline-value]");
+  const baselineLabel = root.querySelector("[data-pv-baseline-label]");
+  const baselineButtons = [...root.querySelectorAll("[data-pv-baseline]")];
+  const status = root.querySelector(".pv-relative-status");
+  let activeBaseline = 0;
+  const render = (speak = false) => {
+    const value = Number(input.value);
+    const baseline = copy.baselines[activeBaseline];
+    const rvol = value / baseline.value;
+    scene.dataset.period = baseline.key;
+    scene.dataset.baseline = String(baseline.value);
+    scene.dataset.current = String(value);
+    scene.dataset.ratio = rvol.toFixed(2);
+    output.textContent = `${value} ${copy.volumeUnit}`;
+    current.textContent = `${value}`;
+    baselineValue.textContent = `${baseline.value}`;
+    baselineLabel.textContent = `${copy.baselineLabel} · ${baseline.label}`;
+    ratio.textContent = `${rvol.toFixed(2)}×`;
+    chart.setAttribute("aria-label", copy.chartAriaTemplate.replace("{period}",baseline.label).replace("{baseline}",String(baseline.value)).replace("{current}",String(value)).replace("{ratio}",rvol.toFixed(2)));
+    chart.innerHTML = [...baseline.history, value].map((item) => `<span class="pv-relative-column" style="height:${Math.max(12,item / 1.8)}%"></span>`).join("");
+    baselineButtons.forEach((button,index)=>button.setAttribute("aria-pressed",String(index===activeBaseline)));
+    status.textContent = copy.statusTemplate.replace("{current}",String(value)).replace("{baseline}",String(baseline.value)).replace("{period}",baseline.label).replace("{ratio}",rvol.toFixed(2));
+    if (speak) announce(status.textContent);
+  };
+  baselineButtons.forEach((button)=>button.addEventListener("click",()=>{activeBaseline=Number(button.dataset.pvBaselineIndex);render(true);}));
+  input.addEventListener("input", () => render());
+  input.addEventListener("change", () => render(true));
+  render();
+  return { reset:()=>{ activeBaseline=0; input.value="100"; render(); }, destroy:()=>{ root.innerHTML=""; } };
+});
+
+registerDemo("pv-four-quadrants", ({ root, copy, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-quadrants { display:grid; gap:1rem; min-height:24rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-quadrants-grid { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+      .pv-quadrants-card { min-height:8rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:.9rem; color:${tokens.ink}; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); font:inherit; text-align:left; cursor:pointer; }
+      .pv-quadrants-card strong { display:block; margin-bottom:.45rem; color:${tokens.ocean}; }
+      .pv-quadrants-card:nth-child(2n) strong { color:${tokens.coral}; }
+      .pv-quadrants-card span { color:${tokens.muted}; font-size:.76rem; line-height:1.45; }
+      .pv-quadrants-card[aria-pressed="true"] { border-color:${tokens.warm}; box-shadow:inset 0 0 0 2px ${tokens.warm}; }
+      .pv-quadrants-card:focus-visible { outline:3px solid ${tokens.ocean}; outline-offset:2px; }
+      .pv-quadrants-status { min-height:5.5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.warm}; border-radius:.7rem; background:color-mix(in srgb,${tokens.warm} 8%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .pv-quadrants-note { margin:0; color:${tokens.muted}; font-size:.74rem; text-align:center; }
+      @media(max-width:480px){ .pv-quadrants-grid{grid-template-columns:1fr;} .pv-quadrants-card{min-height:6rem;} }
+    </style>
+    <div class="pv-quadrants" role="group" aria-label="${escapeHtml(copy.ariaLabel)}"><div class="pv-quadrants-grid">${copy.quadrants.map((item,index)=>`<button type="button" class="pv-quadrants-card" data-pv-quadrant="${index}" aria-pressed="${index===0}"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.axes)}</span></button>`).join("")}</div><p class="pv-quadrants-status" data-pv-status aria-live="polite"></p><p class="pv-quadrants-note">${escapeHtml(copy.syntheticNote)}</p></div>`;
+  const buttons=[...root.querySelectorAll("[data-pv-quadrant]")];
+  const status=root.querySelector(".pv-quadrants-status");
+  const select=(index,speak=false)=>{ status.textContent=copy.quadrants[index].status; buttons.forEach((button,i)=>button.setAttribute("aria-pressed",String(i===index))); if(speak) announce(status.textContent); };
+  buttons.forEach((button)=>button.addEventListener("click",()=>select(Number(button.dataset.pvQuadrant),true)));
+  select(0);
+  return { reset:()=>select(0), destroy:()=>{root.innerHTML="";} };
+});
+
+registerDemo("pv-breakout-follow-through", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-breakout { display:grid; gap:1rem; min-height:23rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-breakout-path-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.75rem; }
+      .pv-breakout-card { display:grid; gap:.45rem; min-width:0; padding:.65rem; border:1px solid ${tokens.line}; border-radius:1rem; background:color-mix(in srgb,${tokens.paper} 36%,${tokens.surface}); }
+      .pv-breakout-card h3 { margin:0; font-size:.78rem; }
+      .pv-breakout-state { color:${tokens.muted}; font-size:.68rem; font-weight:800; }
+      .pv-breakout-chart { position:relative; min-height:12rem; overflow:hidden; border:1px solid ${tokens.line}; border-radius:.7rem; background:repeating-linear-gradient(to bottom,transparent 0 31px,color-mix(in srgb,${tokens.line} 55%,transparent) 31px 32px); }
+      .pv-breakout-level { position:absolute; z-index:1; top:43%; left:0; right:0; border-top:2px dashed ${tokens.coral}; color:${tokens.coral}; font-size:.68rem; font-weight:800; text-align:right; }
+      .pv-breakout-path { position:absolute; inset:12% 5%; width:90%; height:76%; fill:none; stroke:${tokens.ocean}; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:520; animation:pv-breakout-draw 1.8s ease both; }
+      .pv-breakout-volume { position:absolute; inset:auto 5% 5%; display:flex; gap:.35rem; align-items:end; height:25%; }
+      .pv-breakout-volume span { flex:1; height:var(--pv-volume); border-radius:.2rem .2rem 0 0; background:${tokens.warm}; opacity:.72; }
+      .pv-breakout-controls { display:flex; gap:.6rem; flex-wrap:wrap; }
+      .pv-breakout-controls button { flex:1 1 10rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .pv-breakout-controls button[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pv-breakout-controls button:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pv-breakout-status { min-height:5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.coral}; border-radius:.65rem; color:${tokens.muted}; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); line-height:1.55; }
+      .pv-breakout-note { margin:0; color:${tokens.muted}; font-size:.74rem; text-align:center; }
+      .pv-breakout.is-paused .pv-breakout-path { animation-play-state:paused; }
+      @keyframes pv-breakout-draw { from { stroke-dashoffset:520; } to { stroke-dashoffset:0; } }
+      @media (max-width:560px) { .pv-breakout-path-grid { grid-template-columns:1fr; } }
+    </style>
+    <div class="pv-breakout${motion?"":" is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}"><div class="pv-breakout-path-grid">${copy.paths.map((path)=>`<section class="pv-breakout-card" data-pv-path="${path.key}" data-path-state="undetermined"><h3>${escapeHtml(path.label)}</h3><span class="pv-breakout-state" data-pv-path-state-label></span><div class="pv-breakout-chart" role="img"><span class="pv-breakout-level">${escapeHtml(copy.referenceLevel)}</span><svg viewBox="0 0 600 220" class="pv-breakout-path" preserveAspectRatio="none" aria-hidden="true"><polyline data-pv-polyline></polyline></svg><div class="pv-breakout-volume" data-pv-volume></div></div></section>`).join("")}</div><div class="pv-breakout-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${copy.windows.map((item,index)=>`<button type="button" data-pv-window="${item.key}" data-pv-window-index="${index}" aria-pressed="${index===0}">${escapeHtml(item.label)}</button>`).join("")}</div><p class="pv-breakout-status" data-pv-status aria-live="polite"></p><p class="pv-breakout-note">${escapeHtml(copy.syntheticNote)}</p></div>`;
+  const scene=root.querySelector(".pv-breakout"); const status=root.querySelector(".pv-breakout-status"); const buttons=[...root.querySelectorAll("[data-pv-window]")]; const cards=[...root.querySelectorAll("[data-pv-path]")];
+  const select=(index,speak=false)=>{const windowState=copy.windows[index];scene.dataset.window=windowState.key;cards.forEach((card,pathIndex)=>{const path=copy.paths[pathIndex];const crossingOnly=windowState.key==="crossing";const state=crossingOnly?"undetermined":path.result;const points=crossingOnly?path.crossingPoints:path.followThroughPoints;const volumes=crossingOnly?path.volumes.slice(0,path.crossingCount):path.volumes;card.dataset.pathState=state;card.dataset.visiblePoints=String(points.trim().split(/\s+/).length);card.querySelector("[data-pv-path-state-label]").textContent=copy.stateLabels[state];card.querySelector("[data-pv-polyline]").setAttribute("points",points);card.querySelector("[data-pv-volume]").innerHTML=volumes.map((item)=>`<span style="--pv-volume:${item}%"></span>`).join("");card.querySelector(".pv-breakout-chart").setAttribute("aria-label",path.aria[windowState.key]);});status.textContent=windowState.status;buttons.forEach((button,i)=>button.setAttribute("aria-pressed",String(i===index)));if(speak)announce(status.textContent);};
+  buttons.forEach((button)=>button.addEventListener("click",()=>select(Number(button.dataset.pvWindowIndex),true)));select(0);
+  return { pause:()=>scene.classList.add("is-paused"),resume:()=>scene.classList.remove("is-paused"),reset:()=>select(0),destroy:()=>{root.innerHTML="";} };
+});
+
+registerDemo("pv-absorption-divergence", ({ root, copy, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-absorption { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-absorption-stage { display:grid; grid-template-columns:repeat(2,1fr); gap:.7rem; }
+      .pv-absorption-panel { min-height:10rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1rem; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); }
+      .pv-absorption-panel h3 { margin:0 0 .8rem; color:${tokens.ocean}; font-size:.82rem; }
+      .pv-absorption-panel:last-child h3 { color:${tokens.coral}; }
+      .pv-absorption-track { position:relative; height:5rem; border-bottom:1px solid ${tokens.line}; }
+      .pv-absorption-track span { position:absolute; left:var(--pv-left); bottom:var(--pv-bottom); width:.55rem; height:.55rem; border-radius:50%; background:${tokens.warm}; transform:translate(-50%,50%); }
+      .pv-absorption-controls { display:flex; gap:.6rem; flex-wrap:wrap; }
+      .pv-absorption-controls button { flex:1 1 10rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .pv-absorption-controls button[aria-pressed="true"] { border-color:${tokens.warm}; box-shadow:inset 0 0 0 1px ${tokens.warm}; }
+      .pv-absorption-controls button:focus-visible { outline:3px solid ${tokens.ocean}; outline-offset:2px; }
+      .pv-absorption-status { min-height:5rem; margin:0; padding:1rem; border-left:.3rem solid ${tokens.warm}; border-radius:.65rem; color:${tokens.muted}; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); line-height:1.55; }
+      .pv-absorption-note { margin:0; color:${tokens.muted}; font-size:.74rem; text-align:center; }
+      @media(max-width:500px){.pv-absorption-stage{grid-template-columns:1fr;}}
+    </style>
+    <div class="pv-absorption" role="group" aria-label="${escapeHtml(copy.ariaLabel)}"><div class="pv-absorption-stage"><div class="pv-absorption-panel"><h3>${escapeHtml(copy.priceLabel)}</h3><div class="pv-absorption-track" data-pv-price></div></div><div class="pv-absorption-panel"><h3>${escapeHtml(copy.volumeLabel)}</h3><div class="pv-absorption-track" data-pv-volume></div></div></div><div class="pv-absorption-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${copy.patterns.map((item,index)=>`<button type="button" data-pv-pattern="${index}" aria-pressed="${index===0}">${escapeHtml(item.label)}</button>`).join("")}</div><p class="pv-absorption-status" data-pv-status aria-live="polite"></p><p class="pv-absorption-note">${escapeHtml(copy.syntheticNote)}</p></div>`;
+  const price=root.querySelector("[data-pv-price]");const volume=root.querySelector("[data-pv-volume]");const status=root.querySelector(".pv-absorption-status");const buttons=[...root.querySelectorAll("[data-pv-pattern]")];
+  const points=(items)=>items.map((item,index)=>`<span style="--pv-left:${index*20}%;--pv-bottom:${item}%"></span>`).join("");
+  const select=(index,speak=false)=>{const item=copy.patterns[index];price.innerHTML=points(item.price);volume.innerHTML=points(item.volume);status.textContent=item.status;buttons.forEach((button,i)=>button.setAttribute("aria-pressed",String(i===index)));if(speak)announce(item.status);};
+  buttons.forEach((button)=>button.addEventListener("click",()=>select(Number(button.dataset.pvPattern),true)));select(0);
+  return { reset:()=>select(0),destroy:()=>{root.innerHTML="";} };
+});
+
+registerDemo("pv-context-checklist", ({ root, copy, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pv-checklist { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; background:${tokens.surface}; }
+      .pv-checklist-items { display:grid; gap:.6rem; }
+      .pv-checklist-item { display:grid; grid-template-columns:auto 1fr; gap:.75rem; align-items:start; padding:.85rem; border:1px solid ${tokens.line}; border-radius:.8rem; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); cursor:pointer; }
+      .pv-checklist-item input { width:1.15rem; height:1.15rem; accent-color:${tokens.ocean}; }
+      .pv-checklist-item strong { display:block; margin-bottom:.25rem; font-size:.82rem; }
+      .pv-checklist-item span { color:${tokens.muted}; font-size:.73rem; line-height:1.45; }
+      .pv-checklist-meter { height:.65rem; overflow:hidden; border-radius:999px; background:color-mix(in srgb,${tokens.line} 65%,${tokens.surface}); }
+      .pv-checklist-meter span { display:block; width:var(--pv-width); height:100%; background:linear-gradient(90deg,${tokens.ocean},${tokens.warm}); transition:width .2s ease; }
+      .pv-checklist-status { min-height:4rem; margin:0; padding:.8rem; border-left:.3rem solid ${tokens.ocean}; border-radius:.65rem; color:${tokens.ink}; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); font-weight:800; line-height:1.55; }
+      .pv-checklist-note { margin:0; padding:.8rem; border:1px solid color-mix(in srgb,${tokens.coral} 60%,${tokens.line}); border-radius:.7rem; color:${tokens.coral}; font-size:.76rem; font-weight:750; }
+    </style>
+    <div class="pv-checklist" role="group" aria-label="${escapeHtml(copy.ariaLabel)}"><div class="pv-checklist-items">${copy.items.map((item,index)=>`<label class="pv-checklist-item"><input type="checkbox" data-pv-check="${index}" data-check-key="${item.key}"><span><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.body)}</span></span></label>`).join("")}</div><div class="pv-checklist-meter" role="progressbar" aria-label="${escapeHtml(copy.meterAria)}" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0"><span></span></div><p class="pv-checklist-status" data-pv-status aria-live="polite"></p><p class="pv-checklist-note">${escapeHtml(copy.educationNote)}</p></div>`;
+  const scene=root.querySelector(".pv-checklist");const inputs=[...root.querySelectorAll("[data-pv-check]")];const meterRoot=root.querySelector(".pv-checklist-meter");const meter=root.querySelector(".pv-checklist-meter span");const status=root.querySelector(".pv-checklist-status");
+  const render=(speak=false)=>{const checked=inputs.filter((input)=>input.checked);const count=checked.length;const keys=new Set(checked.map((input)=>input.dataset.checkKey));let outcome="limited";if(count<=2)outcome="insufficient";else if(!keys.has("followThrough"))outcome="waiting";else if(count===inputs.length)outcome="complete";scene.dataset.outcome=outcome;scene.dataset.checkedCount=String(count);meter.style.setProperty("--pv-width",`${count/inputs.length*100}%`);meterRoot.setAttribute("aria-valuenow",String(count));status.textContent=copy.outcomes[outcome];if(speak)announce(status.textContent);};
+  inputs.forEach((input)=>input.addEventListener("change",()=>render(true)));render();
+  return { reset:()=>{inputs.forEach((input)=>{input.checked=false;});render();},destroy:()=>{root.innerHTML="";} };
+});
+  </script>
+</body>
+</html>

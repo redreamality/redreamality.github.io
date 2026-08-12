@@ -147,3 +147,109 @@ test('air-conditioner demos expose localized interaction and reset behavior', as
   await condenser.getByRole('button', { name: '风路受阻' }).click();
   await expect(condenser.getByText('热量积压在盘管附近')).toBeVisible();
 });
+
+test('price-volume kit artifact mounts into a dedicated root without losing runtime status', async ({ page }) => {
+  await page.goto('/price-volume-relationship/en/', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('h1')).toHaveText('Price shows where an auction moved. Volume shows how much traded there.');
+  await expect(page.locator('interactive-figure')).toHaveCount(7);
+  await expect(page.locator('script[src], link[href^="http"], img[src^="http"]')).toHaveCount(0);
+
+  const overview = page.locator('interactive-figure[data-demo="pv-auction-overview"]');
+  await overview.scrollIntoViewIfNeeded();
+  await expect(overview).toHaveAttribute('data-state', 'mounted');
+  await expect(overview.locator('.stage > .mount')).toHaveCount(1);
+  await expect(overview.locator('.mount + [data-runtime-status]')).toHaveCount(1);
+  await expect(overview.locator('.stage > .status')).toHaveCount(0);
+
+  const scene = overview.locator('.pv-auction');
+  const firstAskDepth = overview.locator('[data-pv-depth-side="ask"][data-pv-depth-index="0"]');
+  await expect(scene).toHaveAttribute('data-liquidity', 'thick');
+  await expect(scene).toHaveAttribute('data-execution-volume', '900');
+  await expect(scene).toHaveAttribute('data-displacement', '0.18');
+  await expect(firstAskDepth).toHaveAttribute('data-depth', '82');
+  const secondScenario = overview.locator('[data-pv-scenario="1"]');
+  await secondScenario.focus();
+  await page.keyboard.press('Enter');
+  await expect(secondScenario).toHaveAttribute('aria-pressed', 'true');
+  await expect(scene).toHaveAttribute('data-liquidity', 'thin');
+  await expect(scene).toHaveAttribute('data-execution-volume', '900');
+  await expect(scene).toHaveAttribute('data-displacement', '0.92');
+  await expect(firstAskDepth).toHaveAttribute('data-depth', '22');
+  const expectedStatus = 'Same synthetic execution volume, different displacement: 900 units consume more levels in thin displayed liquidity and move price by +0.92. Equal volume does not mean equal price displacement.';
+  await expect(overview.locator('[data-pv-status]')).toHaveText(expectedStatus);
+  const runtimeStatus = overview.locator('[data-runtime-status]');
+  await expect(runtimeStatus).toBeAttached();
+  await expect(runtimeStatus).toHaveAttribute('role', 'status');
+  await expect(runtimeStatus).toHaveText(expectedStatus);
+  await expect(runtimeStatus).toHaveAttribute('data-live-only', '');
+  await expect(runtimeStatus).not.toHaveAttribute('hidden', '');
+  await expect(runtimeStatus).toHaveCSS('pointer-events', 'none');
+  const runtimeStatusBox = await runtimeStatus.boundingBox();
+  expect(runtimeStatusBox).not.toBeNull();
+  expect(runtimeStatusBox!.width).toBeLessThanOrEqual(1);
+  expect(runtimeStatusBox!.height).toBeLessThanOrEqual(1);
+  await expect(secondScenario).toBeVisible();
+
+  await overview.getByRole('button', { name: 'Reset' }).click();
+  await expect(overview.locator('[data-pv-scenario="0"]')).toHaveAttribute('aria-pressed', 'true');
+});
+
+test('price-volume kit baselines, follow-through paths, and checklist expose stable state', async ({ page }) => {
+  await page.goto('/price-volume-relationship/en/', { waitUntil: 'domcontentloaded' });
+
+  const relative = page.locator('interactive-figure[data-demo="pv-relative-volume"]');
+  await relative.scrollIntoViewIfNeeded();
+  await expect(relative).toHaveAttribute('data-state', 'mounted');
+  const output = relative.locator('[data-pv-output]');
+  const ratio = relative.locator('[data-pv-ratio]');
+  const relativeScene = relative.locator('.pv-relative');
+  const initialOutput = await output.textContent();
+  const initialRatio = await ratio.textContent();
+  await expect(relativeScene).toHaveAttribute('data-period', 'open');
+  await expect(relativeScene).toHaveAttribute('data-ratio', '0.71');
+  const midday = relative.locator('[data-pv-baseline="midday"]');
+  await midday.focus();
+  await page.keyboard.press('Enter');
+  await expect(relativeScene).toHaveAttribute('data-period', 'midday');
+  await expect(relativeScene).toHaveAttribute('data-current', '100');
+  await expect(relativeScene).toHaveAttribute('data-ratio', '1.54');
+  await relative.locator('[data-pv-relative-input]').focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(output).not.toHaveText(initialOutput ?? '');
+  await expect(relativeScene).toHaveAttribute('data-current', '101');
+  await expect(relativeScene).toHaveAttribute('data-ratio', '1.55');
+  await relative.getByRole('button', { name: 'Reset' }).click();
+  await expect(relativeScene).toHaveAttribute('data-period', 'open');
+  await expect(output).toHaveText(initialOutput ?? '');
+  await expect(ratio).toHaveText(initialRatio ?? '');
+
+  const breakout = page.locator('interactive-figure[data-demo="pv-breakout-follow-through"]');
+  await breakout.scrollIntoViewIfNeeded();
+  await expect(breakout).toHaveAttribute('data-state', 'mounted');
+  const accepted = breakout.locator('[data-pv-path="accepted"]');
+  const rejected = breakout.locator('[data-pv-path="rejected"]');
+  await expect(accepted).toHaveAttribute('data-path-state', 'undetermined');
+  await expect(rejected).toHaveAttribute('data-path-state', 'undetermined');
+  await expect(accepted).toHaveAttribute('data-visible-points', '6');
+  await breakout.locator('[data-pv-window="followThrough"]').click();
+  await expect(accepted).toHaveAttribute('data-path-state', 'accepted');
+  await expect(rejected).toHaveAttribute('data-path-state', 'rejected');
+  await expect(accepted).toHaveAttribute('data-visible-points', '10');
+  await expect(breakout.locator('[data-pv-status]')).toContainText('Only later evidence distinguishes the paths');
+
+  const checklist = page.locator('interactive-figure[data-demo="pv-context-checklist"]');
+  await checklist.scrollIntoViewIfNeeded();
+  await expect(checklist).toHaveAttribute('data-state', 'mounted');
+  const checklistScene = checklist.locator('.pv-checklist');
+  await expect(checklist.locator('[data-pv-check]')).toHaveCount(7);
+  const checkbox = checklist.locator('[data-pv-check="0"]');
+  await checkbox.focus();
+  await page.keyboard.press('Space');
+  await expect(checkbox).toBeChecked();
+  await expect(checklistScene).toHaveAttribute('data-checked-count', '1');
+  await expect(checklist.locator('[data-pv-status]')).toHaveText('Insufficient information');
+  await checklist.getByRole('button', { name: 'Reset' }).click();
+  await expect(checkbox).not.toBeChecked();
+  await expect(checklistScene).toHaveAttribute('data-checked-count', '0');
+  await expect(checklist.locator('[data-pv-status]')).toHaveText('Insufficient information');
+});
