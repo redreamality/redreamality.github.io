@@ -5,47 +5,51 @@ import type { VisualGalleryItem } from '../../utils/visuals';
 
 interface Props {
   lang: Language;
-  visual?: VisualGalleryItem;
+  visuals: VisualGalleryItem[];
 }
 
-const { lang, visual } = Astro.props;
+const { lang, visuals } = Astro.props;
 const c = homeContent[lang];
 const basePath = lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : '';
-const dateLabel = visual
-  ? new Date(visual.publishedAt).toLocaleDateString(localeFor(lang), {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    })
-  : '';
-const isAirConditioner = visual?.cover === 'air-conditioner';
-const isTyphoon = visual?.cover === 'typhoon';
-const isLoopEngineering = visual?.cover === 'loop-engineering';
-const isPriceVolume = visual?.cover === 'price-volume';
+const homeVisuals = visuals.map((visual) => ({
+  ...visual,
+  dateLabel: new Date(visual.publishedAt).toLocaleDateString(localeFor(lang), {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  }),
+  isAirConditioner: visual.cover === 'air-conditioner',
+  isTyphoon: visual.cover === 'typhoon',
+  isLoopEngineering: visual.cover === 'loop-engineering',
+  isPriceVolume: visual.cover === 'price-volume',
+}));
 ---
 
-{visual && (
-  <section data-home-latest-visual class="mx-auto max-w-6xl px-4 pb-14 md:pb-16" aria-labelledby="latest-visual-title">
+{visuals.length > 0 && (
+  <section data-home-visuals class="mx-auto max-w-6xl px-4 pb-14 md:pb-16" aria-labelledby="home-visuals-title">
     <div class="mb-5 flex items-center justify-between gap-4">
-      <h2 id="latest-visual-title" class="flex items-center gap-3 font-display text-2xl font-bold text-surface-900 dark:text-white">
+      <h2 id="home-visuals-title" class="flex items-center gap-3 font-display text-2xl font-bold text-surface-900 dark:text-white">
         <span class="inline-block h-6 w-1.5 rounded-full bg-accent-500" aria-hidden="true"></span>
-        {c.latestVisualTitle}
+        {c.visualsSectionTitle}
       </h2>
       <a href={`${basePath}/visuals/`} class="shrink-0 text-sm font-medium text-accent-600 transition-colors hover:text-accent-500 dark:text-accent-400">
         {c.viewAllVisuals} <span aria-hidden="true">→</span>
       </a>
     </div>
 
-    <a
-      href={visual.href}
-      aria-label={visual.title}
-      class="reveal-init group grid overflow-hidden rounded-3xl border border-surface-200/80 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover dark:border-surface-800 dark:bg-surface-900 md:grid-cols-[minmax(0,1.05fr)_minmax(22rem,.95fr)]"
-    >
+    <div class="space-y-6">
+      {homeVisuals.map((visual) => (
+        <a
+          data-home-visual-card={visual.slug}
+          href={visual.href}
+          aria-label={visual.title}
+          class="reveal-init group grid overflow-hidden rounded-3xl border border-surface-200/80 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover dark:border-surface-800 dark:bg-surface-900 md:grid-cols-[minmax(0,1.05fr)_minmax(22rem,.95fr)]"
+        >
       <div class="flex flex-col justify-center p-7 md:p-10">
         <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.14em] text-accent-600 dark:text-accent-400">
           <span>{c.visualTypeLabels[visual.type]}</span>
           <span class="h-1 w-1 rounded-full bg-surface-300 dark:bg-surface-700" aria-hidden="true"></span>
-          <time datetime={visual.publishedAt} class="normal-case tracking-normal text-surface-500 dark:text-surface-400">{dateLabel}</time>
+          <time datetime={visual.publishedAt} class="normal-case tracking-normal text-surface-500 dark:text-surface-400">{visual.dateLabel}</time>
         </div>
         <h3 class="mt-4 font-display text-3xl font-extrabold tracking-tight text-surface-950 transition-colors group-hover:text-brand-600 dark:text-white dark:group-hover:text-brand-300 md:text-4xl">
           {visual.title}
@@ -59,7 +63,7 @@ const isPriceVolume = visual?.cover === 'price-volume';
 
       <div class="relative min-h-64 overflow-hidden bg-gradient-to-br from-slate-950 via-cyan-900 to-teal-500 md:min-h-80" aria-hidden="true">
         <div class="absolute inset-0 opacity-80 [background-image:radial-gradient(circle_at_20%_18%,rgba(255,255,255,.5)_0_2px,transparent_3px),radial-gradient(circle_at_82%_70%,rgba(255,255,255,.32)_0_3px,transparent_4px)] [background-size:72px_72px,116px_116px]"></div>
-        {isPriceVolume ? (
+        {visual.isPriceVolume ? (
           <>
             <div class="absolute inset-8 rounded-[2rem] border border-white/15 bg-slate-950/35 backdrop-blur-sm"></div>
             <div class="absolute bottom-[18%] left-[12%] flex h-[52%] w-[76%] items-end gap-3">
@@ -73,7 +77,7 @@ const isPriceVolume = visual?.cover === 'price-volume';
             <div class="absolute left-[12%] top-[34%] h-[3px] w-[76%] -rotate-6 bg-cyan-200/85 shadow-[0_0_18px_rgba(165,243,252,.7)]"></div>
             <div class="absolute right-[12%] top-[18%] rounded-full border border-rose-200/40 bg-rose-300/15 px-3 py-1 text-xs font-bold tracking-wide text-rose-100">P × V</div>
           </>
-        ) : isAirConditioner ? (
+        ) : visual.isAirConditioner ? (
           <>
             <div class="absolute left-[8%] top-[24%] h-36 w-44 rounded-[2rem] border border-cyan-100/30 bg-cyan-100/10 shadow-[0_0_55px_rgba(103,232,249,.2)] backdrop-blur-sm"></div>
             <div class="absolute right-[8%] top-[24%] h-36 w-44 rounded-[2rem] border border-amber-100/30 bg-amber-100/10 shadow-[0_0_55px_rgba(251,191,36,.18)] backdrop-blur-sm"></div>
@@ -85,7 +89,7 @@ const isPriceVolume = visual?.cover === 'price-volume';
             <div class="absolute left-[14%] top-[17%] text-3xl text-cyan-100/75">↓</div>
             <div class="absolute right-[14%] top-[17%] text-3xl text-amber-100/75">↑</div>
           </>
-        ) : isLoopEngineering ? (
+        ) : visual.isLoopEngineering ? (
           <>
             <div class="absolute inset-8 rounded-[2rem] border border-white/15 bg-slate-950/25 backdrop-blur-sm"></div>
             <div class="absolute left-[12%] top-1/2 h-16 w-28 -translate-y-1/2 rounded-2xl border border-cyan-200/35 bg-cyan-100/10"></div>
@@ -98,7 +102,7 @@ const isPriceVolume = visual?.cover === 'price-volume';
             <div class="absolute left-[18%] top-[28%] h-[48%] w-[64%] rounded-[50%] border border-dashed border-white/25 motion-safe:animate-[spin_18s_linear_infinite]"></div>
             <div class="absolute left-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-[0_0_28px_rgba(255,255,255,.85)]"></div>
           </>
-        ) : isTyphoon ? (
+        ) : visual.isTyphoon ? (
           <>
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_54%_50%,rgba(255,255,255,.95)_0_5%,rgba(103,232,249,.42)_6%_11%,transparent_12%)]"></div>
             <div class="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full border-[18px] border-white/15 shadow-[0_0_70px_rgba(103,232,249,.35)] motion-safe:animate-[spin_18s_linear_infinite]"></div>
@@ -112,6 +116,8 @@ const isPriceVolume = visual?.cover === 'price-volume';
           {visual.tags.slice(0, 3).join(' · ')}
         </div>
       </div>
-    </a>
+        </a>
+      ))}
+    </div>
   </section>
 )}

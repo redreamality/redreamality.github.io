@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getLatestVisual, getVisualWork } from './visuals';
+import { getHomepageVisuals, getLatestVisual, getVisualWork } from './visuals';
 
 describe('getLatestVisual', () => {
   it.each([
@@ -8,6 +8,18 @@ describe('getLatestVisual', () => {
     ['ja', '/ja/visuals/price-volume-relationship/', '株式取引の仕組み：価格と出来高'],
   ] as const)('returns the newest published %s artifact', (lang, href, title) => {
     expect(getLatestVisual(lang)).toMatchObject({ slug: 'price-volume-relationship', href, title, hasCurrentArtifact: true });
+  });
+});
+
+describe('getHomepageVisuals', () => {
+  it('returns every current-language artifact in newest-first order', () => {
+    expect(getHomepageVisuals('en').map((visual) => visual.slug)).toEqual([
+      'price-volume-relationship',
+      'air-conditioner',
+      'loop-engineering',
+      'typhoon',
+    ]);
+    expect(getHomepageVisuals('en').every((visual) => visual.hasCurrentArtifact)).toBe(true);
   });
 });
 

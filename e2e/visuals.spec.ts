@@ -51,42 +51,61 @@ test('primary navigation and homepage expose the Visuals section', async ({ page
 for (const locale of [
   {
     path: '/',
-    sectionTitle: 'Latest visual',
-    workTitle: 'How Price and Volume Work Together',
-    workHref: '/visuals/price-volume-relationship/',
+    sectionTitle: 'Visuals',
+    works: [
+      ['price-volume-relationship', 'How Price and Volume Work Together', '/visuals/price-volume-relationship/'],
+      ['air-conditioner', 'How Air Conditioners Work', '/visuals/air-conditioner/'],
+      ['loop-engineering', 'What Is Loop Engineering?', '/visuals/loop-engineering/'],
+      ['typhoon', 'How Typhoons Form', '/visuals/typhoon/'],
+    ],
     typeLabel: 'Interactive explainer',
     allLabel: 'View all visuals',
     allHref: '/visuals/',
   },
   {
     path: '/cn/',
-    sectionTitle: '最新可视化',
-    workTitle: '股市交易原理：量价关系',
-    workHref: '/cn/visuals/price-volume-relationship/',
+    sectionTitle: '可视化',
+    works: [
+      ['price-volume-relationship', '股市交易原理：量价关系', '/cn/visuals/price-volume-relationship/'],
+      ['air-conditioner', '空调的工作原理', '/cn/visuals/air-conditioner/'],
+      ['loop-engineering', '什么是 Loop Engineering？', '/cn/visuals/loop-engineering/'],
+      ['typhoon', '台风如何形成', '/cn/visuals/typhoon/'],
+    ],
     typeLabel: '交互图解',
     allLabel: '查看全部可视化',
     allHref: '/cn/visuals/',
   },
   {
     path: '/ja/',
-    sectionTitle: '最新ビジュアル',
-    workTitle: '株式取引の仕組み：価格と出来高',
-    workHref: '/ja/visuals/price-volume-relationship/',
+    sectionTitle: 'ビジュアル',
+    works: [
+      ['price-volume-relationship', '株式取引の仕組み：価格と出来高', '/ja/visuals/price-volume-relationship/'],
+      ['air-conditioner', 'エアコンの仕組み', '/ja/visuals/air-conditioner/'],
+      ['loop-engineering', 'Loop Engineering とは何か？', '/ja/visuals/loop-engineering/'],
+      ['typhoon', '台風ができるまで', '/ja/visuals/typhoon/'],
+    ],
     typeLabel: 'インタラクティブ解説',
     allLabel: 'すべてのビジュアルを見る',
     allHref: '/ja/visuals/',
   },
 ]) {
-  test(`${locale.path} features the latest localized visual`, async ({ page }) => {
+  test(`${locale.path} shows every localized visual`, async ({ page }) => {
     await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
 
-    const section = page.locator('[data-home-latest-visual]');
+    const section = page.locator('[data-home-visuals]');
     await expect(section).toBeVisible();
     await expect(section.getByRole('heading', { name: locale.sectionTitle })).toBeVisible();
-    const workLink = section.getByRole('link', { name: locale.workTitle });
-    await expect(workLink).toBeVisible();
-    await expect(workLink).toHaveAttribute('href', locale.workHref);
-    await expect(section.getByText(locale.typeLabel, { exact: true })).toBeVisible();
+    const cards = section.locator('[data-home-visual-card]');
+    await expect(cards).toHaveCount(locale.works.length);
+    expect(await cards.evaluateAll((elements) => elements.map((element) => element.getAttribute('data-home-visual-card'))))
+      .toEqual(locale.works.map(([slug]) => slug));
+    for (const [slug, title, href] of locale.works) {
+      const card = section.locator(`[data-home-visual-card="${slug}"]`);
+      await expect(card).toHaveAccessibleName(title);
+      await expect(card).toHaveAttribute('href', href);
+      await expect(card.getByRole('heading', { name: title })).toBeVisible();
+      await expect(card.getByText(locale.typeLabel, { exact: true })).toBeVisible();
+    }
     await expect(section.getByRole('link', { name: locale.allLabel })).toHaveAttribute('href', locale.allHref);
   });
 }

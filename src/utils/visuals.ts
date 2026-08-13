@@ -110,9 +110,13 @@ export function getVisualGallery(lang: Language): VisualGalleryItem[] {
 }
 
 export function getLatestVisual(lang: Language): VisualGalleryItem | undefined {
+  return getHomepageVisuals(lang)[0];
+}
+
+export function getHomepageVisuals(lang: Language): VisualGalleryItem[] {
   return getVisualGallery(lang)
     .filter((work) => work.hasCurrentArtifact)
-    .sort((left, right) => new Date(right.publishedAt).valueOf() - new Date(left.publishedAt).valueOf())[0];
+    .sort((left, right) => new Date(right.publishedAt).valueOf() - new Date(left.publishedAt).valueOf());
 }
 
 export function getVisualWork(slug: string): VisualWork | undefined {

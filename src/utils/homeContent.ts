@@ -16,7 +16,7 @@ export interface HomeStrings {
   meditationsDesc: string;
   talksTitle: string;
   talksDesc: string;
-  latestVisualTitle: string;
+  visualsSectionTitle: string;
   visualTypeLabels: Record<VisualType, string>;
   openVisual: string;
   viewAllVisuals: string;
@@ -51,7 +51,7 @@ export const homeContent: Record<Language, HomeStrings> = {
     meditationsDesc: 'Personal reflections on engineering and time',
     talksTitle: 'Talks',
     talksDesc: 'Presentations and slides',
-    latestVisualTitle: 'Latest visual',
+    visualsSectionTitle: 'Visuals',
     visualTypeLabels: {
       'interactive-explainer': 'Interactive explainer',
       'visual-story': 'Visual story',
@@ -84,7 +84,7 @@ export const homeContent: Record<Language, HomeStrings> = {
     meditationsDesc: '关于工程与时间的个人感悟',
     talksTitle: '演讲',
     talksDesc: '演讲与幻灯片',
-    latestVisualTitle: '最新可视化',
+    visualsSectionTitle: '可视化',
     visualTypeLabels: {
       'interactive-explainer': '交互图解',
       'visual-story': '视觉故事',
@@ -117,7 +117,7 @@ export const homeContent: Record<Language, HomeStrings> = {
     meditationsDesc: '工学と時間についての個人的な思索',
     talksTitle: '講演',
     talksDesc: 'プレゼンテーションとスライド',
-    latestVisualTitle: '最新ビジュアル',
+    visualsSectionTitle: 'ビジュアル',
     visualTypeLabels: {
       'interactive-explainer': 'インタラクティブ解説',
       'visual-story': 'ビジュアルストーリー',
