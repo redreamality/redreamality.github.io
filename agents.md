@@ -282,3 +282,7 @@ This ensures:
 - Do not pass wildcard search roots such as `test*` directly to `rg` on Windows; the wildcard can be interpreted as an invalid path. Search the repository with `-g` filters, or enumerate existing roots before invoking `rg`.
 - Rebasing homepage Visual-list changes over a newly published Visual can conflict in the homepage cover component, manifest-derived tests, and Visuals E2E. Resolve by retaining the new manifest item and cover branch while updating the all-Visual ordering assertions; never choose either file wholesale.
 - In PowerShell, quote stash references containing braces (for example, `git stash pop "stash@{0}"`). An unquoted `stash@{0}` can be parsed by PowerShell before Git receives it and surface as an unrelated `unknown switch` error.
+- 在刚克隆的仓库中首次运行 `pnpm build` 前先执行 `pnpm install --frozen-lockfile`；缺少 `node_modules` 时会出现 `'astro' is not recognized`，根因是依赖尚未安装。
+- 运行 Playwright 测试前确认 Chromium 二进制已安装；若出现 `Executable doesn't exist`，执行 `pnpm exec playwright install chromium-headless-shell`（必要时再安装 `chromium`）。
+- 在 Windows 中通过 `Stop-Process` 主动停止 `pnpm preview` 后，pnpm 包装进程可能返回 `4294967295`；这是清理预览服务器的预期退出码，不代表构建或测试失败。
+- `git fetch` 偶发出现 `Recv failure: Connection was reset` 时，先保留本地已有的远端引用并按网络瞬时故障处理；确认 `git rev-list --left-right --count origin/master...master` 后再重试 fetch/push，不要误判为仓库或权限损坏。

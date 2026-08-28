@@ -96,3 +96,12 @@ function getHeadingStyle(depth: number) {
     padding-left: 0.5rem;
   }
 </style> 
+
+<style is:global>
+  /* The TOC is fixed on large screens, so article pages must reserve its column. */
+  @media (min-width: 1024px) {
+    body:has(.table-of-contents) > main > main {
+      padding-right: 22rem;
+    }
+  }
+</style>
