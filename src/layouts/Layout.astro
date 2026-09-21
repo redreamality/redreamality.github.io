@@ -4,7 +4,6 @@ import '../styles/global.css';
 import 'katex/dist/katex.min.css';
 import LanguageToggle from '../components/LanguageToggle.astro';
 import DarkModeToggle from '../components/DarkModeToggle.astro';
-import AntiAdblock from '../components/AntiAdblock.astro';
 import {
   detectLanguageFromPath,
   t,
@@ -53,7 +52,6 @@ const isAdFreePath =
     (routeRoot) => normalizedPath === routeRoot || normalizedPath.startsWith(`${routeRoot}/`),
   );
 const shouldLoadAds = !isAdFreePath;
-const shouldMountAntiAdblock = shouldLoadAds;
 const isTagPage =
   normalizedPath === '/tags' ||
   normalizedPath.startsWith('/tags/') ||
@@ -311,7 +309,6 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
                 </div>
             </div>
         </footer>
-        {shouldMountAntiAdblock && <AntiAdblock />}
         <script>
             import { initReveals } from '../utils/animations';
             initReveals();
