@@ -1,11 +1,21 @@
 ---
-title: 'Browser Extension Development Guide'
+title: 'What Is a Browser Extension? Build Your First One with WXT'
 pubDate: 2024-03-11T00:00:00.000Z
-description: 'This article introduces how to develop browser extensions using modern tools, including the WXT toolchain usage and development workflow.'
+description: 'Learn what browser extensions do, how popups and content scripts work, and how to start building an extension with WXT, TypeScript and pnpm.'
 author: 'Remy'
 tags: ['browser-extension', 'frontend-development', 'WXT', 'tutorial', 'web-development']
 ---
-Browser extensions are powerful tools that can enhance user experience and add functionality to web browsers. This guide will walk you through the modern approach to developing browser extensions using the WXT framework.
+## What Is a Browser Extension?
+
+A browser extension is software installed in a web browser to add features or change how websites behave. Examples include password managers, page translators, and tools that save a page to your notes.
+
+Unlike an ordinary website, an extension can use browser extension APIs, subject to the permissions it requests. Its interface might be a toolbar popup, while a content script works inside a web page. A background component can respond to browser events.
+
+## Using an Extension or Building One?
+
+If you want to use an extension, install it from your browser's extension store and review the publisher and requested permissions. Permission to read or change website data can be sensitive; an extension should only need access appropriate to its purpose.
+
+If you want to build one, the rest of this guide introduces WXT, a development framework for browser extensions. You will need Node.js and pnpm for the commands below.
 
 ## Quick Start with WXT
 

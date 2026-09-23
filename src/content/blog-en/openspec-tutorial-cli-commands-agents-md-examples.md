@@ -1,10 +1,21 @@
 ---
-title: 'OpenSpec Tutorial: CLI Install, Commands, AGENTS.md, and Real-World Examples'
+title: 'OpenSpec Tutorial: Install the CLI and Run Your First Change'
 pubDate: 2026-06-16T08:15:00.000Z
-description: 'A practical OpenSpec tutorial for AI-native spec-driven development: install the CLI, initialize a project, create changes, validate specs, use AGENTS.md, and follow a brownfield workflow.'
+description: 'Install and initialize OpenSpec, create your first change, validate specs, and archive completed work. Includes CLI commands and AGENTS.md examples.'
 author: 'Remy'
 tags: ['openspec', 'spec-driven development', 'sdd', 'ai coding', 'agents.md', 'cli']
 ---
+
+## OpenSpec Quick Start
+
+This tutorial covers the OpenSpec CLI workflow: initialize a repository, create a change, write its proposal and specifications, then validate and archive the completed work. Start in your existing project's root:
+
+```bash
+pnpm dlx @fission-ai/openspec@latest --help
+pnpm dlx @fission-ai/openspec@latest init .
+```
+
+The first command runs the CLI help without a global installation; the second initializes OpenSpec in the current directory. Follow the CLI's prompts for your coding tools. The sections below explain the change workflow and individual commands.
 
 ## What is OpenSpec?
 

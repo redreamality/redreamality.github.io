@@ -1,12 +1,36 @@
 ---
-title: 'Setting PYTHONPATH Environment Variable: A Comprehensive Guide for All Platforms & VS Code Development'
+title: 'How to Set PYTHONPATH on Windows, Linux, macOS and VS Code'
 pubDate: 2025-08-21T09:24:07.954Z
-description: 'This article will detail various methods for setting PYTHONPATH on Windows, macOS, and Linux systems, as well as several convenient and recommended ways to set module search paths for Python projects in Visual Studio Code (VS Code).'
+description: 'Set and check PYTHONPATH with PowerShell or export commands. Configure VS Code terminals and debugging, and diagnose Python import errors.'
 author: 'Remy'
 tags: ['python']
 ---
 
-## Global PYTHONPATH
+## What is PYTHONPATH?
+
+`PYTHONPATH` adds directories to Python's module search path, `sys.path`. It does not select the Python executable: that is the job of your shell's `PATH` or the interpreter selected in VS Code.
+
+For a project containing `src/my_package/`, add the `src` directory, not `src/my_package` or an individual `.py` file. Use an absolute path when the working directory may change.
+
+## Quick Reference: Set and Check PYTHONPATH
+
+The following examples replace PYTHONPATH for the current shell session:
+
+| Shell | Set one directory | Check the variable |
+| :--- | :--- | :--- |
+| Windows PowerShell | `$env:PYTHONPATH = 'C:\project\src'` | `$env:PYTHONPATH` |
+| Windows Command Prompt | `set "PYTHONPATH=C:\project\src"` | `echo %PYTHONPATH%` |
+| Linux/macOS Bash or Zsh | `export PYTHONPATH="/path/to/project/src"` | `echo "$PYTHONPATH"` |
+
+Separate multiple directories with `;` on Windows and `:` on Linux/macOS. Check the interpreter and its effective search path in the same terminal where the import fails:
+
+```bash
+python -c "import os, sys; print(sys.executable); print(os.environ.get('PYTHONPATH')); print(*sys.path, sep='\n')"
+```
+
+Use `python3` instead of `python` if that is the command for your intended interpreter.
+
+## Configure PYTHONPATH for Your Project
 
 PYTHONPATH is an environment variable that allows users to add extra directories to the list of paths that the Python interpreter searches for modules and packages. This is particularly useful during development when you need to import custom modules that are not located in the standard library path or in the installed package directories. This article will detail various methods for setting PYTHONPATH on Windows, macOS, and Linux systems.
 
@@ -89,7 +113,7 @@ export PYTHONPATH="/path/to/first/module:/path/to/second/module"
 If you want to add new paths to the existing PYTHONPATH, you can do this:
 
 ```bash
-export PYTHONPATH="/new/path:$PYTHONPATH"
+export PYTHONPATH="/new/path${PYTHONPATH:+:$PYTHONPATH}"
 ```
 
 #### 2\. Permanent Setting (Shell Configuration File)
@@ -163,7 +187,7 @@ print(sys.path)
 
 ## Several Main Ways to Set Python Path in VS Code:
 
-### 1\. Using a `.env` File (Recommended Method)
+### 1\. Using a `.env` File for Debugging and Opt-in Terminal Loading
 
 This is the most commonly used and recommended method because it confines environment variable configuration within the project workspace and does not affect other projects.
 
@@ -179,7 +203,7 @@ This is the most commonly used and recommended method because it confines enviro
     ```
 
 2.  **Set PYTHONPATH in the `.env` file.**
-    Open the `.env` file and add the following content. VS Code's Python extension will automatically load this file.
+    Open the `.env` file and add the following content. Python itself does not automatically read `.env`; the launching tool must load it.
 
       * **Syntax:** `VARIABLE=value`
 
@@ -206,18 +230,21 @@ This is the most commonly used and recommended method because it confines enviro
         ```
 
 3.  **Configure VS Code to load the `.env` file.**
-    Typically, VS Code's Python extension will automatically recognize and use the `.env` file. If it does not work, you can ensure it is loaded by specifying the `.env` file path in `launch.json` (for debugging) or `settings.json`.
+    Set `python.envFile` to identify the environment file. To inject these variables into new integrated terminals, also enable `python.terminal.useEnvFile`, which defaults to `false`.
     Open or create the `.vscode/settings.json` file and add:
 
     ```json
     {
-        "python.envFile": "${workspaceFolder}/.env"
+        "python.envFile": "${workspaceFolder}/.env",
+        "python.terminal.useEnvFile": true
     }
     ```
 
     `${workspaceFolder}` is a predefined variable in VS Code that represents the root directory of the project you currently have open.
 
-**Important Note:** After modifying the `.env` file, you may need to reload the VS Code window or restart the debugging session for the changes to take effect.
+Open a new terminal after changing these settings. For a specific debug configuration, set `"envFile": "${workspaceFolder}/.env"` in `.vscode/launch.json` and restart debugging. Relative paths such as `./src` depend on the launched process's working directory.
+
+These are separate from `python.analysis.extraPaths`: that setting helps Pylance resolve imports in the editor but does not set the runtime's PYTHONPATH.
 
 ### 2\. Modifying `settings.json` in Workspace Settings
 
@@ -250,14 +277,13 @@ You can directly modify the workspace settings (`.vscode/settings.json`) to add 
 
 In many cases, **the best practice is not to manually set PYTHONPATH but to use a Python virtual environment**. VS Code integrates well with virtual environments (such as `venv` or `conda`).
 
-When you create a virtual environment and install dependencies for it, VS Code will automatically detect it. By selecting this environment as your workspace interpreter, VS Code will handle all module path issues, including code completion, Go to Definition, and debugging.
+Select the environment containing your project's dependencies as the workspace interpreter. This avoids using packages from a different Python installation, but it does not automatically make an uninstalled `src` directory importable.
 
 1.  **Create a virtual environment:**
     In your project root directory, open the terminal and run:
 
     ```bash
-    # Using venv
-    python -m venv .venv
+    uv venv
     ```
 
     This will create a folder named `.venv` that contains an independent Python environment.
@@ -269,14 +295,20 @@ When you create a virtual environment and install dependencies for it, VS Code w
       * VS Code will list all detected Python interpreters, including the one in `.venv`. Select it.
 
 3.  **Activate the environment and install packages:**
-    VS Code will automatically activate the selected virtual environment in the integrated terminal. Now, you can use `pip install` to install all project dependencies, which will be installed in this isolated environment, and VS Code will be able to find them immediately.
+    Open a new terminal using the selected environment. For a project with packaging metadata, `uv pip install -e .` installs the local package in editable mode, so imports can resolve without a global PYTHONPATH.
 
 ### Summary and Comparison
 
 | Method | Advantages | Disadvantages | Best Use Cases |
 | :--- | :--- | :--- | :--- |
-| **`.env` File** | **Project Isolation**, simple configuration, does not affect system environment, easy for team collaboration (can include `.env.example` in version control). | Requires restarting the terminal or debugging session to take effect. | Development requiring references to non-installed modules within the project. |
+| **`.env` File** | Keeps environment variables in a project-local file. | Must be loaded by the debugger or an opted-in terminal; Python alone does not read it. | Development requiring references to non-installed modules within the project. |
 | **`settings.json`** | Directly integrated into VS Code workspace settings. | Configuration is slightly more complex, mainly affects the VS Code integrated terminal. | Needing to customize complex environment variables for the VS Code terminal. |
-| **Selecting Interpreter (Virtual Environment)** | **Best Practice**, perfect project isolation, automatic path management, avoids dependency conflicts. | Requires creating and managing virtual environments. | **Almost all Python projects**, from small scripts to large applications. |
+| **Selecting Interpreter (Virtual Environment)** | Separates installed dependencies from other environments. | Local packages still need installation or an explicit search path. | Projects with their own dependencies. |
 
-For most Python development in VS Code, **it is strongly recommended to prioritize using a virtual environment**. If you need to add paths to uninstalled local modules, **using the `.env` file is the best way to manage PYTHONPATH**.
+## Why Is PYTHONPATH Not Working?
+
+Check `sys.executable` and `sys.path` in the failing process, not only in a different terminal. Confirm the directory exists, contains the package you import, and uses the correct path separator. Restart terminals or debugging after changing their environment.
+
+If imports work at runtime but Pylance still reports an error, check the selected interpreter and `python.analysis.extraPaths`. If only the editor resolves the import, configure the runtime environment or install the local package; editor analysis settings alone cannot fix a runtime `ModuleNotFoundError`.
+
+For packaged projects, prefer a virtual environment and an editable installation. Use project-local PYTHONPATH settings when you specifically need to import uninstalled source directories.
