@@ -152,6 +152,22 @@ All content files must have proper frontmatter with:
 - Keep filenames descriptive but concise
 - Match filename to content slug/URL
 
+
+
+### Chaos digest feed（选题 → 底噪页）
+
+站点 `/garden/chaos/`（及 `/cn`、`/ja`）主 UX 是 **按小时分组的热点选题列表**（数据：`src/data/chaos-digest.json`），不是旧的长文卡片墙。旧 `chaos-*` 长文仍可通过 slug 与页脚 Archive 访问。
+
+流水线：
+1. 选题汇总更新 `/workspace/blog-pipeline/topics.md` 后，在本仓库根目录运行：
+   ```bash
+   node scripts/build-chaos-digest.mjs
+   ```
+2. 将生成的 `src/data/chaos-digest.json` 与站点改动一并 commit，push `master` 发版。
+3. 已发文选题在 `notes` 中写上 `redreamality.com/.../blog/<slug>/` 链接，或保证 `status=published` 且 slug 可从 notes/内容目录匹配，digest 会露出「深入阅读」。
+
+详见 `/workspace/blog-pipeline/CHAOS.md`。
+
 ## Summary
 
 **The Golden Rule:** One H1 per page. The frontmatter `title` is the H1. Start markdown content with H2 (`##`) or plain text, never with H1 (`#`).

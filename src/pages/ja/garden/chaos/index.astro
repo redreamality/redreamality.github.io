@@ -1,31 +1,23 @@
 ---
 import Layout from '../../../../layouts/Layout.astro';
-import GardenListing from '../../../../components/shared/GardenListing.astro';
+import ChaosDigest from '../../../../components/chaos/ChaosDigest.astro';
 import { getChaosPosts, type Language } from '../../../../utils/i18n';
 
 const lang: Language = 'ja';
 const posts = await getChaosPosts(lang);
-const basePath = '/ja';
 const locale = 'ja-JP';
 
-const strings = {
-  kicker: 'シグナル · ノイズ',
-  title: 'カオス',
-  subtitle: '外部の出来事、業界の動き、世界の底流ノイズを整理する場所です。',
-  empty: 'まだカオス記事はありません。',
-};
-
-const items = posts.map((p) => ({
-  href: `${basePath}/garden/chaos/${p.slug}/`,
+const archive = posts.map((p) => ({
+  href: `/ja/garden/chaos/${p.slug}/`,
   title: p.data.title,
-  description: p.data.description,
-  dateISO: new Date(p.data.pubDate).toISOString(),
-  dateLabel: new Date(p.data.pubDate).toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' }),
-  tags: p.data.tags,
-  tagBasePath: `${basePath}/tags`,
+  dateLabel: new Date(p.data.pubDate).toLocaleDateString(locale, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  }),
 }));
 ---
 
-<Layout title={strings.title} description={strings.subtitle}>
-  <GardenListing kicker={strings.kicker} title={strings.title} subtitle={strings.subtitle} emptyMessage={strings.empty} accent="accent" items={items} />
+<Layout title="カオス" description="直近のホットトピックを時間帯ごとにまとめます。">
+  <ChaosDigest lang={lang} archive={archive} />
 </Layout>

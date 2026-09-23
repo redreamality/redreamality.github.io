@@ -1,31 +1,23 @@
 ---
 import Layout from '../../../../layouts/Layout.astro';
-import GardenListing from '../../../../components/shared/GardenListing.astro';
+import ChaosDigest from '../../../../components/chaos/ChaosDigest.astro';
 import { getChaosPosts, type Language } from '../../../../utils/i18n';
 
 const lang: Language = 'zh';
 const posts = await getChaosPosts(lang);
-const basePath = '/cn';
 const locale = 'zh-CN';
 
-const strings = {
-  kicker: '信号 · 底噪',
-  title: '底噪',
-  subtitle: '记录外部世界的动态、行业信号与背景噪声。',
-  empty: '暂无底噪内容。',
-};
-
-const items = posts.map((p) => ({
-  href: `${basePath}/garden/chaos/${p.slug}/`,
+const archive = posts.map((p) => ({
+  href: `/cn/garden/chaos/${p.slug}/`,
   title: p.data.title,
-  description: p.data.description,
-  dateISO: new Date(p.data.pubDate).toISOString(),
-  dateLabel: new Date(p.data.pubDate).toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' }),
-  tags: p.data.tags,
-  tagBasePath: `${basePath}/tags`,
+  dateLabel: new Date(p.data.pubDate).toLocaleDateString(locale, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  }),
 }));
 ---
 
-<Layout title={strings.title} description={strings.subtitle}>
-  <GardenListing kicker={strings.kicker} title={strings.title} subtitle={strings.subtitle} emptyMessage={strings.empty} accent="accent" items={items} />
+<Layout title="底噪" description="按小时汇总的近期热点选题——先看信号，再决定是否深入。">
+  <ChaosDigest lang={lang} archive={archive} />
 </Layout>

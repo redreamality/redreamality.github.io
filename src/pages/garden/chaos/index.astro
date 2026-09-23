@@ -1,31 +1,23 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import GardenListing from '../../../components/shared/GardenListing.astro';
+import ChaosDigest from '../../../components/chaos/ChaosDigest.astro';
 import { getChaosPosts, type Language } from '../../../utils/i18n';
 
 const lang: Language = 'en';
 const posts = await getChaosPosts(lang);
-const basePath = '';
 const locale = 'en-US';
 
-const strings = {
-  kicker: 'Signals · Noise',
-  title: 'Chaos',
-  subtitle: 'External signals, industry motion, and the background noise that shapes the web.',
-  empty: 'No chaos entries yet.',
-};
-
-const items = posts.map((p) => ({
-  href: `${basePath}/garden/chaos/${p.slug}/`,
+const archive = posts.map((p) => ({
+  href: `/garden/chaos/${p.slug}/`,
   title: p.data.title,
-  description: p.data.description,
-  dateISO: new Date(p.data.pubDate).toISOString(),
-  dateLabel: new Date(p.data.pubDate).toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' }),
-  tags: p.data.tags,
-  tagBasePath: `${basePath}/tags`,
+  dateLabel: new Date(p.data.pubDate).toLocaleDateString(locale, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  }),
 }));
 ---
 
-<Layout title={strings.title} description={strings.subtitle}>
-  <GardenListing kicker={strings.kicker} title={strings.title} subtitle={strings.subtitle} emptyMessage={strings.empty} accent="accent" items={items} />
+<Layout title="Chaos" description="Recent hot topics grouped by hour — signals before long-form.">
+  <ChaosDigest lang={lang} archive={archive} />
 </Layout>

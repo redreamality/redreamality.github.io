@@ -38,7 +38,8 @@
     "visual-kit:air-conditioner": "uv run --no-project python -B tools/visual-explainer-kit/build.py --manifest manifest-air-conditioner.json --output src/assets/html-pages/air-conditioner",
     "visual-kit:price-volume": "uv run --no-project python -B tools/visual-explainer-kit/build.py --manifest manifest-price-volume-relationship.json --output src/assets/html-pages/price-volume-relationship",
     "visual-kit:e2e": "pnpm visual-kit:test && pnpm visual-kit:build && playwright test --config=tools/visual-explainer-kit/playwright.config.ts",
-    "trigger:rebuild": "node scripts/trigger-rebuild.mjs"
+    "trigger:rebuild": "node scripts/trigger-rebuild.mjs",
+    "chaos:digest": "node scripts/build-chaos-digest.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

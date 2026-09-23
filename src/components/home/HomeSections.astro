@@ -2,6 +2,7 @@
 import type { Language } from '../../utils/i18n';
 import { homeContent, localeFor } from '../../utils/homeContent';
 import SectionGrid, { type SectionItem } from '../shared/SectionGrid.astro';
+import chaosDigest from '../../data/chaos-digest.json';
 
 type Entry = { slug: string; data: Record<string, any> };
 
@@ -60,13 +61,45 @@ const questionItems: SectionItem[] = questions.slice(0, 6).map((q) => ({
   dateLabel: fmt(q.data.date),
 }));
 
-const chaosItems: SectionItem[] = chaos.slice(0, 6).map((p) => ({
-  href: `${basePath}/garden/chaos/${p.slug}/`,
-  title: p.data.title,
-  description: p.data.description,
-  dateISO: new Date(p.data.pubDate).toISOString(),
-  dateLabel: fmt(p.data.pubDate),
-}));
+const digestLang = lang === 'zh' || lang === 'ja' ? lang : 'en';
+const STATUS_RANK: Record<string, number> = {
+  published: 0,
+  shortlisted: 1,
+  writing: 2,
+  inbox: 3,
+};
+const digestFlat = chaosDigest.hours.flatMap((h) => h.items);
+const digestTop = [...digestFlat]
+  .sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return (STATUS_RANK[a.status] ?? 5) - (STATUS_RANK[b.status] ?? 5);
+  })
+  .slice(0, 6);
+
+const chaosItems: SectionItem[] =
+  digestTop.length > 0
+    ? digestTop.map((item) => {
+        const blog =
+          digestLang === 'zh'
+            ? item.blog?.zh || item.blog?.en
+            : item.blog?.en || item.blog?.zh;
+        const href = blog || item.externalUrls?.[0] || `${basePath}/garden/chaos/`;
+        return {
+          href,
+          title: item.title[digestLang] || item.title.zh || item.title.en,
+          description: item.summary[digestLang] || item.summary.zh || item.summary.en,
+          dateISO: chaosDigest.updatedAt,
+          dateLabel: fmt(new Date(chaosDigest.updatedAt)),
+          badges: [{ label: `${item.score}/5` }],
+        };
+      })
+    : chaos.slice(0, 6).map((p) => ({
+        href: `${basePath}/garden/chaos/${p.slug}/`,
+        title: p.data.title,
+        description: p.data.description,
+        dateISO: new Date(p.data.pubDate).toISOString(),
+        dateLabel: fmt(p.data.pubDate),
+      }));
 
 const noteItems: SectionItem[] = notes.slice(0, 6).map((n) => ({
   href: `${basePath}/garden/notes/${n.slug}/`,
