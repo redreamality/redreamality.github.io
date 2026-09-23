@@ -10,7 +10,7 @@ translatedFrom: "jev-claude-code-10x-and-25-lines"
 
 Over the last two days, a YouTube video titled “Jev will 10x your Claude Code” climbed to roughly 410k views.[1] It couples TypeSafe’s decision model Jev with Anthropic’s coding agent Claude Code. The slogan is seductive; the common landing mistake is treating Jev as “change the base URL and it becomes your chat model.”
 
-We already published a [scenario-focused Jev guide](/en/blog/typesafe-jev-use-cases/)—a **scenario catalog** covering browser next-step selection, routing, ticket triage, citation checks, context management, and pre-production validation.[2] **This post does not redo that catalog.** It answers three urgent questions:
+We already published a [scenario-focused Jev guide](/blog/typesafe-jev-use-cases/)—a **scenario catalog** covering browser next-step selection, routing, ticket triage, citation checks, context management, and pre-production validation.[2] **This post does not redo that catalog.** It answers three urgent questions:
 
 1. **Can Jev be the underlying chat model for Claude Code / Codex?**
 2. **If not, which coding-agent integration paths actually work, and what are the install/verify steps?**
@@ -54,7 +54,7 @@ What comes back is not an assistant reply, but a typed answer such as `{"is_urge
 
 To keep readers from treating the two posts as long/short versions of each other:
 
-| | [Use-cases post](/en/blog/typesafe-jev-use-cases/) | This post |
+| | [Use-cases post](/blog/typesafe-jev-use-cases/) | This post |
 | --- | --- | --- |
 | Core question | Which business judgments fit Jev? | How do coding agents attach Jev? What is the mechanism and competitive pressure? |
 | Evidence shape | Browser / routing / tickets / RAG / context scenarios + validation order | Reproducible skill / hook / MCP / per-turn routing steps + pitfalls |
@@ -317,7 +317,7 @@ A useful team split: product owns the scenario post’s acceptance sequence; pla
 
 The slogan “Jev 10xes Claude Code” is usually true only in this narrower sense: **move many tiny decisions out of slow generation**. The official skill, boundary hooks, MCP, and per-turn routing are the four currently verifiable paths. The 25-line build clarifies the mechanism; the OpenAI fast-follow debate reminds you the product window may be short—so anchor value in your own workflow measurements, not in slogans or star counts.
 
-If you have not read the scenario post yet, pair them: [Jev use cases](/en/blog/typesafe-jev-use-cases/) covers **where judgments belong**; this post covers **how coding agents attach them, how to read the mechanism, and where competitive pressure comes from**.
+If you have not read the scenario post yet, pair them: [Jev use cases](/blog/typesafe-jev-use-cases/) covers **where judgments belong**; this post covers **how coding agents attach them, how to read the mechanism, and where competitive pressure comes from**.
 
 ## Sources
 
@@ -337,7 +337,7 @@ If you have not read the scenario post yet, pair them: [Jev use cases](/en/blog/
 14. [Arcturus Labs: Will OpenAI Eat Jev's Lunch?][14]
 
 [1]: https://www.youtube.com/watch?v=tTnUcSj-QPA
-[2]: https://redreamality.com/en/blog/typesafe-jev-use-cases/
+[2]: https://redreamality.com/blog/typesafe-jev-use-cases/
 [3]: https://apimaster.ai/blog/jev-claude-code-codex
 [4]: https://typesafe.ai/blog/introducing-system-one-models-and-jev
 [5]: https://docs.typesafe.ai/primitives
