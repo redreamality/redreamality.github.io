@@ -24,7 +24,7 @@ Jev **cannot** be the chat model behind Claude Code or Codex.[3]
 
 Claude Code speaks the Anthropic Messages API; Codex speaks the OpenAI Responses API. Even if you change the base URL, the wire format still expects an assistant message stream: renderable text, parseable tool calls. Jev’s API is different—you submit a `state` plus typed `questions`, and you get structured answers with probabilities—**no free-form string generation**.[4][5]
 
-TypeSafe’s documented evaluation endpoint is `POST /v1/systemone`, with `GET /v1/models` for aliases your account can use. The default is `jev-latest`; versioned IDs such as `jev-1.13.0` are also accepted.[3][5] There is no `/v1/chat/completions` surface and no Anthropic Messages-compatible face in the docs. Guides that say “point Claude Code at Jev” mix two product kinds.
+TypeSafe’s documented evaluation endpoint is `POST /v1/systemone`, with `GET /v1/models` for aliases your account can use. The default is `jev-latest`; versioned IDs such as `jev-1.13.0` are also accepted.[3][5] There is no `/v1/chat/completions` surface and no Anthropic Messages-compatible API in the docs. Guides that say “point Claude Code at Jev” mix two product kinds.
 
 The useful split is:
 

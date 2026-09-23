@@ -248,4 +248,5 @@ The homepage needs to surface new visual work without hard-coding a slug, showin
 - Prefer substance (repro steps, failure modes, on-site cross-links, cited sources) over padding
 - Ultra-short cheat sheets belong in `notes-*`, not `blog-*`
 - Canonical detail lives in `agents.md` → "Blog length target"
+- Chinese wording / anti-calque constraints: canonical detail in `agents.md` → "Blog Chinese style（站长约束，2026-09-23）"
 
