@@ -237,3 +237,15 @@ The homepage needs to surface new visual work without hard-coding a slug, showin
 
 ### Future Considerations
 - A new published work becomes the homepage feature by manifest metadata alone; homepage components should not require a slug-specific change except for optional artwork enhancements.
+
+## Rule: Blog post length target
+**Date**: 2026-09-23
+**Context**: Site owner wants formal blog posts to match deep mid-length pieces (~median was ~2k 汉字; new target is deeper).
+
+### Requirement
+- `blog-cn`: aim for **~5000 Chinese characters** (accept ~4500–5500)
+- `blog-en`: aim for **~2800–3500 words**, full translation not a summary
+- Prefer substance (repro steps, failure modes, on-site cross-links, cited sources) over padding
+- Ultra-short cheat sheets belong in `notes-*`, not `blog-*`
+- Canonical detail lives in `agents.md` → "Blog length target"
+

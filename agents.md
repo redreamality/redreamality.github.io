@@ -99,6 +99,23 @@ Before saving any markdown content file, verify:
 2. ✅ The markdown body does NOT start with `# Title` matching the frontmatter title
 3. ✅ First heading in the content (if any) starts with `## ` (H2), not `# ` (H1)
 4. ✅ Python code comments using `#` are NOT affected (they're in code blocks)
+5. ✅ Blog posts target ~5000 Chinese characters (or EN/JA equivalent); report count on handoff
+
+### Blog length target（站长约束，2026-09-23）
+
+正式博客（`blog-cn` / `blog-en` / `blog-ja`）默认按**深度中篇**写，不要默认写成短讯。
+
+| 语言 | 目标 | 计量 |
+| --- | --- | --- |
+| 中文 `blog-cn` | **约 5000 汉字**（可接受约 4500–5500） | 正文汉字数，不含 frontmatter；代码块内注释/标识符不计入「汉字」目标，但仍算篇幅 |
+| 英文 `blog-en` | **约 2800–3500 词** | 与中文信息量对齐的完整英译，不是摘要 |
+| 日文 `blog-ja` | 与中文信息量对齐 | 有日文站需求时再写；不因缺日文阻塞中英上线 |
+
+执行要求：
+1. 选题进入 `writing` 前，先估能否撑到目标长度；撑不住就换题或合并相关 shortlisted，而不是注水。
+2. 扩写优先补：**可复现步骤、边界条件、反例/踩坑、与站内既有文的对照、可核来源**；禁止空话、重复口号、无来源数字。
+3. 交审时在回报里写明中文汉字数（或英文词数）；明显低于约 4500 汉字须说明原因并征求头子是否破例。
+4. 速查/备忘类短文若必须很短，改放到 `notes-*`，不要占正式 blog 槽位。
 
 ### Special Note: Python Code Comments
 
