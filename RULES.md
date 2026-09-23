@@ -249,4 +249,6 @@ The homepage needs to surface new visual work without hard-coding a slug, showin
 - Ultra-short cheat sheets belong in `notes-*`, not `blog-*`
 - Canonical detail lives in `agents.md` → "Blog length target"
 - Chinese wording / anti-calque constraints: canonical detail in `agents.md` → "Blog Chinese style（站长约束，2026-09-23）"
+- Throughput / fill missing `blog-ja`: canonical detail in `agents.md` → Blog length target items 5–6
+- In-site blog links: EN `/blog/.../`, CN `/cn/blog/.../`, JA `/ja/blog/.../` — never `/en/blog/` (404). Canonical: `agents.md` → "Blog in-site links".
 
