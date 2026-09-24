@@ -63,7 +63,7 @@ const hoverTitle: Record<string, string> = {
     className,
   ]}
 >
-  <a href={href} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer" : undefined} class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-lg">
+  <a href={href} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer nofollow" : undefined} class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-lg">
     <h3 class:list={['font-display text-lg font-semibold leading-snug text-surface-900 dark:text-white mb-2 transition-colors', hoverTitle[accent]]}>
       {title}
     </h3>

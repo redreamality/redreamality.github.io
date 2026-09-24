@@ -1,8 +1,8 @@
 ---
 /**
- * Chaos digest feed — aihot.news–inspired hot list + hourly timeline.
- * Primary UX: ranked topics grouped by Asia/Shanghai hour buckets.
- * Legacy long-form chaos posts appear in a collapsible Archive footer.
+ * Chaos digest feed — Hot list + theme-grouped sections (+ optional hourly timeline).
+ * Locale separation: never fall back across zh/en/ja prose (avoids 中英混杂).
+ * External links always rel="noopener noreferrer nofollow".
  */
 import digest from '../../data/chaos-digest.json';
 import type { Language } from '../../utils/i18n';
@@ -23,12 +23,22 @@ const { lang, archive = [] } = Astro.props;
 type L = 'zh' | 'en' | 'ja';
 const L = (lang === 'zh' || lang === 'ja' ? lang : 'en') as L;
 
+const CJK_RE = /[\u3040-\u30ff\u3400-\u9fff\uf900-\ufaff]/;
+function hasCJK(s: string) {
+  return CJK_RE.test(s || '');
+}
+function asciiRatio(s: string) {
+  if (!s?.length) return 1;
+  return (s.match(/[\x00-\x7F]/g) || []).length / s.length;
+}
+
 const copy = {
   zh: {
     kicker: '信号 · 底噪',
     title: '底噪',
-    subtitle: '按小时汇总的近期热点选题。未必每条都有长文——先看信号，再决定是否深入。',
+    subtitle: '按主题归纳的近期热点选题。未必每条都有长文——先看信号，再决定是否深入。',
     hot: '当前热点',
+    byTheme: '按主题',
     timeline: '按小时',
     deepRead: '深入阅读',
     score: '热度',
@@ -36,14 +46,24 @@ const copy = {
     archive: '历史深度短文',
     archiveHint: '旧版底噪长文仍可阅读',
     status: { published: '已发文', shortlisted: '候选', writing: '撰写中', inbox: '观察' } as Record<string, string>,
+    themes: {
+      models: '模型发布',
+      'coding-tools': '编程工具',
+      'agents-oss': '开源 Agent',
+      security: '安全',
+      research: '研究论文',
+      'product-news': '产品动态',
+      other: '其他',
+    } as Record<string, string>,
     updated: '更新于',
     itemsUnit: '条',
   },
   en: {
     kicker: 'Signals · Noise',
     title: 'Chaos',
-    subtitle: 'Recent hot topics grouped by hour. Not every item has a full article — scan signals first, then deep-read when available.',
+    subtitle: 'Recent hot topics grouped by theme. Not every item has a full article — scan signals first, then deep-read when available.',
     hot: 'Hot now',
+    byTheme: 'By theme',
     timeline: 'By hour',
     deepRead: 'Deep read',
     score: 'Heat',
@@ -51,14 +71,24 @@ const copy = {
     archive: 'Archive',
     archiveHint: 'Earlier long-form chaos notes',
     status: { published: 'Published', shortlisted: 'Shortlisted', writing: 'Writing', inbox: 'Watching' } as Record<string, string>,
+    themes: {
+      models: 'Models',
+      'coding-tools': 'Coding tools',
+      'agents-oss': 'Open-source agents',
+      security: 'Security',
+      research: 'Research',
+      'product-news': 'Product news',
+      other: 'Other',
+    } as Record<string, string>,
     updated: 'Updated',
     itemsUnit: 'items',
   },
   ja: {
     kicker: 'シグナル · ノイズ',
     title: 'カオス',
-    subtitle: '直近のホットトピックを時間帯ごとにまとめます。すべてに長文があるわけではありません。',
+    subtitle: '直近のホットトピックをテーマごとにまとめます。すべてに長文があるわけではありません。',
     hot: 'いまのホット',
+    byTheme: 'テーマ別',
     timeline: '時間帯',
     deepRead: '深い読み',
     score: '熱度',
@@ -66,37 +96,91 @@ const copy = {
     archive: 'アーカイブ',
     archiveHint: '以前の長文カオス記事',
     status: { published: '公開済', shortlisted: '候補', writing: '執筆中', inbox: '観察' } as Record<string, string>,
+    themes: {
+      models: 'モデル',
+      'coding-tools': 'コーディングツール',
+      'agents-oss': 'OSSエージェント',
+      security: 'セキュリティ',
+      research: '研究',
+      'product-news': 'プロダクト',
+      other: 'その他',
+    } as Record<string, string>,
     updated: '更新',
     itemsUnit: '件',
   },
 }[L];
 
-type DigestItem = (typeof digest.hours)[number]['items'][number];
+type DigestItem = {
+  id: string;
+  theme?: string;
+  title: { zh?: string; en?: string; ja?: string };
+  summary: { zh?: string; en?: string; ja?: string };
+  sources: string[];
+  score: number;
+  status: string;
+  externalUrls?: string[];
+  blog?: { zh?: string | null; en?: string | null };
+};
 
-function pickTitle(item: DigestItem) {
-  return item.title[L] || item.title.zh || item.title.en;
+/**
+ * Locale-appropriate title only — no cross-lang fallback of Chinese↔English.
+ * zh: CJK title OR mostly-ASCII machine title
+ * en/ja: non-empty, not primarily CJK
+ */
+function localeTitle(item: DigestItem): string | null {
+  const t = (item.title?.[L] || '').trim();
+  if (!t) return null;
+  if (L === 'zh') {
+    if (hasCJK(t) || asciiRatio(t) > 0.7) return t;
+    return null;
+  }
+  // en / ja: reject primarily-CJK strings
+  if (hasCJK(t) && asciiRatio(t) < 0.7) return null;
+  return t;
 }
-function pickSummary(item: DigestItem) {
-  return item.summary[L] || item.summary.zh || item.summary.en || '';
+
+function localeSummary(item: DigestItem): string {
+  const s = (item.summary?.[L] || '').trim();
+  if (!s) return '';
+  if (L === 'zh') return s;
+  if (hasCJK(s) && asciiRatio(s) < 0.7) return '';
+  return s;
 }
+
+/** Same-locale blog only — do not cross-link zh↔en when both exist. */
 function blogHref(item: DigestItem): string | null {
   if (!item.blog) return null;
-  if (L === 'zh') return item.blog.zh || item.blog.en || null;
-  if (L === 'ja') return item.blog.en || item.blog.zh || null; // JA often falls back to EN blog
-  return item.blog.en || item.blog.zh || null;
+  if (L === 'zh') return item.blog.zh || null;
+  if (L === 'ja') return item.blog.en || null; // JA pages use EN blog when present
+  return item.blog.en || null;
 }
+
 function primaryExternal(item: DigestItem): string | null {
   return item.externalUrls?.[0] || null;
 }
 
-/** Flat ranked list for hot section: score desc, then status */
 const STATUS_RANK: Record<string, number> = {
   published: 0,
   shortlisted: 1,
   writing: 2,
   inbox: 3,
 };
-const allItems: DigestItem[] = digest.hours.flatMap((h) => h.items);
+
+const THEME_ORDER: string[] =
+  (digest as { themes?: string[] }).themes || [
+    'models',
+    'coding-tools',
+    'agents-oss',
+    'security',
+    'research',
+    'product-news',
+    'other',
+  ];
+
+/** Filter to items visible in this locale */
+const allRaw: DigestItem[] = digest.hours.flatMap((h) => h.items as DigestItem[]);
+const allItems = allRaw.filter((item) => localeTitle(item) !== null);
+
 const hotItems = [...allItems]
   .sort((a, b) => {
     if (b.score !== a.score) return b.score - a.score;
@@ -104,7 +188,25 @@ const hotItems = [...allItems]
   })
   .slice(0, 10);
 
-const hours = digest.hours;
+/** Group by theme for primary UX */
+const themeSections = THEME_ORDER.map((themeId) => {
+  const items = allItems
+    .filter((i) => i.theme === themeId)
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return (STATUS_RANK[a.status] ?? 5) - (STATUS_RANK[b.status] ?? 5);
+    });
+  return { themeId, items };
+}).filter((s) => s.items.length > 0);
+
+/** Hourly timeline — secondary; only hours with locale-visible items */
+const hours = digest.hours
+  .map((hour) => ({
+    ...hour,
+    items: hour.items.filter((item) => localeTitle(item) !== null),
+  }))
+  .filter((hour) => hour.items.length > 0);
+
 const hasContent = allItems.length > 0;
 
 function rankLabel(i: number) {
@@ -115,6 +217,12 @@ function hourShort(hourStart: string) {
   const m = hourStart.match(/T(\d{2}):/);
   return m ? `${m[1]}:00` : hourStart;
 }
+
+function themeLabel(themeId: string) {
+  return copy.themes[themeId] || themeId;
+}
+
+const EXT_REL = 'noopener noreferrer nofollow';
 ---
 
 <div class="mx-auto max-w-3xl px-4">
@@ -149,9 +257,10 @@ function hourShort(hourStart: string) {
             {hotItems.map((item, i) => {
               const blog = blogHref(item);
               const ext = primaryExternal(item);
-              const title = pickTitle(item);
-              const summary = pickSummary(item);
+              const title = localeTitle(item)!;
+              const summary = localeSummary(item);
               const statusLabel = copy.status[item.status] || item.status;
+              const theme = item.theme;
               return (
                 <li class="group flex gap-3 px-4 py-3.5 sm:px-5 hover:bg-surface-50/80 dark:hover:bg-surface-800/40 transition-colors">
                   <span class="mt-0.5 w-8 shrink-0 font-mono text-sm font-semibold tabular-nums text-accent-600 dark:text-accent-400">{rankLabel(i)}</span>
@@ -162,7 +271,7 @@ function hourShort(hourStart: string) {
                           {title}
                         </a>
                       ) : ext ? (
-                        <a href={ext} target="_blank" rel="noopener noreferrer" class="font-display text-[15px] font-semibold leading-snug text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400 transition-colors">
+                        <a href={ext} target="_blank" rel={EXT_REL} class="font-display text-[15px] font-semibold leading-snug text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400 transition-colors">
                           {title}
                         </a>
                       ) : (
@@ -176,6 +285,9 @@ function hourShort(hourStart: string) {
                       <p class="mt-1 text-sm leading-relaxed text-surface-500 dark:text-surface-400 line-clamp-1">{summary}</p>
                     )}
                     <div class="mt-2 flex flex-wrap items-center gap-1.5">
+                      {theme && (
+                        <span class="rounded-full bg-surface-100 dark:bg-surface-800 px-2 py-0.5 text-[10px] font-medium text-surface-600 dark:text-surface-300">{themeLabel(theme)}</span>
+                      )}
                       {item.sources.map((s) => (
                         <span class="rounded-full border border-surface-200 dark:border-surface-700 bg-surface-50 dark:bg-surface-800 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-surface-600 dark:text-surface-300">{s}</span>
                       ))}
@@ -200,88 +312,154 @@ function hourShort(hourStart: string) {
         </div>
       </section>
 
-      <!-- Hourly timeline -->
-      <section aria-labelledby="chaos-timeline-heading">
-        <h2 id="chaos-timeline-heading" class="mb-6 flex items-center gap-2 font-display text-xl font-bold text-surface-900 dark:text-white">
+      <!-- Theme sections (primary grouping) -->
+      <section aria-labelledby="chaos-theme-heading">
+        <h2 id="chaos-theme-heading" class="mb-6 flex items-center gap-2 font-display text-xl font-bold text-surface-900 dark:text-white">
           <span class="inline-block h-6 w-1.5 rounded-full bg-accent-500" aria-hidden="true"></span>
-          {copy.timeline}
+          {copy.byTheme}
         </h2>
 
-        <div class="relative pl-0 sm:pl-2">
-          <!-- vertical line -->
-          <div class="pointer-events-none absolute left-[11px] top-2 bottom-2 hidden w-px bg-surface-200 dark:bg-surface-700 sm:block" aria-hidden="true"></div>
-
-          <div class="space-y-8">
-            {hours.map((hour) => (
-              <div class="relative sm:pl-10">
-                <!-- teal dot -->
-                <div class="absolute left-0 top-3 hidden h-[22px] w-[22px] items-center justify-center sm:flex" aria-hidden="true">
-                  <span class="h-3 w-3 rounded-full border-2 border-accent-500 bg-white dark:bg-surface-900 shadow-[0_0_0_4px_rgba(20,184,166,0.15)]"></span>
-                </div>
-
-                <div class="rounded-2xl border border-surface-200 dark:border-surface-800 bg-white dark:bg-surface-900 shadow-card overflow-hidden">
-                  <header class="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-2 border-b border-surface-200/80 dark:border-surface-800 bg-white/95 dark:bg-surface-900/95 backdrop-blur px-4 py-3 sm:px-5">
-                    <div class="flex items-baseline gap-2">
-                      <time datetime={hour.hourStart} class="font-display text-base font-bold tabular-nums text-surface-900 dark:text-white">
-                        {hour.label[L] || hour.label.zh}
-                      </time>
-                      <span class="text-xs text-surface-500 dark:text-surface-400">· {hourShort(hour.hourStart)} · {hour.items.length} {copy.itemsUnit}</span>
-                    </div>
-                  </header>
-
-                  <ul class="divide-y divide-surface-100 dark:divide-surface-800">
-                    {hour.items.map((item) => {
-                      const blog = blogHref(item);
-                      const ext = primaryExternal(item);
-                      const title = pickTitle(item);
-                      const summary = pickSummary(item);
-                      const statusLabel = copy.status[item.status] || item.status;
-                      return (
-                        <li class="px-4 py-3 sm:px-5 hover:bg-surface-50/70 dark:hover:bg-surface-800/30 transition-colors">
-                          <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-                            {blog ? (
-                              <a href={blog} class="font-semibold text-[14px] leading-snug text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400">
-                                {title}
-                              </a>
-                            ) : ext ? (
-                              <a href={ext} target="_blank" rel="noopener noreferrer" class="font-semibold text-[14px] leading-snug text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400">
-                                {title}
-                              </a>
-                            ) : (
-                              <span class="font-semibold text-[14px] leading-snug text-surface-900 dark:text-white">{title}</span>
-                            )}
-                            <span class="font-mono text-[10px] tabular-nums text-accent-600/90 dark:text-accent-400">{item.score}/5</span>
-                          </div>
-                          {summary && (
-                            <p class="mt-0.5 text-[13px] leading-relaxed text-surface-500 dark:text-surface-400 line-clamp-1">{summary}</p>
-                          )}
-                          <div class="mt-1.5 flex flex-wrap items-center gap-1.5">
-                            {item.sources.map((s) => (
-                              <span class="rounded-full border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] uppercase tracking-wide text-surface-500 dark:text-surface-400">{s}</span>
-                            ))}
-                            <span class:list={[
-                              'rounded-full px-1.5 py-px text-[10px] font-medium',
-                              item.status === 'published' && 'bg-accent-500/15 text-accent-700 dark:text-accent-300',
-                              item.status === 'shortlisted' && 'bg-brand-500/10 text-brand-700 dark:text-brand-300',
-                              item.status === 'writing' && 'bg-ink-500/15 text-ink-600 dark:text-ink-400',
-                              (item.status === 'inbox' || !['published','shortlisted','writing'].includes(item.status)) && 'bg-surface-100 dark:bg-surface-800 text-surface-500',
-                            ]}>{statusLabel}</span>
-                            {blog && (
-                              <a href={blog} class="ml-auto text-[11px] font-medium text-accent-600 dark:text-accent-400 hover:underline">
-                                {copy.deepRead} →
-                              </a>
-                            )}
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div class="space-y-6">
+          {themeSections.map(({ themeId, items }) => (
+            <div class="rounded-2xl border border-surface-200 dark:border-surface-800 bg-white dark:bg-surface-900 shadow-card overflow-hidden">
+              <header class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-200/80 dark:border-surface-800 px-4 py-3 sm:px-5">
+                <h3 class="font-display text-base font-bold text-surface-900 dark:text-white">{themeLabel(themeId)}</h3>
+                <span class="text-xs text-surface-500 dark:text-surface-400">{items.length} {copy.itemsUnit}</span>
+              </header>
+              <ul class="divide-y divide-surface-100 dark:divide-surface-800">
+                {items.map((item) => {
+                  const blog = blogHref(item);
+                  const ext = primaryExternal(item);
+                  const title = localeTitle(item)!;
+                  const summary = localeSummary(item);
+                  const statusLabel = copy.status[item.status] || item.status;
+                  return (
+                    <li class="px-4 py-3 sm:px-5 hover:bg-surface-50/70 dark:hover:bg-surface-800/30 transition-colors">
+                      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                        {blog ? (
+                          <a href={blog} class="font-semibold text-[14px] leading-snug text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400">
+                            {title}
+                          </a>
+                        ) : ext ? (
+                          <a href={ext} target="_blank" rel={EXT_REL} class="font-semibold text-[14px] leading-snug text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400">
+                            {title}
+                          </a>
+                        ) : (
+                          <span class="font-semibold text-[14px] leading-snug text-surface-900 dark:text-white">{title}</span>
+                        )}
+                        <span class="font-mono text-[10px] tabular-nums text-accent-600/90 dark:text-accent-400">{item.score}/5</span>
+                      </div>
+                      {summary && (
+                        <p class="mt-0.5 text-[13px] leading-relaxed text-surface-500 dark:text-surface-400 line-clamp-1">{summary}</p>
+                      )}
+                      <div class="mt-1.5 flex flex-wrap items-center gap-1.5">
+                        {item.sources.map((s) => (
+                          <span class="rounded-full border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] uppercase tracking-wide text-surface-500 dark:text-surface-400">{s}</span>
+                        ))}
+                        <span class:list={[
+                          'rounded-full px-1.5 py-px text-[10px] font-medium',
+                          item.status === 'published' && 'bg-accent-500/15 text-accent-700 dark:text-accent-300',
+                          item.status === 'shortlisted' && 'bg-brand-500/10 text-brand-700 dark:text-brand-300',
+                          item.status === 'writing' && 'bg-ink-500/15 text-ink-600 dark:text-ink-400',
+                          (item.status === 'inbox' || !['published','shortlisted','writing'].includes(item.status)) && 'bg-surface-100 dark:bg-surface-800 text-surface-500',
+                        ]}>{statusLabel}</span>
+                        {blog && (
+                          <a href={blog} class="ml-auto text-[11px] font-medium text-accent-600 dark:text-accent-400 hover:underline">
+                            {copy.deepRead} →
+                          </a>
+                        )}
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
         </div>
       </section>
+
+      <!-- Hourly timeline (secondary) -->
+      {hours.length > 0 && (
+        <section aria-labelledby="chaos-timeline-heading">
+          <h2 id="chaos-timeline-heading" class="mb-6 flex items-center gap-2 font-display text-xl font-bold text-surface-900 dark:text-white">
+            <span class="inline-block h-6 w-1.5 rounded-full bg-surface-400" aria-hidden="true"></span>
+            {copy.timeline}
+          </h2>
+
+          <div class="relative pl-0 sm:pl-2">
+            <div class="pointer-events-none absolute left-[11px] top-2 bottom-2 hidden w-px bg-surface-200 dark:bg-surface-700 sm:block" aria-hidden="true"></div>
+
+            <div class="space-y-8">
+              {hours.map((hour) => (
+                <div class="relative sm:pl-10">
+                  <div class="absolute left-0 top-3 hidden h-[22px] w-[22px] items-center justify-center sm:flex" aria-hidden="true">
+                    <span class="h-3 w-3 rounded-full border-2 border-accent-500 bg-white dark:bg-surface-900 shadow-[0_0_0_4px_rgba(20,184,166,0.15)]"></span>
+                  </div>
+
+                  <div class="rounded-2xl border border-surface-200 dark:border-surface-800 bg-white dark:bg-surface-900 shadow-card overflow-hidden">
+                    <header class="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-2 border-b border-surface-200/80 dark:border-surface-800 bg-white/95 dark:bg-surface-900/95 backdrop-blur px-4 py-3 sm:px-5">
+                      <div class="flex items-baseline gap-2">
+                        <time datetime={hour.hourStart} class="font-display text-base font-bold tabular-nums text-surface-900 dark:text-white">
+                          {hour.label[L] || hour.label.en}
+                        </time>
+                        <span class="text-xs text-surface-500 dark:text-surface-400">· {hourShort(hour.hourStart)} · {hour.items.length} {copy.itemsUnit}</span>
+                      </div>
+                    </header>
+
+                    <ul class="divide-y divide-surface-100 dark:divide-surface-800">
+                      {hour.items.map((item) => {
+                        const blog = blogHref(item);
+                        const ext = primaryExternal(item);
+                        const title = localeTitle(item)!;
+                        const summary = localeSummary(item);
+                        const statusLabel = copy.status[item.status] || item.status;
+                        return (
+                          <li class="px-4 py-3 sm:px-5 hover:bg-surface-50/70 dark:hover:bg-surface-800/30 transition-colors">
+                            <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                              {blog ? (
+                                <a href={blog} class="font-semibold text-[14px] leading-snug text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400">
+                                  {title}
+                                </a>
+                              ) : ext ? (
+                                <a href={ext} target="_blank" rel={EXT_REL} class="font-semibold text-[14px] leading-snug text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400">
+                                  {title}
+                                </a>
+                              ) : (
+                                <span class="font-semibold text-[14px] leading-snug text-surface-900 dark:text-white">{title}</span>
+                              )}
+                              <span class="font-mono text-[10px] tabular-nums text-accent-600/90 dark:text-accent-400">{item.score}/5</span>
+                            </div>
+                            {summary && (
+                              <p class="mt-0.5 text-[13px] leading-relaxed text-surface-500 dark:text-surface-400 line-clamp-1">{summary}</p>
+                            )}
+                            <div class="mt-1.5 flex flex-wrap items-center gap-1.5">
+                              {item.sources.map((s) => (
+                                <span class="rounded-full border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] uppercase tracking-wide text-surface-500 dark:text-surface-400">{s}</span>
+                              ))}
+                              <span class:list={[
+                                'rounded-full px-1.5 py-px text-[10px] font-medium',
+                                item.status === 'published' && 'bg-accent-500/15 text-accent-700 dark:text-accent-300',
+                                item.status === 'shortlisted' && 'bg-brand-500/10 text-brand-700 dark:text-brand-300',
+                                item.status === 'writing' && 'bg-ink-500/15 text-ink-600 dark:text-ink-400',
+                                (item.status === 'inbox' || !['published','shortlisted','writing'].includes(item.status)) && 'bg-surface-100 dark:bg-surface-800 text-surface-500',
+                              ]}>{statusLabel}</span>
+                              {blog && (
+                                <a href={blog} class="ml-auto text-[11px] font-medium text-accent-600 dark:text-accent-400 hover:underline">
+                                  {copy.deepRead} →
+                                </a>
+                              )}
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   )}
 

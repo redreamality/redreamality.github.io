@@ -68,26 +68,67 @@ const STATUS_RANK: Record<string, number> = {
   writing: 2,
   inbox: 3,
 };
-const digestFlat = chaosDigest.hours.flatMap((h) => h.items);
+const CJK_RE = /[\u3040-\u30ff\u3400-\u9fff\uf900-\ufaff]/;
+const hasCJK = (s: string) => CJK_RE.test(s || '');
+const asciiRatio = (s: string) =>
+  !s?.length ? 1 : (s.match(/[\x00-\x7F]/g) || []).length / s.length;
+
+type ChaosDigestItem = {
+  id: string;
+  theme?: string;
+  title: { zh?: string; en?: string; ja?: string };
+  summary: { zh?: string; en?: string; ja?: string };
+  sources: string[];
+  score: number;
+  status: string;
+  externalUrls?: string[];
+  blog?: { zh?: string | null; en?: string | null };
+};
+
+/** Locale-appropriate title only — never fall back Chinese↔English. */
+function chaosLocaleTitle(item: ChaosDigestItem): string | null {
+  const t = (item.title?.[digestLang] || '').trim();
+  if (!t) return null;
+  if (digestLang === 'zh') {
+    if (hasCJK(t) || asciiRatio(t) > 0.7) return t;
+    return null;
+  }
+  if (hasCJK(t) && asciiRatio(t) < 0.7) return null;
+  return t;
+}
+function chaosLocaleSummary(item: ChaosDigestItem): string {
+  const s = (item.summary?.[digestLang] || '').trim();
+  if (!s) return '';
+  if (digestLang === 'zh') return s;
+  if (hasCJK(s) && asciiRatio(s) < 0.7) return '';
+  return s;
+}
+function chaosBlogHref(item: ChaosDigestItem): string | null {
+  if (!item.blog) return null;
+  if (digestLang === 'zh') return item.blog.zh || null;
+  return item.blog.en || null; // en + ja use EN blog when present
+}
+
+const digestFlat: ChaosDigestItem[] = chaosDigest.hours.flatMap((h) => h.items as ChaosDigestItem[]);
 const digestTop = [...digestFlat]
+  .filter((item) => chaosLocaleTitle(item) !== null)
   .sort((a, b) => {
     if (b.score !== a.score) return b.score - a.score;
     return (STATUS_RANK[a.status] ?? 5) - (STATUS_RANK[b.status] ?? 5);
   })
   .slice(0, 6);
 
+const chaosFallback = `${basePath}/garden/chaos/`;
 const chaosItems: SectionItem[] =
   digestTop.length > 0
     ? digestTop.map((item) => {
-        const blog =
-          digestLang === 'zh'
-            ? item.blog?.zh || item.blog?.en
-            : item.blog?.en || item.blog?.zh;
-        const href = blog || item.externalUrls?.[0] || `${basePath}/garden/chaos/`;
+        // Homepage: NEVER use externalUrls — only same-lang blog or Chaos index
+        const blog = chaosBlogHref(item);
+        const href = blog || chaosFallback;
         return {
           href,
-          title: item.title[digestLang] || item.title.zh || item.title.en,
-          description: item.summary[digestLang] || item.summary.zh || item.summary.en,
+          title: chaosLocaleTitle(item)!,
+          description: chaosLocaleSummary(item) || undefined,
           dateISO: chaosDigest.updatedAt,
           dateLabel: fmt(new Date(chaosDigest.updatedAt)),
           badges: [{ label: `${item.score}/5` }],

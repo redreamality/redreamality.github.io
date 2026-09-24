@@ -1,7 +1,151 @@
 {
-  "updatedAt": "2026-09-23T23:20:56+08:00",
+  "updatedAt": "2026-09-24T09:40:05+08:00",
   "timezone": "Asia/Shanghai",
+  "themes": [
+    "models",
+    "coding-tools",
+    "agents-oss",
+    "security",
+    "research",
+    "product-news",
+    "other"
+  ],
+  "themeCounts": {
+    "models": 4,
+    "coding-tools": 8,
+    "agents-oss": 20,
+    "security": 2,
+    "research": 7,
+    "product-news": 2,
+    "other": 0
+  },
   "hours": [
+    {
+      "hourStart": "2026-09-24T00:00:00+08:00",
+      "label": {
+        "zh": "9月24日 00:00",
+        "en": "Sep 24 00:00",
+        "ja": "9月24日 00:00"
+      },
+      "items": [
+        {
+          "id": "t001",
+          "theme": "models",
+          "title": {
+            "zh": "Claude Opus 5.5：降价 + 旗舰性能同窗发布",
+            "en": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose",
+            "ja": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose"
+          },
+          "summary": {
+            "zh": "与 GPT-6 对台：性能/价格/安全限制怎么选",
+            "en": "Anthropic launched Claude Opus 5.5 on 2026-09-22: about 40% lower cost on typical workloads versus Opus 5, with Fable-tier capability claims and matching safeguards. A builder-focused read of pricing, benchmarks, and coding-agent fit.",
+            "ja": ""
+          },
+          "sources": [
+            "hn",
+            "techcrunch",
+            "36kr"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://www.anthropic.com/claude-opus-5-5",
+            "https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/",
+            "https://eu.36kr.com/zh/p/3995195771588745"
+          ],
+          "blog": {
+            "zh": "/cn/blog/claude-opus-5-5-price-and-performance/",
+            "en": "/blog/claude-opus-5-5-price-and-performance/"
+          }
+        },
+        {
+          "id": "t002",
+          "theme": "models",
+          "title": {
+            "zh": "GPT-6 Sol & Luna（含 Astra 官方叙事）",
+            "en": "GPT-6 Sol and Luna: Spreading Astra-Class Intelligence Down the Cost Curve",
+            "ja": "GPT-6 Sol and Luna: Spreading Astra-Class Intelligence Down the Cost Curve"
+          },
+          "summary": {
+            "zh": "双模型+降错价；Astra 能力故事与客户首秀可作副线",
+            "en": "OpenAI launched GPT-6 Sol and Luna on 2026-09-22: 50% lower API prices versus GPT-5.6 promo rates, with Astra-generation capability and alignment gains. Pricing, benchmarks, caching, and the Astra/Enigma side story—for coding-agent routing.",
+            "ja": ""
+          },
+          "sources": [
+            "hn",
+            "techcrunch",
+            "youtube",
+            "36kr"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://openai.com/index/introducing-gpt-6-sol-and-luna/",
+            "https://techcrunch.com/2026/09/22/openai-launches-gpt-6-sol-and-luna/",
+            "https://www.youtube.com/watch?v=1QNsdr-Qx_I",
+            "https://www.youtube.com/watch?v=QFxDF30qf_4",
+            "https://www.cryptocellar.org/bgac/the-mvueh-break.html",
+            "https://eu.36kr.com/zh/p/3995195771588745"
+          ],
+          "blog": {
+            "zh": "/cn/blog/gpt-6-sol-luna-and-astra/",
+            "en": "/blog/gpt-6-sol-luna-and-astra/"
+          }
+        },
+        {
+          "id": "t005",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "alibaba/open-code-review：确定性流水线 + LLM Agent 评审",
+            "en": "Alibaba’s Open Code Review: What Enterprises Can Copy from a Deterministic Pipeline Plus LLM Agents",
+            "ja": "Alibaba’s Open Code Review: What Enterprises Can Copy from a Deterministic Pipeline Plus LLM Agents"
+          },
+          "summary": {
+            "zh": "企业级 AI Code Review 落地样本（周增过万星）",
+            "en": "A practical teardown of alibaba/open-code-review: deterministic engineering owns file selection and positioning; the agent owns deep reasoning. Covers AACR-Bench, delegation mode, CI hooks, copyable patterns, and limits.",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://github.com/alibaba/open-code-review"
+          ],
+          "blog": {
+            "zh": "/cn/blog/alibaba-open-code-review-deterministic-pipeline/",
+            "en": "/blog/alibaba-open-code-review-deterministic-pipeline/"
+          }
+        },
+        {
+          "id": "t006",
+          "theme": "security",
+          "title": {
+            "zh": "cloudflare/security-audit-skill：Coding-agent 安全审计 skill",
+            "en": "Cloudflare’s security-audit-skill: A Verifiable Security-Audit Workflow for Coding Agents",
+            "ja": "Cloudflare’s security-audit-skill: A Verifiable Security-Audit Workflow for Coding Agents"
+          },
+          "summary": {
+            "zh": "Skill 分发形态爆发 + 安全审计刚需",
+            "en": "A teardown of cloudflare/security-audit-skill: Skill distribution, six audit phases, confirmed / needs_validation / rejected verdicts, adversarial validation, and fail-open behavior without a sandbox—plus install steps and enterprise limits.",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://github.com/cloudflare/security-audit-skill"
+          ],
+          "blog": {
+            "zh": "/cn/blog/cloudflare-security-audit-skill-for-coding-agents/",
+            "en": "/blog/cloudflare-security-audit-skill-for-coding-agents/"
+          }
+        }
+      ]
+    },
     {
       "hourStart": "2026-09-23T23:00:00+08:00",
       "label": {
@@ -12,15 +156,16 @@
       "items": [
         {
           "id": "t003",
+          "theme": "coding-tools",
           "title": {
             "zh": "Jev × Claude Code：爆款工作流与 25 行最小实现",
             "en": "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Build",
-            "ja": "Jev × Claude Code：爆款工作流与 25 行最小实现"
+            "ja": "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Build"
           },
           "summary": {
             "zh": "站内 Jev 刚需：实操 10x + 最小实现 + OpenAI 跟进压力",
-            "en": "站内 Jev 刚需：实操 10x + 最小实现 + OpenAI 跟进压力",
-            "ja": "站内 Jev 刚需：实操 10x + 最小实现 + OpenAI 跟进压力"
+            "en": "A viral YouTube clip ties Jev to Claude Code, but Jev cannot be the CLI chat model. This post covers the official skill, boundary hooks, MCP, and per-turn routing, contrasts NobodyWho’s 25-line minimal build, and discusses OpenAI fast-follow pressure.",
+            "ja": ""
           },
           "sources": [
             "youtube",
@@ -49,112 +194,17 @@
       },
       "items": [
         {
-          "id": "t001",
-          "title": {
-            "zh": "Claude Opus 5.5：降价 + 旗舰性能同窗发布",
-            "en": "Claude Opus 5.5：降价 + 旗舰性能同窗发布",
-            "ja": "Claude Opus 5.5：降价 + 旗舰性能同窗发布"
-          },
-          "summary": {
-            "zh": "与 GPT-6 对台：性能/价格/安全限制怎么选",
-            "en": "与 GPT-6 对台：性能/价格/安全限制怎么选",
-            "ja": "与 GPT-6 对台：性能/价格/安全限制怎么选"
-          },
-          "sources": [
-            "hn",
-            "techcrunch",
-            "36kr"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.anthropic.com/claude-opus-5-5",
-            "https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/",
-            "https://eu.36kr.com/zh/p/3995195771588745"
-          ]
-        },
-        {
-          "id": "t002",
-          "title": {
-            "zh": "GPT-6 Sol & Luna（含 Astra 官方叙事）",
-            "en": "GPT-6 Sol & Luna（含 Astra 官方叙事）",
-            "ja": "GPT-6 Sol & Luna（含 Astra 官方叙事）"
-          },
-          "summary": {
-            "zh": "双模型+降错价；Astra 能力故事与客户首秀可作副线",
-            "en": "双模型+降错价；Astra 能力故事与客户首秀可作副线",
-            "ja": "双模型+降错价；Astra 能力故事与客户首秀可作副线"
-          },
-          "sources": [
-            "hn",
-            "techcrunch",
-            "youtube",
-            "36kr"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://openai.com/index/introducing-gpt-6-sol-and-luna/",
-            "https://techcrunch.com/2026/09/22/openai-launches-gpt-6-sol-and-luna/",
-            "https://www.youtube.com/watch?v=1QNsdr-Qx_I",
-            "https://www.youtube.com/watch?v=QFxDF30qf_4",
-            "https://www.cryptocellar.org/bgac/the-mvueh-break.html",
-            "https://eu.36kr.com/zh/p/3995195771588745"
-          ]
-        },
-        {
-          "id": "t005",
-          "title": {
-            "zh": "alibaba/open-code-review：确定性流水线 + LLM Agent 评审",
-            "en": "alibaba/open-code-review：确定性流水线 + LLM Agent 评审",
-            "ja": "alibaba/open-code-review：确定性流水线 + LLM Agent 评审"
-          },
-          "summary": {
-            "zh": "企业级 AI Code Review 落地样本（周增过万星）",
-            "en": "企业级 AI Code Review 落地样本（周增过万星）",
-            "ja": "企业级 AI Code Review 落地样本（周增过万星）"
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/alibaba/open-code-review"
-          ]
-        },
-        {
-          "id": "t006",
-          "title": {
-            "zh": "cloudflare/security-audit-skill：Coding-agent 安全审计 skill",
-            "en": "cloudflare/security-audit-skill：Coding-agent 安全审计 skill",
-            "ja": "cloudflare/security-audit-skill：Coding-agent 安全审计 skill"
-          },
-          "summary": {
-            "zh": "Skill 分发形态爆发 + 安全审计刚需",
-            "en": "Skill 分发形态爆发 + 安全审计刚需",
-            "ja": "Skill 分发形态爆发 + 安全审计刚需"
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/cloudflare/security-audit-skill"
-          ]
-        },
-        {
           "id": "t004",
+          "theme": "agents-oss",
           "title": {
             "zh": "google/ax：Google 开源 agent orchestration runtime",
-            "en": "google/ax：Google 开源 agent orchestration runtime",
-            "ja": "google/ax：Google 开源 agent orchestration runtime"
+            "en": "google/ax",
+            "ja": "google/ax"
           },
           "summary": {
             "zh": "大厂 agent 编排基建日增 1.5k+，对照自家 harness 叙事",
-            "en": "大厂 agent 编排基建日增 1.5k+，对照自家 harness 叙事",
-            "ja": "大厂 agent 编排基建日增 1.5k+，对照自家 harness 叙事"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -167,15 +217,16 @@
         },
         {
           "id": "t007",
+          "theme": "coding-tools",
           "title": {
             "zh": "affaan-m/ECC：Agent harness 性能/记忆/安全优化",
-            "en": "affaan-m/ECC：Agent harness 性能/记忆/安全优化",
-            "ja": "affaan-m/ECC：Agent harness 性能/记忆/安全优化"
+            "en": "affaan-m/ECC",
+            "ja": "affaan-m/ECC"
           },
           "summary": {
             "zh": "Harness 优化系统，适配 Claude Code/Codex/Cursor",
-            "en": "Harness 优化系统，适配 Claude Code/Codex/Cursor",
-            "ja": "Harness 优化系统，适配 Claude Code/Codex/Cursor"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -188,15 +239,16 @@
         },
         {
           "id": "t008",
+          "theme": "agents-oss",
           "title": {
             "zh": "dream-num/univer：Office Harness for AI Agents",
-            "en": "dream-num/univer：Office Harness for AI Agents",
-            "ja": "dream-num/univer：Office Harness for AI Agents"
+            "en": "dream-num/univer",
+            "ja": "dream-num/univer"
           },
           "summary": {
             "zh": "文档/表格型 agent 运行时，日增 1k+",
-            "en": "文档/表格型 agent 运行时，日增 1k+",
-            "ja": "文档/表格型 agent 运行时，日增 1k+"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -209,15 +261,16 @@
         },
         {
           "id": "t009",
+          "theme": "agents-oss",
           "title": {
             "zh": "stablyai/orca：并行 agent 舰队 ADE",
-            "en": "stablyai/orca：并行 agent 舰队 ADE",
-            "ja": "stablyai/orca：并行 agent 舰队 ADE"
+            "en": "stablyai/orca",
+            "ja": "stablyai/orca"
           },
           "summary": {
             "zh": "多 agent 编排产品形态（桌面/移动/远程）",
-            "en": "多 agent 编排产品形态（桌面/移动/远程）",
-            "ja": "多 agent 编排产品形态（桌面/移动/远程）"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -230,15 +283,16 @@
         },
         {
           "id": "t010",
+          "theme": "models",
           "title": {
             "zh": "MiMo v2.6：小米开源/中文前沿模型冲刺",
-            "en": "MiMo v2.6：小米开源/中文前沿模型冲刺",
-            "ja": "MiMo v2.6：小米开源/中文前沿模型冲刺"
+            "en": "MiMo v2.6",
+            "ja": "MiMo v2.6"
           },
           "summary": {
             "zh": "中文读者向开源模型对照 Opus/GPT-6",
-            "en": "中文读者向开源模型对照 Opus/GPT-6",
-            "ja": "中文读者向开源模型对照 Opus/GPT-6"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "hn"
@@ -251,15 +305,16 @@
         },
         {
           "id": "t011",
+          "theme": "agents-oss",
           "title": {
             "zh": "Meta Muse ↔ OpenClaw：大厂借鉴开源 agent 栈",
-            "en": "Meta Muse ↔ OpenClaw：大厂借鉴开源 agent 栈",
-            "ja": "Meta Muse ↔ OpenClaw：大厂借鉴开源 agent 栈"
+            "en": "Meta Muse ↔ OpenClaw",
+            "ja": "Meta Muse ↔ OpenClaw"
           },
           "summary": {
             "zh": "开源 harness 被产品化抄写的活案例",
-            "en": "开源 harness 被产品化抄写的活案例",
-            "ja": "开源 harness 被产品化抄写的活案例"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "techcrunch"
@@ -272,15 +327,16 @@
         },
         {
           "id": "t047",
+          "theme": "agents-oss",
           "title": {
             "zh": "Solid：自备真机/账号/预算的长程 Agents",
-            "en": "Solid：自备真机/账号/预算的长程 Agents",
-            "ja": "Solid：自备真机/账号/预算的长程 Agents"
+            "en": "Solid",
+            "ja": "Solid"
           },
           "summary": {
             "zh": "「agent 有自己的电脑」产品形态，对照 harness 叙事",
-            "en": "「agent 有自己的电脑」产品形态，对照 harness 叙事",
-            "ja": "「agent 有自己的电脑」产品形态，对照 harness 叙事"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "producthunt"
@@ -293,6 +349,7 @@
         },
         {
           "id": "t050",
+          "theme": "research",
           "title": {
             "zh": "Agensh: Scaling Organizational Intelligence to 1,024 Agents",
             "en": "Agensh: Scaling Organizational Intelligence to 1,024 Agents",
@@ -300,8 +357,8 @@
           },
           "summary": {
             "zh": "1024 agents 组织智能；多 agent 扩展上限",
-            "en": "1024 agents 组织智能；多 agent 扩展上限",
-            "ja": "1024 agents 组织智能；多 agent 扩展上限"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "arxiv"
@@ -314,6 +371,7 @@
         },
         {
           "id": "t051",
+          "theme": "research",
           "title": {
             "zh": "CliffCompaction: Cost-Efficient Compaction for Long-Horizon Coding Agents",
             "en": "CliffCompaction: Cost-Efficient Compaction for Long-Horizon Coding Agents",
@@ -321,8 +379,8 @@
           },
           "summary": {
             "zh": "长程 coding agent 低成本上下文压缩",
-            "en": "长程 coding agent 低成本上下文压缩",
-            "ja": "长程 coding agent 低成本上下文压缩"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "arxiv"
@@ -335,6 +393,7 @@
         },
         {
           "id": "t052",
+          "theme": "research",
           "title": {
             "zh": "Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents",
             "en": "Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents",
@@ -342,8 +401,8 @@
           },
           "summary": {
             "zh": "Harness 扩张 vs 堆上下文；对照 ECC/skills",
-            "en": "Harness 扩张 vs 堆上下文；对照 ECC/skills",
-            "ja": "Harness 扩张 vs 堆上下文；对照 ECC/skills"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "arxiv"
@@ -356,6 +415,7 @@
         },
         {
           "id": "t055",
+          "theme": "research",
           "title": {
             "zh": "Jev-Mem: System-One-Controlled Agentic Memory for Efficient AI Agents",
             "en": "Jev-Mem: System-One-Controlled Agentic Memory for Efficient AI Agents",
@@ -363,8 +423,8 @@
           },
           "summary": {
             "zh": "与站内 Jev 选题同频：agentic memory",
-            "en": "与站内 Jev 选题同频：agentic memory",
-            "ja": "与站内 Jev 选题同频：agentic memory"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "paperswithcode"
@@ -377,15 +437,16 @@
         },
         {
           "id": "t012",
+          "theme": "security",
           "title": {
             "zh": "WordPress 未认证路径穿越 → 条件 RCE",
-            "en": "WordPress 未认证路径穿越 → 条件 RCE",
-            "ja": "WordPress 未认证路径穿越 → 条件 RCE"
+            "en": "",
+            "ja": ""
           },
           "summary": {
             "zh": "安全突发；读者面大但偏运维，可攒",
-            "en": "安全突发；读者面大但偏运维，可攒",
-            "ja": "安全突发；读者面大但偏运维，可攒"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "hn"
@@ -398,15 +459,16 @@
         },
         {
           "id": "t013",
+          "theme": "coding-tools",
           "title": {
             "zh": "Claude Code 仅在遥测开启时读 AGENTS.md",
-            "en": "Claude Code 仅在遥测开启时读 AGENTS.md",
-            "ja": "Claude Code 仅在遥测开启时读 AGENTS.md"
+            "en": "",
+            "ja": ""
           },
           "summary": {
             "zh": "Coding agent 隐私/配置坑；可作短评",
-            "en": "Coding agent 隐私/配置坑；可作短评",
-            "ja": "Coding agent 隐私/配置坑；可作短评"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "hn"
@@ -419,15 +481,16 @@
         },
         {
           "id": "t014",
+          "theme": "coding-tools",
           "title": {
             "zh": "addyosmani/agent-skills：生产级 engineering skills",
-            "en": "addyosmani/agent-skills：生产级 engineering skills",
-            "ja": "addyosmani/agent-skills：生产级 engineering skills"
+            "en": "addyosmani/agent-skills",
+            "ja": "addyosmani/agent-skills"
           },
           "summary": {
             "zh": "Skills 赛道权威信号，可与 CF skill 对照攒写",
-            "en": "Skills 赛道权威信号，可与 CF skill 对照攒写",
-            "ja": "Skills 赛道权威信号，可与 CF skill 对照攒写"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -440,15 +503,16 @@
         },
         {
           "id": "t015",
+          "theme": "agents-oss",
           "title": {
             "zh": "obra/superpowers：Agentic skills 框架",
-            "en": "obra/superpowers：Agentic skills 框架",
-            "ja": "obra/superpowers：Agentic skills 框架"
+            "en": "obra/superpowers",
+            "ja": "obra/superpowers"
           },
           "summary": {
             "zh": "Skills 方法论大体量；与 ECC/CF 同赛道",
-            "en": "Skills 方法论大体量；与 ECC/CF 同赛道",
-            "ja": "Skills 方法论大体量；与 ECC/CF 同赛道"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -461,15 +525,16 @@
         },
         {
           "id": "t016",
+          "theme": "agents-oss",
           "title": {
             "zh": "BuilderIO/agent-native：把产品做成 agent-native",
-            "en": "BuilderIO/agent-native：把产品做成 agent-native",
-            "ja": "BuilderIO/agent-native：把产品做成 agent-native"
+            "en": "BuilderIO/agent-native",
+            "ja": "BuilderIO/agent-native"
           },
           "summary": {
             "zh": "产品 agent 化框架；日榜靠前",
-            "en": "产品 agent 化框架；日榜靠前",
-            "ja": "产品 agent 化框架；日榜靠前"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -482,15 +547,16 @@
         },
         {
           "id": "t017",
+          "theme": "coding-tools",
           "title": {
             "zh": "Fission-AI/OpenSpec：Spec-driven development for AI coding",
-            "en": "Fission-AI/OpenSpec：Spec-driven development for AI coding",
-            "ja": "Fission-AI/OpenSpec：Spec-driven development for AI coding"
+            "en": "Fission-AI/OpenSpec",
+            "ja": "Fission-AI/OpenSpec"
           },
           "summary": {
             "zh": "SDD × coding agent；周增高",
-            "en": "SDD × coding agent；周增高",
-            "ja": "SDD × coding agent；周增高"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -503,15 +569,16 @@
         },
         {
           "id": "t018",
+          "theme": "agents-oss",
           "title": {
             "zh": "Tencent/WeKnora：文档→RAG→自主 agent→Wiki",
-            "en": "Tencent/WeKnora：文档→RAG→自主 agent→Wiki",
-            "ja": "Tencent/WeKnora：文档→RAG→自主 agent→Wiki"
+            "en": "Tencent/WeKnora",
+            "ja": "Tencent/WeKnora"
           },
           "summary": {
             "zh": "腾讯知识 agent 平台；Δ5303",
-            "en": "腾讯知识 agent 平台；Δ5303",
-            "ja": "腾讯知识 agent 平台；Δ5303"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -524,15 +591,16 @@
         },
         {
           "id": "t019",
+          "theme": "coding-tools",
           "title": {
             "zh": "anthropics/claude-code：Coding agent 品类锚点",
-            "en": "anthropics/claude-code：Coding agent 品类锚点",
-            "ja": "anthropics/claude-code：Coding agent 品类锚点"
+            "en": "anthropics/claude-code",
+            "ja": "anthropics/claude-code"
           },
           "summary": {
             "zh": "常青对照，不必单篇除非新功能",
-            "en": "常青对照，不必单篇除非新功能",
-            "ja": "常青对照，不必单篇除非新功能"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -545,15 +613,16 @@
         },
         {
           "id": "t020",
+          "theme": "agents-oss",
           "title": {
             "zh": "anthropics/knowledge-work-plugins：Cowork 插件集",
-            "en": "anthropics/knowledge-work-plugins：Cowork 插件集",
-            "ja": "anthropics/knowledge-work-plugins：Cowork 插件集"
+            "en": "anthropics/knowledge-work-plugins",
+            "ja": "anthropics/knowledge-work-plugins"
           },
           "summary": {
             "zh": "知识工作 × skills/plugins；2238 补录",
-            "en": "知识工作 × skills/plugins；2238 补录",
-            "ja": "知识工作 × skills/plugins；2238 补录"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -566,15 +635,16 @@
         },
         {
           "id": "t021",
+          "theme": "agents-oss",
           "title": {
             "zh": "danny-avila/LibreChat：自托管 Chat + Agents/MCP",
-            "en": "danny-avila/LibreChat：自托管 Chat + Agents/MCP",
-            "ja": "danny-avila/LibreChat：自托管 Chat + Agents/MCP"
+            "en": "danny-avila/LibreChat",
+            "ja": "danny-avila/LibreChat"
           },
           "summary": {
             "zh": "开源对话+agent 产品对照；2238 补录",
-            "en": "开源对话+agent 产品对照；2238 补录",
-            "ja": "开源对话+agent 产品对照；2238 补录"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -587,6 +657,7 @@
         },
         {
           "id": "t022",
+          "theme": "agents-oss",
           "title": {
             "zh": "How to Build AI Agents in Python（Tech With Tim）",
             "en": "How to Build AI Agents in Python（Tech With Tim）",
@@ -594,8 +665,8 @@
           },
           "summary": {
             "zh": "刚发教程，可作入门向外链/短评素材",
-            "en": "刚发教程，可作入门向外链/短评素材",
-            "ja": "刚发教程，可作入门向外链/短评素材"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "youtube"
@@ -608,15 +679,16 @@
         },
         {
           "id": "t023",
+          "theme": "coding-tools",
           "title": {
             "zh": "Claude Vibe Coding 全教程",
-            "en": "Claude Vibe Coding 全教程",
-            "ja": "Claude Vibe Coding 全教程"
+            "en": "",
+            "ja": ""
           },
           "summary": {
             "zh": "短时过万播；可作实践向短文",
-            "en": "短时过万播；可作实践向短文",
-            "ja": "短时过万播；可作实践向短文"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "youtube"
@@ -629,15 +701,16 @@
         },
         {
           "id": "t024",
+          "theme": "product-news",
           "title": {
             "zh": "YouTube 允许用 AI 自定义推荐算法",
-            "en": "YouTube 允许用 AI 自定义推荐算法",
-            "ja": "YouTube 允许用 AI 自定义推荐算法"
+            "en": "",
+            "ja": ""
           },
           "summary": {
             "zh": "平台推荐范式变化；可攒",
-            "en": "平台推荐范式变化；可攒",
-            "ja": "平台推荐范式变化；可攒"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "techcrunch",
@@ -652,15 +725,16 @@
         },
         {
           "id": "t025",
+          "theme": "agents-oss",
           "title": {
             "zh": "Unreal Agent 产品化发布",
-            "en": "Unreal Agent 产品化发布",
-            "ja": "Unreal Agent 产品化发布"
+            "en": "",
+            "ja": ""
           },
           "summary": {
             "zh": "Agent UX 产品脉冲",
-            "en": "Agent UX 产品脉冲",
-            "ja": "Agent UX 产品脉冲"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "hn"
@@ -673,15 +747,16 @@
         },
         {
           "id": "t026",
+          "theme": "models",
           "title": {
             "zh": "Open models 权力平衡（Interconnects）",
-            "en": "Open models 权力平衡（Interconnects）",
-            "ja": "Open models 权力平衡（Interconnects）"
+            "en": "",
+            "ja": ""
           },
           "summary": {
             "zh": "开源模型格局长文；可攒深度",
-            "en": "开源模型格局长文；可攒深度",
-            "ja": "开源模型格局长文；可攒深度"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "hn"
@@ -694,6 +769,7 @@
         },
         {
           "id": "t027",
+          "theme": "agents-oss",
           "title": {
             "zh": "Drop：rootless Linux sandbox + gVisor",
             "en": "Drop：rootless Linux sandbox + gVisor",
@@ -701,8 +777,8 @@
           },
           "summary": {
             "zh": "Agent 跑代码的隔离工具",
-            "en": "Agent 跑代码的隔离工具",
-            "ja": "Agent 跑代码的隔离工具"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "hn"
@@ -715,15 +791,16 @@
         },
         {
           "id": "t028",
+          "theme": "product-news",
           "title": {
             "zh": "Stripe 内部 Knowledge AI 平台",
-            "en": "Stripe 内部 Knowledge AI 平台",
-            "ja": "Stripe 内部 Knowledge AI 平台"
+            "en": "",
+            "ja": ""
           },
           "summary": {
             "zh": "大厂内部 AI 平台模式",
-            "en": "大厂内部 AI 平台模式",
-            "ja": "大厂内部 AI 平台模式"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "hn"
@@ -736,15 +813,16 @@
         },
         {
           "id": "t033",
+          "theme": "agents-oss",
           "title": {
             "zh": "JustVugg/colibri：自有硬件流式 MoE",
-            "en": "JustVugg/colibri：自有硬件流式 MoE",
-            "ja": "JustVugg/colibri：自有硬件流式 MoE"
+            "en": "JustVugg/colibri",
+            "ja": "JustVugg/colibri"
           },
           "summary": {
             "zh": "本地推理引擎热度 Δ4036",
-            "en": "本地推理引擎热度 Δ4036",
-            "ja": "本地推理引擎热度 Δ4036"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -757,15 +835,16 @@
         },
         {
           "id": "t034",
+          "theme": "agents-oss",
           "title": {
             "zh": "TencentCloud/Octop：自托管多用户多 agent",
-            "en": "TencentCloud/Octop：自托管多用户多 agent",
-            "ja": "TencentCloud/Octop：自托管多用户多 agent"
+            "en": "TencentCloud/Octop",
+            "ja": "TencentCloud/Octop"
           },
           "summary": {
             "zh": "多 agent 自托管 Δ2148",
-            "en": "多 agent 自托管 Δ2148",
-            "ja": "多 agent 自托管 Δ2148"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -778,15 +857,16 @@
         },
         {
           "id": "t035",
+          "theme": "agents-oss",
           "title": {
             "zh": "HKUDS/CLI-Anything：软件 Agent-Native CLI 化",
-            "en": "HKUDS/CLI-Anything：软件 Agent-Native CLI 化",
-            "ja": "HKUDS/CLI-Anything：软件 Agent-Native CLI 化"
+            "en": "HKUDS/CLI-Anything",
+            "ja": "HKUDS/CLI-Anything"
           },
           "summary": {
             "zh": "Agent 工具化叙事",
-            "en": "Agent 工具化叙事",
-            "ja": "Agent 工具化叙事"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -799,6 +879,7 @@
         },
         {
           "id": "t036",
+          "theme": "agents-oss",
           "title": {
             "zh": "DeusData/codebase-memory-mcp",
             "en": "DeusData/codebase-memory-mcp",
@@ -806,8 +887,8 @@
           },
           "summary": {
             "zh": "MCP + 代码库记忆",
-            "en": "MCP + 代码库记忆",
-            "ja": "MCP + 代码库记忆"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github",
@@ -822,6 +903,7 @@
         },
         {
           "id": "t037",
+          "theme": "agents-oss",
           "title": {
             "zh": "agent-substrate/substrate",
             "en": "agent-substrate/substrate",
@@ -829,8 +911,8 @@
           },
           "summary": {
             "zh": "Agent 底层基建",
-            "en": "Agent 底层基建",
-            "ja": "Agent 底层基建"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -843,6 +925,7 @@
         },
         {
           "id": "t038",
+          "theme": "agents-oss",
           "title": {
             "zh": "strands-agents/harness-sdk",
             "en": "strands-agents/harness-sdk",
@@ -850,8 +933,8 @@
           },
           "summary": {
             "zh": "生产级 harness SDK",
-            "en": "生产级 harness SDK",
-            "ja": "生产级 harness SDK"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "github"
@@ -864,15 +947,16 @@
         },
         {
           "id": "t048",
+          "theme": "agents-oss",
           "title": {
             "zh": "Firecrawl Alexandria：Agent 知识库/数据接入层",
-            "en": "Firecrawl Alexandria：Agent 知识库/数据接入层",
-            "ja": "Firecrawl Alexandria：Agent 知识库/数据接入层"
+            "en": "Firecrawl Alexandria",
+            "ja": "Firecrawl Alexandria"
           },
           "summary": {
             "zh": "MCP/CLI 给 agent 接索引；检索质量宣称 +21%",
-            "en": "MCP/CLI 给 agent 接索引；检索质量宣称 +21%",
-            "ja": "MCP/CLI 给 agent 接索引；检索质量宣称 +21%"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "producthunt"
@@ -885,6 +969,7 @@
         },
         {
           "id": "t053",
+          "theme": "research",
           "title": {
             "zh": "Beyond Repeated Sampling: Learning Search Policies for LLM Reasoning",
             "en": "Beyond Repeated Sampling: Learning Search Policies for LLM Reasoning",
@@ -892,8 +977,8 @@
           },
           "summary": {
             "zh": "推理搜索策略学习",
-            "en": "推理搜索策略学习",
-            "ja": "推理搜索策略学习"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "arxiv"
@@ -906,6 +991,7 @@
         },
         {
           "id": "t054",
+          "theme": "research",
           "title": {
             "zh": "Recursive self-improvement of AI research agents",
             "en": "Recursive self-improvement of AI research agents",
@@ -913,8 +999,8 @@
           },
           "summary": {
             "zh": "AI 研究 agent 递归自我改进",
-            "en": "AI 研究 agent 递归自我改进",
-            "ja": "AI 研究 agent 递归自我改进"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "arxiv"
@@ -927,6 +1013,7 @@
         },
         {
           "id": "t056",
+          "theme": "research",
           "title": {
             "zh": "RRSI: Regularized Recursive Self-Improvement of Agent Harnesses",
             "en": "RRSI: Regularized Recursive Self-Improvement of Agent Harnesses",
@@ -934,8 +1021,8 @@
           },
           "summary": {
             "zh": "Agent harness 正则化递归自改进",
-            "en": "Agent harness 正则化递归自改进",
-            "ja": "Agent harness 正则化递归自改进"
+            "en": "",
+            "ja": ""
           },
           "sources": [
             "paperswithcode"
