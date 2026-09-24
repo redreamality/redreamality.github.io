@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="交互图解复利：离散复利为何会甩开线性加总，微小日率经过 365 次乘法如何拉开差距，以及时间窗口为何和利率一样关键——只讲机制，不含投资建议。">
+  <title>每天多赚 0.1%，一年后你会差多少？</title>
+  <style data-prototype-bundle="article">
+:root {
+  color-scheme: light;
+  --paper: #f4f1e8;
+  --surface: #fffdf8;
+  --ink: #17333c;
+  --muted: #60747a;
+  --line: #d8ddd7;
+  --ocean: #0f7185;
+  --warm: #ee9d46;
+  --coral: #d45f50;
+  --soft-ocean: color-mix(in srgb, var(--ocean) 9%, var(--surface));
+  --soft-warm: color-mix(in srgb, var(--warm) 12%, var(--surface));
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body { margin: 0; overflow-x: clip; color: var(--ink); background: radial-gradient(circle at 20% 0, #dff3ef 0, transparent 30rem), var(--paper); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .75rem;
+  left: .75rem;
+  padding: .65rem .9rem;
+  color: white;
+  background: var(--ink);
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.75rem;
+  padding: .65rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(216, 221, 215, .9);
+  background: rgba(244, 241, 232, .9);
+  backdrop-filter: blur(14px);
+}
+.site-header strong { margin-right: auto; font-size: .72rem; letter-spacing: .12em; }
+.language-links { display: flex; gap: .65rem; }
+.language-links a { color: var(--muted); font-size: .78rem; }
+.language-links a[aria-current="page"] { color: var(--ocean); font-weight: 800; }
+[data-global-motion] {
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.hero, .copy-block {
+  width: min(calc(100% - 2rem), 54rem);
+  margin-inline: auto;
+}
+.hero {
+  position: relative;
+  padding: clamp(5rem, 14vw, 10rem) 0;
+}
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -12% auto auto;
+  width: clamp(9rem, 28vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ocean) 35%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem color-mix(in srgb, var(--ocean) 5%, transparent),
+    0 0 0 5rem color-mix(in srgb, var(--warm) 4%, transparent);
+  content: "";
+}
+.eyebrow, .section-label {
+  margin: 0 0 1rem;
+  color: var(--ocean);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+h1, h2 { margin-top: 0; line-height: 1.03; text-wrap: balance; }
+h1 { max-width: 9em; margin-bottom: 1.5rem; font-size: clamp(3.2rem, 10vw, 7rem); letter-spacing: -.06em; }
+h2 { max-width: 16em; margin-bottom: 1.15rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+.hero-subtitle, .copy-prose { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.75; }
+.hero-subtitle { max-width: 38rem; }
+.copy-prose { margin: .8rem 0 0; }
+
+.plain-language {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .75rem 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 55%, var(--line));
+  border-radius: 1rem;
+  background: var(--soft-warm);
+}
+.plain-language strong {
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  color: var(--surface);
+  background: var(--warm);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.plain-language p { margin: 0; color: var(--ink); line-height: 1.65; }
+
+.concept-points { margin-top: 1.4rem; }
+.concept-points-label {
+  margin: 0 0 .7rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.concept-points ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.concept-card strong { display: block; margin-bottom: .45rem; }
+.concept-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+.overview, .chapter, .closing { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
+.overview { background: color-mix(in srgb, var(--surface) 42%, transparent); }
+.chapter:nth-of-type(even) { background: color-mix(in srgb, var(--surface) 22%, transparent); }
+interactive-figure {
+  display: block;
+  width: min(calc(100% - 2rem), 68rem);
+  min-height: 29rem;
+  margin: 3rem auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 51, 60, .14);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 1.5rem 4rem rgba(23, 51, 60, .1);
+}
+
+.closing { background: linear-gradient(150deg, var(--soft-ocean), color-mix(in srgb, var(--paper) 86%, var(--surface))); }
+.closing-copy { width: min(calc(100% - 2rem), 68rem); }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.starter-checklist, .boundary-map {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.closing h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.starter-checklist ol { display: grid; gap: .7rem; margin: 0; padding-left: 1.35rem; }
+.starter-checklist li { padding-left: .3rem; line-height: 1.55; }
+.boundary-map ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.scale-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: .2rem .8rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--surface);
+}
+.scale-card strong { grid-row: 1 / span 2; color: var(--ocean); }
+.scale-card span { color: var(--ink); font-size: .82rem; font-weight: 800; }
+.scale-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.closing blockquote {
+  margin: 2rem 0 0;
+  padding: 1.35rem clamp(1rem, 3vw, 1.8rem);
+  border-left: .32rem solid var(--ocean);
+  color: var(--ink);
+  background: var(--surface);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.55;
+}
+.source-note { margin: 1rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+article[data-visual-slug="loop-engineering"] .hero .eyebrow { color: var(--coral); }
+article[data-visual-slug="loop-engineering"] interactive-figure { box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ocean) 12%, transparent); }
+
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header strong { width: 100%; }
+  .language-links { margin-right: auto; }
+  interactive-figure { min-height: 32rem; border-radius: 1rem; }
+  .concept-points ul, .closing-grid { grid-template-columns: 1fr; }
+  .plain-language { grid-template-columns: 1fr; }
+  .scale-card { grid-template-columns: 5.5rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#article">跳到正文</a>
+  <header class="site-header">
+    <strong>VISUAL KIT / PROTOTYPE</strong>
+    <nav class="language-links" aria-label="语言">
+<a href="../en/" hreflang="en">English</a>
+<a href="../zh/" hreflang="zh" aria-current="page">中文</a>
+<a href="../ja/" hreflang="ja">日本語</a>
+    </nav>
+    <button type="button" data-global-motion aria-pressed="false"></button>
+  </header>
+  <main id="article">
+    <article data-visual-slug="compound-interest">
+      <header class="hero">
+        <p class="eyebrow">增长 / 复利 / 指数直觉</p>
+        <h1>每天多赚 0.1%，一年后你会差多少？</h1>
+        <p class="hero-subtitle">脑子里的「每天多一点」常常画成直线；真要按日率再投入，就是连乘 (1+r)^n。本图解对照线性直觉与离散复利，只讲机制，不是炒股教程。</p>
+      </header>
+<section class="overview" aria-labelledby="overview-title">
+  <div class="copy-block">
+    <p class="section-label">复利总览</p>
+    <h2 id="overview-title">直线直觉，对上一条往上弯的曲线</h2>
+    <p class="copy-prose">很多人把固定日率当成固定日增量：每天加同一块，加完就停。这是线性思维——好画，但对应不了「再投入」。</p>
+<p class="copy-prose">复利是每期用 (1+r) 去乘当前余额。前几天几乎贴着直线；后面几天会甩出线性加总永远补不上的缺口。冲击感来自曲线形状，不是发财故事。</p>
+    <aside class="plain-language"><strong>一句话</strong><p>每天加同量是直线；每天按比率再投入是会扯开差距的曲线。</p></aside><div class="concept-points"><p class="concept-points-label">先记住三点</p><ul><li class="concept-card"><strong>加总 vs 连乘</strong><p>线性路径加固定量；复利路径每步乘 (1+r)。</p></li><li class="concept-card"><strong>r 很小，n 很多</strong><p>日率不起眼，重复几百次就不再「不起眼」。</p></li><li class="concept-card"><strong>机制，不是荐股</strong><p>本页讲离散复利，不教你挑资产或跑赢市场。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="ci-overview" data-title="切换：线性直觉 vs 复利曲线" data-copy="{&quot;ariaLabel&quot;:&quot;对比线性加总与复利曲线的交互总览&quot;,&quot;caption&quot;:&quot;切换视图：同一起点，一旦改成连乘，差距会慢慢拉开。&quot;,&quot;controlLabel&quot;:&quot;视图&quot;,&quot;modes&quot;:[{&quot;key&quot;:&quot;linear&quot;,&quot;label&quot;:&quot;线性直觉&quot;,&quot;headline&quot;:&quot;每天加上同一块&quot;,&quot;detail&quot;:&quot;脑子画一条斜坡：第 n 天 ≈ 起点 + n × 固定切片。好画，但低估了再投入。&quot;,&quot;badge&quot;:&quot;加总&quot;},{&quot;key&quot;:&quot;compound&quot;,&quot;label&quot;:&quot;复利曲线&quot;,&quot;headline&quot;:&quot;每天用当前余额去乘&quot;,&quot;detail&quot;:&quot;余额变成 起点 × (1+r)^n。前期看着平，后期曲线会甩开直线。&quot;,&quot;badge&quot;:&quot;连乘&quot;}],&quot;statusLinear&quot;:&quot;线性视图：固定日增量画出一条直斜坡。&quot;,&quot;statusCompound&quot;:&quot;复利视图：每天乘 (1+r)，路径往上弯。&quot;}"><noscript>请启用 JavaScript 以查看交互图解。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="linear-vs-reinvest" aria-labelledby="linear-vs-reinvest-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 01</p>
+    <h2 id="linear-vs-reinvest-title">同一笔本金、同一个日率——两种记账</h2>
+    <p class="copy-prose">固定起点余额和日率 r。路径 A 每天加上同样的绝对量（好比把昨天赚到的拿走、不再放回去）。路径 B 每天把整笔余额乘以 (1+r)。</p>
+<p class="copy-prose">两边的 r 一样，差别只在记账：加总还是再投入。演示数字故意玩具化，好让形状可读。</p>
+    <aside class="plain-language"><strong>一句话</strong><p>同一个率，两本账：一本每天加固定块；一本把增益折回去再乘。</p></aside><div class="concept-points"><p class="concept-points-label">留意什么</p><ul><li class="concept-card"><strong>同一起点</strong><p>两条路径从同一本金出发。</p></li><li class="concept-card"><strong>同一率标签</strong><p>日率百分比相同，更新规则不同。</p></li><li class="concept-card"><strong>差距随 n 变大</strong><p>天数够了，再投入路径会明显高于加总。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="ci-linear" data-title="拖动天数：线性加总 vs 每日再投入" data-copy="{&quot;ariaLabel&quot;:&quot;对比同一日率下线性日增量与每日再投入的滑块图&quot;,&quot;caption&quot;:&quot;拖动天数，看直线斜坡和再投入余额如何分叉。&quot;,&quot;controlLabel&quot;:&quot;已过天数&quot;,&quot;linearLabel&quot;:&quot;线性加总&quot;,&quot;compoundLabel&quot;:&quot;每日再投入&quot;,&quot;principalLabel&quot;:&quot;起点&quot;,&quot;rateLabel&quot;:&quot;日率&quot;,&quot;dayLabel&quot;:&quot;第&quot;,&quot;statusEarly&quot;:&quot;前几天：两条路径还挨得近——线性直觉几乎说得通。&quot;,&quot;statusLate&quot;:&quot;后面几天：再投入已经明显高于直线加总。&quot;}"><noscript>请启用 JavaScript 以查看交互图解。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="daily-extra" aria-labelledby="daily-extra-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 02</p>
+    <h2 id="daily-extra-title">「每天多 0.1%」其实是连乘 365 次</h2>
+    <p class="copy-prose">千分之一听起来可以忽略。离散复利换个问法：把这个因子连乘三百六十五次，会怎样？</p>
+<p class="copy-prose">封闭形式就是 起点 × (1+r)^n。不必恐吓式公式——只要看见：很多次小乘法，会甩开脑子里的「0.1% × 365」。</p>
+    <aside class="plain-language"><strong>一句话</strong><p>0.1% 做一次很小；0.1% 做 365 次是一摞乘法。</p></aside><div class="concept-points"><p class="concept-points-label">留意什么</p><ul><li class="concept-card"><strong>(1+r)^n</strong><p>每天乘一次，指数就是天数。</p></li><li class="concept-card"><strong>不是 0.1% × 365</strong><p>天真的线性外推会漏掉「利滚利」。</p></li><li class="concept-card"><strong>玩具数字</strong><p>示意日率只教形状，不是预测。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="ci-compound" data-title="按天看 (1+r)^n 怎么堆起来" data-copy="{&quot;ariaLabel&quot;:&quot;小日率在多天离散复利下的动画图&quot;,&quot;caption&quot;:&quot;播放或拖动天数，看连乘曲线怎样甩开线性心算。&quot;,&quot;controlLabel&quot;:&quot;天数序号&quot;,&quot;rateLabel&quot;:&quot;日率 r&quot;,&quot;factorLabel&quot;:&quot;增长因子 (1+r)^n&quot;,&quot;linearEstimateLabel&quot;:&quot;天真线性估计&quot;,&quot;compoundValueLabel&quot;:&quot;复利后的值&quot;,&quot;playLabel&quot;:&quot;播放&quot;,&quot;statusEarly&quot;:&quot;还早：复利路径和天真估计几乎贴在一起。&quot;,&quot;statusMid&quot;:&quot;中段：连乘路径开始甩开线性估计。&quot;,&quot;statusLate&quot;:&quot;临近年底：(1+r)^n 对「0.1%×n」思维已经拉开明显差距。&quot;}"><noscript>请启用 JavaScript 以查看交互图解。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="time-horizon" aria-labelledby="time-horizon-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 03</p>
+    <h2 id="time-horizon-title">同一日率，不同窗口：30 天、一年、好几年</h2>
+    <p class="copy-prose">指数敏感不只看 r，还看你允许多少次连乘。固定 r，拉长时间：一个月、一年、好几年。</p>
+<p class="copy-prose">短窗口里曲线几乎像直线；窗口一长，弯度就显眼。这是时间依赖，不是任何真实组合的承诺。</p>
+    <aside class="plain-language"><strong>一句话</strong><p>同一个率，看一个月很温和；天数一大就显得夸张。</p></aside><div class="concept-points"><p class="concept-points-label">留意什么</p><ul><li class="concept-card"><strong>n 是旋钮</strong><p>窗口长度和 r 一样能改变观感。</p></li><li class="concept-card"><strong>短 ≈ 平</strong><p>三十步常常贴线；三百六十五步不会。</p></li><li class="concept-card"><strong>多年再叠</strong><p>多年窗口等于把同一规则叠好几个季节。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="ci-horizon" data-title="对比 30 天、365 天与多年窗口" data-copy="{&quot;ariaLabel&quot;:&quot;同一日复利在短、年、多年窗口下的交互对比&quot;,&quot;caption&quot;:&quot;日率固定，切换时间窗口——看同一条规则陡成什么样。&quot;,&quot;controlLabel&quot;:&quot;时间窗口&quot;,&quot;windows&quot;:[{&quot;key&quot;:&quot;month&quot;,&quot;label&quot;:&quot;30 天&quot;,&quot;headline&quot;:&quot;一个月的步数&quot;,&quot;detail&quot;:&quot;连乘次数少：路径还贴着缓坡。&quot;},{&quot;key&quot;:&quot;year&quot;,&quot;label&quot;:&quot;365 天&quot;,&quot;headline&quot;:&quot;一整年的步数&quot;,&quot;detail&quot;:&quot;连乘几百次：弯离直线已经清楚。&quot;},{&quot;key&quot;:&quot;years&quot;,&quot;label&quot;:&quot;好几年&quot;,&quot;headline&quot;:&quot;叠起来的年份&quot;,&quot;detail&quot;:&quot;同一日规则跨过多个季节，竖直差距拉得很开。&quot;}],&quot;rateLabel&quot;:&quot;日率（固定）&quot;,&quot;endValueLabel&quot;:&quot;相对起点的倍数&quot;,&quot;statusMonth&quot;:&quot;30 天窗口：复利看起来几乎还是线性。&quot;,&quot;statusYear&quot;:&quot;365 天窗口：曲线已经明显离开直线估计。&quot;,&quot;statusYears&quot;:&quot;多年窗口：同一个日率看起来陡得多。&quot;}"><noscript>请启用 JavaScript 以查看交互图解。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="two-paths" aria-labelledby="two-paths-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 04</p>
+    <h2 id="two-paths-title">两条路径并排——再轻提一句真实世界</h2>
+    <p class="copy-prose">把稍慢的日率和稍快的日率叠在一起。比的是相对增速，不是荐股：小小的率差，会在终点变成大缺口。</p>
+<p class="copy-prose">真实世界里，名义复利还可能被价格总水平上涨（通胀）啃掉一块。提醒一句：账本上的单位 ≠ 购买力——更深的通胀故事在另一页。</p>
+    <aside class="plain-language"><strong>一句话</strong><p>稍快的率会随时间领先；通胀可能啃名义账面。</p></aside><div class="concept-points"><p class="concept-points-label">留意什么</p><ul><li class="concept-card"><strong>相对差距</strong><p>两条不同 r 的复利路径会先缓后猛地分叉。</p></li><li class="concept-card"><strong>名义 vs 实际</strong><p>账本增长是名义量；物价也可能涨。</p></li><li class="concept-card"><strong>仍然不是建议</strong><p>没有推荐——只有率和时间的几何关系。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="ci-paths" data-title="叠两条复利路径；可切换通胀浅提示" data-copy="{&quot;ariaLabel&quot;:&quot;叠置两条复利增长路径并可显示通胀提醒的图&quot;,&quot;caption&quot;:&quot;看路径 A、B 如何分开。可选浅色提示：物价上涨会怎样削减名义增益的实际读数。&quot;,&quot;controlLabel&quot;:&quot;显示&quot;,&quot;pathALabel&quot;:&quot;路径 A（较慢 r）&quot;,&quot;pathBLabel&quot;:&quot;路径 B（较快 r）&quot;,&quot;modes&quot;:[{&quot;key&quot;:&quot;nominal&quot;,&quot;label&quot;:&quot;只看名义&quot;,&quot;headline&quot;:&quot;只看账本单位&quot;,&quot;detail&quot;:&quot;两条路径都报名义余额——不做物价调整。&quot;},{&quot;key&quot;:&quot;realHint&quot;,&quot;label&quot;:&quot;真实世界提示&quot;,&quot;headline&quot;:&quot;名义在涨，购买力要当心&quot;,&quot;detail&quot;:&quot;浅色通胀阴影提醒：物价上涨可能削弱名义单位能买到的东西。&quot;}],&quot;statusNominal&quot;:&quot;名义视图：两条复利路径只因日率不同而分叉。&quot;,&quot;statusRealHint&quot;:&quot;提示视图：即便名义曲线上升，通胀也可能摊薄实际索取权。&quot;}"><noscript>请启用 JavaScript 以查看交互图解。</noscript></interactive-figure>
+</section>
+<section class="closing" aria-labelledby="closing-title">
+  <div class="copy-block closing-copy">
+    <p class="section-label">把系统拼回去</p>
+    <h2 id="closing-title">复利是随时间连乘——不是脑子里的直线加总</h2>
+    <p class="copy-prose">离散复利每期用 (1+r) 更新余额。线性直觉加固定切片，会低估「利滚利」一旦启动后缺口怎么拉开。</p>
+<p class="copy-prose">记住三个旋钮——利率、天数、是否再投入——再读「每天多一点点」的标题，就会先问机制，而不是当理财广告。</p>
+    <div class="closing-grid">
+      <div class="starter-checklist">
+        <h3>读者自检</h3>
+        <ol><li>先问故事是在加固定量，还是在乘 (1+r)。</li><li>数清期数 n——不只看 r 的大小。</li><li>把玩具演示和真实市场、费用、风险分开。</li><li>本页只讲机制——不是投资建议。</li></ol>
+      </div>
+      <div class="boundary-map">
+        <h3>四个动作</h3>
+        <ul><li class="scale-card"><strong>加总</strong><span>线性直觉在干什么？</span><p>每天加固定切片。</p></li><li class="scale-card"><strong>连乘</strong><span>复利在干什么？</span><p>用 (1+r) 乘当前余额。</p></li><li class="scale-card"><strong>窗口</strong><span>什么拉大弯度？</span><p>更多期数让曲线离开直线。</p></li><li class="scale-card"><strong>实际</strong><span>什么仍可能侵蚀增益？</span><p>价格总水平上涨会摊薄购买力。</p></li></ul>
+      </div>
+    </div>
+    <blockquote>意外的往往不是那个率——而是连乘了多少次。</blockquote>
+    <p class="source-note">教学说明（公共教育 / 复利）：演示使用示意日率的离散按日复利。连续复利、浮动利率、费用、税收与资产风险更复杂。本页只讲机制——不是预测或投资建议。Wikipedia「Compound interest」可作背景阅读；本题未以 Wiki 热度为主推依据。</p>
+  </div>
+</section>
+    </article>
+  </main>
+  <script>
+    window.__VISUAL_I18N__ = {"pauseAll":"暂停所有动画","resumeAll":"继续所有动画","pause":"暂停","resume":"继续","reset":"重置","waiting":"图解放进视口后才会加载。","loading":"正在准备图解…","error":"图解无法显示，请先阅读上方文字说明。","figureFallback":"请启用 JavaScript 以查看交互图解。","skipToContent":"跳到正文","languageNavigation":"语言","overviewLabel":"复利总览","stepLabel":"步骤"};
+  </script>
+  <script data-prototype-bundle="runtime">
+(() => {
+  "use strict";
+
+  const ui = Object.freeze(window.__VISUAL_I18N__);
+  const registry = new Map();
+  const figures = new Set();
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const tokens = Object.freeze({
+    ink: "var(--visual-ink, #17333c)",
+    muted: "var(--visual-muted, #60747a)",
+    line: "var(--visual-line, #d8ddd7)",
+    ocean: "var(--visual-ocean, #0f7185)",
+    warm: "var(--visual-warm, #ee9d46)",
+    coral: "var(--visual-coral, #d45f50)",
+    paper: "var(--visual-paper, #f4f1e8)",
+    surface: "var(--visual-surface, #fffdf8)"
+  });
+  let globalPaused = false;
+
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+  const call = (instance, method, value) => {
+    if (instance && typeof instance[method] === "function") instance[method](value);
+  };
+
+  class InteractiveFigure extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
+      this._instance = null;
+      this._mounted = false;
+      this._mounting = false;
+      this._visible = false;
+      this._localPaused = false;
+    }
+
+    connectedCallback() {
+      if (this._connected) return;
+      this._connected = true;
+      figures.add(this);
+      this._shadow.innerHTML = `
+        <style>
+          :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+          .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
+          .mount { min-height: inherit; }
+          .runtime-status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; pointer-events: none; }
+          .runtime-status[data-live-only] { position: absolute; inset: auto; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; background: transparent; pointer-events: none; }
+          .runtime-status[hidden] { display: none; }
+          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
+          .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+          button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+          button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+          @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
+        </style>
+        <div class="frame">
+          <div class="stage"><div class="mount"></div><div class="runtime-status" data-runtime-status role="status"></div></div>
+          <div class="controls">
+            <span class="title"></span>
+            <button type="button" data-action="pause" aria-pressed="false"></button>
+            <button type="button" data-action="reset"></button>
+          </div>
+        </div>`;
+
+      this._stage = this._shadow.querySelector(".stage");
+      this._mountRoot = this._shadow.querySelector(".mount");
+      this._status = this._shadow.querySelector("[data-runtime-status]");
+      this._title = this._shadow.querySelector(".title");
+      this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
+      this._resetButton = this._shadow.querySelector('[data-action="reset"]');
+      this._copy = JSON.parse(this.dataset.copy || "{}");
+      this._title.textContent = this.dataset.title || "";
+      this._pauseButton.textContent = ui.pause;
+      this._resetButton.textContent = ui.reset;
+      this._setStatus(ui.waiting);
+
+      this._pauseButton.addEventListener("click", () => {
+        this._localPaused = !this._localPaused;
+        this._syncPlayback();
+      });
+      this._resetButton.addEventListener("click", () => {
+        call(this._instance, "reset");
+        this.dispatchEvent(new CustomEvent("demo-reset", { bubbles: true }));
+      });
+
+      this._observer = new IntersectionObserver((entries) => {
+        this._visible = entries[0]?.isIntersecting ?? false;
+        if (this._visible) this._mount();
+        this._syncPlayback();
+      }, { rootMargin: "180px 0px", threshold: .05 });
+      this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      figures.delete(this);
+      this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
+      call(this._instance, "destroy");
+    }
+
+    async _mount() {
+      if (this._mounted || this._mounting) return;
+      const factory = registry.get(this.dataset.demo);
+      if (!factory) return;
+      this._mounting = true;
+      this._setStatus(ui.loading);
+      try {
+        this._instance = await factory({
+          root: this._mountRoot,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
+          copy: this._copy,
+          motion: !reducedMotion.matches,
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._announce(message)
+        }) || {};
+        this._mounted = true;
+        this.dataset.state = "mounted";
+        this._liveRevision = (this._liveRevision || 0) + 1;
+        this._status.removeAttribute("data-live-only");
+        this._status.textContent = "";
+        this._status.hidden = true;
+        this._resize();
+        this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
+      } catch {
+        this.dataset.state = "error";
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
+      }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
+    }
+
+    _syncPlayback() {
+      const paused = globalPaused || this._localPaused || !this._visible || reducedMotion.matches;
+      this.dataset.playback = paused ? "paused" : "playing";
+      this._pauseButton?.setAttribute("aria-pressed", String(this._localPaused));
+      if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
+      call(this._instance, paused ? "pause" : "resume");
+    }
+
+    _setStatus(message) {
+      this._liveRevision = (this._liveRevision || 0) + 1;
+      this._status.removeAttribute("data-live-only");
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
+
+    _announce(message) {
+      const revision = (this._liveRevision || 0) + 1;
+      this._liveRevision = revision;
+      this._status.hidden = false;
+      this._status.setAttribute("data-live-only", "");
+      this._status.textContent = "";
+      queueMicrotask(() => {
+        if (this._liveRevision !== revision || !this._status.isConnected) return;
+        this._status.textContent = message;
+      });
+    }
+  }
+
+  window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
+    if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
+    registry.set(id, factory);
+    figures.forEach((figure) => {
+      if (figure.dataset.demo === id && figure._visible) figure._mount();
+    });
+  };
+
+  customElements.define("interactive-figure", InteractiveFigure);
+
+  const globalToggle = document.querySelector("[data-global-motion]");
+  const syncGlobalToggle = () => {
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
+    figures.forEach((figure) => figure._syncPlayback());
+  };
+  globalToggle?.addEventListener("click", () => {
+    globalPaused = !globalPaused;
+    syncGlobalToggle();
+  });
+  reducedMotion.addEventListener("change", syncGlobalToggle);
+  syncGlobalToggle();
+})();
+  </script>
+  <script data-prototype-bundle="demos">
+const escapeHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+registerDemo("ci-overview", ({ root, copy, motion, tokens, announce }) => {
+  const buttons = copy.modes.map((mode, index) => `
+    <button type="button" class="ci-ov-btn" data-ci-ov="${index}" aria-pressed="${index === 0}">${escapeHtml(mode.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .ci-ov { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(145deg,color-mix(in srgb,${tokens.ocean} 8%,${tokens.surface}),${tokens.surface} 55%,color-mix(in srgb,${tokens.warm} 10%,${tokens.surface})); }
+      .ci-ov-panel { display:grid; gap:.75rem; padding:1.1rem 1.2rem; border:1px solid ${tokens.line}; border-radius:1.1rem;
+        background:color-mix(in srgb,${tokens.paper} 55%,${tokens.surface}); min-height:12rem; }
+      .ci-ov-badge { display:inline-flex; width:max-content; padding:.25rem .55rem; border-radius:999px; font-size:.68rem; font-weight:850;
+        letter-spacing:.04em; text-transform:uppercase; color:${tokens.surface}; background:${tokens.ocean}; }
+      .ci-ov-panel[data-mode="compound"] .ci-ov-badge { background:${tokens.coral}; }
+      .ci-ov-headline { margin:0; font-size:1.15rem; font-weight:850; line-height:1.35; }
+      .ci-ov-detail { margin:0; color:${tokens.muted}; line-height:1.55; }
+      .ci-ov-viz { position:relative; height:6.5rem; border-radius:.85rem; border:1px dashed ${tokens.line}; overflow:hidden;
+        background:color-mix(in srgb,${tokens.surface} 80%,${tokens.paper}); }
+      .ci-ov-viz svg { width:100%; height:100%; display:block; }
+      .ci-ov-line { fill:none; stroke:${tokens.ocean}; stroke-width:3; stroke-linecap:round;
+        transition:opacity 400ms ease; opacity:.35; }
+      .ci-ov-curve { fill:none; stroke:${tokens.coral}; stroke-width:3; stroke-linecap:round;
+        transition:opacity 400ms ease; opacity:.35; }
+      .ci-ov-panel[data-mode="linear"] .ci-ov-line { opacity:1; }
+      .ci-ov-panel[data-mode="compound"] .ci-ov-curve { opacity:1; }
+      .ci-ov-panel[data-mode="compound"] .ci-ov-line { opacity:.25; }
+      .ci-ov-panel[data-mode="linear"] .ci-ov-curve { opacity:.25; }
+      .ci-ov-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .ci-ov-btn { flex:1 1 8rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink};
+        background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .ci-ov-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .ci-ov-btn:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .ci-ov-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .ci-ov-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .ci-ov.is-paused .ci-ov-line, .ci-ov.is-paused .ci-ov-curve { transition:none; }
+    </style>
+    <div class="ci-ov${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="ci-ov-panel" data-ci-panel data-mode="linear">
+        <span class="ci-ov-badge" data-ci-badge></span>
+        <h3 class="ci-ov-headline" data-ci-headline></h3>
+        <p class="ci-ov-detail" data-ci-detail></p>
+        <div class="ci-ov-viz" aria-hidden="true">
+          <svg viewBox="0 0 320 100" preserveAspectRatio="none">
+            <path class="ci-ov-line" d="M16 78 L304 28"/>
+            <path class="ci-ov-curve" d="M16 78 C 90 76, 160 70, 220 48 C 260 32, 290 18, 304 10"/>
+          </svg>
+        </div>
+      </div>
+      <div class="ci-ov-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${buttons}</div>
+      <p class="ci-ov-status" data-ci-status role="status"></p>
+      <p class="ci-ov-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".ci-ov");
+  const panel = root.querySelector("[data-ci-panel]");
+  const badge = root.querySelector("[data-ci-badge]");
+  const headline = root.querySelector("[data-ci-headline]");
+  const detail = root.querySelector("[data-ci-detail]");
+  const status = root.querySelector("[data-ci-status]");
+  const btns = [...root.querySelectorAll("[data-ci-ov]")];
+
+  const select = (index, speak = false) => {
+    const mode = copy.modes[index];
+    panel.dataset.mode = mode.key;
+    badge.textContent = mode.badge;
+    headline.textContent = mode.headline;
+    detail.textContent = mode.detail;
+    status.textContent = mode.key === "linear" ? copy.statusLinear : copy.statusCompound;
+    btns.forEach((b, i) => b.setAttribute("aria-pressed", String(i === index)));
+    if (speak) announce(status.textContent);
+  };
+
+  btns.forEach((b) => b.addEventListener("click", () => select(Number(b.dataset.ciOv), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("ci-linear", ({ root, copy, motion, tokens, announce }) => {
+  const PRINCIPAL = 100;
+  const RATE = 0.001;
+
+  root.innerHTML = `
+    <style>
+      .ci-lin { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(160deg,color-mix(in srgb,${tokens.paper} 70%,${tokens.surface}),${tokens.surface}); }
+      .ci-lin-meta { display:flex; flex-wrap:wrap; gap:.75rem 1.25rem; font-size:.85rem; color:${tokens.muted}; }
+      .ci-lin-meta strong { color:${tokens.ink}; font-weight:850; }
+      .ci-lin-stage { position:relative; min-height:12rem; border:1px solid ${tokens.line}; border-radius:1rem;
+        background:color-mix(in srgb,${tokens.surface} 85%,${tokens.paper}); padding:.75rem 1rem 1.5rem; }
+      .ci-lin-stage svg { width:100%; height:11rem; display:block; }
+      .ci-lin-legend { display:flex; flex-wrap:wrap; gap:1rem; font-size:.78rem; font-weight:750; margin-top:.35rem; }
+      .ci-lin-swatch { display:inline-block; width:.75rem; height:.75rem; border-radius:999px; margin-right:.35rem; vertical-align:middle; }
+      .ci-lin-control { display:grid; gap:.45rem; }
+      .ci-lin-control label { font-weight:800; font-size:.9rem; }
+      .ci-lin input[type="range"] { width:100%; accent-color:${tokens.ocean}; }
+      .ci-lin-readout { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
+      @media (max-width:640px){ .ci-lin-readout { grid-template-columns:1fr; } }
+      .ci-lin-card { padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 45%,${tokens.surface}); }
+      .ci-lin-card-label { margin:0 0 .25rem; font-size:.72rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:${tokens.muted}; }
+      .ci-lin-card-value { margin:0; font-size:1.25rem; font-weight:850; }
+      .ci-lin-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .ci-lin-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .ci-lin.is-paused path { transition:none; }
+    </style>
+    <div class="ci-lin${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="ci-lin-meta">
+        <span>${escapeHtml(copy.principalLabel)}: <strong>${PRINCIPAL}</strong></span>
+        <span>${escapeHtml(copy.rateLabel)}: <strong>0.1%/day</strong></span>
+      </div>
+      <div class="ci-lin-stage">
+        <svg viewBox="0 0 360 140" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="24" y1="120" x2="340" y2="120" stroke="${tokens.line}" stroke-width="1"/>
+          <line x1="24" y1="20" x2="24" y2="120" stroke="${tokens.line}" stroke-width="1"/>
+          <path data-ci-lin-path fill="none" stroke="${tokens.ocean}" stroke-width="2.5" stroke-linecap="round"/>
+          <path data-ci-cmp-path fill="none" stroke="${tokens.coral}" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <div class="ci-lin-legend">
+          <span><span class="ci-lin-swatch" style="background:${tokens.ocean}"></span>${escapeHtml(copy.linearLabel)}</span>
+          <span><span class="ci-lin-swatch" style="background:${tokens.coral}"></span>${escapeHtml(copy.compoundLabel)}</span>
+        </div>
+      </div>
+      <div class="ci-lin-control">
+        <label for="ci-lin-range">${escapeHtml(copy.controlLabel)}</label>
+        <input id="ci-lin-range" type="range" min="0" max="365" value="30" data-ci-range />
+      </div>
+      <div class="ci-lin-readout">
+        <div class="ci-lin-card">
+          <p class="ci-lin-card-label">${escapeHtml(copy.linearLabel)}</p>
+          <p class="ci-lin-card-value" data-ci-lin-val>—</p>
+        </div>
+        <div class="ci-lin-card">
+          <p class="ci-lin-card-label">${escapeHtml(copy.compoundLabel)}</p>
+          <p class="ci-lin-card-value" data-ci-cmp-val>—</p>
+        </div>
+      </div>
+      <p class="ci-lin-status" data-ci-status role="status"></p>
+      <p class="ci-lin-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".ci-lin");
+  const range = root.querySelector("[data-ci-range]");
+  const status = root.querySelector("[data-ci-status]");
+  const linVal = root.querySelector("[data-ci-lin-val]");
+  const cmpVal = root.querySelector("[data-ci-cmp-val]");
+  const linPath = root.querySelector("[data-ci-lin-path]");
+  const cmpPath = root.querySelector("[data-ci-cmp-path]");
+
+  const fmt = (n) => n.toFixed(2);
+  const yAt = (value, maxV) => 120 - ((value - PRINCIPAL) / (maxV - PRINCIPAL || 1)) * 90;
+
+  const render = (speak = false) => {
+    const days = Number(range.value);
+    const dailyAdd = PRINCIPAL * RATE;
+    const linearEnd = PRINCIPAL + dailyAdd * days;
+    const compoundEnd = PRINCIPAL * Math.pow(1 + RATE, days);
+    const maxV = Math.max(linearEnd, compoundEnd, PRINCIPAL * 1.01);
+
+    const pts = (fn) => {
+      const parts = [];
+      const steps = Math.max(1, days);
+      for (let i = 0; i <= steps; i += Math.max(1, Math.floor(steps / 48))) {
+        const d = Math.min(i, days);
+        const x = 24 + (d / Math.max(days, 1)) * 316;
+        const y = yAt(fn(d), maxV);
+        parts.push(`${parts.length ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)}`);
+      }
+      if (days > 0) {
+        const x = 24 + 316;
+        const y = yAt(fn(days), maxV);
+        parts.push(`L${x.toFixed(1)} ${y.toFixed(1)}`);
+      } else {
+        parts.push(`M24 ${yAt(PRINCIPAL, maxV).toFixed(1)}`);
+      }
+      return parts.join(" ");
+    };
+
+    linPath.setAttribute("d", pts((d) => PRINCIPAL + dailyAdd * d));
+    cmpPath.setAttribute("d", pts((d) => PRINCIPAL * Math.pow(1 + RATE, d)));
+    linVal.textContent = fmt(linearEnd);
+    cmpVal.textContent = fmt(compoundEnd);
+    status.textContent = days < 90 ? copy.statusEarly : copy.statusLate;
+    if (speak) announce(status.textContent);
+  };
+
+  range.addEventListener("input", () => render(true));
+  render();
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => { range.value = "30"; render(); },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("ci-compound", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  root.innerHTML = `
+    <style>
+      .ci-compound-root {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        color: var(--ink);
+        font-family: system-ui, sans-serif;
+      }
+      .ci-compound-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: 0.875rem;
+        padding: 0.75rem;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+      }
+      .ci-compound-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+      }
+      .ci-compound-swatch {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+      }
+      .ci-compound-chart {
+        position: relative;
+        width: 100%;
+        min-height: 320px;
+        background: var(--paper);
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+      }
+      .ci-compound-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+      }
+      .ci-compound-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .ci-compound-control-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.875rem;
+      }
+      .ci-compound-control-row label {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+      }
+      .ci-compound-control-row input[type="range"] {
+        flex: 1;
+        min-width: 0;
+      }
+      .ci-compound-val {
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+        min-width: 3.5rem;
+        text-align: right;
+      }
+      .ci-compound-caption {
+        font-size: 0.875rem;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+    </style>
+    <div class="ci-compound-root">
+      <div class="ci-compound-legend">
+        <div class="ci-compound-legend-item">
+          <div class="ci-compound-swatch" style="background: var(--ocean);"></div>
+          <span class="ci-compound-l-compound"></span>: <span class="ci-compound-v-compound ci-compound-val"></span>
+        </div>
+        <div class="ci-compound-legend-item">
+          <div class="ci-compound-swatch" style="background: var(--coral);"></div>
+          <span class="ci-compound-l-linear"></span>: <span class="ci-compound-v-linear ci-compound-val"></span>
+        </div>
+        <div class="ci-compound-legend-item">
+          <span class="ci-compound-l-factor"></span>: <span class="ci-compound-v-factor ci-compound-val"></span>
+        </div>
+      </div>
+      <div class="ci-compound-chart">
+        <canvas class="ci-compound-canvas" role="img" tabindex="0"></canvas>
+      </div>
+      <div class="ci-compound-controls">
+        <div class="ci-compound-control-row">
+          <label>
+            <span class="ci-compound-l-day"></span>
+            <input type="range" class="ci-compound-day-slider" min="0" max="365" value="0" step="1" />
+            <span class="ci-compound-v-day ci-compound-val">0</span>
+          </label>
+        </div>
+        <div class="ci-compound-control-row">
+          <label>
+            <span class="ci-compound-l-rate"></span>
+            <input type="range" class="ci-compound-rate-slider" min="0.1" max="1.0" value="0.1" step="0.1" />
+            <span class="ci-compound-v-rate ci-compound-val">0.1%</span>
+          </label>
+        </div>
+      </div>
+      <div class="ci-compound-caption"></div>
+    </div>
+  `;
+
+  const qs = (sel) => root.querySelector(sel);
+  const dom = {
+    lCompound: qs('.ci-compound-l-compound'),
+    lLinear: qs('.ci-compound-l-linear'),
+    lFactor: qs('.ci-compound-l-factor'),
+    lDay: qs('.ci-compound-l-day'),
+    lRate: qs('.ci-compound-l-rate'),
+    vCompound: qs('.ci-compound-v-compound'),
+    vLinear: qs('.ci-compound-v-linear'),
+    vFactor: qs('.ci-compound-v-factor'),
+    vDay: qs('.ci-compound-v-day'),
+    vRate: qs('.ci-compound-v-rate'),
+    sliderDay: qs('.ci-compound-day-slider'),
+    sliderRate: qs('.ci-compound-rate-slider'),
+    canvas: qs('.ci-compound-canvas'),
+    caption: qs('.ci-compound-caption')
+  };
+
+  dom.lCompound.textContent = copy.compoundValueLabel;
+  dom.lLinear.textContent = copy.linearEstimateLabel;
+  dom.lFactor.textContent = copy.factorLabel;
+  dom.lDay.textContent = copy.controlLabel;
+  dom.lRate.textContent = copy.rateLabel;
+  dom.caption.textContent = copy.caption;
+  dom.canvas.setAttribute('aria-label', copy.ariaLabel);
+
+  const state = {
+    day: motion ? 0 : 365,
+    rate: 0.001,
+    isPlaying: motion,
+    isDestroyed: false,
+    width: 0,
+    height: 0,
+    dpr: 1,
+    lastAnnouncedStage: -1
+  };
+
+  let rafId;
+  let lastTime = performance.now();
+
+  const updateUI = () => {
+    const dayInt = Math.floor(state.day);
+    const ratePercent = (state.rate * 100).toFixed(1);
+    const valComp = Math.pow(1 + state.rate, dayInt).toFixed(3);
+    const valLin = (1 + state.rate * dayInt).toFixed(3);
+
+    dom.vDay.textContent = dayInt;
+    dom.sliderDay.value = dayInt;
+
+    dom.vRate.textContent = `${ratePercent}%`;
+    dom.sliderRate.value = ratePercent;
+
+    dom.vCompound.textContent = valComp;
+    dom.vLinear.textContent = valLin;
+    dom.vFactor.textContent = `(1 + ${state.rate.toFixed(3)})^${dayInt}`;
+  };
+
+  const checkAnnounce = () => {
+    let stage = -1;
+    if (state.day > 10 && state.day < 150) stage = 0;
+    else if (state.day >= 150 && state.day < 280) stage = 1;
+    else if (state.day >= 280) stage = 2;
+
+    if (stage !== -1 && stage !== state.lastAnnouncedStage) {
+      state.lastAnnouncedStage = stage;
+      if (stage === 0) announce(copy.statusEarly);
+      if (stage === 1) announce(copy.statusMid);
+      if (stage === 2) announce(copy.statusLate);
+    }
+  };
+
+  const draw = () => {
+    if (!state.width || !state.height) return;
+    const ctx = dom.canvas.getContext('2d');
+    ctx.clearRect(0, 0, dom.canvas.width, dom.canvas.height);
+    ctx.save();
+    ctx.scale(state.dpr, state.dpr);
+
+    const w = state.width;
+    const h = state.height;
+    const padLeft = 45;
+    const padRight = 15;
+    const padTop = 20;
+    const padBottom = 25;
+    const graphW = w - padLeft - padRight;
+    const graphH = h - padTop - padBottom;
+
+    const maxDay = 365;
+    const maxVal = Math.pow(1 + state.rate, maxDay);
+    const minVal = 1.0;
+    const valRange = (maxVal - minVal) * 1.05;
+
+    const getX = (d) => padLeft + (d / maxDay) * graphW;
+    const getY = (v) => h - padBottom - ((v - minVal) / valRange) * graphH;
+
+    ctx.strokeStyle = resolveColor(tokens.line);
+    ctx.lineWidth = 1;
+
+    ctx.beginPath();
+    ctx.moveTo(padLeft, h - padBottom);
+    ctx.lineTo(w - padRight, h - padBottom);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(padLeft, padTop);
+    ctx.lineTo(padLeft, h - padBottom);
+    ctx.stroke();
+
+    ctx.fillStyle = resolveColor(tokens.muted);
+    ctx.font = '12px system-ui, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    ctx.fillText((1).toFixed(2), padLeft - 6, getY(1.0));
+    ctx.fillText(maxVal.toFixed(2), padLeft - 6, getY(maxVal));
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText(String(0), getX(0), h - padBottom + 6);
+    ctx.fillText(String(365), getX(365), h - padBottom + 6);
+
+    const currentLinear = 1 + state.rate * state.day;
+    
+    ctx.beginPath();
+    ctx.moveTo(getX(0), getY(1));
+    ctx.lineTo(getX(state.day), getY(currentLinear));
+    ctx.strokeStyle = resolveColor(tokens.coral);
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(getX(0), getY(1));
+    for (let d = 1; d <= state.day; d++) {
+      ctx.lineTo(getX(d), getY(Math.pow(1 + state.rate, d)));
+    }
+    ctx.strokeStyle = resolveColor(tokens.ocean);
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(getX(0), getY(1));
+    for (let d = 1; d <= state.day; d++) {
+      ctx.lineTo(getX(d), getY(Math.pow(1 + state.rate, d)));
+    }
+    ctx.lineTo(getX(state.day), getY(currentLinear));
+    ctx.lineTo(getX(0), getY(1));
+    ctx.fillStyle = resolveColor(tokens.ocean);
+    ctx.globalAlpha = 0.15;
+    ctx.fill();
+    ctx.globalAlpha = 1.0;
+
+    const currentX = getX(state.day);
+    ctx.beginPath();
+    ctx.moveTo(currentX, padTop);
+    ctx.lineTo(currentX, h - padBottom);
+    ctx.strokeStyle = resolveColor(tokens.line);
+    ctx.setLineDash([4, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    const drawDot = (x, y, colorToken) => {
+      ctx.beginPath();
+      ctx.arc(x, y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = resolveColor(colorToken);
+      ctx.fill();
+    };
+    drawDot(currentX, getY(currentLinear), tokens.coral);
+    drawDot(currentX, getY(Math.pow(1 + state.rate, state.day)), tokens.ocean);
+
+    ctx.restore();
+  };
+
+  const loop = (time) => {
+    if (state.isDestroyed) return;
+    if (!state.isPlaying) return;
+
+    const dt = time - lastTime;
+    lastTime = time;
+
+    state.day += (365 / 4000) * dt;
+    if (state.day >= 365) {
+      state.day = 365;
+      state.isPlaying = false;
+    }
+    
+    updateUI();
+    draw();
+    checkAnnounce();
+
+    if (state.isPlaying) {
+      rafId = requestAnimationFrame(loop);
+    }
+  };
+
+  dom.sliderDay.addEventListener('input', (e) => {
+    state.day = parseInt(e.target.value, 10);
+    state.isPlaying = false;
+    if (rafId) cancelAnimationFrame(rafId);
+    updateUI();
+    draw();
+    checkAnnounce();
+  });
+
+  dom.sliderRate.addEventListener('input', (e) => {
+    state.rate = parseFloat(e.target.value) / 100;
+    updateUI();
+    draw();
+  });
+
+  signal.addEventListener('abort', () => {
+    state.isDestroyed = true;
+    if (rafId) cancelAnimationFrame(rafId);
+  });
+
+  updateUI();
+  if (state.isPlaying) {
+    rafId = requestAnimationFrame(loop);
+  }
+
+  return {
+    pause() {
+      state.isPlaying = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      draw();
+    },
+    resume() {
+      if (state.day >= 365) state.day = 0;
+      if (!state.isPlaying) {
+        state.isPlaying = true;
+        lastTime = performance.now();
+        rafId = requestAnimationFrame(loop);
+      }
+    },
+    reset() {
+      state.day = 0;
+      state.lastAnnouncedStage = -1;
+      updateUI();
+      draw();
+    },
+    destroy() {
+      state.isDestroyed = true;
+      if (rafId) cancelAnimationFrame(rafId);
+      root.innerHTML = '';
+    },
+    resize({ width, height, dpr }) {
+      state.width = width;
+      state.height = height;
+      state.dpr = dpr;
+      dom.canvas.width = width * dpr;
+      dom.canvas.height = height * dpr;
+      draw();
+    }
+  };
+});
+
+registerDemo("ci-horizon", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  let width = 0, height = 0, dpr = 1;
+  let isPlaying = true;
+  let progress = motion === false ? 1 : 0;
+  let currentIndex = 0;
+  let rafId;
+  let lastTime = performance.now();
+
+  const daysList = [30, 365, 1095];
+  const r = 0.003; // 0.3% daily rate for clear visual distinction
+  const statuses = [copy.statusMonth, copy.statusYear, copy.statusYears];
+
+  root.innerHTML = `
+    <style>
+      .ci-horizon-root {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-family: system-ui, sans-serif;
+      }
+      .ci-horizon-controls {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .ci-horizon-btn {
+        padding: 0.4rem 0.8rem;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--ink);
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-family: inherit;
+        transition: all 0.2s;
+      }
+      .ci-horizon-btn[aria-pressed="true"] {
+        background: var(--ocean);
+        color: var(--paper);
+        border-color: var(--ocean);
+      }
+      .ci-horizon-legend {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        color: var(--muted);
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .ci-horizon-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .ci-horizon-swatch-line {
+        width: 16px;
+        height: 0;
+        border-top: 2px dashed var(--muted);
+      }
+      .ci-horizon-swatch-curve {
+        width: 16px;
+        height: 3px;
+        background: var(--ocean);
+      }
+      .ci-horizon-stage {
+        position: relative;
+        width: 100%;
+        min-height: 280px;
+      }
+      .ci-horizon-stage canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .ci-horizon-info {
+        background: var(--surface);
+        padding: 1rem;
+        border-radius: 6px;
+        border: 1px solid var(--line);
+      }
+      .ci-horizon-headline {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.05rem;
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .ci-horizon-detail {
+        margin: 0;
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+    </style>
+    <div class="ci-horizon-root">
+      <div class="ci-horizon-controls" role="group" aria-label="${copy.controlLabel}">
+        ${copy.windows.map((w, i) => `
+          <button type="button" class="ci-horizon-btn" aria-pressed="${i === 0}" data-index="${i}">
+            ${w.label}
+          </button>
+        `).join('')}
+      </div>
+      <div class="ci-horizon-legend">
+        <div class="ci-horizon-legend-item">
+          <div class="ci-horizon-swatch-line"></div>
+          <span>${copy.rateLabel}</span>
+        </div>
+        <div class="ci-horizon-legend-item">
+          <div class="ci-horizon-swatch-curve"></div>
+          <span>${copy.endValueLabel}</span>
+        </div>
+      </div>
+      <div class="ci-horizon-stage">
+        <canvas aria-label="${copy.ariaLabel}" role="img"></canvas>
+      </div>
+      <div class="ci-horizon-info" aria-live="polite">
+        <h3 class="ci-horizon-headline">${copy.windows[0].headline}</h3>
+        <p class="ci-horizon-detail">${copy.windows[0].detail}</p>
+      </div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const btns = root.querySelectorAll('.ci-horizon-btn');
+  const headlineEl = root.querySelector('.ci-horizon-headline');
+  const detailEl = root.querySelector('.ci-horizon-detail');
+
+  function updateContent(index) {
+    btns.forEach((b, i) => b.setAttribute('aria-pressed', i === index ? 'true' : 'false'));
+    headlineEl.textContent = copy.windows[index].headline;
+    detailEl.textContent = copy.windows[index].detail;
+    announce(statuses[index]);
+  }
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.getAttribute('data-index'), 10);
+      if (idx !== currentIndex) {
+        currentIndex = idx;
+        if (!isPlaying || motion === false) {
+          progress = 1;
+        } else {
+          progress = 0;
+        }
+        updateContent(idx);
+        draw();
+      }
+    }, { signal });
+  });
+
+  function draw() {
+    if (!width || !height) return;
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+    ctx.scale(dpr, dpr);
+
+    const padLeft = 10;
+    const padRight = 60;
+    const padTop = 20;
+    const padBottom = 20;
+    const plotW = width - padLeft - padRight;
+    const plotH = height - padTop - padBottom;
+
+    const maxX = daysList[currentIndex];
+    const maxY = Math.pow(1 + r, maxX);
+    
+    const mapX = (x) => padLeft + (x / maxX) * plotW;
+    const mapY = (y) => padTop + plotH - ((y - 1) / (maxY - 1)) * plotH;
+
+    const colorMuted = resolveColor(tokens.muted);
+    const colorOcean = resolveColor(tokens.ocean);
+    const colorLine = resolveColor(tokens.line);
+    const colorInk = resolveColor(tokens.ink);
+
+    ctx.beginPath();
+    ctx.strokeStyle = colorLine;
+    ctx.lineWidth = 1;
+    ctx.moveTo(padLeft, padTop);
+    ctx.lineTo(padLeft, padTop + plotH);
+    ctx.lineTo(padLeft + plotW, padTop + plotH);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = colorMuted;
+    ctx.lineWidth = 2;
+    ctx.setLineDash([4, 4]);
+    ctx.moveTo(mapX(0), mapY(1));
+    const linearMaxY = 1 + r * maxX;
+    ctx.lineTo(mapX(maxX), mapY(linearMaxY));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    const currentX = maxX * progress;
+    ctx.beginPath();
+    ctx.strokeStyle = colorOcean;
+    ctx.lineWidth = 3;
+    ctx.lineJoin = 'round';
+    ctx.moveTo(mapX(0), mapY(1));
+    
+    const steps = 100;
+    for (let i = 1; i <= steps; i++) {
+      const x = (currentX * i) / steps;
+      const y = Math.pow(1 + r, x);
+      ctx.lineTo(mapX(x), mapY(y));
+    }
+    ctx.stroke();
+
+    const currentY = Math.pow(1 + r, currentX);
+    const px = mapX(currentX);
+    const py = mapY(currentY);
+
+    ctx.beginPath();
+    ctx.fillStyle = colorOcean;
+    ctx.arc(px, py, 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = colorInk;
+    ctx.font = `600 13px system-ui, sans-serif`;
+    ctx.textBaseline = 'middle';
+    ctx.fillText(currentY.toFixed(2) + 'x', px + 8, py);
+
+    ctx.restore();
+  }
+
+  function loop(time) {
+    if (!rafId) return;
+    
+    const dt = time - lastTime;
+    lastTime = time;
+
+    if (isPlaying && progress < 1) {
+      progress += dt / 1500;
+      if (progress > 1) progress = 1;
+      draw();
+    }
+
+    rafId = requestAnimationFrame(loop);
+  }
+
+  rafId = requestAnimationFrame((t) => {
+    lastTime = t;
+    loop(t);
+  });
+
+  return {
+    pause() {
+      isPlaying = false;
+      draw();
+    },
+    resume() {
+      isPlaying = true;
+      lastTime = performance.now();
+    },
+    reset() {
+      currentIndex = 0;
+      progress = motion === false ? 1 : 0;
+      updateContent(0);
+      lastTime = performance.now();
+      draw();
+    },
+    destroy() {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+      root.innerHTML = '';
+    },
+    resize(dims) {
+      width = dims.width;
+      height = dims.height;
+      dpr = dims.dpr;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      draw();
+    }
+  };
+});
+
+registerDemo("ci-paths", ({ root, copy, motion, tokens, announce }) => {
+  const PRINCIPAL = 100;
+  const RATE_A = 0.0008;
+  const RATE_B = 0.0012;
+  const DAYS = 365;
+
+  const buttons = copy.modes.map((mode, index) => `
+    <button type="button" class="ci-paths-btn" data-ci-paths="${index}" aria-pressed="${index === 0}">${escapeHtml(mode.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .ci-paths { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(150deg,color-mix(in srgb,${tokens.ocean} 6%,${tokens.surface}),${tokens.surface}); }
+      .ci-paths-panel { display:grid; gap:.65rem; padding:1rem 1.1rem; border:1px solid ${tokens.line}; border-radius:1.1rem;
+        background:color-mix(in srgb,${tokens.paper} 50%,${tokens.surface}); }
+      .ci-paths-badge { display:inline-flex; width:max-content; padding:.25rem .55rem; border-radius:999px; font-size:.68rem; font-weight:850;
+        letter-spacing:.04em; text-transform:uppercase; color:${tokens.surface}; background:${tokens.ocean}; }
+      .ci-paths-panel[data-mode="realHint"] .ci-paths-badge { background:${tokens.warm}; color:${tokens.ink}; }
+      .ci-paths-headline { margin:0; font-size:1.1rem; font-weight:850; line-height:1.35; }
+      .ci-paths-detail { margin:0; color:${tokens.muted}; line-height:1.55; }
+      .ci-paths-stage { position:relative; min-height:11rem; border-radius:.85rem; border:1px dashed ${tokens.line}; overflow:hidden;
+        background:color-mix(in srgb,${tokens.surface} 80%,${tokens.paper}); }
+      .ci-paths-stage svg { width:100%; height:11rem; display:block; }
+      .ci-paths-shade { opacity:0; transition:opacity 400ms ease; }
+      .ci-paths-panel[data-mode="realHint"] .ci-paths-shade { opacity:.55; }
+      .ci-paths-legend { display:flex; flex-wrap:wrap; gap:1rem; font-size:.78rem; font-weight:750; }
+      .ci-paths-swatch { display:inline-block; width:.75rem; height:.75rem; border-radius:999px; margin-right:.35rem; vertical-align:middle; }
+      .ci-paths-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .ci-paths-btn { flex:1 1 8rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink};
+        background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .ci-paths-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .ci-paths-btn:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .ci-paths-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .ci-paths-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .ci-paths.is-paused .ci-paths-shade { transition:none; }
+    </style>
+    <div class="ci-paths${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="ci-paths-panel" data-ci-panel data-mode="nominal">
+        <span class="ci-paths-badge" data-ci-badge></span>
+        <h3 class="ci-paths-headline" data-ci-headline></h3>
+        <p class="ci-paths-detail" data-ci-detail></p>
+        <div class="ci-paths-stage" aria-hidden="true">
+          <svg viewBox="0 0 360 140" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="ci-inf-shade" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="${tokens.warm}" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="${tokens.warm}" stop-opacity="0.05"/>
+              </linearGradient>
+            </defs>
+            <path class="ci-paths-shade" data-ci-shade fill="url(#ci-inf-shade)" d=""/>
+            <path data-ci-a fill="none" stroke="${tokens.ocean}" stroke-width="2.5" stroke-linecap="round"/>
+            <path data-ci-b fill="none" stroke="${tokens.coral}" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ci-paths-legend">
+          <span><span class="ci-paths-swatch" style="background:${tokens.ocean}"></span>${escapeHtml(copy.pathALabel)}</span>
+          <span><span class="ci-paths-swatch" style="background:${tokens.coral}"></span>${escapeHtml(copy.pathBLabel)}</span>
+        </div>
+      </div>
+      <div class="ci-paths-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${buttons}</div>
+      <p class="ci-paths-status" data-ci-status role="status"></p>
+      <p class="ci-paths-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".ci-paths");
+  const panel = root.querySelector("[data-ci-panel]");
+  const badge = root.querySelector("[data-ci-badge]");
+  const headline = root.querySelector("[data-ci-headline]");
+  const detail = root.querySelector("[data-ci-detail]");
+  const status = root.querySelector("[data-ci-status]");
+  const pathA = root.querySelector("[data-ci-a]");
+  const pathB = root.querySelector("[data-ci-b]");
+  const shade = root.querySelector("[data-ci-shade]");
+  const btns = [...root.querySelectorAll("[data-ci-paths]")];
+
+  const series = (rate) => {
+    const pts = [];
+    for (let d = 0; d <= DAYS; d += 5) {
+      pts.push(PRINCIPAL * Math.pow(1 + rate, d));
+    }
+    pts.push(PRINCIPAL * Math.pow(1 + rate, DAYS));
+    return pts;
+  };
+  const aVals = series(RATE_A);
+  const bVals = series(RATE_B);
+  const maxV = Math.max(...bVals);
+
+  const toPath = (vals) => vals.map((v, i) => {
+    const x = 16 + (i / (vals.length - 1)) * 328;
+    const y = 120 - ((v - PRINCIPAL) / (maxV - PRINCIPAL)) * 95;
+    return `${i ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)}`;
+  }).join(" ");
+
+  pathA.setAttribute("d", toPath(aVals));
+  pathB.setAttribute("d", toPath(bVals));
+  const top = toPath(bVals.map((v) => v * 0.92));
+  const bottom = toPath(bVals).split(" ").reverse().map((p, i, arr) => {
+    if (i === 0) return p.replace(/^L/, "L").replace(/^M/, "L");
+    return p;
+  });
+  // simpler shade polygon under path B
+  const shadePts = [];
+  bVals.forEach((v, i) => {
+    const x = 16 + (i / (bVals.length - 1)) * 328;
+    const y = 120 - ((v * 0.88 - PRINCIPAL) / (maxV - PRINCIPAL)) * 95;
+    shadePts.push(`${i ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)}`);
+  });
+  shadePts.push(`L${(16 + 328).toFixed(1)} 120 L16 120 Z`);
+  shade.setAttribute("d", shadePts.join(" "));
+
+  const select = (index, speak = false) => {
+    const mode = copy.modes[index];
+    panel.dataset.mode = mode.key;
+    badge.textContent = mode.key === "nominal" ? "Nominal" : "Real hint";
+    // Prefer localized headline fields; badge from mode isn't in copy — use headline badge-ish from key
+    if (mode.badge) badge.textContent = mode.badge;
+    else badge.textContent = mode.key === "nominal" ? "Nominal" : "Hint";
+    headline.textContent = mode.headline;
+    detail.textContent = mode.detail;
+    status.textContent = mode.key === "nominal" ? copy.statusNominal : copy.statusRealHint;
+    btns.forEach((b, i) => b.setAttribute("aria-pressed", String(i === index)));
+    if (speak) announce(status.textContent);
+  };
+
+  btns.forEach((b) => b.addEventListener("click", () => select(Number(b.dataset.ciPaths), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+  </script>
+</body>
+</html>

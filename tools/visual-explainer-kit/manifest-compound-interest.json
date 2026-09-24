@@ -1,0 +1,983 @@
+{
+  "slug": "compound-interest",
+  "renderer": "interactive-explainer",
+  "structure": {
+    "overview": {
+      "demo": "ci-overview"
+    },
+    "steps": [
+      {
+        "id": "linear-vs-reinvest",
+        "demo": "ci-linear"
+      },
+      {
+        "id": "daily-extra",
+        "demo": "ci-compound"
+      },
+      {
+        "id": "time-horizon",
+        "demo": "ci-horizon"
+      },
+      {
+        "id": "two-paths",
+        "demo": "ci-paths"
+      }
+    ]
+  },
+  "locales": {
+    "en": {
+      "lang": "en",
+      "meta": {
+        "title": "0.1% Extra a Day—How Far Ahead Are You in a Year?",
+        "description": "An interactive guide to compound growth: why discrete compounding pulls away from linear add-ups, how a tiny daily rate becomes a large gap over 365 steps, and why time horizon matters as much as the rate—mechanism only, no investment advice."
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "Pause all motion",
+        "resumeAll": "Resume all motion",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset",
+        "waiting": "The visual will load when it enters the viewport.",
+        "loading": "Preparing the visual…",
+        "error": "The visual could not be displayed. Read the explanation above instead.",
+        "figureFallback": "Enable JavaScript to view this interactive explanation.",
+        "skipToContent": "Skip to content",
+        "languageNavigation": "Languages",
+        "overviewLabel": "Compound growth overview",
+        "stepLabel": "Step"
+      },
+      "hero": {
+        "eyebrow": "GROWTH / COMPOUNDING / EXPONENTIAL INTUITION",
+        "title": "0.1% extra a day—how far ahead are you in a year?",
+        "subtitle": "A small daily gain feels like a straight line in the head. Reinvested, it is multiplication: (1+r)^n. This explainer shows linear intuition versus discrete compounding, without turning into a stock tip sheet."
+      },
+      "overview": {
+        "title": "Straight-line intuition vs a curving stack",
+        "body": [
+          "People often treat a fixed daily percentage as if it were a fixed daily amount: add the same slice each day and stop. That is linear thinking—easy to picture, and wrong for reinvestment.",
+          "Compounding multiplies the current balance by (1+r) each period. Early days look almost flat; later days open a gap that linear addition never closes. The shock is the curve, not a get-rich story."
+        ],
+        "plainLanguage": {
+          "label": "Plainly",
+          "body": "Adding the same chunk each day is a line; reinvesting a rate each day is a curve that pulls away."
+        },
+        "keyPointsLabel": "Keep these three ideas",
+        "keyPoints": [
+          {
+            "title": "Add vs multiply",
+            "body": "Linear paths add a fixed amount; compound paths multiply by (1+r) each step."
+          },
+          {
+            "title": "Tiny r, many n",
+            "body": "A small daily rate repeated hundreds of times is not “tiny” in total."
+          },
+          {
+            "title": "Mechanism, not tips",
+            "body": "This page explains discrete compounding—not how to pick assets or beat markets."
+          }
+        ],
+        "demoTitle": "Toggle linear intuition vs compound curve",
+        "copy": {
+          "ariaLabel": "Interactive overview contrasting a linear add-up with a compounding curve",
+          "caption": "Switch views: the same starting point can hide a growing gap once growth multiplies instead of adding.",
+          "controlLabel": "View",
+          "modes": [
+            {
+              "key": "linear",
+              "label": "Linear intuition",
+              "headline": "Same chunk added every day",
+              "detail": "The mind draws a straight ramp: day n ≈ start + n × fixed slice. Easy to sketch—and it understates reinvestment.",
+              "badge": "Add"
+            },
+            {
+              "key": "compound",
+              "label": "Compound curve",
+              "headline": "Each day multiplies the current balance",
+              "detail": "Balance becomes start × (1+r)^n. Early days look gentle; later days open daylight between the curve and the line.",
+              "badge": "Multiply"
+            }
+          ],
+          "statusLinear": "Linear view: a fixed daily add-up draws a straight ramp.",
+          "statusCompound": "Compound view: multiplying by (1+r) each day bends the path upward."
+        }
+      },
+      "steps": [
+        {
+          "id": "linear-vs-reinvest",
+          "number": "01",
+          "title": "One principal, one daily rate—two different stories",
+          "body": [
+            "Fix a starting balance and a daily rate r. Path A adds the same absolute amount each day (as if you pocketed yesterday’s gain and never put it back). Path B multiplies the whole balance by (1+r) every day.",
+            "Both use the same r. Only the accounting differs: add versus reinvest. The demo keeps the numbers toy-sized so the geometry stays readable."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Same rate, two ledgers: one adds a fixed slice; the other folds each gain back in."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Shared starting point",
+              "body": "Both paths begin at the same principal."
+            },
+            {
+              "title": "Shared rate label",
+              "body": "The daily percentage is identical; the update rule is not."
+            },
+            {
+              "title": "Gap grows with n",
+              "body": "After enough days the reinvested path sits clearly above the add-up."
+            }
+          ],
+          "demoTitle": "Slide days: linear add vs daily reinvest",
+          "copy": {
+            "ariaLabel": "Slider comparing a linear daily add-up with daily reinvestment of the same rate",
+            "caption": "Move the day counter. Watch the linear ramp and the reinvested balance diverge.",
+            "controlLabel": "Days elapsed",
+            "linearLabel": "Linear add-up",
+            "compoundLabel": "Daily reinvest",
+            "principalLabel": "Start",
+            "rateLabel": "Daily rate",
+            "dayLabel": "Day",
+            "statusEarly": "Early days: the two paths still look close—linear intuition feels almost fine.",
+            "statusLate": "Later days: reinvestment has pulled clearly above the straight add-up."
+          }
+        },
+        {
+          "id": "daily-extra",
+          "number": "02",
+          "title": "“0.1% extra a day” is 365 multiplications",
+          "body": [
+            "A tenth of a percent sounds negligible. Discrete compounding asks a different question: what happens when you apply that factor three hundred sixty-five times?",
+            "The closed form is start × (1+r)^n. You do not need intimidation math—just enough visualization to feel why many small multiplications outrun a mental sum of “0.1% × 365.”"
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "0.1% once is tiny; 0.1% applied 365 times is a stack of multiplications."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "(1+r)^n",
+              "body": "Each day multiplies; the exponent is the day count."
+            },
+            {
+              "title": "Not 0.1% × 365",
+              "body": "Naive linear scaling undercounts because it ignores growth-on-growth."
+            },
+            {
+              "title": "Toy numbers",
+              "body": "Illustrative rates teach the shape—they are not a forecast."
+            }
+          ],
+          "demoTitle": "Watch (1+r)^n fill in day by day",
+          "copy": {
+            "ariaLabel": "Animated chart of discrete compounding at a small daily rate over many days",
+            "caption": "Advance or scrub through days to see the multiplicative stack outrun a linear mental estimate.",
+            "controlLabel": "Day index",
+            "rateLabel": "Daily rate r",
+            "factorLabel": "Growth factor (1+r)^n",
+            "linearEstimateLabel": "Naive linear estimate",
+            "compoundValueLabel": "Compounded value",
+            "playLabel": "Play",
+            "statusEarly": "Still early: compound and naive estimate sit close together.",
+            "statusMid": "Mid-run: the multiplicative path is pulling ahead of the linear estimate.",
+            "statusLate": "Late in the year: (1+r)^n has opened a clear gap over 0.1%×n thinking."
+          }
+        },
+        {
+          "id": "time-horizon",
+          "number": "03",
+          "title": "Same daily rate, different windows: 30 days vs a year vs years",
+          "body": [
+            "Exponential sensitivity is not only about r—it is about how many multiplications you allow. Hold r fixed and stretch the horizon: a month, a year, several years.",
+            "Short windows keep the curve almost linear to the eye. Longer windows make the bend obvious. That is time dependence, not a promise about any real portfolio."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Same rate looks mild over a month and dramatic once the day count gets large."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "n is a dial",
+              "body": "Horizon length changes the visual drama as much as r does."
+            },
+            {
+              "title": "Short ≈ flat",
+              "body": "Thirty steps often hug a line; three hundred sixty-five do not."
+            },
+            {
+              "title": "Years compound further",
+              "body": "Multi-year windows stack seasons of the same rule."
+            }
+          ],
+          "demoTitle": "Compare 30-day, 365-day, and multi-year windows",
+          "copy": {
+            "ariaLabel": "Interactive comparison of the same daily compound rate across short, yearly, and multi-year horizons",
+            "caption": "Switch the time window while keeping the daily rate fixed—watch how steep the same rule looks.",
+            "controlLabel": "Time window",
+            "windows": [
+              {
+                "key": "month",
+                "label": "30 days",
+                "headline": "A month of steps",
+                "detail": "Few multiplications: the path still hugs a gentle ramp."
+              },
+              {
+                "key": "year",
+                "label": "365 days",
+                "headline": "A full year of steps",
+                "detail": "Hundreds of multiplications: the bend away from the line is clear."
+              },
+              {
+                "key": "years",
+                "label": "Several years",
+                "headline": "Stacked years",
+                "detail": "The same daily rule, repeated across seasons, opens a wide vertical gap."
+              }
+            ],
+            "rateLabel": "Daily rate (fixed)",
+            "endValueLabel": "End multiple of start",
+            "statusMonth": "30-day window: compound growth still looks nearly linear.",
+            "statusYear": "365-day window: the curve has visibly left the straight estimate.",
+            "statusYears": "Multi-year window: the same daily rate looks dramatically steeper."
+          }
+        },
+        {
+          "id": "two-paths",
+          "number": "04",
+          "title": "Two paths side by side—and a light note on the real world",
+          "body": [
+            "Compare a slower daily rate with a slightly faster one. Relative growth—not a stock pick—shows how small rate gaps compound into large end gaps.",
+            "In the real world, nominal compounding can be eroded by a rising price level (inflation). That is a reminder that “units on a ledger” are not the same as purchasing power—we leave the deep inflation story on its own page."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "A slightly faster rate pulls ahead over time; inflation can nibble nominal gains in the wild."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Relative gap",
+              "body": "Two compound paths with different r diverge smoothly, then widely."
+            },
+            {
+              "title": "Nominal vs real",
+              "body": "Ledger growth is nominal; prices can rise too."
+            },
+            {
+              "title": "Still not advice",
+              "body": "No recommendation—only the geometry of rates and time."
+            }
+          ],
+          "demoTitle": "Overlay two compound paths; toggle a soft inflation shade",
+          "copy": {
+            "ariaLabel": "Chart overlaying two compound growth paths with an optional inflation reminder",
+            "caption": "Watch path A and path B diverge. Optionally shade how a rising price level can trim real reading of nominal gains.",
+            "controlLabel": "Display",
+            "pathALabel": "Path A (slower r)",
+            "pathBLabel": "Path B (faster r)",
+            "modes": [
+              {
+                "key": "nominal",
+                "label": "Nominal only",
+                "headline": "Ledger units only",
+                "detail": "Both paths report nominal balances—no price-level adjustment."
+              },
+              {
+                "key": "realHint",
+                "label": "Real-world hint",
+                "headline": "Nominal up, purchasing power caution",
+                "detail": "A light inflation shade reminds you that rising prices can erode what nominal units buy."
+              }
+            ],
+            "statusNominal": "Nominal view: two compound paths diverge by rate alone.",
+            "statusRealHint": "Hint view: inflation can thin the real claim even when nominal curves rise."
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "Put the system back together",
+        "title": "Compounding is multiplication over time—not a straight mental sum",
+        "body": [
+          "Discrete compounding updates a balance by (1+r) each period. Linear intuition adds a fixed slice and underestimates how gaps open once growth feeds on itself.",
+          "Remember the three dials—rate, day count, and reinvestment—and you can read “tiny daily percent” headlines as mechanism questions rather than tips."
+        ],
+        "checklistLabel": "Reader checklist",
+        "checklist": [
+          "Ask whether the story adds a fixed amount or multiplies by (1+r).",
+          "Count the periods n—not only the size of r.",
+          "Separate toy demos from real markets, fees, and risk.",
+          "Treat this page as mechanism only—not investment advice."
+        ],
+        "scaleTitle": "Four moves of the idea",
+        "scaleItems": [
+          {
+            "term": "Add",
+            "question": "What does linear intuition do?",
+            "role": "Adds a fixed slice each day."
+          },
+          {
+            "term": "Multiply",
+            "question": "What does compounding do?",
+            "role": "Multiplies the current balance by (1+r)."
+          },
+          {
+            "term": "Horizon",
+            "question": "What stretches the bend?",
+            "role": "More periods make the curve leave the line."
+          },
+          {
+            "term": "Real",
+            "question": "What can still erode gains?",
+            "role": "A rising price level can thin purchasing power."
+          }
+        ],
+        "finalQuote": "The surprise is not the rate—it is the count of multiplications.",
+        "sourceNote": "Teaching note (public-education / compound interest): demos use discrete daily compounding with illustrative toy rates. Continuous compounding, variable rates, fees, taxes, and asset risk are richer. This page explains mechanism only—not forecasts or investment advice. Wikipedia “Compound interest” is a useful background article; heat ranking was not the selection driver here."
+      }
+    },
+    "zh": {
+      "lang": "zh-CN",
+      "meta": {
+        "title": "每天多赚 0.1%，一年后你会差多少？",
+        "description": "交互图解复利：离散复利为何会甩开线性加总，微小日率经过 365 次乘法如何拉开差距，以及时间窗口为何和利率一样关键——只讲机制，不含投资建议。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "暂停所有动画",
+        "resumeAll": "继续所有动画",
+        "pause": "暂停",
+        "resume": "继续",
+        "reset": "重置",
+        "waiting": "图解放进视口后才会加载。",
+        "loading": "正在准备图解…",
+        "error": "图解无法显示，请先阅读上方文字说明。",
+        "figureFallback": "请启用 JavaScript 以查看交互图解。",
+        "skipToContent": "跳到正文",
+        "languageNavigation": "语言",
+        "overviewLabel": "复利总览",
+        "stepLabel": "步骤"
+      },
+      "hero": {
+        "eyebrow": "增长 / 复利 / 指数直觉",
+        "title": "每天多赚 0.1%，一年后你会差多少？",
+        "subtitle": "脑子里的「每天多一点」常常画成直线；真要按日率再投入，就是连乘 (1+r)^n。本图解对照线性直觉与离散复利，只讲机制，不是炒股教程。"
+      },
+      "overview": {
+        "title": "直线直觉，对上一条往上弯的曲线",
+        "body": [
+          "很多人把固定日率当成固定日增量：每天加同一块，加完就停。这是线性思维——好画，但对应不了「再投入」。",
+          "复利是每期用 (1+r) 去乘当前余额。前几天几乎贴着直线；后面几天会甩出线性加总永远补不上的缺口。冲击感来自曲线形状，不是发财故事。"
+        ],
+        "plainLanguage": {
+          "label": "一句话",
+          "body": "每天加同量是直线；每天按比率再投入是会扯开差距的曲线。"
+        },
+        "keyPointsLabel": "先记住三点",
+        "keyPoints": [
+          {
+            "title": "加总 vs 连乘",
+            "body": "线性路径加固定量；复利路径每步乘 (1+r)。"
+          },
+          {
+            "title": "r 很小，n 很多",
+            "body": "日率不起眼，重复几百次就不再「不起眼」。"
+          },
+          {
+            "title": "机制，不是荐股",
+            "body": "本页讲离散复利，不教你挑资产或跑赢市场。"
+          }
+        ],
+        "demoTitle": "切换：线性直觉 vs 复利曲线",
+        "copy": {
+          "ariaLabel": "对比线性加总与复利曲线的交互总览",
+          "caption": "切换视图：同一起点，一旦改成连乘，差距会慢慢拉开。",
+          "controlLabel": "视图",
+          "modes": [
+            {
+              "key": "linear",
+              "label": "线性直觉",
+              "headline": "每天加上同一块",
+              "detail": "脑子画一条斜坡：第 n 天 ≈ 起点 + n × 固定切片。好画，但低估了再投入。",
+              "badge": "加总"
+            },
+            {
+              "key": "compound",
+              "label": "复利曲线",
+              "headline": "每天用当前余额去乘",
+              "detail": "余额变成 起点 × (1+r)^n。前期看着平，后期曲线会甩开直线。",
+              "badge": "连乘"
+            }
+          ],
+          "statusLinear": "线性视图：固定日增量画出一条直斜坡。",
+          "statusCompound": "复利视图：每天乘 (1+r)，路径往上弯。"
+        }
+      },
+      "steps": [
+        {
+          "id": "linear-vs-reinvest",
+          "number": "01",
+          "title": "同一笔本金、同一个日率——两种记账",
+          "body": [
+            "固定起点余额和日率 r。路径 A 每天加上同样的绝对量（好比把昨天赚到的拿走、不再放回去）。路径 B 每天把整笔余额乘以 (1+r)。",
+            "两边的 r 一样，差别只在记账：加总还是再投入。演示数字故意玩具化，好让形状可读。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "同一个率，两本账：一本每天加固定块；一本把增益折回去再乘。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "同一起点",
+              "body": "两条路径从同一本金出发。"
+            },
+            {
+              "title": "同一率标签",
+              "body": "日率百分比相同，更新规则不同。"
+            },
+            {
+              "title": "差距随 n 变大",
+              "body": "天数够了，再投入路径会明显高于加总。"
+            }
+          ],
+          "demoTitle": "拖动天数：线性加总 vs 每日再投入",
+          "copy": {
+            "ariaLabel": "对比同一日率下线性日增量与每日再投入的滑块图",
+            "caption": "拖动天数，看直线斜坡和再投入余额如何分叉。",
+            "controlLabel": "已过天数",
+            "linearLabel": "线性加总",
+            "compoundLabel": "每日再投入",
+            "principalLabel": "起点",
+            "rateLabel": "日率",
+            "dayLabel": "第",
+            "statusEarly": "前几天：两条路径还挨得近——线性直觉几乎说得通。",
+            "statusLate": "后面几天：再投入已经明显高于直线加总。"
+          }
+        },
+        {
+          "id": "daily-extra",
+          "number": "02",
+          "title": "「每天多 0.1%」其实是连乘 365 次",
+          "body": [
+            "千分之一听起来可以忽略。离散复利换个问法：把这个因子连乘三百六十五次，会怎样？",
+            "封闭形式就是 起点 × (1+r)^n。不必恐吓式公式——只要看见：很多次小乘法，会甩开脑子里的「0.1% × 365」。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "0.1% 做一次很小；0.1% 做 365 次是一摞乘法。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "(1+r)^n",
+              "body": "每天乘一次，指数就是天数。"
+            },
+            {
+              "title": "不是 0.1% × 365",
+              "body": "天真的线性外推会漏掉「利滚利」。"
+            },
+            {
+              "title": "玩具数字",
+              "body": "示意日率只教形状，不是预测。"
+            }
+          ],
+          "demoTitle": "按天看 (1+r)^n 怎么堆起来",
+          "copy": {
+            "ariaLabel": "小日率在多天离散复利下的动画图",
+            "caption": "播放或拖动天数，看连乘曲线怎样甩开线性心算。",
+            "controlLabel": "天数序号",
+            "rateLabel": "日率 r",
+            "factorLabel": "增长因子 (1+r)^n",
+            "linearEstimateLabel": "天真线性估计",
+            "compoundValueLabel": "复利后的值",
+            "playLabel": "播放",
+            "statusEarly": "还早：复利路径和天真估计几乎贴在一起。",
+            "statusMid": "中段：连乘路径开始甩开线性估计。",
+            "statusLate": "临近年底：(1+r)^n 对「0.1%×n」思维已经拉开明显差距。"
+          }
+        },
+        {
+          "id": "time-horizon",
+          "number": "03",
+          "title": "同一日率，不同窗口：30 天、一年、好几年",
+          "body": [
+            "指数敏感不只看 r，还看你允许多少次连乘。固定 r，拉长时间：一个月、一年、好几年。",
+            "短窗口里曲线几乎像直线；窗口一长，弯度就显眼。这是时间依赖，不是任何真实组合的承诺。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "同一个率，看一个月很温和；天数一大就显得夸张。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "n 是旋钮",
+              "body": "窗口长度和 r 一样能改变观感。"
+            },
+            {
+              "title": "短 ≈ 平",
+              "body": "三十步常常贴线；三百六十五步不会。"
+            },
+            {
+              "title": "多年再叠",
+              "body": "多年窗口等于把同一规则叠好几个季节。"
+            }
+          ],
+          "demoTitle": "对比 30 天、365 天与多年窗口",
+          "copy": {
+            "ariaLabel": "同一日复利在短、年、多年窗口下的交互对比",
+            "caption": "日率固定，切换时间窗口——看同一条规则陡成什么样。",
+            "controlLabel": "时间窗口",
+            "windows": [
+              {
+                "key": "month",
+                "label": "30 天",
+                "headline": "一个月的步数",
+                "detail": "连乘次数少：路径还贴着缓坡。"
+              },
+              {
+                "key": "year",
+                "label": "365 天",
+                "headline": "一整年的步数",
+                "detail": "连乘几百次：弯离直线已经清楚。"
+              },
+              {
+                "key": "years",
+                "label": "好几年",
+                "headline": "叠起来的年份",
+                "detail": "同一日规则跨过多个季节，竖直差距拉得很开。"
+              }
+            ],
+            "rateLabel": "日率（固定）",
+            "endValueLabel": "相对起点的倍数",
+            "statusMonth": "30 天窗口：复利看起来几乎还是线性。",
+            "statusYear": "365 天窗口：曲线已经明显离开直线估计。",
+            "statusYears": "多年窗口：同一个日率看起来陡得多。"
+          }
+        },
+        {
+          "id": "two-paths",
+          "number": "04",
+          "title": "两条路径并排——再轻提一句真实世界",
+          "body": [
+            "把稍慢的日率和稍快的日率叠在一起。比的是相对增速，不是荐股：小小的率差，会在终点变成大缺口。",
+            "真实世界里，名义复利还可能被价格总水平上涨（通胀）啃掉一块。提醒一句：账本上的单位 ≠ 购买力——更深的通胀故事在另一页。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "稍快的率会随时间领先；通胀可能啃名义账面。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "相对差距",
+              "body": "两条不同 r 的复利路径会先缓后猛地分叉。"
+            },
+            {
+              "title": "名义 vs 实际",
+              "body": "账本增长是名义量；物价也可能涨。"
+            },
+            {
+              "title": "仍然不是建议",
+              "body": "没有推荐——只有率和时间的几何关系。"
+            }
+          ],
+          "demoTitle": "叠两条复利路径；可切换通胀浅提示",
+          "copy": {
+            "ariaLabel": "叠置两条复利增长路径并可显示通胀提醒的图",
+            "caption": "看路径 A、B 如何分开。可选浅色提示：物价上涨会怎样削减名义增益的实际读数。",
+            "controlLabel": "显示",
+            "pathALabel": "路径 A（较慢 r）",
+            "pathBLabel": "路径 B（较快 r）",
+            "modes": [
+              {
+                "key": "nominal",
+                "label": "只看名义",
+                "headline": "只看账本单位",
+                "detail": "两条路径都报名义余额——不做物价调整。"
+              },
+              {
+                "key": "realHint",
+                "label": "真实世界提示",
+                "headline": "名义在涨，购买力要当心",
+                "detail": "浅色通胀阴影提醒：物价上涨可能削弱名义单位能买到的东西。"
+              }
+            ],
+            "statusNominal": "名义视图：两条复利路径只因日率不同而分叉。",
+            "statusRealHint": "提示视图：即便名义曲线上升，通胀也可能摊薄实际索取权。"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "把系统拼回去",
+        "title": "复利是随时间连乘——不是脑子里的直线加总",
+        "body": [
+          "离散复利每期用 (1+r) 更新余额。线性直觉加固定切片，会低估「利滚利」一旦启动后缺口怎么拉开。",
+          "记住三个旋钮——利率、天数、是否再投入——再读「每天多一点点」的标题，就会先问机制，而不是当理财广告。"
+        ],
+        "checklistLabel": "读者自检",
+        "checklist": [
+          "先问故事是在加固定量，还是在乘 (1+r)。",
+          "数清期数 n——不只看 r 的大小。",
+          "把玩具演示和真实市场、费用、风险分开。",
+          "本页只讲机制——不是投资建议。"
+        ],
+        "scaleTitle": "四个动作",
+        "scaleItems": [
+          {
+            "term": "加总",
+            "question": "线性直觉在干什么？",
+            "role": "每天加固定切片。"
+          },
+          {
+            "term": "连乘",
+            "question": "复利在干什么？",
+            "role": "用 (1+r) 乘当前余额。"
+          },
+          {
+            "term": "窗口",
+            "question": "什么拉大弯度？",
+            "role": "更多期数让曲线离开直线。"
+          },
+          {
+            "term": "实际",
+            "question": "什么仍可能侵蚀增益？",
+            "role": "价格总水平上涨会摊薄购买力。"
+          }
+        ],
+        "finalQuote": "意外的往往不是那个率——而是连乘了多少次。",
+        "sourceNote": "教学说明（公共教育 / 复利）：演示使用示意日率的离散按日复利。连续复利、浮动利率、费用、税收与资产风险更复杂。本页只讲机制——不是预测或投资建议。Wikipedia「Compound interest」可作背景阅读；本题未以 Wiki 热度为主推依据。"
+      }
+    },
+    "ja": {
+      "lang": "ja",
+      "meta": {
+        "title": "毎日0.1%多く増やすと、一年後どれだけ差がつく？",
+        "description": "複利のインタラクティブ解説：離散複利が線形の足し算からどう離れるか、ごく小さな日次レートが365回の掛け算で大きな差になる理由、時間窓がレートと同じくらい重要な理由——仕組みのみ、投資助言なし。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "すべての動きを停止",
+        "resumeAll": "すべての動きを再開",
+        "pause": "一時停止",
+        "resume": "再開",
+        "reset": "リセット",
+        "waiting": "ビジュアルは表示領域に入ると読み込まれます。",
+        "loading": "ビジュアルを準備しています…",
+        "error": "ビジュアルを表示できません。上の説明を読んでください。",
+        "figureFallback": "インタラクティブ解説を見るには JavaScript を有効にしてください。",
+        "skipToContent": "本文へスキップ",
+        "languageNavigation": "言語",
+        "overviewLabel": "複利の概要",
+        "stepLabel": "ステップ"
+      },
+      "hero": {
+        "eyebrow": "成長 / 複利 / 指数的直感",
+        "title": "毎日0.1%多く増やすと、一年後どれだけ差がつく？",
+        "subtitle": "頭の中の「毎日ちょっと多く」は直線になりがち。日次で再投資すると掛け算 (1+r)^n。線形直感と離散複利を見比べる図解で、仕組みだけ——株の指南ではない。"
+      },
+      "overview": {
+        "title": "直線の直感と、上へ曲がる積み上げ",
+        "body": [
+          "固定の日次パーセントを、固定の日次「額」のように扱いがちだ。毎日同じ切片を足して終わり——それが線形思考で、再投資には対応しない。",
+          "複利は毎期、現在残高に (1+r) を掛ける。序盤はほぼ平らに見え、後半で線形の足し算が追いつかない差が開く。驚きは曲線の形であり、一攫千金の話ではない。"
+        ],
+        "plainLanguage": {
+          "label": "ひとことで",
+          "body": "毎日同じ量を足すのは直線；比率で再投資するのは差が開く曲線。"
+        },
+        "keyPointsLabel": "まず三点",
+        "keyPoints": [
+          {
+            "title": "足すか掛けるか",
+            "body": "線形は固定量を足し、複利は毎ステップ (1+r) を掛ける。"
+          },
+          {
+            "title": "小さな r、多い n",
+            "body": "日次レートは地味でも、何百回も繰り返せば地味でなくなる。"
+          },
+          {
+            "title": "仕組みであり助言ではない",
+            "body": "離散複利の説明であり、銘柄選びや市場超えの指南ではない。"
+          }
+        ],
+        "demoTitle": "線形直感と複利曲線を切り替える",
+        "copy": {
+          "ariaLabel": "線形の足し算と複利曲線を対比するインタラクティブ概要",
+          "caption": "表示を切り替え：掛け算に変わると、同じ起点から差が広がる。",
+          "controlLabel": "表示",
+          "modes": [
+            {
+              "key": "linear",
+              "label": "線形の直感",
+              "headline": "毎日同じ切片を足す",
+              "detail": "頭は直線の坂を描く：n 日目 ≈ 起点 + n × 固定切片。描きやすいが再投資を過小評価する。",
+              "badge": "加算"
+            },
+            {
+              "key": "compound",
+              "label": "複利曲線",
+              "headline": "毎日、現在残高に掛ける",
+              "detail": "残高は 起点 × (1+r)^n。序盤は穏やか、後半で直線から離れる。",
+              "badge": "乗算"
+            }
+          ],
+          "statusLinear": "線形表示：固定の日次加算が直線の坂になる。",
+          "statusCompound": "複利表示：毎日 (1+r) を掛け、経路が上へ曲がる。"
+        }
+      },
+      "steps": [
+        {
+          "id": "linear-vs-reinvest",
+          "number": "01",
+          "title": "同じ元本・同じ日次レート——二つの記帳",
+          "body": [
+            "起点残高と日次レート r を固定する。経路 A は毎日同じ絶対額を足す（昨日の増分を持ち出して戻さないイメージ）。経路 B は毎日残高全体に (1+r) を掛ける。",
+            "r は同じ。違うのは記帳：加算か再投資か。数字は玩具サイズにして形を読みやすくする。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "同じレート、二つの台帳：一方は固定切片を足し、他方は増分を戻して掛ける。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "同じ起点",
+              "body": "両経路は同じ元本から始まる。"
+            },
+            {
+              "title": "同じレート名",
+              "body": "日次パーセントは同一だが更新規則が違う。"
+            },
+            {
+              "title": "差は n とともに",
+              "body": "日数が足りると再投資経路が加算をはっきり上回る。"
+            }
+          ],
+          "demoTitle": "日数を滑らせ：線形加算 vs 日次再投資",
+          "copy": {
+            "ariaLabel": "同じ日次レートでの線形日次加算と日次再投資を比べるスライダー",
+            "caption": "日数を動かし、直線の坂と再投資残高の分岐を見る。",
+            "controlLabel": "経過日数",
+            "linearLabel": "線形加算",
+            "compoundLabel": "日次再投資",
+            "principalLabel": "起点",
+            "rateLabel": "日次レート",
+            "dayLabel": "日",
+            "statusEarly": "序盤：二つの経路はまだ近く、線形直感がほぼ通じる。",
+            "statusLate": "後半：再投資が直線加算をはっきり上回る。"
+          }
+        },
+        {
+          "id": "daily-extra",
+          "number": "02",
+          "title": "「毎日0.1%多く」は365回の掛け算",
+          "body": [
+            "0.1パーセントは無視できそうに聞こえる。離散複利は問いを変える：その因子を365回掛けたらどうなるか？",
+            "閉じた形は 起点 × (1+r)^n。吓人な式は不要——小さな掛け算の積み重ねが、頭の中の「0.1%×365」を追い越すのを見れば足りる。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "0.1%を一度は小さい；0.1%を365回は掛け算の山。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "(1+r)^n",
+              "body": "毎日掛け、指数は日数。"
+            },
+            {
+              "title": "0.1%×365ではない",
+              "body": "素朴な線形外挿は成長の上の成長を落とす。"
+            },
+            {
+              "title": "玩具の数字",
+              "body": "例示レートは形を教えるだけで予測ではない。"
+            }
+          ],
+          "demoTitle": "日ごとに (1+r)^n が積み上がる様子",
+          "copy": {
+            "ariaLabel": "小さな日次レートの離散複利を多日にわたって示すアニメーション図",
+            "caption": "再生や日数スクラブで、掛け算曲線が線形の目安を追い越すのを見る。",
+            "controlLabel": "日インデックス",
+            "rateLabel": "日次レート r",
+            "factorLabel": "成長因子 (1+r)^n",
+            "linearEstimateLabel": "素朴な線形見積もり",
+            "compoundValueLabel": "複利後の値",
+            "playLabel": "再生",
+            "statusEarly": "まだ早い：複利と素朴見積もりは近い。",
+            "statusMid": "中盤：掛け算の経路が線形見積もりを引き離し始める。",
+            "statusLate": "年末近く：(1+r)^n が「0.1%×n」思考から明確に離れる。"
+          }
+        },
+        {
+          "id": "time-horizon",
+          "number": "03",
+          "title": "同じ日次レート、違う窓：30日・1年・数年",
+          "body": [
+            "指数的な敏感さは r だけではなく、掛け算を何回許すかでも決まる。r を固定して窓を伸ばす：1か月、1年、数年。",
+            "短い窓では曲線はほぼ直線に見える。長い窓では曲がりがはっきりする。時間依存であり、実ポートフォリオの約束ではない。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "同じレートでも1か月は穏やか、日数が増えると劇的に見える。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "n はダイヤル",
+              "body": "窓の長さは r と同じくらい見た目を変える。"
+            },
+            {
+              "title": "短 ≈ 平",
+              "body": "30ステップは線に寄り、365は寄り切らない。"
+            },
+            {
+              "title": "年を重ねる",
+              "body": "多年窓は同じ規則を季節ごとに積み重ねる。"
+            }
+          ],
+          "demoTitle": "30日・365日・多年窓を比べる",
+          "copy": {
+            "ariaLabel": "同じ日次複利を短い窓・年・多年で比べるインタラクティブ図",
+            "caption": "日次レート固定のまま時間窓を切り替え、同じ規則の急さの違いを見る。",
+            "controlLabel": "時間窓",
+            "windows": [
+              {
+                "key": "month",
+                "label": "30日",
+                "headline": "1か月分のステップ",
+                "detail": "掛け算が少なく、経路はまだ緩やかな坂に沿う。"
+              },
+              {
+                "key": "year",
+                "label": "365日",
+                "headline": "1年分のステップ",
+                "detail": "何百回もの掛け算で、直線からの離れがはっきりする。"
+              },
+              {
+                "key": "years",
+                "label": "数年",
+                "headline": "積み重なる年",
+                "detail": "同じ日次規則が季節をまたぎ、縦の差が大きく開く。"
+              }
+            ],
+            "rateLabel": "日次レート（固定）",
+            "endValueLabel": "起点に対する倍率",
+            "statusMonth": "30日窓：複利はまだほぼ線形に見える。",
+            "statusYear": "365日窓：曲線が直線見積もりからはっきり離れる。",
+            "statusYears": "多年窓：同じ日次レートがずっと急に見える。"
+          }
+        },
+        {
+          "id": "two-paths",
+          "number": "04",
+          "title": "二つの経路を並べ——現実への軽い注記",
+          "body": [
+            "やや遅い日次レートとやや速いレートを重ねる。見るのは相対成長であり銘柄推奨ではない：小さなレート差が終点で大きな差になる。",
+            "現実では名目の複利が物価上昇（インフレ）に削られることもある。台帳の単位は購買力と同じではない——深いインフレの話は別ページに任せる。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "やや速いレートは時間とともに先行し、インフレは名目の増分をかじり得る。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "相対ギャップ",
+              "body": "異なる r の二つの複利経路は滑らかに、やがて大きく分岐する。"
+            },
+            {
+              "title": "名目 vs 実質",
+              "body": "台帳の成長は名目；物価も上がり得る。"
+            },
+            {
+              "title": "それでも助言ではない",
+              "body": "推奨なし——レートと時間の幾何だけ。"
+            }
+          ],
+          "demoTitle": "二つの複利経路を重ね、インフレの薄いヒントを切り替え",
+          "copy": {
+            "ariaLabel": "二つの複利成長経路を重ね、任意でインフレ注意を示す図",
+            "caption": "経路 A と B の分岐を見る。物価上昇が名目増分の実質読取をどう削り得るかの薄いヒントも切り替え可能。",
+            "controlLabel": "表示",
+            "pathALabel": "経路 A（遅い r）",
+            "pathBLabel": "経路 B（速い r）",
+            "modes": [
+              {
+                "key": "nominal",
+                "label": "名目のみ",
+                "headline": "台帳単位のみ",
+                "detail": "両経路とも名目残高——物価調整なし。"
+              },
+              {
+                "key": "realHint",
+                "label": "現実のヒント",
+                "headline": "名目は上がっても購買力には注意",
+                "detail": "薄いインフレの陰影が、物価上昇が名目単位の購買を削り得ることを思い出させる。"
+              }
+            ],
+            "statusNominal": "名目表示：二つの複利経路はレートだけで分岐する。",
+            "statusRealHint": "ヒント表示：名目曲線が上がっても、インフレは実質の請求を薄くし得る。"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "システムを組み立て直す",
+        "title": "複利は時間をかけた掛け算——頭の中の直線加算ではない",
+        "body": [
+          "離散複利は毎期 (1+r) で残高を更新する。線形直感は固定切片を足し、成長が成長を生むと差がどう開くかを過小評価する。",
+          "レート・日数・再投資の三つのダイヤルを覚えれば、「毎日ちょっと」の見出しを助言ではなく仕組みの問いとして読める。"
+        ],
+        "checklistLabel": "読者チェック",
+        "checklist": [
+          "固定量の加算か (1+r) の乗算かを問う。",
+          "期間数 n を数える——r の大きさだけ見ない。",
+          "玩具デモと実市場・費用・リスクを分ける。",
+          "本ページは仕組みのみ——投資助言ではない。"
+        ],
+        "scaleTitle": "四つの動き",
+        "scaleItems": [
+          {
+            "term": "加算",
+            "question": "線形直感は何をする？",
+            "role": "毎日固定切片を足す。"
+          },
+          {
+            "term": "乗算",
+            "question": "複利は何をする？",
+            "role": "現在残高に (1+r) を掛ける。"
+          },
+          {
+            "term": "地平",
+            "question": "曲がりを伸ばすのは？",
+            "role": "期間が増えると曲線が直線から離れる。"
+          },
+          {
+            "term": "実質",
+            "question": "なお削り得るものは？",
+            "role": "物価水準の上昇が購買力を薄くし得る。"
+          }
+        ],
+        "finalQuote": "驚きはレートそのものより、掛け算の回数にある。",
+        "sourceNote": "教材ノート（公共教育 / 複利）：デモは例示の日次レートによる離散複利。連続複利、変動レート、手数料、税、資産リスクはより豊か。本ページは仕組みのみ——予測や投資助言ではない。Wikipedia「Compound interest」は背景として有用；ここでは Wiki 熱度を主推の根拠にしていない。"
+      }
+    }
+  }
+}

@@ -26,6 +26,7 @@ const homeVisuals = visuals.map((visual) => ({
   isPrisonersDilemma: visual.cover === 'prisoners-dilemma',
   isButterflyEffect: visual.cover === 'butterfly-effect',
   isInflationPurchasingPower: visual.cover === 'inflation-purchasing-power',
+  isCompoundInterest: visual.cover === 'compound-interest',
 }));
 ---
 
@@ -164,6 +165,20 @@ const homeVisuals = visuals.map((visual) => ({
             <div class="absolute left-[10%] top-[14%] rounded-full border border-cyan-100/35 bg-cyan-100/10 px-3 py-1 text-xs font-bold tracking-wide text-cyan-50/90">δx₀ → fork</div>
             <div class="absolute right-[12%] top-[16%] text-2xl font-bold text-rose-100/95">↗</div>
           </>
+
+        ) : visual.isCompoundInterest ? (
+          <>
+            <div class="absolute inset-8 rounded-[2rem] border border-white/15 bg-slate-950/30 backdrop-blur-sm"></div>
+            <svg class="absolute inset-0 h-full w-full" viewBox="0 0 420 320" fill="none" aria-hidden="true">
+              <path d="M48 240 L380 140" stroke="rgba(103,232,249,.55)" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8"/>
+              <path d="M48 240 C 140 236, 210 210, 270 150 C 320 100, 355 60, 380 42" stroke="rgba(251,113,133,.95)" stroke-width="4.5" stroke-linecap="round"/>
+              <circle cx="48" cy="240" r="7" fill="rgba(255,255,255,.95)"/>
+              <circle cx="380" cy="42" r="7" fill="rgba(251,113,133,.95)"/>
+            </svg>
+            <div class="absolute left-[10%] top-[14%] rounded-full border border-cyan-100/35 bg-cyan-100/10 px-3 py-1 text-xs font-bold tracking-wide text-cyan-50/90">(1+r)ⁿ · gap</div>
+            <div class="absolute right-[12%] top-[16%] text-2xl font-bold text-rose-100/95">↗</div>
+          </>
+
         ) : visual.isInflationPurchasingPower ? (
           <>
             <div class="absolute inset-8 rounded-[2rem] border border-white/15 bg-slate-950/30 backdrop-blur-sm"></div>

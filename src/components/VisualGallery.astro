@@ -101,6 +101,7 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
       const isPrisonersDilemma = work.cover === 'prisoners-dilemma';
       const isButterflyEffect = work.cover === 'butterfly-effect';
       const isInflationPurchasingPower = work.cover === 'inflation-purchasing-power';
+      const isCompoundInterest = work.cover === 'compound-interest';
 
       return (
         <article id={work.slug} data-visual-card={work.slug} class="group overflow-hidden rounded-3xl border border-surface-200/80 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover dark:border-surface-800 dark:bg-surface-900">
@@ -191,6 +192,22 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
                 <div class="absolute right-[10%] top-[12%] text-lg font-bold text-rose-100/90">↗</div>
               </>
             )}
+
+            {isCompoundInterest && (
+              <>
+                {/* Linear ramp vs compounding curve pulling away */}
+                <div class="absolute inset-6 rounded-3xl border border-white/15 bg-slate-950/30 backdrop-blur-sm"></div>
+                <svg class="absolute inset-0 h-full w-full" viewBox="0 0 400 224" fill="none" aria-hidden="true">
+                  <path d="M36 168 L360 96" stroke="rgba(103,232,249,.55)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 6"/>
+                  <path d="M36 168 C 120 166, 190 150, 250 110 C 300 72, 335 42, 360 28" stroke="rgba(251,113,133,.95)" stroke-width="3.5" stroke-linecap="round"/>
+                  <circle cx="36" cy="168" r="5" fill="rgba(255,255,255,.9)"/>
+                  <circle cx="360" cy="28" r="5" fill="rgba(251,113,133,.95)"/>
+                </svg>
+                <div class="absolute left-[10%] top-[14%] rounded-full border border-cyan-100/35 bg-cyan-100/10 px-2 py-0.5 text-[10px] font-bold tracking-wide text-cyan-50/90">(1+r)ⁿ</div>
+                <div class="absolute right-[10%] top-[12%] text-lg font-bold text-rose-100/90">↗</div>
+              </>
+            )}
+
             {isInflationPurchasingPower && (
               <>
                 {/* Nominal bills vs thinning basket slice — purchasing-power dilution */}
