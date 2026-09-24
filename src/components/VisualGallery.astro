@@ -104,6 +104,7 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
       const isCompoundInterest = work.cover === 'compound-interest';
       const isBayesLabResult = work.cover === 'bayes-lab-result';
       const isNormalDistribution = work.cover === 'normal-distribution';
+      const isR0HerdImmunity = work.cover === 'r0-herd-immunity';
 
       return (
         <article id={work.slug} data-visual-card={work.slug} class="group overflow-hidden rounded-3xl border border-surface-200/80 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover dark:border-surface-800 dark:bg-surface-900">
@@ -217,6 +218,29 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
               </>
             )}
 
+
+
+            {isR0HerdImmunity && (
+              <>
+                {/* Thinning transmission tree + threshold waterline */}
+                <div class="absolute inset-6 rounded-3xl border border-white/15 bg-slate-950/30 backdrop-blur-sm"></div>
+                <svg class="absolute inset-0 h-full w-full" viewBox="0 0 400 224" fill="none" aria-hidden="true">
+                  <path d="M200 36 L200 70" stroke="rgba(251,113,133,.95)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M200 70 L140 110" stroke="rgba(251,113,133,.75)" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M200 70 L260 110" stroke="rgba(103,232,249,.55)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 5"/>
+                  <path d="M140 110 L110 155" stroke="rgba(251,113,133,.65)" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M140 110 L170 155" stroke="rgba(103,232,249,.4)" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4"/>
+                  <circle cx="200" cy="36" r="6" fill="rgba(251,113,133,.95)"/>
+                  <circle cx="140" cy="110" r="5" fill="rgba(251,113,133,.85)"/>
+                  <circle cx="260" cy="110" r="5" fill="rgba(103,232,249,.7)"/>
+                  <circle cx="110" cy="155" r="4" fill="rgba(251,113,133,.7)"/>
+                  <circle cx="170" cy="155" r="4" fill="rgba(165,243,252,.55)"/>
+                  <line x1="48" y1="178" x2="352" y2="178" stroke="rgba(251,191,36,.75)" stroke-width="2" stroke-dasharray="6 5"/>
+                </svg>
+                <div class="absolute left-[10%] top-[14%] rounded-full border border-rose-100/35 bg-rose-100/10 px-2 py-0.5 text-[10px] font-bold tracking-wide text-rose-50/90">chains</div>
+                <div class="absolute right-[10%] top-[14%] rounded-full border border-amber-100/35 bg-amber-100/10 px-2 py-0.5 text-[10px] font-bold tracking-wide text-amber-50/90">1−1/R₀</div>
+              </>
+            )}
 
             {isNormalDistribution && (
               <>

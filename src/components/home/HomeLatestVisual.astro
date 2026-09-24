@@ -29,6 +29,7 @@ const homeVisuals = visuals.map((visual) => ({
   isCompoundInterest: visual.cover === 'compound-interest',
   isBayesLabResult: visual.cover === 'bayes-lab-result',
   isNormalDistribution: visual.cover === 'normal-distribution',
+  isR0HerdImmunity: visual.cover === 'r0-herd-immunity',
 }));
 ---
 
@@ -169,6 +170,27 @@ const homeVisuals = visuals.map((visual) => ({
           </>
 
 
+
+
+        ) : visual.isR0HerdImmunity ? (
+          <>
+            <div class="absolute inset-8 rounded-[2rem] border border-white/15 bg-slate-950/30 backdrop-blur-sm"></div>
+            <svg class="absolute inset-0 h-full w-full" viewBox="0 0 420 320" fill="none" aria-hidden="true">
+              <path d="M210 48 L210 100" stroke="rgba(251,113,133,.95)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M210 100 L140 160" stroke="rgba(251,113,133,.8)" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M210 100 L280 160" stroke="rgba(103,232,249,.55)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="7 6"/>
+              <path d="M140 160 L100 230" stroke="rgba(251,113,133,.7)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M140 160 L180 230" stroke="rgba(165,243,252,.45)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 5"/>
+              <circle cx="210" cy="48" r="8" fill="rgba(251,113,133,.95)"/>
+              <circle cx="140" cy="160" r="7" fill="rgba(251,113,133,.85)"/>
+              <circle cx="280" cy="160" r="7" fill="rgba(103,232,249,.75)"/>
+              <circle cx="100" cy="230" r="6" fill="rgba(251,113,133,.75)"/>
+              <circle cx="180" cy="230" r="6" fill="rgba(165,243,252,.55)"/>
+              <line x1="56" y1="268" x2="364" y2="268" stroke="rgba(251,191,36,.8)" stroke-width="3" stroke-dasharray="8 6"/>
+            </svg>
+            <div class="absolute left-[10%] top-[12%] rounded-full border border-rose-100/35 bg-rose-100/10 px-3 py-1 text-xs font-bold tracking-wide text-rose-50/90">thinning chains</div>
+            <div class="absolute right-[10%] top-[12%] rounded-full border border-amber-100/35 bg-amber-100/10 px-3 py-1 text-xs font-bold tracking-wide text-amber-50/90">threshold</div>
+          </>
 
         ) : visual.isNormalDistribution ? (
           <>

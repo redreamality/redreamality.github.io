@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="基本再生産数 R₀ と集団免疫閾値のインタラクティブ解説：感染連鎖がどう伸び／熄むか、免疫が感受性プールをどう縮めるか、なぜカバー率 ≈ 1−1/R₀ で実効再生産数を1未満にできるか——教材モデルであり政策助言ではない。">
+  <title>どんなに強いウイルスでも、接種がある閾値を超えると流行はなぜ自ら収束するのか？</title>
+  <style data-prototype-bundle="article">
+:root {
+  color-scheme: light;
+  --paper: #f4f1e8;
+  --surface: #fffdf8;
+  --ink: #17333c;
+  --muted: #60747a;
+  --line: #d8ddd7;
+  --ocean: #0f7185;
+  --warm: #ee9d46;
+  --coral: #d45f50;
+  --soft-ocean: color-mix(in srgb, var(--ocean) 9%, var(--surface));
+  --soft-warm: color-mix(in srgb, var(--warm) 12%, var(--surface));
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body { margin: 0; overflow-x: clip; color: var(--ink); background: radial-gradient(circle at 20% 0, #dff3ef 0, transparent 30rem), var(--paper); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .75rem;
+  left: .75rem;
+  padding: .65rem .9rem;
+  color: white;
+  background: var(--ink);
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.75rem;
+  padding: .65rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(216, 221, 215, .9);
+  background: rgba(244, 241, 232, .9);
+  backdrop-filter: blur(14px);
+}
+.site-header strong { margin-right: auto; font-size: .72rem; letter-spacing: .12em; }
+.language-links { display: flex; gap: .65rem; }
+.language-links a { color: var(--muted); font-size: .78rem; }
+.language-links a[aria-current="page"] { color: var(--ocean); font-weight: 800; }
+[data-global-motion] {
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.hero, .copy-block {
+  width: min(calc(100% - 2rem), 54rem);
+  margin-inline: auto;
+}
+.hero {
+  position: relative;
+  padding: clamp(5rem, 14vw, 10rem) 0;
+}
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -12% auto auto;
+  width: clamp(9rem, 28vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ocean) 35%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem color-mix(in srgb, var(--ocean) 5%, transparent),
+    0 0 0 5rem color-mix(in srgb, var(--warm) 4%, transparent);
+  content: "";
+}
+.eyebrow, .section-label {
+  margin: 0 0 1rem;
+  color: var(--ocean);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+h1, h2 { margin-top: 0; line-height: 1.03; text-wrap: balance; }
+h1 { max-width: 9em; margin-bottom: 1.5rem; font-size: clamp(3.2rem, 10vw, 7rem); letter-spacing: -.06em; }
+h2 { max-width: 16em; margin-bottom: 1.15rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+.hero-subtitle, .copy-prose { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.75; }
+.hero-subtitle { max-width: 38rem; }
+.copy-prose { margin: .8rem 0 0; }
+
+.plain-language {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .75rem 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 55%, var(--line));
+  border-radius: 1rem;
+  background: var(--soft-warm);
+}
+.plain-language strong {
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  color: var(--surface);
+  background: var(--warm);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.plain-language p { margin: 0; color: var(--ink); line-height: 1.65; }
+
+.concept-points { margin-top: 1.4rem; }
+.concept-points-label {
+  margin: 0 0 .7rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.concept-points ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.concept-card strong { display: block; margin-bottom: .45rem; }
+.concept-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+.overview, .chapter, .closing { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
+.overview { background: color-mix(in srgb, var(--surface) 42%, transparent); }
+.chapter:nth-of-type(even) { background: color-mix(in srgb, var(--surface) 22%, transparent); }
+interactive-figure {
+  display: block;
+  width: min(calc(100% - 2rem), 68rem);
+  min-height: 29rem;
+  margin: 3rem auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 51, 60, .14);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 1.5rem 4rem rgba(23, 51, 60, .1);
+}
+
+.closing { background: linear-gradient(150deg, var(--soft-ocean), color-mix(in srgb, var(--paper) 86%, var(--surface))); }
+.closing-copy { width: min(calc(100% - 2rem), 68rem); }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.starter-checklist, .boundary-map {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.closing h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.starter-checklist ol { display: grid; gap: .7rem; margin: 0; padding-left: 1.35rem; }
+.starter-checklist li { padding-left: .3rem; line-height: 1.55; }
+.boundary-map ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.scale-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: .2rem .8rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--surface);
+}
+.scale-card strong { grid-row: 1 / span 2; color: var(--ocean); }
+.scale-card span { color: var(--ink); font-size: .82rem; font-weight: 800; }
+.scale-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.closing blockquote {
+  margin: 2rem 0 0;
+  padding: 1.35rem clamp(1rem, 3vw, 1.8rem);
+  border-left: .32rem solid var(--ocean);
+  color: var(--ink);
+  background: var(--surface);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.55;
+}
+.source-note { margin: 1rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+article[data-visual-slug="loop-engineering"] .hero .eyebrow { color: var(--coral); }
+article[data-visual-slug="loop-engineering"] interactive-figure { box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ocean) 12%, transparent); }
+
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header strong { width: 100%; }
+  .language-links { margin-right: auto; }
+  interactive-figure { min-height: 32rem; border-radius: 1rem; }
+  .concept-points ul, .closing-grid { grid-template-columns: 1fr; }
+  .plain-language { grid-template-columns: 1fr; }
+  .scale-card { grid-template-columns: 5.5rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#article">本文へスキップ</a>
+  <header class="site-header">
+    <strong>VISUAL KIT / PROTOTYPE</strong>
+    <nav class="language-links" aria-label="言語">
+<a href="../en/" hreflang="en">English</a>
+<a href="../zh/" hreflang="zh">中文</a>
+<a href="../ja/" hreflang="ja" aria-current="page">日本語</a>
+    </nav>
+    <button type="button" data-global-motion aria-pressed="false"></button>
+  </header>
+  <main id="article">
+    <article data-visual-slug="r0-herd-immunity">
+      <header class="hero">
+        <p class="eyebrow">R₀ / 感染連鎖 / 集団免疫</p>
+        <h1>どんなに強いウイルスでも、接種がある閾値を超えると流行はなぜ自ら収束するのか？</h1>
+        <p class="hero-subtitle">1人が数人にうつすと、流行は止められないように見える。接触ネットワークの十分な割合を免疫にすれば、平均の次世代感染は1を下回りうる——全員カバーなしでも連鎖は薄くなることがある。直感のための玩具モデル；接種スケジュールでも公衆衛生命令でもない。</p>
+      </header>
+<section class="overview" aria-labelledby="overview-title">
+  <div class="copy-block">
+    <p class="section-label">R₀と集団免疫の概観</p>
+    <h2 id="overview-title">1症例の次は何人？——R₀ に出会う</h2>
+    <p class="copy-prose">R₀（基本再生産数）は問う：ほぼ全員が感受性の集団で、典型的な1症例は平均何人の新規感染を生むか。1より大きければ連鎖は伸びやすく、1未満なら消えやすい。</p>
+<p class="copy-prose">以下の数字はすべて例示。実流行は接触様式・時間構造・免疫の質が混ざる——本ページは閾値の直感だけを切り出し、予測はしない。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>R₀ は「ほぼ全員が感受性」のときの、感染連鎖の平均分岐倍率。</p></aside><div class="concept-points"><p class="concept-points-label">まず三点</p><ul><li class="concept-card"><strong>分岐倍率</strong><p>R₀&gt;1 は伸び、R₀&lt;1 は熄む——この簡易モデルでは平均の話。</p></li><li class="concept-card"><strong>実効 R は動く</strong><p>免疫が上がると、各症例が会う感受性者が減り実効 R が下がる。</p></li><li class="concept-card"><strong>教材であり政策ではない</strong><p>閾値 ≈ 1−1/R₀ は黒板の式——カバー命令ではない。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="r0-overview" data-title="静かな種子と熱い種子を切り替える" data-copy="{&quot;ariaLabel&quot;:&quot;低い／高い基本再生産数の分岐を対比するインタラクティブ概観&quot;,&quot;caption&quot;:&quot;種子を切替：同じ人でも平均の次世代人数で静かにも爆発的にも見える。&quot;,&quot;controlLabel&quot;:&quot;どの種子か&quot;,&quot;modes&quot;:[{&quot;key&quot;:&quot;quiet&quot;,&quot;label&quot;:&quot;静かな種子 · R₀≈0.8&quot;,&quot;headline&quot;:&quot;平均では連鎖は縮む&quot;,&quot;detail&quot;:&quot;各症例の次世代は1人未満。枝は細り——アウトブレイクは自ら熄みやすい。&quot;,&quot;badge&quot;:&quot;R₀ &lt; 1&quot;},{&quot;key&quot;:&quot;hot&quot;,&quot;label&quot;:&quot;熱い種子 · R₀≈3&quot;,&quot;headline&quot;:&quot;平均では連鎖は扇状に開く&quot;,&quot;detail&quot;:&quot;全員感受性なら各症例は約3人へ。木はすぐ密になる。&quot;,&quot;badge&quot;:&quot;R₀ &gt; 1&quot;}],&quot;statusQuiet&quot;:&quot;静かな種子：平均の次世代 &lt; 1 → 連鎖は消えやすい。&quot;,&quot;statusHot&quot;:&quot;熱い種子：平均の次世代 &gt; 1 → 連鎖は伸びやすい。&quot;}"><noscript>インタラクティブな説明を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="growth-or-fade" aria-labelledby="growth-or-fade-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 01</p>
+    <h2 id="growth-or-fade-title">R₀&gt;1 なら連鎖は伸び、R₀&lt;1 なら熄む</h2>
+    <p class="copy-prose">感染を世代として想像する：各感染者は感受性の接触者へ病原体を渡す。その平均が1を超え続ければ症例は増え、1を下回れば減っていく。</p>
+<p class="copy-prose">下のスライダーは玩具。潜伏・季節・病床は入れない——伸びか熄みかの蝶番だけを残し、R₀ を直感ポンプにする。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>1より上なら木は密に、1未満なら痩せる——平均の話。</p></aside><div class="concept-points"><p class="concept-points-label">見るポイント</p><ul><li class="concept-card"><strong>平均であり運命ではない</strong><p>個人の運は揺れる；このスケッチでは傾向は平均で決まる。</p></li><li class="concept-card"><strong>同じウイルスでも R は変わる</strong><p>行動・密度・免疫が実効値を動かす。</p></li><li class="concept-card"><strong>玩具の世代</strong><p>離散ステップが連続時間の代わり。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="r0-spread" data-title="R₀ を動かし、世代が伸びる／熄むのを見る" data-copy="{&quot;ariaLabel&quot;:&quot;R₀ に応じて感染世代が伸びる／熄むインタラクティブ図&quot;,&quot;caption&quot;:&quot;R₀ を動かす。各世代が前より大きいか小さいかを見る。&quot;,&quot;controlLabel&quot;:&quot;基本再生産数 R₀&quot;,&quot;r0Label&quot;:&quot;R₀&quot;,&quot;generationLabel&quot;:&quot;世代&quot;,&quot;casesLabel&quot;:&quot;相対症例&quot;,&quot;statusGrow&quot;:&quot;R₀ &gt; 1：各世代は平均で大きい——拡散は上昇。&quot;,&quot;statusFade&quot;:&quot;R₀ &lt; 1：各世代は平均で小さい——拡散は熄む。&quot;,&quot;statusEdge&quot;:&quot;R₀ ≈ 1：世代はほぼ横ばい——玩具の刃の位置。&quot;}"><noscript>インタラクティブな説明を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="thinning-chains" aria-labelledby="thinning-chains-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 02</p>
+    <h2 id="thinning-chains-title">免疫は感受性プールを縮め——連鎖は枝を失う</h2>
+    <p class="copy-prose">接種や既往感染は（簡易モデルでは）感受性プールから人を外す。感染者は、うつして次へ渡せる相手に会いにくくなる。</p>
+<p class="copy-prose">病原そのものの「強さ」が変わらなくても実効再生産数は下がる。分岐が薄くなるのはウイルスが「諦めた」からではなく、開いている接触辺が減ったから。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>感受性の隣人が減る → 症例あたりの次世代感染が減る。</p></aside><div class="concept-points"><p class="concept-points-label">見るポイント</p><ul><li class="concept-card"><strong>プールであり魔法ではない</strong><p>ここでの免疫は接触グラフの辺を閉じる。</p></li><li class="concept-card"><strong>実効 R</strong><p>おおよそ R₀ × なお感受性の割合（玩具形）。</p></li><li class="concept-card"><strong>目に見える間引き</strong><p>免疫ノードに当たると枝は止まる。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="r0-chains" data-title="免疫カバーを上げ、木が薄くなるのを見る" data-copy="{&quot;ariaLabel&quot;:&quot;免疫カバー上昇で薄くなる分岐感染ツリーのインタラクティブ図&quot;,&quot;caption&quot;:&quot;カバーを上げる。免疫ノードに当たった枝は止まり——実効の次世代が減る。&quot;,&quot;controlLabel&quot;:&quot;免疫カバー率&quot;,&quot;coverageLabel&quot;:&quot;カバー率&quot;,&quot;susceptibleLabel&quot;:&quot;感受性&quot;,&quot;immuneLabel&quot;:&quot;免疫&quot;,&quot;infectedLabel&quot;:&quot;感染経路&quot;,&quot;statusLow&quot;:&quot;カバー低：大半の接触は開いたまま——木は dense。&quot;,&quot;statusHigh&quot;:&quot;カバー高：多くの接触が閉じる——木は疎になり、連鎖は早く切れる。&quot;}"><noscript>インタラクティブな説明を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="threshold" aria-labelledby="threshold-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 03</p>
+    <h2 id="threshold-title">なぜ100%でなくてよい？素描閾値 ≈ 1−1/R₀</h2>
+    <p class="copy-prose">古典的な均一混合の玩具では、実効 R を1未満に落とすだけでよい。免疫割合を p とすると粗い条件は R₀(1−p)&lt;1、つまり p &gt; 1−1/R₀。</p>
+<p class="copy-prose">だから教科書は言う：強い病原（大きい R₀）ほど、同じ蝶番を倒すには高いカバーが要る——そしてこの簡略化では「全員」は必須ではない。実集団はもっと乱雑；式は黒板であり布告ではない。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>症例あたり平均の次世代が1未満になるまで覆う——100%は要らない場合がある。</p></aside><div class="concept-points"><p class="concept-points-label">見るポイント</p><ul><li class="concept-card"><strong>蝶番は1</strong><p>玩具の目標は実効 R&lt;1であり、永遠のゼロ症例ではない。</p></li><li class="concept-card"><strong>R₀ が大きいほど高いバー</strong><p>1−1/R₀ は R₀ とともに上がる——素描では強い病原ほど高いカバー。</p></li><li class="concept-card"><strong>命令ではない</strong><p>本ページは式の形を説明する——政策目標ではない。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="r0-threshold" data-title="R₀ を動かし、閾値の水位線が動くのを見る" data-copy="{&quot;ariaLabel&quot;:&quot;R₀ に対する集団免疫閾値の面積図とカバー率スライダー&quot;,&quot;caption&quot;:&quot;R₀ を変え 1−1/R₀ の水位線を動かす。カバーをドラッグし蝶番の上か下かを見る。&quot;,&quot;controlLabel&quot;:&quot;R₀ とカバー率&quot;,&quot;r0Label&quot;:&quot;R₀&quot;,&quot;coverageLabel&quot;:&quot;カバー率 p&quot;,&quot;thresholdLabel&quot;:&quot;閾値 1−1/R₀&quot;,&quot;aboveLabel&quot;:&quot;閾値の上（玩具）&quot;,&quot;belowLabel&quot;:&quot;閾値の下（玩具）&quot;,&quot;statusAbove&quot;:&quot;この素描でカバーが 1−1/R₀ より上 → 実効 R は1未満に傾く。&quot;,&quot;statusBelow&quot;:&quot;この素描でカバーが 1−1/R₀ より下 → 実効 R は1超に傾く。&quot;,&quot;statusNear&quot;:&quot;水位線付近：小さな動きで玩具の蝶番が倒れる。&quot;}"><noscript>インタラクティブな説明を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="limits" aria-labelledby="limits-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 04</p>
+    <h2 id="limits-title">限界：異質な接触、ワクチン効果、変異がバーを動かす</h2>
+    <p class="copy-prose">均一混合は便利のための仮定。スーパースプレッディング接触、不完全なワクチン防御、減衰免疫、免疫逃避変異は、必要なカバーを変え——閾値が鋭く見えるかさえ変える。</p>
+<p class="copy-prose">ここで謙虚に止まる：R₀ と 1−1/R₀ は、部分カバーでも連鎖を下に曲げうる理由を教える。疫学・試験データ・地域の意思決定の代わりにはならない。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>世界が不均一で、ワクチンが部分的で、ウイルスが変われば、黒板の閾値は動き・ぼやける。</p></aside><div class="concept-points"><p class="concept-points-label">見るポイント</p><ul><li class="concept-card"><strong>異質な接触</strong><p>少数の高次数ハブは、均一集団とは違うアウトブレイク形を作る。</p></li><li class="concept-card"><strong>不完全な防御</strong><p>接種が伝播を部分的にしか止めなければ、実効カバーは接種数より低い。</p></li><li class="concept-card"><strong>動く標的</strong><p>変異は R₀ を上げたり免疫をすり抜けたり——バーは滑る。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="r0-limits" data-title="理想スケッチとよりmessyな世界を切替" data-copy="{&quot;ariaLabel&quot;:&quot;理想の集団免疫閾値とmessyな現実の注意点を比較するインタラクティブ図&quot;,&quot;caption&quot;:&quot;視点を切替：きれいな水位線 vs ぼやけ・ずれる注意点。&quot;,&quot;controlLabel&quot;:&quot;どの絵か&quot;,&quot;modes&quot;:[{&quot;key&quot;:&quot;ideal&quot;,&quot;label&quot;:&quot;理想スケッチ&quot;,&quot;headline&quot;:&quot;1−1/R₀ のきれいな水位線&quot;,&quot;detail&quot;:&quot;均一接触・堅い免疫・固定 R₀——教科書の蝶番は鋭く見える。&quot;,&quot;badge&quot;:&quot;玩具&quot;},{&quot;key&quot;:&quot;messy&quot;,&quot;label&quot;:&quot;よりmessyな世界&quot;,&quot;headline&quot;:&quot;バーは smear し漂う&quot;,&quot;detail&quot;:&quot;不均一混合・部分防御・変異が実効閾値を伸ばしたり動かしたりする。&quot;,&quot;badge&quot;:&quot;注意&quot;}],&quot;statusIdeal&quot;:&quot;理想スケッチ：きれいな水位線一条——教材のみ。&quot;,&quot;statusMessy&quot;:&quot;よりmessyな世界：ぼやけて動くバーを予期——単一の魔法％はない。&quot;}"><noscript>インタラクティブな説明を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="closing" aria-labelledby="closing-title">
+  <div class="copy-block closing-copy">
+    <p class="section-label">仕組みを組み立て直す</p>
+    <h2 id="closing-title">R₀ が分岐を決め、カバーが実効 R を1未満へ引く</h2>
+    <p class="copy-prose">R₀ は全員感受性のときの連鎖の denseness を素描する。免疫は開いた辺を閉じ、症例あたりの次世代を減らす。均一玩具ではカバーがおよそ 1−1/R₀ を超えると平均の次世代は1未満——100%なしでも拡散は自ら薄くなりうる。</p>
+<p class="copy-prose">免責を大きく：教材の簡略化であり、接種スケジュールでも予測でも政策助言でもない。実プログラムは接種意欲・公平・製品性能・ウイルス変化と格闘する。</p>
+    <div class="closing-grid">
+      <div class="starter-checklist">
+        <h3>読者チェック</h3>
+        <ol><li>仮定している R₀（または実効 R）とその根拠を問う。</li><li>接触ネットワークのどれだけがなお感受性かを問う。</li><li>1−1/R₀ を黒板の蝶番として扱い、命令として扱わない。</li><li>異質性・不完全ワクチン・変異がバーを動かすことを覚える。</li></ol>
+      </div>
+      <div class="boundary-map">
+        <h3>四つの部品</h3>
+        <ul><li class="scale-card"><strong>R₀</strong><span>始めはどれだけ dense？</span><p>全員感受性での平均次世代人数。</p></li><li class="scale-card"><strong>実効 R</strong><span>免疫で何が変わる？</span><p>感受性プール縮小後の次世代人数。</p></li><li class="scale-card"><strong>閾値</strong><span>なぜ常に100%ではない？</span><p>玩具の蝶番は p ≈ 1−1/R₀ 付近。</p></li><li class="scale-card"><strong>限界</strong><span>何がスケッチを壊す？</span><p>混合・効果・減衰・変異。</p></li></ul>
+      </div>
+    </div>
+    <blockquote>部分カバーでも連鎖を下に曲げうる——蝶番は「平均の次世代が1未満」であり「全員にインクを塗る」ことではない。</blockquote>
+    <p class="source-note">基本再生産数と古典的集団免疫閾値 p ≈ 1−1/R₀ についての公共教育ノート。図は教材の例示——予測でも臨床指針でも公衆衛生政策でもない。Wikipedia「Basic reproduction number」「Herd immunity」は有用な背景；本ページは仕組みのみ。</p>
+  </div>
+</section>
+    </article>
+  </main>
+  <script>
+    window.__VISUAL_I18N__ = {"pauseAll":"すべての動きを停止","resumeAll":"すべての動きを再開","pause":"一時停止","resume":"再開","reset":"リセット","waiting":"図は表示領域に入ったときに読み込まれます。","loading":"図を準備しています…","error":"図を表示できません。上の説明を先に読んでください。","figureFallback":"インタラクティブな説明を見るには JavaScript を有効にしてください。","skipToContent":"本文へスキップ","languageNavigation":"言語","overviewLabel":"R₀と集団免疫の概観","stepLabel":"ステップ"};
+  </script>
+  <script data-prototype-bundle="runtime">
+(() => {
+  "use strict";
+
+  const ui = Object.freeze(window.__VISUAL_I18N__);
+  const registry = new Map();
+  const figures = new Set();
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const tokens = Object.freeze({
+    ink: "var(--visual-ink, #17333c)",
+    muted: "var(--visual-muted, #60747a)",
+    line: "var(--visual-line, #d8ddd7)",
+    ocean: "var(--visual-ocean, #0f7185)",
+    warm: "var(--visual-warm, #ee9d46)",
+    coral: "var(--visual-coral, #d45f50)",
+    paper: "var(--visual-paper, #f4f1e8)",
+    surface: "var(--visual-surface, #fffdf8)"
+  });
+  let globalPaused = false;
+
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+  const call = (instance, method, value) => {
+    if (instance && typeof instance[method] === "function") instance[method](value);
+  };
+
+  class InteractiveFigure extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
+      this._instance = null;
+      this._mounted = false;
+      this._mounting = false;
+      this._visible = false;
+      this._localPaused = false;
+    }
+
+    connectedCallback() {
+      if (this._connected) return;
+      this._connected = true;
+      figures.add(this);
+      this._shadow.innerHTML = `
+        <style>
+          :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+          .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
+          .mount { min-height: inherit; }
+          .runtime-status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; pointer-events: none; }
+          .runtime-status[data-live-only] { position: absolute; inset: auto; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; background: transparent; pointer-events: none; }
+          .runtime-status[hidden] { display: none; }
+          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
+          .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+          button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+          button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+          @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
+        </style>
+        <div class="frame">
+          <div class="stage"><div class="mount"></div><div class="runtime-status" data-runtime-status role="status"></div></div>
+          <div class="controls">
+            <span class="title"></span>
+            <button type="button" data-action="pause" aria-pressed="false"></button>
+            <button type="button" data-action="reset"></button>
+          </div>
+        </div>`;
+
+      this._stage = this._shadow.querySelector(".stage");
+      this._mountRoot = this._shadow.querySelector(".mount");
+      this._status = this._shadow.querySelector("[data-runtime-status]");
+      this._title = this._shadow.querySelector(".title");
+      this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
+      this._resetButton = this._shadow.querySelector('[data-action="reset"]');
+      this._copy = JSON.parse(this.dataset.copy || "{}");
+      this._title.textContent = this.dataset.title || "";
+      this._pauseButton.textContent = ui.pause;
+      this._resetButton.textContent = ui.reset;
+      this._setStatus(ui.waiting);
+
+      this._pauseButton.addEventListener("click", () => {
+        this._localPaused = !this._localPaused;
+        this._syncPlayback();
+      });
+      this._resetButton.addEventListener("click", () => {
+        call(this._instance, "reset");
+        this.dispatchEvent(new CustomEvent("demo-reset", { bubbles: true }));
+      });
+
+      this._observer = new IntersectionObserver((entries) => {
+        this._visible = entries[0]?.isIntersecting ?? false;
+        if (this._visible) this._mount();
+        this._syncPlayback();
+      }, { rootMargin: "180px 0px", threshold: .05 });
+      this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      figures.delete(this);
+      this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
+      call(this._instance, "destroy");
+    }
+
+    async _mount() {
+      if (this._mounted || this._mounting) return;
+      const factory = registry.get(this.dataset.demo);
+      if (!factory) return;
+      this._mounting = true;
+      this._setStatus(ui.loading);
+      try {
+        this._instance = await factory({
+          root: this._mountRoot,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
+          copy: this._copy,
+          motion: !reducedMotion.matches,
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._announce(message)
+        }) || {};
+        this._mounted = true;
+        this.dataset.state = "mounted";
+        this._liveRevision = (this._liveRevision || 0) + 1;
+        this._status.removeAttribute("data-live-only");
+        this._status.textContent = "";
+        this._status.hidden = true;
+        this._resize();
+        this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
+      } catch {
+        this.dataset.state = "error";
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
+      }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
+    }
+
+    _syncPlayback() {
+      const paused = globalPaused || this._localPaused || !this._visible || reducedMotion.matches;
+      this.dataset.playback = paused ? "paused" : "playing";
+      this._pauseButton?.setAttribute("aria-pressed", String(this._localPaused));
+      if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
+      call(this._instance, paused ? "pause" : "resume");
+    }
+
+    _setStatus(message) {
+      this._liveRevision = (this._liveRevision || 0) + 1;
+      this._status.removeAttribute("data-live-only");
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
+
+    _announce(message) {
+      const revision = (this._liveRevision || 0) + 1;
+      this._liveRevision = revision;
+      this._status.hidden = false;
+      this._status.setAttribute("data-live-only", "");
+      this._status.textContent = "";
+      queueMicrotask(() => {
+        if (this._liveRevision !== revision || !this._status.isConnected) return;
+        this._status.textContent = message;
+      });
+    }
+  }
+
+  window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
+    if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
+    registry.set(id, factory);
+    figures.forEach((figure) => {
+      if (figure.dataset.demo === id && figure._visible) figure._mount();
+    });
+  };
+
+  customElements.define("interactive-figure", InteractiveFigure);
+
+  const globalToggle = document.querySelector("[data-global-motion]");
+  const syncGlobalToggle = () => {
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
+    figures.forEach((figure) => figure._syncPlayback());
+  };
+  globalToggle?.addEventListener("click", () => {
+    globalPaused = !globalPaused;
+    syncGlobalToggle();
+  });
+  reducedMotion.addEventListener("change", syncGlobalToggle);
+  syncGlobalToggle();
+})();
+  </script>
+  <script data-prototype-bundle="demos">
+const escapeHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+registerDemo("r0-overview", ({ root, copy, motion, tokens, announce }) => {
+  const buttons = copy.modes.map((mode, index) => `
+    <button type="button" class="r0-ov-btn" data-r0-ov="${index}" aria-pressed="${index === 0}">${escapeHtml(mode.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .r0-ov { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(145deg,color-mix(in srgb,${tokens.ocean} 8%,${tokens.surface}),${tokens.surface} 55%,color-mix(in srgb,${tokens.coral} 10%,${tokens.surface})); }
+      .r0-ov-panel { display:grid; gap:.75rem; padding:1.1rem 1.2rem; border:1px solid ${tokens.line}; border-radius:1.1rem;
+        background:color-mix(in srgb,${tokens.paper} 55%,${tokens.surface}); min-height:12rem; }
+      .r0-ov-badge { display:inline-flex; width:max-content; padding:.25rem .55rem; border-radius:999px; font-size:.68rem; font-weight:850;
+        letter-spacing:.04em; text-transform:uppercase; color:${tokens.surface}; background:${tokens.ocean}; }
+      .r0-ov-panel[data-mode="hot"] .r0-ov-badge { background:${tokens.coral}; }
+      .r0-ov-headline { margin:0; font-size:1.15rem; font-weight:850; line-height:1.35; }
+      .r0-ov-detail { margin:0; color:${tokens.muted}; line-height:1.55; }
+      .r0-ov-tree { display:flex; flex-direction:column; align-items:center; gap:.55rem; min-height:8.5rem;
+        padding:.85rem; border-radius:.85rem; border:1px dashed ${tokens.line};
+        background:color-mix(in srgb,${tokens.surface} 80%,${tokens.paper}); }
+      .r0-ov-row { display:flex; flex-wrap:wrap; justify-content:center; gap:.35rem; }
+      .r0-ov-node { width:1.15rem; height:1.15rem; border-radius:999px; border:1px solid ${tokens.line};
+        background:color-mix(in srgb,${tokens.ocean} 55%,${tokens.surface}); transition:transform 280ms ease, background 280ms ease, opacity 280ms ease; }
+      .r0-ov-panel[data-mode="hot"] .r0-ov-node { background:color-mix(in srgb,${tokens.coral} 65%,${tokens.surface}); }
+      .r0-ov-node.is-seed { width:1.45rem; height:1.45rem; background:${tokens.warm}; box-shadow:0 0 0 3px color-mix(in srgb,${tokens.warm} 28%,transparent); }
+      .r0-ov-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .r0-ov-btn { flex:1 1 8rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink};
+        background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .r0-ov-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .r0-ov-btn:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .r0-ov-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .r0-ov-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .r0-ov.is-paused .r0-ov-node { transition:none; }
+    </style>
+    <div class="r0-ov${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="r0-ov-panel" data-r0-panel data-mode="quiet">
+        <span class="r0-ov-badge" data-r0-badge></span>
+        <h3 class="r0-ov-headline" data-r0-headline></h3>
+        <p class="r0-ov-detail" data-r0-detail></p>
+        <div class="r0-ov-tree" data-r0-tree aria-hidden="true"></div>
+      </div>
+      <div class="r0-ov-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${buttons}</div>
+      <p class="r0-ov-status" data-r0-status role="status"></p>
+      <p class="r0-ov-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".r0-ov");
+  const panel = root.querySelector("[data-r0-panel]");
+  const badge = root.querySelector("[data-r0-badge]");
+  const headline = root.querySelector("[data-r0-headline]");
+  const detail = root.querySelector("[data-r0-detail]");
+  const status = root.querySelector("[data-r0-status]");
+  const tree = root.querySelector("[data-r0-tree]");
+  const btns = [...root.querySelectorAll("[data-r0-ov]")];
+
+  const renderTree = (key) => {
+    const counts = key === "hot" ? [1, 3, 7] : [1, 1, 0];
+    tree.innerHTML = counts.map((n, gen) => {
+      if (n <= 0) return `<div class="r0-ov-row"></div>`;
+      const nodes = Array.from({ length: n }, (_, i) =>
+        `<span class="r0-ov-node${gen === 0 && i === 0 ? " is-seed" : ""}"></span>`).join("");
+      return `<div class="r0-ov-row">${nodes}</div>`;
+    }).join("");
+  };
+
+  const select = (index, speak = false) => {
+    const mode = copy.modes[index];
+    panel.dataset.mode = mode.key;
+    badge.textContent = mode.badge;
+    headline.textContent = mode.headline;
+    detail.textContent = mode.detail;
+    status.textContent = mode.key === "hot" ? copy.statusHot : copy.statusQuiet;
+    renderTree(mode.key);
+    btns.forEach((b, i) => b.setAttribute("aria-pressed", String(i === index)));
+    if (speak) announce(status.textContent);
+  };
+
+  btns.forEach((b) => b.addEventListener("click", () => select(Number(b.dataset.r0Ov), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("r0-spread", ({ root, copy, motion, tokens, resolveColor, announce }) => {
+  root.innerHTML = `
+    <style>
+      .r0-sp { display:grid; gap:1rem; min-height:24rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(160deg,color-mix(in srgb,${tokens.ocean} 7%,${tokens.surface}),${tokens.surface}); }
+      .r0-sp-controls { display:grid; gap:.55rem; }
+      .r0-sp-label { display:flex; justify-content:space-between; gap:1rem; font-size:.85rem; font-weight:750; }
+      .r0-sp-label span:last-child { color:${tokens.ocean}; font-variant-numeric:tabular-nums; }
+      .r0-sp-range { width:100%; accent-color:${tokens.ocean}; }
+      .r0-sp-chart { position:relative; min-height:12rem; height:12rem; border-radius:1rem; border:1px solid ${tokens.line};
+        background:color-mix(in srgb,${tokens.paper} 45%,${tokens.surface}); overflow:hidden; }
+      .r0-sp-chart canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+      .r0-sp-legend { display:flex; flex-wrap:wrap; gap:.85rem; justify-content:center; font-size:.78rem; color:${tokens.muted}; }
+      .r0-sp-swatch { display:inline-block; width:.7rem; height:.7rem; border-radius:2px; margin-right:.3rem; vertical-align:middle; }
+      .r0-sp-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .r0-sp-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+    </style>
+    <div class="r0-sp" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="r0-sp-controls">
+        <label class="r0-sp-label" for="r0-sp-range"><span>${escapeHtml(copy.controlLabel)}</span><span data-r0-sp-val></span></label>
+        <input id="r0-sp-range" class="r0-sp-range" data-r0-sp-range type="range" min="0.4" max="3.2" step="0.1" value="1.8" aria-label="${escapeHtml(copy.r0Label)}" />
+      </div>
+      <div class="r0-sp-chart" data-r0-sp-wrap>
+        <canvas data-r0-sp-canvas aria-hidden="true"></canvas>
+      </div>
+      <div class="r0-sp-legend" aria-hidden="true">
+        <span><span class="r0-sp-swatch" style="background:${tokens.ocean}"></span>${escapeHtml(copy.casesLabel)}</span>
+        <span><span class="r0-sp-swatch" style="background:${tokens.line}"></span>${escapeHtml(copy.generationLabel)}</span>
+      </div>
+      <p class="r0-sp-status" data-r0-sp-status role="status"></p>
+      <p class="r0-sp-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const range = root.querySelector("[data-r0-sp-range]");
+  const valEl = root.querySelector("[data-r0-sp-val]");
+  const status = root.querySelector("[data-r0-sp-status]");
+  const wrap = root.querySelector("[data-r0-sp-wrap]");
+  const canvas = root.querySelector("[data-r0-sp-canvas]");
+  const ctx = canvas.getContext("2d");
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+  let paused = !motion;
+  void paused;
+
+  const generations = (r0) => {
+    const out = [1];
+    for (let i = 0; i < 7; i++) out.push(out[out.length - 1] * r0);
+    return out;
+  };
+
+  const statusFor = (r0) => {
+    if (r0 > 1.05) return copy.statusGrow;
+    if (r0 < 0.95) return copy.statusFade;
+    return copy.statusEdge;
+  };
+
+  const draw = () => {
+    if (!width || !height) return;
+    const r0 = Number(range.value);
+    valEl.textContent = `${copy.r0Label} = ${r0.toFixed(1)}`;
+    status.textContent = statusFor(r0);
+    const vals = generations(r0);
+    const maxV = Math.max(...vals, 1.2);
+
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+
+    const padX = 28;
+    const padY = 18;
+    const plotW = width - padX * 2;
+    const plotH = height - padY * 2;
+    const barW = plotW / vals.length * 0.62;
+    const gap = plotW / vals.length;
+
+    const cOcean = resolveColor(tokens.ocean);
+    const cCoral = resolveColor(tokens.coral);
+    const cLine = resolveColor(tokens.line);
+    ctx.strokeStyle = cLine;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(padX, padY + plotH);
+    ctx.lineTo(padX + plotW, padY + plotH);
+    ctx.stroke();
+    vals.forEach((v, i) => {
+      const h = (v / maxV) * plotH;
+      const x = padX + i * gap + (gap - barW) / 2;
+      const y = padY + plotH - h;
+      const growing = r0 >= 1;
+      ctx.fillStyle = growing ? cCoral : cOcean;
+      ctx.globalAlpha = 0.45 + i * 0.07;
+      ctx.fillRect(x, y, barW, Math.max(h, 2));
+      ctx.globalAlpha = 1;
+    });
+  };
+
+  range.addEventListener("input", () => {
+    draw();
+    announce(status.textContent);
+  });
+
+  draw();
+  return {
+    pause: () => { paused = true; },
+    resume: () => { paused = false; },
+    reset: () => { range.value = "1.8"; draw(); },
+    destroy: () => { root.innerHTML = ""; },
+    resize: ({ width: w, height: h, dpr: ratio }) => {
+      width = Math.max(1, w || wrap.getBoundingClientRect().width);
+      height = Math.max(1, h || wrap.getBoundingClientRect().height);
+      dpr = ratio || 1;
+      draw();
+    }
+  };
+});
+
+registerDemo("r0-chains", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  // 注入 HTML 和 CSS
+  root.innerHTML = `
+    <style>
+      .r0-chains {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        min-height: 480px;
+        font-family: system-ui, sans-serif;
+        position: relative;
+        width: 100%;
+      }
+      .r0-chains-header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        background: ${tokens.surface};
+        border: 1px solid ${tokens.line};
+        border-radius: 8px;
+      }
+      .r0-chains-control {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex: 1;
+        min-width: 200px;
+      }
+      .r0-chains-control label {
+        font-size: 0.9rem;
+        color: ${tokens.ink};
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .r0-chains-slider {
+        flex: 1;
+        cursor: pointer;
+        accent-color: ${tokens.ocean};
+      }
+      .r0-chains-legend {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.85rem;
+        color: ${tokens.muted};
+        flex-wrap: wrap;
+      }
+      .r0-chains-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .r0-chains-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+      .r0-chains-dot.susceptible {
+        background: ${tokens.surface};
+        border: 1px solid ${tokens.line};
+      }
+      .r0-chains-dot.immune {
+        background: ${tokens.ocean};
+      }
+      .r0-chains-dot.infected {
+        background: ${tokens.coral};
+      }
+      .r0-chains-canvas-wrap {
+        position: relative;
+        flex: 1;
+        min-height: 320px;
+        width: 100%;
+      }
+      .r0-chains-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+      }
+      .r0-chains-status {
+        font-size: 0.95rem;
+        color: ${tokens.ink};
+        text-align: center;
+        min-height: 1.5em;
+        padding: 0 0.5rem;
+      }
+    </style>
+    <div class="r0-chains" aria-label="${copy.ariaLabel}">
+      <div class="r0-chains-header">
+        <div class="r0-chains-control">
+          <label for="r0-chains-slider">${copy.coverageLabel}</label>
+          <input type="range" id="r0-chains-slider" class="r0-chains-slider" min="0" max="1" step="0.01" value="0.2" aria-label="${copy.controlLabel}">
+        </div>
+        <div class="r0-chains-legend">
+          <div class="r0-chains-legend-item">
+            <div class="r0-chains-dot susceptible"></div>
+            <span>${copy.susceptibleLabel}</span>
+          </div>
+          <div class="r0-chains-legend-item">
+            <div class="r0-chains-dot immune"></div>
+            <span>${copy.immuneLabel}</span>
+          </div>
+          <div class="r0-chains-legend-item">
+            <div class="r0-chains-dot infected"></div>
+            <span>${copy.infectedLabel}</span>
+          </div>
+        </div>
+      </div>
+      <div class="r0-chains-canvas-wrap">
+        <canvas class="r0-chains-canvas"></canvas>
+      </div>
+      <div class="r0-chains-status" aria-live="polite"></div>
+    </div>
+  `;
+
+  // DOM 节点引用
+  const slider = root.querySelector('#r0-chains-slider');
+  const canvasWrap = root.querySelector('.r0-chains-canvas-wrap');
+  const canvas = root.querySelector('.r0-chains-canvas');
+  const statusDiv = root.querySelector('.r0-chains-status');
+  const ctx = canvas.getContext('2d');
+
+  // 状态变量
+  let canvasWidth = 0;
+  let canvasHeight = 0;
+  let currentDpr = 1;
+  let time = motion === false ? Infinity : 0;
+  let isPlaying = motion !== false;
+  let animationFrameId = null;
+  let lastTime = performance.now();
+
+  // 确定的随机数生成器 (SplitMix32)，保证每次重置/渲染树的结构和免疫节点分布完全一致
+  function splitmix32(a) {
+    return function() {
+      a |= 0; a = a + 0x9e3779b9 | 0;
+      let t = a ^ a >>> 16; t = Math.imul(t, 0x21f0aaad);
+      t = t ^ t >>> 15; t = Math.imul(t, 0x735a2d97);
+      return ((t = t ^ t >>> 15) >>> 0) / 4294967296;
+    }
+  }
+
+  // 构建树结构
+  let nodes = [];
+  let idCounter = 0;
+  
+  function buildTree() {
+    nodes = [];
+    idCounter = 0;
+    const rng = splitmix32(42); 
+
+    function buildNode(depth, minX, maxX, parent) {
+      // 增加轻微的随机偏移，使树看起来更自然，但不超出分配的水平区间
+      let x = minX + (maxX - minX) * (0.5 + (rng() - 0.5) * 0.3);
+      let y = 0.1 + (depth / 4) * 0.8; 
+      
+      // 根节点强制居中
+      if (depth === 0) {
+        x = 0.5;
+        y = 0.08;
+      }
+
+      let node = {
+        id: idCounter++,
+        depth, x, y,
+        threshold: rng(), // 用于决定是否免疫的阈值
+        parent, children: [],
+        isImmune: false,
+        linkStartTime: Infinity,
+        linkEndTime: Infinity,
+        infectedTime: Infinity
+      };
+      nodes.push(node);
+
+      // 最大深度为 4
+      if (depth < 4) {
+        // 根节点 3 个分支，其余 2 个分支
+        let numChildren = depth === 0 ? 3 : 2;
+        let step = (maxX - minX) / numChildren;
+        for (let i = 0; i < numChildren; i++) {
+          let childMinX = minX + i * step;
+          let childMaxX = childMinX + step;
+          node.children.push(buildNode(depth + 1, childMinX, childMaxX, node));
+        }
+      }
+      return node;
+    }
+    
+    buildNode(0, 0.02, 0.98, null);
+  }
+
+  // 根据当前覆盖率计算每个节点的感染时间
+  function updateInfectionState(coverage) {
+    // 根节点始终是感染源
+    nodes[0].isImmune = false;
+    nodes[0].infectedTime = 0;
+
+    // 节点在 buildTree 时按先序遍历加入，保证了拓扑排序，可以直接线性计算
+    for (let i = 1; i < nodes.length; i++) {
+      let n = nodes[i];
+      n.isImmune = n.threshold < coverage;
+
+      let p = n.parent;
+      if (p.infectedTime < Infinity) {
+        n.linkStartTime = p.infectedTime;
+        n.linkEndTime = p.infectedTime + 600; // 每层传播耗时 600ms
+        
+        if (!n.isImmune) {
+          n.infectedTime = n.linkEndTime;
+        } else {
+          n.infectedTime = Infinity; // 免疫节点阻断传播
+        }
+      } else {
+        n.linkStartTime = Infinity;
+        n.linkEndTime = Infinity;
+        n.infectedTime = Infinity;
+      }
+    }
+  }
+
+  function updateStatusText(coverage) {
+    const isHigh = coverage >= 0.5;
+    const newText = isHigh ? copy.statusHigh : copy.statusLow;
+    if (statusDiv.textContent !== newText) {
+      statusDiv.textContent = newText;
+    }
+  }
+
+  // 绘制函数
+  function draw() {
+    if (!ctx || canvasWidth === 0) return;
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    const surfaceColor = resolveColor(tokens.surface);
+    const lineColor = resolveColor(tokens.line);
+    const oceanColor = resolveColor(tokens.ocean);
+    const coralColor = resolveColor(tokens.coral);
+
+    // 1. 绘制所有潜在的传播路径（半透明底色）
+    ctx.globalAlpha = 0.3;
+    ctx.lineWidth = 1.5 * currentDpr;
+    ctx.strokeStyle = lineColor;
+    ctx.beginPath();
+    for (let i = 1; i < nodes.length; i++) {
+      let n = nodes[i];
+      let p = n.parent;
+      ctx.moveTo(p.x * canvasWidth, p.y * canvasHeight);
+      ctx.lineTo(n.x * canvasWidth, n.y * canvasHeight);
+    }
+    ctx.stroke();
+    ctx.globalAlpha = 1.0;
+
+    // 2. 绘制实际发生的感染路径（动态生长）
+    ctx.lineWidth = 2.5 * currentDpr;
+    ctx.strokeStyle = coralColor;
+    for (let i = 1; i < nodes.length; i++) {
+      let n = nodes[i];
+      if (time > n.linkStartTime) {
+        let p = n.parent;
+        let progress = Math.min(1, (time - n.linkStartTime) / (n.linkEndTime - n.linkStartTime));
+        let cx = p.x + (n.x - p.x) * progress;
+        let cy = p.y + (n.y - p.y) * progress;
+        
+        ctx.beginPath();
+        ctx.moveTo(p.x * canvasWidth, p.y * canvasHeight);
+        ctx.lineTo(cx * canvasWidth, cy * canvasHeight);
+        ctx.stroke();
+      }
+    }
+
+    // 3. 绘制节点
+    const radius = 4.5 * currentDpr;
+    for (let i = 0; i < nodes.length; i++) {
+      let n = nodes[i];
+      let x = n.x * canvasWidth;
+      let y = n.y * canvasHeight;
+
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, 2 * Math.PI);
+
+      if (n.isImmune) {
+        ctx.fillStyle = oceanColor;
+        ctx.fill();
+      } else if (time >= n.infectedTime) {
+        ctx.fillStyle = coralColor;
+        ctx.fill();
+      } else {
+        ctx.fillStyle = surfaceColor;
+        ctx.fill();
+        ctx.lineWidth = 1.5 * currentDpr;
+        ctx.strokeStyle = lineColor;
+        ctx.stroke();
+      }
+    }
+  }
+
+  // 动画循环
+  function loop(timestamp) {
+    if (!isPlaying) return;
+    let dt = timestamp - lastTime;
+    lastTime = timestamp;
+    
+    // 防止切后台导致 dt 过大
+    if (dt > 100) dt = 16;
+    
+    time += dt;
+    draw();
+    animationFrameId = requestAnimationFrame(loop);
+  }
+
+  // 事件监听
+  slider.addEventListener('input', (e) => {
+    const val = parseFloat(e.target.value);
+    updateInfectionState(val);
+    updateStatusText(val);
+    draw(); // 拖拽时立即重绘以提供实时反馈
+  }, { signal });
+
+  slider.addEventListener('change', () => {
+    // 释放滑块时，朗读当前状态
+    announce(statusDiv.textContent);
+  }, { signal });
+
+  // 初始化数据
+  buildTree();
+  updateInfectionState(parseFloat(slider.value));
+  updateStatusText(parseFloat(slider.value));
+
+  return {
+    resize({ width, height, dpr }) {
+      // 依据容器的实际可用区域设置 Canvas 尺寸
+      canvasWidth = canvasWrap.clientWidth;
+      canvasHeight = canvasWrap.clientHeight;
+      currentDpr = dpr;
+      
+      canvas.width = canvasWidth * dpr;
+      canvas.height = canvasHeight * dpr;
+      
+      draw();
+    },
+    pause() {
+      isPlaying = false;
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+      draw();
+    },
+    resume() {
+      if (!isPlaying && motion !== false) {
+        isPlaying = true;
+        lastTime = performance.now();
+        animationFrameId = requestAnimationFrame(loop);
+      }
+    },
+    reset() {
+      slider.value = 0.2;
+      updateInfectionState(0.2);
+      updateStatusText(0.2);
+      time = motion === false ? Infinity : 0;
+      lastTime = performance.now();
+      draw();
+    },
+    destroy() {
+      isPlaying = false;
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      root.innerHTML = '';
+    }
+  };
+});
+
+registerDemo("r0-threshold", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  root.innerHTML = `
+    <style>
+      .r0-t-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        min-height: 450px;
+        width: 100%;
+        font-family: system-ui, sans-serif;
+        color: var(--ink);
+        box-sizing: border-box;
+      }
+      .r0-t-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        padding: 1rem;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+      .r0-t-control {
+        flex: 1;
+        min-width: 200px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .r0-t-label-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+      .r0-t-slider {
+        width: 100%;
+        cursor: pointer;
+        accent-color: var(--ocean);
+      }
+      .r0-t-canvas-container {
+        position: relative;
+        flex: 1;
+        min-height: 250px;
+      }
+      .r0-t-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        touch-action: none;
+      }
+      .r0-t-status {
+        min-height: 3rem;
+        padding: 0.75rem;
+        font-size: 0.875rem;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+    <div class="r0-t-container">
+      <div class="r0-t-controls" aria-label="${copy.controlLabel}">
+        <div class="r0-t-control">
+          <div class="r0-t-label-row">
+            <label for="r0-t-r0">${copy.r0Label}</label>
+            <span class="r0-t-val-r0">3.0</span>
+          </div>
+          <input id="r0-t-r0" class="r0-t-slider" type="range" min="1" max="10" step="0.1" value="3" aria-label="${copy.r0Label}">
+        </div>
+        <div class="r0-t-control">
+          <div class="r0-t-label-row">
+            <label for="r0-t-cov">${copy.coverageLabel}</label>
+            <span class="r0-t-val-cov">0.50</span>
+          </div>
+          <input id="r0-t-cov" class="r0-t-slider" type="range" min="0" max="1" step="0.01" value="0.5" aria-label="${copy.coverageLabel}">
+        </div>
+      </div>
+      <div class="r0-t-canvas-container">
+        <canvas class="r0-t-canvas" aria-label="${copy.ariaLabel}"></canvas>
+      </div>
+      <div class="r0-t-status" aria-live="polite"></div>
+    </div>
+  `;
+
+  const r0Slider = root.querySelector('#r0-t-r0');
+  const covSlider = root.querySelector('#r0-t-cov');
+  const r0Val = root.querySelector('.r0-t-val-r0');
+  const covVal = root.querySelector('.r0-t-val-cov');
+  const canvas = root.querySelector('.r0-t-canvas');
+  const ctx = canvas.getContext('2d');
+  const statusEl = root.querySelector('.r0-t-status');
+
+  let targetR0 = 3;
+  let currentR0 = 3;
+  let targetCov = 0.5;
+  let currentCov = 0.5;
+  let lastStatus = '';
+
+  let canvasW = 0;
+  let canvasH = 0;
+  let currentDpr = 1;
+
+  let isPaused = false;
+  let animationId = null;
+
+  const isCJK = (str) => /[\u4e00-\u9fa5\u3040-\u30ff\uac00-\ud7af]/.test(str);
+
+  function wrapText(context, text, x, y, maxWidth, lineHeight) {
+    const cjk = isCJK(text);
+    const tokens = cjk ? text.split('') : text.split(' ');
+    let line = '';
+    const lines = [];
+    
+    for (let i = 0; i < tickMarks.length; i++) {
+      const token = tickMarks[i];
+      const testLine = line + (line && !cjk ? ' ' : '') + token;
+      if (context.measureText(testLine).width > maxWidth && i > 0) {
+        lines.push(line);
+        line = token;
+      } else {
+        line = testLine;
+      }
+    }
+    lines.push(line);
+    
+    const startY = y - ((lines.length - 1) * lineHeight) / 2;
+    lines.forEach((l, i) => {
+      context.fillText(l, x, startY + i * lineHeight);
+    });
+  }
+
+  function updateStatus() {
+    const threshold = 1 - 1 / targetR0;
+    let newStatus = '';
+    if (Math.abs(targetCov - threshold) < 0.05) {
+      newStatus = copy.statusNear;
+    } else if (targetCov > threshold) {
+      newStatus = copy.statusAbove;
+    } else {
+      newStatus = copy.statusBelow;
+    }
+    if (newStatus !== lastStatus) {
+      statusEl.textContent = newStatus;
+      lastStatus = newStatus;
+      announce(newStatus);
+    }
+  }
+
+  function handleInput() {
+    targetR0 = parseFloat(r0Slider.value);
+    targetCov = parseFloat(covSlider.value);
+    r0Val.textContent = targetR0.toFixed(1);
+    covVal.textContent = targetCov.toFixed(2);
+    updateStatus();
+    
+    if (isPaused || !motion) {
+      currentR0 = targetR0;
+      currentCov = targetCov;
+      draw();
+    } else if (!animationId) {
+      loop();
+    }
+  }
+
+  r0Slider.addEventListener('input', handleInput, { signal });
+  covSlider.addEventListener('input', handleInput, { signal });
+
+  function draw() {
+    if (!canvasW || !canvasH) return;
+
+    ctx.clearRect(0, 0, canvasW, canvasH);
+
+    const ink = resolveColor(tokens.ink);
+    const muted = resolveColor(tokens.muted);
+    const ocean = resolveColor(tokens.ocean);
+    const warm = resolveColor(tokens.warm);
+    const line = resolveColor(tokens.line);
+    const paper = resolveColor(tokens.paper);
+
+    const padL = 60 * currentDpr;
+    const padR = 20 * currentDpr;
+    const padT = 30 * currentDpr;
+    const padB = 40 * currentDpr;
+
+    const plotW = canvasW - padL - padR;
+    const plotH = canvasH - padT - padB;
+
+    const mapX = (r0) => padL + ((r0 - 1) / 9) * plotW;
+    const mapY = (p) => canvasH - padB - p * plotH;
+
+    ctx.beginPath();
+    ctx.moveTo(mapX(1), mapY(0));
+    for (let x = 1; x <= 10; x += 0.1) {
+      ctx.lineTo(mapX(x), mapY(1 - 1/x));
+    }
+    ctx.lineTo(mapX(10), mapY(0));
+    ctx.closePath();
+    ctx.fillStyle = warm;
+    ctx.globalAlpha = 0.15;
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(mapX(1), mapY(0));
+    for (let x = 1; x <= 10; x += 0.1) {
+      ctx.lineTo(mapX(x), mapY(1 - 1/x));
+    }
+    ctx.lineTo(mapX(10), mapY(1));
+    ctx.lineTo(mapX(1), mapY(1));
+    ctx.closePath();
+    ctx.fillStyle = ocean;
+    ctx.fill();
+    ctx.globalAlpha = 1.0;
+
+    ctx.beginPath();
+    for (let x = 1; x <= 10; x += 0.1) {
+      ctx.lineTo(mapX(x), mapY(1 - 1/x));
+    }
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 2 * currentDpr;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(padL, padT);
+    ctx.lineTo(padL, canvasH - padB);
+    ctx.lineTo(canvasW - padR, canvasH - padB);
+    ctx.strokeStyle = line;
+    ctx.lineWidth = 1 * currentDpr;
+    ctx.stroke();
+
+    ctx.fillStyle = ink;
+    ctx.font = `${12 * currentDpr}px sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    
+    [1, 5, 10].forEach(val => {
+      const x = mapX(val);
+      ctx.fillText(val, x, canvasH - padB + 8 * currentDpr);
+      ctx.beginPath();
+      ctx.moveTo(x, canvasH - padB);
+      ctx.lineTo(x, canvasH - padB + 4 * currentDpr);
+      ctx.strokeStyle = line;
+      ctx.stroke();
+    });
+    ctx.fillText(copy.r0Label, padL + plotW / 2, canvasH - padB + 24 * currentDpr);
+
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    [0, 0.5, 1].forEach(val => {
+      const y = mapY(val);
+      ctx.fillText(val, padL - 8 * currentDpr, y);
+      ctx.beginPath();
+      ctx.moveTo(padL - 4 * currentDpr, y);
+      ctx.lineTo(padL, y);
+      ctx.strokeStyle = line;
+      ctx.stroke();
+    });
+
+    ctx.save();
+    ctx.translate(padL - 40 * currentDpr, padT + plotH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = 'center';
+    ctx.fillText(copy.coverageLabel, 0, 0);
+    ctx.restore();
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const lineHeight = 16 * currentDpr;
+    
+    ctx.fillStyle = ocean;
+    wrapText(ctx, copy.aboveLabel, mapX(4), mapY(0.85), plotW * 0.4, lineHeight);
+    
+    ctx.fillStyle = warm;
+    wrapText(ctx, copy.belowLabel, mapX(7), mapY(0.2), plotW * 0.4, lineHeight);
+
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'bottom';
+    ctx.fillStyle = ink;
+    const tX = mapX(2.5) + 8 * currentDpr;
+    const tY = mapY(1 - 1/2.5) - 8 * currentDpr;
+    wrapText(ctx, copy.thresholdLabel, tX, tY, plotW * 0.4, lineHeight);
+
+    const cx = mapX(currentR0);
+    const cy = mapY(currentCov);
+
+    ctx.beginPath();
+    ctx.setLineDash([4 * currentDpr, 4 * currentDpr]);
+    ctx.moveTo(cx, canvasH - padB);
+    ctx.lineTo(cx, cy);
+    ctx.moveTo(padL, cy);
+    ctx.lineTo(cx, cy);
+    ctx.strokeStyle = muted;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, 6 * currentDpr, 0, Math.PI * 2);
+    const currentThreshold = 1 - 1 / currentR0;
+    ctx.fillStyle = currentCov > currentThreshold ? ocean : warm;
+    ctx.fill();
+    ctx.strokeStyle = paper;
+    ctx.lineWidth = 2 * currentDpr;
+    ctx.stroke();
+  }
+
+  function loop() {
+    if (isPaused) {
+      animationId = null;
+      return;
+    }
+    
+    let needsDraw = false;
+    
+    if (motion) {
+      const dr = targetR0 - currentR0;
+      const dc = targetCov - currentCov;
+      if (Math.abs(dr) > 0.01 || Math.abs(dc) > 0.001) {
+        currentR0 += dr * 0.15;
+        currentCov += dc * 0.15;
+        needsDraw = true;
+      } else {
+        currentR0 = targetR0;
+        currentCov = targetCov;
+        needsDraw = true;
+      }
+    } else {
+      if (currentR0 !== targetR0 || currentCov !== targetCov) {
+        currentR0 = targetR0;
+        currentCov = targetCov;
+        needsDraw = true;
+      }
+    }
+
+    if (needsDraw) {
+      draw();
+    }
+
+    if (currentR0 !== targetR0 || currentCov !== targetCov) {
+      animationId = requestAnimationFrame(loop);
+    } else {
+      animationId = null;
+    }
+  }
+
+  updateStatus();
+
+  return {
+    pause() {
+      isPaused = true;
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+    },
+    resume() {
+      isPaused = false;
+      if (currentR0 !== targetR0 || currentCov !== targetCov) {
+        loop();
+      }
+    },
+    reset() {
+      targetR0 = 3;
+      targetCov = 0.5;
+      r0Slider.value = 3;
+      covSlider.value = 0.5;
+      r0Val.textContent = "3.0";
+      covVal.textContent = "0.50";
+      updateStatus();
+      
+      if (!motion || isPaused) {
+        currentR0 = targetR0;
+        currentCov = targetCov;
+        draw();
+      } else if (!animationId) {
+        loop();
+      }
+    },
+    destroy() {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+      root.innerHTML = '';
+    },
+    resize({ dpr }) {
+      currentDpr = dpr;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvasW = rect.width * dpr;
+      canvasH = rect.height * dpr;
+      canvas.width = canvasW;
+      canvas.height = canvasH;
+      draw();
+    }
+  };
+});
+
+registerDemo("r0-limits", ({ root, copy, motion, tokens, resolveColor, announce }) => {
+  const buttons = copy.modes.map((mode, index) => `
+    <button type="button" class="r0-lim-btn" data-r0-lim="${index}" aria-pressed="${index === 0}">${escapeHtml(mode.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .r0-lim { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(145deg,color-mix(in srgb,${tokens.warm} 8%,${tokens.surface}),${tokens.surface}); }
+      .r0-lim-panel { display:grid; gap:.75rem; padding:1.1rem 1.2rem; border:1px solid ${tokens.line}; border-radius:1.1rem;
+        background:color-mix(in srgb,${tokens.paper} 55%,${tokens.surface}); }
+      .r0-lim-badge { display:inline-flex; width:max-content; padding:.25rem .55rem; border-radius:999px; font-size:.68rem; font-weight:850;
+        letter-spacing:.04em; text-transform:uppercase; color:${tokens.surface}; background:${tokens.ocean}; }
+      .r0-lim-panel[data-mode="messy"] .r0-lim-badge { background:${tokens.coral}; }
+      .r0-lim-headline { margin:0; font-size:1.15rem; font-weight:850; line-height:1.35; }
+      .r0-lim-detail { margin:0; color:${tokens.muted}; line-height:1.55; }
+      .r0-lim-viz { position:relative; min-height:9.5rem; height:9.5rem; border-radius:.85rem; border:1px dashed ${tokens.line};
+        background:color-mix(in srgb,${tokens.surface} 80%,${tokens.paper}); overflow:hidden; }
+      .r0-lim-viz canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+      .r0-lim-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .r0-lim-btn { flex:1 1 8rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink};
+        background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .r0-lim-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .r0-lim-btn:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .r0-lim-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .r0-lim-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .r0-lim.is-paused canvas { opacity:.92; }
+    </style>
+    <div class="r0-lim${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="r0-lim-panel" data-r0-lim-panel data-mode="ideal">
+        <span class="r0-lim-badge" data-r0-lim-badge></span>
+        <h3 class="r0-lim-headline" data-r0-lim-headline></h3>
+        <p class="r0-lim-detail" data-r0-lim-detail></p>
+        <div class="r0-lim-viz" data-r0-lim-wrap>
+          <canvas data-r0-lim-canvas aria-hidden="true"></canvas>
+        </div>
+      </div>
+      <div class="r0-lim-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${buttons}</div>
+      <p class="r0-lim-status" data-r0-lim-status role="status"></p>
+      <p class="r0-lim-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".r0-lim");
+  const panel = root.querySelector("[data-r0-lim-panel]");
+  const badge = root.querySelector("[data-r0-lim-badge]");
+  const headline = root.querySelector("[data-r0-lim-headline]");
+  const detail = root.querySelector("[data-r0-lim-detail]");
+  const status = root.querySelector("[data-r0-lim-status]");
+  const wrap = root.querySelector("[data-r0-lim-wrap]");
+  const canvas = root.querySelector("[data-r0-lim-canvas]");
+  const ctx = canvas.getContext("2d");
+  const btns = [...root.querySelectorAll("[data-r0-lim]")];
+  let modeKey = "ideal";
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+
+  const draw = () => {
+    if (!width || !height) return;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+
+    const pad = 18;
+    const axisY = height - pad;
+    const top = pad + 8;
+    const left = pad;
+    const right = width - pad;
+    const thresholdX = left + (right - left) * 0.62;
+
+    const cLine = resolveColor(tokens.line);
+    const cOcean = resolveColor(tokens.ocean);
+    const cWarm = resolveColor(tokens.warm);
+    const cCoral = resolveColor(tokens.coral);
+    ctx.strokeStyle = cLine;
+    ctx.beginPath();
+    ctx.moveTo(left, axisY);
+    ctx.lineTo(right, axisY);
+    ctx.stroke();
+
+    if (modeKey === "ideal") {
+      ctx.globalAlpha = 0.22;
+      ctx.fillStyle = cOcean;
+      ctx.fillRect(thresholdX, top, right - thresholdX, axisY - top);
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = cOcean;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(thresholdX, top);
+      ctx.lineTo(thresholdX, axisY);
+      ctx.stroke();
+      ctx.fillStyle = cWarm;
+      ctx.beginPath();
+      ctx.arc(thresholdX, top + 10, 5, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      const bandL = thresholdX - 28;
+      const bandR = thresholdX + 36;
+      ctx.globalAlpha = 0.2;
+      ctx.fillStyle = cCoral;
+      ctx.fillRect(bandL, top, bandR - bandL, axisY - top);
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = cCoral;
+      ctx.setLineDash([5, 5]);
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(thresholdX - 12, top + 6);
+      ctx.lineTo(thresholdX + 18, axisY - 4);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      const hubs = [
+        [left + 40, top + 30],
+        [left + 90, top + 70],
+        [right - 50, top + 40],
+        [thresholdX + 10, top + 55]
+      ];
+      hubs.forEach(([x, y], i) => {
+        ctx.fillStyle = i % 2 ? cCoral : cWarm;
+        ctx.beginPath();
+        ctx.arc(x, y, 4 + (i % 3), 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+  };
+
+  const select = (index, speak = false) => {
+    const mode = copy.modes[index];
+    modeKey = mode.key;
+    panel.dataset.mode = mode.key;
+    badge.textContent = mode.badge;
+    headline.textContent = mode.headline;
+    detail.textContent = mode.detail;
+    status.textContent = mode.key === "messy" ? copy.statusMessy : copy.statusIdeal;
+    btns.forEach((b, i) => b.setAttribute("aria-pressed", String(i === index)));
+    draw();
+    if (speak) announce(status.textContent);
+  };
+
+  btns.forEach((b) => b.addEventListener("click", () => select(Number(b.dataset.r0Lim), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; },
+    resize: ({ width: w, height: h, dpr: ratio }) => {
+      width = Math.max(1, w || wrap.getBoundingClientRect().width);
+      height = Math.max(1, h || wrap.getBoundingClientRect().height);
+      dpr = ratio || 1;
+      draw();
+    }
+  };
+});
+  </script>
+</body>
+</html>

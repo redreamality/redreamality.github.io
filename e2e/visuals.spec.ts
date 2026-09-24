@@ -5,7 +5,8 @@ test('English Visuals gallery contains the multilingual published works', async 
 
   expect(response?.status()).toBe(200);
   await expect(page.locator('h1')).toHaveText('Visuals');
-  await expect(page.locator('[data-visual-card]')).toHaveCount(11);
+  await expect(page.locator('[data-visual-card]')).toHaveCount(12);
+  await expect(page.getByRole('heading', { name: 'Even a Fierce Virus: Why Does Spread Self-Extinguish Past a Coverage Threshold?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'In a World of "About Average," Why Do Extremes Keep Showing Up?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Same Lab Result—Why Do Two People Reach Opposite Conclusions?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: '0.1% Extra a Day—How Far Ahead Are You in a Year?' })).toBeVisible();
@@ -17,7 +18,7 @@ test('English Visuals gallery contains the multilingual published works', async 
   await expect(page.getByRole('heading', { name: 'How Air Conditioners Work' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'What Is Loop Engineering?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'How Typhoons Form' })).toBeVisible();
-  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(11);
+  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(12);
   await expect(page.getByText('Agent Architecture Showcase')).toHaveCount(0);
   await expect(page.getByText(/not available in this language/i)).toHaveCount(0);
 });
@@ -30,8 +31,8 @@ test('stale missing-language query cannot mark multilingual Typhoon as unavailab
 });
 
 for (const locale of [
-  { path: '/cn/visuals/', title: '可视化', work: '为什么「差不多平均」的世界里，极端值总出现？' },
-  { path: '/ja/visuals/', title: 'ビジュアル', work: '「だいたい平均」の世界で、なぜ極端な値はいつも現れるのか？' },
+  { path: '/cn/visuals/', title: '可视化', work: '病毒再猛，为什么接种到某个点疫情会自己熄？' },
+  { path: '/ja/visuals/', title: 'ビジュアル', work: 'どんなに強いウイルスでも、接種がある閾値を超えると流行はなぜ自ら収束するのか？' },
 ]) {
   test(`${locale.path} renders a localized Visuals gallery`, async ({ page }) => {
     const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
@@ -39,7 +40,7 @@ for (const locale of [
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toHaveText(locale.title);
     await expect(page.getByRole('heading', { name: locale.work })).toBeVisible();
-    await expect(page.locator('[data-visual-card]')).toHaveCount(11);
+    await expect(page.locator('[data-visual-card]')).toHaveCount(12);
   });
 }
 
@@ -60,6 +61,7 @@ for (const locale of [
     path: '/',
     sectionTitle: 'Visuals',
     works: [
+      ['r0-herd-immunity', 'Even a Fierce Virus: Why Does Spread Self-Extinguish Past a Coverage Threshold?', '/visuals/r0-herd-immunity/'],
       ['normal-distribution', 'In a World of "About Average," Why Do Extremes Keep Showing Up?', '/visuals/normal-distribution/'],
       ['bayes-lab-result', 'Same Lab Result—Why Do Two People Reach Opposite Conclusions?', '/visuals/bayes-lab-result/'],
       ['compound-interest', '0.1% Extra a Day—How Far Ahead Are You in a Year?', '/visuals/compound-interest/'],
@@ -80,6 +82,7 @@ for (const locale of [
     path: '/cn/',
     sectionTitle: '可视化',
     works: [
+      ['r0-herd-immunity', '病毒再猛，为什么接种到某个点疫情会自己熄？', '/cn/visuals/r0-herd-immunity/'],
       ['normal-distribution', '为什么「差不多平均」的世界里，极端值总出现？', '/cn/visuals/normal-distribution/'],
       ['bayes-lab-result', '同一张化验单，为什么两人结论相反？', '/cn/visuals/bayes-lab-result/'],
       ['compound-interest', '每天多赚 0.1%，一年后你会差多少？', '/cn/visuals/compound-interest/'],
@@ -100,6 +103,7 @@ for (const locale of [
     path: '/ja/',
     sectionTitle: 'ビジュアル',
     works: [
+      ['r0-herd-immunity', 'どんなに強いウイルスでも、接種がある閾値を超えると流行はなぜ自ら収束するのか？', '/ja/visuals/r0-herd-immunity/'],
       ['normal-distribution', '「だいたい平均」の世界で、なぜ極端な値はいつも現れるのか？', '/ja/visuals/normal-distribution/'],
       ['bayes-lab-result', '同じ検査結果なのに、なぜ二人の結論は真逆なのか？', '/ja/visuals/bayes-lab-result/'],
       ['compound-interest', '毎日0.1%多く増やすと、一年後どれだけ差がつく？', '/ja/visuals/compound-interest/'],
@@ -1140,6 +1144,64 @@ for (const locale of [
   });
 }
 
+
+for (const locale of [
+  {
+    path: '/visuals/r0-herd-immunity/',
+    htmlLang: 'en',
+    h1: 'Even a fierce virus: why does spread self-extinguish past a coverage threshold?',
+    pauseAll: 'Pause all motion',
+    reset: 'Reset',
+    statusHot: 'Hot seed: average onward cases > 1 → chains tend to grow.',
+  },
+  {
+    path: '/cn/visuals/r0-herd-immunity/',
+    htmlLang: 'zh-CN',
+    h1: '病毒再猛，为什么接种到某个点疫情会自己熄？',
+    pauseAll: '暂停所有动画',
+    reset: '重置',
+    statusHot: '热种子：平均向下传 > 1 → 链条倾向增长。',
+  },
+  {
+    path: '/ja/visuals/r0-herd-immunity/',
+    htmlLang: 'ja',
+    h1: 'どんなに強いウイルスでも、接種がある閾値を超えると流行はなぜ自ら収束するのか？',
+    pauseAll: 'すべての動きを停止',
+    reset: 'リセット',
+    statusHot: '熱い種子：平均の次世代 > 1 → 連鎖は伸びやすい。',
+  },
+]) {
+  test(`${locale.path} renders the localized r0-herd-immunity explainer and lifecycle`, async ({ page }) => {
+    const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('html')).toHaveAttribute('lang', locale.htmlLang);
+    await expect(page.locator('body > nav')).toBeVisible();
+    await expect(page.locator('h1')).toHaveText(locale.h1);
+    await expect(page.locator('h1')).toHaveCount(1);
+    const visual = page.locator('[data-visual-artifact="r0-herd-immunity"]');
+    await expect(visual).toBeVisible();
+    await expect(visual.locator('iframe')).toHaveCount(0);
+    await expect(page.locator('.site-header')).toHaveCount(0);
+    await expect(page.locator('interactive-figure')).toHaveCount(5);
+
+    const overview = page.locator('interactive-figure[data-demo="r0-overview"]');
+    await overview.scrollIntoViewIfNeeded();
+    await expect(overview).toHaveAttribute('data-state', 'mounted');
+    await expect(overview.locator('.r0-ov-controls')).toBeVisible();
+    const hotMode = overview.locator('[data-r0-ov="1"]');
+    const status = overview.locator('[data-r0-status]');
+    await hotMode.click();
+    await expect(hotMode).toHaveAttribute('aria-pressed', 'true');
+    await expect(status).toContainText(locale.statusHot);
+
+    await overview.getByRole('button', { name: locale.reset }).click();
+    await expect(overview.locator('[data-r0-ov="0"]')).toHaveAttribute('aria-pressed', 'true');
+    await page.getByRole('button', { name: locale.pauseAll }).click();
+    await expect(overview).toHaveAttribute('data-playback', 'paused');
+  });
+}
+
+
 test('sitemap lists every published visual locale and no Agent Architecture routes', async ({ request }) => {
   const indexResponse = await request.get('/sitemap-index.xml');
   expect(indexResponse.ok()).toBeTruthy();
@@ -1186,6 +1248,9 @@ test('sitemap lists every published visual locale and no Agent Architecture rout
     '/visuals/normal-distribution/',
     '/cn/visuals/normal-distribution/',
     '/ja/visuals/normal-distribution/',
+    '/visuals/r0-herd-immunity/',
+    '/cn/visuals/r0-herd-immunity/',
+    '/ja/visuals/r0-herd-immunity/',
   ]) {
     expect(xml).toContain(`<loc>https://redreamality.com${path}</loc>`);
   }

@@ -1,0 +1,923 @@
+{
+  "slug": "r0-herd-immunity",
+  "renderer": "interactive-explainer",
+  "structure": {
+    "overview": {
+      "demo": "r0-overview"
+    },
+    "steps": [
+      {
+        "id": "growth-or-fade",
+        "demo": "r0-spread"
+      },
+      {
+        "id": "thinning-chains",
+        "demo": "r0-chains"
+      },
+      {
+        "id": "threshold",
+        "demo": "r0-threshold"
+      },
+      {
+        "id": "limits",
+        "demo": "r0-limits"
+      }
+    ]
+  },
+  "locales": {
+    "en": {
+      "lang": "en",
+      "meta": {
+        "title": "Even a Fierce Virus: Why Does Spread Self-Extinguish Past a Coverage Threshold?",
+        "description": "An interactive guide to basic reproduction number R₀ and the herd-immunity threshold: how chains grow or fade, how immunity shrinks the susceptible pool, and why coverage ≈ 1−1/R₀ can tip effective R below one—teaching model only, not policy advice."
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "Pause all motion",
+        "resumeAll": "Resume all motion",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset",
+        "waiting": "The visual will load when it enters the viewport.",
+        "loading": "Preparing the visual…",
+        "error": "The visual could not be displayed. Read the explanation above instead.",
+        "figureFallback": "Enable JavaScript to view this interactive explanation.",
+        "skipToContent": "Skip to content",
+        "languageNavigation": "Languages",
+        "overviewLabel": "R0 and herd-immunity overview",
+        "stepLabel": "Step"
+      },
+      "hero": {
+        "eyebrow": "R₀ / TRANSMISSION CHAINS / HERD IMMUNITY",
+        "title": "Even a fierce virus: why does spread self-extinguish past a coverage threshold?",
+        "subtitle": "A pathogen can look unstoppable when each case seeds several more. Push enough of the contact network into immunity and the average onward chain can drop below one—spread fades without needing every person covered. Toy model for intuition; not a vaccination schedule or public-health order."
+      },
+      "overview": {
+        "title": "One case, how many next?—meet R₀",
+        "body": [
+          "R₀ (basic reproduction number) asks: in a fully susceptible crowd, how many new infections does one typical case cause on average? If that number sits above one, chains tend to grow; below one, they tend to die out.",
+          "The demos below keep numbers illustrative. Real outbreaks mix contact patterns, timing, and immunity quality—this page isolates the threshold idea, not a forecast."
+        ],
+        "plainLanguage": {
+          "label": "Plainly",
+          "body": "R₀ is the average branching factor of infection when almost everyone is still susceptible."
+        },
+        "keyPointsLabel": "Keep these three ideas",
+        "keyPoints": [
+          {
+            "title": "Branching factor",
+            "body": "R₀ > 1 grows; R₀ < 1 fades—on average, in a simple model."
+          },
+          {
+            "title": "Effective R moves",
+            "body": "As immunity rises, each case meets fewer susceptible people—effective R falls."
+          },
+          {
+            "title": "Teaching, not policy",
+            "body": "Threshold ≈ 1−1/R₀ is a classroom sketch—not a coverage mandate."
+          }
+        ],
+        "demoTitle": "Toggle a quiet seed vs a hot seed",
+        "copy": {
+          "ariaLabel": "Interactive overview contrasting low and high basic reproduction number branching",
+          "caption": "Switch seeds: the same person can look quiet or explosive depending on average onward cases.",
+          "controlLabel": "Which seed",
+          "modes": [
+            {
+              "key": "quiet",
+              "label": "Quiet seed · R₀≈0.8",
+              "headline": "On average, chains shrink",
+              "detail": "Each case seeds fewer than one next case. Branches thin out—outbreaks tend to sputter.",
+              "badge": "R₀ < 1"
+            },
+            {
+              "key": "hot",
+              "label": "Hot seed · R₀≈3",
+              "headline": "On average, chains fan out",
+              "detail": "Each case seeds about three next cases in a fully susceptible crowd. Trees thicken fast.",
+              "badge": "R₀ > 1"
+            }
+          ],
+          "statusQuiet": "Quiet seed: average onward cases < 1 → chains tend to die.",
+          "statusHot": "Hot seed: average onward cases > 1 → chains tend to grow."
+        }
+      },
+      "steps": [
+        {
+          "id": "growth-or-fade",
+          "number": "01",
+          "title": "Chains grow when R₀ > 1—and fade when R₀ < 1",
+          "body": [
+            "Picture generations of infection: each infected person passes the pathogen to some number of susceptible contacts. If that average stays above one, case counts climb; if it slips below one, they drift down.",
+            "The slider below is a toy. It does not encode incubation, seasons, or hospital load—only the growth-vs-fade hinge that makes R₀ useful as an intuition pump."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Above one the tree thickens; below one it withers—on average."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Average, not destiny",
+              "body": "Individual luck varies; the mean decides the trend in this sketch."
+            },
+            {
+              "title": "Same virus, different R",
+              "body": "Behavior, density, and immunity all shift the effective number."
+            },
+            {
+              "title": "Toy generations",
+              "body": "Discrete steps stand in for messy continuous time."
+            }
+          ],
+          "demoTitle": "Slide R₀ and watch generations grow or fade",
+          "copy": {
+            "ariaLabel": "Interactive chart of infection generations growing or fading with R0",
+            "caption": "Move R₀. Watch whether each generation is larger or smaller than the last.",
+            "controlLabel": "Basic reproduction number R₀",
+            "r0Label": "R₀",
+            "generationLabel": "Generation",
+            "casesLabel": "Relative cases",
+            "statusGrow": "R₀ > 1: each generation is larger on average—spread climbs.",
+            "statusFade": "R₀ < 1: each generation is smaller on average—spread fades.",
+            "statusEdge": "R₀ ≈ 1: generations hover near flat—knife-edge in this toy."
+          }
+        },
+        {
+          "id": "thinning-chains",
+          "number": "02",
+          "title": "Immunity shrinks the susceptible pool—chains lose branches",
+          "body": [
+            "Vaccination or prior infection removes people from the susceptible pool (in the simple model). An infectious person then meets fewer hosts who can still catch and pass it on.",
+            "Effective reproduction number falls even if the pathogen’s intrinsic infectiousness is unchanged. Branching trees look thinner—not because the virus “gave up,” but because fewer contacts are open links."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Fewer susceptible neighbors → fewer onward infections per case."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Pool, not magic",
+              "body": "Immunity works here by closing links in the contact graph."
+            },
+            {
+              "title": "Effective R",
+              "body": "Roughly R₀ times the still-susceptible fraction (toy form)."
+            },
+            {
+              "title": "Visual thinning",
+              "body": "Watch branches fail when they hit an immune node."
+            }
+          ],
+          "demoTitle": "Raise immune coverage and watch the tree thin",
+          "copy": {
+            "ariaLabel": "Interactive branching transmission tree that thins as immune coverage rises",
+            "caption": "Raise coverage. Branches that hit immune nodes stop—effective onward spread falls.",
+            "controlLabel": "Immune coverage",
+            "coverageLabel": "Coverage",
+            "susceptibleLabel": "Susceptible",
+            "immuneLabel": "Immune",
+            "infectedLabel": "Infected path",
+            "statusLow": "Low coverage: most contacts are still open—trees stay bushy.",
+            "statusHigh": "High coverage: many contacts are closed—trees look sparse; chains break sooner."
+          }
+        },
+        {
+          "id": "threshold",
+          "number": "03",
+          "title": "Why not 100%? The sketch threshold ≈ 1 − 1/R₀",
+          "body": [
+            "In the classic homogeneous toy, you only need the effective R to fall below one. If a fraction p of people are immune, a rough condition is R₀(1−p) < 1, so p > 1 − 1/R₀.",
+            "That is why textbooks say a fierce pathogen (large R₀) needs higher coverage to tip the same hinge—and why “everyone” is not required inside this simplification. Real populations are messier; treat the formula as a chalkboard, not a decree."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Cover enough that each case averages under one next case—you may not need 100%."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Hinge at one",
+              "body": "The goal in the toy is effective R < 1, not zero cases forever."
+            },
+            {
+              "title": "Higher R₀, higher bar",
+              "body": "1−1/R₀ rises as R₀ rises—fiercer pathogens need more coverage in the sketch."
+            },
+            {
+              "title": "Not a mandate",
+              "body": "This page explains a formula shape—not a policy target."
+            }
+          ],
+          "demoTitle": "Slide R₀ and watch the threshold waterline move",
+          "copy": {
+            "ariaLabel": "Interactive area chart of herd-immunity threshold versus R0 with a coverage slider",
+            "caption": "Change R₀ to move the 1−1/R₀ waterline. Drag coverage to see whether you sit above or below the hinge.",
+            "controlLabel": "R₀ and coverage",
+            "r0Label": "R₀",
+            "coverageLabel": "Coverage p",
+            "thresholdLabel": "Threshold 1−1/R₀",
+            "aboveLabel": "Above threshold (toy)",
+            "belowLabel": "Below threshold (toy)",
+            "statusAbove": "Coverage sits above 1−1/R₀ in this sketch → effective R tends below one.",
+            "statusBelow": "Coverage sits below 1−1/R₀ in this sketch → effective R tends above one.",
+            "statusNear": "Near the waterline: small moves tip the toy hinge."
+          }
+        },
+        {
+          "id": "limits",
+          "number": "04",
+          "title": "Limits: mixing, vaccine effect, variants move the bar",
+          "body": [
+            "Homogeneous mixing is a convenience. Super-spreading contact patterns, imperfect vaccine protection, waning immunity, and immune-escape variants all shift how much coverage you need—and whether “threshold” even looks sharp.",
+            "Stop here with the right humility: R₀ and 1−1/R₀ teach why partial coverage can still bend chains downward. They do not replace epidemiology, trial data, or local decision-making."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "The chalkboard threshold moves when the world is uneven, vaccines are partial, or the virus changes."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Heterogeneous contacts",
+              "body": "A few high-degree hubs change outbreak shape versus a uniform crowd."
+            },
+            {
+              "title": "Imperfect protection",
+              "body": "If a shot blocks transmission only partly, effective coverage is lower than doses given."
+            },
+            {
+              "title": "Moving target",
+              "body": "Variants can raise R₀ or dodge immunity—bars slide."
+            }
+          ],
+          "demoTitle": "Toggle ideal sketch vs messier world",
+          "copy": {
+            "ariaLabel": "Interactive comparison of ideal herd-immunity threshold versus messy real-world caveats",
+            "caption": "Switch views: ideal waterline versus caveats that blur or shift it.",
+            "controlLabel": "Which picture",
+            "modes": [
+              {
+                "key": "ideal",
+                "label": "Ideal sketch",
+                "headline": "Clean waterline at 1−1/R₀",
+                "detail": "Homogeneous contacts, solid immunity, fixed R₀—the textbook hinge looks sharp.",
+                "badge": "Toy"
+              },
+              {
+                "key": "messy",
+                "label": "Messier world",
+                "headline": "The bar smears and drifts",
+                "detail": "Uneven mixing, partial protection, and variants stretch or move the effective threshold.",
+                "badge": "Caveats"
+              }
+            ],
+            "statusIdeal": "Ideal sketch selected: one clean waterline—teaching aid only.",
+            "statusMessy": "Messier world selected: expect a fuzzy, moving bar—not a single magic percentage."
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "Put the mechanism back together",
+        "title": "R₀ sets the branching; coverage pulls effective R under one",
+        "body": [
+          "R₀ sketches how bushy chains are in a fully susceptible crowd. Immunity shrinks open links so each case seeds fewer next cases. In the homogeneous toy, coverage past about 1−1/R₀ tips average onward spread below one—spread can fade without 100% coverage.",
+          "Keep the disclaimer loud: teaching simplification, not a vaccination schedule, not a forecast, not policy advice. Real programs wrestle with uptake, equity, product performance, and viral change."
+        ],
+        "checklistLabel": "Reader checklist",
+        "checklist": [
+          "Ask what R₀ (or effective R) you are assuming—and why.",
+          "Ask how much of the contact network is still susceptible.",
+          "Treat 1−1/R₀ as a chalkboard hinge, not a mandate.",
+          "Remember heterogeneity, imperfect vaccines, and variants move the bar."
+        ],
+        "scaleTitle": "Four moving parts",
+        "scaleItems": [
+          {
+            "term": "R₀",
+            "question": "How bushy at the start?",
+            "role": "Average onward cases in a fully susceptible crowd."
+          },
+          {
+            "term": "Effective R",
+            "question": "What changes with immunity?",
+            "role": "Onward cases after the susceptible pool shrinks."
+          },
+          {
+            "term": "Threshold",
+            "question": "Why not always 100%?",
+            "role": "Toy hinge near p ≈ 1−1/R₀."
+          },
+          {
+            "term": "Limits",
+            "question": "What breaks the sketch?",
+            "role": "Mixing, efficacy, waning, variants."
+          }
+        ],
+        "finalQuote": "Partial coverage can still bend chains downward—because the hinge is average onward cases under one, not universal ink.",
+        "sourceNote": "Public-education notes on basic reproduction number and the classic herd-immunity threshold p ≈ 1−1/R₀. Figures are illustrative teaching devices—not forecasts, not clinical guidance, and not public-health policy. Wikipedia “Basic reproduction number” / “Herd immunity” provide useful background; this page is mechanism-only."
+      }
+    },
+    "zh": {
+      "lang": "zh",
+      "meta": {
+        "title": "病毒再猛，为什么接种到某个点疫情会自己熄？",
+        "description": "交互图解基本再生数 R₀ 与群体免疫阈值：传染链如何增长或熄灭、免疫如何缩小可感染池、为何覆盖率约 1−1/R₀ 就能把有效再生数压到 1 以下——示意模型，不是政策建议。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "暂停所有动画",
+        "resumeAll": "恢复所有动画",
+        "pause": "暂停",
+        "resume": "继续",
+        "reset": "重置",
+        "waiting": "图示进入视口后才会加载。",
+        "loading": "正在准备图示…",
+        "error": "图示无法显示，请先阅读上方说明。",
+        "figureFallback": "请启用 JavaScript 以查看交互说明。",
+        "skipToContent": "跳到正文",
+        "languageNavigation": "语言",
+        "overviewLabel": "R₀ 与群体免疫概览",
+        "stepLabel": "步骤"
+      },
+      "hero": {
+        "eyebrow": "R₀ / 传染链 / 群体免疫",
+        "title": "病毒再猛，为什么接种到某个点疫情会自己熄？",
+        "subtitle": "一人传几人时，疫情看起来势不可挡。把接触网络里足够多人变成免疫，平均向下传的人数就可以掉到 1 以下——不必人人接种，链条也可能自己变稀。下面是课堂示意，不是接种时间表，也不是防疫指令。"
+      },
+      "overview": {
+        "title": "一人能传几人？先认识 R₀",
+        "body": [
+          "R₀（基本再生数）问的是：在几乎人人可感的人群里，一个典型感染者平均会传给几个人？大于 1，链条容易越扯越长；小于 1，链条更容易断掉。",
+          "下面数字都是示意。真实疫情还掺着接触方式、时间结构和免疫质量——这一页只把「门槛」直觉拆开，不做预测。"
+        ],
+        "plainLanguage": {
+          "label": "一句话说",
+          "body": "R₀ 就是「几乎人人可感」时，感染链条的平均分叉倍数。"
+        },
+        "keyPointsLabel": "先记住三点",
+        "keyPoints": [
+          {
+            "title": "分叉倍数",
+            "body": "R₀>1 往上长，R₀<1 往下熄——在这个简化模型里是平均值的故事。"
+          },
+          {
+            "title": "有效再生数会动",
+            "body": "免疫升高后，每个感染者碰到的可感者变少，有效再生数往下掉。"
+          },
+          {
+            "title": "教学，不是政策",
+            "body": "阈值约 1−1/R₀ 是黑板公式——不是覆盖率命令。"
+          }
+        ],
+        "demoTitle": "切换「冷种子」和「热种子」",
+        "copy": {
+          "ariaLabel": "对比低高基本再生数分叉的交互概览",
+          "caption": "切换种子：同一个人，平均向下传几人不同，看起来就安静或炸裂。",
+          "controlLabel": "哪颗种子",
+          "modes": [
+            {
+              "key": "quiet",
+              "label": "冷种子 · R₀≈0.8",
+              "headline": "平均来说，链条在收缩",
+              "detail": "每人传给不到一个人。分叉变稀——爆发更容易自己熄。",
+              "badge": "R₀ < 1"
+            },
+            {
+              "key": "hot",
+              "label": "热种子 · R₀≈3",
+              "headline": "平均来说，链条在张开",
+              "detail": "在人人可感时，每人大约传给三人。树很快变密。",
+              "badge": "R₀ > 1"
+            }
+          ],
+          "statusQuiet": "冷种子：平均向下传 < 1 → 链条倾向熄灭。",
+          "statusHot": "热种子：平均向下传 > 1 → 链条倾向增长。"
+        }
+      },
+      "steps": [
+        {
+          "id": "growth-or-fade",
+          "number": "01",
+          "title": "R₀>1 时链条长，R₀<1 时链条熄",
+          "body": [
+            "把传染想成一代一代往下交：每个感染者把病原传给若干可感接触者。平均值一直大于 1，病例数往上爬；掉到 1 以下，就往下漂。",
+            "下面滑条是玩具。它不写潜伏期、季节性或床位——只留下「涨还是熄」这道铰链，好让 R₀ 当直觉泵用。"
+          ],
+          "plainLanguage": {
+            "label": "一句话说",
+            "body": "大于 1 树变密，小于 1 树变稀——讲的是平均。"
+          },
+          "keyPointsLabel": "看什么",
+          "keyPoints": [
+            {
+              "title": "平均，不是宿命",
+              "body": "个人运气会飘；这个示意里趋势看均值。"
+            },
+            {
+              "title": "同一病毒，R 可以不同",
+              "body": "行为、密度、免疫都会改有效数字。"
+            },
+            {
+              "title": "示意代数",
+              "body": "离散代际代替乱七八糟的连续时间。"
+            }
+          ],
+          "demoTitle": "拖动 R₀，看代际涨还是熄",
+          "copy": {
+            "ariaLabel": "随 R₀ 变化、感染代际增长或熄灭的交互图",
+            "caption": "拖动 R₀。看每一代是比上一代更大还是更小。",
+            "controlLabel": "基本再生数 R₀",
+            "r0Label": "R₀",
+            "generationLabel": "代际",
+            "casesLabel": "相对病例",
+            "statusGrow": "R₀ > 1：每一代平均更大——扩散在爬升。",
+            "statusFade": "R₀ < 1：每一代平均更小——扩散在熄灭。",
+            "statusEdge": "R₀ ≈ 1：代际几乎走平——玩具里的刀刃位置。"
+          }
+        },
+        {
+          "id": "thinning-chains",
+          "number": "02",
+          "title": "免疫缩小可感染池——链条丢分叉",
+          "body": [
+            "接种或既往感染（在简单模型里）把人从可感池里拿掉。感染者再往外摸，碰到还能接住并传下去的人就少了。",
+            "病原本身有多「猛」可以不变，有效再生数照样往下掉。分叉树变稀，不是病毒「放弃了」，而是开着的接触边变少了。"
+          ],
+          "plainLanguage": {
+            "label": "一句话说",
+            "body": "可感邻居变少 → 每人向下传的感染变少。"
+          },
+          "keyPointsLabel": "看什么",
+          "keyPoints": [
+            {
+              "title": "池子，不是魔法",
+              "body": "这里免疫起作用的方式，是关掉接触图上的边。"
+            },
+            {
+              "title": "有效再生数",
+              "body": "粗略等于 R₀ × 仍可感比例（玩具写法）。"
+            },
+            {
+              "title": "看得见的变稀",
+              "body": "碰到免疫节点时，分叉就断了。"
+            }
+          ],
+          "demoTitle": "提高免疫覆盖，看树变稀",
+          "copy": {
+            "ariaLabel": "免疫覆盖升高时变稀的分支传染树交互图",
+            "caption": "提高覆盖率。碰到免疫节点的分叉会停——有效向下传变少。",
+            "controlLabel": "免疫覆盖率",
+            "coverageLabel": "覆盖率",
+            "susceptibleLabel": "可感",
+            "immuneLabel": "免疫",
+            "infectedLabel": "感染路径",
+            "statusLow": "覆盖低：多数接触仍开着——树还很密。",
+            "statusHigh": "覆盖高：许多接触已关掉——树变稀，链条更早断。"
+          }
+        },
+        {
+          "id": "threshold",
+          "number": "03",
+          "title": "为什么不必 100%？示意阈值约 1−1/R₀",
+          "body": [
+            "在经典的均匀混合玩具里，你只需要把有效再生数压到 1 以下。若免疫比例是 p，粗条件是 R₀(1−p)<1，也就是 p > 1−1/R₀。",
+            "所以教材会说：病毒越猛（R₀ 越大），要把同一道铰链扳过去，覆盖率就要更高——也解释了为何在这个简化里不必「人人」。真实人群更乱；把公式当黑板，别当政令。"
+          ],
+          "plainLanguage": {
+            "label": "一句话说",
+            "body": "盖到让每人平均向下传不到 1 人——不必盖到 100%。"
+          },
+          "keyPointsLabel": "看什么",
+          "keyPoints": [
+            {
+              "title": "铰链在 1",
+              "body": "玩具的目标是有效 R<1，不是永远零病例。"
+            },
+            {
+              "title": "R₀ 越大门槛越高",
+              "body": "1−1/R₀ 随 R₀ 升高——示意里更猛的病原要更高覆盖。"
+            },
+            {
+              "title": "不是命令",
+              "body": "这一页讲公式形状——不是政策指标。"
+            }
+          ],
+          "demoTitle": "拖 R₀，看阈值水位线移动",
+          "copy": {
+            "ariaLabel": "群体免疫阈值相对 R₀ 的面积图，带覆盖率滑条",
+            "caption": "改 R₀ 移动 1−1/R₀ 水位线。拖覆盖率，看自己在铰链上还是下。",
+            "controlLabel": "R₀ 与覆盖率",
+            "r0Label": "R₀",
+            "coverageLabel": "覆盖率 p",
+            "thresholdLabel": "阈值 1−1/R₀",
+            "aboveLabel": "阈值之上（示意）",
+            "belowLabel": "阈值之下（示意）",
+            "statusAbove": "示意里覆盖率高于 1−1/R₀ → 有效 R 倾向小于 1。",
+            "statusBelow": "示意里覆盖率低于 1−1/R₀ → 有效 R 倾向大于 1。",
+            "statusNear": "靠近水位线：小幅移动就能扳动玩具铰链。"
+          }
+        },
+        {
+          "id": "limits",
+          "number": "04",
+          "title": "限度：异质接触、疫苗效力、变体会挪门槛",
+          "body": [
+            "均匀混合只是图方便。超级传播式的接触、疫苗挡传播不完全、免疫消退、免疫逃逸变体，都会改变「需要多少覆盖」——甚至让「阈值」看起来没那么锋利。",
+            "停在这里带着谦虚：R₀ 和 1−1/R₀ 教你为什么部分覆盖仍可能把链条往下压。它们替不了流行病学、试验数据和本地决策。"
+          ],
+          "plainLanguage": {
+            "label": "一句话说",
+            "body": "世界不均匀、疫苗不完全、病毒在变时，黑板上的阈值会挪、会糊。"
+          },
+          "keyPointsLabel": "看什么",
+          "keyPoints": [
+            {
+              "title": "异质接触",
+              "body": "少数高度数枢纽，会让暴发形状不同于均匀人群。"
+            },
+            {
+              "title": "不完全保护",
+              "body": "若针只能部分挡住传播，有效覆盖低于打针人数。"
+            },
+            {
+              "title": "移动靶",
+              "body": "变体可能抬高 R₀ 或躲开免疫——门槛跟着滑。"
+            }
+          ],
+          "demoTitle": "切换理想示意 vs 更乱的世界",
+          "copy": {
+            "ariaLabel": "理想群体免疫阈值与更乱现实 caveat 的对比交互",
+            "caption": "切换视图：干净水位线 vs 会模糊、会漂移的 caveat。",
+            "controlLabel": "哪张图",
+            "modes": [
+              {
+                "key": "ideal",
+                "label": "理想示意",
+                "headline": "干净水位线在 1−1/R₀",
+                "detail": "均匀接触、扎实免疫、固定 R₀——教材铰链看起来锋利。",
+                "badge": "玩具"
+              },
+              {
+                "key": "messy",
+                "label": "更乱的世界",
+                "headline": "门槛发糊、还会漂",
+                "detail": "不均匀混合、部分保护、变体，会拉长或挪动有效阈值。",
+                "badge": "限度"
+              }
+            ],
+            "statusIdeal": "理想示意：一条干净水位线——仅供教学。",
+            "statusMessy": "更乱的世界：预期是模糊、会动的门槛——没有单一魔法百分比。"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "把机制装回去",
+        "title": "R₀ 定分叉；覆盖率把有效 R 拽到 1 以下",
+        "body": [
+          "R₀ 勾勒人人可感时链条有多密。免疫关掉开着的边，让每人向下传变少。均匀玩具里，覆盖率超过约 1−1/R₀，平均向下传就会掉到 1 以下——不必 100% 覆盖，扩散也可能自己变稀。",
+          "免责声明说大声：教学简化，不是接种时间表，不是预测，不是政策建议。真实项目还要对付接种意愿、公平、产品表现和病毒变化。"
+        ],
+        "checklistLabel": "读者自检",
+        "checklist": [
+          "问自己假设的 R₀（或有效 R）是多少——依据是什么。",
+          "问接触网络里还有多少人仍可感。",
+          "把 1−1/R₀ 当黑板铰链，不当命令。",
+          "记住异质性、不完全疫苗和变体会挪门槛。"
+        ],
+        "scaleTitle": "四个零件",
+        "scaleItems": [
+          {
+            "term": "R₀",
+            "question": "一开始有多密？",
+            "role": "人人可感时的平均向下传人数。"
+          },
+          {
+            "term": "有效 R",
+            "question": "免疫后什么变了？",
+            "role": "可感池缩小后的向下传人数。"
+          },
+          {
+            "term": "阈值",
+            "question": "为何不必总是 100%？",
+            "role": "玩具铰链约在 p ≈ 1−1/R₀。"
+          },
+          {
+            "term": "限度",
+            "question": "什么会拆掉示意？",
+            "role": "混合方式、效力、消退、变体。"
+          }
+        ],
+        "finalQuote": "部分覆盖仍可能把链条往下压——因为铰链是「平均向下传不到 1」，不是「墨迹盖满所有人」。",
+        "sourceNote": "关于基本再生数与经典群体免疫阈值 p ≈ 1−1/R₀ 的公共教育笔记。图示为教学示意——不是预测、不是诊疗指导、不是公共卫生政策。Wikipedia「Basic reproduction number」「Herd immunity」可作背景；本页只讲机制。"
+      }
+    },
+    "ja": {
+      "lang": "ja",
+      "meta": {
+        "title": "どんなに強いウイルスでも、接種がある閾値を超えると流行はなぜ自ら収束するのか？",
+        "description": "基本再生産数 R₀ と集団免疫閾値のインタラクティブ解説：感染連鎖がどう伸び／熄むか、免疫が感受性プールをどう縮めるか、なぜカバー率 ≈ 1−1/R₀ で実効再生産数を1未満にできるか——教材モデルであり政策助言ではない。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "すべての動きを停止",
+        "resumeAll": "すべての動きを再開",
+        "pause": "一時停止",
+        "resume": "再開",
+        "reset": "リセット",
+        "waiting": "図は表示領域に入ったときに読み込まれます。",
+        "loading": "図を準備しています…",
+        "error": "図を表示できません。上の説明を先に読んでください。",
+        "figureFallback": "インタラクティブな説明を見るには JavaScript を有効にしてください。",
+        "skipToContent": "本文へスキップ",
+        "languageNavigation": "言語",
+        "overviewLabel": "R₀と集団免疫の概観",
+        "stepLabel": "ステップ"
+      },
+      "hero": {
+        "eyebrow": "R₀ / 感染連鎖 / 集団免疫",
+        "title": "どんなに強いウイルスでも、接種がある閾値を超えると流行はなぜ自ら収束するのか？",
+        "subtitle": "1人が数人にうつすと、流行は止められないように見える。接触ネットワークの十分な割合を免疫にすれば、平均の次世代感染は1を下回りうる——全員カバーなしでも連鎖は薄くなることがある。直感のための玩具モデル；接種スケジュールでも公衆衛生命令でもない。"
+      },
+      "overview": {
+        "title": "1症例の次は何人？——R₀ に出会う",
+        "body": [
+          "R₀（基本再生産数）は問う：ほぼ全員が感受性の集団で、典型的な1症例は平均何人の新規感染を生むか。1より大きければ連鎖は伸びやすく、1未満なら消えやすい。",
+          "以下の数字はすべて例示。実流行は接触様式・時間構造・免疫の質が混ざる——本ページは閾値の直感だけを切り出し、予測はしない。"
+        ],
+        "plainLanguage": {
+          "label": "ひとことで",
+          "body": "R₀ は「ほぼ全員が感受性」のときの、感染連鎖の平均分岐倍率。"
+        },
+        "keyPointsLabel": "まず三点",
+        "keyPoints": [
+          {
+            "title": "分岐倍率",
+            "body": "R₀>1 は伸び、R₀<1 は熄む——この簡易モデルでは平均の話。"
+          },
+          {
+            "title": "実効 R は動く",
+            "body": "免疫が上がると、各症例が会う感受性者が減り実効 R が下がる。"
+          },
+          {
+            "title": "教材であり政策ではない",
+            "body": "閾値 ≈ 1−1/R₀ は黒板の式——カバー命令ではない。"
+          }
+        ],
+        "demoTitle": "静かな種子と熱い種子を切り替える",
+        "copy": {
+          "ariaLabel": "低い／高い基本再生産数の分岐を対比するインタラクティブ概観",
+          "caption": "種子を切替：同じ人でも平均の次世代人数で静かにも爆発的にも見える。",
+          "controlLabel": "どの種子か",
+          "modes": [
+            {
+              "key": "quiet",
+              "label": "静かな種子 · R₀≈0.8",
+              "headline": "平均では連鎖は縮む",
+              "detail": "各症例の次世代は1人未満。枝は細り——アウトブレイクは自ら熄みやすい。",
+              "badge": "R₀ < 1"
+            },
+            {
+              "key": "hot",
+              "label": "熱い種子 · R₀≈3",
+              "headline": "平均では連鎖は扇状に開く",
+              "detail": "全員感受性なら各症例は約3人へ。木はすぐ密になる。",
+              "badge": "R₀ > 1"
+            }
+          ],
+          "statusQuiet": "静かな種子：平均の次世代 < 1 → 連鎖は消えやすい。",
+          "statusHot": "熱い種子：平均の次世代 > 1 → 連鎖は伸びやすい。"
+        }
+      },
+      "steps": [
+        {
+          "id": "growth-or-fade",
+          "number": "01",
+          "title": "R₀>1 なら連鎖は伸び、R₀<1 なら熄む",
+          "body": [
+            "感染を世代として想像する：各感染者は感受性の接触者へ病原体を渡す。その平均が1を超え続ければ症例は増え、1を下回れば減っていく。",
+            "下のスライダーは玩具。潜伏・季節・病床は入れない——伸びか熄みかの蝶番だけを残し、R₀ を直感ポンプにする。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "1より上なら木は密に、1未満なら痩せる——平均の話。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "平均であり運命ではない",
+              "body": "個人の運は揺れる；このスケッチでは傾向は平均で決まる。"
+            },
+            {
+              "title": "同じウイルスでも R は変わる",
+              "body": "行動・密度・免疫が実効値を動かす。"
+            },
+            {
+              "title": "玩具の世代",
+              "body": "離散ステップが連続時間の代わり。"
+            }
+          ],
+          "demoTitle": "R₀ を動かし、世代が伸びる／熄むのを見る",
+          "copy": {
+            "ariaLabel": "R₀ に応じて感染世代が伸びる／熄むインタラクティブ図",
+            "caption": "R₀ を動かす。各世代が前より大きいか小さいかを見る。",
+            "controlLabel": "基本再生産数 R₀",
+            "r0Label": "R₀",
+            "generationLabel": "世代",
+            "casesLabel": "相対症例",
+            "statusGrow": "R₀ > 1：各世代は平均で大きい——拡散は上昇。",
+            "statusFade": "R₀ < 1：各世代は平均で小さい——拡散は熄む。",
+            "statusEdge": "R₀ ≈ 1：世代はほぼ横ばい——玩具の刃の位置。"
+          }
+        },
+        {
+          "id": "thinning-chains",
+          "number": "02",
+          "title": "免疫は感受性プールを縮め——連鎖は枝を失う",
+          "body": [
+            "接種や既往感染は（簡易モデルでは）感受性プールから人を外す。感染者は、うつして次へ渡せる相手に会いにくくなる。",
+            "病原そのものの「強さ」が変わらなくても実効再生産数は下がる。分岐が薄くなるのはウイルスが「諦めた」からではなく、開いている接触辺が減ったから。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "感受性の隣人が減る → 症例あたりの次世代感染が減る。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "プールであり魔法ではない",
+              "body": "ここでの免疫は接触グラフの辺を閉じる。"
+            },
+            {
+              "title": "実効 R",
+              "body": "おおよそ R₀ × なお感受性の割合（玩具形）。"
+            },
+            {
+              "title": "目に見える間引き",
+              "body": "免疫ノードに当たると枝は止まる。"
+            }
+          ],
+          "demoTitle": "免疫カバーを上げ、木が薄くなるのを見る",
+          "copy": {
+            "ariaLabel": "免疫カバー上昇で薄くなる分岐感染ツリーのインタラクティブ図",
+            "caption": "カバーを上げる。免疫ノードに当たった枝は止まり——実効の次世代が減る。",
+            "controlLabel": "免疫カバー率",
+            "coverageLabel": "カバー率",
+            "susceptibleLabel": "感受性",
+            "immuneLabel": "免疫",
+            "infectedLabel": "感染経路",
+            "statusLow": "カバー低：大半の接触は開いたまま——木は dense。",
+            "statusHigh": "カバー高：多くの接触が閉じる——木は疎になり、連鎖は早く切れる。"
+          }
+        },
+        {
+          "id": "threshold",
+          "number": "03",
+          "title": "なぜ100%でなくてよい？素描閾値 ≈ 1−1/R₀",
+          "body": [
+            "古典的な均一混合の玩具では、実効 R を1未満に落とすだけでよい。免疫割合を p とすると粗い条件は R₀(1−p)<1、つまり p > 1−1/R₀。",
+            "だから教科書は言う：強い病原（大きい R₀）ほど、同じ蝶番を倒すには高いカバーが要る——そしてこの簡略化では「全員」は必須ではない。実集団はもっと乱雑；式は黒板であり布告ではない。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "症例あたり平均の次世代が1未満になるまで覆う——100%は要らない場合がある。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "蝶番は1",
+              "body": "玩具の目標は実効 R<1であり、永遠のゼロ症例ではない。"
+            },
+            {
+              "title": "R₀ が大きいほど高いバー",
+              "body": "1−1/R₀ は R₀ とともに上がる——素描では強い病原ほど高いカバー。"
+            },
+            {
+              "title": "命令ではない",
+              "body": "本ページは式の形を説明する——政策目標ではない。"
+            }
+          ],
+          "demoTitle": "R₀ を動かし、閾値の水位線が動くのを見る",
+          "copy": {
+            "ariaLabel": "R₀ に対する集団免疫閾値の面積図とカバー率スライダー",
+            "caption": "R₀ を変え 1−1/R₀ の水位線を動かす。カバーをドラッグし蝶番の上か下かを見る。",
+            "controlLabel": "R₀ とカバー率",
+            "r0Label": "R₀",
+            "coverageLabel": "カバー率 p",
+            "thresholdLabel": "閾値 1−1/R₀",
+            "aboveLabel": "閾値の上（玩具）",
+            "belowLabel": "閾値の下（玩具）",
+            "statusAbove": "この素描でカバーが 1−1/R₀ より上 → 実効 R は1未満に傾く。",
+            "statusBelow": "この素描でカバーが 1−1/R₀ より下 → 実効 R は1超に傾く。",
+            "statusNear": "水位線付近：小さな動きで玩具の蝶番が倒れる。"
+          }
+        },
+        {
+          "id": "limits",
+          "number": "04",
+          "title": "限界：異質な接触、ワクチン効果、変異がバーを動かす",
+          "body": [
+            "均一混合は便利のための仮定。スーパースプレッディング接触、不完全なワクチン防御、減衰免疫、免疫逃避変異は、必要なカバーを変え——閾値が鋭く見えるかさえ変える。",
+            "ここで謙虚に止まる：R₀ と 1−1/R₀ は、部分カバーでも連鎖を下に曲げうる理由を教える。疫学・試験データ・地域の意思決定の代わりにはならない。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "世界が不均一で、ワクチンが部分的で、ウイルスが変われば、黒板の閾値は動き・ぼやける。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "異質な接触",
+              "body": "少数の高次数ハブは、均一集団とは違うアウトブレイク形を作る。"
+            },
+            {
+              "title": "不完全な防御",
+              "body": "接種が伝播を部分的にしか止めなければ、実効カバーは接種数より低い。"
+            },
+            {
+              "title": "動く標的",
+              "body": "変異は R₀ を上げたり免疫をすり抜けたり——バーは滑る。"
+            }
+          ],
+          "demoTitle": "理想スケッチとよりmessyな世界を切替",
+          "copy": {
+            "ariaLabel": "理想の集団免疫閾値とmessyな現実の注意点を比較するインタラクティブ図",
+            "caption": "視点を切替：きれいな水位線 vs ぼやけ・ずれる注意点。",
+            "controlLabel": "どの絵か",
+            "modes": [
+              {
+                "key": "ideal",
+                "label": "理想スケッチ",
+                "headline": "1−1/R₀ のきれいな水位線",
+                "detail": "均一接触・堅い免疫・固定 R₀——教科書の蝶番は鋭く見える。",
+                "badge": "玩具"
+              },
+              {
+                "key": "messy",
+                "label": "よりmessyな世界",
+                "headline": "バーは smear し漂う",
+                "detail": "不均一混合・部分防御・変異が実効閾値を伸ばしたり動かしたりする。",
+                "badge": "注意"
+              }
+            ],
+            "statusIdeal": "理想スケッチ：きれいな水位線一条——教材のみ。",
+            "statusMessy": "よりmessyな世界：ぼやけて動くバーを予期——単一の魔法％はない。"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "仕組みを組み立て直す",
+        "title": "R₀ が分岐を決め、カバーが実効 R を1未満へ引く",
+        "body": [
+          "R₀ は全員感受性のときの連鎖の denseness を素描する。免疫は開いた辺を閉じ、症例あたりの次世代を減らす。均一玩具ではカバーがおよそ 1−1/R₀ を超えると平均の次世代は1未満——100%なしでも拡散は自ら薄くなりうる。",
+          "免責を大きく：教材の簡略化であり、接種スケジュールでも予測でも政策助言でもない。実プログラムは接種意欲・公平・製品性能・ウイルス変化と格闘する。"
+        ],
+        "checklistLabel": "読者チェック",
+        "checklist": [
+          "仮定している R₀（または実効 R）とその根拠を問う。",
+          "接触ネットワークのどれだけがなお感受性かを問う。",
+          "1−1/R₀ を黒板の蝶番として扱い、命令として扱わない。",
+          "異質性・不完全ワクチン・変異がバーを動かすことを覚える。"
+        ],
+        "scaleTitle": "四つの部品",
+        "scaleItems": [
+          {
+            "term": "R₀",
+            "question": "始めはどれだけ dense？",
+            "role": "全員感受性での平均次世代人数。"
+          },
+          {
+            "term": "実効 R",
+            "question": "免疫で何が変わる？",
+            "role": "感受性プール縮小後の次世代人数。"
+          },
+          {
+            "term": "閾値",
+            "question": "なぜ常に100%ではない？",
+            "role": "玩具の蝶番は p ≈ 1−1/R₀ 付近。"
+          },
+          {
+            "term": "限界",
+            "question": "何がスケッチを壊す？",
+            "role": "混合・効果・減衰・変異。"
+          }
+        ],
+        "finalQuote": "部分カバーでも連鎖を下に曲げうる——蝶番は「平均の次世代が1未満」であり「全員にインクを塗る」ことではない。",
+        "sourceNote": "基本再生産数と古典的集団免疫閾値 p ≈ 1−1/R₀ についての公共教育ノート。図は教材の例示——予測でも臨床指針でも公衆衛生政策でもない。Wikipedia「Basic reproduction number」「Herd immunity」は有用な背景；本ページは仕組みのみ。"
+      }
+    }
+  }
+}

@@ -13,6 +13,7 @@ import InflationPurchasingPowerVisual from './InflationPurchasingPowerVisual.ast
 import CompoundInterestVisual from './CompoundInterestVisual.astro';
 import BayesLabResultVisual from './BayesLabResultVisual.astro';
 import NormalDistributionVisual from './NormalDistributionVisual.astro';
+import R0HerdImmunityVisual from './R0HerdImmunityVisual.astro';
 
 interface Props {
   lang: Language;
@@ -34,6 +35,7 @@ const artifactComponents = {
   'compound-interest': CompoundInterestVisual,
   'bayes-lab-result': BayesLabResultVisual,
   'normal-distribution': NormalDistributionVisual,
+  'r0-herd-immunity': R0HerdImmunityVisual,
 } as const;
 const VisualComponent = artifactId ? artifactComponents[artifactId as keyof typeof artifactComponents] : undefined;
 
