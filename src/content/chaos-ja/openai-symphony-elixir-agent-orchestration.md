@@ -3,7 +3,7 @@ title: "OpenAI Symphony：世界最大のAIラボがエージェントオーケ�
 pubDate: 2026-03-17T00:00:00.000Z
 description: "OpenAIのオープンソースフレームワークSymphonyは、エージェントオーケストレーションが新たなフェーズに入りつつあることを示唆している。そこではPythonへの親しみよりも、耐障害性・並行性・ホットアップグレードの方が重要になる。"
 author: "Remy"
-tags: ["AI", "OpenAI", "Elixir", "BEAM", "AI Agents", "Developer Tools"]
+tags: ["ai", "openai", "Elixir", "BEAM", "ai-agents", "developer-tools"]
 lang: "ja"
 translatedFrom: "openai-symphony-elixir-agent-orchestration"
 ---

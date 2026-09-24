@@ -3,7 +3,7 @@ title: 'WordPressはAIをプラグインではなくプラットフォームイ�
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'WordPressはAIチームの設置提案・共有プロバイダーインフラ・MCPツールにより、散在するAIプラグインを超えて、CMSをAIネイティブな出版のコントロールレイヤーへと進化させようとしている。'
 author: 'Remy'
-tags: ['AI', 'WordPress', 'MCP', 'Open Source', 'Software Engineering']
+tags: ['ai', 'WordPress', 'mcp', 'open-source', 'software-engineering']
 lang: 'ja'
 translatedFrom: 'wordpress-ai-team-provider-infrastructure'
 ---

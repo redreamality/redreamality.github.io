@@ -3,7 +3,7 @@ title: "GitLab Duo Agent Platform + MCP：GitLab 想成为 AI 编码代理的操
 pubDate: 2026-03-17T00:00:00.000Z
 description: "GitLab 正在把 AI 编码从单点 copilot 推向受治理的工作流基础设施，通过外部 agents、托管凭证、审计轨迹与 MCP 连接整个 DevSecOps 栈。"
 author: "Remy"
-tags: ["AI", "GitLab", "DevSecOps", "MCP", "AI Agents", "开发者工具"]
+tags: ["ai", "GitLab", "DevSecOps", "mcp", "ai-agents", "developer-tools"]
 lang: "zh"
 translatedFrom: "gitlab-duo-agent-platform-mcp-devsecops"
 ---

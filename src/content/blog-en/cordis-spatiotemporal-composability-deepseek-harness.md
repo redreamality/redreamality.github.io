@@ -3,7 +3,7 @@ title: 'Cordis Explained: Spatiotemporal Composability, Plugin Systems, and Deep
 pubDate: 2026-08-23T00:00:00.000Z
 description: 'A practical, evidence-based guide to Cordis, spatiotemporal composability, revertible effects, reactive coeffects, plugin lifecycles, and the architecture of DeepSeek Harness.'
 author: 'Remy'
-tags: ['cordis', 'deepseek-harness', 'plugin-system', 'spatiotemporal-composability', 'agent-harness']
+tags: ['cordis', 'agent-harness', 'plugin-system', 'spatiotemporal-composability', 'agent-loop']
 lang: 'en'
 translatedFrom: 'cordis-spatiotemporal-composability-deepseek-harness'
 ---

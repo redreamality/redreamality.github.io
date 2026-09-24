@@ -3,7 +3,7 @@ title: "YC W26 Signals the Next Software Shift: AI Agents Are Coming for Your Sa
 pubDate: 2026-03-17T00:00:00.000Z
 description: "Y Combinator's Winter 2026 batch is packed with autonomous agent startups. The deeper signal is not more AI copilots, but software that replaces SaaS workflows outright."
 author: "Remy"
-tags: ["AI", "Agents", "Startups", "SaaS", "Developer Tools"]
+tags: ["ai", "ai-agents", "Startups", "SaaS", "developer-tools", "rsi"]
 lang: "en"
 ---
 

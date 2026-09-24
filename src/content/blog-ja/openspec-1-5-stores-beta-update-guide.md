@@ -3,7 +3,7 @@ title: 'OpenSpec 1.5 詳解：Stores Beta、Explore-first ワークフロー、�
 pubDate: 2026-07-02T01:30:00.000Z
 description: 'OpenSpec 1.5.0 のソースコードと公式ドキュメントをもとに、Stores Beta、/opsx:explore、brownfield 導入、command frontmatter 修正、repo-local specs から共有 planning context への進化を解説します。'
 author: 'Remy'
-tags: ['openspec', 'spec-driven development', 'sdd', 'ai coding', 'stores', 'ai agents', 'cli']
+tags: ['openspec', 'sdd', 'ai-coding', 'stores', 'ai-agents', 'cli']
 lang: 'ja'
 translatedFrom: 'openspec-1-5-stores-beta-update-guide'
 ---

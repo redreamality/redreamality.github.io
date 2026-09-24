@@ -3,7 +3,7 @@ title: "GPT-6 Sol 与 Luna：把 Astra 的智能铺到更便宜的档位"
 description: "OpenAI 于 2026-09-22 发布 GPT-6 Sol 与 Luna：相对 GPT-5.6 促销价 API 降价 50%，并继承 Astra 代际的能力与对齐改进。对照定价、基准叙事、缓存与 Astra/Enigma 能力故事，说明 coding agent 如何分档选型。"
 pubDate: 2026-09-24T02:30:00.000Z
 author: "Remy"
-tags: ["GPT-6", "Sol", "Luna", "Astra", "OpenAI", "模型发布", "Coding Agents", "定价"]
+tags: ["GPT-6", "Sol", "Luna", "Astra", "openai", "模型发布", "ai-agents", "定价"]
 lang: "zh"
 ---
 

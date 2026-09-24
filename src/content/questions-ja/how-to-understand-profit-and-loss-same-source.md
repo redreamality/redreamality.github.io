@@ -2,7 +2,7 @@
 title: "「利益と損失は同じ源から」をどう理解するか？"
 description: "すべての優位性には対応する失敗シナリオが付随：何に賭けているかを理解することで、損失がなぜ現れるかがわかる"
 date: 2026-01-07
-tags: ["クオンツトレーディング", "利益損失同源", "リスク管理", "期待値", "市場状態", "戦略設計"]
+tags: ["quantitative-trading", "利益損失同源", "リスク管理", "期待値", "市場状態", "戦略設計"]
 lang: "ja"
 translatedFrom: "how-to-understand-profit-and-loss-same-source"
 ---

@@ -2,7 +2,7 @@
 title: "What is the relationship between swings, structure, and trend?"
 description: "How three common trading words map to one coherent hierarchy (and how to avoid mixing levels)"
 date: 2026-01-07
-tags: ["量化交易", "quantitative-trading", "swings", "market-structure", "trend", "multi-timeframe"]
+tags: ["quantitative-trading", "swings", "market-structure", "trend", "multi-timeframe"]
 lang: "en"
 ---
 People often use “swing,” “structure,” and “trend” interchangeably, which creates endless confusion:

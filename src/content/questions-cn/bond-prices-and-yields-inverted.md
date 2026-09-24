@@ -2,7 +2,7 @@
 title: "为什么债券价格和收益率会倒挂？"
 description: "深入解析收益率曲线倒挂现象及其对经济和债券市场的意义"
 date: 2025-01-15
-tags: ["收益率曲线", "债券", "利率", "经济", "衰退指标"]
+tags: ["收益率曲线", "bonds", "interest-rates", "经济", "衰退指标"]
 lang: "zh"
 translatedFrom: "bond-prices-and-yields-inverted"
 ---

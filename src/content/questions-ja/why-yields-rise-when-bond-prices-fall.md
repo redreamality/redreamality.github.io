@@ -2,7 +2,7 @@
 title: "なぜ債券価格が下落すると利回りが上昇するのか？"
 description: "債券市場のメカニズムを通じて債券価格と利回りの間の逆相関関係を理解"
 date: 2025-01-15
-tags: ["債券利回り", "債券価格", "利回り上昇", "固定収益", "投資基礎"]
+tags: ["bond-yields", "bond-prices", "利回り上昇", "fixed-income", "investment-basics"]
 lang: "ja"
 translatedFrom: "why-yields-rise-when-bond-prices-fall"
 ---

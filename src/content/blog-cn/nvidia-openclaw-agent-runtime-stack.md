@@ -3,7 +3,7 @@ title: "NVIDIA 正在把企业级 AI Agent 做成一整套运行时栈"
 pubDate: 2026-03-17T00:00:00.000Z
 description: "从 2026 年 3 月 16 日 GTC 的发布来看，NVIDIA 想卖给企业的已经不只是 OpenClaw 模型，而是一整套 AI Agent 运行时基础设施：guardrails、retrieval、evaluation 与工作流编排。"
 author: "Remy"
-tags: ["AI", "NVIDIA", "OpenClaw", "企业 AI", "AI Agents", "NeMo", "开发者工具"]
+tags: ["ai", "NVIDIA", "OpenClaw", "企业 AI", "ai-agents", "NeMo", "developer-tools"]
 lang: "zh"
 translatedFrom: "nvidia-openclaw-agent-runtime-stack"
 ---

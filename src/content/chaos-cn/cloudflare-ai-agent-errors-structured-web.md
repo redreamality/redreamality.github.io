@@ -3,7 +3,7 @@ title: 'Cloudflare 正在为 AI Agent 重写 Web 错误层，而不只是服务�
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'Cloudflare 把 RFC 9457 problem details 带到 AI Agent 场景里。真正值得关注的，不是错误页长什么样，而是机器能不能可靠理解失败并继续执行。'
 author: 'Remy'
-tags: ['AI', 'Cloudflare', 'AI Agents', '开发者工具', 'Web 基础设施', 'API']
+tags: ['ai', 'Cloudflare', 'ai-agents', 'developer-tools', 'Web 基础设施', 'API']
 lang: 'zh'
 translatedFrom: 'cloudflare-ai-agent-errors-structured-web'
 ---

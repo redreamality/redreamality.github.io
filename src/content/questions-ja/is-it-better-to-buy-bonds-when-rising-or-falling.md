@@ -2,7 +2,7 @@
 title: "金利が上昇または下降しているときに債券を購入する方がいいのか？"
 description: "金利サイクルに基づく債券購入タイミングの包括的ガイド"
 date: 2025-01-15
-tags: ["債券投資", "金利", "債券タイミング", "投資戦略", "固定収益"]
+tags: ["bond-investing", "interest-rates", "債券タイミング", "investment-strategy", "fixed-income"]
 lang: "ja"
 translatedFrom: "is-it-better-to-buy-bonds-when-rising-or-falling"
 ---

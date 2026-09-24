@@ -2,7 +2,7 @@
 title: "価格はなぜ変動するのか？"
 description: "クオンツトレーディングに近い視点で、価格変動をオーダー、流動性、ボラティリティの3つに分解"
 date: 2026-01-07
-tags: ["クオンツトレーディング", "取引", "市場マイクロストラクチャー", "流動性", "ボラティリティ", "プライスアクション"]
+tags: ["quantitative-trading", "取引", "市場マイクロストラクチャー", "流動性", "ボラティリティ", "price-action"]
 lang: "ja"
 translatedFrom: "why-prices-fluctuate"
 ---

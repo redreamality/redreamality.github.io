@@ -3,7 +3,7 @@ title: 'AIエージェントは新しい種類のパーソナルコンピュー�
 pubDate: 2026-03-18T00:00:00.000Z
 description: 'NVIDIAが2026年3月16〜17日のGTCで打ち出したNemoClaw・OpenClaw・OpenShellのメッセージは、プライベートで常時稼働するローカルエージェントが次のパーソナルコンピューティングの潮流を定義する可能性を示している。'
 author: 'Remy'
-tags: ["AI", "NVIDIA", "OpenClaw", "NemoClaw", "AI Agents", "Local AI", "Personal Computing"]
+tags: ["ai", "NVIDIA", "OpenClaw", "NemoClaw", "ai-agents", "Local AI", "Personal Computing"]
 lang: 'ja'
 translatedFrom: 'local-agent-computers-nemoclaw'
 ---

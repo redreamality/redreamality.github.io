@@ -2,7 +2,7 @@
 title: "スイング、構造、トレンドの関係は？"
 description: "最もよく混同される3つの取引用語を同じ階層フレームワークに配置：スイングは積み木、構造は文法、トレンドは要約"
 date: 2026-01-07
-tags: ["クオンツトレーディング", "スイング", "市場構造", "トレンド", "マルチタイムフレーム", "取引システム"]
+tags: ["quantitative-trading", "スイング", "market-structure", "トレンド", "マルチタイムフレーム", "取引システム"]
 lang: "ja"
 translatedFrom: "relationship-between-swings-structure-and-trend"
 ---

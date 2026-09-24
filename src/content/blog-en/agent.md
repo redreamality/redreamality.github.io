@@ -3,7 +3,7 @@ title: 'Agent Optimization Data "Leverage": Effective Question Filtering Standar
 pubDate: 2025-10-27T03:29:41.744Z
 description: 'In Agent model optimization, data is the core "lever" driving effect improvements. However, not all chat records have equal value. This article provides algorithm engineers and product teams with a detailed set of "effective question" filtering standards, teaching you how to accurately identify high-value samples from complex conversations—such as task failures, intent misunderstandings, negative emotions, and fallback responses. Mastering these filtering standards will help you pinpoint model weaknesses and efficiently use data to drive continuous improvement in Agent effectiveness and performance.'
 author: 'Remy'
-tags: ['agents', 'AI']
+tags: ['ai-agents', 'ai']
 lang: 'en'
 translatedFrom: 'agent'
 ---

@@ -2,7 +2,7 @@
 title: "Why do support and resistance exist in markets?"
 description: "A rigorous but practical explanation of why certain price zones keep attracting trades, rejections, and reversals"
 date: 2026-01-07
-tags: ["量化交易", "quantitative-trading", "technical-analysis", "support-resistance", "liquidity", "order-flow"]
+tags: ["quantitative-trading", "technical-analysis", "support-resistance", "liquidity", "order-flow"]
 lang: "en"
 ---
 “Support and resistance” is one of those chart concepts that looks mystical when explained poorly and obvious when explained well. People draw a line, price touches it a few times, and then we pretend the market “respects” it.

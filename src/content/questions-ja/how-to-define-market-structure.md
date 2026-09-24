@@ -2,7 +2,7 @@
 title: "市場構造をどう定義するか？"
 description: "「構造」を口癖から実行可能なルールに変える：転換点、ブレイク、状態遷移"
 date: 2026-01-07
-tags: ["クオンツトレーディング", "市場構造", "プライスアクション", "転換点", "ブレイク", "ステートマシン"]
+tags: ["quantitative-trading", "market-structure", "price-action", "転換点", "ブレイク", "ステートマシン"]
 lang: "ja"
 translatedFrom: "how-to-define-market-structure"
 ---

@@ -3,7 +3,7 @@ title: "Alibaba’s Open Code Review: What Enterprises Can Copy from a Determini
 description: "A practical teardown of alibaba/open-code-review: deterministic engineering owns file selection and positioning; the agent owns deep reasoning. Covers AACR-Bench, delegation mode, CI hooks, copyable patterns, and limits."
 pubDate: 2026-09-24T00:00:00+08:00
 author: "Remy"
-tags: ["Open Code Review", "Code Review", "Agents", "Harness", "Alibaba", "Developer Tools"]
+tags: ["Open Code Review", "Code Review", "ai-agents", "agent-harness", "Alibaba", "developer-tools", "agent-loop"]
 lang: "en"
 translatedFrom: "alibaba-open-code-review-deterministic-pipeline"
 ---

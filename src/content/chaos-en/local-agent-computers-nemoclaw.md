@@ -3,7 +3,7 @@ title: "AI Agents Are Becoming a New Kind of Personal Computer"
 pubDate: 2026-03-18T00:00:00.000Z
 description: "NVIDIA's March 16-17, 2026 GTC messaging around NemoClaw, OpenClaw, and OpenShell argues that private, always-on local agents could define the next personal computing cycle."
 author: "Remy"
-tags: ["AI", "NVIDIA", "OpenClaw", "NemoClaw", "AI Agents", "Local AI", "Personal Computing"]
+tags: ["ai", "NVIDIA", "OpenClaw", "NemoClaw", "ai-agents", "Local AI", "Personal Computing"]
 lang: "en"
 ---
 

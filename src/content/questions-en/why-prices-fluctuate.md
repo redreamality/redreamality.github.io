@@ -2,7 +2,7 @@
 title: "Why do prices fluctuate?"
 description: "A practical, quant-minded explanation of where price changes come from, from order flow to volatility"
 date: 2026-01-07
-tags: ["量化交易", "quantitative-trading", "trading", "market-microstructure", "volatility", "price-action"]
+tags: ["quantitative-trading", "trading", "market-microstructure", "volatility", "price-action"]
 lang: "en"
 ---
 When people first look at a chart, they often assume price changes must be caused by “news” or “fundamentals.” That’s sometimes true, but it’s only a small part of the story. If you want a rigorous way to think about price fluctuation (especially from a quantitative trading perspective), the cleanest starting point is this:

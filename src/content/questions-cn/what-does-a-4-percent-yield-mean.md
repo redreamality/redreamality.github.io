@@ -2,7 +2,7 @@
 title: "4%的收益率意味着什么？"
 description: "理解4%的收益率对债券、投资和财务规划意味着什么"
 date: 2025-01-15
-tags: ["收益率", "投资回报", "债券收益率", "财务规划", "投资基础"]
+tags: ["收益率", "投资回报", "bond-yields", "财务规划", "investment-basics"]
 lang: "zh"
 translatedFrom: "what-does-a-4-percent-yield-mean"
 ---

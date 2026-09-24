@@ -3,7 +3,7 @@ title: "Anthropic Claude Code Review: Multi-Agent AI Systems Are Now Reviewing Y
 pubDate: 2026-03-17T00:00:00.000Z
 description: "Anthropic's Claude Code Review turns pull request analysis into a multi-agent workflow, signaling that AI code review is shifting from autocomplete add-on to core engineering infrastructure."
 author: "Remy"
-tags: ["AI", "Anthropic", "Claude", "Code Review", "AI Agents", "Developer Tools"]
+tags: ["ai", "Anthropic", "Claude", "Code Review", "ai-agents", "developer-tools"]
 lang: "en"
 ---
 

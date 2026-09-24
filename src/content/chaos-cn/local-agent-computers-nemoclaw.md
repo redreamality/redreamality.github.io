@@ -3,7 +3,7 @@ title: "AI Agent 正在变成一种新的个人计算机形态"
 pubDate: 2026-03-18T00:00:00.000Z
 description: "NVIDIA 在 2026 年 3 月 16 日至 17 日围绕 NemoClaw、OpenClaw 与 OpenShell 的表述，实际上是在推动一种新判断：私有、常驻、本地运行的 agent 可能会定义下一轮个人计算。"
 author: "Remy"
-tags: ["AI", "NVIDIA", "OpenClaw", "NemoClaw", "AI Agents", "本地 AI", "个人计算"]
+tags: ["ai", "NVIDIA", "OpenClaw", "NemoClaw", "ai-agents", "本地 AI", "个人计算"]
 lang: "zh"
 translatedFrom: "local-agent-computers-nemoclaw"
 ---

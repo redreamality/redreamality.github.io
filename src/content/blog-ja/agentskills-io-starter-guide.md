@@ -3,7 +3,7 @@ title: 'AIエージェントのスキルとツールで構築する方法：2026
 pubDate: 2026-01-15T10:00:00.000Z
 description: 'スキルとツールを使ってインテリジェントなAIエージェントを構築する方法を学ぶ。エージェントスキル、ツール統合、コンピューター使用、ファイル操作、ClaudeとOpenAIを使った実例を網羅した初心者向けチュートリアル。'
 author: 'Remy'
-tags: ['AI', 'エージェント', 'チュートリアル', '初心者ガイド', 'claude', 'openai', 'llm', '自動化']
+tags: ['ai', 'エージェント', 'チュートリアル', '初心者ガイド', 'claude', 'openai', 'llm', '自動化']
 lang: 'ja'
 translatedFrom: 'agentskills-io-starter-guide'
 ---

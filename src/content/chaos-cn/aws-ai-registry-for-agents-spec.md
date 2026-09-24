@@ -3,7 +3,7 @@ title: "AWS 想让 Agent 开发拥有包管理层，而不只是 Prompt 层"
 pubDate: 2026-03-17T00:00:00.000Z
 description: "AWS 推出的 AI Registry for Agents 说明，下一阶段的 agent 基础设施竞争，可能不只是模型和框架之争，而是围绕打包、分发与可复现安装展开。"
 author: "Remy"
-tags: ["AI", "Agents", "AWS", "开发者工具", "开源", "基础设施"]
+tags: ["ai", "ai-agents", "AWS", "developer-tools", "open-source", "基础设施"]
 lang: "zh"
 translatedFrom: "aws-ai-registry-for-agents-spec"
 ---

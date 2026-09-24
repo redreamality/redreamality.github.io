@@ -2,7 +2,7 @@
 title: "債券の5%ルールとは何か？"
 description: "債券投資の5%ルールとポートフォリオ管理における応用を理解する"
 date: 2025-01-15
-tags: ["債券ルール", "5%ルール", "債券投資", "投資戦略", "固定収益"]
+tags: ["債券ルール", "5%ルール", "bond-investing", "investment-strategy", "fixed-income"]
 lang: "ja"
 translatedFrom: "what-is-the-5-percent-rule-for-bonds"
 ---

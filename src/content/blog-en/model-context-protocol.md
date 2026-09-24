@@ -3,7 +3,7 @@ title: 'Deep Dive into Model Context Protocol (MCP) - A Standardized Protocol fo
 pubDate: 2025-02-18T00:00:00.000Z
 description: 'A detailed introduction to Model Context Protocol (MCP), an open protocol that provides standardized context transmission for AI applications'
 author: 'Remy'
-tags: ["AI", "LLM", "Protocol", "Integration"]
+tags: ["ai", "llm", "Protocol", "Integration"]
 lang: 'en'
 ---
 ## Introduction

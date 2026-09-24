@@ -3,7 +3,7 @@ title: "ZeroTier 安全吗？- 深度分析"
 pubDate: 2025-02-26T00:00:00.000Z
 description: "深入分析 ZeroTier 的安全架构、潜在风险和安全部署的最佳实践"
 author: "Redreamality"
-tags: ["zerotier", "安全", "网络", "vpn", "网络安全"]
+tags: ["zerotier", "security", "网络", "vpn", "网络安全"]
 ---
 
 

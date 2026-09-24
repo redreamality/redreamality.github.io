@@ -3,7 +3,7 @@ title: 'Gemini CLI入門者向け深層分析：npmパッケージツールと�
 pubDate: 2025-09-15T00:00:00.000Z
 description: 'Gemini CLI入門ツールのnpm対話分析と、コントリビューターのGitHub活動パターンに関する包括的な調査'
 author: 'Remy'
-tags: ['open source', 'gemini', 'cli', 'community', 'npm', 'github', 'analysis']
+tags: ['open-source', 'gemini', 'cli', 'community', 'npm', 'github', 'analysis']
 lang: 'ja'
 translatedFrom: 'gemini-cli-contributors-deep-analysis'
 ---

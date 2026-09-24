@@ -3,7 +3,7 @@ title: 'WordPress 正在把 AI 变成平台基础设施，而不只是插件功�
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'WordPress 正在通过 AI Team 提案、共享的 provider 基础设施，以及 MCP 相关工具，把 AI 从零散插件能力推进为面向内容工作流的平台层。'
 author: 'Remy'
-tags: ['AI', 'WordPress', 'MCP', '开源', '软件工程']
+tags: ['ai', 'WordPress', 'mcp', 'open-source', 'software-engineering']
 lang: 'zh'
 translatedFrom: 'wordpress-ai-team-provider-infrastructure'
 ---

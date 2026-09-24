@@ -3,7 +3,7 @@ title: 'Cordis 徹底解説：『A Programming Paradigm for Spatiotemporal Compo
 pubDate: 2026-08-23T00:00:00.000Z
 description: 'Cordis のプラグインシステム、カーネル、撤回可能な effect、反応式 coeffect、時空可組合せ性、および DeepSeek Harness・Koishi・Shigma・Cordis v4 との実際の関係をゼロから解説する。'
 author: 'Remy'
-tags: ['cordis', 'deepseek-harness', 'plugin-system', 'spatiotemporal-composability', 'agent-harness']
+tags: ['cordis', 'agent-harness', 'plugin-system', 'spatiotemporal-composability', 'agent-loop']
 lang: 'ja'
 translatedFrom: 'cordis-spatiotemporal-composability-deepseek-harness'
 ---

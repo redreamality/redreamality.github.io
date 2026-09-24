@@ -3,7 +3,7 @@ title: 'GitHub Copilot Is Becoming a Memory-Bearing Agentic Coding Stack'
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'GitHub shipped a tight sequence of March 2026 Copilot updates around memory, planning, review instructions, and task decomposition. Together they look less like feature polish and more like an agentic development stack.'
 author: 'Remy'
-tags: ['AI', 'GitHub', 'GitHub Copilot', 'Agents', 'Developer Tools', 'Software Engineering']
+tags: ['ai', 'github', 'github-copilot', 'ai-agents', 'developer-tools', 'software-engineering']
 lang: 'en'
 ---
 

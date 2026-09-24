@@ -2,7 +2,7 @@
 title: "如何定义结构？"
 description: "把“结构”从一句口头禅变成可执行的规则：拐点、破位、状态切换"
 date: 2026-01-07
-tags: ["量化交易", "市场结构", "价格行为", "拐点", "破位", "状态机"]
+tags: ["quantitative-trading", "market-structure", "price-action", "拐点", "破位", "状态机"]
 lang: "zh"
 translatedFrom: "how-to-define-market-structure"
 ---

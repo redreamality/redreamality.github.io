@@ -2,7 +2,7 @@
 title: "How are different timeframes connected in price action?"
 description: "A simple but rigorous way to think about multi-timeframe analysis without contradictions"
 date: 2026-01-07
-tags: ["量化交易", "quantitative-trading", "multi-timeframe", "fractal", "risk-management", "signal-design"]
+tags: ["quantitative-trading", "multi-timeframe", "fractal", "risk-management", "signal-design"]
 lang: "en"
 ---
 Multi-timeframe analysis often sounds like this:

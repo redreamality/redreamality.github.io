@@ -2,7 +2,7 @@
 title: "スイングをどう定義するか？"
 description: "スイングは「そこにあるもの」ではなく、ノイズを転換点にフィルタリングするルールセットです"
 date: 2026-01-07
-tags: ["クオンツトレーディング", "スイング", "プライスアクション", "市場構造", "信号処理", "ボラティリティ"]
+tags: ["quantitative-trading", "スイング", "price-action", "market-structure", "信号処理", "ボラティリティ"]
 lang: "ja"
 translatedFrom: "how-to-define-a-swing"
 ---

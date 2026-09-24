@@ -3,7 +3,7 @@ title: 'Google Gemini 3が主流へ：あなたのスマートフォンで静か
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'GoogleはGemini 3 Flashをデフォルトモデルスタックに静かに切り替え、エージェント型のGemini機能をPixelスマートフォンに展開した。開発者にとっての本質的なニュースは、フロンティア級の性能が低コストで実現されていることだ。'
 author: 'Remy'
-tags: ['AI', 'Google', 'Gemini', 'Android', 'Pixel', 'Developer Tools']
+tags: ['ai', 'Google', 'Gemini', 'Android', 'Pixel', 'developer-tools']
 lang: 'ja'
 translatedFrom: 'google-gemini-3-agentic-mainstream'
 ---

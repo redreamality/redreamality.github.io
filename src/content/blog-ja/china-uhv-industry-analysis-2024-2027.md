@@ -3,7 +3,7 @@ title: '中国UHV産業状況の詳細分析：A株コアターゲットから�
 pubDate: 2025-11-04T00:00:00.000Z
 description: '中国UHV産業チェーンの詳細分析、マクロドライバー、サプライチェーン状況、中流寡占分析、A株コアターゲットの投資見通しを含む'
 author: 'Remy'
-tags: ['Quantitative', 'A-Share', 'UHV', 'Investment-Strategy']
+tags: ['Quantitative', 'A-Share', 'UHV', 'investment-strategy']
 lang: 'ja'
 translatedFrom: 'china-uhv-industry-analysis-2024-2027'
 ---

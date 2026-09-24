@@ -3,7 +3,7 @@ title: 'Claude Agent SDK (Python) 学習ガイド'
 pubDate: 2025-10-17T00:00:00.000Z
 description: 'Claude Agent SDKのアーキテクチャ、クエリ、カスタムMCPツール拡張、自動化のためのHookシステム、デバッグ、実装に関する完全ガイド。'
 author: 'Remy'
-tags: ['claude code', 'vibe coding', 'python']
+tags: ['claude-code', 'vibe-coding', 'python']
 lang: 'ja'
 translatedFrom: 'claude-agent-sdk-python-'
 ---

@@ -3,7 +3,7 @@ title: '2025年ブラウザ拡張フレームワークの現状：Plasmo、WXT�
 pubDate: 2025-09-03T08:44:51.236Z
 description: '2025年のブラウザ拡張開発の状況は、Manifest V3（MV3）への必須移行とブラウザ間API不整合の持続によって、複雑さを増しています。この困難な環境において、明確な市場リーダーが出現しました。利用可能なフレームワーク、その機能セット、開発者体験、エコシステムの健全性の分析により、**WXT**が現代のブラウザ拡張開発のための決定的なリーディングフレームワークとしての地位を確立していることが示されています。このリーダーシップの地位は、優れた開発者体験、堅牢で柔軟な機能セット、広範な互換性を提供するフレームワーク不可知アーキテクチャ、そして最も重要なこととして、アクティブで信頼性の高いオープンソースメンテナンスの実績に基づいています。'
 author: 'Remy'
-tags: ['browser-extension', 'frontend-development', 'WXT']
+tags: ['browser-extension', 'frontend-development', 'wxt']
 lang: 'ja'
 translatedFrom: 'the-2025-state-of-browser-extension-frameworks-a-comparative-analysis-of-plasmo-wxt-and-crxjs'
 ---

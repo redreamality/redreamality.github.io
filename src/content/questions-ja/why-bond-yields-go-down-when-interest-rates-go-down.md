@@ -2,7 +2,7 @@
 title: "なぜ金利が下がると債券利回りが下がるのか？"
 description: "金利低下が債券利回り低下と債券価格上昇を引き起こすメカニズムを深く分析"
 date: 2025-01-15
-tags: ["債券利回り", "金利", "債券価格", "固定収入", "投資基礎"]
+tags: ["bond-yields", "interest-rates", "bond-prices", "固定収入", "investment-basics"]
 lang: "ja"
 translatedFrom: "why-bond-yields-go-down-when-interest-rates-go-down"
 ---

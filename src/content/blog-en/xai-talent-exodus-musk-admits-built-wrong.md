@@ -3,7 +3,7 @@ title: 'xAI''s Talent Exodus: Musk Admits It Was "Built Wrong" as Founders Keep 
 pubDate: 2026-03-16T00:00:00.000Z
 description: 'Elon Musk says xAI can catch OpenAI, Google, and Anthropic by the end of 2026. But with 9 of 11 co-founders gone, layoffs underway, and staff describing constant upheaval, developers should pay attention to more than benchmark charts.'
 author: 'Remy'
-tags: ['AI', 'xAI', 'Elon Musk', 'Grok', 'Developer Tools', 'AI Labs']
+tags: ['ai', 'xAI', 'Elon Musk', 'Grok', 'developer-tools', 'AI Labs']
 lang: 'en'
 ---
 

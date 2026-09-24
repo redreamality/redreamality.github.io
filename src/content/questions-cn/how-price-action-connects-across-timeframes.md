@@ -2,7 +2,7 @@
 title: "不同周期的走势是如何关联的？"
 description: "多周期不是“互相打架”，而是同一套订单过程在不同分辨率下的汇总与嵌套"
 date: 2026-01-07
-tags: ["量化交易", "多周期", "分形", "信号设计", "风险管理", "采样"]
+tags: ["quantitative-trading", "多周期", "分形", "信号设计", "风险管理", "采样"]
 lang: "zh"
 translatedFrom: "how-price-action-connects-across-timeframes"
 ---

@@ -3,7 +3,7 @@ title: "YC W26 给出的下一个软件信号：AI Agents 正在吃掉你的 Saa
 pubDate: 2026-03-17T00:00:00.000Z
 description: "Y Combinator 2026 冬季批次里最重要的信号，不是 AI 公司更多了，而是越来越多创业公司在做能够直接替代 SaaS 工作流的自主代理。"
 author: "Remy"
-tags: ["AI", "Agents", "创业", "SaaS", "开发者工具"]
+tags: ["ai", "ai-agents", "创业", "SaaS", "developer-tools", "rsi"]
 lang: "zh"
 translatedFrom: "yc-w26-ai-agents-replace-saas"
 ---

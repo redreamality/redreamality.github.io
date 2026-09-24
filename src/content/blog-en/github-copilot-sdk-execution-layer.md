@@ -3,7 +3,7 @@ title: 'GitHub Wants Copilot To Be the Execution Layer for AI Developer Tools'
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'GitHub’s March 10, 2026 Copilot SDK push reframes Copilot as an embedded execution runtime for developer tools, not just an assistant inside GitHub surfaces.'
 author: 'Remy'
-tags: ['AI', 'GitHub', 'GitHub Copilot', 'Agents', 'Developer Tools', 'Software Engineering']
+tags: ['ai', 'github', 'github-copilot', 'ai-agents', 'developer-tools', 'software-engineering']
 lang: 'en'
 ---
 

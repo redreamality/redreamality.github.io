@@ -3,7 +3,7 @@ title: "Agent Harness 模式：从 Claude Code 核心循环中提炼的工程蓝
 pubDate: 2026-04-07T00:00:00.000Z
 description: "教科书里的 ReAct 循环到底缺了什么？我们从 Claude Code 源码中提炼出 Agent Harness 模式——一个可泛化的、让 AI Agent 在生产环境中存活的工程蓝图。"
 author: 'Remy'
-tags: ['harness-engineering', 'agent-harness', 'claude-code', 'react-pattern', 'llm-engineering']
+tags: ['agent-harness', 'claude-code', 'react-pattern', 'llm-engineering', 'agent-loop']
 lang: 'zh'
 ---
 

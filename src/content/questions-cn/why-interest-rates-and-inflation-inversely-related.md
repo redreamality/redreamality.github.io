@@ -2,7 +2,7 @@
 title: "为什么利率和通胀呈反向关系？"
 description: "深入理解经济学理论和实践中利率与通胀之间基本的反向关系"
 date: 2025-01-15
-tags: ["利率", "通胀", "反向关系", "经济学", "货币政策"]
+tags: ["interest-rates", "通胀", "反向关系", "经济学", "货币政策"]
 lang: "zh"
 translatedFrom: "why-interest-rates-and-inflation-inversely-related"
 ---

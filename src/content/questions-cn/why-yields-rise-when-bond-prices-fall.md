@@ -2,7 +2,7 @@
 title: "为什么债券价格下跌时收益率会上升？"
 description: "通过债券市场的机制理解债券价格和收益率之间的反向关系"
 date: 2025-01-15
-tags: ["债券收益率", "债券价格", "收益率上升", "固定收益", "投资基础"]
+tags: ["bond-yields", "bond-prices", "收益率上升", "fixed-income", "investment-basics"]
 lang: "zh"
 translatedFrom: "why-yields-rise-when-bond-prices-fall"
 ---

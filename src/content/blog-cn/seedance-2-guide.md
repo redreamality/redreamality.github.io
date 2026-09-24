@@ -3,7 +3,7 @@ title: 'Seedance 2.0 使用指南：从提示词到成片的完整攻略'
 pubDate: 2026-02-15T00:00:00.000Z
 description: 'Seedance 2.0 AI视频生成完整使用指南，涵盖提示词万能公式、运镜技巧、风格关键词、素材引用系统、画质增强方法及实战示例'
 author: 'Remy'
-tags: ['AI', 'Seedance', '视频生成', '提示词', '使用指南']
+tags: ['ai', 'Seedance', '视频生成', '提示词', '使用指南']
 lang: 'zh'
 ---
 

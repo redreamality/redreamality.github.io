@@ -3,7 +3,7 @@ title: 'Microsoft Kills Copilot AI Bloat: The New Vista Moment for Forced AI Int
 pubDate: 2026-03-16T00:00:00.000Z
 description: 'Microsoft has cancelled several planned Copilot integrations in Windows 11, including Settings, File Explorer, and notification center features. For developers, this is a product lesson about why AI-first does not mean AI-everywhere.'
 author: 'Remy'
-tags: ['AI', 'Microsoft', 'Copilot', 'Windows 11', 'Product Strategy', 'Developer Tools']
+tags: ['ai', 'Microsoft', 'github-copilot', 'Windows 11', 'Product Strategy', 'developer-tools']
 lang: 'en'
 ---
 

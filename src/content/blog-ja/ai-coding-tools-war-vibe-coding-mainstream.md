@@ -3,7 +3,7 @@ title: '2026年AIコーディングツール戦争：バイブコーディング
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'Cursor、Windsurf、Claude Code、Copilot、Aiderは同じフロンティアモデルに収束しつつある。本当の戦いは今やワークフローにある：IDEの利便性対ターミナルネイティブエージェント。'
 author: 'Remy'
-tags: ['AI', 'Developer Tools', 'Software Engineering', 'Agents', 'Vibe Coding']
+tags: ['ai', 'developer-tools', 'software-engineering', 'ai-agents', 'vibe-coding']
 lang: 'ja'
 translatedFrom: 'ai-coding-tools-war-vibe-coding-mainstream'
 ---

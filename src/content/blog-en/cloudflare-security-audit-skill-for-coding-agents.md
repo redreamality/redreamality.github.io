@@ -3,7 +3,7 @@ title: "Cloudflare’s security-audit-skill: A Verifiable Security-Audit Workflo
 description: "A teardown of cloudflare/security-audit-skill: Skill distribution, six audit phases, confirmed / needs_validation / rejected verdicts, adversarial validation, and fail-open behavior without a sandbox—plus install steps and enterprise limits."
 pubDate: 2026-09-24T00:00:00+08:00
 author: "Remy"
-tags: ["Cloudflare", "Security", "Agent Skills", "Security Audit", "Harness", "Developer Tools"]
+tags: ["Cloudflare", "security", "Agent Skills", "Security Audit", "agent-harness", "developer-tools", "agent-loop"]
 lang: "en"
 translatedFrom: "cloudflare-security-audit-skill-for-coding-agents"
 ---

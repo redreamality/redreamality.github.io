@@ -3,7 +3,7 @@ title: "通信ネットワークはAIの分散推論レイヤーになろうと�
 pubDate: 2026-03-18T00:00:00.000Z
 description: "NVIDIAが2026年3月17日に打ち出した通信AIグリッド構想は、通信キャリアを次世代エッジ推論プラットフォームとして再定義し、レイテンシ・データローカリティ・トークンあたりコストをネットワークアーキテクチャの問題として捉え直す。"
 author: "Remy"
-tags: ["AI", "Telecom", "NVIDIA", "Edge AI", "Distributed Systems", "AI Infrastructure"]
+tags: ["ai", "Telecom", "NVIDIA", "Edge AI", "Distributed Systems", "AI Infrastructure"]
 lang: 'ja'
 translatedFrom: 'telecom-ai-grids-distributed-inference'
 ---

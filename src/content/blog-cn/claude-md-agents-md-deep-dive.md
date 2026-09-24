@@ -3,7 +3,7 @@ title: '一万字讲透 CLAUDE.md/AGENTS.md：从基础到反直觉'
 pubDate: 2026-04-25T00:00:00.000Z
 description: '从 Anthropic 官方规范到 Karpathy 的 program.md 范式，从"两次原则"到达尔文式记忆，从 Spec-Driven 到 Eval-Driven——一篇梳理 AI 编程代理指令文件的来龙去脉与反直觉心智模型。'
 author: 'Remy'
-tags: ['Claude Code', 'AI Agents', 'Context Engineering']
+tags: ['claude-code', 'ai-agents', 'Context Engineering']
 ---
 
 ## 写在前面

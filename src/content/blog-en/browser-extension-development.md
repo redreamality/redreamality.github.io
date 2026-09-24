@@ -3,7 +3,7 @@ title: 'What Is a Browser Extension? Build Your First One with WXT'
 pubDate: 2024-03-11T00:00:00.000Z
 description: 'Learn what browser extensions do, how popups and content scripts work, and how to start building an extension with WXT, TypeScript and pnpm.'
 author: 'Remy'
-tags: ['browser-extension', 'frontend-development', 'WXT', 'tutorial', 'web-development']
+tags: ['browser-extension', 'frontend-development', 'wxt', 'tutorial', 'web-development']
 ---
 ## What Is a Browser Extension?
 

@@ -3,7 +3,7 @@ title: "アリババがオープンソース化した Open Code Review：決定�
 description: "alibaba/open-code-review のハイブリッド構成を分解：決定性工学がファイル選別と位置決めを担い、Agent が深い推論を担う。AACR-Bench・委託モード・CI 接続を対照し、企業が複製できる点と境界を示す。"
 pubDate: 2026-09-24T00:00:00+08:00
 author: "Remy"
-tags: ["Open Code Review", "コードレビュー", "Agent", "Harness", "アリババ", "開発者ツール"]
+tags: ["Open Code Review", "コードレビュー", "ai-agents", "agent-harness", "アリババ", "developer-tools", "agent-loop"]
 lang: 'ja'
 translatedFrom: 'alibaba-open-code-review-deterministic-pipeline'
 ---

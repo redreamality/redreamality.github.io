@@ -2,7 +2,7 @@
 title: "为什么降息会导致债券收益率下降？"
 description: "深入解析降息如何导致债券收益率下降和债券价格上涨的机制"
 date: 2025-01-15
-tags: ["债券收益率", "利率", "债券价格", "固定收益", "投资基础"]
+tags: ["bond-yields", "interest-rates", "bond-prices", "fixed-income", "investment-basics"]
 lang: "zh"
 translatedFrom: "why-bond-yields-go-down-when-interest-rates-go-down"
 ---

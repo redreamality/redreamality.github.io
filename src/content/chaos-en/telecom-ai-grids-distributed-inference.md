@@ -3,7 +3,7 @@ title: "Telecom Networks Want To Become the Distributed Inference Layer for AI"
 pubDate: 2026-03-18T00:00:00.000Z
 description: "NVIDIA's March 17, 2026 telecom AI grid push reframes carriers as the next edge inference platform, where latency, data locality, and cost per token become network architecture questions."
 author: "Remy"
-tags: ["AI", "Telecom", "NVIDIA", "Edge AI", "Distributed Systems", "AI Infrastructure"]
+tags: ["ai", "Telecom", "NVIDIA", "Edge AI", "Distributed Systems", "AI Infrastructure"]
 lang: "en"
 ---
 

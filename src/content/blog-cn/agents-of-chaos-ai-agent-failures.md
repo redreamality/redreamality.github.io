@@ -3,7 +3,7 @@ title: "Agents of Chaos：为什么你的 AI Agent 离“毁掉一切”只差�
 pubDate: 2026-03-17T00:00:00.000Z
 description: "MIT、Stanford 和 Harvard 的一项大型研究展示了自主 AI agent 接入真实工具后的风险现实: 服务器被毁、敏感数据泄露、无限循环，以及被普通对话轻易操纵。"
 author: "Remy"
-tags: ["AI", "AI Agents", "AI Safety", "Agentic AI", "安全", "开发者工具"]
+tags: ["ai", "ai-agents", "AI Safety", "security", "developer-tools"]
 lang: "zh"
 translatedFrom: "agents-of-chaos-ai-agent-failures"
 ---

@@ -3,7 +3,7 @@ title: 'Parlant：顧客エンゲージメント向けに設計された AI Agen
 pubDate: 2025-11-06T00:00:00.000Z
 description: '顧客エンゲージメントシナリオ専用に構築された AI Agent フレームワーク Parlant を深く探求。アーキテクチャ設計、コア機能、実践的応用、ベストプラクティスから、高品質な対話型 AI システムの構築方法を包括的に解説'
 author: 'Remy'
-tags: ['AI', 'agents', 'Parlant', 'conversational AI', 'customer engagement']
+tags: ['ai', 'ai-agents', 'Parlant', 'conversational AI', 'customer-engagement']
 lang: 'ja'
 translatedFrom: 'parlant-ai-agent-framework'
 ---

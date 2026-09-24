@@ -3,7 +3,7 @@ title: "OpenAI Symphony：为什么这家最大 AI 实验室会用 Elixir 做 Ag
 pubDate: 2026-03-17T00:00:00.000Z
 description: "OpenAI 开源 Symphony，不只是推出一个新框架，更是在传递一个信号：Agent 编排已经进入重视容错、并发和热更新的新阶段。"
 author: "Remy"
-tags: ["AI", "OpenAI", "Elixir", "BEAM", "AI Agents", "开发者工具"]
+tags: ["ai", "openai", "Elixir", "BEAM", "ai-agents", "developer-tools"]
 lang: "zh"
 translatedFrom: "openai-symphony-elixir-agent-orchestration"
 ---

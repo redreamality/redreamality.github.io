@@ -3,7 +3,7 @@ title: "BMAD-METHOD 使用ガイド：革新的なアジャイルAI駆動開発�
 description: "BMAD-METHODのコアアーキテクチャ、インストール・デプロイ、エージェントロール、4段階アジャイル方法論を深く解析し、開発者が仕様駆動のAI開発フレームワークをマスターするのを支援"
 date: 2026-01-10
 source: "https://github.com/bmad-code-org/BMAD-METHOD"
-tags: ["AI開発", "アジャイル開発", "BMAD", "仕様駆動開発", "マルチエージェントシステム"]
+tags: ["ai-development", "アジャイル開発", "bmad", "sdd", "マルチエージェントシステム"]
 lang: "ja"
 translatedFrom: "bmad-method-guide"
 ---

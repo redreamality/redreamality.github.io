@@ -3,7 +3,7 @@ title: '当人类不再需要工作：四维推演与红利地图'
 pubDate: 2026-05-11T00:00:00.000Z
 description: '一次多智能体的思想实验——从经济、心理、社会结构、文明四个维度推演"后工作社会"的真实形态，并回答两个实操问题：过渡期的红利在哪里？token 会成为通货吗？'
 author: 'Remy'
-tags: ['AI', 'Future', 'Economy', 'Society']
+tags: ['ai', 'Future', 'Economy', 'Society']
 lang: 'zh'
 ---
 

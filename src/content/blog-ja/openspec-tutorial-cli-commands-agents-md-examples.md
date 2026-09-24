@@ -3,7 +3,7 @@ title: 'OpenSpecチュートリアル：CLIの導入、コマンド、AGENTS.md�
 pubDate: 2026-06-16T08:15:00.000Z
 description: 'AIネイティブなspec-driven developmentのための実践的なOpenSpecチュートリアル。CLIの導入、プロジェクト初期化、変更作成、仕様検証、AGENTS.mdの活用、そしてbrownfieldワークフローまでを解説します。'
 author: 'Remy'
-tags: ['openspec', 'spec-driven development', 'sdd', 'ai coding', 'agents.md', 'cli']
+tags: ['openspec', 'sdd', 'ai-coding', 'agents.md', 'cli']
 lang: 'ja'
 translatedFrom: 'openspec-tutorial-cli-commands-agents-md-examples'
 ---

@@ -2,7 +2,7 @@
 title: "交易的利润来自于哪里？"
 description: "从“钱从哪来”倒推策略：风险溢价、提供流动性、信息处理优势、结构性约束与套利"
 date: 2026-01-07
-tags: ["量化交易", "盈利来源", "阿尔法", "风险溢价", "做市", "套利"]
+tags: ["quantitative-trading", "盈利来源", "阿尔法", "风险溢价", "做市", "套利"]
 lang: "zh"
 translatedFrom: "where-does-trading-profit-come-from"
 ---

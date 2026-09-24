@@ -2,7 +2,7 @@
 title: "Where does trading profit come from?"
 description: "A clear map of profit sources in markets: risk premia, providing liquidity, information, and structural edges"
 date: 2026-01-07
-tags: ["量化交易", "quantitative-trading", "alpha", "risk-premium", "market-making", "arbitrage"]
+tags: ["quantitative-trading", "alpha", "risk-premium", "market-making", "arbitrage"]
 lang: "en"
 ---
 This question sounds simple, but it’s one of the most important questions in trading. If you can’t explain where profit comes from, you’re basically hoping the market donates money to you.

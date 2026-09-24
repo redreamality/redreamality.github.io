@@ -3,7 +3,7 @@ title: '誰が魚を飼っているか'
 pubDate: 2025-02-07T00:00:00.000Z
 description: '古典的な論理パズル「誰が魚を飼っているか」をPythonで解く方法を解説します。制約充足問題（CSP）の特性とバックトラッキングアルゴリズムによる解決策を詳しく紹介します。'
 author: 'Remy'
-tags: ['論理パズル', 'CSP', 'バックトラック法', 'Python', '人工知能', 'deepseek', '制約充足問題']
+tags: ['論理パズル', 'CSP', 'バックトラック法', 'python', 'ai', 'deepseek', '制約充足問題']
 lang: 'ja'
 translatedFrom: 'who-fish'
 ---

@@ -3,7 +3,7 @@ title: 'xAIの人材流出：マスクが「構造が間違っていた」と認
 pubDate: 2026-03-16T00:00:00.000Z
 description: 'イーロン・マスクはxAIが2026年末までにOpenAI、Google、Anthropicに追いつくと言う。しかし11人中9人の共同創業者が去り、レイオフが進み、スタッフが絶え間ない混乱を訴える中、開発者はベンチマークチャート以上のものに注目すべきだ。'
 author: 'Remy'
-tags: ['AI', 'xAI', 'Elon Musk', 'Grok', 'Developer Tools', 'AI Labs']
+tags: ['ai', 'xAI', 'Elon Musk', 'Grok', 'developer-tools', 'AI Labs']
 lang: 'ja'
 translatedFrom: 'xai-talent-exodus-musk-admits-built-wrong'
 ---

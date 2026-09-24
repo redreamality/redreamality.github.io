@@ -2,7 +2,7 @@
 title: "债券价格会随利率上升而上涨吗？"
 description: "理解债券价格与利率之间的反向关系，以及为什么利率上升时债券价格通常会下跌"
 date: 2025-01-15
-tags: ["债券价格", "利率", "利率上升", "债券投资", "固定收益"]
+tags: ["bond-prices", "interest-rates", "利率上升", "bond-investing", "fixed-income"]
 lang: "zh"
 translatedFrom: "do-bond-prices-rise-with-interest"
 ---

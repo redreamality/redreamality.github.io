@@ -3,7 +3,7 @@ title: "NVIDIA 的 Nemotron 联盟：为什么开放前沿模型正在变成一�
 pubDate: 2026-03-17T00:00:00.000Z
 description: "NVIDIA 联合 8 家 AI 实验室在 DGX Cloud 上共建开放前沿模型，这不只是一次合作发布，更是在用生态协同对抗封闭 API 巨头。"
 author: "Remy"
-tags: ["AI", "NVIDIA", "开放模型", "Nemotron", "Agentic AI"]
+tags: ["ai", "NVIDIA", "开放模型", "Nemotron", "ai-agents"]
 lang: "zh"
 translatedFrom: "nvidia-nemotron-coalition-open-frontier-models"
 ---

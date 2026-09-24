@@ -3,7 +3,7 @@ title: "YC W26が示す次のソフトウェアの転換：AIエージェント�
 pubDate: 2026-03-17T00:00:00.000Z
 description: "Y Combinatorの2026年冬バッチは自律型エージェントスタートアップで溢れている。より深いシグナルは、AIコパイロットの増加ではなく、SaaSワークフローをそのまま置き換えるソフトウェアだ。"
 author: "Remy"
-tags: ["AI", "Agents", "Startups", "SaaS", "Developer Tools"]
+tags: ["ai", "ai-agents", "Startups", "SaaS", "developer-tools", "rsi"]
 lang: "ja"
 translatedFrom: "yc-w26-ai-agents-replace-saas"
 ---

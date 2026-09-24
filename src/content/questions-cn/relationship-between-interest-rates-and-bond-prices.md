@@ -2,7 +2,7 @@
 title: "为什么利率和债券价格呈反向关系？"
 description: "深入解析金融市场中利率与债券价格之间的基本反向关系及其背后的原理"
 date: 2025-01-15
-tags: ["债券", "利率", "固定收益", "投资基础"]
+tags: ["bonds", "interest-rates", "fixed-income", "investment-basics"]
 lang: "zh"
 translatedFrom: "relationship-between-interest-rates-and-bond-prices"
 ---

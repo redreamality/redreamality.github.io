@@ -3,7 +3,7 @@ title: '如何使用技能和工具构建 AI 代理：2026 完整新手指南'
 pubDate: 2026-01-15T10:00:00.000Z
 description: '学习如何使用实用技能和工具构建智能 AI 代理。包含代理技能、工具集成、计算机使用、文件操作和 Claude、OpenAI 实际示例的完整新手友好教程。'
 author: 'Remy'
-tags: ['AI', 'agents', 'tutorial', 'beginner-guide', 'claude', 'openai', 'llm', 'automation']
+tags: ['ai', 'ai-agents', 'tutorial', 'beginner-guide', 'claude', 'openai', 'llm', 'automation']
 lang: 'zh'
 translatedFrom: 'agentskills-io-starter-guide'
 ---

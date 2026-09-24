@@ -2,7 +2,7 @@
 title: "市场中为什么会存在支撑阻力？"
 description: "把“支撑阻力”从画线玄学，落到订单聚集、流动性分布与仓位记忆"
 date: 2026-01-07
-tags: ["量化交易", "技术分析", "支撑阻力", "流动性", "订单流", "仓位"]
+tags: ["quantitative-trading", "技术分析", "支撑阻力", "流动性", "订单流", "仓位"]
 lang: "zh"
 translatedFrom: "why-support-and-resistance-exist"
 ---

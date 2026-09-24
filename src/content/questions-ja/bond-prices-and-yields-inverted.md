@@ -2,7 +2,7 @@
 title: "なぜ債券価格と利回りは逆転するのか？"
 description: "イールドカーブ逆転現象とその経済および債券市場への意義を深く分析"
 date: 2025-01-15
-tags: ["イールドカーブ", "債券", "金利", "経済", "景気後退指標"]
+tags: ["イールドカーブ", "bonds", "interest-rates", "経済", "景気後退指標"]
 lang: "ja"
 translatedFrom: "bond-prices-and-yields-inverted"
 ---

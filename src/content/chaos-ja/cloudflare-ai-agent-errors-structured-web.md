@@ -3,7 +3,7 @@ title: 'Cloudflare はブラウザ向けではなく、AI エージェント向�
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'Cloudflare は RFC 9457 の problem details を AI エージェント時代の文脈で押し出している。重要なのは見栄えのよいエラーページではなく、機械が失敗を理解して次の行動を選べることだ。'
 author: 'Remy'
-tags: ['AI', 'Cloudflare', 'AI Agents', '開発者ツール', 'Web インフラ', 'API']
+tags: ['ai', 'Cloudflare', 'ai-agents', 'developer-tools', 'Web インフラ', 'API']
 lang: 'ja'
 translatedFrom: 'cloudflare-ai-agent-errors-structured-web'
 ---

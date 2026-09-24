@@ -3,7 +3,7 @@ title: "Claude Code 源码泄露：Anthropic AI 编程智能体架构深度解�
 pubDate: 2026-03-31T00:00:00.000Z
 description: "Claude Code 源码短暂公开。我们读完了全部 1,884 个 TypeScript 文件。以下是这套架构揭示的 AI 编程工具真正走向。"
 author: "Remy"
-tags: ["AI", "Claude Code", "架构", "开发者工具", "Agents", "Anthropic"]
+tags: ["ai", "claude-code", "架构", "developer-tools", "ai-agents", "Anthropic"]
 lang: "zh"
 translatedFrom: "claude-code-source-leak-architecture-analysis"
 ---

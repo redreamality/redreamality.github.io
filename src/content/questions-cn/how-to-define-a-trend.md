@@ -2,7 +2,7 @@
 title: "如何定义趋势？"
 description: "趋势不是一句“感觉在涨”，而是你先选时间尺度，再定义方向偏置和失效条件"
 date: 2026-01-07
-tags: ["量化交易", "趋势", "动量", "市场结构", "时间尺度", "信噪比"]
+tags: ["quantitative-trading", "趋势", "动量", "market-structure", "时间尺度", "信噪比"]
 lang: "zh"
 translatedFrom: "how-to-define-a-trend"
 ---

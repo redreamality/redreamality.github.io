@@ -3,7 +3,7 @@ title: '微软砍掉 Copilot AI 臃肿集成：强推式 AI 的“新 Vista 时�
 pubDate: 2026-03-16T00:00:00.000Z
 description: '微软取消了多项原计划中的 Windows 11 Copilot 集成，包括设置、文件资源管理器和通知中心。对开发者来说，这不是一条普通新闻，而是一堂关于“AI-first 不等于 AI 到处塞”的产品课。'
 author: 'Remy'
-tags: ['AI', 'Microsoft', 'Copilot', 'Windows 11', '产品策略', '开发者工具']
+tags: ['ai', 'Microsoft', 'github-copilot', 'Windows 11', '产品策略', 'developer-tools']
 lang: 'zh'
 translatedFrom: 'microsoft-copilot-ai-bloat-reversal'
 ---

@@ -2,7 +2,7 @@
 title: "トレンドをどう定義するか？"
 description: "トレンドは「上がっている感じ」ではなく、まず時間スケールを選び、次に方向バイアスと無効条件を定義するものです"
 date: 2026-01-07
-tags: ["クオンツトレーディング", "トレンド", "モメンタム", "市場構造", "時間スケール", "シグナル・ノイズ比"]
+tags: ["quantitative-trading", "トレンド", "モメンタム", "market-structure", "時間スケール", "シグナル・ノイズ比"]
 lang: "ja"
 translatedFrom: "how-to-define-a-trend"
 ---

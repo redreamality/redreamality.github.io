@@ -2,7 +2,7 @@
 title: "波段、结构、趋势的关系是怎样的？"
 description: "把三个最常被混用的交易词，放进同一个层级框架：波段是积木，结构是语法，趋势是总结"
 date: 2026-01-07
-tags: ["量化交易", "波段", "市场结构", "趋势", "多周期", "交易体系"]
+tags: ["quantitative-trading", "波段", "market-structure", "趋势", "多周期", "交易体系"]
 lang: "zh"
 translatedFrom: "relationship-between-swings-structure-and-trend"
 ---

@@ -3,7 +3,7 @@ title: "NVIDIA Is Turning Enterprise Agents Into a Managed Runtime Stack"
 pubDate: 2026-03-17T00:00:00.000Z
 description: "NVIDIA's March 16, 2026 GTC announcements suggest the enterprise AI race is shifting beyond models toward a full runtime stack: guardrails, retrieval, evaluation, and operational control for production agents."
 author: "Remy"
-tags: ["AI", "NVIDIA", "OpenClaw", "Enterprise AI", "AI Agents", "NeMo", "Developer Tools"]
+tags: ["ai", "NVIDIA", "OpenClaw", "Enterprise AI", "ai-agents", "NeMo", "developer-tools"]
 lang: "en"
 ---
 

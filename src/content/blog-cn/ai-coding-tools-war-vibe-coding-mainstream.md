@@ -3,7 +3,7 @@ title: '2026 AI 编程工具大战：Vibe Coding 正在把开发者工作流一�
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'Cursor、Windsurf、GitHub Copilot、Claude Code 和 Aider 的差异，已经不只是模型能力，而是 IDE 工作流与终端代理工作流之间的路线分裂。'
 author: 'Remy'
-tags: ['AI', '开发者工具', '软件工程', 'Agents', 'Vibe Coding']
+tags: ['ai', 'developer-tools', 'software-engineering', 'ai-agents', 'vibe-coding']
 lang: 'zh'
 translatedFrom: 'ai-coding-tools-war-vibe-coding-mainstream'
 ---

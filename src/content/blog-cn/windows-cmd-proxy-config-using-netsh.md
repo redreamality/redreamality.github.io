@@ -3,7 +3,7 @@ title: '带有绕过列表的本地代理：一个Windows批处理脚本'
 pubDate: 2025-08-06T00:00:00.000Z
 description: '学习如何使用 Windows 批处理脚本自动配置 WinHTTP 代理。本指南涵盖了设置本地代理及定义绕过列表，旨在简化您的开发与测试流程。'
 author: 'Remy'
-tags: ['windows', '代理']
+tags: ['windows', 'ai-agents']
 ---
 
 ## 使用 Windows 批处理脚本配置本地代理的终极指南

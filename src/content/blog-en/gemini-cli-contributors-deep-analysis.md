@@ -3,7 +3,7 @@ title: 'Deep Analysis of Google Gemini CLI Contributors: The Power of Open Sourc
 pubDate: 2025-12-11T10:00:00.000Z
 description: 'A comprehensive analysis of 100+ contributors to the Google Gemini CLI project, exploring how open source communities build and maintain enterprise-grade tools. This article covers top contributors, collaboration patterns, and best practices for community-driven development.'
 author: 'Dev Team'
-tags: ['Google', 'Gemini', 'CLI', 'Open Source', 'Community Analysis']
+tags: ['Google', 'Gemini', 'cli', 'open-source', 'Community Analysis']
 lang: 'en'
 ---
 

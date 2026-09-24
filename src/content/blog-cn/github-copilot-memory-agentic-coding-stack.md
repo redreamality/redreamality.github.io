@@ -3,7 +3,7 @@ title: 'GitHub Copilot 正在变成一个带记忆的 Agentic 编程栈'
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'GitHub 在 2026 年 3 月连续发布了 Copilot 的记忆、规划、代码审查指令和任务拆解能力。把这些更新连起来看，它们更像一套面向软件团队的 agentic 开发栈，而不只是功能补丁。'
 author: 'Remy'
-tags: ['AI', 'GitHub', 'GitHub Copilot', 'AI Agents', '开发者工具', '软件工程']
+tags: ['ai', 'github', 'github-copilot', 'ai-agents', 'developer-tools', 'software-engineering']
 lang: 'zh'
 translatedFrom: 'github-copilot-memory-agentic-coding-stack'
 ---

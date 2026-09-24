@@ -2,7 +2,7 @@
 title: "4%の利回りとは何を意味するのか？"
 description: "4%の利回りが債券、投資、財務計画において何を意味するかを理解する"
 date: 2025-01-15
-tags: ["利回り", "投資リターン", "債券利回り", "財務計画", "投資基礎"]
+tags: ["利回り", "投資リターン", "bond-yields", "財務計画", "investment-basics"]
 lang: "ja"
 translatedFrom: "what-does-a-4-percent-yield-mean"
 ---

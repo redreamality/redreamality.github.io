@@ -2,7 +2,7 @@
 title: "为什么债券走势与利率相反？"
 description: "通过实际例子和市场动态理解债券价格为何与利率走势相反"
 date: 2025-01-15
-tags: ["债券走势", "利率", "债券价格", "固定收益基础", "投资教育"]
+tags: ["债券走势", "interest-rates", "bond-prices", "固定收益基础", "investment-education"]
 lang: "zh"
 translatedFrom: "why-bonds-move-opposite-of-interest-rates"
 ---

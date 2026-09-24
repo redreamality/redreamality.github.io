@@ -2,7 +2,7 @@
 title: "債券価格は金利上昇に伴って上昇するのか？"
 description: "債券価格と金利の逆相関関係を理解し、なぜ金利が上昇すると債券価格が通常下落するのかを解説"
 date: 2025-01-15
-tags: ["債券価格", "金利", "金利上昇", "債券投資", "固定利付"]
+tags: ["bond-prices", "interest-rates", "金利上昇", "bond-investing", "固定利付"]
 lang: "ja"
 translatedFrom: "do-bond-prices-rise-with-interest"
 ---

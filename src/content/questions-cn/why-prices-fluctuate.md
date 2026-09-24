@@ -2,7 +2,7 @@
 title: "价格为什么会波动？"
 description: "用更接近量化交易的视角，把价格波动拆成订单、流动性与波动率三件事"
 date: 2026-01-07
-tags: ["量化交易", "交易", "市场微观结构", "流动性", "波动率", "价格行为"]
+tags: ["quantitative-trading", "交易", "市场微观结构", "流动性", "波动率", "price-action"]
 lang: "zh"
 translatedFrom: "why-prices-fluctuate"
 ---

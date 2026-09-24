@@ -3,7 +3,7 @@ title: 'Google Gemini 3 Goes Mainstream: The Quiet Agentic AI Takeover Happening
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'Google quietly turned Gemini 3 Flash into its default model stack and shipped agentic Gemini actions to Pixel phones. For developers, the bigger story is frontier-grade performance at budget pricing.'
 author: 'Remy'
-tags: ['AI', 'Google', 'Gemini', 'Android', 'Pixel', 'Developer Tools']
+tags: ['ai', 'Google', 'Gemini', 'Android', 'Pixel', 'developer-tools']
 lang: 'en'
 ---
 

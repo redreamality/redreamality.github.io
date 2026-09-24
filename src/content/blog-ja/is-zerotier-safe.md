@@ -3,7 +3,7 @@ title: "ZeroTier は安全か？- 深層分析"
 pubDate: 2025-02-26T00:00:00.000Z
 description: "ZeroTier のセキュリティアーキテクチャ、潜在的リスク、安全な展開のベストプラクティスを深く分析"
 author: "Redreamality"
-tags: ["zerotier", "セキュリティ", "ネットワーク", "vpn", "ネットワークセキュリティ"]
+tags: ["zerotier", "security", "ネットワーク", "vpn", "ネットワークセキュリティ"]
 lang: "ja"
 translatedFrom: "is-zerotier-safe"
 ---

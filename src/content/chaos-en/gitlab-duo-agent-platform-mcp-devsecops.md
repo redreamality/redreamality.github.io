@@ -3,7 +3,7 @@ title: "GitLab Duo Agent Platform + MCP: GitLab Wants To Be the Operating System
 pubDate: 2026-03-17T00:00:00.000Z
 description: "GitLab is pushing AI coding beyond copilots and into governed workflow infrastructure, with external agents, managed credentials, audit trails, and MCP connections across the DevSecOps stack."
 author: "Remy"
-tags: ["AI", "GitLab", "DevSecOps", "MCP", "AI Agents", "Developer Tools"]
+tags: ["ai", "GitLab", "DevSecOps", "mcp", "ai-agents", "developer-tools"]
 lang: "en"
 ---
 

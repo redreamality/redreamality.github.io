@@ -3,7 +3,7 @@ title: "Jev × Claude Code：チャットモデルとして使わず、四つの
 description: "YouTubeのバズ動画はJevをClaude Codeに結びつけたが、JevはCLI背後のチャットモデルにはなれない。公式skill、境界フック、MCP、ターン単位ルーティングの四経路を整理し、NobodyWhoの25行最小実装と対照し、OpenAIの追随圧力を論じる。"
 pubDate: 2026-09-23T14:40:00.000Z
 author: "Remy"
-tags: ["Jev", "Claude Code", "Agents", "開発者ツール", "System One"]
+tags: ["jev", "claude-code", "ai-agents", "developer-tools", "System One"]
 lang: 'ja'
 translatedFrom: 'jev-claude-code-10x-and-25-lines'
 ---

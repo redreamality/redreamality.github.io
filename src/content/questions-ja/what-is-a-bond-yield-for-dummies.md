@@ -2,7 +2,7 @@
 title: "債券利回りとは？"
 description: "債券利回りを理解する初心者向けガイド、計算方法と投資家にとっての意味を含む"
 date: 2025-01-15
-tags: ["債券利回り", "初心者ガイド", "固定収益", "投資教育", "利回り基礎"]
+tags: ["bond-yields", "初心者ガイド", "fixed-income", "investment-education", "利回り基礎"]
 lang: "ja"
 translatedFrom: "what-is-a-bond-yield-for-dummies"
 ---

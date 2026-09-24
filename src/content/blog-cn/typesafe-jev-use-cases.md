@@ -3,7 +3,7 @@ title: "Jev 的使用前景与具体场景"
 description: "结合 TypeSafe 官方文章、开发者实测和 awesome-jev 项目，解释 Jev 如何用于浏览器操作、模型路由、工单分流、引用核查和上下文管理，以及上线前需要验证的边界。"
 pubDate: 2026-09-19T00:00:00+10:00
 author: "Remy"
-tags: ["AI", "Agents", "开发者工具", "自动化"]
+tags: ["ai", "ai-agents", "developer-tools", "自动化"]
 lang: "zh"
 ---
 

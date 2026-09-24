@@ -3,7 +3,7 @@ title: "GitLab Duo Agent Platform + MCP：GitLabはAIコーディングエージ
 pubDate: 2026-03-17T00:00:00.000Z
 description: "GitLabはAIコーディングをコパイロット的な支援を超えて、ガバナンスされたワークフローインフラへと押し上げようとしている。外部エージェント、管理された認証情報、監査証跡、DevSecOpsスタック全体にわたるMCP接続がその柱だ。"
 author: "Remy"
-tags: ["AI", "GitLab", "DevSecOps", "MCP", "AI Agents", "Developer Tools"]
+tags: ["ai", "GitLab", "DevSecOps", "mcp", "ai-agents", "developer-tools"]
 lang: "ja"
 translatedFrom: "gitlab-duo-agent-platform-mcp-devsecops"
 ---

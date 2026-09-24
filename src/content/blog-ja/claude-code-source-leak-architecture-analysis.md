@@ -3,7 +3,7 @@ title: 'Claude Code流出解析：AnthropicのAIコーディングエージェ�
 pubDate: 2026-03-31T00:00:00.000Z
 description: 'Claude Codeのソース流出から見えた、マルチエージェント実行基盤、プラグイン市場、コンテキスト管理、権限モデルまでを読み解く。'
 author: "Remy"
-tags: ["AI", "Claude Code", "Architecture", "Developer Tools", "Agents", "Anthropic"]
+tags: ["ai", "claude-code", "Architecture", "developer-tools", "ai-agents", "Anthropic"]
 lang: 'ja'
 translatedFrom: 'claude-code-source-leak-architecture-analysis'
 ---

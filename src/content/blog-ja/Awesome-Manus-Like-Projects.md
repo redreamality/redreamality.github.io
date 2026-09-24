@@ -3,7 +3,7 @@ title: 'Manus に似た優れたプロジェクト'
 pubDate: 2025-04-07T00:00:00.000Z
 description: 'Manus 技術スタックに関連するオープンソースプロジェクトの厳選リスト'
 author: 'Remy'
-tags: ['人工知能', 'エージェント', 'マルチモーダル', 'ツール', 'マルチエージェントシステム', 'AI']
+tags: ['ai', 'エージェント', 'マルチモーダル', 'ツール', 'マルチエージェントシステム']
 lang: 'ja'
 translatedFrom: 'Awesome-Manus-Like-Projects'
 ---

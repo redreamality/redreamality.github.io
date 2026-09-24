@@ -3,7 +3,7 @@ title: 'Seedance Product Research Report'
 pubDate: 2026-02-15T00:00:00.000Z
 description: 'Comprehensive research analysis of Seedance 2.0 (ByteDance/Jimeng) AI video generation model and major competitors, covering product features, competitive landscape, target users, market trends, and API integration'
 author: 'Remy'
-tags: ['AI', 'Seedance', 'Video Generation', 'Product Research', 'ByteDance']
+tags: ['ai', 'Seedance', 'Video Generation', 'Product Research', 'ByteDance']
 lang: 'en'
 translatedFrom: 'seedance-research'
 ---

@@ -3,7 +3,7 @@ title: 'Parlant: An In-Depth Analysis of the AI Agent Framework Designed for Cus
 pubDate: 2025-11-06T00:00:00.000Z
 description: 'A comprehensive exploration of Parlant, an AI Agent framework specifically built for customer engagement scenarios. From architecture design and core features to practical applications and best practices, this article provides a complete guide to building high-quality conversational AI systems with Parlant.'
 author: 'Remy'
-tags: ['AI', 'agents', 'Parlant', 'conversational AI', 'customer engagement']
+tags: ['ai', 'ai-agents', 'Parlant', 'conversational AI', 'customer-engagement']
 lang: 'en'
 ---
 ## Introduction

@@ -2,7 +2,7 @@
 title: "债券的5%规则是什么？"
 description: "理解债券投资的5%规则及其在投资组合管理中的应用"
 date: 2025-01-15
-tags: ["债券规则", "5%规则", "债券投资", "投资策略", "固定收益"]
+tags: ["债券规则", "5%规则", "bond-investing", "investment-strategy", "fixed-income"]
 lang: "zh"
 translatedFrom: "what-is-the-5-percent-rule-for-bonds"
 ---

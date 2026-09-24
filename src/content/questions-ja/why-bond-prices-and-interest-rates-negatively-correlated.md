@@ -2,7 +2,7 @@
 title: "なぜ債券価格と金利は負の相関関係にあるのか？"
 description: "金融市場における債券価格と金利の基本的な負の相関関係を理解"
 date: 2025-01-15
-tags: ["債券価格", "金利", "負の相関", "債券基礎", "金融市場"]
+tags: ["bond-prices", "interest-rates", "負の相関", "債券基礎", "金融市場"]
 lang: "ja"
 translatedFrom: "why-bond-prices-and-interest-rates-negatively-correlated"
 ---

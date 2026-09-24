@@ -3,7 +3,7 @@ title: 'Deep Analysis of China UHV Industry Landscape: From A-Share Core Targets
 pubDate: 2025-11-04T00:00:00.000Z
 description: 'In-depth analysis of China UHV industry chain, including macro drivers, supply chain landscape, midstream oligopoly analysis, and investment outlook for A-share core targets'
 author: 'Remy'
-tags: ['Quantitative', 'A-Share', 'UHV', 'Investment-Strategy']
+tags: ['Quantitative', 'A-Share', 'UHV', 'investment-strategy']
 ---
 ## **Part 1: Macro Drivers - UHV: From "National Business Card" to "Energy Superhighway"**
 

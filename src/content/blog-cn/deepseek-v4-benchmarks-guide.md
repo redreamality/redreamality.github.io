@@ -3,7 +3,7 @@ title: 'DeepSeek V4 评测地图：读懂 2026 前沿 LLM 基准'
 pubDate: 2026-04-24T00:00:00.000Z
 description: '从 LiveCodeBench 到 SWE-bench Pro，再到 ClawBench 家族——把 DeepSeek V4 报告里的十六个评测集一次讲清楚，顺便梳理 2026 年前沿模型评测的整体格局。'
 author: 'Remy'
-tags: ['DeepSeek', 'Benchmark', 'AI Agent']
+tags: ['DeepSeek', 'Benchmark', 'ai-agents']
 lang: 'zh'
 ---
 

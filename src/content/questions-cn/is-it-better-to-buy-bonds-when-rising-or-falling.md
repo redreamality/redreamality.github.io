@@ -2,7 +2,7 @@
 title: "在利率上升或下降时买债券哪个更好？"
 description: "基于利率周期全面指导债券购买时机"
 date: 2025-01-15
-tags: ["债券投资", "利率", "债券时机", "投资策略", "固定收益"]
+tags: ["bond-investing", "interest-rates", "债券时机", "investment-strategy", "fixed-income"]
 lang: "zh"
 translatedFrom: "is-it-better-to-buy-bonds-when-rising-or-falling"
 ---

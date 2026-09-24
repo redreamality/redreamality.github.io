@@ -3,7 +3,7 @@ title: "OpenSpec 詳細研究レポート：AI支援プログラミングにお�
 description: "OpenSpecのコアアーキテクチャ、ワークフロー、エンタープライズアプリケーションを深く探求し、仕様駆動開発を通じてAIプログラミングにおけるコンテキスト喪失と幻覚問題をどのように解決するかを理解"
 date: 2026-01-11
 source: "https://github.com/Fission-AI/OpenSpec"
-tags: ["AI開発", "OpenSpec", "仕様駆動開発", "SDD", "AIエージェント"]
+tags: ["ai-development", "openspec", "sdd", "AIエージェント"]
 lang: "ja"
 translatedFrom: 'openspec-guide'
 ---

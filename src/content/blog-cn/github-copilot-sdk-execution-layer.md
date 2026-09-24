@@ -3,7 +3,7 @@ title: 'GitHub 正在把 Copilot 推成 AI 开发者工具的执行层'
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'GitHub 在 2026 年 3 月 10 日推进 Copilot SDK，不只是扩展一个助手功能，而是在把 Copilot 定位成可嵌入开发工具链的执行层。'
 author: 'Remy'
-tags: ['AI', 'GitHub', 'GitHub Copilot', 'AI Agents', '开发者工具', '软件工程']
+tags: ['ai', 'github', 'github-copilot', 'ai-agents', 'developer-tools', 'software-engineering']
 lang: 'zh'
 translatedFrom: 'github-copilot-sdk-execution-layer'
 ---

@@ -2,7 +2,7 @@
 title: "How do you define market structure?"
 description: "Turning price action into a consistent framework: pivots, breaks, ranges, and state changes"
 date: 2026-01-07
-tags: ["量化交易", "quantitative-trading", "market-structure", "price-action", "swings", "state-models"]
+tags: ["quantitative-trading", "market-structure", "price-action", "swings", "state-models"]
 lang: "en"
 ---
 When traders say “structure,” they usually mean something like: “the market is making higher highs and higher lows,” or “structure broke,” or “we’re ranging.”

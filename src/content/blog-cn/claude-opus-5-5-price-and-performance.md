@@ -3,7 +3,7 @@ title: "Claude Opus 5.5：降价近四成，旗舰性能怎么选"
 description: "Anthropic 于 2026-09-22 发布 Claude Opus 5.5：相对 Opus 5 典型任务成本约降 40%，定价与安全限制同步落地。对照官方基准、价格表与防护策略，说明 coding agent 场景下如何选型。"
 pubDate: 2026-09-24T02:00:00.000Z
 author: "Remy"
-tags: ["Claude", "Opus 5.5", "Anthropic", "模型发布", "Coding Agents", "定价"]
+tags: ["Claude", "Opus 5.5", "Anthropic", "模型发布", "ai-agents", "定价"]
 lang: "zh"
 ---
 

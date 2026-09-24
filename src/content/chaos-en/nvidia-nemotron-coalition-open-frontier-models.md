@@ -3,7 +3,7 @@ title: "NVIDIA's Nemotron Coalition: Why Open Frontier Models Are Becoming a Tea
 pubDate: 2026-03-17T00:00:00.000Z
 description: "NVIDIA's new Nemotron Coalition brings eight AI labs onto DGX Cloud to co-build open frontier models, signaling a new competitive strategy against closed API giants."
 author: "Remy"
-tags: ["AI", "NVIDIA", "Open Models", "Nemotron", "Agentic AI"]
+tags: ["ai", "NVIDIA", "Open Models", "Nemotron", "ai-agents"]
 lang: "en"
 ---
 

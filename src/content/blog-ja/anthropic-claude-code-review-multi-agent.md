@@ -3,7 +3,7 @@ title: "AnthropicのClaude Codeレビュー：マルチエージェントAIシ�
 pubDate: 2026-03-17T00:00:00.000Z
 description: "AnthropicのClaude Code Reviewはプルリクエスト分析をマルチエージェントワークフローへと変え、AIコードレビューがオートコンプリートのアドオンからコアエンジニアリングインフラへとシフトしていることを示している。"
 author: "Remy"
-tags: ["AI", "Anthropic", "Claude", "Code Review", "AI Agents", "Developer Tools"]
+tags: ["ai", "Anthropic", "Claude", "Code Review", "ai-agents", "developer-tools"]
 lang: 'ja'
 translatedFrom: 'anthropic-claude-code-review-multi-agent'
 ---

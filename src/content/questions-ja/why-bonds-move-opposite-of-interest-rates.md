@@ -2,7 +2,7 @@
 title: "なぜ債券は金利と逆方向に動くのか？"
 description: "実例と市場動向を通じて、債券価格が金利と逆方向に動く理由を理解"
 date: 2025-01-15
-tags: ["債券動向", "金利", "債券価格", "固定収入基礎", "投資教育"]
+tags: ["債券動向", "interest-rates", "bond-prices", "固定収入基礎", "investment-education"]
 lang: "ja"
 translatedFrom: "why-bonds-move-opposite-of-interest-rates"
 ---

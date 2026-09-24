@@ -3,7 +3,7 @@ title: 'CLAUDE.md and AGENTS.md, In Depth: From Basics to Counterintuitive Patte
 pubDate: 2026-04-26T00:00:00.000Z
 description: "From Anthropic's official guidance to Karpathy's program.md paradigm, from the two-strikes rule to Darwinian memory, from Spec-Driven to Eval-Driven — a long-form survey of how we write project files for AI coding agents, and the counterintuitive mental models worth borrowing."
 author: 'Remy'
-tags: ['Claude Code', 'AI Agents', 'Context Engineering']
+tags: ['claude-code', 'ai-agents', 'Context Engineering']
 lang: 'en'
 translatedFrom: 'claude-md-agents-md-deep-dive'
 ---

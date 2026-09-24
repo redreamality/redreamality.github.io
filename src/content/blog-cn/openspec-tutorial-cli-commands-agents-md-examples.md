@@ -3,7 +3,7 @@ title: 'OpenSpec 教程：CLI 安装、命令、AGENTS.md 与实战示例'
 pubDate: 2026-06-16T08:15:00.000Z
 description: '面向 AI 原生规范驱动开发的 OpenSpec 实用教程：安装 CLI、初始化项目、创建变更、验证规范、使用 AGENTS.md，以及棕地项目工作流实战。'
 author: 'Remy'
-tags: ['openspec', 'spec-driven development', 'sdd', 'ai coding', 'agents.md', 'cli', '规范驱动开发', 'AI 编码']
+tags: ['openspec', 'sdd', 'ai-coding', 'agents.md', 'cli', '规范驱动开发', 'AI 编码']
 lang: 'zh'
 translatedFrom: 'openspec-tutorial-cli-commands-agents-md-examples'
 ---

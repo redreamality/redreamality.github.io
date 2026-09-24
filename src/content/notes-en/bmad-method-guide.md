@@ -3,7 +3,7 @@ title: "BMAD-METHOD Guide: Breakthrough Agile AI-Driven Development"
 description: "A comprehensive analysis of BMAD-METHOD's core architecture, deployment, agent roles, and four-phase agile methodology for mastering spec-driven AI development"
 date: 2026-01-10
 source: "https://github.com/bmad-code-org/BMAD-METHOD"
-tags: ["AI Development", "Agile", "BMAD", "Spec-Driven Development", "Multi-Agent Systems"]
+tags: ["ai-development", "Agile", "bmad", "sdd", "multi-agent-systems"]
 lang: "en"
 translatedFrom: "bmad-method-guide"
 ---

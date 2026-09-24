@@ -3,7 +3,7 @@ title: 'OpenSpec 1.5 Explained: Stores Beta, Explore-first Workflow, and Team-sc
 pubDate: 2026-07-02T01:30:00.000Z
 description: 'A detailed update and usage guide for OpenSpec 1.5.0, covering Stores Beta, /opsx:explore, brownfield adoption, command frontmatter fixes, and the shift from repo-local specs to shared planning context.'
 author: 'Remy'
-tags: ['openspec', 'spec-driven development', 'sdd', 'ai coding', 'stores', 'ai agents', 'cli']
+tags: ['openspec', 'sdd', 'ai-coding', 'stores', 'ai-agents', 'cli']
 lang: 'en'
 translatedFrom: 'openspec-1-5-stores-beta-update-guide'
 ---

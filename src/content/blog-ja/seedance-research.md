@@ -3,7 +3,7 @@ title: 'Seedance 製品調査レポート'
 pubDate: 2026-02-15T00:00:00.000Z
 description: 'Seedance 2.0（ByteDance/即夢）AI動画生成モデルと主要競合の包括的調査分析。製品機能、競合比較、ターゲットユーザー、市場動向、API連携方法を網羅'
 author: 'Remy'
-tags: ['AI', 'Seedance', '動画生成', '製品調査', 'ByteDance']
+tags: ['ai', 'Seedance', '動画生成', '製品調査', 'ByteDance']
 lang: 'ja'
 translatedFrom: 'seedance-research'
 ---

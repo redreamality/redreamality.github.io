@@ -3,7 +3,7 @@ title: 'Seedance 2.0 使い方ガイド：プロンプトから完成映像ま�
 pubDate: 2026-02-15T00:00:00.000Z
 description: 'Seedance 2.0 AI動画生成の完全使い方ガイド — プロンプト万能公式、カメラワーク、スタイルキーワード、素材参照システム、画質向上テクニック、実践例を網羅'
 author: 'Remy'
-tags: ['AI', 'Seedance', '動画生成', 'プロンプト', '使い方ガイド']
+tags: ['ai', 'Seedance', '動画生成', 'プロンプト', '使い方ガイド']
 lang: 'ja'
 translatedFrom: 'seedance-2-guide'
 ---

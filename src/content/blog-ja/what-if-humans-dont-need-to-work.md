@@ -3,7 +3,7 @@ title: '人間がもう働く必要がなくなったら：4次元の演繹と�
 pubDate: 2026-05-11T00:00:00.000Z
 description: '労働後の社会に関するマルチエージェント思考実験——経済・心理・社会・文明の4次元から——そして移行期の配当が実際にどこにあるかを探る。'
 author: 'Remy'
-tags: ['AI', 'Future', 'Economy', 'Society']
+tags: ['ai', 'Future', 'Economy', 'Society']
 lang: 'ja'
 translatedFrom: 'what-if-humans-dont-need-to-work'
 ---

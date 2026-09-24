@@ -3,7 +3,7 @@ title: 'DeepSeek V4 評価スイート完全ガイド：2026年LLMベンチマ�
 pubDate: 2026-04-24T00:00:00.000Z
 description: 'DeepSeek V4 が報告するすべてのベンチマーク——LiveCodeBench から SWE-bench Pro、ClawBench ファミリーまで——を網羅し、それぞれが実際に何を測定するかを解説するフィールドガイド。'
 author: 'Remy'
-tags: ['DeepSeek', 'Benchmark', 'AI Agent', 'LLM評価']
+tags: ['DeepSeek', 'Benchmark', 'ai-agents', 'LLM評価']
 lang: 'ja'
 translatedFrom: 'deepseek-v4-benchmarks-guide'
 ---

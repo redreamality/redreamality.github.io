@@ -3,7 +3,7 @@ title: "エージェント・ハーネス・パターン：Claude Codeのコア�
 pubDate: 2026-04-07T00:00:00.000Z
 description: "本番環境で生き残るエージェントループとは何か？Claude Codeのソースコードからエージェント・ハーネス・パターンを抽出し、耐障害性・自己回復型AIエージェントランタイムを構築するための汎用ブループリントを解説します。"
 author: 'Remy'
-tags: ['harness-engineering', 'agent-harness', 'claude-code', 'react-pattern', 'llm-engineering']
+tags: ['agent-harness', 'claude-code', 'react-pattern', 'llm-engineering', 'agent-loop']
 lang: 'ja'
 translatedFrom: 'inside-claude-code-agent-harness'
 ---

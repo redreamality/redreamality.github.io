@@ -3,7 +3,7 @@ title: "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Bu
 description: "A viral YouTube clip ties Jev to Claude Code, but Jev cannot be the CLI chat model. This post covers the official skill, boundary hooks, MCP, and per-turn routing, contrasts NobodyWho’s 25-line minimal build, and discusses OpenAI fast-follow pressure."
 pubDate: 2026-09-23T14:40:00.000Z
 author: "Remy"
-tags: ["Jev", "Claude Code", "Agents", "Developer Tools", "System One"]
+tags: ["jev", "claude-code", "ai-agents", "developer-tools", "System One"]
 lang: "en"
 translatedFrom: "jev-claude-code-10x-and-25-lines"
 ---

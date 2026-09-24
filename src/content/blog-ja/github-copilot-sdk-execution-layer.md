@@ -3,7 +3,7 @@ title: 'GitHub は Copilot を AI 開発ツールの実行レイヤーにしよ�
 pubDate: 2026-03-17T00:00:00.000Z
 description: '2026年3月10日の Copilot SDK の打ち出しは、Copilot を GitHub 内のアシスタントから、外部ツールに埋め込める実行レイヤーへ押し広げる動きとして読むべきだ。'
 author: 'Remy'
-tags: ['AI', 'GitHub', 'GitHub Copilot', 'Agents', 'Developer Tools', 'Software Engineering']
+tags: ['ai', 'github', 'github-copilot', 'ai-agents', 'developer-tools', 'software-engineering']
 lang: 'ja'
 translatedFrom: 'github-copilot-sdk-execution-layer'
 ---

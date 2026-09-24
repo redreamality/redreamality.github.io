@@ -3,7 +3,7 @@ title: 'Google Gemini 3 走向主流：正在你手机上悄悄发生的 Agentic
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'Google 一边把 Gemini 3 Flash 变成全线默认模型，一边在 Pixel 手机上把 Gemini 推进到可代办任务的 agent 阶段。对开发者来说，更大的信号是前沿性能开始进入更便宜的价格带。'
 author: 'Remy'
-tags: ['AI', 'Google', 'Gemini', 'Android', 'Pixel', '开发者工具']
+tags: ['ai', 'Google', 'Gemini', 'Android', 'Pixel', 'developer-tools']
 lang: 'zh'
 translatedFrom: 'google-gemini-3-agentic-mainstream'
 ---

@@ -3,7 +3,7 @@ title: "AWS Wants Agent Building To Have A Package Layer, Not Just A Prompt Laye
 pubDate: 2026-03-17T00:00:00.000Z
 description: "AWS's AI Registry for Agents spec suggests the next battle in the agent stack may be about packaging, distribution, and reproducible installs rather than model access alone."
 author: "Remy"
-tags: ["AI", "Agents", "AWS", "Developer Tools", "Open Source", "Infrastructure"]
+tags: ["ai", "ai-agents", "AWS", "developer-tools", "open-source", "Infrastructure"]
 lang: "en"
 ---
 

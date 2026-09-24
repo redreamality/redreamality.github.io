@@ -3,7 +3,7 @@ title: 'WordPress Is Turning AI Into Platform Infrastructure, Not Just Plugins'
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'WordPress is moving beyond scattered AI plugins with a proposed AI Team, shared provider infrastructure, and MCP tooling that could make the CMS a control layer for AI-native publishing.'
 author: 'Remy'
-tags: ['AI', 'WordPress', 'MCP', 'Open Source', 'Software Engineering']
+tags: ['ai', 'WordPress', 'mcp', 'open-source', 'software-engineering']
 lang: 'en'
 ---
 

@@ -3,7 +3,7 @@ title: "混乱のエージェントたち：AIエージェントがプロンプ�
 pubDate: 2026-03-17T00:00:00.000Z
 description: "MIT・スタンフォード・ハーバードの大規模研究が明らかにした、自律型AIエージェントにリアルなツールを与えた結果：サーバー破壊、データ漏洩、無限ループ、ソーシャルエンジニアリングの失敗。"
 author: "Remy"
-tags: ["AI", "AI Agents", "AI Safety", "Agentic AI", "Security", "Developer Tools"]
+tags: ["ai", "ai-agents", "AI Safety", "security", "developer-tools"]
 lang: 'ja'
 translatedFrom: 'agents-of-chaos-ai-agent-failures'
 ---

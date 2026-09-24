@@ -3,7 +3,7 @@ title: 'Parlant：专为客户互动设计的AI Agent框架深度解析'
 pubDate: 2025-11-06T00:00:00.000Z
 description: '深入探讨Parlant这一专为客户互动场景打造的AI Agent框架，从其架构设计、核心特性、实战应用到最佳实践，全面解析如何利用Parlant构建高质量的对话式AI系统'
 author: 'Remy'
-tags: ['AI', 'agents', 'Parlant', 'conversational AI', 'customer engagement']
+tags: ['ai', 'ai-agents', 'Parlant', 'conversational AI', 'customer-engagement']
 ---
 ## 引言
 

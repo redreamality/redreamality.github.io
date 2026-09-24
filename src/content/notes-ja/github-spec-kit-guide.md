@@ -3,7 +3,7 @@ title: "GitHub Spec Kit 詳細ガイド：AI駆動の仕様開発方法論"
 description: "GitHub Spec Kitのアーキテクチャ設計、ワークフロー、エンタープライズ級アプリケーションを深く分析し、仕様駆動開発（SDD）がAIプログラミングにおけるコンテキスト喪失問題をどのように解決するかを探求"
 date: 2026-01-08
 source: "https://github.com/github/spec-kit"
-tags: ["AI開発", "仕様駆動開発", "SDD", "GitHub", "Spec Kit"]
+tags: ["ai-development", "sdd", "github", "spec-kit"]
 lang: "ja"
 translatedFrom: 'github-spec-kit-guide'
 ---

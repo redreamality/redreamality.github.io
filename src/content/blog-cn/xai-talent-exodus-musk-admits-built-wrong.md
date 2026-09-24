@@ -3,7 +3,7 @@ title: 'xAI 人才流失持续扩大：马斯克承认公司“一开始就没�
 pubDate: 2026-03-16T00:00:00.000Z
 description: '马斯克说 xAI 会在 2026 年底追平 OpenAI、Google 和 Anthropic，但在 11 名联合创始人中已有 9 人离开、裁员和重组持续发生的背景下，开发者更该关注的是平台稳定性，而不只是 benchmark。'
 author: 'Remy'
-tags: ['AI', 'xAI', 'Elon Musk', 'Grok', '开发者工具', 'AI 实验室']
+tags: ['ai', 'xAI', 'Elon Musk', 'Grok', 'developer-tools', 'AI 实验室']
 lang: 'zh'
 translatedFrom: 'xai-talent-exodus-musk-admits-built-wrong'
 ---

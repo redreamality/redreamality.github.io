@@ -2,7 +2,7 @@
 title: "如何定义波段？"
 description: "波段不是“天生就在那里”的东西，它其实是一套把噪声过滤成转折点的规则"
 date: 2026-01-07
-tags: ["量化交易", "波段", "价格行为", "市场结构", "信号处理", "波动率"]
+tags: ["quantitative-trading", "波段", "price-action", "market-structure", "信号处理", "波动率"]
 lang: "zh"
 translatedFrom: "how-to-define-a-swing"
 ---

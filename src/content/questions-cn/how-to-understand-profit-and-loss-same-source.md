@@ -2,7 +2,7 @@
 title: "如何理解“盈亏同源”？"
 description: "每一种优势都自带对应的失败场景：看懂你到底押的是什么，才知道亏损为什么出现"
 date: 2026-01-07
-tags: ["量化交易", "盈亏同源", "风险管理", "期望", "市场状态", "策略设计"]
+tags: ["quantitative-trading", "盈亏同源", "风险管理", "期望", "市场状态", "策略设计"]
 lang: "zh"
 translatedFrom: "how-to-understand-profit-and-loss-same-source"
 ---

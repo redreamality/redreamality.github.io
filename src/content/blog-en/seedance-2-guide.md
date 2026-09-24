@@ -3,7 +3,7 @@ title: 'Seedance 2.0 Usage Guide: Complete Prompt Engineering Playbook'
 pubDate: 2026-02-15T00:00:00.000Z
 description: 'Complete guide to Seedance 2.0 AI video generation — prompt formula, camera movement keywords, style references, audio prompts, material referencing system, and practical examples'
 author: 'Remy'
-tags: ['AI', 'Seedance', 'Video Generation', 'Prompt Engineering', 'Guide']
+tags: ['ai', 'Seedance', 'Video Generation', 'Prompt Engineering', 'Guide']
 lang: 'en'
 translatedFrom: 'seedance-2-guide'
 ---

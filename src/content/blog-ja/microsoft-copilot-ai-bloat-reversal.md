@@ -3,7 +3,7 @@ title: 'MicrosoftがCopilotのAI肥大化を一掃：強制的なAI統合にお�
 pubDate: 2026-03-16T00:00:00.000Z
 description: 'Microsoftは、設定・ファイルエクスプローラー・通知センター機能を含む、Windows 11向けに計画されていたいくつかのCopilot統合をキャンセルした。開発者にとって、これはAIファーストがAIどこでもを意味しない理由についてのプロダクトの教訓だ。'
 author: 'Remy'
-tags: ['AI', 'Microsoft', 'Copilot', 'Windows 11', 'Product Strategy', 'Developer Tools']
+tags: ['ai', 'Microsoft', 'github-copilot', 'Windows 11', 'Product Strategy', 'developer-tools']
 lang: 'ja'
 translatedFrom: 'microsoft-copilot-ai-bloat-reversal'
 ---

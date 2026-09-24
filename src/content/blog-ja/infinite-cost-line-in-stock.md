@@ -3,7 +3,7 @@ title: '無限コストライン'
 pubDate: 2025-02-07T00:00:00.000Z
 description: '株式市場における無限コストラインの意味と使用法'
 author: 'Remy'
-tags: ['株式市場', '無限コストライン', 'CYC∞ライン', 'コスト移動平均線', 'テクニカル分析', '株式取引', '投資戦略']
+tags: ['株式市場', '無限コストライン', 'CYC∞ライン', 'コスト移動平均線', 'テクニカル分析', '株式取引', 'investment-strategy']
 lang: 'ja'
 translatedFrom: 'infinite-cost-line-in-stock'
 ---

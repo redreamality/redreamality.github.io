@@ -3,7 +3,7 @@ title: 'Cloudflare Is Rebuilding Web Errors for AI Agents, Not Just Browsers'
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'Cloudflare is pushing RFC 9457 problem details into the agent era. That matters because AI workflows need machine-readable failures, not decorative HTML error pages.'
 author: 'Remy'
-tags: ['AI', 'Cloudflare', 'AI Agents', 'Developer Tools', 'Web Infrastructure', 'APIs']
+tags: ['ai', 'Cloudflare', 'ai-agents', 'developer-tools', 'Web Infrastructure', 'APIs']
 lang: 'en'
 ---
 

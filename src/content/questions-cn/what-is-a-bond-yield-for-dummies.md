@@ -2,7 +2,7 @@
 title: "债券收益率是什么？"
 description: "理解债券收益率、新手友好的指南，包括如何计算以及它对投资者的意义"
 date: 2025-01-15
-tags: ["债券收益率", "新手指南", "固定收益", "投资教育", "收益率基础"]
+tags: ["bond-yields", "新手指南", "fixed-income", "investment-education", "收益率基础"]
 lang: "zh"
 translatedFrom: "what-is-a-bond-yield-for-dummies"
 ---

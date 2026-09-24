@@ -2,7 +2,7 @@
 title: "谁在高收益率或高利率环境中受益？"
 description: "分析哪些投资者、行业和实体在高利率环境中受益"
 date: 2025-01-15
-tags: ["利率", "高收益", "赢家和输家", "债券市场", "投资策略"]
+tags: ["interest-rates", "高收益", "赢家和输家", "债券市场", "investment-strategy"]
 lang: "zh"
 translatedFrom: "who-benefits-when-yields-or-interest-rates-are-high"
 ---

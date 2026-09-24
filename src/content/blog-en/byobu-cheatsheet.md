@@ -3,7 +3,7 @@ title: 'byobu cheatsheet'
 pubDate: 2025-10-18T02:37:49.282Z
 description: 'byobu cheatsheet common commands quick reference'
 author: 'Remy'
-tags: ['terminal', 'linux', 'vibe coding']
+tags: ['terminal', 'linux', 'vibe-coding']
 ---
 
 Byobu is an enhanced terminal multiplexer built on top of tmux and screen, offering more user-friendly and powerful features. It was originally developed by Dustin Kirkland and is now one of Ubuntu’s default terminal management tools. The name “Byobu” comes from the Japanese word for “folding screen,” aiming to give users stronger and more flexible terminal session management. With Byobu, you can run multiple sessions inside a single terminal window, each operating independently and switchable at will. It is especially suited for users who need to manage many tasks on remote servers.

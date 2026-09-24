@@ -3,7 +3,7 @@ title: "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose"
 description: "Anthropic launched Claude Opus 5.5 on 2026-09-22: about 40% lower cost on typical workloads versus Opus 5, with Fable-tier capability claims and matching safeguards. A builder-focused read of pricing, benchmarks, and coding-agent fit."
 pubDate: 2026-09-24T02:00:00.000Z
 author: "Remy"
-tags: ["Claude", "Opus 5.5", "Anthropic", "Model Release", "Coding Agents", "Pricing"]
+tags: ["Claude", "Opus 5.5", "Anthropic", "Model Release", "ai-agents", "Pricing"]
 lang: "en"
 translatedFrom: "claude-opus-5-5-price-and-performance"
 ---

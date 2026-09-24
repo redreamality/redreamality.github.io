@@ -3,7 +3,7 @@ title: "Anthropic Claude Code Review：多 Agent AI 开始审查你的 Pull Requ
 pubDate: 2026-03-17T00:00:00.000Z
 description: "Anthropic 推出的 Claude Code Review 把 PR 审查变成多 Agent 并行工作流，说明 AI 代码审查正在从辅助功能升级为工程基础设施。"
 author: "Remy"
-tags: ["AI", "Anthropic", "Claude", "代码审查", "AI Agents", "开发者工具"]
+tags: ["ai", "Anthropic", "Claude", "代码审查", "ai-agents", "developer-tools"]
 lang: "zh"
 translatedFrom: "anthropic-claude-code-review-multi-agent"
 ---

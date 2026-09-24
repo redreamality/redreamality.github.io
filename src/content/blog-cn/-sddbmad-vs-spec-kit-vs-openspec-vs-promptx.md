@@ -3,7 +3,7 @@ title: '什么是规格驱动开发 (SDD)？开源框架深度对比：BMAD vs s
 pubDate: 2025-10-21T16:12:17.943Z
 description: '本文将深入探讨规格驱动开发（Spec-Driven Development, SDD）这一变革性方法，并对四个引领潮流的开源项目——BMAD-METHOD、GitHub的spec-kit、OpenSpec和PromptX——进行深度解构与战略比较。'
 author: 'Remy'
-tags: ['vibe coding', 'sdd', 'spec-driven coding', 'open spec', 'spec-kit', 'BMAD']
+tags: ['vibe-coding', 'sdd', 'openspec', 'spec-kit', 'bmad']
 ---
 
 ## **导言：超越“Vibe Coding”——AI驱动开发中结构化的必然性**

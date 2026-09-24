@@ -3,7 +3,7 @@ title: "OpenAI Symphony: Why the Biggest AI Lab Just Bet on Elixir for Agent Orc
 pubDate: 2026-03-17T00:00:00.000Z
 description: "OpenAI's open-source Symphony framework suggests agent orchestration is entering a new phase where fault tolerance, concurrency, and hot upgrades matter more than Python familiarity."
 author: "Remy"
-tags: ["AI", "OpenAI", "Elixir", "BEAM", "AI Agents", "Developer Tools"]
+tags: ["ai", "openai", "Elixir", "BEAM", "ai-agents", "developer-tools"]
 lang: "en"
 ---
 

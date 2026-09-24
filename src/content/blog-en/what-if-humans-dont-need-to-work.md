@@ -3,7 +3,7 @@ title: 'What If Humans No Longer Need to Work: A Four-Dimensional Deduction and 
 pubDate: 2026-05-11T00:00:00.000Z
 description: 'A multi-agent thought experiment on post-work society — across economic, psychological, social, and civilizational dimensions — and where the transition-period dividends actually sit.'
 author: 'Remy'
-tags: ['AI', 'Future', 'Economy', 'Society']
+tags: ['ai', 'Future', 'Economy', 'Society']
 lang: 'en'
 translatedFrom: 'what-if-humans-dont-need-to-work'
 ---

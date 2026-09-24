@@ -2,7 +2,7 @@
 title: "なぜ金利とインフレは逆相関なのか？"
 description: "経済理論と実践における金利とインフレの間の基本的な逆相関関係を深く理解"
 date: 2025-01-15
-tags: ["金利", "インフレ", "逆相関", "経済学", "金融政策"]
+tags: ["interest-rates", "インフレ", "逆相関", "経済学", "金融政策"]
 lang: "ja"
 translatedFrom: "why-interest-rates-and-inflation-inversely-related"
 ---

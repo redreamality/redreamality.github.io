@@ -3,7 +3,7 @@ title: "AWSはエージェント開発にプロンプト層だけでなくパッ
 pubDate: 2026-03-17T00:00:00.000Z
 description: "AWSのAI Registry for Agentsスペックは、エージェントスタックにおける次の戦いがモデルアクセスだけでなく、パッケージング・配布・再現可能なインストールをめぐるものになる可能性を示唆している。"
 author: "Remy"
-tags: ["AI", "Agents", "AWS", "Developer Tools", "Open Source", "Infrastructure"]
+tags: ["ai", "ai-agents", "AWS", "developer-tools", "open-source", "Infrastructure"]
 lang: "ja"
 translatedFrom: "aws-ai-registry-for-agents-spec"
 ---

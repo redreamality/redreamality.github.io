@@ -3,7 +3,7 @@ title: 'GitHub Copilotはメモリを持つエージェント型コーディン�
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'GitHubは2026年3月、メモリ・プランニング・レビュー指示・タスク分解に関する一連のCopilotアップデートをリリースした。これらを総合すると、単なる機能改善ではなく、エージェント型開発スタックの構築に見える。'
 author: 'Remy'
-tags: ['AI', 'GitHub', 'GitHub Copilot', 'Agents', 'Developer Tools', 'Software Engineering']
+tags: ['ai', 'github', 'github-copilot', 'ai-agents', 'developer-tools', 'software-engineering']
 lang: 'ja'
 translatedFrom: 'github-copilot-memory-agentic-coding-stack'
 ---

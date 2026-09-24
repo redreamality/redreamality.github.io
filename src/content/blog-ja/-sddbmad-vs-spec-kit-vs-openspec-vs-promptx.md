@@ -3,7 +3,7 @@ title: 'スペック駆動開発（SDD）とは？オープンソースフレー
 pubDate: 2025-10-21T16:12:17.943Z
 description: '本記事では、スペック駆動開発（SDD）の革新的な方法論を深く掘り下げ、4つのトレンドを設定するオープンソースプロジェクト—BMAD-METHOD、GitHubのspec-kit、OpenSpec、PromptX—の詳細な分析と戦略的比較を提供します。'
 author: 'Remy'
-tags: ['vibe coding', 'sdd', 'spec-driven coding', 'open spec', 'spec-kit', 'BMAD']
+tags: ['vibe-coding', 'sdd', 'openspec', 'spec-kit', 'bmad']
 lang: 'ja'
 translatedFrom: '-sddbmad-vs-spec-kit-vs-openspec-vs-promptx'
 ---

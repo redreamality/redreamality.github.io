@@ -3,7 +3,7 @@ title: 'Claude Agent SDK (Python) 学习指南'
 pubDate: 2025-10-15T03:15:48.639Z
 description: 'Claude Agent SDK (Python) 全方位学习指南：从架构原理、核心功能到实战案例，助您掌握如何通过 Python 编程方式高效集成与扩展 Claude Code 的强大能力。'
 author: 'Remy'
-tags: ['claude code', 'vibe coding', 'python']
+tags: ['claude-code', 'vibe-coding', 'python']
 ---
 **文档版本**: 1.0
 **生成时间**: 2025-10-15

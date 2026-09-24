@@ -3,7 +3,7 @@ title: "NVIDIAはエンタープライズ向けエージェントをマネージ
 pubDate: 2026-03-17T00:00:00.000Z
 description: "2026年3月16日のGTCでのNVIDIAの発表は、エンタープライズAI競争がモデルを超え、本番エージェント向けのガードレール・検索・評価・運用制御を含むフルランタイムスタックへと移行しつつあることを示している。"
 author: "Remy"
-tags: ["AI", "NVIDIA", "OpenClaw", "Enterprise AI", "AI Agents", "NeMo", "Developer Tools"]
+tags: ["ai", "NVIDIA", "OpenClaw", "Enterprise AI", "ai-agents", "NeMo", "developer-tools"]
 lang: "ja"
 translatedFrom: "nvidia-openclaw-agent-runtime-stack"
 ---

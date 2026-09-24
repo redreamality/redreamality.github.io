@@ -3,7 +3,7 @@ title: "Where Jev Fits in Software Workflows"
 description: "A source-backed look at Jev through TypeSafe's writing, developer experiments, and awesome-jev projects: browser actions, model routing, triage, citation checking, context management, and deployment boundaries."
 pubDate: 2026-09-19T00:00:00+10:00
 author: "Remy"
-tags: ["AI", "Agents", "Developer Tools", "Automation"]
+tags: ["ai", "ai-agents", "developer-tools", "Automation"]
 lang: "en"
 translatedFrom: "typesafe-jev-use-cases"
 ---

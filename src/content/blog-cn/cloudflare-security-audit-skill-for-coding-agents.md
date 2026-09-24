@@ -3,7 +3,7 @@ title: "Cloudflare 开源 security-audit-skill：给编程 Agent 装上可验证
 description: "拆解 cloudflare/security-audit-skill：Skill 分发形态、六阶段审计、confirmed / needs_validation / rejected 三态结论、对抗式校验与无沙箱时的 fail-open。说明安装用法、企业可抄点与安全边界。"
 pubDate: 2026-09-24T00:00:00+08:00
 author: "Remy"
-tags: ["Cloudflare", "Security", "Agent Skills", "安全审计", "Harness", "开发者工具"]
+tags: ["Cloudflare", "security", "Agent Skills", "安全审计", "agent-harness", "developer-tools", "agent-loop"]
 lang: "zh"
 ---
 

@@ -3,7 +3,7 @@ title: "The Agent Harness Pattern: Lessons from Claude Code's Core Loop"
 pubDate: 2026-04-07T00:00:00.000Z
 description: "What makes a production agent loop survive the real world? We extract the Agent Harness Pattern from Claude Code's source — a generalizable blueprint for building resilient, self-recovering AI agent runtimes."
 author: 'Remy'
-tags: ['harness-engineering', 'agent-harness', 'claude-code', 'react-pattern', 'llm-engineering']
+tags: ['agent-harness', 'claude-code', 'react-pattern', 'llm-engineering', 'agent-loop']
 lang: 'en'
 translatedFrom: 'inside-claude-code-agent-harness'
 ---

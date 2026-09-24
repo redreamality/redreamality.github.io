@@ -3,7 +3,7 @@ title: "电信网络想成为 AI 的分布式推理层"
 pubDate: 2026-03-18T00:00:00.000Z
 description: "NVIDIA 在 2026 年 3 月 17 日提出的 telecom AI grid 叙事，正在把运营商重新定义为边缘推理平台，让延迟、数据本地性与 token 成本都变成网络架构问题。"
 author: "Remy"
-tags: ["AI", "电信", "NVIDIA", "边缘 AI", "分布式系统", "AI 基础设施"]
+tags: ["ai", "电信", "NVIDIA", "边缘 AI", "分布式系统", "AI 基础设施"]
 lang: "zh"
 translatedFrom: "telecom-ai-grids-distributed-inference"
 ---

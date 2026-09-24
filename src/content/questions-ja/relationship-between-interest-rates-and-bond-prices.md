@@ -2,7 +2,7 @@
 title: "なぜ金利と債券価格は逆相関なのか？"
 description: "金融市場における金利と債券価格の間の基本的な逆相関関係とその背後にある原理を深く解析"
 date: 2025-01-15
-tags: ["債券", "金利", "固定収益", "投資基礎"]
+tags: ["bonds", "interest-rates", "fixed-income", "investment-basics"]
 lang: "ja"
 translatedFrom: "relationship-between-interest-rates-and-bond-prices"
 ---

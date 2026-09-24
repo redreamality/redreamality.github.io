@@ -3,7 +3,7 @@ title: 'OpenSpec 1.5 更新详解：Stores Beta、Explore-first 工作流与团�
 pubDate: 2026-07-02T01:30:00.000Z
 description: '基于 OpenSpec 1.5.0 源码与官方文档，详细介绍 Stores Beta、/opsx:explore 工作流、既有项目引入方式、AI 工具适配修复，以及从单仓库规范到团队级规格协作层的产品方向。'
 author: 'Remy'
-tags: ['openspec', 'spec-driven development', 'sdd', 'ai coding', 'stores', 'ai agents', 'cli', '规范驱动开发']
+tags: ['openspec', 'sdd', 'ai-coding', 'stores', 'ai-agents', 'cli', '规范驱动开发']
 lang: 'zh'
 translatedFrom: 'openspec-1-5-stores-beta-update-guide'
 ---

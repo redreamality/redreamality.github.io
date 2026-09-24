@@ -3,7 +3,7 @@ title: 'Multi-Agent Systems'
 pubDate: 2025-02-09T00:00:00.000Z
 description: 'A comprehensive research report on multi-agent systems, covering architecture design, planning, memory management, interaction principles, and evaluation metrics.'
 author: 'Remy'
-tags: ['multi-agent-systems', 'artificial-intelligence', 'ai', 'constraint-satisfaction-problem']
+tags: ['multi-agent-systems', 'ai', 'constraint-satisfaction-problem']
 lang: 'en'
 ---
 ## 1. Multi-Agent Systems Overview

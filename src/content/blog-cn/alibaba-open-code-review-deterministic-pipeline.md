@@ -3,7 +3,7 @@ title: "阿里开源 Open Code Review：确定性流水线加 LLM Agent，企业
 description: "拆解 alibaba/open-code-review 的混合架构：确定性工程管文件筛选与定位，Agent 管深度推理。对照 AACR-Bench、委托模式与 CI 接入，说明企业可复制点与边界。"
 pubDate: 2026-09-24T00:00:00+08:00
 author: "Remy"
-tags: ["Open Code Review", "代码审查", "Agent", "Harness", "阿里巴巴", "开发者工具"]
+tags: ["Open Code Review", "代码审查", "ai-agents", "agent-harness", "阿里巴巴", "developer-tools", "agent-loop"]
 lang: "zh"
 ---
 

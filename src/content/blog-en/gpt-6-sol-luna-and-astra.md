@@ -3,7 +3,7 @@ title: "GPT-6 Sol and Luna: Spreading Astra-Class Intelligence Down the Cost Cur
 description: "OpenAI launched GPT-6 Sol and Luna on 2026-09-22: 50% lower API prices versus GPT-5.6 promo rates, with Astra-generation capability and alignment gains. Pricing, benchmarks, caching, and the Astra/Enigma side story—for coding-agent routing."
 pubDate: 2026-09-24T02:30:00.000Z
 author: "Remy"
-tags: ["GPT-6", "Sol", "Luna", "Astra", "OpenAI", "Model Release", "Coding Agents", "Pricing"]
+tags: ["GPT-6", "Sol", "Luna", "Astra", "openai", "Model Release", "ai-agents", "Pricing"]
 lang: "en"
 translatedFrom: "gpt-6-sol-luna-and-astra"
 ---

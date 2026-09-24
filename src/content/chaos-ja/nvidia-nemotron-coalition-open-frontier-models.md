@@ -3,7 +3,7 @@ title: "NVIDIAのNemotronコアリション：オープンフロンティアモ�
 pubDate: 2026-03-17T00:00:00.000Z
 description: "NVIDIAの新しいNemotronコアリションは、8つのAIラボをDGX Cloudに集結させ、オープンフロンティアモデルを共同開発する。これはクローズドAPIの巨人に対する新たな競争戦略を示している。"
 author: "Remy"
-tags: ["AI", "NVIDIA", "Open Models", "Nemotron", "Agentic AI"]
+tags: ["ai", "NVIDIA", "Open Models", "Nemotron", "ai-agents"]
 lang: "ja"
 translatedFrom: "nvidia-nemotron-coalition-open-frontier-models"
 ---

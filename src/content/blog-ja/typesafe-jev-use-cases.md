@@ -3,7 +3,7 @@ title: "Jev の利用前景と具体シーン"
 description: "TypeSafe 公式記事、開発者の実測、awesome-jev プロジェクトを突き合わせ、Jev をブラウザ操作・モデルルーティング・チケット振り分け・引用チェック・コンテキスト管理にどう使うか、本番前に検証すべき境界まで整理する。"
 pubDate: 2026-09-19T00:00:00+10:00
 author: "Remy"
-tags: ["AI", "Agents", "開発者ツール", "自動化"]
+tags: ["ai", "ai-agents", "developer-tools", "自動化"]
 lang: 'ja'
 translatedFrom: 'typesafe-jev-use-cases'
 ---

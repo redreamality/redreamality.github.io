@@ -3,7 +3,7 @@ title: "Agents of Chaos: Why Your AI Agents Are One Prompt Away From Destroying 
 pubDate: 2026-03-17T00:00:00.000Z
 description: "A major MIT, Stanford, and Harvard study shows what happens when autonomous AI agents get real tools: server destruction, data leaks, infinite loops, and social engineering failures."
 author: "Remy"
-tags: ["AI", "AI Agents", "AI Safety", "Agentic AI", "Security", "Developer Tools"]
+tags: ["ai", "ai-agents", "AI Safety", "security", "developer-tools"]
 lang: "en"
 ---
 

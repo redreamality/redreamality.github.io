@@ -2,7 +2,7 @@
 title: "沃伦·巴菲特为什么不投资债券？"
 description: "分析巴菲特的投资理念以及他为何在大富大贵的情况下仍然偏爱股票而非债券"
 date: 2025-01-15
-tags: ["沃伦-巴菲特", "债券", "股票", "投资理念", "价值投资"]
+tags: ["沃伦-巴菲特", "bonds", "股票", "投资理念", "价值投资"]
 lang: "zh"
 translatedFrom: "why-warren-buffett-does-not-invest-in-bonds"
 ---

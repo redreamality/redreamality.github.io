@@ -3,7 +3,7 @@ title: 'CLAUDE.mdとAGENTS.md徹底解説：基礎から直感に反するパタ
 pubDate: 2026-04-26T00:00:00.000Z
 description: 'Anthropicの公式ガイドからKarpathyのprogram.mdパラダイムへ、二度目ルールからダーウィニアン・メモリへ、Spec-DrivenからEval-Drivenまで——AIコーディングエージェント向けのプロジェクトファイルをどう書くのか、そして借りる価値のある直感に反するメンタルモデルを長文で俯瞰する。'
 author: 'Remy'
-tags: ['Claude Code', 'AI Agents', 'Context Engineering']
+tags: ['claude-code', 'ai-agents', 'Context Engineering']
 lang: 'ja'
 translatedFrom: 'claude-md-agents-md-deep-dive'
 ---

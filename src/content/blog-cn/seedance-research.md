@@ -3,7 +3,7 @@ title: 'Seedance 产品调研报告'
 pubDate: 2026-02-15T00:00:00.000Z
 description: 'Seedance 2.0（字节跳动/即梦）AI视频生成模型及主要竞品的全面调研分析，涵盖产品功能、竞品对比、目标用户、市场趋势与API接入方式'
 author: 'Remy'
-tags: ['AI', 'Seedance', '视频生成', '产品调研', '字节跳动']
+tags: ['ai', 'Seedance', '视频生成', '产品调研', '字节跳动']
 lang: 'zh'
 ---
 

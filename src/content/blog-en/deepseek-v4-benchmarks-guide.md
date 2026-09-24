@@ -3,7 +3,7 @@ title: 'Mapping the DeepSeek V4 Evaluation Suite: A Field Guide to 2026 LLM Benc
 pubDate: 2026-04-24T00:00:00.000Z
 description: 'A complete walkthrough of every benchmark DeepSeek V4 reports against — from LiveCodeBench to SWE-bench Pro to the ClawBench family — and what each one actually measures.'
 author: 'Remy'
-tags: ['DeepSeek', 'Benchmark', 'AI Agent']
+tags: ['DeepSeek', 'Benchmark', 'ai-agents']
 lang: 'en'
 translatedFrom: 'deepseek-v4-benchmarks-guide'
 ---

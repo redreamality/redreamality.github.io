@@ -3,7 +3,7 @@ title: "Claude Code Leak: A Deep Dive into Anthropic's AI Coding Agent Architect
 pubDate: 2026-03-31T00:00:00.000Z
 description: "Claude Code's source was briefly exposed. We read all 1,884 TypeScript files. Here is what the architecture reveals about where AI coding tools are actually heading."
 author: "Remy"
-tags: ["AI", "Claude Code", "Architecture", "Developer Tools", "Agents", "Anthropic"]
+tags: ["ai", "claude-code", "Architecture", "developer-tools", "ai-agents", "Anthropic"]
 lang: "en"
 ---
 

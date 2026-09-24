@@ -3,7 +3,7 @@ title: 'The AI Coding Tools War of 2026: Why Vibe Coding Is Splitting the Develo
 pubDate: 2026-03-17T00:00:00.000Z
 description: 'Cursor, Windsurf, Claude Code, Copilot, and Aider are converging on the same frontier models. The real fight is now workflow: IDE convenience versus terminal-native agents.'
 author: 'Remy'
-tags: ['AI', 'Developer Tools', 'Software Engineering', 'Agents', 'Vibe Coding']
+tags: ['ai', 'developer-tools', 'software-engineering', 'ai-agents', 'vibe-coding']
 lang: 'en'
 ---
 

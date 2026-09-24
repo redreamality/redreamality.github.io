@@ -3,7 +3,7 @@ title: '谁养鱼'
 pubDate: 2025-02-07T00:00:00.000Z
 description: '使用 Python 解决经典的“谁养鱼”逻辑谜题。本文深入探讨了约束满足问题 (CSP) 的特性，并展示了如何通过回溯算法高效地找到唯一解。'
 author: 'Remy'
-tags: ['逻辑谜题', 'CSP', '回溯法', 'Python', '人工智能', 'deepseek', '约束满足问题']
+tags: ['逻辑谜题', 'CSP', '回溯法', 'python', 'ai', 'deepseek', '约束满足问题']
 ---
 
 

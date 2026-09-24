@@ -3,7 +3,7 @@ title: 'byobu cheatsheet'
 pubDate: 2025-10-18T02:37:49.282Z
 description: 'byobu cheatsheet 常见命令速查表'
 author: 'Remy'
-tags: ['terminal', 'linux', 'vibe coding']
+tags: ['terminal', 'linux', 'vibe-coding']
 ---
 
 Byobu 是一个增强的终端复用器，基于 tmux 和 screen，提供了更易用且强大的功能。它最初由 Dustin Kirkland 开发，现在是 Ubuntu 默认终端管理工具之一。Byobu 的名字来源于日语的「屏风」，旨在为用户提供更强大、更灵活的终端会话管理。通过 Byobu，用户可以在一个终端窗口内运行多个会话，每个会话可以独立工作并可以快速切换。它特别适合需要在远程服务器上管理多个任务的用户。

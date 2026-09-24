@@ -3,7 +3,7 @@ title: "Jev × Claude Code：别当聊天模型用，先搞清四条落地路径
 description: "YouTube 爆款把 Jev 绑上 Claude Code，但 Jev 不能当 CLI 背后的聊天模型。本文整理官方 skill、边界钩子、MCP、按轮路由四条路径，对照 NobodyWho 的 25 行最小实现，并讨论 OpenAI 跟进压力。"
 pubDate: 2026-09-23T14:40:00.000Z
 author: "Remy"
-tags: ["Jev", "Claude Code", "Agents", "开发者工具", "System One"]
+tags: ["jev", "claude-code", "ai-agents", "developer-tools", "System One"]
 lang: "zh"
 ---
 

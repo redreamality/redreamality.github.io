@@ -3,7 +3,7 @@ title: 'How to Build AI Agents with Skills and Tools: Complete 2026 Beginner Gui
 pubDate: 2026-01-15T10:00:00.000Z
 description: 'Learn how to build intelligent AI agents with practical skills and tools. Complete beginner-friendly tutorial covering agent skills, tool integration, computer use, file operations, and real-world examples using Claude and OpenAI.'
 author: 'Remy'
-tags: ['AI', 'agents', 'tutorial', 'beginner-guide', 'claude', 'openai', 'llm', 'automation']
+tags: ['ai', 'ai-agents', 'tutorial', 'beginner-guide', 'claude', 'openai', 'llm', 'automation']
 lang: 'en'
 ---
 
