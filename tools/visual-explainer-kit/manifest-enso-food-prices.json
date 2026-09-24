@@ -1,0 +1,1422 @@
+{
+  "slug": "enso-food-prices",
+  "renderer": "interactive-explainer",
+  "structure": {
+    "overview": {
+      "demo": "enso-overview"
+    },
+    "steps": [
+      {
+        "id": "basin-sst",
+        "demo": "enso-sst"
+      },
+      {
+        "id": "rainfall-shift",
+        "demo": "enso-rain"
+      },
+      {
+        "id": "crop-shock",
+        "demo": "enso-crops"
+      },
+      {
+        "id": "price-pass",
+        "demo": "enso-prices"
+      },
+      {
+        "id": "not-typhoon",
+        "demo": "enso-not-typhoon"
+      }
+    ]
+  },
+  "locales": {
+    "en": {
+      "lang": "en",
+      "meta": {
+        "title": "Why Pacific warming shows up in grocery prices",
+        "description": "An interactive guide to ENSO: equatorial Pacific heat anomalies reshape rainfall, crop stress, and food prices—without confusing the story with tropical cyclones."
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "Pause all motion",
+        "resumeAll": "Resume all motion",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset",
+        "waiting": "The visual will load when it enters the viewport.",
+        "loading": "Preparing the visual…",
+        "error": "The visual could not be displayed. Read the explanation above instead.",
+        "figureFallback": "Enable JavaScript to view this interactive explanation.",
+        "skipToContent": "Skip to content",
+        "languageNavigation": "Languages",
+        "overviewLabel": "ENSO-to-prices overview",
+        "stepLabel": "Step"
+      },
+      "hero": {
+        "eyebrow": "CLIMATE / ENSO / FOOD SYSTEMS",
+        "title": "Why Pacific warming shows up in grocery prices",
+        "subtitle": "El Niño–Southern Oscillation (ENSO) is a slow, basin-scale swing in tropical Pacific heat and winds. It does not invent food inflation alone—but it can push rainfall, harvest risk, and shipping stress in directions that raise what you pay at the store."
+      },
+      "overview": {
+        "title": "A four-link chain from sea heat to the checkout aisle",
+        "body": [
+          "ENSO is a coupled ocean–atmosphere mode. When the equatorial central and eastern Pacific run unusually warm (El Niño) or cool (La Niña), the Walker circulation and rainfall belts shift across the tropics—and those shifts reach crop belts months later.",
+          "This explainer follows one causal chain: sea-surface temperature anomaly → rainfall teleconnection → crop and logistics shock → grocery price pass-through. A final step separates that chain from typhoon formation so the two Visuals stay narratively distinct."
+        ],
+        "plainLanguage": {
+          "label": "Plainly",
+          "body": "The Pacific’s heat pattern rearranges who gets rain. Farms and shipping feel it first; prices catch up later."
+        },
+        "keyPointsLabel": "Keep these three ideas",
+        "keyPoints": [
+          {
+            "title": "Heat is the switch",
+            "body": "ENSO is measured first as equatorial Pacific sea-surface temperature anomalies, not as a single storm."
+          },
+          {
+            "title": "Rain moves elsewhere",
+            "body": "The same basin change can wet one breadbasket and dry another through teleconnections."
+          },
+          {
+            "title": "Prices are delayed",
+            "body": "Harvest damage, inventory, and freight costs transmit into retail with lags and filters—not overnight magic."
+          }
+        ],
+        "demoTitle": "Follow the ENSO → prices chain",
+        "copy": {
+          "ariaLabel": "Interactive chain linking Pacific sea heat, rainfall shifts, crop stress, and grocery prices",
+          "caption": "Select a link to inspect how the signal travels from the tropical Pacific to food prices.",
+          "stageControlLabel": "Inspect a link in the chain",
+          "stages": [
+            {
+              "label": "Sea heat",
+              "state": "Equatorial Pacific SST anomaly",
+              "detail": "Warm or cool anomalies in the central/eastern equatorial Pacific redefine the starting state of ENSO."
+            },
+            {
+              "label": "Rain shift",
+              "state": "Tropical rainfall teleconnection",
+              "detail": "The Walker circulation and ITCZ-related rainfall belts relocate, changing who gets drought or excess rain."
+            },
+            {
+              "label": "Crop stress",
+              "state": "Yield and logistics risk",
+              "detail": "Key producers of grains, oilseeds, sugar, and coffee face water stress, heat, disease pressure, or harvest disruption."
+            },
+            {
+              "label": "Price pass",
+              "state": "Wholesale → retail",
+              "detail": "Thin inventories, futures markets, and freight amplify or dampen the shock before it reaches grocery shelves."
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "id": "basin-sst",
+          "number": "01",
+          "title": "Start with equatorial Pacific heat, not a single storm",
+          "body": [
+            "ENSO begins as a slow rearrangement of heat in the tropical Pacific. In El Niño, anomalous warmth builds in the central and eastern equatorial Pacific; in La Niña, that region runs cooler than normal while the west often stays relatively warm.",
+            "Those temperature anomalies couple to surface winds and the thermocline. The ocean does not need a named cyclone to matter—months of basin-scale warmth or coolness are enough to reorganize tropical convection."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Think of a giant Pacific thermostat, not a single spinning storm."
+          },
+          "keyPointsLabel": "What changes here",
+          "keyPoints": [
+            {
+              "title": "Anomaly, not absolute heat",
+              "body": "ENSO indices track departures from a seasonal baseline along the equator."
+            },
+            {
+              "title": "East–west contrast",
+              "body": "El Niño and La Niña flip which side of the basin is anomalously warm."
+            },
+            {
+              "title": "Slow clock",
+              "body": "Events evolve over seasons, giving agriculture a delayed but coherent signal."
+            }
+          ],
+          "demoTitle": "Toggle El Niño / neutral / La Niña heat maps",
+          "copy": {
+            "ariaLabel": "Interactive equatorial Pacific sea-surface temperature anomaly map for El Niño, neutral, and La Niña",
+            "caption": "Warm colors mark positive SST anomalies; cool colors mark negative anomalies. The pattern is basin-scale, not a storm track.",
+            "controlLabel": "ENSO phase",
+            "phases": [
+              {
+                "key": "el-nino",
+                "label": "El Niño",
+                "status": "Central and eastern equatorial Pacific run warmer than normal; convection tends to slide east.",
+                "warmHint": "Warm anomaly east",
+                "coolHint": "Relative cool west"
+              },
+              {
+                "key": "neutral",
+                "label": "Neutral",
+                "status": "Anomalies stay near the baseline. Rainfall belts sit closer to their climatological home.",
+                "warmHint": "Near-normal east",
+                "coolHint": "Near-normal west"
+              },
+              {
+                "key": "la-nina",
+                "label": "La Niña",
+                "status": "Central and eastern equatorial Pacific run cooler than normal; convection piles up farther west.",
+                "warmHint": "Relative warm west",
+                "coolHint": "Cool anomaly east"
+              }
+            ],
+            "basinLabel": "Equatorial Pacific",
+            "eastLabel": "East",
+            "westLabel": "West",
+            "anomalyLabel": "SST anomaly"
+          }
+        },
+        {
+          "id": "rainfall-shift",
+          "number": "02",
+          "title": "Rainfall belts move with the Walker circulation",
+          "body": [
+            "When equatorial Pacific heat relocates, so does the rising branch of tropical convection. El Niño often suppresses rainfall over parts of Maritime Continent Australia and can wet parts of western South America; La Niña tends toward the opposite rainfall fingerprint in many of those regions.",
+            "These are teleconnections: statistically preferred rainfall responses thousands of kilometers away. They are tendencies with large uncertainty year to year—not deterministic weather forecasts for a single farm."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "When the Pacific heat map flips, the rain map tends to flip with it."
+          },
+          "keyPointsLabel": "What changes here",
+          "keyPoints": [
+            {
+              "title": "Preferred patterns",
+              "body": "ENSO stacks the odds toward certain drought and flood footprints."
+            },
+            {
+              "title": "Not global lockstep",
+              "body": "One phase can soak one region while another dries—both matter for food."
+            },
+            {
+              "title": "Seasonal timing",
+              "body": "Impacts depend on whether the anomaly overlaps a crop’s critical growth window."
+            }
+          ],
+          "demoTitle": "Watch wet and dry regions trade places",
+          "copy": {
+            "ariaLabel": "Interactive map of rainfall teleconnection tendencies under El Niño and La Niña",
+            "caption": "Markers show illustrative wet or dry tendencies for major agricultural regions—not a forecast for a single season.",
+            "controlLabel": "Phase for rainfall tendency",
+            "wetLabel": "Wetter tendency",
+            "dryLabel": "Drier tendency",
+            "phases": [
+              {
+                "key": "el-nino",
+                "label": "El Niño rain map",
+                "status": "Illustrative: drier risk over parts of Australia / Maritime Continent / southern Africa; wetter risk over parts of southern South America and the southern US.",
+                "regions": [
+                  {
+                    "name": "Australia / SE Asia",
+                    "state": "dry",
+                    "note": "Often drier"
+                  },
+                  {
+                    "name": "Southern Africa",
+                    "state": "dry",
+                    "note": "Drought risk up"
+                  },
+                  {
+                    "name": "S. South America",
+                    "state": "wet",
+                    "note": "Often wetter"
+                  },
+                  {
+                    "name": "Horn of Africa",
+                    "state": "wet",
+                    "note": "Short-rains boost risk"
+                  }
+                ]
+              },
+              {
+                "key": "la-nina",
+                "label": "La Niña rain map",
+                "status": "Illustrative: wetter tendency over parts of Australia / Maritime Continent; drier risk over parts of southern South America and the southern US.",
+                "regions": [
+                  {
+                    "name": "Australia / SE Asia",
+                    "state": "wet",
+                    "note": "Often wetter"
+                  },
+                  {
+                    "name": "Southern Africa",
+                    "state": "wet",
+                    "note": "Rain odds up"
+                  },
+                  {
+                    "name": "S. South America",
+                    "state": "dry",
+                    "note": "Drought risk up"
+                  },
+                  {
+                    "name": "Horn of Africa",
+                    "state": "dry",
+                    "note": "Dry risk up"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "crop-shock",
+          "number": "03",
+          "title": "Crop belts feel water stress before shoppers do",
+          "body": [
+            "Food prices respond when ENSO-aligned rainfall and heat hit concentrated producers. Soy and maize in South America, wheat and sugar in parts of Australia and southern Africa, rice and palm in Southeast Asia, and coffee in equatorial highlands are classic examples of exposure—not an exhaustive list.",
+            "Damage is not only yield loss. Heat can cut grain fill, excess rain can delay harvest, and flooded roads or low rivers can raise logistics costs even when grain still exists in the field."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "A few export regions carry outsized weight. When they stumble together, global balances tighten."
+          },
+          "keyPointsLabel": "What changes here",
+          "keyPoints": [
+            {
+              "title": "Concentration risk",
+              "body": "Global calories depend on a handful of exporting regions."
+            },
+            {
+              "title": "Quality and timing",
+              "body": "Late harvests and quality downgrades matter even without total crop failure."
+            },
+            {
+              "title": "Cascades",
+              "body": "Feed grain shocks spill into livestock and processed foods later."
+            }
+          ],
+          "demoTitle": "Stress a crop basket under different water regimes",
+          "copy": {
+            "ariaLabel": "Interactive crop basket showing yield and logistics stress under dry, balanced, and wet scenarios",
+            "caption": "Sliders are illustrative stress indices, not real forecasts. Watch how yield risk and logistics risk can move together or apart.",
+            "controlLabel": "Water / heat stress",
+            "lowLabel": "Mild",
+            "highLabel": "Severe",
+            "yieldLabel": "Yield risk",
+            "logisticsLabel": "Logistics risk",
+            "basketLabel": "Export crop basket",
+            "crops": [
+              {
+                "id": "soy",
+                "name": "Soy / maize"
+              },
+              {
+                "id": "wheat",
+                "name": "Wheat / sugar"
+              },
+              {
+                "id": "rice",
+                "name": "Rice / palm"
+              },
+              {
+                "id": "coffee",
+                "name": "Coffee"
+              }
+            ],
+            "statusLow": "Stress stays local. Inventories and substitution usually absorb most of the shock.",
+            "statusMedium": "Several exporters feel simultaneous pressure. Futures and freight begin to price the risk.",
+            "statusHigh": "Yield cuts compound with logistics friction. Buyers compete for remaining cargoes."
+          }
+        },
+        {
+          "id": "price-pass",
+          "number": "04",
+          "title": "Prices rise through inventory, futures, and freight—not overnight magic",
+          "body": [
+            "A harvest scare first hits local cash markets and export quotes. Thin inventories amplify the move; comfortable stocks dampen it. Futures markets capitalize expected shortages months ahead, while ocean freight and insurance can add another layer when ports, rivers, or canals are stressed.",
+            "Retail grocery prices filter the wholesale signal through contracts, private labels, and product mix. Staples and imported ingredients often move earlier than fully processed local goods. ENSO is one shock among many—energy, currency, and policy still matter."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Your receipt is the last stop on a delayed conveyor belt of wholesale and freight prices."
+          },
+          "keyPointsLabel": "What changes here",
+          "keyPoints": [
+            {
+              "title": "Lags",
+              "body": "Farm → wholesale → retail can take weeks to months."
+            },
+            {
+              "title": "Filters",
+              "body": "Contracts and inventories mute some shocks and prolong others."
+            },
+            {
+              "title": "Multiple causes",
+              "body": "ENSO rarely acts alone; it tilts probabilities inside a wider price system."
+            }
+          ],
+          "demoTitle": "Trace a shock from farm gate to grocery shelf",
+          "copy": {
+            "ariaLabel": "Interactive price pass-through from farm gate through wholesale and freight to grocery shelf",
+            "caption": "Advance the timeline to see how a supply shock can lift wholesale first, then retail—with freight as an optional amplifier.",
+            "controlLabel": "Shock timeline",
+            "stages": [
+              {
+                "key": "farm",
+                "label": "Farm gate",
+                "detail": "Local cash prices jump where harvest risk is visible."
+              },
+              {
+                "key": "wholesale",
+                "label": "Wholesale / futures",
+                "detail": "Export quotes and futures capitalize the expected shortage."
+              },
+              {
+                "key": "freight",
+                "label": "Freight layer",
+                "detail": "River, canal, or port friction adds cost even if grain still exists."
+              },
+              {
+                "key": "retail",
+                "label": "Grocery shelf",
+                "detail": "Retail catches up after contracts roll and shelves restock."
+              }
+            ],
+            "shockLabel": "Supply shock size",
+            "inventoryLabel": "Inventory buffer",
+            "retailLabel": "Retail price index",
+            "wholesaleLabel": "Wholesale index",
+            "statusTemplate": "Shock {shock}% with inventory buffer {inventory}% → wholesale {wholesale}, retail {retail}."
+          }
+        },
+        {
+          "id": "not-typhoon",
+          "number": "05",
+          "title": "This is not the typhoon story",
+          "body": [
+            "Tropical cyclones grow from warm-ocean disturbances into tightly organized storms with an eye, eyewall, and spiral rainbands over days. That Visual maps local intensification and structure.",
+            "ENSO is a seasonal, Pacific-basin mode that rearranges rainfall and harvest risk across hemispheres. It can modulate the seasonal environment that cyclones form in, but the grocery-price chain here runs through droughts, floods, and crop logistics—not through counting landfalling storms."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Typhoon Visual = how one storm organizes. This Visual = how a Pacific climate swing hits food prices."
+          },
+          "keyPointsLabel": "Keep the narratives apart",
+          "keyPoints": [
+            {
+              "title": "Different clocks",
+              "body": "Cyclones: days. ENSO: seasons."
+            },
+            {
+              "title": "Different objects",
+              "body": "Cyclones: vortex structure. ENSO: basin heat and teleconnections."
+            },
+            {
+              "title": "Different endpoints",
+              "body": "Cyclone Visual ends at storm organization; this one ends at grocery pass-through."
+            }
+          ],
+          "demoTitle": "Compare cyclone genesis with the ENSO price chain",
+          "copy": {
+            "ariaLabel": "Side-by-side contrast between tropical cyclone formation and the ENSO food-price chain",
+            "caption": "Two Visuals, two mechanisms. Use the toggle to keep the stories from collapsing into each other.",
+            "controlLabel": "Which mechanism?",
+            "modes": [
+              {
+                "key": "typhoon",
+                "label": "Typhoon path",
+                "title": "Cyclone organization (other Visual)",
+                "steps": [
+                  "Warm ocean disturbance",
+                  "Organized convection",
+                  "Eye / eyewall structure",
+                  "Landfall risk"
+                ],
+                "status": "Focus: how a single tropical cyclone intensifies and organizes over days."
+              },
+              {
+                "key": "enso",
+                "label": "ENSO → prices",
+                "title": "This Visual’s chain",
+                "steps": [
+                  "Pacific SST anomaly",
+                  "Rainfall teleconnection",
+                  "Crop / logistics shock",
+                  "Grocery pass-through"
+                ],
+                "status": "Focus: how a seasonal Pacific mode can tilt food prices months later."
+              }
+            ]
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "PUT THE CHAIN BACK TOGETHER",
+        "title": "Grocery prices feel ENSO when heat, rain, harvests, and freight line up",
+        "body": [
+          "ENSO is a basin-scale ocean–atmosphere swing. Its food-system fingerprint appears when sea-surface anomalies relocate rainfall over concentrated crop exporters, then inventories, futures, and freight transmit the shock into retail with lags.",
+          "Treat ENSO as a probability tilt inside a larger price system—not as a one-to-one map from a Niño index to your weekly receipt. And keep it distinct from the typhoon Visual’s story of cyclone organization."
+        ],
+        "checklistLabel": "Reader checklist",
+        "checklist": [
+          "Ask which ENSO phase is favored and whether it overlaps a crop’s critical window.",
+          "Look at exporter concentration, not only a global average yield number.",
+          "Check inventory and freight conditions before blaming the Pacific alone.",
+          "Expect retail lags; wholesale often moves first.",
+          "Do not mix this chain with day-scale tropical cyclone intensification."
+        ],
+        "scaleTitle": "Four links to remember",
+        "scaleItems": [
+          {
+            "term": "SST anomaly",
+            "question": "Where does the signal start?",
+            "role": "Equatorial Pacific heat sets the ENSO phase."
+          },
+          {
+            "term": "Teleconnection",
+            "question": "How does rain relocate?",
+            "role": "Walker-linked rainfall tendencies shift across crop belts."
+          },
+          {
+            "term": "Crop stress",
+            "question": "What breaks first?",
+            "role": "Yield, quality, and logistics in concentrated exporters."
+          },
+          {
+            "term": "Price pass",
+            "question": "Why does your receipt move later?",
+            "role": "Inventories, futures, freight, and retail contracts filter the shock."
+          }
+        ],
+        "finalQuote": "Pacific heat does not print grocery barcodes—but when it relocates rain over the farms the world leans on, prices eventually notice.",
+        "sourceNote": "Technical note: rainfall and crop examples are illustrative teleconnection tendencies, not forecasts. Real seasons vary; ENSO is one driver among energy costs, policy, pests, and exchange rates. Indices and maps are simplified for teaching."
+      }
+    },
+    "zh": {
+      "lang": "zh-CN",
+      "meta": {
+        "title": "太平洋变暖，为什么你家菜价先涨？",
+        "description": "交互图解 ENSO：赤道太平洋海温异常如何改写降水、冲击作物与供应链，并传导到食品价格——叙事上与台风形成题明确分开。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "暂停所有动画",
+        "resumeAll": "继续所有动画",
+        "pause": "暂停",
+        "resume": "继续",
+        "reset": "重置",
+        "waiting": "图解将在进入视口后加载。",
+        "loading": "正在准备图解…",
+        "error": "图解暂时无法显示，请阅读上方文字说明。",
+        "figureFallback": "启用 JavaScript 后可以查看交互图解。",
+        "skipToContent": "跳到正文",
+        "languageNavigation": "语言",
+        "overviewLabel": "从海温到菜价总览",
+        "stepLabel": "步骤"
+      },
+      "hero": {
+        "eyebrow": "气候 / ENSO / 食品系统",
+        "title": "太平洋变暖，为什么你家菜价先涨？",
+        "subtitle": "厄尔尼诺–南方涛动（ENSO）是热带太平洋海温与风场的季节尺度摆动。它不会单独“发明”食品通胀，但能把降雨、收成风险和航运摩擦推到更容易抬价的方向。"
+      },
+      "overview": {
+        "title": "从海温到收银台的四段链条",
+        "body": [
+          "ENSO 是海气耦合模态。赤道中、东太平洋偏暖（厄尔尼诺）或偏冷（拉尼娜）时，沃克环流和热带雨带会改道——几个月后，这种改道会落到主要产粮带上。",
+          "本图解只跟一条因果链：海表温度异常 → 降水遥相关 → 作物与物流冲击 → 零售价格传导。最后一步专门对照「台风如何形成」，避免两道 Visual 叙事糊成一团。"
+        ],
+        "plainLanguage": {
+          "label": "一句话",
+          "body": "太平洋的冷暖格局，会重排谁先下雨；农场和航运先感觉到，价格后到。"
+        },
+        "keyPointsLabel": "先抓住这三点",
+        "keyPoints": [
+          {
+            "title": "海温是开关",
+            "body": "ENSO 首先看赤道太平洋海温距平，不是看某一场风暴。"
+          },
+          {
+            "title": "雨会搬家",
+            "body": "同一次海盆变化，可以让一个粮仓偏旱、另一个偏涝。"
+          },
+          {
+            "title": "价格有时滞",
+            "body": "收成、库存、运费传到货架要过滤和延迟，不是隔夜魔法。"
+          }
+        ],
+        "demoTitle": "顺着 ENSO → 菜价链条走一遍",
+        "copy": {
+          "ariaLabel": "连接太平洋海温、降水迁移、作物压力与菜价传导的交互链条",
+          "caption": "点选一环，看信号如何从热带太平洋走到食品价格。",
+          "stageControlLabel": "查看链条中的一环",
+          "stages": [
+            {
+              "label": "海温",
+              "state": "赤道太平洋海温距平",
+              "detail": "中东赤道太平洋偏暖或偏冷，定义了 ENSO 的起点状态。"
+            },
+            {
+              "label": "降水",
+              "state": "热带降水遥相关",
+              "detail": "沃克环流与雨带改道，改变谁更容易旱、谁更容易涝。"
+            },
+            {
+              "label": "作物",
+              "state": "产量与物流风险",
+              "detail": "粮油糖咖啡等主产区面临水分胁迫、高温、病害或收割受阻。"
+            },
+            {
+              "label": "价格",
+              "state": "批发 → 零售",
+              "detail": "库存厚薄、期货与运费会放大或削弱冲击，再传到菜场和超市。"
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "id": "basin-sst",
+          "number": "01",
+          "title": "先看赤道太平洋的冷暖，而不是一场风暴",
+          "body": [
+            "ENSO 从热带太平洋热量的缓慢重排开始。厄尔尼诺时，中东赤道太平洋异常偏暖；拉尼娜时，这一带偏冷，西太平洋相对更暖。",
+            "海温距平会耦合到海面风和温跃层。这里不需要一个命名风暴——几个月的海盆尺度冷暖，就足以重组热带对流。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "把它想成太平洋上的巨大调温旋钮，而不是一颗龙卷风。"
+          },
+          "keyPointsLabel": "这里变了什么",
+          "keyPoints": [
+            {
+              "title": "看距平",
+              "body": "指数跟踪的是相对季节平均的偏差。"
+            },
+            {
+              "title": "东西对照",
+              "body": "厄尔尼诺与拉尼娜会翻转海盆哪一侧更暖。"
+            },
+            {
+              "title": "季节时钟",
+              "body": "事件跨季节演变，给农业留下可感知但滞后的信号。"
+            }
+          ],
+          "demoTitle": "切换厄尔尼诺 / 中性 / 拉尼娜海温图",
+          "copy": {
+            "ariaLabel": "厄尔尼诺、中性与拉尼娜下的赤道太平洋海温距平交互图",
+            "caption": "暖色表示正距平，冷色表示负距平。这是海盆尺度图案，不是台风路径。",
+            "controlLabel": "ENSO 位相",
+            "phases": [
+              {
+                "key": "el-nino",
+                "label": "厄尔尼诺",
+                "status": "中东赤道太平洋偏暖，对流中心往往东移。",
+                "warmHint": "东侧偏暖",
+                "coolHint": "西侧相对偏冷"
+              },
+              {
+                "key": "neutral",
+                "label": "中性",
+                "status": "距平贴近基线，雨带更接近气候平均位置。",
+                "warmHint": "东侧接近常年",
+                "coolHint": "西侧接近常年"
+              },
+              {
+                "key": "la-nina",
+                "label": "拉尼娜",
+                "status": "中东赤道太平洋偏冷，对流更堆在西侧。",
+                "warmHint": "西侧相对偏暖",
+                "coolHint": "东侧偏冷"
+              }
+            ],
+            "basinLabel": "赤道太平洋",
+            "eastLabel": "东",
+            "westLabel": "西",
+            "anomalyLabel": "海温距平"
+          }
+        },
+        {
+          "id": "rainfall-shift",
+          "number": "02",
+          "title": "雨带跟着沃克环流搬家",
+          "body": [
+            "赤道太平洋热量搬家，热带上升支和对流也会搬家。厄尔尼诺时常让澳洲—海洋大陆一带偏干，南美西部部分地区偏湿；拉尼娜在许多区域呈现相反的降水指纹。",
+            "这叫遥相关：千里之外的统计偏好，不是对某一块田的确定性预报。年际差别可以很大。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "太平洋冷暖图一翻，降雨倾向图也容易跟着翻。"
+          },
+          "keyPointsLabel": "这里变了什么",
+          "keyPoints": [
+            {
+              "title": "偏好，不是铁律",
+              "body": "ENSO 提高某些旱涝格局的概率。"
+            },
+            {
+              "title": "全球不同步",
+              "body": "同一位相可以一地涝、一地旱——两边都影响粮食。"
+            },
+            {
+              "title": "卡农时窗口",
+              "body": "冲击是否要命，取决于是否撞上作物关键生长期。"
+            }
+          ],
+          "demoTitle": "看湿区与干区对调",
+          "copy": {
+            "ariaLabel": "厄尔尼诺与拉尼娜下降水遥相关倾向的交互示意",
+            "caption": "标记是主产区的示意干湿倾向，不是单季预报。",
+            "controlLabel": "降水倾向对应的位相",
+            "wetLabel": "偏湿倾向",
+            "dryLabel": "偏干倾向",
+            "phases": [
+              {
+                "key": "el-nino",
+                "label": "厄尔尼诺雨图",
+                "status": "示意：澳洲/海洋大陆/南部非洲等地偏干风险升；南美南部、美国南部等地偏湿风险升。",
+                "regions": [
+                  {
+                    "name": "澳洲 / 东南亚",
+                    "state": "dry",
+                    "note": "常偏干"
+                  },
+                  {
+                    "name": "南部非洲",
+                    "state": "dry",
+                    "note": "干旱风险升"
+                  },
+                  {
+                    "name": "南美南部",
+                    "state": "wet",
+                    "note": "常偏湿"
+                  },
+                  {
+                    "name": "非洲之角",
+                    "state": "wet",
+                    "note": "短雨季偏湿风险"
+                  }
+                ]
+              },
+              {
+                "key": "la-nina",
+                "label": "拉尼娜雨图",
+                "status": "示意：澳洲/海洋大陆等地偏湿倾向；南美南部、美国南部等地偏干风险升。",
+                "regions": [
+                  {
+                    "name": "澳洲 / 东南亚",
+                    "state": "wet",
+                    "note": "常偏湿"
+                  },
+                  {
+                    "name": "南部非洲",
+                    "state": "wet",
+                    "note": "降水概率升"
+                  },
+                  {
+                    "name": "南美南部",
+                    "state": "dry",
+                    "note": "干旱风险升"
+                  },
+                  {
+                    "name": "非洲之角",
+                    "state": "dry",
+                    "note": "偏干风险升"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "crop-shock",
+          "number": "03",
+          "title": "作物带比消费者更早感到水分胁迫",
+          "body": [
+            "当 ENSO 对齐的降水与高温打到集中产区，食品价格才容易动。南美豆玉米、澳洲与南部非洲的麦与糖、东南亚稻米与棕榈、赤道高地咖啡，都是常见暴露面——不是穷尽名单。",
+            "冲击不只是减产。灌浆期高温会砍质量，连阴雨会拖收割，公路洪水或河道过浅会抬物流成本——地里还有粮，也可能更贵。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "全球卡路里靠少数出口区顶着；它们一起瘸了，平衡表就紧。"
+          },
+          "keyPointsLabel": "这里变了什么",
+          "keyPoints": [
+            {
+              "title": "集中度风险",
+              "body": "出口高度集中，比“全球平均产量”更敏感。"
+            },
+            {
+              "title": "质量与时机",
+              "body": "晚收与降级也会推价，不一定要绝收。"
+            },
+            {
+              "title": "链条外溢",
+              "body": "饲料粮一紧，畜禽与加工食品会后置反应。"
+            }
+          ],
+          "demoTitle": "在不同水分情景下给作物篮加压",
+          "copy": {
+            "ariaLabel": "在偏干、适中与偏湿情景下观察产量与物流风险的交互作物篮",
+            "caption": "滑块是示意压力指数，不是真实预报。留意产量风险与物流风险何时同向、何时分叉。",
+            "controlLabel": "水分 / 高温压力",
+            "lowLabel": "偏轻",
+            "highLabel": "偏重",
+            "yieldLabel": "产量风险",
+            "logisticsLabel": "物流风险",
+            "basketLabel": "出口作物篮",
+            "crops": [
+              {
+                "id": "soy",
+                "name": "大豆 / 玉米"
+              },
+              {
+                "id": "wheat",
+                "name": "小麦 / 糖"
+              },
+              {
+                "id": "rice",
+                "name": "稻米 / 棕榈"
+              },
+              {
+                "id": "coffee",
+                "name": "咖啡"
+              }
+            ],
+            "statusLow": "压力偏局部。库存与替代品通常能吸收大部分冲击。",
+            "statusMedium": "多个出口区同时承压，期货与运费开始计价风险。",
+            "statusHigh": "减产与物流摩擦叠在一起，买家争抢剩余货源。"
+          }
+        },
+        {
+          "id": "price-pass",
+          "number": "04",
+          "title": "价格传导走库存、期货和运费，不是隔夜魔法",
+          "body": [
+            "收成警报先打到产地现货和出口报价。库存薄会放大波动，库存厚会缓冲。期货会把未来几个月的短缺预期提前计价；河运、运河或港口不顺时，运费与保险再叠一层。",
+            "零售价还要经过合同、自有品牌和商品结构过滤。主食和进口原料往往比深度加工的本地货先动。ENSO 只是众多冲击之一——能源、汇率与政策同样重要。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "你的小票是批发与运费延迟传送带的最后一站。"
+          },
+          "keyPointsLabel": "这里变了什么",
+          "keyPoints": [
+            {
+              "title": "时滞",
+              "body": "田头 → 批发 → 零售，常要数周到数月。"
+            },
+            {
+              "title": "过滤器",
+              "body": "合同与库存会削弱一部分冲击，也会拖长另一部分。"
+            },
+            {
+              "title": "多因并存",
+              "body": "ENSO 很少单独行动，它是在更大价格系统里倾斜概率。"
+            }
+          ],
+          "demoTitle": "把冲击从田头跟到货架",
+          "copy": {
+            "ariaLabel": "从田头经批发与运费到零售货架的价格传导交互",
+            "caption": "推进时间线，看供给冲击如何先抬批发、再抬零售——运费可作为可选放大器。",
+            "controlLabel": "冲击时间线",
+            "stages": [
+              {
+                "key": "farm",
+                "label": "田头",
+                "detail": "收成风险可见处，现货先跳。"
+              },
+              {
+                "key": "wholesale",
+                "label": "批发 / 期货",
+                "detail": "出口报价与期货把预期短缺资本化。"
+              },
+              {
+                "key": "freight",
+                "label": "运费层",
+                "detail": "河道、运河或港口摩擦叠加成本。"
+              },
+              {
+                "key": "retail",
+                "label": "零售货架",
+                "detail": "合同滚动、补货之后，零售才跟上。"
+              }
+            ],
+            "shockLabel": "供给冲击幅度",
+            "inventoryLabel": "库存缓冲",
+            "retailLabel": "零售价格指数",
+            "wholesaleLabel": "批发指数",
+            "statusTemplate": "冲击 {shock}%、库存缓冲 {inventory}% → 批发 {wholesale}，零售 {retail}。"
+          }
+        },
+        {
+          "id": "not-typhoon",
+          "number": "05",
+          "title": "这不是「台风如何形成」那条故事线",
+          "body": [
+            "热带气旋从暖洋面扰动长成有眼、眼墙和螺旋雨带的风暴，时间尺度是天。那道 Visual 讲的是局地增强与结构。",
+            "ENSO 是跨季节的太平洋海盆模态，重排南北半球的降水与收成风险。它能调节气旋生成的季节环境，但本页菜价链条走的是旱涝与作物物流，不是数登陆风暴个数。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "台风题 = 一场风暴怎么组织；本题 = 太平洋气候摆动怎么碰到菜价。"
+          },
+          "keyPointsLabel": "把叙事分开",
+          "keyPoints": [
+            {
+              "title": "时钟不同",
+              "body": "气旋论天；ENSO 论季。"
+            },
+            {
+              "title": "对象不同",
+              "body": "气旋看涡旋结构；ENSO 看海盆热量与遥相关。"
+            },
+            {
+              "title": "终点不同",
+              "body": "台风题停在风暴组织；本题停在零售传导。"
+            }
+          ],
+          "demoTitle": "对照气旋生成与 ENSO 菜价链",
+          "copy": {
+            "ariaLabel": "热带气旋形成与 ENSO 食品价格链条的并排对照",
+            "caption": "两道 Visual、两套机制。用开关避免故事线互相吞掉。",
+            "controlLabel": "看哪条机制？",
+            "modes": [
+              {
+                "key": "typhoon",
+                "label": "台风路径",
+                "title": "气旋组织（另一道 Visual）",
+                "steps": [
+                  "暖洋面扰动",
+                  "对流组织",
+                  "眼 / 眼墙结构",
+                  "登陆风险"
+                ],
+                "status": "焦点：单个热带气旋如何在数天内增强、组织。"
+              },
+              {
+                "key": "enso",
+                "label": "ENSO → 菜价",
+                "title": "本图解的链条",
+                "steps": [
+                  "太平洋海温距平",
+                  "降水遥相关",
+                  "作物 / 物流冲击",
+                  "零售价格传导"
+                ],
+                "status": "焦点：季节尺度太平洋模态如何在数月后倾斜食品价格。"
+              }
+            ]
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "把链条重新装回去",
+        "title": "海温、降雨、收成和运费对齐时，菜价才会感觉到 ENSO",
+        "body": [
+          "ENSO 是海盆尺度的海气摆动。它的食品指纹出现在：海温距平改写集中产区的降水，库存、期货与运费再把冲击带着时滞送进零售。",
+          "把 ENSO 当成更大价格系统里的概率倾斜，而不是 Niño 指数到小票的一一映射。也请把它与台风题的「气旋如何组织」分开。"
+        ],
+        "checklistLabel": "阅读清单",
+        "checklist": [
+          "先问当前倾向哪个位相，是否撞上作物关键窗口。",
+          "看出口集中度，不要只看全球平均产量。",
+          "先核对库存与运费，再把锅全甩给太平洋。",
+          "预期零售滞后；批发往往先动。",
+          "不要把这条链与天尺度的热带气旋增强混为一谈。"
+        ],
+        "scaleTitle": "记住四环",
+        "scaleItems": [
+          {
+            "term": "海温距平",
+            "question": "信号从哪起？",
+            "role": "赤道太平洋热量定义 ENSO 位相。"
+          },
+          {
+            "term": "遥相关",
+            "question": "雨怎么搬家？",
+            "role": "与沃克环流相关的降水倾向改写产粮带。"
+          },
+          {
+            "term": "作物压力",
+            "question": "谁先破？",
+            "role": "集中出口区的产量、质量与物流。"
+          },
+          {
+            "term": "价格传导",
+            "question": "小票为何后动？",
+            "role": "库存、期货、运费与零售合同过滤冲击。"
+          }
+        ],
+        "finalQuote": "太平洋的热量不会直接印菜价条码——但当它改写世界依赖的农田降雨时，价格迟早会注意到。",
+        "sourceNote": "技术说明：降水与作物例子是示意性遥相关倾向，不是预报。真实季节差异很大；ENSO 只是能源成本、政策、病虫害与汇率等诸多驱动之一。指数与地图为教学简化。"
+      }
+    },
+    "ja": {
+      "lang": "ja",
+      "meta": {
+        "title": "太平洋が暖まると、なぜ食卓の値段が先に上がるのか",
+        "description": "ENSO（エルニーニョ・南方振動）を対話的に解説。赤道太平洋の海面水温偏差が降水・作物・物流を通じ食品価格へ波及する仕組み。台風形成の物語とは切り分けます。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "すべての動きを停止",
+        "resumeAll": "すべての動きを再開",
+        "pause": "一時停止",
+        "resume": "再開",
+        "reset": "リセット",
+        "waiting": "図解は表示領域に入ると読み込まれます。",
+        "loading": "図解を準備しています…",
+        "error": "図解を表示できません。上の説明を読んでください。",
+        "figureFallback": "インタラクティブ図解を見るには JavaScript を有効にしてください。",
+        "skipToContent": "本文へスキップ",
+        "languageNavigation": "言語",
+        "overviewLabel": "ENSOから食品価格までの概観",
+        "stepLabel": "ステップ"
+      },
+      "hero": {
+        "eyebrow": "気候 / ENSO / 食料システム",
+        "title": "太平洋が暖まると、なぜ食卓の値段が先に上がるのか",
+        "subtitle": "エルニーニョ・南方振動（ENSO）は熱帯太平洋の熱と風の季節規模のゆらぎです。それだけで食品インフレを「作る」わけではありませんが、雨・収穫リスク・輸送摩擦を、価格が上がりやすい方向へ押しやることがあります。"
+      },
+      "overview": {
+        "title": "海の熱からレジまでの四つのつながり",
+        "body": [
+          "ENSO は海洋と大気が結合したモードです。赤道中・東部太平洋が異常に暖かい（エルニーニョ）か冷たい（ラニーニャ）とき、ウォーカー循環と熱帯の雨帯がずれ、数か月後に主要産地へ届きます。",
+          "この図解は一本の因果鎖だけを追います。海面水温偏差 → 降水テレコネクション → 作物・物流ショック → 小売価格への波及。最後に台風形成との違いを示し、二つの Visual の物語を混ぜません。"
+        ],
+        "plainLanguage": {
+          "label": "ひとことで",
+          "body": "太平洋の寒暖パターンが、誰が雨を得るかを並べ替える。農場と輸送が先に感じ、価格は後から来る。"
+        },
+        "keyPointsLabel": "押さえる三点",
+        "keyPoints": [
+          {
+            "title": "熱がスイッチ",
+            "body": "ENSO はまず赤道太平洋の海面水温偏差で測り、単一の嵐ではありません。"
+          },
+          {
+            "title": "雨が移る",
+            "body": "同じ海盆変化が、ある穀倉を乾かし、別の穀倉を濡らすことがあります。"
+          },
+          {
+            "title": "価格は遅れる",
+            "body": "収穫・在庫・運賃が棚に届くまでには遅れとフィルターがあります。"
+          }
+        ],
+        "demoTitle": "ENSO → 価格の鎖をたどる",
+        "copy": {
+          "ariaLabel": "太平洋の熱、降水の移動、作物ストレス、食品価格をつなぐ対話的チェーン",
+          "caption": "リンクを選ぶと、熱帯太平洋から食品価格へ信号がどう伝わるかを確認できます。",
+          "stageControlLabel": "鎖の一環を見る",
+          "stages": [
+            {
+              "label": "海の熱",
+              "state": "赤道太平洋 SST 偏差",
+              "detail": "中・東部赤道太平洋の暖冷偏差が ENSO の出発点を定義します。"
+            },
+            {
+              "label": "雨の移動",
+              "state": "熱帯降水テレコネクション",
+              "detail": "ウォーカー循環と雨帯がずれ、旱魃や多雨の当たりやすさが変わります。"
+            },
+            {
+              "label": "作物ストレス",
+              "state": "収量と物流リスク",
+              "detail": "穀物・油糧・砂糖・コーヒーなどの主産地が水・熱・病害・収穫遅延にさらされます。"
+            },
+            {
+              "label": "価格波及",
+              "state": "卸 → 小売",
+              "detail": "在庫・先物・運賃がショックを増幅または抑制し、食料品棚へ届きます。"
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "id": "basin-sst",
+          "number": "01",
+          "title": "まず赤道太平洋の寒暖を見る。単一の嵐ではない",
+          "body": [
+            "ENSO は熱帯太平洋の熱のゆっくりした再配置から始まります。エルニーニョでは中・東部赤道太平洋が異常に暖かくなり、ラニーニャではそこが平年より冷たく、西側が相対的に暖かくなりがちです。",
+            "水温偏差は海面風と水温躍層に結合します。名前の付いた熱帯低気圧がなくても、数か月続く海盆規模の寒暖で熱帯対流は再編成されます。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "巨大な太平洋のサーモスタットだと考えてください。一本の回転する嵐ではありません。"
+          },
+          "keyPointsLabel": "ここで変わること",
+          "keyPoints": [
+            {
+              "title": "偏差を見る",
+              "body": "指数は季節平均からのずれを追います。"
+            },
+            {
+              "title": "東西の対比",
+              "body": "エルニーニョとラニーニャで、どちら側が異常に暖いかが反転します。"
+            },
+            {
+              "title": "季節の時計",
+              "body": "事象は季節をかけて進み、農業には遅れて届く一貫した信号になります。"
+            }
+          ],
+          "demoTitle": "エルニーニョ / 中立 / ラニーニャの水温図を切替",
+          "copy": {
+            "ariaLabel": "エルニーニョ・中立・ラニーニャの赤道太平洋海面水温偏差マップ",
+            "caption": "暖色は正偏差、寒色は負偏差。海盆規模のパターンであり、台風進路ではありません。",
+            "controlLabel": "ENSO 位相",
+            "phases": [
+              {
+                "key": "el-nino",
+                "label": "エルニーニョ",
+                "status": "中・東部赤道太平洋が平年より暖かく、対流は東へずれやすい。",
+                "warmHint": "東側が暖かい",
+                "coolHint": "西側は相対的に冷たい"
+              },
+              {
+                "key": "neutral",
+                "label": "中立",
+                "status": "偏差は基線付近。雨帯は気候平均の位置に近い。",
+                "warmHint": "東側はほぼ平年",
+                "coolHint": "西側はほぼ平年"
+              },
+              {
+                "key": "la-nina",
+                "label": "ラニーニャ",
+                "status": "中・東部赤道太平洋が平年より冷たく、対流は西側に集まりやすい。",
+                "warmHint": "西側が相対的に暖かい",
+                "coolHint": "東側が冷たい"
+              }
+            ],
+            "basinLabel": "赤道太平洋",
+            "eastLabel": "東",
+            "westLabel": "西",
+            "anomalyLabel": "SST 偏差"
+          }
+        },
+        {
+          "id": "rainfall-shift",
+          "number": "02",
+          "title": "雨帯はウォーカー循環とともに動く",
+          "body": [
+            "赤道太平洋の熱が移動すると、熱帯の上昇流域も動きます。エルニーニョでは海洋大陸・オーストラリア方面が乾きやすく、南米西部の一部が濡れやすい、といった傾向があります。ラニーニャはその逆の降水指紋になりやすい地域が多いです。",
+            "これはテレコネクションです。何千キロも離れた統計的な好みであり、一枚の畑への確定予報ではありません。年ごとのばらつきは大きいです。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "太平洋の寒暖図がひっくり返ると、雨の傾向図もひっくり返りやすい。"
+          },
+          "keyPointsLabel": "ここで変わること",
+          "keyPoints": [
+            {
+              "title": "好みであり鉄則ではない",
+              "body": "ENSO は特定の旱魃・洪水パターンの確率を積み上げます。"
+            },
+            {
+              "title": "世界は同時ではない",
+              "body": "同じ位相でも一地域が濡れ、別地域が乾く——どちらも食料に効く。"
+            },
+            {
+              "title": "生育の窓",
+              "body": "作物の重要期に重なるかどうかで打撃は変わります。"
+            }
+          ],
+          "demoTitle": "湿潤域と乾燥域の入れ替わりを見る",
+          "copy": {
+            "ariaLabel": "エルニーニョとラニーニャの降水テレコネクション傾向マップ",
+            "caption": "マーカーは主要農業地域の例示的な乾湿傾向であり、単一季節の予報ではありません。",
+            "controlLabel": "降水傾向の位相",
+            "wetLabel": "湿りやすい",
+            "dryLabel": "乾きやすい",
+            "phases": [
+              {
+                "key": "el-nino",
+                "label": "エルニーニョの雨図",
+                "status": "例示：オーストラリア／海洋大陸／南部アフリカなどで乾燥リスク増。南米南部や米国南部などで湿潤リスク増。",
+                "regions": [
+                  {
+                    "name": "豪州 / 東南アジア",
+                    "state": "dry",
+                    "note": "乾きやすい"
+                  },
+                  {
+                    "name": "南部アフリカ",
+                    "state": "dry",
+                    "note": "旱魃リスク増"
+                  },
+                  {
+                    "name": "南米南部",
+                    "state": "wet",
+                    "note": "濡れやすい"
+                  },
+                  {
+                    "name": "アフリカの角",
+                    "state": "wet",
+                    "note": "短雨が強まりやすい"
+                  }
+                ]
+              },
+              {
+                "key": "la-nina",
+                "label": "ラニーニャの雨図",
+                "status": "例示：オーストラリア／海洋大陸などで湿潤傾向。南米南部や米国南部などで乾燥リスク増。",
+                "regions": [
+                  {
+                    "name": "豪州 / 東南アジア",
+                    "state": "wet",
+                    "note": "濡れやすい"
+                  },
+                  {
+                    "name": "南部アフリカ",
+                    "state": "wet",
+                    "note": "雨の確率増"
+                  },
+                  {
+                    "name": "南米南部",
+                    "state": "dry",
+                    "note": "旱魃リスク増"
+                  },
+                  {
+                    "name": "アフリカの角",
+                    "state": "dry",
+                    "note": "乾燥リスク増"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "crop-shock",
+          "number": "03",
+          "title": "作物地帯は買い物客より先に水ストレスを感じる",
+          "body": [
+            "ENSO に沿った雨と熱が集中産地を打つと、食品価格は動きやすくなります。南米の大豆・トウモロコシ、豪州や南部アフリカの小麦・砂糖、東南アジアの米・パーム、赤道高地のコーヒーなどが典型的な露出面です（網羅リストではありません）。",
+            "打撃は収量減だけではありません。登熟期の高温は品質を落とし、長雨は収穫を遅らせ、冠水した道路や浅い河川は、畑に穀物が残っていても物流コストを上げます。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "世界のカロリーは少数の輸出地域に頼る。同時に躓くと需給は締まる。"
+          },
+          "keyPointsLabel": "ここで変わること",
+          "keyPoints": [
+            {
+              "title": "集中リスク",
+              "body": "輸出の集中は、世界平均収量より敏感です。"
+            },
+            {
+              "title": "品質とタイミング",
+              "body": "全滅でなくとも遅延と格下げで価格は動きます。"
+            },
+            {
+              "title": "波及",
+              "body": "飼料穀物のショックは畜産と加工食品に遅れても効く。"
+            }
+          ],
+          "demoTitle": "水条件を変え作物バスケットに負荷をかける",
+          "copy": {
+            "ariaLabel": "乾燥・均衡・多湿シナリオで収量と物流リスクを見る作物バスケット",
+            "caption": "スライダーは例示的なストレス指数であり、実予報ではありません。収量リスクと物流リスクが同方向・逆方向に動く様子を見てください。",
+            "controlLabel": "水・熱ストレス",
+            "lowLabel": "軽い",
+            "highLabel": "重い",
+            "yieldLabel": "収量リスク",
+            "logisticsLabel": "物流リスク",
+            "basketLabel": "輸出作物バスケット",
+            "crops": [
+              {
+                "id": "soy",
+                "name": "大豆 / トウモロコシ"
+              },
+              {
+                "id": "wheat",
+                "name": "小麦 / 砂糖"
+              },
+              {
+                "id": "rice",
+                "name": "米 / パーム"
+              },
+              {
+                "id": "coffee",
+                "name": "コーヒー"
+              }
+            ],
+            "statusLow": "ストレスは局所的。在庫と代替で多くを吸収しやすい。",
+            "statusMedium": "複数の輸出地域が同時に圧迫され、先物と運賃がリスクを織り込み始める。",
+            "statusHigh": "収量減と物流摩擦が重なり、買い手は残貨を奪い合う。"
+          }
+        },
+        {
+          "id": "price-pass",
+          "number": "04",
+          "title": "価格は在庫・先物・運賃を通じて上がる。一夜の魔法ではない",
+          "body": [
+            "収穫不安はまず現地の現金相場と輸出建値を打ちます。薄い在庫は値動きを増幅し、厚い在庫は和らげます。先物は数か月先の不足予想を前倒しで織り込み、河川・運河・港が詰まると運賃と保険がさらに乗ります。",
+            "小売価格は契約・PB・商品構成で卸の信号を濾します。主食や輸入原料は、深く加工された地場品より先に動きがちです。ENSO は多くのショックの一つにすぎず、エネルギー・為替・政策も重要です。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "レシートは、卸と運賃の遅れたコンベアの最終駅です。"
+          },
+          "keyPointsLabel": "ここで変わること",
+          "keyPoints": [
+            {
+              "title": "遅れ",
+              "body": "産地 → 卸 → 小売は数週〜数か月かかることがある。"
+            },
+            {
+              "title": "フィルター",
+              "body": "契約と在庫は一部のショックを弱め、別のものは長引かせる。"
+            },
+            {
+              "title": "多要因",
+              "body": "ENSO 単独ではなく、より大きな価格システムの中で確率を傾ける。"
+            }
+          ],
+          "demoTitle": "ショックを産地から棚までたどる",
+          "copy": {
+            "ariaLabel": "産地から卸・運賃を経て食料品棚へ至る価格波及の対話図",
+            "caption": "タイムラインを進めると、供給ショックがまず卸を押し上げ、その後小売へ届く様子が見えます。運賃は任意の増幅器です。",
+            "controlLabel": "ショックのタイムライン",
+            "stages": [
+              {
+                "key": "farm",
+                "label": "産地",
+                "detail": "収穫リスクが見える場所で現金価格が跳ねる。"
+              },
+              {
+                "key": "wholesale",
+                "label": "卸 / 先物",
+                "detail": "輸出建値と先物が予想不足を資本化する。"
+              },
+              {
+                "key": "freight",
+                "label": "運賃層",
+                "detail": "河川・運河・港の摩擦がコストを上乗せする。"
+              },
+              {
+                "key": "retail",
+                "label": "食料品棚",
+                "detail": "契約更新と補充のあと、小売が追いつく。"
+              }
+            ],
+            "shockLabel": "供給ショックの大きさ",
+            "inventoryLabel": "在庫バッファ",
+            "retailLabel": "小売価格指数",
+            "wholesaleLabel": "卸指数",
+            "statusTemplate": "ショック {shock}%、在庫バッファ {inventory}% → 卸 {wholesale}、小売 {retail}。"
+          }
+        },
+        {
+          "id": "not-typhoon",
+          "number": "05",
+          "title": "これは台風形成の物語ではない",
+          "body": [
+            "熱帯低気圧は暖かい海の擾乱から、眼・眼の壁・スパイラルバンドを持つ嵐へ、日単位で成長します。あの Visual は局所的な強化と構造を地図化します。",
+            "ENSO は季節規模の太平洋モードで、半球をまたぐ降水と収穫リスクを並べ替えます。台風が発生しやすい季節環境を変調することはあっても、本ページの食品価格の鎖は旱魃・洪水・作物物流を通り、上陸台風の個数勘定ではありません。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "台風 Visual = 一つの嵐の組織化。本 Visual = 太平洋の気候ゆらぎが食卓価格に届く道。"
+          },
+          "keyPointsLabel": "物語を分ける",
+          "keyPoints": [
+            {
+              "title": "時計が違う",
+              "body": "熱帯低気圧は日、ENSO は季節。"
+            },
+            {
+              "title": "対象が違う",
+              "body": "低気圧は渦の構造、ENSO は海盆の熱とテレコネクション。"
+            },
+            {
+              "title": "終点が違う",
+              "body": "台風図解は嵐の組織化で終わり、本図解は小売波及で終わる。"
+            }
+          ],
+          "demoTitle": "台風発生と ENSO 価格鎖を見比べる",
+          "copy": {
+            "ariaLabel": "熱帯低気圧の形成と ENSO 食品価格鎖の並び対照",
+            "caption": "二つの Visual、二つの仕組み。トグルで物語が混ざらないようにします。",
+            "controlLabel": "どの仕組みを見る？",
+            "modes": [
+              {
+                "key": "typhoon",
+                "label": "台風の道",
+                "title": "低気圧の組織化（別 Visual）",
+                "steps": [
+                  "暖海の擾乱",
+                  "対流の組織化",
+                  "眼 / 眼の壁",
+                  "上陸リスク"
+                ],
+                "status": "焦点：一つの熱帯低気圧が数日で強化・組織化する過程。"
+              },
+              {
+                "key": "enso",
+                "label": "ENSO → 価格",
+                "title": "本図解の鎖",
+                "steps": [
+                  "太平洋 SST 偏差",
+                  "降水テレコネクション",
+                  "作物 / 物流ショック",
+                  "小売への波及"
+                ],
+                "status": "焦点：季節規模の太平洋モードが数か月後に食品価格を傾ける過程。"
+              }
+            ]
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "鎖を再び組み立てる",
+        "title": "熱・雨・収穫・運賃が揃うとき、食卓価格は ENSO を感じる",
+        "body": [
+          "ENSO は海盆規模の海洋–大気ゆらぎです。その食料指紋は、海面水温偏差が集中産地の雨を移し、在庫・先物・運賃が遅れをもって小売へ届けるときに現れます。",
+          "ENSO を、より大きな価格システムの中の確率の傾きとして扱い、Niño 指数とレシートの一対一写像だと思わないでください。台風 Visual の「低気圧の組織化」とも分けてください。"
+        ],
+        "checklistLabel": "読み手チェックリスト",
+        "checklist": [
+          "どの位相が優勢か、作物の重要期と重なるかを確認する。",
+          "世界平均収量だけでなく輸出の集中度を見る。",
+          "太平洋だけを責めず、在庫と運賃も見る。",
+          "小売の遅れを予期する。卸が先に動くことが多い。",
+          "日単位の熱帯低気圧強化とこの鎖を混同しない。"
+        ],
+        "scaleTitle": "覚える四つの環",
+        "scaleItems": [
+          {
+            "term": "SST 偏差",
+            "question": "信号はどこから？",
+            "role": "赤道太平洋の熱が ENSO 位相を決める。"
+          },
+          {
+            "term": "テレコネクション",
+            "question": "雨はどう移る？",
+            "role": "ウォーカー関連の降水傾向が産地を塗り替える。"
+          },
+          {
+            "term": "作物ストレス",
+            "question": "何が先に壊れる？",
+            "role": "集中輸出地域の収量・品質・物流。"
+          },
+          {
+            "term": "価格波及",
+            "question": "なぜレシートは遅れる？",
+            "role": "在庫・先物・運賃・小売契約がショックを濾す。"
+          }
+        ],
+        "finalQuote": "太平洋の熱はバーコードを刷らない——しかし世界が頼る畑の雨を並べ替えるとき、価格はいずれ気づく。",
+        "sourceNote": "技術注記：降水と作物の例は例示的なテレコネクション傾向であり予報ではありません。実際の季節は大きくばらつきます。ENSO はエネルギーコスト・政策・病害・為替など多くの要因の一つです。指数と地図は教材用に簡略化しています。"
+      }
+    }
+  }
+}

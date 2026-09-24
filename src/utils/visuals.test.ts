@@ -3,17 +3,18 @@ import { getHomepageVisuals, getLatestVisual, getVisualWork } from './visuals';
 
 describe('getLatestVisual', () => {
   it.each([
-    ['en', '/visuals/price-volume-relationship/', 'How Price and Volume Work Together'],
-    ['zh', '/cn/visuals/price-volume-relationship/', '股市交易原理：量价关系'],
-    ['ja', '/ja/visuals/price-volume-relationship/', '株式取引の仕組み：価格と出来高'],
+    ['en', '/visuals/enso-food-prices/', 'Why Pacific Warming Shows Up in Grocery Prices'],
+    ['zh', '/cn/visuals/enso-food-prices/', '太平洋变暖，为什么你家菜价先涨？'],
+    ['ja', '/ja/visuals/enso-food-prices/', '太平洋が暖まると、なぜ食卓の値段が先に上がるのか'],
   ] as const)('returns the newest published %s artifact', (lang, href, title) => {
-    expect(getLatestVisual(lang)).toMatchObject({ slug: 'price-volume-relationship', href, title, hasCurrentArtifact: true });
+    expect(getLatestVisual(lang)).toMatchObject({ slug: 'enso-food-prices', href, title, hasCurrentArtifact: true });
   });
 });
 
 describe('getHomepageVisuals', () => {
   it('returns every current-language artifact in newest-first order', () => {
     expect(getHomepageVisuals('en').map((visual) => visual.slug)).toEqual([
+      'enso-food-prices',
       'price-volume-relationship',
       'air-conditioner',
       'loop-engineering',
@@ -29,6 +30,7 @@ describe('visual artifact registration', () => {
     ['loop-engineering', 'loop-engineering'],
     ['price-volume-relationship', 'price-volume-relationship'],
     ['typhoon', 'typhoon'],
+    ['enso-food-prices', 'enso-food-prices'],
   ] as const)('uses one stable artifact ID across locales for %s', (slug, artifact) => {
     const work = getVisualWork(slug);
 

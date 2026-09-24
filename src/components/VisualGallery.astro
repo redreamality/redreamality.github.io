@@ -97,6 +97,7 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
       const isLoopEngineering = work.cover === 'loop-engineering';
       const isPriceVolume = work.cover === 'price-volume';
       const isTyphoon = work.cover === 'typhoon';
+      const isEnsoFoodPrices = work.cover === 'enso-food-prices';
 
       return (
         <article id={work.slug} data-visual-card={work.slug} class="group overflow-hidden rounded-3xl border border-surface-200/80 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover dark:border-surface-800 dark:bg-surface-900">
@@ -143,6 +144,21 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
               <>
                 <div class="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full border-[14px] border-white/15"></div>
                 <div class="absolute left-1/2 top-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/50 bg-slate-950/70"></div>
+              </>
+            )}
+            {isEnsoFoodPrices && (
+              <>
+                {/* Equatorial warm tongue across the Pacific — not a typhoon spiral */}
+                <div class="absolute inset-x-0 top-[38%] h-[28%] bg-gradient-to-r from-sky-900/20 via-cyan-700/35 to-sky-900/20"></div>
+                <div class="absolute left-[8%] top-[46%] h-5 w-[84%] rounded-full bg-gradient-to-r from-amber-300/25 via-orange-400/80 to-rose-400/55 shadow-[0_0_28px_rgba(251,146,60,.45)]"></div>
+                <div class="absolute left-[22%] top-[48%] h-2.5 w-[42%] rounded-full bg-gradient-to-r from-yellow-200/70 to-orange-300/40"></div>
+                {/* Rising grocery-price hint */}
+                <div class="absolute bottom-[16%] right-[10%] flex h-[38%] w-[22%] items-end gap-1">
+                  <div class="h-[35%] flex-1 rounded-t bg-emerald-200/45"></div>
+                  <div class="h-[55%] flex-1 rounded-t bg-emerald-200/60"></div>
+                  <div class="h-[78%] flex-1 rounded-t bg-rose-300/70"></div>
+                </div>
+                <div class="absolute bottom-[52%] right-[12%] text-lg font-bold text-rose-100/90">↗</div>
               </>
             )}
             <div class="absolute inset-x-8 bottom-8 flex items-center justify-between text-white/90">

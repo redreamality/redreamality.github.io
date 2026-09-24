@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive guide to ENSO: equatorial Pacific heat anomalies reshape rainfall, crop stress, and food prices—without confusing the story with tropical cyclones.">
+  <title>Why Pacific warming shows up in grocery prices</title>
+  <style data-prototype-bundle="article">
+:root {
+  color-scheme: light;
+  --paper: #f4f1e8;
+  --surface: #fffdf8;
+  --ink: #17333c;
+  --muted: #60747a;
+  --line: #d8ddd7;
+  --ocean: #0f7185;
+  --warm: #ee9d46;
+  --coral: #d45f50;
+  --soft-ocean: color-mix(in srgb, var(--ocean) 9%, var(--surface));
+  --soft-warm: color-mix(in srgb, var(--warm) 12%, var(--surface));
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body { margin: 0; overflow-x: clip; color: var(--ink); background: radial-gradient(circle at 20% 0, #dff3ef 0, transparent 30rem), var(--paper); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .75rem;
+  left: .75rem;
+  padding: .65rem .9rem;
+  color: white;
+  background: var(--ink);
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.75rem;
+  padding: .65rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(216, 221, 215, .9);
+  background: rgba(244, 241, 232, .9);
+  backdrop-filter: blur(14px);
+}
+.site-header strong { margin-right: auto; font-size: .72rem; letter-spacing: .12em; }
+.language-links { display: flex; gap: .65rem; }
+.language-links a { color: var(--muted); font-size: .78rem; }
+.language-links a[aria-current="page"] { color: var(--ocean); font-weight: 800; }
+[data-global-motion] {
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.hero, .copy-block {
+  width: min(calc(100% - 2rem), 54rem);
+  margin-inline: auto;
+}
+.hero {
+  position: relative;
+  padding: clamp(5rem, 14vw, 10rem) 0;
+}
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -12% auto auto;
+  width: clamp(9rem, 28vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ocean) 35%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem color-mix(in srgb, var(--ocean) 5%, transparent),
+    0 0 0 5rem color-mix(in srgb, var(--warm) 4%, transparent);
+  content: "";
+}
+.eyebrow, .section-label {
+  margin: 0 0 1rem;
+  color: var(--ocean);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+h1, h2 { margin-top: 0; line-height: 1.03; text-wrap: balance; }
+h1 { max-width: 9em; margin-bottom: 1.5rem; font-size: clamp(3.2rem, 10vw, 7rem); letter-spacing: -.06em; }
+h2 { max-width: 16em; margin-bottom: 1.15rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+.hero-subtitle, .copy-prose { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.75; }
+.hero-subtitle { max-width: 38rem; }
+.copy-prose { margin: .8rem 0 0; }
+
+.plain-language {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .75rem 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 55%, var(--line));
+  border-radius: 1rem;
+  background: var(--soft-warm);
+}
+.plain-language strong {
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  color: var(--surface);
+  background: var(--warm);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.plain-language p { margin: 0; color: var(--ink); line-height: 1.65; }
+
+.concept-points { margin-top: 1.4rem; }
+.concept-points-label {
+  margin: 0 0 .7rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.concept-points ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.concept-card strong { display: block; margin-bottom: .45rem; }
+.concept-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+.overview, .chapter, .closing { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
+.overview { background: color-mix(in srgb, var(--surface) 42%, transparent); }
+.chapter:nth-of-type(even) { background: color-mix(in srgb, var(--surface) 22%, transparent); }
+interactive-figure {
+  display: block;
+  width: min(calc(100% - 2rem), 68rem);
+  min-height: 29rem;
+  margin: 3rem auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 51, 60, .14);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 1.5rem 4rem rgba(23, 51, 60, .1);
+}
+
+.closing { background: linear-gradient(150deg, var(--soft-ocean), color-mix(in srgb, var(--paper) 86%, var(--surface))); }
+.closing-copy { width: min(calc(100% - 2rem), 68rem); }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.starter-checklist, .boundary-map {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.closing h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.starter-checklist ol { display: grid; gap: .7rem; margin: 0; padding-left: 1.35rem; }
+.starter-checklist li { padding-left: .3rem; line-height: 1.55; }
+.boundary-map ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.scale-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: .2rem .8rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--surface);
+}
+.scale-card strong { grid-row: 1 / span 2; color: var(--ocean); }
+.scale-card span { color: var(--ink); font-size: .82rem; font-weight: 800; }
+.scale-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.closing blockquote {
+  margin: 2rem 0 0;
+  padding: 1.35rem clamp(1rem, 3vw, 1.8rem);
+  border-left: .32rem solid var(--ocean);
+  color: var(--ink);
+  background: var(--surface);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.55;
+}
+.source-note { margin: 1rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+article[data-visual-slug="loop-engineering"] .hero .eyebrow { color: var(--coral); }
+article[data-visual-slug="loop-engineering"] interactive-figure { box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ocean) 12%, transparent); }
+
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header strong { width: 100%; }
+  .language-links { margin-right: auto; }
+  interactive-figure { min-height: 32rem; border-radius: 1rem; }
+  .concept-points ul, .closing-grid { grid-template-columns: 1fr; }
+  .plain-language { grid-template-columns: 1fr; }
+  .scale-card { grid-template-columns: 5.5rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#article">Skip to content</a>
+  <header class="site-header">
+    <strong>VISUAL KIT / PROTOTYPE</strong>
+    <nav class="language-links" aria-label="Languages">
+<a href="../en/" hreflang="en" aria-current="page">English</a>
+<a href="../zh/" hreflang="zh">中文</a>
+<a href="../ja/" hreflang="ja">日本語</a>
+    </nav>
+    <button type="button" data-global-motion aria-pressed="false"></button>
+  </header>
+  <main id="article">
+    <article data-visual-slug="enso-food-prices">
+      <header class="hero">
+        <p class="eyebrow">CLIMATE / ENSO / FOOD SYSTEMS</p>
+        <h1>Why Pacific warming shows up in grocery prices</h1>
+        <p class="hero-subtitle">El Niño–Southern Oscillation (ENSO) is a slow, basin-scale swing in tropical Pacific heat and winds. It does not invent food inflation alone—but it can push rainfall, harvest risk, and shipping stress in directions that raise what you pay at the store.</p>
+      </header>
+<section class="overview" aria-labelledby="overview-title">
+  <div class="copy-block">
+    <p class="section-label">ENSO-to-prices overview</p>
+    <h2 id="overview-title">A four-link chain from sea heat to the checkout aisle</h2>
+    <p class="copy-prose">ENSO is a coupled ocean–atmosphere mode. When the equatorial central and eastern Pacific run unusually warm (El Niño) or cool (La Niña), the Walker circulation and rainfall belts shift across the tropics—and those shifts reach crop belts months later.</p>
+<p class="copy-prose">This explainer follows one causal chain: sea-surface temperature anomaly → rainfall teleconnection → crop and logistics shock → grocery price pass-through. A final step separates that chain from typhoon formation so the two Visuals stay narratively distinct.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>The Pacific’s heat pattern rearranges who gets rain. Farms and shipping feel it first; prices catch up later.</p></aside><div class="concept-points"><p class="concept-points-label">Keep these three ideas</p><ul><li class="concept-card"><strong>Heat is the switch</strong><p>ENSO is measured first as equatorial Pacific sea-surface temperature anomalies, not as a single storm.</p></li><li class="concept-card"><strong>Rain moves elsewhere</strong><p>The same basin change can wet one breadbasket and dry another through teleconnections.</p></li><li class="concept-card"><strong>Prices are delayed</strong><p>Harvest damage, inventory, and freight costs transmit into retail with lags and filters—not overnight magic.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="enso-overview" data-title="Follow the ENSO → prices chain" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive chain linking Pacific sea heat, rainfall shifts, crop stress, and grocery prices&quot;,&quot;caption&quot;:&quot;Select a link to inspect how the signal travels from the tropical Pacific to food prices.&quot;,&quot;stageControlLabel&quot;:&quot;Inspect a link in the chain&quot;,&quot;stages&quot;:[{&quot;label&quot;:&quot;Sea heat&quot;,&quot;state&quot;:&quot;Equatorial Pacific SST anomaly&quot;,&quot;detail&quot;:&quot;Warm or cool anomalies in the central/eastern equatorial Pacific redefine the starting state of ENSO.&quot;},{&quot;label&quot;:&quot;Rain shift&quot;,&quot;state&quot;:&quot;Tropical rainfall teleconnection&quot;,&quot;detail&quot;:&quot;The Walker circulation and ITCZ-related rainfall belts relocate, changing who gets drought or excess rain.&quot;},{&quot;label&quot;:&quot;Crop stress&quot;,&quot;state&quot;:&quot;Yield and logistics risk&quot;,&quot;detail&quot;:&quot;Key producers of grains, oilseeds, sugar, and coffee face water stress, heat, disease pressure, or harvest disruption.&quot;},{&quot;label&quot;:&quot;Price pass&quot;,&quot;state&quot;:&quot;Wholesale → retail&quot;,&quot;detail&quot;:&quot;Thin inventories, futures markets, and freight amplify or dampen the shock before it reaches grocery shelves.&quot;}]}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="basin-sst" aria-labelledby="basin-sst-title">
+  <div class="copy-block">
+    <p class="section-label">Step 01</p>
+    <h2 id="basin-sst-title">Start with equatorial Pacific heat, not a single storm</h2>
+    <p class="copy-prose">ENSO begins as a slow rearrangement of heat in the tropical Pacific. In El Niño, anomalous warmth builds in the central and eastern equatorial Pacific; in La Niña, that region runs cooler than normal while the west often stays relatively warm.</p>
+<p class="copy-prose">Those temperature anomalies couple to surface winds and the thermocline. The ocean does not need a named cyclone to matter—months of basin-scale warmth or coolness are enough to reorganize tropical convection.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>Think of a giant Pacific thermostat, not a single spinning storm.</p></aside><div class="concept-points"><p class="concept-points-label">What changes here</p><ul><li class="concept-card"><strong>Anomaly, not absolute heat</strong><p>ENSO indices track departures from a seasonal baseline along the equator.</p></li><li class="concept-card"><strong>East–west contrast</strong><p>El Niño and La Niña flip which side of the basin is anomalously warm.</p></li><li class="concept-card"><strong>Slow clock</strong><p>Events evolve over seasons, giving agriculture a delayed but coherent signal.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="enso-sst" data-title="Toggle El Niño / neutral / La Niña heat maps" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive equatorial Pacific sea-surface temperature anomaly map for El Niño, neutral, and La Niña&quot;,&quot;caption&quot;:&quot;Warm colors mark positive SST anomalies; cool colors mark negative anomalies. The pattern is basin-scale, not a storm track.&quot;,&quot;controlLabel&quot;:&quot;ENSO phase&quot;,&quot;phases&quot;:[{&quot;key&quot;:&quot;el-nino&quot;,&quot;label&quot;:&quot;El Niño&quot;,&quot;status&quot;:&quot;Central and eastern equatorial Pacific run warmer than normal; convection tends to slide east.&quot;,&quot;warmHint&quot;:&quot;Warm anomaly east&quot;,&quot;coolHint&quot;:&quot;Relative cool west&quot;},{&quot;key&quot;:&quot;neutral&quot;,&quot;label&quot;:&quot;Neutral&quot;,&quot;status&quot;:&quot;Anomalies stay near the baseline. Rainfall belts sit closer to their climatological home.&quot;,&quot;warmHint&quot;:&quot;Near-normal east&quot;,&quot;coolHint&quot;:&quot;Near-normal west&quot;},{&quot;key&quot;:&quot;la-nina&quot;,&quot;label&quot;:&quot;La Niña&quot;,&quot;status&quot;:&quot;Central and eastern equatorial Pacific run cooler than normal; convection piles up farther west.&quot;,&quot;warmHint&quot;:&quot;Relative warm west&quot;,&quot;coolHint&quot;:&quot;Cool anomaly east&quot;}],&quot;basinLabel&quot;:&quot;Equatorial Pacific&quot;,&quot;eastLabel&quot;:&quot;East&quot;,&quot;westLabel&quot;:&quot;West&quot;,&quot;anomalyLabel&quot;:&quot;SST anomaly&quot;}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="rainfall-shift" aria-labelledby="rainfall-shift-title">
+  <div class="copy-block">
+    <p class="section-label">Step 02</p>
+    <h2 id="rainfall-shift-title">Rainfall belts move with the Walker circulation</h2>
+    <p class="copy-prose">When equatorial Pacific heat relocates, so does the rising branch of tropical convection. El Niño often suppresses rainfall over parts of Maritime Continent Australia and can wet parts of western South America; La Niña tends toward the opposite rainfall fingerprint in many of those regions.</p>
+<p class="copy-prose">These are teleconnections: statistically preferred rainfall responses thousands of kilometers away. They are tendencies with large uncertainty year to year—not deterministic weather forecasts for a single farm.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>When the Pacific heat map flips, the rain map tends to flip with it.</p></aside><div class="concept-points"><p class="concept-points-label">What changes here</p><ul><li class="concept-card"><strong>Preferred patterns</strong><p>ENSO stacks the odds toward certain drought and flood footprints.</p></li><li class="concept-card"><strong>Not global lockstep</strong><p>One phase can soak one region while another dries—both matter for food.</p></li><li class="concept-card"><strong>Seasonal timing</strong><p>Impacts depend on whether the anomaly overlaps a crop’s critical growth window.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="enso-rain" data-title="Watch wet and dry regions trade places" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive map of rainfall teleconnection tendencies under El Niño and La Niña&quot;,&quot;caption&quot;:&quot;Markers show illustrative wet or dry tendencies for major agricultural regions—not a forecast for a single season.&quot;,&quot;controlLabel&quot;:&quot;Phase for rainfall tendency&quot;,&quot;wetLabel&quot;:&quot;Wetter tendency&quot;,&quot;dryLabel&quot;:&quot;Drier tendency&quot;,&quot;phases&quot;:[{&quot;key&quot;:&quot;el-nino&quot;,&quot;label&quot;:&quot;El Niño rain map&quot;,&quot;status&quot;:&quot;Illustrative: drier risk over parts of Australia / Maritime Continent / southern Africa; wetter risk over parts of southern South America and the southern US.&quot;,&quot;regions&quot;:[{&quot;name&quot;:&quot;Australia / SE Asia&quot;,&quot;state&quot;:&quot;dry&quot;,&quot;note&quot;:&quot;Often drier&quot;},{&quot;name&quot;:&quot;Southern Africa&quot;,&quot;state&quot;:&quot;dry&quot;,&quot;note&quot;:&quot;Drought risk up&quot;},{&quot;name&quot;:&quot;S. South America&quot;,&quot;state&quot;:&quot;wet&quot;,&quot;note&quot;:&quot;Often wetter&quot;},{&quot;name&quot;:&quot;Horn of Africa&quot;,&quot;state&quot;:&quot;wet&quot;,&quot;note&quot;:&quot;Short-rains boost risk&quot;}]},{&quot;key&quot;:&quot;la-nina&quot;,&quot;label&quot;:&quot;La Niña rain map&quot;,&quot;status&quot;:&quot;Illustrative: wetter tendency over parts of Australia / Maritime Continent; drier risk over parts of southern South America and the southern US.&quot;,&quot;regions&quot;:[{&quot;name&quot;:&quot;Australia / SE Asia&quot;,&quot;state&quot;:&quot;wet&quot;,&quot;note&quot;:&quot;Often wetter&quot;},{&quot;name&quot;:&quot;Southern Africa&quot;,&quot;state&quot;:&quot;wet&quot;,&quot;note&quot;:&quot;Rain odds up&quot;},{&quot;name&quot;:&quot;S. South America&quot;,&quot;state&quot;:&quot;dry&quot;,&quot;note&quot;:&quot;Drought risk up&quot;},{&quot;name&quot;:&quot;Horn of Africa&quot;,&quot;state&quot;:&quot;dry&quot;,&quot;note&quot;:&quot;Dry risk up&quot;}]}]}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="crop-shock" aria-labelledby="crop-shock-title">
+  <div class="copy-block">
+    <p class="section-label">Step 03</p>
+    <h2 id="crop-shock-title">Crop belts feel water stress before shoppers do</h2>
+    <p class="copy-prose">Food prices respond when ENSO-aligned rainfall and heat hit concentrated producers. Soy and maize in South America, wheat and sugar in parts of Australia and southern Africa, rice and palm in Southeast Asia, and coffee in equatorial highlands are classic examples of exposure—not an exhaustive list.</p>
+<p class="copy-prose">Damage is not only yield loss. Heat can cut grain fill, excess rain can delay harvest, and flooded roads or low rivers can raise logistics costs even when grain still exists in the field.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>A few export regions carry outsized weight. When they stumble together, global balances tighten.</p></aside><div class="concept-points"><p class="concept-points-label">What changes here</p><ul><li class="concept-card"><strong>Concentration risk</strong><p>Global calories depend on a handful of exporting regions.</p></li><li class="concept-card"><strong>Quality and timing</strong><p>Late harvests and quality downgrades matter even without total crop failure.</p></li><li class="concept-card"><strong>Cascades</strong><p>Feed grain shocks spill into livestock and processed foods later.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="enso-crops" data-title="Stress a crop basket under different water regimes" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive crop basket showing yield and logistics stress under dry, balanced, and wet scenarios&quot;,&quot;caption&quot;:&quot;Sliders are illustrative stress indices, not real forecasts. Watch how yield risk and logistics risk can move together or apart.&quot;,&quot;controlLabel&quot;:&quot;Water / heat stress&quot;,&quot;lowLabel&quot;:&quot;Mild&quot;,&quot;highLabel&quot;:&quot;Severe&quot;,&quot;yieldLabel&quot;:&quot;Yield risk&quot;,&quot;logisticsLabel&quot;:&quot;Logistics risk&quot;,&quot;basketLabel&quot;:&quot;Export crop basket&quot;,&quot;crops&quot;:[{&quot;id&quot;:&quot;soy&quot;,&quot;name&quot;:&quot;Soy / maize&quot;},{&quot;id&quot;:&quot;wheat&quot;,&quot;name&quot;:&quot;Wheat / sugar&quot;},{&quot;id&quot;:&quot;rice&quot;,&quot;name&quot;:&quot;Rice / palm&quot;},{&quot;id&quot;:&quot;coffee&quot;,&quot;name&quot;:&quot;Coffee&quot;}],&quot;statusLow&quot;:&quot;Stress stays local. Inventories and substitution usually absorb most of the shock.&quot;,&quot;statusMedium&quot;:&quot;Several exporters feel simultaneous pressure. Futures and freight begin to price the risk.&quot;,&quot;statusHigh&quot;:&quot;Yield cuts compound with logistics friction. Buyers compete for remaining cargoes.&quot;}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="price-pass" aria-labelledby="price-pass-title">
+  <div class="copy-block">
+    <p class="section-label">Step 04</p>
+    <h2 id="price-pass-title">Prices rise through inventory, futures, and freight—not overnight magic</h2>
+    <p class="copy-prose">A harvest scare first hits local cash markets and export quotes. Thin inventories amplify the move; comfortable stocks dampen it. Futures markets capitalize expected shortages months ahead, while ocean freight and insurance can add another layer when ports, rivers, or canals are stressed.</p>
+<p class="copy-prose">Retail grocery prices filter the wholesale signal through contracts, private labels, and product mix. Staples and imported ingredients often move earlier than fully processed local goods. ENSO is one shock among many—energy, currency, and policy still matter.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>Your receipt is the last stop on a delayed conveyor belt of wholesale and freight prices.</p></aside><div class="concept-points"><p class="concept-points-label">What changes here</p><ul><li class="concept-card"><strong>Lags</strong><p>Farm → wholesale → retail can take weeks to months.</p></li><li class="concept-card"><strong>Filters</strong><p>Contracts and inventories mute some shocks and prolong others.</p></li><li class="concept-card"><strong>Multiple causes</strong><p>ENSO rarely acts alone; it tilts probabilities inside a wider price system.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="enso-prices" data-title="Trace a shock from farm gate to grocery shelf" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive price pass-through from farm gate through wholesale and freight to grocery shelf&quot;,&quot;caption&quot;:&quot;Advance the timeline to see how a supply shock can lift wholesale first, then retail—with freight as an optional amplifier.&quot;,&quot;controlLabel&quot;:&quot;Shock timeline&quot;,&quot;stages&quot;:[{&quot;key&quot;:&quot;farm&quot;,&quot;label&quot;:&quot;Farm gate&quot;,&quot;detail&quot;:&quot;Local cash prices jump where harvest risk is visible.&quot;},{&quot;key&quot;:&quot;wholesale&quot;,&quot;label&quot;:&quot;Wholesale / futures&quot;,&quot;detail&quot;:&quot;Export quotes and futures capitalize the expected shortage.&quot;},{&quot;key&quot;:&quot;freight&quot;,&quot;label&quot;:&quot;Freight layer&quot;,&quot;detail&quot;:&quot;River, canal, or port friction adds cost even if grain still exists.&quot;},{&quot;key&quot;:&quot;retail&quot;,&quot;label&quot;:&quot;Grocery shelf&quot;,&quot;detail&quot;:&quot;Retail catches up after contracts roll and shelves restock.&quot;}],&quot;shockLabel&quot;:&quot;Supply shock size&quot;,&quot;inventoryLabel&quot;:&quot;Inventory buffer&quot;,&quot;retailLabel&quot;:&quot;Retail price index&quot;,&quot;wholesaleLabel&quot;:&quot;Wholesale index&quot;,&quot;statusTemplate&quot;:&quot;Shock {shock}% with inventory buffer {inventory}% → wholesale {wholesale}, retail {retail}.&quot;}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="not-typhoon" aria-labelledby="not-typhoon-title">
+  <div class="copy-block">
+    <p class="section-label">Step 05</p>
+    <h2 id="not-typhoon-title">This is not the typhoon story</h2>
+    <p class="copy-prose">Tropical cyclones grow from warm-ocean disturbances into tightly organized storms with an eye, eyewall, and spiral rainbands over days. That Visual maps local intensification and structure.</p>
+<p class="copy-prose">ENSO is a seasonal, Pacific-basin mode that rearranges rainfall and harvest risk across hemispheres. It can modulate the seasonal environment that cyclones form in, but the grocery-price chain here runs through droughts, floods, and crop logistics—not through counting landfalling storms.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>Typhoon Visual = how one storm organizes. This Visual = how a Pacific climate swing hits food prices.</p></aside><div class="concept-points"><p class="concept-points-label">Keep the narratives apart</p><ul><li class="concept-card"><strong>Different clocks</strong><p>Cyclones: days. ENSO: seasons.</p></li><li class="concept-card"><strong>Different objects</strong><p>Cyclones: vortex structure. ENSO: basin heat and teleconnections.</p></li><li class="concept-card"><strong>Different endpoints</strong><p>Cyclone Visual ends at storm organization; this one ends at grocery pass-through.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="enso-not-typhoon" data-title="Compare cyclone genesis with the ENSO price chain" data-copy="{&quot;ariaLabel&quot;:&quot;Side-by-side contrast between tropical cyclone formation and the ENSO food-price chain&quot;,&quot;caption&quot;:&quot;Two Visuals, two mechanisms. Use the toggle to keep the stories from collapsing into each other.&quot;,&quot;controlLabel&quot;:&quot;Which mechanism?&quot;,&quot;modes&quot;:[{&quot;key&quot;:&quot;typhoon&quot;,&quot;label&quot;:&quot;Typhoon path&quot;,&quot;title&quot;:&quot;Cyclone organization (other Visual)&quot;,&quot;steps&quot;:[&quot;Warm ocean disturbance&quot;,&quot;Organized convection&quot;,&quot;Eye / eyewall structure&quot;,&quot;Landfall risk&quot;],&quot;status&quot;:&quot;Focus: how a single tropical cyclone intensifies and organizes over days.&quot;},{&quot;key&quot;:&quot;enso&quot;,&quot;label&quot;:&quot;ENSO → prices&quot;,&quot;title&quot;:&quot;This Visual’s chain&quot;,&quot;steps&quot;:[&quot;Pacific SST anomaly&quot;,&quot;Rainfall teleconnection&quot;,&quot;Crop / logistics shock&quot;,&quot;Grocery pass-through&quot;],&quot;status&quot;:&quot;Focus: how a seasonal Pacific mode can tilt food prices months later.&quot;}]}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="closing" aria-labelledby="closing-title">
+  <div class="copy-block closing-copy">
+    <p class="section-label">PUT THE CHAIN BACK TOGETHER</p>
+    <h2 id="closing-title">Grocery prices feel ENSO when heat, rain, harvests, and freight line up</h2>
+    <p class="copy-prose">ENSO is a basin-scale ocean–atmosphere swing. Its food-system fingerprint appears when sea-surface anomalies relocate rainfall over concentrated crop exporters, then inventories, futures, and freight transmit the shock into retail with lags.</p>
+<p class="copy-prose">Treat ENSO as a probability tilt inside a larger price system—not as a one-to-one map from a Niño index to your weekly receipt. And keep it distinct from the typhoon Visual’s story of cyclone organization.</p>
+    <div class="closing-grid">
+      <div class="starter-checklist">
+        <h3>Reader checklist</h3>
+        <ol><li>Ask which ENSO phase is favored and whether it overlaps a crop’s critical window.</li><li>Look at exporter concentration, not only a global average yield number.</li><li>Check inventory and freight conditions before blaming the Pacific alone.</li><li>Expect retail lags; wholesale often moves first.</li><li>Do not mix this chain with day-scale tropical cyclone intensification.</li></ol>
+      </div>
+      <div class="boundary-map">
+        <h3>Four links to remember</h3>
+        <ul><li class="scale-card"><strong>SST anomaly</strong><span>Where does the signal start?</span><p>Equatorial Pacific heat sets the ENSO phase.</p></li><li class="scale-card"><strong>Teleconnection</strong><span>How does rain relocate?</span><p>Walker-linked rainfall tendencies shift across crop belts.</p></li><li class="scale-card"><strong>Crop stress</strong><span>What breaks first?</span><p>Yield, quality, and logistics in concentrated exporters.</p></li><li class="scale-card"><strong>Price pass</strong><span>Why does your receipt move later?</span><p>Inventories, futures, freight, and retail contracts filter the shock.</p></li></ul>
+      </div>
+    </div>
+    <blockquote>Pacific heat does not print grocery barcodes—but when it relocates rain over the farms the world leans on, prices eventually notice.</blockquote>
+    <p class="source-note">Technical note: rainfall and crop examples are illustrative teleconnection tendencies, not forecasts. Real seasons vary; ENSO is one driver among energy costs, policy, pests, and exchange rates. Indices and maps are simplified for teaching.</p>
+  </div>
+</section>
+    </article>
+  </main>
+  <script>
+    window.__VISUAL_I18N__ = {"pauseAll":"Pause all motion","resumeAll":"Resume all motion","pause":"Pause","resume":"Resume","reset":"Reset","waiting":"The visual will load when it enters the viewport.","loading":"Preparing the visual…","error":"The visual could not be displayed. Read the explanation above instead.","figureFallback":"Enable JavaScript to view this interactive explanation.","skipToContent":"Skip to content","languageNavigation":"Languages","overviewLabel":"ENSO-to-prices overview","stepLabel":"Step"};
+  </script>
+  <script data-prototype-bundle="runtime">
+(() => {
+  "use strict";
+
+  const ui = Object.freeze(window.__VISUAL_I18N__);
+  const registry = new Map();
+  const figures = new Set();
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const tokens = Object.freeze({
+    ink: "var(--visual-ink, #17333c)",
+    muted: "var(--visual-muted, #60747a)",
+    line: "var(--visual-line, #d8ddd7)",
+    ocean: "var(--visual-ocean, #0f7185)",
+    warm: "var(--visual-warm, #ee9d46)",
+    coral: "var(--visual-coral, #d45f50)",
+    paper: "var(--visual-paper, #f4f1e8)",
+    surface: "var(--visual-surface, #fffdf8)"
+  });
+  let globalPaused = false;
+
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+  const call = (instance, method, value) => {
+    if (instance && typeof instance[method] === "function") instance[method](value);
+  };
+
+  class InteractiveFigure extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
+      this._instance = null;
+      this._mounted = false;
+      this._mounting = false;
+      this._visible = false;
+      this._localPaused = false;
+    }
+
+    connectedCallback() {
+      if (this._connected) return;
+      this._connected = true;
+      figures.add(this);
+      this._shadow.innerHTML = `
+        <style>
+          :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+          .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
+          .mount { min-height: inherit; }
+          .runtime-status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; pointer-events: none; }
+          .runtime-status[data-live-only] { position: absolute; inset: auto; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; background: transparent; pointer-events: none; }
+          .runtime-status[hidden] { display: none; }
+          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
+          .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+          button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+          button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+          @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
+        </style>
+        <div class="frame">
+          <div class="stage"><div class="mount"></div><div class="runtime-status" data-runtime-status role="status"></div></div>
+          <div class="controls">
+            <span class="title"></span>
+            <button type="button" data-action="pause" aria-pressed="false"></button>
+            <button type="button" data-action="reset"></button>
+          </div>
+        </div>`;
+
+      this._stage = this._shadow.querySelector(".stage");
+      this._mountRoot = this._shadow.querySelector(".mount");
+      this._status = this._shadow.querySelector("[data-runtime-status]");
+      this._title = this._shadow.querySelector(".title");
+      this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
+      this._resetButton = this._shadow.querySelector('[data-action="reset"]');
+      this._copy = JSON.parse(this.dataset.copy || "{}");
+      this._title.textContent = this.dataset.title || "";
+      this._pauseButton.textContent = ui.pause;
+      this._resetButton.textContent = ui.reset;
+      this._setStatus(ui.waiting);
+
+      this._pauseButton.addEventListener("click", () => {
+        this._localPaused = !this._localPaused;
+        this._syncPlayback();
+      });
+      this._resetButton.addEventListener("click", () => {
+        call(this._instance, "reset");
+        this.dispatchEvent(new CustomEvent("demo-reset", { bubbles: true }));
+      });
+
+      this._observer = new IntersectionObserver((entries) => {
+        this._visible = entries[0]?.isIntersecting ?? false;
+        if (this._visible) this._mount();
+        this._syncPlayback();
+      }, { rootMargin: "180px 0px", threshold: .05 });
+      this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      figures.delete(this);
+      this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
+      call(this._instance, "destroy");
+    }
+
+    async _mount() {
+      if (this._mounted || this._mounting) return;
+      const factory = registry.get(this.dataset.demo);
+      if (!factory) return;
+      this._mounting = true;
+      this._setStatus(ui.loading);
+      try {
+        this._instance = await factory({
+          root: this._mountRoot,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
+          copy: this._copy,
+          motion: !reducedMotion.matches,
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._announce(message)
+        }) || {};
+        this._mounted = true;
+        this.dataset.state = "mounted";
+        this._liveRevision = (this._liveRevision || 0) + 1;
+        this._status.removeAttribute("data-live-only");
+        this._status.textContent = "";
+        this._status.hidden = true;
+        this._resize();
+        this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
+      } catch {
+        this.dataset.state = "error";
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
+      }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
+    }
+
+    _syncPlayback() {
+      const paused = globalPaused || this._localPaused || !this._visible || reducedMotion.matches;
+      this.dataset.playback = paused ? "paused" : "playing";
+      this._pauseButton?.setAttribute("aria-pressed", String(this._localPaused));
+      if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
+      call(this._instance, paused ? "pause" : "resume");
+    }
+
+    _setStatus(message) {
+      this._liveRevision = (this._liveRevision || 0) + 1;
+      this._status.removeAttribute("data-live-only");
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
+
+    _announce(message) {
+      const revision = (this._liveRevision || 0) + 1;
+      this._liveRevision = revision;
+      this._status.hidden = false;
+      this._status.setAttribute("data-live-only", "");
+      this._status.textContent = "";
+      queueMicrotask(() => {
+        if (this._liveRevision !== revision || !this._status.isConnected) return;
+        this._status.textContent = message;
+      });
+    }
+  }
+
+  window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
+    if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
+    registry.set(id, factory);
+    figures.forEach((figure) => {
+      if (figure.dataset.demo === id && figure._visible) figure._mount();
+    });
+  };
+
+  customElements.define("interactive-figure", InteractiveFigure);
+
+  const globalToggle = document.querySelector("[data-global-motion]");
+  const syncGlobalToggle = () => {
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
+    figures.forEach((figure) => figure._syncPlayback());
+  };
+  globalToggle?.addEventListener("click", () => {
+    globalPaused = !globalPaused;
+    syncGlobalToggle();
+  });
+  reducedMotion.addEventListener("change", syncGlobalToggle);
+  syncGlobalToggle();
+})();
+  </script>
+  <script data-prototype-bundle="demos">
+const escapeHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+registerDemo("enso-overview", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  // 注入作用域样式与 HTML 结构
+  root.innerHTML = `
+    <style>
+      .eo-wrapper {
+        position: relative;
+        min-height: 420px;
+        display: flex;
+        flex-direction: column;
+        font-family: system-ui, -apple-system, sans-serif;
+        color: var(--ink);
+        box-sizing: border-box;
+        padding: 16px;
+      }
+      .eo-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .eo-caption {
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 32px;
+        z-index: 2;
+      }
+      .eo-track {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        position: relative;
+        z-index: 2;
+        margin-bottom: 32px;
+      }
+      .eo-node {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: transparent;
+        border: none;
+        padding: 0 4px;
+        cursor: pointer;
+        text-align: center;
+      }
+      .eo-node:focus-visible {
+        outline: 2px solid var(--ocean);
+        outline-offset: 4px;
+        border-radius: 4px;
+      }
+      .eo-dot {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--surface);
+        border: 3px solid var(--line);
+        margin-bottom: 12px;
+        transition: all 0.2s ease;
+        position: relative;
+      }
+      .eo-node.active .eo-dot {
+        border-color: var(--ocean);
+        background: var(--ocean);
+        box-shadow: 0 0 0 4px var(--surface), 0 0 0 6px var(--ocean);
+      }
+      .eo-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--muted);
+        line-height: 1.3;
+        transition: color 0.2s ease;
+      }
+      .eo-node.active .eo-label {
+        color: var(--ink);
+      }
+      .eo-panel {
+        margin-top: auto;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--ocean);
+        padding: 20px;
+        border-radius: 6px;
+        z-index: 2;
+        min-height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .eo-state {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin: 0 0 8px 0;
+        color: var(--ink);
+      }
+      .eo-detail {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+    </style>
+    <div class="eo-wrapper" aria-label="${copy.ariaLabel}">
+      <div class="eo-caption" aria-hidden="true">${copy.caption}</div>
+      <canvas class="eo-canvas"></canvas>
+      <div class="eo-track" role="group" aria-label="${copy.stageControlLabel}">
+        ${copy.stages.map((stage, i) => `
+          <button class="eo-node" data-index="${i}" aria-pressed="${i === 0}" aria-controls="eo-panel-info">
+            <div class="eo-dot"></div>
+            <span class="eo-label">${stage.label}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="eo-panel" id="eo-panel-info" aria-live="polite">
+        <div class="eo-state"></div>
+        <div class="eo-detail"></div>
+      </div>
+    </div>
+  `;
+
+  // DOM 元素引用
+  const wrapper = root.querySelector('.eo-wrapper');
+  const canvas = root.querySelector('.eo-canvas');
+  const ctx = canvas.getContext('2d');
+  const nodes = root.querySelectorAll('.eo-node');
+  const stateEl = root.querySelector('.eo-state');
+  const detailEl = root.querySelector('.eo-detail');
+
+  // 内部状态
+  let currentIndex = 0;
+  let dots = [];
+  let isPlaying = true;
+  let reqId = null;
+  let time = 0;
+  let canvasWidth = 0;
+  let canvasHeight = 0;
+
+  // 更新面板与按钮状态
+  function updatePanel(index) {
+    const stage = copy.stages[index];
+    stateEl.textContent = stage.state;
+    detailEl.textContent = stage.detail;
+
+    nodes.forEach((btn, i) => {
+      const isActive = i === index;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive);
+    });
+
+    announce(`${stage.label}: ${stage.state}. ${stage.detail}`);
+  }
+
+  // 测量节点圆点中心位置（用于 Canvas 连线与粒子动画）
+  function measureDots() {
+    const wrapperRect = wrapper.getBoundingClientRect();
+    dots = Array.from(nodes).map(node => {
+      const dot = node.querySelector('.eo-dot');
+      const rect = dot.getBoundingClientRect();
+      return {
+        x: rect.left - wrapperRect.left + rect.width / 2,
+        y: rect.top - wrapperRect.top + rect.height / 2
+      };
+    });
+  }
+
+  // 获取路径上的插值坐标 (t: 0 ~ stages.length - 1)
+  function getPointOnPath(t) {
+    const maxIndex = dots.length - 1;
+    if (t <= 0) return dots[0];
+    if (t >= maxIndex) return dots[maxIndex];
+
+    const index = Math.floor(t);
+    const remainder = t - index;
+    const p1 = dots[index];
+    const p2 = dots[index + 1];
+
+    return {
+      x: p1.x + (p2.x - p1.x) * remainder,
+      y: p1.y + (p2.y - p1.y) * remainder
+    };
+  }
+
+  // 核心绘制逻辑
+  function draw() {
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    if (dots.length < 2) return;
+
+    const lineToken = tokens.line;
+    const oceanToken = tokens.ocean;
+    const mutedToken = tokens.muted;
+
+    // 1. 绘制基础底线
+    ctx.beginPath();
+    ctx.moveTo(dots[0].x, dots[0].y);
+    for (let i = 1; i < dots.length; i++) {
+      ctx.lineTo(dots[i].x, dots[i].y);
+    }
+    ctx.strokeStyle = resolveColor(lineToken);
+    ctx.lineWidth = 4;
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+
+    // 2. 绘制激活路径（从起点到当前选中的节点）
+    if (currentIndex > 0) {
+      ctx.beginPath();
+      ctx.moveTo(dots[0].x, dots[0].y);
+      for (let i = 1; i <= currentIndex; i++) {
+        ctx.lineTo(dots[i].x, dots[i].y);
+      }
+      ctx.strokeStyle = resolveColor(oceanToken);
+      ctx.lineWidth = 4;
+      ctx.stroke();
+    }
+
+    // 3. 绘制流动粒子（仅在允许动画时）
+    if (motion !== false) {
+      const speed = 0.0015;
+      const numParticles = 8;
+      const totalSegments = dots.length - 1;
+
+      for (let i = 0; i < numParticles; i++) {
+        // 让粒子在整个链条上循环流动
+        const t = ((time * speed) + (i * (totalSegments / numParticles))) % totalSegments;
+        const pt = getPointOnPath(t);
+
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2);
+
+        // 粒子如果在当前高亮的因果链段内，则使用主题色，否则使用弱化色
+        if (t <= currentIndex) {
+          ctx.fillStyle = resolveColor(oceanToken);
+        } else {
+          ctx.fillStyle = resolveColor(mutedToken);
+        }
+        ctx.fill();
+      }
+    }
+  }
+
+  // 动画循环
+  function loop(timestamp) {
+    if (!isPlaying) return;
+    time = timestamp;
+    draw();
+    reqId = requestAnimationFrame(loop);
+  }
+
+  // 事件监听：点击节点切换因果链阶段
+  const track = root.querySelector('.eo-track');
+  track.addEventListener('click', (e) => {
+    const btn = e.target.closest('.eo-node');
+    if (btn) {
+      currentIndex = parseInt(btn.dataset.index, 10);
+      updatePanel(currentIndex);
+      if (!isPlaying) {
+        draw(); // 暂停状态下点击需立即重绘以响应交互
+      }
+    }
+  }, { signal });
+
+  // 初始化首个状态
+  updatePanel(0);
+
+  return {
+    pause() {
+      isPlaying = false;
+      if (reqId) cancelAnimationFrame(reqId);
+      draw(); // 确保停在清晰的静态帧
+    },
+    resume() {
+      if (!isPlaying) {
+        isPlaying = true;
+        reqId = requestAnimationFrame(loop);
+      }
+    },
+    reset() {
+      currentIndex = 0;
+      updatePanel(currentIndex);
+      time = 0;
+      draw();
+    },
+    destroy() {
+      isPlaying = false;
+      if (reqId) cancelAnimationFrame(reqId);
+      root.innerHTML = '';
+    },
+    resize({ width, height, dpr }) {
+      // 容器自身的高度由内部元素撑开，取真实渲染尺寸
+      const rect = wrapper.getBoundingClientRect();
+      canvasWidth = rect.width;
+      canvasHeight = rect.height;
+
+      canvas.width = canvasWidth * dpr;
+      canvas.height = canvasHeight * dpr;
+      canvas.style.width = `${canvasWidth}px`;
+      canvas.style.height = `${canvasHeight}px`;
+
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+
+      measureDots();
+      draw(); // 尺寸变化后立即重绘，避免闪烁
+    }
+  };
+});
+
+registerDemo("enso-sst", ({ root, copy, motion, tokens, announce }) => {
+  const phaseButtons = copy.phases.map((phase, index) => `
+    <button type="button" class="enso-sst-phase" data-enso-phase="${index}" aria-pressed="${index === 0}">${escapeHtml(phase.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .enso-sst { display:grid; gap:1rem; min-height:26rem; padding:clamp(1rem,4vw,2.25rem); color:${tokens.ink}; background:linear-gradient(150deg,color-mix(in srgb,${tokens.ocean} 10%,${tokens.surface}),${tokens.surface} 60%,color-mix(in srgb,${tokens.coral} 8%,${tokens.surface})); }
+      .enso-sst-board { position:relative; min-height:14rem; overflow:hidden; border:1px solid ${tokens.line}; border-radius:1.25rem; background:
+        linear-gradient(90deg,
+          color-mix(in srgb,${tokens.warm} calc(var(--enso-west, 35) * 1%), ${tokens.ocean} calc((100 - var(--enso-west, 35)) * .45%)),
+          color-mix(in srgb,${tokens.coral} calc(var(--enso-east, 65) * 1%), ${tokens.ocean} calc((100 - var(--enso-east, 65)) * .4%))); }
+      .enso-sst-board::after { position:absolute; inset:18% 8%; border:1px dashed color-mix(in srgb,${tokens.surface} 55%,transparent); border-radius:999px; content:""; opacity:.55; }
+      .enso-sst-label { position:absolute; z-index:2; margin:0; padding:.3rem .55rem; border-radius:999px; color:${tokens.surface}; background:color-mix(in srgb,${tokens.ink} 45%,transparent); font-size:.7rem; font-weight:850; }
+      .enso-sst-basin { top:.8rem; left:50%; transform:translateX(-50%); }
+      .enso-sst-west { left:.8rem; bottom:.8rem; }
+      .enso-sst-east { right:.8rem; bottom:.8rem; }
+      .enso-sst-hint { position:absolute; z-index:2; top:42%; max-width:9rem; padding:.45rem .6rem; border-radius:.7rem; background:color-mix(in srgb,${tokens.surface} 88%,transparent); font-size:.7rem; font-weight:800; line-height:1.35; }
+      .enso-sst-hint-west { left:8%; }
+      .enso-sst-hint-east { right:8%; text-align:right; }
+      .enso-sst-pulse { position:absolute; top:50%; left:var(--enso-pulse, 68%); width:1.1rem; height:1.1rem; border-radius:50%; background:${tokens.surface}; box-shadow:0 0 0 .35rem color-mix(in srgb,${tokens.warm} 35%,transparent); transform:translate(-50%,-50%); animation:enso-sst-breathe 1.6s ease-in-out infinite; }
+      .enso-sst-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .enso-sst-phase { flex:1 1 7rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .enso-sst-phase[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .enso-sst-phase:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .enso-sst-readout { display:grid; grid-template-columns:auto 1fr; gap:.75rem; align-items:center; padding:.9rem 1rem; border:1px solid ${tokens.line}; border-radius:.9rem; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); }
+      .enso-sst-readout b { color:${tokens.ocean}; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; }
+      .enso-sst-readout p { margin:0; color:${tokens.muted}; line-height:1.5; }
+      .enso-sst-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .enso-sst.is-paused .enso-sst-pulse { animation-play-state:paused; }
+      @keyframes enso-sst-breathe { 50% { transform:translate(-50%,-50%) scale(1.35); opacity:.7; } }
+      @media (max-width:560px) { .enso-sst-hint { max-width:7.2rem; font-size:.64rem; } }
+    </style>
+    <div class="enso-sst${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="enso-sst-board" data-enso-board>
+        <p class="enso-sst-label enso-sst-basin">${escapeHtml(copy.basinLabel)}</p>
+        <p class="enso-sst-label enso-sst-west">${escapeHtml(copy.westLabel)}</p>
+        <p class="enso-sst-label enso-sst-east">${escapeHtml(copy.eastLabel)}</p>
+        <div class="enso-sst-hint enso-sst-hint-west" data-enso-west-hint></div>
+        <div class="enso-sst-hint enso-sst-hint-east" data-enso-east-hint></div>
+        <span class="enso-sst-pulse" aria-hidden="true"></span>
+      </div>
+      <div class="enso-sst-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${phaseButtons}</div>
+      <div class="enso-sst-readout" aria-live="polite"><b>${escapeHtml(copy.anomalyLabel)}</b><p data-enso-status></p></div>
+      <p class="enso-sst-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".enso-sst");
+  const board = root.querySelector("[data-enso-board]");
+  const westHint = root.querySelector("[data-enso-west-hint]");
+  const eastHint = root.querySelector("[data-enso-east-hint]");
+  const status = root.querySelector("[data-enso-status]");
+  const buttons = [...root.querySelectorAll("[data-enso-phase]")];
+  const profiles = {
+    "el-nino": { west: 28, east: 88, pulse: "72%" },
+    neutral: { west: 48, east: 48, pulse: "50%" },
+    "la-nina": { west: 82, east: 22, pulse: "28%" }
+  };
+  const select = (index, speak = false) => {
+    const phase = copy.phases[index];
+    const profile = profiles[phase.key] || profiles.neutral;
+    board.style.setProperty("--enso-west", String(profile.west));
+    board.style.setProperty("--enso-east", String(profile.east));
+    board.style.setProperty("--enso-pulse", profile.pulse);
+    westHint.textContent = phase.warmHint;
+    eastHint.textContent = phase.coolHint;
+    if (phase.key === "la-nina") {
+      westHint.textContent = phase.warmHint;
+      eastHint.textContent = phase.coolHint;
+    }
+    status.textContent = phase.status;
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    if (speak) announce(phase.status);
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.ensoPhase), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("enso-rain", ({ root, copy, motion, tokens, announce }) => {
+  const phaseButtons = copy.phases.map((phase, index) => `
+    <button type="button" class="enso-rain-phase" data-enso-rain-phase="${index}" aria-pressed="${index === 0}">${escapeHtml(phase.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .enso-rain { display:grid; gap:1rem; min-height:26rem; padding:clamp(1rem,4vw,2.25rem); color:${tokens.ink}; background:linear-gradient(145deg,color-mix(in srgb,${tokens.ocean} 11%,${tokens.surface}),${tokens.surface} 58%,color-mix(in srgb,${tokens.warm} 9%,${tokens.surface})); }
+      .enso-rain-map { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; min-height:14rem; }
+      .enso-rain-region { display:grid; gap:.35rem; align-content:start; min-height:6.5rem; padding:.9rem; border:1px solid ${tokens.line}; border-radius:1rem; background:${tokens.surface}; transition:background .2s ease, border-color .2s ease; }
+      .enso-rain-region[data-state="wet"] { border-color:${tokens.ocean}; background:color-mix(in srgb,${tokens.ocean} 14%,${tokens.surface}); }
+      .enso-rain-region[data-state="dry"] { border-color:${tokens.coral}; background:color-mix(in srgb,${tokens.coral} 12%,${tokens.surface}); }
+      .enso-rain-region strong { font-size:.88rem; }
+      .enso-rain-region span { color:${tokens.muted}; font-size:.72rem; }
+      .enso-rain-badge { justify-self:start; padding:.2rem .55rem; border-radius:999px; font-size:.66rem; font-weight:850; }
+      .enso-rain-region[data-state="wet"] .enso-rain-badge { color:${tokens.surface}; background:${tokens.ocean}; }
+      .enso-rain-region[data-state="dry"] .enso-rain-badge { color:${tokens.surface}; background:${tokens.coral}; }
+      .enso-rain-drop { width:.55rem; height:.55rem; border-radius:50% 50% 45% 45%; background:${tokens.ocean}; opacity:0; animation:enso-rain-fall 1.3s linear infinite; }
+      .enso-rain-region[data-state="wet"] .enso-rain-drop { opacity:.85; }
+      .enso-rain-region[data-state="dry"] .enso-rain-drop { background:${tokens.coral}; opacity:.35; animation:none; transform:scale(.7); }
+      .enso-rain-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .enso-rain-phase { flex:1 1 10rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .enso-rain-phase[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .enso-rain-phase:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .enso-rain-status { min-height:4.8rem; margin:0; padding:1rem; border-left:.28rem solid ${tokens.ocean}; border-radius:.75rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .enso-rain-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .enso-rain.is-paused .enso-rain-drop { animation-play-state:paused; }
+      @keyframes enso-rain-fall { from { transform:translateY(-.4rem); } to { transform:translateY(1.1rem); opacity:.15; } }
+      @media (max-width:560px) { .enso-rain-map { grid-template-columns:1fr; } }
+    </style>
+    <div class="enso-rain${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="enso-rain-map" data-enso-rain-map></div>
+      <div class="enso-rain-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${phaseButtons}</div>
+      <p class="enso-rain-status" data-enso-rain-status aria-live="polite"></p>
+      <p class="enso-rain-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".enso-rain");
+  const map = root.querySelector("[data-enso-rain-map]");
+  const status = root.querySelector("[data-enso-rain-status]");
+  const buttons = [...root.querySelectorAll("[data-enso-rain-phase]")];
+  const select = (index, speak = false) => {
+    const phase = copy.phases[index];
+    map.innerHTML = phase.regions.map((region) => `
+      <article class="enso-rain-region" data-state="${escapeHtml(region.state)}">
+        <strong>${escapeHtml(region.name)}</strong>
+        <span class="enso-rain-badge">${escapeHtml(region.state === "wet" ? copy.wetLabel : copy.dryLabel)}</span>
+        <span>${escapeHtml(region.note)}</span>
+        <span class="enso-rain-drop" aria-hidden="true"></span>
+      </article>`).join("");
+    status.textContent = phase.status;
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    if (speak) announce(phase.status);
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.ensoRainPhase), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("enso-crops", ({ root, copy, motion, tokens, announce }) => {
+  const cropCards = copy.crops.map((crop) => `
+    <article class="enso-crop-card" data-enso-crop="${escapeHtml(crop.id)}">
+      <strong>${escapeHtml(crop.name)}</strong>
+      <div class="enso-crop-meter" aria-hidden="true"><i data-enso-yield-bar></i></div>
+      <div class="enso-crop-meter enso-crop-meter-logistics" aria-hidden="true"><i data-enso-logistics-bar></i></div>
+    </article>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .enso-crops { display:grid; gap:1rem; min-height:26rem; padding:clamp(1rem,4vw,2.25rem); color:${tokens.ink}; background:linear-gradient(150deg,color-mix(in srgb,${tokens.warm} 10%,${tokens.surface}),${tokens.surface} 58%,color-mix(in srgb,${tokens.ocean} 10%,${tokens.surface})); }
+      .enso-crop-panel { display:grid; gap:.85rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1.1rem; background:color-mix(in srgb,${tokens.paper} 38%,${tokens.surface}); }
+      .enso-crop-panel label { font-weight:850; }
+      .enso-crop-panel input { width:100%; accent-color:${tokens.ocean}; }
+      .enso-crop-range { display:flex; justify-content:space-between; color:${tokens.muted}; font-size:.72rem; }
+      .enso-crop-metrics { display:grid; grid-template-columns:1fr 1fr; gap:.65rem; }
+      .enso-crop-metric { padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; background:${tokens.surface}; }
+      .enso-crop-metric small { display:block; margin-bottom:.25rem; color:${tokens.muted}; font-size:.66rem; }
+      .enso-crop-metric output { font-size:1.2rem; font-weight:900; color:${tokens.ocean}; }
+      .enso-crop-basket { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem; }
+      .enso-crop-card { display:grid; gap:.45rem; padding:.8rem; border:1px solid ${tokens.line}; border-radius:.85rem; background:${tokens.surface}; }
+      .enso-crop-card strong { font-size:.82rem; }
+      .enso-crop-meter { height:.55rem; overflow:hidden; border-radius:999px; background:color-mix(in srgb,${tokens.line} 70%,${tokens.surface}); }
+      .enso-crop-meter i { display:block; height:100%; width:calc(var(--enso-fill, 20) * 1%); border-radius:inherit; background:${tokens.coral}; transition:width .2s ease; }
+      .enso-crop-meter-logistics i { background:${tokens.warm}; }
+      .enso-crop-status { min-height:4.5rem; margin:0; padding:1rem; border-left:.28rem solid ${tokens.warm}; border-radius:.75rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .enso-crop-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .enso-crops.is-paused .enso-crop-meter i { transition:none; }
+      @media (max-width:560px) { .enso-crop-basket, .enso-crop-metrics { grid-template-columns:1fr; } }
+    </style>
+    <div class="enso-crops${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="enso-crop-panel">
+        <label for="enso-crop-stress">${escapeHtml(copy.controlLabel)}</label>
+        <input id="enso-crop-stress" type="range" min="0" max="100" value="35" aria-label="${escapeHtml(copy.controlLabel)}">
+        <div class="enso-crop-range"><span>${escapeHtml(copy.lowLabel)}</span><span>${escapeHtml(copy.highLabel)}</span></div>
+        <div class="enso-crop-metrics">
+          <div class="enso-crop-metric"><small>${escapeHtml(copy.yieldLabel)}</small><output data-enso-yield></output></div>
+          <div class="enso-crop-metric"><small>${escapeHtml(copy.logisticsLabel)}</small><output data-enso-logistics></output></div>
+        </div>
+      </div>
+      <div>
+        <p style="margin:0 0 .55rem; font-weight:850;">${escapeHtml(copy.basketLabel)}</p>
+        <div class="enso-crop-basket">${cropCards}</div>
+      </div>
+      <p class="enso-crop-status" data-enso-crop-status aria-live="polite"></p>
+      <p class="enso-crop-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".enso-crops");
+  const range = root.querySelector("#enso-crop-stress");
+  const yieldOut = root.querySelector("[data-enso-yield]");
+  const logisticsOut = root.querySelector("[data-enso-logistics]");
+  const status = root.querySelector("[data-enso-crop-status]");
+  const cards = [...root.querySelectorAll("[data-enso-crop]")];
+  let lastBand = "";
+  const update = (speak = false) => {
+    const value = Number(range.value);
+    const yieldRisk = Math.round(18 + value * 0.72);
+    const logisticsRisk = Math.round(12 + value * 0.58 + (value > 70 ? 10 : 0));
+    yieldOut.textContent = `${yieldRisk}%`;
+    logisticsOut.textContent = `${logisticsRisk}%`;
+    cards.forEach((card, index) => {
+      const bias = (index % 3) * 4;
+      card.querySelector("[data-enso-yield-bar]").style.setProperty("--enso-fill", String(Math.min(100, yieldRisk + bias)));
+      card.querySelector("[data-enso-logistics-bar]").style.setProperty("--enso-fill", String(Math.min(100, logisticsRisk + (2 - index % 3) * 5)));
+    });
+    const band = value < 34 ? "low" : value < 68 ? "medium" : "high";
+    const message = band === "low" ? copy.statusLow : band === "medium" ? copy.statusMedium : copy.statusHigh;
+    status.textContent = message;
+    if (speak && band !== lastBand) announce(message);
+    lastBand = band;
+  };
+  range.addEventListener("input", () => update(true));
+  update();
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => { range.value = "35"; lastBand = ""; update(); },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("enso-prices", ({ root, copy, motion, tokens, announce }) => {
+  const stageButtons = copy.stages.map((stage, index) => `
+    <button type="button" class="enso-price-stage" data-enso-price-stage="${index}" aria-pressed="${index === 0}">${escapeHtml(stage.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .enso-prices { display:grid; gap:1rem; min-height:26rem; padding:clamp(1rem,4vw,2.25rem); color:${tokens.ink}; background:linear-gradient(145deg,color-mix(in srgb,${tokens.coral} 9%,${tokens.surface}),${tokens.surface} 55%,color-mix(in srgb,${tokens.ocean} 10%,${tokens.surface})); }
+      .enso-price-sliders { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+      .enso-price-sliders label { display:grid; gap:.45rem; padding:.85rem; border:1px solid ${tokens.line}; border-radius:.9rem; background:${tokens.surface}; font-weight:850; }
+      .enso-price-sliders input { width:100%; accent-color:${tokens.coral}; }
+      .enso-price-pipeline { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.55rem; }
+      .enso-price-node { display:grid; gap:.35rem; min-height:7rem; padding:.8rem; border:1px solid ${tokens.line}; border-radius:.9rem; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); }
+      .enso-price-node.is-active { border-color:${tokens.coral}; box-shadow:inset 0 0 0 1px ${tokens.coral}; }
+      .enso-price-node strong { font-size:.82rem; }
+      .enso-price-node span { color:${tokens.muted}; font-size:.7rem; line-height:1.4; }
+      .enso-price-bar { height:.55rem; overflow:hidden; border-radius:999px; background:color-mix(in srgb,${tokens.line} 70%,${tokens.surface}); }
+      .enso-price-bar i { display:block; height:100%; width:calc(var(--enso-level, 20) * 1%); background:linear-gradient(90deg,${tokens.ocean},${tokens.coral}); transition:width .25s ease; }
+      .enso-price-metrics { display:grid; grid-template-columns:1fr 1fr; gap:.65rem; }
+      .enso-price-metric { padding:.8rem; border:1px solid ${tokens.line}; border-radius:.8rem; background:${tokens.surface}; text-align:center; }
+      .enso-price-metric small { display:block; margin-bottom:.25rem; color:${tokens.muted}; font-size:.66rem; }
+      .enso-price-metric output { font-size:1.25rem; font-weight:900; color:${tokens.coral}; }
+      .enso-price-controls { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.5rem; }
+      .enso-price-stage { padding:.7rem .45rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-size:.74rem; font-weight:800; cursor:pointer; }
+      .enso-price-stage[aria-pressed="true"] { border-color:${tokens.coral}; box-shadow:inset 0 0 0 1px ${tokens.coral}; }
+      .enso-price-stage:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .enso-price-status { min-height:4.2rem; margin:0; padding:1rem; border-left:.28rem solid ${tokens.coral}; border-radius:.75rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .enso-price-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .enso-prices.is-paused .enso-price-bar i { transition:none; }
+      @media (max-width:720px) {
+        .enso-price-sliders, .enso-price-metrics, .enso-price-pipeline, .enso-price-controls { grid-template-columns:1fr 1fr; }
+      }
+      @media (max-width:520px) {
+        .enso-price-pipeline, .enso-price-controls { grid-template-columns:1fr; }
+      }
+    </style>
+    <div class="enso-prices${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="enso-price-sliders">
+        <label>${escapeHtml(copy.shockLabel)}<input data-enso-shock type="range" min="10" max="100" value="55" aria-label="${escapeHtml(copy.shockLabel)}"></label>
+        <label>${escapeHtml(copy.inventoryLabel)}<input data-enso-inventory type="range" min="0" max="100" value="40" aria-label="${escapeHtml(copy.inventoryLabel)}"></label>
+      </div>
+      <div class="enso-price-pipeline" data-enso-pipeline>
+        ${copy.stages.map((stage, index) => `
+          <article class="enso-price-node${index === 0 ? " is-active" : ""}" data-enso-price-node="${index}">
+            <strong>${escapeHtml(stage.label)}</strong>
+            <span data-enso-price-detail>${escapeHtml(stage.detail)}</span>
+            <div class="enso-price-bar" aria-hidden="true"><i data-enso-price-bar></i></div>
+          </article>`).join("")}
+      </div>
+      <div class="enso-price-metrics">
+        <div class="enso-price-metric"><small>${escapeHtml(copy.wholesaleLabel)}</small><output data-enso-wholesale></output></div>
+        <div class="enso-price-metric"><small>${escapeHtml(copy.retailLabel)}</small><output data-enso-retail></output></div>
+      </div>
+      <div class="enso-price-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${stageButtons}</div>
+      <p class="enso-price-status" data-enso-price-status aria-live="polite"></p>
+      <p class="enso-price-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".enso-prices");
+  const shock = root.querySelector("[data-enso-shock]");
+  const inventory = root.querySelector("[data-enso-inventory]");
+  const wholesale = root.querySelector("[data-enso-wholesale]");
+  const retail = root.querySelector("[data-enso-retail]");
+  const status = root.querySelector("[data-enso-price-status]");
+  const buttons = [...root.querySelectorAll("[data-enso-price-stage]")];
+  const nodes = [...root.querySelectorAll("[data-enso-price-node]")];
+  let stageIndex = 0;
+  const formatIndex = (value) => `${Math.round(value)}`;
+  const selectStage = (index, speak = false) => {
+    stageIndex = index;
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    nodes.forEach((node, nodeIndex) => node.classList.toggle("is-active", nodeIndex === index));
+    if (speak) announce(copy.stages[index].detail);
+    render();
+  };
+  const render = () => {
+    const shockValue = Number(shock.value);
+    const inventoryValue = Number(inventory.value);
+    const buffer = inventoryValue / 100;
+    const wholesaleValue = Math.round(100 + shockValue * (0.85 - buffer * 0.45));
+    const lag = 0.55 + stageIndex * 0.12;
+    const retailValue = Math.round(100 + (wholesaleValue - 100) * lag * (0.9 - buffer * 0.25));
+    wholesale.textContent = formatIndex(wholesaleValue);
+    retail.textContent = formatIndex(retailValue);
+    nodes.forEach((node, index) => {
+      const level = Math.min(100, Math.round((shockValue * (0.35 + index * 0.18)) * (1 - buffer * 0.35)));
+      node.querySelector("[data-enso-price-bar]").style.setProperty("--enso-level", String(level));
+    });
+    status.textContent = copy.statusTemplate
+      .replace("{shock}", String(shockValue))
+      .replace("{inventory}", String(inventoryValue))
+      .replace("{wholesale}", formatIndex(wholesaleValue))
+      .replace("{retail}", formatIndex(retailValue));
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => selectStage(Number(button.dataset.ensoPriceStage), true)));
+  shock.addEventListener("input", render);
+  inventory.addEventListener("input", render);
+  selectStage(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => { shock.value = "55"; inventory.value = "40"; selectStage(0); },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("enso-not-typhoon", ({ root, copy, motion, tokens, announce }) => {
+  const modeButtons = copy.modes.map((mode, index) => `
+    <button type="button" class="enso-nt-mode" data-enso-nt-mode="${index}" aria-pressed="${index === 1}">${escapeHtml(mode.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .enso-nt { display:grid; gap:1rem; min-height:26rem; padding:clamp(1rem,4vw,2.25rem); color:${tokens.ink}; background:linear-gradient(145deg,color-mix(in srgb,${tokens.ocean} 10%,${tokens.surface}),${tokens.surface} 55%,color-mix(in srgb,${tokens.warm} 11%,${tokens.surface})); }
+      .enso-nt-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .enso-nt-mode { flex:1 1 10rem; padding:.8rem; border:1px solid ${tokens.line}; border-radius:.85rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:850; cursor:pointer; }
+      .enso-nt-mode[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .enso-nt-mode:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .enso-nt-board { display:grid; gap:.85rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1.15rem; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); }
+      .enso-nt-board h3 { margin:0; font-size:1rem; }
+      .enso-nt-steps { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.55rem; }
+      .enso-nt-step { position:relative; min-height:5.5rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; background:${tokens.surface}; font-size:.78rem; font-weight:800; line-height:1.35; }
+      .enso-nt-step::after { position:absolute; top:50%; right:-.5rem; width:.55rem; height:.55rem; border-top:2px solid ${tokens.ocean}; border-right:2px solid ${tokens.ocean}; content:""; transform:translateY(-50%) rotate(45deg); opacity:.5; }
+      .enso-nt-step:last-child::after { display:none; }
+      .enso-nt-step.is-typhoon { border-color:${tokens.warm}; }
+      .enso-nt-step.is-enso { border-color:${tokens.ocean}; }
+      .enso-nt-pulse { width:.7rem; height:.7rem; margin-top:.55rem; border-radius:50%; background:${tokens.ocean}; animation:enso-nt-pulse 1.4s ease-in-out infinite; }
+      .enso-nt-board[data-mode="typhoon"] .enso-nt-pulse { background:${tokens.warm}; }
+      .enso-nt-status { min-height:4.2rem; margin:0; padding:1rem; border-left:.28rem solid ${tokens.ocean}; border-radius:.75rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .enso-nt-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .enso-nt.is-paused .enso-nt-pulse { animation-play-state:paused; }
+      @keyframes enso-nt-pulse { 50% { transform:scale(1.7); opacity:.4; } }
+      @media (max-width:720px) { .enso-nt-steps { grid-template-columns:repeat(2,minmax(0,1fr)); } .enso-nt-step::after { display:none; } }
+    </style>
+    <div class="enso-nt${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="enso-nt-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${modeButtons}</div>
+      <div class="enso-nt-board" data-enso-nt-board>
+        <h3 data-enso-nt-title></h3>
+        <div class="enso-nt-steps" data-enso-nt-steps></div>
+      </div>
+      <p class="enso-nt-status" data-enso-nt-status aria-live="polite"></p>
+      <p class="enso-nt-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".enso-nt");
+  const board = root.querySelector("[data-enso-nt-board]");
+  const title = root.querySelector("[data-enso-nt-title]");
+  const steps = root.querySelector("[data-enso-nt-steps]");
+  const status = root.querySelector("[data-enso-nt-status]");
+  const buttons = [...root.querySelectorAll("[data-enso-nt-mode]")];
+  const select = (index, speak = false) => {
+    const mode = copy.modes[index];
+    board.dataset.mode = mode.key;
+    title.textContent = mode.title;
+    steps.innerHTML = mode.steps.map((step) => `
+      <div class="enso-nt-step is-${escapeHtml(mode.key)}">${escapeHtml(step)}<div class="enso-nt-pulse" aria-hidden="true"></div></div>`).join("");
+    status.textContent = mode.status;
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    if (speak) announce(mode.status);
+  };
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.ensoNtMode), true)));
+  select(1);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(1),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+  </script>
+</body>
+</html>

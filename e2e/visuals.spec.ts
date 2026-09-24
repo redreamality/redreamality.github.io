@@ -5,12 +5,13 @@ test('English Visuals gallery contains the multilingual published works', async 
 
   expect(response?.status()).toBe(200);
   await expect(page.locator('h1')).toHaveText('Visuals');
-  await expect(page.locator('[data-visual-card]')).toHaveCount(4);
+  await expect(page.locator('[data-visual-card]')).toHaveCount(5);
+  await expect(page.getByRole('heading', { name: 'Why Pacific Warming Shows Up in Grocery Prices' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'How Price and Volume Work Together' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'How Air Conditioners Work' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'What Is Loop Engineering?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'How Typhoons Form' })).toBeVisible();
-  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(4);
+  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(5);
   await expect(page.getByText('Agent Architecture Showcase')).toHaveCount(0);
   await expect(page.getByText(/not available in this language/i)).toHaveCount(0);
 });
@@ -23,8 +24,8 @@ test('stale missing-language query cannot mark multilingual Typhoon as unavailab
 });
 
 for (const locale of [
-  { path: '/cn/visuals/', title: '可视化', work: '股市交易原理：量价关系' },
-  { path: '/ja/visuals/', title: 'ビジュアル', work: '株式取引の仕組み：価格と出来高' },
+  { path: '/cn/visuals/', title: '可视化', work: '太平洋变暖，为什么你家菜价先涨？' },
+  { path: '/ja/visuals/', title: 'ビジュアル', work: '太平洋が暖まると、なぜ食卓の値段が先に上がるのか' },
 ]) {
   test(`${locale.path} renders a localized Visuals gallery`, async ({ page }) => {
     const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
@@ -32,7 +33,7 @@ for (const locale of [
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toHaveText(locale.title);
     await expect(page.getByRole('heading', { name: locale.work })).toBeVisible();
-    await expect(page.locator('[data-visual-card]')).toHaveCount(4);
+    await expect(page.locator('[data-visual-card]')).toHaveCount(5);
   });
 }
 
@@ -53,6 +54,7 @@ for (const locale of [
     path: '/',
     sectionTitle: 'Visuals',
     works: [
+      ['enso-food-prices', 'Why Pacific Warming Shows Up in Grocery Prices', '/visuals/enso-food-prices/'],
       ['price-volume-relationship', 'How Price and Volume Work Together', '/visuals/price-volume-relationship/'],
       ['air-conditioner', 'How Air Conditioners Work', '/visuals/air-conditioner/'],
       ['loop-engineering', 'What Is Loop Engineering?', '/visuals/loop-engineering/'],
@@ -66,6 +68,7 @@ for (const locale of [
     path: '/cn/',
     sectionTitle: '可视化',
     works: [
+      ['enso-food-prices', '太平洋变暖，为什么你家菜价先涨？', '/cn/visuals/enso-food-prices/'],
       ['price-volume-relationship', '股市交易原理：量价关系', '/cn/visuals/price-volume-relationship/'],
       ['air-conditioner', '空调的工作原理', '/cn/visuals/air-conditioner/'],
       ['loop-engineering', '什么是 Loop Engineering？', '/cn/visuals/loop-engineering/'],
@@ -79,6 +82,7 @@ for (const locale of [
     path: '/ja/',
     sectionTitle: 'ビジュアル',
     works: [
+      ['enso-food-prices', '太平洋が暖まると、なぜ食卓の値段が先に上がるのか', '/ja/visuals/enso-food-prices/'],
       ['price-volume-relationship', '株式取引の仕組み：価格と出来高', '/ja/visuals/price-volume-relationship/'],
       ['air-conditioner', 'エアコンの仕組み', '/ja/visuals/air-conditioner/'],
       ['loop-engineering', 'Loop Engineering とは何か？', '/ja/visuals/loop-engineering/'],

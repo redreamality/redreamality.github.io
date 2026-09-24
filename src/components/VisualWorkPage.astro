@@ -6,6 +6,8 @@ import AirConditionerVisual from './AirConditionerVisual.astro';
 import LoopEngineeringVisual from './LoopEngineeringVisual.astro';
 import PriceVolumeRelationshipVisual from './PriceVolumeRelationshipVisual.astro';
 import TyphoonVisual from './TyphoonVisual.astro';
+import EnsoFoodPricesVisual from './EnsoFoodPricesVisual.astro';
+import PrisonersDilemmaVisual from './PrisonersDilemmaVisual.astro';
 
 interface Props {
   lang: Language;
@@ -20,6 +22,8 @@ const artifactComponents = {
   'loop-engineering': LoopEngineeringVisual,
   'price-volume-relationship': PriceVolumeRelationshipVisual,
   'typhoon': TyphoonVisual,
+  'enso-food-prices': EnsoFoodPricesVisual,
+  'prisoners-dilemma': PrisonersDilemmaVisual,
 } as const;
 const VisualComponent = artifactId ? artifactComponents[artifactId as keyof typeof artifactComponents] : undefined;
 

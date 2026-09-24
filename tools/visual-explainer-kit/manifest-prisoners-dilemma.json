@@ -1,0 +1,1371 @@
+{
+  "slug": "prisoners-dilemma",
+  "renderer": "interactive-explainer",
+  "structure": {
+    "overview": {
+      "demo": "pd-overview"
+    },
+    "steps": [
+      {
+        "id": "payoff-matrix",
+        "demo": "pd-matrix"
+      },
+      {
+        "id": "single-rational",
+        "demo": "pd-choice"
+      },
+      {
+        "id": "mutual-defect",
+        "demo": "pd-nash"
+      },
+      {
+        "id": "collective-gap",
+        "demo": "pd-welfare"
+      },
+      {
+        "id": "repeated-game",
+        "demo": "pd-repeat"
+      }
+    ]
+  },
+  "locales": {
+    "en": {
+      "lang": "en",
+      "meta": {
+        "title": "Why two people who want less jail time both get more",
+        "description": "An interactive guide to the prisoner's dilemma: payoff matrices, dominant strategies, Nash mutual defection, the welfare gap, and how repeated games with punishment can protect cooperation."
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "Pause all motion",
+        "resumeAll": "Resume all motion",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset",
+        "waiting": "The visual will load when it enters the viewport.",
+        "loading": "Preparing the visual…",
+        "error": "The visual could not be displayed. Read the explanation above instead.",
+        "figureFallback": "Enable JavaScript to view this interactive explanation.",
+        "skipToContent": "Skip to content",
+        "languageNavigation": "Languages",
+        "overviewLabel": "Prisoner's dilemma overview",
+        "stepLabel": "Step"
+      },
+      "hero": {
+        "eyebrow": "GAME THEORY / INCENTIVES / NASH",
+        "title": "Why two people who want less jail time both get more",
+        "subtitle": "Each prisoner wants a shorter sentence. When both reason privately, they can still land in a cell that is worse for both than mutual silence—unless repetition or credible punishment rewires the game."
+      },
+      "overview": {
+        "title": "Two rational choices can lock both into a worse cell",
+        "body": [
+          "The prisoner's dilemma is a 2×2 game: each player independently chooses Cooperate or Defect. Payoffs here are years in jail—lower is better for each person.",
+          "When both stay silent (Cooperate), each gets a short sentence. When one confesses (Defect) while the other stays silent, the confessor walks free and the silent one gets the longest term. When both confess, both get medium terms—worse for the pair than mutual silence."
+        ],
+        "plainLanguage": {
+          "label": "Plainly",
+          "body": "What looks safest for you alone can be worse for both of you together."
+        },
+        "keyPointsLabel": "Keep these three ideas",
+        "keyPoints": [
+          {
+            "title": "Payoff matrix first",
+            "body": "The whole story lives in four cells: CC, CD, DC, DD."
+          },
+          {
+            "title": "Dominant move",
+            "body": "Given the other's choice, Defect often shortens your own sentence."
+          },
+          {
+            "title": "Nash ≠ social best",
+            "body": "Mutual Defect can be stable even though mutual Cooperate is better for both."
+          }
+        ],
+        "demoTitle": "Tour the four cells of the dilemma",
+        "copy": {
+          "ariaLabel": "Interactive prisoner's dilemma payoff matrix overview",
+          "caption": "Select a cell to see each player's years in jail and whether the outcome is stable or jointly better.",
+          "controlLabel": "Inspect an outcome",
+          "youLabel": "You",
+          "otherLabel": "Partner",
+          "coopLabel": "Cooperate",
+          "defectLabel": "Defect",
+          "yearsUnit": "yr",
+          "cells": [
+            {
+              "key": "cc",
+              "label": "Both cooperate",
+              "you": 1,
+              "other": 1,
+              "state": "Jointly best",
+              "detail": "Mutual silence: short terms for both. Fragile if either can profit by switching alone."
+            },
+            {
+              "key": "dc",
+              "label": "You defect",
+              "you": 0,
+              "other": 3,
+              "state": "Temptation",
+              "detail": "You confess; partner stays silent. You walk free; they take the sucker's long sentence."
+            },
+            {
+              "key": "cd",
+              "label": "Partner defects",
+              "you": 3,
+              "other": 0,
+              "state": "Sucker",
+              "detail": "You stay silent; partner confesses. You eat the long sentence; they walk free."
+            },
+            {
+              "key": "dd",
+              "label": "Both defect",
+              "you": 2,
+              "other": 2,
+              "state": "Nash trap",
+              "detail": "Mutual confession: medium terms. Stable once both reason the same way—but worse than CC for both."
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "id": "payoff-matrix",
+          "number": "01",
+          "title": "Read the payoff matrix before blaming anyone",
+          "body": [
+            "Rows are your move; columns are your partner's. Each cell shows (your years, partner's years). The numbers invent a crisp conflict: Defect is privately tempting, Cooperate is jointly kinder.",
+            "Nothing mystical happens yet—only a map of incentives. Later steps ask what a self-interested chooser does when they cannot bind the other player's hand."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Four boxes. Two choices each. The numbers set the trap."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Lower is better",
+              "body": "These payoffs are jail years, not utility points."
+            },
+            {
+              "title": "Asymmetry of temptation",
+              "body": "Unilateral Defect beats Cooperate against a cooperator."
+            },
+            {
+              "title": "Symmetric trap",
+              "body": "Against a defector, Defect still hurts you less than Cooperate."
+            }
+          ],
+          "demoTitle": "Highlight cells in the 2×2 matrix",
+          "copy": {
+            "ariaLabel": "Prisoner's dilemma payoff matrix with selectable cells",
+            "caption": "Tap a cell to read the sentence pair. Notice how Defect improves your private outcome against either partner move.",
+            "controlLabel": "Select a payoff cell",
+            "rowLabel": "Your move",
+            "colLabel": "Partner's move",
+            "coopLabel": "Cooperate",
+            "defectLabel": "Defect",
+            "youShort": "You",
+            "otherShort": "Them",
+            "yearsUnit": "yr",
+            "cells": [
+              {
+                "key": "cc",
+                "you": 1,
+                "other": 1,
+                "title": "Reward",
+                "detail": "Both silent → 1 year each. Best joint total."
+              },
+              {
+                "key": "dc",
+                "you": 0,
+                "other": 3,
+                "title": "Temptation / Sucker",
+                "detail": "You confess, they silent → 0 for you, 3 for them."
+              },
+              {
+                "key": "cd",
+                "you": 3,
+                "other": 0,
+                "title": "Sucker / Temptation",
+                "detail": "You silent, they confess → 3 for you, 0 for them."
+              },
+              {
+                "key": "dd",
+                "you": 2,
+                "other": 2,
+                "title": "Punishment",
+                "detail": "Both confess → 2 years each. Worse jointly than CC."
+              }
+            ]
+          }
+        },
+        {
+          "id": "single-rational",
+          "number": "02",
+          "title": "Fix the other's move—then pick what shortens your sentence",
+          "body": [
+            "Hold the partner's choice fixed and compare your two options. If they Cooperate, Defect cuts your term from 1 to 0. If they Defect, Defect cuts it from 3 to 2.",
+            "That is a dominant strategy: whatever they do, Defect privately beats Cooperate. Rationality here means 'minimize my years,' not 'maximize our joint calm.'"
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Against either partner move, confessing looks safer for you alone."
+          },
+          "keyPointsLabel": "What changes here",
+          "keyPoints": [
+            {
+              "title": "Conditional comparison",
+              "body": "Dominance is checked column by column (or row by row)."
+            },
+            {
+              "title": "No mind-reading required",
+              "body": "You do not need to know their move to prefer Defect."
+            },
+            {
+              "title": "Still one-shot",
+              "body": "This step is a single round with no future punishment."
+            }
+          ],
+          "demoTitle": "Choose Cooperate or Defect given the partner",
+          "copy": {
+            "ariaLabel": "Choose cooperate or defect given the partner's fixed move",
+            "caption": "Set the partner's move, then pick yours. The readout shows your years and whether Defect dominates.",
+            "partnerControlLabel": "Partner's move",
+            "yourControlLabel": "Your move",
+            "coopLabel": "Cooperate",
+            "defectLabel": "Defect",
+            "yearsLabel": "Your years",
+            "partnerYearsLabel": "Partner years",
+            "yearsUnit": "yr",
+            "statusCooperateVsC": "They stay silent. If you also stay silent you serve 1 year; if you confess you serve 0. Defect wins for you.",
+            "statusDefectVsC": "You took the temptation payoff: 0 years while they serve 3.",
+            "statusCooperateVsD": "They confess. Staying silent costs you 3 years; confessing costs 2. Defect still wins for you.",
+            "statusDefectVsD": "Both confess: 2 years each. Privately better for you than being the sucker."
+          }
+        },
+        {
+          "id": "mutual-defect",
+          "number": "03",
+          "title": "When both reason the same way, they meet in the worse cell",
+          "body": [
+            "If Defect is dominant for you and for them, the predicted one-shot outcome is mutual Defect: 2 years each. Neither player wants to switch alone—switching to Cooperate would raise your term from 2 to 3.",
+            "That is a Nash equilibrium: a pair of strategies where no one benefits from a unilateral change. Stability is not the same as joint happiness."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Two smart choosers can land on a cell neither would pick if they could bind each other."
+          },
+          "keyPointsLabel": "What changes here",
+          "keyPoints": [
+            {
+              "title": "Nash = no unilateral escape",
+              "body": "From DD, a lone switch to Cooperate hurts the switcher."
+            },
+            {
+              "title": "CC is unstable alone",
+              "body": "From CC, a lone Defect pays the tempter—so CC needs trust or enforcement."
+            },
+            {
+              "title": "Symmetric reasoning",
+              "body": "The trap tightens when both use the same dominance logic."
+            }
+          ],
+          "demoTitle": "Watch both players tip toward Defect",
+          "copy": {
+            "ariaLabel": "Animation of both players converging on mutual defection",
+            "caption": "Step through how each player's best reply pushes the pair from hope of CC into the DD Nash cell.",
+            "controlLabel": "Advance the reasoning",
+            "youLabel": "You",
+            "otherLabel": "Partner",
+            "coopLabel": "C",
+            "defectLabel": "D",
+            "yearsUnit": "yr",
+            "stages": [
+              {
+                "label": "Hope CC",
+                "youMove": "C",
+                "otherMove": "C",
+                "youYears": 1,
+                "otherYears": 1,
+                "detail": "If both could commit to silence, each serves only 1 year."
+              },
+              {
+                "label": "Your temptation",
+                "youMove": "D",
+                "otherMove": "C",
+                "youYears": 0,
+                "otherYears": 3,
+                "detail": "Holding them at C, you shorten your sentence by Defecting."
+              },
+              {
+                "label": "Their reply",
+                "youMove": "D",
+                "otherMove": "D",
+                "youYears": 2,
+                "otherYears": 2,
+                "detail": "They apply the same logic. Best replies meet at DD."
+              },
+              {
+                "label": "Locked Nash",
+                "youMove": "D",
+                "otherMove": "D",
+                "youYears": 2,
+                "otherYears": 2,
+                "detail": "Neither benefits from switching alone. The equilibrium holds—and both are worse than at CC."
+              }
+            ]
+          }
+        },
+        {
+          "id": "collective-gap",
+          "number": "04",
+          "title": "Add the years: the stable cell is not the kindest total",
+          "body": [
+            "Sum both sentences. CC totals 2 years; DD totals 4. The Nash outcome wastes two extra years of freedom that mutual silence would have preserved.",
+            "This is the system's punchline: individually rational best replies can stack into a collectively worse ledger. The gap is not a math error—it is the conflict between private and joint objectives."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "What each prefers privately adds up to more jail time than what they would prefer together."
+          },
+          "keyPointsLabel": "What changes here",
+          "keyPoints": [
+            {
+              "title": "Welfare ≠ Nash",
+              "body": "Joint total years ranks CC above DD even though DD is stable."
+            },
+            {
+              "title": "Pareto idea",
+              "body": "Moving from DD to CC can help both without hurting either."
+            },
+            {
+              "title": "Needs a mechanism",
+              "body": "Getting to CC usually needs commitment, reputation, or punishment—not wishful thinking."
+            }
+          ],
+          "demoTitle": "Compare joint totals for CC vs DD",
+          "copy": {
+            "ariaLabel": "Compare joint jail years for mutual cooperate versus mutual defect",
+            "caption": "Toggle between the jointly best cell and the Nash cell. Watch the summed years diverge.",
+            "controlLabel": "Compare outcomes",
+            "ccLabel": "Both cooperate",
+            "ddLabel": "Both defect (Nash)",
+            "youLabel": "You",
+            "otherLabel": "Partner",
+            "totalLabel": "Joint years",
+            "gapLabel": "Extra years vs CC",
+            "yearsUnit": "yr",
+            "ccDetail": "Joint total 2 years. Best for the pair—but each has a private incentive to sneak to Defect.",
+            "ddDetail": "Joint total 4 years. Stable best replies—but two extra years of shared loss versus CC."
+          }
+        },
+        {
+          "id": "repeated-game",
+          "number": "05",
+          "title": "Repeat the game—and credible punishment can protect Cooperate",
+          "body": [
+            "In a one-shot game, Defect dominates. In a repeated game with a future, strategies like tit-for-tat (copy the other's last move) or grim trigger (punish forever after a Defect) can make Cooperate incentive-compatible.",
+            "The key is credibility: the threatened punishment must be something you would actually carry out, and the shadow of the future must be long enough that today's Temptation is not worth tomorrow's Punishment."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "If you will meet again—and can punish betrayal—silence can become the smarter private move."
+          },
+          "keyPointsLabel": "What changes here",
+          "keyPoints": [
+            {
+              "title": "Shadow of the future",
+              "body": "Continuation value can outweigh one-round temptation."
+            },
+            {
+              "title": "Tit-for-tat intuition",
+              "body": "Start nice; mirror the last move; keep punishment proportional."
+            },
+            {
+              "title": "Not magic",
+              "body": "Finite known endings, noise, and weak monitoring can reopen the trap."
+            }
+          ],
+          "demoTitle": "Toggle one-shot vs repeated-with-punishment",
+          "copy": {
+            "ariaLabel": "Compare one-shot defect dominance with repeated-game cooperation under punishment",
+            "caption": "Switch regimes. In the repeated regime, a punishment threat changes which private choice looks safer.",
+            "controlLabel": "Game regime",
+            "modes": [
+              {
+                "key": "oneshot",
+                "label": "One-shot",
+                "bestMove": "Defect",
+                "status": "No future round. Defect dominates; expected meeting point is DD.",
+                "youMove": "D",
+                "otherMove": "D",
+                "note": "Temptation today has no tomorrow cost."
+              },
+              {
+                "key": "tft",
+                "label": "Tit-for-tat",
+                "bestMove": "Cooperate",
+                "status": "Partner mirrors your last move. Defecting once buys a short gain, then mirrored punishment.",
+                "youMove": "C",
+                "otherMove": "C",
+                "note": "Nice, retaliatory, forgiving—classic folk theorem intuition."
+              },
+              {
+                "key": "grim",
+                "label": "Grim trigger",
+                "bestMove": "Cooperate",
+                "status": "Any Defect triggers permanent mutual Defect afterward. The threat can sustain CC if the future matters enough.",
+                "youMove": "C",
+                "otherMove": "C",
+                "note": "Harsh but simple commitment technology."
+              }
+            ],
+            "bestMoveLabel": "Privately safer move",
+            "yearsUnit": "yr",
+            "coopLabel": "Cooperate",
+            "defectLabel": "Defect",
+            "youLabel": "You",
+            "otherLabel": "Partner"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "Put the system back together",
+        "title": "Private best replies can stack into a shared loss—unless a future (or a rule) rewires the matrix",
+        "body": [
+          "The prisoner's dilemma is not a story about stupid players. It is a story about a payoff matrix where Defect is privately safer in a one-shot meeting, so mutual Defect becomes the stable prediction—even though mutual Cooperate wastes fewer years.",
+          "Mechanisms matter: repetition, reputation, contracts, and credible punishment change the effective game. When those are weak, the Nash trap remains."
+        ],
+        "checklistLabel": "Reader checklist",
+        "checklist": [
+          "Name the four cells and whose years appear where.",
+          "Check dominance: does Defect beat Cooperate against both partner moves?",
+          "Separate Nash stability from joint totals.",
+          "Ask whether the interaction is one-shot or repeated.",
+          "If Cooperation appears, identify the enforcement or shadow of the future that supports it."
+        ],
+        "scaleTitle": "Four moves of the trap",
+        "scaleItems": [
+          {
+            "term": "Matrix",
+            "question": "What are the numbers?",
+            "role": "Four cells define temptation, reward, sucker, and punishment."
+          },
+          {
+            "term": "Dominance",
+            "question": "What is privately safer?",
+            "role": "In the classic one-shot PD, Defect beats Cooperate either way."
+          },
+          {
+            "term": "Nash",
+            "question": "Where do best replies meet?",
+            "role": "Mutual Defect can be stable even when jointly worse."
+          },
+          {
+            "term": "Repeat",
+            "question": "What rewires incentives?",
+            "role": "Future rounds and credible punishment can protect Cooperate."
+          }
+        ],
+        "finalQuote": "The dilemma is not that people want harm—it is that separately sensible choices can compose into shared harm.",
+        "sourceNote": "Teaching note: payoffs are stylized jail years (CC 1,1; DC 0,3; CD 3,0; DD 2,2). Real legal systems, noise, and incomplete monitoring change details; the qualitative conflict between private dominance and joint efficiency is the point."
+      }
+    },
+    "zh": {
+      "lang": "zh",
+      "meta": {
+        "title": "两人都想少坐牢，为什么一起判得更重？",
+        "description": "交互图解囚徒困境：支付矩阵、优势策略、双方背叛的纳什、集体福利缺口，以及重复博弈与可信惩罚如何护住合作。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "暂停所有动画",
+        "resumeAll": "恢复所有动画",
+        "pause": "暂停",
+        "resume": "继续",
+        "reset": "重置",
+        "waiting": "图解进入视口后加载。",
+        "loading": "正在准备图解…",
+        "error": "图解无法显示，请阅读上方说明。",
+        "figureFallback": "请启用 JavaScript 以查看交互图解。",
+        "skipToContent": "跳到正文",
+        "languageNavigation": "语言",
+        "overviewLabel": "囚徒困境总览",
+        "stepLabel": "步骤"
+      },
+      "hero": {
+        "eyebrow": "博弈论 / 激励 / 纳什",
+        "title": "两人都想少坐牢，为什么一起判得更重？",
+        "subtitle": "每个囚徒都想缩短自己的刑期。当双方各自私下推理时，仍可能停在对双方都差于一起沉默的格子——除非重复见面或可信惩罚改写博弈。"
+      },
+      "overview": {
+        "title": "两个理性选择，也能把两人锁进更差的格子",
+        "body": [
+          "囚徒困境是一个 2×2 博弈：每人独立选择合作或背叛。这里的支付是坐牢年数——对个人来说数字越小越好。",
+          "两人一起沉默（合作）时，各判较短刑期；一人招供（背叛）而另一人沉默时，招供者可能当场释放，沉默者吃最长刑期；两人一起招供时，各判中等刑期——对两人合计来说，比一起沉默更差。"
+        ],
+        "plainLanguage": {
+          "label": "一句话说",
+          "body": "对你一个人最稳妥的选择，叠在一起，可能让两人都更惨。"
+        },
+        "keyPointsLabel": "先记住三点",
+        "keyPoints": [
+          {
+            "title": "先看支付矩阵",
+            "body": "整条故事线就在四个格子里：CC、CD、DC、DD。"
+          },
+          {
+            "title": "优势策略",
+            "body": "给定对方选择，背叛常常能缩短你自己的刑期。"
+          },
+          {
+            "title": "纳什 ≠ 集体最优",
+            "body": "双方背叛可以很稳定，即使双方合作对两人都更好。"
+          }
+        ],
+        "demoTitle": "点开困境的四个格子",
+        "copy": {
+          "ariaLabel": "囚徒困境支付矩阵总览交互",
+          "caption": "点选格子，查看各自的坐牢年数，以及该结果是稳定还是对双方更好。",
+          "controlLabel": "查看某一结果",
+          "youLabel": "你",
+          "otherLabel": "同伴",
+          "coopLabel": "合作",
+          "defectLabel": "背叛",
+          "yearsUnit": "年",
+          "cells": [
+            {
+              "key": "cc",
+              "label": "双方合作",
+              "you": 1,
+              "other": 1,
+              "state": "集体最好",
+              "detail": "一起沉默：两人都是短刑期。若任何一方单方面改口，就会被诱惑拉开。"
+            },
+            {
+              "key": "dc",
+              "label": "你背叛",
+              "you": 0,
+              "other": 3,
+              "state": "诱惑",
+              "detail": "你招供、对方沉默：你可能释放，对方吃最长的「傻瓜」刑期。"
+            },
+            {
+              "key": "cd",
+              "label": "对方背叛",
+              "you": 3,
+              "other": 0,
+              "state": "傻瓜",
+              "detail": "你沉默、对方招供：你吃长刑期，对方走人。"
+            },
+            {
+              "key": "dd",
+              "label": "双方背叛",
+              "you": 2,
+              "other": 2,
+              "state": "纳什陷阱",
+              "detail": "一起招供：中等刑期。一旦双方用同一套推理，就稳定停在这里——但比 CC 更差。"
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "id": "payoff-matrix",
+          "number": "01",
+          "title": "先读支付矩阵，再谈谁坏谁傻",
+          "body": [
+            "行是你的行动，列是同伴的行动。每个格子写着（你的年数，同伴的年数）。数字把冲突写清楚：背叛对个人有诱惑，合作对两人合计更仁慈。",
+            "这一步还没有神秘心理——只是一张激励地图。后面再问：当无法约束对方时，自利选择者会怎么动。"
+          ],
+          "plainLanguage": {
+            "label": "一句话说",
+            "body": "四个格子，每人两个选项。陷阱藏在数字里。"
+          },
+          "keyPointsLabel": "注意这些",
+          "keyPoints": [
+            {
+              "title": "越小越好",
+              "body": "这里的支付是坐牢年数，不是「越大越好」的效用分。"
+            },
+            {
+              "title": "诱惑不对称",
+              "body": "对方合作时，单方面背叛对你更划算。"
+            },
+            {
+              "title": "对称陷阱",
+              "body": "对方也背叛时，你背叛仍比继续合作少坐一点。"
+            }
+          ],
+          "demoTitle": "在 2×2 矩阵里点亮格子",
+          "copy": {
+            "ariaLabel": "可点选的囚徒困境支付矩阵",
+            "caption": "点选格子阅读刑期组合。注意：无论对方怎么选，背叛都能改善你的私人结果。",
+            "controlLabel": "选择支付格子",
+            "rowLabel": "你的行动",
+            "colLabel": "同伴的行动",
+            "coopLabel": "合作",
+            "defectLabel": "背叛",
+            "youShort": "你",
+            "otherShort": "对方",
+            "yearsUnit": "年",
+            "cells": [
+              {
+                "key": "cc",
+                "you": 1,
+                "other": 1,
+                "title": "奖励",
+                "detail": "一起沉默 → 各 1 年。合计最好。"
+              },
+              {
+                "key": "dc",
+                "you": 0,
+                "other": 3,
+                "title": "诱惑 / 傻瓜",
+                "detail": "你招供、对方沉默 → 你 0，对方 3。"
+              },
+              {
+                "key": "cd",
+                "you": 3,
+                "other": 0,
+                "title": "傻瓜 / 诱惑",
+                "detail": "你沉默、对方招供 → 你 3，对方 0。"
+              },
+              {
+                "key": "dd",
+                "you": 2,
+                "other": 2,
+                "title": "惩罚",
+                "detail": "一起招供 → 各 2 年。合计差于 CC。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "single-rational",
+          "number": "02",
+          "title": "固定对方行动——再选能缩短你刑期的那一步",
+          "body": [
+            "把同伴的选择钉住，只比较你的两个选项。对方合作时，背叛把你的刑期从 1 压到 0；对方背叛时，背叛把 3 压到 2。",
+            "这就是优势策略：无论对方怎么做，背叛在私人账本上都压过合作。这里的「理性」是「尽量少坐牢」，不是「尽量让两人一起舒服」。"
+          ],
+          "plainLanguage": {
+            "label": "一句话说",
+            "body": "对方无论合作还是背叛，招供对你一个人都更稳。"
+          },
+          "keyPointsLabel": "这一步在变什么",
+          "keyPoints": [
+            {
+              "title": "条件比较",
+              "body": "优势策略是按对方的每一列（或每一行）逐格核对的。"
+            },
+            {
+              "title": "不必读心",
+              "body": "你甚至不需要知道对方选什么，也会偏向背叛。"
+            },
+            {
+              "title": "仍是单次",
+              "body": "这一步没有下一局，也没有惩罚条款。"
+            }
+          ],
+          "demoTitle": "在对方给定时选择合作或背叛",
+          "copy": {
+            "ariaLabel": "在同伴行动固定时选择合作或背叛",
+            "caption": "先设定同伴行动，再选你的行动。读出你的年数，并看到背叛是否占优。",
+            "partnerControlLabel": "同伴的行动",
+            "yourControlLabel": "你的行动",
+            "coopLabel": "合作",
+            "defectLabel": "背叛",
+            "yearsLabel": "你的年数",
+            "partnerYearsLabel": "同伴年数",
+            "yearsUnit": "年",
+            "statusCooperateVsC": "对方沉默。你也沉默坐 1 年；你招供坐 0 年。对你而言背叛更好。",
+            "statusDefectVsC": "你拿走了诱惑支付：你 0 年，对方 3 年。",
+            "statusCooperateVsD": "对方招供。你继续沉默坐 3 年；你也招供坐 2 年。对你而言仍是背叛更好。",
+            "statusDefectVsD": "双方招供：各 2 年。比你当「傻瓜」独自坐 3 年更划算。"
+          }
+        },
+        {
+          "id": "mutual-defect",
+          "number": "03",
+          "title": "双方用同一套推理，就会在更差的格子碰头",
+          "body": [
+            "若背叛对你是优势策略，对对方也是，则单次博弈的预测落点是双方背叛：各 2 年。谁也不想单独改口——单独改成合作，会把你的刑期从 2 抬到 3。",
+            "这就是纳什均衡：策略组合里，没有人能靠单方面偏离变得更好。稳定，不等于两人一起更开心。"
+          ],
+          "plainLanguage": {
+            "label": "一句话说",
+            "body": "两个聪明选择者，也可能停在若能互相约束就绝不会选的格子。"
+          },
+          "keyPointsLabel": "这一步在变什么",
+          "keyPoints": [
+            {
+              "title": "纳什＝单方面逃不掉",
+              "body": "从 DD 出发，独自改成合作只会让改口者更惨。"
+            },
+            {
+              "title": "CC 独自不稳",
+              "body": "从 CC 出发，独自背叛能拿到诱惑——所以 CC 需要信任或约束。"
+            },
+            {
+              "title": "对称推理",
+              "body": "双方都用优势策略逻辑时，陷阱收得更紧。"
+            }
+          ],
+          "demoTitle": "看双方如何一起滑向背叛",
+          "copy": {
+            "ariaLabel": "双方收敛到相互背叛的示意动画",
+            "caption": "逐步推进：每人的最优反应如何把希望中的 CC 推进到 DD 纳什格。",
+            "controlLabel": "推进推理",
+            "youLabel": "你",
+            "otherLabel": "同伴",
+            "coopLabel": "合",
+            "defectLabel": "背",
+            "yearsUnit": "年",
+            "stages": [
+              {
+                "label": "指望 CC",
+                "youMove": "C",
+                "otherMove": "C",
+                "youYears": 1,
+                "otherYears": 1,
+                "detail": "若双方都能承诺沉默，每人只坐 1 年。"
+              },
+              {
+                "label": "你的诱惑",
+                "youMove": "D",
+                "otherMove": "C",
+                "youYears": 0,
+                "otherYears": 3,
+                "detail": "对方仍在 C 时，你背叛能缩短自己的刑期。"
+              },
+              {
+                "label": "对方回应",
+                "youMove": "D",
+                "otherMove": "D",
+                "youYears": 2,
+                "otherYears": 2,
+                "detail": "对方用同一套逻辑。最优反应在 DD 碰头。"
+              },
+              {
+                "label": "锁死纳什",
+                "youMove": "D",
+                "otherMove": "D",
+                "youYears": 2,
+                "otherYears": 2,
+                "detail": "没人能靠单方面改口变好。均衡站住——两人都比 CC 更差。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "collective-gap",
+          "number": "04",
+          "title": "把年数加总：稳定的格子并不是最仁慈的合计",
+          "body": [
+            "把两人的刑期加在一起。CC 合计 2 年；DD 合计 4 年。纳什结果浪费了若一起沉默本可保住的两年自由。",
+            "这就是系统的 punchline：个体理性的最优反应，可以叠成集体更差的账本。差额不是算术错误——是私人目标与联合目标冲突的结果。"
+          ],
+          "plainLanguage": {
+            "label": "一句话说",
+            "body": "每人私下觉得更好的选择，加总后可能比一起合作多坐几年。"
+          },
+          "keyPointsLabel": "这一步在变什么",
+          "keyPoints": [
+            {
+              "title": "福利 ≠ 纳什",
+              "body": "按合计年数，CC 优于 DD，即便 DD 更稳定。"
+            },
+            {
+              "title": "帕累托直觉",
+              "body": "从 DD 挪到 CC，可以让两人都变好、不让任何一方变差。"
+            },
+            {
+              "title": "需要机制",
+              "body": "走到 CC 通常要靠承诺、声誉或惩罚——不是靠愿望。"
+            }
+          ],
+          "demoTitle": "对照 CC 与 DD 的合计年数",
+          "copy": {
+            "ariaLabel": "对照双方合作与双方背叛的合计坐牢年数",
+            "caption": "在集体最好的格子与纳什格子之间切换，看合计年数如何拉开。",
+            "controlLabel": "对照结果",
+            "ccLabel": "双方合作",
+            "ddLabel": "双方背叛（纳什）",
+            "youLabel": "你",
+            "otherLabel": "同伴",
+            "totalLabel": "合计年数",
+            "gapLabel": "相对 CC 多坐",
+            "yearsUnit": "年",
+            "ccDetail": "合计 2 年。对两人最好——但每人仍有私下偷偷背叛的激励。",
+            "ddDetail": "合计 4 年。最优反应很稳定——却比 CC 多亏两年。"
+          }
+        },
+        {
+          "id": "repeated-game",
+          "number": "05",
+          "title": "把博弈重复下去——可信惩罚可以护住合作",
+          "body": [
+            "单次博弈里，背叛占优。若会再见面，以牙还牙（模仿对方上一步）或冷酷触发（一次背叛后永久惩罚）一类策略，可以让合作变得激励相容。",
+            "关键是可信：威胁的惩罚必须是你真的会执行的；未来的影子也要够长，让今天的诱惑不值得明天的惩罚。"
+          ],
+          "plainLanguage": {
+            "label": "一句话说",
+            "body": "还会再见——并且能惩罚背叛——沉默就可能重新变成对你更划算的私人选择。"
+          },
+          "keyPointsLabel": "这一步在变什么",
+          "keyPoints": [
+            {
+              "title": "未来的影子",
+              "body": "后续回合的价值，可以压过单轮诱惑。"
+            },
+            {
+              "title": "以牙还牙直觉",
+              "body": "先示好；镜像上一步；惩罚保持克制。"
+            },
+            {
+              "title": "不是魔法",
+              "body": "已知终点、噪声、弱监督，都可能让陷阱重新打开。"
+            }
+          ],
+          "demoTitle": "切换单次 vs 带惩罚的重复博弈",
+          "copy": {
+            "ariaLabel": "对照单次背叛占优与重复博弈下惩罚如何支撑合作",
+            "caption": "切换制度。在重复制度里，惩罚威胁会改写哪一个私人选择看起来更稳。",
+            "controlLabel": "博弈制度",
+            "modes": [
+              {
+                "key": "oneshot",
+                "label": "单次",
+                "bestMove": "背叛",
+                "status": "没有下一局。背叛占优；预期碰头点是 DD。",
+                "youMove": "D",
+                "otherMove": "D",
+                "note": "今天的诱惑没有明天的代价。"
+              },
+              {
+                "key": "tft",
+                "label": "以牙还牙",
+                "bestMove": "合作",
+                "status": "对方镜像你的上一步。背叛一次换来短利，随后是镜像惩罚。",
+                "youMove": "C",
+                "otherMove": "C",
+                "note": "善良、会报复、可原谅——经典民间定理直觉。"
+              },
+              {
+                "key": "grim",
+                "label": "冷酷触发",
+                "bestMove": "合作",
+                "status": "任何一次背叛都会触发之后永久的双方背叛。若未来够重要，威胁可以撑住 CC。",
+                "youMove": "C",
+                "otherMove": "C",
+                "note": "严厉但简单的承诺装置。"
+              }
+            ],
+            "bestMoveLabel": "私下更稳的行动",
+            "yearsUnit": "年",
+            "coopLabel": "合作",
+            "defectLabel": "背叛",
+            "youLabel": "你",
+            "otherLabel": "同伴"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "把系统重新装回去",
+        "title": "私人最优反应可以叠成共同损失——除非未来（或规则）改写矩阵",
+        "body": [
+          "囚徒困境不是「选手很蠢」的故事。它是一张支付矩阵：在单次见面里背叛对私人更稳，于是双方背叛成为稳定预测——即便双方合作浪费的年数更少。",
+          "机制很重要：重复、声誉、合约与可信惩罚会改写有效博弈。这些变弱时，纳什陷阱仍在。"
+        ],
+        "checklistLabel": "阅读清单",
+        "checklist": [
+          "说出四个格子，以及谁的年数写在哪里。",
+          "核对优势：对方两种行动下，背叛是否都压过合作？",
+          "把纳什稳定性与合计福利分开看。",
+          "问清互动是单次还是重复。",
+          "若出现合作，指出支撑它的执行装置或「未来的影子」。"
+        ],
+        "scaleTitle": "陷阱的四步",
+        "scaleItems": [
+          {
+            "term": "矩阵",
+            "question": "数字是什么？",
+            "role": "四个格子定义诱惑、奖励、傻瓜与惩罚。"
+          },
+          {
+            "term": "优势",
+            "question": "私下谁更稳？",
+            "role": "经典单次囚徒困境里，背叛双向压过合作。"
+          },
+          {
+            "term": "纳什",
+            "question": "最优反应在哪碰头？",
+            "role": "双方背叛可以稳定，即便集体更差。"
+          },
+          {
+            "term": "重复",
+            "question": "什么改写激励？",
+            "role": "未来回合与可信惩罚可以护住合作。"
+          }
+        ],
+        "finalQuote": "困境不在于人们想伤害别人——而在于各自说得通的选择，可以合成共同伤害。",
+        "sourceNote": "教学说明：支付为示意坐牢年数（CC 1,1；DC 0,3；CD 3,0；DD 2,2）。真实司法、噪声与不完全监督会改细节；私人优势与联合效率的冲突才是重点。"
+      }
+    },
+    "ja": {
+      "lang": "ja",
+      "meta": {
+        "title": "二人とも刑期を短くしたいのに、なぜ一緒により重く判かれるのか",
+        "description": "囚人のジレンマのインタラクティブ図解：利得行列、支配戦略、相互裏切りのナッシュ、集団厚生のギャップ、繰り返しと信頼できる罰が協力を守る仕組み。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "すべての動きを停止",
+        "resumeAll": "すべての動きを再開",
+        "pause": "一時停止",
+        "resume": "再開",
+        "reset": "リセット",
+        "waiting": "表示領域に入ると図解が読み込まれます。",
+        "loading": "図解を準備しています…",
+        "error": "図解を表示できません。上の説明をお読みください。",
+        "figureFallback": "インタラクティブ図解を見るには JavaScript を有効にしてください。",
+        "skipToContent": "本文へスキップ",
+        "languageNavigation": "言語",
+        "overviewLabel": "囚人のジレンマ概観",
+        "stepLabel": "ステップ"
+      },
+      "hero": {
+        "eyebrow": "ゲーム理論 / インセンティブ / ナッシュ",
+        "title": "二人とも刑期を短くしたいのに、なぜ一緒により重く判かれるのか",
+        "subtitle": "各囚人は自分の刑期を短くしたい。各自が私下に推論すると、相互沈黙より二人とも悪いマスに止まりうる——繰り返しや信頼できる罰がゲームを書き換えるまでは。"
+      },
+      "overview": {
+        "title": "二つの合理的選択が、二人をより悪いマスに閉じ込めうる",
+        "body": [
+          "囚人のジレンマは 2×2 のゲームです。各自が独立に協力か裏切りかを選びます。ここでの利得は服役年数——個人にとっては数字が小さいほど良い。",
+          "両者が沈黙（協力）すれば短い刑期。一方だけが自白（裏切り）すれば、自白者は釈放に近く、沈黙した側が最長を食らう。両方自白すれば中程度——二人合計では相互沈黙より悪い。"
+        ],
+        "plainLanguage": {
+          "label": "ひとことで",
+          "body": "一人にとって安全に見える選択が、重なると二人とも損をしうる。"
+        },
+        "keyPointsLabel": "まず三点",
+        "keyPoints": [
+          {
+            "title": "まず利得行列",
+            "body": "物語は CC・CD・DC・DD の四マスに収まる。"
+          },
+          {
+            "title": "支配戦略",
+            "body": "相手の手を所与とすれば、裏切りが自分の刑期を短くしがち。"
+          },
+          {
+            "title": "ナッシュ ≠ 集団最適",
+            "body": "相互裏切りは安定しうる。相互協力の方が二人とも良いのに。"
+          }
+        ],
+        "demoTitle": "ジレンマの四マスを巡る",
+        "copy": {
+          "ariaLabel": "囚人のジレンマ利得行列の概観インタラクション",
+          "caption": "マスを選ぶと各自の服役年数と、その結果が安定か二人にとって良いかが分かります。",
+          "controlLabel": "結果を見る",
+          "youLabel": "あなた",
+          "otherLabel": "相棒",
+          "coopLabel": "協力",
+          "defectLabel": "裏切り",
+          "yearsUnit": "年",
+          "cells": [
+            {
+              "key": "cc",
+              "label": "双方協力",
+              "you": 1,
+              "other": 1,
+              "state": "集団最良",
+              "detail": "相互沈黙：どちらも短い刑期。片方が単独で逸脱すると誘惑で崩れる。"
+            },
+            {
+              "key": "dc",
+              "label": "あなたが裏切り",
+              "you": 0,
+              "other": 3,
+              "state": "誘惑",
+              "detail": "あなた自白・相手沈黙：あなたは 0、相手は「カモ」の最長。"
+            },
+            {
+              "key": "cd",
+              "label": "相手が裏切り",
+              "you": 3,
+              "other": 0,
+              "state": "カモ",
+              "detail": "あなた沈黙・相手自白：あなたが長く、相手が自由に。"
+            },
+            {
+              "key": "dd",
+              "label": "双方裏切り",
+              "you": 2,
+              "other": 2,
+              "state": "ナッシュの罠",
+              "detail": "相互自白：中程度。同じ推論を使うとここに安定——だが CC より悪い。"
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "id": "payoff-matrix",
+          "number": "01",
+          "title": "誰が悪いか言う前に、利得行列を読む",
+          "body": [
+            "行があなたの手、列が相棒の手。各マスは（あなたの年数、相棒の年数）。数字が衝突をはっきりさせる：裏切りは私的に魅力的で、協力は二人合計では優しい。",
+            "神秘的な心理はまだ出てこない——インセンティブの地図だけ。相手の手を縛れないとき、利己的な選択者がどう動くかは次の段。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "四マス。各二つ。罠は数字の中。"
+          },
+          "keyPointsLabel": "見るべき点",
+          "keyPoints": [
+            {
+              "title": "小さいほど良い",
+              "body": "利得は服役年数。効用点のように大きいほど良いわけではない。"
+            },
+            {
+              "title": "誘惑の非対称",
+              "body": "相手が協力なら、単独裏切りが得。"
+            },
+            {
+              "title": "対称の罠",
+              "body": "相手も裏切るなら、それでも裏切りの方がマシ。"
+            }
+          ],
+          "demoTitle": "2×2 行列のマスをハイライト",
+          "copy": {
+            "ariaLabel": "選択可能な囚人のジレンマ利得行列",
+            "caption": "マスをタップして刑期の組を読む。相手の手のどちらに対しても、裏切りが私的結果を改善することに注目。",
+            "controlLabel": "利得マスを選ぶ",
+            "rowLabel": "あなたの手",
+            "colLabel": "相棒の手",
+            "coopLabel": "協力",
+            "defectLabel": "裏切り",
+            "youShort": "あなた",
+            "otherShort": "相手",
+            "yearsUnit": "年",
+            "cells": [
+              {
+                "key": "cc",
+                "you": 1,
+                "other": 1,
+                "title": "報酬",
+                "detail": "相互沈黙 → 各 1 年。合計最良。"
+              },
+              {
+                "key": "dc",
+                "you": 0,
+                "other": 3,
+                "title": "誘惑 / カモ",
+                "detail": "あなた自白・相手沈黙 → あなた 0、相手 3。"
+              },
+              {
+                "key": "cd",
+                "you": 3,
+                "other": 0,
+                "title": "カモ / 誘惑",
+                "detail": "あなた沈黙・相手自白 → あなた 3、相手 0。"
+              },
+              {
+                "key": "dd",
+                "you": 2,
+                "other": 2,
+                "title": "罰",
+                "detail": "相互自白 → 各 2 年。合計は CC より悪い。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "single-rational",
+          "number": "02",
+          "title": "相手の手を固定して——刑期を短くする手を選ぶ",
+          "body": [
+            "相棒の選択を固定し、自分の二手だけ比べる。相手が協力なら、裏切りで 1 年が 0 年に。相手が裏切りなら、3 年が 2 年に。",
+            "これが支配戦略：相手が何をしても、私的には裏切りが協力に勝つ。ここでの合理性は「自分の年数を最小化」であり、「二人の安らぎを最大化」ではない。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "相手が協力でも裏切りでも、自白の方が一人にとっては安全に見える。"
+          },
+          "keyPointsLabel": "ここで変わること",
+          "keyPoints": [
+            {
+              "title": "条件付き比較",
+              "body": "支配は列ごと（または行ごと）に確かめる。"
+            },
+            {
+              "title": "読心は不要",
+              "body": "相手の手を知らなくても裏切りを好みうる。"
+            },
+            {
+              "title": "まだ一回限り",
+              "body": "将来の罰も次局もない。"
+            }
+          ],
+          "demoTitle": "相手所与で協力か裏切りかを選ぶ",
+          "copy": {
+            "ariaLabel": "相棒の手が固定された状態で協力か裏切りかを選ぶ",
+            "caption": "相棒の手を設定し、自分の手を選ぶ。年数の表示と、裏切りが支配するかを確認。",
+            "partnerControlLabel": "相棒の手",
+            "yourControlLabel": "あなたの手",
+            "coopLabel": "協力",
+            "defectLabel": "裏切り",
+            "yearsLabel": "あなたの年数",
+            "partnerYearsLabel": "相棒の年数",
+            "yearsUnit": "年",
+            "statusCooperateVsC": "相手は沈黙。自分も沈黙なら 1 年、自白なら 0 年。あなたには裏切りが勝つ。",
+            "statusDefectVsC": "誘惑利得を取った：あなた 0 年、相手 3 年。",
+            "statusCooperateVsD": "相手は自白。沈黙なら 3 年、自白なら 2 年。やはり裏切りが勝つ。",
+            "statusDefectVsD": "相互自白：各 2 年。カモになって 3 年よりはマシ。"
+          }
+        },
+        {
+          "id": "mutual-defect",
+          "number": "03",
+          "title": "同じ推論をすると、より悪いマスで出会う",
+          "body": [
+            "裏切りがあなたにも相手にも支配的なら、一回限りの予測は相互裏切り：各 2 年。単独で協力に戻しても得はない——刑期が 2 から 3 に上がるだけ。",
+            "これがナッシュ均衡：誰も一方的な逸脱で得をしない戦略の組。安定は、二人の幸福とは別物。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "賢い二人でも、互いに縛れれば選ばないマスに止まりうる。"
+          },
+          "keyPointsLabel": "ここで変わること",
+          "keyPoints": [
+            {
+              "title": "ナッシュ＝単独脱出不可",
+              "body": "DD から一人だけ協力に戻すと、戻した側が損。"
+            },
+            {
+              "title": "CC は単独では不安定",
+              "body": "CC から一人だけ裏切ると誘惑を得られる——だから信頼か強制が要る。"
+            },
+            {
+              "title": "対称推論",
+              "body": "双方が同じ支配ロジックを使うと罠が締まる。"
+            }
+          ],
+          "demoTitle": "双方が裏切りへ傾く様子を見る",
+          "copy": {
+            "ariaLabel": "双方が相互裏切りへ収束するアニメーション",
+            "caption": "各人の最適反応が、CC への希望を DD のナッシュマスへ押しやる過程を段階的に進める。",
+            "controlLabel": "推論を進める",
+            "youLabel": "あなた",
+            "otherLabel": "相棒",
+            "coopLabel": "協",
+            "defectLabel": "裏",
+            "yearsUnit": "年",
+            "stages": [
+              {
+                "label": "CC を望む",
+                "youMove": "C",
+                "otherMove": "C",
+                "youYears": 1,
+                "otherYears": 1,
+                "detail": "双方が沈黙にコミットできれば各 1 年。"
+              },
+              {
+                "label": "あなたの誘惑",
+                "youMove": "D",
+                "otherMove": "C",
+                "youYears": 0,
+                "otherYears": 3,
+                "detail": "相手が C のままなら、裏切りで自分の刑期が縮む。"
+              },
+              {
+                "label": "相手の返答",
+                "youMove": "D",
+                "otherMove": "D",
+                "youYears": 2,
+                "otherYears": 2,
+                "detail": "相手も同じ論理。最適反応が DD で出会う。"
+              },
+              {
+                "label": "ナッシュ固定",
+                "youMove": "D",
+                "otherMove": "D",
+                "youYears": 2,
+                "otherYears": 2,
+                "detail": "単独逸脱の得はない。均衡は保たれ——二人とも CC より悪い。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "collective-gap",
+          "number": "04",
+          "title": "年数を足す：安定マスは合計では優しくない",
+          "body": [
+            "二人の刑期を足す。CC 合計 2 年、DD 合計 4 年。ナッシュ結果は、相互沈黙なら守れた二年分の自由を浪費する。",
+            "システムの決め台詞：個別合理の最適反応が、集団としてはより悪い台帳になりうる。差は計算ミスではなく、私的目的と共同目的の衝突。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "各自が私下で良いと思う選択の合計が、一緒に協力するより長い服役になりうる。"
+          },
+          "keyPointsLabel": "ここで変わること",
+          "keyPoints": [
+            {
+              "title": "厚生 ≠ ナッシュ",
+              "body": "合計年数では CC が DD より上。DD の方が安定でも。"
+            },
+            {
+              "title": "パレートの直感",
+              "body": "DD から CC へ移すと、双方を損なわずに双方を助けうる。"
+            },
+            {
+              "title": "仕組みが要る",
+              "body": "CC へ行くにはコミット・評判・罰が要ることが多い。"
+            }
+          ],
+          "demoTitle": "CC と DD の合計を比べる",
+          "copy": {
+            "ariaLabel": "相互協力と相互裏切りの合計服役年数を比較",
+            "caption": "集団最良マスとナッシュマスを切り替えて、合計年数の開きを見る。",
+            "controlLabel": "結果を比較",
+            "ccLabel": "双方協力",
+            "ddLabel": "双方裏切り（ナッシュ）",
+            "youLabel": "あなた",
+            "otherLabel": "相棒",
+            "totalLabel": "合計年数",
+            "gapLabel": "CC より多い年数",
+            "yearsUnit": "年",
+            "ccDetail": "合計 2 年。二人には最良——だが各自に内緒の裏切り激励がある。",
+            "ddDetail": "合計 4 年。最適反応は安定——だが CC より二年分の共有損失。"
+          }
+        },
+        {
+          "id": "repeated-game",
+          "number": "05",
+          "title": "ゲームを繰り返す——信頼できる罰が協力を守りうる",
+          "body": [
+            "一回限りでは裏切りが支配。将来がある繰り返しでは、しっぺ返し（相手の直前を真似る）や冷酷トリガー（一度の裏切り後は永久罰）が、協力をインセンティブ適合にしうる。",
+            "鍵は信憑性：脅した罰を本当に実行すること、そして将来の影が十分長く、今日の誘惑が明日の罰に見合わないこと。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "また会う——そして裏切りを罰せる——なら、沈黙が再び私的にも得になりうる。"
+          },
+          "keyPointsLabel": "ここで変わること",
+          "keyPoints": [
+            {
+              "title": "将来の影",
+              "body": "継続価値が一回の誘惑を上回りうる。"
+            },
+            {
+              "title": "しっぺ返しの直感",
+              "body": "最初は善人；直前を鏡写し；罰は比例的に。"
+            },
+            {
+              "title": "魔法ではない",
+              "body": "既知の終点・ノイズ・弱い監視は罠を再び開きうる。"
+            }
+          ],
+          "demoTitle": "一回限り vs 罰つき繰り返しを切替",
+          "copy": {
+            "ariaLabel": "一回限りの裏切り支配と、繰り返し＋罰による協力維持を比較",
+            "caption": "制度を切替。繰り返しでは罰の脅威が、どの私的選択が安全に見えるかを変える。",
+            "controlLabel": "ゲーム制度",
+            "modes": [
+              {
+                "key": "oneshot",
+                "label": "一回限り",
+                "bestMove": "裏切り",
+                "status": "次局なし。裏切りが支配；出会いは DD。",
+                "youMove": "D",
+                "otherMove": "D",
+                "note": "今日の誘惑に明日のコストがない。"
+              },
+              {
+                "key": "tft",
+                "label": "しっぺ返し",
+                "bestMove": "協力",
+                "status": "相手は直前を鏡写し。一度の裏切りは短い得のあと、鏡の罰。",
+                "youMove": "C",
+                "otherMove": "C",
+                "note": "善良・報復的・寛容——古典的なフォーク定理の直感。"
+              },
+              {
+                "key": "grim",
+                "label": "冷酷トリガー",
+                "bestMove": "協力",
+                "status": "一度の裏切りで以後は永久の相互裏切り。将来が十分重要なら CC を支えうる。",
+                "youMove": "C",
+                "otherMove": "C",
+                "note": "厳しいが単純なコミット装置。"
+              }
+            ],
+            "bestMoveLabel": "私的により安全な手",
+            "yearsUnit": "年",
+            "coopLabel": "協力",
+            "defectLabel": "裏切り",
+            "youLabel": "あなた",
+            "otherLabel": "相棒"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "システムを組み立て直す",
+        "title": "私的な最適反応は共有の損失に積み上がりうる——将来（やルール）が行列を書き換えるまでは",
+        "body": [
+          "囚人のジレンマは「愚かな選手」の話ではない。一回の出会いでは裏切りが私的に安全なので、相互裏切りが安定予測になる——相互協力の方が年数を浪費しにくいのに。",
+          "仕組みが重要：繰り返し、評判、契約、信頼できる罰が有効ゲームを変える。それらが弱いとき、ナッシュの罠は残る。"
+        ],
+        "checklistLabel": "読み手チェックリスト",
+        "checklist": [
+          "四マスと、誰の年数がどこにあるかを言える。",
+          "支配を確認：相手の両手に対し裏切りが協力に勝つか。",
+          "ナッシュの安定と合計厚生を分けて見る。",
+          "一回限りか繰り返しかを問う。",
+          "協力が見えたら、支える執行や将来の影を特定する。"
+        ],
+        "scaleTitle": "罠の四手",
+        "scaleItems": [
+          {
+            "term": "行列",
+            "question": "数字は何か？",
+            "role": "四マスが誘惑・報酬・カモ・罰を定義する。"
+          },
+          {
+            "term": "支配",
+            "question": "私的に何が安全？",
+            "role": "古典的一回 PD では裏切りが双方向で勝つ。"
+          },
+          {
+            "term": "ナッシュ",
+            "question": "最適反応はどこで会う？",
+            "role": "相互裏切りは、集団的に悪くても安定しうる。"
+          },
+          {
+            "term": "繰り返し",
+            "question": "何がインセンティブを書き換える？",
+            "role": "将来ラウンドと信頼できる罰が協力を守りうる。"
+          }
+        ],
+        "finalQuote": "ジレンマは人が害を望むことではない——別々には筋の通る選択が、共有の害に合成されうることだ。",
+        "sourceNote": "教材注：利得は様式化された服役年数（CC 1,1；DC 0,3；CD 3,0；DD 2,2）。実司法・ノイズ・不完全監視は細部を変える。私的支配と共同効率の衝突が要点。"
+      }
+    }
+  }
+}
