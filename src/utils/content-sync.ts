@@ -1,4 +1,4 @@
-import { getCollection } from 'astro:content';
+import { getCollection } from './content-collections';
 import type { Language } from './i18n';
 
 export interface ContentItem {

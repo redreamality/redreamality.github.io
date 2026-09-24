@@ -1,4 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const blogSchema = z.object({
   title: z.string(),
@@ -82,113 +84,113 @@ const meditationsSchema = z.object({
 
 // Chinese content collections
 const blogCnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog-cn' }),
   schema: blogSchema,
 });
 
 const talksCnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/talks-cn' }),
   schema: talksSchema,
 });
 
 // English content collections
 const blogEnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog-en' }),
   schema: blogSchema,
 });
 
 const talksEnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/talks-en' }),
   schema: talksSchema,
 });
 
 // Projects content collections
 const projectsCnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects-cn' }),
   schema: projectsSchema,
 });
 
 const projectsEnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects-en' }),
   schema: projectsSchema,
 });
 
 // Questions content collections
 const questionsCnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/questions-cn' }),
   schema: questionsSchema,
 });
 
 const questionsEnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/questions-en' }),
   schema: questionsSchema,
 });
 
 // Notes content collections
 const notesCnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/notes-cn' }),
   schema: notesSchema,
 });
 
 const notesEnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/notes-en' }),
   schema: notesSchema,
 });
 
 // Japanese content collections
 const blogJaCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog-ja' }),
   schema: blogSchema,
 });
 
 const chaosCnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/chaos-cn' }),
   schema: chaosSchema,
 });
 
 const chaosEnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/chaos-en' }),
   schema: chaosSchema,
 });
 
 const chaosJaCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/chaos-ja' }),
   schema: chaosSchema,
 });
 
 const talksJaCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/talks-ja' }),
   schema: talksSchema,
 });
 
 const projectsJaCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects-ja' }),
   schema: projectsSchema,
 });
 
 const questionsJaCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/questions-ja' }),
   schema: questionsSchema,
 });
 
 const notesJaCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/notes-ja' }),
   schema: notesSchema,
 });
 
 // Meditations content collections (个人感悟 / 沉思录)
 const meditationsCnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/meditations-cn' }),
   schema: meditationsSchema,
 });
 
 const meditationsEnCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/meditations-en' }),
   schema: meditationsSchema,
 });
 
 const meditationsJaCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/meditations-ja' }),
   schema: meditationsSchema,
 });
 

@@ -21,7 +21,7 @@ const localStorageMock = {
   removeItem: vi.fn(),
   clear: vi.fn(),
 };
-globalThis.localStorage = localStorageMock as any;
+vi.stubGlobal('localStorage', localStorageMock);
 
 // Mock sessionStorage
 const sessionStorageMock = {
@@ -30,4 +30,4 @@ const sessionStorageMock = {
   removeItem: vi.fn(),
   clear: vi.fn(),
 };
-globalThis.sessionStorage = sessionStorageMock as any;
+vi.stubGlobal('sessionStorage', sessionStorageMock);

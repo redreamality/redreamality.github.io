@@ -1,12 +1,13 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwind from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
+import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import node from '@astrojs/node';
 import visualManifest from './src/data/visuals-manifest.json';
 
 const siteUrl = 'https://redreamality.com';
@@ -37,25 +38,16 @@ export default defineConfig({
   base: '/',
   trailingSlash: 'always',
   output: 'static',
+  compressHTML: true,
+  vite: {
+    css: {
+      postcss: {
+        plugins: [tailwind(), autoprefixer()],
+      },
+    },
+  },
   integrations: [
-    tailwind({
-      // 启用 JIT 模式
-      applyBaseStyles: true,
-    }),
-    mdx({
-      remarkPlugins: [remarkMath],
-      rehypePlugins: [[rehypeKatex, {
-        // KaTeX options
-        strict: false,
-        macros: {
-          "\\bmatrix": "\\begin{bmatrix}#1\\end{bmatrix}",
-          "\\pmatrix": "\\begin{pmatrix}#1\\end{pmatrix}",
-          "\\vmatrix": "\\begin{vmatrix}#1\\end{vmatrix}",
-          "\\Vmatrix": "\\begin{Vmatrix}#1\\end{Vmatrix}",
-          "\\matrix": "\\begin{matrix}#1\\end{matrix}"
-        }
-      }]]
-    }),
+    mdx(),
     sitemap({
       customPages: [
         'https://redreamality.com/benchmark-papers/',
@@ -123,21 +115,22 @@ export default defineConfig({
     }),
   ],
   markdown: {
+    processor: unified({
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [[rehypeKatex, {
+        strict: false,
+        macros: {
+          "\\bmatrix": "\\begin{bmatrix}#1\\end{bmatrix}",
+          "\\pmatrix": "\\begin{pmatrix}#1\\end{pmatrix}",
+          "\\vmatrix": "\\begin{vmatrix}#1\\end{vmatrix}",
+          "\\Vmatrix": "\\begin{Vmatrix}#1\\end{Vmatrix}",
+          "\\matrix": "\\begin{matrix}#1\\end{matrix}"
+        }
+      }]],
+    }),
     shikiConfig: {
       theme: 'dracula',
       wrap: true
-    },
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [[rehypeKatex, {
-      // KaTeX options
-      strict: false,
-      macros: {
-        "\\bmatrix": "\\begin{bmatrix}#1\\end{bmatrix}",
-        "\\pmatrix": "\\begin{pmatrix}#1\\end{pmatrix}",
-        "\\vmatrix": "\\begin{vmatrix}#1\\end{vmatrix}",
-        "\\Vmatrix": "\\begin{Vmatrix}#1\\end{Vmatrix}",
-        "\\matrix": "\\begin{matrix}#1\\end{matrix}"
-      }
-    }]]
+    }
   }
 });

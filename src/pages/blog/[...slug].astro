@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import RelatedContent from '../../components/RelatedContent.astro';
-import { getCollection } from 'astro:content';
+import { getCollection } from '../../utils/content-collections';
 import { type Language, getTagCounts } from '../../utils/i18n';
 import { rankRelatedContent } from '../../utils/related';
 

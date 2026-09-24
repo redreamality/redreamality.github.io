@@ -15,8 +15,19 @@ import {
 } from './content';
 
 // Mock fs and path modules
-vi.mock('fs');
-vi.mock('path');
+vi.mock('fs', () => ({
+  default: {
+    existsSync: vi.fn(),
+    mkdirSync: vi.fn(),
+    writeFileSync: vi.fn(),
+  },
+}));
+vi.mock('path', () => ({
+  default: {
+    join: vi.fn(),
+    dirname: vi.fn(),
+  },
+}));
 
 const mockFs = vi.mocked(fs);
 const mockPath = vi.mocked(path);

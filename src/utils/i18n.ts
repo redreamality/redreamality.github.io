@@ -1,4 +1,4 @@
-import { getCollection } from 'astro:content';
+import { getCollection } from './content-collections';
 
 export type Language = 'zh' | 'en' | 'ja';
 
