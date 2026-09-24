@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T09:54:19+08:00",
+  "updatedAt": "2026-09-24T09:55:06+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,13 +11,13 @@
     "other"
   ],
   "themeCounts": {
-    "models": 4,
-    "coding-tools": 11,
-    "agents-oss": 29,
+    "models": 6,
+    "coding-tools": 10,
+    "agents-oss": 30,
     "security": 2,
     "research": 7,
     "product-news": 2,
-    "other": 1
+    "other": 9
   },
   "hours": [
     {
@@ -28,6 +28,87 @@
         "ja": "9月24日 09:00"
       },
       "items": [
+        {
+          "id": "t003",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Jev × Claude Code：爆款工作流与 25 行最小实现",
+            "en": "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Build",
+            "ja": "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Build"
+          },
+          "summary": {
+            "zh": "站内 Jev 刚需：实操 10x + 最小实现 + OpenAI 跟进压力",
+            "en": "A viral YouTube clip ties Jev to Claude Code, but Jev cannot be the CLI chat model. This post covers the official skill, boundary hooks, MCP, and per-turn routing, contrasts NobodyWho’s 25-line minimal build, and discusses OpenAI fast-follow pressure.",
+            "ja": ""
+          },
+          "sources": [
+            "youtube",
+            "hn"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://www.youtube.com/watch?v=tTnUcSj-QPA",
+            "https://www.nobodywho.ai/posts/jev-in-25-lines/",
+            "https://arcturus-labs.com/blog/2026/09/21/will-openai-eat-jevs-lunch/"
+          ],
+          "blog": {
+            "zh": "/cn/blog/jev-claude-code-10x-and-25-lines/",
+            "en": "/blog/jev-claude-code-10x-and-25-lines/"
+          }
+        },
+        {
+          "id": "t005",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "alibaba/open-code-review：确定性流水线 + LLM Agent 评审",
+            "en": "Alibaba’s Open Code Review: What Enterprises Can Copy from a Deterministic Pipeline Plus LLM Agents",
+            "ja": "Alibaba’s Open Code Review: What Enterprises Can Copy from a Deterministic Pipeline Plus LLM Agents"
+          },
+          "summary": {
+            "zh": "企业级 AI Code Review 落地样本（周增过万星）",
+            "en": "A practical teardown of alibaba/open-code-review: deterministic engineering owns file selection and positioning; the agent owns deep reasoning. Covers AACR-Bench, delegation mode, CI hooks, copyable patterns, and limits.",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://github.com/alibaba/open-code-review"
+          ],
+          "blog": {
+            "zh": "/cn/blog/alibaba-open-code-review-deterministic-pipeline/",
+            "en": "/blog/alibaba-open-code-review-deterministic-pipeline/"
+          }
+        },
+        {
+          "id": "t006",
+          "theme": "security",
+          "title": {
+            "zh": "cloudflare/security-audit-skill：Coding-agent 安全审计 skill",
+            "en": "Cloudflare’s security-audit-skill: A Verifiable Security-Audit Workflow for Coding Agents",
+            "ja": "Cloudflare’s security-audit-skill: A Verifiable Security-Audit Workflow for Coding Agents"
+          },
+          "summary": {
+            "zh": "Skill 分发形态爆发 + 安全审计刚需",
+            "en": "A teardown of cloudflare/security-audit-skill: Skill distribution, six audit phases, confirmed / needs_validation / rejected verdicts, adversarial validation, and fail-open behavior without a sandbox—plus install steps and enterprise limits.",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://github.com/cloudflare/security-audit-skill"
+          ],
+          "blog": {
+            "zh": "/cn/blog/cloudflare-security-audit-skill-for-coding-agents/",
+            "en": "/blog/cloudflare-security-audit-skill-for-coding-agents/"
+          }
+        },
         {
           "id": "t057",
           "theme": "agents-oss",
@@ -48,6 +129,142 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
+          ]
+        },
+        {
+          "id": "t004",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "google/ax：Google 开源 agent orchestration runtime",
+            "en": "google/ax",
+            "ja": "google/ax"
+          },
+          "summary": {
+            "zh": "大厂 agent 编排基建日增 1.5k+，对照自家 harness 叙事",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://github.com/google/ax"
+          ]
+        },
+        {
+          "id": "t007",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "affaan-m/ECC：Agent harness 性能/记忆/安全优化",
+            "en": "affaan-m/ECC",
+            "ja": "affaan-m/ECC"
+          },
+          "summary": {
+            "zh": "Harness 优化系统，适配 Claude Code/Codex/Cursor",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://github.com/affaan-m/ECC"
+          ]
+        },
+        {
+          "id": "t008",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "dream-num/univer：Office Harness for AI Agents",
+            "en": "dream-num/univer",
+            "ja": "dream-num/univer"
+          },
+          "summary": {
+            "zh": "文档/表格型 agent 运行时，日增 1k+",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://github.com/dream-num/univer"
+          ]
+        },
+        {
+          "id": "t009",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "stablyai/orca：并行 agent 舰队 ADE",
+            "en": "stablyai/orca",
+            "ja": "stablyai/orca"
+          },
+          "summary": {
+            "zh": "多 agent 编排产品形态（桌面/移动/远程）",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://github.com/stablyai/orca"
+          ]
+        },
+        {
+          "id": "t010",
+          "theme": "models",
+          "title": {
+            "zh": "MiMo v2.6：小米开源/中文前沿模型冲刺",
+            "en": "MiMo v2.6",
+            "ja": "MiMo v2.6"
+          },
+          "summary": {
+            "zh": "中文读者向开源模型对照 Opus/GPT-6",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "hn",
+            "huggingface"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://mimo.xiaomi.com/mimo-v2-6",
+            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
+          ]
+        },
+        {
+          "id": "t017",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Fission-AI/OpenSpec：Spec-driven development for AI coding",
+            "en": "Fission-AI/OpenSpec",
+            "ja": "Fission-AI/OpenSpec"
+          },
+          "summary": {
+            "zh": "SDD × coding agents：OpenSpec 仓库 + DeepLearningAI 全课",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://github.com/Fission-AI/OpenSpec",
+            "https://www.youtube.com/watch?v=hy8UstR2NEg"
           ]
         },
         {
@@ -74,7 +291,7 @@
         },
         {
           "id": "t069",
-          "theme": "coding-tools",
+          "theme": "models",
           "title": {
             "zh": "ThinkingCap Qwen3.8-27B 发布",
             "en": "",
@@ -86,12 +303,14 @@
             "ja": ""
           },
           "sources": [
-            "reddit"
+            "reddit",
+            "huggingface"
           ],
           "score": 4,
           "status": "shortlisted",
           "externalUrls": [
-            "https://www.reddit.com/r/LocalLLM/comments/1wolg9w/thinkingcap_qwen3827b_has_been_released/"
+            "https://www.reddit.com/r/LocalLLM/comments/1wolg9w/thinkingcap_qwen3827b_has_been_released/",
+            "https://huggingface.co/Qwen/Qwen3.8-27B"
           ]
         },
         {
@@ -114,6 +333,206 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://dev.to/robertadam987_/your-ai-coding-agent-can-be-attacked-by-the-repository-it-opens-ie4"
+          ]
+        },
+        {
+          "id": "t074",
+          "theme": "models",
+          "title": {
+            "zh": "OpenJev on Hugging Face",
+            "en": "OpenJev on Hugging Face",
+            "ja": "OpenJev on Hugging Face"
+          },
+          "summary": {
+            "zh": "与站内 Jev 同频的开源模型/权重信号",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://huggingface.co/AlexWortega/openjev"
+          ]
+        },
+        {
+          "id": "t075",
+          "theme": "other",
+          "title": {
+            "zh": "deepseek-ai/DeepSeek-V4.1-Flash",
+            "en": "deepseek-ai/DeepSeek-V4.1-Flash",
+            "ja": "deepseek-ai/DeepSeek-V4.1-Flash"
+          },
+          "summary": {
+            "zh": "DeepSeek 新一代速度/质量档；对照前沿模型选题",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash"
+          ]
+        },
+        {
+          "id": "t014",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "addyosmani/agent-skills：生产级 engineering skills",
+            "en": "addyosmani/agent-skills",
+            "ja": "addyosmani/agent-skills"
+          },
+          "summary": {
+            "zh": "Skills 赛道权威信号，可与 CF skill 对照攒写",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/addyosmani/agent-skills"
+          ]
+        },
+        {
+          "id": "t015",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "obra/superpowers：Agentic skills 框架",
+            "en": "obra/superpowers",
+            "ja": "obra/superpowers"
+          },
+          "summary": {
+            "zh": "Skills 方法论大体量；与 ECC/CF 同赛道",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/obra/superpowers"
+          ]
+        },
+        {
+          "id": "t018",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Tencent/WeKnora：文档→RAG→自主 agent→Wiki",
+            "en": "Tencent/WeKnora",
+            "ja": "Tencent/WeKnora"
+          },
+          "summary": {
+            "zh": "腾讯知识 agent 平台；Δ5303",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/Tencent/WeKnora"
+          ]
+        },
+        {
+          "id": "t022",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "How to Build AI Agents in Python（Tech With Tim）",
+            "en": "How to Build AI Agents in Python（Tech With Tim）",
+            "ja": "How to Build AI Agents in Python（Tech With Tim）"
+          },
+          "summary": {
+            "zh": "刚发教程，可作入门向外链/短评素材",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "youtube"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.youtube.com/watch?v=-RTgK6qX6A8"
+          ]
+        },
+        {
+          "id": "t033",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "JustVugg/colibri：自有硬件流式 MoE",
+            "en": "JustVugg/colibri",
+            "ja": "JustVugg/colibri"
+          },
+          "summary": {
+            "zh": "本地推理引擎热度 Δ4036",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/JustVugg/colibri"
+          ]
+        },
+        {
+          "id": "t036",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "DeusData/codebase-memory-mcp",
+            "en": "DeusData/codebase-memory-mcp",
+            "ja": "DeusData/codebase-memory-mcp"
+          },
+          "summary": {
+            "zh": "MCP + 代码库记忆",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github",
+            "producthunt"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/DeusData/codebase-memory-mcp",
+            "https://www.productcool.com/archive/2026/09/23"
+          ]
+        },
+        {
+          "id": "t037",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "agent-substrate/substrate",
+            "en": "agent-substrate/substrate",
+            "ja": "agent-substrate/substrate"
+          },
+          "summary": {
+            "zh": "Agent 底层基建",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/agent-substrate/substrate"
           ]
         },
         {
@@ -313,6 +732,182 @@
           "externalUrls": [
             "https://dev.to/sylwia-lask/what-if-your-ai-agent-never-had-to-leave-the-browser-demo--5g"
           ]
+        },
+        {
+          "id": "t072",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Cursor $20 vs 百万级 AI Agent（Tech With Tim）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "成本对比向短评素材；7天10万播",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "youtube"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.youtube.com/watch?v=8u3vB6kPdgY"
+          ]
+        },
+        {
+          "id": "t076",
+          "theme": "other",
+          "title": {
+            "zh": "Lightricks/LTX-2.5",
+            "en": "Lightricks/LTX-2.5",
+            "ja": "Lightricks/LTX-2.5"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/Lightricks/LTX-2.5"
+          ]
+        },
+        {
+          "id": "t077",
+          "theme": "other",
+          "title": {
+            "zh": "prism-ml/Ternary-Bonsai-2-27B-gguf",
+            "en": "prism-ml/Ternary-Bonsai-2-27B-gguf",
+            "ja": "prism-ml/Ternary-Bonsai-2-27B-gguf"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf"
+          ]
+        },
+        {
+          "id": "t078",
+          "theme": "other",
+          "title": {
+            "zh": "Qwen/Qwen-Image-2.1",
+            "en": "Qwen/Qwen-Image-2.1",
+            "ja": "Qwen/Qwen-Image-2.1"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/Qwen/Qwen-Image-2.1"
+          ]
+        },
+        {
+          "id": "t079",
+          "theme": "other",
+          "title": {
+            "zh": "XingChen-AGI/Xing4.0-29B-A4B",
+            "en": "XingChen-AGI/Xing4.0-29B-A4B",
+            "ja": "XingChen-AGI/Xing4.0-29B-A4B"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B"
+          ]
+        },
+        {
+          "id": "t081",
+          "theme": "other",
+          "title": {
+            "zh": "multimodalart/jev-decision-index",
+            "en": "multimodalart/jev-decision-index",
+            "ja": "multimodalart/jev-decision-index"
+          },
+          "summary": {
+            "zh": "Jev 相关 Space/演示",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/spaces/multimodalart/jev-decision-index"
+          ]
+        },
+        {
+          "id": "t082",
+          "theme": "other",
+          "title": {
+            "zh": "convaiinnovations/laya-demo",
+            "en": "convaiinnovations/laya-demo",
+            "ja": "convaiinnovations/laya-demo"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/spaces/convaiinnovations/laya-demo"
+          ]
+        },
+        {
+          "id": "t083",
+          "theme": "other",
+          "title": {
+            "zh": "webml-community/ternary-bonsai-2-webgpu-kernels",
+            "en": "webml-community/ternary-bonsai-2-webgpu-kernels",
+            "ja": "webml-community/ternary-bonsai-2-webgpu-kernels"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/spaces/webml-community/ternary-bonsai-2-webgpu-kernels"
+          ]
         }
       ]
     },
@@ -387,97 +982,6 @@
             "zh": "/cn/blog/gpt-6-sol-luna-and-astra/",
             "en": "/blog/gpt-6-sol-luna-and-astra/"
           }
-        },
-        {
-          "id": "t005",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "alibaba/open-code-review：确定性流水线 + LLM Agent 评审",
-            "en": "Alibaba’s Open Code Review: What Enterprises Can Copy from a Deterministic Pipeline Plus LLM Agents",
-            "ja": "Alibaba’s Open Code Review: What Enterprises Can Copy from a Deterministic Pipeline Plus LLM Agents"
-          },
-          "summary": {
-            "zh": "企业级 AI Code Review 落地样本（周增过万星）",
-            "en": "A practical teardown of alibaba/open-code-review: deterministic engineering owns file selection and positioning; the agent owns deep reasoning. Covers AACR-Bench, delegation mode, CI hooks, copyable patterns, and limits.",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://github.com/alibaba/open-code-review"
-          ],
-          "blog": {
-            "zh": "/cn/blog/alibaba-open-code-review-deterministic-pipeline/",
-            "en": "/blog/alibaba-open-code-review-deterministic-pipeline/"
-          }
-        },
-        {
-          "id": "t006",
-          "theme": "security",
-          "title": {
-            "zh": "cloudflare/security-audit-skill：Coding-agent 安全审计 skill",
-            "en": "Cloudflare’s security-audit-skill: A Verifiable Security-Audit Workflow for Coding Agents",
-            "ja": "Cloudflare’s security-audit-skill: A Verifiable Security-Audit Workflow for Coding Agents"
-          },
-          "summary": {
-            "zh": "Skill 分发形态爆发 + 安全审计刚需",
-            "en": "A teardown of cloudflare/security-audit-skill: Skill distribution, six audit phases, confirmed / needs_validation / rejected verdicts, adversarial validation, and fail-open behavior without a sandbox—plus install steps and enterprise limits.",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://github.com/cloudflare/security-audit-skill"
-          ],
-          "blog": {
-            "zh": "/cn/blog/cloudflare-security-audit-skill-for-coding-agents/",
-            "en": "/blog/cloudflare-security-audit-skill-for-coding-agents/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-23T23:00:00+08:00",
-      "label": {
-        "zh": "9月23日 23:00",
-        "en": "Sep 23 23:00",
-        "ja": "9月23日 23:00"
-      },
-      "items": [
-        {
-          "id": "t003",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Jev × Claude Code：爆款工作流与 25 行最小实现",
-            "en": "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Build",
-            "ja": "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Build"
-          },
-          "summary": {
-            "zh": "站内 Jev 刚需：实操 10x + 最小实现 + OpenAI 跟进压力",
-            "en": "A viral YouTube clip ties Jev to Claude Code, but Jev cannot be the CLI chat model. This post covers the official skill, boundary hooks, MCP, and per-turn routing, contrasts NobodyWho’s 25-line minimal build, and discusses OpenAI fast-follow pressure.",
-            "ja": ""
-          },
-          "sources": [
-            "youtube",
-            "hn"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://www.youtube.com/watch?v=tTnUcSj-QPA",
-            "https://www.nobodywho.ai/posts/jev-in-25-lines/",
-            "https://arcturus-labs.com/blog/2026/09/21/will-openai-eat-jevs-lunch/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/jev-claude-code-10x-and-25-lines/",
-            "en": "/blog/jev-claude-code-10x-and-25-lines/"
-          }
         }
       ]
     },
@@ -489,116 +993,6 @@
         "ja": "9月23日 22:00"
       },
       "items": [
-        {
-          "id": "t004",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "google/ax：Google 开源 agent orchestration runtime",
-            "en": "google/ax",
-            "ja": "google/ax"
-          },
-          "summary": {
-            "zh": "大厂 agent 编排基建日增 1.5k+，对照自家 harness 叙事",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/google/ax"
-          ]
-        },
-        {
-          "id": "t007",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "affaan-m/ECC：Agent harness 性能/记忆/安全优化",
-            "en": "affaan-m/ECC",
-            "ja": "affaan-m/ECC"
-          },
-          "summary": {
-            "zh": "Harness 优化系统，适配 Claude Code/Codex/Cursor",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/affaan-m/ECC"
-          ]
-        },
-        {
-          "id": "t008",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "dream-num/univer：Office Harness for AI Agents",
-            "en": "dream-num/univer",
-            "ja": "dream-num/univer"
-          },
-          "summary": {
-            "zh": "文档/表格型 agent 运行时，日增 1k+",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/dream-num/univer"
-          ]
-        },
-        {
-          "id": "t009",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "stablyai/orca：并行 agent 舰队 ADE",
-            "en": "stablyai/orca",
-            "ja": "stablyai/orca"
-          },
-          "summary": {
-            "zh": "多 agent 编排产品形态（桌面/移动/远程）",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/stablyai/orca"
-          ]
-        },
-        {
-          "id": "t010",
-          "theme": "models",
-          "title": {
-            "zh": "MiMo v2.6：小米开源/中文前沿模型冲刺",
-            "en": "MiMo v2.6",
-            "ja": "MiMo v2.6"
-          },
-          "summary": {
-            "zh": "中文读者向开源模型对照 Opus/GPT-6",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://mimo.xiaomi.com/mimo-v2-6"
-          ]
-        },
         {
           "id": "t011",
           "theme": "agents-oss",
@@ -776,50 +1170,6 @@
           ]
         },
         {
-          "id": "t014",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "addyosmani/agent-skills：生产级 engineering skills",
-            "en": "addyosmani/agent-skills",
-            "ja": "addyosmani/agent-skills"
-          },
-          "summary": {
-            "zh": "Skills 赛道权威信号，可与 CF skill 对照攒写",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/addyosmani/agent-skills"
-          ]
-        },
-        {
-          "id": "t015",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "obra/superpowers：Agentic skills 框架",
-            "en": "obra/superpowers",
-            "ja": "obra/superpowers"
-          },
-          "summary": {
-            "zh": "Skills 方法论大体量；与 ECC/CF 同赛道",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/obra/superpowers"
-          ]
-        },
-        {
           "id": "t016",
           "theme": "agents-oss",
           "title": {
@@ -839,50 +1189,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://github.com/BuilderIO/agent-native"
-          ]
-        },
-        {
-          "id": "t017",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Fission-AI/OpenSpec：Spec-driven development for AI coding",
-            "en": "Fission-AI/OpenSpec",
-            "ja": "Fission-AI/OpenSpec"
-          },
-          "summary": {
-            "zh": "SDD × coding agent；周增高",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/Fission-AI/OpenSpec"
-          ]
-        },
-        {
-          "id": "t018",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Tencent/WeKnora：文档→RAG→自主 agent→Wiki",
-            "en": "Tencent/WeKnora",
-            "ja": "Tencent/WeKnora"
-          },
-          "summary": {
-            "zh": "腾讯知识 agent 平台；Δ5303",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/Tencent/WeKnora"
           ]
         },
         {
@@ -949,28 +1255,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://github.com/danny-avila/LibreChat"
-          ]
-        },
-        {
-          "id": "t022",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "How to Build AI Agents in Python（Tech With Tim）",
-            "en": "How to Build AI Agents in Python（Tech With Tim）",
-            "ja": "How to Build AI Agents in Python（Tech With Tim）"
-          },
-          "summary": {
-            "zh": "刚发教程，可作入门向外链/短评素材",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "youtube"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.youtube.com/watch?v=-RTgK6qX6A8"
           ]
         },
         {
@@ -1108,28 +1392,6 @@
           ]
         },
         {
-          "id": "t033",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "JustVugg/colibri：自有硬件流式 MoE",
-            "en": "JustVugg/colibri",
-            "ja": "JustVugg/colibri"
-          },
-          "summary": {
-            "zh": "本地推理引擎热度 Δ4036",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/JustVugg/colibri"
-          ]
-        },
-        {
           "id": "t034",
           "theme": "agents-oss",
           "title": {
@@ -1171,52 +1433,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://github.com/HKUDS/CLI-Anything"
-          ]
-        },
-        {
-          "id": "t036",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "DeusData/codebase-memory-mcp",
-            "en": "DeusData/codebase-memory-mcp",
-            "ja": "DeusData/codebase-memory-mcp"
-          },
-          "summary": {
-            "zh": "MCP + 代码库记忆",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github",
-            "producthunt"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/DeusData/codebase-memory-mcp",
-            "https://www.productcool.com/archive/2026/09/23"
-          ]
-        },
-        {
-          "id": "t037",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "agent-substrate/substrate",
-            "en": "agent-substrate/substrate",
-            "ja": "agent-substrate/substrate"
-          },
-          "summary": {
-            "zh": "Agent 底层基建",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/agent-substrate/substrate"
           ]
         },
         {
