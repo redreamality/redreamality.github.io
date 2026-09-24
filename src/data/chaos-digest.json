@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T10:47:23+08:00",
+  "updatedAt": "2026-09-24T10:53:55+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,11 +13,11 @@
   "themeCounts": {
     "models": 8,
     "coding-tools": 10,
-    "agents-oss": 32,
-    "security": 2,
+    "agents-oss": 36,
+    "security": 3,
     "research": 16,
     "product-news": 3,
-    "other": 8
+    "other": 9
   },
   "hours": [
     {
@@ -117,12 +117,12 @@
           "theme": "agents-oss",
           "title": {
             "zh": "Claude 发现类 CRISPR 新酶系统",
-            "en": "",
-            "ja": ""
+            "en": "Claude \\\"Discovered\\\" a CRISPR-like Enzyme System: How to Read the Science Marketing, Not the Hype",
+            "ja": "Claude \\\"Discovered\\\" a CRISPR-like Enzyme System: How to Read the Science Marketing, Not the Hype"
           },
           "summary": {
             "zh": "模型「发现科学」叙事：可复现性与研究 agent 边界",
-            "en": "",
+            "en": "Anthropic says Claude found ART (array-associated reverse transcriptases) under high-level direction. This post cross-checks the news post and technical report: search discovery vs unknown function, reproducibility limits, research-agent pipelines, and how builders should read the story.",
             "ja": ""
           },
           "sources": [
@@ -132,7 +132,11 @@
           "status": "writing",
           "externalUrls": [
             "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
-          ]
+          ],
+          "blog": {
+            "zh": "/cn/blog/claude-discovers-novel-enzyme-crispr-like-art/",
+            "en": "/blog/claude-discovers-novel-enzyme-crispr-like-art/"
+          }
         },
         {
           "id": "t004",
@@ -226,24 +230,26 @@
           "id": "t010",
           "theme": "models",
           "title": {
-            "zh": "MiMo v2.6：小米开源/中文前沿模型冲刺",
-            "en": "MiMo v2.6",
-            "ja": "MiMo v2.6"
+            "zh": "MiMo v2.6→V3：小米开源/中文前沿（含 HySparse2）",
+            "en": "",
+            "ja": ""
           },
           "summary": {
-            "zh": "中文读者向开源模型对照 Opus/GPT-6",
+            "zh": "中文读者向开源模型对照 Opus/GPT-6；V3 HySparse2 架构预告",
             "en": "",
             "ja": ""
           },
           "sources": [
             "hn",
-            "huggingface"
+            "huggingface",
+            "reddit"
           ],
           "score": 4,
           "status": "shortlisted",
           "externalUrls": [
             "https://mimo.xiaomi.com/mimo-v2-6",
-            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
+            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wo7mr6/mimov3_is_getting_a_new_architecture_the_core_of/"
           ]
         },
         {
@@ -450,6 +456,50 @@
           ]
         },
         {
+          "id": "t098",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "LensVLM-9B：长上下文压成图像页再按需展开",
+            "en": "LensVLM-9B",
+            "ja": "LensVLM-9B"
+          },
+          "summary": {
+            "zh": "Agent/RAG 上下文成本另一条路；对照 KV/稀疏注意力",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://huggingface.co/apple/LensVLM-9B"
+          ]
+        },
+        {
+          "id": "t099",
+          "theme": "security",
+          "title": {
+            "zh": "澳大利亚称 OpenAI agent 入侵政府门户",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "真实世界 agent 越权/审计/沙箱责任叙事",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://www.channelnewsasia.com/world/australia-openai-agent-breach-government-portal-6406411"
+          ]
+        },
+        {
           "id": "t095",
           "theme": "research",
           "title": {
@@ -557,6 +607,28 @@
           "status": "inbox",
           "externalUrls": [
             "https://github.com/Tencent/WeKnora"
+          ]
+        },
+        {
+          "id": "t032",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Tokens Too Cheap to Meter",
+            "en": "Tokens Too Cheap to Meter",
+            "ja": "Tokens Too Cheap to Meter"
+          },
+          "summary": {
+            "zh": "推理单价崩塌→产品默认嵌模型；对照 agent 循环成本",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "hn"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://jyn.dev/tokens-too-cheap-to-meter/"
           ]
         },
         {
@@ -757,6 +829,72 @@
           "status": "inbox",
           "externalUrls": [
             "https://huggingface.co/spaces/webml-community/ternary-bonsai-2-webgpu-kernels"
+          ]
+        },
+        {
+          "id": "t097",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Per-Agent Cost Tracking：多 Agent AWS 成本归因",
+            "en": "Per-Agent Cost Tracking",
+            "ja": "Per-Agent Cost Tracking"
+          },
+          "summary": {
+            "zh": "多 agent 运维账单归因；接 token 降价叙事讲控预算",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "devto"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://dev.to/sarvar_04/per-agent-cost-tracking-for-multi-agent-ai-on-aws-10eg"
+          ]
+        },
+        {
+          "id": "t101",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Snapdragon X2：agentic AI PC + Linux 支持",
+            "en": "Snapdragon X2",
+            "ja": "Snapdragon X2"
+          },
+          "summary": {
+            "zh": "端侧 agent 运行时硬件；对照本地推理/隐私",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "hn"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.qualcomm.com/news/onq/2026/09/snapdragon-summit-agentic-ai-pcs-linux"
+          ]
+        },
+        {
+          "id": "t102",
+          "theme": "other",
+          "title": {
+            "zh": "Strix Halo 128GB：本地 Qwen3 235B UMA 调参实录",
+            "en": "Strix Halo 128GB",
+            "ja": "Strix Halo 128GB"
+          },
+          "summary": {
+            "zh": "本地大模型卡在统一内存切分；ops 样本",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "reddit"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.reddit.com/r/LocalLLM/comments/1won03e/strix_halo_128gb_local_llm_tuning_96gb_uma_made_a/"
           ]
         }
       ]
