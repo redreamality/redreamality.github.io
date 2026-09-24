@@ -3,17 +3,18 @@ import { getHomepageVisuals, getLatestVisual, getVisualWork } from './visuals';
 
 describe('getLatestVisual', () => {
   it.each([
-    ['en', '/visuals/bayes-lab-result/', 'Same Lab Result—Why Do Two People Reach Opposite Conclusions?'],
-    ['zh', '/cn/visuals/bayes-lab-result/', '同一张化验单，为什么两人结论相反？'],
-    ['ja', '/ja/visuals/bayes-lab-result/', '同じ検査結果なのに、なぜ二人の結論は真逆なのか？'],
+    ['en', '/visuals/normal-distribution/', 'In a World of "About Average," Why Do Extremes Keep Showing Up?'],
+    ['zh', '/cn/visuals/normal-distribution/', '为什么「差不多平均」的世界里，极端值总出现？'],
+    ['ja', '/ja/visuals/normal-distribution/', '「だいたい平均」の世界で、なぜ極端な値はいつも現れるのか？'],
   ] as const)('returns the newest published %s artifact', (lang, href, title) => {
-    expect(getLatestVisual(lang)).toMatchObject({ slug: 'bayes-lab-result', href, title, hasCurrentArtifact: true });
+    expect(getLatestVisual(lang)).toMatchObject({ slug: 'normal-distribution', href, title, hasCurrentArtifact: true });
   });
 });
 
 describe('getHomepageVisuals', () => {
   it('returns every current-language artifact in newest-first order', () => {
     expect(getHomepageVisuals('en').map((visual) => visual.slug)).toEqual([
+      'normal-distribution',
       'bayes-lab-result',
       'compound-interest',
       'inflation-purchasing-power',
@@ -41,6 +42,7 @@ describe('visual artifact registration', () => {
     ['inflation-purchasing-power', 'inflation-purchasing-power'],
     ['compound-interest', 'compound-interest'],
     ['bayes-lab-result', 'bayes-lab-result'],
+    ['normal-distribution', 'normal-distribution'],
   ] as const)('uses one stable artifact ID across locales for %s', (slug, artifact) => {
     const work = getVisualWork(slug);
 

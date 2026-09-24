@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="正規分布（釣鐘曲線）のインタラクティブ解説：なぜ大半の結果は平均付近に集まり、独立な小さな摂動がどう積み上がってその形になるか、1/2/3σ帯の意味、大標本で稀な尾がなお現れる理由——仕組みのみ、公式暗記ページではない。">
+  <title>「だいたい平均」の世界で、なぜ極端な値はいつも現れるのか？</title>
+  <style data-prototype-bundle="article">
+:root {
+  color-scheme: light;
+  --paper: #f4f1e8;
+  --surface: #fffdf8;
+  --ink: #17333c;
+  --muted: #60747a;
+  --line: #d8ddd7;
+  --ocean: #0f7185;
+  --warm: #ee9d46;
+  --coral: #d45f50;
+  --soft-ocean: color-mix(in srgb, var(--ocean) 9%, var(--surface));
+  --soft-warm: color-mix(in srgb, var(--warm) 12%, var(--surface));
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body { margin: 0; overflow-x: clip; color: var(--ink); background: radial-gradient(circle at 20% 0, #dff3ef 0, transparent 30rem), var(--paper); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .75rem;
+  left: .75rem;
+  padding: .65rem .9rem;
+  color: white;
+  background: var(--ink);
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.75rem;
+  padding: .65rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(216, 221, 215, .9);
+  background: rgba(244, 241, 232, .9);
+  backdrop-filter: blur(14px);
+}
+.site-header strong { margin-right: auto; font-size: .72rem; letter-spacing: .12em; }
+.language-links { display: flex; gap: .65rem; }
+.language-links a { color: var(--muted); font-size: .78rem; }
+.language-links a[aria-current="page"] { color: var(--ocean); font-weight: 800; }
+[data-global-motion] {
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.hero, .copy-block {
+  width: min(calc(100% - 2rem), 54rem);
+  margin-inline: auto;
+}
+.hero {
+  position: relative;
+  padding: clamp(5rem, 14vw, 10rem) 0;
+}
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -12% auto auto;
+  width: clamp(9rem, 28vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ocean) 35%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem color-mix(in srgb, var(--ocean) 5%, transparent),
+    0 0 0 5rem color-mix(in srgb, var(--warm) 4%, transparent);
+  content: "";
+}
+.eyebrow, .section-label {
+  margin: 0 0 1rem;
+  color: var(--ocean);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+h1, h2 { margin-top: 0; line-height: 1.03; text-wrap: balance; }
+h1 { max-width: 9em; margin-bottom: 1.5rem; font-size: clamp(3.2rem, 10vw, 7rem); letter-spacing: -.06em; }
+h2 { max-width: 16em; margin-bottom: 1.15rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+.hero-subtitle, .copy-prose { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.75; }
+.hero-subtitle { max-width: 38rem; }
+.copy-prose { margin: .8rem 0 0; }
+
+.plain-language {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .75rem 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 55%, var(--line));
+  border-radius: 1rem;
+  background: var(--soft-warm);
+}
+.plain-language strong {
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  color: var(--surface);
+  background: var(--warm);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.plain-language p { margin: 0; color: var(--ink); line-height: 1.65; }
+
+.concept-points { margin-top: 1.4rem; }
+.concept-points-label {
+  margin: 0 0 .7rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.concept-points ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.concept-card strong { display: block; margin-bottom: .45rem; }
+.concept-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+.overview, .chapter, .closing { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
+.overview { background: color-mix(in srgb, var(--surface) 42%, transparent); }
+.chapter:nth-of-type(even) { background: color-mix(in srgb, var(--surface) 22%, transparent); }
+interactive-figure {
+  display: block;
+  width: min(calc(100% - 2rem), 68rem);
+  min-height: 29rem;
+  margin: 3rem auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 51, 60, .14);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 1.5rem 4rem rgba(23, 51, 60, .1);
+}
+
+.closing { background: linear-gradient(150deg, var(--soft-ocean), color-mix(in srgb, var(--paper) 86%, var(--surface))); }
+.closing-copy { width: min(calc(100% - 2rem), 68rem); }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.starter-checklist, .boundary-map {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.closing h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.starter-checklist ol { display: grid; gap: .7rem; margin: 0; padding-left: 1.35rem; }
+.starter-checklist li { padding-left: .3rem; line-height: 1.55; }
+.boundary-map ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.scale-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: .2rem .8rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--surface);
+}
+.scale-card strong { grid-row: 1 / span 2; color: var(--ocean); }
+.scale-card span { color: var(--ink); font-size: .82rem; font-weight: 800; }
+.scale-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.closing blockquote {
+  margin: 2rem 0 0;
+  padding: 1.35rem clamp(1rem, 3vw, 1.8rem);
+  border-left: .32rem solid var(--ocean);
+  color: var(--ink);
+  background: var(--surface);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.55;
+}
+.source-note { margin: 1rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+article[data-visual-slug="loop-engineering"] .hero .eyebrow { color: var(--coral); }
+article[data-visual-slug="loop-engineering"] interactive-figure { box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ocean) 12%, transparent); }
+
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header strong { width: 100%; }
+  .language-links { margin-right: auto; }
+  interactive-figure { min-height: 32rem; border-radius: 1rem; }
+  .concept-points ul, .closing-grid { grid-template-columns: 1fr; }
+  .plain-language { grid-template-columns: 1fr; }
+  .scale-card { grid-template-columns: 5.5rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#article">本文へスキップ</a>
+  <header class="site-header">
+    <strong>VISUAL KIT / PROTOTYPE</strong>
+    <nav class="language-links" aria-label="言語">
+<a href="../en/" hreflang="en">English</a>
+<a href="../zh/" hreflang="zh">中文</a>
+<a href="../ja/" hreflang="ja" aria-current="page">日本語</a>
+    </nav>
+    <button type="button" data-global-motion aria-pressed="false"></button>
+  </header>
+  <main id="article">
+    <article data-visual-slug="normal-distribution">
+      <header class="hero">
+        <p class="eyebrow">分布 / 釣鐘曲線 / 尾部</p>
+        <h1>「だいたい平均」の世界で、なぜ極端な値はいつも現れるのか？</h1>
+        <p class="hero-subtitle">身長、測定ノイズ、日常のスコアは多くが「普通」の近くに落ち、時おり極端に遠い人もいる。釣鐘曲線はその直感を密度として描く：中央は厚く、翼は薄いがゼロではない——極端はインクのバグではない。</p>
+      </header>
+<section class="overview" aria-labelledby="overview-title">
+  <div class="copy-block">
+    <p class="section-label">正規分布の概観</p>
+    <h2 id="overview-title">大半は普通、たまに過激——同じ形</h2>
+    <p class="copy-prose">周囲を見てみよう：同級生の身長、日々の気温、小さな測定誤差。多くは「典型」の近く、少数は大きく左か右へ。中央が密で両端が疎——正規曲線が描くリズムだ。</p>
+<p class="copy-prose">極端は印刷ミスではない。同じ密度の薄い縁だ。このページはその絵を組む：小さな摂動の加算 → 釣鐘、σ帯、大標本で稀な値がなお当たる理由。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>世界が「だいたい平均」に見えるのは中央が厚いから；極端がなお出るのは尾がゼロにならないから。</p></aside><div class="concept-points"><p class="concept-points-label">まずこの三点</p><ul><li class="concept-card"><strong>厚い中央</strong><p>確率質量の大半は平均付近——だから「普通」がよく見える。</p></li><li class="concept-card"><strong>薄いが実在する尾</strong><p>遠い結果は1回あたり稀だが、禁止ではない。</p></li><li class="concept-card"><strong>仕組み、暗記ではない</strong><p>形と標本の直感を追う——試験テクではない。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="nd-overview" data-title="切り替え：普通の山 vs 極端の強調" data-copy="{&quot;ariaLabel&quot;:&quot;釣鐘曲線で密集した中央と強調した極端を対比する概観インタラクション&quot;,&quot;caption&quot;:&quot;視点を切り替え：同じ曲線でも、中央を灯せば「だいたい平均」、翼を灯せば「極端は存在する」。&quot;,&quot;controlLabel&quot;:&quot;視点&quot;,&quot;modes&quot;:[{&quot;key&quot;:&quot;middle&quot;,&quot;label&quot;:&quot;普通の山&quot;,&quot;headline&quot;:&quot;質量の大半は中央に寄り添う&quot;,&quot;detail&quot;:&quot;太い中央を見ると世界は「だいたい平均」に見える——大抵の抽選もここに落ちる。&quot;,&quot;badge&quot;:&quot;中央&quot;},{&quot;key&quot;:&quot;tails&quot;,&quot;label&quot;:&quot;極端の翼&quot;,&quot;headline&quot;:&quot;同じ曲線にも翼がある&quot;,&quot;detail&quot;:&quot;遠い帯を灯すと稀な結果が見える——誤りではなく、同じ形の低密度の場所。&quot;,&quot;badge&quot;:&quot;尾部&quot;}],&quot;statusMiddle&quot;:&quot;中央を灯す：確率の大半は平均付近——普通がよく見える。&quot;,&quot;statusTails&quot;:&quot;尾を灯す：極端は1回あたり稀だが、同じ曲線に属する。&quot;}"><noscript>インタラクティブ図解を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="many-shocks" aria-labelledby="many-shocks-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 01</p>
+    <h2 id="many-shocks-title">多くの独立な小さな摂動の和 → 釣鐘</h2>
+    <p class="copy-prose">ごく小さく、おおよそ独立な押しをたくさん想像する——測定の揺れ、わずかな遺伝要因、日常ノイズ。一つ一つは乱雑でも、十分足すと合計はしばしば丘になる：それらの平均付近が最も高く、離れるほど薄くなる。</p>
+<p class="copy-prose">壁に定理名を並べる必要はない。直感版は：独立ノイズを積むと釣鐘に見えやすい。デモのサイコロ/コインは、その小さな摂動の玩具の代役だ。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>独立な小さなノイズをたくさん足すと、合計は真ん中が高い丘になりやすい。</p></aside><div class="concept-points"><p class="concept-points-label">見るポイント</p><ul><li class="concept-card"><strong>独立が助けになる</strong><p>摂動が同期しないと、打ち消しが中央を埋めやすい。</p></li><li class="concept-card"><strong>項が多いほど丸い丘</strong><p>項が少ないとヒストグラムは角ばり、多いと丸くなる。</p></li><li class="concept-card"><strong>玩具モデル</strong><p>サイコロ/コインの和は教材の代役——現実の変数がすべて正規だとは言わない。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="nd-sum" data-title="小さな摂動の数を増やし、丘ができるのを見る" data-copy="{&quot;ariaLabel&quot;:&quot;独立な小さな摂動の和が釣鐘形になるインタラクティブヒストグラム&quot;,&quot;caption&quot;:&quot;1回の和に含める小さな摂動の数を上げる。合計のヒストグラムがより丸く釣鐘に近づく。&quot;,&quot;controlLabel&quot;:&quot;1回の和あたりの小さな摂動数&quot;,&quot;shocksLabel&quot;:&quot;1回あたりの摂動数&quot;,&quot;samplesLabel&quot;:&quot;山に積む抽選回数&quot;,&quot;statusFew&quot;:&quot;摂動が少ない：山はまだ角ばって不均一。&quot;,&quot;statusMany&quot;:&quot;摂動が多い：打ち消しが中央を埋め——より釣鐘に見える。&quot;}"><noscript>インタラクティブ図解を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="three-sigmas" aria-labelledby="three-sigmas-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 02</p>
+    <h2 id="three-sigmas-title">68 · 95 · 99.7：「珍しい」はどれくらい遠いか？</h2>
+    <p class="copy-prose">正規曲線では、平均からの距離を標準偏差（σ）で測ることが多い。教材の粗い帯：約68%が1σ以内、約95%が2σ以内、約99.7%が3σ以内。</p>
+<p class="copy-prose">これらは曲線の下の面積であり、魔法の合言葉ではない。帯幅を動かすと、残る尾がどれだけ速く痩せるか、「3σの外」が稀でも不可能ではない理由が見える。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>1σ / 2σ / 3σは平均まわりのだんだん広いベルト；大半の質量は内側、少しが外側に漏れる。</p></aside><div class="concept-points"><p class="concept-points-label">見るポイント</p><ul><li class="concept-card"><strong>σは物差し</strong><p>この丘が「どれだけ広がっているか」を測る。</p></li><li class="concept-card"><strong>帯は面積</strong><p>68–95–99.7は確率質量の話であり、暗記そのものが目的ではない。</p></li><li class="concept-card"><strong>外側 ≠ 不可能</strong><p>3σの外は1回あたり少ない——禁域ではない。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="nd-curve" data-title="釣鐘に1σ / 2σ / 3σ帯を灯す" data-copy="{&quot;ariaLabel&quot;:&quot;1/2/3シグマ帯を選べるインタラクティブ正規曲線&quot;,&quot;caption&quot;:&quot;σベルトを選ぶ。曲線の面積のうち帯の内側と翼にどれだけあるかを見る。&quot;,&quot;controlLabel&quot;:&quot;シグマ帯&quot;,&quot;band1Label&quot;:&quot;±1σ · ~68%&quot;,&quot;band2Label&quot;:&quot;±2σ · ~95%&quot;,&quot;band3Label&quot;:&quot;±3σ · ~99.7%&quot;,&quot;meanLabel&quot;:&quot;平均&quot;,&quot;insideLabel&quot;:&quot;帯の内側&quot;,&quot;outsideLabel&quot;:&quot;外側（尾）&quot;,&quot;status1&quot;:&quot;±1σ：質量の大半はすでに内側——普通の領域。&quot;,&quot;status2&quot;:&quot;±2σ：外側に残るのは薄い切片だけ。&quot;,&quot;status3&quot;:&quot;±3σ：ほぼすべて内側；残る尾はごく小さいがゼロではない。&quot;}"><noscript>インタラクティブ図解を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="rare-tails" aria-labelledby="rare-tails-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 03</p>
+    <h2 id="rare-tails-title">1回あたり稀——大標本では「いつも」当たる</h2>
+    <p class="copy-prose">1回で遠い尾に落ちると奇跡や故障に感じる。枠を変える：1回なら極端は起きにくい。何千回なら、「少なくとも1回の極端」は当たり前になる。</p>
+<p class="copy-prose">デモは翼を強調し、標本を大きくできる。極端が「いつも出る」のは中央が嘘をついたからではなく、独立な機会が何度も薄い縁をつつくからだ。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>1回は稀；回数を重ねればいずれ——標本を取り続けるなら。</p></aside><div class="concept-points"><p class="concept-points-label">見るポイント</p><ul><li class="concept-card"><strong>1回の稀少さ</strong><p>遠い尾は各抽選で確率が小さい。</p></li><li class="concept-card"><strong>標本サイズが効く</strong><p>nが大きいと「少なくとも1つの極端」は普通になる。</p></li><li class="concept-card"><strong>極端 ≠ 存在すべきでない</strong><p>薄い尾に属することは「あってはならない」とは別。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="nd-tails" data-title="標本を増やし、尾のヒットが出るまで見る" data-copy="{&quot;ariaLabel&quot;:&quot;正規曲線の尾を強調し標本サイズに応じて極端ヒットが積もるインタラクティブデモ&quot;,&quot;caption&quot;:&quot;標本サイズを上げる。1回あたりは稀でも、翼のヒットが徐々に積もる。&quot;,&quot;controlLabel&quot;:&quot;標本サイズ&quot;,&quot;sampleLabel&quot;:&quot;抽選回数&quot;,&quot;tailLabel&quot;:&quot;尾の領域&quot;,&quot;hitsLabel&quot;:&quot;これまでの極端ヒット&quot;,&quot;statusSmall&quot;:&quot;標本が小さい：翼のヒットはまだ出ないかも——稀少さが勝つ。&quot;,&quot;statusLarge&quot;:&quot;標本が大きい：いくつかの極端ヒットが出る——同じ薄い尾の下では想定内。&quot;}"><noscript>インタラクティブ図解を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="not-always" aria-labelledby="not-always-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 04</p>
+    <h2 id="not-always-title">すべてが正規ではない——太い尾は別世界</h2>
+    <p class="copy-prose">穏やかで独立な効果がたくさん積まれるとき、釣鐘は強い既定だ。万能パスポートではない。尾が太い系もある：正規が許すより極端が頻繁に来る。</p>
+<p class="copy-prose">ここは一文で十分：崩壊、連鎖、勝者総取りの尖りが多い世界なら、釣鐘を無理に当てるな。本ページは正規の形を認め——疑うべき時を知るところで止まる。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>釣鐘は便利な道具であり、すべてのデータの自然法則ではない。</p></aside><div class="concept-points"><p class="concept-points-label">見るポイント</p><ul><li class="concept-card"><strong>正規はモデル</strong><p>積み上げの話が合うとき有用；無理強いすると危険。</p></li><li class="concept-card"><strong>太い尾は存在する</strong><p>遠いところに釣鐘の±3σより多くの質量を置く過程もある。</p></li><li class="concept-card"><strong>金融講座にはしない</strong><p>注意を名指しするだけ——取引は教えない。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="nd-limits" data-title="釣鐘とより太い尾のスケッチを比べる" data-copy="{&quot;ariaLabel&quot;:&quot;正規の釣鐘とより重い尾のスケッチを切り替えて比較&quot;,&quot;caption&quot;:&quot;形を切り替え：中央の話は似て、翼の厚さが違う。&quot;,&quot;controlLabel&quot;:&quot;形&quot;,&quot;modes&quot;:[{&quot;key&quot;:&quot;normal&quot;,&quot;label&quot;:&quot;釣鐘（正規）&quot;,&quot;headline&quot;:&quot;翼は速く痩せる&quot;,&quot;detail&quot;:&quot;数σを超えると密度は急速に落ちる——このモデルでは極端は稀。&quot;,&quot;badge&quot;:&quot;正規&quot;},{&quot;key&quot;:&quot;heavy&quot;,&quot;label&quot;:&quot;より太い尾&quot;,&quot;headline&quot;:&quot;翼がより厚い&quot;,&quot;detail&quot;:&quot;遠方に確率がより残る。ここで釣鐘を無理に当てると極端を過小評価する。&quot;,&quot;badge&quot;:&quot;注意&quot;}],&quot;statusNormal&quot;:&quot;釣鐘を選択：尾は薄い——1回あたり極端は少ない。&quot;,&quot;statusHeavy&quot;:&quot;より太いスケッチ：翼が厚い——すべての丘が正規だと思い込むな。&quot;}"><noscript>インタラクティブ図解を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="closing" aria-labelledby="closing-title">
+  <div class="copy-block closing-copy">
+    <p class="section-label">形を組み立て直す</p>
+    <h2 id="closing-title">厚い中央 + 薄い尾——極端は同じ曲線の一部</h2>
+    <p class="copy-prose">正規曲線は「だいたい平均」がなぜ正しく感じるかと、稀な極端がなぜなお起きるかの両方を説明する：質量の大半は平均付近、翼はゼロにならない。独立な小さな摂動がしばしばその丘を作り、σ帯が「どれだけ遠いか」を測り、大標本が稀なヒットを不可避にする。</p>
+<p class="copy-prose">一息で caveat を覚える：すべてが正規ではない。積み上げの話が合うとき釣鐘を使い、翼が太すぎるときは疑う。</p>
+    <div class="closing-grid">
+      <div class="starter-checklist">
+        <h3>読者チェック</h3>
+        <ol><li>多くの穏やかな独立効果が積まれているかを問う。</li><li>「珍しい」をσ距離として読み、道徳的失敗として読まない。</li><li>大標本では尾のヒットをいくらか予期する。</li><li>極端が多すぎるなら、より太い尾を考える——無理な釣鐘は避ける。</li></ol>
+      </div>
+      <div class="boundary-map">
+        <h3>四つの動き</h3>
+        <ul><li class="scale-card"><strong>積み上げ</strong><span>丘はどこから？</span><p>多くの独立な小さな摂動の和。</p></li><li class="scale-card"><strong>σ帯</strong><span>遠さはどう測る？</span><p>1 / 2 / 3σベルトとその面積。</p></li><li class="scale-card"><strong>尾</strong><span>なぜ極端が出る？</span><p>1回は稀；何度も標本を取れば普通。</p></li><li class="scale-card"><strong>限界</strong><span>いつ釣鐘を疑う？</span><p>翼がずっと太いとき——別モデルの方が合うかも。</p></li></ul>
+      </div>
+    </div>
+    <blockquote>「平均」の世界の極端は、しばしば同じ密度の薄い縁——インクのバグではない。</blockquote>
+    <p class="source-note">正規（ガウス）分布についての公共教育ノート：中央への集中、σ帯、大標本で稀な尾が現れる理由。Wikipedia「Normal distribution」は高トラフィックの背景記事；本ページは仕組みの直感のみ——試験ドリル、予測、投資助言ではない。</p>
+  </div>
+</section>
+    </article>
+  </main>
+  <script>
+    window.__VISUAL_I18N__ = {"pauseAll":"すべての動きを停止","resumeAll":"すべての動きを再開","pause":"一時停止","resume":"再開","reset":"リセット","waiting":"図解は表示領域に入ると読み込まれます。","loading":"図解を準備しています…","error":"図解を表示できません。上の説明を読んでください。","figureFallback":"インタラクティブ図解を見るには JavaScript を有効にしてください。","skipToContent":"本文へスキップ","languageNavigation":"言語","overviewLabel":"正規分布の概観","stepLabel":"ステップ"};
+  </script>
+  <script data-prototype-bundle="runtime">
+(() => {
+  "use strict";
+
+  const ui = Object.freeze(window.__VISUAL_I18N__);
+  const registry = new Map();
+  const figures = new Set();
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const tokens = Object.freeze({
+    ink: "var(--visual-ink, #17333c)",
+    muted: "var(--visual-muted, #60747a)",
+    line: "var(--visual-line, #d8ddd7)",
+    ocean: "var(--visual-ocean, #0f7185)",
+    warm: "var(--visual-warm, #ee9d46)",
+    coral: "var(--visual-coral, #d45f50)",
+    paper: "var(--visual-paper, #f4f1e8)",
+    surface: "var(--visual-surface, #fffdf8)"
+  });
+  let globalPaused = false;
+
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+  const call = (instance, method, value) => {
+    if (instance && typeof instance[method] === "function") instance[method](value);
+  };
+
+  class InteractiveFigure extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
+      this._instance = null;
+      this._mounted = false;
+      this._mounting = false;
+      this._visible = false;
+      this._localPaused = false;
+    }
+
+    connectedCallback() {
+      if (this._connected) return;
+      this._connected = true;
+      figures.add(this);
+      this._shadow.innerHTML = `
+        <style>
+          :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+          .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
+          .mount { min-height: inherit; }
+          .runtime-status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; pointer-events: none; }
+          .runtime-status[data-live-only] { position: absolute; inset: auto; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; background: transparent; pointer-events: none; }
+          .runtime-status[hidden] { display: none; }
+          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
+          .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+          button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+          button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+          @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
+        </style>
+        <div class="frame">
+          <div class="stage"><div class="mount"></div><div class="runtime-status" data-runtime-status role="status"></div></div>
+          <div class="controls">
+            <span class="title"></span>
+            <button type="button" data-action="pause" aria-pressed="false"></button>
+            <button type="button" data-action="reset"></button>
+          </div>
+        </div>`;
+
+      this._stage = this._shadow.querySelector(".stage");
+      this._mountRoot = this._shadow.querySelector(".mount");
+      this._status = this._shadow.querySelector("[data-runtime-status]");
+      this._title = this._shadow.querySelector(".title");
+      this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
+      this._resetButton = this._shadow.querySelector('[data-action="reset"]');
+      this._copy = JSON.parse(this.dataset.copy || "{}");
+      this._title.textContent = this.dataset.title || "";
+      this._pauseButton.textContent = ui.pause;
+      this._resetButton.textContent = ui.reset;
+      this._setStatus(ui.waiting);
+
+      this._pauseButton.addEventListener("click", () => {
+        this._localPaused = !this._localPaused;
+        this._syncPlayback();
+      });
+      this._resetButton.addEventListener("click", () => {
+        call(this._instance, "reset");
+        this.dispatchEvent(new CustomEvent("demo-reset", { bubbles: true }));
+      });
+
+      this._observer = new IntersectionObserver((entries) => {
+        this._visible = entries[0]?.isIntersecting ?? false;
+        if (this._visible) this._mount();
+        this._syncPlayback();
+      }, { rootMargin: "180px 0px", threshold: .05 });
+      this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      figures.delete(this);
+      this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
+      call(this._instance, "destroy");
+    }
+
+    async _mount() {
+      if (this._mounted || this._mounting) return;
+      const factory = registry.get(this.dataset.demo);
+      if (!factory) return;
+      this._mounting = true;
+      this._setStatus(ui.loading);
+      try {
+        this._instance = await factory({
+          root: this._mountRoot,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
+          copy: this._copy,
+          motion: !reducedMotion.matches,
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._announce(message)
+        }) || {};
+        this._mounted = true;
+        this.dataset.state = "mounted";
+        this._liveRevision = (this._liveRevision || 0) + 1;
+        this._status.removeAttribute("data-live-only");
+        this._status.textContent = "";
+        this._status.hidden = true;
+        this._resize();
+        this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
+      } catch {
+        this.dataset.state = "error";
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
+      }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
+    }
+
+    _syncPlayback() {
+      const paused = globalPaused || this._localPaused || !this._visible || reducedMotion.matches;
+      this.dataset.playback = paused ? "paused" : "playing";
+      this._pauseButton?.setAttribute("aria-pressed", String(this._localPaused));
+      if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
+      call(this._instance, paused ? "pause" : "resume");
+    }
+
+    _setStatus(message) {
+      this._liveRevision = (this._liveRevision || 0) + 1;
+      this._status.removeAttribute("data-live-only");
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
+
+    _announce(message) {
+      const revision = (this._liveRevision || 0) + 1;
+      this._liveRevision = revision;
+      this._status.hidden = false;
+      this._status.setAttribute("data-live-only", "");
+      this._status.textContent = "";
+      queueMicrotask(() => {
+        if (this._liveRevision !== revision || !this._status.isConnected) return;
+        this._status.textContent = message;
+      });
+    }
+  }
+
+  window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
+    if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
+    registry.set(id, factory);
+    figures.forEach((figure) => {
+      if (figure.dataset.demo === id && figure._visible) figure._mount();
+    });
+  };
+
+  customElements.define("interactive-figure", InteractiveFigure);
+
+  const globalToggle = document.querySelector("[data-global-motion]");
+  const syncGlobalToggle = () => {
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
+    figures.forEach((figure) => figure._syncPlayback());
+  };
+  globalToggle?.addEventListener("click", () => {
+    globalPaused = !globalPaused;
+    syncGlobalToggle();
+  });
+  reducedMotion.addEventListener("change", syncGlobalToggle);
+  syncGlobalToggle();
+})();
+  </script>
+  <script data-prototype-bundle="demos">
+const escapeHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+registerDemo("nd-overview", ({ root, copy, motion, tokens, announce }) => {
+  const buttons = copy.modes.map((mode, index) => `
+    <button type="button" class="nd-ov-btn" data-nd-ov="${index}" aria-pressed="${index === 0}">${escapeHtml(mode.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .nd-ov { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(145deg,color-mix(in srgb,${tokens.ocean} 8%,${tokens.surface}),${tokens.surface} 55%,color-mix(in srgb,${tokens.warm} 10%,${tokens.surface})); }
+      .nd-ov-panel { display:grid; gap:.75rem; padding:1.1rem 1.2rem; border:1px solid ${tokens.line}; border-radius:1.1rem;
+        background:color-mix(in srgb,${tokens.paper} 55%,${tokens.surface}); min-height:12rem; }
+      .nd-ov-badge { display:inline-flex; width:max-content; padding:.25rem .55rem; border-radius:999px; font-size:.68rem; font-weight:850;
+        letter-spacing:.04em; text-transform:uppercase; color:${tokens.surface}; background:${tokens.ocean}; }
+      .nd-ov-panel[data-mode="tails"] .nd-ov-badge { background:${tokens.coral}; }
+      .nd-ov-headline { margin:0; font-size:1.15rem; font-weight:850; line-height:1.35; }
+      .nd-ov-detail { margin:0; color:${tokens.muted}; line-height:1.55; }
+      .nd-ov-canvas-wrap { position:relative; min-height:9rem; height:9rem; border-radius:.85rem; border:1px dashed ${tokens.line};
+        background:color-mix(in srgb,${tokens.surface} 80%,${tokens.paper}); overflow:hidden; }
+      .nd-ov-canvas { position:absolute; inset:0; display:block; width:100%; height:100%; }
+      .nd-ov-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .nd-ov-btn { flex:1 1 8rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink};
+        background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .nd-ov-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .nd-ov-btn:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .nd-ov-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .nd-ov-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .nd-ov.is-paused .nd-ov-canvas { opacity:.92; }
+    </style>
+    <div class="nd-ov${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="nd-ov-panel" data-nd-panel data-mode="middle">
+        <span class="nd-ov-badge" data-nd-badge></span>
+        <h3 class="nd-ov-headline" data-nd-headline></h3>
+        <p class="nd-ov-detail" data-nd-detail></p>
+        <div class="nd-ov-canvas-wrap" data-nd-wrap>
+          <canvas class="nd-ov-canvas" data-nd-canvas aria-hidden="true"></canvas>
+        </div>
+      </div>
+      <div class="nd-ov-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${buttons}</div>
+      <p class="nd-ov-status" data-nd-status role="status"></p>
+      <p class="nd-ov-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".nd-ov");
+  const panel = root.querySelector("[data-nd-panel]");
+  const badge = root.querySelector("[data-nd-badge]");
+  const headline = root.querySelector("[data-nd-headline]");
+  const detail = root.querySelector("[data-nd-detail]");
+  const status = root.querySelector("[data-nd-status]");
+  const wrap = root.querySelector("[data-nd-wrap]");
+  const canvas = root.querySelector("[data-nd-canvas]");
+  const ctx = canvas.getContext("2d");
+  const btns = [...root.querySelectorAll("[data-nd-ov]")];
+  let modeKey = "middle";
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+
+  const pdf = (x) => Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI);
+
+  const draw = () => {
+    if (!width || !height) return;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+
+    const padX = 16;
+    const padY = 14;
+    const plotW = width - padX * 2;
+    const plotH = height - padY * 2;
+    const xMin = -3.6;
+    const xMax = 3.6;
+    const yMax = pdf(0) * 1.12;
+    const toX = (x) => padX + ((x - xMin) / (xMax - xMin)) * plotW;
+    const toY = (y) => padY + plotH - (y / yMax) * plotH;
+
+    ctx.beginPath();
+    for (let i = 0; i <= 120; i++) {
+      const x = xMin + (i / 120) * (xMax - xMin);
+      const px = toX(x);
+      const py = toY(pdf(x));
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.lineTo(toX(xMax), toY(0));
+    ctx.lineTo(toX(xMin), toY(0));
+    ctx.closePath();
+    ctx.fillStyle = modeKey === "middle"
+      ? `color-mix(in srgb, ${tokens.ocean} 35%, transparent)`
+      : `color-mix(in srgb, ${tokens.muted} 18%, transparent)`;
+    ctx.fill();
+
+    if (modeKey === "tails") {
+      const highlight = (a, b) => {
+        ctx.beginPath();
+        let started = false;
+        for (let i = 0; i <= 60; i++) {
+          const x = a + (i / 60) * (b - a);
+          const px = toX(x);
+          const py = toY(pdf(x));
+          if (!started) { ctx.moveTo(px, toY(0)); ctx.lineTo(px, py); started = true; }
+          else ctx.lineTo(px, py);
+        }
+        ctx.lineTo(toX(b), toY(0));
+        ctx.closePath();
+        ctx.fillStyle = `color-mix(in srgb, ${tokens.coral} 55%, transparent)`;
+        ctx.fill();
+      };
+      highlight(xMin, -1.8);
+      highlight(1.8, xMax);
+    } else {
+      ctx.beginPath();
+      for (let i = 0; i <= 80; i++) {
+        const x = -1.2 + (i / 80) * 2.4;
+        const px = toX(x);
+        const py = toY(pdf(x));
+        if (i === 0) { ctx.moveTo(px, toY(0)); ctx.lineTo(px, py); }
+        else ctx.lineTo(px, py);
+      }
+      ctx.lineTo(toX(1.2), toY(0));
+      ctx.closePath();
+      ctx.fillStyle = `color-mix(in srgb, ${tokens.ocean} 50%, transparent)`;
+      ctx.fill();
+    }
+
+    ctx.beginPath();
+    for (let i = 0; i <= 120; i++) {
+      const x = xMin + (i / 120) * (xMax - xMin);
+      const px = toX(x);
+      const py = toY(pdf(x));
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.strokeStyle = tokens.ink;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(toX(0), toY(0));
+    ctx.lineTo(toX(0), toY(pdf(0)));
+    ctx.strokeStyle = tokens.warm;
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  };
+
+  const select = (index, speak = false) => {
+    const mode = copy.modes[index];
+    modeKey = mode.key;
+    panel.dataset.mode = mode.key;
+    badge.textContent = mode.badge;
+    headline.textContent = mode.headline;
+    detail.textContent = mode.detail;
+    status.textContent = mode.key === "middle" ? copy.statusMiddle : copy.statusTails;
+    btns.forEach((b, i) => b.setAttribute("aria-pressed", String(i === index)));
+    draw();
+    if (speak) announce(status.textContent);
+  };
+
+  btns.forEach((b) => b.addEventListener("click", () => select(Number(b.dataset.ndOv), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    resize: ({ width: w, height: h, dpr: ratio }) => {
+      // Prefer wrap box so canvas stays bounded
+      width = wrap.clientWidth || w;
+      height = wrap.clientHeight || h;
+      dpr = ratio || 1;
+      draw();
+    },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("nd-sum", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .nd-sum { display:grid; gap:1rem; min-height:24rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(160deg,color-mix(in srgb,${tokens.ocean} 7%,${tokens.surface}),${tokens.surface}); }
+      .nd-sum-controls { display:grid; gap:.55rem; padding:1rem 1.1rem; border:1px solid ${tokens.line}; border-radius:1rem;
+        background:color-mix(in srgb,${tokens.paper} 45%,${tokens.surface}); }
+      .nd-sum-row { display:flex; flex-wrap:wrap; align-items:center; gap:.75rem; }
+      .nd-sum-label { font-weight:800; font-size:.9rem; min-width:8rem; }
+      .nd-sum-slider { flex:1 1 10rem; min-width:8rem; cursor:pointer; }
+      .nd-sum-val { font-variant-numeric:tabular-nums; font-weight:850; min-width:2.5rem; }
+      .nd-sum-canvas-wrap { position:relative; min-height:14rem; height:14rem; border-radius:1rem; border:1px solid ${tokens.line};
+        background:color-mix(in srgb,${tokens.surface} 88%,${tokens.paper}); overflow:hidden; }
+      .nd-sum-canvas { position:absolute; inset:0; display:block; width:100%; height:100%; }
+      .nd-sum-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .nd-sum-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+    </style>
+    <div class="nd-sum" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="nd-sum-controls">
+        <div class="nd-sum-row">
+          <label class="nd-sum-label" for="nd-sum-shocks">${escapeHtml(copy.shocksLabel)}</label>
+          <input id="nd-sum-shocks" class="nd-sum-slider" type="range" min="1" max="12" step="1" value="2" aria-label="${escapeHtml(copy.controlLabel)}" />
+          <span class="nd-sum-val" data-nd-shocks-val>2</span>
+        </div>
+      </div>
+      <div class="nd-sum-canvas-wrap" data-nd-wrap>
+        <canvas class="nd-sum-canvas" data-nd-canvas tabindex="0" aria-label="${escapeHtml(copy.ariaLabel)}"></canvas>
+      </div>
+      <p class="nd-sum-status" data-nd-status role="status"></p>
+      <p class="nd-sum-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const slider = root.querySelector("#nd-sum-shocks");
+  const shocksVal = root.querySelector("[data-nd-shocks-val]");
+  const status = root.querySelector("[data-nd-status]");
+  const wrap = root.querySelector("[data-nd-wrap]");
+  const canvas = root.querySelector("[data-nd-canvas]");
+  const ctx = canvas.getContext("2d");
+  let shocks = 2;
+  let playing = Boolean(motion);
+  let raf = 0;
+  let bins = [];
+  let tick = 0;
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+  const BIN_COUNT = 41;
+  const SAMPLE_BATCH = 40;
+  const MAX_SAMPLES = 1200;
+
+  const resetBins = () => {
+    bins = Array.from({ length: BIN_COUNT }, () => 0);
+    tick = 0;
+  };
+
+  const oneSum = (n) => {
+    let s = 0;
+    for (let i = 0; i < n; i++) s += Math.random() * 2 - 1;
+    return s;
+  };
+
+  const pushSamples = (count) => {
+    const maxAbs = shocks;
+    for (let i = 0; i < count; i++) {
+      const s = oneSum(shocks);
+      const t = (s + maxAbs) / (2 * maxAbs || 1);
+      const idx = Math.min(BIN_COUNT - 1, Math.max(0, Math.floor(t * BIN_COUNT)));
+      bins[idx] += 1;
+      tick += 1;
+    }
+    if (tick > MAX_SAMPLES) {
+      const scale = MAX_SAMPLES / tick;
+      bins = bins.map((v) => v * scale);
+      tick = MAX_SAMPLES;
+    }
+  };
+
+  const draw = () => {
+    if (!width || !height) return;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+
+    const pad = { l: 16, r: 16, t: 16, b: 28 };
+    const plotW = width - pad.l - pad.r;
+    const plotH = height - pad.t - pad.b;
+    const maxBin = Math.max(1, ...bins);
+    const barW = plotW / BIN_COUNT;
+
+    ctx.fillStyle = `color-mix(in srgb, ${tokens.ocean} 55%, ${tokens.warm})`;
+    bins.forEach((v, i) => {
+      const bh = (v / maxBin) * plotH;
+      const x = pad.l + i * barW;
+      const y = pad.t + plotH - bh;
+      ctx.fillRect(x + 1, y, Math.max(1, barW - 2), bh);
+    });
+
+    ctx.strokeStyle = tokens.line;
+    ctx.beginPath();
+    ctx.moveTo(pad.l, pad.t + plotH);
+    ctx.lineTo(pad.l + plotW, pad.t + plotH);
+    ctx.stroke();
+
+    ctx.fillStyle = tokens.muted;
+    ctx.font = "12px system-ui,sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(String(Math.round(tick)), width / 2, height - 8);
+  };
+
+  const updateStatus = () => {
+    status.textContent = shocks <= 3 ? copy.statusFew : copy.statusMany;
+  };
+
+  const loop = () => {
+    if (!playing) return;
+    pushSamples(SAMPLE_BATCH);
+    draw();
+    raf = requestAnimationFrame(loop);
+  };
+
+  const rebuild = (speak = false) => {
+    shocks = Number(slider.value);
+    shocksVal.textContent = String(shocks);
+    resetBins();
+    pushSamples(200);
+    updateStatus();
+    draw();
+    if (speak) announce(status.textContent);
+  };
+
+  slider.addEventListener("input", () => rebuild(true));
+  rebuild(false);
+  if (playing) raf = requestAnimationFrame(loop);
+
+  return {
+    pause: () => { playing = false; if (raf) cancelAnimationFrame(raf); raf = 0; },
+    resume: () => { if (playing) return; playing = true; raf = requestAnimationFrame(loop); },
+    reset: () => { rebuild(false); if (playing) { cancelAnimationFrame(raf); raf = requestAnimationFrame(loop); } },
+    resize: ({ width: w, height: h, dpr: ratio }) => {
+      width = wrap.clientWidth || w;
+      height = wrap.clientHeight || h;
+      dpr = ratio || 1;
+      draw();
+    },
+    destroy: () => { playing = false; if (raf) cancelAnimationFrame(raf); root.innerHTML = ""; }
+  };
+});
+
+registerDemo("nd-curve", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  // Initialize HTML structure and scoped CSS
+  root.innerHTML = `
+    <style>
+      .nd-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        min-height: 400px;
+        font-family: system-ui, sans-serif;
+        box-sizing: border-box;
+        user-select: none;
+      }
+      .nd-controls {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-top: 0.5rem;
+      }
+      .nd-controls button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+        border: 1px solid ${tokens.line};
+        background: ${tokens.surface};
+        color: ${tokens.ink};
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+      .nd-controls button[aria-pressed="true"] {
+        background: ${tokens.ocean};
+        color: ${tokens.paper};
+        border-color: ${tokens.ocean};
+      }
+      .nd-legend {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        font-size: 0.85rem;
+        color: ${tokens.muted};
+      }
+      .nd-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .nd-swatch {
+        width: 14px;
+        height: 14px;
+        border-radius: 2px;
+      }
+      .nd-canvas-container {
+        position: relative;
+        flex: 1;
+        min-height: 250px;
+        width: 100%;
+      }
+      .nd-canvas-container canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        touch-action: none;
+      }
+      .nd-status {
+        text-align: center;
+        color: ${tokens.ink};
+        font-size: 0.95rem;
+        min-height: 2.5em;
+        padding: 0 1rem;
+      }
+      .nd-sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+    </style>
+    <div class="nd-wrapper" aria-label="${copy.ariaLabel}">
+      <div class="nd-controls" role="group" aria-label="${copy.controlLabel}">
+        <button type="button" data-sigma="1" aria-pressed="true">${copy.band1Label}</button>
+        <button type="button" data-sigma="2" aria-pressed="false">${copy.band2Label}</button>
+        <button type="button" data-sigma="3" aria-pressed="false">${copy.band3Label}</button>
+      </div>
+      <div class="nd-legend" aria-hidden="true">
+        <div class="nd-legend-item">
+          <div class="nd-swatch" style="background: ${tokens.ocean}; opacity: 0.2;"></div>
+          <span>${copy.insideLabel}</span>
+        </div>
+        <div class="nd-legend-item">
+          <div class="nd-swatch" style="border: 1px solid ${tokens.line}; background: transparent;"></div>
+          <span>${copy.outsideLabel}</span>
+        </div>
+      </div>
+      <div class="nd-canvas-container">
+        <canvas role="img" aria-label="${copy.caption}"></canvas>
+      </div>
+      <div class="nd-status" aria-live="polite">${copy.status1}</div>
+    </div>
+  `;
+
+  // DOM Elements
+  const controls = root.querySelector('.nd-controls');
+  const buttons = controls.querySelectorAll('button');
+  const statusEl = root.querySelector('.nd-status');
+  const canvasContainer = root.querySelector('.nd-canvas-container');
+  const canvas = canvasContainer.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+
+  // State
+  let currentSigma = 1;
+  let animSigma = 1;
+  let isAnimating = false;
+  let rafId = null;
+  let lastTime = 0;
+  let paused = false;
+
+  let canvasW = 0;
+  let canvasH = 0;
+  let canvasDpr = 1;
+
+  // Coordinate mapping
+  function getPos(x, y) {
+    const padding = { top: 20, bottom: 40, left: 20, right: 20 };
+    const innerW = canvasW - padding.left - padding.right;
+    const innerH = canvasH - padding.top - padding.bottom;
+
+    // Map x from [-3.8, 3.8] to canvas width
+    const cx = padding.left + ((x + 3.8) / 7.6) * innerW;
+    // Map y from [0, 1.1] to canvas height (leaving headroom)
+    const cy = canvasH - padding.bottom - (y / 1.1) * innerH;
+
+    return [cx, cy];
+  }
+
+  // Render function
+  function render() {
+    if (!ctx || canvasW === 0 || canvasH === 0) return;
+
+    ctx.save();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.scale(canvasDpr, canvasDpr);
+
+    // 1. Draw baseline
+    ctx.beginPath();
+    let [bx1, by1] = getPos(-3.8, 0);
+    let [bx2, by2] = getPos(3.8, 0);
+    ctx.moveTo(bx1, by1);
+    ctx.lineTo(bx2, by2);
+    ctx.strokeStyle = resolveColor(tokens.line);
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // 2. Draw ticks and mean label
+    ctx.fillStyle = resolveColor(tokens.muted);
+    ctx.font = '12px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+
+    for (let i = -3; i <= 3; i++) {
+      let [tx, ty] = getPos(i, 0);
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(tx, ty + 5);
+      ctx.strokeStyle = resolveColor(tokens.line);
+      ctx.stroke();
+
+      if (i === 0) {
+        ctx.fillText(copy.meanLabel, tx, ty + 8);
+      }
+    }
+
+    // 3. Draw shaded area (Inside band)
+    ctx.beginPath();
+    let startX = -animSigma;
+    let endX = animSigma;
+    let [sx, sy] = getPos(startX, 0);
+    ctx.moveTo(sx, sy);
+
+    for (let x = startX; x <= endX; x += 0.05) {
+      let y = Math.exp(-0.5 * x * x);
+      let [cx, cy] = getPos(x, y);
+      ctx.lineTo(cx, cy);
+    }
+
+    let [ex, ey] = getPos(endX, Math.exp(-0.5 * endX * endX));
+    ctx.lineTo(ex, ey);
+    let [ex0, ey0] = getPos(endX, 0);
+    ctx.lineTo(ex0, ey0);
+    ctx.closePath();
+
+    ctx.fillStyle = resolveColor(tokens.ocean);
+    ctx.globalAlpha = 0.2;
+    ctx.fill();
+    ctx.globalAlpha = 1.0;
+
+    // 4. Draw vertical boundaries for the band
+    ctx.beginPath();
+    let [lx, ly] = getPos(-animSigma, Math.exp(-0.5 * animSigma * animSigma));
+    let [lx0, ly0] = getPos(-animSigma, 0);
+    ctx.moveTo(lx, ly);
+    ctx.lineTo(lx0, ly0);
+
+    let [rx, ry] = getPos(animSigma, Math.exp(-0.5 * animSigma * animSigma));
+    let [rx0, ry0] = getPos(animSigma, 0);
+    ctx.moveTo(rx, ry);
+    ctx.lineTo(rx0, ry0);
+
+    ctx.strokeStyle = resolveColor(tokens.ocean);
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // 5. Draw the normal distribution curve
+    ctx.beginPath();
+    for (let x = -3.8; x <= 3.8; x += 0.05) {
+      let y = Math.exp(-0.5 * x * x);
+      let [cx, cy] = getPos(x, y);
+      if (x === -3.8) ctx.moveTo(cx, cy);
+      else ctx.lineTo(cx, cy);
+    }
+    ctx.strokeStyle = resolveColor(tokens.ink);
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // 6. Draw the band label centered inside the curve
+    let currentBandLabel = currentSigma === 1 ? copy.band1Label : (currentSigma === 2 ? copy.band2Label : copy.band3Label);
+    let [lblX, lblY] = getPos(0, 0.4);
+
+    ctx.font = '600 14px system-ui, sans-serif';
+    ctx.fillStyle = resolveColor(tokens.ocean);
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // Add a stroke to ensure text is readable against the curve if they intersect
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = resolveColor(tokens.surface);
+    ctx.strokeText(currentBandLabel, lblX, lblY);
+    ctx.fillText(currentBandLabel, lblX, lblY);
+
+    ctx.restore();
+  }
+
+  // Animation Loop
+  function tick(now) {
+    if (!isAnimating) return;
+    if (!lastTime) lastTime = now;
+    let dt = now - lastTime;
+    lastTime = now;
+
+    let diff = currentSigma - animSigma;
+
+    if (Math.abs(diff) < 0.005) {
+      animSigma = currentSigma;
+      isAnimating = false;
+    } else {
+      // Frame-independent easing
+      let factor = 1 - Math.pow(0.85, dt / 16.66);
+      animSigma += diff * factor;
+    }
+
+    render();
+
+    if (isAnimating) {
+      rafId = requestAnimationFrame(tick);
+    } else {
+      lastTime = 0;
+    }
+  }
+
+  // Update logic
+  function updateDOM() {
+    buttons.forEach(btn => {
+      btn.setAttribute('aria-pressed', btn.dataset.sigma == currentSigma);
+    });
+    statusEl.textContent = copy['status' + currentSigma];
+  }
+
+  function setSigma(s) {
+    if (currentSigma === s) return;
+    currentSigma = s;
+
+    updateDOM();
+    announce(copy['status' + s]);
+
+    if (motion === false || paused) {
+      animSigma = s;
+      isAnimating = false;
+      cancelAnimationFrame(rafId);
+      render();
+    } else {
+      isAnimating = true;
+      lastTime = 0;
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(tick);
+    }
+  }
+
+  // Event Listeners
+  buttons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const s = parseInt(e.currentTarget.dataset.sigma, 10);
+      setSigma(s);
+    }, { signal });
+  });
+
+  // Lifecycle methods
+  return {
+    pause() {
+      paused = true;
+      isAnimating = false;
+      cancelAnimationFrame(rafId);
+    },
+    resume() {
+      paused = false;
+      if (animSigma !== currentSigma) {
+        isAnimating = true;
+        lastTime = 0;
+        rafId = requestAnimationFrame(tick);
+      }
+    },
+    reset() {
+      currentSigma = 1;
+      animSigma = 1;
+      isAnimating = false;
+      cancelAnimationFrame(rafId);
+      updateDOM();
+      render();
+    },
+    destroy() {
+      isAnimating = false;
+      cancelAnimationFrame(rafId);
+      root.innerHTML = '';
+    },
+    resize({ width, height, dpr }) {
+      // Use the actual container dimensions to avoid layout feedback loops
+      canvasW = canvasContainer.clientWidth;
+      canvasH = canvasContainer.clientHeight;
+      canvasDpr = dpr;
+
+      canvas.width = canvasW * dpr;
+      canvas.height = canvasH * dpr;
+
+      render();
+    }
+  };
+});
+
+registerDemo("nd-tails", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  const MAX_DRAWS = 5000;
+  const TAIL_THRESHOLD = 2.5;
+  const STATUS_THRESHOLD = 500;
+
+  root.innerHTML = `
+    <style>
+      .nd-tails-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        min-height: 480px;
+        font-family: system-ui, -apple-system, sans-serif;
+        color: var(--ink);
+      }
+      .nd-tails-header {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .nd-tails-caption {
+        margin: 0;
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .nd-tails-controls {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        background: var(--surface);
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+      }
+      .nd-tails-slider-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        flex: 1;
+        min-width: 200px;
+      }
+      .nd-tails-slider-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .nd-tails-slider-wrap input {
+        width: 100%;
+        cursor: pointer;
+        accent-color: var(--ocean);
+      }
+      .nd-tails-stats {
+        display: flex;
+        gap: 1rem;
+      }
+      .nd-tails-stat-box {
+        display: flex;
+        flex-direction: column;
+        min-width: 90px;
+      }
+      .nd-tails-stat-label {
+        font-size: 0.75rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .nd-tails-stat-val {
+        font-variant-numeric: tabular-nums;
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--ink);
+      }
+      .nd-tails-stat-val.hit {
+        color: var(--coral);
+      }
+      .nd-tails-canvas-container {
+        position: relative;
+        flex: 1;
+        min-height: 280px;
+        width: 100%;
+      }
+      .nd-tails-canvas-container canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        touch-action: none;
+      }
+      .nd-tails-status {
+        font-size: 0.95rem;
+        padding: 1rem;
+        background: var(--surface);
+        border-left: 4px solid var(--ocean);
+        border-radius: 0 8px 8px 0;
+        margin: 0;
+        line-height: 1.5;
+        transition: border-color 0.3s ease;
+      }
+      .nd-tails-status.large {
+        border-left-color: var(--coral);
+      }
+    </style>
+    <div class="nd-tails-wrapper">
+      <div class="nd-tails-header">
+        <p class="nd-tails-caption">${copy.caption}</p>
+        <div class="nd-tails-controls">
+          <div class="nd-tails-slider-wrap">
+            <label class="nd-tails-slider-label" for="nd-tails-slider">${copy.controlLabel}</label>
+            <input type="range" id="nd-tails-slider" min="10" max="${MAX_DRAWS}" step="10" value="10">
+          </div>
+          <div class="nd-tails-stats">
+            <div class="nd-tails-stat-box">
+              <span class="nd-tails-stat-label">${copy.sampleLabel}</span>
+              <span class="nd-tails-stat-val" id="nd-tails-val-draws">10</span>
+            </div>
+            <div class="nd-tails-stat-box">
+              <span class="nd-tails-stat-label">${copy.hitsLabel}</span>
+              <span class="nd-tails-stat-val hit" id="nd-tails-val-hits">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nd-tails-canvas-container">
+        <canvas aria-label="${copy.ariaLabel}" role="img" tabindex="0"></canvas>
+      </div>
+      <div class="nd-tails-status" id="nd-tails-status" aria-live="polite"></div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const slider = root.querySelector('#nd-tails-slider');
+  const valDraws = root.querySelector('#nd-tails-val-draws');
+  const valHits = root.querySelector('#nd-tails-val-hits');
+  const statusBox = root.querySelector('#nd-tails-status');
+
+  let points = [];
+  let currentDraws = motion ? 10 : MAX_DRAWS;
+  let targetDraws = currentDraws;
+  let isPlaying = true;
+  let autoProgress = motion;
+  let lastStatus = '';
+  let canvasWidth = 0;
+  let canvasHeight = 0;
+  let canvasDpr = 1;
+  let rafId = null;
+
+  slider.value = currentDraws;
+
+  for (let i = 0; i < MAX_DRAWS; i++) {
+    let u = 1 - Math.random();
+    let v = Math.random();
+    let z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+    let curveY = Math.exp(-0.5 * z * z);
+    let y = Math.random() * curveY;
+    points.push({ x: z, y: y, isHit: Math.abs(z) > TAIL_THRESHOLD });
+  }
+
+  function wrapText(context, text, maxWidth) {
+    const isCJK = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f]/.test(text);
+    let lines = [];
+    if (isCJK) {
+      let currentLine = '';
+      for (let char of text) {
+        let testLine = currentLine + char;
+        if (context.measureText(testLine).width > maxWidth && currentLine.length > 0) {
+          lines.push(currentLine);
+          currentLine = char;
+        } else {
+          currentLine = testLine;
+        }
+      }
+      if (currentLine) lines.push(currentLine);
+    } else {
+      let words = text.split(' ');
+      let currentLine = '';
+      for (let word of words) {
+        let testLine = currentLine ? currentLine + ' ' + word : word;
+        if (context.measureText(testLine).width > maxWidth && currentLine.length > 0) {
+          lines.push(currentLine);
+          currentLine = word;
+        } else {
+          currentLine = testLine;
+        }
+      }
+      if (currentLine) lines.push(currentLine);
+    }
+    return lines;
+  }
+
+  function mapX(x, padding) {
+    return padding + ((x + 4) / 8) * (canvasWidth - 2 * padding);
+  }
+
+  function mapY(y, paddingTop, paddingBottom) {
+    return canvasHeight - paddingBottom - (y / 1.1) * (canvasHeight - paddingTop - paddingBottom);
+  }
+
+  function draw() {
+    if (!canvasWidth || !canvasHeight) return;
+
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    const paddingX = 40;
+    const paddingTop = 40;
+    const paddingBottom = 30;
+
+    let hits = 0;
+    for (let i = 0; i < currentDraws; i++) {
+      if (points[i].isHit) hits++;
+    }
+
+    valDraws.textContent = Math.floor(currentDraws).toString();
+    valHits.textContent = hits.toString();
+
+    const isLarge = currentDraws >= STATUS_THRESHOLD;
+    const currentStatusText = isLarge ? copy.statusLarge : copy.statusSmall;
+
+    if (lastStatus !== currentStatusText) {
+      statusBox.textContent = currentStatusText;
+      if (isLarge) {
+        statusBox.classList.add('large');
+      } else {
+        statusBox.classList.remove('large');
+      }
+      if (lastStatus !== '') {
+        announce(currentStatusText);
+      }
+      lastStatus = currentStatusText;
+    }
+
+    ctx.globalAlpha = 0.15;
+    ctx.fillStyle = resolveColor(tokens.coral);
+    ctx.beginPath();
+    ctx.moveTo(mapX(-4, paddingX), mapY(0, paddingTop, paddingBottom));
+    for (let x = -4; x <= -TAIL_THRESHOLD; x += 0.05) {
+      ctx.lineTo(mapX(x, paddingX), mapY(Math.exp(-0.5 * x * x), paddingTop, paddingBottom));
+    }
+    ctx.lineTo(mapX(-TAIL_THRESHOLD, paddingX), mapY(0, paddingTop, paddingBottom));
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(mapX(TAIL_THRESHOLD, paddingX), mapY(0, paddingTop, paddingBottom));
+    for (let x = TAIL_THRESHOLD; x <= 4; x += 0.05) {
+      ctx.lineTo(mapX(x, paddingX), mapY(Math.exp(-0.5 * x * x), paddingTop, paddingBottom));
+    }
+    ctx.lineTo(mapX(4, paddingX), mapY(0, paddingTop, paddingBottom));
+    ctx.fill();
+    ctx.globalAlpha = 1.0;
+
+    ctx.beginPath();
+    for (let x = -4; x <= 4; x += 0.05) {
+      let px = mapX(x, paddingX);
+      let py = mapY(Math.exp(-0.5 * x * x), paddingTop, paddingBottom);
+      if (x === -4) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.strokeStyle = resolveColor(tokens.ink);
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    for (let i = 0; i < currentDraws; i++) {
+      let p = points[i];
+      if (!p.isHit) {
+        ctx.rect(mapX(p.x, paddingX) - 1, mapY(p.y, paddingTop, paddingBottom) - 1, 2, 2);
+      }
+    }
+    ctx.fillStyle = resolveColor(tokens.ocean);
+    ctx.globalAlpha = 0.5;
+    ctx.fill();
+
+    ctx.beginPath();
+    for (let i = 0; i < currentDraws; i++) {
+      let p = points[i];
+      if (p.isHit) {
+        let px = mapX(p.x, paddingX);
+        let py = mapY(p.y, paddingTop, paddingBottom);
+        ctx.moveTo(px + 2.5, py);
+        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+      }
+    }
+    ctx.fillStyle = resolveColor(tokens.coral);
+    ctx.globalAlpha = 0.9;
+    ctx.fill();
+    ctx.globalAlpha = 1.0;
+
+    ctx.fillStyle = resolveColor(tokens.ink);
+    ctx.font = '12px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    const labelMaxWidth = 70;
+    const lines = wrapText(ctx, copy.tailLabel, labelMaxWidth);
+    const lineHeight = 16;
+
+    const drawLabelAt = (xPos) => {
+      let startY = mapY(0.7, paddingTop, paddingBottom) - ((lines.length - 1) * lineHeight) / 2;
+      lines.forEach((line, i) => {
+        ctx.fillText(line, mapX(xPos, paddingX), startY + i * lineHeight);
+      });
+
+      ctx.beginPath();
+      ctx.moveTo(mapX(xPos, paddingX), startY + lines.length * lineHeight - 4);
+      ctx.lineTo(mapX(xPos, paddingX), mapY(0.15, paddingTop, paddingBottom));
+      ctx.strokeStyle = resolveColor(tokens.muted);
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    };
+
+    drawLabelAt(-3.2);
+    drawLabelAt(3.2);
+  }
+
+  function loop() {
+    if (isPlaying && autoProgress && motion) {
+      if (currentDraws < MAX_DRAWS) {
+        currentDraws += 15;
+        if (currentDraws > MAX_DRAWS) currentDraws = MAX_DRAWS;
+        slider.value = currentDraws;
+        draw();
+      } else {
+        autoProgress = false;
+      }
+    }
+    rafId = requestAnimationFrame(loop);
+  }
+
+  slider.addEventListener('input', (e) => {
+    autoProgress = false;
+    currentDraws = Number(e.target.value);
+    draw();
+  }, { signal });
+
+  if (motion) {
+    rafId = requestAnimationFrame(loop);
+  } else {
+    draw();
+  }
+
+  return {
+    pause() {
+      isPlaying = false;
+      draw();
+    },
+    resume() {
+      isPlaying = true;
+      draw();
+    },
+    reset() {
+      autoProgress = motion;
+      currentDraws = motion ? 10 : MAX_DRAWS;
+      slider.value = currentDraws;
+      lastStatus = '';
+      draw();
+    },
+    destroy() {
+      if (rafId) cancelAnimationFrame(rafId);
+      root.innerHTML = '';
+    },
+    resize({ width, height, dpr }) {
+      canvasWidth = width;
+      canvasHeight = height;
+      canvasDpr = dpr;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+      draw();
+    }
+  };
+});
+
+registerDemo("nd-limits", ({ root, copy, motion, tokens, announce }) => {
+  const buttons = copy.modes.map((mode, index) => `
+    <button type="button" class="nd-lim-btn" data-nd-lim="${index}" aria-pressed="${index === 0}">${escapeHtml(mode.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .nd-lim { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(150deg,color-mix(in srgb,${tokens.coral} 6%,${tokens.surface}),${tokens.surface}); }
+      .nd-lim-panel { display:grid; gap:.75rem; padding:1.1rem 1.2rem; border:1px solid ${tokens.line}; border-radius:1.1rem;
+        background:color-mix(in srgb,${tokens.paper} 55%,${tokens.surface}); }
+      .nd-lim-badge { display:inline-flex; width:max-content; padding:.25rem .55rem; border-radius:999px; font-size:.68rem; font-weight:850;
+        letter-spacing:.04em; text-transform:uppercase; color:${tokens.surface}; background:${tokens.ocean}; }
+      .nd-lim-panel[data-mode="heavy"] .nd-lim-badge { background:${tokens.coral}; }
+      .nd-lim-headline { margin:0; font-size:1.15rem; font-weight:850; line-height:1.35; }
+      .nd-lim-detail { margin:0; color:${tokens.muted}; line-height:1.55; }
+      .nd-lim-canvas-wrap { position:relative; min-height:10rem; height:10rem; border-radius:.85rem; border:1px dashed ${tokens.line};
+        background:color-mix(in srgb,${tokens.surface} 80%,${tokens.paper}); overflow:hidden; }
+      .nd-lim-canvas { position:absolute; inset:0; display:block; width:100%; height:100%; }
+      .nd-lim-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .nd-lim-btn { flex:1 1 8rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink};
+        background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .nd-lim-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .nd-lim-btn:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .nd-lim-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .nd-lim-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+    </style>
+    <div class="nd-lim" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="nd-lim-panel" data-nd-panel data-mode="normal">
+        <span class="nd-lim-badge" data-nd-badge></span>
+        <h3 class="nd-lim-headline" data-nd-headline></h3>
+        <p class="nd-lim-detail" data-nd-detail></p>
+        <div class="nd-lim-canvas-wrap" data-nd-wrap>
+          <canvas class="nd-lim-canvas" data-nd-canvas aria-hidden="true"></canvas>
+        </div>
+      </div>
+      <div class="nd-lim-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${buttons}</div>
+      <p class="nd-lim-status" data-nd-status role="status"></p>
+      <p class="nd-lim-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const panel = root.querySelector("[data-nd-panel]");
+  const badge = root.querySelector("[data-nd-badge]");
+  const headline = root.querySelector("[data-nd-headline]");
+  const detail = root.querySelector("[data-nd-detail]");
+  const status = root.querySelector("[data-nd-status]");
+  const wrap = root.querySelector("[data-nd-wrap]");
+  const canvas = root.querySelector("[data-nd-canvas]");
+  const ctx = canvas.getContext("2d");
+  const btns = [...root.querySelectorAll("[data-nd-lim]")];
+  let modeKey = "normal";
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+
+  const normalPdf = (x) => Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI);
+  const heavyPdf = (x) => {
+    const df = 3;
+    const c = 1 / (Math.sqrt(df * Math.PI) * 1.5);
+    return c * Math.pow(1 + (x * x) / df, -(df + 1) / 2) * 2.2;
+  };
+
+  const draw = () => {
+    if (!width || !height) return;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+
+    const padX = 16;
+    const padY = 14;
+    const plotW = width - padX * 2;
+    const plotH = height - padY * 2;
+    const xMin = -4.5;
+    const xMax = 4.5;
+    const fn = modeKey === "heavy" ? heavyPdf : normalPdf;
+    const yMax = Math.max(normalPdf(0), heavyPdf(0)) * 1.15;
+    const toX = (x) => padX + ((x - xMin) / (xMax - xMin)) * plotW;
+    const toY = (y) => padY + plotH - (y / yMax) * plotH;
+
+    ctx.beginPath();
+    for (let i = 0; i <= 140; i++) {
+      const x = xMin + (i / 140) * (xMax - xMin);
+      const px = toX(x);
+      const py = toY(normalPdf(x));
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.strokeStyle = `color-mix(in srgb, ${tokens.muted} 45%, transparent)`;
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([5, 5]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.beginPath();
+    for (let i = 0; i <= 140; i++) {
+      const x = xMin + (i / 140) * (xMax - xMin);
+      const px = toX(x);
+      const py = toY(fn(x));
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.lineTo(toX(xMax), toY(0));
+    ctx.lineTo(toX(xMin), toY(0));
+    ctx.closePath();
+    ctx.fillStyle = modeKey === "heavy"
+      ? `color-mix(in srgb, ${tokens.coral} 40%, transparent)`
+      : `color-mix(in srgb, ${tokens.ocean} 40%, transparent)`;
+    ctx.fill();
+
+    ctx.beginPath();
+    for (let i = 0; i <= 140; i++) {
+      const x = xMin + (i / 140) * (xMax - xMin);
+      const px = toX(x);
+      const py = toY(fn(x));
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.strokeStyle = modeKey === "heavy" ? tokens.coral : tokens.ocean;
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+  };
+
+  const select = (index, speak = false) => {
+    const mode = copy.modes[index];
+    modeKey = mode.key;
+    panel.dataset.mode = mode.key;
+    badge.textContent = mode.badge;
+    headline.textContent = mode.headline;
+    detail.textContent = mode.detail;
+    status.textContent = mode.key === "normal" ? copy.statusNormal : copy.statusHeavy;
+    btns.forEach((b, i) => b.setAttribute("aria-pressed", String(i === index)));
+    draw();
+    if (speak) announce(status.textContent);
+  };
+
+  btns.forEach((b) => b.addEventListener("click", () => select(Number(b.dataset.ndLim), true)));
+  select(0);
+  return {
+    pause: () => {},
+    resume: () => {},
+    reset: () => select(0),
+    resize: ({ width: w, height: h, dpr: ratio }) => {
+      width = wrap.clientWidth || w;
+      height = wrap.clientHeight || h;
+      dpr = ratio || 1;
+      draw();
+    },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+  </script>
+</body>
+</html>

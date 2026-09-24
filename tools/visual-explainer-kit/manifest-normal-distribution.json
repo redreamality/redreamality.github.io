@@ -1,0 +1,917 @@
+{
+  "slug": "normal-distribution",
+  "renderer": "interactive-explainer",
+  "structure": {
+    "overview": {
+      "demo": "nd-overview"
+    },
+    "steps": [
+      {
+        "id": "many-shocks",
+        "demo": "nd-sum"
+      },
+      {
+        "id": "three-sigmas",
+        "demo": "nd-curve"
+      },
+      {
+        "id": "rare-tails",
+        "demo": "nd-tails"
+      },
+      {
+        "id": "not-always",
+        "demo": "nd-limits"
+      }
+    ]
+  },
+  "locales": {
+    "en": {
+      "lang": "en",
+      "meta": {
+        "title": "In a World of \"About Average,\" Why Do Extremes Keep Showing Up?",
+        "description": "An interactive guide to the normal (bell) curve: why most outcomes pile near the mean, how independent small shocks stack into that shape, what 1/2/3σ bands mean, and why rare tails still appear in large samples—mechanism only, not a formula drill."
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "Pause all motion",
+        "resumeAll": "Resume all motion",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset",
+        "waiting": "The visual will load when it enters the viewport.",
+        "loading": "Preparing the visual…",
+        "error": "The visual could not be displayed. Read the explanation above instead.",
+        "figureFallback": "Enable JavaScript to view this interactive explanation.",
+        "skipToContent": "Skip to content",
+        "languageNavigation": "Languages",
+        "overviewLabel": "Normal distribution overview",
+        "stepLabel": "Step"
+      },
+      "hero": {
+        "eyebrow": "DISTRIBUTION / BELL CURVE / TAILS",
+        "title": "In a world of \"about average,\" why do extremes keep showing up?",
+        "subtitle": "Most heights, measurement noise, and everyday scores feel ordinary. Yet once in a while someone is far out. The bell curve is that intuition drawn as density: crowded near the mean, thin but real in the tails—not a claim that extremes are bugs."
+      },
+      "overview": {
+        "title": "Mostly ordinary, occasionally wild—same shape",
+        "body": [
+          "Look around: classmates' heights, daily temperatures, small measurement errors. Most sit near \"typical.\" A few stretch far left or right. That rhythm—dense center, sparse extremes—is what a normal curve draws.",
+          "Extremes are not glitches in the ink. They are the thin edges of the same density. This page builds that picture: stacking shocks → bell, σ bands, then why large samples still produce rare hits."
+        ],
+        "plainLanguage": {
+          "label": "Plainly",
+          "body": "The world feels \"about average\" because the middle is thick; extremes still exist because the tails never go to zero."
+        },
+        "keyPointsLabel": "Keep these three ideas",
+        "keyPoints": [
+          {
+            "title": "Thick middle",
+            "body": "Most probability mass sits near the mean—that is why \"ordinary\" feels common."
+          },
+          {
+            "title": "Thin but real tails",
+            "body": "Far outcomes are rare per trial, not forbidden."
+          },
+          {
+            "title": "Mechanism, not drills",
+            "body": "We chase the shape and sampling intuition—not exam tricks."
+          }
+        ],
+        "demoTitle": "Toggle ordinary pile vs extreme highlight",
+        "copy": {
+          "ariaLabel": "Interactive overview contrasting a dense middle with highlighted extremes on a bell curve",
+          "caption": "Switch views: the same curve can look \"mostly average\" or \"extremes exist\" depending on what you light up.",
+          "controlLabel": "View",
+          "modes": [
+            {
+              "key": "middle",
+              "label": "Ordinary pile",
+              "headline": "Most mass hugs the center",
+              "detail": "When you watch the fat middle, the world feels \"about average\"—and that is where most draws land.",
+              "badge": "Center"
+            },
+            {
+              "key": "tails",
+              "label": "Extreme edges",
+              "headline": "The same curve still has wings",
+              "detail": "Light the far bands and rare outcomes become visible—not as errors, but as low-density places on the same shape.",
+              "badge": "Tails"
+            }
+          ],
+          "statusMiddle": "Center lit: most probability sits near the mean—ordinary feels common.",
+          "statusTails": "Tails lit: extremes are rare per draw, yet they belong on the same curve."
+        }
+      },
+      "steps": [
+        {
+          "id": "many-shocks",
+          "number": "01",
+          "title": "Many independent small shocks → a bell",
+          "body": [
+            "Imagine many tiny, roughly independent pushes—measurement jitter, small genetic bits, daily noise. Alone each push is messy. Add enough of them and the total often settles into a mound: highest near the average of those pushes, thinning as you walk away.",
+            "You do not need the theorem name on the wall. The gut version is: stacked independent noise tends to look bell-shaped. Toy dice or coin flips in the demo stand in for those small shocks."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Add lots of small independent noises; the sum often looks like a hill with a high middle."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Independence helps",
+              "body": "When shocks do not all move together, cancellations fill the middle."
+            },
+            {
+              "title": "More pieces, smoother mound",
+              "body": "With few terms the histogram is jagged; with more it rounds."
+            },
+            {
+              "title": "Toy model",
+              "body": "Dice/coin sums are teaching stand-ins—not a claim every real variable is normal."
+            }
+          ],
+          "demoTitle": "Stack more tiny shocks and watch the mound form",
+          "copy": {
+            "ariaLabel": "Interactive histogram showing sums of independent small shocks forming a bell shape",
+            "caption": "Raise how many tiny shocks you add. The total's histogram rounds toward a mound.",
+            "controlLabel": "Number of small shocks per sum",
+            "shocksLabel": "Shocks per draw",
+            "samplesLabel": "Draws in the pile",
+            "statusFew": "Few shocks: the pile still looks blocky and uneven.",
+            "statusMany": "Many shocks: cancellations fill the middle—the mound looks more bell-like."
+          }
+        },
+        {
+          "id": "three-sigmas",
+          "number": "02",
+          "title": "68 · 95 · 99.7: how far is \"unusual\"?",
+          "body": [
+            "For a normal curve, distance from the mean is often measured in standard deviations (σ). Rough teaching bands: about 68% of draws fall within 1σ, about 95% within 2σ, about 99.7% within 3σ.",
+            "Those numbers are area under the curve—not magic passwords. Sliding the band width shows how quickly the remaining tail shrinks, and why \"three sigma out\" feels rare without being impossible."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "1σ / 2σ / 3σ mark ever-wider belts around the mean; most mass sits inside, a little spills outside."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "σ is a yardstick",
+              "body": "It scales \"how spread out\" this particular mound is."
+            },
+            {
+              "title": "Bands are areas",
+              "body": "68–95–99.7 is about probability mass, not exam memorization for its own sake."
+            },
+            {
+              "title": "Outside ≠ impossible",
+              "body": "Beyond 3σ is uncommon per draw—not a forbidden zone."
+            }
+          ],
+          "demoTitle": "Light 1σ / 2σ / 3σ belts on the bell",
+          "copy": {
+            "ariaLabel": "Interactive normal curve with selectable one-, two-, and three-sigma bands",
+            "caption": "Choose a σ belt. Watch how much of the curve's area sits inside versus in the wings.",
+            "controlLabel": "Sigma belt",
+            "band1Label": "±1σ · ~68%",
+            "band2Label": "±2σ · ~95%",
+            "band3Label": "±3σ · ~99.7%",
+            "meanLabel": "Mean",
+            "insideLabel": "Inside band",
+            "outsideLabel": "Outside (tails)",
+            "status1": "±1σ: most mass is already inside—ordinary territory.",
+            "status2": "±2σ: only a thin slice remains outside.",
+            "status3": "±3σ: almost everything is inside; the leftover tails are tiny but nonzero."
+          }
+        },
+        {
+          "id": "rare-tails",
+          "number": "03",
+          "title": "Rare per draw—yet \"always\" in a large sample",
+          "body": [
+            "A single far-tail outcome can feel like a miracle or a bug. Change the frame: draw once, and extremes are unlikely. Draw thousands of times, and some extreme hit becomes expected.",
+            "The demo highlights the wings and lets you grow the sample. Extremes \"keep showing up\" not because the middle lied, but because many independent chances eventually tickle the thin edges."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Unlikely once; likely eventually—if you keep sampling."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Per-trial rarity",
+              "body": "Far tails have small probability on each draw."
+            },
+            {
+              "title": "Sample size matters",
+              "body": "Large n makes \"at least one extreme\" ordinary."
+            },
+            {
+              "title": "Extreme ≠ absurd",
+              "body": "Belonging to a thin tail is not the same as \"should not exist.\""
+            }
+          ],
+          "demoTitle": "Grow the sample until tail hits appear",
+          "copy": {
+            "ariaLabel": "Interactive demo highlighting normal-curve tails and accumulating extreme hits as sample size grows",
+            "caption": "Raise sample size. Watch rare wing hits accumulate even though each single draw stays unlikely.",
+            "controlLabel": "Sample size",
+            "sampleLabel": "Draws",
+            "tailLabel": "Tail region",
+            "hitsLabel": "Extreme hits so far",
+            "statusSmall": "Small sample: wing hits may not appear yet—rarity still dominates.",
+            "statusLarge": "Large sample: several extreme hits show up—expected under the same thin tails."
+          }
+        },
+        {
+          "id": "not-always",
+          "number": "04",
+          "title": "Not every pile is normal—fat tails are another world",
+          "body": [
+            "The bell is a powerful default when many mild independent effects stack. It is not a universal passport. Some systems have heavy tails: extremes arrive more often than a normal curve allows.",
+            "One sentence of caution is enough here: if your world has crashes, cascades, or winner-take-most spikes, do not force a bell. This page stops at recognizing the normal shape—and knowing when to doubt it."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Bell curves are common tools, not laws of nature for every dataset."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Normal is a model",
+              "body": "Useful when the stacking story fits; dangerous when forced."
+            },
+            {
+              "title": "Fat tails exist",
+              "body": "Some processes put more mass far out than ±3σ of a bell."
+            },
+            {
+              "title": "Stop before finance class",
+              "body": "We name the caveat; we do not teach trading."
+            }
+          ],
+          "demoTitle": "Compare a bell against a heavier-tailed sketch",
+          "copy": {
+            "ariaLabel": "Toggle comparing a normal bell curve with a heavier-tailed sketch",
+            "caption": "Switch shapes: same center story, different wing thickness.",
+            "controlLabel": "Shape",
+            "modes": [
+              {
+                "key": "normal",
+                "label": "Bell (normal)",
+                "headline": "Wings thin out fast",
+                "detail": "Beyond a few σ, density drops quickly—extremes are rare under this model.",
+                "badge": "Normal"
+              },
+              {
+                "key": "heavy",
+                "label": "Heavier tails",
+                "headline": "Wings stay fatter",
+                "detail": "More probability remains far out. Forcing a bell here understates extremes.",
+                "badge": "Caution"
+              }
+            ],
+            "statusNormal": "Bell selected: thin tails—extremes are uncommon per draw.",
+            "statusHeavy": "Heavier sketch: wings stay thicker—do not pretend every pile is normal."
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "Putting the shape back together",
+        "title": "Thick middle + thin tails—extremes are part of the same curve",
+        "body": [
+          "A normal curve explains why \"about average\" feels true and why rare extremes still happen: most mass sits near the mean; the wings never reach zero. Stacked independent shocks often build that mound; σ bands quantify \"how far\"; large samples make rare hits inevitable.",
+          "Remember the caveat in one breath: not every system is normal. Use the bell when the stacking story fits; doubt it when wings look too fat."
+        ],
+        "checklistLabel": "Reader check",
+        "checklist": [
+          "Ask whether many mild independent effects could be stacking.",
+          "Read \"unusual\" as distance in σ, not as moral failure.",
+          "In large samples, expect some tail hits.",
+          "If extremes arrive too often, consider heavier tails—not a forced bell."
+        ],
+        "scaleTitle": "Four moves",
+        "scaleItems": [
+          {
+            "term": "Stack",
+            "question": "Where does the mound come from?",
+            "role": "Many small independent shocks added together."
+          },
+          {
+            "term": "σ bands",
+            "question": "How far is far?",
+            "role": "1 / 2 / 3σ belts and their areas."
+          },
+          {
+            "term": "Tails",
+            "question": "Why do extremes show up?",
+            "role": "Rare per draw; common across many draws."
+          },
+          {
+            "term": "Limits",
+            "question": "When to doubt the bell?",
+            "role": "When wings stay fat—another model may fit better."
+          }
+        ],
+        "finalQuote": "Extremes in an \"average\" world are often the thin edges of the same density—not bugs in the ink.",
+        "sourceNote": "Public-education note on the normal (Gaussian) distribution: central concentration, σ bands, and why rare tails appear in large samples. Wikipedia \"Normal distribution\" is a high-traffic background article; this page is mechanism intuition only—not exam drills, forecasts, or investment advice."
+      }
+    },
+    "zh": {
+      "lang": "zh",
+      "meta": {
+        "title": "为什么「差不多平均」的世界里，极端值总出现？",
+        "description": "交互图解正态分布（钟形曲线）：为何大多数结果挤在均值附近，独立小扰动如何堆出这座丘，1/2/3σ 带是什么意思，以及大样本下稀有尾部为何仍会出现——只讲机制，不是背公式页。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "暂停所有动画",
+        "resumeAll": "恢复所有动画",
+        "pause": "暂停",
+        "resume": "继续",
+        "reset": "重置",
+        "waiting": "图解进入视口后才会加载。",
+        "loading": "正在准备图解…",
+        "error": "图解无法显示，请先读上方说明。",
+        "figureFallback": "请启用 JavaScript 以查看交互图解。",
+        "skipToContent": "跳到正文",
+        "languageNavigation": "语言",
+        "overviewLabel": "正态分布总览",
+        "stepLabel": "步骤"
+      },
+      "hero": {
+        "eyebrow": "分布 / 钟形曲线 / 尾部",
+        "title": "为什么「差不多平均」的世界里，极端值总出现？",
+        "subtitle": "身高、测量误差、日常分数，大多落在「普通」附近，偶尔又有人极端得很远。钟形曲线就是把这套直觉画成密度：中间厚、两翼薄但不是零——极端值不是墨水里的 bug。"
+      },
+      "overview": {
+        "title": "大多普通、偶有夸张——同一座丘",
+        "body": [
+          "看看周围：同学身高、日温、小测量误差。多数靠在「典型」附近，少数甩到很左或很右。中间密、两头稀——正态曲线画的就是这种节奏。",
+          "极端不是印刷错误，而是同一密度的薄边。这页把画面搭起来：小扰动相加 → 钟形，σ 带，再看大样本为何总会碰到稀有值。"
+        ],
+        "plainLanguage": {
+          "label": "一句话",
+          "body": "世界显得「差不多平均」，是因为中间厚；极端仍会出现，是因为尾部从不归零。"
+        },
+        "keyPointsLabel": "先记住三点",
+        "keyPoints": [
+          {
+            "title": "中间厚",
+            "body": "概率质量大多在均值附近——所以「普通」显得常见。"
+          },
+          {
+            "title": "尾部薄但真实",
+            "body": "很远的结果每次很少见，却不是被禁止。"
+          },
+          {
+            "title": "讲机制，不背公式",
+            "body": "我们追形状与抽样直觉——不是考试技巧。"
+          }
+        ],
+        "demoTitle": "切换：普通堆积 vs 极端高亮",
+        "copy": {
+          "ariaLabel": "交互总览：在钟形曲线上对比密集中部与高亮极端",
+          "caption": "切换视角：同一条曲线，点亮中部像「差不多平均」，点亮两翼像「极端存在」。",
+          "controlLabel": "视角",
+          "modes": [
+            {
+              "key": "middle",
+              "label": "普通堆积",
+              "headline": "质量大多贴着中心",
+              "detail": "盯着胖中间时，世界像「差不多平均」——多数抽样也落在这里。",
+              "badge": "中心"
+            },
+            {
+              "key": "tails",
+              "label": "极端两翼",
+              "headline": "同一条曲线仍有翅膀",
+              "detail": "点亮远端带，稀有结果变得可见——不是错误，而是同一形状上的低密度处。",
+              "badge": "尾部"
+            }
+          ],
+          "statusMiddle": "中心点亮：多数概率在均值附近——普通显得常见。",
+          "statusTails": "尾部点亮：极端每次很少见，但仍属于同一条曲线。"
+        }
+      },
+      "steps": [
+        {
+          "id": "many-shocks",
+          "number": "01",
+          "title": "许多独立小扰动相加 → 钟形",
+          "body": [
+            "想象许多很小、大致独立的推力——测量抖动、一点遗传差异、日常噪声。单独看每个都很乱；加得够多，总和往往堆成一座丘：靠近这些推力的平均处最高，往两边走逐渐变薄。",
+            "墙上不必写满定理名。直觉版是：独立噪声叠起来，常常长得像钟。演示里的骰子/硬币只是这些小扰动的玩具替身。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "把很多独立小噪声加在一起，总和经常像一座中间高的山。"
+          },
+          "keyPointsLabel": "看什么",
+          "keyPoints": [
+            {
+              "title": "独立性有帮助",
+              "body": "扰动不同步时，互相抵消更容易填满中间。"
+            },
+            {
+              "title": "项越多，丘越圆",
+              "body": "项少时直方图还方；项多就变圆润。"
+            },
+            {
+              "title": "玩具模型",
+              "body": "骰子/硬币求和是教学替身——不是说现实变量都正态。"
+            }
+          ],
+          "demoTitle": "增加小扰动个数，看丘如何成形",
+          "copy": {
+            "ariaLabel": "交互直方图：独立小扰动求和逐渐形成钟形",
+            "caption": "提高每次求和包含的小扰动数。总和的直方图会更圆、更像钟。",
+            "controlLabel": "每次求和的小扰动数",
+            "shocksLabel": "每次扰动数",
+            "samplesLabel": "堆积的抽样次数",
+            "statusFew": "扰动少：堆积仍显得方、不均匀。",
+            "statusMany": "扰动多：抵消填满中间——更像钟形。"
+          }
+        },
+        {
+          "id": "three-sigmas",
+          "number": "02",
+          "title": "68 · 95 · 99.7：多远算「不寻常」？",
+          "body": [
+            "对正态曲线，离均值的距离常用标准差（σ）量。教学用粗带：大约 68% 落在 1σ 内，约 95% 在 2σ 内，约 99.7% 在 3σ 内。",
+            "这些数字是曲线下的面积——不是魔法口令。滑动带宽，能看见剩余尾部收得有多快，以及「三西格玛开外」为何少见却并非不可能。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "1σ / 2σ / 3σ 是均值周围越来越宽的腰带；多数质量在里面，一点漏在外面。"
+          },
+          "keyPointsLabel": "看什么",
+          "keyPoints": [
+            {
+              "title": "σ 是尺子",
+              "body": "它标定这座丘「散开得有多远」。"
+            },
+            {
+              "title": "带是面积",
+              "body": "68–95–99.7 讲的是概率质量，不是为背而背。"
+            },
+            {
+              "title": "外面 ≠ 不可能",
+              "body": "3σ 以外每次少见——却不是禁区。"
+            }
+          ],
+          "demoTitle": "在钟上点亮 1σ / 2σ / 3σ 带",
+          "copy": {
+            "ariaLabel": "可选 1/2/3 西格玛带的交互正态曲线",
+            "caption": "选择一条 σ 带。看有多少面积在带内、多少在两翼。",
+            "controlLabel": "西格玛带",
+            "band1Label": "±1σ · ~68%",
+            "band2Label": "±2σ · ~95%",
+            "band3Label": "±3σ · ~99.7%",
+            "meanLabel": "均值",
+            "insideLabel": "带内",
+            "outsideLabel": "带外（尾部）",
+            "status1": "±1σ：多数质量已在内——普通地带。",
+            "status2": "±2σ：外面只剩薄片。",
+            "status3": "±3σ：几乎全在内；剩下的尾部极小但非零。"
+          }
+        },
+        {
+          "id": "rare-tails",
+          "number": "03",
+          "title": "每次稀有——大样本里却「总会」碰到",
+          "body": [
+            "单次落到很远的尾部，会像奇迹或故障。换个框：抽一次，极端很少见；抽几千次，「至少一个极端」就变得正常。",
+            "演示点亮两翼并让你加大样本量。极端「总出现」，不是因为中间撒谎，而是很多次独立机会终会碰到薄边。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "一次未必；次数够了就迟早会——只要你继续抽样。"
+          },
+          "keyPointsLabel": "看什么",
+          "keyPoints": [
+            {
+              "title": "单次稀有",
+              "body": "远端尾部在每次抽取上概率很小。"
+            },
+            {
+              "title": "样本量要紧",
+              "body": "n 大时，「至少一个极端」变得平常。"
+            },
+            {
+              "title": "极端 ≠ 不该存在",
+              "body": "落在薄尾上，不等于「不该出现」。"
+            }
+          ],
+          "demoTitle": "加大样本，直到尾部命中出现",
+          "copy": {
+            "ariaLabel": "高亮正态尾部并随样本量累积极端命中的交互演示",
+            "caption": "提高样本量。尽管单次仍少见，稀有两翼命中会逐渐累积。",
+            "controlLabel": "样本量",
+            "sampleLabel": "抽取次数",
+            "tailLabel": "尾部区域",
+            "hitsLabel": "迄今极端命中",
+            "statusSmall": "样本小：两翼命中可能还没出现——稀有仍占上风。",
+            "statusLarge": "样本大：若干极端命中出现——在同一薄尾下是预期内的。"
+          }
+        },
+        {
+          "id": "not-always",
+          "number": "04",
+          "title": "并非一切都正态——肥尾是另一个世界",
+          "body": [
+            "当许多温和、独立的效应叠在一起时，钟形是很强的默认。它不是万能护照。有些系统尾更肥：极端比正态允许的更常来。",
+            "这里一句就够：若你的世界里常见崩溃、级联或赢家通吃的尖峰，别硬套钟形。本页停在认清正态形状——以及知道何时该怀疑它。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "钟形是常用工具，不是每份数据的自然定律。"
+          },
+          "keyPointsLabel": "看什么",
+          "keyPoints": [
+            {
+              "title": "正态是模型",
+              "body": "叠加速度说得通时有用；硬套就危险。"
+            },
+            {
+              "title": "肥尾存在",
+              "body": "有些过程在远端放的质量，比钟的 ±3σ 更多。"
+            },
+            {
+              "title": "别开成金融课",
+              "body": "我们点出 caveat；不教交易。"
+            }
+          ],
+          "demoTitle": "对比钟形与更肥的尾部草图",
+          "copy": {
+            "ariaLabel": "切换对比正态钟形与更重尾草图",
+            "caption": "切换形状：中心故事相似，两翼厚度不同。",
+            "controlLabel": "形状",
+            "modes": [
+              {
+                "key": "normal",
+                "label": "钟形（正态）",
+                "headline": "两翼收得很快",
+                "detail": "过了几个 σ，密度迅速下降——此模型下极端少见。",
+                "badge": "正态"
+              },
+              {
+                "key": "heavy",
+                "label": "更肥的尾",
+                "headline": "两翼更厚",
+                "detail": "远端仍留着更多概率。这里硬套钟形会低估极端。",
+                "badge": "当心"
+              }
+            ],
+            "statusNormal": "选中钟形：尾薄——每次极端少见。",
+            "statusHeavy": "更肥草图：两翼更厚——别假装每座丘都正态。"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "把形状重新装回去",
+        "title": "中间厚 + 尾部薄——极端是同一条曲线的一部分",
+        "body": [
+          "正态曲线同时解释「差不多平均」为何成立、稀有极端为何仍发生：质量大多在均值附近，两翼却从不归零。独立小扰动常堆出这座丘；σ 带量化「有多远」；大样本让稀有命中变得难免。",
+          "一口气记住 caveat：并非一切系统都正态。叠加速度说得通再用钟；两翼显得太肥就该怀疑。"
+        ],
+        "checklistLabel": "读者自检",
+        "checklist": [
+          "问一问：是否许多温和独立效应在叠加？",
+          "把「不寻常」读成 σ 距离，而不是道德失败。",
+          "大样本里，预期会有一些尾部命中。",
+          "若极端来得太勤，考虑更肥的尾——别硬套钟。"
+        ],
+        "scaleTitle": "四个动作",
+        "scaleItems": [
+          {
+            "term": "叠加",
+            "question": "丘从哪来？",
+            "role": "许多独立小扰动相加。"
+          },
+          {
+            "term": "σ 带",
+            "question": "多远算远？",
+            "role": "1 / 2 / 3σ 腰带及其面积。"
+          },
+          {
+            "term": "尾部",
+            "question": "极端为何出现？",
+            "role": "单次稀有；多次抽样就常见。"
+          },
+          {
+            "term": "边界",
+            "question": "何时怀疑钟？",
+            "role": "两翼一直很肥——别的模型可能更合适。"
+          }
+        ],
+        "finalQuote": "「平均」世界里的极端，常常是同一密度的薄边——不是墨水里的 bug。",
+        "sourceNote": "公共教育向说明：正态分布（高斯）的中心集中、σ 带，以及大样本下稀有尾部为何出现。Wikipedia「Normal distribution」是高流量背景文；本页只讲机制直觉——不是考试技巧、预测或投资建议。"
+      }
+    },
+    "ja": {
+      "lang": "ja",
+      "meta": {
+        "title": "「だいたい平均」の世界で、なぜ極端な値はいつも現れるのか？",
+        "description": "正規分布（釣鐘曲線）のインタラクティブ解説：なぜ大半の結果は平均付近に集まり、独立な小さな摂動がどう積み上がってその形になるか、1/2/3σ帯の意味、大標本で稀な尾がなお現れる理由——仕組みのみ、公式暗記ページではない。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "すべての動きを停止",
+        "resumeAll": "すべての動きを再開",
+        "pause": "一時停止",
+        "resume": "再開",
+        "reset": "リセット",
+        "waiting": "図解は表示領域に入ると読み込まれます。",
+        "loading": "図解を準備しています…",
+        "error": "図解を表示できません。上の説明を読んでください。",
+        "figureFallback": "インタラクティブ図解を見るには JavaScript を有効にしてください。",
+        "skipToContent": "本文へスキップ",
+        "languageNavigation": "言語",
+        "overviewLabel": "正規分布の概観",
+        "stepLabel": "ステップ"
+      },
+      "hero": {
+        "eyebrow": "分布 / 釣鐘曲線 / 尾部",
+        "title": "「だいたい平均」の世界で、なぜ極端な値はいつも現れるのか？",
+        "subtitle": "身長、測定ノイズ、日常のスコアは多くが「普通」の近くに落ち、時おり極端に遠い人もいる。釣鐘曲線はその直感を密度として描く：中央は厚く、翼は薄いがゼロではない——極端はインクのバグではない。"
+      },
+      "overview": {
+        "title": "大半は普通、たまに過激——同じ形",
+        "body": [
+          "周囲を見てみよう：同級生の身長、日々の気温、小さな測定誤差。多くは「典型」の近く、少数は大きく左か右へ。中央が密で両端が疎——正規曲線が描くリズムだ。",
+          "極端は印刷ミスではない。同じ密度の薄い縁だ。このページはその絵を組む：小さな摂動の加算 → 釣鐘、σ帯、大標本で稀な値がなお当たる理由。"
+        ],
+        "plainLanguage": {
+          "label": "ひとことで",
+          "body": "世界が「だいたい平均」に見えるのは中央が厚いから；極端がなお出るのは尾がゼロにならないから。"
+        },
+        "keyPointsLabel": "まずこの三点",
+        "keyPoints": [
+          {
+            "title": "厚い中央",
+            "body": "確率質量の大半は平均付近——だから「普通」がよく見える。"
+          },
+          {
+            "title": "薄いが実在する尾",
+            "body": "遠い結果は1回あたり稀だが、禁止ではない。"
+          },
+          {
+            "title": "仕組み、暗記ではない",
+            "body": "形と標本の直感を追う——試験テクではない。"
+          }
+        ],
+        "demoTitle": "切り替え：普通の山 vs 極端の強調",
+        "copy": {
+          "ariaLabel": "釣鐘曲線で密集した中央と強調した極端を対比する概観インタラクション",
+          "caption": "視点を切り替え：同じ曲線でも、中央を灯せば「だいたい平均」、翼を灯せば「極端は存在する」。",
+          "controlLabel": "視点",
+          "modes": [
+            {
+              "key": "middle",
+              "label": "普通の山",
+              "headline": "質量の大半は中央に寄り添う",
+              "detail": "太い中央を見ると世界は「だいたい平均」に見える——大抵の抽選もここに落ちる。",
+              "badge": "中央"
+            },
+            {
+              "key": "tails",
+              "label": "極端の翼",
+              "headline": "同じ曲線にも翼がある",
+              "detail": "遠い帯を灯すと稀な結果が見える——誤りではなく、同じ形の低密度の場所。",
+              "badge": "尾部"
+            }
+          ],
+          "statusMiddle": "中央を灯す：確率の大半は平均付近——普通がよく見える。",
+          "statusTails": "尾を灯す：極端は1回あたり稀だが、同じ曲線に属する。"
+        }
+      },
+      "steps": [
+        {
+          "id": "many-shocks",
+          "number": "01",
+          "title": "多くの独立な小さな摂動の和 → 釣鐘",
+          "body": [
+            "ごく小さく、おおよそ独立な押しをたくさん想像する——測定の揺れ、わずかな遺伝要因、日常ノイズ。一つ一つは乱雑でも、十分足すと合計はしばしば丘になる：それらの平均付近が最も高く、離れるほど薄くなる。",
+            "壁に定理名を並べる必要はない。直感版は：独立ノイズを積むと釣鐘に見えやすい。デモのサイコロ/コインは、その小さな摂動の玩具の代役だ。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "独立な小さなノイズをたくさん足すと、合計は真ん中が高い丘になりやすい。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "独立が助けになる",
+              "body": "摂動が同期しないと、打ち消しが中央を埋めやすい。"
+            },
+            {
+              "title": "項が多いほど丸い丘",
+              "body": "項が少ないとヒストグラムは角ばり、多いと丸くなる。"
+            },
+            {
+              "title": "玩具モデル",
+              "body": "サイコロ/コインの和は教材の代役——現実の変数がすべて正規だとは言わない。"
+            }
+          ],
+          "demoTitle": "小さな摂動の数を増やし、丘ができるのを見る",
+          "copy": {
+            "ariaLabel": "独立な小さな摂動の和が釣鐘形になるインタラクティブヒストグラム",
+            "caption": "1回の和に含める小さな摂動の数を上げる。合計のヒストグラムがより丸く釣鐘に近づく。",
+            "controlLabel": "1回の和あたりの小さな摂動数",
+            "shocksLabel": "1回あたりの摂動数",
+            "samplesLabel": "山に積む抽選回数",
+            "statusFew": "摂動が少ない：山はまだ角ばって不均一。",
+            "statusMany": "摂動が多い：打ち消しが中央を埋め——より釣鐘に見える。"
+          }
+        },
+        {
+          "id": "three-sigmas",
+          "number": "02",
+          "title": "68 · 95 · 99.7：「珍しい」はどれくらい遠いか？",
+          "body": [
+            "正規曲線では、平均からの距離を標準偏差（σ）で測ることが多い。教材の粗い帯：約68%が1σ以内、約95%が2σ以内、約99.7%が3σ以内。",
+            "これらは曲線の下の面積であり、魔法の合言葉ではない。帯幅を動かすと、残る尾がどれだけ速く痩せるか、「3σの外」が稀でも不可能ではない理由が見える。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "1σ / 2σ / 3σは平均まわりのだんだん広いベルト；大半の質量は内側、少しが外側に漏れる。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "σは物差し",
+              "body": "この丘が「どれだけ広がっているか」を測る。"
+            },
+            {
+              "title": "帯は面積",
+              "body": "68–95–99.7は確率質量の話であり、暗記そのものが目的ではない。"
+            },
+            {
+              "title": "外側 ≠ 不可能",
+              "body": "3σの外は1回あたり少ない——禁域ではない。"
+            }
+          ],
+          "demoTitle": "釣鐘に1σ / 2σ / 3σ帯を灯す",
+          "copy": {
+            "ariaLabel": "1/2/3シグマ帯を選べるインタラクティブ正規曲線",
+            "caption": "σベルトを選ぶ。曲線の面積のうち帯の内側と翼にどれだけあるかを見る。",
+            "controlLabel": "シグマ帯",
+            "band1Label": "±1σ · ~68%",
+            "band2Label": "±2σ · ~95%",
+            "band3Label": "±3σ · ~99.7%",
+            "meanLabel": "平均",
+            "insideLabel": "帯の内側",
+            "outsideLabel": "外側（尾）",
+            "status1": "±1σ：質量の大半はすでに内側——普通の領域。",
+            "status2": "±2σ：外側に残るのは薄い切片だけ。",
+            "status3": "±3σ：ほぼすべて内側；残る尾はごく小さいがゼロではない。"
+          }
+        },
+        {
+          "id": "rare-tails",
+          "number": "03",
+          "title": "1回あたり稀——大標本では「いつも」当たる",
+          "body": [
+            "1回で遠い尾に落ちると奇跡や故障に感じる。枠を変える：1回なら極端は起きにくい。何千回なら、「少なくとも1回の極端」は当たり前になる。",
+            "デモは翼を強調し、標本を大きくできる。極端が「いつも出る」のは中央が嘘をついたからではなく、独立な機会が何度も薄い縁をつつくからだ。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "1回は稀；回数を重ねればいずれ——標本を取り続けるなら。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "1回の稀少さ",
+              "body": "遠い尾は各抽選で確率が小さい。"
+            },
+            {
+              "title": "標本サイズが効く",
+              "body": "nが大きいと「少なくとも1つの極端」は普通になる。"
+            },
+            {
+              "title": "極端 ≠ 存在すべきでない",
+              "body": "薄い尾に属することは「あってはならない」とは別。"
+            }
+          ],
+          "demoTitle": "標本を増やし、尾のヒットが出るまで見る",
+          "copy": {
+            "ariaLabel": "正規曲線の尾を強調し標本サイズに応じて極端ヒットが積もるインタラクティブデモ",
+            "caption": "標本サイズを上げる。1回あたりは稀でも、翼のヒットが徐々に積もる。",
+            "controlLabel": "標本サイズ",
+            "sampleLabel": "抽選回数",
+            "tailLabel": "尾の領域",
+            "hitsLabel": "これまでの極端ヒット",
+            "statusSmall": "標本が小さい：翼のヒットはまだ出ないかも——稀少さが勝つ。",
+            "statusLarge": "標本が大きい：いくつかの極端ヒットが出る——同じ薄い尾の下では想定内。"
+          }
+        },
+        {
+          "id": "not-always",
+          "number": "04",
+          "title": "すべてが正規ではない——太い尾は別世界",
+          "body": [
+            "穏やかで独立な効果がたくさん積まれるとき、釣鐘は強い既定だ。万能パスポートではない。尾が太い系もある：正規が許すより極端が頻繁に来る。",
+            "ここは一文で十分：崩壊、連鎖、勝者総取りの尖りが多い世界なら、釣鐘を無理に当てるな。本ページは正規の形を認め——疑うべき時を知るところで止まる。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "釣鐘は便利な道具であり、すべてのデータの自然法則ではない。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "正規はモデル",
+              "body": "積み上げの話が合うとき有用；無理強いすると危険。"
+            },
+            {
+              "title": "太い尾は存在する",
+              "body": "遠いところに釣鐘の±3σより多くの質量を置く過程もある。"
+            },
+            {
+              "title": "金融講座にはしない",
+              "body": "注意を名指しするだけ——取引は教えない。"
+            }
+          ],
+          "demoTitle": "釣鐘とより太い尾のスケッチを比べる",
+          "copy": {
+            "ariaLabel": "正規の釣鐘とより重い尾のスケッチを切り替えて比較",
+            "caption": "形を切り替え：中央の話は似て、翼の厚さが違う。",
+            "controlLabel": "形",
+            "modes": [
+              {
+                "key": "normal",
+                "label": "釣鐘（正規）",
+                "headline": "翼は速く痩せる",
+                "detail": "数σを超えると密度は急速に落ちる——このモデルでは極端は稀。",
+                "badge": "正規"
+              },
+              {
+                "key": "heavy",
+                "label": "より太い尾",
+                "headline": "翼がより厚い",
+                "detail": "遠方に確率がより残る。ここで釣鐘を無理に当てると極端を過小評価する。",
+                "badge": "注意"
+              }
+            ],
+            "statusNormal": "釣鐘を選択：尾は薄い——1回あたり極端は少ない。",
+            "statusHeavy": "より太いスケッチ：翼が厚い——すべての丘が正規だと思い込むな。"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "形を組み立て直す",
+        "title": "厚い中央 + 薄い尾——極端は同じ曲線の一部",
+        "body": [
+          "正規曲線は「だいたい平均」がなぜ正しく感じるかと、稀な極端がなぜなお起きるかの両方を説明する：質量の大半は平均付近、翼はゼロにならない。独立な小さな摂動がしばしばその丘を作り、σ帯が「どれだけ遠いか」を測り、大標本が稀なヒットを不可避にする。",
+          "一息で caveat を覚える：すべてが正規ではない。積み上げの話が合うとき釣鐘を使い、翼が太すぎるときは疑う。"
+        ],
+        "checklistLabel": "読者チェック",
+        "checklist": [
+          "多くの穏やかな独立効果が積まれているかを問う。",
+          "「珍しい」をσ距離として読み、道徳的失敗として読まない。",
+          "大標本では尾のヒットをいくらか予期する。",
+          "極端が多すぎるなら、より太い尾を考える——無理な釣鐘は避ける。"
+        ],
+        "scaleTitle": "四つの動き",
+        "scaleItems": [
+          {
+            "term": "積み上げ",
+            "question": "丘はどこから？",
+            "role": "多くの独立な小さな摂動の和。"
+          },
+          {
+            "term": "σ帯",
+            "question": "遠さはどう測る？",
+            "role": "1 / 2 / 3σベルトとその面積。"
+          },
+          {
+            "term": "尾",
+            "question": "なぜ極端が出る？",
+            "role": "1回は稀；何度も標本を取れば普通。"
+          },
+          {
+            "term": "限界",
+            "question": "いつ釣鐘を疑う？",
+            "role": "翼がずっと太いとき——別モデルの方が合うかも。"
+          }
+        ],
+        "finalQuote": "「平均」の世界の極端は、しばしば同じ密度の薄い縁——インクのバグではない。",
+        "sourceNote": "正規（ガウス）分布についての公共教育ノート：中央への集中、σ帯、大標本で稀な尾が現れる理由。Wikipedia「Normal distribution」は高トラフィックの背景記事；本ページは仕組みの直感のみ——試験ドリル、予測、投資助言ではない。"
+      }
+    }
+  }
+}

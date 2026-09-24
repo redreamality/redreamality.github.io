@@ -12,6 +12,7 @@ import ButterflyEffectVisual from './ButterflyEffectVisual.astro';
 import InflationPurchasingPowerVisual from './InflationPurchasingPowerVisual.astro';
 import CompoundInterestVisual from './CompoundInterestVisual.astro';
 import BayesLabResultVisual from './BayesLabResultVisual.astro';
+import NormalDistributionVisual from './NormalDistributionVisual.astro';
 
 interface Props {
   lang: Language;
@@ -32,6 +33,7 @@ const artifactComponents = {
   'inflation-purchasing-power': InflationPurchasingPowerVisual,
   'compound-interest': CompoundInterestVisual,
   'bayes-lab-result': BayesLabResultVisual,
+  'normal-distribution': NormalDistributionVisual,
 } as const;
 const VisualComponent = artifactId ? artifactComponents[artifactId as keyof typeof artifactComponents] : undefined;
 

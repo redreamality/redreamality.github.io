@@ -5,7 +5,8 @@ test('English Visuals gallery contains the multilingual published works', async 
 
   expect(response?.status()).toBe(200);
   await expect(page.locator('h1')).toHaveText('Visuals');
-  await expect(page.locator('[data-visual-card]')).toHaveCount(10);
+  await expect(page.locator('[data-visual-card]')).toHaveCount(11);
+  await expect(page.getByRole('heading', { name: 'In a World of "About Average," Why Do Extremes Keep Showing Up?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Same Lab Result—Why Do Two People Reach Opposite Conclusions?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: '0.1% Extra a Day—How Far Ahead Are You in a Year?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'When More Money Is Printed, Why Does Your Pocket Feel Thinner?' })).toBeVisible();
@@ -16,7 +17,7 @@ test('English Visuals gallery contains the multilingual published works', async 
   await expect(page.getByRole('heading', { name: 'How Air Conditioners Work' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'What Is Loop Engineering?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'How Typhoons Form' })).toBeVisible();
-  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(10);
+  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(11);
   await expect(page.getByText('Agent Architecture Showcase')).toHaveCount(0);
   await expect(page.getByText(/not available in this language/i)).toHaveCount(0);
 });
@@ -29,8 +30,8 @@ test('stale missing-language query cannot mark multilingual Typhoon as unavailab
 });
 
 for (const locale of [
-  { path: '/cn/visuals/', title: '可视化', work: '同一张化验单，为什么两人结论相反？' },
-  { path: '/ja/visuals/', title: 'ビジュアル', work: '同じ検査結果なのに、なぜ二人の結論は真逆なのか？' },
+  { path: '/cn/visuals/', title: '可视化', work: '为什么「差不多平均」的世界里，极端值总出现？' },
+  { path: '/ja/visuals/', title: 'ビジュアル', work: '「だいたい平均」の世界で、なぜ極端な値はいつも現れるのか？' },
 ]) {
   test(`${locale.path} renders a localized Visuals gallery`, async ({ page }) => {
     const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
@@ -38,7 +39,7 @@ for (const locale of [
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toHaveText(locale.title);
     await expect(page.getByRole('heading', { name: locale.work })).toBeVisible();
-    await expect(page.locator('[data-visual-card]')).toHaveCount(10);
+    await expect(page.locator('[data-visual-card]')).toHaveCount(11);
   });
 }
 
@@ -59,6 +60,7 @@ for (const locale of [
     path: '/',
     sectionTitle: 'Visuals',
     works: [
+      ['normal-distribution', 'In a World of "About Average," Why Do Extremes Keep Showing Up?', '/visuals/normal-distribution/'],
       ['bayes-lab-result', 'Same Lab Result—Why Do Two People Reach Opposite Conclusions?', '/visuals/bayes-lab-result/'],
       ['compound-interest', '0.1% Extra a Day—How Far Ahead Are You in a Year?', '/visuals/compound-interest/'],
       ['inflation-purchasing-power', 'When More Money Is Printed, Why Does Your Pocket Feel Thinner?', '/visuals/inflation-purchasing-power/'],
@@ -78,6 +80,7 @@ for (const locale of [
     path: '/cn/',
     sectionTitle: '可视化',
     works: [
+      ['normal-distribution', '为什么「差不多平均」的世界里，极端值总出现？', '/cn/visuals/normal-distribution/'],
       ['bayes-lab-result', '同一张化验单，为什么两人结论相反？', '/cn/visuals/bayes-lab-result/'],
       ['compound-interest', '每天多赚 0.1%，一年后你会差多少？', '/cn/visuals/compound-interest/'],
       ['inflation-purchasing-power', '钱印多了，为什么你口袋里的反而更薄？', '/cn/visuals/inflation-purchasing-power/'],
@@ -97,6 +100,7 @@ for (const locale of [
     path: '/ja/',
     sectionTitle: 'ビジュアル',
     works: [
+      ['normal-distribution', '「だいたい平均」の世界で、なぜ極端な値はいつも現れるのか？', '/ja/visuals/normal-distribution/'],
       ['bayes-lab-result', '同じ検査結果なのに、なぜ二人の結論は真逆なのか？', '/ja/visuals/bayes-lab-result/'],
       ['compound-interest', '毎日0.1%多く増やすと、一年後どれだけ差がつく？', '/ja/visuals/compound-interest/'],
       ['inflation-purchasing-power', 'お金を刷れば刷るほど、なぜ懐は薄くなるのか？', '/ja/visuals/inflation-purchasing-power/'],
@@ -1076,6 +1080,66 @@ for (const locale of [
   });
 }
 
+
+for (const locale of [
+  {
+    path: '/visuals/normal-distribution/',
+    htmlLang: 'en',
+    h1: 'In a world of "about average," why do extremes keep showing up?',
+    pauseAll: 'Pause all motion',
+    reset: 'Reset',
+    control: 'View',
+    statusTails: 'Tails lit: extremes are rare per draw, yet they belong on the same curve.',
+  },
+  {
+    path: '/cn/visuals/normal-distribution/',
+    htmlLang: 'zh-CN',
+    h1: '为什么「差不多平均」的世界里，极端值总出现？',
+    pauseAll: '暂停所有动画',
+    reset: '重置',
+    control: '视角',
+    statusTails: '尾部点亮：极端每次很少见，但仍属于同一条曲线。',
+  },
+  {
+    path: '/ja/visuals/normal-distribution/',
+    htmlLang: 'ja',
+    h1: '「だいたい平均」の世界で、なぜ極端な値はいつも現れるのか？',
+    pauseAll: 'すべての動きを停止',
+    reset: 'リセット',
+    control: '視点',
+    statusTails: '尾を灯す：極端は1回あたり稀だが、同じ曲線に属する。',
+  },
+]) {
+  test(`${locale.path} renders the localized normal-distribution explainer and lifecycle`, async ({ page }) => {
+    const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('html')).toHaveAttribute('lang', locale.htmlLang);
+    await expect(page.locator('body > nav')).toBeVisible();
+    await expect(page.locator('h1')).toHaveText(locale.h1);
+    await expect(page.locator('h1')).toHaveCount(1);
+    const visual = page.locator('[data-visual-artifact="normal-distribution"]');
+    await expect(visual).toBeVisible();
+    await expect(visual.locator('iframe')).toHaveCount(0);
+    await expect(page.locator('.site-header')).toHaveCount(0);
+    await expect(page.locator('interactive-figure')).toHaveCount(5);
+
+    const overview = page.locator('interactive-figure[data-demo="nd-overview"]');
+    await overview.scrollIntoViewIfNeeded();
+    await expect(overview).toHaveAttribute('data-state', 'mounted');
+    await expect(overview.locator('.nd-ov-controls')).toBeVisible();
+    const tailsMode = overview.locator('[data-nd-ov="1"]');
+    const status = overview.locator('[data-nd-status]');
+    await tailsMode.click();
+    await expect(tailsMode).toHaveAttribute('aria-pressed', 'true');
+    await expect(status).toContainText(locale.statusTails);
+
+    await overview.getByRole('button', { name: locale.reset }).click();
+    await expect(overview.locator('[data-nd-ov="0"]')).toHaveAttribute('aria-pressed', 'true');
+    await page.getByRole('button', { name: locale.pauseAll }).click();
+    await expect(overview).toHaveAttribute('data-playback', 'paused');
+  });
+}
+
 test('sitemap lists every published visual locale and no Agent Architecture routes', async ({ request }) => {
   const indexResponse = await request.get('/sitemap-index.xml');
   expect(indexResponse.ok()).toBeTruthy();
@@ -1119,6 +1183,9 @@ test('sitemap lists every published visual locale and no Agent Architecture rout
     '/visuals/bayes-lab-result/',
     '/cn/visuals/bayes-lab-result/',
     '/ja/visuals/bayes-lab-result/',
+    '/visuals/normal-distribution/',
+    '/cn/visuals/normal-distribution/',
+    '/ja/visuals/normal-distribution/',
   ]) {
     expect(xml).toContain(`<loc>https://redreamality.com${path}</loc>`);
   }

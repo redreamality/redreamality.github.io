@@ -4,7 +4,7 @@ import type { Language } from './i18n';
 export type VisualRenderer = 'standalone' | 'interactive-explainer';
 export type VisualType = 'visual-story' | 'interactive-explainer';
 export type VisualStatus = 'draft' | 'published';
-export type VisualCover = 'air-conditioner' | 'loop-engineering' | 'price-volume' | 'typhoon' | 'enso-food-prices' | 'prisoners-dilemma' | 'butterfly-effect' | 'inflation-purchasing-power' | 'compound-interest' | 'bayes-lab-result';
+export type VisualCover = 'air-conditioner' | 'loop-engineering' | 'price-volume' | 'typhoon' | 'enso-food-prices' | 'prisoners-dilemma' | 'butterfly-effect' | 'inflation-purchasing-power' | 'compound-interest' | 'bayes-lab-result' | 'normal-distribution';
 
 export interface VisualLocaleRecord {
   title: string;
