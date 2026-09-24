@@ -122,7 +122,7 @@ Before saving any markdown content file, verify:
 
 ### Explore & Exploit（站长，2026-09-24）
 
-选题与制作遵循 explore-and-exploit：**一边做强精品**（已验证主题线加深、对照、系列化，优先正式 blog / Visual），**一边保持探索**（信号粗筛与 Chaos 继续广扫；新方向先 shortlisted / notes / Chaos 试水温）。不要只追热点，也不要只啃老题；库存里应同时有「深耕线」和「新芽」。细则见 `/workspace/blog-pipeline/README.md`。
+选题与制作遵循 explore-and-exploit：**一边做强精品**（已验证主题线加深、对照、系列化，优先正式 blog / Visual），**一边保持探索**（信号粗筛与 Chaos 继续广扫；新方向先 shortlisted / notes / Chaos 试水温）。硬约束：**长期主义深内容，不为追热点而写热点**——正式 blog 要有可沉淀的机制/对照/清单；纯热榜软新闻进 Chaos / notes。库存里应同时有「深耕线」和「新芽」。撰稿节奏工作日约每天 4 篇；站长授权后正式 blog 由博客头子终审即发，不必逐篇请示。细则见 `/workspace/blog-pipeline/README.md`。
 
 ### Blog Chinese style（站长约束，2026-09-23）
 
