@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T09:59:06+08:00",
+  "updatedAt": "2026-09-24T10:47:23+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,50 +11,53 @@
     "other"
   ],
   "themeCounts": {
-    "models": 6,
+    "models": 8,
     "coding-tools": 10,
     "agents-oss": 32,
     "security": 2,
-    "research": 13,
+    "research": 16,
     "product-news": 3,
-    "other": 9
+    "other": 8
   },
   "hours": [
     {
-      "hourStart": "2026-09-24T09:00:00+08:00",
+      "hourStart": "2026-09-24T10:00:00+08:00",
       "label": {
-        "zh": "9月24日 09:00",
-        "en": "Sep 24 09:00",
-        "ja": "9月24日 09:00"
+        "zh": "9月24日 10:00",
+        "en": "Sep 24 10:00",
+        "ja": "9月24日 10:00"
       },
       "items": [
         {
-          "id": "t003",
-          "theme": "coding-tools",
+          "id": "t001",
+          "theme": "models",
           "title": {
-            "zh": "Jev × Claude Code：爆款工作流与 25 行最小实现",
-            "en": "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Build",
-            "ja": "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Build"
+            "zh": "Claude Opus 5.5：降价 + 旗舰性能同窗发布",
+            "en": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose",
+            "ja": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose"
           },
           "summary": {
-            "zh": "站内 Jev 刚需：实操 10x + 最小实现 + OpenAI 跟进压力",
-            "en": "A viral YouTube clip ties Jev to Claude Code, but Jev cannot be the CLI chat model. This post covers the official skill, boundary hooks, MCP, and per-turn routing, contrasts NobodyWho’s 25-line minimal build, and discusses OpenAI fast-follow pressure.",
+            "zh": "与 GPT-6 对台：性能/价格/安全限制怎么选",
+            "en": "Anthropic launched Claude Opus 5.5 on 2026-09-22: about 40% lower cost on typical workloads versus Opus 5, with Fable-tier capability claims and matching safeguards. A builder-focused read of pricing, benchmarks, and coding-agent fit.",
             "ja": ""
           },
           "sources": [
-            "youtube",
-            "hn"
+            "hn",
+            "techcrunch",
+            "36kr",
+            "youtube"
           ],
           "score": 5,
           "status": "published",
           "externalUrls": [
-            "https://www.youtube.com/watch?v=tTnUcSj-QPA",
-            "https://www.nobodywho.ai/posts/jev-in-25-lines/",
-            "https://arcturus-labs.com/blog/2026/09/21/will-openai-eat-jevs-lunch/"
+            "https://www.anthropic.com/claude-opus-5-5",
+            "https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/",
+            "https://eu.36kr.com/zh/p/3995195771588745",
+            "https://www.youtube.com/watch?v=jKRl_CSVxyI"
           ],
           "blog": {
-            "zh": "/cn/blog/jev-claude-code-10x-and-25-lines/",
-            "en": "/blog/jev-claude-code-10x-and-25-lines/"
+            "zh": "/cn/blog/claude-opus-5-5-price-and-performance/",
+            "en": "/blog/claude-opus-5-5-price-and-performance/"
           }
         },
         {
@@ -126,7 +129,7 @@
             "hn"
           ],
           "score": 5,
-          "status": "shortlisted",
+          "status": "writing",
           "externalUrls": [
             "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
           ]
@@ -244,6 +247,28 @@
           ]
         },
         {
+          "id": "t016",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "BuilderIO/agent-native：把产品做成 agent-native",
+            "en": "BuilderIO/agent-native",
+            "ja": "BuilderIO/agent-native"
+          },
+          "summary": {
+            "zh": "产品 agent 化框架；日榜靠前",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://github.com/BuilderIO/agent-native"
+          ]
+        },
+        {
           "id": "t017",
           "theme": "coding-tools",
           "title": {
@@ -268,25 +293,25 @@
           ]
         },
         {
-          "id": "t059",
+          "id": "t038",
           "theme": "agents-oss",
           "title": {
-            "zh": "Gemini 3.8 文本转语音",
-            "en": "",
-            "ja": ""
+            "zh": "strands-agents/harness-sdk",
+            "en": "strands-agents/harness-sdk",
+            "ja": "strands-agents/harness-sdk"
           },
           "summary": {
-            "zh": "语音 agent / 多模态产品面；云端 TTS 选型",
+            "zh": "生产级 harness SDK",
             "en": "",
             "ja": ""
           },
           "sources": [
-            "hn"
+            "github"
           ],
           "score": 4,
           "status": "shortlisted",
           "externalUrls": [
-            "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/"
+            "https://github.com/strands-agents/harness-sdk"
           ]
         },
         {
@@ -314,28 +339,6 @@
           ]
         },
         {
-          "id": "t070",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Coding agent 可被所打开的仓库攻击",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "不可信仓库=攻击面；prompt/tool injection",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "devto"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://dev.to/robertadam987_/your-ai-coding-agent-can-be-attacked-by-the-repository-it-opens-ie4"
-          ]
-        },
-        {
           "id": "t074",
           "theme": "models",
           "title": {
@@ -359,7 +362,7 @@
         },
         {
           "id": "t075",
-          "theme": "other",
+          "theme": "models",
           "title": {
             "zh": "deepseek-ai/DeepSeek-V4.1-Flash",
             "en": "deepseek-ai/DeepSeek-V4.1-Flash",
@@ -377,6 +380,466 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash"
+          ]
+        },
+        {
+          "id": "t082",
+          "theme": "models",
+          "title": {
+            "zh": "convaiinnovations/laya：System 1 决策分类小模型（+ demo）",
+            "en": "convaiinnovations/laya",
+            "ja": "convaiinnovations/laya"
+          },
+          "summary": {
+            "zh": "System 1 决策小模型 + Space demo；对照 Jev/决策索引线",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://huggingface.co/spaces/convaiinnovations/laya-demo",
+            "https://huggingface.co/convaiinnovations/laya"
+          ]
+        },
+        {
+          "id": "t093",
+          "theme": "other",
+          "title": {
+            "zh": "MiniMaxAI/MiniMax-H3：图文生视频",
+            "en": "MiniMaxAI/MiniMax-H3",
+            "ja": "MiniMaxAI/MiniMax-H3"
+          },
+          "summary": {
+            "zh": "MiniMax H3 多模态视频；下载/likes 双高，对照 LTX/DeepSeek 多模态档",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://huggingface.co/MiniMaxAI/MiniMax-H3"
+          ]
+        },
+        {
+          "id": "t094",
+          "theme": "research",
+          "title": {
+            "zh": "JitMem: Just-in-Time Memory for LLM Agents",
+            "en": "JitMem: Just-in-Time Memory for LLM Agents",
+            "ja": "JitMem: Just-in-Time Memory for LLM Agents"
+          },
+          "summary": {
+            "zh": "读时策展记忆 vs 写时蒸馏；对照 Jev-Mem/GBrain 记忆层",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.27334"
+          ]
+        },
+        {
+          "id": "t095",
+          "theme": "research",
+          "title": {
+            "zh": "AEWM: Agent-Editing World Model",
+            "en": "AEWM: Agent-Editing World Model",
+            "ja": "AEWM: Agent-Editing World Model"
+          },
+          "summary": {
+            "zh": "State Revision/EditAct 改写脏推理；长程 task-state contamination",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.28416"
+          ]
+        },
+        {
+          "id": "t096",
+          "theme": "research",
+          "title": {
+            "zh": "EnSIMem: Entity-Structured Indexing for Long-Term Agent Memory",
+            "en": "EnSIMem: Entity-Structured Indexing for Long-Term Agent Memory",
+            "ja": "EnSIMem: Entity-Structured Indexing for Long-Term Agent Memory"
+          },
+          "summary": {
+            "zh": "实体–属性结构化长程记忆；开源可落地对照 Jev-Mem",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.27279"
+          ]
+        },
+        {
+          "id": "t014",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "addyosmani/agent-skills：生产级 engineering skills",
+            "en": "addyosmani/agent-skills",
+            "ja": "addyosmani/agent-skills"
+          },
+          "summary": {
+            "zh": "Skills 赛道权威信号，可与 CF skill 对照攒写",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/addyosmani/agent-skills"
+          ]
+        },
+        {
+          "id": "t015",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "obra/superpowers：Agentic skills 框架",
+            "en": "obra/superpowers",
+            "ja": "obra/superpowers"
+          },
+          "summary": {
+            "zh": "Skills 方法论大体量；与 ECC/CF 同赛道",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/obra/superpowers"
+          ]
+        },
+        {
+          "id": "t018",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Tencent/WeKnora：文档→RAG→自主 agent→Wiki",
+            "en": "Tencent/WeKnora",
+            "ja": "Tencent/WeKnora"
+          },
+          "summary": {
+            "zh": "腾讯知识 agent 平台；Δ5303",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/Tencent/WeKnora"
+          ]
+        },
+        {
+          "id": "t033",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "JustVugg/colibri：自有硬件流式 MoE",
+            "en": "JustVugg/colibri",
+            "ja": "JustVugg/colibri"
+          },
+          "summary": {
+            "zh": "本地推理引擎热度 Δ4036",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/JustVugg/colibri"
+          ]
+        },
+        {
+          "id": "t036",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "DeusData/codebase-memory-mcp",
+            "en": "DeusData/codebase-memory-mcp",
+            "ja": "DeusData/codebase-memory-mcp"
+          },
+          "summary": {
+            "zh": "MCP + 代码库记忆",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github",
+            "producthunt"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/DeusData/codebase-memory-mcp",
+            "https://www.productcool.com/archive/2026/09/23"
+          ]
+        },
+        {
+          "id": "t037",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "agent-substrate/substrate",
+            "en": "agent-substrate/substrate",
+            "ja": "agent-substrate/substrate"
+          },
+          "summary": {
+            "zh": "Agent 底层基建",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/agent-substrate/substrate"
+          ]
+        },
+        {
+          "id": "t076",
+          "theme": "other",
+          "title": {
+            "zh": "Lightricks/LTX-2.5",
+            "en": "Lightricks/LTX-2.5",
+            "ja": "Lightricks/LTX-2.5"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/Lightricks/LTX-2.5"
+          ]
+        },
+        {
+          "id": "t077",
+          "theme": "other",
+          "title": {
+            "zh": "prism-ml/Ternary-Bonsai-2-27B-gguf",
+            "en": "prism-ml/Ternary-Bonsai-2-27B-gguf",
+            "ja": "prism-ml/Ternary-Bonsai-2-27B-gguf"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf"
+          ]
+        },
+        {
+          "id": "t078",
+          "theme": "other",
+          "title": {
+            "zh": "Qwen/Qwen-Image-2.1",
+            "en": "Qwen/Qwen-Image-2.1",
+            "ja": "Qwen/Qwen-Image-2.1"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/Qwen/Qwen-Image-2.1"
+          ]
+        },
+        {
+          "id": "t079",
+          "theme": "other",
+          "title": {
+            "zh": "XingChen-AGI/Xing4.0-29B-A4B",
+            "en": "XingChen-AGI/Xing4.0-29B-A4B",
+            "ja": "XingChen-AGI/Xing4.0-29B-A4B"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B"
+          ]
+        },
+        {
+          "id": "t081",
+          "theme": "other",
+          "title": {
+            "zh": "multimodalart/jev-decision-index",
+            "en": "multimodalart/jev-decision-index",
+            "ja": "multimodalart/jev-decision-index"
+          },
+          "summary": {
+            "zh": "Jev 相关 Space/演示",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/spaces/multimodalart/jev-decision-index"
+          ]
+        },
+        {
+          "id": "t083",
+          "theme": "other",
+          "title": {
+            "zh": "webml-community/ternary-bonsai-2-webgpu-kernels",
+            "en": "webml-community/ternary-bonsai-2-webgpu-kernels",
+            "ja": "webml-community/ternary-bonsai-2-webgpu-kernels"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/spaces/webml-community/ternary-bonsai-2-webgpu-kernels"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-09-24T09:00:00+08:00",
+      "label": {
+        "zh": "9月24日 09:00",
+        "en": "Sep 24 09:00",
+        "ja": "9月24日 09:00"
+      },
+      "items": [
+        {
+          "id": "t003",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Jev × Claude Code：爆款工作流与 25 行最小实现",
+            "en": "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Build",
+            "ja": "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Build"
+          },
+          "summary": {
+            "zh": "站内 Jev 刚需：实操 10x + 最小实现 + OpenAI 跟进压力",
+            "en": "A viral YouTube clip ties Jev to Claude Code, but Jev cannot be the CLI chat model. This post covers the official skill, boundary hooks, MCP, and per-turn routing, contrasts NobodyWho’s 25-line minimal build, and discusses OpenAI fast-follow pressure.",
+            "ja": ""
+          },
+          "sources": [
+            "youtube",
+            "hn"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://www.youtube.com/watch?v=tTnUcSj-QPA",
+            "https://www.nobodywho.ai/posts/jev-in-25-lines/",
+            "https://arcturus-labs.com/blog/2026/09/21/will-openai-eat-jevs-lunch/"
+          ],
+          "blog": {
+            "zh": "/cn/blog/jev-claude-code-10x-and-25-lines/",
+            "en": "/blog/jev-claude-code-10x-and-25-lines/"
+          }
+        },
+        {
+          "id": "t059",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Gemini 3.8 文本转语音",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "语音 agent / 多模态产品面；云端 TTS 选型",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/"
+          ]
+        },
+        {
+          "id": "t070",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Coding agent 可被所打开的仓库攻击",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "不可信仓库=攻击面；prompt/tool injection",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "devto"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://dev.to/robertadam987_/your-ai-coding-agent-can-be-attacked-by-the-repository-it-opens-ie4"
           ]
         },
         {
@@ -514,72 +977,6 @@
           ]
         },
         {
-          "id": "t014",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "addyosmani/agent-skills：生产级 engineering skills",
-            "en": "addyosmani/agent-skills",
-            "ja": "addyosmani/agent-skills"
-          },
-          "summary": {
-            "zh": "Skills 赛道权威信号，可与 CF skill 对照攒写",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/addyosmani/agent-skills"
-          ]
-        },
-        {
-          "id": "t015",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "obra/superpowers：Agentic skills 框架",
-            "en": "obra/superpowers",
-            "ja": "obra/superpowers"
-          },
-          "summary": {
-            "zh": "Skills 方法论大体量；与 ECC/CF 同赛道",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/obra/superpowers"
-          ]
-        },
-        {
-          "id": "t018",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Tencent/WeKnora：文档→RAG→自主 agent→Wiki",
-            "en": "Tencent/WeKnora",
-            "ja": "Tencent/WeKnora"
-          },
-          "summary": {
-            "zh": "腾讯知识 agent 平台；Δ5303",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/Tencent/WeKnora"
-          ]
-        },
-        {
           "id": "t022",
           "theme": "agents-oss",
           "title": {
@@ -599,74 +996,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://www.youtube.com/watch?v=-RTgK6qX6A8"
-          ]
-        },
-        {
-          "id": "t033",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "JustVugg/colibri：自有硬件流式 MoE",
-            "en": "JustVugg/colibri",
-            "ja": "JustVugg/colibri"
-          },
-          "summary": {
-            "zh": "本地推理引擎热度 Δ4036",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/JustVugg/colibri"
-          ]
-        },
-        {
-          "id": "t036",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "DeusData/codebase-memory-mcp",
-            "en": "DeusData/codebase-memory-mcp",
-            "ja": "DeusData/codebase-memory-mcp"
-          },
-          "summary": {
-            "zh": "MCP + 代码库记忆",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github",
-            "producthunt"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/DeusData/codebase-memory-mcp",
-            "https://www.productcool.com/archive/2026/09/23"
-          ]
-        },
-        {
-          "id": "t037",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "agent-substrate/substrate",
-            "en": "agent-substrate/substrate",
-            "ja": "agent-substrate/substrate"
-          },
-          "summary": {
-            "zh": "Agent 底层基建",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/agent-substrate/substrate"
           ]
         },
         {
@@ -890,160 +1219,6 @@
           ]
         },
         {
-          "id": "t076",
-          "theme": "other",
-          "title": {
-            "zh": "Lightricks/LTX-2.5",
-            "en": "Lightricks/LTX-2.5",
-            "ja": "Lightricks/LTX-2.5"
-          },
-          "summary": {
-            "zh": "HF 续扫",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "huggingface"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://huggingface.co/Lightricks/LTX-2.5"
-          ]
-        },
-        {
-          "id": "t077",
-          "theme": "other",
-          "title": {
-            "zh": "prism-ml/Ternary-Bonsai-2-27B-gguf",
-            "en": "prism-ml/Ternary-Bonsai-2-27B-gguf",
-            "ja": "prism-ml/Ternary-Bonsai-2-27B-gguf"
-          },
-          "summary": {
-            "zh": "HF 续扫",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "huggingface"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf"
-          ]
-        },
-        {
-          "id": "t078",
-          "theme": "other",
-          "title": {
-            "zh": "Qwen/Qwen-Image-2.1",
-            "en": "Qwen/Qwen-Image-2.1",
-            "ja": "Qwen/Qwen-Image-2.1"
-          },
-          "summary": {
-            "zh": "HF 续扫",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "huggingface"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://huggingface.co/Qwen/Qwen-Image-2.1"
-          ]
-        },
-        {
-          "id": "t079",
-          "theme": "other",
-          "title": {
-            "zh": "XingChen-AGI/Xing4.0-29B-A4B",
-            "en": "XingChen-AGI/Xing4.0-29B-A4B",
-            "ja": "XingChen-AGI/Xing4.0-29B-A4B"
-          },
-          "summary": {
-            "zh": "HF 续扫",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "huggingface"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B"
-          ]
-        },
-        {
-          "id": "t081",
-          "theme": "other",
-          "title": {
-            "zh": "multimodalart/jev-decision-index",
-            "en": "multimodalart/jev-decision-index",
-            "ja": "multimodalart/jev-decision-index"
-          },
-          "summary": {
-            "zh": "Jev 相关 Space/演示",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "huggingface"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://huggingface.co/spaces/multimodalart/jev-decision-index"
-          ]
-        },
-        {
-          "id": "t082",
-          "theme": "other",
-          "title": {
-            "zh": "convaiinnovations/laya-demo",
-            "en": "convaiinnovations/laya-demo",
-            "ja": "convaiinnovations/laya-demo"
-          },
-          "summary": {
-            "zh": "HF 续扫",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "huggingface"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://huggingface.co/spaces/convaiinnovations/laya-demo"
-          ]
-        },
-        {
-          "id": "t083",
-          "theme": "other",
-          "title": {
-            "zh": "webml-community/ternary-bonsai-2-webgpu-kernels",
-            "en": "webml-community/ternary-bonsai-2-webgpu-kernels",
-            "ja": "webml-community/ternary-bonsai-2-webgpu-kernels"
-          },
-          "summary": {
-            "zh": "HF 续扫",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "huggingface"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://huggingface.co/spaces/webml-community/ternary-bonsai-2-webgpu-kernels"
-          ]
-        },
-        {
           "id": "t085",
           "theme": "research",
           "title": {
@@ -1119,36 +1294,6 @@
         "ja": "9月24日 00:00"
       },
       "items": [
-        {
-          "id": "t001",
-          "theme": "models",
-          "title": {
-            "zh": "Claude Opus 5.5：降价 + 旗舰性能同窗发布",
-            "en": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose",
-            "ja": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose"
-          },
-          "summary": {
-            "zh": "与 GPT-6 对台：性能/价格/安全限制怎么选",
-            "en": "Anthropic launched Claude Opus 5.5 on 2026-09-22: about 40% lower cost on typical workloads versus Opus 5, with Fable-tier capability claims and matching safeguards. A builder-focused read of pricing, benchmarks, and coding-agent fit.",
-            "ja": ""
-          },
-          "sources": [
-            "hn",
-            "techcrunch",
-            "36kr"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://www.anthropic.com/claude-opus-5-5",
-            "https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/",
-            "https://eu.36kr.com/zh/p/3995195771588745"
-          ],
-          "blog": {
-            "zh": "/cn/blog/claude-opus-5-5-price-and-performance/",
-            "en": "/blog/claude-opus-5-5-price-and-performance/"
-          }
-        },
         {
           "id": "t002",
           "theme": "models",
@@ -1367,28 +1512,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/"
-          ]
-        },
-        {
-          "id": "t016",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "BuilderIO/agent-native：把产品做成 agent-native",
-            "en": "BuilderIO/agent-native",
-            "ja": "BuilderIO/agent-native"
-          },
-          "summary": {
-            "zh": "产品 agent 化框架；日榜靠前",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/BuilderIO/agent-native"
           ]
         },
         {
@@ -1633,28 +1756,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://github.com/HKUDS/CLI-Anything"
-          ]
-        },
-        {
-          "id": "t038",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "strands-agents/harness-sdk",
-            "en": "strands-agents/harness-sdk",
-            "ja": "strands-agents/harness-sdk"
-          },
-          "summary": {
-            "zh": "生产级 harness SDK",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/strands-agents/harness-sdk"
           ]
         },
         {
