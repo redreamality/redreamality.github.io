@@ -1,5 +1,5 @@
 ---
-title: 'What Is Spec-Driven Development (SDD)? In-Depth Comparison of Open-Source Frameworks: BMAD vs spec-kit vs OpenSpec vs PromptX'
+title: 'Spec-Driven Development: BMAD vs spec-kit vs OpenSpec vs PromptX'
 pubDate: 2025-10-21T16:12:17.943Z
 description: 'This article delves into the transformative methodology of Spec-Driven Development (SDD) and provides a deep dissection and strategic comparison of four trend-setting open-source projects—BMAD-METHOD, GitHub''s spec-kit, OpenSpec, and PromptX.'
 author: 'Remy'

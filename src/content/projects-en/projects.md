@@ -1,5 +1,5 @@
 ---
-title: "Projects"
+title: "Open-Source Portfolio: AI Agents, Research & Developer Tools"
 description: "Open source projects and research contributions"
 pubDate: 2025-01-22
 author: "redreamality"

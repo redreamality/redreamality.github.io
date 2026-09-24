@@ -1,5 +1,5 @@
 ---
-title: "なぜ金利と債券価格は逆相関なのか？"
+title: "現在価値の計算で理解する金利と債券価格の逆相関"
 description: "金利と債券価格の逆相関の数学的原理と経済論理を深く分析"
 date: 2025-01-15
 tags: ["bonds", "interest-rates", "固定収入", "bond-prices", "investment-education"]

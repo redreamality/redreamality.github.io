@@ -4,6 +4,7 @@ import '../styles/global.css';
 import 'katex/dist/katex.min.css';
 import LanguageToggle from '../components/LanguageToggle.astro';
 import DarkModeToggle from '../components/DarkModeToggle.astro';
+import { getPageTitle } from '../utils/page-titles';
 import {
   detectLanguageFromPath,
   t,
@@ -17,9 +18,9 @@ import {
 // Component Script:
 const currentLang = detectLanguageFromPath(Astro.url.pathname);
 const {
-    title = t('home', currentLang) + " - Redreamality's Blog",
+    title: suppliedTitle = t('home', currentLang) + " - Redreamality's Blog",
     description = currentLang === 'zh' ? "欢迎访问 Redreamality 的个人博客，这里汇集了关于软件开发、AI 智能体及各类技术创新项目的深度文章与实践经验。" : currentLang === 'ja' ? "Redreamalityのブログへようこそ。ソフトウェア開発、AIエージェント、最新テクノロジーに関する詳細な記事やプロジェクトの成果を公開しています。" : "Explore Redreamality's personal blog and project showcase, featuring in-depth articles on software development, AI agents, and innovative technology solutions.",
-    ogTitle = title,
+    ogTitle: suppliedOgTitle,
     ogDescription = description,
     image = "/images/default-og.png",
     canonicalURL = getCanonicalURL(Astro.url.pathname, currentLang, Astro.site.toString()),
@@ -30,6 +31,8 @@ const {
     fullWidth = false
 } = Astro.props;
 
+const title = getPageTitle(Astro.url.pathname, currentLang, suppliedTitle);
+const ogTitle = suppliedOgTitle ?? title;
 const socialImageURL = new URL(image, Astro.site);
 const hreflangAlternates = getHreflangAlternates(Astro.url.pathname, Astro.site.toString());
 const localeString = getLocaleString(currentLang);

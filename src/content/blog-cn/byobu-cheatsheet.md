@@ -1,5 +1,5 @@
 ---
-title: 'byobu cheatsheet'
+title: 'Byobu 常用命令与快捷键速查表'
 pubDate: 2025-10-18T02:37:49.282Z
 description: 'byobu cheatsheet 常见命令速查表'
 author: 'Remy'
