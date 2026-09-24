@@ -119,6 +119,11 @@ Before saving any markdown content file, verify:
 5. **吞吐（站长，2026-09-24）**：若多道 `shortlisted` 都值得写，可并行开写，不要人为限一篇；每篇仍须达到篇幅与「Blog Chinese style」，交审须分别回报字数。质量不够就少开，不要注水凑篇数。
 6. **日文补齐**：已有中英正式博客、缺 `blog-ja` 的 slug 须补全译（信息量对齐中文，不是摘要）。缺日文不再作为可选项搁置；补译交头子发版。不因日文阻塞中英首发，但首发后应尽快补齐。
 
+
+### Explore & Exploit（站长，2026-09-24）
+
+选题与制作遵循 explore-and-exploit：**一边做强精品**（已验证主题线加深、对照、系列化，优先正式 blog / Visual），**一边保持探索**（信号粗筛与 Chaos 继续广扫；新方向先 shortlisted / notes / Chaos 试水温）。不要只追热点，也不要只啃老题；库存里应同时有「深耕线」和「新芽」。细则见 `/workspace/blog-pipeline/README.md`。
+
 ### Blog Chinese style（站长约束，2026-09-23）
 
 中文正文按**跟同事说话**来写，不要把英文习语/隐喻外壳硬译进标题或正文。经验来自 t003（`jev-claude-code-10x-and-25-lines`）审稿。
