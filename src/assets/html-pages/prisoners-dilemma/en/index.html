@@ -1,21 +1,1462 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Prisoner's Dilemma (stub)</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive guide to the prisoner&#x27;s dilemma: payoff matrices, dominant strategies, Nash mutual defection, the welfare gap, and how repeated games with punishment can protect cooperation.">
+  <title>Why two people who want less jail time both get more</title>
   <style data-prototype-bundle="article">
-    article { color: inherit; }
+:root {
+  color-scheme: light;
+  --paper: #f4f1e8;
+  --surface: #fffdf8;
+  --ink: #17333c;
+  --muted: #60747a;
+  --line: #d8ddd7;
+  --ocean: #0f7185;
+  --warm: #ee9d46;
+  --coral: #d45f50;
+  --soft-ocean: color-mix(in srgb, var(--ocean) 9%, var(--surface));
+  --soft-warm: color-mix(in srgb, var(--warm) 12%, var(--surface));
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body { margin: 0; overflow-x: clip; color: var(--ink); background: radial-gradient(circle at 20% 0, #dff3ef 0, transparent 30rem), var(--paper); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .75rem;
+  left: .75rem;
+  padding: .65rem .9rem;
+  color: white;
+  background: var(--ink);
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.75rem;
+  padding: .65rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(216, 221, 215, .9);
+  background: rgba(244, 241, 232, .9);
+  backdrop-filter: blur(14px);
+}
+.site-header strong { margin-right: auto; font-size: .72rem; letter-spacing: .12em; }
+.language-links { display: flex; gap: .65rem; }
+.language-links a { color: var(--muted); font-size: .78rem; }
+.language-links a[aria-current="page"] { color: var(--ocean); font-weight: 800; }
+[data-global-motion] {
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.hero, .copy-block {
+  width: min(calc(100% - 2rem), 54rem);
+  margin-inline: auto;
+}
+.hero {
+  position: relative;
+  padding: clamp(5rem, 14vw, 10rem) 0;
+}
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -12% auto auto;
+  width: clamp(9rem, 28vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ocean) 35%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem color-mix(in srgb, var(--ocean) 5%, transparent),
+    0 0 0 5rem color-mix(in srgb, var(--warm) 4%, transparent);
+  content: "";
+}
+.eyebrow, .section-label {
+  margin: 0 0 1rem;
+  color: var(--ocean);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+h1, h2 { margin-top: 0; line-height: 1.03; text-wrap: balance; }
+h1 { max-width: 9em; margin-bottom: 1.5rem; font-size: clamp(3.2rem, 10vw, 7rem); letter-spacing: -.06em; }
+h2 { max-width: 16em; margin-bottom: 1.15rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+.hero-subtitle, .copy-prose { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.75; }
+.hero-subtitle { max-width: 38rem; }
+.copy-prose { margin: .8rem 0 0; }
+
+.plain-language {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .75rem 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 55%, var(--line));
+  border-radius: 1rem;
+  background: var(--soft-warm);
+}
+.plain-language strong {
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  color: var(--surface);
+  background: var(--warm);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.plain-language p { margin: 0; color: var(--ink); line-height: 1.65; }
+
+.concept-points { margin-top: 1.4rem; }
+.concept-points-label {
+  margin: 0 0 .7rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.concept-points ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.concept-card strong { display: block; margin-bottom: .45rem; }
+.concept-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+.overview, .chapter, .closing { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
+.overview { background: color-mix(in srgb, var(--surface) 42%, transparent); }
+.chapter:nth-of-type(even) { background: color-mix(in srgb, var(--surface) 22%, transparent); }
+interactive-figure {
+  display: block;
+  width: min(calc(100% - 2rem), 68rem);
+  min-height: 29rem;
+  margin: 3rem auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 51, 60, .14);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 1.5rem 4rem rgba(23, 51, 60, .1);
+}
+
+.closing { background: linear-gradient(150deg, var(--soft-ocean), color-mix(in srgb, var(--paper) 86%, var(--surface))); }
+.closing-copy { width: min(calc(100% - 2rem), 68rem); }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.starter-checklist, .boundary-map {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.closing h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.starter-checklist ol { display: grid; gap: .7rem; margin: 0; padding-left: 1.35rem; }
+.starter-checklist li { padding-left: .3rem; line-height: 1.55; }
+.boundary-map ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.scale-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: .2rem .8rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--surface);
+}
+.scale-card strong { grid-row: 1 / span 2; color: var(--ocean); }
+.scale-card span { color: var(--ink); font-size: .82rem; font-weight: 800; }
+.scale-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.closing blockquote {
+  margin: 2rem 0 0;
+  padding: 1.35rem clamp(1rem, 3vw, 1.8rem);
+  border-left: .32rem solid var(--ocean);
+  color: var(--ink);
+  background: var(--surface);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.55;
+}
+.source-note { margin: 1rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+article[data-visual-slug="loop-engineering"] .hero .eyebrow { color: var(--coral); }
+article[data-visual-slug="loop-engineering"] interactive-figure { box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ocean) 12%, transparent); }
+
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header strong { width: 100%; }
+  .language-links { margin-right: auto; }
+  interactive-figure { min-height: 32rem; border-radius: 1rem; }
+  .concept-points ul, .closing-grid { grid-template-columns: 1fr; }
+  .plain-language { grid-template-columns: 1fr; }
+  .scale-card { grid-template-columns: 5.5rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#article">Skip</a>
-  <header class="site-header"><p>stub</p></header>
+  <a class="skip-link" href="#article">Skip to content</a>
+  <header class="site-header">
+    <strong>VISUAL KIT / PROTOTYPE</strong>
+    <nav class="language-links" aria-label="Languages">
+<a href="../en/" hreflang="en" aria-current="page">English</a>
+<a href="../zh/" hreflang="zh">中文</a>
+<a href="../ja/" hreflang="ja">日本語</a>
+    </nav>
+    <button type="button" data-global-motion aria-pressed="false"></button>
+  </header>
   <main id="article">
     <article data-visual-slug="prisoners-dilemma">
-      <h1>Prisoner's Dilemma stub</h1>
-      <p>Placeholder for parallel v012 authoring — replace by visual-kit build.</p>
+      <header class="hero">
+        <p class="eyebrow">GAME THEORY / INCENTIVES / NASH</p>
+        <h1>Why two people who want less jail time both get more</h1>
+        <p class="hero-subtitle">Each prisoner wants a shorter sentence. When both reason privately, they can still land in a cell that is worse for both than mutual silence—unless repetition or credible punishment rewires the game.</p>
+      </header>
+<section class="overview" aria-labelledby="overview-title">
+  <div class="copy-block">
+    <p class="section-label">Prisoner&#x27;s dilemma overview</p>
+    <h2 id="overview-title">Two rational choices can lock both into a worse cell</h2>
+    <p class="copy-prose">The prisoner&#x27;s dilemma is a 2×2 game: each player independently chooses Cooperate or Defect. Payoffs here are years in jail—lower is better for each person.</p>
+<p class="copy-prose">When both stay silent (Cooperate), each gets a short sentence. When one confesses (Defect) while the other stays silent, the confessor walks free and the silent one gets the longest term. When both confess, both get medium terms—worse for the pair than mutual silence.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>What looks safest for you alone can be worse for both of you together.</p></aside><div class="concept-points"><p class="concept-points-label">Keep these three ideas</p><ul><li class="concept-card"><strong>Payoff matrix first</strong><p>The whole story lives in four cells: CC, CD, DC, DD.</p></li><li class="concept-card"><strong>Dominant move</strong><p>Given the other&#x27;s choice, Defect often shortens your own sentence.</p></li><li class="concept-card"><strong>Nash ≠ social best</strong><p>Mutual Defect can be stable even though mutual Cooperate is better for both.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pd-overview" data-title="Tour the four cells of the dilemma" data-copy="{&quot;ariaLabel&quot;:&quot;Interactive prisoner&#x27;s dilemma payoff matrix overview&quot;,&quot;caption&quot;:&quot;Select a cell to see each player&#x27;s years in jail and whether the outcome is stable or jointly better.&quot;,&quot;controlLabel&quot;:&quot;Inspect an outcome&quot;,&quot;youLabel&quot;:&quot;You&quot;,&quot;otherLabel&quot;:&quot;Partner&quot;,&quot;coopLabel&quot;:&quot;Cooperate&quot;,&quot;defectLabel&quot;:&quot;Defect&quot;,&quot;yearsUnit&quot;:&quot;yr&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;cc&quot;,&quot;label&quot;:&quot;Both cooperate&quot;,&quot;you&quot;:1,&quot;other&quot;:1,&quot;state&quot;:&quot;Jointly best&quot;,&quot;detail&quot;:&quot;Mutual silence: short terms for both. Fragile if either can profit by switching alone.&quot;},{&quot;key&quot;:&quot;dc&quot;,&quot;label&quot;:&quot;You defect&quot;,&quot;you&quot;:0,&quot;other&quot;:3,&quot;state&quot;:&quot;Temptation&quot;,&quot;detail&quot;:&quot;You confess; partner stays silent. You walk free; they take the sucker&#x27;s long sentence.&quot;},{&quot;key&quot;:&quot;cd&quot;,&quot;label&quot;:&quot;Partner defects&quot;,&quot;you&quot;:3,&quot;other&quot;:0,&quot;state&quot;:&quot;Sucker&quot;,&quot;detail&quot;:&quot;You stay silent; partner confesses. You eat the long sentence; they walk free.&quot;},{&quot;key&quot;:&quot;dd&quot;,&quot;label&quot;:&quot;Both defect&quot;,&quot;you&quot;:2,&quot;other&quot;:2,&quot;state&quot;:&quot;Nash trap&quot;,&quot;detail&quot;:&quot;Mutual confession: medium terms. Stable once both reason the same way—but worse than CC for both.&quot;}]}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="payoff-matrix" aria-labelledby="payoff-matrix-title">
+  <div class="copy-block">
+    <p class="section-label">Step 01</p>
+    <h2 id="payoff-matrix-title">Read the payoff matrix before blaming anyone</h2>
+    <p class="copy-prose">Rows are your move; columns are your partner&#x27;s. Each cell shows (your years, partner&#x27;s years). The numbers invent a crisp conflict: Defect is privately tempting, Cooperate is jointly kinder.</p>
+<p class="copy-prose">Nothing mystical happens yet—only a map of incentives. Later steps ask what a self-interested chooser does when they cannot bind the other player&#x27;s hand.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>Four boxes. Two choices each. The numbers set the trap.</p></aside><div class="concept-points"><p class="concept-points-label">What to notice</p><ul><li class="concept-card"><strong>Lower is better</strong><p>These payoffs are jail years, not utility points.</p></li><li class="concept-card"><strong>Asymmetry of temptation</strong><p>Unilateral Defect beats Cooperate against a cooperator.</p></li><li class="concept-card"><strong>Symmetric trap</strong><p>Against a defector, Defect still hurts you less than Cooperate.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pd-matrix" data-title="Highlight cells in the 2×2 matrix" data-copy="{&quot;ariaLabel&quot;:&quot;Prisoner&#x27;s dilemma payoff matrix with selectable cells&quot;,&quot;caption&quot;:&quot;Tap a cell to read the sentence pair. Notice how Defect improves your private outcome against either partner move.&quot;,&quot;controlLabel&quot;:&quot;Select a payoff cell&quot;,&quot;rowLabel&quot;:&quot;Your move&quot;,&quot;colLabel&quot;:&quot;Partner&#x27;s move&quot;,&quot;coopLabel&quot;:&quot;Cooperate&quot;,&quot;defectLabel&quot;:&quot;Defect&quot;,&quot;youShort&quot;:&quot;You&quot;,&quot;otherShort&quot;:&quot;Them&quot;,&quot;yearsUnit&quot;:&quot;yr&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;cc&quot;,&quot;you&quot;:1,&quot;other&quot;:1,&quot;title&quot;:&quot;Reward&quot;,&quot;detail&quot;:&quot;Both silent → 1 year each. Best joint total.&quot;},{&quot;key&quot;:&quot;dc&quot;,&quot;you&quot;:0,&quot;other&quot;:3,&quot;title&quot;:&quot;Temptation / Sucker&quot;,&quot;detail&quot;:&quot;You confess, they silent → 0 for you, 3 for them.&quot;},{&quot;key&quot;:&quot;cd&quot;,&quot;you&quot;:3,&quot;other&quot;:0,&quot;title&quot;:&quot;Sucker / Temptation&quot;,&quot;detail&quot;:&quot;You silent, they confess → 3 for you, 0 for them.&quot;},{&quot;key&quot;:&quot;dd&quot;,&quot;you&quot;:2,&quot;other&quot;:2,&quot;title&quot;:&quot;Punishment&quot;,&quot;detail&quot;:&quot;Both confess → 2 years each. Worse jointly than CC.&quot;}]}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="single-rational" aria-labelledby="single-rational-title">
+  <div class="copy-block">
+    <p class="section-label">Step 02</p>
+    <h2 id="single-rational-title">Fix the other&#x27;s move—then pick what shortens your sentence</h2>
+    <p class="copy-prose">Hold the partner&#x27;s choice fixed and compare your two options. If they Cooperate, Defect cuts your term from 1 to 0. If they Defect, Defect cuts it from 3 to 2.</p>
+<p class="copy-prose">That is a dominant strategy: whatever they do, Defect privately beats Cooperate. Rationality here means &#x27;minimize my years,&#x27; not &#x27;maximize our joint calm.&#x27;</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>Against either partner move, confessing looks safer for you alone.</p></aside><div class="concept-points"><p class="concept-points-label">What changes here</p><ul><li class="concept-card"><strong>Conditional comparison</strong><p>Dominance is checked column by column (or row by row).</p></li><li class="concept-card"><strong>No mind-reading required</strong><p>You do not need to know their move to prefer Defect.</p></li><li class="concept-card"><strong>Still one-shot</strong><p>This step is a single round with no future punishment.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pd-choice" data-title="Choose Cooperate or Defect given the partner" data-copy="{&quot;ariaLabel&quot;:&quot;Choose cooperate or defect given the partner&#x27;s fixed move&quot;,&quot;caption&quot;:&quot;Set the partner&#x27;s move, then pick yours. The readout shows your years and whether Defect dominates.&quot;,&quot;partnerControlLabel&quot;:&quot;Partner&#x27;s move&quot;,&quot;yourControlLabel&quot;:&quot;Your move&quot;,&quot;coopLabel&quot;:&quot;Cooperate&quot;,&quot;defectLabel&quot;:&quot;Defect&quot;,&quot;yearsLabel&quot;:&quot;Your years&quot;,&quot;partnerYearsLabel&quot;:&quot;Partner years&quot;,&quot;yearsUnit&quot;:&quot;yr&quot;,&quot;statusCooperateVsC&quot;:&quot;They stay silent. If you also stay silent you serve 1 year; if you confess you serve 0. Defect wins for you.&quot;,&quot;statusDefectVsC&quot;:&quot;You took the temptation payoff: 0 years while they serve 3.&quot;,&quot;statusCooperateVsD&quot;:&quot;They confess. Staying silent costs you 3 years; confessing costs 2. Defect still wins for you.&quot;,&quot;statusDefectVsD&quot;:&quot;Both confess: 2 years each. Privately better for you than being the sucker.&quot;}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="mutual-defect" aria-labelledby="mutual-defect-title">
+  <div class="copy-block">
+    <p class="section-label">Step 03</p>
+    <h2 id="mutual-defect-title">When both reason the same way, they meet in the worse cell</h2>
+    <p class="copy-prose">If Defect is dominant for you and for them, the predicted one-shot outcome is mutual Defect: 2 years each. Neither player wants to switch alone—switching to Cooperate would raise your term from 2 to 3.</p>
+<p class="copy-prose">That is a Nash equilibrium: a pair of strategies where no one benefits from a unilateral change. Stability is not the same as joint happiness.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>Two smart choosers can land on a cell neither would pick if they could bind each other.</p></aside><div class="concept-points"><p class="concept-points-label">What changes here</p><ul><li class="concept-card"><strong>Nash = no unilateral escape</strong><p>From DD, a lone switch to Cooperate hurts the switcher.</p></li><li class="concept-card"><strong>CC is unstable alone</strong><p>From CC, a lone Defect pays the tempter—so CC needs trust or enforcement.</p></li><li class="concept-card"><strong>Symmetric reasoning</strong><p>The trap tightens when both use the same dominance logic.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pd-nash" data-title="Watch both players tip toward Defect" data-copy="{&quot;ariaLabel&quot;:&quot;Animation of both players converging on mutual defection&quot;,&quot;caption&quot;:&quot;Step through how each player&#x27;s best reply pushes the pair from hope of CC into the DD Nash cell.&quot;,&quot;controlLabel&quot;:&quot;Advance the reasoning&quot;,&quot;youLabel&quot;:&quot;You&quot;,&quot;otherLabel&quot;:&quot;Partner&quot;,&quot;coopLabel&quot;:&quot;C&quot;,&quot;defectLabel&quot;:&quot;D&quot;,&quot;yearsUnit&quot;:&quot;yr&quot;,&quot;stages&quot;:[{&quot;label&quot;:&quot;Hope CC&quot;,&quot;youMove&quot;:&quot;C&quot;,&quot;otherMove&quot;:&quot;C&quot;,&quot;youYears&quot;:1,&quot;otherYears&quot;:1,&quot;detail&quot;:&quot;If both could commit to silence, each serves only 1 year.&quot;},{&quot;label&quot;:&quot;Your temptation&quot;,&quot;youMove&quot;:&quot;D&quot;,&quot;otherMove&quot;:&quot;C&quot;,&quot;youYears&quot;:0,&quot;otherYears&quot;:3,&quot;detail&quot;:&quot;Holding them at C, you shorten your sentence by Defecting.&quot;},{&quot;label&quot;:&quot;Their reply&quot;,&quot;youMove&quot;:&quot;D&quot;,&quot;otherMove&quot;:&quot;D&quot;,&quot;youYears&quot;:2,&quot;otherYears&quot;:2,&quot;detail&quot;:&quot;They apply the same logic. Best replies meet at DD.&quot;},{&quot;label&quot;:&quot;Locked Nash&quot;,&quot;youMove&quot;:&quot;D&quot;,&quot;otherMove&quot;:&quot;D&quot;,&quot;youYears&quot;:2,&quot;otherYears&quot;:2,&quot;detail&quot;:&quot;Neither benefits from switching alone. The equilibrium holds—and both are worse than at CC.&quot;}]}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="collective-gap" aria-labelledby="collective-gap-title">
+  <div class="copy-block">
+    <p class="section-label">Step 04</p>
+    <h2 id="collective-gap-title">Add the years: the stable cell is not the kindest total</h2>
+    <p class="copy-prose">Sum both sentences. CC totals 2 years; DD totals 4. The Nash outcome wastes two extra years of freedom that mutual silence would have preserved.</p>
+<p class="copy-prose">This is the system&#x27;s punchline: individually rational best replies can stack into a collectively worse ledger. The gap is not a math error—it is the conflict between private and joint objectives.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>What each prefers privately adds up to more jail time than what they would prefer together.</p></aside><div class="concept-points"><p class="concept-points-label">What changes here</p><ul><li class="concept-card"><strong>Welfare ≠ Nash</strong><p>Joint total years ranks CC above DD even though DD is stable.</p></li><li class="concept-card"><strong>Pareto idea</strong><p>Moving from DD to CC can help both without hurting either.</p></li><li class="concept-card"><strong>Needs a mechanism</strong><p>Getting to CC usually needs commitment, reputation, or punishment—not wishful thinking.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pd-welfare" data-title="Compare joint totals for CC vs DD" data-copy="{&quot;ariaLabel&quot;:&quot;Compare joint jail years for mutual cooperate versus mutual defect&quot;,&quot;caption&quot;:&quot;Toggle between the jointly best cell and the Nash cell. Watch the summed years diverge.&quot;,&quot;controlLabel&quot;:&quot;Compare outcomes&quot;,&quot;ccLabel&quot;:&quot;Both cooperate&quot;,&quot;ddLabel&quot;:&quot;Both defect (Nash)&quot;,&quot;youLabel&quot;:&quot;You&quot;,&quot;otherLabel&quot;:&quot;Partner&quot;,&quot;totalLabel&quot;:&quot;Joint years&quot;,&quot;gapLabel&quot;:&quot;Extra years vs CC&quot;,&quot;yearsUnit&quot;:&quot;yr&quot;,&quot;ccDetail&quot;:&quot;Joint total 2 years. Best for the pair—but each has a private incentive to sneak to Defect.&quot;,&quot;ddDetail&quot;:&quot;Joint total 4 years. Stable best replies—but two extra years of shared loss versus CC.&quot;}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="chapter" id="repeated-game" aria-labelledby="repeated-game-title">
+  <div class="copy-block">
+    <p class="section-label">Step 05</p>
+    <h2 id="repeated-game-title">Repeat the game—and credible punishment can protect Cooperate</h2>
+    <p class="copy-prose">In a one-shot game, Defect dominates. In a repeated game with a future, strategies like tit-for-tat (copy the other&#x27;s last move) or grim trigger (punish forever after a Defect) can make Cooperate incentive-compatible.</p>
+<p class="copy-prose">The key is credibility: the threatened punishment must be something you would actually carry out, and the shadow of the future must be long enough that today&#x27;s Temptation is not worth tomorrow&#x27;s Punishment.</p>
+    <aside class="plain-language"><strong>Plainly</strong><p>If you will meet again—and can punish betrayal—silence can become the smarter private move.</p></aside><div class="concept-points"><p class="concept-points-label">What changes here</p><ul><li class="concept-card"><strong>Shadow of the future</strong><p>Continuation value can outweigh one-round temptation.</p></li><li class="concept-card"><strong>Tit-for-tat intuition</strong><p>Start nice; mirror the last move; keep punishment proportional.</p></li><li class="concept-card"><strong>Not magic</strong><p>Finite known endings, noise, and weak monitoring can reopen the trap.</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="pd-repeat" data-title="Toggle one-shot vs repeated-with-punishment" data-copy="{&quot;ariaLabel&quot;:&quot;Compare one-shot defect dominance with repeated-game cooperation under punishment&quot;,&quot;caption&quot;:&quot;Switch regimes. In the repeated regime, a punishment threat changes which private choice looks safer.&quot;,&quot;controlLabel&quot;:&quot;Game regime&quot;,&quot;modes&quot;:[{&quot;key&quot;:&quot;oneshot&quot;,&quot;label&quot;:&quot;One-shot&quot;,&quot;bestMove&quot;:&quot;Defect&quot;,&quot;status&quot;:&quot;No future round. Defect dominates; expected meeting point is DD.&quot;,&quot;youMove&quot;:&quot;D&quot;,&quot;otherMove&quot;:&quot;D&quot;,&quot;note&quot;:&quot;Temptation today has no tomorrow cost.&quot;},{&quot;key&quot;:&quot;tft&quot;,&quot;label&quot;:&quot;Tit-for-tat&quot;,&quot;bestMove&quot;:&quot;Cooperate&quot;,&quot;status&quot;:&quot;Partner mirrors your last move. Defecting once buys a short gain, then mirrored punishment.&quot;,&quot;youMove&quot;:&quot;C&quot;,&quot;otherMove&quot;:&quot;C&quot;,&quot;note&quot;:&quot;Nice, retaliatory, forgiving—classic folk theorem intuition.&quot;},{&quot;key&quot;:&quot;grim&quot;,&quot;label&quot;:&quot;Grim trigger&quot;,&quot;bestMove&quot;:&quot;Cooperate&quot;,&quot;status&quot;:&quot;Any Defect triggers permanent mutual Defect afterward. The threat can sustain CC if the future matters enough.&quot;,&quot;youMove&quot;:&quot;C&quot;,&quot;otherMove&quot;:&quot;C&quot;,&quot;note&quot;:&quot;Harsh but simple commitment technology.&quot;}],&quot;bestMoveLabel&quot;:&quot;Privately safer move&quot;,&quot;yearsUnit&quot;:&quot;yr&quot;,&quot;coopLabel&quot;:&quot;Cooperate&quot;,&quot;defectLabel&quot;:&quot;Defect&quot;,&quot;youLabel&quot;:&quot;You&quot;,&quot;otherLabel&quot;:&quot;Partner&quot;}"><noscript>Enable JavaScript to view this interactive explanation.</noscript></interactive-figure>
+</section>
+<section class="closing" aria-labelledby="closing-title">
+  <div class="copy-block closing-copy">
+    <p class="section-label">Put the system back together</p>
+    <h2 id="closing-title">Private best replies can stack into a shared loss—unless a future (or a rule) rewires the matrix</h2>
+    <p class="copy-prose">The prisoner&#x27;s dilemma is not a story about stupid players. It is a story about a payoff matrix where Defect is privately safer in a one-shot meeting, so mutual Defect becomes the stable prediction—even though mutual Cooperate wastes fewer years.</p>
+<p class="copy-prose">Mechanisms matter: repetition, reputation, contracts, and credible punishment change the effective game. When those are weak, the Nash trap remains.</p>
+    <div class="closing-grid">
+      <div class="starter-checklist">
+        <h3>Reader checklist</h3>
+        <ol><li>Name the four cells and whose years appear where.</li><li>Check dominance: does Defect beat Cooperate against both partner moves?</li><li>Separate Nash stability from joint totals.</li><li>Ask whether the interaction is one-shot or repeated.</li><li>If Cooperation appears, identify the enforcement or shadow of the future that supports it.</li></ol>
+      </div>
+      <div class="boundary-map">
+        <h3>Four moves of the trap</h3>
+        <ul><li class="scale-card"><strong>Matrix</strong><span>What are the numbers?</span><p>Four cells define temptation, reward, sucker, and punishment.</p></li><li class="scale-card"><strong>Dominance</strong><span>What is privately safer?</span><p>In the classic one-shot PD, Defect beats Cooperate either way.</p></li><li class="scale-card"><strong>Nash</strong><span>Where do best replies meet?</span><p>Mutual Defect can be stable even when jointly worse.</p></li><li class="scale-card"><strong>Repeat</strong><span>What rewires incentives?</span><p>Future rounds and credible punishment can protect Cooperate.</p></li></ul>
+      </div>
+    </div>
+    <blockquote>The dilemma is not that people want harm—it is that separately sensible choices can compose into shared harm.</blockquote>
+    <p class="source-note">Teaching note: payoffs are stylized jail years (CC 1,1; DC 0,3; CD 3,0; DD 2,2). Real legal systems, noise, and incomplete monitoring change details; the qualitative conflict between private dominance and joint efficiency is the point.</p>
+  </div>
+</section>
     </article>
   </main>
-  <script></script>
+  <script>
+    window.__VISUAL_I18N__ = {"pauseAll":"Pause all motion","resumeAll":"Resume all motion","pause":"Pause","resume":"Resume","reset":"Reset","waiting":"The visual will load when it enters the viewport.","loading":"Preparing the visual…","error":"The visual could not be displayed. Read the explanation above instead.","figureFallback":"Enable JavaScript to view this interactive explanation.","skipToContent":"Skip to content","languageNavigation":"Languages","overviewLabel":"Prisoner's dilemma overview","stepLabel":"Step"};
+  </script>
+  <script data-prototype-bundle="runtime">
+(() => {
+  "use strict";
+
+  const ui = Object.freeze(window.__VISUAL_I18N__);
+  const registry = new Map();
+  const figures = new Set();
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const tokens = Object.freeze({
+    ink: "var(--visual-ink, #17333c)",
+    muted: "var(--visual-muted, #60747a)",
+    line: "var(--visual-line, #d8ddd7)",
+    ocean: "var(--visual-ocean, #0f7185)",
+    warm: "var(--visual-warm, #ee9d46)",
+    coral: "var(--visual-coral, #d45f50)",
+    paper: "var(--visual-paper, #f4f1e8)",
+    surface: "var(--visual-surface, #fffdf8)"
+  });
+  let globalPaused = false;
+
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+  const call = (instance, method, value) => {
+    if (instance && typeof instance[method] === "function") instance[method](value);
+  };
+
+  class InteractiveFigure extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
+      this._instance = null;
+      this._mounted = false;
+      this._mounting = false;
+      this._visible = false;
+      this._localPaused = false;
+    }
+
+    connectedCallback() {
+      if (this._connected) return;
+      this._connected = true;
+      figures.add(this);
+      this._shadow.innerHTML = `
+        <style>
+          :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+          .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
+          .mount { min-height: inherit; }
+          .runtime-status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; pointer-events: none; }
+          .runtime-status[data-live-only] { position: absolute; inset: auto; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; background: transparent; pointer-events: none; }
+          .runtime-status[hidden] { display: none; }
+          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
+          .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+          button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+          button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+          @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
+        </style>
+        <div class="frame">
+          <div class="stage"><div class="mount"></div><div class="runtime-status" data-runtime-status role="status"></div></div>
+          <div class="controls">
+            <span class="title"></span>
+            <button type="button" data-action="pause" aria-pressed="false"></button>
+            <button type="button" data-action="reset"></button>
+          </div>
+        </div>`;
+
+      this._stage = this._shadow.querySelector(".stage");
+      this._mountRoot = this._shadow.querySelector(".mount");
+      this._status = this._shadow.querySelector("[data-runtime-status]");
+      this._title = this._shadow.querySelector(".title");
+      this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
+      this._resetButton = this._shadow.querySelector('[data-action="reset"]');
+      this._copy = JSON.parse(this.dataset.copy || "{}");
+      this._title.textContent = this.dataset.title || "";
+      this._pauseButton.textContent = ui.pause;
+      this._resetButton.textContent = ui.reset;
+      this._setStatus(ui.waiting);
+
+      this._pauseButton.addEventListener("click", () => {
+        this._localPaused = !this._localPaused;
+        this._syncPlayback();
+      });
+      this._resetButton.addEventListener("click", () => {
+        call(this._instance, "reset");
+        this.dispatchEvent(new CustomEvent("demo-reset", { bubbles: true }));
+      });
+
+      this._observer = new IntersectionObserver((entries) => {
+        this._visible = entries[0]?.isIntersecting ?? false;
+        if (this._visible) this._mount();
+        this._syncPlayback();
+      }, { rootMargin: "180px 0px", threshold: .05 });
+      this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      figures.delete(this);
+      this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
+      call(this._instance, "destroy");
+    }
+
+    async _mount() {
+      if (this._mounted || this._mounting) return;
+      const factory = registry.get(this.dataset.demo);
+      if (!factory) return;
+      this._mounting = true;
+      this._setStatus(ui.loading);
+      try {
+        this._instance = await factory({
+          root: this._mountRoot,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
+          copy: this._copy,
+          motion: !reducedMotion.matches,
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._announce(message)
+        }) || {};
+        this._mounted = true;
+        this.dataset.state = "mounted";
+        this._liveRevision = (this._liveRevision || 0) + 1;
+        this._status.removeAttribute("data-live-only");
+        this._status.textContent = "";
+        this._status.hidden = true;
+        this._resize();
+        this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
+      } catch {
+        this.dataset.state = "error";
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
+      }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
+    }
+
+    _syncPlayback() {
+      const paused = globalPaused || this._localPaused || !this._visible || reducedMotion.matches;
+      this.dataset.playback = paused ? "paused" : "playing";
+      this._pauseButton?.setAttribute("aria-pressed", String(this._localPaused));
+      if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
+      call(this._instance, paused ? "pause" : "resume");
+    }
+
+    _setStatus(message) {
+      this._liveRevision = (this._liveRevision || 0) + 1;
+      this._status.removeAttribute("data-live-only");
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
+
+    _announce(message) {
+      const revision = (this._liveRevision || 0) + 1;
+      this._liveRevision = revision;
+      this._status.hidden = false;
+      this._status.setAttribute("data-live-only", "");
+      this._status.textContent = "";
+      queueMicrotask(() => {
+        if (this._liveRevision !== revision || !this._status.isConnected) return;
+        this._status.textContent = message;
+      });
+    }
+  }
+
+  window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
+    if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
+    registry.set(id, factory);
+    figures.forEach((figure) => {
+      if (figure.dataset.demo === id && figure._visible) figure._mount();
+    });
+  };
+
+  customElements.define("interactive-figure", InteractiveFigure);
+
+  const globalToggle = document.querySelector("[data-global-motion]");
+  const syncGlobalToggle = () => {
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
+    figures.forEach((figure) => figure._syncPlayback());
+  };
+  globalToggle?.addEventListener("click", () => {
+    globalPaused = !globalPaused;
+    syncGlobalToggle();
+  });
+  reducedMotion.addEventListener("change", syncGlobalToggle);
+  syncGlobalToggle();
+})();
+  </script>
+  <script data-prototype-bundle="demos">
+const escapeHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+registerDemo("pd-overview", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  const html = `
+    <style>
+      .pd-overview {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        font-family: system-ui, sans-serif;
+        color: var(--ink, ${tokens.ink});
+        min-height: 350px;
+        padding: 0.5rem;
+        box-sizing: border-box;
+      }
+      .pd-caption {
+        font-size: 0.875rem;
+        color: var(--muted, ${tokens.muted});
+        margin: 0;
+        text-align: center;
+      }
+      .pd-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        width: 100%;
+        align-items: stretch;
+      }
+      .pd-grid-section {
+        flex: 1 1 260px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .pd-grid {
+        display: grid;
+        grid-template-columns: 2.5rem max-content 1fr 1fr;
+        grid-template-rows: 2.5rem max-content 1fr 1fr;
+        gap: 6px;
+        width: 100%;
+        max-width: 360px;
+      }
+      .pd-axis-partner {
+        grid-column: 3 / 5;
+        grid-row: 1;
+        text-align: center;
+        font-weight: 600;
+        align-self: end;
+        color: var(--coral, ${tokens.coral});
+      }
+      .pd-axis-you {
+        grid-column: 1;
+        grid-row: 3 / 5;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        text-align: center;
+        font-weight: 600;
+        justify-self: end;
+        color: var(--ocean, ${tokens.ocean});
+      }
+      .pd-label-col {
+        grid-row: 2;
+        text-align: center;
+        font-size: 0.875rem;
+        color: var(--muted, ${tokens.muted});
+        align-self: end;
+        padding-bottom: 4px;
+      }
+      .pd-label-row {
+        grid-column: 2;
+        text-align: right;
+        font-size: 0.875rem;
+        color: var(--muted, ${tokens.muted});
+        align-self: center;
+        padding-right: 8px;
+      }
+      .pd-cell {
+        background: var(--surface, ${tokens.surface});
+        border: 2px solid var(--line, ${tokens.line});
+        border-radius: 8px;
+        padding: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        min-height: 80px;
+        position: relative;
+        appearance: none;
+        font-family: inherit;
+      }
+      .pd-cell:hover {
+        border-color: var(--muted, ${tokens.muted});
+      }
+      .pd-cell:focus-visible {
+        outline: 2px solid var(--ink, ${tokens.ink});
+        outline-offset: 2px;
+      }
+      .pd-cell[aria-pressed="true"] {
+        border-color: var(--ocean, ${tokens.ocean});
+        background: var(--paper, ${tokens.paper});
+        box-shadow: 0 0 0 1px var(--ocean, ${tokens.ocean});
+        z-index: 2;
+      }
+      .pd-cell-inner {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        justify-content: space-between;
+        pointer-events: none;
+      }
+      .pd-val-partner {
+        align-self: flex-end;
+        color: var(--coral, ${tokens.coral});
+        font-weight: 600;
+      }
+      .pd-val-you {
+        align-self: flex-start;
+        color: var(--ocean, ${tokens.ocean});
+        font-weight: 600;
+      }
+      .pd-panel {
+        flex: 1 1 280px;
+        background: var(--surface, ${tokens.surface});
+        border: 1px solid var(--line, ${tokens.line});
+        border-radius: 8px;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .pd-panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .pd-panel-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+        color: var(--ink, ${tokens.ink});
+      }
+      .pd-panel-state {
+        background: var(--line, ${tokens.line});
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+      }
+      .pd-panel-payoffs {
+        display: flex;
+        gap: 1.5rem;
+        font-size: 1.125rem;
+      }
+      .pd-panel-desc {
+        line-height: 1.6;
+        margin: 0;
+        color: var(--ink, ${tokens.ink});
+      }
+    </style>
+
+    <div class="pd-overview" role="region" aria-label="${copy.ariaLabel}">
+      <p class="pd-caption" aria-hidden="true">${copy.caption}</p>
+      <div class="pd-content">
+        <div class="pd-grid-section">
+          <div class="pd-grid" role="group" aria-label="${copy.controlLabel}">
+            <div class="pd-axis-partner" aria-hidden="true">${copy.otherLabel}</div>
+            <div class="pd-axis-you" aria-hidden="true">${copy.youLabel}</div>
+
+            <div class="pd-label-col" style="grid-column: 3;" aria-hidden="true">${copy.coopLabel}</div>
+            <div class="pd-label-col" style="grid-column: 4;" aria-hidden="true">${copy.defectLabel}</div>
+
+            <div class="pd-label-row" style="grid-row: 3;" aria-hidden="true">${copy.coopLabel}</div>
+            <button class="pd-cell" data-idx="0" style="grid-column: 3; grid-row: 3;"></button>
+            <button class="pd-cell" data-idx="2" style="grid-column: 4; grid-row: 3;"></button>
+
+            <div class="pd-label-row" style="grid-row: 4;" aria-hidden="true">${copy.defectLabel}</div>
+            <button class="pd-cell" data-idx="1" style="grid-column: 3; grid-row: 4;"></button>
+            <button class="pd-cell" data-idx="3" style="grid-column: 4; grid-row: 4;"></button>
+          </div>
+        </div>
+
+        <div class="pd-panel" aria-live="polite">
+          <div class="pd-panel-header">
+            <h3 class="pd-panel-title"></h3>
+            <span class="pd-panel-state"></span>
+          </div>
+          <div class="pd-panel-payoffs">
+            <span class="pd-val-you pd-panel-you"></span>
+            <span class="pd-val-partner pd-panel-partner"></span>
+          </div>
+          <p class="pd-panel-desc"></p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  root.innerHTML = html;
+
+  const cells = Array.from(root.querySelectorAll('.pd-cell'));
+  const titleEl = root.querySelector('.pd-panel-title');
+  const stateEl = root.querySelector('.pd-panel-state');
+  const youEl = root.querySelector('.pd-panel-you');
+  const partnerEl = root.querySelector('.pd-panel-partner');
+  const descEl = root.querySelector('.pd-panel-desc');
+
+  let activeIdx = 0;
+  let timer = null;
+  let isPlaying = motion !== false;
+  let userInteracted = false;
+
+  // Cycle order visually moving clockwise: cc(0) -> cd(2) -> dd(3) -> dc(1)
+  const cycle = [0, 2, 3, 1];
+
+  cells.forEach(btn => {
+    const idx = parseInt(btn.dataset.idx, 10);
+    const data = copy.cells[idx];
+
+    btn.setAttribute('aria-label', `${data.label}. ${copy.youLabel}: ${data.you} ${copy.yearsUnit}, ${copy.otherLabel}: ${data.other} ${copy.yearsUnit}`);
+
+    btn.innerHTML = `
+      <div class="pd-cell-inner">
+        <div class="pd-val-partner">${data.other}${copy.yearsUnit}</div>
+        <div class="pd-val-you">${data.you}${copy.yearsUnit}</div>
+      </div>
+    `;
+
+    btn.addEventListener('click', () => {
+      userInteracted = true;
+      stopTimer();
+      selectCell(idx);
+    }, { signal });
+  });
+
+  function selectCell(idx, auto = false) {
+    activeIdx = idx;
+
+    cells.forEach(btn => {
+      const isSelected = parseInt(btn.dataset.idx, 10) === idx;
+      btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+    });
+
+    const data = copy.cells[idx];
+    titleEl.textContent = data.label;
+    stateEl.textContent = data.state;
+    youEl.textContent = `${copy.youLabel}: ${data.you}${copy.yearsUnit}`;
+    partnerEl.textContent = `${copy.otherLabel}: ${data.other}${copy.yearsUnit}`;
+    descEl.textContent = data.detail;
+
+    if (!auto) {
+      announce(`${data.label}. ${data.state}. ${data.detail}`);
+    }
+  }
+
+  function startTimer() {
+    stopTimer();
+    if (!isPlaying || userInteracted) return;
+    timer = setInterval(() => {
+      const currentCycleIdx = cycle.indexOf(activeIdx);
+      const nextIdx = cycle[(currentCycleIdx + 1) % 4];
+      selectCell(nextIdx, true);
+    }, 3500);
+  }
+
+  function stopTimer() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  // Initialize
+  selectCell(0, true);
+  if (isPlaying) {
+    startTimer();
+  }
+
+  return {
+    pause() {
+      isPlaying = false;
+      stopTimer();
+    },
+    resume() {
+      isPlaying = motion !== false;
+      if (isPlaying && !userInteracted) {
+        startTimer();
+      }
+    },
+    reset() {
+      userInteracted = false;
+      isPlaying = motion !== false;
+      selectCell(0, true);
+      if (isPlaying) {
+        startTimer();
+      }
+    },
+    destroy() {
+      stopTimer();
+      root.innerHTML = '';
+    },
+    resize(dimensions) {
+      // Dimensions are managed natively by CSS flex and grid
+    }
+  };
+});
+
+registerDemo("pd-matrix", ({ root, copy, motion, tokens, announce }) => {
+  const byKey = Object.fromEntries(copy.cells.map((cell) => [cell.key, cell]));
+  const order = ["cc", "cd", "dc", "dd"];
+
+  root.innerHTML = `
+    <style>
+      .pd-mx { display:grid; gap:1rem; min-height:26rem; padding:clamp(1rem,4vw,2.25rem); color:${tokens.ink}; background:linear-gradient(145deg,color-mix(in srgb,${tokens.warm} 8%,${tokens.surface}),${tokens.surface} 60%,color-mix(in srgb,${tokens.ocean} 10%,${tokens.surface})); }
+      .pd-mx-board { display:grid; grid-template-columns:5.5rem 1fr 1fr; grid-template-rows:auto 1fr 1fr; gap:.5rem; }
+      .pd-mx-label { display:grid; place-items:center; color:${tokens.muted}; font-size:.7rem; font-weight:850; text-align:center; }
+      .pd-mx-cell { display:grid; gap:.3rem; place-items:center; min-height:6.2rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.9rem; background:${tokens.surface}; cursor:pointer; font:inherit; color:${tokens.ink}; }
+      .pd-mx-cell[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}, 0 0 0 .2rem color-mix(in srgb,${tokens.ocean} 18%,transparent); }
+      .pd-mx-cell:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pd-mx-cell strong { font-size:1.1rem; }
+      .pd-mx-cell small { color:${tokens.muted}; font-size:.68rem; }
+      .pd-mx-cell em { font-style:normal; color:${tokens.coral}; font-size:.72rem; font-weight:850; }
+      .pd-mx-glow { transition:box-shadow .25s ease; }
+      .pd-mx.is-paused .pd-mx-glow { transition:none; }
+      .pd-mx-status { min-height:4rem; margin:0; padding:1rem; border-left:.28rem solid ${tokens.warm}; border-radius:.75rem; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .pd-mx-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      @media (max-width:520px) { .pd-mx-board { grid-template-columns:4.2rem 1fr 1fr; } .pd-mx-cell { min-height:5.2rem; } }
+    </style>
+    <div class="pd-mx${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="pd-mx-board" role="group" aria-label="${escapeHtml(copy.controlLabel)}">
+        <div></div>
+        <div class="pd-mx-label">${escapeHtml(copy.colLabel)}<br>${escapeHtml(copy.coopLabel)}</div>
+        <div class="pd-mx-label">${escapeHtml(copy.colLabel)}<br>${escapeHtml(copy.defectLabel)}</div>
+        <div class="pd-mx-label">${escapeHtml(copy.rowLabel)}<br>${escapeHtml(copy.coopLabel)}</div>
+        <button type="button" class="pd-mx-cell pd-mx-glow" data-pd-mx="cc" aria-pressed="true"></button>
+        <button type="button" class="pd-mx-cell pd-mx-glow" data-pd-mx="cd" aria-pressed="false"></button>
+        <div class="pd-mx-label">${escapeHtml(copy.rowLabel)}<br>${escapeHtml(copy.defectLabel)}</div>
+        <button type="button" class="pd-mx-cell pd-mx-glow" data-pd-mx="dc" aria-pressed="false"></button>
+        <button type="button" class="pd-mx-cell pd-mx-glow" data-pd-mx="dd" aria-pressed="false"></button>
+      </div>
+      <p class="pd-mx-status" data-pd-mx-status aria-live="polite"></p>
+      <p class="pd-mx-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".pd-mx");
+  const status = root.querySelector("[data-pd-mx-status]");
+  const cells = [...root.querySelectorAll("[data-pd-mx]")];
+
+  cells.forEach((node) => {
+    const cell = byKey[node.dataset.pdMx];
+    node.innerHTML = `<em>${escapeHtml(cell.title)}</em><strong>${cell.you} , ${cell.other}</strong><small>${escapeHtml(copy.youShort)} / ${escapeHtml(copy.otherShort)} · ${escapeHtml(copy.yearsUnit)}</small>`;
+  });
+
+  const select = (key, speak = false) => {
+    const cell = byKey[key];
+    cells.forEach((node) => node.setAttribute("aria-pressed", String(node.dataset.pdMx === key)));
+    status.textContent = `${cell.title}: ${cell.detail}`;
+    if (speak) announce(cell.detail);
+  };
+
+  cells.forEach((node) => node.addEventListener("click", () => select(node.dataset.pdMx, true)));
+  select("cc");
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select("cc"),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("pd-choice", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pd-choice-demo {
+        font-family: system-ui, sans-serif;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        color: ${tokens.ink};
+        container-type: inline-size;
+        padding: 0.5rem;
+      }
+      .pd-choice-section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .pd-choice-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: ${tokens.muted};
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .pd-choice-toggle {
+        display: inline-flex;
+        background: ${tokens.surface};
+        border: 1px solid ${tokens.line};
+        border-radius: 0.375rem;
+        overflow: hidden;
+        align-self: flex-start;
+      }
+      .pd-choice-btn {
+        background: transparent;
+        border: none;
+        padding: 0.5rem 1.25rem;
+        font-size: 1rem;
+        color: ${tokens.ink};
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+      }
+      .pd-choice-btn:hover {
+        background: ${tokens.line};
+      }
+      .pd-choice-btn[aria-pressed="true"] {
+        background: ${tokens.ink};
+        color: ${tokens.paper};
+      }
+      .pd-choice-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .pd-choice-card {
+        background: ${tokens.surface};
+        border: 2px solid ${tokens.line};
+        border-radius: 0.5rem;
+        padding: 1rem;
+        text-align: left;
+        cursor: pointer;
+        transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        color: ${tokens.ink};
+      }
+      .pd-choice-card:hover {
+        border-color: ${tokens.muted};
+      }
+      .pd-choice-card[aria-pressed="true"] {
+        border-color: ${tokens.ocean};
+        background: ${tokens.paper};
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+      .pd-choice-card-title {
+        font-weight: 600;
+        font-size: 1.125rem;
+      }
+      .pd-choice-stats {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .pd-choice-stat {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .pd-choice-stat-label {
+        width: 80px;
+        font-size: 0.75rem;
+        color: ${tokens.muted};
+        line-height: 1.1;
+      }
+      .pd-choice-stat-track {
+        flex: 1;
+        height: 0.5rem;
+        background: ${tokens.line};
+        border-radius: 0.25rem;
+        overflow: hidden;
+      }
+      .pd-choice-stat-fill {
+        height: 100%;
+        border-radius: 0.25rem;
+        width: 0%;
+      }
+      .pd-choice-fill-you {
+        background: ${tokens.ocean};
+      }
+      .pd-choice-fill-partner {
+        background: ${tokens.warm};
+      }
+      .pd-choice-stat-val {
+        width: 45px;
+        text-align: right;
+        font-size: 0.875rem;
+        font-variant-numeric: tabular-nums;
+        font-weight: 500;
+      }
+      .pd-choice-status {
+        min-height: 4.5rem;
+        padding: 1rem;
+        background: ${tokens.surface};
+        border-left: 4px solid ${tokens.ocean};
+        border-radius: 0 0.25rem 0.25rem 0;
+        font-size: 0.9375rem;
+        line-height: 1.5;
+      }
+      ${motion ? `
+      .pd-choice-stat-fill {
+        transition: width 0.4s cubic-bezier(0.2, 0, 0, 1);
+      }
+      ` : ''}
+      @container (max-width: 480px) {
+        .pd-choice-cards {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <div class="pd-choice-demo" aria-label="${copy.ariaLabel}">
+      <div class="pd-choice-section">
+        <div class="pd-choice-label" id="pd-partner-label">${copy.partnerControlLabel}</div>
+        <div class="pd-choice-toggle" role="group" aria-labelledby="pd-partner-label">
+          <button class="pd-choice-btn" data-actor="partner" data-move="C" aria-pressed="true">${copy.coopLabel}</button>
+          <button class="pd-choice-btn" data-actor="partner" data-move="D" aria-pressed="false">${copy.defectLabel}</button>
+        </div>
+      </div>
+
+      <div class="pd-choice-section">
+        <div class="pd-choice-label" id="pd-you-label">${copy.yourControlLabel}</div>
+        <div class="pd-choice-cards" role="group" aria-labelledby="pd-you-label">
+          <button class="pd-choice-card" data-actor="you" data-move="C" aria-pressed="true">
+            <div class="pd-choice-card-title">${copy.coopLabel}</div>
+            <div class="pd-choice-stats">
+              <div class="pd-choice-stat">
+                <div class="pd-choice-stat-label">${copy.yearsLabel}</div>
+                <div class="pd-choice-stat-track"><div class="pd-choice-stat-fill pd-choice-fill-you" data-fill="y-c"></div></div>
+                <div class="pd-choice-stat-val" data-val="y-c"></div>
+              </div>
+              <div class="pd-choice-stat">
+                <div class="pd-choice-stat-label">${copy.partnerYearsLabel}</div>
+                <div class="pd-choice-stat-track"><div class="pd-choice-stat-fill pd-choice-fill-partner" data-fill="p-c"></div></div>
+                <div class="pd-choice-stat-val" data-val="p-c"></div>
+              </div>
+            </div>
+          </button>
+          <button class="pd-choice-card" data-actor="you" data-move="D" aria-pressed="false">
+            <div class="pd-choice-card-title">${copy.defectLabel}</div>
+            <div class="pd-choice-stats">
+              <div class="pd-choice-stat">
+                <div class="pd-choice-stat-label">${copy.yearsLabel}</div>
+                <div class="pd-choice-stat-track"><div class="pd-choice-stat-fill pd-choice-fill-you" data-fill="y-d"></div></div>
+                <div class="pd-choice-stat-val" data-val="y-d"></div>
+              </div>
+              <div class="pd-choice-stat">
+                <div class="pd-choice-stat-label">${copy.partnerYearsLabel}</div>
+                <div class="pd-choice-stat-track"><div class="pd-choice-stat-fill pd-choice-fill-partner" data-fill="p-d"></div></div>
+                <div class="pd-choice-stat-val" data-val="p-d"></div>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="pd-choice-status" aria-live="polite"></div>
+    </div>
+  `;
+
+  const payoffs = {
+    C: { C: { y: 1, p: 1 }, D: { y: 3, p: 0 } },
+    D: { C: { y: 0, p: 3 }, D: { y: 2, p: 2 } }
+  };
+
+  let partnerMove = 'C';
+  let yourMove = 'C';
+
+  const partnerBtns = root.querySelectorAll('.pd-choice-btn[data-actor="partner"]');
+  const youCards = root.querySelectorAll('.pd-choice-card[data-actor="you"]');
+  const statusBox = root.querySelector('.pd-choice-status');
+
+  function update(announceChange = false) {
+    partnerBtns.forEach(btn => {
+      btn.setAttribute('aria-pressed', btn.dataset.move === partnerMove);
+    });
+
+    youCards.forEach(card => {
+      const move = card.dataset.move;
+      card.setAttribute('aria-pressed', move === yourMove);
+
+      const yYears = payoffs[move][partnerMove].y;
+      const pYears = payoffs[move][partnerMove].p;
+
+      const fillY = card.querySelector('.pd-choice-fill-you');
+      const fillP = card.querySelector('.pd-choice-fill-partner');
+      const valY = card.querySelector(`.pd-choice-stat-val[data-val="y-${move.toLowerCase()}"]`);
+      const valP = card.querySelector(`.pd-choice-stat-val[data-val="p-${move.toLowerCase()}"]`);
+
+      fillY.style.width = `${(yYears / 3) * 100}%`;
+      fillP.style.width = `${(pYears / 3) * 100}%`;
+
+      valY.textContent = `${yYears} ${copy.yearsUnit}`;
+      valP.textContent = `${pYears} ${copy.yearsUnit}`;
+    });
+
+    let statusKey = 'status';
+    statusKey += yourMove === 'C' ? 'Cooperate' : 'Defect';
+    statusKey += 'Vs';
+    statusKey += partnerMove === 'C' ? 'C' : 'D';
+
+    const text = copy[statusKey];
+    statusBox.textContent = text;
+
+    if (announceChange) {
+      announce(text);
+    }
+  }
+
+  partnerBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (partnerMove !== btn.dataset.move) {
+        partnerMove = btn.dataset.move;
+        update(true);
+      }
+    }, { signal });
+  });
+
+  youCards.forEach(card => {
+    card.addEventListener('click', () => {
+      if (yourMove !== card.dataset.move) {
+        yourMove = card.dataset.move;
+        update(true);
+      }
+    }, { signal });
+  });
+
+  update(false);
+
+  return {
+    pause() {},
+    resume() {},
+    reset() {
+      partnerMove = 'C';
+      yourMove = 'C';
+      update(false);
+    },
+    destroy() {
+      root.innerHTML = '';
+    },
+    resize() {}
+  };
+});
+
+registerDemo("pd-nash", ({ root, copy, motion, tokens, announce }) => {
+  const stageButtons = copy.stages.map((stage, index) => `
+    <button type="button" class="pd-nash-stage" data-pd-nash-stage="${index}" aria-pressed="${index === 0}">${escapeHtml(stage.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .pd-nash { display:grid; gap:1rem; min-height:26rem; padding:clamp(1rem,4vw,2.25rem); color:${tokens.ink}; background:linear-gradient(145deg,color-mix(in srgb,${tokens.ocean} 9%,${tokens.surface}),${tokens.surface} 55%,color-mix(in srgb,${tokens.coral} 10%,${tokens.surface})); }
+      .pd-nash-players { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
+      .pd-nash-card { display:grid; gap:.45rem; min-height:8rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1rem; background:${tokens.surface}; text-align:center; }
+      .pd-nash-card.is-defect { border-color:${tokens.coral}; box-shadow:inset 0 0 0 1px ${tokens.coral}; }
+      .pd-nash-card.is-coop { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pd-nash-card strong { font-size:.8rem; color:${tokens.muted}; letter-spacing:.05em; text-transform:uppercase; }
+      .pd-nash-move { font-size:1.8rem; font-weight:900; }
+      .pd-nash-years { color:${tokens.coral}; font-size:1.05rem; font-weight:850; }
+      .pd-nash-arrow { height:.4rem; border-radius:999px; background:linear-gradient(90deg,${tokens.ocean},${tokens.coral}); transform-origin:left center; animation:pd-nash-flow 1.8s ease-in-out infinite; }
+      .pd-nash.is-paused .pd-nash-arrow { animation-play-state:paused; }
+      @keyframes pd-nash-flow { 50% { opacity:.45; transform:scaleX(.92); } }
+      .pd-nash-controls { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.5rem; }
+      .pd-nash-stage { padding:.7rem .4rem; border:1px solid ${tokens.line}; border-radius:.75rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-size:.72rem; font-weight:800; cursor:pointer; }
+      .pd-nash-stage[aria-pressed="true"] { border-color:${tokens.coral}; box-shadow:inset 0 0 0 1px ${tokens.coral}; }
+      .pd-nash-stage:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pd-nash-status { min-height:4.4rem; margin:0; padding:1rem; border-left:.28rem solid ${tokens.coral}; border-radius:.75rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .pd-nash-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      @media (max-width:560px) { .pd-nash-controls { grid-template-columns:1fr 1fr; } }
+    </style>
+    <div class="pd-nash${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="pd-nash-players">
+        <article class="pd-nash-card" data-pd-nash-you>
+          <strong>${escapeHtml(copy.youLabel)}</strong>
+          <div class="pd-nash-move" data-pd-nash-you-move></div>
+          <div class="pd-nash-years" data-pd-nash-you-years></div>
+        </article>
+        <article class="pd-nash-card" data-pd-nash-other>
+          <strong>${escapeHtml(copy.otherLabel)}</strong>
+          <div class="pd-nash-move" data-pd-nash-other-move></div>
+          <div class="pd-nash-years" data-pd-nash-other-years></div>
+        </article>
+      </div>
+      <div class="pd-nash-arrow" aria-hidden="true"></div>
+      <div class="pd-nash-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${stageButtons}</div>
+      <p class="pd-nash-status" data-pd-nash-status aria-live="polite"></p>
+      <p class="pd-nash-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".pd-nash");
+  const status = root.querySelector("[data-pd-nash-status]");
+  const youCard = root.querySelector("[data-pd-nash-you]");
+  const otherCard = root.querySelector("[data-pd-nash-other]");
+  const youMove = root.querySelector("[data-pd-nash-you-move]");
+  const otherMove = root.querySelector("[data-pd-nash-other-move]");
+  const youYears = root.querySelector("[data-pd-nash-you-years]");
+  const otherYears = root.querySelector("[data-pd-nash-other-years]");
+  const buttons = [...root.querySelectorAll("[data-pd-nash-stage]")];
+
+  const labelMove = (move) => (move === "C" || move === "合" || move === "協" ? copy.coopLabel : copy.defectLabel);
+
+  const select = (index, speak = false) => {
+    const stage = copy.stages[index];
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    youMove.textContent = labelMove(stage.youMove);
+    otherMove.textContent = labelMove(stage.otherMove);
+    youYears.textContent = `${stage.youYears} ${copy.yearsUnit}`;
+    otherYears.textContent = `${stage.otherYears} ${copy.yearsUnit}`;
+    const youDefect = String(stage.youMove).toUpperCase().startsWith("D") || stage.youMove === "背" || stage.youMove === "裏";
+    const otherDefect = String(stage.otherMove).toUpperCase().startsWith("D") || stage.otherMove === "背" || stage.otherMove === "裏";
+    youCard.classList.toggle("is-defect", youDefect);
+    youCard.classList.toggle("is-coop", !youDefect);
+    otherCard.classList.toggle("is-defect", otherDefect);
+    otherCard.classList.toggle("is-coop", !otherDefect);
+    status.textContent = stage.detail;
+    if (speak) announce(stage.detail);
+  };
+
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.pdNashStage), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("pd-welfare", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .pd-wf { display:grid; gap:1rem; min-height:26rem; padding:clamp(1rem,4vw,2.25rem); color:${tokens.ink}; background:linear-gradient(150deg,color-mix(in srgb,${tokens.warm} 9%,${tokens.surface}),${tokens.surface} 55%,color-mix(in srgb,${tokens.ocean} 9%,${tokens.surface})); }
+      .pd-wf-controls { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; }
+      .pd-wf-btn { padding:.9rem; border:1px solid ${tokens.line}; border-radius:.85rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:850; cursor:pointer; }
+      .pd-wf-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pd-wf-btn[data-pd-wf="dd"][aria-pressed="true"] { border-color:${tokens.coral}; box-shadow:inset 0 0 0 1px ${tokens.coral}; }
+      .pd-wf-btn:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pd-wf-bars { display:grid; gap:.85rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1rem; background:${tokens.surface}; }
+      .pd-wf-row { display:grid; grid-template-columns:5.5rem 1fr 3.2rem; gap:.65rem; align-items:center; }
+      .pd-wf-row span { font-size:.78rem; font-weight:800; }
+      .pd-wf-track { height:.85rem; overflow:hidden; border-radius:999px; background:color-mix(in srgb,${tokens.line} 65%,${tokens.surface}); }
+      .pd-wf-track i { display:block; height:100%; width:calc(var(--pd-wf-w, 25) * 1%); background:linear-gradient(90deg,${tokens.ocean},${tokens.coral}); transition:width .3s ease; }
+      .pd-wf.is-paused .pd-wf-track i { transition:none; }
+      .pd-wf-row output { text-align:right; font-weight:900; color:${tokens.coral}; }
+      .pd-wf-total { display:grid; grid-template-columns:1fr 1fr; gap:.65rem; }
+      .pd-wf-metric { padding:.9rem; border:1px solid ${tokens.line}; border-radius:.85rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); text-align:center; }
+      .pd-wf-metric small { display:block; margin-bottom:.3rem; color:${tokens.muted}; font-size:.68rem; }
+      .pd-wf-metric output { font-size:1.35rem; font-weight:900; color:${tokens.coral}; }
+      .pd-wf-status { min-height:4.2rem; margin:0; padding:1rem; border-left:.28rem solid ${tokens.warm}; border-radius:.75rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .pd-wf-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+    </style>
+    <div class="pd-wf${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="pd-wf-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">
+        <button type="button" class="pd-wf-btn" data-pd-wf="cc" aria-pressed="true">${escapeHtml(copy.ccLabel)}</button>
+        <button type="button" class="pd-wf-btn" data-pd-wf="dd" aria-pressed="false">${escapeHtml(copy.ddLabel)}</button>
+      </div>
+      <div class="pd-wf-bars">
+        <div class="pd-wf-row"><span>${escapeHtml(copy.youLabel)}</span><div class="pd-wf-track"><i data-pd-wf-you-bar></i></div><output data-pd-wf-you></output></div>
+        <div class="pd-wf-row"><span>${escapeHtml(copy.otherLabel)}</span><div class="pd-wf-track"><i data-pd-wf-other-bar></i></div><output data-pd-wf-other></output></div>
+      </div>
+      <div class="pd-wf-total">
+        <div class="pd-wf-metric"><small>${escapeHtml(copy.totalLabel)}</small><output data-pd-wf-total></output></div>
+        <div class="pd-wf-metric"><small>${escapeHtml(copy.gapLabel)}</small><output data-pd-wf-gap></output></div>
+      </div>
+      <p class="pd-wf-status" data-pd-wf-status aria-live="polite"></p>
+      <p class="pd-wf-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".pd-wf");
+  const status = root.querySelector("[data-pd-wf-status]");
+  const youOut = root.querySelector("[data-pd-wf-you]");
+  const otherOut = root.querySelector("[data-pd-wf-other]");
+  const totalOut = root.querySelector("[data-pd-wf-total]");
+  const gapOut = root.querySelector("[data-pd-wf-gap]");
+  const youBar = root.querySelector("[data-pd-wf-you-bar]");
+  const otherBar = root.querySelector("[data-pd-wf-other-bar]");
+  const buttons = [...root.querySelectorAll("[data-pd-wf]")];
+  const profiles = {
+    cc: { you: 1, other: 1, total: 2, gap: 0, detail: copy.ccDetail },
+    dd: { you: 2, other: 2, total: 4, gap: 2, detail: copy.ddDetail }
+  };
+
+  const select = (key, speak = false) => {
+    const profile = profiles[key];
+    buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.pdWf === key)));
+    youOut.textContent = `${profile.you} ${copy.yearsUnit}`;
+    otherOut.textContent = `${profile.other} ${copy.yearsUnit}`;
+    totalOut.textContent = `${profile.total} ${copy.yearsUnit}`;
+    gapOut.textContent = `${profile.gap} ${copy.yearsUnit}`;
+    youBar.style.setProperty("--pd-wf-w", String((profile.you / 4) * 100));
+    otherBar.style.setProperty("--pd-wf-w", String((profile.other / 4) * 100));
+    status.textContent = profile.detail;
+    if (speak) announce(profile.detail);
+  };
+
+  buttons.forEach((button) => button.addEventListener("click", () => select(button.dataset.pdWf, true)));
+  select("cc");
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select("cc"),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("pd-repeat", ({ root, copy, motion, tokens, announce }) => {
+  const modeButtons = copy.modes.map((mode, index) => `
+    <button type="button" class="pd-rp-mode" data-pd-rp-mode="${index}" aria-pressed="${index === 0}">${escapeHtml(mode.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .pd-rp { display:grid; gap:1rem; min-height:26rem; padding:clamp(1rem,4vw,2.25rem); color:${tokens.ink}; background:linear-gradient(145deg,color-mix(in srgb,${tokens.ocean} 10%,${tokens.surface}),${tokens.surface} 55%,color-mix(in srgb,${tokens.warm} 9%,${tokens.surface})); }
+      .pd-rp-controls { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.5rem; }
+      .pd-rp-mode { padding:.8rem .45rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-size:.78rem; font-weight:850; cursor:pointer; }
+      .pd-rp-mode[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .pd-rp-mode:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .pd-rp-board { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
+      .pd-rp-card { display:grid; gap:.4rem; min-height:7.5rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1rem; background:${tokens.surface}; text-align:center; }
+      .pd-rp-card.is-coop { border-color:${tokens.ocean}; }
+      .pd-rp-card.is-defect { border-color:${tokens.coral}; }
+      .pd-rp-card strong { font-size:.72rem; color:${tokens.muted}; letter-spacing:.05em; text-transform:uppercase; }
+      .pd-rp-card b { font-size:1.5rem; }
+      .pd-rp-best { padding:1rem; border:1px solid ${tokens.line}; border-radius:.95rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); text-align:center; }
+      .pd-rp-best small { display:block; margin-bottom:.35rem; color:${tokens.muted}; font-size:.68rem; }
+      .pd-rp-best output { font-size:1.25rem; font-weight:900; color:${tokens.ocean}; }
+      .pd-rp-best.is-defect output { color:${tokens.coral}; }
+      .pd-rp-timeline { display:flex; gap:.35rem; align-items:center; justify-content:center; min-height:2rem; }
+      .pd-rp-dot { width:.85rem; height:.85rem; border-radius:50%; background:${tokens.line}; }
+      .pd-rp-dot.is-on { background:${tokens.ocean}; box-shadow:0 0 0 .25rem color-mix(in srgb,${tokens.ocean} 25%,transparent); animation:pd-rp-pulse 1.4s ease-in-out infinite; }
+      .pd-rp-dot.is-bad { background:${tokens.coral}; }
+      .pd-rp.is-paused .pd-rp-dot.is-on { animation-play-state:paused; }
+      @keyframes pd-rp-pulse { 50% { transform:scale(1.25); opacity:.7; } }
+      .pd-rp-status { min-height:4.4rem; margin:0; padding:1rem; border-left:.28rem solid ${tokens.ocean}; border-radius:.75rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
+      .pd-rp-note { margin:0; color:${tokens.muted}; font-size:.78rem; text-align:center; }
+      .pd-rp-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      @media (max-width:560px) { .pd-rp-controls { grid-template-columns:1fr; } }
+    </style>
+    <div class="pd-rp${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="pd-rp-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${modeButtons}</div>
+      <div class="pd-rp-board">
+        <article class="pd-rp-card" data-pd-rp-you><strong>${escapeHtml(copy.youLabel)}</strong><b data-pd-rp-you-move></b></article>
+        <article class="pd-rp-card" data-pd-rp-other><strong>${escapeHtml(copy.otherLabel)}</strong><b data-pd-rp-other-move></b></article>
+      </div>
+      <div class="pd-rp-timeline" aria-hidden="true" data-pd-rp-timeline></div>
+      <div class="pd-rp-best" data-pd-rp-best><small>${escapeHtml(copy.bestMoveLabel)}</small><output data-pd-rp-best-move></output></div>
+      <p class="pd-rp-status" data-pd-rp-status aria-live="polite"></p>
+      <p class="pd-rp-note" data-pd-rp-note></p>
+      <p class="pd-rp-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".pd-rp");
+  const status = root.querySelector("[data-pd-rp-status]");
+  const note = root.querySelector("[data-pd-rp-note]");
+  const bestWrap = root.querySelector("[data-pd-rp-best]");
+  const bestMove = root.querySelector("[data-pd-rp-best-move]");
+  const youCard = root.querySelector("[data-pd-rp-you]");
+  const otherCard = root.querySelector("[data-pd-rp-other]");
+  const youMove = root.querySelector("[data-pd-rp-you-move]");
+  const otherMove = root.querySelector("[data-pd-rp-other-move]");
+  const timeline = root.querySelector("[data-pd-rp-timeline]");
+  const buttons = [...root.querySelectorAll("[data-pd-rp-mode]")];
+
+  const isDefect = (move) => {
+    const value = String(move);
+    return value === "D" || value.includes("背") || value.includes("裏") || /defect/i.test(value);
+  };
+  const labelMove = (move) => (isDefect(move) ? copy.defectLabel : copy.coopLabel);
+
+  const select = (index, speak = false) => {
+    const mode = copy.modes[index];
+    buttons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+    youMove.textContent = labelMove(mode.youMove);
+    otherMove.textContent = labelMove(mode.otherMove);
+    const youBad = isDefect(mode.youMove);
+    const otherBad = isDefect(mode.otherMove);
+    youCard.classList.toggle("is-defect", youBad);
+    youCard.classList.toggle("is-coop", !youBad);
+    otherCard.classList.toggle("is-defect", otherBad);
+    otherCard.classList.toggle("is-coop", !otherBad);
+    bestMove.textContent = mode.bestMove;
+    bestWrap.classList.toggle("is-defect", isDefect(mode.bestMove) || /背|裏|Defect/i.test(mode.bestMove));
+    status.textContent = mode.status;
+    note.textContent = mode.note;
+    const dots = mode.key === "oneshot"
+      ? '<span class="pd-rp-dot is-on is-bad"></span>'
+      : '<span class="pd-rp-dot is-on"></span><span class="pd-rp-dot is-on"></span><span class="pd-rp-dot is-on"></span><span class="pd-rp-dot is-on"></span>';
+    timeline.innerHTML = dots;
+    if (speak) announce(mode.status);
+  };
+
+  buttons.forEach((button) => button.addEventListener("click", () => select(Number(button.dataset.pdRpMode), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+  </script>
 </body>
 </html>

@@ -23,6 +23,8 @@ const homeVisuals = visuals.map((visual) => ({
   isLoopEngineering: visual.cover === 'loop-engineering',
   isPriceVolume: visual.cover === 'price-volume',
   isEnsoFoodPrices: visual.cover === 'enso-food-prices',
+  isPrisonersDilemma: visual.cover === 'prisoners-dilemma',
+  isButterflyEffect: visual.cover === 'butterfly-effect',
 }));
 ---
 
@@ -124,6 +126,42 @@ const homeVisuals = visuals.map((visual) => ({
             </div>
             <div class="absolute bottom-[58%] right-[10%] text-2xl font-bold text-rose-100/95">↗</div>
             <div class="absolute left-[10%] top-[18%] rounded-full border border-cyan-100/30 bg-cyan-100/10 px-3 py-1 text-xs font-bold tracking-wide text-cyan-50/90">ENSO</div>
+          </>
+        ) : visual.isPrisonersDilemma ? (
+          <>
+            {/* Payoff matrix / two-cell game — distinct from typhoon eye */}
+            <div class="absolute left-1/2 top-[14%] h-[68%] w-[70%] -translate-x-1/2 rounded-[1.75rem] border border-white/20 bg-slate-950/40 p-3 backdrop-blur-sm">
+              <div class="grid h-full grid-cols-2 grid-rows-2 gap-2">
+                <div class="flex flex-col items-center justify-center gap-1 rounded-2xl border border-emerald-200/45 bg-emerald-300/25">
+                  <span class="text-sm font-bold text-emerald-50">C·C</span>
+                  <span class="text-[10px] font-semibold text-emerald-100/80">1 , 1</span>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-1 rounded-2xl border border-amber-200/35 bg-amber-300/15">
+                  <span class="text-sm font-bold text-amber-50/90">C·D</span>
+                  <span class="text-[10px] font-semibold text-amber-100/70">3 , 0</span>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-1 rounded-2xl border border-amber-200/35 bg-amber-300/15">
+                  <span class="text-sm font-bold text-amber-50/90">D·C</span>
+                  <span class="text-[10px] font-semibold text-amber-100/70">0 , 3</span>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-1 rounded-2xl border border-rose-200/50 bg-rose-400/40 shadow-[0_0_28px_rgba(251,113,133,.4)]">
+                  <span class="text-sm font-bold text-rose-50">D·D</span>
+                  <span class="text-[10px] font-semibold text-rose-100/85">2 , 2</span>
+                </div>
+              </div>
+            </div>
+            <div class="absolute left-[8%] top-[12%] rounded-full border border-white/30 bg-black/25 px-3 py-1 text-xs font-bold tracking-wide text-white/90">Nash · DD</div>
+          </>
+        ) : visual.isButterflyEffect ? (
+          <>
+            <div class="absolute inset-8 rounded-[2rem] border border-white/15 bg-slate-950/30 backdrop-blur-sm"></div>
+            <svg class="absolute inset-0 h-full w-full" viewBox="0 0 420 320" fill="none" aria-hidden="true">
+              <path d="M48 200 C 130 196, 175 175, 220 130 C 275 70, 330 45, 380 36" stroke="rgba(103,232,249,.9)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M48 204 C 130 210, 180 235, 230 255 C 290 280, 340 265, 380 220" stroke="rgba(251,113,133,.95)" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="48" cy="202" r="7" fill="rgba(255,255,255,.95)"/>
+            </svg>
+            <div class="absolute left-[10%] top-[14%] rounded-full border border-cyan-100/35 bg-cyan-100/10 px-3 py-1 text-xs font-bold tracking-wide text-cyan-50/90">δx₀ → fork</div>
+            <div class="absolute right-[12%] top-[16%] text-2xl font-bold text-rose-100/95">↗</div>
           </>
         ) : (
           <div class="absolute inset-12 rounded-3xl border border-white/20 bg-white/10 shadow-[0_0_70px_rgba(103,232,249,.24)] backdrop-blur-sm"></div>

@@ -1,89 +1,271 @@
-registerDemo("pd-choice", ({ root, copy, motion, tokens, announce }) => {
-  const payoffs = {
-    C: { C: [1, 1], D: [3, 0] },
-    D: { C: [0, 3], D: [2, 2] }
-  };
-
+registerDemo("pd-choice", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
   root.innerHTML = `
     <style>
-      .pd-ch { display:grid; gap:1rem; min-height:26rem; padding:clamp(1rem,4vw,2.25rem); color:${tokens.ink}; background:linear-gradient(150deg,color-mix(in srgb,${tokens.coral} 8%,${tokens.surface}),${tokens.surface} 58%,color-mix(in srgb,${tokens.ocean} 10%,${tokens.surface})); }
-      .pd-ch-block { display:grid; gap:.55rem; }
-      .pd-ch-block h3 { margin:0; color:${tokens.muted}; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; }
-      .pd-ch-row { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; }
-      .pd-ch-btn { padding:.85rem; border:1px solid ${tokens.line}; border-radius:.85rem; color:${tokens.ink}; background:${tokens.surface}; font:inherit; font-weight:850; cursor:pointer; }
-      .pd-ch-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
-      .pd-ch-btn.is-best[aria-pressed="true"] { border-color:${tokens.coral}; box-shadow:inset 0 0 0 1px ${tokens.coral}; }
-      .pd-ch-btn:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
-      .pd-ch-metrics { display:grid; grid-template-columns:1fr 1fr; gap:.65rem; }
-      .pd-ch-metric { padding:.9rem; border:1px solid ${tokens.line}; border-radius:.85rem; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); text-align:center; }
-      .pd-ch-metric small { display:block; margin-bottom:.3rem; color:${tokens.muted}; font-size:.68rem; }
-      .pd-ch-metric output { font-size:1.35rem; font-weight:900; color:${tokens.coral}; }
-      .pd-ch-status { min-height:4.5rem; margin:0; padding:1rem; border-left:.28rem solid ${tokens.coral}; border-radius:.75rem; background:color-mix(in srgb,${tokens.paper} 42%,${tokens.surface}); color:${tokens.muted}; line-height:1.55; }
-      .pd-ch-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
-      .pd-ch-hint { height:.35rem; border-radius:999px; background:color-mix(in srgb,${tokens.line} 70%,${tokens.surface}); overflow:hidden; }
-      .pd-ch-hint i { display:block; height:100%; width:var(--pd-ch-dom, 50%); background:linear-gradient(90deg,${tokens.ocean},${tokens.coral}); transition:width .25s ease; }
-      .pd-ch.is-paused .pd-ch-hint i { transition:none; }
+      .pd-choice-demo {
+        font-family: system-ui, sans-serif;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        color: ${tokens.ink};
+        container-type: inline-size;
+        padding: 0.5rem;
+      }
+      .pd-choice-section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .pd-choice-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: ${tokens.muted};
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .pd-choice-toggle {
+        display: inline-flex;
+        background: ${tokens.surface};
+        border: 1px solid ${tokens.line};
+        border-radius: 0.375rem;
+        overflow: hidden;
+        align-self: flex-start;
+      }
+      .pd-choice-btn {
+        background: transparent;
+        border: none;
+        padding: 0.5rem 1.25rem;
+        font-size: 1rem;
+        color: ${tokens.ink};
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+      }
+      .pd-choice-btn:hover {
+        background: ${tokens.line};
+      }
+      .pd-choice-btn[aria-pressed="true"] {
+        background: ${tokens.ink};
+        color: ${tokens.paper};
+      }
+      .pd-choice-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .pd-choice-card {
+        background: ${tokens.surface};
+        border: 2px solid ${tokens.line};
+        border-radius: 0.5rem;
+        padding: 1rem;
+        text-align: left;
+        cursor: pointer;
+        transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        color: ${tokens.ink};
+      }
+      .pd-choice-card:hover {
+        border-color: ${tokens.muted};
+      }
+      .pd-choice-card[aria-pressed="true"] {
+        border-color: ${tokens.ocean};
+        background: ${tokens.paper};
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+      .pd-choice-card-title {
+        font-weight: 600;
+        font-size: 1.125rem;
+      }
+      .pd-choice-stats {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .pd-choice-stat {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .pd-choice-stat-label {
+        width: 80px;
+        font-size: 0.75rem;
+        color: ${tokens.muted};
+        line-height: 1.1;
+      }
+      .pd-choice-stat-track {
+        flex: 1;
+        height: 0.5rem;
+        background: ${tokens.line};
+        border-radius: 0.25rem;
+        overflow: hidden;
+      }
+      .pd-choice-stat-fill {
+        height: 100%;
+        border-radius: 0.25rem;
+        width: 0%;
+      }
+      .pd-choice-fill-you {
+        background: ${tokens.ocean};
+      }
+      .pd-choice-fill-partner {
+        background: ${tokens.warm};
+      }
+      .pd-choice-stat-val {
+        width: 45px;
+        text-align: right;
+        font-size: 0.875rem;
+        font-variant-numeric: tabular-nums;
+        font-weight: 500;
+      }
+      .pd-choice-status {
+        min-height: 4.5rem;
+        padding: 1rem;
+        background: ${tokens.surface};
+        border-left: 4px solid ${tokens.ocean};
+        border-radius: 0 0.25rem 0.25rem 0;
+        font-size: 0.9375rem;
+        line-height: 1.5;
+      }
+      ${motion ? `
+      .pd-choice-stat-fill {
+        transition: width 0.4s cubic-bezier(0.2, 0, 0, 1);
+      }
+      ` : ''}
+      @container (max-width: 480px) {
+        .pd-choice-cards {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
-    <div class="pd-ch${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
-      <div class="pd-ch-block">
-        <h3>${escapeHtml(copy.partnerControlLabel)}</h3>
-        <div class="pd-ch-row" role="group" aria-label="${escapeHtml(copy.partnerControlLabel)}">
-          <button type="button" class="pd-ch-btn" data-pd-partner="C" aria-pressed="true">${escapeHtml(copy.coopLabel)}</button>
-          <button type="button" class="pd-ch-btn" data-pd-partner="D" aria-pressed="false">${escapeHtml(copy.defectLabel)}</button>
+    <div class="pd-choice-demo" aria-label="${copy.ariaLabel}">
+      <div class="pd-choice-section">
+        <div class="pd-choice-label" id="pd-partner-label">${copy.partnerControlLabel}</div>
+        <div class="pd-choice-toggle" role="group" aria-labelledby="pd-partner-label">
+          <button class="pd-choice-btn" data-actor="partner" data-move="C" aria-pressed="true">${copy.coopLabel}</button>
+          <button class="pd-choice-btn" data-actor="partner" data-move="D" aria-pressed="false">${copy.defectLabel}</button>
         </div>
       </div>
-      <div class="pd-ch-block">
-        <h3>${escapeHtml(copy.yourControlLabel)}</h3>
-        <div class="pd-ch-row" role="group" aria-label="${escapeHtml(copy.yourControlLabel)}">
-          <button type="button" class="pd-ch-btn" data-pd-you="C" aria-pressed="false">${escapeHtml(copy.coopLabel)}</button>
-          <button type="button" class="pd-ch-btn is-best" data-pd-you="D" aria-pressed="true">${escapeHtml(copy.defectLabel)}</button>
+
+      <div class="pd-choice-section">
+        <div class="pd-choice-label" id="pd-you-label">${copy.yourControlLabel}</div>
+        <div class="pd-choice-cards" role="group" aria-labelledby="pd-you-label">
+          <button class="pd-choice-card" data-actor="you" data-move="C" aria-pressed="true">
+            <div class="pd-choice-card-title">${copy.coopLabel}</div>
+            <div class="pd-choice-stats">
+              <div class="pd-choice-stat">
+                <div class="pd-choice-stat-label">${copy.yearsLabel}</div>
+                <div class="pd-choice-stat-track"><div class="pd-choice-stat-fill pd-choice-fill-you" data-fill="y-c"></div></div>
+                <div class="pd-choice-stat-val" data-val="y-c"></div>
+              </div>
+              <div class="pd-choice-stat">
+                <div class="pd-choice-stat-label">${copy.partnerYearsLabel}</div>
+                <div class="pd-choice-stat-track"><div class="pd-choice-stat-fill pd-choice-fill-partner" data-fill="p-c"></div></div>
+                <div class="pd-choice-stat-val" data-val="p-c"></div>
+              </div>
+            </div>
+          </button>
+          <button class="pd-choice-card" data-actor="you" data-move="D" aria-pressed="false">
+            <div class="pd-choice-card-title">${copy.defectLabel}</div>
+            <div class="pd-choice-stats">
+              <div class="pd-choice-stat">
+                <div class="pd-choice-stat-label">${copy.yearsLabel}</div>
+                <div class="pd-choice-stat-track"><div class="pd-choice-stat-fill pd-choice-fill-you" data-fill="y-d"></div></div>
+                <div class="pd-choice-stat-val" data-val="y-d"></div>
+              </div>
+              <div class="pd-choice-stat">
+                <div class="pd-choice-stat-label">${copy.partnerYearsLabel}</div>
+                <div class="pd-choice-stat-track"><div class="pd-choice-stat-fill pd-choice-fill-partner" data-fill="p-d"></div></div>
+                <div class="pd-choice-stat-val" data-val="p-d"></div>
+              </div>
+            </div>
+          </button>
         </div>
-        <div class="pd-ch-hint" aria-hidden="true"><i data-pd-ch-bar></i></div>
       </div>
-      <div class="pd-ch-metrics">
-        <div class="pd-ch-metric"><small>${escapeHtml(copy.yearsLabel)}</small><output data-pd-you-years></output></div>
-        <div class="pd-ch-metric"><small>${escapeHtml(copy.partnerYearsLabel)}</small><output data-pd-partner-years></output></div>
-      </div>
-      <p class="pd-ch-status" data-pd-ch-status aria-live="polite"></p>
-      <p class="pd-ch-caption">${escapeHtml(copy.caption)}</p>
-    </div>`;
 
-  const scene = root.querySelector(".pd-ch");
-  const status = root.querySelector("[data-pd-ch-status]");
-  const youYears = root.querySelector("[data-pd-you-years]");
-  const partnerYears = root.querySelector("[data-pd-partner-years]");
-  const bar = root.querySelector("[data-pd-ch-bar]");
-  const partnerButtons = [...root.querySelectorAll("[data-pd-partner]")];
-  const youButtons = [...root.querySelectorAll("[data-pd-you]")];
-  let partner = "C";
-  let you = "D";
+      <div class="pd-choice-status" aria-live="polite"></div>
+    </div>
+  `;
 
-  const statusKey = () => {
-    if (partner === "C" && you === "C") return copy.statusCooperateVsC;
-    if (partner === "C" && you === "D") return copy.statusDefectVsC;
-    if (partner === "D" && you === "C") return copy.statusCooperateVsD;
-    return copy.statusDefectVsD;
+  const payoffs = {
+    C: { C: { y: 1, p: 1 }, D: { y: 3, p: 0 } },
+    D: { C: { y: 0, p: 3 }, D: { y: 2, p: 2 } }
   };
 
-  const render = (speak = false) => {
-    const [y, p] = payoffs[you][partner];
-    youYears.textContent = `${y} ${copy.yearsUnit}`;
-    partnerYears.textContent = `${p} ${copy.yearsUnit}`;
-    partnerButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.pdPartner === partner)));
-    youButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.pdYou === you)));
-    // Dominance bar: Defect always privately better → lean toward coral
-    bar.style.setProperty("--pd-ch-dom", you === "D" ? "88%" : "28%");
-    status.textContent = statusKey();
-    if (speak) announce(status.textContent);
-  };
+  let partnerMove = 'C';
+  let yourMove = 'C';
 
-  partnerButtons.forEach((button) => button.addEventListener("click", () => { partner = button.dataset.pdPartner; render(true); }));
-  youButtons.forEach((button) => button.addEventListener("click", () => { you = button.dataset.pdYou; render(true); }));
-  render();
+  const partnerBtns = root.querySelectorAll('.pd-choice-btn[data-actor="partner"]');
+  const youCards = root.querySelectorAll('.pd-choice-card[data-actor="you"]');
+  const statusBox = root.querySelector('.pd-choice-status');
+
+  function update(announceChange = false) {
+    partnerBtns.forEach(btn => {
+      btn.setAttribute('aria-pressed', btn.dataset.move === partnerMove);
+    });
+
+    youCards.forEach(card => {
+      const move = card.dataset.move;
+      card.setAttribute('aria-pressed', move === yourMove);
+
+      const yYears = payoffs[move][partnerMove].y;
+      const pYears = payoffs[move][partnerMove].p;
+
+      const fillY = card.querySelector('.pd-choice-fill-you');
+      const fillP = card.querySelector('.pd-choice-fill-partner');
+      const valY = card.querySelector(`.pd-choice-stat-val[data-val="y-${move.toLowerCase()}"]`);
+      const valP = card.querySelector(`.pd-choice-stat-val[data-val="p-${move.toLowerCase()}"]`);
+
+      fillY.style.width = `${(yYears / 3) * 100}%`;
+      fillP.style.width = `${(pYears / 3) * 100}%`;
+
+      valY.textContent = `${yYears} ${copy.yearsUnit}`;
+      valP.textContent = `${pYears} ${copy.yearsUnit}`;
+    });
+
+    let statusKey = 'status';
+    statusKey += yourMove === 'C' ? 'Cooperate' : 'Defect';
+    statusKey += 'Vs';
+    statusKey += partnerMove === 'C' ? 'C' : 'D';
+
+    const text = copy[statusKey];
+    statusBox.textContent = text;
+
+    if (announceChange) {
+      announce(text);
+    }
+  }
+
+  partnerBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (partnerMove !== btn.dataset.move) {
+        partnerMove = btn.dataset.move;
+        update(true);
+      }
+    }, { signal });
+  });
+
+  youCards.forEach(card => {
+    card.addEventListener('click', () => {
+      if (yourMove !== card.dataset.move) {
+        yourMove = card.dataset.move;
+        update(true);
+      }
+    }, { signal });
+  });
+
+  update(false);
+
   return {
-    pause: () => scene.classList.add("is-paused"),
-    resume: () => scene.classList.remove("is-paused"),
-    reset: () => { partner = "C"; you = "D"; render(); },
-    destroy: () => { root.innerHTML = ""; }
+    pause() {},
+    resume() {},
+    reset() {
+      partnerMove = 'C';
+      yourMove = 'C';
+      update(false);
+    },
+    destroy() {
+      root.innerHTML = '';
+    },
+    resize() {}
   };
 });

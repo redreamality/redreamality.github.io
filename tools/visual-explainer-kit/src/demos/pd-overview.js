@@ -158,7 +158,7 @@ registerDemo("pd-overview", ({ root, shadow, signal, copy, motion, tokens, resol
         color: var(--ink, ${tokens.ink});
       }
     </style>
-    
+
     <div class="pd-overview" role="region" aria-label="${copy.ariaLabel}">
       <p class="pd-caption" aria-hidden="true">${copy.caption}</p>
       <div class="pd-content">
@@ -166,20 +166,20 @@ registerDemo("pd-overview", ({ root, shadow, signal, copy, motion, tokens, resol
           <div class="pd-grid" role="group" aria-label="${copy.controlLabel}">
             <div class="pd-axis-partner" aria-hidden="true">${copy.otherLabel}</div>
             <div class="pd-axis-you" aria-hidden="true">${copy.youLabel}</div>
-            
+
             <div class="pd-label-col" style="grid-column: 3;" aria-hidden="true">${copy.coopLabel}</div>
             <div class="pd-label-col" style="grid-column: 4;" aria-hidden="true">${copy.defectLabel}</div>
-            
+
             <div class="pd-label-row" style="grid-row: 3;" aria-hidden="true">${copy.coopLabel}</div>
             <button class="pd-cell" data-idx="0" style="grid-column: 3; grid-row: 3;"></button>
             <button class="pd-cell" data-idx="2" style="grid-column: 4; grid-row: 3;"></button>
-            
+
             <div class="pd-label-row" style="grid-row: 4;" aria-hidden="true">${copy.defectLabel}</div>
             <button class="pd-cell" data-idx="1" style="grid-column: 3; grid-row: 4;"></button>
             <button class="pd-cell" data-idx="3" style="grid-column: 4; grid-row: 4;"></button>
           </div>
         </div>
-        
+
         <div class="pd-panel" aria-live="polite">
           <div class="pd-panel-header">
             <h3 class="pd-panel-title"></h3>
@@ -208,23 +208,23 @@ registerDemo("pd-overview", ({ root, shadow, signal, copy, motion, tokens, resol
   let timer = null;
   let isPlaying = motion !== false;
   let userInteracted = false;
-  
+
   // Cycle order visually moving clockwise: cc(0) -> cd(2) -> dd(3) -> dc(1)
   const cycle = [0, 2, 3, 1];
 
   cells.forEach(btn => {
     const idx = parseInt(btn.dataset.idx, 10);
     const data = copy.cells[idx];
-    
+
     btn.setAttribute('aria-label', `${data.label}. ${copy.youLabel}: ${data.you} ${copy.yearsUnit}, ${copy.otherLabel}: ${data.other} ${copy.yearsUnit}`);
-    
+
     btn.innerHTML = `
       <div class="pd-cell-inner">
         <div class="pd-val-partner">${data.other}${copy.yearsUnit}</div>
         <div class="pd-val-you">${data.you}${copy.yearsUnit}</div>
       </div>
     `;
-    
+
     btn.addEventListener('click', () => {
       userInteracted = true;
       stopTimer();
@@ -234,19 +234,19 @@ registerDemo("pd-overview", ({ root, shadow, signal, copy, motion, tokens, resol
 
   function selectCell(idx, auto = false) {
     activeIdx = idx;
-    
+
     cells.forEach(btn => {
       const isSelected = parseInt(btn.dataset.idx, 10) === idx;
       btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
     });
-    
+
     const data = copy.cells[idx];
     titleEl.textContent = data.label;
     stateEl.textContent = data.state;
     youEl.textContent = `${copy.youLabel}: ${data.you}${copy.yearsUnit}`;
     partnerEl.textContent = `${copy.otherLabel}: ${data.other}${copy.yearsUnit}`;
     descEl.textContent = data.detail;
-    
+
     if (!auto) {
       announce(`${data.label}. ${data.state}. ${data.detail}`);
     }

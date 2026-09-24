@@ -3,17 +3,19 @@ import { getHomepageVisuals, getLatestVisual, getVisualWork } from './visuals';
 
 describe('getLatestVisual', () => {
   it.each([
-    ['en', '/visuals/enso-food-prices/', 'Why Pacific Warming Shows Up in Grocery Prices'],
-    ['zh', '/cn/visuals/enso-food-prices/', '太平洋变暖，为什么你家菜价先涨？'],
-    ['ja', '/ja/visuals/enso-food-prices/', '太平洋が暖まると、なぜ食卓の値段が先に上がるのか'],
+    ['en', '/visuals/butterfly-effect/', "Can a Butterfly's Flap Really Start a Tornado?"],
+    ['zh', '/cn/visuals/butterfly-effect/', '一只蝴蝶扇翅，真能掀起龙卷风吗？'],
+    ['ja', '/ja/visuals/butterfly-effect/', '蝶の羽ばたきは、本当に竜巻を起こすのか？'],
   ] as const)('returns the newest published %s artifact', (lang, href, title) => {
-    expect(getLatestVisual(lang)).toMatchObject({ slug: 'enso-food-prices', href, title, hasCurrentArtifact: true });
+    expect(getLatestVisual(lang)).toMatchObject({ slug: 'butterfly-effect', href, title, hasCurrentArtifact: true });
   });
 });
 
 describe('getHomepageVisuals', () => {
   it('returns every current-language artifact in newest-first order', () => {
     expect(getHomepageVisuals('en').map((visual) => visual.slug)).toEqual([
+      'butterfly-effect',
+      'prisoners-dilemma',
       'enso-food-prices',
       'price-volume-relationship',
       'air-conditioner',
@@ -31,6 +33,8 @@ describe('visual artifact registration', () => {
     ['price-volume-relationship', 'price-volume-relationship'],
     ['typhoon', 'typhoon'],
     ['enso-food-prices', 'enso-food-prices'],
+    ['prisoners-dilemma', 'prisoners-dilemma'],
+    ['butterfly-effect', 'butterfly-effect'],
   ] as const)('uses one stable artifact ID across locales for %s', (slug, artifact) => {
     const work = getVisualWork(slug);
 

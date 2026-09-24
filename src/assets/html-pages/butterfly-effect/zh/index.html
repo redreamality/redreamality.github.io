@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="交互图解混沌中的敏感依赖：初值微扰、轨迹指数分叉、可预测视界，并澄清「蝴蝶」是隐喻而非字面因果。">
+  <title>一只蝴蝶扇翅，真能掀起龙卷风吗？</title>
+  <style data-prototype-bundle="article">
+:root {
+  color-scheme: light;
+  --paper: #f4f1e8;
+  --surface: #fffdf8;
+  --ink: #17333c;
+  --muted: #60747a;
+  --line: #d8ddd7;
+  --ocean: #0f7185;
+  --warm: #ee9d46;
+  --coral: #d45f50;
+  --soft-ocean: color-mix(in srgb, var(--ocean) 9%, var(--surface));
+  --soft-warm: color-mix(in srgb, var(--warm) 12%, var(--surface));
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body { margin: 0; overflow-x: clip; color: var(--ink); background: radial-gradient(circle at 20% 0, #dff3ef 0, transparent 30rem), var(--paper); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .75rem;
+  left: .75rem;
+  padding: .65rem .9rem;
+  color: white;
+  background: var(--ink);
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.75rem;
+  padding: .65rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(216, 221, 215, .9);
+  background: rgba(244, 241, 232, .9);
+  backdrop-filter: blur(14px);
+}
+.site-header strong { margin-right: auto; font-size: .72rem; letter-spacing: .12em; }
+.language-links { display: flex; gap: .65rem; }
+.language-links a { color: var(--muted); font-size: .78rem; }
+.language-links a[aria-current="page"] { color: var(--ocean); font-weight: 800; }
+[data-global-motion] {
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.hero, .copy-block {
+  width: min(calc(100% - 2rem), 54rem);
+  margin-inline: auto;
+}
+.hero {
+  position: relative;
+  padding: clamp(5rem, 14vw, 10rem) 0;
+}
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -12% auto auto;
+  width: clamp(9rem, 28vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ocean) 35%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem color-mix(in srgb, var(--ocean) 5%, transparent),
+    0 0 0 5rem color-mix(in srgb, var(--warm) 4%, transparent);
+  content: "";
+}
+.eyebrow, .section-label {
+  margin: 0 0 1rem;
+  color: var(--ocean);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+h1, h2 { margin-top: 0; line-height: 1.03; text-wrap: balance; }
+h1 { max-width: 9em; margin-bottom: 1.5rem; font-size: clamp(3.2rem, 10vw, 7rem); letter-spacing: -.06em; }
+h2 { max-width: 16em; margin-bottom: 1.15rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+.hero-subtitle, .copy-prose { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.75; }
+.hero-subtitle { max-width: 38rem; }
+.copy-prose { margin: .8rem 0 0; }
+
+.plain-language {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .75rem 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 55%, var(--line));
+  border-radius: 1rem;
+  background: var(--soft-warm);
+}
+.plain-language strong {
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  color: var(--surface);
+  background: var(--warm);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.plain-language p { margin: 0; color: var(--ink); line-height: 1.65; }
+
+.concept-points { margin-top: 1.4rem; }
+.concept-points-label {
+  margin: 0 0 .7rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.concept-points ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.concept-card strong { display: block; margin-bottom: .45rem; }
+.concept-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+.overview, .chapter, .closing { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
+.overview { background: color-mix(in srgb, var(--surface) 42%, transparent); }
+.chapter:nth-of-type(even) { background: color-mix(in srgb, var(--surface) 22%, transparent); }
+interactive-figure {
+  display: block;
+  width: min(calc(100% - 2rem), 68rem);
+  min-height: 29rem;
+  margin: 3rem auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 51, 60, .14);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 1.5rem 4rem rgba(23, 51, 60, .1);
+}
+
+.closing { background: linear-gradient(150deg, var(--soft-ocean), color-mix(in srgb, var(--paper) 86%, var(--surface))); }
+.closing-copy { width: min(calc(100% - 2rem), 68rem); }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.starter-checklist, .boundary-map {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.closing h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.starter-checklist ol { display: grid; gap: .7rem; margin: 0; padding-left: 1.35rem; }
+.starter-checklist li { padding-left: .3rem; line-height: 1.55; }
+.boundary-map ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.scale-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: .2rem .8rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--surface);
+}
+.scale-card strong { grid-row: 1 / span 2; color: var(--ocean); }
+.scale-card span { color: var(--ink); font-size: .82rem; font-weight: 800; }
+.scale-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.closing blockquote {
+  margin: 2rem 0 0;
+  padding: 1.35rem clamp(1rem, 3vw, 1.8rem);
+  border-left: .32rem solid var(--ocean);
+  color: var(--ink);
+  background: var(--surface);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.55;
+}
+.source-note { margin: 1rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+article[data-visual-slug="loop-engineering"] .hero .eyebrow { color: var(--coral); }
+article[data-visual-slug="loop-engineering"] interactive-figure { box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ocean) 12%, transparent); }
+
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header strong { width: 100%; }
+  .language-links { margin-right: auto; }
+  interactive-figure { min-height: 32rem; border-radius: 1rem; }
+  .concept-points ul, .closing-grid { grid-template-columns: 1fr; }
+  .plain-language { grid-template-columns: 1fr; }
+  .scale-card { grid-template-columns: 5.5rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#article">跳到正文</a>
+  <header class="site-header">
+    <strong>VISUAL KIT / PROTOTYPE</strong>
+    <nav class="language-links" aria-label="语言">
+<a href="../en/" hreflang="en">English</a>
+<a href="../zh/" hreflang="zh" aria-current="page">中文</a>
+<a href="../ja/" hreflang="ja">日本語</a>
+    </nav>
+    <button type="button" data-global-motion aria-pressed="false"></button>
+  </header>
+  <main id="article">
+    <article data-visual-slug="butterfly-effect">
+      <header class="hero">
+        <p class="eyebrow">混沌 / 敏感依赖 / 预测极限</p>
+        <h1>一只蝴蝶扇翅，真能掀起龙卷风吗？</h1>
+        <p class="hero-subtitle">混沌理论说：方程可以完全确定，长期细预报仍可能失败。初值上的一丝扰动，会让两条几乎相同的未来分道扬镳——这不需要随机数，也不等于指控某只昆虫「造成」某场风暴。</p>
+      </header>
+<section class="overview" aria-labelledby="overview-title">
+  <div class="copy-block">
+    <p class="section-label">蝴蝶效应总览</p>
+    <h2 id="overview-title">先看敏感依赖，再谈天气诗意</h2>
+    <p class="copy-prose">流行说法「蝴蝶效应」指的是一个数学事实：在某些非线性系统里，邻近初值会指数级分离。天气是著名例子，但核心主张关于轨迹，而不是某只昆虫拥有某场龙卷风的产权。</p>
+<p class="copy-prose">本图解走一条短链：隐喻澄清 → 双初值轨迹 → 误差增长 → 可预测视界 → 混沌与噪声。方程保持确定性；意外在于确定性蒸发得有多快。</p>
+    <aside class="plain-language"><strong>一句话</strong><p>起点差一点点，结局可以差很多——即便每一步规则都写死了。</p></aside><div class="concept-points"><p class="concept-points-label">先记住这三句</p><ul><li class="concept-card"><strong>隐喻，不是归因</strong><p>蝴蝶形象戏剧化了敏感性；它并不给单次扇翅开法庭起诉书。</p></li><li class="concept-card"><strong>确定 ≠ 永远可预报</strong><p>规则固定，仍可能存在有用预报的硬视界。</p></li><li class="concept-card"><strong>增长速度要紧</strong><p>误差如何指数放大，决定双胞胎运行何时不再一致。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="bf-overview" data-title="在神话与机制之间切换" data-copy="{&quot;ariaLabel&quot;:&quot;对比蝴蝶隐喻与敏感依赖机制的交互总览&quot;,&quot;caption&quot;:&quot;在诗意故事与数学真正主张的轨迹机制之间切换。&quot;,&quot;controlLabel&quot;:&quot;视角&quot;,&quot;modes&quot;:[{&quot;key&quot;:&quot;myth&quot;,&quot;label&quot;:&quot;诗意神话&quot;,&quot;headline&quot;:&quot;一次扇翅 → 一场龙卷？&quot;,&quot;detail&quot;:&quot;干净的因果卡通：虫翅，然后远方风暴。好记——若当作字面归因则过度宣称。&quot;,&quot;badge&quot;:&quot;故事&quot;},{&quot;key&quot;:&quot;mechanism&quot;,&quot;label&quot;:&quot;机制&quot;,&quot;headline&quot;:&quot;邻近起点 → 分叉未来&quot;,&quot;detail&quot;:&quot;同一确定性映射的两次运行，t=0 只差一根头发。足够多步后，状态看起来互不相干。&quot;,&quot;badge&quot;:&quot;数学&quot;}],&quot;statusMyth&quot;:&quot;神话把蝴蝶当成「点名某场风暴」的原因。&quot;,&quot;statusMechanism&quot;:&quot;机制是：固定规则下，邻近轨迹的指数分离。&quot;}"><noscript>请启用 JavaScript 以查看交互图解。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="metaphor-clarify" aria-labelledby="metaphor-clarify-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 01</p>
+    <h2 id="metaphor-clarify-title">蝴蝶是敏感性的隐喻——不是给昆虫打官司</h2>
+    <p class="copy-prose">Lorenz 的洞见来自数值天气预报：把初值多保留几位小数，后来的预报就变了。「蝴蝶」形象后来把这种敏感性说得人人皆知：在非线性动力学里，小原因可以很要紧。</p>
+<p class="copy-prose">这张图像并不授权你声称「某一次扇翅造成某一场龙卷风」。真实天气归因是条件之网；数学要点是不确定性如何增长。</p>
+    <aside class="plain-language"><strong>一句话</strong><p>把蝴蝶当「起点很脆」的提醒，别当法庭指认。</p></aside><div class="concept-points"><p class="concept-points-label">留意什么</p><ul><li class="concept-card"><strong>敏感 ≠ 单一原因</strong><p>许多微小因素纠缠；隐喻强调的是微小差别如何被放大。</p></li><li class="concept-card"><strong>确定性规则</strong><p>模型里没有随机数生成器，意外照样发生。</p></li><li class="concept-card"><strong>措辞陷阱</strong><p>随口说「造成」，会偷运数学从未承诺的归因。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="bf-metaphor" data-title="把隐喻和主张拆开" data-copy="{&quot;ariaLabel&quot;:&quot;区分蝴蝶隐喻与科学主张的交互卡片&quot;,&quot;caption&quot;:&quot;点选卡片，看这句话暗示了什么——以及没有暗示什么。&quot;,&quot;controlLabel&quot;:&quot;检查一个主张&quot;,&quot;cards&quot;:[{&quot;key&quot;:&quot;metaphor&quot;,&quot;label&quot;:&quot;隐喻&quot;,&quot;claim&quot;:&quot;微小差别可以极端要紧。&quot;,&quot;verdict&quot;:&quot;成立&quot;,&quot;detail&quot;:&quot;这是敏感依赖的核心：把微观初值缝隙放大。&quot;},{&quot;key&quot;:&quot;literal&quot;,&quot;label&quot;:&quot;字面因果&quot;,&quot;claim&quot;:&quot;那只蝴蝶造成了那场龙卷风。&quot;,&quot;verdict&quot;:&quot;过度宣称&quot;,&quot;detail&quot;:&quot;天气归因不是昆虫账本。扇翅是意象，不是法医编号。&quot;},{&quot;key&quot;:&quot;random&quot;,&quot;label&quot;:&quot;必须随机？&quot;,&quot;claim&quot;:&quot;混沌要求模型内部掷骰子。&quot;,&quot;verdict&quot;:&quot;否&quot;,&quot;detail&quot;:&quot;经典混沌映射是确定性的。随机噪声是另一回事（步骤 05）。&quot;}],&quot;verdictLabel&quot;:&quot;判定&quot;,&quot;statusTemplate&quot;:&quot;{label}：{verdict}。{detail}&quot;}"><noscript>请启用 JavaScript 以查看交互图解。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="twin-trajectories" aria-labelledby="twin-trajectories-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 02</p>
+    <h2 id="twin-trajectories-title">跑两个几乎相同的起点，看轨迹怎样分叉</h2>
+    <p class="copy-prose">取一个简单的确定性递推——混沌参数下的 Logistic 映射。让两条轨道只在初值第六位小数处不同。</p>
+<p class="copy-prose">早期迭代几乎粘在一起。随后它们分开，最终占据同一吸引子的不同区域。规则书相同；路径史不同。</p>
+    <aside class="plain-language"><strong>一句话</strong><p>同一台机器、几乎相同的起点：磁带最终读出不同故事。</p></aside><div class="concept-points"><p class="concept-points-label">留意什么</p><ul><li class="concept-card"><strong>更新规则相同</strong><p>步与步之间不注入随机。</p></li><li class="concept-card"><strong>微观 δx₀</strong><p>唯一差别是极小的初值偏移。</p></li><li class="concept-card"><strong>可见分叉</strong><p>足够多步后，双胞胎曲线不再互相跟踪。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="bf-twins" data-title="双胞胎 Logistic 轨道" data-copy="{&quot;ariaLabel&quot;:&quot;几乎相同初值下 Logistic 映射双胞胎轨迹的交互演示&quot;,&quot;caption&quot;:&quot;蓝与珊瑚轨迹共用同一更新规则；只有 x₀ 差一根头发。&quot;,&quot;controlLabel&quot;:&quot;扰动大小&quot;,&quot;runLabel&quot;:&quot;运行&quot;,&quot;perturbations&quot;:[{&quot;key&quot;:&quot;tiny&quot;,&quot;label&quot;:&quot;10⁻⁶&quot;,&quot;delta&quot;:1e-06,&quot;status&quot;:&quot;发丝级起点差：先粘合，再撕开。&quot;},{&quot;key&quot;:&quot;small&quot;,&quot;label&quot;:&quot;10⁻⁴&quot;,&quot;delta&quot;:0.0001,&quot;status&quot;:&quot;更大起点差：同一映射上分叉来得更早。&quot;},{&quot;key&quot;:&quot;mild&quot;,&quot;label&quot;:&quot;10⁻²&quot;,&quot;delta&quot;:0.01,&quot;status&quot;:&quot;中等差距：更少步数内分叉就很明显。&quot;}],&quot;seriesA&quot;:&quot;轨道 A&quot;,&quot;seriesB&quot;:&quot;轨道 B&quot;,&quot;xLabel&quot;:&quot;迭代 n&quot;,&quot;yLabel&quot;:&quot;xₙ&quot;,&quot;statusReady&quot;:&quot;选择扰动大小，然后运行双胞胎轨道。&quot;}"><noscript>请启用 JavaScript 以查看交互图解。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="exponential-error" aria-labelledby="exponential-error-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 03</p>
+    <h2 id="exponential-error-title">缝隙不是爬行——它在复利</h2>
+    <p class="copy-prose">敏感依赖可以定量。在一段时间里，双胞胎轨迹间距大致像 e^{λt} 增长，其中 λ 是正的 Lyapunov 指数。</p>
+<p class="copy-prose">在 |x_A − x_B| 的对数图上，早期近似直线上升就是复利的视觉签名。当差距到了量级 1，对数线性区饱和——轨道已经忘掉彼此精确起点。</p>
+    <aside class="plain-language"><strong>一句话</strong><p>误差在相乘，不是每步只多一点点。</p></aside><div class="concept-points"><p class="concept-points-label">留意什么</p><ul><li class="concept-card"><strong>对数坐标</strong><p>指数增长在 log |δ| 上看起来像直线爬升。</p></li><li class="concept-card"><strong>Lyapunov 直觉</strong><p>平均拉伸率为正，是这里混沌的指纹。</p></li><li class="concept-card"><strong>饱和</strong><p>在有界吸引子上，差距不能永远爆炸。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="bf-error" data-title="在对数尺度上看 |δ|" data-copy="{&quot;ariaLabel&quot;:&quot;双胞胎混沌轨道绝对差的对数尺度交互图&quot;,&quot;caption&quot;:&quot;log |x_A − x_B| 上的早期爬升，是分离在复利的视觉签名。&quot;,&quot;controlLabel&quot;:&quot;动画&quot;,&quot;playLabel&quot;:&quot;播放增长&quot;,&quot;seriesLabel&quot;:&quot;log₁₀ |δ|&quot;,&quot;xLabel&quot;:&quot;迭代 n&quot;,&quot;yLabel&quot;:&quot;log₁₀ |δ|&quot;,&quot;statusIdle&quot;:&quot;按下播放，看误差爬升然后趋平。&quot;,&quot;statusGrowing&quot;:&quot;复利阶段：差距仍在指数拉伸。&quot;,&quot;statusSaturated&quot;:&quot;已饱和：轨道量级上已不一致，起点细节丢失。&quot;}"><noscript>请启用 JavaScript 以查看交互图解。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="predictability-horizon" aria-labelledby="predictability-horizon-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 04</p>
+    <h2 id="predictability-horizon-title">有用的预报有视界——即便方程完美</h2>
+    <p class="copy-prose">如果你只以有限精度知道状态，指数误差增长会把这份无知变成硬时钟。越过可预测视界后，对细节状态的预报不再有用——即便模型正确。</p>
+<p class="copy-prose">提高测量精度能买时间，但大致只按对数换取：多一位有效数字，视界延长一截，而不是无限。</p>
+    <aside class="plain-language"><strong>一句话</strong><p>更好的仪器推迟雾起，并不取消雾。</p></aside><div class="concept-points"><p class="concept-points-label">留意什么</p><ul><li class="concept-card"><strong>有限精度</strong><p>任何真实观测都有最小可信数位。</p></li><li class="concept-card"><strong>视界时钟</strong><p>误差过阈值后，细节预报崩溃。</p></li><li class="concept-card"><strong>对数回报</strong><p>额外精度只买有限的额外提前量。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="bf-horizon" data-title="滑动精度，观察视界" data-copy="{&quot;ariaLabel&quot;:&quot;由测量精度驱动的可预测视界交互演示&quot;,&quot;caption&quot;:&quot;提高精度可把视界推后；每一位的收益有限。&quot;,&quot;controlLabel&quot;:&quot;可信小数位数&quot;,&quot;horizonLabel&quot;:&quot;视界（迭代）&quot;,&quot;errorLabel&quot;:&quot;误差阈值&quot;,&quot;digits&quot;:[{&quot;key&quot;:&quot;d3&quot;,&quot;label&quot;:&quot;3 位&quot;,&quot;digits&quot;:3,&quot;horizon&quot;:12,&quot;status&quot;:&quot;粗起点：细节预报很早失效。&quot;},{&quot;key&quot;:&quot;d5&quot;,&quot;label&quot;:&quot;5 位&quot;,&quot;digits&quot;:5,&quot;horizon&quot;:22,&quot;status&quot;:&quot;多两位买到更长——仍有限——的窗口。&quot;},{&quot;key&quot;:&quot;d7&quot;,&quot;label&quot;:&quot;7 位&quot;,&quot;digits&quot;:7,&quot;horizon&quot;:32,&quot;status&quot;:&quot;再尖的起点，拉伸复利后仍撞墙。&quot;}],&quot;beforeLabel&quot;:&quot;仍有用&quot;,&quot;afterLabel&quot;:&quot;已过视界&quot;}"><noscript>请启用 JavaScript 以查看交互图解。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="chaos-vs-noise" aria-labelledby="chaos-vs-noise-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 05</p>
+    <h2 id="chaos-vs-noise-title">混沌不等于随机噪声</h2>
+    <p class="copy-prose">随机噪声每一步注入新的随机性。混沌可以看起来不规则，却仍是吸引子上的确定性轨道——在无限精度下重复同一起点，会得到同一路径。</p>
+<p class="copy-prose">实践中二者常被混淆，因为它们都挫败预报。区分它们很重要：集合预报、模式误差与噪声假设，是针对不同不确定性来源的工具。</p>
+    <aside class="plain-language"><strong>一句话</strong><p>看起来狂野，不等于「规则内部在掷骰子」。</p></aside><div class="concept-points"><p class="concept-points-label">留意什么</p><ul><li class="concept-card"><strong>重放检验</strong><p>完全相同起点 → 混沌路径相同；若噪声重采样，噪声路径仍会分叉。</p></li><li class="concept-card"><strong>结构</strong><p>混沌吸引子仍约束状态落在哪里。</p></li><li class="concept-card"><strong>不同对策</strong><p>敏感性靠精度；噪声可能需要平均或更好的随机模型。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="bf-noise" data-title="对比混沌轨迹与噪声轨迹" data-copy="{&quot;ariaLabel&quot;:&quot;确定性混沌轨道与随机噪声路径的交互对比&quot;,&quot;caption&quot;:&quot;切换模式：纯混沌对固定起点重放一致；噪声会持续抖动。&quot;,&quot;controlLabel&quot;:&quot;模式&quot;,&quot;modes&quot;:[{&quot;key&quot;:&quot;chaos&quot;,&quot;label&quot;:&quot;确定性混沌&quot;,&quot;status&quot;:&quot;固定规则、固定起点：重放画出同一条不规则路径。&quot;,&quot;replayNote&quot;:&quot;重放一致。&quot;},{&quot;key&quot;:&quot;noise&quot;,&quot;label&quot;:&quot;随机噪声&quot;,&quot;status&quot;:&quot;每步新冲击：即便起点匹配，重放也会走样。&quot;,&quot;replayNote&quot;:&quot;重放不同。&quot;},{&quot;key&quot;:&quot;both&quot;,&quot;label&quot;:&quot;并排&quot;,&quot;status&quot;:&quot;同一画窗：混沌是受约束的不规则；噪声是持续注入。&quot;,&quot;replayNote&quot;:&quot;两种不确定性故事。&quot;}],&quot;seriesChaos&quot;:&quot;混沌&quot;,&quot;seriesNoise&quot;:&quot;噪声&quot;,&quot;replayLabel&quot;:&quot;重放&quot;}"><noscript>请启用 JavaScript 以查看交互图解。</noscript></interactive-figure>
+</section>
+<section class="closing" aria-labelledby="closing-title">
+  <div class="copy-block closing-copy">
+    <p class="section-label">把系统重新组装</p>
+    <h2 id="closing-title">确定性规则，仍可能拒绝你一份长久的细预报</h2>
+    <p class="copy-prose">蝴蝶效应最好读作对敏感依赖的警告：对起点的微观无知，可以在之后爆炸成宏观分歧。这与方程被完全写死并不矛盾。</p>
+<p class="copy-prose">保留隐喻，丢掉民俗官司。改问：双胞胎轨迹分离有多快，我的精度买到多远视界？</p>
+    <div class="closing-grid">
+      <div class="starter-checklist">
+        <h3>读者清单</h3>
+        <ol><li>把隐喻与字面单因主张分开。</li><li>说出一个双胞胎轨迹实验（同规则、微小 δx₀）。</li><li>寻找 |δ| 的复利增长，而不只看最终一团糟。</li><li>在有限精度下陈述一个可预测视界。</li><li>说明不规则来自混沌、噪声，还是两者。</li></ol>
+      </div>
+      <div class="boundary-map">
+        <h3>这个想法的四步</h3>
+        <ul><li class="scale-card"><strong>隐喻</strong><span>主张什么？</span><p>敏感性意象——不是昆虫法医归责。</p></li><li class="scale-card"><strong>双胞胎</strong><span>什么在分叉？</span><p>同一确定性映射下的两条轨道。</p></li><li class="scale-card"><strong>增长</strong><span>有多快？</span><p>大致指数拉伸直到饱和。</p></li><li class="scale-card"><strong>视界</strong><span>有用多久？</span><p>有限精度设定预报时钟。</p></li></ul>
+      </div>
+    </div>
+    <blockquote>混沌不是「怎样都行」。它是「映射固定，但你的有用提前量不固定」。</blockquote>
+    <p class="source-note">教材注：演示用 r=4 的 Logistic 映射作最小混沌生成器。真实大气模式维度高得多；定性课——敏感依赖与有限可预测视界——仍能组织流行的蝴蝶意象。</p>
+  </div>
+</section>
+    </article>
+  </main>
+  <script>
+    window.__VISUAL_I18N__ = {"pauseAll":"暂停所有动画","resumeAll":"恢复所有动画","pause":"暂停","resume":"继续","reset":"重置","waiting":"图解进入视口后才会加载。","loading":"正在准备图解…","error":"图解无法显示，请先阅读上方文字说明。","figureFallback":"请启用 JavaScript 以查看交互图解。","skipToContent":"跳到正文","languageNavigation":"语言","overviewLabel":"蝴蝶效应总览","stepLabel":"步骤"};
+  </script>
+  <script data-prototype-bundle="runtime">
+(() => {
+  "use strict";
+
+  const ui = Object.freeze(window.__VISUAL_I18N__);
+  const registry = new Map();
+  const figures = new Set();
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const tokens = Object.freeze({
+    ink: "var(--visual-ink, #17333c)",
+    muted: "var(--visual-muted, #60747a)",
+    line: "var(--visual-line, #d8ddd7)",
+    ocean: "var(--visual-ocean, #0f7185)",
+    warm: "var(--visual-warm, #ee9d46)",
+    coral: "var(--visual-coral, #d45f50)",
+    paper: "var(--visual-paper, #f4f1e8)",
+    surface: "var(--visual-surface, #fffdf8)"
+  });
+  let globalPaused = false;
+
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+  const call = (instance, method, value) => {
+    if (instance && typeof instance[method] === "function") instance[method](value);
+  };
+
+  class InteractiveFigure extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
+      this._instance = null;
+      this._mounted = false;
+      this._mounting = false;
+      this._visible = false;
+      this._localPaused = false;
+    }
+
+    connectedCallback() {
+      if (this._connected) return;
+      this._connected = true;
+      figures.add(this);
+      this._shadow.innerHTML = `
+        <style>
+          :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+          .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
+          .mount { min-height: inherit; }
+          .runtime-status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; pointer-events: none; }
+          .runtime-status[data-live-only] { position: absolute; inset: auto; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; background: transparent; pointer-events: none; }
+          .runtime-status[hidden] { display: none; }
+          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
+          .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+          button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+          button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+          @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
+        </style>
+        <div class="frame">
+          <div class="stage"><div class="mount"></div><div class="runtime-status" data-runtime-status role="status"></div></div>
+          <div class="controls">
+            <span class="title"></span>
+            <button type="button" data-action="pause" aria-pressed="false"></button>
+            <button type="button" data-action="reset"></button>
+          </div>
+        </div>`;
+
+      this._stage = this._shadow.querySelector(".stage");
+      this._mountRoot = this._shadow.querySelector(".mount");
+      this._status = this._shadow.querySelector("[data-runtime-status]");
+      this._title = this._shadow.querySelector(".title");
+      this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
+      this._resetButton = this._shadow.querySelector('[data-action="reset"]');
+      this._copy = JSON.parse(this.dataset.copy || "{}");
+      this._title.textContent = this.dataset.title || "";
+      this._pauseButton.textContent = ui.pause;
+      this._resetButton.textContent = ui.reset;
+      this._setStatus(ui.waiting);
+
+      this._pauseButton.addEventListener("click", () => {
+        this._localPaused = !this._localPaused;
+        this._syncPlayback();
+      });
+      this._resetButton.addEventListener("click", () => {
+        call(this._instance, "reset");
+        this.dispatchEvent(new CustomEvent("demo-reset", { bubbles: true }));
+      });
+
+      this._observer = new IntersectionObserver((entries) => {
+        this._visible = entries[0]?.isIntersecting ?? false;
+        if (this._visible) this._mount();
+        this._syncPlayback();
+      }, { rootMargin: "180px 0px", threshold: .05 });
+      this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      figures.delete(this);
+      this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
+      call(this._instance, "destroy");
+    }
+
+    async _mount() {
+      if (this._mounted || this._mounting) return;
+      const factory = registry.get(this.dataset.demo);
+      if (!factory) return;
+      this._mounting = true;
+      this._setStatus(ui.loading);
+      try {
+        this._instance = await factory({
+          root: this._mountRoot,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
+          copy: this._copy,
+          motion: !reducedMotion.matches,
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._announce(message)
+        }) || {};
+        this._mounted = true;
+        this.dataset.state = "mounted";
+        this._liveRevision = (this._liveRevision || 0) + 1;
+        this._status.removeAttribute("data-live-only");
+        this._status.textContent = "";
+        this._status.hidden = true;
+        this._resize();
+        this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
+      } catch {
+        this.dataset.state = "error";
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
+      }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
+    }
+
+    _syncPlayback() {
+      const paused = globalPaused || this._localPaused || !this._visible || reducedMotion.matches;
+      this.dataset.playback = paused ? "paused" : "playing";
+      this._pauseButton?.setAttribute("aria-pressed", String(this._localPaused));
+      if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
+      call(this._instance, paused ? "pause" : "resume");
+    }
+
+    _setStatus(message) {
+      this._liveRevision = (this._liveRevision || 0) + 1;
+      this._status.removeAttribute("data-live-only");
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
+
+    _announce(message) {
+      const revision = (this._liveRevision || 0) + 1;
+      this._liveRevision = revision;
+      this._status.hidden = false;
+      this._status.setAttribute("data-live-only", "");
+      this._status.textContent = "";
+      queueMicrotask(() => {
+        if (this._liveRevision !== revision || !this._status.isConnected) return;
+        this._status.textContent = message;
+      });
+    }
+  }
+
+  window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
+    if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
+    registry.set(id, factory);
+    figures.forEach((figure) => {
+      if (figure.dataset.demo === id && figure._visible) figure._mount();
+    });
+  };
+
+  customElements.define("interactive-figure", InteractiveFigure);
+
+  const globalToggle = document.querySelector("[data-global-motion]");
+  const syncGlobalToggle = () => {
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
+    figures.forEach((figure) => figure._syncPlayback());
+  };
+  globalToggle?.addEventListener("click", () => {
+    globalPaused = !globalPaused;
+    syncGlobalToggle();
+  });
+  reducedMotion.addEventListener("change", syncGlobalToggle);
+  syncGlobalToggle();
+})();
+  </script>
+  <script data-prototype-bundle="demos">
+const escapeHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+registerDemo("bf-overview", ({ root, copy, motion, tokens, announce }) => {
+  const buttons = copy.modes.map((mode, index) => `
+    <button type="button" class="bf-ov-btn" data-bf-ov="${index}" aria-pressed="${index === 0}">${escapeHtml(mode.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .bf-ov { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(145deg,color-mix(in srgb,${tokens.ocean} 8%,${tokens.surface}),${tokens.surface} 55%,color-mix(in srgb,${tokens.warm} 10%,${tokens.surface})); }
+      .bf-ov-panel { display:grid; gap:.75rem; padding:1.1rem 1.2rem; border:1px solid ${tokens.line}; border-radius:1.1rem;
+        background:color-mix(in srgb,${tokens.paper} 55%,${tokens.surface}); min-height:11rem; }
+      .bf-ov-badge { display:inline-flex; width:max-content; padding:.25rem .55rem; border-radius:999px; font-size:.68rem; font-weight:850;
+        letter-spacing:.04em; text-transform:uppercase; color:${tokens.surface}; background:${tokens.ocean}; }
+      .bf-ov-panel[data-mode="myth"] .bf-ov-badge { background:${tokens.warm}; color:${tokens.ink}; }
+      .bf-ov-headline { margin:0; font-size:1.15rem; font-weight:850; line-height:1.35; }
+      .bf-ov-detail { margin:0; color:${tokens.muted}; line-height:1.55; }
+      .bf-ov-viz { position:relative; height:4.5rem; border-radius:.85rem; border:1px dashed ${tokens.line}; overflow:hidden;
+        background:color-mix(in srgb,${tokens.surface} 80%,${tokens.paper}); }
+      .bf-ov-dot { position:absolute; top:50%; width:.85rem; height:.85rem; border-radius:50%; transform:translate(-50%,-50%);
+        transition:left 700ms ease, background 300ms ease; }
+      .bf-ov-dot-a { left:18%; background:${tokens.ocean}; box-shadow:0 0 0 .3rem color-mix(in srgb,${tokens.ocean} 25%,transparent); }
+      .bf-ov-dot-b { left:22%; background:${tokens.coral}; box-shadow:0 0 0 .3rem color-mix(in srgb,${tokens.coral} 25%,transparent); }
+      .bf-ov-panel[data-mode="mechanism"] .bf-ov-dot-a { left:28%; }
+      .bf-ov-panel[data-mode="mechanism"] .bf-ov-dot-b { left:78%; }
+      .bf-ov-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .bf-ov-btn { flex:1 1 8rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink};
+        background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .bf-ov-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .bf-ov-btn:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .bf-ov-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .bf-ov-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .bf-ov.is-paused .bf-ov-dot { transition:none; }
+    </style>
+    <div class="bf-ov${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="bf-ov-panel" data-bf-panel data-mode="myth">
+        <span class="bf-ov-badge" data-bf-badge></span>
+        <h3 class="bf-ov-headline" data-bf-headline></h3>
+        <p class="bf-ov-detail" data-bf-detail></p>
+        <div class="bf-ov-viz" aria-hidden="true">
+          <span class="bf-ov-dot bf-ov-dot-a"></span>
+          <span class="bf-ov-dot bf-ov-dot-b"></span>
+        </div>
+      </div>
+      <div class="bf-ov-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${buttons}</div>
+      <p class="bf-ov-status" data-bf-status role="status"></p>
+      <p class="bf-ov-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".bf-ov");
+  const panel = root.querySelector("[data-bf-panel]");
+  const badge = root.querySelector("[data-bf-badge]");
+  const headline = root.querySelector("[data-bf-headline]");
+  const detail = root.querySelector("[data-bf-detail]");
+  const status = root.querySelector("[data-bf-status]");
+  const btns = [...root.querySelectorAll("[data-bf-ov]")];
+
+  const select = (index, speak = false) => {
+    const mode = copy.modes[index];
+    panel.dataset.mode = mode.key;
+    badge.textContent = mode.badge;
+    headline.textContent = mode.headline;
+    detail.textContent = mode.detail;
+    status.textContent = mode.key === "myth" ? copy.statusMyth : copy.statusMechanism;
+    btns.forEach((b, i) => b.setAttribute("aria-pressed", String(i === index)));
+    if (speak) announce(status.textContent);
+  };
+
+  btns.forEach((b) => b.addEventListener("click", () => select(Number(b.dataset.bfOv), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("bf-metaphor", ({ root, copy, tokens, announce }) => {
+  const cards = copy.cards.map((card, index) => `
+    <button type="button" class="bf-met-card" data-bf-met="${index}" aria-pressed="${index === 0}">
+      <span class="bf-met-label">${escapeHtml(card.label)}</span>
+      <span class="bf-met-claim">${escapeHtml(card.claim)}</span>
+    </button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .bf-met { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; }
+      .bf-met-grid { display:grid; gap:.7rem; grid-template-columns:repeat(auto-fit,minmax(10rem,1fr)); }
+      .bf-met-card { display:grid; gap:.45rem; text-align:left; padding:.95rem; border:1px solid ${tokens.line}; border-radius:.95rem;
+        background:${tokens.surface}; color:${tokens.ink}; font:inherit; cursor:pointer; min-height:7rem; }
+      .bf-met-card[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; background:color-mix(in srgb,${tokens.ocean} 8%,${tokens.surface}); }
+      .bf-met-card:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .bf-met-label { font-size:.72rem; font-weight:850; letter-spacing:.05em; text-transform:uppercase; color:${tokens.ocean}; }
+      .bf-met-claim { font-weight:700; line-height:1.4; }
+      .bf-met-readout { display:grid; gap:.55rem; padding:1rem 1.1rem; border:1px solid ${tokens.line}; border-radius:1rem;
+        background:color-mix(in srgb,${tokens.paper} 45%,${tokens.surface}); }
+      .bf-met-verdict { display:inline-flex; width:max-content; padding:.3rem .65rem; border-radius:999px; font-size:.75rem; font-weight:850;
+        background:color-mix(in srgb,${tokens.ocean} 18%,${tokens.surface}); color:${tokens.ocean}; }
+      .bf-met-verdict.is-over { background:color-mix(in srgb,${tokens.coral} 18%,${tokens.surface}); color:${tokens.coral}; }
+      .bf-met-verdict.is-false { background:color-mix(in srgb,${tokens.warm} 22%,${tokens.surface}); color:${tokens.ink}; }
+      .bf-met-detail { margin:0; color:${tokens.muted}; line-height:1.55; }
+      .bf-met-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+    </style>
+    <div class="bf-met" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="bf-met-grid" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${cards}</div>
+      <div class="bf-met-readout">
+        <span class="bf-met-verdict" data-bf-verdict></span>
+        <p class="bf-met-detail" data-bf-detail role="status"></p>
+      </div>
+      <p class="bf-met-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const verdictEl = root.querySelector("[data-bf-verdict]");
+  const detailEl = root.querySelector("[data-bf-detail]");
+  const btns = [...root.querySelectorAll("[data-bf-met]")];
+
+  const select = (index, speak = false) => {
+    const card = copy.cards[index];
+    verdictEl.textContent = `${copy.verdictLabel}: ${card.verdict}`;
+    verdictEl.classList.toggle("is-over", /over|過度|言い過ぎ/i.test(card.verdict));
+    verdictEl.classList.toggle("is-false", /false|否|誤り/i.test(card.verdict));
+    const status = copy.statusTemplate
+      .replace("{label}", card.label)
+      .replace("{verdict}", card.verdict)
+      .replace("{detail}", card.detail);
+    detailEl.textContent = status;
+    btns.forEach((b, i) => b.setAttribute("aria-pressed", String(i === index)));
+    if (speak) announce(status);
+  };
+
+  btns.forEach((b) => b.addEventListener("click", () => select(Number(b.dataset.bfMet), true)));
+  select(0);
+  return {
+    pause: () => {},
+    resume: () => {},
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("bf-twins", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  const maxIter = 50;
+  const r = 4.0;
+
+  let currentWidth = 300;
+  let currentHeight = 200;
+  let currentDpr = 1;
+
+  let trajA = [];
+  let trajB = [];
+  let progress = 0;
+  let isAnimating = false;
+  let animId = null;
+  let selectedIndex = 0;
+
+  // Setup DOM
+  root.innerHTML = `
+    <style>
+      .bf-twins-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-family: system-ui, sans-serif;
+        color: ${tokens.ink};
+        width: 100%;
+      }
+      .bf-twins-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: 0.875rem;
+        justify-content: center;
+      }
+      .bf-twins-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+      }
+      .bf-twins-legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+      .bf-twins-canvas-wrap {
+        position: relative;
+        width: 100%;
+        min-height: 280px;
+        background: ${tokens.surface};
+        border: 1px solid ${tokens.line};
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .bf-twins-canvas-wrap canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .bf-twins-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+      }
+      .bf-twins-fieldset {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        border: 1px solid ${tokens.line};
+        padding: 0.5rem 0.75rem;
+        border-radius: 4px;
+        margin: 0;
+      }
+      .bf-twins-fieldset legend {
+        font-size: 0.75rem;
+        color: ${tokens.muted};
+        padding: 0 0.25rem;
+      }
+      .bf-twins-fieldset label {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.875rem;
+        cursor: pointer;
+      }
+      .bf-twins-btn {
+        padding: 0.5rem 1.25rem;
+        background: ${tokens.ocean};
+        color: ${tokens.paper};
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.875rem;
+        transition: opacity 0.2s;
+      }
+      .bf-twins-btn:hover {
+        opacity: 0.9;
+      }
+      .bf-twins-btn:focus-visible {
+        outline: 2px solid ${tokens.ink};
+        outline-offset: 2px;
+      }
+      .bf-twins-status {
+        font-size: 0.875rem;
+        color: ${tokens.muted};
+        min-height: 1.25rem;
+      }
+      .bf-twins-caption {
+        font-size: 0.875rem;
+        border-left: 3px solid ${tokens.line};
+        padding-left: 0.75rem;
+        color: ${tokens.ink};
+        line-height: 1.4;
+      }
+    </style>
+    <div class="bf-twins-container">
+      <div class="bf-twins-legend" aria-hidden="true">
+        <div class="bf-twins-legend-item">
+          <div class="bf-twins-legend-color" style="background: ${tokens.ocean}"></div>
+          <span>${copy.seriesA}</span>
+        </div>
+        <div class="bf-twins-legend-item">
+          <div class="bf-twins-legend-color" style="background: ${tokens.coral}"></div>
+          <span>${copy.seriesB}</span>
+        </div>
+      </div>
+
+      <div class="bf-twins-canvas-wrap">
+        <canvas role="img" aria-label="${copy.ariaLabel}"></canvas>
+      </div>
+
+      <div class="bf-twins-controls">
+        <fieldset class="bf-twins-fieldset">
+          <legend>${copy.controlLabel}</legend>
+          ${copy.perturbations.map((p, i) => `
+            <label>
+              <input type="radio" name="bf-twins-delta" value="${i}" ${i === 0 ? 'checked' : ''}>
+              ${p.label}
+            </label>
+          `).join('')}
+        </fieldset>
+        <button class="bf-twins-btn" type="button">${copy.runLabel}</button>
+      </div>
+
+      <div class="bf-twins-status" aria-live="polite">${copy.statusReady}</div>
+      <div class="bf-twins-caption">${copy.caption}</div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const runBtn = root.querySelector('.bf-twins-btn');
+  const statusEl = root.querySelector('.bf-twins-status');
+  const radios = root.querySelectorAll('input[name="bf-twins-delta"]');
+
+  function generateTrajectories(delta) {
+    trajA = [0.2];
+    trajB = [0.2 + delta];
+    for (let i = 0; i < maxIter; i++) {
+      trajA.push(r * trajA[i] * (1 - trajA[i]));
+      trajB.push(r * trajB[i] * (1 - trajB[i]));
+    }
+  }
+
+  function draw() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, currentWidth * currentDpr, currentHeight * currentDpr);
+
+    ctx.save();
+    ctx.scale(currentDpr, currentDpr);
+
+    const padLeft = 48;
+    const padBottom = 32;
+    const padTop = 16;
+    const padRight = 16;
+
+    const plotW = currentWidth - padLeft - padRight;
+    const plotH = currentHeight - padTop - padBottom;
+
+    // Draw axes
+    ctx.beginPath();
+    ctx.strokeStyle = resolveColor(tokens.line);
+    ctx.lineWidth = 1;
+    ctx.moveTo(padLeft, padTop);
+    ctx.lineTo(padLeft, padTop + plotH);
+    ctx.lineTo(padLeft + plotW, padTop + plotH);
+    ctx.stroke();
+
+    // Draw labels
+    ctx.fillStyle = resolveColor(tokens.muted);
+    ctx.font = '12px system-ui, sans-serif';
+
+    // X label
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText(copy.xLabel, padLeft + plotW / 2, padTop + plotH + 8);
+
+    // Y label
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(copy.yLabel, padLeft - 8, padTop + plotH / 2);
+
+    // Helpers
+    const getX = (i) => padLeft + (i / maxIter) * plotW;
+    const getY = (val) => padTop + plotH - val * plotH;
+
+    function drawPath(traj, colorStr) {
+      if (traj.length === 0 || progress <= 0) return;
+      ctx.beginPath();
+      ctx.strokeStyle = resolveColor(colorStr);
+      ctx.lineWidth = 2.5;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+
+      ctx.moveTo(getX(0), getY(traj[0]));
+
+      const maxIdx = Math.floor(progress);
+      for (let i = 1; i <= maxIdx && i <= maxIter; i++) {
+        ctx.lineTo(getX(i), getY(traj[i]));
+      }
+
+      if (maxIdx < maxIter && maxIdx < progress) {
+        const frac = progress - maxIdx;
+        const nx = getX(maxIdx) + (getX(maxIdx + 1) - getX(maxIdx)) * frac;
+        const ny = getY(traj[maxIdx]) + (getY(traj[maxIdx + 1]) - getY(traj[maxIdx])) * frac;
+        ctx.lineTo(nx, ny);
+      }
+      ctx.stroke();
+    }
+
+    // Draw A then B
+    drawPath(trajA, tokens.ocean);
+    drawPath(trajB, tokens.coral);
+
+    ctx.restore();
+  }
+
+  function loop() {
+    if (!isAnimating) return;
+
+    progress += (motion ? 0.4 : maxIter);
+    if (progress >= maxIter) {
+      progress = maxIter;
+      isAnimating = false;
+    }
+
+    draw();
+
+    if (isAnimating) {
+      animId = requestAnimationFrame(loop);
+    }
+  }
+
+  function startSimulation() {
+    const selectedRadio = root.querySelector('input[name="bf-twins-delta"]:checked');
+    selectedIndex = parseInt(selectedRadio.value, 10);
+    const perturbation = copy.perturbations[selectedIndex];
+
+    generateTrajectories(perturbation.delta);
+    progress = 0;
+    isAnimating = true;
+
+    statusEl.textContent = perturbation.status;
+    announce(perturbation.status);
+
+    if (animId) cancelAnimationFrame(animId);
+    loop();
+  }
+
+  runBtn.addEventListener('click', startSimulation, { signal });
+
+  // Reset progress visually when user changes selection before running
+  radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      progress = 0;
+      trajA = [];
+      trajB = [];
+      isAnimating = false;
+      if (animId) cancelAnimationFrame(animId);
+      statusEl.textContent = copy.statusReady;
+      draw();
+    }, { signal });
+  });
+
+  return {
+    pause() {
+      isAnimating = false;
+      if (animId) cancelAnimationFrame(animId);
+      draw();
+    },
+    resume() {
+      if (progress > 0 && progress < maxIter) {
+        isAnimating = true;
+        loop();
+      }
+    },
+    reset() {
+      isAnimating = false;
+      if (animId) cancelAnimationFrame(animId);
+      progress = 0;
+      trajA = [];
+      trajB = [];
+      radios[0].checked = true;
+      statusEl.textContent = copy.statusReady;
+      draw();
+    },
+    destroy() {
+      isAnimating = false;
+      if (animId) cancelAnimationFrame(animId);
+      root.innerHTML = '';
+    },
+    resize({ width, height, dpr }) {
+      currentWidth = width;
+      // Use the container's height constraint, fallback to param height if necessary
+      const wrap = root.querySelector('.bf-twins-canvas-wrap');
+      if (wrap) {
+        currentHeight = wrap.clientHeight || height;
+      } else {
+        currentHeight = height;
+      }
+      currentDpr = dpr;
+
+      canvas.width = currentWidth * currentDpr;
+      canvas.height = currentHeight * currentDpr;
+
+      draw();
+    }
+  };
+});
+
+registerDemo("bf-error", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  const MAX_ITER = 60;
+  const data = [];
+  let x = 0.3;
+  let y = 0.3 + 1e-12;
+
+  for (let i = 0; i <= MAX_ITER; i++) {
+    const diff = Math.abs(x - y);
+    const logDiff = diff > 0 ? Math.log10(diff) : -12;
+    data.push({ n: i, logDiff });
+    x = 4 * x * (1 - x);
+    y = 4 * y * (1 - y);
+  }
+
+  const isStatic = motion === false;
+  let currentIter = isStatic ? MAX_ITER : 0;
+  let isPlaying = false;
+  let phase = isStatic ? 'saturated' : 'idle';
+  let animId = null;
+  let lastTime = 0;
+  let canvasWidth = 0;
+  let canvasHeight = 0;
+  let canvasDpr = 1;
+
+  root.innerHTML = `
+    <style>
+      .bf-error-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-height: 420px;
+        font-family: system-ui, sans-serif;
+        box-sizing: border-box;
+      }
+      .bf-error-status {
+        padding: 0.75rem 1rem;
+        color: var(--ink);
+        font-size: 0.95rem;
+        min-height: 3.5em;
+        display: flex;
+        align-items: center;
+        background: var(--surface);
+        border-radius: 4px;
+        margin-bottom: 0.5rem;
+      }
+      .bf-error-canvas-box {
+        position: relative;
+        flex-grow: 1;
+        width: 100%;
+        min-height: 300px;
+      }
+      .bf-error-canvas-box canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .bf-error-caption {
+        padding: 0.75rem;
+        color: var(--muted);
+        font-size: 0.85rem;
+        text-align: center;
+        line-height: 1.4;
+      }
+    </style>
+    <div class="bf-error-container">
+      <div class="bf-error-status" aria-live="polite">${isStatic ? copy.statusSaturated : copy.statusIdle}</div>
+      <div class="bf-error-canvas-box">
+        <canvas role="img" aria-label="${copy.ariaLabel}"></canvas>
+      </div>
+      <div class="bf-error-caption">${copy.caption}</div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('canvas');
+  const statusDiv = root.querySelector('.bf-error-status');
+
+  function updatePhase() {
+    let newPhase = 'idle';
+    if (currentIter === 0) {
+      newPhase = 'idle';
+    } else if (currentIter < 38) {
+      newPhase = 'growing';
+    } else {
+      newPhase = 'saturated';
+    }
+
+    if (newPhase !== phase) {
+      phase = newPhase;
+      let text = '';
+      if (phase === 'idle') text = copy.statusIdle;
+      else if (phase === 'growing') text = copy.statusGrowing;
+      else if (phase === 'saturated') text = copy.statusSaturated;
+
+      statusDiv.textContent = text;
+      if (isPlaying) {
+        announce(text);
+      }
+    }
+  }
+
+  function draw() {
+    if (!canvasWidth || !canvasHeight) return;
+
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvasWidth * canvasDpr, canvasHeight * canvasDpr);
+
+    const padLeft = 55 * canvasDpr;
+    const padBottom = 45 * canvasDpr;
+    const padTop = 35 * canvasDpr;
+    const padRight = 20 * canvasDpr;
+
+    const plotW = canvasWidth * canvasDpr - padLeft - padRight;
+    const plotH = canvasHeight * canvasDpr - padTop - padBottom;
+
+    const mapX = (n) => padLeft + (n / MAX_ITER) * plotW;
+    const mapY = (val) => padTop + plotH - ((val + 12) / 12) * plotH;
+
+    const colorLine = resolveColor(tokens.line);
+    const colorMuted = resolveColor(tokens.muted);
+    const colorOcean = resolveColor(tokens.ocean);
+    const colorInk = resolveColor(tokens.ink);
+
+    ctx.lineWidth = 1 * canvasDpr;
+    ctx.strokeStyle = colorLine;
+    ctx.beginPath();
+    ctx.moveTo(padLeft, padTop + plotH);
+    ctx.lineTo(padLeft + plotW, padTop + plotH);
+    ctx.moveTo(padLeft, padTop);
+    ctx.lineTo(padLeft, padTop + plotH);
+    ctx.stroke();
+
+    ctx.fillStyle = colorMuted;
+    ctx.font = `${12 * canvasDpr}px system-ui, sans-serif`;
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+
+    for (let v = -12; v <= 0; v += 3) {
+      const y = mapY(v);
+      ctx.beginPath();
+      ctx.moveTo(padLeft - 5 * canvasDpr, y);
+      ctx.lineTo(padLeft + plotW, y);
+      ctx.strokeStyle = colorLine;
+      ctx.stroke();
+      ctx.fillText(v.toString(), padLeft - 10 * canvasDpr, y);
+    }
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    for (let n = 0; n <= MAX_ITER; n += 15) {
+      const x = mapX(n);
+      ctx.beginPath();
+      ctx.moveTo(x, padTop + plotH);
+      ctx.lineTo(x, padTop + plotH + 5 * canvasDpr);
+      ctx.strokeStyle = colorLine;
+      ctx.stroke();
+      ctx.fillText(n.toString(), x, padTop + plotH + 10 * canvasDpr);
+    }
+
+    ctx.fillStyle = colorInk;
+    ctx.textAlign = 'center';
+    ctx.fillText(copy.xLabel, padLeft + plotW / 2, padTop + plotH + 28 * canvasDpr);
+
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText(copy.yLabel, padLeft, padTop - 12 * canvasDpr);
+
+    if (currentIter > 0) {
+      ctx.beginPath();
+      ctx.strokeStyle = colorOcean;
+      ctx.lineWidth = 2 * canvasDpr;
+      ctx.moveTo(mapX(data[0].n), mapY(data[0].logDiff));
+
+      const maxIdx = Math.floor(currentIter);
+      for (let i = 1; i <= maxIdx; i++) {
+        ctx.lineTo(mapX(data[i].n), mapY(data[i].logDiff));
+      }
+
+      if (maxIdx < MAX_ITER && currentIter > maxIdx) {
+        const frac = currentIter - maxIdx;
+        const p1 = data[maxIdx];
+        const p2 = data[maxIdx + 1];
+        const interpX = p1.n + frac * (p2.n - p1.n);
+        const interpY = p1.logDiff + frac * (p2.logDiff - p1.logDiff);
+        ctx.lineTo(mapX(interpX), mapY(interpY));
+      }
+      ctx.stroke();
+    }
+
+    if (currentIter >= 0) {
+      const idx = Math.floor(currentIter);
+      let cx, cy;
+      if (idx < MAX_ITER && currentIter > idx) {
+        const frac = currentIter - idx;
+        cx = mapX(data[idx].n + frac * (data[idx+1].n - data[idx].n));
+        cy = mapY(data[idx].logDiff + frac * (data[idx+1].logDiff - data[idx].logDiff));
+      } else {
+        cx = mapX(data[idx].n);
+        cy = mapY(data[idx].logDiff);
+      }
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, 4 * canvasDpr, 0, Math.PI * 2);
+      ctx.fillStyle = colorOcean;
+      ctx.fill();
+    }
+  }
+
+  function tick(now) {
+    if (!isPlaying) return;
+    const dt = lastTime ? (now - lastTime) : 16;
+    lastTime = now;
+
+    if (currentIter < MAX_ITER) {
+      currentIter += dt * 0.015;
+      if (currentIter > MAX_ITER) currentIter = MAX_ITER;
+      updatePhase();
+      draw();
+    } else {
+      isPlaying = false;
+    }
+
+    if (isPlaying) {
+      animId = requestAnimationFrame(tick);
+    }
+  }
+
+  return {
+    pause() {
+      isPlaying = false;
+      if (animId) cancelAnimationFrame(animId);
+      lastTime = 0;
+      draw();
+    },
+    resume() {
+      if (currentIter >= MAX_ITER) {
+        currentIter = 0;
+        updatePhase();
+      }
+      isPlaying = true;
+      lastTime = performance.now();
+      animId = requestAnimationFrame(tick);
+    },
+    reset() {
+      isPlaying = false;
+      if (animId) cancelAnimationFrame(animId);
+      currentIter = 0;
+      lastTime = 0;
+      updatePhase();
+      draw();
+    },
+    destroy() {
+      isPlaying = false;
+      if (animId) cancelAnimationFrame(animId);
+      root.innerHTML = '';
+    },
+    resize({ width, height, dpr }) {
+      canvasWidth = width;
+      canvasHeight = height;
+      canvasDpr = dpr;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      draw();
+    }
+  };
+});
+
+registerDemo("bf-horizon", ({ root, copy, tokens, announce }) => {
+  const digitButtons = copy.digits.map((d, index) => `
+    <button type="button" class="bf-hz-btn" data-bf-hz="${index}" aria-pressed="${index === 0}">${escapeHtml(d.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .bf-hz { display:grid; gap:1rem; min-height:24rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; }
+      .bf-hz-track { position:relative; height:4.2rem; border-radius:999px; border:1px solid ${tokens.line}; overflow:hidden;
+        background:linear-gradient(90deg, color-mix(in srgb,${tokens.ocean} 28%,${tokens.surface}) 0%, color-mix(in srgb,${tokens.ocean} 28%,${tokens.surface}) var(--bf-hz, 30%), color-mix(in srgb,${tokens.coral} 22%,${tokens.surface}) var(--bf-hz, 30%), color-mix(in srgb,${tokens.coral} 22%,${tokens.surface}) 100%); }
+      .bf-hz-marker { position:absolute; top:0; bottom:0; left:var(--bf-hz, 30%); width:3px; background:${tokens.ink}; transform:translateX(-50%); }
+      .bf-hz-labels { display:flex; justify-content:space-between; font-size:.78rem; font-weight:750; color:${tokens.muted}; }
+      .bf-hz-readout { display:grid; grid-template-columns:repeat(auto-fit,minmax(9rem,1fr)); gap:.7rem; }
+      .bf-hz-card { padding:.9rem 1rem; border:1px solid ${tokens.line}; border-radius:.9rem; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); }
+      .bf-hz-card b { display:block; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; color:${tokens.ocean}; margin-bottom:.35rem; }
+      .bf-hz-card p { margin:0; font-size:1.35rem; font-weight:850; }
+      .bf-hz-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .bf-hz-btn { flex:1 1 6.5rem; padding:.7rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink};
+        background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .bf-hz-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .bf-hz-btn:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .bf-hz-status { margin:0; color:${tokens.muted}; line-height:1.5; }
+      .bf-hz-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+    </style>
+    <div class="bf-hz" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="bf-hz-labels"><span>${escapeHtml(copy.beforeLabel)}</span><span>${escapeHtml(copy.afterLabel)}</span></div>
+      <div class="bf-hz-track" data-bf-track aria-hidden="true"><span class="bf-hz-marker"></span></div>
+      <div class="bf-hz-readout">
+        <div class="bf-hz-card"><b>${escapeHtml(copy.controlLabel)}</b><p data-bf-digits></p></div>
+        <div class="bf-hz-card"><b>${escapeHtml(copy.horizonLabel)}</b><p data-bf-horizon></p></div>
+        <div class="bf-hz-card"><b>${escapeHtml(copy.errorLabel)}</b><p data-bf-thresh>10⁻¹</p></div>
+      </div>
+      <div class="bf-hz-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${digitButtons}</div>
+      <p class="bf-hz-status" data-bf-status role="status"></p>
+      <p class="bf-hz-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const track = root.querySelector("[data-bf-track]");
+  const digitsEl = root.querySelector("[data-bf-digits]");
+  const horizonEl = root.querySelector("[data-bf-horizon]");
+  const status = root.querySelector("[data-bf-status]");
+  const btns = [...root.querySelectorAll("[data-bf-hz]")];
+  const maxH = Math.max(...copy.digits.map((d) => d.horizon));
+
+  const select = (index, speak = false) => {
+    const d = copy.digits[index];
+    const pct = Math.round((d.horizon / maxH) * 100);
+    track.style.setProperty("--bf-hz", `${pct}%`);
+    digitsEl.textContent = String(d.digits);
+    horizonEl.textContent = String(d.horizon);
+    status.textContent = d.status;
+    btns.forEach((b, i) => b.setAttribute("aria-pressed", String(i === index)));
+    if (speak) announce(d.status);
+  };
+
+  btns.forEach((b) => b.addEventListener("click", () => select(Number(b.dataset.bfHz), true)));
+  select(0);
+  return {
+    pause: () => {},
+    resume: () => {},
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("bf-noise", ({ root, copy, motion, tokens, resolveColor, announce }) => {
+  const modeButtons = copy.modes.map((m, index) => `
+    <button type="button" class="bf-no-btn" data-bf-no="${index}" aria-pressed="${index === 0}">${escapeHtml(m.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .bf-no { display:grid; gap:1rem; min-height:26rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink}; }
+      .bf-no-frame { position:relative; min-height:14rem; border:1px solid ${tokens.line}; border-radius:1.1rem; overflow:hidden;
+        background:color-mix(in srgb,${tokens.paper} 35%,${tokens.surface}); }
+      .bf-no-frame canvas { display:block; width:100%; height:14rem; }
+      .bf-no-legend { display:flex; flex-wrap:wrap; gap:.75rem; font-size:.78rem; font-weight:750; color:${tokens.muted}; }
+      .bf-no-swatch { display:inline-block; width:.7rem; height:.7rem; border-radius:50%; margin-right:.35rem; vertical-align:middle; }
+      .bf-no-controls { display:flex; flex-wrap:wrap; gap:.55rem; align-items:center; }
+      .bf-no-btn, .bf-no-replay { padding:.7rem .9rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink};
+        background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .bf-no-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .bf-no-replay { background:color-mix(in srgb,${tokens.warm} 18%,${tokens.surface}); }
+      .bf-no-btn:focus-visible, .bf-no-replay:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .bf-no-status { margin:0; color:${tokens.muted}; line-height:1.5; }
+      .bf-no-note { margin:0; font-size:.8rem; font-weight:750; color:${tokens.ocean}; }
+      .bf-no-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+    </style>
+    <div class="bf-no" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="bf-no-frame"><canvas data-bf-canvas></canvas></div>
+      <div class="bf-no-legend">
+        <span><i class="bf-no-swatch" style="background:${tokens.ocean}"></i>${escapeHtml(copy.seriesChaos)}</span>
+        <span><i class="bf-no-swatch" style="background:${tokens.coral}"></i>${escapeHtml(copy.seriesNoise)}</span>
+      </div>
+      <div class="bf-no-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">
+        ${modeButtons}
+        <button type="button" class="bf-no-replay" data-bf-replay>${escapeHtml(copy.replayLabel)}</button>
+      </div>
+      <p class="bf-no-status" data-bf-status role="status"></p>
+      <p class="bf-no-note" data-bf-note></p>
+      <p class="bf-no-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const canvas = root.querySelector("[data-bf-canvas]");
+  const ctx = canvas.getContext("2d");
+  const status = root.querySelector("[data-bf-status]");
+  const note = root.querySelector("[data-bf-note]");
+  const btns = [...root.querySelectorAll("[data-bf-no]")];
+  const replayBtn = root.querySelector("[data-bf-replay]");
+  let modeIndex = 0;
+  let noiseSeed = 1;
+  let chaos = [];
+  let noisy = [];
+  const N = 50;
+  const R = 4;
+
+  const mulberry = (s) => {
+    let t = (s + 0x6d2b79f5) | 0;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+
+  const build = (seed) => {
+    let x = 0.3;
+    chaos = [x];
+    for (let i = 0; i < N; i += 1) {
+      x = R * x * (1 - x);
+      chaos.push(x);
+    }
+    let y = 0.3;
+    noisy = [y];
+    let s = seed;
+    for (let i = 0; i < N; i += 1) {
+      s = (s * 1664525 + 1013904223) >>> 0;
+      const shock = (mulberry(s) - 0.5) * 0.08;
+      y = Math.min(0.98, Math.max(0.02, y + shock));
+      noisy.push(y);
+    }
+  };
+
+  const draw = () => {
+    const w = canvas.clientWidth || 320;
+    const h = canvas.clientHeight || 224;
+    canvas.width = Math.floor(w);
+    canvas.height = Math.floor(h);
+    ctx.clearRect(0, 0, w, h);
+    const pad = { l: 28, r: 12, t: 14, b: 18 };
+    const iw = w - pad.l - pad.r;
+    const ih = h - pad.t - pad.b;
+    ctx.strokeStyle = resolveColor(tokens.line);
+    ctx.beginPath();
+    ctx.moveTo(pad.l, pad.t);
+    ctx.lineTo(pad.l, pad.t + ih);
+    ctx.lineTo(pad.l + iw, pad.t + ih);
+    ctx.stroke();
+    const mode = copy.modes[modeIndex].key;
+    const plot = (arr, color) => {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let i = 0; i <= N; i += 1) {
+        const x = pad.l + (i / N) * iw;
+        const y = pad.t + ih - arr[i] * ih;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    };
+    if (mode === "chaos" || mode === "both") plot(chaos, resolveColor(tokens.ocean));
+    if (mode === "noise" || mode === "both") plot(noisy, resolveColor(tokens.coral));
+  };
+
+  const select = (index, speak = false) => {
+    modeIndex = index;
+    const m = copy.modes[index];
+    status.textContent = m.status;
+    note.textContent = m.replayNote;
+    btns.forEach((b, i) => b.setAttribute("aria-pressed", String(i === index)));
+    draw();
+    if (speak) announce(m.status);
+  };
+
+  const replay = () => {
+    const m = copy.modes[modeIndex];
+    if (m.key === "chaos") {
+      build(noiseSeed);
+    } else {
+      noiseSeed = (noiseSeed + 97) >>> 0;
+      build(noiseSeed);
+    }
+    draw();
+    note.textContent = m.replayNote;
+    announce(m.replayNote);
+  };
+
+  btns.forEach((b) => b.addEventListener("click", () => select(Number(b.dataset.bfNo), true)));
+  replayBtn.addEventListener("click", replay);
+  build(noiseSeed);
+  select(0);
+
+  return {
+    pause: () => {},
+    resume: () => {},
+    reset: () => { noiseSeed = 1; build(noiseSeed); select(0); },
+    resize: () => draw(),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+  </script>
+</body>
+</html>

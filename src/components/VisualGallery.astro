@@ -98,6 +98,8 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
       const isPriceVolume = work.cover === 'price-volume';
       const isTyphoon = work.cover === 'typhoon';
       const isEnsoFoodPrices = work.cover === 'enso-food-prices';
+      const isPrisonersDilemma = work.cover === 'prisoners-dilemma';
+      const isButterflyEffect = work.cover === 'butterfly-effect';
 
       return (
         <article id={work.slug} data-visual-card={work.slug} class="group overflow-hidden rounded-3xl border border-surface-200/80 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover dark:border-surface-800 dark:bg-surface-900">
@@ -159,6 +161,33 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
                   <div class="h-[78%] flex-1 rounded-t bg-rose-300/70"></div>
                 </div>
                 <div class="absolute bottom-[52%] right-[12%] text-lg font-bold text-rose-100/90">↗</div>
+              </>
+            )}
+            {isPrisonersDilemma && (
+              <>
+                {/* 2×2 payoff matrix — two-player game, not a typhoon eye */}
+                <div class="absolute left-1/2 top-[18%] h-[58%] w-[62%] -translate-x-1/2 rounded-2xl border border-white/20 bg-slate-950/35 p-2 backdrop-blur-sm">
+                  <div class="grid h-full grid-cols-2 grid-rows-2 gap-1.5">
+                    <div class="flex items-center justify-center rounded-xl border border-emerald-200/40 bg-emerald-300/20 text-xs font-bold text-emerald-50">C·C</div>
+                    <div class="flex items-center justify-center rounded-xl border border-amber-200/35 bg-amber-300/15 text-xs font-bold text-amber-50/90">C·D</div>
+                    <div class="flex items-center justify-center rounded-xl border border-amber-200/35 bg-amber-300/15 text-xs font-bold text-amber-50/90">D·C</div>
+                    <div class="flex items-center justify-center rounded-xl border border-rose-200/45 bg-rose-400/35 text-xs font-bold text-rose-50 shadow-[0_0_18px_rgba(251,113,133,.35)]">D·D</div>
+                  </div>
+                </div>
+                <div class="absolute left-[12%] top-[14%] rounded-full border border-white/25 bg-black/25 px-2 py-0.5 text-[10px] font-bold tracking-wide text-white/85">2×2</div>
+              </>
+            )}
+            {isButterflyEffect && (
+              <>
+                {/* Twin trajectories forking — sensitive dependence, not a typhoon eye */}
+                <div class="absolute inset-6 rounded-3xl border border-white/15 bg-slate-950/30 backdrop-blur-sm"></div>
+                <svg class="absolute inset-0 h-full w-full" viewBox="0 0 400 224" fill="none" aria-hidden="true">
+                  <path d="M40 150 C 120 148, 160 140, 200 110 C 250 70, 300 40, 360 28" stroke="rgba(103,232,249,.85)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M40 152 C 120 154, 165 170, 210 185 C 260 205, 310 200, 360 168" stroke="rgba(251,113,133,.9)" stroke-width="3" stroke-linecap="round"/>
+                  <circle cx="40" cy="151" r="5" fill="rgba(255,255,255,.9)"/>
+                </svg>
+                <div class="absolute left-[10%] top-[14%] rounded-full border border-cyan-100/35 bg-cyan-100/10 px-2 py-0.5 text-[10px] font-bold tracking-wide text-cyan-50/90">δx₀</div>
+                <div class="absolute right-[10%] top-[12%] text-lg font-bold text-rose-100/90">↗</div>
               </>
             )}
             <div class="absolute inset-x-8 bottom-8 flex items-center justify-between text-white/90">

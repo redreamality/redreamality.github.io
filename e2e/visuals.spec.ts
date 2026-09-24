@@ -5,13 +5,15 @@ test('English Visuals gallery contains the multilingual published works', async 
 
   expect(response?.status()).toBe(200);
   await expect(page.locator('h1')).toHaveText('Visuals');
-  await expect(page.locator('[data-visual-card]')).toHaveCount(5);
+  await expect(page.locator('[data-visual-card]')).toHaveCount(7);
+  await expect(page.getByRole('heading', { name: 'Can a Butterfly\'s Flap Really Start a Tornado?' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Why Two People Who Want Less Jail Time Both Get More' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Why Pacific Warming Shows Up in Grocery Prices' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'How Price and Volume Work Together' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'How Air Conditioners Work' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'What Is Loop Engineering?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'How Typhoons Form' })).toBeVisible();
-  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(5);
+  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(7);
   await expect(page.getByText('Agent Architecture Showcase')).toHaveCount(0);
   await expect(page.getByText(/not available in this language/i)).toHaveCount(0);
 });
@@ -24,8 +26,8 @@ test('stale missing-language query cannot mark multilingual Typhoon as unavailab
 });
 
 for (const locale of [
-  { path: '/cn/visuals/', title: '可视化', work: '太平洋变暖，为什么你家菜价先涨？' },
-  { path: '/ja/visuals/', title: 'ビジュアル', work: '太平洋が暖まると、なぜ食卓の値段が先に上がるのか' },
+  { path: '/cn/visuals/', title: '可视化', work: '一只蝴蝶扇翅，真能掀起龙卷风吗？' },
+  { path: '/ja/visuals/', title: 'ビジュアル', work: '蝶の羽ばたきは、本当に竜巻を起こすのか？' },
 ]) {
   test(`${locale.path} renders a localized Visuals gallery`, async ({ page }) => {
     const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
@@ -33,7 +35,7 @@ for (const locale of [
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toHaveText(locale.title);
     await expect(page.getByRole('heading', { name: locale.work })).toBeVisible();
-    await expect(page.locator('[data-visual-card]')).toHaveCount(5);
+    await expect(page.locator('[data-visual-card]')).toHaveCount(7);
   });
 }
 
@@ -54,6 +56,8 @@ for (const locale of [
     path: '/',
     sectionTitle: 'Visuals',
     works: [
+      ['butterfly-effect', "Can a Butterfly's Flap Really Start a Tornado?", '/visuals/butterfly-effect/'],
+      ['prisoners-dilemma', 'Why Two People Who Want Less Jail Time Both Get More', '/visuals/prisoners-dilemma/'],
       ['enso-food-prices', 'Why Pacific Warming Shows Up in Grocery Prices', '/visuals/enso-food-prices/'],
       ['price-volume-relationship', 'How Price and Volume Work Together', '/visuals/price-volume-relationship/'],
       ['air-conditioner', 'How Air Conditioners Work', '/visuals/air-conditioner/'],
@@ -68,6 +72,8 @@ for (const locale of [
     path: '/cn/',
     sectionTitle: '可视化',
     works: [
+      ['butterfly-effect', '一只蝴蝶扇翅，真能掀起龙卷风吗？', '/cn/visuals/butterfly-effect/'],
+      ['prisoners-dilemma', '两人都想少坐牢，为什么一起判得更重？', '/cn/visuals/prisoners-dilemma/'],
       ['enso-food-prices', '太平洋变暖，为什么你家菜价先涨？', '/cn/visuals/enso-food-prices/'],
       ['price-volume-relationship', '股市交易原理：量价关系', '/cn/visuals/price-volume-relationship/'],
       ['air-conditioner', '空调的工作原理', '/cn/visuals/air-conditioner/'],
@@ -82,6 +88,8 @@ for (const locale of [
     path: '/ja/',
     sectionTitle: 'ビジュアル',
     works: [
+      ['butterfly-effect', '蝶の羽ばたきは、本当に竜巻を起こすのか？', '/ja/visuals/butterfly-effect/'],
+      ['prisoners-dilemma', '二人とも刑期を短くしたいのに、なぜ一緒により重く判かれるのか', '/ja/visuals/prisoners-dilemma/'],
       ['enso-food-prices', '太平洋が暖まると、なぜ食卓の値段が先に上がるのか', '/ja/visuals/enso-food-prices/'],
       ['price-volume-relationship', '株式取引の仕組み：価格と出来高', '/ja/visuals/price-volume-relationship/'],
       ['air-conditioner', 'エアコンの仕組み', '/ja/visuals/air-conditioner/'],
@@ -901,6 +909,15 @@ test('sitemap lists every published visual locale and no Agent Architecture rout
     '/visuals/typhoon/',
     '/cn/visuals/typhoon/',
     '/ja/visuals/typhoon/',
+    '/visuals/enso-food-prices/',
+    '/cn/visuals/enso-food-prices/',
+    '/ja/visuals/enso-food-prices/',
+    '/visuals/prisoners-dilemma/',
+    '/cn/visuals/prisoners-dilemma/',
+    '/ja/visuals/prisoners-dilemma/',
+    '/visuals/butterfly-effect/',
+    '/cn/visuals/butterfly-effect/',
+    '/ja/visuals/butterfly-effect/',
   ]) {
     expect(xml).toContain(`<loc>https://redreamality.com${path}</loc>`);
   }

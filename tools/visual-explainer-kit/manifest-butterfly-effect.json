@@ -1,0 +1,1242 @@
+{
+  "slug": "butterfly-effect",
+  "renderer": "interactive-explainer",
+  "structure": {
+    "overview": {
+      "demo": "bf-overview"
+    },
+    "steps": [
+      {
+        "id": "metaphor-clarify",
+        "demo": "bf-metaphor"
+      },
+      {
+        "id": "twin-trajectories",
+        "demo": "bf-twins"
+      },
+      {
+        "id": "exponential-error",
+        "demo": "bf-error"
+      },
+      {
+        "id": "predictability-horizon",
+        "demo": "bf-horizon"
+      },
+      {
+        "id": "chaos-vs-noise",
+        "demo": "bf-noise"
+      }
+    ]
+  },
+  "locales": {
+    "en": {
+      "lang": "en",
+      "meta": {
+        "title": "Can a butterfly's flap really start a tornado?",
+        "description": "An interactive guide to sensitive dependence in chaos: tiny initial differences, exponentially diverging trajectories, predictability horizons, and why the butterfly is a metaphor—not a literal cause."
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "Pause all motion",
+        "resumeAll": "Resume all motion",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset",
+        "waiting": "The visual will load when it enters the viewport.",
+        "loading": "Preparing the visual…",
+        "error": "The visual could not be displayed. Read the explanation above instead.",
+        "figureFallback": "Enable JavaScript to view this interactive explanation.",
+        "skipToContent": "Skip to content",
+        "languageNavigation": "Languages",
+        "overviewLabel": "Butterfly effect overview",
+        "stepLabel": "Step"
+      },
+      "hero": {
+        "eyebrow": "CHAOS / SENSITIVITY / PREDICTION LIMITS",
+        "title": "Can a butterfly's flap really start a tornado?",
+        "subtitle": "Chaos theory says deterministic equations can still make long-range forecasts fail. A microscopic nudge in the starting state can send two nearly identical futures far apart—without needing randomness, and without claiming one insect literally causing one storm."
+      },
+      "overview": {
+        "title": "Sensitivity first, weather poetry second",
+        "body": [
+          "The popular phrase \"butterfly effect\" names a mathematical fact: in some nonlinear systems, nearby initial conditions separate exponentially. The weather is a famous example, but the core claim is about trajectories—not about one insect owning one tornado.",
+          "This explainer walks a short chain: metaphor → twin paths → error growth → predictability horizon → chaos versus noise. The equations stay deterministic; the surprise is how fast certainty evaporates."
+        ],
+        "plainLanguage": {
+          "label": "Plainly",
+          "body": "Tiny start differences can explode into big outcome differences—even when every rule is fixed."
+        },
+        "keyPointsLabel": "Keep these three ideas",
+        "keyPoints": [
+          {
+            "title": "Metaphor, not attribution",
+            "body": "The butterfly image dramatizes sensitivity; it does not assign courtroom cause to a single flap."
+          },
+          {
+            "title": "Deterministic ≠ predictable forever",
+            "body": "Fixed rules can still produce a hard horizon for useful forecasts."
+          },
+          {
+            "title": "Growth rate matters",
+            "body": "Exponential error growth sets how quickly two twin runs stop agreeing."
+          }
+        ],
+        "demoTitle": "Toggle myth vs mechanism",
+        "copy": {
+          "ariaLabel": "Interactive overview contrasting the butterfly metaphor with sensitive dependence",
+          "caption": "Switch between the poetic story and the trajectory mechanism the math actually claims.",
+          "controlLabel": "View",
+          "modes": [
+            {
+              "key": "myth",
+              "label": "Poetic myth",
+              "headline": "One flap → one tornado?",
+              "detail": "A tidy causal cartoon: insect wing, then distant storm. Memorable—and scientifically overclaimed as literal attribution.",
+              "badge": "Story"
+            },
+            {
+              "key": "mechanism",
+              "label": "Mechanism",
+              "headline": "Nearby starts → split futures",
+              "detail": "Two runs of the same deterministic map differ by a hair at t=0. After enough steps, their states look unrelated.",
+              "badge": "Math"
+            }
+          ],
+          "statusMyth": "The myth treats the butterfly as a named cause of a named storm.",
+          "statusMechanism": "The mechanism is exponential separation of nearby trajectories under fixed rules."
+        }
+      },
+      "steps": [
+        {
+          "id": "metaphor-clarify",
+          "number": "01",
+          "title": "The butterfly is a metaphor for sensitivity—not a lawsuit against insects",
+          "body": [
+            "Edward Lorenz's insight grew from a numerical weather model where rounding a starting number slightly changed later forecasts. The \"butterfly\" image later popularized that sensitivity: small causes can matter a lot in nonlinear dynamics.",
+            "What the image does not license is a one-to-one claim that a specific flap caused a specific tornado. Attribution in real weather is a web of conditions; the mathematical point is about how uncertainty grows."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Use the butterfly as a reminder of fragile starts, not as a courtroom finger-point."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Sensitivity ≠ single cause",
+              "body": "Many small factors interact; the metaphor highlights the growth of tiny differences."
+            },
+            {
+              "title": "Deterministic rules",
+              "body": "The surprise happens even when the model has no random number generator."
+            },
+            {
+              "title": "Language trap",
+              "body": "Saying \"caused\" casually smuggles in attribution the math never promised."
+            }
+          ],
+          "demoTitle": "Separate metaphor from claim",
+          "copy": {
+            "ariaLabel": "Interactive cards separating butterfly metaphor from scientific claim",
+            "caption": "Select a card to see what the phrase implies—and what it does not.",
+            "controlLabel": "Inspect a claim",
+            "cards": [
+              {
+                "key": "metaphor",
+                "label": "Metaphor",
+                "claim": "Tiny differences can matter enormously.",
+                "verdict": "Supported",
+                "detail": "This is the core of sensitive dependence: amplify a microscopic initial gap."
+              },
+              {
+                "key": "literal",
+                "label": "Literal cause",
+                "claim": "That butterfly caused that tornado.",
+                "verdict": "Overclaim",
+                "detail": "Weather attribution is not a single-insect ledger. The flap is imagery, not a forensic ID."
+              },
+              {
+                "key": "random",
+                "label": "Needs randomness?",
+                "claim": "Chaos requires a dice roll inside the model.",
+                "verdict": "False",
+                "detail": "Classic chaotic maps are deterministic. Random noise is a different story (step 05)."
+              }
+            ],
+            "verdictLabel": "Verdict",
+            "statusTemplate": "{label}: {verdict}. {detail}"
+          }
+        },
+        {
+          "id": "twin-trajectories",
+          "number": "02",
+          "title": "Run two nearly identical starts and watch the paths fork",
+          "body": [
+            "Take a simple deterministic recurrence—the logistic map at a chaotic parameter. Launch two orbits that differ only in the sixth decimal place of the initial value.",
+            "Early iterates look almost glued together. Later iterates wander apart until they occupy different regions of the same attractor. Same rulebook; different path history."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Same machine, almost-same start: eventually the tapes read different stories."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Identical update rule",
+              "body": "Nothing random is injected between steps."
+            },
+            {
+              "title": "Microscopic δx₀",
+              "body": "The only difference is a tiny initial offset."
+            },
+            {
+              "title": "Visible fork",
+              "body": "After enough iterates, the twin curves no longer track each other."
+            }
+          ],
+          "demoTitle": "Twin logistic orbits",
+          "copy": {
+            "ariaLabel": "Interactive twin trajectories of the logistic map from nearly identical initial conditions",
+            "caption": "Blue and coral traces share the same update rule; only x₀ differs by a hair.",
+            "controlLabel": "Perturbation size",
+            "runLabel": "Run",
+            "perturbations": [
+              {
+                "key": "tiny",
+                "label": "10⁻⁶",
+                "delta": 1e-06,
+                "status": "Hairline start gap: paths stick together at first, then peel apart."
+              },
+              {
+                "key": "small",
+                "label": "10⁻⁴",
+                "delta": 0.0001,
+                "status": "Larger start gap: the fork arrives earlier on the same map."
+              },
+              {
+                "key": "mild",
+                "label": "10⁻²",
+                "delta": 0.01,
+                "status": "Mild gap: divergence is obvious within fewer iterates."
+              }
+            ],
+            "seriesA": "Orbit A",
+            "seriesB": "Orbit B",
+            "xLabel": "Iterate n",
+            "yLabel": "xₙ",
+            "statusReady": "Choose a perturbation and run the twin orbits."
+          }
+        },
+        {
+          "id": "exponential-error",
+          "number": "03",
+          "title": "The gap does not crawl—it compounds",
+          "body": [
+            "Sensitive dependence is quantitative. For a stretch of time, the distance between twin trajectories grows roughly like e^{λt}, where λ is a positive Lyapunov exponent.",
+            "On a log plot of |x_A − x_B|, an early straight climb signals that compounding. Once the gap is order-one, the linear-in-log regime saturates—the orbits have forgotten each other's precise start."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Errors multiply, they don't just add a little each step."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Log scale",
+              "body": "Exponential growth looks like a straight rise on log |δ|."
+            },
+            {
+              "title": "Lyapunov idea",
+              "body": "A positive average stretch rate is the fingerprint of chaos here."
+            },
+            {
+              "title": "Saturation",
+              "body": "Once the gap is large, it cannot keep exploding forever on a bounded attractor."
+            }
+          ],
+          "demoTitle": "Watch |δ| on a log scale",
+          "copy": {
+            "ariaLabel": "Interactive log-scale plot of the absolute difference between twin chaotic orbits",
+            "caption": "Early rise on log |x_A − x_B| is the visual signature of compounding separation.",
+            "controlLabel": "Animation",
+            "playLabel": "Play growth",
+            "seriesLabel": "log₁₀ |δ|",
+            "xLabel": "Iterate n",
+            "yLabel": "log₁₀ |δ|",
+            "statusIdle": "Press play to watch the error climb, then level off.",
+            "statusGrowing": "Compounding phase: the gap is still stretching exponentially.",
+            "statusSaturated": "Saturated: orbits disagree by order-one; start detail is lost."
+          }
+        },
+        {
+          "id": "predictability-horizon",
+          "number": "04",
+          "title": "Useful prediction has a horizon—even with perfect equations",
+          "body": [
+            "If you only know the state to finite precision, exponential error growth turns that ignorance into a hard clock. Beyond a predictability horizon, forecasts of the detailed state stop being useful—even if the model is correct.",
+            "Improving measurement precision buys time, but only logarithmically: each extra digit of accuracy extends the horizon by a roughly fixed amount, not forever."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Better instruments delay the fog; they do not abolish it."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Finite precision",
+              "body": "Every real observation carries a smallest trustworthy digit."
+            },
+            {
+              "title": "Horizon clock",
+              "body": "Past a threshold error, detailed prediction collapses."
+            },
+            {
+              "title": "Logarithmic returns",
+              "body": "Extra accuracy buys limited extra lead time."
+            }
+          ],
+          "demoTitle": "Slide precision, watch the horizon",
+          "copy": {
+            "ariaLabel": "Interactive predictability horizon driven by measurement precision",
+            "caption": "Raise precision to push the horizon later; the gain per digit is limited.",
+            "controlLabel": "Trusted decimal digits",
+            "horizonLabel": "Horizon (iterates)",
+            "errorLabel": "Error threshold",
+            "digits": [
+              {
+                "key": "d3",
+                "label": "3 digits",
+                "digits": 3,
+                "horizon": 12,
+                "status": "Coarse start: the detailed forecast dies early."
+              },
+              {
+                "key": "d5",
+                "label": "5 digits",
+                "digits": 5,
+                "horizon": 22,
+                "status": "Two extra digits buy a longer—but still finite—window."
+              },
+              {
+                "key": "d7",
+                "label": "7 digits",
+                "digits": 7,
+                "horizon": 32,
+                "status": "Even sharp starts hit a wall once stretching compounds."
+              }
+            ],
+            "beforeLabel": "Still useful",
+            "afterLabel": "Past horizon"
+          }
+        },
+        {
+          "id": "chaos-vs-noise",
+          "number": "05",
+          "title": "Chaos is not the same as random noise",
+          "body": [
+            "Stochastic noise injects fresh randomness each step. Chaos can look irregular while remaining a deterministic orbit on an attractor—repeat the exact same start (at infinite precision) and you get the same path.",
+            "In practice we confuse them because both frustrate prediction. Distinguishing them matters: ensemble forecasts, model error, and noise assumptions are different tools for different uncertainty sources."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Wild-looking is not automatically \"random inside the rules.\""
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Replay test",
+              "body": "Exact same start → identical chaotic path; noise paths diverge even from identical seeds if noise is resampled."
+            },
+            {
+              "title": "Structure",
+              "body": "Chaotic attractors still constrain where states live."
+            },
+            {
+              "title": "Different fixes",
+              "body": "More precision helps sensitivity; noise may need averaging or better stochastic models."
+            }
+          ],
+          "demoTitle": "Compare chaos track vs noisy track",
+          "copy": {
+            "ariaLabel": "Interactive comparison of a deterministic chaotic orbit and a noisy stochastic path",
+            "caption": "Toggle modes: pure chaos stays a fixed orbit for a fixed start; noise keeps jiggling.",
+            "controlLabel": "Mode",
+            "modes": [
+              {
+                "key": "chaos",
+                "label": "Deterministic chaos",
+                "status": "Fixed rule, fixed start: replay draws the same irregular path.",
+                "replayNote": "Replay matches."
+              },
+              {
+                "key": "noise",
+                "label": "Random noise",
+                "status": "Fresh shocks each step: even a matched start wanders differently on replay.",
+                "replayNote": "Replay differs."
+              },
+              {
+                "key": "both",
+                "label": "Side by side",
+                "status": "Same plotting window: chaos is constrained irregularity; noise is ongoing injection.",
+                "replayNote": "Two uncertainty stories."
+              }
+            ],
+            "seriesChaos": "Chaos",
+            "seriesNoise": "Noise",
+            "replayLabel": "Replay"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "Put the system back together",
+        "title": "Deterministic rules can still deny you a long, detailed forecast",
+        "body": [
+          "The butterfly effect is best read as a warning about sensitive dependence: microscopic ignorance of the start can explode into macroscopic disagreement later. That is compatible with fully specified equations.",
+          "Keep the metaphor; drop the folklore lawsuit. Ask instead: how fast do twin trajectories separate, and what horizon does my precision buy?"
+        ],
+        "checklistLabel": "Reader checklist",
+        "checklist": [
+          "Separate metaphor from literal single-cause claims.",
+          "Name a twin-trajectory experiment (same rule, tiny δx₀).",
+          "Look for compounding |δ| growth, not only a final mess.",
+          "State a predictability horizon given finite precision.",
+          "Say whether irregularity comes from chaos, noise, or both."
+        ],
+        "scaleTitle": "Four moves of the idea",
+        "scaleItems": [
+          {
+            "term": "Metaphor",
+            "question": "What is claimed?",
+            "role": "Sensitivity imagery—not forensic insect blame."
+          },
+          {
+            "term": "Twins",
+            "question": "What diverges?",
+            "role": "Two orbits under one deterministic map."
+          },
+          {
+            "term": "Growth",
+            "question": "How fast?",
+            "role": "Roughly exponential stretch until saturation."
+          },
+          {
+            "term": "Horizon",
+            "question": "How long is useful?",
+            "role": "Finite precision sets a forecast clock."
+          }
+        ],
+        "finalQuote": "Chaos does not mean \"anything goes.\" It means \"the map is fixed, but your useful lead time is not.\"",
+        "sourceNote": "Teaching note: demos use a logistic map at r=4 as a minimal chaotic generator. Real atmosphere models are vastly higher-dimensional; the qualitative lesson—sensitive dependence and finite predictability horizons—still organizes the popular butterfly image."
+      }
+    },
+    "zh": {
+      "lang": "zh",
+      "meta": {
+        "title": "一只蝴蝶扇翅，真能掀起龙卷风吗？",
+        "description": "交互图解混沌中的敏感依赖：初值微扰、轨迹指数分叉、可预测视界，并澄清「蝴蝶」是隐喻而非字面因果。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "暂停所有动画",
+        "resumeAll": "恢复所有动画",
+        "pause": "暂停",
+        "resume": "继续",
+        "reset": "重置",
+        "waiting": "图解进入视口后才会加载。",
+        "loading": "正在准备图解…",
+        "error": "图解无法显示，请先阅读上方文字说明。",
+        "figureFallback": "请启用 JavaScript 以查看交互图解。",
+        "skipToContent": "跳到正文",
+        "languageNavigation": "语言",
+        "overviewLabel": "蝴蝶效应总览",
+        "stepLabel": "步骤"
+      },
+      "hero": {
+        "eyebrow": "混沌 / 敏感依赖 / 预测极限",
+        "title": "一只蝴蝶扇翅，真能掀起龙卷风吗？",
+        "subtitle": "混沌理论说：方程可以完全确定，长期细预报仍可能失败。初值上的一丝扰动，会让两条几乎相同的未来分道扬镳——这不需要随机数，也不等于指控某只昆虫「造成」某场风暴。"
+      },
+      "overview": {
+        "title": "先看敏感依赖，再谈天气诗意",
+        "body": [
+          "流行说法「蝴蝶效应」指的是一个数学事实：在某些非线性系统里，邻近初值会指数级分离。天气是著名例子，但核心主张关于轨迹，而不是某只昆虫拥有某场龙卷风的产权。",
+          "本图解走一条短链：隐喻澄清 → 双初值轨迹 → 误差增长 → 可预测视界 → 混沌与噪声。方程保持确定性；意外在于确定性蒸发得有多快。"
+        ],
+        "plainLanguage": {
+          "label": "一句话",
+          "body": "起点差一点点，结局可以差很多——即便每一步规则都写死了。"
+        },
+        "keyPointsLabel": "先记住这三句",
+        "keyPoints": [
+          {
+            "title": "隐喻，不是归因",
+            "body": "蝴蝶形象戏剧化了敏感性；它并不给单次扇翅开法庭起诉书。"
+          },
+          {
+            "title": "确定 ≠ 永远可预报",
+            "body": "规则固定，仍可能存在有用预报的硬视界。"
+          },
+          {
+            "title": "增长速度要紧",
+            "body": "误差如何指数放大，决定双胞胎运行何时不再一致。"
+          }
+        ],
+        "demoTitle": "在神话与机制之间切换",
+        "copy": {
+          "ariaLabel": "对比蝴蝶隐喻与敏感依赖机制的交互总览",
+          "caption": "在诗意故事与数学真正主张的轨迹机制之间切换。",
+          "controlLabel": "视角",
+          "modes": [
+            {
+              "key": "myth",
+              "label": "诗意神话",
+              "headline": "一次扇翅 → 一场龙卷？",
+              "detail": "干净的因果卡通：虫翅，然后远方风暴。好记——若当作字面归因则过度宣称。",
+              "badge": "故事"
+            },
+            {
+              "key": "mechanism",
+              "label": "机制",
+              "headline": "邻近起点 → 分叉未来",
+              "detail": "同一确定性映射的两次运行，t=0 只差一根头发。足够多步后，状态看起来互不相干。",
+              "badge": "数学"
+            }
+          ],
+          "statusMyth": "神话把蝴蝶当成「点名某场风暴」的原因。",
+          "statusMechanism": "机制是：固定规则下，邻近轨迹的指数分离。"
+        }
+      },
+      "steps": [
+        {
+          "id": "metaphor-clarify",
+          "number": "01",
+          "title": "蝴蝶是敏感性的隐喻——不是给昆虫打官司",
+          "body": [
+            "Lorenz 的洞见来自数值天气预报：把初值多保留几位小数，后来的预报就变了。「蝴蝶」形象后来把这种敏感性说得人人皆知：在非线性动力学里，小原因可以很要紧。",
+            "这张图像并不授权你声称「某一次扇翅造成某一场龙卷风」。真实天气归因是条件之网；数学要点是不确定性如何增长。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "把蝴蝶当「起点很脆」的提醒，别当法庭指认。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "敏感 ≠ 单一原因",
+              "body": "许多微小因素纠缠；隐喻强调的是微小差别如何被放大。"
+            },
+            {
+              "title": "确定性规则",
+              "body": "模型里没有随机数生成器，意外照样发生。"
+            },
+            {
+              "title": "措辞陷阱",
+              "body": "随口说「造成」，会偷运数学从未承诺的归因。"
+            }
+          ],
+          "demoTitle": "把隐喻和主张拆开",
+          "copy": {
+            "ariaLabel": "区分蝴蝶隐喻与科学主张的交互卡片",
+            "caption": "点选卡片，看这句话暗示了什么——以及没有暗示什么。",
+            "controlLabel": "检查一个主张",
+            "cards": [
+              {
+                "key": "metaphor",
+                "label": "隐喻",
+                "claim": "微小差别可以极端要紧。",
+                "verdict": "成立",
+                "detail": "这是敏感依赖的核心：把微观初值缝隙放大。"
+              },
+              {
+                "key": "literal",
+                "label": "字面因果",
+                "claim": "那只蝴蝶造成了那场龙卷风。",
+                "verdict": "过度宣称",
+                "detail": "天气归因不是昆虫账本。扇翅是意象，不是法医编号。"
+              },
+              {
+                "key": "random",
+                "label": "必须随机？",
+                "claim": "混沌要求模型内部掷骰子。",
+                "verdict": "否",
+                "detail": "经典混沌映射是确定性的。随机噪声是另一回事（步骤 05）。"
+              }
+            ],
+            "verdictLabel": "判定",
+            "statusTemplate": "{label}：{verdict}。{detail}"
+          }
+        },
+        {
+          "id": "twin-trajectories",
+          "number": "02",
+          "title": "跑两个几乎相同的起点，看轨迹怎样分叉",
+          "body": [
+            "取一个简单的确定性递推——混沌参数下的 Logistic 映射。让两条轨道只在初值第六位小数处不同。",
+            "早期迭代几乎粘在一起。随后它们分开，最终占据同一吸引子的不同区域。规则书相同；路径史不同。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "同一台机器、几乎相同的起点：磁带最终读出不同故事。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "更新规则相同",
+              "body": "步与步之间不注入随机。"
+            },
+            {
+              "title": "微观 δx₀",
+              "body": "唯一差别是极小的初值偏移。"
+            },
+            {
+              "title": "可见分叉",
+              "body": "足够多步后，双胞胎曲线不再互相跟踪。"
+            }
+          ],
+          "demoTitle": "双胞胎 Logistic 轨道",
+          "copy": {
+            "ariaLabel": "几乎相同初值下 Logistic 映射双胞胎轨迹的交互演示",
+            "caption": "蓝与珊瑚轨迹共用同一更新规则；只有 x₀ 差一根头发。",
+            "controlLabel": "扰动大小",
+            "runLabel": "运行",
+            "perturbations": [
+              {
+                "key": "tiny",
+                "label": "10⁻⁶",
+                "delta": 1e-06,
+                "status": "发丝级起点差：先粘合，再撕开。"
+              },
+              {
+                "key": "small",
+                "label": "10⁻⁴",
+                "delta": 0.0001,
+                "status": "更大起点差：同一映射上分叉来得更早。"
+              },
+              {
+                "key": "mild",
+                "label": "10⁻²",
+                "delta": 0.01,
+                "status": "中等差距：更少步数内分叉就很明显。"
+              }
+            ],
+            "seriesA": "轨道 A",
+            "seriesB": "轨道 B",
+            "xLabel": "迭代 n",
+            "yLabel": "xₙ",
+            "statusReady": "选择扰动大小，然后运行双胞胎轨道。"
+          }
+        },
+        {
+          "id": "exponential-error",
+          "number": "03",
+          "title": "缝隙不是爬行——它在复利",
+          "body": [
+            "敏感依赖可以定量。在一段时间里，双胞胎轨迹间距大致像 e^{λt} 增长，其中 λ 是正的 Lyapunov 指数。",
+            "在 |x_A − x_B| 的对数图上，早期近似直线上升就是复利的视觉签名。当差距到了量级 1，对数线性区饱和——轨道已经忘掉彼此精确起点。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "误差在相乘，不是每步只多一点点。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "对数坐标",
+              "body": "指数增长在 log |δ| 上看起来像直线爬升。"
+            },
+            {
+              "title": "Lyapunov 直觉",
+              "body": "平均拉伸率为正，是这里混沌的指纹。"
+            },
+            {
+              "title": "饱和",
+              "body": "在有界吸引子上，差距不能永远爆炸。"
+            }
+          ],
+          "demoTitle": "在对数尺度上看 |δ|",
+          "copy": {
+            "ariaLabel": "双胞胎混沌轨道绝对差的对数尺度交互图",
+            "caption": "log |x_A − x_B| 上的早期爬升，是分离在复利的视觉签名。",
+            "controlLabel": "动画",
+            "playLabel": "播放增长",
+            "seriesLabel": "log₁₀ |δ|",
+            "xLabel": "迭代 n",
+            "yLabel": "log₁₀ |δ|",
+            "statusIdle": "按下播放，看误差爬升然后趋平。",
+            "statusGrowing": "复利阶段：差距仍在指数拉伸。",
+            "statusSaturated": "已饱和：轨道量级上已不一致，起点细节丢失。"
+          }
+        },
+        {
+          "id": "predictability-horizon",
+          "number": "04",
+          "title": "有用的预报有视界——即便方程完美",
+          "body": [
+            "如果你只以有限精度知道状态，指数误差增长会把这份无知变成硬时钟。越过可预测视界后，对细节状态的预报不再有用——即便模型正确。",
+            "提高测量精度能买时间，但大致只按对数换取：多一位有效数字，视界延长一截，而不是无限。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "更好的仪器推迟雾起，并不取消雾。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "有限精度",
+              "body": "任何真实观测都有最小可信数位。"
+            },
+            {
+              "title": "视界时钟",
+              "body": "误差过阈值后，细节预报崩溃。"
+            },
+            {
+              "title": "对数回报",
+              "body": "额外精度只买有限的额外提前量。"
+            }
+          ],
+          "demoTitle": "滑动精度，观察视界",
+          "copy": {
+            "ariaLabel": "由测量精度驱动的可预测视界交互演示",
+            "caption": "提高精度可把视界推后；每一位的收益有限。",
+            "controlLabel": "可信小数位数",
+            "horizonLabel": "视界（迭代）",
+            "errorLabel": "误差阈值",
+            "digits": [
+              {
+                "key": "d3",
+                "label": "3 位",
+                "digits": 3,
+                "horizon": 12,
+                "status": "粗起点：细节预报很早失效。"
+              },
+              {
+                "key": "d5",
+                "label": "5 位",
+                "digits": 5,
+                "horizon": 22,
+                "status": "多两位买到更长——仍有限——的窗口。"
+              },
+              {
+                "key": "d7",
+                "label": "7 位",
+                "digits": 7,
+                "horizon": 32,
+                "status": "再尖的起点，拉伸复利后仍撞墙。"
+              }
+            ],
+            "beforeLabel": "仍有用",
+            "afterLabel": "已过视界"
+          }
+        },
+        {
+          "id": "chaos-vs-noise",
+          "number": "05",
+          "title": "混沌不等于随机噪声",
+          "body": [
+            "随机噪声每一步注入新的随机性。混沌可以看起来不规则，却仍是吸引子上的确定性轨道——在无限精度下重复同一起点，会得到同一路径。",
+            "实践中二者常被混淆，因为它们都挫败预报。区分它们很重要：集合预报、模式误差与噪声假设，是针对不同不确定性来源的工具。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "看起来狂野，不等于「规则内部在掷骰子」。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "重放检验",
+              "body": "完全相同起点 → 混沌路径相同；若噪声重采样，噪声路径仍会分叉。"
+            },
+            {
+              "title": "结构",
+              "body": "混沌吸引子仍约束状态落在哪里。"
+            },
+            {
+              "title": "不同对策",
+              "body": "敏感性靠精度；噪声可能需要平均或更好的随机模型。"
+            }
+          ],
+          "demoTitle": "对比混沌轨迹与噪声轨迹",
+          "copy": {
+            "ariaLabel": "确定性混沌轨道与随机噪声路径的交互对比",
+            "caption": "切换模式：纯混沌对固定起点重放一致；噪声会持续抖动。",
+            "controlLabel": "模式",
+            "modes": [
+              {
+                "key": "chaos",
+                "label": "确定性混沌",
+                "status": "固定规则、固定起点：重放画出同一条不规则路径。",
+                "replayNote": "重放一致。"
+              },
+              {
+                "key": "noise",
+                "label": "随机噪声",
+                "status": "每步新冲击：即便起点匹配，重放也会走样。",
+                "replayNote": "重放不同。"
+              },
+              {
+                "key": "both",
+                "label": "并排",
+                "status": "同一画窗：混沌是受约束的不规则；噪声是持续注入。",
+                "replayNote": "两种不确定性故事。"
+              }
+            ],
+            "seriesChaos": "混沌",
+            "seriesNoise": "噪声",
+            "replayLabel": "重放"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "把系统重新组装",
+        "title": "确定性规则，仍可能拒绝你一份长久的细预报",
+        "body": [
+          "蝴蝶效应最好读作对敏感依赖的警告：对起点的微观无知，可以在之后爆炸成宏观分歧。这与方程被完全写死并不矛盾。",
+          "保留隐喻，丢掉民俗官司。改问：双胞胎轨迹分离有多快，我的精度买到多远视界？"
+        ],
+        "checklistLabel": "读者清单",
+        "checklist": [
+          "把隐喻与字面单因主张分开。",
+          "说出一个双胞胎轨迹实验（同规则、微小 δx₀）。",
+          "寻找 |δ| 的复利增长，而不只看最终一团糟。",
+          "在有限精度下陈述一个可预测视界。",
+          "说明不规则来自混沌、噪声，还是两者。"
+        ],
+        "scaleTitle": "这个想法的四步",
+        "scaleItems": [
+          {
+            "term": "隐喻",
+            "question": "主张什么？",
+            "role": "敏感性意象——不是昆虫法医归责。"
+          },
+          {
+            "term": "双胞胎",
+            "question": "什么在分叉？",
+            "role": "同一确定性映射下的两条轨道。"
+          },
+          {
+            "term": "增长",
+            "question": "有多快？",
+            "role": "大致指数拉伸直到饱和。"
+          },
+          {
+            "term": "视界",
+            "question": "有用多久？",
+            "role": "有限精度设定预报时钟。"
+          }
+        ],
+        "finalQuote": "混沌不是「怎样都行」。它是「映射固定，但你的有用提前量不固定」。",
+        "sourceNote": "教材注：演示用 r=4 的 Logistic 映射作最小混沌生成器。真实大气模式维度高得多；定性课——敏感依赖与有限可预测视界——仍能组织流行的蝴蝶意象。"
+      }
+    },
+    "ja": {
+      "lang": "ja",
+      "meta": {
+        "title": "蝶の羽ばたきは、本当に竜巻を起こすのか？",
+        "description": "カオスにおける初期値敏感依存のインタラクティブ図解：微小な初期差、軌道の指数的分岐、予測地平、そして「蝶」は比喩であり字面の因果ではないこと。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "すべての動きを停止",
+        "resumeAll": "すべての動きを再開",
+        "pause": "一時停止",
+        "resume": "再開",
+        "reset": "リセット",
+        "waiting": "図解は表示領域に入ると読み込まれます。",
+        "loading": "図解を準備しています…",
+        "error": "図解を表示できません。上の説明を読んでください。",
+        "figureFallback": "インタラクティブ図解を見るには JavaScript を有効にしてください。",
+        "skipToContent": "本文へスキップ",
+        "languageNavigation": "言語",
+        "overviewLabel": "バタフライ効果の概要",
+        "stepLabel": "ステップ"
+      },
+      "hero": {
+        "eyebrow": "カオス / 敏感依存 / 予測の限界",
+        "title": "蝶の羽ばたきは、本当に竜巻を起こすのか？",
+        "subtitle": "カオス理論は言う：方程式が完全に決まっていても、長期の詳細予報は失敗しうる。初期状態のごく小さな押しが、ほぼ同じ二つの未来を遠くへ引き離す——乱数は不要で、一匹の虫が一つの嵐を「起こした」と法廷で主張する必要もない。"
+      },
+      "overview": {
+        "title": "まず敏感依存、天気の詩はその次",
+        "body": [
+          "俗に言う「バタフライ効果」は数学的事実を指す：ある非線形系では、近い初期条件が指数的に離れる。天気は有名な例だが、核心の主張は軌道についてであり、一匹の虫が一つの竜巻の所有権を持つ話ではない。",
+          "本図解は短い鎖をたどる：比喩の整理 → 双子軌道 → 誤差成長 → 予測地平 → カオスとノイズ。方程式は決定論のまま；驚きは、確実性がどれほど速く蒸発するかだ。"
+        ],
+        "plainLanguage": {
+          "label": "ひとことで",
+          "body": "始まりの差がごく小さくても、結末は大きく分かれうる——ルールが全部固定でも。"
+        },
+        "keyPointsLabel": "この三つを残す",
+        "keyPoints": [
+          {
+            "title": "比喩であり帰属ではない",
+            "body": "蝶のイメージは敏感性を劇的に示す；一回の羽ばたきへの告訴状ではない。"
+          },
+          {
+            "title": "決定論 ≠ 永遠に予報可能",
+            "body": "規則が固定でも、有用な予報には硬い地平がありうる。"
+          },
+          {
+            "title": "成長率が肝心",
+            "body": "誤差の指数成長が、双子ランがいつ一致をやめるかを決める。"
+          }
+        ],
+        "demoTitle": "神話と機制を切り替える",
+        "copy": {
+          "ariaLabel": "蝶の比喩と敏感依存の機制を対比する概要インタラクション",
+          "caption": "詩的な物語と、数学が実際に主張する軌道の機制を切り替える。",
+          "controlLabel": "視点",
+          "modes": [
+            {
+              "key": "myth",
+              "label": "詩的神話",
+              "headline": "一回の羽ばたき → 一つの竜巻？",
+              "detail": "きれいな因果カートゥーン：虫の羽、そして遠い嵐。覚えやすい——字面の帰属としては言い過ぎ。",
+              "badge": "物語"
+            },
+            {
+              "key": "mechanism",
+              "label": "機制",
+              "headline": "近い始まり → 分岐する未来",
+              "detail": "同じ決定論マップの二回の実行は、t=0 で髪の毛一本分しか違わない。十分なステップの後、状態は無関係に見える。",
+              "badge": "数学"
+            }
+          ],
+          "statusMyth": "神話は蝶を、特定の嵐の「名義上の原因」として扱う。",
+          "statusMechanism": "機制は、固定規則のもとでの近傍軌道の指数的分離である。"
+        }
+      },
+      "steps": [
+        {
+          "id": "metaphor-clarify",
+          "number": "01",
+          "title": "蝶は敏感性の比喩——昆虫への訴訟ではない",
+          "body": [
+            "Lorenz の洞察は数値天気予報から育った：初期値の丸めを少し変えると、後の予報が変わった。「蝶」のイメージはその敏感性を普及させた：非線形力学では小さな原因が大きく効きうる。",
+            "このイメージは、特定の羽ばたきが特定の竜巻を起こしたという一対一の主張を許可しない。実天候の帰属は条件の網である；数学の要点は不確かさの成長である。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "蝶を「始まりの脆さ」の合図に使い、法廷の指差しにはしない。"
+          },
+          "keyPointsLabel": "見るべき点",
+          "keyPoints": [
+            {
+              "title": "敏感 ≠ 単一原因",
+              "body": "多くの微小要因が絡む；比喩は微小差の増幅を強調する。"
+            },
+            {
+              "title": "決定論的規則",
+              "body": "乱数生成器がなくても驚きは起きる。"
+            },
+            {
+              "title": "言葉の罠",
+              "body": "安易に「起こした」と言うと、数学が約束していない帰属を密輸する。"
+            }
+          ],
+          "demoTitle": "比喩と主張を分ける",
+          "copy": {
+            "ariaLabel": "蝶の比喩と科学的主張を分けるインタラクティブカード",
+            "caption": "カードを選び、その言い回しが何を含意し、何を含意しないかを見る。",
+            "controlLabel": "主張を調べる",
+            "cards": [
+              {
+                "key": "metaphor",
+                "label": "比喩",
+                "claim": "微小な差は極端に重要になりうる。",
+                "verdict": "支持",
+                "detail": "これが敏感依存の核心：微視的な初期ギャップを増幅する。"
+              },
+              {
+                "key": "literal",
+                "label": "字面の因果",
+                "claim": "あの蝶があの竜巻を起こした。",
+                "verdict": "言い過ぎ",
+                "detail": "天候帰属は昆虫の台帳ではない。羽ばたきはイメージであり法医 ID ではない。"
+              },
+              {
+                "key": "random",
+                "label": "乱数が必要？",
+                "claim": "カオスはモデル内のサイコロを必要とする。",
+                "verdict": "誤り",
+                "detail": "古典的カオス写像は決定論的。ランダムノイズは別の話（ステップ 05）。"
+              }
+            ],
+            "verdictLabel": "判定",
+            "statusTemplate": "{label}：{verdict}。{detail}"
+          }
+        },
+        {
+          "id": "twin-trajectories",
+          "number": "02",
+          "title": "ほぼ同一の二つの始まりを走らせ、分岐を見る",
+          "body": [
+            "単純な決定論的漸化式——カオス的パラメータのロジスティック写像——を取る。初期値の小数第六位だけが違う二つの軌道を起動する。",
+            "初期の反復はほぼ張り付いている。後の反復は離れ、同じアトラクタの別領域に住む。規則書は同じ；経路の履歴は違う。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "同じ機械、ほぼ同じ始まり：やがてテープは別の物語を読む。"
+          },
+          "keyPointsLabel": "見るべき点",
+          "keyPoints": [
+            {
+              "title": "同一の更新規則",
+              "body": "ステップ間に乱数は注入されない。"
+            },
+            {
+              "title": "微視的 δx₀",
+              "body": "唯一の差はごく小さな初期オフセット。"
+            },
+            {
+              "title": "見える分岐",
+              "body": "十分な反復の後、双子曲線は互いを追わなくなる。"
+            }
+          ],
+          "demoTitle": "双子のロジスティック軌道",
+          "copy": {
+            "ariaLabel": "ほぼ同一の初期条件からのロジスティック写像の双子軌道インタラクション",
+            "caption": "青とコーラルの軌跡は同じ更新規則；x₀ だけが髪の毛一本分違う。",
+            "controlLabel": "摂動の大きさ",
+            "runLabel": "実行",
+            "perturbations": [
+              {
+                "key": "tiny",
+                "label": "10⁻⁶",
+                "delta": 1e-06,
+                "status": "髪の毛級の開始差：最初は密着し、やがて剥がれる。"
+              },
+              {
+                "key": "small",
+                "label": "10⁻⁴",
+                "delta": 0.0001,
+                "status": "より大きな開始差：同じ写像で分岐が早まる。"
+              },
+              {
+                "key": "mild",
+                "label": "10⁻²",
+                "delta": 0.01,
+                "status": "中程度の差：より少ない反復で分岐が明白。"
+              }
+            ],
+            "seriesA": "軌道 A",
+            "seriesB": "軌道 B",
+            "xLabel": "反復 n",
+            "yLabel": "xₙ",
+            "statusReady": "摂動を選び、双子軌道を実行する。"
+          }
+        },
+        {
+          "id": "exponential-error",
+          "number": "03",
+          "title": "隙間は這わない——複利で膨らむ",
+          "body": [
+            "敏感依存は定量的である。しばらくの間、双子軌道の距離はおおよそ e^{λt} のように増え、λ は正のリアプノフ指数である。",
+            "|x_A − x_B| の対数プロットでは、初期のほぼ直線的な上昇が複利の印である。差がオーダー 1 になると対数線形域は飽和する——軌道は互いの精密な始まりを忘れた。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "誤差は掛け算される。毎ステップ少し足すだけではない。"
+          },
+          "keyPointsLabel": "見るべき点",
+          "keyPoints": [
+            {
+              "title": "対数スケール",
+              "body": "指数成長は log |δ| 上で直線上昇に見える。"
+            },
+            {
+              "title": "リアプノフの直感",
+              "body": "平均の引き延ばし率が正であることが、ここでのカオスの指紋。"
+            },
+            {
+              "title": "飽和",
+              "body": "有界アトラクタでは差は永遠に爆発し続けられない。"
+            }
+          ],
+          "demoTitle": "対数スケールで |δ| を見る",
+          "copy": {
+            "ariaLabel": "双子カオス軌道の絶対差の対数スケール・インタラクティブ図",
+            "caption": "log |x_A − x_B| の初期上昇は、分離が複利である視覚サイン。",
+            "controlLabel": "アニメーション",
+            "playLabel": "成長を再生",
+            "seriesLabel": "log₁₀ |δ|",
+            "xLabel": "反復 n",
+            "yLabel": "log₁₀ |δ|",
+            "statusIdle": "再生を押し、誤差が上がり平らになるのを見る。",
+            "statusGrowing": "複利段階：差はまだ指数的に伸びている。",
+            "statusSaturated": "飽和：軌道はオーダー 1 で食い違い、開始の細部は失われた。"
+          }
+        },
+        {
+          "id": "predictability-horizon",
+          "number": "04",
+          "title": "有用な予測には地平がある——方程式が完璧でも",
+          "body": [
+            "状態を有限精度でしか知らないなら、指数的誤差成長はその無知を硬い時計に変える。予測地平を超えると、詳細状態の予報は有用でなくなる——モデルが正しくても。",
+            "計測精度の向上は時間を買うが、おおよそ対数的にしか買えない：有効数字を一つ増やすと地平は一定量延びるが、永遠には延びない。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "良い器械は霧を遅らせる。霧を廃止はしない。"
+          },
+          "keyPointsLabel": "見るべき点",
+          "keyPoints": [
+            {
+              "title": "有限精度",
+              "body": "あらゆる実観測には最小の信頼桁がある。"
+            },
+            {
+              "title": "地平の時計",
+              "body": "誤差が閾値を超えると詳細予測は崩れる。"
+            },
+            {
+              "title": "対数的リターン",
+              "body": "追加精度が買う追加リードタイムは限られる。"
+            }
+          ],
+          "demoTitle": "精度をスライドし、地平を見る",
+          "copy": {
+            "ariaLabel": "計測精度が駆動する予測地平のインタラクション",
+            "caption": "精度を上げると地平は後へ；桁あたりの得は限られる。",
+            "controlLabel": "信頼できる小数桁",
+            "horizonLabel": "地平（反復）",
+            "errorLabel": "誤差閾値",
+            "digits": [
+              {
+                "key": "d3",
+                "label": "3 桁",
+                "digits": 3,
+                "horizon": 12,
+                "status": "粗い始まり：詳細予報は早く死ぬ。"
+              },
+              {
+                "key": "d5",
+                "label": "5 桁",
+                "digits": 5,
+                "horizon": 22,
+                "status": "桁を二つ増やすと、より長い——それでも有限な——窓を買う。"
+              },
+              {
+                "key": "d7",
+                "label": "7 桁",
+                "digits": 7,
+                "horizon": 32,
+                "status": "鋭い始まりでも、引き延ばしの複利の後に壁に当たる。"
+              }
+            ],
+            "beforeLabel": "まだ有用",
+            "afterLabel": "地平の向こう"
+          }
+        },
+        {
+          "id": "chaos-vs-noise",
+          "number": "05",
+          "title": "カオスはランダムノイズと同じではない",
+          "body": [
+            "確率的ノイズは毎ステップ新しい乱数を注入する。カオスは不規則に見えても、アトラクタ上の決定論的軌道でありうる——無限精度で同じ始まりを繰り返せば同じ道になる。",
+            "実務ではどちらも予測を挫くため混同されやすい。区別は重要：アンサンブル予報、モデル誤差、ノイズ仮定は、異なる不確かさ源への異なる道具である。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "荒く見えることと、「規則の内部でサイコロ」は同じではない。"
+          },
+          "keyPointsLabel": "見るべき点",
+          "keyPoints": [
+            {
+              "title": "再生テスト",
+              "body": "全く同じ始まり → カオス経路は同一；ノイズを再サンプリングすればノイズ経路は分岐する。"
+            },
+            {
+              "title": "構造",
+              "body": "カオスアトラクタは状態の居場所をなお制約する。"
+            },
+            {
+              "title": "違う手当",
+              "body": "敏感性には精度；ノイズには平均化やより良い確率モデルが要ることがある。"
+            }
+          ],
+          "demoTitle": "カオス軌跡とノイズ軌跡を比べる",
+          "copy": {
+            "ariaLabel": "決定論的カオス軌道と確率的ノイズ経路のインタラクティブ比較",
+            "caption": "モード切替：純カオスは固定開始の再生で一致；ノイズは揺れ続ける。",
+            "controlLabel": "モード",
+            "modes": [
+              {
+                "key": "chaos",
+                "label": "決定論的カオス",
+                "status": "固定規則・固定開始：再生は同じ不規則経路を描く。",
+                "replayNote": "再生は一致。"
+              },
+              {
+                "key": "noise",
+                "label": "ランダムノイズ",
+                "status": "毎ステップ新しい衝撃：開始が一致しても再生は食い違う。",
+                "replayNote": "再生は異なる。"
+              },
+              {
+                "key": "both",
+                "label": "並べて",
+                "status": "同じ描画窓：カオスは制約された不規則性；ノイズは継続注入。",
+                "replayNote": "二つの不確かさの物語。"
+              }
+            ],
+            "seriesChaos": "カオス",
+            "seriesNoise": "ノイズ",
+            "replayLabel": "再生"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "システムを組み立て直す",
+        "title": "決定論的規則でも、長く詳細な予報を拒みうる",
+        "body": [
+          "バタフライ効果は、敏感依存への警告として読むのが最善：始まりへの微視的無知は、後に巨視的な不一致へ爆発しうる。それは方程式が完全に書かれていることと相容れる。",
+          "比喩は残し、民俗裁判は捨てる。代わりに問う：双子軌道はどれほど速く離れ、精度はどれだけの地平を買うか？"
+        ],
+        "checklistLabel": "読み手チェックリスト",
+        "checklist": [
+          "比喩と字面の単一原因主張を分ける。",
+          "双子軌道実験を言える（同じ規則、微小な δx₀）。",
+          "最終的な混乱だけでなく、|δ| の複利成長を探す。",
+          "有限精度のもとで予測地平を述べる。",
+          "不規則さがカオスかノイズか両方かを言う。"
+        ],
+        "scaleTitle": "この考えの四手",
+        "scaleItems": [
+          {
+            "term": "比喩",
+            "question": "何を主張？",
+            "role": "敏感性のイメージ——昆虫の法医帰責ではない。"
+          },
+          {
+            "term": "双子",
+            "question": "何が分岐？",
+            "role": "一つの決定論マップ下の二つの軌道。"
+          },
+          {
+            "term": "成長",
+            "question": "どれほど速く？",
+            "role": "飽和までおおよそ指数的引き延ばし。"
+          },
+          {
+            "term": "地平",
+            "question": "有用なのはどれだけ？",
+            "role": "有限精度が予報時計を設定する。"
+          }
+        ],
+        "finalQuote": "カオスは「何でもあり」ではない。「マップは固定だが、有用なリードタイムは固定ではない」という意味だ。",
+        "sourceNote": "教材注：デモは r=4 のロジスティック写像を最小のカオス生成器として使う。実大気モデルは遥かに高次元；定性的教訓——敏感依存と有限の予測地平——は、なお通俗的な蝶イメージを組織する。"
+      }
+    }
+  }
+}
