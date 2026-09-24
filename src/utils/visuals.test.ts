@@ -3,17 +3,18 @@ import { getHomepageVisuals, getLatestVisual, getVisualWork } from './visuals';
 
 describe('getLatestVisual', () => {
   it.each([
-    ['en', '/visuals/compound-interest/', '0.1% Extra a Day—How Far Ahead Are You in a Year?'],
-    ['zh', '/cn/visuals/compound-interest/', '每天多赚 0.1%，一年后你会差多少？'],
-    ['ja', '/ja/visuals/compound-interest/', '毎日0.1%多く増やすと、一年後どれだけ差がつく？'],
+    ['en', '/visuals/bayes-lab-result/', 'Same Lab Result—Why Do Two People Reach Opposite Conclusions?'],
+    ['zh', '/cn/visuals/bayes-lab-result/', '同一张化验单，为什么两人结论相反？'],
+    ['ja', '/ja/visuals/bayes-lab-result/', '同じ検査結果なのに、なぜ二人の結論は真逆なのか？'],
   ] as const)('returns the newest published %s artifact', (lang, href, title) => {
-    expect(getLatestVisual(lang)).toMatchObject({ slug: 'compound-interest', href, title, hasCurrentArtifact: true });
+    expect(getLatestVisual(lang)).toMatchObject({ slug: 'bayes-lab-result', href, title, hasCurrentArtifact: true });
   });
 });
 
 describe('getHomepageVisuals', () => {
   it('returns every current-language artifact in newest-first order', () => {
     expect(getHomepageVisuals('en').map((visual) => visual.slug)).toEqual([
+      'bayes-lab-result',
       'compound-interest',
       'inflation-purchasing-power',
       'butterfly-effect',
@@ -39,6 +40,7 @@ describe('visual artifact registration', () => {
     ['butterfly-effect', 'butterfly-effect'],
     ['inflation-purchasing-power', 'inflation-purchasing-power'],
     ['compound-interest', 'compound-interest'],
+    ['bayes-lab-result', 'bayes-lab-result'],
   ] as const)('uses one stable artifact ID across locales for %s', (slug, artifact) => {
     const work = getVisualWork(slug);
 

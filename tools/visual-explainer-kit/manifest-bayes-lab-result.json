@@ -1,0 +1,890 @@
+{
+  "slug": "bayes-lab-result",
+  "renderer": "interactive-explainer",
+  "structure": {
+    "overview": {
+      "demo": "bayes-overview"
+    },
+    "steps": [
+      {
+        "id": "two-priors",
+        "demo": "bayes-prior"
+      },
+      {
+        "id": "likelihood",
+        "demo": "bayes-likelihood"
+      },
+      {
+        "id": "update",
+        "demo": "bayes-update"
+      },
+      {
+        "id": "opposite",
+        "demo": "bayes-contrast"
+      }
+    ]
+  },
+  "locales": {
+    "en": {
+      "lang": "en",
+      "meta": {
+        "title": "Same Lab Result—Why Do Two People Reach Opposite Conclusions?",
+        "description": "An interactive guide to Bayesian updating: how different priors plus the same positive test can yield opposite posteriors—base rates, likelihood ratios, and tree/area intuition. Teaching numbers only; not a medical diagnosis."
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "Pause all motion",
+        "resumeAll": "Resume all motion",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset",
+        "waiting": "The visual will load when it enters the viewport.",
+        "loading": "Preparing the visual…",
+        "error": "The visual could not be displayed. Read the explanation above instead.",
+        "figureFallback": "Enable JavaScript to view this interactive explanation.",
+        "skipToContent": "Skip to content",
+        "languageNavigation": "Languages",
+        "overviewLabel": "Bayesian update overview",
+        "stepLabel": "Step"
+      },
+      "hero": {
+        "eyebrow": "BELIEF / EVIDENCE / BAYESIAN UPDATE",
+        "title": "Same lab result—why do two people reach opposite conclusions?",
+        "subtitle": "One positive slip, two opposite gut reactions. The fork is often prior belief × how the test speaks—not a plot twist in the ink. Teaching metaphor with toy numbers; not a real medical conclusion."
+      },
+      "overview": {
+        "title": "Same positive—two opposite gut reads",
+        "body": [
+          "Person A sees a positive and freezes. Person B sees the same slip and stays calm. The ink is identical; the starting beliefs are not.",
+          "Bayesian updating says: posterior ∝ prior × likelihood. If the disease is rare for you and common for them, the same evidence can land in different places. Numbers below are illustrative—not a clinic report."
+        ],
+        "plainLanguage": {
+          "label": "Plainly",
+          "body": "Same evidence, different starting odds → different updated odds."
+        },
+        "keyPointsLabel": "Keep these three ideas",
+        "keyPoints": [
+          {
+            "title": "Prior first",
+            "body": "How common is the condition in this person’s world before the test?"
+          },
+          {
+            "title": "Evidence is a weight",
+            "body": "Sensitivity and false positives shape how hard the result pulls."
+          },
+          {
+            "title": "Teaching, not diagnosis",
+            "body": "Toy percentages explain the shape—they are not your lab’s truth."
+          }
+        ],
+        "demoTitle": "Toggle fear vs calm on the same positive",
+        "copy": {
+          "ariaLabel": "Interactive overview contrasting two gut reactions to the same positive lab result",
+          "caption": "Switch people: same positive slip, different priors, different gut reads.",
+          "controlLabel": "Whose reaction",
+          "modes": [
+            {
+              "key": "afraid",
+              "label": "Person A · fears",
+              "headline": "Positive feels like a verdict",
+              "detail": "A starts with a higher prior that the condition is present. The same positive lands closer to “yes, worry.”",
+              "badge": "High prior"
+            },
+            {
+              "key": "calm",
+              "label": "Person B · stays calm",
+              "headline": "Positive feels like a false alarm risk",
+              "detail": "B starts with a low base rate. Even a clear positive still leaves room for “maybe the test misfired.”",
+              "badge": "Low prior"
+            }
+          ],
+          "statusAfraid": "Person A: higher prior → same positive pulls the gut toward worry.",
+          "statusCalm": "Person B: low base rate → same positive still leaves doubt about a false positive."
+        }
+      },
+      "steps": [
+        {
+          "id": "two-priors",
+          "number": "01",
+          "title": "Two priors: rare crowd vs higher-risk crowd",
+          "body": [
+            "Before any slip arrives, each person carries a base rate—how often the condition shows up in people like them. Call it the prior.",
+            "In a rare-crowd prior the condition is uncommon; in a higher-risk prior it is more common. Same test later; different starting stacks of “yes” vs “no.” Illustrative percentages only."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Prior = how common you thought it was before opening the envelope."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Base rate",
+              "body": "Prevalence in this person’s reference group—not a moral score."
+            },
+            {
+              "title": "Two stacks",
+              "body": "Rare vs common priors look like thin vs thick “has it” bars."
+            },
+            {
+              "title": "Toy numbers",
+              "body": "We use round teaching percentages so the geometry stays readable."
+            }
+          ],
+          "demoTitle": "Slide between rare and higher-risk priors",
+          "copy": {
+            "ariaLabel": "Slider comparing a rare-crowd prior with a higher-risk prior for the same condition",
+            "caption": "Move the prior dial. Watch the “has it” share of the crowd change before any test.",
+            "controlLabel": "Prior (base rate)",
+            "rareLabel": "Rare crowd",
+            "commonLabel": "Higher-risk crowd",
+            "hasLabel": "Has condition (prior)",
+            "clearLabel": "Does not (prior)",
+            "statusRare": "Rare prior: most of the crowd starts in the clear stack.",
+            "statusCommon": "Higher-risk prior: a larger share starts in the “has it” stack."
+          }
+        },
+        {
+          "id": "likelihood",
+          "number": "02",
+          "title": "Likelihood: how the test talks when truth is yes vs no",
+          "body": [
+            "A positive result is not a pure mirror. Sensitivity asks: if the condition is truly present, how often does the test say yes? False-positive rate asks the opposite: if it is absent, how often does the test still say yes?",
+            "Those two rates form a likelihood ratio—how many times more the evidence favors “has it” over “doesn’t.” Teaching numbers; not a specific assay’s datasheet."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "The test can be right when sick and wrong when healthy—both rates matter."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Sensitivity",
+              "body": "P(positive | has it)—true-positive rate in the toy model."
+            },
+            {
+              "title": "False positive",
+              "body": "P(positive | clear)—how often healthy people still test positive."
+            },
+            {
+              "title": "Likelihood ratio",
+              "body": "Roughly sensitivity ÷ false-positive rate when both are nonzero."
+            }
+          ],
+          "demoTitle": "Tune sensitivity and false-positive rate",
+          "copy": {
+            "ariaLabel": "Controls for sensitivity and false-positive rate showing the likelihood ratio of a positive result",
+            "caption": "Adjust the two rates. The likelihood ratio shows how hard a positive pulls toward “has it.”",
+            "controlLabel": "Test rates",
+            "sensitivityLabel": "Sensitivity P(+|has)",
+            "fprLabel": "False-positive rate P(+|clear)",
+            "lrLabel": "Likelihood ratio",
+            "statusWeak": "Weak pull: positive evidence barely outweighs a false alarm.",
+            "statusStrong": "Strong pull: positives land far more often when the condition is truly present."
+          }
+        },
+        {
+          "id": "update",
+          "number": "03",
+          "title": "Update: prior × likelihood → posterior (tree / area)",
+          "body": [
+            "Picture a crowd of 1,000 toy people. Split them by prior into “has it” and “clear.” Then apply the test: some true positives, some false positives. Among everyone who got a positive, what share truly has it? That share is the posterior.",
+            "Area or tree views beat formula piles: you see which positive slips came from the thin rare branch versus the thick higher-risk branch. Still illustrative—not a medical conclusion."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Count the positives from each prior branch; the mix is your updated belief."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Count positives",
+              "body": "True positives + false positives = everyone who tested positive."
+            },
+            {
+              "title": "Posterior share",
+              "body": "True positives ÷ all positives ≈ P(has it | positive)."
+            },
+            {
+              "title": "Geometry > slogans",
+              "body": "Areas make base-rate neglect harder to miss."
+            }
+          ],
+          "demoTitle": "Walk the tree from prior to positive-only slice",
+          "copy": {
+            "ariaLabel": "Interactive tree or area diagram showing prior branches, test outcomes, and the posterior among positives",
+            "caption": "Follow the crowd: prior split → who tests positive → what share of positives truly has it.",
+            "controlLabel": "Crowd prior",
+            "crowdLabel": "Toy crowd",
+            "hasBranchLabel": "Has it",
+            "clearBranchLabel": "Clear",
+            "tpLabel": "True positives",
+            "fpLabel": "False positives",
+            "posteriorLabel": "Posterior P(has | +)",
+            "positivePoolLabel": "Everyone who tested positive",
+            "statusRare": "Rare prior: many positives are false alarms—posterior stays modest.",
+            "statusCommon": "Higher-risk prior: more true positives enter the pool—posterior climbs."
+          }
+        },
+        {
+          "id": "opposite",
+          "number": "04",
+          "title": "Why two people can disagree on the same slip",
+          "body": [
+            "Hold the test fixed. Give Person A a higher-risk prior and Person B a rare prior. Run the same update. Their posteriors can sit on opposite sides of a worry threshold even though the ink matches.",
+            "That is base-rate sensitivity in action—not a personality flaw. Closing reminder: every percentage here is a teaching metaphor, not a real diagnosis or clinical advice."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Same test, different priors → posteriors can cross a fear line in opposite ways."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Shared evidence",
+              "body": "Likelihood is the same; priors differ."
+            },
+            {
+              "title": "Opposite guts",
+              "body": "One posterior can look scary, the other tolerable."
+            },
+            {
+              "title": "Not medical advice",
+              "body": "Talk to clinicians about real labs—this page teaches Bayesian shape only."
+            }
+          ],
+          "demoTitle": "Side-by-side: A vs B after the same positive",
+          "copy": {
+            "ariaLabel": "Side-by-side comparison of two people updating on the same positive result from different priors",
+            "caption": "Compare Person A and Person B. Same positive evidence; different starting base rates; different posteriors.",
+            "controlLabel": "Compare",
+            "personALabel": "Person A (higher-risk prior)",
+            "personBLabel": "Person B (rare prior)",
+            "priorLabel": "Prior",
+            "posteriorLabel": "Posterior after +",
+            "evidenceLabel": "Shared positive evidence",
+            "statusSplit": "Same slip, split conclusions: A’s posterior sits higher; B’s stays lower.",
+            "statusAligned": "If priors were identical, posteriors would match—disagreement needs a prior gap."
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "Put the system back together",
+        "title": "Posterior = prior × how the evidence speaks—not the ink alone",
+        "body": [
+          "Bayesian updating multiplies a starting belief by how diagnostic the result is. Ignore the base rate and the same positive can feel like certainty when it is still mostly false alarms—or the reverse.",
+          "Remember the dials: prior, sensitivity, false-positive rate. And remember the disclaimer: illustrative numbers, not a medical conclusion."
+        ],
+        "checklistLabel": "Reader checklist",
+        "checklist": [
+          "Ask what prior (base rate) you are using.",
+          "Ask how often the test is positive when the condition is absent.",
+          "Prefer counting positives in a toy crowd over slogan certainty.",
+          "Treat this page as mechanism teaching—not diagnosis or clinical advice."
+        ],
+        "scaleTitle": "Four moving parts",
+        "scaleItems": [
+          {
+            "term": "Prior",
+            "question": "What starts the story?",
+            "role": "Base rate in this person’s reference group."
+          },
+          {
+            "term": "Likelihood",
+            "question": "How does the test speak?",
+            "role": "Sensitivity vs false-positive rate."
+          },
+          {
+            "term": "Posterior",
+            "question": "What updates?",
+            "role": "Belief after seeing the positive."
+          },
+          {
+            "term": "Disclaimer",
+            "question": "What is this not?",
+            "role": "Not a real lab report or medical advice."
+          }
+        ],
+        "finalQuote": "Opposite guts on the same slip often mean different priors—not different ink.",
+        "sourceNote": "Public-education notes on Bayesian updating and base-rate neglect. Lab percentages are illustrative teaching devices—not clinical performance claims or medical conclusions. Wikipedia “Bayes' theorem” / “Base rate fallacy” provide useful background; this page is mechanism-only and not diagnosis or treatment advice."
+      }
+    },
+    "zh": {
+      "lang": "zh",
+      "meta": {
+        "title": "同一张化验单，为什么两人结论相反？",
+        "description": "交互图解贝叶斯更新：先验不同时，同一阳性结果如何推出相反后验——基础率、似然比、树图/面积直觉。示意数字，不是真实医学结论。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "暂停所有动画",
+        "resumeAll": "恢复所有动画",
+        "pause": "暂停",
+        "resume": "继续",
+        "reset": "重置",
+        "waiting": "图示进入视口后才会加载。",
+        "loading": "正在准备图示…",
+        "error": "图示无法显示，请先阅读上方说明。",
+        "figureFallback": "请启用 JavaScript 以查看交互说明。",
+        "skipToContent": "跳到正文",
+        "languageNavigation": "语言",
+        "overviewLabel": "贝叶斯更新概览",
+        "stepLabel": "步骤"
+      },
+      "hero": {
+        "eyebrow": "信念 / 证据 / 贝叶斯更新",
+        "title": "同一张化验单，为什么两人结论相反？",
+        "subtitle": "同一张阳性单，一个人慌、一个人不慌。分叉往往在「事先觉得有多常见」×「检测怎么说话」，不在墨迹本身。下面是教学隐喻、示意数字——不是真实医学结论。"
+      },
+      "overview": {
+        "title": "同一阳性，两种相反的直觉",
+        "body": [
+          "A 看到阳性就慌；B 看到同一张单却还能稳住。墨迹一样，起跑的信念不一样。",
+          "贝叶斯更新说：后验 ∝ 先验 × 似然。对你少见、对他更常见时，同一证据可以落在不同位置。下面百分比是示意——不是门诊报告。"
+        ],
+        "plainLanguage": {
+          "label": "一句话说",
+          "body": "证据相同、起跑赔率不同 → 更新后的赔率也可以不同。"
+        },
+        "keyPointsLabel": "先记住三点",
+        "keyPoints": [
+          {
+            "title": "先验在前",
+            "body": "在打开信封之前，这件事在「像他这样的人」里有多常见？"
+          },
+          {
+            "title": "证据是砝码",
+            "body": "灵敏度、假阳性率决定结果往哪边拽、拽多狠。"
+          },
+          {
+            "title": "教学不是诊疗",
+            "body": "圆整百分比只为看清形状——不是你家化验单的真相。"
+          }
+        ],
+        "demoTitle": "切换：同一阳性下的慌与不慌",
+        "copy": {
+          "ariaLabel": "对照同一张阳性化验单上两种直觉反应的交互概览",
+          "caption": "切换人物：同一阳性单，不同先验，不同直觉。",
+          "controlLabel": "谁的反应",
+          "modes": [
+            {
+              "key": "afraid",
+              "label": "A · 慌",
+              "headline": "阳性像宣判",
+              "detail": "A 的先验更高：事先更相信「有」。同一阳性更容易落到「该担心」。",
+              "badge": "高先验"
+            },
+            {
+              "key": "calm",
+              "label": "B · 不慌",
+              "headline": "阳性更像假阳性风险",
+              "detail": "B 的基础率低。哪怕阳性很醒目，仍留着「也许测错了」的空间。",
+              "badge": "低先验"
+            }
+          ],
+          "statusAfraid": "人物 A：先验更高 → 同一阳性把直觉往担心拽。",
+          "statusCalm": "人物 B：基础率低 → 同一阳性仍怀疑假阳性。"
+        }
+      },
+      "steps": [
+        {
+          "id": "two-priors",
+          "number": "01",
+          "title": "两枚先验：少见人群 vs 更高风险人群",
+          "body": [
+            "化验单还没来之前，每个人都带着一个基础率——「像我这样的人」里这件事有多常见。这叫先验。",
+            "少见先验里这件事不常见；更高风险先验里更常见。后面检测可以一样，起跑的「有 / 没有」堆却不同。百分比仅供示意。"
+          ],
+          "plainLanguage": {
+            "label": "一句话说",
+            "body": "先验 = 拆信封之前，你觉得它有多常见。"
+          },
+          "keyPointsLabel": "看什么",
+          "keyPoints": [
+            {
+              "title": "基础率",
+              "body": "参照群体里的出现频率——不是道德评分。"
+            },
+            {
+              "title": "两堆人",
+              "body": "少见 vs 常见先验，看起来像「有」那条细或粗。"
+            },
+            {
+              "title": "示意数字",
+              "body": "用圆整教学百分比，好让几何可读。"
+            }
+          ],
+          "demoTitle": "在少见与更高风险先验之间滑动",
+          "copy": {
+            "ariaLabel": "对照少见人群先验与更高风险先验的滑块",
+            "caption": "拨动先验。看检测到来之前，「有」在人群里占多大一块。",
+            "controlLabel": "先验（基础率）",
+            "rareLabel": "少见人群",
+            "commonLabel": "更高风险人群",
+            "hasLabel": "有（先验）",
+            "clearLabel": "没有（先验）",
+            "statusRare": "少见先验：大部分人先落在「没有」那一堆。",
+            "statusCommon": "更高风险先验：「有」那一堆更大。"
+          }
+        },
+        {
+          "id": "likelihood",
+          "number": "02",
+          "title": "似然：真相为有 / 没有时，检测怎么说话",
+          "body": [
+            "阳性不是纯镜子。灵敏度问：真有时，检测多常说「有」？假阳性率问反过来：真没有时，检测还多常说「有」？",
+            "这两个率组成似然比——证据把砝码往「有」那边推多少倍。教学数字；不是某张试剂说明书。"
+          ],
+          "plainLanguage": {
+            "label": "一句话说",
+            "body": "有病时测对、没病时测错——两个率都得看。"
+          },
+          "keyPointsLabel": "看什么",
+          "keyPoints": [
+            {
+              "title": "灵敏度",
+              "body": "P(阳性 | 有)——示意模型里的真阳性率。"
+            },
+            {
+              "title": "假阳性",
+              "body": "P(阳性 | 没有)——健康人仍测阳的频率。"
+            },
+            {
+              "title": "似然比",
+              "body": "两者都非零时，大约是灵敏度 ÷ 假阳性率。"
+            }
+          ],
+          "demoTitle": "调节灵敏度与假阳性率",
+          "copy": {
+            "ariaLabel": "调节灵敏度与假阳性率并显示阳性似然比的控件",
+            "caption": "调两个率。似然比显示阳性往「有」那边拽得有多狠。",
+            "controlLabel": "检测指标",
+            "sensitivityLabel": "灵敏度 P(+|有)",
+            "fprLabel": "假阳性率 P(+|没有)",
+            "lrLabel": "似然比",
+            "statusWeak": "拉力弱：阳性证据几乎压不过假警报。",
+            "statusStrong": "拉力强：真有时远比没病时更容易出阳性。"
+          }
+        },
+        {
+          "id": "update",
+          "number": "03",
+          "title": "更新：先验 × 似然 → 后验（树图 / 面积）",
+          "body": [
+            "想象 1000 个示意小人。先按先验拆成「有」和「没有」，再过检测：一部分真阳性，一部分假阳性。在所有测阳的人里，真正「有」的占多少？那一份额就是后验。",
+            "面积或树图比堆公式更直观：你能看见阳性单有多少来自少见细枝、多少来自更高风险粗枝。仍是示意——不是医学结论。"
+          ],
+          "plainLanguage": {
+            "label": "一句话说",
+            "body": "数清各先验分支里的阳性；那一锅里的比例就是更新后的信念。"
+          },
+          "keyPointsLabel": "看什么",
+          "keyPoints": [
+            {
+              "title": "数阳性",
+              "body": "真阳性 + 假阳性 = 所有测阳的人。"
+            },
+            {
+              "title": "后验份额",
+              "body": "真阳性 ÷ 全部阳性 ≈ P(有 | 阳性)。"
+            },
+            {
+              "title": "几何 > 口号",
+              "body": "面积让「忽视基础率」更难蒙混。"
+            }
+          ],
+          "demoTitle": "从先验走到「只看阳性」那一刀",
+          "copy": {
+            "ariaLabel": "展示先验分支、检测结果与阳性中后验份额的交互树图或面积图",
+            "caption": "跟着人群走：先验拆分 → 谁测阳 → 阳性里真正「有」占多少。",
+            "controlLabel": "人群先验",
+            "crowdLabel": "示意人群",
+            "hasBranchLabel": "有",
+            "clearBranchLabel": "没有",
+            "tpLabel": "真阳性",
+            "fpLabel": "假阳性",
+            "posteriorLabel": "后验 P(有 | +)",
+            "positivePoolLabel": "所有测阳的人",
+            "statusRare": "少见先验：不少阳性是假警报——后验仍然温和。",
+            "statusCommon": "更高风险先验：更多真阳性进池——后验抬升。"
+          }
+        },
+        {
+          "id": "opposite",
+          "number": "04",
+          "title": "为什么同一张单，两人可以吵翻",
+          "body": [
+            "检测固定。给 A 更高风险先验、给 B 少见先验，做同一套更新。他们的后验可以落在担心阈值的两边——墨迹却一模一样。",
+            "这是基础率敏感性在起作用，不是性格缺陷。收尾提醒：这里每个百分比都是教学隐喻，不是真实诊断，也不是诊疗建议。"
+          ],
+          "plainLanguage": {
+            "label": "一句话说",
+            "body": "同一检测、不同先验 → 后验可以分别站在怕与不怕两侧。"
+          },
+          "keyPointsLabel": "看什么",
+          "keyPoints": [
+            {
+              "title": "共享证据",
+              "body": "似然相同；先验不同。"
+            },
+            {
+              "title": "相反直觉",
+              "body": "一个后验吓人，另一个还能接受。"
+            },
+            {
+              "title": "不是医疗建议",
+              "body": "真实化验单请找临床决策——本页只讲贝叶斯形状。"
+            }
+          ],
+          "demoTitle": "并排：同一阳性后的 A 与 B",
+          "copy": {
+            "ariaLabel": "并排对照两人从不同先验对同一阳性结果做更新",
+            "caption": "对照 A 与 B。阳性证据相同；起跑基础率不同；后验不同。",
+            "controlLabel": "对照",
+            "personALabel": "人物 A（更高风险先验）",
+            "personBLabel": "人物 B（少见先验）",
+            "priorLabel": "先验",
+            "posteriorLabel": "阳性后的后验",
+            "evidenceLabel": "共享的阳性证据",
+            "statusSplit": "同一张单，结论分叉：A 的后验更高，B 的更低。",
+            "statusAligned": "若先验相同，后验也会对齐——吵起来往往因为先验缺口。"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "把系统装回去",
+        "title": "后验 = 先验 × 证据怎么说话——不是单看墨迹",
+        "body": [
+          "贝叶斯更新用起点信念乘上结果有多「会说话」。忽视基础率时，同一阳性可能被当成铁证，其实仍可能大多是假警报——反过来也一样。",
+          "记住旋钮：先验、灵敏度、假阳性率。也记住免责：示意数字，不是医学结论。"
+        ],
+        "checklistLabel": "读者自检",
+        "checklist": [
+          "先问自己用的先验（基础率）是什么。",
+          "再问：没病时检测多常仍报阳性。",
+          "宁可在示意人群里数阳性，也不要口号式的「一定」。",
+          "把本页当机制教学——不是诊断或诊疗建议。"
+        ],
+        "scaleTitle": "四个零件",
+        "scaleItems": [
+          {
+            "term": "先验",
+            "question": "故事从哪起跑？",
+            "role": "此人参照群体里的基础率。"
+          },
+          {
+            "term": "似然",
+            "question": "检测怎么说话？",
+            "role": "灵敏度对照假阳性率。"
+          },
+          {
+            "term": "后验",
+            "question": "更新了什么？",
+            "role": "看到阳性之后的信念。"
+          },
+          {
+            "term": "免责",
+            "question": "这页不是什么？",
+            "role": "不是真实化验报告，也不是医疗建议。"
+          }
+        ],
+        "finalQuote": "同一张单上相反的直觉，常常是先验不同——不是墨迹不同。",
+        "sourceNote": "公共教育向笔记：贝叶斯更新与基础率忽视。化验百分比为教学示意，不代表某项临床性能，也不是医学结论。可参考维基「贝叶斯定理」「基础率谬误」作背景；本页只讲机制，不含诊断或治疗建议。"
+      }
+    },
+    "ja": {
+      "lang": "ja",
+      "meta": {
+        "title": "同じ検査結果なのに、なぜ二人の結論は真逆なのか？",
+        "description": "ベイズ更新のインタラクティブ解説：異なる事前確率と同一の陽性結果が、なぜ反対の事後確率になり得るか——基礎率、尤度比、木/面積の直感。示意の数字であり、医学的結論ではない。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "すべての動きを停止",
+        "resumeAll": "すべての動きを再開",
+        "pause": "一時停止",
+        "resume": "再開",
+        "reset": "リセット",
+        "waiting": "表示領域に入ると図が読み込まれます。",
+        "loading": "図を準備しています…",
+        "error": "図を表示できません。上の説明を読んでください。",
+        "figureFallback": "インタラクティブ説明を見るには JavaScript を有効にしてください。",
+        "skipToContent": "本文へ",
+        "languageNavigation": "言語",
+        "overviewLabel": "ベイズ更新の概要",
+        "stepLabel": "ステップ"
+      },
+      "hero": {
+        "eyebrow": "信念 / 証拠 / ベイズ更新",
+        "title": "同じ検査結果なのに、なぜ二人の結論は真逆なのか？",
+        "subtitle": "同じ陽性票でも、一人は恐れ、一人は落ち着く。分岐はしばしば「事前にどれくらいあり得ると思っていたか」×「検査がどう語るか」であり、インクそのものではない。示意の数字による教材メタファー——実医療の結論ではない。"
+      },
+      "overview": {
+        "title": "同じ陽性——真逆の直感",
+        "body": [
+          "A は陽性を見て凍りつく。B は同じ票を見ても落ち着く。インクは同じで、出発の信念が違う。",
+          "ベイズ更新は言う：事後 ∝ 事前 × 尤度。あなたには稀で相手にはあり得るなら、同じ証拠でも着地が違う。以下の百分率は示意——診療レポートではない。"
+        ],
+        "plainLanguage": {
+          "label": "ひとことで",
+          "body": "証拠は同じ、出発のオッズが違う → 更新後のオッズも違い得る。"
+        },
+        "keyPointsLabel": "まず三点",
+        "keyPoints": [
+          {
+            "title": "事前が先",
+            "body": "検査の前、その人の世界で条件はどれくらいあり得るか？"
+          },
+          {
+            "title": "証拠は重り",
+            "body": "感度と偽陽性が、結果の引き方を決める。"
+          },
+          {
+            "title": "教材であり診断ではない",
+            "body": "丸い百分率は形を教えるだけ——あなたの検査の真実ではない。"
+          }
+        ],
+        "demoTitle": "同じ陽性での恐れと落ち着きを切り替え",
+        "copy": {
+          "ariaLabel": "同じ陽性検査結果に対する二つの直感を対比するインタラクティブ概要",
+          "caption": "人物を切り替え：同じ陽性票、異なる事前、異なる直感。",
+          "controlLabel": "誰の反応か",
+          "modes": [
+            {
+              "key": "afraid",
+              "label": "A · 恐れる",
+              "headline": "陽性が評決のように感じる",
+              "detail": "A は「ある」事前が高い。同じ陽性は「心配せよ」に寄りやすい。",
+              "badge": "高い事前"
+            },
+            {
+              "key": "calm",
+              "label": "B · 落ち着く",
+              "headline": "陽性は偽陽性リスクにも見える",
+              "detail": "B の基礎率は低い。はっきりした陽性でも「検査の誤りかも」が残る。",
+              "badge": "低い事前"
+            }
+          ],
+          "statusAfraid": "人物 A：事前が高い → 同じ陽性が心配へ引き寄せる。",
+          "statusCalm": "人物 B：基礎率が低い → 同じ陽性でも偽陽性の疑いが残る。"
+        }
+      },
+      "steps": [
+        {
+          "id": "two-priors",
+          "number": "01",
+          "title": "二つの事前：稀な集団 vs より高リスクの集団",
+          "body": [
+            "票が届く前、各人は基礎率を持つ——自分に似た人の中でその条件がどれくらいあるか。これが事前。",
+            "稀な事前では珍しく、高リスク事前ではよりあり得る。後の検査は同じでも、「ある/ない」の初期の山が違う。百分率は示意のみ。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "事前 = 封筒を開ける前に、どれくらいあり得ると思っていたか。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "基礎率",
+              "body": "参照集団での出現頻度——道徳スコアではない。"
+            },
+            {
+              "title": "二つの山",
+              "body": "稀 vs あり得る事前は、「ある」棒の細太に見える。"
+            },
+            {
+              "title": "玩具の数字",
+              "body": "幾何を読みやすくするため丸い教材パーセントを使う。"
+            }
+          ],
+          "demoTitle": "稀な事前と高リスク事前を滑らせる",
+          "copy": {
+            "ariaLabel": "稀な集団の事前と高リスク事前を比べるスライダー",
+            "caption": "事前ダイヤルを動かし、検査前の「ある」割合の変化を見る。",
+            "controlLabel": "事前（基礎率）",
+            "rareLabel": "稀な集団",
+            "commonLabel": "高リスク集団",
+            "hasLabel": "ある（事前）",
+            "clearLabel": "ない（事前）",
+            "statusRare": "稀な事前：大半はまず「ない」側にいる。",
+            "statusCommon": "高リスク事前：「ある」側の割合が大きい。"
+          }
+        },
+        {
+          "id": "likelihood",
+          "number": "02",
+          "title": "尤度：真実がある/ないとき、検査はどう語るか",
+          "body": [
+            "陽性は完全な鏡ではない。感度は問う：本当にあるとき、検査はどれだけ「ある」と言うか。偽陽性率は逆：本当にないとき、なおどれだけ「ある」と言うか。",
+            "この二つが尤度比を作る——証拠が「ある」を「ない」より何倍支持するか。教材の数字であり、特定試薬の仕様書ではない。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "病があるときの正解と、ないときの誤報——両方の率が要る。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "感度",
+              "body": "P(陽性|ある)——玩具モデルの真陽性率。"
+            },
+            {
+              "title": "偽陽性",
+              "body": "P(陽性|ない)——健康でも陽が出る頻度。"
+            },
+            {
+              "title": "尤度比",
+              "body": "両方ゼロでなければ、おおよそ感度÷偽陽性率。"
+            }
+          ],
+          "demoTitle": "感度と偽陽性率を調整する",
+          "copy": {
+            "ariaLabel": "感度と偽陽性率を調整し陽性の尤度比を示すコントロール",
+            "caption": "二つの率を動かす。尤度比は陽性が「ある」側へどれだけ強く引くかを示す。",
+            "controlLabel": "検査の率",
+            "sensitivityLabel": "感度 P(+|ある)",
+            "fprLabel": "偽陽性率 P(+|ない)",
+            "lrLabel": "尤度比",
+            "statusWeak": "弱い引き：陽性証拠が誤報をほとんど上回らない。",
+            "statusStrong": "強い引き：本当にあるときの方がはるかに陽が出やすい。"
+          }
+        },
+        {
+          "id": "update",
+          "number": "03",
+          "title": "更新：事前 × 尤度 → 事後（木 / 面積）",
+          "body": [
+            "1000人の玩具の群衆を想像する。事前で「ある」「ない」に分け、検査を当てる：真陽性と偽陽性。陽が出た人のうち、本当に「ある」割合は？それが事後。",
+            "面積や木は式の山より直感的：稀な細い枝から来た陽と、高リスクの太い枝から来た陽が見える。なお示意——医学的結論ではない。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "各事前枝の陽性を数え、その混ざりが更新後の信念。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "陽性を数える",
+              "body": "真陽性+偽陽性=陽が出た全員。"
+            },
+            {
+              "title": "事後の割合",
+              "body": "真陽性÷全陽性 ≈ P(ある|陽性)。"
+            },
+            {
+              "title": "幾何 > スローガン",
+              "body": "面積は基礎率無視を見逃しにくくする。"
+            }
+          ],
+          "demoTitle": "事前から「陽性だけの切片」まで辿る",
+          "copy": {
+            "ariaLabel": "事前枝・検査結果・陽性内の事後割合を示すインタラクティブな木または面積図",
+            "caption": "群衆を追う：事前分割 → 誰が陽か → 陽性のうち本当に「ある」割合。",
+            "controlLabel": "群衆の事前",
+            "crowdLabel": "玩具の群衆",
+            "hasBranchLabel": "ある",
+            "clearBranchLabel": "ない",
+            "tpLabel": "真陽性",
+            "fpLabel": "偽陽性",
+            "posteriorLabel": "事後 P(ある | +)",
+            "positivePoolLabel": "陽が出た全員",
+            "statusRare": "稀な事前：陽性の多くが誤報——事後は控えめ。",
+            "statusCommon": "高リスク事前：真陽性が増え——事後が上がる。"
+          }
+        },
+        {
+          "id": "opposite",
+          "number": "04",
+          "title": "なぜ同じ票で二人が真逆になり得るか",
+          "body": [
+            "検査は固定。A に高リスク事前、B に稀な事前を与え、同じ更新を走らせる。心配の閾の左右に事後が分かれても、インクは一致し得る。",
+            "それは基礎率への敏感さであり、性格の欠陥ではない。締めの注意：ここにある百分率はすべて教材メタファーであり、実診断や臨床助言ではない。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "同じ検査、違う事前 → 事後は恐れの線の反対側に立ち得る。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "共有の証拠",
+              "body": "尤度は同じ；事前が違う。"
+            },
+            {
+              "title": "真逆の直感",
+              "body": "一方の事後は恐ろしく、他方は許容範囲。"
+            },
+            {
+              "title": "医療助言ではない",
+              "body": "実検査は臨床へ——本ページはベイズの形だけ。"
+            }
+          ],
+          "demoTitle": "並び：同じ陽性の後の A と B",
+          "copy": {
+            "ariaLabel": "異なる事前から同一陽性結果を更新する二人の並び比較",
+            "caption": "A と B を比べる。陽性証拠は同じ；出発の基礎率が違う；事後が違う。",
+            "controlLabel": "比較",
+            "personALabel": "人物 A（高リスク事前）",
+            "personBLabel": "人物 B（稀な事前）",
+            "priorLabel": "事前",
+            "posteriorLabel": "陽性後の事後",
+            "evidenceLabel": "共有の陽性証拠",
+            "statusSplit": "同じ票、結論は分岐：A の事後は高く、B は低い。",
+            "statusAligned": "事前が同じなら事後も揃う——対立には事前の差が要る。"
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "システムを組み立て直す",
+        "title": "事後 = 事前 × 証拠の語り方——インクだけではない",
+        "body": [
+          "ベイズ更新は出発の信念に、結果がどれだけ診断的かを掛ける。基礎率を無視すると、同じ陽性がほぼ誤報なのに確信に見えたり、その逆が起きる。",
+          "ダイヤルを覚える：事前、感度、偽陽性率。免責も覚える：示意の数字であり、医学的結論ではない。"
+        ],
+        "checklistLabel": "読者チェック",
+        "checklist": [
+          "使っている事前（基礎率）を問う。",
+          "条件がないとき検査がどれだけ陽になるかを問う。",
+          "スローガンの確信より、玩具群衆で陽性を数える。",
+          "本ページは仕組みの教材——診断や臨床助言ではない。"
+        ],
+        "scaleTitle": "四つの動き",
+        "scaleItems": [
+          {
+            "term": "事前",
+            "question": "物語は何から？",
+            "role": "その人の参照集団での基礎率。"
+          },
+          {
+            "term": "尤度",
+            "question": "検査はどう語る？",
+            "role": "感度対偽陽性率。"
+          },
+          {
+            "term": "事後",
+            "question": "何が更新される？",
+            "role": "陽性を見たあとの信念。"
+          },
+          {
+            "term": "免責",
+            "question": "これは何ではない？",
+            "role": "実検査レポートでも医療助言でもない。"
+          }
+        ],
+        "finalQuote": "同じ票での真逆の直感は、しばしば異なる事前——異なるインクではない。",
+        "sourceNote": "ベイズ更新と基礎率無視についての公共教育ノート。検査の百分率は教材の示意であり、臨床性能の主張でも医学的結論でもない。Wikipedia「Bayes' theorem」「Base rate fallacy」は背景として有用；本ページは仕組みのみで、診断・治療の助言ではない。"
+      }
+    }
+  }
+}

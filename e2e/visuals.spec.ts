@@ -5,7 +5,8 @@ test('English Visuals gallery contains the multilingual published works', async 
 
   expect(response?.status()).toBe(200);
   await expect(page.locator('h1')).toHaveText('Visuals');
-  await expect(page.locator('[data-visual-card]')).toHaveCount(9);
+  await expect(page.locator('[data-visual-card]')).toHaveCount(10);
+  await expect(page.getByRole('heading', { name: 'Same Lab Result—Why Do Two People Reach Opposite Conclusions?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: '0.1% Extra a Day—How Far Ahead Are You in a Year?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'When More Money Is Printed, Why Does Your Pocket Feel Thinner?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Can a Butterfly\'s Flap Really Start a Tornado?' })).toBeVisible();
@@ -15,7 +16,7 @@ test('English Visuals gallery contains the multilingual published works', async 
   await expect(page.getByRole('heading', { name: 'How Air Conditioners Work' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'What Is Loop Engineering?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'How Typhoons Form' })).toBeVisible();
-  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(9);
+  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(10);
   await expect(page.getByText('Agent Architecture Showcase')).toHaveCount(0);
   await expect(page.getByText(/not available in this language/i)).toHaveCount(0);
 });
@@ -28,8 +29,8 @@ test('stale missing-language query cannot mark multilingual Typhoon as unavailab
 });
 
 for (const locale of [
-  { path: '/cn/visuals/', title: '可视化', work: '每天多赚 0.1%，一年后你会差多少？' },
-  { path: '/ja/visuals/', title: 'ビジュアル', work: '毎日0.1%多く増やすと、一年後どれだけ差がつく？' },
+  { path: '/cn/visuals/', title: '可视化', work: '同一张化验单，为什么两人结论相反？' },
+  { path: '/ja/visuals/', title: 'ビジュアル', work: '同じ検査結果なのに、なぜ二人の結論は真逆なのか？' },
 ]) {
   test(`${locale.path} renders a localized Visuals gallery`, async ({ page }) => {
     const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
@@ -37,7 +38,7 @@ for (const locale of [
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toHaveText(locale.title);
     await expect(page.getByRole('heading', { name: locale.work })).toBeVisible();
-    await expect(page.locator('[data-visual-card]')).toHaveCount(9);
+    await expect(page.locator('[data-visual-card]')).toHaveCount(10);
   });
 }
 
@@ -58,6 +59,7 @@ for (const locale of [
     path: '/',
     sectionTitle: 'Visuals',
     works: [
+      ['bayes-lab-result', 'Same Lab Result—Why Do Two People Reach Opposite Conclusions?', '/visuals/bayes-lab-result/'],
       ['compound-interest', '0.1% Extra a Day—How Far Ahead Are You in a Year?', '/visuals/compound-interest/'],
       ['inflation-purchasing-power', 'When More Money Is Printed, Why Does Your Pocket Feel Thinner?', '/visuals/inflation-purchasing-power/'],
       ['butterfly-effect', "Can a Butterfly's Flap Really Start a Tornado?", '/visuals/butterfly-effect/'],
@@ -76,6 +78,7 @@ for (const locale of [
     path: '/cn/',
     sectionTitle: '可视化',
     works: [
+      ['bayes-lab-result', '同一张化验单，为什么两人结论相反？', '/cn/visuals/bayes-lab-result/'],
       ['compound-interest', '每天多赚 0.1%，一年后你会差多少？', '/cn/visuals/compound-interest/'],
       ['inflation-purchasing-power', '钱印多了，为什么你口袋里的反而更薄？', '/cn/visuals/inflation-purchasing-power/'],
       ['butterfly-effect', '一只蝴蝶扇翅，真能掀起龙卷风吗？', '/cn/visuals/butterfly-effect/'],
@@ -94,6 +97,7 @@ for (const locale of [
     path: '/ja/',
     sectionTitle: 'ビジュアル',
     works: [
+      ['bayes-lab-result', '同じ検査結果なのに、なぜ二人の結論は真逆なのか？', '/ja/visuals/bayes-lab-result/'],
       ['compound-interest', '毎日0.1%多く増やすと、一年後どれだけ差がつく？', '/ja/visuals/compound-interest/'],
       ['inflation-purchasing-power', 'お金を刷れば刷るほど、なぜ懐は薄くなるのか？', '/ja/visuals/inflation-purchasing-power/'],
       ['butterfly-effect', '蝶の羽ばたきは、本当に竜巻を起こすのか？', '/ja/visuals/butterfly-effect/'],
@@ -1012,6 +1016,66 @@ for (const locale of [
   });
 }
 
+
+for (const locale of [
+  {
+    path: '/visuals/bayes-lab-result/',
+    htmlLang: 'en',
+    h1: 'Same lab result—why do two people reach opposite conclusions?',
+    pauseAll: 'Pause all motion',
+    reset: 'Reset',
+    control: 'Whose reaction',
+    statusCalm: 'Person B: low base rate → same positive still leaves doubt about a false positive.',
+  },
+  {
+    path: '/cn/visuals/bayes-lab-result/',
+    htmlLang: 'zh-CN',
+    h1: '同一张化验单，为什么两人结论相反？',
+    pauseAll: '暂停所有动画',
+    reset: '重置',
+    control: '谁的反应',
+    statusCalm: '人物 B：基础率低 → 同一阳性仍怀疑假阳性。',
+  },
+  {
+    path: '/ja/visuals/bayes-lab-result/',
+    htmlLang: 'ja',
+    h1: '同じ検査結果なのに、なぜ二人の結論は真逆なのか？',
+    pauseAll: 'すべての動きを停止',
+    reset: 'リセット',
+    control: '誰の反応か',
+    statusCalm: '人物 B：基礎率が低い → 同じ陽性でも偽陽性の疑いが残る。',
+  },
+]) {
+  test(`${locale.path} renders the localized bayes-lab-result explainer and lifecycle`, async ({ page }) => {
+    const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('html')).toHaveAttribute('lang', locale.htmlLang);
+    await expect(page.locator('body > nav')).toBeVisible();
+    await expect(page.locator('h1')).toHaveText(locale.h1);
+    await expect(page.locator('h1')).toHaveCount(1);
+    const visual = page.locator('[data-visual-artifact="bayes-lab-result"]');
+    await expect(visual).toBeVisible();
+    await expect(visual.locator('iframe')).toHaveCount(0);
+    await expect(page.locator('.site-header')).toHaveCount(0);
+    await expect(page.locator('interactive-figure')).toHaveCount(5);
+
+    const overview = page.locator('interactive-figure[data-demo="bayes-overview"]');
+    await overview.scrollIntoViewIfNeeded();
+    await expect(overview).toHaveAttribute('data-state', 'mounted');
+    await expect(overview.locator('.bayes-ov-controls')).toBeVisible();
+    const calmMode = overview.locator('[data-bayes-ov="1"]');
+    const status = overview.locator('[data-bayes-status]');
+    await calmMode.click();
+    await expect(calmMode).toHaveAttribute('aria-pressed', 'true');
+    await expect(status).toContainText(locale.statusCalm);
+
+    await overview.getByRole('button', { name: locale.reset }).click();
+    await expect(overview.locator('[data-bayes-ov="0"]')).toHaveAttribute('aria-pressed', 'true');
+    await page.getByRole('button', { name: locale.pauseAll }).click();
+    await expect(overview).toHaveAttribute('data-playback', 'paused');
+  });
+}
+
 test('sitemap lists every published visual locale and no Agent Architecture routes', async ({ request }) => {
   const indexResponse = await request.get('/sitemap-index.xml');
   expect(indexResponse.ok()).toBeTruthy();
@@ -1052,6 +1116,9 @@ test('sitemap lists every published visual locale and no Agent Architecture rout
     '/visuals/compound-interest/',
     '/cn/visuals/compound-interest/',
     '/ja/visuals/compound-interest/',
+    '/visuals/bayes-lab-result/',
+    '/cn/visuals/bayes-lab-result/',
+    '/ja/visuals/bayes-lab-result/',
   ]) {
     expect(xml).toContain(`<loc>https://redreamality.com${path}</loc>`);
   }

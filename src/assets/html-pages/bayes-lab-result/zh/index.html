@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="交互图解贝叶斯更新：先验不同时，同一阳性结果如何推出相反后验——基础率、似然比、树图/面积直觉。示意数字，不是真实医学结论。">
+  <title>同一张化验单，为什么两人结论相反？</title>
+  <style data-prototype-bundle="article">
+:root {
+  color-scheme: light;
+  --paper: #f4f1e8;
+  --surface: #fffdf8;
+  --ink: #17333c;
+  --muted: #60747a;
+  --line: #d8ddd7;
+  --ocean: #0f7185;
+  --warm: #ee9d46;
+  --coral: #d45f50;
+  --soft-ocean: color-mix(in srgb, var(--ocean) 9%, var(--surface));
+  --soft-warm: color-mix(in srgb, var(--warm) 12%, var(--surface));
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body { margin: 0; overflow-x: clip; color: var(--ink); background: radial-gradient(circle at 20% 0, #dff3ef 0, transparent 30rem), var(--paper); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .75rem;
+  left: .75rem;
+  padding: .65rem .9rem;
+  color: white;
+  background: var(--ink);
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.75rem;
+  padding: .65rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(216, 221, 215, .9);
+  background: rgba(244, 241, 232, .9);
+  backdrop-filter: blur(14px);
+}
+.site-header strong { margin-right: auto; font-size: .72rem; letter-spacing: .12em; }
+.language-links { display: flex; gap: .65rem; }
+.language-links a { color: var(--muted); font-size: .78rem; }
+.language-links a[aria-current="page"] { color: var(--ocean); font-weight: 800; }
+[data-global-motion] {
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.hero, .copy-block {
+  width: min(calc(100% - 2rem), 54rem);
+  margin-inline: auto;
+}
+.hero {
+  position: relative;
+  padding: clamp(5rem, 14vw, 10rem) 0;
+}
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -12% auto auto;
+  width: clamp(9rem, 28vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ocean) 35%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem color-mix(in srgb, var(--ocean) 5%, transparent),
+    0 0 0 5rem color-mix(in srgb, var(--warm) 4%, transparent);
+  content: "";
+}
+.eyebrow, .section-label {
+  margin: 0 0 1rem;
+  color: var(--ocean);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+h1, h2 { margin-top: 0; line-height: 1.03; text-wrap: balance; }
+h1 { max-width: 9em; margin-bottom: 1.5rem; font-size: clamp(3.2rem, 10vw, 7rem); letter-spacing: -.06em; }
+h2 { max-width: 16em; margin-bottom: 1.15rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+.hero-subtitle, .copy-prose { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.75; }
+.hero-subtitle { max-width: 38rem; }
+.copy-prose { margin: .8rem 0 0; }
+
+.plain-language {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .75rem 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 55%, var(--line));
+  border-radius: 1rem;
+  background: var(--soft-warm);
+}
+.plain-language strong {
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  color: var(--surface);
+  background: var(--warm);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.plain-language p { margin: 0; color: var(--ink); line-height: 1.65; }
+
+.concept-points { margin-top: 1.4rem; }
+.concept-points-label {
+  margin: 0 0 .7rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.concept-points ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.concept-card strong { display: block; margin-bottom: .45rem; }
+.concept-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+.overview, .chapter, .closing { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
+.overview { background: color-mix(in srgb, var(--surface) 42%, transparent); }
+.chapter:nth-of-type(even) { background: color-mix(in srgb, var(--surface) 22%, transparent); }
+interactive-figure {
+  display: block;
+  width: min(calc(100% - 2rem), 68rem);
+  min-height: 29rem;
+  margin: 3rem auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 51, 60, .14);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 1.5rem 4rem rgba(23, 51, 60, .1);
+}
+
+.closing { background: linear-gradient(150deg, var(--soft-ocean), color-mix(in srgb, var(--paper) 86%, var(--surface))); }
+.closing-copy { width: min(calc(100% - 2rem), 68rem); }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.starter-checklist, .boundary-map {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.closing h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.starter-checklist ol { display: grid; gap: .7rem; margin: 0; padding-left: 1.35rem; }
+.starter-checklist li { padding-left: .3rem; line-height: 1.55; }
+.boundary-map ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.scale-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: .2rem .8rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--surface);
+}
+.scale-card strong { grid-row: 1 / span 2; color: var(--ocean); }
+.scale-card span { color: var(--ink); font-size: .82rem; font-weight: 800; }
+.scale-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.closing blockquote {
+  margin: 2rem 0 0;
+  padding: 1.35rem clamp(1rem, 3vw, 1.8rem);
+  border-left: .32rem solid var(--ocean);
+  color: var(--ink);
+  background: var(--surface);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.55;
+}
+.source-note { margin: 1rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+article[data-visual-slug="loop-engineering"] .hero .eyebrow { color: var(--coral); }
+article[data-visual-slug="loop-engineering"] interactive-figure { box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ocean) 12%, transparent); }
+
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header strong { width: 100%; }
+  .language-links { margin-right: auto; }
+  interactive-figure { min-height: 32rem; border-radius: 1rem; }
+  .concept-points ul, .closing-grid { grid-template-columns: 1fr; }
+  .plain-language { grid-template-columns: 1fr; }
+  .scale-card { grid-template-columns: 5.5rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#article">跳到正文</a>
+  <header class="site-header">
+    <strong>VISUAL KIT / PROTOTYPE</strong>
+    <nav class="language-links" aria-label="语言">
+<a href="../en/" hreflang="en">English</a>
+<a href="../zh/" hreflang="zh" aria-current="page">中文</a>
+<a href="../ja/" hreflang="ja">日本語</a>
+    </nav>
+    <button type="button" data-global-motion aria-pressed="false"></button>
+  </header>
+  <main id="article">
+    <article data-visual-slug="bayes-lab-result">
+      <header class="hero">
+        <p class="eyebrow">信念 / 证据 / 贝叶斯更新</p>
+        <h1>同一张化验单，为什么两人结论相反？</h1>
+        <p class="hero-subtitle">同一张阳性单，一个人慌、一个人不慌。分叉往往在「事先觉得有多常见」×「检测怎么说话」，不在墨迹本身。下面是教学隐喻、示意数字——不是真实医学结论。</p>
+      </header>
+<section class="overview" aria-labelledby="overview-title">
+  <div class="copy-block">
+    <p class="section-label">贝叶斯更新概览</p>
+    <h2 id="overview-title">同一阳性，两种相反的直觉</h2>
+    <p class="copy-prose">A 看到阳性就慌；B 看到同一张单却还能稳住。墨迹一样，起跑的信念不一样。</p>
+<p class="copy-prose">贝叶斯更新说：后验 ∝ 先验 × 似然。对你少见、对他更常见时，同一证据可以落在不同位置。下面百分比是示意——不是门诊报告。</p>
+    <aside class="plain-language"><strong>一句话说</strong><p>证据相同、起跑赔率不同 → 更新后的赔率也可以不同。</p></aside><div class="concept-points"><p class="concept-points-label">先记住三点</p><ul><li class="concept-card"><strong>先验在前</strong><p>在打开信封之前，这件事在「像他这样的人」里有多常见？</p></li><li class="concept-card"><strong>证据是砝码</strong><p>灵敏度、假阳性率决定结果往哪边拽、拽多狠。</p></li><li class="concept-card"><strong>教学不是诊疗</strong><p>圆整百分比只为看清形状——不是你家化验单的真相。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="bayes-overview" data-title="切换：同一阳性下的慌与不慌" data-copy="{&quot;ariaLabel&quot;:&quot;对照同一张阳性化验单上两种直觉反应的交互概览&quot;,&quot;caption&quot;:&quot;切换人物：同一阳性单，不同先验，不同直觉。&quot;,&quot;controlLabel&quot;:&quot;谁的反应&quot;,&quot;modes&quot;:[{&quot;key&quot;:&quot;afraid&quot;,&quot;label&quot;:&quot;A · 慌&quot;,&quot;headline&quot;:&quot;阳性像宣判&quot;,&quot;detail&quot;:&quot;A 的先验更高：事先更相信「有」。同一阳性更容易落到「该担心」。&quot;,&quot;badge&quot;:&quot;高先验&quot;},{&quot;key&quot;:&quot;calm&quot;,&quot;label&quot;:&quot;B · 不慌&quot;,&quot;headline&quot;:&quot;阳性更像假阳性风险&quot;,&quot;detail&quot;:&quot;B 的基础率低。哪怕阳性很醒目，仍留着「也许测错了」的空间。&quot;,&quot;badge&quot;:&quot;低先验&quot;}],&quot;statusAfraid&quot;:&quot;人物 A：先验更高 → 同一阳性把直觉往担心拽。&quot;,&quot;statusCalm&quot;:&quot;人物 B：基础率低 → 同一阳性仍怀疑假阳性。&quot;}"><noscript>请启用 JavaScript 以查看交互说明。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="two-priors" aria-labelledby="two-priors-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 01</p>
+    <h2 id="two-priors-title">两枚先验：少见人群 vs 更高风险人群</h2>
+    <p class="copy-prose">化验单还没来之前，每个人都带着一个基础率——「像我这样的人」里这件事有多常见。这叫先验。</p>
+<p class="copy-prose">少见先验里这件事不常见；更高风险先验里更常见。后面检测可以一样，起跑的「有 / 没有」堆却不同。百分比仅供示意。</p>
+    <aside class="plain-language"><strong>一句话说</strong><p>先验 = 拆信封之前，你觉得它有多常见。</p></aside><div class="concept-points"><p class="concept-points-label">看什么</p><ul><li class="concept-card"><strong>基础率</strong><p>参照群体里的出现频率——不是道德评分。</p></li><li class="concept-card"><strong>两堆人</strong><p>少见 vs 常见先验，看起来像「有」那条细或粗。</p></li><li class="concept-card"><strong>示意数字</strong><p>用圆整教学百分比，好让几何可读。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="bayes-prior" data-title="在少见与更高风险先验之间滑动" data-copy="{&quot;ariaLabel&quot;:&quot;对照少见人群先验与更高风险先验的滑块&quot;,&quot;caption&quot;:&quot;拨动先验。看检测到来之前，「有」在人群里占多大一块。&quot;,&quot;controlLabel&quot;:&quot;先验（基础率）&quot;,&quot;rareLabel&quot;:&quot;少见人群&quot;,&quot;commonLabel&quot;:&quot;更高风险人群&quot;,&quot;hasLabel&quot;:&quot;有（先验）&quot;,&quot;clearLabel&quot;:&quot;没有（先验）&quot;,&quot;statusRare&quot;:&quot;少见先验：大部分人先落在「没有」那一堆。&quot;,&quot;statusCommon&quot;:&quot;更高风险先验：「有」那一堆更大。&quot;}"><noscript>请启用 JavaScript 以查看交互说明。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="likelihood" aria-labelledby="likelihood-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 02</p>
+    <h2 id="likelihood-title">似然：真相为有 / 没有时，检测怎么说话</h2>
+    <p class="copy-prose">阳性不是纯镜子。灵敏度问：真有时，检测多常说「有」？假阳性率问反过来：真没有时，检测还多常说「有」？</p>
+<p class="copy-prose">这两个率组成似然比——证据把砝码往「有」那边推多少倍。教学数字；不是某张试剂说明书。</p>
+    <aside class="plain-language"><strong>一句话说</strong><p>有病时测对、没病时测错——两个率都得看。</p></aside><div class="concept-points"><p class="concept-points-label">看什么</p><ul><li class="concept-card"><strong>灵敏度</strong><p>P(阳性 | 有)——示意模型里的真阳性率。</p></li><li class="concept-card"><strong>假阳性</strong><p>P(阳性 | 没有)——健康人仍测阳的频率。</p></li><li class="concept-card"><strong>似然比</strong><p>两者都非零时，大约是灵敏度 ÷ 假阳性率。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="bayes-likelihood" data-title="调节灵敏度与假阳性率" data-copy="{&quot;ariaLabel&quot;:&quot;调节灵敏度与假阳性率并显示阳性似然比的控件&quot;,&quot;caption&quot;:&quot;调两个率。似然比显示阳性往「有」那边拽得有多狠。&quot;,&quot;controlLabel&quot;:&quot;检测指标&quot;,&quot;sensitivityLabel&quot;:&quot;灵敏度 P(+|有)&quot;,&quot;fprLabel&quot;:&quot;假阳性率 P(+|没有)&quot;,&quot;lrLabel&quot;:&quot;似然比&quot;,&quot;statusWeak&quot;:&quot;拉力弱：阳性证据几乎压不过假警报。&quot;,&quot;statusStrong&quot;:&quot;拉力强：真有时远比没病时更容易出阳性。&quot;}"><noscript>请启用 JavaScript 以查看交互说明。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="update" aria-labelledby="update-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 03</p>
+    <h2 id="update-title">更新：先验 × 似然 → 后验（树图 / 面积）</h2>
+    <p class="copy-prose">想象 1000 个示意小人。先按先验拆成「有」和「没有」，再过检测：一部分真阳性，一部分假阳性。在所有测阳的人里，真正「有」的占多少？那一份额就是后验。</p>
+<p class="copy-prose">面积或树图比堆公式更直观：你能看见阳性单有多少来自少见细枝、多少来自更高风险粗枝。仍是示意——不是医学结论。</p>
+    <aside class="plain-language"><strong>一句话说</strong><p>数清各先验分支里的阳性；那一锅里的比例就是更新后的信念。</p></aside><div class="concept-points"><p class="concept-points-label">看什么</p><ul><li class="concept-card"><strong>数阳性</strong><p>真阳性 + 假阳性 = 所有测阳的人。</p></li><li class="concept-card"><strong>后验份额</strong><p>真阳性 ÷ 全部阳性 ≈ P(有 | 阳性)。</p></li><li class="concept-card"><strong>几何 &gt; 口号</strong><p>面积让「忽视基础率」更难蒙混。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="bayes-update" data-title="从先验走到「只看阳性」那一刀" data-copy="{&quot;ariaLabel&quot;:&quot;展示先验分支、检测结果与阳性中后验份额的交互树图或面积图&quot;,&quot;caption&quot;:&quot;跟着人群走：先验拆分 → 谁测阳 → 阳性里真正「有」占多少。&quot;,&quot;controlLabel&quot;:&quot;人群先验&quot;,&quot;crowdLabel&quot;:&quot;示意人群&quot;,&quot;hasBranchLabel&quot;:&quot;有&quot;,&quot;clearBranchLabel&quot;:&quot;没有&quot;,&quot;tpLabel&quot;:&quot;真阳性&quot;,&quot;fpLabel&quot;:&quot;假阳性&quot;,&quot;posteriorLabel&quot;:&quot;后验 P(有 | +)&quot;,&quot;positivePoolLabel&quot;:&quot;所有测阳的人&quot;,&quot;statusRare&quot;:&quot;少见先验：不少阳性是假警报——后验仍然温和。&quot;,&quot;statusCommon&quot;:&quot;更高风险先验：更多真阳性进池——后验抬升。&quot;}"><noscript>请启用 JavaScript 以查看交互说明。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="opposite" aria-labelledby="opposite-title">
+  <div class="copy-block">
+    <p class="section-label">步骤 04</p>
+    <h2 id="opposite-title">为什么同一张单，两人可以吵翻</h2>
+    <p class="copy-prose">检测固定。给 A 更高风险先验、给 B 少见先验，做同一套更新。他们的后验可以落在担心阈值的两边——墨迹却一模一样。</p>
+<p class="copy-prose">这是基础率敏感性在起作用，不是性格缺陷。收尾提醒：这里每个百分比都是教学隐喻，不是真实诊断，也不是诊疗建议。</p>
+    <aside class="plain-language"><strong>一句话说</strong><p>同一检测、不同先验 → 后验可以分别站在怕与不怕两侧。</p></aside><div class="concept-points"><p class="concept-points-label">看什么</p><ul><li class="concept-card"><strong>共享证据</strong><p>似然相同；先验不同。</p></li><li class="concept-card"><strong>相反直觉</strong><p>一个后验吓人，另一个还能接受。</p></li><li class="concept-card"><strong>不是医疗建议</strong><p>真实化验单请找临床决策——本页只讲贝叶斯形状。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="bayes-contrast" data-title="并排：同一阳性后的 A 与 B" data-copy="{&quot;ariaLabel&quot;:&quot;并排对照两人从不同先验对同一阳性结果做更新&quot;,&quot;caption&quot;:&quot;对照 A 与 B。阳性证据相同；起跑基础率不同；后验不同。&quot;,&quot;controlLabel&quot;:&quot;对照&quot;,&quot;personALabel&quot;:&quot;人物 A（更高风险先验）&quot;,&quot;personBLabel&quot;:&quot;人物 B（少见先验）&quot;,&quot;priorLabel&quot;:&quot;先验&quot;,&quot;posteriorLabel&quot;:&quot;阳性后的后验&quot;,&quot;evidenceLabel&quot;:&quot;共享的阳性证据&quot;,&quot;statusSplit&quot;:&quot;同一张单，结论分叉：A 的后验更高，B 的更低。&quot;,&quot;statusAligned&quot;:&quot;若先验相同，后验也会对齐——吵起来往往因为先验缺口。&quot;}"><noscript>请启用 JavaScript 以查看交互说明。</noscript></interactive-figure>
+</section>
+<section class="closing" aria-labelledby="closing-title">
+  <div class="copy-block closing-copy">
+    <p class="section-label">把系统装回去</p>
+    <h2 id="closing-title">后验 = 先验 × 证据怎么说话——不是单看墨迹</h2>
+    <p class="copy-prose">贝叶斯更新用起点信念乘上结果有多「会说话」。忽视基础率时，同一阳性可能被当成铁证，其实仍可能大多是假警报——反过来也一样。</p>
+<p class="copy-prose">记住旋钮：先验、灵敏度、假阳性率。也记住免责：示意数字，不是医学结论。</p>
+    <div class="closing-grid">
+      <div class="starter-checklist">
+        <h3>读者自检</h3>
+        <ol><li>先问自己用的先验（基础率）是什么。</li><li>再问：没病时检测多常仍报阳性。</li><li>宁可在示意人群里数阳性，也不要口号式的「一定」。</li><li>把本页当机制教学——不是诊断或诊疗建议。</li></ol>
+      </div>
+      <div class="boundary-map">
+        <h3>四个零件</h3>
+        <ul><li class="scale-card"><strong>先验</strong><span>故事从哪起跑？</span><p>此人参照群体里的基础率。</p></li><li class="scale-card"><strong>似然</strong><span>检测怎么说话？</span><p>灵敏度对照假阳性率。</p></li><li class="scale-card"><strong>后验</strong><span>更新了什么？</span><p>看到阳性之后的信念。</p></li><li class="scale-card"><strong>免责</strong><span>这页不是什么？</span><p>不是真实化验报告，也不是医疗建议。</p></li></ul>
+      </div>
+    </div>
+    <blockquote>同一张单上相反的直觉，常常是先验不同——不是墨迹不同。</blockquote>
+    <p class="source-note">公共教育向笔记：贝叶斯更新与基础率忽视。化验百分比为教学示意，不代表某项临床性能，也不是医学结论。可参考维基「贝叶斯定理」「基础率谬误」作背景；本页只讲机制，不含诊断或治疗建议。</p>
+  </div>
+</section>
+    </article>
+  </main>
+  <script>
+    window.__VISUAL_I18N__ = {"pauseAll":"暂停所有动画","resumeAll":"恢复所有动画","pause":"暂停","resume":"继续","reset":"重置","waiting":"图示进入视口后才会加载。","loading":"正在准备图示…","error":"图示无法显示，请先阅读上方说明。","figureFallback":"请启用 JavaScript 以查看交互说明。","skipToContent":"跳到正文","languageNavigation":"语言","overviewLabel":"贝叶斯更新概览","stepLabel":"步骤"};
+  </script>
+  <script data-prototype-bundle="runtime">
+(() => {
+  "use strict";
+
+  const ui = Object.freeze(window.__VISUAL_I18N__);
+  const registry = new Map();
+  const figures = new Set();
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const tokens = Object.freeze({
+    ink: "var(--visual-ink, #17333c)",
+    muted: "var(--visual-muted, #60747a)",
+    line: "var(--visual-line, #d8ddd7)",
+    ocean: "var(--visual-ocean, #0f7185)",
+    warm: "var(--visual-warm, #ee9d46)",
+    coral: "var(--visual-coral, #d45f50)",
+    paper: "var(--visual-paper, #f4f1e8)",
+    surface: "var(--visual-surface, #fffdf8)"
+  });
+  let globalPaused = false;
+
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+  const call = (instance, method, value) => {
+    if (instance && typeof instance[method] === "function") instance[method](value);
+  };
+
+  class InteractiveFigure extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
+      this._instance = null;
+      this._mounted = false;
+      this._mounting = false;
+      this._visible = false;
+      this._localPaused = false;
+    }
+
+    connectedCallback() {
+      if (this._connected) return;
+      this._connected = true;
+      figures.add(this);
+      this._shadow.innerHTML = `
+        <style>
+          :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+          .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
+          .mount { min-height: inherit; }
+          .runtime-status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; pointer-events: none; }
+          .runtime-status[data-live-only] { position: absolute; inset: auto; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; background: transparent; pointer-events: none; }
+          .runtime-status[hidden] { display: none; }
+          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
+          .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+          button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+          button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+          @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
+        </style>
+        <div class="frame">
+          <div class="stage"><div class="mount"></div><div class="runtime-status" data-runtime-status role="status"></div></div>
+          <div class="controls">
+            <span class="title"></span>
+            <button type="button" data-action="pause" aria-pressed="false"></button>
+            <button type="button" data-action="reset"></button>
+          </div>
+        </div>`;
+
+      this._stage = this._shadow.querySelector(".stage");
+      this._mountRoot = this._shadow.querySelector(".mount");
+      this._status = this._shadow.querySelector("[data-runtime-status]");
+      this._title = this._shadow.querySelector(".title");
+      this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
+      this._resetButton = this._shadow.querySelector('[data-action="reset"]');
+      this._copy = JSON.parse(this.dataset.copy || "{}");
+      this._title.textContent = this.dataset.title || "";
+      this._pauseButton.textContent = ui.pause;
+      this._resetButton.textContent = ui.reset;
+      this._setStatus(ui.waiting);
+
+      this._pauseButton.addEventListener("click", () => {
+        this._localPaused = !this._localPaused;
+        this._syncPlayback();
+      });
+      this._resetButton.addEventListener("click", () => {
+        call(this._instance, "reset");
+        this.dispatchEvent(new CustomEvent("demo-reset", { bubbles: true }));
+      });
+
+      this._observer = new IntersectionObserver((entries) => {
+        this._visible = entries[0]?.isIntersecting ?? false;
+        if (this._visible) this._mount();
+        this._syncPlayback();
+      }, { rootMargin: "180px 0px", threshold: .05 });
+      this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      figures.delete(this);
+      this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
+      call(this._instance, "destroy");
+    }
+
+    async _mount() {
+      if (this._mounted || this._mounting) return;
+      const factory = registry.get(this.dataset.demo);
+      if (!factory) return;
+      this._mounting = true;
+      this._setStatus(ui.loading);
+      try {
+        this._instance = await factory({
+          root: this._mountRoot,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
+          copy: this._copy,
+          motion: !reducedMotion.matches,
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._announce(message)
+        }) || {};
+        this._mounted = true;
+        this.dataset.state = "mounted";
+        this._liveRevision = (this._liveRevision || 0) + 1;
+        this._status.removeAttribute("data-live-only");
+        this._status.textContent = "";
+        this._status.hidden = true;
+        this._resize();
+        this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
+      } catch {
+        this.dataset.state = "error";
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
+      }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
+    }
+
+    _syncPlayback() {
+      const paused = globalPaused || this._localPaused || !this._visible || reducedMotion.matches;
+      this.dataset.playback = paused ? "paused" : "playing";
+      this._pauseButton?.setAttribute("aria-pressed", String(this._localPaused));
+      if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
+      call(this._instance, paused ? "pause" : "resume");
+    }
+
+    _setStatus(message) {
+      this._liveRevision = (this._liveRevision || 0) + 1;
+      this._status.removeAttribute("data-live-only");
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
+
+    _announce(message) {
+      const revision = (this._liveRevision || 0) + 1;
+      this._liveRevision = revision;
+      this._status.hidden = false;
+      this._status.setAttribute("data-live-only", "");
+      this._status.textContent = "";
+      queueMicrotask(() => {
+        if (this._liveRevision !== revision || !this._status.isConnected) return;
+        this._status.textContent = message;
+      });
+    }
+  }
+
+  window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
+    if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
+    registry.set(id, factory);
+    figures.forEach((figure) => {
+      if (figure.dataset.demo === id && figure._visible) figure._mount();
+    });
+  };
+
+  customElements.define("interactive-figure", InteractiveFigure);
+
+  const globalToggle = document.querySelector("[data-global-motion]");
+  const syncGlobalToggle = () => {
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
+    figures.forEach((figure) => figure._syncPlayback());
+  };
+  globalToggle?.addEventListener("click", () => {
+    globalPaused = !globalPaused;
+    syncGlobalToggle();
+  });
+  reducedMotion.addEventListener("change", syncGlobalToggle);
+  syncGlobalToggle();
+})();
+  </script>
+  <script data-prototype-bundle="demos">
+const escapeHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+registerDemo("bayes-overview", ({ root, copy, motion, tokens, announce }) => {
+  const buttons = copy.modes.map((mode, index) => `
+    <button type="button" class="bayes-ov-btn" data-bayes-ov="${index}" aria-pressed="${index === 0}">${escapeHtml(mode.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .bayes-ov { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(145deg,color-mix(in srgb,${tokens.ocean} 8%,${tokens.surface}),${tokens.surface} 55%,color-mix(in srgb,${tokens.warm} 10%,${tokens.surface})); }
+      .bayes-ov-panel { display:grid; gap:.75rem; padding:1.1rem 1.2rem; border:1px solid ${tokens.line}; border-radius:1.1rem;
+        background:color-mix(in srgb,${tokens.paper} 55%,${tokens.surface}); min-height:12rem; }
+      .bayes-ov-badge { display:inline-flex; width:max-content; padding:.25rem .55rem; border-radius:999px; font-size:.68rem; font-weight:850;
+        letter-spacing:.04em; text-transform:uppercase; color:${tokens.surface}; background:${tokens.coral}; }
+      .bayes-ov-panel[data-mode="calm"] .bayes-ov-badge { background:${tokens.ocean}; }
+      .bayes-ov-headline { margin:0; font-size:1.15rem; font-weight:850; line-height:1.35; }
+      .bayes-ov-detail { margin:0; color:${tokens.muted}; line-height:1.55; }
+      .bayes-ov-viz { display:grid; grid-template-columns:1fr auto 1fr; gap:.75rem; align-items:end; min-height:7rem;
+        padding:.75rem; border-radius:.85rem; border:1px dashed ${tokens.line};
+        background:color-mix(in srgb,${tokens.surface} 80%,${tokens.paper}); }
+      .bayes-ov-bar-wrap { display:grid; gap:.35rem; align-content:end; }
+      .bayes-ov-bar-label { font-size:.7rem; font-weight:750; color:${tokens.muted}; text-align:center; }
+      .bayes-ov-bar { height:5.5rem; border-radius:.55rem; display:flex; flex-direction:column-reverse; overflow:hidden;
+        border:1px solid ${tokens.line}; background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); }
+      .bayes-ov-seg-has { background:${tokens.coral}; transition:flex-basis 400ms ease; }
+      .bayes-ov-seg-clear { background:color-mix(in srgb,${tokens.ocean} 55%,${tokens.surface}); transition:flex-basis 400ms ease; }
+      .bayes-ov-arrow { align-self:center; font-size:1.4rem; font-weight:900; color:${tokens.warm}; padding:0 .25rem; }
+      .bayes-ov-slip { align-self:center; padding:.55rem .7rem; border-radius:.65rem; border:1px solid ${tokens.line};
+        background:${tokens.surface}; font-size:.78rem; font-weight:850; text-align:center; line-height:1.3; }
+      .bayes-ov-slip span { display:block; color:${tokens.coral}; font-size:.95rem; }
+      .bayes-ov-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .bayes-ov-btn { flex:1 1 8rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink};
+        background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .bayes-ov-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .bayes-ov-btn:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .bayes-ov-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .bayes-ov-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .bayes-ov.is-paused .bayes-ov-seg-has, .bayes-ov.is-paused .bayes-ov-seg-clear { transition:none; }
+    </style>
+    <div class="bayes-ov${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="bayes-ov-panel" data-bayes-panel data-mode="afraid">
+        <span class="bayes-ov-badge" data-bayes-badge></span>
+        <h3 class="bayes-ov-headline" data-bayes-headline></h3>
+        <p class="bayes-ov-detail" data-bayes-detail></p>
+        <div class="bayes-ov-viz" aria-hidden="true">
+          <div class="bayes-ov-bar-wrap">
+            <div class="bayes-ov-bar">
+              <div class="bayes-ov-seg-has" data-bayes-has style="flex:0 0 55%"></div>
+              <div class="bayes-ov-seg-clear" data-bayes-clear style="flex:1 1 auto"></div>
+            </div>
+            <div class="bayes-ov-bar-label">prior</div>
+          </div>
+          <div class="bayes-ov-arrow">→</div>
+          <div class="bayes-ov-slip">lab<br/><span>+</span></div>
+        </div>
+      </div>
+      <div class="bayes-ov-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${buttons}</div>
+      <p class="bayes-ov-status" data-bayes-status role="status"></p>
+      <p class="bayes-ov-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".bayes-ov");
+  const panel = root.querySelector("[data-bayes-panel]");
+  const badge = root.querySelector("[data-bayes-badge]");
+  const headline = root.querySelector("[data-bayes-headline]");
+  const detail = root.querySelector("[data-bayes-detail]");
+  const status = root.querySelector("[data-bayes-status]");
+  const hasSeg = root.querySelector("[data-bayes-has]");
+  const btns = [...root.querySelectorAll("[data-bayes-ov]")];
+
+  const select = (index, speak = false) => {
+    const mode = copy.modes[index];
+    panel.dataset.mode = mode.key;
+    badge.textContent = mode.badge;
+    headline.textContent = mode.headline;
+    detail.textContent = mode.detail;
+    status.textContent = mode.key === "afraid" ? copy.statusAfraid : copy.statusCalm;
+    hasSeg.style.flex = mode.key === "afraid" ? "0 0 55%" : "0 0 8%";
+    btns.forEach((b, i) => b.setAttribute("aria-pressed", String(i === index)));
+    if (speak) announce(status.textContent);
+  };
+
+  btns.forEach((b) => b.addEventListener("click", () => select(Number(b.dataset.bayesOv), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("bayes-prior", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .bayes-pr { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(160deg,color-mix(in srgb,${tokens.paper} 70%,${tokens.surface}),${tokens.surface}); }
+      .bayes-pr-stage { display:grid; gap:.85rem; padding:1rem; border:1px solid ${tokens.line}; border-radius:1rem;
+        background:color-mix(in srgb,${tokens.surface} 85%,${tokens.paper}); }
+      .bayes-pr-bars { display:grid; grid-template-columns:1fr 1fr; gap:1rem; min-height:9rem; }
+      @media (max-width:640px){ .bayes-pr-bars { grid-template-columns:1fr; } }
+      .bayes-pr-col { display:grid; gap:.4rem; align-content:end; }
+      .bayes-pr-stack { height:8rem; border-radius:.75rem; overflow:hidden; border:1px solid ${tokens.line};
+        display:flex; flex-direction:column-reverse; background:${tokens.surface}; }
+      .bayes-pr-has { background:${tokens.coral}; transition:flex-basis 350ms ease; }
+      .bayes-pr-clear { background:color-mix(in srgb,${tokens.ocean} 50%,${tokens.surface}); transition:flex-basis 350ms ease; }
+      .bayes-pr-name { margin:0; font-size:.82rem; font-weight:800; text-align:center; }
+      .bayes-pr-pct { margin:0; font-size:.75rem; color:${tokens.muted}; text-align:center; }
+      .bayes-pr-control { display:grid; gap:.45rem; }
+      .bayes-pr-control label { font-weight:800; font-size:.9rem; }
+      .bayes-pr input[type="range"] { width:100%; accent-color:${tokens.ocean}; }
+      .bayes-pr-legend { display:flex; flex-wrap:wrap; gap:1rem; font-size:.78rem; font-weight:750; }
+      .bayes-pr-swatch { display:inline-block; width:.75rem; height:.75rem; border-radius:999px; margin-right:.35rem; vertical-align:middle; }
+      .bayes-pr-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .bayes-pr-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .bayes-pr.is-paused .bayes-pr-has, .bayes-pr.is-paused .bayes-pr-clear { transition:none; }
+    </style>
+    <div class="bayes-pr${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="bayes-pr-stage">
+        <div class="bayes-pr-legend">
+          <span><span class="bayes-pr-swatch" style="background:${tokens.coral}"></span>${escapeHtml(copy.hasLabel)}</span>
+          <span><span class="bayes-pr-swatch" style="background:color-mix(in srgb,${tokens.ocean} 50%,${tokens.surface})"></span>${escapeHtml(copy.clearLabel)}</span>
+        </div>
+        <div class="bayes-pr-bars">
+          <div class="bayes-pr-col">
+            <div class="bayes-pr-stack">
+              <div class="bayes-pr-has" data-rare-has style="flex:0 0 5%"></div>
+              <div class="bayes-pr-clear" style="flex:1 1 auto"></div>
+            </div>
+            <p class="bayes-pr-name">${escapeHtml(copy.rareLabel)}</p>
+            <p class="bayes-pr-pct" data-rare-pct>5%</p>
+          </div>
+          <div class="bayes-pr-col">
+            <div class="bayes-pr-stack">
+              <div class="bayes-pr-has" data-common-has style="flex:0 0 25%"></div>
+              <div class="bayes-pr-clear" style="flex:1 1 auto"></div>
+            </div>
+            <p class="bayes-pr-name">${escapeHtml(copy.commonLabel)}</p>
+            <p class="bayes-pr-pct" data-common-pct>25%</p>
+          </div>
+        </div>
+      </div>
+      <div class="bayes-pr-control">
+        <label for="bayes-pr-range">${escapeHtml(copy.controlLabel)}</label>
+        <input id="bayes-pr-range" type="range" min="0" max="100" value="40" data-bayes-pr-range />
+      </div>
+      <p class="bayes-pr-status" data-bayes-pr-status role="status"></p>
+      <p class="bayes-pr-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".bayes-pr");
+  const range = root.querySelector("[data-bayes-pr-range]");
+  const status = root.querySelector("[data-bayes-pr-status]");
+  const rareHas = root.querySelector("[data-rare-has]");
+  const commonHas = root.querySelector("[data-common-has]");
+  const rarePct = root.querySelector("[data-rare-pct]");
+  const commonPct = root.querySelector("[data-common-pct]");
+
+  const render = (speak = false) => {
+    const t = Number(range.value) / 100;
+    // Rare: 1%–8%; higher-risk: 15%–40% as dial moves toward "common"
+    const rare = Math.round(1 + t * 7);
+    const common = Math.round(15 + t * 25);
+    rareHas.style.flex = `0 0 ${rare}%`;
+    commonHas.style.flex = `0 0 ${common}%`;
+    rarePct.textContent = `${rare}%`;
+    commonPct.textContent = `${common}%`;
+    status.textContent = t < 0.45 ? copy.statusRare : copy.statusCommon;
+    if (speak) announce(status.textContent);
+  };
+
+  range.addEventListener("input", () => render(true));
+  render();
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => { range.value = "40"; render(); },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("bayes-likelihood", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .bayes-lk { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(160deg,color-mix(in srgb,${tokens.paper} 70%,${tokens.surface}),${tokens.surface}); }
+      .bayes-lk-readout { display:grid; grid-template-columns:1fr 1fr 1fr; gap:.75rem; }
+      @media (max-width:640px){ .bayes-lk-readout { grid-template-columns:1fr; } }
+      .bayes-lk-card { padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 45%,${tokens.surface}); }
+      .bayes-lk-card-label { margin:0 0 .25rem; font-size:.72rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:${tokens.muted}; }
+      .bayes-lk-card-value { margin:0; font-size:1.25rem; font-weight:850; }
+      .bayes-lk-card[data-accent="lr"] .bayes-lk-card-value { color:${tokens.coral}; }
+      .bayes-lk-viz { position:relative; height:5.5rem; border-radius:.85rem; border:1px dashed ${tokens.line}; overflow:hidden;
+        background:color-mix(in srgb,${tokens.surface} 80%,${tokens.paper}); }
+      .bayes-lk-viz svg { width:100%; height:100%; display:block; }
+      .bayes-lk-control { display:grid; gap:.45rem; }
+      .bayes-lk-control label { font-weight:800; font-size:.9rem; }
+      .bayes-lk input[type="range"] { width:100%; accent-color:${tokens.ocean}; }
+      .bayes-lk-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .bayes-lk-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .bayes-lk.is-paused rect { transition:none; }
+    </style>
+    <div class="bayes-lk${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="bayes-lk-readout">
+        <div class="bayes-lk-card">
+          <p class="bayes-lk-card-label">${escapeHtml(copy.sensitivityLabel)}</p>
+          <p class="bayes-lk-card-value" data-sens-val>—</p>
+        </div>
+        <div class="bayes-lk-card">
+          <p class="bayes-lk-card-label">${escapeHtml(copy.fprLabel)}</p>
+          <p class="bayes-lk-card-value" data-fpr-val>—</p>
+        </div>
+        <div class="bayes-lk-card" data-accent="lr">
+          <p class="bayes-lk-card-label">${escapeHtml(copy.lrLabel)}</p>
+          <p class="bayes-lk-card-value" data-lr-val>—</p>
+        </div>
+      </div>
+      <div class="bayes-lk-viz" aria-hidden="true">
+        <svg viewBox="0 0 320 88" preserveAspectRatio="none">
+          <rect x="24" y="18" width="12" height="52" rx="4" fill="${tokens.line}" opacity=".35"/>
+          <rect data-sens-bar x="48" y="18" width="80" height="52" rx="6" fill="${tokens.ocean}" style="transition:width 300ms ease"/>
+          <rect x="180" y="18" width="12" height="52" rx="4" fill="${tokens.line}" opacity=".35"/>
+          <rect data-fpr-bar x="204" y="40" width="40" height="30" rx="6" fill="${tokens.coral}" style="transition:width 300ms ease,y 300ms ease,height 300ms ease"/>
+        </svg>
+      </div>
+      <div class="bayes-lk-control">
+        <label for="bayes-sens">${escapeHtml(copy.sensitivityLabel)}</label>
+        <input id="bayes-sens" type="range" min="60" max="99" value="90" data-sens />
+      </div>
+      <div class="bayes-lk-control">
+        <label for="bayes-fpr">${escapeHtml(copy.fprLabel)}</label>
+        <input id="bayes-fpr" type="range" min="1" max="20" value="5" data-fpr />
+      </div>
+      <p class="bayes-lk-status" data-bayes-lk-status role="status"></p>
+      <p class="bayes-lk-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".bayes-lk");
+  const sens = root.querySelector("[data-sens]");
+  const fpr = root.querySelector("[data-fpr]");
+  const sensVal = root.querySelector("[data-sens-val]");
+  const fprVal = root.querySelector("[data-fpr-val]");
+  const lrVal = root.querySelector("[data-lr-val]");
+  const sensBar = root.querySelector("[data-sens-bar]");
+  const fprBar = root.querySelector("[data-fpr-bar]");
+  const status = root.querySelector("[data-bayes-lk-status]");
+
+  const render = (speak = false) => {
+    const s = Number(sens.value) / 100;
+    const f = Number(fpr.value) / 100;
+    const lr = f > 0 ? s / f : Infinity;
+    sensVal.textContent = `${Math.round(s * 100)}%`;
+    fprVal.textContent = `${Math.round(f * 100)}%`;
+    lrVal.textContent = Number.isFinite(lr) ? `${lr.toFixed(1)}×` : "∞";
+    sensBar.setAttribute("width", String(40 + s * 100));
+    const fprW = 12 + f * 200;
+    fprBar.setAttribute("width", String(fprW));
+    fprBar.setAttribute("height", String(18 + f * 80));
+    fprBar.setAttribute("y", String(70 - (18 + f * 80)));
+    status.textContent = lr < 8 ? copy.statusWeak : copy.statusStrong;
+    if (speak) announce(status.textContent);
+  };
+
+  sens.addEventListener("input", () => render(true));
+  fpr.addEventListener("input", () => render(true));
+  render();
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => { sens.value = "90"; fpr.value = "5"; render(); },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("bayes-update", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  root.innerHTML = `
+    <style>
+      .bayes-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 500px;
+        width: 100%;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: var(--surface);
+        color: var(--ink);
+      }
+      .bayes-controls {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px;
+        border-bottom: 1px solid var(--line);
+        flex-wrap: wrap;
+      }
+      .bayes-controls label {
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+      .bayes-slider {
+        flex: 1;
+        min-width: 150px;
+        max-width: 300px;
+        cursor: pointer;
+      }
+      .bayes-prior-val {
+        font-variant-numeric: tabular-nums;
+        font-weight: bold;
+        min-width: 40px;
+      }
+      .bayes-canvas-container {
+        position: relative;
+        flex: 1;
+        min-height: 350px;
+        width: 100%;
+      }
+      .bayes-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+      }
+      .bayes-status {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        text-align: center;
+        border-top: 1px solid var(--line);
+        background: var(--surface);
+        min-height: 3em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+    <div class="bayes-container">
+      <div class="bayes-controls">
+        <label for="bayes-prior-slider">${copy.controlLabel}</label>
+        <input type="range" id="bayes-prior-slider" class="bayes-slider" min="1" max="50" value="5" step="1" aria-label="${copy.controlLabel}">
+        <span class="bayes-prior-val" id="bayes-prior-val">5%</span>
+      </div>
+      <div class="bayes-canvas-container">
+        <canvas class="bayes-canvas" tabindex="0" aria-label="${copy.ariaLabel}"></canvas>
+      </div>
+      <div class="bayes-status" id="bayes-status" aria-live="polite"></div>
+    </div>
+  `;
+
+  const slider = root.querySelector('#bayes-prior-slider');
+  const priorValEl = root.querySelector('#bayes-prior-val');
+  const statusEl = root.querySelector('#bayes-status');
+  const canvas = root.querySelector('.bayes-canvas');
+  const ctx = canvas.getContext('2d');
+
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+  let isPlaying = true;
+  let animationId = null;
+  let particles = [];
+  let prior = 0.05;
+
+  const SENSITIVITY = 0.9;
+  const FPR = 0.1;
+  const TOTAL_POP = 1000;
+
+  class Particle {
+    constructor(pathId) {
+      this.pathId = pathId;
+      this.t = 0;
+      this.speed = 0.004 + Math.random() * 0.004;
+      this.offset = (Math.random() - 0.5);
+    }
+  }
+
+  function getBezierXY(t, x0, y0, x1, y1, x2, y2, x3, y3) {
+    const cx = 3 * (x1 - x0);
+    const bx = 3 * (x2 - x1) - cx;
+    const ax = x3 - x0 - cx - bx;
+    const cy = 3 * (y1 - y0);
+    const by = 3 * (y2 - y1) - cy;
+    const ay = y3 - y0 - cy - by;
+    const x = ax * t * t * t + bx * t * t + cx * t + x0;
+    const y = ay * t * t * t + by * t * t + cy * t + y0;
+    return { x, y };
+  }
+
+  function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight) {
+    const words = text.split(' ');
+    let lines = [];
+    let currentLine = '';
+
+    for (let word of words) {
+      if (ctx.measureText(word).width > maxWidth) {
+        for (let char of word) {
+          let testLine = currentLine + char;
+          if (ctx.measureText(testLine).width > maxWidth && currentLine !== '') {
+            lines.push(currentLine);
+            currentLine = char;
+          } else {
+            currentLine = testLine;
+          }
+        }
+        currentLine += ' ';
+      } else {
+        let testLine = currentLine + word + ' ';
+        if (ctx.measureText(testLine).width > maxWidth && currentLine !== '') {
+          lines.push(currentLine.trim());
+          currentLine = word + ' ';
+        } else {
+          currentLine = testLine;
+        }
+      }
+    }
+    if (currentLine.trim() !== '') lines.push(currentLine.trim());
+
+    let startY = y - ((lines.length - 1) * lineHeight) / 2;
+    lines.forEach((line, i) => {
+      ctx.fillText(line, x, startY + i * lineHeight);
+    });
+  }
+
+  function drawCurve(ctx, x1, y1, x2, y2, thickness, color, alpha) {
+    if (thickness <= 0.2) return;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    const cp1x = x1 + (x2 - x1) * 0.5;
+    const cp2x = x2 - (x2 - x1) * 0.5;
+    ctx.bezierCurveTo(cp1x, y1, cp2x, y2, x2, y2);
+    ctx.lineWidth = thickness;
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = alpha;
+    ctx.stroke();
+    ctx.globalAlpha = 1.0;
+  }
+
+  function updateStatus() {
+    priorValEl.textContent = `${Math.round(prior * 100)}%`;
+    const isRare = prior < 0.15;
+    const newStatus = isRare ? copy.statusRare : copy.statusCommon;
+    if (statusEl.textContent !== newStatus) {
+      statusEl.textContent = newStatus;
+      announce(newStatus);
+    }
+  }
+
+  function draw() {
+    if (!width || !height) return;
+
+    ctx.clearRect(0, 0, width, height);
+
+    const cOcean = resolveColor(tokens.ocean);
+    const cCoral = resolveColor(tokens.coral);
+    const cMuted = resolveColor(tokens.muted);
+    const cInk = resolveColor(tokens.ink);
+    const cSurface = resolveColor(tokens.surface);
+
+    const hasIt = prior * TOTAL_POP;
+    const clear = (1 - prior) * TOTAL_POP;
+    const tp = hasIt * SENSITIVITY;
+    const fn = hasIt * (1 - SENSITIVITY);
+    const fp = clear * FPR;
+    const tn = clear * (1 - FPR);
+    const posPool = tp + fp;
+    const posterior = posPool > 0 ? (tp / posPool) : 0;
+
+    const S = (height * 0.35) / TOTAL_POP; 
+    
+    const X0 = width * 0.1;
+    const X1 = width * 0.45;
+    const X2 = width * 0.85;
+
+    const Root_y = height * 0.5;
+    const Root_top = Root_y - (TOTAL_POP * S) / 2;
+    const Root_to_HasIt_y = Root_top + (hasIt * S) / 2;
+    const Root_to_Clear_y = Root_top + hasIt * S + (clear * S) / 2;
+
+    const HasIt_y = height * 0.25;
+    const HasIt_top = HasIt_y - (hasIt * S) / 2;
+    const HasIt_to_Pool_y = HasIt_top + (tp * S) / 2;
+    const HasIt_to_Fade_y = HasIt_top + tp * S + (fn * S) / 2;
+
+    const Clear_y = height * 0.75;
+    const Clear_top = Clear_y - (clear * S) / 2;
+    const Clear_to_Pool_y = Clear_top + (fp * S) / 2;
+    const Clear_to_Fade_y = Clear_top + fp * S + (tn * S) / 2;
+
+    const Pool_y = height * 0.5;
+    const Pool_top = Pool_y - (posPool * S) / 2;
+    const Pool_in_TP_y = Pool_top + (tp * S) / 2;
+    const Pool_in_FP_y = Pool_top + tp * S + (fp * S) / 2;
+
+    // Draw Curves
+    drawCurve(ctx, X0, Root_to_HasIt_y, X1, HasIt_y, hasIt * S, cOcean, 0.4);
+    drawCurve(ctx, X0, Root_to_Clear_y, X1, Clear_y, clear * S, cCoral, 0.4);
+    drawCurve(ctx, X1, HasIt_to_Pool_y, X2, Pool_in_TP_y, tp * S, cOcean, 0.6);
+    drawCurve(ctx, X1, Clear_to_Pool_y, X2, Pool_in_FP_y, fp * S, cCoral, 0.6);
+    drawCurve(ctx, X1, HasIt_to_Fade_y, X1 + (X2 - X1) * 0.5, height * 0.05, fn * S, cOcean, 0.15);
+    drawCurve(ctx, X1, Clear_to_Fade_y, X1 + (X2 - X1) * 0.5, height * 0.95, tn * S, cCoral, 0.15);
+
+    // Draw Nodes (Bars)
+    ctx.fillStyle = cMuted;
+    ctx.fillRect(X0 - 3, Root_top, 6, TOTAL_POP * S);
+    
+    ctx.fillStyle = cOcean;
+    ctx.fillRect(X1 - 3, HasIt_top, 6, hasIt * S);
+    
+    ctx.fillStyle = cCoral;
+    ctx.fillRect(X1 - 3, Clear_top, 6, clear * S);
+
+    // Pool Stacked Bar
+    ctx.fillStyle = cOcean;
+    ctx.fillRect(X2 - 8, Pool_top, 16, tp * S);
+    ctx.fillStyle = cCoral;
+    ctx.fillRect(X2 - 8, Pool_top + tp * S, 16, fp * S);
+
+    // Particles
+    if (motion !== false) {
+      ctx.fillStyle = cSurface;
+      for (let p of particles) {
+        let startX, startY, endX, endY, curveWidth;
+        if (p.t < 0.5) {
+          let localT = p.t * 2;
+          startX = X0;
+          if (p.pathId === 0 || p.pathId === 2) {
+            startY = Root_to_HasIt_y; endX = X1; endY = HasIt_y; curveWidth = hasIt * S;
+          } else {
+            startY = Root_to_Clear_y; endX = X1; endY = Clear_y; curveWidth = clear * S;
+          }
+          const pt = getBezierXY(localT, startX, startY, startX + (endX - startX) * 0.5, startY, endX - (endX - startX) * 0.5, endY, endX, endY);
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y + p.offset * curveWidth, 1.5, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          let localT = (p.t - 0.5) * 2;
+          startX = X1;
+          if (p.pathId === 0) {
+            startY = HasIt_to_Pool_y; endX = X2; endY = Pool_in_TP_y; curveWidth = tp * S;
+          } else if (p.pathId === 1) {
+            startY = Clear_to_Pool_y; endX = X2; endY = Pool_in_FP_y; curveWidth = fp * S;
+          } else if (p.pathId === 2) {
+            startY = HasIt_to_Fade_y; endX = X1 + (X2 - X1) * 0.5; endY = height * 0.05; curveWidth = fn * S;
+          } else {
+            startY = Clear_to_Fade_y; endX = X1 + (X2 - X1) * 0.5; endY = height * 0.95; curveWidth = tn * S;
+          }
+          const pt = getBezierXY(localT, startX, startY, startX + (endX - startX) * 0.5, startY, endX - (endX - startX) * 0.5, endY, endX, endY);
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y + p.offset * curveWidth, 1.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+
+    // Text Labels
+    ctx.fillStyle = cInk;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const fontSize = Math.max(10, Math.min(14, width / 40));
+    ctx.font = `600 ${fontSize}px system-ui, sans-serif`;
+    const maxW = width * 0.25;
+
+    drawWrappedText(ctx, copy.crowdLabel, X0, Root_top - 20, maxW, fontSize * 1.2);
+    drawWrappedText(ctx, copy.hasBranchLabel, X1, HasIt_top - 20, maxW, fontSize * 1.2);
+    drawWrappedText(ctx, copy.clearBranchLabel, X1, Clear_top + clear * S + 20, maxW, fontSize * 1.2);
+    
+    // TP / FP labels in the middle
+    drawWrappedText(ctx, copy.tpLabel, X1 + (X2 - X1) * 0.4, (HasIt_to_Pool_y + Pool_in_TP_y) / 2 - 25, maxW, fontSize * 1.2);
+    drawWrappedText(ctx, copy.fpLabel, X1 + (X2 - X1) * 0.4, (Clear_to_Pool_y + Pool_in_FP_y) / 2 + 25, maxW, fontSize * 1.2);
+
+    drawWrappedText(ctx, copy.positivePoolLabel, X2, Pool_top - 25, maxW, fontSize * 1.2);
+    drawWrappedText(ctx, `${copy.posteriorLabel} = ${(posterior * 100).toFixed(1)}%`, X2, Pool_top + posPool * S + 25, maxW, fontSize * 1.2);
+  }
+
+  function loop() {
+    if (!isPlaying) return;
+
+    if (motion !== false) {
+      // Spawn particles
+      if (Math.random() < 0.4) {
+        const hasIt = prior * TOTAL_POP;
+        const clear = (1 - prior) * TOTAL_POP;
+        const tp = hasIt * SENSITIVITY;
+        const fn = hasIt * (1 - SENSITIVITY);
+        const fp = clear * FPR;
+        const tn = clear * (1 - FPR);
+        
+        const total = tp + fp + fn + tn;
+        const r = Math.random() * total;
+        let pathId;
+        if (r < tp) pathId = 0;
+        else if (r < tp + fp) pathId = 1;
+        else if (r < tp + fp + fn) pathId = 2;
+        else pathId = 3;
+        
+        particles.push(new Particle(pathId));
+      }
+
+      // Update particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].t += particles[i].speed;
+        if (particles[i].t > 1) {
+          particles.splice(i, 1);
+        }
+      }
+    }
+
+    draw();
+    animationId = requestAnimationFrame(loop);
+  }
+
+  slider.addEventListener('input', (e) => {
+    prior = parseInt(e.target.value, 10) / 100;
+    updateStatus();
+    if (!isPlaying || motion === false) {
+      draw();
+    }
+  }, { signal });
+
+  updateStatus();
+
+  return {
+    pause() {
+      isPlaying = false;
+      if (animationId) cancelAnimationFrame(animationId);
+      draw();
+    },
+    resume() {
+      isPlaying = true;
+      if (motion !== false) {
+        loop();
+      }
+    },
+    reset() {
+      prior = 0.05;
+      slider.value = 5;
+      particles = [];
+      updateStatus();
+      draw();
+    },
+    destroy() {
+      isPlaying = false;
+      if (animationId) cancelAnimationFrame(animationId);
+      root.innerHTML = '';
+    },
+    resize(dim) {
+      width = dim.width;
+      height = dim.height;
+      dpr = dim.dpr;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+      draw();
+    }
+  };
+});
+
+registerDemo("bayes-contrast", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+    root.innerHTML = `
+        <style>
+            .bc-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1.5rem;
+                background: ${tokens.paper};
+                color: ${tokens.ink};
+                border-radius: 8px;
+                font-family: system-ui, -apple-system, sans-serif;
+                min-height: 450px;
+                box-sizing: border-box;
+            }
+            .bc-sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border: 0;
+            }
+            .bc-controls {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            .bc-controls label {
+                font-weight: 600;
+                font-size: 1rem;
+            }
+            .bc-controls input[type="range"] {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 100%;
+                max-width: 320px;
+                height: 8px;
+                background: ${tokens.surface};
+                border-radius: 4px;
+                outline: none;
+            }
+            .bc-controls input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                background: ${tokens.coral};
+                cursor: pointer;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            }
+            .bc-controls input[type="range"]::-moz-range-thumb {
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                background: ${tokens.coral};
+                cursor: pointer;
+                border: none;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            }
+            .bc-controls input[type="range"]:focus-visible {
+                outline: 2px solid ${tokens.ocean};
+                outline-offset: 4px;
+            }
+            .bc-status {
+                text-align: center;
+                font-size: 0.95rem;
+                color: ${tokens.ink};
+                background: ${tokens.surface};
+                padding: 0.75rem 1rem;
+                border-radius: 8px;
+                min-height: 3em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1.4;
+            }
+            .bc-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem 2rem;
+                align-items: start;
+            }
+            .bc-col {
+                display: flex;
+                flex-direction: column;
+            }
+            .bc-person-name {
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 1rem;
+                color: ${tokens.ink};
+                font-size: 1.05rem;
+            }
+            .bc-bar-group {
+                display: flex;
+                flex-direction: column;
+                gap: 0.35rem;
+            }
+            .bc-bar-header {
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.85rem;
+                align-items: flex-end;
+            }
+            .bc-bar-label {
+                color: ${tokens.muted};
+            }
+            .bc-bar-val {
+                font-variant-numeric: tabular-nums;
+                font-weight: 600;
+                color: ${tokens.ink};
+            }
+            .bc-bar-track {
+                height: 18px;
+                background: ${tokens.surface};
+                border-radius: 9px;
+                overflow: hidden;
+            }
+            .bc-bar-fill {
+                height: 100%;
+                width: 0%;
+                border-radius: 9px;
+                will-change: width;
+            }
+            .bc-fill-prior { background: ${tokens.ocean}; }
+            .bc-fill-post { background: ${tokens.coral}; }
+            .bc-arrow-down {
+                text-align: center;
+                color: ${tokens.muted};
+                font-size: 1.2rem;
+                margin: 0.5rem 0;
+                line-height: 1;
+            }
+            .bc-evidence-row {
+                grid-column: 1 / -1;
+                display: flex;
+                justify-content: center;
+                padding: 0.5rem 0;
+                position: relative;
+            }
+            .bc-evidence-badge {
+                background: ${tokens.paper};
+                border: 2px solid ${tokens.warm};
+                color: ${tokens.ink};
+                padding: 0.5rem 1.5rem;
+                border-radius: 20px;
+                font-weight: 600;
+                font-size: 0.95rem;
+                text-align: center;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            }
+            @media (max-width: 400px) {
+                .bc-grid { gap: 0.5rem 1rem; }
+                .bc-person-name { font-size: 0.95rem; }
+                .bc-evidence-badge { padding: 0.4rem 1rem; font-size: 0.85rem; }
+            }
+        </style>
+        <div class="bc-wrapper" role="region" aria-label="${copy.ariaLabel}">
+            <div class="bc-sr-only">${copy.caption}</div>
+            
+            <div class="bc-controls">
+                <label for="bc-slider">${copy.controlLabel}</label>
+                <input type="range" id="bc-slider" min="0" max="1" step="0.01" value="1">
+            </div>
+            
+            <div class="bc-status" aria-live="polite"></div>
+            
+            <div class="bc-grid">
+                <div class="bc-col">
+                    <div class="bc-person-name">${copy.personALabel}</div>
+                </div>
+                <div class="bc-col">
+                    <div class="bc-person-name">${copy.personBLabel}</div>
+                </div>
+
+                <div class="bc-col">
+                    <div class="bc-bar-group">
+                        <div class="bc-bar-header">
+                            <span class="bc-bar-label">${copy.priorLabel}</span>
+                            <span class="bc-bar-val" id="bc-val-prior-a"></span>
+                        </div>
+                        <div class="bc-bar-track" aria-hidden="true">
+                            <div class="bc-bar-fill bc-fill-prior" id="bc-fill-prior-a"></div>
+                        </div>
+                    </div>
+                    <div class="bc-arrow-down">↓</div>
+                </div>
+                <div class="bc-col">
+                    <div class="bc-bar-group">
+                        <div class="bc-bar-header">
+                            <span class="bc-bar-label">${copy.priorLabel}</span>
+                            <span class="bc-bar-val" id="bc-val-prior-b"></span>
+                        </div>
+                        <div class="bc-bar-track" aria-hidden="true">
+                            <div class="bc-bar-fill bc-fill-prior" id="bc-fill-prior-b"></div>
+                        </div>
+                    </div>
+                    <div class="bc-arrow-down">↓</div>
+                </div>
+
+                <div class="bc-evidence-row">
+                    <div class="bc-evidence-badge">${copy.evidenceLabel}</div>
+                </div>
+
+                <div class="bc-col">
+                    <div class="bc-arrow-down">↓</div>
+                    <div class="bc-bar-group">
+                        <div class="bc-bar-header">
+                            <span class="bc-bar-label">${copy.posteriorLabel}</span>
+                            <span class="bc-bar-val" id="bc-val-post-a"></span>
+                        </div>
+                        <div class="bc-bar-track" aria-hidden="true">
+                            <div class="bc-bar-fill bc-fill-post" id="bc-fill-post-a"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bc-col">
+                    <div class="bc-arrow-down">↓</div>
+                    <div class="bc-bar-group">
+                        <div class="bc-bar-header">
+                            <span class="bc-bar-label">${copy.posteriorLabel}</span>
+                            <span class="bc-bar-val" id="bc-val-post-b"></span>
+                        </div>
+                        <div class="bc-bar-track" aria-hidden="true">
+                            <div class="bc-bar-fill bc-fill-post" id="bc-fill-post-b"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const slider = root.querySelector('#bc-slider');
+    const statusEl = root.querySelector('.bc-status');
+
+    const fillPriorA = root.querySelector('#bc-fill-prior-a');
+    const fillPriorB = root.querySelector('#bc-fill-prior-b');
+    const fillPostA = root.querySelector('#bc-fill-post-a');
+    const fillPostB = root.querySelector('#bc-fill-post-b');
+
+    const valPriorA = root.querySelector('#bc-val-prior-a');
+    const valPriorB = root.querySelector('#bc-val-prior-b');
+    const valPostA = root.querySelector('#bc-val-post-a');
+    const valPostB = root.querySelector('#bc-val-post-b');
+
+    let targetGap = 1;
+    let currentGap = 1;
+    let isPlaying = true;
+    let animationId;
+    let lastStatus = '';
+    let hasInitialized = false;
+
+    const LIKELIHOOD_RATIO = 9;
+
+    function formatPercent(p) {
+        return (p * 100).toFixed(1) + '%';
+    }
+
+    function renderState() {
+        const priorA = 0.10 + 0.30 * currentGap;
+        const priorB = 0.10 - 0.08 * currentGap;
+
+        const oddsA = priorA / (1 - priorA);
+        const postOddsA = oddsA * LIKELIHOOD_RATIO;
+        const postA = postOddsA / (1 + postOddsA);
+
+        const oddsB = priorB / (1 - priorB);
+        const postOddsB = oddsB * LIKELIHOOD_RATIO;
+        const postB = postOddsB / (1 + postOddsB);
+
+        fillPriorA.style.width = `${priorA * 100}%`;
+        fillPriorB.style.width = `${priorB * 100}%`;
+        fillPostA.style.width = `${postA * 100}%`;
+        fillPostB.style.width = `${postB * 100}%`;
+
+        valPriorA.textContent = formatPercent(priorA);
+        valPriorB.textContent = formatPercent(priorB);
+        valPostA.textContent = formatPercent(postA);
+        valPostB.textContent = formatPercent(postB);
+
+        const newStatus = currentGap > 0.5 ? 'split' : 'aligned';
+        if (newStatus !== lastStatus) {
+            lastStatus = newStatus;
+            const statusText = newStatus === 'split' ? copy.statusSplit : copy.statusAligned;
+            statusEl.textContent = statusText;
+            
+            if (hasInitialized) {
+                announce(statusText);
+            }
+        }
+    }
+
+    function loop() {
+        if (!isPlaying) return;
+
+        let needsUpdate = false;
+        if (Math.abs(targetGap - currentGap) > 0.001) {
+            currentGap += (targetGap - currentGap) * (motion === false ? 1 : 0.15);
+            needsUpdate = true;
+        } else if (currentGap !== targetGap) {
+            currentGap = targetGap;
+            needsUpdate = true;
+        }
+
+        if (needsUpdate) {
+            renderState();
+        }
+
+        animationId = requestAnimationFrame(loop);
+    }
+
+    slider.addEventListener('input', (e) => {
+        targetGap = parseFloat(e.target.value);
+        if (motion === false) {
+            currentGap = targetGap;
+            renderState();
+        }
+    }, { signal });
+
+    renderState();
+    hasInitialized = true;
+    loop();
+
+    return {
+        pause() {
+            isPlaying = false;
+        },
+        resume() {
+            if (!isPlaying) {
+                isPlaying = true;
+                loop();
+            }
+        },
+        reset() {
+            targetGap = 1;
+            slider.value = 1;
+            if (motion === false) {
+                currentGap = 1;
+                renderState();
+            }
+        },
+        destroy() {
+            isPlaying = false;
+            cancelAnimationFrame(animationId);
+            root.innerHTML = '';
+        },
+        resize({ width, height, dpr }) {
+            renderState();
+        }
+    };
+});
+  </script>
+</body>
+</html>
