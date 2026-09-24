@@ -100,6 +100,7 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
       const isEnsoFoodPrices = work.cover === 'enso-food-prices';
       const isPrisonersDilemma = work.cover === 'prisoners-dilemma';
       const isButterflyEffect = work.cover === 'butterfly-effect';
+      const isInflationPurchasingPower = work.cover === 'inflation-purchasing-power';
 
       return (
         <article id={work.slug} data-visual-card={work.slug} class="group overflow-hidden rounded-3xl border border-surface-200/80 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover dark:border-surface-800 dark:bg-surface-900">
@@ -188,6 +189,23 @@ const bannerWorks = Object.fromEntries(works.filter((work) => !work.hasCurrentAr
                 </svg>
                 <div class="absolute left-[10%] top-[14%] rounded-full border border-cyan-100/35 bg-cyan-100/10 px-2 py-0.5 text-[10px] font-bold tracking-wide text-cyan-50/90">δx₀</div>
                 <div class="absolute right-[10%] top-[12%] text-lg font-bold text-rose-100/90">↗</div>
+              </>
+            )}
+            {isInflationPurchasingPower && (
+              <>
+                {/* Nominal bills vs thinning basket slice — purchasing-power dilution */}
+                <div class="absolute inset-6 rounded-3xl border border-white/15 bg-slate-950/30 backdrop-blur-sm"></div>
+                <div class="absolute left-[12%] top-[28%] flex h-[48%] w-[28%] items-end gap-1.5">
+                  <div class="h-[40%] flex-1 rounded-sm bg-cyan-300/50"></div>
+                  <div class="h-[58%] flex-1 rounded-sm bg-cyan-300/65"></div>
+                  <div class="h-[76%] flex-1 rounded-sm bg-cyan-200/80"></div>
+                  <div class="h-[92%] flex-1 rounded-sm bg-cyan-100/90 shadow-[0_0_18px_rgba(165,243,252,.45)]"></div>
+                </div>
+                <div class="absolute right-[12%] top-[30%] h-[46%] w-[36%] rounded-2xl border-2 border-dashed border-white/25 bg-white/5 p-2">
+                  <div class="absolute bottom-2 left-2 right-2 h-[28%] rounded-md bg-gradient-to-t from-rose-400/80 to-amber-300/70 shadow-[0_0_22px_rgba(251,113,133,.35)]"></div>
+                </div>
+                <div class="absolute left-[10%] top-[14%] rounded-full border border-cyan-100/35 bg-cyan-100/10 px-2 py-0.5 text-[10px] font-bold tracking-wide text-cyan-50/90">nominal ↑</div>
+                <div class="absolute right-[10%] top-[14%] rounded-full border border-rose-100/35 bg-rose-100/10 px-2 py-0.5 text-[10px] font-bold tracking-wide text-rose-50/90">real ↓</div>
               </>
             )}
             <div class="absolute inset-x-8 bottom-8 flex items-center justify-between text-white/90">

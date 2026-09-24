@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="インフレを購買力の希薄化として図解する：貨幣や需要のショックが一般物価水準をどう押し上げるか、名目貨幣量が実質購買力と同じでない理由、個別価格の上昇と一般的上昇の違い。">
+  <title>お金を刷れば刷るほど、なぜ懐は薄くなるのか？</title>
+  <style data-prototype-bundle="article">
+:root {
+  color-scheme: light;
+  --paper: #f4f1e8;
+  --surface: #fffdf8;
+  --ink: #17333c;
+  --muted: #60747a;
+  --line: #d8ddd7;
+  --ocean: #0f7185;
+  --warm: #ee9d46;
+  --coral: #d45f50;
+  --soft-ocean: color-mix(in srgb, var(--ocean) 9%, var(--surface));
+  --soft-warm: color-mix(in srgb, var(--warm) 12%, var(--surface));
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body { margin: 0; overflow-x: clip; color: var(--ink); background: radial-gradient(circle at 20% 0, #dff3ef 0, transparent 30rem), var(--paper); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .75rem;
+  left: .75rem;
+  padding: .65rem .9rem;
+  color: white;
+  background: var(--ink);
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.75rem;
+  padding: .65rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(216, 221, 215, .9);
+  background: rgba(244, 241, 232, .9);
+  backdrop-filter: blur(14px);
+}
+.site-header strong { margin-right: auto; font-size: .72rem; letter-spacing: .12em; }
+.language-links { display: flex; gap: .65rem; }
+.language-links a { color: var(--muted); font-size: .78rem; }
+.language-links a[aria-current="page"] { color: var(--ocean); font-weight: 800; }
+[data-global-motion] {
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.hero, .copy-block {
+  width: min(calc(100% - 2rem), 54rem);
+  margin-inline: auto;
+}
+.hero {
+  position: relative;
+  padding: clamp(5rem, 14vw, 10rem) 0;
+}
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -12% auto auto;
+  width: clamp(9rem, 28vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ocean) 35%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem color-mix(in srgb, var(--ocean) 5%, transparent),
+    0 0 0 5rem color-mix(in srgb, var(--warm) 4%, transparent);
+  content: "";
+}
+.eyebrow, .section-label {
+  margin: 0 0 1rem;
+  color: var(--ocean);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+h1, h2 { margin-top: 0; line-height: 1.03; text-wrap: balance; }
+h1 { max-width: 9em; margin-bottom: 1.5rem; font-size: clamp(3.2rem, 10vw, 7rem); letter-spacing: -.06em; }
+h2 { max-width: 16em; margin-bottom: 1.15rem; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+.hero-subtitle, .copy-prose { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.75; }
+.hero-subtitle { max-width: 38rem; }
+.copy-prose { margin: .8rem 0 0; }
+
+.plain-language {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .75rem 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 55%, var(--line));
+  border-radius: 1rem;
+  background: var(--soft-warm);
+}
+.plain-language strong {
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  color: var(--surface);
+  background: var(--warm);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.plain-language p { margin: 0; color: var(--ink); line-height: 1.65; }
+
+.concept-points { margin-top: 1.4rem; }
+.concept-points-label {
+  margin: 0 0 .7rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.concept-points ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.concept-card strong { display: block; margin-bottom: .45rem; }
+.concept-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+.overview, .chapter, .closing { padding: clamp(4rem, 10vw, 8rem) 0; border-top: 1px solid var(--line); }
+.overview { background: color-mix(in srgb, var(--surface) 42%, transparent); }
+.chapter:nth-of-type(even) { background: color-mix(in srgb, var(--surface) 22%, transparent); }
+interactive-figure {
+  display: block;
+  width: min(calc(100% - 2rem), 68rem);
+  min-height: 29rem;
+  margin: 3rem auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 51, 60, .14);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 1.5rem 4rem rgba(23, 51, 60, .1);
+}
+
+.closing { background: linear-gradient(150deg, var(--soft-ocean), color-mix(in srgb, var(--paper) 86%, var(--surface))); }
+.closing-copy { width: min(calc(100% - 2rem), 68rem); }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.starter-checklist, .boundary-map {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.closing h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.starter-checklist ol { display: grid; gap: .7rem; margin: 0; padding-left: 1.35rem; }
+.starter-checklist li { padding-left: .3rem; line-height: 1.55; }
+.boundary-map ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.scale-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: .2rem .8rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--surface);
+}
+.scale-card strong { grid-row: 1 / span 2; color: var(--ocean); }
+.scale-card span { color: var(--ink); font-size: .82rem; font-weight: 800; }
+.scale-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.closing blockquote {
+  margin: 2rem 0 0;
+  padding: 1.35rem clamp(1rem, 3vw, 1.8rem);
+  border-left: .32rem solid var(--ocean);
+  color: var(--ink);
+  background: var(--surface);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.55;
+}
+.source-note { margin: 1rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+article[data-visual-slug="loop-engineering"] .hero .eyebrow { color: var(--coral); }
+article[data-visual-slug="loop-engineering"] interactive-figure { box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ocean) 12%, transparent); }
+
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header strong { width: 100%; }
+  .language-links { margin-right: auto; }
+  interactive-figure { min-height: 32rem; border-radius: 1rem; }
+  .concept-points ul, .closing-grid { grid-template-columns: 1fr; }
+  .plain-language { grid-template-columns: 1fr; }
+  .scale-card { grid-template-columns: 5.5rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#article">本文へスキップ</a>
+  <header class="site-header">
+    <strong>VISUAL KIT / PROTOTYPE</strong>
+    <nav class="language-links" aria-label="言語">
+<a href="../en/" hreflang="en">English</a>
+<a href="../zh/" hreflang="zh">中文</a>
+<a href="../ja/" hreflang="ja" aria-current="page">日本語</a>
+    </nav>
+    <button type="button" data-global-motion aria-pressed="false"></button>
+  </header>
+  <main id="article">
+    <article data-visual-slug="inflation-purchasing-power">
+      <header class="hero">
+        <p class="eyebrow">貨幣 / 物価水準 / 購買力</p>
+        <h1>お金を刷れば刷るほど、なぜ懐は薄くなるのか？</h1>
+        <p class="hero-subtitle">通貨単位が増えると、財布の紙は厚く見えても、同じバスケットを買える分は減り得る。名目と実質、一般インフレと相対価格の変化を分けて見る。仕組みの説明のみで、投資助言ではない。</p>
+      </header>
+<section class="overview" aria-labelledby="overview-title">
+  <div class="copy-block">
+    <p class="section-label">インフレ概観</p>
+    <h2 id="overview-title">単位は増えても財は同じ——バスケットへの請求権は薄くなる</h2>
+    <p class="copy-prose">ここでいうインフレは、一般物価水準の持続的な上昇：同じ代表的な財・サービス・バスケットに、以前より多くの通貨単位が必要になることだ。</p>
+<p class="copy-prose">水準が上がると、固定された名目残高が買えるものが薄まる。貨幣の増加も需要の強まりも水準を押し上げ得る。懐が薄く感じるのは、札の枚数ではなく実質購買力が縮んだからだ。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>物価が全般に上がると、貨幣1単位で買える同じものが減る。</p></aside><div class="concept-points"><p class="concept-points-label">まず3つ</p><ul><li class="concept-card"><strong>名目 ≠ 実質</strong><p>札面の数字は名目。それで清算できる財量が実質購買力。</p></li><li class="concept-card"><strong>水準であり、一枚の値札ではない</strong><p>インフレは広いバスケットの話であり、単品の相対価格ではない。</p></li><li class="concept-card"><strong>ショックが水準に入る</strong><p>貨幣ショックと需要ショックは別の入口から水準を上げ得る。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="inf-overview" data-title="名目ストックと購買力を切り替える" data-copy="{&quot;ariaLabel&quot;:&quot;名目貨幣ストックと実質購買力を対比する概観インタラクション&quot;,&quot;caption&quot;:&quot;表示を切り替え：札束が厚くても、同じバスケットの薄い切片しか取れないことがある。&quot;,&quot;controlLabel&quot;:&quot;表示&quot;,&quot;modes&quot;:[{&quot;key&quot;:&quot;nominal&quot;,&quot;label&quot;:&quot;名目ストック&quot;,&quot;headline&quot;:&quot;財布の通貨単位が増える&quot;,&quot;detail&quot;:&quot;お金の単位数が増える。見た目は懐が厚い——だがそれは名目面だけ。&quot;,&quot;badge&quot;:&quot;名目&quot;},{&quot;key&quot;:&quot;real&quot;,&quot;label&quot;:&quot;購買力&quot;,&quot;headline&quot;:&quot;同じ札でも財への請求は小さい&quot;,&quot;detail&quot;:&quot;物価水準が貨幣（や需要）とともに上がれば、同じ単位でバスケットから取れる分は減る。&quot;,&quot;badge&quot;:&quot;実質&quot;}],&quot;statusNominal&quot;:&quot;名目表示：流通中または手元の単位が増える。&quot;,&quot;statusReal&quot;:&quot;実質表示：物価水準が高いほど、1単位で買える同じバスケットは減る。&quot;}"><noscript>インタラクティブ図解を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="more-units" aria-labelledby="more-units-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 01</p>
+    <h2 id="more-units-title">第一歩：より多くの通貨単位が物語に入る</h2>
+    <p class="copy-prose">固定した例示バスケットを買うための貨幣ストックから始める。ストックが拡大し——より多くの単位が流通に入ると——財の産出が同時に増えない限り、同じ財を追う請求権が増える。</p>
+<p class="copy-prose">この段は「紙幣増刷＝必ず不幸」とは言わない。最初の可動部品、すなわち財に入札できる名目単位の量だけを取り出す。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>まず、お金の単位の山が大きくなったことに気づく。</p></aside><div class="concept-points"><p class="concept-points-label">見るポイント</p><ul><li class="concept-card"><strong>単位のストック</strong><p>ここでの貨幣は、交換に使う数えられる単位のストック。</p></li><li class="concept-card"><strong>バスケットを固定</strong><p>財側を固定すると、貨幣側の変化が見える。</p></li><li class="concept-card"><strong>助言ではない</strong><p>仕組みのスケッチであり、政策や投資の処方ではない。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="inf-money" data-title="貨幣ストックを増やす" data-copy="{&quot;ariaLabel&quot;:&quot;例示の貨幣ストックをスライダーで増やし、財バスケットは固定のままにする&quot;,&quot;caption&quot;:&quot;スライドして単位を増やす。バスケットの輪郭は同じ大きさ——大きくなるのはお金の山だけ。&quot;,&quot;controlLabel&quot;:&quot;貨幣ストック&quot;,&quot;moneyLabel&quot;:&quot;流通単位&quot;,&quot;basketLabel&quot;:&quot;財バスケット（固定）&quot;,&quot;statusLow&quot;:&quot;基準の貨幣ストック：この玩具経済では単位とバスケットがおおむね釣り合う。&quot;,&quot;statusHigh&quot;:&quot;より多くの単位が同じバスケットを追う——物価水準への圧力が高まる。&quot;}"><noscript>インタラクティブ図解を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="price-level" aria-labelledby="price-level-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 02</p>
+    <h2 id="price-level-title">物価水準：同じバスケットにより多くの単位が要る</h2>
+    <p class="copy-prose">一般物価水準は、代表バスケットが通貨単位でいくらかかるかを示す指数だ。指数が上がると、貨幣1単位がカバーするバスケットの取り分は小さくなる。</p>
+<p class="copy-prose">多くの財の値札が一緒にずり上がるイメージ——リンゴだけが稀少で他が静止、ではない。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>ここでのインフレは、バスケット全体の値札合計が上がること。</p></aside><div class="concept-points"><p class="concept-points-label">見るポイント</p><ul><li class="concept-card"><strong>指数であり噂話ではない</strong><p>物価水準は多くの価格を一つの読みにまとめる。</p></li><li class="concept-card"><strong>バスケットあたりの単位</strong><p>水準が高い＝同じ財により多くの通貨が必要。</p></li><li class="concept-card"><strong>広い動き</strong><p>教材の標的は全般的上昇であり、一つの棚ではない。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="inf-prices" data-title="バスケットの単位コスト上昇を見る" data-copy="{&quot;ariaLabel&quot;:&quot;物価水準の上昇とともにバスケットの単位コストが上がるインタラクティブ表示&quot;,&quot;caption&quot;:&quot;物価水準指数を上げると、財リストは同じままバスケットの通貨コストが上がる。&quot;,&quot;controlLabel&quot;:&quot;物価水準指数&quot;,&quot;indexLabel&quot;:&quot;物価水準&quot;,&quot;costLabel&quot;:&quot;バスケット費用&quot;,&quot;unitSuffix&quot;:&quot; 単位&quot;,&quot;statusLow&quot;:&quot;低い物価水準：バスケットは少ない通貨単位で清算できる。&quot;,&quot;statusHigh&quot;:&quot;高い物価水準：同じバスケットに、より多くの単位が要る。&quot;}"><noscript>インタラクティブ図解を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="purchasing-power" aria-labelledby="purchasing-power-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 03</p>
+    <h2 id="purchasing-power-title">購買力：名目現金が同じでも買える切片は薄い</h2>
+    <p class="copy-prose">財布の名目残高を固定したまま物価水準を上げる。実質の請求権——その残高がバスケットのどれだけを買えるか——は縮む。枚数が変わらなくても「懐が薄い」感覚になる。</p>
+<p class="copy-prose">名目所得も上がり得る。希薄化で重要なのは、残高が物価水準に追いついているかどうかだ。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>現金の数字は同じで物価が高い → 持ち帰れるものが減る。</p></aside><div class="concept-points"><p class="concept-points-label">見るポイント</p><ul><li class="concept-card"><strong>実質残高</strong><p>名目現金 ÷ 物価水準 ≈ 実質購買力。</p></li><li class="concept-card"><strong>薄くなるのであって消えるのではない</strong><p>デモでは希薄化はゆるやか。現実のエピソードは様々。</p></li><li class="concept-card"><strong>助言なし</strong><p>希薄化の算術を示すだけで、何を買う・持つべきかは言わない。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="inf-power" data-title="財布が清算できるバスケットを縮める" data-copy="{&quot;ariaLabel&quot;:&quot;名目財布を固定し、物価上昇で買えるバスケット割合が減るデモ&quot;,&quot;caption&quot;:&quot;財布の単位数は固定。物価水準が上がると、バスケットの塗りつぶし部分が薄くなる。&quot;,&quot;controlLabel&quot;:&quot;物価水準 vs 固定財布&quot;,&quot;walletLabel&quot;:&quot;名目財布&quot;,&quot;walletValue&quot;:&quot;100単位（固定）&quot;,&quot;basketFillLabel&quot;:&quot;清算できるバスケット割合&quot;,&quot;statusLow&quot;:&quot;低い物価水準では、固定財布は例示バスケットの大部分をカバーする。&quot;,&quot;statusHigh&quot;:&quot;高い物価水準では、同じ財布はバスケットの薄い一切れしかカバーしない。&quot;}"><noscript>インタラクティブ図解を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="two-shocks" aria-labelledby="two-shocks-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 04</p>
+    <h2 id="two-shocks-title">高い物価水準への二つの入口：貨幣 vs 需要</h2>
+    <p class="copy-prose">貨幣ショックは、財に対する名目単位（や流通速度）を増やす。需要ショックは、スケッチ上で貨幣ストックが同じでも、自信・財政・信用などの理由で同じバスケットをより欲しがることだ。</p>
+<p class="copy-prose">単純な需給スケッチではどちらも物価水準を上げ得る。今日の見出しを診断するのが目的ではなく、「インフレ」が名付けるのは水準という症状で、上流のショックは一つとは限らないと見ることだ。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>より多くのお金が財を追うか、より買いたいか——どちらも物価を押し上げ得る。</p></aside><div class="concept-points"><p class="concept-points-label">見るポイント</p><ul><li class="concept-card"><strong>同じ症状</strong><p>異なるショックが「水準上昇」を共有し得る。</p></li><li class="concept-card"><strong>教材スケッチ</strong><p>現実には粘着価格、期待、開放経済チャネルなどがある。</p></li><li class="concept-card"><strong>スコアボードではない</strong><p>特定年のショックの優劣は付けない。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="inf-shocks" data-title="貨幣ショックと需要ショックを比べる" data-copy="{&quot;ariaLabel&quot;:&quot;貨幣ショックと需要ショックを切り替え、どちらも例示物価水準を押し上げる&quot;,&quot;caption&quot;:&quot;ショックを選ぶ。どちらの場合も物価水準の針は上がる——ただしラベルされた経路が違う。&quot;,&quot;controlLabel&quot;:&quot;ショックの種類&quot;,&quot;shocks&quot;:[{&quot;key&quot;:&quot;money&quot;,&quot;label&quot;:&quot;貨幣ショック&quot;,&quot;headline&quot;:&quot;単位が増える（または回転が速い）&quot;,&quot;detail&quot;:&quot;このスケッチでは、追加の名目請求が同じ財供給に入札する。&quot;,&quot;channel&quot;:&quot;貨幣チャネル&quot;},{&quot;key&quot;:&quot;demand&quot;,&quot;label&quot;:&quot;需要ショック&quot;,&quot;headline&quot;:&quot;支出意欲が強い&quot;,&quot;detail&quot;:&quot;スケッチ上で貨幣ストックが同じでも、買い手はバスケットをより欲しがる。&quot;,&quot;channel&quot;:&quot;需要チャネル&quot;}],&quot;priceLabel&quot;:&quot;物価水準&quot;,&quot;statusMoney&quot;:&quot;貨幣ショック経路：名目請求の増加 → 玩具モデルで物価水準が上昇。&quot;,&quot;statusDemand&quot;:&quot;需要ショック経路：支出意欲の強化 → 玩具モデルで物価水準が上昇。&quot;}"><noscript>インタラクティブ図解を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="chapter" id="relative-vs-general" aria-labelledby="relative-vs-general-title">
+  <div class="copy-block">
+    <p class="section-label">ステップ 05</p>
+    <h2 id="relative-vs-general-title">一つの価格上昇はインフレと同じではない</h2>
+    <p class="copy-prose">リンゴだけが高く、バスケットの残りがほぼ横ばいなら、それは主に相対価格の変化——資源がリンゴへ再配分される話だ。ここでのインフレは、広い物価水準が上がること。</p>
+<p class="copy-prose">相対の動きと一般インフレは共存し得る。癖にしたいのは、一枚の値札を見ているのか、指数全体を見ているのかを問うことだ。</p>
+    <aside class="plain-language"><strong>ひとことで</strong><p>一つの棚の急騰 ≠ 店全体の物価水準上昇。</p></aside><div class="concept-points"><p class="concept-points-label">見るポイント</p><ul><li class="concept-card"><strong>相対価格</strong><p>ある財とその他——希少性や選好の変化を示す。</p></li><li class="concept-card"><strong>一般水準</strong><p>多くの価格が一緒に上がる——インフレの読み。</p></li><li class="concept-card"><strong>周縁トピックでも切れ味を</strong><p>Wikipedia Inflation は熱量〔边缘〕寄りでも、区別ははっきりさせる価値がある。</p></li></ul></div>
+  </div>
+  <interactive-figure data-demo="inf-relative" data-title="相対スパイクと全般上昇を分ける" data-copy="{&quot;ariaLabel&quot;:&quot;単一の相対価格スパイクと広い物価水準上昇を比較するインタラクション&quot;,&quot;caption&quot;:&quot;モード切替。一本だけ高い棒は相対スパイク。多くの棒が一緒に上がるのが一般水準の動き。&quot;,&quot;controlLabel&quot;:&quot;価格パターン&quot;,&quot;modes&quot;:[{&quot;key&quot;:&quot;relative&quot;,&quot;label&quot;:&quot;相対スパイク&quot;,&quot;headline&quot;:&quot;一つの財が跳ねる&quot;,&quot;detail&quot;:&quot;一カテゴリだけ価格が上がる。他が止まれば指数はほとんど動かない。&quot;,&quot;badge&quot;:&quot;相対&quot;},{&quot;key&quot;:&quot;general&quot;,&quot;label&quot;:&quot;全般上昇&quot;,&quot;headline&quot;:&quot;バスケット全体が持ち上がる&quot;,&quot;detail&quot;:&quot;多くの価格が一緒に上がる——インフレの物価水準の話。&quot;,&quot;badge&quot;:&quot;全般&quot;}],&quot;statusRelative&quot;:&quot;相対モード：高い価格が一つあるだけで、広いインフレ読みではない。&quot;,&quot;statusGeneral&quot;:&quot;全般モード：例示バスケットの物価水準が上昇する。&quot;,&quot;categories&quot;:[&quot;食品&quot;,&quot;エネルギー&quot;,&quot;住居&quot;,&quot;サービス&quot;,&quot;その他&quot;]}"><noscript>インタラクティブ図解を見るには JavaScript を有効にしてください。</noscript></interactive-figure>
+</section>
+<section class="closing" aria-labelledby="closing-title">
+  <div class="copy-block closing-copy">
+    <p class="section-label">システムを組み立て直す</p>
+    <h2 id="closing-title">名目単位は増えても、財への実質請求は薄くなり得る</h2>
+    <p class="copy-prose">本図解のインフレは、所与の名目残高が買えるものを薄める物価水準の上昇だ。貨幣と需要はその症状への二つの入口。孤立した相対価格スパイクは別の話である。</p>
+<p class="copy-prose">名目/実質、水準/相対の語彙を揃えれば、一つの高い棚を「どこも懐が薄い」と取り違えにくくなる。</p>
+    <div class="closing-grid">
+      <div class="starter-checklist">
+        <h3>読者チェック</h3>
+        <ol><li>名目の貨幣量と実質購買力を分ける。</li><li>一枚の値札だけでなく、物価水準（バスケット）が動いたかを問う。</li><li>水準を上げるショックは一つとは限らないと認める。</li><li>デモは教材スケッチ——予測でも投資助言でもない。</li></ol>
+      </div>
+      <div class="boundary-map">
+        <h3>アイデアの四手</h3>
+        <ul><li class="scale-card"><strong>単位</strong><span>まず増えるのは？</span><p>より多くの貨幣単位が流通に入り得る。</p></li><li class="scale-card"><strong>水準</strong><span>次に上がるのは？</span><p>バスケットの単位コストが上がり得る。</p></li><li class="scale-card"><strong>希薄化</strong><span>薄くなるのは？</span><p>固定名目現金が清算できる量が減る。</p></li><li class="scale-card"><strong>範囲</strong><span>インフレでないものは？</span><p>全般上昇 ≠ 一つの相対スパイク。</p></li></ul>
+      </div>
+    </div>
+    <blockquote>懐が薄くなるのは、財への請求が縮むとき——印刷機が回っているという事実だけではない。</blockquote>
+    <p class="source-note">教材ノート（Wikipedia Inflation〔边缘〕）：デモは固定の例示バスケットと玩具の物価水準算術を使う。実際の CPI 作成、期待、粘着価格、開放経済チャネル、政策反応関数はより豊か。本ページは仕組みのみ——ニュース評論・予測・投資助言ではない。</p>
+  </div>
+</section>
+    </article>
+  </main>
+  <script>
+    window.__VISUAL_I18N__ = {"pauseAll":"すべての動きを停止","resumeAll":"すべての動きを再開","pause":"一時停止","resume":"再開","reset":"リセット","waiting":"表示領域に入ると図解が読み込まれます。","loading":"図解を準備しています…","error":"図解を表示できません。上の説明を先にお読みください。","figureFallback":"インタラクティブ図解を見るには JavaScript を有効にしてください。","skipToContent":"本文へスキップ","languageNavigation":"言語","overviewLabel":"インフレ概観","stepLabel":"ステップ"};
+  </script>
+  <script data-prototype-bundle="runtime">
+(() => {
+  "use strict";
+
+  const ui = Object.freeze(window.__VISUAL_I18N__);
+  const registry = new Map();
+  const figures = new Set();
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const tokens = Object.freeze({
+    ink: "var(--visual-ink, #17333c)",
+    muted: "var(--visual-muted, #60747a)",
+    line: "var(--visual-line, #d8ddd7)",
+    ocean: "var(--visual-ocean, #0f7185)",
+    warm: "var(--visual-warm, #ee9d46)",
+    coral: "var(--visual-coral, #d45f50)",
+    paper: "var(--visual-paper, #f4f1e8)",
+    surface: "var(--visual-surface, #fffdf8)"
+  });
+  let globalPaused = false;
+
+  const themeObserver = new MutationObserver(() => {
+    requestAnimationFrame(() => figures.forEach((figure) => figure._resize()));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+  const call = (instance, method, value) => {
+    if (instance && typeof instance[method] === "function") instance[method](value);
+  };
+
+  class InteractiveFigure extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({ mode: "open" });
+      this._abortController = new AbortController();
+      this._instance = null;
+      this._mounted = false;
+      this._mounting = false;
+      this._visible = false;
+      this._localPaused = false;
+    }
+
+    connectedCallback() {
+      if (this._connected) return;
+      this._connected = true;
+      figures.add(this);
+      this._shadow.innerHTML = `
+        <style>
+          :host { display: block; color: ${tokens.ink}; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+          .frame { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: inherit; background: ${tokens.surface}; }
+          .stage { position: relative; min-height: 25rem; overflow: hidden; isolation: isolate; }
+          .mount { min-height: inherit; }
+          .runtime-status { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 2rem; color: ${tokens.muted}; text-align: center; background: ${tokens.surface}; pointer-events: none; }
+          .runtime-status[data-live-only] { position: absolute; inset: auto; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; background: transparent; pointer-events: none; }
+          .runtime-status[hidden] { display: none; }
+          .controls { display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .6rem .75rem; border-top: 1px solid ${tokens.line}; }
+          .title { min-width: 0; margin-right: auto; overflow: hidden; color: ${tokens.muted}; font-size: .78rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+          button { padding: .42rem .7rem; border: 1px solid ${tokens.line}; border-radius: 999px; color: ${tokens.ink}; background: ${tokens.surface}; font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+          button:focus-visible { outline: 3px solid ${tokens.warm}; outline-offset: 2px; }
+          @media (max-width: 560px) { .controls { align-items: flex-start; } .title { padding-top: .4rem; white-space: normal; } }
+        </style>
+        <div class="frame">
+          <div class="stage"><div class="mount"></div><div class="runtime-status" data-runtime-status role="status"></div></div>
+          <div class="controls">
+            <span class="title"></span>
+            <button type="button" data-action="pause" aria-pressed="false"></button>
+            <button type="button" data-action="reset"></button>
+          </div>
+        </div>`;
+
+      this._stage = this._shadow.querySelector(".stage");
+      this._mountRoot = this._shadow.querySelector(".mount");
+      this._status = this._shadow.querySelector("[data-runtime-status]");
+      this._title = this._shadow.querySelector(".title");
+      this._pauseButton = this._shadow.querySelector('[data-action="pause"]');
+      this._resetButton = this._shadow.querySelector('[data-action="reset"]');
+      this._copy = JSON.parse(this.dataset.copy || "{}");
+      this._title.textContent = this.dataset.title || "";
+      this._pauseButton.textContent = ui.pause;
+      this._resetButton.textContent = ui.reset;
+      this._setStatus(ui.waiting);
+
+      this._pauseButton.addEventListener("click", () => {
+        this._localPaused = !this._localPaused;
+        this._syncPlayback();
+      });
+      this._resetButton.addEventListener("click", () => {
+        call(this._instance, "reset");
+        this.dispatchEvent(new CustomEvent("demo-reset", { bubbles: true }));
+      });
+
+      this._observer = new IntersectionObserver((entries) => {
+        this._visible = entries[0]?.isIntersecting ?? false;
+        if (this._visible) this._mount();
+        this._syncPlayback();
+      }, { rootMargin: "180px 0px", threshold: .05 });
+      this._observer.observe(this);
+
+      this._resizeObserver = new ResizeObserver(() => this._resize());
+      this._resizeObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      figures.delete(this);
+      this._observer?.disconnect();
+      this._resizeObserver?.disconnect();
+      this._abortController.abort();
+      call(this._instance, "destroy");
+    }
+
+    async _mount() {
+      if (this._mounted || this._mounting) return;
+      const factory = registry.get(this.dataset.demo);
+      if (!factory) return;
+      this._mounting = true;
+      this._setStatus(ui.loading);
+      try {
+        this._instance = await factory({
+          root: this._mountRoot,
+          shadow: this._shadow,
+          signal: this._abortController.signal,
+          copy: this._copy,
+          motion: !reducedMotion.matches,
+          tokens,
+          resolveColor: (value) => this._resolveColor(value),
+          announce: (message) => this._announce(message)
+        }) || {};
+        this._mounted = true;
+        this.dataset.state = "mounted";
+        this._liveRevision = (this._liveRevision || 0) + 1;
+        this._status.removeAttribute("data-live-only");
+        this._status.textContent = "";
+        this._status.hidden = true;
+        this._resize();
+        this._syncPlayback();
+        this.dispatchEvent(new CustomEvent("demo-mounted", {
+          bubbles: true,
+          detail: { id: this.dataset.demo }
+        }));
+      } catch {
+        this.dataset.state = "error";
+        this._setStatus(ui.error);
+      } finally {
+        this._mounting = false;
+      }
+    }
+
+    _resize() {
+      if (!this._mounted) return;
+      call(this._instance, "resize", {
+        width: this._stage.clientWidth,
+        height: this._stage.clientHeight,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    }
+
+    _resolveColor(value) {
+      if (!this._colorProbe?.isConnected) {
+        this._colorProbe = document.createElement("span");
+        this._colorProbe.hidden = true;
+        this._colorProbe.setAttribute("aria-hidden", "true");
+        this._stage.appendChild(this._colorProbe);
+      }
+      this._colorProbe.style.color = "";
+      this._colorProbe.style.color = value;
+      return getComputedStyle(this._colorProbe).color || value;
+    }
+
+    _syncPlayback() {
+      const paused = globalPaused || this._localPaused || !this._visible || reducedMotion.matches;
+      this.dataset.playback = paused ? "paused" : "playing";
+      this._pauseButton?.setAttribute("aria-pressed", String(this._localPaused));
+      if (this._pauseButton) this._pauseButton.textContent = this._localPaused ? ui.resume : ui.pause;
+      call(this._instance, paused ? "pause" : "resume");
+    }
+
+    _setStatus(message) {
+      this._liveRevision = (this._liveRevision || 0) + 1;
+      this._status.removeAttribute("data-live-only");
+      this._status.hidden = false;
+      this._status.textContent = message;
+    }
+
+    _announce(message) {
+      const revision = (this._liveRevision || 0) + 1;
+      this._liveRevision = revision;
+      this._status.hidden = false;
+      this._status.setAttribute("data-live-only", "");
+      this._status.textContent = "";
+      queueMicrotask(() => {
+        if (this._liveRevision !== revision || !this._status.isConnected) return;
+        this._status.textContent = message;
+      });
+    }
+  }
+
+  window.registerDemo = (id, factory) => {
+    if (!id || typeof factory !== "function") throw new TypeError("registerDemo(id, factory) requires an ID and factory.");
+    if (registry.has(id)) throw new Error(`Duplicate demo: ${id}`);
+    registry.set(id, factory);
+    figures.forEach((figure) => {
+      if (figure.dataset.demo === id && figure._visible) figure._mount();
+    });
+  };
+
+  customElements.define("interactive-figure", InteractiveFigure);
+
+  const globalToggle = document.querySelector("[data-global-motion]");
+  const syncGlobalToggle = () => {
+    if (globalToggle) {
+      globalToggle.textContent = globalPaused ? ui.resumeAll : ui.pauseAll;
+      globalToggle.setAttribute("aria-pressed", String(globalPaused));
+    }
+    figures.forEach((figure) => figure._syncPlayback());
+  };
+  globalToggle?.addEventListener("click", () => {
+    globalPaused = !globalPaused;
+    syncGlobalToggle();
+  });
+  reducedMotion.addEventListener("change", syncGlobalToggle);
+  syncGlobalToggle();
+})();
+  </script>
+  <script data-prototype-bundle="demos">
+const escapeHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+registerDemo("inf-overview", ({ root, copy, motion, tokens, announce }) => {
+  const buttons = copy.modes.map((mode, index) => `
+    <button type="button" class="inf-ov-btn" data-inf-ov="${index}" aria-pressed="${index === 0}">${escapeHtml(mode.label)}</button>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .inf-ov { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(145deg,color-mix(in srgb,${tokens.ocean} 8%,${tokens.surface}),${tokens.surface} 55%,color-mix(in srgb,${tokens.warm} 10%,${tokens.surface})); }
+      .inf-ov-panel { display:grid; gap:.75rem; padding:1.1rem 1.2rem; border:1px solid ${tokens.line}; border-radius:1.1rem;
+        background:color-mix(in srgb,${tokens.paper} 55%,${tokens.surface}); min-height:12rem; }
+      .inf-ov-badge { display:inline-flex; width:max-content; padding:.25rem .55rem; border-radius:999px; font-size:.68rem; font-weight:850;
+        letter-spacing:.04em; text-transform:uppercase; color:${tokens.surface}; background:${tokens.ocean}; }
+      .inf-ov-panel[data-mode="real"] .inf-ov-badge { background:${tokens.coral}; }
+      .inf-ov-headline { margin:0; font-size:1.15rem; font-weight:850; line-height:1.35; }
+      .inf-ov-detail { margin:0; color:${tokens.muted}; line-height:1.55; }
+      .inf-ov-viz { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:.75rem; min-height:5.5rem; }
+      .inf-ov-stack, .inf-ov-basket { border-radius:.85rem; border:1px dashed ${tokens.line}; background:color-mix(in srgb,${tokens.surface} 80%,${tokens.paper});
+        display:flex; align-items:flex-end; justify-content:center; gap:.2rem; padding:.6rem; min-height:5.5rem; }
+      .inf-ov-bill { width:1.1rem; border-radius:.2rem; background:${tokens.ocean}; transition:height 500ms ease, opacity 300ms ease; }
+      .inf-ov-panel[data-mode="nominal"] .inf-ov-bill:nth-child(1) { height:28%; }
+      .inf-ov-panel[data-mode="nominal"] .inf-ov-bill:nth-child(2) { height:42%; }
+      .inf-ov-panel[data-mode="nominal"] .inf-ov-bill:nth-child(3) { height:58%; }
+      .inf-ov-panel[data-mode="nominal"] .inf-ov-bill:nth-child(4) { height:74%; }
+      .inf-ov-panel[data-mode="nominal"] .inf-ov-bill:nth-child(5) { height:90%; }
+      .inf-ov-panel[data-mode="real"] .inf-ov-bill { height:38%; opacity:.55; }
+      .inf-ov-slice { width:70%; border-radius:.35rem .35rem 0 0; background:color-mix(in srgb,${tokens.warm} 70%,${tokens.coral});
+        transition:height 500ms ease; box-shadow:inset 0 0 0 1px color-mix(in srgb,${tokens.ink} 8%,transparent); }
+      .inf-ov-panel[data-mode="nominal"] .inf-ov-slice { height:78%; }
+      .inf-ov-panel[data-mode="real"] .inf-ov-slice { height:28%; }
+      .inf-ov-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .inf-ov-btn { flex:1 1 8rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink};
+        background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .inf-ov-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .inf-ov-btn:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .inf-ov-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .inf-ov-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .inf-ov.is-paused .inf-ov-bill, .inf-ov.is-paused .inf-ov-slice { transition:none; }
+    </style>
+    <div class="inf-ov${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="inf-ov-panel" data-inf-panel data-mode="nominal">
+        <span class="inf-ov-badge" data-inf-badge></span>
+        <h3 class="inf-ov-headline" data-inf-headline></h3>
+        <p class="inf-ov-detail" data-inf-detail></p>
+        <div class="inf-ov-viz" aria-hidden="true">
+          <div class="inf-ov-stack">
+            <span class="inf-ov-bill"></span><span class="inf-ov-bill"></span><span class="inf-ov-bill"></span>
+            <span class="inf-ov-bill"></span><span class="inf-ov-bill"></span>
+          </div>
+          <div class="inf-ov-basket"><span class="inf-ov-slice"></span></div>
+        </div>
+      </div>
+      <div class="inf-ov-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${buttons}</div>
+      <p class="inf-ov-status" data-inf-status role="status"></p>
+      <p class="inf-ov-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".inf-ov");
+  const panel = root.querySelector("[data-inf-panel]");
+  const badge = root.querySelector("[data-inf-badge]");
+  const headline = root.querySelector("[data-inf-headline]");
+  const detail = root.querySelector("[data-inf-detail]");
+  const status = root.querySelector("[data-inf-status]");
+  const btns = [...root.querySelectorAll("[data-inf-ov]")];
+
+  const select = (index, speak = false) => {
+    const mode = copy.modes[index];
+    panel.dataset.mode = mode.key;
+    badge.textContent = mode.badge;
+    headline.textContent = mode.headline;
+    detail.textContent = mode.detail;
+    status.textContent = mode.key === "nominal" ? copy.statusNominal : copy.statusReal;
+    btns.forEach((b, i) => b.setAttribute("aria-pressed", String(i === index)));
+    if (speak) announce(status.textContent);
+  };
+
+  btns.forEach((b) => b.addEventListener("click", () => select(Number(b.dataset.infOv), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("inf-money", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .inf-money { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(160deg,color-mix(in srgb,${tokens.paper} 70%,${tokens.surface}),${tokens.surface}); }
+      .inf-money-stage { display:grid; grid-template-columns:1.1fr .9fr; gap:1rem; }
+      @media (max-width:640px){ .inf-money-stage { grid-template-columns:1fr; } }
+      .inf-money-pile, .inf-money-basket { min-height:11rem; border:1px solid ${tokens.line}; border-radius:1rem; padding:1rem;
+        background:color-mix(in srgb,${tokens.surface} 85%,${tokens.paper}); display:flex; flex-direction:column; gap:.75rem; }
+      .inf-money-label { margin:0; font-size:.78rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:${tokens.muted}; }
+      .inf-money-bills { flex:1; display:flex; align-items:flex-end; gap:.35rem; min-height:7rem; }
+      .inf-money-bill { flex:1; border-radius:.25rem; background:linear-gradient(180deg,${tokens.ocean},color-mix(in srgb,${tokens.ocean} 60%,${tokens.ink}));
+        transition:height 400ms ease; min-height:12%; height:20%; }
+      .inf-money-outline { flex:1; border:2px dashed ${tokens.line}; border-radius:.75rem; display:grid; place-items:center;
+        color:${tokens.muted}; font-weight:700; background:color-mix(in srgb,${tokens.paper} 40%,transparent); }
+      .inf-money-control { display:grid; gap:.45rem; }
+      .inf-money-control label { font-weight:800; font-size:.9rem; }
+      .inf-money input[type="range"] { width:100%; accent-color:${tokens.ocean}; }
+      .inf-money-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .inf-money-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .inf-money.is-paused .inf-money-bill { transition:none; }
+    </style>
+    <div class="inf-money${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="inf-money-stage">
+        <div class="inf-money-pile">
+          <p class="inf-money-label">${escapeHtml(copy.moneyLabel)}</p>
+          <div class="inf-money-bills" data-inf-bills aria-hidden="true">
+            <span class="inf-money-bill"></span><span class="inf-money-bill"></span><span class="inf-money-bill"></span><span class="inf-money-bill"></span>
+            <span class="inf-money-bill"></span><span class="inf-money-bill"></span><span class="inf-money-bill"></span><span class="inf-money-bill"></span>
+          </div>
+        </div>
+        <div class="inf-money-basket">
+          <p class="inf-money-label">${escapeHtml(copy.basketLabel)}</p>
+          <div class="inf-money-outline">▣</div>
+        </div>
+      </div>
+      <div class="inf-money-control">
+        <label for="inf-money-range">${escapeHtml(copy.controlLabel)}</label>
+        <input id="inf-money-range" type="range" min="0" max="100" value="20" data-inf-range />
+      </div>
+      <p class="inf-money-status" data-inf-status role="status"></p>
+      <p class="inf-money-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".inf-money");
+  const billEls = [...root.querySelectorAll(".inf-money-bill")];
+  const range = root.querySelector("[data-inf-range]");
+  const status = root.querySelector("[data-inf-status]");
+
+  const render = (speak = false) => {
+    const v = Number(range.value);
+    billEls.forEach((el, i) => {
+      const h = 18 + (v / 100) * (18 + i * 8);
+      el.style.height = `${Math.min(96, h)}%`;
+    });
+    status.textContent = v < 45 ? copy.statusLow : copy.statusHigh;
+    if (speak) announce(status.textContent);
+  };
+
+  range.addEventListener("input", () => render(true));
+  render();
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => { range.value = "20"; render(); },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("inf-prices", ({ root, copy, motion, tokens, announce }) => {
+  root.innerHTML = `
+    <style>
+      .inf-prices { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(165deg,${tokens.surface},color-mix(in srgb,${tokens.warm} 8%,${tokens.surface})); }
+      .inf-prices-meter { display:grid; gap:.6rem; padding:1.1rem; border:1px solid ${tokens.line}; border-radius:1rem;
+        background:color-mix(in srgb,${tokens.paper} 50%,${tokens.surface}); }
+      .inf-prices-row { display:flex; justify-content:space-between; gap:1rem; align-items:baseline; font-weight:800; }
+      .inf-prices-bar { height:1rem; border-radius:999px; background:color-mix(in srgb,${tokens.line} 70%,${tokens.surface}); overflow:hidden; }
+      .inf-prices-fill { height:100%; width:30%; border-radius:inherit; background:linear-gradient(90deg,${tokens.ocean},${tokens.coral});
+        transition:width 450ms ease; }
+      .inf-prices-cost { font-size:1.6rem; font-weight:900; color:${tokens.ocean}; transition:color 300ms ease; }
+      .inf-prices-control { display:grid; gap:.45rem; }
+      .inf-prices-control label { font-weight:800; }
+      .inf-prices input[type="range"] { width:100%; accent-color:${tokens.coral}; }
+      .inf-prices-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .inf-prices-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .inf-prices.is-paused .inf-prices-fill { transition:none; }
+    </style>
+    <div class="inf-prices${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="inf-prices-meter">
+        <div class="inf-prices-row"><span>${escapeHtml(copy.indexLabel)}</span><span data-inf-index>100</span></div>
+        <div class="inf-prices-bar" aria-hidden="true"><div class="inf-prices-fill" data-inf-fill></div></div>
+        <div class="inf-prices-row"><span>${escapeHtml(copy.costLabel)}</span><span class="inf-prices-cost" data-inf-cost></span></div>
+      </div>
+      <div class="inf-prices-control">
+        <label for="inf-prices-range">${escapeHtml(copy.controlLabel)}</label>
+        <input id="inf-prices-range" type="range" min="80" max="180" value="100" data-inf-range />
+      </div>
+      <p class="inf-prices-status" data-inf-status role="status"></p>
+      <p class="inf-prices-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".inf-prices");
+  const range = root.querySelector("[data-inf-range]");
+  const fill = root.querySelector("[data-inf-fill]");
+  const indexEl = root.querySelector("[data-inf-index]");
+  const costEl = root.querySelector("[data-inf-cost]");
+  const status = root.querySelector("[data-inf-status]");
+
+  const render = (speak = false) => {
+    const v = Number(range.value);
+    const pct = ((v - 80) / 100) * 100;
+    fill.style.width = `${Math.max(12, Math.min(100, pct))}%`;
+    indexEl.textContent = String(v);
+    costEl.textContent = `${v}${copy.unitSuffix}`;
+    costEl.style.color = v > 130 ? tokens.coral : tokens.ocean;
+    status.textContent = v < 120 ? copy.statusLow : copy.statusHigh;
+    if (speak) announce(status.textContent);
+  };
+
+  range.addEventListener("input", () => render(true));
+  render();
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => { range.value = "100"; render(); },
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+
+registerDemo("inf-power", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  root.innerHTML = `
+    <style>
+      .inf-power-root {
+        display: flex;
+        flex-direction: column;
+        min-height: 400px;
+        font-family: system-ui, -apple-system, sans-serif;
+        position: relative;
+        user-select: none;
+        box-sizing: border-box;
+      }
+      .inf-power-controls {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        gap: 0.5rem;
+        z-index: 10;
+      }
+      .inf-power-controls label {
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .inf-power-slider {
+        width: 100%;
+        max-width: 300px;
+        cursor: pointer;
+      }
+      .inf-power-stage {
+        flex: 1;
+        position: relative;
+        min-height: 250px;
+        width: 100%;
+      }
+      .inf-power-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+      .inf-power-label {
+        position: absolute;
+        transform: translate(-50%, -100%);
+        text-align: center;
+        font-size: 0.85rem;
+        line-height: 1.3;
+        pointer-events: none;
+        width: max-content;
+        max-width: 45vw;
+      }
+      .inf-power-label small {
+        display: block;
+        font-size: 0.75rem;
+        opacity: 0.8;
+        margin-top: 4px;
+      }
+      .inf-power-caption {
+        text-align: center;
+        padding: 1rem;
+        font-size: 0.85rem;
+      }
+    </style>
+    <div class="inf-power-root" aria-label="${copy.ariaLabel}">
+      <div class="inf-power-controls">
+        <label for="inf-power-slider">${copy.controlLabel}</label>
+        <input type="range" id="inf-power-slider" class="inf-power-slider" min="1" max="4" step="0.01" value="1" aria-label="${copy.controlLabel}">
+      </div>
+      <div class="inf-power-stage">
+        <canvas class="inf-power-canvas" aria-hidden="true"></canvas>
+        <div class="inf-power-label" id="inf-power-wallet-label">
+          ${copy.walletLabel}
+          <small>${copy.walletValue}</small>
+        </div>
+        <div class="inf-power-label" id="inf-power-basket-label">
+          ${copy.basketFillLabel}
+        </div>
+      </div>
+      <div class="inf-power-caption" aria-live="polite">${copy.caption}</div>
+    </div>
+  `;
+
+  const slider = root.querySelector('#inf-power-slider');
+  const canvas = root.querySelector('.inf-power-canvas');
+  const ctx = canvas.getContext('2d');
+
+  const walletLabel = root.querySelector('#inf-power-wallet-label');
+  const basketLabel = root.querySelector('#inf-power-basket-label');
+  const controlsLabel = root.querySelector('.inf-power-controls label');
+  const caption = root.querySelector('.inf-power-caption');
+
+  controlsLabel.style.color = resolveColor(tokens.ink);
+  walletLabel.style.color = resolveColor(tokens.ink);
+  basketLabel.style.color = resolveColor(tokens.ink);
+  caption.style.color = resolveColor(tokens.muted);
+
+  let priceLevel = 1;
+  let isPlaying = true;
+  let isInteracting = false;
+  let animFrame;
+  let lastTime = performance.now();
+  let animPhase = 0;
+
+  let logicalWidth = 0;
+  let logicalHeight = 0;
+  let currentDpr = 1;
+  let lastAnnouncedState = 'low';
+
+  function checkAnnounce() {
+    if (priceLevel < 1.5 && lastAnnouncedState !== 'low') {
+      announce(copy.statusLow);
+      lastAnnouncedState = 'low';
+    } else if (priceLevel > 3.5 && lastAnnouncedState !== 'high') {
+      announce(copy.statusHigh);
+      lastAnnouncedState = 'high';
+    } else if (priceLevel >= 1.5 && priceLevel <= 3.5) {
+      lastAnnouncedState = 'mid';
+    }
+  }
+
+  slider.addEventListener('input', (e) => {
+    isInteracting = true;
+    priceLevel = parseFloat(e.target.value);
+    checkAnnounce();
+    render();
+  }, { signal });
+
+  function render() {
+    if (!ctx || !logicalWidth || !logicalHeight) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const w = logicalWidth;
+    const h = logicalHeight;
+
+    const boxW = Math.min(w * 0.25, 120);
+    const boxH = Math.min(h * 0.5, 140);
+
+    const walletX = w * 0.25 - boxW / 2;
+    const basketX = w * 0.75 - boxW / 2;
+    const boxY = h * 0.5 - boxH / 2 + 15;
+
+    const ink = resolveColor(tokens.ink);
+    const ocean = resolveColor(tokens.ocean);
+    const coral = resolveColor(tokens.coral);
+    const muted = resolveColor(tokens.muted);
+
+    ctx.fillStyle = ocean;
+    ctx.fillRect(walletX, boxY, boxW, boxH);
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 2 * currentDpr;
+    ctx.strokeRect(walletX, boxY, boxW, boxH);
+
+    const fillH = boxH / priceLevel;
+    const fillY = boxY + boxH - fillH;
+
+    ctx.fillStyle = coral;
+    ctx.fillRect(basketX, fillY, boxW, fillH);
+
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 2 * currentDpr;
+    ctx.strokeRect(basketX, boxY, boxW, boxH);
+
+    ctx.beginPath();
+    ctx.setLineDash([6 * currentDpr, 6 * currentDpr]);
+    ctx.moveTo(walletX + boxW, boxY);
+    ctx.lineTo(basketX, fillY);
+    ctx.strokeStyle = muted;
+    ctx.lineWidth = 2 * currentDpr;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    walletLabel.style.left = `${w * 0.25}px`;
+    walletLabel.style.top = `${boxY - 15}px`;
+
+    basketLabel.style.left = `${w * 0.75}px`;
+    basketLabel.style.top = `${boxY - 15}px`;
+  }
+
+  function loop(time) {
+    if (!isPlaying) {
+      lastTime = time;
+      animFrame = requestAnimationFrame(loop);
+      return;
+    }
+
+    const dt = time - lastTime;
+    lastTime = time;
+
+    if (!isInteracting && motion !== false) {
+      animPhase += dt * 0.0015;
+      priceLevel = 2.5 - 1.5 * Math.cos(animPhase);
+      slider.value = priceLevel;
+      checkAnnounce();
+      render();
+    }
+
+    animFrame = requestAnimationFrame(loop);
+  }
+
+  animFrame = requestAnimationFrame((t) => {
+    lastTime = t;
+    loop(t);
+  });
+
+  return {
+    pause() {
+      isPlaying = false;
+    },
+    resume() {
+      isPlaying = true;
+      lastTime = performance.now();
+    },
+    reset() {
+      isInteracting = false;
+      animPhase = 0;
+      priceLevel = 1;
+      slider.value = priceLevel;
+      lastAnnouncedState = 'low';
+      render();
+    },
+    destroy() {
+      cancelAnimationFrame(animFrame);
+      root.innerHTML = '';
+    },
+    resize({ width, height, dpr }) {
+      logicalWidth = width;
+      logicalHeight = height;
+      currentDpr = dpr;
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+
+      render();
+    }
+  };
+});
+
+registerDemo("inf-shocks", ({ root, shadow, signal, copy, motion, tokens, resolveColor, announce }) => {
+  root.innerHTML = `
+    <style>
+      .inf-shocks-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        font-family: system-ui, -apple-system, sans-serif;
+        color: var(--ink);
+        width: 100%;
+      }
+      .inf-shocks-controls {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 24px;
+        padding: 8px;
+      }
+      .inf-shocks-radio {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        user-select: none;
+      }
+      .inf-shocks-radio input {
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+        accent-color: var(--coral);
+      }
+      .inf-shocks-stage {
+        position: relative;
+        min-height: 280px;
+        background: var(--surface);
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        overflow: hidden;
+      }
+      .inf-shocks-stage canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .inf-shocks-label {
+        position: absolute;
+        font-size: 13px;
+        text-align: center;
+        pointer-events: none;
+        color: var(--ink);
+        line-height: 1.3;
+        padding: 4px 8px;
+        font-weight: 500;
+      }
+      .inf-shocks-label-money {
+        left: 2%;
+        bottom: 10%;
+        width: 38%;
+      }
+      .inf-shocks-label-demand {
+        right: 2%;
+        bottom: 10%;
+        width: 38%;
+      }
+      .inf-shocks-label-price {
+        left: 50%;
+        top: 8%;
+        transform: translateX(-50%);
+        width: 50%;
+      }
+      .inf-shocks-info {
+        text-align: center;
+        min-height: 64px;
+        padding: 0 16px;
+      }
+      .inf-shocks-info h4 {
+        margin: 0 0 6px 0;
+        font-size: 16px;
+        color: var(--ink);
+      }
+      .inf-shocks-info p {
+        margin: 0;
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+    </style>
+    <div class="inf-shocks-container">
+      <div class="inf-shocks-controls" role="radiogroup" aria-label="${copy.controlLabel}">
+        ${copy.shocks.map((s, i) => `
+          <label class="inf-shocks-radio">
+            <input type="radio" name="inf-shocks-type" value="${s.key}" ${i === 0 ? 'checked' : ''}>
+            <span>${s.label}</span>
+          </label>
+        `).join('')}
+      </div>
+      <div class="inf-shocks-stage">
+        <canvas role="img" aria-label="${copy.ariaLabel}"></canvas>
+        <div class="inf-shocks-label inf-shocks-label-money" aria-hidden="true">${copy.shocks[0].channel}</div>
+        <div class="inf-shocks-label inf-shocks-label-demand" aria-hidden="true">${copy.shocks[1].channel}</div>
+        <div class="inf-shocks-label inf-shocks-label-price" aria-hidden="true">${copy.priceLabel}</div>
+      </div>
+      <div class="inf-shocks-info" aria-live="polite">
+        <h4 class="inf-shocks-headline"></h4>
+        <p class="inf-shocks-detail"></p>
+      </div>
+    </div>
+  `;
+
+  const canvas = root.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const radios = root.querySelectorAll('input[type="radio"]');
+  const headlineEl = root.querySelector('.inf-shocks-headline');
+  const detailEl = root.querySelector('.inf-shocks-detail');
+
+  let activeShock = copy.shocks[0].key;
+  let priceLevel = 0.2;
+  const targetPriceLevel = 0.8;
+  let particles = [];
+  let isPlaying = true;
+  let frameId;
+  let width = 0, height = 0, dpr = 1;
+  let lastTime = performance.now();
+  let spawnTimer = 0;
+
+  const colorLine = resolveColor(tokens.line);
+  const colorCoral = resolveColor(tokens.coral);
+  const colorOcean = resolveColor(tokens.ocean);
+  const colorWarm = resolveColor(tokens.warm);
+  const colorPaper = resolveColor(tokens.paper);
+
+  const updateInfo = () => {
+    const shock = copy.shocks.find(s => s.key === activeShock);
+    headlineEl.textContent = shock.headline;
+    detailEl.textContent = shock.detail;
+  };
+
+  updateInfo();
+
+  radios.forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        activeShock = e.target.value;
+        priceLevel = 0.2;
+        particles = [];
+        updateInfo();
+
+        if (activeShock === 'money') {
+          announce(copy.statusMoney);
+        } else {
+          announce(copy.statusDemand);
+        }
+
+        if (!isPlaying) {
+          draw();
+        }
+      }
+    }, { signal });
+  });
+
+  const spawnParticle = () => {
+    const isMoney = activeShock === 'money';
+    const startX = isMoney ? width * 0.1 : width * 0.9;
+    const endX = isMoney ? (width / 2 - 15) : (width / 2 + 15);
+    const y = height * 0.7;
+
+    particles.push({
+      x: startX,
+      y: y + (Math.random() * 6 - 3),
+      tx: endX,
+      vx: isMoney ? 2.5 : -2.5,
+      color: isMoney ? colorOcean : colorWarm,
+      size: 4 + Math.random() * 2
+    });
+  };
+
+  const update = (time) => {
+    if (!isPlaying) return;
+    const dt = Math.min(time - lastTime, 32);
+    lastTime = time;
+
+    if (motion) {
+      priceLevel += (targetPriceLevel - priceLevel) * 0.04 * (dt / 16);
+
+      spawnTimer += dt;
+      if (spawnTimer > 120) {
+        spawnTimer = 0;
+        spawnParticle();
+      }
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        let p = particles[i];
+        p.x += p.vx * (dt / 16);
+
+        if ((p.vx > 0 && p.x >= p.tx) || (p.vx < 0 && p.x <= p.tx)) {
+          particles.splice(i, 1);
+        }
+      }
+    } else {
+      priceLevel = targetPriceLevel;
+      particles = [];
+      const isMoney = activeShock === 'money';
+      const startX = isMoney ? width * 0.1 : width * 0.9;
+      const endX = isMoney ? (width / 2 - 15) : (width / 2 + 15);
+      const y = height * 0.7;
+
+      for (let i = 0; i < 6; i++) {
+        particles.push({
+          x: startX + (endX - startX) * (i / 5),
+          y: y,
+          color: isMoney ? colorOcean : colorWarm,
+          size: 5
+        });
+      }
+    }
+
+    draw();
+    frameId = requestAnimationFrame(update);
+  };
+
+  const draw = () => {
+    if (width === 0 || height === 0) return;
+    ctx.clearRect(0, 0, width, height);
+
+    const cx = width / 2;
+    const gaugeW = 36;
+    const gaugeH = height * 0.50;
+    const gaugeY = height * 0.25;
+    const pipeY = height * 0.7;
+
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    // 1. Pipe Backgrounds
+    ctx.lineWidth = 14;
+    ctx.strokeStyle = colorPaper;
+    ctx.beginPath();
+    ctx.moveTo(width * 0.1, pipeY);
+    ctx.lineTo(cx - gaugeW/2 + 2, pipeY);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(width * 0.9, pipeY);
+    ctx.lineTo(cx + gaugeW/2 - 2, pipeY);
+    ctx.stroke();
+
+    // 2. Particles (flowing inside pipes)
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.fill();
+    });
+
+    // 3. Pipe Borders
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = colorLine;
+
+    ctx.beginPath();
+    ctx.moveTo(width * 0.1, pipeY - 7);
+    ctx.lineTo(cx - gaugeW/2, pipeY - 7);
+    ctx.moveTo(width * 0.1, pipeY + 7);
+    ctx.lineTo(cx - gaugeW/2, pipeY + 7);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(width * 0.9, pipeY - 7);
+    ctx.lineTo(cx + gaugeW/2, pipeY - 7);
+    ctx.moveTo(width * 0.9, pipeY + 7);
+    ctx.lineTo(cx + gaugeW/2, pipeY + 7);
+    ctx.stroke();
+
+    // 4. Gauge Background
+    ctx.fillStyle = colorPaper;
+    ctx.beginPath();
+    if (ctx.roundRect) {
+      ctx.roundRect(cx - gaugeW/2, gaugeY, gaugeW, gaugeH, 8);
+    } else {
+      ctx.rect(cx - gaugeW/2, gaugeY, gaugeW, gaugeH);
+    }
+    ctx.fill();
+
+    // 5. Gauge Fill (Price Level)
+    const fillH = priceLevel * (gaugeH - 4);
+    const fillY = gaugeY + gaugeH - 2 - fillH;
+
+    ctx.fillStyle = colorCoral;
+    ctx.beginPath();
+    if (ctx.roundRect) {
+      ctx.roundRect(cx - gaugeW/2 + 2, fillY, gaugeW - 4, fillH, [0, 0, 6, 6]);
+    } else {
+      ctx.rect(cx - gaugeW/2 + 2, fillY, gaugeW - 4, fillH);
+    }
+    ctx.fill();
+
+    // 6. Gauge Border & Marks
+    ctx.strokeStyle = colorLine;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    if (ctx.roundRect) {
+      ctx.roundRect(cx - gaugeW/2, gaugeY, gaugeW, gaugeH, 8);
+    } else {
+      ctx.rect(cx - gaugeW/2, gaugeY, gaugeW, gaugeH);
+    }
+    ctx.stroke();
+
+    ctx.lineWidth = 1;
+    for(let i = 1; i < 5; i++) {
+      const markY = gaugeY + (gaugeH * i / 5);
+      ctx.beginPath();
+      ctx.moveTo(cx - gaugeW/2, markY);
+      ctx.lineTo(cx - gaugeW/2 + 8, markY);
+      ctx.stroke();
+    }
+  };
+
+  frameId = requestAnimationFrame(update);
+
+  return {
+    pause() {
+      isPlaying = false;
+      cancelAnimationFrame(frameId);
+    },
+    resume() {
+      if (!isPlaying) {
+        isPlaying = true;
+        lastTime = performance.now();
+        frameId = requestAnimationFrame(update);
+      }
+    },
+    reset() {
+      activeShock = copy.shocks[0].key;
+      radios[0].checked = true;
+      priceLevel = 0.2;
+      particles = [];
+      updateInfo();
+      if (!isPlaying) draw();
+    },
+    destroy() {
+      isPlaying = false;
+      cancelAnimationFrame(frameId);
+      root.innerHTML = '';
+    },
+    resize(dims) {
+      width = dims.width;
+      height = dims.height;
+      dpr = dims.dpr;
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+
+      if (!motion) {
+        particles = [];
+        const isMoney = activeShock === 'money';
+        const startX = isMoney ? width * 0.1 : width * 0.9;
+        const endX = isMoney ? (width / 2 - 15) : (width / 2 + 15);
+        const y = height * 0.7;
+
+        for (let i = 0; i < 6; i++) {
+          particles.push({
+            x: startX + (endX - startX) * (i / 5),
+            y: y,
+            color: isMoney ? colorOcean : colorWarm,
+            size: 5
+          });
+        }
+      }
+
+      draw();
+    }
+  };
+});
+
+registerDemo("inf-relative", ({ root, copy, motion, tokens, announce }) => {
+  const buttons = copy.modes.map((mode, index) => `
+    <button type="button" class="inf-rel-btn" data-inf-rel="${index}" aria-pressed="${index === 0}">${escapeHtml(mode.label)}</button>`).join("");
+  const bars = copy.categories.map((label, index) => `
+    <div class="inf-rel-col">
+      <div class="inf-rel-bar" data-inf-bar="${index}" style="height:36%"></div>
+      <span class="inf-rel-cat">${escapeHtml(label)}</span>
+    </div>`).join("");
+
+  root.innerHTML = `
+    <style>
+      .inf-rel { display:grid; gap:1rem; min-height:22rem; padding:clamp(1rem,4vw,2rem); color:${tokens.ink};
+        background:linear-gradient(148deg,color-mix(in srgb,${tokens.warm} 8%,${tokens.surface}),${tokens.surface}); }
+      .inf-rel-panel { display:grid; gap:.7rem; padding:1.1rem; border:1px solid ${tokens.line}; border-radius:1.1rem;
+        background:color-mix(in srgb,${tokens.paper} 50%,${tokens.surface}); }
+      .inf-rel-badge { display:inline-flex; width:max-content; padding:.25rem .55rem; border-radius:999px; font-size:.68rem; font-weight:850;
+        letter-spacing:.04em; text-transform:uppercase; color:${tokens.surface}; background:${tokens.warm}; }
+      .inf-rel-panel[data-mode="general"] .inf-rel-badge { background:${tokens.coral}; }
+      .inf-rel-headline { margin:0; font-size:1.1rem; font-weight:850; }
+      .inf-rel-detail { margin:0; color:${tokens.muted}; line-height:1.55; }
+      .inf-rel-chart { display:flex; align-items:flex-end; justify-content:space-between; gap:.45rem; min-height:9rem;
+        padding:.5rem .25rem 0; border-top:1px dashed ${tokens.line}; }
+      .inf-rel-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:.35rem; min-width:0; }
+      .inf-rel-bar { width:100%; max-width:2.4rem; border-radius:.35rem .35rem 0 0; background:${tokens.ocean};
+        transition:height 450ms ease, background 300ms ease; }
+      .inf-rel-cat { font-size:.65rem; font-weight:700; color:${tokens.muted}; text-align:center; line-height:1.2; }
+      .inf-rel-controls { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .inf-rel-btn { flex:1 1 8rem; padding:.75rem; border:1px solid ${tokens.line}; border-radius:.8rem; color:${tokens.ink};
+        background:${tokens.surface}; font:inherit; font-weight:800; cursor:pointer; }
+      .inf-rel-btn[aria-pressed="true"] { border-color:${tokens.ocean}; box-shadow:inset 0 0 0 1px ${tokens.ocean}; }
+      .inf-rel-btn:focus-visible { outline:3px solid ${tokens.warm}; outline-offset:2px; }
+      .inf-rel-status { margin:0; padding:.85rem 1rem; border:1px solid ${tokens.line}; border-radius:.85rem;
+        background:color-mix(in srgb,${tokens.paper} 40%,${tokens.surface}); color:${tokens.muted}; line-height:1.5; }
+      .inf-rel-caption { margin:0; color:${tokens.muted}; font-size:.76rem; text-align:center; }
+      .inf-rel.is-paused .inf-rel-bar { transition:none; }
+    </style>
+    <div class="inf-rel${motion ? "" : " is-paused"}" role="group" aria-label="${escapeHtml(copy.ariaLabel)}">
+      <div class="inf-rel-panel" data-inf-panel data-mode="relative">
+        <span class="inf-rel-badge" data-inf-badge></span>
+        <h3 class="inf-rel-headline" data-inf-headline></h3>
+        <p class="inf-rel-detail" data-inf-detail></p>
+        <div class="inf-rel-chart" aria-hidden="true">${bars}</div>
+      </div>
+      <div class="inf-rel-controls" role="group" aria-label="${escapeHtml(copy.controlLabel)}">${buttons}</div>
+      <p class="inf-rel-status" data-inf-status role="status"></p>
+      <p class="inf-rel-caption">${escapeHtml(copy.caption)}</p>
+    </div>`;
+
+  const scene = root.querySelector(".inf-rel");
+  const panel = root.querySelector("[data-inf-panel]");
+  const badge = root.querySelector("[data-inf-badge]");
+  const headline = root.querySelector("[data-inf-headline]");
+  const detail = root.querySelector("[data-inf-detail]");
+  const status = root.querySelector("[data-inf-status]");
+  const barEls = [...root.querySelectorAll("[data-inf-bar]")];
+  const btns = [...root.querySelectorAll("[data-inf-rel]")];
+
+  const select = (index, speak = false) => {
+    const mode = copy.modes[index];
+    panel.dataset.mode = mode.key;
+    badge.textContent = mode.badge;
+    headline.textContent = mode.headline;
+    detail.textContent = mode.detail;
+    if (mode.key === "relative") {
+      barEls.forEach((el, i) => {
+        el.style.height = i === 1 ? "88%" : "34%";
+        el.style.background = i === 1 ? tokens.coral : tokens.ocean;
+      });
+      status.textContent = copy.statusRelative;
+    } else {
+      barEls.forEach((el) => {
+        el.style.height = "70%";
+        el.style.background = tokens.coral;
+      });
+      status.textContent = copy.statusGeneral;
+    }
+    btns.forEach((b, i) => b.setAttribute("aria-pressed", String(i === index)));
+    if (speak) announce(status.textContent);
+  };
+
+  btns.forEach((b) => b.addEventListener("click", () => select(Number(b.dataset.infRel), true)));
+  select(0);
+  return {
+    pause: () => scene.classList.add("is-paused"),
+    resume: () => scene.classList.remove("is-paused"),
+    reset: () => select(0),
+    destroy: () => { root.innerHTML = ""; }
+  };
+});
+  </script>
+</body>
+</html>

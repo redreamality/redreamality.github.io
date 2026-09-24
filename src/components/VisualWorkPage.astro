@@ -9,6 +9,7 @@ import TyphoonVisual from './TyphoonVisual.astro';
 import EnsoFoodPricesVisual from './EnsoFoodPricesVisual.astro';
 import PrisonersDilemmaVisual from './PrisonersDilemmaVisual.astro';
 import ButterflyEffectVisual from './ButterflyEffectVisual.astro';
+import InflationPurchasingPowerVisual from './InflationPurchasingPowerVisual.astro';
 
 interface Props {
   lang: Language;
@@ -26,6 +27,7 @@ const artifactComponents = {
   'enso-food-prices': EnsoFoodPricesVisual,
   'prisoners-dilemma': PrisonersDilemmaVisual,
   'butterfly-effect': ButterflyEffectVisual,
+  'inflation-purchasing-power': InflationPurchasingPowerVisual,
 } as const;
 const VisualComponent = artifactId ? artifactComponents[artifactId as keyof typeof artifactComponents] : undefined;
 

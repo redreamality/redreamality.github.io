@@ -1,0 +1,1089 @@
+{
+  "slug": "inflation-purchasing-power",
+  "renderer": "interactive-explainer",
+  "structure": {
+    "overview": {
+      "demo": "inf-overview"
+    },
+    "steps": [
+      {
+        "id": "more-units",
+        "demo": "inf-money"
+      },
+      {
+        "id": "price-level",
+        "demo": "inf-prices"
+      },
+      {
+        "id": "purchasing-power",
+        "demo": "inf-power"
+      },
+      {
+        "id": "two-shocks",
+        "demo": "inf-shocks"
+      },
+      {
+        "id": "relative-vs-general",
+        "demo": "inf-relative"
+      }
+    ]
+  },
+  "locales": {
+    "en": {
+      "lang": "en",
+      "meta": {
+        "title": "When More Money Is Printed, Why Does Your Pocket Feel Thinner?",
+        "description": "An interactive guide to inflation as purchasing-power dilution: how money or demand shocks lift the price level, why nominal cash is not the same as real buying power, and how a single rising price differs from a general rise."
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "Pause all motion",
+        "resumeAll": "Resume all motion",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset",
+        "waiting": "The visual will load when it enters the viewport.",
+        "loading": "Preparing the visual…",
+        "error": "The visual could not be displayed. Read the explanation above instead.",
+        "figureFallback": "Enable JavaScript to view this interactive explanation.",
+        "skipToContent": "Skip to content",
+        "languageNavigation": "Languages",
+        "overviewLabel": "Inflation overview",
+        "stepLabel": "Step"
+      },
+      "hero": {
+        "eyebrow": "MONEY / PRICE LEVEL / PURCHASING POWER",
+        "title": "When more money is printed, why does your pocket feel thinner?",
+        "subtitle": "Printing more currency units can leave the same wallet holding more paper—and buying less of the same basket. This explainer separates nominal money from real purchasing power, and general inflation from a single relative price change. No investment advice—just the mechanism."
+      },
+      "overview": {
+        "title": "More units, same goods—thinner claim on the basket",
+        "body": [
+          "Inflation, in the teaching sense used here, is a sustained rise in the general price level: the same representative basket of goods and services costs more currency units than before.",
+          "That rise dilutes what a fixed nominal balance can buy. Extra money or stronger demand can both push the price level up; the pocket feels thinner because real purchasing power—not the count of bills—is what shrank."
+        ],
+        "plainLanguage": {
+          "label": "Plainly",
+          "body": "When prices across the board climb, each unit of money buys less of the same stuff."
+        },
+        "keyPointsLabel": "Keep these three ideas",
+        "keyPoints": [
+          {
+            "title": "Nominal ≠ real",
+            "body": "The number printed on cash is nominal; what that cash clears in goods is real purchasing power."
+          },
+          {
+            "title": "Price level, not one sticker",
+            "body": "Inflation is about the broad basket, not a single item’s relative price."
+          },
+          {
+            "title": "Shocks feed the level",
+            "body": "Money-supply and demand shocks can both raise the price level through different doors."
+          }
+        ],
+        "demoTitle": "Toggle nominal stock vs purchasing power",
+        "copy": {
+          "ariaLabel": "Interactive overview contrasting nominal money stock with real purchasing power",
+          "caption": "Switch views: a fatter stack of bills can still claim a thinner slice of the same basket.",
+          "controlLabel": "View",
+          "modes": [
+            {
+              "key": "nominal",
+              "label": "Nominal stock",
+              "headline": "More currency units in the wallet",
+              "detail": "The count of money rises. On paper, the pocket looks fuller—but this is only the nominal side.",
+              "badge": "Nominal"
+            },
+            {
+              "key": "real",
+              "label": "Purchasing power",
+              "headline": "Same bills, smaller claim on goods",
+              "detail": "If the price level rose with the money (or demand), those units clear fewer items from the same basket.",
+              "badge": "Real"
+            }
+          ],
+          "statusNominal": "Nominal view: more units in circulation or in hand.",
+          "statusReal": "Real view: each unit buys less of the same basket when the price level is higher."
+        }
+      },
+      "steps": [
+        {
+          "id": "more-units",
+          "number": "01",
+          "title": "Step one: more currency units enter the story",
+          "body": [
+            "Start with a simple stock of money used to buy a fixed illustrative basket. When the money stock expands—new units enter circulation—there are more claims chasing the same goods, unless goods output expands in step.",
+            "This step does not say “printing always equals misery.” It isolates the first moving part: the quantity of nominal units available to bid for goods."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "First notice that the pile of money units got larger."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Stock of units",
+              "body": "Money here is a countable stock of units used in exchange."
+            },
+            {
+              "title": "Basket held fixed",
+              "body": "We freeze the goods basket so the money change is visible."
+            },
+            {
+              "title": "Not yet advice",
+              "body": "This is a mechanism sketch, not a policy or portfolio prescription."
+            }
+          ],
+          "demoTitle": "Grow the money stock",
+          "copy": {
+            "ariaLabel": "Slider that increases the illustrative money stock while the goods basket stays fixed",
+            "caption": "Slide to add units. The basket outline stays the same size—only the money pile grows.",
+            "controlLabel": "Money stock",
+            "moneyLabel": "Units in circulation",
+            "basketLabel": "Goods basket (fixed)",
+            "statusLow": "Baseline money stock: units and basket look balanced in this toy economy.",
+            "statusHigh": "More units now chase the same basket—pressure on the price level is building."
+          }
+        },
+        {
+          "id": "price-level",
+          "number": "02",
+          "title": "The price level: the same basket asks for more units",
+          "body": [
+            "The general price level is an index of what the representative basket costs in currency units. When that index rises, every unit of money covers a smaller share of the basket.",
+            "Think of stickers across many goods drifting up together—not one apple getting scarce while everything else is flat."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Inflation here means the whole basket’s sticker total went up."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Index, not gossip",
+              "body": "A price level summarizes many prices into one reading."
+            },
+            {
+              "title": "Units per basket",
+              "body": "Higher level = more currency needed for the same goods."
+            },
+            {
+              "title": "Broad move",
+              "body": "The teaching target is a general rise, not one aisle."
+            }
+          ],
+          "demoTitle": "Watch the basket’s unit cost climb",
+          "copy": {
+            "ariaLabel": "Interactive display of a goods basket whose unit cost rises with the price level",
+            "caption": "Raise the price-level index and see the basket’s currency cost climb while the goods list stays the same.",
+            "controlLabel": "Price-level index",
+            "indexLabel": "Price level",
+            "costLabel": "Basket cost",
+            "unitSuffix": " units",
+            "statusLow": "Low price level: the basket clears for fewer currency units.",
+            "statusHigh": "Higher price level: the same basket now requires more units."
+          }
+        },
+        {
+          "id": "purchasing-power",
+          "number": "03",
+          "title": "Purchasing power: fixed nominal cash buys a thinner slice",
+          "body": [
+            "Hold a wallet’s nominal balance fixed while the price level rises. The real claim—how much of the basket that balance can buy—shrinks. That is the “thinner pocket” feeling with unchanged bill count.",
+            "Nominal income can also rise; the comparison that matters for dilution is whether money balances keep up with the price level."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "Same cash number, higher prices → you take home less stuff."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Real balances",
+              "body": "Nominal cash ÷ price level ≈ real purchasing power."
+            },
+            {
+              "title": "Thinner, not vanished",
+              "body": "Dilution is gradual in the demo; reality varies by episode."
+            },
+            {
+              "title": "No tips",
+              "body": "We illustrate arithmetic of dilution, not what to buy or hold."
+            }
+          ],
+          "demoTitle": "Shrink the basket your wallet clears",
+          "copy": {
+            "ariaLabel": "Demo holding nominal wallet fixed while rising prices shrink the basket it can buy",
+            "caption": "Keep the wallet’s unit count fixed. As the price level rises, the filled portion of the basket shrinks.",
+            "controlLabel": "Price level vs fixed wallet",
+            "walletLabel": "Nominal wallet",
+            "walletValue": "100 units (fixed)",
+            "basketFillLabel": "Share of basket cleared",
+            "statusLow": "At a low price level, the fixed wallet covers most of the illustrative basket.",
+            "statusHigh": "At a high price level, the same wallet covers only a thin slice of the basket."
+          }
+        },
+        {
+          "id": "two-shocks",
+          "number": "04",
+          "title": "Two doors into a higher price level: money vs demand",
+          "body": [
+            "A money shock adds nominal units (or velocity) against goods. A demand shock raises desired spending on the same goods for non-money reasons—confidence, fiscal impulse, credit, and so on in the real world.",
+            "Both can lift the price level in a simple supply–demand sketch. The point is not to diagnose today’s headlines; it is to see that “inflation” names the price-level symptom, which can have more than one upstream shock."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "More money chasing goods, or more eagerness to buy—either can push prices up."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Same symptom",
+              "body": "Different shocks can share a rising price level."
+            },
+            {
+              "title": "Teaching sketch",
+              "body": "Real economies mix sticky prices, expectations, and open-economy channels."
+            },
+            {
+              "title": "Not a scorecard",
+              "body": "We are not ranking which shock “won” any particular year."
+            }
+          ],
+          "demoTitle": "Compare money shock and demand shock",
+          "copy": {
+            "ariaLabel": "Toggle between a money shock and a demand shock, both lifting the illustrative price level",
+            "caption": "Pick a shock. Watch the price-level needle rise in both cases—through different labeled channels.",
+            "controlLabel": "Shock type",
+            "shocks": [
+              {
+                "key": "money",
+                "label": "Money shock",
+                "headline": "More units (or faster turnover)",
+                "detail": "Extra nominal claims bid for the same goods supply in this sketch.",
+                "channel": "Money channel"
+              },
+              {
+                "key": "demand",
+                "label": "Demand shock",
+                "headline": "Stronger desire to spend",
+                "detail": "Buyers want more of the basket even if the money stock is unchanged in the sketch.",
+                "channel": "Demand channel"
+              }
+            ],
+            "priceLabel": "Price level",
+            "statusMoney": "Money shock path: more nominal claims → higher price level in the toy model.",
+            "statusDemand": "Demand shock path: stronger spending desire → higher price level in the toy model."
+          }
+        },
+        {
+          "id": "relative-vs-general",
+          "number": "05",
+          "title": "One price rising is not the same as inflation",
+          "body": [
+            "If only apples get expensive while the rest of the basket is flat, that is mainly a relative price change—resources reallocating toward apples. Inflation, as used here, is when the broad price level moves up.",
+            "Relative moves and general inflation can coexist. The habit to keep is: ask whether you are looking at one sticker or the whole index."
+          ],
+          "plainLanguage": {
+            "label": "Plainly",
+            "body": "One aisle spiking ≠ the whole store’s price level rising."
+          },
+          "keyPointsLabel": "What to notice",
+          "keyPoints": [
+            {
+              "title": "Relative price",
+              "body": "One good vs others—signals scarcity or preference shifts."
+            },
+            {
+              "title": "General level",
+              "body": "Many prices rising together—the inflation reading."
+            },
+            {
+              "title": "Edge topic, clear cut",
+              "body": "Wiki heat for Inflation is mid-tier; the mechanism still rewards a crisp distinction."
+            }
+          ],
+          "demoTitle": "Separate relative spike from broad rise",
+          "copy": {
+            "ariaLabel": "Interactive comparison of a single relative price spike versus a broad price-level rise",
+            "caption": "Toggle modes. One tall bar is a relative spike; all bars rising together is a general price-level move.",
+            "controlLabel": "Price pattern",
+            "modes": [
+              {
+                "key": "relative",
+                "label": "Relative spike",
+                "headline": "One good jumps",
+                "detail": "Only one category’s price rises. The index barely moves if others stay put.",
+                "badge": "Relative"
+              },
+              {
+                "key": "general",
+                "label": "General rise",
+                "headline": "The whole basket lifts",
+                "detail": "Many prices move up together—the price-level story of inflation.",
+                "badge": "General"
+              }
+            ],
+            "statusRelative": "Relative mode: one elevated price, not a broad inflation reading.",
+            "statusGeneral": "General mode: the price level rises across the illustrative basket.",
+            "categories": [
+              "Food",
+              "Energy",
+              "Rent",
+              "Services",
+              "Other"
+            ]
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "Put the system back together",
+        "title": "Nominal units can multiply while real claims on goods thin out",
+        "body": [
+          "Inflation, in this explainer, is the price-level rise that dilutes what a given nominal balance can buy. Money and demand shocks are two doors into that symptom; a lonely relative price spike is a different story.",
+          "Keep the vocabulary straight—nominal vs real, level vs relative—and you can read headlines without mistaking one expensive aisle for a thinner wallet everywhere."
+        ],
+        "checklistLabel": "Reader checklist",
+        "checklist": [
+          "Separate nominal money counts from real purchasing power.",
+          "Ask whether the price level (basket) moved, not only one sticker.",
+          "Allow more than one shock type to raise that level.",
+          "Treat demos as teaching sketches—not forecasts or investment advice."
+        ],
+        "scaleTitle": "Four moves of the idea",
+        "scaleItems": [
+          {
+            "term": "Units",
+            "question": "What grows first?",
+            "role": "More money units can enter circulation."
+          },
+          {
+            "term": "Level",
+            "question": "What rises next?",
+            "role": "The basket’s unit cost can climb."
+          },
+          {
+            "term": "Dilution",
+            "question": "What thins?",
+            "role": "Fixed nominal cash clears less of the basket."
+          },
+          {
+            "term": "Scope",
+            "question": "What is not inflation?",
+            "role": "A broad rise ≠ one relative spike."
+          }
+        ],
+        "finalQuote": "The pocket feels thinner when the claim on goods shrinks—not merely when the printer runs.",
+        "sourceNote": "Teaching note (Wikipedia Inflation〔边缘〕): demos use a fixed illustrative basket and toy price-level arithmetic. Real CPI construction, expectations, sticky prices, open-economy channels, and policy reaction functions are richer. This page explains mechanism only—not news commentary, forecasts, or investment advice."
+      }
+    },
+    "zh": {
+      "lang": "zh-CN",
+      "meta": {
+        "title": "钱印多了，为什么你口袋里的反而更薄？",
+        "description": "交互图解通胀如何摊薄购买力：货币或需求冲击如何抬升价格总水平，名义货币量为何不等于实际购买力，以及单个商品涨价与普遍通胀的区别。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "暂停所有动画",
+        "resumeAll": "继续所有动画",
+        "pause": "暂停",
+        "resume": "继续",
+        "reset": "重置",
+        "waiting": "图解放进视口后才会加载。",
+        "loading": "正在准备图解…",
+        "error": "图解无法显示，请先阅读上方文字说明。",
+        "figureFallback": "请启用 JavaScript 以查看交互图解。",
+        "skipToContent": "跳到正文",
+        "languageNavigation": "语言",
+        "overviewLabel": "通胀总览",
+        "stepLabel": "步骤"
+      },
+      "hero": {
+        "eyebrow": "货币 / 价格总水平 / 购买力",
+        "title": "钱印多了，为什么你口袋里的反而更薄？",
+        "subtitle": "货币单位变多，钱包里的纸可能更厚，但同一篮子商品能换到的却更少。本图解区分名义货币与实际购买力，以及普遍通胀与相对价格变动。只讲机制，不含投资建议。"
+      },
+      "overview": {
+        "title": "单位变多、商品依旧——对篮子的索取权变薄",
+        "body": [
+          "这里所说的通胀，指价格总水平持续上升：同一代表性商品与服务篮子，要用更多货币单位才能买下。",
+          "价格总水平上扬，会摊薄固定名义余额的购买力。货币变多或需求变强，都可能推高总水平；口袋变薄，是因为实际购买力——而不是钞票张数——变小了。"
+        ],
+        "plainLanguage": {
+          "label": "一句话",
+          "body": "大家一起涨价时，每一单位货币能换到的东西变少。"
+        },
+        "keyPointsLabel": "先记住三点",
+        "keyPoints": [
+          {
+            "title": "名义 ≠ 实际",
+            "body": "钞面上的数字是名义量；它能结清多少商品才是实际购买力。"
+          },
+          {
+            "title": "看总水平，不看一张价签",
+            "body": "通胀讲的是宽口径篮子，不是某一个商品的相对价格。"
+          },
+          {
+            "title": "冲击进入总水平",
+            "body": "货币冲击与需求冲击可以从不同入口抬升价格总水平。"
+          }
+        ],
+        "demoTitle": "切换：名义存量 vs 购买力",
+        "copy": {
+          "ariaLabel": "对比名义货币存量与实际购买力的交互总览",
+          "caption": "切换视图：更厚的一沓钞票，仍可能只换到同一篮子里更薄的一块。",
+          "controlLabel": "视图",
+          "modes": [
+            {
+              "key": "nominal",
+              "label": "名义存量",
+              "headline": "钱包里货币单位变多",
+              "detail": "钱的张数/单位数上升。纸面上看口袋更鼓——但这只是名义面。",
+              "badge": "名义"
+            },
+            {
+              "key": "real",
+              "label": "购买力",
+              "headline": "同样的钱，对商品的索取更小",
+              "detail": "若价格总水平随货币（或需求）上升，这些单位只能从同一篮子里换走更少。",
+              "badge": "实际"
+            }
+          ],
+          "statusNominal": "名义视图：流通中或手中的单位变多。",
+          "statusReal": "实际视图：价格总水平更高时，每单位能买到的同一篮子更少。"
+        }
+      },
+      "steps": [
+        {
+          "id": "more-units",
+          "number": "01",
+          "title": "第一步：更多货币单位进入故事",
+          "body": [
+            "先看一笔用来购买固定示意篮子的货币存量。当货币存量扩张——更多单位进入流通——就会有更多索取权去追逐同样的商品，除非商品产出同步扩张。",
+            "这一步并不说「印钞必然等于倒霉」。它只抽出第一个零件：可用于竞购商品的名义单位数量。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "先看见：钱的单位堆变大了。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "单位存量",
+              "body": "这里的货币是可计数、用于交换的单位存量。"
+            },
+            {
+              "title": "篮子先固定",
+              "body": "固定商品篮子，才能看清货币这一侧的变化。"
+            },
+            {
+              "title": "不是建议",
+              "body": "这是机制示意，不是政策或投资处方。"
+            }
+          ],
+          "demoTitle": "拉大货币存量",
+          "copy": {
+            "ariaLabel": "用滑块增大示意货币存量，同时商品篮子保持不变",
+            "caption": "滑动以增加单位。篮子轮廓大小不变——变大的只有钱堆。",
+            "controlLabel": "货币存量",
+            "moneyLabel": "流通中的单位",
+            "basketLabel": "商品篮子（固定）",
+            "statusLow": "基准货币存量：在这个玩具经济里，单位与篮子大致相称。",
+            "statusHigh": "更多单位在追逐同一篮子——对价格总水平的压力在积聚。"
+          }
+        },
+        {
+          "id": "price-level",
+          "number": "02",
+          "title": "价格总水平：同一篮子要更多单位",
+          "body": [
+            "价格总水平是「代表性篮子要用多少货币单位」的指数。指数上升，意味着每一单位货币只能覆盖篮子里更小的一份。",
+            "把它想成许多商品的价签一起上移——不是一只苹果变稀缺、其余一切都静止。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "这里的通胀，指整篮子的标价总额上升。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "指数，不是街谈",
+              "body": "价格总水平把许多价格收成一个读数。"
+            },
+            {
+              "title": "每篮子的单位数",
+              "body": "总水平更高 = 买同样商品需要更多货币。"
+            },
+            {
+              "title": "宽口径变动",
+              "body": "教学目标是普遍上升，不是某一个货架。"
+            }
+          ],
+          "demoTitle": "看篮子的单位成本爬升",
+          "copy": {
+            "ariaLabel": "展示商品篮子单位成本随价格总水平上升的交互图",
+            "caption": "提高价格总水平指数，看见篮子的货币成本上升，而商品清单不变。",
+            "controlLabel": "价格总水平指数",
+            "indexLabel": "价格总水平",
+            "costLabel": "篮子成本",
+            "unitSuffix": " 单位",
+            "statusLow": "总水平较低：篮子用较少货币单位就能结清。",
+            "statusHigh": "总水平较高：同一篮子现在需要更多单位。"
+          }
+        },
+        {
+          "id": "purchasing-power",
+          "number": "03",
+          "title": "购买力：名义现金固定，能买到的更薄",
+          "body": [
+            "把钱包的名义余额固定，同时让价格总水平上扬。实际索取权——这笔余额能买下篮子的多大份额——就会收缩。钞票张数不变，却感到「口袋更薄」。",
+            "名义收入也可能上涨；摊薄要看的是货币余额是否跟得上价格总水平。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "现金数字不变、价格更高 → 能带回家的东西变少。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "实际余额",
+              "body": "名义现金 ÷ 价格总水平 ≈ 实际购买力。"
+            },
+            {
+              "title": "变薄，不是消失",
+              "body": "示意里摊薄是渐进的；真实情节各不相同。"
+            },
+            {
+              "title": "不给贴士",
+              "body": "只演示摊薄算术，不告诉你该买什么、持有什么。"
+            }
+          ],
+          "demoTitle": "缩小钱包能结清的篮子份额",
+          "copy": {
+            "ariaLabel": "固定名义钱包，同时价格上升使可购买篮子份额缩小的演示",
+            "caption": "钱包单位数保持不变。价格总水平上升时，篮子被填满的部分变薄。",
+            "controlLabel": "价格总水平 vs 固定钱包",
+            "walletLabel": "名义钱包",
+            "walletValue": "100 单位（固定）",
+            "basketFillLabel": "能结清的篮子份额",
+            "statusLow": "总水平较低时，固定钱包能覆盖示意篮子的大部分。",
+            "statusHigh": "总水平较高时，同一钱包只覆盖篮子里薄薄一角。"
+          }
+        },
+        {
+          "id": "two-shocks",
+          "number": "04",
+          "title": "抬升总水平的两扇门：货币 vs 需求",
+          "body": [
+            "货币冲击是在商品面前增加名义单位（或周转速度）。需求冲击则是在货币存量不变的示意里，因信心、财政、信贷等原因更想买同一篮子。",
+            "在简单的供求草图里，两者都能抬升价格总水平。重点不是诊断今天的新闻，而是看见「通胀」命名的是总水平症状，上游冲击可以不止一种。"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "更多钱追商品，或更想买——都可能把价格推高。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "同一症状",
+              "body": "不同冲击可以共享「总水平上升」。"
+            },
+            {
+              "title": "教学草图",
+              "body": "真实经济还有黏性价格、预期、开放经济通道等。"
+            },
+            {
+              "title": "不是记分牌",
+              "body": "我们不给某一年的冲击「排名」。"
+            }
+          ],
+          "demoTitle": "对比货币冲击与需求冲击",
+          "copy": {
+            "ariaLabel": "在货币冲击与需求冲击之间切换，二者都会抬升示意价格总水平",
+            "caption": "选择一种冲击。看价格总水平指针在两种情形下都会上升——但标注的通道不同。",
+            "controlLabel": "冲击类型",
+            "shocks": [
+              {
+                "key": "money",
+                "label": "货币冲击",
+                "headline": "更多单位（或更快周转）",
+                "detail": "在本草图中，额外的名义索取权去竞购同样的商品供给。",
+                "channel": "货币通道"
+              },
+              {
+                "key": "demand",
+                "label": "需求冲击",
+                "headline": "更强的支出意愿",
+                "detail": "即使示意里货币存量不变，买者也想要更多篮子。",
+                "channel": "需求通道"
+              }
+            ],
+            "priceLabel": "价格总水平",
+            "statusMoney": "货币冲击路径：更多名义索取权 → 玩具模型中总水平更高。",
+            "statusDemand": "需求冲击路径：更强支出意愿 → 玩具模型中总水平更高。"
+          }
+        },
+        {
+          "id": "relative-vs-general",
+          "number": "05",
+          "title": "单个商品涨价，不等于通胀",
+          "body": [
+            "若只有苹果变贵、其余篮子大致不动，那主要是相对价格变动——资源向苹果倾斜。这里的通胀，指宽口径价格总水平上移。",
+            "相对变动与普遍通胀可以并存。要养成的习惯是：你看的是一张价签，还是整个指数？"
+          ],
+          "plainLanguage": {
+            "label": "一句话",
+            "body": "一个货架飙升 ≠ 全店价格总水平上升。"
+          },
+          "keyPointsLabel": "留意什么",
+          "keyPoints": [
+            {
+              "title": "相对价格",
+              "body": "某一商品相对其他——反映稀缺或偏好变化。"
+            },
+            {
+              "title": "总水平",
+              "body": "许多价格一起升——通胀读数。"
+            },
+            {
+              "title": "边缘热度，清楚切割",
+              "body": "Wiki 上 Inflation 热度中等偏边缘；机制区分仍值得做清楚。"
+            }
+          ],
+          "demoTitle": "分开：相对尖峰 vs 普遍上升",
+          "copy": {
+            "ariaLabel": "对比单个相对价格尖峰与宽口径价格总水平上升的交互图",
+            "caption": "切换模式。一根特别高的柱是相对尖峰；许多柱一起抬升才是总水平故事。",
+            "controlLabel": "价格形态",
+            "modes": [
+              {
+                "key": "relative",
+                "label": "相对尖峰",
+                "headline": "一个商品跳升",
+                "detail": "只有一类价格上升。若其余不动，指数几乎不动。",
+                "badge": "相对"
+              },
+              {
+                "key": "general",
+                "label": "普遍上升",
+                "headline": "整篮子抬升",
+                "detail": "许多价格一起上移——通胀的价格总水平故事。",
+                "badge": "普遍"
+              }
+            ],
+            "statusRelative": "相对模式：一个偏高的价格，不是宽口径通胀读数。",
+            "statusGeneral": "普遍模式：示意篮子的价格总水平上升。",
+            "categories": [
+              "食品",
+              "能源",
+              "居住",
+              "服务",
+              "其他"
+            ]
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "把系统重新装回去",
+        "title": "名义单位可以变多，对商品的实际索取权却可以变薄",
+        "body": [
+          "在本图解里，通胀是摊薄给定名义余额购买力的那种价格总水平上升。货币与需求是进入该症状的两扇门；孤立的相对价格尖峰则是另一件事。",
+          "把名义/实际、总水平/相对说清楚，读新闻时就不容易把「一个货架变贵」误当成「到处口袋都更薄」。"
+        ],
+        "checklistLabel": "读者自检",
+        "checklist": [
+          "区分名义货币数量与实际购买力。",
+          "先问价格总水平（篮子）有没有动，而不只看一张价签。",
+          "允许不止一种冲击抬升总水平。",
+          "把演示当作教学草图——不是预测，也不是投资建议。"
+        ],
+        "scaleTitle": "四个动作",
+        "scaleItems": [
+          {
+            "term": "单位",
+            "question": "先变多的是什么？",
+            "role": "更多货币单位可以进入流通。"
+          },
+          {
+            "term": "总水平",
+            "question": "接着上升的是什么？",
+            "role": "篮子的单位成本可以爬升。"
+          },
+          {
+            "term": "摊薄",
+            "question": "变薄的是什么？",
+            "role": "固定名义现金能结清的篮子更少。"
+          },
+          {
+            "term": "范围",
+            "question": "什么不是通胀？",
+            "role": "普遍上升 ≠ 一次相对尖峰。"
+          }
+        ],
+        "finalQuote": "口袋变薄，是因为对商品的索取权变小——而不只是因为印刷机在转。",
+        "sourceNote": "教学说明（Wikipedia Inflation〔边缘〕）：演示使用固定示意篮子与玩具式价格总水平算术。真实 CPI 编制、预期、黏性价格、开放经济通道与政策反应函数更丰富。本页只讲机制——不是新闻评论、预测或投资建议。"
+      }
+    },
+    "ja": {
+      "lang": "ja",
+      "meta": {
+        "title": "お金を刷れば刷るほど、なぜ懐は薄くなるのか？",
+        "description": "インフレを購買力の希薄化として図解する：貨幣や需要のショックが一般物価水準をどう押し上げるか、名目貨幣量が実質購買力と同じでない理由、個別価格の上昇と一般的上昇の違い。"
+      },
+      "languageLabels": {
+        "en": "English",
+        "zh": "中文",
+        "ja": "日本語"
+      },
+      "ui": {
+        "pauseAll": "すべての動きを停止",
+        "resumeAll": "すべての動きを再開",
+        "pause": "一時停止",
+        "resume": "再開",
+        "reset": "リセット",
+        "waiting": "表示領域に入ると図解が読み込まれます。",
+        "loading": "図解を準備しています…",
+        "error": "図解を表示できません。上の説明を先にお読みください。",
+        "figureFallback": "インタラクティブ図解を見るには JavaScript を有効にしてください。",
+        "skipToContent": "本文へスキップ",
+        "languageNavigation": "言語",
+        "overviewLabel": "インフレ概観",
+        "stepLabel": "ステップ"
+      },
+      "hero": {
+        "eyebrow": "貨幣 / 物価水準 / 購買力",
+        "title": "お金を刷れば刷るほど、なぜ懐は薄くなるのか？",
+        "subtitle": "通貨単位が増えると、財布の紙は厚く見えても、同じバスケットを買える分は減り得る。名目と実質、一般インフレと相対価格の変化を分けて見る。仕組みの説明のみで、投資助言ではない。"
+      },
+      "overview": {
+        "title": "単位は増えても財は同じ——バスケットへの請求権は薄くなる",
+        "body": [
+          "ここでいうインフレは、一般物価水準の持続的な上昇：同じ代表的な財・サービス・バスケットに、以前より多くの通貨単位が必要になることだ。",
+          "水準が上がると、固定された名目残高が買えるものが薄まる。貨幣の増加も需要の強まりも水準を押し上げ得る。懐が薄く感じるのは、札の枚数ではなく実質購買力が縮んだからだ。"
+        ],
+        "plainLanguage": {
+          "label": "ひとことで",
+          "body": "物価が全般に上がると、貨幣1単位で買える同じものが減る。"
+        },
+        "keyPointsLabel": "まず3つ",
+        "keyPoints": [
+          {
+            "title": "名目 ≠ 実質",
+            "body": "札面の数字は名目。それで清算できる財量が実質購買力。"
+          },
+          {
+            "title": "水準であり、一枚の値札ではない",
+            "body": "インフレは広いバスケットの話であり、単品の相対価格ではない。"
+          },
+          {
+            "title": "ショックが水準に入る",
+            "body": "貨幣ショックと需要ショックは別の入口から水準を上げ得る。"
+          }
+        ],
+        "demoTitle": "名目ストックと購買力を切り替える",
+        "copy": {
+          "ariaLabel": "名目貨幣ストックと実質購買力を対比する概観インタラクション",
+          "caption": "表示を切り替え：札束が厚くても、同じバスケットの薄い切片しか取れないことがある。",
+          "controlLabel": "表示",
+          "modes": [
+            {
+              "key": "nominal",
+              "label": "名目ストック",
+              "headline": "財布の通貨単位が増える",
+              "detail": "お金の単位数が増える。見た目は懐が厚い——だがそれは名目面だけ。",
+              "badge": "名目"
+            },
+            {
+              "key": "real",
+              "label": "購買力",
+              "headline": "同じ札でも財への請求は小さい",
+              "detail": "物価水準が貨幣（や需要）とともに上がれば、同じ単位でバスケットから取れる分は減る。",
+              "badge": "実質"
+            }
+          ],
+          "statusNominal": "名目表示：流通中または手元の単位が増える。",
+          "statusReal": "実質表示：物価水準が高いほど、1単位で買える同じバスケットは減る。"
+        }
+      },
+      "steps": [
+        {
+          "id": "more-units",
+          "number": "01",
+          "title": "第一歩：より多くの通貨単位が物語に入る",
+          "body": [
+            "固定した例示バスケットを買うための貨幣ストックから始める。ストックが拡大し——より多くの単位が流通に入ると——財の産出が同時に増えない限り、同じ財を追う請求権が増える。",
+            "この段は「紙幣増刷＝必ず不幸」とは言わない。最初の可動部品、すなわち財に入札できる名目単位の量だけを取り出す。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "まず、お金の単位の山が大きくなったことに気づく。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "単位のストック",
+              "body": "ここでの貨幣は、交換に使う数えられる単位のストック。"
+            },
+            {
+              "title": "バスケットを固定",
+              "body": "財側を固定すると、貨幣側の変化が見える。"
+            },
+            {
+              "title": "助言ではない",
+              "body": "仕組みのスケッチであり、政策や投資の処方ではない。"
+            }
+          ],
+          "demoTitle": "貨幣ストックを増やす",
+          "copy": {
+            "ariaLabel": "例示の貨幣ストックをスライダーで増やし、財バスケットは固定のままにする",
+            "caption": "スライドして単位を増やす。バスケットの輪郭は同じ大きさ——大きくなるのはお金の山だけ。",
+            "controlLabel": "貨幣ストック",
+            "moneyLabel": "流通単位",
+            "basketLabel": "財バスケット（固定）",
+            "statusLow": "基準の貨幣ストック：この玩具経済では単位とバスケットがおおむね釣り合う。",
+            "statusHigh": "より多くの単位が同じバスケットを追う——物価水準への圧力が高まる。"
+          }
+        },
+        {
+          "id": "price-level",
+          "number": "02",
+          "title": "物価水準：同じバスケットにより多くの単位が要る",
+          "body": [
+            "一般物価水準は、代表バスケットが通貨単位でいくらかかるかを示す指数だ。指数が上がると、貨幣1単位がカバーするバスケットの取り分は小さくなる。",
+            "多くの財の値札が一緒にずり上がるイメージ——リンゴだけが稀少で他が静止、ではない。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "ここでのインフレは、バスケット全体の値札合計が上がること。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "指数であり噂話ではない",
+              "body": "物価水準は多くの価格を一つの読みにまとめる。"
+            },
+            {
+              "title": "バスケットあたりの単位",
+              "body": "水準が高い＝同じ財により多くの通貨が必要。"
+            },
+            {
+              "title": "広い動き",
+              "body": "教材の標的は全般的上昇であり、一つの棚ではない。"
+            }
+          ],
+          "demoTitle": "バスケットの単位コスト上昇を見る",
+          "copy": {
+            "ariaLabel": "物価水準の上昇とともにバスケットの単位コストが上がるインタラクティブ表示",
+            "caption": "物価水準指数を上げると、財リストは同じままバスケットの通貨コストが上がる。",
+            "controlLabel": "物価水準指数",
+            "indexLabel": "物価水準",
+            "costLabel": "バスケット費用",
+            "unitSuffix": " 単位",
+            "statusLow": "低い物価水準：バスケットは少ない通貨単位で清算できる。",
+            "statusHigh": "高い物価水準：同じバスケットに、より多くの単位が要る。"
+          }
+        },
+        {
+          "id": "purchasing-power",
+          "number": "03",
+          "title": "購買力：名目現金が同じでも買える切片は薄い",
+          "body": [
+            "財布の名目残高を固定したまま物価水準を上げる。実質の請求権——その残高がバスケットのどれだけを買えるか——は縮む。枚数が変わらなくても「懐が薄い」感覚になる。",
+            "名目所得も上がり得る。希薄化で重要なのは、残高が物価水準に追いついているかどうかだ。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "現金の数字は同じで物価が高い → 持ち帰れるものが減る。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "実質残高",
+              "body": "名目現金 ÷ 物価水準 ≈ 実質購買力。"
+            },
+            {
+              "title": "薄くなるのであって消えるのではない",
+              "body": "デモでは希薄化はゆるやか。現実のエピソードは様々。"
+            },
+            {
+              "title": "助言なし",
+              "body": "希薄化の算術を示すだけで、何を買う・持つべきかは言わない。"
+            }
+          ],
+          "demoTitle": "財布が清算できるバスケットを縮める",
+          "copy": {
+            "ariaLabel": "名目財布を固定し、物価上昇で買えるバスケット割合が減るデモ",
+            "caption": "財布の単位数は固定。物価水準が上がると、バスケットの塗りつぶし部分が薄くなる。",
+            "controlLabel": "物価水準 vs 固定財布",
+            "walletLabel": "名目財布",
+            "walletValue": "100単位（固定）",
+            "basketFillLabel": "清算できるバスケット割合",
+            "statusLow": "低い物価水準では、固定財布は例示バスケットの大部分をカバーする。",
+            "statusHigh": "高い物価水準では、同じ財布はバスケットの薄い一切れしかカバーしない。"
+          }
+        },
+        {
+          "id": "two-shocks",
+          "number": "04",
+          "title": "高い物価水準への二つの入口：貨幣 vs 需要",
+          "body": [
+            "貨幣ショックは、財に対する名目単位（や流通速度）を増やす。需要ショックは、スケッチ上で貨幣ストックが同じでも、自信・財政・信用などの理由で同じバスケットをより欲しがることだ。",
+            "単純な需給スケッチではどちらも物価水準を上げ得る。今日の見出しを診断するのが目的ではなく、「インフレ」が名付けるのは水準という症状で、上流のショックは一つとは限らないと見ることだ。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "より多くのお金が財を追うか、より買いたいか——どちらも物価を押し上げ得る。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "同じ症状",
+              "body": "異なるショックが「水準上昇」を共有し得る。"
+            },
+            {
+              "title": "教材スケッチ",
+              "body": "現実には粘着価格、期待、開放経済チャネルなどがある。"
+            },
+            {
+              "title": "スコアボードではない",
+              "body": "特定年のショックの優劣は付けない。"
+            }
+          ],
+          "demoTitle": "貨幣ショックと需要ショックを比べる",
+          "copy": {
+            "ariaLabel": "貨幣ショックと需要ショックを切り替え、どちらも例示物価水準を押し上げる",
+            "caption": "ショックを選ぶ。どちらの場合も物価水準の針は上がる——ただしラベルされた経路が違う。",
+            "controlLabel": "ショックの種類",
+            "shocks": [
+              {
+                "key": "money",
+                "label": "貨幣ショック",
+                "headline": "単位が増える（または回転が速い）",
+                "detail": "このスケッチでは、追加の名目請求が同じ財供給に入札する。",
+                "channel": "貨幣チャネル"
+              },
+              {
+                "key": "demand",
+                "label": "需要ショック",
+                "headline": "支出意欲が強い",
+                "detail": "スケッチ上で貨幣ストックが同じでも、買い手はバスケットをより欲しがる。",
+                "channel": "需要チャネル"
+              }
+            ],
+            "priceLabel": "物価水準",
+            "statusMoney": "貨幣ショック経路：名目請求の増加 → 玩具モデルで物価水準が上昇。",
+            "statusDemand": "需要ショック経路：支出意欲の強化 → 玩具モデルで物価水準が上昇。"
+          }
+        },
+        {
+          "id": "relative-vs-general",
+          "number": "05",
+          "title": "一つの価格上昇はインフレと同じではない",
+          "body": [
+            "リンゴだけが高く、バスケットの残りがほぼ横ばいなら、それは主に相対価格の変化——資源がリンゴへ再配分される話だ。ここでのインフレは、広い物価水準が上がること。",
+            "相対の動きと一般インフレは共存し得る。癖にしたいのは、一枚の値札を見ているのか、指数全体を見ているのかを問うことだ。"
+          ],
+          "plainLanguage": {
+            "label": "ひとことで",
+            "body": "一つの棚の急騰 ≠ 店全体の物価水準上昇。"
+          },
+          "keyPointsLabel": "見るポイント",
+          "keyPoints": [
+            {
+              "title": "相対価格",
+              "body": "ある財とその他——希少性や選好の変化を示す。"
+            },
+            {
+              "title": "一般水準",
+              "body": "多くの価格が一緒に上がる——インフレの読み。"
+            },
+            {
+              "title": "周縁トピックでも切れ味を",
+              "body": "Wikipedia Inflation は熱量〔边缘〕寄りでも、区別ははっきりさせる価値がある。"
+            }
+          ],
+          "demoTitle": "相対スパイクと全般上昇を分ける",
+          "copy": {
+            "ariaLabel": "単一の相対価格スパイクと広い物価水準上昇を比較するインタラクション",
+            "caption": "モード切替。一本だけ高い棒は相対スパイク。多くの棒が一緒に上がるのが一般水準の動き。",
+            "controlLabel": "価格パターン",
+            "modes": [
+              {
+                "key": "relative",
+                "label": "相対スパイク",
+                "headline": "一つの財が跳ねる",
+                "detail": "一カテゴリだけ価格が上がる。他が止まれば指数はほとんど動かない。",
+                "badge": "相対"
+              },
+              {
+                "key": "general",
+                "label": "全般上昇",
+                "headline": "バスケット全体が持ち上がる",
+                "detail": "多くの価格が一緒に上がる——インフレの物価水準の話。",
+                "badge": "全般"
+              }
+            ],
+            "statusRelative": "相対モード：高い価格が一つあるだけで、広いインフレ読みではない。",
+            "statusGeneral": "全般モード：例示バスケットの物価水準が上昇する。",
+            "categories": [
+              "食品",
+              "エネルギー",
+              "住居",
+              "サービス",
+              "その他"
+            ]
+          }
+        }
+      ],
+      "closing": {
+        "eyebrow": "システムを組み立て直す",
+        "title": "名目単位は増えても、財への実質請求は薄くなり得る",
+        "body": [
+          "本図解のインフレは、所与の名目残高が買えるものを薄める物価水準の上昇だ。貨幣と需要はその症状への二つの入口。孤立した相対価格スパイクは別の話である。",
+          "名目/実質、水準/相対の語彙を揃えれば、一つの高い棚を「どこも懐が薄い」と取り違えにくくなる。"
+        ],
+        "checklistLabel": "読者チェック",
+        "checklist": [
+          "名目の貨幣量と実質購買力を分ける。",
+          "一枚の値札だけでなく、物価水準（バスケット）が動いたかを問う。",
+          "水準を上げるショックは一つとは限らないと認める。",
+          "デモは教材スケッチ——予測でも投資助言でもない。"
+        ],
+        "scaleTitle": "アイデアの四手",
+        "scaleItems": [
+          {
+            "term": "単位",
+            "question": "まず増えるのは？",
+            "role": "より多くの貨幣単位が流通に入り得る。"
+          },
+          {
+            "term": "水準",
+            "question": "次に上がるのは？",
+            "role": "バスケットの単位コストが上がり得る。"
+          },
+          {
+            "term": "希薄化",
+            "question": "薄くなるのは？",
+            "role": "固定名目現金が清算できる量が減る。"
+          },
+          {
+            "term": "範囲",
+            "question": "インフレでないものは？",
+            "role": "全般上昇 ≠ 一つの相対スパイク。"
+          }
+        ],
+        "finalQuote": "懐が薄くなるのは、財への請求が縮むとき——印刷機が回っているという事実だけではない。",
+        "sourceNote": "教材ノート（Wikipedia Inflation〔边缘〕）：デモは固定の例示バスケットと玩具の物価水準算術を使う。実際の CPI 作成、期待、粘着価格、開放経済チャネル、政策反応関数はより豊か。本ページは仕組みのみ——ニュース評論・予測・投資助言ではない。"
+      }
+    }
+  }
+}

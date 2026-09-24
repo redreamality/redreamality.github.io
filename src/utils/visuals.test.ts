@@ -3,17 +3,18 @@ import { getHomepageVisuals, getLatestVisual, getVisualWork } from './visuals';
 
 describe('getLatestVisual', () => {
   it.each([
-    ['en', '/visuals/butterfly-effect/', "Can a Butterfly's Flap Really Start a Tornado?"],
-    ['zh', '/cn/visuals/butterfly-effect/', '一只蝴蝶扇翅，真能掀起龙卷风吗？'],
-    ['ja', '/ja/visuals/butterfly-effect/', '蝶の羽ばたきは、本当に竜巻を起こすのか？'],
+    ['en', '/visuals/inflation-purchasing-power/', 'When More Money Is Printed, Why Does Your Pocket Feel Thinner?'],
+    ['zh', '/cn/visuals/inflation-purchasing-power/', '钱印多了，为什么你口袋里的反而更薄？'],
+    ['ja', '/ja/visuals/inflation-purchasing-power/', 'お金を刷れば刷るほど、なぜ懐は薄くなるのか？'],
   ] as const)('returns the newest published %s artifact', (lang, href, title) => {
-    expect(getLatestVisual(lang)).toMatchObject({ slug: 'butterfly-effect', href, title, hasCurrentArtifact: true });
+    expect(getLatestVisual(lang)).toMatchObject({ slug: 'inflation-purchasing-power', href, title, hasCurrentArtifact: true });
   });
 });
 
 describe('getHomepageVisuals', () => {
   it('returns every current-language artifact in newest-first order', () => {
     expect(getHomepageVisuals('en').map((visual) => visual.slug)).toEqual([
+      'inflation-purchasing-power',
       'butterfly-effect',
       'prisoners-dilemma',
       'enso-food-prices',
@@ -35,6 +36,7 @@ describe('visual artifact registration', () => {
     ['enso-food-prices', 'enso-food-prices'],
     ['prisoners-dilemma', 'prisoners-dilemma'],
     ['butterfly-effect', 'butterfly-effect'],
+    ['inflation-purchasing-power', 'inflation-purchasing-power'],
   ] as const)('uses one stable artifact ID across locales for %s', (slug, artifact) => {
     const work = getVisualWork(slug);
 

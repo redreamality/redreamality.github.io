@@ -5,7 +5,8 @@ test('English Visuals gallery contains the multilingual published works', async 
 
   expect(response?.status()).toBe(200);
   await expect(page.locator('h1')).toHaveText('Visuals');
-  await expect(page.locator('[data-visual-card]')).toHaveCount(7);
+  await expect(page.locator('[data-visual-card]')).toHaveCount(8);
+  await expect(page.getByRole('heading', { name: 'When More Money Is Printed, Why Does Your Pocket Feel Thinner?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Can a Butterfly\'s Flap Really Start a Tornado?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Why Two People Who Want Less Jail Time Both Get More' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Why Pacific Warming Shows Up in Grocery Prices' })).toBeVisible();
@@ -13,7 +14,7 @@ test('English Visuals gallery contains the multilingual published works', async 
   await expect(page.getByRole('heading', { name: 'How Air Conditioners Work' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'What Is Loop Engineering?' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'How Typhoons Form' })).toBeVisible();
-  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(7);
+  await expect(page.getByText('Languages: English / Chinese / Japanese')).toHaveCount(8);
   await expect(page.getByText('Agent Architecture Showcase')).toHaveCount(0);
   await expect(page.getByText(/not available in this language/i)).toHaveCount(0);
 });
@@ -26,8 +27,8 @@ test('stale missing-language query cannot mark multilingual Typhoon as unavailab
 });
 
 for (const locale of [
-  { path: '/cn/visuals/', title: '可视化', work: '一只蝴蝶扇翅，真能掀起龙卷风吗？' },
-  { path: '/ja/visuals/', title: 'ビジュアル', work: '蝶の羽ばたきは、本当に竜巻を起こすのか？' },
+  { path: '/cn/visuals/', title: '可视化', work: '钱印多了，为什么你口袋里的反而更薄？' },
+  { path: '/ja/visuals/', title: 'ビジュアル', work: 'お金を刷れば刷るほど、なぜ懐は薄くなるのか？' },
 ]) {
   test(`${locale.path} renders a localized Visuals gallery`, async ({ page }) => {
     const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
@@ -35,7 +36,7 @@ for (const locale of [
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toHaveText(locale.title);
     await expect(page.getByRole('heading', { name: locale.work })).toBeVisible();
-    await expect(page.locator('[data-visual-card]')).toHaveCount(7);
+    await expect(page.locator('[data-visual-card]')).toHaveCount(8);
   });
 }
 
@@ -56,6 +57,7 @@ for (const locale of [
     path: '/',
     sectionTitle: 'Visuals',
     works: [
+      ['inflation-purchasing-power', 'When More Money Is Printed, Why Does Your Pocket Feel Thinner?', '/visuals/inflation-purchasing-power/'],
       ['butterfly-effect', "Can a Butterfly's Flap Really Start a Tornado?", '/visuals/butterfly-effect/'],
       ['prisoners-dilemma', 'Why Two People Who Want Less Jail Time Both Get More', '/visuals/prisoners-dilemma/'],
       ['enso-food-prices', 'Why Pacific Warming Shows Up in Grocery Prices', '/visuals/enso-food-prices/'],
@@ -72,6 +74,7 @@ for (const locale of [
     path: '/cn/',
     sectionTitle: '可视化',
     works: [
+      ['inflation-purchasing-power', '钱印多了，为什么你口袋里的反而更薄？', '/cn/visuals/inflation-purchasing-power/'],
       ['butterfly-effect', '一只蝴蝶扇翅，真能掀起龙卷风吗？', '/cn/visuals/butterfly-effect/'],
       ['prisoners-dilemma', '两人都想少坐牢，为什么一起判得更重？', '/cn/visuals/prisoners-dilemma/'],
       ['enso-food-prices', '太平洋变暖，为什么你家菜价先涨？', '/cn/visuals/enso-food-prices/'],
@@ -88,6 +91,7 @@ for (const locale of [
     path: '/ja/',
     sectionTitle: 'ビジュアル',
     works: [
+      ['inflation-purchasing-power', 'お金を刷れば刷るほど、なぜ懐は薄くなるのか？', '/ja/visuals/inflation-purchasing-power/'],
       ['butterfly-effect', '蝶の羽ばたきは、本当に竜巻を起こすのか？', '/ja/visuals/butterfly-effect/'],
       ['prisoners-dilemma', '二人とも刑期を短くしたいのに、なぜ一緒により重く判かれるのか', '/ja/visuals/prisoners-dilemma/'],
       ['enso-food-prices', '太平洋が暖まると、なぜ食卓の値段が先に上がるのか', '/ja/visuals/enso-food-prices/'],
@@ -884,6 +888,66 @@ test('price-volume explainer supports reduced motion and shared dark mode', asyn
   expect(contrast(darkTheme.headingColor, 'rgb(18, 49, 58)')).toBeGreaterThanOrEqual(7);
 });
 
+
+for (const locale of [
+  {
+    path: '/visuals/inflation-purchasing-power/',
+    htmlLang: 'en',
+    h1: 'When more money is printed, why does your pocket feel thinner?',
+    pauseAll: 'Pause all motion',
+    reset: 'Reset',
+    control: 'View',
+    statusReal: 'Real view: each unit buys less of the same basket when the price level is higher.',
+  },
+  {
+    path: '/cn/visuals/inflation-purchasing-power/',
+    htmlLang: 'zh-CN',
+    h1: '钱印多了，为什么你口袋里的反而更薄？',
+    pauseAll: '暂停所有动画',
+    reset: '重置',
+    control: '视图',
+    statusReal: '实际视图：价格总水平更高时，每单位能买到的同一篮子更少。',
+  },
+  {
+    path: '/ja/visuals/inflation-purchasing-power/',
+    htmlLang: 'ja',
+    h1: 'お金を刷れば刷るほど、なぜ懐は薄くなるのか？',
+    pauseAll: 'すべての動きを停止',
+    reset: 'リセット',
+    control: '表示',
+    statusReal: '実質表示：物価水準が高いほど、1単位で買える同じバスケットは減る。',
+  },
+]) {
+  test(`${locale.path} renders the localized inflation explainer and lifecycle`, async ({ page }) => {
+    const response = await page.goto(locale.path, { waitUntil: 'domcontentloaded' });
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('html')).toHaveAttribute('lang', locale.htmlLang);
+    await expect(page.locator('body > nav')).toBeVisible();
+    await expect(page.locator('h1')).toHaveText(locale.h1);
+    await expect(page.locator('h1')).toHaveCount(1);
+    const visual = page.locator('[data-visual-artifact="inflation-purchasing-power"]');
+    await expect(visual).toBeVisible();
+    await expect(visual.locator('iframe')).toHaveCount(0);
+    await expect(page.locator('.site-header')).toHaveCount(0);
+    await expect(page.locator('interactive-figure')).toHaveCount(6);
+
+    const overview = page.locator('interactive-figure[data-demo="inf-overview"]');
+    await overview.scrollIntoViewIfNeeded();
+    await expect(overview).toHaveAttribute('data-state', 'mounted');
+    await expect(overview.locator('.inf-ov-controls')).toBeVisible();
+    const realMode = overview.locator('[data-inf-ov="1"]');
+    const status = overview.locator('[data-inf-status]');
+    await realMode.click();
+    await expect(realMode).toHaveAttribute('aria-pressed', 'true');
+    await expect(status).toContainText(locale.statusReal);
+
+    await overview.getByRole('button', { name: locale.reset }).click();
+    await expect(overview.locator('[data-inf-ov="0"]')).toHaveAttribute('aria-pressed', 'true');
+    await page.getByRole('button', { name: locale.pauseAll }).click();
+    await expect(overview).toHaveAttribute('data-playback', 'paused');
+  });
+}
+
 test('sitemap lists every published visual locale and no Agent Architecture routes', async ({ request }) => {
   const indexResponse = await request.get('/sitemap-index.xml');
   expect(indexResponse.ok()).toBeTruthy();
@@ -918,6 +982,9 @@ test('sitemap lists every published visual locale and no Agent Architecture rout
     '/visuals/butterfly-effect/',
     '/cn/visuals/butterfly-effect/',
     '/ja/visuals/butterfly-effect/',
+    '/visuals/inflation-purchasing-power/',
+    '/cn/visuals/inflation-purchasing-power/',
+    '/ja/visuals/inflation-purchasing-power/',
   ]) {
     expect(xml).toContain(`<loc>https://redreamality.com${path}</loc>`);
   }

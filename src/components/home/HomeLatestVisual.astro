@@ -25,6 +25,7 @@ const homeVisuals = visuals.map((visual) => ({
   isEnsoFoodPrices: visual.cover === 'enso-food-prices',
   isPrisonersDilemma: visual.cover === 'prisoners-dilemma',
   isButterflyEffect: visual.cover === 'butterfly-effect',
+  isInflationPurchasingPower: visual.cover === 'inflation-purchasing-power',
 }));
 ---
 
@@ -162,6 +163,21 @@ const homeVisuals = visuals.map((visual) => ({
             </svg>
             <div class="absolute left-[10%] top-[14%] rounded-full border border-cyan-100/35 bg-cyan-100/10 px-3 py-1 text-xs font-bold tracking-wide text-cyan-50/90">δx₀ → fork</div>
             <div class="absolute right-[12%] top-[16%] text-2xl font-bold text-rose-100/95">↗</div>
+          </>
+        ) : visual.isInflationPurchasingPower ? (
+          <>
+            <div class="absolute inset-8 rounded-[2rem] border border-white/15 bg-slate-950/30 backdrop-blur-sm"></div>
+            <div class="absolute left-[12%] top-[26%] flex h-[52%] w-[30%] items-end gap-2">
+              <div class="h-[42%] flex-1 rounded-md bg-cyan-300/55"></div>
+              <div class="h-[60%] flex-1 rounded-md bg-cyan-300/70"></div>
+              <div class="h-[78%] flex-1 rounded-md bg-cyan-200/85"></div>
+              <div class="h-[96%] flex-1 rounded-md bg-cyan-100/95 shadow-[0_0_24px_rgba(165,243,252,.5)]"></div>
+            </div>
+            <div class="absolute right-[11%] top-[28%] h-[50%] w-[38%] rounded-[1.5rem] border-2 border-dashed border-white/30 bg-white/5 p-3">
+              <div class="absolute bottom-3 left-3 right-3 h-[26%] rounded-lg bg-gradient-to-t from-rose-400/85 to-amber-300/75 shadow-[0_0_28px_rgba(251,113,133,.4)]"></div>
+            </div>
+            <div class="absolute left-[10%] top-[12%] rounded-full border border-cyan-100/35 bg-cyan-100/10 px-3 py-1 text-xs font-bold tracking-wide text-cyan-50/90">nominal ↑</div>
+            <div class="absolute right-[10%] top-[12%] rounded-full border border-rose-100/35 bg-rose-100/10 px-3 py-1 text-xs font-bold tracking-wide text-rose-50/90">real ↓</div>
           </>
         ) : (
           <div class="absolute inset-12 rounded-3xl border border-white/20 bg-white/10 shadow-[0_0_70px_rgba(103,232,249,.24)] backdrop-blur-sm"></div>
