@@ -151,8 +151,8 @@ const noteItems: SectionItem[] = notes.slice(0, 6).map((n) => ({
 }));
 ---
 
-<div class="mx-auto max-w-6xl px-4">
-  <div class="grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-2">
+<div class="home-reading mx-auto max-w-6xl px-4">
+  <div class="grid grid-cols-1 gap-x-12 gap-y-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
     <!-- Left: blog -->
     <SectionGrid
       title={c.recentBlogTitle}
@@ -164,7 +164,7 @@ const noteItems: SectionItem[] = notes.slice(0, 6).map((n) => ({
     />
 
     <!-- Right: meditations + talks + questions -->
-    <div class="space-y-12">
+    <div class="reading-sidebar space-y-12">
       <SectionGrid
         title={c.recentMeditationsTitle}
         viewAllHref={`${basePath}/garden/meditations/`}
@@ -216,3 +216,40 @@ const noteItems: SectionItem[] = notes.slice(0, 6).map((n) => ({
     />
   </div>
 </div>
+
+<style>
+  .home-reading { letter-spacing: 0; }
+  .home-reading :global(section > div:first-child) {
+    align-items: baseline;
+    flex-wrap: wrap;
+    padding-bottom: 1rem;
+    margin-bottom: 0;
+    border-bottom: 1px solid theme('colors.surface.200');
+  }
+  .home-reading :global(h2) { font-size: 1.25rem; line-height: 1.5; letter-spacing: 0; }
+  .home-reading :global(h2 > span[aria-hidden]) { display: none; }
+  .home-reading :global(article) {
+    border: 0;
+    border-bottom: 1px solid theme('colors.surface.200');
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 1.5rem 0;
+    transform: none;
+  }
+  .home-reading :global(article > span[aria-hidden]) { display: none; }
+  .home-reading :global(article h3) { line-height: 1.55; text-wrap: pretty; overflow-wrap: anywhere; }
+  .home-reading :global(article p) { line-height: 1.8; margin-bottom: 1rem; color: theme('colors.zinc.600'); }
+  .home-reading :global(article > div) { color: theme('colors.zinc.600'); }
+  :global(.dark) .home-reading :global(article p),
+  :global(.dark) .home-reading :global(article > div) { color: theme('colors.zinc.400'); }
+  .home-reading :global(article time > span) { display: none; }
+  .home-reading :global(section > .grid) { row-gap: 0; column-gap: 2rem; }
+  .home-reading :global(a:focus-visible) { outline: 2px solid theme('colors.accent.600'); outline-offset: 4px; }
+  :global(.dark) .home-reading :global(article),
+  :global(.dark) .home-reading :global(section > div:first-child) { border-color: theme('colors.surface.700'); }
+  @media (min-width: 1024px) {
+    .reading-sidebar { border-left: 1px solid theme('colors.surface.200'); padding-left: 2rem; }
+    :global(.dark) .reading-sidebar { border-color: theme('colors.surface.700'); }
+  }
+</style>
