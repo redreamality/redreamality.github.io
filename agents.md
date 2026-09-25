@@ -154,6 +154,11 @@ def my_function():
 
 ## Other Best Practices
 
+### Outbound links
+
+External user-facing `http(s)` links go through a locale confirm page (`/go/?to=`, `/cn/go/?to=`, `/ja/go/?to=`). Helpers live in `src/utils/outbound.ts`. Markdown is rewritten by `src/plugins/rehype-outbound-links.ts` to `/go/?to=...`; `Layout.astro` prefixes `/cn` or `/ja` on locale pages. Astro components that know `lang` should call `toOutboundHref(href, lang)` directly. Do not send `mailto:`/`tel:` or same-site URLs through `/go`.
+
+
 ### Markdown Heading Hierarchy
 - Use semantic heading structure: H2 → H3 → H4
 - Don't skip heading levels (e.g., don't jump from H2 to H4)

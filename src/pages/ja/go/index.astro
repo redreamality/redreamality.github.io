@@ -1,0 +1,12 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import OutboundConfirm from '../../../components/OutboundConfirm.astro';
+import { t } from '../../../utils/i18n';
+
+const lang = 'ja' as const;
+const title = t('outboundLeaving', lang);
+---
+
+<Layout title={title} description={title} robots="noindex, nofollow">
+  <OutboundConfirm lang={lang} />
+</Layout>

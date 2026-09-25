@@ -56,6 +56,11 @@ export const i18nConfig: I18nConfig = {
       switchToEnglish: 'English',
       switchToChinese: '中文',
       switchToJapanese: '日本語',
+      outboundLeaving: '你即将离开 redreamality.com',
+      outboundAboutTo: '你即将访问',
+      outboundContinue: '继续访问',
+      outboundGoBack: '返回',
+      outboundInvalid: '无法打开此链接',
       toc: '目录',
     },
     en: {
@@ -102,6 +107,11 @@ export const i18nConfig: I18nConfig = {
       switchToEnglish: 'English',
       switchToChinese: '中文',
       switchToJapanese: '日本語',
+      outboundLeaving: 'You’re leaving redreamality.com',
+      outboundAboutTo: 'You’re about to visit',
+      outboundContinue: 'Continue',
+      outboundGoBack: 'Go back',
+      outboundInvalid: 'This link isn’t available',
       toc: 'Table of Contents',
     },
     ja: {
@@ -148,6 +158,11 @@ export const i18nConfig: I18nConfig = {
       switchToEnglish: 'English',
       switchToChinese: '中文',
       switchToJapanese: '日本語',
+      outboundLeaving: 'redreamality.com から離れようとしています',
+      outboundAboutTo: '次のサイトへ移動します',
+      outboundContinue: '続行する',
+      outboundGoBack: '戻る',
+      outboundInvalid: 'このリンクは開けません',
       toc: '目次',
     }
   }

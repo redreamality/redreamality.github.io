@@ -2,12 +2,12 @@
 import { defineConfig } from 'astro/config';
 import tailwind from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
-import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import rehypeOutboundLinks from './src/plugins/rehype-outbound-links.ts';
 import visualManifest from './src/data/visuals-manifest.json';
 
 const siteUrl = 'https://redreamality.com';
@@ -32,6 +32,23 @@ for (const work of visualManifest) {
   }
 }
 
+const katexOptions = {
+  strict: false,
+  macros: {
+    "\\bmatrix": "\\begin{bmatrix}#1\\end{bmatrix}",
+    "\\pmatrix": "\\begin{pmatrix}#1\\end{pmatrix}",
+    "\\vmatrix": "\\begin{vmatrix}#1\\end{vmatrix}",
+    "\\Vmatrix": "\\begin{Vmatrix}#1\\end{Vmatrix}",
+    "\\matrix": "\\begin{matrix}#1\\end{matrix}"
+  }
+};
+
+const sharedRemarkPlugins = [remarkMath];
+const sharedRehypePlugins = [
+  [rehypeKatex, katexOptions],
+  rehypeOutboundLinks,
+];
+
 // https://astro.build/config
 export default defineConfig({
   site: siteUrl,
@@ -47,7 +64,10 @@ export default defineConfig({
     },
   },
   integrations: [
-    mdx(),
+    mdx({
+      remarkPlugins: sharedRemarkPlugins,
+      rehypePlugins: sharedRehypePlugins,
+    }),
     sitemap({
       customPages: [
         'https://redreamality.com/benchmark-papers/',
@@ -69,6 +89,11 @@ export default defineConfig({
         // Parse URL to get pathname for precise matching
         const url = new URL(page);
         const path = url.pathname;
+
+        // Exclude outbound confirm interstitial
+        if (path === '/go/' || path === '/go') return false;
+        if (path === '/cn/go/' || path === '/cn/go') return false;
+        if (path === '/ja/go/' || path === '/ja/go') return false;
 
         // Exclude redirect pages - these have noindex meta tags
         // Redirect from /talks/* to /garden/talks/*
@@ -115,19 +140,8 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    processor: unified({
-      remarkPlugins: [remarkMath],
-      rehypePlugins: [[rehypeKatex, {
-        strict: false,
-        macros: {
-          "\\bmatrix": "\\begin{bmatrix}#1\\end{bmatrix}",
-          "\\pmatrix": "\\begin{pmatrix}#1\\end{pmatrix}",
-          "\\vmatrix": "\\begin{vmatrix}#1\\end{vmatrix}",
-          "\\Vmatrix": "\\begin{Vmatrix}#1\\end{Vmatrix}",
-          "\\matrix": "\\begin{matrix}#1\\end{matrix}"
-        }
-      }]],
-    }),
+    remarkPlugins: sharedRemarkPlugins,
+    rehypePlugins: sharedRehypePlugins,
     shikiConfig: {
       theme: 'dracula',
       wrap: true

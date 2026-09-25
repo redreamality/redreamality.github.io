@@ -28,7 +28,8 @@ const {
     publishDate,
     tags = [],
     author = "Redreamality",
-    fullWidth = false
+    fullWidth = false,
+    robots = "index, follow, max-image-preview:large",
 } = Astro.props;
 
 const title = getPageTitle(Astro.url.pathname, currentLang, suppliedTitle);
@@ -40,7 +41,7 @@ const languageCode = getLanguageCode(currentLang);
 
 const normalizePath = (path: string) => (path.length > 1 ? path.replace(/\/$/, '') : path);
 const normalizedPath = normalizePath(Astro.url.pathname);
-const adFreeExactPaths = new Set(['/', '/about', '/cn', '/cn/about', '/ja', '/ja/about']);
+const adFreeExactPaths = new Set(['/', '/about', '/cn', '/cn/about', '/ja', '/ja/about', '/go', '/cn/go', '/ja/go']);
 const adFreeRouteRoots = [
   '/visual',
   '/visuals',
@@ -152,7 +153,7 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
         <!-- Other Meta Tags -->
         <meta name="generator" content={Astro.generator} />
         <meta name="google-site-verification" content="NxVlZ1d8Bmz-k4XFi54AbYDxS-5atIJjnfGXeEC3eVg" />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <meta name="robots" content={robots} />
         <meta name="author" content={author} />
         <meta name="keywords" content={tags.join(', ')} />
         
@@ -318,6 +319,25 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
         </script>
         <script>
             const siteHeader = document.querySelector('body > nav');
+
+            // Prefix rehype-rewritten /go/?to= links with /cn or /ja on locale pages.
+            // Markdown always emits the EN /go/ form; this keeps confirm pages locale-correct.
+            (function prefixOutboundGoLinks() {
+                const path = location.pathname;
+                const prefix = path.startsWith('/cn/') || path === '/cn'
+                    ? '/cn'
+                    : path.startsWith('/ja/') || path === '/ja'
+                      ? '/ja'
+                      : '';
+                if (!prefix) return;
+                document.querySelectorAll('a[href^="/go/?to="]').forEach((a) => {
+                    const href = a.getAttribute('href');
+                    if (href && href.startsWith('/go/')) {
+                        a.setAttribute('href', prefix + href);
+                    }
+                });
+            })();
+
 
             const setHeaderHeightVar = () => {
                 const height = siteHeader?.getBoundingClientRect().height ?? 0;

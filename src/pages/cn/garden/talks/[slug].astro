@@ -4,6 +4,7 @@ import TableOfContents from '../../../../components/TableOfContents.astro';
 import RelatedContent from '../../../../components/RelatedContent.astro';
 import { getTalks, type Language } from '../../../../utils/i18n';
 import { rankRelatedContent } from '../../../../utils/related';
+import { toOutboundHref } from '../../../../utils/outbound';
 
 // This is the Chinese talk page (/cn/garden/talks/[slug] path)
 const lang: Language = 'zh';
@@ -102,7 +103,7 @@ const relatedItems = relatedTalks.map((relatedTalk) => ({
           <div class="flex flex-wrap gap-4 mb-6">
             {talk.data.slides && (
               <a
-                href={talk.data.slides}
+                href={toOutboundHref(talk.data.slides, lang === "zh" ? "zh" : lang === "ja" ? "ja" : "en")}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500 transition-colors"
@@ -113,7 +114,7 @@ const relatedItems = relatedTalks.map((relatedTalk) => ({
             )}
             {talk.data.video && (
               <a
-                href={talk.data.video}
+                href={toOutboundHref(talk.data.video, lang === "zh" ? "zh" : lang === "ja" ? "ja" : "en")}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500 transition-colors"

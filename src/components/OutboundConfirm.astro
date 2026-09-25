@@ -1,0 +1,190 @@
+---
+/**
+ * Confirm UI before leaving the site for an external http(s) URL.
+ * Static site: destination is read from `?to=` on the client (build has no query).
+ * Never uses set:html for the destination — text only via textContent.
+ */
+import type { Language } from '../utils/i18n';
+import { getLocalizedPath } from '../utils/i18n';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const homeHref = getLocalizedPath('/', lang);
+
+const copy = {
+  en: {
+    leaving: 'You’re leaving redreamality.com',
+    aboutTo: 'You’re about to visit',
+    continue: 'Continue',
+    goBack: 'Go back',
+    invalidTitle: 'This link isn’t available',
+    invalidBody: 'The destination URL is missing or not allowed.',
+    home: 'Back to Home',
+  },
+  zh: {
+    leaving: '你即将离开 redreamality.com',
+    aboutTo: '你即将访问',
+    continue: '继续访问',
+    goBack: '返回',
+    invalidTitle: '无法打开此链接',
+    invalidBody: '目标地址缺失或不被允许。',
+    home: '返回首页',
+  },
+  ja: {
+    leaving: 'redreamality.com から離れようとしています',
+    aboutTo: '次のサイトへ移動します',
+    continue: '続行する',
+    goBack: '戻る',
+    invalidTitle: 'このリンクは開けません',
+    invalidBody: '移動先の URL がないか、許可されていません。',
+    home: 'ホームに戻る',
+  },
+}[lang];
+
+// Hosts mirrored from outbound.ts — keep in sync (inline for static client validation).
+const internalHostsJson = JSON.stringify([
+  'redreamality.com',
+  'www.redreamality.com',
+  'redreamality.github.io',
+  'localhost',
+  '127.0.0.1',
+]);
+---
+
+<div
+  id="outbound-confirm"
+  class="mx-auto max-w-xl px-4 py-12"
+  data-home={homeHref}
+  data-internal-hosts={internalHostsJson}
+  data-copy-leaving={copy.leaving}
+  data-copy-about={copy.aboutTo}
+  data-copy-continue={copy.continue}
+  data-copy-back={copy.goBack}
+  data-copy-invalid-title={copy.invalidTitle}
+  data-copy-invalid-body={copy.invalidBody}
+  data-copy-home={copy.home}
+>
+  <div class="rounded-2xl border border-surface-200/80 dark:border-surface-800 bg-white dark:bg-surface-900 p-6 sm:p-8 shadow-card">
+    <div id="outbound-valid" class="hidden">
+      <p id="outbound-leaving" class="text-xs font-medium uppercase tracking-wide text-surface-500 dark:text-surface-400"></p>
+      <h1 id="outbound-about" class="mt-3 font-display text-2xl sm:text-3xl font-bold text-surface-900 dark:text-white"></h1>
+      <p id="outbound-host" class="mt-4 text-xl font-semibold text-brand-600 dark:text-brand-300 break-all"></p>
+      <p id="outbound-url" class="mt-3 font-mono text-xs sm:text-sm text-surface-600 dark:text-surface-400 break-all leading-relaxed"></p>
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a
+          id="outbound-continue"
+          href="#"
+          rel="noopener noreferrer nofollow"
+          class="inline-flex items-center justify-center rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-brand-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 transition-colors"
+        ></a>
+        <button
+          type="button"
+          id="outbound-go-back"
+          class="inline-flex items-center justify-center rounded-lg border border-surface-200 dark:border-surface-700 bg-surface-50 dark:bg-surface-800 px-5 py-2.5 text-sm font-medium text-surface-800 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 transition-colors"
+        ></button>
+      </div>
+    </div>
+
+    <div id="outbound-invalid" class="hidden">
+      <h1 id="outbound-invalid-title" class="font-display text-2xl font-bold text-surface-900 dark:text-white"></h1>
+      <p id="outbound-invalid-body" class="mt-3 text-sm text-surface-600 dark:text-surface-400"></p>
+      <div class="mt-8">
+        <a
+          id="outbound-home"
+          href={homeHref}
+          class="inline-flex items-center justify-center rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-brand-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 transition-colors"
+        ></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById('outbound-confirm');
+    if (!root) return;
+
+    var INTERNAL = new Set([]);
+    try {
+      INTERNAL = new Set(JSON.parse(root.getAttribute('data-internal-hosts') || '[]'));
+    } catch (e) {}
+
+    function sanitize(raw) {
+      if (!raw) return null;
+      var trimmed = String(raw).trim();
+      if (!trimmed) return null;
+      if (trimmed.indexOf('//') === 0) return null;
+      var lower = trimmed.toLowerCase();
+      if (
+        lower.indexOf('javascript:') === 0 ||
+        lower.indexOf('data:') === 0 ||
+        lower.indexOf('vbscript:') === 0 ||
+        lower.indexOf('blob:') === 0
+      ) {
+        return null;
+      }
+      var url;
+      try {
+        url = new URL(trimmed);
+      } catch (e) {
+        return null;
+      }
+      if (url.protocol !== 'http:' && url.protocol !== 'https:') return null;
+      var host = url.hostname.replace(/\.$/, '').toLowerCase();
+      if (INTERNAL.has(host)) return null;
+      return url.toString();
+    }
+
+    var params = new URLSearchParams(window.location.search);
+    var rawTo = params.get('to');
+    var decoded = rawTo;
+    if (rawTo) {
+      try {
+        decoded = decodeURIComponent(rawTo);
+      } catch (e) {
+        decoded = rawTo;
+      }
+    }
+    var safe = sanitize(decoded);
+
+    var validEl = document.getElementById('outbound-valid');
+    var invalidEl = document.getElementById('outbound-invalid');
+
+    if (safe) {
+      var host;
+      try {
+        host = new URL(safe).hostname;
+      } catch (e) {
+        host = '';
+      }
+      document.getElementById('outbound-leaving').textContent = root.getAttribute('data-copy-leaving') || '';
+      document.getElementById('outbound-about').textContent = root.getAttribute('data-copy-about') || '';
+      document.getElementById('outbound-host').textContent = host;
+      document.getElementById('outbound-url').textContent = safe;
+      var cont = document.getElementById('outbound-continue');
+      cont.textContent = root.getAttribute('data-copy-continue') || '';
+      cont.setAttribute('href', safe);
+      var back = document.getElementById('outbound-go-back');
+      back.textContent = root.getAttribute('data-copy-back') || '';
+      back.addEventListener('click', function () {
+        if (window.history.length > 1) {
+          window.history.back();
+          return;
+        }
+        window.location.href = root.getAttribute('data-home') || '/';
+      });
+      validEl.classList.remove('hidden');
+    } else {
+      document.getElementById('outbound-invalid-title').textContent =
+        root.getAttribute('data-copy-invalid-title') || '';
+      document.getElementById('outbound-invalid-body').textContent =
+        root.getAttribute('data-copy-invalid-body') || '';
+      var home = document.getElementById('outbound-home');
+      home.textContent = root.getAttribute('data-copy-home') || '';
+      invalidEl.classList.remove('hidden');
+    }
+  })();
+</script>

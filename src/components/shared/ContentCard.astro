@@ -1,4 +1,7 @@
 ---
+import { toOutboundHref } from '../../utils/outbound';
+import { detectLanguageFromPath } from '../../utils/i18n';
+
 // Generic content card used across the homepage and all listing pages.
 // Replaces the repeated inline <article class="bg-white dark:bg-gray-800 ..."> blocks.
 export interface CardBadge {
@@ -42,7 +45,11 @@ const shownTags = (tags || [])
   .filter((tag) => !tagCounts || (tagCounts[tag] ?? 0) >= 2)
   .slice(0, maxTags);
 
+const pageLang = detectLanguageFromPath(Astro.url.pathname);
+const outboundLang = pageLang === 'zh' ? 'zh' : pageLang === 'ja' ? 'ja' : 'en';
 const isExternal = /^https?:\/\//i.test(href);
+const cardHref = isExternal ? toOutboundHref(href, outboundLang) : href;
+const opensExternal = isExternal && cardHref === href; // only raw external if rewrite skipped
 
 const accentBar: Record<string, string> = {
   brand: 'bg-brand-gradient',
@@ -63,7 +70,7 @@ const hoverTitle: Record<string, string> = {
     className,
   ]}
 >
-  <a href={href} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer nofollow" : undefined} class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-lg">
+  <a href={cardHref} target={opensExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer nofollow" : undefined} class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-lg">
     <h3 class:list={['font-display text-lg font-semibold leading-snug text-surface-900 dark:text-white mb-2 transition-colors', hoverTitle[accent]]}>
       {title}
     </h3>
