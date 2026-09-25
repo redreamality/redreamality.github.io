@@ -9,9 +9,11 @@
  *         src/content/blog-cn|blog-en frontmatter for published blog links
  * Writes: src/data/chaos-digest.json
  *
- * Idempotent. Prefer shortlisted + published + inbox score≥3; skip killed.
- * Groups by Asia/Shanghai floor hour of updated_at; within hour sorts by
- * score desc then status (published > shortlisted > writing > inbox).
+ * Idempotent. Prefer shortlisted + published + writing + inbox score≥4; skip killed.
+ * Per-status lookback on updated_at (Asia/Shanghai): inbox 72h, shortlisted+writing
+ * 7d (168h), published 30d (720h). Rows outside the window are omitted from the
+ * digest only (topics.md untouched). Groups by Shanghai floor hour; within hour
+ * sorts by score desc then status (published > shortlisted > writing > inbox).
  *
  * Locale rules (CRITICAL — no 中英混杂):
  *   - title.zh  = topics title (Chinese OK)
@@ -45,7 +47,13 @@ const OUT_PATH = path.join(rootDir, 'src/data/chaos-digest.json');
 const BLOG_CN = path.join(rootDir, 'src/content/blog-cn');
 const BLOG_EN = path.join(rootDir, 'src/content/blog-en');
 const TZ = 'Asia/Shanghai';
-const LOOKBACK_HOURS = 72;
+/** Per-status lookback hours (Asia/Shanghai via updated_at). */
+const LOOKBACK_HOURS = {
+  inbox: 72,
+  shortlisted: 168, // 7 days
+  writing: 168,
+  published: 720, // 30 days
+};
 
 const STATUS_RANK = {
   published: 0,
@@ -374,8 +382,20 @@ function shouldInclude(row) {
   if (status === 'killed') return false;
   if (status === 'published' || status === 'shortlisted' || status === 'writing')
     return true;
-  if (status === 'inbox' && score >= 3) return true;
+  if (status === 'inbox' && score >= 4) return true;
   return false;
+}
+
+/** Hours of lookback for this status, or null if status has no window. */
+function lookbackHoursFor(status) {
+  return LOOKBACK_HOURS[status] ?? null;
+}
+
+function withinLookback(updated, status, now) {
+  const hours = lookbackHoursFor(status);
+  if (hours == null) return true;
+  const cutoff = new Date(now.getTime() - hours * 3600 * 1000);
+  return updated >= cutoff;
 }
 
 function matchBlog(row, blogMap, fromNotes) {
@@ -437,16 +457,14 @@ function build() {
   if (t003Blog?.titleEn) EN_TITLE_OVERRIDES.t003 = t003Blog.titleEn;
 
   const now = new Date();
-  const cutoff = new Date(now.getTime() - LOOKBACK_HOURS * 3600 * 1000);
 
   const items = [];
   for (const row of rows) {
     if (!shouldInclude(row)) continue;
     const updated = parseShanghaiLocal(row.updated_at);
     if (!updated) continue;
-    if (updated < cutoff && (row.status || '').toLowerCase() === 'inbox') {
-      continue;
-    }
+    const status = (row.status || '').toLowerCase();
+    if (!withinLookback(updated, status, now)) continue;
 
     const fromNotes = extractBlogFromNotes(row.notes);
     let { blog, meta } = matchBlog(row, blogMap, fromNotes);
