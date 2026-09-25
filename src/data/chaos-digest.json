@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-25T09:51:58+08:00",
+  "updatedAt": "2026-09-25T15:54:34+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,58 +13,21 @@
   "themeCounts": {
     "models": 8,
     "coding-tools": 21,
-    "agents-oss": 60,
-    "security": 6,
-    "research": 28,
+    "agents-oss": 65,
+    "security": 8,
+    "research": 33,
     "product-news": 2,
     "other": 17
   },
   "hours": [
     {
-      "hourStart": "2026-09-25T09:00:00+08:00",
+      "hourStart": "2026-09-25T15:00:00+08:00",
       "label": {
-        "zh": "9月25日 09:00",
-        "en": "Sep 25 09:00",
-        "ja": "9月25日 09:00"
+        "zh": "9月25日 15:00",
+        "en": "Sep 25 15:00",
+        "ja": "9月25日 15:00"
       },
       "items": [
-        {
-          "id": "t001",
-          "theme": "models",
-          "title": {
-            "zh": "Claude Opus 5.5：降价 + 旗舰性能同窗发布",
-            "en": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose",
-            "ja": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose"
-          },
-          "summary": {
-            "zh": "与 GPT-6 对台：性能/价格/安全限制怎么选",
-            "en": "Anthropic launched Claude Opus 5.5 on 2026-09-22: about 40% lower cost on typical workloads versus Opus 5, with Fable-tier capability claims and matching safeguards. A builder-focused read of pricing, benchmarks, and coding-agent fit.",
-            "ja": ""
-          },
-          "sources": [
-            "hn",
-            "techcrunch",
-            "36kr",
-            "youtube",
-            "reddit"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://www.anthropic.com/claude-opus-5-5",
-            "https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/",
-            "https://eu.36kr.com/zh/p/3995195771588745",
-            "https://www.youtube.com/watch?v=jKRl_CSVxyI",
-            "https://www.reddit.com/r/ClaudeAI/comments/1woc97l/opus_55_vs_gpt6_sol_3d_pelican_riding_bike_test/",
-            "https://www.youtube.com/watch?v=NDTbUObZTlM",
-            "https://launchvideo.io",
-            "https://www.reddit.com/r/ClaudeAI/comments/1wp1eks/opus_55_anthropic_cooked_the_current_agent_space/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/claude-opus-5-5-price-and-performance/",
-            "en": "/blog/claude-opus-5-5-price-and-performance/"
-          }
-        },
         {
           "id": "t003",
           "theme": "coding-tools",
@@ -98,7 +61,9 @@
             "https://dev.to/kike/how-i-went-from-trust-me-bro-to-boomer-with-receipts-using-jev-2141",
             "https://www.reddit.com/r/LocalLLaMA/comments/1wo6o0f/mods_can_we_do_something_about_half_the_forum/",
             "https://www.youtube.com/watch?v=HHUsHkYhkcM",
-            "https://www.youtube.com/watch?v=fsEssFc-WhU"
+            "https://www.youtube.com/watch?v=fsEssFc-WhU",
+            "https://www.youtube.com/watch?v=0zFfcEr1e9U",
+            "https://github.com/egma-ai/jev-code-reviewer"
           ],
           "blog": {
             "zh": "/cn/blog/jev-claude-code-10x-and-25-lines/",
@@ -132,32 +97,48 @@
           }
         },
         {
-          "id": "t006",
-          "theme": "security",
+          "id": "t179",
+          "theme": "research",
           "title": {
-            "zh": "cloudflare/security-audit-skill：Coding-agent 安全审计 skill",
-            "en": "Cloudflare’s security-audit-skill: A Verifiable Security-Audit Workflow for Coding Agents",
-            "ja": "Cloudflare’s security-audit-skill: A Verifiable Security-Audit Workflow for Coding Agents"
+            "zh": "Jev-Mobile：Jev 作移动 GUI Agent 执行器",
+            "en": "Jev-Mobile",
+            "ja": "Jev-Mobile"
           },
           "summary": {
-            "zh": "Skill 分发形态爆发 + 安全审计刚需",
-            "en": "A teardown of cloudflare/security-audit-skill: Skill distribution, six audit phases, confirmed / needs_validation / rejected verdicts, adversarial validation, and fail-open behavior without a sandbox—plus install steps and enterprise limits.",
+            "zh": "Jev 从裁判/记忆走向高频执行器：VLM 低频规划 + Jev 选无树动作；AndroidWorld 79%、时延−33%、API 成本−73%",
+            "en": "",
             "ja": ""
           },
           "sources": [
-            "github",
-            "hn"
+            "arxiv"
           ],
           "score": 5,
-          "status": "published",
+          "status": "shortlisted",
           "externalUrls": [
-            "https://github.com/cloudflare/security-audit-skill",
-            "https://blog.trailofbits.com/2026/09/18/auditing-in-the-age-of-good-enough-ai/"
+            "https://arxiv.org/abs/2609.30186"
+          ]
+        },
+        {
+          "id": "t180",
+          "theme": "research",
+          "title": {
+            "zh": "SpecHarness：规格签字、Agent 提案（Who Holds the Pen）",
+            "en": "SpecHarness",
+            "ja": "SpecHarness"
+          },
+          "summary": {
+            "zh": "规格升格为外部权威：可见规格→可验证义务，证据门控提交；SkillsBench Pass+12pp / 状态权威缺口−20pp；OpenSpec/SDD 运行时落地",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "arxiv"
           ],
-          "blog": {
-            "zh": "/cn/blog/cloudflare-security-audit-skill-for-coding-agents/",
-            "en": "/blog/cloudflare-security-audit-skill-for-coding-agents/"
-          }
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29921"
+          ]
         },
         {
           "id": "t007",
@@ -183,6 +164,62 @@
           "blog": {
             "zh": "/cn/blog/ecc-agent-harness-optimization/",
             "en": "/blog/ecc-agent-harness-optimization/"
+          }
+        },
+        {
+          "id": "t038",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "strands-agents/harness-sdk（含 Strands Harness 产品公告）",
+            "en": "Strands Harness: Productizing Agent-Loop Control as a Shippable SDK",
+            "ja": "Strands Harness: Productizing Agent-Loop Control as a Shippable SDK"
+          },
+          "summary": {
+            "zh": "生产级 harness SDK + 显式 harness 产品化公告",
+            "en": "A source-checked read of Strands harness and the Harness SDK—how they turn context management, sessions, tool gates, and loop control into a product—plus a selection checklist against ECC, Growing Harness, and Claude Code harness.",
+            "ja": ""
+          },
+          "sources": [
+            "github",
+            "hn",
+            "devto"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://github.com/strands-agents/harness-sdk",
+            "https://strandsagents.com/blog/introducing-strands-harness/",
+            "https://dev.to/sunnydachs/what-happens-when-enterprise-requirements-hit-strands-langgraph-and-crewai-45-runs-measured-ocg"
+          ],
+          "blog": {
+            "zh": "/cn/blog/strands-harness-sdk-production-agent-runtime/",
+            "en": "/blog/strands-harness-sdk-production-agent-runtime/"
+          }
+        },
+        {
+          "id": "t052",
+          "theme": "research",
+          "title": {
+            "zh": "Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents",
+            "en": "Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents",
+            "ja": "Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents"
+          },
+          "summary": {
+            "zh": "Harness 扩张 vs 堆上下文；对照 ECC/skills",
+            "en": "A deep read of arXiv:2609.26760 Growing Harness—turning recurring control into executable code via task feedback—contrasted with “just stuff more context” and with in-site harness / Skills / deterministic-pipeline narratives.",
+            "ja": ""
+          },
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.26760"
+          ],
+          "blog": {
+            "zh": "/cn/blog/grow-the-harness-not-the-context/",
+            "en": "/blog/grow-the-harness-not-the-context/"
           }
         },
         {
@@ -280,29 +317,6 @@
           ]
         },
         {
-          "id": "t011",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Meta Muse ↔ OpenClaw：大厂借鉴开源 agent 栈",
-            "en": "Meta Muse ↔ OpenClaw",
-            "ja": "Meta Muse ↔ OpenClaw"
-          },
-          "summary": {
-            "zh": "开源 harness 被产品化抄写的活案例",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "techcrunch",
-            "theverge"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://techcrunch.com/2026/09/22/meta-admits-muses-likeness-to-openclaw-isnt-a-coincidence/"
-          ]
-        },
-        {
           "id": "t014",
           "theme": "coding-tools",
           "title": {
@@ -345,12 +359,13 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://github.com/BuilderIO/agent-native",
-            "https://www.youtube.com/watch?v=a7Mb_dJtMdk"
+            "https://www.youtube.com/watch?v=a7Mb_dJtMdk",
+            "https://www.youtube.com/watch?v=pNmfMi-yjZk"
           ]
         },
         {
           "id": "t017",
-          "theme": "coding-tools",
+          "theme": "research",
           "title": {
             "zh": "Fission-AI/OpenSpec：Spec-driven development for AI coding",
             "en": "Fission-AI/OpenSpec",
@@ -371,32 +386,6 @@
             "https://github.com/Fission-AI/OpenSpec",
             "https://www.youtube.com/watch?v=hy8UstR2NEg",
             "https://www.youtube.com/watch?v=bHJZiM2XM-w"
-          ]
-        },
-        {
-          "id": "t038",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "strands-agents/harness-sdk（含 Strands Harness 产品公告）",
-            "en": "strands-agents/harness-sdk",
-            "ja": "strands-agents/harness-sdk"
-          },
-          "summary": {
-            "zh": "生产级 harness SDK + 显式 harness 产品化公告",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github",
-            "hn",
-            "devto"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/strands-agents/harness-sdk",
-            "https://strandsagents.com/blog/introducing-strands-harness/",
-            "https://dev.to/sunnydachs/what-happens-when-enterprise-requirements-hit-strands-langgraph-and-crewai-45-runs-measured-ocg"
           ]
         },
         {
@@ -513,7 +502,686 @@
           "externalUrls": [
             "https://huggingface.co/spaces/convaiinnovations/laya-demo",
             "https://huggingface.co/convaiinnovations/laya",
-            "https://www.reddit.com/r/LocalLLM/comments/1wnyf0o/laya_came_first_so_why_is_everyone_still_only/"
+            "https://www.reddit.com/r/LocalLLM/comments/1wnyf0o/laya_came_first_so_why_is_everyone_still_only/",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wpieby/i_added_openvino_support_to_laya_40_ms_per/"
+          ]
+        },
+        {
+          "id": "t090",
+          "theme": "research",
+          "title": {
+            "zh": "DeepSeek DSec：agent 训练沙箱弹性算力",
+            "en": "DeepSeek DSec",
+            "ja": "DeepSeek DSec"
+          },
+          "summary": {
+            "zh": "罕见 lab 级 agent-RL 执行基建披露；对照 coding-agent sandbox",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "technode",
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://technode.com/2026/09/23/deepseek-dsec-agent-training-sandbox-infrastructure/",
+            "https://arxiv.org/abs/2609.22978"
+          ]
+        },
+        {
+          "id": "t093",
+          "theme": "other",
+          "title": {
+            "zh": "MiniMaxAI/MiniMax-H3：图文生视频",
+            "en": "MiniMaxAI/MiniMax-H3",
+            "ja": "MiniMaxAI/MiniMax-H3"
+          },
+          "summary": {
+            "zh": "MiniMax H3 多模态视频；下载/likes 双高，对照 LTX/DeepSeek 多模态档",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+            "https://huggingface.co/spaces/Pepe104/MiniMax-H3-Turbo-Lora-UNCENSORED"
+          ]
+        },
+        {
+          "id": "t181",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "DeepSeek Harness 桌面预览：Electron + 一切皆插件",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "开源 lab 把显式 harness 推到桌面零配置：PTC/多 Agent 档/插件/沙箱/Cordis；对照 DSec 与 Strands/ECC",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "36kr"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://eu.36kr.com/zh/p/3998199345500040",
+            "https://www.deepseek.com/harness",
+            "https://github.com/deepseek-ai/deepseek-harness"
+          ]
+        },
+        {
+          "id": "t015",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "obra/superpowers：Agentic skills 框架",
+            "en": "obra/superpowers",
+            "ja": "obra/superpowers"
+          },
+          "summary": {
+            "zh": "Skills 方法论大体量；与 ECC/CF 同赛道",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/obra/superpowers"
+          ]
+        },
+        {
+          "id": "t182",
+          "theme": "research",
+          "title": {
+            "zh": "PPTBench：Coding Agents 重建可编辑幻灯片/视觉世界",
+            "en": "PPTBench",
+            "ja": "PPTBench"
+          },
+          "summary": {
+            "zh": "Coding-agent 考场扩到结构化可编辑 PPTX；500 题四级 Agentic Judge，最强 67.8/中位 19.5——会写文件过不了语义门",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29718"
+          ]
+        },
+        {
+          "id": "t184",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "锁客的是 Harness 不是 Model（YT 论）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "Harness 锁能力/锁客论；对接站内 Grow-Harness / agent-loop 深耕，可作对照短评素材",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "youtube"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.youtube.com/watch?v=k8jYOcQUB_A"
+          ]
+        },
+        {
+          "id": "t018",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Tencent/WeKnora：文档→RAG→自主 agent→Wiki",
+            "en": "Tencent/WeKnora",
+            "ja": "Tencent/WeKnora"
+          },
+          "summary": {
+            "zh": "腾讯知识 agent 平台；Δ5303",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/Tencent/WeKnora"
+          ]
+        },
+        {
+          "id": "t019",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "anthropics/claude-code：Coding agent 品类锚点",
+            "en": "anthropics/claude-code",
+            "ja": "anthropics/claude-code"
+          },
+          "summary": {
+            "zh": "常青对照，不必单篇除非新功能",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github",
+            "youtube",
+            "reddit"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/anthropics/claude-code",
+            "https://www.youtube.com/watch?v=bxSr8QAQt7c",
+            "https://www.youtube.com/watch?v=S_lzYIvtEaQ",
+            "https://www.reddit.com/r/ClaudeAI/comments/1wp2e0t/8_claude_workflow_tips_from_daily_use_mostly/",
+            "https://www.reddit.com/r/ClaudeAI/comments/1wpce5m/how_claude_code_directed_the_most_boring_movie/"
+          ]
+        },
+        {
+          "id": "t020",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "anthropics/knowledge-work-plugins：Cowork 插件集",
+            "en": "anthropics/knowledge-work-plugins",
+            "ja": "anthropics/knowledge-work-plugins"
+          },
+          "summary": {
+            "zh": "知识工作 × skills/plugins；2238 补录",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/anthropics/knowledge-work-plugins"
+          ]
+        },
+        {
+          "id": "t021",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "danny-avila/LibreChat：自托管 Chat + Agents/MCP",
+            "en": "danny-avila/LibreChat",
+            "ja": "danny-avila/LibreChat"
+          },
+          "summary": {
+            "zh": "开源对话+agent 产品对照；2238 补录",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/danny-avila/LibreChat",
+            "https://github.com/LibreChat-AI/LibreChat"
+          ]
+        },
+        {
+          "id": "t033",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "JustVugg/colibri：自有硬件流式 MoE",
+            "en": "JustVugg/colibri",
+            "ja": "JustVugg/colibri"
+          },
+          "summary": {
+            "zh": "本地推理引擎热度 Δ4036",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/JustVugg/colibri"
+          ]
+        },
+        {
+          "id": "t034",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "TencentCloud/Octop：自托管多用户多 agent",
+            "en": "TencentCloud/Octop",
+            "ja": "TencentCloud/Octop"
+          },
+          "summary": {
+            "zh": "多 agent 自托管 Δ2148",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/TencentCloud/Octop"
+          ]
+        },
+        {
+          "id": "t035",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "HKUDS/CLI-Anything：软件 Agent-Native CLI 化",
+            "en": "HKUDS/CLI-Anything",
+            "ja": "HKUDS/CLI-Anything"
+          },
+          "summary": {
+            "zh": "Agent 工具化叙事",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/HKUDS/CLI-Anything"
+          ]
+        },
+        {
+          "id": "t077",
+          "theme": "other",
+          "title": {
+            "zh": "prism-ml/Ternary-Bonsai-2-27B-gguf",
+            "en": "prism-ml/Ternary-Bonsai-2-27B-gguf",
+            "ja": "prism-ml/Ternary-Bonsai-2-27B-gguf"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf"
+          ]
+        },
+        {
+          "id": "t078",
+          "theme": "other",
+          "title": {
+            "zh": "Qwen/Qwen-Image-2.1",
+            "en": "Qwen/Qwen-Image-2.1",
+            "ja": "Qwen/Qwen-Image-2.1"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/Qwen/Qwen-Image-2.1",
+            "https://huggingface.co/Comfy-Org/Qwen-Image-2.1",
+            "https://huggingface.co/abenzerps/Qwen-Image-2.1-Uncensored-GGUF",
+            "https://huggingface.co/spaces/Qwen/Qwen-Image-2.1"
+          ]
+        },
+        {
+          "id": "t079",
+          "theme": "other",
+          "title": {
+            "zh": "XingChen-AGI/Xing4.0-29B-A4B",
+            "en": "XingChen-AGI/Xing4.0-29B-A4B",
+            "ja": "XingChen-AGI/Xing4.0-29B-A4B"
+          },
+          "summary": {
+            "zh": "HF 续扫",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "huggingface"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B"
+          ]
+        },
+        {
+          "id": "t165",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "vectorize-io/hindsight：会学习的 Agent Memory",
+            "en": "vectorize-io/hindsight",
+            "ja": "vectorize-io/hindsight"
+          },
+          "summary": {
+            "zh": "Agent memory 学习型；对照 Jev-Mem/JitMem/GBrain/EnSIMem",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/vectorize-io/hindsight"
+          ]
+        },
+        {
+          "id": "t183",
+          "theme": "research",
+          "title": {
+            "zh": "Self-Play Pretraining with Zero Data",
+            "en": "Self-Play Pretraining with Zero Data",
+            "ja": "Self-Play Pretraining with Zero Data"
+          },
+          "summary": {
+            "zh": "零自然语言数据：生成器搜 UTM 程序、学习器 next-byte；合成字节涌现多模态 scaling 与 ICL",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "arxiv"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30063"
+          ]
+        },
+        {
+          "id": "t185",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "LangSmith Trajectories + Engine v2：Agent session 可读轨迹与更快修复",
+            "en": "LangSmith Trajectories + Engine v2",
+            "ja": "LangSmith Trajectories + Engine v2"
+          },
+          "summary": {
+            "zh": "官方 agent-loop 可观测性：轨迹视图 + 更快检出/发布修复；对照 AgentScore/eval harness",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "youtube"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.youtube.com/watch?v=1akSvsjd_oI",
+            "https://www.youtube.com/watch?v=GNO9XFE4PKM"
+          ]
+        },
+        {
+          "id": "t186",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Docker Cloud Sandboxes：Agentic 工作负载执行边界",
+            "en": "Docker Cloud Sandboxes",
+            "ja": "Docker Cloud Sandboxes"
+          },
+          "summary": {
+            "zh": "云沙箱作 agent 工具执行边界；对照 coding-agent sandbox / DSec / Drop",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "hn"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.docker.com/c/sbx-promo/"
+          ]
+        },
+        {
+          "id": "t187",
+          "theme": "security",
+          "title": {
+            "zh": "SourceHut 构建日志 XSS：CI 输出成安全边界",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "不可信仓库/构建输出渲染=接管面；agentic 工具执行或渲染 CI 输出时的信任边界",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "hn"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://blog.arusekk.pl/posts/srht-account-takeover/"
+          ]
+        },
+        {
+          "id": "t188",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "akitaonrails/ai-memory：Coding CLI 长期记忆与交接",
+            "en": "akitaonrails/ai-memory",
+            "ja": "akitaonrails/ai-memory"
+          },
+          "summary": {
+            "zh": "Agent coding CLI 长期记忆/handoff；对照 Jev-Mem/JitMem/Hindsight/GBrain",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "github"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/akitaonrails/ai-memory"
+          ]
+        },
+        {
+          "id": "t189",
+          "theme": "security",
+          "title": {
+            "zh": "AI 是否尊重补丁：检测率 100% 仍不够",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "Coding-agent 安全评测：漏洞检出≠补丁忠实；对照 CF security-audit-skill",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "devto"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://dev.to/unit_500_c36d1b1011fdf39c/100-vuln-detection-wasnt-enough-measuring-whether-ai-respects-the-patch-dg4"
+          ]
+        },
+        {
+          "id": "t190",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Confused Deputy：AI Agents 反复引入的旧授权bug",
+            "en": "Confused Deputy",
+            "ja": "Confused Deputy"
+          },
+          "summary": {
+            "zh": "委托权限跨信任边界；agent-tool/权限模型必读概念",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "devto"
+          ],
+          "score": 3,
+          "status": "inbox",
+          "externalUrls": [
+            "https://dev.to/auth0/confused-deputy-the-old-bug-that-ai-agents-keep-reintroducing-1kf"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-09-25T10:00:00+08:00",
+      "label": {
+        "zh": "9月25日 10:00",
+        "en": "Sep 25 10:00",
+        "ja": "9月25日 10:00"
+      },
+      "items": [
+        {
+          "id": "t055",
+          "theme": "research",
+          "title": {
+            "zh": "Jev-Mem: System-One-Controlled Agentic Memory for Efficient AI Agents",
+            "en": "Don’t Default Memory Control to an Autoregressive LLM: Reading Jev-Mem’s System-One Memory Architecture",
+            "ja": "Don’t Default Memory Control to an Autoregressive LLM: Reading Jev-Mem’s System-One Memory Architecture"
+          },
+          "summary": {
+            "zh": "与站内 Jev 选题同频：agentic memory",
+            "en": "A deep read of arXiv:2609.23986 Jev-Mem—separating memory organize/retrieve/stop into a System-One control plane—contrasted with this site’s Jev decision line and Growing Harness “sink control into code,” with checked LoCoMo numbers and a reusable design checklist.",
+            "ja": ""
+          },
+          "sources": [
+            "paperswithcode"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.23986"
+          ],
+          "blog": {
+            "zh": "/cn/blog/jev-mem-system-one-agentic-memory/",
+            "en": "/blog/jev-mem-system-one-agentic-memory/"
+          }
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-09-25T09:00:00+08:00",
+      "label": {
+        "zh": "9月25日 09:00",
+        "en": "Sep 25 09:00",
+        "ja": "9月25日 09:00"
+      },
+      "items": [
+        {
+          "id": "t001",
+          "theme": "models",
+          "title": {
+            "zh": "Claude Opus 5.5：降价 + 旗舰性能同窗发布",
+            "en": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose",
+            "ja": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose"
+          },
+          "summary": {
+            "zh": "与 GPT-6 对台：性能/价格/安全限制怎么选",
+            "en": "Anthropic launched Claude Opus 5.5 on 2026-09-22: about 40% lower cost on typical workloads versus Opus 5, with Fable-tier capability claims and matching safeguards. A builder-focused read of pricing, benchmarks, and coding-agent fit.",
+            "ja": ""
+          },
+          "sources": [
+            "hn",
+            "techcrunch",
+            "36kr",
+            "youtube",
+            "reddit"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://www.anthropic.com/claude-opus-5-5",
+            "https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/",
+            "https://eu.36kr.com/zh/p/3995195771588745",
+            "https://www.youtube.com/watch?v=jKRl_CSVxyI",
+            "https://www.reddit.com/r/ClaudeAI/comments/1woc97l/opus_55_vs_gpt6_sol_3d_pelican_riding_bike_test/",
+            "https://www.youtube.com/watch?v=NDTbUObZTlM",
+            "https://launchvideo.io",
+            "https://www.reddit.com/r/ClaudeAI/comments/1wp1eks/opus_55_anthropic_cooked_the_current_agent_space/"
+          ],
+          "blog": {
+            "zh": "/cn/blog/claude-opus-5-5-price-and-performance/",
+            "en": "/blog/claude-opus-5-5-price-and-performance/"
+          }
+        },
+        {
+          "id": "t006",
+          "theme": "security",
+          "title": {
+            "zh": "cloudflare/security-audit-skill：Coding-agent 安全审计 skill",
+            "en": "Cloudflare’s security-audit-skill: A Verifiable Security-Audit Workflow for Coding Agents",
+            "ja": "Cloudflare’s security-audit-skill: A Verifiable Security-Audit Workflow for Coding Agents"
+          },
+          "summary": {
+            "zh": "Skill 分发形态爆发 + 安全审计刚需",
+            "en": "A teardown of cloudflare/security-audit-skill: Skill distribution, six audit phases, confirmed / needs_validation / rejected verdicts, adversarial validation, and fail-open behavior without a sandbox—plus install steps and enterprise limits.",
+            "ja": ""
+          },
+          "sources": [
+            "github",
+            "hn"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://github.com/cloudflare/security-audit-skill",
+            "https://blog.trailofbits.com/2026/09/18/auditing-in-the-age-of-good-enough-ai/"
+          ],
+          "blog": {
+            "zh": "/cn/blog/cloudflare-security-audit-skill-for-coding-agents/",
+            "en": "/blog/cloudflare-security-audit-skill-for-coding-agents/"
+          }
+        },
+        {
+          "id": "t011",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Meta Muse ↔ OpenClaw：大厂借鉴开源 agent 栈",
+            "en": "Meta Muse ↔ OpenClaw",
+            "ja": "Meta Muse ↔ OpenClaw"
+          },
+          "summary": {
+            "zh": "开源 harness 被产品化抄写的活案例",
+            "en": "",
+            "ja": ""
+          },
+          "sources": [
+            "techcrunch",
+            "theverge"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://techcrunch.com/2026/09/22/meta-admits-muses-likeness-to-openclaw-isnt-a-coincidence/"
           ]
         },
         {
@@ -562,29 +1230,6 @@
           "externalUrls": [
             "https://techcrunch.com/2026/09/23/everything-new-coming-to-metas-ai-agent-muse/",
             "https://www.theverge.com/ai-artificial-intelligence/1000222/meta-muse-ai-filesystem"
-          ]
-        },
-        {
-          "id": "t093",
-          "theme": "other",
-          "title": {
-            "zh": "MiniMaxAI/MiniMax-H3：图文生视频",
-            "en": "MiniMaxAI/MiniMax-H3",
-            "ja": "MiniMaxAI/MiniMax-H3"
-          },
-          "summary": {
-            "zh": "MiniMax H3 多模态视频；下载/likes 双高，对照 LTX/DeepSeek 多模态档",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "huggingface"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://huggingface.co/MiniMaxAI/MiniMax-H3",
-            "https://huggingface.co/spaces/Pepe104/MiniMax-H3-Turbo-Lora-UNCENSORED"
           ]
         },
         {
@@ -723,28 +1368,6 @@
           ]
         },
         {
-          "id": "t015",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "obra/superpowers：Agentic skills 框架",
-            "en": "obra/superpowers",
-            "ja": "obra/superpowers"
-          },
-          "summary": {
-            "zh": "Skills 方法论大体量；与 ECC/CF 同赛道",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/obra/superpowers"
-          ]
-        },
-        {
           "id": "t159",
           "theme": "agents-oss",
           "title": {
@@ -767,100 +1390,6 @@
           ]
         },
         {
-          "id": "t018",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Tencent/WeKnora：文档→RAG→自主 agent→Wiki",
-            "en": "Tencent/WeKnora",
-            "ja": "Tencent/WeKnora"
-          },
-          "summary": {
-            "zh": "腾讯知识 agent 平台；Δ5303",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/Tencent/WeKnora"
-          ]
-        },
-        {
-          "id": "t019",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "anthropics/claude-code：Coding agent 品类锚点",
-            "en": "anthropics/claude-code",
-            "ja": "anthropics/claude-code"
-          },
-          "summary": {
-            "zh": "常青对照，不必单篇除非新功能",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github",
-            "youtube",
-            "reddit"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/anthropics/claude-code",
-            "https://www.youtube.com/watch?v=bxSr8QAQt7c",
-            "https://www.youtube.com/watch?v=S_lzYIvtEaQ",
-            "https://www.reddit.com/r/ClaudeAI/comments/1wp2e0t/8_claude_workflow_tips_from_daily_use_mostly/"
-          ]
-        },
-        {
-          "id": "t020",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "anthropics/knowledge-work-plugins：Cowork 插件集",
-            "en": "anthropics/knowledge-work-plugins",
-            "ja": "anthropics/knowledge-work-plugins"
-          },
-          "summary": {
-            "zh": "知识工作 × skills/plugins；2238 补录",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/anthropics/knowledge-work-plugins"
-          ]
-        },
-        {
-          "id": "t021",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "danny-avila/LibreChat：自托管 Chat + Agents/MCP",
-            "en": "danny-avila/LibreChat",
-            "ja": "danny-avila/LibreChat"
-          },
-          "summary": {
-            "zh": "开源对话+agent 产品对照；2238 补录",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/danny-avila/LibreChat",
-            "https://github.com/LibreChat-AI/LibreChat"
-          ]
-        },
-        {
           "id": "t028",
           "theme": "coding-tools",
           "title": {
@@ -880,119 +1409,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://stripe.dev/blog/meet-stripes-knowledge-ai-platform"
-          ]
-        },
-        {
-          "id": "t034",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "TencentCloud/Octop：自托管多用户多 agent",
-            "en": "TencentCloud/Octop",
-            "ja": "TencentCloud/Octop"
-          },
-          "summary": {
-            "zh": "多 agent 自托管 Δ2148",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/TencentCloud/Octop"
-          ]
-        },
-        {
-          "id": "t035",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "HKUDS/CLI-Anything：软件 Agent-Native CLI 化",
-            "en": "HKUDS/CLI-Anything",
-            "ja": "HKUDS/CLI-Anything"
-          },
-          "summary": {
-            "zh": "Agent 工具化叙事",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/HKUDS/CLI-Anything"
-          ]
-        },
-        {
-          "id": "t077",
-          "theme": "other",
-          "title": {
-            "zh": "prism-ml/Ternary-Bonsai-2-27B-gguf",
-            "en": "prism-ml/Ternary-Bonsai-2-27B-gguf",
-            "ja": "prism-ml/Ternary-Bonsai-2-27B-gguf"
-          },
-          "summary": {
-            "zh": "HF 续扫",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "huggingface"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf"
-          ]
-        },
-        {
-          "id": "t078",
-          "theme": "other",
-          "title": {
-            "zh": "Qwen/Qwen-Image-2.1",
-            "en": "Qwen/Qwen-Image-2.1",
-            "ja": "Qwen/Qwen-Image-2.1"
-          },
-          "summary": {
-            "zh": "HF 续扫",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "huggingface"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://huggingface.co/Qwen/Qwen-Image-2.1",
-            "https://huggingface.co/Comfy-Org/Qwen-Image-2.1",
-            "https://huggingface.co/abenzerps/Qwen-Image-2.1-Uncensored-GGUF",
-            "https://huggingface.co/spaces/Qwen/Qwen-Image-2.1"
-          ]
-        },
-        {
-          "id": "t079",
-          "theme": "other",
-          "title": {
-            "zh": "XingChen-AGI/Xing4.0-29B-A4B",
-            "en": "XingChen-AGI/Xing4.0-29B-A4B",
-            "ja": "XingChen-AGI/Xing4.0-29B-A4B"
-          },
-          "summary": {
-            "zh": "HF 续扫",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "huggingface"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B"
           ]
         },
         {
@@ -1103,28 +1519,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://www.latent.space/p/runway"
-          ]
-        },
-        {
-          "id": "t165",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "vectorize-io/hindsight：会学习的 Agent Memory",
-            "en": "vectorize-io/hindsight",
-            "ja": "vectorize-io/hindsight"
-          },
-          "summary": {
-            "zh": "Agent memory 学习型；对照 Jev-Mem/JitMem/GBrain/EnSIMem",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/vectorize-io/hindsight"
           ]
         },
         {
@@ -1270,32 +1664,6 @@
         "ja": "9月24日 17:00"
       },
       "items": [
-        {
-          "id": "t052",
-          "theme": "research",
-          "title": {
-            "zh": "Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents",
-            "en": "Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents",
-            "ja": "Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents"
-          },
-          "summary": {
-            "zh": "Harness 扩张 vs 堆上下文；对照 ECC/skills",
-            "en": "A deep read of arXiv:2609.26760 Growing Harness—turning recurring control into executable code via task feedback—contrasted with “just stuff more context” and with in-site harness / Skills / deterministic-pipeline narratives.",
-            "ja": ""
-          },
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.26760"
-          ],
-          "blog": {
-            "zh": "/cn/blog/grow-the-harness-not-the-context/",
-            "en": "/blog/grow-the-harness-not-the-context/"
-          }
-        },
         {
           "id": "t110",
           "theme": "research",
@@ -1539,28 +1907,6 @@
           "externalUrls": [
             "https://jyn.dev/tokens-too-cheap-to-meter/",
             "https://www.reddit.com/r/LocalLLaMA/comments/1wo1bct/cost_of_intelligence_is_dropping_fast"
-          ]
-        },
-        {
-          "id": "t033",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "JustVugg/colibri：自有硬件流式 MoE",
-            "en": "JustVugg/colibri",
-            "ja": "JustVugg/colibri"
-          },
-          "summary": {
-            "zh": "本地推理引擎热度 Δ4036",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "github"
-          ],
-          "score": 3,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/JustVugg/colibri"
           ]
         },
         {
@@ -2672,30 +3018,6 @@
           ]
         },
         {
-          "id": "t090",
-          "theme": "research",
-          "title": {
-            "zh": "DeepSeek DSec：agent 训练沙箱弹性算力",
-            "en": "DeepSeek DSec",
-            "ja": "DeepSeek DSec"
-          },
-          "summary": {
-            "zh": "罕见 lab 级 agent-RL 执行基建披露；对照 coding-agent sandbox",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "technode",
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://technode.com/2026/09/23/deepseek-dsec-agent-training-sandbox-infrastructure/",
-            "https://arxiv.org/abs/2609.22978"
-          ]
-        },
-        {
           "id": "t091",
           "theme": "agents-oss",
           "title": {
@@ -3099,28 +3421,6 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://arxiv.org/abs/2609.26779"
-          ]
-        },
-        {
-          "id": "t055",
-          "theme": "research",
-          "title": {
-            "zh": "Jev-Mem: System-One-Controlled Agentic Memory for Efficient AI Agents",
-            "en": "Jev-Mem: System-One-Controlled Agentic Memory for Efficient AI Agents",
-            "ja": "Jev-Mem: System-One-Controlled Agentic Memory for Efficient AI Agents"
-          },
-          "summary": {
-            "zh": "与站内 Jev 选题同频：agentic memory",
-            "en": "",
-            "ja": ""
-          },
-          "sources": [
-            "paperswithcode"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.23986"
           ]
         },
         {
