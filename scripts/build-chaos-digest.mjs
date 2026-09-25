@@ -6,8 +6,13 @@
  *   node scripts/build-chaos-digest.mjs
  *
  * Reads:  /workspace/blog-pipeline/topics.md  (or TOPICS_MD env)
+ *         /workspace/blog-pipeline/briefs.json (judgment + sourceBriefs)
+ *         /workspace/blog-pipeline/archive/** for backfill when briefs missing
  *         src/content/blog-cn|blog-en frontmatter for published blog links
  * Writes: src/data/chaos-digest.json
+ *         /workspace/blog-pipeline/briefs.json (idempotent merge of backfills)
+ *
+ * Digestion is 二次加工: per-source briefs → editorial judgment → digest item.
  *
  * Idempotent. Prefer shortlisted + published + writing + inbox score≥4; skip killed.
  * Per-status lookback on updated_at (Asia/Shanghai): inbox 72h, shortlisted+writing
@@ -21,9 +26,13 @@
  *                 machine title | null  (NEVER copy Chinese into en)
  *   - title.ja  = same as en for ASCII/repo; null when only Chinese exists
  *                 (no JA translations yet; never paste Chinese into ja)
- *   - summary.zh = angle/notes (Chinese OK)
+ *   - judgment.zh = briefs.json or topics angle (Chinese OK); never copy into en/ja
+ *   - judgment.en/ja = hand-written only (never Chinese)
+ *   - sourceBriefs[].brief = per-source signal summary (why_hot / abstract_snippet)
+ *   - summary.zh = judgment.zh || angle (compat)
  *   - summary.en = EN blog description only, else ""
  *   - summary.ja = "" (no JA paraphrase yet)
+ *   - UI prefers judgment, falls back to summary
  *
  * Theme taxonomy (item.theme) — derived from sources / title / angle keywords:
  *   models        — frontier / open model releases (Opus, GPT-6, MiMo, …)
@@ -43,6 +52,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.join(__dirname, '..');
 const TOPICS_MD =
   process.env.TOPICS_MD || '/workspace/blog-pipeline/topics.md';
+const BRIEFS_PATH =
+  process.env.BRIEFS_JSON || '/workspace/blog-pipeline/briefs.json';
+const ARCHIVE_DIR =
+  process.env.ARCHIVE_DIR || '/workspace/blog-pipeline/archive';
+const INBOX_DIR =
+  process.env.INBOX_DIR || '/workspace/blog-pipeline/inbox';
 const OUT_PATH = path.join(rootDir, 'src/data/chaos-digest.json');
 const BLOG_CN = path.join(rootDir, 'src/content/blog-cn');
 const BLOG_EN = path.join(rootDir, 'src/content/blog-en');
@@ -443,6 +458,338 @@ function matchBlog(row, blogMap, fromNotes) {
   return { blog: blog.zh || blog.en ? blog : null, meta };
 }
 
+
+/** Normalize URL for archive matching (arxiv id, github org/repo, stripped host). */
+function normalizeUrl(u) {
+  let s = String(u || '')
+    .trim()
+    .replace(/\/+$/, '')
+    .toLowerCase();
+  if (!s) return '';
+  s = s.replace(/^https?:\/\/(www\.)?/, '');
+  const arxiv = s.match(/arxiv\.org\/(?:abs|pdf|html)\/(\d+\.\d+)/);
+  if (arxiv) return `arxiv:${arxiv[1]}`;
+  const gh = s.match(/github\.com\/([^/#?]+\/[^/#?]+)/);
+  if (gh) return `gh:${gh[1].replace(/\.git$/, '')}`;
+  return s.split('?')[0];
+}
+
+function emptyLocale() {
+  return { zh: '', en: '', ja: '' };
+}
+
+/** Strip CJK from a candidate EN/JA string; return "" if primarily CJK. */
+function enSafe(s) {
+  const t = String(s || '').trim();
+  if (!t) return '';
+  if (hasCJK(t) && asciiRatio(t) < 0.7) return '';
+  // Drop residual CJK chars if mixed
+  if (hasCJK(t)) return t.replace(CJK_RE, '').replace(/\s{2,}/g, ' ').trim();
+  return t;
+}
+
+/**
+ * Map signal fields → per-source brief locales.
+ * why_hot → zh (and en when already English); abstract_snippet / description → en when ASCII.
+ */
+function briefsFromSignal(sig) {
+  const brief = emptyLocale();
+  const why = String(sig.why_hot || '').trim();
+  const abs = String(
+    sig.abstract_snippet || sig.description || sig.readme_blurb || '',
+  ).trim();
+
+  if (why) {
+    if (hasCJK(why)) {
+      brief.zh = why;
+    } else {
+      // English why_hot: usable on zh (technical) and en
+      brief.zh = why;
+      brief.en = enSafe(why);
+    }
+  }
+  const absEn = enSafe(abs);
+  if (absEn) {
+    brief.en = absEn; // prefer abstract for en when present
+  } else if (abs && hasCJK(abs) && !brief.zh) {
+    brief.zh = abs;
+  }
+  return brief;
+}
+
+function briefRichness(brief) {
+  if (!brief || typeof brief !== 'object') return 0;
+  let n = 0;
+  for (const k of ['zh', 'en', 'ja']) {
+    const v = String(brief[k] || '').trim();
+    if (v) n += v.length;
+  }
+  return n;
+}
+
+function judgmentRichness(j) {
+  return briefRichness(j);
+}
+
+function sourceBriefRichness(sb) {
+  if (!sb) return 0;
+  return briefRichness(sb.brief) + String(sb.title || '').length;
+}
+
+/** Parse simple YAML-ish frontmatter from archive .md signals. */
+function parseMdSignal(filePath) {
+  let raw;
+  try {
+    raw = fs.readFileSync(filePath, 'utf8');
+  } catch {
+    return null;
+  }
+  if (!raw.startsWith('---')) return null;
+  const end = raw.indexOf('\n---', 3);
+  if (end < 0) return null;
+  const fm = raw.slice(3, end);
+  const get = (key) => {
+    const m = fm.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'));
+    if (!m) return null;
+    let v = m[1].trim();
+    if (
+      (v.startsWith('"') && v.endsWith('"')) ||
+      (v.startsWith("'") && v.endsWith("'"))
+    ) {
+      v = v.slice(1, -1);
+    }
+    return v;
+  };
+  const url = get('url');
+  if (!url) return null;
+  let source = get('source') || '';
+  source = source.replace(/^["']|["']$/g, '').toLowerCase();
+  return {
+    title: get('title') || '',
+    url,
+    source,
+    why_hot: get('why_hot') || '',
+    abstract_snippet: get('abstract_snippet') || '',
+    description: get('description') || '',
+  };
+}
+
+function loadSignalFile(filePath) {
+  if (filePath.endsWith('.json')) {
+    try {
+      const d = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      if (d && d.url && (d.why_hot || d.abstract_snippet || d.description)) {
+        return d;
+      }
+    } catch {
+      /* skip */
+    }
+    return null;
+  }
+  if (filePath.endsWith('.md')) return parseMdSignal(filePath);
+  return null;
+}
+
+function walkFiles(dir, out = []) {
+  if (!fs.existsSync(dir)) return out;
+  for (const name of fs.readdirSync(dir)) {
+    const p = path.join(dir, name);
+    let st;
+    try {
+      st = fs.statSync(p);
+    } catch {
+      continue;
+    }
+    if (st.isDirectory()) walkFiles(p, out);
+    else if (name.endsWith('.json') || name.endsWith('.md')) out.push(p);
+  }
+  return out;
+}
+
+/** Build normalizeUrl → signal[] index from archive (+ inbox). */
+function buildArchiveIndex() {
+  const index = new Map(); // norm -> signal[]
+  const files = [
+    ...walkFiles(ARCHIVE_DIR),
+    ...walkFiles(INBOX_DIR),
+  ];
+  for (const f of files) {
+    const sig = loadSignalFile(f);
+    if (!sig) continue;
+    const key = normalizeUrl(sig.url);
+    if (!key) continue;
+    if (!index.has(key)) index.set(key, []);
+    index.get(key).push(sig);
+  }
+  return index;
+}
+
+function loadBriefs() {
+  if (!fs.existsSync(BRIEFS_PATH)) return {};
+  try {
+    const raw = JSON.parse(fs.readFileSync(BRIEFS_PATH, 'utf8'));
+    return raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * Idempotent merge: never overwrite richer hand-written judgment / source briefs.
+ * Returns { briefs, stats }.
+ */
+function mergeBriefs(existing, id, candidate) {
+  const prev = existing[id] || null;
+  if (!prev) {
+    existing[id] = candidate;
+    return { created: true, enriched: false };
+  }
+  let enriched = false;
+  // judgment: keep richer; fill empty locales from candidate
+  const pj = prev.judgment || emptyLocale();
+  const cj = candidate.judgment || emptyLocale();
+  const nextJ = { ...emptyLocale(), ...pj };
+  if (judgmentRichness(cj) > judgmentRichness(pj)) {
+    // only replace empty locales from richer candidate, or take whole if prev empty
+    if (judgmentRichness(pj) === 0) {
+      Object.assign(nextJ, cj);
+      enriched = true;
+    } else {
+      for (const k of ['zh', 'en', 'ja']) {
+        if (!String(nextJ[k] || '').trim() && String(cj[k] || '').trim()) {
+          nextJ[k] = cj[k];
+          enriched = true;
+        }
+      }
+    }
+  } else {
+    for (const k of ['zh', 'en', 'ja']) {
+      if (!String(nextJ[k] || '').trim() && String(cj[k] || '').trim()) {
+        nextJ[k] = cj[k];
+        enriched = true;
+      }
+    }
+  }
+  // Never allow CJK into en/ja
+  nextJ.en = enSafe(nextJ.en);
+  nextJ.ja = enSafe(nextJ.ja);
+
+  // sources: merge by normalizeUrl / source+title; keep richer brief
+  const byKey = new Map();
+  const addSrc = (s) => {
+    if (!s) return;
+    const k =
+      normalizeUrl(s.url) ||
+      `${String(s.source || '').toLowerCase()}::${String(s.title || '').toLowerCase()}`;
+    if (!k || k === '::') return;
+    const prevS = byKey.get(k);
+    if (!prevS || sourceBriefRichness(s) > sourceBriefRichness(prevS)) {
+      const brief = { ...emptyLocale(), ...(s.brief || {}) };
+      brief.en = enSafe(brief.en);
+      brief.ja = enSafe(brief.ja);
+      byKey.set(k, {
+        source: String(s.source || '').toLowerCase() || 'other',
+        url: s.url || undefined,
+        title: s.title || undefined,
+        brief,
+      });
+    } else {
+      // fill empty locales on existing
+      const brief = { ...emptyLocale(), ...(prevS.brief || {}) };
+      const incoming = s.brief || {};
+      for (const loc of ['zh', 'en', 'ja']) {
+        if (!String(brief[loc] || '').trim() && String(incoming[loc] || '').trim()) {
+          brief[loc] = loc === 'zh' ? incoming[loc] : enSafe(incoming[loc]);
+        }
+      }
+      byKey.set(k, { ...prevS, brief });
+    }
+  };
+  for (const s of prev.sources || []) addSrc(s);
+  const before = byKey.size;
+  for (const s of candidate.sources || []) addSrc(s);
+  if (byKey.size > before) enriched = true;
+
+  existing[id] = {
+    judgment: nextJ,
+    sources: [...byKey.values()],
+  };
+  return { created: false, enriched };
+}
+
+/**
+ * Backfill briefs for a topic row from archive matches on externalUrls / title.
+ */
+function backfillFromArchive(row, archiveIndex) {
+  const urls = splitList(row.urls);
+  const matched = [];
+  const seen = new Set();
+  const consider = (sig) => {
+    if (!sig) return;
+    const k = normalizeUrl(sig.url);
+    if (!k || seen.has(k)) return;
+    seen.add(k);
+    matched.push(sig);
+  };
+  for (const u of urls) {
+    const hits = archiveIndex.get(normalizeUrl(u)) || [];
+    // Prefer the hit with richest why_hot / abstract
+    const best = [...hits].sort(
+      (a, b) =>
+        String(b.why_hot || '').length + String(b.abstract_snippet || '').length -
+        (String(a.why_hot || '').length + String(a.abstract_snippet || '').length),
+    )[0];
+    consider(best);
+  }
+  // Fallback: org/repo at start of title
+  const title = String(row.title || '').trim();
+  const repo = title.match(/^([A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+)/);
+  if (repo) {
+    const hits = archiveIndex.get(`gh:${repo[1].toLowerCase()}`) || [];
+    const best = hits[0];
+    consider(best);
+  }
+
+  const sources = matched.map((sig) => {
+    const brief = briefsFromSignal(sig);
+    const src = String(sig.source || '').toLowerCase() || 'other';
+    const entry = {
+      source: src,
+      url: sig.url || undefined,
+      title: sig.title || undefined,
+      brief,
+    };
+    return entry;
+  }).filter((s) => briefRichness(s.brief) > 0 || s.url);
+
+  const angle = String(row.angle || '').trim();
+  const judgment = emptyLocale();
+  judgment.zh = angle; // topics angle = 选题判断 (zh); never copy into en/ja
+
+  return { judgment, sources };
+}
+
+function localeFromBriefs(entry, fallbackZh) {
+  const j = entry?.judgment || emptyLocale();
+  const zh = String(j.zh || '').trim() || String(fallbackZh || '').trim();
+  const en = enSafe(j.en);
+  const ja = enSafe(j.ja);
+  return {
+    judgment: { zh, en, ja },
+    sourceBriefs: (entry?.sources || []).map((s) => ({
+      source: String(s.source || '').toLowerCase() || 'other',
+      ...(s.url ? { url: s.url } : {}),
+      ...(s.title ? { title: s.title } : {}),
+      brief: {
+        zh: String(s.brief?.zh || '').trim(),
+        en: enSafe(s.brief?.en),
+        ja: enSafe(s.brief?.ja),
+      },
+    })),
+  };
+}
+
+
 function build() {
   if (!fs.existsSync(TOPICS_MD)) {
     console.error(`topics.md not found: ${TOPICS_MD}`);
@@ -451,6 +798,11 @@ function build() {
   const md = fs.readFileSync(TOPICS_MD, 'utf8');
   const rows = parseTable(md);
   const blogMap = scanBlogSlugs();
+  const briefsStore = loadBriefs();
+  const archiveIndex = buildArchiveIndex();
+  let briefsCreated = 0;
+  let briefsEnriched = 0;
+  let briefsBackfilled = 0;
 
   // Refresh known overrides from blog frontmatter when present
   const t003Blog = blogMap.get('jev-claude-code-10x-and-25-lines');
@@ -490,8 +842,36 @@ function build() {
     const jaTitle =
       enTitle && !hasCJK(enTitle) ? enTitle : machineAsciiTitle(zhTitle);
 
-    const zhSummary = row.angle || row.notes || '';
-    // EN summary only from English blog description — never copy Chinese angle
+    // Briefs: use store if present; backfill from archive + angle when missing/thin
+    const hadBrief = Boolean(briefsStore[row.id]);
+    const existing = briefsStore[row.id];
+    const needsBackfill =
+      !hadBrief ||
+      !(existing.sources && existing.sources.length) ||
+      !String(existing.judgment?.zh || '').trim();
+    if (needsBackfill) {
+      const candidate = backfillFromArchive(row, archiveIndex);
+      if (!String(candidate.judgment.zh || '').trim()) {
+        candidate.judgment.zh = String(row.angle || row.notes || '').trim();
+      }
+      const r = mergeBriefs(briefsStore, row.id, candidate);
+      if (r.created) {
+        briefsCreated += 1;
+        briefsBackfilled += 1;
+      } else if (r.enriched) {
+        briefsEnriched += 1;
+        briefsBackfilled += 1;
+      }
+    }
+
+    const angle = String(row.angle || row.notes || '').trim();
+    const { judgment, sourceBriefs } = localeFromBriefs(
+      briefsStore[row.id],
+      angle,
+    );
+
+    // Compat summary: zh from judgment; en only from EN blog description
+    const zhSummary = judgment.zh || angle;
     const enSummary =
       meta?.descEn && !hasCJK(meta.descEn) ? meta.descEn : '';
     const jaSummary = ''; // no JA paraphrase yet
@@ -512,6 +892,8 @@ function build() {
         en: enSummary,
         ja: jaSummary,
       },
+      judgment,
+      sourceBriefs,
       sources: splitList(row.sources).map((s) => s.toLowerCase()),
       score: Number(row.score) || 0,
       status: (row.status || 'inbox').toLowerCase(),
@@ -527,6 +909,14 @@ function build() {
     }
     items.push(item);
   }
+
+  // Persist briefs (idempotent merge already applied in-memory)
+  fs.mkdirSync(path.dirname(BRIEFS_PATH), { recursive: true });
+  fs.writeFileSync(
+    BRIEFS_PATH,
+    JSON.stringify(briefsStore, null, 2) + '\n',
+    'utf8',
+  );
 
   const byHour = new Map();
   for (const item of items) {
@@ -591,9 +981,18 @@ function build() {
   const total = hours.reduce((n, h) => n + h.items.length, 0);
   const withEn = items.filter((i) => i.title.en).length;
   const withBlog = items.filter((i) => i.blog).length;
+  const withBriefs = items.filter(
+    (i) => Array.isArray(i.sourceBriefs) && i.sourceBriefs.length > 0,
+  ).length;
+  const withJudgment = items.filter((i) => i.judgment && i.judgment.zh).length;
+  const emptyBriefs = total - withBriefs;
   console.log(
     `Wrote ${OUT_PATH} — ${hours.length} hour(s), ${total} item(s), enTitles=${withEn}, blogs=${withBlog}, updatedAt=${nowLabel}`,
   );
+  console.log(
+    `  briefs: sourceBriefs=${withBriefs} empty=${emptyBriefs} judgment=${withJudgment} created=${briefsCreated} enriched=${briefsEnriched} backfilledOps=${briefsBackfilled}`,
+  );
+  console.log(`  briefs file: ${BRIEFS_PATH} (${Object.keys(briefsStore).length} keys)`);
   console.log('  themes:', JSON.stringify(themeCounts));
   for (const h of hours) {
     console.log(`  ${h.hourStart} → ${h.items.length} items`);

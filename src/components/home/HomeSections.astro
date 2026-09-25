@@ -78,6 +78,7 @@ type ChaosDigestItem = {
   theme?: string;
   title: { zh?: string; en?: string; ja?: string };
   summary: { zh?: string; en?: string; ja?: string };
+  judgment?: { zh?: string; en?: string; ja?: string };
   sources: string[];
   score: number;
   status: string;
@@ -96,12 +97,16 @@ function chaosLocaleTitle(item: ChaosDigestItem): string | null {
   if (hasCJK(t) && asciiRatio(t) < 0.7) return null;
   return t;
 }
-function chaosLocaleSummary(item: ChaosDigestItem): string {
-  const s = (item.summary?.[digestLang] || '').trim();
+function chaosLocaleBlob(blob: { zh?: string; en?: string; ja?: string } | undefined): string {
+  const s = (blob?.[digestLang] || '').trim();
   if (!s) return '';
   if (digestLang === 'zh') return s;
   if (hasCJK(s) && asciiRatio(s) < 0.7) return '';
   return s;
+}
+/** Homepage teaser: judgment one-liner only (prefer judgment, fall back to summary). Never externalUrls. */
+function chaosLocaleSummary(item: ChaosDigestItem): string {
+  return chaosLocaleBlob(item.judgment) || chaosLocaleBlob(item.summary);
 }
 function chaosBlogHref(item: ChaosDigestItem): string | null {
   if (!item.blog) return null;
