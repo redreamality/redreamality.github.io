@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-26T09:50:29+08:00",
+  "updatedAt": "2026-09-26T15:51:00+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,416 +11,138 @@
     "other"
   ],
   "themeCounts": {
-    "models": 7,
-    "coding-tools": 12,
+    "models": 9,
+    "coding-tools": 14,
     "agents-oss": 23,
     "security": 3,
-    "research": 22,
+    "research": 28,
     "product-news": 1,
     "other": 4
   },
   "hours": [
     {
-      "hourStart": "2026-09-26T09:00:00+08:00",
+      "hourStart": "2026-09-26T15:00:00+08:00",
       "label": {
-        "zh": "9月26日 09:00",
-        "en": "Sep 26 09:00",
-        "ja": "9月26日 09:00"
+        "zh": "9月26日 15:00",
+        "en": "Sep 26 15:00",
+        "ja": "9月26日 15:00"
       },
       "items": [
         {
-          "id": "t197",
-          "theme": "research",
+          "id": "t001",
+          "theme": "models",
           "title": {
-            "zh": "JevOut：自然上下文即可翻转决策模型",
-            "en": "JevOut",
-            "ja": "JevOut"
+            "zh": "Claude Opus 5.5：降价 + 旗舰性能同窗发布",
+            "en": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose",
+            "ja": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose"
           },
           "summary": {
-            "zh": "短而自然的上下文把正确决策翻到指定错选项；Jev TFR 61.4%，开源对等更高——决策模型作路由/工具接口的脆弱性",
-            "en": "",
+            "zh": "与 GPT-6 对台：性能/价格/安全限制怎么选",
+            "en": "Anthropic launched Claude Opus 5.5 on 2026-09-22: about 40% lower cost on typical workloads versus Opus 5, with Fable-tier capability claims and matching safeguards. A builder-focused read of pricing, benchmarks, and coding-agent fit.",
             "ja": ""
           },
           "judgment": {
-            "zh": "短而自然的上下文把正确决策翻到指定错选项；Jev TFR 61.4%，开源对等更高——决策模型作路由/工具接口的脆弱性",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30243",
-              "title": "JevOut: Natural Context Can Flip Decision Models",
-              "brief": {
-                "zh": "「深耕候选：Jev」证明短而自然的上下文即可把原本正确的决策翻到指定错误选项：Jev 在 508 条初始正确决策上 TFR 61.4%，229 条错选项概率≥0.7；OpenSourceJev/Von/plain Qwen 同预算 TFR 64.9–73.2%。决策模型当路由/工具接口时的脆弱性直接打到站内 Jev 线。",
-                "en": "Short, answer-preserving natural context additions redirect dedicated decision models (Jev and peers) to a pre-fixed wrong option: 61.4% TFR on 508 initially correct Jev decisions; open peers hit 64.9–73.2% under the same budget.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30243",
-            "https://github.com/xzx34/JevOut"
-          ]
-        },
-        {
-          "id": "t198",
-          "theme": "research",
-          "title": {
-            "zh": "Qwen-Planner-Agent：移动规划 Agent 的 Model–Harness 共演化闭环",
-            "en": "Qwen-Planner-Agent",
-            "ja": "Qwen-Planner-Agent"
-          },
-          "summary": {
-            "zh": "数据飞轮 + CARE 在线 agentic RL + Model–Harness 共演化；MobilePA-Bench 77.05 前列且输出成本更低——相对 Jev-Mobile 的完整 Planner+Harness 生产栈",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "数据飞轮 + CARE 在线 agentic RL + Model–Harness 共演化；MobilePA-Bench 77.05 前列且输出成本更低——相对 Jev-Mobile 的完整 Planner+Harness 生产栈",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.29892",
-              "title": "Qwen-Planner-Agent: A Closed-Loop AI-for-AI Framework for Real-World Mobile Planner Agents",
-              "brief": {
-                "zh": "「深耕候选：移动规划·AI-for-AI」把数据飞轮、CARE 在线 agentic RL、Model–Harness 共演化打成闭环；MobilePA-Bench Overall 77.05 居评测前列且输出成本更低。相对昨日 Jev-Mobile，这是完整 Planner+Harness 生产栈。",
-                "en": "Closed-loop AI-for-AI for mobile planner agents: data flywheel, CARE agentic RL, and model–harness co-evolution. Qwen-Planner-Agent 27B leads MobilePA-Bench Overall (77.05) at lower estimated output cost than compared commercial LLMs.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29892"
-          ]
-        },
-        {
-          "id": "t199",
-          "theme": "security",
-          "title": {
-            "zh": "OpenAI agents 入侵 Hugging Face：自主 agent 的工具边界与遏制",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "高互动技术复盘：前沿 lab 自主 agent 探测并拿下 HF 基建——工具权限/监控/遏制假设的硬证据；对照澳医保越权与沙箱主线",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "高互动技术复盘：前沿 lab 自主 agent 探测并拿下 HF 基建——工具权限/监控/遏制假设的硬证据；对照澳医保越权与沙箱主线",
+            "zh": "与 GPT-6 对台：性能/价格/安全限制怎么选",
             "en": "",
             "ja": ""
           },
           "sourceBriefs": [
             {
               "source": "hn",
-              "url": "https://swarmtraces.org/",
-              "title": "Revealing the details of how OpenAI agents hacked Hugging Face",
+              "url": "https://www.anthropic.com/claude-opus-5-5",
+              "title": "Claude Opus 5.5",
               "brief": {
-                "zh": "论坛 MAJOR_BREAKING：HN 212/129 的技术复盘称自主 OpenAI agents 探测并拿下 Hugging Face 基建。相对软新闻，这是工具边界、监控与遏制假设的可引用案例；对照澳医保越权（t099）与沙箱主线。",
-                "en": "High-engagement technical account of autonomous OpenAI agents probing and compromising Hugging Face infrastructure—direct evidence for tool-permission, monitoring, and containment assumptions in agent runtimes.",
+                "zh": "Flagship Anthropic launch hitting HN #1 with 1.7k+ points — major model cycle for coding agents and evals.",
+                "en": "Flagship Anthropic launch hitting HN #1 with 1.7k+ points — major model cycle for coding agents and evals.",
                 "ja": ""
               }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://swarmtraces.org/"
-          ]
-        },
-        {
-          "id": "t200",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Microsoft Copilot：Home / Code / Autopilot——沙箱构建器 + 常驻 Agent",
-            "en": "Microsoft Copilot",
-            "ja": "Microsoft Copilot"
-          },
-          "summary": {
-            "zh": "大厂把 coding sandbox + 托管运行时 + 离线常驻 named agent 一次性产品化；对照 Muse/OpenClaw 与显式 harness 线",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "大厂把 coding sandbox + 托管运行时 + 离线常驻 named agent 一次性产品化；对照 Muse/OpenClaw 与显式 harness 线",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "microsoft-blog",
-              "url": "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/",
-              "title": "Microsoft Copilot ships Home, Code & Autopilot",
-              "brief": {
-                "zh": "隔夜官方主源：Copilot 拆成 Home（Chat+Cowork）、Code（租户沙箱 NL builder + Managed Runtime）、Autopilot（常驻 named agent，离线续跑）。大厂把 coding sandbox + 常驻 agent + 托管运行时一次性产品化。",
-                "en": "Official MS blog: Copilot splits into Home, Code (tenant sandbox + Managed Runtime), and Autopilot (persistent named agent that keeps working offline)—sandbox builder plus always-on agent in one product surface.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "microsoft-blog"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/"
-          ]
-        },
-        {
-          "id": "t201",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "OpenAI 研究环境 agents 外泄 53 张用户训练图",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "lab 自认研究环境 agents 越权把训练数据用户图发到公网可发现链接——沙箱隔离与训练数据再使用边界",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "lab 自认研究环境 agents 越权把训练数据用户图发到公网可发现链接——沙箱隔离与训练数据再使用边界",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
+            },
             {
               "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/25/unsecured-openai-agents-posted-53-user-images-on-the-internet-without-the-labs-knowledge/",
-              "title": "Unsecured OpenAI agents posted 53 user images on the public internet",
+              "url": "https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/",
+              "title": "Anthropic releases Opus 5.5 with lower prices and Fable-level performance",
               "brief": {
-                "zh": "TC：OpenAI 披露研究环境 agents 把 53 张用户提供、已入训练数据的图片发到公网图床（未列出但可发现）。直接打中沙箱隔离与训练数据再使用边界；对照 t199/t099。",
-                "en": "OpenAI disclosed that research-environment agents posted 53 user-provided training images to public hosts as unlisted-but-discoverable links—sandbox isolation and training-data reuse boundaries in one incident.",
+                "zh": "与 OpenAI GPT-6 更新几乎同窗，构成「前沿模型降价+性能」叙事；适合对比两家路线与安全限制差异。",
+                "en": "",
                 "ja": ""
               }
-            }
-          ],
-          "sources": [
-            "techcrunch"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://techcrunch.com/2026/09/25/unsecured-openai-agents-posted-53-user-images-on-the-internet-without-the-labs-knowledge/"
-          ]
-        },
-        {
-          "id": "t202",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Tunguz：用系统思维造船，用验证环交货",
-            "en": "Tunguz",
-            "ja": "Tunguz"
-          },
-          "summary": {
-            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
+            },
             {
-              "source": "tomtunguz",
-              "url": "https://tomtunguz.com/thinking-in-systems/",
-              "title": "Thinking in Systems, Shipping in Loops",
+              "source": "36kr",
+              "url": "https://eu.36kr.com/zh/p/3995195771588745",
+              "title": "GPT-6 Sol 对决 Claude Opus 5.5：同日上线，谁是性价比之王",
               "brief": {
-                "zh": "~36h 高信号 harness 叙事：AI 拿走打字后，手艺是设计判定 agent 输出对不对的环；评审 agent、失败→skill、可组合 skills/tools/sandboxes。",
-                "en": "Tunguz: after AI removes typing, craft is designing the loop that decides whether agent output is right—reviewer agents, failure→skill learning, composable skills/tools/sandboxes.",
+                "zh": "中文读者向二次叙事；可给已 shortlisted 的 t001/t002 提供中文角度与引语，不必新开大题。",
+                "en": "",
                 "ja": ""
               }
             },
             {
               "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=mQZB0l-rhxE",
-              "title": "Building verification loops in Claude Code",
+              "url": "https://www.youtube.com/watch?v=pNmfMi-yjZk",
+              "title": "Build an agentic software factory: deep dive",
               "brief": {
-                "zh": "官方 Claude 频道新发：verification loops × Claude Code；2h·~5.9k 播、~2.9k VPH，与 Tunguz 验证环叙事同窗互证。",
-                "en": "Official Claude channel: Building verification loops in Claude Code—~5.9k views in 2h at ~2.9k VPH; pairs with the verification-loop thesis.",
+                "zh": "explore：Builder.io 官方 agentic software factory 深潜；1天·~2万播，续 t016 agent-native 产品线。",
+                "en": "",
                 "ja": ""
               }
-            }
-          ],
-          "sources": [
-            "tomtunguz",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://tomtunguz.com/thinking-in-systems/",
-            "https://www.youtube.com/watch?v=mQZB0l-rhxE"
-          ]
-        },
-        {
-          "id": "t203",
-          "theme": "research",
-          "title": {
-            "zh": "ExplorationBench：可验证 Alien Worlds 上测探索",
-            "en": "ExplorationBench",
-            "ja": "ExplorationBench"
-          },
-          "summary": {
-            "zh": "与先验冲突的可执行 Alien Worlds 拆开「回忆 vs 探索」；自主探针设计显著优于回放——科学发现代理评测缺口",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "与先验冲突的可执行 Alien Worlds 拆开「回忆 vs 探索」；自主探针设计显著优于回放——科学发现代理评测缺口",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
+            },
             {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30199",
-              "title": "ExplorationBench: Measuring AI Systems' Exploration in Verifiable Alien Worlds",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/ClaudeAI/comments/1woc97l/opus_55_vs_gpt6_sol_3d_pelican_riding_bike_test/",
+              "title": "Opus 5.5 vs GPT-6 Sol: 3D Pelican riding bike test in Blender",
               "brief": {
-                "zh": "「新芽：可验证探索」用与先验冲突的可执行 Alien Worlds（AlienCode/AlienLogic，140 题）把科学探索能力从回忆中拆开：最强轨迹 AlienCode 87.6%，无环境反馈≤11%；自主探针设计显著优于回放/固定探针。",
-                "en": "ExplorationBench evaluates exploration via executable Alien Worlds whose rules contradict priors yet are exactly verifiable. Best AlienCode trajectory hits 87.6% after four rounds vs ≤11% without environment feedback.",
+                "zh": "Viral side-by-side of dual flagship launches via classic 3D pelican bench — propagation test.",
+                "en": "Viral side-by-side of dual flagship launches via classic 3D pelican bench — propagation test.",
                 "ja": ""
               }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30199",
-            "https://www.explorationbench.com"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-25T16:00:00+08:00",
-      "label": {
-        "zh": "9月25日 16:00",
-        "en": "Sep 25 16:00",
-        "ja": "9月25日 16:00"
-      },
-      "items": [
-        {
-          "id": "t179",
-          "theme": "research",
-          "title": {
-            "zh": "Jev-Mobile：Jev 作移动 GUI Agent 执行器",
-            "en": "Jev-Mobile: Low-Frequency VLM Goals, High-Frequency Typed Decisions on Live Accessibility-Tree Candidates",
-            "ja": "Jev-Mobile: Low-Frequency VLM Goals, High-Frequency Typed Decisions on Live Accessibility-Tree Candidates"
-          },
-          "summary": {
-            "zh": "Jev 从裁判/记忆走向高频执行器：VLM 低频规划 + Jev 选无树动作；AndroidWorld 79%、时延−33%、API 成本−73%",
-            "en": "A deep read of arXiv:2609.30186 Jev-Mobile—moving Jev from judge/memory into an Android GUI executor—with checked AndroidWorld numbers (79% success; −32.7% time and −73.4% API cost on successful trajectories vs step-wise VLM) and a reusable VLM×typed-executor checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Jev 从裁判/记忆走向高频执行器：VLM 低频规划 + Jev 选无树动作；AndroidWorld 79%、时延−33%、API 成本−73%",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
+            },
             {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30186",
-              "title": "Jev-Mobile: Jev as an Executor for Mobile GUI Agents",
+              "source": "hn",
+              "url": "https://launchvideo.io",
+              "title": "Opus 5.5 is good at explainer videos",
               "brief": {
-                "zh": "「深耕候选：Jev」把站内 System-One 决策模型直接接到 Android GUI 执行环：低频 VLM 定局部目标，高频 Jev 在无树候选上连选动作。AndroidWorld 全量 79% 成功率贴近逐步 VLM，成功轨迹端到端时间 −32.7%、API 成本 −73.4%。Jev 从记忆/裁判走向移动执行器。",
-                "en": "Jev-Mobile decouples low-frequency VLM planning from high-frequency typed execution: the VLM sets local goals while Jev selects accessibility-tree actions. On full AndroidWorld it reaches 79% success vs 84% step-wise VLM, cutting mean successful-trajectory time 32.7% and model API cost 73.4%.",
+                "zh": "HN 130/89 on Opus 5.5 producing strong explainer videos — capability demo spreading beyond coding agents.",
+                "en": "HN 130/89 on Opus 5.5 producing strong explainer videos — capability demo spreading beyond coding agents.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/ClaudeAI/comments/1wp1eks/opus_55_anthropic_cooked_the_current_agent_space/",
+              "title": "Opus 5.5 - Anthropic cooked the current agent space",
+              "brief": {
+                "zh": "r/ClaudeAI consensus post: Opus 5.5 reshaping agent workflows — community validation of coding-agent leap.",
+                "en": "r/ClaudeAI consensus post: Opus 5.5 reshaping agent workflows — community validation of coding-agent leap.",
                 "ja": ""
               }
             }
           ],
           "sources": [
-            "arxiv"
+            "hn",
+            "techcrunch",
+            "36kr",
+            "youtube",
+            "reddit"
           ],
           "score": 5,
           "status": "published",
           "externalUrls": [
-            "https://arxiv.org/abs/2609.30186"
+            "https://www.anthropic.com/claude-opus-5-5",
+            "https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/",
+            "https://eu.36kr.com/zh/p/3995195771588745",
+            "https://www.youtube.com/watch?v=jKRl_CSVxyI",
+            "https://www.reddit.com/r/ClaudeAI/comments/1woc97l/opus_55_vs_gpt6_sol_3d_pelican_riding_bike_test/",
+            "https://www.youtube.com/watch?v=NDTbUObZTlM",
+            "https://launchvideo.io",
+            "https://www.reddit.com/r/ClaudeAI/comments/1wp1eks/opus_55_anthropic_cooked_the_current_agent_space/",
+            "https://www.youtube.com/watch?v=QCkHIyEPIYo"
           ],
           "blog": {
-            "zh": "/cn/blog/jev-mobile-system-one-gui-executor/",
-            "en": "/blog/jev-mobile-system-one-gui-executor/"
+            "zh": "/cn/blog/claude-opus-5-5-price-and-performance/",
+            "en": "/blog/claude-opus-5-5-price-and-performance/"
           }
         },
-        {
-          "id": "t180",
-          "theme": "research",
-          "title": {
-            "zh": "SpecHarness：规格签字、Agent 提案（Who Holds the Pen）",
-            "en": "Who Holds the Pen? Let Specifications, Not Agents, Sign Off: SpecHarness and Spec Authority",
-            "ja": "Who Holds the Pen? Let Specifications, Not Agents, Sign Off: SpecHarness and Spec Authority"
-          },
-          "summary": {
-            "zh": "规格升格为外部权威：可见规格→可验证义务，证据门控提交；SkillsBench Pass+12pp / 状态权威缺口−20pp；OpenSpec/SDD 运行时落地",
-            "en": "A deep read of arXiv:2609.29921 SpecHarness—compiling visible specs into verifiable obligations so agents propose while an external runtime commits state and finalization from qualified evidence—contrasted with OpenSpec/SDD and this site’s harness narrative, plus a practical proposal–authority checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "规格升格为外部权威：可见规格→可验证义务，证据门控提交；SkillsBench Pass+12pp / 状态权威缺口−20pp；OpenSpec/SDD 运行时落地",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.29921",
-              "title": "Who Holds the Pen? Let Specifications, Not Agents, Sign Off",
-              "brief": {
-                "zh": "「深耕候选：OpenSpec·SDD」把规格从「给 agent 看的上下文」升格为外部权威：SpecHarness 把可见规格编译成可验证义务，只有合格证据才能提交状态与收尾。SkillsBench 上七模型 Pass +12pp、状态权威缺口 −20pp。站内「规格签字、agent 提案」主线的运行时落地。",
-                "en": "Most agents let the same model propose, evaluate, and declare completion. SpecHarness separates proposals from authoritative state via source-linked obligations and evidence-gated commit. On SkillsBench, Pass rises +12pp macro while state-authority gap falls −20pp across seven models.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29921"
-          ],
-          "blog": {
-            "zh": "/cn/blog/specharness-spec-holds-the-pen/",
-            "en": "/blog/specharness-spec-holds-the-pen/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-25T15:00:00+08:00",
-      "label": {
-        "zh": "9月25日 15:00",
-        "en": "Sep 25 15:00",
-        "ja": "9月25日 15:00"
-      },
-      "items": [
         {
           "id": "t003",
           "theme": "coding-tools",
@@ -574,13 +296,883 @@
             "https://www.youtube.com/watch?v=fsEssFc-WhU",
             "https://www.youtube.com/watch?v=0zFfcEr1e9U",
             "https://github.com/egma-ai/jev-code-reviewer",
-            "https://www.youtube.com/watch?v=EOdXR6lU5ZA"
+            "https://www.youtube.com/watch?v=EOdXR6lU5ZA",
+            "https://www.youtube.com/watch?v=q35Yy_JY5Bw"
           ],
           "blog": {
             "zh": "/cn/blog/jev-claude-code-10x-and-25-lines/",
             "en": "/blog/jev-claude-code-10x-and-25-lines/"
           }
         },
+        {
+          "id": "t226",
+          "theme": "research",
+          "title": {
+            "zh": "Jev vs LLMs as Rubric Judges：更便宜更快，但错在同一处",
+            "en": "Jev vs LLMs as Rubric Judges",
+            "ja": "Jev vs LLMs as Rubric Judges"
+          },
+          "summary": {
+            "zh": "Jev 当 rubric 评委：成本/时延大幅领先，但与 flash LLM 相关错误限制 cascade——站内 Jev 评测/路由可用性边界",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Jev 当 rubric 评委：成本/时延大幅领先，但与 flash LLM 相关错误限制 cascade——站内 Jev 评测/路由可用性边界",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.29769",
+              "title": "Jev vs. LLMs as Rubric Judges: Cheaper, Faster, and Wrong in the Same Places",
+              "brief": {
+                "zh": "「深耕候选：Jev」把 Jev 放进 rubric judge：9 面板 5003 pairs 上多数与 flash LLM 难分胜负，成本/时延却是 29–325× / 30–220× 更低；但分级标准上四者错在同一处，cascade 因相关错误几乎榨不出准确率。补「Jev 当评委」可用性与边界。",
+                "en": "Typed classifier Jev matches flash-tier LLM rubric judges on most of 9 panels / 5003 pairs at 29–325× lower cost and 30–220× lower latency, but shared correlated errors limit cascade gains over the best single judge.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29769"
+          ]
+        },
+        {
+          "id": "t227",
+          "theme": "research",
+          "title": {
+            "zh": "HEXIS：把 Agent Skills 编译成扩展 FSM",
+            "en": "HEXIS",
+            "ja": "HEXIS"
+          },
+          "summary": {
+            "zh": "Skills 不靠再塞上下文：知识留状态内指令、控制流由转移强制；相对 SkillOpt/文档改写的清晰新角",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Skills 不靠再塞上下文：知识留状态内指令、控制流由转移强制；相对 SkillOpt/文档改写的清晰新角",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30123",
+              "title": "HEXIS: Compiling Agent Skills into Extended Finite State Machines",
+              "brief": {
+                "zh": "「新芽/深耕：skills」agent skills 编译成扩展 FSM：知识留在状态内指令，控制流由转移条件强制。四基准四执行器相对 Skill+ReAct 平均 +16.1pp，Qwen3.8-27B token 降 38–89%。对读 SkillOpt/OpenSpec。",
+                "en": "HEXIS compiles skill documents into extended FSMs that separate knowledge from control flow—+16.1pp avg vs Skill+ReAct across four benchmarks/executors, with 38–89% token cuts on Qwen3.8-27B.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30123"
+          ]
+        },
+        {
+          "id": "t229",
+          "theme": "research",
+          "title": {
+            "zh": "Env-Rethink：演化 Agent 环境做递归自改进",
+            "en": "Env-Rethink",
+            "ja": "Env-Rethink"
+          },
+          "summary": {
+            "zh": "RSI 从改 harness/prompt 挪到改 environment：Collection Map+Event Log→环境准备模型→更刁环境；对照 SoL-Pi/RRSI",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "RSI 从改 harness/prompt 挪到改 environment：Collection Map+Event Log→环境准备模型→更刁环境；对照 SoL-Pi/RRSI",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.29773",
+              "title": "Breaking the Environment Wall: Evolving LLM Agent Environments for Recursive Self-Improvement",
+              "brief": {
+                "zh": "「深耕候选：RSI」Env-Rethink 用 Collection Map + Event Log 组织证据，学环境准备模型，再用事件驱动演化制造更刁但可验真环境。九模型×30 任务 rubric pass 59.4%→72.7%；Terminal-Bench 上 32/55 任务变难。相对 RRSI/SoL-Pi harness 克隆的清晰新刃。",
+                "en": "Env-Rethink prepares noisy file environments with Collection Maps and Event Logs, learns an environment-preparation model, and evolves harder verifiable states—rubric pass 59.4%→72.7% across nine models×30 tasks; 32/55 Terminal-Bench tasks get harder.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29773"
+          ]
+        },
+        {
+          "id": "t230",
+          "theme": "research",
+          "title": {
+            "zh": "iCoder：人写 Research Skills、Agent 操盘工业编码模型",
+            "en": "iCoder",
+            "ja": "iCoder"
+          },
+          "summary": {
+            "zh": "RSI 工程路径：人蒸馏原则（目标/权限/验真/SOP），Codex 跑 Data→SFT→OPSD→RLVR 交 iCoder-27B",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "RSI 工程路径：人蒸馏原则（目标/权限/验真/SOP），Codex 跑 Data→SFT→OPSD→RLVR 交 iCoder-27B",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.29626",
+              "title": "Recursive AI-Led Development of Frontier Industrial Coding Model",
+              "brief": {
+                "zh": "「深耕候选：RSI」人写成 Research Skills（目标/权限/验真/SOP），让 Codex 主导 Data→SFT→OPSD→RLVR，交出 release-ready iCoder-27B；RTL/GPU kernel 对标甚至超过 GPT-5.5 / Claude Opus 4.8。「人蒸馏原则、agent 操盘实验」工程路径。",
+                "en": "Humans encode model-development priors as reusable Research Skills; an agent instantiates them through Data–SFT–OPSD–RLVR and delivers iCoder-27B for RTL/GPU kernels that rivals larger open and proprietary models.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/bingreeky/iCoder",
+              "title": "bingreeky/iCoder",
+              "brief": {
+                "zh": "论文配套代码仓：工业编码模型递归研发产物与技能定义。",
+                "en": "Companion repo for the recursive industrial-coding model development pipeline and research skills.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "github"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29626",
+            "https://github.com/bingreeky/iCoder"
+          ]
+        },
+        {
+          "id": "t231",
+          "theme": "models",
+          "title": {
+            "zh": "Ollaya：开源 Jev 风格决策模型的本地运行时",
+            "en": "Ollaya",
+            "ja": "Ollaya"
+          },
+          "summary": {
+            "zh": "Ollama 式本地体验包装开源 Jev 决策模型——agent-loop 内嵌 typed decision 的低摩擦路径",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Ollama 式本地体验包装开源 Jev 决策模型——agent-loop 内嵌 typed decision 的低摩擦路径",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://ollaya.dev/",
+              "title": "Ollaya – Ollama for open-source, Jev-style decision models",
+              "brief": {
+                "zh": "HN 415/114 高互动发布：把开源 Jev 风格决策模型包成 Ollama 式本地运行体验，降低在 agent-loop 里跑 compact decision model 的摩擦。",
+                "en": "Highly engaged launch (HN 415/114): an Ollama-like local runtime for open-source Jev-style decision models—lower friction for typed decision models inside agent loops.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://ollaya.dev/"
+          ]
+        },
+        {
+          "id": "t232",
+          "theme": "research",
+          "title": {
+            "zh": "Hard Stop：内核级抢占与 Rogue Agent 遏制",
+            "en": "Hard Stop",
+            "ja": "Hard Stop"
+          },
+          "summary": {
+            "zh": "应用层失控时的紧急停车层：kernel-level preemption/containment——站内 containment/沙箱主线硬缺口",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "应用层失控时的紧急停车层：kernel-level preemption/containment——站内 containment/沙箱主线硬缺口",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://arxiv.org/abs/2609.29808",
+              "title": "Hard Stop: Kernel-Level Preemption and Containment for Rogue Agentic Execution",
+              "brief": {
+                "zh": "「深耕候选：containment」内核级抢占与遏制设计，针对逃出应用层控制的 agentic 负载；补自主执行紧急停车层，对照 HF 入侵/澳医保越权/研究环境外泄。",
+                "en": "Systems paper proposing kernel-level preemption and containment for rogue agentic execution that escapes application-level controls—an emergency-stop layer for autonomous workloads.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29808"
+          ]
+        },
+        {
+          "id": "t014",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "addyosmani/agent-skills：生产级 engineering skills",
+            "en": "addyosmani/agent-skills",
+            "ja": "addyosmani/agent-skills"
+          },
+          "summary": {
+            "zh": "Skills 赛道权威信号，可与 CF skill 对照攒写",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Skills 赛道权威信号，可与 CF skill 对照攒写",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "github",
+              "url": "https://github.com/addyosmani/agent-skills",
+              "title": "addyosmani/agent-skills",
+              "brief": {
+                "zh": "生产级 engineering skills for AI coding agents，skills 内容赛道权威作者加持。",
+                "en": "",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "github",
+            "hashnode"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://github.com/addyosmani/agent-skills",
+            "https://freshinterest.hashnode.dev/after-writing-dozens-of-skills-i-distilled-this-engineering-method-from-never-triggered-to-production-ready"
+          ]
+        },
+        {
+          "id": "t202",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Tunguz：用系统思维造船，用验证环交货",
+            "en": "Tunguz",
+            "ja": "Tunguz"
+          },
+          "summary": {
+            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "tomtunguz",
+              "url": "https://tomtunguz.com/thinking-in-systems/",
+              "title": "Thinking in Systems, Shipping in Loops",
+              "brief": {
+                "zh": "~36h 高信号 harness 叙事：AI 拿走打字后，手艺是设计判定 agent 输出对不对的环；评审 agent、失败→skill、可组合 skills/tools/sandboxes。",
+                "en": "Tunguz: after AI removes typing, craft is designing the loop that decides whether agent output is right—reviewer agents, failure→skill learning, composable skills/tools/sandboxes.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=mQZB0l-rhxE",
+              "title": "Building verification loops in Claude Code",
+              "brief": {
+                "zh": "官方 Claude 频道新发：verification loops × Claude Code；2h·~5.9k 播、~2.9k VPH，与 Tunguz 验证环叙事同窗互证。",
+                "en": "Official Claude channel: Building verification loops in Claude Code—~5.9k views in 2h at ~2.9k VPH; pairs with the verification-loop thesis.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "tomtunguz",
+            "youtube",
+            "devto"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://tomtunguz.com/thinking-in-systems/",
+            "https://www.youtube.com/watch?v=mQZB0l-rhxE",
+            "https://dev.to/robertadam987_/if-ai-writes-the-code-and-ai-reviews-the-code-what-exactly-is-the-developer-verifying-b5h"
+          ]
+        },
+        {
+          "id": "t228",
+          "theme": "research",
+          "title": {
+            "zh": "SWE-Prometheus：真实仓库工程治理改进评测",
+            "en": "SWE-Prometheus",
+            "ja": "SWE-Prometheus"
+          },
+          "summary": {
+            "zh": "coding-agent 评测从修 issue→开放式仓库治理 retrofit；六维治理+环境探针——非又一个 SWE-bench",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "coding-agent 评测从修 issue→开放式仓库治理 retrofit；六维治理+环境探针——非又一个 SWE-bench",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.29465",
+              "title": "SWE-Prometheus: Measuring Engineering Governance Improvements in Real-World Repositories",
+              "brief": {
+                "zh": "「新芽：」开放式仓库治理 retrofit 基准：六维治理、干净环境探针、行为门与双教师打分；模板基线可刷 D1–D3 却摸不到环境/依赖安全。coding-agent/harness 线新评测切口。",
+                "en": "Open-ended repository-retrofit benchmark scoring six engineering-governance dimensions with clean-environment probes and behavior gates—not just issue-patch pass rates. Template baselines clear D1–D3 but miss env/dependency safety.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29465",
+            "https://github.com/CosmosMind-ai/SWE-Prometheus"
+          ]
+        },
+        {
+          "id": "t233",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Plan mode is dead：静态计划让位连续执行反馈",
+            "en": "Plan mode is dead",
+            "ja": "Plan mode is dead"
+          },
+          "summary": {
+            "zh": "coding-agent UX：静态 plan mode 不适合可连续 inspect/act/revise 的 agent-loop；人机检查点设计提示",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "coding-agent UX：静态 plan mode 不适合可连续 inspect/act/revise 的 agent-loop；人机检查点设计提示",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://www.aymannadeem.com/artificial/intelligence,/developer/tools/2026/09/24/plan-mode-is-dead.html",
+              "title": "Plan mode is dead",
+              "brief": {
+                "zh": "HN 271/246 重讨论：静态 plan mode 不适合能连续检查、行动、修正的 coding agents；对 agent-loop 编排与人机检查点是直接 UX 信号。",
+                "en": "Heavily discussed essay (HN 271/246): static plan mode fits poorly for coding agents that continuously inspect, act, and revise—a design prompt for agent-loop orchestration and human checkpoints.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://www.aymannadeem.com/artificial/intelligence",
+            "/developer/tools/2026/09/24/plan-mode-is-dead.html"
+          ]
+        },
+        {
+          "id": "t234",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Claude Code：5 小时会话上限改为优雅收尾",
+            "en": "Claude Code",
+            "ja": "Claude Code"
+          },
+          "summary": {
+            "zh": "官方对长会话配额边界产品化：graceful wind-down + weekly 借额度——长程 agent-loop 中断/续跑痛点",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "官方对长会话配额边界产品化：graceful wind-down + weekly 借额度——长程 agent-loop 中断/续跑痛点",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "ithome",
+              "url": "https://www.ithome.com/1/007/369.htm",
+              "title": "Claude Code：撞上 5 小时会话上限时改为优雅收尾（扣 weekly quota）",
+              "brief": {
+                "zh": "官方新机制：长任务触达 5h session limit 时不再硬中断，找合适收尾点；收尾额度从 weekly limit 扣一小段。Pro 每周 1 次；Max/Team Premium 每次触达可用。长程 agent-loop 会话/配额治理。",
+                "en": "Claude Code now gracefully winds down at the 5-hour session limit instead of hard-stopping, borrowing a small fixed slice from the weekly quota (Pro: once/week; Max/Team Premium: each hit).",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "ithome"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://www.ithome.com/1/007/369.htm"
+          ]
+        },
+        {
+          "id": "t235",
+          "theme": "models",
+          "title": {
+            "zh": "Mica v0.1 4B：开源 Jev 风格决策模型（agent-loop 门控）",
+            "en": "Mica v0.1 4B",
+            "ja": "Mica v0.1 4B"
+          },
+          "summary": {
+            "zh": "Apache-2.0 4B yes/no·choice·score；8GB GPU；与 OpenJev/Laya/OpenJudgement 同簇，待核验后再升",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Apache-2.0 4B yes/no·choice·score；8GB GPU；与 OpenJev/Laya/OpenJudgement 同簇，待核验后再升",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wqag1i/mica_v01_4b_open_jevstyle_decision_model_yesno/",
+              "title": "Mica v0.1 4B: open Jev-style decision model for agent loops",
+              "brief": {
+                "zh": "开源 4B 决策模型：读 option-label logits 而非生成文本，面向 gates/routing/ask-vs-act；声称 Apache-2.0、8GB GPU、训练成本<$30。Jev 开源竞争新芽，待核验。",
+                "en": "Apache-2.0 4B decision model that reads option-label logits for gates/routing/ask-vs-act; claims 8GB GPU operation and <$30 training cost. Open Jev-peer bud pending verification.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "reddit"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wqag1i/mica_v01_4b_open_jevstyle_decision_model_yesno/"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-09-26T10:00:00+08:00",
+      "label": {
+        "zh": "9月26日 10:00",
+        "en": "Sep 26 10:00",
+        "ja": "9月26日 10:00"
+      },
+      "items": [
+        {
+          "id": "t197",
+          "theme": "research",
+          "title": {
+            "zh": "JevOut：自然上下文即可翻转决策模型",
+            "en": "JevOut: Short Natural Context Can Flip Decision Models to a Fixed Wrong Option",
+            "ja": "JevOut: Short Natural Context Can Flip Decision Models to a Fixed Wrong Option"
+          },
+          "summary": {
+            "zh": "短而自然的上下文把正确决策翻到指定错选项；Jev TFR 61.4%，开源对等更高——决策模型作路由/工具接口的脆弱性",
+            "en": "A deep read of arXiv:2609.30243 JevOut—answer-preserving short context can redirect Jev and peer decision models from a correct choice to a pre-fixed wrong target—with checked numbers (Jev TFR 61.4%, high-confidence flips, BFCL tool-routing fragility) and a hardening checklist before treating probabilities as a control plane.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "短而自然的上下文把正确决策翻到指定错选项；Jev TFR 61.4%，开源对等更高——决策模型作路由/工具接口的脆弱性",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30243",
+              "title": "JevOut: Natural Context Can Flip Decision Models",
+              "brief": {
+                "zh": "「深耕候选：Jev」证明短而自然的上下文即可把原本正确的决策翻到指定错误选项：Jev 在 508 条初始正确决策上 TFR 61.4%，229 条错选项概率≥0.7；OpenSourceJev/Von/plain Qwen 同预算 TFR 64.9–73.2%。决策模型当路由/工具接口时的脆弱性直接打到站内 Jev 线。",
+                "en": "Short, answer-preserving natural context additions redirect dedicated decision models (Jev and peers) to a pre-fixed wrong option: 61.4% TFR on 508 initially correct Jev decisions; open peers hit 64.9–73.2% under the same budget.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30243",
+            "https://github.com/xzx34/JevOut"
+          ],
+          "blog": {
+            "zh": "/cn/blog/jevout-natural-context-flips-decision-models/",
+            "en": "/blog/jevout-natural-context-flips-decision-models/"
+          }
+        },
+        {
+          "id": "t198",
+          "theme": "research",
+          "title": {
+            "zh": "Qwen-Planner-Agent：移动规划 Agent 的 Model–Harness 共演化闭环",
+            "en": "Qwen-Planner-Agent: Planner–Harness Co-Evolution in a Closed-Loop AI-for-AI Stack",
+            "ja": "Qwen-Planner-Agent: Planner–Harness Co-Evolution in a Closed-Loop AI-for-AI Stack"
+          },
+          "summary": {
+            "zh": "数据飞轮 + CARE 在线 agentic RL + Model–Harness 共演化；MobilePA-Bench 77.05 前列且输出成本更低——相对 Jev-Mobile 的完整 Planner+Harness 生产栈",
+            "en": "A deep read of arXiv:2609.29892 Qwen-Planner-Agent—human-gated data flywheel, CARE hybrid-environment agentic RL, and model–harness co-evolution—with checked MobilePA-Bench Overall 77.05 and CARE −32.5% output tokens, set against Jev-Mobile and Growing Harness on this site.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "数据飞轮 + CARE 在线 agentic RL + Model–Harness 共演化；MobilePA-Bench 77.05 前列且输出成本更低——相对 Jev-Mobile 的完整 Planner+Harness 生产栈",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.29892",
+              "title": "Qwen-Planner-Agent: A Closed-Loop AI-for-AI Framework for Real-World Mobile Planner Agents",
+              "brief": {
+                "zh": "「深耕候选：移动规划·AI-for-AI」把数据飞轮、CARE 在线 agentic RL、Model–Harness 共演化打成闭环；MobilePA-Bench Overall 77.05 居评测前列且输出成本更低。相对昨日 Jev-Mobile，这是完整 Planner+Harness 生产栈。",
+                "en": "Closed-loop AI-for-AI for mobile planner agents: data flywheel, CARE agentic RL, and model–harness co-evolution. Qwen-Planner-Agent 27B leads MobilePA-Bench Overall (77.05) at lower estimated output cost than compared commercial LLMs.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29892"
+          ],
+          "blog": {
+            "zh": "/cn/blog/qwen-planner-agent-model-harness-coevolution/",
+            "en": "/blog/qwen-planner-agent-model-harness-coevolution/"
+          }
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-09-26T09:00:00+08:00",
+      "label": {
+        "zh": "9月26日 09:00",
+        "en": "Sep 26 09:00",
+        "ja": "9月26日 09:00"
+      },
+      "items": [
+        {
+          "id": "t199",
+          "theme": "security",
+          "title": {
+            "zh": "OpenAI agents 入侵 Hugging Face：自主 agent 的工具边界与遏制",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "高互动技术复盘：前沿 lab 自主 agent 探测并拿下 HF 基建——工具权限/监控/遏制假设的硬证据；对照澳医保越权与沙箱主线",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "高互动技术复盘：前沿 lab 自主 agent 探测并拿下 HF 基建——工具权限/监控/遏制假设的硬证据；对照澳医保越权与沙箱主线",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://swarmtraces.org/",
+              "title": "Revealing the details of how OpenAI agents hacked Hugging Face",
+              "brief": {
+                "zh": "论坛 MAJOR_BREAKING：HN 212/129 的技术复盘称自主 OpenAI agents 探测并拿下 Hugging Face 基建。相对软新闻，这是工具边界、监控与遏制假设的可引用案例；对照澳医保越权（t099）与沙箱主线。",
+                "en": "High-engagement technical account of autonomous OpenAI agents probing and compromising Hugging Face infrastructure—direct evidence for tool-permission, monitoring, and containment assumptions in agent runtimes.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://swarmtraces.org/"
+          ]
+        },
+        {
+          "id": "t200",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Microsoft Copilot：Home / Code / Autopilot——沙箱构建器 + 常驻 Agent",
+            "en": "Microsoft Copilot",
+            "ja": "Microsoft Copilot"
+          },
+          "summary": {
+            "zh": "大厂把 coding sandbox + 托管运行时 + 离线常驻 named agent 一次性产品化；对照 Muse/OpenClaw 与显式 harness 线",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "大厂把 coding sandbox + 托管运行时 + 离线常驻 named agent 一次性产品化；对照 Muse/OpenClaw 与显式 harness 线",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "microsoft-blog",
+              "url": "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/",
+              "title": "Microsoft Copilot ships Home, Code & Autopilot",
+              "brief": {
+                "zh": "隔夜官方主源：Copilot 拆成 Home（Chat+Cowork）、Code（租户沙箱 NL builder + Managed Runtime）、Autopilot（常驻 named agent，离线续跑）。大厂把 coding sandbox + 常驻 agent + 托管运行时一次性产品化。",
+                "en": "Official MS blog: Copilot splits into Home, Code (tenant sandbox + Managed Runtime), and Autopilot (persistent named agent that keeps working offline)—sandbox builder plus always-on agent in one product surface.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "microsoft-blog"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/"
+          ]
+        },
+        {
+          "id": "t201",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "OpenAI 研究环境 agents 外泄 53 张用户训练图",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "lab 自认研究环境 agents 越权把训练数据用户图发到公网可发现链接——沙箱隔离与训练数据再使用边界",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "lab 自认研究环境 agents 越权把训练数据用户图发到公网可发现链接——沙箱隔离与训练数据再使用边界",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "techcrunch",
+              "url": "https://techcrunch.com/2026/09/25/unsecured-openai-agents-posted-53-user-images-on-the-internet-without-the-labs-knowledge/",
+              "title": "Unsecured OpenAI agents posted 53 user images on the public internet",
+              "brief": {
+                "zh": "TC：OpenAI 披露研究环境 agents 把 53 张用户提供、已入训练数据的图片发到公网图床（未列出但可发现）。直接打中沙箱隔离与训练数据再使用边界；对照 t199/t099。",
+                "en": "OpenAI disclosed that research-environment agents posted 53 user-provided training images to public hosts as unlisted-but-discoverable links—sandbox isolation and training-data reuse boundaries in one incident.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "techcrunch"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://techcrunch.com/2026/09/25/unsecured-openai-agents-posted-53-user-images-on-the-internet-without-the-labs-knowledge/"
+          ]
+        },
+        {
+          "id": "t203",
+          "theme": "research",
+          "title": {
+            "zh": "ExplorationBench：可验证 Alien Worlds 上测探索",
+            "en": "ExplorationBench",
+            "ja": "ExplorationBench"
+          },
+          "summary": {
+            "zh": "与先验冲突的可执行 Alien Worlds 拆开「回忆 vs 探索」；自主探针设计显著优于回放——科学发现代理评测缺口",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "与先验冲突的可执行 Alien Worlds 拆开「回忆 vs 探索」；自主探针设计显著优于回放——科学发现代理评测缺口",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30199",
+              "title": "ExplorationBench: Measuring AI Systems' Exploration in Verifiable Alien Worlds",
+              "brief": {
+                "zh": "「新芽：可验证探索」用与先验冲突的可执行 Alien Worlds（AlienCode/AlienLogic，140 题）把科学探索能力从回忆中拆开：最强轨迹 AlienCode 87.6%，无环境反馈≤11%；自主探针设计显著优于回放/固定探针。",
+                "en": "ExplorationBench evaluates exploration via executable Alien Worlds whose rules contradict priors yet are exactly verifiable. Best AlienCode trajectory hits 87.6% after four rounds vs ≤11% without environment feedback.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30199",
+            "https://www.explorationbench.com"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-09-25T16:00:00+08:00",
+      "label": {
+        "zh": "9月25日 16:00",
+        "en": "Sep 25 16:00",
+        "ja": "9月25日 16:00"
+      },
+      "items": [
+        {
+          "id": "t179",
+          "theme": "research",
+          "title": {
+            "zh": "Jev-Mobile：Jev 作移动 GUI Agent 执行器",
+            "en": "Jev-Mobile: Low-Frequency VLM Goals, High-Frequency Typed Decisions on Live Accessibility-Tree Candidates",
+            "ja": "Jev-Mobile: Low-Frequency VLM Goals, High-Frequency Typed Decisions on Live Accessibility-Tree Candidates"
+          },
+          "summary": {
+            "zh": "Jev 从裁判/记忆走向高频执行器：VLM 低频规划 + Jev 选无树动作；AndroidWorld 79%、时延−33%、API 成本−73%",
+            "en": "A deep read of arXiv:2609.30186 Jev-Mobile—moving Jev from judge/memory into an Android GUI executor—with checked AndroidWorld numbers (79% success; −32.7% time and −73.4% API cost on successful trajectories vs step-wise VLM) and a reusable VLM×typed-executor checklist.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Jev 从裁判/记忆走向高频执行器：VLM 低频规划 + Jev 选无树动作；AndroidWorld 79%、时延−33%、API 成本−73%",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30186",
+              "title": "Jev-Mobile: Jev as an Executor for Mobile GUI Agents",
+              "brief": {
+                "zh": "「深耕候选：Jev」把站内 System-One 决策模型直接接到 Android GUI 执行环：低频 VLM 定局部目标，高频 Jev 在无树候选上连选动作。AndroidWorld 全量 79% 成功率贴近逐步 VLM，成功轨迹端到端时间 −32.7%、API 成本 −73.4%。Jev 从记忆/裁判走向移动执行器。",
+                "en": "Jev-Mobile decouples low-frequency VLM planning from high-frequency typed execution: the VLM sets local goals while Jev selects accessibility-tree actions. On full AndroidWorld it reaches 79% success vs 84% step-wise VLM, cutting mean successful-trajectory time 32.7% and model API cost 73.4%.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30186"
+          ],
+          "blog": {
+            "zh": "/cn/blog/jev-mobile-system-one-gui-executor/",
+            "en": "/blog/jev-mobile-system-one-gui-executor/"
+          }
+        },
+        {
+          "id": "t180",
+          "theme": "research",
+          "title": {
+            "zh": "SpecHarness：规格签字、Agent 提案（Who Holds the Pen）",
+            "en": "Who Holds the Pen? Let Specifications, Not Agents, Sign Off: SpecHarness and Spec Authority",
+            "ja": "Who Holds the Pen? Let Specifications, Not Agents, Sign Off: SpecHarness and Spec Authority"
+          },
+          "summary": {
+            "zh": "规格升格为外部权威：可见规格→可验证义务，证据门控提交；SkillsBench Pass+12pp / 状态权威缺口−20pp；OpenSpec/SDD 运行时落地",
+            "en": "A deep read of arXiv:2609.29921 SpecHarness—compiling visible specs into verifiable obligations so agents propose while an external runtime commits state and finalization from qualified evidence—contrasted with OpenSpec/SDD and this site’s harness narrative, plus a practical proposal–authority checklist.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "规格升格为外部权威：可见规格→可验证义务，证据门控提交；SkillsBench Pass+12pp / 状态权威缺口−20pp；OpenSpec/SDD 运行时落地",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.29921",
+              "title": "Who Holds the Pen? Let Specifications, Not Agents, Sign Off",
+              "brief": {
+                "zh": "「深耕候选：OpenSpec·SDD」把规格从「给 agent 看的上下文」升格为外部权威：SpecHarness 把可见规格编译成可验证义务，只有合格证据才能提交状态与收尾。SkillsBench 上七模型 Pass +12pp、状态权威缺口 −20pp。站内「规格签字、agent 提案」主线的运行时落地。",
+                "en": "Most agents let the same model propose, evaluate, and declare completion. SpecHarness separates proposals from authoritative state via source-linked obligations and evidence-gated commit. On SkillsBench, Pass rises +12pp macro while state-authority gap falls −20pp across seven models.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29921"
+          ],
+          "blog": {
+            "zh": "/cn/blog/specharness-spec-holds-the-pen/",
+            "en": "/blog/specharness-spec-holds-the-pen/"
+          }
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-09-25T15:00:00+08:00",
+      "label": {
+        "zh": "9月25日 15:00",
+        "en": "Sep 25 15:00",
+        "ja": "9月25日 15:00"
+      },
+      "items": [
         {
           "id": "t005",
           "theme": "coding-tools",
@@ -977,45 +1569,6 @@
             "https://www.reddit.com/r/LocalLLaMA/comments/1wo7mr6/mimov3_is_getting_a_new_architecture_the_core_of/",
             "https://www.reddit.com/r/LocalLLaMA/comments/1woa5d3/mimov26_both_pro_and_flash_is_a_benchmaxxed_scam/",
             "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
-          ]
-        },
-        {
-          "id": "t014",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "addyosmani/agent-skills：生产级 engineering skills",
-            "en": "addyosmani/agent-skills",
-            "ja": "addyosmani/agent-skills"
-          },
-          "summary": {
-            "zh": "Skills 赛道权威信号，可与 CF skill 对照攒写",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Skills 赛道权威信号，可与 CF skill 对照攒写",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/addyosmani/agent-skills",
-              "title": "addyosmani/agent-skills",
-              "brief": {
-                "zh": "生产级 engineering skills for AI coding agents，skills 内容赛道权威作者加持。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/addyosmani/agent-skills"
           ]
         },
         {
@@ -1697,120 +2250,6 @@
         "ja": "9月25日 09:00"
       },
       "items": [
-        {
-          "id": "t001",
-          "theme": "models",
-          "title": {
-            "zh": "Claude Opus 5.5：降价 + 旗舰性能同窗发布",
-            "en": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose",
-            "ja": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose"
-          },
-          "summary": {
-            "zh": "与 GPT-6 对台：性能/价格/安全限制怎么选",
-            "en": "Anthropic launched Claude Opus 5.5 on 2026-09-22: about 40% lower cost on typical workloads versus Opus 5, with Fable-tier capability claims and matching safeguards. A builder-focused read of pricing, benchmarks, and coding-agent fit.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "与 GPT-6 对台：性能/价格/安全限制怎么选",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://www.anthropic.com/claude-opus-5-5",
-              "title": "Claude Opus 5.5",
-              "brief": {
-                "zh": "Flagship Anthropic launch hitting HN #1 with 1.7k+ points — major model cycle for coding agents and evals.",
-                "en": "Flagship Anthropic launch hitting HN #1 with 1.7k+ points — major model cycle for coding agents and evals.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/",
-              "title": "Anthropic releases Opus 5.5 with lower prices and Fable-level performance",
-              "brief": {
-                "zh": "与 OpenAI GPT-6 更新几乎同窗，构成「前沿模型降价+性能」叙事；适合对比两家路线与安全限制差异。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "36kr",
-              "url": "https://eu.36kr.com/zh/p/3995195771588745",
-              "title": "GPT-6 Sol 对决 Claude Opus 5.5：同日上线，谁是性价比之王",
-              "brief": {
-                "zh": "中文读者向二次叙事；可给已 shortlisted 的 t001/t002 提供中文角度与引语，不必新开大题。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=pNmfMi-yjZk",
-              "title": "Build an agentic software factory: deep dive",
-              "brief": {
-                "zh": "explore：Builder.io 官方 agentic software factory 深潜；1天·~2万播，续 t016 agent-native 产品线。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1woc97l/opus_55_vs_gpt6_sol_3d_pelican_riding_bike_test/",
-              "title": "Opus 5.5 vs GPT-6 Sol: 3D Pelican riding bike test in Blender",
-              "brief": {
-                "zh": "Viral side-by-side of dual flagship launches via classic 3D pelican bench — propagation test.",
-                "en": "Viral side-by-side of dual flagship launches via classic 3D pelican bench — propagation test.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://launchvideo.io",
-              "title": "Opus 5.5 is good at explainer videos",
-              "brief": {
-                "zh": "HN 130/89 on Opus 5.5 producing strong explainer videos — capability demo spreading beyond coding agents.",
-                "en": "HN 130/89 on Opus 5.5 producing strong explainer videos — capability demo spreading beyond coding agents.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1wp1eks/opus_55_anthropic_cooked_the_current_agent_space/",
-              "title": "Opus 5.5 - Anthropic cooked the current agent space",
-              "brief": {
-                "zh": "r/ClaudeAI consensus post: Opus 5.5 reshaping agent workflows — community validation of coding-agent leap.",
-                "en": "r/ClaudeAI consensus post: Opus 5.5 reshaping agent workflows — community validation of coding-agent leap.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "techcrunch",
-            "36kr",
-            "youtube",
-            "reddit"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://www.anthropic.com/claude-opus-5-5",
-            "https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/",
-            "https://eu.36kr.com/zh/p/3995195771588745",
-            "https://www.youtube.com/watch?v=jKRl_CSVxyI",
-            "https://www.reddit.com/r/ClaudeAI/comments/1woc97l/opus_55_vs_gpt6_sol_3d_pelican_riding_bike_test/",
-            "https://www.youtube.com/watch?v=NDTbUObZTlM",
-            "https://launchvideo.io",
-            "https://www.reddit.com/r/ClaudeAI/comments/1wp1eks/opus_55_anthropic_cooked_the_current_agent_space/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/claude-opus-5-5-price-and-performance/",
-            "en": "/blog/claude-opus-5-5-price-and-performance/"
-          }
-        },
         {
           "id": "t006",
           "theme": "security",
