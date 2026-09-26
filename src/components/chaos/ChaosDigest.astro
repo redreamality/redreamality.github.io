@@ -1,9 +1,8 @@
 ---
 /**
- * Chaos digest feed — Hot list + theme-grouped brief cards (+ collapsed hourly timeline).
- * Locale separation: never fall back across zh/en/ja prose (avoids 中英混杂).
- * External links always rel="noopener noreferrer nofollow".
- * Prefer judgment over summary; show per-source briefs under each card.
+ * Chaos digest feed — Hot list + theme-grouped briefs (+ collapsed hourly timeline).
+ * Layout (Impeccable Operate+Read): sticky theme rail (lg+) / chip scroller (narrow);
+ * main pane Hot → themes. Locale isolation; nofollow externals; same-locale blog links.
  */
 import digest from '../../data/chaos-digest.json';
 import type { Language } from '../../utils/i18n';
@@ -36,21 +35,19 @@ function asciiRatio(s: string) {
 
 const copy = {
   zh: {
-    kicker: '信号 · 底噪',
     title: '底噪',
     subtitle: '选题二次加工：先看各来源摘要，再看编辑判断。未必每条都有长文——摘要与判断够用时再深入。',
     hot: '当前热点',
-    byTheme: '按主题',
     timeline: '按小时',
     timelineHint: '次要时间线，默认折叠',
     deepRead: '深入阅读',
     judgment: '判断',
     sources: '来源摘要',
     moreSources: '更多来源',
-    score: '热度',
     empty: '暂无热点选题。',
     archive: '历史深度短文',
     archiveHint: '旧版底噪长文仍可阅读',
+    nav: '主题导航',
     status: { published: '已发文', shortlisted: '候选', writing: '撰写中', inbox: '观察' } as Record<string, string>,
     themes: {
       models: '模型发布',
@@ -65,21 +62,19 @@ const copy = {
     itemsUnit: '条',
   },
   en: {
-    kicker: 'Signals · Noise',
     title: 'Chaos',
     subtitle: 'Secondary processing: source briefs first, then editorial judgment. Not every item has a full article — scan briefs and the take, then deep-read when available.',
     hot: 'Hot now',
-    byTheme: 'By theme',
     timeline: 'By hour',
     timelineHint: 'Secondary timeline, collapsed by default',
     deepRead: 'Deep read',
     judgment: 'Take',
     sources: 'Source briefs',
     moreSources: 'More sources',
-    score: 'Heat',
     empty: 'No hot topics yet.',
     archive: 'Archive',
     archiveHint: 'Earlier long-form chaos notes',
+    nav: 'Theme navigation',
     status: { published: 'Published', shortlisted: 'Shortlisted', writing: 'Writing', inbox: 'Watching' } as Record<string, string>,
     themes: {
       models: 'Models',
@@ -94,21 +89,19 @@ const copy = {
     itemsUnit: 'items',
   },
   ja: {
-    kicker: 'シグナル · ノイズ',
     title: 'カオス',
     subtitle: '二次加工：まず各ソースの要約、次に編集判断。すべてに長文があるわけではありません。',
     hot: 'いまのホット',
-    byTheme: 'テーマ別',
     timeline: '時間帯',
     timelineHint: '補助タイムライン（既定で折りたたみ）',
     deepRead: '深い読み',
     judgment: '判断',
     sources: 'ソース要約',
     moreSources: '他のソース',
-    score: '熱度',
     empty: 'まだホットトピックはありません。',
     archive: 'アーカイブ',
     archiveHint: '以前の長文カオス記事',
+    nav: 'テーマナビ',
     status: { published: '公開済', shortlisted: '候補', writing: '執筆中', inbox: '観察' } as Record<string, string>,
     themes: {
       models: 'モデル',
@@ -252,9 +245,18 @@ function themeLabel(themeId: string) {
   return copy.themes[themeId] || themeId;
 }
 
+function allSourceBriefs(item: DigestItem): SourceBrief[] {
+  return (item.sourceBriefs || []).filter((sb) => localeSourceBrief(sb));
+}
+
 function visibleSourceBriefs(item: DigestItem): { shown: SourceBrief[]; rest: SourceBrief[] } {
-  const all = (item.sourceBriefs || []).filter((sb) => localeSourceBrief(sb));
+  const all = allSourceBriefs(item);
   return { shown: all.slice(0, 2), rest: all.slice(2) };
+}
+
+const HOT_ID = 'chaos-hot';
+function themeAnchor(themeId: string) {
+  return `chaos-theme-${themeId}`;
 }
 
 const EXT_REL = 'noopener noreferrer nofollow';
@@ -263,17 +265,30 @@ function extHref(url: string | null | undefined): string | null {
   if (!url) return null;
   return toOutboundHref(url, outboundLang);
 }
+
+function statusClass(status: string) {
+  if (status === 'published') return 'bg-accent-500/15 text-accent-700 dark:text-accent-300';
+  if (status === 'shortlisted') return 'bg-brand-500/10 text-brand-700 dark:text-brand-300';
+  if (status === 'writing') return 'bg-ink-500/15 text-ink-600 dark:text-ink-400';
+  return 'bg-surface-200/80 dark:bg-surface-700 text-surface-600 dark:text-surface-300';
+}
+
+const navLinks = [
+  { id: HOT_ID, label: copy.hot, count: hotItems.length },
+  ...themeSections.map(({ themeId, items }) => ({
+    id: themeAnchor(themeId),
+    label: themeLabel(themeId),
+    count: items.length,
+  })),
+];
 ---
 
-<div class="mx-auto max-w-3xl px-4">
-  <header class="mb-10 text-center">
-    <span class="inline-flex items-center gap-2 rounded-full border border-accent-500/30 bg-accent-500/10 px-4 py-1.5 text-xs font-medium tracking-wide text-accent-600 dark:text-accent-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-accent-500"></span>{copy.kicker}
-    </span>
-    <h1 class="mt-5 font-display text-5xl md:text-6xl font-extrabold tracking-tight text-surface-900 dark:text-white">{copy.title}</h1>
-    <p class="mx-auto mt-4 max-w-2xl text-base md:text-lg leading-relaxed text-surface-600 dark:text-surface-300">{copy.subtitle}</p>
+<div class="mx-auto max-w-7xl px-4 sm:px-6">
+  <header class="mb-8 max-w-3xl lg:mb-10">
+    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-surface-900 dark:text-white">{copy.title}</h1>
+    <p class="mt-3 text-base md:text-lg leading-relaxed text-surface-600 dark:text-surface-300">{copy.subtitle}</p>
     {digest.updatedAt && (
-      <p class="mt-3 text-xs text-surface-500 dark:text-surface-400">
+      <p class="mt-2 text-xs text-surface-500 dark:text-surface-400">
         {copy.updated} · <time datetime={digest.updatedAt}>{digest.updatedAt.replace('T', ' ').replace(/\+08:00$/, ' CST')}</time>
       </p>
     )}
@@ -282,151 +297,191 @@ function extHref(url: string | null | undefined): string | null {
   {!hasContent ? (
     <p class="rounded-2xl border border-dashed border-surface-300 dark:border-surface-700 p-10 text-center text-surface-500 dark:text-surface-400">{copy.empty}</p>
   ) : (
-    <div class="space-y-12">
-      <!-- Hot list: brief cards -->
-      <section aria-labelledby="chaos-hot-heading">
-        <div class="rounded-2xl border border-surface-200 dark:border-surface-800 bg-white dark:bg-surface-900 shadow-card overflow-hidden">
-          <div class="flex items-center justify-between gap-3 border-b border-surface-200/80 dark:border-surface-800 px-5 py-3.5">
-            <h2 id="chaos-hot-heading" class="flex items-center gap-2 font-display text-lg font-bold text-surface-900 dark:text-white">
-              <span class="inline-block h-2 w-2 rounded-full bg-accent-500 shadow-glow-accent" aria-hidden="true"></span>
-              {copy.hot}
-            </h2>
-            <span class="text-xs tabular-nums text-surface-500 dark:text-surface-400">{hotItems.length} {copy.itemsUnit}</span>
-          </div>
-          <ol class="divide-y divide-surface-100 dark:divide-surface-800">
-            {hotItems.map((item, i) => {
-              const blog = blogHref(item);
-              const ext = primaryExternal(item);
-              const title = localeTitle(item)!;
-              const judgment = localeJudgment(item);
-              const statusLabel = copy.status[item.status] || item.status;
-              const theme = item.theme;
-              const { shown, rest } = visibleSourceBriefs(item);
-              return (
-                <li class="group px-4 py-4 sm:px-5 hover:bg-surface-50/80 dark:hover:bg-surface-800/40 transition-colors">
-                  <div class="flex gap-3">
-                    <span class="mt-0.5 w-8 shrink-0 font-mono text-sm font-semibold tabular-nums text-accent-600 dark:text-accent-400">{rankLabel(i)}</span>
-                    <div class="min-w-0 flex-1">
-                      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                        {blog ? (
-                          <a href={blog} class="font-display text-[15px] font-semibold leading-snug text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400 transition-colors">
-                            {title}
-                          </a>
-                        ) : ext ? (
-                          <a href={extHref(ext)!} target="_blank" rel={EXT_REL} class="font-display text-[15px] font-semibold leading-snug text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400 transition-colors">
-                            {title}
-                          </a>
-                        ) : (
-                          <span class="font-display text-[15px] font-semibold leading-snug text-surface-900 dark:text-white">{title}</span>
+    <>
+      <!-- Narrow: sticky horizontal theme chips -->
+      <nav
+        aria-label={copy.nav}
+        class="lg:hidden sticky z-20 -mx-4 mb-6 border-b border-surface-200 dark:border-surface-800 bg-surface-50 dark:bg-surface-950 px-4 py-2.5 sm:-mx-6 sm:px-6"
+        style="top: var(--site-header-height);"
+      >
+        <ul class="flex gap-2 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {navLinks.map((link) => (
+            <li class="shrink-0">
+              <a
+                href={`#${link.id}`}
+                class="inline-flex items-center gap-1.5 rounded-full border border-surface-200 dark:border-surface-700 bg-white dark:bg-surface-900 px-3 py-1.5 text-xs font-medium text-surface-700 dark:text-surface-200 hover:border-accent-500/40 hover:text-accent-700 dark:hover:text-accent-300 transition-colors"
+              >
+                <span>{link.label}</span>
+                <span class="tabular-nums text-surface-400 dark:text-surface-500">{link.count}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="lg:grid lg:grid-cols-[13.5rem_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[15rem_minmax(0,1fr)] xl:gap-12">
+        <!-- lg+: sticky left rail -->
+        <aside class="hidden lg:block">
+          <nav
+            aria-label={copy.nav}
+            class="sticky max-h-[calc(100vh-var(--site-header-height)-2rem)] overflow-y-auto pr-1"
+            style="top: calc(var(--site-header-height) + 1rem);"
+          >
+            <p class="mb-3 text-[11px] font-semibold uppercase tracking-wider text-surface-400 dark:text-surface-500">{copy.nav}</p>
+            <ul class="space-y-0.5 border-l border-surface-200 dark:border-surface-800">
+              {navLinks.map((link) => (
+                <li>
+                  <a
+                    href={`#${link.id}`}
+                    class="group flex items-center justify-between gap-2 border-l-2 border-transparent -ml-px pl-3 py-1.5 text-sm text-surface-600 dark:text-surface-300 hover:border-accent-500 hover:text-surface-900 dark:hover:text-white transition-colors"
+                  >
+                    <span class="truncate">{link.label}</span>
+                    <span class="shrink-0 tabular-nums text-xs text-surface-400 group-hover:text-accent-600 dark:group-hover:text-accent-400">{link.count}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+
+        <div class="min-w-0 space-y-14 md:space-y-16">
+          <!-- Hot band: slightly richer density -->
+          <section id={HOT_ID} aria-labelledby="chaos-hot-heading" class="scroll-mt-[calc(var(--site-header-height)+1rem)]">
+            <div class="mb-4 flex items-baseline justify-between gap-3">
+              <h2 id="chaos-hot-heading" class="font-display text-xl font-bold text-surface-900 dark:text-white">
+                {copy.hot}
+              </h2>
+              <span class="text-xs tabular-nums text-surface-500 dark:text-surface-400">{hotItems.length} {copy.itemsUnit}</span>
+            </div>
+
+            <ol class="divide-y divide-surface-200 dark:divide-surface-800 border-y border-surface-200 dark:border-surface-800">
+              {hotItems.map((item, i) => {
+                const blog = blogHref(item);
+                const ext = primaryExternal(item);
+                const title = localeTitle(item)!;
+                const judgment = localeJudgment(item);
+                const statusLabel = copy.status[item.status] || item.status;
+                const theme = item.theme;
+                const { shown, rest } = visibleSourceBriefs(item);
+                return (
+                  <li class="group py-4 sm:py-5 first:pt-4 last:pb-4">
+                    <div class="flex gap-3 sm:gap-4">
+                      <span class="mt-0.5 w-7 shrink-0 font-mono text-sm font-semibold tabular-nums text-accent-600 dark:text-accent-400">{rankLabel(i)}</span>
+                      <div class="min-w-0 flex-1 space-y-2">
+                        <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                          {blog ? (
+                            <a href={blog} class="font-display text-[15px] sm:text-base font-semibold leading-snug text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400 transition-colors">
+                              {title}
+                            </a>
+                          ) : ext ? (
+                            <a href={extHref(ext)!} target="_blank" rel={EXT_REL} class="font-display text-[15px] sm:text-base font-semibold leading-snug text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400 transition-colors">
+                              {title}
+                            </a>
+                          ) : (
+                            <span class="font-display text-[15px] sm:text-base font-semibold leading-snug text-surface-900 dark:text-white">{title}</span>
+                          )}
+                          <span class="inline-flex items-center rounded-md bg-accent-500/10 px-1.5 py-0.5 font-mono text-[11px] font-medium tabular-nums text-accent-700 dark:text-accent-300">
+                            {item.score}/5
+                          </span>
+                          <span class:list={['rounded-full px-2 py-0.5 text-[10px] font-medium', statusClass(item.status)]}>{statusLabel}</span>
+                        </div>
+
+                        {judgment && (
+                          <p class="text-sm leading-relaxed text-surface-600 dark:text-surface-300 line-clamp-3">
+                            <span class="mr-1.5 text-[10px] font-semibold uppercase tracking-wide text-accent-600/80 dark:text-accent-400/80">{copy.judgment}</span>
+                            {judgment}
+                          </p>
                         )}
-                        <span class="inline-flex items-center rounded-md bg-accent-500/10 px-1.5 py-0.5 font-mono text-[11px] font-medium tabular-nums text-accent-700 dark:text-accent-300">
-                          {item.score}/5
-                        </span>
-                        <span class:list={[
-                          'rounded-full px-2 py-0.5 text-[10px] font-medium',
-                          item.status === 'published' && 'bg-accent-500/15 text-accent-700 dark:text-accent-300',
-                          item.status === 'shortlisted' && 'bg-brand-500/10 text-brand-700 dark:text-brand-300',
-                          item.status === 'writing' && 'bg-ink-500/15 text-ink-600 dark:text-ink-400',
-                          (item.status === 'inbox' || !['published','shortlisted','writing'].includes(item.status)) && 'bg-surface-200/80 dark:bg-surface-700 text-surface-600 dark:text-surface-300',
-                        ]}>{statusLabel}</span>
-                      </div>
 
-                      {judgment && (
-                        <p class="mt-2 text-sm leading-relaxed text-surface-600 dark:text-surface-300 line-clamp-3">
-                          <span class="mr-1.5 text-[10px] font-semibold uppercase tracking-wide text-accent-600/80 dark:text-accent-400/80">{copy.judgment}</span>
-                          {judgment}
-                        </p>
-                      )}
-
-                      {shown.length > 0 && (
-                        <ul class="mt-2.5 space-y-1.5">
-                          {shown.map((sb) => {
-                            const brief = localeSourceBrief(sb);
-                            const label = sb.source;
-                            return (
-                              <li class="flex gap-2 text-[12.5px] leading-relaxed text-surface-500 dark:text-surface-400">
-                                {sb.url ? (
-                                  <a href={extHref(sb.url)!} target="_blank" rel={EXT_REL} class="shrink-0 mt-0.5 rounded border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] font-medium uppercase tracking-wide text-surface-600 dark:text-surface-300 hover:border-accent-500/40 hover:text-accent-600 dark:hover:text-accent-400">
-                                    {label}
-                                  </a>
-                                ) : (
-                                  <span class="shrink-0 mt-0.5 rounded border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] font-medium uppercase tracking-wide text-surface-600 dark:text-surface-300">{label}</span>
-                                )}
-                                <span class="min-w-0 line-clamp-2">{brief}</span>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      )}
-                      {rest.length > 0 && (
-                        <details class="mt-1.5">
-                          <summary class="cursor-pointer list-none text-[11px] font-medium text-surface-500 hover:text-accent-600 dark:text-surface-400 dark:hover:text-accent-400">
-                            {copy.moreSources} ({rest.length})
-                          </summary>
-                          <ul class="mt-1.5 space-y-1.5">
-                            {rest.map((sb) => {
+                        {shown.length > 0 && (
+                          <ul class="space-y-1.5">
+                            {shown.map((sb) => {
                               const brief = localeSourceBrief(sb);
                               return (
                                 <li class="flex gap-2 text-[12.5px] leading-relaxed text-surface-500 dark:text-surface-400">
                                   {sb.url ? (
-                                    <a href={extHref(sb.url)!} target="_blank" rel={EXT_REL} class="shrink-0 mt-0.5 rounded border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] font-medium uppercase tracking-wide">{sb.source}</a>
+                                    <a href={extHref(sb.url)!} target="_blank" rel={EXT_REL} class="shrink-0 mt-0.5 rounded border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] font-medium uppercase tracking-wide text-surface-600 dark:text-surface-300 hover:border-accent-500/40 hover:text-accent-600 dark:hover:text-accent-400">
+                                      {sb.source}
+                                    </a>
                                   ) : (
-                                    <span class="shrink-0 mt-0.5 rounded border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] font-medium uppercase tracking-wide">{sb.source}</span>
+                                    <span class="shrink-0 mt-0.5 rounded border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] font-medium uppercase tracking-wide text-surface-600 dark:text-surface-300">{sb.source}</span>
                                   )}
                                   <span class="min-w-0 line-clamp-2">{brief}</span>
                                 </li>
                               );
                             })}
                           </ul>
-                        </details>
-                      )}
+                        )}
+                        {rest.length > 0 && (
+                          <details>
+                            <summary class="cursor-pointer list-none text-[11px] font-medium text-surface-500 hover:text-accent-600 dark:text-surface-400 dark:hover:text-accent-400">
+                              {copy.moreSources} ({rest.length})
+                            </summary>
+                            <ul class="mt-1.5 space-y-1.5">
+                              {rest.map((sb) => {
+                                const brief = localeSourceBrief(sb);
+                                return (
+                                  <li class="flex gap-2 text-[12.5px] leading-relaxed text-surface-500 dark:text-surface-400">
+                                    {sb.url ? (
+                                      <a href={extHref(sb.url)!} target="_blank" rel={EXT_REL} class="shrink-0 mt-0.5 rounded border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] font-medium uppercase tracking-wide">{sb.source}</a>
+                                    ) : (
+                                      <span class="shrink-0 mt-0.5 rounded border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] font-medium uppercase tracking-wide">{sb.source}</span>
+                                    )}
+                                    <span class="min-w-0 line-clamp-2">{brief}</span>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </details>
+                        )}
 
-                      <div class="mt-2.5 flex flex-wrap items-center gap-1.5">
-                        {theme && (
-                          <span class="rounded-full bg-surface-100 dark:bg-surface-800 px-2 py-0.5 text-[10px] font-medium text-surface-600 dark:text-surface-300">{themeLabel(theme)}</span>
-                        )}
-                        {item.sources.map((s) => (
-                          <span class="rounded-full border border-surface-200 dark:border-surface-700 bg-surface-50 dark:bg-surface-800 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-surface-600 dark:text-surface-300">{s}</span>
-                        ))}
-                        {blog && (
-                          <a href={blog} class="ml-auto text-xs font-medium text-accent-600 hover:text-accent-500 dark:text-accent-400 dark:hover:text-accent-300">
-                            {copy.deepRead} →
-                          </a>
-                        )}
+                        <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+                          {theme && (
+                            <a href={`#${themeAnchor(theme)}`} class="rounded-full bg-surface-100 dark:bg-surface-800 px-2 py-0.5 text-[10px] font-medium text-surface-600 dark:text-surface-300 hover:text-accent-700 dark:hover:text-accent-300">
+                              {themeLabel(theme)}
+                            </a>
+                          )}
+                          {item.sources.map((s) => (
+                            <span class="rounded-full border border-surface-200 dark:border-surface-700 bg-surface-50 dark:bg-surface-800 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-surface-600 dark:text-surface-300">{s}</span>
+                          ))}
+                          {blog && (
+                            <a href={blog} class="ml-auto text-xs font-medium text-accent-600 hover:text-accent-500 dark:text-accent-400 dark:hover:text-accent-300">
+                              {copy.deepRead} →
+                            </a>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
-        </div>
-      </section>
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
 
-      <!-- Theme sections: brief cards -->
-      <section aria-labelledby="chaos-theme-heading">
-        <h2 id="chaos-theme-heading" class="mb-6 flex items-center gap-2 font-display text-xl font-bold text-surface-900 dark:text-white">
-          <span class="inline-block h-6 w-1.5 rounded-full bg-accent-500" aria-hidden="true"></span>
-          {copy.byTheme}
-        </h2>
-
-        <div class="space-y-6">
+          <!-- Theme sections: scannable lists -->
           {themeSections.map(({ themeId, items }) => (
-            <div class="rounded-2xl border border-surface-200 dark:border-surface-800 bg-white dark:bg-surface-900 shadow-card overflow-hidden">
-              <header class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-200/80 dark:border-surface-800 px-4 py-3 sm:px-5">
-                <h3 class="font-display text-base font-bold text-surface-900 dark:text-white">{themeLabel(themeId)}</h3>
-                <span class="text-xs text-surface-500 dark:text-surface-400">{items.length} {copy.itemsUnit}</span>
-              </header>
-              <ul class="divide-y divide-surface-100 dark:divide-surface-800">
+            <section
+              id={themeAnchor(themeId)}
+              aria-labelledby={`chaos-theme-heading-${themeId}`}
+              class="scroll-mt-[calc(var(--site-header-height)+1rem)]"
+            >
+              <div class="mb-3 flex items-baseline justify-between gap-3">
+                <h2 id={`chaos-theme-heading-${themeId}`} class="font-display text-lg font-bold text-surface-900 dark:text-white">
+                  {themeLabel(themeId)}
+                </h2>
+                <span class="text-xs tabular-nums text-surface-500 dark:text-surface-400">{items.length} {copy.itemsUnit}</span>
+              </div>
+
+              <ul class="divide-y divide-surface-200 dark:divide-surface-800 border-y border-surface-200 dark:border-surface-800">
                 {items.map((item) => {
                   const blog = blogHref(item);
                   const ext = primaryExternal(item);
                   const title = localeTitle(item)!;
                   const judgment = localeJudgment(item);
                   const statusLabel = copy.status[item.status] || item.status;
-                  const { shown, rest } = visibleSourceBriefs(item);
+                  const briefs = allSourceBriefs(item);
                   return (
-                    <li class="px-4 py-4 sm:px-5 hover:bg-surface-50/70 dark:hover:bg-surface-800/30 transition-colors">
+                    <li class="py-3 sm:py-3.5 space-y-1.5">
                       <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
                         {blog ? (
                           <a href={blog} class="font-semibold text-[14px] leading-snug text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400">
@@ -440,134 +495,103 @@ function extHref(url: string | null | undefined): string | null {
                           <span class="font-semibold text-[14px] leading-snug text-surface-900 dark:text-white">{title}</span>
                         )}
                         <span class="font-mono text-[10px] tabular-nums text-accent-600/90 dark:text-accent-400">{item.score}/5</span>
-                        <span class:list={[
-                          'rounded-full px-1.5 py-px text-[10px] font-medium',
-                          item.status === 'published' && 'bg-accent-500/15 text-accent-700 dark:text-accent-300',
-                          item.status === 'shortlisted' && 'bg-brand-500/10 text-brand-700 dark:text-brand-300',
-                          item.status === 'writing' && 'bg-ink-500/15 text-ink-600 dark:text-ink-400',
-                          (item.status === 'inbox' || !['published','shortlisted','writing'].includes(item.status)) && 'bg-surface-100 dark:bg-surface-800 text-surface-500',
-                        ]}>{statusLabel}</span>
+                        <span class:list={['rounded-full px-1.5 py-px text-[10px] font-medium', statusClass(item.status)]}>{statusLabel}</span>
+                        {blog && (
+                          <a href={blog} class="ml-auto text-[11px] font-medium text-accent-600 dark:text-accent-400 hover:underline">
+                            {copy.deepRead} →
+                          </a>
+                        )}
                       </div>
 
                       {judgment && (
-                        <p class="mt-1.5 text-[13px] leading-relaxed text-surface-600 dark:text-surface-300 line-clamp-3">{judgment}</p>
+                        <p class="text-[13px] leading-relaxed text-surface-600 dark:text-surface-300 line-clamp-1">{judgment}</p>
                       )}
 
-                      {shown.length > 0 && (
-                        <ul class="mt-2 space-y-1">
-                          {shown.map((sb) => {
-                            const brief = localeSourceBrief(sb);
-                            return (
+                      {briefs.length > 0 && (
+                        <details class="group/src">
+                          <summary class="cursor-pointer list-none text-[11px] font-medium text-surface-500 hover:text-accent-600 dark:text-surface-400 dark:hover:text-accent-400">
+                            {copy.sources} ({briefs.length})
+                          </summary>
+                          <ul class="mt-1.5 space-y-1">
+                            {briefs.map((sb) => (
                               <li class="flex gap-2 text-[12px] leading-relaxed text-surface-500 dark:text-surface-400">
                                 {sb.url ? (
                                   <a href={extHref(sb.url)!} target="_blank" rel={EXT_REL} class="shrink-0 mt-0.5 rounded border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] font-medium uppercase tracking-wide hover:text-accent-600 dark:hover:text-accent-400">{sb.source}</a>
                                 ) : (
                                   <span class="shrink-0 mt-0.5 rounded border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] font-medium uppercase tracking-wide">{sb.source}</span>
                                 )}
-                                <span class="min-w-0 line-clamp-2">{brief}</span>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      )}
-                      {rest.length > 0 && (
-                        <details class="mt-1">
-                          <summary class="cursor-pointer list-none text-[11px] font-medium text-surface-500 hover:text-accent-600 dark:text-surface-400">{copy.moreSources} ({rest.length})</summary>
-                          <ul class="mt-1 space-y-1">
-                            {rest.map((sb) => (
-                              <li class="flex gap-2 text-[12px] leading-relaxed text-surface-500 dark:text-surface-400">
-                                <span class="shrink-0 mt-0.5 rounded border border-surface-200 dark:border-surface-700 px-1.5 py-px text-[10px] font-medium uppercase tracking-wide">{sb.source}</span>
                                 <span class="min-w-0 line-clamp-2">{localeSourceBrief(sb)}</span>
                               </li>
                             ))}
                           </ul>
                         </details>
                       )}
-
-                      {blog && (
-                        <div class="mt-2 flex justify-end">
-                          <a href={blog} class="text-[11px] font-medium text-accent-600 dark:text-accent-400 hover:underline">
-                            {copy.deepRead} →
-                          </a>
-                        </div>
-                      )}
                     </li>
                   );
                 })}
               </ul>
-            </div>
+            </section>
           ))}
-        </div>
-      </section>
 
-      <!-- Hourly timeline: collapsed by default (secondary / noisy) -->
-      {hours.length > 0 && (
-        <details class="group rounded-2xl border border-dashed border-surface-300 dark:border-surface-700 bg-surface-50/40 dark:bg-surface-900/30">
-          <summary class="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-3">
-            <span class="flex items-center gap-2 font-display text-base font-bold text-surface-800 dark:text-surface-200">
-              <span class="inline-block h-5 w-1 rounded-full bg-surface-400" aria-hidden="true"></span>
-              {copy.timeline}
-              <span class="text-xs font-normal text-surface-500">· {copy.timelineHint}</span>
-            </span>
-            <span class="text-surface-400 transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
-          </summary>
+          <!-- Hourly timeline: collapsed by default -->
+          {hours.length > 0 && (
+            <details class="group border-t border-dashed border-surface-300 dark:border-surface-700 pt-2">
+              <summary class="cursor-pointer list-none py-3 flex items-center justify-between gap-3">
+                <span class="font-display text-base font-bold text-surface-800 dark:text-surface-200">
+                  {copy.timeline}
+                  <span class="ml-2 text-xs font-normal text-surface-500">· {copy.timelineHint}</span>
+                </span>
+                <span class="text-surface-400 transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
+              </summary>
 
-          <div class="border-t border-surface-200 dark:border-surface-800 px-4 py-5 sm:px-5">
-            <div class="relative pl-0 sm:pl-2">
-              <div class="pointer-events-none absolute left-[11px] top-2 bottom-2 hidden w-px bg-surface-200 dark:bg-surface-700 sm:block" aria-hidden="true"></div>
-              <div class="space-y-6">
+              <div class="pb-2 space-y-8">
                 {hours.map((hour) => (
-                  <div class="relative sm:pl-10">
-                    <div class="absolute left-0 top-3 hidden h-[22px] w-[22px] items-center justify-center sm:flex" aria-hidden="true">
-                      <span class="h-3 w-3 rounded-full border-2 border-surface-400 bg-white dark:bg-surface-900"></span>
-                    </div>
-                    <div class="rounded-xl border border-surface-200 dark:border-surface-800 bg-white dark:bg-surface-900 overflow-hidden">
-                      <header class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-200/80 dark:border-surface-800 px-4 py-2.5">
-                        <time datetime={hour.hourStart} class="font-display text-sm font-bold tabular-nums text-surface-900 dark:text-white">
-                          {hour.label[L] || hour.label.en}
-                        </time>
-                        <span class="text-xs text-surface-500 dark:text-surface-400">{hourShort(hour.hourStart)} · {hour.items.length} {copy.itemsUnit}</span>
-                      </header>
-                      <ul class="divide-y divide-surface-100 dark:divide-surface-800">
-                        {hour.items.map((item) => {
-                          const blog = blogHref(item);
-                          const ext = primaryExternal(item);
-                          const title = localeTitle(item)!;
-                          const judgment = localeJudgment(item);
-                          return (
-                            <li class="px-4 py-2.5">
-                              <div class="flex flex-wrap items-baseline gap-x-2">
-                                {blog ? (
-                                  <a href={blog} class="font-medium text-[13px] text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400">{title}</a>
-                                ) : ext ? (
-                                  <a href={extHref(ext)!} target="_blank" rel={EXT_REL} class="font-medium text-[13px] text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400">{title}</a>
-                                ) : (
-                                  <span class="font-medium text-[13px] text-surface-900 dark:text-white">{title}</span>
-                                )}
-                                <span class="font-mono text-[10px] tabular-nums text-accent-600/90 dark:text-accent-400">{item.score}/5</span>
-                              </div>
-                              {judgment && (
-                                <p class="mt-0.5 text-[12px] leading-relaxed text-surface-500 dark:text-surface-400 line-clamp-2">{judgment}</p>
+                  <div>
+                    <header class="mb-2 flex flex-wrap items-baseline justify-between gap-2">
+                      <time datetime={hour.hourStart} class="font-display text-sm font-bold tabular-nums text-surface-900 dark:text-white">
+                        {hour.label[L] || hour.label.en}
+                      </time>
+                      <span class="text-xs text-surface-500 dark:text-surface-400">{hourShort(hour.hourStart)} · {hour.items.length} {copy.itemsUnit}</span>
+                    </header>
+                    <ul class="divide-y divide-surface-200 dark:divide-surface-800 border-y border-surface-200 dark:border-surface-800">
+                      {hour.items.map((item) => {
+                        const blog = blogHref(item);
+                        const ext = primaryExternal(item);
+                        const title = localeTitle(item)!;
+                        const judgment = localeJudgment(item);
+                        return (
+                          <li class="py-2.5">
+                            <div class="flex flex-wrap items-baseline gap-x-2">
+                              {blog ? (
+                                <a href={blog} class="font-medium text-[13px] text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400">{title}</a>
+                              ) : ext ? (
+                                <a href={extHref(ext)!} target="_blank" rel={EXT_REL} class="font-medium text-[13px] text-surface-900 dark:text-white hover:text-accent-600 dark:hover:text-accent-400">{title}</a>
+                              ) : (
+                                <span class="font-medium text-[13px] text-surface-900 dark:text-white">{title}</span>
                               )}
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
+                              <span class="font-mono text-[10px] tabular-nums text-accent-600/90 dark:text-accent-400">{item.score}/5</span>
+                            </div>
+                            {judgment && (
+                              <p class="mt-0.5 text-[12px] leading-relaxed text-surface-500 dark:text-surface-400 line-clamp-2">{judgment}</p>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </details>
-      )}
-    </div>
+            </details>
+          )}
+        </div>
+      </div>
+    </>
   )}
 
   <!-- Legacy archive -->
   {archive.length > 0 && (
-    <details class="mt-14 group rounded-2xl border border-dashed border-surface-300 dark:border-surface-700 bg-surface-50/50 dark:bg-surface-900/40">
-      <summary class="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-3 text-sm font-medium text-surface-700 dark:text-surface-300">
+    <details class="mt-14 group border-t border-dashed border-surface-300 dark:border-surface-700">
+      <summary class="cursor-pointer list-none py-4 flex items-center justify-between gap-3 text-sm font-medium text-surface-700 dark:text-surface-300">
         <span>
           <span class="font-display font-semibold text-surface-900 dark:text-white">{copy.archive}</span>
           <span class="ml-2 text-xs font-normal text-surface-500">· {copy.archiveHint} ({archive.length})</span>
@@ -577,7 +601,7 @@ function extHref(url: string | null | undefined): string | null {
       <ul class="border-t border-surface-200 dark:border-surface-800 divide-y divide-surface-100 dark:divide-surface-800">
         {archive.map((a) => (
           <li>
-            <a href={a.href} class="flex items-baseline justify-between gap-3 px-5 py-3 text-sm hover:bg-white dark:hover:bg-surface-800/50 transition-colors">
+            <a href={a.href} class="flex items-baseline justify-between gap-3 py-3 text-sm hover:text-accent-600 dark:hover:text-accent-400 transition-colors">
               <span class="font-medium text-surface-800 dark:text-surface-200">{a.title}</span>
               {a.dateLabel && <time class="shrink-0 text-xs text-surface-500">{a.dateLabel}</time>}
             </a>
