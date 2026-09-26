@@ -1,0 +1,36 @@
+---
+import type { Language } from '../../utils/i18n';
+import { breadcrumbForTag } from '../../utils/tag-taxonomy';
+
+interface Props {
+  tag: string;
+  lang: Language;
+}
+
+const { tag, lang } = Astro.props;
+const crumbs = breadcrumbForTag(tag, lang);
+---
+
+<nav aria-label={lang === 'zh' ? '面包屑' : lang === 'ja' ? 'パンくず' : 'Breadcrumb'} class="mb-8">
+  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-surface-500 dark:text-surface-400">
+    {crumbs.map((crumb, i) => (
+      <li class="inline-flex items-center gap-2">
+        {i > 0 && (
+          <span class="select-none text-surface-300 dark:text-surface-600" aria-hidden="true">/</span>
+        )}
+        {crumb.href ? (
+          <a
+            href={crumb.href}
+            class="text-brand-600 hover:text-brand-700 dark:text-brand-300 dark:hover:text-brand-200 transition-colors"
+          >
+            {crumb.label}
+          </a>
+        ) : (
+          <span class="font-medium text-surface-800 dark:text-surface-200" aria-current="page">
+            {crumb.label}
+          </span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

@@ -1,20 +1,19 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getBlogPosts, getTags, getTagCounts, type Language } from '../../../utils/i18n';
-
-// This is the Chinese tag detail page (/cn/tags/tag path)
+import TagBreadcrumb from '../../../components/tags/TagBreadcrumb.astro';
+import { getBlogPosts, getTags, getTagCounts, getLocalizedPath, type Language } from '../../../utils/i18n';
 
 export async function getStaticPaths() {
-  // Get Chinese tags and posts
   const posts = await getBlogPosts('zh');
   const tags = await getTags('zh');
 
-  return tags.map(tag => ({
+  return tags.map((tag) => ({
     params: { tag },
     props: {
-      posts: posts.filter(post => post.data.tags?.includes(tag))
+      posts: posts
+        .filter((post) => post.data.tags?.includes(tag))
         .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
-      lang: 'zh' as Language
+      lang: 'zh' as Language,
     },
   }));
 }
@@ -26,100 +25,106 @@ interface Props {
 
 const { tag } = Astro.params;
 const { posts, lang } = Astro.props;
-
-// Get tag counts to filter out tags with count < 2
 const tagCounts = await getTagCounts(lang);
 
-// Language-specific content
 const content = {
   en: {
-    backToTags: "Back to Tags",
-    articlesCount: "articles",
-    articleCount: "article",
-    readMore: "Read More",
-    author: "by"
+    articlesCount: 'articles',
+    articleCount: 'article',
+    readMore: 'Read',
+    author: 'by',
   },
   zh: {
-    backToTags: "返回标签列表",
-    articlesCount: "篇文章",
-    articleCount: "篇文章",
-    readMore: "阅读更多",
-    author: "作者"
-  }
-};
+    articlesCount: '篇文章',
+    articleCount: '篇文章',
+    readMore: '阅读',
+    author: '作者',
+  },
+  ja: {
+    articlesCount: '件の記事',
+    articleCount: '件の記事',
+    readMore: '読む',
+    author: '著者',
+  },
+} as const;
 
 const currentContent = content[lang];
-const basePath = lang === 'zh' ? '/cn' : '';
+const blogBase = getLocalizedPath('/blog/', lang).replace(/\/$/, '');
+const tagsBase = getLocalizedPath('/tags/', lang).replace(/\/$/, '');
+const locale = lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja-JP' : 'en-US';
+const pageTitleSuffix = lang === 'zh' ? '标签' : lang === 'ja' ? 'タグ' : 'Tags';
 ---
 
-<Layout title={`${tag} - ${lang === 'zh' ? '标签' : 'Tag'}`}>
-  <main class="container mx-auto px-4 py-8">
-    <div class="max-w-4xl mx-auto">
-      <div class="mb-8">
-        <nav class="mb-4">
-          <a href={`${basePath}/tags`} class="text-blue-600 dark:text-blue-400 hover:underline">
-            ← {currentContent.backToTags}
-          </a>
-        </nav>
-        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">#{tag}</h1>
-        <p class="text-lg text-gray-600 dark:text-gray-400">
-          {posts.length} {posts.length === 1 ? currentContent.articleCount : currentContent.articlesCount}
-        </p>
-      </div>
+<Layout title={`#${tag} | ${pageTitleSuffix}`}>
+  <main class="mx-auto max-w-3xl px-4 py-10 md:py-14">
+    <TagBreadcrumb tag={tag!} lang={lang} />
 
-      <!-- Posts -->
-      <div class="space-y-8">
-        {posts.map((post) => (
-          <article class="bg-white border border-gray-200 rounded-lg shadow-md p-6 dark:bg-gray-800 dark:border-gray-700">
-            <div class="flex flex-col space-y-4">
-              <div>
-                <a href={`${basePath}/blog/${post.slug}`}>
-                  <h2 class="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                    {post.data.title}
-                  </h2>
-                </a>
-                <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mt-2">
-                  <span>
-                    {post.data.pubDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </span>
-                  <span>{currentContent.author} {post.data.author || 'Redreamality'}</span>
-                </div>
-              </div>
-              
-              {post.data.description && (
-                <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {post.data.description}
-                </p>
+    <header class="mb-10 border-b border-surface-200 pb-6 dark:border-surface-800">
+      <h1 class="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-surface-900 dark:text-white">
+        #{tag}
+      </h1>
+      <p class="mt-2 text-sm text-surface-500 dark:text-surface-400">
+        {posts.length}{' '}
+        {posts.length === 1 ? currentContent.articleCount : currentContent.articlesCount}
+      </p>
+    </header>
+
+    <ul class="divide-y divide-surface-200 dark:divide-surface-800">
+      {posts.map((post) => (
+        <li class="py-6 first:pt-0">
+          <article>
+            <a href={`${blogBase}/${post.slug}/`} class="group block">
+              <h2 class="font-display text-xl font-semibold text-surface-900 transition-colors group-hover:text-brand-600 dark:text-white dark:group-hover:text-brand-300">
+                {post.data.title}
+              </h2>
+            </a>
+            <div class="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-surface-500 dark:text-surface-400">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString(locale, {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+              {post.data.author && (
+                <span>
+                  {currentContent.author} {post.data.author}
+                </span>
               )}
-              
-              <div class="flex items-center justify-between">
-                <div class="flex flex-wrap gap-2">
-                  {post.data.tags
-                    ?.filter((postTag: string) => tagCounts[postTag] >= 2)
-                    .map((postTag: string) => (
+            </div>
+            {post.data.description && (
+              <p class="mt-2 text-sm leading-relaxed text-surface-600 dark:text-surface-400 line-clamp-2">
+                {post.data.description}
+              </p>
+            )}
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="mt-3 flex flex-wrap gap-1.5">
+                {post.data.tags
+                  .filter((t: string) => (tagCounts[t] ?? 0) >= 2)
+                  .map((t: string) => (
                     <a
-                      href={`${basePath}/tags/${postTag}/`}
-                      class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                      href={`${tagsBase}/${encodeURIComponent(t)}/`}
+                      class:list={[
+                        'rounded-full px-2 py-0.5 text-xs transition-colors',
+                        t === tag
+                          ? 'bg-brand-500/15 font-medium text-brand-700 dark:text-brand-300'
+                          : 'bg-surface-100 text-surface-600 hover:bg-surface-200 dark:bg-surface-800 dark:text-surface-400 dark:hover:bg-surface-700',
+                      ]}
                     >
-                      #{postTag}
+                      #{t}
                     </a>
                   ))}
-                </div>
-                <a
-                  href={`${basePath}/blog/${post.slug}`}
-                  class="text-blue-600 dark:text-blue-400 hover:underline font-medium"
-                >
-                  {currentContent.readMore} →
-                </a>
               </div>
-            </div>
+            )}
+            <a
+              href={`${blogBase}/${post.slug}/`}
+              class="mt-3 inline-block text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-300 dark:hover:text-brand-200"
+            >
+              {currentContent.readMore} →
+            </a>
           </article>
-        ))}
-      </div>
-    </div>
+        </li>
+      ))}
+    </ul>
   </main>
 </Layout>

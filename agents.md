@@ -173,6 +173,28 @@ All content files must have proper frontmatter with:
 - `tags`: Array of relevant tags (optional but recommended)
 - `lang`: Language code ('en', 'zh', or 'ja') for translations (optional)
 
+
+### Tag taxonomy（站点标签体系）
+
+标签是**站点知识图谱 / 主题分类**，不是关键词堆。UI 与返回导航的层级以仓库内机器可读文件为准。
+
+| 角色 | 路径 |
+|---|---|
+| **UI 层级真源（committed）** | `src/data/tag-taxonomy.json` |
+| 辅助函数 | `src/utils/tag-taxonomy.ts`（`groupTagsByTheme`、`breadcrumbForTag`、`normalizeTag`） |
+| 索引 UI | `src/components/tags/TagsTaxonomy.astro` |
+| 详情面包屑 | `src/components/tags/TagBreadcrumb.astro` |
+| 编辑长文 / 合并决策 | `/workspace/blog-pipeline/TAGS.md`（APPROVED clusters；非本站仓库路径） |
+
+规则：
+
+1. **`/tags` 索引按主题分组**：主题顺序与标签归属来自 `tag-taxonomy.json`；路由上存在但不在任何主题 `tags` / `aliases` 映射中的标签，运行时落入 `uncategorizedId`（`other` / 其他）。
+2. **标签详情返回导航是三级层级**：`标签 → 主题 → #slug`（例：`/cn/tags/` → `/cn/tags/#agent-systems` → 当前页）。层级同样由该 JSON 推导，不要硬编码「返回标签列表」。
+3. **新文 frontmatter**：优先复用已有 **canonical EN kebab-case slug**（如 `ai-agents`、`agent-harness`、`sdd`）；不要发明同义变体（`AI Agents` / `Agents` / `agents`）。展示名可在 UI / display map 本地化；slug 本身不编码语言。
+4. **路由现实不变**：`getTagCounts(lang)` 只统计 blog；**count ≥ 2** 才生成 `/tags/<tag>/`。非 blog 类型（Meditations 等）不得无条件链到 `/tags/.../`——见下方 Command and Test Pitfalls 中的 Meditations 条目，并交叉遵守本节。
+5. **大改主题 / 合并 / 重命名**：先由 Tag·体系起草，经 **博客头子** 审阅后再改 `tag-taxonomy.json`（及必要时 frontmatter）；未经站长明确要求不要 push master。
+6. **aliases**：仅用于分组归类（把仍在内容里的 Title Case / 同义字符串映射到 canonical）；链接仍指向实际存在路由的 tag 字符串。
+
 ### File Naming Conventions
 - Use kebab-case for filenames: `my-blog-post.md`
 - Keep filenames descriptive but concise
@@ -273,7 +295,7 @@ This ensures:
 - PowerShell `Select-String -LiteralPath` does not expand wildcards such as `dist/_astro/*.css` and reports `Illegal characters in path`. Use `-Path` for wildcard expansion, or pipe files returned by `Get-ChildItem`.
 - For `node -e` JavaScript in PowerShell, avoid wrapping the whole script in shell single quotes when the script also contains nested quoted values; quoting may be stripped before Node receives it. Prefer a PowerShell double-quoted argument with JavaScript single-quoted strings, or use a script file.
 - A non-interactive `exec` session may not support sending Ctrl+C through `write_stdin`. Start long-running servers with an interruptible TTY when possible, or stop the verified listener by its owning PID/port.
-- Tag detail routes are currently generated from blog tags that occur at least twice. New content types such as Meditations must not render unconditional `/tags/.../` links; use `getTagCounts()` and render a plain tag when the corresponding route is not generated.
+- Tag detail routes are currently generated from blog tags that occur at least twice. New content types such as Meditations must not render unconditional `/tags/.../` links; use `getTagCounts()` and render a plain tag when the corresponding route is not generated. Taxonomy UI / hierarchical back-nav rules live under **Tag taxonomy（站点标签体系）** above (`src/data/tag-taxonomy.json`).
 - Playwright reduced-motion coverage is more deterministic when the test calls `await page.emulateMedia({ reducedMotion: 'reduce' })` before navigation. A describe-level `test.use({ reducedMotion: 'reduce' })` was observed to leak or fail to apply when files shared a worker.
 - `rg` exits with status 1 when it finds no matches. For cleanup assertions where “no matches” is the expected success state, handle `$LASTEXITCODE -eq 1` explicitly instead of treating it as a command failure.
 - When a shared component or data helper expands from `en | zh` to the full `Language` union, update every localized content record and route prefix in the same change. Otherwise static generation can fail only when it reaches the newly added locale, as happened with `HtmlPagesSection` missing its `ja` copy.
