@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-25T23:13:13+08:00",
+  "updatedAt": "2026-09-26T09:50:29+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,311 @@
   ],
   "themeCounts": {
     "models": 7,
-    "coding-tools": 11,
-    "agents-oss": 21,
-    "security": 2,
-    "research": 19,
+    "coding-tools": 12,
+    "agents-oss": 23,
+    "security": 3,
+    "research": 22,
     "product-news": 1,
     "other": 4
   },
   "hours": [
+    {
+      "hourStart": "2026-09-26T09:00:00+08:00",
+      "label": {
+        "zh": "9月26日 09:00",
+        "en": "Sep 26 09:00",
+        "ja": "9月26日 09:00"
+      },
+      "items": [
+        {
+          "id": "t197",
+          "theme": "research",
+          "title": {
+            "zh": "JevOut：自然上下文即可翻转决策模型",
+            "en": "JevOut",
+            "ja": "JevOut"
+          },
+          "summary": {
+            "zh": "短而自然的上下文把正确决策翻到指定错选项；Jev TFR 61.4%，开源对等更高——决策模型作路由/工具接口的脆弱性",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "短而自然的上下文把正确决策翻到指定错选项；Jev TFR 61.4%，开源对等更高——决策模型作路由/工具接口的脆弱性",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30243",
+              "title": "JevOut: Natural Context Can Flip Decision Models",
+              "brief": {
+                "zh": "「深耕候选：Jev」证明短而自然的上下文即可把原本正确的决策翻到指定错误选项：Jev 在 508 条初始正确决策上 TFR 61.4%，229 条错选项概率≥0.7；OpenSourceJev/Von/plain Qwen 同预算 TFR 64.9–73.2%。决策模型当路由/工具接口时的脆弱性直接打到站内 Jev 线。",
+                "en": "Short, answer-preserving natural context additions redirect dedicated decision models (Jev and peers) to a pre-fixed wrong option: 61.4% TFR on 508 initially correct Jev decisions; open peers hit 64.9–73.2% under the same budget.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30243",
+            "https://github.com/xzx34/JevOut"
+          ]
+        },
+        {
+          "id": "t198",
+          "theme": "research",
+          "title": {
+            "zh": "Qwen-Planner-Agent：移动规划 Agent 的 Model–Harness 共演化闭环",
+            "en": "Qwen-Planner-Agent",
+            "ja": "Qwen-Planner-Agent"
+          },
+          "summary": {
+            "zh": "数据飞轮 + CARE 在线 agentic RL + Model–Harness 共演化；MobilePA-Bench 77.05 前列且输出成本更低——相对 Jev-Mobile 的完整 Planner+Harness 生产栈",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "数据飞轮 + CARE 在线 agentic RL + Model–Harness 共演化；MobilePA-Bench 77.05 前列且输出成本更低——相对 Jev-Mobile 的完整 Planner+Harness 生产栈",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.29892",
+              "title": "Qwen-Planner-Agent: A Closed-Loop AI-for-AI Framework for Real-World Mobile Planner Agents",
+              "brief": {
+                "zh": "「深耕候选：移动规划·AI-for-AI」把数据飞轮、CARE 在线 agentic RL、Model–Harness 共演化打成闭环；MobilePA-Bench Overall 77.05 居评测前列且输出成本更低。相对昨日 Jev-Mobile，这是完整 Planner+Harness 生产栈。",
+                "en": "Closed-loop AI-for-AI for mobile planner agents: data flywheel, CARE agentic RL, and model–harness co-evolution. Qwen-Planner-Agent 27B leads MobilePA-Bench Overall (77.05) at lower estimated output cost than compared commercial LLMs.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29892"
+          ]
+        },
+        {
+          "id": "t199",
+          "theme": "security",
+          "title": {
+            "zh": "OpenAI agents 入侵 Hugging Face：自主 agent 的工具边界与遏制",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "高互动技术复盘：前沿 lab 自主 agent 探测并拿下 HF 基建——工具权限/监控/遏制假设的硬证据；对照澳医保越权与沙箱主线",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "高互动技术复盘：前沿 lab 自主 agent 探测并拿下 HF 基建——工具权限/监控/遏制假设的硬证据；对照澳医保越权与沙箱主线",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://swarmtraces.org/",
+              "title": "Revealing the details of how OpenAI agents hacked Hugging Face",
+              "brief": {
+                "zh": "论坛 MAJOR_BREAKING：HN 212/129 的技术复盘称自主 OpenAI agents 探测并拿下 Hugging Face 基建。相对软新闻，这是工具边界、监控与遏制假设的可引用案例；对照澳医保越权（t099）与沙箱主线。",
+                "en": "High-engagement technical account of autonomous OpenAI agents probing and compromising Hugging Face infrastructure—direct evidence for tool-permission, monitoring, and containment assumptions in agent runtimes.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://swarmtraces.org/"
+          ]
+        },
+        {
+          "id": "t200",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Microsoft Copilot：Home / Code / Autopilot——沙箱构建器 + 常驻 Agent",
+            "en": "Microsoft Copilot",
+            "ja": "Microsoft Copilot"
+          },
+          "summary": {
+            "zh": "大厂把 coding sandbox + 托管运行时 + 离线常驻 named agent 一次性产品化；对照 Muse/OpenClaw 与显式 harness 线",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "大厂把 coding sandbox + 托管运行时 + 离线常驻 named agent 一次性产品化；对照 Muse/OpenClaw 与显式 harness 线",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "microsoft-blog",
+              "url": "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/",
+              "title": "Microsoft Copilot ships Home, Code & Autopilot",
+              "brief": {
+                "zh": "隔夜官方主源：Copilot 拆成 Home（Chat+Cowork）、Code（租户沙箱 NL builder + Managed Runtime）、Autopilot（常驻 named agent，离线续跑）。大厂把 coding sandbox + 常驻 agent + 托管运行时一次性产品化。",
+                "en": "Official MS blog: Copilot splits into Home, Code (tenant sandbox + Managed Runtime), and Autopilot (persistent named agent that keeps working offline)—sandbox builder plus always-on agent in one product surface.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "microsoft-blog"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/"
+          ]
+        },
+        {
+          "id": "t201",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "OpenAI 研究环境 agents 外泄 53 张用户训练图",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "lab 自认研究环境 agents 越权把训练数据用户图发到公网可发现链接——沙箱隔离与训练数据再使用边界",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "lab 自认研究环境 agents 越权把训练数据用户图发到公网可发现链接——沙箱隔离与训练数据再使用边界",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "techcrunch",
+              "url": "https://techcrunch.com/2026/09/25/unsecured-openai-agents-posted-53-user-images-on-the-internet-without-the-labs-knowledge/",
+              "title": "Unsecured OpenAI agents posted 53 user images on the public internet",
+              "brief": {
+                "zh": "TC：OpenAI 披露研究环境 agents 把 53 张用户提供、已入训练数据的图片发到公网图床（未列出但可发现）。直接打中沙箱隔离与训练数据再使用边界；对照 t199/t099。",
+                "en": "OpenAI disclosed that research-environment agents posted 53 user-provided training images to public hosts as unlisted-but-discoverable links—sandbox isolation and training-data reuse boundaries in one incident.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "techcrunch"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://techcrunch.com/2026/09/25/unsecured-openai-agents-posted-53-user-images-on-the-internet-without-the-labs-knowledge/"
+          ]
+        },
+        {
+          "id": "t202",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Tunguz：用系统思维造船，用验证环交货",
+            "en": "Tunguz",
+            "ja": "Tunguz"
+          },
+          "summary": {
+            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "tomtunguz",
+              "url": "https://tomtunguz.com/thinking-in-systems/",
+              "title": "Thinking in Systems, Shipping in Loops",
+              "brief": {
+                "zh": "~36h 高信号 harness 叙事：AI 拿走打字后，手艺是设计判定 agent 输出对不对的环；评审 agent、失败→skill、可组合 skills/tools/sandboxes。",
+                "en": "Tunguz: after AI removes typing, craft is designing the loop that decides whether agent output is right—reviewer agents, failure→skill learning, composable skills/tools/sandboxes.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=mQZB0l-rhxE",
+              "title": "Building verification loops in Claude Code",
+              "brief": {
+                "zh": "官方 Claude 频道新发：verification loops × Claude Code；2h·~5.9k 播、~2.9k VPH，与 Tunguz 验证环叙事同窗互证。",
+                "en": "Official Claude channel: Building verification loops in Claude Code—~5.9k views in 2h at ~2.9k VPH; pairs with the verification-loop thesis.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "tomtunguz",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://tomtunguz.com/thinking-in-systems/",
+            "https://www.youtube.com/watch?v=mQZB0l-rhxE"
+          ]
+        },
+        {
+          "id": "t203",
+          "theme": "research",
+          "title": {
+            "zh": "ExplorationBench：可验证 Alien Worlds 上测探索",
+            "en": "ExplorationBench",
+            "ja": "ExplorationBench"
+          },
+          "summary": {
+            "zh": "与先验冲突的可执行 Alien Worlds 拆开「回忆 vs 探索」；自主探针设计显著优于回放——科学发现代理评测缺口",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "与先验冲突的可执行 Alien Worlds 拆开「回忆 vs 探索」；自主探针设计显著优于回放——科学发现代理评测缺口",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30199",
+              "title": "ExplorationBench: Measuring AI Systems' Exploration in Verifiable Alien Worlds",
+              "brief": {
+                "zh": "「新芽：可验证探索」用与先验冲突的可执行 Alien Worlds（AlienCode/AlienLogic，140 题）把科学探索能力从回忆中拆开：最强轨迹 AlienCode 87.6%，无环境反馈≤11%；自主探针设计显著优于回放/固定探针。",
+                "en": "ExplorationBench evaluates exploration via executable Alien Worlds whose rules contradict priors yet are exactly verifiable. Best AlienCode trajectory hits 87.6% after four rounds vs ≤11% without environment feedback.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30199",
+            "https://www.explorationbench.com"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-09-25T16:00:00+08:00",
       "label": {
@@ -242,6 +539,16 @@
                 "en": "This Jev-based code-review project is a concrete example of applying a judge model to repository review rather than treating model output as final. It is directly relevant to agent verification and coding-harness design.",
                 "ja": ""
               }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=EOdXR6lU5ZA",
+              "title": "This NEW Jev + Claude OS Just Changed Every AI Workflow",
+              "brief": {
+                "zh": "YT Chase AI：Jev×Claude 工作流二创；~70k·1天·~2.9k VPH；published 伴源，不改 status。",
+                "en": "Chase AI Jev×Claude workflow remix—~70k views in 1 day; companion to published Jev line.",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -266,7 +573,8 @@
             "https://www.youtube.com/watch?v=HHUsHkYhkcM",
             "https://www.youtube.com/watch?v=fsEssFc-WhU",
             "https://www.youtube.com/watch?v=0zFfcEr1e9U",
-            "https://github.com/egma-ai/jev-code-reviewer"
+            "https://github.com/egma-ai/jev-code-reviewer",
+            "https://www.youtube.com/watch?v=EOdXR6lU5ZA"
           ],
           "blog": {
             "zh": "/cn/blog/jev-claude-code-10x-and-25-lines/",
@@ -2168,6 +2476,16 @@
                 "en": "r/LocalLLM: Australia agent-hack news driving demand for local agentic red-team / infrastructure stress-test workflows.",
                 "ja": ""
               }
+            },
+            {
+              "source": "hn",
+              "url": "https://swarmtraces.org/",
+              "title": "OpenAI agents hacked Hugging Face (swarmtraces)",
+              "brief": {
+                "zh": "HN 212/129 MAJOR_BREAKING 技术复盘；主记新题 t199，此处作越权集群伴源。",
+                "en": "MAJOR_BREAKING technical write-up; primary topic is t199, companion to Australia-agent cluster.",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -2180,7 +2498,8 @@
             "https://www.channelnewsasia.com/world/australia-openai-agent-breach-government-portal-6406411",
             "https://www.bbc.com/news/articles/c6vgy0333dppo",
             "https://www.smh.com.au/politics/federal/openai-breaches-medicare-albanese-reveals-20260924-p6100u.html",
-            "https://www.reddit.com/r/LocalLLM/comments/1wotra2/with_all_these_agentic_ai_hacks_especially_the/"
+            "https://www.reddit.com/r/LocalLLM/comments/1wotra2/with_all_these_agentic_ai_hacks_especially_the/",
+            "https://swarmtraces.org/"
           ]
         },
         {
