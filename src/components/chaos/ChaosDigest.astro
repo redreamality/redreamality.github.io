@@ -1,8 +1,8 @@
 ---
 /**
  * Chaos digest feed — Hot list + theme-grouped briefs (+ collapsed hourly timeline).
- * Layout (Impeccable Operate+Read): sticky theme rail (lg+) / chip scroller (narrow);
- * main pane Hot → themes. Locale isolation; nofollow externals; same-locale blog links.
+ * Layout (Impeccable Operate+Read): sticky theme+hour rail (lg+) / chip scroller (narrow);
+ * main pane Hot → themes → hourly timeline. Locale isolation; nofollow externals; same-locale blog links.
  */
 import digest from '../../data/chaos-digest.json';
 import type { Language } from '../../utils/i18n';
@@ -47,7 +47,7 @@ const copy = {
     empty: '暂无热点选题。',
     archive: '历史深度短文',
     archiveHint: '旧版底噪长文仍可阅读',
-    nav: '主题导航',
+    nav: '导航',
     status: { published: '已发文', shortlisted: '候选', writing: '撰写中', inbox: '观察' } as Record<string, string>,
     themes: {
       models: '模型发布',
@@ -74,7 +74,7 @@ const copy = {
     empty: 'No hot topics yet.',
     archive: 'Archive',
     archiveHint: 'Earlier long-form chaos notes',
-    nav: 'Theme navigation',
+    nav: 'Navigation',
     status: { published: 'Published', shortlisted: 'Shortlisted', writing: 'Writing', inbox: 'Watching' } as Record<string, string>,
     themes: {
       models: 'Models',
@@ -101,7 +101,7 @@ const copy = {
     empty: 'まだホットトピックはありません。',
     archive: 'アーカイブ',
     archiveHint: '以前の長文カオス記事',
-    nav: 'テーマナビ',
+    nav: 'ナビ',
     status: { published: '公開済', shortlisted: '候補', writing: '執筆中', inbox: '観察' } as Record<string, string>,
     themes: {
       models: 'モデル',
@@ -255,8 +255,14 @@ function visibleSourceBriefs(item: DigestItem): { shown: SourceBrief[]; rest: So
 }
 
 const HOT_ID = 'chaos-hot';
+const TIMELINE_ID = 'chaos-timeline';
 function themeAnchor(themeId: string) {
   return `chaos-theme-${themeId}`;
+}
+function hourAnchor(hourStart: string) {
+  // e.g. 2026-09-26T09:00:00+08:00 → chaos-hour-2026092609
+  const digits = hourStart.replace(/\D/g, '').slice(0, 10);
+  return `chaos-hour-${digits}`;
 }
 
 const EXT_REL = 'noopener noreferrer nofollow';
@@ -273,13 +279,27 @@ function statusClass(status: string) {
   return 'bg-surface-200/80 dark:bg-surface-700 text-surface-600 dark:text-surface-300';
 }
 
-const navLinks = [
+const themeNavLinks = [
   { id: HOT_ID, label: copy.hot, count: hotItems.length },
   ...themeSections.map(({ themeId, items }) => ({
     id: themeAnchor(themeId),
     label: themeLabel(themeId),
     count: items.length,
   })),
+];
+
+const hourNavLinks = hours.map((hour) => ({
+  id: hourAnchor(hour.hourStart),
+  label: hour.label[L] || hour.label.en || hourShort(hour.hourStart),
+  count: hour.items.length,
+}));
+
+/** Narrow chips: themes + one timeline jump (hours live in the left rail). */
+const chipNavLinks = [
+  ...themeNavLinks,
+  ...(hours.length > 0
+    ? [{ id: TIMELINE_ID, label: copy.timeline, count: hours.reduce((n, h) => n + h.items.length, 0) }]
+    : []),
 ];
 ---
 
@@ -305,7 +325,7 @@ const navLinks = [
         style="top: var(--site-header-height);"
       >
         <ul class="flex gap-2 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {navLinks.map((link) => (
+          {chipNavLinks.map((link) => (
             <li class="shrink-0">
               <a
                 href={`#${link.id}`}
@@ -329,7 +349,7 @@ const navLinks = [
           >
             <p class="mb-3 text-[11px] font-semibold uppercase tracking-wider text-surface-400 dark:text-surface-500">{copy.nav}</p>
             <ul class="space-y-0.5 border-l border-surface-200 dark:border-surface-800">
-              {navLinks.map((link) => (
+              {themeNavLinks.map((link) => (
                 <li>
                   <a
                     href={`#${link.id}`}
@@ -341,6 +361,24 @@ const navLinks = [
                 </li>
               ))}
             </ul>
+            {hourNavLinks.length > 0 && (
+              <>
+                <p class="mt-6 mb-3 text-[11px] font-semibold uppercase tracking-wider text-surface-400 dark:text-surface-500">{copy.timeline}</p>
+                <ul class="space-y-0.5 border-l border-surface-200 dark:border-surface-800">
+                  {hourNavLinks.map((link) => (
+                    <li>
+                      <a
+                        href={`#${link.id}`}
+                        class="group flex items-center justify-between gap-2 border-l-2 border-transparent -ml-px pl-3 py-1.5 text-sm text-surface-600 dark:text-surface-300 hover:border-accent-500 hover:text-surface-900 dark:hover:text-white transition-colors"
+                      >
+                        <span class="truncate tabular-nums">{link.label}</span>
+                        <span class="shrink-0 tabular-nums text-xs text-surface-400 group-hover:text-accent-600 dark:group-hover:text-accent-400">{link.count}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </nav>
         </aside>
 
@@ -533,9 +571,9 @@ const navLinks = [
             </section>
           ))}
 
-          <!-- Hourly timeline: collapsed by default -->
+          <!-- Hourly timeline: collapsed by default; left-nav / chips open via hash -->
           {hours.length > 0 && (
-            <details class="group border-t border-dashed border-surface-300 dark:border-surface-700 pt-2">
+            <details id={TIMELINE_ID} class="group scroll-mt-[calc(var(--site-header-height)+1rem)] border-t border-dashed border-surface-300 dark:border-surface-700 pt-2">
               <summary class="cursor-pointer list-none py-3 flex items-center justify-between gap-3">
                 <span class="font-display text-base font-bold text-surface-800 dark:text-surface-200">
                   {copy.timeline}
@@ -546,7 +584,7 @@ const navLinks = [
 
               <div class="pb-2 space-y-8">
                 {hours.map((hour) => (
-                  <div>
+                  <div id={hourAnchor(hour.hourStart)} class="scroll-mt-[calc(var(--site-header-height)+1rem)]">
                     <header class="mb-2 flex flex-wrap items-baseline justify-between gap-2">
                       <time datetime={hour.hourStart} class="font-display text-sm font-bold tabular-nums text-surface-900 dark:text-white">
                         {hour.label[L] || hour.label.en}
@@ -610,4 +648,20 @@ const navLinks = [
       </ul>
     </details>
   )}
+
+<script is:inline>
+  (function () {
+    function openTimelineForHash() {
+      var hash = (location.hash || '').replace(/^#/, '');
+      if (!hash) return;
+      var details = document.getElementById('chaos-timeline');
+      if (!details || details.tagName !== 'DETAILS') return;
+      if (hash === 'chaos-timeline' || hash.indexOf('chaos-hour-') === 0) {
+        details.open = true;
+      }
+    }
+    openTimelineForHash();
+    window.addEventListener('hashchange', openTimelineForHash);
+  })();
+</script>
 </div>
