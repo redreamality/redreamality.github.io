@@ -7,8 +7,6 @@ tags: ['ai', 'Google', 'Gemini', 'Android', 'Pixel', 'developer-tools']
 lang: 'en'
 ---
 
-# Google Gemini 3 Goes Mainstream: The Quiet Agentic AI Takeover Happening on Your Phone
-
 March 2026 has been full of loud AI headlines: NVIDIA talking infrastructure, OpenAI talking platforms, and every model lab trying to dominate benchmark discourse. Google took a different route. It shipped.
 
 Gemini 3 Flash is now the default model across the Gemini app, AI Mode in Search, the Gemini API, Vertex AI, and Google AI Studio. At the same time, the March Pixel Drop turned Gemini from an assistant you talk to into software that can act on your behalf inside third-party apps such as Uber and Grubhub.

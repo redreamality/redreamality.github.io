@@ -189,7 +189,7 @@ print(sys.path)
 
 ### 1\. Using a `.env` File for Debugging and Opt-in Terminal Loading
 
-This is the most commonly used and recommended method because it confines environment variable configuration within the project workspace and does not affect other projects.
+A project-local `.env` file keeps variables out of global settings, but it only affects processes whose launching tool loads the file.
 
 1.  **Create a file named `.env` in your project root directory.**
     Project structure:
@@ -198,8 +198,9 @@ This is the most commonly used and recommended method because it confines enviro
     your_project/
     ├── .env
     ├── your_script.py
-    └── your_modules/
-        └── my_module.py
+    └── src/
+        └── my_package/
+            └── __init__.py
     ```
 
 2.  **Set PYTHONPATH in the `.env` file.**
@@ -245,6 +246,14 @@ This is the most commonly used and recommended method because it confines enviro
 Open a new terminal after changing these settings. For a specific debug configuration, set `"envFile": "${workspaceFolder}/.env"` in `.vscode/launch.json` and restart debugging. Relative paths such as `./src` depend on the launched process's working directory.
 
 These are separate from `python.analysis.extraPaths`: that setting helps Pylance resolve imports in the editor but does not set the runtime's PYTHONPATH.
+
+From the project root, verify the same example rather than testing a different installed package:
+
+```bash
+python -c "import sys, my_package; print(sys.executable); print(my_package.__file__)"
+```
+
+The output should identify the selected interpreter and `src/my_package/__init__.py`. Repeat the check inside a failing debug session: a successful terminal import does not prove that the debugger received the same environment.
 
 ### 2\. Modifying `settings.json` in Workspace Settings
 
@@ -312,3 +321,9 @@ Check `sys.executable` and `sys.path` in the failing process, not only in a diff
 If imports work at runtime but Pylance still reports an error, check the selected interpreter and `python.analysis.extraPaths`. If only the editor resolves the import, configure the runtime environment or install the local package; editor analysis settings alone cannot fix a runtime `ModuleNotFoundError`.
 
 For packaged projects, prefer a virtual environment and an editable installation. Use project-local PYTHONPATH settings when you specifically need to import uninstalled source directories.
+
+## References
+
+- [VS Code Python environments and terminal settings](https://code.visualstudio.com/docs/python/environments)
+- [VS Code Python debugging](https://code.visualstudio.com/docs/python/debugging)
+- [Python module search path initialization](https://docs.python.org/3/library/sys_path_init.html)

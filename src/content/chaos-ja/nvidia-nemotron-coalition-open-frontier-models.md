@@ -8,8 +8,6 @@ lang: "ja"
 translatedFrom: "nvidia-nemotron-coalition-open-frontier-models"
 ---
 
-# NVIDIAのNemotronコアリション：オープンフロンティアモデルがチームスポーツになる理由
-
 2026年3月16日、NVIDIAはGTC初日に単なるモデルリリースを超えた戦略的な発表を行った。それがNemotronコアリション——8つのAIラボがNVIDIA DGX Cloud上でオープンフロンティアモデルを共同開発する新たなアライアンスだ。
 
 メンバーリストは際立って強力であり、互いに補完的だ。Mistral AI、Cursor、LangChain、Perplexity、Black Forest Labs、Reflection AI、Sarvam、そしてThinking Machines Lab。OpenAIやAnthropicと真っ向から競う単一のクローズドな旗艦モデルを構築しようとするのではなく、NVIDIAはスペシャリストの連合を結成し、共通のインフラスタックを提供している。

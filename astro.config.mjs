@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { fileURLToPath } from 'node:url';
 import tailwind from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
 import mdx from '@astrojs/mdx';
@@ -9,8 +10,10 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeOutboundLinks from './src/plugins/rehype-outbound-links.ts';
 import visualManifest from './src/data/visuals-manifest.json';
+import { getLegacyBlogRedirectPaths } from './scripts/legacy-blog-redirects.mjs';
 
 const siteUrl = 'https://redreamality.com';
+const legacyBlogRedirectPaths = getLegacyBlogRedirectPaths(fileURLToPath(new URL('./src/content/', import.meta.url)));
 /** @type {Record<string, string>} */
 const visualLanguagePrefixes = { en: '', zh: '/cn', ja: '/ja' };
 /** @type {string[]} */
@@ -89,6 +92,8 @@ export default defineConfig({
         // Parse URL to get pathname for precise matching
         const url = new URL(page);
         const path = url.pathname;
+
+        if (legacyBlogRedirectPaths.has(path)) return false;
 
         // Exclude outbound confirm interstitial
         if (path === '/go/' || path === '/go') return false;

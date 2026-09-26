@@ -90,7 +90,7 @@ export PYTHONPATH="/path/to/first/module:/path/to/second/module"
 如果你想在现有的PYTHONPATH基础上添加新的路径，可以这样做：
 
 ```bash
-export PYTHONPATH="/new/path:$PYTHONPATH"
+export PYTHONPATH="/new/path${PYTHONPATH:+:$PYTHONPATH}"
 ```
 
 #### 2\. 永久设置 (Shell配置文件)
@@ -164,9 +164,9 @@ print(sys.path)
 
 ## 在VS Code中设置Python路径的几种主要方式：
 
-### 1\. 使用`.env`文件（推荐方法）
+### 1\. 为调试和终端分别配置 `.env`
 
-这是最常用且推荐的方法，因为它将环境变量的配置限定在项目工作区内，不会影响其他项目。
+`.env` 可以把变量保存在项目内，但文件本身不会改变 Python 的环境。需要确认启动程序是否读取它。
 
 1.  **在你的项目根目录下创建一个名为`.env`的文件。**
     项目结构如下：
@@ -175,12 +175,13 @@ print(sys.path)
     your_project/
     ├── .env
     ├── your_script.py
-    └── your_modules/
-        └── my_module.py
+    └── src/
+        └── my_package/
+            └── __init__.py
     ```
 
 2.  **在`.env`文件中设置PYTHONPATH。**
-    打开`.env`文件并添加以下内容。VS Code的Python扩展会自动加载此文件。
+    打开 `.env` 文件并添加以下内容。Python 本身不会自动读取 `.env`。
 
       * **语法：** `VARIABLE=value`
 
@@ -207,18 +208,27 @@ print(sys.path)
         ```
 
 3.  **配置VS Code以加载`.env`文件。**
-    通常，VS Code的Python扩展会自动识别并使用`.env`文件。如果它没有生效，你可以通过在`launch.json`（用于调试）或`settings.json`中指定`.env`文件的路径来确保它被加载。
+    `python.envFile` 指定文件位置；若要让新建的集成终端读取变量，还须启用默认值为 `false` 的 `python.terminal.useEnvFile`。调试器需要在对应的 `launch.json` 配置中设置 `envFile`。
     打开或创建`.vscode/settings.json`文件，并添加：
 
     ```json
     {
-        "python.envFile": "${workspaceFolder}/.env"
+        "python.envFile": "${workspaceFolder}/.env",
+        "python.terminal.useEnvFile": true
     }
     ```
 
     `${workspaceFolder}`是VS Code的一个预定义变量，代表你当前打开的项目根目录。
 
-**重要提示**：修改`.env`文件后，你可能需要重新加载VS Code窗口或重启调试会话才能使更改生效。
+更改后新建终端或重启调试会话。相对路径 `./src` 取决于 Python 进程的工作目录。`python.analysis.extraPaths` 只帮助 Pylance 分析导入，不会设置运行时的 `PYTHONPATH`。
+
+在项目根目录启动的进程中验证：
+
+```bash
+python -c "import sys, my_package; print(sys.executable); print(my_package.__file__)"
+```
+
+结果应指向所选解释器和 `src/my_package/__init__.py`。如果终端成功而调试失败，在调试进程里检查相同信息，不要把两个启动环境视为同一个。
 
 ### 2\. 在工作区设置中修改`settings.json`
 
@@ -251,7 +261,7 @@ print(sys.path)
 
 在很多情况下，**最好的做法不是手动设置PYTHONPATH，而是使用Python虚拟环境**。VS Code与虚拟环境（如 `venv` 或 `conda`）的集成非常好。
 
-当你创建一个虚拟环境并为其安装依赖包时，VS Code会自动检测到它。通过选择这个环境作为你的工作区解释器，VS Code会自动处理好所有的模块路径问题，包括代码补全、Go to Definition和调试。
+选择解释器决定 Python 运行环境，但不会自动安装本地源码，也不会将任意 `src` 目录加入搜索路径。包必须已安装，或者由进程的搜索路径明确包含。
 
 1.  **创建虚拟环境**：
     在你的项目根目录下打开终端，运行：
@@ -270,7 +280,7 @@ print(sys.path)
       * VS Code会列出所有检测到的Python解释器，包括你在`.venv`中创建的那个。选择它。
 
 3.  **激活环境并安装包**：
-    VS Code会自动在集成终端中激活你选择的虚拟环境。现在，你可以使用`pip install`来安装所有项目依赖，它们会被安装到这个隔离的环境中，并且VS Code能够立即找到它们。
+    新建使用所选环境的终端。对于已有打包元数据的项目，可以用 `uv pip install -e .` 进行可编辑安装；没有打包配置时不能仅靠这条命令解决导入问题。
 
 ### 总结与对比
 
@@ -278,6 +288,12 @@ print(sys.path)
 | :--- | :--- | :--- | :--- |
 | **`.env` 文件** | **项目隔离**，配置简单，不影响系统环境，便于团队协作（可将`.env.example`加入版本控制）。 | 需要重启终端或调试会话才能生效。 | 开发时需要引用项目内部的非安装模块。 |
 | **`settings.json`** | 直接集成在VS Code工作区设置中。 | 配置稍微复杂，主要影响VS Code的集成终端。 | 需要为VS Code终端自定义复杂的环境变量。 |
-| **选择解释器 (虚拟环境)** | **最佳实践**，完美实现项目隔离，自动管理路径，避免依赖冲突。 | 需要创建和管理虚拟环境。 | **几乎所有Python项目**，从小型脚本到大型应用。 |
+| **选择解释器 (虚拟环境)** | 隔离各项目安装的依赖。 | 本地包仍需安装或显式配置搜索路径。 | 有独立依赖的 Python 项目。 |
 
-对于绝大多数在VS Code中的Python开发，**强烈建议优先使用虚拟环境**。如果确实需要添加未安装的本地模块路径，**使用`.env`文件是管理PYTHONPATH的最佳方式**。
+对已有打包配置的项目，优先使用虚拟环境和可编辑安装。需要临时引用未安装源码时，再选择项目级 `PYTHONPATH`。排错时检查失败进程的 `sys.executable`、`sys.path` 和当前工作目录。
+
+## 参考资料
+
+- [VS Code Python 环境与终端设置](https://code.visualstudio.com/docs/python/environments)
+- [VS Code Python 调试配置](https://code.visualstudio.com/docs/python/debugging)
+- [Python 模块搜索路径初始化](https://docs.python.org/3/library/sys_path_init.html)

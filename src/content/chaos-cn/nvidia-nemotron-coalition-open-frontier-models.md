@@ -8,8 +8,6 @@ lang: "zh"
 translatedFrom: "nvidia-nemotron-coalition-open-frontier-models"
 ---
 
-# NVIDIA 的 Nemotron 联盟：为什么开放前沿模型正在变成一场团队战
-
 2026 年 3 月 16 日，在 GTC 首日，NVIDIA 抛出的最重要消息不只是一个新模型，而是一个更大的组织动作: Nemotron Coalition。这个联盟把 8 家 AI 实验室拉到同一张桌子上，在 NVIDIA 的 DGX Cloud 上共同开发开放前沿模型。
 
 这 8 家成员分别是 Mistral AI、Cursor、LangChain、Perplexity、Black Forest Labs、Reflection AI、Sarvam 和 Thinking Machines Lab。这个名单有两个特点: 一是强，二是互补。NVIDIA 并没有选择像 OpenAI 或 Anthropic 那样，自己去打造一个完全封闭的旗舰模型，而是把不同方向的专长整合进一个共享基础设施和共享路线图的联盟里。

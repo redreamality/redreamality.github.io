@@ -7,8 +7,6 @@ tags: ["ai", "Telecom", "NVIDIA", "Edge AI", "Distributed Systems", "AI Infrastr
 lang: "en"
 ---
 
-# Telecom Networks Want To Become the Distributed Inference Layer for AI
-
 For years, telecom operators were cast as the pipes of the internet. AI workloads happened somewhere else, usually inside hyperscale cloud regions, and carriers merely moved the traffic around.
 
 That framing is starting to break.

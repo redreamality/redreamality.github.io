@@ -8,8 +8,6 @@ lang: "zh"
 translatedFrom: "local-agent-computers-nemoclaw"
 ---
 
-# AI Agent 正在变成一种新的个人计算机形态
-
 过去两年，大多数 AI 产品团队默认接受了一个前提：真正的 agent 应该跑在云上。
 
 这个前提现在开始松动了。

@@ -12,14 +12,14 @@ const pages = [
     slug: 'who-starred-my-github-repo-how-to-view',
     title: 'How to See Who Starred Your GitHub Repository',
     answer: 'Open the Stargazers Page',
-    content: 'You do not need to own a public repository',
+    content: 'a public repository does not guarantee public access to its stargazers',
     description: 'See who starred a GitHub repository using its Stargazers page. Find the URL, understand access limits, and distinguish stars from watchers.',
   },
   {
     slug: 'openspec-tutorial-cli-commands-agents-md-examples',
     title: 'OpenSpec Tutorial: Install the CLI and Run Your First Change',
     answer: 'OpenSpec Quick Start',
-    content: 'pnpm dlx @fission-ai/openspec@latest init .',
+    content: 'pnpm dlx @fission-ai/openspec@1.13.2 init . --tools none',
     description: 'Install and initialize OpenSpec, create your first change, validate specs, and archive completed work. Includes CLI commands and AGENTS.md examples.',
   },
   {

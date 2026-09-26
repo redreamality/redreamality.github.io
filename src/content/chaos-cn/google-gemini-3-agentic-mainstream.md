@@ -8,8 +8,6 @@ lang: 'zh'
 translatedFrom: 'google-gemini-3-agentic-mainstream'
 ---
 
-# Google Gemini 3 走向主流：正在你手机上悄悄发生的 Agentic AI 接管
-
 2026 年 3 月的 AI 新闻非常吵闹。NVIDIA 在讲基础设施，OpenAI 在讲平台，几乎每一家模型公司都在争抢注意力。Google 走的是另一条路线: 它没有先制造最大声量，而是先把东西真正推到了用户手里。
 
 Gemini 3 Flash 现在已经成为 Gemini App、Search 的 AI Mode、Gemini API、Vertex AI 和 Google AI Studio 的默认模型。与此同时，2026 年 3 月的 Pixel Drop 还把 Gemini 从“你可以和它聊天的助手”，推进成“可以在手机里替你执行任务的软件”。

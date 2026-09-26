@@ -8,8 +8,6 @@ lang: "ja"
 translatedFrom: "gitlab-duo-agent-platform-mcp-devsecops"
 ---
 
-# GitLab Duo Agent Platform + MCP：GitLabはAIコーディングエージェントのOSになろうとしている
-
 AIコーディングに関するほとんどの見出しは、今もある一つの狭い問いを中心に回っている。どのモデルがより良いコードを書くか、というものだ。GitLabは別の賭けをしている。次のAI開発フェーズを、コード生成の問題としてではなく、ワークフロー制御の問題として捉えているのだ。
 
 だからこそ、GitLab Duo Agent Platformが重要なのだ。

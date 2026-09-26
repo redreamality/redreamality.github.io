@@ -8,8 +8,6 @@ lang: "zh"
 translatedFrom: "aws-ai-registry-for-agents-spec"
 ---
 
-# AWS 想让 Agent 开发拥有包管理层，而不只是 Prompt 层
-
 现在的 AI agent 生态，真正缺的也许不是更多 prompt，而是一套像样的打包和分发机制。
 
 今天大家分享 agent 的方式仍然很原始：GitHub 仓库、零散的 prompt 文档、MCP server 链接、复制粘贴的说明文件，以及各种“先按 README 配一遍环境再说”的手工流程。只要你真的做过 agent 工作流，就会知道这里的问题有多明显：安装不一致、依赖关系不透明、别人能跑起来的东西你未必能稳定复现。

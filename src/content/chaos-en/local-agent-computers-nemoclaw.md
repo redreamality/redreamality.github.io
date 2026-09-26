@@ -7,8 +7,6 @@ tags: ["ai", "NVIDIA", "OpenClaw", "NemoClaw", "ai-agents", "Local AI", "Persona
 lang: "en"
 ---
 
-# AI Agents Are Becoming a New Kind of Personal Computer
-
 For the past two years, most AI product strategy has assumed the same default: the real agent lives in the cloud.
 
 That assumption is starting to break.

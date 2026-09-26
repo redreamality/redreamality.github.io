@@ -7,8 +7,6 @@ tags: ["ai", "NVIDIA", "Open Models", "Nemotron", "ai-agents"]
 lang: "en"
 ---
 
-# NVIDIA's Nemotron Coalition: Why Open Frontier Models Are Becoming a Team Sport
-
 On March 16, 2026, NVIDIA used day one of GTC to announce something more strategic than a single model release: the Nemotron Coalition, a new alliance of eight AI labs that will co-develop open frontier models on NVIDIA DGX Cloud.
 
 The member list is unusually strong and unusually complementary: Mistral AI, Cursor, LangChain, Perplexity, Black Forest Labs, Reflection AI, Sarvam, and Thinking Machines Lab. Instead of trying to build one closed flagship model to compete head-on with OpenAI or Anthropic, NVIDIA is assembling a coalition of specialists and giving them a shared infrastructure stack.

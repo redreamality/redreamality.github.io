@@ -8,8 +8,6 @@ lang: "zh"
 translatedFrom: "openai-symphony-elixir-agent-orchestration"
 ---
 
-# OpenAI Symphony：为什么这家最大 AI 实验室会用 Elixir 做 Agent 编排
-
 OpenAI 开源 Symphony，真正值得关注的并不是“又多了一个 AI agent 框架”，而是它背后的技术判断变了。过去几年，大多数 AI 工具链默认都围绕 Python 组织，因为模型生态、库生态和开发者习惯都在那里。但 Symphony 释放出的信号是，agent orchestration 正在从一个“怎么调模型”的问题，变成一个“怎么管理分布式工作流”的问题。
 
 这也是为什么 Elixir 才是这条消息真正的重点。

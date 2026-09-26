@@ -7,8 +7,6 @@ tags: ['ai', 'WordPress', 'mcp', 'open-source', 'software-engineering']
 lang: 'en'
 ---
 
-# WordPress Is Turning AI Into Platform Infrastructure, Not Just Plugins
-
 Most AI coverage still focuses on model labs, coding agents, and cloud infrastructure. WordPress points to a different battleground: the publishing stack itself.
 
 That is why WordPress's March 10, 2026 proposal to create a formal AI Team matters more than it may look at first glance. On its own, a new team proposal could sound administrative. In context, though, it lands alongside official provider tooling and MCP-related projects that suggest WordPress wants AI to become shared platform infrastructure across its ecosystem, not just another plugin category.

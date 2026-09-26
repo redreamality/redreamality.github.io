@@ -8,8 +8,6 @@ lang: "zh"
 translatedFrom: "gitlab-duo-agent-platform-mcp-devsecops"
 ---
 
-# GitLab Duo Agent Platform + MCP：GitLab 想成为 AI 编码代理的操作系统
-
 大多数 AI 编码新闻，讨论的还是同一个问题：到底哪个模型写代码更强。GitLab 押注的方向不一样。它在推动的不是“更好的代码生成”，而是“谁来控制 AI 编码工作流”。
 
 这也是 GitLab Duo Agent Platform 真正值得关注的原因。

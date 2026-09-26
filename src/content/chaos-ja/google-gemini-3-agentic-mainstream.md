@@ -8,8 +8,6 @@ lang: 'ja'
 translatedFrom: 'google-gemini-3-agentic-mainstream'
 ---
 
-# Google Gemini 3が主流へ：あなたのスマートフォンで静かに進む自律型AIの浸透
-
 2026年3月は大きなAIニュースに溢れていた。NVIDIAはインフラについて語り、OpenAIはプラットフォームについて語り、各モデルラボはベンチマーク競争に躍起になっていた。Googleは別の道を選んだ。実際に製品を出荷したのだ。
 
 Gemini 3 Flashは今や、Geminiアプリ、SearchのAIモード、Gemini API、Vertex AI、Google AI Studioといった関連サービス全体のデフォルトモデルとなっている。同時に、3月のPixel Dropによって、Geminiはユーザーとわかりやすいやりとりをするアシスタントから、UberやGrubhubといったサードパーティアプリ内でユーザーの代わりに行動できるソフトウェアへと変貌した。

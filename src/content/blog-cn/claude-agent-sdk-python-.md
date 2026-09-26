@@ -1,1541 +1,413 @@
 ---
 title: 'Claude Agent SDK (Python) 学习指南'
 pubDate: 2025-10-15T03:15:48.639Z
-description: 'Claude Agent SDK (Python) 全方位学习指南：从架构原理、核心功能到实战案例，助您掌握如何通过 Python 编程方式高效集成与扩展 Claude Code 的强大能力。'
+description: '固定 Python SDK 0.1.3，说明 query、ClaudeSDKClient 生命周期、hooks、MCP 工具、超时和清理，并提供完整示例及离线验证边界。'
 author: 'Remy'
 tags: ['claude-code', 'vibe-coding', 'python']
 ---
-**文档版本**: 1.0
-**生成时间**: 2025-10-15
-**SDK 版本**: 0.1.3
-**学习级别**: 标准级（预计学习时间：2-4 小时）
-**目标用户**: Python 开发者（中级）
 
----
+[Claude Agent SDK for Python](https://github.com/anthropics/claude-agent-sdk-python/tree/v0.1.3) 是通过 Python 驱动 Claude Code、接收类型化消息的开发库。本文保留原文的 **claude-agent-sdk==0.1.3** 基线，解释这个正式发布版本的真实接口，不把它当作最新版本，也不建议新服务直接部署旧依赖。
 
-## 目录
+先区分两个同名操作：模块级 `query()` 返回消息异步迭代器；`ClaudeSDKClient.query()` 只发送输入，返回 `None`，答案需要通过 `receive_response()` 消费。Hooks 通过 `ClaudeAgentOptions.hooks`、`HookMatcher` 和异步回调配置，不需要另找一个同步客户端。
 
-1. [项目概述](#-项目概述)
-2. [快速开始（15 分钟）](#-快速开始15-分钟)
-3. [核心概念（20 分钟）](#-核心概念20-分钟)
-4. [主要功能（30 分钟）](#-主要功能30-分钟)
-5. [架构设计（20 分钟）](#-架构设计20-分钟)
-6. [实战示例（30 分钟）](#-实战示例30-分钟)
-7. [学习路径建议](#-学习路径建议)
-8. [常见问题与故障排查](#-常见问题与故障排查)
-9. [参考资料](#-参考资料)
-10. [附录](#-附录)
+下面明确区分本地验证与模型请求。本地检查不需要密钥、不启动 Claude Code，也不会产生模型调用费用。在线示例需要自行完成认证，可能产生费用。文中的在线预期输出是验收条件，不是已经取得的模型实测记录。
 
----
+## 安装与版本检查
 
-## 📖 项目概述
-
-### 1.1 项目简介
-
-**Claude Agent SDK for Python** 是 Anthropic 官方提供的 Python SDK，用于以编程方式与 Claude Code 交互。它封装了 Claude Code CLI，提供了简洁的 Pythonic API，支持：
-
-- **双向对话**：与 Claude 进行多轮交互式对话
-- **自定义工具**：通过进程内 MCP 服务器扩展 Claude 的能力
-- **Hook 系统**：在工具执行前后注入自定义逻辑
-- **权限控制**：细粒度的工具使用权限管理
-- **异步优先**：基于 `anyio` 的跨平台异步支持
-
-**项目类型**: SDK / 开发者库
-**编程语言**: Python 3.10+
-**许可证**: MIT
-**仓库地址**: https://github.com/anthropics/claude-agent-sdk-python
-
-### 1.2 核心特性
-
-1. **两种使用模式**
-   - `query()`: 简单的一次性查询，适用于无状态场景
-   - `ClaudeSDKClient`: 交互式双向对话，适用于有状态场景
-
-2. **进程内 MCP 工具**
-   - 使用 `@tool` 装饰器快速定义自定义工具
-   - 无需独立进程，性能优于外部 MCP 服务器
-   - 直接访问应用程序状态和变量
-
-3. **强大的控制能力**
-   - Hook 系统：PreToolUse、PostToolUse 等生命周期钩子
-   - 权限回调：动态决策工具使用权限
-   - 中断支持：随时停止长时间运行的任务
-
-4. **类型安全**
-   - 完整的类型注解（支持 mypy）
-   - 强类型消息和内容块
-   - IDE 自动补全和类型检查
-
-5. **异步设计**
-   - 基于 `anyio` 支持 asyncio 和 trio
-   - 流式消息处理，低内存占用
-   - 并发任务管理
-
-### 1.3 适用场景
-
-**适合使用 SDK 的场景**：
-- 构建聊天应用或对话式 UI
-- 自动化代码生成和分析工具
-- 集成 Claude 到现有 Python 应用
-- 创建自定义开发助手或 CI/CD 工具
-- 需要自定义工具和权限控制的企业级应用
-
-**不适合的场景**：
-- 简单的一次性脚本（直接使用 CLI 更简单）
-- 非 Python 项目（考虑其他语言的 SDK）
-- 不需要编程控制的交互（使用 Claude Code GUI）
-
-### 1.4 学习目标
-
-完成本指南后，你将能够：
-
-✅ 理解 Claude Agent SDK 的架构和工作原理
-✅ 使用 `query()` 和 `ClaudeSDKClient` 进行基本和高级查询
-✅ 创建自定义 MCP 工具扩展 Claude 的能力
-✅ 使用 Hook 系统实现自动化和权限控制
-✅ 调试和解决常见问题
-✅ 设计和实现生产级 Claude 集成
-
----
-
-## 🚀 快速开始（15 分钟）
-
-### 2.1 前置知识要求
-
-#### 必需知识
-- **Python 基础 (3.10+)**: 数据类型、类、装饰器、异步编程
-- **异步编程**: `async`/`await`、异步迭代器、`anyio` 基础
-- **类型提示**: `typing` 模块、TypedDict、Literal
-
-#### 推荐知识
-- **进程间通信**: stdin/stdout/stderr、子进程管理
-- **JSON**: JSON 序列化/反序列化
-- **MCP 协议**: Model Context Protocol 基础（可选）
-
-### 2.2 环境准备
-
-#### 步骤 1: 检查 Python 版本
+[v0.1.3 官方 README](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/README.md) 要求 Python 3.10+、Node.js 和 Claude Code 2.0.0+。这是当时的前置条件，不能据此保证所有后续 CLI 都兼容旧 SDK。在临时目录中使用管理 Python 环境和依赖的 [uv](https://docs.astral.sh/uv/pip/environments/)：
 
 ```bash
-python --version
-# 需要 3.10 或更高版本
+uv venv --python 3.12 .venv
+uv pip install --python .venv "claude-agent-sdk==0.1.3" "mcp==1.18.0" "anyio==4.11.0"
 ```
 
-如果版本过低，请升级：
-```bash
-# Ubuntu/Debian
-sudo apt install python3.10
+Windows 使用 `.venv\Scripts\python.exe` 运行以下文件，macOS 或 Linux 使用 `.venv/bin/python`。明确解释器路径可以避免意外导入全局版本，不要仅凭终端已经激活环境就推断实际使用的包。
 
-# macOS
-brew install python@3.10
-
-# Windows: 从 https://python.org/downloads/ 下载
-```
-
-#### 步骤 2: 安装 Claude Code CLI
-
-Claude Code CLI 是 SDK 的必需依赖。
-
-```bash
-# 安装 Claude Code CLI
-npm install -g @anthropic-ai/claude-code
-
-# 验证安装
-claude -v
-# 应显示 2.0.0 或更高版本
-```
-
-#### 步骤 3: 设置 API Key
-
-```bash
-# Linux/macOS
-export ANTHROPIC_API_KEY="sk-ant-api03-your-key-here"
-
-# Windows (PowerShell)
-$env:ANTHROPIC_API_KEY = "sk-ant-api03-your-key-here"
-
-# 永久设置（Linux/macOS）
-echo 'export ANTHROPIC_API_KEY="sk-ant-api03-..."' >> ~/.bashrc
-source ~/.bashrc
-```
-
-从 https://platform.claude.com/ 获取 API Key。
-
-#### 步骤 4: 安装 SDK
-
-```bash
-# 方法 1: 从 PyPI 安装（推荐）
-pip install claude-agent-sdk
-
-# 方法 2: 从源码安装（开发环境）
-cd claude-agent-sdk-python
-pip install -e .
-```
-
-#### 步骤 5: 验证安装
-
-```bash
-python -c "import claude_agent_sdk; print(claude_agent_sdk.__version__)"
-# 应显示: 0.1.3
-```
-
-### 2.3 第一个示例
-
-创建文件 `hello_claude.py`:
+将下面的独立示例保存为 `inspect_install.py`：
 
 ```python
-#!/usr/bin/env python3
-"""第一个 Claude Agent SDK 示例"""
+import inspect
+from importlib.metadata import version
 
+from claude_agent_sdk import ClaudeAgentOptions, ClaudeSDKClient, HookMatcher, query
+
+def main():
+    assert version("claude-agent-sdk") == "0.1.3"
+    assert inspect.isasyncgenfunction(query)
+    assert inspect.iscoroutinefunction(ClaudeSDKClient.query)
+    assert set(inspect.signature(HookMatcher).parameters) == {"matcher", "hooks"}
+    ClaudeAgentOptions(max_turns=2, setting_sources=[])
+    print("SDK 0.1.3: imports and signatures OK")
+
+if __name__ == "__main__":
+    main()
+```
+
+```bash
+# Windows
+.venv\Scripts\python.exe inspect_install.py
+# macOS / Linux
+.venv/bin/python inspect_install.py
+```
+
+预期输出是 `SDK 0.1.3: imports and signatures OK`。它只证明导入和所检查的签名成立，不能证明网络、模型权限或工具权限正常。读取包元数据，也比假定每个包都提供某个版本属性更明确。
+
+这里同时固定 MCP 和 AnyIO 有实际原因：验证环境仅安装 SDK 0.1.3 时解析到了 MCP 2.2.0，创建工具服务器随即出现 `Server.list_tools` 不存在的错误。本文示例改用 MCP 1.18.0 和 AnyIO 4.11.0。安装成功不等于接口兼容，这组旧依赖只用于复现，不代表安全性或长期支持保证。
+
+在线运行前记录 `claude --version`、实际执行文件及 Python 依赖版本，并按[官方认证说明](https://code.claude.com/docs/en/agent-sdk/overview) 配置环境。不要把密钥放进脚本或提交到仓库。本地检查不需要读取任何凭据；没有 CLI 时先停在离线验证，不要安装一个名称相近的 `claude` 包代替。
+
+## Query 与消息类型
+
+[固定版本的 query 实现](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/src/claude_agent_sdk/query.py) 要求以关键字传入 `prompt`，另可提供 `options` 和 `transport`。应调用 `query(prompt="...")`，不能把 prompt 当成位置参数。返回对象需要使用 `async for` 消费，不能把迭代器或任意一条消息当成最终文本。
+
+`AssistantMessage` 可以包含多个内容块。正文读取 `TextBlock`，工具请求检查 `ToolUseBlock`。`ResultMessage` 标记一轮结束，带有错误状态、耗时、会话信息和可选费用。收到一段文字不等于任务成功，文字之后仍可能发生工具失败或连接中断。
+
+以下在线示例保存为 `query_once.py`，包含完整导入、异步入口和 runner：
+
+```python
+from contextlib import aclosing
 import anyio
-from claude_agent_sdk import query, AssistantMessage, TextBlock
+from claude_agent_sdk import (
+    AssistantMessage, ClaudeAgentOptions, ResultMessage, TextBlock, query,
+)
 
 async def main():
-    """简单的查询示例"""
-    print("向 Claude 提问...")
-
-    async for message in query(prompt="What is 2 + 2?"):
-        if isinstance(message, AssistantMessage):
-            for block in message.content:
-                if isinstance(block, TextBlock):
-                    print(f"Claude: {block.text}")
+    completed = False
+    failure = None
+    options = ClaudeAgentOptions(max_turns=1, setting_sources=[])
+    async with aclosing(query(
+        prompt="Reply with the number obtained by adding 2 and 2. Do not use tools.",
+        options=options,
+    )) as messages:
+        async for message in messages:
+            if isinstance(message, AssistantMessage):
+                for block in message.content:
+                    if isinstance(block, TextBlock):
+                        print(block.text)
+            elif isinstance(message, ResultMessage):
+                completed = True
+                print(f"result: is_error={message.is_error}")
+                if message.is_error:
+                    failure = message.subtype
+    if failure is not None:
+        raise RuntimeError(f"Turn failed: {failure}")
+    if not completed:
+        raise RuntimeError("Stream ended without ResultMessage")
 
 if __name__ == "__main__":
     anyio.run(main)
 ```
 
-运行：
-```bash
-python hello_claude.py
-```
+使用前面的解释器命令，将文件名替换为 `query_once.py`。成功时应回答算术问题并输出 `result: is_error=False`，但具体措辞不保证一致。提示词要求不使用工具只是指令，不是操作系统层面的权限隔离。
 
-预期输出：
-```
-向 Claude 提问...
-Claude: 2 + 2 equals 4.
-```
+示例先完整消费迭代器，再报告模型结果错误。0.1.3 在消费中途异常时，外层 `aclosing` 不能可靠地在同一任务中关闭嵌套生成器，本地测试复现了取消作用域错误。这是旧版清理限制，不能承诺任意异常都安全释放。应用需要主动取消时，应采用下面明确管理生命周期的客户端。
 
-### 2.4 验证安装
+模块级 query 通常启动独立执行，但不宜绝对称为无状态。这个版本已经有 `resume` 和 `continue_conversation` 选项。恢复保存的对话，与保留一个已连接的 Python 客户端，是两种不同机制。排查上下文丢失时应明确选择了哪一种，并记录会话标识。
 
-如果上述示例成功运行，恭喜！你已经完成了基础设置。
+## ClaudeSDKClient 生命周期与清理
 
-如果遇到错误：
-- `CLINotFoundError`: 检查 Claude Code CLI 是否已安装
-- `ImportError`: 检查 SDK 是否已正确安装
-- `ProcessError`: 检查 API Key 是否已设置
+[客户端源码](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/src/claude_agent_sdk/client.py) 的顺序是：创建实例、连接、发送、接收、按需重复、断开。创建实例不会自动连接；`async with ClaudeSDKClient(...)` 在进入时连接、退出时断开。手动管理时应通过 `finally` 调用清理，连接初始化异常也需要考虑。
 
-参见 [常见问题](#-常见问题与故障排查) 获取详细的故障排查指南。
+连接和断开必须处于同一个异步任务与上下文。这个版本在二者之间保持一个 AnyIO task group，不能当作普通 HTTP 对象，随意在不同任务中建立和关闭。需要多个来源提交请求时，可以在应用层排队，让一个明确的任务负责客户端。
 
----
+将下面保存为 `lifecycle.py`。可选的 `transport` 参数供离线 fixture 使用，普通调用留空。程序依次发送两条消息，消费完上一轮结果后才发送下一轮：
 
-## 📚 核心概念（20 分钟）
-
-### 3.1 核心概念清单
-
-按学习优先级排序：
-
-1. **Claude Code CLI** ⭐⭐⭐⭐⭐ - 底层执行引擎
-2. **Claude Agent SDK** ⭐⭐⭐⭐⭐ - Python 封装层
-3. **消息类型** ⭐⭐⭐⭐⭐ - 数据结构
-4. **Tools** ⭐⭐⭐⭐⭐ - 工具系统
-5. **MCP** ⭐⭐⭐⭐ - Model Context Protocol
-6. **Hooks** ⭐⭐⭐⭐ - 生命周期钩子
-7. **权限系统** ⭐⭐⭐⭐ - 安全控制
-8. **anyio** ⭐⭐⭐⭐ - 异步库
-9. **Transport** ⭐⭐⭐ - 传输层抽象
-10. **Agent Definitions** ⭐⭐⭐ - 自定义代理
-
-### 3.2 概念详解
-
-#### 概念 1: Claude Code CLI
-
-**定义**: Anthropic 官方命令行工具，提供 Claude AI 能力的底层接口。
-
-**作用**: SDK 通过子进程调用 CLI，CLI 负责与 Anthropic API 通信。
-
-**安装**: `npm install -g @anthropic-ai/claude-code`
-
-**关键点**:
-- 版本要求: ≥ 2.0.0
-- 通过 stdin/stdout 使用 JSONL 格式通信
-- 支持流式模式（双向通信）
-
-#### 概念 2: Claude Agent SDK
-
-**定义**: Python SDK，封装 CLI，提供 Pythonic API。
-
-**两种使用模式**:
-- `query()`: 无状态、单次查询
-- `ClaudeSDKClient`: 有状态、交互式会话
-
-**核心优势**:
-- 简化接口
-- 类型安全
-- 进程内 MCP 工具
-- Hook 和权限控制
-
-#### 概念 3: 消息类型
-
-**定义**: SDK 中不同类型的消息结构。
-
-**主要类型**:
-- `UserMessage`: 用户消息
-- `AssistantMessage`: Claude 的回复
-- `SystemMessage`: 系统消息
-- `ResultMessage`: 结果和成本信息
-- `StreamEvent`: 流式事件
-
-**内容块类型**:
-- `TextBlock`: 文本内容
-- `ThinkingBlock`: 思考内容
-- `ToolUseBlock`: 工具调用
-- `ToolResultBlock`: 工具结果
-
-#### 概念 4: Tools
-
-**定义**: Claude 可以调用的函数，用于执行特定任务。
-
-**两种工具类型**:
-- **内置工具**: Read、Write、Bash、Edit、Glob、Grep 等
-- **自定义工具**: 使用 `@tool` 装饰器定义
-
-**示例**:
-```python
-from claude_agent_sdk import tool
-
-@tool("add", "Add two numbers", {"a": float, "b": float})
-async def add_numbers(args):
-    result = args["a"] + args["b"]
-    return {
-        "content": [{"type": "text", "text": f"Result: {result}"}]
-    }
-```
-
-#### 概念 5: MCP (Model Context Protocol)
-
-**定义**: 标准协议，定义工具如何与 AI 模型通信。
-
-**SDK 实现**:
-- **SDK MCP Server** (进程内): 使用 `create_sdk_mcp_server()` 创建
-- **External MCP Server** (外部进程): 通过 stdio/SSE/HTTP 通信
-
-**优势**:
-- 标准化工具接口
-- 支持多种传输方式
-- 可扩展
-
-#### 概念 6: Hooks
-
-**定义**: 在 Claude 代理循环的特定点执行的回调函数。
-
-**支持的钩子事件**:
-- `PreToolUse`: 工具使用前（权限控制）
-- `PostToolUse`: 工具使用后（添加上下文）
-- `UserPromptSubmit`: 用户提交提示词后
-- `Stop`: 停止事件
-- `SubagentStop`: 子代理停止
-- `PreCompact`: 压缩前
-
-**使用场景**:
-- 日志记录
-- 动态权限控制
-- 工具行为修改
-- 审计和监控
-
-#### 概念 7: 权限系统
-
-**定义**: 控制 Claude 可以执行哪些操作。
-
-**权限模式**:
-- `default`: CLI 提示用户确认危险操作
-- `acceptEdits`: 自动批准文件编辑
-- `plan`: 规划模式，不执行任何工具
-- `bypassPermissions`: 绕过所有权限检查（危险！）
-
-**权限回调**:
-```python
-async def permission_callback(tool_name, input_data, context):
-    if tool_name == "Bash" and "rm -rf" in input_data.get("command", ""):
-        return PermissionResultDeny(message="Dangerous command")
-    return PermissionResultAllow()
-```
-
-#### 概念 8: anyio
-
-**定义**: 跨异步运行时库，统一 asyncio 和 trio API。
-
-**为什么使用**:
-- 提供统一的异步 API
-- 支持多种异步后端
-- 简化跨平台异步编程
-
-**基本用法**:
 ```python
 import anyio
+from claude_agent_sdk import ClaudeAgentOptions, ClaudeSDKClient, ResultMessage
+
+async def run_turns(transport=None, seconds=30, cleanup_seconds=5):
+    client = ClaudeSDKClient(
+        options=ClaudeAgentOptions(max_turns=2, setting_sources=[]),
+        transport=transport,
+    )
+    cleanup_completed = False
+    with anyio.CancelScope() as lifecycle_scope:
+        try:
+            await client.connect()
+            for prompt in ("Remember the word cedar. Do not use tools.",
+                           "What word did I ask you to remember? Do not use tools."):
+                completed = False
+                with anyio.fail_after(seconds):
+                    await client.query(prompt)
+                    async for message in client.receive_response():
+                        if isinstance(message, ResultMessage):
+                            completed = True
+                            if message.is_error:
+                                raise RuntimeError(f"Turn failed: {message.subtype}")
+                if not completed:
+                    raise RuntimeError("Stream ended without ResultMessage")
+                print("turn complete")
+        except TimeoutError:
+            print("turn deadline exceeded; outcome unknown")
+            raise
+        finally:
+            lifecycle_scope.shield = True
+            lifecycle_scope.deadline = anyio.current_time() + cleanup_seconds
+            await client.disconnect()
+            cleanup_completed = True
+    if not cleanup_completed:
+        raise RuntimeError("cleanup deadline exceeded; resources may remain")
+    await anyio.lowlevel.checkpoint()
 
 async def main():
-    await anyio.sleep(1)
-    async with anyio.create_task_group() as tg:
-        tg.start_soon(task1)
-        tg.start_soon(task2)
+    await run_turns()
 
-anyio.run(main)
+if __name__ == "__main__":
+    anyio.run(main)
 ```
 
-### 3.3 概念关系图
+用同一解释器运行 `lifecycle.py`，成功标记是两行 `turn complete`。它只证明两轮都消费到了非错误结果，没有检查第二轮是否真的记住单词；若要验证模型回答质量，需要另行读取并断言文本。
 
-```
-外部依赖层
-┌─────────────────────────────────────────┐
-│ Node.js → Claude Code CLI (>=2.0.0)     │
-│ Python 3.10+ → anyio → mcp              │
-└─────────────────────────────────────────┘
-            ↓
-协议层
-┌─────────────────────────────────────────┐
-│ MCP (Model Context Protocol)            │
-│ SDK Control Protocol                    │
-└─────────────────────────────────────────┘
-            ↓
-SDK 核心层
-┌─────────────────────────────────────────┐
-│ Claude Agent SDK                        │
-│   ├─ query() [简单查询]                 │
-│   └─ ClaudeSDKClient [交互式会话]        │
-└─────────────────────────────────────────┘
-            ↓
-功能层
-┌─────────────────────────────────────────┐
-│ 工具系统 | 权限系统 | 钩子系统           │
-└─────────────────────────────────────────┘
-            ↓
-应用层
-┌─────────────────────────────────────────┐
-│ 你的 Python 应用                         │
-└─────────────────────────────────────────┘
-```
+单轮超时作用域会先退出，但调用者仍然取消的外层作用域可能继续打断 transport 清理。因此在连接前进入 `lifecycle_scope`，只在 `finally` 中修改这个既有作用域的 `shield` 和 `deadline`。不要在 `disconnect()` 外临时进入新的保护作用域，SDK 的 task group 必须按栈顺序退出。单轮与清理各有预算，不是包括启动、两轮总和及关闭耗时的总期限。
 
-### 3.4 学习顺序建议
+`cleanup_seconds` 应为正数，默认允许清理五秒。它屏蔽来自祖先 AnyIO 作用域的取消，但保留自身的截止时间。最后的 checkpoint 会继续传递清理期间到达的外部取消。清理超时会明确报告资源可能残留，这个错误优先于原任务中断，不能返回成功；应弃用该客户端，由监管进程处理剩余资源。这种保护不覆盖直接调用 `asyncio.Task.cancel()`、进程终止或不让出执行的阻塞代码。
 
-```
-第1步: Python 基础 + 异步编程
-  ↓
-第2步: Claude Code CLI 安装和基本使用
-  ↓
-第3步: Claude Agent SDK 基础 (query 函数)
-  ↓
-第4步: 消息类型和内容块
-  ↓
-第5步: MCP 协议和工具系统
-  ↓
-第6步: ClaudeSDKClient 交互式会话
-  ↓
-第7步: 权限系统
-  ↓
-第8步: Hooks 钩子系统
-```
+旧版本还有一个边界：`disconnect()` 通过内部 query 对象关闭资源。如果失败发生在该对象创建之前，不能保证所有部分启动的 transport 都已清理。自定义 transport 应负责自己的启动失败路径；生产环境还需要进程级监管。存在 `finally` 只能说明尝试清理，不能保证任何情况下都没有残留子进程。
 
----
+`Stop` 是 agent 事件，不是 Python 客户端析构。`interrupt()` 通过控制通道请求中断，既不能替代断开，也不会撤销已经完成的工具操作。取消之后，外部效果未核对前应标记结果未知；即使没收到最终回答，也不能无条件重试部署、付款或文件修改。
 
-## 🔧 主要功能（30 分钟）
+## Hooks 与权限决定
 
-### 4.1 API 概览
+[v0.1.3 类型定义](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/src/claude_agent_sdk/types.py) 支持六种事件：`PreToolUse`、`PostToolUse`、`UserPromptSubmit`、`Stop`、`SubagentStop`、`PreCompact`。连接前在 options 中注册，不要照搬 TypeScript 的事件全集，也不要发明客户端装饰器。
 
-Claude Agent SDK 提供两个主要接口：
+回调接收 `input_data`、`tool_use_id` 和 `context` 三个参数，是返回字典的 `async def` 函数。工具执行前明确拒绝时，应在 `hookSpecificOutput` 下提供对应的 `hookEventName` 和 `permissionDecision="deny"`。返回 `{}` 表示没有增加决定，不等于明确批准，更不会覆盖其他权限检查。
 
-| API | 使用场景 | 特点 |
-|-----|----------|------|
-| `query()` | 简单查询、批处理 | 无状态、单向流式 |
-| `ClaudeSDKClient` | 交互式应用、多轮对话 | 有状态、双向流式 |
+以下保存为 `hooks_demo.py`，默认直接调用回调进行离线检查。只有加上 `--live` 才会请求模型执行一个无害的 Bash 命令，而回调拒绝所有 Bash 调用。相比匹配几个危险字符串，拒绝整个工具更容易检查本例的预期行为。
 
-### 4.2 两种使用模式
-
-#### 模式 1: query() 函数
-
-**适用场景**: 简单的一次性查询、批处理任务。
-
-**基本用法**:
 ```python
-from claude_agent_sdk import query
-
-async for message in query(prompt="What is 2 + 2?"):
-    print(message)
-```
-
-**带选项的查询**:
-```python
-from claude_agent_sdk import query, ClaudeAgentOptions
-
-options = ClaudeAgentOptions(
-    system_prompt="You are a helpful assistant",
-    allowed_tools=["Read", "Write"],
-    max_turns=5
+import argparse
+import anyio
+from claude_agent_sdk import (
+    ClaudeAgentOptions, ClaudeSDKClient, HookMatcher, ResultMessage,
 )
 
-async for message in query(prompt="Create a hello.txt file", options=options):
-    print(message)
-```
-
-**特点**:
-- 无状态，每次调用独立
-- 自动管理连接生命周期
-- 适合脚本和自动化
-
-#### 模式 2: ClaudeSDKClient 类
-
-**适用场景**: 多轮对话、需要中断控制、实时应用。
-
-**基本用法**:
-```python
-from claude_agent_sdk import ClaudeSDKClient
-
-async with ClaudeSDKClient() as client:
-    # 第一轮
-    await client.query("What's the capital of France?")
-    async for msg in client.receive_response():
-        print(msg)
-
-    # 第二轮（保持上下文）
-    await client.query("What's its population?")
-    async for msg in client.receive_response():
-        print(msg)
-```
-
-**核心方法**:
-- `connect()`: 建立连接
-- `query(prompt)`: 发送查询
-- `receive_messages()`: 接收所有消息
-- `receive_response()`: 接收单次完整响应
-- `interrupt()`: 发送中断
-- `set_permission_mode(mode)`: 修改权限模式
-- `disconnect()`: 断开连接
-
-**特点**:
-- 有状态，维护对话上下文
-- 支持中断和动态配置
-- 适合聊天应用和交互式 UI
-
-### 4.3 配置选项
-
-#### ClaudeAgentOptions 常用配置
-
-```python
-from claude_agent_sdk import ClaudeAgentOptions
-
-options = ClaudeAgentOptions(
-    # 系统提示
-    system_prompt="You are a helpful assistant",
-
-    # 工具权限
-    allowed_tools=["Read", "Write", "Bash"],
-    disallowed_tools=["Edit"],
-
-    # 权限模式
-    permission_mode="default",  # 或 "acceptEdits", "plan", "bypassPermissions"
-
-    # 对话限制
-    max_turns=10,
-
-    # 模型选择
-    model="claude-sonnet-4-5",
-
-    # 工作目录
-    cwd="/path/to/project",
-
-    # MCP 服务器
-    mcp_servers={
-        "my-server": {...}
-    },
-
-    # 工具权限回调
-    can_use_tool=my_permission_callback,
-
-    # Hook 配置
-    hooks={
-        "PreToolUse": [HookMatcher(...)],
-        "PostToolUse": [HookMatcher(...)]
-    },
-
-    # 流式设置
-    include_partial_messages=True
-)
-```
-
-### 4.4 消息类型
-
-#### 消息类型层次
-
-```python
-Message = UserMessage | AssistantMessage | SystemMessage | ResultMessage | StreamEvent
-```
-
-#### UserMessage
-
-```python
-from claude_agent_sdk import UserMessage
-
-# 文本消息
-user_msg = UserMessage(
-    content="Hello Claude",
-    parent_tool_use_id=None
-)
-
-# 内容块列表
-user_msg = UserMessage(
-    content=[
-        {"type": "text", "text": "Hello"},
-        {"type": "image", "source": {...}}
-    ],
-    parent_tool_use_id=None
-)
-```
-
-#### AssistantMessage
-
-```python
-from claude_agent_sdk import AssistantMessage, TextBlock, ToolUseBlock
-
-for message in messages:
-    if isinstance(message, AssistantMessage):
-        for block in message.content:
-            if isinstance(block, TextBlock):
-                print(f"Text: {block.text}")
-            elif isinstance(block, ToolUseBlock):
-                print(f"Tool: {block.name}, Input: {block.input}")
-```
-
-#### ResultMessage
-
-```python
-from claude_agent_sdk import ResultMessage
-
-if isinstance(message, ResultMessage):
-    print(f"Duration: {message.duration_ms} ms")
-    print(f"Cost: ${message.total_cost_usd}")
-    print(f"Turns: {message.num_turns}")
-    print(f"Error: {message.is_error}")
-```
-
-### 4.5 自定义工具
-
-#### 创建 SDK MCP 服务器
-
-```python
-from claude_agent_sdk import tool, create_sdk_mcp_server, ClaudeAgentOptions
-
-# 1. 定义工具
-@tool("calculate_sum", "Add two numbers", {"a": float, "b": float})
-async def calculate_sum(args):
-    result = args["a"] + args["b"]
-    return {
-        "content": [{"type": "text", "text": f"Sum: {result}"}]
-    }
-
-# 2. 创建服务器
-server = create_sdk_mcp_server(
-    name="math-tools",
-    version="1.0.0",
-    tools=[calculate_sum]
-)
-
-# 3. 配置选项
-options = ClaudeAgentOptions(
-    mcp_servers={"math": server},
-    allowed_tools=["mcp__math__calculate_sum"]
-)
-
-# 4. 使用
-async with ClaudeSDKClient(options=options) as client:
-    await client.query("Calculate 15 + 27")
-    async for msg in client.receive_response():
-        print(msg)
-```
-
-#### 工具返回格式
-
-```python
-# 成功返回
-return {
-    "content": [
-        {"type": "text", "text": "Result: 42"}
-    ]
-}
-
-# 错误返回
-return {
-    "content": [
-        {"type": "text", "text": "Error: Division by zero"}
-    ],
-    "is_error": True
-}
-```
-
-### 4.6 Hook 系统
-
-#### PreToolUse Hook
-
-```python
-from claude_agent_sdk import HookMatcher, ClaudeAgentOptions
-
-async def check_bash_command(input_data, tool_use_id, context):
+async def deny_bash(input_data, tool_use_id, context):
     if input_data["tool_name"] != "Bash":
         return {}
-
-    command = input_data["tool_input"].get("command", "")
-    if "rm -rf" in command:
-        return {
-            "hookSpecificOutput": {
-                "hookEventName": "PreToolUse",
-                "permissionDecision": "deny",
-                "permissionDecisionReason": "Dangerous command blocked"
-            }
+    print("PreToolUse: deny Bash")
+    return {
+        "hookSpecificOutput": {
+            "hookEventName": "PreToolUse",
+            "permissionDecision": "deny",
+            "permissionDecisionReason": "Bash is disabled in this example",
         }
+    }
+
+async def audit_tool(input_data, tool_use_id, context):
+    print(f"PostToolUse: {input_data['tool_name']}")
     return {}
 
-options = ClaudeAgentOptions(
-    hooks={
-        "PreToolUse": [
-            HookMatcher(matcher="Bash", hooks=[check_bash_command])
-        ]
-    }
-)
+def make_options():
+    return ClaudeAgentOptions(
+        max_turns=2,
+        setting_sources=[],
+        hooks={
+            "PreToolUse": [HookMatcher(matcher="Bash", hooks=[deny_bash])],
+            "PostToolUse": [HookMatcher(matcher=None, hooks=[audit_tool])],
+        },
+    )
+
+async def main(live=False):
+    if not live:
+        result = await deny_bash(
+            {"hook_event_name": "PreToolUse", "session_id": "fixture",
+             "transcript_path": "", "cwd": ".", "tool_name": "Bash",
+             "tool_input": {"command": "echo hook-check"}},
+            "fixture-tool", {"signal": None},
+        )
+        assert result["hookSpecificOutput"]["permissionDecision"] == "deny"
+        make_options()
+        print("offline hook contract OK")
+        return
+    async with ClaudeSDKClient(options=make_options()) as client:
+        await client.query("Use Bash to run: echo hook-check")
+        completed = False
+        async for message in client.receive_response():
+            if isinstance(message, ResultMessage):
+                completed = True
+                print(f"result: is_error={message.is_error}")
+                if message.is_error:
+                    raise RuntimeError(f"Turn failed: {message.subtype}")
+        if not completed:
+            raise RuntimeError("Stream ended without ResultMessage")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--live", action="store_true")
+    anyio.run(main, parser.parse_args().live)
 ```
 
-#### PostToolUse Hook
+使用同一解释器运行 `hooks_demo.py`，确定性的本地输出为：
+
+```text
+PreToolUse: deny Bash
+offline hook contract OK
+```
+
+完成认证并确认允许模型请求后，才添加 `--live`。模型未必选择 Bash，所以没有第一行日志不一定是注册失败。反过来，直接调用回调时打印了拒绝，也不能证明 CLI 实际阻止了工具。在线验收必须观察真实工具请求，并确认没有产生预期之外的副作用。
+
+`PostToolUse` 发生在工具执行后，可以记录审计信息，但不能撤销操作。日志默认只记录事件、工具名和调用标识，不要打印完整提示词、输入参数或文件正文，以免把私密内容带入排障记录。本例只打印工具名。
+
+这个例子不是通用沙箱。禁止 Bash 不代表其他工具不能修改文件或访问网络；`allowed_tools` 和提示词也不能替代文件系统隔离。实际策略应定义允许的操作、处理未知工具，并在隔离目录测试替代路径。`can_use_tool` 是另一种权限回调 API，也需要流式控制通道。
+
+## 模块级 Query 的流式 Hooks
+
+[内部客户端实现](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/src/claude_agent_sdk/_internal/client.py) 会把 hooks 传入 query 对象，但只有异步可迭代输入会初始化控制协议。因此，不能笼统说模块 query 不支持 hooks，也不能把这个版本的字符串输入和流式输入视为等价。
+
+将 `stream_query.py` 放在 `hooks_demo.py` 同一目录，明确复用前例的回调配置。事件对象让输入流保持打开，直到收到结果。只 yield 一条消息就结束的生成器可能提前关闭 stdin，让后续控制响应无法写回。
 
 ```python
-async def add_context(input_data, tool_use_id, context):
-    if input_data["tool_name"] == "Read":
-        return {
-            "hookSpecificOutput": {
-                "hookEventName": "PostToolUse",
-                "additionalContext": "This file is part of the main codebase"
-            }
+from contextlib import aclosing
+import anyio
+from claude_agent_sdk import ResultMessage, query
+from hooks_demo import make_options
+
+async def main():
+    done = anyio.Event()
+
+    async def prompts():
+        yield {
+            "type": "user",
+            "message": {"role": "user", "content": "Use Bash: echo hook-check"},
+            "parent_tool_use_id": None,
+            "session_id": "default",
         }
-    return {}
+        await done.wait()
 
-options = ClaudeAgentOptions(
-    hooks={
-        "PostToolUse": [
-            HookMatcher(matcher="Read", hooks=[add_context])
-        ]
-    }
-)
+    completed = False
+    failure = None
+    try:
+        async with aclosing(query(prompt=prompts(), options=make_options())) as messages:
+            async for message in messages:
+                if isinstance(message, ResultMessage):
+                    completed = True
+                    done.set()
+                    if message.is_error:
+                        failure = message.subtype
+                    else:
+                        print("stream result received")
+    finally:
+        done.set()
+    if failure is not None:
+        raise RuntimeError(f"Turn failed: {failure}")
+    if not completed:
+        raise RuntimeError("Stream ended without ResultMessage")
+
+if __name__ == "__main__":
+    anyio.run(main)
 ```
 
----
+使用同一解释器运行 `stream_query.py` 会发起在线请求。成功时输出 `stream result received`，拒绝日志仍以实际发出 Bash 请求为前提。此例解释旧版输入流的生命周期，不适合作为无限等待的服务。如果一直没有结果，输入流也会保持打开；在线实验需要监管进程，应用需要控制等待时间时可采用上一节的客户端截止方案。
 
-## 🏗️ 架构设计（20 分钟）
+## 不同层次的超时
 
-### 5.1 整体架构
+这个版本的 `ClaudeSDKClient` 和 `HookMatcher` 构造签名没有 `timeout=`，不能自行添加。[控制协议源码](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/src/claude_agent_sdk/_internal/query.py) 对自身发出的控制请求等待 60 秒，但这不代表每轮模型调用、每个传入回调或整项任务都有相同截止时间。
 
-```
-┌─────────────────────────────────────────┐
-│ 用户 API 层 (query, ClaudeSDKClient)    │
-├─────────────────────────────────────────┤
-│ 业务逻辑层 (消息处理、Hook、权限)         │
-├─────────────────────────────────────────┤
-│ 传输层 (Transport 抽象)                  │
-├─────────────────────────────────────────┤
-│ CLI 接口层 (subprocess + JSONL)          │
-└─────────────────────────────────────────┘
-```
+<div class="overflow-x-auto" role="region" aria-label="超时层次对照表" tabindex="0">
 
-### 5.2 核心模块
+| 层次 | 本文中的含义 | 不能据此保证 |
+| --- | --- | --- |
+| 连接与控制请求 | SDK 内部等待控制回复 | 模型整轮执行的最大时间 |
+| 回调自身的 I/O | 单独限制数据库或 HTTP 等待 | 旧版存在 `HookMatcher.timeout` |
+| 异步 Hook 输出 | `async_` 选择延后输出，`asyncTimeout` 在该版本中以毫秒计 | 所有异步函数都会后台执行 |
+| 应用单轮任务 | `anyio.fail_after(seconds)` 覆盖发送和接收 | 启动和清理也受此时间限制 |
+| 完整作业 | 监管进程负责总生命周期与子进程清理 | 远端副作用自动回滚 |
 
-#### 目录结构
+</div>
 
-```
-src/claude_agent_sdk/
-├── __init__.py              # 公共 API 导出
-├── query.py                 # query() 函数
-├── client.py                # ClaudeSDKClient 类
-├── types.py                 # 类型定义
-├── _errors.py               # 错误类型
-└── _internal/               # 内部实现
-    ├── client.py            # InternalClient
-    ├── query.py             # Query 控制协议
-    ├── message_parser.py    # 消息解析
-    └── transport/           # 传输层
-        ├── __init__.py      # Transport 抽象
-        └── subprocess_cli.py # 子进程传输
-```
+[当前 Python 文档](https://code.claude.com/docs/en/agent-sdk/python) 介绍了通过环境配置向 CLI 传入 `API_TIMEOUT_MS`，约束 API 请求等待。它属于当前 CLI 的契约，本文没有将其作为旧 SDK／CLI 组合的已验证参数。重试还可能累计多个请求时间窗口，不能把单请求限制当成整个任务上限。
 
-#### 模块职责
+如果工具批准依赖外部查询，可以在回调内部给查询设置截止时间，超时后明确返回拒绝。但取消需要实际的异步等待点：同步阻塞库或长时间 CPU 循环不会因为外层写了 `async def` 就及时让出执行。
 
-- **query.py**: 无状态查询接口
-- **client.py**: 有状态交互式客户端
-- **types.py**: 所有数据类型和类型注解
-- **_internal/query.py**: 双向控制协议管理
-- **_internal/transport/**: 与 CLI 通信
+后台审计与批准应分开。返回 `async_` 不证明权限检查已经完成；本文也不对旧版 CLI 在所有 Hook 超时后的动作作统一承诺。应分别验证工具是否执行、会话是否继续、客户端是否关闭，不能只凭捕获到一个异常就推断三者。
 
-### 5.3 数据流
+## 自定义 MCP 工具
 
-#### 查询流程
+MCP 是让 agent 以结构化输入和输出调用工具的协议。[v0.1.3 工具实现](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/src/claude_agent_sdk/__init__.py) 从包根目录导出 `tool` 和 `create_sdk_mcp_server`。进程内服务器省去独立服务器进程，但不代表已经测量出性能优势，也不隔离工具与 Python 程序的权限。
 
-```
-用户调用 query(prompt, options)
-    ↓
-InternalClient.process_query()
-    ↓
-创建 SubprocessCLITransport
-    ↓
-启动 Claude Code CLI 子进程
-    ↓
-创建 Query 对象处理控制协议
-    ↓
-发送消息到 CLI stdin
-    ↓
-从 CLI stdout 读取响应
-    ↓
-解析 JSON → Message 对象
-    ↓
-返回 AsyncIterator[Message]
-```
-
-#### 交互式流程
-
-```
-用户创建 ClaudeSDKClient
-    ↓
-connect() - 建立连接
-    ↓
-query(prompt) - 发送消息
-    ↓
-receive_response() - 接收响应
-    ↓
-(可选) interrupt() - 中断
-    ↓
-(可选) 发送新查询
-    ↓
-disconnect() - 断开连接
-```
-
-### 5.4 设计模式
-
-#### 1. 装饰器模式 (@tool)
-
-```python
-@tool("add", "Add two numbers", {"a": float, "b": float})
-async def add_numbers(args):
-    return {"content": [...]}
-```
-
-**优点**: 声明式 API，自动类型转换
-
-#### 2. 工厂模式 (create_sdk_mcp_server)
-
-```python
-server = create_sdk_mcp_server(
-    name="calculator",
-    tools=[add_numbers]
-)
-```
-
-**优点**: 封装复杂配置逻辑
-
-#### 3. 上下文管理器 (async with)
-
-```python
-async with ClaudeSDKClient() as client:
-    # 自动管理连接生命周期
-    pass
-```
-
-**优点**: 自动资源清理，异常安全
-
-#### 4. 策略模式 (Transport)
-
-```python
-class Transport(ABC):
-    @abstractmethod
-    async def connect(self): ...
-    @abstractmethod
-    async def write(self, data): ...
-```
-
-**优点**: 可插拔传输实现
-
----
-
-## 💡 实战示例（30 分钟）
-
-### 6.1 示例索引
-
-| 文件名 | 功能描述 | 复杂度 |
-|--------|----------|--------|
-| quick_start.py | 基础查询、配置选项 | 简单 |
-| streaming_mode.py | 完整的流式模式示例 | 复杂 |
-| mcp_calculator.py | SDK MCP 服务器 | 中等 |
-| hooks.py | Hook 系统 | 复杂 |
-| tool_permission_callback.py | 工具权限回调 | 中等 |
-| agents.py | 自定义 Agent | 中等 |
-| system_prompt.py | 系统提示配置 | 简单 |
-
-**示例路径**: `C:\Users\Remy\sensedeal\code\projects\work\claude-sdk\claude-agent-sdk-python\examples\`
-
-### 6.2 基础示例
-
-#### 示例 1: 简单查询
+下面的完整本地示例保存为 `mcp_demo.py`：
 
 ```python
 import anyio
-from claude_agent_sdk import query, AssistantMessage, TextBlock
+from claude_agent_sdk import ClaudeAgentOptions, create_sdk_mcp_server, tool
+
+@tool("calculate_sum", "Add two numbers", {"a": float, "b": float})
+async def calculate_sum(args):
+    return {"content": [{"type": "text", "text": str(args["a"] + args["b"])}]}
+
+def make_options():
+    server = create_sdk_mcp_server(
+        name="math-tools", version="1.0.0", tools=[calculate_sum],
+    )
+    return ClaudeAgentOptions(
+        mcp_servers={"math": server},
+        allowed_tools=["mcp__math__calculate_sum"],
+        setting_sources=[],
+    )
 
 async def main():
-    async for message in query(prompt="What is 2 + 2?"):
-        if isinstance(message, AssistantMessage):
-            for block in message.content:
-                if isinstance(block, TextBlock):
-                    print(f"Claude: {block.text}")
+    make_options()
+    result = await calculate_sum.handler({"a": 15.0, "b": 27.0})
+    assert result["content"][0]["text"] == "42.0"
+    print("local MCP handler: 42.0")
 
-anyio.run(main)
+if __name__ == "__main__":
+    anyio.run(main)
 ```
 
-#### 示例 2: 带配置的查询
+用同一解释器运行 `mcp_demo.py`，预期输出 `local MCP handler: 42.0`。直接调用 handler 只检查计算与返回字典，不证明 CLI 发现了工具或模型选择了工具。在线集成时，把这里的 `make_options()` 传给前面的客户端流程，再观察真实工具调用及结果。
 
-```python
-from claude_agent_sdk import query, ClaudeAgentOptions
+工具完整名称取自 `mcp_servers` 的字典键 `math` 和工具名 `calculate_sum`，不是服务器显示名称 `math-tools`。不要根据界面的描述标签猜测 `mcp__math__calculate_sum`，命名错误也可能被误认为 matcher 不生效。
 
-options = ClaudeAgentOptions(
-    system_prompt="You are a pirate. Speak like a pirate!",
-    allowed_tools=["Read"],
-    max_turns=1
-)
+## 排障与验证边界
 
-async for message in query(prompt="Tell me a joke", options=options):
-    print(message)
-```
+Hook 没有日志时，依次检查安装版本、输入模式、初始化握手、实际工具名、matcher、回调入口及返回结构。`allowed_tools` 不会强迫模型选择工具；没有工具调用的普通文字回答，不能证明工具 Hook 成功或失败。
 
-### 6.3 进阶示例
+连接故障要区分执行文件缺失、工作目录错误、CLI 退出、消息解析错误和认证失败。单独一个 `ProcessError` 不证明密钥未配置，应保留退出码和脱敏后的 stderr。不要只升级一个依赖，再把结果变化归结为某个未经隔离验证的原因。
 
-#### 示例 3: 多轮对话
+本文使用 Python 3.12 和固定依赖进行本地验证，检查导入、签名、所有 Python 代码块、直接 Hook 回调和 MCP handler。模拟 transport 还驱动真实 SDK，覆盖初始化、连续两轮响应、Hook 路由、流式输入、缺失结果超时及清理。模拟消息只是 fixture，不是 Claude 的回答。
 
-```python
-from claude_agent_sdk import ClaudeSDKClient, AssistantMessage, TextBlock
+这些测试不能证明 CLI 权限执行、真实 Hook 超时策略、操作系统子进程回收、模型记忆、认证、费用或网络可靠性。在线验收仍需记录准确的 CLI 版本，观察真实工具被拒绝且没有副作用、允许的工具触发后置回调，并在临时目录验证取消。页面能展示和代码能解析，都不能代替这些检查。
 
-async def main():
-    async with ClaudeSDKClient() as client:
-        # 第一轮
-        await client.query("What's the capital of France?")
-        async for msg in client.receive_response():
-            if isinstance(msg, AssistantMessage):
-                for block in msg.content:
-                    if isinstance(block, TextBlock):
-                        print(f"A1: {block.text}")
+部署时应选择仍受维护的 SDK／CLI 组合，固定完整依赖并重新验证这些契约。本文保留旧版本是为了让原有教程前后一致；当前文档可用于制定迁移方案，不能悄悄改变旧接口的含义。
 
-        # 第二轮（保持上下文）
-        await client.query("What's the population?")
-        async for msg in client.receive_response():
-            if isinstance(msg, AssistantMessage):
-                for block in msg.content:
-                    if isinstance(block, TextBlock):
-                        print(f"A2: {block.text}")
+### 可复现的失败检查
 
-anyio.run(main)
-```
+先在一次性工作目录中使用一个客户端和一条提示词，执行前说明期待的终止条件：非错误结果、明确拒绝、本地异常或截止时间。没有这些预期，提前结束的流可能被误认成快速回答，工具被拒绝也可能被误认成应用崩溃。
 
-#### 示例 4: 自定义工具
+缺失结果至少分两种测试。第一种 fixture 确认初始化并接受输入，随后保持流打开但不发送结果，以验证等待截止。第二种在接受输入后立即关闭流，以验证代码确实报告结果缺失。界面上看似都没有回答，实际对应超时与不完整流两个不同原因。
 
-```python
-from claude_agent_sdk import (
-    tool,
-    create_sdk_mcp_server,
-    ClaudeAgentOptions,
-    ClaudeSDKClient
-)
+清理探针应在 `close()` 中先等待一个异步检查点，再记录完成。成功、内部超时、错误结果和外部 AnyIO 取消后，断言 `close_completed`，不能只断言 `close_started`。本地回归还覆盖清理中途收到取消、清理持续等待时有界退出，并检查取消继续传播、失败后没有第二轮以及作用域栈仍可使用。这是实际 SDK 加模拟 transport 的验证，不是已经证实真实 CLI 进程泄漏。
 
-@tool("get_weather", "Get weather for a city", {"city": str})
-async def get_weather(args):
-    # 模拟 API 调用
-    city = args["city"]
-    return {
-        "content": [
-            {"type": "text", "text": f"Weather in {city}: Sunny, 25°C"}
-        ]
-    }
+测试 Hook 路由时，应读取初始化载荷中 SDK 实际注册的 callback ID，用它构造 `hook_callback` 控制请求，再检查返回的控制响应。直接调用 `deny_bash()` 只验证应用策略；通过真实 SDK 路由还能验证注册和字典序列化。两者都没有验证具体 CLI 如何执行拒绝。
 
-server = create_sdk_mcp_server("weather", tools=[get_weather])
+重试前先区分可以重复的读取与结果未知的操作。即使提示词看似只读，也可能调用权限更宽的工具。先确认调用标识与外部状态，必要时设计应用层幂等键。连接错误只说明通信有问题，不自动授权重做此前所有操作。
 
-options = ClaudeAgentOptions(
-    mcp_servers={"weather": server},
-    allowed_tools=["mcp__weather__get_weather"]
-)
+### 配置与错误记录
 
-async def main():
-    async with ClaudeSDKClient(options=options) as client:
-        await client.query("What's the weather in Paris?")
-        async for msg in client.receive_response():
-            print(msg)
+需要固定模型时，使用 `ClaudeAgentOptions(model=...)`。示例没有指定模型，是因为可用模型属于账号及运行环境条件，不能靠离线导入检查确定。不要把其他消息 API 的 `temperature`、`max_tokens` 参数放进 `client.query()`。
 
-anyio.run(main)
-```
+`max_turns` 限制 agent 轮数，不是墙钟时间或费用上限。结果的 `total_cost_usd` 可能为 `None`，无条件格式化成小数反而会使错误报告失败。费用缺失应标记未知，并与任务是否完成分别记录。
 
-### 6.4 高级示例
+可复现的诊断记录应包含 SDK、MCP、AnyIO、Python 版本、CLI 路径与版本、操作系统、工作目录、输入模式、启用的事件、最后消息类型和耗时。分享前移除密钥与个人信息。示例设置 `setting_sources=[]`，不主动加载文件系统配置来源，但这不是沙箱，也不会清除继承的环境变量或机器权限。
 
-#### 示例 5: Hook 拦截
+### 把单轮超时接入应用
 
-```python
-from claude_agent_sdk import (
-    ClaudeSDKClient,
-    ClaudeAgentOptions,
-    HookMatcher
-)
+如果网页请求的等待时间只有十秒，而客户端允许单轮等待三十秒，就需要先决定网页断开后任务是否继续。不能让前端显示失败，后台却悄悄继续修改文件，又在用户重试时重新发起同一操作。应用可以选择取消并核对结果，也可以选择转成有标识的后台任务，让用户稍后查询状态；无论哪种，都需要保存任务标识与终止原因。
 
-async def log_tool_use(input_data, tool_use_id, context):
-    tool_name = input_data["tool_name"]
-    print(f"[LOG] Tool used: {tool_name}")
+总任务期限应包括排队、连接、发送、接收和清理。本例分别设置单轮和清理预算，但没有限制启动时间。某轮等待上限也不能简单乘以轮数就当成总期限，因为其他阶段和重试另有耗时。整个作业的硬性限制应由拥有子进程生命周期的监管层处理。进程退出与外部操作回滚仍是两回事。
 
-    # 拒绝危险命令
-    if tool_name == "Bash":
-        command = input_data["tool_input"].get("command", "")
-        if "rm -rf" in command:
-            return {
-                "hookSpecificOutput": {
-                    "hookEventName": "PreToolUse",
-                    "permissionDecision": "deny",
-                    "permissionDecisionReason": "Dangerous command blocked"
-                }
-            }
+测试后置回调时，不应选择一个注定被前置回调拒绝的工具，再要求同一次调用出现后置日志。应另外准备一个明确允许且无副作用的工具，例如本地加法工具，分别记录前置允许、工具完成和后置观察。这样才能区分拒绝流程与成功流程，不会把不同执行路径的预期混在一起。本文提供了两类回调和加法 handler，但没有宣称完成这项在线组合测试。
 
-    return {}
+还有一种容易忽略的情况是日志系统自己失败。审计回调如果同步写入不可用的远程服务，就可能把原本已经完成的工具操作变成客户端继续等待的原因。应为日志发送安排独立的失败处理，并在业务要求必须审计时明确拒绝还是进入待处理状态。不要依赖异常自动产生预期的权限效果，也不要通过吞掉所有异常伪造完整记录。
 
-options = ClaudeAgentOptions(
-    allowed_tools=["Bash", "Read"],
-    hooks={
-        "PreToolUse": [
-            HookMatcher(matcher=None, hooks=[log_tool_use])
-        ]
-    }
-)
+保存测试结果时，分别列出能够证明的事实与仍需验证的条件。例如，离线协议测试能够证明回调被调用、返回结构正确；真实命令测试才能证明指定 CLI 的执行效果。将两者分开，后续升级依赖时才能知道需要重测哪一部分，而不必把一条笼统的通过记录当作全部依据。
 
-async def main():
-    async with ClaudeSDKClient(options=options) as client:
-        await client.query("Run: echo hello")
-        async for msg in client.receive_response():
-            print(msg)
+## 参考资料
 
-anyio.run(main)
-```
-
-#### 示例 6: 权限回调
-
-```python
-from claude_agent_sdk import (
-    ClaudeAgentOptions,
-    ClaudeSDKClient,
-    PermissionResultAllow,
-    PermissionResultDeny
-)
-
-async def safe_permission(tool_name, input_data, context):
-    # 自动允许只读工具
-    if tool_name in ["Read", "Grep", "Glob"]:
-        return PermissionResultAllow()
-
-    # 拒绝危险 Bash 命令
-    if tool_name == "Bash":
-        command = input_data.get("command", "")
-        if "rm -rf" in command or "sudo" in command:
-            return PermissionResultDeny(
-                message="Dangerous command blocked"
-            )
-
-    # 修改写入路径
-    if tool_name == "Write":
-        safe_path = f"/tmp/{input_data['file_path'].split('/')[-1]}"
-        return PermissionResultAllow(
-            updated_input={**input_data, "file_path": safe_path}
-        )
-
-    return PermissionResultAllow()
-
-options = ClaudeAgentOptions(
-    can_use_tool=safe_permission
-)
-
-async def main():
-    async with ClaudeSDKClient(options=options) as client:
-        await client.query("Create a file called test.txt")
-        async for msg in client.receive_response():
-            print(msg)
-
-anyio.run(main)
-```
-
----
-
-## 🎓 学习路径建议
-
-### 7.1 初学者路径（1-2 天）
-
-**目标**: 掌握基础用法，能够进行简单查询和配置。
-
-**学习步骤**:
-
-1. **环境搭建（1 小时）**
-   - 安装 Python 3.10+
-   - 安装 Claude Code CLI
-   - 安装 SDK
-   - 运行第一个示例
-
-2. **理解核心概念（2 小时）**
-   - 阅读 [核心概念](#-核心概念20-分钟) 部分
-   - 理解 Claude Code CLI 和 SDK 的关系
-   - 理解消息类型
-
-3. **基础 API（2 小时）**
-   - 学习 `query()` 函数
-   - 尝试不同的 `ClaudeAgentOptions`
-   - 运行 `examples/quick_start.py`
-
-4. **实践项目（3 小时）**
-   - 创建一个简单的代码生成工具
-   - 实现一个问答机器人
-   - 尝试不同的系统提示
-
-**推荐资源**:
-- 官方文档: https://platform.claude.com/docs/en/agent-sdk/python
-- 示例代码: `examples/quick_start.py`
-- 教程视频: (待官方发布)
-
-### 7.2 进阶用户路径（3-5 天）
-
-**目标**: 掌握交互式客户端、自定义工具、Hook 系统。
-
-**学习步骤**:
-
-1. **ClaudeSDKClient 深入（4 小时）**
-   - 学习多轮对话
-   - 理解会话管理
-   - 掌握中断机制
-   - 运行 `examples/streaming_mode.py`
-
-2. **自定义工具（4 小时）**
-   - 理解 MCP 协议
-   - 创建 SDK MCP 服务器
-   - 定义自定义工具
-   - 运行 `examples/mcp_calculator.py`
-
-3. **Hook 系统（4 小时）**
-   - 理解 Hook 类型
-   - 实现 PreToolUse 和 PostToolUse Hook
-   - 掌握权限控制
-   - 运行 `examples/hooks.py`
-
-4. **实践项目（8 小时）**
-   - 创建一个集成自定义 API 的工具
-   - 实现一个安全审计系统（使用 Hook）
-   - 构建一个多轮对话的聊天应用
-
-**推荐资源**:
-- Hook 文档: https://code.claude.com/docs/en/hooks
-- MCP 文档: https://code.claude.com/docs/en/mcp
-- 示例代码: `examples/` 目录
-
-### 7.3 高级用户路径（1-2 周）
-
-**目标**: 深入源码、性能优化、生产环境部署。
-
-**学习步骤**:
-
-1. **架构深入（6 小时）**
-   - 阅读 [架构设计](#-架构设计20-分钟) 部分
-   - 研究源码: `src/claude_agent_sdk/`
-   - 理解传输层和控制协议
-   - 阅读设计模式实现
-
-2. **高级功能（8 小时）**
-   - 自定义 Transport 实现
-   - Agent Definitions
-   - 会话管理和分叉
-   - 实时部分消息流
-
-3. **性能优化（6 小时）**
-   - 并发查询优化
-   - 内存管理
-   - 工具性能分析
-   - 缓存策略
-
-4. **生产环境（10 小时）**
-   - 错误处理和重试机制
-   - 日志和监控
-   - 安全加固
-   - Docker 容器化
-   - CI/CD 集成
-
-5. **开源贡献（可选）**
-   - 提交 Bug 报告
-   - 贡献代码
-   - 编写文档
-   - 分享使用案例
-
-**推荐资源**:
-- 源码: https://github.com/anthropics/claude-agent-sdk-python
-- 贡献指南: `CONTRIBUTING.md`
-- Discord 社区: https://discord.com/invite/anthropic
-
----
-
-## ❓ 常见问题与故障排查
-
-### 8.1 快速诊断
-
-```
-遇到问题？
-├─ 安装问题？
-│  ├─ Python 版本 < 3.10 → 升级 Python
-│  ├─ claude-code 未找到 → npm install -g @anthropic-ai/claude-code
-│  └─ pip 安装失败 → 使用虚拟环境
-│
-├─ 运行时错误？
-│  ├─ CLINotFoundError → 检查 CLI 安装
-│  ├─ ProcessError → 检查 API Key
-│  ├─ CLIJSONDecodeError → 检查 CLI 版本
-│  └─ MessageParseError → 更新 SDK 和 CLI
-│
-├─ API 使用问题？
-│  ├─ 消息未收到 → 检查是否使用 async for
-│  ├─ 中断不生效 → 确保后台消费消息
-│  ├─ Hook 未触发 → 检查 matcher 和 allowed_tools
-│  └─ 工具未识别 → 检查命名格式 mcp__<server>__<tool>
-│
-└─ 性能问题？
-   ├─ 响应慢 → 限制 max_turns、选择更快模型
-   └─ 内存高 → 使用流式处理、定期清理会话
-```
-
-### 8.2 常见问题 TOP 10
-
-#### 1. Python 版本不兼容
-
-**症状**: `ImportError: cannot import name 'AsyncIterator'`
-
-**解决**: 升级到 Python 3.10+
-```bash
-python --version
-# 如果 < 3.10，安装新版本
-```
-
-#### 2. Claude Code CLI 未安装
-
-**症状**: `CLINotFoundError: Claude Code not found`
-
-**解决**: 安装 CLI
-```bash
-npm install -g @anthropic-ai/claude-code
-claude -v
-```
-
-#### 3. API Key 未设置
-
-**症状**: `ProcessError: Process failed (exit code: 1)`
-
-**解决**: 设置环境变量
-```bash
-export ANTHROPIC_API_KEY="sk-ant-api03-..."
-```
-
-#### 4. 消息没有正确接收
-
-**症状**: 发送查询后无响应
-
-**解决**: 使用 `async for` 消费消息
-```python
-# ✅ 正确
-async for msg in client.receive_response():
-    print(msg)
-
-# ❌ 错误
-msg = await client.receive_response()
-```
-
-#### 5. 中断不生效
-
-**症状**: 调用 `interrupt()` 但任务继续执行
-
-**解决**: 在后台消费消息
-```python
-async def consume():
-    async for msg in client.receive_response():
-        pass
-
-task = asyncio.create_task(consume())
-await asyncio.sleep(2)
-await client.interrupt()
-await task
-```
-
-#### 6. Hook 不触发
-
-**症状**: Hook 函数从未被调用
-
-**解决**: 检查配置
-```python
-# 1. 工具必须在 allowed_tools 中
-# 2. matcher 必须匹配工具名（区分大小写）
-# 3. Hook 签名必须正确
-
-hooks={
-    "PreToolUse": [
-        HookMatcher(matcher="Bash", hooks=[my_hook])
-    ]
-}
-```
-
-#### 7. 自定义工具不工作
-
-**症状**: Claude 报告无法找到工具
-
-**解决**: 检查命名格式
-```python
-# 命名格式: mcp__<server_name>__<tool_name>
-allowed_tools=["mcp__math__calculate_sum"]
-```
-
-#### 8. 忘记 await
-
-**症状**: `TypeError: object AsyncGenerator can't be used in 'await' expression`
-
-**解决**: 使用 `async for` 而非 `await`
-```python
-# ✅ 正确
-async for msg in query("test"):
-    pass
-
-# ❌ 错误
-msg = await query("test")
-```
-
-#### 9. 异步迭代器未完全消费
-
-**症状**: 资源泄漏或不完整的结果
-
-**解决**: 消费直到 `ResultMessage`
-```python
-async for msg in client.receive_messages():
-    print(msg)
-    if isinstance(msg, ResultMessage):
-        break
-```
-
-#### 10. 上下文管理器使用不当
-
-**症状**: 连接未关闭，资源泄漏
-
-**解决**: 使用 `async with`
-```python
-# ✅ 正确
-async with ClaudeSDKClient() as client:
-    pass  # 自动 disconnect
-
-# ❌ 错误
-client = ClaudeSDKClient()
-await client.connect()
-# 忘记 disconnect
-```
-
-### 8.3 调试技巧
-
-#### 1. 启用 CLI 日志
-
-```python
-def stderr_callback(line):
-    print(f"[CLI] {line}")
-
-options = ClaudeAgentOptions(
-    stderr=stderr_callback,
-    extra_args={"debug-to-stderr": None}
-)
-```
-
-#### 2. 使用诊断脚本
-
-```python
-"""诊断脚本"""
-import sys
-
-print(f"Python: {sys.version}")
-print(f"SDK: {claude_agent_sdk.__version__}")
-
-import shutil
-cli_path = shutil.which("claude")
-print(f"CLI: {cli_path}")
-```
-
-#### 3. 类型检查
-
-```bash
-pip install mypy
-python -m mypy your_script.py
-```
-
----
-
-## 📖 参考资料
-
-### 9.1 官方文档
-
-- **SDK 文档**: https://platform.claude.com/docs/en/agent-sdk/python
-- **Claude Code 文档**: https://code.claude.com/docs/en/
-- **API 参考**: https://platform.claude.com/docs/en/agent-sdk/python
-- **迁移指南**: https://platform.claude.com/docs/en/agent-sdk/migration-guide
-
-### 9.2 示例代码
-
-**本地示例目录**:
-- 路径: `C:\Users\Remy\sensedeal\code\projects\work\claude-sdk\claude-agent-sdk-python\examples\`
-- GitHub: https://github.com/anthropics/claude-agent-sdk-python/tree/main/examples
-
-**关键示例**:
-- `quick_start.py`: 快速入门
-- `streaming_mode.py`: 完整流式示例
-- `mcp_calculator.py`: 自定义工具
-- `hooks.py`: Hook 系统
-- `tool_permission_callback.py`: 权限回调
-
-### 9.3 社区资源
-
-- **Discord**: https://discord.com/invite/anthropic
-- **论坛**: https://community.anthropic.com/
-- **GitHub Issues**: https://github.com/anthropics/claude-agent-sdk-python/issues
-- **GitHub Discussions**: https://github.com/anthropics/claude-agent-sdk-python/discussions
-
-### 9.4 相关项目
-
-- **Claude Code CLI**: https://github.com/anthropics/claude-code
-- **MCP (Model Context Protocol)**: https://modelcontextprotocol.io/
-- **anyio**: https://anyio.readthedocs.io/
-
----
-
-## 📝 附录
-
-### A. API 速查表
-
-| API | 用途 | 返回类型 |
-|-----|------|----------|
-| `query(prompt, options)` | 简单查询 | `AsyncIterator[Message]` |
-| `ClaudeSDKClient()` | 创建客户端 | `ClaudeSDKClient` |
-| `client.connect()` | 建立连接 | `None` |
-| `client.query(prompt)` | 发送查询 | `None` |
-| `client.receive_messages()` | 接收所有消息 | `AsyncIterator[Message]` |
-| `client.receive_response()` | 接收单次响应 | `AsyncIterator[Message]` |
-| `client.interrupt()` | 发送中断 | `None` |
-| `client.disconnect()` | 断开连接 | `None` |
-| `@tool(name, desc, schema)` | 定义工具 | `SdkMcpTool` |
-| `create_sdk_mcp_server(...)` | 创建 MCP 服务器 | `McpSdkServerConfig` |
-
-### B. 类型定义速查
-
-```python
-# 消息类型
-Message = UserMessage | AssistantMessage | SystemMessage | ResultMessage | StreamEvent
-
-# 内容块类型
-ContentBlock = TextBlock | ThinkingBlock | ToolUseBlock | ToolResultBlock
-
-# 权限模式
-PermissionMode = Literal["default", "acceptEdits", "plan", "bypassPermissions"]
-
-# Hook 事件
-HookEvent = Literal["PreToolUse", "PostToolUse", "UserPromptSubmit", "Stop", "SubagentStop", "PreCompact"]
-
-# 权限结果
-PermissionResult = PermissionResultAllow | PermissionResultDeny
-```
-
-### C. 错误代码参考
-
-| 错误类型 | 含义 | 解决方法 |
-|----------|------|----------|
-| `CLINotFoundError` | CLI 未找到 | 安装 Claude Code CLI |
-| `CLIConnectionError` | 连接失败 | 检查工作目录、权限 |
-| `ProcessError` | 进程异常退出 | 检查 API Key、配置 |
-| `CLIJSONDecodeError` | JSON 解析失败 | 更新 CLI 版本、增加缓冲区 |
-| `MessageParseError` | 消息解析失败 | 更新 SDK 和 CLI |
-
-### D. 配置选项完整列表
-
-```python
-ClaudeAgentOptions(
-    # 系统提示
-    system_prompt: str | dict | None = None,
-
-    # 工具权限
-    allowed_tools: list[str] | None = None,
-    disallowed_tools: list[str] | None = None,
-
-    # 权限模式
-    permission_mode: PermissionMode = "default",
-
-    # 对话限制
-    max_turns: int | None = None,
-
-    # 模型
-    model: str | None = None,
-
-    # 工作目录
-    cwd: str | Path | None = None,
-
-    # 环境变量
-    env: dict[str, str] | None = None,
-
-    # CLI 路径
-    cli_path: str | Path | None = None,
-
-    # MCP 服务器
-    mcp_servers: dict[str, McpServerConfig] | None = None,
-
-    # 工具权限回调
-    can_use_tool: CanUseTool | None = None,
-
-    # Hook 配置
-    hooks: dict[HookEvent, list[HookMatcher]] | None = None,
-
-    # 代理定义
-    agents: dict[str, AgentDefinition] | None = None,
-
-    # 流式设置
-    include_partial_messages: bool = False,
-
-    # 设置源
-    setting_sources: list[str] | None = None,
-
-    # 额外参数
-    extra_args: dict[str, Any] | None = None,
-
-    # stderr 回调
-    stderr: Callable[[str], None] | None = None,
-
-    # 缓冲区大小
-    max_buffer_size: int = 1024 * 1024,
-)
-```
-
----
-
-## 🎉 总结
-
-恭喜你完成了 Claude Agent SDK (Python) 的学习指南！
-
-**你现在应该能够**:
-- ✅ 安装和配置 SDK 环境
-- ✅ 使用 `query()` 和 `ClaudeSDKClient` 进行查询
-- ✅ 创建自定义工具和 MCP 服务器
-- ✅ 使用 Hook 系统进行权限控制
-- ✅ 调试和解决常见问题
-- ✅ 设计生产级 Claude 集成
-
-**下一步**:
-1. 尝试完整的示例代码 (`examples/` 目录)
-2. 构建你的第一个 Claude 集成项目
-3. 加入社区，分享你的经验
-4. 贡献代码和文档
-
-**获取帮助**:
-- Discord: https://discord.com/invite/anthropic
-- GitHub Issues: https://github.com/anthropics/claude-agent-sdk-python/issues
-- 文档: https://platform.claude.com/docs/en/home
-
-祝你使用 Claude Agent SDK 构建出色的应用！🚀
+- [官方 v0.1.3 仓库与 README](https://github.com/anthropics/claude-agent-sdk-python/tree/v0.1.3)：版本基线和历史前置条件。
+- [客户端生命周期](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/src/claude_agent_sdk/client.py)及 [query 输入处理](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/src/claude_agent_sdk/_internal/client.py)：发送、接收与流式初始化。
+- [类型及 Hook 字段](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/src/claude_agent_sdk/types.py)和[控制协议](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/src/claude_agent_sdk/_internal/query.py)：事件、时间单位和清理实现。
+- [当前 Python 参考](https://code.claude.com/docs/en/agent-sdk/python)及[当前 Hooks 指南](https://code.claude.com/docs/en/agent-sdk/hooks)：供迁移参考，不作为旧版接口契约。
+- [AnyIO 取消说明](https://anyio.readthedocs.io/en/stable/cancellation.html)：截止时间、取消作用域和清理顺序。

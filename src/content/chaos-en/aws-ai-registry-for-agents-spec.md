@@ -7,8 +7,6 @@ tags: ["ai", "ai-agents", "AWS", "developer-tools", "open-source", "Infrastructu
 lang: "en"
 ---
 
-# AWS Wants Agent Building To Have A Package Layer, Not Just A Prompt Layer
-
 The AI agent ecosystem has a packaging problem.
 
 Today, teams share agents through a messy mix of GitHub repos, prompt documents, MCP server links, copied instructions, and one-off setup notes. The result is familiar to anyone building real agent workflows: installation is inconsistent, dependencies are unclear, and reproducing someone else's setup often feels more like archaeology than software reuse.

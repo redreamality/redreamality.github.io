@@ -7,8 +7,6 @@ tags: ['ai', 'Cloudflare', 'ai-agents', 'developer-tools', 'Web Infrastructure',
 lang: 'en'
 ---
 
-# Cloudflare Is Rebuilding Web Errors for AI Agents, Not Just Browsers
-
 Most web error handling still assumes a human is staring at a browser tab. When something breaks, the system returns a status code plus an HTML page meant to be read by a person. That model worked well enough for the browser era. It works badly for AI agents.
 
 An agent does not want a branded 403 page, a verbose 429 screen, or a generic origin failure template. It needs to know what happened, whether the failure is temporary, and what to do next. Can it retry? Should it re-authenticate? Is the request malformed? Is the resource gone for good?

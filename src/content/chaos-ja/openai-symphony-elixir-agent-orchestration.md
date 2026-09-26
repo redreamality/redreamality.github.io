@@ -8,8 +8,6 @@ lang: "ja"
 translatedFrom: "openai-symphony-elixir-agent-orchestration"
 ---
 
-# OpenAI Symphony：世界最大のAIラボがエージェントオーケストレーションにElixirを賭けた理由
-
 OpenAIのSymphonyローンチが重要な理由は何よりも一つ——エージェントインフラが実際に必要とするものの変化を指し示しているからだ。ここ数年、ほとんどのAIツールはPythonを中心に構築されてきた。モデル、ライブラリ、開発者の注目がそこに集まっていたからだ。Symphonyはそのパターンを破る。エージェントオーケストレーションを、単なるプロンプトエンジニアリングの問題としてではなく、分散システムの問題として位置づけている。
 
 だからElixirの選択こそが本当のストーリーなのだ。

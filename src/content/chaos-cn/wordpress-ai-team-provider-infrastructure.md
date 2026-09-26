@@ -8,8 +8,6 @@ lang: 'zh'
 translatedFrom: 'wordpress-ai-team-provider-infrastructure'
 ---
 
-# WordPress 正在把 AI 变成平台基础设施，而不只是插件功能
-
 现在大多数 AI 讨论仍然集中在模型公司、编程代理和云基础设施上。但 WordPress 指向了另一条正在升温的战线: 内容发布系统本身。
 
 这也是为什么 2026 年 3 月 10 日 WordPress 提出成立正式 AI Team 这件事，比表面看起来更重要。单看一项团队提案，它似乎只是治理层面的调整；但把它和官方 provider 工具、以及 MCP 相关项目放在一起看，就会发现 WordPress 想做的并不只是“加几个 AI 功能”，而是把 AI 变成整个生态共享的平台基础设施。

@@ -8,8 +8,6 @@ lang: "zh"
 translatedFrom: "telecom-ai-grids-distributed-inference"
 ---
 
-# 电信网络想成为 AI 的分布式推理层
-
 过去很多年里，电信运营商在互联网产业链里的角色都很固定: 它们负责传输流量，而真正的 AI 工作负载发生在别处，通常是在超大规模云区域里。
 
 这个叙事正在开始变化。

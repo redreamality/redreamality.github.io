@@ -8,14 +8,14 @@ tags: ['openspec', 'sdd', 'ai-coding', 'agents.md', 'cli']
 
 ## OpenSpec Quick Start
 
-This tutorial covers the OpenSpec CLI workflow: initialize a repository, create a change, write its proposal and specifications, then validate and archive the completed work. Start in your existing project's root:
+This tutorial covers the OpenSpec CLI workflow: initialize a repository, create a change, write its proposal and specifications, then validate and archive the completed work. The examples use the published **1.13.2** package, Node.js **20.19.0+**, and pnpm. Validation was checked with Node.js 26.7.0 and pnpm 10.28.2 in an empty directory, without model calls. Start in a new practice directory outside your application:
 
 ```bash
-pnpm dlx @fission-ai/openspec@latest --help
-pnpm dlx @fission-ai/openspec@latest init .
+pnpm dlx @fission-ai/openspec@1.13.2 --help
+pnpm dlx @fission-ai/openspec@1.13.2 init . --tools none
 ```
 
-The first command runs the CLI help without a global installation; the second initializes OpenSpec in the current directory. Follow the CLI's prompts for your coding tools. The sections below explain the change workflow and individual commands.
+The first command runs help without a global installation; the second creates the OpenSpec structure without assistant integrations. Use an existing project only after reviewing what initialization will add. For definitions and suitability, read the independent [OpenSpec workflow and files guide](/garden/notes/openspec-guide/); this tutorial focuses on executing the first change.
 
 ## What is OpenSpec?
 
@@ -47,13 +47,13 @@ The npm package is:
 @fission-ai/openspec
 ```
 
-You can run it with `npx`:
+Run the pinned package with pnpm:
 
 ```bash
-npx -y @fission-ai/openspec@latest --help
+pnpm dlx @fission-ai/openspec@1.13.2 --help
 ```
 
-The CLI entrypoint is `openspec`:
+The CLI entrypoint is `openspec`. Bare commands below, including the cheat sheet and optional AGENTS.md example, assume a separately installed CLI of the same version; otherwise use the `pnpm dlx @fission-ai/openspec@1.13.2` prefix:
 
 ```bash
 openspec --help
@@ -76,23 +76,23 @@ instructions    Output enriched artifact/task instructions
 
 ## Initialize OpenSpec in a project
 
-From your repository root:
+For an interactive installation, run this from the intended project root. This is an alternative to the practice directory's `--tools none`, not another required initialization:
 
 ```bash
-npx -y @fission-ai/openspec@latest init .
+pnpm dlx @fission-ai/openspec@1.13.2 init .
 ```
 
 If you want to configure AI tools non-interactively, use `--tools`:
 
 ```bash
-npx -y @fission-ai/openspec@latest init . --tools claude,codex,cursor,gemini,github-copilot
+pnpm dlx @fission-ai/openspec@1.13.2 init . --tools claude,codex,cursor,gemini,github-copilot
 ```
 
 You can also use:
 
 ```bash
-npx -y @fission-ai/openspec@latest init . --tools all
-npx -y @fission-ai/openspec@latest init . --tools none
+pnpm dlx @fission-ai/openspec@1.13.2 init . --tools all
+pnpm dlx @fission-ai/openspec@1.13.2 init . --tools none
 ```
 
 The CLI help currently lists many supported tools, including `claude`, `codex`, `cursor`, `gemini`, `github-copilot`, `kilocode`, `qwen`, `windsurf`, `cline`, `continue`, `opencode`, `roocode`, `trae`, and others.
@@ -109,32 +109,32 @@ A simple OpenSpec loop looks like this:
 6. **Review and test** the code.
 7. **Archive** the completed change so the main specs stay current.
 
-The key mental model is: **the spec leads, the code follows**.
+This tutorial uses **spec review before implementation** as a project policy. OpenSpec's artifact workflow is iterative: if implementation changes your assumptions, update the proposal, delta, design, and tasks, then validate again. The CLI does not enforce an irreversible sequence.
 
 ## Create a new OpenSpec change
 
 Use `openspec new change <name>`:
 
 ```bash
-npx -y @fission-ai/openspec@latest new change add-user-login
+pnpm dlx @fission-ai/openspec@1.13.2 new change add-user-login
 ```
 
 You can include a description:
 
 ```bash
-npx -y @fission-ai/openspec@latest new change add-user-login \
+pnpm dlx @fission-ai/openspec@1.13.2 new change add-user-login \
   --description "Add email/password login with session persistence"
 ```
 
-For coordinated workspaces, the command also supports flags such as:
+The published 1.13.2 `new change --help` includes:
 
 ```text
---goal <text>         Workspace product goal to store with the change
---areas <names>       Comma-separated affected workspace link names
---initiative <id>     Link the repo-local change to an initiative
+--goal <text>         Optional goal metadata to store with the change
 --schema <name>       Workflow schema to use, default: spec-driven
 --json                Output as JSON
 ```
+
+Do not copy the old `--areas` or `--initiative` workspace options into this version's commands. `--goal` remains available; it is optional metadata, not a mandatory workspace configuration. Check the installed version rather than mixing npm behavior with the main branch.
 
 A good change name should be specific and action-oriented:
 
@@ -161,8 +161,7 @@ Suppose you maintain a SaaS app and want to add magic-link login.
 Create the change:
 
 ```bash
-npx -y @fission-ai/openspec@latest new change add-magic-link-login \
-  --description "Allow users to sign in with one-time email magic links"
+pnpm dlx @fission-ai/openspec@1.13.2 new change add-magic-link-login --description "Allow users to sign in with one-time email magic links"
 ```
 
 Then define the intent before coding. A strong proposal answers:
@@ -173,7 +172,7 @@ Then define the intent before coding. A strong proposal answers:
 - What are the acceptance criteria?
 - What should the AI agent not change?
 
-For example:
+Save the following as `openspec/changes/add-magic-link-login/proposal.md`. The command above creates metadata and a README from the description; it does not create a complete proposal or delta:
 
 ```markdown
 # Change: add-magic-link-login
@@ -181,11 +180,20 @@ For example:
 ## Why
 Users forget passwords and support receives frequent reset requests. Magic-link login should reduce friction while preserving existing password login.
 
-## What changes
+## What Changes
 - Add a magic-link request form.
 - Send a single-use email token.
 - Validate the token and create a session.
 - Keep existing email/password login unchanged.
+
+## Capabilities
+### New Capabilities
+- `auth`: Single-use magic-link login alongside password login.
+### Modified Capabilities
+- None. This practice project has no existing auth spec.
+
+## Impact
+Authentication routes, token storage, email delivery, and login tests.
 
 ## Non-goals
 - Do not remove password login.
@@ -198,26 +206,103 @@ Users forget passwords and support receives frequent reset requests. Magic-link 
 - Existing password login tests still pass.
 ```
 
-This is the point of OpenSpec: it gives the AI agent a smaller, safer box to work inside.
+In a real application with an existing auth spec, review that spec first: an existing requirement may need `MODIFIED`, not another `ADDED` entry. This exercise deliberately starts without a main auth specification.
+
+### Write the actual spec delta
+
+Create the directory `openspec/changes/add-magic-link-login/specs/auth/`, then save this complete file as `openspec/changes/add-magic-link-login/specs/auth/spec.md`:
+
+```markdown
+## Purpose
+Allow existing users to sign in with a single-use email link while preserving the existing password sign-in flow.
+
+## ADDED Requirements
+
+### Requirement: Single-use magic-link sign-in
+The system SHALL allow an existing user to sign in with a valid, unexpired, unused email link, consume it atomically, and reject expired or reused links without creating a session.
+
+#### Scenario: Valid link
+- **WHEN** an existing user submits a valid, unexpired, unused link
+- **THEN** the system creates a session and marks the link as used
+
+#### Scenario: Expired link
+- **WHEN** a user submits an expired link
+- **THEN** the system rejects it without creating a session
+
+#### Scenario: Reused link
+- **WHEN** a user submits a previously used link
+- **THEN** the system rejects it without creating a session
+
+### Requirement: Preserve password sign-in
+The system SHALL retain the existing email and password sign-in behavior.
+
+#### Scenario: Existing password login
+- **WHEN** an existing user submits correct email and password credentials
+- **THEN** the system signs the user in through the existing flow
+```
+
+`## ADDED Requirements`, `### Requirement:`, and `#### Scenario:` are parser-facing structure. Keep those headings and normative `SHALL` wording. The proposal's acceptance list is not a substitute for this file. Validation checks structure, not whether token consumption is actually atomic.
+
+### Add design and implementation tasks
+
+Save `openspec/changes/add-magic-link-login/design.md`:
+
+```markdown
+## Context
+Add magic-link login without removing password login.
+
+## Goals / Non-Goals
+Support existing users only. Registration, billing, and page redesign are out of scope.
+
+## Decisions
+Store a hash of each random token with a user ID, expiry, and used status.
+Consume an unexpired token atomically before creating a session.
+Keep the existing password flow and use a local email test double.
+
+## Risks / Trade-offs
+Concurrent requests could replay a token unless consumption is atomic.
+Expired, reused, and concurrent requests need application tests.
+
+## Migration Plan
+Add token storage behind a feature flag; disabling it preserves password login.
+```
+
+Save `openspec/changes/add-magic-link-login/tasks.md`:
+
+```markdown
+## 1. Implementation
+- [ ] 1.1 Add token storage and a request endpoint with a local email test double.
+- [ ] 1.2 Implement atomic token consumption and session creation.
+
+## 2. Verification
+- [ ] 2.1 Test valid, expired, reused, and concurrent token submissions.
+- [ ] 2.2 Run existing password-login regression tests and review the diff.
+```
+
+These documents make the change ready to discuss, not ready to ship. Check tasks only after implementation and tests produce evidence. To inspect the schema's artifact state, run:
+
+```bash
+pnpm dlx @fission-ai/openspec@1.13.2 status --change add-magic-link-login --json
+```
 
 ## Validate changes and specs
 
 Before implementation, run validation:
 
 ```bash
-npx -y @fission-ai/openspec@latest validate add-magic-link-login
+pnpm dlx @fission-ai/openspec@1.13.2 validate add-magic-link-login
 ```
 
 For stricter checks:
 
 ```bash
-npx -y @fission-ai/openspec@latest validate add-magic-link-login --strict
+pnpm dlx @fission-ai/openspec@1.13.2 validate add-magic-link-login --strict --json --no-interactive
 ```
 
 Validate everything:
 
 ```bash
-npx -y @fission-ai/openspec@latest validate --all
+pnpm dlx @fission-ai/openspec@1.13.2 validate --all
 ```
 
 Useful validation flags:
@@ -235,7 +320,7 @@ Useful validation flags:
 For CI, `--json` and `--no-interactive` are especially useful:
 
 ```bash
-npx -y @fission-ai/openspec@latest validate --all --strict --json --no-interactive
+pnpm dlx @fission-ai/openspec@1.13.2 validate --all --strict --json --no-interactive
 ```
 
 ## List and inspect OpenSpec items
@@ -243,50 +328,50 @@ npx -y @fission-ai/openspec@latest validate --all --strict --json --no-interacti
 List active changes:
 
 ```bash
-npx -y @fission-ai/openspec@latest list
+pnpm dlx @fission-ai/openspec@1.13.2 list
 ```
 
 List specs instead:
 
 ```bash
-npx -y @fission-ai/openspec@latest list --specs
+pnpm dlx @fission-ai/openspec@1.13.2 list --specs
 ```
 
 Get machine-readable output:
 
 ```bash
-npx -y @fission-ai/openspec@latest list --json
+pnpm dlx @fission-ai/openspec@1.13.2 list --json
 ```
 
 Show a change or spec:
 
 ```bash
-npx -y @fission-ai/openspec@latest show add-magic-link-login
+pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login
 ```
 
 Show JSON:
 
 ```bash
-npx -y @fission-ai/openspec@latest show add-magic-link-login --json
+pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login --json
 ```
 
 If a name is ambiguous, specify the type:
 
 ```bash
-npx -y @fission-ai/openspec@latest show add-magic-link-login --type change
+pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login --type change
 ```
 
 For change review automation, `--deltas-only` can be helpful:
 
 ```bash
-npx -y @fission-ai/openspec@latest show add-magic-link-login --json --deltas-only
+pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login --json --deltas-only
 ```
 
 ## How AGENTS.md fits into OpenSpec
 
 Many AI coding tools read repository instruction files. `AGENTS.md` has become a common convention for telling agents how to behave inside a codebase.
 
-OpenSpec can generate or update instruction files for supported tools. That matters because the spec workflow only works if the agent knows the rules:
+OpenSpec generates tool-specific skills and command files. For example, a separate 1.13.2 initialization with `--tools claude` creates `.claude/skills/openspec-propose/SKILL.md` and `.claude/commands/opsx/propose.md`. It does not require a generated `openspec/AGENTS.md`. The following rules are optional, handwritten project policy:
 
 - Do not implement before reading the change proposal.
 - Keep implementation scoped to the approved change.
@@ -332,22 +417,24 @@ The OpenSpec version gives the agent a durable source of truth, a boundary, and 
 After implementation, review, and tests, archive the change:
 
 ```bash
-npx -y @fission-ai/openspec@latest archive add-magic-link-login
+pnpm dlx @fission-ai/openspec@1.13.2 archive add-magic-link-login
 ```
 
 To skip confirmation prompts:
 
 ```bash
-npx -y @fission-ai/openspec@latest archive add-magic-link-login --yes
+pnpm dlx @fission-ai/openspec@1.13.2 archive add-magic-link-login --yes
 ```
 
-For infrastructure, tooling, or documentation-only changes where no spec update is needed:
+Check that the active change has moved to `openspec/changes/archive/YYYY-MM-DD-add-magic-link-login/` and that `openspec/specs/auth/spec.md` contains both requirements. Then validate the main spec:
 
 ```bash
-npx -y @fission-ai/openspec@latest archive docs-update --skip-specs
+pnpm dlx @fission-ai/openspec@1.13.2 validate auth --type spec --strict --json --no-interactive
 ```
 
-There is also `--no-validate`, but treat it as an emergency escape hatch rather than a normal workflow.
+The isolated CLI check for this article exercised init, new, strict validation, and archive using the files above. It did not implement authentication or send email. In the dry run, unchecked application tasks were retained as a warning; archive success is not evidence that those tasks were completed. In a real project, finish implementation, run the tests, and update the task list before archiving. Do not bypass validation to make this example pass.
+
+The delta's `## Purpose` supplies the purpose when this new capability is created. Without it, archive can generate a placeholder that fails strict main-spec validation; an existing main spec's placeholder must be edited there directly. `--skip-specs` is only for changes that genuinely need no spec update; this login example needs its delta merged.
 
 ## OpenSpec command cheat sheet
 
@@ -375,7 +462,7 @@ OpenSpec works best when a change maps to one coherent feature, bug fix, or refa
 
 ### 2. Write non-goals explicitly
 
-AI agents often overreach. A `Non-goals` section prevents accidental scope expansion.
+AI agents can overreach. A `Non-goals` section makes scope expansion easier to identify; it is not a filesystem permission boundary.
 
 ### 3. Validate before implementation
 
@@ -415,6 +502,12 @@ Do not make the agent guess the product intent. Write the proposal, define non-g
 - **PromptX**: more of a context/persona platform than a strict spec workflow.
 
 If your team is asking “how do we safely use AI agents in an existing repo?”, OpenSpec is one of the most practical starting points.
+
+## Versioned References
+
+- [OpenSpec 1.13.2 README](https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/README.md)
+- [1.13.2 CLI reference](https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/cli.md)
+- [1.13.2 OPSX workflow](https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/opsx.md)
 
 ## Final takeaway
 

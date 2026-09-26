@@ -8,13 +8,24 @@ lang: 'zh'
 translatedFrom: 'openspec-tutorial-cli-commands-agents-md-examples'
 ---
 
+## OpenSpec 快速开始
+
+本文使用 npm 已发布的 **OpenSpec 1.13.2**，需要 Node.js **20.19.0+** 和 pnpm。验证环境为 Node.js 26.7.0、pnpm 10.28.2；在仓库外空目录验证文件工作流，没有调用模型。先进入新建的练习目录，再运行：
+
+```bash
+pnpm dlx @fission-ai/openspec@1.13.2 --help
+pnpm dlx @fission-ai/openspec@1.13.2 init . --tools none
+```
+
+`--tools none` 只初始化规范目录，不安装编码助手集成。熟悉生成文件后，再决定如何引入现有项目。定义、适用边界和文件关系见[OpenSpec 独立指南](/cn/garden/notes/openspec-guide/)；本教程专门完成第一个变更。
+
 ## 什么是 OpenSpec？
 
 **OpenSpec** 是一个面向 AI 原生的规范驱动开发系统。在实际使用中，它为你的 AI 编码工作流提供了持久化的结构：你不再需要让 Agent 去"直接实现这个功能"，而是将预期的变更描述为一个提案，验证规范，让 Agent 依据规范实现，最后将已完成的变更归档回主要的知识源。
 
 这使得 OpenSpec 在**棕地项目**中尤为实用：在现有代码库中，大多数工作并非从零重写，而是持续不断的 Bug 修复、功能迭代、重构和产品变更。
 
-如果你想对比更广泛的方案，我也写了一篇关于 SDD 的详细比较文章：[BMAD vs spec-kit vs OpenSpec vs PromptX](/blog/-sddbmad-vs-spec-kit-vs-openspec-vs-promptx/)。本教程仅聚焦于 OpenSpec 的日常使用。
+如果你想对比更广泛的方案，可以阅读 SDD 比较文章：[BMAD vs spec-kit vs OpenSpec vs PromptX](/cn/blog/-sddbmad-vs-spec-kit-vs-openspec-vs-promptx/)。本教程仅聚焦于 OpenSpec 的日常使用。
 
 ## 什么时候应该使用 OpenSpec？
 
@@ -38,13 +49,13 @@ npm 包名为：
 @fission-ai/openspec
 ```
 
-你可以用 `npx` 直接运行：
+使用 pnpm 运行固定版本：
 
 ```bash
-npx -y @fission-ai/openspec@latest --help
+pnpm dlx @fission-ai/openspec@1.13.2 --help
 ```
 
-CLI 入口命令为 `openspec`：
+CLI 入口命令为 `openspec`。后文速查表与可选 AGENTS.md 示例中的裸命令，要求已经单独安装同版本 CLI；否则都使用 `pnpm dlx @fission-ai/openspec@1.13.2` 前缀：
 
 ```bash
 openspec --help
@@ -67,23 +78,23 @@ instructions    输出增强的制品/任务指令
 
 ## 在项目中初始化 OpenSpec
 
-在仓库根目录执行：
+如果希望交互选择编码工具，在目标项目根目录执行下面的命令。它是练习中 `--tools none` 的替代选项，不是必须再次初始化：
 
 ```bash
-npx -y @fission-ai/openspec@latest init .
+pnpm dlx @fission-ai/openspec@1.13.2 init .
 ```
 
 如果你想以非交互方式配置 AI 工具，使用 `--tools`：
 
 ```bash
-npx -y @fission-ai/openspec@latest init . --tools claude,codex,cursor,gemini,github-copilot
+pnpm dlx @fission-ai/openspec@1.13.2 init . --tools claude,codex,cursor,gemini,github-copilot
 ```
 
 也可以使用：
 
 ```bash
-npx -y @fission-ai/openspec@latest init . --tools all
-npx -y @fission-ai/openspec@latest init . --tools none
+pnpm dlx @fission-ai/openspec@1.13.2 init . --tools all
+pnpm dlx @fission-ai/openspec@1.13.2 init . --tools none
 ```
 
 CLI 帮助中目前列出了众多支持的工具，包括 `claude`、`codex`、`cursor`、`gemini`、`github-copilot`、`kilocode`、`qwen`、`windsurf`、`cline`、`continue`、`opencode`、`roocode`、`trae` 等。
@@ -100,32 +111,32 @@ CLI 帮助中目前列出了众多支持的工具，包括 `claude`、`codex`、
 6. **评审并测试**代码。
 7. **归档**已完成的变更，使主规范保持最新。
 
-核心思维模型是：**规范先行，代码跟随**。
+本教程采用**先评审规范，再实现代码**的项目约定。OpenSpec 的产物工作流可以反复修改：实现中发现新约束时，返回更新 proposal、delta、design 和 tasks，再次验证。CLI 不强制不可回头的线性顺序。
 
 ## 创建新的 OpenSpec 变更
 
 使用 `openspec new change <name>`：
 
 ```bash
-npx -y @fission-ai/openspec@latest new change add-user-login
+pnpm dlx @fission-ai/openspec@1.13.2 new change add-user-login
 ```
 
 可以附带描述：
 
 ```bash
-npx -y @fission-ai/openspec@latest new change add-user-login \
+pnpm dlx @fission-ai/openspec@1.13.2 new change add-user-login \
   --description "Add email/password login with session persistence"
 ```
 
-对于协作工作区，该命令还支持以下参数：
+已发布的 1.13.2 中，`new change --help` 列出：
 
 ```text
---goal <text>         工作区产品目标，随变更一起存储
---areas <names>       逗号分隔的受影响工作区链接名称
---initiative <id>     将仓库本地变更关联到某个计划
+--goal <text>         随变更存储的可选目标元数据
 --schema <name>       使用的工作流 schema，默认：spec-driven
 --json                以 JSON 格式输出
 ```
+
+不要把旧 workspace 示例中的 `--areas`、`--initiative` 复制到此版本。`--goal` 仍然有效，但它是可选元数据，不是必需的工作区配置。判断参数时使用同版本帮助，不混用 npm 发布包与官方 main。
 
 好的变更名称应该具体且面向行动：
 
@@ -152,8 +163,7 @@ ai-work
 创建变更：
 
 ```bash
-npx -y @fission-ai/openspec@latest new change add-magic-link-login \
-  --description "Allow users to sign in with one-time email magic links"
+pnpm dlx @fission-ai/openspec@1.13.2 new change add-magic-link-login --description "Allow users to sign in with one-time email magic links"
 ```
 
 然后在编码之前定义意图。一个好的提案需要回答：
@@ -164,51 +174,137 @@ npx -y @fission-ai/openspec@latest new change add-magic-link-login \
 - 验收标准是什么？
 - AI Agent 不应该修改什么？
 
-示例如下：
+将下面内容保存为 `openspec/changes/add-magic-link-login/proposal.md`。上面的命令只生成元数据和带描述的 README，不会自动补齐 proposal 与 delta。示例保留工具模板的英文结构标题，解释与评审使用中文：
 
 ```markdown
-# 变更：add-magic-link-login
+# Change: add-magic-link-login
 
-## 原因
-用户忘记密码，支持团队频繁收到重置请求。魔法链接登录应该在保留现有密码登录的同时降低使用摩擦。
+## Why
+本例假定用户忘记密码，支持团队频繁收到重置请求。希望在保留现有密码登录的同时，增加一次性邮件链接供已有用户使用；不把注册或账户恢复扩展到本次变更中。
 
-## 变更内容
+## What Changes
 - 添加魔法链接请求表单。
 - 发送一次性邮件 token。
 - 验证 token 并创建会话。
 - 保持现有的邮箱/密码登录不变。
 
-## 非目标
+## Capabilities
+### New Capabilities
+- `auth`：在密码登录之外提供一次性链接登录。
+### Modified Capabilities
+- 无。练习项目尚无现存 auth 规范。
+
+## Impact
+认证路由、token 存储、邮件发送和登录测试。
+
+## Non-goals
 - 不删除密码登录。
 - 不重新设计整个认证页面。
 - 不修改账单或账户设置。
 
-## 验收标准
+## Acceptance criteria
 - 有效链接只能让用户登录一次。
 - 过期或已使用的链接安全失败。
 - 现有密码登录测试仍然通过。
 ```
 
-这正是 OpenSpec 的意义所在：它给 AI Agent 提供了一个更小、更安全的工作边界。
+真实项目如果已有 auth 规范，需要先检查原文：已有需求可能应使用 `MODIFIED`，而不是再添加一个 `ADDED`。本练习特意从没有主 auth 规范的目录开始。
+
+### 补齐实际的规范增量文件
+
+创建 `openspec/changes/add-magic-link-login/specs/auth/` 目录，把下列完整内容保存为 `openspec/changes/add-magic-link-login/specs/auth/spec.md`：
+
+```markdown
+## Purpose
+Allow existing users to sign in with a single-use email link while preserving the existing password sign-in flow.
+
+## ADDED Requirements
+
+### Requirement: Single-use magic-link sign-in
+The system SHALL allow an existing user to sign in with a valid, unexpired, unused email link, consume it atomically, and reject expired or reused links without creating a session.
+
+#### Scenario: Valid link
+- **WHEN** an existing user submits a valid, unexpired, unused link
+- **THEN** the system creates a session and marks the link as used
+
+#### Scenario: Expired link
+- **WHEN** a user submits an expired link
+- **THEN** the system rejects it without creating a session
+
+#### Scenario: Reused link
+- **WHEN** a user submits a previously used link
+- **THEN** the system rejects it without creating a session
+
+### Requirement: Preserve password sign-in
+The system SHALL retain the existing email and password sign-in behavior.
+
+#### Scenario: Existing password login
+- **WHEN** an existing user submits correct email and password credentials
+- **THEN** the system signs the user in through the existing flow
+```
+
+两条需求分别要求一次性链接登录和保留密码登录；四个场景覆盖有效、过期、已使用的链接，以及原有密码登录。`## ADDED Requirements`、`### Requirement:`、`#### Scenario:` 是解析器识别的结构，示例保留英文标记和 `SHALL`。提案里的验收列表不能替代这个文件。格式验证也不能证明 token 消费确实具有原子性。
+
+### 补齐设计和实施任务
+
+保存为 `openspec/changes/add-magic-link-login/design.md`：
+
+```markdown
+## Context
+增加魔法链接登录，保留现有密码登录。
+
+## Goals / Non-Goals
+只支持已有用户；注册、账单和页面重新设计不在范围内。
+
+## Decisions
+保存随机 token 的哈希值、用户 ID、到期时间与使用状态。
+先原子地消费未过期 token，再创建会话。
+保留密码流程，使用本地邮件测试替身。
+
+## Risks / Trade-offs
+非原子消费可能让并发请求重放 token。
+需要覆盖过期、重用和并发请求的应用测试。
+
+## Migration Plan
+使用功能开关引入 token 存储；关闭后仍保留密码登录。
+```
+
+保存为 `openspec/changes/add-magic-link-login/tasks.md`：
+
+```markdown
+## 1. Implementation
+- [ ] 1.1 添加 token 存储和请求端点，使用本地邮件测试替身。
+- [ ] 1.2 实现原子 token 消费与会话创建。
+
+## 2. Verification
+- [ ] 2.1 测试有效、过期、重用和并发提交 token 的情况。
+- [ ] 2.2 运行现有密码登录回归测试并检查变更差异。
+```
+
+文档齐备意味着可以评审，不代表功能已经交付。只有实现和测试有了证据，才勾选对应任务。检查 schema 产物状态：
+
+```bash
+pnpm dlx @fission-ai/openspec@1.13.2 status --change add-magic-link-login --json
+```
 
 ## 验证变更和规范
 
 实现之前，运行验证：
 
 ```bash
-npx -y @fission-ai/openspec@latest validate add-magic-link-login
+pnpm dlx @fission-ai/openspec@1.13.2 validate add-magic-link-login
 ```
 
 更严格的检查：
 
 ```bash
-npx -y @fission-ai/openspec@latest validate add-magic-link-login --strict
+pnpm dlx @fission-ai/openspec@1.13.2 validate add-magic-link-login --strict --json --no-interactive
 ```
 
 验证全部内容：
 
 ```bash
-npx -y @fission-ai/openspec@latest validate --all
+pnpm dlx @fission-ai/openspec@1.13.2 validate --all
 ```
 
 常用验证参数：
@@ -226,7 +322,7 @@ npx -y @fission-ai/openspec@latest validate --all
 在 CI 中，`--json` 和 `--no-interactive` 特别有用：
 
 ```bash
-npx -y @fission-ai/openspec@latest validate --all --strict --json --no-interactive
+pnpm dlx @fission-ai/openspec@1.13.2 validate --all --strict --json --no-interactive
 ```
 
 ## 列出和检查 OpenSpec 条目
@@ -234,50 +330,50 @@ npx -y @fission-ai/openspec@latest validate --all --strict --json --no-interacti
 列出活跃变更：
 
 ```bash
-npx -y @fission-ai/openspec@latest list
+pnpm dlx @fission-ai/openspec@1.13.2 list
 ```
 
 列出规范：
 
 ```bash
-npx -y @fission-ai/openspec@latest list --specs
+pnpm dlx @fission-ai/openspec@1.13.2 list --specs
 ```
 
 获取机器可读输出：
 
 ```bash
-npx -y @fission-ai/openspec@latest list --json
+pnpm dlx @fission-ai/openspec@1.13.2 list --json
 ```
 
 显示某个变更或规范：
 
 ```bash
-npx -y @fission-ai/openspec@latest show add-magic-link-login
+pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login
 ```
 
 以 JSON 格式显示：
 
 ```bash
-npx -y @fission-ai/openspec@latest show add-magic-link-login --json
+pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login --json
 ```
 
 如果名称有歧义，指定类型：
 
 ```bash
-npx -y @fission-ai/openspec@latest show add-magic-link-login --type change
+pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login --type change
 ```
 
 对于变更评审自动化，`--deltas-only` 可能很有用：
 
 ```bash
-npx -y @fission-ai/openspec@latest show add-magic-link-login --json --deltas-only
+pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login --json --deltas-only
 ```
 
 ## AGENTS.md 在 OpenSpec 中的角色
 
 许多 AI 编码工具会读取仓库指令文件。`AGENTS.md` 已成为告知 Agent 如何在代码库中行为的通用约定。
 
-OpenSpec 可以为支持的工具生成或更新指令文件。这一点很重要，因为规范工作流只有在 Agent 了解规则的情况下才能正常运转：
+OpenSpec 生成的是工具对应的 skills 和命令文件。例如，另一次 1.13.2 初始化选择 `--tools claude` 后，会生成 `.claude/skills/openspec-propose/SKILL.md` 和 `.claude/commands/opsx/propose.md`，不要求存在自动生成的 `openspec/AGENTS.md`。下面这些是可以手写的可选项目约束：
 
 - 在阅读变更提案之前不要实现。
 - 将实现范围限定在已批准的变更内。
@@ -323,22 +419,24 @@ OpenSpec 版本为 Agent 提供了持久的知识源、明确的边界和可评�
 在实现、评审和测试完成后，归档变更：
 
 ```bash
-npx -y @fission-ai/openspec@latest archive add-magic-link-login
+pnpm dlx @fission-ai/openspec@1.13.2 archive add-magic-link-login
 ```
 
 跳过确认提示：
 
 ```bash
-npx -y @fission-ai/openspec@latest archive add-magic-link-login --yes
+pnpm dlx @fission-ai/openspec@1.13.2 archive add-magic-link-login --yes
 ```
 
-对于基础设施、工具或纯文档变更，无需更新规范时：
+检查活跃变更已移至 `openspec/changes/archive/YYYY-MM-DD-add-magic-link-login/`，并确认 `openspec/specs/auth/spec.md` 已包含两条需求。随后验证主规范：
 
 ```bash
-npx -y @fission-ai/openspec@latest archive docs-update --skip-specs
+pnpm dlx @fission-ai/openspec@1.13.2 validate auth --type spec --strict --json --no-interactive
 ```
 
-也有 `--no-validate` 参数，但应将其视为紧急逃生口，而非常规工作流。
+本次在隔离目录使用上述文件验证了 init、new、严格验证和 archive，没有实现认证，也没有发送邮件。演练保留未勾选的应用任务，archive 会发出警告；归档成功不能证明这些任务完成。真实项目必须先完成实现、测试和任务状态更新，再归档，不应跳过验证来让示例通过。
+
+delta 中的 `## Purpose` 会在首次创建能力规范时提供用途说明。缺少它时，archive 可能生成占位文字，导致主规范严格验证失败；已有主规范的占位文字需要直接修改主规范。`--skip-specs` 只适用于确实无需更新规范的变更，本登录示例需要合并 delta，不能跳过。
 
 ## OpenSpec 命令速查表
 
@@ -366,7 +464,7 @@ npx -y @fission-ai/openspec@latest archive docs-update --skip-specs
 
 ### 2. 明确写出非目标
 
-AI Agent 常常容易超出范围。`非目标` 章节可以防止意外的范围扩展。
+AI Agent 可能超出范围。`非目标` 章节让评审更容易发现范围变化，但它不是文件写入权限控制。
 
 ### 3. 实现前先验证
 
@@ -406,6 +504,12 @@ OpenSpec 不仅仅是存放随机文档的地方。它是一个受控变更的�
 - **PromptX**：更像一个上下文/角色平台，而非严格的规范工作流。
 
 如果你的团队在问"我们如何在现有仓库中安全地使用 AI Agent？"，OpenSpec 是最实用的起点之一。
+
+## 版本化参考资料
+
+- [OpenSpec 1.13.2 README](https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/README.md)
+- [1.13.2 CLI 参考](https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/cli.md)
+- [1.13.2 OPSX 工作流](https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/opsx.md)
 
 ## 总结
 

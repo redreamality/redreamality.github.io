@@ -1,23 +1,23 @@
 ---
 title: 'The 2025 State of Browser Extension Frameworks: A Comparative Analysis of Plasmo, WXT, and CRXJS'
 pubDate: 2025-09-03T08:44:51.236Z
-description: 'The browser extension development landscape of 2025 is characterized by increasing complexity, driven by the mandatory transition to Manifest V3 (MV3) and persistent cross-browser API inconsistencies. In this challenging environment, a clear market leader has emerged. Analysis of the available frameworks, their feature sets, developer experience, and ecosystem health indicates that **WXT** has established itself as the definitive leading framework for modern browser extension development. This leadership position is founded on its superior developer experience, a robust and flexible feature set, a framework-agnostic architecture that offers broad compatibility, and, most critically, a track record of active and reliable open-source maintenance.'
+description: 'Compare Plasmo, WXT and CRXJS by entrypoints, messaging, UI support and publishing boundaries, with dated corrections to the original 2025 analysis.'
 author: 'Remy'
 tags: ['browser-extension', 'frontend-development', 'wxt']
 ---
 ## **Section 1: Executive Summary**
 
-### **1.1. The Current Market Leader**
+### **1.1. Historical Scope and Current Corrections**
 
-The browser extension development landscape of 2025 is characterized by increasing complexity, driven by the mandatory transition to Manifest V3 (MV3) and persistent cross-browser API inconsistencies. In this challenging environment, a clear market leader has emerged. Analysis of the available frameworks, their feature sets, developer experience, and ecosystem health indicates that **WXT** has established itself as the definitive leading framework for modern browser extension development. This leadership position is founded on its superior developer experience, a robust and flexible feature set, a framework-agnostic architecture that offers broad compatibility, and, most critically, a track record of active and reliable open-source maintenance.
+This article retains its September 3, 2025 title, publication date, and URL. The **2026-09-25 UTC** correction distinguishes architectural comparisons from historical opinions and current documentation. We have not reconstructed every framework's 2025 release and issue history. Today's documentation therefore cannot establish that a feature never existed in 2025, or validate the original maintenance rankings. No controlled three-framework performance benchmark was performed.
 
 ### **1.2. The Contenders at a Glance**
 
 The market is primarily defined by three key players, each with a distinct philosophy and set of trade-offs:
 
-* **WXT:** This report recommends WXT for the vast majority of new browser extension projects. It provides the most effective balance of powerful features, architectural flexibility, and long-term project stability. Its active community and proven adoption in high-scale production extensions further solidify its position as the most prudent and productive choice. 
-* **Plasmo:** A powerful, highly-opinionated framework that offers an excellent initial developer experience, particularly for teams specializing in React. Its "Next.js for extensions" philosophy provides a streamlined, declarative workflow.However, its long-term viability is severely undermined by significant and widespread community concerns regarding its maintenance status and its reliance on the comparatively slower Parcel bundler, which has fallen behind in the modern tooling ecosystem. 
-* **CRXJS:** A lightweight and capable Vite plugin, rather than a full-fledged framework. It excels at providing a best-in-class build process with superior Hot Module Replacement (HMR) for content scripts.CRXJS is the ideal choice for highly experienced teams who require maximum control and wish to avoid the abstractions of a full framework. However, its value proposition is narrowing as comprehensive frameworks like WXT adopt the same underlying Vite technology while offering a more complete out-of-the-box solution.
+* **WXT:** Consider it when file-based entrypoints, configurable browser targets, storage helpers, and shared modules fit the project. Messaging still uses browser APIs or a separately selected library.
+* **Plasmo:** Consider its conventions when the team wants a React-oriented workflow, Content Scripts UI, and the ecosystem's storage and messaging packages. Its official documentation also lists optional Vue and Svelte support.
+* **CRXJS:** Consider this Vite plugin when an explicit manifest and content-script HMR match the workflow. The team selects application-level storage and messaging libraries. A narrower build-tool scope can be intentional, not evidence of declining relevance.
 
 ### **1.3. Key Strategic Imperative**
 
@@ -41,7 +41,7 @@ While the WebExtensions API has created a degree of standardization, developing 
 * **Feature Availability:** Entire API modules or specific methods within an API may be available in one browser but not another. For example, Firefox supports container tabs through the contextualIdentities API, a feature not present in Chrome. 
 * **Behavioral Differences:** Even when an API is supported, its behavior can vary. A notable example is how content scripts interact with the host page's JavaScript environment. Chrome uses a concept called "isolated worlds" to prevent conflicts, while Firefox employs a different security model known as "Xray vision".
 
-Manually managing these differences requires extensive conditional code, polyfills, and browser-specific build configurations. A primary function of a modern extension framework is to abstract away this complexity, providing a single, unified API that allows developers to "write once, deploy everywhere".
+Frameworks can share configuration and normalize some API access, but cannot implement every missing browser capability. Treat resource generation, API behavior, debugging, packaging, and store submission as separate questions, rather than promising one build that behaves identically everywhere.
 
 ### **2.3. The Intricacies of the Extension Lifecycle**
 
@@ -64,7 +64,7 @@ Plasmo's core architectural principle is the abstraction of the manifest.json fi
 
 popup.tsx, options.tsx, content.ts, background.ts) are automatically recognized and wired into the final extension bundle.This declarative, file-based routing system is intentionally similar to that of Next.js, providing a familiar pattern for web developers.
 
-A critical and differentiating architectural decision is Plasmo's use of the **Parcel** bundler.While Parcel is known for its zero-configuration approach, this choice contrasts with competitors WXT and CRXJS, which have standardized on the more modern and performant Vite toolchain. As will be discussed, this reliance on Parcel has become a significant source of technical debt and a point of concern within the developer community.
+A differentiating architectural decision is Plasmo's use of **Parcel**, while WXT and CRXJS use Vite. These choices affect configuration, plugins, caching, and debugging. The bundler name does not measure startup speed or establish technical debt. Evaluate the actual resolved dependency versions and the integration your project requires.
 
 ### **3.2. Developer Experience (DX): Opinionated and Streamlined**
 
@@ -72,7 +72,7 @@ Plasmo is explicitly designed with the React and TypeScript developer in mind, o
 
 pnpm create plasmo, which can be augmented with flags to include integrations like TailwindCSS or Supabase from the start.
 
-The development server provides live-reloading to automatically refresh the extension upon code changes. However, a key limitation of its developer experience is that its more advanced Hot Module Replacement (HMR) capabilities, which allow for stateful updates without a full reload, are optimized almost exclusively for React.Teams using the framework's optional support for Vue or Svelte will not experience the same level of development velocity, as changes will often trigger a full extension reload.
+The development server refreshes code during development. Distinguish a module update from a page or extension reload: only testing the chosen UI integration establishes which state survives. Plasmo's [framework documentation](https://docs.plasmo.com/framework) describes first-class React support and optional Vue/Svelte support. This distinction does not establish a measured productivity disadvantage for other frameworks.
 
 ### **3.3. Core Features and Abstractions**
 
@@ -83,51 +83,51 @@ Plasmo's "battery-packed" nature is evident in its rich set of built-in features
 * **Deployment and Publishing:** The Plasmo ecosystem extends beyond the core framework to include tooling for the entire extension lifecycle. The open-source Browser Platform Publisher (BPP) is a GitHub Action that automates the process of deploying an extension to the Chrome, Firefox, and Edge web stores.Additionally, Plasmo offers a commercial Software-as-a-Service (SaaS) product called  
   Itero TestBed, which provides a staging environment for testing extensions and pushing updates to beta testers without undergoing the official store review process.
 
-### **3.4. Ecosystem and Viability: A Cautionary Tale**
+### **3.4. Maintenance Evidence to Collect**
 
-Despite its impressive feature set and a large number of stars on GitHub (12.3k) 4, the long-term viability of the Plasmo framework is a matter of significant concern. There is a growing body of evidence from the developer community suggesting that the project is not being actively maintained at a level required for a production-critical tool.
+Maintenance matters, but the original star counts, competitor commentary, and community anecdotes did not form a dated maintenance audit. They are not retained as an enterprise-risk score. A star count reflects interest, not the time needed to resolve a blocking dependency or browser issue.
 
-WXT's official comparison documentation explicitly states that Plasmo "Appears to be in maintenance mode with little to no maintainers or feature development happening".This assertion is supported by anecdotal reports from developers on platforms like Reddit. One user strongly advised against adopting the framework, stating, "Anyone thinking of picking up Plasmo please don't. They are lagging major versions behind with parcel and looking at the state of the code it isn't an easy migration as well".This dependency lag has tangible consequences, such as preventing the use of modern tools like TailwindCSS v4.
+For Plasmo, inspect its own [release history](https://github.com/PlasmoHQ/plasmo/releases), the package manifest for the selected tag, and issues relevant to your dependencies. Record the inspection date, installed version, blocking issue, workaround, and whether a fix is released or only on a development branch. Repeat the same procedure for the other candidates.
 
-The existence of paid commercial tiers for services like Itero TestBed 18 further complicates the picture, raising questions about the project's allocation of resources between its open-source framework and its commercial offerings. While a high star count indicates past popularity, the qualitative feedback from the community points to a project that is struggling to keep pace with the rapidly evolving web ecosystem.
+The existence of a paid service does not establish how maintainers allocate effort to an open-source package. Evaluate service terms separately if the team plans to use that service. A team using only the local framework should not inherit a risk score inferred from an unrelated commercial offering.
 
-This situation presents a classic "great idea, risky execution" dilemma. The conceptual model of Plasmo, with its declarative architecture and powerful abstractions, is nearly ideal for modern extension development. However, a framework's value is inextricably linked to its ongoing maintenance. Adopting Plasmo for a new project means accepting a substantial risk that the framework will not receive timely updates to support future browser API changes, address security vulnerabilities, or maintain compatibility with the broader JavaScript toolchain. For most professional and enterprise teams, this level of risk is likely to outweigh the benefits of its feature set.
+For a long-lived product, document who can diagnose build failures, pin a working dependency graph, contribute a patch, or maintain a temporary fork. Those obligations exist with every candidate. An unresolved issue can be a practical blocker without proving the whole project is abandoned; an active release feed does not guarantee that your blocker will be fixed.
 
 ## **Section 4: In-Depth Analysis: WXT Framework**
 
-WXT presents itself as a "Next-gen Web Extension Framework," drawing heavy inspiration from the developer-centric philosophies of Nuxt.js.Its design is predicated on two primary goals: providing a best-in-class Developer Experience (DX) and offering first-class, unified support for all major browsers.It has rapidly gained traction and is now widely regarded as the leading choice for building robust, cross-browser extensions.
+WXT takes inspiration from Nuxt-style conventions, including discovered entrypoints and auto-imports. Its browser targets help share source code, but browser APIs, manifest versions, native packaging, and store submission remain separate compatibility questions.
 
 ### **4.1. Architectural Deep Dive: Nuxt-Inspired and Framework-Agnostic**
 
 The most significant architectural advantage of WXT is its **frontend framework agnosticism**. Unlike the React-centric approach of Plasmo, WXT is designed to work with any modern UI framework that has a Vite plugin. It provides pre-configured, official modules for the most popular choices—React, Vue, Svelte, and SolidJS—but does not preclude the use of others.This flexibility makes WXT an exceptionally versatile and future-proof choice, as it does not lock development teams into a specific UI technology.
 
-At its core, WXT is built on top of **Vite**, the modern frontend build tool.This foundational choice provides WXT with significant performance benefits, including an extremely fast development server leveraging native ES modules for Hot Module Replacement (HMR) and highly optimized production builds powered by Rollup. This alignment with the modern Vite ecosystem is a key factor in its superior performance and developer experience.
+WXT builds on **Vite**, making Vite plugins and configuration relevant to the project. In the current tested tutorial baseline, WXT 0.21.4 uses explicitly installed Vite 6.3.6. That build succeeded, but it was not compared against equivalent Plasmo or CRXJS projects. It supports no relative speed or bundle-size conclusion.
 
-### **4.2. Developer Experience (DX): Best-in-Class Tooling**
+### **4.2. Developer Experience (DX): Conventions and Tooling**
 
 WXT has been meticulously engineered to minimize developer friction and reduce boilerplate code through a suite of powerful DX features.
 
 * **File-Based Entrypoints:** Similar to Plasmo, WXT employs a file-based system where the manifest.json is generated automatically from the files present in the entrypoints/ directory.However, WXT enhances this pattern by allowing for inline configuration options directly within the entrypoint files, offering a greater degree of granular control over the manifest generation. 
 * **Auto-Imports:** A standout feature inspired by Nuxt, WXT provides automatic, on-demand importing of components, hooks, and utility functions.This eliminates the need for dozens of manual  
   import statements, resulting in cleaner, more concise code and a significant boost to developer productivity.  
-* **Dev Mode:** The framework's development mode is widely praised for its speed, offering "lightning fast HMR for UI development and fast reloads for content/background scripts".User testimonials confirm a generally positive experience, with the caveat that websocket connections for hot reloading can occasionally be unstable. 
+* **Dev Mode:** Distinguish UI HMR from content-script and background reloads. Test a popup field, an injected component, and a background listener separately; a working update in one context says nothing about state preservation in another.
 * **CLI:** Project scaffolding is handled by an interactive Command Line Interface (CLI), invoked via npx wxt@latest init. This tool guides the developer through selecting a project name, a UI framework template (including vanilla TypeScript), and other initial setup options, enabling a new project to be bootstrapped in seconds.
 
 ### **4.3. Core Features and Abstractions**
 
 WXT provides a comprehensive set of features that address the primary pain points of cross-browser extension development.
 
-* **Unified Browser API:** WXT exposes a global browser object that serves as a consistent, promise-based wrapper around the underlying WebExtensions APIs. This abstraction layer automatically handles the differences between Chrome's chrome.\* namespace and Firefox's browser.\* namespace, allowing developers to write a single, clean codebase that functions correctly across all target browsers. 
+* **Browser API Access:** WXT provides a `browser` import for extension API access. It does not implement APIs absent from a browser or guarantee identical behavior. Use capability checks, target-specific configuration, and runtime tests where APIs differ.
 * **Comprehensive Build & Publishing:** The framework offers robust, built-in tooling for the entire deployment pipeline. It includes commands to generate optimized ZIP packages tailored for different browser stores, including the creation of a separate source code ZIP file, which is a requirement for submission to the Mozilla Add-ons store.Furthermore, WXT provides utilities to automate the process of uploading and publishing the extension. 
 * **Module System:** For organizations that maintain a suite of related extensions, WXT offers a powerful module system. This feature enables the creation of reusable modules that can share both build-time configuration and runtime code across multiple extension projects, promoting code reuse and simplifying maintenance.
 
-### **4.4. Ecosystem and Viability: Active and Thriving**
+### **4.4. Maintenance and Upgrade Boundaries**
 
-WXT's viability is strongly supported by its widespread adoption and active community. The framework's official website showcases a gallery of popular, production-ready extensions built with WXT, including several with massive user bases, such as "Eye Dropper" (1,000,000+ users) and "ChatGPT Writer" (600,000+ users).This serves as powerful social proof of its stability and scalability.
+WXT's showcase can identify projects worth inspecting, but their user counts do not measure framework reliability or establish how much application-specific engineering those projects required. Review the [WXT releases](https://github.com/wxt-dev/wxt/releases) and the upgrade notes for the version you actually intend to install.
 
-The project is actively maintained, with a healthy and responsive presence on GitHub (7.9k stars) and an active community on Discord for user support.The sentiment among developers is overwhelmingly positive, with numerous public accounts of teams successfully migrating from Plasmo to WXT and reporting "significant improvements" in both performance and developer experience.
+The current [0.21 upgrade notes](https://wxt.dev/guide/resources/upgrading) require Node >=22, direct installation of Vite, and attention to changed source-ZIP rules. They also remove `url:` imports. These are concrete migration obligations, not evidence that the corresponding 2025 behavior was incorrectly documented.
 
-The framework's architectural decision to be UI framework-agnostic is a significant strategic advantage. It not only caters to a wider developer audience but also future-proofs the projects built with it. By decoupling the core extension logic from the UI rendering layer, WXT ensures that teams can adopt the best UI technology for their needs without being constrained by the framework itself. This flexibility makes WXT a more resilient and strategically sound choice for long-term projects, as it can easily adapt to future trends in the frontend ecosystem.
+UI choice can reduce coupling between extension logic and rendering, but it does not make upgrades free. Review framework modules, Vite plugins, injected-style behavior, and lifecycle cleanup together. CRXJS is also framework-agnostic, while Plasmo documents optional Vue/Svelte support; this flexibility is not exclusive to WXT.
 
 ## **Section 5: In-Depth Analysis: CRXJS Vite Plugin**
 
@@ -141,7 +141,7 @@ Unlike the file-based routing conventions of WXT and Plasmo, CRXJS adheres to a 
 
 ### **5.2. Developer Experience (DX): Lean and Unopinionated**
 
-The primary developer experience feature and key technical achievement of CRXJS is its implementation of **"True Hot Module Replacement" that works for content scripts**.This is a significant differentiator. While other tools can reload the UI of a popup or options page, CRXJS is able to inject updated code into a content script on a live webpage without requiring a full page refresh, preserving the state of the page and the extension. This provides a dramatic acceleration of the development feedback loop for extensions that are heavily reliant on content script functionality. Some community members have noted that this level of HMR for content scripts is not as effective in other frameworks, making CRXJS a superior choice for this specific use case.
+CRXJS documents content-script HMR as a feature. Evaluate it on the actual injected UI: edit a component, retain page input, and check whether listeners or styles accumulate after repeated updates. Module acceptance boundaries still matter, so neither universal state preservation nor a speed advantage follows from the HMR label alone. The [official introduction](https://crxjs.dev/guide/introduction/) also lists support for multiple UI frameworks.
 
 The setup process is lean and straightforward: a developer initializes a standard Vite project, installs the @crxjs/vite-plugin package, and adds it to the vite.config.js file, pointing it to the project's manifest.json.This minimalist approach grants developers maximum control, as they are free to structure their application and choose their own libraries for tasks like storage and messaging without being bound by framework conventions.
 
@@ -154,37 +154,36 @@ CRXJS focuses on a narrow but critical set of responsibilities:
 
 It is important to note what CRXJS does *not* provide. There are no built-in wrappers or abstractions for the browser's Storage, Messaging, or Internationalization (i18n) APIs. Developers using CRXJS are expected to interact directly with the native chrome.\* or browser.\* APIs or to select and integrate their own third-party libraries for these purposes.
 
-### **5.4. Ecosystem and Viability: Signs of Concern**
+### **5.4. Maintenance and Application Ownership**
 
-The project's history and maintenance status have been a source of concern for the community. The Vite plugin remained in a beta state for over three years before its official version 2.0.release in June 2025\.During this extended beta period, there were discussions about the project being unmaintained or potentially archived, which may have impacted its adoption.
+The original analysis used beta duration and community discussion to infer future maintenance risk. This correction does not reconstruct that historical timeline or treat it as a present-day reliability score. Consult the [project's release history](https://github.com/crxjs/chrome-extension-tools/releases) for dated releases and their supported Vite versions.
 
-While a new, active team of maintainers has recently taken stewardship of the project and pushed the official 2.0.release, this history of instability may give potential adopters pause, especially for long-term enterprise projects.Its user base, as indicated by its 3.5k stars on GitHub, is smaller and more niche than that of its full-framework competitors.
+For a candidate version, check whether the target manifest, asset imports, and UI plugin work together. Record unresolved blockers and whether the team can pin or patch the integration. Apply the same threshold used for WXT and Plasmo instead of inferring enterprise suitability from repository size.
 
-The niche for a build-tool-only solution like CRXJS appears to be shrinking. Its primary value proposition—a high-performance, Vite-based build process with excellent HMR—is now also a core feature of comprehensive frameworks like WXT. A team choosing WXT gets the benefits of the Vite toolchain *plus* a rich set of valuable, pre-built runtime abstractions for storage, messaging, and cross-browser compatibility. A team choosing CRXJS would need to build or source these abstractions themselves, effectively re-implementing a portion of what a full framework already provides. Therefore, the ideal user for CRXJS is a developer or team with a very specific need for its superior content script HMR, or one that has a strong preference for minimal abstraction and is willing to manage all application-level concerns manually.
+CRXJS leaves storage, message schemas, and state management to the application. That can fit an existing codebase with established libraries; a new team may prefer more conventions. WXT supplies storage helpers but not a built-in messaging wrapper, so messaging ownership must be considered for both. Choosing libraries does not necessarily mean reimplementing them.
 
 ## **Section 6: Comparative Framework Analysis: A Head-to-Head Evaluation**
 
-A direct, feature-by-feature comparison of WXT, Plasmo, and CRXJS reveals a clear hierarchy in terms of completeness, developer experience, and project health. While each tool has its strengths, WXT consistently offers the most comprehensive and well-supported feature set, making it the most robust choice for a wide range of projects.
+A feature comparison describes ownership and workflow, not an overall winner. The following correction records current documented boundaries; it is not a reconstructed package-by-package snapshot of September 2025.
 
 ### **6.1. Detailed Feature Matrix**
 
-The following table provides a detailed comparison of the three leading frameworks across several key categories. The data is synthesized from official documentation, community discussions, and direct feature comparisons provided by the framework authors themselves.
+Sources for this matrix are [WXT messaging](https://wxt.dev/guide/essentials/messaging), [WXT upgrading](https://wxt.dev/guide/resources/upgrading), [Plasmo's framework guide](https://docs.plasmo.com/framework), and [CRXJS's introduction](https://crxjs.dev/guide/introduction/). Undocumented or untested combinations are left as checks, not marked universally supported.
 
 | Feature Category | Feature | WXT | Plasmo | CRXJS |
 | :---- | :---- | :---- | :---- | :---- |
-| **Project Health** | **Actively Maintained** | ✅ | 🟡¹ | 🟡² |
-|  | **GitHub Stars** | 7.9k 22 | 12.3k 4 | 3.5k 28 |
+| **Maintenance** | **Release/dependency audit** | Check selected tag | Check selected tag | Check selected tag |
 | **Developer Experience** | **First-class TypeScript** | ✅ | ✅ | ✅ |
 |  | **Entrypoint Discovery** | ✅ (File-based) | ✅ (File-based) | ❌³ |
 |  | **Inline Entrypoint Config** | ✅ | ✅ | ❌ |
 |  | **Auto-imports** | ✅ | ❌ | ❌ |
 |  | **Reusable Module System** | ✅ | ❌ | ❌ |
-|  | **Supports All UI Frameworks** | ✅ | 🟡⁴ | ✅ |
+|  | **UI integration** | Official modules and Vite plugins | React; optional Vue/Svelte | Framework-agnostic Vite integration |
 | **Build Tools** | **Underlying Bundler** | Vite | Parcel | Vite |
 |  | **Create Extension ZIPs** | ✅ | ✅ | ❌ |
 |  | **Create Firefox Sources ZIP** | ✅ | ❌ | ❌ |
 |  | **Automated Publishing** | ✅ | ✅ | ❌ |
-|  | **Remote Code Bundling** | ✅ | ✅ | ❌ |
+|  | **Remote URL imports** | Removed in WXT 0.21 | Check selected version and policy | Not a core promise |
 | **Dev Mode Features** | **.env File Support** | ✅ | ✅ | ✅ |
 |  | **HMR for UIs** | ✅ | 🟡⁵ | ✅ |
 |  | **HMR for Content Scripts** | 🟡⁶ | 🟡⁶ | ✅ |
@@ -193,34 +192,42 @@ The following table provides a detailed comparison of the three leading framewor
 |  | **Messaging API** | ❌⁷ | ✅ | ❌⁷ |
 |  | **Content Script UI** | ✅ | ✅ | ❌⁷ |
 |  | **Internationalization (i18n)** | ✅ | ❌ | ❌ |
-| **Browser/Manifest** | **Supports All Browsers** | ✅ | ✅ | ✅ |
+| **Browser/Manifest** | **Cross-browser execution** | Test each target | Test each target | Test each target |
 |  | **MV2 Support** | ✅ | ✅ | 🟡⁸ |
 |  | **MV3 Support** | ✅ | ✅ | 🟡⁸ |
 
 Table Footnotes:  
-¹ Appears to be in maintenance mode with concerns about outdated dependencies.
-
-² Has a history of being unmaintained, though a new team has recently become active.
+Maintenance grades and star counts have been removed because this article does not contain a reproducible, dated maintenance audit.
 
 ³ Entrypoints are configured exclusively in manifest.json.
 
-⁴ First-class support is for React; support for Vue and Svelte is optional and less optimized.
+⁴ First-class React and optional Vue/Svelte describe support routes, not measured speed.
 
-⁵ HMR is optimized for React only; other frameworks trigger a full reload.
+⁵ Check HMR with the selected UI integration; do not infer identical update behavior.
 
-⁶ Reloads the entire extension rather than performing a true hot-module replacement.
+⁶ Distinguish UI HMR, content-script reinjection, background reload, and page reload.
 
 ⁷ No built-in wrapper is provided; developers must use native browser APIs or third-party libraries.
 
-⁸ Supports either MV2 or MV3 in a given build, but not both from the same codebase simultaneously.
+⁸ Inspect the chosen plugin version and manifest target. A single output has one manifest version; that alone does not prove shared-source builds are impossible.
 
 ### **6.2. Analysis of Key Differentiators**
 
 The feature matrix highlights several critical areas where the frameworks diverge significantly, with important practical implications for development teams.
 
-* **Maintenance & Viability:** This is the most crucial differentiator. WXT demonstrates clear signs of active, healthy maintenance and strong community adoption.In stark contrast, both Plasmo and CRXJS carry significant red flags. Plasmo's reliance on outdated dependencies and the community perception of it being in "maintenance mode" introduce substantial risk.CRXJS, despite a recent revival, has a history of instability that may deter risk-averse teams.For any project intended for long-term production use, WXT's stability is a decisive advantage.  
-* **Developer Experience:** WXT leads in overall developer experience due to its unique combination of features. Its **auto-imports** functionality is a powerful productivity booster not found in the other tools.While Plasmo's initial setup is smooth for React developers, its React-only HMR is a notable limitation.CRXJS offers the best-in-class HMR for content scripts, but this single advantage is weighed against its lack of other DX features like auto-imports or file-based entrypoints. 
-* **Abstraction Level:** The choice between these tools is also a choice of abstraction level. Plasmo and WXT are comprehensive frameworks that provide both build tooling and high-level runtime APIs for storage, messaging, and UI injection. This "all-in-one" approach accelerates development by providing solutions for common problems out of the box. CRXJS, on the other hand, is a tool that operates almost entirely at the build level. It requires a "bring your own abstractions" approach, offering maximum control and flexibility at the cost of increased initial development effort. As WXT's abstractions are well-designed and optional, they provide a more productive starting point for most projects than the purely manual approach required by CRXJS.
+* **Maintenance:** Collect dated releases, dependency compatibility, and project-specific blockers. No candidate receives a guarantee of future support.
+* **Development workflow:** Compare entrypoint discovery, generated configuration, and HMR in the contexts the team edits. Auto-imports are a convention, not a measured productivity score.
+* **Runtime ownership:** WXT includes storage helpers; messaging uses native APIs or an optional library. Plasmo supplies ecosystem messaging APIs. CRXJS leaves both choices to the application.
+
+For browser support, use a second matrix. WXT's [target documentation](https://wxt.dev/guide/essentials/target-different-browsers) and [publishing guide](https://wxt.dev/guide/essentials/publishing) distinguish these stages:
+
+| Target | WXT 0.21.4 resource build in the companion example | Runtime and distribution |
+| --- | --- | --- |
+| Chrome MV3 | Built | Browser loading and store submission not tested |
+| Firefox MV2 | Built; sources ZIP generated | Temporary loading, consent metadata, ID, and AMO review remain separate |
+| Safari MV2 | Built | Apple packaging, signing, device tests, and submission not performed |
+
+WXT does not create the Safari native wrapper or automate Safari publication. Apple offers both a command-line packaging route and [App Store Connect web packaging](https://developer.apple.com/documentation/safariservices/packaging-and-distributing-safari-web-extensions-with-app-store-connect). Plasmo and CRXJS target combinations were not built in this correction; do not read their framework-level support descriptions as equivalent test results.
 
 ## **Section 7: Performance and Build Tooling Deep Dive: Vite vs. Parcel**
 
@@ -230,29 +237,29 @@ The choice of an underlying bundler is a foundational architectural decision tha
 
 A bundler's responsibilities include resolving module imports, transforming code (e.g., TypeScript to JavaScript, JSX to JS), optimizing assets, and packaging everything into files that a browser can execute. The efficiency of this process directly affects how quickly a developer can see their changes (dev server speed and HMR) and the size and speed of the final product (production build performance).
 
-### **7.2. Vite (WXT, CRXJS): The Need for Speed**
+### **7.2. Vite (WXT, CRXJS): Build Architecture**
 
-Vite has rapidly become the standard for modern frontend tooling due to its innovative architecture that prioritizes speed.Its performance advantages stem from two key design choices:
+The original 2025 discussion described Vite's ESM development server, dependency pre-bundling, and Rollup-based production builds. These explain the architecture of that generation, not a timeless description of every Vite release or a benchmark of extension frameworks:
 
-* **Native ESM Dev Server:** During development, Vite does not bundle the application's source code. Instead, it leverages the browser's native support for ES modules (ESM). When a file is requested, Vite transforms and serves it on-demand. This approach results in a near-instantaneous server start time, regardless of the project's size. 
-* **esbuild for Pre-Bundling:** Vite uses esbuild, a bundler written in Go, to pre-bundle third-party dependencies from node\_modules. Because esbuild is 10-100 times faster than JavaScript-based bundlers, this initial dependency-bundling step is incredibly fast. 
-* **Rollup for Production:** For production builds, Vite uses Rollup, which is renowned for its highly optimized output and excellent tree-shaking capabilities, resulting in smaller, more efficient bundles.
+* **Development modules:** On-demand transformation affects startup work, but extension entrypoint discovery, plugins, dependencies, and browser loading still take time.
+* **Dependency pre-bundling:** Cold and warm dependency caches are different experimental conditions. A component benchmark for esbuild cannot be transferred to an entire WXT or CRXJS workflow.
+* **Production bundling:** For the Vite 6 baseline used by the companion example, Rollup creates production output. Measure the resulting extension with the same source and optimization settings before comparing size.
 
-The combination of these technologies provides the fast and responsive developer experience frequently praised by users of WXT and CRXJS.This choice aligns these frameworks with the cutting edge of the web development ecosystem.
+The [Vite guide](https://vite.dev/guide/) is a reference for the version being adopted. Preserve the lockfile and identify the installed Vite major when reporting results; a later toolchain change should not silently become evidence about a 2025 release.
 
-### **7.3. Parcel (Plasmo): Simplicity at a Cost**
+### **7.3. Parcel (Plasmo): What to Measure**
 
-Parcel's primary design goal is simplicity through a zero-configuration experience.It is a capable bundler that can handle a wide variety of assets automatically. However, community feedback and developer testimonials indicate that this simplicity can come at the cost of performance, especially as projects grow in complexity.
+Parcel handles transformations and assets through its build pipeline and caching. Its [official documentation](https://parceljs.org/features/development/) describes development behavior, but does not establish how a particular Plasmo application compares with an equivalent WXT or CRXJS application.
 
-Developers migrating from Plasmo to WXT have reported "significant improvements" and "much faster build and dev startup times".Others have noted that Parcel's caching and HMR can be "poor" and "slower" in the context of monorepos or larger projects.Furthermore, the fact that Plasmo is reportedly "lagging major versions behind with parcel" is a significant red flag.It suggests the project is accumulating technical debt and is unable to leverage the latest performance improvements and features from its own core dependency. This makes the choice of build tool a strong proxy for a framework's overall health and modernity. WXT and CRXJS are built on a modern, high-performance foundation, while Plasmo's foundation shows signs of aging.
+Use the same popup, content script, storage setting, UI framework, and browser target for all candidates. Pin Node, package manager, framework, and bundler versions. Record cold startup, warm startup, one UI edit, one content-script edit, and a production build separately. Keep dependency download time outside startup timing unless installation is the question. Repeat runs and report spread as well as a median; publish the commands and machine details. No such comparison was run here, so this article assigns no speed winner.
 
 ### **7.4. Bundle Size and Runtime Performance**
 
 In the resource-constrained environment of a browser extension, every kilobyte of the bundle and every millisecond of execution time matters.Large extensions can contribute to browser lag, increase memory consumption, and lead to a poor user experience.
 
-Frameworks that rely on large UI libraries like React can introduce a significant payload, especially for simple UIs like a popup.For performance-critical interfaces, a framework like Svelte, which compiles components to minimal vanilla JavaScript at build time and has no runtime library, can be a superior choice.WXT's framework-agnostic nature is a distinct advantage here, as it allows developers to choose Svelte or another lightweight library for performance-sensitive parts of their extension.
+UI dependencies contribute to output, but their effect depends on the application and compilation settings. Compare the same UI implementation before attributing a bundle difference to the extension tool. WXT and CRXJS permit multiple UI integrations, and Plasmo documents optional alternatives to React. A compiler-based UI still produces runtime code; it is not automatically smaller or faster for every workload.
 
-The frameworks also offer tools for performance analysis and optimization. Plasmo, for instance, provides a \--bundle-buddy flag to generate a visual report of the bundle's composition and a \--hoist flag to optimize dependency bundling, which can significantly improve speed and reduce size.Developers must leverage these tools and employ standard web performance techniques like code-splitting, tree-shaking, and lazy loading to ensure their extensions remain lean and responsive.
+Use the chosen version's bundle-analysis tools to identify duplicated dependencies and code that reaches each entrypoint. Treat raw output size, archive size, popup startup, content-script work, and background wakeups as separate metrics. Code splitting and lazy loading change execution timing as well as packaging; measure the actual user interaction after applying them.
 
 ## **Section 8: Strategic Framework Selection: Recommendations for Project Archetypes**
 
@@ -265,20 +272,20 @@ The following table maps common project requirements to the suitability of each 
 | Project Requirement | WXT | Plasmo | CRXJS |
 | :---- | :---- | :---- | :---- |
 | **Team Expertise** |  |  |  |
-| React-Heavy Team | **Excellent** | **Good** (DX) / **Poor** (Risk) | **Viable** |
-| Vue/Svelte/SolidJS Team | **Excellent** | **Poor** | **Viable** |
-| Polyglot / Agency Team | **Excellent** | **Poor** | **Good** |
+| React-Heavy Team | Evaluate official React module | Evaluate React conventions and CSUI | Evaluate Vite React integration |
+| Vue/Svelte/SolidJS Team | Check official modules | Check optional Vue/Svelte route; verify other choices | Check chosen Vite plugin |
+| Polyglot / Agency Team | Shared WXT modules | Shared Plasmo conventions | Shared Vite configuration |
 | **Project Scale** |  |  |  |
-| Small Prototype / MVP | **Excellent** | **Good** | **Good** |
-| Mid-Sized Product | **Excellent** | **Poor** (Risk) | **Viable** |
-| Enterprise Suite | **Excellent** | **Poor** (Risk) | **Poor** (Risk) |
+| Small Prototype / MVP | Test one complete workflow | Test one complete workflow | Test one complete workflow |
+| Mid-Sized Product | Audit upgrade and testing needs | Audit upgrade and testing needs | Audit application-library ownership |
+| Enterprise Suite | Assign maintenance ownership | Assign maintenance ownership | Assign maintenance ownership |
 | **Strategic Priority** |  |  |  |
-| Fastest Time-to-Market | **Excellent** | **Good** | **Good** |
-| Long-Term Maintainability | **Excellent** | **Poor** | **Poor** |
-| Maximum Control / Minimalism | **Good** | **Poor** | **Excellent** |
+| Time-to-Market | Measure team workflow | Measure team workflow | Measure team workflow |
+| Long-Term Maintainability | Dated release/dependency audit | Dated release/dependency audit | Dated release/dependency audit |
+| Explicit Configuration | Generated manifest conventions | Generated manifest conventions | Manifest-driven setup |
 | **Target Platforms** |  |  |  |
-| Chrome-Only | **Excellent** | **Good** | **Excellent** |
-| All Major Browsers | **Excellent** | **Good** | **Good** |
+| Chrome-Only | Test target manifest and APIs | Test target manifest and APIs | Test target manifest and APIs |
+| Multiple Browsers | Build and test separately | Check each supported target | Check plugin version and target |
 
 ### **8.2. Detailed Scenario Analysis**
 
@@ -286,34 +293,34 @@ The decision matrix can be further illuminated by examining several common proje
 
 * **Scenario A: The Enterprise React Team**  
   * **Context:** A large organization with deep in-house React expertise is tasked with building a complex, mission-critical browser extension that will be supported for many years. Stability, security, and long-term maintainability are the highest priorities.  
-  * **Analysis:** At first glance, Plasmo's React-first developer experience and Next.js-like patterns seem highly appealing.However, the significant and credible community concerns about its maintenance status and outdated dependencies introduce an unacceptable level of risk for a long-term enterprise product.The potential for the framework to become unmaintained or fall behind on critical browser updates or security patches is a deal-breaker.  
-  * **Recommendation: WXT.** WXT's active maintenance, proven stability in large-scale applications, and excellent first-party support for React via the @wxt-dev/module-react package make it the most prudent and professional choice.It provides a comparable developer experience for React teams without the associated maintenance risk.  
+  * **Analysis:** Compare Plasmo's React conventions with WXT's React module and CRXJS's Vite integration using the existing component library. Include permissions, background restart, storage migration, and the team's ability to diagnose generated output.
+  * **Decision boundary:** Select after a dated dependency audit and a representative workflow test. None of these tools removes maintenance risk, and enterprise scale alone does not disqualify a plugin-based approach.
 * **Scenario B: The Lean Startup / Indie Developer**  
   * **Context:** A small, agile team or a solo developer is building a Minimum Viable Product (MVP). The primary goal is to validate an idea and ship a functional product as quickly as possible.  
-  * **Analysis:** All three tools offer a fast initial setup. CRXJS is very quick to get started for a developer comfortable with Vite.However, a "fast start" is different from "fast to the finish line." WXT's rich set of built-in abstractions for common tasks like cross-browser storage and messaging will ultimately accelerate development more significantly by reducing the amount of boilerplate code that needs to be written from scratch. 
-  * **Recommendation: WXT.** Its combination of a fast scaffolding process, powerful DX features like auto-imports, and ready-made solutions for common extension problems makes it the fastest path from idea to a feature-complete MVP.  
+  * **Analysis:** Compare the time to complete one actual workflow, not just create a template. WXT's storage helper can be useful, while messaging still needs native APIs or an optional library. Plasmo provides ecosystem wrappers; CRXJS lets the team retain existing libraries.
+  * **Decision boundary:** Prefer the conventions the team can explain and test through a release rehearsal. There is no measured fastest path in this article.
 * **Scenario C: The Multi-Framework Agency**  
   * **Context:** A digital agency or consultancy that builds browser extensions for a variety of clients. These clients may have existing technology stacks and preferences for different UI frameworks, such as React, Vue, or Svelte.  
   * **Analysis:** This scenario perfectly highlights the strategic advantage of WXT's architecture. Its framework-agnostic nature is a killer feature for this use case.An agency can standardize its core extension development and build process on WXT, creating a consistent, efficient workflow across all projects. This allows them to accumulate institutional knowledge and reusable code (potentially using WXT's module system) while retaining the flexibility to use the specific UI framework required by each client.  
-  * **Recommendation: WXT.** No other framework offers this level of flexibility. Adopting WXT allows the agency to serve a broader market without having to maintain separate, specialized toolchains for each UI framework.  
+  * **Decision boundary:** WXT is one candidate for shared modules and multiple UI integrations. CRXJS is also framework-agnostic; Plasmo lists optional Vue/Svelte support. Test the actual plugin combinations, injected styles, and update behavior before standardizing.
 * **Scenario D: The Performance Purist / Tooling Expert**  
   * **Context:** A developer building a highly-performant, lightweight extension where every kilobyte of bundle size and every millisecond of latency is critical. This developer is a tooling expert who prefers to have full, granular control over every dependency and build step, and is wary of framework "magic."  
-  * **Analysis:** For this specific and advanced use case, the lack of abstractions in CRXJS becomes a feature, not a bug. The developer can leverage the powerful Vite build process and its best-in-class content script HMR without inheriting any of the runtime abstractions or conventions of a full framework.This allows them to hand-pick every library and write their own minimal, highly-optimized code for storage, messaging, and state management.  
-  * **Recommendation: CRXJS.** While this represents a niche, it is the scenario where CRXJS truly excels. It provides the essential build-time tooling needed for a modern development workflow while affording the expert developer the complete control they require.
+  * **Analysis:** A manifest-driven Vite plugin can fit explicit dependency ownership. That does not prove smaller output: a hand-selected library can outweigh a framework helper, and repeated listener registration can dominate runtime cost.
+  * **Decision boundary:** Include CRXJS when explicit configuration is valuable, then measure the same workload. Minimal abstraction is a design preference, not a speed result.
 
 ## **Section 9: Conclusion and Future Outlook**
 
 ### **9.1. Final Verdict**
 
-The analysis conducted in this report leads to a clear and confident conclusion: **WXT is the superior choice for nearly all new browser extension projects in 2025\.** It successfully synthesizes the best aspects of the current tooling landscape, combining a modern, high-performance Vite-based architecture with a best-in-class developer experience that demonstrably accelerates development. Most importantly, it is backed by an active, healthy open-source community, providing the assurance of ongoing maintenance and long-term stability that is critical for professional software development.
+The original universal recommendation is withdrawn because the article did not establish comparable benchmarks or a dated maintenance audit. WXT, Plasmo, and CRXJS organize different parts of the work. Entrypoint conventions, application-library ownership, UI integration, and release targets provide concrete selection criteria.
 
-While Plasmo offers a compelling vision and a polished experience for React developers, the significant risks associated with its maintenance status make it a difficult choice to recommend. CRXJS remains an excellent tool for a specific niche of experts who demand minimal abstraction, but its value proposition is increasingly being absorbed by more comprehensive frameworks like WXT that offer the same build-time advantages alongside valuable runtime features.
+For a complete WXT example, use the [version-pinned tutorial](/blog/browser-extension-development/). Its typecheck and browser-target resource builds are reproducible checks of one example, not a comparative runtime benchmark. A product decision still requires browser execution and a release rehearsal.
 
 ### **9.2. The Future of the Ecosystem**
 
-The browser extension framework space appears to be in a state of consolidation, moving from a period of rapid experimentation to one of maturation around a few dominant players. The technical debt and maintenance challenges evidently faced by Plasmo and CRXJS underscore the immense difficulty of sustaining complex open-source tooling in a fast-moving ecosystem. The success of WXT demonstrates that a successful framework must excel not only in its technical architecture but also in its community stewardship.
+Future changes should be evaluated through release notes, API requirements, and migration experiments rather than a prediction that one tool will absorb the others. For example, WXT's removal of `url:` imports is a current upgrade consideration; it is not a reason to retroactively mark every 2025 remote-import statement false.
 
-For technical decision-makers, the key takeaway is that the evaluation of open-source frameworks must now extend beyond a simple feature matrix. A thorough assessment of a project's maintenance velocity, community engagement, and dependency freshness has become a non-negotiable part of the due diligence process. In the current landscape, the health of the community is the most reliable predictor of the long-term success and viability of a project. As such, the continued evolution and stewardship of the WXT framework will be the central trend to monitor in this space for the foreseeable future.
+Keep the selected version, dependency lockfile, browser matrix, known blockers, and upgrade owner with the decision. The references below retain the original 2025 reading list for historical context; current corrections link to the relevant official documents beside each claim. Historical forum opinions are not evidence of today's maintenance status.
 
 #### **Works cited**
 

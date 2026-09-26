@@ -7,8 +7,6 @@ tags: ["ai", "GitLab", "DevSecOps", "mcp", "ai-agents", "developer-tools"]
 lang: "en"
 ---
 
-# GitLab Duo Agent Platform + MCP: GitLab Wants To Be the Operating System for AI Coding Agents
-
 Most AI coding headlines still revolve around one narrow question: which model writes better code. GitLab is making a different bet. It is treating the next phase of AI development as a workflow-control problem, not just a code-generation problem.
 
 That is why GitLab Duo Agent Platform matters.

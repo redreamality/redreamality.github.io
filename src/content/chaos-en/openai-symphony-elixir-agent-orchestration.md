@@ -7,8 +7,6 @@ tags: ["ai", "openai", "Elixir", "BEAM", "ai-agents", "developer-tools"]
 lang: "en"
 ---
 
-# OpenAI Symphony: Why the Biggest AI Lab Just Bet on Elixir for Agent Orchestration
-
 OpenAI's Symphony launch matters for one reason above all others: it points to a change in what agent infrastructure actually needs. For the last few years, most AI tooling has been built around Python because that is where the models, libraries, and developer attention were. Symphony breaks from that pattern. It frames agent orchestration as a distributed systems problem, not just a prompt engineering problem.
 
 That is why the Elixir choice is the real story.
