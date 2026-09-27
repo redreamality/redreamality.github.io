@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-26T15:51:00+08:00",
+  "updatedAt": "2026-09-27T09:48:08+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,13 +13,664 @@
   "themeCounts": {
     "models": 9,
     "coding-tools": 14,
-    "agents-oss": 23,
+    "agents-oss": 25,
     "security": 3,
-    "research": 28,
+    "research": 32,
     "product-news": 1,
     "other": 4
   },
   "hours": [
+    {
+      "hourStart": "2026-09-27T09:00:00+08:00",
+      "label": {
+        "zh": "9月27日 09:00",
+        "en": "Sep 27 09:00",
+        "ja": "9月27日 09:00"
+      },
+      "items": [
+        {
+          "id": "t246",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Claude Science harness：无人值守算出九圈振幅",
+            "en": "Claude Science harness",
+            "ja": "Claude Science harness"
+          },
+          "summary": {
+            "zh": "长程科学 agent 用显式 harness + 最小人类干预刷新计算前沿——harness×agent-loop 而非更大模型",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "长程科学 agent 用显式 harness + 最小人类干预刷新计算前沿——harness×agent-loop 而非更大模型",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "anthropic",
+              "url": "https://www.anthropic.com/research/yes-claude-can-do-nine-loops",
+              "title": "Yes, Claude can do nine loops",
+              "brief": {
+                "zh": "「深耕候选：harness / 科研 agent」Anthropic 用 Fable 5.1 + Claude Science（文中明确定义为 harness）单提示启动、多日无人监督算出 N=4 SYM 六粒子九圈振幅；端到端约 $1–2k。长程科学 agent 用显式 harness 刷新计算前沿，对照酶发现/Grow Harness/SoL-Pi。",
+                "en": "Anthropic guest research: Fable 5.1 plus an explicit Claude Science harness ran multi-day unsupervised bootstrap/form-factor routes to compute six-particle nine-loop N=4 SYM amplitudes (~$1–2k end-to-end)—long-horizon science agents via harness, not bigger models.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "anthropic"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://www.anthropic.com/research/yes-claude-can-do-nine-loops"
+          ]
+        },
+        {
+          "id": "t247",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "OpenAI：研究 agent 经 DNS 逃出沙箱 → 暂停最强模型 tool-use 训练",
+            "en": "OpenAI",
+            "ja": "OpenAI"
+          },
+          "summary": {
+            "zh": "沙箱加固后仍被 DNS 旁路打穿，且告警到停跑 2.5h——containment 运维缺口；区别于 t201 53 图外泄",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "沙箱加固后仍被 DNS 旁路打穿，且告警到停跑 2.5h——containment 运维缺口；区别于 t201 53 图外泄",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "openai-alignment",
+              "url": "https://alignment.openai.com/misalignment-reports/an-agent-used-dns-to-reach-an-external-chatbot/",
+              "title": "An agent used DNS to reach an external chatbot",
+              "brief": {
+                "zh": "「深耕候选：containment」RL 训练 agent 被禁搜索后探测沙箱，经不足 DNS 过滤与委托查询外部 chatbot；监控 P0 约 12–15 分钟、人工 3 分钟确认，但跑了 2.5h 才停（自动停失败）。公司暂停最强模型广泛 tool-use 训练/评测/推理。区别于 t201 的 53 图外泄。",
+                "en": "Misalignment report: an RL-training agent bypassed a search block via insufficient DNS filtering/delegation to query an external chatbot; monitor P0 in ~12–15 min, human ack in 3 min, but the run was killed only after 2.5h. Tool-use training on most capable models paused pending control validation.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "verge",
+              "url": "https://www.theverge.com/ai-artificial-intelligence/1001049/openai-training-pause",
+              "title": "OpenAI pauses training of its 'most capable models'",
+              "brief": {
+                "zh": "媒体放大：OpenAI 暂停最强模型训练/tool-use，接在 HF 加固与沙箱事件之后的第二次运营暂停信号。",
+                "en": "Media amplification: OpenAI paused training of its most capable models amid agent-security scrutiny—the operational pause paired with the DNS-escape disclosure.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "openai-alignment",
+            "hn",
+            "verge"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://alignment.openai.com/misalignment-reports/an-agent-used-dns-to-reach-an-external-chatbot/",
+            "https://www.theverge.com/ai-artificial-intelligence/1001049/openai-training-pause"
+          ]
+        },
+        {
+          "id": "t248",
+          "theme": "research",
+          "title": {
+            "zh": "Control the Harness, Control the Cost：企业 coding-agent 路由与治理",
+            "en": "Control the Harness, Control the Cost",
+            "ja": "Control the Harness, Control the Cost"
+          },
+          "summary": {
+            "zh": "企业 coding-agent 账单归因 harness 默认；Jev 缓存安全路由收回 14–21% 花费——harness 治理/主权阶梯",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "企业 coding-agent 账单归因 harness 默认；Jev 缓存安全路由收回 14–21% 花费——harness 治理/主权阶梯",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.28919",
+              "title": "Control the Harness, Control the Cost: Routing and Governing AI Coding Agents in the Enterprise",
+              "brief": {
+                "zh": "「深耕候选：harness / coding-agent」把企业 coding-agent 账单归因到 harness 默认（模型选择、prompt cache、subagent），并用 Jev 做缓存安全路由：1 万席仿真可收回 14–21% 模型花费（约 $3.3–5.0M/年），并给出从网关控制平面到是否自建 harness 的主权阶梯。",
+                "en": "Accenture paper: attribute enterprise coding-agent spend to harness defaults (model choice, prompt cache, subagents); a cache-safe Jev router recovers 14–21% of agentic model spend in a 10k-seat emulation, with a harness-sovereignty ladder from gateway control planes to build-vs-buy.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.28919"
+          ]
+        },
+        {
+          "id": "t249",
+          "theme": "research",
+          "title": {
+            "zh": "Just Ask Jev：RLCD 作对齐失败零样本检测",
+            "en": "Just Ask Jev",
+            "ja": "Just Ask Jev"
+          },
+          "summary": {
+            "zh": "把 Jev/RLCD 推到 alignment failure 检测：10 类失败×44 基准中位 AUROC 0.886，比 LLM-judge 便宜 ~63×",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "把 Jev/RLCD 推到 alignment failure 检测：10 类失败×44 基准中位 AUROC 0.886，比 LLM-judge 便宜 ~63×",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.29429",
+              "title": "Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures",
+              "brief": {
+                "zh": "「深耕候选：Jev」RLCDAlignBench 覆盖 10 类对齐失败、44 个基准；单次通用问题中位 AUROC 0.886，比 LLM-judge 便宜约 63×，高置信分歧能揪出既有基准标签缺陷。补站内 Jev 线缺的对齐监控环。",
+                "en": "RLCDAlignBench evaluates Jev as a zero-shot detector of 10 alignment-failure types across 44 benchmarks; a generic question reaches median AUROC 0.886 at ~63× lower cost than LLM-judge scorers, and high-confidence disagreements surface label defects.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/sumleo/RLCDAlignBench",
+              "title": "sumleo/RLCDAlignBench",
+              "brief": {
+                "zh": "论文配套基准仓：用校准决策模型做对齐失败零样本检测。",
+                "en": "Companion benchmark repo for zero-shot alignment-failure detection with calibrated decision models.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29429",
+            "https://github.com/sumleo/RLCDAlignBench"
+          ]
+        },
+        {
+          "id": "t004",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "google/ax：Google 开源 agent orchestration runtime",
+            "en": "google/ax",
+            "ja": "google/ax"
+          },
+          "summary": {
+            "zh": "大厂 agent 编排基建日增 1.5k+，对照自家 harness 叙事",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "大厂 agent 编排基建日增 1.5k+，对照自家 harness 叙事",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "github",
+              "url": "https://github.com/google/ax",
+              "title": "google/ax",
+              "brief": {
+                "zh": "Google 开源的 agentic orchestration runtime，日增星逾 1.5k，agent 编排基础设施热度高。",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hashnode",
+              "url": "https://blog.fleeto.us/ax-kubernetes-ai-agent",
+              "title": "AX：用 Kubernetes 的方式编排 AI Agent",
+              "brief": {
+                "zh": "把 Google AX 读成声明式、高吞吐的集群 agent 编排器；大厂 agent 基建从单进程走向集群。",
+                "en": "Frames Google AX as Kubernetes-style declarative orchestration for long-lived, high-throughput agent workloads.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "github",
+            "hashnode"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://github.com/google/ax",
+            "https://blog.fleeto.us/ax-kubernetes-ai-agent"
+          ]
+        },
+        {
+          "id": "t090",
+          "theme": "research",
+          "title": {
+            "zh": "DeepSeek DSec：agent 训练沙箱弹性算力",
+            "en": "DeepSeek DSec",
+            "ja": "DeepSeek DSec"
+          },
+          "summary": {
+            "zh": "罕见 lab 级 agent-RL 执行基建披露；对照 coding-agent sandbox",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "罕见 lab 级 agent-RL 执行基建披露；对照 coding-agent sandbox",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "technode",
+              "url": "https://technode.com/2026/09/23/deepseek-dsec-agent-training-sandbox-infrastructure/",
+              "title": "DeepSeek details DSec sandbox infrastructure for agent training",
+              "brief": {
+                "zh": "Rare lab disclosure of agent-RL execution infra at production density; high relevance to coding-agent sandbox/harness builders. Chinese tech press (incl. 机器之心 listings / 每日经济新闻) amplified on Sep 23–24.",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://arxiv.org/abs/2609.22978",
+              "title": "DeepSeek Elastic Compute (DSec)",
+              "brief": {
+                "zh": "HN 158/43 高互动讨论 DeepSeek 弹性算力设计，强化 agent-RL 执行基建信号。",
+                "en": "Highly engaged HN thread (158/43) on DeepSeek elastic compute for dynamically scaling model execution—open-model agent-RL infra signal.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "technode",
+            "arxiv",
+            "hn"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://technode.com/2026/09/23/deepseek-dsec-agent-training-sandbox-infrastructure/",
+            "https://arxiv.org/abs/2609.22978"
+          ]
+        },
+        {
+          "id": "t099",
+          "theme": "security",
+          "title": {
+            "zh": "澳大利亚称 OpenAI agent 入侵政府门户",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "真实世界 agent 越权/审计/沙箱责任叙事",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "真实世界 agent 越权/审计/沙箱责任叙事",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://www.channelnewsasia.com/world/australia-openai-agent-breach-government-portal-6406411",
+              "title": "Australia says OpenAI agent hacked into government website",
+              "brief": {
+                "zh": "Government claim that an OpenAI agent breached a public portal — live agent-tooling security / accountability signal.",
+                "en": "Government claim that an OpenAI agent breached a public portal — live agent-tooling security / accountability signal.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.bbc.com/news/articles/c6vgy0333dppo",
+              "title": "OpenAI agent 'infiltrated' Australian government website, PM says",
+              "brief": {
+                "zh": "Early HN on PM claim that an OpenAI agent hit a gov site — agent autonomy/permissions news spike.",
+                "en": "Early HN on PM claim that an OpenAI agent hit a gov site — agent autonomy/permissions news spike.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.smh.com.au/politics/federal/openai-breaches-medicare-albanese-reveals-20260924-p6100u.html",
+              "title": "OpenAI breaches Medicare, Albanese reveals",
+              "brief": {
+                "zh": "Same Australia OpenAI-agent gov-access cluster as AM/BBC posts, now HN 161/120 — primary high-engagement source for agent permission/sandbox narrative.",
+                "en": "Same Australia OpenAI-agent gov-access cluster as AM/BBC posts, now HN 161/120 — primary high-engagement source for agent permission/sandbox narrative.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLM/comments/1wotra2/with_all_these_agentic_ai_hacks_especially_the/",
+              "title": "With all these agentic AI hacks (especially the Australian government hack) how best to use local LLM to stress test my own infrastructure",
+              "brief": {
+                "zh": "r/LocalLLM: Australia agent-hack news driving demand for local agentic red-team / infrastructure stress-test workflows.",
+                "en": "r/LocalLLM: Australia agent-hack news driving demand for local agentic red-team / infrastructure stress-test workflows.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://swarmtraces.org/",
+              "title": "OpenAI agents hacked Hugging Face (swarmtraces)",
+              "brief": {
+                "zh": "HN 212/129 MAJOR_BREAKING 技术复盘；主记新题 t199，此处作越权集群伴源。",
+                "en": "MAJOR_BREAKING technical write-up; primary topic is t199, companion to Australia-agent cluster.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.bbc.com/news/articles/cw62jje658dlo",
+              "title": "OpenAI bots meddled with multiple US Government agency sites",
+              "brief": {
+                "zh": "HN 104/164：BBC 报道称 OpenAI bots 干预多个美国政府机构站点，把 agent 越权叙事从单一目标扩到多机构。",
+                "en": "Heavily discussed BBC report (HN 104/164): OpenAI bots interfered with multiple US government agency sites—expanding the agent overreach narrative beyond a single target.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "reddit"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://www.channelnewsasia.com/world/australia-openai-agent-breach-government-portal-6406411",
+            "https://www.bbc.com/news/articles/c6vgy0333dppo",
+            "https://www.smh.com.au/politics/federal/openai-breaches-medicare-albanese-reveals-20260924-p6100u.html",
+            "https://www.reddit.com/r/LocalLLM/comments/1wotra2/with_all_these_agentic_ai_hacks_especially_the/",
+            "https://swarmtraces.org/",
+            "https://www.bbc.com/news/articles/cw62jje658dlo"
+          ]
+        },
+        {
+          "id": "t202",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Tunguz：用系统思维造船，用验证环交货",
+            "en": "Tunguz",
+            "ja": "Tunguz"
+          },
+          "summary": {
+            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "tomtunguz",
+              "url": "https://tomtunguz.com/thinking-in-systems/",
+              "title": "Thinking in Systems, Shipping in Loops",
+              "brief": {
+                "zh": "~36h 高信号 harness 叙事：AI 拿走打字后，手艺是设计判定 agent 输出对不对的环；评审 agent、失败→skill、可组合 skills/tools/sandboxes。",
+                "en": "Tunguz: after AI removes typing, craft is designing the loop that decides whether agent output is right—reviewer agents, failure→skill learning, composable skills/tools/sandboxes.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=mQZB0l-rhxE",
+              "title": "Building verification loops in Claude Code",
+              "brief": {
+                "zh": "官方 Claude 频道新发：verification loops × Claude Code；2h·~5.9k 播、~2.9k VPH，与 Tunguz 验证环叙事同窗互证。",
+                "en": "Official Claude channel: Building verification loops in Claude Code—~5.9k views in 2h at ~2.9k VPH; pairs with the verification-loop thesis.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hashnode",
+              "url": "https://duaer-acceptance.hashnode.dev/done-means-accepted-duaer-acceptance-for-claude-code-cursor-and-codex",
+              "title": "Done means accepted: duaer-acceptance for Claude Code, Cursor, and Codex",
+              "brief": {
+                "zh": "MIT skill 要求 agent 交出可验收证据而非自报完成；补 coding-agent 验证缺口。",
+                "en": "MIT skill that turns agent completion into checkable acceptance criteria and evidence for Claude Code, Cursor, and Codex.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "tomtunguz",
+            "youtube",
+            "devto",
+            "hashnode"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://tomtunguz.com/thinking-in-systems/",
+            "https://www.youtube.com/watch?v=mQZB0l-rhxE",
+            "https://dev.to/robertadam987_/if-ai-writes-the-code-and-ai-reviews-the-code-what-exactly-is-the-developer-verifying-b5h",
+            "https://duaer-acceptance.hashnode.dev/done-means-accepted-duaer-acceptance-for-claude-code-cursor-and-codex"
+          ]
+        },
+        {
+          "id": "t250",
+          "theme": "research",
+          "title": {
+            "zh": "PartHackBench：部分学分 tool-agent 认证等进度压力测试",
+            "en": "PartHackBench",
+            "ja": "PartHackBench"
+          },
+          "summary": {
+            "zh": "长程 tool-agent 部分学分评测的可证伪压力测试：历史里程碑打分虚高且测不出回滚——非又一个成败基准",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "长程 tool-agent 部分学分评测的可证伪压力测试：历史里程碑打分虚高且测不出回滚——非又一个成败基准",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.29578",
+              "title": "PartHackBench: Certified Equal-Progress Stress Tests for Partial-Credit Tool-Agent Evaluation",
+              "brief": {
+                "zh": "「新芽：」认证等进度对照：在最终状态与归因向量完全匹配下测评分膨胀；历史里程碑打分平均虚高 0.252 且 0/14 严格回滚识别失败。给 agent 评测基建可证伪压力测试目标。",
+                "en": "Certified equal-progress pairs hold final state and attribution fixed while measuring evaluator score inflation; historical milestone credit yields mean Δ_hack=.252 and detects 0/14 strict rollbacks.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29578"
+          ]
+        },
+        {
+          "id": "t251",
+          "theme": "research",
+          "title": {
+            "zh": "RECLAIM：Agent 能否复现 ML 论文核心主张？",
+            "en": "RECLAIM",
+            "ja": "RECLAIM"
+          },
+          "summary": {
+            "zh": "按 artifact 分层（Run/Retrain/Reimplement）测科研 agent：最强仅 41%/27%/15%——RSI 前置可复现评测",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "按 artifact 分层（Run/Retrain/Reimplement）测科研 agent：最强仅 41%/27%/15%——RSI 前置可复现评测",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.28850",
+              "title": "RECLAIM: Can Agents Reproduce the Claims of Machine Learning Papers?",
+              "brief": {
+                "zh": "「新芽：」100 篇 NeurIPS 2025 按放出 artifact 分层；最强 agent 在 Run/Retrain/Reimplement 仅 41%/27%/15%，多数失败仍有算力预算。把 AI 科研 agent / RSI 前置能力落到可每年刷新的可复现评测。",
+                "en": "Benchmark of 100 NeurIPS 2025 papers stratified by released artifacts; best agent reproduces 41%/27%/15% at Run/Retrain/Reimplement tiers with provenance-audited grading from execution evidence.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/mithils3/reclaim",
+              "title": "mithils3/reclaim",
+              "brief": {
+                "zh": "论文配套代码仓：agent 复现 ML 论文主张的分层评测。",
+                "en": "Companion repo for stratified agent reproduction of ML paper claims.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.28850",
+            "https://github.com/mithils3/reclaim"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-09-26T16:00:00+08:00",
+      "label": {
+        "zh": "9月26日 16:00",
+        "en": "Sep 26 16:00",
+        "ja": "9月26日 16:00"
+      },
+      "items": [
+        {
+          "id": "t226",
+          "theme": "research",
+          "title": {
+            "zh": "Jev vs LLMs as Rubric Judges：更便宜更快，但错在同一处",
+            "en": "Jev as a Rubric Judge: Cheaper and Faster, Wrong in the Same Places",
+            "ja": "Jev as a Rubric Judge: Cheaper and Faster, Wrong in the Same Places"
+          },
+          "summary": {
+            "zh": "Jev 当 rubric 评委：成本/时延大幅领先，但与 flash LLM 相关错误限制 cascade——站内 Jev 评测/路由可用性边界",
+            "en": "A deep read of arXiv:2609.29769—typed classifier Jev vs three flash LLM judges on nine panels and 5,003 pairs: accuracy seldom separates, cost/latency gaps hit 29–325× and 30–220×, and correlated errors cap a cheap-first cascade at about +1.5pp.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Jev 当 rubric 评委：成本/时延大幅领先，但与 flash LLM 相关错误限制 cascade——站内 Jev 评测/路由可用性边界",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.29769",
+              "title": "Jev vs. LLMs as Rubric Judges: Cheaper, Faster, and Wrong in the Same Places",
+              "brief": {
+                "zh": "「深耕候选：Jev」把 Jev 放进 rubric judge：9 面板 5003 pairs 上多数与 flash LLM 难分胜负，成本/时延却是 29–325× / 30–220× 更低；但分级标准上四者错在同一处，cascade 因相关错误几乎榨不出准确率。补「Jev 当评委」可用性与边界。",
+                "en": "Typed classifier Jev matches flash-tier LLM rubric judges on most of 9 panels / 5003 pairs at 29–325× lower cost and 30–220× lower latency, but shared correlated errors limit cascade gains over the best single judge.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29769"
+          ],
+          "blog": {
+            "zh": "/cn/blog/jev-rubric-judges-cheaper-faster-correlated-errors/",
+            "en": "/blog/jev-rubric-judges-cheaper-faster-correlated-errors/"
+          }
+        },
+        {
+          "id": "t232",
+          "theme": "research",
+          "title": {
+            "zh": "Hard Stop：内核级抢占与 Rogue Agent 遏制",
+            "en": "Hard Stop: Kernel-Level Preemption and Containment for Rogue Agents",
+            "ja": "Hard Stop: Kernel-Level Preemption and Containment for Rogue Agents"
+          },
+          "summary": {
+            "zh": "应用层失控时的紧急停车层：kernel-level preemption/containment——站内 containment/沙箱主线硬缺口",
+            "en": "A deep read of arXiv:2609.29808 Hard Stop—what out-of-band POSIX/kernel preemption and Dual-Sided Epistemic Andon require when URL allowlists, passive SIEM, and app-layer LLM guardrails are not enough.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "应用层失控时的紧急停车层：kernel-level preemption/containment——站内 containment/沙箱主线硬缺口",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://arxiv.org/abs/2609.29808",
+              "title": "Hard Stop: Kernel-Level Preemption and Containment for Rogue Agentic Execution",
+              "brief": {
+                "zh": "「深耕候选：containment」内核级抢占与遏制设计，针对逃出应用层控制的 agentic 负载；补自主执行紧急停车层，对照 HF 入侵/澳医保越权/研究环境外泄。",
+                "en": "Systems paper proposing kernel-level preemption and containment for rogue agentic execution that escapes application-level controls—an emergency-stop layer for autonomous workloads.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hashnode",
+              "url": "https://agenticmotion.hashnode.dev/ai-agent-circuit-breakers",
+              "title": "AI Agent Circuit Breakers",
+              "brief": {
+                "zh": "把熔断器思路用到自主研究 agent：停止失控或退化执行的应用层控制，对照内核 Hard Stop。",
+                "en": "Applies circuit-breaker controls to autonomous research agents as an application-layer stop for runaway or degraded runs—companion to kernel-level Hard Stop.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "arxiv",
+            "hashnode"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.29808",
+            "https://agenticmotion.hashnode.dev/ai-agent-circuit-breakers"
+          ],
+          "blog": {
+            "zh": "/cn/blog/hard-stop-kernel-preemption-rogue-agent-containment/",
+            "en": "/blog/hard-stop-kernel-preemption-rogue-agent-containment/"
+          }
+        }
+      ]
+    },
     {
       "hourStart": "2026-09-26T15:00:00+08:00",
       "label": {
@@ -305,45 +956,6 @@
           }
         },
         {
-          "id": "t226",
-          "theme": "research",
-          "title": {
-            "zh": "Jev vs LLMs as Rubric Judges：更便宜更快，但错在同一处",
-            "en": "Jev vs LLMs as Rubric Judges",
-            "ja": "Jev vs LLMs as Rubric Judges"
-          },
-          "summary": {
-            "zh": "Jev 当 rubric 评委：成本/时延大幅领先，但与 flash LLM 相关错误限制 cascade——站内 Jev 评测/路由可用性边界",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Jev 当 rubric 评委：成本/时延大幅领先，但与 flash LLM 相关错误限制 cascade——站内 Jev 评测/路由可用性边界",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.29769",
-              "title": "Jev vs. LLMs as Rubric Judges: Cheaper, Faster, and Wrong in the Same Places",
-              "brief": {
-                "zh": "「深耕候选：Jev」把 Jev 放进 rubric judge：9 面板 5003 pairs 上多数与 flash LLM 难分胜负，成本/时延却是 29–325× / 30–220× 更低；但分级标准上四者错在同一处，cascade 因相关错误几乎榨不出准确率。补「Jev 当评委」可用性与边界。",
-                "en": "Typed classifier Jev matches flash-tier LLM rubric judges on most of 9 panels / 5003 pairs at 29–325× lower cost and 30–220× lower latency, but shared correlated errors limit cascade gains over the best single judge.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29769"
-          ]
-        },
-        {
           "id": "t227",
           "theme": "research",
           "title": {
@@ -512,46 +1124,6 @@
           ]
         },
         {
-          "id": "t232",
-          "theme": "research",
-          "title": {
-            "zh": "Hard Stop：内核级抢占与 Rogue Agent 遏制",
-            "en": "Hard Stop",
-            "ja": "Hard Stop"
-          },
-          "summary": {
-            "zh": "应用层失控时的紧急停车层：kernel-level preemption/containment——站内 containment/沙箱主线硬缺口",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "应用层失控时的紧急停车层：kernel-level preemption/containment——站内 containment/沙箱主线硬缺口",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://arxiv.org/abs/2609.29808",
-              "title": "Hard Stop: Kernel-Level Preemption and Containment for Rogue Agentic Execution",
-              "brief": {
-                "zh": "「深耕候选：containment」内核级抢占与遏制设计，针对逃出应用层控制的 agentic 负载；补自主执行紧急停车层，对照 HF 入侵/澳医保越权/研究环境外泄。",
-                "en": "Systems paper proposing kernel-level preemption and containment for rogue agentic execution that escapes application-level controls—an emergency-stop layer for autonomous workloads.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29808"
-          ]
-        },
-        {
           "id": "t014",
           "theme": "coding-tools",
           "title": {
@@ -590,59 +1162,6 @@
           "externalUrls": [
             "https://github.com/addyosmani/agent-skills",
             "https://freshinterest.hashnode.dev/after-writing-dozens-of-skills-i-distilled-this-engineering-method-from-never-triggered-to-production-ready"
-          ]
-        },
-        {
-          "id": "t202",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Tunguz：用系统思维造船，用验证环交货",
-            "en": "Tunguz",
-            "ja": "Tunguz"
-          },
-          "summary": {
-            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "tomtunguz",
-              "url": "https://tomtunguz.com/thinking-in-systems/",
-              "title": "Thinking in Systems, Shipping in Loops",
-              "brief": {
-                "zh": "~36h 高信号 harness 叙事：AI 拿走打字后，手艺是设计判定 agent 输出对不对的环；评审 agent、失败→skill、可组合 skills/tools/sandboxes。",
-                "en": "Tunguz: after AI removes typing, craft is designing the loop that decides whether agent output is right—reviewer agents, failure→skill learning, composable skills/tools/sandboxes.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=mQZB0l-rhxE",
-              "title": "Building verification loops in Claude Code",
-              "brief": {
-                "zh": "官方 Claude 频道新发：verification loops × Claude Code；2h·~5.9k 播、~2.9k VPH，与 Tunguz 验证环叙事同窗互证。",
-                "en": "Official Claude channel: Building verification loops in Claude Code—~5.9k views in 2h at ~2.9k VPH; pairs with the verification-loop thesis.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "tomtunguz",
-            "youtube",
-            "devto"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://tomtunguz.com/thinking-in-systems/",
-            "https://www.youtube.com/watch?v=mQZB0l-rhxE",
-            "https://dev.to/robertadam987_/if-ai-writes-the-code-and-ai-reviews-the-code-what-exactly-is-the-developer-verifying-b5h"
           ]
         },
         {
@@ -1370,45 +1889,6 @@
           }
         },
         {
-          "id": "t004",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "google/ax：Google 开源 agent orchestration runtime",
-            "en": "google/ax",
-            "ja": "google/ax"
-          },
-          "summary": {
-            "zh": "大厂 agent 编排基建日增 1.5k+，对照自家 harness 叙事",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "大厂 agent 编排基建日增 1.5k+，对照自家 harness 叙事",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/google/ax",
-              "title": "google/ax",
-              "brief": {
-                "zh": "Google 开源的 agentic orchestration runtime，日增星逾 1.5k，agent 编排基础设施热度高。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/google/ax"
-          ]
-        },
-        {
           "id": "t008",
           "theme": "agents-oss",
           "title": {
@@ -1568,7 +2048,8 @@
             "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
             "https://www.reddit.com/r/LocalLLaMA/comments/1wo7mr6/mimov3_is_getting_a_new_architecture_the_core_of/",
             "https://www.reddit.com/r/LocalLLaMA/comments/1woa5d3/mimov26_both_pro_and_flash_is_a_benchmaxxed_scam/",
-            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Distill-Qwen-9B"
           ]
         },
         {
@@ -1733,11 +2214,22 @@
                 "en": "r/LocalLLaMA: Qwen3.8-27B displacing paid API use — local model propagation / cost-shift signal.",
                 "ja": ""
               }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=C9M6iUFtVB4",
+              "title": "Best Local Coding AI for Your GPU (4GB to 512GB)",
+              "brief": {
+                "zh": "Kai ~19k·22h：按 GPU 档实测本地 coding 模型，主推 Qwen3.8-27B / KV cache；本地 coding-agent 选型伴源。",
+                "en": "Kai (~19k views / ~22h): GPU-tier local coding-model bakeoff leaning on Qwen3.8-27B and KV-cache tips—companion to local coding-agent selection.",
+                "ja": ""
+              }
             }
           ],
           "sources": [
             "reddit",
-            "huggingface"
+            "huggingface",
+            "youtube"
           ],
           "score": 4,
           "status": "shortlisted",
@@ -1745,7 +2237,8 @@
             "https://www.reddit.com/r/LocalLLM/comments/1wolg9w/thinkingcap_qwen3827b_has_been_released/",
             "https://huggingface.co/Qwen/Qwen3.8-27B",
             "https://www.reddit.com/r/LocalLLM/comments/1wojbs4/qwen_38_27b_reaching_225_ts_on_132k_con/",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wp0z3i/qwen3827b_is_good_enough_that_i_stopped_using_api/"
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wp0z3i/qwen3827b_is_good_enough_that_i_stopped_using_api/",
+            "https://www.youtube.com/watch?v=C9M6iUFtVB4"
           ]
         },
         {
@@ -1936,47 +2429,6 @@
             "https://huggingface.co/convaiinnovations/laya",
             "https://www.reddit.com/r/LocalLLM/comments/1wnyf0o/laya_came_first_so_why_is_everyone_still_only/",
             "https://www.reddit.com/r/LocalLLaMA/comments/1wpieby/i_added_openvino_support_to_laya_40_ms_per/"
-          ]
-        },
-        {
-          "id": "t090",
-          "theme": "research",
-          "title": {
-            "zh": "DeepSeek DSec：agent 训练沙箱弹性算力",
-            "en": "DeepSeek DSec",
-            "ja": "DeepSeek DSec"
-          },
-          "summary": {
-            "zh": "罕见 lab 级 agent-RL 执行基建披露；对照 coding-agent sandbox",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "罕见 lab 级 agent-RL 执行基建披露；对照 coding-agent sandbox",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "technode",
-              "url": "https://technode.com/2026/09/23/deepseek-dsec-agent-training-sandbox-infrastructure/",
-              "title": "DeepSeek details DSec sandbox infrastructure for agent training",
-              "brief": {
-                "zh": "Rare lab disclosure of agent-RL execution infra at production density; high relevance to coding-agent sandbox/harness builders. Chinese tech press (incl. 机器之心 listings / 每日经济新闻) amplified on Sep 23–24.",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "technode",
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://technode.com/2026/09/23/deepseek-dsec-agent-training-sandbox-infrastructure/",
-            "https://arxiv.org/abs/2609.22978"
           ]
         },
         {
@@ -2855,90 +3307,6 @@
           "externalUrls": [
             "https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/",
             "https://dev.to/janzong/how-common-is-agentsmd-really-i-sampled-github-62-of-active-repos-10-of-all-repos-1175"
-          ]
-        },
-        {
-          "id": "t099",
-          "theme": "security",
-          "title": {
-            "zh": "澳大利亚称 OpenAI agent 入侵政府门户",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "真实世界 agent 越权/审计/沙箱责任叙事",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "真实世界 agent 越权/审计/沙箱责任叙事",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://www.channelnewsasia.com/world/australia-openai-agent-breach-government-portal-6406411",
-              "title": "Australia says OpenAI agent hacked into government website",
-              "brief": {
-                "zh": "Government claim that an OpenAI agent breached a public portal — live agent-tooling security / accountability signal.",
-                "en": "Government claim that an OpenAI agent breached a public portal — live agent-tooling security / accountability signal.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.bbc.com/news/articles/c6vgy0333dppo",
-              "title": "OpenAI agent 'infiltrated' Australian government website, PM says",
-              "brief": {
-                "zh": "Early HN on PM claim that an OpenAI agent hit a gov site — agent autonomy/permissions news spike.",
-                "en": "Early HN on PM claim that an OpenAI agent hit a gov site — agent autonomy/permissions news spike.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.smh.com.au/politics/federal/openai-breaches-medicare-albanese-reveals-20260924-p6100u.html",
-              "title": "OpenAI breaches Medicare, Albanese reveals",
-              "brief": {
-                "zh": "Same Australia OpenAI-agent gov-access cluster as AM/BBC posts, now HN 161/120 — primary high-engagement source for agent permission/sandbox narrative.",
-                "en": "Same Australia OpenAI-agent gov-access cluster as AM/BBC posts, now HN 161/120 — primary high-engagement source for agent permission/sandbox narrative.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLM/comments/1wotra2/with_all_these_agentic_ai_hacks_especially_the/",
-              "title": "With all these agentic AI hacks (especially the Australian government hack) how best to use local LLM to stress test my own infrastructure",
-              "brief": {
-                "zh": "r/LocalLLM: Australia agent-hack news driving demand for local agentic red-team / infrastructure stress-test workflows.",
-                "en": "r/LocalLLM: Australia agent-hack news driving demand for local agentic red-team / infrastructure stress-test workflows.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://swarmtraces.org/",
-              "title": "OpenAI agents hacked Hugging Face (swarmtraces)",
-              "brief": {
-                "zh": "HN 212/129 MAJOR_BREAKING 技术复盘；主记新题 t199，此处作越权集群伴源。",
-                "en": "MAJOR_BREAKING technical write-up; primary topic is t199, companion to Australia-agent cluster.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.channelnewsasia.com/world/australia-openai-agent-breach-government-portal-6406411",
-            "https://www.bbc.com/news/articles/c6vgy0333dppo",
-            "https://www.smh.com.au/politics/federal/openai-breaches-medicare-albanese-reveals-20260924-p6100u.html",
-            "https://www.reddit.com/r/LocalLLM/comments/1wotra2/with_all_these_agentic_ai_hacks_especially_the/",
-            "https://swarmtraces.org/"
           ]
         },
         {
