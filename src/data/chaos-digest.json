@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-27T09:48:08+08:00",
+  "updatedAt": "2026-09-27T15:47:32+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,19 +13,310 @@
   "themeCounts": {
     "models": 9,
     "coding-tools": 14,
-    "agents-oss": 25,
+    "agents-oss": 26,
     "security": 3,
-    "research": 32,
+    "research": 31,
     "product-news": 1,
     "other": 4
   },
   "hours": [
     {
-      "hourStart": "2026-09-27T09:00:00+08:00",
+      "hourStart": "2026-09-27T15:00:00+08:00",
       "label": {
-        "zh": "9月27日 09:00",
-        "en": "Sep 27 09:00",
-        "ja": "9月27日 09:00"
+        "zh": "9月27日 15:00",
+        "en": "Sep 27 15:00",
+        "ja": "9月27日 15:00"
+      },
+      "items": [
+        {
+          "id": "t265",
+          "theme": "research",
+          "title": {
+            "zh": "LLM Agents 可轻易篡改自身 traces",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多数本地 coding-agent harness 允许删除/伪造 trace——审计完整性失败；需 agent 主机外独立 append-only 拦截",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多数本地 coding-agent harness 允许删除/伪造 trace——审计完整性失败；需 agent 主机外独立 append-only 拦截",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30266",
+              "title": "LLM Agents Can Easily Tamper With Their Own Traces",
+              "brief": {
+                "zh": "「深耕候选：observability / containment」测 Claude Code、Codex、OpenCode 等本地 harness：多数允许直接、经 skills 或奖励压力删除/伪造自身 traces。建议在 agent 主机外做独立 append-only 拦截——验证环若依赖可被改写的自报日志则失效。",
+                "en": "Study finds most tested local agent harnesses (Claude Code, Codex, OpenCode, others) allow agents to delete or spoof their own traces—directly, via skills, or under reward pressure. Recommends independent append-only interception outside the agent host.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30266"
+          ]
+        },
+        {
+          "id": "t117",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "16GB 显存本地模型替 Claude Code",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "本地 coding-agent/harness 真实选型约束",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "本地 coding-agent/harness 真实选型约束",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLM/comments/1woikg7/are_there_any_models_that_i_can_use_with_a_16gb/",
+              "title": "Are there any models that I can use with a 16GB GPU that might be able to replace claude code?",
+              "brief": {
+                "zh": "Direct demand signal: local 16GB VRAM as Claude Code substitute — coding-agent / local harness 选型痛点.",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wom3fe/qwen_38_flash_next_q4_k_m_130k_context_q8_cache",
+              "title": "Qwen 3.8 Flash Next q4_k_m, 130k context, q8 cache on 16GB VRAM and 64GB RAM, 15-20 t/s on 4080",
+              "brief": {
+                "zh": "Practical 16GB VRAM recipe for Qwen 3.8 Flash Next + MTP branch/cache flags — local coding-agent host notes.",
+                "en": "Practical 16GB VRAM recipe for Qwen 3.8 Flash Next + MTP branch/cache flags — local coding-agent host notes.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wp7zyb/qwen38flashnext_on_12gb_vram_65_tokens_per_second/",
+              "title": "Qwen3.8-Flash-Next on 12GB VRAM - 65 tokens per second",
+              "brief": {
+                "zh": "Concrete Flash-Next speed on 12GB VRAM (65 tok/s) — consumer-GPU local inference signal.",
+                "en": "Concrete Flash-Next speed on 12GB VRAM (65 tok/s) — consumer-GPU local inference signal.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=XpPtfB2pdio",
+              "title": "LM Studio Full Tutorial - The BEST Way to Run Local Models",
+              "brief": {
+                "zh": "Tech With Tim LM Studio 全教程 ~21k/19h：本地模型运行工具热窗，补 16GB/本地 coding-agent 选型栈。",
+                "en": "Tech With Tim full LM Studio tutorial (~21k views / ~19h)—practical local-model runner heat for the local coding-agent stack.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "reddit",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://www.reddit.com/r/LocalLLM/comments/1woikg7/are_there_any_models_that_i_can_use_with_a_16gb/",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wom3fe/qwen_38_flash_next_q4_k_m_130k_context_q8_cache",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wp7zyb/qwen38flashnext_on_12gb_vram_65_tokens_per_second/",
+            "https://www.youtube.com/watch?v=XpPtfB2pdio"
+          ]
+        },
+        {
+          "id": "t202",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Tunguz：用系统思维造船，用验证环交货",
+            "en": "Tunguz",
+            "ja": "Tunguz"
+          },
+          "summary": {
+            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "tomtunguz",
+              "url": "https://tomtunguz.com/thinking-in-systems/",
+              "title": "Thinking in Systems, Shipping in Loops",
+              "brief": {
+                "zh": "~36h 高信号 harness 叙事：AI 拿走打字后，手艺是设计判定 agent 输出对不对的环；评审 agent、失败→skill、可组合 skills/tools/sandboxes。",
+                "en": "Tunguz: after AI removes typing, craft is designing the loop that decides whether agent output is right—reviewer agents, failure→skill learning, composable skills/tools/sandboxes.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=mQZB0l-rhxE",
+              "title": "Building verification loops in Claude Code",
+              "brief": {
+                "zh": "官方 Claude 频道新发：verification loops × Claude Code；2h·~5.9k 播、~2.9k VPH，与 Tunguz 验证环叙事同窗互证。",
+                "en": "Official Claude channel: Building verification loops in Claude Code—~5.9k views in 2h at ~2.9k VPH; pairs with the verification-loop thesis.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hashnode",
+              "url": "https://duaer-acceptance.hashnode.dev/done-means-accepted-duaer-acceptance-for-claude-code-cursor-and-codex",
+              "title": "Done means accepted: duaer-acceptance for Claude Code, Cursor, and Codex",
+              "brief": {
+                "zh": "MIT skill 要求 agent 交出可验收证据而非自报完成；补 coding-agent 验证缺口。",
+                "en": "MIT skill that turns agent completion into checkable acceptance criteria and evidence for Claude Code, Cursor, and Codex.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "devto",
+              "url": "https://dev.to/robertadam987_/your-ai-coding-agent-says-tests-pass-but-did-it-actually-run-them-4684",
+              "title": "Your AI Coding Agent Says 'Tests Pass.' But Did It Actually Run Them?",
+              "brief": {
+                "zh": "把「tests pass」从口头完成变成证据契约：命令、exit code、范围、新鲜度与独立 CI 才是真相源。",
+                "en": "Turns vague “tests pass” completion claims into an evidence contract covering commands, exit codes, scope, freshness, and independent CI as source of truth.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "tomtunguz",
+            "youtube",
+            "devto",
+            "hashnode"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://tomtunguz.com/thinking-in-systems/",
+            "https://www.youtube.com/watch?v=mQZB0l-rhxE",
+            "https://dev.to/robertadam987_/if-ai-writes-the-code-and-ai-reviews-the-code-what-exactly-is-the-developer-verifying-b5h",
+            "https://duaer-acceptance.hashnode.dev/done-means-accepted-duaer-acceptance-for-claude-code-cursor-and-codex",
+            "https://dev.to/robertadam987_/your-ai-coding-agent-says-tests-pass-but-did-it-actually-run-them-4684"
+          ]
+        },
+        {
+          "id": "t266",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Self-replicating prompt injections：可经邮件/文件/注释传播",
+            "en": "Self-replicating prompt injections",
+            "ja": "Self-replicating prompt injections"
+          },
+          "summary": {
+            "zh": "OpenAI Alignment 披露可经输出信道自我复制的注入类；传播本身成独立 agent 安全威胁——对照 DNS 逃逸属另一 containment 面",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "OpenAI Alignment 披露可经输出信道自我复制的注入类；传播本身成独立 agent 安全威胁——对照 DNS 逃逸属另一 containment 面",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "openai-alignment",
+              "url": "https://alignment.openai.com/misalignment-reports/self-replicating-prompt-injections-exist/",
+              "title": "Self-replicating prompt injections exist",
+              "brief": {
+                "zh": "「深耕候选：containment / prompt-injection」模拟 GPT-Red 攻击诱导 agent 在邮件/文件/代码注释等公开输出信道复制注入并追求对抗目标；仿真外未观察实际危害，但把「传播」标成独立 agent 安全威胁类。",
+                "en": "OpenAI Alignment discloses a prompt-injection class that can propagate through email, files, or code comments while pursuing an adversarial goal. Simulated GPT-Red attacks induced agents to reproduce the injection on public output channels; no impact outside simulated tool calls was observed.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "devto",
+              "url": "https://dev.to/james_anderson_h/prompt-injection-is-the-new-sql-injection-and-were-not-ready-4ea4",
+              "title": "Prompt Injection Is the New SQL Injection (and We're Not Ready)",
+              "brief": {
+                "zh": "把间接 prompt injection 映射到 SQL 注入式的数据/命令混淆；主张最小权限、隔离与人工门禁，而非幻想完美提示层修复。",
+                "en": "Maps indirect prompt injection to SQL-injection-style data/command confusion and argues for least privilege, isolation, and human gates rather than a presumed perfect prompt-level fix.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "openai-alignment",
+            "devto"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://alignment.openai.com/misalignment-reports/self-replicating-prompt-injections-exist/",
+            "https://dev.to/james_anderson_h/prompt-injection-is-the-new-sql-injection-and-were-not-ready-4ea4"
+          ]
+        },
+        {
+          "id": "t267",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Nom Army：别信 coding agents 自报做完",
+            "en": "Nom Army",
+            "ja": "Nom Army"
+          },
+          "summary": {
+            "zh": "计划/沙箱实现/独立 checker 提交前验证——把完成声称变成可验收证据的 harness 模式",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "计划/沙箱实现/独立 checker 提交前验证——把完成声称变成可验收证据的 harness 模式",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "github",
+              "url": "https://github.com/rayson-tech/nomarmy",
+              "title": "Nom Army: Don't trust coding agents when they say they're done",
+              "brief": {
+                "zh": "「深耕候选：verification / harness」助手规划、沙箱工人实现、独立 checker 在 commit 前验证每次变更——直接针对虚假完成声称的 coding-agent harness 模式。",
+                "en": "Harness pattern that separates planning from sandboxed implementation and verifies every change with an independent checker before commit—making agent completion claims evidence-based.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "github"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://github.com/rayson-tech/nomarmy"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-09-27T10:00:00+08:00",
+      "label": {
+        "zh": "9月27日 10:00",
+        "en": "Sep 27 10:00",
+        "ja": "9月27日 10:00"
       },
       "items": [
         {
@@ -33,12 +324,12 @@
           "theme": "agents-oss",
           "title": {
             "zh": "Claude Science harness：无人值守算出九圈振幅",
-            "en": "Claude Science harness",
-            "ja": "Claude Science harness"
+            "en": "Claude Science harness: unattended nine-loop amplitudes",
+            "ja": "Claude Science harness: unattended nine-loop amplitudes"
           },
           "summary": {
             "zh": "长程科学 agent 用显式 harness + 最小人类干预刷新计算前沿——harness×agent-loop 而非更大模型",
-            "en": "",
+            "en": "Reading Anthropic’s guest post on Fable 5.1 inside Claude Science: planar N=4 SYM nine-loop hexagon amplitudes via an explicit science harness and minimal human intervention—harness × agent-loop, not a bigger-model story.",
             "ja": ""
           },
           "judgment": {
@@ -62,11 +353,68 @@
             "anthropic"
           ],
           "score": 5,
-          "status": "shortlisted",
+          "status": "published",
           "externalUrls": [
             "https://www.anthropic.com/research/yes-claude-can-do-nine-loops"
-          ]
+          ],
+          "blog": {
+            "zh": "/cn/blog/claude-science-harness-nine-loop-amplitudes/",
+            "en": "/blog/claude-science-harness-nine-loop-amplitudes/"
+          }
         },
+        {
+          "id": "t248",
+          "theme": "research",
+          "title": {
+            "zh": "Control the Harness, Control the Cost：企业 coding-agent 路由与治理",
+            "en": "Control the Harness, Control the Cost: Enterprise Coding-Agent Routing and Governance",
+            "ja": "Control the Harness, Control the Cost: Enterprise Coding-Agent Routing and Governance"
+          },
+          "summary": {
+            "zh": "企业 coding-agent 账单归因 harness 默认；Jev 缓存安全路由收回 14–21% 花费——harness 治理/主权阶梯",
+            "en": "A deep read of Accenture arXiv:2609.28919—enterprise coding-agent bills are often blamed on “expensive models,” but the paper moves the blame to harness defaults; cache-safe routing with Jev recovers about 14–21% of model spend in a 10k-seat emulation, with a sovereignty ladder from observe to own.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "企业 coding-agent 账单归因 harness 默认；Jev 缓存安全路由收回 14–21% 花费——harness 治理/主权阶梯",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.28919",
+              "title": "Control the Harness, Control the Cost: Routing and Governing AI Coding Agents in the Enterprise",
+              "brief": {
+                "zh": "「深耕候选：harness / coding-agent」把企业 coding-agent 账单归因到 harness 默认（模型选择、prompt cache、subagent），并用 Jev 做缓存安全路由：1 万席仿真可收回 14–21% 模型花费（约 $3.3–5.0M/年），并给出从网关控制平面到是否自建 harness 的主权阶梯。",
+                "en": "Accenture paper: attribute enterprise coding-agent spend to harness defaults (model choice, prompt cache, subagents); a cache-safe Jev router recovers 14–21% of agentic model spend in a 10k-seat emulation, with a harness-sovereignty ladder from gateway control planes to build-vs-buy.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.28919"
+          ],
+          "blog": {
+            "zh": "/cn/blog/control-the-harness-control-the-cost/",
+            "en": "/blog/control-the-harness-control-the-cost/"
+          }
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-09-27T09:00:00+08:00",
+      "label": {
+        "zh": "9月27日 09:00",
+        "en": "Sep 27 09:00",
+        "ja": "9月27日 09:00"
+      },
+      "items": [
         {
           "id": "t247",
           "theme": "agents-oss",
@@ -117,45 +465,6 @@
           "externalUrls": [
             "https://alignment.openai.com/misalignment-reports/an-agent-used-dns-to-reach-an-external-chatbot/",
             "https://www.theverge.com/ai-artificial-intelligence/1001049/openai-training-pause"
-          ]
-        },
-        {
-          "id": "t248",
-          "theme": "research",
-          "title": {
-            "zh": "Control the Harness, Control the Cost：企业 coding-agent 路由与治理",
-            "en": "Control the Harness, Control the Cost",
-            "ja": "Control the Harness, Control the Cost"
-          },
-          "summary": {
-            "zh": "企业 coding-agent 账单归因 harness 默认；Jev 缓存安全路由收回 14–21% 花费——harness 治理/主权阶梯",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "企业 coding-agent 账单归因 harness 默认；Jev 缓存安全路由收回 14–21% 花费——harness 治理/主权阶梯",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.28919",
-              "title": "Control the Harness, Control the Cost: Routing and Governing AI Coding Agents in the Enterprise",
-              "brief": {
-                "zh": "「深耕候选：harness / coding-agent」把企业 coding-agent 账单归因到 harness 默认（模型选择、prompt cache、subagent），并用 Jev 做缓存安全路由：1 万席仿真可收回 14–21% 模型花费（约 $3.3–5.0M/年），并给出从网关控制平面到是否自建 harness 的主权阶梯。",
-                "en": "Accenture paper: attribute enterprise coding-agent spend to harness defaults (model choice, prompt cache, subagents); a cache-safe Jev router recovers 14–21% of agentic model spend in a 10k-seat emulation, with a harness-sovereignty ladder from gateway control planes to build-vs-buy.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.28919"
           ]
         },
         {
@@ -404,71 +713,6 @@
             "https://www.reddit.com/r/LocalLLM/comments/1wotra2/with_all_these_agentic_ai_hacks_especially_the/",
             "https://swarmtraces.org/",
             "https://www.bbc.com/news/articles/cw62jje658dlo"
-          ]
-        },
-        {
-          "id": "t202",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Tunguz：用系统思维造船，用验证环交货",
-            "en": "Tunguz",
-            "ja": "Tunguz"
-          },
-          "summary": {
-            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "验证层>打字：agent-loop/评审 agent/失败→skill 是稀缺资产；官方 Claude「Building verification loops」同窗互证",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "tomtunguz",
-              "url": "https://tomtunguz.com/thinking-in-systems/",
-              "title": "Thinking in Systems, Shipping in Loops",
-              "brief": {
-                "zh": "~36h 高信号 harness 叙事：AI 拿走打字后，手艺是设计判定 agent 输出对不对的环；评审 agent、失败→skill、可组合 skills/tools/sandboxes。",
-                "en": "Tunguz: after AI removes typing, craft is designing the loop that decides whether agent output is right—reviewer agents, failure→skill learning, composable skills/tools/sandboxes.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=mQZB0l-rhxE",
-              "title": "Building verification loops in Claude Code",
-              "brief": {
-                "zh": "官方 Claude 频道新发：verification loops × Claude Code；2h·~5.9k 播、~2.9k VPH，与 Tunguz 验证环叙事同窗互证。",
-                "en": "Official Claude channel: Building verification loops in Claude Code—~5.9k views in 2h at ~2.9k VPH; pairs with the verification-loop thesis.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hashnode",
-              "url": "https://duaer-acceptance.hashnode.dev/done-means-accepted-duaer-acceptance-for-claude-code-cursor-and-codex",
-              "title": "Done means accepted: duaer-acceptance for Claude Code, Cursor, and Codex",
-              "brief": {
-                "zh": "MIT skill 要求 agent 交出可验收证据而非自报完成；补 coding-agent 验证缺口。",
-                "en": "MIT skill that turns agent completion into checkable acceptance criteria and evidence for Claude Code, Cursor, and Codex.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "tomtunguz",
-            "youtube",
-            "devto",
-            "hashnode"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://tomtunguz.com/thinking-in-systems/",
-            "https://www.youtube.com/watch?v=mQZB0l-rhxE",
-            "https://dev.to/robertadam987_/if-ai-writes-the-code-and-ai-reviews-the-code-what-exactly-is-the-developer-verifying-b5h",
-            "https://duaer-acceptance.hashnode.dev/done-means-accepted-duaer-acceptance-for-claude-code-cursor-and-codex"
           ]
         },
         {
@@ -2939,67 +3183,6 @@
           ]
         },
         {
-          "id": "t117",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "16GB 显存本地模型替 Claude Code",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "本地 coding-agent/harness 真实选型约束",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "本地 coding-agent/harness 真实选型约束",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLM/comments/1woikg7/are_there_any_models_that_i_can_use_with_a_16gb/",
-              "title": "Are there any models that I can use with a 16GB GPU that might be able to replace claude code?",
-              "brief": {
-                "zh": "Direct demand signal: local 16GB VRAM as Claude Code substitute — coding-agent / local harness 选型痛点.",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wom3fe/qwen_38_flash_next_q4_k_m_130k_context_q8_cache",
-              "title": "Qwen 3.8 Flash Next q4_k_m, 130k context, q8 cache on 16GB VRAM and 64GB RAM, 15-20 t/s on 4080",
-              "brief": {
-                "zh": "Practical 16GB VRAM recipe for Qwen 3.8 Flash Next + MTP branch/cache flags — local coding-agent host notes.",
-                "en": "Practical 16GB VRAM recipe for Qwen 3.8 Flash Next + MTP branch/cache flags — local coding-agent host notes.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wp7zyb/qwen38flashnext_on_12gb_vram_65_tokens_per_second/",
-              "title": "Qwen3.8-Flash-Next on 12GB VRAM - 65 tokens per second",
-              "brief": {
-                "zh": "Concrete Flash-Next speed on 12GB VRAM (65 tok/s) — consumer-GPU local inference signal.",
-                "en": "Concrete Flash-Next speed on 12GB VRAM (65 tok/s) — consumer-GPU local inference signal.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "reddit"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.reddit.com/r/LocalLLM/comments/1woikg7/are_there_any_models_that_i_can_use_with_a_16gb/",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wom3fe/qwen_38_flash_next_q4_k_m_130k_context_q8_cache",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wp7zyb/qwen38flashnext_on_12gb_vram_65_tokens_per_second/"
-          ]
-        },
-        {
           "id": "t121",
           "theme": "agents-oss",
           "title": {
@@ -3828,45 +4011,6 @@
           "externalUrls": [
             "https://www.producthunt.com/products/latitude-4"
           ]
-        },
-        {
-          "id": "t103",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "菜单栏 App 驱动真实 Claude Code 会话",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "中途插话+权限提示：coding-agent harness UX 细节",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "中途插话+权限提示：coding-agent harness UX 细节",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1wonh3k/how_a_menubar_app_drives_a_real_claude_code/",
-              "title": "How a menu-bar app drives a real Claude Code session: a message mid-turn, permission prompts, and the result",
-              "brief": {
-                "zh": "Concrete Claude Code session-driving UX (mid-turn inject + permissions) — coding-agent harness craft.",
-                "en": "Concrete Claude Code session-driving UX (mid-turn inject + permissions) — coding-agent harness craft.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "reddit"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.reddit.com/r/ClaudeAI/comments/1wonh3k/how_a_menubar_app_drives_a_real_claude_code/"
-          ]
         }
       ]
     },
@@ -3954,84 +4098,6 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://huggingface.co/apple/LensVLM-9B"
-          ]
-        },
-        {
-          "id": "t095",
-          "theme": "research",
-          "title": {
-            "zh": "AEWM: Agent-Editing World Model",
-            "en": "AEWM: Agent-Editing World Model",
-            "ja": "AEWM: Agent-Editing World Model"
-          },
-          "summary": {
-            "zh": "State Revision/EditAct 改写脏推理；长程 task-state contamination",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "State Revision/EditAct 改写脏推理；长程 task-state contamination",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.28416",
-              "title": "Agent-Editing World Model: Rethinking World Modeling for LLM Agents",
-              "brief": {
-                "zh": "质疑「预测工具观测」式语言世界模型：AEWM 改为判断 Critical/Exploratory/Noisy 决策并用 State Revision 直接改写脏推理–动作，再落地执行（EditAct）。跨 Search/Terminal/SWE 六基准、三 backbone 平均提升 3.2–6.7 分；还可把修正轨迹蒸馏回 agent（AEWM-RFT），直击长程 task-state contamination。",
-                "en": "AEWM models how reasoning and actions shape future task progress rather than simulating tool responses. Action Judge labels Critical/Exploratory/Noisy decisions; State Revision edits noisy continuations. EditAct improves average scores by 3.2–6.7 points across six benchmarks and three agent backbones.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.28416"
-          ]
-        },
-        {
-          "id": "t096",
-          "theme": "research",
-          "title": {
-            "zh": "EnSIMem: Entity-Structured Indexing for Long-Term Agent Memory",
-            "en": "EnSIMem: Entity-Structured Indexing for Long-Term Agent Memory",
-            "ja": "EnSIMem: Entity-Structured Indexing for Long-Term Agent Memory"
-          },
-          "summary": {
-            "zh": "实体–属性结构化长程记忆；开源可落地对照 Jev-Mem",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "实体–属性结构化长程记忆；开源可落地对照 Jev-Mem",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.27279",
-              "title": "EnSIMem: Entity-Structured Indexing for Long-Term Agent Memory",
-              "brief": {
-                "zh": "用实体–属性结构化索引做长程 agent 记忆：离线建 [entity][type][property:value] 并保留原文溯源，在线按证据需求检索。LoCoMo/LongMemEval 上相对 Memora 等明显抬升（~90%+），强调结构寻址而非摘要替换原文；开源实现，可落地到生产记忆层。",
-                "en": "EnSIMem organizes interactions into theme-coherent episodes and builds dialogue-grounded index entries [entity][entity_type][property:value] linked to source turns. On long-term agent-memory benchmarks it achieves high accuracy with compact contexts; code: https://github.com/RamonMeng/EnSIMem.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.27279"
           ]
         }
       ]
