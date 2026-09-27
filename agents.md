@@ -120,9 +120,13 @@ Before saving any markdown content file, verify:
 6. **日文补齐**：已有中英正式博客、缺 `blog-ja` 的 slug 须补全译（信息量对齐中文，不是摘要）。缺日文不再作为可选项搁置；补译交头子发版。不因日文阻塞中英首发，但首发后应尽快补齐。
 
 
-### Explore & Exploit（站长，2026-09-24）
+### Explore & Exploit（站长，2026-09-24；选题配额修订 2026-09-27）
 
 选题与制作遵循 explore-and-exploit：**一边做强精品**（已验证主题线加深、对照、系列化，优先正式 blog / Visual），**一边保持探索**（信号粗筛与 Chaos 继续广扫；新方向先 shortlisted / notes / Chaos 试水温）。硬约束：**长期主义深内容，不为追热点而写热点**——正式 blog 要有可沉淀的机制/对照/清单；纯热榜软新闻进 Chaos / notes。库存里应同时有「深耕线」和「新芽」。撰稿节奏**每日**约 4 篇（含周末；10:35 / 16:35 两槽）；站长授权后正式 blog 由博客头子终审即发，不必逐篇请示。细则见 `/workspace/blog-pipeline/README.md`。
+
+补充（站长，2026-09-27）：
+1. **Jev 配额**：正式 blog 的 Jev / Jev 强相关题默认每周（Asia/Shanghai）**最多 1 篇**；除非特别值得写（MAJOR_BREAKING、全新机制、或头子/站长破例）。超额进 Chaos / notes 或不进本周撰稿槽。
+2. **搜索意图**：其它选题 shortlist / 开写前查 **Google Trends**（或等价热度）；主词须有搜索意图。无意图的热闹进 Chaos / notes。交审/挑题回报写明 Trends 结论与本周 Jev 占用。
 
 ### Blog Chinese style（站长约束，2026-09-23）
 
