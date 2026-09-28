@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-28T09:48:28+08:00",
+  "updatedAt": "2026-09-28T15:47:40+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -14,12 +14,319 @@
     "models": 9,
     "coding-tools": 15,
     "agents-oss": 27,
-    "security": 5,
-    "research": 34,
+    "security": 6,
+    "research": 39,
     "product-news": 1,
     "other": 4
   },
   "hours": [
+    {
+      "hourStart": "2026-09-28T15:00:00+08:00",
+      "label": {
+        "zh": "9月28日 15:00",
+        "en": "Sep 28 15:00",
+        "ja": "9月28日 15:00"
+      },
+      "items": [
+        {
+          "id": "t297",
+          "theme": "security",
+          "title": {
+            "zh": "Google MCP Toolbox SSRF（CVE-2026-14540）：agent 工具路径可打内网",
+            "en": "Google MCP Toolbox SSRF（CVE-2026-14540）",
+            "ja": "Google MCP Toolbox SSRF（CVE-2026-14540）"
+          },
+          "summary": {
+            "zh": "MCP/agent 工具路径 SSRF：prompt 可控重定向打到内网/metadata——工具边界必须默认拦私网",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "MCP/agent 工具路径 SSRF：prompt 可控重定向打到内网/metadata——工具边界必须默认拦私网",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://anas-security-portfolio.vercel.app/google-mcp-ssrf.html",
+              "title": "An SSRF in Google’s MCP Toolbox (CVE-2026-14540)",
+              "brief": {
+                "zh": "MAJOR_BREAKING：Google MCP Toolbox for Databases HTTP 源/工具缺 CheckRedirect 与目标 IP 校验，prompt 可控路径可 SSRF 内网；CVE-2026-14540 CVSS~8.0，1.5.0+ 引入 SSRFGuard。",
+                "en": "MAJOR_BREAKING: CVE-2026-14540 is a high-severity SSRF in Google MCP Toolbox for Databases (0.3.0–1.4.0) where missing redirect/IP checks let prompt-controlled paths reach internal endpoints; upgrade to 1.5.0+ SSRFGuard.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "cve",
+              "url": "https://www.cve.org/CVERecord?id=CVE-2026-14540",
+              "title": "CVE-2026-14540",
+              "brief": {
+                "zh": "CVE 记录：CWE-918 SSRF；HTTP client 无限制重定向与 IP 校验。",
+                "en": "Official CVE record for CWE-918 SSRF from unrestricted HTTP redirects without target IP validation.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/advisories/GHSA-3x3x-8ffg-ghcv",
+              "title": "GHSA-3x3x-8ffg-ghcv",
+              "brief": {
+                "zh": "GitHub Advisory：googleapis/mcp-toolbox SSRF 高危披露与修复链。",
+                "en": "GitHub Advisory for the googleapis/mcp-toolbox SSRF with fix references.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "cve"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://anas-security-portfolio.vercel.app/google-mcp-ssrf.html",
+            "https://www.cve.org/CVERecord?id=CVE-2026-14540",
+            "https://github.com/advisories/GHSA-3x3x-8ffg-ghcv",
+            "https://github.com/googleapis/mcp-toolbox/pull/3448"
+          ]
+        },
+        {
+          "id": "t298",
+          "theme": "research",
+          "title": {
+            "zh": "MoMHa：准确率·安全·token 三目标联合优化 LLM harness",
+            "en": "MoMHa",
+            "ja": "MoMHa"
+          },
+          "summary": {
+            "zh": "Harness 一等设计面：Meta-Harness 多智能体提案在 accuracy/safety/tokens 上联合搜索——非再堆 RSI 口号",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Harness 一等设计面：Meta-Harness 多智能体提案在 accuracy/safety/tokens 上联合搜索——非再堆 RSI 口号",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30967",
+              "title": "MoMHa: Multi-Objective Optimization of LLM Harnesses over Accuracy, Safety, and Tokens",
+              "brief": {
+                "zh": "「深耕：harness」MoMHa 单阶段联合奖励 proposer 在准确率·行为安全·token 三目标上胜过两阶段与准确率-only；17 域×12 模型交叉迁移。",
+                "en": "MoMHa treats the harness as a multi-objective design surface and shows a single-phase joint-reward proposer beats two-phase and accuracy-only baselines across 17 domains and 12 models.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30967"
+          ]
+        },
+        {
+          "id": "t299",
+          "theme": "research",
+          "title": {
+            "zh": "Coding Agents 成本低效行为：检索冗余·脚本重复·测重跑",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "首次系统刻画 Claude Code/Mini-SWE 轨迹成本坑；开发者 skill 可降本~41.7%——harness/skill 工程刚需",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "首次系统刻画 Claude Code/Mini-SWE 轨迹成本坑；开发者 skill 可降本~41.7%——harness/skill 工程刚需",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30725",
+              "title": "Analyzing and Mitigating Cost-Inefficient Behaviors in Coding Agents",
+              "brief": {
+                "zh": "「深耕：coding-agent cost」分析 1.2k 轨迹中的 subsumed retrieval、相似脚本重复、测试重跑；开发者设计 skill 降本至约 41.7%，优于 agent 自合成 skill。",
+                "en": "First study of recurring cost-inefficient coding-agent behaviors across 1,200 Claude Code and Mini-SWE-Agent trajectories; developer-designed skills cut cost to about 41.7%, beating agent-synthesized skills.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30725"
+          ]
+        },
+        {
+          "id": "t300",
+          "theme": "research",
+          "title": {
+            "zh": "SkillEvoReg：正则化 skill 演化防过拟合",
+            "en": "SkillEvoReg",
+            "ja": "SkillEvoReg"
+          },
+          "summary": {
+            "zh": "Skill 演化本身会过拟合：dropout+复杂度局部正则+因果反例验证——相对 RRSI harness 层的 skill 层新刃",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Skill 演化本身会过拟合：dropout+复杂度局部正则+因果反例验证——相对 RRSI harness 层的 skill 层新刃",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30861",
+              "title": "SkillEvoReg: Regularizing Agent Skill Evolution Against Overfitting",
+              "brief": {
+                "zh": "「深耕：skills」SkillEvoReg 把 skill 更新当学习过程正则化：skill dropout、复杂度局部正则、因果反例验证（CCV），抑制状态膨胀与回退。",
+                "en": "SkillEvoReg regularizes skill evolution with skill dropout, complexity-aware local regularization, and causal counterexample validation to curb skill-state bloat and regressions.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30861"
+          ]
+        },
+        {
+          "id": "t301",
+          "theme": "research",
+          "title": {
+            "zh": "Abstraction Ladder：代码技能抽象梯（语义 skill vs 原语）",
+            "en": "Abstraction Ladder",
+            "ja": "Abstraction Ladder"
+          },
+          "summary": {
+            "zh": "代码技能抽象梯：语义 skill 近 3× 推进并降推理成本~86%，混合原语保留回退——skills×harness 组合权衡",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "代码技能抽象梯：语义 skill 近 3× 推进并降推理成本~86%，混合原语保留回退——skills×harness 组合权衡",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.31076",
+              "title": "Up and Down the Abstraction Ladder: Code-Based Skills for Language Agents",
+              "brief": {
+                "zh": "「深耕：skills」系统研究代码技能抽象梯：语义 skill 可近 3× 推进 NetHack 并降推理成本约 86%；skill+primitives 混合保留回退。",
+                "en": "Studies code-based skill abstraction ladders: semantic skills can nearly 3× progress and cut reasoning cost ~86% on NetHack, while mixing primitives keeps a fallback path.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.31076"
+          ]
+        },
+        {
+          "id": "t302",
+          "theme": "research",
+          "title": {
+            "zh": "Anchored Context Distillation：压观测保动作（SE agents）",
+            "en": "Anchored Context Distillation",
+            "ja": "Anchored Context Distillation"
+          },
+          "summary": {
+            "zh": "SE agent 工具观测主导上下文：LOHA+锚定蒸馏压缩观测、保留文本动作——可行动作保真 vs 笼统 compaction",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "SE agent 工具观测主导上下文：LOHA+锚定蒸馏压缩观测、保留文本动作——可行动作保真 vs 笼统 compaction",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.31430",
+              "title": "Compress What You See, Not What You Say: Anchored Context Distillation for Latent-Observation Software Engineering Agents",
+              "brief": {
+                "zh": "「深耕：coding-agent context」LOHA 布局 + Anchored Context Distillation：压缩观测历史、保留文本动作，避免软 token 适配破坏原行为。",
+                "en": "Anchored Context Distillation with LOHA compresses observation history while keeping textual actions, avoiding soft-token adaptation that breaks action fidelity in SE agents.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.31430"
+          ]
+        },
+        {
+          "id": "t303",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "METR：eval 环上的 per-action blocking monitor",
+            "en": "METR",
+            "ja": "METR"
+          },
+          "summary": {
+            "zh": "LLM judge 在动作执行前拦截高危害/破坏监控行为——把 sandbox 安全写成可部署验收件",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "LLM judge 在动作执行前拦截高危害/破坏监控行为——把 sandbox 安全写成可部署验收件",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "metr",
+              "url": "https://metr.org/notes/2026-09-27-implementing-a-basic-blocking-action-monitor/",
+              "title": "METR: Implementing a Basic Per-Action Monitor for Safer Evals",
+              "brief": {
+                "zh": "METR 在自有 eval 部署 live per-action blocking monitor：LLM judge 审每步动作，拦截真实危害或破坏监控的行为；目标高危害召回、人可复审误报率。",
+                "en": "METR deployed a live per-action blocking monitor on its evals: an LLM judge reviews each agent action before execution and holds actions that could cause real-world harm or subvert the monitor.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "metr"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://metr.org/notes/2026-09-27-implementing-a-basic-blocking-action-monitor/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-09-28T09:00:00+08:00",
       "label": {
@@ -33,12 +340,12 @@
           "theme": "research",
           "title": {
             "zh": "Bad Genius：反事实引导的 harness 演化防评测捷径",
-            "en": "Bad Genius",
-            "ja": "Bad Genius"
+            "en": "Bad Genius: When Counterfactual Protocols Expose Harness Evolution Cheats",
+            "ja": "Bad Genius: When Counterfactual Protocols Expose Harness Evolution Cheats"
           },
           "summary": {
             "zh": "自动 harness 优化可在固定协议上走 shortcut；坏天才 Proposer + 反事实协议——相对 RRSI/SoL-Pi 的 RSI 新刃",
-            "en": "",
+            "en": "A deep read of arXiv:2609.18366 CHASE—automatic harness optimization can exploit benchmark-wide shortcuts on a fixed released protocol; a Challenger searches executable protocol transforms with a validity firewall and held-out confirmation, retaining released gains while cutting gain destruction on Syn-Ledger and OfficeQA.",
             "ja": ""
           },
           "judgment": {
@@ -62,22 +369,26 @@
             "arxiv"
           ],
           "score": 5,
-          "status": "shortlisted",
+          "status": "published",
           "externalUrls": [
             "https://arxiv.org/abs/2609.18366"
-          ]
+          ],
+          "blog": {
+            "zh": "/cn/blog/bad-genius-counterfactual-harness-evolution/",
+            "en": "/blog/bad-genius-counterfactual-harness-evolution/"
+          }
         },
         {
           "id": "t272",
           "theme": "research",
           "title": {
             "zh": "Exactly-Once 住哪？Model / Harness / Tool-Contract 与重复副作用",
-            "en": "",
-            "ja": ""
+            "en": "Where Does Exactly-Once Live? Model, Harness, or Tool Contract",
+            "ja": "Where Does Exactly-Once Live? Model, Harness, or Tool Contract"
           },
           "summary": {
             "zh": "exactly-once 拆到模型 vs harness vs 工具契约；LIMBO 沙箱量化重复副作用——工具幂等/契约优先于再堆模型",
-            "en": "",
+            "en": "Reading arXiv:2609.29095: Limbo (6 services, 12 faults, 25,930 episodes) shows exactly-once for LLM agent side effects lives in the model when read-back can resolve outcomes, and in the tool contract under in-flight/redelivery faults—idempotency keys cut duplicates 28%→4%; distrust agent success reports.",
             "ja": ""
           },
           "judgment": {
@@ -101,10 +412,14 @@
             "arxiv"
           ],
           "score": 5,
-          "status": "shortlisted",
+          "status": "published",
           "externalUrls": [
             "https://arxiv.org/abs/2609.29095"
-          ]
+          ],
+          "blog": {
+            "zh": "/cn/blog/exactly-once-model-harness-tool-contract/",
+            "en": "/blog/exactly-once-model-harness-tool-contract/"
+          }
         },
         {
           "id": "t279",
@@ -2743,7 +3058,8 @@
           "externalUrls": [
             "https://github.com/BuilderIO/agent-native",
             "https://www.youtube.com/watch?v=a7Mb_dJtMdk",
-            "https://www.youtube.com/watch?v=pNmfMi-yjZk"
+            "https://www.youtube.com/watch?v=pNmfMi-yjZk",
+            "https://www.youtube.com/watch?v=vGCJ7diEtrw"
           ]
         },
         {
@@ -3735,45 +4051,6 @@
           "externalUrls": [
             "https://arxiv.org/abs/2609.27308",
             "https://github.com/EmbodiedSWE/EmbodiedSWE"
-          ]
-        },
-        {
-          "id": "t159",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "OpenJudgement-4B：开源权重 Jev/TypeSafe 替代（early preview）",
-            "en": "OpenJudgement-4B",
-            "ja": "OpenJudgement-4B"
-          },
-          "summary": {
-            "zh": "Jev 开源竞争又一刀；对照 OpenJev/CLM/Laya；先核验再写",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Jev 开源竞争又一刀；对照 OpenJev/CLM/Laya；先核验再写",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wp2xpn/i_built_an_openweight_alternative_to_jev_typesafe/",
-              "title": "I built an open-weight alternative to Jev / TypeSafe - introducing OpenJudgement-4B (early preview)",
-              "brief": {
-                "zh": "OpenJudgement-4B claims open-weight alternative to Jev/TypeSafe — exploit-track model for decision/judge loops.",
-                "en": "OpenJudgement-4B claims open-weight alternative to Jev/TypeSafe — exploit-track model for decision/judge loops.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "reddit"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wp2xpn/i_built_an_openweight_alternative_to_jev_typesafe/"
           ]
         }
       ]
