@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-29T09:51:00+08:00",
+  "updatedAt": "2026-09-29T15:49:28+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,475 @@
   ],
   "themeCounts": {
     "models": 10,
-    "coding-tools": 16,
+    "coding-tools": 17,
     "agents-oss": 27,
     "security": 7,
-    "research": 40,
+    "research": 45,
     "product-news": 1,
-    "other": 3
+    "other": 4
   },
   "hours": [
+    {
+      "hourStart": "2026-09-29T15:00:00+08:00",
+      "label": {
+        "zh": "9月29日 15:00",
+        "en": "Sep 29 15:00",
+        "ja": "9月29日 15:00"
+      },
+      "items": [
+        {
+          "id": "t330",
+          "theme": "models",
+          "title": {
+            "zh": "Claude Sonnet 5.5：中档 agentic coding 日用引擎（Terminal-Bench 70.6%）",
+            "en": "Claude Sonnet 5.5",
+            "ja": "Claude Sonnet 5.5"
+          },
+          "summary": {
+            "zh": "一级模型发布：同价更少 token·30%+ 更快；Terminal-Bench 4.0 70.6% vs Sonnet5 10.3%——harness 默认选型从 Opus 下沉到中档",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "一级模型发布：同价更少 token·30%+ 更快；Terminal-Bench 4.0 70.6% vs Sonnet5 10.3%——harness 默认选型从 Opus 下沉到中档",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "anthropic",
+              "url": "https://www.anthropic.com/claude-sonnet-5-5",
+              "title": "Introducing Claude Sonnet 5.5",
+              "brief": {
+                "zh": "Anthropic Sep28：Sonnet 5.5 同价档、少 token 可降任务成本至多 30%、速度 30%+；agentic coding Terminal-Bench 4.0 70.6%（vs Sonnet5 10.3%），定位日常/明确范围 coding partner。",
+                "en": "Anthropic’s Sonnet 5.5 keeps the same list price while claiming up to 30% lower cost per task and 30%+ speed; it posts 70.6% on Terminal-Bench 4.0 versus Sonnet 5’s 10.3% for everyday agentic coding.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=s5nkj-L2vAw",
+              "title": "Introducing Claude Sonnet 5.5",
+              "brief": {
+                "zh": "官方 Claude 频道 Sonnet 5.5 发布片：~7.7h·~119k 播、~15.3k VPH；补强 t330 的官方 launch 与 Claude Code 默认模型信号。",
+                "en": "Official Claude launch video for Sonnet 5.5—~119k views in 7.7h at ~15.3k VPH; strengthens the official release and Claude Code default-model signal.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/ClaudeAI/comments/1wsrb1z/sonnet_55_vs_opus_55_on_the_same_frontend_spec/",
+              "title": "Sonnet 5.5 vs Opus 5.5 same frontend spec",
+              "brief": {
+                "zh": "Reddit：同 frontend 规格隐测双过，Sonnet 约两分钟完成、成本约 Opus 1/5。",
+                "en": "Reddit: both models pass hidden frontend tests; Sonnet finishes in ~2 minutes at about one-fifth Opus cost.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/ClaudeAI/comments/1wso86h/sonnet_55_vs_opus_55_on_a_fromscratch_rust/",
+              "title": "Sonnet 5.5 vs Opus 5.5 from-scratch Rust decompressor",
+              "brief": {
+                "zh": "Reddit：from-scratch Rust 解压任务正确率相当，Sonnet 约 1/4 价。",
+                "en": "Reddit: matching correctness on a from-scratch Rust decompressor at roughly one-quarter the price.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "anthropic",
+            "hn",
+            "youtube",
+            "reddit"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://www.anthropic.com/claude-sonnet-5-5",
+            "https://www.youtube.com/watch?v=s5nkj-L2vAw",
+            "https://www.reddit.com/r/ClaudeAI/comments/1wsrb1z/sonnet_55_vs_opus_55_on_the_same_frontend_spec/",
+            "https://www.reddit.com/r/ClaudeAI/comments/1wso86h/sonnet_55_vs_opus_55_on_a_fromscratch_rust/"
+          ]
+        },
+        {
+          "id": "t349",
+          "theme": "research",
+          "title": {
+            "zh": "Progressive Disclosure：生产级 Agent Skills 按需披露",
+            "en": "Progressive Disclosure",
+            "ja": "Progressive Disclosure"
+          },
+          "summary": {
+            "zh": "生产技能库 harness 层：eager 全量加载 N=100 直接 crash；progressive disclosure（先 frontmatter、按需 load_skill）最高省 81.7% token 并稳住检索——Workday 部署经验补位 skills 主线",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "生产技能库 harness 层：eager 全量加载 N=100 直接 crash；progressive disclosure（先 frontmatter、按需 load_skill）最高省 81.7% token 并稳住检索——Workday 部署经验补位 skills 主线",
+            "en": "Production skill libraries need harness-layer progressive disclosure: eager load crashes at N=100, while frontmatter-first on-demand load_skill cuts tokens up to 81.7% without hurting retrieval—Workday deployment evidence on the skills line.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.35692",
+              "title": "Report: Progressive Disclosure of Agent Skills",
+              "brief": {
+                "zh": "「深耕：skills/harness」Workday：对比 eager 全量技能加载与 progressive disclosure（先 frontmatter、按需 load_skill）；N=100 时 eager crash，PD 最高省 81.7% token 并稳住检索质量。",
+                "en": "Workday study contrasts eager full skill loading vs progressive disclosure (frontmatter first, load_skill on demand); eager crashes at N=100 while PD saves up to 81.7% tokens with stable retrieval.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.35692"
+          ]
+        },
+        {
+          "id": "t350",
+          "theme": "research",
+          "title": {
+            "zh": "Harness Learning：可泛化的测试时 harness 适应",
+            "en": "Harness Learning",
+            "ja": "Harness Learning"
+          },
+          "summary": {
+            "zh": "把 harness 修订做成可迁移 meta-learning：RL 训 proposer 据执行反馈改 harness 代码，测试时冻结模型只改 harness；4B proposer 在 21 未见 Reasoning Gym 族均值超 35B teacher——harness 优化升为可泛化适应程序",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "把 harness 修订做成可迁移 meta-learning：RL 训 proposer 据执行反馈改 harness 代码，测试时冻结模型只改 harness；4B proposer 在 21 未见 Reasoning Gym 族均值超 35B teacher——harness 优化升为可泛化适应程序",
+            "en": "Harness Learning turns harness edits into transferable meta-learning: an RL-trained proposer rewrites harness code from execution feedback while freezing the model at test time; a 4B proposer beats a 35B teacher mean on 21 unseen Reasoning Gym families.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.35738",
+              "title": "Harness Learning Enables Generalizable Test-Time Adaptation",
+              "brief": {
+                "zh": "「深耕：harness/TTA」用 RL 训 proposer 根据执行反馈改 harness；测试时冻结模型只改 harness；4B proposer 在 21 未见族上均值 0.62 vs 35B teacher 0.56，HotpotQA 修订可迁移 MuSiQue/2Wiki。",
+                "en": "Trains a proposer with RL to edit harness code from execution feedback; at test time the model stays frozen. A 4B proposer averages 0.62 vs a 35B teacher’s 0.56 on 21 unseen Reasoning Gym families, with HotpotQA edits transferring to MuSiQue/2Wiki.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.35738"
+          ]
+        },
+        {
+          "id": "t351",
+          "theme": "research",
+          "title": {
+            "zh": "RLHarness：Skills×策略共演化的长程多模态推理",
+            "en": "RLHarness",
+            "ja": "RLHarness"
+          },
+          "summary": {
+            "zh": "Skills+协议+few-shot 打包成版本化 Harness，与策略交替共演化（Build→Learn→Reconstruct→Learn）；仅重建不适应会掉点——把「技能库陈旧」做成可测的版本对齐循环",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Skills+协议+few-shot 打包成版本化 Harness，与策略交替共演化（Build→Learn→Reconstruct→Learn）；仅重建不适应会掉点——把「技能库陈旧」做成可测的版本对齐循环",
+            "en": "RLHarness packages skills, protocols, and few-shots into a versioned harness that co-evolves with the policy (Build→Learn→Reconstruct→Learn); reconstruct-without-adapt regresses—making stale skill libraries a measurable version-alignment loop.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.32326",
+              "title": "RLHarness: Co-Evolving Procedural Skills with Reinforcement Learning for Long-Horizon Multimodal Reasoning",
+              "brief": {
+                "zh": "「深耕：skills×RL」版本化 Harness 与策略交替共演化；MetroMap/TravelMap Acc 16→62/28→50；仅重建不适应掉点，同预算 Φ²+DAPO II 全面压过复用旧 Harness。",
+                "en": "Versioned harnesses co-evolve with policy via Build→Learn→Reconstruct→Learn; MetroMap/TravelMap accuracy rises 16→62 / 28→50. Reconstruct-only without adaptation regresses; under the same budget Φ²+DAPO II beats reusing a stale harness.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.32326",
+            "https://github.com/Ziqiao-Shang/RLHarness"
+          ]
+        },
+        {
+          "id": "t352",
+          "theme": "research",
+          "title": {
+            "zh": "SkillDelta：任务条件增益预测决定是否注入技能",
+            "en": "SkillDelta",
+            "ja": "SkillDelta"
+          },
+          "summary": {
+            "zh": "技能不是「相关就灌」：用有/无技能配对历史预测任务条件增益，决策前决定是否注入；15 设定相对随机激活 +4.3pp——补位 Progressive Disclosure/LoRA Skills 的「何时该用」空白",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "技能不是「相关就灌」：用有/无技能配对历史预测任务条件增益，决策前决定是否注入；15 设定相对随机激活 +4.3pp——补位 Progressive Disclosure/LoRA Skills 的「何时该用」空白",
+            "en": "SkillDelta predicts task-conditional gain from with/without skill pairs before injection; across 15 settings it beats random activation by +4.3pp on average—filling the when-to-use gap left by progressive disclosure and LoRA skill composition.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.32274",
+              "title": "When Does a Skill Add Value? Task-Conditional Gain Prediction for Selective Skill Use",
+              "brief": {
+                "zh": "「新芽：selective skills」SkillDelta 用有/无技能配对历史预测任务条件增益再决定注入；15 设定平均 +4.3pp，多数收益来自跨任务组分配；附 DeepSeek Harness 插件。",
+                "en": "SkillDelta uses paired with/without skill history to predict task-conditional gain before injection; +4.3pp average over random activation across 15 settings, with most gains from cross-task allocation, plus a DeepSeek Harness plugin.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.32274"
+          ]
+        },
+        {
+          "id": "t353",
+          "theme": "research",
+          "title": {
+            "zh": "RSI-Master：Experiment OS 约束自主模型改进实验",
+            "en": "RSI-Master",
+            "ja": "RSI-Master"
+          },
+          "summary": {
+            "zh": "RSI 新边：Experiment OS 约束逐步动作防 hacking + Reviewer 引导研究 DAG 防 strategy lock-in；PostTrainBench 54.49 vs 最强 agent 基线 46.53、hacking 0%——可控实验+结构化探索双层正则",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "RSI 新边：Experiment OS 约束逐步动作防 hacking + Reviewer 引导研究 DAG 防 strategy lock-in；PostTrainBench 54.49 vs 最强 agent 基线 46.53、hacking 0%——可控实验+结构化探索双层正则",
+            "en": "RSI-Master’s Experiment OS constrains step actions against hacking while a Reviewer-guided research DAG fights strategy lock-in; PostTrainBench 54.49 vs 46.53 best agent baseline with 0% hacking—dual regularization via controllable experiments and structured exploration.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.35561",
+              "title": "RSI-Master: Structuring Experiments to Guide Autonomous Model Improvement",
+              "brief": {
+                "zh": "「深耕：RSI」Experiment OS + Reviewer DAG；PostTrainBench 均分 54.49 vs 最强 agent 46.53，hacking rate 0%；35B 上 LiveCodeBench-v6 超 Instruct，HorizonMath 非零分。",
+                "en": "Pairs an Experiment OS with a Reviewer-guided research DAG; scores 54.49 on PostTrainBench vs 46.53 for the strongest agent baseline at 0% hacking, and a 35B run beats Instruct on LiveCodeBench-v6 with nonzero HorizonMath.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.35561"
+          ]
+        },
+        {
+          "id": "t354",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）",
+            "en": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）",
+            "ja": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）"
+          },
+          "summary": {
+            "zh": "一级源长访谈：把 coding-agent 产品面写成 Mods/Plugins/Projects/Tag 可组合 harness，并明示「agent 改写自己的 harness」——cloud-brain/local-hands + sandbox/prompt-injection 工程题",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "一级源长访谈：把 coding-agent 产品面写成 Mods/Plugins/Projects/Tag 可组合 harness，并明示「agent 改写自己的 harness」——cloud-brain/local-hands + sandbox/prompt-injection 工程题",
+            "en": "Primary-source Latent Space interview frames Claude Code’s next era as composable Mods/Plugins/Projects/Tag harness surfaces, including agents rewriting their own harnesses—plus cloud-brain/local-hands and sandbox/prompt-injection engineering stakes.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "latent-space",
+              "url": "https://www.latent.space/p/thariq",
+              "title": "Claude Code’s Next Era — Thariq Shihipar",
+              "brief": {
+                "zh": "Sep29 Latent Space×Anthropic Thariq：Claude Mods（改 harness 本身）、Plugins、Projects（并行云会话）、Claude Tag 多人协作；明示 agent 改写自身 harness 与 sandbox/注入安全。",
+                "en": "Sep 29 Latent Space with Anthropic’s Thariq covers Claude Mods (customize the harness), Plugins, Projects (parallel cloud sessions), and Claude Tag multiplayer—explicitly agents rewriting their own harnesses plus sandbox/prompt-injection risk.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "latent-space"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://www.latent.space/p/thariq"
+          ]
+        },
+        {
+          "id": "t355",
+          "theme": "other",
+          "title": {
+            "zh": "OpenAI：前沿训练 safety cases（否决权+自动暂停）",
+            "en": "OpenAI",
+            "ja": "OpenAI"
+          },
+          "summary": {
+            "zh": "一级源把 sandbox/containment/monitoring 写成训练前可验收 safety case：多高管否决 + 未确认高优告警自动暂停——接 DNS/METR/OpenShell 主线的流程验收件",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "一级源把 sandbox/containment/monitoring 写成训练前可验收 safety case：多高管否决 + 未确认高优告警自动暂停——接 DNS/METR/OpenShell 主线的流程验收件",
+            "en": "OpenAI’s primary post turns sandbox/containment/monitoring into pre-training safety cases with multi-senior veto and auto-pause on unacked high-priority alerts—an operational acceptance piece on the DNS/METR/OpenShell line.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "openai",
+              "url": "https://openai.com/index/towards-safety-cases-for-frontier-ai-training/",
+              "title": "Towards safety cases for frontier AI training",
+              "brief": {
+                "zh": "OpenAI Sep28：前沿 RL 训练前要求结构化 safety case；对齐训练+多层沙箱遏制+阻断阈值监控；多高管否决与未确认高优告警自动暂停。",
+                "en": "OpenAI Sep 28 requires structured safety cases before frontier RL runs: alignment training, multi-layer sandbox containment, blocking-threshold monitoring, multi-senior veto, and auto-pause for unacknowledged high-priority alerts.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "openai"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://openai.com/index/towards-safety-cases-for-frontier-ai-training/"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-09-29T10:00:00+08:00",
+      "label": {
+        "zh": "9月29日 10:00",
+        "en": "Sep 29 10:00",
+        "ja": "9月29日 10:00"
+      },
+      "items": [
+        {
+          "id": "t331",
+          "theme": "security",
+          "title": {
+            "zh": "Nvidia Open Agent Safety：OpenShell + 硅级 Sentry 看门狗",
+            "en": "Nvidia Open Agent Safety",
+            "ja": "Nvidia Open Agent Safety"
+          },
+          "summary": {
+            "zh": "把 sandbox 边界做到 harness 外开源 runtime + BlueField 硅级隔离——接 DNS/METR/breakout 主线的硬件验收件",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "把 sandbox 边界做到 harness 外开源 runtime + BlueField 硅级隔离——接 DNS/METR/breakout 主线的硬件验收件",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "techcrunch",
+              "url": "https://techcrunch.com/2026/09/28/nvidia-launches-new-platform-for-reining-in-rogue-ai-agents/",
+              "title": "Nvidia launches platform for reining in rogue AI agents",
+              "brief": {
+                "zh": "Nvidia Open Agent Safety：OpenShell 开源安全 runtime（模型+harness 外边界）+ Sentry 在 BlueField-4 上毫秒级隔离越界 agent。",
+                "en": "Nvidia’s Open Agent Safety Platform pairs open-source OpenShell runtime boundaries outside the model/harness with Sentry on BlueField-4 for millisecond quarantine of breakout behavior.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.cnbc.com/2026/09/28/nvidia-releases.html",
+              "title": "Nvidia wants to put a watchdog chip next to every AI agent",
+              "brief": {
+                "zh": "HN/CNBC：把「看门狗芯片」叙事推到每个 agent 旁——containment 从软件护栏扩到主机/网络强制。",
+                "en": "HN/CNBC coverage frames a hardware watchdog beside each agent, extending containment from model safeguards to host/network enforcement.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "techcrunch",
+            "hn",
+            "nvidia"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://techcrunch.com/2026/09/28/nvidia-launches-new-platform-for-reining-in-rogue-ai-agents/",
+            "https://www.cnbc.com/2026/09/28/nvidia-releases.html",
+            "https://developer.nvidia.com/blog/nvidia-open-agent-safety-platform-a-reference-for-continuous-in-silicon-agent-monitoring/"
+          ]
+        },
+        {
+          "id": "t326",
+          "theme": "research",
+          "title": {
+            "zh": "LLM Parkinsonism / GEC：执行控制失灵与停不住",
+            "en": "LLM Parkinsonism / GEC",
+            "ja": "LLM Parkinsonism / GEC"
+          },
+          "summary": {
+            "zh": "把 agent-loop「停不住」命名为 Parkinsonism；GEC 拆提案与项目级停止权——近同等成功率下砍 ~36% token",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "把 agent-loop「停不住」命名为 Parkinsonism；GEC 拆提案与项目级停止权——近同等成功率下砍 ~36% token",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30662",
+              "title": "LLM Parkinsonism: Executive-Control Failure, Token-Inefficient Persistence, and an Uncertainty-Aware Global Executive Control Architecture for Autonomous Language-Model Agents",
+              "brief": {
+                "zh": "「深耕：executive-control」用非临床隐喻命名目标漂移/复杂度堆积/终止失败；GEC 把提案生成与项目级停止权拆开，matched-candidate 基准上成功率近平、均 token 降约 36%。",
+                "en": "Names token-inefficient post-goal persistence as LLM Parkinsonism and proposes GEC to separate proposal generation from project-level stopping; matched-candidate sims keep success while cutting mean tokens ~36%.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30662"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-09-29T09:00:00+08:00",
       "label": {
@@ -166,6 +627,16 @@
                 "en": "IndyDevDan’s ten-level Jev tutorial—~36k views in 12.8h at ~2.8k VPH; a practical Jev/harness companion signal for published t003.",
                 "ja": ""
               }
+            },
+            {
+              "source": "hn",
+              "url": "https://github.com/firelex/jeff",
+              "title": "Jeff – Jev-compatible 0.8B decision models",
+              "brief": {
+                "zh": "HN Show：Jeff 家训 Jev 兼容 0.8B/~30ms；主记 t357，本周不催 Jev 撰稿。",
+                "en": "Show HN Jeff: home-trainable Jev-compatible 0.8B/~30ms; primary topic t357, no Jev draft push this week.",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -193,117 +664,13 @@
             "https://github.com/egma-ai/jev-code-reviewer",
             "https://www.youtube.com/watch?v=EOdXR6lU5ZA",
             "https://www.youtube.com/watch?v=q35Yy_JY5Bw",
-            "https://www.youtube.com/watch?v=_U-O5lYhJ7Q"
+            "https://www.youtube.com/watch?v=_U-O5lYhJ7Q",
+            "https://github.com/firelex/jeff"
           ],
           "blog": {
             "zh": "/cn/blog/jev-claude-code-10x-and-25-lines/",
             "en": "/blog/jev-claude-code-10x-and-25-lines/"
           }
-        },
-        {
-          "id": "t330",
-          "theme": "models",
-          "title": {
-            "zh": "Claude Sonnet 5.5：中档 agentic coding 日用引擎（Terminal-Bench 70.6%）",
-            "en": "Claude Sonnet 5.5",
-            "ja": "Claude Sonnet 5.5"
-          },
-          "summary": {
-            "zh": "一级模型发布：同价更少 token·30%+ 更快；Terminal-Bench 4.0 70.6% vs Sonnet5 10.3%——harness 默认选型从 Opus 下沉到中档",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "一级模型发布：同价更少 token·30%+ 更快；Terminal-Bench 4.0 70.6% vs Sonnet5 10.3%——harness 默认选型从 Opus 下沉到中档",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "anthropic",
-              "url": "https://www.anthropic.com/claude-sonnet-5-5",
-              "title": "Introducing Claude Sonnet 5.5",
-              "brief": {
-                "zh": "Anthropic Sep28：Sonnet 5.5 同价档、少 token 可降任务成本至多 30%、速度 30%+；agentic coding Terminal-Bench 4.0 70.6%（vs Sonnet5 10.3%），定位日常/明确范围 coding partner。",
-                "en": "Anthropic’s Sonnet 5.5 keeps the same list price while claiming up to 30% lower cost per task and 30%+ speed; it posts 70.6% on Terminal-Bench 4.0 versus Sonnet 5’s 10.3% for everyday agentic coding.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=s5nkj-L2vAw",
-              "title": "Introducing Claude Sonnet 5.5",
-              "brief": {
-                "zh": "官方 Claude 频道 Sonnet 5.5 发布片：~7.7h·~119k 播、~15.3k VPH；补强 t330 的官方 launch 与 Claude Code 默认模型信号。",
-                "en": "Official Claude launch video for Sonnet 5.5—~119k views in 7.7h at ~15.3k VPH; strengthens the official release and Claude Code default-model signal.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "anthropic",
-            "hn",
-            "youtube"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.anthropic.com/claude-sonnet-5-5",
-            "https://www.youtube.com/watch?v=s5nkj-L2vAw"
-          ]
-        },
-        {
-          "id": "t331",
-          "theme": "security",
-          "title": {
-            "zh": "Nvidia Open Agent Safety：OpenShell + 硅级 Sentry 看门狗",
-            "en": "Nvidia Open Agent Safety",
-            "ja": "Nvidia Open Agent Safety"
-          },
-          "summary": {
-            "zh": "把 sandbox 边界做到 harness 外开源 runtime + BlueField 硅级隔离——接 DNS/METR/breakout 主线的硬件验收件",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "把 sandbox 边界做到 harness 外开源 runtime + BlueField 硅级隔离——接 DNS/METR/breakout 主线的硬件验收件",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/28/nvidia-launches-new-platform-for-reining-in-rogue-ai-agents/",
-              "title": "Nvidia launches platform for reining in rogue AI agents",
-              "brief": {
-                "zh": "Nvidia Open Agent Safety：OpenShell 开源安全 runtime（模型+harness 外边界）+ Sentry 在 BlueField-4 上毫秒级隔离越界 agent。",
-                "en": "Nvidia’s Open Agent Safety Platform pairs open-source OpenShell runtime boundaries outside the model/harness with Sentry on BlueField-4 for millisecond quarantine of breakout behavior.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.cnbc.com/2026/09/28/nvidia-releases.html",
-              "title": "Nvidia wants to put a watchdog chip next to every AI agent",
-              "brief": {
-                "zh": "HN/CNBC：把「看门狗芯片」叙事推到每个 agent 旁——containment 从软件护栏扩到主机/网络强制。",
-                "en": "HN/CNBC coverage frames a hardware watchdog beside each agent, extending containment from model safeguards to host/network enforcement.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "techcrunch",
-            "hn",
-            "nvidia"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://techcrunch.com/2026/09/28/nvidia-launches-new-platform-for-reining-in-rogue-ai-agents/",
-            "https://www.cnbc.com/2026/09/28/nvidia-releases.html",
-            "https://developer.nvidia.com/blog/nvidia-open-agent-safety-platform-a-reference-for-continuous-in-silicon-agent-monitoring/"
-          ]
         },
         {
           "id": "t324",
@@ -381,45 +748,6 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://arxiv.org/abs/2609.30906"
-          ]
-        },
-        {
-          "id": "t326",
-          "theme": "research",
-          "title": {
-            "zh": "LLM Parkinsonism / GEC：执行控制失灵与停不住",
-            "en": "LLM Parkinsonism / GEC",
-            "ja": "LLM Parkinsonism / GEC"
-          },
-          "summary": {
-            "zh": "把 agent-loop「停不住」命名为 Parkinsonism；GEC 拆提案与项目级停止权——近同等成功率下砍 ~36% token",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "把 agent-loop「停不住」命名为 Parkinsonism；GEC 拆提案与项目级停止权——近同等成功率下砍 ~36% token",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30662",
-              "title": "LLM Parkinsonism: Executive-Control Failure, Token-Inefficient Persistence, and an Uncertainty-Aware Global Executive Control Architecture for Autonomous Language-Model Agents",
-              "brief": {
-                "zh": "「深耕：executive-control」用非临床隐喻命名目标漂移/复杂度堆积/终止失败；GEC 把提案生成与项目级停止权拆开，matched-candidate 基准上成功率近平、均 token 降约 36%。",
-                "en": "Names token-inefficient post-goal persistence as LLM Parkinsonism and proposes GEC to separate proposal generation from project-level stopping; matched-candidate sims keep success while cutting mean tokens ~36%.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30662"
           ]
         },
         {
@@ -3358,6 +3686,16 @@
                 "en": "",
                 "ja": ""
               }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=tUPPVhBBcoM",
+              "title": "Self-Improving software factories — Zach Lloyd, Warp",
+              "brief": {
+                "zh": "AI Engineer×Warp 自改进 software factory 热片；主记 t367，本条作 factory 伴源。",
+                "en": "AI Engineer×Warp self-improving software factory heat talk; primary topic t367, companion here.",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -3370,7 +3708,8 @@
             "https://github.com/BuilderIO/agent-native",
             "https://www.youtube.com/watch?v=a7Mb_dJtMdk",
             "https://www.youtube.com/watch?v=pNmfMi-yjZk",
-            "https://www.youtube.com/watch?v=vGCJ7diEtrw"
+            "https://www.youtube.com/watch?v=vGCJ7diEtrw",
+            "https://www.youtube.com/watch?v=tUPPVhBBcoM"
           ]
         },
         {
