@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-28T15:47:40+08:00",
+  "updatedAt": "2026-09-29T09:48:22+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,21 +11,319 @@
     "other"
   ],
   "themeCounts": {
-    "models": 9,
-    "coding-tools": 15,
+    "models": 10,
+    "coding-tools": 16,
     "agents-oss": 27,
-    "security": 6,
-    "research": 39,
+    "security": 7,
+    "research": 40,
     "product-news": 1,
-    "other": 4
+    "other": 3
   },
   "hours": [
     {
-      "hourStart": "2026-09-28T15:00:00+08:00",
+      "hourStart": "2026-09-29T09:00:00+08:00",
       "label": {
-        "zh": "9月28日 15:00",
-        "en": "Sep 28 15:00",
-        "ja": "9月28日 15:00"
+        "zh": "9月29日 09:00",
+        "en": "Sep 29 09:00",
+        "ja": "9月29日 09:00"
+      },
+      "items": [
+        {
+          "id": "t330",
+          "theme": "models",
+          "title": {
+            "zh": "Claude Sonnet 5.5：中档 agentic coding 日用引擎（Terminal-Bench 70.6%）",
+            "en": "Claude Sonnet 5.5",
+            "ja": "Claude Sonnet 5.5"
+          },
+          "summary": {
+            "zh": "一级模型发布：同价更少 token·30%+ 更快；Terminal-Bench 4.0 70.6% vs Sonnet5 10.3%——harness 默认选型从 Opus 下沉到中档",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "一级模型发布：同价更少 token·30%+ 更快；Terminal-Bench 4.0 70.6% vs Sonnet5 10.3%——harness 默认选型从 Opus 下沉到中档",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "anthropic",
+              "url": "https://www.anthropic.com/claude-sonnet-5-5",
+              "title": "Introducing Claude Sonnet 5.5",
+              "brief": {
+                "zh": "Anthropic Sep28：Sonnet 5.5 同价档、少 token 可降任务成本至多 30%、速度 30%+；agentic coding Terminal-Bench 4.0 70.6%（vs Sonnet5 10.3%），定位日常/明确范围 coding partner。",
+                "en": "Anthropic’s Sonnet 5.5 keeps the same list price while claiming up to 30% lower cost per task and 30%+ speed; it posts 70.6% on Terminal-Bench 4.0 versus Sonnet 5’s 10.3% for everyday agentic coding.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "anthropic",
+            "hn"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://www.anthropic.com/claude-sonnet-5-5"
+          ]
+        },
+        {
+          "id": "t331",
+          "theme": "security",
+          "title": {
+            "zh": "Nvidia Open Agent Safety：OpenShell + 硅级 Sentry 看门狗",
+            "en": "Nvidia Open Agent Safety",
+            "ja": "Nvidia Open Agent Safety"
+          },
+          "summary": {
+            "zh": "把 sandbox 边界做到 harness 外开源 runtime + BlueField 硅级隔离——接 DNS/METR/breakout 主线的硬件验收件",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "把 sandbox 边界做到 harness 外开源 runtime + BlueField 硅级隔离——接 DNS/METR/breakout 主线的硬件验收件",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "techcrunch",
+              "url": "https://techcrunch.com/2026/09/28/nvidia-launches-new-platform-for-reining-in-rogue-ai-agents/",
+              "title": "Nvidia launches platform for reining in rogue AI agents",
+              "brief": {
+                "zh": "Nvidia Open Agent Safety：OpenShell 开源安全 runtime（模型+harness 外边界）+ Sentry 在 BlueField-4 上毫秒级隔离越界 agent。",
+                "en": "Nvidia’s Open Agent Safety Platform pairs open-source OpenShell runtime boundaries outside the model/harness with Sentry on BlueField-4 for millisecond quarantine of breakout behavior.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.cnbc.com/2026/09/28/nvidia-releases.html",
+              "title": "Nvidia wants to put a watchdog chip next to every AI agent",
+              "brief": {
+                "zh": "HN/CNBC：把「看门狗芯片」叙事推到每个 agent 旁——containment 从软件护栏扩到主机/网络强制。",
+                "en": "HN/CNBC coverage frames a hardware watchdog beside each agent, extending containment from model safeguards to host/network enforcement.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "techcrunch",
+            "hn",
+            "nvidia"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://techcrunch.com/2026/09/28/nvidia-launches-new-platform-for-reining-in-rogue-ai-agents/",
+            "https://www.cnbc.com/2026/09/28/nvidia-releases.html",
+            "https://developer.nvidia.com/blog/nvidia-open-agent-safety-platform-a-reference-for-continuous-in-silicon-agent-monitoring/"
+          ]
+        },
+        {
+          "id": "t324",
+          "theme": "research",
+          "title": {
+            "zh": "LoRA Skills READ：新技能只读旧技能、禁止写回",
+            "en": "LoRA Skills READ",
+            "ja": "LoRA Skills READ"
+          },
+          "summary": {
+            "zh": "LoRA 技能组合：规范因子+单向耦合，新 skill 只读旧子空间不写回——补位 SkillEvoReg/抽象梯的拼装干扰",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "LoRA 技能组合：规范因子+单向耦合，新 skill 只读旧子空间不写回——补位 SkillEvoReg/抽象梯的拼装干扰",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.31600",
+              "title": "New LoRA Skills Should Read but Never Write",
+              "brief": {
+                "zh": "「深耕：skills/LoRA」READ：把适配器规范成平衡因子，新技能只读旧技能输入子空间、禁止写回输出子空间；追加时只训耦合矩阵新行，合成进基座无推理开销。",
+                "en": "READ composes LoRA skills by canonicalizing adapters and learning one-way couplings so a new skill can read old input subspaces but never write into their outputs; only the new coupling row is trained and the update folds into base weights.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.31600"
+          ]
+        },
+        {
+          "id": "t325",
+          "theme": "research",
+          "title": {
+            "zh": "ToolSearcher：大规模工具选择的 agentic RL",
+            "en": "ToolSearcher",
+            "ja": "ToolSearcher"
+          },
+          "summary": {
+            "zh": "仓库级工具库下搜/辨/组工具立为 RL 新挑战；类别约束判别+事件级搜索+轨迹信用——coding-agent tooling 面",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "仓库级工具库下搜/辨/组工具立为 RL 新挑战；类别约束判别+事件级搜索+轨迹信用——coding-agent tooling 面",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30906",
+              "title": "ToolSearcher: Optimizing Tool Selection at Scale via Reinforcement Learning",
+              "brief": {
+                "zh": "「深耕：tool-selection」ToolSearcher 用 RL 做大规模多轮工具搜索与兼容组合：类别约束判别、事件级搜索建模、轨迹对齐信用分配；StableToolBench/AppWorld 优于强基线。",
+                "en": "ToolSearcher frames large-scale tool selection as agentic RL with category-constrained discrimination, event-level search modeling, and trajectory-aligned credit assignment for multi-turn search and compatible composition.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30906"
+          ]
+        },
+        {
+          "id": "t326",
+          "theme": "research",
+          "title": {
+            "zh": "LLM Parkinsonism / GEC：执行控制失灵与停不住",
+            "en": "LLM Parkinsonism / GEC",
+            "ja": "LLM Parkinsonism / GEC"
+          },
+          "summary": {
+            "zh": "把 agent-loop「停不住」命名为 Parkinsonism；GEC 拆提案与项目级停止权——近同等成功率下砍 ~36% token",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "把 agent-loop「停不住」命名为 Parkinsonism；GEC 拆提案与项目级停止权——近同等成功率下砍 ~36% token",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30662",
+              "title": "LLM Parkinsonism: Executive-Control Failure, Token-Inefficient Persistence, and an Uncertainty-Aware Global Executive Control Architecture for Autonomous Language-Model Agents",
+              "brief": {
+                "zh": "「深耕：executive-control」用非临床隐喻命名目标漂移/复杂度堆积/终止失败；GEC 把提案生成与项目级停止权拆开，matched-candidate 基准上成功率近平、均 token 降约 36%。",
+                "en": "Names token-inefficient post-goal persistence as LLM Parkinsonism and proposes GEC to separate proposal generation from project-level stopping; matched-candidate sims keep success while cutting mean tokens ~36%.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30662"
+          ]
+        },
+        {
+          "id": "t332",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Google Gemini：Gems → skills（11/17 迁移）",
+            "en": "Google Gemini",
+            "ja": "Google Gemini"
+          },
+          "summary": {
+            "zh": "大厂把自定义 agent 人设收成可组合 slash-skills——与站内 SkillOpt/SkillGym/CF skill 同构产品化",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "大厂把自定义 agent 人设收成可组合 slash-skills——与站内 SkillOpt/SkillGym/CF skill 同构产品化",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "techcrunch",
+              "url": "https://techcrunch.com/2026/09/28/google-is-killing-off-geminis-gems-in-favor-of-skills/",
+              "title": "Google is killing off Gemini’s Gems in favor of skills",
+              "brief": {
+                "zh": "Gemini App 将于 2026-11-17 起用 skills 取代 Gems：可 slash 调用、可组合，自动迁移——任务 agent 人设收成 skills 层。",
+                "en": "Gemini will replace Gems with slash-invocable, composable skills starting Nov 17, 2026, with auto-migration—consolidating task-agent personas into a skills layer.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "techcrunch"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://techcrunch.com/2026/09/28/google-is-killing-off-geminis-gems-in-favor-of-skills/"
+          ]
+        },
+        {
+          "id": "t333",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Coding is not solved：生成廉价，验证/所有权仍贵",
+            "en": "Coding is not solved",
+            "ja": "Coding is not solved"
+          },
+          "summary": {
+            "zh": "HN 高互动工程批判：明确点名 harness/skills/MCP/agent-loop——代码生成≠软件完成",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "HN 高互动工程批判：明确点名 harness/skills/MCP/agent-loop——代码生成≠软件完成",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://blog.alexewerlof.com/p/coding-is-not-solved",
+              "title": "Coding is not solved",
+              "brief": {
+                "zh": "HN 409/427：生成代码只是廉价部分；所有权、可靠性、安全、维护仍在，并直接连到 harness/skills/MCP/多 agent 反馈环。",
+                "en": "High-engagement essay argues code generation is the cheap part; ownership, reliability, security, and maintenance remain—and explicitly ties bottlenecks to harnesses, skills, MCP, and agent loops.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://blog.alexewerlof.com/p/coding-is-not-solved"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-09-28T16:00:00+08:00",
+      "label": {
+        "zh": "9月28日 16:00",
+        "en": "Sep 28 16:00",
+        "ja": "9月28日 16:00"
       },
       "items": [
         {
@@ -33,12 +331,12 @@
           "theme": "security",
           "title": {
             "zh": "Google MCP Toolbox SSRF（CVE-2026-14540）：agent 工具路径可打内网",
-            "en": "Google MCP Toolbox SSRF（CVE-2026-14540）",
-            "ja": "Google MCP Toolbox SSRF（CVE-2026-14540）"
+            "en": "SSRF on the MCP Tool Path: Google MCP Toolbox and the HTTP Egress Boundary",
+            "ja": "SSRF on the MCP Tool Path: Google MCP Toolbox and the HTTP Egress Boundary"
           },
           "summary": {
             "zh": "MCP/agent 工具路径 SSRF：prompt 可控重定向打到内网/metadata——工具边界必须默认拦私网",
-            "en": "",
+            "en": "Reading CVE-2026-14540 / GHSA-3x3x-8ffg-ghcv: why SSRF (CWE-918) on MCP HTTP tool paths matters for agents; SSRFGuard’s default-deny for private networks; why MCP tool servers sit outside classic SCA call graphs; upgrade to 1.5.0+ and config knobs.",
             "ja": ""
           },
           "judgment": {
@@ -83,14 +381,71 @@
             "cve"
           ],
           "score": 5,
-          "status": "shortlisted",
+          "status": "published",
           "externalUrls": [
             "https://anas-security-portfolio.vercel.app/google-mcp-ssrf.html",
             "https://www.cve.org/CVERecord?id=CVE-2026-14540",
             "https://github.com/advisories/GHSA-3x3x-8ffg-ghcv",
             "https://github.com/googleapis/mcp-toolbox/pull/3448"
-          ]
+          ],
+          "blog": {
+            "zh": "/cn/blog/google-mcp-toolbox-ssrf-tool-path-boundary/",
+            "en": "/blog/google-mcp-toolbox-ssrf-tool-path-boundary/"
+          }
         },
+        {
+          "id": "t299",
+          "theme": "research",
+          "title": {
+            "zh": "Coding Agents 成本低效行为：检索冗余·脚本重复·测重跑",
+            "en": "Three Cost-Wasting Habits in Coding Agents—and Why Developer Skills Beat Synthesized Ones",
+            "ja": "Three Cost-Wasting Habits in Coding Agents—and Why Developer Skills Beat Synthesized Ones"
+          },
+          "summary": {
+            "zh": "首次系统刻画 Claude Code/Mini-SWE 轨迹成本坑；开发者 skill 可降本~41.7%——harness/skill 工程刚需",
+            "en": "Reading Purdue arXiv:2609.30725: across 1,200 Claude Code and Mini-SWE-Agent trajectories, three behaviors hit 79–98% of tasks and up to 22.75% of task cost; structure-aware retrieval can raise cost 28.14%; developer-designed skills cut ~2× agent-synthesized skills.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "首次系统刻画 Claude Code/Mini-SWE 轨迹成本坑；开发者 skill 可降本~41.7%——harness/skill 工程刚需",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30725",
+              "title": "Analyzing and Mitigating Cost-Inefficient Behaviors in Coding Agents",
+              "brief": {
+                "zh": "「深耕：coding-agent cost」分析 1.2k 轨迹中的 subsumed retrieval、相似脚本重复、测试重跑；开发者设计 skill 降本至约 41.7%，优于 agent 自合成 skill。",
+                "en": "First study of recurring cost-inefficient coding-agent behaviors across 1,200 Claude Code and Mini-SWE-Agent trajectories; developer-designed skills cut cost to about 41.7%, beating agent-synthesized skills.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30725"
+          ],
+          "blog": {
+            "zh": "/cn/blog/coding-agents-cost-inefficient-behaviors/",
+            "en": "/blog/coding-agents-cost-inefficient-behaviors/"
+          }
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-09-28T15:00:00+08:00",
+      "label": {
+        "zh": "9月28日 15:00",
+        "en": "Sep 28 15:00",
+        "ja": "9月28日 15:00"
+      },
+      "items": [
         {
           "id": "t298",
           "theme": "research",
@@ -128,45 +483,6 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://arxiv.org/abs/2609.30967"
-          ]
-        },
-        {
-          "id": "t299",
-          "theme": "research",
-          "title": {
-            "zh": "Coding Agents 成本低效行为：检索冗余·脚本重复·测重跑",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "首次系统刻画 Claude Code/Mini-SWE 轨迹成本坑；开发者 skill 可降本~41.7%——harness/skill 工程刚需",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "首次系统刻画 Claude Code/Mini-SWE 轨迹成本坑；开发者 skill 可降本~41.7%——harness/skill 工程刚需",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30725",
-              "title": "Analyzing and Mitigating Cost-Inefficient Behaviors in Coding Agents",
-              "brief": {
-                "zh": "「深耕：coding-agent cost」分析 1.2k 轨迹中的 subsumed retrieval、相似脚本重复、测试重跑；开发者设计 skill 降本至约 41.7%，优于 agent 自合成 skill。",
-                "en": "First study of recurring cost-inefficient coding-agent behaviors across 1,200 Claude Code and Mini-SWE-Agent trajectories; developer-designed skills cut cost to about 41.7%, beating agent-synthesized skills.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30725"
           ]
         },
         {
@@ -2502,46 +2818,6 @@
           "externalUrls": [
             "https://techcrunch.com/2026/09/25/unsecured-openai-agents-posted-53-user-images-on-the-internet-without-the-labs-knowledge/"
           ]
-        },
-        {
-          "id": "t203",
-          "theme": "research",
-          "title": {
-            "zh": "ExplorationBench：可验证 Alien Worlds 上测探索",
-            "en": "ExplorationBench",
-            "ja": "ExplorationBench"
-          },
-          "summary": {
-            "zh": "与先验冲突的可执行 Alien Worlds 拆开「回忆 vs 探索」；自主探针设计显著优于回放——科学发现代理评测缺口",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "与先验冲突的可执行 Alien Worlds 拆开「回忆 vs 探索」；自主探针设计显著优于回放——科学发现代理评测缺口",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30199",
-              "title": "ExplorationBench: Measuring AI Systems' Exploration in Verifiable Alien Worlds",
-              "brief": {
-                "zh": "「新芽：可验证探索」用与先验冲突的可执行 Alien Worlds（AlienCode/AlienLogic，140 题）把科学探索能力从回忆中拆开：最强轨迹 AlienCode 87.6%，无环境反馈≤11%；自主探针设计显著优于回放/固定探针。",
-                "en": "ExplorationBench evaluates exploration via executable Alien Worlds whose rules contradict priors yet are exactly verifiable. Best AlienCode trajectory hits 87.6% after four rounds vs ≤11% without environment feedback.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30199",
-            "https://www.explorationbench.com"
-          ]
         }
       ]
     },
@@ -3479,123 +3755,6 @@
             "https://www.deepseek.com/harness",
             "https://github.com/deepseek-ai/deepseek-harness"
           ]
-        },
-        {
-          "id": "t015",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "obra/superpowers：Agentic skills 框架",
-            "en": "obra/superpowers",
-            "ja": "obra/superpowers"
-          },
-          "summary": {
-            "zh": "Skills 方法论大体量；与 ECC/CF 同赛道",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Skills 方法论大体量；与 ECC/CF 同赛道",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/obra/superpowers",
-              "title": "obra/superpowers",
-              "brief": {
-                "zh": "Agentic skills framework and software-development methodology.",
-                "en": "Agentic skills framework and software-development methodology.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/obra/superpowers"
-          ]
-        },
-        {
-          "id": "t182",
-          "theme": "research",
-          "title": {
-            "zh": "PPTBench：Coding Agents 重建可编辑幻灯片/视觉世界",
-            "en": "PPTBench",
-            "ja": "PPTBench"
-          },
-          "summary": {
-            "zh": "Coding-agent 考场扩到结构化可编辑 PPTX；500 题四级 Agentic Judge，最强 67.8/中位 19.5——会写文件过不了语义门",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Coding-agent 考场扩到结构化可编辑 PPTX；500 题四级 Agentic Judge，最强 67.8/中位 19.5——会写文件过不了语义门",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.29718",
-              "title": "PPTBench: Can Coding Agents Reconstruct the Visual World through Structured, Editable Slides",
-              "brief": {
-                "zh": "「深耕候选：coding-agent」+「新芽：visual coding」把 coding agent 考场扩到可编辑 PPT 结构重建：500 道真实 arXiv 流程图、四级 Agentic Judge。31 配置最强仅 67.8、中位 19.5——会写合法 PPTX，却过不了语义/视觉门。站内 coding-agent 线的视觉结构压测。",
-                "en": "PPTBench asks coding agents to rebuild scientific flow diagrams as native editable PPTX. Across 500 tasks and 31 configs, the best score is 67.80 (median 19.47): agents emit valid files but fail semantic/visual gates, with text defects dominating residual error.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29718"
-          ]
-        },
-        {
-          "id": "t184",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "锁客的是 Harness 不是 Model（YT 论）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Harness 锁能力/锁客论；对接站内 Grow-Harness / agent-loop 深耕，可作对照短评素材",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Harness 锁能力/锁客论；对接站内 Grow-Harness / agent-loop 深耕，可作对照短评素材",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=pNmfMi-yjZk",
-              "title": "Build an agentic software factory: deep dive",
-              "brief": {
-                "zh": "explore：Builder.io 官方 agentic software factory 深潜；1天·~2万播，续 t016 agent-native 产品线。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "youtube"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.youtube.com/watch?v=k8jYOcQUB_A"
-          ]
         }
       ]
     },
@@ -4247,7 +4406,7 @@
         },
         {
           "id": "t124",
-          "theme": "other",
+          "theme": "agents-oss",
           "title": {
             "zh": "CLM vs Jev：Contrastive Language Models 抢决策 API",
             "en": "CLM vs Jev",
