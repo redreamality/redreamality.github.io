@@ -197,7 +197,7 @@ All content files must have proper frontmatter with:
 3. **新文 frontmatter**：优先复用已有 **canonical EN kebab-case slug**（如 `ai-agents`、`agent-harness`、`sdd`）；不要发明同义变体（`AI Agents` / `Agents` / `agents`）。展示名可在 UI / display map 本地化；slug 本身不编码语言。
 4. **路由现实不变**：`getTagCounts(lang)` 只统计 blog；**count ≥ 2** 才生成 `/tags/<tag>/`。非 blog 类型（Meditations 等）不得无条件链到 `/tags/.../`——见下方 Command and Test Pitfalls 中的 Meditations 条目，并交叉遵守本节。
 5. **大改主题 / 合并 / 重命名**：先由 Tag·体系起草，经 **博客头子** 审阅后再改 `tag-taxonomy.json`（及必要时 frontmatter）；未经站长明确要求不要 push master。
-6. **aliases**：仅用于分组归类（把仍在内容里的 Title Case / 同义字符串映射到 canonical）；链接仍指向实际存在路由的 tag 字符串。
+6. **aliases / 路由去重**：`getTagCounts` / `getTags` / tag `getStaticPaths` 经 `normalizeTag` 合并别名与大小写变体到 canonical slug；sitemap 过滤非 canonical 的 `/tags/<x>/`。链接一律用 canonical（`getTagHref`）。
 
 ### File Naming Conventions
 - Use kebab-case for filenames: `my-blog-post.md`

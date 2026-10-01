@@ -10,7 +10,30 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeOutboundLinks from './src/plugins/rehype-outbound-links.ts';
 import visualManifest from './src/data/visuals-manifest.json';
+import tagTaxonomy from './src/data/tag-taxonomy.json' with { type: 'json' };
 import { getLegacyBlogRedirectPaths } from './scripts/legacy-blog-redirects.mjs';
+
+/** Sitemap safety net: mirror normalizeTag without importing tag-taxonomy.ts (avoids i18n → astro:content). */
+const tagAliasMap = tagTaxonomy.aliases ?? {};
+const curatedTagSlugs = new Set();
+for (const theme of tagTaxonomy.themes ?? []) {
+  for (const cluster of theme.clusters ?? []) {
+    for (const node of cluster.tags ?? []) {
+      if (node.slug) curatedTagSlugs.add(node.slug);
+    }
+  }
+}
+function normalizeTagForSitemap(tag) {
+  if (tagAliasMap[tag]) return tagAliasMap[tag];
+  const lower = tag.toLowerCase();
+  if (tagAliasMap[lower]) return tagAliasMap[lower];
+  for (const [key, value] of Object.entries(tagAliasMap)) {
+    if (key.toLowerCase() === lower) return value;
+  }
+  if (curatedTagSlugs.has(lower)) return lower;
+  if (curatedTagSlugs.has(tag)) return tag;
+  return tag;
+}
 
 const siteUrl = 'https://redreamality.com';
 const legacyBlogRedirectPaths = getLegacyBlogRedirectPaths(fileURLToPath(new URL('./src/content/', import.meta.url)));
@@ -117,6 +140,18 @@ export default defineConfig({
         // legacy HTML Showcase redirects from the sitemap.
         if (unavailableVisualPaths.has(path)) return false;
         if (path.match(/^\/(?:cn\/|ja\/)?blog\/html\/agent-architecture-showcase\/?$/)) return false;
+
+        // Exclude alias/case-variant tag routes; keep locale prefixes and canonical slugs
+        const tagMatch = path.match(/^\/(?:cn\/|ja\/)?tags\/([^/]+)\/?$/);
+        if (tagMatch) {
+          let segment;
+          try {
+            segment = decodeURIComponent(tagMatch[1]);
+          } catch {
+            segment = tagMatch[1];
+          }
+          if (segment !== normalizeTagForSitemap(segment)) return false;
+        }
 
         return true;
       },

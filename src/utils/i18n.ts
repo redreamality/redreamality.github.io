@@ -1,4 +1,5 @@
 import { getCollection } from './content-collections';
+import { normalizeTag } from './tag-taxonomy';
 
 export type Language = 'zh' | 'en' | 'ja';
 
@@ -333,7 +334,8 @@ export async function getTagCounts(lang: Language): Promise<Record<string, numbe
   const allTags = posts.flatMap(post => post.data.tags || []);
   const counts: Record<string, number> = {};
   for (const tag of allTags) {
-    counts[tag] = (counts[tag] || 0) + 1;
+    const canonical = normalizeTag(tag);
+    counts[canonical] = (counts[canonical] || 0) + 1;
   }
   return counts;
 }
@@ -362,7 +364,10 @@ export async function getTags(lang: Language, minCount: number = 2): Promise<str
  */
 export async function getPostsByTag(tag: string, lang: Language) {
   const posts = await getBlogPosts(lang);
-  return posts.filter(post => post.data.tags?.includes(tag));
+  const canonical = normalizeTag(tag);
+  return posts.filter(post =>
+    (post.data.tags || []).some((t) => normalizeTag(t) === canonical)
+  );
 }
 
 /**

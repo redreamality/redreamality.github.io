@@ -447,7 +447,7 @@ export function getPremiumThemeTeasers(lang: TaxonomyLang, limit = 3): Array<{
   href: string;
 }> {
   const indexHref = tagsIndexPath(lang);
-  const premiumIds = ['agent-systems', 'specs-sdd', 'rsi-complex-jev', 'coding-tools', 'finance'];
+  const premiumIds = ['agent-systems', 'specs-sdd', 'rsi-complex', 'models-runtimes', 'coding-tools', 'finance'];
   return [...taxonomy.themes]
     .filter((t) => premiumIds.includes(t.id) && !t.muted)
     .sort((a, b) => a.order - b.order)

@@ -10,6 +10,7 @@ import {
   getTagNode,
   pickFeaturedPosts,
   normalizeTag,
+  getTagHref,
 } from '../../utils/tag-taxonomy';
 
 export async function getStaticPaths() {
@@ -20,7 +21,7 @@ export async function getStaticPaths() {
     params: { tag },
     props: {
       posts: posts
-        .filter((post) => post.data.tags?.includes(tag))
+        .filter((post) => (post.data.tags || []).some((t) => normalizeTag(t) === tag))
         .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
       lang: 'en' as Language,
       allTags: tags,
@@ -61,9 +62,10 @@ const content = {
 } as const;
 
 const currentContent = content[lang];
+const canonicalURL = new URL(getTagHref(canonical, lang), Astro.site).toString();
 ---
 
-<Layout title={`${displayName} | ${currentContent.pageSuffix}`}>
+<Layout title={`${displayName} | ${currentContent.pageSuffix}`} canonicalURL={canonicalURL}>
   <main class="mx-auto max-w-3xl px-4 py-10 md:py-14">
     <TagBreadcrumb tag={tag!} lang={lang} />
 
