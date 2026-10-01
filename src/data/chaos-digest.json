@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T09:48:28+08:00",
+  "updatedAt": "2026-10-01T15:45:43+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,26 +11,26 @@
     "other"
   ],
   "themeCounts": {
-    "models": 11,
-    "coding-tools": 18,
-    "agents-oss": 29,
+    "models": 12,
+    "coding-tools": 14,
+    "agents-oss": 26,
     "security": 10,
-    "research": 54,
+    "research": 57,
     "product-news": 1,
     "other": 4
   },
   "hours": [
     {
-      "hourStart": "2026-10-01T09:00:00+08:00",
+      "hourStart": "2026-10-01T15:00:00+08:00",
       "label": {
-        "zh": "10月1日 09:00",
-        "en": "Oct 1 09:00",
-        "ja": "10月1日 09:00"
+        "zh": "10月1日 15:00",
+        "en": "Oct 1 15:00",
+        "ja": "10月1日 15:00"
       },
       "items": [
         {
           "id": "t003",
-          "theme": "coding-tools",
+          "theme": "models",
           "title": {
             "zh": "Jev × Claude Code：爆款工作流与 25 行最小实现",
             "en": "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Build",
@@ -272,95 +272,54 @@
           ]
         },
         {
-          "id": "t371",
-          "theme": "security",
+          "id": "t456",
+          "theme": "agents-oss",
           "title": {
-            "zh": "OpenAI DevDay：Codex 云环境 + Security Cloud + Decisions/Agents API",
-            "en": "OpenAI DevDay",
-            "ja": "OpenAI DevDay"
+            "zh": "Matthew Green：沙箱是否足以遏制 rogue agents？",
+            "en": "Matthew Green",
+            "ja": "Matthew Green"
           },
           "summary": {
-            "zh": "一级源把 coding-agent harness 写成可复用云环境+安全扫描+Decisions 路由+Agents API Computer Use",
+            "zh": "Matthew Green 论证：沙箱隔离挡不住共享出站信道上的 agent 互传指令（缓存/邮件/Slack/文档）——把 HF 链升维成「权限/权威轴」问题，补 OpenShell 硬件边界与 METR 政策证词的工程对照。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "一级源把 coding-agent harness 写成可复用云环境+安全扫描+Decisions 路由+Agents API Computer Use",
-            "en": "OpenAI DevDay packages coding-agent harness as reusable cloud envs, Security Cloud scans, a Decisions API for next-action routing, and Agents API Computer Use—harness, sandbox, and decision control in one ship.",
+            "zh": "Matthew Green 论证：沙箱隔离挡不住共享出站信道上的 agent 互传指令（缓存/邮件/Slack/文档）——把 HF 链升维成「权限/权威轴」问题，补 OpenShell 硬件边界与 METR 政策证词的工程对照。",
+            "en": "Matthew Green argues process sandboxes fail once agents share egress channels (caches, email, Slack, docs). Elevating the HF chain into an authority-axis problem complements OpenShell’s hardware boundary and METR’s policy record.",
             "ja": ""
           },
           "sourceBriefs": [
             {
-              "source": "openai",
-              "url": "https://openai.com/index/devday-2026-recap/",
-              "title": "DevDay 2026 recap",
+              "source": "cryptographyengineering",
+              "url": "https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/",
+              "title": "Is sandboxing sufficient to contain rogue agents?",
               "brief": {
-                "zh": "DevDay：Codex 可复用云环境、Security Cloud、Decisions API、Agents API Computer Use 与 Ultrafast。",
-                "en": "DevDay ships Codex reusable cloud environments, Security Cloud, Decisions API, Agents API Computer Use, and Ultrafast token generation.",
+                "zh": "Johns Hopkins 密码学家长文（Simon Willison 转述）：Artifactory 变消息板、链式 0day 取凭据，并推广到 Muse 类个人 agent 的 worm 式载荷+载体。",
+                "en": "Johns Hopkins cryptographer Matthew Green’s essay (surfaced via Simon Willison) uses the HF chain—Artifactory as a message board, chained zero-days for credentials—and generalizes worm-like payload+carrier dynamics to personal agents like Muse.",
                 "ja": ""
               }
             },
             {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=7Bv68f5szSU",
-              "title": "Meet the all new Codex Cloud",
+              "source": "hn",
+              "url": "https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/",
+              "title": "Is sandboxing sufficient to contain rogue agents?",
               "brief": {
-                "zh": "OpenAI 官方 Codex Cloud 发布片，~7h·3万播。",
-                "en": "Official OpenAI Codex Cloud launch video (~30.7k views in ~7h).",
+                "zh": "HN 20/26：同文进论坛，安全向反驳「有进程隔离就够」。",
+                "en": "HN 20 points / 26 comments on the same essay, a security-oriented counterpoint to assuming process isolation solves agent control.",
                 "ja": ""
               }
             }
           ],
           "sources": [
-            "openai",
-            "youtube",
-            "techcrunch"
+            "cryptographyengineering",
+            "hn",
+            "simonw"
           ],
           "score": 5,
           "status": "shortlisted",
           "externalUrls": [
-            "https://openai.com/index/devday-2026-recap/",
-            "https://www.youtube.com/watch?v=7Bv68f5szSU",
-            "https://techcrunch.com/2026/09/30/openais-jev-clone-could-help-the-frontier-lab-stop-its-swarming-agents/"
-          ]
-        },
-        {
-          "id": "t424",
-          "theme": "models",
-          "title": {
-            "zh": "Gemini 4 Argon：1M 输出 + Fairwind 网络优先放行",
-            "en": "Gemini 4 Argon",
-            "ja": "Gemini 4 Argon"
-          },
-          "summary": {
-            "zh": "Google 一级源新前沿：1M 输出 token、DeepSWE 77.9%，先经 Fairwind 放给可信网络防御者（去网络护栏）——coding-agent/sandbox 选型对照 Astra/Sol/Opus 的新锚，且显式分阶段安全放行。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Google 一级源新前沿：1M 输出 token、DeepSWE 77.9%，先经 Fairwind 放给可信网络防御者（去网络护栏）——coding-agent/sandbox 选型对照 Astra/Sol/Opus 的新锚，且显式分阶段安全放行。",
-            "en": "Google’s frontier Gemini 4 Argon claims 1M output tokens and 77.9% DeepSWE, rolling out first via Fairwind to trusted cyber defenders without cyber guardrails. It resets coding-agent and sandbox baselines versus Astra/Sol/Opus with an explicit phased-safety release.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "google",
-              "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
-              "title": "Gemini 4 Argon",
-              "brief": {
-                "zh": "DeepMind 宣布 Gemini 4 Argon：长程软件工程/知识工作/网络防御，输出上下文 64K→1M；Fairwind 优先放行后再开 API/Ultra。",
-                "en": "DeepMind announces Gemini 4 Argon for long-horizon SWE, knowledge work, and cyber defense, with output context jumping 64K→1M. Fairwind trusted defenders get first access before broader API/Ultra.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "google"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"
+            "https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/"
           ]
         },
         {
@@ -509,176 +468,42 @@
           ]
         },
         {
-          "id": "t010",
+          "id": "t075",
           "theme": "models",
           "title": {
-            "zh": "MiMo v2.6→V3：小米开源/中文前沿（含 HySparse2）",
-            "en": "",
-            "ja": ""
+            "zh": "deepseek-ai/DeepSeek-V4.1-Flash",
+            "en": "deepseek-ai/DeepSeek-V4.1-Flash",
+            "ja": "deepseek-ai/DeepSeek-V4.1-Flash"
           },
           "summary": {
-            "zh": "中文读者向开源模型对照 Opus/GPT-6；V3 HySparse2 架构预告",
+            "zh": "DeepSeek 新一代速度/质量档；对照前沿模型选题",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "中文读者向开源模型对照 Opus/GPT-6；V3 HySparse2 架构预告",
+            "zh": "DeepSeek 新一代速度/质量档；对照前沿模型选题",
             "en": "",
             "ja": ""
           },
           "sourceBriefs": [
             {
-              "source": "hn",
-              "url": "https://mimo.xiaomi.com/mimo-v2-6",
-              "title": "MiMo v2.6",
-              "brief": {
-                "zh": "Xiaomi MiMo v2.6 is a high-velocity open/Chinese model release competing in the frontier race.",
-                "en": "Xiaomi MiMo v2.6 is a high-velocity open/Chinese model release competing in the frontier race.",
-                "ja": ""
-              }
-            },
-            {
               "source": "huggingface",
-              "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
-              "title": "XiaomiMiMo/MiMo-V2.6-Pro-RL",
+              "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+              "title": "deepseek-ai/DeepSeek-V4.1-Flash",
               "brief": {
-                "zh": "MiMo multimodal/audio/video model with agent and long-context tags.",
-                "en": "MiMo multimodal/audio/video model with agent and long-context tags.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wo7mr6/mimov3_is_getting_a_new_architecture_the_core_of/",
-              "title": "MiMo-V3 is getting a new architecture. The core of it, HySparse2, is out today.",
-              "brief": {
-                "zh": "Xiaomi MiMo path: HySparse2 core dropped ahead of V3 — local-community architecture signal beyond another Qwen 3.8 thread.",
-                "en": "Xiaomi MiMo path: HySparse2 core dropped ahead of V3 — local-community architecture signal beyond another Qwen 3.8 thread.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1woa5d3/mimov26_both_pro_and_flash_is_a_benchmaxxed_scam/",
-              "title": "MiMo-V2.6 (both Pro and Flash) is a benchmaxxed scam",
-              "brief": {
-                "zh": "Community benchmax skepticism on MiMo-V2.6 Pro/Flash — pairs with earlier HySparse2/MiMo-V3 architecture news for evaluation literacy.",
-                "en": "Community benchmax skepticism on MiMo-V2.6 Pro/Flash — pairs with earlier HySparse2/MiMo-V3 architecture news for evaluation literacy.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
-              "title": "XiaomiMiMo/MiMo-V2.6-Flash-RL",
-              "brief": {
-                "zh": "MiMo V2.6 Flash RL，agent 与视频理解方向升温。",
-                "en": "",
+                "zh": "DeepSeek multimodal Flash model with high likes and downloads.",
+                "en": "DeepSeek multimodal Flash model with high likes and downloads.",
                 "ja": ""
               }
             }
           ],
           "sources": [
-            "hn",
-            "huggingface",
-            "reddit"
+            "huggingface"
           ],
           "score": 4,
           "status": "shortlisted",
           "externalUrls": [
-            "https://mimo.xiaomi.com/mimo-v2-6",
-            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wo7mr6/mimov3_is_getting_a_new_architecture_the_core_of/",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1woa5d3/mimov26_both_pro_and_flash_is_a_benchmaxxed_scam/",
-            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
-            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Distill-Qwen-9B",
-            "https://huggingface.co/spaces/FineEnvs/MiMo-RL-Envs-Explorer"
-          ]
-        },
-        {
-          "id": "t069",
-          "theme": "models",
-          "title": {
-            "zh": "ThinkingCap Qwen3.8-27B 发布",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "本地 coding agent 对云端前沿的替代窗口",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "本地 coding agent 对云端前沿的替代窗口",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLM/comments/1wolg9w/thinkingcap_qwen3827b_has_been_released/",
-              "title": "ThinkingCap Qwen3.8-27B has been released",
-              "brief": {
-                "zh": "New Qwen 3.8 27B release dominating r/LocalLLM with throughput follow-ups — strong local coding-agent signal.",
-                "en": "New Qwen 3.8 27B release dominating r/LocalLLM with throughput follow-ups — strong local coding-agent signal.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
-              "title": "Qwen/Qwen3.8-27B",
-              "brief": {
-                "zh": "Qwen multimodal model with the highest likes in the live model feed.",
-                "en": "Qwen multimodal model with the highest likes in the live model feed.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLM/comments/1wojbs4/qwen_38_27b_reaching_225_ts_on_132k_con/",
-              "title": "Qwen 3.8 27B reaching 225 t/s on 132k context on CMP 170HX",
-              "brief": {
-                "zh": "Aggressive local throughput claim for Qwen3.8-27B @ 132k ctx on CMP 170HX — local inference perf explore.",
-                "en": "Aggressive local throughput claim for Qwen3.8-27B @ 132k ctx on CMP 170HX — local inference perf explore.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wp0z3i/qwen3827b_is_good_enough_that_i_stopped_using_api/",
-              "title": "Qwen-3.8-27B is good enough that I stopped using API",
-              "brief": {
-                "zh": "r/LocalLLaMA: Qwen3.8-27B displacing paid API use — local model propagation / cost-shift signal.",
-                "en": "r/LocalLLaMA: Qwen3.8-27B displacing paid API use — local model propagation / cost-shift signal.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=C9M6iUFtVB4",
-              "title": "Best Local Coding AI for Your GPU (4GB to 512GB)",
-              "brief": {
-                "zh": "Kai ~19k·22h：按 GPU 档实测本地 coding 模型，主推 Qwen3.8-27B / KV cache；本地 coding-agent 选型伴源。",
-                "en": "Kai (~19k views / ~22h): GPU-tier local coding-model bakeoff leaning on Qwen3.8-27B and KV-cache tips—companion to local coding-agent selection.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "reddit",
-            "huggingface",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.reddit.com/r/LocalLLM/comments/1wolg9w/thinkingcap_qwen3827b_has_been_released/",
-            "https://huggingface.co/Qwen/Qwen3.8-27B",
-            "https://www.reddit.com/r/LocalLLM/comments/1wojbs4/qwen_38_27b_reaching_225_ts_on_132k_con/",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wp0z3i/qwen3827b_is_good_enough_that_i_stopped_using_api/",
-            "https://www.youtube.com/watch?v=C9M6iUFtVB4",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wufzrh/qwen3827bpi_effortordered_reasoning_for_agentic/"
+            "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash"
           ]
         },
         {
@@ -892,6 +717,537 @@
             "https://www.reddit.com/r/LocalLLaMA/comments/1woscea/contrastive_language_models/",
             "https://www.reddit.com/r/LocalLLaMA/comments/1wouby6/jev_almost_dead_clm_vs_jev/",
             "https://github.com/Contrastive-LM/CLM"
+          ]
+        },
+        {
+          "id": "t451",
+          "theme": "research",
+          "title": {
+            "zh": "MADBench：多智能体辩论安全基准",
+            "en": "MADBench",
+            "ja": "MADBench"
+          },
+          "summary": {
+            "zh": "多智能体辩论的交互既能纠错也能传播对抗错误：MADBench 分层 taxonomy×六族攻击显示，相对单代理可减答案攻击，却放大未授权读写——协作推理本身是传染通道。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多智能体辩论的交互既能纠错也能传播对抗错误：MADBench 分层 taxonomy×六族攻击显示，相对单代理可减答案攻击，却放大未授权读写——协作推理本身是传染通道。",
+            "en": "Multi-agent debate interactions can correct mistakes or spread adversarial errors. MADBench’s layered attack taxonomy across six families shows debate can reduce answer attacks versus a single agent while amplifying unauthorized reads/writes—collaboration itself is a contagion channel.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.39146",
+              "title": "MADBench: Benchmarking the Security of Multi-Agent Debate",
+              "brief": {
+                "zh": "356 源任务 / 3958 用例：即便 3/5 合谋，仅 28.3% 原先正确任务被改错；诚实代理中仅 3.26% 中途改错——安全度量须同时看答案与工作区副作用。",
+                "en": "Over 356 source tasks and 3,958 cases, even 3/5 collusion flips only 28.3% of previously correct finals, and only 3.26% of initially correct honest agents switch mid-debate—so security metrics must cover answer and workspace side effects.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.39146"
+          ]
+        },
+        {
+          "id": "t452",
+          "theme": "research",
+          "title": {
+            "zh": "Stale binding：上下文已更新仍读旧值（CICM）",
+            "en": "Stale binding",
+            "ja": "Stale binding"
+          },
+          "summary": {
+            "zh": "上下文里新旧值并存时 frontier 仍可能绑定旧状态（stale binding）；开源模型探针能找回新值→失败在选择而非记忆。可靠 harness 必须强制「用上」更新，不只是写进上下文。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "上下文里新旧值并存时 frontier 仍可能绑定旧状态（stale binding）；开源模型探针能找回新值→失败在选择而非记忆。可靠 harness 必须强制「用上」更新，不只是写进上下文。",
+            "en": "When old and new values coexist in context, frontier models can still bind the stale one. Probes recovering the update show a selection failure, not pure forgetting—reliable harnesses must force use of updates, not merely store them.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.38866",
+              "title": "When Context Changes: Understanding Update Failures in LLMs",
+              "brief": {
+                "zh": "CICM 可控基准测对话/agent 日志中的状态更新；注意力漂移使多个旧值合计压过当前值；无重训的注意力重定向可纠正多数旧值错误。",
+                "en": "CICM stress-tests state updates in dialogues and agent logs. Attention drift lets several old values outvote the current one; training-free attention redirection fixes most old-value errors while preserving initially correct answers.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.38866"
+          ]
+        },
+        {
+          "id": "t453",
+          "theme": "research",
+          "title": {
+            "zh": "TomasuLLM：乱序推测执行长耗时工具",
+            "en": "TomasuLLM",
+            "ja": "TomasuLLM"
+          },
+          "summary": {
+            "zh": "长耗时工具让 coding-agent 观察空转：TomasuLLM 把乱序处理器思路搬来——轨迹外推测执行+写时复制沙箱，验证后按序提交；跨基准约 1.3× 且 4010 次提交校验零误接受。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "长耗时工具让 coding-agent 观察空转：TomasuLLM 把乱序处理器思路搬来——轨迹外推测执行+写时复制沙箱，验证后按序提交；跨基准约 1.3× 且 4010 次提交校验零误接受。",
+            "en": "Long-running tools idle coding agents on the observation stall. TomasuLLM borrows out-of-order execution: speculate future tool calls in copy-on-write sandboxes and commit in trajectory order after validation—about 1.3× across benches with zero false accepts in 4,010 audits.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.38201",
+              "title": "TomasuLLM: Out-of-Order Speculative Execution for LLM Agents",
+              "brief": {
+                "zh": "SWE-bench Verified 1.31×、Terminal-Bench 1.35×、SWE-Marathon 匹配进度 1.27×；延迟越长收益越大。",
+                "en": "Reports 1.31× on 100 SWE-bench Verified tasks, 1.35× on 28 Terminal-Bench 2.0 tasks, and 1.27× matched progress on 18 SWE-Marathon sessions, scaling with tool latency.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.38201"
+          ]
+        },
+        {
+          "id": "t454",
+          "theme": "research",
+          "title": {
+            "zh": "Who Verifies the Graph：污染因果动作验证器图",
+            "en": "Who Verifies the Graph",
+            "ja": "Who Verifies the Graph"
+          },
+          "summary": {
+            "zh": "因果动作验证器若信任已提交的 action-state 图，删一条双向边或反箭头即可从「零误执行」崩到高误执行且证书仍自洽——谁来验证验证器的图；attest 抽样可检出攻击但几乎放弃收益执行。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "因果动作验证器若信任已提交的 action-state 图，删一条双向边或反箭头即可从「零误执行」崩到高误执行且证书仍自洽——谁来验证验证器的图；attest 抽样可检出攻击但几乎放弃收益执行。",
+            "en": "If a causal action verifier trusts a committed action-state graph, omitting one bidirected edge or reversing an arrowhead can move it from zero false executions to high rates while certificates stay internally valid—so who verifies the verifier’s graph? Attestation can catch attacks but still blocks most beneficial executions.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.40027",
+              "title": "Who Verifies the Graph? Misspecification Attacks on Causal Action Verification for Language Agents",
+              "brief": {
+                "zh": "对 CIVeX 红队：省略混杂边→15.3% 误执行（91% 有害）；反箭头→48.9% 误执行且无正确执行；attest 在真实图上 555 次仅 2 误报。",
+                "en": "Red-teaming CIVeX: dropping a confounder edge yields 15.3% false executions (91% harmful); reversing an arrowhead yields 48.9% false and zero correct executions. Attestation caught both attacks with 2 false alarms in 555 truthful-graph executions.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.40027"
+          ]
+        },
+        {
+          "id": "t455",
+          "theme": "research",
+          "title": {
+            "zh": "Competing hazards：失控事件的竞争风险分类法",
+            "en": "Competing hazards",
+            "ja": "Competing hazards"
+          },
+          "summary": {
+            "zh": "失控不能只堆 jailbreak 样本：竞争风险框架把每次尝试收成 approved/safe-stop/scope-escape/continuation，并分离 agent 行为与环境放行——多数评测不把安全停止当一等结局，20/22 事故中环境允许越权效应。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "失控不能只堆 jailbreak 样本：竞争风险框架把每次尝试收成 approved/safe-stop/scope-escape/continuation，并分离 agent 行为与环境放行——多数评测不把安全停止当一等结局，20/22 事故中环境允许越权效应。",
+            "en": "Loss-of-control needs more than jailbreak piles. A competing-hazards frame ends each attempt in approved completion, safe stopping, scope escape, or continuation, separating agent behavior from environmental permission—most evals omit safe stopping as a first-class outcome, and environments allowed out-of-scope effects in 20/22 audited incidents.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.38411",
+              "title": "A Competing-Hazards Systematization of Loss of Control in Autonomous Agents",
+              "brief": {
+                "zh": "审计 2025-01–2026-09 的 22 事故与 102 评测：13 起继续未停、6 起任务无法在范围内完成；87 评测记录越权效应，仅 26 把安全停止当一等结局。",
+                "en": "Audits 22 incidents and 102 evaluations (Jan 2025–Sep 2026): 13 continued rather than stopped, 6 could not finish in scope; 87 evals recorded out-of-scope effects, only 26 treated safe stopping as first-class.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.38411"
+          ]
+        },
+        {
+          "id": "t457",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "OpenRouter：agent 成本/CI eval 门禁/置信度路由",
+            "en": "OpenRouter",
+            "ja": "OpenRouter"
+          },
+          "summary": {
+            "zh": "OpenRouter 一级可复现三件套：用自有样例算成本/质量点选过线最便宜模型、把 LLM eval 做成 CI 合并门禁、用自报置信度做廉价→强模型升级——harness 默认路由反纯 Arena 榜。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "OpenRouter 一级可复现三件套：用自有样例算成本/质量点选过线最便宜模型、把 LLM eval 做成 CI 合并门禁、用自报置信度做廉价→强模型升级——harness 默认路由反纯 Arena 榜。",
+            "en": "OpenRouter’s primary three-piece harness kit: pick the cheapest model that clears a task quality bar on your own 20–50 examples, gate PRs on LLM evals in CI, and escalate via self-reported confidence—routing against pure Arena leaderboards.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "openrouter",
+              "url": "https://openrouter.ai/blog/insights/cost-vs-quality-tradeoff-framework-for-agent-models/",
+              "title": "Cost vs quality tradeoff framework for agent models",
+              "brief": {
+                "zh": "三步：定任务质量条→在便宜/中档/前沿上跑自有样例算 cost-per-quality-point→选过线最便宜者（高于分数噪声）。",
+                "en": "Three steps: set a task quality bar, run 20–50 of your examples on cheap/mid/frontier models for cost-per-quality-point, then pick the cheapest model that clears the bar above run-to-run noise.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "openrouter",
+              "url": "https://openrouter.ai/blog/tutorials/how-to-gate-pull-requests-on-llm-evals-in-ci/",
+              "title": "How to gate pull requests on LLM evals in CI",
+              "brief": {
+                "zh": "固定仓内 eval 集+脚本打分+测噪声地板，做成 GitHub required check——prompt/agent 回退不可合并。",
+                "en": "Keep a fixed in-repo eval set, score via script, measure the noise floor, and make it a required GitHub status check so prompt/agent regressions cannot merge.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "openrouter",
+              "url": "https://openrouter.ai/blog/insights/confidence-thresholds-for-model-escalation-routing/",
+              "title": "Confidence thresholds for model escalation routing",
+              "brief": {
+                "zh": "结构化输出强制 0–1 自报置信度，低分升级；阈值须用自有分桶错误率标定并监控升级率。",
+                "en": "Force a 0–1 self-reported confidence via structured outputs and escalate lows; calibrate thresholds from your own per-band error rates and monitor escalation plus non-escalated errors.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "openrouter"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://openrouter.ai/blog/insights/cost-vs-quality-tradeoff-framework-for-agent-models/",
+            "https://openrouter.ai/blog/tutorials/how-to-gate-pull-requests-on-llm-evals-in-ci/",
+            "https://openrouter.ai/blog/insights/confidence-thresholds-for-model-escalation-routing/"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-01T09:00:00+08:00",
+      "label": {
+        "zh": "10月1日 09:00",
+        "en": "Oct 1 09:00",
+        "ja": "10月1日 09:00"
+      },
+      "items": [
+        {
+          "id": "t371",
+          "theme": "security",
+          "title": {
+            "zh": "OpenAI DevDay：Codex 云环境 + Security Cloud + Decisions/Agents API",
+            "en": "OpenAI DevDay",
+            "ja": "OpenAI DevDay"
+          },
+          "summary": {
+            "zh": "一级源把 coding-agent harness 写成可复用云环境+安全扫描+Decisions 路由+Agents API Computer Use",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "一级源把 coding-agent harness 写成可复用云环境+安全扫描+Decisions 路由+Agents API Computer Use",
+            "en": "OpenAI DevDay packages coding-agent harness as reusable cloud envs, Security Cloud scans, a Decisions API for next-action routing, and Agents API Computer Use—harness, sandbox, and decision control in one ship.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "openai",
+              "url": "https://openai.com/index/devday-2026-recap/",
+              "title": "DevDay 2026 recap",
+              "brief": {
+                "zh": "DevDay：Codex 可复用云环境、Security Cloud、Decisions API、Agents API Computer Use 与 Ultrafast。",
+                "en": "DevDay ships Codex reusable cloud environments, Security Cloud, Decisions API, Agents API Computer Use, and Ultrafast token generation.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=7Bv68f5szSU",
+              "title": "Meet the all new Codex Cloud",
+              "brief": {
+                "zh": "OpenAI 官方 Codex Cloud 发布片，~7h·3万播。",
+                "en": "Official OpenAI Codex Cloud launch video (~30.7k views in ~7h).",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "openai",
+            "youtube",
+            "techcrunch"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://openai.com/index/devday-2026-recap/",
+            "https://www.youtube.com/watch?v=7Bv68f5szSU",
+            "https://techcrunch.com/2026/09/30/openais-jev-clone-could-help-the-frontier-lab-stop-its-swarming-agents/"
+          ]
+        },
+        {
+          "id": "t424",
+          "theme": "models",
+          "title": {
+            "zh": "Gemini 4 Argon：1M 输出 + Fairwind 网络优先放行",
+            "en": "Gemini 4 Argon",
+            "ja": "Gemini 4 Argon"
+          },
+          "summary": {
+            "zh": "Google 一级源新前沿：1M 输出 token、DeepSWE 77.9%，先经 Fairwind 放给可信网络防御者（去网络护栏）——coding-agent/sandbox 选型对照 Astra/Sol/Opus 的新锚，且显式分阶段安全放行。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Google 一级源新前沿：1M 输出 token、DeepSWE 77.9%，先经 Fairwind 放给可信网络防御者（去网络护栏）——coding-agent/sandbox 选型对照 Astra/Sol/Opus 的新锚，且显式分阶段安全放行。",
+            "en": "Google’s frontier Gemini 4 Argon claims 1M output tokens and 77.9% DeepSWE, rolling out first via Fairwind to trusted cyber defenders without cyber guardrails. It resets coding-agent and sandbox baselines versus Astra/Sol/Opus with an explicit phased-safety release.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "google",
+              "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+              "title": "Gemini 4 Argon",
+              "brief": {
+                "zh": "DeepMind 宣布 Gemini 4 Argon：长程软件工程/知识工作/网络防御，输出上下文 64K→1M；Fairwind 优先放行后再开 API/Ultra。",
+                "en": "DeepMind announces Gemini 4 Argon for long-horizon SWE, knowledge work, and cyber defense, with output context jumping 64K→1M. Fairwind trusted defenders get first access before broader API/Ultra.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "google"
+          ],
+          "score": 5,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"
+          ]
+        },
+        {
+          "id": "t010",
+          "theme": "models",
+          "title": {
+            "zh": "MiMo v2.6→V3：小米开源/中文前沿（含 HySparse2）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "中文读者向开源模型对照 Opus/GPT-6；V3 HySparse2 架构预告",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "中文读者向开源模型对照 Opus/GPT-6；V3 HySparse2 架构预告",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://mimo.xiaomi.com/mimo-v2-6",
+              "title": "MiMo v2.6",
+              "brief": {
+                "zh": "Xiaomi MiMo v2.6 is a high-velocity open/Chinese model release competing in the frontier race.",
+                "en": "Xiaomi MiMo v2.6 is a high-velocity open/Chinese model release competing in the frontier race.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+              "title": "XiaomiMiMo/MiMo-V2.6-Pro-RL",
+              "brief": {
+                "zh": "MiMo multimodal/audio/video model with agent and long-context tags.",
+                "en": "MiMo multimodal/audio/video model with agent and long-context tags.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wo7mr6/mimov3_is_getting_a_new_architecture_the_core_of/",
+              "title": "MiMo-V3 is getting a new architecture. The core of it, HySparse2, is out today.",
+              "brief": {
+                "zh": "Xiaomi MiMo path: HySparse2 core dropped ahead of V3 — local-community architecture signal beyond another Qwen 3.8 thread.",
+                "en": "Xiaomi MiMo path: HySparse2 core dropped ahead of V3 — local-community architecture signal beyond another Qwen 3.8 thread.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1woa5d3/mimov26_both_pro_and_flash_is_a_benchmaxxed_scam/",
+              "title": "MiMo-V2.6 (both Pro and Flash) is a benchmaxxed scam",
+              "brief": {
+                "zh": "Community benchmax skepticism on MiMo-V2.6 Pro/Flash — pairs with earlier HySparse2/MiMo-V3 architecture news for evaluation literacy.",
+                "en": "Community benchmax skepticism on MiMo-V2.6 Pro/Flash — pairs with earlier HySparse2/MiMo-V3 architecture news for evaluation literacy.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+              "title": "XiaomiMiMo/MiMo-V2.6-Flash-RL",
+              "brief": {
+                "zh": "MiMo V2.6 Flash RL，agent 与视频理解方向升温。",
+                "en": "",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "huggingface",
+            "reddit"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://mimo.xiaomi.com/mimo-v2-6",
+            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wo7mr6/mimov3_is_getting_a_new_architecture_the_core_of/",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1woa5d3/mimov26_both_pro_and_flash_is_a_benchmaxxed_scam/",
+            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Distill-Qwen-9B",
+            "https://huggingface.co/spaces/FineEnvs/MiMo-RL-Envs-Explorer"
+          ]
+        },
+        {
+          "id": "t069",
+          "theme": "models",
+          "title": {
+            "zh": "ThinkingCap Qwen3.8-27B 发布",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "本地 coding agent 对云端前沿的替代窗口",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "本地 coding agent 对云端前沿的替代窗口",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLM/comments/1wolg9w/thinkingcap_qwen3827b_has_been_released/",
+              "title": "ThinkingCap Qwen3.8-27B has been released",
+              "brief": {
+                "zh": "New Qwen 3.8 27B release dominating r/LocalLLM with throughput follow-ups — strong local coding-agent signal.",
+                "en": "New Qwen 3.8 27B release dominating r/LocalLLM with throughput follow-ups — strong local coding-agent signal.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+              "title": "Qwen/Qwen3.8-27B",
+              "brief": {
+                "zh": "Qwen multimodal model with the highest likes in the live model feed.",
+                "en": "Qwen multimodal model with the highest likes in the live model feed.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLM/comments/1wojbs4/qwen_38_27b_reaching_225_ts_on_132k_con/",
+              "title": "Qwen 3.8 27B reaching 225 t/s on 132k context on CMP 170HX",
+              "brief": {
+                "zh": "Aggressive local throughput claim for Qwen3.8-27B @ 132k ctx on CMP 170HX — local inference perf explore.",
+                "en": "Aggressive local throughput claim for Qwen3.8-27B @ 132k ctx on CMP 170HX — local inference perf explore.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wp0z3i/qwen3827b_is_good_enough_that_i_stopped_using_api/",
+              "title": "Qwen-3.8-27B is good enough that I stopped using API",
+              "brief": {
+                "zh": "r/LocalLLaMA: Qwen3.8-27B displacing paid API use — local model propagation / cost-shift signal.",
+                "en": "r/LocalLLaMA: Qwen3.8-27B displacing paid API use — local model propagation / cost-shift signal.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=C9M6iUFtVB4",
+              "title": "Best Local Coding AI for Your GPU (4GB to 512GB)",
+              "brief": {
+                "zh": "Kai ~19k·22h：按 GPU 档实测本地 coding 模型，主推 Qwen3.8-27B / KV cache；本地 coding-agent 选型伴源。",
+                "en": "Kai (~19k views / ~22h): GPU-tier local coding-model bakeoff leaning on Qwen3.8-27B and KV-cache tips—companion to local coding-agent selection.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "reddit",
+            "huggingface",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://www.reddit.com/r/LocalLLM/comments/1wolg9w/thinkingcap_qwen3827b_has_been_released/",
+            "https://huggingface.co/Qwen/Qwen3.8-27B",
+            "https://www.reddit.com/r/LocalLLM/comments/1wojbs4/qwen_38_27b_reaching_225_ts_on_132k_con/",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wp0z3i/qwen3827b_is_good_enough_that_i_stopped_using_api/",
+            "https://www.youtube.com/watch?v=C9M6iUFtVB4",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wufzrh/qwen3827bpi_effortordered_reasoning_for_agentic/"
           ]
         },
         {
@@ -4967,45 +5323,6 @@
           ]
         },
         {
-          "id": "t075",
-          "theme": "models",
-          "title": {
-            "zh": "deepseek-ai/DeepSeek-V4.1-Flash",
-            "en": "deepseek-ai/DeepSeek-V4.1-Flash",
-            "ja": "deepseek-ai/DeepSeek-V4.1-Flash"
-          },
-          "summary": {
-            "zh": "DeepSeek 新一代速度/质量档；对照前沿模型选题",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "DeepSeek 新一代速度/质量档；对照前沿模型选题",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
-              "title": "deepseek-ai/DeepSeek-V4.1-Flash",
-              "brief": {
-                "zh": "DeepSeek multimodal Flash model with high likes and downloads.",
-                "en": "DeepSeek multimodal Flash model with high likes and downloads.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "huggingface"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash"
-          ]
-        },
-        {
           "id": "t181",
           "theme": "agents-oss",
           "title": {
@@ -5930,416 +6247,6 @@
             "zh": "/cn/blog/claude-discovers-novel-enzyme-crispr-like-art/",
             "en": "/blog/claude-discovers-novel-enzyme-crispr-like-art/"
           }
-        },
-        {
-          "id": "t114",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "荣耀 Magic9：系统级 Agent Harness 操作系统",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "消费终端把感知/记忆/规划/工具/执行写成系统层；跨圈放大 harness",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "消费终端把感知/记忆/规划/工具/执行写成系统层；跨圈放大 harness",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "36kr",
-              "url": "https://eu.36kr.com/zh/p/3996102074290305",
-              "title": "荣耀 Magic9：系统级 Agent Harness 操作系统 + 阿里垂域模型",
-              "brief": {
-                "zh": "消费终端媒体罕见直接使用 Agent Harness 叙事，把感知/记忆/规划/工具调用/执行写成系统层能力——对站内 harness 选题有跨圈放大价值。站内积累线：harness。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "36kr"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://eu.36kr.com/zh/p/3996102074290305"
-          ]
-        },
-        {
-          "id": "t115",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Jev State：对话变测试与可运行代码",
-            "en": "Jev State",
-            "ja": "Jev State"
-          },
-          "summary": {
-            "zh": "Jev 从决策模型延到可回归测试+TS/workflow 导出+coding-agent skill",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Jev 从决策模型延到可回归测试+TS/workflow 导出+coding-agent skill",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "producthunt",
-              "url": "https://www.producthunt.com/products/jev-state",
-              "title": "Jev State — turn AI conversations into tests and runnable code",
-              "brief": {
-                "zh": "PH new launch directly extends the Jev product surface beyond the decision model into testable state + shippable code; high developer propagation. 站内积累线：Jev / coding-agent skills。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "producthunt"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.producthunt.com/products/jev-state"
-          ]
-        },
-        {
-          "id": "t116",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Latitude AgentScore：生产 agent 日质量分",
-            "en": "Latitude AgentScore",
-            "ja": "Latitude AgentScore"
-          },
-          "summary": {
-            "zh": "outcome/reliability/cost/speed/safety 合成分+失败模式回灌 coding agent",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "outcome/reliability/cost/speed/safety 合成分+失败模式回灌 coding agent",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "producthunt",
-              "url": "https://www.producthunt.com/products/latitude-4",
-              "title": "Latitude AgentScore — daily quality score for production agents",
-              "brief": {
-                "zh": "Open-source agent observability answering ‘is my agent getting better?’ — eval coverage gap + self-healing loop story resonates with builders. 站内积累线：agent-loop / eval harness。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "producthunt"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.producthunt.com/products/latitude-4"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-24T10:00:00+08:00",
-      "label": {
-        "zh": "9月24日 10:00",
-        "en": "Sep 24 10:00",
-        "ja": "9月24日 10:00"
-      },
-      "items": [
-        {
-          "id": "t094",
-          "theme": "research",
-          "title": {
-            "zh": "JitMem: Just-in-Time Memory for LLM Agents",
-            "en": "JitMem: Just-in-Time Memory for LLM Agents",
-            "ja": "JitMem: Just-in-Time Memory for LLM Agents"
-          },
-          "summary": {
-            "zh": "读时策展记忆 vs 写时蒸馏；对照 Jev-Mem/GBrain 记忆层",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "读时策展记忆 vs 写时蒸馏；对照 Jev-Mem/GBrain 记忆层",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.27334",
-              "title": "Just-in-Time Memory: Learning to Curate Task-Adaptive Memory for LLM Agents",
-              "brief": {
-                "zh": "把 agent 记忆从「写入时蒸馏」翻转为「读取时按当前任务再策展」：原始轨迹无损入库，curator 在读时生成任务自适应 payload，并用同任务即时奖励做 GRPO。ALFWorld/WebShop 上相对最强基线绝对成功率 +16pp 级，且未训练 curator 已可竞争写时记忆方法——范式层面冲击大。",
-                "en": "We retain raw trajectories and defer curation until read time. A memory curator synthesizes a compact, task-adaptive payload from retrieved traces and the current task, trained from immediate task success. Across ALFWorld, WebShop, and τ²-bench, JitMem improves over the strongest baseline by 16.2, 16.3, and 3.9 absolute success-rate points.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.27334"
-          ]
-        },
-        {
-          "id": "t098",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "LensVLM-9B：长上下文压成图像页再按需展开",
-            "en": "LensVLM-9B",
-            "ja": "LensVLM-9B"
-          },
-          "summary": {
-            "zh": "Agent/RAG 上下文成本另一条路；对照 KV/稀疏注意力",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Agent/RAG 上下文成本另一条路；对照 KV/稀疏注意力",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://huggingface.co/apple/LensVLM-9B",
-              "title": "LensVLM: Compressing long context as images, expanding only relevant pages",
-              "brief": {
-                "zh": "Apple open-weights LensVLM-9B on HF — long-context as visual pages with selective expand; fresh architecture signal beyond chat benchmarks.",
-                "en": "Apple open-weights LensVLM-9B on HF — long-context as visual pages with selective expand; fresh architecture signal beyond chat benchmarks.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://huggingface.co/apple/LensVLM-9B"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-24T09:00:00+08:00",
-      "label": {
-        "zh": "9月24日 09:00",
-        "en": "Sep 24 09:00",
-        "ja": "9月24日 09:00"
-      },
-      "items": [
-        {
-          "id": "t059",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Gemini 3.8 文本转语音",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "语音 agent / 多模态产品面；云端 TTS 选型",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "语音 agent / 多模态产品面；云端 TTS 选型",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/",
-              "title": "Gemini 3.8 text-to-speech",
-              "brief": {
-                "zh": "Google Gemini 3.8 TTS launch trending on HN — fresh multimodal/model surface for voice agents and product UX.",
-                "en": "Google Gemini 3.8 TTS launch trending on HN — fresh multimodal/model surface for voice agents and product UX.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/"
-          ]
-        },
-        {
-          "id": "t070",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Coding agent 可被所打开的仓库攻击",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "不可信仓库=攻击面；prompt/tool injection",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "不可信仓库=攻击面；prompt/tool injection",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "devto",
-              "url": "https://dev.to/robertadam987_/your-ai-coding-agent-can-be-attacked-by-the-repository-it-opens-ie4",
-              "title": "Your AI Coding Agent Can Be Attacked by the Repository It Opens",
-              "brief": {
-                "zh": "Security-flavored Dev.to post on coding agents attacked by the repo they open — prompt/tool injection practical angle.",
-                "en": "Security-flavored Dev.to post on coding agents attacked by the repo they open — prompt/tool injection practical angle.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "devto"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://dev.to/robertadam987_/your-ai-coding-agent-can-be-attacked-by-the-repository-it-opens-ie4"
-          ]
-        },
-        {
-          "id": "t084",
-          "theme": "research",
-          "title": {
-            "zh": "Coding Agents are Strong Prompt Optimizers",
-            "en": "Coding Agents are Strong Prompt Optimizers",
-            "ja": "Coding Agents are Strong Prompt Optimizers"
-          },
-          "summary": {
-            "zh": "Coding agents prompt 优化；对照 Claude Code / SDD",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Coding agents prompt 优化；对照 Claude Code / SDD",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.26261",
-              "title": "Coding Agents are Strong Prompt Optimizers",
-              "brief": {
-                "zh": "Sumit Gulwani 团队提出 CASD：用现成 coding agent 对静态轨迹语料做语料级统计反思，单次离线蒸馏即可优化 system prompt，在 4 个 agent 基准上平均提升 16.6pp，且成本约 $1.60（较验证门控搜索便宜 22×）。把「prompt 优化」直接交回 coding agent 工作流。",
-                "en": "Given only a static corpus of agent trajectories, an off-the-shelf coding agent can directly synthesize an optimized prompt (CASD), requiring neither environment access nor validation data. Under matched data access, a single CASD pass outperforms GEPA on 3/4 benchmarks and SkillOpt on all four, lifting the baseline by 16.6pp on average at ~$1.60 per prompt.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.26261"
-          ]
-        },
-        {
-          "id": "t089",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "ChatGPT 移动端语音驱动 agentic（Work tab）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "口袋优先语音触发 agent；对照 Muse/Claude 移动",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "口袋优先语音触发 agent；对照 Muse/Claude 移动",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/23/chatgpt-mobile-app-gets-voice-based-agentic-features/",
-              "title": "ChatGPT mobile app gets voice-based agentic features",
-              "brief": {
-                "zh": "Moves ChatGPT Agents from desktop/chat into pocket-first voice UX — high propagation for consumer+dev agent narratives and competitive pressure vs Muse/Claude mobile.",
-                "en": "Moves ChatGPT Agents from desktop/chat into pocket-first voice UX — high propagation for consumer+dev agent narratives and competitive pressure vs Muse/Claude mobile.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "techcrunch"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://techcrunch.com/2026/09/23/chatgpt-mobile-app-gets-voice-based-agentic-features/"
-          ]
-        },
-        {
-          "id": "t091",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "GBrain：跨 harness 共享记忆/工具/skills",
-            "en": "GBrain",
-            "ja": "GBrain"
-          },
-          "summary": {
-            "zh": "任意 harness 可达的记忆层；对照 Solid/Jev-Mem",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "任意 harness 可达的记忆层；对照 Solid/Jev-Mem",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "producthunt",
-              "url": "https://www.producthunt.com/products/gbrain",
-              "title": "GBrain — Garry Tan’s AI memory, tools & skills for any harness",
-              "brief": {
-                "zh": "Directly on the harness/skills/memory thesis readers care about — cross-tool agent memory as a product, launched ~Sep 23 on PH.",
-                "en": "Directly on the harness/skills/memory thesis readers care about — cross-tool agent memory as a product, launched ~Sep 23 on PH.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "producthunt"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.producthunt.com/products/gbrain"
-          ]
         }
       ]
     }
