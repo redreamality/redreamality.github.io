@@ -7,6 +7,7 @@
 import digest from '../../data/chaos-digest.json';
 import type { Language } from '../../utils/i18n';
 import { toOutboundHref } from '../../utils/outbound';
+import TaxonomyEntryCard from '../tags/TaxonomyEntryCard.astro';
 
 interface ArchiveItem {
   href: string;
@@ -313,6 +314,8 @@ const chipNavLinks = [
       </p>
     )}
   </header>
+
+  <TaxonomyEntryCard lang={lang} variant="compact" themeLimit={3} />
 
   {!hasContent ? (
     <p class="rounded-2xl border border-dashed border-surface-300 dark:border-surface-700 p-10 text-center text-surface-500 dark:text-surface-400">{copy.empty}</p>

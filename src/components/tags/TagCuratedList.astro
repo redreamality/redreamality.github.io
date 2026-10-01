@@ -1,0 +1,135 @@
+---
+import type { Language } from '../../utils/i18n';
+import { getLocalizedPath } from '../../utils/i18n';
+
+interface PostLike {
+  slug: string;
+  data: {
+    title: string;
+    description?: string;
+    pubDate: Date;
+    author?: string;
+    tags?: string[];
+  };
+}
+
+interface Props {
+  lang: Language;
+  featured: PostLike[];
+  timeline: PostLike[];
+  currentTag: string;
+  tagCounts: Record<string, number>;
+}
+
+const { lang, featured, timeline, currentTag, tagCounts } = Astro.props;
+
+const copy = {
+  en: {
+    featured: 'Featured',
+    timeline: 'Timeline',
+    readMore: 'Read',
+    author: 'by',
+  },
+  zh: {
+    featured: '精选',
+    timeline: '时间线',
+    readMore: '阅读',
+    author: '作者',
+  },
+  ja: {
+    featured: '精選',
+    timeline: 'タイムライン',
+    readMore: '読む',
+    author: '著者',
+  },
+} as const;
+
+const t = copy[lang];
+const blogBase = getLocalizedPath('/blog/', lang).replace(/\/$/, '');
+const tagsBase = getLocalizedPath('/tags/', lang).replace(/\/$/, '');
+const locale = lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja-JP' : 'en-US';
+
+const allSections: Array<{ id: string; title: string; posts: PostLike[]; emphasize: boolean }> = [];
+if (featured.length > 0) {
+  allSections.push({ id: 'tag-featured-heading', title: t.featured, posts: featured, emphasize: true });
+}
+if (timeline.length > 0) {
+  allSections.push({ id: 'tag-timeline-heading', title: t.timeline, posts: timeline, emphasize: false });
+}
+---
+
+{allSections.map((section, si) => (
+  <section class:list={[si < allSections.length - 1 ? 'mb-12' : '']} aria-labelledby={section.id}>
+    <div class="mb-4 flex items-baseline gap-3 border-b border-surface-200 pb-3 dark:border-surface-800">
+      <h2
+        id={section.id}
+        class="font-display text-lg font-bold tracking-tight text-surface-900 dark:text-white"
+      >
+        {section.title}
+      </h2>
+      <span class="text-xs text-surface-400 dark:text-surface-500">{section.posts.length}</span>
+    </div>
+    <ul class="divide-y divide-surface-200 dark:divide-surface-800">
+      {section.posts.map((post) => (
+        <li class="py-5 first:pt-0">
+          <article>
+            <a href={`${blogBase}/${post.slug}/`} class="group block">
+              <h3
+                class:list={[
+                  'font-display font-semibold text-surface-900 transition-colors group-hover:text-brand-600 dark:text-white dark:group-hover:text-brand-300',
+                  section.emphasize ? 'text-xl md:text-2xl' : 'text-lg',
+                ]}
+              >
+                {post.data.title}
+              </h3>
+            </a>
+            <div class="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-surface-500 dark:text-surface-400">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString(locale, {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+              {post.data.author && (
+                <span>
+                  {t.author} {post.data.author}
+                </span>
+              )}
+            </div>
+            {post.data.description && (
+              <p class="mt-2 text-sm leading-relaxed text-surface-600 dark:text-surface-400 line-clamp-2">
+                {post.data.description}
+              </p>
+            )}
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="mt-3 flex flex-wrap gap-1.5">
+                {post.data.tags
+                  .filter((tg: string) => (tagCounts[tg] ?? 0) >= 2)
+                  .map((tg: string) => (
+                    <a
+                      href={`${tagsBase}/${encodeURIComponent(tg)}/`}
+                      class:list={[
+                        'rounded-full px-2 py-0.5 text-xs transition-colors',
+                        tg === currentTag
+                          ? 'bg-brand-500/15 font-medium text-brand-700 dark:text-brand-300'
+                          : 'bg-surface-100 text-surface-600 hover:bg-surface-200 dark:bg-surface-800 dark:text-surface-400 dark:hover:bg-surface-700',
+                      ]}
+                    >
+                      #{tg}
+                    </a>
+                  ))}
+              </div>
+            )}
+            <a
+              href={`${blogBase}/${post.slug}/`}
+              class="mt-3 inline-block text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-300 dark:hover:text-brand-200"
+            >
+              {t.readMore} →
+            </a>
+          </article>
+        </li>
+      ))}
+    </ul>
+  </section>
+))}

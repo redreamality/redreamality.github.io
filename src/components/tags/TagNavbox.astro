@@ -1,0 +1,188 @@
+---
+import type { Language } from '../../utils/i18n';
+import {
+  getThemeForTag,
+  getClusterForTag,
+  getParent,
+  getChildren,
+  getSiblings,
+  getRelated,
+  getTagHref,
+  getTagsIndexHref,
+  getTagDisplayLabel,
+  normalizeTag,
+} from '../../utils/tag-taxonomy';
+
+interface Props {
+  tag: string;
+  lang: Language;
+  /** Route tags that actually have detail pages (count ≥ 2). */
+  routeTags?: Set<string> | string[];
+}
+
+const { tag, lang, routeTags } = Astro.props;
+const canonical = normalizeTag(tag);
+const routeSet =
+  routeTags instanceof Set
+    ? routeTags
+    : new Set(routeTags ?? []);
+
+const copy = {
+  en: {
+    nav: 'In this theme',
+    parent: 'Parent',
+    children: 'Children',
+    siblings: 'Siblings',
+    related: 'Related',
+    theme: 'Theme',
+    cluster: 'Cluster',
+  },
+  zh: {
+    nav: '同主题导航',
+    parent: '上级',
+    children: '下级',
+    siblings: '同级',
+    related: '相关',
+    theme: '主题',
+    cluster: '探索路径',
+  },
+  ja: {
+    nav: 'このテーマ内',
+    parent: '親',
+    children: '子',
+    siblings: '兄弟',
+    related: '関連',
+    theme: 'テーマ',
+    cluster: 'クラスタ',
+  },
+} as const;
+
+const t = copy[lang];
+const theme = getThemeForTag(tag);
+const cluster = getClusterForTag(tag);
+const parent = getParent(canonical);
+const children = getChildren(canonical);
+const siblings = getSiblings(canonical);
+const related = getRelated(canonical);
+const indexHref = getTagsIndexHref(lang);
+const otherId = 'other';
+
+function linkable(slug: string): boolean {
+  if (routeSet.size === 0) return true;
+  return routeSet.has(slug) || [...routeSet].some((r) => normalizeTag(r) === slug);
+}
+
+type LinkItem = { slug: string; label: string; href: string };
+
+function toLinks(nodes: { slug: string }[]): LinkItem[] {
+  return nodes
+    .filter((n) => linkable(n.slug))
+    .map((n) => ({
+      slug: n.slug,
+      label: getTagDisplayLabel(n.slug, lang),
+      href: getTagHref(n.slug, lang),
+    }));
+}
+
+const sections: Array<{ key: string; label: string; items: LinkItem[] }> = [];
+
+if (parent && linkable(parent.slug)) {
+  sections.push({
+    key: 'parent',
+    label: t.parent,
+    items: [
+      {
+        slug: parent.slug,
+        label: getTagDisplayLabel(parent.slug, lang),
+        href: getTagHref(parent.slug, lang),
+      },
+    ],
+  });
+}
+
+const childLinks = toLinks(children);
+if (childLinks.length) sections.push({ key: 'children', label: t.children, items: childLinks });
+
+const siblingLinks = toLinks(siblings);
+if (siblingLinks.length) sections.push({ key: 'siblings', label: t.siblings, items: siblingLinks });
+
+const relatedLinks = toLinks(related);
+if (relatedLinks.length) sections.push({ key: 'related', label: t.related, items: relatedLinks });
+
+const hasTheme =
+  theme && theme.id !== otherId
+    ? { label: theme.label[lang] ?? theme.label.en, href: `${indexHref}#${theme.id}` }
+    : null;
+const hasCluster =
+  cluster && theme && theme.id !== otherId
+    ? { label: cluster.label[lang] ?? cluster.label.en, href: `${indexHref}#${cluster.id}` }
+    : null;
+
+const show = sections.length > 0 || hasTheme || hasCluster;
+---
+
+{show && (
+  <nav
+    aria-label={t.nav}
+    class="mb-10 overflow-hidden rounded-xl border border-surface-200 bg-surface-50/80 dark:border-surface-800 dark:bg-surface-950/60"
+  >
+    <div class="border-b border-surface-200 px-4 py-2.5 dark:border-surface-800">
+      <p class="text-xs font-semibold uppercase tracking-wider text-surface-500 dark:text-surface-400">
+        {t.nav}
+      </p>
+    </div>
+
+    <div class="grid gap-0 sm:grid-cols-2">
+      {(hasTheme || hasCluster) && (
+        <div class="border-b border-surface-200 px-4 py-3 sm:col-span-2 dark:border-surface-800">
+          <dl class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+            {hasTheme && (
+              <div class="flex items-baseline gap-2">
+                <dt class="shrink-0 text-xs text-surface-400 dark:text-surface-500">{t.theme}</dt>
+                <dd>
+                  <a
+                    href={hasTheme.href}
+                    class="font-medium text-brand-600 hover:text-brand-700 dark:text-brand-300 dark:hover:text-brand-200"
+                  >
+                    {hasTheme.label}
+                  </a>
+                </dd>
+              </div>
+            )}
+            {hasCluster && (
+              <div class="flex items-baseline gap-2">
+                <dt class="shrink-0 text-xs text-surface-400 dark:text-surface-500">{t.cluster}</dt>
+                <dd>
+                  <a
+                    href={hasCluster.href}
+                    class="font-medium text-brand-600 hover:text-brand-700 dark:text-brand-300 dark:hover:text-brand-200"
+                  >
+                    {hasCluster.label}
+                  </a>
+                </dd>
+              </div>
+            )}
+          </dl>
+        </div>
+      )}
+
+      {sections.map((sec) => (
+        <div class="border-b border-surface-200 px-4 py-3 last:border-b-0 sm:border-r sm:odd:border-r dark:border-surface-800 sm:[&:nth-child(2n)]:border-r-0">
+          <p class="mb-1.5 text-xs font-medium text-surface-400 dark:text-surface-500">{sec.label}</p>
+          <ul class="flex flex-wrap gap-1.5">
+            {sec.items.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="inline-flex rounded-md bg-white px-2 py-0.5 text-sm text-surface-700 ring-1 ring-surface-200 transition-colors hover:bg-brand-500/5 hover:text-brand-700 hover:ring-brand-400/40 dark:bg-surface-900 dark:text-surface-300 dark:ring-surface-700 dark:hover:bg-brand-500/10 dark:hover:text-brand-300 dark:hover:ring-brand-400/30"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </nav>
+)}

@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "themes": [
     {
       "id": "agent-systems",
@@ -14,17 +14,110 @@
         "zh": "Agent 循环、Harness、多智能体与支撑它们运行的平台。",
         "ja": "エージェントループ、ハーネス、マルチエージェント、およびその実行基盤。"
       },
-      "tags": [
-        "ai-agents",
-        "agent-harness",
-        "agent-loop",
-        "multi-agent-systems",
-        "mcp",
-        "openclaw",
-        "Agent Skills",
-        "エージェント",
-        "マルチエージェントシステム",
-        "多智能体系统"
+      "clusters": [
+        {
+          "id": "agent-core",
+          "label": {
+            "en": "Agent core",
+            "zh": "Agent 核心",
+            "ja": "エージェント核心"
+          },
+          "blurb": {
+            "en": "Hubs for agent systems — start with AI Agents, then harness and loop patterns.",
+            "zh": "Agent 体系枢纽 — 从 AI Agents 出发，再看 Harness 与 Loop。",
+            "ja": "エージェント体系のハブ — AI Agents から、ハーネスとループへ。"
+          },
+          "tags": [
+            {
+              "slug": "ai-agents",
+              "children": ["agent-harness", "agent-loop", "multi-agent-systems"],
+              "related": ["mcp", "openclaw"],
+              "display": {
+                "en": "AI Agents",
+                "zh": "AI 代理",
+                "ja": "AIエージェント"
+              },
+              "blurb": {
+                "en": "Core theme for agentic systems across blog, chaos, notes, and visuals.",
+                "zh": "贯穿博客、底噪、笔记与可视化的 Agent 核心主题。",
+                "ja": "ブログ・カオス・ノート・ビジュアルにまたがるエージェント核心テーマ。"
+              }
+            },
+            {
+              "slug": "agent-harness",
+              "parent": "ai-agents",
+              "related": ["agent-loop"],
+              "display": {
+                "en": "Agent Harness",
+                "zh": "Agent Harness",
+                "ja": "エージェントハーネス"
+              },
+              "blurb": {
+                "en": "Runtime scaffolding that keeps agents reliable and observable.",
+                "zh": "让 Agent 可靠、可观测的运行时脚手架。",
+                "ja": "エージェントを信頼可能・観測可能にするランタイム足場。"
+              }
+            },
+            {
+              "slug": "agent-loop",
+              "parent": "ai-agents",
+              "related": ["agent-harness", "feedback-loops"],
+              "display": {
+                "en": "Agent Loop",
+                "zh": "Agent Loop",
+                "ja": "エージェントループ"
+              },
+              "blurb": {
+                "en": "Plan–act–observe cycles and loop engineering.",
+                "zh": "计划—行动—观察循环与 Loop Engineering。",
+                "ja": "計画—行動—観察のサイクルとループエンジニアリング。"
+              }
+            },
+            {
+              "slug": "multi-agent-systems",
+              "parent": "ai-agents",
+              "related": ["mcp"],
+              "display": {
+                "en": "Multi-Agent Systems",
+                "zh": "多智能体系统",
+                "ja": "マルチエージェントシステム"
+              },
+              "blurb": {
+                "en": "Coordination patterns when more than one agent shares the work.",
+                "zh": "多个 Agent 协作时的协调模式。",
+                "ja": "複数エージェントが仕事を分けるときの協調パターン。"
+              }
+            },
+            {
+              "slug": "mcp",
+              "related": ["ai-agents", "multi-agent-systems"],
+              "display": {
+                "en": "MCP",
+                "zh": "MCP",
+                "ja": "MCP"
+              },
+              "blurb": {
+                "en": "Model Context Protocol — tool and context bridges for agents.",
+                "zh": "Model Context Protocol — Agent 的工具与上下文桥梁。",
+                "ja": "Model Context Protocol — エージェントのツール／コンテキスト橋。"
+              }
+            },
+            {
+              "slug": "openclaw",
+              "related": ["ai-agents", "mcp"],
+              "display": {
+                "en": "OpenClaw",
+                "zh": "OpenClaw",
+                "ja": "OpenClaw"
+              },
+              "blurb": {
+                "en": "OpenClaw product hub in the agent-platform cluster.",
+                "zh": "Agent 平台簇中的 OpenClaw 产品枢纽。",
+                "ja": "エージェント基盤クラスタ内の OpenClaw 製品ハブ。"
+              }
+            }
+          ]
+        }
       ]
     },
     {
@@ -40,16 +133,96 @@
         "zh": "规格驱动开发、OpenSpec、Spec Kit、BMAD 与 agents.md 工作流。",
         "ja": "仕様駆動開発、OpenSpec、Spec Kit、BMAD、agents.md のワークフロー。"
       },
-      "tags": [
-        "sdd",
-        "openspec",
-        "spec-kit",
-        "bmad",
-        "agents-md",
-        "agents.md",
-        "规范驱动开发",
-        "规格驱动开发",
-        "仕様駆動開発"
+      "clusters": [
+        {
+          "id": "spec-coding",
+          "label": {
+            "en": "Spec coding",
+            "zh": "规格编码",
+            "ja": "仕様コーディング"
+          },
+          "blurb": {
+            "en": "Explore from SDD down into OpenSpec, Spec Kit, and BMAD — with agents.md nearby.",
+            "zh": "从 SDD 下探 OpenSpec、Spec Kit、BMAD，旁路 agents.md。",
+            "ja": "SDD から OpenSpec・Spec Kit・BMAD へ。agents.md は近縁。"
+          },
+          "tags": [
+            {
+              "slug": "sdd",
+              "children": ["openspec", "spec-kit", "bmad"],
+              "related": ["agents-md"],
+              "display": {
+                "en": "SDD / Spec-Driven Development",
+                "zh": "规格驱动开发 (SDD)",
+                "ja": "仕様駆動開発 (SDD)"
+              },
+              "blurb": {
+                "en": "Umbrella for spec-driven development — write the contract before the code.",
+                "zh": "规格驱动开发总览 — 先写契约再写代码。",
+                "ja": "仕様駆動開発の総称 — コードより先に契約を書く。"
+              }
+            },
+            {
+              "slug": "openspec",
+              "parent": "sdd",
+              "related": ["spec-kit", "bmad", "agents-md"],
+              "display": {
+                "en": "OpenSpec",
+                "zh": "OpenSpec",
+                "ja": "OpenSpec"
+              },
+              "blurb": {
+                "en": "OpenSpec tooling and comparison posts under the SDD umbrella.",
+                "zh": "SDD 伞下的 OpenSpec 工具与对比文。",
+                "ja": "SDD 傘下の OpenSpec ツールと比較記事。"
+              }
+            },
+            {
+              "slug": "spec-kit",
+              "parent": "sdd",
+              "related": ["openspec", "bmad"],
+              "display": {
+                "en": "Spec Kit",
+                "zh": "Spec Kit",
+                "ja": "Spec Kit"
+              },
+              "blurb": {
+                "en": "Spec Kit workflows for structured agent coding.",
+                "zh": "结构化 Agent 编码的 Spec Kit 工作流。",
+                "ja": "構造化エージェントコーディング向け Spec Kit。"
+              }
+            },
+            {
+              "slug": "bmad",
+              "parent": "sdd",
+              "related": ["openspec", "spec-kit"],
+              "display": {
+                "en": "BMAD",
+                "zh": "BMAD",
+                "ja": "BMAD"
+              },
+              "blurb": {
+                "en": "BMAD method — another path through spec-driven agent work.",
+                "zh": "BMAD 方法 — 规格驱动 Agent 工作的另一条路径。",
+                "ja": "BMAD 手法 — 仕様駆動エージェント作業の別経路。"
+              }
+            },
+            {
+              "slug": "agents-md",
+              "related": ["sdd", "openspec"],
+              "display": {
+                "en": "agents.md",
+                "zh": "agents.md",
+                "ja": "agents.md"
+              },
+              "blurb": {
+                "en": "agents.md as living project memory for agent workflows.",
+                "zh": "作为 Agent 工作流活文档的 agents.md。",
+                "ja": "エージェント作業の生きたプロジェクト記憶としての agents.md。"
+              }
+            }
+          ]
+        }
       ]
     },
     {
@@ -65,12 +238,78 @@
         "zh": "递归自我改进、复杂系统思维，以及 Jev 主题。",
         "ja": "再帰的自己改善、複雑系の思考、そして Jev テーマ。"
       },
-      "tags": [
-        "rsi",
-        "jev",
-        "Jev",
-        "complex-systems",
-        "feedback-loops"
+      "clusters": [
+        {
+          "id": "rsi-systems",
+          "label": {
+            "en": "RSI & systems",
+            "zh": "RSI 与系统",
+            "ja": "RSI とシステム"
+          },
+          "blurb": {
+            "en": "Self-improving loops meet complex-systems lenses — RSI, Jev, feedback.",
+            "zh": "自我改进循环与复杂系统透镜 — RSI、Jev、反馈。",
+            "ja": "自己改善ループと複雑系のレンズ — RSI、Jev、フィードバック。"
+          },
+          "tags": [
+            {
+              "slug": "rsi",
+              "related": ["jev", "complex-systems", "feedback-loops"],
+              "display": {
+                "en": "RSI / Recursive Self-Improvement",
+                "zh": "RSI / 递归自我改进",
+                "ja": "RSI / 再帰的自己改善"
+              },
+              "blurb": {
+                "en": "Recursive self-improvement as a systems and agent theme.",
+                "zh": "作为系统与 Agent 主题的递归自我改进。",
+                "ja": "システム／エージェントテーマとしての再帰的自己改善。"
+              }
+            },
+            {
+              "slug": "jev",
+              "related": ["rsi", "complex-systems", "feedback-loops"],
+              "display": {
+                "en": "Jev",
+                "zh": "Jev",
+                "ja": "Jev"
+              },
+              "blurb": {
+                "en": "The Jev premium theme — systems thinking in practice.",
+                "zh": "Jev 精品主题 — 实践中的系统思维。",
+                "ja": "Jev プレミアムテーマ — 実践のシステム思考。"
+              }
+            },
+            {
+              "slug": "complex-systems",
+              "related": ["rsi", "jev", "feedback-loops"],
+              "display": {
+                "en": "Complex Systems",
+                "zh": "复杂系统",
+                "ja": "複雑系"
+              },
+              "blurb": {
+                "en": "Complex-systems hubs spanning visuals and long-form notes.",
+                "zh": "跨越可视化与长文的复杂系统枢纽。",
+                "ja": "ビジュアルと長文にまたがる複雑系ハブ。"
+              }
+            },
+            {
+              "slug": "feedback-loops",
+              "related": ["rsi", "jev", "complex-systems", "agent-loop"],
+              "display": {
+                "en": "Feedback Loops",
+                "zh": "反馈环",
+                "ja": "フィードバックループ"
+              },
+              "blurb": {
+                "en": "Feedback as the shared grammar of RSI, agents, and markets.",
+                "zh": "反馈作为 RSI、Agent 与市场的共同语法。",
+                "ja": "RSI・エージェント・市場の共通文法としてのフィードバック。"
+              }
+            }
+          ]
+        }
       ]
     },
     {
@@ -86,37 +325,254 @@
         "zh": "Vibe coding、开发者工具、软件工程实践与日常 CLI。",
         "ja": "バイブコーディング、開発者ツール、ソフトウェア工学、日常の CLI。"
       },
-      "tags": [
-        "vibe-coding",
-        "claude-code",
-        "ai-coding",
-        "developer-tools",
-        "software-engineering",
-        "cli",
-        "github",
-        "github-copilot",
-        "browser-extension",
-        "wxt",
-        "python",
-        "llm",
-        "LLM",
-        "security",
-        "open-source",
-        "frontend-development",
-        "constraint-satisfaction-problem",
-        "tutorial",
-        "memory",
-        "customer-engagement",
-        "代码审查",
-        "约束满足问题",
-        "チュートリアル",
-        "制約充足問題",
-        "自動化"
+      "clusters": [
+        {
+          "id": "ai-coding-practice",
+          "label": {
+            "en": "AI coding practice",
+            "zh": "AI 编码实践",
+            "ja": "AIコーディング実践"
+          },
+          "blurb": {
+            "en": "How we actually code with models — vibe coding, Claude Code, AI coding.",
+            "zh": "与模型一起写代码的实操 — Vibe Coding、Claude Code、AI Coding。",
+            "ja": "モデルと一緒に書く実践 — Vibe Coding、Claude Code、AI Coding。"
+          },
+          "tags": [
+            {
+              "slug": "vibe-coding",
+              "related": ["claude-code", "ai-coding"],
+              "display": {
+                "en": "Vibe Coding",
+                "zh": "Vibe Coding",
+                "ja": "バイブコーディング"
+              },
+              "blurb": {
+                "en": "Fluid, intuition-led coding with AI in the loop.",
+                "zh": "AI 在环、直觉驱动的流畅编码。",
+                "ja": "AI をループに入れた直感駆動のコーディング。"
+              }
+            },
+            {
+              "slug": "claude-code",
+              "related": ["vibe-coding", "ai-coding", "cli"],
+              "display": {
+                "en": "Claude Code",
+                "zh": "Claude Code",
+                "ja": "Claude Code"
+              },
+              "blurb": {
+                "en": "Claude Code as a daily coding agent surface.",
+                "zh": "作为日常编码 Agent 界面的 Claude Code。",
+                "ja": "日常のコーディングエージェント面としての Claude Code。"
+              }
+            },
+            {
+              "slug": "ai-coding",
+              "related": ["vibe-coding", "claude-code", "llm"],
+              "display": {
+                "en": "AI Coding",
+                "zh": "AI 编程",
+                "ja": "AIコーディング"
+              },
+              "blurb": {
+                "en": "Broader AI-assisted coding practice beyond a single tool.",
+                "zh": "不绑定单一工具的 AI 辅助编码实践。",
+                "ja": "単一ツールに縛られない AI 支援コーディング。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "dev-tooling",
+          "label": {
+            "en": "Dev tooling",
+            "zh": "开发者工具",
+            "ja": "開発者ツール"
+          },
+          "blurb": {
+            "en": "CLIs, GitHub, extensions, languages, and engineering craft.",
+            "zh": "CLI、GitHub、扩展、语言与工程手艺。",
+            "ja": "CLI、GitHub、拡張、言語、エンジニアリングの手仕事。"
+          },
+          "tags": [
+            {
+              "slug": "developer-tools",
+              "related": ["cli", "github", "software-engineering"],
+              "display": {
+                "en": "Developer Tools",
+                "zh": "开发者工具",
+                "ja": "開発者ツール"
+              },
+              "blurb": {
+                "en": "Tools that shape the daily developer loop.",
+                "zh": "塑造日常开发循环的工具。",
+                "ja": "日常の開発ループを形作るツール。"
+              }
+            },
+            {
+              "slug": "software-engineering",
+              "related": ["developer-tools", "code-review", "open-source"],
+              "display": {
+                "en": "Software Engineering",
+                "zh": "软件工程",
+                "ja": "ソフトウェア工学"
+              },
+              "blurb": {
+                "en": "Engineering practice beyond any single stack.",
+                "zh": "超越单一技术栈的工程实践。",
+                "ja": "特定スタックを超えたエンジニアリング実践。"
+              }
+            },
+            {
+              "slug": "cli",
+              "related": ["developer-tools", "claude-code"],
+              "display": {
+                "en": "CLI",
+                "zh": "命令行",
+                "ja": "CLI"
+              },
+              "blurb": {
+                "en": "Command-line workflows and terminal craft.",
+                "zh": "命令行工作流与终端手艺。",
+                "ja": "コマンドライン作業とターミナルの手仕事。"
+              }
+            },
+            {
+              "slug": "github",
+              "related": ["github-copilot", "open-source", "code-review"],
+              "display": {
+                "en": "GitHub",
+                "zh": "GitHub",
+                "ja": "GitHub"
+              },
+              "blurb": {
+                "en": "GitHub as the collaboration and delivery surface.",
+                "zh": "作为协作与交付面的 GitHub。",
+                "ja": "協働とデリバリの面としての GitHub。"
+              }
+            },
+            {
+              "slug": "github-copilot",
+              "related": ["github", "ai-coding"],
+              "display": {
+                "en": "GitHub Copilot",
+                "zh": "GitHub Copilot",
+                "ja": "GitHub Copilot"
+              },
+              "blurb": {
+                "en": "Copilot as an inline AI coding companion.",
+                "zh": "作为行内 AI 编码伴侣的 Copilot。",
+                "ja": "インライン AI コーディング相棒としての Copilot。"
+              }
+            },
+            {
+              "slug": "browser-extension",
+              "related": ["wxt"],
+              "children": ["wxt"],
+              "display": {
+                "en": "Browser Extension",
+                "zh": "浏览器扩展",
+                "ja": "ブラウザ拡張"
+              },
+              "blurb": {
+                "en": "Browser extension craft and shipping patterns.",
+                "zh": "浏览器扩展手艺与发布模式。",
+                "ja": "ブラウザ拡張の手仕事と出荷パターン。"
+              }
+            },
+            {
+              "slug": "wxt",
+              "parent": "browser-extension",
+              "display": {
+                "en": "WXT",
+                "zh": "WXT",
+                "ja": "WXT"
+              },
+              "blurb": {
+                "en": "WXT framework for modern extension development.",
+                "zh": "现代扩展开发的 WXT 框架。",
+                "ja": "現代的な拡張開発向け WXT フレームワーク。"
+              }
+            },
+            {
+              "slug": "python",
+              "related": ["llm", "cli"],
+              "display": {
+                "en": "Python",
+                "zh": "Python",
+                "ja": "Python"
+              },
+              "blurb": {
+                "en": "Python as a recurring implementation language.",
+                "zh": "反复出现的实现语言 Python。",
+                "ja": "繰り返し登場する実装言語 Python。"
+              }
+            },
+            {
+              "slug": "llm",
+              "related": ["ai-coding", "python"],
+              "display": {
+                "en": "LLM",
+                "zh": "大语言模型",
+                "ja": "LLM"
+              },
+              "blurb": {
+                "en": "Large language models as a coding and systems substrate.",
+                "zh": "作为编码与系统基底的大语言模型。",
+                "ja": "コーディングとシステムの基盤としての大規模言語モデル。"
+              }
+            },
+            {
+              "slug": "security",
+              "related": ["software-engineering", "open-source"],
+              "display": {
+                "en": "Security",
+                "zh": "安全",
+                "ja": "セキュリティ"
+              },
+              "blurb": {
+                "en": "Security practice in agent and tooling contexts.",
+                "zh": "Agent 与工具语境下的安全实践。",
+                "ja": "エージェント／ツール文脈でのセキュリティ実践。"
+              }
+            },
+            {
+              "slug": "open-source",
+              "related": ["github", "software-engineering"],
+              "display": {
+                "en": "Open Source",
+                "zh": "开源",
+                "ja": "オープンソース"
+              },
+              "blurb": {
+                "en": "Open-source projects, licenses, and contribution patterns.",
+                "zh": "开源项目、许可与贡献模式。",
+                "ja": "オープンソースのプロジェクト、ライセンス、貢献パターン。"
+              }
+            },
+            {
+              "slug": "code-review",
+              "related": ["software-engineering", "github"],
+              "display": {
+                "en": "Code Review",
+                "zh": "代码审查",
+                "ja": "コードレビュー"
+              },
+              "blurb": {
+                "en": "Review craft — human and agent-assisted.",
+                "zh": "审查手艺 — 人与 Agent 辅助。",
+                "ja": "レビューの手仕事 — 人とエージェント支援。"
+              }
+            }
+          ]
+        }
       ]
     },
     {
       "id": "vendors",
-      "order": 50,
+      "order": 80,
+      "muted": true,
       "label": {
         "en": "Vendors",
         "zh": "厂商",
@@ -127,17 +583,72 @@
         "zh": "反复出现的实验室与产品枢纽；新文慎用。",
         "ja": "繰り返し登場するラボ／製品ハブ。新規投稿では控えめに。"
       },
-      "tags": [
-        "ai",
-        "anthropic",
-        "Anthropic",
-        "openai",
-        "nvidia",
-        "deepseek",
-        "DeepSeek",
-        "Claude",
-        "claude",
-        "Seedance"
+      "clusters": [
+        {
+          "id": "vendor-hubs",
+          "label": {
+            "en": "Vendor hubs",
+            "zh": "厂商枢纽",
+            "ja": "ベンダーハブ"
+          },
+          "tags": [
+            {
+              "slug": "ai",
+              "display": {
+                "en": "AI",
+                "zh": "人工智能",
+                "ja": "人工知能"
+              },
+              "blurb": {
+                "en": "Broad AI hub — prefer more specific themes when possible.",
+                "zh": "宽泛 AI 枢纽 — 能更具体时优先具体主题。",
+                "ja": "広い AI ハブ — 可能ならより具体的なテーマを。"
+              }
+            },
+            {
+              "slug": "anthropic",
+              "related": ["claude", "claude-code"],
+              "display": {
+                "en": "Anthropic",
+                "zh": "Anthropic",
+                "ja": "Anthropic"
+              }
+            },
+            {
+              "slug": "openai",
+              "display": {
+                "en": "OpenAI",
+                "zh": "OpenAI",
+                "ja": "OpenAI"
+              }
+            },
+            {
+              "slug": "nvidia",
+              "display": {
+                "en": "NVIDIA",
+                "zh": "NVIDIA",
+                "ja": "NVIDIA"
+              }
+            },
+            {
+              "slug": "deepseek",
+              "display": {
+                "en": "DeepSeek",
+                "zh": "DeepSeek",
+                "ja": "DeepSeek"
+              }
+            },
+            {
+              "slug": "claude",
+              "related": ["anthropic", "claude-code"],
+              "display": {
+                "en": "Claude",
+                "zh": "Claude",
+                "ja": "Claude"
+              }
+            }
+          ]
+        }
       ]
     },
     {
@@ -153,41 +664,219 @@
         "zh": "市场、固收、量化交易与投资教育。",
         "ja": "市場、債券、クオンツ取引、投資教育。"
       },
-      "tags": [
-        "quantitative-trading",
-        "interest-rates",
-        "fixed-income",
-        "bonds",
-        "bond-prices",
-        "bond-yields",
-        "bond-investing",
-        "investment-strategy",
-        "investment-basics",
-        "investment-education",
-        "market-structure",
-        "market-microstructure",
-        "price-action",
-        "price-volume",
-        "finance-education",
-        "Pricing",
-        "定价",
-        "価格"
+      "clusters": [
+        {
+          "id": "markets-quant",
+          "label": {
+            "en": "Markets & quant",
+            "zh": "市场与量化",
+            "ja": "市場とクオンツ"
+          },
+          "blurb": {
+            "en": "Trading, microstructure, and price–volume lenses.",
+            "zh": "交易、微观结构与价量视角。",
+            "ja": "取引、マイクロストラクチャ、価格と出来高のレンズ。"
+          },
+          "tags": [
+            {
+              "slug": "quantitative-trading",
+              "related": ["market-microstructure", "price-action", "price-volume"],
+              "display": {
+                "en": "Quantitative Trading",
+                "zh": "量化交易",
+                "ja": "クオンツトレーディング"
+              },
+              "blurb": {
+                "en": "Quant trading hubs across questions and notes.",
+                "zh": "跨越问答与笔记的量化交易枢纽。",
+                "ja": "Q&A とノートにまたがるクオンツ取引ハブ。"
+              }
+            },
+            {
+              "slug": "market-structure",
+              "related": ["market-microstructure", "price-action"],
+              "display": {
+                "en": "Market Structure",
+                "zh": "市场结构",
+                "ja": "市場構造"
+              }
+            },
+            {
+              "slug": "market-microstructure",
+              "related": ["market-structure", "quantitative-trading", "price-volume"],
+              "display": {
+                "en": "Market Microstructure",
+                "zh": "市场微观结构",
+                "ja": "マーケットマイクロストラクチャ"
+              },
+              "blurb": {
+                "en": "Microstructure bridge between visuals and questions.",
+                "zh": "连接可视化与问答的微观结构桥。",
+                "ja": "ビジュアルと Q&A をつなぐマイクロストラクチャ。"
+              }
+            },
+            {
+              "slug": "price-action",
+              "related": ["price-volume", "market-structure"],
+              "display": {
+                "en": "Price Action",
+                "zh": "价格行为",
+                "ja": "プライスアクション"
+              }
+            },
+            {
+              "slug": "price-volume",
+              "related": ["price-action", "market-microstructure"],
+              "display": {
+                "en": "Price–Volume",
+                "zh": "价量关系",
+                "ja": "価格と出来高"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fixed-income",
+          "label": {
+            "en": "Fixed income",
+            "zh": "固定收益",
+            "ja": "固定収益"
+          },
+          "blurb": {
+            "en": "Rates, bonds, and yield mechanics.",
+            "zh": "利率、债券与收益率机制。",
+            "ja": "金利、債券、利回りの仕組み。"
+          },
+          "tags": [
+            {
+              "slug": "interest-rates",
+              "related": ["bonds", "bond-yields", "fixed-income"],
+              "display": {
+                "en": "Interest Rates",
+                "zh": "利率",
+                "ja": "金利"
+              }
+            },
+            {
+              "slug": "fixed-income",
+              "related": ["bonds", "interest-rates"],
+              "children": ["bonds", "bond-prices", "bond-yields", "bond-investing"],
+              "display": {
+                "en": "Fixed Income",
+                "zh": "固定收益",
+                "ja": "固定収益"
+              }
+            },
+            {
+              "slug": "bonds",
+              "parent": "fixed-income",
+              "related": ["bond-prices", "bond-yields", "bond-investing"],
+              "display": {
+                "en": "Bonds",
+                "zh": "债券",
+                "ja": "債券"
+              }
+            },
+            {
+              "slug": "bond-prices",
+              "parent": "fixed-income",
+              "related": ["bond-yields", "bonds"],
+              "display": {
+                "en": "Bond Prices",
+                "zh": "债券价格",
+                "ja": "債券価格"
+              }
+            },
+            {
+              "slug": "bond-yields",
+              "parent": "fixed-income",
+              "related": ["bond-prices", "interest-rates"],
+              "display": {
+                "en": "Bond Yields",
+                "zh": "债券收益率",
+                "ja": "債券利回り"
+              }
+            },
+            {
+              "slug": "bond-investing",
+              "parent": "fixed-income",
+              "related": ["bonds", "investment-strategy"],
+              "display": {
+                "en": "Bond Investing",
+                "zh": "债券投资",
+                "ja": "債券投資"
+              }
+            }
+          ]
+        },
+        {
+          "id": "investing-edu",
+          "label": {
+            "en": "Investing education",
+            "zh": "投资教育",
+            "ja": "投資教育"
+          },
+          "blurb": {
+            "en": "Strategy, basics, and finance education hubs.",
+            "zh": "策略、基础与金融教育枢纽。",
+            "ja": "戦略、基礎、金融教育のハブ。"
+          },
+          "tags": [
+            {
+              "slug": "investment-strategy",
+              "related": ["investment-basics", "investment-education"],
+              "display": {
+                "en": "Investment Strategy",
+                "zh": "投资策略",
+                "ja": "投資戦略"
+              }
+            },
+            {
+              "slug": "investment-basics",
+              "related": ["investment-strategy", "investment-education"],
+              "display": {
+                "en": "Investment Basics",
+                "zh": "投资基础",
+                "ja": "投資基礎"
+              }
+            },
+            {
+              "slug": "investment-education",
+              "related": ["investment-basics", "finance-education"],
+              "display": {
+                "en": "Investment Education",
+                "zh": "投资教育",
+                "ja": "投資教育"
+              }
+            },
+            {
+              "slug": "finance-education",
+              "related": ["investment-education"],
+              "display": {
+                "en": "Finance Education",
+                "zh": "金融教育",
+                "ja": "金融教育"
+              }
+            }
+          ]
+        }
       ]
     },
     {
       "id": "other",
       "order": 900,
+      "muted": true,
       "label": {
-        "en": "Other",
-        "zh": "其他",
-        "ja": "その他"
+        "en": "Uncategorized",
+        "zh": "未归类",
+        "ja": "未分類"
       },
       "description": {
-        "en": "Route tags not yet placed in a premium theme.",
-        "zh": "尚未归入精品主题的路由标签。",
-        "ja": "まだテーマに未分類のルートタグ。"
+        "en": "Route tags not yet placed in a curated theme — never expand this list by hand.",
+        "zh": "尚未归入精品主题的路由标签 — 禁止手工扩张本列表。",
+        "ja": "まだテーマに未分類のルートタグ — 手作業で増やさない。"
       },
-      "tags": []
+      "clusters": []
     }
   ],
   "aliases": {
@@ -200,22 +889,30 @@
     "AI Agent": "ai-agents",
     "Agent": "ai-agents",
     "代理": "ai-agents",
+    "エージェント": "ai-agents",
+    "Agent Skills": "ai-agents",
     "Harness": "agent-harness",
     "harness-engineering": "agent-harness",
     "deepseek-harness": "agent-harness",
     "MCP": "mcp",
     "OpenClaw": "openclaw",
     "Multi-Agent Systems": "multi-agent-systems",
+    "マルチエージェントシステム": "multi-agent-systems",
+    "多智能体系统": "multi-agent-systems",
     "SDD": "sdd",
     "spec-driven development": "sdd",
     "Spec-Driven Development": "sdd",
     "spec-driven coding": "sdd",
+    "规范驱动开发": "sdd",
+    "规格驱动开发": "sdd",
+    "仕様駆動開発": "sdd",
     "OpenSpec": "openspec",
     "open spec": "openspec",
     "Open Spec": "openspec",
     "オープンSpec": "openspec",
     "Spec Kit": "spec-kit",
     "BMAD": "bmad",
+    "agents.md": "agents-md",
     "Jev": "jev",
     "vibe coding": "vibe-coding",
     "Vibe Coding": "vibe-coding",
@@ -241,6 +938,8 @@
     "Open Source": "open-source",
     "open source": "open-source",
     "开源": "open-source",
+    "Code Review": "code-review",
+    "代码审查": "code-review",
     "AI": "ai",
     "人工智能": "ai",
     "人工知能": "ai",
@@ -249,6 +948,8 @@
     "OpenAI": "openai",
     "NVIDIA": "nvidia",
     "DeepSeek": "deepseek",
+    "Claude": "claude",
+    "Seedance": "seedance",
     "浏览器扩展": "browser-extension",
     "量化交易": "quantitative-trading",
     "クオンツトレーディング": "quantitative-trading",
@@ -273,8 +974,6 @@
     "市場構造": "market-structure",
     "价格行为": "price-action",
     "プライスアクション": "price-action",
-    "代码审查": "code-review",
-    "Code Review": "code-review",
     "模型发布": "model-release",
     "Model Release": "model-release",
     "モデル公開": "model-release",
@@ -288,11 +987,8 @@
     "制約充足問題": "constraint-satisfaction-problem",
     "チュートリアル": "tutorial",
     "自動化": "automation",
-    "エージェント": "ai-agents",
-    "マルチエージェントシステム": "multi-agent-systems",
-    "规范驱动开发": "sdd",
-    "规格驱动开发": "sdd",
-    "仕様駆動開発": "sdd"
+    "frontend-development": "frontend-development",
+    "constraint-satisfaction-problem": "constraint-satisfaction-problem"
   },
   "uncategorizedId": "other"
 }

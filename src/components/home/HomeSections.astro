@@ -3,6 +3,7 @@ import type { Language } from '../../utils/i18n';
 import { homeContent, localeFor } from '../../utils/homeContent';
 import SectionGrid, { type SectionItem } from '../shared/SectionGrid.astro';
 import chaosDigest from '../../data/chaos-digest.json';
+import TaxonomyEntryCard from '../tags/TaxonomyEntryCard.astro';
 
 type Entry = { slug: string; data: Record<string, any> };
 
@@ -219,6 +220,8 @@ const noteItems: SectionItem[] = notes.slice(0, 6).map((n) => ({
       emptyMessage={c.noNotesMessage}
       items={noteItems}
     />
+
+    <TaxonomyEntryCard lang={lang} variant="full" themeLimit={3} />
   </div>
 </div>
 

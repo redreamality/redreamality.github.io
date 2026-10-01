@@ -1,7 +1,16 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import TagBreadcrumb from '../../../components/tags/TagBreadcrumb.astro';
-import { getBlogPosts, getTags, getTagCounts, getLocalizedPath, type Language } from '../../../utils/i18n';
+import TagNavbox from '../../../components/tags/TagNavbox.astro';
+import TagCuratedList from '../../../components/tags/TagCuratedList.astro';
+import { getBlogPosts, getTags, getTagCounts, type Language } from '../../../utils/i18n';
+import {
+  getTagDisplayLabel,
+  getTagBlurb,
+  getTagNode,
+  pickFeaturedPosts,
+  normalizeTag,
+} from '../../../utils/tag-taxonomy';
 
 export async function getStaticPaths() {
   const posts = await getBlogPosts('zh');
@@ -14,6 +23,7 @@ export async function getStaticPaths() {
         .filter((post) => post.data.tags?.includes(tag))
         .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
       lang: 'zh' as Language,
+      allTags: tags,
     },
   }));
 }
@@ -21,110 +31,67 @@ export async function getStaticPaths() {
 interface Props {
   posts: any[];
   lang: Language;
+  allTags: string[];
 }
 
 const { tag } = Astro.params;
-const { posts, lang } = Astro.props;
+const { posts, lang, allTags } = Astro.props;
 const tagCounts = await getTagCounts(lang);
+const canonical = normalizeTag(tag!);
+const displayName = getTagDisplayLabel(canonical, lang);
+const blurb = getTagBlurb(canonical, lang) ?? getTagNode(canonical)?.blurb?.[lang];
+const { featured, timeline } = pickFeaturedPosts(canonical, posts);
 
 const content = {
   en: {
     articlesCount: 'articles',
     articleCount: 'article',
-    readMore: 'Read',
-    author: 'by',
+    pageSuffix: 'Tags',
   },
   zh: {
     articlesCount: '篇文章',
     articleCount: '篇文章',
-    readMore: '阅读',
-    author: '作者',
+    pageSuffix: '标签',
   },
   ja: {
     articlesCount: '件の記事',
     articleCount: '件の記事',
-    readMore: '読む',
-    author: '著者',
+    pageSuffix: 'タグ',
   },
 } as const;
 
 const currentContent = content[lang];
-const blogBase = getLocalizedPath('/blog/', lang).replace(/\/$/, '');
-const tagsBase = getLocalizedPath('/tags/', lang).replace(/\/$/, '');
-const locale = lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja-JP' : 'en-US';
-const pageTitleSuffix = lang === 'zh' ? '标签' : lang === 'ja' ? 'タグ' : 'Tags';
 ---
 
-<Layout title={`#${tag} | ${pageTitleSuffix}`}>
+<Layout title={`${displayName} | ${currentContent.pageSuffix}`}>
   <main class="mx-auto max-w-3xl px-4 py-10 md:py-14">
     <TagBreadcrumb tag={tag!} lang={lang} />
 
-    <header class="mb-10 border-b border-surface-200 pb-6 dark:border-surface-800">
+    <header class="mb-8 border-b border-surface-200 pb-6 dark:border-surface-800">
       <h1 class="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-surface-900 dark:text-white">
-        #{tag}
+        {displayName}
       </h1>
+      {blurb && (
+        <p class="mt-3 max-w-2xl text-base leading-relaxed text-surface-600 dark:text-surface-400">
+          {blurb}
+        </p>
+      )}
       <p class="mt-2 text-sm text-surface-500 dark:text-surface-400">
+        <span class="font-mono text-xs text-surface-400 dark:text-surface-500">{canonical}</span>
+        <span class="mx-2 text-surface-300 dark:text-surface-700">·</span>
         {posts.length}{' '}
         {posts.length === 1 ? currentContent.articleCount : currentContent.articlesCount}
       </p>
     </header>
 
-    <ul class="divide-y divide-surface-200 dark:divide-surface-800">
-      {posts.map((post) => (
-        <li class="py-6 first:pt-0">
-          <article>
-            <a href={`${blogBase}/${post.slug}/`} class="group block">
-              <h2 class="font-display text-xl font-semibold text-surface-900 transition-colors group-hover:text-brand-600 dark:text-white dark:group-hover:text-brand-300">
-                {post.data.title}
-              </h2>
-            </a>
-            <div class="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-surface-500 dark:text-surface-400">
-              <time datetime={post.data.pubDate.toISOString()}>
-                {post.data.pubDate.toLocaleDateString(locale, {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </time>
-              {post.data.author && (
-                <span>
-                  {currentContent.author} {post.data.author}
-                </span>
-              )}
-            </div>
-            {post.data.description && (
-              <p class="mt-2 text-sm leading-relaxed text-surface-600 dark:text-surface-400 line-clamp-2">
-                {post.data.description}
-              </p>
-            )}
-            {post.data.tags && post.data.tags.length > 0 && (
-              <div class="mt-3 flex flex-wrap gap-1.5">
-                {post.data.tags
-                  .filter((t: string) => (tagCounts[t] ?? 0) >= 2)
-                  .map((t: string) => (
-                    <a
-                      href={`${tagsBase}/${encodeURIComponent(t)}/`}
-                      class:list={[
-                        'rounded-full px-2 py-0.5 text-xs transition-colors',
-                        t === tag
-                          ? 'bg-brand-500/15 font-medium text-brand-700 dark:text-brand-300'
-                          : 'bg-surface-100 text-surface-600 hover:bg-surface-200 dark:bg-surface-800 dark:text-surface-400 dark:hover:bg-surface-700',
-                      ]}
-                    >
-                      #{t}
-                    </a>
-                  ))}
-              </div>
-            )}
-            <a
-              href={`${blogBase}/${post.slug}/`}
-              class="mt-3 inline-block text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-300 dark:hover:text-brand-200"
-            >
-              {currentContent.readMore} →
-            </a>
-          </article>
-        </li>
-      ))}
-    </ul>
+    <TagNavbox tag={tag!} lang={lang} routeTags={allTags} />
+
+    <TagCuratedList
+      lang={lang}
+      featured={featured}
+      timeline={timeline}
+      currentTag={tag!}
+      tagCounts={tagCounts}
+    />
   </main>
 </Layout>

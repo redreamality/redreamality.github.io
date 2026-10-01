@@ -1,0 +1,110 @@
+---
+import type { Language } from '../../utils/i18n';
+import {
+  getTagsIndexHref,
+  getPremiumThemeTeasers,
+} from '../../utils/tag-taxonomy';
+
+interface Props {
+  lang: Language;
+  /** compact = chaos strip; full = homepage block */
+  variant?: 'full' | 'compact';
+  themeLimit?: number;
+}
+
+const { lang, variant = 'full', themeLimit = 3 } = Astro.props;
+
+const copy = {
+  en: {
+    title: 'Knowledge map',
+    subtitle: 'Explore the curated taxonomy — themes, clusters, and tags.',
+    cta: 'Browse all tags',
+    compactTitle: 'Site taxonomy',
+    compactCta: 'Open knowledge map',
+  },
+  zh: {
+    title: '知识地图',
+    subtitle: '探索站点知识体系 — 主题、簇与标签。',
+    cta: '浏览全部标签',
+    compactTitle: '站点标签体系',
+    compactCta: '打开知识地图',
+  },
+  ja: {
+    title: '知識マップ',
+    subtitle: 'キュレーション分類を探索 — テーマ、クラスタ、タグ。',
+    cta: 'すべてのタグを見る',
+    compactTitle: 'サイト分類',
+    compactCta: '知識マップを開く',
+  },
+} as const;
+
+const t = copy[lang];
+const indexHref = getTagsIndexHref(lang);
+const teasers = getPremiumThemeTeasers(lang, themeLimit);
+---
+
+{variant === 'compact' ? (
+  <aside
+    class="mb-8 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-surface-200 bg-surface-50/80 px-4 py-3 dark:border-surface-800 dark:bg-surface-950/60"
+  >
+    <div class="min-w-0">
+      <p class="text-xs font-semibold uppercase tracking-wider text-surface-400 dark:text-surface-500">
+        {t.compactTitle}
+      </p>
+      <p class="mt-0.5 text-sm text-surface-600 dark:text-surface-400">
+        {teasers.map((th) => th.label).join(' · ')}
+      </p>
+    </div>
+    <a
+      href={indexHref}
+      class="shrink-0 rounded-lg bg-brand-500/10 px-3 py-1.5 text-sm font-medium text-brand-700 transition-colors hover:bg-brand-500/15 dark:text-brand-300 dark:hover:bg-brand-500/20"
+    >
+      {t.compactCta} →
+    </a>
+  </aside>
+) : (
+  <section
+    class="rounded-2xl border border-surface-200 bg-gradient-to-br from-surface-50 to-white p-6 md:p-8 dark:border-surface-800 dark:from-surface-950 dark:to-surface-900"
+    aria-labelledby="taxonomy-entry-heading"
+  >
+    <div class="flex flex-wrap items-start justify-between gap-4">
+      <div class="max-w-xl">
+        <h2
+          id="taxonomy-entry-heading"
+          class="font-display text-xl md:text-2xl font-bold tracking-tight text-surface-900 dark:text-white"
+        >
+          {t.title}
+        </h2>
+        <p class="mt-2 text-sm md:text-base leading-relaxed text-surface-600 dark:text-surface-400">
+          {t.subtitle}
+        </p>
+      </div>
+      <a
+        href={indexHref}
+        class="shrink-0 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-400"
+      >
+        {t.cta} →
+      </a>
+    </div>
+
+    {teasers.length > 0 && (
+      <ul class="mt-6 grid gap-3 sm:grid-cols-3">
+        {teasers.map((th) => (
+          <li>
+            <a
+              href={th.href}
+              class="group block h-full rounded-xl border border-surface-200 bg-white px-4 py-3.5 transition-colors hover:border-brand-400/50 hover:bg-brand-500/[0.03] dark:border-surface-700 dark:bg-surface-900 dark:hover:border-brand-400/30 dark:hover:bg-brand-500/5"
+            >
+              <span class="font-display text-sm font-semibold text-surface-900 group-hover:text-brand-600 dark:text-white dark:group-hover:text-brand-300">
+                {th.label}
+              </span>
+              <p class="mt-1.5 line-clamp-2 text-xs leading-relaxed text-surface-500 dark:text-surface-400">
+                {th.description}
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+)}
