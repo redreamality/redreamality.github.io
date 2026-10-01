@@ -45,6 +45,14 @@ const demoHref = p.demo ? toOutboundHref(p.demo, outboundLang) : null;
 const paperHref = p.paper ? toOutboundHref(p.paper, outboundLang) : null;
 const primary = githubHref || demoHref || paperHref || '#';
 const description = p.desc[lang] ?? p.desc.en;
+const detailsLabel: Record<Language, string> = {
+  en: 'Project details',
+  zh: '项目详情',
+  ja: 'プロジェクト詳細',
+};
+const detailsHref = p.details
+  ? `${lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : ''}/projects/${p.slug}/`
+  : null;
 ---
 
 <article
@@ -75,6 +83,12 @@ const description = p.desc[lang] ?? p.desc.en;
   </a>
 
   <p class="mt-2 flex-grow text-sm leading-relaxed text-surface-600 dark:text-surface-400">{description}</p>
+
+  {detailsHref && (
+    <a href={detailsHref} class="mt-3 self-start text-sm text-brand-600 dark:text-brand-300 hover:underline focus-visible:ring-2 focus-visible:ring-brand-400">
+      {detailsLabel[lang]}
+    </a>
+  )}
 
   {p.techStack && p.techStack.length > 0 && (
     <div class="mt-4 flex flex-wrap gap-1.5">

@@ -9,6 +9,7 @@ export interface Project {
   desc: Record<Language, string>;
   github?: string;
   demo?: string;
+  details?: boolean;
   paper?: string;
   venue?: string; // for papers: conference / journal
   language?: string; // primary programming language
@@ -30,6 +31,22 @@ export const projectGroups: { type: ProjectType; label: Record<Language, string>
 ];
 
 export const projects: Project[] = [
+  {
+    slug: 'my-personal-library',
+    type: 'tool',
+    title: 'My Personal Library',
+    desc: {
+      en: 'A running Python pipeline that processes bookmarks in hourly batches for private Markdown archives, Qwen summaries, keyword search, and weekly digests.',
+      zh: '已运行的 Python 流水线，按小时分批处理书签，保存私有 Markdown 正文与 Qwen 摘要，提供关键词搜索和每周汇总。',
+      ja: '毎時のバッチでブックマークを処理し、非公開の Markdown 保存、Qwen 要約、キーワード検索、週次ダイジェストを提供する Python パイプライン。',
+    },
+    github: 'https://github.com/redreamality/my-personal-library',
+    details: true,
+    language: 'Python',
+    status: 'active',
+    techStack: ['Python', 'uv', 'Jina Reader', 'Qwen', 'SQLite'],
+    year: 2026,
+  },
   {
     slug: 'the-agent-builder',
     type: 'project',
