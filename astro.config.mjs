@@ -24,15 +24,18 @@ for (const theme of tagTaxonomy.themes ?? []) {
   }
 }
 function normalizeTagForSitemap(tag) {
-  if (tagAliasMap[tag]) return tagAliasMap[tag];
-  const lower = tag.toLowerCase();
+  const raw = String(tag).trim();
+  if (tagAliasMap[raw]) return tagAliasMap[raw];
+  const lower = raw.toLowerCase();
   if (tagAliasMap[lower]) return tagAliasMap[lower];
   for (const [key, value] of Object.entries(tagAliasMap)) {
     if (key.toLowerCase() === lower) return value;
   }
+  if (curatedTagSlugs.has(raw)) return raw;
   if (curatedTagSlugs.has(lower)) return lower;
-  if (curatedTagSlugs.has(tag)) return tag;
-  return tag;
+  const kebab = raw.replace(/[\s_]+/g, '-').toLowerCase();
+  if (curatedTagSlugs.has(kebab)) return kebab;
+  return raw;
 }
 
 const siteUrl = 'https://redreamality.com';

@@ -197,7 +197,10 @@ All content files must have proper frontmatter with:
 3. **新文 frontmatter**：优先复用已有 **canonical EN kebab-case slug**（如 `ai-agents`、`agent-harness`、`sdd`）；不要发明同义变体（`AI Agents` / `Agents` / `agents`）。展示名可在 UI / display map 本地化；slug 本身不编码语言。
 4. **路由现实不变**：`getTagCounts(lang)` 只统计 blog；**count ≥ 2** 才生成 `/tags/<tag>/`。非 blog 类型（Meditations 等）不得无条件链到 `/tags/.../`——见下方 Command and Test Pitfalls 中的 Meditations 条目，并交叉遵守本节。
 5. **大改主题 / 合并 / 重命名**：先由 Tag·体系起草，经 **博客头子** 审阅后再改 `tag-taxonomy.json`（及必要时 frontmatter）；未经站长明确要求不要 push master。
-6. **aliases / 路由去重**：`getTagCounts` / `getTags` / tag `getStaticPaths` 经 `normalizeTag` 合并别名与大小写变体到 canonical slug；sitemap 过滤非 canonical 的 `/tags/<x>/`。链接一律用 canonical（`getTagHref`）。
+6. **aliases / 路由去重（半自动折叠）**：`getTagCounts` / `getTags` / tag `getStaticPaths` 经 `normalizeTag` 合并到 canonical slug；sitemap 过滤非 canonical 的 `/tags/<x>/`。链接一律用 canonical（`getTagHref`）。
+   - **`normalizeTag` 顺序**：trim → **手动 aliases 优先**（exact → lower key → 大小写不敏感 alias-key）→ 已是 curated slug → `toLowerCase()` 命中 curated（`DeepSeek`→`deepseek`）→ 空格/`_`→kebab 再 lower 命中 curated（`Claude Code`→`claude-code`）→ 否则保留原文（落入 other / minCount）。
+   - **`tag-taxonomy.json` 的 `aliases` 只放手动覆盖**：语义合并（`deepseek-harness`→`agent-harness`、`Agents`→`ai-agents`、`Agent Skills`→`ai-agents`）与 CJK/日文等变体（`规范驱动开发`→`sdd`）。**不要**为纯大小写 / 空格-kebab 再写 alias（自动规则已覆盖）；**不要**发明新 canonical，也**不要**自动把任意中文映射到英文（如勿把 `深度求索` 自动折到 `deepseek`）。
+   - 可选扫描：`node scripts/suggest-tag-aliases.mjs`（只打印建议，不回写 JSON）。
 
 ### File Naming Conventions
 - Use kebab-case for filenames: `my-blog-post.md`

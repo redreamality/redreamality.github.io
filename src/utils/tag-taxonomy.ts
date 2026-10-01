@@ -115,20 +115,31 @@ export function loadTaxonomy(): TagTaxonomy {
   return taxonomy;
 }
 
-/** Map a raw frontmatter/route tag to its canonical slug when known. */
+/**
+ * Map a raw frontmatter/route tag to its canonical slug when known.
+ * Order (manual aliases win; auto never invents new canonicals or CJK→EN maps):
+ * 1. trim
+ * 2. manual aliases: exact key, then lower key, then case-insensitive alias-key match
+ * 3. raw already a curated node slug
+ * 4. toLowerCase() hits a curated slug (DeepSeek → deepseek)
+ * 5. spaces/_ → kebab then lower hits curated (Claude Code → claude-code)
+ * 6. else keep original (other / minCount pages)
+ */
 export function normalizeTag(tag: string): string {
+  const raw = tag.trim();
   const aliases = taxonomy.aliases ?? {};
-  if (aliases[tag]) return aliases[tag];
-  const lower = tag.toLowerCase();
+  if (aliases[raw]) return aliases[raw];
+  const lower = raw.toLowerCase();
   if (aliases[lower]) return aliases[lower];
   // Case-insensitive alias key match (e.g. ANTHROPIC → Anthropic → anthropic)
   for (const [key, value] of Object.entries(aliases)) {
     if (key.toLowerCase() === lower) return value;
   }
-  // Curated node present under lowercase kebab
+  if (nodeIndex.has(raw)) return raw;
   if (nodeIndex.has(lower)) return lower;
-  if (nodeIndex.has(tag)) return tag;
-  return tag;
+  const kebab = raw.replace(/[\s_]+/g, '-').toLowerCase();
+  if (nodeIndex.has(kebab)) return kebab;
+  return raw;
 }
 
 function localized(map: LocalizedString | undefined, lang: TaxonomyLang): string {
