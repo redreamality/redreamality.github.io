@@ -1,0 +1,68 @@
+---
+import type { Language } from '../../utils/i18n';
+import { getTagHref, type ClusterTagTreeNode } from '../../utils/tag-taxonomy';
+import TagTreeBranch from './TagTreeBranch.astro';
+
+interface Props {
+  nodes: ClusterTagTreeNode[];
+  lang: Language;
+  articleWord: string;
+  articlesWord: string;
+  depth?: number;
+}
+
+const { nodes, lang, articleWord, articlesWord, depth = 0 } = Astro.props;
+
+function countLabel(n: number): string {
+  if (lang === 'zh' || lang === 'ja') return `${n}${articlesWord}`;
+  return `${n} ${n === 1 ? articleWord : articlesWord}`;
+}
+---
+
+<ul
+  class:list={[
+    'flex flex-col',
+    depth === 0 ? 'gap-0' : 'ml-3 gap-0 border-l-2 border-brand-400/40 pl-4 dark:border-brand-400/30 sm:ml-4 sm:pl-6',
+  ]}
+  role={depth === 0 ? 'tree' : 'group'}
+>
+  {nodes.map((node) => (
+    <li role="treeitem" aria-level={depth + 1} aria-expanded={node.children.length > 0 ? true : undefined}>
+      <a
+        href={getTagHref(node.tag, lang)}
+        class="group flex flex-col rounded-lg px-3 py-2.5 transition-colors hover:bg-brand-500/[0.06] dark:hover:bg-brand-500/10"
+      >
+        <div class="flex items-baseline justify-between gap-3">
+          <span
+            class:list={[
+              'font-display font-semibold text-surface-900 group-hover:text-brand-600 dark:text-white dark:group-hover:text-brand-300',
+              depth === 0 ? 'text-base' : 'text-sm',
+            ]}
+          >
+            {node.displayLabel}
+          </span>
+          <span class="shrink-0 font-mono text-xs tabular-nums text-surface-400 dark:text-surface-500">
+            {countLabel(node.count)}
+          </span>
+        </div>
+        {node.blurb && (
+          <p class="mt-1 line-clamp-2 text-xs leading-relaxed text-surface-500 dark:text-surface-400">
+            {node.blurb}
+          </p>
+        )}
+        <span class="mt-1 font-mono text-[10px] uppercase tracking-wider text-surface-400 dark:text-surface-600">
+          {node.tag}
+        </span>
+      </a>
+      {node.children.length > 0 && (
+        <TagTreeBranch
+          nodes={node.children}
+          lang={lang}
+          articleWord={articleWord}
+          articlesWord={articlesWord}
+          depth={depth + 1}
+        />
+      )}
+    </li>
+  ))}
+</ul>

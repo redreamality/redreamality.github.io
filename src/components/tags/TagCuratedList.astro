@@ -1,6 +1,16 @@
 ---
 import type { Language } from '../../utils/i18n';
 import { getLocalizedPath } from '../../utils/i18n';
+import {
+  classifyTagRelation,
+  isRelatedPathTag,
+  featuredReasonLabel,
+  sameClusterPathCue,
+  getTagDisplayLabel,
+  getTagHref,
+  normalizeTag,
+  type FeaturedReason,
+} from '../../utils/tag-taxonomy';
 
 interface PostLike {
   slug: string;
@@ -13,9 +23,14 @@ interface PostLike {
   };
 }
 
+interface FeaturedItem {
+  post: PostLike;
+  reason: FeaturedReason;
+}
+
 interface Props {
   lang: Language;
-  featured: PostLike[];
+  featured: FeaturedItem[];
   timeline: PostLike[];
   currentTag: string;
   tagCounts: Record<string, number>;
@@ -29,32 +44,66 @@ const copy = {
     timeline: 'Timeline',
     readMore: 'Read',
     author: 'by',
+    sameCluster: 'same cluster',
+    current: 'current',
   },
   zh: {
     featured: '精选',
     timeline: '时间线',
     readMore: '阅读',
     author: '作者',
+    sameCluster: '同簇',
+    current: '当前',
   },
   ja: {
     featured: '精選',
     timeline: 'タイムライン',
     readMore: '読む',
     author: '著者',
+    sameCluster: '同クラスタ',
+    current: '現在',
   },
 } as const;
 
 const t = copy[lang];
 const blogBase = getLocalizedPath('/blog/', lang).replace(/\/$/, '');
-const tagsBase = getLocalizedPath('/tags/', lang).replace(/\/$/, '');
 const locale = lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja-JP' : 'en-US';
+const canonicalCurrent = normalizeTag(currentTag);
 
-const allSections: Array<{ id: string; title: string; posts: PostLike[]; emphasize: boolean }> = [];
+type Section =
+  | { id: string; title: string; kind: 'featured'; items: FeaturedItem[] }
+  | { id: string; title: string; kind: 'timeline'; items: PostLike[] };
+
+const allSections: Section[] = [];
 if (featured.length > 0) {
-  allSections.push({ id: 'tag-featured-heading', title: t.featured, posts: featured, emphasize: true });
+  allSections.push({
+    id: 'tag-featured-heading',
+    title: t.featured,
+    kind: 'featured',
+    items: featured,
+  });
 }
 if (timeline.length > 0) {
-  allSections.push({ id: 'tag-timeline-heading', title: t.timeline, posts: timeline, emphasize: false });
+  allSections.push({
+    id: 'tag-timeline-heading',
+    title: t.timeline,
+    kind: 'timeline',
+    items: timeline,
+  });
+}
+
+function visibleTags(post: PostLike): string[] {
+  return (post.data.tags ?? []).filter((tg) => (tagCounts[tg] ?? 0) >= 2 || normalizeTag(tg) === canonicalCurrent);
+}
+
+function chipClass(kind: ReturnType<typeof classifyTagRelation>): string {
+  if (kind === 'self') {
+    return 'bg-brand-500/15 font-medium text-brand-700 ring-1 ring-brand-500/40 dark:text-brand-300 dark:ring-brand-400/40';
+  }
+  if (isRelatedPathTag(kind)) {
+    return 'bg-brand-500/10 font-medium text-brand-700 ring-1 ring-brand-500/50 dark:bg-brand-500/15 dark:text-brand-300 dark:ring-brand-400/45';
+  }
+  return 'bg-surface-100 text-surface-500 ring-1 ring-transparent dark:bg-surface-800 dark:text-surface-500';
 }
 ---
 
@@ -67,69 +116,153 @@ if (timeline.length > 0) {
       >
         {section.title}
       </h2>
-      <span class="text-xs text-surface-400 dark:text-surface-500">{section.posts.length}</span>
+      <span class="text-xs text-surface-400 dark:text-surface-500">{section.items.length}</span>
     </div>
     <ul class="divide-y divide-surface-200 dark:divide-surface-800">
-      {section.posts.map((post) => (
-        <li class="py-5 first:pt-0">
-          <article>
-            <a href={`${blogBase}/${post.slug}/`} class="group block">
-              <h3
-                class:list={[
-                  'font-display font-semibold text-surface-900 transition-colors group-hover:text-brand-600 dark:text-white dark:group-hover:text-brand-300',
-                  section.emphasize ? 'text-xl md:text-2xl' : 'text-lg',
-                ]}
-              >
-                {post.data.title}
-              </h3>
-            </a>
-            <div class="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-surface-500 dark:text-surface-400">
-              <time datetime={post.data.pubDate.toISOString()}>
-                {post.data.pubDate.toLocaleDateString(locale, {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </time>
-              {post.data.author && (
-                <span>
-                  {t.author} {post.data.author}
-                </span>
-              )}
-            </div>
-            {post.data.description && (
-              <p class="mt-2 text-sm leading-relaxed text-surface-600 dark:text-surface-400 line-clamp-2">
-                {post.data.description}
-              </p>
-            )}
-            {post.data.tags && post.data.tags.length > 0 && (
-              <div class="mt-3 flex flex-wrap gap-1.5">
-                {post.data.tags
-                  .filter((tg: string) => (tagCounts[tg] ?? 0) >= 2)
-                  .map((tg: string) => (
-                    <a
-                      href={`${tagsBase}/${encodeURIComponent(tg)}/`}
-                      class:list={[
-                        'rounded-full px-2 py-0.5 text-xs transition-colors',
-                        tg === currentTag
-                          ? 'bg-brand-500/15 font-medium text-brand-700 dark:text-brand-300'
-                          : 'bg-surface-100 text-surface-600 hover:bg-surface-200 dark:bg-surface-800 dark:text-surface-400 dark:hover:bg-surface-700',
-                      ]}
-                    >
-                      #{tg}
-                    </a>
-                  ))}
-              </div>
-            )}
-            <a
-              href={`${blogBase}/${post.slug}/`}
-              class="mt-3 inline-block text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-300 dark:hover:text-brand-200"
-            >
-              {t.readMore} →
-            </a>
-          </article>
-        </li>
-      ))}
+      {section.kind === 'featured'
+        ? section.items.map(({ post, reason }) => {
+            const pathCue = sameClusterPathCue(currentTag, post.data.tags, lang);
+            const reasonLabel = featuredReasonLabel(reason, lang);
+            const tags = visibleTags(post);
+            return (
+              <li class="py-5 first:pt-0">
+                <article>
+                  <p class="mb-1.5 text-xs font-medium text-brand-600 dark:text-brand-300">
+                    {reasonLabel}
+                  </p>
+                  <a href={`${blogBase}/${post.slug}/`} class="group block">
+                    <h3 class="font-display text-xl font-semibold text-surface-900 transition-colors group-hover:text-brand-600 md:text-2xl dark:text-white dark:group-hover:text-brand-300">
+                      {post.data.title}
+                    </h3>
+                  </a>
+                  {pathCue && (
+                    <p class="mt-1 text-xs text-surface-500 dark:text-surface-400">{pathCue}</p>
+                  )}
+                  <div class="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-surface-500 dark:text-surface-400">
+                    <time datetime={post.data.pubDate.toISOString()}>
+                      {post.data.pubDate.toLocaleDateString(locale, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </time>
+                    {post.data.author && (
+                      <span>
+                        {t.author} {post.data.author}
+                      </span>
+                    )}
+                  </div>
+                  {post.data.description && (
+                    <p class="mt-2 text-sm leading-relaxed text-surface-600 dark:text-surface-400 line-clamp-2">
+                      {post.data.description}
+                    </p>
+                  )}
+                  {tags.length > 0 && (
+                    <div class="mt-3 flex flex-wrap gap-1.5">
+                      {tags.map((tg) => {
+                        const kind = classifyTagRelation(currentTag, tg);
+                        const related = isRelatedPathTag(kind);
+                        return (
+                          <a
+                            href={getTagHref(normalizeTag(tg), lang)}
+                            class:list={[
+                              'inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs transition-colors',
+                              chipClass(kind),
+                              kind !== 'self' && 'hover:bg-brand-500/15 dark:hover:bg-brand-500/20',
+                            ]}
+                          >
+                            <span>#{getTagDisplayLabel(tg, lang)}</span>
+                            {related && (
+                              <span class="rounded bg-brand-500/20 px-1 py-px text-[10px] font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
+                                {t.sameCluster}
+                              </span>
+                            )}
+                            {kind === 'self' && (
+                              <span class="sr-only">{t.current}</span>
+                            )}
+                          </a>
+                        );
+                      })}
+                    </div>
+                  )}
+                  <a
+                    href={`${blogBase}/${post.slug}/`}
+                    class="mt-3 inline-block text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-300 dark:hover:text-brand-200"
+                  >
+                    {t.readMore} →
+                  </a>
+                </article>
+              </li>
+            );
+          })
+        : section.items.map((post) => {
+            const pathCue = sameClusterPathCue(currentTag, post.data.tags, lang);
+            const tags = visibleTags(post);
+            return (
+              <li class="py-5 first:pt-0">
+                <article>
+                  <a href={`${blogBase}/${post.slug}/`} class="group block">
+                    <h3 class="font-display text-lg font-semibold text-surface-900 transition-colors group-hover:text-brand-600 dark:text-white dark:group-hover:text-brand-300">
+                      {post.data.title}
+                    </h3>
+                  </a>
+                  {pathCue && (
+                    <p class="mt-1 text-xs text-surface-500 dark:text-surface-400">{pathCue}</p>
+                  )}
+                  <div class="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-surface-500 dark:text-surface-400">
+                    <time datetime={post.data.pubDate.toISOString()}>
+                      {post.data.pubDate.toLocaleDateString(locale, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </time>
+                    {post.data.author && (
+                      <span>
+                        {t.author} {post.data.author}
+                      </span>
+                    )}
+                  </div>
+                  {post.data.description && (
+                    <p class="mt-2 text-sm leading-relaxed text-surface-600 dark:text-surface-400 line-clamp-2">
+                      {post.data.description}
+                    </p>
+                  )}
+                  {tags.length > 0 && (
+                    <div class="mt-3 flex flex-wrap gap-1.5">
+                      {tags.map((tg) => {
+                        const kind = classifyTagRelation(currentTag, tg);
+                        const related = isRelatedPathTag(kind);
+                        return (
+                          <a
+                            href={getTagHref(normalizeTag(tg), lang)}
+                            class:list={[
+                              'inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs transition-colors',
+                              chipClass(kind),
+                              kind !== 'self' && 'hover:bg-brand-500/15 dark:hover:bg-brand-500/20',
+                            ]}
+                          >
+                            <span>#{getTagDisplayLabel(tg, lang)}</span>
+                            {related && (
+                              <span class="rounded bg-brand-500/20 px-1 py-px text-[10px] font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
+                                {t.sameCluster}
+                              </span>
+                            )}
+                          </a>
+                        );
+                      })}
+                    </div>
+                  )}
+                  <a
+                    href={`${blogBase}/${post.slug}/`}
+                    class="mt-3 inline-block text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-300 dark:hover:text-brand-200"
+                  >
+                    {t.readMore} →
+                  </a>
+                </article>
+              </li>
+            );
+          })}
     </ul>
   </section>
 ))}
