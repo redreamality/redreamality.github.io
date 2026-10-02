@@ -5,6 +5,7 @@ import 'katex/dist/katex.min.css';
 import LanguageToggle from '../components/LanguageToggle.astro';
 import DarkModeToggle from '../components/DarkModeToggle.astro';
 import { getPageTitle } from '../utils/page-titles';
+import { resolveDocumentTitle, resolveMetaDescription } from '../utils/seo';
 import { serializeJsonForScript } from '../utils/json-script';
 import {
   detectLanguageFromPath,
@@ -20,6 +21,7 @@ import {
 const currentLang = detectLanguageFromPath(Astro.url.pathname);
 const {
     title: suppliedTitle = t('home', currentLang) + " - Redreamality's Blog",
+    seoTitle: suppliedSeoTitle,
     description = currentLang === 'zh' ? "欢迎访问 Redreamality 的个人博客，这里汇集了关于软件开发、AI 智能体及各类技术创新项目的深度文章与实践经验。" : currentLang === 'ja' ? "Redreamalityのブログへようこそ。ソフトウェア開発、AIエージェント、最新テクノロジーに関する詳細な記事やプロジェクトの成果を公開しています。" : "Explore Redreamality's personal blog and project showcase, featuring in-depth articles on software development, AI agents, and innovative technology solutions.",
     ogTitle: suppliedOgTitle,
     ogDescription = description,
@@ -33,8 +35,11 @@ const {
     robots = "index, follow, max-image-preview:large",
 } = Astro.props;
 
-const title = getPageTitle(Astro.url.pathname, currentLang, suppliedTitle);
-const ogTitle = suppliedOgTitle ?? title;
+const routeTitle = getPageTitle(Astro.url.pathname, currentLang, suppliedTitle);
+const title = resolveDocumentTitle(suppliedSeoTitle ?? routeTitle, currentLang, undefined, { description });
+const descriptionResolved = resolveMetaDescription(description, routeTitle, currentLang);
+const ogTitle = suppliedOgTitle ?? routeTitle;
+const ogDescriptionResolved = resolveMetaDescription(ogDescription, routeTitle, currentLang);
 const socialImageURL = new URL(image, Astro.site);
 const hreflangAlternates = getHreflangAlternates(Astro.url.pathname, Astro.site.toString());
 const localeString = getLocaleString(currentLang);
@@ -116,7 +121,7 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
         <!-- Primary Meta Tags -->
         <title>{title}</title>
         <meta name="title" content={title} />
-        <meta name="description" content={description} />
+        <meta name="description" content={descriptionResolved} />
         <link rel="canonical" href={canonicalURL} />
 
         <!-- Hreflang Tags -->
@@ -134,7 +139,7 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
         <meta property="og:type" content={type} />
         <meta property="og:url" content={canonicalURL} />
         <meta property="og:title" content={ogTitle} />
-        <meta property="og:description" content={ogDescription} />
+        <meta property="og:description" content={ogDescriptionResolved} />
         <meta property="og:image" content={socialImageURL} />
         <meta property="og:site_name" content="Redreamality's Blog" />
         <meta property="og:locale" content={localeString} />
@@ -147,7 +152,7 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content={canonicalURL} />
         <meta property="twitter:title" content={ogTitle} />
-        <meta property="twitter:description" content={ogDescription} />
+        <meta property="twitter:description" content={ogDescriptionResolved} />
         <meta property="twitter:image" content={socialImageURL} />
         <meta name="twitter:creator" content="@redreamality" />
         
@@ -162,8 +167,8 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
         <script type="application/ld+json" set:html={serializeJsonForScript({
             "@context": "https://schema.org",
             "@type": type === "article" ? "BlogPosting" : "WebSite",
-            "headline": title,
-            "description": description,
+            "headline": routeTitle,
+            "description": descriptionResolved,
             "image": socialImageURL.toString(),
             "url": canonicalURL.toString(),
             "author": {

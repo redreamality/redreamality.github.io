@@ -51,7 +51,7 @@ const locale = 'ja-JP';
           <ContentCard
             href={`${basePath}/blog/${post.slug}/`}
             title={post.data.title}
-            description={post.data.description}
+            description={post.data.seoDescription ?? post.data.description}
             dateISO={new Date(post.data.pubDate).toISOString()}
             dateLabel={new Date(post.data.pubDate).toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' })}
             tags={post.data.tags}

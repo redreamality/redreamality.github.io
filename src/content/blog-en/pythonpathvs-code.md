@@ -1,7 +1,7 @@
 ---
 title: 'How to Set PYTHONPATH on Windows, Linux, macOS and VS Code'
 pubDate: 2025-08-21T09:24:07.954Z
-description: 'Set and check PYTHONPATH with PowerShell or export commands. Configure VS Code terminals and debugging, and diagnose Python import errors.'
+description: 'Set and check PYTHONPATH with PowerShell or export commands. Configure VS Code terminals and debugging so Python imports resolve across Windows, Linux, and macOS.'
 author: 'Remy'
 tags: ['python']
 ---

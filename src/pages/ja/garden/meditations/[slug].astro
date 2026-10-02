@@ -43,7 +43,8 @@ const relatedItems = related.map((r) => ({
 
 <Layout
   title={meditation.data.title}
-  description={meditation.data.description}
+  seoTitle={meditation.data.seoTitle}
+  description={meditation.data.seoDescription ?? meditation.data.description}
   publishDate={formattedDate}
   tags={meditation.data.tags || []}
   type="article"

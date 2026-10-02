@@ -54,7 +54,7 @@ const relatedItems = relatedProjects.map((relatedProject) => ({
 }));
 ---
 
-<Layout title={project.data.title} description={project.data.description}>
+<Layout title={project.data.title} seoTitle={project.data.seoTitle} description={project.data.seoDescription ?? project.data.description}>
   <main class="container mx-auto px-4 py-8">
     <div class="max-w-4xl mx-auto">
       {headings && headings.length > 0 && <TableOfContents headings={headings} />}

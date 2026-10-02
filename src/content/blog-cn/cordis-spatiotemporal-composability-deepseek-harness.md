@@ -1,7 +1,7 @@
 ---
 title: 'Cordis 深度解析：插件生命周期与 DeepSeek Harness'
 pubDate: 2026-08-23T00:00:00.000Z
-description: '从零讲透 Cordis 插件系统、内核、可撤销 effect、反应式 coeffect、时空可组合性，以及它与 DeepSeek Harness、Koishi、Shigma 和 Cordis v4 的真实关系。'
+description: '从零讲透 Cordis 插件系统、内核、可撤销 effect、反应式 coeffect 与时空可组合性，并说明它与 DeepSeek Harness、Koishi、Shigma 及 Cordis v4 的关系、边界与实践取舍。'
 author: 'Remy'
 tags: ['cordis', 'agent-harness', 'plugin-system', 'spatiotemporal-composability', 'agent-loop']
 lang: 'zh'

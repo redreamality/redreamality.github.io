@@ -59,7 +59,8 @@ const relatedItems = relatedQuestions.map((relatedQuestion) => ({
 
 <Layout 
   title={question.data.title} 
-  description={question.data.description}
+  seoTitle={question.data.seoTitle}
+  description={question.data.seoDescription ?? question.data.description}
   publishDate={formattedDate}
   tags={question.data.tags || []}
   type="article"

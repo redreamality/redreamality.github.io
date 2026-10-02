@@ -9,7 +9,12 @@ describe('listing SEO titles', () => {
         '/garden/talks/', '/garden/meditations/', '/tags/', '/about/'];
       const titles = paths.map(path => getPageTitle(`${prefix}${path}`, lang, 'fallback'));
       expect(new Set(titles).size).toBe(paths.length);
-      for (const title of titles) expect(title).toContain('Redreamality');
+      const min = lang === 'en' ? 45 : 30;
+      for (const title of titles) {
+        expect(title).toContain('Redreamality');
+        expect(title.length).toBeGreaterThanOrEqual(min);
+        expect(title.length).toBeLessThanOrEqual(70);
+      }
     });
   }
   it('normalizes trailing slashes without matching detail pages or similar prefixes', () => {

@@ -9,6 +9,7 @@ import robotsTxt from 'astro-robots-txt';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeOutboundLinks from './src/plugins/rehype-outbound-links.ts';
+import remarkDemoteH1 from './src/plugins/remark-demote-h1.ts';
 import visualManifest from './src/data/visuals-manifest.json';
 import tagTaxonomy from './src/data/tag-taxonomy.json' with { type: 'json' };
 import { getLegacyBlogRedirectPaths } from './scripts/legacy-blog-redirects.mjs';
@@ -72,7 +73,7 @@ const katexOptions = {
   }
 };
 
-const sharedRemarkPlugins = [remarkMath];
+const sharedRemarkPlugins = [remarkMath, remarkDemoteH1];
 const sharedRehypePlugins = [
   [rehypeKatex, katexOptions],
   rehypeOutboundLinks,

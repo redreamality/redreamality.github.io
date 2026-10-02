@@ -4,7 +4,9 @@ import { z } from 'astro/zod';
 
 const blogSchema = z.object({
   title: z.string(),
+  seoTitle: z.string().optional(), // document <title> override; H1 keeps title
   description: z.string(),
+  seoDescription: z.string().optional(),
   pubDate: z.date(),
   author: z.string(),
   tags: z.array(z.string()).optional(),
@@ -18,7 +20,9 @@ const chaosSchema = blogSchema;
 
 const talksSchema = z.object({
   title: z.string(),
+  seoTitle: z.string().optional(),
   description: z.string(),
+  seoDescription: z.string().optional(),
   date: z.date(),
   location: z.string().optional(),
   slides: z.string().optional(),
@@ -29,7 +33,9 @@ const talksSchema = z.object({
 
 const questionsSchema = z.object({
   title: z.string(),
+  seoTitle: z.string().optional(),
   description: z.string(),
+  seoDescription: z.string().optional(),
   date: z.date(),
   tags: z.array(z.string()).optional(),
   lang: z.enum(['zh', 'en', 'ja']).optional(),
@@ -38,7 +44,9 @@ const questionsSchema = z.object({
 
 const notesSchema = z.object({
   title: z.string(),
+  seoTitle: z.string().optional(),
   description: z.string(),
+  seoDescription: z.string().optional(),
   date: z.date(),
   source: z.string().optional(), // Original source URL or reference
   tags: z.array(z.string()).optional(),
@@ -48,7 +56,9 @@ const notesSchema = z.object({
 
 const projectsSchema = z.object({
   title: z.string(),
+  seoTitle: z.string().optional(),
   description: z.string(),
+  seoDescription: z.string().optional(),
   pubDate: z.date(),
   author: z.string(),
   lang: z.enum(['zh', 'en', 'ja']).optional(),
@@ -74,7 +84,9 @@ const projectsSchema = z.object({
 
 const meditationsSchema = z.object({
   title: z.string(),
+  seoTitle: z.string().optional(),
   description: z.string(),
+  seoDescription: z.string().optional(),
   date: z.date(),
   tags: z.array(z.string()).optional(),
   theme: z.string().optional(), // optional thematic label, e.g. "成长" / "工程哲学"

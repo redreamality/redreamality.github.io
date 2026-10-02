@@ -64,7 +64,8 @@ const relatedItems = relatedTalks.map((relatedTalk) => ({
 
 <Layout 
   title={talk.data.title} 
-  description={talk.data.description}
+  seoTitle={talk.data.seoTitle}
+  description={talk.data.seoDescription ?? talk.data.description}
   publishDate={formattedDate}
   type="article"
 >

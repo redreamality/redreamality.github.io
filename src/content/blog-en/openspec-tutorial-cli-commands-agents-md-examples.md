@@ -1,7 +1,7 @@
 ---
 title: 'OpenSpec Tutorial: Install the CLI and Run Your First Change'
 pubDate: 2026-06-16T08:15:00.000Z
-description: 'Install and initialize OpenSpec, create your first change, validate specs, and archive completed work. Includes CLI commands and AGENTS.md examples.'
+description: 'Install and initialize OpenSpec, create your first change, validate specs, and archive completed work with CLI examples for Agents.md workflows.'
 author: 'Remy'
 tags: ['openspec', 'sdd', 'ai-coding', 'agents.md', 'cli']
 ---

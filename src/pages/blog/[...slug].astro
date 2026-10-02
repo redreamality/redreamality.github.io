@@ -82,7 +82,8 @@ const relatedItems = relatedPosts.map((relatedPost) => ({
 
 <Layout 
   title={post.data.title} 
-  description={post.data.description}
+  seoTitle={post.data.seoTitle}
+  description={post.data.seoDescription ?? post.data.description}
   publishDate={formattedDate}
   tags={filteredTags}
   type="article"

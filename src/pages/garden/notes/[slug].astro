@@ -61,7 +61,8 @@ const relatedItems = relatedNotes.map((relatedNote) => ({
 
 <Layout 
   title={note.data.title} 
-  description={note.data.description}
+  seoTitle={note.data.seoTitle}
+  description={note.data.seoDescription ?? note.data.description}
   publishDate={formattedDate}
   tags={note.data.tags || []}
   type="article"
