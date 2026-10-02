@@ -45,6 +45,7 @@
     "visual-kit:e2e": "pnpm visual-kit:test && pnpm visual-kit:build && playwright test --config=tools/visual-explainer-kit/playwright.config.ts",
     "trigger:rebuild": "node scripts/trigger-rebuild.mjs",
     "chaos:digest": "node scripts/build-chaos-digest.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
     "visual-kit:enso-food-prices": "uv run --no-project python -B tools/visual-explainer-kit/build.py --manifest manifest-enso-food-prices.json --output src/assets/html-pages/enso-food-prices",
     "visual-kit:prisoners-dilemma": "uv run --no-project python -B tools/visual-explainer-kit/build.py --manifest manifest-prisoners-dilemma.json --output src/assets/html-pages/prisoners-dilemma",
     "visual-kit:butterfly-effect": "uv run --no-project python -B tools/visual-explainer-kit/build.py --manifest manifest-butterfly-effect.json --output src/assets/html-pages/butterfly-effect",

@@ -224,6 +224,34 @@ All content files must have proper frontmatter with:
 
 详见 `/workspace/blog-pipeline/CHAOS.md`。
 
+### IndexNow（搜索引擎即时通知）
+
+站点通过 [IndexNow](https://www.indexnow.org/documentation.html) 在内容发布/变更后通知 Bing、Yandex 等参与引擎。
+
+| 角色 | 路径 |
+|---|---|
+| 所有权验证 key 文件（public，部署后可公开访问） | `public/97c30153e5a34ca0854e52d8ae413f1a.txt` → `https://redreamality.com/97c30153e5a34ca0854e52d8ae413f1a.txt` |
+| 提交脚本 | `scripts/indexnow.mjs` |
+| CI | `.github/workflows/deploy.yml` 的 `indexnow` job（`deploy` 成功后，对本次 push 的 content diff 提交） |
+
+手动提交：
+
+```bash
+# 单个或多个 URL
+node scripts/indexnow.mjs https://redreamality.com/blog/your-slug/
+pnpm indexnow -- https://redreamality.com/cn/blog/your-slug/
+
+# 从上次提交映射 content 变更（blog/notes/chaos/talks/questions/meditations/projects × en/cn/ja）
+node scripts/indexnow.mjs --git-diff HEAD~1 HEAD
+node scripts/indexnow.mjs --git-diff HEAD~1 HEAD --dry-run
+
+# stdin（每行一个 URL）
+printf '%s\n' 'https://redreamality.com/garden/notes/foo/' | node scripts/indexnow.mjs --stdin
+```
+
+说明：IndexNow key 按协议会放在站点根路径供引擎抓取，不是 GitHub Actions secret。首次提交可能返回 HTTP 202（key 校验中），属正常。可选在 [Bing Webmaster Tools](https://www.bing.com/webmasters) 登记同一 IndexNow key 以便查看接收状态。
+
+
 ## Summary
 
 **The Golden Rule:** One H1 per page. The frontmatter `title` is the H1. Start markdown content with H2 (`##`) or plain text, never with H1 (`#`).
