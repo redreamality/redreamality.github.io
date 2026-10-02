@@ -2,6 +2,713 @@
   "version": 1,
   "entries": [
     {
+      "id": "1a630277f46316edefa0237511ef22af2dc976e8a819ce2a5c4a9bdefce27a22",
+      "title": "Scaling SQLite to 4M QPS on a Single Server (EC2 vs Bare Metal)",
+      "url": "https://use.expensify.com/blog/scaling-sqlite-to-4m-qps-on-a-single-server",
+      "date": "2026-10-02T19:25:02.038Z",
+      "language": "zh",
+      "sentence": "Expensify 通过自托管硬件、Bedrock 和针对 SQLite 的少量修改，在单台服务器上实现超过 400 万 QPS 的并行读性能，并显示裸金属在成本和性能上优于 EC2。",
+      "bullets": [
+        {
+          "heading": "技术栈与 Bedrock",
+          "details": [
+            "Expensify 使用 SQLite 而非 MySQL 或 Postgres，并通过自研开源 Bedrock 提供分布式事务、任务队列和复制缓存。",
+            "其内部不使用 DNS，主要依靠配置管理的 /etc/hosts，并自托管 Web 与数据库硬件。"
+          ]
+        },
+        {
+          "heading": "硬件与扩展动机",
+          "details": [
+            "新一代自托管服务器配备 1TB DDR4 内存、3TB NVMe SSD 和 192 个 2.7GHz 物理核心，超线程后为 384 线程。",
+            "Expensify 不做数据分片，因为用户可跨客户共享费用，会计公司需要跨客户聚合处理。"
+          ]
+        },
+        {
+          "heading": "SQLite 调整",
+          "details": [
+            "SQLite 做了若干修改，包括禁用 Posix 建议锁、让 RANDOM() 确定性、禁用 malloc 全局锁并扩展内存映射上限。",
+            "核心设计基本适合该场景，主要优化集中在 BIOS 和内核电源设置，以减少额外内存访问并避免 CPU 降频。"
+          ]
+        },
+        {
+          "heading": "测试方法",
+          "details": [
+            "测试对每种线程数运行 100 秒，并取最快一秒作为结果，以过滤缓存预热造成的慢样本。",
+            "查询在 100 亿行、447GB 的两列随机整数表中随机求和 10 行，数据库预先缓存且只读。"
+          ]
+        },
+        {
+          "heading": "性能结果",
+          "details": [
+            "裸金属服务器在 192 线程下达到 400 万 QPS 以上并继续上升，而 EC2 x1e.32xlarge 约在 150 万 QPS 封顶。",
+            "EC2 x1e.32xlarge 标称 128 vCPU 和 4TB 内存，按文中价格约 26.688 美元/小时或 23.3 万美元/年。"
+          ]
+        },
+        {
+          "heading": "EC2 与裸金属差异",
+          "details": [
+            "EC2 的 128 个 vCPU 实际对应 64 个物理 CPU 加超线程，且每线程性能随线程数增加明显下降。",
+            "作者认为 EC2 可能采用平衡性能配置，在高功耗时降低时钟速度，而自托管可调整 BIOS 电源设置。"
+          ]
+        },
+        {
+          "heading": "结论与后续",
+          "details": [
+            "SQLite 在并行读负载下扩展接近线性，超线程也能带来额外容量。",
+            "测试在 Meltdown/Spectre 之前完成，早期迹象显示性能约下降 2.5%；SQLite 也支持 WAL 和页面锁等写并发能力。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 13285,
+        "totalChars": 13285
+      }
+    },
+    {
+      "id": "af4ac08c28739e231235fa496974bbe9ba40dd4748e3a206a3958602f2ea92ad",
+      "title": "glanceapp/glance",
+      "url": "https://github.com/glanceapp/glance",
+      "date": "2026-10-02T19:24:43.004Z",
+      "language": "zh",
+      "sentence": "该页面介绍了 Glance 自托管仪表盘的功能、配置、安装方式和常见问题。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "Glance 是一个自托管仪表盘项目。",
+            "它把多种信息源集中到一个轻量、可定制的界面中。"
+          ]
+        },
+        {
+          "heading": "支持组件",
+          "details": [
+            "支持 RSS、Subreddit、Hacker News、天气、YouTube、Twitch、市场价格等组件。",
+            "也支持 Docker 容器状态、服务器统计和自定义组件。"
+          ]
+        },
+        {
+          "heading": "性能特点",
+          "details": [
+            "项目强调低内存占用、较少依赖和最小化原生 JavaScript。",
+            "提供小于 20MB 的单文件二进制和多平台 Docker 容器。",
+            "未缓存页面通常约 1 秒加载，具体取决于网速和组件数量。"
+          ]
+        },
+        {
+          "heading": "配置与主题",
+          "details": [
+            "配置通过 YAML 文件完成，可设置页面、列和组件。",
+            "支持自定义 CSS、多页面/标签以及多种组件样式。",
+            "可通过调整少量数值创建主题，也可选择已有主题。"
+          ]
+        },
+        {
+          "heading": "安装方式",
+          "details": [
+            "推荐通过 Docker Compose 模板目录安装。",
+            "也可手动编写 Docker Compose 文件，或在 Linux、Windows、macOS 上运行预编译二进制。",
+            "第三方渠道包括 Proxmox VE Helper Script、NixOS、Hostinger 和 Coolify。"
+          ]
+        },
+        {
+          "heading": "常见问题与扩展",
+          "details": [
+            "请求超时常与 Pi-Hole、AdGuard Home 等 DNS 服务的限流有关。",
+            "页面信息通常需刷新更新，组件数据在加载时获取并缓存。",
+            "可通过 iframe、html、extension 或 custom-api 组件创建自定义内容。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 15145,
+        "totalChars": 15145
+      }
+    },
+    {
+      "id": "589e3ac2cf7acec883bb29b3ff28e8fd8d9d6b75464e4c07e97206364d74e3f9",
+      "title": "listmonk 邮件订阅系统搭建与 RSS 转换指南 | 2025 年第 1 周草梅周报",
+      "url": "https://blog.cmyr.ltd/archives/2025-01-caomei-weekly-email-subscription-rss-conversion-guide.html",
+      "date": "2026-10-02T19:24:22.731Z",
+      "language": "zh",
+      "sentence": "该周报介绍了 listmonk 邮件订阅与 RSS 转换、rss-impact-server v1.14.3 更新，并推荐多篇周刊和订阅渠道。",
+      "bullets": [
+        {
+          "heading": "周报内容",
+          "details": [
+            "草梅周报由草梅友仁基于 AI 整理。",
+            "内容涵盖博客更新、GitHub 动态、个人动态和其他周刊文章推荐。"
+          ]
+        },
+        {
+          "heading": "邮件订阅与 RSS",
+          "details": [
+            "作者更新了 listmonk 邮件订阅系统搭建指南。",
+            "同时提供 RSS 与邮件互相转换指南。",
+            "邮件订阅地址为 listmonk.cmyr.dev/subscription/form。"
+          ]
+        },
+        {
+          "heading": "GitHub Release",
+          "details": [
+            "rss-impact-server 发布 v1.14.3。",
+            "发布时间为 2025-01-04 20:40:48。",
+            "更新包括代码重构、测试优化和 Bug 修复。"
+          ]
+        },
+        {
+          "heading": "版本更新细节",
+          "details": [
+            "优化系统信息输出格式。",
+            "修复 e2e 测试中的 app 关闭逻辑，并将测试数据库初始化改用 beforeAll 和 afterAll。",
+            "将常量 RESOURCE_SAVE_DAYS 更名为 ARTICLE_SAVE_DAYS。"
+          ]
+        },
+        {
+          "heading": "周刊推荐",
+          "details": [
+            "推荐阮一峰科技爱好者周刊第 332 期。",
+            "推荐 HelloGitHub 热点速览、阿猫的博客 2024 年度总结和潮流周刊第 206 期。"
+          ]
+        },
+        {
+          "heading": "订阅与往期",
+          "details": [
+            "可通过博客、公众号、邮箱订阅和 Memos 订阅更新。",
+            "往期回顾包括 2024 年第 53、52、51 周草梅周报。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 4139,
+        "totalChars": 4139
+      }
+    },
+    {
+      "id": "7c77f6039cb392378b9a022f9fdd3a2a58ad7b5227d51cbdc5ca382ee3340b51",
+      "title": "万维广告",
+      "url": "https://wwads.cn/",
+      "date": "2026-10-02T19:24:02.650Z",
+      "language": "zh",
+      "sentence": "万维广告是一个主打专业受众、非侵入式上下文广告和按效果付费的广告平台，页面展示了其受众群、精选流量、运营数据、客户案例及广告工具。",
+      "bullets": [
+        {
+          "heading": "平台定位",
+          "details": [
+            "万维广告是一个面向专业受众的广告平台，页面口号为“让您的广告 简单 优雅 更有效”。",
+            "页面称其服务从创业团队到财富500强的广告主，帮助规模化触达专业受众、建立品牌并获取线索。",
+            "平台同时面向广告主和流量主，提供免费开户入口和流量主招募入口。"
+          ]
+        },
+        {
+          "heading": "受众与流量",
+          "details": [
+            "页面列出三类主要受众群：开发者、产品/运营/商务、游戏/泛文娱爱好者。",
+            "精选流量主包括 CSDN 博客、异次元软件世界、苹果团、编程狮、Vue.js、虫部落、ThinkPHP 等网站。",
+            "页面显示 CSDN 博客月均曝光人次为 3110.57 万，异次元软件世界为 102.36 万。"
+          ]
+        },
+        {
+          "heading": "投放方式",
+          "details": [
+            "页面强调采用非侵入式上下文广告和受众群广告，避免大型 Banner、高屏占比和强侵入式广告。",
+            "页面称其仅分析网站类型和页面话题，不给最终用户打标签做广告推荐系统。",
+            "页面称广告曝光免费，广告主可按效果付费，并提到当前低价优惠的 CPC 价格。"
+          ]
+        },
+        {
+          "heading": "运营数据",
+          "details": [
+            "页面显示“7年+ 深耕开发者营销”。",
+            "页面显示广告主续费率为 37%。",
+            "页面显示广告总曝光人次为 55.1 亿，广告总点击量为 187.7 万。"
+          ]
+        },
+        {
+          "heading": "客户案例",
+          "details": [
+            "成功客户案例标签包括云服务器、开发者工具、开源系统、API服务、DevOps、网络工具、AI、SaaS服务等。",
+            "页面展示的客户评价来自 CRMEB 创始人许荣耀、Vue.js 创始人尤雨溪、Apifox 产品 VP 王蓬。"
+          ]
+        },
+        {
+          "heading": "工具与生态",
+          "details": [
+            "页面提供免费互动统计服务，并可统计转化次数、针对转化进行投放优化。",
+            "页面提到支持插入变量和页面话题定位，以提升广告投放精准度。",
+            "页面包含万维广告研究院内容，如互联网广告的秘密、流量主如何提升网站广告收益、广告投放学习期，以及《创业公司增长指南 - Growth 101》。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 11901,
+        "totalChars": 11901
+      }
+    },
+    {
+      "id": "948393928833109abd586ba9027680a1d5df72f3284a0df44150dcc5be1142ab",
+      "title": "手机号码提取工具-同时支持座机邮箱提取_蛙蛙工具",
+      "url": "https://www.iamwawa.cn/getmobile.html",
+      "date": "2026-10-02T19:23:43.670Z",
+      "language": "zh",
+      "sentence": "该页面介绍蛙蛙工具的联系信息提取功能，可从文本中提取中国常用手机号码、座机号码和邮箱地址。",
+      "bullets": [
+        {
+          "heading": "工具定位",
+          "details": [
+            "页面来自蛙蛙工具，定位为便捷的在线工具网站。",
+            "当前页面是联系信息提取工具。"
+          ]
+        },
+        {
+          "heading": "提取能力",
+          "details": [
+            "支持从文本中提取中国常用的11位手机号码。",
+            "同时支持提取座机号码和邮箱地址。",
+            "页面提供“包含内容”和“不包含内容”的设置项。"
+          ]
+        },
+        {
+          "heading": "使用场景",
+          "details": [
+            "用于快速从文本中提取联系信息。",
+            "可减少手动逐个复制的麻烦。"
+          ]
+        },
+        {
+          "heading": "站内工具",
+          "details": [
+            "导航包含文本、语言、财务、日期时间、换算、图像、便民查询、开发、编码解码、网络等工具。",
+            "相关工具包括手机号码归属地查询、常用电话列表、区号邮编查询等。"
+          ]
+        },
+        {
+          "heading": "页面信息",
+          "details": [
+            "页面显示点赞数为1072，并提供收藏入口。",
+            "页脚包含关于、赞赏、反馈、会员、摆个摊、文章等链接。",
+            "版权信息显示为2026年蛙蛙工具-阿粥的技术分享，并标注粤ICP备18006158号。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 7784,
+        "totalChars": 7784
+      }
+    },
+    {
+      "id": "a9b7093548dfb8324a59a17a41ef7d79075aefa5feafe315c9f7ada2e9b0bcf2",
+      "title": "蛙蛙工具 - 便捷的在线工具网站",
+      "url": "https://www.iamwawa.cn/",
+      "date": "2026-10-02T19:23:23.756Z",
+      "language": "zh",
+      "sentence": "该页面是蛙蛙工具首页，集中展示文本、语言、财务、日期、换算、图像、便民、开发、编码和网络等在线工具入口。",
+      "bullets": [
+        {
+          "heading": "网站定位",
+          "details": [
+            "蛙蛙工具是一个便捷的在线工具网站。",
+            "页面提供首页、关于、赞赏、反馈、会员、摆个摊、文章等入口。"
+          ]
+        },
+        {
+          "heading": "工具分类",
+          "details": [
+            "页面列出文本、语言、财务、日期时间、换算、图像、便民查询、开发、编码解码、网络等工具分类。",
+            "每个分类下提供多个具体工具链接。"
+          ]
+        },
+        {
+          "heading": "常用工具示例",
+          "details": [
+            "文本工具包括大小写转换、文本替换、字数统计、词频统计等。",
+            "语言工具包括简体繁体转换、汉语拼音、在线翻译、成语查询等。",
+            "财务工具包括人民币大写、税金税率、个人所得税、贷款计算等。"
+          ]
+        },
+        {
+          "heading": "日期与版权",
+          "details": [
+            "页面显示今天是2026年10月03日，星期六，农历八月廿三。",
+            "页脚显示 Copyright © 2026 蛙蛙工具-阿粥的技术分享 版权所有。",
+            "页脚显示粤ICP备18006158号。"
+          ]
+        },
+        {
+          "heading": "页面功能",
+          "details": [
+            "页面提供搜索工具、便签、收藏夹、返回顶部、切换主题、会员中心、建议反馈等功能。",
+            "收藏夹显示暂无收藏，并提示在会员中心设置。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 24088,
+        "totalChars": 24088
+      }
+    },
+    {
+      "id": "f83fc0f454e2579d52c2a0e7d925556acc827c2781a8f70958b3eceead421d81",
+      "title": "CloudFlare Tunnel 免费内网穿透的简明教程 - 少数派",
+      "url": "https://sspai.com/post/79278",
+      "date": "2026-10-02T19:23:05.135Z",
+      "language": "zh",
+      "sentence": "这篇教程介绍了如何使用 CloudFlare Tunnel 免费将本地内网服务通过域名暴露到公网，并说明了配置步骤、HTTPS 访问和额外安全验证方式。",
+      "bullets": [
+        {
+          "heading": "核心用途",
+          "details": [
+            "CloudFlare Tunnel 可将本地网络服务暴露到公网，实现内网穿透。",
+            "可把非常规端口服务转发到 80/443 常规端口。",
+            "可为域名自动提供 HTTPS 认证，并支持为服务添加额外访问验证。"
+          ]
+        },
+        {
+          "heading": "工作原理",
+          "details": [
+            "Tunnel 依赖在本地网络运行的 Cloudflare 守护程序 cloudflared。",
+            "cloudflared 与 Cloudflare 云端通信，将云端请求转发到本地 IP 和端口。"
+          ]
+        },
+        {
+          "heading": "前置条件",
+          "details": [
+            "需要持有一个域名，并将域名 DNS 解析托管到 Cloudflare。",
+            "内网需要一台本地服务器用于运行 cloudflared。",
+            "教程提到需要一张境内双币信用卡用于添加付款方式，但服务本身免费。"
+          ]
+        },
+        {
+          "heading": "配置流程",
+          "details": [
+            "在 Cloudflare Zero Trust 面板选择免费计划并创建 Tunnel。",
+            "推荐通过 Docker 部署 cloudflared，并运行包含 Token 的启动命令。",
+            "在 Tunnel 中配置子域名和转发 URL，URL 填写内网服务的 IP 加端口。"
+          ]
+        },
+        {
+          "heading": "访问方式",
+          "details": [
+            "配置完成后，可通过类似 https://app.yourdomain.com 的三级域名访问内网服务。",
+            "一个 Tunnel 中可添加多条三级域名，用于跳转到不同内网服务。"
+          ]
+        },
+        {
+          "heading": "安全与评价",
+          "details": [
+            "可使用 Application 功能为服务添加额外验证，例如指定邮箱域名、完整邮箱地址或 IP 地址范围。",
+            "文章认为 Tunnel 免费、配置简单、门槛较低，适合 Self-hosted 玩家。",
+            "文章同时提醒 Tunnel 在国内访问速度不快，并可能出现断流情况。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 29194,
+        "totalChars": 29194
+      }
+    },
+    {
+      "id": "0ffd6eba15166237518873f8e5d916b1408d774cb825eae63988149bcf87cfa8",
+      "title": "如何用AI生成数字人视频？干货拉满！视频解说/直播带货统统拿捏_AI吧",
+      "url": "https://www.ai8.net/tutorial/2024/0701/525.html",
+      "date": "2026-10-02T19:22:47.870Z",
+      "language": "zh",
+      "sentence": "该教程介绍通过本地部署开源项目 Easy-Wav2Lip，结合绿幕素材、AI 音频和后期抠像合成，免费制作 AI 数字人视频。",
+      "bullets": [
+        {
+          "heading": "核心思路",
+          "details": [
+            "教程目标是零基础入门 AI 数字人视频制作。",
+            "采用本地部署开源项目 Easy-Wav2Lip，避免依赖收费在线工具。",
+            "适用于视频解说、直播带货等数字人应用场景。"
+          ]
+        },
+        {
+          "heading": "素材准备",
+          "details": [
+            "可用云台或三脚架固定相机、手机。",
+            "在绿幕前拍摄 20 到 30 秒的说话视频。",
+            "语速要适中，肢体动作幅度不要太大。"
+          ]
+        },
+        {
+          "heading": "音频制作",
+          "details": [
+            "音频可以自己配音。",
+            "也可以使用剪映 AI 朗读生成声音。",
+            "导出时取消视频导出，勾选音频导出并设置为 .wav 格式。"
+          ]
+        },
+        {
+          "heading": "本地生成",
+          "details": [
+            "下载并解压 Easy-Wav2Lip 安装包后启动本地 WebUI。",
+            "在界面中分别上传视频素材和音频素材。",
+            "可设置视频质量为 Enhanced，并启用 mask 嘴部跟踪。",
+            "若生成结果出现牙齿缺失，可尝试切换到 Wav2Lip_GAN。"
+          ]
+        },
+        {
+          "heading": "后期合成",
+          "details": [
+            "将生成的数字人视频导入剪映或 AE 进行抠像。",
+            "剪映可使用色度抠图去除绿幕背景。",
+            "AE 可使用 Roto 笔刷细化人物选区并渲染。",
+            "导出透明背景数字人视频后，叠加到背景上并添加字幕、背景音乐。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 4091,
+        "totalChars": 4091
+      }
+    },
+    {
+      "id": "b5af821c185ec6e71c9483af1475ca0d7278af8a7453e058e400ddb159dc6987",
+      "title": "automatisch/automatisch",
+      "url": "https://github.com/automatisch/automatisch",
+      "date": "2026-10-02T19:22:28.324Z",
+      "language": "zh",
+      "sentence": "Automatisch 是一个可自托管的开源工作流自动化工具，提供类似 Zapier 的低代码/无代码自动化能力，并采用社区版 AGPL-3.0 与企业版商业许可的双许可结构。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "Automatisch 被描述为开源的 Zapier 替代工具，用于构建工作流自动化。",
+            "它可连接 Twitter、Slack 等服务，帮助自动化业务流程。",
+            "页面称使用 Automatisch 不需要编程知识。"
+          ]
+        },
+        {
+          "heading": "仓库概况",
+          "details": [
+            "仓库为 GitHub 上的 automatisch/automatisch，状态为公开。",
+            "页面显示约 14.0k stars、1.1k forks 和 73 watchers。",
+            "页面显示 215 个 issues、73 个 pull requests 和 15 个 releases，最新 release 为 v0.15.0。"
+          ]
+        },
+        {
+          "heading": "开发与贡献",
+          "details": [
+            "页面显示 33 名 contributors，主要语言为 JavaScript，占比 99.7%。",
+            "最新提交来自 barinali，合并 PR #2686，日期为 2026 年 1 月 15 日。",
+            "仓库历史显示 4,776 次提交、85 个分支和 27 个标签。"
+          ]
+        },
+        {
+          "heading": "部署与文档",
+          "details": [
+            "官方文档链接指向 automatisch.io/docs。",
+            "README 提供通过 git clone 和 docker compose up 启动项目的示例。",
+            "页面提供 Discord 和 Twitter 社区链接，并建议通过 GitHub issues 获取支持。"
+          ]
+        },
+        {
+          "heading": "许可模式",
+          "details": [
+            "Automatisch Community Edition 采用 AGPL-3.0 许可。",
+            "Automatisch Enterprise Edition 采用商业企业许可。",
+            "仓库同时包含 AGPL 和企业许可文件，文件名含 .ee. 的文件属于企业许可。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 25398,
+        "totalChars": 25398
+      }
+    },
+    {
+      "id": "20b7261b00ff2918cf60883b45da41eceb3dd8e7c819c583677ec172126cb7c5",
+      "title": "About Us - Flowith Team",
+      "url": "https://try.flowith.io/",
+      "date": "2026-10-02T19:22:05.127Z",
+      "language": "zh",
+      "sentence": "Flowith AI 页面展示其智能工作区、多种图像生成模型、创作应用、模板推荐以及注册登录入口。",
+      "bullets": [
+        {
+          "heading": "产品定位",
+          "details": [
+            "Flowith AI 页面称其为 Agentic Workspace。",
+            "页面提供 New Flow、Flow Library、Media History、Knowledge Garden 和 Knowledge Market 等入口。",
+            "页面鼓励用户注册以探索更多功能。"
+          ]
+        },
+        {
+          "heading": "图像生成模型",
+          "details": [
+            "页面列出多个图像生成与编辑模型，如 Seedream 5.0 Pro、GPT Image 2.5 Flare 和 Grok Image 2.0。",
+            "部分模型标注为 NEW，例如 Nano Banana 2 Lite、GPT Image 2.5 Sunburst 和 Seedream V5.0 Lite。",
+            "部分模型显示折扣，如 Seedream v4.5 25% off、Nano Banana 2 23% off、Nano Banana Pro 47% off。"
+          ]
+        },
+        {
+          "heading": "应用工具",
+          "details": [
+            "页面展示 Code Video、Virtual Try-on、Social Post Maker 等应用。",
+            "工具包括 Background Remover、Photo Relighting、Image Upscaler、Editorial Poster、Crop & Resize、Wallpaper Generator 和 Furry Art Generator。"
+          ]
+        },
+        {
+          "heading": "模板与推荐",
+          "details": [
+            "页面提供 For You、Branding、Creative、E-commerce、Poster、Product 和 Social media 等分类。",
+            "模板示例包括 Twilight Future Residence、Wildland Light Luxury Portrait 和 Dusk Bokeh City。",
+            "部分模板显示 Use 或 Upgrade 操作。"
+          ]
+        },
+        {
+          "heading": "账户与合规",
+          "details": [
+            "页面包含 Sign in 和 Sign Up 入口。",
+            "注册需同意 Terms 和 Privacy 政策。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 7891,
+        "totalChars": 7891
+      }
+    },
+    {
+      "id": "6bc42649e6ef3900808acbe043822f782656db2c6b6a62999aa34915fc529ae3",
+      "title": "flowith 2.0 - Your AI Creation Workspace, with Knowledge",
+      "url": "https://flowith.io/repo-detail/a1556827-02d4-4d74-9a9b-185f3c4b94ec",
+      "date": "2026-10-02T19:21:49.570Z",
+      "language": "zh",
+      "sentence": "该页面介绍由 Yiming-Shi-PhD 创建的 Flowith AI 生物信息学知识库，并展示其功能、试用对比与购买说明。",
+      "bullets": [
+        {
+          "heading": "页面主题",
+          "details": [
+            "页面展示 Flowith AI 的“Bioinformatics Med（BrainMed Lab）”知识库。",
+            "创建者显示为 Yiming-Shi-PhD。"
+          ]
+        },
+        {
+          "heading": "知识库定位",
+          "details": [
+            "介绍为 AI 驱动的生物信息学知识库。",
+            "声称用于捕获、结构化并提升生物与计算研究知识。"
+          ]
+        },
+        {
+          "heading": "功能亮点",
+          "details": [
+            "从数据中提取核心框架、方法、讨论。",
+            "识别文献差距与趋势以生成研究方向。",
+            "使用 AI 提示拆解复杂研究并可视化领域。"
+          ]
+        },
+        {
+          "heading": "试用与对比",
+          "details": [
+            "提供“增强 AI”与“标准 AI”的实时对比。",
+            "增强 AI 声称可基于知识库给出更准确、上下文相关的回答。"
+          ]
+        },
+        {
+          "heading": "创作者与购买说明",
+          "details": [
+            "创作者统计显示为 $1。",
+            "税后 80% 付款归创作者。",
+            "一次性购买、终身访问、包含更新、禁止转售再分发。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 3546,
+        "totalChars": 3546
+      }
+    },
+    {
+      "id": "ac818a015d86bbb3127138d7552308c4ac98bcb247f7ef80b8d877e6944cbb6c",
+      "title": "30 Free SEO Tools I Use and Recommend (As An SEO)",
+      "url": "https://www.laurengalvez.com/blog/free-seo-tools",
+      "date": "2026-10-02T19:21:17.860Z",
+      "language": "zh",
+      "sentence": "该页面由 SEO 顾问 Lauren Galvez 整理，推荐 30 个覆盖技术、站内、站外和本地 SEO 的免费工具，适合小预算网站进行基础优化与检查。",
+      "bullets": [
+        {
+          "heading": "文章主题",
+          "details": [
+            "页面标题为“30 Free SEO Tools I Use and Recommend (As An SEO)”。",
+            "作者 Lauren Galvez 称自己为 SEO 顾问，并提到有 6 年行业经验。",
+            "列表覆盖 on-page、off-page、technical 和 local SEO 任务。",
+            "许多工具是 Chrome 扩展或可下载软件，便于快速完成 SEO 检查。"
+          ]
+        },
+        {
+          "heading": "Google 工具",
+          "details": [
+            "Google Search Console 用于查看 Google 如何索引网站、排名关键词、流量和技术问题。",
+            "Google Analytics 用于跟踪访客在网站上的行为。",
+            "Google Keyword Planner 提供关键词创意和搜索量范围，但其竞争度仅针对 Google Ads。",
+            "Google Trends、Google Alerts、Google Business Profile、PageSpeed Insights 和 Rich Results Test 也被列入。"
+          ]
+        },
+        {
+          "heading": "网站审计与抓取",
+          "details": [
+            "Screaming Frog SEO Spider 对 500 个 URL 或更少的网站免费，用于技术 SEO 审计。",
+            "Ahrefs Webmaster Tools 可审计技术问题、查看关键词排名和外链概况。",
+            "Semrush 免费账户提供有限的关键词研究、竞争分析、排名跟踪和网站审计功能。",
+            "Wappalyzer 和 Ahrefs SEO Toolbar 可用于快速查看网站技术栈或页面 SEO 元素。"
+          ]
+        },
+        {
+          "heading": "关键词与外链",
+          "details": [
+            "Ahrefs Keyword Generator 可生成关键词创意，并显示难度、搜索量和数据更新时间。",
+            "Ahrefs Backlink Checker 可查看任意网站的有限外链数据，如引用域、do-follow 比例和锚文本。",
+            "Ahrefs Website Authority Checker 用 Domain Rating 衡量网站外链概况强度。",
+            "Merkle SERP Simulator 用于预览标题和 meta description 在搜索结果中是否会被截断。"
+          ]
+        },
+        {
+          "heading": "本地 SEO",
+          "details": [
+            "Google Business Profile 被推荐为本地企业参与本地搜索竞争的基础工具。",
+            "BrightLocal 提供评价链接生成器、本地列表健康扫描器、本地 SERP 检查器和 Local Rankflux。",
+            "GMB Everywhere 和 Pleper 是用于查看或审计 Google Business Profile 数据的 Chrome 扩展。",
+            "BrightLocal Local Rankflux 跟踪 14,000 多个关键词以监测本地搜索算法波动。"
+          ]
+        },
+        {
+          "heading": "技术 SEO 实现",
+          "details": [
+            "Merkle Schema Markup Generator 和 Google Rich Results Test 用于生成和验证结构化数据。",
+            "PageSpeed Insights 针对单个 URL 提供桌面和移动端加载速度建议。",
+            "Image Compressor、What Would JavaScript Do、Robots.txt Generator、XML Sitemap Generator 和 Hreflang Tag Generator 分别用于图片压缩、JavaScript 渲染差异、robots.txt、站点地图和 hreflang 标签。",
+            "XML Sitemap Generator 最多创建 500 个 URL 的站点地图，Hreflang Tag Generator 每次最多处理 50 个 URL。"
+          ]
+        },
+        {
+          "heading": "免费工具限制",
+          "details": [
+            "作者说明免费工具通常没有付费工具的全部功能，多用于小型或快速 SEO 检查。",
+            "Screaming Frog 免费版适用于 500 个 URL 或更少的网站。",
+            "GMB Everywhere 免费版每月允许 5 次审计。",
+            "BrightLocal 评价链接生成器要求 Google Business Profile 中包含地址。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 30911,
+        "totalChars": 30911
+      }
+    },
+    {
       "id": "b1844dc4969513b616edfb6ebe59b02d398666f40ef8cfcd68da7f339d18be4c",
       "title": "Jumpstarting Your Blockchain Journey: A Python Programmer's Guide to the Decentralized World | Redreamality's Blog",
       "url": "https://redreamality.com/blog/blockchain-for-python-developers/",
