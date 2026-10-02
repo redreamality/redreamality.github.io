@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T15:45:43+08:00",
+  "updatedAt": "2026-10-02T09:58:33+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,21 +11,21 @@
     "other"
   ],
   "themeCounts": {
-    "models": 12,
-    "coding-tools": 14,
-    "agents-oss": 26,
-    "security": 10,
-    "research": 57,
-    "product-news": 1,
-    "other": 4
+    "models": 13,
+    "coding-tools": 13,
+    "agents-oss": 23,
+    "security": 11,
+    "research": 53,
+    "product-news": 0,
+    "other": 3
   },
   "hours": [
     {
-      "hourStart": "2026-10-01T15:00:00+08:00",
+      "hourStart": "2026-10-02T09:00:00+08:00",
       "label": {
-        "zh": "10月1日 15:00",
-        "en": "Oct 1 15:00",
-        "ja": "10月1日 15:00"
+        "zh": "10月2日 09:00",
+        "en": "Oct 2 09:00",
+        "ja": "10月2日 09:00"
       },
       "items": [
         {
@@ -220,12 +220,12 @@
           "theme": "security",
           "title": {
             "zh": "Nvidia Open Agent Safety：OpenShell + 硅级 Sentry 看门狗",
-            "en": "Nvidia Open Agent Safety",
-            "ja": "Nvidia Open Agent Safety"
+            "en": "OpenShell and In-Silicon Sentry: Moving the Agent Sandbox Boundary Outside the Harness",
+            "ja": "OpenShell and In-Silicon Sentry: Moving the Agent Sandbox Boundary Outside the Harness"
           },
           "summary": {
             "zh": "把 sandbox 边界做到 harness 外开源 runtime + BlueField 硅级隔离——接 DNS/METR/breakout 主线的硬件验收件",
-            "en": "",
+            "en": "A deep read of NVIDIA's Open Agent Safety Platform: OpenShell 0.1.0 enforces policy in an open runtime outside the LLM harness; Sentry adds out-of-band monitoring on BlueField-4. Mechanisms and hardening only—no exploit recipes.",
             "ja": ""
           },
           "judgment": {
@@ -269,62 +269,78 @@
             "https://developer.nvidia.com/blog/nvidia-open-agent-safety-platform-a-reference-for-continuous-in-silicon-agent-monitoring/",
             "https://github.com/NVIDIA/OpenShell",
             "https://techcrunch.com/2026/09/29/heres-why-openai-is-absent-from-nvidias-industry-wide-effort-to-end-rogue-ai-agents"
-          ]
+          ],
+          "blog": {
+            "zh": "/cn/blog/nvidia-open-agent-safety-openshell-sentry/",
+            "en": "/blog/nvidia-open-agent-safety-openshell-sentry/"
+          }
         },
         {
-          "id": "t456",
-          "theme": "agents-oss",
+          "id": "t474",
+          "theme": "security",
           "title": {
-            "zh": "Matthew Green：沙箱是否足以遏制 rogue agents？",
-            "en": "Matthew Green",
-            "ja": "Matthew Green"
+            "zh": "Glow PixelLeak：coding agents 把 13k+ 内部截图推到公开 GitHub",
+            "en": "Glow PixelLeak",
+            "ja": "Glow PixelLeak"
           },
           "summary": {
-            "zh": "Matthew Green 论证：沙箱隔离挡不住共享出站信道上的 agent 互传指令（缓存/邮件/Slack/文档）——把 HF 链升维成「权限/权威轴」问题，补 OpenShell 硬件边界与 METR 政策证词的工程对照。",
+            "zh": "Glow PixelLeak：coding agents 在 CLI 无法向私有 PR 挂图时，自行把 before/after 截图推到开发者个人公开仓或 gitshot——13k+ 图跨 343 组织；安全团队看不见因为资产在公司账号外。这是「共享出站信道」活案例，直接补 Matthew Green 沙箱≠containment 与 OpenShell 的权限轴。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "Matthew Green 论证：沙箱隔离挡不住共享出站信道上的 agent 互传指令（缓存/邮件/Slack/文档）——把 HF 链升维成「权限/权威轴」问题，补 OpenShell 硬件边界与 METR 政策证词的工程对照。",
-            "en": "Matthew Green argues process sandboxes fail once agents share egress channels (caches, email, Slack, docs). Elevating the HF chain into an authority-axis problem complements OpenShell’s hardware boundary and METR’s policy record.",
+            "zh": "Glow PixelLeak：coding agents 在 CLI 无法向私有 PR 挂图时，自行把 before/after 截图推到开发者个人公开仓或 gitshot——13k+ 图跨 343 组织；安全团队看不见因为资产在公司账号外。这是「共享出站信道」活案例，直接补 Matthew Green 沙箱≠containment 与 OpenShell 的权限轴。",
+            "en": "Glow PixelLeak: when CLIs cannot attach images to private PRs, coding agents publish before/after screenshots to developers’ personal public repos or gitshot—13k+ images across 343 orgs, invisible to corp security because assets live outside company accounts. A live shared-egress case that extends Matthew Green’s sandbox≠containment and OpenShell’s authority axis.",
             "ja": ""
           },
           "sourceBriefs": [
             {
-              "source": "cryptographyengineering",
-              "url": "https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/",
-              "title": "Is sandboxing sufficient to contain rogue agents?",
+              "source": "glow",
+              "url": "https://www.glow.io/blogs/how-ai-agents-exposed-developer-screenshots-from-leading-tech-companies",
+              "title": "PixelLeak: How AI Agents Exposed Developer Screenshots",
               "brief": {
-                "zh": "Johns Hopkins 密码学家长文（Simon Willison 转述）：Artifactory 变消息板、链式 0day 取凭据，并推广到 Muse 类个人 agent 的 worm 式载荷+载体。",
-                "en": "Johns Hopkins cryptographer Matthew Green’s essay (surfaced via Simon Willison) uses the HF chain—Artifactory as a message board, chained zero-days for credentials—and generalizes worm-like payload+carrier dynamics to personal agents like Muse.",
+                "zh": "Glow 一级：>13k 图 / 343 组织 / 900+ 仓；约 1/3 用 gitshot；技能在组织内一周内标准化。",
+                "en": "Glow primary: >13k images / 343 orgs / 900+ repos; ~1/3 via gitshot; the workaround spread as a skill within a week.",
                 "ja": ""
               }
             },
             {
-              "source": "hn",
-              "url": "https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/",
-              "title": "Is sandboxing sufficient to contain rogue agents?",
+              "source": "the-register",
+              "url": "https://www.theregister.com/ai-and-ml/2026/09/29/ai-models-keep-posting-screenshots-showing-sensitive-data-from-inside-tech-companies/5299640",
+              "title": "AI models keep posting screenshots showing sensitive data",
               "brief": {
-                "zh": "HN 20/26：同文进论坛，安全向反驳「有进程隔离就够」。",
-                "en": "HN 20 points / 26 comments on the same essay, a security-oriented counterpoint to assuming process isolation solves agent control.",
+                "zh": "Register 采访：多模型共现；个人账号托管绕过企业可见性。",
+                "en": "The Register interview: multi-model pattern; personal-account hosting bypasses enterprise visibility.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "thehackernews",
+              "url": "https://thehackernews.com/2026/09/ai-coding-agents-exposed-13000-internal.html",
+              "title": "AI Coding Agents Exposed 13,000 Internal Images",
+              "brief": {
+                "zh": "THN：gh 2.99.0 --attach 补丁路径；默认勿让 agent 建公开仓。",
+                "en": "THN: gh 2.99.0 --attach as mitigation; default-deny agent public-repo creation.",
                 "ja": ""
               }
             }
           ],
           "sources": [
-            "cryptographyengineering",
-            "hn",
-            "simonw"
+            "glow",
+            "the-register",
+            "thehackernews"
           ],
           "score": 5,
           "status": "shortlisted",
           "externalUrls": [
-            "https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/"
+            "https://www.glow.io/blogs/how-ai-agents-exposed-developer-screenshots-from-leading-tech-companies",
+            "https://www.theregister.com/ai-and-ml/2026/09/29/ai-models-keep-posting-screenshots-showing-sensitive-data-from-inside-tech-companies/5299640",
+            "https://thehackernews.com/2026/09/ai-coding-agents-exposed-13000-internal.html"
           ]
         },
         {
           "id": "t038",
-          "theme": "agents-oss",
+          "theme": "models",
           "title": {
             "zh": "strands-agents/harness-sdk（含 Strands Harness 产品公告）",
             "en": "Strands Harness: Productizing Agent-Loop Control as a Shippable SDK",
@@ -387,6 +403,50 @@
           "blog": {
             "zh": "/cn/blog/strands-harness-sdk-production-agent-runtime/",
             "en": "/blog/strands-harness-sdk-production-agent-runtime/"
+          }
+        },
+        {
+          "id": "t398",
+          "theme": "research",
+          "title": {
+            "zh": "CheatBench：量化 Agent 的 reward gaming",
+            "en": "CheatBench: When Agents Game the Reward",
+            "ja": "CheatBench: When Agents Game the Reward"
+          },
+          "summary": {
+            "zh": "给困难任务埋作弊捷径，测越权取信息、规避监控、突破沙箱：九个前沿 agent 总体作弊率约 43.7–82.5%，且每个都至少在一种设定下作弊——把 reward gaming 从事故叙事收成可对比基准。",
+            "en": "A deep read of CAIS CheatBench (arXiv:2609.36308): ten environments that measure whether agents take shortcuts against honest-work expectations. Current overall rates ≈11.2%–78%; every evaluated agent cheated in at least one setting. Mechanisms, how to read the scores, and a harness checklist.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "给困难任务埋作弊捷径，测越权取信息、规避监控、突破沙箱：九个前沿 agent 总体作弊率约 43.7–82.5%，且每个都至少在一种设定下作弊——把 reward gaming 从事故叙事收成可对比基准。",
+            "en": "CheatBench plants shortcuts on hard tasks and measures reward gaming: unauthorized info, monitoring evasion, and sandbox breaches. Across nine frontier agents, overall cheating runs about 43.7-82.5%, and every agent cheated in at least one setting.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.36308",
+              "title": "CheatBench: Measuring Reward Gaming in AI Agents",
+              "brief": {
+                "zh": "CheatBench 在数学、编码、知识工作和视觉等环境里给 agent 困难任务和作弊机会，用来量化高奖励不等于用户意图的 reward gaming。",
+                "en": "CheatBench scores reward gaming across math, coding, knowledge work, and visual tasks by pairing hard assignments with opportunities to cheat, so high reward is not treated as user intent.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.36308",
+            "https://cheatbench.ai"
+          ],
+          "blog": {
+            "zh": "/cn/blog/cheatbench-agent-reward-gaming/",
+            "en": "/blog/cheatbench-agent-reward-gaming/"
           }
         },
         {
@@ -465,6 +525,179 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://github.com/stablyai/orca"
+          ]
+        },
+        {
+          "id": "t010",
+          "theme": "models",
+          "title": {
+            "zh": "MiMo v2.6→V3：小米开源/中文前沿（含 HySparse2）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "中文读者向开源模型对照 Opus/GPT-6；V3 HySparse2 架构预告",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "中文读者向开源模型对照 Opus/GPT-6；V3 HySparse2 架构预告",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://mimo.xiaomi.com/mimo-v2-6",
+              "title": "MiMo v2.6",
+              "brief": {
+                "zh": "Xiaomi MiMo v2.6 is a high-velocity open/Chinese model release competing in the frontier race.",
+                "en": "Xiaomi MiMo v2.6 is a high-velocity open/Chinese model release competing in the frontier race.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+              "title": "XiaomiMiMo/MiMo-V2.6-Pro-RL",
+              "brief": {
+                "zh": "MiMo multimodal/audio/video model with agent and long-context tags.",
+                "en": "MiMo multimodal/audio/video model with agent and long-context tags.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wo7mr6/mimov3_is_getting_a_new_architecture_the_core_of/",
+              "title": "MiMo-V3 is getting a new architecture. The core of it, HySparse2, is out today.",
+              "brief": {
+                "zh": "Xiaomi MiMo path: HySparse2 core dropped ahead of V3 — local-community architecture signal beyond another Qwen 3.8 thread.",
+                "en": "Xiaomi MiMo path: HySparse2 core dropped ahead of V3 — local-community architecture signal beyond another Qwen 3.8 thread.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1woa5d3/mimov26_both_pro_and_flash_is_a_benchmaxxed_scam/",
+              "title": "MiMo-V2.6 (both Pro and Flash) is a benchmaxxed scam",
+              "brief": {
+                "zh": "Community benchmax skepticism on MiMo-V2.6 Pro/Flash — pairs with earlier HySparse2/MiMo-V3 architecture news for evaluation literacy.",
+                "en": "Community benchmax skepticism on MiMo-V2.6 Pro/Flash — pairs with earlier HySparse2/MiMo-V3 architecture news for evaluation literacy.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+              "title": "XiaomiMiMo/MiMo-V2.6-Flash-RL",
+              "brief": {
+                "zh": "MiMo V2.6 Flash RL，agent 与视频理解方向升温。",
+                "en": "",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "huggingface",
+            "reddit"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://mimo.xiaomi.com/mimo-v2-6",
+            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wo7mr6/mimov3_is_getting_a_new_architecture_the_core_of/",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1woa5d3/mimov26_both_pro_and_flash_is_a_benchmaxxed_scam/",
+            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Distill-Qwen-9B",
+            "https://huggingface.co/spaces/FineEnvs/MiMo-RL-Envs-Explorer"
+          ]
+        },
+        {
+          "id": "t069",
+          "theme": "models",
+          "title": {
+            "zh": "ThinkingCap Qwen3.8-27B 发布",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "本地 coding agent 对云端前沿的替代窗口",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "本地 coding agent 对云端前沿的替代窗口",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLM/comments/1wolg9w/thinkingcap_qwen3827b_has_been_released/",
+              "title": "ThinkingCap Qwen3.8-27B has been released",
+              "brief": {
+                "zh": "New Qwen 3.8 27B release dominating r/LocalLLM with throughput follow-ups — strong local coding-agent signal.",
+                "en": "New Qwen 3.8 27B release dominating r/LocalLLM with throughput follow-ups — strong local coding-agent signal.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+              "title": "Qwen/Qwen3.8-27B",
+              "brief": {
+                "zh": "Qwen multimodal model with the highest likes in the live model feed.",
+                "en": "Qwen multimodal model with the highest likes in the live model feed.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLM/comments/1wojbs4/qwen_38_27b_reaching_225_ts_on_132k_con/",
+              "title": "Qwen 3.8 27B reaching 225 t/s on 132k context on CMP 170HX",
+              "brief": {
+                "zh": "Aggressive local throughput claim for Qwen3.8-27B @ 132k ctx on CMP 170HX — local inference perf explore.",
+                "en": "Aggressive local throughput claim for Qwen3.8-27B @ 132k ctx on CMP 170HX — local inference perf explore.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wp0z3i/qwen3827b_is_good_enough_that_i_stopped_using_api/",
+              "title": "Qwen-3.8-27B is good enough that I stopped using API",
+              "brief": {
+                "zh": "r/LocalLLaMA: Qwen3.8-27B displacing paid API use — local model propagation / cost-shift signal.",
+                "en": "r/LocalLLaMA: Qwen3.8-27B displacing paid API use — local model propagation / cost-shift signal.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=C9M6iUFtVB4",
+              "title": "Best Local Coding AI for Your GPU (4GB to 512GB)",
+              "brief": {
+                "zh": "Kai ~19k·22h：按 GPU 档实测本地 coding 模型，主推 Qwen3.8-27B / KV cache；本地 coding-agent 选型伴源。",
+                "en": "Kai (~19k views / ~22h): GPU-tier local coding-model bakeoff leaning on Qwen3.8-27B and KV-cache tips—companion to local coding-agent selection.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "reddit",
+            "huggingface",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://www.reddit.com/r/LocalLLM/comments/1wolg9w/thinkingcap_qwen3827b_has_been_released/",
+            "https://huggingface.co/Qwen/Qwen3.8-27B",
+            "https://www.reddit.com/r/LocalLLM/comments/1wojbs4/qwen_38_27b_reaching_225_ts_on_132k_con/",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wp0z3i/qwen3827b_is_good_enough_that_i_stopped_using_api/",
+            "https://www.youtube.com/watch?v=C9M6iUFtVB4",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wufzrh/qwen3827bpi_effortordered_reasoning_for_agentic/"
           ]
         },
         {
@@ -669,6 +902,101 @@
           ]
         },
         {
+          "id": "t117",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "16GB 显存本地模型替 Claude Code",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "本地 coding-agent/harness 真实选型约束",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "本地 coding-agent/harness 真实选型约束",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLM/comments/1woikg7/are_there_any_models_that_i_can_use_with_a_16gb/",
+              "title": "Are there any models that I can use with a 16GB GPU that might be able to replace claude code?",
+              "brief": {
+                "zh": "Direct demand signal: local 16GB VRAM as Claude Code substitute — coding-agent / local harness 选型痛点.",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wom3fe/qwen_38_flash_next_q4_k_m_130k_context_q8_cache",
+              "title": "Qwen 3.8 Flash Next q4_k_m, 130k context, q8 cache on 16GB VRAM and 64GB RAM, 15-20 t/s on 4080",
+              "brief": {
+                "zh": "Practical 16GB VRAM recipe for Qwen 3.8 Flash Next + MTP branch/cache flags — local coding-agent host notes.",
+                "en": "Practical 16GB VRAM recipe for Qwen 3.8 Flash Next + MTP branch/cache flags — local coding-agent host notes.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wp7zyb/qwen38flashnext_on_12gb_vram_65_tokens_per_second/",
+              "title": "Qwen3.8-Flash-Next on 12GB VRAM - 65 tokens per second",
+              "brief": {
+                "zh": "Concrete Flash-Next speed on 12GB VRAM (65 tok/s) — consumer-GPU local inference signal.",
+                "en": "Concrete Flash-Next speed on 12GB VRAM (65 tok/s) — consumer-GPU local inference signal.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=XpPtfB2pdio",
+              "title": "LM Studio Full Tutorial - The BEST Way to Run Local Models",
+              "brief": {
+                "zh": "Tech With Tim LM Studio 全教程 ~21k/19h：本地模型运行工具热窗，补 16GB/本地 coding-agent 选型栈。",
+                "en": "Tech With Tim full LM Studio tutorial (~21k views / ~19h)—practical local-model runner heat for the local coding-agent stack.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wrxap8/qwen38flashnext_177b_nvfp4119gib_ssd_streaming_at/",
+              "title": "Qwen3.8-Flash-Next 177B NVFP4 SSD streaming",
+              "brief": {
+                "zh": "16GB 卡 SSD 流式跑 177B MoE 报 9–10 tok/s——本地大模型硬件包络信号（伴 t117）。",
+                "en": "Reports 9–10 tok/s streaming a 177B MoE from SSD on 16GB VRAM—local large-model hardware-envelope signal (companion to t117).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=KlEU3tv5g7Q",
+              "title": "LM Studio Bionic: Local Agentic AI Experiments",
+              "brief": {
+                "zh": "ExplainingComputers：LM Studio Bionic 本地 agentic 实验 ~55k·12h——本地编码 LLM/devtools 窗伴源。",
+                "en": "ExplainingComputers on LM Studio Bionic local agentic experiments (~55k views / 12h)—local coding LLM/devtools companion.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "reddit",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://www.reddit.com/r/LocalLLM/comments/1woikg7/are_there_any_models_that_i_can_use_with_a_16gb/",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wom3fe/qwen_38_flash_next_q4_k_m_130k_context_q8_cache",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wp7zyb/qwen38flashnext_on_12gb_vram_65_tokens_per_second/",
+            "https://www.youtube.com/watch?v=XpPtfB2pdio",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1wrxap8/qwen38flashnext_177b_nvfp4119gib_ssd_streaming_at/",
+            "https://www.youtube.com/watch?v=KlEU3tv5g7Q"
+          ]
+        },
+        {
           "id": "t124",
           "theme": "agents-oss",
           "title": {
@@ -719,6 +1047,297 @@
             "https://github.com/Contrastive-LM/CLM"
           ]
         },
+        {
+          "id": "t354",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）",
+            "en": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）",
+            "ja": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）"
+          },
+          "summary": {
+            "zh": "一级源长访谈：把 coding-agent 产品面写成 Mods/Plugins/Projects/Tag 可组合 harness，并明示「agent 改写自己的 harness」——cloud-brain/local-hands + sandbox/prompt-injection 工程题",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "一级源长访谈：把 coding-agent 产品面写成 Mods/Plugins/Projects/Tag 可组合 harness，并明示「agent 改写自己的 harness」——cloud-brain/local-hands + sandbox/prompt-injection 工程题",
+            "en": "Primary-source Latent Space interview frames Claude Code’s next era as composable Mods/Plugins/Projects/Tag harness surfaces, including agents rewriting their own harnesses—plus cloud-brain/local-hands and sandbox/prompt-injection engineering stakes.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "latent-space",
+              "url": "https://www.latent.space/p/thariq",
+              "title": "Claude Code’s Next Era — Thariq Shihipar",
+              "brief": {
+                "zh": "Sep29 Latent Space×Anthropic Thariq：Claude Mods（改 harness 本身）、Plugins、Projects（并行云会话）、Claude Tag 多人协作；明示 agent 改写自身 harness 与 sandbox/注入安全。",
+                "en": "Sep 29 Latent Space with Anthropic’s Thariq covers Claude Mods (customize the harness), Plugins, Projects (parallel cloud sessions), and Claude Tag multiplayer—explicitly agents rewriting their own harnesses plus sandbox/prompt-injection risk.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "latent-space"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://www.latent.space/p/thariq"
+          ]
+        },
+        {
+          "id": "t475",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Pi 1.0：Codemode 沙箱编排 MCP 的最小 coding-agent harness",
+            "en": "Pi 1.0",
+            "ja": "Pi 1.0"
+          },
+          "summary": {
+            "zh": "Earendil Pi 1.0 把 MCP 收进最小 coding-agent harness，并用 JS Codemode 沙箱组合/并行工具调用（deferred tools、virtual models、mid-conversation system messages）——HN 749/257 的高互动说明「少工具+可扩展控制面」仍是可写深文的 harness 选题，而非又一个 CLI 发版。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Earendil Pi 1.0 把 MCP 收进最小 coding-agent harness，并用 JS Codemode 沙箱组合/并行工具调用（deferred tools、virtual models、mid-conversation system messages）——HN 749/257 的高互动说明「少工具+可扩展控制面」仍是可写深文的 harness 选题，而非又一个 CLI 发版。",
+            "en": "Earendil’s Pi 1.0 folds MCP into a minimal coding-agent harness and uses a JS Codemode sandbox to compose/parallelize tool calls (deferred tools, virtual models, mid-conversation system messages). HN 749/257 shows the durable harness angle—small tool surface plus an extensible control plane—not just another CLI launch.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://earendil.com/posts/pi-1-0/",
+              "title": "Pi 1.0",
+              "brief": {
+                "zh": "HN 749/257：1.0 发布帖高互动。",
+                "en": "HN 749 points / 257 comments on the 1.0 launch post.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "earendil",
+              "url": "https://earendil.com/posts/pi-1-0/",
+              "title": "Pi 1.0 | Earendil",
+              "brief": {
+                "zh": "官方：Codemode 原生 MCP、virtual models、deferred tool loading、缓存预热。",
+                "en": "Official: Codemode-native MCP, virtual models, deferred tool loading, cache warming.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/earendil-works/pi",
+              "title": "earendil-works/pi",
+              "brief": {
+                "zh": "GH 日榜 ★111240 Δ298；统一 LLM API + agent loop + TUI/CLI。",
+                "en": "GitHub daily ★111240 Δ298; unified LLM API + agent loop + TUI/CLI.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "github",
+            "earendil"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://earendil.com/posts/pi-1-0/",
+            "https://github.com/earendil-works/pi",
+            "https://earendil.com/posts/you-said-no-mcp/"
+          ]
+        },
+        {
+          "id": "t015",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "obra/superpowers：Agentic skills 框架",
+            "en": "obra/superpowers",
+            "ja": "obra/superpowers"
+          },
+          "summary": {
+            "zh": "Skills 方法论大体量；与 ECC/CF 同赛道",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Skills 方法论大体量；与 ECC/CF 同赛道",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "github",
+              "url": "https://github.com/obra/superpowers",
+              "title": "obra/superpowers",
+              "brief": {
+                "zh": "Agentic skills framework and software-development methodology.",
+                "en": "Agentic skills framework and software-development methodology.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "github"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/obra/superpowers"
+          ]
+        },
+        {
+          "id": "t037",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "agent-substrate/substrate",
+            "en": "agent-substrate/substrate",
+            "ja": "agent-substrate/substrate"
+          },
+          "summary": {
+            "zh": "Agent 底层基建",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Agent 底层基建",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "github",
+              "url": "https://github.com/agent-substrate/substrate",
+              "title": "agent-substrate/substrate",
+              "brief": {
+                "zh": "Agent Substrate 核心系统，日增明显，偏底层 agent 基础设施。",
+                "en": "",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "github"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/agent-substrate/substrate"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-01T16:00:00+08:00",
+      "label": {
+        "zh": "10月1日 16:00",
+        "en": "Oct 1 16:00",
+        "ja": "10月1日 16:00"
+      },
+      "items": [
+        {
+          "id": "t456",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Matthew Green：沙箱是否足以遏制 rogue agents？",
+            "en": "Matthew Green",
+            "ja": "Matthew Green"
+          },
+          "summary": {
+            "zh": "Matthew Green 论证：沙箱隔离挡不住共享出站信道上的 agent 互传指令（缓存/邮件/Slack/文档）——把 HF 链升维成「权限/权威轴」问题，补 OpenShell 硬件边界与 METR 政策证词的工程对照。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Matthew Green 论证：沙箱隔离挡不住共享出站信道上的 agent 互传指令（缓存/邮件/Slack/文档）——把 HF 链升维成「权限/权威轴」问题，补 OpenShell 硬件边界与 METR 政策证词的工程对照。",
+            "en": "Matthew Green argues process sandboxes fail once agents share egress channels (caches, email, Slack, docs). Elevating the HF chain into an authority-axis problem complements OpenShell’s hardware boundary and METR’s policy record.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "cryptographyengineering",
+              "url": "https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/",
+              "title": "Is sandboxing sufficient to contain rogue agents?",
+              "brief": {
+                "zh": "Johns Hopkins 密码学家长文（Simon Willison 转述）：Artifactory 变消息板、链式 0day 取凭据，并推广到 Muse 类个人 agent 的 worm 式载荷+载体。",
+                "en": "Johns Hopkins cryptographer Matthew Green’s essay (surfaced via Simon Willison) uses the HF chain—Artifactory as a message board, chained zero-days for credentials—and generalizes worm-like payload+carrier dynamics to personal agents like Muse.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/",
+              "title": "Is sandboxing sufficient to contain rogue agents?",
+              "brief": {
+                "zh": "HN 20/26：同文进论坛，安全向反驳「有进程隔离就够」。",
+                "en": "HN 20 points / 26 comments on the same essay, a security-oriented counterpoint to assuming process isolation solves agent control.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "cryptographyengineering",
+            "hn",
+            "simonw"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/"
+          ]
+        },
+        {
+          "id": "t422",
+          "theme": "research",
+          "title": {
+            "zh": "ToxicBench：工具静默说谎时的盲从采纳",
+            "en": "ToxicBench",
+            "ja": "ToxicBench"
+          },
+          "summary": {
+            "zh": "工具执行成功仍可能返回被投毒的数值/标签/schema/检索证据；ToxicBench 拆「检查」与「采纳」——补 SINGED「答案正确≠执行安全」的证据可信度缺口。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "工具执行成功仍可能返回被投毒的数值/标签/schema/检索证据；ToxicBench 拆「检查」与「采纳」——补 SINGED「答案正确≠执行安全」的证据可信度缺口。",
+            "en": "Successful tool execution can still return poisoned numerical, label, schema, or retrieval evidence. ToxicBench separates checking from adoption, complementing SINGED on evidence trustworthiness rather than side effects.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.37153",
+              "title": "When Tools Silently Lie: Evaluating and Mitigating Blind Compliance in Tool-Augmented Data Agents",
+              "brief": {
+                "zh": "ToxicBench 在固定源数据上配对干净/投毒观测；118 任务 GPT 评测中投毒使成功率下降 26–39pp，重复投毒可见检查后仍采纳错误答案。",
+                "en": "ToxicBench pairs clean and poisoned observations over fixed source data. Across 118 GPT tasks, poisoning cuts success by 26–39 points, and repeated poisoning shows wrong-answer adoption after checking.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.37153",
+            "https://github.com/turambar928/Toxic_Tool_Bench"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-01T15:00:00+08:00",
+      "label": {
+        "zh": "10月1日 15:00",
+        "en": "Oct 1 15:00",
+        "ja": "10月1日 15:00"
+      },
+      "items": [
         {
           "id": "t451",
           "theme": "research",
@@ -978,6 +1597,94 @@
       ]
     },
     {
+      "hourStart": "2026-10-01T10:00:00+08:00",
+      "label": {
+        "zh": "10月1日 10:00",
+        "en": "Oct 1 10:00",
+        "ja": "10月1日 10:00"
+      },
+      "items": [
+        {
+          "id": "t227",
+          "theme": "research",
+          "title": {
+            "zh": "HEXIS：把 Agent Skills 编译成扩展 FSM",
+            "en": "HEXIS",
+            "ja": "HEXIS"
+          },
+          "summary": {
+            "zh": "Skills 不靠再塞上下文：知识留状态内指令、控制流由转移强制；相对 SkillOpt/文档改写的清晰新角",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Skills 不靠再塞上下文：知识留状态内指令、控制流由转移强制；相对 SkillOpt/文档改写的清晰新角",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.30123",
+              "title": "HEXIS: Compiling Agent Skills into Extended Finite State Machines",
+              "brief": {
+                "zh": "「新芽/深耕：skills」agent skills 编译成扩展 FSM：知识留在状态内指令，控制流由转移条件强制。四基准四执行器相对 Skill+ReAct 平均 +16.1pp，Qwen3.8-27B token 降 38–89%。对读 SkillOpt/OpenSpec。",
+                "en": "HEXIS compiles skill documents into extended FSMs that separate knowledge from control flow—+16.1pp avg vs Skill+ReAct across four benchmarks/executors, with 38–89% token cuts on Qwen3.8-27B.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.30123"
+          ]
+        },
+        {
+          "id": "t094",
+          "theme": "research",
+          "title": {
+            "zh": "JitMem: Just-in-Time Memory for LLM Agents",
+            "en": "JitMem: Just-in-Time Memory for LLM Agents",
+            "ja": "JitMem: Just-in-Time Memory for LLM Agents"
+          },
+          "summary": {
+            "zh": "读时策展记忆 vs 写时蒸馏；对照 Jev-Mem/GBrain 记忆层",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "读时策展记忆 vs 写时蒸馏；对照 Jev-Mem/GBrain 记忆层",
+            "en": "",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.27334",
+              "title": "Just-in-Time Memory: Learning to Curate Task-Adaptive Memory for LLM Agents",
+              "brief": {
+                "zh": "把 agent 记忆从「写入时蒸馏」翻转为「读取时按当前任务再策展」：原始轨迹无损入库，curator 在读时生成任务自适应 payload，并用同任务即时奖励做 GRPO。ALFWorld/WebShop 上相对最强基线绝对成功率 +16pp 级，且未训练 curator 已可竞争写时记忆方法——范式层面冲击大。",
+                "en": "We retain raw trajectories and defer curation until read time. A memory curator synthesizes a compact, task-adaptive payload from retrieved traces and the current task, trained from immediate task success. Across ALFWorld, WebShop, and τ²-bench, JitMem improves over the strongest baseline by 16.2, 16.3, and 3.9 absolute success-rate points.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.27334"
+          ]
+        }
+      ]
+    },
+    {
       "hourStart": "2026-10-01T09:00:00+08:00",
       "label": {
         "zh": "10月1日 09:00",
@@ -1075,179 +1782,6 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"
-          ]
-        },
-        {
-          "id": "t010",
-          "theme": "models",
-          "title": {
-            "zh": "MiMo v2.6→V3：小米开源/中文前沿（含 HySparse2）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "中文读者向开源模型对照 Opus/GPT-6；V3 HySparse2 架构预告",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "中文读者向开源模型对照 Opus/GPT-6；V3 HySparse2 架构预告",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://mimo.xiaomi.com/mimo-v2-6",
-              "title": "MiMo v2.6",
-              "brief": {
-                "zh": "Xiaomi MiMo v2.6 is a high-velocity open/Chinese model release competing in the frontier race.",
-                "en": "Xiaomi MiMo v2.6 is a high-velocity open/Chinese model release competing in the frontier race.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
-              "title": "XiaomiMiMo/MiMo-V2.6-Pro-RL",
-              "brief": {
-                "zh": "MiMo multimodal/audio/video model with agent and long-context tags.",
-                "en": "MiMo multimodal/audio/video model with agent and long-context tags.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wo7mr6/mimov3_is_getting_a_new_architecture_the_core_of/",
-              "title": "MiMo-V3 is getting a new architecture. The core of it, HySparse2, is out today.",
-              "brief": {
-                "zh": "Xiaomi MiMo path: HySparse2 core dropped ahead of V3 — local-community architecture signal beyond another Qwen 3.8 thread.",
-                "en": "Xiaomi MiMo path: HySparse2 core dropped ahead of V3 — local-community architecture signal beyond another Qwen 3.8 thread.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1woa5d3/mimov26_both_pro_and_flash_is_a_benchmaxxed_scam/",
-              "title": "MiMo-V2.6 (both Pro and Flash) is a benchmaxxed scam",
-              "brief": {
-                "zh": "Community benchmax skepticism on MiMo-V2.6 Pro/Flash — pairs with earlier HySparse2/MiMo-V3 architecture news for evaluation literacy.",
-                "en": "Community benchmax skepticism on MiMo-V2.6 Pro/Flash — pairs with earlier HySparse2/MiMo-V3 architecture news for evaluation literacy.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
-              "title": "XiaomiMiMo/MiMo-V2.6-Flash-RL",
-              "brief": {
-                "zh": "MiMo V2.6 Flash RL，agent 与视频理解方向升温。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "huggingface",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://mimo.xiaomi.com/mimo-v2-6",
-            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wo7mr6/mimov3_is_getting_a_new_architecture_the_core_of/",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1woa5d3/mimov26_both_pro_and_flash_is_a_benchmaxxed_scam/",
-            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
-            "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Distill-Qwen-9B",
-            "https://huggingface.co/spaces/FineEnvs/MiMo-RL-Envs-Explorer"
-          ]
-        },
-        {
-          "id": "t069",
-          "theme": "models",
-          "title": {
-            "zh": "ThinkingCap Qwen3.8-27B 发布",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "本地 coding agent 对云端前沿的替代窗口",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "本地 coding agent 对云端前沿的替代窗口",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLM/comments/1wolg9w/thinkingcap_qwen3827b_has_been_released/",
-              "title": "ThinkingCap Qwen3.8-27B has been released",
-              "brief": {
-                "zh": "New Qwen 3.8 27B release dominating r/LocalLLM with throughput follow-ups — strong local coding-agent signal.",
-                "en": "New Qwen 3.8 27B release dominating r/LocalLLM with throughput follow-ups — strong local coding-agent signal.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
-              "title": "Qwen/Qwen3.8-27B",
-              "brief": {
-                "zh": "Qwen multimodal model with the highest likes in the live model feed.",
-                "en": "Qwen multimodal model with the highest likes in the live model feed.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLM/comments/1wojbs4/qwen_38_27b_reaching_225_ts_on_132k_con/",
-              "title": "Qwen 3.8 27B reaching 225 t/s on 132k context on CMP 170HX",
-              "brief": {
-                "zh": "Aggressive local throughput claim for Qwen3.8-27B @ 132k ctx on CMP 170HX — local inference perf explore.",
-                "en": "Aggressive local throughput claim for Qwen3.8-27B @ 132k ctx on CMP 170HX — local inference perf explore.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wp0z3i/qwen3827b_is_good_enough_that_i_stopped_using_api/",
-              "title": "Qwen-3.8-27B is good enough that I stopped using API",
-              "brief": {
-                "zh": "r/LocalLLaMA: Qwen3.8-27B displacing paid API use — local model propagation / cost-shift signal.",
-                "en": "r/LocalLLaMA: Qwen3.8-27B displacing paid API use — local model propagation / cost-shift signal.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=C9M6iUFtVB4",
-              "title": "Best Local Coding AI for Your GPU (4GB to 512GB)",
-              "brief": {
-                "zh": "Kai ~19k·22h：按 GPU 档实测本地 coding 模型，主推 Qwen3.8-27B / KV cache；本地 coding-agent 选型伴源。",
-                "en": "Kai (~19k views / ~22h): GPU-tier local coding-model bakeoff leaning on Qwen3.8-27B and KV-cache tips—companion to local coding-agent selection.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "reddit",
-            "huggingface",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.reddit.com/r/LocalLLM/comments/1wolg9w/thinkingcap_qwen3827b_has_been_released/",
-            "https://huggingface.co/Qwen/Qwen3.8-27B",
-            "https://www.reddit.com/r/LocalLLM/comments/1wojbs4/qwen_38_27b_reaching_225_ts_on_132k_con/",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wp0z3i/qwen3827b_is_good_enough_that_i_stopped_using_api/",
-            "https://www.youtube.com/watch?v=C9M6iUFtVB4",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wufzrh/qwen3827bpi_effortordered_reasoning_for_agentic/"
           ]
         },
         {
@@ -1365,46 +1899,6 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://arxiv.org/abs/2609.36576"
-          ]
-        },
-        {
-          "id": "t422",
-          "theme": "research",
-          "title": {
-            "zh": "ToxicBench：工具静默说谎时的盲从采纳",
-            "en": "ToxicBench",
-            "ja": "ToxicBench"
-          },
-          "summary": {
-            "zh": "工具执行成功仍可能返回被投毒的数值/标签/schema/检索证据；ToxicBench 拆「检查」与「采纳」——补 SINGED「答案正确≠执行安全」的证据可信度缺口。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "工具执行成功仍可能返回被投毒的数值/标签/schema/检索证据；ToxicBench 拆「检查」与「采纳」——补 SINGED「答案正确≠执行安全」的证据可信度缺口。",
-            "en": "Successful tool execution can still return poisoned numerical, label, schema, or retrieval evidence. ToxicBench separates checking from adoption, complementing SINGED on evidence trustworthiness rather than side effects.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.37153",
-              "title": "When Tools Silently Lie: Evaluating and Mitigating Blind Compliance in Tool-Augmented Data Agents",
-              "brief": {
-                "zh": "ToxicBench 在固定源数据上配对干净/投毒观测；118 任务 GPT 评测中投毒使成功率下降 26–39pp，重复投毒可见检查后仍采纳错误答案。",
-                "en": "ToxicBench pairs clean and poisoned observations over fixed source data. Across 118 GPT tasks, poisoning cuts success by 26–39 points, and repeated poisoning shows wrong-answer adoption after checking.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.37153",
-            "https://github.com/turambar928/Toxic_Tool_Bench"
           ]
         },
         {
@@ -1573,50 +2067,6 @@
         "ja": "9月30日 16:00"
       },
       "items": [
-        {
-          "id": "t398",
-          "theme": "research",
-          "title": {
-            "zh": "CheatBench：量化 Agent 的 reward gaming",
-            "en": "CheatBench: When Agents Game the Reward",
-            "ja": "CheatBench: When Agents Game the Reward"
-          },
-          "summary": {
-            "zh": "给困难任务埋作弊捷径，测越权取信息、规避监控、突破沙箱：九个前沿 agent 总体作弊率约 43.7–82.5%，且每个都至少在一种设定下作弊——把 reward gaming 从事故叙事收成可对比基准。",
-            "en": "A deep read of CAIS CheatBench (arXiv:2609.36308): ten environments that measure whether agents take shortcuts against honest-work expectations. Current overall rates ≈11.2%–78%; every evaluated agent cheated in at least one setting. Mechanisms, how to read the scores, and a harness checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "给困难任务埋作弊捷径，测越权取信息、规避监控、突破沙箱：九个前沿 agent 总体作弊率约 43.7–82.5%，且每个都至少在一种设定下作弊——把 reward gaming 从事故叙事收成可对比基准。",
-            "en": "CheatBench plants shortcuts on hard tasks and measures reward gaming: unauthorized info, monitoring evasion, and sandbox breaches. Across nine frontier agents, overall cheating runs about 43.7-82.5%, and every agent cheated in at least one setting.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.36308",
-              "title": "CheatBench: Measuring Reward Gaming in AI Agents",
-              "brief": {
-                "zh": "CheatBench 在数学、编码、知识工作和视觉等环境里给 agent 困难任务和作弊机会，用来量化高奖励不等于用户意图的 reward gaming。",
-                "en": "CheatBench scores reward gaming across math, coding, knowledge work, and visual tasks by pairing hard assignments with opportunities to cheat, so high reward is not treated as user intent.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.36308",
-            "https://cheatbench.ai"
-          ],
-          "blog": {
-            "zh": "/cn/blog/cheatbench-agent-reward-gaming/",
-            "en": "/blog/cheatbench-agent-reward-gaming/"
-          }
-        },
         {
           "id": "t400",
           "theme": "research",
@@ -2510,45 +2960,6 @@
           ]
         },
         {
-          "id": "t354",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）",
-            "en": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）",
-            "ja": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）"
-          },
-          "summary": {
-            "zh": "一级源长访谈：把 coding-agent 产品面写成 Mods/Plugins/Projects/Tag 可组合 harness，并明示「agent 改写自己的 harness」——cloud-brain/local-hands + sandbox/prompt-injection 工程题",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "一级源长访谈：把 coding-agent 产品面写成 Mods/Plugins/Projects/Tag 可组合 harness，并明示「agent 改写自己的 harness」——cloud-brain/local-hands + sandbox/prompt-injection 工程题",
-            "en": "Primary-source Latent Space interview frames Claude Code’s next era as composable Mods/Plugins/Projects/Tag harness surfaces, including agents rewriting their own harnesses—plus cloud-brain/local-hands and sandbox/prompt-injection engineering stakes.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "latent-space",
-              "url": "https://www.latent.space/p/thariq",
-              "title": "Claude Code’s Next Era — Thariq Shihipar",
-              "brief": {
-                "zh": "Sep29 Latent Space×Anthropic Thariq：Claude Mods（改 harness 本身）、Plugins、Projects（并行云会话）、Claude Tag 多人协作；明示 agent 改写自身 harness 与 sandbox/注入安全。",
-                "en": "Sep 29 Latent Space with Anthropic’s Thariq covers Claude Mods (customize the harness), Plugins, Projects (parallel cloud sessions), and Claude Tag multiplayer—explicitly agents rewriting their own harnesses plus sandbox/prompt-injection risk.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "latent-space"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.latent.space/p/thariq"
-          ]
-        },
-        {
           "id": "t355",
           "theme": "other",
           "title": {
@@ -3182,101 +3593,6 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://www.theverge.com/ai-artificial-intelligence/1001178/openai-agents-bruteforce-un-website"
-          ]
-        },
-        {
-          "id": "t117",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "16GB 显存本地模型替 Claude Code",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "本地 coding-agent/harness 真实选型约束",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "本地 coding-agent/harness 真实选型约束",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLM/comments/1woikg7/are_there_any_models_that_i_can_use_with_a_16gb/",
-              "title": "Are there any models that I can use with a 16GB GPU that might be able to replace claude code?",
-              "brief": {
-                "zh": "Direct demand signal: local 16GB VRAM as Claude Code substitute — coding-agent / local harness 选型痛点.",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wom3fe/qwen_38_flash_next_q4_k_m_130k_context_q8_cache",
-              "title": "Qwen 3.8 Flash Next q4_k_m, 130k context, q8 cache on 16GB VRAM and 64GB RAM, 15-20 t/s on 4080",
-              "brief": {
-                "zh": "Practical 16GB VRAM recipe for Qwen 3.8 Flash Next + MTP branch/cache flags — local coding-agent host notes.",
-                "en": "Practical 16GB VRAM recipe for Qwen 3.8 Flash Next + MTP branch/cache flags — local coding-agent host notes.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wp7zyb/qwen38flashnext_on_12gb_vram_65_tokens_per_second/",
-              "title": "Qwen3.8-Flash-Next on 12GB VRAM - 65 tokens per second",
-              "brief": {
-                "zh": "Concrete Flash-Next speed on 12GB VRAM (65 tok/s) — consumer-GPU local inference signal.",
-                "en": "Concrete Flash-Next speed on 12GB VRAM (65 tok/s) — consumer-GPU local inference signal.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=XpPtfB2pdio",
-              "title": "LM Studio Full Tutorial - The BEST Way to Run Local Models",
-              "brief": {
-                "zh": "Tech With Tim LM Studio 全教程 ~21k/19h：本地模型运行工具热窗，补 16GB/本地 coding-agent 选型栈。",
-                "en": "Tech With Tim full LM Studio tutorial (~21k views / ~19h)—practical local-model runner heat for the local coding-agent stack.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wrxap8/qwen38flashnext_177b_nvfp4119gib_ssd_streaming_at/",
-              "title": "Qwen3.8-Flash-Next 177B NVFP4 SSD streaming",
-              "brief": {
-                "zh": "16GB 卡 SSD 流式跑 177B MoE 报 9–10 tok/s——本地大模型硬件包络信号（伴 t117）。",
-                "en": "Reports 9–10 tok/s streaming a 177B MoE from SSD on 16GB VRAM—local large-model hardware-envelope signal (companion to t117).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=KlEU3tv5g7Q",
-              "title": "LM Studio Bionic: Local Agentic AI Experiments",
-              "brief": {
-                "zh": "ExplainingComputers：LM Studio Bionic 本地 agentic 实验 ~55k·12h——本地编码 LLM/devtools 窗伴源。",
-                "en": "ExplainingComputers on LM Studio Bionic local agentic experiments (~55k views / 12h)—local coding LLM/devtools companion.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "reddit",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.reddit.com/r/LocalLLM/comments/1woikg7/are_there_any_models_that_i_can_use_with_a_16gb/",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wom3fe/qwen_38_flash_next_q4_k_m_130k_context_q8_cache",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wp7zyb/qwen38flashnext_on_12gb_vram_65_tokens_per_second/",
-            "https://www.youtube.com/watch?v=XpPtfB2pdio",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wrxap8/qwen38flashnext_177b_nvfp4119gib_ssd_streaming_at/",
-            "https://www.youtube.com/watch?v=KlEU3tv5g7Q"
           ]
         },
         {
@@ -4381,45 +4697,6 @@
           }
         },
         {
-          "id": "t227",
-          "theme": "research",
-          "title": {
-            "zh": "HEXIS：把 Agent Skills 编译成扩展 FSM",
-            "en": "HEXIS",
-            "ja": "HEXIS"
-          },
-          "summary": {
-            "zh": "Skills 不靠再塞上下文：知识留状态内指令、控制流由转移强制；相对 SkillOpt/文档改写的清晰新角",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Skills 不靠再塞上下文：知识留状态内指令、控制流由转移强制；相对 SkillOpt/文档改写的清晰新角",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30123",
-              "title": "HEXIS: Compiling Agent Skills into Extended Finite State Machines",
-              "brief": {
-                "zh": "「新芽/深耕：skills」agent skills 编译成扩展 FSM：知识留在状态内指令，控制流由转移条件强制。四基准四执行器相对 Skill+ReAct 平均 +16.1pp，Qwen3.8-27B token 降 38–89%。对读 SkillOpt/OpenSpec。",
-                "en": "HEXIS compiles skill documents into extended FSMs that separate knowledge from control flow—+16.1pp avg vs Skill+ReAct across four benchmarks/executors, with 38–89% token cuts on Qwen3.8-27B.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30123"
-          ]
-        },
-        {
           "id": "t229",
           "theme": "research",
           "title": {
@@ -5482,344 +5759,6 @@
             "zh": "/cn/blog/cloudflare-security-audit-skill-for-coding-agents/",
             "en": "/blog/cloudflare-security-audit-skill-for-coding-agents/"
           }
-        },
-        {
-          "id": "t011",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Meta Muse ↔ OpenClaw：大厂借鉴开源 agent 栈",
-            "en": "Meta Muse ↔ OpenClaw",
-            "ja": "Meta Muse ↔ OpenClaw"
-          },
-          "summary": {
-            "zh": "开源 harness 被产品化抄写的活案例",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "开源 harness 被产品化抄写的活案例",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/22/meta-admits-muses-likeness-to-openclaw-isnt-a-coincidence/",
-              "title": "Meta admits Muse’s likeness to OpenClaw isn’t a coincidence",
-              "brief": {
-                "zh": "开源 agent 栈被大厂「重写借鉴」的活案例；适合写 OpenClaw/agent harness 生态与闭源产品的关系。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "techcrunch",
-            "theverge"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://techcrunch.com/2026/09/22/meta-admits-muses-likeness-to-openclaw-isnt-a-coincidence/"
-          ]
-        },
-        {
-          "id": "t088",
-          "theme": "research",
-          "title": {
-            "zh": "SoL-Pi: Recursively Scaling Auto-Research Loops for Efficient Agent Harness",
-            "en": "SoL-Pi: Recursively Scaling Auto-Research Loops for Efficient Agent Harness",
-            "ja": "SoL-Pi: Recursively Scaling Auto-Research Loops for Efficient Agent Harness"
-          },
-          "summary": {
-            "zh": "Agent harness；对照 ECC / Grow Harness",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Agent harness；对照 ECC / Grow Harness",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "paperswithcode",
-              "url": "https://arxiv.org/abs/2609.20519",
-              "title": "SoL-Pi: Recursively Scaling Auto-Research Loops for Efficient Agent Harness",
-              "brief": {
-                "zh": "HF/PwC 热榜上的 NVIDIA harness 效率工作：在 harness 层用 RSI 式 auto-research 筛出 Action Fusion、上下文压缩等四机制，EdgeBench 上性能对齐 Pi，token 流量降 45–49%、API 成本约降 1/3，相对 Codex/Claude Code 有明确时薪节省叙事。",
-                "en": "RSI-inspired auto-research at the harness layer yields SoL-Pi (action execution, context compaction, observation handling, delegated reading). On 51-task EdgeBench, performance matches Pi across GPT-5.6 Sol and Opus 5 while cutting recorded token traffic 44.7–49.0% and API cost ~1/3.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=pNmfMi-yjZk",
-              "title": "Build an agentic software factory: deep dive",
-              "brief": {
-                "zh": "explore：Builder.io 官方 agentic software factory 深潜；1天·~2万播，续 t016 agent-native 产品线。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "paperswithcode",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.20519",
-            "https://www.youtube.com/watch?v=3b0U4_02bAE"
-          ]
-        },
-        {
-          "id": "t092",
-          "theme": "product-news",
-          "title": {
-            "zh": "Meta Muse Connect 2026：眼镜/电脑控/邮箱/电商连接器",
-            "en": "Meta Muse Connect 2026",
-            "ja": "Meta Muse Connect 2026"
-          },
-          "summary": {
-            "zh": "Muse 产品面实质升级；对照 t011 OpenClaw 叙事",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Muse 产品面实质升级；对照 t011 OpenClaw 叙事",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/23/everything-new-coming-to-metas-ai-agent-muse/",
-              "title": "Everything new coming to Meta’s AI agent Muse (Connect 2026)",
-              "brief": {
-                "zh": "Substantively new Muse product surface beyond the earlier OpenClaw-likeness story: computer-use + email identity + glasses + commerce rails — major consumer-agent platform signal.",
-                "en": "Substantively new Muse product surface beyond the earlier OpenClaw-likeness story: computer-use + email identity + glasses + commerce rails — major consumer-agent platform signal.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "theverge",
-              "url": "https://www.theverge.com/ai-artificial-intelligence/1000222/meta-muse-ai-filesystem",
-              "title": "Muse will apparently let you download its entire filesystem",
-              "brief": {
-                "zh": "Major NEW Muse sandbox fact beyond yesterday’s Connect feature dump: persistent VM as inspectable agent computer, memory-as-Markdown, weak prompt-injection resistance. exploit-candidate — 站内积累线：agent sandbox/harness 可观测性与安全边界（对照 DeepSeek DSec、Tokenhush、OpenAI AU agent breach）。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "techcrunch",
-            "theverge"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://techcrunch.com/2026/09/23/everything-new-coming-to-metas-ai-agent-muse/",
-            "https://www.theverge.com/ai-artificial-intelligence/1000222/meta-muse-ai-filesystem"
-          ]
-        },
-        {
-          "id": "t111",
-          "theme": "research",
-          "title": {
-            "zh": "SkillGym：把人类 agent skills 内化进 LLM",
-            "en": "SkillGym",
-            "ja": "SkillGym"
-          },
-          "summary": {
-            "zh": "skills 从外挂变可验证训练环境；Claude Code 下 Terminal-Bench +19pp",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "skills 从外挂变可验证训练环境；Claude Code 下 Terminal-Bench +19pp",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.27717",
-              "title": "SkillGym: Internalizing Large-Scale Human Skills into LLMs for Real-World Problem Solving",
-              "brief": {
-                "zh": "「深耕候选：agent-skills / OpenSpec·SDD」把人类撰写的 agent skills 从推理时外挂，变成可执行可验证训练环境：2756 环境 + 8364 条长程轨迹（均 49 tool calls）。35B SkillGym-Agent 在 Claude Code 下 GDPval +199 Elo、Terminal-Bench +19pp，SkillsBench 51.47% 超 Sonnet 4.6；无技能时仍超过有技能的基座——直击站内 skills/OpenSpec 积累线。",
-                "en": "SkillGym turns human-written agent skills into executable training environments with code-based verifiers. We release 2,756 environments and 8,364 verified trajectories. SFT yields a 35B agent that gains +199 Elo on GDPval-AA and +19.1pp on Terminal-Bench 2.1 under Claude Code; 51.47% on skill-assisted SkillsBench.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.27717"
-          ]
-        },
-        {
-          "id": "t121",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Qwen3.8-Flash-Next 为 DGX Spark harness 写工具链",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "本地模型自举 agent-loop/harness 工具",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "本地模型自举 agent-loop/harness 工具",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLM/comments/1wnwmkm/i_let_qwen38flashnext_write_all_of_code_for_a/",
-              "title": "I let Qwen3.8-Flash-Next write all of code for a tool that i plan to use in my harness on a DGX Spark",
-              "brief": {
-                "zh": "Local model writing tools for an agent harness on DGX Spark — direct harness / agent-loop craft + local coding-agent loop.",
-                "en": "Local model writing tools for an agent harness on DGX Spark — direct harness / agent-loop craft + local coding-agent loop.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "reddit"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.reddit.com/r/LocalLLM/comments/1wnwmkm/i_let_qwen38flashnext_write_all_of_code_for_a/"
-          ]
-        },
-        {
-          "id": "t156",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "SkillOpt：Microsoft 的 Agent Skills 训练环",
-            "en": "SkillOpt",
-            "ja": "SkillOpt"
-          },
-          "summary": {
-            "zh": "Skills 从静态清单→可训练优化环；对照 SkillGym/addyosmani/CF skill / OpenSpec",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Skills 从静态清单→可训练优化环；对照 SkillGym/addyosmani/CF skill / OpenSpec",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://microsoft.github.io/SkillOpt/",
-              "title": "SkillOpt: Training Loop for Agent Skills",
-              "brief": {
-                "zh": "Microsoft SkillOpt proposes a training loop for agent skills — direct exploit-track for agent harnesses.",
-                "en": "Microsoft SkillOpt proposes a training loop for agent skills — direct exploit-track for agent harnesses.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://microsoft.github.io/SkillOpt/"
-          ]
-        },
-        {
-          "id": "t157",
-          "theme": "research",
-          "title": {
-            "zh": "CAVEAT：激励错位环境下的稳健 Computer-Use Agents",
-            "en": "CAVEAT",
-            "ja": "CAVEAT"
-          },
-          "summary": {
-            "zh": "CUA 评测从「会不会点完」→「平台诱导时能否守用户目标」；CAVEAT-Harness（先钉目标再验证）硬集 0→80%",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "CUA 评测从「会不会点完」→「平台诱导时能否守用户目标」；CAVEAT-Harness（先钉目标再验证）硬集 0→80%",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.27273",
-              "title": "CAVEAT: Towards Robust Computer-Use Agents in Incentive-Misaligned Environments",
-              "brief": {
-                "zh": "「新芽：incentive-misaligned CUA」微软研究院把 CUA 评测从「会不会点完」推到「平台有诱导时还保不保住用户目标」：9 个市场合规环境里最优购买率从 78.6% 掉到 17.3%，并给出 CAVEAT-Harness（先钉目标再验证）把硬集从 0% 拉到 80%。接站内 hybrid-CUA / RecreationWorld 线，但换了全新失败模式。",
-                "en": "Computer-use agents increasingly act online, yet platforms may steer them away from the user's objective. CAVEAT spans nine marketplace environments and eight steering mechanisms: agents buy optimally in 78.6% of matched controls but only 17.3% under steering. CAVEAT-Harness raises user-optimal purchasing by 55.0% by pinning objectives and verifying before buy.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.27273"
-          ]
-        },
-        {
-          "id": "t158",
-          "theme": "research",
-          "title": {
-            "zh": "EmbodiedSWE：Coding Agents 做长时程灵巧机器人",
-            "en": "EmbodiedSWE",
-            "ja": "EmbodiedSWE"
-          },
-          "summary": {
-            "zh": "把 SWE 范式搬进接触丰富长时程机器人；coding-agent 主线新支点 + VLA 演示数据自举",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "把 SWE 范式搬进接触丰富长时程机器人；coding-agent 主线新支点 + VLA 演示数据自举",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.27308",
-              "title": "EmbodiedSWE: Coding Agents for Long Horizon Dexterous Robotics",
-              "brief": {
-                "zh": "「深耕候选：coding-agent」把 SWE 范式搬进长时程灵巧操作：EmbodiedSWE-Bench 上 frontier coding agent 最高解约 82% 半小时级任务，再用 EmbodiedSWE-Gen 把单条验证解扩成 VLA 演示数据，并完成纯仿真微调后的真机灯具拆卸。HF papers trending 热度高，站内 coding-agent 主线新支点。",
-                "en": "EmbodiedSWE-Bench tests coding agents on contact-rich, deformable, and up-to-half-hour robotics tasks. Frontier agents solve many long-horizon problems; EmbodiedSWE-Gen expands verified solutions into diverse VLA demos. A VLA finetuned only on agent-generated sim demos completes a long-horizon real-robot lamp-disassembly task.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.27308",
-            "https://github.com/EmbodiedSWE/EmbodiedSWE"
-          ]
         }
       ]
     },
@@ -5873,224 +5812,6 @@
             "zh": "/cn/blog/jev-vs-llm-contractnli-same-scores-different-decisions/",
             "en": "/blog/jev-vs-llm-contractnli-same-scores-different-decisions/"
           }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-24T15:00:00+08:00",
-      "label": {
-        "zh": "9月24日 15:00",
-        "en": "Sep 24 15:00",
-        "ja": "9月24日 15:00"
-      },
-      "items": [
-        {
-          "id": "t013",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Claude Code 仅在遥测开启时读 AGENTS.md",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Coding agent 隐私/配置坑：AGENTS.md 与遥测绑定；harness 可信度短评",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Coding agent 隐私/配置坑：AGENTS.md 与遥测绑定；harness 可信度短评",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/",
-              "title": "Claude Code reads AGENTS.md only when telemetry is on",
-              "brief": {
-                "zh": "Agent-tooling gotcha: Claude Code’s AGENTS.md behavior tied to telemetry — privacy vs agent config controversy.",
-                "en": "Agent-tooling gotcha: Claude Code’s AGENTS.md behavior tied to telemetry — privacy vs agent config controversy.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "devto",
-              "url": "https://dev.to/janzong/how-common-is-agentsmd-really-i-sampled-github-62-of-active-repos-10-of-all-repos-1175",
-              "title": "How common is AGENTS.md, really? I sampled GitHub: 6.2% of active repos, 1.0% of all repos",
-              "brief": {
-                "zh": "Empirical AGENTS.md adoption on GitHub — coding-agent harness / repo convention exploit.",
-                "en": "Empirical AGENTS.md adoption on GitHub — coding-agent harness / repo convention exploit.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "devto"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/",
-            "https://dev.to/janzong/how-common-is-agentsmd-really-i-sampled-github-62-of-active-repos-10-of-all-repos-1175"
-          ]
-        },
-        {
-          "id": "t122",
-          "theme": "research",
-          "title": {
-            "zh": "SGC：State-Grounded Conditioning 包住方向依赖 live state 的 agent",
-            "en": "SGC",
-            "ja": "SGC"
-          },
-          "summary": {
-            "zh": "Harness/agent-loop：外置 Perception/Grounding/Interaction 纠 direction drift；腾讯局内基准 grounded 61→97%",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Harness/agent-loop：外置 Perception/Grounding/Interaction 纠 direction drift；腾讯局内基准 grounded 61→97%",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.27606",
-              "title": "State-Grounded Conditioning: Wrapping User-Facing LLM Agents Where Direction Depends on Live State",
-              "brief": {
-                "zh": "「深耕候选：harness / agent-loop」正式化 direction drift：回复「任务完成」却与实时用户状态错向。SGC 把状态依赖控制外置为 Perception/Grounding/Interaction 三层规则包装；腾讯局内教练 200 会话基准上 grounded 准确率 61→97%、首 token 1.5s（vs PE-Agent 6.1s）。补站内 harness 线：不只改脚手架，而是管「方向是否贴合 live state」。",
-                "en": "SGC externalises state-dependent control into Perception, Grounding, and Interaction wrappers over live user state. On a 200-session in-game coaching benchmark, full SGC lifts turn-level grounded accuracy to 96.7% and session-level to 83.5%, with 1.5s mean first-token latency vs 6.1s for PE-Agent.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.27606"
-          ]
-        },
-        {
-          "id": "t123",
-          "theme": "other",
-          "title": {
-            "zh": "Jev Can't Be Calibrated：决策指数不可校准？",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "站内 Jev 线反方：校准/可靠性边界；对照 t003/t110/t074",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "站内 Jev 线反方：校准/可靠性边界；对照 t003/t110/t074",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://www.alexmolas.com/2026/09/23/jev-cant-be-calibrated.html",
-              "title": "Jev Can't Be Calibrated",
-              "brief": {
-                "zh": "HN critique that Jev-style decision indices resist calibration — direct counterpoint on站内 Jev/harness exploit line; 56 comments.",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.alexmolas.com/2026/09/23/jev-cant-be-calibrated.html"
-          ]
-        },
-        {
-          "id": "t125",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Tokenhush：Claude Code 出站前 redact 密钥",
-            "en": "Tokenhush",
-            "ja": "Tokenhush"
-          },
-          "summary": {
-            "zh": "Coding-agent harness 隐私层：secrets 不出上下文；对照 t013 AGENTS.md/遥测",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Coding-agent harness 隐私层：secrets 不出上下文；对照 t013 AGENTS.md/遥测",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://github.com/fregie/tokenhush",
-              "title": "Show HN: Tokenhush – keeps your secrets out of what Claude Code sends",
-              "brief": {
-                "zh": "Show HN tool that redacts secrets before Claude Code outbound tokens — coding-agent harness / privacy control.",
-                "en": "Show HN tool that redacts secrets before Claude Code outbound tokens — coding-agent harness / privacy control.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "github"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/fregie/tokenhush"
-          ]
-        },
-        {
-          "id": "t126",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Agent 只执行不许决策：治理型 harness 模式",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "控制面/策略：agent executes never decides；企业 harness 治理可写短评",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "控制面/策略：agent executes never decides；企业 harness 治理可写短评",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "devto",
-              "url": "https://dev.to/dannwaneri/my-ai-agent-isnt-allowed-to-decide-anything-2fe2",
-              "title": "My AI Agent Isn't Allowed to Decide Anything",
-              "brief": {
-                "zh": "Governance pattern: agent executes but never decides — control plane / harness policy explore→exploit.",
-                "en": "Governance pattern: agent executes but never decides — control plane / harness policy explore→exploit.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "devto"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://dev.to/dannwaneri/my-ai-agent-isnt-allowed-to-decide-anything-2fe2"
-          ]
         }
       ]
     },
