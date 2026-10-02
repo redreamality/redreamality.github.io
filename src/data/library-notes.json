@@ -2,6 +2,559 @@
   "version": 1,
   "entries": [
     {
+      "id": "a7e3ca800825094ed259656388c28b4cfc6a78b3f341a66c372980bc058b97a7",
+      "title": "RockChinQ/LangBot",
+      "url": "https://github.com/RockChinQ/LangBot",
+      "date": "2026-10-02T07:05:39.042Z",
+      "language": "zh",
+      "sentence": "LangBot 是一个开源、生产级 AI 即时机器人平台，可将大语言模型接入多种聊天平台并提供管理、插件与部署能力。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "LangBot 被描述为开源、生产级平台，用于构建 AI 驱动的即时消息机器人。",
+            "它可将大语言模型连接到聊天平台，以创建可对话、执行任务并集成现有工作流的智能体。"
+          ]
+        },
+        {
+          "heading": "AI 能力",
+          "details": [
+            "支持多轮对话、工具调用、多模态和流式输出。",
+            "内置 RAG 知识库，并深度集成 Dify、Coze、n8n、Langflow、Deerflow、Weknora。"
+          ]
+        },
+        {
+          "heading": "平台接入",
+          "details": [
+            "文档称一套代码可支持 Discord、Telegram、Slack、LINE、QQ、微信、企业微信、飞书、钉钉、KOOK。",
+            "平台状态表还列出 Satori 与 Matrix，其中 Matrix 支持 Signal、WhatsApp、Messenger、iMessage、Mattermost、Google Chat、IRC、XMPP、Zulip 等桥接平台。"
+          ]
+        },
+        {
+          "heading": "生产与扩展",
+          "details": [
+            "提供访问控制、速率限制、敏感词过滤、监控和异常处理。",
+            "拥有插件生态、事件驱动架构、组件扩展和 MCP 协议支持。"
+          ]
+        },
+        {
+          "heading": "部署与管理",
+          "details": [
+            "可通过 uvx langbot 快速启动，需要 uv，并访问 http://localhost:5300。",
+            "也可通过 Docker Compose 部署，并提供 Web 管理面板和多流水线架构。"
+          ]
+        },
+        {
+          "heading": "模型与生态",
+          "details": [
+            "支持 OpenAI、Anthropic、DeepSeek、Google Gemini、xAI、Moonshot、Zhipu AI、Ollama、LM Studio 等模型或本地模型。",
+            "支持 Dify、MCP、SiliconFlow、阿里云百炼、火山引擎方舟、ModelScope、GiteeAI、CompShare、PPIO、ShengSuanYun、接口 AI、302.AI、Qiniu 等网关或平台。",
+            "LangBot Space 提供插件/MCP/技能市场，并暴露 MCP 服务器供代理检索和检查。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 7428,
+        "totalChars": 7428
+      }
+    },
+    {
+      "id": "ad9050b6b9b462ee8d6eab7a89140128350577dc033959dd5ef110feabb1113e",
+      "title": "InternLM/HuixiangDou: HuixiangDou: Overcoming Group Chat Scenarios with LLM-based Technical Assistance",
+      "url": "https://github.com/InternLM/HuixiangDou",
+      "date": "2026-10-02T07:05:04.214Z",
+      "language": "zh",
+      "sentence": "该页面介绍 HuixiangDou 是一个面向群聊场景、无需训练且支持多 LLM、多文件、多检索与多端集成的 LLM 知识助手。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "HuixiangDou 是基于 LLM 的专业知识助手，面向群聊场景。",
+            "它设计预处理、拒绝、响应三阶段流水线。",
+            "chat_in_group 用于群聊问答并减少消息刷屏，chat_with_repo 支持实时流式聊天。"
+          ]
+        },
+        {
+          "heading": "版本升级",
+          "details": [
+            "HuixiangDou2 是 GraphRAG 方案。",
+            "其效果在植物科学领域得到验证。",
+            "它贡献了 Cell Molecular Plant 封面论文。",
+            "非计算机领域用户可尝试新发布。"
+          ]
+        },
+        {
+          "heading": "部署与硬件",
+          "details": [
+            "项目无需训练，提供 CPU-only、2GB 和 10GB 配置。",
+            "CPU-only 版可使用 SiliconFlow API 进行文本推理。",
+            "标准版约需 2GB GPU 显存，多模态版约需 10GB GPU 显存。",
+            "项目提供 Web、Android 和 pipeline 源码，并描述为工业级且可商用。"
+          ]
+        },
+        {
+          "heading": "能力支持",
+          "details": [
+            "支持 DeepSeek、InternLM、GLM、KIMI、StepFun、vLLM 等 LLM。",
+            "支持 excel、html、markdown、pdf、ppt、txt、word 等文件。",
+            "支持文档稠密检索、代码稀疏检索、知识图谱、互联网搜索、SourceGraph 和图文检索。",
+            "支持微信、Lark、OpenXLab Web、Gradio、HTTP Server 和 Read the Docs 集成。"
+          ]
+        },
+        {
+          "heading": "运行流程",
+          "details": [
+            "标准版需安装依赖、创建知识库并配置 LLM API。",
+            "知识库可由 repodir 文档或 QA 对构建。",
+            "可通过 main、gradio_ui 或 api_server 进行测试与服务。",
+            "可更新 repodir、good_questions 和 bad_questions 以适配领域知识。"
+          ]
+        },
+        {
+          "heading": "集成与扩展",
+          "details": [
+            "支持飞书和微信群的单向或双向接入，以及个人微信 Android 或 wkteam 接入。",
+            "提供 TypeScript 前端和 Python 后端源码，支持多租户、零编程接入飞书或微信，并描述为 k8s 友好。",
+            "10G 多模态版需下载 Visualized_m3.pth 并安装 FlagEmbedding 主分支及多模态依赖。",
+            "高级能力包括混合知识图谱与稠密检索、群聊共指消解 SFT 和 RAG 标注 SFT 数据。"
+          ]
+        },
+        {
+          "heading": "常见问题与引用",
+          "details": [
+            "FAQ 建议通过 good_questions、bad_questions、repodir 内容和 reject_throttle 调整回答范围。",
+            "运行时 OOM 可考虑 KV cache 量化并独立部署 Hybrid LLM Service。",
+            "项目引用了 HuixiangDou、SFT 数据标注和 HuixiangDou2 三篇 arXiv 论文。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 21573,
+        "totalChars": 21573
+      }
+    },
+    {
+      "id": "888408aa2ddcc1b0106bc03a0c2be458a08c6ab4fcf4f17c25ca6344b6b0c281",
+      "title": "Those MCP totally 10x my Cursor workflow…",
+      "url": "https://www.youtube.com/watch?v=oAoigBWLZgE",
+      "date": "2026-10-02T07:04:42.416Z",
+      "language": "zh",
+      "sentence": "该页面数据主要包含一个英文标题、一组西班牙语页脚链接以及 Google LLC 的版权信息。",
+      "bullets": [
+        {
+          "heading": "页面标题",
+          "details": [
+            "标题为“Those MCP totally 10x my Cursor workflow…”"
+          ]
+        },
+        {
+          "heading": "页脚链接",
+          "details": [
+            "包含“关于”“新闻”“版权”“联系我们”等西班牙语链接",
+            "包含“创作者”“广告”“开发者”“条款”“隐私”等站点入口",
+            "包含“YouTube 如何运作”和“试用新功能”等链接"
+          ]
+        },
+        {
+          "heading": "版权信息",
+          "details": [
+            "显示“© 2026 Google LLC”"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 203,
+        "totalChars": 203
+      }
+    },
+    {
+      "id": "9a7579136451220a59b2100313129e190201b534fcbf9a086de755fec0b3fb61",
+      "title": "lastmile-ai/mcp-agent",
+      "url": "https://github.com/lastmile-ai/mcp-agent",
+      "date": "2026-10-02T07:04:11.156Z",
+      "language": "zh",
+      "sentence": "mcp-agent 是一个以 MCP 为核心、提供可组合 agent 模式、持久执行和云部署能力的 Python 框架。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "mcp-agent 是一个用于构建基于 Model Context Protocol（MCP）的 agent 的简单、可组合框架。",
+            "其理念是 MCP 足以构建 agent，简单模式比复杂架构更适合交付高质量 agent。"
+          ]
+        },
+        {
+          "heading": "核心能力",
+          "details": [
+            "完整实现 MCP，并管理 MCP 服务器连接生命周期。",
+            "以可组合方式实现 Anthropic《Building Effective Agents》中的多种 agent 模式。",
+            "支持从简单 agent 扩展到基于 Temporal 的持久工作流，可暂停、恢复并在不改变 agent API 的情况下恢复。"
+          ]
+        },
+        {
+          "heading": "安装与快速开始",
+          "details": [
+            "推荐用 uv 管理项目，也可用 pip 安装 mcp-agent。",
+            "CLI 可通过 uvx mcp-agent 初始化项目、管理 secrets、检查工作流并部署到 Cloud。",
+            "配置通常放在 mcp_agent.config.yaml，密钥放在 mcp_agent.secrets.yaml 或环境变量中。"
+          ]
+        },
+        {
+          "heading": "核心组件",
+          "details": [
+            "MCPApp 负责加载配置、日志、追踪和执行引擎。",
+            "Agent 与 AgentSpec 将指令、MCP 服务器和可选函数绑定。",
+            "Augmented LLM 包装 LLM provider SDK，提供 generate、generate_str 和 generate_structured 等能力。",
+            "工作流装饰器可将协程转换为工具或持久工作流。"
+          ]
+        },
+        {
+          "heading": "工作流模式",
+          "details": [
+            "提供 parallel/map-reduce、router、intent classifier 等辅助函数。",
+            "提供 orchestrator-workers、deep research、evaluator-optimizer 和 swarm 等模式。",
+            "这些模式可作为可复用工作流组合，用于构建更高层 agent 应用。"
+          ]
+        },
+        {
+          "heading": "生产与部署",
+          "details": [
+            "支持 Temporal 作为执行后端，实现暂停/恢复、重试、人工输入和持久历史。",
+            "提供结构化日志、OpenTelemetry 和 TokenCounter 用于可观测性与 token 用量跟踪。",
+            "可将 MCPApp 暴露为标准 MCP server，供 Claude Desktop、Cursor 等客户端调用。",
+            "可部署到 mcp-agent Cloud，获得托管 Temporal 执行、secrets 和 HTTPS MCP 端点。"
+          ]
+        },
+        {
+          "heading": "文档与生态",
+          "details": [
+            "完整文档位于 docs.mcp-agent.com，并提供 llms.txt、llms-full.txt 和 docs MCP server。",
+            "仓库包含 examples 目录和 gallery.md，提供可运行示例与社区项目。",
+            "项目欢迎贡献，并可通过 Discord 参与讨论。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 40500,
+        "totalChars": 40500
+      }
+    },
+    {
+      "id": "379be736432353a133a75a04f07334becb39380cf30a4b085f0c865b6c2186bf",
+      "title": "User flow diagramming tool for design teams | Overflow",
+      "url": "https://overflow.io/",
+      "date": "2026-10-02T07:03:56.056Z",
+      "language": "zh",
+      "sentence": "Overflow 是帮助设计团队导入设计、构建用户流程并进行协作演示与反馈的工具。",
+      "bullets": [
+        {
+          "heading": "产品定位",
+          "details": [
+            "Overflow 是面向设计团队的用户流程绘图与演示工具。",
+            "页面称其被全球 50 万以上设计师和产品经理使用。"
+          ]
+        },
+        {
+          "heading": "核心视图",
+          "details": [
+            "提供画布与用户流程视图，用于展示用户旅程。",
+            "提供原型视图，可逐屏查看设计细节。",
+            "提供故事视图，可创建交互式、自助式设计讲解。"
+          ]
+        },
+        {
+          "heading": "协作与反馈",
+          "details": [
+            "支持通过共享文件夹组织工作并保持团队同步。",
+            "支持邀请文档编辑者并访问完整版本历史。",
+            "支持在文档任意位置留言，进行异步设计评审。"
+          ]
+        },
+        {
+          "heading": "发布与分享",
+          "details": [
+            "可将作品上传到 Overflow Cloud 并生成发布链接。",
+            "可将演示嵌入协作工具、网站或博客。",
+            "可在已分享演示上继续迭代，并在准备好时更新发布链接。"
+          ]
+        },
+        {
+          "heading": "工作流功能",
+          "details": [
+            "可从流行设计工具导入设计，并保留原始图层或原型链接。",
+            "支持使用设备外壳、注释和样式等增强用户旅程展示。",
+            "支持在鸟瞰视图与逐屏原型视图之间切换进行演示。"
+          ]
+        },
+        {
+          "heading": "用户评价",
+          "details": [
+            "用户评价称其适合映射复杂产品或功能。",
+            "用户评价称其高度可定制且易于使用。",
+            "用户评价称其有助于可视化讲述用户流程背后的故事。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 9067,
+        "totalChars": 9067
+      }
+    },
+    {
+      "id": "74b6f350fbab5074ef05bdd3e8023a1f65fcbda2008dc61a496d23ccc43ac369",
+      "title": "玩转用户旅程地图 – 人人都是产品经理",
+      "url": "https://www.woshipm.com/user-research/5838878.html",
+      "date": "2026-10-02T07:03:03.258Z",
+      "language": "zh",
+      "sentence": "文章介绍用户旅程地图的定义、组成、使用场景、As-Is 与 To-Be 区别，以及单用户和多用户地图的创建方法。",
+      "bullets": [
+        {
+          "heading": "概念定义",
+          "details": [
+            "用户旅程地图是分析用户旅程的可视化工具，按时间线从左到右呈现。",
+            "它从用户角度出发，以讲故事方式描述用户在业务场景中完成任务或目标的过程和体验。",
+            "用户旅程地图与用户体验地图在资料中常被视为同一模板。"
+          ]
+        },
+        {
+          "heading": "核心组成",
+          "details": [
+            "完整地图包含用户模型、可视化体验过程和机会点三部分。",
+            "可视化体验过程包括关键活动、具体行为、触点、心情曲线和痛点。",
+            "机会点来自对痛点、期望、市场趋势或竞争做法的分析。"
+          ]
+        },
+        {
+          "heading": "使用场景",
+          "details": [
+            "工作中可作为协作和沟通工具，帮助理清业务流程并找到问题。",
+            "生活中可用于梳理装修等复杂事务的关键活动、行为和顺序。",
+            "学习中可用于规划目标、拆分行为、记录体验并改进方法。"
+          ]
+        },
+        {
+          "heading": "As-Is 与 To-Be",
+          "details": [
+            "As-Is 用户旅程地图描述当前旅程或业务流程，适用于问题域。",
+            "As-Is 通常包含关键活动、具体行为、触点、痛点和心情曲线。",
+            "To-Be 用户旅程地图描述未来方案，适用于方案域，通常侧重关键活动、具体行为和触点。"
+          ]
+        },
+        {
+          "heading": "创建方法",
+          "details": [
+            "单用户地图先定义用户、场景和目标，再按时间排列关键活动和具体行为。",
+            "创建时可补充触点、心情曲线和痛点，形成完整体验分析。",
+            "多用户地图通过泳道、颜色和箭头展示不同角色行为及依赖关系。",
+            "多用户地图若侧重过程，可省略心情曲线和痛点以提高可读性。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 7303,
+        "totalChars": 7303
+      }
+    },
+    {
+      "id": "1907f01f17fb2796f00a249f9687c7b60a3d2e337fc75590f9093f9ff7409f82",
+      "title": "大盘云图",
+      "url": "https://52etf.site/?utm_source=AI%E7%A5%9E%E5%99%A8%E9%9B%86",
+      "date": "2026-10-02T07:02:43.112Z",
+      "language": "zh",
+      "sentence": "大盘云图是一款免费A股热力图工具，按行业板块展示沪深A股并支持缩放、详情、全屏、截图与复盘。",
+      "bullets": [
+        {
+          "heading": "产品定位",
+          "details": [
+            "大盘云图是免费的A股实时热力图工具",
+            "将沪深两市数千只股票按行业板块分类展示",
+            "用红绿深浅呈现涨跌幅"
+          ]
+        },
+        {
+          "heading": "核心功能",
+          "details": [
+            "支持从行业板块到个股的多级缩放钻取",
+            "鼠标悬停可显示股票名称、代码、涨跌幅、成交额等详情",
+            "支持全屏查看、截图分享与历史复盘"
+          ]
+        },
+        {
+          "heading": "数据覆盖",
+          "details": [
+            "覆盖沪深两市全部A股",
+            "支持港股市场，包括恒生指数、恒生科技",
+            "行业分类采用申万/同花顺行业板块标准"
+          ]
+        },
+        {
+          "heading": "数据更新",
+          "details": [
+            "行情数据来自东方财富、同花顺等主流数据源",
+            "交易时段内约每8秒自动刷新一次",
+            "提供延迟行情数据，非Level-2实时数据"
+          ]
+        },
+        {
+          "heading": "使用方式",
+          "details": [
+            "打开网站即可看到实时大盘云图",
+            "完全免费使用，无需注册登录",
+            "支持滚轮缩放、悬停查看个股详情和全屏盯盘"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 977,
+        "totalChars": 977
+      }
+    },
+    {
+      "id": "477070f83849b3e5d24bc2a5edeba26fd8749338ac85103b872dc00958fe9c8d",
+      "title": "AboutRSS/ALL-about-RSS: A list of RSS related stuff: tools, services, communities and tutorials, etc.",
+      "url": "https://github.com/AboutRSS/ALL-about-RSS",
+      "date": "2026-10-02T07:02:06.850Z",
+      "language": "zh",
+      "sentence": "该页面展示了 GitHub 仓库 AboutRSS/ALL-about-RSS 的 RSS 资源列表，整理了 RSS 规范、阅读器、生成转发、社区和播客等工具与服务。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "GitHub 仓库 AboutRSS/ALL-about-RSS 是一个 RSS 相关资源列表。",
+            "内容涵盖工具、服务、社区、教程等。",
+            "内容主要依据 Telegram 频道 @AboutRSS 的帖子整理。",
+            "仓库采用 CC-BY-4.0 许可。"
+          ]
+        },
+        {
+          "heading": "仓库状态",
+          "details": [
+            "仓库为公开仓库，星标约 5.9k，Fork 256。",
+            "页面显示有 14 个 Issues 和 10 个 Pull requests。",
+            "最新提交为 Add FeedsBar and The Signal 500 (#147)。",
+            "贡献者显示为 66 人，语言以 Python 为主。"
+          ]
+        },
+        {
+          "heading": "内容组织",
+          "details": [
+            "条目没有特定顺序。",
+            "上标数字链接到 Telegram 频道帖子，t 开头表示 Twitter 链接。",
+            "图标用于标注开源、免费、平台、浏览器扩展、播客、视频和 AI 等属性。",
+            "项目说明自己不是 Awesome list，可收录运行良好且维护良好的服务或工具。"
+          ]
+        },
+        {
+          "heading": "RSS 基础与规范",
+          "details": [
+            "包含用于解释 RSS 的图片、视频和网页。",
+            "列出 RSS 0.90、RSS 0.91、RSS 1.0、RSS 2.0、Atom、JSON Feed 和 RSS 3.0 等规范。",
+            "包含规范转换器、规范比较工具和 RSS 校验器。",
+            "列出 Media RSS、GeoRSS、Podcast Index 等 RSS 扩展。"
+          ]
+        },
+        {
+          "heading": "阅读器与服务",
+          "details": [
+            "分类列出 App、微信小程序、托管阅读器、自托管阅读器、邮件系统阅读器和终端阅读器。",
+            "列出基于 GitHub、Notion 和 Obsidian 的 RSS 服务。",
+            "列出支持 RSS 的服务，包括 GitHub、YouTube、Medium、Bing、Yahoo 和 DuckDuckGo。",
+            "提供 RSSHub、TTRSS、FreshRSS、RSS-Bridge 和 Miniflux 等免费服务器实例。"
+          ]
+        },
+        {
+          "heading": "RSS 生成与转发",
+          "details": [
+            "覆盖网页、文本、搜索结果、邮件、webhook 和看板等来源。",
+            "覆盖 Twitter、Instagram、Facebook、GitHub、YouTube、Telegram、微博、微信公众号和知乎等平台。",
+            "提供 RSS 到 Kindle、邮件、Newsletter、Slack、Telegram、Discord、Mastodon 和 Webhook 等转发。",
+            "包含全文提取、过滤、合并、翻译、样式、AI 内容等增强工具。"
+          ]
+        },
+        {
+          "heading": "社区与播客",
+          "details": [
+            "收录 RSS 相关论坛、Telegram 群组/频道、Mastodon 账号和个人帖子。",
+            "包含教程、书籍、学术文献、在线课程、硬件和调查等内容。",
+            "RSS × Podcast 部分列出播客应用、聚合、校验、托管、搜索和转换工具。",
+            "列出停止支持 RSS 的服务，如 Apple News、Reuters、LinkedIn 和 Google Groups。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 44490,
+        "totalChars": 44490
+      }
+    },
+    {
+      "id": "956040855e959e902b03601f60c8ac6e3f1da49b1ea1434251c13d4fe645aa22",
+      "title": "X 上的 宝玉：「原文：《Paper: Ironies of Automation》 作者：Fred Hebert 竟然之前一直没有记录这篇经典又重要的论文：《自动化的反讽》。作者 Lisanne Bainbridge 在论文发表近 40 年后，还专门写了一篇自己对原文的修订，值得一读。这篇文章引用超过 1800」 / X",
+      "url": "https://x.com/dotey/status/1897892533616685238",
+      "date": "2026-10-02T07:01:51.956Z",
+      "language": "zh",
+      "sentence": "这篇帖子梳理了《自动化的反讽》的核心论点：自动化系统始终需要人机协作，并揭示了技能退化、警报设计、人工监督和故障处理等矛盾。",
+      "bullets": [
+        {
+          "heading": "论文背景",
+          "details": [
+            "该帖介绍 Lisanne Bainbridge 的论文《Ironies of Automation》（《自动化的反讽》）。",
+            "帖文称其为经典且重要的自动化领域文献，引用超过 1800 次并有维基百科页面。",
+            "作者近 40 年后还写过对原文的修订。"
+          ]
+        },
+        {
+          "heading": "核心观点",
+          "details": [
+            "任何自动化系统最终都会成为人与机器共同协作的系统。",
+            "即使自动化水平提高，人的因素仍然至关重要。"
+          ]
+        },
+        {
+          "heading": "基本矛盾",
+          "details": [
+            "自动化系统需要有人监控其是否正常运作。",
+            "一旦自动化出错，还需要有人迅速接管。",
+            "这两项需求与自动化减少人工介入的初衷相悖。"
+          ]
+        },
+        {
+          "heading": "主要反讽",
+          "details": [
+            "自动化越高，操作员越可能因长期缺乏实践而技能退化。",
+            "复杂系统需要更多警报，但更多警报可能加剧紧急状况下的混乱。",
+            "人类难以实时判断机器决策是否正确，却又要负责发现并修正机器错误。"
+          ]
+        },
+        {
+          "heading": "应对建议",
+          "details": [
+            "Bainbridge 建议故障处理可遵循“停机、观察、理解、修正、重新启动”。",
+            "自动化节奏应尽量与人类可理解和跟踪的节奏相符。",
+            "可通过定期手动操作或高仿真模拟器训练操作员。"
+          ]
+        },
+        {
+          "heading": "总结",
+          "details": [
+            "人机关系本质上关乎团队合作，人类必须清楚机器负责哪些任务。",
+            "时间压力会降低人类表现，自动化可能带来新的复杂问题。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 2310,
+        "totalChars": 2310
+      }
+    },
+    {
       "id": "918adff4b8b94ed71a92f90d9df7f0d50c9a34bd26aacd087b3d5ca8209a411b",
       "title": "SearXNG",
       "url": "https://search.rhscz.eu/preferences",
