@@ -5,6 +5,10 @@ on:
     types: [content_update]
   workflow_dispatch:
 
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest

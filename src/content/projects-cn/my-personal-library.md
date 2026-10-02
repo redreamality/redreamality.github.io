@@ -10,7 +10,7 @@ status: "active"
 
 [My Personal Library](https://github.com/redreamality/my-personal-library) 是我的个人资料整理流水线，起点是保存 osmos 书签与备忘内容的 README。现在它使用 uv 管理 Python 环境，已经完成本地处理验证和 GitHub Actions 实际运行，并将归档输出写入私有仓库。工作流能够运行，不代表所有收藏都已处理，也不代表每个来源都能成功提取。
 
-灵感来自 [Nekonull 关于 LLM 与书签整理的文章](https://nekonull.me/posts/llm_x_bookmark/)。我希望收藏之后还能找到正文、回顾要点，而不只是留下一个链接。公开仓库维护处理代码与说明，提取的原始正文、摘要与处理状态保存在独立的私有输出仓库中；公开项目页不展示私有收藏内容、访问凭据或接口密钥。
+灵感来自 [Nekonull 关于 LLM 与书签整理的文章](https://nekonull.me/posts/llm_x_bookmark/)。我希望收藏之后还能找到正文、回顾要点，而不只是留下一个链接。公开仓库维护处理代码与说明，完整产物保存在独立的私有仓库中。成功条目的标题、来源与摘要经过字段筛选后，同步到本站[阅读笔记](/cn/garden/notes/)，与手写笔记一起展示；原始全文、内部处理状态和凭据不会随之公开。
 
 ## 从链接到可检索的资料
 

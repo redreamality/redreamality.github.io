@@ -1,0 +1,9 @@
+---
+import { getLibraryNotes } from '../../../../utils/library-notes';
+import { libraryNotePath } from '../../../../utils/library-notes-i18n';
+
+export function getStaticPaths() {
+  return getLibraryNotes().map((note) => ({ params: { id: note.id } }));
+}
+return Astro.redirect(libraryNotePath(Astro.params.id!, 'zh'), 301);
+---

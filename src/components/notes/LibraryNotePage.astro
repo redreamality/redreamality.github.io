@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import type { Language } from '../../utils/i18n';
+import type { LibraryNote } from '../../utils/library-notes';
+import { noteDate, notesCopy, notesPath } from '../../utils/library-notes-i18n';
+import { toOutboundHref } from '../../utils/outbound';
+
+interface Props { lang: Language; note: LibraryNote }
+const { lang, note } = Astro.props;
+const c = notesCopy[lang];
+const coverage = c.coverage
+  .replace('{summarized}', String(note.coverage.summarizedChars))
+  .replace('{total}', String(note.coverage.totalChars));
+---
+
+<Layout title={note.title} description={note.sentence}>
+  <article data-library-detail class="library-detail mx-auto max-w-3xl text-surface-900 dark:text-surface-100">
+    <a href={notesPath(lang)} class="text-sm text-brand-600 underline underline-offset-4 dark:text-brand-300">{c.back}</a>
+    <header class="mt-6 border-b border-surface-200 pb-6 dark:border-surface-700">
+      <h1 class="font-display text-3xl font-bold leading-tight text-surface-900 dark:text-white">{note.title}</h1>
+      <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-surface-700 dark:text-surface-300">
+        <span>{c.ai}</span>
+        <span>{c.chinese}</span>
+        <span>{c.indexed} <time datetime={note.date}>{noteDate(note.date, lang)}</time></span>
+      </div>
+      <a data-library-source href={toOutboundHref(note.url, lang)} class="mt-4 inline-block text-brand-600 underline underline-offset-4 dark:text-brand-300">{c.source}</a>
+    </header>
+    {!note.coverage.complete && (
+      <aside data-note-partial class="mt-6 border-b border-surface-200 pb-6 text-sm leading-relaxed text-surface-700 dark:border-surface-700 dark:text-surface-300">
+        <p>{c.partial}</p>
+        <p class="mt-1">{coverage}</p>
+      </aside>
+    )}
+    <div data-library-summary lang="zh-CN" class="mt-7 leading-loose">
+      <p class="text-lg">{note.sentence}</p>
+      {note.bullets.map((bullet) => (
+        <section class="mt-8">
+          <h2 class="mb-3 text-xl font-semibold leading-snug">{bullet.heading}</h2>
+          <ul class="list-disc space-y-3 pl-5">
+            {bullet.details.map((detail) => <li>{detail}</li>)}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .library-detail { overflow-wrap: anywhere; letter-spacing: 0; }
+  .library-detail a:focus-visible { @apply outline outline-2 outline-offset-4 outline-brand-500; }
+  .library-detail ::selection { @apply bg-brand-200 text-surface-900; }
+</style>

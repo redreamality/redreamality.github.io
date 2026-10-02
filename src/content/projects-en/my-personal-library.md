@@ -10,7 +10,7 @@ status: "active"
 
 [My Personal Library](https://github.com/redreamality/my-personal-library) is my personal reading-material pipeline. It started as a README holding osmos bookmarks and memos. It now uses Python managed with uv, has completed local processing checks and a real GitHub Actions run, and has written archive output to a private repository. A working pipeline does not mean that every bookmark has been processed or that every source can be extracted.
 
-The inspiration is [Nekonull's article on LLMs and bookmark management](https://nekonull.me/posts/llm_x_bookmark/). The goal is to find the text and review its main points later, rather than save only a link. The public repository contains processing code and documentation. Extracted source text, summaries, and processing state are stored in a separate private output repository. Private collections, access credentials, and API secrets are not published on this project page.
+The inspiration is [Nekonull's article on LLMs and bookmark management](https://nekonull.me/posts/llm_x_bookmark/). The goal is to find the text and review its main points later, rather than save only a link. The public repository contains processing code and documentation, while complete outputs stay in a separate private repository. An allowlist of fields publishes successful entries' titles, sources, and summaries to this site's [reading notes](/garden/notes/), alongside handwritten notes. Raw full text, internal processing state, and credentials are not published.
 
 ## From Links to Searchable Material
 

@@ -127,6 +127,9 @@ export default defineConfig({
         if (path === '/ja/go/' || path === '/ja/go') return false;
 
         // Exclude redirect pages - these have noindex meta tags
+        // Notes keep their existing /garden/notes/ canonical routes.
+        if (/^\/(?:cn\/|ja\/)?notes(?:\/|$)/.test(path)) return false;
+
         // Redirect from /talks/* to /garden/talks/*
         if (path === '/talks/' || path === '/talks') return false;
         if (path.match(/^\/talks\/[^/]+\/?$/)) return false;

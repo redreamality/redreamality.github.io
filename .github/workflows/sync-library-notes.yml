@@ -1,0 +1,92 @@
+name: Sync library notes
+
+on:
+  schedule:
+    - cron: '47 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - 'scripts/export-library-notes.mjs'
+      - 'scripts/ensure-pages-deployment.mjs'
+      - 'src/data/library-notes-policy.json'
+      - '.github/workflows/sync-library-notes.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: library-notes-sync
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          path: site
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.2
+          package_json_file: site/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: site/pnpm-lock.yaml
+      - name: Install and test the publication boundary before loading private data
+        working-directory: site
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm exec vitest run src/utils/library-notes-export.test.ts src/utils/pages-deployment.test.ts
+      - name: Read the private archive with a repository-scoped read-only key
+        uses: actions/checkout@v4
+        with:
+          repository: redreamality/my-personal-library-archive
+          ref: main
+          path: private-archive
+          ssh-key: ${{ secrets.LIBRARY_ARCHIVE_READ_KEY }}
+          persist-credentials: false
+          sparse-checkout: data.json
+          sparse-checkout-cone-mode: false
+      - name: Export only public note fields
+        working-directory: site
+        run: node scripts/export-library-notes.mjs --archive ../private-archive/data.json
+      - name: Validate the generated site
+        working-directory: site
+        run: pnpm build
+      - name: Commit the public snapshot only
+        id: publish
+        working-directory: site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          git add -- src/data/library-notes.json
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Public notes unchanged"
+          else
+            if [[ "$(git diff --cached --name-only)" != "src/data/library-notes.json" ]]; then
+              echo "::error::Unexpected staged files; refusing publication"
+              exit 1
+            fi
+            git config user.name 'library-notes[bot]'
+            git config user.email 'library-notes[bot]@users.noreply.github.com'
+            git commit -m "Sync public library notes" --quiet
+            gh auth setup-git
+            git push origin HEAD:master --quiet
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Ensure the current commit is deployed, recovering prior deployment failures
+        working-directory: site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/ensure-pages-deployment.mjs

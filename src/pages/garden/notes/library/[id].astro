@@ -1,0 +1,10 @@
+---
+import LibraryNotePage from '../../../../components/notes/LibraryNotePage.astro';
+import { getLibraryNotes } from '../../../../utils/library-notes';
+
+export function getStaticPaths() {
+  return getLibraryNotes().map((note) => ({ params: { id: note.id }, props: { note } }));
+}
+const { note } = Astro.props;
+---
+<LibraryNotePage lang="en" note={note} />

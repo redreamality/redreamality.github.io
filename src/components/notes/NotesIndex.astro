@@ -1,0 +1,137 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getNotes, type Language } from '../../utils/i18n';
+import { getLibraryNotes } from '../../utils/library-notes';
+import { libraryNotePath, noteDate, notesCopy, notesPath } from '../../utils/library-notes-i18n';
+
+interface Props { lang: Language }
+const { lang } = Astro.props;
+const c = notesCopy[lang];
+const manual = await getNotes(lang);
+const items = [
+  ...manual.map((note) => ({
+    kind: 'manual' as const, href: `${notesPath(lang)}${note.slug}/`,
+    title: note.data.title, description: note.data.description ?? '',
+    tags: note.data.tags ?? [],
+    date: new Date(note.data.date).toISOString(), partial: false,
+    search: [note.data.title, note.data.description, ...(note.data.tags ?? [])].join(' '),
+  })),
+  ...getLibraryNotes().map((note) => ({
+    kind: 'library' as const, href: libraryNotePath(note.id, lang),
+    title: note.title, description: note.sentence, date: note.date,
+    partial: !note.coverage.complete,
+    search: [note.title, note.sentence, ...note.bullets.flatMap((bullet) => [bullet.heading, ...bullet.details])].join(' '),
+  })),
+].sort((a, b) => Date.parse(b.date) - Date.parse(a.date) || a.href.localeCompare(b.href));
+---
+
+<Layout title={c.title} description={c.description}>
+  <notes-index class="notes-index mx-auto block max-w-4xl" data-count-template={c.count}>
+    <header class="mb-8">
+      <h1 class="font-display text-3xl font-bold text-surface-900 dark:text-white">{c.title}</h1>
+      <p class="mt-3 text-surface-700 dark:text-surface-300">{c.description}</p>
+    </header>
+    <form data-notes-controls hidden role="search" class="mb-6">
+      <label for="notes-search" class="mb-2 block text-sm font-medium">{c.search}</label>
+      <div class="flex items-center gap-2">
+        <input id="notes-search" type="search" name="query" autocomplete="off" class="min-w-0 flex-1 rounded-md border border-surface-300 bg-white px-3 py-2 dark:border-surface-700 dark:bg-surface-900" />
+        <button type="reset" data-notes-clear class="min-h-11 rounded-md px-3 text-sm font-medium text-brand-600 hover:bg-surface-100 dark:text-brand-300 dark:hover:bg-surface-800">{c.clear}</button>
+      </div>
+      <fieldset class="mt-4">
+        <legend class="mb-2 text-sm font-medium">{c.kinds}</legend>
+        <div class="flex flex-wrap gap-x-5 gap-y-1">
+          {(['all', 'manual', 'library'] as const).map((kind) => (
+            <label class="flex min-h-11 cursor-pointer items-center gap-2 text-sm">
+              <input type="radio" name="kind" value={kind} checked={kind === 'all'} />
+              {c[kind]}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    </form>
+    <p data-notes-count role="status" aria-live="polite" aria-atomic="true" class="mb-3 text-sm text-surface-700 dark:text-surface-300">
+      {c.count.replace('{count}', String(items.length))}
+    </p>
+    <ul class="notes-list border-t border-surface-200 dark:border-surface-700">
+      {items.map((item) => (
+        <li data-note-kind={item.kind} data-note-search={item.search} data-note-date={item.date}
+          class="border-b border-surface-200 py-6 dark:border-surface-700">
+          <div class="mb-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-surface-700 dark:text-surface-300">
+            <span>{item.kind === 'library' ? c.ai : c.manual}</span>
+            <span>{item.kind === 'library' ? c.indexed : c.written} <time datetime={item.date}>{noteDate(item.date, lang)}</time></span>
+            {item.kind === 'library' && <span>{c.chinese}</span>}
+          </div>
+          <h2 class="text-xl font-semibold leading-snug text-surface-900 dark:text-white">
+            <a data-note-link href={item.href} class="hover:text-brand-600 hover:underline dark:hover:text-brand-300">{item.title}</a>
+          </h2>
+          <p lang={item.kind === 'library' ? 'zh-CN' : undefined} class="mt-2 leading-relaxed text-surface-700 dark:text-surface-300">{item.description}</p>
+          {item.kind === 'manual' && item.tags.length > 0 && (
+            <div data-note-tags class="mt-3 flex flex-wrap gap-2">
+              {item.tags.map((tag) => (
+                <span data-note-tag class="rounded-md bg-surface-100 px-2 py-1 text-xs text-surface-700 dark:bg-surface-800 dark:text-surface-300">#{tag}</span>
+              ))}
+            </div>
+          )}
+          {item.partial && <p data-note-partial class="mt-2 text-sm text-surface-700 dark:text-surface-300">{c.partial}</p>}
+        </li>
+      ))}
+    </ul>
+    <p data-notes-empty hidden={items.length > 0} class="py-10 text-surface-700 dark:text-surface-300">{c.empty}</p>
+  </notes-index>
+</Layout>
+
+<script>
+  class NotesIndex extends HTMLElement {
+    connectedCallback() {
+      if (this.dataset.ready) return;
+      const form = this.querySelector<HTMLFormElement>('[data-notes-controls]');
+      const search = this.querySelector<HTMLInputElement>('#notes-search');
+      const count = this.querySelector<HTMLElement>('[data-notes-count]');
+      const empty = this.querySelector<HTMLElement>('[data-notes-empty]');
+      if (!form || !search || !count || !empty) return;
+      const entries = Array.from(this.querySelectorAll<HTMLElement>('[data-note-kind]'))
+        .map((element) => ({
+          element,
+          text: (element.dataset.noteSearch ?? '').normalize('NFKC').toLocaleLowerCase(),
+        }));
+      const update = () => {
+        const query = search.value.normalize('NFKC').trim().toLocaleLowerCase();
+        const kind = form.querySelector<HTMLInputElement>('input[name="kind"]:checked')?.value ?? 'all';
+        let total = 0;
+        for (const entry of entries) {
+          const visible = (kind === 'all' || entry.element.dataset.noteKind === kind) && entry.text.includes(query);
+          entry.element.hidden = !visible;
+          if (visible) total++;
+        }
+        count.textContent = (this.dataset.countTemplate ?? '{count}').replace('{count}', String(total));
+        empty.hidden = total !== 0;
+      };
+      form.addEventListener('submit', (event) => { event.preventDefault(); update(); });
+      form.addEventListener('input', update);
+      form.addEventListener('change', update);
+      form.addEventListener('reset', (event) => {
+        // Cancel native reset so controls and filtered rows update together.
+        event.preventDefault();
+        search.value = '';
+        for (const radio of form.querySelectorAll<HTMLInputElement>('input[name="kind"]')) {
+          radio.checked = radio.value === 'all';
+        }
+        update();
+        search.focus();
+      });
+      form.hidden = false;
+      this.dataset.ready = 'true';
+      update();
+    }
+  }
+  if (!customElements.get('notes-index')) customElements.define('notes-index', NotesIndex);
+</script>
+
+<style>
+  .notes-index { @apply text-surface-900 dark:text-surface-100; overflow-wrap: anywhere; letter-spacing: 0; }
+  .notes-index [hidden] { display: none !important; }
+  .notes-index :is(input, button, a):focus-visible { @apply outline outline-2 outline-offset-4 outline-brand-500; }
+  .notes-index input { @apply accent-brand-600 caret-brand-600 dark:accent-brand-300 dark:caret-brand-300; }
+  .notes-index ::selection { @apply bg-brand-200 text-surface-900; }
+  .notes-list { list-style: none; padding: 0; }
+</style>

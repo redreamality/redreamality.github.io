@@ -1,31 +1,5 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import GardenListing from '../../../components/shared/GardenListing.astro';
-import { getNotes, type Language } from '../../../utils/i18n';
-
-const lang: Language = 'en';
-const notes = await getNotes(lang);
-const basePath = '';
-const locale = 'en-US';
-
-const strings = {
-  kicker: 'Reading',
-  title: 'Reading Notes',
-  subtitle: 'Notes from my reading using the ROI reading method — structured insights from information I have consumed.',
-  empty: 'No notes available yet.',
-};
-
-const items = notes.map((n) => ({
-  href: `${basePath}/garden/notes/${n.slug}/`,
-  title: n.data.title,
-  description: n.data.description,
-  dateISO: new Date(n.data.date).toISOString(),
-  dateLabel: new Date(n.data.date).toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' }),
-  tags: n.data.tags,
-  tagBasePath: `${basePath}/tags`,
-}));
+import NotesIndex from '../../../components/notes/NotesIndex.astro';
 ---
 
-<Layout title={strings.title} description={strings.subtitle}>
-  <GardenListing kicker={strings.kicker} title={strings.title} subtitle={strings.subtitle} emptyMessage={strings.empty} accent="brand" items={items} />
-</Layout>
+<NotesIndex lang="en" />

@@ -5,6 +5,7 @@ import 'katex/dist/katex.min.css';
 import LanguageToggle from '../components/LanguageToggle.astro';
 import DarkModeToggle from '../components/DarkModeToggle.astro';
 import { getPageTitle } from '../utils/page-titles';
+import { serializeJsonForScript } from '../utils/json-script';
 import {
   detectLanguageFromPath,
   t,
@@ -158,7 +159,7 @@ const aboutHref = getLocalizedPath('/about/', currentLang);
         <meta name="keywords" content={tags.join(', ')} />
         
         <!-- JSON-LD -->
-        <script type="application/ld+json" set:html={JSON.stringify({
+        <script type="application/ld+json" set:html={serializeJsonForScript({
             "@context": "https://schema.org",
             "@type": type === "article" ? "BlogPosting" : "WebSite",
             "headline": title,
