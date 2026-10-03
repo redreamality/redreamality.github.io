@@ -2,6 +2,472 @@
   "version": 1,
   "entries": [
     {
+      "id": "864dfeb05172121214650f504177fc610b2de568b422ca12e9d8c86dc21ca203",
+      "title": "SWivid/F5-TTS: Official code for \"F5-TTS: A Fairytaler that Fakes Fluent and Faithful Speech with Flow Matching\"",
+      "url": "https://github.com/SWivid/F5-TTS",
+      "date": "2026-10-03T05:24:11.727Z",
+      "language": "zh",
+      "sentence": "该页面介绍了 F5-TTS 官方代码仓库的模型特性、安装部署、推理训练、性能基准和许可信息。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "F5-TTS 是论文《F5-TTS: A Fairytaler that Fakes Fluent and Faithful Speech with Flow Matching》的官方代码仓库。",
+            "页面围绕基于 Flow Matching 的语音合成项目，提供模型、推理、训练、部署和许可说明。"
+          ]
+        },
+        {
+          "heading": "模型与特性",
+          "details": [
+            "F5-TTS 采用 Diffusion Transformer with ConvNeXt V2，强调更快的训练和推理。",
+            "E2 TTS 提供 Flat-UNet Transformer 结构，作为论文最接近的复现。",
+            "Sway Sampling 是一种推理时流步采样策略，用于提升性能。"
+          ]
+        },
+        {
+          "heading": "安装与部署",
+          "details": [
+            "安装建议创建 Python 3.10 或更高版本环境，并安装 FFmpeg。",
+            "支持按 NVIDIA、AMD、Intel 或 Apple Silicon 设备安装对应 PyTorch。",
+            "可通过 pip install f5-tts 安装，也可克隆仓库进行可编辑安装，并提供 Docker 使用方式。"
+          ]
+        },
+        {
+          "heading": "推理能力",
+          "details": [
+            "Gradio 应用支持基础 TTS、分块推理、多风格/多说话人生成，以及由 Qwen2.5-3B-Instruct 驱动的语音聊天。",
+            "CLI 推理支持参考音频、参考文本、目标文本和 TOML 配置，并支持多声音示例。"
+          ]
+        },
+        {
+          "heading": "训练与评估",
+          "details": [
+            "训练与微调可使用 Hugging Face Accelerate，也可通过 Gradio 应用快速开始。",
+            "仓库提供评估模块，用于对生成语音进行评测。"
+          ]
+        },
+        {
+          "heading": "性能与许可",
+          "details": [
+            "提供基于 Triton 和 TensorRT-LLM 的部署方案，并在单张 L20 GPU 上给出延迟与 RTF 基准。",
+            "代码采用 MIT 许可证；预训练模型因使用 Emilia 数据而采用 CC-BY-NC 许可证。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 12859,
+        "totalChars": 12859
+      }
+    },
+    {
+      "id": "1a83f3fdeb21d0c9ca77a63f83e8a19d198e35053828f0332a5d01811b2d7296",
+      "title": "新版huggingface部署wewe-rss教程",
+      "url": "https://sugar404.notion.site/huggingface-wewe-rss-0cc8d00b9e0d4a71a8b2ec541ebe58dc",
+      "date": "2026-10-03T05:23:54.376Z",
+      "language": "zh",
+      "sentence": "该教程说明如何在 HuggingFace 上部署 wewe-rss，包括使用 Railway 创建 MySQL、配置 Dockerfile 与环境变量，并通过 Factory rebuild 更新。",
+      "bullets": [
+        {
+          "heading": "项目用途",
+          "details": [
+            "wewe-rss 是一种微信公众号订阅方式",
+            "支持私有化部署",
+            "可生成微信公众号 RSS"
+          ]
+        },
+        {
+          "heading": "数据库准备",
+          "details": [
+            "使用 Railway 免费额度部署 MySQL",
+            "在 Railway 中记录 MYSQL 对应值",
+            "额度耗尽前需备份或改用其他数据库"
+          ]
+        },
+        {
+          "heading": "HuggingFace 空间",
+          "details": [
+            "在 HuggingFace 创建空间",
+            "建议先设为公开",
+            "公开可确保 SERVER_ORIGIN_URL 有可用 URL"
+          ]
+        },
+        {
+          "heading": "构建配置",
+          "details": [
+            "重写 Dockerfile 并提交",
+            "追加 app_port: 4000"
+          ]
+        },
+        {
+          "heading": "环境变量与更新",
+          "details": [
+            "在 Settings 的 Variables and secrets 中添加所需变量",
+            "需配置 DATABASE_URL、AUTH_CODE、SERVER_ORIGIN_URL",
+            "更新时点击 Factory rebuild 重新构建项目"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 4998,
+        "totalChars": 4998
+      }
+    },
+    {
+      "id": "5e949cf77ad9fa3c080bbd2d7c2436a8d3140959da6377490c105d0a4adaaf0c",
+      "title": "Universe 2024 - Attendee Portal",
+      "url": "https://reg.githubuniverse.com/flow/github/universe24/attendee-portal/page/portal",
+      "date": "2026-10-03T05:23:44.360Z",
+      "language": "zh",
+      "sentence": "该页面是 Universe 2024 参会者门户，列出 Sessions、Speakers、Sponsors、Watch on demand、Sign Up、Sign in 和 Sign out 等入口。",
+      "bullets": [
+        {
+          "heading": "页面标题",
+          "details": [
+            "标题为“Universe 2024 - Attendee Portal”。"
+          ]
+        },
+        {
+          "heading": "导航入口",
+          "details": [
+            "包含“Sessions”“Speakers”“Sponsors”“Attendee Portal”“Watch on demand”“Sign Up”等文本。"
+          ]
+        },
+        {
+          "heading": "账户操作",
+          "details": [
+            "包含“Attendee Portal”“Sign in”“Sign out”等文本。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 101,
+        "totalChars": 101
+      }
+    },
+    {
+      "id": "634c2a82f7c068232f1d353dc14b65575ebb23576d7c55b77cb2648ef1e3d974",
+      "title": "把Github当作数据库，搭建博客 · Issue #54 · zhangyu1818/blog",
+      "url": "https://github.com/zhangyu1818/blog/issues/54",
+      "date": "2026-10-03T05:23:21.511Z",
+      "language": "zh",
+      "sentence": "该文档介绍了一种以 GitHub Issues 为数据源，结合 GitHub API、Gitalk、图片分支和 Vercel 部署来搭建博客的方法。",
+      "bullets": [
+        {
+          "heading": "方案概述",
+          "details": [
+            "文章介绍用 GitHub Issues 作为博客数据源，无需服务器即可搭建博客。",
+            "前端可采用任意技术栈，并支持评论、标签分类、图片存储、CDN 加速和自定义域名。"
+          ]
+        },
+        {
+          "heading": "数据读取",
+          "details": [
+            "每篇文章对应一个 GitHub Issue，Issue 评论可作为文章评论。",
+            "可通过 GitHub REST API 或 GraphQL API 读取 Issues 列表和详情，作者示例使用 GraphQL API。",
+            "详情接口可获取 bodyHTML，减少本地 Markdown 渲染工作。"
+          ]
+        },
+        {
+          "heading": "评论系统",
+          "details": [
+            "推荐使用 Gitalk 实现评论功能。",
+            "需要创建 GitHub 应用，并配置 clientID、clientSecret、repo、owner、admin 和 number 等参数。"
+          ]
+        },
+        {
+          "heading": "图片与 CDN",
+          "details": [
+            "图片可保存在仓库的另一个分支中。",
+            "可使用 PicGo 或 PicGo-Core 上传图片，并通过 jsdelivr 提供 CDN 加速。"
+          ]
+        },
+        {
+          "heading": "部署与域名",
+          "details": [
+            "推荐用 Vercel 部署，支持主分支更新后自动拉取和部署。",
+            "Vercel 支持多种前端技术栈，可配置环境变量并修改自定义域名。"
+          ]
+        },
+        {
+          "heading": "安全与站点配置",
+          "details": [
+            "GitHub Token 需要妥善保管，不应提交到仓库，可用 .env.local 或部署平台环境变量读取。",
+            "sitemap 可在静态构建前生成，也可在服务端渲染时通过 API 接口提供。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 5845,
+        "totalChars": 5845
+      }
+    },
+    {
+      "id": "0bfd999c435907ebcdc38fd0cd8439375e11796bae53f0909814e56d67485e85",
+      "title": "starslink/EasyNav: 一个现代化的企业内部导航门户系统，用于集中管理和展示公司各类系统和资源的链接。",
+      "url": "https://github.com/starslink/EasyNav",
+      "date": "2026-10-03T05:22:59.573Z",
+      "language": "zh",
+      "sentence": "EasyNav 是一个基于 React 与 Node.js 的企业内部导航门户系统，支持链接分组管理、用户认证和 Docker/Kubernetes 部署。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "EasyNav 是一个现代化的企业内部导航门户系统。",
+            "用于集中管理和展示公司各类系统与资源链接。",
+            "页面提供了 demo 地址 https://www.easynav.icu。"
+          ]
+        },
+        {
+          "heading": "核心功能",
+          "details": [
+            "支持用户认证与授权。",
+            "提供响应式界面，适配桌面和移动设备。",
+            "支持分组、二级分类、链接排序和搜索。",
+            "提供分组与链接的增删改查管理。"
+          ]
+        },
+        {
+          "heading": "技术栈",
+          "details": [
+            "前端使用 React 18、TypeScript、Tailwind CSS、Framer Motion 等。",
+            "后端使用 Node.js、Express、SQLite/MySQL、JWT、Nodemailer 和 bcrypt。",
+            "部署支持 Docker、Kubernetes 和 Nginx。"
+          ]
+        },
+        {
+          "heading": "运行与部署",
+          "details": [
+            "环境要求 Node.js >= 18 和 npm >= 9。",
+            "默认使用 SQLite，也可配置 MySQL。",
+            "支持 Docker Compose 启动前后端与数据库。",
+            "提供 k8s 目录下的 Kubernetes 配置。"
+          ]
+        },
+        {
+          "heading": "数据与接口",
+          "details": [
+            "数据库包含 users、groups、subgroups 和 links 表。",
+            "API 覆盖注册、登录和邮箱验证。",
+            "提供分组与链接的查询、创建、更新和删除接口。"
+          ]
+        },
+        {
+          "heading": "安全与性能",
+          "details": [
+            "使用 bcrypt 哈希密码、JWT 认证和邮箱验证。",
+            "通过环境变量配置敏感信息，并使用参数化查询防 SQL 注入。",
+            "前端采用懒加载、代码分割和 Gzip 压缩等优化。",
+            "后端采用数据库索引、连接池、缓存、限流和响应压缩。"
+          ]
+        },
+        {
+          "heading": "许可证",
+          "details": [
+            "项目采用木兰宽松许可证。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 15925,
+        "totalChars": 15925
+      }
+    },
+    {
+      "id": "538bbf2ca517deb942ba82fa79748a6ee7eb1ad69561c64802407132722dc602",
+      "title": "freqtrade/freqtrade",
+      "url": "https://github.com/freqtrade/freqtrade",
+      "date": "2026-10-03T05:22:35.973Z",
+      "language": "zh",
+      "sentence": "Freqtrade 是一个免费开源的 Python 加密货币交易机器人，提供回测、策略优化、Telegram/WebUI 控制以及多交易所支持。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "Freqtrade 是一个免费且开源的加密货币交易机器人，使用 Python 编写。",
+            "它支持主要交易所，并可通过 Telegram 或内置 WebUI 控制。",
+            "项目包含回测、绘图、资金管理工具，以及基于机器学习的策略优化。"
+          ]
+        },
+        {
+          "heading": "风险提示",
+          "details": [
+            "文档声明该软件仅用于教育目的，用户需自行承担交易风险。",
+            "作者及相关方不对交易结果负责。",
+            "建议先以 Dry-Run 模式运行，并在理解机制和预期盈亏后再投入资金。",
+            "文档建议用户具备编码和 Python 知识，并阅读源码。"
+          ]
+        },
+        {
+          "heading": "交易所支持",
+          "details": [
+            "支持的现货交易所包括 Binance、BingX、Bitget、Bybit、Gate、HTX、Hyperliquid、Kraken、OKX 等。",
+            "支持的期货交易所包括 Binance、Bitget、Bybit、Gate、Hyperliquid、Kraken、OKX。",
+            "社区确认可用的交易所包括 Bitvavo 和 Kucoin。"
+          ]
+        },
+        {
+          "heading": "核心功能",
+          "details": [
+            "基于 Python 3.11+，可运行在 Windows、macOS 和 Linux 上。",
+            "通过 sqlite 实现持久化，并提供 Dry-run、回测和机器学习策略优化。",
+            "支持 FreqAI 自适应预测建模、加密货币白名单/黑名单、内置 WebUI 和 Telegram 管理。",
+            "可显示法币盈亏和当前交易绩效状态。"
+          ]
+        },
+        {
+          "heading": "使用方式",
+          "details": [
+            "文档提供 Docker 快速开始和原生安装说明。",
+            "CLI 命令包括 trade、backtesting、hyperopt、webserver、plot-dataframe 等。",
+            "Telegram 命令包括 /start、/stop、/status、/profit、/forceexit 等。"
+          ]
+        },
+        {
+          "heading": "开发与运行要求",
+          "details": [
+            "项目主要分支包括 develop、stable 和 feat/*，PR 应针对 develop 分支创建。",
+            "运行要求时钟准确并频繁同步 NTP。",
+            "建议最低硬件为 2GB RAM、1GB 磁盘空间和 2vCPU。",
+            "软件要求包括 Python >= 3.11、pip、git、TA-Lib，推荐 virtualenv 和 Docker。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 15132,
+        "totalChars": 15132
+      }
+    },
+    {
+      "id": "deb41c214476225f093c9bdc1593dff3b208ef631917db336762de8b445718b9",
+      "title": "哥飞-正在赚钱的海外AI产品观察",
+      "url": "https://gamma.app/docs/0824-xeuflt7lt3ohpfu?mode=doc",
+      "date": "2026-10-03T05:21:52.884Z",
+      "language": "zh",
+      "sentence": "该文档以估算数据梳理海外AI产品的类型、流量、广告投入和收入估算方法，并重点分析写作、插件、图像、音乐、语音、套壳与编程等类别。",
+      "bullets": [
+        {
+          "heading": "分享者背景",
+          "details": [
+            "哥飞被描述为SEO专家、AI出海工具创业者和两千人付费社群创始人。",
+            "其有十几年SEO经验，目前专注海外SEO流量研究和实践。",
+            "有一个十人小团队做AI出海工具，通过SEO和SEM获客。",
+            "带领两千人社群一起出海赚美元。"
+          ]
+        },
+        {
+          "heading": "产品分类",
+          "details": [
+            "文档按输入/输出将AI产品分为文字、图片、声音、视频等类别。",
+            "覆盖文生文、文生图、TTS、AI音乐生成、图片转文字、图片到图片、STT、视频总结、视频到视频等。",
+            "还列出3D模型、代码、结构化数据、文档、演示文稿、App、网站、VR/AR内容等更多类型。"
+          ]
+        },
+        {
+          "heading": "估算方法",
+          "details": [
+            "收入估算方法包括按流量经验值、支付平台域名访问数据、广告费和同类产品真实收入。",
+            "文档说明数据来自估算，结论仅供参考。",
+            "估算假设包括转化率/流量价值固定、同类网站潜在客户群体相同、长期理性投放广告可回本。"
+          ]
+        },
+        {
+          "heading": "写作与插件",
+          "details": [
+            "Jenni AI、StealthGPT AI、UndetectAble AI 的7月访问量分别为126万、23.7万、240万。",
+            "Jenni AI 7月MRR为$57万，StealthGPT AI 为$18.4万，UndetectAble AI 估算约$186.32万。",
+            "Monica、Eightify、Glarity 的7月访问量分别为490万、61.3万、25.1万。",
+            "文档估算 Monica 7月流量价值为$98万，Eightify 为$12.26万或$6.74万，Glarity 为$2.76万。"
+          ]
+        },
+        {
+          "heading": "图像音乐语音",
+          "details": [
+            "Midjourney 7月访问量为1067万，文档估算7月流量价值为629万，并提到预测2024年3亿美元收入。",
+            "Leonardo 7月访问量为1272万，文档提到其被Canva收购。",
+            "Suno.com 7月访问量为6127万，文档估算7月流量价值为$2512万。",
+            "Notta 7月访问量为387万，文档估算7月流量价值为$715万、$464万或$263万；TurboScribe 为210万，估算$258万或$142万。"
+          ]
+        },
+        {
+          "heading": "套壳与编程",
+          "details": [
+            "ChatPDF、PopAI、ChatBotApp 的7月访问量分别为391万、205万、552万。",
+            "文档估算 ChatPDF 7月流量价值为$152万，PopAI 为$256万或$106万，ChatBotApp 为$231万或$154万。",
+            "时间轴显示 Github Copilot 2021年6月发布VS Code插件，2022年6月开始收费。",
+            "时间轴显示 Devin AI 2024年3月演示视频爆火并获$2100万投资，Cursor 2024年4月获$1.75亿投资、估值$20亿，2024年8月获$6000万投资。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 13313,
+        "totalChars": 13313
+      }
+    },
+    {
+      "id": "7e18454411f4e997e88c0d84ecdc7f4efcc9251e7a9cef257a6952e63be3735d",
+      "title": "ripienaar/free-for-dev",
+      "url": "https://github.com/ripienaar/free-for-dev",
+      "date": "2026-10-03T05:21:24.212Z",
+      "language": "zh",
+      "sentence": "该页面是面向 DevOps 和基础设施开发者的免费云服务清单，当前摘要仅覆盖开头部分。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "该页面整理 SaaS、PaaS、IaaS 等提供开发者免费层级的服务。",
+            "其范围偏向系统管理员、DevOps 等基础设施开发者可能用到的服务。",
+            "列表由 1600 多名贡献者通过 Pull Request、评审和讨论维护。"
+          ]
+        },
+        {
+          "heading": "收录标准",
+          "details": [
+            "仅收录 as-a-Service 服务，不收录自托管软件。",
+            "服务必须提供免费层级，而不是仅提供免费试用。",
+            "若免费层级按时间限制，需至少持续一年。",
+            "从安全角度考虑，不接受将 TLS 限制在付费层的服务。"
+          ]
+        },
+        {
+          "heading": "主要云厂商",
+          "details": [
+            "Google Cloud 列出 App Engine、Cloud Run、BigQuery、Cloud Build、Kaggle 等免费额度。",
+            "AWS 列出 Lambda、DynamoDB、CloudFront、CodeBuild、SES 等免费额度。",
+            "Azure 列出 App Service、Functions、Storage、AKS、Cosmos DB 等免费额度。",
+            "Oracle Cloud 列出 Always Free 计算、块存储、对象存储、数据库和每月 10TB 出口流量等。"
+          ]
+        },
+        {
+          "heading": "云管理与代码仓库",
+          "details": [
+            "云管理部分包括 Brainboard、Cloud 66、Pulumi、scalr.com 等服务。",
+            "代码仓库部分包括 GitHub、GitLab、Bitbucket、Codeberg、GitGud 等服务。",
+            "许多条目提供免费私有仓库、CI/CD、静态托管、包管理或项目管理能力。"
+          ]
+        },
+        {
+          "heading": "API、数据与 ML",
+          "details": [
+            "该部分收录 IP 地理定位、PDF 生成、OCR、新闻、金融数据、MLOps 和 webhook 等服务。",
+            "许多条目给出免费请求数、月度积分、免费额度或无需信用卡的条件。",
+            "当前摘要仅覆盖该部分开头，未包含后续完整列表。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": false,
+        "summarizedChars": 48000,
+        "totalChars": 270217
+      }
+    },
+    {
       "id": "62e32721526a497f893d065ec94e64058cd3da847d7f40ccacb5ada5ed62499f",
       "title": "How I Use Git Worktrees",
       "url": "https://matklad.github.io/2024/07/25/git-worktrees.html",
