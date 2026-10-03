@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T09:53:36+08:00",
+  "updatedAt": "2026-10-03T15:51:38+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,147 @@
   ],
   "themeCounts": {
     "models": 13,
-    "coding-tools": 13,
-    "agents-oss": 19,
+    "coding-tools": 11,
+    "agents-oss": 18,
     "security": 10,
-    "research": 57,
+    "research": 54,
     "product-news": 0,
-    "other": 2
+    "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-03T10:00:00+08:00",
+      "label": {
+        "zh": "10月3日 10:00",
+        "en": "Oct 3 10:00",
+        "ja": "10月3日 10:00"
+      },
+      "items": [
+        {
+          "id": "t475",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Pi 1.0：Codemode 沙箱编排 MCP 的最小 coding-agent harness",
+            "en": "Pi 1.0: Folding MCP into Codemode—a Minimal Coding-Agent Harness",
+            "ja": "Pi 1.0: Folding MCP into Codemode—a Minimal Coding-Agent Harness"
+          },
+          "summary": {
+            "zh": "Earendil Pi 1.0 把 MCP 收进最小 coding-agent harness，并用 JS Codemode 沙箱组合/并行工具调用（deferred tools、virtual models、mid-conversation system messages）——HN 749/257 的高互动说明「少工具+可扩展控制面」仍是可写深文的 harness 选题，而非又一个 CLI 发版。",
+            "en": "Reading Earendil’s Pi 1.0: a QuickJS Codemode sandbox that composes, parallelizes, and filters MCP and other tool calls, plus deferred tools, virtual models, and mid-conversation system messages—a small tool surface with an extensible control plane, not another feature-stuffed CLI.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Earendil Pi 1.0 把 MCP 收进最小 coding-agent harness，并用 JS Codemode 沙箱组合/并行工具调用（deferred tools、virtual models、mid-conversation system messages）——HN 749/257 的高互动说明「少工具+可扩展控制面」仍是可写深文的 harness 选题，而非又一个 CLI 发版。",
+            "en": "Earendil’s Pi 1.0 folds MCP into a minimal coding-agent harness and uses a JS Codemode sandbox to compose/parallelize tool calls (deferred tools, virtual models, mid-conversation system messages). HN 749/257 shows the durable harness angle—small tool surface plus an extensible control plane—not just another CLI launch.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://earendil.com/posts/pi-1-0/",
+              "title": "Pi 1.0",
+              "brief": {
+                "zh": "HN 749/257：1.0 发布帖高互动。",
+                "en": "HN 749 points / 257 comments on the 1.0 launch post.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "earendil",
+              "url": "https://earendil.com/posts/pi-1-0/",
+              "title": "Pi 1.0 | Earendil",
+              "brief": {
+                "zh": "官方：Codemode 原生 MCP、virtual models、deferred tool loading、缓存预热。",
+                "en": "Official: Codemode-native MCP, virtual models, deferred tool loading, cache warming.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/earendil-works/pi",
+              "title": "earendil-works/pi",
+              "brief": {
+                "zh": "GH 日榜 ★111240 Δ298；统一 LLM API + agent loop + TUI/CLI。",
+                "en": "GitHub daily ★111240 Δ298; unified LLM API + agent loop + TUI/CLI.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "github",
+            "earendil"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://earendil.com/posts/pi-1-0/",
+            "https://github.com/earendil-works/pi",
+            "https://earendil.com/posts/you-said-no-mcp/"
+          ],
+          "blog": {
+            "zh": "/cn/blog/pi-1-0-codemode-mcp-minimal-harness/",
+            "en": "/blog/pi-1-0-codemode-mcp-minimal-harness/"
+          }
+        },
+        {
+          "id": "t510",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "NVIDIA SkillSpector：安装前扫描 Agent Skills 的信任管线",
+            "en": "NVIDIA SkillSpector: A Pre-Install Trust Pipeline for Agent Skills",
+            "ja": "NVIDIA SkillSpector: A Pre-Install Trust Pipeline for Agent Skills"
+          },
+          "summary": {
+            "zh": "Skills 包正在变成可安装供应链。NVIDIA SkillSpector 把安装前扫描（静态规则 + 可选语义对照）嵌进 scan→eval→sign 的信任管线，而不是再发一个技能清单——晨间 skills 热度是需求面，闸门才是可写的机制。",
+            "en": "Skill packs are becoming an install-time supply chain. Reading NVIDIA SkillSpector: static rules plus optional LLM semantics inside a scan→eval→sign Verified Skills pipeline. README sample: 26.1% of 31,132 analyzed skills show vulnerabilities; 5.2% likely malicious intent. Mechanism and hardening only—no exploit steps.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Skills 包正在变成可安装供应链。NVIDIA SkillSpector 把安装前扫描（静态规则 + 可选语义对照）嵌进 scan→eval→sign 的信任管线，而不是再发一个技能清单——晨间 skills 热度是需求面，闸门才是可写的机制。",
+            "en": "Skill packs are turning into an install-time supply chain. NVIDIA SkillSpector puts pre-install scanning (static rules plus optional semantic review) inside a scan-eval-sign trust pipeline, instead of shipping another skill list. Morning skill-repo heat is the demand side; the gate is the mechanism worth writing.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "github",
+              "url": "https://github.com/NVIDIA/SkillSpector",
+              "title": "NVIDIA/SkillSpector",
+              "brief": {
+                "zh": "日榜 ★19118 Δ168；安装前扫 Claude Code/Codex/MCP skills 的提示注入、外泄与供应链风险。",
+                "en": "Daily trending, 19118 stars (+168): pre-install scan of Claude Code/Codex/MCP skills for injection, exfiltration, and supply-chain risk.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "nvidia",
+              "url": "https://docs.nvidia.com/skills/agent-skill-trust-pipeline",
+              "title": "A Trust Pipeline for Agent Skills",
+              "brief": {
+                "zh": "官方三层：SkillSpector 安全扫描、语义去重、沙箱实评，通过后签名进目录。",
+                "en": "Official three tiers: SkillSpector security scan, semantic dedupe, sandboxed live eval, then signature into a catalog.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "github",
+            "nvidia"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://github.com/NVIDIA/SkillSpector",
+            "https://docs.nvidia.com/skills/scanning-agent-skills",
+            "https://docs.nvidia.com/skills/agent-skill-trust-pipeline"
+          ],
+          "blog": {
+            "zh": "/cn/blog/nvidia-skillspector-agent-skills-trust-pipeline/",
+            "en": "/blog/nvidia-skillspector-agent-skills-trust-pipeline/"
+          }
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-03T09:00:00+08:00",
       "label": {
@@ -91,58 +224,6 @@
             "https://arstechnica.com/security/2026/10/apple-changes-full-disk-access-permissions-to-curb-abuse-from-ai-agents/",
             "https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/",
             "https://forgeeks.net/apple-agent-consent-not-least-privilege/"
-          ]
-        },
-        {
-          "id": "t510",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "NVIDIA SkillSpector：安装前扫描 Agent Skills 的信任管线",
-            "en": "NVIDIA SkillSpector",
-            "ja": "NVIDIA SkillSpector"
-          },
-          "summary": {
-            "zh": "Skills 包正在变成可安装供应链。NVIDIA SkillSpector 把安装前扫描（静态规则 + 可选语义对照）嵌进 scan→eval→sign 的信任管线，而不是再发一个技能清单——晨间 skills 热度是需求面，闸门才是可写的机制。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Skills 包正在变成可安装供应链。NVIDIA SkillSpector 把安装前扫描（静态规则 + 可选语义对照）嵌进 scan→eval→sign 的信任管线，而不是再发一个技能清单——晨间 skills 热度是需求面，闸门才是可写的机制。",
-            "en": "Skill packs are turning into an install-time supply chain. NVIDIA SkillSpector puts pre-install scanning (static rules plus optional semantic review) inside a scan-eval-sign trust pipeline, instead of shipping another skill list. Morning skill-repo heat is the demand side; the gate is the mechanism worth writing.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/NVIDIA/SkillSpector",
-              "title": "NVIDIA/SkillSpector",
-              "brief": {
-                "zh": "日榜 ★19118 Δ168；安装前扫 Claude Code/Codex/MCP skills 的提示注入、外泄与供应链风险。",
-                "en": "Daily trending, 19118 stars (+168): pre-install scan of Claude Code/Codex/MCP skills for injection, exfiltration, and supply-chain risk.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "nvidia",
-              "url": "https://docs.nvidia.com/skills/agent-skill-trust-pipeline",
-              "title": "A Trust Pipeline for Agent Skills",
-              "brief": {
-                "zh": "官方三层：SkillSpector 安全扫描、语义去重、沙箱实评，通过后签名进目录。",
-                "en": "Official three tiers: SkillSpector security scan, semantic dedupe, sandboxed live eval, then signature into a catalog.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github",
-            "nvidia"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/NVIDIA/SkillSpector",
-            "https://docs.nvidia.com/skills/scanning-agent-skills",
-            "https://docs.nvidia.com/skills/agent-skill-trust-pipeline"
           ]
         }
       ]
@@ -429,79 +510,6 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://arxiv.org/abs/2610.00010"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-02T09:00:00+08:00",
-      "label": {
-        "zh": "10月2日 09:00",
-        "en": "Oct 2 09:00",
-        "ja": "10月2日 09:00"
-      },
-      "items": [
-        {
-          "id": "t475",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Pi 1.0：Codemode 沙箱编排 MCP 的最小 coding-agent harness",
-            "en": "Pi 1.0",
-            "ja": "Pi 1.0"
-          },
-          "summary": {
-            "zh": "Earendil Pi 1.0 把 MCP 收进最小 coding-agent harness，并用 JS Codemode 沙箱组合/并行工具调用（deferred tools、virtual models、mid-conversation system messages）——HN 749/257 的高互动说明「少工具+可扩展控制面」仍是可写深文的 harness 选题，而非又一个 CLI 发版。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Earendil Pi 1.0 把 MCP 收进最小 coding-agent harness，并用 JS Codemode 沙箱组合/并行工具调用（deferred tools、virtual models、mid-conversation system messages）——HN 749/257 的高互动说明「少工具+可扩展控制面」仍是可写深文的 harness 选题，而非又一个 CLI 发版。",
-            "en": "Earendil’s Pi 1.0 folds MCP into a minimal coding-agent harness and uses a JS Codemode sandbox to compose/parallelize tool calls (deferred tools, virtual models, mid-conversation system messages). HN 749/257 shows the durable harness angle—small tool surface plus an extensible control plane—not just another CLI launch.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://earendil.com/posts/pi-1-0/",
-              "title": "Pi 1.0",
-              "brief": {
-                "zh": "HN 749/257：1.0 发布帖高互动。",
-                "en": "HN 749 points / 257 comments on the 1.0 launch post.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "earendil",
-              "url": "https://earendil.com/posts/pi-1-0/",
-              "title": "Pi 1.0 | Earendil",
-              "brief": {
-                "zh": "官方：Codemode 原生 MCP、virtual models、deferred tool loading、缓存预热。",
-                "en": "Official: Codemode-native MCP, virtual models, deferred tool loading, cache warming.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/earendil-works/pi",
-              "title": "earendil-works/pi",
-              "brief": {
-                "zh": "GH 日榜 ★111240 Δ298；统一 LLM API + agent loop + TUI/CLI。",
-                "en": "GitHub daily ★111240 Δ298; unified LLM API + agent loop + TUI/CLI.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "github",
-            "earendil"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://earendil.com/posts/pi-1-0/",
-            "https://github.com/earendil-works/pi",
-            "https://earendil.com/posts/you-said-no-mcp/"
           ]
         }
       ]
@@ -1156,7 +1164,7 @@
         },
         {
           "id": "t093",
-          "theme": "other",
+          "theme": "models",
           "title": {
             "zh": "MiniMaxAI/MiniMax-H3：图文生视频",
             "en": "MiniMaxAI/MiniMax-H3",
@@ -4963,295 +4971,6 @@
             "zh": "/cn/blog/claude-opus-5-5-price-and-performance/",
             "en": "/blog/claude-opus-5-5-price-and-performance/"
           }
-        },
-        {
-          "id": "t229",
-          "theme": "research",
-          "title": {
-            "zh": "Env-Rethink：演化 Agent 环境做递归自改进",
-            "en": "Env-Rethink",
-            "ja": "Env-Rethink"
-          },
-          "summary": {
-            "zh": "RSI 从改 harness/prompt 挪到改 environment：Collection Map+Event Log→环境准备模型→更刁环境；对照 SoL-Pi/RRSI",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "RSI 从改 harness/prompt 挪到改 environment：Collection Map+Event Log→环境准备模型→更刁环境；对照 SoL-Pi/RRSI",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.29773",
-              "title": "Breaking the Environment Wall: Evolving LLM Agent Environments for Recursive Self-Improvement",
-              "brief": {
-                "zh": "「深耕候选：RSI」Env-Rethink 用 Collection Map + Event Log 组织证据，学环境准备模型，再用事件驱动演化制造更刁但可验真环境。九模型×30 任务 rubric pass 59.4%→72.7%；Terminal-Bench 上 32/55 任务变难。相对 RRSI/SoL-Pi harness 克隆的清晰新刃。",
-                "en": "Env-Rethink prepares noisy file environments with Collection Maps and Event Logs, learns an environment-preparation model, and evolves harder verifiable states—rubric pass 59.4%→72.7% across nine models×30 tasks; 32/55 Terminal-Bench tasks get harder.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29773"
-          ]
-        },
-        {
-          "id": "t230",
-          "theme": "research",
-          "title": {
-            "zh": "iCoder：人写 Research Skills、Agent 操盘工业编码模型",
-            "en": "iCoder",
-            "ja": "iCoder"
-          },
-          "summary": {
-            "zh": "RSI 工程路径：人蒸馏原则（目标/权限/验真/SOP），Codex 跑 Data→SFT→OPSD→RLVR 交 iCoder-27B",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "RSI 工程路径：人蒸馏原则（目标/权限/验真/SOP），Codex 跑 Data→SFT→OPSD→RLVR 交 iCoder-27B",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.29626",
-              "title": "Recursive AI-Led Development of Frontier Industrial Coding Model",
-              "brief": {
-                "zh": "「深耕候选：RSI」人写成 Research Skills（目标/权限/验真/SOP），让 Codex 主导 Data→SFT→OPSD→RLVR，交出 release-ready iCoder-27B；RTL/GPU kernel 对标甚至超过 GPT-5.5 / Claude Opus 4.8。「人蒸馏原则、agent 操盘实验」工程路径。",
-                "en": "Humans encode model-development priors as reusable Research Skills; an agent instantiates them through Data–SFT–OPSD–RLVR and delivers iCoder-27B for RTL/GPU kernels that rivals larger open and proprietary models.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/bingreeky/iCoder",
-              "title": "bingreeky/iCoder",
-              "brief": {
-                "zh": "论文配套代码仓：工业编码模型递归研发产物与技能定义。",
-                "en": "Companion repo for the recursive industrial-coding model development pipeline and research skills.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "github"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29626",
-            "https://github.com/bingreeky/iCoder"
-          ]
-        },
-        {
-          "id": "t231",
-          "theme": "models",
-          "title": {
-            "zh": "Ollaya：开源 Jev 风格决策模型的本地运行时",
-            "en": "Ollaya",
-            "ja": "Ollaya"
-          },
-          "summary": {
-            "zh": "Ollama 式本地体验包装开源 Jev 决策模型——agent-loop 内嵌 typed decision 的低摩擦路径",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Ollama 式本地体验包装开源 Jev 决策模型——agent-loop 内嵌 typed decision 的低摩擦路径",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://ollaya.dev/",
-              "title": "Ollaya – Ollama for open-source, Jev-style decision models",
-              "brief": {
-                "zh": "HN 415/114 高互动发布：把开源 Jev 风格决策模型包成 Ollama 式本地运行体验，降低在 agent-loop 里跑 compact decision model 的摩擦。",
-                "en": "Highly engaged launch (HN 415/114): an Ollama-like local runtime for open-source Jev-style decision models—lower friction for typed decision models inside agent loops.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://ollaya.dev/"
-          ]
-        },
-        {
-          "id": "t014",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "addyosmani/agent-skills：生产级 engineering skills",
-            "en": "addyosmani/agent-skills",
-            "ja": "addyosmani/agent-skills"
-          },
-          "summary": {
-            "zh": "Skills 赛道权威信号，可与 CF skill 对照攒写",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Skills 赛道权威信号，可与 CF skill 对照攒写",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/addyosmani/agent-skills",
-              "title": "addyosmani/agent-skills",
-              "brief": {
-                "zh": "生产级 engineering skills for AI coding agents，skills 内容赛道权威作者加持。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github",
-            "hashnode"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/addyosmani/agent-skills",
-            "https://freshinterest.hashnode.dev/after-writing-dozens-of-skills-i-distilled-this-engineering-method-from-never-triggered-to-production-ready"
-          ]
-        },
-        {
-          "id": "t228",
-          "theme": "research",
-          "title": {
-            "zh": "SWE-Prometheus：真实仓库工程治理改进评测",
-            "en": "SWE-Prometheus",
-            "ja": "SWE-Prometheus"
-          },
-          "summary": {
-            "zh": "coding-agent 评测从修 issue→开放式仓库治理 retrofit；六维治理+环境探针——非又一个 SWE-bench",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "coding-agent 评测从修 issue→开放式仓库治理 retrofit；六维治理+环境探针——非又一个 SWE-bench",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.29465",
-              "title": "SWE-Prometheus: Measuring Engineering Governance Improvements in Real-World Repositories",
-              "brief": {
-                "zh": "「新芽：」开放式仓库治理 retrofit 基准：六维治理、干净环境探针、行为门与双教师打分；模板基线可刷 D1–D3 却摸不到环境/依赖安全。coding-agent/harness 线新评测切口。",
-                "en": "Open-ended repository-retrofit benchmark scoring six engineering-governance dimensions with clean-environment probes and behavior gates—not just issue-patch pass rates. Template baselines clear D1–D3 but miss env/dependency safety.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29465",
-            "https://github.com/CosmosMind-ai/SWE-Prometheus"
-          ]
-        },
-        {
-          "id": "t233",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Plan mode is dead：静态计划让位连续执行反馈",
-            "en": "Plan mode is dead",
-            "ja": "Plan mode is dead"
-          },
-          "summary": {
-            "zh": "coding-agent UX：静态 plan mode 不适合可连续 inspect/act/revise 的 agent-loop；人机检查点设计提示",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "coding-agent UX：静态 plan mode 不适合可连续 inspect/act/revise 的 agent-loop；人机检查点设计提示",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://www.aymannadeem.com/artificial/intelligence,/developer/tools/2026/09/24/plan-mode-is-dead.html",
-              "title": "Plan mode is dead",
-              "brief": {
-                "zh": "HN 271/246 重讨论：静态 plan mode 不适合能连续检查、行动、修正的 coding agents；对 agent-loop 编排与人机检查点是直接 UX 信号。",
-                "en": "Heavily discussed essay (HN 271/246): static plan mode fits poorly for coding agents that continuously inspect, act, and revise—a design prompt for agent-loop orchestration and human checkpoints.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.aymannadeem.com/artificial/intelligence",
-            "/developer/tools/2026/09/24/plan-mode-is-dead.html"
-          ]
-        },
-        {
-          "id": "t234",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Claude Code：5 小时会话上限改为优雅收尾",
-            "en": "Claude Code",
-            "ja": "Claude Code"
-          },
-          "summary": {
-            "zh": "官方对长会话配额边界产品化：graceful wind-down + weekly 借额度——长程 agent-loop 中断/续跑痛点",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "官方对长会话配额边界产品化：graceful wind-down + weekly 借额度——长程 agent-loop 中断/续跑痛点",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "ithome",
-              "url": "https://www.ithome.com/1/007/369.htm",
-              "title": "Claude Code：撞上 5 小时会话上限时改为优雅收尾（扣 weekly quota）",
-              "brief": {
-                "zh": "官方新机制：长任务触达 5h session limit 时不再硬中断，找合适收尾点；收尾额度从 weekly limit 扣一小段。Pro 每周 1 次；Max/Team Premium 每次触达可用。长程 agent-loop 会话/配额治理。",
-                "en": "Claude Code now gracefully winds down at the 5-hour session limit instead of hard-stopping, borrowing a small fixed slice from the weekly quota (Pro: once/week; Max/Team Premium: each hit).",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "ithome"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.ithome.com/1/007/369.htm"
-          ]
         }
       ]
     },
