@@ -2,6 +2,570 @@
   "version": 1,
   "entries": [
     {
+      "id": "62e32721526a497f893d065ec94e64058cd3da847d7f40ccacb5ada5ed62499f",
+      "title": "How I Use Git Worktrees",
+      "url": "https://matklad.github.io/2024/07/25/git-worktrees.html",
+      "date": "2026-10-02T23:51:10.992Z",
+      "language": "zh",
+      "sentence": "文章介绍作者将 git worktree 用作管理编码、评审、模糊测试和杂项任务的并发工作空间，而非仅作为分支切换工具。",
+      "bullets": [
+        {
+          "heading": "核心观点",
+          "details": [
+            "作者认为 git worktree 更适合管理并发活动，而不是简单替代分支。",
+            "他最初用 worktree 代替分支切换，但后来放弃了这种用法。"
+          ]
+        },
+        {
+          "heading": "分支切换习惯",
+          "details": [
+            "作者避免使用 staging area 和 stash，因为它们容易让状态混乱。",
+            "切换分支前常用 git add . 和 git commit -m . 保存当前改动。",
+            "切回后可能用 git reset HEAD~ 撤销提交但保留工作区改动，或继续修改后 amend。"
+          ]
+        },
+        {
+          "heading": "五个固定工作树",
+          "details": [
+            "作者固定使用 5 个 worktree：main、work、review、fuzz 和 scratch。",
+            "这些 worktree 主要对应并发活动，而不是与分支一一对应。"
+          ]
+        },
+        {
+          "heading": "main 与 work",
+          "details": [
+            "main 是只读工作树，保存远端 main 的近期快照，用于比较代码、构建时间和测试行为。",
+            "work 是主要编码工作树，经常切换分支，以便同时比较新旧代码。"
+          ]
+        },
+        {
+          "heading": "review、fuzz 与 scratch",
+          "details": [
+            "review 用于检出他人代码进行评审，可与实现任务并发。",
+            "fuzz 用于运行长时间模糊测试，通常以 detached HEAD 方式切到特定提交。",
+            "scratch 用于处理随机小任务，例如快速修复无关 typo 并推送。"
+          ]
+        },
+        {
+          "heading": "典型工作流",
+          "details": [
+            "作者在 work 中创建带 matklad/ 前缀的分支，并基于 origin/main 开始。",
+            "编码后提交，然后在 fuzz 工作树切到该提交运行模糊测试，同时整理提交历史。",
+            "满意后使用 push --force-with-lease 并创建 PR。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 7069,
+        "totalChars": 7069
+      }
+    },
+    {
+      "id": "1154d5af7687cb8cc7ce67df22ee8b53392151b90ec7a6d4c61e5915a3d448a8",
+      "title": "Dollar Street | Family in Jordan | Family 171",
+      "url": "https://www.gapminder.org/dollar-street",
+      "date": "2026-10-02T23:50:52.019Z",
+      "language": "zh",
+      "sentence": "该页面是 Gapminder 的 Dollar Street 项目，按家庭月收入展示多国家庭照片，并包含约旦家庭示例、项目规模、许可及参与资源信息。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "Dollar Street 是 Gapminder 的项目。",
+            "页面称其用照片作为数据，以消除国家刻板印象。",
+            "页面称该项目内容可自由使用。"
+          ]
+        },
+        {
+          "heading": "数据规模",
+          "details": [
+            "页面称曾访问 50 个国家的 264 个家庭并收集 30,000 张照片。",
+            "页脚称当前展示 67 个国家的 469 个家庭。",
+            "页脚称包含 46,070 张照片和 8,586 个视频。"
+          ]
+        },
+        {
+          "heading": "展示方式",
+          "details": [
+            "家庭按每月收入从左到右排列。",
+            "页面提供从贫困到富裕的收入区间示例。",
+            "示例包括肯尼亚、菲律宾、约旦、乌克兰、海地、塞尔维亚、南非、印度、突尼斯、埃塞俄比亚、哥伦比亚、玻利维亚和缅甸。"
+          ]
+        },
+        {
+          "heading": "约旦相关",
+          "details": [
+            "页面标题指向约旦家庭（Family 171）。",
+            "正文中的约旦示例标注为 $583/month/m。"
+          ]
+        },
+        {
+          "heading": "参与与资源",
+          "details": [
+            "页面称仍有地区未被 Dollar Street 覆盖。",
+            "页面提供记录家庭所需的资源链接。",
+            "页面包含首页、地图、摄影师、我的相册和关于等导航。"
+          ]
+        },
+        {
+          "heading": "许可与版本",
+          "details": [
+            "页面显示 Creative Commons 标识。",
+            "页脚显示版本 2.5.1。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 10456,
+        "totalChars": 10456
+      }
+    },
+    {
+      "id": "e094b745fe487ee571d62a1f7876ac57082b1500563146090af44e8307e02f02",
+      "title": "WsgiDAV 4.3.4a1 documentation",
+      "url": "https://wsgidav.readthedocs.io/en/latest/index.html",
+      "date": "2026-10-02T23:50:33.346Z",
+      "language": "zh",
+      "sentence": "该前缀内容主要展示 WsgiDAV 4.3.6a1 文档的目录结构与 API 自动摘要链接，未覆盖完整文档。",
+      "bullets": [
+        {
+          "heading": "页面来源与版本",
+          "details": [
+            "该页面来自 WsgiDAV 的 Read the Docs 文档站。",
+            "页面内标题显示为 WsgiDAV 4.3.6a1 documentation。",
+            "本次提供内容仅覆盖文档前缀，未包含完整文档。"
+          ]
+        },
+        {
+          "heading": "文档结构",
+          "details": [
+            "目录包含 Overview、Installation、User Guide 和 Reference Guide。",
+            "User Guide 下设命令行界面、配置、WebDAV 客户端、库使用、自定义 provider 和 FAQ。",
+            "Reference Guide 下设架构、术语表和 API Doc。"
+          ]
+        },
+        {
+          "heading": "扩展 provider",
+          "details": [
+            "列出 Mercurial、MongoDB、MySQL、Google App Engine、Virtual 等 WebDAV provider。",
+            "还列出 NT Domain Controller、MongoDB property manager 和 CouchDB property manager。"
+          ]
+        },
+        {
+          "heading": "API 模块",
+          "details": [
+            "API Doc 前缀列出 wsgidav.dav_error、wsgidav.dav_provider、wsgidav.dir_browser 等模块。",
+            "还列出 wsgidav.error_printer、wsgidav.fs_dav_provider、wsgidav.http_authenticator、wsgidav.request_resolver 和 wsgidav.request_server。"
+          ]
+        },
+        {
+          "heading": "资源接口",
+          "details": [
+            "dav_provider 下包含 DAVCollection、DAVNonCollection 和 DAVProvider。",
+            "这些类列出 get_content、get_properties、handle_copy、handle_move、handle_delete 等方法。",
+            "fs_dav_provider 下包含 FileResource 和 FolderResource，并列出类似资源方法。"
+          ]
+        },
+        {
+          "heading": "请求处理",
+          "details": [
+            "request_server 的 RequestServer 列出 do_GET、do_HEAD、do_OPTIONS、do_COPY、do_DELETE、do_LOCK、do_MKCOL、do_MOVE 等方法。",
+            "http_authenticator 的 HTTPAuthenticator 列出 Basic 和 Digest 认证相关方法。",
+            "request_resolver 的 RequestResolver 列出 __call__、get_config 和 is_disabled。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": false,
+        "summarizedChars": 48000,
+        "totalChars": 267904
+      }
+    },
+    {
+      "id": "d5390aa703c4c9272f96671bec1bbe474fbbe1c89a94f189db3110d11559624b",
+      "title": "system-design-primer/README-zh-Hans.md at master · donnemartin/system-design-primer",
+      "url": "https://github.com/donnemartin/system-design-primer/blob/master/README-zh-Hans.md",
+      "date": "2026-10-02T23:49:58.946Z",
+      "language": "zh",
+      "sentence": "该前缀内容介绍了系统设计入门仓库的简体中文 README，涵盖面试准备、学习路径、常见面试题、设计权衡以及 DNS、CDN 和负载均衡等基础设施主题。",
+      "bullets": [
+        {
+          "heading": "文档来源与目的",
+          "details": [
+            "页面是 donnemartin/system-design-primer 仓库中 README-zh-Hans.md 的简体中文版本。",
+            "内容来自掘金翻译计划，并列出多位译者。",
+            "主要目的是帮助读者学习大型系统设计并为系统设计面试做准备。",
+            "文档说明这是一个持续更新的开源项目，欢迎贡献。"
+          ]
+        },
+        {
+          "heading": "面试准备与学习路径",
+          "details": [
+            "学习指引建议按短期、中期、长期目标复习系统设计主题。",
+            "短期以主题广度为主并练习一些面试题，中期增加初级深度，长期追求高级深度。",
+            "文档指出面试内容会受经验、技术背景、职位、公司和运气影响。",
+            "提供系统设计面试题、面向对象设计面试题以及其它面试题的复习建议。"
+          ]
+        },
+        {
+          "heading": "面试题与解答",
+          "details": [
+            "前缀列出了 Pastebin/Bit.ly、Twitter 时间线和搜索、网页爬虫、Mint.com 等系统设计题。",
+            "还列出社交网络数据结构、搜索引擎 key-value 存储、Amazon 销售排名和 AWS 百万用户系统。",
+            "相关解答位于 solutions 文件夹中。",
+            "面向对象设计部分包含 hash map、LRU 缓存、呼叫中心、停车场等题目，并标注该节仍在完善中。"
+          ]
+        },
+        {
+          "heading": "系统设计面试方法",
+          "details": [
+            "文档把系统设计面试描述为开放式对话，期望候选人主导讨论。",
+            "建议步骤包括描述使用场景、约束和假设，再创建高层设计。",
+            "随后设计核心组件，并扩展设计以处理瓶颈和限制。",
+            "还提到可能需要使用附录中的估算资源进行手算估算。"
+          ]
+        },
+        {
+          "heading": "核心设计概念",
+          "details": [
+            "前缀讨论了性能与可扩展性、延迟与吞吐量、可用性与一致性等基础权衡。",
+            "CAP 理论指出分布式系统通常只能在一致性、可用性和分区容错性中同时满足两点。",
+            "一致性模式包括弱一致性、最终一致性和强一致性。",
+            "可用性模式包括故障切换和复制，例如 active-passive、active-active、主从复制和主主复制。"
+          ]
+        },
+        {
+          "heading": "常见基础设施组件",
+          "details": [
+            "DNS 用于将域名解析为 IP 地址，并涉及 NS、MX、A、CNAME 等记录类型。",
+            "CDN 通过靠近用户的节点提供内容，并区分推送和拉取两种模式。",
+            "负载均衡器用于分发请求、避免过载和单点故障，可支持 SSL 终结和 session 留存。",
+            "四层负载均衡基于传输层信息，七层负载均衡基于应用层内容。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": false,
+        "summarizedChars": 48000,
+        "totalChars": 111697
+      }
+    },
+    {
+      "id": "99e642c023cfb24a2330f34490779f69f0c6bad45b4cf00d77b1df20be5d430e",
+      "title": "Flash Loans (闪电贷) 是什么？ | 代码家",
+      "url": "https://daimajia.com/2022/05/23/what-is-flash-loans/",
+      "date": "2026-10-02T23:49:45.104Z",
+      "language": "zh",
+      "sentence": "闪电贷是 DeFi 中无抵押、匿名且必须在同一交易内偿还的短期借贷，主要依赖原子性用于套利，但也伴随智能合约、GAS 和协议漏洞风险。",
+      "bullets": [
+        {
+          "heading": "基本定义",
+          "details": [
+            "闪电贷是 DeFi 中一种无抵押、匿名的短期借贷方式。",
+            "借款人通常需要在几秒内、于同一笔以太坊交易结束前偿还本金和利息。",
+            "利息通常略低于 1%。"
+          ]
+        },
+        {
+          "heading": "使用门槛",
+          "details": [
+            "当前通常需要借款人自己编写并部署 Solidity 智能合约。",
+            "未来 Aave 等协议可能通过用户界面直接提供闪电贷功能。"
+          ]
+        },
+        {
+          "heading": "运作机制",
+          "details": [
+            "闪电贷依赖以太坊交易的原子性：交易要么完全成功，要么完全失败。",
+            "如果最终还本付息成功，整笔交易会被写入区块链。",
+            "如果任何子交易失败，整笔交易回滚，贷款也视为从未发生。"
+          ]
+        },
+        {
+          "heading": "主要限制",
+          "details": [
+            "借入的资金不能移出所属区块链网络。",
+            "交易必须支付 GAS 费，复杂交易可能导致成本较高。",
+            "贷款规模理论上没有固定上限，但受协议流动性限制。"
+          ]
+        },
+        {
+          "heading": "典型用途",
+          "details": [
+            "目前主要用途是套利，即利用不同市场之间的价格差异获利。",
+            "套利机器人可寻找价差，借入大额资金执行交易后偿还贷款并保留利润。"
+          ]
+        },
+        {
+          "heading": "风险与争议",
+          "details": [
+            "贷款人不承担传统违约风险，但存在智能合约和协议漏洞风险。",
+            "闪电贷曾被用于放大 DeFi 漏洞攻击，因此常与黑客事件联系在一起。",
+            "即使交易失败，借款人仍可能因 GAS 费而亏损。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 4074,
+        "totalChars": 4074
+      }
+    },
+    {
+      "id": "beb68b68ae0d9a811a3d1f21a11a9976daee235077ef24604b585b5d755ebb9d",
+      "title": "Marzban/README-zh-cn.md at master · Gozargah/Marzban",
+      "url": "https://github.com/Gozargah/Marzban/blob/master/README-zh-cn.md",
+      "date": "2026-10-02T23:49:29.433Z",
+      "language": "zh",
+      "sentence": "该 README 介绍了 Marzban 的功能、安装、配置、API、备份和 Telegram Bot 使用方法。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "Marzban 是一个基于 Xray-core 的代理管理工具。",
+            "它使用 Python 和 Reactjs 构建，并提供简单易用的用户界面。",
+            "该工具可用于管理数百个代理账户。"
+          ]
+        },
+        {
+          "heading": "主要功能",
+          "details": [
+            "内置 Web 界面，并支持 REST API 后端。",
+            "支持 Vmess、VLESS、Trojan 和 Shadowsocks 协议。",
+            "支持流量限制、过期日期限制、周期性流量限制、订阅链接、二维码生成、系统监控和流量统计。",
+            "支持 TLS、自定义 Xray 配置、集成 Telegram Bot，并正在开发多管理员支持。"
+          ]
+        },
+        {
+          "heading": "安装方式",
+          "details": [
+            "可通过安装脚本使用 SQLite、MySQL 或 MariaDB 数据库安装。",
+            "安装后文件位于 /opt/marzban，配置文件位于 /opt/marzban/.env，数据文件位于 /usr/lib/marzban。",
+            "出于安全原因，仪表盘不能通过 IP 直接访问，需要 SSL 证书和域名访问，也可使用 SSH 端口转发进行本地测试。",
+            "安装完成后需要创建 sudo 管理员账号以登录仪表盘。"
+          ]
+        },
+        {
+          "heading": "手动安装",
+          "details": [
+            "手动安装需要 Python 3.8 或更高版本，并先安装 Xray。",
+            "需要克隆仓库、安装依赖、运行数据库迁移脚本，并复制 .env.example 为 .env 进行配置。",
+            "可通过 python3 main.py 启动，也可使用 systemctl 管理。",
+            "文档提供了配合 nginx 使用 HTTPS 和反向代理的配置示例。"
+          ]
+        },
+        {
+          "heading": "配置项",
+          "details": [
+            "配置可通过环境变量或 .env 文件设置。",
+            "可配置管理员账号、数据库地址、Uvicorn 主机和端口、SSL 证书等。",
+            "可配置 Xray 配置文件、可执行文件路径、资源目录、订阅 URL 前缀和 fallbacks 入站标记。",
+            "可配置 Telegram Bot、JWT 过期时间、API 文档开关、Webhook 通知和自动删除策略。"
+          ]
+        },
+        {
+          "heading": "API、备份与 Telegram",
+          "details": [
+            "Marzban 提供 REST API，设置 DOCS=True 后可在 /docs 和 /redoc 查看 API 文档。",
+            "备份建议复制 /var/lib/marzban 目录，并备份 env 文件和 Xray 配置文件。",
+            "备份服务支持 SQLite、MySQL 和 MariaDB，可将压缩后的备份发送到 Telegram Bot，并支持定时或即时备份。",
+            "集成 Telegram Bot 可用于服务器管理、用户创建和删除以及发送通知。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 16267,
+        "totalChars": 16267
+      }
+    },
+    {
+      "id": "ef5b2c5961b28c1910318c0fe6abf30b52efc002ac2f989f7c0b75b976ecb5a0",
+      "title": "getpelican/pelican",
+      "url": "https://github.com/getpelican/pelican",
+      "date": "2026-10-02T23:49:05.607Z",
+      "language": "zh",
+      "sentence": "该页面介绍 Pelican 是一个 Python 静态站点生成器，支持 Markdown/reST 内容、主题、RSS、插件和静态输出，并展示其仓库、社区与维护信息。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "Pelican 是一个用 Python 编写的静态站点生成器。",
+            "它支持用 Markdown、reStructuredText 和 HTML 等文本文件创建网站。",
+            "生成的站点无需数据库或服务器端编程，可由任意 Web 服务器或托管服务提供。"
+          ]
+        },
+        {
+          "heading": "核心功能",
+          "details": [
+            "支持按时间顺序的文章或博客内容，也支持静态页面。",
+            "提供基于 Jinja2 的站点主题、多语言文章、Atom/RSS 生成和 Pygments 代码高亮。",
+            "可从 WordPress、Dotclear 或 RSS 导入内容，并通过插件生态扩展。"
+          ]
+        },
+        {
+          "heading": "仓库状态",
+          "details": [
+            "页面显示最新提交和发布为 Pelican 4.12.0，日期为 2026 年 4 月 20 日。",
+            "仓库有 4,022 次提交、10 个分支和 68 个标签。",
+            "当前显示 74 个 Issues 和 36 个 Pull requests。"
+          ]
+        },
+        {
+          "heading": "社区与采用",
+          "details": [
+            "仓库有 13.3k stars、1.8k forks 和 326 watchers。",
+            "页面显示有 425 名贡献者，并被 8.7K 个依赖项目使用。",
+            "主要语言占比为 Python 89%、CSS 9.2%、Jinja 1.8%。"
+          ]
+        },
+        {
+          "heading": "许可与资源",
+          "details": [
+            "项目采用 AGPL-3.0 许可证。",
+            "页面提供 README、贡献指南和文档链接。",
+            "赞助渠道包括 donate.getpelican.com 和 liberapay.com/pelican。"
+          ]
+        },
+        {
+          "heading": "近期维护",
+          "details": [
+            "最近提交包括要求 Python 3.11 及以上版本。",
+            "还包含要求 Sphinx 9.0 及以上版本，以及修复 JavaScript MIME 类型的问题。",
+            "默认分支为 main。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 27939,
+        "totalChars": 27939
+      }
+    },
+    {
+      "id": "d50469f9fba10967276bdb002b4c8aff801c8d471c24034b1f959936f017c6a5",
+      "title": "ccbikai/RSS.Beauty",
+      "url": "https://github.com/ccbikai/RSS.Beauty",
+      "date": "2026-10-02T23:48:42.596Z",
+      "language": "zh",
+      "sentence": "RSS.Beauty 是一个基于 XSLT 的开源 RSS/Atom 美化工具，支持自托管与多种部署方式。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "RSS.Beauty 是一个基于 XSLT 技术的 RSS 美化工具。",
+            "它可将普通 RSS/Atom 源转换为更美观的阅读界面。",
+            "项目口号为 Make Your RSS Beautiful!"
+          ]
+        },
+        {
+          "heading": "核心功能",
+          "details": [
+            "支持 RSS 2.0 和 Atom 1.0。",
+            "提供响应式设计，适合移动端阅读。",
+            "支持一键订阅主要 RSS 阅读器，并支持自托管。"
+          ]
+        },
+        {
+          "heading": "技术栈",
+          "details": [
+            "技术栈包括 Astro、TailwindCSS 和 XSLT。",
+            "代码语言占比显示 Astro 30.7%、CSS 29.4%、TypeScript 16.9%。",
+            "仓库主题包括 astro、rss、xml、xsl、xslt。"
+          ]
+        },
+        {
+          "heading": "部署方式",
+          "details": [
+            "支持部署到 Cloudflare Pages、Vercel、Netlify 等 Serverless 平台。",
+            "提供 Docker 部署方式，示例命令使用 ghcr.io/miantiao-me/rss.beauty:main 并映射 4321 端口。",
+            "仓库包含 docs/deployment-guide.md 部署指南。"
+          ]
+        },
+        {
+          "heading": "仓库状态",
+          "details": [
+            "页面显示 481 stars、41 forks、2 watchers。",
+            "显示 11 个 Issues、0 个 Pull requests、29 次提交。",
+            "最新提交日期为 2025 年 12 月 20 日，合并了 PR #16。",
+            "许可证为 LGPL-3.0，最新版本为 v0.0.2（2025 年 12 月 14 日）。"
+          ]
+        },
+        {
+          "heading": "社区与赞助",
+          "details": [
+            "贡献者包括 miantiao-me、Copilot 和 mofanx。",
+            "提供 GitHub Sponsors 和 buymeacoffee.com/miantiao 赞助入口。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 26746,
+        "totalChars": 26746
+      }
+    },
+    {
+      "id": "5391a4b3f980366919847a8d5ba99d86ffd6c179508536de21fb058c879a905c",
+      "title": "Find public records and leaks - Library of Leaks",
+      "url": "https://search.libraryofleaks.org/",
+      "date": "2026-10-02T23:48:24.680Z",
+      "language": "zh",
+      "sentence": "该页面是 Library of Leaks 的公开数据搜索入口，展示约 2900 万公共实体、57 个数据集和 36 个国家/地区的分类统计。",
+      "bullets": [
+        {
+          "heading": "平台概览",
+          "details": [
+            "页面标题为“Find public records and leaks - Library of Leaks”。",
+            "页面提供文档、公司和个人的搜索入口。",
+            "页面显示 29 m 公共实体、57 个公共数据集和 36 个国家/地区。"
+          ]
+        },
+        {
+          "heading": "主要实体类型",
+          "details": [
+            "网页数量为 8,945,180。",
+            "文档数量为 6,364,750。",
+            "电子邮件数量为 5,258,335。",
+            "图片数量为 3,222,274。"
+          ]
+        },
+        {
+          "heading": "其他实体类型",
+          "details": [
+            "表格数量为 1,693,831。",
+            "文本文件数量为 1,507,904。",
+            "人物数量为 920,510。",
+            "工作簿数量为 315,846。"
+          ]
+        },
+        {
+          "heading": "国家/地区覆盖",
+          "details": [
+            "美国对应 27 个数据集。",
+            "全球对应 15 个数据集。",
+            "以色列和俄罗斯各对应 4 个数据集。",
+            "英国和德国各对应 3 个数据集。"
+          ]
+        },
+        {
+          "heading": "来源信息",
+          "details": [
+            "URL 来源为 https://search.libraryofleaks.org/。",
+            "发布时间为 2025-07-19 18:14:12 GMT。",
+            "覆盖信息显示完整，总字符数为 5010。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 5010,
+        "totalChars": 5010
+      }
+    },
+    {
       "id": "1a630277f46316edefa0237511ef22af2dc976e8a819ce2a5c4a9bdefce27a22",
       "title": "Scaling SQLite to 4M QPS on a Single Server (EC2 vs Bare Metal)",
       "url": "https://use.expensify.com/blog/scaling-sqlite-to-4m-qps-on-a-single-server",
