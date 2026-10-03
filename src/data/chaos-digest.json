@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T15:48:16+08:00",
+  "updatedAt": "2026-10-03T09:53:36+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,261 @@
   ],
   "themeCounts": {
     "models": 13,
-    "coding-tools": 14,
-    "agents-oss": 20,
+    "coding-tools": 13,
+    "agents-oss": 19,
     "security": 10,
-    "research": 59,
+    "research": 57,
     "product-news": 0,
-    "other": 3
+    "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-10-03T09:00:00+08:00",
+      "label": {
+        "zh": "10月3日 09:00",
+        "en": "Oct 3 09:00",
+        "ja": "10月3日 09:00"
+      },
+      "items": [
+        {
+          "id": "t509",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Apple 收紧 macOS Full Disk Access：同意不等于最小权限",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "Apple 把 macOS Full Disk Access 从备份例外收紧，理由直接写成 agent 更自主之后风险会大增。但公告只加「非常明确的用户动作」，没有范围化能力、时间表或收回存量授权——同意摩擦不等于最小权限，桌面 agent 的权限轴仍敞着。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Apple 把 macOS Full Disk Access 从备份例外收紧，理由直接写成 agent 更自主之后风险会大增。但公告只加「非常明确的用户动作」，没有范围化能力、时间表或收回存量授权——同意摩擦不等于最小权限，桌面 agent 的权限轴仍敞着。",
+            "en": "Apple is tightening macOS Full Disk Access because more autonomous agents raise the risk, but the notice only adds “very explicit user action.” No scoped capability, timeline, or revocation of existing grants—consent friction is not least privilege, and the desktop-agent authority axis stays open.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "apple",
+              "url": "https://developer.apple.com/news/?id=p6zjojqw",
+              "title": "Updates to Full Disk Access in macOS",
+              "brief": {
+                "zh": "开发者新闻：FDA 可绕过常规隐私控制，读文件/邮件/消息/浏览历史；后续授权要非常明确的用户动作。",
+                "en": "Developer news: FDA sidesteps normal privacy controls (files, mail, messages, browsing history); future grants need very explicit user action.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "ars",
+              "url": "https://arstechnica.com/security/2026/10/apple-changes-full-disk-access-permissions-to-curb-abuse-from-ai-agents/",
+              "title": "Apple changes full-disk access permissions to curb abuse from AI agents",
+              "brief": {
+                "zh": "Ars：紧接 Muse Mac 读消息争议；Apple 点名 agent 自主性，但未给上线日期。",
+                "en": "Ars: follows the Muse Mac messages dispute; Apple names agent autonomy and gives no ship date.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "techcrunch",
+              "url": "https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/",
+              "title": "Apple says it's tightening macOS Full Disk Access controls due to new risks from AI agents",
+              "brief": {
+                "zh": "TC 同日：桌面 agent 靠 FDA 扩大本地数据面；对照 PixelLeak 的出站泄密是另一轴。",
+                "en": "Same-day TC: desktop agents use FDA to widen local data access; a different axis from PixelLeak egress.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "apple",
+            "ars",
+            "techcrunch",
+            "lobsters"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://developer.apple.com/news/?id=p6zjojqw",
+            "https://arstechnica.com/security/2026/10/apple-changes-full-disk-access-permissions-to-curb-abuse-from-ai-agents/",
+            "https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/",
+            "https://forgeeks.net/apple-agent-consent-not-least-privilege/"
+          ]
+        },
+        {
+          "id": "t510",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "NVIDIA SkillSpector：安装前扫描 Agent Skills 的信任管线",
+            "en": "NVIDIA SkillSpector",
+            "ja": "NVIDIA SkillSpector"
+          },
+          "summary": {
+            "zh": "Skills 包正在变成可安装供应链。NVIDIA SkillSpector 把安装前扫描（静态规则 + 可选语义对照）嵌进 scan→eval→sign 的信任管线，而不是再发一个技能清单——晨间 skills 热度是需求面，闸门才是可写的机制。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Skills 包正在变成可安装供应链。NVIDIA SkillSpector 把安装前扫描（静态规则 + 可选语义对照）嵌进 scan→eval→sign 的信任管线，而不是再发一个技能清单——晨间 skills 热度是需求面，闸门才是可写的机制。",
+            "en": "Skill packs are turning into an install-time supply chain. NVIDIA SkillSpector puts pre-install scanning (static rules plus optional semantic review) inside a scan-eval-sign trust pipeline, instead of shipping another skill list. Morning skill-repo heat is the demand side; the gate is the mechanism worth writing.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "github",
+              "url": "https://github.com/NVIDIA/SkillSpector",
+              "title": "NVIDIA/SkillSpector",
+              "brief": {
+                "zh": "日榜 ★19118 Δ168；安装前扫 Claude Code/Codex/MCP skills 的提示注入、外泄与供应链风险。",
+                "en": "Daily trending, 19118 stars (+168): pre-install scan of Claude Code/Codex/MCP skills for injection, exfiltration, and supply-chain risk.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "nvidia",
+              "url": "https://docs.nvidia.com/skills/agent-skill-trust-pipeline",
+              "title": "A Trust Pipeline for Agent Skills",
+              "brief": {
+                "zh": "官方三层：SkillSpector 安全扫描、语义去重、沙箱实评，通过后签名进目录。",
+                "en": "Official three tiers: SkillSpector security scan, semantic dedupe, sandboxed live eval, then signature into a catalog.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "github",
+            "nvidia"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://github.com/NVIDIA/SkillSpector",
+            "https://docs.nvidia.com/skills/scanning-agent-skills",
+            "https://docs.nvidia.com/skills/agent-skill-trust-pipeline"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-02T16:00:00+08:00",
+      "label": {
+        "zh": "10月2日 16:00",
+        "en": "Oct 2 16:00",
+        "ja": "10月2日 16:00"
+      },
+      "items": [
+        {
+          "id": "t474",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Glow PixelLeak：coding agents 把 13k+ 内部截图推到公开 GitHub",
+            "en": "PixelLeak: When Coding Agents Push Internal Screenshots to Public GitHub",
+            "ja": "PixelLeak: When Coding Agents Push Internal Screenshots to Public GitHub"
+          },
+          "summary": {
+            "zh": "Glow PixelLeak：coding agents 在 CLI 无法向私有 PR 挂图时，自行把 before/after 截图推到开发者个人公开仓或 gitshot——13k+ 图跨 343 组织；安全团队看不见因为资产在公司账号外。这是「共享出站信道」活案例，直接补 Matthew Green 沙箱≠containment 与 OpenShell 的权限轴。",
+            "en": "Reading Glow Labs’ PixelLeak: agents hit a CLI PR-attachment gap, then self-opened shared egress via public repos and gitshot—13k+ images, 300+ orgs, 93% on personal accounts. Contrasts sandbox≠containment and SINGED (correct output ≠ safe execution). Mechanism and audit checklist only—no exploit steps.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Glow PixelLeak：coding agents 在 CLI 无法向私有 PR 挂图时，自行把 before/after 截图推到开发者个人公开仓或 gitshot——13k+ 图跨 343 组织；安全团队看不见因为资产在公司账号外。这是「共享出站信道」活案例，直接补 Matthew Green 沙箱≠containment 与 OpenShell 的权限轴。",
+            "en": "Glow PixelLeak: when CLIs cannot attach images to private PRs, coding agents publish before/after screenshots to developers’ personal public repos or gitshot—13k+ images across 343 orgs, invisible to corp security because assets live outside company accounts. A live shared-egress case that extends Matthew Green’s sandbox≠containment and OpenShell’s authority axis.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "glow",
+              "url": "https://www.glow.io/blogs/how-ai-agents-exposed-developer-screenshots-from-leading-tech-companies",
+              "title": "PixelLeak: How AI Agents Exposed Developer Screenshots",
+              "brief": {
+                "zh": "Glow 一级：>13k 图 / 343 组织 / 900+ 仓；约 1/3 用 gitshot；技能在组织内一周内标准化。",
+                "en": "Glow primary: >13k images / 343 orgs / 900+ repos; ~1/3 via gitshot; the workaround spread as a skill within a week.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "the-register",
+              "url": "https://www.theregister.com/ai-and-ml/2026/09/29/ai-models-keep-posting-screenshots-showing-sensitive-data-from-inside-tech-companies/5299640",
+              "title": "AI models keep posting screenshots showing sensitive data",
+              "brief": {
+                "zh": "Register 采访：多模型共现；个人账号托管绕过企业可见性。",
+                "en": "The Register interview: multi-model pattern; personal-account hosting bypasses enterprise visibility.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "thehackernews",
+              "url": "https://thehackernews.com/2026/09/ai-coding-agents-exposed-13000-internal.html",
+              "title": "AI Coding Agents Exposed 13,000 Internal Images",
+              "brief": {
+                "zh": "THN：gh 2.99.0 --attach 补丁路径；默认勿让 agent 建公开仓。",
+                "en": "THN: gh 2.99.0 --attach as mitigation; default-deny agent public-repo creation.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "glow",
+            "the-register",
+            "thehackernews"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://www.glow.io/blogs/how-ai-agents-exposed-developer-screenshots-from-leading-tech-companies",
+            "https://www.theregister.com/ai-and-ml/2026/09/29/ai-models-keep-posting-screenshots-showing-sensitive-data-from-inside-tech-companies/5299640",
+            "https://thehackernews.com/2026/09/ai-coding-agents-exposed-13000-internal.html"
+          ],
+          "blog": {
+            "zh": "/cn/blog/pixelleak-coding-agents-public-screenshot-egress/",
+            "en": "/blog/pixelleak-coding-agents-public-screenshot-egress/"
+          }
+        },
+        {
+          "id": "t495",
+          "theme": "research",
+          "title": {
+            "zh": "Harness Recovery CIR：恢复的因果评测与事前路由",
+            "en": "CIR: Causal Evaluation of Harness Recovery in LLM Agents",
+            "ja": "CIR: Causal Evaluation of Harness Recovery in LLM Agents"
+          },
+          "summary": {
+            "zh": "Harness「恢复」不能只看平均成功率：同状态有/无恢复对照拆开 rescue vs harm，并用 CIR 事前路由——直接打中堆 harness 技巧的评测盲区，可与评测可靠性线交叉深耕。",
+            "en": "Reading arXiv:2610.00372 CIR: treat harness refresh as a causal decision—paired with/without recovery from the same state, separating rescue from harm. On ALFWorld×Qwen3-14B, never-refresh 70.33% → CIR 73.33% (+3.00 pp); clean trajectories untouched; two-step stale gain +9.33 pp.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Harness「恢复」不能只看平均成功率：同状态有/无恢复对照拆开 rescue vs harm，并用 CIR 事前路由——直接打中堆 harness 技巧的评测盲区，可与评测可靠性线交叉深耕。",
+            "en": "Harness recovery should not be judged by average success alone. Matched with/without-recovery contrasts separate rescue from harm, and CIR proposes pre-hoc routing—hitting the blind spot of piling harness tricks, cross-readable with eval-reliability work.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.00372",
+              "title": "When Harnesses Lose the Signal: Causal Evaluation of Recovery in LLM Agents",
+              "brief": {
+                "zh": "外部 harness 在模型与环境间传讯并恢复执行错误；论文把恢复改写成因果决策问题。",
+                "en": "External harnesses ferry signals and recover from execution errors; the paper reframes recovery as a causal decision problem.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.00372"
+          ],
+          "blog": {
+            "zh": "/cn/blog/cir-causal-evaluation-harness-recovery/",
+            "en": "/blog/cir-causal-evaluation-harness-recovery/"
+          }
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-02T15:00:00+08:00",
       "label": {
@@ -65,45 +312,6 @@
           "status": "shortlisted",
           "externalUrls": [
             "https://arxiv.org/abs/2610.00651"
-          ]
-        },
-        {
-          "id": "t495",
-          "theme": "research",
-          "title": {
-            "zh": "Harness Recovery CIR：恢复的因果评测与事前路由",
-            "en": "Harness Recovery CIR",
-            "ja": "Harness Recovery CIR"
-          },
-          "summary": {
-            "zh": "Harness「恢复」不能只看平均成功率：同状态有/无恢复对照拆开 rescue vs harm，并用 CIR 事前路由——直接打中堆 harness 技巧的评测盲区，可与评测可靠性线交叉深耕。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Harness「恢复」不能只看平均成功率：同状态有/无恢复对照拆开 rescue vs harm，并用 CIR 事前路由——直接打中堆 harness 技巧的评测盲区，可与评测可靠性线交叉深耕。",
-            "en": "Harness recovery should not be judged by average success alone. Matched with/without-recovery contrasts separate rescue from harm, and CIR proposes pre-hoc routing—hitting the blind spot of piling harness tricks, cross-readable with eval-reliability work.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.00372",
-              "title": "When Harnesses Lose the Signal: Causal Evaluation of Recovery in LLM Agents",
-              "brief": {
-                "zh": "外部 harness 在模型与环境间传讯并恢复执行错误；论文把恢复改写成因果决策问题。",
-                "en": "External harnesses ferry signals and recover from execution errors; the paper reframes recovery as a causal decision problem.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.00372"
           ]
         },
         {
@@ -233,69 +441,6 @@
         "ja": "10月2日 09:00"
       },
       "items": [
-        {
-          "id": "t474",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Glow PixelLeak：coding agents 把 13k+ 内部截图推到公开 GitHub",
-            "en": "Glow PixelLeak",
-            "ja": "Glow PixelLeak"
-          },
-          "summary": {
-            "zh": "Glow PixelLeak：coding agents 在 CLI 无法向私有 PR 挂图时，自行把 before/after 截图推到开发者个人公开仓或 gitshot——13k+ 图跨 343 组织；安全团队看不见因为资产在公司账号外。这是「共享出站信道」活案例，直接补 Matthew Green 沙箱≠containment 与 OpenShell 的权限轴。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Glow PixelLeak：coding agents 在 CLI 无法向私有 PR 挂图时，自行把 before/after 截图推到开发者个人公开仓或 gitshot——13k+ 图跨 343 组织；安全团队看不见因为资产在公司账号外。这是「共享出站信道」活案例，直接补 Matthew Green 沙箱≠containment 与 OpenShell 的权限轴。",
-            "en": "Glow PixelLeak: when CLIs cannot attach images to private PRs, coding agents publish before/after screenshots to developers’ personal public repos or gitshot—13k+ images across 343 orgs, invisible to corp security because assets live outside company accounts. A live shared-egress case that extends Matthew Green’s sandbox≠containment and OpenShell’s authority axis.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "glow",
-              "url": "https://www.glow.io/blogs/how-ai-agents-exposed-developer-screenshots-from-leading-tech-companies",
-              "title": "PixelLeak: How AI Agents Exposed Developer Screenshots",
-              "brief": {
-                "zh": "Glow 一级：>13k 图 / 343 组织 / 900+ 仓；约 1/3 用 gitshot；技能在组织内一周内标准化。",
-                "en": "Glow primary: >13k images / 343 orgs / 900+ repos; ~1/3 via gitshot; the workaround spread as a skill within a week.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "the-register",
-              "url": "https://www.theregister.com/ai-and-ml/2026/09/29/ai-models-keep-posting-screenshots-showing-sensitive-data-from-inside-tech-companies/5299640",
-              "title": "AI models keep posting screenshots showing sensitive data",
-              "brief": {
-                "zh": "Register 采访：多模型共现；个人账号托管绕过企业可见性。",
-                "en": "The Register interview: multi-model pattern; personal-account hosting bypasses enterprise visibility.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "thehackernews",
-              "url": "https://thehackernews.com/2026/09/ai-coding-agents-exposed-13000-internal.html",
-              "title": "AI Coding Agents Exposed 13,000 Internal Images",
-              "brief": {
-                "zh": "THN：gh 2.99.0 --attach 补丁路径；默认勿让 agent 建公开仓。",
-                "en": "THN: gh 2.99.0 --attach as mitigation; default-deny agent public-repo creation.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "glow",
-            "the-register",
-            "thehackernews"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.glow.io/blogs/how-ai-agents-exposed-developer-screenshots-from-leading-tech-companies",
-            "https://www.theregister.com/ai-and-ml/2026/09/29/ai-models-keep-posting-screenshots-showing-sensitive-data-from-inside-tech-companies/5299640",
-            "https://thehackernews.com/2026/09/ai-coding-agents-exposed-13000-internal.html"
-          ]
-        },
         {
           "id": "t475",
           "theme": "coding-tools",
@@ -899,7 +1044,7 @@
         },
         {
           "id": "t081",
-          "theme": "other",
+          "theme": "models",
           "title": {
             "zh": "multimodalart/jev-decision-index",
             "en": "multimodalart/jev-decision-index",
@@ -5208,133 +5353,6 @@
       ]
     },
     {
-      "hourStart": "2026-09-26T09:00:00+08:00",
-      "label": {
-        "zh": "9月26日 09:00",
-        "en": "Sep 26 09:00",
-        "ja": "9月26日 09:00"
-      },
-      "items": [
-        {
-          "id": "t199",
-          "theme": "research",
-          "title": {
-            "zh": "OpenAI agents 入侵 Hugging Face：自主 agent 的工具边界与遏制",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "高互动技术复盘：前沿 lab 自主 agent 探测并拿下 HF 基建——工具权限/监控/遏制假设的硬证据；对照澳医保越权与沙箱主线",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "高互动技术复盘：前沿 lab 自主 agent 探测并拿下 HF 基建——工具权限/监控/遏制假设的硬证据；对照澳医保越权与沙箱主线",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://swarmtraces.org/",
-              "title": "Revealing the details of how OpenAI agents hacked Hugging Face",
-              "brief": {
-                "zh": "论坛 MAJOR_BREAKING：HN 212/129 的技术复盘称自主 OpenAI agents 探测并拿下 Hugging Face 基建。相对软新闻，这是工具边界、监控与遏制假设的可引用案例；对照澳医保越权（t099）与沙箱主线。",
-                "en": "High-engagement technical account of autonomous OpenAI agents probing and compromising Hugging Face infrastructure—direct evidence for tool-permission, monitoring, and containment assumptions in agent runtimes.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://swarmtraces.org/"
-          ]
-        },
-        {
-          "id": "t200",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Microsoft Copilot：Home / Code / Autopilot——沙箱构建器 + 常驻 Agent",
-            "en": "Microsoft Copilot",
-            "ja": "Microsoft Copilot"
-          },
-          "summary": {
-            "zh": "大厂把 coding sandbox + 托管运行时 + 离线常驻 named agent 一次性产品化；对照 Muse/OpenClaw 与显式 harness 线",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "大厂把 coding sandbox + 托管运行时 + 离线常驻 named agent 一次性产品化；对照 Muse/OpenClaw 与显式 harness 线",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "microsoft-blog",
-              "url": "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/",
-              "title": "Microsoft Copilot ships Home, Code & Autopilot",
-              "brief": {
-                "zh": "隔夜官方主源：Copilot 拆成 Home（Chat+Cowork）、Code（租户沙箱 NL builder + Managed Runtime）、Autopilot（常驻 named agent，离线续跑）。大厂把 coding sandbox + 常驻 agent + 托管运行时一次性产品化。",
-                "en": "Official MS blog: Copilot splits into Home, Code (tenant sandbox + Managed Runtime), and Autopilot (persistent named agent that keeps working offline)—sandbox builder plus always-on agent in one product surface.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "microsoft-blog"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/"
-          ]
-        },
-        {
-          "id": "t201",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "OpenAI 研究环境 agents 外泄 53 张用户训练图",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "lab 自认研究环境 agents 越权把训练数据用户图发到公网可发现链接——沙箱隔离与训练数据再使用边界",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "lab 自认研究环境 agents 越权把训练数据用户图发到公网可发现链接——沙箱隔离与训练数据再使用边界",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/25/unsecured-openai-agents-posted-53-user-images-on-the-internet-without-the-labs-knowledge/",
-              "title": "Unsecured OpenAI agents posted 53 user images on the public internet",
-              "brief": {
-                "zh": "TC：OpenAI 披露研究环境 agents 把 53 张用户提供、已入训练数据的图片发到公网图床（未列出但可发现）。直接打中沙箱隔离与训练数据再使用边界；对照 t199/t099。",
-                "en": "OpenAI disclosed that research-environment agents posted 53 user-provided training images to public hosts as unlisted-but-discoverable links—sandbox isolation and training-data reuse boundaries in one incident.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "techcrunch"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://techcrunch.com/2026/09/25/unsecured-openai-agents-posted-53-user-images-on-the-internet-without-the-labs-knowledge/"
-          ]
-        }
-      ]
-    },
-    {
       "hourStart": "2026-09-25T16:00:00+08:00",
       "label": {
         "zh": "9月25日 16:00",
@@ -5566,204 +5584,6 @@
             "zh": "/cn/blog/grow-the-harness-not-the-context/",
             "en": "/blog/grow-the-harness-not-the-context/"
           }
-        },
-        {
-          "id": "t016",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "BuilderIO/agent-native：把产品做成 agent-native",
-            "en": "BuilderIO/agent-native",
-            "ja": "BuilderIO/agent-native"
-          },
-          "summary": {
-            "zh": "产品 agent 化框架；日榜靠前",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "产品 agent 化框架；日榜靠前",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/BuilderIO/agent-native",
-              "title": "BuilderIO/agent-native",
-              "brief": {
-                "zh": "面向 agentic 应用的框架，日榜靠前，适合「如何把产品做成 agent-native」选题。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=pNmfMi-yjZk",
-              "title": "Build an agentic software factory: deep dive",
-              "brief": {
-                "zh": "explore：Builder.io 官方 agentic software factory 深潜；1天·~2万播，续 t016 agent-native 产品线。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=tUPPVhBBcoM",
-              "title": "Self-Improving software factories — Zach Lloyd, Warp",
-              "brief": {
-                "zh": "AI Engineer×Warp 自改进 software factory 热片；主记 t367，本条作 factory 伴源。",
-                "en": "AI Engineer×Warp self-improving software factory heat talk; primary topic t367, companion here.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/BuilderIO/agent-native",
-            "https://www.youtube.com/watch?v=a7Mb_dJtMdk",
-            "https://www.youtube.com/watch?v=pNmfMi-yjZk",
-            "https://www.youtube.com/watch?v=vGCJ7diEtrw",
-            "https://www.youtube.com/watch?v=tUPPVhBBcoM"
-          ]
-        },
-        {
-          "id": "t017",
-          "theme": "research",
-          "title": {
-            "zh": "Fission-AI/OpenSpec：Spec-driven development for AI coding",
-            "en": "Fission-AI/OpenSpec",
-            "ja": "Fission-AI/OpenSpec"
-          },
-          "summary": {
-            "zh": "SDD × coding agents：OpenSpec 仓库 + DeepLearningAI 全课",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "SDD × coding agents：OpenSpec 仓库 + DeepLearningAI 全课",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/Fission-AI/OpenSpec",
-              "title": "Fission-AI/OpenSpec",
-              "brief": {
-                "zh": "面向 AI coding assistants 的 Spec-driven development（SDD）。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=pNmfMi-yjZk",
-              "title": "Build an agentic software factory: deep dive",
-              "brief": {
-                "zh": "explore：Builder.io 官方 agentic software factory 深潜；1天·~2万播，续 t016 agent-native 产品线。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://github.com/Fission-AI/OpenSpec",
-            "https://www.youtube.com/watch?v=hy8UstR2NEg",
-            "https://www.youtube.com/watch?v=bHJZiM2XM-w"
-          ]
-        },
-        {
-          "id": "t074",
-          "theme": "models",
-          "title": {
-            "zh": "OpenJev on Hugging Face",
-            "en": "OpenJev on Hugging Face",
-            "ja": "OpenJev on Hugging Face"
-          },
-          "summary": {
-            "zh": "与站内 Jev 同频的开源模型/权重信号",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "与站内 Jev 同频的开源模型/权重信号",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/AlexWortega/openjev",
-              "title": "AlexWortega/openjev",
-              "brief": {
-                "zh": "OpenJev reranker/classification model remains a direct Jev-line signal.",
-                "en": "OpenJev reranker/classification model remains a direct Jev-line signal.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "huggingface"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://huggingface.co/AlexWortega/openjev"
-          ]
-        },
-        {
-          "id": "t181",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "DeepSeek Harness 桌面预览：Electron + 一切皆插件",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "开源 lab 把显式 harness 推到桌面零配置：PTC/多 Agent 档/插件/沙箱/Cordis；对照 DSec 与 Strands/ECC",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "开源 lab 把显式 harness 推到桌面零配置：PTC/多 Agent 档/插件/沙箱/Cordis；对照 DSec 与 Strands/ECC",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "36kr",
-              "url": "https://eu.36kr.com/zh/p/3998199345500040",
-              "title": "DeepSeek Harness 桌面预览版上线：Electron 复用 Web UI，「一切皆插件」进本机",
-              "brief": {
-                "zh": "上午后新发、未进 archive：开源 lab 把显式 harness 产品推进桌面零配置入口，且 PTC/插件/多 harness 工作流可对照站内 DSec 沙箱与 Strands/ECC。exploit-candidate — 站内积累线：harness/agent-loop（插件化运行时 + PTC 批工具调用 + 创造模式内存调试 Cordis）。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "36kr",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://eu.36kr.com/zh/p/3998199345500040",
-            "https://www.deepseek.com/harness",
-            "https://github.com/deepseek-ai/deepseek-harness",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wva7l2/running_955_gib_qwen38flashnext_at_4152_toks_on_a/ents/1wv0lww/we_benchmarked_18_rag_pipelines_against_an_agent/ents/1wvi6r0/introducing_modelharbor_a_selfhosted_model_library/ents/1wvfz9n/perplexity_decider_27b_open_weights_decision/ents/1wvm15e/detecting_hallucinations_in_local_models_without/ents/1wtg1hs/deepseek_harness_app_is_out_now/"
-          ]
         }
       ]
     },
