@@ -2,6 +2,69 @@
   "version": 1,
   "entries": [
     {
+      "id": "4091c26d4e29f1c04b04f2c373422f2281cb5e1a8a0d8b86b6dc50812cdffa16",
+      "title": "Krasjet/pdf.tocgen",
+      "url": "https://github.com/Krasjet/pdf.tocgen",
+      "date": "2026-10-03T11:42:19.863Z",
+      "language": "zh",
+      "sentence": "pdf.tocgen 是一套用于自动提取和生成 PDF 目录的 Python 命令行工具，适合处理软件生成的 PDF 文件。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "pdf.tocgen 是一个 Python 3 命令行工具集",
+            "用于自动提取并生成 PDF 文件的目录（ToC）",
+            "通过标题的字体属性和位置推断 PDF 大纲"
+          ]
+        },
+        {
+          "heading": "适用范围",
+          "details": [
+            "最适合由 pdftex、pdflatex、pdfxetex 等 TeX 工具生成的 PDF",
+            "也可用于其他软件生成的 PDF，如 troff/groff、InDesign、Word",
+            "不适用于扫描版 PDF"
+          ]
+        },
+        {
+          "heading": "安装方式",
+          "details": [
+            "可用 pip install -U pdf.tocgen 安装",
+            "也可用 pipx 或 pip install -U --user pdf.tocgen 安装",
+            "已知支持 Python 3.7 到 3.11，覆盖 Linux、Windows 和 macOS"
+          ]
+        },
+        {
+          "heading": "核心工作流",
+          "details": [
+            "pdfxmeta 提取标题元数据并生成 recipe 文件",
+            "pdftocgen 根据 recipe 生成目录",
+            "pdftocio 将目录导入 PDF 文档"
+          ]
+        },
+        {
+          "heading": "命令能力",
+          "details": [
+            "pdftocio 可显示、写入、导入目录，并支持复制目录",
+            "pdftocgen 可输出目录，并用 -v 保留标题垂直位置",
+            "pdfxmeta 可搜索关键词、按页搜索、dump 页面或整个文档"
+          ]
+        },
+        {
+          "heading": "开发与许可",
+          "details": [
+            "开发依赖使用 poetry 管理，测试命令为 make test",
+            "Emacs 的 toc-mode 可作为 GUI 前端",
+            "源码采用 GNU GPLv3，recipes 目录采用 CC BY-NC-SA 4.0"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 13551,
+        "totalChars": 13551
+      }
+    },
+    {
       "id": "864dfeb05172121214650f504177fc610b2de568b422ca12e9d8c86dc21ca203",
       "title": "SWivid/F5-TTS: Official code for \"F5-TTS: A Fairytaler that Fakes Fluent and Faithful Speech with Flow Matching\"",
       "url": "https://github.com/SWivid/F5-TTS",
