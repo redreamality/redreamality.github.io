@@ -126,7 +126,7 @@ Before saving any markdown content file, verify:
 
 补充（站长，2026-09-27）：
 1. **Jev 配额**：正式 blog 的 Jev / Jev 强相关题默认每周（Asia/Shanghai）**最多 1 篇**；除非特别值得写（MAJOR_BREAKING、全新机制、或头子/站长破例）。超额进 Chaos / notes 或不进本周撰稿槽。
-2. **搜索意图**：其它选题 shortlist / 开写前查 **Google Trends**（或等价热度）；主词须有搜索意图。无意图的热闹进 Chaos / notes。交审/挑题回报写明 Trends 结论与本周 Jev 占用。
+2. **搜索意图（站长，2026-10-04 收紧）**：正式 blog 的 shortlist / 开写前必须查 **Google Trends 的 7 天和 24 小时**两个窗口（不要只用等价检索代替）。候选主词在**两个窗口都要高于基线词 `gpts`**，否则不进正式 shortlist，改走 Chaos / notes。交审/挑题回报写明两窗口相对 `gpts` 的结论，以及本周 Jev 占用。
 3. **深度调研优先（站长，2026-10-01）**：正式 blog 优先写机制地图 / 综述 / 对照综合（如 RSI 枢纽文），少做「单点论文或新闻条目堆叠」。单点热讯进 Chaos / notes；短名单论文解读可系列化，但选题配额应给足综合文。
 
 ### Blog Chinese style（站长约束，2026-09-23）
