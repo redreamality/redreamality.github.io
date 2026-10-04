@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Language } from '../utils/i18n';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+const copy = {
+  en: {
+    title: 'Privacy',
+    description:
+      'Cookies on this personal site: Google Analytics (G-4WM6C44V4Z) loads on every page. Google AdSense (ca-pub-4617864538353929) loads on most pages, not home, About, Visuals, or /go/.',
+    h1: 'Privacy',
+    intro: 'Personal site. This is what actually loads, not a legal policy.',
+    analyticsTitle: 'Analytics',
+    analytics:
+      'Every page, including this one, loads Google Analytics, measurement ID G-4WM6C44V4Z. Google can set cookies and receive your IP address, browser, and which pages you open.',
+    adsTitle: 'Ads',
+    ads: 'Google AdSense, publisher ID ca-pub-4617864538353929, loads on most pages, including this one. It does not load on the home page, About, Visuals, or the outbound-link confirm page (/go/). AdSense can set cookies and use them to show and measure ads.',
+    chatTitle: 'Chat',
+    chat: 'A Chatwoot widget also loads. If you type into it, that conversation is stored by the chat service.',
+    absentTitle: 'What I don’t keep here',
+    absent:
+      'There is no reader account and no newsletter signup. If you email me, the inbox has whatever you wrote. I don’t keep a separate visitor list beyond what those services collect on their side.',
+    contactLabel: 'Contact',
+  },
+  zh: {
+    title: '隐私',
+    description:
+      '这个个人站点的 cookie：每个页面都加载 Google Analytics（G-4WM6C44V4Z）。Google AdSense（ca-pub-4617864538353929）在多数页面上，首页、关于、可视化和离站确认页没有。有问题就直接写信：redreamality@gmail.com。',
+    h1: '隐私',
+    intro: '个人站点。下面写的是页面上实际在跑的东西，不是法律文本。',
+    analyticsTitle: '统计',
+    analytics:
+      '每个页面，包括这一页，都会加载 Google Analytics，衡量 ID 是 G-4WM6C44V4Z。Google 可能会写 cookie，并收到 IP、浏览器，以及你打开了哪些页面。',
+    adsTitle: '广告',
+    ads: 'Google AdSense（发布商 ID ca-pub-4617864538353929）出现在多数页面上，这一页也有。首页、关于页、可视化页，以及离开本站前的确认页（/go/）不加载。AdSense 可能会写 cookie，用来展示和统计广告。',
+    chatTitle: '聊天',
+    chat: '页面上还有一个 Chatwoot 聊天组件。你要是在里面打字，对话会记在那个聊天服务那边。',
+    absentTitle: '我这边没有的',
+    absent:
+      '没有读者账号，也没有邮件列表订阅。你写信过来，邮箱里就是你写的那些。除了上面这些服务自己收集的，我没有另建一套访客档案。',
+    contactLabel: '联系',
+  },
+  ja: {
+    title: 'プライバシー',
+    description:
+      'この個人サイトの cookie：全ページで Google Analytics（G-4WM6C44V4Z）を読み込みます。Google AdSense（ca-pub-4617864538353929）は多くのページにあり、ホーム、About、ビジュアル、外部確認ページにはありません。連絡先は redreamality@gmail.com です。',
+    h1: 'プライバシー',
+    intro: '個人サイトです。今ページに載っているものだけを書きます。法律文書ではありません。',
+    analyticsTitle: '分析',
+    analytics:
+      'このページを含め、すべてのページで Google Analytics（測定 ID G-4WM6C44V4Z）を読み込みます。Google は cookie を置き、IP アドレス、ブラウザ、開いたページなどを受け取ることがあります。',
+    adsTitle: '広告',
+    ads: 'Google AdSense（パブリッシャー ID ca-pub-4617864538353929）は、このページを含む多くのページで読み込みます。ホーム、About、ビジュアル、サイトを離れる前の確認ページ（/go/）では読み込みません。AdSense は cookie を置き、広告の表示と計測に使うことがあります。',
+    chatTitle: 'チャット',
+    chat: 'Chatwoot のウィジェットも読み込みます。そこに入力すると、その会話はチャット側に残ります。',
+    absentTitle: 'こちらにないもの',
+    absent:
+      '読者アカウントも、メールマガジンの登録もありません。メールすると、届いた内容が手元に残ります。上のサービスが集めるもの以外に、訪問者の名簿は作っていません。',
+    contactLabel: '連絡先',
+  },
+} as const;
+
+const current = copy[lang];
+---
+
+<Layout title={current.title} description={current.description}>
+  <div class="max-w-3xl mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{current.h1}</h1>
+    <p class="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">{current.intro}</p>
+
+    <div class="space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed">
+      <section>
+        <h2 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">{current.analyticsTitle}</h2>
+        <p>{current.analytics}</p>
+      </section>
+      <section>
+        <h2 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">{current.adsTitle}</h2>
+        <p>{current.ads}</p>
+      </section>
+      <section>
+        <h2 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">{current.chatTitle}</h2>
+        <p>{current.chat}</p>
+      </section>
+      <section>
+        <h2 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">{current.absentTitle}</h2>
+        <p>{current.absent}</p>
+      </section>
+      <section>
+        <h2 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">{current.contactLabel}</h2>
+        <p>
+          <a href="mailto:redreamality@gmail.com" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">redreamality@gmail.com</a>
+        </p>
+      </section>
+    </div>
+  </div>
+</Layout>

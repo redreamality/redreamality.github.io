@@ -63,6 +63,11 @@ const titles: Record<string, Record<Language, string>> = {
     zh: '关于 Remy（Redreamality）：软件开发与 AI 研究者',
     ja: 'Remy（Redreamality）について｜ソフトウェアとAI',
   },
+  '/privacy': {
+    en: 'Privacy: Analytics, Cookies, and Ads | Redreamality',
+    zh: '隐私说明：本站统计、Cookie 与广告的实际情况 | Redreamality',
+    ja: 'プライバシー：分析・Cookie・広告の扱い | Redreamality',
+  },
 };
 
 export function getPageTitle(pathname: string, lang: Language, fallback: string): string {

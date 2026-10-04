@@ -86,7 +86,9 @@ const relatedItems = relatedPosts.map((relatedPost) => ({
   seoTitle={post.data.seoTitle}
   description={post.data.seoDescription ?? post.data.description}
   publishDate={formattedDate}
+  updatedDate={post.data.updatedDate?.toISOString()}
   tags={filteredTags}
+  author={post.data.author}
   type="article"
 >
   <main class="container mx-auto px-4 py-8">

@@ -26,6 +26,7 @@ export const i18nConfig: I18nConfig = {
       projects: '项目',
       visuals: '可视化',
       about: '关于',
+      privacy: '隐私',
       tags: '标签',
       
       // Content
@@ -77,6 +78,7 @@ export const i18nConfig: I18nConfig = {
       projects: 'Projects',
       visuals: 'Visuals',
       about: 'About',
+      privacy: 'Privacy',
       tags: 'Tags',
       
       // Content
@@ -128,6 +130,7 @@ export const i18nConfig: I18nConfig = {
       projects: 'プロジェクト',
       visuals: 'ビジュアル',
       about: '私について',
+      privacy: 'プライバシー',
       tags: 'タグ',
       
       // Content

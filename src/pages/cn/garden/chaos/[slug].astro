@@ -35,7 +35,9 @@ const relatedItems = relatedPosts.map((relatedPost) => ({
   seoTitle={post.data.seoTitle}
   description={post.data.seoDescription ?? post.data.description}
   publishDate={post.data.pubDate.toISOString()}
+  updatedDate={post.data.updatedDate?.toISOString()}
   tags={post.data.tags || []}
+  author={post.data.author}
   type="article"
 >
   <ChaosEntry
