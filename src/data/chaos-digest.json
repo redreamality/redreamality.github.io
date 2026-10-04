@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T09:53:36+08:00",
+  "updatedAt": "2026-10-04T15:56:06+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,13 +13,146 @@
   "themeCounts": {
     "models": 14,
     "coding-tools": 12,
-    "agents-oss": 17,
+    "agents-oss": 16,
     "security": 10,
     "research": 51,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-04T10:00:00+08:00",
+      "label": {
+        "zh": "10月4日 10:00",
+        "en": "Oct 4 10:00",
+        "ja": "10月4日 10:00"
+      },
+      "items": [
+        {
+          "id": "t509",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Apple 收紧 macOS Full Disk Access：同意不等于最小权限",
+            "en": "macOS Full Disk Access: Consent Friction Is Not Least Privilege",
+            "ja": "macOS Full Disk Access: Consent Friction Is Not Least Privilege"
+          },
+          "summary": {
+            "zh": "Apple 把 macOS Full Disk Access 从备份例外收紧，理由直接写成 agent 更自主之后风险会大增。但公告只加「非常明确的用户动作」，没有范围化能力、时间表或收回存量授权——同意摩擦不等于最小权限，桌面 agent 的权限轴仍敞着。",
+            "en": "Apple’s 2026-10-02 developer notice will tighten how macOS Full Disk Access is granted, stressing “very explicit user action” as AI-agent risk grows. This post maps the TCC/FDA mechanism and argues: stronger consent friction is not least privilege scoped by path, time, or task.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Apple 把 macOS Full Disk Access 从备份例外收紧，理由直接写成 agent 更自主之后风险会大增。但公告只加「非常明确的用户动作」，没有范围化能力、时间表或收回存量授权——同意摩擦不等于最小权限，桌面 agent 的权限轴仍敞着。",
+            "en": "Apple is tightening macOS Full Disk Access because more autonomous agents raise the risk, but the notice only adds “very explicit user action.” No scoped capability, timeline, or revocation of existing grants—consent friction is not least privilege, and the desktop-agent authority axis stays open.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "apple",
+              "url": "https://developer.apple.com/news/?id=p6zjojqw",
+              "title": "Updates to Full Disk Access in macOS",
+              "brief": {
+                "zh": "开发者新闻：FDA 可绕过常规隐私控制，读文件/邮件/消息/浏览历史；后续授权要非常明确的用户动作。",
+                "en": "Developer news: FDA sidesteps normal privacy controls (files, mail, messages, browsing history); future grants need very explicit user action.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "ars",
+              "url": "https://arstechnica.com/security/2026/10/apple-changes-full-disk-access-permissions-to-curb-abuse-from-ai-agents/",
+              "title": "Apple changes full-disk access permissions to curb abuse from AI agents",
+              "brief": {
+                "zh": "Ars：紧接 Muse Mac 读消息争议；Apple 点名 agent 自主性，但未给上线日期。",
+                "en": "Ars: follows the Muse Mac messages dispute; Apple names agent autonomy and gives no ship date.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "techcrunch",
+              "url": "https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/",
+              "title": "Apple says it's tightening macOS Full Disk Access controls due to new risks from AI agents",
+              "brief": {
+                "zh": "TC 同日：桌面 agent 靠 FDA 扩大本地数据面；对照 PixelLeak 的出站泄密是另一轴。",
+                "en": "Same-day TC: desktop agents use FDA to widen local data access; a different axis from PixelLeak egress.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "apple",
+            "ars",
+            "techcrunch",
+            "lobsters"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://developer.apple.com/news/?id=p6zjojqw",
+            "https://arstechnica.com/security/2026/10/apple-changes-full-disk-access-permissions-to-curb-abuse-from-ai-agents/",
+            "https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/",
+            "https://forgeeks.net/apple-agent-consent-not-least-privilege/"
+          ],
+          "blog": {
+            "zh": "/cn/blog/macos-full-disk-access-consent-not-least-privilege/",
+            "en": "/blog/macos-full-disk-access-consent-not-least-privilege/"
+          }
+        },
+        {
+          "id": "t541",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "默认硬预算帽：coding agent 会在你睡着时烧穿账单",
+            "en": "Default Hard Budget Caps: Services Agents Deploy Need Kill Switches",
+            "ja": "Default Hard Budget Caps: Services Agents Deploy Need Kill Switches"
+          },
+          "summary": {
+            "zh": "Coding agent 把睡着时仍在烧账单变成默认故障。硬预算帽应当是付费用量 API 的默认：超过 $X 就停并返回错误，而不是只发警告邮件。这和已经写过的轨迹浪费、企业路由不是同一层——被 agent 部署出去的服务本身要有停机线。",
+            "en": "Pay-by-usage services need default hard budget caps—cut off and return errors past $X/month, not a midnight warning email. Coding and personal agents lower the friction of spinning up billable downstream APIs, storage, and compute; AWS project spend limits and Google Cloud Spend Caps are moving hard-stop into the product. This essay separates the agent token ledger from bills for services agents deploy, and closes with a builder checklist.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Coding agent 把睡着时仍在烧账单变成默认故障。硬预算帽应当是付费用量 API 的默认：超过 $X 就停并返回错误，而不是只发警告邮件。这和已经写过的轨迹浪费、企业路由不是同一层——被 agent 部署出去的服务本身要有停机线。",
+            "en": "Coding agents make an overnight bill blowup the default failure. A hard budget cap should be the default on pay-by-usage APIs: past $X, stop and return an error, not a warning email. That is a different layer from trajectory waste or enterprise routing. The services an agent deploys need their own hard stop.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "simonw",
+              "url": "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/",
+              "title": "We're going to need default hard budget caps on pretty much everything",
+              "brief": {
+                "zh": "2026-10-03 主张超额即停；点名 AWS 项目月度 spend limit 与 Google Cloud Spend Caps，并希望 agent 默认推荐带硬帽的供应商。",
+                "en": "3 Oct 2026 argument for stop-and-error past a monthly cap. Names AWS project spend limits and Google Cloud Spend Caps, and wants agents to prefer providers that ship a hard cap.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/",
+              "title": "We're going to need default hard budget caps on pretty much everything",
+              "brief": {
+                "zh": "HN 137 分 / 59 评论，讨论硬帽相对警告邮件是否挡得住无人值守的 agent 账单。",
+                "en": "Hacker News 137 points / 59 comments on whether a hard cap, unlike a warning email, stops an unattended agent bill.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "simonw"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/"
+          ],
+          "blog": {
+            "zh": "/cn/blog/default-hard-budget-caps-agent-deployed-services/",
+            "en": "/blog/default-hard-budget-caps-agent-deployed-services/"
+          }
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-04T09:00:00+08:00",
       "label": {
@@ -89,56 +222,6 @@
             "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/",
             "https://huggingface.co/Aleph-Alpha/Kolibri-1",
             "https://aleph-alpha.com/en/kolibri/"
-          ]
-        },
-        {
-          "id": "t541",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "默认硬预算帽：coding agent 会在你睡着时烧穿账单",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Coding agent 把睡着时仍在烧账单变成默认故障。硬预算帽应当是付费用量 API 的默认：超过 $X 就停并返回错误，而不是只发警告邮件。这和已经写过的轨迹浪费、企业路由不是同一层——被 agent 部署出去的服务本身要有停机线。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Coding agent 把睡着时仍在烧账单变成默认故障。硬预算帽应当是付费用量 API 的默认：超过 $X 就停并返回错误，而不是只发警告邮件。这和已经写过的轨迹浪费、企业路由不是同一层——被 agent 部署出去的服务本身要有停机线。",
-            "en": "Coding agents make an overnight bill blowup the default failure. A hard budget cap should be the default on pay-by-usage APIs: past $X, stop and return an error, not a warning email. That is a different layer from trajectory waste or enterprise routing. The services an agent deploys need their own hard stop.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "simonw",
-              "url": "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/",
-              "title": "We're going to need default hard budget caps on pretty much everything",
-              "brief": {
-                "zh": "2026-10-03 主张超额即停；点名 AWS 项目月度 spend limit 与 Google Cloud Spend Caps，并希望 agent 默认推荐带硬帽的供应商。",
-                "en": "3 Oct 2026 argument for stop-and-error past a monthly cap. Names AWS project spend limits and Google Cloud Spend Caps, and wants agents to prefer providers that ship a hard cap.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/",
-              "title": "We're going to need default hard budget caps on pretty much everything",
-              "brief": {
-                "zh": "HN 137 分 / 59 评论，讨论硬帽相对警告邮件是否挡得住无人值守的 agent 账单。",
-                "en": "Hacker News 137 points / 59 comments on whether a hard cap, unlike a warning email, stops an unattended agent bill.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "simonw"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/"
           ]
         },
         {
@@ -334,81 +417,6 @@
             "zh": "/cn/blog/nvidia-skillspector-agent-skills-trust-pipeline/",
             "en": "/blog/nvidia-skillspector-agent-skills-trust-pipeline/"
           }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-03T09:00:00+08:00",
-      "label": {
-        "zh": "10月3日 09:00",
-        "en": "Oct 3 09:00",
-        "ja": "10月3日 09:00"
-      },
-      "items": [
-        {
-          "id": "t509",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Apple 收紧 macOS Full Disk Access：同意不等于最小权限",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Apple 把 macOS Full Disk Access 从备份例外收紧，理由直接写成 agent 更自主之后风险会大增。但公告只加「非常明确的用户动作」，没有范围化能力、时间表或收回存量授权——同意摩擦不等于最小权限，桌面 agent 的权限轴仍敞着。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Apple 把 macOS Full Disk Access 从备份例外收紧，理由直接写成 agent 更自主之后风险会大增。但公告只加「非常明确的用户动作」，没有范围化能力、时间表或收回存量授权——同意摩擦不等于最小权限，桌面 agent 的权限轴仍敞着。",
-            "en": "Apple is tightening macOS Full Disk Access because more autonomous agents raise the risk, but the notice only adds “very explicit user action.” No scoped capability, timeline, or revocation of existing grants—consent friction is not least privilege, and the desktop-agent authority axis stays open.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "apple",
-              "url": "https://developer.apple.com/news/?id=p6zjojqw",
-              "title": "Updates to Full Disk Access in macOS",
-              "brief": {
-                "zh": "开发者新闻：FDA 可绕过常规隐私控制，读文件/邮件/消息/浏览历史；后续授权要非常明确的用户动作。",
-                "en": "Developer news: FDA sidesteps normal privacy controls (files, mail, messages, browsing history); future grants need very explicit user action.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "ars",
-              "url": "https://arstechnica.com/security/2026/10/apple-changes-full-disk-access-permissions-to-curb-abuse-from-ai-agents/",
-              "title": "Apple changes full-disk access permissions to curb abuse from AI agents",
-              "brief": {
-                "zh": "Ars：紧接 Muse Mac 读消息争议；Apple 点名 agent 自主性，但未给上线日期。",
-                "en": "Ars: follows the Muse Mac messages dispute; Apple names agent autonomy and gives no ship date.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/",
-              "title": "Apple says it's tightening macOS Full Disk Access controls due to new risks from AI agents",
-              "brief": {
-                "zh": "TC 同日：桌面 agent 靠 FDA 扩大本地数据面；对照 PixelLeak 的出站泄密是另一轴。",
-                "en": "Same-day TC: desktop agents use FDA to widen local data access; a different axis from PixelLeak egress.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "apple",
-            "ars",
-            "techcrunch",
-            "lobsters"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://developer.apple.com/news/?id=p6zjojqw",
-            "https://arstechnica.com/security/2026/10/apple-changes-full-disk-access-permissions-to-curb-abuse-from-ai-agents/",
-            "https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/",
-            "https://forgeeks.net/apple-agent-consent-not-least-privilege/"
-          ]
         }
       ]
     },
@@ -4510,68 +4518,6 @@
             "zh": "/cn/blog/llm-agents-tamper-own-traces-append-only-audit/",
             "en": "/blog/llm-agents-tamper-own-traces-append-only-audit/"
           }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-27T15:00:00+08:00",
-      "label": {
-        "zh": "9月27日 15:00",
-        "en": "Sep 27 15:00",
-        "ja": "9月27日 15:00"
-      },
-      "items": [
-        {
-          "id": "t266",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Self-replicating prompt injections：可经邮件/文件/注释传播",
-            "en": "Self-replicating prompt injections",
-            "ja": "Self-replicating prompt injections"
-          },
-          "summary": {
-            "zh": "OpenAI Alignment 披露可经输出信道自我复制的注入类；传播本身成独立 agent 安全威胁——对照 DNS 逃逸属另一 containment 面",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "OpenAI Alignment 披露可经输出信道自我复制的注入类；传播本身成独立 agent 安全威胁——对照 DNS 逃逸属另一 containment 面",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "openai-alignment",
-              "url": "https://alignment.openai.com/misalignment-reports/self-replicating-prompt-injections-exist/",
-              "title": "Self-replicating prompt injections exist",
-              "brief": {
-                "zh": "「深耕候选：containment / prompt-injection」模拟 GPT-Red 攻击诱导 agent 在邮件/文件/代码注释等公开输出信道复制注入并追求对抗目标；仿真外未观察实际危害，但把「传播」标成独立 agent 安全威胁类。",
-                "en": "OpenAI Alignment discloses a prompt-injection class that can propagate through email, files, or code comments while pursuing an adversarial goal. Simulated GPT-Red attacks induced agents to reproduce the injection on public output channels; no impact outside simulated tool calls was observed.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "devto",
-              "url": "https://dev.to/james_anderson_h/prompt-injection-is-the-new-sql-injection-and-were-not-ready-4ea4",
-              "title": "Prompt Injection Is the New SQL Injection (and We're Not Ready)",
-              "brief": {
-                "zh": "把间接 prompt injection 映射到 SQL 注入式的数据/命令混淆；主张最小权限、隔离与人工门禁，而非幻想完美提示层修复。",
-                "en": "Maps indirect prompt injection to SQL-injection-style data/command confusion and argues for least privilege, isolation, and human gates rather than a presumed perfect prompt-level fix.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "openai-alignment",
-            "devto"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://alignment.openai.com/misalignment-reports/self-replicating-prompt-injections-exist/",
-            "https://dev.to/james_anderson_h/prompt-injection-is-the-new-sql-injection-and-were-not-ready-4ea4"
-          ]
         }
       ]
     },
