@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05T09:50:25+08:00",
+  "updatedAt": "2026-10-05T15:53:17+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -15,11 +15,187 @@
     "coding-tools": 9,
     "agents-oss": 13,
     "security": 9,
-    "research": 50,
+    "research": 49,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-05T15:00:00+08:00",
+      "label": {
+        "zh": "10月5日 15:00",
+        "en": "Oct 5 15:00",
+        "ja": "10月5日 15:00"
+      },
+      "items": [
+        {
+          "id": "t559",
+          "theme": "research",
+          "title": {
+            "zh": "Compound AI 失效分类：150 起生产事故与韧性模式目录",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "复合 AI / agent 管线的失效常常出在组件边界：级联、静默退化、各部分都对但集体错。这篇从 150 起生产事故抽出 23 种模式和可测的韧性套路，适合当可靠性对照，不是又一个单点方法。Trends 贴题主词未过 gpts，故停在 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "复合 AI / agent 管线的失效常常出在组件边界：级联、静默退化、各部分都对但集体错。这篇从 150 起生产事故抽出 23 种模式和可测的韧性套路，适合当可靠性对照，不是又一个单点方法。Trends 贴题主词未过 gpts，故停在 inbox。",
+            "en": "Failures in compound AI and agent pipelines often sit at component boundaries: cascades, silent degradation, and collectively wrong behavior from locally correct parts. This paper turns 150 production incidents into 23 modes and measured resilience patterns. A reliability reference, not another single method. Topic-relevant Trends terms did not beat gpts, so it stays in the inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.02503",
+              "title": "Compound AI System Reliability: A Failure Taxonomy and Resilience Pattern Catalog from 150 Production Incidents",
+              "brief": {
+                "zh": "分析 150 份生产事故，给出检索/生成/工具/编排/集成五类共 23 种失效；断路器、质量门、隔离等模式有故障注入实测。",
+                "en": "Analyzes 150 production incidents into 23 failure modes across retrieval, generation, tools, orchestration, and integration, with fault-injection results for circuit breakers, quality gates, and isolation.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.02503"
+          ]
+        },
+        {
+          "id": "t561",
+          "theme": "research",
+          "title": {
+            "zh": "MLCommons Jailbreak Benchmark v1.0：行业向越狱评测管线",
+            "en": "MLCommons Jailbreak Benchmark v1.0",
+            "ja": "MLCommons Jailbreak Benchmark v1.0"
+          },
+          "summary": {
+            "zh": "MLCommons 给出端到端单轮文本越狱评测管线，并用 Resilience Gap 度量基线到对抗的安全落差。有望当行业参照，但贴题主词 Trends 未过 gpts，裸词 jailbreak 虽热不单独抬升，故停在 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "MLCommons 给出端到端单轮文本越狱评测管线，并用 Resilience Gap 度量基线到对抗的安全落差。有望当行业参照，但贴题主词 Trends 未过 gpts，裸词 jailbreak 虽热不单独抬升，故停在 inbox。",
+            "en": "MLCommons publishes an end-to-end single-turn text jailbreak pipeline and measures a Resilience Gap from baseline to adversarial conditions. It could become a reference axis, but topic-relevant Trends terms did not beat gpts, and the bare word jailbreak is not enough to shortlist, so this stays in the inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.02827",
+              "title": "MLCommons Jailbreak Benchmark v1.0",
+              "brief": {
+                "zh": "8 个开源系统、264 个种子提示、11 类危害；不安全回复从 11.08% 升到 18.65%，平均 Resilience Gap 7.57%。",
+                "en": "Eight open-weight systems, 264 seed prompts, and eleven hazard categories. Unsafe responses rose from 11.08% to 18.65%, for an average Resilience Gap of 7.57%.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.02827"
+          ]
+        },
+        {
+          "id": "t562",
+          "theme": "research",
+          "title": {
+            "zh": "Sentry：失败课按需送达，而不是整本写进上下文",
+            "en": "Sentry",
+            "ja": "Sentry"
+          },
+          "summary": {
+            "zh": "失败课是条件知识：整本写进上下文会误触发。Sentry 把 playbook 放在外部，只在检测到失败时取用、核验后再写入。这是测试时恢复层。产品名 Sentry 的搜索热度与 Sentry.io 易混，贴题主词未过 gpts，不升短名单。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "失败课是条件知识：整本写进上下文会误触发。Sentry 把 playbook 放在外部，只在检测到失败时取用、核验后再写入。这是测试时恢复层。产品名 Sentry 的搜索热度与 Sentry.io 易混，贴题主词未过 gpts，不升短名单。",
+            "en": "Failure lessons are conditional: leaving them in context misfires when the failure is absent. Sentry keeps an external playbook, retrieves only on detected failure, verifies recovery, and stores a lesson only if it worked. A test-time recovery layer. Product-name Trends for Sentry are ambiguous with Sentry.io, and topic-relevant terms did not beat gpts, so this is not shortlisted.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.02994",
+              "title": "Sentry: Learning to Recover from LLM Agent Failures at Test Time",
+              "brief": {
+                "zh": "相对最强运行时干预基线均值约 +37%，相对上下文演化基线约 +39%；完整 playbook 永不进入 agent 上下文。",
+                "en": "Beats the strongest runtime-intervention baseline by about 37% on average and the strongest context-evolution baseline by about 39%. The full playbook never enters the agent context.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.02994"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-05T10:00:00+08:00",
+      "label": {
+        "zh": "10月5日 10:00",
+        "en": "Oct 5 10:00",
+        "ja": "10月5日 10:00"
+      },
+      "items": [
+        {
+          "id": "t421",
+          "theme": "research",
+          "title": {
+            "zh": "AdaLCPI：残片拼合间接提示注入",
+            "en": "AdaLCPI",
+            "ja": "AdaLCPI"
+          },
+          "summary": {
+            "zh": "间接注入不必整段落盘：残片散落长上下文由更强 agent 自行拼合；AdaLCPI macro ASR 61.4%——长上下文能力提升反而扩大攻击面，安全评测须测「拼合残片」设定。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "间接注入不必整段落盘：残片散落长上下文由更强 agent 自行拼合；AdaLCPI macro ASR 61.4%——长上下文能力提升反而扩大攻击面，安全评测须测「拼合残片」设定。",
+            "en": "Indirect prompt injection need not land as a whole paragraph: incomplete fragments scattered across a long context can be reconstructed by a capable agent. AdaLCPI reaches 61.4% macro ASR, so safety evals should test fragment-reconstruction settings.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.36576",
+              "title": "Divide and Inject: Can Agents Reconstruct an Indirect Prompt Injection from Fragments?",
+              "brief": {
+                "zh": "AdaLCPI 把攻击目标拆成残片嵌入工具检索内容，再用重构提示与 OpenEvolve 反馈迭代；相对 Trojan Hippo/AgentVigil 基线 ASR 约翻倍。",
+                "en": "AdaLCPI splits an attack objective into incomplete fragments in tool-retrieved content, then iteratively refines fragments and a reconstruction cue with OpenEvolve feedback, roughly doubling ASR versus Trojan Hippo-style and AgentVigil baselines.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "writing",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.36576"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-04T16:00:00+08:00",
       "label": {
@@ -2172,45 +2348,6 @@
           ]
         },
         {
-          "id": "t421",
-          "theme": "research",
-          "title": {
-            "zh": "AdaLCPI：残片拼合间接提示注入",
-            "en": "AdaLCPI",
-            "ja": "AdaLCPI"
-          },
-          "summary": {
-            "zh": "间接注入不必整段落盘：残片散落长上下文由更强 agent 自行拼合；AdaLCPI macro ASR 61.4%——长上下文能力提升反而扩大攻击面，安全评测须测「拼合残片」设定。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "间接注入不必整段落盘：残片散落长上下文由更强 agent 自行拼合；AdaLCPI macro ASR 61.4%——长上下文能力提升反而扩大攻击面，安全评测须测「拼合残片」设定。",
-            "en": "Indirect prompt injection need not land as a whole paragraph: incomplete fragments scattered across a long context can be reconstructed by a capable agent. AdaLCPI reaches 61.4% macro ASR, so safety evals should test fragment-reconstruction settings.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.36576",
-              "title": "Divide and Inject: Can Agents Reconstruct an Indirect Prompt Injection from Fragments?",
-              "brief": {
-                "zh": "AdaLCPI 把攻击目标拆成残片嵌入工具检索内容，再用重构提示与 OpenEvolve 反馈迭代；相对 Trojan Hippo/AgentVigil 基线 ASR 约翻倍。",
-                "en": "AdaLCPI splits an attack objective into incomplete fragments in tool-retrieved content, then iteratively refines fragments and a reconstruction cue with OpenEvolve feedback, roughly doubling ASR versus Trojan Hippo-style and AgentVigil baselines.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.36576"
-          ]
-        },
-        {
           "id": "t423",
           "theme": "research",
           "title": {
@@ -3685,172 +3822,6 @@
             "zh": "/cn/blog/coding-agents-cost-inefficient-behaviors/",
             "en": "/blog/coding-agents-cost-inefficient-behaviors/"
           }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-28T15:00:00+08:00",
-      "label": {
-        "zh": "9月28日 15:00",
-        "en": "Sep 28 15:00",
-        "ja": "9月28日 15:00"
-      },
-      "items": [
-        {
-          "id": "t298",
-          "theme": "research",
-          "title": {
-            "zh": "MoMHa：准确率·安全·token 三目标联合优化 LLM harness",
-            "en": "MoMHa",
-            "ja": "MoMHa"
-          },
-          "summary": {
-            "zh": "Harness 一等设计面：Meta-Harness 多智能体提案在 accuracy/safety/tokens 上联合搜索——非再堆 RSI 口号",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Harness 一等设计面：Meta-Harness 多智能体提案在 accuracy/safety/tokens 上联合搜索——非再堆 RSI 口号",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30967",
-              "title": "MoMHa: Multi-Objective Optimization of LLM Harnesses over Accuracy, Safety, and Tokens",
-              "brief": {
-                "zh": "「深耕：harness」MoMHa 单阶段联合奖励 proposer 在准确率·行为安全·token 三目标上胜过两阶段与准确率-only；17 域×12 模型交叉迁移。",
-                "en": "MoMHa treats the harness as a multi-objective design surface and shows a single-phase joint-reward proposer beats two-phase and accuracy-only baselines across 17 domains and 12 models.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30967"
-          ]
-        },
-        {
-          "id": "t300",
-          "theme": "research",
-          "title": {
-            "zh": "SkillEvoReg：正则化 skill 演化防过拟合",
-            "en": "SkillEvoReg",
-            "ja": "SkillEvoReg"
-          },
-          "summary": {
-            "zh": "Skill 演化本身会过拟合：dropout+复杂度局部正则+因果反例验证——相对 RRSI harness 层的 skill 层新刃",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Skill 演化本身会过拟合：dropout+复杂度局部正则+因果反例验证——相对 RRSI harness 层的 skill 层新刃",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30861",
-              "title": "SkillEvoReg: Regularizing Agent Skill Evolution Against Overfitting",
-              "brief": {
-                "zh": "「深耕：skills」SkillEvoReg 把 skill 更新当学习过程正则化：skill dropout、复杂度局部正则、因果反例验证（CCV），抑制状态膨胀与回退。",
-                "en": "SkillEvoReg regularizes skill evolution with skill dropout, complexity-aware local regularization, and causal counterexample validation to curb skill-state bloat and regressions.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30861"
-          ]
-        },
-        {
-          "id": "t301",
-          "theme": "research",
-          "title": {
-            "zh": "Abstraction Ladder：代码技能抽象梯（语义 skill vs 原语）",
-            "en": "Abstraction Ladder",
-            "ja": "Abstraction Ladder"
-          },
-          "summary": {
-            "zh": "代码技能抽象梯：语义 skill 近 3× 推进并降推理成本~86%，混合原语保留回退——skills×harness 组合权衡",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "代码技能抽象梯：语义 skill 近 3× 推进并降推理成本~86%，混合原语保留回退——skills×harness 组合权衡",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.31076",
-              "title": "Up and Down the Abstraction Ladder: Code-Based Skills for Language Agents",
-              "brief": {
-                "zh": "「深耕：skills」系统研究代码技能抽象梯：语义 skill 可近 3× 推进 NetHack 并降推理成本约 86%；skill+primitives 混合保留回退。",
-                "en": "Studies code-based skill abstraction ladders: semantic skills can nearly 3× progress and cut reasoning cost ~86% on NetHack, while mixing primitives keeps a fallback path.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.31076"
-          ]
-        },
-        {
-          "id": "t302",
-          "theme": "research",
-          "title": {
-            "zh": "Anchored Context Distillation：压观测保动作（SE agents）",
-            "en": "Anchored Context Distillation",
-            "ja": "Anchored Context Distillation"
-          },
-          "summary": {
-            "zh": "SE agent 工具观测主导上下文：LOHA+锚定蒸馏压缩观测、保留文本动作——可行动作保真 vs 笼统 compaction",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "SE agent 工具观测主导上下文：LOHA+锚定蒸馏压缩观测、保留文本动作——可行动作保真 vs 笼统 compaction",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.31430",
-              "title": "Compress What You See, Not What You Say: Anchored Context Distillation for Latent-Observation Software Engineering Agents",
-              "brief": {
-                "zh": "「深耕：coding-agent context」LOHA 布局 + Anchored Context Distillation：压缩观测历史、保留文本动作，避免软 token 适配破坏原行为。",
-                "en": "Anchored Context Distillation with LOHA compresses observation history while keeping textual actions, avoiding soft-token adaptation that breaks action fidelity in SE agents.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.31430"
-          ]
         }
       ]
     },
