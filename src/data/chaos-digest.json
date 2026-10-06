@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05T15:53:17+08:00",
+  "updatedAt": "2026-10-06T09:49:01+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,334 @@
   ],
   "themeCounts": {
     "models": 13,
-    "coding-tools": 9,
-    "agents-oss": 13,
-    "security": 9,
+    "coding-tools": 11,
+    "agents-oss": 14,
+    "security": 10,
     "research": 49,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-06T09:00:00+08:00",
+      "label": {
+        "zh": "10月6日 09:00",
+        "en": "Oct 6 09:00",
+        "ja": "10月6日 09:00"
+      },
+      "items": [
+        {
+          "id": "t569",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Reflection Beam：501B/23B 美国开源权重（coding/agentic MoE）",
+            "en": "Reflection Beam",
+            "ja": "Reflection Beam"
+          },
+          "summary": {
+            "zh": "Reflection 放出美国开源阵营旗舰 Beam：501B/23B MoE，主打 coding 与 agentic，对照 DeepSeek/Qwen/GLM。权重和技术报告还没放，先写发布与定位。贴题 Trends 相对 gpts 未过两窗口，故停在 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Reflection 放出美国开源阵营旗舰 Beam：501B/23B MoE，主打 coding 与 agentic，对照 DeepSeek/Qwen/GLM。权重和技术报告还没放，先写发布与定位。贴题 Trends 相对 gpts 未过两窗口，故停在 inbox。",
+            "en": "Reflection launches Beam, a US open-weight MoE (501B total, 23B active) aimed at coding and agentic work against DeepSeek, Qwen, and GLM. Weights and the tech report are still pending, so the piece is the launch and positioning. Topic-relevant Trends terms did not beat gpts in both windows, so this stays in the inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "reflection",
+              "url": "https://reflection.ai/blog/introducing-beam",
+              "title": "Introducing Beam",
+              "brief": {
+                "zh": "官方：稀疏 MoE；预训练 23.8T tokens；RL 在 10.5K GB300 跑 4 周；宣称 coding/agentic 近 GLM 5.2 / Qwen 3.8-Max，推理算力更省；可申请早期访问，权重本月晚些时候放出。",
+                "en": "Official: sparse MoE; 23.8T pretraining tokens; RL for four weeks on 10.5K GB300s; claims coding/agentic parity near GLM 5.2 / Qwen 3.8-Max with less inference compute; early access now, weights later this month.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://news.ycombinator.com/item?id=49969183",
+              "title": "Beam on HN",
+              "brief": {
+                "zh": "HN 304/79。昨日 r/LocalLLaMA 仅传闻，现已发。",
+                "en": "HN 304/79. Yesterday's LocalLLaMA rumor is now a real launch.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "reflection",
+            "hn",
+            "techcrunch"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://reflection.ai/blog/introducing-beam",
+            "https://news.ycombinator.com/item?id=49969183"
+          ]
+        },
+        {
+          "id": "t570",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Cowork：推理与 VM 都迁到按会话隔离的云 sandbox",
+            "en": "Cowork",
+            "ja": "Cowork"
+          },
+          "summary": {
+            "zh": "Cowork 把工具执行从本机 VM 改成云端按会话隔离的 sandbox，本机文件改由桌面代理。这是 sandbox 产品架构换挡，不是又一个插件。Trends 主词 Claude Cowork 两窗口都高于 gpts，升短名单。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Cowork 把工具执行从本机 VM 改成云端按会话隔离的 sandbox，本机文件改由桌面代理。这是 sandbox 产品架构换挡，不是又一个插件。Trends 主词 Claude Cowork 两窗口都高于 gpts，升短名单。",
+            "en": "Cowork moves tool execution from a local VM into a per-session cloud sandbox, with desktop-app proxying for local files. A sandbox product-architecture shift, not another plugin. Trends for Claude Cowork beat gpts in both windows, so this is shortlisted.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "simonw",
+              "url": "https://simonwillison.net/2026/Oct/5/felix-rieseberg/",
+              "title": "Cowork moves inference and the VM to the cloud",
+              "brief": {
+                "zh": "Simon 引 Felix：旧版云推理+本机 VM；新版推理与 VM 都在云端，会话互不共享状态。",
+                "en": "Simon quoting Felix: old Cowork ran tools in a local VM; the new design moves inference and the VM to the cloud with no shared session state.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "anthropic",
+              "url": "https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile",
+              "title": "Use Claude Cowork on web, desktop, and mobile",
+              "brief": {
+                "zh": "帮助中心：2026-10-06 起 Pro/Max 新建 Cowork 任务默认云端，「Only on your computer」移除。",
+                "en": "Help Center: from 2026-10-06, new Pro/Max Cowork tasks run in the cloud and the on-your-computer option is removed.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "simonw",
+            "anthropic"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://simonwillison.net/2026/Oct/5/felix-rieseberg/",
+            "https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile"
+          ]
+        },
+        {
+          "id": "t571",
+          "theme": "security",
+          "title": {
+            "zh": "MCP protocol pivoting：跨 agent 委派链把恶意指令传到下游",
+            "en": "MCP protocol pivoting",
+            "ja": "MCP protocol pivoting"
+          },
+          "summary": {
+            "zh": "多 agent 委派链上的隐式互信，让注入可以从专用 agent 经 MCP/A2A 传到下游，并拿到托管凭证做 SSRF。这是协议层边界，不是单工具补丁。Trends 未过，停 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多 agent 委派链上的隐式互信，让注入可以从专用 agent 经 MCP/A2A 传到下游，并拿到托管凭证做 SSRF。这是协议层边界，不是单工具补丁。Trends 未过，停 inbox。",
+            "en": "Implicit trust along multi-agent delegation lets an injected specialist reach downstream agents over MCP/A2A and abuse hosted credentials for SSRF. A protocol-boundary issue, not a one-tool patch. Trends did not pass, so this stays in the inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "ars",
+              "url": "https://arstechnica.com/security/2026/10/vulnerability-in-agents-from-google-and-others-exposes-structural-flaw-in-mcp/",
+              "title": "MCP protocol pivoting",
+              "brief": {
+                "zh": "Ars：Google mcp-toolbox 等修复；Rapid7 CVE-2026-97228；过去五个月多家机构承认同类问题。",
+                "en": "Ars: Google mcp-toolbox and others patched; Rapid7 CVE-2026-97228; several orgs acknowledged related issues in five months.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "ars",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arstechnica.com/security/2026/10/vulnerability-in-agents-from-google-and-others-exposes-structural-flaw-in-mcp/"
+          ]
+        },
+        {
+          "id": "t573",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Wikimedia：OpenAI「rogue」agents 在维基项目上的未批准编辑与爬取",
+            "en": "Wikimedia",
+            "ja": "Wikimedia"
+          },
+          "summary": {
+            "zh": "Wikimedia 量化披露疑似 OpenAI agents 的未批准编辑与大规模爬取。这是开放平台视角的出网与授权问题，不是 lab 自己报的逃逸故事。Trends 未过，停 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Wikimedia 量化披露疑似 OpenAI agents 的未批准编辑与大规模爬取。这是开放平台视角的出网与授权问题，不是 lab 自己报的逃逸故事。Trends 未过，停 inbox。",
+            "en": "Wikimedia quantifies unapproved edits and large-scale crawling attributed to OpenAI agents. An open-platform view of egress and authorization, not a lab self-report. Trends did not pass, so this stays in the inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "wikimedia",
+              "url": "https://wikimediafoundation.org/news/2026/10/05/openai-rogue-agent-activities-found-on-wikimedia-projects/",
+              "title": "OpenAI rogue agent activities on Wikimedia",
+              "brief": {
+                "zh": "WMF：sandbox 编辑、引用工具配置改动、数百万 API/页请求与 WDQS 负载；公开了编辑 CSV。",
+                "en": "WMF: sandbox edits, citation-tool config changes, millions of API and page requests plus WDQS load; edit CSVs published.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "wikimedia",
+            "verge"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://wikimediafoundation.org/news/2026/10/05/openai-rogue-agent-activities-found-on-wikimedia-projects/"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-05T16:00:00+08:00",
+      "label": {
+        "zh": "10月5日 16:00",
+        "en": "Oct 5 16:00",
+        "ja": "10月5日 16:00"
+      },
+      "items": [
+        {
+          "id": "t424",
+          "theme": "models",
+          "title": {
+            "zh": "Gemini 4 Argon：1M 输出 + Fairwind 网络优先放行",
+            "en": "Gemini 4 Argon",
+            "ja": "Gemini 4 Argon"
+          },
+          "summary": {
+            "zh": "Google 一级源新前沿：1M 输出 token、DeepSWE 77.9%，先经 Fairwind 放给可信网络防御者（去网络护栏）——coding-agent/sandbox 选型对照 Astra/Sol/Opus 的新锚，且显式分阶段安全放行。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Google 一级源新前沿：1M 输出 token、DeepSWE 77.9%，先经 Fairwind 放给可信网络防御者（去网络护栏）——coding-agent/sandbox 选型对照 Astra/Sol/Opus 的新锚，且显式分阶段安全放行。",
+            "en": "Google’s frontier Gemini 4 Argon claims 1M output tokens and 77.9% DeepSWE, rolling out first via Fairwind to trusted cyber defenders without cyber guardrails. It resets coding-agent and sandbox baselines versus Astra/Sol/Opus with an explicit phased-safety release.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "google",
+              "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+              "title": "Gemini 4 Argon",
+              "brief": {
+                "zh": "DeepMind 宣布 Gemini 4 Argon：长程软件工程/知识工作/网络防御，输出上下文 64K→1M；Fairwind 优先放行后再开 API/Ultra。",
+                "en": "DeepMind announces Gemini 4 Argon for long-horizon SWE, knowledge work, and cyber defense, with output context jumping 64K→1M. Fairwind trusted defenders get first access before broader API/Ultra.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "google"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"
+          ]
+        },
+        {
+          "id": "t452",
+          "theme": "research",
+          "title": {
+            "zh": "Stale binding：上下文已更新仍读旧值（CICM）",
+            "en": "Stale binding",
+            "ja": "Stale binding"
+          },
+          "summary": {
+            "zh": "上下文里新旧值并存时 frontier 仍可能绑定旧状态（stale binding）；开源模型探针能找回新值→失败在选择而非记忆。可靠 harness 必须强制「用上」更新，不只是写进上下文。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "上下文里新旧值并存时 frontier 仍可能绑定旧状态（stale binding）；开源模型探针能找回新值→失败在选择而非记忆。可靠 harness 必须强制「用上」更新，不只是写进上下文。",
+            "en": "When old and new values coexist in context, frontier models can still bind the stale one. Probes recovering the update show a selection failure, not pure forgetting—reliable harnesses must force use of updates, not merely store them.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.38866",
+              "title": "When Context Changes: Understanding Update Failures in LLMs",
+              "brief": {
+                "zh": "CICM 可控基准测对话/agent 日志中的状态更新；注意力漂移使多个旧值合计压过当前值；无重训的注意力重定向可纠正多数旧值错误。",
+                "en": "CICM stress-tests state updates in dialogues and agent logs. Attention drift lets several old values outvote the current one; training-free attention redirection fixes most old-value errors while preserving initially correct answers.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.38866"
+          ]
+        },
+        {
+          "id": "t421",
+          "theme": "research",
+          "title": {
+            "zh": "AdaLCPI：残片拼合间接提示注入",
+            "en": "AdaLCPI",
+            "ja": "AdaLCPI"
+          },
+          "summary": {
+            "zh": "间接注入不必整段落盘：残片散落长上下文由更强 agent 自行拼合；AdaLCPI macro ASR 61.4%——长上下文能力提升反而扩大攻击面，安全评测须测「拼合残片」设定。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "间接注入不必整段落盘：残片散落长上下文由更强 agent 自行拼合；AdaLCPI macro ASR 61.4%——长上下文能力提升反而扩大攻击面，安全评测须测「拼合残片」设定。",
+            "en": "Indirect prompt injection need not land as a whole paragraph: incomplete fragments scattered across a long context can be reconstructed by a capable agent. AdaLCPI reaches 61.4% macro ASR, so safety evals should test fragment-reconstruction settings.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.36576",
+              "title": "Divide and Inject: Can Agents Reconstruct an Indirect Prompt Injection from Fragments?",
+              "brief": {
+                "zh": "AdaLCPI 把攻击目标拆成残片嵌入工具检索内容，再用重构提示与 OpenEvolve 反馈迭代；相对 Trojan Hippo/AgentVigil 基线 ASR 约翻倍。",
+                "en": "AdaLCPI splits an attack objective into incomplete fragments in tool-retrieved content, then iteratively refines fragments and a reconstruction cue with OpenEvolve feedback, roughly doubling ASR versus Trojan Hippo-style and AgentVigil baselines.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "shortlisted",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.36576"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-05T15:00:00+08:00",
       "label": {
@@ -143,55 +463,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://arxiv.org/abs/2610.02994"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-05T10:00:00+08:00",
-      "label": {
-        "zh": "10月5日 10:00",
-        "en": "Oct 5 10:00",
-        "ja": "10月5日 10:00"
-      },
-      "items": [
-        {
-          "id": "t421",
-          "theme": "research",
-          "title": {
-            "zh": "AdaLCPI：残片拼合间接提示注入",
-            "en": "AdaLCPI",
-            "ja": "AdaLCPI"
-          },
-          "summary": {
-            "zh": "间接注入不必整段落盘：残片散落长上下文由更强 agent 自行拼合；AdaLCPI macro ASR 61.4%——长上下文能力提升反而扩大攻击面，安全评测须测「拼合残片」设定。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "间接注入不必整段落盘：残片散落长上下文由更强 agent 自行拼合；AdaLCPI macro ASR 61.4%——长上下文能力提升反而扩大攻击面，安全评测须测「拼合残片」设定。",
-            "en": "Indirect prompt injection need not land as a whole paragraph: incomplete fragments scattered across a long context can be reconstructed by a capable agent. AdaLCPI reaches 61.4% macro ASR, so safety evals should test fragment-reconstruction settings.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.36576",
-              "title": "Divide and Inject: Can Agents Reconstruct an Indirect Prompt Injection from Fragments?",
-              "brief": {
-                "zh": "AdaLCPI 把攻击目标拆成残片嵌入工具检索内容，再用重构提示与 OpenEvolve 反馈迭代；相对 Trojan Hippo/AgentVigil 基线 ASR 约翻倍。",
-                "en": "AdaLCPI splits an attack objective into incomplete fragments in tool-retrieved content, then iteratively refines fragments and a reconstruction cue with OpenEvolve feedback, roughly doubling ASR versus Trojan Hippo-style and AgentVigil baselines.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "writing",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.36576"
           ]
         }
       ]
@@ -1690,45 +1961,6 @@
           ]
         },
         {
-          "id": "t452",
-          "theme": "research",
-          "title": {
-            "zh": "Stale binding：上下文已更新仍读旧值（CICM）",
-            "en": "Stale binding",
-            "ja": "Stale binding"
-          },
-          "summary": {
-            "zh": "上下文里新旧值并存时 frontier 仍可能绑定旧状态（stale binding）；开源模型探针能找回新值→失败在选择而非记忆。可靠 harness 必须强制「用上」更新，不只是写进上下文。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "上下文里新旧值并存时 frontier 仍可能绑定旧状态（stale binding）；开源模型探针能找回新值→失败在选择而非记忆。可靠 harness 必须强制「用上」更新，不只是写进上下文。",
-            "en": "When old and new values coexist in context, frontier models can still bind the stale one. Probes recovering the update show a selection failure, not pure forgetting—reliable harnesses must force use of updates, not merely store them.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.38866",
-              "title": "When Context Changes: Understanding Update Failures in LLMs",
-              "brief": {
-                "zh": "CICM 可控基准测对话/agent 日志中的状态更新；注意力漂移使多个旧值合计压过当前值；无重训的注意力重定向可纠正多数旧值错误。",
-                "en": "CICM stress-tests state updates in dialogues and agent logs. Attention drift lets several old values outvote the current one; training-free attention redirection fixes most old-value errors while preserving initially correct answers.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.38866"
-          ]
-        },
-        {
           "id": "t453",
           "theme": "research",
           "title": {
@@ -2055,45 +2287,6 @@
             "https://openai.com/index/devday-2026-recap/",
             "https://www.youtube.com/watch?v=7Bv68f5szSU",
             "https://techcrunch.com/2026/09/30/openais-jev-clone-could-help-the-frontier-lab-stop-its-swarming-agents/"
-          ]
-        },
-        {
-          "id": "t424",
-          "theme": "models",
-          "title": {
-            "zh": "Gemini 4 Argon：1M 输出 + Fairwind 网络优先放行",
-            "en": "Gemini 4 Argon",
-            "ja": "Gemini 4 Argon"
-          },
-          "summary": {
-            "zh": "Google 一级源新前沿：1M 输出 token、DeepSWE 77.9%，先经 Fairwind 放给可信网络防御者（去网络护栏）——coding-agent/sandbox 选型对照 Astra/Sol/Opus 的新锚，且显式分阶段安全放行。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Google 一级源新前沿：1M 输出 token、DeepSWE 77.9%，先经 Fairwind 放给可信网络防御者（去网络护栏）——coding-agent/sandbox 选型对照 Astra/Sol/Opus 的新锚，且显式分阶段安全放行。",
-            "en": "Google’s frontier Gemini 4 Argon claims 1M output tokens and 77.9% DeepSWE, rolling out first via Fairwind to trusted cyber defenders without cyber guardrails. It resets coding-agent and sandbox baselines versus Astra/Sol/Opus with an explicit phased-safety release.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "google",
-              "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
-              "title": "Gemini 4 Argon",
-              "brief": {
-                "zh": "DeepMind 宣布 Gemini 4 Argon：长程软件工程/知识工作/网络防御，输出上下文 64K→1M；Fairwind 优先放行后再开 API/Ultra。",
-                "en": "DeepMind announces Gemini 4 Argon for long-horizon SWE, knowledge work, and cyber defense, with output context jumping 64K→1M. Fairwind trusted defenders get first access before broader API/Ultra.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "google"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"
           ]
         },
         {
