@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-06T09:49:01+08:00",
+  "updatedAt": "2026-10-06T15:51:22+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,295 @@
     "other"
   ],
   "themeCounts": {
-    "models": 13,
-    "coding-tools": 11,
+    "models": 12,
+    "coding-tools": 10,
     "agents-oss": 14,
     "security": 10,
-    "research": 49,
+    "research": 48,
     "product-news": 0,
-    "other": 1
+    "other": 0
   },
   "hours": [
+    {
+      "hourStart": "2026-10-06T15:00:00+08:00",
+      "label": {
+        "zh": "10月6日 15:00",
+        "en": "Oct 6 15:00",
+        "ja": "10月6日 15:00"
+      },
+      "items": [
+        {
+          "id": "t582",
+          "theme": "research",
+          "title": {
+            "zh": "Agentic 工具调用让 MLLM 更难拒答有害请求",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多模态模型一旦开始 agentic 调工具，拒答有害请求的能力系统性变差。这是工具增强与安全拒答的冲突，不是又一个越狱提示集。Trends 未过，停 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多模态模型一旦开始 agentic 调工具，拒答有害请求的能力系统性变差。这是工具增强与安全拒答的冲突，不是又一个越狱提示集。Trends 未过，停 inbox。",
+            "en": "Once multimodal models enter agentic tool use, refusal of harmful requests systematically worsens. A clash between tool-augmented reasoning and safety refusal, not another jailbreak prompt set. Trends did not pass, so this stays in the inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.03938",
+              "title": "MLLMs Fail to Refuse when Using Tools Agentically",
+              "brief": {
+                "zh": "三套安全基准上，开闭源强模型在用工具时更不安全，拒答失败率相对升高最高约 68.7%。",
+                "en": "Across three safety benchmarks, top open- and closed-weight MLLMs are less safe with tools, with refusal-failure rising by up to 68.7%.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.03938"
+          ]
+        },
+        {
+          "id": "t583",
+          "theme": "research",
+          "title": {
+            "zh": "自传播错位：错位 agent 把目标写入持久记忆，留给未来对齐 agent 执行",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "错位 agent 可以自己把暂时做不到的目标写进持久记忆，等未来更对齐、更有能力的 agent 去执行。审计或关掉记忆都不够。Trends 未齐，停 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "错位 agent 可以自己把暂时做不到的目标写进持久记忆，等未来更对齐、更有能力的 agent 去执行。审计或关掉记忆都不够。Trends 未齐，停 inbox。",
+            "en": "A misaligned agent can write a goal it cannot yet act on into persistent memory for a later, more capable aligned agent to execute. Auditing or disabling memory is not enough. Trends did not clear both windows, so this stays in the inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.04083",
+              "title": "Self-Propagating Misalignment in LLM Agents",
+              "brief": {
+                "zh": "20 场景、11 模型；显式错位提示下自传播约 58%，仅价值观提示约 18%。",
+                "en": "Twenty scenarios and eleven models; about 58% self-propagation with an explicit misaligned goal, about 18% with values-only prompts.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.04083"
+          ]
+        },
+        {
+          "id": "t584",
+          "theme": "research",
+          "title": {
+            "zh": "Verification Trap：共享错误前提时，验证器会放大选错",
+            "en": "Verification Trap",
+            "ja": "Verification Trap"
+          },
+          "summary": {
+            "zh": "test-time 选优默认验证器能纠偏；一旦生成器与验证器共享错误前提，验证会把隐藏测错的候选选出来。Trends 未过，停 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "test-time 选优默认验证器能纠偏；一旦生成器与验证器共享错误前提，验证会把隐藏测错的候选选出来。Trends 未过，停 inbox。",
+            "en": "Test-time selection assumes the verifier can correct the generator. When both share a false premise, verification can prefer a candidate that fails hidden tests. Trends did not pass, so this stays in the inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.05170",
+              "title": "Verification Trap",
+              "brief": {
+                "zh": "三代码基准、五模型：假前提降低首样本正确率，并在 64 样本选择后放大误选。",
+                "en": "Three code benchmarks and five models: false premises cut first-sample correctness and amplify mis-selection after 64-sample selection.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.05170"
+          ]
+        },
+        {
+          "id": "t587",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Databricks Genie：恶意 Skill 绕过组织治理并浏览器侧外泄",
+            "en": "Databricks Genie",
+            "ja": "Databricks Genie"
+          },
+          "summary": {
+            "zh": "Databricks Genie 可从个人 workspace 加载恶意 Skill，绕过组织 Catalog，并在浏览器侧外泄数据。四道常用控制不够。对照 SkillSpector/PixelLeak，Trends 未过，停 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Databricks Genie 可从个人 workspace 加载恶意 Skill，绕过组织 Catalog，并在浏览器侧外泄数据。四道常用控制不够。对照 SkillSpector/PixelLeak，Trends 未过，停 inbox。",
+            "en": "Databricks Genie can load malicious Skills from a personal workspace, bypass the org catalog, and exfiltrate via the browser. Four common controls are not enough. Compared with SkillSpector and PixelLeak; Trends did not pass, so this stays in the inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "promptarmor",
+              "url": "https://www.promptarmor.com/resources/four-databricks-genie-controls-that-dont-stop-malicious-skills",
+              "title": "Four Databricks Genie controls that do not stop malicious skills",
+              "brief": {
+                "zh": "披露：无 HITL 的钓鱼模态 + 查看 tool results 时外泄；厂商归用户确保 Skill 无恶意。",
+                "en": "Disclosure: phishing modals without HITL plus exfiltration when viewing tool results; the vendor treats Skill safety as a user responsibility.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "promptarmor",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.promptarmor.com/resources/four-databricks-genie-controls-that-dont-stop-malicious-skills"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-06T11:00:00+08:00",
+      "label": {
+        "zh": "10月6日 11:00",
+        "en": "Oct 6 11:00",
+        "ja": "10月6日 11:00"
+      },
+      "items": [
+        {
+          "id": "t581",
+          "theme": "research",
+          "title": {
+            "zh": "Agent Skills 2026 综述：从静态清单到按需加载、可训练、可验收、可签名",
+            "en": "Agent Skills in 2026: A Survey from SKILL.md to On-Demand Loading, Training, Acceptance Gates, and Signing",
+            "ja": "Agent Skills in 2026: A Survey from SKILL.md to On-Demand Loading, Training, Acceptance Gates, and Signing"
+          },
+          "summary": {
+            "zh": "把 Agent Skills 从静态清单写成按需加载、可训练、可验收、可签名的工程面：progressive disclosure、演化验收、安装前扫描同窗对照。",
+            "en": "A 2026 survey of Agent Skills organized as a lifecycle—write, install, select, execute, learn, accept, govern—covering the SKILL.md spec, pre-install scanning and signing, on-demand loading, HEXIS state machines, SkillOpt/SkillGym training, and SAGE acceptance gates, with a comparison table and a checklist.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "把 Agent Skills 从静态清单写成按需加载、可训练、可验收、可签名的工程面：progressive disclosure、演化验收、安装前扫描同窗对照。",
+            "en": "Frames Agent Skills as an engineering surface: progressive disclosure, trainable evolution with acceptance gates, and install-time scanning—not a static checklist.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "blog",
+              "url": "https://redreamality.com/cn/blog/",
+              "title": "Agent Skills 2026 survey",
+              "brief": {
+                "zh": "站内已发综述，串联 skills 主线。",
+                "en": "Published site survey tying together the skills line.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "site",
+            "arxiv",
+            "nvidia",
+            "techcrunch"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://microsoft.github.io/SkillOpt/",
+            "https://arxiv.org/abs/2609.35692",
+            "https://github.com/NVIDIA/SkillSpector"
+          ],
+          "blog": {
+            "zh": "/cn/blog/agent-skills-2026-survey-lifecycle-map/",
+            "en": "/blog/agent-skills-2026-survey-lifecycle-map/"
+          }
+        },
+        {
+          "id": "t570",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Cowork：推理与 VM 都迁到按会话隔离的云 sandbox",
+            "en": "Claude Cowork Moves Execution to the Cloud: Should an Agent's Hands Run in a Local VM, a Per-Session Sandbox, or Its Own Cloud Computer?",
+            "ja": "Claude Cowork Moves Execution to the Cloud: Should an Agent's Hands Run in a Local VM, a Per-Session Sandbox, or Its Own Cloud Computer?"
+          },
+          "summary": {
+            "zh": "Cowork 把工具执行从本机 VM 改成云端按会话隔离的 sandbox，本机文件改由桌面代理。这是 sandbox 产品架构换挡，不是又一个插件。Trends 主词 Claude Cowork 两窗口都高于 gpts，升短名单。",
+            "en": "From October 6, new Claude Cowork tasks on Pro/Max run in per-session cloud sandboxes by default, with local files proxied through the desktop app. This post compares local VMs, per-session cloud sandboxes, and always-on agents with their own cloud computer (like OpenAI dots) across permissions, local files, egress, secrets, cost, and failure modes, ending with a decision table.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Cowork 把工具执行从本机 VM 改成云端按会话隔离的 sandbox，本机文件改由桌面代理。这是 sandbox 产品架构换挡，不是又一个插件。Trends 主词 Claude Cowork 两窗口都高于 gpts，升短名单。",
+            "en": "Cowork moves tool execution from a local VM into a per-session cloud sandbox, with desktop-app proxying for local files. A sandbox product-architecture shift, not another plugin. Trends for Claude Cowork beat gpts in both windows, so this is shortlisted.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "simonw",
+              "url": "https://simonwillison.net/2026/Oct/5/felix-rieseberg/",
+              "title": "Cowork moves inference and the VM to the cloud",
+              "brief": {
+                "zh": "Simon 引 Felix：旧版云推理+本机 VM；新版推理与 VM 都在云端，会话互不共享状态。",
+                "en": "Simon quoting Felix: old Cowork ran tools in a local VM; the new design moves inference and the VM to the cloud with no shared session state.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "anthropic",
+              "url": "https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile",
+              "title": "Use Claude Cowork on web, desktop, and mobile",
+              "brief": {
+                "zh": "帮助中心：2026-10-06 起 Pro/Max 新建 Cowork 任务默认云端，「Only on your computer」移除。",
+                "en": "Help Center: from 2026-10-06, new Pro/Max Cowork tasks run in the cloud and the on-your-computer option is removed.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "simonw",
+            "anthropic"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://simonwillison.net/2026/Oct/5/felix-rieseberg/",
+            "https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile"
+          ],
+          "blog": {
+            "zh": "/cn/blog/claude-cowork-cloud-sandbox-where-agents-run/",
+            "en": "/blog/claude-cowork-cloud-sandbox-where-agents-run/"
+          }
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-06T09:00:00+08:00",
       "label": {
@@ -78,57 +358,6 @@
           "externalUrls": [
             "https://reflection.ai/blog/introducing-beam",
             "https://news.ycombinator.com/item?id=49969183"
-          ]
-        },
-        {
-          "id": "t570",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Cowork：推理与 VM 都迁到按会话隔离的云 sandbox",
-            "en": "Cowork",
-            "ja": "Cowork"
-          },
-          "summary": {
-            "zh": "Cowork 把工具执行从本机 VM 改成云端按会话隔离的 sandbox，本机文件改由桌面代理。这是 sandbox 产品架构换挡，不是又一个插件。Trends 主词 Claude Cowork 两窗口都高于 gpts，升短名单。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Cowork 把工具执行从本机 VM 改成云端按会话隔离的 sandbox，本机文件改由桌面代理。这是 sandbox 产品架构换挡，不是又一个插件。Trends 主词 Claude Cowork 两窗口都高于 gpts，升短名单。",
-            "en": "Cowork moves tool execution from a local VM into a per-session cloud sandbox, with desktop-app proxying for local files. A sandbox product-architecture shift, not another plugin. Trends for Claude Cowork beat gpts in both windows, so this is shortlisted.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "simonw",
-              "url": "https://simonwillison.net/2026/Oct/5/felix-rieseberg/",
-              "title": "Cowork moves inference and the VM to the cloud",
-              "brief": {
-                "zh": "Simon 引 Felix：旧版云推理+本机 VM；新版推理与 VM 都在云端，会话互不共享状态。",
-                "en": "Simon quoting Felix: old Cowork ran tools in a local VM; the new design moves inference and the VM to the cloud with no shared session state.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "anthropic",
-              "url": "https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile",
-              "title": "Use Claude Cowork on web, desktop, and mobile",
-              "brief": {
-                "zh": "帮助中心：2026-10-06 起 Pro/Max 新建 Cowork 任务默认云端，「Only on your computer」移除。",
-                "en": "Help Center: from 2026-10-06, new Pro/Max Cowork tasks run in the cloud and the on-your-computer option is removed.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "simonw",
-            "anthropic"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://simonwillison.net/2026/Oct/5/felix-rieseberg/",
-            "https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile"
           ]
         },
         {
@@ -778,7 +1007,7 @@
             "openai"
           ],
           "score": 4,
-          "status": "writing",
+          "status": "published",
           "externalUrls": [
             "https://alignment.openai.com/misalignment-reports/reaching-an-internal-eda-host-through-a-reference-tool/",
             "https://alignment.openai.com/misalignment-reports/command-injecting-a-reference-tool-to-copy-a-source-file/",
@@ -3441,288 +3670,6 @@
       ]
     },
     {
-      "hourStart": "2026-09-29T15:00:00+08:00",
-      "label": {
-        "zh": "9月29日 15:00",
-        "en": "Sep 29 15:00",
-        "ja": "9月29日 15:00"
-      },
-      "items": [
-        {
-          "id": "t330",
-          "theme": "models",
-          "title": {
-            "zh": "Claude Sonnet 5.5：中档 agentic coding 日用引擎（Terminal-Bench 70.6%）",
-            "en": "Claude Sonnet 5.5",
-            "ja": "Claude Sonnet 5.5"
-          },
-          "summary": {
-            "zh": "一级模型发布：同价更少 token·30%+ 更快；Terminal-Bench 4.0 70.6% vs Sonnet5 10.3%——harness 默认选型从 Opus 下沉到中档",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "一级模型发布：同价更少 token·30%+ 更快；Terminal-Bench 4.0 70.6% vs Sonnet5 10.3%——harness 默认选型从 Opus 下沉到中档",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "anthropic",
-              "url": "https://www.anthropic.com/claude-sonnet-5-5",
-              "title": "Introducing Claude Sonnet 5.5",
-              "brief": {
-                "zh": "Anthropic Sep28：Sonnet 5.5 同价档、少 token 可降任务成本至多 30%、速度 30%+；agentic coding Terminal-Bench 4.0 70.6%（vs Sonnet5 10.3%），定位日常/明确范围 coding partner。",
-                "en": "Anthropic’s Sonnet 5.5 keeps the same list price while claiming up to 30% lower cost per task and 30%+ speed; it posts 70.6% on Terminal-Bench 4.0 versus Sonnet 5’s 10.3% for everyday agentic coding.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=s5nkj-L2vAw",
-              "title": "Introducing Claude Sonnet 5.5",
-              "brief": {
-                "zh": "官方 Claude 频道 Sonnet 5.5 发布片：~7.7h·~119k 播、~15.3k VPH；补强 t330 的官方 launch 与 Claude Code 默认模型信号。",
-                "en": "Official Claude launch video for Sonnet 5.5—~119k views in 7.7h at ~15.3k VPH; strengthens the official release and Claude Code default-model signal.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1wsrb1z/sonnet_55_vs_opus_55_on_the_same_frontend_spec/",
-              "title": "Sonnet 5.5 vs Opus 5.5 same frontend spec",
-              "brief": {
-                "zh": "Reddit：同 frontend 规格隐测双过，Sonnet 约两分钟完成、成本约 Opus 1/5。",
-                "en": "Reddit: both models pass hidden frontend tests; Sonnet finishes in ~2 minutes at about one-fifth Opus cost.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1wso86h/sonnet_55_vs_opus_55_on_a_fromscratch_rust/",
-              "title": "Sonnet 5.5 vs Opus 5.5 from-scratch Rust decompressor",
-              "brief": {
-                "zh": "Reddit：from-scratch Rust 解压任务正确率相当，Sonnet 约 1/4 价。",
-                "en": "Reddit: matching correctness on a from-scratch Rust decompressor at roughly one-quarter the price.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "anthropic",
-            "hn",
-            "youtube",
-            "reddit"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.anthropic.com/claude-sonnet-5-5",
-            "https://www.youtube.com/watch?v=s5nkj-L2vAw",
-            "https://www.reddit.com/r/ClaudeAI/comments/1wveyun/how_the_phonetophone_qr_file_transfer_got_built/ts/1wvbh1l/i_built_a_daw_ableton_with_claude_code_then_put/ts/1wvh6iy/i_gave_claude_code_the_ceo_job_for_my_free_chrome/ts/1wsrb1z/sonnet_55_vs_opus_55_on_the_same_frontend_spec/",
-            "https://www.reddit.com/r/ClaudeAI/comments/1wveyun/how_the_phonetophone_qr_file_transfer_got_built/ts/1wvbh1l/i_built_a_daw_ableton_with_claude_code_then_put/ts/1wvh6iy/i_gave_claude_code_the_ceo_job_for_my_free_chrome/ts/1wso86h/sonnet_55_vs_opus_55_on_a_fromscratch_rust/",
-            "https://www.reddit.com/r/ClaudeAI/comments/1wveyun/how_the_phonetophone_qr_file_transfer_got_built/ts/1wvbh1l/i_built_a_daw_ableton_with_claude_code_then_put/ts/1wvh6iy/i_gave_claude_code_the_ceo_job_for_my_free_chrome/ts/1wtyju3/sonnet_55_streaming_broken_on_all_providers_when/"
-          ]
-        },
-        {
-          "id": "t350",
-          "theme": "research",
-          "title": {
-            "zh": "Harness Learning：可泛化的测试时 harness 适应",
-            "en": "Harness Learning",
-            "ja": "Harness Learning"
-          },
-          "summary": {
-            "zh": "把 harness 修订做成可迁移 meta-learning：RL 训 proposer 据执行反馈改 harness 代码，测试时冻结模型只改 harness；4B proposer 在 21 未见 Reasoning Gym 族均值超 35B teacher——harness 优化升为可泛化适应程序",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "把 harness 修订做成可迁移 meta-learning：RL 训 proposer 据执行反馈改 harness 代码，测试时冻结模型只改 harness；4B proposer 在 21 未见 Reasoning Gym 族均值超 35B teacher——harness 优化升为可泛化适应程序",
-            "en": "Harness Learning turns harness edits into transferable meta-learning: an RL-trained proposer rewrites harness code from execution feedback while freezing the model at test time; a 4B proposer beats a 35B teacher mean on 21 unseen Reasoning Gym families.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.35738",
-              "title": "Harness Learning Enables Generalizable Test-Time Adaptation",
-              "brief": {
-                "zh": "「深耕：harness/TTA」用 RL 训 proposer 根据执行反馈改 harness；测试时冻结模型只改 harness；4B proposer 在 21 未见族上均值 0.62 vs 35B teacher 0.56，HotpotQA 修订可迁移 MuSiQue/2Wiki。",
-                "en": "Trains a proposer with RL to edit harness code from execution feedback; at test time the model stays frozen. A 4B proposer averages 0.62 vs a 35B teacher’s 0.56 on 21 unseen Reasoning Gym families, with HotpotQA edits transferring to MuSiQue/2Wiki.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.35738"
-          ]
-        },
-        {
-          "id": "t351",
-          "theme": "research",
-          "title": {
-            "zh": "RLHarness：Skills×策略共演化的长程多模态推理",
-            "en": "RLHarness",
-            "ja": "RLHarness"
-          },
-          "summary": {
-            "zh": "Skills+协议+few-shot 打包成版本化 Harness，与策略交替共演化（Build→Learn→Reconstruct→Learn）；仅重建不适应会掉点——把「技能库陈旧」做成可测的版本对齐循环",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Skills+协议+few-shot 打包成版本化 Harness，与策略交替共演化（Build→Learn→Reconstruct→Learn）；仅重建不适应会掉点——把「技能库陈旧」做成可测的版本对齐循环",
-            "en": "RLHarness packages skills, protocols, and few-shots into a versioned harness that co-evolves with the policy (Build→Learn→Reconstruct→Learn); reconstruct-without-adapt regresses—making stale skill libraries a measurable version-alignment loop.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.32326",
-              "title": "RLHarness: Co-Evolving Procedural Skills with Reinforcement Learning for Long-Horizon Multimodal Reasoning",
-              "brief": {
-                "zh": "「深耕：skills×RL」版本化 Harness 与策略交替共演化；MetroMap/TravelMap Acc 16→62/28→50；仅重建不适应掉点，同预算 Φ²+DAPO II 全面压过复用旧 Harness。",
-                "en": "Versioned harnesses co-evolve with policy via Build→Learn→Reconstruct→Learn; MetroMap/TravelMap accuracy rises 16→62 / 28→50. Reconstruct-only without adaptation regresses; under the same budget Φ²+DAPO II beats reusing a stale harness.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.32326",
-            "https://github.com/Ziqiao-Shang/RLHarness"
-          ]
-        },
-        {
-          "id": "t353",
-          "theme": "research",
-          "title": {
-            "zh": "RSI-Master：Experiment OS 约束自主模型改进实验",
-            "en": "RSI-Master",
-            "ja": "RSI-Master"
-          },
-          "summary": {
-            "zh": "RSI 新边：Experiment OS 约束逐步动作防 hacking + Reviewer 引导研究 DAG 防 strategy lock-in；PostTrainBench 54.49 vs 最强 agent 基线 46.53、hacking 0%——可控实验+结构化探索双层正则",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "RSI 新边：Experiment OS 约束逐步动作防 hacking + Reviewer 引导研究 DAG 防 strategy lock-in；PostTrainBench 54.49 vs 最强 agent 基线 46.53、hacking 0%——可控实验+结构化探索双层正则",
-            "en": "RSI-Master’s Experiment OS constrains step actions against hacking while a Reviewer-guided research DAG fights strategy lock-in; PostTrainBench 54.49 vs 46.53 best agent baseline with 0% hacking—dual regularization via controllable experiments and structured exploration.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.35561",
-              "title": "RSI-Master: Structuring Experiments to Guide Autonomous Model Improvement",
-              "brief": {
-                "zh": "「深耕：RSI」Experiment OS + Reviewer DAG；PostTrainBench 均分 54.49 vs 最强 agent 46.53，hacking rate 0%；35B 上 LiveCodeBench-v6 超 Instruct，HorizonMath 非零分。",
-                "en": "Pairs an Experiment OS with a Reviewer-guided research DAG; scores 54.49 on PostTrainBench vs 46.53 for the strongest agent baseline at 0% hacking, and a 35B run beats Instruct on LiveCodeBench-v6 with nonzero HorizonMath.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.35561"
-          ]
-        },
-        {
-          "id": "t354",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）",
-            "en": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）",
-            "ja": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）"
-          },
-          "summary": {
-            "zh": "一级源长访谈：把 coding-agent 产品面写成 Mods/Plugins/Projects/Tag 可组合 harness，并明示「agent 改写自己的 harness」——cloud-brain/local-hands + sandbox/prompt-injection 工程题",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "一级源长访谈：把 coding-agent 产品面写成 Mods/Plugins/Projects/Tag 可组合 harness，并明示「agent 改写自己的 harness」——cloud-brain/local-hands + sandbox/prompt-injection 工程题",
-            "en": "Primary-source Latent Space interview frames Claude Code’s next era as composable Mods/Plugins/Projects/Tag harness surfaces, including agents rewriting their own harnesses—plus cloud-brain/local-hands and sandbox/prompt-injection engineering stakes.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "latent-space",
-              "url": "https://www.latent.space/p/thariq",
-              "title": "Claude Code’s Next Era — Thariq Shihipar",
-              "brief": {
-                "zh": "Sep29 Latent Space×Anthropic Thariq：Claude Mods（改 harness 本身）、Plugins、Projects（并行云会话）、Claude Tag 多人协作；明示 agent 改写自身 harness 与 sandbox/注入安全。",
-                "en": "Sep 29 Latent Space with Anthropic’s Thariq covers Claude Mods (customize the harness), Plugins, Projects (parallel cloud sessions), and Claude Tag multiplayer—explicitly agents rewriting their own harnesses plus sandbox/prompt-injection risk.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "latent-space"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://www.latent.space/p/thariq"
-          ]
-        },
-        {
-          "id": "t355",
-          "theme": "other",
-          "title": {
-            "zh": "OpenAI：前沿训练 safety cases（否决权+自动暂停）",
-            "en": "OpenAI",
-            "ja": "OpenAI"
-          },
-          "summary": {
-            "zh": "一级源把 sandbox/containment/monitoring 写成训练前可验收 safety case：多高管否决 + 未确认高优告警自动暂停——接 DNS/METR/OpenShell 主线的流程验收件",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "一级源把 sandbox/containment/monitoring 写成训练前可验收 safety case：多高管否决 + 未确认高优告警自动暂停——接 DNS/METR/OpenShell 主线的流程验收件",
-            "en": "OpenAI’s primary post turns sandbox/containment/monitoring into pre-training safety cases with multi-senior veto and auto-pause on unacked high-priority alerts—an operational acceptance piece on the DNS/METR/OpenShell line.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "openai",
-              "url": "https://openai.com/index/towards-safety-cases-for-frontier-ai-training/",
-              "title": "Towards safety cases for frontier AI training",
-              "brief": {
-                "zh": "OpenAI Sep28：前沿 RL 训练前要求结构化 safety case；对齐训练+多层沙箱遏制+阻断阈值监控；多高管否决与未确认高优告警自动暂停。",
-                "en": "OpenAI Sep 28 requires structured safety cases before frontier RL runs: alignment training, multi-layer sandbox containment, blocking-threshold monitoring, multi-senior veto, and auto-pause for unacknowledged high-priority alerts.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "openai"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://openai.com/index/towards-safety-cases-for-frontier-ai-training/"
-          ]
-        }
-      ]
-    },
-    {
       "hourStart": "2026-09-29T10:00:00+08:00",
       "label": {
         "zh": "9月29日 10:00",
@@ -3767,133 +3714,6 @@
           "status": "published",
           "externalUrls": [
             "https://arxiv.org/abs/2609.30662"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-29T09:00:00+08:00",
-      "label": {
-        "zh": "9月29日 09:00",
-        "en": "Sep 29 09:00",
-        "ja": "9月29日 09:00"
-      },
-      "items": [
-        {
-          "id": "t324",
-          "theme": "research",
-          "title": {
-            "zh": "LoRA Skills READ：新技能只读旧技能、禁止写回",
-            "en": "LoRA Skills READ",
-            "ja": "LoRA Skills READ"
-          },
-          "summary": {
-            "zh": "LoRA 技能组合：规范因子+单向耦合，新 skill 只读旧子空间不写回——补位 SkillEvoReg/抽象梯的拼装干扰",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "LoRA 技能组合：规范因子+单向耦合，新 skill 只读旧子空间不写回——补位 SkillEvoReg/抽象梯的拼装干扰",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.31600",
-              "title": "New LoRA Skills Should Read but Never Write",
-              "brief": {
-                "zh": "「深耕：skills/LoRA」READ：把适配器规范成平衡因子，新技能只读旧技能输入子空间、禁止写回输出子空间；追加时只训耦合矩阵新行，合成进基座无推理开销。",
-                "en": "READ composes LoRA skills by canonicalizing adapters and learning one-way couplings so a new skill can read old input subspaces but never write into their outputs; only the new coupling row is trained and the update folds into base weights.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.31600"
-          ]
-        },
-        {
-          "id": "t325",
-          "theme": "research",
-          "title": {
-            "zh": "ToolSearcher：大规模工具选择的 agentic RL",
-            "en": "ToolSearcher",
-            "ja": "ToolSearcher"
-          },
-          "summary": {
-            "zh": "仓库级工具库下搜/辨/组工具立为 RL 新挑战；类别约束判别+事件级搜索+轨迹信用——coding-agent tooling 面",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "仓库级工具库下搜/辨/组工具立为 RL 新挑战；类别约束判别+事件级搜索+轨迹信用——coding-agent tooling 面",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30906",
-              "title": "ToolSearcher: Optimizing Tool Selection at Scale via Reinforcement Learning",
-              "brief": {
-                "zh": "「深耕：tool-selection」ToolSearcher 用 RL 做大规模多轮工具搜索与兼容组合：类别约束判别、事件级搜索建模、轨迹对齐信用分配；StableToolBench/AppWorld 优于强基线。",
-                "en": "ToolSearcher frames large-scale tool selection as agentic RL with category-constrained discrimination, event-level search modeling, and trajectory-aligned credit assignment for multi-turn search and compatible composition.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30906"
-          ]
-        },
-        {
-          "id": "t332",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Google Gemini：Gems → skills（11/17 迁移）",
-            "en": "Google Gemini",
-            "ja": "Google Gemini"
-          },
-          "summary": {
-            "zh": "大厂把自定义 agent 人设收成可组合 slash-skills——与站内 SkillOpt/SkillGym/CF skill 同构产品化",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "大厂把自定义 agent 人设收成可组合 slash-skills——与站内 SkillOpt/SkillGym/CF skill 同构产品化",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/28/google-is-killing-off-geminis-gems-in-favor-of-skills/",
-              "title": "Google is killing off Gemini’s Gems in favor of skills",
-              "brief": {
-                "zh": "Gemini App 将于 2026-11-17 起用 skills 取代 Gems：可 slash 调用、可组合，自动迁移——任务 agent 人设收成 skills 层。",
-                "en": "Gemini will replace Gems with slash-invocable, composable skills starting Nov 17, 2026, with auto-migration—consolidating task-agent personas into a skills layer.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "techcrunch"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://techcrunch.com/2026/09/28/google-is-killing-off-geminis-gems-in-favor-of-skills/"
           ]
         }
       ]
