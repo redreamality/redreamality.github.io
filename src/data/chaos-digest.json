@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-07T09:54:49+08:00",
+  "updatedAt": "2026-10-07T15:53:47+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,290 @@
     "other"
   ],
   "themeCounts": {
-    "models": 12,
-    "coding-tools": 11,
-    "agents-oss": 16,
+    "models": 13,
+    "coding-tools": 12,
+    "agents-oss": 17,
     "security": 8,
-    "research": 46,
+    "research": 48,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-07T15:00:00+08:00",
+      "label": {
+        "zh": "10月7日 15:00",
+        "en": "Oct 7 15:00",
+        "ja": "10月7日 15:00"
+      },
+      "items": [
+        {
+          "id": "t611",
+          "theme": "models",
+          "title": {
+            "zh": "Reika：面向小本地模型的 coding-agent CLI（上下文纪律+环路熔断+macOS sandbox）",
+            "en": "Reika",
+            "ja": "Reika"
+          },
+          "summary": {
+            "zh": "Reika 把本地小模型 coding-agent 写成可验收 harness（上下文/环路/沙箱/skills）。贴题 Trends 两窗口未过 gpts，停 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Reika 把本地小模型 coding-agent 写成可验收 harness（上下文/环路/沙箱/skills）。贴题 Trends 两窗口未过 gpts，停 inbox。",
+            "en": "Reika frames a local small-model coding-agent as an auditable harness (context/loop/sandbox/skills). Topic Trends failed both windows vs gpts—stays inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "producthunt",
+              "url": "https://www.producthunt.com/products/reika",
+              "title": "Reika on Product Hunt",
+              "brief": {
+                "zh": "下午 PH 新上；面向 8B–35B 本地窗的 coding-agent CLI。",
+                "en": "Afternoon PH launch; coding-agent CLI for 8B–35B local windows.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/alexwkleung/reika",
+              "title": "alexwkleung/reika",
+              "brief": {
+                "zh": "append-only 上下文、环路熔断、macOS sandbox、MCP+skills；docs/findings.md。",
+                "en": "Append-only context, loop breakers, macOS sandbox, MCP+skills; docs/findings.md.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "producthunt",
+            "github"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.producthunt.com/products/reika",
+            "https://github.com/alexwkleung/reika",
+            "https://reikacode.com"
+          ]
+        },
+        {
+          "id": "t612",
+          "theme": "research",
+          "title": {
+            "zh": "Trust Layer for Agent Evaluation：分数旁的四维可信事后审计",
+            "en": "Trust Layer for Agent Evaluation",
+            "ja": "Trust Layer for Agent Evaluation"
+          },
+          "summary": {
+            "zh": "Trust Layer 给 recorded score 加四维事后可信审计；ALE 仅 22.6% 过全关。Trends 未过，停 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Trust Layer 给 recorded score 加四维事后可信审计；ALE 仅 22.6% 过全关。Trends 未过，停 inbox。",
+            "en": "Trust Layer adds four post-hoc trust checks beside recorded scores; only 22.6% of ALE passes clear all. Trends failed—inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.07274",
+              "title": "A Trust Layer for Agent Evaluation",
+              "brief": {
+                "zh": "可复现/溯源/诚实/重复稳定性；能力榜≠可信度。",
+                "en": "Reproducibility, provenance, honesty, repeat stability—capability ≠ trustworthiness.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.07274"
+          ]
+        },
+        {
+          "id": "t613",
+          "theme": "research",
+          "title": {
+            "zh": "Evidence to Action：工具型 agent 如何在证据→行动链上失败（SafeActBench）",
+            "en": "Evidence to Action",
+            "ja": "Evidence to Action"
+          },
+          "summary": {
+            "zh": "Evidence→Action 失败学：调查不全或证据未立就动手；SafeActBench+Ledger。Trends 未过，停 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Evidence→Action 失败学：调查不全或证据未立就动手；SafeActBench+Ledger。Trends 未过，停 inbox。",
+            "en": "Evidence→action failure modes: incomplete investigation or acting before evidence; SafeActBench+Ledger. Trends failed—inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.07753",
+              "title": "From Evidence to Action: How Tool-Using Agents Fail",
+              "brief": {
+                "zh": "656 例 + provenance-bound Evidence Ledger。",
+                "en": "656 cases + provenance-bound Evidence Ledger.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.07753"
+          ]
+        },
+        {
+          "id": "t614",
+          "theme": "research",
+          "title": {
+            "zh": "Evaluate the Stack, Not the Layer：规则门+LLM 裁判是否独立失效？",
+            "en": "Evaluate the Stack, Not the Layer",
+            "ja": "Evaluate the Stack, Not the Layer"
+          },
+          "summary": {
+            "zh": "堆栈门禁相关失效：规则+裁判近独立，双裁判高度相关。Trends 未过，停 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "堆栈门禁相关失效：规则+裁判近独立，双裁判高度相关。Trends 未过，停 inbox。",
+            "en": "Stacked gates correlate: rule+judge near-independent, dual judges highly correlated. Trends failed—inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.07359",
+              "title": "Evaluate the Stack, Not the Layer",
+              "brief": {
+                "zh": "1119 labelled actions；solo 准确率不预测堆栈增益。",
+                "en": "1,119 labelled actions; solo accuracy does not predict stack gain.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.07359"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-07T11:00:00+08:00",
+      "label": {
+        "zh": "10月7日 11:00",
+        "en": "Oct 7 11:00",
+        "ja": "10月7日 11:00"
+      },
+      "items": [
+        {
+          "id": "t372",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "OpenAI Dots：常驻 agent + 自有云机（Astra）",
+            "en": "OpenAI Dots, Unpacked: Who Wakes an Always-On Agent and Who Pays",
+            "ja": "OpenAI Dots, Unpacked: Who Wakes an Always-On Agent and Who Pays"
+          },
+          "summary": {
+            "zh": "一级源把常驻 agent + 自有云机产品化——授权/插件/可检视电脑同窗",
+            "en": "OpenAI's dots are always-on agents with their own cloud computer that decide when to wake up. Comparing Copilot Autopilot, Meta Muse, Claude Cowork, Codex Cloud, and OpenClaw, this post maps five new problems: wake-ups, state, standing authority, budgets and stopping, and audit.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "一级源把常驻 agent + 自有云机产品化——授权/插件/可检视电脑同窗",
+            "en": "OpenAI Dots productizes always-on agents with their own cloud computers, plugins, and inspectable sessions—cloud-brain/local-hands plus an authorization surface.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "openai",
+              "url": "https://openai.com/index/introducing-dots/",
+              "title": "Introducing Dots",
+              "brief": {
+                "zh": "Dots：Astra 驱动的常驻个人/组织 agent，自带云机与浏览器，经 ChatGPT/Slack/Teams 可达，连 4k+ 应用。",
+                "en": "Dots are Astra-powered always-on personal/org agents with their own cloud computer and browser, reachable from ChatGPT/Slack/Teams and 4k+ apps via plugins.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "openai"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://openai.com/index/introducing-dots/"
+          ],
+          "blog": {
+            "zh": "/cn/blog/openai-dots-always-on-agent-engineering/",
+            "en": "/blog/openai-dots-always-on-agent-engineering/"
+          }
+        },
+        {
+          "id": "t354",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）",
+            "en": "Claude Code Extensions Mapped: CLAUDE.md to Mods, What to Add First",
+            "ja": "Claude Code Extensions Mapped: CLAUDE.md to Mods, What to Add First"
+          },
+          "summary": {
+            "zh": "一级源长访谈：把 coding-agent 产品面写成 Mods/Plugins/Projects/Tag 可组合 harness，并明示「agent 改写自己的 harness」——cloud-brain/local-hands + sandbox/prompt-injection 工程题",
+            "en": "How the Claude Code extension stack fits together in 2026, from CLAUDE.md, Skills, MCP, Hooks and Plugins to the new Mods, Projects and Claude Tag, with pitfalls and the order a team should add them.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "一级源长访谈：把 coding-agent 产品面写成 Mods/Plugins/Projects/Tag 可组合 harness，并明示「agent 改写自己的 harness」——cloud-brain/local-hands + sandbox/prompt-injection 工程题",
+            "en": "Primary-source Latent Space interview frames Claude Code’s next era as composable Mods/Plugins/Projects/Tag harness surfaces, including agents rewriting their own harnesses—plus cloud-brain/local-hands and sandbox/prompt-injection engineering stakes.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "latent-space",
+              "url": "https://www.latent.space/p/thariq",
+              "title": "Claude Code’s Next Era — Thariq Shihipar",
+              "brief": {
+                "zh": "Sep29 Latent Space×Anthropic Thariq：Claude Mods（改 harness 本身）、Plugins、Projects（并行云会话）、Claude Tag 多人协作；明示 agent 改写自身 harness 与 sandbox/注入安全。",
+                "en": "Sep 29 Latent Space with Anthropic’s Thariq covers Claude Mods (customize the harness), Plugins, Projects (parallel cloud sessions), and Claude Tag multiplayer—explicitly agents rewriting their own harnesses plus sandbox/prompt-injection risk.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "latent-space"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://www.latent.space/p/thariq"
+          ],
+          "blog": {
+            "zh": "/cn/blog/claude-code-extension-stack-mods-plugins/",
+            "en": "/blog/claude-code-extension-stack-mods-plugins/"
+          }
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-07T09:00:00+08:00",
       "label": {
@@ -3420,55 +3695,6 @@
             "zh": "/cn/blog/singed-correct-output-not-safe-execution/",
             "en": "/blog/singed-correct-output-not-safe-execution/"
           }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-30T15:00:00+08:00",
-      "label": {
-        "zh": "9月30日 15:00",
-        "en": "Sep 30 15:00",
-        "ja": "9月30日 15:00"
-      },
-      "items": [
-        {
-          "id": "t401",
-          "theme": "research",
-          "title": {
-            "zh": "SCOUT：推理+工具探针做 CUA 安全核验",
-            "en": "SCOUT",
-            "ja": "SCOUT"
-          },
-          "summary": {
-            "zh": "良性指令下计算机使用 agent 仍会造成意外伤害：先无工具生成任务级完成与安全 rubric，再让探针 agent 进入事后环境取证；测试时反思把不安全执行从 30.2% 降到 17.2%。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "良性指令下计算机使用 agent 仍会造成意外伤害：先无工具生成任务级完成与安全 rubric，再让探针 agent 进入事后环境取证；测试时反思把不安全执行从 30.2% 降到 17.2%。",
-            "en": "SCOUT checks computer-use safety under benign instructions: it first writes task-specific completion and safety rubrics without tools, then a probing agent gathers evidence in the post-execution environment. Test-time reflection cut unsafe execution from 30.2% to 17.2% on AutoElicit-Bench.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.36201",
-              "title": "SCOUT: Synergizing Reasoning and Tool-Use for Computer-Use Safety",
-              "brief": {
-                "zh": "SCOUT 是两阶段 CUA 安全核验：推理生成任务级 rubric，工具探针核对环境里实际发生了什么，而不只看截图。",
-                "en": "SCOUT is a two-stage computer-use safety verifier: reasoning writes task-specific rubrics, then a tool-using probe checks what actually changed in the environment instead of screenshots alone.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.36201"
-          ]
         }
       ]
     },
