@@ -468,36 +468,31 @@ export async function getLocalizedContent(
 }
 
 /**
- * Get hreflang alternate URLs for a page
+ * Get hreflang alternate URLs for a page.
+ *
+ * Pass `availableLanguages` (see `getAvailableLanguagesForPath` in
+ * `locale-availability.ts`) so alternates are only emitted for locales whose
+ * page is actually generated; omitting it keeps the legacy all-locales output.
  */
-export function getHreflangAlternates(currentPath: string, site: string): Array<{lang: string, url: string}> {
-  const alternates = [];
+export function getHreflangAlternates(
+  currentPath: string,
+  site: string,
+  availableLanguages: Language[] = i18nConfig.languages,
+): Array<{lang: Language, url: string}> {
+  return i18nConfig.languages
+    .filter((lang) => availableLanguages.includes(lang))
+    .map((lang) => ({
+      lang,
+      url: new URL(normalizeCanonicalPath(getLocalizedPath(currentPath, lang)), site).toString(),
+    }));
+}
 
-  // Add English version
-  const enPath = getLocalizedPath(currentPath, 'en');
-  const normalizedEnPath = normalizeCanonicalPath(enPath);
-  alternates.push({
-    lang: 'en',
-    url: new URL(normalizedEnPath, site).toString()
-  });
-
-  // Add Chinese version
-  const zhPath = getLocalizedPath(currentPath, 'zh');
-  const normalizedZhPath = normalizeCanonicalPath(zhPath);
-  alternates.push({
-    lang: 'zh',
-    url: new URL(normalizedZhPath, site).toString()
-  });
-
-  // Add Japanese version
-  const jaPath = getLocalizedPath(currentPath, 'ja');
-  const normalizedJaPath = normalizeCanonicalPath(jaPath);
-  alternates.push({
-    lang: 'ja',
-    url: new URL(normalizedJaPath, site).toString()
-  });
-
-  return alternates;
+/**
+ * x-default target: the default-language (en) alternate when it exists,
+ * otherwise the first existing alternate in configured language order.
+ */
+export function getXDefaultAlternate(alternates: Array<{lang: Language, url: string}>): string | undefined {
+  return (alternates.find((alt) => alt.lang === i18nConfig.defaultLanguage) ?? alternates[0])?.url;
 }
 
 /**

@@ -1,14 +1,23 @@
 ---
 import { detectLanguageFromPath, getAlternateLanguagePath, i18nConfig, t, type Language } from '../utils/i18n';
+import { getAvailableLanguagesForPath } from '../utils/locale-availability';
 
 interface Props {
   currentPath?: string;
   showAvailability?: boolean;
   instanceId?: string;
+  /** Locales whose version of this page exists; others are not rendered. */
+  availableLanguages?: Language[];
 }
 
-const { currentPath = Astro.url.pathname, showAvailability = false, instanceId = 'default' } = Astro.props;
+const { currentPath = Astro.url.pathname, showAvailability = false, instanceId = 'default', availableLanguages } = Astro.props;
 const currentLang = detectLanguageFromPath(currentPath);
+// Never link to a locale page that is not generated (dead link). Layout passes
+// the build-time availability; standalone usage resolves it here.
+const resolvedLanguages = availableLanguages ?? (await getAvailableLanguagesForPath(currentPath, currentLang));
+const visibleLanguages = i18nConfig.languages.filter(
+  (langOption) => langOption === currentLang || resolvedLanguages.includes(langOption),
+);
 
 const languageMeta: Record<Language, { label: string; emoji: string; checkingText: string }> = {
   en: { label: 'English', emoji: '🇺🇸', checkingText: 'Checking...' },
@@ -65,7 +74,7 @@ const availabilityIdMap: Record<Language, string> = {
       aria-labelledby={toggleBtnId}
     >
       <div class="py-1" role="none">
-        {i18nConfig.languages.map((langOption) => (
+        {visibleLanguages.map((langOption) => (
           <a
             href={langOption === currentLang ? currentPath : getAlternateLanguagePath(currentPath, langOption)}
             class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white"

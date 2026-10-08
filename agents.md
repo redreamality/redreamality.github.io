@@ -164,6 +164,13 @@ def my_function():
 External user-facing `http(s)` links go through a locale confirm page (`/go/?to=`, `/cn/go/?to=`, `/ja/go/?to=`). Helpers live in `src/utils/outbound.ts`. Markdown is rewritten by `src/plugins/rehype-outbound-links.ts` to `/go/?to=...`; `Layout.astro` prefixes `/cn` or `/ja` on locale pages. Astro components that know `lang` should call `toOutboundHref(href, lang)` directly. Do not send `mailto:`/`tel:` or same-site URLs through `/go`.
 
 
+### Language switcher & hreflang（三语可用性）
+
+语言切换器与 `<link rel="alternate" hreflang>` 只能指向**真实生成**的 locale 页面，禁止链到 404（例：中英已发、`blog-ja` 未补的博客不显示「日本語」，也不输出 `hreflang="ja"`）。
+- 真源：`src/utils/locale-availability.ts` 在构建期从各 `<type>-<locale>` 集合、`getTags(lang)`、Visual manifest 的 locale `artifact`、library notes 以及 `src/pages` 下的非动态页面推导可用语言；`Layout.astro` 统一传给 `LanguageToggle` 和 hreflang。x-default 优先 en，en 不存在时取第一个存在的 locale。
+- 不要按 slug 硬编码。新增带 locale 的详情路由时，在 `DETAIL_ROUTES` 里登记并从与其 `getStaticPaths` 相同的数据源取 slug；未登记的动态路由只显示当前语言（宁可隐藏，不链 404）。页面确需覆盖时可给 `Layout` 传 `availableLanguages`。
+- 验证：`pnpm build` 后运行 `pnpm check:locale-links`（扫描 `dist` 中所有切换链接与 hreflang，存在死链则退出码 1）。
+
 ### Markdown Heading Hierarchy
 - Use semantic heading structure: H2 → H3 → H4
 - Don't skip heading levels (e.g., don't jump from H2 to H4)

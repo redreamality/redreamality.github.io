@@ -34,6 +34,7 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
+    "check:locale-links": "node scripts/check-locale-links.mjs",
     "notes:sync": "node scripts/export-library-notes.mjs",
     "visual-kit": "uv run --no-project python -B tools/visual-explainer-kit/preview.py",
     "visual-kit:test": "uv run --no-project python -B tools/visual-explainer-kit/test_builder.py && uv run --no-project python -B tools/visual-explainer-kit/test_generate_demos.py",
