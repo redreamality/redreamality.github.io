@@ -98,6 +98,12 @@ const projectsHref = getLocalizedPath('/projects/', currentLang);
 const visualsHref = getLocalizedPath('/visuals/', currentLang);
 const aboutHref = getLocalizedPath('/about/', currentLang);
 const privacyHref = getLocalizedPath('/privacy/', currentLang);
+// Top-nav item classes. Below `lg` the items live in the collapsible mobile
+// menu; from `lg` up they sit inside a padded rounded pill. The pill's padding,
+// item padding and text size are defined together here so the background always
+// wraps its content (see the desktop `<ul>` below). `lg` (not `md`) because the
+// Japanese labels plus logo and toggles do not fit in one row at 768-1023px.
+const navItemClass = 'block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:py-1 lg:px-3.5 lg:text-sm lg:leading-5 lg:whitespace-nowrap lg:rounded-full lg:hover:bg-surface-100 lg:hover:text-blue-700 lg:dark:hover:bg-surface-800 lg:dark:hover:text-blue-400';
 const siteName = "Redreamality";
 const publisherLogoUrl = new URL("/assets/avatar.png", Astro.site).toString();
 ---
@@ -243,26 +249,26 @@ const publisherLogoUrl = new URL("/assets/avatar.png", Astro.site).toString();
                 <a href={homeHref} class="flex items-center space-x-3 rtl:space-x-reverse group">
                     <span class="self-center text-2xl font-display font-bold whitespace-nowrap text-surface-900 dark:text-white">Remy<span class="text-brand-500 group-hover:text-accent-400 transition-colors">.</span>Blog</span>
                 </a>
-                <div class="flex items-center gap-1 md:hidden">
+                <div class="flex items-center gap-1 lg:hidden">
                 <DarkModeToggle />
-                <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false" id="mobile-menu-button">
+                <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false" id="mobile-menu-button">
                     <span class="sr-only">Open main menu</span>
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
                     </svg>
                 </button>
                 </div>
-                <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                    <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                        <li><a href={homeHref} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{t('home', currentLang)}</a></li>
+                <div class="hidden w-full lg:block lg:w-auto" id="navbar-default">
+                    <ul class="font-medium flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700 lg:flex-row lg:items-center lg:gap-0.5 lg:p-1 lg:mt-0 lg:rounded-full lg:border-surface-200/80 lg:bg-white/70 lg:shadow-sm lg:dark:border-surface-800 lg:dark:bg-surface-900/70">
+                        <li><a href={homeHref} class={navItemClass}>{t('home', currentLang)}</a></li>
                         <li class="relative group">
-                            <button id="garden-menu-toggle" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent flex items-center w-full text-left">
+                            <button id="garden-menu-toggle" class:list={[navItemClass, 'flex items-center w-full text-left lg:w-auto']}>
                                 {t('garden', currentLang)}
-                                <svg class="w-2.5 h-2.5 ms-2.5 garden-chevron transition-transform duration-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <svg class="w-2.5 h-2.5 ms-2.5 lg:ms-1.5 garden-chevron transition-transform duration-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                                 </svg>
                             </button>
-                            <div id="garden-dropdown" class="nav-dropdown-mobile hidden absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg dark:bg-gray-800 z-50 md:hidden">
+                            <div id="garden-dropdown" class="nav-dropdown-mobile hidden mt-1 ms-3 w-48 bg-white rounded-md shadow-lg dark:bg-gray-800 lg:hidden">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                                     <li>
                                         <a href={blogHref} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('blog', currentLang)}</a>
@@ -284,7 +290,7 @@ const publisherLogoUrl = new URL("/assets/avatar.png", Astro.site).toString();
                                     </li>
                                 </ul>
                             </div>
-                            <div class="nav-dropdown-desktop absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg dark:bg-gray-800 z-50 hidden md:block">
+                            <div class="nav-dropdown-desktop absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg dark:bg-gray-800 z-50 hidden lg:block">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                                     <li>
                                         <a href={blogHref} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">{t('blog', currentLang)}</a>
@@ -307,15 +313,15 @@ const publisherLogoUrl = new URL("/assets/avatar.png", Astro.site).toString();
                                 </ul>
                             </div>
                         </li>
-                        <li><a href={visualsHref} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{t('visuals', currentLang)}</a></li>
-                        <li><a href={projectsHref} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{t('projects', currentLang)}</a></li>
-                        <li><a href={aboutHref} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{t('about', currentLang)}</a></li>
+                        <li><a href={visualsHref} class={navItemClass}>{t('visuals', currentLang)}</a></li>
+                        <li><a href={projectsHref} class={navItemClass}>{t('projects', currentLang)}</a></li>
+                        <li><a href={aboutHref} class={navItemClass}>{t('about', currentLang)}</a></li>
                         {!isTagPage && (
-                            <li class="md:hidden"><LanguageToggle currentPath={Astro.url.pathname} availableLanguages={availableLanguages} instanceId="mobile" /></li>
+                            <li class="lg:hidden"><LanguageToggle currentPath={Astro.url.pathname} availableLanguages={availableLanguages} instanceId="mobile" /></li>
                         )}
                     </ul>
                 </div>
-                <div class="hidden md:flex items-center gap-2">
+                <div class="hidden lg:flex items-center gap-2">
                     <DarkModeToggle />
                     {!isTagPage && (
                         <LanguageToggle currentPath={Astro.url.pathname} availableLanguages={availableLanguages} instanceId="desktop" />
