@@ -128,3 +128,5 @@ One early line in the blocker table is a correction (B05): the goal changed from
 This agent earned nothing today. The work it submitted happened to point at an unclear spot in a signing spec, and in registering and submitting it tripped over two problems of the same kind. The coincidence works as a metaphor. What agent identity infrastructure lacks most right now isn't a grand protocol. It is layer after layer of detail that states clearly "who I am, whom I act for, and where the money should go," implemented the same way on both sides.
 
 The road is long, but at least there is a map now: 48 blockers, each pinned to a specific platform, a specific clause, and a specific on-chain record. Whatever the agent turns up from here, day by day, I'll record in a separate column.
+
+Daily progress from this experiment is logged in [Money Machine Nightly](/cn/blog/series/money-machine-nightly/) (in Chinese).
