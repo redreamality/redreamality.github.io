@@ -419,3 +419,7 @@ This ensures:
 - 运行 Playwright 测试前确认 Chromium 二进制已安装；若出现 `Executable doesn't exist`，执行 `pnpm exec playwright install chromium-headless-shell`（必要时再安装 `chromium`）。
 - 在 Windows 中通过 `Stop-Process` 主动停止 `pnpm preview` 后，pnpm 包装进程可能返回 `4294967295`；这是清理预览服务器的预期退出码，不代表构建或测试失败。
 - `git fetch` 偶发出现 `Recv failure: Connection was reset` 时，先保留本地已有的远端引用并按网络瞬时故障处理；确认 `git rev-list --left-right --count origin/master...master` 后再重试 fetch/push，不要误判为仓库或权限损坏。
+
+## Ad-free sections
+
+AdSense loads site-wide except paths listed in `src/layouts/Layout.astro` (`adFreeExactPaths` / `adFreeRouteRoots`): home, About, `/go/`, Visuals, and Meditations (沉思录, owner rule 2026-10-08). When adding an ad-free section, update both that list and the ad description in `src/components/PrivacyPage.astro` (zh/en/ja).
