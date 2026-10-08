@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { SERIES_SLUGS } from './data/series';
 
 const blogSchema = z.object({
   title: z.string(),
@@ -14,6 +15,10 @@ const blogSchema = z.object({
   updatedDate: z.date().optional(),
   lang: z.enum(['zh', 'en', 'ja']).optional(),
   translatedFrom: z.string().optional(), // Reference to original post slug
+  // --- Series / column fields (optional; see src/data/series.ts) ---
+  series: z.enum(SERIES_SLUGS).optional(), // e.g. "money-machine-nightly"
+  seriesDay: z.number().int().nonnegative().optional(), // day number shown in series nav/index
+  humanInterventions: z.number().int().nonnegative().optional(), // summed on the series index
 });
 
 const chaosSchema = blogSchema;

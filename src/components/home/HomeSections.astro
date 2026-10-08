@@ -4,6 +4,7 @@ import { homeContent, localeFor } from '../../utils/homeContent';
 import SectionGrid, { type SectionItem } from '../shared/SectionGrid.astro';
 import chaosDigest from '../../data/chaos-digest.json';
 import TaxonomyEntryCard from '../tags/TaxonomyEntryCard.astro';
+import { filterHomeFeedPosts } from '../../utils/series';
 
 type Entry = { slug: string; data: Record<string, any> };
 
@@ -25,7 +26,9 @@ const locale = localeFor(lang);
 
 const fmt = (d: Date) => new Date(d).toLocaleDateString(locale);
 
-const blogItems: SectionItem[] = posts.slice(0, 12).map((p) => ({
+// Series entries marked excludeFromHome (e.g. the nightly column) stay out of the
+// home page so daily logs don't push formal posts off; they remain in /blog/, tags, RSS.
+const blogItems: SectionItem[] = filterHomeFeedPosts(posts).slice(0, 12).map((p) => ({
   href: `${basePath}/blog/${p.slug}/`,
   title: p.data.title,
   description: p.data.description,

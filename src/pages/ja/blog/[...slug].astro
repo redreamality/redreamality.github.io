@@ -2,6 +2,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import TableOfContents from '../../../components/TableOfContents.astro';
 import RelatedContent from '../../../components/RelatedContent.astro';
+import SeriesNav from '../../../components/series/SeriesNav.astro';
 import { getCollection } from '../../../utils/content-collections';
 import { type Language, getTagCounts } from '../../../utils/i18n';
 import { rankRelatedContent } from '../../../utils/related';
@@ -96,6 +97,7 @@ const relatedItems = relatedPosts.map((relatedPost) => ({
       {headings && headings.length > 0 && <TableOfContents headings={headings} />}
       <article class="prose dark:prose-invert lg:prose-xl mx-auto">
         <header class="mb-8">
+          {post.data.series && <SeriesNav lang={lang} post={post} posts={allPosts} variant="badge" />}
           <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{post.data.title}</h1>
           <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
             <span>
@@ -137,6 +139,7 @@ const relatedItems = relatedPosts.map((relatedPost) => ({
         </div>
 
         <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 not-prose">
+          {post.data.series && <SeriesNav lang={lang} post={post} posts={allPosts} variant="nav" />}
           <RelatedContent title={currentContent.relatedTitle} items={relatedItems} lang={lang} />
 
           <div class="mt-10">

@@ -217,6 +217,15 @@ All content files must have proper frontmatter with:
 
 
 
+### Blog series / 专栏（`series` 字段）
+
+专栏条目仍是普通 `blog-<locale>` 文章，靠 frontmatter 串起来；元数据只在 `src/data/series.ts` 登记一处（slug、各语言标题/简介、`excludeFromHome`、置顶链接）。
+- 条目 frontmatter：`series: <slug>`（必须是 `series.ts` 里登记过的 slug，否则构建失败）、可选 `seriesDay`（天数，整数 ≥ 0；不填按日期顺序自动编号）、可选 `humanInterventions`（当天人工介入次数，索引页累加）。三者对旧文全部可选。
+- 首页：`excludeFromHome: true` 的专栏条目**不进**三语首页「最新文章」12 条（`filterHomeFeedPosts`，`src/utils/series.ts`）；仍出现在 `/blog/` 全量列表、标签页、RSS、sitemap、相关文章。
+- 索引页：`/[lang]/blog/series/<slug>/`（`src/pages/{,cn/,ja/}blog/series/[series].astro` + `src/components/series/SeriesIndex.astro`），**只为该语言至少有 1 篇条目的专栏生成**；`locale-availability.ts` 的 `series` 路由用同一个 `getSeriesSlugsWithEntries`，语言切换不会链到空索引。条目页由 `SeriesNav.astro` 显示专栏徽章与前一天/后一天/索引导航。
+- 现有专栏：`money-machine-nightly`（赚钱机器夜报，`blog-cn` 每晚一篇，`/cn/blog/money-machine-nightly-YYYY-MM-DD/`）。条目模板与脱敏清单：`/workspace/blog-pipeline/templates/money-machine-nightly.md`。夜报 600–1,200 字（站长批准的栏目篇幅，属于「Blog length target」的例外）；按 `blog-cn` 文件数统计撰稿节奏或配额的脚本/报表应排除带 `series` 的文章。
+- 测试：`src/utils/series.test.ts`（首页过滤、分组、前后导航、累计）。
+
 ### Chaos digest feed（选题 → 底噪页）
 
 站点 `/garden/chaos/`（及 `/cn`、`/ja`）主 UX 是 **按小时分组的热点选题列表**（数据：`src/data/chaos-digest.json`），不是旧的长文卡片墙。旧 `chaos-*` 长文仍可通过 slug 与页脚 Archive 访问。

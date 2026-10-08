@@ -27,6 +27,7 @@ function makeIndex() {
       visuals: perLang(['v'], ['v'], []),
       tags: perLang(['System One', 'shared'], ['shared'], ['shared']),
       library: perLang(['lib-1'], ['lib-1'], ['lib-1']),
+      series: perLang([], ['money-machine-nightly'], []),
     },
   };
 }
@@ -57,6 +58,13 @@ describe('locale availability resolver', () => {
     expect(resolve('/tags/System%20One/', 'en')).toEqual(['en']);
     expect(resolve('/ja/tags/shared/', 'ja')).toEqual(['en', 'zh', 'ja']);
     expect(resolve('/ja/garden/notes/library/lib-1/', 'ja')).toEqual(['en', 'zh', 'ja']);
+  });
+
+  it('resolves series indexes before blog slugs and only lists locales with entries', () => {
+    expect(resolve('/cn/blog/series/money-machine-nightly/', 'zh')).toEqual(['zh']);
+    // An English page that does not exist must not be advertised from the zh index.
+    expect(resolve('/cn/blog/series/money-machine-nightly/', 'zh')).not.toContain('en');
+    expect(resolve('/blog/series/unknown/', 'en')).toEqual(['en']);
   });
 
   it('uses src/pages for static routes and keeps all locales only when every page exists', () => {

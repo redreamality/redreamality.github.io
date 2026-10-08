@@ -24,6 +24,7 @@ import {
   type Language,
 } from './i18n';
 import { getLibraryNotes } from './library-notes';
+import { getSeriesSlugsWithEntries } from './series';
 import { getVisualWorks } from './visuals';
 
 export type LocalizedDetailType =
@@ -36,7 +37,8 @@ export type LocalizedDetailType =
   | 'projects'
   | 'visuals'
   | 'tags'
-  | 'library';
+  | 'library'
+  | 'series';
 
 export interface LocaleAvailabilityIndex {
   /** Locale-prefixed, trailing-slash paths of non-dynamic pages (e.g. `/cn/garden/`). */
@@ -56,6 +58,8 @@ const DETAIL_ROUTES: Array<{ type: LocalizedDetailType; pattern: RegExp }> = [
   { type: 'projects', pattern: /^\/projects\/([^/]+)\/$/ },
   { type: 'visuals', pattern: /^\/visuals\/([^/]+)\/$/ },
   { type: 'tags', pattern: /^\/tags\/([^/]+)\/$/ },
+  // Series indexes live under /blog/ and must be matched before blog slugs.
+  { type: 'series', pattern: /^\/blog\/series\/([^/]+)\/$/ },
   { type: 'blog', pattern: /^\/blog\/(.+)\/$/ },
 ];
 
@@ -130,6 +134,7 @@ function emptyDetails(): LocaleAvailabilityIndex['details'] {
     visuals: make(),
     tags: make(),
     library: make(),
+    series: make(),
   };
 }
 
@@ -184,6 +189,7 @@ async function buildIndex(): Promise<LocaleAvailabilityIndex> {
         for (const slug of slugs) details[type][lang].add(safeDecode(slug));
       };
       add('blog', blog.map((entry) => entry.slug));
+      add('series', getSeriesSlugsWithEntries(blog));
       add('chaos', chaos.map((entry) => entry.slug));
       add('notes', notes.map((entry) => entry.slug));
       add('questions', questions.map((entry) => entry.slug));

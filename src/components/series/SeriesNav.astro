@@ -1,0 +1,79 @@
+---
+/**
+ * Series navigation for a blog entry that belongs to a column (frontmatter `series`).
+ * - variant "badge": one-line link above the H1 (column name · day N).
+ * - variant "nav": previous/next day + link to the series index (end of article).
+ * Renders nothing for posts without `series`.
+ */
+import type { Language } from '../../utils/i18n';
+import { getSeriesConfig, getSeriesTitle } from '../../data/series';
+import {
+  getSeriesDay,
+  getSeriesEntries,
+  getSeriesIndexHref,
+  getSeriesNeighbors,
+  type SeriesEntryLike,
+} from '../../utils/series';
+
+type Entry = SeriesEntryLike & { data: SeriesEntryLike['data'] & { title: string } };
+
+interface Props {
+  lang: Language;
+  post: Entry;
+  /** All blog posts of the same locale. */
+  posts: Entry[];
+  variant?: 'badge' | 'nav';
+}
+
+const { lang, post, posts, variant = 'nav' } = Astro.props;
+const config = getSeriesConfig(post.data.series);
+const entries = config ? getSeriesEntries(posts, config.slug) : [];
+const basePath = lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : '';
+const strings = {
+  zh: { day: (n: number) => `第 ${n} 天`, prev: '前一天', next: '后一天', all: '全部夜报', label: '专栏导航' },
+  en: { day: (n: number) => `Day ${n}`, prev: 'Previous', next: 'Next', all: 'All entries', label: 'Series navigation' },
+  ja: { day: (n: number) => `${n} 日目`, prev: '前の日', next: '次の日', all: 'すべての記事', label: 'シリーズナビゲーション' },
+}[lang];
+const title = config ? getSeriesTitle(config, lang) : '';
+const indexHref = config ? getSeriesIndexHref(config.slug, lang) : '';
+const day = config ? getSeriesDay(post, entries) : 0;
+const { prev, next } = config ? getSeriesNeighbors(entries, post.slug) : { prev: null, next: null };
+const href = (e: Entry) => `${basePath}/blog/${e.slug}/`;
+---
+
+{config && variant === 'badge' && (
+  <div class="not-prose mb-4">
+  <a
+    href={indexHref}
+    data-series-badge={config.slug}
+    class="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-3 py-1 text-xs font-medium text-brand-600 no-underline hover:bg-brand-500/20 dark:text-brand-300"
+  >
+    <span aria-hidden="true">🌙</span>{title} · {strings.day(day)}
+  </a>
+  </div>
+)}
+
+{config && variant === 'nav' && (
+  <nav aria-label={strings.label} data-series-nav={config.slug} class="not-prose mb-10 rounded-lg border border-gray-200 p-4 dark:border-gray-700">
+    <div class="mb-3 flex flex-wrap items-center justify-between gap-2 text-sm">
+      <a href={indexHref} class="font-semibold text-gray-900 hover:text-brand-600 dark:text-white dark:hover:text-brand-300">
+        {title} · {strings.day(day)}
+      </a>
+      <a href={indexHref} class="text-gray-500 hover:text-brand-600 dark:text-gray-400 dark:hover:text-brand-300">{strings.all} →</a>
+    </div>
+    <div class="grid gap-3 sm:grid-cols-2">
+      {prev ? (
+        <a href={href(prev)} rel="prev" data-series-prev class="block rounded border border-gray-200 p-3 text-sm hover:shadow-sm dark:border-gray-700">
+          <span class="block text-xs text-gray-500 dark:text-gray-400">← {strings.prev} · {strings.day(getSeriesDay(prev, entries))}</span>
+          <span class="block font-medium text-gray-900 dark:text-white">{prev.data.title}</span>
+        </a>
+      ) : <span class="hidden sm:block"></span>}
+      {next && (
+        <a href={href(next)} rel="next" data-series-next class="block rounded border border-gray-200 p-3 text-right text-sm hover:shadow-sm dark:border-gray-700">
+          <span class="block text-xs text-gray-500 dark:text-gray-400">{strings.next} · {strings.day(getSeriesDay(next, entries))} →</span>
+          <span class="block font-medium text-gray-900 dark:text-white">{next.data.title}</span>
+        </a>
+      )}
+    </div>
+  </nav>
+)}
