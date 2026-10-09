@@ -12,6 +12,7 @@ import rehypeOutboundLinks from './src/plugins/rehype-outbound-links.ts';
 import remarkDemoteH1 from './src/plugins/remark-demote-h1.ts';
 import visualManifest from './src/data/visuals-manifest.json';
 import tagTaxonomy from './src/data/tag-taxonomy.json' with { type: 'json' };
+import legacyRedirects from './src/data/legacy-redirects.json' with { type: 'json' };
 import { getLegacyBlogRedirectPaths } from './scripts/legacy-blog-redirects.mjs';
 
 /** Sitemap safety net: mirror normalizeTag without importing tag-taxonomy.ts (avoids i18n → astro:content). */
@@ -41,6 +42,8 @@ function normalizeTagForSitemap(tag) {
 
 const siteUrl = 'https://redreamality.com';
 const legacyBlogRedirectPaths = getLegacyBlogRedirectPaths(fileURLToPath(new URL('./src/content/', import.meta.url)));
+/** Moved pages (old path -> new path); Astro emits the same static redirect page as Astro.redirect(). */
+const legacyRedirectSources = new Set(Object.keys(legacyRedirects));
 /** @type {Record<string, string>} */
 const visualLanguagePrefixes = { en: '', zh: '/cn', ja: '/ja' };
 /** @type {string[]} */
@@ -86,6 +89,8 @@ export default defineConfig({
   trailingSlash: 'always',
   output: 'static',
   compressHTML: true,
+  // Static hosting: each source becomes an HTML page with meta refresh + canonical + noindex.
+  redirects: legacyRedirects,
   vite: {
     css: {
       postcss: {
@@ -121,6 +126,7 @@ export default defineConfig({
         const path = url.pathname;
 
         if (legacyBlogRedirectPaths.has(path)) return false;
+        if (legacyRedirectSources.has(path)) return false;
 
         // Exclude outbound confirm interstitial
         if (path === '/go/' || path === '/go') return false;

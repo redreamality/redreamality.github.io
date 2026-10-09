@@ -1,15 +1,14 @@
 ---
 /**
- * Series navigation for a blog entry that belongs to a column (frontmatter `series`).
+ * Navigation for a project-column entry (/[lang]/projects/<column>/<YYYY-MM-DD>/).
  * - variant "badge": one-line link above the H1 (column name · day N).
- * - variant "nav": previous/next day + link to the series index (end of article).
- * Renders nothing for posts without `series`.
+ * - variant "nav": previous/next day + link to the column index (end of entry).
  */
 import type { Language } from '../../utils/i18n';
-import { getSeriesConfig, getSeriesTitle } from '../../data/series';
+import { getSeriesTitle, type SeriesConfig } from '../../data/series';
 import {
   getSeriesDay,
-  getSeriesEntries,
+  getSeriesEntryHref,
   getSeriesIndexHref,
   getSeriesNeighbors,
   type SeriesEntryLike,
@@ -19,29 +18,27 @@ type Entry = SeriesEntryLike & { data: SeriesEntryLike['data'] & { title: string
 
 interface Props {
   lang: Language;
-  post: Entry;
-  /** All blog posts of the same locale. */
-  posts: Entry[];
+  config: SeriesConfig;
+  entry: Entry;
+  /** All entries of the column in this locale, newest first. */
+  entries: Entry[];
   variant?: 'badge' | 'nav';
 }
 
-const { lang, post, posts, variant = 'nav' } = Astro.props;
-const config = getSeriesConfig(post.data.series);
-const entries = config ? getSeriesEntries(posts, config.slug) : [];
-const basePath = lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : '';
+const { lang, config, entry, entries, variant = 'nav' } = Astro.props;
 const strings = {
   zh: { day: (n: number) => `第 ${n} 天`, prev: '前一天', next: '后一天', all: '全部夜报', label: '专栏导航' },
-  en: { day: (n: number) => `Day ${n}`, prev: 'Previous', next: 'Next', all: 'All entries', label: 'Series navigation' },
-  ja: { day: (n: number) => `${n} 日目`, prev: '前の日', next: '次の日', all: 'すべての記事', label: 'シリーズナビゲーション' },
+  en: { day: (n: number) => `Day ${n}`, prev: 'Previous', next: 'Next', all: 'All entries', label: 'Column navigation' },
+  ja: { day: (n: number) => `${n} 日目`, prev: '前の日', next: '次の日', all: 'すべての記事', label: 'コラムナビゲーション' },
 }[lang];
-const title = config ? getSeriesTitle(config, lang) : '';
-const indexHref = config ? getSeriesIndexHref(config.slug, lang) : '';
-const day = config ? getSeriesDay(post, entries) : 0;
-const { prev, next } = config ? getSeriesNeighbors(entries, post.slug) : { prev: null, next: null };
-const href = (e: Entry) => `${basePath}/blog/${e.slug}/`;
+const title = getSeriesTitle(config, lang);
+const indexHref = getSeriesIndexHref(config.slug, lang);
+const day = getSeriesDay(entry, entries);
+const { prev, next } = getSeriesNeighbors(entries, entry.slug);
+const href = (e: Entry) => getSeriesEntryHref(config.slug, e.slug, lang);
 ---
 
-{config && variant === 'badge' && (
+{variant === 'badge' && (
   <div class="not-prose mb-4">
   <a
     href={indexHref}
@@ -53,13 +50,13 @@ const href = (e: Entry) => `${basePath}/blog/${e.slug}/`;
   </div>
 )}
 
-{config && variant === 'nav' && (
+{variant === 'nav' && (
   <nav aria-label={strings.label} data-series-nav={config.slug} class="not-prose mb-10 rounded-lg border border-gray-200 p-4 dark:border-gray-700">
     <div class="mb-3 flex flex-wrap items-center justify-between gap-2 text-sm">
       <a href={indexHref} class="font-semibold text-gray-900 hover:text-brand-600 dark:text-white dark:hover:text-brand-300">
         {title} · {strings.day(day)}
       </a>
-      <a href={indexHref} class="text-gray-500 hover:text-brand-600 dark:text-gray-400 dark:hover:text-brand-300">{strings.all} →</a>
+      <a href={indexHref} data-series-index-link class="text-gray-500 hover:text-brand-600 dark:text-gray-400 dark:hover:text-brand-300">{strings.all} →</a>
     </div>
     <div class="grid gap-3 sm:grid-cols-2">
       {prev ? (

@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import ProjectCard from '../../components/shared/ProjectCard.astro';
 import { projects, projectGroups } from '../../utils/projectsData';
+import { getColumnsWithEntries } from '../../utils/columns';
 import type { Language } from '../../utils/i18n';
 
 const lang: Language = 'en';
@@ -20,8 +21,12 @@ const sortInGroup = (a: typeof projects[number], b: typeof projects[number]) => 
   return (b.stars ?? 0) - (a.stars ?? 0);
 };
 
+// Column cards (e.g. 赚钱机器夜报) only appear where the column has entries, so en/ja never link to a missing index.
+const columnsWithEntries = await getColumnsWithEntries(lang);
+const visibleProjects = projects.filter((p) => !p.column || columnsWithEntries.includes(p.column));
+
 const groups = projectGroups
-  .map((g) => ({ ...g, items: projects.filter((p) => p.type === g.type).sort(sortInGroup) }))
+  .map((g) => ({ ...g, items: visibleProjects.filter((p) => p.type === g.type).sort(sortInGroup) }))
   .filter((g) => g.items.length > 0);
 ---
 

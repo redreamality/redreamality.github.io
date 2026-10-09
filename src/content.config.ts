@@ -1,7 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { SERIES_SLUGS } from './data/series';
 
 const blogSchema = z.object({
   title: z.string(),
@@ -15,10 +14,6 @@ const blogSchema = z.object({
   updatedDate: z.date().optional(),
   lang: z.enum(['zh', 'en', 'ja']).optional(),
   translatedFrom: z.string().optional(), // Reference to original post slug
-  // --- Series / column fields (optional; see src/data/series.ts) ---
-  series: z.enum(SERIES_SLUGS).optional(), // e.g. "money-machine-nightly"
-  seriesDay: z.number().int().nonnegative().optional(), // day number shown in series nav/index
-  humanInterventions: z.number().int().nonnegative().optional(), // summed on the series index
 });
 
 const chaosSchema = blogSchema;
@@ -85,6 +80,22 @@ const projectsSchema = z.object({
   language: z.string().optional(), // primary programming language
   featured: z.boolean().default(false),
   order: z.number().optional(), // manual sort weight within its group
+});
+
+// Nightly project columns (one collection per column, under /[lang]/projects/<column>/).
+// Metadata for each column lives in src/data/series.ts.
+const nightlySchema = z.object({
+  title: z.string(),
+  seoTitle: z.string().optional(),
+  description: z.string(),
+  seoDescription: z.string().optional(),
+  pubDate: z.date(),
+  author: z.string(),
+  tags: z.array(z.string()).optional(),
+  updatedDate: z.date().optional(),
+  lang: z.enum(['zh', 'en', 'ja']).optional(),
+  seriesDay: z.number().int().nonnegative().optional(), // day number shown in column nav/index
+  humanInterventions: z.number().int().nonnegative().optional(), // summed on the column index
 });
 
 const meditationsSchema = z.object({
@@ -195,6 +206,12 @@ const notesJaCollection = defineCollection({
   schema: notesSchema,
 });
 
+// 赚钱机器夜报 (zh only for now): /cn/projects/money-machine-nightly/<YYYY-MM-DD>/
+const moneyMachineNightlyCnCollection = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/money-machine-nightly-cn' }),
+  schema: nightlySchema,
+});
+
 // Meditations content collections (个人感悟 / 沉思录)
 const meditationsCnCollection = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/meditations-cn' }),
@@ -224,6 +241,7 @@ export const collections = {
   'projects-cn': projectsCnCollection,
   'projects-en': projectsEnCollection,
   'projects-ja': projectsJaCollection,
+  'money-machine-nightly-cn': moneyMachineNightlyCnCollection,
   'questions-cn': questionsCnCollection,
   'questions-en': questionsEnCollection,
   'questions-ja': questionsJaCollection,

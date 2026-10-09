@@ -24,7 +24,8 @@ import {
   type Language,
 } from './i18n';
 import { getLibraryNotes } from './library-notes';
-import { getSeriesSlugsWithEntries } from './series';
+import { SERIES, type SeriesSlug } from '../data/series';
+import { getColumnEntries } from './columns';
 import { getVisualWorks } from './visuals';
 
 export type LocalizedDetailType =
@@ -38,7 +39,7 @@ export type LocalizedDetailType =
   | 'visuals'
   | 'tags'
   | 'library'
-  | 'series';
+  | 'columns';
 
 export interface LocaleAvailabilityIndex {
   /** Locale-prefixed, trailing-slash paths of non-dynamic pages (e.g. `/cn/garden/`). */
@@ -56,10 +57,11 @@ const DETAIL_ROUTES: Array<{ type: LocalizedDetailType; pattern: RegExp }> = [
   { type: 'talks', pattern: /^\/garden\/talks\/([^/]+)\/$/ },
   { type: 'meditations', pattern: /^\/garden\/meditations\/([^/]+)\/$/ },
   { type: 'projects', pattern: /^\/projects\/([^/]+)\/$/ },
+  // Project-column entries: /projects/<column>/<YYYY-MM-DD>/ (slug key = `<column>/<entry>`).
+  // Column indexes are plain static pages (src/pages/**/projects/<column>/index.astro).
+  { type: 'columns', pattern: /^\/projects\/([^/]+\/[^/]+)\/$/ },
   { type: 'visuals', pattern: /^\/visuals\/([^/]+)\/$/ },
   { type: 'tags', pattern: /^\/tags\/([^/]+)\/$/ },
-  // Series indexes live under /blog/ and must be matched before blog slugs.
-  { type: 'series', pattern: /^\/blog\/series\/([^/]+)\/$/ },
   { type: 'blog', pattern: /^\/blog\/(.+)\/$/ },
 ];
 
@@ -134,7 +136,7 @@ function emptyDetails(): LocaleAvailabilityIndex['details'] {
     visuals: make(),
     tags: make(),
     library: make(),
-    series: make(),
+    columns: make(),
   };
 }
 
@@ -189,7 +191,6 @@ async function buildIndex(): Promise<LocaleAvailabilityIndex> {
         for (const slug of slugs) details[type][lang].add(safeDecode(slug));
       };
       add('blog', blog.map((entry) => entry.slug));
-      add('series', getSeriesSlugsWithEntries(blog));
       add('chaos', chaos.map((entry) => entry.slug));
       add('notes', notes.map((entry) => entry.slug));
       add('questions', questions.map((entry) => entry.slug));
@@ -198,6 +199,9 @@ async function buildIndex(): Promise<LocaleAvailabilityIndex> {
       add('projects', projects.map((entry) => entry.slug));
       add('tags', tags);
       add('library', libraryIds);
+      for (const column of Object.keys(SERIES) as SeriesSlug[]) {
+        add('columns', (await getColumnEntries(column, lang)).map((entry) => `${column}/${entry.slug}`));
+      }
       add(
         'visuals',
         visualWorks.filter((work) => Boolean(work.locales[lang]?.artifact)).map((work) => work.slug),

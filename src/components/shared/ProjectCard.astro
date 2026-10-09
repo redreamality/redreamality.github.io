@@ -43,16 +43,15 @@ const outboundLang = lang === 'zh' ? 'zh' : lang === 'ja' ? 'ja' : 'en';
 const githubHref = p.github ? toOutboundHref(p.github, outboundLang) : null;
 const demoHref = p.demo ? toOutboundHref(p.demo, outboundLang) : null;
 const paperHref = p.paper ? toOutboundHref(p.paper, outboundLang) : null;
-const primary = githubHref || demoHref || paperHref || '#';
 const description = p.desc[lang] ?? p.desc.en;
-const detailsLabel: Record<Language, string> = {
-  en: 'Project details',
-  zh: '项目详情',
-  ja: 'プロジェクト詳細',
-};
+const detailsLabel: Record<Language, string> = p.column
+  ? { en: 'Read the column', zh: '阅读专栏', ja: 'コラムを読む' }
+  : { en: 'Project details', zh: '项目详情', ja: 'プロジェクト詳細' };
 const detailsHref = p.details
   ? `${lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : ''}/projects/${p.slug}/`
   : null;
+const primary = githubHref || demoHref || paperHref || detailsHref || '#';
+const primaryIsExternal = primary !== detailsHref;
 ---
 
 <article
@@ -76,7 +75,7 @@ const detailsHref = p.details
     {p.featured && <span class="ml-auto text-ink-400" title="Featured">★</span>}
   </div>
 
-  <a href={primary} rel="noopener noreferrer nofollow" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded">
+  <a href={primary} rel={primaryIsExternal ? 'noopener noreferrer nofollow' : undefined} class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded">
     <h3 class="font-display text-xl font-bold text-surface-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-300 transition-colors">
       {p.title}
     </h3>

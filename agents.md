@@ -217,14 +217,17 @@ All content files must have proper frontmatter with:
 
 
 
-### Blog series / 专栏（`series` 字段）
+### Project columns / 专栏（项目区夜报，如「赚钱机器夜报」）
 
-专栏条目仍是普通 `blog-<locale>` 文章，靠 frontmatter 串起来；元数据只在 `src/data/series.ts` 登记一处（slug、各语言标题/简介、`excludeFromHome`、置顶链接）。
-- 条目 frontmatter：`series: <slug>`（必须是 `series.ts` 里登记过的 slug，否则构建失败）、可选 `seriesDay`（天数，整数 ≥ 0；不填按日期顺序自动编号）、可选 `humanInterventions`（当天人工介入次数，索引页累加）。三者对旧文全部可选。
-- 首页：`excludeFromHome: true` 的专栏条目**不进**三语首页「最新文章」12 条（`filterHomeFeedPosts`，`src/utils/series.ts`）；仍出现在 `/blog/` 全量列表、标签页、RSS、sitemap、相关文章。
-- 索引页：`/[lang]/blog/series/<slug>/`（`src/pages/{,cn/,ja/}blog/series/[series].astro` + `src/components/series/SeriesIndex.astro`），**只为该语言至少有 1 篇条目的专栏生成**；`locale-availability.ts` 的 `series` 路由用同一个 `getSeriesSlugsWithEntries`，语言切换不会链到空索引。条目页由 `SeriesNav.astro` 显示专栏徽章与前一天/后一天/索引导航。
-- 现有专栏：`money-machine-nightly`（赚钱机器夜报，`blog-cn` 每晚一篇，`/cn/blog/money-machine-nightly-YYYY-MM-DD/`）。条目模板与脱敏清单：`/workspace/blog-pipeline/templates/money-machine-nightly.md`。夜报 600–1,200 字（站长批准的栏目篇幅，属于「Blog length target」的例外）；按 `blog-cn` 文件数统计撰稿节奏或配额的脚本/报表应排除带 `series` 的文章。
-- 测试：`src/utils/series.test.ts`（首页过滤、分组、前后导航、累计）。
+专栏条目**不是博客文章**：每个专栏是项目区下的独立内容集合，不进 `/blog/` 列表、blog RSS、相关文章、首页「最新文章」和标签计数（`getTagCounts` 只统计 blog）。元数据只在 `src/data/series.ts` 登记一处（slug、各语言标题/简介/SEO 描述、`intro`、置顶「先读这篇」链接）。
+- 集合：每专栏每语言一个 `<column>-<locale>` 集合（`src/content.config.ts` 的 `nightlySchema`），集合名在 `src/utils/columns.ts` 的 `COLUMN_COLLECTIONS` 登记；**只在该语言确有条目时才建集合**。
+- 条目文件：`src/content/<column>-<locale>/YYYY-MM-DD.md`（文件名即 URL slug）。frontmatter：`title`、`description`、`pubDate`、`author`、`lang`，可选 `tags`、`seriesDay`（整数 ≥ 0；不填按日期顺序自动编号）、`humanInterventions`（当天人工介入次数，索引页累加）。不要再写 `series:` 字段，也不要加专栏同名标签。`tags` 只放主题标签（如 `ai-agents`），条目页只链接已生成的 blog 标签页（count ≥ 2）。
+- 路由：索引 `/[lang]/projects/<column>/`（`src/pages/cn/projects/<column>/index.astro` + `src/components/series/SeriesIndex.astro`：简介、先读这篇、累计看板、按日期倒序带天数的列表）；条目 `/[lang]/projects/<column>/YYYY-MM-DD/`（同目录 `[entry].astro`，`SeriesNav.astro` 显示专栏徽章与前一天/后一天/索引导航）；专栏 RSS `/[lang]/projects/<column>/rss.xml`。路由文件只为有条目的语言创建（目前只有 `src/pages/cn/projects/money-machine-nightly/`）。
+- 项目页卡片：`src/utils/projectsData.ts` 里带 `column: '<column>'` 的条目，三语 `/projects/` 页只在该语言有条目时显示（`getColumnsWithEntries`），卡片链到专栏索引。
+- 语言可用性：`locale-availability.ts` 的 `columns` 路由从 `getColumnEntries` 取 `<column>/<entry>`，索引页按 `src/pages` 静态页判断；en/ja 不会链到空页。
+- 旧 URL：专栏曾在 blog 下（`/cn/blog/money-machine-nightly-2026-10-08/`、`/cn/blog/series/money-machine-nightly/`），由 `src/data/legacy-redirects.json` → `astro.config.mjs` 的 `redirects` 生成静态跳转页（meta refresh + canonical + noindex），并从 sitemap 过滤。以后搬迁已对外分享的页面也往这个 JSON 加一对「旧路径 → 新路径」。
+- 现有专栏：`money-machine-nightly`（赚钱机器夜报，`money-machine-nightly-cn` 每晚一篇，`src/content/money-machine-nightly-cn/YYYY-MM-DD.md` → `/cn/projects/money-machine-nightly/YYYY-MM-DD/`，索引 `/cn/projects/money-machine-nightly/`）。条目模板与脱敏清单：`/workspace/blog-pipeline/templates/money-machine-nightly.md`。夜报 600–1,200 字（站长批准的栏目篇幅），不计入 blog 撰稿槽 / 字数考核。
+- 测试：`src/utils/series.test.ts`（排序、天数、前后导航、累计、URL、旧 URL 跳转表、项目卡片）；`src/utils/locale-availability.test.ts`（`columns` 路由）；`e2e/sitemap-redirects.spec.ts`（旧 URL 跳转与 sitemap）。
 
 ### Chaos digest feed（选题 → 底噪页）
 

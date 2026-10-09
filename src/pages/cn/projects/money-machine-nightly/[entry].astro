@@ -1,0 +1,81 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import TableOfContents from '../../../../components/TableOfContents.astro';
+import SeriesNav from '../../../../components/series/SeriesNav.astro';
+import { SERIES } from '../../../../data/series';
+import { getColumnEntries } from '../../../../utils/columns';
+import { getTagCounts, type Language } from '../../../../utils/i18n';
+import { getTagHref } from '../../../../utils/tag-taxonomy';
+
+// 赚钱机器夜报 entry: /cn/projects/money-machine-nightly/<YYYY-MM-DD>/
+const lang: Language = 'zh';
+
+export async function getStaticPaths() {
+  const entries = await getColumnEntries('money-machine-nightly', 'zh');
+  return entries.map((entry) => ({ params: { entry: entry.slug }, props: { entry, entries } }));
+}
+
+const { entry, entries } = Astro.props;
+const config = SERIES['money-machine-nightly'];
+const { Content, headings } = await entry.render();
+
+// Tag routes are generated from blog posts only (count >= 2); link a tag only when its page exists.
+const tagCounts = await getTagCounts(lang);
+const linkedTags = entry.data.tags?.filter((tag) => tagCounts[tag] >= 2) ?? [];
+const fmt = (d: Date) => d.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<Layout
+  title={entry.data.title}
+  seoTitle={entry.data.seoTitle}
+  description={entry.data.seoDescription ?? entry.data.description}
+  publishDate={entry.data.pubDate.toISOString()}
+  updatedDate={entry.data.updatedDate?.toISOString()}
+  tags={linkedTags}
+  author={entry.data.author}
+  type="article"
+>
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      {headings && headings.length > 0 && <TableOfContents headings={headings} />}
+      <article class="prose dark:prose-invert lg:prose-xl mx-auto" data-series-entry-page={config.slug}>
+        <header class="mb-8">
+          <SeriesNav lang={lang} config={config} entry={entry} entries={entries} variant="badge" />
+          <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{entry.data.title}</h1>
+          <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+            <span>发布于 {fmt(entry.data.pubDate)}</span>
+            {entry.data.updatedDate && <span>更新于 {fmt(entry.data.updatedDate)}</span>}
+            <span>作者 {entry.data.author}</span>
+          </div>
+          {linkedTags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mb-6 not-prose">
+              <span class="text-sm font-medium text-gray-600 dark:text-gray-300">标签:</span>
+              {linkedTags.map((tag) => (
+                <a
+                  href={getTagHref(tag, lang)}
+                  class="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
+                >
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          )}
+        </header>
+
+        <div class="prose dark:prose-invert max-w-none">
+          <Content />
+        </div>
+
+        <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 not-prose">
+          <SeriesNav lang={lang} config={config} entry={entry} entries={entries} variant="nav" />
+        </footer>
+      </article>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .prose :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
+    margin-top: 2em;
+  }
+</style>

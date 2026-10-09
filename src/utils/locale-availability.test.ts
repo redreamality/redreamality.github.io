@@ -27,7 +27,7 @@ function makeIndex() {
       visuals: perLang(['v'], ['v'], []),
       tags: perLang(['System One', 'shared'], ['shared'], ['shared']),
       library: perLang(['lib-1'], ['lib-1'], ['lib-1']),
-      series: perLang([], ['money-machine-nightly'], []),
+      columns: perLang([], ['money-machine-nightly/2026-10-08'], []),
     },
   };
 }
@@ -60,11 +60,13 @@ describe('locale availability resolver', () => {
     expect(resolve('/ja/garden/notes/library/lib-1/', 'ja')).toEqual(['en', 'zh', 'ja']);
   });
 
-  it('resolves series indexes before blog slugs and only lists locales with entries', () => {
-    expect(resolve('/cn/blog/series/money-machine-nightly/', 'zh')).toEqual(['zh']);
-    // An English page that does not exist must not be advertised from the zh index.
-    expect(resolve('/cn/blog/series/money-machine-nightly/', 'zh')).not.toContain('en');
-    expect(resolve('/blog/series/unknown/', 'en')).toEqual(['en']);
+  it('resolves project-column entries per locale and column indexes as static pages', () => {
+    const withIndex = { ...index, staticRoutes: new Set([...index.staticRoutes, '/cn/projects/money-machine-nightly/']) };
+    expect(resolve('/cn/projects/money-machine-nightly/2026-10-08/', 'zh')).toEqual(['zh']);
+    // English/Japanese entries do not exist and must not be advertised.
+    expect(resolve('/cn/projects/money-machine-nightly/2026-10-08/', 'zh')).not.toContain('en');
+    expect(resolve('/projects/money-machine-nightly/2099-01-01/', 'en')).toEqual(['en']);
+    expect(resolveAvailableLanguages('/cn/projects/money-machine-nightly/', 'zh', withIndex)).toEqual(['zh']);
   });
 
   it('uses src/pages for static routes and keeps all locales only when every page exists', () => {

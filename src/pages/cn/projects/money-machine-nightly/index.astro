@@ -1,0 +1,13 @@
+---
+import SeriesIndex from '../../../../components/series/SeriesIndex.astro';
+import { SERIES } from '../../../../data/series';
+import { getColumnEntries } from '../../../../utils/columns';
+import type { Language } from '../../../../utils/i18n';
+
+// 赚钱机器夜报 column index: /cn/projects/money-machine-nightly/
+// Only zh has entries; en/ja get no page (and no switcher link) until their collection exists.
+const lang: Language = 'zh';
+const entries = await getColumnEntries('money-machine-nightly', lang);
+---
+
+<SeriesIndex lang={lang} config={SERIES['money-machine-nightly']} entries={entries} />

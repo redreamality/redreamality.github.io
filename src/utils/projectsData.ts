@@ -1,3 +1,4 @@
+import type { SeriesSlug } from '../data/series';
 import type { Language } from './i18n';
 
 export type ProjectType = 'project' | 'paper' | 'tool' | 'list' | 'app';
@@ -19,6 +20,11 @@ export interface Project {
   techStack?: string[];
   featured?: boolean;
   year?: number;
+  /**
+   * Project column (nightly log) whose index is `/[lang]/projects/<column>/`.
+   * The card is listed only in locales where that column has entries.
+   */
+  column?: SeriesSlug;
 }
 
 // Group display order + localized headings.
@@ -31,6 +37,22 @@ export const projectGroups: { type: ProjectType; label: Record<Language, string>
 ];
 
 export const projects: Project[] = [
+  {
+    slug: 'money-machine-nightly',
+    type: 'project',
+    title: '赚钱机器夜报',
+    desc: {
+      en: 'An AI agent trying to earn money on its own with no borrowed identity and no budget, logged every night: what it checked, what worked, where it got stuck.',
+      zh: '让一个 AI agent 不借身份、不花钱、尽量不靠人，自己去赚钱；每晚一篇流水账：查了哪些线、跑通了什么、卡在哪一层。',
+      ja: '借りた身元も予算もなしに自力で稼ごうとする AI エージェントの夜間ログ：何を調べ、何が通り、どこで詰まったか。',
+    },
+    details: true,
+    column: 'money-machine-nightly',
+    status: 'active',
+    techStack: ['AI Agents', 'Agent Payments', 'Agent Identity'],
+    featured: true,
+    year: 2026,
+  },
   {
     slug: 'my-personal-library',
     type: 'tool',

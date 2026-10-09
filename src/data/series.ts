@@ -1,11 +1,12 @@
 /**
- * Blog series (columns) — single source of truth for series metadata.
+ * Project columns (nightly logs) — single source of truth for column metadata.
  *
- * A blog post joins a series by setting `series: <slug>` (and optionally
- * `seriesDay`, `humanInterventions`) in its frontmatter. The blog schema only
- * accepts slugs listed here, so a typo fails the build instead of producing an
- * orphan post. Index pages live at `/[lang]/blog/series/<slug>/` and are only
- * generated for locales that already have at least one entry.
+ * Each column is its own content collection per locale (e.g.
+ * `money-machine-nightly-cn`, file name = `YYYY-MM-DD.md`) and lives under the
+ * projects section: index `/[lang]/projects/<slug>/`, entries
+ * `/[lang]/projects/<slug>/<YYYY-MM-DD>/`. Pages exist only for locales whose
+ * collection has at least one entry. Entries are not blog posts: they never
+ * appear in blog lists, blog RSS, related articles or the home page.
  */
 import type { Language } from '../utils/i18n';
 
@@ -17,15 +18,8 @@ export interface SeriesConfig {
   description: Partial<Record<Language, string>>;
   /** Longer meta description for the index page (aim for >= 150 chars to avoid generic padding). */
   seoDescription?: Partial<Record<Language, string>>;
-  /** Short intro paragraph(s) shown at the top of the series index. */
+  /** Short intro paragraph(s) shown at the top of the column index. */
   intro: Partial<Record<Language, string[]>>;
-  /** Tag every entry should carry (also used by tag pages). */
-  tag: string;
-  /**
-   * Keep entries out of the home page "latest posts" list. They stay in the
-   * blog index, tag pages, RSS and sitemap.
-   */
-  excludeFromHome: boolean;
   /** Optional pinned link shown on the index (e.g. the essay that started the column). */
   pinned?: Partial<Record<Language, { href: string; title: string }>>;
 }
@@ -55,8 +49,6 @@ export const SERIES = {
         'Numbers come from its own run logs or from public data it fetched and checked that day. Private keys, receiving addresses, and anything that points to a real identity are never published here.',
       ],
     },
-    tag: 'money-machine-nightly',
-    excludeFromHome: true,
     pinned: {
       zh: {
         href: '/cn/garden/meditations/agent-identity-infrastructure-long-road/',
@@ -71,9 +63,6 @@ export const SERIES = {
 } as const satisfies Record<string, SeriesConfig>;
 
 export type SeriesSlug = keyof typeof SERIES;
-
-/** Non-empty tuple of configured slugs (for `z.enum`). */
-export const SERIES_SLUGS = Object.keys(SERIES) as [SeriesSlug, ...SeriesSlug[]];
 
 export function getSeriesConfig(slug: string | undefined | null): SeriesConfig | undefined {
   if (!slug) return undefined;

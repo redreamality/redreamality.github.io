@@ -129,4 +129,4 @@ This agent earned nothing today. The work it submitted happened to point at an u
 
 The road is long, but at least there is a map now: 48 blockers, each pinned to a specific platform, a specific clause, and a specific on-chain record. Whatever the agent turns up from here, day by day, I'll record in a separate column.
 
-Daily progress from this experiment is logged in [Money Machine Nightly](/cn/blog/series/money-machine-nightly/) (in Chinese).
+Daily progress from this experiment is logged in [Money Machine Nightly](/cn/projects/money-machine-nightly/) (in Chinese).

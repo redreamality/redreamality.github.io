@@ -1,15 +1,14 @@
 /**
- * Pure helpers for blog series (columns). Kept free of `astro:content` so they
- * can be unit-tested; pages pass in entries from `getBlogPosts(lang)`.
- * Metadata lives in `src/data/series.ts`.
+ * Pure helpers for project columns (nightly logs). Kept free of `astro:content`
+ * so they can be unit-tested; pages pass in entries from the column's own
+ * collection (see `getColumnEntries` in `./columns`). Metadata lives in
+ * `src/data/series.ts`.
  */
-import { getSeriesConfig } from '../data/series';
 import type { Language } from './i18n';
 
 export interface SeriesFields {
   pubDate: Date;
   title?: string;
-  series?: string;
   seriesDay?: number;
   humanInterventions?: number;
 }
@@ -19,56 +18,13 @@ export interface SeriesEntryLike {
   data: SeriesFields;
 }
 
-/**
- * Home page "latest posts" eligibility: posts in a series whose config sets
- * `excludeFromHome` are dropped. Posts without `series` are always eligible.
- * An unknown series slug (cannot happen after schema validation) is treated as
- * excluded so a stray daily entry never pushes formal posts off the home page.
- */
-export function isHomeFeedEligible(post: { data: { series?: string } }): boolean {
-  const slug = post.data.series;
-  if (!slug) return true;
-  const config = getSeriesConfig(slug);
-  return config ? !config.excludeFromHome : false;
-}
-
-export function filterHomeFeedPosts<T extends { data: { series?: string } }>(posts: T[]): T[] {
-  return posts.filter(isHomeFeedEligible);
-}
-
-/** Entries of one series, newest first (date desc, then seriesDay desc). */
-export function getSeriesEntries<T extends SeriesEntryLike>(posts: T[], series: string): T[] {
-  return posts
-    .filter((p) => p.data.series === series)
-    .sort((a, b) => {
-      const byDate = b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
-      if (byDate !== 0) return byDate;
-      return (b.data.seriesDay ?? 0) - (a.data.seriesDay ?? 0);
-    });
-}
-
-/** Group posts by series slug; each group newest first. Posts without series are skipped. */
-export function groupPostsBySeries<T extends SeriesEntryLike>(posts: T[]): Map<string, T[]> {
-  const groups = new Map<string, T[]>();
-  for (const post of posts) {
-    const slug = post.data.series;
-    if (!slug) continue;
-    if (!groups.has(slug)) groups.set(slug, []);
-    groups.get(slug)!.push(post);
-  }
-  for (const [slug, entries] of groups) {
-    groups.set(slug, getSeriesEntries(entries, slug));
-  }
-  return groups;
-}
-
-/**
- * Series slugs that should get an index page for this locale: configured
- * series with at least one entry. Used by both `getStaticPaths` and
- * locale availability so the language switcher never links to a missing index.
- */
-export function getSeriesSlugsWithEntries(posts: SeriesEntryLike[]): string[] {
-  return [...groupPostsBySeries(posts).keys()].filter((slug) => Boolean(getSeriesConfig(slug))).sort();
+/** Column entries newest first (date desc, then seriesDay desc). Does not mutate the input. */
+export function sortSeriesEntries<T extends SeriesEntryLike>(entries: T[]): T[] {
+  return [...entries].sort((a, b) => {
+    const byDate = b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+    if (byDate !== 0) return byDate;
+    return (b.data.seriesDay ?? 0) - (a.data.seriesDay ?? 0);
+  });
 }
 
 /** Day label: explicit `seriesDay` wins, else 1-based position in date order. */
@@ -137,7 +93,16 @@ export function summarizeSeries<T extends SeriesEntryLike>(entriesNewestFirst: T
   };
 }
 
+function localePrefix(lang: Language): string {
+  return lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : '';
+}
+
+/** Column index under the projects section: `/cn/projects/<series>/`. */
 export function getSeriesIndexHref(series: string, lang: Language): string {
-  const prefix = lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : '';
-  return `${prefix}/blog/series/${series}/`;
+  return `${localePrefix(lang)}/projects/${series}/`;
+}
+
+/** Column entry: `/cn/projects/<series>/<entry-slug>/` (entry slug = `YYYY-MM-DD`). */
+export function getSeriesEntryHref(series: string, entrySlug: string, lang: Language): string {
+  return `${getSeriesIndexHref(series, lang)}${entrySlug}/`;
 }
