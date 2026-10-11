@@ -10,6 +10,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeOutboundLinks from './src/plugins/rehype-outbound-links.ts';
 import remarkDemoteH1 from './src/plugins/remark-demote-h1.ts';
+import remarkCitations from './src/plugins/remark-citations.ts';
 import visualManifest from './src/data/visuals-manifest.json';
 import tagTaxonomy from './src/data/tag-taxonomy.json' with { type: 'json' };
 import legacyRedirects from './src/data/legacy-redirects.json' with { type: 'json' };
@@ -76,7 +77,7 @@ const katexOptions = {
   }
 };
 
-const sharedRemarkPlugins = [remarkMath, remarkDemoteH1];
+const sharedRemarkPlugins = [remarkMath, remarkDemoteH1, remarkCitations];
 const sharedRehypePlugins = [
   [rehypeKatex, katexOptions],
   rehypeOutboundLinks,

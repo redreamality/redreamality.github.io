@@ -63,6 +63,37 @@
   .prose :where(h1, h2, h3, h4, h5, h6) {
     scroll-margin-top: calc(var(--site-header-height) + 1rem);
   }
+
+  /* Numeric citations (remark-citations) */
+  .prose sup.cite {
+    font-size: 0.72em;
+    line-height: 0;
+    vertical-align: super;
+    margin-left: 0.05em;
+    white-space: nowrap;
+    @apply text-brand-600 dark:text-brand-300;
+  }
+  .prose sup.cite a,
+  .prose a.ref-backlink {
+    @apply text-brand-600 dark:text-brand-300 font-medium;
+    text-decoration: none;
+    border-bottom: none;
+    scroll-margin-top: calc(var(--site-header-height) + 1rem);
+  }
+  .prose sup.cite a:hover,
+  .prose a.ref-backlink:hover {
+    text-decoration: underline;
+  }
+  .prose a.ref-backlink {
+    font-size: 0.85em;
+    margin-left: 0.15em;
+  }
+  .prose .ref-entry {
+    scroll-margin-top: calc(var(--site-header-height) + 1rem);
+  }
+  .prose .ref-entry:target {
+    @apply bg-brand-50 dark:bg-brand-950 rounded;
+  }
   
   /* 标题样式 */
   .prose h1 {
