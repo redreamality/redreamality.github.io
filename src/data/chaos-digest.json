@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T15:47:45+08:00",
+  "updatedAt": "2026-10-11T09:47:16+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,128 @@
     "other"
   ],
   "themeCounts": {
-    "models": 13,
-    "coding-tools": 14,
-    "agents-oss": 13,
+    "models": 11,
+    "coding-tools": 15,
+    "agents-oss": 14,
     "security": 8,
-    "research": 42,
+    "research": 40,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-11T09:00:00+08:00",
+      "label": {
+        "zh": "10月11日 09:00",
+        "en": "Oct 11 09:00",
+        "ja": "10月11日 09:00"
+      },
+      "items": [
+        {
+          "id": "t569",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Reflection Beam：501B/23B 美国开源权重（coding/agentic MoE）",
+            "en": "Reflection Beam",
+            "ja": "Reflection Beam"
+          },
+          "summary": {
+            "zh": "Reflection 放出美国开源阵营旗舰 Beam：501B/23B MoE，主打 coding 与 agentic，对照 DeepSeek/Qwen/GLM。权重和技术报告还没放，先写发布与定位。贴题 Trends 相对 gpts 未过两窗口，故停在 inbox。 10-11：FT 称 Nvidia 洽购 Reflection AI。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Reflection 放出美国开源阵营旗舰 Beam：501B/23B MoE，主打 coding 与 agentic，对照 DeepSeek/Qwen/GLM。权重和技术报告还没放，先写发布与定位。贴题 Trends 相对 gpts 未过两窗口，故停在 inbox。 10-11：FT 称 Nvidia 洽购 Reflection AI。",
+            "en": "Reflection launches Beam, a US open-weight MoE (501B total, 23B active) aimed at coding and agentic work against DeepSeek, Qwen, and GLM. Weights and the tech report are still pending, so the piece is the launch and positioning. Topic-relevant Trends terms did not beat gpts in both windows, so this stays in the inbox. Oct 11: FT reports Nvidia in talks to acquire Reflection AI.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "reflection",
+              "url": "https://reflection.ai/blog/introducing-beam",
+              "title": "Introducing Beam",
+              "brief": {
+                "zh": "官方：稀疏 MoE；预训练 23.8T tokens；RL 在 10.5K GB300 跑 4 周；宣称 coding/agentic 近 GLM 5.2 / Qwen 3.8-Max，推理算力更省；可申请早期访问，权重本月晚些时候放出。",
+                "en": "Official: sparse MoE; 23.8T pretraining tokens; RL for four weeks on 10.5K GB300s; claims coding/agentic parity near GLM 5.2 / Qwen 3.8-Max with less inference compute; early access now, weights later this month.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://news.ycombinator.com/item?id=49969183",
+              "title": "Beam on HN",
+              "brief": {
+                "zh": "HN 304/79。昨日 r/LocalLLaMA 仅传闻，现已发。",
+                "en": "HN 304/79. Yesterday's LocalLLaMA rumor is now a real launch.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.ft.com/content/052610c5-22b4-4dd4-932e-b7f9f0628b6a",
+              "title": "Nvidia in talks to acquire Reflection AI (FT)",
+              "brief": {
+                "zh": "HN 122/83；付费墙。",
+                "en": "HN 122/83; paywalled.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "reflection",
+            "hn",
+            "techcrunch"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://reflection.ai/blog/introducing-beam",
+            "https://news.ycombinator.com/item?id=49969183",
+            "https://www.ft.com/content/052610c5-22b4-4dd4-932e-b7f9f0628b6a"
+          ]
+        },
+        {
+          "id": "t684",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Microsoft Execution Containers 1.0（MXC）：给 AI agent 代码执行的策略驱动沙箱",
+            "en": "Microsoft Execution Containers 1.0（MXC）",
+            "ja": "Microsoft Execution Containers 1.0（MXC）"
+          },
+          "summary": {
+            "zh": "微软发 Execution Containers 1.0，为 agent 代码执行提供策略驱动沙箱——平台级 containment 原语，接本周 Anthropic 断网与 AgentCorruption；Trends 「Microsoft Execution Containers」7d 1.38 vs gpts 57.2 fail、24h 0.0 vs gpts 2.69 fail → inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "微软发 Execution Containers 1.0，为 agent 代码执行提供策略驱动沙箱——平台级 containment 原语，接本周 Anthropic 断网与 AgentCorruption；Trends 「Microsoft Execution Containers」7d 1.38 vs gpts 57.2 fail、24h 0.0 vs gpts 2.69 fail → inbox。",
+            "en": "Microsoft ships Execution Containers 1.0, policy-driven sandboxing for agent code execution—a platform-level containment primitive alongside this week's Anthropic eval shutdown and AgentCorruption; Trends \"Microsoft Execution Containers\"7d 1.38 vs gpts 57.2 fail, 24h 0.0 vs gpts 2.69 fail → inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/",
+              "title": "Microsoft Execution Containers: policy-driven containment for AI agents",
+              "brief": {
+                "zh": "HN 160/37；1.0 发布。",
+                "en": "HN 160/37; 1.0 release.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "microsoft"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-10T15:00:00+08:00",
       "label": {
@@ -239,15 +352,15 @@
       "items": [
         {
           "id": "t630",
-          "theme": "models",
+          "theme": "research",
           "title": {
             "zh": "Claude Haiku 5.5：$0.10/$0.50 小旗舰、effort 档位、1M 上下文——给 Opus/Sonnet 当 subagent 与压缩引擎",
-            "en": "Claude Haiku 5.5",
-            "ja": "Claude Haiku 5.5"
+            "en": "When Claude Haiku 5.5 Actually Saves Money as a Subagent or Compaction Engine: A Cost Model You Can Run Yourself",
+            "ja": "When Claude Haiku 5.5 Actually Saves Money as a Subagent or Compaction Engine: A Cost Model You Can Run Yourself"
           },
           "summary": {
             "zh": "Anthropic 发 Haiku 5.5：与 GPT-6 Luna 同价（≤100k），首个带 effort 档的 Haiku，发布文直接定位为 subagent/压缩引擎；阶梯价与新 tokenizer 让真实账单因负载而异。主词「Claude Haiku 5.5」Trends 7d 3.70 vs gpts 11.76 未过（24h 16.62 vs 4.72 过）→ 停 inbox；短词「Haiku 5.5」两窗口过但不替代主词，留待明日复测。 10-08 下午复测：主词 7d 5.72 vs gpts 11.49 仍 fail、24h 27.23 vs 4.62 pass → 仍 inbox。Day-1 实务样本显示 DeepSeek V4.1 Flash 在两项 agent 杂活与研究 subagent 上胜 Haiku 5.5；Agent SDK/claude -p 仍走订阅额度并新增 API 额度。 10-09 晨复测（同主词）：7d 8.32 vs gpts 10.22 fail、24h 43.93 vs 15.32 pass → 仍 inbox。 10-09 下午复测：「Claude Haiku 5.5」7d 9.07 vs gpts 10.36 fail、24h 37.29 vs gpts 9.44 pass，未双过/无数值 → 仍 inbox。 10-10 晨复测：主词 7d 10.72 vs gpts 10.40 / 复跑 10.38、24h 24.08 vs 9.68 / 复跑 30.24 vs 17.87，两窗口两次均过 → 升 shortlisted（7d 边际极薄）。",
-            "en": "",
+            "en": "Haiku 5.5 lists at USD 0.10/0.50 per million tokens, but any prompt over 100K tokens bills the whole request at 5x, and the new tokenizer, on-by-default thinking, and cache rules all move the bill. Per-request formulas, three worked examples, the 12x-vs-GPT-6-Luna counter-case, and an acceptance checklist.",
             "ja": ""
           },
           "judgment": {
@@ -344,7 +457,7 @@
             "reddit"
           ],
           "score": 5,
-          "status": "shortlisted",
+          "status": "published",
           "externalUrls": [
             "https://www.anthropic.com/claude-haiku-5-5",
             "https://news.ycombinator.com/item?id=49996437",
@@ -353,7 +466,11 @@
             "https://www.reddit.com/r/ClaudeAI/comments/1x09xst/i_tested_haiku_55_vs_luna_vs_deepseek_flash_vs/",
             "https://www.reddit.com/r/ClaudeAI/comments/1x04bau/monthly_api_quota_for_max_and_team_users/",
             "https://www.reddit.com/r/LocalLLaMA/comments/1x0ixh6/deepseek_v41_flash_beat_haiku_55_as_my_research/"
-          ]
+          ],
+          "blog": {
+            "zh": "/cn/blog/claude-haiku-5-5-subagent-compaction-cost-model/",
+            "en": "/blog/claude-haiku-5-5-subagent-compaction-cost-model/"
+          }
         },
         {
           "id": "t666",
@@ -1671,185 +1788,6 @@
             "zh": "/cn/blog/mcp-server-sprawl-tool-selection-at-scale/",
             "en": "/blog/mcp-server-sprawl-tool-selection-at-scale/"
           }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-07T15:00:00+08:00",
-      "label": {
-        "zh": "10月7日 15:00",
-        "en": "Oct 7 15:00",
-        "ja": "10月7日 15:00"
-      },
-      "items": [
-        {
-          "id": "t611",
-          "theme": "models",
-          "title": {
-            "zh": "Reika：面向小本地模型的 coding-agent CLI（上下文纪律+环路熔断+macOS sandbox）",
-            "en": "Reika",
-            "ja": "Reika"
-          },
-          "summary": {
-            "zh": "Reika 把本地小模型 coding-agent 写成可验收 harness（上下文/环路/沙箱/skills）。贴题 Trends 两窗口未过 gpts，停 inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Reika 把本地小模型 coding-agent 写成可验收 harness（上下文/环路/沙箱/skills）。贴题 Trends 两窗口未过 gpts，停 inbox。",
-            "en": "Reika frames a local small-model coding-agent as an auditable harness (context/loop/sandbox/skills). Topic Trends failed both windows vs gpts—stays inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "producthunt",
-              "url": "https://www.producthunt.com/products/reika",
-              "title": "Reika on Product Hunt",
-              "brief": {
-                "zh": "下午 PH 新上；面向 8B–35B 本地窗的 coding-agent CLI。",
-                "en": "Afternoon PH launch; coding-agent CLI for 8B–35B local windows.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/alexwkleung/reika",
-              "title": "alexwkleung/reika",
-              "brief": {
-                "zh": "append-only 上下文、环路熔断、macOS sandbox、MCP+skills；docs/findings.md。",
-                "en": "Append-only context, loop breakers, macOS sandbox, MCP+skills; docs/findings.md.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "producthunt",
-            "github"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.producthunt.com/products/reika",
-            "https://github.com/alexwkleung/reika",
-            "https://reikacode.com"
-          ]
-        },
-        {
-          "id": "t612",
-          "theme": "research",
-          "title": {
-            "zh": "Trust Layer for Agent Evaluation：分数旁的四维可信事后审计",
-            "en": "Trust Layer for Agent Evaluation",
-            "ja": "Trust Layer for Agent Evaluation"
-          },
-          "summary": {
-            "zh": "Trust Layer 给 recorded score 加四维事后可信审计；ALE 仅 22.6% 过全关。Trends 未过，停 inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Trust Layer 给 recorded score 加四维事后可信审计；ALE 仅 22.6% 过全关。Trends 未过，停 inbox。",
-            "en": "Trust Layer adds four post-hoc trust checks beside recorded scores; only 22.6% of ALE passes clear all. Trends failed—inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.07274",
-              "title": "A Trust Layer for Agent Evaluation",
-              "brief": {
-                "zh": "可复现/溯源/诚实/重复稳定性；能力榜≠可信度。",
-                "en": "Reproducibility, provenance, honesty, repeat stability—capability ≠ trustworthiness.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.07274"
-          ]
-        },
-        {
-          "id": "t613",
-          "theme": "research",
-          "title": {
-            "zh": "Evidence to Action：工具型 agent 如何在证据→行动链上失败（SafeActBench）",
-            "en": "Evidence to Action",
-            "ja": "Evidence to Action"
-          },
-          "summary": {
-            "zh": "Evidence→Action 失败学：调查不全或证据未立就动手；SafeActBench+Ledger。Trends 未过，停 inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Evidence→Action 失败学：调查不全或证据未立就动手；SafeActBench+Ledger。Trends 未过，停 inbox。",
-            "en": "Evidence→action failure modes: incomplete investigation or acting before evidence; SafeActBench+Ledger. Trends failed—inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.07753",
-              "title": "From Evidence to Action: How Tool-Using Agents Fail",
-              "brief": {
-                "zh": "656 例 + provenance-bound Evidence Ledger。",
-                "en": "656 cases + provenance-bound Evidence Ledger.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.07753"
-          ]
-        },
-        {
-          "id": "t614",
-          "theme": "research",
-          "title": {
-            "zh": "Evaluate the Stack, Not the Layer：规则门+LLM 裁判是否独立失效？",
-            "en": "Evaluate the Stack, Not the Layer",
-            "ja": "Evaluate the Stack, Not the Layer"
-          },
-          "summary": {
-            "zh": "堆栈门禁相关失效：规则+裁判近独立，双裁判高度相关。Trends 未过，停 inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "堆栈门禁相关失效：规则+裁判近独立，双裁判高度相关。Trends 未过，停 inbox。",
-            "en": "Stacked gates correlate: rule+judge near-independent, dual judges highly correlated. Trends failed—inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.07359",
-              "title": "Evaluate the Stack, Not the Layer",
-              "brief": {
-                "zh": "1119 labelled actions；solo 准确率不预测堆栈增益。",
-                "en": "1,119 labelled actions; solo accuracy does not predict stack gain.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.07359"
-          ]
         }
       ]
     },
