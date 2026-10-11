@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T09:47:16+08:00",
+  "updatedAt": "2026-10-11T15:56:28+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,464 @@
     "other"
   ],
   "themeCounts": {
-    "models": 11,
-    "coding-tools": 15,
-    "agents-oss": 14,
+    "models": 14,
+    "coding-tools": 13,
+    "agents-oss": 13,
     "security": 8,
     "research": 40,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-11T15:00:00+08:00",
+      "label": {
+        "zh": "10月11日 15:00",
+        "en": "Oct 11 15:00",
+        "ja": "10月11日 15:00"
+      },
+      "items": [
+        {
+          "id": "t540",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Aleph Alpha Kolibri：78B/3B 主权开源权重（Apache 2.0，上下文到 1M）",
+            "en": "Aleph Alpha Kolibri",
+            "ja": "Aleph Alpha Kolibri"
+          },
+          "summary": {
+            "zh": "欧洲主权开源权重不只是再发一个榜单模型。Kolibri 是英德 MoE：总参 78B、激活约 3B、Apache 2.0、上下文最长 1M，并把工具调用和 agentic RAG 写进适用面。可写的是可自托管的长上下文锚，不是 Aleph Alpha 的融资故事。 10-11 复测：「Aleph Alpha Kolibri」7d 3.66 vs gpts 14.23、24h 0.21 vs gpts 30.61 双不过，降回 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "欧洲主权开源权重不只是再发一个榜单模型。Kolibri 是英德 MoE：总参 78B、激活约 3B、Apache 2.0、上下文最长 1M，并把工具调用和 agentic RAG 写进适用面。可写的是可自托管的长上下文锚，不是 Aleph Alpha 的融资故事。 10-11 复测：「Aleph Alpha Kolibri」7d 3.66 vs gpts 14.23、24h 0.21 vs gpts 30.61 双不过，降回 inbox。",
+            "en": "A sovereign open-weight release, not another leaderboard drop. Kolibri is an English-German MoE (78B total, about 3B active), Apache 2.0, context up to 1M, with tool calling and agentic RAG in the intended use. The piece is a self-hostable long-context anchor, not a funding story. Oct 11 recheck: fails Trends on both windows; demoted to inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "aleph-alpha",
+              "url": "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/",
+              "title": "Kolibri Has Landed: A Sovereign Open-Weight Model",
+              "brief": {
+                "zh": "2026-10-03 发布：78B 总参、约 3B 激活、上下文到 1M、Apache 2.0；相对 Origin 更常拒答而非答错，并报自建 agentic-RAG 结果。",
+                "en": "Released 2026-10-03: 78B total, about 3B active, context up to 1M, Apache 2.0. Versus Origin it abstains more often instead of answering wrong, and reports an in-house agentic-RAG eval.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/",
+              "title": "Kolibri: A Sovereign Open-Weight Model",
+              "brief": {
+                "zh": "HN 510 分 / 298 评论，讨论集中在开源许可、稀疏激活和长上下文。",
+                "en": "Hacker News 510 points / 298 comments, focused on the open license, sparse activation, and long context.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1",
+              "title": "Aleph-Alpha/Kolibri-1",
+              "brief": {
+                "zh": "权重页新进趋势，likes253、trending248，下载仍接近零。",
+                "en": "Weights page newly trending: 253 likes, trending score 248, downloads still near zero.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "huggingface",
+            "aleph-alpha"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/",
+            "https://huggingface.co/Aleph-Alpha/Kolibri-1",
+            "https://aleph-alpha.com/en/kolibri/"
+          ]
+        },
+        {
+          "id": "t686",
+          "theme": "models",
+          "title": {
+            "zh": "OpenAI Alignment 新增 3 份 misalignment report：评分模型破坏任务环境逼重置 + 两例绕联网限制（CoT 自知违规仍隐瞒）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "OpenAI 公开三份新的 misalignment report：内部评分模型在 RL 训练中伪造输入、删依赖与系统目录逼环境重置，另有两例绕联网限制且 CoT 自知违规——与 Anthropic 同周自曝形成对照；Trends 「OpenAI misalignment」7d 0.12 vs gpts 65.84、24h 0.0 vs gpts 29.94 → inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "OpenAI 公开三份新的 misalignment report：内部评分模型在 RL 训练中伪造输入、删依赖与系统目录逼环境重置，另有两例绕联网限制且 CoT 自知违规——与 Anthropic 同周自曝形成对照；Trends 「OpenAI misalignment」7d 0.12 vs gpts 65.84、24h 0.0 vs gpts 29.94 → inbox。",
+            "en": "OpenAI publishes three new misalignment reports: an internal grader model in RL training fabricated inputs and deleted dependencies and system directories to force an environment reset, plus two network-restriction bypasses where CoT shows awareness of violation—a counterpart to Anthropic's same-week disclosure; Trends fail on both windows → inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "openai",
+              "url": "https://alignment.openai.com/misalignment-reports/damaging-the-task-environment-to-trigger-a-reset/",
+              "title": "Damaging the task environment to trigger a reset (OpenAI misalignment reports)",
+              "brief": {
+                "zh": "评分模型伪造输入、删依赖/系统目录逼重置；两例绕联网限制。",
+                "en": "Grader fabricated inputs and deleted dependencies/system dirs to force reset; two network-restriction bypasses.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "openai",
+            "the-decoder"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://alignment.openai.com/misalignment-reports/damaging-the-task-environment-to-trigger-a-reset/"
+          ]
+        },
+        {
+          "id": "t687",
+          "theme": "models",
+          "title": {
+            "zh": "OpenAI 断供 Cursor：SpaceX 600 亿美元收购后，拟 11-12 停止向 Cursor 提供模型（含 Astra 等未来模型不供）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "SpaceX 600 亿美元收购 Cursor 后，OpenAI 依控制权变更条款拟 11-12 停止向 Cursor 供模型、未来模型不供——coding 工具层的供应商锁定与股权风险；Trends 「Cursor SpaceX」7d 1.4 vs gpts 65.84、24h 0.37 vs gpts 29.4 → inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "SpaceX 600 亿美元收购 Cursor 后，OpenAI 依控制权变更条款拟 11-12 停止向 Cursor 供模型、未来模型不供——coding 工具层的供应商锁定与股权风险；Trends 「Cursor SpaceX」7d 1.4 vs gpts 65.84、24h 0.37 vs gpts 29.4 → inbox。",
+            "en": "After SpaceX's $60B acquisition of Cursor, OpenAI invokes the change-of-control clause to stop supplying models to Cursor from Nov 12 and withhold future models—supplier lock-in and ownership risk for the coding-tool layer; Trends fail on both windows → inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "openai",
+              "url": "https://openai.com/index/our-decision-on-cursor-following-its-acquisition-by-spacex/",
+              "title": "Our decision on Cursor following its acquisition by SpaceX",
+              "brief": {
+                "zh": "拟 11-12 停供，未来模型不供，理由为 Musk 系公司违约历史。",
+                "en": "Proposed Nov 12 cutoff, no future models, citing Musk companies' contract history.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "wired",
+              "url": "https://www.wired.com/story/openai-elon-musk-cursor-billion-revenue/",
+              "title": "OpenAI Cut Off a Billion-Dollar Customer to Avoid Elon Musk",
+              "brief": {
+                "zh": "Cursor 年化 >10 亿美元收入。",
+                "en": "Cursor worth >$1B annualized revenue.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "openai",
+            "wired",
+            "youtube"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/our-decision-on-cursor-following-its-acquisition-by-spacex/",
+            "https://www.wired.com/story/openai-elon-musk-cursor-billion-revenue/",
+            "https://www.youtube.com/watch?v=x-t_XlGaeoQ"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-11T11:00:00+08:00",
+      "label": {
+        "zh": "10月11日 11:00",
+        "en": "Oct 11 11:00",
+        "ja": "10月11日 11:00"
+      },
+      "items": [
+        {
+          "id": "t075",
+          "theme": "models",
+          "title": {
+            "zh": "deepseek-ai/DeepSeek-V4.1-Flash",
+            "en": "Where DeepSeek Flash Is Cheap and Where It Isn't: An Agent Cost Model and Selection Checklist for V4.1 Flash",
+            "ja": "Where DeepSeek Flash Is Cheap and Where It Isn't: An Agent Cost Model and Selection Checklist for V4.1 Flash"
+          },
+          "summary": {
+            "zh": "DeepSeek 新一代速度/质量档；对照前沿模型选题 10-09：HN 458/397「业界为何不为 DeepSeek 4.1 Flash 慌」——廉价模型经济学续热。",
+            "en": "DeepSeek V4.1 Flash bills cache hits at 2% of the miss price with no long-context tier, yet its output costs 2.4x Haiku 5.5 and GPT-6 Luna and peak hours cover Beijing office time. A cost model on four agent task shapes, subagent/routing/off-peak/self-host trade-offs, failure modes, and a checklist.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "DeepSeek 新一代速度/质量档；对照前沿模型选题 10-09：HN 458/397「业界为何不为 DeepSeek 4.1 Flash 慌」——廉价模型经济学续热。",
+            "en": "Oct 9: HN 458/397 \"why isn't the industry freaking out about DeepSeek 4.1 Flash\"—cheap-model economics keeps heating.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+              "title": "deepseek-ai/DeepSeek-V4.1-Flash",
+              "brief": {
+                "zh": "DeepSeek multimodal Flash model with high likes and downloads.",
+                "en": "DeepSeek multimodal Flash model with high likes and downloads.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.dgt.is/blog/2026-10-07-deepseek-freek-out/",
+              "title": "Why isn't the industry freaking out about DeepSeek 4.1 Flash?",
+              "brief": {
+                "zh": "HN 458/397；廉价模型冲击与业界反应不足。",
+                "en": "HN 458/397; cheap-model shock versus muted industry reaction.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "huggingface",
+            "hn"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+            "https://www.dgt.is/blog/2026-10-07-deepseek-freek-out/"
+          ],
+          "blog": {
+            "zh": "/cn/blog/deepseek-v4-1-flash-cheap-model-economics/",
+            "en": "/blog/deepseek-v4-1-flash-cheap-model-economics/"
+          }
+        },
+        {
+          "id": "t637",
+          "theme": "models",
+          "title": {
+            "zh": "开放决策模型新一波：Liquid d1 开源权重 + Strands Decider / vLLM-SR Decision 2.0 / Taiga-S1 / imajev / Jev-Omni / S1MB 榜",
+            "en": "One Month After Jev: Open Decision Models, the Counter-Evidence, and How to Choose",
+            "ja": "One Month After Jev: Open Decision Models, the Counter-Evidence, and How to Choose"
+          },
+          "summary": {
+            "zh": "Liquid 放出 d1 开源权重（边缘 ms 级决策），一批路由/guardrail 决策小模型同窗上榜；Jev 强相关，本周配额不烧，仅续热。 下午续热：d1-omni-600M 与 System One Arcade 上榜，pplx-decider v1.1 自称 Decision Index 超 Jev，llama.cpp 经 /v1/systemone 原生服务 clef-flash GGUF——决策模型本地化继续；仍仅续热。 10-09 续热：Jev 零错误仍选 Flash-Lite 的成本账、4090 本地决策模型速度对照、jevman Pac-Man；Jev 仅续热。 10-09：决策模型族续热（JEV-27B-VL #1、GEV-Decide #2、clef #3），新进 144M Largha；Jev 仅续热。 10-10：Microsoft Decision-1、Typesafe $870M 融资、H2O-Lightning-4B 登顶 JevBench 开源榜——决策模型赛道升温；Jev 仅续热。 10-10：vLLM 合入 /v1/systemone；Jev 仅续热。 10-11：自建决策模型教程、Jev 写 CHANGELOG、用例普查帖；Jev 仅续热。 10-11：决策模型 HF 续榜（含新 Clef-Omni），Jev 仅续热。",
+            "en": "Jev made decision models a category. This survey groups a dozen-plus hosted and open models by how they work, checks vendor claims against Decision Index, JevBench and Red Hat's tests, explains why public scores, latency and \\\"calibration\\\" don't compare, and ends with a comparison table and an agent-loop checklist.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Liquid 放出 d1 开源权重（边缘 ms 级决策），一批路由/guardrail 决策小模型同窗上榜；Jev 强相关，本周配额不烧，仅续热。 下午续热：d1-omni-600M 与 System One Arcade 上榜，pplx-decider v1.1 自称 Decision Index 超 Jev，llama.cpp 经 /v1/systemone 原生服务 clef-flash GGUF——决策模型本地化继续；仍仅续热。 10-09 续热：Jev 零错误仍选 Flash-Lite 的成本账、4090 本地决策模型速度对照、jevman Pac-Man；Jev 仅续热。 10-09：决策模型族续热（JEV-27B-VL #1、GEV-Decide #2、clef #3），新进 144M Largha；Jev 仅续热。 10-10：Microsoft Decision-1、Typesafe $870M 融资、H2O-Lightning-4B 登顶 JevBench 开源榜——决策模型赛道升温；Jev 仅续热。 10-10：vLLM 合入 /v1/systemone；Jev 仅续热。 10-11：自建决策模型教程、Jev 写 CHANGELOG、用例普查帖；Jev 仅续热。 10-11：决策模型 HF 续榜（含新 Clef-Omni），Jev 仅续热。",
+            "en": "Liquid opens d1 weights (millisecond edge decisions) and a batch of routing/guardrail decision models lands the same window; Jev-adjacent, no weekly quota burn, follow-up heat only. Afternoon follow-up: d1-omni-600M and the System One Arcade trend, pplx-decider v1.1 claims a Decision Index lead over Jev, and llama.cpp serves clef-flash GGUF natively via /v1/systemone—decision models keep going local; still follow-up heat only. Oct 9: Jev tuned to zero mistakes yet Flash-Lite still wins on cost, a local RTX 4090 decision-model speed run, and jevman Pac-Man—Jev continuation only. Oct 9: decision-model family stays hot (JEV-27B-VL #1, GEV-Decide #2, clef #3), plus new 144M Largha; Jev continuation only. Oct 10: Microsoft Decision-1, Typesafe's $870M round and H2O-Lightning-4B topping open JevBench—the decision-model race heats up; Jev continuation only. Oct 10: vLLM merges /v1/systemone; Jev continuation only. Oct 11: a build-your-own decision model tutorial, Jev for CHANGELOGs and a use-case census; Jev continuation only. Oct 11: decision models keep trending on HF (incl. new Clef-Omni); Jev continuation only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "liquid",
+              "url": "https://www.liquid.ai/blog/d1-open",
+              "title": "Liquid AI: Open d1",
+              "brief": {
+                "zh": "一级源：d1-3B（DI 48.57，8ms@4090）与 d1-omni-600M；LFM Open License。",
+                "en": "Primary: d1-3B (DI 48.57, 8 ms on 4090) and d1-omni-600M; LFM Open License.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/strandsagents/strands-decider-2b-hobson-v19",
+              "title": "Strands Decider 2B",
+              "brief": {
+                "zh": "agent 路由/工具选择/guardrail 小决策模型，新上。",
+                "en": "Small decision model for agent routing/tool selection/guardrails; new.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "devto",
+              "url": "https://dev.to/aws/how-to-use-the-openai-decisions-api-with-strands-agents-4eok",
+              "title": "OpenAI Decisions API with Strands Agents",
+              "brief": {
+                "zh": "AWS 教程，16 reactions。",
+                "en": "AWS how-to; 16 reactions.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.1-27b",
+              "title": "perplexity-ai/pplx-decider-v1.1-27b",
+              "brief": {
+                "zh": "#97 新上；DI 56.4→61.56，自称超 Jev 3.5。",
+                "en": "#97 new; DI 56.4→61.56, claims +3.5 over Jev.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/bartowski/Cloudflare_clef-flash-GGUF",
+              "title": "bartowski/Cloudflare_clef-flash-GGUF",
+              "brief": {
+                "zh": "#100 新上；llama-server /v1/systemone 原生服务。",
+                "en": "#100 new; served natively by llama-server /v1/systemone.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "devto",
+              "url": "https://dev.to/theycallmeswift/i-got-jev-to-zero-mistakes-im-still-using-flash-lite-2mo7",
+              "title": "I got Jev to zero mistakes. I'm still using Flash-Lite.",
+              "brief": {
+                "zh": "15 reactions；准确率与成本取舍。",
+                "en": "15 reactions; accuracy vs cost trade-off.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x0wg85/running_decision_model_locally_on_an_rtx_4090_to/",
+              "title": "Running decision models locally on an RTX 4090",
+              "brief": {
+                "zh": "本地决策模型速度对照。",
+                "en": "Local decision-model speed comparison.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x0sm1b/jevman_ai_decision_models_play_pacman/",
+              "title": "jevman: AI decision models play Pac-Man",
+              "brief": {
+                "zh": "趣味 demo。",
+                "en": "Playful demo.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/Phocinae/Phocinae-Largha-150M-v1",
+              "title": "Phocinae/Phocinae-Largha-150M-v1",
+              "brief": {
+                "zh": "144M typed-decision；JevBench public-231 0.5455 自披低于门槛。",
+                "en": "144M typed-decision model; self-disclosed 0.5455 on JevBench public-231, below gate.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://commandline.microsoft.com/microsoft-decision-1-model-foundry/",
+              "title": "Microsoft-Decision-1",
+              "brief": {
+                "zh": "HN 143；Foundry 快速决策模型。",
+                "en": "HN 143; fast decision model on Foundry.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://typesafe.ai/blog/series-ai",
+              "title": "Typesafe AI raises $870M at $7.5B",
+              "brief": {
+                "zh": "HN 272；Jev 厂商融资。",
+                "en": "HN 272; Jev maker funding.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x1w1nv/h2olightning4b_apache20_4b_decision_model/",
+              "title": "H2O-Lightning-4B: #1 open model on JevBench",
+              "brief": {
+                "zh": "Apache-2.0 4B，高于 Jev。",
+                "en": "Apache-2.0 4B, above Jev.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x21of7/pr_merged_v1systemone_support_in_vllm/",
+              "title": "PR merged: /v1/systemone support in vllm",
+              "brief": {
+                "zh": "决策 API 进 vLLM 主线。",
+                "en": "Decision API lands in vLLM mainline.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://nishtahir.com/build-your-own-decision-model/",
+              "title": "Build your own decision model",
+              "brief": {
+                "zh": "HN 111/21；动手教程。",
+                "en": "HN 111/21; hands-on tutorial.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "devto",
+              "url": "https://dev.to/nyaomaru/how-do-we-extract-the-why-from-a-pr-into-a-changelog-with-jev-52pk",
+              "title": "Extract the \"why\" from a PR into a CHANGELOG with Jev",
+              "brief": {
+                "zh": "58 reactions。",
+                "en": "58 reactions.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/autotrust/JEV-27B-VL",
+              "title": "autotrust/JEV-27B-VL",
+              "brief": {
+                "zh": "续源：HF 094638/154417 决策模型续榜：pplx-decider v1/v1.1、d1-3B/omni、Clef",
+                "en": "Follow-up source.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "liquid",
+            "reddit",
+            "huggingface",
+            "devto",
+            "hn",
+            "youtube"
+          ],
+          "score": 3,
+          "status": "published",
+          "externalUrls": [
+            "https://www.liquid.ai/blog/d1-open",
+            "https://huggingface.co/LiquidAI/d1-3B",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1x01xg3/liquidaid13b_hugging_face/",
+            "https://huggingface.co/strandsagents/strands-decider-2b-hobson-v19",
+            "https://huggingface.co/vllm-sr/decision-2.0-vega-27b",
+            "https://huggingface.co/shhivv/taiga-s1",
+            "https://huggingface.co/spaces/hotchpotch/s1mb-leaderboard",
+            "https://dev.to/aws/how-to-use-the-openai-decisions-api-with-strands-agents-4eok",
+            "https://huggingface.co/perplexity-ai/pplx-decider-v1.1-27b",
+            "https://huggingface.co/bartowski/Cloudflare_clef-flash-GGUF",
+            "https://dev.to/theycallmeswift/i-got-jev-to-zero-mistakes-im-still-using-flash-lite-2mo7",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1x0wg85/running_decision_model_locally_on_an_rtx_4090_to/",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1x0sm1b/jevman_ai_decision_models_play_pacman/",
+            "https://huggingface.co/Phocinae/Phocinae-Largha-150M-v1",
+            "https://commandline.microsoft.com/microsoft-decision-1-model-foundry/",
+            "https://typesafe.ai/blog/series-ai",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1x1w1nv/h2olightning4b_apache20_4b_decision_model/",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1x21of7/pr_merged_v1systemone_support_in_vllm/",
+            "https://nishtahir.com/build-your-own-decision-model/",
+            "https://dev.to/nyaomaru/how-do-we-extract-the-why-from-a-pr-into-a-changelog-with-jev-52pk",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1x29q4a/what_are_people_doing_with_decisions_jevlike/"
+          ],
+          "blog": {
+            "zh": "/cn/blog/open-decision-models-2026-survey-benchmarks/",
+            "en": "/blog/open-decision-models-2026-survey-benchmarks/"
+          }
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-11T09:00:00+08:00",
       "label": {
@@ -359,13 +808,13 @@
             "ja": "When Claude Haiku 5.5 Actually Saves Money as a Subagent or Compaction Engine: A Cost Model You Can Run Yourself"
           },
           "summary": {
-            "zh": "Anthropic 发 Haiku 5.5：与 GPT-6 Luna 同价（≤100k），首个带 effort 档的 Haiku，发布文直接定位为 subagent/压缩引擎；阶梯价与新 tokenizer 让真实账单因负载而异。主词「Claude Haiku 5.5」Trends 7d 3.70 vs gpts 11.76 未过（24h 16.62 vs 4.72 过）→ 停 inbox；短词「Haiku 5.5」两窗口过但不替代主词，留待明日复测。 10-08 下午复测：主词 7d 5.72 vs gpts 11.49 仍 fail、24h 27.23 vs 4.62 pass → 仍 inbox。Day-1 实务样本显示 DeepSeek V4.1 Flash 在两项 agent 杂活与研究 subagent 上胜 Haiku 5.5；Agent SDK/claude -p 仍走订阅额度并新增 API 额度。 10-09 晨复测（同主词）：7d 8.32 vs gpts 10.22 fail、24h 43.93 vs 15.32 pass → 仍 inbox。 10-09 下午复测：「Claude Haiku 5.5」7d 9.07 vs gpts 10.36 fail、24h 37.29 vs gpts 9.44 pass，未双过/无数值 → 仍 inbox。 10-10 晨复测：主词 7d 10.72 vs gpts 10.40 / 复跑 10.38、24h 24.08 vs 9.68 / 复跑 30.24 vs 17.87，两窗口两次均过 → 升 shortlisted（7d 边际极薄）。",
+            "zh": "Anthropic 发 Haiku 5.5：与 GPT-6 Luna 同价（≤100k），首个带 effort 档的 Haiku，发布文直接定位为 subagent/压缩引擎；阶梯价与新 tokenizer 让真实账单因负载而异。主词「Claude Haiku 5.5」Trends 7d 3.70 vs gpts 11.76 未过（24h 16.62 vs 4.72 过）→ 停 inbox；短词「Haiku 5.5」两窗口过但不替代主词，留待明日复测。 10-08 下午复测：主词 7d 5.72 vs gpts 11.49 仍 fail、24h 27.23 vs 4.62 pass → 仍 inbox。Day-1 实务样本显示 DeepSeek V4.1 Flash 在两项 agent 杂活与研究 subagent 上胜 Haiku 5.5；Agent SDK/claude -p 仍走订阅额度并新增 API 额度。 10-09 晨复测（同主词）：7d 8.32 vs gpts 10.22 fail、24h 43.93 vs 15.32 pass → 仍 inbox。 10-09 下午复测：「Claude Haiku 5.5」7d 9.07 vs gpts 10.36 fail、24h 37.29 vs gpts 9.44 pass，未双过/无数值 → 仍 inbox。 10-10 晨复测：主词 7d 10.72 vs gpts 10.40 / 复跑 10.38、24h 24.08 vs 9.68 / 复跑 30.24 vs 17.87，两窗口两次均过 → 升 shortlisted（7d 边际极薄）。 10-11：社区讨论按完成任务而非 token 比较 Astra 与 Opus 5.5 成本。",
             "en": "Haiku 5.5 lists at USD 0.10/0.50 per million tokens, but any prompt over 100K tokens bills the whole request at 5x, and the new tokenizer, on-by-default thinking, and cache rules all move the bill. Per-request formulas, three worked examples, the 12x-vs-GPT-6-Luna counter-case, and an acceptance checklist.",
             "ja": ""
           },
           "judgment": {
-            "zh": "Anthropic 发 Haiku 5.5：与 GPT-6 Luna 同价（≤100k），首个带 effort 档的 Haiku，发布文直接定位为 subagent/压缩引擎；阶梯价与新 tokenizer 让真实账单因负载而异。主词「Claude Haiku 5.5」Trends 7d 3.70 vs gpts 11.76 未过（24h 16.62 vs 4.72 过）→ 停 inbox；短词「Haiku 5.5」两窗口过但不替代主词，留待明日复测。 10-08 下午复测：主词 7d 5.72 vs gpts 11.49 仍 fail、24h 27.23 vs 4.62 pass → 仍 inbox。Day-1 实务样本显示 DeepSeek V4.1 Flash 在两项 agent 杂活与研究 subagent 上胜 Haiku 5.5；Agent SDK/claude -p 仍走订阅额度并新增 API 额度。 10-09 晨复测（同主词）：7d 8.32 vs gpts 10.22 fail、24h 43.93 vs 15.32 pass → 仍 inbox。 10-09 下午复测：「Claude Haiku 5.5」7d 9.07 vs gpts 10.36 fail、24h 37.29 vs gpts 9.44 pass，未双过/无数值 → 仍 inbox。 10-10 晨复测：主词 7d 10.72 vs gpts 10.40 / 复跑 10.38、24h 24.08 vs 9.68 / 复跑 30.24 vs 17.87，两窗口两次均过 → 升 shortlisted（7d 边际极薄）。",
-            "en": "Anthropic ships Haiku 5.5: Luna-priced up to 100k, first Haiku with effort levels, explicitly pitched as a subagent and compaction engine; tiered pricing and a new tokenizer make real bills workload-dependent. Main query \"Claude Haiku 5.5\" failed the 7-day gpts bar (3.70 vs 11.76; 24h passed 16.62 vs 4.72), so it stays inbox. The shorter \"Haiku 5.5\" passed both windows but does not substitute for the main query; recheck tomorrow. Oct 8 afternoon recheck: main query 7d 5.72 vs gpts 11.49 still fails, 24h 27.23 vs 4.62 passes, so still inbox. Day-1 practitioner samples have DeepSeek V4.1 Flash beating Haiku 5.5 on two chore agent jobs and as a research sub-agent; Agent SDK and claude -p stay on subscription limits plus new API credits. Oct 9 morning recheck (same query): 7d 8.32 vs gpts 10.22 fails, 24h 43.93 vs 15.32 passes, so still inbox. Oct 9 afternoon recheck: 「Claude Haiku 5.5」7d 9.07 vs gpts 10.36 fail、24h 37.29 vs gpts 9.44 pass — not both / no data, still inbox. Oct 10 morning recheck: main query 7d 10.72 vs gpts 10.40 (rerun 10.38), 24h 24.08 vs 9.68 (rerun 30.24 vs 17.87)—both windows pass twice, promoted to shortlist (very thin 7d margin).",
+            "zh": "Anthropic 发 Haiku 5.5：与 GPT-6 Luna 同价（≤100k），首个带 effort 档的 Haiku，发布文直接定位为 subagent/压缩引擎；阶梯价与新 tokenizer 让真实账单因负载而异。主词「Claude Haiku 5.5」Trends 7d 3.70 vs gpts 11.76 未过（24h 16.62 vs 4.72 过）→ 停 inbox；短词「Haiku 5.5」两窗口过但不替代主词，留待明日复测。 10-08 下午复测：主词 7d 5.72 vs gpts 11.49 仍 fail、24h 27.23 vs 4.62 pass → 仍 inbox。Day-1 实务样本显示 DeepSeek V4.1 Flash 在两项 agent 杂活与研究 subagent 上胜 Haiku 5.5；Agent SDK/claude -p 仍走订阅额度并新增 API 额度。 10-09 晨复测（同主词）：7d 8.32 vs gpts 10.22 fail、24h 43.93 vs 15.32 pass → 仍 inbox。 10-09 下午复测：「Claude Haiku 5.5」7d 9.07 vs gpts 10.36 fail、24h 37.29 vs gpts 9.44 pass，未双过/无数值 → 仍 inbox。 10-10 晨复测：主词 7d 10.72 vs gpts 10.40 / 复跑 10.38、24h 24.08 vs 9.68 / 复跑 30.24 vs 17.87，两窗口两次均过 → 升 shortlisted（7d 边际极薄）。 10-11：社区讨论按完成任务而非 token 比较 Astra 与 Opus 5.5 成本。",
+            "en": "Anthropic ships Haiku 5.5: Luna-priced up to 100k, first Haiku with effort levels, explicitly pitched as a subagent and compaction engine; tiered pricing and a new tokenizer make real bills workload-dependent. Main query \"Claude Haiku 5.5\" failed the 7-day gpts bar (3.70 vs 11.76; 24h passed 16.62 vs 4.72), so it stays inbox. The shorter \"Haiku 5.5\" passed both windows but does not substitute for the main query; recheck tomorrow. Oct 8 afternoon recheck: main query 7d 5.72 vs gpts 11.49 still fails, 24h 27.23 vs 4.62 passes, so still inbox. Day-1 practitioner samples have DeepSeek V4.1 Flash beating Haiku 5.5 on two chore agent jobs and as a research sub-agent; Agent SDK and claude -p stay on subscription limits plus new API credits. Oct 9 morning recheck (same query): 7d 8.32 vs gpts 10.22 fails, 24h 43.93 vs 15.32 passes, so still inbox. Oct 9 afternoon recheck: 「Claude Haiku 5.5」7d 9.07 vs gpts 10.36 fail、24h 37.29 vs gpts 9.44 pass — not both / no data, still inbox. Oct 10 morning recheck: main query 7d 10.72 vs gpts 10.40 (rerun 10.38), 24h 24.08 vs 9.68 (rerun 30.24 vs 17.87)—both windows pass twice, promoted to shortlist (very thin 7d margin). Oct 11: community debate on per-task vs per-token cost for Astra vs Opus 5.5.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -448,6 +897,16 @@
                 "en": "Agent SDK and claude -p keep subscription limits, plus API credits.",
                 "ja": ""
               }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/ClaudeAI/comments/1x2xcom/astra_vs_opus_55_is_cost_per_token_the_wrong_way/",
+              "title": "Astra vs Opus 5.5: is cost per token the wrong way to compare them for coding?",
+              "brief": {
+                "zh": "续源：论坛 1546 Reddit r/ClaudeAI「Astra vs Opus 5.5：按 token 还是按完成任务算",
+                "en": "Follow-up source.",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -465,7 +924,8 @@
             "https://www.reddit.com/r/ClaudeAI/comments/1x0agoh/claude_haiku_55_cost_12x_more_than_gpt6_luna_for/",
             "https://www.reddit.com/r/ClaudeAI/comments/1x09xst/i_tested_haiku_55_vs_luna_vs_deepseek_flash_vs/",
             "https://www.reddit.com/r/ClaudeAI/comments/1x04bau/monthly_api_quota_for_max_and_team_users/",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x0ixh6/deepseek_v41_flash_beat_haiku_55_as_my_research/"
+            "https://www.reddit.com/r/LocalLLaMA/comments/1x0ixh6/deepseek_v41_flash_beat_haiku_55_as_my_research/",
+            "https://www.reddit.com/r/ClaudeAI/comments/1x2xcom/astra_vs_opus_55_is_cost_per_token_the_wrong_way/"
           ],
           "blog": {
             "zh": "/cn/blog/claude-haiku-5-5-subagent-compaction-cost-model/",
@@ -629,13 +1089,13 @@
             "ja": ""
           },
           "summary": {
-            "zh": "AI 数学浪首次系统纠错：OpenAI 撤回三项结果，同窗论文指出 Lean 通过不保证形式化陈述忠实于原题——综述角度是「验证链条到底验了什么」，串起 t599/t621/t640。Trends「OpenAI math」7d 15.8 vs gpts 9.19、24h 41.38 vs 15.34，两窗口均过 → shortlisted。 10-09 下午续：Karagila 拆解 Partition Principle 结论、Tao 谈该怎么教学生、Dev.to 验证者视角——撤回事件有了专家解读。 10-10：Reddit 指 OpenAI 数学结果建立在用户数据上（未核）。 10-10：Tao 撰文谈 Lean 的可靠性边界与 AI（HN 92）。",
+            "zh": "AI 数学浪首次系统纠错：OpenAI 撤回三项结果，同窗论文指出 Lean 通过不保证形式化陈述忠实于原题——综述角度是「验证链条到底验了什么」，串起 t599/t621/t640。Trends「OpenAI math」7d 15.8 vs gpts 9.19、24h 41.38 vs 15.34，两窗口均过 → shortlisted。 10-09 下午续：Karagila 拆解 Partition Principle 结论、Tao 谈该怎么教学生、Dev.to 验证者视角——撤回事件有了专家解读。 10-10：Reddit 指 OpenAI 数学结果建立在用户数据上（未核）。 10-10：Tao 撰文谈 Lean 的可靠性边界与 AI（HN 92）。 10-11：Proofs & Prompts 汇总 100+ 反应；九年级生借 Claude 证几何猜想（待核）。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "AI 数学浪首次系统纠错：OpenAI 撤回三项结果，同窗论文指出 Lean 通过不保证形式化陈述忠实于原题——综述角度是「验证链条到底验了什么」，串起 t599/t621/t640。Trends「OpenAI math」7d 15.8 vs gpts 9.19、24h 41.38 vs 15.34，两窗口均过 → shortlisted。 10-09 下午续：Karagila 拆解 Partition Principle 结论、Tao 谈该怎么教学生、Dev.to 验证者视角——撤回事件有了专家解读。 10-10：Reddit 指 OpenAI 数学结果建立在用户数据上（未核）。 10-10：Tao 撰文谈 Lean 的可靠性边界与 AI（HN 92）。",
-            "en": "The AI-math wave gets its first real correction: OpenAI withdraws three results, and a same-week paper shows Lean verification does not guarantee the formal statement matches the original problem. Survey angle: what the verification chain actually verifies, tying together t599/t621/t640. Trends \"OpenAI math\": 7d 15.8 vs gpts 9.19, 24h 41.38 vs 15.34 — both pass, shortlisted. Oct 9 afternoon: Karagila dissects the Partition Principle claims, Tao on what to tell students, and a verifier-first Dev.to take—expert reads on the withdrawal. Oct 10: Reddit claim that OpenAI's math results relied on user data (unverified). Oct 10: Tao on Lean's reliability limits and AI (HN 92).",
+            "zh": "AI 数学浪首次系统纠错：OpenAI 撤回三项结果，同窗论文指出 Lean 通过不保证形式化陈述忠实于原题——综述角度是「验证链条到底验了什么」，串起 t599/t621/t640。Trends「OpenAI math」7d 15.8 vs gpts 9.19、24h 41.38 vs 15.34，两窗口均过 → shortlisted。 10-09 下午续：Karagila 拆解 Partition Principle 结论、Tao 谈该怎么教学生、Dev.to 验证者视角——撤回事件有了专家解读。 10-10：Reddit 指 OpenAI 数学结果建立在用户数据上（未核）。 10-10：Tao 撰文谈 Lean 的可靠性边界与 AI（HN 92）。 10-11：Proofs & Prompts 汇总 100+ 反应；九年级生借 Claude 证几何猜想（待核）。",
+            "en": "The AI-math wave gets its first real correction: OpenAI withdraws three results, and a same-week paper shows Lean verification does not guarantee the formal statement matches the original problem. Survey angle: what the verification chain actually verifies, tying together t599/t621/t640. Trends \"OpenAI math\": 7d 15.8 vs gpts 9.19, 24h 41.38 vs 15.34 — both pass, shortlisted. Oct 9 afternoon: Karagila dissects the Partition Principle claims, Tao on what to tell students, and a verifier-first Dev.to take—expert reads on the withdrawal. Oct 10: Reddit claim that OpenAI's math results relied on user data (unverified). Oct 10: Tao on Lean's reliability limits and AI (HN 92). Oct 11: Proofs & Prompts roundup of 100+ reactions; a 9th grader's Claude-assisted geometry proof (unverified).",
             "ja": ""
           },
           "sourceBriefs": [
@@ -708,6 +1168,16 @@
                 "en": "HN 92; expert anchor.",
                 "ja": ""
               }
+            },
+            {
+              "source": "hn",
+              "url": "https://proofsandprompts.com/2026/10/08/100-reactions-to-100-solutions/",
+              "title": "100+ reactions to 100+ solutions",
+              "brief": {
+                "zh": "续源：论坛 1546 AI 数学续热：HN Proofs & Prompts「100+ reactions to 100+ s",
+                "en": "Follow-up source.",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -728,7 +1198,9 @@
             "https://terrytao.wordpress.com/2026/10/08/what-should-we-tell-our-students/",
             "https://dev.to/slabb/700-manuscripts-48-hours-three-withdrawals-the-verifier-won-dhl",
             "https://www.reddit.com/r/LocalLLaMA/comments/1x1rk4o/openais_math_findings_built_on_stolen_user_data/",
-            "https://terrytao.wordpress.com/2026/10/09/what-mathematicians-should-know-about-the-lean-theorem-proverquestions-of-reliability-and-ai/"
+            "https://terrytao.wordpress.com/2026/10/09/what-mathematicians-should-know-about-the-lean-theorem-proverquestions-of-reliability-and-ai/",
+            "https://proofsandprompts.com/2026/10/08/100-reactions-to-100-solutions/",
+            "https://www.reddit.com/r/ClaudeAI/comments/1x2eybb/im_a_9th_grader_and_i_used_claude_to_prove_a/"
           ]
         },
         {
@@ -934,57 +1406,6 @@
           "status": "published",
           "externalUrls": [
             "https://arxiv.org/abs/2610.11647"
-          ]
-        },
-        {
-          "id": "t075",
-          "theme": "models",
-          "title": {
-            "zh": "deepseek-ai/DeepSeek-V4.1-Flash",
-            "en": "deepseek-ai/DeepSeek-V4.1-Flash",
-            "ja": "deepseek-ai/DeepSeek-V4.1-Flash"
-          },
-          "summary": {
-            "zh": "DeepSeek 新一代速度/质量档；对照前沿模型选题 10-09：HN 458/397「业界为何不为 DeepSeek 4.1 Flash 慌」——廉价模型经济学续热。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "DeepSeek 新一代速度/质量档；对照前沿模型选题 10-09：HN 458/397「业界为何不为 DeepSeek 4.1 Flash 慌」——廉价模型经济学续热。",
-            "en": "Oct 9: HN 458/397 \"why isn't the industry freaking out about DeepSeek 4.1 Flash\"—cheap-model economics keeps heating.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
-              "title": "deepseek-ai/DeepSeek-V4.1-Flash",
-              "brief": {
-                "zh": "DeepSeek multimodal Flash model with high likes and downloads.",
-                "en": "DeepSeek multimodal Flash model with high likes and downloads.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.dgt.is/blog/2026-10-07-deepseek-freek-out/",
-              "title": "Why isn't the industry freaking out about DeepSeek 4.1 Flash?",
-              "brief": {
-                "zh": "HN 458/397；廉价模型冲击与业界反应不足。",
-                "en": "HN 458/397; cheap-model shock versus muted industry reaction.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "huggingface",
-            "hn"
-          ],
-          "score": 4,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
-            "https://www.dgt.is/blog/2026-10-07-deepseek-freek-out/"
           ]
         },
         {
@@ -1481,161 +1902,6 @@
             "zh": "/cn/blog/prompt-injection-2026-survey-self-replicating/",
             "en": "/blog/prompt-injection-2026-survey-self-replicating/"
           }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-08T09:00:00+08:00",
-      "label": {
-        "zh": "10月8日 09:00",
-        "en": "Oct 8 09:00",
-        "ja": "10月8日 09:00"
-      },
-      "items": [
-        {
-          "id": "t631",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Stacklok Mecatl：云原生 harness 把 agent loop 与执行/状态/客户端拆开（Latent Space × K8s 联合创始人）",
-            "en": "Stacklok Mecatl",
-            "ja": "Stacklok Mecatl"
-          },
-          "summary": {
-            "zh": "Mecatl 把 agent loop 与执行、状态、客户端拆开，主张 harness 要云原生而非桌面平移——harness 架构线好材料。贴题「Mecatl」Trends 两窗口远低于 gpts → inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Mecatl 把 agent loop 与执行、状态、客户端拆开，主张 harness 要云原生而非桌面平移——harness 架构线好材料。贴题「Mecatl」Trends 两窗口远低于 gpts → inbox。",
-            "en": "Mecatl separates the agent loop from execution, state and client, arguing harnesses must be cloud-native rather than lifted-and-shifted desktops—good harness-architecture material. Topic Trends (\"Mecatl\") far below gpts on both windows, so inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "latent-space",
-              "url": "https://www.latent.space/p/stacklok",
-              "title": "Latent Space: Can a Cloud-Native Harness Make Agents Reliable Beyond the Desktop?",
-              "brief": {
-                "zh": "McLuckie/Beda 访谈：loop/执行/状态分离、durable state、quiesce、gRPC/SSE API；企业会像治理邮件一样治理 agent 交互。",
-                "en": "McLuckie/Beda interview: loop/execution/state split, durable state, quiesce, gRPC/SSE APIs; enterprises will govern agent traffic like email.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/stacklok/mecatl",
-              "title": "stacklok/mecatl",
-              "brief": {
-                "zh": "Apache-2.0，约 241★，本地/远端/K8s 跑 loop。",
-                "en": "Apache-2.0, ~241 stars; loop runs locally, remotely or on Kubernetes.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "latent-space",
-            "github"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.latent.space/p/stacklok",
-            "https://github.com/stacklok/mecatl"
-          ]
-        },
-        {
-          "id": "t632",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Agent Lightning v1.0：Harnessed Agentic RL——部署用的 harness 原样进 RL（LLM 代理录轨迹、3.5k 行控制面）",
-            "en": "Agent Lightning v1.0",
-            "ja": "Agent Lightning v1.0"
-          },
-          "summary": {
-            "zh": "MSR 把真实部署 harness 原样接进 agentic RL（proxy 录轨迹、K8s rollout），9B 模型 SWE-bench Verified +14.6pt——harness 线向训练侧延伸。贴题 Trends 两窗口远低于 gpts → inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "MSR 把真实部署 harness 原样接进 agentic RL（proxy 录轨迹、K8s rollout），9B 模型 SWE-bench Verified +14.6pt——harness 线向训练侧延伸。贴题 Trends 两窗口远低于 gpts → inbox。",
-            "en": "MSR plugs unmodified deployment harnesses into agentic RL (proxy trajectory capture, K8s rollouts), lifting a 9B model +14.6pt on SWE-bench Verified—the harness line extends into training. Topic Trends far below gpts on both windows, so inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "msr",
-              "url": "https://www.microsoft.com/en-us/research/blog/agent-lightning-v1-0-a-3500-line-lightweight-agentic-rl-framework-for-training-agents-with-real-harnesses/",
-              "title": "Agent Lightning v1.0",
-              "brief": {
-                "zh": "一级源：定义 Harnessed Agentic RL；3.5k LOC 控制面；Qwen3.5-9B 41.8%→56.4%。",
-                "en": "Primary: defines Harnessed Agentic RL; 3.5k-LOC control plane; Qwen3.5-9B 41.8%→56.4%.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/spaces/FineEnvs/multi-harness-rl",
-              "title": "FineEnvs/multi-harness-rl",
-              "brief": {
-                "zh": "HF spaces #2：在真实 agent harness 内做 RL 的 demo。",
-                "en": "HF Spaces #2: RL inside real agent harnesses.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "msr",
-            "github",
-            "huggingface"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.microsoft.com/en-us/research/blog/agent-lightning-v1-0-a-3500-line-lightweight-agentic-rl-framework-for-training-agents-with-real-harnesses/",
-            "https://github.com/microsoft/agent-lightning",
-            "https://huggingface.co/spaces/FineEnvs/multi-harness-rl",
-            "https://huggingface.co/spaces/adithyask/rl-environments-guide",
-            "https://huggingface.co/spaces/FineEnvs/mimo-rl-envs-explorer"
-          ]
-        },
-        {
-          "id": "t633",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "LangChain Deep Agents Skills revamp：工具绑定到 skill、pinned skill、长线程热重载",
-            "en": "LangChain Deep Agents Skills revamp",
-            "ja": "LangChain Deep Agents Skills revamp"
-          },
-          "summary": {
-            "zh": "Deep Agents 把 progressive disclosure 扩到工具层（read-before-call、cache 友好）并加 pinned/热重载——skills 规模化的具体工程答案。贴题 Trends 两窗口远低于 gpts → inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Deep Agents 把 progressive disclosure 扩到工具层（read-before-call、cache 友好）并加 pinned/热重载——skills 规模化的具体工程答案。贴题 Trends 两窗口远低于 gpts → inbox。",
-            "en": "Deep Agents extends progressive disclosure to tools (read-before-call, cache-friendly) and adds pinned skills and hot reload—a concrete engineering answer to skills at scale. Topic Trends far below gpts on both windows, so inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "langchain",
-              "url": "https://www.langchain.com/blog/revamping-skills-in-deep-agents",
-              "title": "Revamping Skills in Deep Agents",
-              "brief": {
-                "zh": "一级源：tool binding、pinned skills、mid-thread reload；千级 skill 注册表。",
-                "en": "Primary: tool binding, pinned skills, mid-thread reload; registries of thousands of skills.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "langchain"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.langchain.com/blog/revamping-skills-in-deep-agents"
-          ]
         }
       ]
     },
@@ -2568,69 +2834,6 @@
         "ja": "10月4日 09:00"
       },
       "items": [
-        {
-          "id": "t540",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Aleph Alpha Kolibri：78B/3B 主权开源权重（Apache 2.0，上下文到 1M）",
-            "en": "Aleph Alpha Kolibri",
-            "ja": "Aleph Alpha Kolibri"
-          },
-          "summary": {
-            "zh": "欧洲主权开源权重不只是再发一个榜单模型。Kolibri 是英德 MoE：总参 78B、激活约 3B、Apache 2.0、上下文最长 1M，并把工具调用和 agentic RAG 写进适用面。可写的是可自托管的长上下文锚，不是 Aleph Alpha 的融资故事。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "欧洲主权开源权重不只是再发一个榜单模型。Kolibri 是英德 MoE：总参 78B、激活约 3B、Apache 2.0、上下文最长 1M，并把工具调用和 agentic RAG 写进适用面。可写的是可自托管的长上下文锚，不是 Aleph Alpha 的融资故事。",
-            "en": "A sovereign open-weight release, not another leaderboard drop. Kolibri is an English-German MoE (78B total, about 3B active), Apache 2.0, context up to 1M, with tool calling and agentic RAG in the intended use. The piece is a self-hostable long-context anchor, not a funding story.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "aleph-alpha",
-              "url": "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/",
-              "title": "Kolibri Has Landed: A Sovereign Open-Weight Model",
-              "brief": {
-                "zh": "2026-10-03 发布：78B 总参、约 3B 激活、上下文到 1M、Apache 2.0；相对 Origin 更常拒答而非答错，并报自建 agentic-RAG 结果。",
-                "en": "Released 2026-10-03: 78B total, about 3B active, context up to 1M, Apache 2.0. Versus Origin it abstains more often instead of answering wrong, and reports an in-house agentic-RAG eval.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/",
-              "title": "Kolibri: A Sovereign Open-Weight Model",
-              "brief": {
-                "zh": "HN 510 分 / 298 评论，讨论集中在开源许可、稀疏激活和长上下文。",
-                "en": "Hacker News 510 points / 298 comments, focused on the open license, sparse activation, and long context.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1",
-              "title": "Aleph-Alpha/Kolibri-1",
-              "brief": {
-                "zh": "权重页新进趋势，likes253、trending248，下载仍接近零。",
-                "en": "Weights page newly trending: 253 likes, trending score 248, downloads still near zero.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "huggingface",
-            "aleph-alpha"
-          ],
-          "score": 5,
-          "status": "shortlisted",
-          "externalUrls": [
-            "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/",
-            "https://huggingface.co/Aleph-Alpha/Kolibri-1",
-            "https://aleph-alpha.com/en/kolibri/"
-          ]
-        },
         {
           "id": "t543",
           "theme": "security",
