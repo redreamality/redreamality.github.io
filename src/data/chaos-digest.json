@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-14T10:00:40+08:00",
+  "updatedAt": "2026-10-14T11:12:40+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,7 +13,7 @@
   "themeCounts": {
     "models": 13,
     "coding-tools": 18,
-    "agents-oss": 12,
+    "agents-oss": 13,
     "security": 11,
     "research": 41,
     "product-news": 0,
@@ -28,6 +28,220 @@
         "ja": "10月14日 10:00"
       },
       "items": [
+        {
+          "id": "t704",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "AI 逆向与 clean-room 重写：REA「Reverse-Engineer Anything」× ArtCraft/PhotoCraft 重写 Photoshop（及 Wordcraft）× chardet 用 Claude 重写改许可 × Malus「洁净室即服务」讽刺",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。",
+            "en": "REA lets coding agents reverse-engineer binaries and runtimes and rebuild features; PhotoCraft claims a clean-room Photoshop rewrite; chardet's Claude rewrite and relicensing sparked a derivative-work fight—a multi-source synthesis on the mechanism, legal risk and methods of AI reverse engineering and clean-room rewrites. Same-day Trends: 24h \"reverse engineer anything\" passes, 7d 429 → stays in inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "github",
+              "url": "https://github.com/morluto/rea",
+              "title": "morluto/rea",
+              "brief": {
+                "zh": "REA：给 coding agent 的逆向工具集（反汇编/反编译/调用追踪/浏览器与进程抓取），★161,865、日 +45,327（10-13）。",
+                "en": "Reverse-engineering toolkit for coding agents (disassembly, decompilation, call tracing, browser/process capture); 161,865 stars, +45,327/day (Oct 13).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "rea",
+              "url": "https://rea.tools/",
+              "title": "REA — Reverse Engineering for Your Coding Agent",
+              "brief": {
+                "zh": "官网演示：从 Windows 计算器 DLL 还原 % 规则并重建、从恐龙游戏脚本还原加速规则；「Clone this website」提示。",
+                "en": "Site demos: recovering Calculator's % rule from its DLL and rebuilding it, recovering a game's speed rule; \"clone this website\" prompt.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://news.ycombinator.com/item?id=50028275",
+              "title": "REA Reverse – Engineer Anything (HN)",
+              "brief": {
+                "zh": "HN 800/337（10-10）；另有 10-12「Reverse engineer anything with agents…」98/32。",
+                "en": "HN 800/337 (Oct 10); plus 98/32 on Oct 12.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=dAzs_rU6080",
+              "title": "I Tested The Viral Github Repo To Reverse Engineer Anything",
+              "brief": {
+                "zh": "80.4k@10.2h 实测。",
+                "en": "80.4k views at 10.2h, hands-on test.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=OMobTlfjb8s",
+              "title": "The Fastest-Rising Repo on GitHub Is a Little Scary (REA)",
+              "brief": {
+                "zh": "51.7k@7.3h。",
+                "en": "51.7k views at 7.3h.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/storytold/photocraft",
+              "title": "storytold/photocraft",
+              "brief": {
+                "zh": "ArtCraft 旗下「clean-room 重写 Photoshop」（纯 Rust、24 crates、1,700+ 测试、PSD 往返 307/309）；仅凭公开规范与观察行为。",
+                "en": "ArtCraft's \"clean-room Photoshop reimplementation\" in pure Rust (24 crates, 1,700+ tests, PSD round-trips 307/309), from public specs and observed behaviour only.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://news.ycombinator.com/item?id=49981449",
+              "title": "Adobe Creative Suite Cleanroom Port to Rust (HN)",
+              "brief": {
+                "zh": "HN 140/86（10-06）；另有 Wordcraft「clean-room 重写 Word」101/109（10-12）。",
+                "en": "HN 140/86 (Oct 6); plus Wordcraft (clean-room Word) 101/109 (Oct 12).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "declic",
+              "url": "https://www.declic.media/en/news/artcraft-adobe-clean-room/",
+              "title": "Photoshop cloned with Claude: is it legal?",
+              "brief": {
+                "zh": "Guadamuz：clean room 主要是证据问题；ArtCraft 未分离观察者与编码者，模型训练所见无法核验。",
+                "en": "Guadamuz: clean room is mainly evidentiary; ArtCraft does not separate observers from coders, and training exposure cannot be verified.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "ipdefense",
+              "url": "https://ipdefense.law/resources/adobe-ai-software-case-study.pdf",
+              "title": "AI Recreated Adobe-Like Software. What Could Adobe Actually Protect?",
+              "brief": {
+                "zh": "律所案例分析：条款、商业外观、专利、商标等残余风险。",
+                "en": "Law-firm case study: residual risks via terms, trade dress, patents, trademarks.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/Adobe/comments/1wvyxjd/photocraft_ive_created_an_open_source_100_rust/",
+              "title": "PhotoCraft: I've created an open source 100% Rust clean-room clone of 7 of Adobe's apps",
+              "brief": {
+                "zh": "作者 r/Adobe 发帖。",
+                "en": "Author's r/Adobe announcement.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/chardet/chardet/issues/327",
+              "title": "chardet #327: No right to relicense this project",
+              "brief": {
+                "zh": "chardet 7.0 用 Claude Code 重写并由 LGPL 改 MIT（后改 0BSD），原作者 Mark Pilgrim 反对。",
+                "en": "chardet 7.0 rewritten with Claude Code and relicensed LGPL→MIT (later 0BSD); original author Mark Pilgrim objects.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "dan-blanchard",
+              "url": "http://dan-blanchard.github.io/blog/chardet-rewrite-controversy/",
+              "title": "Everything Claude Saw: A Transparent Account of the Chardet v7 Rewrite",
+              "brief": {
+                "zh": "维护者公开全部会话日志：子 agent 三次读到旧源码；三种相似度度量近零重合。",
+                "en": "Maintainer publishes all session logs: subagents read old source in three sessions; three similarity measures show near-zero overlap.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "lwn",
+              "url": "https://lwn.net/Articles/1061534/",
+              "title": "The relicensing of chardet",
+              "brief": {
+                "zh": "LWN：低相似度不等于切断衍生关系（类比翻译成 Lisp）；训练语料含旧版。",
+                "en": "LWN: low similarity does not break the derivative link (cf. translation to Lisp); training data included old versions.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "simonw",
+              "url": "https://simonwillison.net/2026/Mar/5/chardet/",
+              "title": "Can coding agents relicense open source through a \"clean room\" implementation of code?",
+              "brief": {
+                "zh": "Simon Willison 梳理与观察 LLM 曾访问 LGPL 源码。",
+                "en": "Simon Willison's analysis, noting the LLM did access the LGPL source.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arstechnica",
+              "url": "https://arstechnica.com/ai/2026/03/ai-can-rewrite-open-source-code-but-can-it-rewrite-the-license-too/",
+              "title": "AI can rewrite open source code—but can it rewrite the license, too?",
+              "brief": {
+                "zh": "FSF：「吃过原代码的 LLM 没有 clean 可言」。",
+                "en": "FSF: \"There is nothing clean about an LLM which has ingested the code.\"",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://malus.sh",
+              "title": "Malus – Clean Room as a Service (HN 1433/531)",
+              "brief": {
+                "zh": "讽刺站点（FOSDEM 2026 演讲配套）：AI「洁净室即服务」洗白开源许可，HN 1433/531（2026-03）。",
+                "en": "Satirical \"clean room as a service\" laundering OSS licenses (FOSDEM 2026 companion), HN 1433/531 (Mar 2026).",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "github",
+            "rea",
+            "hn",
+            "youtube",
+            "reddit",
+            "declic",
+            "ipdefense",
+            "lwn",
+            "simonw",
+            "arstechnica",
+            "dan-blanchard"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/morluto/rea",
+            "https://rea.tools/",
+            "https://news.ycombinator.com/item?id=50028275",
+            "https://www.youtube.com/watch?v=dAzs_rU6080",
+            "https://www.youtube.com/watch?v=OMobTlfjb8s",
+            "https://github.com/storytold/photocraft",
+            "https://news.ycombinator.com/item?id=49981449",
+            "https://www.declic.media/en/news/artcraft-adobe-clean-room/",
+            "https://ipdefense.law/resources/adobe-ai-software-case-study.pdf",
+            "https://www.reddit.com/r/Adobe/comments/1wvyxjd/photocraft_ive_created_an_open_source_100_rust/",
+            "https://github.com/chardet/chardet/issues/327",
+            "http://dan-blanchard.github.io/blog/chardet-rewrite-controversy/",
+            "https://lwn.net/Articles/1061534/",
+            "https://simonwillison.net/2026/Mar/5/chardet/",
+            "https://arstechnica.com/ai/2026/03/ai-can-rewrite-open-source-code-but-can-it-rewrite-the-license-too/",
+            "https://malus.sh"
+          ]
+        },
         {
           "id": "t427",
           "theme": "security",
