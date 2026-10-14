@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-13T15:55:08+08:00",
+  "updatedAt": "2026-10-14T10:00:40+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,164 @@
   ],
   "themeCounts": {
     "models": 13,
-    "coding-tools": 19,
-    "agents-oss": 13,
-    "security": 8,
+    "coding-tools": 18,
+    "agents-oss": 12,
+    "security": 11,
     "research": 41,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-14T10:00:00+08:00",
+      "label": {
+        "zh": "10月14日 10:00",
+        "en": "Oct 14 10:00",
+        "ja": "10月14日 10:00"
+      },
+      "items": [
+        {
+          "id": "t427",
+          "theme": "security",
+          "title": {
+            "zh": "OpenAI：打断协同对抗蒸馏（Moonshot 关联簇）",
+            "en": "OpenAI",
+            "ja": "OpenAI"
+          },
+          "summary": {
+            "zh": "OpenAI 一级源：攻击者跨会话复放加密 reasoning 做对抗蒸馏（峰值约 16k 请求），核心簇关联 Moonshot——关路径+封禁，对齐/防蒸馏与 agent 工具链共享安全面。 10-13 新规重筛：单点新闻类（单点发布/新闻/单一来源条目，非多来源综合）→ 降回 inbox。 10-14：Anthropic 公布蒸馏防御（抓取降 90–99%），与 OpenAI 构成跨 lab 蒸馏攻防综合候选；主词 Trends 不过。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "OpenAI 一级源：攻击者跨会话复放加密 reasoning 做对抗蒸馏（峰值约 16k 请求），核心簇关联 Moonshot——关路径+封禁，对齐/防蒸馏与 agent 工具链共享安全面。 10-13 新规重筛：单点新闻类（单点发布/新闻/单一来源条目，非多来源综合）→ 降回 inbox。 10-14：Anthropic 公布蒸馏防御（抓取降 90–99%），与 OpenAI 构成跨 lab 蒸馏攻防综合候选；主词 Trends 不过。",
+            "en": "OpenAI says a July campaign extracted protected reasoning by replaying encrypted reasoning across sessions, peaking near 16k requests, with a core cluster tied to Moonshot-associated actors. Closing that path is an alignment/anti-distillation control that also matters for agent tooling surfaces. Oct 13 rescreen (new rules): single-point item, not a multi-source synthesis → demoted to inbox (Chaos/notes only). Oct 14: Anthropic reports distillation defenses cutting harvested data 90–99%, pairing with OpenAI's post as a cross-lab synthesis candidate; main term fails Trends.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "openai",
+              "url": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign",
+              "title": "Disrupting a coordinated model-distillation campaign",
+              "brief": {
+                "zh": "OpenAI：7 月对抗蒸馏高峰 16k 请求/4k+ 用户，7/28 前打断；发现经 Frontier Model Forum 与政府渠道共享。",
+                "en": "OpenAI reports a July adversarial-distillation spike of about 16k requests from 4k+ users, disrupted by July 28, with findings shared via the Frontier Model Forum and government channels.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.anthropic.com/research/distillation-defenses",
+              "title": "Anthropic: Strengthening our defenses against distillation attacks",
+              "brief": {
+                "zh": "续源：媒体 0938 Anthropic 一级源（10-12）：新防御使工业级蒸馏抓取数据降 90–99%，点名智谱把网络能力",
+                "en": "Follow-up source.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "openai",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign",
+            "https://www.anthropic.com/research/distillation-defenses"
+          ]
+        },
+        {
+          "id": "t700",
+          "theme": "security",
+          "title": {
+            "zh": "agent 时代的工程基建：Anthropic「为 agent 重做源码管理」（HN 545/523）+「为游戏开发设计 AI harness」（132/58）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "Anthropic 公开为 agent 时代重做源码管理，另有游戏开发 harness 工程实践——agent 工程基建的一级源复盘。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Anthropic 公开为 agent 时代重做源码管理，另有游戏开发 harness 工程实践——agent 工程基建的一级源复盘。",
+            "en": "Anthropic describes redesigning source control for the agent era, alongside a game-dev harness engineering write-up—first-party agent infrastructure retrospectives.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "anthropic",
+              "url": "https://www.anthropic.com/engineering/redesigning-source-control",
+              "title": "Redesigning source control at Anthropic",
+              "brief": {
+                "zh": "HN 545/523。",
+                "en": "HN 545/523.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://kylekukshtel.com/ai-harness-engineering-game-development-claude-code",
+              "title": "How to engineer an AI harness for game development",
+              "brief": {
+                "zh": "HN 132/58。",
+                "en": "HN 132/58.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.anthropic.com/engineering/redesigning-source-control",
+            "https://kylekukshtel.com/ai-harness-engineering-game-development-claude-code"
+          ]
+        },
+        {
+          "id": "t701",
+          "theme": "security",
+          "title": {
+            "zh": "406 位科学家公开信：具网络能力的 AI 默认气隙/高保证沙箱、国际机构统一 containment 标准、强制报告逃逸事件",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "406 位科学家联署要求具网络能力的 AI 默认气隙隔离、建国际 containment 标准并强制报告逃逸——containment 议题进入政策端；簇主词 Trends 不过。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "406 位科学家联署要求具网络能力的 AI 默认气隙隔离、建国际 containment 标准并强制报告逃逸——containment 议题进入政策端；簇主词 Trends 不过。",
+            "en": "406 scientists call for air-gapped default containment of cyber-capable AI, an international standards body and mandatory breakout reporting—containment moves to policy; cluster term fails Trends.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://ai-security-letter.org/",
+              "title": "Open Letter from the Scientific Community on AI and Cybersecurity (406 signatories)",
+              "brief": {
+                "zh": "406 人联署；气隙默认、国际机构、强制报告。",
+                "en": "406 signatories; air-gap default, international body, mandatory reporting.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://ai-security-letter.org/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-13T15:00:00+08:00",
       "label": {
@@ -1219,13 +1369,13 @@
             "ja": "One Month After Jev: Open Decision Models, the Counter-Evidence, and How to Choose"
           },
           "summary": {
-            "zh": "Liquid 放出 d1 开源权重（边缘 ms 级决策），一批路由/guardrail 决策小模型同窗上榜；Jev 强相关，本周配额不烧，仅续热。 下午续热：d1-omni-600M 与 System One Arcade 上榜，pplx-decider v1.1 自称 Decision Index 超 Jev，llama.cpp 经 /v1/systemone 原生服务 clef-flash GGUF——决策模型本地化继续；仍仅续热。 10-09 续热：Jev 零错误仍选 Flash-Lite 的成本账、4090 本地决策模型速度对照、jevman Pac-Man；Jev 仅续热。 10-09：决策模型族续热（JEV-27B-VL #1、GEV-Decide #2、clef #3），新进 144M Largha；Jev 仅续热。 10-10：Microsoft Decision-1、Typesafe $870M 融资、H2O-Lightning-4B 登顶 JevBench 开源榜——决策模型赛道升温；Jev 仅续热。 10-10：vLLM 合入 /v1/systemone；Jev 仅续热。 10-11：自建决策模型教程、Jev 写 CHANGELOG、用例普查帖；Jev 仅续热。 10-11：决策模型 HF 续榜（含新 Clef-Omni），Jev 仅续热。 10-12：Jebadiah v2.1 与 HF 决策模型续榜，仅续热。 10-12 下午：Decision 3.0 / d3 / JEV-35B，仅续热。 10-13：Jev 触发 on-call agent 视频与决策模型续榜，仅续热。",
+            "zh": "Liquid 放出 d1 开源权重（边缘 ms 级决策），一批路由/guardrail 决策小模型同窗上榜；Jev 强相关，本周配额不烧，仅续热。 下午续热：d1-omni-600M 与 System One Arcade 上榜，pplx-decider v1.1 自称 Decision Index 超 Jev，llama.cpp 经 /v1/systemone 原生服务 clef-flash GGUF——决策模型本地化继续；仍仅续热。 10-09 续热：Jev 零错误仍选 Flash-Lite 的成本账、4090 本地决策模型速度对照、jevman Pac-Man；Jev 仅续热。 10-09：决策模型族续热（JEV-27B-VL #1、GEV-Decide #2、clef #3），新进 144M Largha；Jev 仅续热。 10-10：Microsoft Decision-1、Typesafe $870M 融资、H2O-Lightning-4B 登顶 JevBench 开源榜——决策模型赛道升温；Jev 仅续热。 10-10：vLLM 合入 /v1/systemone；Jev 仅续热。 10-11：自建决策模型教程、Jev 写 CHANGELOG、用例普查帖；Jev 仅续热。 10-11：决策模型 HF 续榜（含新 Clef-Omni），Jev 仅续热。 10-12：Jebadiah v2.1 与 HF 决策模型续榜，仅续热。 10-12 下午：Decision 3.0 / d3 / JEV-35B，仅续热。 10-13：Jev 触发 on-call agent 视频与决策模型续榜，仅续热。 10-14：Jev+Claude 视频与 d3-flash，仅续热。",
             "en": "Jev made decision models a category. This survey groups a dozen-plus hosted and open models by how they work, checks vendor claims against Decision Index, JevBench and Red Hat's tests, explains why public scores, latency and \\\"calibration\\\" don't compare, and ends with a comparison table and an agent-loop checklist.",
             "ja": ""
           },
           "judgment": {
-            "zh": "Liquid 放出 d1 开源权重（边缘 ms 级决策），一批路由/guardrail 决策小模型同窗上榜；Jev 强相关，本周配额不烧，仅续热。 下午续热：d1-omni-600M 与 System One Arcade 上榜，pplx-decider v1.1 自称 Decision Index 超 Jev，llama.cpp 经 /v1/systemone 原生服务 clef-flash GGUF——决策模型本地化继续；仍仅续热。 10-09 续热：Jev 零错误仍选 Flash-Lite 的成本账、4090 本地决策模型速度对照、jevman Pac-Man；Jev 仅续热。 10-09：决策模型族续热（JEV-27B-VL #1、GEV-Decide #2、clef #3），新进 144M Largha；Jev 仅续热。 10-10：Microsoft Decision-1、Typesafe $870M 融资、H2O-Lightning-4B 登顶 JevBench 开源榜——决策模型赛道升温；Jev 仅续热。 10-10：vLLM 合入 /v1/systemone；Jev 仅续热。 10-11：自建决策模型教程、Jev 写 CHANGELOG、用例普查帖；Jev 仅续热。 10-11：决策模型 HF 续榜（含新 Clef-Omni），Jev 仅续热。 10-12：Jebadiah v2.1 与 HF 决策模型续榜，仅续热。 10-12 下午：Decision 3.0 / d3 / JEV-35B，仅续热。 10-13：Jev 触发 on-call agent 视频与决策模型续榜，仅续热。",
-            "en": "Liquid opens d1 weights (millisecond edge decisions) and a batch of routing/guardrail decision models lands the same window; Jev-adjacent, no weekly quota burn, follow-up heat only. Afternoon follow-up: d1-omni-600M and the System One Arcade trend, pplx-decider v1.1 claims a Decision Index lead over Jev, and llama.cpp serves clef-flash GGUF natively via /v1/systemone—decision models keep going local; still follow-up heat only. Oct 9: Jev tuned to zero mistakes yet Flash-Lite still wins on cost, a local RTX 4090 decision-model speed run, and jevman Pac-Man—Jev continuation only. Oct 9: decision-model family stays hot (JEV-27B-VL #1, GEV-Decide #2, clef #3), plus new 144M Largha; Jev continuation only. Oct 10: Microsoft Decision-1, Typesafe's $870M round and H2O-Lightning-4B topping open JevBench—the decision-model race heats up; Jev continuation only. Oct 10: vLLM merges /v1/systemone; Jev continuation only. Oct 11: a build-your-own decision model tutorial, Jev for CHANGELOGs and a use-case census; Jev continuation only. Oct 11: decision models keep trending on HF (incl. new Clef-Omni); Jev continuation only. Oct 12: Jebadiah v2.1 and more decision models trending; continuation only. Oct 12 pm: Decision 3.0, d3 and JEV-35B; continuation only. Oct 13: Jev-triggered on-call agent video and decision models; continuation only.",
+            "zh": "Liquid 放出 d1 开源权重（边缘 ms 级决策），一批路由/guardrail 决策小模型同窗上榜；Jev 强相关，本周配额不烧，仅续热。 下午续热：d1-omni-600M 与 System One Arcade 上榜，pplx-decider v1.1 自称 Decision Index 超 Jev，llama.cpp 经 /v1/systemone 原生服务 clef-flash GGUF——决策模型本地化继续；仍仅续热。 10-09 续热：Jev 零错误仍选 Flash-Lite 的成本账、4090 本地决策模型速度对照、jevman Pac-Man；Jev 仅续热。 10-09：决策模型族续热（JEV-27B-VL #1、GEV-Decide #2、clef #3），新进 144M Largha；Jev 仅续热。 10-10：Microsoft Decision-1、Typesafe $870M 融资、H2O-Lightning-4B 登顶 JevBench 开源榜——决策模型赛道升温；Jev 仅续热。 10-10：vLLM 合入 /v1/systemone；Jev 仅续热。 10-11：自建决策模型教程、Jev 写 CHANGELOG、用例普查帖；Jev 仅续热。 10-11：决策模型 HF 续榜（含新 Clef-Omni），Jev 仅续热。 10-12：Jebadiah v2.1 与 HF 决策模型续榜，仅续热。 10-12 下午：Decision 3.0 / d3 / JEV-35B，仅续热。 10-13：Jev 触发 on-call agent 视频与决策模型续榜，仅续热。 10-14：Jev+Claude 视频与 d3-flash，仅续热。",
+            "en": "Liquid opens d1 weights (millisecond edge decisions) and a batch of routing/guardrail decision models lands the same window; Jev-adjacent, no weekly quota burn, follow-up heat only. Afternoon follow-up: d1-omni-600M and the System One Arcade trend, pplx-decider v1.1 claims a Decision Index lead over Jev, and llama.cpp serves clef-flash GGUF natively via /v1/systemone—decision models keep going local; still follow-up heat only. Oct 9: Jev tuned to zero mistakes yet Flash-Lite still wins on cost, a local RTX 4090 decision-model speed run, and jevman Pac-Man—Jev continuation only. Oct 9: decision-model family stays hot (JEV-27B-VL #1, GEV-Decide #2, clef #3), plus new 144M Largha; Jev continuation only. Oct 10: Microsoft Decision-1, Typesafe's $870M round and H2O-Lightning-4B topping open JevBench—the decision-model race heats up; Jev continuation only. Oct 10: vLLM merges /v1/systemone; Jev continuation only. Oct 11: a build-your-own decision model tutorial, Jev for CHANGELOGs and a use-case census; Jev continuation only. Oct 11: decision models keep trending on HF (incl. new Clef-Omni); Jev continuation only. Oct 12: Jebadiah v2.1 and more decision models trending; continuation only. Oct 12 pm: Decision 3.0, d3 and JEV-35B; continuation only. Oct 13: Jev-triggered on-call agent video and decision models; continuation only. Oct 14: Jev+Claude video and d3-flash; continuation only.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -1418,6 +1568,16 @@
                 "en": "Follow-up source.",
                 "ja": ""
               }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=_yFen1B8hdU",
+              "title": "Jev + Claude，男女搭配，幹活不累",
+              "brief": {
+                "zh": "续源：YT 0944「Jev + Claude」35.5k@17.2h；HF d3-flash（9B）。Jev 强相关：本周配",
+                "en": "Follow-up source.",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -1454,125 +1614,13 @@
             "https://www.reddit.com/r/LocalLLaMA/comments/1x29q4a/what_are_people_doing_with_decisions_jevlike/",
             "https://www.reddit.com/r/MachineLearning/comments/1x33wgz/p_pecision_models_that_score_every_allowed_label/",
             "https://www.reddit.com/r/LocalLLaMA/comments/1x3th4p/decision_30_open_multimodal_decision_models_from/",
-            "https://www.youtube.com/watch?v=DNDYYHsypZg"
+            "https://www.youtube.com/watch?v=DNDYYHsypZg",
+            "https://www.youtube.com/watch?v=_yFen1B8hdU"
           ],
           "blog": {
             "zh": "/cn/blog/open-decision-models-2026-survey-benchmarks/",
             "en": "/blog/open-decision-models-2026-survey-benchmarks/"
           }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-11T09:00:00+08:00",
-      "label": {
-        "zh": "10月11日 09:00",
-        "en": "Oct 11 09:00",
-        "ja": "10月11日 09:00"
-      },
-      "items": [
-        {
-          "id": "t569",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Reflection Beam：501B/23B 美国开源权重（coding/agentic MoE）",
-            "en": "Reflection Beam",
-            "ja": "Reflection Beam"
-          },
-          "summary": {
-            "zh": "Reflection 放出美国开源阵营旗舰 Beam：501B/23B MoE，主打 coding 与 agentic，对照 DeepSeek/Qwen/GLM。权重和技术报告还没放，先写发布与定位。贴题 Trends 相对 gpts 未过两窗口，故停在 inbox。 10-11：FT 称 Nvidia 洽购 Reflection AI。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Reflection 放出美国开源阵营旗舰 Beam：501B/23B MoE，主打 coding 与 agentic，对照 DeepSeek/Qwen/GLM。权重和技术报告还没放，先写发布与定位。贴题 Trends 相对 gpts 未过两窗口，故停在 inbox。 10-11：FT 称 Nvidia 洽购 Reflection AI。",
-            "en": "Reflection launches Beam, a US open-weight MoE (501B total, 23B active) aimed at coding and agentic work against DeepSeek, Qwen, and GLM. Weights and the tech report are still pending, so the piece is the launch and positioning. Topic-relevant Trends terms did not beat gpts in both windows, so this stays in the inbox. Oct 11: FT reports Nvidia in talks to acquire Reflection AI.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "reflection",
-              "url": "https://reflection.ai/blog/introducing-beam",
-              "title": "Introducing Beam",
-              "brief": {
-                "zh": "官方：稀疏 MoE；预训练 23.8T tokens；RL 在 10.5K GB300 跑 4 周；宣称 coding/agentic 近 GLM 5.2 / Qwen 3.8-Max，推理算力更省；可申请早期访问，权重本月晚些时候放出。",
-                "en": "Official: sparse MoE; 23.8T pretraining tokens; RL for four weeks on 10.5K GB300s; claims coding/agentic parity near GLM 5.2 / Qwen 3.8-Max with less inference compute; early access now, weights later this month.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://news.ycombinator.com/item?id=49969183",
-              "title": "Beam on HN",
-              "brief": {
-                "zh": "HN 304/79。昨日 r/LocalLLaMA 仅传闻，现已发。",
-                "en": "HN 304/79. Yesterday's LocalLLaMA rumor is now a real launch.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.ft.com/content/052610c5-22b4-4dd4-932e-b7f9f0628b6a",
-              "title": "Nvidia in talks to acquire Reflection AI (FT)",
-              "brief": {
-                "zh": "HN 122/83；付费墙。",
-                "en": "HN 122/83; paywalled.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "reflection",
-            "hn",
-            "techcrunch"
-          ],
-          "score": 5,
-          "status": "inbox",
-          "externalUrls": [
-            "https://reflection.ai/blog/introducing-beam",
-            "https://news.ycombinator.com/item?id=49969183",
-            "https://www.ft.com/content/052610c5-22b4-4dd4-932e-b7f9f0628b6a"
-          ]
-        },
-        {
-          "id": "t684",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Microsoft Execution Containers 1.0（MXC）：给 AI agent 代码执行的策略驱动沙箱",
-            "en": "Microsoft Execution Containers 1.0（MXC）",
-            "ja": "Microsoft Execution Containers 1.0（MXC）"
-          },
-          "summary": {
-            "zh": "微软发 Execution Containers 1.0，为 agent 代码执行提供策略驱动沙箱——平台级 containment 原语，接本周 Anthropic 断网与 AgentCorruption；Trends 「Microsoft Execution Containers」7d 1.38 vs gpts 57.2 fail、24h 0.0 vs gpts 2.69 fail → inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "微软发 Execution Containers 1.0，为 agent 代码执行提供策略驱动沙箱——平台级 containment 原语，接本周 Anthropic 断网与 AgentCorruption；Trends 「Microsoft Execution Containers」7d 1.38 vs gpts 57.2 fail、24h 0.0 vs gpts 2.69 fail → inbox。",
-            "en": "Microsoft ships Execution Containers 1.0, policy-driven sandboxing for agent code execution—a platform-level containment primitive alongside this week's Anthropic eval shutdown and AgentCorruption; Trends \"Microsoft Execution Containers\"7d 1.38 vs gpts 57.2 fail, 24h 0.0 vs gpts 2.69 fail → inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/",
-              "title": "Microsoft Execution Containers: policy-driven containment for AI agents",
-              "brief": {
-                "zh": "HN 160/37；1.0 发布。",
-                "en": "HN 160/37; 1.0 release.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "microsoft"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/"
-          ]
         }
       ]
     },
@@ -2926,13 +2974,13 @@
             "ja": "Gemini 4 Argon"
           },
           "summary": {
-            "zh": "Google 一级源新前沿：1M 输出 token、DeepSWE 77.9%，先经 Fairwind 放给可信网络防御者（去网络护栏）——coding-agent/sandbox 选型对照 Astra/Sol/Opus 的新锚，且显式分阶段安全放行。",
+            "zh": "Google 一级源新前沿：1M 输出 token、DeepSWE 77.9%，先经 Fairwind 放给可信网络防御者（去网络护栏）——coding-agent/sandbox 选型对照 Astra/Sol/Opus 的新锚，且显式分阶段安全放行。 10-14：Gemini 4 Argon 正式发布（HN 987/752）与官方 Chromium 维护案例。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "Google 一级源新前沿：1M 输出 token、DeepSWE 77.9%，先经 Fairwind 放给可信网络防御者（去网络护栏）——coding-agent/sandbox 选型对照 Astra/Sol/Opus 的新锚，且显式分阶段安全放行。",
-            "en": "Google’s frontier Gemini 4 Argon claims 1M output tokens and 77.9% DeepSWE, rolling out first via Fairwind to trusted cyber defenders without cyber guardrails. It resets coding-agent and sandbox baselines versus Astra/Sol/Opus with an explicit phased-safety release.",
+            "zh": "Google 一级源新前沿：1M 输出 token、DeepSWE 77.9%，先经 Fairwind 放给可信网络防御者（去网络护栏）——coding-agent/sandbox 选型对照 Astra/Sol/Opus 的新锚，且显式分阶段安全放行。 10-14：Gemini 4 Argon 正式发布（HN 987/752）与官方 Chromium 维护案例。",
+            "en": "Google’s frontier Gemini 4 Argon claims 1M output tokens and 77.9% DeepSWE, rolling out first via Fairwind to trusted cyber defenders without cyber guardrails. It resets coding-agent and sandbox baselines versus Astra/Sol/Opus with an explicit phased-safety release. Oct 14: Gemini 4 Argon officially launches (HN 987/752) with an official Chromium maintenance case study.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -2945,15 +2993,30 @@
                 "en": "DeepMind announces Gemini 4 Argon for long-horizon SWE, knowledge work, and cyber defense, with output context jumping 64K→1M. Fairwind trusted defenders get first access before broader API/Ultra.",
                 "ja": ""
               }
+            },
+            {
+              "source": "hn",
+              "url": "https://deepmind.google/models/gemini/",
+              "title": "Gemini 4 Argon",
+              "brief": {
+                "zh": "续源：论坛 0938 HN「Gemini 4 Argon」987/752（正式发布，另有机器人版）；YT 0944 官方「Ge",
+                "en": "Follow-up source.",
+                "ja": ""
+              }
             }
           ],
           "sources": [
-            "google"
+            "google",
+            "hn",
+            "youtube"
           ],
           "score": 5,
           "status": "published",
           "externalUrls": [
-            "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"
+            "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+            "https://deepmind.google/models/gemini/",
+            "https://www.youtube.com/watch?v=LVEfFyijQ2c",
+            "https://www.youtube.com/watch?v=OYp5j2RihPE"
           ]
         },
         {
