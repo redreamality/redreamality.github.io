@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-16T09:50:04+08:00",
+  "updatedAt": "2026-10-16T15:51:27+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,13 +13,112 @@
   "themeCounts": {
     "models": 11,
     "coding-tools": 18,
-    "agents-oss": 15,
+    "agents-oss": 16,
     "security": 11,
-    "research": 46,
+    "research": 48,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-16T15:00:00+08:00",
+      "label": {
+        "zh": "10月16日 15:00",
+        "en": "Oct 16 15:00",
+        "ja": "10月16日 15:00"
+      },
+      "items": [
+        {
+          "id": "t719",
+          "theme": "research",
+          "title": {
+            "zh": "「思考」到底在做什么：Latent CoT 统一分类法（21 配置删链/替换/探针，答案在链前已可读）× 推理模型「先接受再取消」语用含义（some/or 字面化）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：两篇论文从不同侧面说明「思考链 ≠ 推理」，可并 t705 成 CoT 专题；待 Trends bot。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：两篇论文从不同侧面说明「思考链 ≠ 推理」，可并 t705 成 CoT 专题；待 Trends bot。",
+            "en": "Synthesis candidate: latent-CoT taxonomy + thinking cancels implicature; awaiting Trends bot.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.21182",
+              "title": "Does Latent Chain-of-Thought Actually Reason? A Single, Unifying Taxonomy for Latent Reasoning",
+              "brief": {
+                "zh": "深耕候选：Latent CoT（COCONUT等）到底有没有在“推理”？21个配置做删链/替换/探针，发现逻辑任务上答案在链开始前就可读、删链几乎不变，还给出统一分类法——taxonomy+可视化机制，很适合画图讲。",
+                "en": "Across 21 latent-CoT configs (e.g. COCONUT), answers are decodable before the chain starts and deleting the chain barely matters on logic tasks; proposes a unifying taxonomy.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.21204",
+              "title": "Entertain, then Cancel: How Thinking Makes Reasoning Models Read Some and Or Literally",
+              "brief": {
+                "zh": "新芽：多想一会儿反而让推理模型把some/or按逻辑字面读（取消“not all”含义），连GPT-5也如此；轨迹显示先接受语用读法再取消。小而有趣的science-of-LLMs发现，机制好解释。",
+                "en": "More thinking makes reasoning models (incl. GPT-5) read 'some'/'or' literally, first entertaining then cancelling the scalar implicature.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.21182",
+            "https://arxiv.org/abs/2610.21204"
+          ]
+        },
+        {
+          "id": "t720",
+          "theme": "research",
+          "title": {
+            "zh": "基准饱和之后怎么测能力：只用「做对的 transcript」预测未饱和题表现",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：直接回应评测饱和，评测/安全读者刚需；待 Trends bot。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：直接回应评测饱和，评测/安全读者刚需；待 Trends bot。",
+            "en": "Single-paper candidate on evaluating capabilities after benchmark saturation; awaiting Trends bot.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.20667",
+              "title": "Evaluating Model Capabilities After Benchmark Saturation",
+              "brief": {
+                "zh": "深耕候选：基准饱和后还能怎么测能力？用“只看做对的transcript”去预测未饱和题上的能力，直接回应评测失效这个大家都头疼的问题，评测/安全策略读者都会关心。",
+                "en": "Proposes predicting capability on unsaturated items from transcripts of correctly solved items, to keep measuring models after benchmark saturation.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.20667"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-16T09:00:00+08:00",
       "label": {
@@ -434,6 +533,224 @@
         "ja": "10月14日 16:00"
       },
       "items": [
+        {
+          "id": "t704",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "AI 逆向与 clean-room 重写：REA「Reverse-Engineer Anything」× ArtCraft/PhotoCraft 重写 Photoshop（及 Wordcraft）× chardet 用 Claude 重写改许可 × Malus「洁净室即服务」讽刺",
+            "en": "AI Reverse Engineering and Clean-Room Rewrites: REA, PhotoCraft, chardet and Malus Side by Side",
+            "ja": "AI Reverse Engineering and Clean-Room Rewrites: REA, PhotoCraft, chardet and Malus Side by Side"
+          },
+          "summary": {
+            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。10-14 15:45 主词「reverse engineer anything」7d/24h 均过 gpts，进正式短名单，Top 3 #1。",
+            "en": "REA's agent reverse-engineering toolkit, ArtCraft PhotoCraft's \\\"clean-room Photoshop\\\", chardet 7's Claude rewrite and relicensing, and the Malus satire, read together: how AI reverse engineering and rewriting work, how the AI version differs from a classic clean room, the licensing and copyright risk layers, and a decision framework for using these tools.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。10-14 15:45 主词「reverse engineer anything」7d/24h 均过 gpts，进正式短名单，Top 3 #1。",
+            "en": "REA lets coding agents reverse-engineer binaries and runtimes and rebuild features; PhotoCraft claims a clean-room Photoshop rewrite; chardet's Claude rewrite and relicensing sparked a derivative-work fight—a multi-source synthesis on the mechanism, legal risk and methods of AI reverse engineering and clean-room rewrites. Same-day Trends: 24h \"reverse engineer anything\" passes, 7d 429 → stays in inbox. 10-14 15:45: own term passes 7d (28.98 vs 7.46) and 24h (67.89 vs 4.48) → shortlisted, Top 3 #1.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "github",
+              "url": "https://github.com/morluto/rea",
+              "title": "morluto/rea",
+              "brief": {
+                "zh": "REA：给 coding agent 的逆向工具集（反汇编/反编译/调用追踪/浏览器与进程抓取），★161,865、日 +45,327（10-13）。",
+                "en": "Reverse-engineering toolkit for coding agents (disassembly, decompilation, call tracing, browser/process capture); 161,865 stars, +45,327/day (Oct 13).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "rea",
+              "url": "https://rea.tools/",
+              "title": "REA — Reverse Engineering for Your Coding Agent",
+              "brief": {
+                "zh": "官网演示：从 Windows 计算器 DLL 还原 % 规则并重建、从恐龙游戏脚本还原加速规则；「Clone this website」提示。",
+                "en": "Site demos: recovering Calculator's % rule from its DLL and rebuilding it, recovering a game's speed rule; \"clone this website\" prompt.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://news.ycombinator.com/item?id=50028275",
+              "title": "REA Reverse – Engineer Anything (HN)",
+              "brief": {
+                "zh": "HN 800/337（10-10）；另有 10-12「Reverse engineer anything with agents…」98/32。",
+                "en": "HN 800/337 (Oct 10); plus 98/32 on Oct 12.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=dAzs_rU6080",
+              "title": "I Tested The Viral Github Repo To Reverse Engineer Anything",
+              "brief": {
+                "zh": "80.4k@10.2h 实测。",
+                "en": "80.4k views at 10.2h, hands-on test.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=OMobTlfjb8s",
+              "title": "The Fastest-Rising Repo on GitHub Is a Little Scary (REA)",
+              "brief": {
+                "zh": "51.7k@7.3h。",
+                "en": "51.7k views at 7.3h.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/storytold/photocraft",
+              "title": "storytold/photocraft",
+              "brief": {
+                "zh": "ArtCraft 旗下「clean-room 重写 Photoshop」（纯 Rust、24 crates、1,700+ 测试、PSD 往返 307/309）；仅凭公开规范与观察行为。",
+                "en": "ArtCraft's \"clean-room Photoshop reimplementation\" in pure Rust (24 crates, 1,700+ tests, PSD round-trips 307/309), from public specs and observed behaviour only.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://news.ycombinator.com/item?id=49981449",
+              "title": "Adobe Creative Suite Cleanroom Port to Rust (HN)",
+              "brief": {
+                "zh": "HN 140/86（10-06）；另有 Wordcraft「clean-room 重写 Word」101/109（10-12）。",
+                "en": "HN 140/86 (Oct 6); plus Wordcraft (clean-room Word) 101/109 (Oct 12).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "declic",
+              "url": "https://www.declic.media/en/news/artcraft-adobe-clean-room/",
+              "title": "Photoshop cloned with Claude: is it legal?",
+              "brief": {
+                "zh": "Guadamuz：clean room 主要是证据问题；ArtCraft 未分离观察者与编码者，模型训练所见无法核验。",
+                "en": "Guadamuz: clean room is mainly evidentiary; ArtCraft does not separate observers from coders, and training exposure cannot be verified.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "ipdefense",
+              "url": "https://ipdefense.law/resources/adobe-ai-software-case-study.pdf",
+              "title": "AI Recreated Adobe-Like Software. What Could Adobe Actually Protect?",
+              "brief": {
+                "zh": "律所案例分析：条款、商业外观、专利、商标等残余风险。",
+                "en": "Law-firm case study: residual risks via terms, trade dress, patents, trademarks.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/Adobe/comments/1wvyxjd/photocraft_ive_created_an_open_source_100_rust/",
+              "title": "PhotoCraft: I've created an open source 100% Rust clean-room clone of 7 of Adobe's apps",
+              "brief": {
+                "zh": "作者 r/Adobe 发帖。",
+                "en": "Author's r/Adobe announcement.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/chardet/chardet/issues/327",
+              "title": "chardet #327: No right to relicense this project",
+              "brief": {
+                "zh": "chardet 7.0 用 Claude Code 重写并由 LGPL 改 MIT（后改 0BSD），原作者 Mark Pilgrim 反对。",
+                "en": "chardet 7.0 rewritten with Claude Code and relicensed LGPL→MIT (later 0BSD); original author Mark Pilgrim objects.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "dan-blanchard",
+              "url": "http://dan-blanchard.github.io/blog/chardet-rewrite-controversy/",
+              "title": "Everything Claude Saw: A Transparent Account of the Chardet v7 Rewrite",
+              "brief": {
+                "zh": "维护者公开全部会话日志：子 agent 三次读到旧源码；三种相似度度量近零重合。",
+                "en": "Maintainer publishes all session logs: subagents read old source in three sessions; three similarity measures show near-zero overlap.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "lwn",
+              "url": "https://lwn.net/Articles/1061534/",
+              "title": "The relicensing of chardet",
+              "brief": {
+                "zh": "LWN：低相似度不等于切断衍生关系（类比翻译成 Lisp）；训练语料含旧版。",
+                "en": "LWN: low similarity does not break the derivative link (cf. translation to Lisp); training data included old versions.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "simonw",
+              "url": "https://simonwillison.net/2026/Mar/5/chardet/",
+              "title": "Can coding agents relicense open source through a \"clean room\" implementation of code?",
+              "brief": {
+                "zh": "Simon Willison 梳理与观察 LLM 曾访问 LGPL 源码。",
+                "en": "Simon Willison's analysis, noting the LLM did access the LGPL source.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arstechnica",
+              "url": "https://arstechnica.com/ai/2026/03/ai-can-rewrite-open-source-code-but-can-it-rewrite-the-license-too/",
+              "title": "AI can rewrite open source code—but can it rewrite the license, too?",
+              "brief": {
+                "zh": "FSF：「吃过原代码的 LLM 没有 clean 可言」。",
+                "en": "FSF: \"There is nothing clean about an LLM which has ingested the code.\"",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://malus.sh",
+              "title": "Malus – Clean Room as a Service (HN 1433/531)",
+              "brief": {
+                "zh": "讽刺站点（FOSDEM 2026 演讲配套）：AI「洁净室即服务」洗白开源许可，HN 1433/531（2026-03）。",
+                "en": "Satirical \"clean room as a service\" laundering OSS licenses (FOSDEM 2026 companion), HN 1433/531 (Mar 2026).",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "github",
+            "rea",
+            "hn",
+            "youtube",
+            "reddit",
+            "declic",
+            "ipdefense",
+            "lwn",
+            "simonw",
+            "arstechnica",
+            "dan-blanchard"
+          ],
+          "score": 5,
+          "status": "published",
+          "externalUrls": [
+            "https://github.com/morluto/rea",
+            "https://rea.tools/",
+            "https://news.ycombinator.com/item?id=50028275",
+            "https://www.youtube.com/watch?v=dAzs_rU6080",
+            "https://www.youtube.com/watch?v=OMobTlfjb8s",
+            "https://github.com/storytold/photocraft",
+            "https://news.ycombinator.com/item?id=49981449",
+            "https://www.declic.media/en/news/artcraft-adobe-clean-room/",
+            "https://ipdefense.law/resources/adobe-ai-software-case-study.pdf",
+            "https://www.reddit.com/r/Adobe/comments/1wvyxjd/photocraft_ive_created_an_open_source_100_rust/",
+            "https://github.com/chardet/chardet/issues/327",
+            "http://dan-blanchard.github.io/blog/chardet-rewrite-controversy/",
+            "https://lwn.net/Articles/1061534/",
+            "https://simonwillison.net/2026/Mar/5/chardet/",
+            "https://arstechnica.com/ai/2026/03/ai-can-rewrite-open-source-code-but-can-it-rewrite-the-license-too/",
+            "https://malus.sh"
+          ],
+          "blog": {
+            "zh": "/cn/blog/ai-reverse-engineering-clean-room-rewrite-licensing/",
+            "en": "/blog/ai-reverse-engineering-clean-room-rewrite-licensing/"
+          }
+        },
         {
           "id": "t705",
           "theme": "research",
