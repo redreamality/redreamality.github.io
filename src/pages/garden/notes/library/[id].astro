@@ -1,10 +1,16 @@
 ---
 import LibraryNotePage from '../../../../components/notes/LibraryNotePage.astro';
+import LibraryNoteRedirect from '../../../../components/notes/LibraryNoteRedirect.astro';
 import { getLibraryNotes } from '../../../../utils/library-notes';
+import { libraryNotePath } from '../../../../utils/library-notes-i18n';
 
 export function getStaticPaths() {
-  return getLibraryNotes().map((note) => ({ params: { id: note.id }, props: { note } }));
+  return getLibraryNotes().flatMap((note) => [
+    { params: { id: note.slug }, props: { note, redirectTo: undefined } },
+    // Legacy hash URL -> static redirect page (GitHub Pages has no server 301).
+    { params: { id: note.id }, props: { note, redirectTo: libraryNotePath(note.slug, 'en') } },
+  ]);
 }
-const { note } = Astro.props;
+const { note, redirectTo } = Astro.props;
 ---
-<LibraryNotePage lang="en" note={note} />
+{redirectTo ? <LibraryNoteRedirect to={redirectTo} /> : <LibraryNotePage lang="en" note={note} />}

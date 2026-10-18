@@ -38,6 +38,8 @@ function normalizeTagForSitemap(tag) {
   if (curatedTagSlugs.has(lower)) return lower;
   const kebab = raw.replace(/[\s_]+/g, '-').toLowerCase();
   if (curatedTagSlugs.has(kebab)) return kebab;
+  // Mirror normalizeTag: whitespace tags canonicalize to kebab (legacy spaced URLs are redirect stubs).
+  if (/\s/.test(raw)) return kebab;
   return raw;
 }
 
@@ -135,6 +137,8 @@ export default defineConfig({
         if (path === '/ja/go/' || path === '/ja/go') return false;
 
         // Exclude redirect pages - these have noindex meta tags
+        // Legacy library note hash URLs redirect to readable slugs.
+        if (/^\/(?:cn\/|ja\/)?garden\/notes\/library\/[a-f0-9]{64}\/?$/.test(path)) return false;
         // Notes keep their existing /garden/notes/ canonical routes.
         if (/^\/(?:cn\/|ja\/)?notes(?:\/|$)/.test(path)) return false;
 

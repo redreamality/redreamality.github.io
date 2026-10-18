@@ -172,7 +172,7 @@ async function buildIndex(): Promise<LocaleAvailabilityIndex> {
   }
 
   const details = emptyDetails();
-  const libraryIds = getLibraryNotes().map((note) => note.id);
+  const libraryIds = getLibraryNotes().map((note) => note.slug);
   const visualWorks = getVisualWorks();
 
   await Promise.all(

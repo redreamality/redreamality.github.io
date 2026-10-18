@@ -1,9 +1,9 @@
 // @vitest-environment node
 import { describe, expect, it } from 'vitest';
-import { getLibraryNotes, parseLibraryNotes, type LibraryNote } from './library-notes';
+import { assignLibrarySlugs, fallbackLibrarySlug, getLibraryNotes, parseLibraryNotes, type ParsedLibraryNote } from './library-notes';
 
 const error = 'Invalid public library notes feed.';
-function note(): LibraryNote {
+function note(): ParsedLibraryNote {
   return {
     id: 'a'.repeat(64), title: 'Public article', url: 'https://example.com/article',
     date: '2026-10-01T12:00:00Z', language: 'zh', sentence: 'A public summary.',
@@ -18,7 +18,7 @@ describe('public library notes validation', () => {
     expect(parseLibraryNotes(feed())).toEqual([note()]);
     expect(parseLibraryNotes(feed([]))).toEqual([]);
     const live = getLibraryNotes();
-    expect(parseLibraryNotes(feed(live))).toEqual(live);
+    expect(assignLibrarySlugs(parseLibraryNotes(feed(live)))).toEqual(live);
     const dates = live.map((entry) => Date.parse(entry.date));
     expect(dates).toEqual([...dates].sort((a, b) => b - a));
   });
@@ -117,5 +117,19 @@ describe('public library notes validation', () => {
     const entry = note();
     entry.bullets[0].heading = ' ';
     expect(() => parseLibraryNotes(feed([entry]))).toThrow(error);
+  });
+});
+
+describe('library note slugs', () => {
+  it('gives every live note a unique readable slug', () => {
+    const slugs = getLibraryNotes().map((n) => n.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
+    for (const s of slugs) expect(s).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+  });
+  it('falls back deterministically for unmapped imports', () => {
+    const id = 'ab'.repeat(32);
+    expect(fallbackLibrarySlug(id, '新版 Foo Bar 教程')).toBe('foo-bar-abababab');
+    expect(fallbackLibrarySlug(id, '中文')).toBe('note-abababab');
+    expect(() => assignLibrarySlugs([{ id } as never, { id: 'cd'.repeat(32) } as never], { [id]: 'x', ['cd'.repeat(32)]: 'x' })).toThrow();
   });
 });

@@ -17,7 +17,7 @@ const items = [
     search: [note.data.title, note.data.description, ...(note.data.tags ?? [])].join(' '),
   })),
   ...getLibraryNotes().map((note) => ({
-    kind: 'library' as const, href: libraryNotePath(note.id, lang),
+    kind: 'library' as const, href: libraryNotePath(note.slug, lang),
     title: note.title, description: note.sentence, date: note.date,
     partial: !note.coverage.complete,
     search: [note.title, note.sentence, ...note.bullets.flatMap((bullet) => [bullet.heading, ...bullet.details])].join(' '),

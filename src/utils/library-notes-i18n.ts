@@ -35,7 +35,7 @@ export const notesCopy = {
 
 export const notesPrefix = (lang: Language) => lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : '';
 export const notesPath = (lang: Language) => `${notesPrefix(lang)}/garden/notes/`;
-export const libraryNotePath = (id: string, lang: Language) => `${notesPath(lang)}library/${id}/`;
+export const libraryNotePath = (slug: string, lang: Language) => `${notesPath(lang)}library/${slug}/`;
 export function noteDate(date: string, lang: Language) {
   return new Date(date).toLocaleDateString(
     lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja-JP' : 'en-US',

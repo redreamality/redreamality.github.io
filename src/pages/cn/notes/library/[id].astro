@@ -3,7 +3,7 @@ import { getLibraryNotes } from '../../../../utils/library-notes';
 import { libraryNotePath } from '../../../../utils/library-notes-i18n';
 
 export function getStaticPaths() {
-  return getLibraryNotes().map((note) => ({ params: { id: note.id } }));
+  return getLibraryNotes().map((note) => ({ params: { id: note.id }, props: { slug: note.slug } }));
 }
-return Astro.redirect(libraryNotePath(Astro.params.id!, 'zh'), 301);
+return Astro.redirect(libraryNotePath(Astro.props.slug, 'zh'), 301);
 ---
