@@ -4,6 +4,7 @@ import { homeContent, localeFor } from '../../utils/homeContent';
 import SectionGrid, { type SectionItem } from '../shared/SectionGrid.astro';
 import chaosDigest from '../../data/chaos-digest.json';
 import TaxonomyEntryCard from '../tags/TaxonomyEntryCard.astro';
+import { archiveDayNumber, pickArchiveWindow } from '../../utils/home-archive';
 
 type Entry = { slug: string; data: Record<string, any> };
 
@@ -34,6 +35,20 @@ const blogItems: SectionItem[] = posts.slice(0, 12).map((p) => ({
   tags: p.data.tags,
   tagBasePath: `${basePath}/tags`,
   tagCounts,
+}));
+
+const RECENT_BLOG_COUNT = 12;
+const archiveTitle = { en: 'From the archive', zh: '往期文章', ja: 'アーカイブから' }[lang];
+const archiveItems: SectionItem[] = pickArchiveWindow(posts, {
+  skipRecent: RECENT_BLOG_COUNT,
+  count: 6,
+  day: archiveDayNumber(),
+}).map((p) => ({
+  href: `${basePath}/blog/${p.slug}/`,
+  title: p.data.title,
+  description: p.data.description,
+  dateISO: new Date(p.data.pubDate).toISOString(),
+  dateLabel: fmt(p.data.pubDate),
 }));
 
 const meditationItems: SectionItem[] = meditations.slice(0, 4).map((m) => ({
@@ -202,6 +217,17 @@ const noteItems: SectionItem[] = notes.slice(0, 6).map((n) => ({
 
   <!-- Full width: chaos + notes -->
   <div class="mt-14 space-y-14">
+    {archiveItems.length > 0 && (
+      <SectionGrid
+        id="from-the-archive"
+        title={archiveTitle}
+        viewAllHref={`${basePath}/blog/`}
+        viewAllLabel={c.viewAll}
+        columns={3}
+        accent="ink"
+        items={archiveItems}
+      />
+    )}
     <SectionGrid
       title={c.recentChaosTitle}
       viewAllHref={`${basePath}/garden/chaos/`}

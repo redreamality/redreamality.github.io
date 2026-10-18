@@ -123,7 +123,8 @@ export function loadTaxonomy(): TagTaxonomy {
  * 3. raw already a curated node slug
  * 4. toLowerCase() hits a curated slug (DeepSeek → deepseek)
  * 5. spaces/_ → kebab then lower hits curated (Claude Code → claude-code)
- * 6. else keep original (other / minCount pages)
+ * 6. raw containing whitespace → kebab-lower (no spaces in URLs)
+ * 7. else keep original (other / minCount pages)
  */
 export function normalizeTag(tag: string): string {
   const raw = tag.trim();
@@ -139,6 +140,8 @@ export function normalizeTag(tag: string): string {
   if (nodeIndex.has(lower)) return lower;
   const kebab = raw.replace(/[\s_]+/g, '-').toLowerCase();
   if (nodeIndex.has(kebab)) return kebab;
+  // Never emit whitespace into tag URLs ("System One" → "system-one").
+  if (/\s/.test(raw)) return kebab;
   return raw;
 }
 

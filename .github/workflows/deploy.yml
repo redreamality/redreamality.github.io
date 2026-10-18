@@ -81,6 +81,9 @@ jobs:
           node-version: 24
 
       - name: Submit changed content URLs to IndexNow
+        # Best effort: an IndexNow outage must never mark the deploy run as failed.
+        continue-on-error: true
+        timeout-minutes: 5
         env:
           BEFORE: ${{ github.event.before }}
           AFTER: ${{ github.sha }}

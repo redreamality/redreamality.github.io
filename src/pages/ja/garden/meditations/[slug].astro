@@ -1,4 +1,5 @@
 ---
+import { normalizeTag } from '../../../../utils/tag-taxonomy';
 import Layout from '../../../../layouts/Layout.astro';
 import TableOfContents from '../../../../components/TableOfContents.astro';
 import RelatedContent from '../../../../components/RelatedContent.astro';
@@ -70,8 +71,8 @@ const relatedItems = related.map((r) => ({
             <div class="flex flex-wrap gap-2 mb-6 not-prose">
               <span class="text-sm font-medium text-surface-600 dark:text-surface-300">{strings.tagsTitle}</span>
               {meditation.data.tags.map((tag) => (
-                (tagCounts[tag] ?? 0) >= 2 ? (
-                  <a href={`${basePath}/tags/${tag}/`} class="inline-block px-2 py-1 text-xs bg-surface-100 text-surface-700 rounded dark:bg-surface-800 dark:text-surface-300 hover:text-ink-600 dark:hover:text-ink-400 transition-colors">
+                (tagCounts[normalizeTag(tag)] ?? 0) >= 2 ? (
+                  <a href={`${basePath}/tags/${encodeURIComponent(normalizeTag(tag))}/`} class="inline-block px-2 py-1 text-xs bg-surface-100 text-surface-700 rounded dark:bg-surface-800 dark:text-surface-300 hover:text-ink-600 dark:hover:text-ink-400 transition-colors">
                     #{tag}
                   </a>
                 ) : (

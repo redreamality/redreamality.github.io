@@ -1,0 +1,20 @@
+---
+// Static redirect stub for legacy tag URLs that contained spaces (GitHub Pages has no server redirects).
+interface Props { to: string }
+const { to } = Astro.props;
+const canonical = new URL(to, Astro.site ?? 'https://redreamality.com').href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting to: {to}</title>
+    <meta http-equiv="refresh" content={`0;url=${to}`} />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={canonical} />
+    <script is:inline define:vars={{ to }}>location.replace(to + location.search + location.hash);</script>
+  </head>
+  <body>
+    <a href={to}>Redirecting to: {to}</a>
+  </body>
+</html>

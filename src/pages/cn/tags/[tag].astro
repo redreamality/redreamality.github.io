@@ -1,4 +1,6 @@
 ---
+import TagLegacyRedirect from '../../../components/tags/TagLegacyRedirect.astro';
+import { getLegacyTagRedirects } from '../../../utils/tag-legacy-redirects';
 import Layout from '../../../layouts/Layout.astro';
 import TagBreadcrumb from '../../../components/tags/TagBreadcrumb.astro';
 import TagNavbox from '../../../components/tags/TagNavbox.astro';
@@ -17,7 +19,15 @@ export async function getStaticPaths() {
   const posts = await getBlogPosts('zh');
   const tags = await getTags('zh');
 
-  return tags.map((tag) => ({
+  const legacy = getLegacyTagRedirects(
+    posts.flatMap((post) => post.data.tags || []),
+    tags,
+  ).map(({ legacy: tag, canonical }) => ({
+    params: { tag },
+    props: { redirectTo: `/cn/tags/${encodeURIComponent(canonical)}/`, posts: [], lang: 'zh' as Language, allTags: tags },
+  }));
+
+  return [...legacy, ...tags.map((tag) => ({
     params: { tag },
     props: {
       posts: posts
@@ -26,17 +36,18 @@ export async function getStaticPaths() {
       lang: 'zh' as Language,
       allTags: tags,
     },
-  }));
+  }))];
 }
 
 interface Props {
   posts: any[];
   lang: Language;
   allTags: string[];
+  redirectTo?: string;
 }
 
 const { tag } = Astro.params;
-const { posts, lang, allTags } = Astro.props;
+const { posts, lang, allTags, redirectTo } = Astro.props;
 const tagCounts = await getTagCounts(lang);
 const canonical = normalizeTag(tag!);
 const displayName = getTagDisplayLabel(canonical, lang);
@@ -65,6 +76,7 @@ const currentContent = content[lang];
 const canonicalURL = new URL(getTagHref(canonical, lang), Astro.site).toString();
 ---
 
+{redirectTo ? <TagLegacyRedirect to={redirectTo} /> : (
 <Layout title={`${displayName} | ${currentContent.pageSuffix}`} canonicalURL={canonicalURL}>
   <main class="mx-auto max-w-3xl px-4 py-10 md:py-14">
     <TagBreadcrumb tag={tag!} lang={lang} />
@@ -97,3 +109,4 @@ const canonicalURL = new URL(getTagHref(canonical, lang), Astro.site).toString()
     />
   </main>
 </Layout>
+)}
