@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T15:53:52+08:00",
+  "updatedAt": "2026-10-18T09:50:02+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,103 @@
     "other"
   ],
   "themeCounts": {
-    "models": 10,
+    "models": 11,
     "coding-tools": 19,
     "agents-oss": 17,
     "security": 8,
-    "research": 50,
+    "research": 49,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-18T09:00:00+08:00",
+      "label": {
+        "zh": "10月18日 09:00",
+        "en": "Oct 18 09:00",
+        "ja": "10月18日 09:00"
+      },
+      "items": [
+        {
+          "id": "t731",
+          "theme": "models",
+          "title": {
+            "zh": "OpenCode 被黑、用户凭据泄露（HN 773/134；有用户 Anthropic key 被盗刷）× 对照 Claude Code 默认静默同步 skills/插件",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "安全事件，热度高；目前单一来源，补齐官方事后报告/媒体后可作综合（coding agent 凭据安全）；待 Trends bot。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "安全事件，热度高；目前单一来源，补齐官方事后报告/媒体后可作综合（coding agent 凭据安全）；待 Trends bot。",
+            "en": "Security incident: OpenCode breach leaking user credentials; single source so far, synthesis once post-mortem/coverage lands; awaiting Trends bot.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://twitter.com/opencode/status/2111516673953935833",
+              "title": "OpenCode Hacked: User credentials leaked",
+              "brief": {
+                "zh": "OpenCode 被黑、用户凭据泄露，HN 773；Reddit 有人 Anthropic key 被盗刷 $158",
+                "en": "OpenCode announced it was hacked and user credentials leaked; HN 773/134; a Reddit user reports a stolen Anthropic key used for $158.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://twitter.com/opencode/status/2111516673953935833"
+          ]
+        },
+        {
+          "id": "t732",
+          "theme": "research",
+          "title": {
+            "zh": "agent 自报告不可信：「Language Models Are \"Insecure\" Reporters」——1,600 份看似成功的工作日志，模型最终报告系统性隐瞒问题",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选，站内 harness 积累线；待 Trends bot。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选，站内 harness 积累线；待 Trends bot。",
+            "en": "Single-paper candidate: LMs omit problems from their own work reports; awaiting Trends bot.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://arxiv.org/abs/2609.36139",
+              "title": "Language Models Are \\\"Insecure\\\" Reporters (AI models hide mistakes in their own work reports)",
+              "brief": {
+                "zh": "The 'agents overstate results' study skipped Oct 12 pending primary source — primary arXiv now verified. Agent-eval/harness reliability: final-report trust in autonomous coding/experiment agents. exploit-candidate — 站内积累线 (harness / agent-loop).",
+                "en": "Given 1,600 synthetic agent work logs that look successful, models final reports systematically omit problems that undermine the result (arXiv 2609.36139).",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.36139"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-17T15:00:00+08:00",
       "label": {
@@ -124,13 +212,13 @@
             "ja": ""
           },
           "summary": {
-            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。",
+            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。",
-            "en": "Synthesis candidate: OpenAI agents breaching real sites + Perplexity SPACE microVM sandbox (+t712); awaiting Trends bot.",
+            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。",
+            "en": "Synthesis candidate: OpenAI agents breaching real sites + Perplexity SPACE microVM sandbox (+t712); awaiting Trends bot. 10-17 Trends (trends bot): \"Perplexity SPACE\" 7d 2.29 / 24h 0.27; \"OpenAI misalignment reports\" 7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 — not passed, stays inbox.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -298,13 +386,13 @@
             "ja": ""
           },
           "summary": {
-            "zh": "单篇论文深读候选：直接回应评测饱和，评测/安全读者刚需；待 Trends bot。 10-16 Trends（trends bot）：「benchmark saturation」7d 0.14 / 24h 0.31 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Mercor 劳动指数补「基准覆盖不到真实工作」一侧，可升为综合题。",
+            "zh": "单篇论文深读候选：直接回应评测饱和，评测/安全读者刚需；待 Trends bot。 10-16 Trends（trends bot）：「benchmark saturation」7d 0.14 / 24h 0.31 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Mercor 劳动指数补「基准覆盖不到真实工作」一侧，可升为综合题。 10-17 Trends（trends bot）：「Mercor labor index」7d 0 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "单篇论文深读候选：直接回应评测饱和，评测/安全读者刚需；待 Trends bot。 10-16 Trends（trends bot）：「benchmark saturation」7d 0.14 / 24h 0.31 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Mercor 劳动指数补「基准覆盖不到真实工作」一侧，可升为综合题。",
-            "en": "Single-paper candidate on evaluating capabilities after benchmark saturation; awaiting Trends bot. 10-16 Trends (trends bot): benchmark saturation 7d 0.14 / 24h 0.31 vs gpts 65.33 / 13.50 — not passed, stays inbox. Follow-up: Mercor labor index (90% of US work hours poorly covered by benchmarks) — could turn this into a synthesis.",
+            "zh": "单篇论文深读候选：直接回应评测饱和，评测/安全读者刚需；待 Trends bot。 10-16 Trends（trends bot）：「benchmark saturation」7d 0.14 / 24h 0.31 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Mercor 劳动指数补「基准覆盖不到真实工作」一侧，可升为综合题。 10-17 Trends（trends bot）：「Mercor labor index」7d 0 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。",
+            "en": "Single-paper candidate on evaluating capabilities after benchmark saturation; awaiting Trends bot. 10-16 Trends (trends bot): benchmark saturation 7d 0.14 / 24h 0.31 vs gpts 65.33 / 13.50 — not passed, stays inbox. Follow-up: Mercor labor index (90% of US work hours poorly covered by benchmarks) — could turn this into a synthesis. 10-17 Trends (trends bot): \"Mercor labor index\" 7d 0 / 24h 0 vs gpts 15.82 / 5.75 — not passed, stays inbox.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -349,13 +437,13 @@
             "ja": ""
           },
           "summary": {
-            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。",
+            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。 10-17 Trends（trends bot）：「LLM writing tic」7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 未过；「不是而是」CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0（CN 数据不可靠，不作结论），留 inbox。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。",
-            "en": "Single-paper candidate on the Mandarin \"not X but Y\" LLM writing tic; awaiting Trends bot.",
+            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。 10-17 Trends（trends bot）：「LLM writing tic」7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 未过；「不是而是」CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0（CN 数据不可靠，不作结论），留 inbox。",
+            "en": "Single-paper candidate on the Mandarin \"not X but Y\" LLM writing tic; awaiting Trends bot. 10-17 Trends (trends bot): \"LLM writing tic\" 7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 — not passed; \"是而是\" CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0 (CN data unreliable, inconclusive), stays inbox.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -388,13 +476,13 @@
             "ja": ""
           },
           "summary": {
-            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。",
+            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。",
-            "en": "Single-paper candidate: much of RLVR out-of-domain gain is answer formatting; awaiting Trends bot.",
+            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。",
+            "en": "Single-paper candidate: much of RLVR out-of-domain gain is answer formatting; awaiting Trends bot. 10-17 Trends (trends bot): \"RLVR\" 7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 — not passed, stays inbox.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -427,13 +515,13 @@
             "ja": ""
           },
           "summary": {
-            "zh": "单篇研究解读候选：热度极高、有可验证结论；若仅为新闻式复述则归 Chaos；待 Trends bot。",
+            "zh": "单篇研究解读候选：热度极高、有可验证结论；若仅为新闻式复述则归 Chaos；待 Trends bot。 10-17 Trends（trends bot）：「NIST curves」7d 0.11 / 24h 0 vs gpts 68.28 / 13.07；「ECDSA」7d 5.25 / 24h 16.16 vs gpts 15.82 / 5.75（24h 过、7d 未过）未过，留 inbox。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "单篇研究解读候选：热度极高、有可验证结论；若仅为新闻式复述则归 Chaos；待 Trends bot。",
-            "en": "Single-result deep-read candidate: Claude reveals origins of NIST ECDSA curve seeds; awaiting Trends bot.",
+            "zh": "单篇研究解读候选：热度极高、有可验证结论；若仅为新闻式复述则归 Chaos；待 Trends bot。 10-17 Trends（trends bot）：「NIST curves」7d 0.11 / 24h 0 vs gpts 68.28 / 13.07；「ECDSA」7d 5.25 / 24h 16.16 vs gpts 15.82 / 5.75（24h 过、7d 未过）未过，留 inbox。",
+            "en": "Single-result deep-read candidate: Claude reveals origins of NIST ECDSA curve seeds; awaiting Trends bot. 10-17 Trends (trends bot): \"NIST curves\" 7d 0.11 / 24h 0 vs gpts 68.28 / 13.07; \"ECDSA\" 7d 5.25 / 24h 16.16 vs gpts 15.82 / 5.75 (24h pass, 7d fail) — not passed, stays inbox.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -476,13 +564,13 @@
             "ja": ""
           },
           "summary": {
-            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。",
+            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。续源：Torvalds 表态。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。",
-            "en": "Ars reports coding agents produce more code but not more software; Hickey and Spinellis push back, QGIS pauses AI contributions while Torvalds uses Claude Code on the kernel—a multi-source productivity-paradox candidate, but no searchable main term, so not shortlisted.",
+            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。续源：Torvalds 表态。",
+            "en": "Ars reports coding agents produce more code but not more software; Hickey and Spinellis push back, QGIS pauses AI contributions while Torvalds uses Claude Code on the kernel—a multi-source productivity-paradox candidate, but no searchable main term, so not shortlisted. Follow-up: Torvalds calls anti-AI contribution rules idiotic.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -525,12 +613,23 @@
                 "en": "Lobsters 48/66.",
                 "ja": ""
               }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x8e4wd/linux_creator_says_antiai_rules_are_idiotic/",
+              "title": "Linux creator says anti-AI rules are 'idiotic.' (Absolute god-tier take.)",
+              "brief": {
+                "zh": "Torvalds 称反 AI 贡献规则「愚蠢」，接 QGIS 禁令与他用 Claude Code 改内核",
+                "en": "Linux creator says anti-AI rules are 'idiotic.' (Absolute god-tier take.)",
+                "ja": ""
+              }
             }
           ],
           "sources": [
             "hn",
             "lobsters",
-            "youtube"
+            "youtube",
+            "reddit"
           ],
           "score": 4,
           "status": "writing",
@@ -540,7 +639,8 @@
             "https://www.spinellis.gr/blog/20261008/?li261008",
             "https://github.com/qgis/QGIS-Enhancement-Proposals/pull/387",
             "https://www.phoronix.com/news/Linus-Torvalds-Claude-Code",
-            "https://www.youtube.com/watch?v=hTAWHgQI4xg"
+            "https://www.youtube.com/watch?v=hTAWHgQI4xg",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1x8e4wd/linux_creator_says_antiai_rules_are_idiotic/"
           ]
         }
       ]
@@ -1135,84 +1235,6 @@
             "zh": "/cn/blog/ai-reverse-engineering-clean-room-rewrite-licensing/",
             "en": "/blog/ai-reverse-engineering-clean-room-rewrite-licensing/"
           }
-        },
-        {
-          "id": "t705",
-          "theme": "research",
-          "title": {
-            "zh": "CoT 监控在 CoT 必要时也会失效：四级 CoT 必要性层级（Fraunhofer HHI）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：直接挑战 CoT 监控这一主力安全手段的前提，层级图适合配图；需主词当日 7d+24h 过 gpts 才进短名单。 10-16 Trends（trends bot）：「chain of thought monitoring」7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 未过，留 inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：直接挑战 CoT 监控这一主力安全手段的前提，层级图适合配图；需主词当日 7d+24h 过 gpts 才进短名单。 10-16 Trends（trends bot）：「chain of thought monitoring」7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 未过，留 inbox。",
-            "en": "Single-paper deep-read candidate challenging the premise that necessary CoT is monitorable; needs its own term to pass Trends. 10-16 Trends (trends bot): chain of thought monitoring 7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 — not passed, stays inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.18105",
-              "title": "Chain of Thought Monitoring Can Fail Even When CoT Is Necessary",
-              "brief": {
-                "zh": "提出四级 CoT 必要性层级，并在医疗诊断等任务上展示即使 CoT 必要，监控仍会逐级失效。",
-                "en": "Proposes a four-level CoT-necessity hierarchy and shows monitoring failures at each level, including on medical diagnosis tasks.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.18105"
-          ]
-        },
-        {
-          "id": "t706",
-          "theme": "research",
-          "title": {
-            "zh": "礼貌刻板印象微调即可诱发 emergent misalignment（跨 4 个模型家族）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：把 emergent misalignment 触发条件扩到日常偏见数据，对企业微调有警示；需主词当日过 Trends。 10-16 Trends（trends bot）：「emergent misalignment」7d 0.17 / 24h 0.25 vs gpts 65.35 / 15.06 未过，留 inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：把 emergent misalignment 触发条件扩到日常偏见数据，对企业微调有警示；需主词当日过 Trends。 10-16 Trends（trends bot）：「emergent misalignment」7d 0.17 / 24h 0.25 vs gpts 65.35 / 15.06 未过，留 inbox。",
-            "en": "Single-paper candidate: everyday-bias fine-tuning triggers emergent misalignment across four model families; needs Trends pass. 10-16 Trends (trends bot): emergent misalignment 7d 0.17 / 24h 0.25 vs gpts 65.35 / 15.06 — not passed, stays inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.15961",
-              "title": "Unfair and Unsafe: Everyday Bias Triggers Emergent Misalignment",
-              "brief": {
-                "zh": "仅用礼貌的刻板印象数据微调，即在 4 个模型家族上复现无关任务中的不安全与不诚实行为。",
-                "en": "Fine-tuning on polite stereotypes alone yields unsafe and dishonest behavior on unrelated tasks across four model families.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.15961"
-          ]
         }
       ]
     },
