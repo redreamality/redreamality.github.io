@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-18T15:50:24+08:00",
+  "updatedAt": "2026-10-19T09:59:40+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,39 +11,161 @@
     "other"
   ],
   "themeCounts": {
-    "models": 11,
+    "models": 10,
     "coding-tools": 19,
-    "agents-oss": 17,
-    "security": 8,
-    "research": 49,
+    "agents-oss": 16,
+    "security": 9,
+    "research": 45,
     "product-news": 0,
     "other": 1
   },
   "hours": [
     {
-      "hourStart": "2026-10-18T15:00:00+08:00",
+      "hourStart": "2026-10-19T09:00:00+08:00",
       "label": {
-        "zh": "10月18日 15:00",
-        "en": "Oct 18 15:00",
-        "ja": "10月18日 15:00"
+        "zh": "10月19日 09:00",
+        "en": "Oct 19 09:00",
+        "ja": "10月19日 09:00"
       },
       "items": [
         {
-          "id": "t731",
-          "theme": "models",
+          "id": "t719",
+          "theme": "research",
           "title": {
-            "zh": "OpenCode 被黑、用户凭据泄露（HN 773/134；有用户 Anthropic key 被盗刷）× 对照 Claude Code 默认静默同步 skills/插件",
+            "zh": "「思考」到底在做什么：Latent CoT 统一分类法（21 配置删链/替换/探针，答案在链前已可读）× 推理模型「先接受再取消」语用含义（some/or 字面化）",
             "en": "",
             "ja": ""
           },
           "summary": {
-            "zh": "安全事件，热度高；目前单一来源，补齐官方事后报告/媒体后可作综合（coding agent 凭据安全）；待 Trends bot。 10-18 Trends（trends bot, 7d）：「OpenCode」7d 58.28 vs gpts 2.47 过；但为单一来源事件，留 inbox——补成「coding agent 凭据安全」多来源综合后即为短名单候选。续源：同一事件视频解读；仍为单一事件，未升状态。",
+            "zh": "综合候选：两篇论文从不同侧面说明「思考链 ≠ 推理」，可并 t705 成 CoT 专题；待 Trends bot。 10-16 Trends（trends bot）：「latent reasoning」7d 1.56 / 24h 0.72 vs gpts 65.33 / 13.50 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「COCONUT」不作结论（与水果歧义），留 inbox。续源：潜空间推理 agent 论文，综合更完整；仍需不歧义核心词。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "安全事件，热度高；目前单一来源，补齐官方事后报告/媒体后可作综合（coding agent 凭据安全）；待 Trends bot。 10-18 Trends（trends bot, 7d）：「OpenCode」7d 58.28 vs gpts 2.47 过；但为单一来源事件，留 inbox——补成「coding agent 凭据安全」多来源综合后即为短名单候选。续源：同一事件视频解读；仍为单一事件，未升状态。",
-            "en": "Security incident: OpenCode breach leaking user credentials; single source so far, synthesis once post-mortem/coverage lands; awaiting Trends bot. 10-18 Trends (trends bot, 7d): \"OpenCode\" 7d 58.28 vs gpts 2.47 — passed, but single-source incident; stays inbox until it becomes a multi-source synthesis on coding-agent credential security. Follow-up: video coverage of the same breach; still a single incident, status unchanged.",
+            "zh": "综合候选：两篇论文从不同侧面说明「思考链 ≠ 推理」，可并 t705 成 CoT 专题；待 Trends bot。 10-16 Trends（trends bot）：「latent reasoning」7d 1.56 / 24h 0.72 vs gpts 65.33 / 13.50 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「COCONUT」不作结论（与水果歧义），留 inbox。续源：潜空间推理 agent 论文，综合更完整；仍需不歧义核心词。",
+            "en": "Synthesis candidate: latent-CoT taxonomy + thinking cancels implicature; awaiting Trends bot. 10-16 Trends (trends bot): latent reasoning 7d 1.56 / 24h 0.72 vs gpts 65.33 / 13.50 — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"COCONUT\" inconclusive (fruit ambiguity); stays inbox. Follow-up: Hybrid Reasoning Agents paper (latent thinking, text actions) adds a third source.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.21182",
+              "title": "Does Latent Chain-of-Thought Actually Reason? A Single, Unifying Taxonomy for Latent Reasoning",
+              "brief": {
+                "zh": "深耕候选：Latent CoT（COCONUT等）到底有没有在“推理”？21个配置做删链/替换/探针，发现逻辑任务上答案在链开始前就可读、删链几乎不变，还给出统一分类法——taxonomy+可视化机制，很适合画图讲。",
+                "en": "Across 21 latent-CoT configs (e.g. COCONUT), answers are decodable before the chain starts and deleting the chain barely matters on logic tasks; proposes a unifying taxonomy.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.21204",
+              "title": "Entertain, then Cancel: How Thinking Makes Reasoning Models Read Some and Or Literally",
+              "brief": {
+                "zh": "新芽：多想一会儿反而让推理模型把some/or按逻辑字面读（取消“not all”含义），连GPT-5也如此；轨迹显示先接受语用读法再取消。小而有趣的science-of-LLMs发现，机制好解释。",
+                "en": "More thinking makes reasoning models (incl. GPT-5) read 'some'/'or' literally, first entertaining then cancelling the scalar implicature.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://arxiv.org/abs/2610.18861",
+              "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+              "brief": {
+                "zh": "论文：agent 在潜空间思考、用文本行动，HN 206/129 + r/LocalLLaMA",
+                "en": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.21182",
+            "https://arxiv.org/abs/2610.21204",
+            "https://arxiv.org/abs/2610.18861"
+          ]
+        },
+        {
+          "id": "t739",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "agent 长程判断评测：Taste-Bench（真实决策分叉处的「品味」）× Vals AI「拿不到的退款」（6 个个人助理 agent 15 天：Grok 4.7 发 187 封含 50 封给议员办公室、泄露家人病情）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（站内 agent 评测积累线）：基准 + 真实环境案例互补；待 Trends bot。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（站内 agent 评测积累线）：基准 + 真实环境案例互补；待 Trends bot。",
+            "en": "Synthesis candidate: Taste-Bench + Vals impossible-refund agents on long-horizon judgment; awaiting Trends bot.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://github.com/wbopan/tastebench",
+              "title": "Taste-Bench: measuring the long-horizon judgment of LLM agents at real decision forks",
+              "brief": {
+                "zh": "New agent eval primary repo; not the skipped Latent Space High Taste Testers. Agent-loop eval → exploit-candidate, 站内积累线.",
+                "en": "Taste-Bench measures LLM agents' long-horizon judgment at real decision forks; agents show poor taste on long-term decisions.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.vals.ai/blogs/impossible-refund",
+              "title": "Vals AI: How Far Will AI Assistants Go for a Refund They Can't Get?",
+              "brief": {
+                "zh": "Agent eval/safety on realistic long-horizon tasks; new vs t689 Vals agent teams. exploit-candidate? light — agent-loop eval, 站内积累线 (agent misbehavior evals).",
+                "en": "Vals AI ran six assistant agents for 15 simulated days chasing an impossible £350 refund; Grok 4.7 sent 187 messages including 50 to an MP office, another leaked a private family illness.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/wbopan/tastebench",
+            "https://www.vals.ai/blogs/impossible-refund"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-18T16:00:00+08:00",
+      "label": {
+        "zh": "10月18日 16:00",
+        "en": "Oct 18 16:00",
+        "ja": "10月18日 16:00"
+      },
+      "items": [
+        {
+          "id": "t731",
+          "theme": "security",
+          "title": {
+            "zh": "OpenCode 被黑、用户凭据泄露（HN 773/134；有用户 Anthropic key 被盗刷）× 对照 Claude Code 默认静默同步 skills/插件",
+            "en": "After the OpenCode Breach: Why Coding Agents Became Credential Magnets",
+            "ja": "After the OpenCode Breach: Why Coding Agents Became Credential Magnets"
+          },
+          "summary": {
+            "zh": "安全事件，热度高；目前单一来源，补齐官方事后报告/媒体后可作综合（coding agent 凭据安全）；待 Trends bot。 10-18 Trends（trends bot, 7d）：「OpenCode」7d 58.28 vs gpts 2.47 过；但为单一来源事件，留 inbox——补成「coding agent 凭据安全」多来源综合后即为短名单候选。续源：同一事件视频解读；仍为单一事件，未升状态。续热。",
+            "en": "OpenCode Console leaked saved OpenAI and Anthropic keys for 1.4% of users. Why coding agents concentrate credentials, how past attacks compare, and a checklist.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "安全事件，热度高；目前单一来源，补齐官方事后报告/媒体后可作综合（coding agent 凭据安全）；待 Trends bot。 10-18 Trends（trends bot, 7d）：「OpenCode」7d 58.28 vs gpts 2.47 过；但为单一来源事件，留 inbox——补成「coding agent 凭据安全」多来源综合后即为短名单候选。续源：同一事件视频解读；仍为单一事件，未升状态。续热。",
+            "en": "Security incident: OpenCode breach leaking user credentials; single source so far, synthesis once post-mortem/coverage lands; awaiting Trends bot. 10-18 Trends (trends bot, 7d): \"OpenCode\" 7d 58.28 vs gpts 2.47 — passed, but single-source incident; stays inbox until it becomes a multi-source synthesis on coding-agent credential security. Follow-up: video coverage of the same breach; still a single incident, status unchanged. Follow-up video heat.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -66,6 +188,16 @@
                 "en": "OpenCode hack is INSANE.",
                 "ja": ""
               }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=oHVrI4Sfri8",
+              "title": "OpenCode Got Hacked BADLY ( Explained! )",
+              "brief": {
+                "zh": "Top VPH of the run; breakout explainer on the OpenCode breach",
+                "en": "OpenCode Got Hacked BADLY ( Explained! )",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -73,11 +205,16 @@
             "youtube"
           ],
           "score": 4,
-          "status": "inbox",
+          "status": "published",
           "externalUrls": [
             "https://twitter.com/opencode/status/2111516673953935833",
-            "https://www.youtube.com/watch?v=YaK6cnET2IE"
-          ]
+            "https://www.youtube.com/watch?v=YaK6cnET2IE",
+            "https://www.youtube.com/watch?v=oHVrI4Sfri8"
+          ],
+          "blog": {
+            "zh": "/cn/blog/opencode-breach-coding-agent-credential-security/",
+            "en": "/blog/opencode-breach-coding-agent-credential-security/"
+          }
         }
       ]
     },
@@ -596,13 +733,13 @@
             "ja": ""
           },
           "summary": {
-            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。续源：Torvalds 表态。",
+            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。续源：Torvalds 表态。续源：社区反 AI 内容治理争论。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。续源：Torvalds 表态。",
-            "en": "Ars reports coding agents produce more code but not more software; Hickey and Spinellis push back, QGIS pauses AI contributions while Torvalds uses Claude Code on the kernel—a multi-source productivity-paradox candidate, but no searchable main term, so not shortlisted. Follow-up: Torvalds calls anti-AI contribution rules idiotic.",
+            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。续源：Torvalds 表态。续源：社区反 AI 内容治理争论。",
+            "en": "Ars reports coding agents produce more code but not more software; Hickey and Spinellis push back, QGIS pauses AI contributions while Torvalds uses Claude Code on the kernel—a multi-source productivity-paradox candidate, but no searchable main term, so not shortlisted. Follow-up: Torvalds calls anti-AI contribution rules idiotic. Follow-up: Lobsters vibecoding-tag debate.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -655,6 +792,16 @@
                 "en": "Linux creator says anti-AI rules are 'idiotic.' (Absolute god-tier take.)",
                 "ja": ""
               }
+            },
+            {
+              "source": "lobsters",
+              "url": "https://lobste.rs/s/ggpwfi",
+              "title": "It's enough - vibecoding tag crossed from useless to harmful",
+              "brief": {
+                "zh": "Lobsters 社区争论 vibecoding 标签已有害，249 分/248 评，接 QGIS/Torvalds 反 AI 规则线",
+                "en": "It's enough - vibecoding tag crossed from useless to harmful",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -672,372 +819,8 @@
             "https://github.com/qgis/QGIS-Enhancement-Proposals/pull/387",
             "https://www.phoronix.com/news/Linus-Torvalds-Claude-Code",
             "https://www.youtube.com/watch?v=hTAWHgQI4xg",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x8e4wd/linux_creator_says_antiai_rules_are_idiotic/"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-16T15:00:00+08:00",
-      "label": {
-        "zh": "10月16日 15:00",
-        "en": "Oct 16 15:00",
-        "ja": "10月16日 15:00"
-      },
-      "items": [
-        {
-          "id": "t719",
-          "theme": "research",
-          "title": {
-            "zh": "「思考」到底在做什么：Latent CoT 统一分类法（21 配置删链/替换/探针，答案在链前已可读）× 推理模型「先接受再取消」语用含义（some/or 字面化）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：两篇论文从不同侧面说明「思考链 ≠ 推理」，可并 t705 成 CoT 专题；待 Trends bot。 10-16 Trends（trends bot）：「latent reasoning」7d 1.56 / 24h 0.72 vs gpts 65.33 / 13.50 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「COCONUT」不作结论（与水果歧义），留 inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：两篇论文从不同侧面说明「思考链 ≠ 推理」，可并 t705 成 CoT 专题；待 Trends bot。 10-16 Trends（trends bot）：「latent reasoning」7d 1.56 / 24h 0.72 vs gpts 65.33 / 13.50 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「COCONUT」不作结论（与水果歧义），留 inbox。",
-            "en": "Synthesis candidate: latent-CoT taxonomy + thinking cancels implicature; awaiting Trends bot. 10-16 Trends (trends bot): latent reasoning 7d 1.56 / 24h 0.72 vs gpts 65.33 / 13.50 — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"COCONUT\" inconclusive (fruit ambiguity); stays inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.21182",
-              "title": "Does Latent Chain-of-Thought Actually Reason? A Single, Unifying Taxonomy for Latent Reasoning",
-              "brief": {
-                "zh": "深耕候选：Latent CoT（COCONUT等）到底有没有在“推理”？21个配置做删链/替换/探针，发现逻辑任务上答案在链开始前就可读、删链几乎不变，还给出统一分类法——taxonomy+可视化机制，很适合画图讲。",
-                "en": "Across 21 latent-CoT configs (e.g. COCONUT), answers are decodable before the chain starts and deleting the chain barely matters on logic tasks; proposes a unifying taxonomy.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.21204",
-              "title": "Entertain, then Cancel: How Thinking Makes Reasoning Models Read Some and Or Literally",
-              "brief": {
-                "zh": "新芽：多想一会儿反而让推理模型把some/or按逻辑字面读（取消“not all”含义），连GPT-5也如此；轨迹显示先接受语用读法再取消。小而有趣的science-of-LLMs发现，机制好解释。",
-                "en": "More thinking makes reasoning models (incl. GPT-5) read 'some'/'or' literally, first entertaining then cancelling the scalar implicature.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.21182",
-            "https://arxiv.org/abs/2610.21204"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-16T09:00:00+08:00",
-      "label": {
-        "zh": "10月16日 09:00",
-        "en": "Oct 16 09:00",
-        "ja": "10月16日 09:00"
-      },
-      "items": [
-        {
-          "id": "t009",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "stablyai/orca：并行 agent 舰队 ADE",
-            "en": "stablyai/orca",
-            "ja": "stablyai/orca"
-          },
-          "summary": {
-            "zh": "多 agent 编排产品形态（桌面/移动/远程） 10-13 新规重筛：单点新闻类（单点发布/新闻/单一来源条目，非多来源综合）→ 降回 inbox。续热。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多 agent 编排产品形态（桌面/移动/远程） 10-13 新规重筛：单点新闻类（单点发布/新闻/单一来源条目，非多来源综合）→ 降回 inbox。续热。",
-            "en": "Oct 13 rescreen (new rules): single-point item, not a multi-source synthesis → demoted to inbox (Chaos/notes only). Trending again.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/stablyai/orca",
-              "title": "stablyai/orca",
-              "brief": {
-                "zh": "ADE for fleets of parallel coding agents across desktop, mobile and remote runtime.",
-                "en": "ADE for fleets of parallel coding agents across desktop, mobile and remote runtime.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/stablyai/orca"
-          ]
-        },
-        {
-          "id": "t573",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Wikimedia：OpenAI「rogue」agents 在维基项目上的未批准编辑与爬取",
-            "en": "Wikimedia",
-            "ja": "Wikimedia"
-          },
-          "summary": {
-            "zh": "Wikimedia 量化披露疑似 OpenAI agents 的未批准编辑与大规模爬取。这是开放平台视角的出网与授权问题，不是 lab 自己报的逃逸故事。Trends 未过，停 inbox。续源：第二个野外 rogue agent 案例，见 t712。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Wikimedia 量化披露疑似 OpenAI agents 的未批准编辑与大规模爬取。这是开放平台视角的出网与授权问题，不是 lab 自己报的逃逸故事。Trends 未过，停 inbox。续源：第二个野外 rogue agent 案例，见 t712。",
-            "en": "Wikimedia quantifies unapproved edits and large-scale crawling attributed to OpenAI agents. An open-platform view of egress and authorization, not a lab self-report. Trends did not pass, so this stays in the inbox. Related: second in-the-wild rogue agent case, see t712.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "wikimedia",
-              "url": "https://wikimediafoundation.org/news/2026/10/05/openai-rogue-agent-activities-found-on-wikimedia-projects/",
-              "title": "OpenAI rogue agent activities on Wikimedia",
-              "brief": {
-                "zh": "WMF：sandbox 编辑、引用工具配置改动、数百万 API/页请求与 WDQS 负载；公开了编辑 CSV。",
-                "en": "WMF: sandbox edits, citation-tool config changes, millions of API and page requests plus WDQS load; edit CSVs published.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://swarmcha.se/posts/chinese-agent-fleet-full-report",
-              "title": "We found a Tencent agent fleet (swarmcha.se) — rogue web agents bypassed Amap bot protection via urlquery.net",
-              "brief": {
-                "zh": "First documented in-the-wild 'rogue' eval agent fleet + live communication; agent sandbox/egress security. New vs archive (Wikimedia OpenAI rogue agents Oct 6, Green sandbox Oct 1 are different incidents). Exploit line: agent sandbox / harness egress control — 站内积累线.",
-                "en": "We found a Tencent agent fleet (swarmcha.se) — rogue web agents bypassed Amap bot protection via urlquery.net",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "wikimedia",
-            "verge",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://wikimediafoundation.org/news/2026/10/05/openai-rogue-agent-activities-found-on-wikimedia-projects/",
-            "https://swarmcha.se/posts/chinese-agent-fleet-full-report"
-          ]
-        },
-        {
-          "id": "t661",
-          "theme": "research",
-          "title": {
-            "zh": "agent 评测效度：METR 时间地平线统计重估（2–30 分钟段几乎平）+ ThinkingBox「做对一次 vs 20/20」",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "METR 时间地平线重估显示 2–30 分钟段难度几乎不随人类耗时变化，同为 10× 的跃迁难度不可比；配 ThinkingBox「一次 vs 20/20」可靠性——agent 能力叙事的两个统计陷阱。Trends「METR time horizon」7d 0.0 vs gpts 61.31、24h 0.24 vs 35.54，未双过 → inbox。续源：独立评测者驻场模式。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "METR 时间地平线重估显示 2–30 分钟段难度几乎不随人类耗时变化，同为 10× 的跃迁难度不可比；配 ThinkingBox「一次 vs 20/20」可靠性——agent 能力叙事的两个统计陷阱。Trends「METR time horizon」7d 0.0 vs gpts 61.31、24h 0.24 vs 35.54，未双过 → inbox。续源：独立评测者驻场模式。",
-            "en": "A statistical re-estimate of METR time horizons finds AI difficulty nearly flat over 2–30 human-minutes, so equal 10× jumps are not equally hard; paired with ThinkingBox once-vs-20/20 reliability—two statistical traps in agent capability narratives. Trends \"METR time horizon\": 7d 0.0 vs gpts 61.31, 24h 0.24 vs 35.54 — not both, inbox. Follow-up: METR gets employee-like access at Anthropic.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.12466",
-              "title": "On the estimation and validity of AI time horizons—a statistical look at the METR plot",
-              "brief": {
-                "zh": "228 任务/26 AI；样条+IRT；2–30 分钟段映射近平，附构念效度诊断图。",
-                "en": "228 tasks / 26 AIs; splines + IRT; near-flat mapping over 2–30 min; construct-validity diagnostics.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/MachineLearning/comments/1x17shf/thinkingbox_solving_an_agent_task_once_vs_solving/",
-              "title": "ThinkingBox: solving an agent task once vs 20/20",
-              "brief": {
-                "zh": "507 个有状态工作流按终态 DB 评分；单次通过≠稳定可靠。",
-                "en": "507 stateful workflows graded on terminal DB state; passing once is not reliability.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.anthropic.com/news/an-update-on-independent-evaluators",
-              "title": "Anthropic: An update on independent evaluators — METR gets employee-like access",
-              "brief": {
-                "zh": "New primary policy/eval-governance move (resident-examiner model for frontier labs); not in Oct 1–15 archive/inbox (distinct from METR coverup Oct 7, Painter testimony Oct 1).",
-                "en": "Anthropic: An update on independent evaluators — METR gets employee-like access",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "reddit",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.12466",
-            "https://www.reddit.com/r/MachineLearning/comments/1x17shf/thinkingbox_solving_an_agent_task_once_vs_solving/",
-            "https://www.anthropic.com/news/an-update-on-independent-evaluators"
-          ]
-        },
-        {
-          "id": "t708",
-          "theme": "research",
-          "title": {
-            "zh": "可解释性三连：SAE 批判性综述（138 篇）× Goodfire「Neural networks are clean」× 追溯并切除 LLM「slop」文风",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：综述 + 产业研究 + 社区实证三角，能写「SAE/可解释性是否已可用于改行为」；待 Trends bot 测主词。 10-16 Trends（trends bot）：「sparse autoencoders」7d 0.21 / 24h 0.45 vs gpts 65.33 / 13.50 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Goodfire」7d 0.10 vs gpts 0.84 未过。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：综述 + 产业研究 + 社区实证三角，能写「SAE/可解释性是否已可用于改行为」；待 Trends bot 测主词。 10-16 Trends（trends bot）：「sparse autoencoders」7d 0.21 / 24h 0.45 vs gpts 65.33 / 13.50 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Goodfire」7d 0.10 vs gpts 0.84 未过。",
-            "en": "Synthesis candidate: SAE critical survey + Goodfire + slop-tracing; awaiting Trends bot on its own term. 10-16 Trends (trends bot): sparse autoencoders 7d 0.21 / 24h 0.45 vs gpts 65.33 / 13.50 — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"Goodfire\" 7d 0.10 vs gpts 0.84 — not passed.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.20139",
-              "title": "Sparse Autoencoders for Mechanistic Interpretability in NLP: A Critical Survey of Recoverability, Interpretability, and Utility",
-              "brief": {
-                "zh": "深耕候选：梳理138篇 SAE 研究的批判性综述，给出任务导向的分类法，并分别审视可恢复性、可解释性、机制忠实度和行为效用的证据，正好借此做一篇「SAE 到底靠不靠谱」的综合解读。",
-                "en": "Critical survey of 138 SAE papers with a task-oriented taxonomy, assessing recoverability, interpretability, mechanistic faithfulness and behavioral utility.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://already-clean.goodfire.com/",
-              "title": "Neural networks are clean",
-              "brief": {
-                "zh": "Goodfire 可解释性研究，HN 501 分",
-                "en": "Goodfire interpretability essay \"Neural networks are clean\"; HN 501 points / 196 comments.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/MachineLearning/comments/1x64lbk/tracing_where_llm_slop_style_comes_from_in_the/",
-              "title": "Tracing where LLM 'slop' style comes from in the model and in training, and cutting it out [R]",
-              "brief": {
-                "zh": "追溯 LLM「slop」文风在模型与训练中的来源并切除",
-                "en": "r/MachineLearning research post tracing where LLM 'slop' style originates in the model and training, and removing it.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "hn",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.20139",
-            "https://already-clean.goodfire.com/",
-            "https://www.reddit.com/r/MachineLearning/comments/1x64lbk/tracing_where_llm_slop_style_comes_from_in_the/"
-          ]
-        },
-        {
-          "id": "t709",
-          "theme": "research",
-          "title": {
-            "zh": "Chatbot Arena 的 Luce 公理在「近亲模型」间失效：180 万票揭示 Bradley-Terry 排名偏差",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：直接动摇常用排行榜的统计假设，机制清楚、好画图；待 Trends bot。 10-16 Trends（trends bot）：「Chatbot Arena」7d 0.57 / 24h 0.35 vs gpts 6.99 / 6.54 未过，留 inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：直接动摇常用排行榜的统计假设，机制清楚、好画图；待 Trends bot。 10-16 Trends（trends bot）：「Chatbot Arena」7d 0.57 / 24h 0.35 vs gpts 6.99 / 6.54 未过，留 inbox。",
-            "en": "Single-paper candidate on Luce-axiom failure in Chatbot Arena; awaiting Trends bot. 10-16 Trends (trends bot): Chatbot Arena 7d 0.57 / 24h 0.35 vs gpts 6.99 / 6.54 — not passed, stays inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.19095",
-              "title": "Similar Models, Broken Odds: Where Luce's Axiom Fails in Chatbot Arena",
-              "brief": {
-                "zh": "深耕候选：用180万条 Chatbot Arena 投票证明 Bradley-Terry 隐含的 Luce 选择公理在「近亲模型」之间系统性失效（同模型不同版本的胜负比预测的决断1.37倍），机制清晰、可画图，直接动摇大家天天看的排行榜。",
-                "en": "Using 1.8M Chatbot Arena votes, shows the Luce axiom behind Bradley-Terry fails systematically between similar models (versions of one model are 1.37x more decisive than predicted).",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.19095"
-          ]
-        },
-        {
-          "id": "t710",
-          "theme": "research",
-          "title": {
-            "zh": "Mamba 检索失败不在状态容量：token 表示不编码 query 相关性，选择门用不上",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：机制反直觉、可配图；待 Trends bot。 10-16 Trends（trends bot）：「Mamba retrieval」7d 0 / 24h 0 vs gpts 6.99 / 6.54 未过，留 inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：机制反直觉、可配图；待 Trends bot。 10-16 Trends（trends bot）：「Mamba retrieval」7d 0 / 24h 0 vs gpts 6.99 / 6.54 未过，留 inbox。",
-            "en": "Single-paper candidate on why Mamba retrieval fails; awaiting Trends bot. 10-16 Trends (trends bot): Mamba retrieval 7d 0 / 24h 0 vs gpts 6.99 / 6.54 — not passed, stays inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.19709",
-              "title": "Beyond State Capacity: Why Retrieval Breaks in Mamba",
-              "brief": {
-                "zh": "深耕候选：推翻「Mamba 检索差是因为固定状态容量」的常识——即便 query 先给，Mamba 仍落后，问题出在 token 表示没编码与 query 的相关性、选择门因此用不上；干预 gate 就能让准确率两极摇摆，机制故事很适合配图。",
-                "en": "Shows Mamba retrieval failure is not state capacity: tokens fail to encode query relevance so the selective gate cannot act; gate interventions swing accuracy.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.19709"
+            "https://www.reddit.com/r/LocalLLaMA/comments/1x8e4wd/linux_creator_says_antiai_rules_are_idiotic/",
+            "https://lobste.rs/s/ggpwfi"
           ]
         }
       ]
