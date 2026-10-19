@@ -1,0 +1,30 @@
+<svg viewBox="0 0 720 420" role="img" aria-label="Pi Durable 检查点与重放" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:720px;display:block;margin:0 auto;font-family:ui-sans-serif,system-ui,sans-serif;color:inherit">
+  <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="600" fill="currentColor">崩溃前后：任务检查点与工具重放策略</text>
+  <rect x="24" y="52" width="200" height="86" rx="8" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-opacity="0.35"/>
+  <text x="124" y="84" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">运行中</text>
+  <text x="124" y="108" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.8">generation / tool / task</text>
+  <text x="124" y="126" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.8">每步先写检查点</text>
+  <path d="M232 95 L288 95" stroke="currentColor" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <rect x="292" y="52" width="136" height="86" rx="8" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.5" stroke-dasharray="4 3"/>
+  <text x="360" y="90" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">进程死亡</text>
+  <text x="360" y="114" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.8">睡眠 / OOM / 部署</text>
+  <path d="M436 95 L492 95" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <rect x="496" y="52" width="200" height="86" rx="8" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-opacity="0.35"/>
+  <text x="596" y="84" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">重新打开存储</text>
+  <text x="596" y="108" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.8">resume() 找未完成任务</text>
+  <text x="596" y="126" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.8">从最后检查点继续</text>
+  <rect x="24" y="180" width="320" height="120" rx="8" fill="currentColor" fill-opacity="0.07" stroke="currentColor" stroke-opacity="0.35"/>
+  <text x="184" y="210" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">replay: "safe"</text>
+  <text x="184" y="236" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">只读搜索、可幂等查询</text>
+  <text x="184" y="258" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">崩溃后自动再跑一遍</text>
+  <text x="184" y="280" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">子代理工具可找回同一 child</text>
+  <rect x="376" y="180" width="320" height="120" rx="8" fill="currentColor" fill-opacity="0.05" stroke="currentColor" stroke-opacity="0.45"/>
+  <text x="536" y="210" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">未声明 safe（默认）</text>
+  <text x="536" y="236" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">部署、扣款、发信</text>
+  <text x="536" y="258" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">绝不自动重放</text>
+  <text x="536" y="280" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">模型收到 interrupted + 已有输出</text>
+  <rect x="24" y="324" width="672" height="72" rx="8" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3"/>
+  <text x="360" y="354" text-anchor="middle" font-size="13" fill="currentColor">requestId：提交恰好一次（防客户端重试双投）</text>
+  <text x="360" y="376" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.8">不等于外部副作用端到端恰好一次；副作用仍要幂等键</text>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="currentColor"/></marker></defs>
+</svg>

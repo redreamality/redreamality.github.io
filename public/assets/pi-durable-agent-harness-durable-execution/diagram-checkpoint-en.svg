@@ -1,0 +1,29 @@
+<svg viewBox="0 0 720 420" role="img" aria-label="Pi Durable checkpoints and tool replay" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:720px;display:block;margin:0 auto;font-family:ui-sans-serif,system-ui,sans-serif;color:inherit">
+  <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="600" fill="currentColor">After a crash: task checkpoints and tool replay policy</text>
+  <rect x="24" y="52" width="200" height="86" rx="8" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-opacity="0.35"/>
+  <text x="124" y="84" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Running</text>
+  <text x="124" y="108" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.8">generation / tool / task</text>
+  <text x="124" y="126" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.8">checkpoint before each step</text>
+  <path d="M232 95 L288 95" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <rect x="292" y="52" width="136" height="86" rx="8" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.5" stroke-dasharray="4 3"/>
+  <text x="360" y="90" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Process dies</text>
+  <text x="360" y="114" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.8">sleep / OOM / redeploy</text>
+  <path d="M436 95 L492 95" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <rect x="496" y="52" width="200" height="86" rx="8" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-opacity="0.35"/>
+  <text x="596" y="84" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Reopen storage</text>
+  <text x="596" y="108" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.8">resume() finds unfinished work</text>
+  <text x="596" y="126" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.8">continue from last checkpoint</text>
+  <rect x="24" y="180" width="320" height="120" rx="8" fill="currentColor" fill-opacity="0.07" stroke="currentColor" stroke-opacity="0.35"/>
+  <text x="184" y="210" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">replay: "safe"</text>
+  <text x="184" y="236" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">read-only search, idempotent reads</text>
+  <text x="184" y="258" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">rerun automatically after a crash</text>
+  <text x="184" y="280" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">subagent tools can find the same child</text>
+  <rect x="376" y="180" width="320" height="120" rx="8" fill="currentColor" fill-opacity="0.05" stroke="currentColor" stroke-opacity="0.45"/>
+  <text x="536" y="210" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">No safe declaration (default)</text>
+  <text x="536" y="236" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">deploy, charge, send mail</text>
+  <text x="536" y="258" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">never auto-replay</text>
+  <text x="536" y="280" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">model gets interrupted + partial output</text>
+  <rect x="24" y="324" width="672" height="72" rx="8" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3"/>
+  <text x="360" y="354" text-anchor="middle" font-size="13" fill="currentColor">requestId: exactly-once submission admission</text>
+  <text x="360" y="376" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.8">not end-to-end exactly-once for external side effects; those still need idempotency keys</text>
+</svg>

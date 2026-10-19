@@ -1,0 +1,39 @@
+<svg viewBox="0 0 740 460" role="img" aria-label="Durable 执行栈对照" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:740px;display:block;margin:0 auto;font-family:ui-sans-serif,system-ui,sans-serif;color:inherit">
+  <text x="370" y="28" text-anchor="middle" font-size="16" font-weight="600" fill="currentColor">四层对照：agent 图、harness、平台、通用编排</text>
+  <rect x="20" y="52" width="170" height="380" rx="10" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3"/>
+  <text x="105" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">图 / 会话层</text>
+  <text x="105" y="110" text-anchor="middle" font-size="12" fill="currentColor">LangGraph</text>
+  <text x="105" y="128" text-anchor="middle" font-size="12" fill="currentColor">checkpointer</text>
+  <text x="105" y="160" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.8">节点快照</text>
+  <text x="105" y="178" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.8">单图恢复</text>
+  <text x="105" y="210" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.75">弱：跨服务定时</text>
+  <text x="105" y="228" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.75">弱：多客户端</text>
+  <rect x="200" y="52" width="170" height="380" rx="10" fill="currentColor" fill-opacity="0.09" stroke="currentColor" stroke-opacity="0.4"/>
+  <text x="285" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Agent harness</text>
+  <text x="285" y="110" text-anchor="middle" font-size="12" fill="currentColor">Pi Durable</text>
+  <text x="285" y="128" text-anchor="middle" font-size="12" fill="currentColor">约 15000 行核心</text>
+  <text x="285" y="160" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.8">任务检查点</text>
+  <text x="285" y="178" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.8">fork / 多会话</text>
+  <text x="285" y="196" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.8">replay 策略</text>
+  <text x="285" y="214" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.8">documents</text>
+  <text x="285" y="246" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.75">库，非托管集群</text>
+  <rect x="380" y="52" width="170" height="380" rx="10" fill="currentColor" fill-opacity="0.07" stroke="currentColor" stroke-opacity="0.35"/>
+  <text x="465" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">平台粘合</text>
+  <text x="465" y="110" text-anchor="middle" font-size="12" fill="currentColor">Cloudflare DO</text>
+  <text x="465" y="128" text-anchor="middle" font-size="12" fill="currentColor">Vercel Queues</text>
+  <text x="465" y="146" text-anchor="middle" font-size="12" fill="currentColor">Rivet Actor</text>
+  <text x="465" y="178" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.8">休眠 / 闹钟</text>
+  <text x="465" y="196" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.8">函数超时接管</text>
+  <text x="465" y="214" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.8">每 key 一对象</text>
+  <rect x="560" y="52" width="160" height="380" rx="10" fill="currentColor" fill-opacity="0.05" stroke="currentColor" stroke-opacity="0.3"/>
+  <text x="640" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">通用编排</text>
+  <text x="640" y="110" text-anchor="middle" font-size="12" fill="currentColor">Temporal</text>
+  <text x="640" y="128" text-anchor="middle" font-size="12" fill="currentColor">Restate / DBOS</text>
+  <text x="640" y="146" text-anchor="middle" font-size="12" fill="currentColor">Inngest</text>
+  <text x="640" y="164" text-anchor="middle" font-size="12" fill="currentColor">CF Workflows</text>
+  <text x="640" y="196" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.8">工作流确定性</text>
+  <text x="640" y="214" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.8">Activity / step</text>
+  <text x="640" y="232" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.8">信号与长等待</text>
+  <text x="640" y="264" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.75">自建 agent 语义</text>
+  <text x="370" y="450" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.7">越往右越强于跨服务编排；越往左越贴近模型循环语义</text>
+</svg>
