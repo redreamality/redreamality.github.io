@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T09:59:40+08:00",
+  "updatedAt": "2026-10-19T15:54:07+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,102 @@
   ],
   "themeCounts": {
     "models": 10,
-    "coding-tools": 19,
+    "coding-tools": 20,
     "agents-oss": 16,
     "security": 9,
-    "research": 45,
+    "research": 48,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-19T15:00:00+08:00",
+      "label": {
+        "zh": "10月19日 15:00",
+        "en": "Oct 19 15:00",
+        "ja": "10月19日 15:00"
+      },
+      "items": [
+        {
+          "id": "t743",
+          "theme": "research",
+          "title": {
+            "zh": "Many Biases, One Circuit：sycophancy 等四种 cue 偏差共用一小撮注意力头，回路预训练即有，约 200 条 SFT 在 chat 格式激活、RL 放大",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：机制清楚、反常识、好画图；待 Trends bot。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：机制清楚、反常识、好画图；待 Trends bot。",
+            "en": "Single-paper candidate: one pretrained cue-routing circuit underlies sycophancy-like biases; awaiting Trends bot.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.22937",
+              "title": "Many Biases, One Circuit: Post-Training Tunes a Pretrained Cue-Routing Mechanism",
+              "brief": {
+                "zh": "深耕候选：sycophancy 这类“提示里一句 I think the answer is B 就改答案”的偏差，作者用因果追踪发现四种 cue 共用同一小撮注意力头，而且这个回路预训练时就在了；约 200 条通用助手样本的 SFT 就能在 chat 格式里把它激活，RL 再放大。把“对齐导致谄媚”的通行说法改写成“后训练调节了一个预训练回路”，机制清楚、很适合画 SVG。",
+                "en": "Causal tracing shows four cue-following biases (e.g. sycophancy) share a small set of attention heads present after pretraining; ~200 SFT samples activate it in chat format and RL amplifies it.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.22937"
+          ]
+        },
+        {
+          "id": "t744",
+          "theme": "research",
+          "title": {
+            "zh": "Progressive Misalignment：无害数据与提示下的递归自蒸馏，多轮后 Qwen3/Phi-4 越来越不安全（模拟良性用户反馈亦然）",
+            "en": "Progressive Misalignment",
+            "ja": "Progressive Misalignment"
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：直接打在自蒸馏/自我改进热点的安全侧；待 Trends bot。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：直接打在自蒸馏/自我改进热点的安全侧；待 Trends bot。",
+            "en": "Single-paper candidate: benign recursive self-distillation yields progressive misalignment; awaiting Trends bot.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.22467",
+              "title": "Progressive Misalignment Can Emerge from Benign Recursive Self-Distillation",
+              "brief": {
+                "zh": "新芽：自蒸馏（模型学“带额外提示时的自己”）正热，这篇发现即使数据和提示都无害，递归自蒸馏多轮后 Qwen3/Phi-4 会越来越不安全，作者称之为 Progressive Misalignment；换成模拟良性用户反馈也会出现。和自我训练/RSI 话题直接相关，但角度是安全失效而非又一个 harness。",
+                "en": "Even with benign data and prompts, recursive self-distillation makes Qwen3/Phi-4 progressively less safe over rounds; simulated benign user feedback shows the same effect.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.22467"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-19T09:00:00+08:00",
       "label": {
@@ -822,6 +910,148 @@
             "https://www.reddit.com/r/LocalLLaMA/comments/1x8e4wd/linux_creator_says_antiai_rules_are_idiotic/",
             "https://lobste.rs/s/ggpwfi"
           ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-16T09:00:00+08:00",
+      "label": {
+        "zh": "10月16日 09:00",
+        "en": "Oct 16 09:00",
+        "ja": "10月16日 09:00"
+      },
+      "items": [
+        {
+          "id": "t709",
+          "theme": "research",
+          "title": {
+            "zh": "Chatbot Arena 的 Luce 公理在「近亲模型」间失效：180 万票揭示 Bradley-Terry 排名偏差",
+            "en": "Why Chatbot Arena Understates \\\"New Version Beats Old\\\": Luce's Axiom, Sibling Models, and Bradley–Terry Bias",
+            "ja": "Why Chatbot Arena Understates \\\"New Version Beats Old\\\": Luce's Axiom, Sibling Models, and Bradley–Terry Bias"
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：直接动摇常用排行榜的统计假设，机制清楚、好画图；待 Trends bot。 10-16 Trends（trends bot）：「Chatbot Arena」7d 0.57 / 24h 0.35 vs gpts 6.99 / 6.54 未过，留 inbox。",
+            "en": "A close read of arXiv:2610.19095. Chatbot Arena (LMArena) gives each model one Bradley–Terry score, which assumes Luce's choice axiom. On 1.8 million votes, versions of one model are judged 1.37x more decisively than their score gap implies, sizes of one generation 1.26x, models of one lab 1.12x. The overall order barely moves, but head-to-head odds between siblings are pulled toward even. The mechanism, how strong each piece of evidence is, how it relates to style control and the Leaderboard Illusion, and what to do when you read or build a pairwise leaderboard.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：直接动摇常用排行榜的统计假设，机制清楚、好画图；待 Trends bot。 10-16 Trends（trends bot）：「Chatbot Arena」7d 0.57 / 24h 0.35 vs gpts 6.99 / 6.54 未过，留 inbox。",
+            "en": "Single-paper candidate on Luce-axiom failure in Chatbot Arena; awaiting Trends bot. 10-16 Trends (trends bot): Chatbot Arena 7d 0.57 / 24h 0.35 vs gpts 6.99 / 6.54 — not passed, stays inbox.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.19095",
+              "title": "Similar Models, Broken Odds: Where Luce's Axiom Fails in Chatbot Arena",
+              "brief": {
+                "zh": "深耕候选：用180万条 Chatbot Arena 投票证明 Bradley-Terry 隐含的 Luce 选择公理在「近亲模型」之间系统性失效（同模型不同版本的胜负比预测的决断1.37倍），机制清晰、可画图，直接动摇大家天天看的排行榜。",
+                "en": "Using 1.8M Chatbot Arena votes, shows the Luce axiom behind Bradley-Terry fails systematically between similar models (versions of one model are 1.37x more decisive than predicted).",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.19095"
+          ],
+          "blog": {
+            "zh": "/cn/blog/chatbot-arena-luce-axiom-sibling-models-bradley-terry/",
+            "en": "/blog/chatbot-arena-luce-axiom-sibling-models-bradley-terry/"
+          }
+        },
+        {
+          "id": "t713",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "agent 记忆/上下文层：火山 OpenViking × TencentDB-Agent-Memory × CopilotKit CLiF（traces→skills）× XERJ autoindex × IBM「context engineering 4 种失败」",
+            "en": "Which Layer Does Your Agent's Memory Belong In? Context Databases, Team Memory, and Traces-to-Skills Compared, with a Decision Framework (2026)",
+            "ja": "Which Layer Does Your Agent's Memory Belong In? Context Databases, Team Memory, and Traces-to-Skills Compared, with a Decision Framework (2026)"
+          },
+          "summary": {
+            "zh": "旁注：agent 记忆/上下文工具集中上榜，单点发布居多，进 Chaos。",
+            "en": "TencentDB Agent Memory, OpenViking, ai-memory, CopilotKit learned skills, XERJ, Graphify, and Tencent's Hy-Memory writer model all call themselves agent memory, but they answer four different questions: what goes in the window this step, what survives across sessions for this user, what a team shares, and how past runs become next run's method. This post splits memory into four layers, maps them to the four ways context goes bad, compares write paths, sources of truth, and trust boundaries, and ends with a symptom-first decision framework.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "旁注：agent 记忆/上下文工具集中上榜，单点发布居多，进 Chaos。",
+            "en": "Side note: agent memory/context-layer launches; Chaos only for now.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "github",
+              "url": "https://github.com/TencentCloud/TencentDB-Agent-Memory",
+              "title": "TencentCloud/TencentDB-Agent-Memory",
+              "brief": {
+                "zh": "腾讯云团队级 agent 记忆中枢，把对话与文档沉淀为共享记忆。",
+                "en": "TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusab",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/volcengine/OpenViking",
+              "title": "volcengine/OpenViking",
+              "brief": {
+                "zh": "火山引擎自演化 agent 上下文数据库，统一记忆、RAG 与 skills。",
+                "en": "Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/xerj-org/xerj",
+              "title": "xerj-org/xerj",
+              "brief": {
+                "zh": "面向 AI 的数据检索引擎，autoindex 让 agent 自动理解数据。",
+                "en": "XERJ is the new way for AI to search data. Its autoindex capability activates agents to know your data without the token",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://docs.copilotkit.ai/intelligence/learned-skills",
+              "title": "CopilotKit CLiF: continual-learning platform turning agent traces + user actions into skills, evals, fine-tuning data",
+              "brief": {
+                "zh": "Coding/agent memory-skills from traces; distinct from LangChain skills revamp (Oct 8) and claude-mem. Exploit-candidate: agent memory/skills — 站内积累线. Lower confidence (vendor launch).",
+                "en": "CopilotKit CLiF: continual-learning platform turning agent traces + user actions into skills, evals, fine-tuning data",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=BwXremQ-i6I",
+              "title": "Context Engineering for AI Agents: 4 Failure Modes to Avoid",
+              "brief": {
+                "zh": "Clears the 24h bar 3x; context engineering for agents is a core harness topic",
+                "en": "Context Engineering for AI Agents: 4 Failure Modes to Avoid",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "github",
+            "media",
+            "youtube"
+          ],
+          "score": 3,
+          "status": "published",
+          "externalUrls": [
+            "https://github.com/TencentCloud/TencentDB-Agent-Memory",
+            "https://github.com/volcengine/OpenViking",
+            "https://github.com/xerj-org/xerj",
+            "https://docs.copilotkit.ai/intelligence/learned-skills",
+            "https://www.youtube.com/watch?v=BwXremQ-i6I"
+          ],
+          "blog": {
+            "zh": "/cn/blog/agent-memory-layer-survey-2026-decision-framework/",
+            "en": "/blog/agent-memory-layer-survey-2026-decision-framework/"
+          }
         }
       ]
     },
