@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T15:54:07+08:00",
+  "updatedAt": "2026-10-20T09:57:09+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -14,12 +14,148 @@
     "models": 10,
     "coding-tools": 20,
     "agents-oss": 16,
-    "security": 9,
+    "security": 11,
     "research": 48,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-20T09:00:00+08:00",
+      "label": {
+        "zh": "10月20日 09:00",
+        "en": "Oct 20 09:00",
+        "ja": "10月20日 09:00"
+      },
+      "items": [
+        {
+          "id": "t747",
+          "theme": "security",
+          "title": {
+            "zh": "agent 成为攻击面与内鬼：NorForge 揭 Cairn agent 黑客面板（20+ 暴露面板，指挥自主 agent 入侵 100+ 站点：John Deere/SharkNinja/Cummins）× 微软 Guardian Agents「前沿模型无论出处都不可信」× Claude Code 装上 Expiro 病毒",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。",
+            "en": "Synthesis candidate: Cairn agent-hacking panels (NorForge) + Microsoft Guardian Agents + Claude Code installing Expiro; awaiting Trends bot.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
+              "title": "Microsoft launches Guardian Agents: 'frontier models, regardless of origin, cannot be trusted' — agents as insider threats",
+              "brief": {
+                "zh": "New product launch Oct 19 (distinct from skipped Oct 11 Nadella emergency-brake interview — this is a shipped control layer). Agent control/observability line; vendor-independent agent monitors vs lab self-assurance (cf. Goodfire monitors Oct 9 archive). 站内积累线 agent sandbox/control.",
+                "en": "Microsoft adds Guardian Agents to monitor and control enterprise AI agents as insider threats, saying frontier models regardless of origin cannot be trusted.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://norforge.com/blog/inside_cairn",
+              "title": "NorForge: Inside Cairn — exposed AI-agent hacking panels behind 100+ site breaches (John Deere, SharkNinja, Cummins)",
+              "brief": {
+                "zh": "New Oct 19 primary report; not in archive (no Cairn/NorForge hits). Real-world autonomous agent-harness offense at scale + harness UI exposure as attack surface — 站内积累线 agent harness/security; pairs with OpenCode breach (t731) and Microsoft agentic-insider piece. exploit-candidate: blackboard-style",
+                "en": "NorForge found 20+ exposed panels of Cairn, an open-source agent problem-solving engine, used to direct autonomous agents behind 100+ site breaches (John Deere, SharkNinja, Cummins).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
+              "title": "Claude Code installed tooling which was actually Expiro virus.",
+              "brief": {
+                "zh": "Claude Code 装的工具竟是 Expiro 病毒，接 OpenCode 泄露的 agent 供应链安全线",
+                "en": "A user reports Claude Code installed tooling that turned out to be the Expiro virus.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "reddit"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
+            "https://norforge.com/blog/inside_cairn",
+            "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-19T17:00:00+08:00",
+      "label": {
+        "zh": "10月19日 17:00",
+        "en": "Oct 19 17:00",
+        "ja": "10月19日 17:00"
+      },
+      "items": [
+        {
+          "id": "t700",
+          "theme": "security",
+          "title": {
+            "zh": "agent 时代的工程基建：Anthropic「为 agent 重做源码管理」（HN 545/523）+「为游戏开发设计 AI harness」（132/58）",
+            "en": "The AI Harness Is Moving Into the Environment: Anthropic's Source Control, a Game Built as a Harness, and OpenAI's Codex Repo",
+            "ja": "The AI Harness Is Moving Into the Environment: Anthropic's Source Control, a Game Built as a Harness, and OpenAI's Codex Repo"
+          },
+          "summary": {
+            "zh": "Anthropic 公开为 agent 时代重做源码管理，另有游戏开发 harness 工程实践——agent 工程基建的一级源复盘。",
+            "en": "Anthropic rebuilt source control for agent scale (Scion), an indie developer turned a game into a harness, and OpenAI made a Codex-built repo legible to agents. Three cases orders of magnitude apart reach one conclusion: once code is cheap, the bottleneck is whether agents can query, reproduce, measure, and be stopped by their environment. This post maps the mechanisms, weighs the objections and the Mononoke attribution dispute, and gives an investment order by scale plus a list of traps.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Anthropic 公开为 agent 时代重做源码管理，另有游戏开发 harness 工程实践——agent 工程基建的一级源复盘。",
+            "en": "Anthropic describes redesigning source control for the agent era, alongside a game-dev harness engineering write-up—first-party agent infrastructure retrospectives.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "anthropic",
+              "url": "https://www.anthropic.com/engineering/redesigning-source-control",
+              "title": "Redesigning source control at Anthropic",
+              "brief": {
+                "zh": "HN 545/523。",
+                "en": "HN 545/523.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://kylekukshtel.com/ai-harness-engineering-game-development-claude-code",
+              "title": "How to engineer an AI harness for game development",
+              "brief": {
+                "zh": "HN 132/58。",
+                "en": "HN 132/58.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://www.anthropic.com/engineering/redesigning-source-control",
+            "https://kylekukshtel.com/ai-harness-engineering-game-development-claude-code"
+          ],
+          "blog": {
+            "zh": "/cn/blog/ai-harness-environment-legibility/",
+            "en": "/blog/ai-harness-environment-legibility/"
+          }
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-19T15:00:00+08:00",
       "label": {
@@ -397,13 +533,13 @@
             "ja": ""
           },
           "summary": {
-            "zh": "单篇论文深读候选：直接回应评测饱和，评测/安全读者刚需；待 Trends bot。 10-16 Trends（trends bot）：「benchmark saturation」7d 0.14 / 24h 0.31 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Mercor 劳动指数补「基准覆盖不到真实工作」一侧，可升为综合题。 10-17 Trends（trends bot）：「Mercor labor index」7d 0 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Mercor」7d 12.22 vs gpts 2.47 过 → shortlisted（score4，综合：基准饱和 × Mercor 劳动指数——基准 vs 真实工作）。",
+            "zh": "单篇论文深读候选：直接回应评测饱和，评测/安全读者刚需；待 Trends bot。 10-16 Trends（trends bot）：「benchmark saturation」7d 0.14 / 24h 0.31 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Mercor 劳动指数补「基准覆盖不到真实工作」一侧，可升为综合题。 10-17 Trends（trends bot）：「Mercor labor index」7d 0 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Mercor」7d 12.22 vs gpts 2.47 过 → shortlisted（score4，综合：基准饱和 × Mercor 劳动指数——基准 vs 真实工作）。续源：自报基准虚高。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "单篇论文深读候选：直接回应评测饱和，评测/安全读者刚需；待 Trends bot。 10-16 Trends（trends bot）：「benchmark saturation」7d 0.14 / 24h 0.31 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Mercor 劳动指数补「基准覆盖不到真实工作」一侧，可升为综合题。 10-17 Trends（trends bot）：「Mercor labor index」7d 0 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Mercor」7d 12.22 vs gpts 2.47 过 → shortlisted（score4，综合：基准饱和 × Mercor 劳动指数——基准 vs 真实工作）。",
-            "en": "Single-paper candidate on evaluating capabilities after benchmark saturation; awaiting Trends bot. 10-16 Trends (trends bot): benchmark saturation 7d 0.14 / 24h 0.31 vs gpts 65.33 / 13.50 — not passed, stays inbox. Follow-up: Mercor labor index (90% of US work hours poorly covered by benchmarks) — could turn this into a synthesis. 10-17 Trends (trends bot): \"Mercor labor index\" 7d 0 / 24h 0 vs gpts 15.82 / 5.75 — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"Mercor\" 7d 12.22 vs gpts 2.47 — passed → shortlisted (score 4; synthesis: benchmark saturation x Mercor labor index, benchmarks vs real work).",
+            "zh": "单篇论文深读候选：直接回应评测饱和，评测/安全读者刚需；待 Trends bot。 10-16 Trends（trends bot）：「benchmark saturation」7d 0.14 / 24h 0.31 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Mercor 劳动指数补「基准覆盖不到真实工作」一侧，可升为综合题。 10-17 Trends（trends bot）：「Mercor labor index」7d 0 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Mercor」7d 12.22 vs gpts 2.47 过 → shortlisted（score4，综合：基准饱和 × Mercor 劳动指数——基准 vs 真实工作）。续源：自报基准虚高。",
+            "en": "Single-paper candidate on evaluating capabilities after benchmark saturation; awaiting Trends bot. 10-16 Trends (trends bot): benchmark saturation 7d 0.14 / 24h 0.31 vs gpts 65.33 / 13.50 — not passed, stays inbox. Follow-up: Mercor labor index (90% of US work hours poorly covered by benchmarks) — could turn this into a synthesis. 10-17 Trends (trends bot): \"Mercor labor index\" 7d 0 / 24h 0 vs gpts 15.82 / 5.75 — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"Mercor\" 7d 12.22 vs gpts 2.47 — passed → shortlisted (score 4; synthesis: benchmark saturation x Mercor labor index, benchmarks vs real work). Follow-up: labs report benchmarks 6.4% above independent testers.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -426,17 +562,29 @@
                 "en": "90% of US working hours are spent on tasks not covered well by AI benchmarks",
                 "ja": ""
               }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x9skrx/ai_labs_report_benchmark_scores_64_higher_than/",
+              "title": "AI labs report benchmark scores 6.4% higher than independent testers, on average",
+              "brief": {
+                "zh": "AI 实验室自报基准分平均比独立测试高 6.4%",
+                "en": "AI labs report benchmark scores 6.4% higher than independent testers, on average",
+                "ja": ""
+              }
             }
           ],
           "sources": [
             "arxiv",
-            "hn"
+            "hn",
+            "reddit"
           ],
           "score": 4,
           "status": "published",
           "externalUrls": [
             "https://arxiv.org/abs/2610.20667",
-            "https://www.mercor.com/research/labor-index/benchmark-map/"
+            "https://www.mercor.com/research/labor-index/benchmark-map/",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1x9skrx/ai_labs_report_benchmark_scores_64_higher_than/"
           ]
         }
       ]
@@ -821,13 +969,13 @@
             "ja": ""
           },
           "summary": {
-            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。续源：Torvalds 表态。续源：社区反 AI 内容治理争论。",
+            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。续源：Torvalds 表态。续源：社区反 AI 内容治理争论。续源。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。续源：Torvalds 表态。续源：社区反 AI 内容治理争论。",
-            "en": "Ars reports coding agents produce more code but not more software; Hickey and Spinellis push back, QGIS pauses AI contributions while Torvalds uses Claude Code on the kernel—a multi-source productivity-paradox candidate, but no searchable main term, so not shortlisted. Follow-up: Torvalds calls anti-AI contribution rules idiotic. Follow-up: Lobsters vibecoding-tag debate.",
+            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。续源：Torvalds 表态。续源：社区反 AI 内容治理争论。续源。",
+            "en": "Ars reports coding agents produce more code but not more software; Hickey and Spinellis push back, QGIS pauses AI contributions while Torvalds uses Claude Code on the kernel—a multi-source productivity-paradox candidate, but no searchable main term, so not shortlisted. Follow-up: Torvalds calls anti-AI contribution rules idiotic. Follow-up: Lobsters vibecoding-tag debate. Follow-up: developer sentiment essay.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -890,6 +1038,16 @@
                 "en": "It's enough - vibecoding tag crossed from useless to harmful",
                 "ja": ""
               }
+            },
+            {
+              "source": "hn",
+              "url": "https://chriskiehl.com/article/it-is-still-ok-to-enjoy-programming",
+              "title": "It's still ok to enjoy programming",
+              "brief": {
+                "zh": "「编程仍可以享受」，HN 441/413；同日 Ruby gem 作者全部归档仓库（403 评），AI 时代开发者心态",
+                "en": "It's still ok to enjoy programming",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -908,7 +1066,8 @@
             "https://www.phoronix.com/news/Linus-Torvalds-Claude-Code",
             "https://www.youtube.com/watch?v=hTAWHgQI4xg",
             "https://www.reddit.com/r/LocalLLaMA/comments/1x8e4wd/linux_creator_says_antiai_rules_are_idiotic/",
-            "https://lobste.rs/s/ggpwfi"
+            "https://lobste.rs/s/ggpwfi",
+            "https://chriskiehl.com/article/it-is-still-ok-to-enjoy-programming"
           ]
         }
       ]
