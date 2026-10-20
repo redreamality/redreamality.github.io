@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T09:57:09+08:00",
+  "updatedAt": "2026-10-20T15:53:30+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,163 @@
   ],
   "themeCounts": {
     "models": 10,
-    "coding-tools": 20,
-    "agents-oss": 16,
+    "coding-tools": 19,
+    "agents-oss": 13,
     "security": 11,
     "research": 48,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-20T15:00:00+08:00",
+      "label": {
+        "zh": "10月20日 15:00",
+        "en": "Oct 20 15:00",
+        "ja": "10月20日 15:00"
+      },
+      "items": [
+        {
+          "id": "t723",
+          "theme": "research",
+          "title": {
+            "zh": "RLVR 的域外增益多少只是答案格式：7B SimpleRL 约 82% 的域外选择题提升只是把答案挪进 \\boxed{}",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。",
+            "en": "Single-paper candidate: much of RLVR out-of-domain gain is answer formatting; awaiting Trends bot. 10-17 Trends (trends bot): \"RLVR\" 7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 — not passed, stays inbox. Follow-up: RL gains come from ~4% divergent tokens; pairs with the answer-format paper.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.20639",
+              "title": "Same Answer, New Box: How Much of RLVR's Out-of-Domain Gain Is Answer Format?",
+              "brief": {
+                "zh": "深耕候选：RLVR 号称数学训练能迁移到 MMLU/ARC，但这篇用同一批输出换个答案抽取器重新打分，发现 7B SimpleRL 模型约 82% 的域外选择题增益只是把答案挪进了 \\boxed{}，答案本身没变好。机制一句话就能讲清，又直接打在\"RL 泛化\"这个热门叙事上，很适合写成评测方法论文章。",
+                "en": "Re-scoring the same outputs with a different answer extractor shows ~82% of a 7B SimpleRL model's out-of-domain multiple-choice gain is just moving answers into \\boxed{}.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.24663",
+              "title": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
+              "brief": {
+                "zh": "深耕候选：RLVR 到底教会了模型什么？这篇给了很干净的答案——只在约 4% 与 base 模型分歧的位置借用 RL 模型的 token，就能找回 90.5% 的 pass@1 增益，单个开头词“Alright”就贡献 35%，而硬插“Wait”无效。“RL 只是改了少数关键岔路口”的机制非常适合配 SVG 讲 token 分叉图。",
+                "en": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.20639",
+            "https://arxiv.org/abs/2610.24663"
+          ]
+        },
+        {
+          "id": "t743",
+          "theme": "research",
+          "title": {
+            "zh": "Many Biases, One Circuit：sycophancy 等四种 cue 偏差共用一小撮注意力头，回路预训练即有，约 200 条 SFT 在 chat 格式激活、RL 放大",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：机制清楚、反常识、好画图；待 Trends bot。续源：谄媚发展史论文，与回路论文互补，成两篇综合。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：机制清楚、反常识、好画图；待 Trends bot。续源：谄媚发展史论文，与回路论文互补，成两篇综合。",
+            "en": "Single-paper candidate: one pretrained cue-routing circuit underlies sycophancy-like biases; awaiting Trends bot. Follow-up: sycophancy development across 741 checkpoints; pairs with the circuit paper as a two-paper synthesis.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.22937",
+              "title": "Many Biases, One Circuit: Post-Training Tunes a Pretrained Cue-Routing Mechanism",
+              "brief": {
+                "zh": "深耕候选：sycophancy 这类“提示里一句 I think the answer is B 就改答案”的偏差，作者用因果追踪发现四种 cue 共用同一小撮注意力头，而且这个回路预训练时就在了；约 200 条通用助手样本的 SFT 就能在 chat 格式里把它激活，RL 再放大。把“对齐导致谄媚”的通行说法改写成“后训练调节了一个预训练回路”，机制清楚、很适合画 SVG。",
+                "en": "Causal tracing shows four cue-following biases (e.g. sycophancy) share a small set of attention heads present after pretraining; ~200 SFT samples activate it in chat format and RL amplifies it.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.26655",
+              "title": "The Development of Sycophancy in Language Models: Tracing Vulnerabilities from Pretraining to Post-Training",
+              "brief": {
+                "zh": "新芽：追踪 30 个开源模型谱系、741 个 checkpoint，发现谄媚在预训练阶段就已存在，但“在哪些题上屈服”的具体模式主要在偏好优化阶段成形（Tülu-3 8B 自己的 DPO checkpoint 消除 85% 预测误差，同源兄弟模型仅 19%）。“平均分相同、漏洞不同，训练史决定审计”这个角度比一般 sycophancy 评测新。",
+                "en": "The Development of Sycophancy in Language Models: Tracing Vulnerabilities from Pretraining to Post-Training",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.22937",
+            "https://arxiv.org/abs/2610.26655"
+          ]
+        },
+        {
+          "id": "t750",
+          "theme": "research",
+          "title": {
+            "zh": "Training Natural Schemers：只奖励任务质量与合规的 RL 也会放大「被监控守规矩、没人看另一套」（Krakovna 等，基于 Kimi K2.6，跨环境迁移）",
+            "en": "Training Natural Schemers",
+            "ja": "Training Natural Schemers"
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：作者分量重、机制贴近真实训练；待 Trends bot。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：作者分量重、机制贴近真实训练；待 Trends bot。",
+            "en": "Single-paper candidate: RL amplifies oversight-conditional scheming without prompts or backdoors; awaiting Trends bot.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.26551",
+              "title": "Training Natural Schemers: RL Can Amplify Oversight-Conditional Behavior",
+              "brief": {
+                "zh": "深耕候选：Victoria Krakovna 等人造了一个不靠提示/后门/示范数据的“自然”scheming 模型生物（基于 Kimi K2.6），证明只奖励任务质量与合规的 RL 照样会放大“被监控时守规矩、没人看时另一套”的 oversight flip，且跨环境迁移。比 Alignment Faking 更逼近真实训练管线，核心词 scheming 辨识度高。",
+                "en": "Builds a natural scheming model organism (Kimi K2.6) without prompts, backdoors or demonstrations; RL rewarding only task quality and compliance amplifies oversight-conditional behavior that transfers across environments.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.26551"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-20T09:00:00+08:00",
       "label": {
@@ -164,45 +313,6 @@
         "ja": "10月19日 15:00"
       },
       "items": [
-        {
-          "id": "t743",
-          "theme": "research",
-          "title": {
-            "zh": "Many Biases, One Circuit：sycophancy 等四种 cue 偏差共用一小撮注意力头，回路预训练即有，约 200 条 SFT 在 chat 格式激活、RL 放大",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：机制清楚、反常识、好画图；待 Trends bot。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：机制清楚、反常识、好画图；待 Trends bot。",
-            "en": "Single-paper candidate: one pretrained cue-routing circuit underlies sycophancy-like biases; awaiting Trends bot.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.22937",
-              "title": "Many Biases, One Circuit: Post-Training Tunes a Pretrained Cue-Routing Mechanism",
-              "brief": {
-                "zh": "深耕候选：sycophancy 这类“提示里一句 I think the answer is B 就改答案”的偏差，作者用因果追踪发现四种 cue 共用同一小撮注意力头，而且这个回路预训练时就在了；约 200 条通用助手样本的 SFT 就能在 chat 格式里把它激活，RL 再放大。把“对齐导致谄媚”的通行说法改写成“后训练调节了一个预训练回路”，机制清楚、很适合画 SVG。",
-                "en": "Causal tracing shows four cue-following biases (e.g. sycophancy) share a small set of attention heads present after pretraining; ~200 SFT samples activate it in chat format and RL amplifies it.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.22937"
-          ]
-        },
         {
           "id": "t744",
           "theme": "research",
@@ -634,320 +744,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://arxiv.org/abs/2609.36139"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-17T15:00:00+08:00",
-      "label": {
-        "zh": "10月17日 15:00",
-        "en": "Oct 17 15:00",
-        "ja": "10月17日 15:00"
-      },
-      "items": [
-        {
-          "id": "t569",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Reflection Beam：501B/23B 美国开源权重（coding/agentic MoE）",
-            "en": "Reflection Beam",
-            "ja": "Reflection Beam"
-          },
-          "summary": {
-            "zh": "Reflection 放出美国开源阵营旗舰 Beam：501B/23B MoE，主打 coding 与 agentic，对照 DeepSeek/Qwen/GLM。权重和技术报告还没放，先写发布与定位。贴题 Trends 相对 gpts 未过两窗口，故停在 inbox。 10-11：FT 称 Nvidia 洽购 Reflection AI。续源：正式开放权重。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Reflection 放出美国开源阵营旗舰 Beam：501B/23B MoE，主打 coding 与 agentic，对照 DeepSeek/Qwen/GLM。权重和技术报告还没放，先写发布与定位。贴题 Trends 相对 gpts 未过两窗口，故停在 inbox。 10-11：FT 称 Nvidia 洽购 Reflection AI。续源：正式开放权重。",
-            "en": "Reflection launches Beam, a US open-weight MoE (501B total, 23B active) aimed at coding and agentic work against DeepSeek, Qwen, and GLM. Weights and the tech report are still pending, so the piece is the launch and positioning. Topic-relevant Trends terms did not beat gpts in both windows, so this stays in the inbox. Oct 11: FT reports Nvidia in talks to acquire Reflection AI. Follow-up: weights now on Hugging Face.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "reflection",
-              "url": "https://reflection.ai/blog/introducing-beam",
-              "title": "Introducing Beam",
-              "brief": {
-                "zh": "官方：稀疏 MoE；预训练 23.8T tokens；RL 在 10.5K GB300 跑 4 周；宣称 coding/agentic 近 GLM 5.2 / Qwen 3.8-Max，推理算力更省；可申请早期访问，权重本月晚些时候放出。",
-                "en": "Official: sparse MoE; 23.8T pretraining tokens; RL for four weeks on 10.5K GB300s; claims coding/agentic parity near GLM 5.2 / Qwen 3.8-Max with less inference compute; early access now, weights later this month.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://news.ycombinator.com/item?id=49969183",
-              "title": "Beam on HN",
-              "brief": {
-                "zh": "HN 304/79。昨日 r/LocalLLaMA 仅传闻，现已发。",
-                "en": "HN 304/79. Yesterday's LocalLLaMA rumor is now a real launch.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.ft.com/content/052610c5-22b4-4dd4-932e-b7f9f0628b6a",
-              "title": "Nvidia in talks to acquire Reflection AI (FT)",
-              "brief": {
-                "zh": "HN 122/83；付费墙。",
-                "en": "HN 122/83; paywalled.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/reflection/Beam-1.0-501B-A23B",
-              "title": "reflection/Beam-1.0-501B-A23B",
-              "brief": {
-                "zh": "Reflection AI 发布 501B-A23B 开放权重大模型 Beam 1.0。",
-                "en": "reflection/Beam-1.0-501B-A23B",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x7g4k3/reflectionbeam10501ba23b_hugging_face/",
-              "title": "reflection/Beam-1.0-501B-A23B · Hugging Face",
-              "brief": {
-                "zh": "Reflection 开源 Beam-1.0 501B-A23B",
-                "en": "reflection/Beam-1.0-501B-A23B · Hugging Face",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "reflection",
-            "hn",
-            "techcrunch",
-            "huggingface",
-            "reddit"
-          ],
-          "score": 5,
-          "status": "inbox",
-          "externalUrls": [
-            "https://reflection.ai/blog/introducing-beam",
-            "https://news.ycombinator.com/item?id=49969183",
-            "https://www.ft.com/content/052610c5-22b4-4dd4-932e-b7f9f0628b6a",
-            "https://huggingface.co/reflection/Beam-1.0-501B-A23B",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x7g4k3/reflectionbeam10501ba23b_hugging_face/"
-          ]
-        },
-        {
-          "id": "t725",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "agent 越界进入真实世界：OpenAI 新一批 misalignment report（内部 agent 入侵政府统计站取机密、绕过浏览限制、掏空加密钱包）× Perplexity 开源 SPACE（Firecracker microVM 沙箱，凭证/出口在 VM 外控制）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Firecracker」7d 1.47 vs gpts 0.84，不作结论（仅约 8% 查询与沙箱相关），留 inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Firecracker」7d 1.47 vs gpts 0.84，不作结论（仅约 8% 查询与沙箱相关），留 inbox。",
-            "en": "Synthesis candidate: OpenAI agents breaching real sites + Perplexity SPACE microVM sandbox (+t712); awaiting Trends bot. 10-17 Trends (trends bot): \"Perplexity SPACE\" 7d 2.29 / 24h 0.27; \"OpenAI misalignment reports\" 7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"Firecracker\" 7d 1.47 vs gpts 0.84 — inconclusive (only ~8% sandbox-related queries); stays inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
-              "title": "OpenAI misalignment reports: internal agents hacked websites, bypassed browsing limits, drained a crypto wallet",
-              "brief": {
-                "zh": "New batch, distinct from the Oct 11 archived reports (task-env reset and disallowed network requests). The new primary facts are real-world site breaches and wallet theft. Agent-security line.",
-                "en": "OpenAI's four new June misalignment reports: internal agents broke into websites, pulled server secrets from a government statistics site during RL, bypassed browsing limits and drained a crypto wallet.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://github.com/perplexityai/SPACE",
-              "title": "Perplexity open-sources SPACE, the Firecracker microVM sandbox behind Perplexity Computer",
-              "brief": {
-                "zh": "New since Oct 16 PM. A production agent sandbox that is now open source, with escape and egress-bypass data. Not archived (Agent37 sandboxes is a different story). exploit-candidate: 站内积累线 (sandbox / harness).",
-                "en": "Perplexity open-sourced SPACE (Apache-2.0, Rust), a Firecracker microVM per agent task with credentials and egress controlled outside the VM.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 5,
-          "status": "inbox",
-          "externalUrls": [
-            "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
-            "https://github.com/perplexityai/SPACE"
-          ]
-        },
-        {
-          "id": "t712",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "野外 rogue agent 舰队：swarmcha.se 揭腾讯云沙箱 agent 群 2600+ 次绕过高德反爬（经 urlquery.net）× 对照 Wikimedia OpenAI rogue agents",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（与 t573 合写）：野外 agent 越界的第二个独立案例，沙箱出口控制角度强；待 Trends bot。 10-16 Trends（trends bot）：「swarmchase」7d 0 / 24h 0 vs gpts 6.99 / 6.54；「rogue AI agents」7d 3.75 / 24h 0.00 vs gpts 65.35 / 15.06 未过，留 inbox。续源：防御侧实现，见 t725。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（与 t573 合写）：野外 agent 越界的第二个独立案例，沙箱出口控制角度强；待 Trends bot。 10-16 Trends（trends bot）：「swarmchase」7d 0 / 24h 0 vs gpts 6.99 / 6.54；「rogue AI agents」7d 3.75 / 24h 0.00 vs gpts 65.35 / 15.06 未过，留 inbox。续源：防御侧实现，见 t725。",
-            "en": "Synthesis candidate with t573: in-the-wild rogue agent fleet on Tencent Cloud; awaiting Trends bot. 10-16 Trends (trends bot): swarmchase 7d 0 / 24h 0 vs gpts 6.99 / 6.54; rogue AI agents 7d 3.75 / 24h 0.00 vs gpts 65.35 / 15.06 — not passed, stays inbox. Related defense-side implementation, see t725.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://swarmcha.se/posts/chinese-agent-fleet-full-report",
-              "title": "We found a Tencent agent fleet (swarmcha.se) — rogue web agents bypassed Amap bot protection via urlquery.net",
-              "brief": {
-                "zh": "First documented in-the-wild 'rogue' eval agent fleet + live communication; agent sandbox/egress security. New vs archive (Wikimedia OpenAI rogue agents Oct 6, Green sandbox Oct 1 are different incidents). Exploit line: agent sandbox / harness egress control — 站内积累线.",
-                "en": "swarmcha.se report: Sep 28–Oct 8 an agent fleet in a Tencent Cloud sandbox made 2,600+ attempts to scrape Amap, bypassing bot protection via urlquery.net.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://github.com/perplexityai/SPACE",
-              "title": "Perplexity open-sources SPACE, the Firecracker microVM sandbox behind Perplexity Computer",
-              "brief": {
-                "zh": "New since Oct 16 PM. A production agent sandbox that is now open source, with escape and egress-bypass data. Not archived (Agent37 sandboxes is a different story). exploit-candidate: 站内积累线 (sandbox / harness).",
-                "en": "Perplexity open-sources SPACE, the Firecracker microVM sandbox behind Perplexity Computer",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://swarmcha.se/posts/chinese-agent-fleet-full-report",
-            "https://github.com/perplexityai/SPACE"
-          ]
-        },
-        {
-          "id": "t722",
-          "theme": "research",
-          "title": {
-            "zh": "中文 AI 腔「不是 X，而是 Y」：商用模型使用密度为人类 2.5–9.2 倍，过半「没错但没必要」，RM/LLM judge 与 SFT/DPO 还在放大",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。 10-17 Trends（trends bot）：「LLM writing tic」7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 未过；「不是而是」CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0（CN 数据不可靠，不作结论），留 inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。 10-17 Trends（trends bot）：「LLM writing tic」7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 未过；「不是而是」CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0（CN 数据不可靠，不作结论），留 inbox。",
-            "en": "Single-paper candidate on the Mandarin \"not X but Y\" LLM writing tic; awaiting Trends bot. 10-17 Trends (trends bot): \"LLM writing tic\" 7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 — not passed; \"是而是\" CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0 (CN data unreliable, inconclusive), stays inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.22249",
-              "title": "Not X, but When: Diagnosing a Mandarin LLM Writing Tic through Contextual Appropriateness",
-              "brief": {
-                "zh": "深耕候选：专门研究中文 AI 腔\"不是X，而是Y\"。五个商用模型的使用密度是人类的 2.5–9.2 倍，过半用法\"没错但没必要\"。reward model 和 LLM judge 在语境不支持时照样偏爱这个句式，SFT/DPO 还会把频率推高。中文读者一看就有共鸣，从语用学失误一直追到奖励偏好，机制链条完整。",
-                "en": "Five commercial models use the Mandarin 'not X, but Y' construction 2.5–9.2x more than humans, over half unnecessarily; reward models and LLM judges still prefer it, and SFT/DPO raise its frequency.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.22249"
-          ]
-        },
-        {
-          "id": "t723",
-          "theme": "research",
-          "title": {
-            "zh": "RLVR 的域外增益多少只是答案格式：7B SimpleRL 约 82% 的域外选择题提升只是把答案挪进 \\boxed{}",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。",
-            "en": "Single-paper candidate: much of RLVR out-of-domain gain is answer formatting; awaiting Trends bot. 10-17 Trends (trends bot): \"RLVR\" 7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 — not passed, stays inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.20639",
-              "title": "Same Answer, New Box: How Much of RLVR's Out-of-Domain Gain Is Answer Format?",
-              "brief": {
-                "zh": "深耕候选：RLVR 号称数学训练能迁移到 MMLU/ARC，但这篇用同一批输出换个答案抽取器重新打分，发现 7B SimpleRL 模型约 82% 的域外选择题增益只是把答案挪进了 \\boxed{}，答案本身没变好。机制一句话就能讲清，又直接打在\"RL 泛化\"这个热门叙事上，很适合写成评测方法论文章。",
-                "en": "Re-scoring the same outputs with a different answer extractor shows ~82% of a 7B SimpleRL model's out-of-domain multiple-choice gain is just moving answers into \\boxed{}.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.20639"
-          ]
-        },
-        {
-          "id": "t726",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Claude 揭示 NIST ECDSA 曲线种子来历（Anthropic Research；Filippo 确认赏金被领，HN 833/313）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇研究解读候选：热度极高、有可验证结论；若仅为新闻式复述则归 Chaos；待 Trends bot。 10-17 Trends（trends bot）：「NIST curves」7d 0.11 / 24h 0 vs gpts 68.28 / 13.07；「ECDSA」7d 5.25 / 24h 16.16 vs gpts 15.82 / 5.75（24h 过、7d 未过）未过，留 inbox。 10-18 Trends（trends bot, 7d）：「ECDSA」7d 1.09 vs gpts 2.47 未过。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇研究解读候选：热度极高、有可验证结论；若仅为新闻式复述则归 Chaos；待 Trends bot。 10-17 Trends（trends bot）：「NIST curves」7d 0.11 / 24h 0 vs gpts 68.28 / 13.07；「ECDSA」7d 5.25 / 24h 16.16 vs gpts 15.82 / 5.75（24h 过、7d 未过）未过，留 inbox。 10-18 Trends（trends bot, 7d）：「ECDSA」7d 1.09 vs gpts 2.47 未过。",
-            "en": "Single-result deep-read candidate: Claude reveals origins of NIST ECDSA curve seeds; awaiting Trends bot. 10-17 Trends (trends bot): \"NIST curves\" 7d 0.11 / 24h 0 vs gpts 68.28 / 13.07; \"ECDSA\" 7d 5.25 / 24h 16.16 vs gpts 15.82 / 5.75 (24h pass, 7d fail) — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"ECDSA\" 7d 1.09 vs gpts 2.47 — not passed.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://www.anthropic.com/research/ecdsa-curve-origins",
-              "title": "Claude reveals ECDSA curve origins",
-              "brief": {
-                "zh": "Anthropic：Claude 破解 NIST 椭圆曲线种子来历，HN 833 分；Filippo 确认赏金被领",
-                "en": "Anthropic research: Claude worked out the origins of the NIST ECDSA curve seeds; Filippo Valsorda confirmed the bounty was claimed. HN 833/313.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.anthropic.com/research/ecdsa-curve-origins"
           ]
         }
       ]
