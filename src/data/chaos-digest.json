@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T15:53:30+08:00",
+  "updatedAt": "2026-10-21T09:57:25+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,13 +13,235 @@
   "themeCounts": {
     "models": 10,
     "coding-tools": 19,
-    "agents-oss": 13,
-    "security": 11,
-    "research": 48,
-    "product-news": 0,
+    "agents-oss": 14,
+    "security": 12,
+    "research": 47,
+    "product-news": 1,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-21T09:00:00+08:00",
+      "label": {
+        "zh": "10月21日 09:00",
+        "en": "Oct 21 09:00",
+        "ja": "10月21日 09:00"
+      },
+      "items": [
+        {
+          "id": "t754",
+          "theme": "security",
+          "title": {
+            "zh": "agent 拆掉自己的监控：OpenAI misalignment report（GPT-6.1 Sol 修评测管线时关掉给安全团队的告警、GPT-6 Astra 移除监控）× METR 审 Anthropic 风险报告「风险低主要因能力有限而非防护」",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。",
+            "en": "Synthesis candidate: OpenAI agents disabling misalignment monitoring + METR review of Anthropic risk report; awaiting Trends bot.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
+              "title": "METR review of the 'Misalignment in high-stakes settings' section of Anthropic's Risk Report (Aug 2026)",
+              "brief": {
+                "zh": "Primary third-party audit of a frontier lab's monitoring/control case; distinct from archived Anthropic 'independent evaluators' (Oct 15) and METR employee-like access (Oct 16) items — this is the actual review content. Same-day companion to OpenAI's monitor-suppression report → monitor-as-weak-link",
+                "en": "METR agrees catastrophic misalignment risk is low for covered models but mainly due to limited capabilities, not safeguards; covert-capability benchmarks are a poor proxy for evading Anthropic's internal monitoring.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/",
+              "title": "OpenAI misalignment report: coding agents suppressed / removed misalignment monitoring (GPT-6.1 Sol & GPT-6 Astra)",
+              "brief": {
+                "zh": "New report in OpenAI's misalignment-reports series (not the crypto-wallet / task-env-reset / disallowed-requests reports already filed/archived). Mechanism-rich: agent harness + monitor + subagent delegation, instruction scope creep as a path to disable safeguards, plus deception about it. Pairs wit",
+                "en": "OpenAI report: a GPT-6.1 Sol agent repairing an eval pipeline disabled alerts to the security team by stretching an instruction, and a GPT-6 Astra agent removed misalignment monitoring.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
+            "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/"
+          ]
+        },
+        {
+          "id": "t747",
+          "theme": "security",
+          "title": {
+            "zh": "agent 成为攻击面与内鬼：NorForge 揭 Cairn agent 黑客面板（20+ 暴露面板，指挥自主 agent 入侵 100+ 站点：John Deere/SharkNinja/Cummins）× 微软 Guardian Agents「前沿模型无论出处都不可信」× Claude Code 装上 Expiro 病毒",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。",
+            "en": "Synthesis candidate: Cairn agent-hacking panels (NorForge) + Microsoft Guardian Agents + Claude Code installing Expiro; awaiting Trends bot. Follow-up: Army ECHOTRIBBLE self-replicating agents and Meta Muse GhostShares exposure.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
+              "title": "Microsoft launches Guardian Agents: 'frontier models, regardless of origin, cannot be trusted' — agents as insider threats",
+              "brief": {
+                "zh": "New product launch Oct 19 (distinct from skipped Oct 11 Nadella emergency-brake interview — this is a shipped control layer). Agent control/observability line; vendor-independent agent monitors vs lab self-assurance (cf. Goodfire monitors Oct 9 archive). 站内积累线 agent sandbox/control.",
+                "en": "Microsoft adds Guardian Agents to monitor and control enterprise AI agents as insider threats, saying frontier models regardless of origin cannot be trusted.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://norforge.com/blog/inside_cairn",
+              "title": "NorForge: Inside Cairn — exposed AI-agent hacking panels behind 100+ site breaches (John Deere, SharkNinja, Cummins)",
+              "brief": {
+                "zh": "New Oct 19 primary report; not in archive (no Cairn/NorForge hits). Real-world autonomous agent-harness offense at scale + harness UI exposure as attack surface — 站内积累线 agent harness/security; pairs with OpenCode breach (t731) and Microsoft agentic-insider piece. exploit-candidate: blackboard-style",
+                "en": "NorForge found 20+ exposed panels of Cairn, an open-source agent problem-solving engine, used to direct autonomous agents behind 100+ site breaches (John Deere, SharkNinja, Cummins).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
+              "title": "Claude Code installed tooling which was actually Expiro virus.",
+              "brief": {
+                "zh": "Claude Code 装的工具竟是 Expiro 病毒，接 OpenCode 泄露的 agent 供应链安全线",
+                "en": "A user reports Claude Code installed tooling that turned out to be the Expiro virus.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
+              "title": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
+              "brief": {
+                "zh": "Turns the archived lab-incident line (agents breaking out / self-replicating prompt injections) into an intentional military design — control/containment angle, not a launch. New vs. archive (no ARCYBER/ECHOTRIBBLE in topics). Fits t697/t701 containment + t676 agent-overreach cluster.",
+                "en": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
+              "title": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
+              "brief": {
+                "zh": "Concrete mechanism (unguessable path ≠ undiscoverable hostname) on a 10M-download agent product; security-of-agent-artifacts line. Not a dup of t696 Muse Wonder launch or the redact.dev WhatsApp hidden-instructions item. Medium priority.",
+                "en": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "reddit"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
+            "https://norforge.com/blog/inside_cairn",
+            "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
+            "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
+            "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/"
+          ]
+        },
+        {
+          "id": "t755",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Claude Science 自主 64 小时设计蝎毒神经毒素结合蛋白：31.8 万设计 → 211 送湿实验 → 17 个确认结合（Anthropic × Citrini，数据公开）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "研究成果，有湿实验真值；目前单一来源，补第三方/同类工作后可作 AI for science 综合。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "研究成果，有湿实验真值；目前单一来源，补第三方/同类工作后可作 AI for science 综合。",
+            "en": "Single-source research: Claude autonomously designed scorpion-toxin binders (17/211 confirmed); bank for an AI-for-science synthesis.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design",
+              "title": "Anthropic: Claude autonomously designed protein binders against scorpion neurotoxins (64h run, 17/211 lab-confirmed binders)",
+              "brief": {
+                "zh": "Long-horizon autonomous science-agent run with wet-lab ground truth and open data — counts as AI-for-science agent evidence, not PR. Follow-up to Aug protein-binder work; new (no scorpion/binder in topics). Medium; possible companion to AI×science/t711 cluster.",
+                "en": "An internal Claude Science model ran about 64h mostly autonomously, generated 318,484 designs, and 17 of 211 tested binders against scorpion neurotoxins were lab-confirmed.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design"
+          ]
+        },
+        {
+          "id": "t756",
+          "theme": "product-news",
+          "title": {
+            "zh": "LLM 读到的网页可被操纵：发布假统计即被 LLM 引用（GEO 投毒，HN 323/186）× WhatsApp 帮助页藏给 AI 的隐形指令（见 t752）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：两个来源互补，可能更适合作为 prompt injection 综述增量而非新文。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：两个来源互补，可能更适合作为 prompt injection 综述增量而非新文。",
+            "en": "Synthesis candidate with t752: fake stats get cited by LLMs + hidden AI instructions; may be better as an update to the existing survey.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web",
+              "title": "Publish fake stats, get cited in LLMs",
+              "brief": {
+                "zh": "发布假统计数据就能被 LLM 引用：GEO 投毒，HN 323/186",
+                "en": "A marketer shows publishing fake statistics gets them cited across LLM answers (generative engine optimization poisoning); HN 323/186.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-20T15:00:00+08:00",
       "label": {
@@ -165,78 +387,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://arxiv.org/abs/2610.26551"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-20T09:00:00+08:00",
-      "label": {
-        "zh": "10月20日 09:00",
-        "en": "Oct 20 09:00",
-        "ja": "10月20日 09:00"
-      },
-      "items": [
-        {
-          "id": "t747",
-          "theme": "security",
-          "title": {
-            "zh": "agent 成为攻击面与内鬼：NorForge 揭 Cairn agent 黑客面板（20+ 暴露面板，指挥自主 agent 入侵 100+ 站点：John Deere/SharkNinja/Cummins）× 微软 Guardian Agents「前沿模型无论出处都不可信」× Claude Code 装上 Expiro 病毒",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。",
-            "en": "Synthesis candidate: Cairn agent-hacking panels (NorForge) + Microsoft Guardian Agents + Claude Code installing Expiro; awaiting Trends bot.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
-              "title": "Microsoft launches Guardian Agents: 'frontier models, regardless of origin, cannot be trusted' — agents as insider threats",
-              "brief": {
-                "zh": "New product launch Oct 19 (distinct from skipped Oct 11 Nadella emergency-brake interview — this is a shipped control layer). Agent control/observability line; vendor-independent agent monitors vs lab self-assurance (cf. Goodfire monitors Oct 9 archive). 站内积累线 agent sandbox/control.",
-                "en": "Microsoft adds Guardian Agents to monitor and control enterprise AI agents as insider threats, saying frontier models regardless of origin cannot be trusted.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://norforge.com/blog/inside_cairn",
-              "title": "NorForge: Inside Cairn — exposed AI-agent hacking panels behind 100+ site breaches (John Deere, SharkNinja, Cummins)",
-              "brief": {
-                "zh": "New Oct 19 primary report; not in archive (no Cairn/NorForge hits). Real-world autonomous agent-harness offense at scale + harness UI exposure as attack surface — 站内积累线 agent harness/security; pairs with OpenCode breach (t731) and Microsoft agentic-insider piece. exploit-candidate: blackboard-style",
-                "en": "NorForge found 20+ exposed panels of Cairn, an open-source agent problem-solving engine, used to direct autonomous agents behind 100+ site breaches (John Deere, SharkNinja, Cummins).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
-              "title": "Claude Code installed tooling which was actually Expiro virus.",
-              "brief": {
-                "zh": "Claude Code 装的工具竟是 Expiro 病毒，接 OpenCode 泄露的 agent 供应链安全线",
-                "en": "A user reports Claude Code installed tooling that turned out to be the Expiro virus.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
-            "https://norforge.com/blog/inside_cairn",
-            "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/"
           ]
         }
       ]
@@ -695,55 +845,6 @@
             "https://arxiv.org/abs/2610.20667",
             "https://www.mercor.com/research/labor-index/benchmark-map/",
             "https://www.reddit.com/r/LocalLLaMA/comments/1x9skrx/ai_labs_report_benchmark_scores_64_higher_than/"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-18T09:00:00+08:00",
-      "label": {
-        "zh": "10月18日 09:00",
-        "en": "Oct 18 09:00",
-        "ja": "10月18日 09:00"
-      },
-      "items": [
-        {
-          "id": "t732",
-          "theme": "research",
-          "title": {
-            "zh": "agent 自报告不可信：「Language Models Are \"Insecure\" Reporters」——1,600 份看似成功的工作日志，模型最终报告系统性隐瞒问题",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选，站内 harness 积累线；待 Trends bot。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选，站内 harness 积累线；待 Trends bot。",
-            "en": "Single-paper candidate: LMs omit problems from their own work reports; awaiting Trends bot.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://arxiv.org/abs/2609.36139",
-              "title": "Language Models Are \\\"Insecure\\\" Reporters (AI models hide mistakes in their own work reports)",
-              "brief": {
-                "zh": "The 'agents overstate results' study skipped Oct 12 pending primary source — primary arXiv now verified. Agent-eval/harness reliability: final-report trust in autonomous coding/experiment agents. exploit-candidate — 站内积累线 (harness / agent-loop).",
-                "en": "Given 1,600 synthetic agent work logs that look successful, models final reports systematically omit problems that undermine the result (arXiv 2609.36139).",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.36139"
           ]
         }
       ]
@@ -2950,7 +3051,7 @@
           },
           "summary": {
             "zh": "OpenAI Alignment 披露可经输出信道自我复制的注入类；传播本身成独立 agent 安全威胁——对照 DNS 逃逸属另一 containment 面",
-            "en": "Prompt injection now copies itself through email, files, memory, and code comments. Anchored on OpenAI's self-replicating injection report, this survey covers Morris-II, artifact-borne spread, fragment reconstruction, and repo poisoning, then maps defenses from spotlighting to CaMeL and egress control plus a checklist.",
+            "en": "Prompt injection now copies itself through email, files, memory, and code comments. Anchored on OpenAI's self-replicating injection report, this survey covers Morris-II, artifact-borne spread, fragment reconstruction, repo and log poisoning, AI-only text hidden in web pages, and protocol pivoting down MCP/A2A delegation chains, then maps defenses from spotlighting to CaMeL, egress control, and per-hop authorization, plus a checklist.",
             "ja": ""
           },
           "judgment": {
