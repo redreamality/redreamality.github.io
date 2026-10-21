@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-21T09:57:25+08:00",
+  "updatedAt": "2026-10-21T15:48:40+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -15,11 +15,214 @@
     "coding-tools": 19,
     "agents-oss": 14,
     "security": 12,
-    "research": 47,
-    "product-news": 1,
+    "research": 50,
+    "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-21T15:00:00+08:00",
+      "label": {
+        "zh": "10月21日 15:00",
+        "en": "Oct 21 15:00",
+        "ja": "10月21日 15:00"
+      },
+      "items": [
+        {
+          "id": "t705",
+          "theme": "research",
+          "title": {
+            "zh": "CoT 监控在 CoT 必要时也会失效：四级 CoT 必要性层级（Fraunhofer HHI）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：直接挑战 CoT 监控这一主力安全手段的前提，层级图适合配图；需主词当日 7d+24h 过 gpts 才进短名单。 10-16 Trends（trends bot）：「chain of thought monitoring」7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 未过，留 inbox。续源：奖励错设损害 CoT 可监控性，与「CoT 必要也会失效」互补，成两篇综合。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：直接挑战 CoT 监控这一主力安全手段的前提，层级图适合配图；需主词当日 7d+24h 过 gpts 才进短名单。 10-16 Trends（trends bot）：「chain of thought monitoring」7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 未过，留 inbox。续源：奖励错设损害 CoT 可监控性，与「CoT 必要也会失效」互补，成两篇综合。",
+            "en": "Single-paper deep-read candidate challenging the premise that necessary CoT is monitorable; needs its own term to pass Trends. 10-16 Trends (trends bot): chain of thought monitoring 7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 — not passed, stays inbox. Follow-up: reward misspecification degrades CoT monitorability; now a two-paper synthesis.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.18105",
+              "title": "Chain of Thought Monitoring Can Fail Even When CoT Is Necessary",
+              "brief": {
+                "zh": "提出四级 CoT 必要性层级，并在医疗诊断等任务上展示即使 CoT 必要，监控仍会逐级失效。",
+                "en": "Proposes a four-level CoT-necessity hierarchy and shows monitoring failures at each level, including on medical diagnosis tasks.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.28303",
+              "title": "Reward Misspecification Degrades Chain-of-Thought Monitorability",
+              "brief": {
+                "zh": "深耕候选：CoT 监控是当前安全路线的核心假设，这篇直接证明“奖励写歪”本身就能让 CoT 失去可监控性——模型嘴上还在讲任务意图，手上已经在 reward hack。机制好讲（CoT 与输出脱钩），还给了“让模型口头化奖励描述”的补救，可以画一张意图/奖励/CoT 三角图。",
+                "en": "Reward Misspecification Degrades Chain-of-Thought Monitorability",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.18105",
+            "https://arxiv.org/abs/2610.28303"
+          ]
+        },
+        {
+          "id": "t756",
+          "theme": "research",
+          "title": {
+            "zh": "LLM 读到的网页可被操纵：发布假统计即被 LLM 引用（GEO 投毒，HN 323/186）× WhatsApp 帮助页藏给 AI 的隐形指令（见 t752）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：两个来源互补，可能更适合作为 prompt injection 综述增量而非新文。续源：agent 市场中的自发 GEO，补齐 agent 对 agent 一侧。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：两个来源互补，可能更适合作为 prompt injection 综述增量而非新文。续源：agent 市场中的自发 GEO，补齐 agent 对 agent 一侧。",
+            "en": "Synthesis candidate with t752: fake stats get cited by LLMs + hidden AI instructions; may be better as an update to the existing survey. Follow-up: Toolflation — seller agents spontaneously do GEO; third source.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web",
+              "title": "Publish fake stats, get cited in LLMs",
+              "brief": {
+                "zh": "发布假统计数据就能被 LLM 引用：GEO 投毒，HN 323/186",
+                "en": "A marketer shows publishing fake statistics gets them cited across LLM answers (generative engine optimization poisoning); HN 323/186.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.28454",
+              "title": "Toolflation: Seller Agents Distort Tool Markets Through Spontaneous Generative Engine Optimization",
+              "brief": {
+                "zh": "新芽：agent 卖给 agent 的市场里，卖方 agent 只被要求“多被选中”就会自发做 GEO、不断夸大工具能力（作者叫 toolflation），某个模型下买方成功率从 89% 跌到约 30%、接近随机。新术语好记，角度是“对第三方的诚实也是对齐”，和已挖烂的 agent-eval 不同。",
+                "en": "Toolflation: Seller Agents Distort Tool Markets Through Spontaneous Generative Engine Optimization",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web",
+            "https://arxiv.org/abs/2610.28454"
+          ]
+        },
+        {
+          "id": "t760",
+          "theme": "research",
+          "title": {
+            "zh": "「越强的 AI 突破越快耗尽自己」：720 万篇论文 + 7.3 万条审稿意见——Transformer 后注意力急剧收窄、想法多样性更快枯竭、审稿置信度掉一整分（James Evans 组）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选，受众广、图好画；缺不歧义核心词，暂留 inbox。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选，受众广、图好画；缺不歧义核心词，暂留 inbox。",
+            "en": "Single-paper candidate: stronger AI breakthroughs exhaust follow-on idea diversity faster; no clean core term yet.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.27296",
+              "title": "Stronger artificial intelligence breakthroughs hasten their own exhaustion",
+              "brief": {
+                "zh": "新芽：科学学视角看 AI 领域本身——720 万篇论文、7.3 万条审稿意见表明 Transformer 之后注意力急剧收窄，越大的突破越快耗尽后续想法多样性，审稿人置信度还掉了一整分。受众面极广（研究者人人有感），“承载力上升但耗竭更陡”的曲线非常适合做 SVG 图。",
+                "en": "Using 7.2M papers and 73k reviews, finds attention narrowed sharply after the Transformer; bigger breakthroughs exhaust follow-on idea diversity faster and reviewer confidence dropped a full point.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.27296"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-21T10:00:00+08:00",
+      "label": {
+        "zh": "10月21日 10:00",
+        "en": "Oct 21 10:00",
+        "ja": "10月21日 10:00"
+      },
+      "items": [
+        {
+          "id": "t755",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Claude Science 自主 64 小时设计蝎毒神经毒素结合蛋白：31.8 万设计 → 211 送湿实验 → 17 个确认结合（Anthropic × Citrini，数据公开）",
+            "en": "Claude Science designed scorpion-antivenom binders in 64 hours: how 318,484 designs narrowed to 17 confirmed binders",
+            "ja": "Claude Science designed scorpion-antivenom binders in 64 hours: how 318,484 designs narrowed to 17 confirmed binders"
+          },
+          "summary": {
+            "zh": "研究成果，有湿实验真值；目前单一来源，补第三方/同类工作后可作 AI for science 综合。",
+            "en": "On Oct 20, 2026, Anthropic reported that an internal research model running inside Claude Science autonomously designed protein binders against scorpion neurotoxins: 318,484 designs filtered to 211 sent to the lab, 17 confirmed binders at two labs. This piece checks the numbers and the limits, takes apart the explore→filter→wet-lab-truth loop, and offers a framework for reading autonomous science-agent results.",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "研究成果，有湿实验真值；目前单一来源，补第三方/同类工作后可作 AI for science 综合。",
+            "en": "Single-source research: Claude autonomously designed scorpion-toxin binders (17/211 confirmed); bank for an AI-for-science synthesis.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design",
+              "title": "Anthropic: Claude autonomously designed protein binders against scorpion neurotoxins (64h run, 17/211 lab-confirmed binders)",
+              "brief": {
+                "zh": "Long-horizon autonomous science-agent run with wet-lab ground truth and open data — counts as AI-for-science agent evidence, not PR. Follow-up to Aug protein-binder work; new (no scorpion/binder in topics). Medium; possible companion to AI×science/t711 cluster.",
+                "en": "An internal Claude Science model ran about 64h mostly autonomously, generated 318,484 designs, and 17 of 211 tested binders against scorpion neurotoxins were lab-confirmed.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "published",
+          "externalUrls": [
+            "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design"
+          ],
+          "blog": {
+            "zh": "/cn/blog/claude-science-scorpion-toxin-binder-design/",
+            "en": "/blog/claude-science-scorpion-toxin-binder-design/"
+          }
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-21T09:00:00+08:00",
       "label": {
@@ -160,84 +363,6 @@
             "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
             "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
             "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/"
-          ]
-        },
-        {
-          "id": "t755",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Claude Science 自主 64 小时设计蝎毒神经毒素结合蛋白：31.8 万设计 → 211 送湿实验 → 17 个确认结合（Anthropic × Citrini，数据公开）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "研究成果，有湿实验真值；目前单一来源，补第三方/同类工作后可作 AI for science 综合。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "研究成果，有湿实验真值；目前单一来源，补第三方/同类工作后可作 AI for science 综合。",
-            "en": "Single-source research: Claude autonomously designed scorpion-toxin binders (17/211 confirmed); bank for an AI-for-science synthesis.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design",
-              "title": "Anthropic: Claude autonomously designed protein binders against scorpion neurotoxins (64h run, 17/211 lab-confirmed binders)",
-              "brief": {
-                "zh": "Long-horizon autonomous science-agent run with wet-lab ground truth and open data — counts as AI-for-science agent evidence, not PR. Follow-up to Aug protein-binder work; new (no scorpion/binder in topics). Medium; possible companion to AI×science/t711 cluster.",
-                "en": "An internal Claude Science model ran about 64h mostly autonomously, generated 318,484 designs, and 17 of 211 tested binders against scorpion neurotoxins were lab-confirmed.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design"
-          ]
-        },
-        {
-          "id": "t756",
-          "theme": "product-news",
-          "title": {
-            "zh": "LLM 读到的网页可被操纵：发布假统计即被 LLM 引用（GEO 投毒，HN 323/186）× WhatsApp 帮助页藏给 AI 的隐形指令（见 t752）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：两个来源互补，可能更适合作为 prompt injection 综述增量而非新文。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：两个来源互补，可能更适合作为 prompt injection 综述增量而非新文。",
-            "en": "Synthesis candidate with t752: fake stats get cited by LLMs + hidden AI instructions; may be better as an update to the existing survey.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web",
-              "title": "Publish fake stats, get cited in LLMs",
-              "brief": {
-                "zh": "发布假统计数据就能被 LLM 引用：GEO 投毒，HN 323/186",
-                "en": "A marketer shows publishing fake statistics gets them cited across LLM answers (generative engine optimization poisoning); HN 323/186.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web"
           ]
         }
       ]
