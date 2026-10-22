@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T11:32:31+08:00",
+  "updatedAt": "2026-10-22T15:57:11+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,216 @@
     "other"
   ],
   "themeCounts": {
-    "models": 10,
+    "models": 11,
     "coding-tools": 19,
-    "agents-oss": 14,
+    "agents-oss": 13,
     "security": 13,
-    "research": 49,
+    "research": 52,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-22T15:00:00+08:00",
+      "label": {
+        "zh": "10月22日 15:00",
+        "en": "Oct 22 15:00",
+        "ja": "10月22日 15:00"
+      },
+      "items": [
+        {
+          "id": "t722",
+          "theme": "research",
+          "title": {
+            "zh": "中文 AI 腔「不是 X，而是 Y」：商用模型使用密度为人类 2.5–9.2 倍，过半「没错但没必要」，RM/LLM judge 与 SFT/DPO 还在放大",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。 10-17 Trends（trends bot）：「LLM writing tic」7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 未过；「不是而是」CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0（CN 数据不可靠，不作结论），留 inbox。续源：AI 文风难读的心理语言学量化与训练归因，与中文 AI 腔论文成两篇综合。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。 10-17 Trends（trends bot）：「LLM writing tic」7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 未过；「不是而是」CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0（CN 数据不可靠，不作结论），留 inbox。续源：AI 文风难读的心理语言学量化与训练归因，与中文 AI 腔论文成两篇综合。",
+            "en": "Single-paper candidate on the Mandarin \"not X but Y\" LLM writing tic; awaiting Trends bot. 10-17 Trends (trends bot): \"LLM writing tic\" 7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 — not passed; \"是而是\" CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0 (CN data unreliable, inconclusive), stays inbox. Follow-up: why AI-generated language is hard to understand; pairs with the Mandarin writing-tic paper.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.22249",
+              "title": "Not X, but When: Diagnosing a Mandarin LLM Writing Tic through Contextual Appropriateness",
+              "brief": {
+                "zh": "深耕候选：专门研究中文 AI 腔\"不是X，而是Y\"。五个商用模型的使用密度是人类的 2.5–9.2 倍，过半用法\"没错但没必要\"。reward model 和 LLM judge 在语境不支持时照样偏爱这个句式，SFT/DPO 还会把频率推高。中文读者一看就有共鸣，从语用学失误一直追到奖励偏好，机制链条完整。",
+                "en": "Five commercial models use the Mandarin 'not X, but Y' construction 2.5–9.2x more than humans, over half unnecessarily; reward models and LLM judges still prefer it, and SFT/DPO raise its frequency.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.29162",
+              "title": "Why is AI-generated language so hard to understand?",
+              "brief": {
+                "zh": "新芽：Mahowald 组用心理语言学指标量化了“AI 文风难读”这个大家都有的体感：9 个前沿模型比人类更爱用长依存、名词堆叠、低频 n-gram。机制假说很漂亮——数学/代码/推理训练推高信息密度而非沟通成功，长度惩罚微调就能复现这种偏离，适合画“优化目标→语言特征”的示意图。",
+                "en": "Why is AI-generated language so hard to understand?",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.22249",
+            "https://arxiv.org/abs/2610.29162"
+          ]
+        },
+        {
+          "id": "t744",
+          "theme": "research",
+          "title": {
+            "zh": "Progressive Misalignment：无害数据与提示下的递归自蒸馏，多轮后 Qwen3/Phi-4 越来越不安全（模拟良性用户反馈亦然）",
+            "en": "Progressive Misalignment",
+            "ja": "Progressive Misalignment"
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：直接打在自蒸馏/自我改进热点的安全侧；待 Trends bot。续源：JOLT 自教 RL，补自蒸馏的能力侧。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：直接打在自蒸馏/自我改进热点的安全侧；待 Trends bot。续源：JOLT 自教 RL，补自蒸馏的能力侧。",
+            "en": "Single-paper candidate: benign recursive self-distillation yields progressive misalignment; awaiting Trends bot. Follow-up: JOLT trains the self-teacher too.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.22467",
+              "title": "Progressive Misalignment Can Emerge from Benign Recursive Self-Distillation",
+              "brief": {
+                "zh": "新芽：自蒸馏（模型学“带额外提示时的自己”）正热，这篇发现即使数据和提示都无害，递归自蒸馏多轮后 Qwen3/Phi-4 会越来越不安全，作者称之为 Progressive Misalignment；换成模拟良性用户反馈也会出现。和自我训练/RSI 话题直接相关，但角度是安全失效而非又一个 harness。",
+                "en": "Even with benign data and prompts, recursive self-distillation makes Qwen3/Phi-4 progressively less safe over rounds; simulated benign user feedback shows the same effect.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://arxiv.org/abs/2610.10447",
+              "title": "Perplexity × NVIDIA JOLT: training the self-teacher too (joint on-policy learning and teaching)",
+              "brief": {
+                "zh": "Mechanism-rich RL post-training for agentic tasks (AppWorld/Terminal-Bench with privileged verifier context). It extends t744 self-distillation / t649 on-policy distillation with a 'reward-consistent teacher' angle. The paper is from Oct 7; the coverage is new today. Not in topics/archive/inbox (ded",
+                "en": "Perplexity × NVIDIA JOLT: training the self-teacher too (joint on-policy learning and teaching)",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.22467",
+            "https://arxiv.org/abs/2610.10447"
+          ]
+        },
+        {
+          "id": "t766",
+          "theme": "research",
+          "title": {
+            "zh": "AI 科学家的现实检验：Agent4Sci（Carlini 等）前沿 agent 在 20 个 ML-for-science 基准全部超 SOTA（Opus 平均 +10.4%）但几乎全靠 ML 工程技巧 × 微软研究院用「人剪枝 agent 轨迹」证明 31 年 KLS 猜想（同 token 预算消融）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：「agent 爬分 vs 人剪枝」对照鲜明，承接已发 AI×数学/科学两篇；缺核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：「agent 爬分 vs 人剪枝」对照鲜明，承接已发 AI×数学/科学两篇；缺核心词。",
+            "en": "Synthesis candidate: Agent4Sci (agents beat SOTA via ML tricks, not insight) + MSR KLS proof via human-pruned agent search; no clean core term.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.28763",
+              "title": "Automating ML for Science: Can Frontier Agents Climb Scientific Hills in the Wild?",
+              "brief": {
+                "zh": "深耕候选：Carlini 等的 Agent4Sci 在 20 个 ML-for-science 基准上让前沿 Agent 去刷已发表 SOTA，结果全都超了（Opus 平均 +10.4%），但几乎全靠 ML 工程小技巧而非领域洞见；三类失败（新颖性误判、资源用不满、塌缩成局部调参）很适合做分类图，正好回应“AI 科学家”叙事。",
+                "en": "Agent4Sci: frontier agents beat published SOTA on all 20 ML-for-science benchmarks (Opus +10.4% on average) but mostly through ML engineering tricks rather than domain insight; three failure types identified.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.microsoft.com/en-us/research/blog/solving-a-31-year-old-grand-challenge-in-mathematics-the-kls-conjecture/",
+              "title": "Microsoft Research: Solving the 31-year-old KLS conjecture with human-directed agentic search",
+              "brief": {
+                "zh": "Primary, mechanism-rich AI×math case with a rare equal-token-budget ablation: human pruning of agent trajectories vs end-to-end agent runs. Extends t711 AI×数学 (Tao/TheoPhysEval) and the human-in-loop agent-harness line; not in topics/archive (dedup'd KLS/kls-conjecture).",
+                "en": "Microsoft Research proves the 31-year-old KLS conjecture with parallel agents exploring ~100 trajectories while a researcher pruned them; an equal-token ablation favors human pruning over end-to-end agents.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.28763",
+            "https://www.microsoft.com/en-us/research/blog/solving-a-31-year-old-grand-challenge-in-mathematics-the-kls-conjecture/"
+          ]
+        },
+        {
+          "id": "t767",
+          "theme": "research",
+          "title": {
+            "zh": "coding agent 不会留后路：RegretBench（205 个真实「早知道先备份」翻车任务）——完成率 86%、事前备份仅 15%；BackUpper 在 harness 层逐 tool call 快照，$0.014/任务",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：失败模式好讲、修复便宜，站内 harness 线；缺高量核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：失败模式好讲、修复便宜，站内 harness 线；缺高量核心词。",
+            "en": "Single-paper candidate: coding agents rarely back up before risky actions (RegretBench); harness-level snapshots fix it cheaply.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.28934",
+              "title": "Back Up Before You Regret: Measuring Backup Awareness and Automating Backup in Coding Agents",
+              "brief": {
+                "zh": "新芽：RegretBench 从真实“早知道先备份”的翻车帖里抽了 205 个任务，前沿编码 Agent 任务完成率 86% 但事前备份只有 15%——“能干活≠会留后路”是个很好讲的失败模式。BackUpper 在 harness 层逐个 tool call 拦截快照，成本 $0.014/任务，核心词“backup awareness / 可逆性”很好记。",
+                "en": "RegretBench: 205 tasks from real regret posts; frontier coding agents complete 86% but back up beforehand only 15%; BackUpper snapshots per tool call at $0.014 per task.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.28934"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-22T11:00:00+08:00",
       "label": {
@@ -30,15 +231,15 @@
       "items": [
         {
           "id": "t762",
-          "theme": "agents-oss",
+          "theme": "models",
           "title": {
             "zh": "AI 工具链供应链投毒：LiteLLM 1.107.0 PyPI 版被植入窃密后门（HN 436/142；同日 Railway 披露托管 Claude 应用 API key 被收割）× 「本地 AI 没你想的私密」（Codex CLI 安全突破，YT 高 VPH）",
-            "en": "",
-            "ja": ""
+            "en": "After the LiteLLM 1.107.0 backdoor: why model gateways became the richest target in the AI toolchain",
+            "ja": "After the LiteLLM 1.107.0 backdoor: why model gateways became the richest target in the AI toolchain"
           },
           "summary": {
             "zh": "多来源综合候选：AI 网关供应链投毒与凭据收割，站内安全线延续；待 Trends bot。",
-            "en": "",
+            "en": "LiteLLM 1.107.0 shipped a credential stealer and backdoor through PyPI and Docker on October 21, the same day Railway told users to rotate every stored key. Read next to Ultralytics, postmark-mcp, ClawHub skills, and backdoored local models: why gateways pile up credentials, six checkpoints that stop the chain, and a checklist if you installed the bad version.",
             "ja": ""
           },
           "judgment": {
@@ -73,11 +274,15 @@
             "youtube"
           ],
           "score": 4,
-          "status": "shortlisted",
+          "status": "published",
           "externalUrls": [
             "https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/",
             "https://www.youtube.com/watch?v=3mx84MRj8lY"
-          ]
+          ],
+          "blog": {
+            "zh": "/cn/blog/litellm-pypi-backdoor-ai-gateway-supply-chain/",
+            "en": "/blog/litellm-pypi-backdoor-ai-gateway-supply-chain/"
+          }
         }
       ]
     },
@@ -707,55 +912,6 @@
       ]
     },
     {
-      "hourStart": "2026-10-19T15:00:00+08:00",
-      "label": {
-        "zh": "10月19日 15:00",
-        "en": "Oct 19 15:00",
-        "ja": "10月19日 15:00"
-      },
-      "items": [
-        {
-          "id": "t744",
-          "theme": "research",
-          "title": {
-            "zh": "Progressive Misalignment：无害数据与提示下的递归自蒸馏，多轮后 Qwen3/Phi-4 越来越不安全（模拟良性用户反馈亦然）",
-            "en": "Progressive Misalignment",
-            "ja": "Progressive Misalignment"
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：直接打在自蒸馏/自我改进热点的安全侧；待 Trends bot。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：直接打在自蒸馏/自我改进热点的安全侧；待 Trends bot。",
-            "en": "Single-paper candidate: benign recursive self-distillation yields progressive misalignment; awaiting Trends bot.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.22467",
-              "title": "Progressive Misalignment Can Emerge from Benign Recursive Self-Distillation",
-              "brief": {
-                "zh": "新芽：自蒸馏（模型学“带额外提示时的自己”）正热，这篇发现即使数据和提示都无害，递归自蒸馏多轮后 Qwen3/Phi-4 会越来越不安全，作者称之为 Progressive Misalignment；换成模拟良性用户反馈也会出现。和自我训练/RSI 话题直接相关，但角度是安全失效而非又一个 harness。",
-                "en": "Even with benign data and prompts, recursive self-distillation makes Qwen3/Phi-4 progressively less safe over rounds; simulated benign user feedback shows the same effect.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.22467"
-          ]
-        }
-      ]
-    },
-    {
       "hourStart": "2026-10-18T16:00:00+08:00",
       "label": {
         "zh": "10月18日 16:00",
@@ -848,13 +1004,13 @@
             "ja": ""
           },
           "summary": {
-            "zh": "多来源综合候选：能力证据 + 人的反应 + 机构资金三线，承接已发 t657；待 Trends bot。 10-16 Trends（trends bot）：「AI mathematicians」7d 2.04 / 24h 0.00 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Tao 新文，第 4 个来源。 10-18 Trends（trends bot, 7d）：「Terence Tao」7d 3.53 vs gpts 2.47 过（余量薄）→ shortlisted（score4，综合：AI × 数学——Tao 文、Thompson、Simons、TheoPhysEval）。",
+            "zh": "多来源综合候选：能力证据 + 人的反应 + 机构资金三线，承接已发 t657；待 Trends bot。 10-16 Trends（trends bot）：「AI mathematicians」7d 2.04 / 24h 0.00 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Tao 新文，第 4 个来源。 10-18 Trends（trends bot, 7d）：「Terence Tao」7d 3.53 vs gpts 2.47 过（余量薄）→ shortlisted（score4，综合：AI × 数学——Tao 文、Thompson、Simons、TheoPhysEval）。续源：AI×数学新案例，见 t766。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "多来源综合候选：能力证据 + 人的反应 + 机构资金三线，承接已发 t657；待 Trends bot。 10-16 Trends（trends bot）：「AI mathematicians」7d 2.04 / 24h 0.00 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Tao 新文，第 4 个来源。 10-18 Trends（trends bot, 7d）：「Terence Tao」7d 3.53 vs gpts 2.47 过（余量薄）→ shortlisted（score4，综合：AI × 数学——Tao 文、Thompson、Simons、TheoPhysEval）。",
-            "en": "Synthesis candidate: AI x mathematics/physics (TheoPhysEval, Thompson, Simons $15M); awaiting Trends bot. 10-16 Trends (trends bot): AI mathematicians 7d 2.04 / 24h 0.00 vs gpts 65.33 / 13.50 — not passed, stays inbox. Follow-up: Terence Tao essay adds a fourth source. 10-18 Trends (trends bot, 7d): \"Terence Tao\" 7d 3.53 vs gpts 2.47 — passed (thin margin) → shortlisted (score 4; synthesis: AI x mathematics — Tao, Thompson, Simons, TheoPhysEval).",
+            "zh": "多来源综合候选：能力证据 + 人的反应 + 机构资金三线，承接已发 t657；待 Trends bot。 10-16 Trends（trends bot）：「AI mathematicians」7d 2.04 / 24h 0.00 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Tao 新文，第 4 个来源。 10-18 Trends（trends bot, 7d）：「Terence Tao」7d 3.53 vs gpts 2.47 过（余量薄）→ shortlisted（score4，综合：AI × 数学——Tao 文、Thompson、Simons、TheoPhysEval）。续源：AI×数学新案例，见 t766。",
+            "en": "Synthesis candidate: AI x mathematics/physics (TheoPhysEval, Thompson, Simons $15M); awaiting Trends bot. 10-16 Trends (trends bot): AI mathematicians 7d 2.04 / 24h 0.00 vs gpts 65.33 / 13.50 — not passed, stays inbox. Follow-up: Terence Tao essay adds a fourth source. 10-18 Trends (trends bot, 7d): \"Terence Tao\" 7d 3.53 vs gpts 2.47 — passed (thin margin) → shortlisted (score 4; synthesis: AI x mathematics — Tao, Thompson, Simons, TheoPhysEval). Follow-up: KLS conjecture case, see t766.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -897,6 +1053,16 @@
                 "en": "Why are we even doing all this?",
                 "ja": ""
               }
+            },
+            {
+              "source": "media",
+              "url": "https://www.microsoft.com/en-us/research/blog/solving-a-31-year-old-grand-challenge-in-mathematics-the-kls-conjecture/",
+              "title": "Microsoft Research: Solving the 31-year-old KLS conjecture with human-directed agentic search",
+              "brief": {
+                "zh": "Primary, mechanism-rich AI×math case with a rare equal-token-budget ablation: human pruning of agent trajectories vs end-to-end agent runs. Extends t711 AI×数学 (Tao/TheoPhysEval) and the human-in-loop agent-harness line; not in topics/archive (dedup'd KLS/kls-conjecture).",
+                "en": "Microsoft Research: Solving the 31-year-old KLS conjecture with human-directed agentic search",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -910,7 +1076,8 @@
             "https://www.derekthompson.org/p/i-know-why-the-mathematicians-weep",
             "https://www.simonsfoundation.org/news/simons-foundation-launches-15m-effort-to-help-mathematicians-navigate-ai-era/",
             "https://arxiv.org/abs/2610.16733",
-            "https://terrytao.wordpress.com/2026/10/15/why-are-we-even-doing-all-this/"
+            "https://terrytao.wordpress.com/2026/10/15/why-are-we-even-doing-all-this/",
+            "https://www.microsoft.com/en-us/research/blog/solving-a-31-year-old-grand-challenge-in-mathematics-the-kls-conjecture/"
           ]
         },
         {
