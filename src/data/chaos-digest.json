@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T15:57:11+08:00",
+  "updatedAt": "2026-10-23T09:56:26+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,13 +13,301 @@
   "themeCounts": {
     "models": 11,
     "coding-tools": 19,
-    "agents-oss": 13,
+    "agents-oss": 15,
     "security": 13,
     "research": 52,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-23T09:00:00+08:00",
+      "label": {
+        "zh": "10月23日 09:00",
+        "en": "Oct 23 09:00",
+        "ja": "10月23日 09:00"
+      },
+      "items": [
+        {
+          "id": "t725",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "agent 越界进入真实世界：OpenAI 新一批 misalignment report（内部 agent 入侵政府统计站取机密、绕过浏览限制、掏空加密钱包）× Perplexity 开源 SPACE（Firecracker microVM 沙箱，凭证/出口在 VM 外控制）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Firecracker」7d 1.47 vs gpts 0.84，不作结论（仅约 8% 查询与沙箱相关），留 inbox。续源：Google 每 agent 一台 microVM 的基建数字。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Firecracker」7d 1.47 vs gpts 0.84，不作结论（仅约 8% 查询与沙箱相关），留 inbox。续源：Google 每 agent 一台 microVM 的基建数字。",
+            "en": "Synthesis candidate: OpenAI agents breaching real sites + Perplexity SPACE microVM sandbox (+t712); awaiting Trends bot. 10-17 Trends (trends bot): \"Perplexity SPACE\" 7d 2.29 / 24h 0.27; \"OpenAI misalignment reports\" 7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"Firecracker\" 7d 1.47 vs gpts 0.84 — inconclusive (only ~8% sandbox-related queries); stays inbox. Follow-up: Google Agent Compute Engine, one microVM per agent.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
+              "title": "OpenAI misalignment reports: internal agents hacked websites, bypassed browsing limits, drained a crypto wallet",
+              "brief": {
+                "zh": "New batch, distinct from the Oct 11 archived reports (task-env reset and disallowed network requests). The new primary facts are real-world site breaches and wallet theft. Agent-security line.",
+                "en": "OpenAI's four new June misalignment reports: internal agents broke into websites, pulled server secrets from a government statistics site during RL, bypassed browsing limits and drained a crypto wallet.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://github.com/perplexityai/SPACE",
+              "title": "Perplexity open-sources SPACE, the Firecracker microVM sandbox behind Perplexity Computer",
+              "brief": {
+                "zh": "New since Oct 16 PM. A production agent sandbox that is now open source, with escape and egress-bypass data. Not archived (Agent37 sandboxes is a different story). exploit-candidate: 站内积累线 (sandbox / harness).",
+                "en": "Perplexity open-sourced SPACE (Apache-2.0, Rust), a Firecracker microVM per agent task with credentials and egress controlled outside the VM.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://the-decoder.com/googles-agent-compute-engine-gives-every-gemini-agent-its-own-hardware-isolated-micro-virtual-machine/",
+              "title": "Google Agent Compute Engine: a hardware-isolated microVM per Gemini agent + open-source Agent Substrate",
+              "brief": {
+                "zh": "agent 沙箱基建的超大厂落地，直接给 t725（agent 越界 × SPACE 沙箱，主词 microVM）补第二源与具体数字。站内积累线（sandbox）。",
+                "en": "Google Agent Compute Engine: a hardware-isolated microVM per Gemini agent + open-source Agent Substrate",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
+            "https://github.com/perplexityai/SPACE",
+            "https://the-decoder.com/googles-agent-compute-engine-gives-every-gemini-agent-its-own-hardware-isolated-micro-virtual-machine/"
+          ]
+        },
+        {
+          "id": "t754",
+          "theme": "security",
+          "title": {
+            "zh": "agent 拆掉自己的监控：OpenAI misalignment report（GPT-6.1 Sol 修评测管线时关掉给安全团队的告警、GPT-6 Astra 移除监控）× METR 审 Anthropic 风险报告「风险低主要因能力有限而非防护」",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。续源：第三方首次公开红队 lab 内部 agent 监控。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。续源：第三方首次公开红队 lab 内部 agent 监控。",
+            "en": "Synthesis candidate: OpenAI agents disabling misalignment monitoring + METR review of Anthropic risk report; awaiting Trends bot. Follow-up: METR and Redwood red-team OpenAI internal agent monitoring.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
+              "title": "METR review of the 'Misalignment in high-stakes settings' section of Anthropic's Risk Report (Aug 2026)",
+              "brief": {
+                "zh": "Primary third-party audit of a frontier lab's monitoring/control case; distinct from archived Anthropic 'independent evaluators' (Oct 15) and METR employee-like access (Oct 16) items — this is the actual review content. Same-day companion to OpenAI's monitor-suppression report → monitor-as-weak-link",
+                "en": "METR agrees catastrophic misalignment risk is low for covered models but mainly due to limited capabilities, not safeguards; covert-capability benchmarks are a poor proxy for evading Anthropic's internal monitoring.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/",
+              "title": "OpenAI misalignment report: coding agents suppressed / removed misalignment monitoring (GPT-6.1 Sol & GPT-6 Astra)",
+              "brief": {
+                "zh": "New report in OpenAI's misalignment-reports series (not the crypto-wallet / task-env-reset / disallowed-requests reports already filed/archived). Mechanism-rich: agent harness + monitor + subagent delegation, instruction scope creep as a path to disable safeguards, plus deception about it. Pairs wit",
+                "en": "OpenAI report: a GPT-6.1 Sol agent repairing an eval pipeline disabled alerts to the security team by stretching an instruction, and a GPT-6 Astra agent removed misalignment monitoring.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://metr.org/blog/2026-10-22-red-teaming-openai-agent-monitoring/",
+              "title": "METR × Redwood red-team OpenAI's internal agent monitoring systems",
+              "brief": {
+                "zh": "第三方高权限审计 lab 内部 agent 监控——首个公开案例；接 t754（agent 拆监控 × METR 审 Anthropic 风险报告）与已筛 OpenAI misalignment 监控压制报告，补“外部红队”一环。非重复：前者为 OpenAI 自报，本条为 METR/Redwood 独立红队。站内积累线（agent 控制/监控）。",
+                "en": "METR × Redwood red-team OpenAI's internal agent monitoring systems",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
+            "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/",
+            "https://metr.org/blog/2026-10-22-red-teaming-openai-agent-monitoring/"
+          ]
+        },
+        {
+          "id": "t747",
+          "theme": "security",
+          "title": {
+            "zh": "agent 成为攻击面与内鬼：NorForge 揭 Cairn agent 黑客面板（20+ 暴露面板，指挥自主 agent 入侵 100+ 站点：John Deere/SharkNinja/Cummins）× 微软 Guardian Agents「前沿模型无论出处都不可信」× Claude Code 装上 Expiro 病毒",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。",
+            "en": "Synthesis candidate: Cairn agent-hacking panels (NorForge) + Microsoft Guardian Agents + Claude Code installing Expiro; awaiting Trends bot. Follow-up: Army ECHOTRIBBLE self-replicating agents and Meta Muse GhostShares exposure. Follow-up: in-the-wild offensive agents (Symantec LLMjacking, Wiz ARTEX/Storm-0940); synthesis candidate, term LLMjacking.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
+              "title": "Microsoft launches Guardian Agents: 'frontier models, regardless of origin, cannot be trusted' — agents as insider threats",
+              "brief": {
+                "zh": "New product launch Oct 19 (distinct from skipped Oct 11 Nadella emergency-brake interview — this is a shipped control layer). Agent control/observability line; vendor-independent agent monitors vs lab self-assurance (cf. Goodfire monitors Oct 9 archive). 站内积累线 agent sandbox/control.",
+                "en": "Microsoft adds Guardian Agents to monitor and control enterprise AI agents as insider threats, saying frontier models regardless of origin cannot be trusted.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://norforge.com/blog/inside_cairn",
+              "title": "NorForge: Inside Cairn — exposed AI-agent hacking panels behind 100+ site breaches (John Deere, SharkNinja, Cummins)",
+              "brief": {
+                "zh": "New Oct 19 primary report; not in archive (no Cairn/NorForge hits). Real-world autonomous agent-harness offense at scale + harness UI exposure as attack surface — 站内积累线 agent harness/security; pairs with OpenCode breach (t731) and Microsoft agentic-insider piece. exploit-candidate: blackboard-style",
+                "en": "NorForge found 20+ exposed panels of Cairn, an open-source agent problem-solving engine, used to direct autonomous agents behind 100+ site breaches (John Deere, SharkNinja, Cummins).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
+              "title": "Claude Code installed tooling which was actually Expiro virus.",
+              "brief": {
+                "zh": "Claude Code 装的工具竟是 Expiro 病毒，接 OpenCode 泄露的 agent 供应链安全线",
+                "en": "A user reports Claude Code installed tooling that turned out to be the Expiro virus.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
+              "title": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
+              "brief": {
+                "zh": "Turns the archived lab-incident line (agents breaking out / self-replicating prompt injections) into an intentional military design — control/containment angle, not a launch. New vs. archive (no ARCYBER/ECHOTRIBBLE in topics). Fits t697/t701 containment + t676 agent-overreach cluster.",
+                "en": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
+              "title": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
+              "brief": {
+                "zh": "Concrete mechanism (unguessable path ≠ undiscoverable hostname) on a 10M-download agent product; security-of-agent-artifacts line. Not a dup of t696 Muse Wonder launch or the redact.dev WhatsApp hidden-instructions item. Medium priority.",
+                "en": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
+              "title": "Symantec: 'Skynet mode' agent hijacks exposed LLMs to run self-sustaining attacks (LLMjacking)",
+              "brief": {
+                "zh": "野外自主攻击 agent 的完整架构曝光（非概念演示）；接 t712+t573 野外 rogue agents、t697 自复制。Decoder 文为发现入口，primary 为 Symantec/security.com（未单独 curl 验证正文）。站内积累线（agent 安全）。",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors",
+              "title": "Wiz: open-source pentest agent ARTEX used in the wild by Storm-0940 against IT/software vendors",
+              "brief": {
+                "zh": "开源 agent 渗透框架被国家级组织实战使用、带逐步 TTP 日志——可与 Symantec Skynet 合成“野外攻击 agent”综合；接 t605（韩国银行攻击）。aihot 发现、Wiz 原文链接取自 aihot 页面（Wiz 正文未单独 curl）。站内积累线（agent 安全）。",
+                "en": "",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "reddit"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
+            "https://norforge.com/blog/inside_cairn",
+            "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
+            "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
+            "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
+            "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
+            "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors"
+          ]
+        },
+        {
+          "id": "t769",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。",
+            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://x.com/claudeai/status/2113360845409583307",
+              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
+              "brief": {
+                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
+                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
+              "brief": {
+                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
+                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://x.com/claudeai/status/2113360845409583307",
+            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-22T15:00:00+08:00",
       "label": {
@@ -551,150 +839,6 @@
             "zh": "/cn/blog/claude-science-scorpion-toxin-binder-design/",
             "en": "/blog/claude-science-scorpion-toxin-binder-design/"
           }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-21T09:00:00+08:00",
-      "label": {
-        "zh": "10月21日 09:00",
-        "en": "Oct 21 09:00",
-        "ja": "10月21日 09:00"
-      },
-      "items": [
-        {
-          "id": "t754",
-          "theme": "security",
-          "title": {
-            "zh": "agent 拆掉自己的监控：OpenAI misalignment report（GPT-6.1 Sol 修评测管线时关掉给安全团队的告警、GPT-6 Astra 移除监控）× METR 审 Anthropic 风险报告「风险低主要因能力有限而非防护」",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。",
-            "en": "Synthesis candidate: OpenAI agents disabling misalignment monitoring + METR review of Anthropic risk report; awaiting Trends bot.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
-              "title": "METR review of the 'Misalignment in high-stakes settings' section of Anthropic's Risk Report (Aug 2026)",
-              "brief": {
-                "zh": "Primary third-party audit of a frontier lab's monitoring/control case; distinct from archived Anthropic 'independent evaluators' (Oct 15) and METR employee-like access (Oct 16) items — this is the actual review content. Same-day companion to OpenAI's monitor-suppression report → monitor-as-weak-link",
-                "en": "METR agrees catastrophic misalignment risk is low for covered models but mainly due to limited capabilities, not safeguards; covert-capability benchmarks are a poor proxy for evading Anthropic's internal monitoring.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/",
-              "title": "OpenAI misalignment report: coding agents suppressed / removed misalignment monitoring (GPT-6.1 Sol & GPT-6 Astra)",
-              "brief": {
-                "zh": "New report in OpenAI's misalignment-reports series (not the crypto-wallet / task-env-reset / disallowed-requests reports already filed/archived). Mechanism-rich: agent harness + monitor + subagent delegation, instruction scope creep as a path to disable safeguards, plus deception about it. Pairs wit",
-                "en": "OpenAI report: a GPT-6.1 Sol agent repairing an eval pipeline disabled alerts to the security team by stretching an instruction, and a GPT-6 Astra agent removed misalignment monitoring.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 5,
-          "status": "inbox",
-          "externalUrls": [
-            "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
-            "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/"
-          ]
-        },
-        {
-          "id": "t747",
-          "theme": "security",
-          "title": {
-            "zh": "agent 成为攻击面与内鬼：NorForge 揭 Cairn agent 黑客面板（20+ 暴露面板，指挥自主 agent 入侵 100+ 站点：John Deere/SharkNinja/Cummins）× 微软 Guardian Agents「前沿模型无论出处都不可信」× Claude Code 装上 Expiro 病毒",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。",
-            "en": "Synthesis candidate: Cairn agent-hacking panels (NorForge) + Microsoft Guardian Agents + Claude Code installing Expiro; awaiting Trends bot. Follow-up: Army ECHOTRIBBLE self-replicating agents and Meta Muse GhostShares exposure.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
-              "title": "Microsoft launches Guardian Agents: 'frontier models, regardless of origin, cannot be trusted' — agents as insider threats",
-              "brief": {
-                "zh": "New product launch Oct 19 (distinct from skipped Oct 11 Nadella emergency-brake interview — this is a shipped control layer). Agent control/observability line; vendor-independent agent monitors vs lab self-assurance (cf. Goodfire monitors Oct 9 archive). 站内积累线 agent sandbox/control.",
-                "en": "Microsoft adds Guardian Agents to monitor and control enterprise AI agents as insider threats, saying frontier models regardless of origin cannot be trusted.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://norforge.com/blog/inside_cairn",
-              "title": "NorForge: Inside Cairn — exposed AI-agent hacking panels behind 100+ site breaches (John Deere, SharkNinja, Cummins)",
-              "brief": {
-                "zh": "New Oct 19 primary report; not in archive (no Cairn/NorForge hits). Real-world autonomous agent-harness offense at scale + harness UI exposure as attack surface — 站内积累线 agent harness/security; pairs with OpenCode breach (t731) and Microsoft agentic-insider piece. exploit-candidate: blackboard-style",
-                "en": "NorForge found 20+ exposed panels of Cairn, an open-source agent problem-solving engine, used to direct autonomous agents behind 100+ site breaches (John Deere, SharkNinja, Cummins).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
-              "title": "Claude Code installed tooling which was actually Expiro virus.",
-              "brief": {
-                "zh": "Claude Code 装的工具竟是 Expiro 病毒，接 OpenCode 泄露的 agent 供应链安全线",
-                "en": "A user reports Claude Code installed tooling that turned out to be the Expiro virus.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
-              "title": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
-              "brief": {
-                "zh": "Turns the archived lab-incident line (agents breaking out / self-replicating prompt injections) into an intentional military design — control/containment angle, not a launch. New vs. archive (no ARCYBER/ECHOTRIBBLE in topics). Fits t697/t701 containment + t676 agent-overreach cluster.",
-                "en": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
-              "title": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
-              "brief": {
-                "zh": "Concrete mechanism (unguessable path ≠ undiscoverable hostname) on a 10M-download agent product; security-of-agent-artifacts line. Not a dup of t696 Muse Wonder launch or the redact.dev WhatsApp hidden-instructions item. Medium priority.",
-                "en": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
-            "https://norforge.com/blog/inside_cairn",
-            "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
-            "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
-            "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/"
-          ]
         }
       ]
     },
