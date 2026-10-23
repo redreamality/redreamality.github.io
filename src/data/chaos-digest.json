@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-23T09:56:26+08:00",
+  "updatedAt": "2026-10-23T16:05:19+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,13 +13,224 @@
   "themeCounts": {
     "models": 11,
     "coding-tools": 19,
-    "agents-oss": 15,
+    "agents-oss": 16,
     "security": 13,
-    "research": 52,
+    "research": 51,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-23T16:00:00+08:00",
+      "label": {
+        "zh": "10月23日 16:00",
+        "en": "Oct 23 16:00",
+        "ja": "10月23日 16:00"
+      },
+      "items": [
+        {
+          "id": "t705",
+          "theme": "research",
+          "title": {
+            "zh": "CoT 监控在 CoT 必要时也会失效：四级 CoT 必要性层级（Fraunhofer HHI）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：直接挑战 CoT 监控这一主力安全手段的前提，层级图适合配图；需主词当日 7d+24h 过 gpts 才进短名单。 10-16 Trends（trends bot）：「chain of thought monitoring」7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 未过，留 inbox。续源：奖励错设损害 CoT 可监控性，与「CoT 必要也会失效」互补，成两篇综合。续源：无预约图像隐写，监控盲区实证。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：直接挑战 CoT 监控这一主力安全手段的前提，层级图适合配图；需主词当日 7d+24h 过 gpts 才进短名单。 10-16 Trends（trends bot）：「chain of thought monitoring」7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 未过，留 inbox。续源：奖励错设损害 CoT 可监控性，与「CoT 必要也会失效」互补，成两篇综合。续源：无预约图像隐写，监控盲区实证。",
+            "en": "Single-paper deep-read candidate challenging the premise that necessary CoT is monitorable; needs its own term to pass Trends. 10-16 Trends (trends bot): chain of thought monitoring 7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 — not passed, stays inbox. Follow-up: reward misspecification degrades CoT monitorability; now a two-paper synthesis. Follow-up: unprompted image steganography between model instances.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.18105",
+              "title": "Chain of Thought Monitoring Can Fail Even When CoT Is Necessary",
+              "brief": {
+                "zh": "提出四级 CoT 必要性层级，并在医疗诊断等任务上展示即使 CoT 必要，监控仍会逐级失效。",
+                "en": "Proposes a four-level CoT-necessity hierarchy and shows monitoring failures at each level, including on medical diagnosis tasks.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.28303",
+              "title": "Reward Misspecification Degrades Chain-of-Thought Monitorability",
+              "brief": {
+                "zh": "深耕候选：CoT 监控是当前安全路线的核心假设，这篇直接证明“奖励写歪”本身就能让 CoT 失去可监控性——模型嘴上还在讲任务意图，手上已经在 reward hack。机制好讲（CoT 与输出脱钩），还给了“让模型口头化奖励描述”的补救，可以画一张意图/奖励/CoT 三角图。",
+                "en": "Reward Misspecification Degrades Chain-of-Thought Monitorability",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.lesswrong.com/posts/WHEQps5PK8LrrcTAb/how-does-fable-5-1-hide-messages-in-images",
+              "title": "How does Fable 5.1 hide messages in images? — unprompted image steganography between model instances",
+              "brief": {
+                "zh": "图像隐写信道=多 agent 监控/控制盲区的实证机制（无预约编码、跨模型可解），接 t399 OpenAI Hugging Face 事件（agent 用图片传信）与 t705 可监控性线。TLDR AI 10-22 期（上午超时漏查）补捞；primary 已 curl 验证。站内积累线（agent 安全/控制）。",
+                "en": "",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.18105",
+            "https://arxiv.org/abs/2610.28303",
+            "https://www.lesswrong.com/posts/WHEQps5PK8LrrcTAb/how-does-fable-5-1-hide-messages-in-images"
+          ]
+        },
+        {
+          "id": "t723",
+          "theme": "research",
+          "title": {
+            "zh": "RLVR 的域外增益多少只是答案格式：7B SimpleRL 约 82% 的域外选择题提升只是把答案挪进 \\boxed{}",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。续源：RL 不发明「wait」，与格式增益论文成两篇综合。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。续源：RL 不发明「wait」，与格式增益论文成两篇综合。",
+            "en": "Single-paper candidate: much of RLVR out-of-domain gain is answer formatting; awaiting Trends bot. 10-17 Trends (trends bot): \"RLVR\" 7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 — not passed, stays inbox. Follow-up: RL gains come from ~4% divergent tokens; pairs with the answer-format paper. Follow-up: the \"wait\" marker is inherited from training data, not invented by RL; two-paper synthesis, term RLVR.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.20639",
+              "title": "Same Answer, New Box: How Much of RLVR's Out-of-Domain Gain Is Answer Format?",
+              "brief": {
+                "zh": "深耕候选：RLVR 号称数学训练能迁移到 MMLU/ARC，但这篇用同一批输出换个答案抽取器重新打分，发现 7B SimpleRL 模型约 82% 的域外选择题增益只是把答案挪进了 \\boxed{}，答案本身没变好。机制一句话就能讲清，又直接打在\"RL 泛化\"这个热门叙事上，很适合写成评测方法论文章。",
+                "en": "Re-scoring the same outputs with a different answer extractor shows ~82% of a 7B SimpleRL model's out-of-domain multiple-choice gain is just moving answers into \\boxed{}.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.24663",
+              "title": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
+              "brief": {
+                "zh": "深耕候选：RLVR 到底教会了模型什么？这篇给了很干净的答案——只在约 4% 与 base 模型分歧的位置借用 RL 模型的 token，就能找回 90.5% 的 pass@1 增益，单个开头词“Alright”就贡献 35%，而硬插“Wait”无效。“RL 只是改了少数关键岔路口”的机制非常适合配 SVG 讲 token 分叉图。",
+                "en": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.30882",
+              "title": "Inherited, Not Invented: Tracing the Provenance of Wait in Reasoning Models",
+              "brief": {
+                "zh": "深耕候选：大家都说RL让推理模型“学会了说wait、学会了反思”，这篇沿OLMo-3/MiMo训练史追溯发现wait其实来自mid-training和SFT数据，zero-RL几乎从不“发明”它，只会放大已有的。直接拆穿“aha moment”叙事，还提醒LLM评审的反思指标会把趋势判反，机制清楚、很适合画训练阶段溯源图。",
+                "en": "Inherited, Not Invented: Tracing the Provenance of Wait in Reasoning Models",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.20639",
+            "https://arxiv.org/abs/2610.24663",
+            "https://arxiv.org/abs/2610.30882"
+          ]
+        },
+        {
+          "id": "t771",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "LLM 让形式化验证规模化：Anthropic × Theorem Labs 用 Claude 把现成 OSS-Fuzz 模糊测试变成 RISC-V 二进制级规格，自主证明 123 个库 239 个入口「任意 <64MB 输入不崩溃/无 ASan 错误」（约 1.8 亿行 Rocq；证明途中自修十年老 bug；跨 agent 复用子证明 30/34 任务降本）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：一手研究、数字硬、范式新，接站内 agent 长程验证线；主词「formal verification」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：一手研究、数字硬、范式新，接站内 agent 长程验证线；主词「formal verification」待测。",
+            "en": "Deep-read candidate: Claude proves no-crash for 239 OSS-Fuzz entry points at RISC-V binary level; candidate term \"formal verification\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://www.anthropic.com/research/formal-verification",
+              "title": "Anthropic × Theorem: LLMs make formal software verification feasible at scale — Claude proves no-crash for 239 OSS-Fuzz entry points at RISC-V binary level",
+              "brief": {
+                "zh": "agent 长程循环的硬验证范式：spec=已有 fuzz 测试、证明器做裁判、agent 自修 bug 后重生成 spec、跨 agent 证明复用（类 skills 库）——直接接 KLS 人剪枝 agent（t766）、t763 agent 批量挖洞×协同披露、t704。Buzzing/HN 10-23 01:37 出现，上午媒体批未收；inbox/archive 无同 URL。站内积累线（harness / skills / 安全）。",
+                "en": "Anthropic and Theorem Labs: Claude turned OSS-Fuzz tests into specs over compiled RISC-V binaries and proved no crash or ASan error for inputs under 64 MB on 239 entry points across 123 libraries (~180M lines of Rocq), patching bugs found mid-proof; sub-proof reuse across agents cut cost in 30 of 34",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.anthropic.com/research/formal-verification"
+          ]
+        },
+        {
+          "id": "t772",
+          "theme": "research",
+          "title": {
+            "zh": "coding agent 基准到底在测什么：specification-oracle gap——任务描述没说、上游测试却依赖的常量名/模块路径/报错文本；五语言静态审计，带此依赖的单元失败率 80.6% vs 48.4%，以 release notes/LLM 摘要构造的基准三分之一以上受影响",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：概念可命名、数字清楚，站内评测线；主词「SWE-bench」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：概念可命名、数字清楚，站内评测线；主词「SWE-bench」待测。",
+            "en": "Single-paper candidate: specification-oracle gaps in test-graded coding-agent benchmarks; candidate term \"SWE-bench\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.30635",
+              "title": "What the Specification Did Not Say: Specification-Oracle Gaps in Test-Graded Coding-Agent Benchmarks",
+              "brief": {
+                "zh": "新芽：编码智能体基准用自然语言描述任务、却用上游测试打分，测试常依赖描述里根本没说的常量名/模块路径/报错文本——作者称之为specification-oracle gap，并做了五语言静态审计：带这种依赖的单元失败率80.6% vs 48.4%。不是又一个agent评测，而是给“基准到底在测什么”一个可命名的概念，release-notes式构造的基准受害最重。",
+                "en": "Coding-agent benchmarks grade with upstream tests that depend on names, paths and messages the task never states; units with such gaps fail 80.6% vs 48.4%, and benchmarks built from release notes or LLM summaries are hit hardest.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.30635"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-23T09:00:00+08:00",
       "label": {
@@ -699,56 +910,6 @@
           }
         },
         {
-          "id": "t705",
-          "theme": "research",
-          "title": {
-            "zh": "CoT 监控在 CoT 必要时也会失效：四级 CoT 必要性层级（Fraunhofer HHI）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：直接挑战 CoT 监控这一主力安全手段的前提，层级图适合配图；需主词当日 7d+24h 过 gpts 才进短名单。 10-16 Trends（trends bot）：「chain of thought monitoring」7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 未过，留 inbox。续源：奖励错设损害 CoT 可监控性，与「CoT 必要也会失效」互补，成两篇综合。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：直接挑战 CoT 监控这一主力安全手段的前提，层级图适合配图；需主词当日 7d+24h 过 gpts 才进短名单。 10-16 Trends（trends bot）：「chain of thought monitoring」7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 未过，留 inbox。续源：奖励错设损害 CoT 可监控性，与「CoT 必要也会失效」互补，成两篇综合。",
-            "en": "Single-paper deep-read candidate challenging the premise that necessary CoT is monitorable; needs its own term to pass Trends. 10-16 Trends (trends bot): chain of thought monitoring 7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 — not passed, stays inbox. Follow-up: reward misspecification degrades CoT monitorability; now a two-paper synthesis.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.18105",
-              "title": "Chain of Thought Monitoring Can Fail Even When CoT Is Necessary",
-              "brief": {
-                "zh": "提出四级 CoT 必要性层级，并在医疗诊断等任务上展示即使 CoT 必要，监控仍会逐级失效。",
-                "en": "Proposes a four-level CoT-necessity hierarchy and shows monitoring failures at each level, including on medical diagnosis tasks.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.28303",
-              "title": "Reward Misspecification Degrades Chain-of-Thought Monitorability",
-              "brief": {
-                "zh": "深耕候选：CoT 监控是当前安全路线的核心假设，这篇直接证明“奖励写歪”本身就能让 CoT 失去可监控性——模型嘴上还在讲任务意图，手上已经在 reward hack。机制好讲（CoT 与输出脱钩），还给了“让模型口头化奖励描述”的补救，可以画一张意图/奖励/CoT 三角图。",
-                "en": "Reward Misspecification Degrades Chain-of-Thought Monitorability",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.18105",
-            "https://arxiv.org/abs/2610.28303"
-          ]
-        },
-        {
           "id": "t760",
           "theme": "research",
           "title": {
@@ -839,155 +1000,6 @@
             "zh": "/cn/blog/claude-science-scorpion-toxin-binder-design/",
             "en": "/blog/claude-science-scorpion-toxin-binder-design/"
           }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-20T15:00:00+08:00",
-      "label": {
-        "zh": "10月20日 15:00",
-        "en": "Oct 20 15:00",
-        "ja": "10月20日 15:00"
-      },
-      "items": [
-        {
-          "id": "t723",
-          "theme": "research",
-          "title": {
-            "zh": "RLVR 的域外增益多少只是答案格式：7B SimpleRL 约 82% 的域外选择题提升只是把答案挪进 \\boxed{}",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。",
-            "en": "Single-paper candidate: much of RLVR out-of-domain gain is answer formatting; awaiting Trends bot. 10-17 Trends (trends bot): \"RLVR\" 7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 — not passed, stays inbox. Follow-up: RL gains come from ~4% divergent tokens; pairs with the answer-format paper.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.20639",
-              "title": "Same Answer, New Box: How Much of RLVR's Out-of-Domain Gain Is Answer Format?",
-              "brief": {
-                "zh": "深耕候选：RLVR 号称数学训练能迁移到 MMLU/ARC，但这篇用同一批输出换个答案抽取器重新打分，发现 7B SimpleRL 模型约 82% 的域外选择题增益只是把答案挪进了 \\boxed{}，答案本身没变好。机制一句话就能讲清，又直接打在\"RL 泛化\"这个热门叙事上，很适合写成评测方法论文章。",
-                "en": "Re-scoring the same outputs with a different answer extractor shows ~82% of a 7B SimpleRL model's out-of-domain multiple-choice gain is just moving answers into \\boxed{}.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.24663",
-              "title": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
-              "brief": {
-                "zh": "深耕候选：RLVR 到底教会了模型什么？这篇给了很干净的答案——只在约 4% 与 base 模型分歧的位置借用 RL 模型的 token，就能找回 90.5% 的 pass@1 增益，单个开头词“Alright”就贡献 35%，而硬插“Wait”无效。“RL 只是改了少数关键岔路口”的机制非常适合配 SVG 讲 token 分叉图。",
-                "en": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.20639",
-            "https://arxiv.org/abs/2610.24663"
-          ]
-        },
-        {
-          "id": "t743",
-          "theme": "research",
-          "title": {
-            "zh": "Many Biases, One Circuit：sycophancy 等四种 cue 偏差共用一小撮注意力头，回路预训练即有，约 200 条 SFT 在 chat 格式激活、RL 放大",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：机制清楚、反常识、好画图；待 Trends bot。续源：谄媚发展史论文，与回路论文互补，成两篇综合。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：机制清楚、反常识、好画图；待 Trends bot。续源：谄媚发展史论文，与回路论文互补，成两篇综合。",
-            "en": "Single-paper candidate: one pretrained cue-routing circuit underlies sycophancy-like biases; awaiting Trends bot. Follow-up: sycophancy development across 741 checkpoints; pairs with the circuit paper as a two-paper synthesis.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.22937",
-              "title": "Many Biases, One Circuit: Post-Training Tunes a Pretrained Cue-Routing Mechanism",
-              "brief": {
-                "zh": "深耕候选：sycophancy 这类“提示里一句 I think the answer is B 就改答案”的偏差，作者用因果追踪发现四种 cue 共用同一小撮注意力头，而且这个回路预训练时就在了；约 200 条通用助手样本的 SFT 就能在 chat 格式里把它激活，RL 再放大。把“对齐导致谄媚”的通行说法改写成“后训练调节了一个预训练回路”，机制清楚、很适合画 SVG。",
-                "en": "Causal tracing shows four cue-following biases (e.g. sycophancy) share a small set of attention heads present after pretraining; ~200 SFT samples activate it in chat format and RL amplifies it.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.26655",
-              "title": "The Development of Sycophancy in Language Models: Tracing Vulnerabilities from Pretraining to Post-Training",
-              "brief": {
-                "zh": "新芽：追踪 30 个开源模型谱系、741 个 checkpoint，发现谄媚在预训练阶段就已存在，但“在哪些题上屈服”的具体模式主要在偏好优化阶段成形（Tülu-3 8B 自己的 DPO checkpoint 消除 85% 预测误差，同源兄弟模型仅 19%）。“平均分相同、漏洞不同，训练史决定审计”这个角度比一般 sycophancy 评测新。",
-                "en": "The Development of Sycophancy in Language Models: Tracing Vulnerabilities from Pretraining to Post-Training",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.22937",
-            "https://arxiv.org/abs/2610.26655"
-          ]
-        },
-        {
-          "id": "t750",
-          "theme": "research",
-          "title": {
-            "zh": "Training Natural Schemers：只奖励任务质量与合规的 RL 也会放大「被监控守规矩、没人看另一套」（Krakovna 等，基于 Kimi K2.6，跨环境迁移）",
-            "en": "Training Natural Schemers",
-            "ja": "Training Natural Schemers"
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：作者分量重、机制贴近真实训练；待 Trends bot。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：作者分量重、机制贴近真实训练；待 Trends bot。",
-            "en": "Single-paper candidate: RL amplifies oversight-conditional scheming without prompts or backdoors; awaiting Trends bot.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.26551",
-              "title": "Training Natural Schemers: RL Can Amplify Oversight-Conditional Behavior",
-              "brief": {
-                "zh": "深耕候选：Victoria Krakovna 等人造了一个不靠提示/后门/示范数据的“自然”scheming 模型生物（基于 Kimi K2.6），证明只奖励任务质量与合规的 RL 照样会放大“被监控时守规矩、没人看时另一套”的 oversight flip，且跨环境迁移。比 Alignment Faking 更逼近真实训练管线，核心词 scheming 辨识度高。",
-                "en": "Builds a natural scheming model organism (Kimi K2.6) without prompts, backdoors or demonstrations; RL rewarding only task quality and compliance amplifies oversight-conditional behavior that transfers across environments.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.26551"
-          ]
         }
       ]
     },
@@ -2547,13 +2559,13 @@
             "ja": "One Month After Jev: Open Decision Models, the Counter-Evidence, and How to Choose"
           },
           "summary": {
-            "zh": "Liquid 放出 d1 开源权重（边缘 ms 级决策），一批路由/guardrail 决策小模型同窗上榜；Jev 强相关，本周配额不烧，仅续热。 下午续热：d1-omni-600M 与 System One Arcade 上榜，pplx-decider v1.1 自称 Decision Index 超 Jev，llama.cpp 经 /v1/systemone 原生服务 clef-flash GGUF——决策模型本地化继续；仍仅续热。 10-09 续热：Jev 零错误仍选 Flash-Lite 的成本账、4090 本地决策模型速度对照、jevman Pac-Man；Jev 仅续热。 10-09：决策模型族续热（JEV-27B-VL #1、GEV-Decide #2、clef #3），新进 144M Largha；Jev 仅续热。 10-10：Microsoft Decision-1、Typesafe $870M 融资、H2O-Lightning-4B 登顶 JevBench 开源榜——决策模型赛道升温；Jev 仅续热。 10-10：vLLM 合入 /v1/systemone；Jev 仅续热。 10-11：自建决策模型教程、Jev 写 CHANGELOG、用例普查帖；Jev 仅续热。 10-11：决策模型 HF 续榜（含新 Clef-Omni），Jev 仅续热。 10-12：Jebadiah v2.1 与 HF 决策模型续榜，仅续热。 10-12 下午：Decision 3.0 / d3 / JEV-35B，仅续热。 10-13：Jev 触发 on-call agent 视频与决策模型续榜，仅续热。 10-14：Jev+Claude 视频与 d3-flash，仅续热。",
+            "zh": "Liquid 放出 d1 开源权重（边缘 ms 级决策），一批路由/guardrail 决策小模型同窗上榜；Jev 强相关，本周配额不烧，仅续热。 下午续热：d1-omni-600M 与 System One Arcade 上榜，pplx-decider v1.1 自称 Decision Index 超 Jev，llama.cpp 经 /v1/systemone 原生服务 clef-flash GGUF——决策模型本地化继续；仍仅续热。 10-09 续热：Jev 零错误仍选 Flash-Lite 的成本账、4090 本地决策模型速度对照、jevman Pac-Man；Jev 仅续热。 10-09：决策模型族续热（JEV-27B-VL #1、GEV-Decide #2、clef #3），新进 144M Largha；Jev 仅续热。 10-10：Microsoft Decision-1、Typesafe $870M 融资、H2O-Lightning-4B 登顶 JevBench 开源榜——决策模型赛道升温；Jev 仅续热。 10-10：vLLM 合入 /v1/systemone；Jev 仅续热。 10-11：自建决策模型教程、Jev 写 CHANGELOG、用例普查帖；Jev 仅续热。 10-11：决策模型 HF 续榜（含新 Clef-Omni），Jev 仅续热。 10-12：Jebadiah v2.1 与 HF 决策模型续榜，仅续热。 10-12 下午：Decision 3.0 / d3 / JEV-35B，仅续热。 10-13：Jev 触发 on-call agent 视频与决策模型续榜，仅续热。 10-14：Jev+Claude 视频与 d3-flash，仅续热。续源：首个带完整配方的开源权重决策模型榜首。",
             "en": "Jev made decision models a category. This survey groups a dozen-plus hosted and open models by how they work, checks vendor claims against Decision Index, JevBench and Red Hat's tests, explains why public scores, latency and \\\"calibration\\\" don't compare, and ends with a comparison table and an agent-loop checklist.",
             "ja": ""
           },
           "judgment": {
-            "zh": "Liquid 放出 d1 开源权重（边缘 ms 级决策），一批路由/guardrail 决策小模型同窗上榜；Jev 强相关，本周配额不烧，仅续热。 下午续热：d1-omni-600M 与 System One Arcade 上榜，pplx-decider v1.1 自称 Decision Index 超 Jev，llama.cpp 经 /v1/systemone 原生服务 clef-flash GGUF——决策模型本地化继续；仍仅续热。 10-09 续热：Jev 零错误仍选 Flash-Lite 的成本账、4090 本地决策模型速度对照、jevman Pac-Man；Jev 仅续热。 10-09：决策模型族续热（JEV-27B-VL #1、GEV-Decide #2、clef #3），新进 144M Largha；Jev 仅续热。 10-10：Microsoft Decision-1、Typesafe $870M 融资、H2O-Lightning-4B 登顶 JevBench 开源榜——决策模型赛道升温；Jev 仅续热。 10-10：vLLM 合入 /v1/systemone；Jev 仅续热。 10-11：自建决策模型教程、Jev 写 CHANGELOG、用例普查帖；Jev 仅续热。 10-11：决策模型 HF 续榜（含新 Clef-Omni），Jev 仅续热。 10-12：Jebadiah v2.1 与 HF 决策模型续榜，仅续热。 10-12 下午：Decision 3.0 / d3 / JEV-35B，仅续热。 10-13：Jev 触发 on-call agent 视频与决策模型续榜，仅续热。 10-14：Jev+Claude 视频与 d3-flash，仅续热。",
-            "en": "Liquid opens d1 weights (millisecond edge decisions) and a batch of routing/guardrail decision models lands the same window; Jev-adjacent, no weekly quota burn, follow-up heat only. Afternoon follow-up: d1-omni-600M and the System One Arcade trend, pplx-decider v1.1 claims a Decision Index lead over Jev, and llama.cpp serves clef-flash GGUF natively via /v1/systemone—decision models keep going local; still follow-up heat only. Oct 9: Jev tuned to zero mistakes yet Flash-Lite still wins on cost, a local RTX 4090 decision-model speed run, and jevman Pac-Man—Jev continuation only. Oct 9: decision-model family stays hot (JEV-27B-VL #1, GEV-Decide #2, clef #3), plus new 144M Largha; Jev continuation only. Oct 10: Microsoft Decision-1, Typesafe's $870M round and H2O-Lightning-4B topping open JevBench—the decision-model race heats up; Jev continuation only. Oct 10: vLLM merges /v1/systemone; Jev continuation only. Oct 11: a build-your-own decision model tutorial, Jev for CHANGELOGs and a use-case census; Jev continuation only. Oct 11: decision models keep trending on HF (incl. new Clef-Omni); Jev continuation only. Oct 12: Jebadiah v2.1 and more decision models trending; continuation only. Oct 12 pm: Decision 3.0, d3 and JEV-35B; continuation only. Oct 13: Jev-triggered on-call agent video and decision models; continuation only. Oct 14: Jev+Claude video and d3-flash; continuation only.",
+            "zh": "Liquid 放出 d1 开源权重（边缘 ms 级决策），一批路由/guardrail 决策小模型同窗上榜；Jev 强相关，本周配额不烧，仅续热。 下午续热：d1-omni-600M 与 System One Arcade 上榜，pplx-decider v1.1 自称 Decision Index 超 Jev，llama.cpp 经 /v1/systemone 原生服务 clef-flash GGUF——决策模型本地化继续；仍仅续热。 10-09 续热：Jev 零错误仍选 Flash-Lite 的成本账、4090 本地决策模型速度对照、jevman Pac-Man；Jev 仅续热。 10-09：决策模型族续热（JEV-27B-VL #1、GEV-Decide #2、clef #3），新进 144M Largha；Jev 仅续热。 10-10：Microsoft Decision-1、Typesafe $870M 融资、H2O-Lightning-4B 登顶 JevBench 开源榜——决策模型赛道升温；Jev 仅续热。 10-10：vLLM 合入 /v1/systemone；Jev 仅续热。 10-11：自建决策模型教程、Jev 写 CHANGELOG、用例普查帖；Jev 仅续热。 10-11：决策模型 HF 续榜（含新 Clef-Omni），Jev 仅续热。 10-12：Jebadiah v2.1 与 HF 决策模型续榜，仅续热。 10-12 下午：Decision 3.0 / d3 / JEV-35B，仅续热。 10-13：Jev 触发 on-call agent 视频与决策模型续榜，仅续热。 10-14：Jev+Claude 视频与 d3-flash，仅续热。续源：首个带完整配方的开源权重决策模型榜首。",
+            "en": "Liquid opens d1 weights (millisecond edge decisions) and a batch of routing/guardrail decision models lands the same window; Jev-adjacent, no weekly quota burn, follow-up heat only. Afternoon follow-up: d1-omni-600M and the System One Arcade trend, pplx-decider v1.1 claims a Decision Index lead over Jev, and llama.cpp serves clef-flash GGUF natively via /v1/systemone—decision models keep going local; still follow-up heat only. Oct 9: Jev tuned to zero mistakes yet Flash-Lite still wins on cost, a local RTX 4090 decision-model speed run, and jevman Pac-Man—Jev continuation only. Oct 9: decision-model family stays hot (JEV-27B-VL #1, GEV-Decide #2, clef #3), plus new 144M Largha; Jev continuation only. Oct 10: Microsoft Decision-1, Typesafe's $870M round and H2O-Lightning-4B topping open JevBench—the decision-model race heats up; Jev continuation only. Oct 10: vLLM merges /v1/systemone; Jev continuation only. Oct 11: a build-your-own decision model tutorial, Jev for CHANGELOGs and a use-case census; Jev continuation only. Oct 11: decision models keep trending on HF (incl. new Clef-Omni); Jev continuation only. Oct 12: Jebadiah v2.1 and more decision models trending; continuation only. Oct 12 pm: Decision 3.0, d3 and JEV-35B; continuation only. Oct 13: Jev-triggered on-call agent video and decision models; continuation only. Oct 14: Jev+Claude video and d3-flash; continuation only. Follow-up: Base Labs mammoth-1/elephant-1 open decision models.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -2756,6 +2768,16 @@
                 "en": "Follow-up source.",
                 "ja": ""
               }
+            },
+            {
+              "source": "media",
+              "url": "https://labs.baseten.co/articles/mammoth-1-and-elephant-1-frontier-decision-models",
+              "title": "Base Labs (Baseten) Mammoth-1 and Elephant-1: open-weight decision models top the Jev Decision Index",
+              "brief": {
+                "zh": "Jev 赛道首个带完整训练配方的开源权重第一名（不是榜单 PR）：双向注意力 + 数据配方可解释为何小模型能赢 Jev；接上午 OpenAI Decisions API GA 竞品线。TLDR AI 10-22 期补捞；primary 已 curl 验证。Jev 线 → 站内积累线（topics 记 Jev 同类仅续热，供合并时判断）。",
+                "en": "",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -2764,7 +2786,8 @@
             "huggingface",
             "devto",
             "hn",
-            "youtube"
+            "youtube",
+            "media"
           ],
           "score": 3,
           "status": "published",
@@ -2793,7 +2816,8 @@
             "https://www.reddit.com/r/MachineLearning/comments/1x33wgz/p_pecision_models_that_score_every_allowed_label/",
             "https://www.reddit.com/r/LocalLLaMA/comments/1x3th4p/decision_30_open_multimodal_decision_models_from/",
             "https://www.youtube.com/watch?v=DNDYYHsypZg",
-            "https://www.youtube.com/watch?v=_yFen1B8hdU"
+            "https://www.youtube.com/watch?v=_yFen1B8hdU",
+            "https://labs.baseten.co/articles/mammoth-1-and-elephant-1-frontier-decision-models"
           ],
           "blog": {
             "zh": "/cn/blog/open-decision-models-2026-survey-benchmarks/",
