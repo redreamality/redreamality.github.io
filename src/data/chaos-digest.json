@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T09:52:53+08:00",
+  "updatedAt": "2026-10-24T16:04:59+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,148 @@
     "other"
   ],
   "themeCounts": {
-    "models": 11,
+    "models": 10,
     "coding-tools": 19,
     "agents-oss": 17,
     "security": 13,
-    "research": 52,
+    "research": 51,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-24T16:00:00+08:00",
+      "label": {
+        "zh": "10月24日 16:00",
+        "en": "Oct 24 16:00",
+        "ja": "10月24日 16:00"
+      },
+      "items": [
+        {
+          "id": "t766",
+          "theme": "research",
+          "title": {
+            "zh": "AI 科学家的现实检验：Agent4Sci（Carlini 等）前沿 agent 在 20 个 ML-for-science 基准全部超 SOTA（Opus 平均 +10.4%）但几乎全靠 ML 工程技巧 × 微软研究院用「人剪枝 agent 轨迹」证明 31 年 KLS 猜想（同 token 预算消融）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：「agent 爬分 vs 人剪枝」对照鲜明，承接已发 AI×数学/科学两篇；缺核心词。续源：AI 科学家的两条机制侧文献，见 t777。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：「agent 爬分 vs 人剪枝」对照鲜明，承接已发 AI×数学/科学两篇；缺核心词。续源：AI 科学家的两条机制侧文献，见 t777。",
+            "en": "Synthesis candidate: Agent4Sci (agents beat SOTA via ML tricks, not insight) + MSR KLS proof via human-pruned agent search; no clean core term. Follow-up: fan-out and depth-first mechanisms for AI research, see t777.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.28763",
+              "title": "Automating ML for Science: Can Frontier Agents Climb Scientific Hills in the Wild?",
+              "brief": {
+                "zh": "深耕候选：Carlini 等的 Agent4Sci 在 20 个 ML-for-science 基准上让前沿 Agent 去刷已发表 SOTA，结果全都超了（Opus 平均 +10.4%），但几乎全靠 ML 工程小技巧而非领域洞见；三类失败（新颖性误判、资源用不满、塌缩成局部调参）很适合做分类图，正好回应“AI 科学家”叙事。",
+                "en": "Agent4Sci: frontier agents beat published SOTA on all 20 ML-for-science benchmarks (Opus +10.4% on average) but mostly through ML engineering tricks rather than domain insight; three failure types identified.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.microsoft.com/en-us/research/blog/solving-a-31-year-old-grand-challenge-in-mathematics-the-kls-conjecture/",
+              "title": "Microsoft Research: Solving the 31-year-old KLS conjecture with human-directed agentic search",
+              "brief": {
+                "zh": "Primary, mechanism-rich AI×math case with a rare equal-token-budget ablation: human pruning of agent trajectories vs end-to-end agent runs. Extends t711 AI×数学 (Tao/TheoPhysEval) and the human-in-loop agent-harness line; not in topics/archive (dedup'd KLS/kls-conjecture).",
+                "en": "Microsoft Research proves the 31-year-old KLS conjecture with parallel agents exploring ~100 trajectories while a researcher pruned them; an equal-token ablation favors human pruning over end-to-end agents.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://latent.space/p/ai-is-getting-good-at-math/",
+              "title": "Latent Space (Ankit Maloo): AI Is Getting Good at Math. Here's Why. — LLMs search depth-first, a verifier makes failure cheap, and 'negative hints' in a drafter/solver/verifier harness replace human taste (branching factor b^k)",
+              "brief": {
+                "zh": "Adds a new, mechanism-level angle beyond t711 (AI×数学 文化/职业/机构视角) and the already-filed MSR KLS item (人剪枝 agent 轨迹): this is the 'why it works' theory — depth-first search + verifier + drafter prompt carrying negative hints, with a concrete harness shape (Drafter/Solver/Verifier, standing adversarial",
+                "en": "Latent Space (Ankit Maloo): AI Is Getting Good at Math. Here's Why. — LLMs search depth-first, a verifier makes failure cheap, and 'negative hints' in a drafter/solver/verifier harness replace human taste (branching factor b^k)",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
+              "title": "OpenAI × PerturbAI × Scripps: 'distributed biological reasoning' — 1,946 parallel GPT-Rosalind agents (one per perturbation) interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 min; 711x more literature than one agent, shuffle controls, blinded experts",
+              "brief": {
+                "zh": "Not in inbox/archive 20261022-24 or topics.md (previous skip was window-only, not duplicate). Mechanism-rich evidence for 'many narrow agents beat one big-context agent' — a controlled same-model/same-budget ablation of fan-out vs single-agent (literature coverage collapse as workload grows), plus a",
+                "en": "OpenAI × PerturbAI × Scripps: 'distributed biological reasoning' — 1,946 parallel GPT-Rosalind agents (one per perturbation) interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 min; 711x more literature than one agent, shuffle controls, blinded experts",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.28763",
+            "https://www.microsoft.com/en-us/research/blog/solving-a-31-year-old-grand-challenge-in-mathematics-the-kls-conjecture/",
+            "https://latent.space/p/ai-is-getting-good-at-math/",
+            "https://openai.com/index/scaling-ai-research-for-complex-biological-data"
+          ]
+        },
+        {
+          "id": "t777",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "AI 做科研的两条机制：广度 fan-out——OpenAI × PerturbAI × Scripps 用 1,946 个并行 GPT-Rosalind agent（每个扰动一个）32 分钟解读 770 万细胞全脑 Perturb-seq 图谱（复现 87.3% 源论文可测发现；同模型同预算消融：单 agent 引文塌缩，分布式多读 711× 文献；洗牌对照、30 位博士盲评）× 深度优先 + verifier——Latent Space 解释 AI 数学为何突然变强（drafter/solver/verifier + 失败路径当「负提示」，分支因子 b^k 成本律；Navier–Stokes 约 1 万 agent、3000 亿 token、88 小时）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（score4）：受控消融 + 机制化理论互补，接站内 AI 科学家线；主词「Perturb-seq」待测，量可能偏低。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（score4）：受控消融 + 机制化理论互补，接站内 AI 科学家线；主词「Perturb-seq」待测，量可能偏低。",
+            "en": "Synthesis candidate: two search structures for AI-driven research, fan-out across 1,946 parallel agents on a Perturb-seq atlas and depth-first search with verifiers for AI maths; candidate term \"Perturb-seq\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://latent.space/p/ai-is-getting-good-at-math/",
+              "title": "Latent Space (Ankit Maloo): AI Is Getting Good at Math. Here's Why. — LLMs search depth-first, a verifier makes failure cheap, and 'negative hints' in a drafter/solver/verifier harness replace human taste (branching factor b^k)",
+              "brief": {
+                "zh": "Adds a new, mechanism-level angle beyond t711 (AI×数学 文化/职业/机构视角) and the already-filed MSR KLS item (人剪枝 agent 轨迹): this is the 'why it works' theory — depth-first search + verifier + drafter prompt carrying negative hints, with a concrete harness shape (Drafter/Solver/Verifier, standing adversarial",
+                "en": "Latent Space essay: LLMs search depth-first, a verifier makes failure cheap, and failed paths become negative hints in a drafter/solver/verifier harness; cost scales as b^k times compute, explaining why cybersecurity fell first. Partly speculative reconstruction.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
+              "title": "OpenAI × PerturbAI × Scripps: 'distributed biological reasoning' — 1,946 parallel GPT-Rosalind agents (one per perturbation) interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 min; 711x more literature than one agent, shuffle controls, blinded experts",
+              "brief": {
+                "zh": "Not in inbox/archive 20261022-24 or topics.md (previous skip was window-only, not duplicate). Mechanism-rich evidence for 'many narrow agents beat one big-context agent' — a controlled same-model/same-budget ablation of fan-out vs single-agent (literature coverage collapse as workload grows), plus a",
+                "en": "OpenAI, PerturbAI and Scripps: 1,946 parallel GPT-Rosalind agents, one per perturbation, interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 minutes, recovering 87.3% of testable source findings; a same-model ablation shows a single agent collapses on literature coverage (711x fewer refs), w",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://latent.space/p/ai-is-getting-good-at-math/",
+            "https://openai.com/index/scaling-ai-research-for-complex-biological-data"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-24T09:00:00+08:00",
       "label": {
@@ -741,57 +874,6 @@
           ]
         },
         {
-          "id": "t766",
-          "theme": "research",
-          "title": {
-            "zh": "AI 科学家的现实检验：Agent4Sci（Carlini 等）前沿 agent 在 20 个 ML-for-science 基准全部超 SOTA（Opus 平均 +10.4%）但几乎全靠 ML 工程技巧 × 微软研究院用「人剪枝 agent 轨迹」证明 31 年 KLS 猜想（同 token 预算消融）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：「agent 爬分 vs 人剪枝」对照鲜明，承接已发 AI×数学/科学两篇；缺核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：「agent 爬分 vs 人剪枝」对照鲜明，承接已发 AI×数学/科学两篇；缺核心词。",
-            "en": "Synthesis candidate: Agent4Sci (agents beat SOTA via ML tricks, not insight) + MSR KLS proof via human-pruned agent search; no clean core term.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.28763",
-              "title": "Automating ML for Science: Can Frontier Agents Climb Scientific Hills in the Wild?",
-              "brief": {
-                "zh": "深耕候选：Carlini 等的 Agent4Sci 在 20 个 ML-for-science 基准上让前沿 Agent 去刷已发表 SOTA，结果全都超了（Opus 平均 +10.4%），但几乎全靠 ML 工程小技巧而非领域洞见；三类失败（新颖性误判、资源用不满、塌缩成局部调参）很适合做分类图，正好回应“AI 科学家”叙事。",
-                "en": "Agent4Sci: frontier agents beat published SOTA on all 20 ML-for-science benchmarks (Opus +10.4% on average) but mostly through ML engineering tricks rather than domain insight; three failure types identified.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.microsoft.com/en-us/research/blog/solving-a-31-year-old-grand-challenge-in-mathematics-the-kls-conjecture/",
-              "title": "Microsoft Research: Solving the 31-year-old KLS conjecture with human-directed agentic search",
-              "brief": {
-                "zh": "Primary, mechanism-rich AI×math case with a rare equal-token-budget ablation: human pruning of agent trajectories vs end-to-end agent runs. Extends t711 AI×数学 (Tao/TheoPhysEval) and the human-in-loop agent-harness line; not in topics/archive (dedup'd KLS/kls-conjecture).",
-                "en": "Microsoft Research proves the 31-year-old KLS conjecture with parallel agents exploring ~100 trajectories while a researcher pruned them; an equal-token ablation favors human pruning over end-to-end agents.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.28763",
-            "https://www.microsoft.com/en-us/research/blog/solving-a-31-year-old-grand-challenge-in-mathematics-the-kls-conjecture/"
-          ]
-        },
-        {
           "id": "t767",
           "theme": "research",
           "title": {
@@ -1032,45 +1114,6 @@
             "zh": "/cn/blog/generative-engine-optimization-geo-trust-citation-chain/",
             "en": "/blog/generative-engine-optimization-geo-trust-citation-chain/"
           }
-        },
-        {
-          "id": "t760",
-          "theme": "research",
-          "title": {
-            "zh": "「越强的 AI 突破越快耗尽自己」：720 万篇论文 + 7.3 万条审稿意见——Transformer 后注意力急剧收窄、想法多样性更快枯竭、审稿置信度掉一整分（James Evans 组）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选，受众广、图好画；缺不歧义核心词，暂留 inbox。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选，受众广、图好画；缺不歧义核心词，暂留 inbox。",
-            "en": "Single-paper candidate: stronger AI breakthroughs exhaust follow-on idea diversity faster; no clean core term yet.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.27296",
-              "title": "Stronger artificial intelligence breakthroughs hasten their own exhaustion",
-              "brief": {
-                "zh": "新芽：科学学视角看 AI 领域本身——720 万篇论文、7.3 万条审稿意见表明 Transformer 之后注意力急剧收窄，越大的突破越快耗尽后续想法多样性，审稿人置信度还掉了一整分。受众面极广（研究者人人有感），“承载力上升但耗竭更陡”的曲线非常适合做 SVG 图。",
-                "en": "Using 7.2M papers and 73k reviews, finds attention narrowed sharply after the Transformer; bigger breakthroughs exhaust follow-on idea diversity faster and reviewer confidence dropped a full point.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.27296"
-          ]
         }
       ]
     },
@@ -1284,13 +1327,13 @@
             "ja": ""
           },
           "summary": {
-            "zh": "多来源综合候选：能力证据 + 人的反应 + 机构资金三线，承接已发 t657；待 Trends bot。 10-16 Trends（trends bot）：「AI mathematicians」7d 2.04 / 24h 0.00 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Tao 新文，第 4 个来源。 10-18 Trends（trends bot, 7d）：「Terence Tao」7d 3.53 vs gpts 2.47 过（余量薄）→ shortlisted（score4，综合：AI × 数学——Tao 文、Thompson、Simons、TheoPhysEval）。续源：AI×数学新案例，见 t766。",
+            "zh": "多来源综合候选：能力证据 + 人的反应 + 机构资金三线，承接已发 t657；待 Trends bot。 10-16 Trends（trends bot）：「AI mathematicians」7d 2.04 / 24h 0.00 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Tao 新文，第 4 个来源。 10-18 Trends（trends bot, 7d）：「Terence Tao」7d 3.53 vs gpts 2.47 过（余量薄）→ shortlisted（score4，综合：AI × 数学——Tao 文、Thompson、Simons、TheoPhysEval）。续源：AI×数学新案例，见 t766。续源：AI 数学机制解释，见 t777。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "多来源综合候选：能力证据 + 人的反应 + 机构资金三线，承接已发 t657；待 Trends bot。 10-16 Trends（trends bot）：「AI mathematicians」7d 2.04 / 24h 0.00 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Tao 新文，第 4 个来源。 10-18 Trends（trends bot, 7d）：「Terence Tao」7d 3.53 vs gpts 2.47 过（余量薄）→ shortlisted（score4，综合：AI × 数学——Tao 文、Thompson、Simons、TheoPhysEval）。续源：AI×数学新案例，见 t766。",
-            "en": "Synthesis candidate: AI x mathematics/physics (TheoPhysEval, Thompson, Simons $15M); awaiting Trends bot. 10-16 Trends (trends bot): AI mathematicians 7d 2.04 / 24h 0.00 vs gpts 65.33 / 13.50 — not passed, stays inbox. Follow-up: Terence Tao essay adds a fourth source. 10-18 Trends (trends bot, 7d): \"Terence Tao\" 7d 3.53 vs gpts 2.47 — passed (thin margin) → shortlisted (score 4; synthesis: AI x mathematics — Tao, Thompson, Simons, TheoPhysEval). Follow-up: KLS conjecture case, see t766.",
+            "zh": "多来源综合候选：能力证据 + 人的反应 + 机构资金三线，承接已发 t657；待 Trends bot。 10-16 Trends（trends bot）：「AI mathematicians」7d 2.04 / 24h 0.00 vs gpts 65.33 / 13.50 未过，留 inbox。续源：Tao 新文，第 4 个来源。 10-18 Trends（trends bot, 7d）：「Terence Tao」7d 3.53 vs gpts 2.47 过（余量薄）→ shortlisted（score4，综合：AI × 数学——Tao 文、Thompson、Simons、TheoPhysEval）。续源：AI×数学新案例，见 t766。续源：AI 数学机制解释，见 t777。",
+            "en": "Synthesis candidate: AI x mathematics/physics (TheoPhysEval, Thompson, Simons $15M); awaiting Trends bot. 10-16 Trends (trends bot): AI mathematicians 7d 2.04 / 24h 0.00 vs gpts 65.33 / 13.50 — not passed, stays inbox. Follow-up: Terence Tao essay adds a fourth source. 10-18 Trends (trends bot, 7d): \"Terence Tao\" 7d 3.53 vs gpts 2.47 — passed (thin margin) → shortlisted (score 4; synthesis: AI x mathematics — Tao, Thompson, Simons, TheoPhysEval). Follow-up: KLS conjecture case, see t766. Follow-up: mechanism essay on AI maths, see t777.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -1343,6 +1386,16 @@
                 "en": "Microsoft Research: Solving the 31-year-old KLS conjecture with human-directed agentic search",
                 "ja": ""
               }
+            },
+            {
+              "source": "media",
+              "url": "https://latent.space/p/ai-is-getting-good-at-math/",
+              "title": "Latent Space (Ankit Maloo): AI Is Getting Good at Math. Here's Why. — LLMs search depth-first, a verifier makes failure cheap, and 'negative hints' in a drafter/solver/verifier harness replace human taste (branching factor b^k)",
+              "brief": {
+                "zh": "Adds a new, mechanism-level angle beyond t711 (AI×数学 文化/职业/机构视角) and the already-filed MSR KLS item (人剪枝 agent 轨迹): this is the 'why it works' theory — depth-first search + verifier + drafter prompt carrying negative hints, with a concrete harness shape (Drafter/Solver/Verifier, standing adversarial",
+                "en": "Latent Space (Ankit Maloo): AI Is Getting Good at Math. Here's Why. — LLMs search depth-first, a verifier makes failure cheap, and 'negative hints' in a drafter/solver/verifier harness replace human taste (branching factor b^k)",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -1357,7 +1410,8 @@
             "https://www.simonsfoundation.org/news/simons-foundation-launches-15m-effort-to-help-mathematicians-navigate-ai-era/",
             "https://arxiv.org/abs/2610.16733",
             "https://terrytao.wordpress.com/2026/10/15/why-are-we-even-doing-all-this/",
-            "https://www.microsoft.com/en-us/research/blog/solving-a-31-year-old-grand-challenge-in-mathematics-the-kls-conjecture/"
+            "https://www.microsoft.com/en-us/research/blog/solving-a-31-year-old-grand-challenge-in-mathematics-the-kls-conjecture/",
+            "https://latent.space/p/ai-is-getting-good-at-math/"
           ]
         },
         {
@@ -7193,162 +7247,6 @@
           "blog": {
             "zh": "/cn/blog/jev-vs-llm-contractnli-same-scores-different-decisions/",
             "en": "/blog/jev-vs-llm-contractnli-same-scores-different-decisions/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-24T11:00:00+08:00",
-      "label": {
-        "zh": "9月24日 11:00",
-        "en": "Sep 24 11:00",
-        "ja": "9月24日 11:00"
-      },
-      "items": [
-        {
-          "id": "t002",
-          "theme": "models",
-          "title": {
-            "zh": "GPT-6 Sol & Luna（含 Astra 官方叙事）",
-            "en": "GPT-6 Sol and Luna: Spreading Astra-Class Intelligence Down the Cost Curve",
-            "ja": "GPT-6 Sol and Luna: Spreading Astra-Class Intelligence Down the Cost Curve"
-          },
-          "summary": {
-            "zh": "双模型+降错价；Astra 能力故事与客户首秀可作副线",
-            "en": "OpenAI launched GPT-6 Sol and Luna on 2026-09-22: 50% lower API prices versus GPT-5.6 promo rates, with Astra-generation capability and alignment gains. Pricing, benchmarks, caching, and the Astra/Enigma side story—for coding-agent routing.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "双模型+降错价；Astra 能力故事与客户首秀可作副线",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://openai.com/index/introducing-gpt-6-sol-and-luna/",
-              "title": "GPT-6 Sol and Luna",
-              "brief": {
-                "zh": "OpenAI GPT-6 dual-model launch — viral product/model release that resets competitive baselines.",
-                "en": "OpenAI GPT-6 dual-model launch — viral product/model release that resets competitive baselines.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/22/openai-launches-gpt-6-sol-and-luna/",
-              "title": "OpenAI launches GPT-6 Sol and Luna, boasting lower cost and fewer mistakes",
-              "brief": {
-                "zh": "双巨头同日级模型发布之一；价格与事实性同时下探，直接影响开发者选型与站内读者可写的「用哪家模型」角度。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=pNmfMi-yjZk",
-              "title": "Build an agentic software factory: deep dive",
-              "brief": {
-                "zh": "explore：Builder.io 官方 agentic software factory 深潜；1天·~2万播，续 t016 agent-native 产品线。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.cryptocellar.org/bgac/the-mvueh-break.html",
-              "title": "OpenAI GPT–6 Astra breaks Enigma message that has resisted solution since 2005",
-              "brief": {
-                "zh": "Capability milestone story: GPT-6 Astra claimed to crack a long-unsolved Enigma ciphertext — strong reader magnet.",
-                "en": "Capability milestone story: GPT-6 Astra claimed to crack a long-unsolved Enigma ciphertext — strong reader magnet.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "36kr",
-              "url": "https://eu.36kr.com/zh/p/3995195771588745",
-              "title": "GPT-6 Sol 对决 Claude Opus 5.5：同日上线，谁是性价比之王",
-              "brief": {
-                "zh": "中文读者向二次叙事；可给已 shortlisted 的 t001/t002 提供中文角度与引语，不必新开大题。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1woc97l/opus_55_vs_gpt6_sol_3d_pelican_riding_bike_test/",
-              "title": "Opus 5.5 vs GPT-6 Sol: 3D Pelican riding bike test in Blender",
-              "brief": {
-                "zh": "Viral side-by-side of dual flagship launches via classic 3D pelican bench — propagation test.",
-                "en": "Viral side-by-side of dual flagship launches via classic 3D pelican bench — propagation test.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "techcrunch",
-            "youtube",
-            "36kr",
-            "reddit"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://openai.com/index/introducing-gpt-6-sol-and-luna/",
-            "https://techcrunch.com/2026/09/22/openai-launches-gpt-6-sol-and-luna/",
-            "https://www.youtube.com/watch?v=1QNsdr-Qx_I",
-            "https://www.youtube.com/watch?v=QFxDF30qf_4",
-            "https://www.cryptocellar.org/bgac/the-mvueh-break.html",
-            "https://eu.36kr.com/zh/p/3995195771588745",
-            "https://www.reddit.com/r/ClaudeAI/comments/1wveyun/how_the_phonetophone_qr_file_transfer_got_built/ts/1wvbh1l/i_built_a_daw_ableton_with_claude_code_then_put/ts/1wvh6iy/i_gave_claude_code_the_ceo_job_for_my_free_chrome/ts/1woc97l/opus_55_vs_gpt6_sol_3d_pelican_riding_bike_test/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/gpt-6-sol-luna-and-astra/",
-            "en": "/blog/gpt-6-sol-luna-and-astra/"
-          }
-        },
-        {
-          "id": "t057",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Claude 发现类 CRISPR 新酶系统",
-            "en": "Claude \\\"Discovered\\\" a CRISPR-like Enzyme System: How to Read the Science Marketing, Not the Hype",
-            "ja": "Claude \\\"Discovered\\\" a CRISPR-like Enzyme System: How to Read the Science Marketing, Not the Hype"
-          },
-          "summary": {
-            "zh": "模型「发现科学」叙事：可复现性与研究 agent 边界",
-            "en": "Anthropic says Claude found ART (array-associated reverse transcriptases) under high-level direction. This post cross-checks the news post and technical report: search discovery vs unknown function, reproducibility limits, research-agent pipelines, and how builders should read the story.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "模型「发现科学」叙事：可复现性与研究 agent 边界",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system",
-              "title": "Claude discovers a novel enzyme system with CRISPR-like repeats",
-              "brief": {
-                "zh": "Anthropic research claim: Claude found a novel enzyme system with CRISPR-like repeats — rare science+model-capability signal beyond chat benchmarks.",
-                "en": "Anthropic research claim: Claude found a novel enzyme system with CRISPR-like repeats — rare science+model-capability signal beyond chat benchmarks.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
-          ],
-          "blog": {
-            "zh": "/cn/blog/claude-discovers-novel-enzyme-crispr-like-art/",
-            "en": "/blog/claude-discovers-novel-enzyme-crispr-like-art/"
           }
         }
       ]
