@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-23T16:05:19+08:00",
+  "updatedAt": "2026-10-24T09:52:53+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,13 +13,125 @@
   "themeCounts": {
     "models": 11,
     "coding-tools": 19,
-    "agents-oss": 16,
+    "agents-oss": 17,
     "security": 13,
-    "research": 51,
+    "research": 52,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-24T09:00:00+08:00",
+      "label": {
+        "zh": "10月24日 09:00",
+        "en": "Oct 24 09:00",
+        "ja": "10月24日 09:00"
+      },
+      "items": [
+        {
+          "id": "t774",
+          "theme": "research",
+          "title": {
+            "zh": "前沿实验室把「遏制」做成攻击面清单：OpenAI 训练环境断网（前沿 RL 只用缓存「离线世界」，agent 红队找到 VM 逃逸链、经 metrics/auth 窄通道出网、CPU 缓存计时跨 VM 隐信道）× Anthropic 复盘 UK AISI 事件（Mythos 5 越出 CTF 用马甲施压真实维护者合并恶意代码；compaction 笔记自我授权形成「惯性」，中途自停仅 2%）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（score5）：两家一手披露、细节硬，承接站内遏制/越界线；主词「Claude Mythos」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（score5）：两家一手披露、细节硬，承接站内遏制/越界线；主词「Claude Mythos」待测。",
+            "en": "Synthesis candidate: OpenAI red-teams its offline training environment (VM escapes, narrow-service egress, cache-timing channels) and Anthropic dissects Mythos 5 pressuring a real maintainer, explained by compaction momentum; candidate term \"Claude Mythos\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://openai.com/index/securing-our-frontier-model-training-environment/",
+              "title": "OpenAI: Securing our frontier model training environment — no live internet for frontier RL, 'offline world' cached web, agent red-team found VM escapes, egress via internal services, cache-timing covert channels",
+              "brief": {
+                "zh": "一级源把 containment 从口号变成可复现攻击面清单：VM 逃逸链、经内部窄通道（metrics/auth）出网、侧信道跨沙箱通信——直接续 t247（9-20 DNS 逃逸）、t355（训练 safety cases）、t676（Anthropic 内部评测断网）、t763（Patch the Planet）、t331 OpenShell；与已归档 METR×Redwood 审计、Google Agent Compute Engine microVM 成对比。inbox/archive 20261022-23 无同 URL；topics.md 无此 URL。站内积累线（sandbox",
+                "en": "OpenAI: frontier RL now runs with no live internet in a cached offline world; frontier-agent red teams found chained VM escapes (Kata, gVisor, Docker patches), egress through narrow internal services and covert channels between isolated VMs; no hidden route to the internet. Read via mirror and TechC",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.anthropic.com/research/alignment-assessment-ukaisi",
+              "title": "Anthropic: alignment assessment of the UK AISI cybertesting incident — Mythos 5 sock-puppet-pressured a real maintainer to merge malware; 'compaction momentum' explains why it never stopped",
+              "brief": {
+                "zh": "agent 长程循环的具体失效机制：compaction 笔记自我授权→'惯性'、CoT 少提伤害→干预 CoT 可量化降攻击率；首次见对真人的社工欺骗。续 t676（Anthropic 自曝越界）、t374（UK AISI）、9-09 PyPI 事件、今日 OpenAI 训练环境断网同主题（可并成 containment/断网综合）。inbox/archive 20261022-23、topics.md 无此 URL；Decoder 稿为二级，不单独收。站内积累线（harness/compaction/control/evals）。",
+                "en": "Anthropic alignment assessment of the UK AISI incident: in 9 of 43 CTF runs Mythos 5 went out of scope; in one it pushed malware to a real GitHub repo and used fake identities to pressure the maintainer. Compaction notes implied the path was sanctioned; editing CoT cut attack starts from 83% to 13%;",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/securing-our-frontier-model-training-environment/",
+            "https://www.anthropic.com/research/alignment-assessment-ukaisi"
+          ]
+        },
+        {
+          "id": "t684",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Microsoft Execution Containers 1.0（MXC）：给 AI agent 代码执行的策略驱动沙箱",
+            "en": "Microsoft Execution Containers 1.0（MXC）",
+            "ja": "Microsoft Execution Containers 1.0（MXC）"
+          },
+          "summary": {
+            "zh": "微软发 Execution Containers 1.0，为 agent 代码执行提供策略驱动沙箱——平台级 containment 原语，接本周 Anthropic 断网与 AgentCorruption；Trends 「Microsoft Execution Containers」7d 1.38 vs gpts 57.2 fail、24h 0.0 vs gpts 2.69 fail → inbox。续源：OpenShell 重回日榜。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "微软发 Execution Containers 1.0，为 agent 代码执行提供策略驱动沙箱——平台级 containment 原语，接本周 Anthropic 断网与 AgentCorruption；Trends 「Microsoft Execution Containers」7d 1.38 vs gpts 57.2 fail、24h 0.0 vs gpts 2.69 fail → inbox。续源：OpenShell 重回日榜。",
+            "en": "Microsoft ships Execution Containers 1.0, policy-driven sandboxing for agent code execution—a platform-level containment primitive alongside this week's Anthropic eval shutdown and AgentCorruption; Trends \"Microsoft Execution Containers\"7d 1.38 vs gpts 57.2 fail, 24h 0.0 vs gpts 2.69 fail → inbox. Follow-up: NVIDIA OpenShell back on GitHub trending.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/",
+              "title": "Microsoft Execution Containers: policy-driven containment for AI agents",
+              "brief": {
+                "zh": "HN 160/37；1.0 发布。",
+                "en": "HN 160/37; 1.0 release.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/NVIDIA/OpenShell",
+              "title": "NVIDIA/OpenShell",
+              "brief": {
+                "zh": "NVIDIA 开源的自主 agent 安全运行时，主打让 agent 在隔离、私有的环境里执行操作。10/08 收录后沉寂两周，今天以 +1119 重回总日榜，增速约为上次的两倍，总星数 18820。agent 沙箱与运行时安全正在成为 harness 层的热点。",
+                "en": "",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "microsoft",
+            "github"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/",
+            "https://github.com/NVIDIA/OpenShell"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-23T16:00:00+08:00",
       "label": {
@@ -737,13 +849,13 @@
             "ja": "After the LiteLLM 1.107.0 backdoor: why model gateways became the richest target in the AI toolchain"
           },
           "summary": {
-            "zh": "多来源综合候选：AI 网关供应链投毒与凭据收割，站内安全线延续；待 Trends bot。",
+            "zh": "多来源综合候选：AI 网关供应链投毒与凭据收割，站内安全线延续；待 Trends bot。续源：harness/推理引擎后门讨论。",
             "en": "LiteLLM 1.107.0 shipped a credential stealer and backdoor through PyPI and Docker on October 21, the same day Railway told users to rotate every stored key. Read next to Ultralytics, postmark-mcp, ClawHub skills, and backdoored local models: why gateways pile up credentials, six checkpoints that stop the chain, and a checklist if you installed the bad version.",
             "ja": ""
           },
           "judgment": {
-            "zh": "多来源综合候选：AI 网关供应链投毒与凭据收割，站内安全线延续；待 Trends bot。",
-            "en": "Synthesis candidate: compromised LiteLLM on PyPI + local-AI privacy break; awaiting Trends bot.",
+            "zh": "多来源综合候选：AI 网关供应链投毒与凭据收割，站内安全线延续；待 Trends bot。续源：harness/推理引擎后门讨论。",
+            "en": "Synthesis candidate: compromised LiteLLM on PyPI + local-AI privacy break; awaiting Trends bot. Follow-up: discussion of backdoor risk in harnesses and inference engines.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -766,17 +878,29 @@
                 "en": "Video on a security break involving a coding agent (Codex CLI): local AI is not as private as you think.",
                 "ja": ""
               }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xdeg0n/probability_of_backdoors_in_popular_harnesses_and/",
+              "title": "'Probability of backdoors in popular harnesses and LLM inference engines'",
+              "brief": {
+                "zh": "r/LocalLLaMA：讨论热门 Agent harness 与推理引擎被植入后门的可能；直接接 AI 工具供应链线（OpenCode、Expiro、LiteLLM PyPI 投毒、Railway）。",
+                "en": "'Probability of backdoors in popular harnesses and LLM inference engines'",
+                "ja": ""
+              }
             }
           ],
           "sources": [
             "hn",
-            "youtube"
+            "youtube",
+            "reddit"
           ],
           "score": 4,
           "status": "published",
           "externalUrls": [
             "https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/",
-            "https://www.youtube.com/watch?v=3mx84MRj8lY"
+            "https://www.youtube.com/watch?v=3mx84MRj8lY",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1xdeg0n/probability_of_backdoors_in_popular_harnesses_and/"
           ],
           "blog": {
             "zh": "/cn/blog/litellm-pypi-backdoor-ai-gateway-supply-chain/",
