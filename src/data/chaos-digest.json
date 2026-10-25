@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T10:05:36+08:00",
+  "updatedAt": "2026-10-25T16:04:38+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,199 @@
     "other"
   ],
   "themeCounts": {
-    "models": 9,
-    "coding-tools": 20,
-    "agents-oss": 16,
+    "models": 11,
+    "coding-tools": 18,
+    "agents-oss": 15,
     "security": 12,
-    "research": 51,
+    "research": 47,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-25T16:00:00+08:00",
+      "label": {
+        "zh": "10月25日 16:00",
+        "en": "Oct 25 16:00",
+        "ja": "10月25日 16:00"
+      },
+      "items": [
+        {
+          "id": "t050",
+          "theme": "research",
+          "title": {
+            "zh": "Agensh: Scaling Organizational Intelligence to 1,024 Agents",
+            "en": "Agensh: Scaling Organizational Intelligence to 1,024 Agents",
+            "ja": "Agensh: Scaling Organizational Intelligence to 1,024 Agents"
+          },
+          "summary": {
+            "zh": "1024 agents 组织智能；多 agent 扩展上限 10-13 站长确认：单篇论文解读候选，开写当天测主词（主词：Agensh）。续源：Agensh 开源与新数据，对照单循环路线见 t780。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "1024 agents 组织智能；多 agent 扩展上限 10-13 站长确认：单篇论文解读候选，开写当天测主词（主词：Agensh）。续源：Agensh 开源与新数据，对照单循环路线见 t780。",
+            "en": "Oct 13 (site owner): valid single-paper deep-read candidate; test own main term \"Agensh\" on the writing day (status stays inbox). Follow-up: Agensh open-sourced with GPT-6.1-sol data; see t780 for the single-loop contrast.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.26781",
+              "title": "Agensh: Scaling Organizational Intelligence to 1,024 Agents",
+              "brief": {
+                "zh": "Furu Wei 团队今日放出的千级多智能体 harness 扩展论文，直指中心编排器是当前多 agent 扩展瓶颈。与站内 google/ax、Orca、Octop 等「舰队编排」选题同频，适合写「组织智能怎么扩到 1024」信号稿。",
+                "en": "A multi-agent system can reduce latency on complex tasks by executing work concurrently. Several pioneering harness frameworks support multi-agent systems. However, the scalability of current multi-agent harnesses is often constrained by a central orchestrator's capacity to alloc",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
+              "title": "Microsoft Research 开源 Agensh：无中心 orchestrator 的去中心化多 agent harness（1→1,024 agents，ProgramBench）",
+              "brief": {
+                "zh": "站内积累线（agent harness/loop）：与今早 Decoder ‘fancy harness 更贵不更好’、已提交的 Anthropic ‘fold subagents into main loop’（单循环 vs 编排）、Latent Space dynamic workflows 构成‘去中心化 vs 编排 vs 单循环’三方对照。topics.md 已有 t050（Agensh 论文，站长 10-13 确认开写候选）——本条不是新话题，新增事实=10-24 开源 + GPT-6.1-sol 新数据 + 循环/服务架构细节 + 与 Claude Code agent teams",
+                "en": "topics.md 有 t050（Agensh 论文，站长 10-13 确认开写候选）——本条不是新话题，新增事实=10-24 开源 + GPT-6.1-sol 新数据 + 循环/服务架构细节 + 与 Claude Code agent teams/Kimi Swarm/Copilot fleet 对比，建议并入 t050 而非另开题。tag exploit-candidate。",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.26781",
+            "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/"
+          ]
+        },
+        {
+          "id": "t769",
+          "theme": "models",
+          "title": {
+            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。",
+            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term. Follow-up: Claude Duet safety architecture, approvals outside the model and credential isolation.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://x.com/claudeai/status/2113360845409583307",
+              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
+              "brief": {
+                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
+                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
+              "brief": {
+                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
+                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://claude.com/blog/claude-duet-safety-privacy-and-security",
+              "title": "Claude Duet Safety, Privacy, and Security（Anthropic 官方拆解：审批卡 + 模型外分类器 + 凭证不进模型）",
+              "brief": {
+                "zh": "站内积累线（agent 安全/控制）：与已归档 1Password for Agents（10-23）、Claude auto mode（10-23）、Managed Agents 凭证代理同一条线，但这篇是 Anthropic 一手的‘审批在模型外 + 凭证隔离 + 浏览器边界’完整架构，机制信息密度高。非本窗口新发（10-23 08:00 北京时间发布），前几轮未归档（topics.md 仅有 Duet 产品发布 t765），故补录。tag exploit-candidate。",
+                "en": "tag exploit-candidate。",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://x.com/claudeai/status/2113360845409583307",
+            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+            "https://claude.com/blog/claude-duet-safety-privacy-and-security"
+          ]
+        },
+        {
+          "id": "t780",
+          "theme": "models",
+          "title": {
+            "zh": "agent 要不要拆：单循环 + skills vs 子 agent 编排 vs 去中心化——Anthropic Applied AI 称带 skills 的单循环常优于子 agent 设计（某客户快约 2×，Claude Code 系统提示砍 80%+，给出何时才该用子 agent 与分阶段合并法）× MSR 开源 Agensh（无中心 orchestrator，1→1,024 agent，ProgramBench 最难 5 题 19.31%→28.78%）× GVS5H（HN：5 个 Qwen3.8-27B 编排后号称追平 Fable 5）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。",
+            "en": "Synthesis candidate: fold subagents into one skills-equipped loop (Anthropic) vs decentralized 1,024-agent harness (MSR Agensh) vs five small models orchestrated to match a frontier model (GVS5H); no clean core term.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://github.com/slee-persis/GVS5H",
+              "title": "'Five Qwen3.8-27B models match Fable 5 Using GVS5H Harness'",
+              "brief": {
+                "zh": "HN 141/48：用 GVS5H harness 把 5 个 Qwen3.8-27B 小模型编排起来，号称追平 Fable 5；harness 优先于模型规模的证据，可接 Qwen3.8 本地编码 Agent、harness 工程与上下文压缩线（需核实评测口径，避免基准虚高）。",
+                "en": "HN 141/48: the GVS5H harness orchestrates five Qwen3.8-27B models and claims to match Fable 5; evaluation setup unverified.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
+              "title": "Building agents: When to fold subagents into your main agent loop（Anthropic Applied AI：单循环 + skills 常优于子 agent 编排）",
+              "brief": {
+                "zh": "站内积累线：agent loop / harness / skills 的一手官方指导，与今早 Decoder ‘fancy harness 更贵不更好’、10-23 Agent Skills 捐给 AAIF、Latent Space dynamic workflows 形成对照/张力（编排 vs 单循环）。10-22 发布，前几轮未归档，补录。tag exploit-candidate。",
+                "en": "Anthropic Applied AI: a single agent loop with skills often beats subagent designs on quality, cost and latency (one customer ~2x faster; Claude Code system prompt cut 80%+); lists when subagents still pay off and a staged merge path driven by end-to-end evals.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
+              "title": "Microsoft Research 开源 Agensh：无中心 orchestrator 的去中心化多 agent harness（1→1,024 agents，ProgramBench）",
+              "brief": {
+                "zh": "站内积累线（agent harness/loop）：与今早 Decoder ‘fancy harness 更贵不更好’、已提交的 Anthropic ‘fold subagents into main loop’（单循环 vs 编排）、Latent Space dynamic workflows 构成‘去中心化 vs 编排 vs 单循环’三方对照。topics.md 已有 t050（Agensh 论文，站长 10-13 确认开写候选）——本条不是新话题，新增事实=10-24 开源 + GPT-6.1-sol 新数据 + 循环/服务架构细节 + 与 Claude Code agent teams",
+                "en": "Microsoft Research open-sources Agensh: no central orchestrator, identical workers on a 5-step claim/verify/merge loop over Gitea and Mattermost; ProgramBench hard-5 average 19.31% (1 agent) to 28.78% (128), with emergent reviewers and integrators at scale. Read via MarkTechPost plus README.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/slee-persis/GVS5H",
+            "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
+            "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-25T10:00:00+08:00",
       "label": {
@@ -781,206 +965,6 @@
             "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
             "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
             "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors"
-          ]
-        },
-        {
-          "id": "t769",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。",
-            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://x.com/claudeai/status/2113360845409583307",
-              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
-              "brief": {
-                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
-                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
-              "brief": {
-                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
-                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://x.com/claudeai/status/2113360845409583307",
-            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-22T15:00:00+08:00",
-      "label": {
-        "zh": "10月22日 15:00",
-        "en": "Oct 22 15:00",
-        "ja": "10月22日 15:00"
-      },
-      "items": [
-        {
-          "id": "t722",
-          "theme": "research",
-          "title": {
-            "zh": "中文 AI 腔「不是 X，而是 Y」：商用模型使用密度为人类 2.5–9.2 倍，过半「没错但没必要」，RM/LLM judge 与 SFT/DPO 还在放大",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。 10-17 Trends（trends bot）：「LLM writing tic」7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 未过；「不是而是」CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0（CN 数据不可靠，不作结论），留 inbox。续源：AI 文风难读的心理语言学量化与训练归因，与中文 AI 腔论文成两篇综合。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。 10-17 Trends（trends bot）：「LLM writing tic」7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 未过；「不是而是」CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0（CN 数据不可靠，不作结论），留 inbox。续源：AI 文风难读的心理语言学量化与训练归因，与中文 AI 腔论文成两篇综合。",
-            "en": "Single-paper candidate on the Mandarin \"not X but Y\" LLM writing tic; awaiting Trends bot. 10-17 Trends (trends bot): \"LLM writing tic\" 7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 — not passed; \"是而是\" CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0 (CN data unreliable, inconclusive), stays inbox. Follow-up: why AI-generated language is hard to understand; pairs with the Mandarin writing-tic paper.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.22249",
-              "title": "Not X, but When: Diagnosing a Mandarin LLM Writing Tic through Contextual Appropriateness",
-              "brief": {
-                "zh": "深耕候选：专门研究中文 AI 腔\"不是X，而是Y\"。五个商用模型的使用密度是人类的 2.5–9.2 倍，过半用法\"没错但没必要\"。reward model 和 LLM judge 在语境不支持时照样偏爱这个句式，SFT/DPO 还会把频率推高。中文读者一看就有共鸣，从语用学失误一直追到奖励偏好，机制链条完整。",
-                "en": "Five commercial models use the Mandarin 'not X, but Y' construction 2.5–9.2x more than humans, over half unnecessarily; reward models and LLM judges still prefer it, and SFT/DPO raise its frequency.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.29162",
-              "title": "Why is AI-generated language so hard to understand?",
-              "brief": {
-                "zh": "新芽：Mahowald 组用心理语言学指标量化了“AI 文风难读”这个大家都有的体感：9 个前沿模型比人类更爱用长依存、名词堆叠、低频 n-gram。机制假说很漂亮——数学/代码/推理训练推高信息密度而非沟通成功，长度惩罚微调就能复现这种偏离，适合画“优化目标→语言特征”的示意图。",
-                "en": "Why is AI-generated language so hard to understand?",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.22249",
-            "https://arxiv.org/abs/2610.29162"
-          ]
-        },
-        {
-          "id": "t744",
-          "theme": "research",
-          "title": {
-            "zh": "Progressive Misalignment：无害数据与提示下的递归自蒸馏，多轮后 Qwen3/Phi-4 越来越不安全（模拟良性用户反馈亦然）",
-            "en": "Progressive Misalignment",
-            "ja": "Progressive Misalignment"
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：直接打在自蒸馏/自我改进热点的安全侧；待 Trends bot。续源：JOLT 自教 RL，补自蒸馏的能力侧。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：直接打在自蒸馏/自我改进热点的安全侧；待 Trends bot。续源：JOLT 自教 RL，补自蒸馏的能力侧。",
-            "en": "Single-paper candidate: benign recursive self-distillation yields progressive misalignment; awaiting Trends bot. Follow-up: JOLT trains the self-teacher too.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.22467",
-              "title": "Progressive Misalignment Can Emerge from Benign Recursive Self-Distillation",
-              "brief": {
-                "zh": "新芽：自蒸馏（模型学“带额外提示时的自己”）正热，这篇发现即使数据和提示都无害，递归自蒸馏多轮后 Qwen3/Phi-4 会越来越不安全，作者称之为 Progressive Misalignment；换成模拟良性用户反馈也会出现。和自我训练/RSI 话题直接相关，但角度是安全失效而非又一个 harness。",
-                "en": "Even with benign data and prompts, recursive self-distillation makes Qwen3/Phi-4 progressively less safe over rounds; simulated benign user feedback shows the same effect.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://arxiv.org/abs/2610.10447",
-              "title": "Perplexity × NVIDIA JOLT: training the self-teacher too (joint on-policy learning and teaching)",
-              "brief": {
-                "zh": "Mechanism-rich RL post-training for agentic tasks (AppWorld/Terminal-Bench with privileged verifier context). It extends t744 self-distillation / t649 on-policy distillation with a 'reward-consistent teacher' angle. The paper is from Oct 7; the coverage is new today. Not in topics/archive/inbox (ded",
-                "en": "Perplexity × NVIDIA JOLT: training the self-teacher too (joint on-policy learning and teaching)",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.22467",
-            "https://arxiv.org/abs/2610.10447"
-          ]
-        },
-        {
-          "id": "t767",
-          "theme": "research",
-          "title": {
-            "zh": "coding agent 不会留后路：RegretBench（205 个真实「早知道先备份」翻车任务）——完成率 86%、事前备份仅 15%；BackUpper 在 harness 层逐 tool call 快照，$0.014/任务",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：失败模式好讲、修复便宜，站内 harness 线；缺高量核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：失败模式好讲、修复便宜，站内 harness 线；缺高量核心词。",
-            "en": "Single-paper candidate: coding agents rarely back up before risky actions (RegretBench); harness-level snapshots fix it cheaply.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.28934",
-              "title": "Back Up Before You Regret: Measuring Backup Awareness and Automating Backup in Coding Agents",
-              "brief": {
-                "zh": "新芽：RegretBench 从真实“早知道先备份”的翻车帖里抽了 205 个任务，前沿编码 Agent 任务完成率 86% 但事前备份只有 15%——“能干活≠会留后路”是个很好讲的失败模式。BackUpper 在 harness 层逐个 tool call 拦截快照，成本 $0.014/任务，核心词“backup awareness / 可逆性”很好记。",
-                "en": "RegretBench: 205 tasks from real regret posts; frontier coding agents complete 86% but back up beforehand only 15%; BackUpper snapshots per tool call at $0.014 per task.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.28934"
           ]
         }
       ]
@@ -6958,198 +6942,6 @@
           "blog": {
             "zh": "/cn/blog/specharness-spec-holds-the-pen/",
             "en": "/blog/specharness-spec-holds-the-pen/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-25T15:00:00+08:00",
-      "label": {
-        "zh": "9月25日 15:00",
-        "en": "Sep 25 15:00",
-        "ja": "9月25日 15:00"
-      },
-      "items": [
-        {
-          "id": "t005",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "alibaba/open-code-review：确定性流水线 + LLM Agent 评审",
-            "en": "Alibaba’s Open Code Review: What Enterprises Can Copy from a Deterministic Pipeline Plus LLM Agents",
-            "ja": "Alibaba’s Open Code Review: What Enterprises Can Copy from a Deterministic Pipeline Plus LLM Agents"
-          },
-          "summary": {
-            "zh": "企业级 AI Code Review 落地样本（周增过万星）",
-            "en": "A practical teardown of alibaba/open-code-review: deterministic engineering owns file selection and positioning; the agent owns deep reasoning. Covers AACR-Bench, delegation mode, CI hooks, copyable patterns, and limits.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "企业级 AI Code Review 落地样本（周增过万星）",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/alibaba/open-code-review",
-              "title": "alibaba/open-code-review",
-              "brief": {
-                "zh": "Hybrid deterministic and LLM-agent code review with line-level security comments.",
-                "en": "Hybrid deterministic and LLM-agent code review with line-level security comments.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://github.com/alibaba/open-code-review"
-          ],
-          "blog": {
-            "zh": "/cn/blog/alibaba-open-code-review-deterministic-pipeline/",
-            "en": "/blog/alibaba-open-code-review-deterministic-pipeline/"
-          }
-        },
-        {
-          "id": "t007",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "affaan-m/ECC：Agent harness 性能/记忆/安全优化",
-            "en": "ECC: A Verifiable Harness Layer for Claude Code, Codex, and Cursor",
-            "ja": "ECC: A Verifiable Harness Layer for Claude Code, Codex, and Cursor"
-          },
-          "summary": {
-            "zh": "Harness 优化系统，适配 Claude Code/Codex/Cursor",
-            "en": "A teardown of affaan-m/ECC—how Skills, Hooks, Instincts, Memory Vault, and AgentShield tackle performance, memory, and security; what actually plugs into Claude Code/Codex/Cursor; what enterprises can copy versus roadmap hype.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Harness 优化系统，适配 Claude Code/Codex/Cursor",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/affaan-m/ECC",
-              "title": "affaan-m/ECC",
-              "brief": {
-                "zh": "Agent harness performance system spanning skills, memory, security and research.",
-                "en": "Agent harness performance system spanning skills, memory, security and research.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://github.com/affaan-m/ECC"
-          ],
-          "blog": {
-            "zh": "/cn/blog/ecc-agent-harness-optimization/",
-            "en": "/blog/ecc-agent-harness-optimization/"
-          }
-        },
-        {
-          "id": "t052",
-          "theme": "research",
-          "title": {
-            "zh": "Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents",
-            "en": "Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents",
-            "ja": "Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents"
-          },
-          "summary": {
-            "zh": "Harness 扩张 vs 堆上下文；对照 ECC/skills",
-            "en": "A deep read of arXiv:2609.26760 Growing Harness—turning recurring control into executable code via task feedback—contrasted with “just stuff more context” and with in-site harness / Skills / deterministic-pipeline narratives.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Harness 扩张 vs 堆上下文；对照 ECC/skills",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.26760",
-              "title": "Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents",
-              "brief": {
-                "zh": "标题即论点：别再把控制策略塞进每次上下文，而要长成可复用的 specialist harness。与站内 ECC / skills / harness-sdk 热度强共振，是「上下文膨胀 vs harness 资产化」的清晰论文话术源。",
-                "en": "Large language model (LLM) agents often handle streams of related tasks, yet standard harnesses repeatedly ask the model to reconstruct the same control decisions inside each task's context. We study whether task feedback can instead turn recurring control into reusable executabl",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.26760"
-          ],
-          "blog": {
-            "zh": "/cn/blog/grow-the-harness-not-the-context/",
-            "en": "/blog/grow-the-harness-not-the-context/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-25T10:00:00+08:00",
-      "label": {
-        "zh": "9月25日 10:00",
-        "en": "Sep 25 10:00",
-        "ja": "9月25日 10:00"
-      },
-      "items": [
-        {
-          "id": "t055",
-          "theme": "research",
-          "title": {
-            "zh": "Jev-Mem: System-One-Controlled Agentic Memory for Efficient AI Agents",
-            "en": "Don’t Default Memory Control to an Autoregressive LLM: Reading Jev-Mem’s System-One Memory Architecture",
-            "ja": "Don’t Default Memory Control to an Autoregressive LLM: Reading Jev-Mem’s System-One Memory Architecture"
-          },
-          "summary": {
-            "zh": "与站内 Jev 选题同频：agentic memory",
-            "en": "A deep read of arXiv:2609.23986 Jev-Mem—separating memory organize/retrieve/stop into a System-One control plane—contrasted with this site’s Jev decision line and Growing Harness “sink control into code,” with checked LoCoMo numbers and a reusable design checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "与站内 Jev 选题同频：agentic memory",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "paperswithcode",
-              "url": "https://arxiv.org/abs/2609.23986",
-              "title": "Jev-Mem: System-One-Controlled Agentic Memory for Efficient AI Agents",
-              "brief": {
-                "zh": "趋势榜上的「Jev」命名记忆系统：把记忆路由/构图从慢速 LLM 生成挪到 System-One 控制面，LoCoMo 准确率升且构建快 6.6×。与站内正在撰写的 Jev×Claude Code 选题强联动，可作「Jev 范式扩到记忆层」的论文侧证据。",
-                "en": "Agentic memory is becoming essential for long-horizon AI agents, yet many existing systems rely on autoregressive LLMs to control how memories are organized, retrieved, and used, placing expensive generation on the critical path of memory operations.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "paperswithcode"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.23986"
-          ],
-          "blog": {
-            "zh": "/cn/blog/jev-mem-system-one-agentic-memory/",
-            "en": "/blog/jev-mem-system-one-agentic-memory/"
           }
         }
       ]
