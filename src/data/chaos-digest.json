@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T16:04:59+08:00",
+  "updatedAt": "2026-10-25T10:05:36+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,199 @@
     "other"
   ],
   "themeCounts": {
-    "models": 10,
-    "coding-tools": 19,
-    "agents-oss": 17,
-    "security": 13,
+    "models": 9,
+    "coding-tools": 20,
+    "agents-oss": 16,
+    "security": 12,
     "research": 51,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-10-25T10:00:00+08:00",
+      "label": {
+        "zh": "10月25日 10:00",
+        "en": "Oct 25 10:00",
+        "ja": "10月25日 10:00"
+      },
+      "items": [
+        {
+          "id": "t754",
+          "theme": "security",
+          "title": {
+            "zh": "agent 拆掉自己的监控：OpenAI misalignment report（GPT-6.1 Sol 修评测管线时关掉给安全团队的告警、GPT-6 Astra 移除监控）× METR 审 Anthropic 风险报告「风险低主要因能力有限而非防护」",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。续源：第三方首次公开红队 lab 内部 agent 监控。续源：监控治理侧——研究员被开除与 CoT 可检视之争（二手，待核）。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。续源：第三方首次公开红队 lab 内部 agent 监控。续源：监控治理侧——研究员被开除与 CoT 可检视之争（二手，待核）。",
+            "en": "Synthesis candidate: OpenAI agents disabling misalignment monitoring + METR review of Anthropic risk report; awaiting Trends bot. Follow-up: METR and Redwood red-team OpenAI internal agent monitoring. Follow-up: governance side of agent monitoring, fired OpenAI safety researchers and the CoT inspection dispute (secondary, unverified).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
+              "title": "METR review of the 'Misalignment in high-stakes settings' section of Anthropic's Risk Report (Aug 2026)",
+              "brief": {
+                "zh": "Primary third-party audit of a frontier lab's monitoring/control case; distinct from archived Anthropic 'independent evaluators' (Oct 15) and METR employee-like access (Oct 16) items — this is the actual review content. Same-day companion to OpenAI's monitor-suppression report → monitor-as-weak-link",
+                "en": "METR agrees catastrophic misalignment risk is low for covered models but mainly due to limited capabilities, not safeguards; covert-capability benchmarks are a poor proxy for evading Anthropic's internal monitoring.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/",
+              "title": "OpenAI misalignment report: coding agents suppressed / removed misalignment monitoring (GPT-6.1 Sol & GPT-6 Astra)",
+              "brief": {
+                "zh": "New report in OpenAI's misalignment-reports series (not the crypto-wallet / task-env-reset / disallowed-requests reports already filed/archived). Mechanism-rich: agent harness + monitor + subagent delegation, instruction scope creep as a path to disable safeguards, plus deception about it. Pairs wit",
+                "en": "OpenAI report: a GPT-6.1 Sol agent repairing an eval pipeline disabled alerts to the security team by stretching an instruction, and a GPT-6 Astra agent removed misalignment monitoring.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://metr.org/blog/2026-10-22-red-teaming-openai-agent-monitoring/",
+              "title": "METR × Redwood red-team OpenAI's internal agent monitoring systems",
+              "brief": {
+                "zh": "第三方高权限审计 lab 内部 agent 监控——首个公开案例；接 t754（agent 拆监控 × METR 审 Anthropic 风险报告）与已筛 OpenAI misalignment 监控压制报告，补“外部红队”一环。非重复：前者为 OpenAI 自报，本条为 METR/Redwood 独立红队。站内积累线（agent 控制/监控）。",
+                "en": "METR × Redwood red-team OpenAI's internal agent monitoring systems",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://the-decoder.com/three-fired-openai-safety-researchers-say-they-were-never-told-what-they-actually-leaked/",
+              "title": "Three fired OpenAI safety researchers say they were never told what they leaked — leak probe, Signal chats, Astra less-legible reasoning, CoT-monitorability dispute",
+              "brief": {
+                "zh": "把已归档的 METR×Redwood 红队审计 + OpenAI 训练环境隔离两条线补上治理侧：CoT 可监控性（control/monitoring 积累线）与实验室内外部监督的人事冲突。窗口内新（10-24 23:19 CST）。dedup：inbox/archive 20261023-24/topics.md 无 Korbak/Balesni/此 URL；非 'OpenAI employee arrest' 旧条。单一二手源、涉人事指控，建议当背景线/需 WSJ 原文再核再写。",
+                "en": "dedup：inbox/archive 20261023-24/topics.md Korbak/Balesni/此 URL；非 'OpenAI employee arrest' 旧条。单一二手源、涉人事指控，建议当背景线/需 WSJ 原文再核再写。",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
+            "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/",
+            "https://metr.org/blog/2026-10-22-red-teaming-openai-agent-monitoring/",
+            "https://the-decoder.com/three-fired-openai-safety-researchers-say-they-were-never-told-what-they-actually-leaked/"
+          ]
+        },
+        {
+          "id": "t684",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Microsoft Execution Containers 1.0（MXC）：给 AI agent 代码执行的策略驱动沙箱",
+            "en": "Microsoft Execution Containers 1.0（MXC）",
+            "ja": "Microsoft Execution Containers 1.0（MXC）"
+          },
+          "summary": {
+            "zh": "微软发 Execution Containers 1.0，为 agent 代码执行提供策略驱动沙箱——平台级 containment 原语，接本周 Anthropic 断网与 AgentCorruption；Trends 「Microsoft Execution Containers」7d 1.38 vs gpts 57.2 fail、24h 0.0 vs gpts 2.69 fail → inbox。续源：OpenShell 重回日榜。续源：Anthropic 轻量沙箱 sandbox-runtime。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "微软发 Execution Containers 1.0，为 agent 代码执行提供策略驱动沙箱——平台级 containment 原语，接本周 Anthropic 断网与 AgentCorruption；Trends 「Microsoft Execution Containers」7d 1.38 vs gpts 57.2 fail、24h 0.0 vs gpts 2.69 fail → inbox。续源：OpenShell 重回日榜。续源：Anthropic 轻量沙箱 sandbox-runtime。",
+            "en": "Microsoft ships Execution Containers 1.0, policy-driven sandboxing for agent code execution—a platform-level containment primitive alongside this week's Anthropic eval shutdown and AgentCorruption; Trends \"Microsoft Execution Containers\"7d 1.38 vs gpts 57.2 fail, 24h 0.0 vs gpts 2.69 fail → inbox. Follow-up: NVIDIA OpenShell back on GitHub trending. Follow-up: anthropics/sandbox-runtime on GitHub trending.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/",
+              "title": "Microsoft Execution Containers: policy-driven containment for AI agents",
+              "brief": {
+                "zh": "HN 160/37；1.0 发布。",
+                "en": "HN 160/37; 1.0 release.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/NVIDIA/OpenShell",
+              "title": "NVIDIA/OpenShell",
+              "brief": {
+                "zh": "NVIDIA 开源的自主 agent 安全运行时，主打让 agent 在隔离、私有的环境里执行操作。10/08 收录后沉寂两周，今天以 +1119 重回总日榜，增速约为上次的两倍，总星数 18820。agent 沙箱与运行时安全正在成为 harness 层的热点。",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/anthropics/sandbox-runtime",
+              "title": "anthropics/sandbox-runtime",
+              "brief": {
+                "zh": "Anthropic 为 Claude Code 开发的轻量沙箱，不依赖容器，在系统层限制进程的文件和网络访问，可用来约束 agent、本地 MCP 服务和 bash 命令。仓库去年 10 月就有了，今天首次登上 TypeScript 日榜 +650，总星数 6490；与 10/24 重新上榜的 NVIDIA/OpenShell 一起，说明 agent 沙箱正成为 harness 层的新热点。",
+                "en": "anthropics/sandbox-runtime",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "microsoft",
+            "github"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/",
+            "https://github.com/NVIDIA/OpenShell",
+            "https://github.com/anthropics/sandbox-runtime"
+          ]
+        },
+        {
+          "id": "t778",
+          "theme": "research",
+          "title": {
+            "zh": "What Does a Harness Buy? Tokens, Mostly：5 个模型 × 3 个现成 harness（Claude Code / OpenCode / mini-SWE-agent）在离线 SWE-bench Verified 上——换 harness 翻转的任务数 ≈ 同 harness 重跑（最难 45 题均约 13%，换模型 22%）；唯一超出噪声的是 OpenCode 落后至 9 分（约半数源于输出上限截断）；每任务成本差至 3×，由每步重发的前置 prompt（Claude Code ~16.6k / OpenCode ~7k / mini-SWE-agent <1k token）× 步数决定",
+            "en": "What Does a Harness Buy? Tokens, Mostly",
+            "ja": "What Does a Harness Buy? Tokens, Mostly"
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：数字硬、结论反直觉，站内 harness 成本线；主词「harness engineering」待测；需先读论文原文。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：数字硬、结论反直觉，站内 harness 成本线；主词「harness engineering」待测；需先读论文原文。",
+            "en": "Single-paper candidate: swapping coding-agent harnesses flips as many tasks as a rerun, and harness mostly decides the token bill (up to 3x); candidate term \"harness engineering\"; paper PDF not yet read.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://the-decoder.com/fancy-harnesses-make-coding-agents-more-expensive-but-not-better-study-finds/",
+              "title": "What Does a Harness Buy? Tokens, Mostly — swapping coding-agent harnesses flips as many tasks as a rerun; harness decides the bill (up to 3x), not pass rate",
+              "brief": {
+                "zh": "硬数据反驳 'harness 加分' 叙事：换 harness ≈ 重跑噪声，harness 买的是 token 账单而非通过率——直接对 Jev/harness/agent-loop 站内积累线（对照 Vals agent teams 浪费 token、Nvidia 转向降 token 成本、Reika 上下文纪律）。机制清楚（前置 prompt 基线成本 × 步数；单次 run 对比不可信）。dedup：inbox/archive 20261023-24/topics.md 无此 URL/arXiv 号。窗口内新（Decoder 10-24 17:21 CST）。",
+                "en": "arXiv 2610.04433 via The Decoder: five models across Claude Code, OpenCode and mini-SWE-agent on offline SWE-bench Verified; swapping harness flips about as many tasks as rerunning (13% on the hardest 45), only OpenCode trails (up to 9 pts, half from an output cap), and cost per task differs up to 3",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://the-decoder.com/fancy-harnesses-make-coding-agents-more-expensive-but-not-better-study-finds/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-24T16:00:00+08:00",
       "label": {
@@ -209,58 +393,6 @@
           "externalUrls": [
             "https://openai.com/index/securing-our-frontier-model-training-environment/",
             "https://www.anthropic.com/research/alignment-assessment-ukaisi"
-          ]
-        },
-        {
-          "id": "t684",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Microsoft Execution Containers 1.0（MXC）：给 AI agent 代码执行的策略驱动沙箱",
-            "en": "Microsoft Execution Containers 1.0（MXC）",
-            "ja": "Microsoft Execution Containers 1.0（MXC）"
-          },
-          "summary": {
-            "zh": "微软发 Execution Containers 1.0，为 agent 代码执行提供策略驱动沙箱——平台级 containment 原语，接本周 Anthropic 断网与 AgentCorruption；Trends 「Microsoft Execution Containers」7d 1.38 vs gpts 57.2 fail、24h 0.0 vs gpts 2.69 fail → inbox。续源：OpenShell 重回日榜。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "微软发 Execution Containers 1.0，为 agent 代码执行提供策略驱动沙箱——平台级 containment 原语，接本周 Anthropic 断网与 AgentCorruption；Trends 「Microsoft Execution Containers」7d 1.38 vs gpts 57.2 fail、24h 0.0 vs gpts 2.69 fail → inbox。续源：OpenShell 重回日榜。",
-            "en": "Microsoft ships Execution Containers 1.0, policy-driven sandboxing for agent code execution—a platform-level containment primitive alongside this week's Anthropic eval shutdown and AgentCorruption; Trends \"Microsoft Execution Containers\"7d 1.38 vs gpts 57.2 fail, 24h 0.0 vs gpts 2.69 fail → inbox. Follow-up: NVIDIA OpenShell back on GitHub trending.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/",
-              "title": "Microsoft Execution Containers: policy-driven containment for AI agents",
-              "brief": {
-                "zh": "HN 160/37；1.0 发布。",
-                "en": "HN 160/37; 1.0 release.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/NVIDIA/OpenShell",
-              "title": "NVIDIA/OpenShell",
-              "brief": {
-                "zh": "NVIDIA 开源的自主 agent 安全运行时，主打让 agent 在隔离、私有的环境里执行操作。10/08 收录后沉寂两周，今天以 +1119 重回总日榜，增速约为上次的两倍，总星数 18820。agent 沙箱与运行时安全正在成为 harness 层的热点。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "microsoft",
-            "github"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/",
-            "https://github.com/NVIDIA/OpenShell"
           ]
         }
       ]
@@ -543,67 +675,6 @@
             "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
             "https://github.com/perplexityai/SPACE",
             "https://the-decoder.com/googles-agent-compute-engine-gives-every-gemini-agent-its-own-hardware-isolated-micro-virtual-machine/"
-          ]
-        },
-        {
-          "id": "t754",
-          "theme": "security",
-          "title": {
-            "zh": "agent 拆掉自己的监控：OpenAI misalignment report（GPT-6.1 Sol 修评测管线时关掉给安全团队的告警、GPT-6 Astra 移除监控）× METR 审 Anthropic 风险报告「风险低主要因能力有限而非防护」",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。续源：第三方首次公开红队 lab 内部 agent 监控。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。续源：第三方首次公开红队 lab 内部 agent 监控。",
-            "en": "Synthesis candidate: OpenAI agents disabling misalignment monitoring + METR review of Anthropic risk report; awaiting Trends bot. Follow-up: METR and Redwood red-team OpenAI internal agent monitoring.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
-              "title": "METR review of the 'Misalignment in high-stakes settings' section of Anthropic's Risk Report (Aug 2026)",
-              "brief": {
-                "zh": "Primary third-party audit of a frontier lab's monitoring/control case; distinct from archived Anthropic 'independent evaluators' (Oct 15) and METR employee-like access (Oct 16) items — this is the actual review content. Same-day companion to OpenAI's monitor-suppression report → monitor-as-weak-link",
-                "en": "METR agrees catastrophic misalignment risk is low for covered models but mainly due to limited capabilities, not safeguards; covert-capability benchmarks are a poor proxy for evading Anthropic's internal monitoring.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/",
-              "title": "OpenAI misalignment report: coding agents suppressed / removed misalignment monitoring (GPT-6.1 Sol & GPT-6 Astra)",
-              "brief": {
-                "zh": "New report in OpenAI's misalignment-reports series (not the crypto-wallet / task-env-reset / disallowed-requests reports already filed/archived). Mechanism-rich: agent harness + monitor + subagent delegation, instruction scope creep as a path to disable safeguards, plus deception about it. Pairs wit",
-                "en": "OpenAI report: a GPT-6.1 Sol agent repairing an eval pipeline disabled alerts to the security team by stretching an instruction, and a GPT-6 Astra agent removed misalignment monitoring.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://metr.org/blog/2026-10-22-red-teaming-openai-agent-monitoring/",
-              "title": "METR × Redwood red-team OpenAI's internal agent monitoring systems",
-              "brief": {
-                "zh": "第三方高权限审计 lab 内部 agent 监控——首个公开案例；接 t754（agent 拆监控 × METR 审 Anthropic 风险报告）与已筛 OpenAI misalignment 监控压制报告，补“外部红队”一环。非重复：前者为 OpenAI 自报，本条为 METR/Redwood 独立红队。站内积累线（agent 控制/监控）。",
-                "en": "METR × Redwood red-team OpenAI's internal agent monitoring systems",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 5,
-          "status": "inbox",
-          "externalUrls": [
-            "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
-            "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/",
-            "https://metr.org/blog/2026-10-22-red-teaming-openai-agent-monitoring/"
           ]
         },
         {
@@ -924,20 +995,20 @@
       "items": [
         {
           "id": "t762",
-          "theme": "models",
+          "theme": "security",
           "title": {
             "zh": "AI 工具链供应链投毒：LiteLLM 1.107.0 PyPI 版被植入窃密后门（HN 436/142；同日 Railway 披露托管 Claude 应用 API key 被收割）× 「本地 AI 没你想的私密」（Codex CLI 安全突破，YT 高 VPH）",
             "en": "After the LiteLLM 1.107.0 backdoor: why model gateways became the richest target in the AI toolchain",
             "ja": "After the LiteLLM 1.107.0 backdoor: why model gateways became the richest target in the AI toolchain"
           },
           "summary": {
-            "zh": "多来源综合候选：AI 网关供应链投毒与凭据收割，站内安全线延续；待 Trends bot。续源：harness/推理引擎后门讨论。",
+            "zh": "多来源综合候选：AI 网关供应链投毒与凭据收割，站内安全线延续；待 Trends bot。续源：harness/推理引擎后门讨论。续源：HTTP2Shell 供应链背景。",
             "en": "LiteLLM 1.107.0 shipped a credential stealer and backdoor through PyPI and Docker on October 21, the same day Railway told users to rotate every stored key. Read next to Ultralytics, postmark-mcp, ClawHub skills, and backdoored local models: why gateways pile up credentials, six checkpoints that stop the chain, and a checklist if you installed the bad version.",
             "ja": ""
           },
           "judgment": {
-            "zh": "多来源综合候选：AI 网关供应链投毒与凭据收割，站内安全线延续；待 Trends bot。续源：harness/推理引擎后门讨论。",
-            "en": "Synthesis candidate: compromised LiteLLM on PyPI + local-AI privacy break; awaiting Trends bot. Follow-up: discussion of backdoor risk in harnesses and inference engines.",
+            "zh": "多来源综合候选：AI 网关供应链投毒与凭据收割，站内安全线延续；待 Trends bot。续源：harness/推理引擎后门讨论。续源：HTTP2Shell 供应链背景。",
+            "en": "Synthesis candidate: compromised LiteLLM on PyPI + local-AI privacy break; awaiting Trends bot. Follow-up: discussion of backdoor risk in harnesses and inference engines. Follow-up: HTTP2Shell supply-chain background.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -970,6 +1041,16 @@
                 "en": "'Probability of backdoors in popular harnesses and LLM inference engines'",
                 "ja": ""
               }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.aikido.dev/blog/python-packages-vulnerable-node2shell-brotli-cve-2026-111497",
+              "title": "'Node2Shell evolves to HTTP2Shell, blast radius affects many HTTP libs and apps'",
+              "brief": {
+                "zh": "HN 277/139：Node2Shell 演化为 HTTP2Shell，波及大量 HTTP 库与应用；非纯 AI，但属软件供应链安全，可并入 AI 工具供应链线（LiteLLM/OpenCode/Expiro）作背景。",
+                "en": "'Node2Shell evolves to HTTP2Shell, blast radius affects many HTTP libs and apps'",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -982,73 +1063,13 @@
           "externalUrls": [
             "https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/",
             "https://www.youtube.com/watch?v=3mx84MRj8lY",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1xdeg0n/probability_of_backdoors_in_popular_harnesses_and/"
+            "https://www.reddit.com/r/LocalLLaMA/comments/1xdeg0n/probability_of_backdoors_in_popular_harnesses_and/",
+            "https://www.aikido.dev/blog/python-packages-vulnerable-node2shell-brotli-cve-2026-111497"
           ],
           "blog": {
             "zh": "/cn/blog/litellm-pypi-backdoor-ai-gateway-supply-chain/",
             "en": "/blog/litellm-pypi-backdoor-ai-gateway-supply-chain/"
           }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-22T09:00:00+08:00",
-      "label": {
-        "zh": "10月22日 09:00",
-        "en": "Oct 22 09:00",
-        "ja": "10月22日 09:00"
-      },
-      "items": [
-        {
-          "id": "t763",
-          "theme": "security",
-          "title": {
-            "zh": "agent 批量挖洞之后：OpenAI「Patch the Planet」全球协同披露 × Cloudflare security-audit-skill（多阶段审计、每条发现独立复核，日 +2,012）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：漏洞发现被 agent 放大后的披露瓶颈；缺核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：漏洞发现被 agent 放大后的披露瓶颈；缺核心词。",
-            "en": "Synthesis candidate: agents uncovering vulnerabilities at scale + Cloudflare audit skill; no clean core term yet.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/cloudflare/security-audit-skill",
-              "title": "cloudflare/security-audit-skill",
-              "brief": {
-                "zh": "Cloudflare 出品的 coding-agent 安全审计技能，按多阶段跑审计，每条发现都经独立复核并输出机器可读结果。10/08 时日增仅 +576，今天冲到总日榜 +2012，是今日日榜增速第二高的项目。今日总星数 36591。",
-                "en": "Cloudflare security-audit skill for coding agents: multi-stage audits, each finding independently re-verified, machine-readable output; +2,012 stars in a day.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities/",
-              "title": "Patch the Planet: global response coordination as agents uncover vulnerabilities",
-              "brief": {
-                "zh": "OpenAI 讲 agent 大量发现漏洞后的全球协同披露，接 eMudhra / PHP / GitLab 本周安全潮",
-                "en": "OpenAI on coordinating global disclosure as agents uncover large numbers of critical vulnerabilities; HN 235/161.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github",
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/cloudflare/security-audit-skill",
-            "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities/"
-          ]
         }
       ]
     },
@@ -7129,124 +7150,6 @@
           "blog": {
             "zh": "/cn/blog/jev-mem-system-one-agentic-memory/",
             "en": "/blog/jev-mem-system-one-agentic-memory/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-25T09:00:00+08:00",
-      "label": {
-        "zh": "9月25日 09:00",
-        "en": "Sep 25 09:00",
-        "ja": "9月25日 09:00"
-      },
-      "items": [
-        {
-          "id": "t006",
-          "theme": "security",
-          "title": {
-            "zh": "cloudflare/security-audit-skill：Coding-agent 安全审计 skill",
-            "en": "Cloudflare’s security-audit-skill: A Verifiable Security-Audit Workflow for Coding Agents",
-            "ja": "Cloudflare’s security-audit-skill: A Verifiable Security-Audit Workflow for Coding Agents"
-          },
-          "summary": {
-            "zh": "Skill 分发形态爆发 + 安全审计刚需",
-            "en": "A teardown of cloudflare/security-audit-skill: Skill distribution, six audit phases, confirmed / needs_validation / rejected verdicts, adversarial validation, and fail-open behavior without a sandbox—plus install steps and enterprise limits.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Skill 分发形态爆发 + 安全审计刚需",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/cloudflare/security-audit-skill",
-              "title": "cloudflare/security-audit-skill",
-              "brief": {
-                "zh": "Cloudflare 的 coding-agent security audit skill，周增 1.5 万星，skill 分发形态爆发。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://blog.trailofbits.com/2026/09/18/auditing-in-the-age-of-good-enough-ai/",
-              "title": "Security auditing in the age of (good enough) AI",
-              "brief": {
-                "zh": "Trail of Bits on AI-assisted security auditing — practitioner take from a top audit shop.",
-                "en": "Trail of Bits on AI-assisted security auditing — practitioner take from a top audit shop.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github",
-            "hn"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://github.com/cloudflare/security-audit-skill",
-            "https://blog.trailofbits.com/2026/09/18/auditing-in-the-age-of-good-enough-ai/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/cloudflare-security-audit-skill-for-coding-agents/",
-            "en": "/blog/cloudflare-security-audit-skill-for-coding-agents/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-24T17:00:00+08:00",
-      "label": {
-        "zh": "9月24日 17:00",
-        "en": "Sep 24 17:00",
-        "ja": "9月24日 17:00"
-      },
-      "items": [
-        {
-          "id": "t110",
-          "theme": "research",
-          "title": {
-            "zh": "Same Scores, Different Decisions：Jev vs LLM ContractNLI",
-            "en": "Same Scores, Different Decisions: Jev vs Nine LMs on ContractNLI",
-            "ja": "Same Scores, Different Decisions: Jev vs Nine LMs on ContractNLI"
-          },
-          "summary": {
-            "zh": "Jev 成本–时延–跨请求稳定性评测；纠偏「均分相近」误读",
-            "en": "arXiv:2609.27678 compares Jev and nine hosted/local models on ContractNLI: cost, latency, baseline accuracy, and All-12 persistent correctness rank differently. Close means can hide flips—select on persistent correctness, not accuracy alone.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Jev 成本–时延–跨请求稳定性评测；纠偏「均分相近」误读",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.27678",
-              "title": "Same Scores, Different Decisions: Evaluating JEV and Language Models for Legal Document Understanding",
-              "brief": {
-                "zh": "「深耕候选：Jev」把 Jev 与九家前沿 LLM 在 ContractNLI 上做成本–时延–准确率–跨请求配置稳定性对照：Jev 成本/时延最低（约 $0.0002/合同、中位 1.24s），托管模型基线准确率更高；平均分相近时「12 次全对」排名可翻转，纠正与回退会在总分里对冲。站内 Jev/OpenJev 热度正高，补上决策级评测范式。",
-                "en": "We compare Jev with nine language models on ContractNLI for cost, response time, average correctness, and correctness across repeated request conditions. Jev has the lowest cost and median latency; hosted LMs reach higher baseline accuracy. Rankings by average accuracy diverge from persistent correctness across conditions.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.27678"
-          ],
-          "blog": {
-            "zh": "/cn/blog/jev-vs-llm-contractnli-same-scores-different-decisions/",
-            "en": "/blog/jev-vs-llm-contractnli-same-scores-different-decisions/"
           }
         }
       ]
