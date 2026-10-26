@@ -12,7 +12,9 @@ translatedFrom: "openspec-guide"
 
 Start with one distinction: `openspec/specs/` describes accepted system behavior, while `openspec/changes/<name>/` describes a proposed change to that behavior. After implementation and testing, you merge the change's spec deltas into the main specifications and archive the change.
 
-For installation and a complete first example, continue to the [OpenSpec CLI tutorial](/blog/openspec-tutorial-cli-commands-agents-md-examples/). This page explains whether the tool fits, what files you will maintain, and what to review at each step. The baseline is the published npm release **OpenSpec 1.13.2**, checked on **2026-09-25 UTC**. The official main branch and other releases may differ.
+For installation, PATH troubleshooting, and command lookup, use the [OpenSpec CLI tutorial](/blog/openspec-tutorial-cli-commands-agents-md-examples/). For shared specifications and separate component tasks, use the [Stores multi-repo example](/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice). As of October 26, 2026, the published npm `latest` is **1.15.0**; its standalone installer does not require Node.js. Stores are included but remain Beta.
+
+This note explains whether the tool fits and which files to review. Its **1.13.2** examples retain the historical baseline checked on **2026-09-25 UTC**, rather than claiming to install the newest release. The CLI tutorial keeps that fixture and adds current installation choices.
 
 ## When OpenSpec Fits
 
@@ -33,6 +35,8 @@ Adopt it to address a specific information gap, not because you expect it to gua
 
 Consider adding email magic-link login while keeping the existing password flow. Only the new, single-use-link path is in scope.
 
+<div class="content-table-scroll" role="region" aria-label="Step / Action and artifact / Human review" tabindex="0">
+
 | Step | Action and artifact | Human review |
 | --- | --- | --- |
 | Clarify intent | Record motivation, scope, capabilities, and impact in `proposal.md` | Check that registration, billing, or a page redesign has not slipped into scope |
@@ -40,6 +44,8 @@ Consider adding email magic-link login while keeping the existing password flow.
 | Design and split work | Record decisions in `design.md` and tasks in `tasks.md` | Check token storage, invalidation, and the testing strategy |
 | Validate and implement | Check spec structure with the CLI; implement and run application tests | Structural validation is not a security or functionality test |
 | Review and archive | Merge deltas into main specs and move the change to the archive | Confirm implementation is complete and specs describe accepted behavior |
+
+</div>
 
 This is a working sequence, not an irreversible state machine. If implementation reveals another constraint, return to the proposal, requirements, and tasks, then revisit affected tests. A checked task list is not a reason to leave a new decision only in chat.
 
@@ -91,7 +97,7 @@ This short example only demonstrates the format. A login feature also needs succ
 
 ## Terminal Commands and Assistant Commands
 
-With Node.js 20.19.0 or later and pnpm installed, start in a new, empty practice directory:
+For this pinned npm-package exercise, use Node.js 20.19.0 or later and pnpm, then start in a new, empty practice directory. This prerequisite does not apply to the current standalone program:
 
 ```bash
 pnpm dlx @fission-ai/openspec@1.13.2 --help

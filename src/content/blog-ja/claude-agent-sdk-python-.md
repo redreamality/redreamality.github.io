@@ -1,7 +1,8 @@
 ---
-title: 'Claude Agent SDK (Python) 学習ガイド'
+title: 'Claude Agent SDK Python：ライフサイクル、キャンセル、タイムアウト'
 pubDate: 2025-10-17T00:00:00.000Z
-description: 'Python SDK 0.1.3 に固定し、query、ClaudeSDKClient のライフサイクル、hooks、MCP ツール、タイムアウトと後処理を完全な例と検証範囲で説明します。'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: 'ClaudeSDKClient の待機、キャンセル、後処理の失敗を調べます。Python SDK 0.1.3 の実行可能な例、オフライン確認、現在のタイムアウト API との違い。'
 author: 'Remy'
 tags: ['claude-code', 'vibe-coding', 'python']
 lang: 'ja'
@@ -16,11 +17,23 @@ translatedFrom: 'claude-agent-sdk-python-'
 
 ## インストールとバージョン確認
 
+エラーが起きている場合は、該当する節から確認できます。
+
+- 呼び出しが `None` を返す、またはテキストだけで完了しない：[Query とメッセージ型](#query-とメッセージ型)。
+- キャンセルでスコープエラーになる、または終了を待ち続ける：[ライフサイクルと後処理](#claudesdkclient-のライフサイクルと後処理)。
+- ターンが止まる、または `timeout=` が `TypeError` になる：[層ごとのタイムアウト](#層ごとのタイムアウト)。
+- Hook が動かない：[Hooks と権限判断](#hooks-と権限判断)、次に[ストリーミング入力](#モジュール-query-のストリーミング-hooks)。
+- CLI に接続できない：[トラブルシューティングと検証範囲](#トラブルシューティングと検証範囲)。
+
+[現在の Python リファレンス](https://code.claude.com/docs/en/agent-sdk/python)には秒単位の `HookMatcher.timeout` がありますが、以下の 0.1.3 にはありません。現在の `API_TIMEOUT_MS` はリクエスト試行ごとの応答ヘッダー待ちを制限し、ストリーム全体の時間は制限しません。どちらもアプリケーションの期限と後処理方針を置き換えません。現在の引数を使う前にインストール済みの版を確認します。
+
+[オフラインのバージョンとシグネチャ確認スクリプト](/assets/tutorial-search-repair/sdk_offline_check.py)をダウンロードし、`uv run --python 3.12 sdk_offline_check.py` を実行します。埋め込んだ依存指定で隔離環境を作成します。末尾は `PASS imports and signatures; no CLI or model was started` になります。初回の依存解決はパッケージレジストリに接続する場合がありますが、確認処理は Claude Code もモデルも起動しません。
+
 [v0.1.3 の公式 README](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/README.md) は Python 3.10 以上、Node.js、Claude Code 2.0.0 以上を前提としています。これは当時の要件であり、その後のすべての CLI が旧 SDK と互換であるという保証ではありません。一時ディレクトリで、Python 環境と依存関係を管理する [uv](https://docs.astral.sh/uv/pip/environments/) を使います。
 
 ```bash
 uv venv --python 3.12 .venv
-uv pip install --python .venv "claude-agent-sdk==0.1.3" "mcp==1.18.0" "anyio==4.11.0"
+uv pip install --python .venv "claude-agent-sdk==0.1.3" "mcp==1.18.0" "anyio==4.11.0" "pydantic==2.11.7"
 ```
 
 Windows では `.venv\Scripts\python.exe`、macOS と Linux では `.venv/bin/python` で以下のファイルを実行します。インタープリターを明示すると、グローバルにインストールされた別の SDK を誤って読み込むことを避けられます。複数の環境を有効化した状態で、単に `python` という名前から使用中の版を判断しないでください。
@@ -55,6 +68,8 @@ if __name__ == "__main__":
 想定出力は `SDK 0.1.3: imports and signatures OK` です。これはインポートと確認対象のシグネチャが正しいことを示すだけで、通信、モデルへのアクセス、ツール権限までは確認しません。パッケージのメタデータを読む方法なら、特定のモジュール属性が存在するという仮定も不要です。
 
 MCP と AnyIO も固定する理由があります。検証環境で SDK 0.1.3 だけをインストールすると MCP 2.2.0 が解決され、SDK MCP サーバーの生成時に `Server.list_tools` が存在しないというエラーになりました。この例では MCP 1.18.0 と AnyIO 4.11.0 を使用します。インストール成功は互換性の証明ではなく、この旧版の組み合わせも安全性や長期サポートの保証ではありません。
+
+インポート時の `cannot import name 'eval_type_backport'` はモデル接続前のエラーです。[MCP 1.18.0 は Pydantic の内部関数をインポート](https://github.com/modelcontextprotocol/python-sdk/blob/v1.18.0/src/mcp/server/fastmcp/utilities/func_metadata.py)しており、新しい Pydantic では削除される場合があります。Pydantic を 2.11.7 に固定すると、ここで検証した旧版の組み合わせを再現できます。2026 年 10 月 26 日に三言語の後処理 fixture がこの組み合わせで通りました。この依存問題による `run_turns()` の変更は不要です。
 
 オンライン実行前には `claude --version`、実際の実行ファイル、Python 依存関係の版を記録し、[公式の認証説明](https://code.claude.com/docs/en/agent-sdk/overview) に従って設定してください。認証情報をスクリプトやコミット対象のシェル設定に埋め込まないでください。ローカル検証では認証情報を読む必要はありません。CLI がない場合はローカル検証までとし、名前が似た `claude` パッケージで代用しないでください。
 

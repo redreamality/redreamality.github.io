@@ -1,10 +1,50 @@
 ---
 title: 'Spec-Driven Development: BMAD vs spec-kit vs OpenSpec vs PromptX'
 pubDate: 2025-10-21T16:12:17.943Z
-description: 'This article delves into the transformative methodology of Spec-Driven Development (SDD) and provides a deep dissection and strategic comparison of four trend-setting open-source projects—BMAD-METHOD, GitHub''s spec-kit, OpenSpec, and PromptX.'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: 'Compare BMAD, Spec Kit, OpenSpec, and PromptX on the same Python change: decisions, artifacts, acceptance tests, and when a specification workflow is worth adopting.'
 author: 'Remy'
 tags: ['vibe-coding', 'sdd', 'openspec', 'spec-kit', 'bmad']
 ---
+
+## Choose a workflow using the same small change
+
+First decide whether your team needs task clarification, maintained specifications, or reusable role context. For a small function, those costs matter more than a feature count. This practical update was checked on October 26, 2026. The original discussion below remains as methodological background; its community counts are historical snapshots, not current rankings or selection criteria.
+
+The shared task adds `normalize_name(value)`: trim surrounding whitespace, collapse internal whitespace to one ordinary space, return an empty string for empty input, and raise `TypeError` for non-strings. Use Python `str.split()` Unicode whitespace semantics. Preserve other text, case, and punctuation without identity validation or transliteration. Download the [full task](/assets/jev-bmad-search-repair/small-change-task.md), [reference implementation](/assets/jev-bmad-search-repair/normalize_name.py), and [seven acceptance tests](/assets/jev-bmad-search-repair/test_normalize_name.py).
+
+Decisions come before tools. Is `None` an error or an empty value? Does a nonbreaking space count as whitespace? Should punctuation survive? These are observable behaviors that a role name cannot decide for us. Once agreed, give every tool the same task rather than supplying one with more complete requirements.
+
+<div class="content-table-scroll" role="region" aria-label="Tool and current entry point / Artifacts needed for this task / Human decision / Completion check" tabindex="0">
+
+| Tool and current entry point | Artifacts needed for this task | Human decision | Completion check |
+| --- | --- | --- | --- |
+| BMAD 6.12.4, host skills `bmad-help` and `bmad-build` | `spec-<slug>.md` under configured implementation_artifacts, implementation, and tests; simplified routes can omit planning sections | Confirm one low-risk change and settle input behavior | Match the spec to seven tests, inspect the actual diff and review notes |
+| Spec Kit, constitution, specify, plan, tasks, implement, converge | Project principles, feature `spec.md`, `plan.md`, `tasks.md`, code, and tests | Decide whether existing principles apply and keep the plan within the standard library and two code files | Run tests, check consistency across artifacts, then use converge to find unfinished work |
+| OpenSpec, `/opsx:propose normalize-name`, `/opsx:apply`, `/opsx:archive` | Proposal, design, tasks, and specs in `openspec/changes/normalize-name/`, then updated main specs | Distinguish new behavior from changed behavior and decide what to maintain | Test the scenarios, inspect tasks and the diff, then archive |
+| PromptX, discover and activate a suitable role | Explicitly request the task contract, code, and tests; role state is not a feature specification | Decide whether reusable role knowledge justifies adding an MCP service | Apply the same tests and diff review; role activation or saved memory is insufficient |
+
+</div>
+
+These paths and processes come from the [versioned BMAD template](https://github.com/bmad-code-org/BMAD-METHOD/blob/v6.12.4/src/bmm-skills/ship/bmad-build/spec-template.md), [current Spec Kit SDD reference](https://github.github.io/spec-kit/reference/agentic-sdd.html), [official OpenSpec workflow](https://github.com/Fission-AI/OpenSpec), and [official PromptX documentation](https://github.com/Deepractice/PromptX). This compares artifacts and decisions for one task, not the performance of four model runs.
+
+Spec Kit's current README also offers independent bug-fixing and idea-assessment entry points. Neither requires completing SDD first. This task adds a feature, so the table uses SDD. The Copilot example uses hyphenated skills such as `/speckit-specify`; other integrations may use `/speckit.specify`. Follow the installed host's entry points and keep chat invocations separate from terminal commands. `converge` checks implementation against the specification, plan, and tasks. It appends tasks for gaps, then returns work to implementation rather than directly fixing the code.
+
+OpenSpec's default flow includes propose, apply, and archive. Some extra commands, including verify, require the expanded profile. An old screenshot is not evidence that installation lost a command, and a change should not be archived before its tests pass. PromptX supplies roles, memory, and tools for context. Its documentation does not establish a directly equivalent feature-specification artifact for this exercise, so the task document in the table is an explicit delivery requirement.
+
+### What the local checks establish
+
+BMAD 6.12.4 was actually installed in an empty directory outside this repository. Its installed rendering script produced a workflow and an existing first-step reference. The author-written reference implementation also passed this command with `Ran 7 tests` and `OK`:
+
+```bash
+uv run --no-project python -B -m unittest -v test_normalize_name.py
+```
+
+The checks cover repeated whitespace, empty input, tabs and newlines, Unicode whitespace, Chinese text preservation, invalid types, and idempotence. No host model was invoked for any of the four tools. There is therefore no observed claim that a tool automatically completed this task, and no comparison of tokens, duration, or success rates. The [existing BMAD guide](/garden/notes/bmad-method-guide/) explains installation, file inspection, and troubleshooting.
+
+To compare workflows in your team, prepare a separate directory for each tool containing only the task and acceptance tests. Ask the assistant to produce its implementation and workflow artifacts. Record additional clarification questions, final files, test commands, and exit status. Keep the reference implementation aside until afterward; otherwise the exercise tests copying. Even after tests pass, inspect the diff for new dependencies, unrelated changes, and altered exception behavior.
+
+My choice is to use the small-change route when the team already has BMAD. Choose OpenSpec when the behavior must remain in maintained specifications, or Spec Kit when existing project principles need to carry through planning and task convergence. Consider PromptX when reusable role knowledge is the missing piece. This function alone does not need a team of agents or a new platform. A retained specification matters when the next change needs the original intent, not because this change produced more Markdown.
 
 ## **Introduction: Beyond “Vibe Coding” — The Inevitability of Structure in AI-Driven Development**
 
@@ -52,7 +92,7 @@ A three-level maturity model (inspired by Martin Fowler [^5]) gauges how deeply 
 * **Workflow & Features**:  
   1. **Agentic Planning**: Analyst, PM, and Architect agents collaborate with the user to craft detailed PRDs and architecture docs.  
   2. **Context-Engineered Development**: A Scrum-Master agent converts planning docs into **hyper-detailed dev stories**, embedding all context, implementation details, and architectural guidance.  
-* **Technical Implementation**: Node.js v20+, JavaScript. Stable v4.x; v6-alpha is a full rewrite [^10].  
+* **Technical Implementation**: The original discussion covered v4 and early v6 organization. The published version checked on October 26, 2026 is 6.12.4; use the current small-change entry points above rather than describing all v6 releases as alpha.
 * **Community & Maturity**: 19.1k ⭐, 2.8k 🍴, active Discord [^10].
 
 ### **2.2. GitHub’s spec-kit: The Pragmatic Enterprise Toolkit**
@@ -105,6 +145,8 @@ For a hands-on walkthrough of installation, CLI commands, `AGENTS.md`, validatio
 
 ### **3.1. Side-by-Side Comparison: Five Tools, Five Philosophies**
 
+<div class="content-table-scroll" role="region" aria-label="Dimension / BMAD-METHOD / spec-kit / OpenSpec / PromptX / GTPlanner" tabindex="0">
+
 | Dimension | BMAD-METHOD | spec-kit | OpenSpec | PromptX | GTPlanner |
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | **Core Philosophy** | **Agentic Agile**: AI team simulates human roles for deep context [^10]. | **Executable Spec**: Gated, verifiable, repeatable flow [^4]. | **Lightweight Change Mgmt**: Auditability for iterative brownfield work [^12]. | **Conversational**: Role-driven experts, tech interaction abstracted [^13]. | **Deterministic PRD Generation**: Clear SOPs eliminate AI ambiguity, Prefab modularity [^25]. |
@@ -114,6 +156,8 @@ For a hands-on walkthrough of installation, CLI commands, `AGENTS.md`, validatio
 | **Ideal Use Case** | Complex greenfield needing deep domain planning; non-tech domains (e.g., creative writing). | New enterprise projects; large, well-defined features in existing systems where rigor matters. | Continuous, iterative changes in mature, complex codebases with high audit needs. | Teams happy with current AI assistants but need deeper, custom context. | Rapid prototyping and PRD generation; teams needing modular Prefabs for quick AI workflow construction. |
 | **SDD Maturity Target** | Targets **Spec-Anchored**, potential for **Spec-as-Source**. | Primarily **Spec-Anchored**. | Primarily **Spec-Anchored**, obsessive about anchoring process. | Meta-tool enhancing **Spec-First** & **Spec-Anchored** workflows. | Targets **Spec-First**, rapid project initiation through PRD standardization. |
 | **Community & Maturity** | Very high (19.1k ⭐) [^10]. | Very high (39.3k ⭐) [^8]. | High (4.1k ⭐) [^12]. | Medium (3k ⭐) [^13]. | Emerging (122 ⭐) [^25]. |
+
+</div>
 
 ### **3.2. Adoption Framework: Horses for Courses**
 

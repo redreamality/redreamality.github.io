@@ -1,17 +1,112 @@
 ---
-title: "pstack 的 51 个 skill：poteto 那套 Cursor 工程工作流怎么用"
-description: "Lauren Tan（poteto）开源的插件 pstack 有 51 个 skill。这篇笔记讲入口命令、一次任务怎么走、验证纠错和她演讲里五层纠错的对应、24 条原则，以及它管不到的地方。"
+title: "pstack skills 怎么用：首次任务、宿主兼容性和 feature map 实例"
+description: "用可运行的 CLI 小项目开始第一次 pstack 任务，区分 Cursor、Claude Code 与第三方移植，并用 feature map 和真实失败、通过记录验收结果。"
 date: 2026-10-08
 source: "https://github.com/cursor/plugins/tree/main/pstack"
 tags: ["ai-agents", "agent-harness", "ai-coding", "code-review", "Cursor"]
 lang: "zh"
 ---
 
-pstack 是 Lauren Tan（[@poteto](https://x.com/poteto)）做的 Cursor / Grok Bot 插件，装进去是 51 个 skill，内容是她自己每天写代码用的那套工程做法。适合已经在用 agent 写代码、但还不敢放手让它自己跑的人。她在演讲里讲过「先有信任，才谈得上并行」，以及纠错时该往哪一层放，那篇我们写过：[信任够了才谈得上并行](/cn/blog/lauren-tan-poteto-trust-before-parallel/)。pstack 可以看成那套想法落到 skill 上的样子。演讲里她特意说那天不展开这个插件，所以这篇笔记补上。
+pstack 是 Lauren Tan（[@poteto](https://x.com/poteto)）整理的一组工程 skill。第一次用时，先找一个自己能核对结果的小任务。下面用任务列表 CLI 演示怎样复现错误、提出修复要求，再检查改好的输出；本地示例不需要安装依赖或申请 API 凭据。
 
-先说清楚范围。下文的细节以公开仓库 [cursor/plugins 里的 pstack 目录](https://github.com/cursor/plugins/tree/main/pstack) 为准，核对时插件版本是 0.15.15，MIT 许可。仓库更新很勤，默认模型、playbook 数量这类细节以后可能会变。
+可以直接跳到[宿主兼容性](#host-compatibility)、[第一次任务](#first-task)或 [feature map 实例](#feature-map-example)。原来的技能参考保留在后半部分，章节链接不变。
+
+安装说明于 2026 年 10 月 26 日按[官方 pstack 0.15.32](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/.cursor-plugin/plugin.json)核对。后半部分的技能目录描述的是原先 0.15.15 的快照，其中的 51 个 skill、24 条原则不能当作当前完整清单。工作流背后的判断见[信任够了才谈得上并行](/cn/blog/lauren-tan-poteto-trust-before-parallel/)。
+
+<a id="host-compatibility"></a>
+
+## 先确认自己的宿主能做什么
+
+[官方 README](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/README.md)已经同时给出 Cursor 和 Claude Code 的安装入口。Claude Code 把外部插件市场称为第三方市场，并不代表 pstack 上游提供的适配就是非官方移植。
+
+<div class="content-table-scroll" role="region" aria-label="宿主 / 安装和入口 / 边界" tabindex="0">
+
+| 宿主 | 安装和入口 | 边界 |
+| --- | --- | --- |
+| Cursor | `/add-plugin pstack`，然后运行 `/setup-pstack` 和 `/poteto-mode` | 模型规则写入 `~/.cursor/rules/pstack-models.mdc`；能用哪些模型取决于账号。 |
+| Claude Code | `/plugin marketplace add cursor/plugins`，再执行 `/plugin install pstack@cursor-plugins` | 使用 `/pstack:setup-pstack` 和 `/pstack:poteto-mode`；规则路径为 `~/.claude/rules/pstack-models.md`。 |
+| Codex 或其他宿主 | 先核对已装包的来源和宿主的 skill 加载方式 | 本次核对的上游 README 没有提供 Codex 安装步骤。复制 skill 或安装社区移植不等于完整兼容。 |
+
+</div>
+
+[官方 Claude Code 适配说明](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/docs/harness/claude-code.md)把不支持的非 Claude 模型名回落到当前会话模型，并跳过依赖不可用 Cursor 能力的步骤。因此不能承诺 Grok 评审面板、Cursor Automations 或云端 agent 原样运行。使用第三方移植前，检查它对应的上游版本、工具映射、模型选择和缺失能力的处理，再决定是否并行执行。能读到 `SKILL.md` 只是第一步。
+
+<a id="first-task"></a>
+
+## 用一个本地 CLI 完成第一次任务
+
+准备 Node.js 22 或更高版本。本地复现不需要包管理器、服务器、账号或模型调用。在一个空目录中放入[有缺陷的 CLI](/assets/pstack-search-repair/task-cli.before.mjs)、[任务数据](/assets/pstack-search-repair/tasks.json)和[验证脚本](/assets/pstack-search-repair/verify.mjs)，保留文件名。[参考修复](/assets/pstack-search-repair/task-cli.mjs)单独提供。
+
+1. 在这个目录打开终端，检查运行环境并复现：
+
+   ```sh
+   node --version
+   node task-cli.before.mjs tasks.json --status open
+   node verify.mjs task-cli.before.mjs evidence-before.json
+   ```
+
+   CLI 返回 ID 为 2、`done` 为 `true` 的 `Publish release`，但未完成列表应当返回 ID 为 1 的 `Write release notes`。因此验证脚本输出 `FAIL open` 并退出 1，另外六个命令检查通过。
+
+2. 用支持的宿主打开这个目录，按上一节安装并配置 pstack，再发送下面的任务。在 Claude Code 中，把 `/poteto-mode` 换成 `/pstack:poteto-mode`。
+
+   ```text
+   /poteto-mode 修复任务列表的 open 筛选。读取 task-cli.before.mjs，
+   把修复后的版本写到 task-cli.mjs，保留原文件。
+   不要修改 tasks.json 和 verify.mjs。open 只能返回任务 1，
+   done 只能返回任务 2，默认列表和 all 都返回两个任务。
+   不支持的状态值、缺失的状态值都必须退出 2，stdout 为空。
+   修改前先复现，用现有验证脚本分别检查前后版本，
+   回报命令、输出、退出码和证据文件路径。
+   只在本地工作，不提交、不创建 PR、不发布、不调用付费外部 API。
+   ```
+
+   宿主内的模型会话仍可能消耗账号额度；直接运行本地示例不调用模型。如果 agent 无法执行命令，应当说明阻塞点，不能宣称已经验收。
+
+3. 检查改动。参考修复把 open 分支中的 `task.done` 改成 `!task.done`。运行修复版：
+
+   ```sh
+   node task-cli.mjs tasks.json --status open
+   node verify.mjs task-cli.mjs evidence-after.json
+   ```
+
+   应当得到 `[{"id":1,"title":"Write release notes","done":false}]`，七个命令检查全部通过，另有 `PASS fixture unchanged`，退出码为 0。不做模型练习时，直接把参考修复下载到同一目录，也能执行这两条命令。
+
+这次任务的交付物是修复后的 CLI，以及前后两份证据 JSON。本站于 2026 年 10 月 26 日在 Windows、Node.js v26.7.0 下实际执行，得到[失败记录](/assets/pstack-search-repair/evidence-before.json)和[通过记录](/assets/pstack-search-repair/evidence-after.json)。记录包含参数、stdout、stderr、退出码和文件哈希。这些证据来自真实 CLI 执行；上面的提示词是供读者练习的任务，没有据此声称跑过 pstack 模型工作流。
+
+<a id="feature-map-example"></a>
+
+## 写出能发现这个错误的 feature map
+
+feature map 记录用户如何进入某项功能，以及什么可观察结果算通过。这个小项目的目录如下：
+
+```text
+task-cli.before.mjs
+task-cli.mjs
+tasks.json
+verify.mjs
+feature-map/
+  README.md
+  list-tasks.md
+evidence-before.json
+evidence-after.json
+```
+
+可下载的[索引](/assets/pstack-search-repair/feature-map/README.md)和[完整功能条目](/assets/pstack-search-repair/feature-map/list-tasks.md)是本站编写的英文示例，条目的四节结构参照[官方 feature map 样例](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/skills/create-verification-skill/references/feature-map-example/create-note.md)，不是运行 skill 自动生成的产物。对应内容如下：
+
+| 条目章节 | 这个项目应填写什么 |
+| --- | --- |
+| Sub-features | 默认列表、all、open、done、非法状态、缺失状态、非法输入 |
+| How to get to it (user POV) | 从终端运行 `node task-cli.mjs tasks.json`，通过状态参数进入筛选 |
+| Driving it with Node.js | 固定数据、完整命令、预期 JSON、退出码和证据路径 |
+| Gotchas | 退出 0 不代表筛选正确；数据文件不能被改动，清理时保留证据 |
+
+没有筛选功能时，旧条目可能只检查默认列表返回 ID 1 和 2。加上 `--status` 后，这个检查就不够了，因为有缺陷的版本也能通过。维护时要补 open 的操作步骤和“只返回 ID 1”的判据，再执行一次，才能看到失败。如果产品有意改了参数名，条目和验证脚本要一起更新并重跑；如果命令没变，只是返回了错误任务，就修产品，不能把预期 ID 改成 2 来消除红灯。
+
+要让 Cursor 生成项目内的验证 skill，可以调用 `/create-verification-skill`，要求使用这里的 CLI、数据和验证脚本，只在本地执行，不提交或创建 PR。Claude Code 中使用 `/pstack:create-verification-skill`。检查生成的启动、doctor 环境检查、操作、证据和清理步骤，再要求端到端跑通。本例没有常驻服务器，也不修改任务数据；若换成有持久化数据的应用，还要加入存储结果的只读复查，以及一次性实例的清理步骤。
 
 ## 它想解决什么
+
+从本节到「它管不到的地方」，保留的是 pstack 0.15.15 在 Cursor 中的历史参考。这里的命令、默认模型、自定义模式和工作流建议都按当时的版本理解，不代表当前版本或其他宿主的能力。现在安装和开始任务，请使用前面的[宿主说明](#host-compatibility)和[实操步骤](#first-task)。
 
 README 开头那句是 "if you want to go fast, go deep first"，意思是想快，先把一件事做深。她的判断是：现在 agent 写出来的东西里，凑数的代码太多了，只有吞吐量没有质量，她不想要。pstack 的目标不是让代码行数变多，反而是让你写得更少、质量更高。
 
@@ -19,13 +114,13 @@ README 开头那句是 "if you want to go fast, go deep first"，意思是想快
 
 第三点是模型。pstack 不绑模型，而且不少 skill 本身就是多模型的：同一件事交给不同家族的模型做或审，取各自所长。
 
-还有一个立场值得单独提：pstack 里没有「写计划」类的 skill。她在 README 里说自己不信先写计划这一套，"the best spec is code"，最好的规格就是代码。真要计划，`/poteto-mode` 里有对应的 playbook，但不是默认步骤。
+还有一个立场值得单独提：0.15.15 快照中没有专门「写计划」的 skill。当时的 README 里，她说自己不信先写计划这一套，"the best spec is code"，最好的规格就是代码。那个版本的 `/poteto-mode` 提供了对应的 playbook，但没有把计划设为默认步骤。
 
 关于用量，她本人在帖子里说过，2026 年 5 月开源那一周，工程团队用了这些 skill 大约 1 万次。这是她自己的说法，没有独立统计。
 
 ## 安装和两个入口命令
 
-在 Cursor 聊天里装插件：
+0.15.15 指南给出的 Cursor 聊天安装命令如下：
 
 ```text
 /add-plugin pstack
@@ -33,11 +128,11 @@ README 开头那句是 "if you want to go fast, go deep first"，意思是想快
 
 装完只需要记两个命令。
 
-第一个是 `/setup-pstack`。它先探测你账号里实际能调哪些模型，问你要多大的推理预算（unlimited、large、medium、small 四档，默认相当于 large，也就是 xhigh），然后把每个角色用哪个模型列给你确认。角色分成写代码的、做判断和写文字的、几个评审面板等。确认后它写一条 always-applied 规则（每次会话都自动加载的规则），路径是 `~/.cursor/rules/pstack-models.mdc`，所有 skill 都会读它。某个角色没写，就回落到 skill 自带的默认值。角色设成 `auto` 或 `inherit-parent`，表示这个子 agent 直接用你当前聊天的模型。按当前 README，默认分工是写代码的活交给 Grok，最难的改动、文字和判断交给 Opus 5.5，评审面板默认是这两家各出一个。
+第一个是 `/setup-pstack`。在这个快照中，它先探测账号可用的模型，再提供 unlimited、large、medium、small 四档推理预算，默认是 large，也就是 xhigh，随后让你确认各角色的模型。角色包括写代码、做判断和写文字，以及评审面板。确认后，配置写入每次会话自动加载的 `~/.cursor/rules/pstack-models.mdc`。没有配置的角色使用 skill 内置默认值；`auto` 或 `inherit-parent` 表示跟随会话模型。按当时的 README，代码工作默认交给 Grok，最难的改动、文字和判断交给 Opus 5.5，评审面板由这两家各出一个模型。
 
 setup 最后还会看你的项目里有没有能证明应用行为的验证手段。没有的话，它会问一次要不要用 `/create-verification-skill` 生成一个。指南的建议是新手直接答应，这一步回报最大，后面会细讲。
 
-第二个是 `/poteto-mode`，任务开头用。普通回车只对这一条消息生效。在斜杠菜单里选它时按 Option+Enter（Mac）或 Alt+Enter（Windows），它会变成 custom mode（自定义模式），之后每一轮都留在上下文里，直到你退出。这个模式目前在 Cursor 的 agents 窗口和 CLI 里可用。
+第二个是任务开头使用的 `/poteto-mode`。当时的指南把普通回车描述为只附加到一条消息；在斜杠菜单里按 Option+Enter（Mac）或 Alt+Enter（Windows）选择，则进入 custom mode（自定义模式），每一轮保留在上下文中，直到退出。这是指南对当时 Cursor agents 窗口和 CLI 的描述。
 
 拿不准该用哪个 skill，就问 `/poteto-help`。它回答问题、给你一句可以直接发的 prompt、附上答案出自哪个文件，但不会替你开工，因为跑一次 pstack 要花不少 token。
 
@@ -190,6 +285,8 @@ prompt 怎么写，指南给了五样东西：目标、能判对错的完成条�
 
 对用户来说，原则最实用的地方是拿来纠偏。你不用调用它们，直接说名字就行。agent 想在三个旧适配器上再加第四个，你说一句「subtract before you add，先删掉过时的适配器」；它说构建过了就算完成，你说「prove it works，跑真实的导入流程，把写进去的记录给我看」。每个名字背后是一条它已经读过的完整规则，一句话比一段说明更准。不过它仍然要在回复里说明这条原则改变了哪个决定。
 
+<div class="content-table-scroll" role="region" aria-label="组 / 原则 / 一句话" tabindex="0">
+
 | 组 | 原则 | 一句话 |
 | --- | --- | --- |
 | 核心 | `laziness-protocol` | 重构或掂量 diff 时偏向删除和最小改动，别加抽象层 |
@@ -216,6 +313,8 @@ prompt 怎么写，指南给了五样东西：目标、能判对错的完成条�
 | 分派 | `guard-the-context-window` | 上下文快满时把大块读取交给子 agent，主线只留摘要 |
 | 分派 | `never-block-on-the-human` | 可逆的事别问「要不要做」，先做、给结果、让人事后纠正 |
 | 元 | `encode-lessons-in-structure` | 同一条指令写到第二次，就把它变成 lint、元数据、运行时检查或脚本 |
+
+</div>
 
 指南的建议是别背这张表，扫一遍，等哪天看到 agent 做了某个名字本可以拦住的事，再回来查。
 
@@ -251,7 +350,7 @@ prompt 怎么写，指南给了五样东西：目标、能判对错的完成条�
 
 **它要花 token。** 子 agent 和评审面板都是额外开销。指南给的省法：调低推理预算或换便宜模型，让写代码的角色用快模型，缩短面板列表，小而明显的改动别开 `poteto-mode`。
 
-**它是她的风格。** 默认的 playbook、口吻和原则来自她一个人的习惯，不想照单全收就用 `automate-me` 做你自己的 mode。默认模型是按当前版本写的，Cursor 的模型列表一变，默认值也会跟着改。仓库里还附带一个默认不启用的自动化包 benny，用来分拣 Slack 上的问题反馈并复现修复，它不算在这 51 个 skill 里，`poteto-agent` 和 Comment Sicko 两个子 agent 也不算。
+**它是她的风格。** 默认的 playbook、口吻和原则来自她一个人的习惯，那个版本提供了 `automate-me`，供使用者生成自己的 mode。这里记录的默认模型属于 0.15.15，可能与你安装的版本不同。当时的仓库还附带默认不启用的自动化包 benny，用来分拣 Slack 上的问题反馈并复现修复；它不计入这 51 个 skill，`poteto-agent` 和 Comment Sicko 两个子 agent 也不计入。
 
 ## 链接
 

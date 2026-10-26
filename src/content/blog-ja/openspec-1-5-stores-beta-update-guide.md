@@ -1,14 +1,138 @@
 ---
-title: 'OpenSpec 1.5 詳解：Stores Beta、Explore-first ワークフロー、チーム規模の仕様協働'
+title: 'OpenSpec Stores の複数リポジトリ運用：設定、仕様参照、同期の確認'
 pubDate: 2026-07-02T01:30:00.000Z
-description: 'OpenSpec 1.5.0 のソースコードと公式ドキュメントをもとに、Stores Beta、/opsx:explore、brownfield 導入、command frontmatter 修正、repo-local specs から共有 planning context への進化を解説します。'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: 'OpenSpec Stores を二つのコードリポジトリで使う実例。共有仕様とローカルタスク、Git 同期、ルート選択、1.15.0 公開版でも残る Beta の制約を解説します。'
 author: 'Remy'
 tags: ['openspec', 'sdd', 'ai-coding', 'stores', 'ai-agents', 'cli']
 lang: 'ja'
 translatedFrom: 'openspec-1-5-stores-beta-update-guide'
 ---
 
-OpenSpec の最近の更新は、単なる CLI 機能追加ではありません。より大きな変化は、OpenSpec が「単一リポジトリ内の軽量な spec workflow」から、「複数リポジトリ、複数チーム、複数 AI coding agent で共有できる仕様協働レイヤー」へ進み始めていることです。
+## 二つのコードリポジトリで Stores を使う
+
+2026 年 10 月 26 日更新。**npm の `latest` は 1.15.0 です。Stores は含まれますが、機能は引き続き Beta 扱いです。** npm の `beta` タグは、より古い `1.6.0-beta.1` を指しています。Stores Beta という名前だけを理由に、そのタグを選ばないでください。以下は 1.15.0 公開版を対象とし、未公開の `main` には依存しません。
+
+Store を使うと、API と Web のリポジトリが同じ仕様を読みながら、実装の変更を別々に管理できます。Store はタスクをリポジトリへ割り当てず、ファイル権限を付与せず、Git も同期しません。独立したテストとレビューが必要なら、実装タスクは各リポジトリに残すことを勧めます。外部 Store を既定の計画先にするのは、計画のライフサイクル自体を共有したい場合です。
+
+動作の根拠は[公式 1.15.0 Stores ガイド](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/stores-beta/user-guide.md)と[CLI リファレンス](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/cli.md)です。導入や PATH の問題は[CLI インストール記事](/ja/blog/openspec-tutorial-cli-commands-agents-md-examples/)を参照してください。元の 1.5 解説は、既存の節リンクを維持して後半に残しています。
+
+<a id="multi-repo-practice"></a>
+
+### 共有契約と二つのローカル変更を作る
+
+新しい同階層のディレクトリ `team-contracts`、`checkout-api`、`checkout-web` を使います。以下は 1.15.0 の導入を前提にしています。未導入なら `openspec` を `pnpm dlx @fission-ai/openspec@1.15.0` に置き換えます。親ディレクトリから始めます。
+
+```bash
+openspec --version
+openspec store setup team-contracts --path ./team-contracts --no-init-git --json
+git init checkout-api
+git init checkout-web
+```
+
+`--no-init-git` は練習用 Store の Git 初期化と自動コミットを省略します。setup は `.openspec-store/store.yaml`、OpenSpec ルート、マシン内の登録を作ります。リモートリポジトリの作成や公開は行いません。実際のチームでは、要件を公開する意図がなければ非公開リポジトリを使います。
+
+`team-contracts/openspec/specs/promotion/spec.md` を作成し、次の練習用契約を保存します。
+
+```markdown
+## Purpose
+Define the shared response used by the checkout API and web client.
+
+## Requirements
+
+### Requirement: Promotion eligibility
+The API SHALL return an eligible boolean and a reason string for a promotion.
+
+#### Scenario: Ineligible promotion
+- **WHEN** the promotion cannot be used
+- **THEN** eligible is false and reason explains why
+```
+
+API は真偽値 `eligible` と文字列 `reason` を返し、割引が使えなければ false と理由を返す契約です。この練習は受け入れ済みの仕様から始めます。実際の開発では提案をレビューしてから、受け入れ済みの動作として扱います。仕様を検証し、二つのコンポーネントを初期化します。
+
+```bash
+openspec validate promotion --type spec --store team-contracts --strict --json --no-interactive
+cd checkout-api
+openspec init . --tools none
+cd ../checkout-web
+openspec init . --tools none
+```
+
+両方のコードリポジトリの `openspec/config.yaml` に、既存の context と rules を残して以下を追加します。
+
+```yaml
+schema: spec-driven
+references:
+  - team-contracts
+```
+
+各ディレクトリでコンポーネントの変更を作ります。
+
+```bash
+cd ../checkout-api
+openspec new change implement-promotion-api
+openspec instructions proposal --change implement-promotion-api --json
+openspec context --json
+cd ../checkout-web
+openspec new change implement-promotion-ui
+openspec instructions proposal --change implement-promotion-ui --json
+openspec context --json
+openspec show promotion --type spec --store team-contracts
+```
+
+続行前に `root.path` を確認します。現在のコンポーネントのリポジトリでなければなりません。`references` 配列には `promotion` と、`--store team-contracts` を含む取得コマンドが入ります。変更ディレクトリはそれぞれの `openspec/changes/` にあり、Store 側には作られません。これはファイル配置と参照の確認であり、API や UI の実装結果ではありません。
+
+各 proposal に `promotion` と採用した Store のコミットを記録します。API のタスクは応答とテストを定義し、UI のタスクは `eligible: false` と `reason` を利用者にどう表示するかを定義します。design と仕様差分を補い、形式検証とアプリのテストを実行してからレビューとアーカイブへ進みます。[最初の変更のチュートリアル](/ja/blog/openspec-tutorial-cli-commands-agents-md-examples/)に完全な成果物の形式があります。
+
+共有契約自体を変更する場合は Store を明示します。
+
+```bash
+openspec new change revise-promotion-contract --store team-contracts
+openspec status --change revise-promotion-contract --store team-contracts --json
+```
+
+参照索引に入るのは `openspec/specs/` の主要仕様であり、Store の進行中の変更ではありません。未確定の契約に沿って実装する場合は、成果物ができた後で `openspec show revise-promotion-contract --store team-contracts` を実行し、Store のブランチと各コンポーネントのレビューを関連付けます。workset はエディターで複数のディレクトリを開く助けになりますが、エージェントへのタスク割り当ては行いません。
+
+### Git で契約を共有して同期する
+
+実際の協働では、通常の Git 手順で Store を初期化・コミットし、実際の非公開リモートを追加します。他の開発者は clone 後に `openspec store register <local-path> --id team-contracts` を実行します。登録はマシンごとに必要です。`remote:` 宣言は clone の手順を示すだけで、取得自体はしません。
+
+共有契約を読む前にチェックアウトを確認します。以下は Store に Git、`origin`、追跡先のブランチが設定済みであることを前提とします。
+
+```bash
+git -C team-contracts status --short
+git -C team-contracts fetch origin
+git -C team-contracts log --oneline HEAD..@{upstream}
+git -C team-contracts pull --ff-only
+git -C team-contracts rev-parse HEAD
+openspec doctor --store team-contracts --json
+```
+
+この例は Bash 用です。PowerShell では範囲を `'HEAD..@{upstream}'` と引用します。未コミットの変更があればチームのブランチ運用で整理してから pull します。fast-forward が失敗したら、分岐したコミットを確認して merge または rebase を選びます。競合を消すためだけに一方の仕様で上書きしないでください。最終的な Store のコミットを両方の proposal に記録すると、同じ契約をレビューできます。
+
+`doctor` はローカルに取得済みの Git 情報を使い、リモートへの接続、同期、修復はしません。古いチェックアウトからは古い参照要約が生成されます。`/opsx:sync` は仕様差分を主要仕様へ反映する機能であり、Git 同期ではありません。
+
+### 参照の欠落と誤った書き込み先を調べる
+
+<div class="content-table-scroll" role="region" aria-label="症状 / 確認と対応" tabindex="0">
+
+| 症状 | 確認と対応 |
+| --- | --- |
+| 参照が見つからない | コンポーネントで `openspec doctor --json` を実行し、必要なら clone 後に実際のパスを登録する |
+| 同じ ID が別のチェックアウトを指す | 一台のマシンでは一つの ID に一つのチェックアウト。両方の場所を確認してから unregister と再登録を行う |
+| 変更が Store に作られる | 明示した `--store`、設定の `store:`、グローバルの `defaultStore` を調べる。独立したタスクはローカルルートと `references` を使う |
+| 古い仕様が参照される | Store のブランチとコミットを確認し、Git の更新を取得・レビューしてから instructions を再実行する |
+| 参照が欠けても終了コードが 0 | `references[].status` を確認する。健康状態の問題だけでは `doctor` は失敗しない |
+
+</div>
+
+1.15.0 の選択順は、明示的な `--store`、最も近い実際の計画ルート、プロジェクトの `store:`、グローバルの `defaultStore` です。どれもなければ、Store が登録済みの場合は選択エラーになり、未登録なら従来どおり現在のディレクトリを使います。参照は書き込み先を選びません。
+
+[検証スクリプト](/assets/openspec-search-repair/check-examples.mjs)は一時ディレクトリにこの例を作り、`XDG_DATA_HOME` と `XDG_CONFIG_HOME` で登録情報を分離します。Node.js、pnpm、Git が利用可能な環境で `node check-examples.mjs` を実行します。Windows では pnpm の `bin/pnpm.cjs` の完全なパスを第一引数に指定します。第二引数に当サイトのチェックアウトを指定すると、三言語のチュートリアルも再実行します。モデル呼び出しとリモート Git 操作は行いません。
+
+## 1.5 リリースの背景
+
+OpenSpec 1.5 は、共有計画をコードリポジトリの外に置く Stores を導入しました。以下はその版の設計と連携機能の解説です。現在の設定とルート選択には、冒頭の固定版の例を使ってください。
 
 一つだけキーワードを挙げるなら **Stores**。一つだけワークフローを覚えるなら、次の流れです。
 
@@ -16,9 +140,9 @@ OpenSpec の最近の更新は、単なる CLI 機能追加ではありません
 explore → propose → apply → archive
 ```
 
-この記事では、`Fission-AI/OpenSpec` の `v1.5.0` ソースコード、`CHANGELOG`、`docs/cli.md`、`docs/commands.md`、`docs/explore.md`、`docs/existing-projects.md`、関連コマンド実装をもとに、何が変わったのか、どう使うのか、実プロジェクトでは何に注意すべきかを整理します。
+歴史の節は[1.5.0 の変更履歴](https://github.com/Fission-AI/OpenSpec/blob/v1.5.0/CHANGELOG.md)と、同じタグの CLI、コマンド、探索、既存プロジェクトの文書に基づきます。Stores の導入理由と、連携の修正がチームに与える影響を説明します。
 
-OpenSpec の基本的な使い方をまだ知らない場合は、先にこちらを読むと理解しやすいです：[OpenSpecチュートリアル：CLIの導入、コマンド、AGENTS.md、実践例](/blog/openspec-tutorial-cli-commands-agents-md-examples/)。この記事では、1.5 周辺の更新とその意味に絞って解説します。
+OpenSpec の基本操作は[OpenSpec チュートリアル](/ja/blog/openspec-tutorial-cli-commands-agents-md-examples/)を参照してください。以下では 1.5 周辺の更新とその背景を説明します。
 
 ## 一言でまとめると
 
@@ -33,7 +157,7 @@ OpenSpec 1.5 の中心は、**Stores Beta によって specs、changes、plannin
 
 ## OpenSpec 1.5.0：中心は Stores Beta
 
-現在の npm パッケージは `@fission-ai/openspec@1.5.0` で、説明は次のとおりです。
+ここで振り返る過去のリリースは `@fission-ai/openspec@1.5.0` で、説明は次のとおりです。
 
 > AI-native system for spec-driven development
 
@@ -193,12 +317,13 @@ Stores が入ると、多くのコマンドは最初に次を決める必要が�
 
 `list`、`show`、`validate`、`status`、`instructions`、`new change`、`archive`、`doctor`、`context` などは、実行前に一つの root を解決します。
 
-実用上の理解は次の通りです。
+現在の 1.15.0 の優先順位は次のとおりです。
 
 1. 明示的な `--store <id>` が最優先；
 2. そうでなければ現在 repo のローカル OpenSpec root；
 3. そうでなければ `openspec/config.yaml` の `store:` 宣言；
-4. 解決できなければ diagnostics を返して失敗。
+4. グローバル設定の `defaultStore`；
+5. いずれもなければ、Store が登録済みなら選択を求め、未登録なら現在のディレクトリを使う。
 
 これは AI agent にとって非常に重要です。root が曖昧だと、agent は間違ったディレクトリでコマンドを実行したり、repo-local root と外部 planning context を混同したりします。新しい JSON 出力や診断は root/store 情報を持つため、agent が「自分はどこに作用しているのか」を確認しやすくなっています。
 
@@ -299,8 +424,8 @@ Stores 以外で大きなシグナルは、`/opsx:explore` の位置づけが強
 
 ```bash
 # terminal
-npx -y @fission-ai/openspec@latest init .
-npx -y @fission-ai/openspec@latest update
+pnpm dlx @fission-ai/openspec@1.15.0 init .
+pnpm dlx @fission-ai/openspec@1.15.0 update
 ```
 
 その後、AI ツール内で：
@@ -432,7 +557,7 @@ references:
 ```bash
 openspec doctor --json
 openspec context --json
-openspec instructions --change add-billing-api --json
+openspec instructions proposal --change add-billing-api --json
 ```
 
 AI chat では：
@@ -450,7 +575,7 @@ AI chat では：
 openspec new change update-billing-contract --store team-context
 ```
 
-その後、AI agent にその change に対して artifacts を生成させます。
+上のローカル instructions は、そのリポジトリに `add-billing-api` が既にあることを前提とします。Store 所有の変更では、後続のコマンドにも `--store team-context` を付けます。setup と instructions はアプリのコードを生成しません。
 
 ## OpenSpec はどこへ向かっているのか
 

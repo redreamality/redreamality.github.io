@@ -1,6 +1,7 @@
 ---
 title: 'How to Set PYTHONPATH on Windows, Linux, macOS and VS Code'
 pubDate: 2025-08-21T09:24:07.954Z
+updatedDate: 2026-10-26T00:00:00.000Z
 description: 'Set and check PYTHONPATH with PowerShell or export commands. Configure VS Code terminals and debugging so Python imports resolve across Windows, Linux, and macOS.'
 author: 'Remy'
 tags: ['python']
@@ -12,15 +13,63 @@ tags: ['python']
 
 For a project containing `src/my_package/`, add the `src` directory, not `src/my_package` or an individual `.py` file. Use an absolute path when the working directory may change.
 
+## Diagnose the process that cannot import
+
+An environment change applies to subsequently launched child processes. Setting PYTHONPATH in one terminal does not update an already running Python process, another terminal, or the parent VS Code process. After changing a user environment variable, restart VS Code as well as its terminals if it still inherits the old value. Shell startup files affect shells that actually read them, not every application.
+
+<div class="content-table-scroll" role="region" aria-label="Symptom / Check in the failing process" tabindex="0">
+
+| Symptom | Check in the failing process |
+| --- | --- |
+| The variable prints correctly but import fails | Check `sys.executable`, `sys.path`, and the package's parent directory |
+| Terminal succeeds, debugger fails | Set debugger `env` or `envFile`; compare `cwd` and interpreter |
+| Editor accepts the import, runtime fails | `python.analysis.extraPaths` configures Pylance, not runtime imports |
+| A running notebook ignores a change | Restart the kernel with the intended environment |
+| PYTHONPATH is visible but absent from `sys.path` | Check `sys.flags.ignore_environment` and `sys.flags.isolated`; `-E` and `-I` ignore it |
+
+</div>
+
+[Download the standard-library-only process probe](/assets/tutorial-search-repair/pythonpath_probe.py). Run `python pythonpath_probe.py my_package` from your project. It prints the interpreter, working directory, environment value, flags, search path and the imported module's actual file. A traceback after those diagnostics means the import failed; a different package path can expose an unintended installed copy.
+
+Run `python pythonpath_probe.py --self-test` for seven temporary-directory checks. They cover missing configuration, the correct parent directory, the wrong package directory, changed working directories and environment-ignoring flags. The expected final line is `7 local checks passed; no VS Code process was exercised`. No packages or model access are needed.
+
+To compare the debugger, place the downloaded file at the project root alongside `src/my_package/__init__.py`. The latter can be an empty file. Use this complete `.vscode/launch.json`:
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Check Python imports",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/pythonpath_probe.py",
+            "args": ["my_package"],
+            "cwd": "${workspaceFolder}",
+            "env": {"PYTHONPATH": "${workspaceFolder}/src"},
+            "console": "integratedTerminal"
+        }
+    ]
+}
+```
+
+Select the intended Python interpreter and start this configuration. Expect `module_file` to end in `src/my_package/__init__.py`. The `env` value belongs to this launch; it does not configure all integrated terminals. An `env` value overrides the same variable from `envFile`. Use one explicit source while diagnosing, then adopt the project's preferred configuration.
+
+Current [VS Code environment settings](https://code.visualstudio.com/docs/python/environments) make terminal `.env` injection opt-in through `python.terminal.useEnvFile`; [debugger settings](https://code.visualstudio.com/docs/python/debugging) control each debug launch separately. Python's [command-line reference](https://docs.python.org/3/using/cmdline.html) defines the environment-ignoring flags.
+
 ## Quick Reference: Set and Check PYTHONPATH
 
 The following examples replace PYTHONPATH for the current shell session:
+
+<div class="content-table-scroll" role="region" aria-label="Shell / Set one directory / Check the variable" tabindex="0">
 
 | Shell | Set one directory | Check the variable |
 | :--- | :--- | :--- |
 | Windows PowerShell | `$env:PYTHONPATH = 'C:\project\src'` | `$env:PYTHONPATH` |
 | Windows Command Prompt | `set "PYTHONPATH=C:\project\src"` | `echo %PYTHONPATH%` |
 | Linux/macOS Bash or Zsh | `export PYTHONPATH="/path/to/project/src"` | `echo "$PYTHONPATH"` |
+
+</div>
 
 Separate multiple directories with `;` on Windows and `:` on Linux/macOS. Check the interpreter and its effective search path in the same terminal where the import fails:
 
@@ -268,19 +317,19 @@ You can directly modify the workspace settings (`.vscode/settings.json`) to add 
     ```json
     {
         "terminal.integrated.env.windows": {
-            "PYTHONPATH": "${workspaceFolder}\\src;${env:PYTHONPATH}"
+            "PYTHONPATH": "${workspaceFolder}/src"
         },
         "terminal.integrated.env.linux": {
-            "PYTHONPATH": "${workspaceFolder}/src:${env:PYTHONPATH}"
+            "PYTHONPATH": "${workspaceFolder}/src"
         },
         "terminal.integrated.env.osx": {
-            "PYTHONPATH": "${workspaceFolder}/src:${env:PYTHONPATH}"
+            "PYTHONPATH": "${workspaceFolder}/src"
         }
     }
     ```
 
       * `${workspaceFolder}` points to your project root directory.
-      * `${env:PYTHONPATH}` retains any existing system-level PYTHONPATH settings.
+      * These values replace PYTHONPATH in new terminals. Add other required directories explicitly with the platform separator; do not append an empty variable and accidentally include the working directory.
 
 ### 3\. Selecting the Correct Python Interpreter (Managing Virtual Environments)
 
@@ -308,11 +357,15 @@ Select the environment containing your project's dependencies as the workspace i
 
 ### Summary and Comparison
 
+<div class="content-table-scroll" role="region" aria-label="Method / Advantages / Disadvantages / Best Use Cases" tabindex="0">
+
 | Method | Advantages | Disadvantages | Best Use Cases |
 | :--- | :--- | :--- | :--- |
 | **`.env` File** | Keeps environment variables in a project-local file. | Must be loaded by the debugger or an opted-in terminal; Python alone does not read it. | Development requiring references to non-installed modules within the project. |
 | **`settings.json`** | Directly integrated into VS Code workspace settings. | Configuration is slightly more complex, mainly affects the VS Code integrated terminal. | Needing to customize complex environment variables for the VS Code terminal. |
 | **Selecting Interpreter (Virtual Environment)** | Separates installed dependencies from other environments. | Local packages still need installation or an explicit search path. | Projects with their own dependencies. |
+
+</div>
 
 ## Why Is PYTHONPATH Not Working?
 

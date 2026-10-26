@@ -175,6 +175,23 @@
     @apply bg-transparent p-0 text-sm leading-relaxed block text-white dark:text-white;
   }
 
+  .prose :not(pre):not(td):not(th) > code,
+  .prose a,
+  .prose header {
+    overflow-wrap: anywhere;
+  }
+
+  .prose .content-table-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+
+  .prose .content-table-scroll:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
   /* LaTeX 数学公式样式 */
   .prose .math {
     @apply overflow-x-auto py-2;
@@ -222,4 +239,4 @@
   .prose td {
     @apply py-2 px-4 border border-gray-200 dark:border-gray-700;
   }
-} 
+}

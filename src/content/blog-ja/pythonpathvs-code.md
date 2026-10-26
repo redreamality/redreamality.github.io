@@ -1,14 +1,61 @@
 ---
-title: 'PYTHONPATH環境変数の設定：全プラットフォーム＆VS Code開発ガイド'
+title: 'PYTHONPATH の設定と反映されない原因：Windows、Linux、macOS、VS Code'
 pubDate: 2025-08-21T09:24:07.954Z
-description: '本記事では、Windows、macOS、Linuxシステム上でPYTHONPATHを設定する様々な方法と、Visual Studio Code（VS Code）でPythonプロジェクトのモジュール検索パスを設定する非常に便利で推奨される方法を詳しく説明します。'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: 'PYTHONPATH を設定して実行時に検証し、ModuleNotFoundError を調査します。VS Code のターミナル、デバッガー、Pylance の違いと依存不要の確認スクリプト。'
 author: 'Remy'
 tags: ['python']
 lang: 'ja'
 translatedFrom: 'pythonpathvs-code'
 ---
 
-## グローバル PYTHONPATH 
+`PYTHONPATH` は Python のモジュール検索パス `sys.path` にディレクトリを追加します。インタープリターを選択する設定ではありません。`src/my_package/` がある場合は `src` を追加し、`src/my_package` や `.py` ファイルを指定しません。作業ディレクトリが変わる場合は絶対パスを使います。
+
+## インポートに失敗したプロセスを調べる
+
+環境変数の変更は、その後に起動する子プロセスに反映されます。実行中の Python、別のターミナル、親の VS Code プロセスは更新されません。ユーザー環境変数を変更しても古い値が残る場合は、ターミナルと VS Code を再起動します。shell 設定ファイルも、実際に読み込む shell にだけ影響します。
+
+<div class="content-table-scroll" role="region" aria-label="症状 / 失敗したプロセスで確認すること" tabindex="0">
+
+| 症状 | 失敗したプロセスで確認すること |
+| --- | --- |
+| 変数は正しいのにインポート失敗 | `sys.executable`、`sys.path`、パッケージの親ディレクトリ |
+| ターミナルでは成功しデバッグでは失敗 | デバッグの `env` または `envFile`、作業ディレクトリ、インタープリター |
+| エディターでは正常だが実行時に失敗 | `python.analysis.extraPaths` は Pylance 用で実行時には影響しない |
+| notebook に変更が反映されない | 対象の環境でカーネルを再起動 |
+| 変数は見えるが `sys.path` にない | `sys.flags.ignore_environment` と `sys.flags.isolated`。`-E` と `-I` は変数を無視する |
+
+</div>
+
+[標準ライブラリだけで動くプロセス確認スクリプト](/assets/tutorial-search-repair/pythonpath_probe.py)をダウンロードし、プロジェクトで `python pythonpath_probe.py my_package` を実行します。インタープリター、作業ディレクトリ、環境変数、起動フラグ、検索パス、実際のモジュールファイルを表示します。その後の traceback はインポート失敗を示します。別のディレクトリなら、意図しない同名パッケージを読んでいる可能性があります。
+
+`python pythonpath_probe.py --self-test` は一時ディレクトリで七つの確認を行います。未設定、正しい親ディレクトリ、誤ったパッケージディレクトリ、作業ディレクトリの変更、環境を無視するフラグが対象です。最後の行は `7 local checks passed; no VS Code process was exercised` です。依存のインストールやモデルへの接続は不要ですが、利用中の VS Code 設定の検証にはなりません。
+
+デバッガーと比較するには、ダウンロードしたファイルをプロジェクトのルートに置き、空でもよいので `src/my_package/__init__.py` を作成します。`.vscode/launch.json` の全体は次のとおりです。
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Check Python imports",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/pythonpath_probe.py",
+            "args": ["my_package"],
+            "cwd": "${workspaceFolder}",
+            "env": {"PYTHONPATH": "${workspaceFolder}/src"},
+            "console": "integratedTerminal"
+        }
+    ]
+}
+```
+
+対象の Python インタープリターを選択して、この設定で起動します。`module_file` が `src/my_package/__init__.py` で終わることを確認します。この `env` は今回のデバッグ起動に属し、すべての統合ターミナルを設定しません。同じ変数では `env` が `envFile` より優先します。調査中は一つの明示的な設定元で確認してから、プロジェクトの運用に合わせます。
+
+現在の [VS Code 環境設定](https://code.visualstudio.com/docs/python/environments)では、`python.terminal.useEnvFile` でターミナルの `.env` 読み込みを有効にします。[デバッグ設定](https://code.visualstudio.com/docs/python/debugging)は各起動を別に制御します。環境変数を無視するフラグは [Python コマンドライン参考](https://docs.python.org/3/using/cmdline.html)で確認できます。
+
+## グローバル PYTHONPATH
 
 PYTHONPATHは環境変数で、ユーザーがPythonインタープリターがモジュールとパッケージを検索するパスリストに追加のディレクトリを追加できるようにします。これは開発中に特に便利で、標準ライブラリパスやインストール済みパッケージディレクトリにないカスタムモジュールをインポートする必要がある場合に役立ちます。本記事では、Windows、macOS、Linuxシステム上でPYTHONPATHを設定する様々な方法を詳しく説明します。
 
@@ -244,19 +291,19 @@ VS Codeのワークスペース設定（`.vscode/settings.json`）でターミ�
     ```json
     {
         "terminal.integrated.env.windows": {
-            "PYTHONPATH": "${workspaceFolder}\\src;${env:PYTHONPATH}"
+            "PYTHONPATH": "${workspaceFolder}/src"
         },
         "terminal.integrated.env.linux": {
-            "PYTHONPATH": "${workspaceFolder}/src:${env:PYTHONPATH}"
+            "PYTHONPATH": "${workspaceFolder}/src"
         },
         "terminal.integrated.env.osx": {
-            "PYTHONPATH": "${workspaceFolder}/src:${env:PYTHONPATH}"
+            "PYTHONPATH": "${workspaceFolder}/src"
         }
     }
     ```
 
       * `${workspaceFolder}` はプロジェクトルートディレクトリを指します。
-      * `${env:PYTHONPATH}` は既存のシステムレベルのPYTHONPATH設定を保持します。
+      * 新しいターミナルの PYTHONPATH を置き換えます。他のディレクトリは OS の区切り文字で明示し、空の変数を追加して作業ディレクトリが混ざるのを避けます。
 
 ### 3\. 正しいPythonインタープリターを選択（仮想環境の管理）
 
@@ -268,8 +315,7 @@ VS Codeのワークスペース設定（`.vscode/settings.json`）でターミ�
     プロジェクトルートディレクトリでターミナルを開き、次を実行します：
 
     ```bash
-    # venv を使用
-    python -m venv .venv
+    uv venv
     ```
 
     これにより、独立したPython環境を含む`.venv`という名前のフォルダが作成されます。
@@ -285,11 +331,15 @@ VS Codeのワークスペース設定（`.vscode/settings.json`）でターミ�
 
 ### まとめと比較
 
+<div class="content-table-scroll" role="region" aria-label="方法 / 利点 / 欠点 / 最適な使用シナリオ" tabindex="0">
+
 | 方法 | 利点 | 欠点 | 最適な使用シナリオ |
 | :--- | :--- | :--- | :--- |
-| **`.env` ファイル** | **プロジェクト隔離**、設定が簡単、システム環境に影響せず、チームコラボレーションに便利（`.env.example`をバージョン管理に追加可能）。 | ターミナルまたはデバッグセッションを再起動する必要あり。 | プロジェクト内の非インストールモジュールを参照する開発時。 |
+| **`.env` ファイル** | 変数をプロジェクト内に保存し、認証情報を除いた `.env.example` を共有できる。 | デバッガーや明示的に有効にしたターミナルが読み込む必要があり、Python 自体は読まない。 | プロジェクト内の非インストールモジュールを参照する開発時。 |
 | **`settings.json`** | VS Codeワークスペース設定に直接統合。 | 設定がやや複雑で、主にVS Codeの統合ターミナルに影響。 | VS Codeターミナルの複雑な環境変数のカスタマイズが必要な場合。 |
 | **インタープリターの選択（仮想環境）** | インストールした依存パッケージを環境ごとに分離。 | ローカルパッケージは別途インストールまたは検索パスの設定が必要。 | 独立した依存関係を持つ Python プロジェクト。 |
+
+</div>
 
 パッケージ定義がある場合は、仮想環境と編集可能なインストールを優先します。未インストールのソースを一時的に参照する場合に、プロジェクト単位の `PYTHONPATH` を選びます。失敗したプロセスの `sys.executable`、`sys.path`、作業ディレクトリを確認してください。
 

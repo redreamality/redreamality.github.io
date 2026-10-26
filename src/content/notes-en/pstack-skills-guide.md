@@ -1,6 +1,6 @@
 ---
-title: "pstack's 51 Skills: How to Use poteto's Engineering Workflow in Cursor"
-description: "pstack, the plugin Lauren Tan (poteto) open-sourced, ships 51 skills. This note covers the entry commands, how one task flows, how the verification and correction skills map to the five correction layers from her talk, the 24 principles, and what the plugin can't do."
+title: "How to use pstack skills: first task, host support, and a feature map"
+description: "Start a pstack task with a runnable CLI example, check Cursor and Claude Code support, and build a feature map with failing and passing verification evidence."
 date: 2026-10-08
 source: "https://github.com/cursor/plugins/tree/main/pstack"
 tags: ["ai-agents", "agent-harness", "ai-coding", "code-review", "Cursor"]
@@ -8,11 +8,106 @@ lang: "en"
 translatedFrom: "pstack-skills-guide"
 ---
 
-pstack is a Cursor / Grok Bot plugin by Lauren Tan ([@poteto](https://x.com/poteto)). Install it and you get 51 skills: the engineering habits she uses for her own coding every day. It's for people who already write code with agents but don't yet dare to let them run on their own. In her talk she argued that trust has to come before parallelism, and she laid out which layer a correction belongs in. We wrote that up here: [Trust First, Then Parallel](/blog/lauren-tan-poteto-trust-before-parallel/). You can read pstack as those ideas turned into skills. In the talk she said she wouldn't go into the plugin that day, so this note fills that gap.
+pstack is Lauren Tan's ([@poteto](https://x.com/poteto)) collection of engineering skills. Start with a small task whose result you can check yourself. The walkthrough below fixes a task-list CLI, records its failure, and verifies the corrected output without dependencies or API credentials.
 
-First, the scope. Details below follow the public repository, [the pstack directory in cursor/plugins](https://github.com/cursor/plugins/tree/main/pstack). When I checked it, the plugin was at version 0.15.15, MIT licensed. The repo changes often, so details like default models and the playbook count may change later.
+Jump to [host compatibility](#host-compatibility), [your first task](#first-task), or [the feature-map example](#feature-map-example). The original skill reference remains below, with its existing section links.
+
+The installation guidance was checked on October 26, 2026 against [official pstack 0.15.32](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/.cursor-plugin/plugin.json). The later skill inventory describes the earlier 0.15.15 snapshot, including its 51 skills and 24 principles; it is not a current exhaustive list. For the reasoning behind the workflow, see [Trust First, Then Parallel](/blog/lauren-tan-poteto-trust-before-parallel/).
+
+<a id="host-compatibility"></a>
+
+## Check your host before installing
+
+The [official README](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/README.md) now documents both Cursor and Claude Code installation. "Third-party marketplace" in Claude Code means an external marketplace; it does not make this upstream pstack adapter an unofficial port.
+
+<div class="content-table-scroll" role="region" aria-label="Host / Installation and entry / Boundary" tabindex="0">
+
+| Host | Installation and entry | Boundary |
+| --- | --- | --- |
+| Cursor | `/add-plugin pstack`, then `/setup-pstack` and `/poteto-mode` | The model rule is `~/.cursor/rules/pstack-models.mdc`. Available models depend on your account. |
+| Claude Code | `/plugin marketplace add cursor/plugins`, then `/plugin install pstack@cursor-plugins` | Use `/pstack:setup-pstack` and `/pstack:poteto-mode`. The rule is `~/.claude/rules/pstack-models.md`. |
+| Codex or another host | Check the installed package's origin and the host's skill loader | The checked upstream README does not give a Codex installation recipe. A copied skill or a community port does not establish full compatibility. |
+
+</div>
+
+The [official Claude Code adapter](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/docs/harness/claude-code.md) maps unsupported non-Claude model names to the session model. It also skips steps requiring unavailable Cursor capabilities. Do not assume a Grok review panel, Cursor Automations, or a cloud agent runs unchanged there. For a third-party port, inspect its upstream revision, tool mappings, model selection, and missing-feature behavior before using parallel workflows. Being able to read `SKILL.md` is only the first check.
+
+<a id="first-task"></a>
+
+## Complete a first task with a local CLI
+
+Use Node.js 22 or newer. This exercise needs no package manager, server, account, or model call to reproduce the result. Download the [buggy CLI](/assets/pstack-search-repair/task-cli.before.mjs), [fixture](/assets/pstack-search-repair/tasks.json), and [verification runner](/assets/pstack-search-repair/verify.mjs) into one empty directory, preserving their filenames. The [reference fix](/assets/pstack-search-repair/task-cli.mjs) is available separately.
+
+1. Open a terminal in that directory. Check the runtime and reproduce the bug:
+
+   ```sh
+   node --version
+   node task-cli.before.mjs tasks.json --status open
+   node verify.mjs task-cli.before.mjs evidence-before.json
+   ```
+
+   The first CLI command returns task 2, `Publish release`, with `done: true`. The runner prints `FAIL open` and exits 1. The other six command checks pass. The desired open task is ID 1, `Write release notes`.
+
+2. Open the directory in your supported host. Install and configure pstack using the host section above, then send this prompt. In Claude Code, replace `/poteto-mode` with `/pstack:poteto-mode`.
+
+   ```text
+   /poteto-mode Fix the task list's open filter. Read task-cli.before.mjs
+   and create task-cli.mjs as the corrected version. Keep the original
+   fixture and verify.mjs unchanged. Open must return only task 1;
+   done must return only task 2; the default and all lists must return both.
+   Unsupported or missing status values must exit 2 with empty stdout.
+   Reproduce before editing, run the supplied verifier on both versions,
+   and report commands, outputs, exit codes, and evidence paths.
+   Work locally. Do not commit, open a PR, publish, or call paid external APIs.
+   ```
+
+   A host model session can still consume your account's quota. Running the local exercise itself does not call a model. An agent that cannot run a command should report the blocker, not call the task verified.
+
+3. Inspect the change. The reference fix changes the open branch from `task.done` to `!task.done`. Run the corrected file:
+
+   ```sh
+   node task-cli.mjs tasks.json --status open
+   node verify.mjs task-cli.mjs evidence-after.json
+   ```
+
+   Expect `[{"id":1,"title":"Write release notes","done":false}]`, seven passing command checks, `PASS fixture unchanged`, and exit 0. If you skip the agent step, download the reference fix into the same directory and run these commands yourself.
+
+The delivered files are the corrected CLI and the two evidence JSON files. Our local run on Windows with Node.js v26.7.0 produced the [failing result](/assets/pstack-search-repair/evidence-before.json) and [passing result](/assets/pstack-search-repair/evidence-after.json) on October 26, 2026. Each report contains exact arguments, stdout, stderr, exit codes, and file hashes. These are real CLI executions; the prompt above is a suggested exercise, not a claim that we ran pstack's model workflow.
+
+<a id="feature-map-example"></a>
+
+## Write a feature map that catches the failure
+
+A feature map describes how a user reaches a behavior and what observable result proves it. For this example, keep the index and recipe beside the CLI:
+
+```text
+task-cli.before.mjs
+task-cli.mjs
+tasks.json
+verify.mjs
+feature-map/
+  README.md
+  list-tasks.md
+evidence-before.json
+evidence-after.json
+```
+
+The downloadable [index](/assets/pstack-search-repair/feature-map/README.md) and [complete feature recipe](/assets/pstack-search-repair/feature-map/list-tasks.md) are site-authored English examples. Their four recipe sections follow the [official feature-map example](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/skills/create-verification-skill/references/feature-map-example/create-note.md). They are not generated skill output.
+
+| Recipe section | Contents for this project |
+| --- | --- |
+| Sub-features | Default, all, open, done, invalid status, missing status, invalid input |
+| How to get to it (user POV) | Terminal entry through `node task-cli.mjs tasks.json` and its status option |
+| Driving it with Node.js | Fixture preconditions, exact commands, expected JSON, exit codes, and evidence path |
+| Gotchas | Exit 0 alone cannot prove the filter works; keep the fixture unchanged and retain evidence |
+
+Before the filter exists, a map may verify only that the default list returns IDs 1 and 2. After adding `--status`, that recipe is incomplete: the buggy version still passes it. Add the open-list recipe with expected ID 1 and rerun it; the failure now becomes visible. If the product intentionally renames the option, update the recipe and runner together. If the unchanged command returns the wrong task, fix the product instead of changing the expected ID.
+
+To generate a project-local skill in Cursor, ask `/create-verification-skill` to use this CLI, fixture, and verifier, with local-only execution and no commit or PR. In Claude Code, use `/pstack:create-verification-skill`. Inspect the generated launch, doctor, drive, evidence, and cleanup instructions, then require a successful end-to-end run. This example has no server to stop and never mutates task data. For a persistent app, add a read-only check of stored values and explicit cleanup for the disposable instance.
 
 ## What it's trying to fix
+
+The reference from this section through "What it can't do" describes pstack 0.15.15 in Cursor. Its commands, model defaults, custom-mode behavior, and workflow recommendations are historical descriptions, not a compatibility promise for current releases or other hosts. For installation and a first task, use the [host guidance](#host-compatibility) and [walkthrough](#first-task) above.
 
 The README opens with "if you want to go fast, go deep first." Her view is that agents produce too much filler code right now, throughput without quality, and she doesn't want that. pstack's goal isn't more lines of code. It's the opposite: write less, but higher quality code.
 
@@ -20,13 +115,13 @@ The second claim runs along the same line as the talk. When you can go deep on o
 
 The third point is models. pstack isn't tied to any model, and many skills are multi-model by design: the same job goes to models from different families to do or review, using each one's strengths.
 
-One stance deserves its own mention. pstack has no planning skill. In the README she says she personally doesn't believe in planning first, and that "the best spec is code." If you do want a plan, `/poteto-mode` has a playbook for it, but it isn't a default step.
+One stance deserves its own mention. The 0.15.15 snapshot had no dedicated planning skill. Its README said she personally didn't believe in planning first, and that "the best spec is code." That version of `/poteto-mode` offered a planning playbook, but planning was not a default step.
 
 On usage, she said in a post that in the week it was open-sourced, May 2026, the engineering team used these skills about 10,000 times. That's her own claim, not an independent count.
 
 ## Install and the two entry commands
 
-Install the plugin from a Cursor chat:
+The 0.15.15 guide gave this installation command for a Cursor chat:
 
 ```text
 /add-plugin pstack
@@ -34,11 +129,11 @@ Install the plugin from a Cursor chat:
 
 After that you only need to remember two commands.
 
-The first is `/setup-pstack`. It detects which models your account can actually call, asks how large a reasoning budget you want (four levels: unlimited, large, medium, small; the default matches large, which is xhigh), and then lists which model each role uses for you to confirm. Roles include code writing, judgment and prose, and several review panels. Once you confirm, it writes an always-applied rule (a rule loaded into every session) at `~/.cursor/rules/pstack-models.mdc`, and every skill reads it. A role with no line falls back to the skill's built-in default. Setting a role to `auto` or `inherit-parent` makes that subagent use your current chat's model. Per the current README, code work goes to Grok by default, while the hardest changes, prose, and judgment go to Opus 5.5, and the default review panel takes one model from each.
+The first was `/setup-pstack`. In the snapshot, it detected available models, offered four reasoning budgets (unlimited, large, medium, small, with large or xhigh as the default), and asked you to confirm the model for each role. Roles covered code writing, judgment and prose, and review panels. It wrote an always-applied rule at `~/.cursor/rules/pstack-models.mdc`. A missing role used the skill's built-in default; `auto` or `inherit-parent` used the session model. The snapshot's README assigned code work to Grok, the hardest changes, prose, and judgment to Opus 5.5, and one model from each family to the default review panel.
 
 At the end, setup also checks whether your project has any way to prove app behavior. If it doesn't, it offers once to generate one with `/create-verification-skill`. The guide's advice for newcomers is to say yes, because this step pays off the most. More on that below.
 
-The second is `/poteto-mode`, which you use at the start of a task. Plain Enter applies it to that one message only. If you pick it from the slash menu with Option+Enter (Mac) or Alt+Enter (Windows), it becomes a custom mode and stays in context on every turn until you exit. Custom modes are currently available in Cursor's agents window and the CLI.
+The second was `/poteto-mode`, invoked at the start of a task. The snapshot's guide described plain Enter as applying it to one message. Selecting it with Option+Enter (Mac) or Alt+Enter (Windows) made it a custom mode that remained in context until you exited. The guide described that behavior for Cursor's agents window and CLI at the time.
 
 If you're unsure which skill to use, ask `/poteto-help`. It answers the question, gives you a prompt you can send as-is, and names the file the answer came from. It won't start the work for you, because a pstack run spends a fair amount of tokens.
 
@@ -80,6 +175,8 @@ This group covers how work is split up before and during implementation.
 
 `show-me-your-work` is that decision log: one TSV file, one row per decision, with columns for time, phase, what was done, why, evidence (a pointer such as a commit, PR number, file and line, or screenshot path, never a paragraph), and result. It stays local by default. Commit it when the work is big enough that a reviewer needs the trail to trust the result.
 
+<div class="content-table-scroll" role="region" aria-label="skill / in one line" tabindex="0">
+
 | skill | in one line |
 | --- | --- |
 | `architect` | Settle caller usage, types, signatures, and module structure before implementing; start over if implementation proves the design wrong |
@@ -90,11 +187,15 @@ This group covers how work is split up before and during implementation.
 | `show-me-your-work` | A TSV decision log for long or unattended work, one row per decision |
 | `make-bot-ui` | Build a small page whose buttons wake a Grok Bot over a webhook, keeping the key on a local server |
 
+</div>
+
 ## Verification and correction, mapped to the talk's five layers
 
 This is the most interesting group in pstack, because it runs along the same line as the five correction layers in the talk. A quick recap of those layers, strongest first. Layer one is the codebase and architecture: make the bad pattern impossible to write as a category. Layer two is static analysis: lint, compilers, CI. Layer three is rules, Bugbot, and skills, where things move from enforcement to guidance. Layer four is style guides and human review. Layer five is verification skills, which can prove whether a feature works but don't prove performance or code quality.
 
 The mapping below is this note's own arrangement by what each skill does. It isn't a table she has published:
+
+<div class="content-table-scroll" role="region" aria-label="Layer in the talk / Matching pstack skills" tabindex="0">
 
 | Layer in the talk | Matching pstack skills |
 | --- | --- |
@@ -103,6 +204,8 @@ The mapping below is this note's own arrangement by what each skill does. It isn
 | Layer 3: rules and skills | `reflect` turning one session's lessons into skill edits; pstack as a whole also lives here |
 | Layer 4: human review | `interrogate` running adversarial review across several models; Comment Sicko inside `no-comments` is also a reviewer |
 | Layer 5: verification | `create-verification-skill`, `maintain-verification-skill`, the `prove-it-works` principle |
+
+</div>
 
 ### correct: move repeated corrections out of the prompt and into the repo
 
@@ -138,6 +241,8 @@ The talk pointed out that a verification skill proves whether something works, n
 
 `/reflect` is for after a task: it spawns three parallel review subagents over the current conversation, each drawing lessons from a different angle (judgment, tooling, divergent), and a synthesizer sorts them into accepted, rejected, and backlog. Items that could be enforced by a lint, a script, or metadata get moved to the backlog, to be fixed at a higher layer. Accepted items wait for your approval before any skill changes, because changing a skill affects every future agent. The guide draws the line clearly: `/reflect` improves skills from one session, and `/correct` changes the repo so a class of mistake can't come back.
 
+<div class="content-table-scroll" role="region" aria-label="skill / in one line" tabindex="0">
+
 | skill | in one line |
 | --- | --- |
 | `create-verification-skill` | Generates a project-local skill that drives the app like a user, with a feature map, self-tested before handoff |
@@ -148,6 +253,8 @@ The talk pointed out that a verification skill proves whether something works, n
 | `no-comments` | Sends Comment Sicko to review comments, deletes what should go, turns claimed constraints into code constraints |
 | `interrogate` | Models from different families adversarially review a diff; the lead sorts the verdict and changes nothing automatically |
 | `reflect` | Three subagents mine the current conversation for lessons; once you approve, they become edits to existing skills |
+
+</div>
 
 ## Understanding code: how, why, teach, recall, bro
 
@@ -191,6 +298,8 @@ The principles are 24 very short skills, one rule each. `poteto-mode` keeps an i
 
 For users, the most practical use of the principles is steering. You don't call them; you just say the name. If the agent is about to add a fourth adapter on top of three old ones, say "subtract before you add, delete the obsolete adapters first." If it claims it's done because the build passed, say "prove it works, run the real import flow and show me the written records." Each name points at a complete rule the agent has already read, so one phrase is more precise than a paragraph of instructions. It still has to say in its reply which decision the principle changed.
 
+<div class="content-table-scroll" role="region" aria-label="group / principle / in one line" tabindex="0">
+
 | group | principle | in one line |
 | --- | --- | --- |
 | core | `laziness-protocol` | When refactoring or sizing a diff, lean toward deletion and the smallest change; don't add layers of abstraction |
@@ -217,6 +326,8 @@ For users, the most practical use of the principles is steering. You don't call 
 | delegation | `guard-the-context-window` | When context is filling up, hand bulk reading to subagents and keep only summaries in the main thread |
 | delegation | `never-block-on-the-human` | Don't ask "should I?" on reversible work; do it, show the result, let the human correct afterwards |
 | meta | `encode-lessons-in-structure` | The second time you write the same instruction, turn it into a lint, metadata, a runtime check, or a script |
+
+</div>
 
 The guide's advice is not to memorize this table. Skim it, and come back the day you see the agent do something one of these names would have prevented.
 
@@ -252,7 +363,7 @@ Say a list page got noticeably slower to open after a few PRs merged last week. 
 
 **It costs tokens.** Subagents and review panels are extra spend. The guide's ways to save: lower the reasoning budget or pick cheaper models, put fast models in the code roles, shorten panel lists, and don't use `poteto-mode` for small, obvious edits.
 
-**It's her style.** The default playbooks, tone, and principles come from one person's habits. If you don't want them wholesale, use `automate-me` to make your own mode. The default models reflect the current version and will change when Cursor's model lineup does. The repo also ships a dormant automation pack, benny, which triages issue reports from Slack and reproduces and fixes them. It isn't counted among the 51 skills, and neither are the two subagents, `poteto-agent` and Comment Sicko.
+**It's her style.** The default playbooks, tone, and principles came from one person's habits. The snapshot offered `automate-me` to create your own mode. The model defaults listed here belong to 0.15.15 and may differ from your installed version. That snapshot also included a dormant automation pack, benny, for triaging Slack issue reports and reproducing and fixing them. It was not counted among the 51 skills, nor were the two subagents, `poteto-agent` and Comment Sicko.
 
 ## Links
 

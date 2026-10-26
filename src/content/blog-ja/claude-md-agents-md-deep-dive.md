@@ -1,455 +1,516 @@
 ---
-title: 'CLAUDE.mdとAGENTS.md徹底解説：基礎から直感に反するパターンまで'
+title: 'AGENTS.mdとCLAUDE.mdの違い：読み込み条件、共存設定、テンプレート'
 pubDate: 2026-04-26T00:00:00.000Z
-description: 'Anthropicの公式ガイドからKarpathyのprogram.mdパラダイムへ、二度目ルールからダーウィニアン・メモリへ、Spec-DrivenからEval-Drivenまで——AIコーディングエージェント向けのプロジェクトファイルをどう書くのか、そして借りる価値のある直感に反するメンタルモデルを長文で俯瞰する。'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: 'Claude Codeのバージョン別にAGENTS.mdとCLAUDE.mdの読み込みと共存を説明。Codexの探索規則、確認手順、共通指示のテンプレートも掲載。'
 author: 'Remy'
 tags: ['claude-code', 'ai-agents', 'Context Engineering']
 lang: 'ja'
 translatedFrom: 'claude-md-agents-md-deep-dive'
 ---
 
-## なぜわざわざ書くのか
+## AGENTS.mdとCLAUDE.mdはどちらを使う？
 
-Claude Code、Cursor、Codex、Aider、Jules、Amp、Windsurf、あるいはこの1年で登場した十数個のAIコーディングツールを使ったことがあるなら、`CLAUDE.md` か `AGENTS.md` をほぼ確実に書いたはずだ。もしかすると両方。7つのリポジトリ全部に。そこで誰もが一度は考える。これはどれくらいの長さにすべきなのか。READMEのように読むべきなのか、それともコマンド一覧のように書くべきなのか。1つのファイルを複数ツールで共有できるのか。書いたあと、エージェントは本当に従ってくれるのか。
+**複数ツールで共有するリポジトリの指示とCodex向けの指示はAGENTS.md、Claude Code専用の指示はCLAUDE.mdに置く。** 両方を使うチームには、共通ルールを `AGENTS.md` に集め、短い `CLAUDE.md` から `@AGENTS.md` でインポートする構成を勧める。共通ルールを一か所で保守でき、各メンバーのClaudeのバージョンやフォールバック設定にも依存しにくい。[1] [2] [3]
 
-これは、2025年半ばから2026年初頭にかけて、英語圏と中国語圏のコミュニティが「AI向けのプロジェクトファイルを書く」ことについて学んできた内容をまとめた長いサーベイである。ハウツーではない。むしろ**メンタルモデルの歴史**に近い——Anthropicの初期ベストプラクティスから、Karpathyの`program.md`パラダイム、Geoffrey HuntleyのRalph Wiggumループ、そしてclaude-evolveの「ダーウィニアン・メモリ」実験までをたどる。最後の数章では机に戻り、ナレッジ・ヴォールトとバックエンド・リポジトリ向けの具体的なチェックリストを提示する。
+**Claude CodeはAGENTS.mdを直接読むのか。** **v2.1.277以降**の対応セッションでは読める。ただし既定では、作業ディレクトリかその祖先に `CLAUDE.md`、`.claude/CLAUDE.md`、`CLAUDE.local.md` があると、AGENTSへのフォールバックが止まる。ユーザーの `~/.claude/CLAUDE.md`、組織管理の指示、`.claude/rules/` はこの判定から除外される。両方のファイルを置くだけでは、両方が読み込まれるとは限らない。[1]
 
-全12章、およそ6,000語。前半6章は基礎と現状、後半6章は直感に反するパターンと実装上の配線だ。奇妙で実用的な部分だけ知りたいなら、第6章へ飛んでほしい。
+まず `claude --version`、次に `/config` の **Project instructions** と `/context` を確認し、`/memory` でAGENTSのパスを見る。旧クライアントや混在環境には下の[インポート用テンプレート](#共通ルールとインポートのテンプレート)を使う。直接共存させる条件は[バージョン表](#バージョンと配置による読み込みの違い)、Codexについては[独自の探索規則](#codexの探索とフォールバック)を参照してほしい。
 
----
+## バージョンと配置による読み込みの違い
 
-## 1. Three Files, Three Audiences: README.md vs CLAUDE.md vs AGENTS.md
+以下は**2026年10月26日に確認した公式文書**の説明であり、過去の全バージョンに共通する仕様ではない。[1]
 
-Before any "file written for AI" can mature, the three files have to be cleanly separated.
+| バージョンまたは設定 | 動作 |
+| --- | --- |
+| v2.1.277より前、AGENTS内蔵プラグインを無効化、またはv2.1.276以前から更新した直後の一部セッション | 直接読み込めない。CLAUDEからインポートする。更新後は新しいセッションも試す。 |
+| v2.1.277からv2.1.280 | 直接読み込みに対応するが、Bedrockやテレメトリー無効などの一部セッションでは更新かインポートが必要。 |
+| 対応セッションで既定の `claude-md-or-agents-md` | 作業ディレクトリと祖先に対象のCLAUDEファイルがない場合だけAGENTSを読む。 |
+| `claude-md-and-agents-md` | 両方を読む。各ディレクトリではCLAUDEが先、AGENTSが後。インポート済みのAGENTSは重複しない。 |
+| `claude-md` | CLAUDEだけを直接読む。明示的な `@AGENTS.md` インポートは使える。 |
+| `managed-only` | 起動時は組織管理の指示と自動メモリーだけ。サブディレクトリやパス別ルールの遅延読み込みまで全面的に止める設定ではない。 |
 
-**README.md** is for humans. The audience is the developer who just opened your repo for the first time. The goal is to get them to "what does this project do, how do I run it, how do I contribute" within five minutes. The voice is descriptive and a little promotional. The shape is the pyramid principle: **what → how → how to participate**.
+`/config` の **Project instructions** で変更する。ユーザー設定を編集する場合は、既存の値を残して `~/.claude/settings.json` に次の項目を統合する。
 
-**CLAUDE.md** is for Claude Code. The audience is an AI agent that **starts every session from zero**. It has no memory of last time, no intuitive sense of the directory structure, no shared culture with the team. It is a freshly amnesiac detective. What that detective actually needs is operational: which command builds, which command tests, which traps must be known to avoid them, how to verify the change.
-
-**AGENTS.md** is the open standard published in August 2025 by OpenAI, Google, Cursor, Factory, Sourcegraph and others. It is now hosted by the Linux Foundation through the Agentic AI Foundation. The promise is one file, read natively by Codex, Cursor, Aider, Jules, Copilot, Claude Code, Amp, Windsurf, Zed and twenty-odd other tools. Adoption is past sixty thousand repos at the time of writing.
-
-The three files are complementary, not substitutes. README.md answers "what". CLAUDE.md and AGENTS.md answer "how". The first is a marketing page for humans; the others are an operations manual for machines.
-
-A common failure mode is writing CLAUDE.md as a re-skin of README.md — pasting the project blurb, the architecture diagram, the Getting Started snippet. None of that is what the agent needs. The agent does not care about your project's value proposition; it cares whether the test command is `pnpm test` or `npm run test:unit`, whether codegen needs to run after edits, which directories are off-limits.
-
-The second failure mode is treating CLAUDE.md as written-once. Anthropic's best practices put it bluntly: "**Treat CLAUDE.md like code: review it when things go wrong, prune it regularly.**" It is a living document, and its lifecycle is a code lifecycle.
-
----
-
-## 2. Universal Best Practices: Length, Structure, Voice
-
-### Length
-
-This is the least controversial and most-often-violated dimension.
-
-Dexter Horthy of HumanLayer published a piece called *Writing a good CLAUDE.md* in which he gives a very specific anchor: their main repository's root CLAUDE.md is **under 60 lines**. A Chinese-speaking author ran a careful experiment: cutting from 3,000 characters to 1,000 produced clear improvement; cutting to 800 was the sweet spot; cutting to 400 lost critical information. He stabilized at around 800 Chinese characters. `vercel/vercel`, a complex monorepo, lives at 247 lines. `openai/codex` is roughly 800 lines, but it survives only because of strict heading discipline.
-
-Rough community consensus: **typical projects ≤ 250 lines; large monorepos shard by sub-package; anything > 500 lines must be aggressively partitioned.** The deeper number Anthropic has hinted at in public talks: frontier models reliably follow somewhere in the range of **150 to 200 instructions**. Past that, compliance decays fast.
-
-### Structure
-
-A workable CLAUDE.md tends to have:
-
-1. **CRITICAL RULES** — the red lines. "Never push to main." "Never `rm -rf`."
-2. **PROJECT CONTEXT** — stack, monorepo layout, key architectural decisions.
-3. **BUILD & TEST COMMANDS** — concrete, copy-pasteable. Not "run the tests"; `pnpm test --watch=false`.
-4. **CODE STYLE** — with examples. Not "keep code clean"; show a good and a bad snippet.
-5. **FILE ORGANIZATION** — what lives where.
-6. **VERIFICATION** — how to confirm the change did not regress something.
-7. **COMMON PITFALLS** — accumulated over time, in event order.
-
-The `vercel/vercel` AGENTS.md is instructive: it has a dedicated *Common Pitfalls* section collecting concrete bites — "no `console.log` in CLI packages", "do not skip CI hooks". `vercel-labs/open-agents` has its parallel *Lessons Learned*. Both implement the same idea: **convert one-time pain into long-lived rules.**
-
-### Voice
-
-Imperative, strong modals, concrete paths and commands. Write `ALWAYS run pnpm typecheck before claiming the task is done`, not "please verify code quality". Write `Never import from src/internal/*`, not "be careful with imports".
-
-The frequently-cited number is **70%** — about seventy percent of CLAUDE.md rules get followed. Which means real red lines cannot rely on CLAUDE.md alone. Red lines need hooks: `PreToolUse` returning exit code 2 is the only way to actually block a forbidden action. The other thirty percent is what hooks are for.
-
----
-
-## 3. Eight Real Samples Worth Reading
-
-Theory always loses to a real file. Eight samples worth opening:
-
-**1. openai/codex** — 800 lines, partitioned by crate (`codex-core`, TUI style, TUI code, text wrapping, tests, snapshot tests, app-server API). The most valuable rule in the file is **"Resist adding code to codex-core."** A negative-intent rule like that beats "keep code simple" by a wide margin. The file also pins concrete numbers — 500 LoC target per file, 800 LoC hard split, `insta` for snapshots, `pretty_assertions` for deep equality.
-
-**2. vercel/vercel** — 247 lines, a gold-standard monorepo template. Clean structure: Repository Structure / Essential Commands / Changesets / Code Style / Testing Patterns / Package Development / Runtime Packages / CLI Development / **Common Pitfalls**. The pitfalls section is a living trap-avoidance manual.
-
-**3. openai/openai-agents-python** — 480 lines, and the interesting part is that instructions are written as **explicit skill invocations**: `$code-change-verification`, `$pr-draft-summary`. Runtime changes must call `$implementation-strategy` first. Doc-only and meta changes are allowed to skip full validation. It treats Markdown as a small DSL for workflow.
-
-**4. vercel-labs/open-agents** — 280 lines, opening with "This is a living document. When you make a mistake, add it to Lessons Learned." That single line is a **self-evolution contract**: both agent and human are invited to append. Concrete rules include "quote `[id]` dynamic-route paths to dodge zsh globbing", "edits to `schema.ts` must generate a migration, never `db:push`".
-
-**5. vercel-labs/agent-skills** — its single most important constraint is "**Keep SKILL.md under 500 lines**", with progressive disclosure for everything below.
-
-**6. anthropics/anthropic-cookbook** — mandates `uv` for Python, mandates **model aliases** (`claude-sonnet-4-6`) over date-pinned IDs. Date-pinned IDs rot.
-
-**7. karpathy/llm-council** — Karpathy's own vibe-coded project's CLAUDE.md. It records **not code style**, but project-level long-term memory and traps: "ReactMarkdown must be wrapped in `<div className="markdown-content">`", "chairman defaults to Gemini". This is what CLAUDE.md is supposed to look like.
-
-**8. affaan-m/everything-claude-code (AgentShield)** — an anti-pattern scanner for CLAUDE.md, settings.json, and MCP configs. Five audit categories, fourteen secret-pattern detectors. Common anti-patterns it surfaces: hard-coded API keys in CLAUDE.md, expired model IDs, vague directives like "be careful".
-
-The eight samples agree on one thing: **a good CLAUDE.md is a fossil layer of project decisions, not a textbook.**
-
----
-
-## 4. Karpathy's Three Paradigm Shifts
-
-If Anthropic's docs tell us *how* to write, Karpathy spent 2025-2026 redefining *why* we write it.
-
-### Shift 1: Prompt Engineering → Context Engineering
-
-On 25 June 2025, Tobi Lütke argued for "context engineering" over "prompt engineering". Karpathy publicly +1'd and added:
-
-> "In every industrial-strength LLM application, context engineering is the delicate art and science of filling the context window."
-
-The emphasis: **context is a system output, not a static string.** It is generated by a dynamic pipeline immediately before each main LLM call, varying by task. The counterintuitive consequence is that when you write CLAUDE.md, you are not authoring a prompt — you are authoring **a runtime variable in a system**. The variable has to interact with task, session, and time.
-
-### Shift 2: Markdown as Source Code (`program.md`)
-
-Karpathy's `autoresearch` repo (sibling to nanochat) uses an instruction file called **`program.md`** — not AGENTS.md, not CLAUDE.md. The working model is brutal but elegant:
-
-> Humans iterate on `program.md`. The agent iterates on `.py`.
-
-Markdown becomes the source. The agent is compiler and runtime. You no longer write Python; you write a natural-language specification, and the agent generates and refines code from it. This is the concrete shape of "Software 2.0" and "Software 3.0" he has been signaling for years.
-
-Looking back at CLAUDE.md from this angle: it is not a config file. It is **the spec layer of your project's source**. Cutting it from 100 lines to 80 is refactoring.
-
-### Shift 3: Goal-Driven Execution (Declarative > Imperative)
-
-Karpathy's principles, as packaged in `forrestchang/andrej-karpathy-skills` (43k installs in a week), include this counterintuitive line:
-
-> "LLMs are extremely good at looping until they hit a specific goal. Don't tell them how to do it. Give them success criteria and let them run."
-
-Translated to project files: **do not write step-by-step instructions in CLAUDE.md. Write success criteria.** Not "read A, modify B, then run C", but "after the change, `pnpm test` must be green and `git diff` must contain no `console.log`." The latter lets the agent organize its own path. The former hits dead ends and stalls.
-
-This inverts the classic engineering instinct of "draw the flowchart first". **In the agent era, a good spec is declarative.**
-
----
-
-## 5. Mental Models from the Other Heavyweights
-
-### Armin Ronacher: Logs as APIs, No Dead Ends
-
-The Flask author has two posts that should be required reading: *Agentic Coding Recommendations* and *Agent Design Is Still Hard*. Two rules.
-
-**Logs as APIs.** In debug mode, dump signup confirmation emails straight to stdout. CLAUDE.md tells the agent to read the logs. The agent then completes the entire "register → wait for email → extract link → click" flow on its own — **no human bridge needed**. The technique generalizes: any asynchronous side effect can be exposed to the agent through the same mechanism.
-
-**No dead ends.** The image-generation tool must write into the same virtual filesystem the code-execution tool reads. The toolchain must form a closed loop. Otherwise the agent gets stuck in "I made the image but I cannot read it" paradoxes.
-
-A subtler observation: Claude Code's `TodoWrite` is just an echo of the task list, but **dynamic re-injection beats one-time top-of-context placement**. Things at the top of the context window get diluted by attention; things re-injected after each tool call stay fresh.
-
-### Geoffrey Huntley: stdlib, Ralph, Window Utilization
-
-Geoffrey Huntley treats team conventions as **a programming language's standard library**. Rules live in `.cursor/rules/*.mdc` or `specs/stdlib/*.md`. He puts it bluntly:
-
-> "You are programming the LLM, not using an IDE."
-
-His **Ralph Wiggum technique** (named after the dim Simpsons character) takes this to its extreme:
-
-```bash
-while :; do cat PROMPT.md | npx --yes @anthropic-ai/claude-code-cli ...; done
+```json
+{
+  "pluginConfigs": {
+    "cc-plugin-agents-md@builtin": {
+      "options": { "instructionFiles": "claude-md-and-agents-md" }
+    }
+  }
+}
 ```
 
-One process, one repo, one task per loop. PROMPT.md is the coordination hub. He insists that **there is no perfect prompt** — those CURSED prompts copy-pasted from Hacker News do not work because they were evolved against specific LLM behavior in a specific context.
+**v2.1.285より前**はキーを `agents-md@builtin` にする。v2.1.285以降は両方のIDを受け付ける。この項目を読むのはユーザー設定、`--settings`、組織管理の設定であり、**プロジェクト設定とlocal設定では無視される**。変更は次のメッセージから適用されるため、`.claude/settings.json` に書いてチーム全員へ配布しても、この設定は有効にならない。[1]
 
-His core operational metric: **target 40-60% context window utilization**. Above that, output quality drops. The whole *advanced context engineering for coding agents* workflow is built around frequent, intentional compaction.
+Claudeが直接読むのは `AGENTS.md` と `.claude/AGENTS.md` で、`AGENTS.override.md`、`AGENTS.local.md`、`.agents/` 配下の指示ファイルは対象外だ。フォールバック条件を満たす場合、Readツールでサブディレクトリのファイルを開くと、その場所のAGENTSを必要に応じて読む。Codexのoverrideとは別の仕組みである。読み込み順が決まっていても、矛盾した自然言語の指示が確実に解決されるわけではない。[1] [2]
 
-### Simon Willison: AGENTS.md for Runtime Anomalies
+## 共通ルールとインポートのテンプレート
 
-Simon Willison's `simonw/research` repo uses AGENTS.md specifically for **sandbox network limits**. The reminder generalizes: AGENTS.md should describe **runtime environment anomalies**, not just code conventions. If the agent will hit a blocked IP range or an unavailable port, write it down explicitly.
+次は `pnpm build` と `pnpm test` があるリポジトリ向けだ。採用前にコマンドと生成物のパスを実際のプロジェクトに合わせる。ルートの `AGENTS.md` に置く内容は次のとおり。
 
-Also a longer-arc observation from him: the "write Markdown, have the agent read it first" pattern actually emerged in 2023 with ChatGPT Code Interpreter. CLAUDE.md is not new. It is a three-year-old pattern that finally got a name and a standard.
+```markdown
+## 作業上の約束
+- Nodeの依存関係にはpnpm、Pythonにはuvを使う。
+- 作業ツリー内の無関係な変更を保持する。
+- ソースを編集し、生成されたdist/を直接編集しない。
 
-### Hamel Husain: Eval as Living PRD
+## 検証
+- コードを変更したらpnpm testとpnpm buildを実行する。
+- 実行できない検査は、コマンドと阻害要因を報告する。
+- 引き渡し時に動作の変更、実行した検査、残る制限を説明する。
+```
 
-Hamel Husain has a sentence that quietly embarrasses the entire eval industry: **a good eval prompt is itself a living PRD** — it tests AI behavior continuously, in real time. He pushes against putting prompts into LangSmith and similar "extra layer of indirection" platforms, and argues prompts belong in Git, versioned like any other software artifact.
+同じディレクトリの `CLAUDE.md` には次を置く。
 
-The implication for CLAUDE.md: **CLAUDE.md itself needs evals**. How do you know "ALWAYS run typecheck" actually got executed? You need a repeatable test. Fireworks, LangChain, and MLflow are now building integrations for exactly this.
+```markdown
+@AGENTS.md
 
-### Harrison Chase: Model / Harness / Context
+## Claude Code
+- 課金処理を変更する前に、影響するケースとテストを提案する。
+```
 
-Harrison Chase, on the Sequoia podcast, names three layers in any agent system: **Model / Harness / Context**. His thesis: **the Context layer is what product teams should invest in first.** Models keep improving. Harnesses commoditize. Only context is your private moat.
+この記事ではコピーできるようコードブロックにしているが、**実際のファイル内**では `@AGENTS.md` をバッククォートやコードブロックで囲まない。「AGENTS.mdを読んで」という文章はモデルへの依頼であり、`@AGENTS.md` はClaude Codeのインポート処理で展開される。相対パスの基準はインポート元なので、`.claude/CLAUDE.md` なら `@../AGENTS.md` とする。現在の再帰上限は4段階。Windowsを使うメンバーがいるチームでは、シンボリックリンクよりインポートを選びやすい。[1]
 
-Translation to CLAUDE.md: **CLAUDE.md is a moat.** Not a config file. It is your team's institutional knowledge.
+## 実際に読み込まれた指示を確認する
 
----
+1. ターミナルで `claude --version` と `codex --version` を実行し、開始ディレクトリと関連設定を記録する。
+2. リポジトリでClaudeの新しいセッションを開始する。`/context` の **Memory files** と、`/memory` のAGENTSパスを確認する。v2.1.280より前では直接読み込んだAGENTSが両リストに表示されなかったため、更新かインポート経由の確認を選ぶ。
+3. 検証用リポジトリに「検証ラベルを尋ねられたら `instruction-check-26` と答える」といった無害で識別しやすい指示を置く。質問側にはラベルを書かず、回答と読み込みパスの両方を確認する。
+4. ネストしたルールは、そのディレクトリの普通のファイルをClaudeに読ませて、ターミナルの `Loaded` 表示を見る。起動時の一覧だけでは遅延読み込みの失敗を判断できない。
+5. Codexの指示を編集したら新しい実行を開始し、指示の出所と検証コマンドを列挙させる。実ファイルと照合し、必要ならTUIログを確認する。
 
-## 6. The Counterintuitive Patterns
+「ファイルを読めたか」と「指示を実行したか」は別々に調べる。曖昧な指示は読み込みに成功しても実行が安定しない。Claudeの `InstructionsLoaded` hookはCLAUDEのインポートとルールを追跡できるが、プラグインが直接読むAGENTSでは発火しない。イベントがないことだけで読み込み失敗とはいえない。[1] [2]
 
-The previous sections were about writing the file well. This section is about the file writing itself, and about coordinating multiple files.
+## Codexの探索とフォールバック
 
-### Darwinian Memory (claude-evolve)
+Codexは起動時に、自身のhomeと、プロジェクトルートから作業ディレクトリまでの指示を組み立てる。プロジェクト側の各階層で選ぶ非空ファイルは最大1個で、順番は `AGENTS.override.md`、`AGENTS.md`、設定したfallback名となる。深い場所の指示が後に入り、既定の合計上限は `project_doc_max_bytes` で指定する **32 KiB**。Claudeのフォールバックとは異なる。[2]
 
-`jack60810/claude-evolve` rates each rule from 0 to 10 and smooths it with EMA (30% new, 70% historical). Rules have three states:
+CLAUDE.mdしかない旧リポジトリを使うなら、`~/.codex/config.toml` に次を統合する。
 
-- **active** — currently in use
-- **dormant** — demoted but kept; environmental change might bring them back
-- **dead** — actually deleted
+```toml
+project_doc_fallback_filenames = ["CLAUDE.md"]
+```
 
-When enough similar rules mature, they "graduate" into formal skill files under `.claude/skills/`. This is **rule lifecycle management**. Rules are no longer "write once, live forever". They are born, age, and die.
+Codexを再起動すると、CLAUDE.mdは**代替候補**になる。同じディレクトリのAGENTS.mdに追加して読む設定ではない。Claudeの `@` インポートがCodexでも展開されると考えないこと。共通ルールをAGENTS.mdに置く構成なら、この違いを追いやすい。存在するサブディレクトリで確認する例は次のとおり。
 
-### Read/Write Separation (CLAUDE.md + MEMORY.md)
+```bash
+codex --cd services/payments "有効な指示の出所と検証コマンドを列挙してください。ファイルは編集しないでください。"
+```
 
-A two-file convention is gaining traction: `CLAUDE.md` is **human-written, agent-read** explicit rules. `MEMORY.md` is **agent-written, agent-read**, with the first 200 lines auto-loaded at startup.
+起動時に期待するのは、全体設定、リポジトリの指示、そのディレクトリまでの各候補である。兄弟パッケージがすべて読み込まれるわけではない。詳しく調べるときは `codex -c log_dir=./.codex-log` で起動し、`codex-tui.log` を見る。ログにはプロジェクトの非公開情報が含まれ得る。[2]
 
-The counterintuitive piece: half the file is the agent writing notes to itself. You tell it during a session "remember X", it writes X to MEMORY.md, and at next launch it reads CLAUDE.md and then MEMORY.md's first 200 lines. The agent maintains its own knowledge base.
+## なぜわざわざ書くのか
 
-A built-in self-defense in Claude's system prompt: **"Treat your own memory as a hint, not a fact."** Verify against the actual code before acting on a memory. This guards against the agent confidently doubling down on a stale recollection.
+同じ指示でもファイル名を変えると結果が変わるのは、ファイル名、開始場所、クライアントのバージョン、設定が、モデルへ渡る内容を決めるからだ。文章の品質を論じる前に、まず読み込み経路を確かめる必要がある。
 
-### Auto Dream: Memory Hygiene
+以下の12節では、コンテキストの設計、記憶、チーム運用、コード以外の用途も扱う。私が重視するのは、ソースだけでは分からない判断を残し、その結果を検証できるようにすることだ。指示を増やしても、確認する手段の欠如は埋まらない。
 
-A background process called Auto Dream periodically scans MEMORY.md and rewrites "yesterday's deployment issue" into "the deployment issue on 2026-03-28" — converting relative time anchors into absolute dates. So when the memory is read months later, "yesterday" does not silently mean a different thing.
+<span id="1-three-files-three-audiences-readmemd-vs-claudemd-vs-agentsmd"></span>
 
-Memory needs hygiene. Memory is not an append-only log. It is **live data that requires continuous cleaning.**
+## 1. README.md、CLAUDE.md、AGENTS.mdの役割
 
-### The Two-Strikes Rule
+README.mdは、人がプロジェクトの目的、実行方法、参加方法を理解する入口になる。エージェントも参考にできるが、利用者向けの紹介だけでは、変更後に何を確認するかまでは分からない。
 
-Anthropic's best-practice doc carries a counterintuitive rule: **only write a CLAUDE.md rule on the second occurrence of the same error.**
+CLAUDE.mdはClaude Codeへ継続的な指示を渡す。新しい会話のコンテキストが空でも、指示ファイルと自動メモリーを通じて知識を引き継げる。「毎回何も覚えていない」という説明では、現在の動作を正しく表せない。[1]
 
-Why? Because the first time might be a fluke. If you commit a rule on every error, your CLAUDE.md drowns in one-off lessons and the signal-to-noise ratio collapses. **Twice = pattern. Once = noise.** This inverts the classic instinct of "document early".
+AGENTS.mdはLinux Foundation傘下のAgentic AI Foundationが管理する、必須項目のないMarkdown形式だ。共有できるのはまず文章であり、すべてのツールが同じ優先順位で読むことまで保証する規格ではない。[3]
 
-### Subagents Are Context Control, Not Role Play
+READMEの紹介文をそのまま転記するより、テストの実行コマンド、生成物の扱い、変更できない境界、過去の決定の理由を書く。ファイルは書き終えたら固定するものではない。コマンドや運用が変わったとき、コードと一緒に見直す。
 
-People reach for subagents to divide labor — one for frontend, one for backend. The deeper use is **context control**: spawn a subagent with a fresh window to do Glob/Grep/Read, have it return a summary, never let raw tool output pollute the main agent's context.
+<span id="2-universal-best-practices-length-structure-voice"></span>
 
-This is precisely why Claude Code's Agent tool returns "summaries" rather than "raw tool results" by default — to protect the main thread's context budget.
+## 2. 長さ、構造、書き方
 
-### Oracle Mode
+<span id="length"></span>
 
-Oracle mode exposes GPT as a tool to Sonnet (or vice versa), enabling cross-model function calls. CLAUDE.md declares: **"On architectural decisions, consult the oracle."** It gives the agent an external advisor — useful as a counterweight against the systematic biases of any single model.
+### 長さ
 
-### Anti-Sycophancy in Three Modes
+HumanLayerのKyleによる *Writing a good CLAUDE.md* は、ルートの指示を短くし、細部を別文書に移すことを勧める。大きな公開リポジトリの行数は、自分のプロジェクトの目標にはならない。必要な検査もディレクトリの構造も違う。
 
-Claude is known for over-affirming the user. The community has converged on three explicit modes:
+Anthropicの現在の推奨は1ファイル200行未満だ。これは普遍的なモデルの指示数上限ではない。`@` インポートは親と一緒に読み込むため、分割だけではコンテキストを節約しない。特定のコードだけに必要な指示は、対応するディレクトリやパス別ルールへ分けて動作を確認する。[1]
 
-- **Mode 1 — Challenge-First**: default to challenging the user's framing
-- **Mode 2 — One-Question**: ask one clarifying question at a time
-- **Mode 3 — Steel-Man**: argue back with the strongest counter-version of the user's proposal
+<span id="structure"></span>
 
-The counterintuitive piece: not one persona, but **three explicitly summonable thinking modes**. CLAUDE.md says "default to Mode 1; switch to Mode 3 for high-stakes decisions."
+### 構造
 
-### Path-Scoped Rules
+最初に禁止操作と作業範囲、次に必要なプロジェクト事情、ビルドとテスト、コード例、配置の約束、検証方法、既知の問題を書くと探しやすい。「テストする」ではなく、どのコマンドで何を確かめるかを書く。
 
-YAML frontmatter with a `paths:` field lets a rule load only when matching files are touched — zero token cost otherwise. A React-component rule only injects when `src/components/*.tsx` is in play. This turns "load everything" into "load on demand", and lets CLAUDE.md grow to thousands of lines without inflating any single request's token cost.
+失敗の記録には、起きた現象だけでなく再発を避ける条件を残す。たとえば動的ルートの `[id]` をシェルへ渡す場合の引用符、生成スキーマの変更後に必要なマイグレーションなど、次の作業で判断に使える情報が役立つ。
 
-### Versioned Changelog at the Top
+<span id="voice"></span>
 
-A `## Changelog v2026-04-26` block at the head of CLAUDE.md prompts the agent to diff against last session and notice rule changes. A small mechanism, but it puts the agent in the loop of rule evolution rather than being blind to it.
+### 書き方
 
----
+`pnpm typecheck` のように実行対象を具体化し、禁止するなら対象のパスを示す。ALWAYSやNEVERを増やすだけでは曖昧な要求は明確にならない。
 
-## 7. The Team Engineering Layer
+Markdownの指示に一律の遵守率を当てはめることはできない。絶対に止める必要がある操作には、権限、サンドボックス、阻止するhookを使う。「デプロイしない」という指示と、デプロイ権限がないことは別の保障である。[1]
 
-Solo best practices and team best practices are different problems. Scale up to five, fifty, or five hundred engineers and a new set of issues emerges: rule conflicts, version drift, compliance variance, and no way to measure ROI.
+<span id="3-eight-real-samples-worth-reading"></span>
 
-### AGENTS.md as a Cross-Tool Contract
+## 3. 実例から何を読むか
 
-AGENTS.md is now a Linux Foundation-hosted open standard with first-class support across twenty-plus tools. **Vercel's Agent Readability Spec** goes further: it folds AGENTS.md into a site reachability convention, recommending exposure at `/AGENTS.md`, `/.well-known/agents.md`, `/CLAUDE.md`, `/.cursor/rules`, and other paths simultaneously. Like robots.txt and sitemap.xml for search engines — AGENTS.md for AI agents.
+公開リポジトリは、そのままコピーするテンプレートではなく、何をルール化したかを比較する材料になる。行数やスター数ではなく、指示が必要になった理由を見る。
 
-Team-level recommendation: **AGENTS.md is the source of truth; CLAUDE.md is a one-line stub: `See @AGENTS.md`** (Anthropic's "import stub" pattern). All tools share one file. Claude-specific quirks live separately. Switching tools requires no reconfiguration. Claude-specific optimizations are not lost.
+1. `openai/codex` は、Rustのcrate、TUI、テストなど複数の担当範囲をどう整理するかという観点で読む。
+2. `vercel/vercel` は、monorepoのコマンド、changeset、パッケージ間の約束、過去の問題の分類を参考にする。
+3. `openai/openai-agents-python` は、検証やレビューの手順を明示的なskill呼び出しへ分ける設計の例になる。文書だけの変更と実行時の変更を区別する考え方が重要だ。
+4. `vercel-labs/open-agents` は、作業で得た教訓をどこに蓄積するか、共有ルールを誰が更新するかという点を見る。
+5. `vercel-labs/agent-skills` は、SKILL.mdに全詳細を詰め込まず、参照先へ分ける構造の例だ。
+6. `anthropics/anthropic-cookbook` は、Pythonの実行環境やモデル指定など、例を再現するための前提をどう記すかを見る。モデル別名と固定版は、更新追従と再現性のどちらが必要かで選ぶ。
+7. `karpathy/llm-council` は、一般的なコーディング作法よりも、コンポーネントの使い方や既定値といったプロジェクト固有の決定を残す例になる。
+8. `affaan-m/everything-claude-code` のAgentShieldは、秘密情報や古い設定、曖昧な指示を検査する観点を提供する。
 
-### CLAUDE.local.md is Deprecated; Use @imports
+これらを読んだ後に自分のファイルへ加えるのは、そのプロジェクトにも当てはまる理由を説明できる指示だけにしたい。過去のスナップショットの数字を、現在も有効な制限として移植しない。
 
-Note: `CLAUDE.local.md` has been officially deprecated by Anthropic (`anthropics/claude-code` issue #2950). The replacement is `@path/to/file` syntax (up to 5 hops of recursion). The clean pattern for personal overrides is `@~/.claude/personal-overrides.md` plus a `.gitignore` line.
+<span id="4-karpathys-three-paradigm-shifts"></span>
 
-### Spec-Driven: Team-Level Agent OS
+## 4. Karpathyの議論から考える指示の設計
 
-Late 2025 saw three spec-driven development camps emerge:
+<span id="shift-1-prompt-engineering--context-engineering"></span>
 
-- **GitHub Spec Kit** — six phases (Constitution → Specify → Clarify → Plan → Tasks → Implement), each gated by a human, agent-agnostic.
-- **BMAD-METHOD** (43k stars) — twelve-plus role agents (Analyst / PM / Architect / SM / Dev / QA), YAML-orchestrated handoffs, enterprise-scale multi-agent pipeline.
-- **Kiro** (an AWS VS Code fork) — spec → design → tasks → impl baked into the IDE, with steering files (product.md / structure.md / tech.md) holding persistent context.
+### プロンプトからコンテキストの構成へ
 
-Martin Fowler's comparison piece is the canonical reference. His advice: **don't apply SDD to small bugs — that's a forklift cracking a walnut.** But for tasks that span modules, require multi-turn dialog, or need multi-person/multi-agent coordination, SDD prevents the gradual descent into chaos.
+Karpathyのcontext engineeringの議論では、モデルへ渡す情報を組み立てることが問題になる。CLAUDE.mdだけを磨いても、作業対象、ツールの結果、過去の会話が異なれば、モデルが判断に使える材料は変わる。
 
-### Eval-Driven CLAUDE.md
+たとえば制約を根ファイルに書き、具体例を別文書に置いた場合、具体例へたどり着く条件も設計の一部だ。ファイルが存在することと、必要な時点で内容が渡ることを分けて考える。
 
-Fireworks, LangChain, and MLflow are pushing a new pattern: **treat CLAUDE.md and SKILL.md as objects under test.**
+<span id="shift-2-markdown-as-source-code-programmd"></span>
 
-1. Write a binary assertion suite. Run it in a clean Docker environment.
-2. Mix LLM judges and rule-based judges: the former for behavior and ordering, the latter for side effects (was the file generated, was the command run).
-3. Use MLflow to trace each Claude Code session. Use spans to verify "was this rule actually loaded?" — output alone cannot catch "prereq did not fire" failures.
+### program.mdと実行対象の分離
 
-MindStudio took it further: a self-modification loop where Claude Code rewrites its own CLAUDE.md until the assertion suite is fully green, with QUALITY.md tracking the baseline. CLAUDE.md gains an automated regression suite.
+`karpathy/autoresearch` の `program.md` は、人が実験の方向を記述し、エージェントが実装と実験を進める考え方を示す。ただし `program.md` はCLAUDEやCodexが自動探索する特別な名前ではない。ワークフロー側で読むように接続する必要がある。
 
-### Observability: Rule ROI
+自然言語の変更も結果へ影響する以上、Gitで差分を確認し、受け入れ条件で評価する価値がある。「自然言語がソース」という比喩から実際に使える教訓は、変更を検証対象として扱うことだ。
 
-Harrison Chase's team wires LangSmith into Claude Code so they can see **which rules were invoked, which were ignored**. This is the only honest way to measure rule ROI. Combined with PostToolUse hooks and LSP diagnostics (re-injecting type errors after each edit), "did the agent comply" becomes an **observable signal**.
+<span id="shift-3-goal-driven-execution-declarative--imperative"></span>
 
-### Meta-CLAUDE.md
+### 成功条件と手順を使い分ける
 
-`.claude/skills/meta/` holds a skill on **how to edit CLAUDE.md itself** — line caps, dead-link checks, the rule-tier convention. The next agent that wants to change rules reads the meta-skill first, then acts. This is the underlying pattern in Kiro steering and BMAD orchestrator: **rules above rules.**
+「Aを読んでBを書き換える」だけでは、何をもって完了かが分からない。`pnpm test` が通ることや、対象の失敗ケースが再現しなくなることを記すと、途中の方法を選びやすくなる。
 
-### GitHub Squad's decisions.md
+一方、マイグレーションや公開作業の順序に意味があるなら、その手順も必要だ。宣言的な目標を使うことと、すべての段階的な手順を消すことは同じではない。
 
-GitHub's Copilot team described their "Squad" workflow: each architectural decision gets appended as a structured block to a versioned `decisions.md` — an **asynchronous team brain**. Any agent making a new decision reads `decisions.md` first, avoiding rehashed debates and accidental policy reversals.
+<span id="5-mental-models-from-the-other-heavyweights"></span>
 
-This is ADR (Architecture Decision Records) ported into the AI collaboration era.
+## 5. 観測と検証を指示につなぐ
 
----
+<span id="armin-ronacher-logs-as-apis-no-dead-ends"></span>
 
-## 8. Non-Code Repositories: PARA, Obsidian, Academic Writing
+### Armin Ronacher：ログとツールの接続
 
-CLAUDE.md serves more than software. Writing, research, knowledge management, courses, blogs, papers — any knowledge work that benefits from agent assistance can use it.
+Armin Ronacherのagentic codingに関する議論は、エージェントが必要な結果を自分で観測できる環境を重視する。開発環境で登録確認メールをログへ出せば、登録から確認リンクの取得までを検証しやすくなる。
 
-### PARA / Obsidian Vaults
+画像生成の出力をコード実行ツールが読める場所へ置くことも同じ問題だ。指示ファイルには「確認する」とだけ書かず、観測先や必要な環境の条件を記す。タスク一覧の再提示も、長い会話で未完了の項目を追うための手段として考えられる。
 
-PARA (Projects / Areas / Resources / Archive) is Tiago Forte's PKM framework. A typical CLAUDE.md for an Obsidian PARA vault contains:
+<span id="geoffrey-huntley-stdlib-ralph-window-utilization"></span>
 
-- **Vault semantics** — what each top-level folder means (Inbox is uncategorized; Projects have deadlines; Areas are ongoing; Resources are reference; Archive is frozen).
-- **Frontmatter standards** — YAML field conventions: `title`, `date`, `tags`, `status`, `source`, `para-type`.
-- **Triage decision tree** — how Claude classifies a new Inbox file into the four PARA quadrants.
-- **Tone/voice** — diary vs research note vs project doc, each with its own register.
-- **Weekly review workflow** — clearing Inbox into the four quadrants every Sunday.
+### Geoffrey Huntley：反復実行と共有ルール
 
-Reference repos: `ballred/obsidian-claude-pkm` (a complete PARA starter kit), `AgriciDaniel/claude-obsidian` (a Karpathy-style LLM Wiki), and `danielrosehill/Claude-Code-Projects-Index` (a non-code use-case anthology).
+HuntleyのstdlibやRalphに関する議論は、規約を再利用し、結果を見ながら繰り返す作業を考える材料になる。繰り返す処理には、終了条件、実行予算、失敗の記録、毎回の検証が必要だ。
 
-Mauricio Gomes, in *Teaching Claude Code My Obsidian Vault*, leaves a useful warning: **review and update the vault's CLAUDE.md monthly**. Otherwise it rots as the vault evolves.
+他人のループや長いプロンプトをコピーしても、自分のテストや環境に合うとは限らない。コンテキストを一定の割合まで使えば必ず良い結果になるという普遍的な閾値も置かず、長い実行で何が落ちるかを観測したい。
 
-### Academic Writing
+<span id="simon-willison-agentsmd-for-runtime-anomalies"></span>
 
-Three repos define the academic-writing playbook: K-Dense-AI/claude-scientific-writer, Galaxy-Dawn/claude-scholar, and Imbad0202/academic-research-skills. Recurring patterns:
+### Simon Willison：実行環境の例外
 
-- **Style calibration** — feed three of your old papers so Claude internalizes voice and citation habits.
-- **Priority** — discipline conventions > journal style > personal preference.
-- **Citation red lines** — explicit "never use unverified citations"; claim-citation alignment checks; no hallucinated BibTeX entries.
-- **AI-use disclosure** — declare in Methods what Claude was used for.
-- **Writing quality check** — banned-word lists (twenty-five AI-tell-tale words), em-dashes ≤ 3, sentence-length burstiness checks.
+Simon Willisonの調査用リポジトリは、ネットワーク制約のような実行環境の事情を指示へ残す観点で読める。通常の手順が使えない理由は、ソースからは分からないことがある。
 
-### Blog and Content Repos
+ブロックされたネットワークや使えないポートを具体的に記せば、同じ失敗の繰り返しを減らせる。ただし環境を移した後も古い制限を保持すると、今度は不要な回避が残る。
 
-GitHub Blog's *How to write a great agents.md* — distilling lessons from 2,500 repos — finds these patterns recur:
+<span id="hamel-husain-eval-as-living-prd"></span>
 
-- Strong modal verbs: ALWAYS / NEVER / MUST.
-- Explicit Personality block (Tone / Style / Voice).
-- Output format templates (H1 / meta / H2 sections / CTA / tags).
-- Vocabulary white/black-lists ("challenge" replaces "problem").
+### Hamel Husain：評価を要件として読む
 
-HumanLayer recommends a blog AGENTS.md under 60 lines. Community ceiling: under 300.
+評価で何を成功と判定するかは、その製品に何を求めるかの表現でもある。Hamel Husainの評価に関する議論を指示ファイルへ当てはめるなら、「型検査する」と書いた結果、本当に検査したかを確認できるようにする。
 
----
+指示もGitで版管理し、変更前後で同じ作業を試す。文章が強くなったことと、実行が良くなったことを混同しない。
 
-## 9. The Chinese Community Lens
+<span id="harrison-chase-model--harness--context"></span>
 
-Chinese developers write CLAUDE.md with the same shape but with two unique twists.
+### Harrison Chase：モデル、実行基盤、コンテキスト
 
-**The "800-character" anchor.** A Zhihu author's careful experiment — 3,000 → 1,000 helps; → 800 is best; → 400 loses critical info — converts cleanly to the 60-250 line range from English-language sources.
+Chaseの議論では、モデル、ツールを動かす基盤、渡す情報を分けて考える。チームが蓄積できるのは、汎用モデルだけでは知らないプロジェクトの事情だ。
 
-**Four-tool fragmentation** is the pain Chinese developers face most acutely: Cursor + Claude Code + **Trae** (ByteDance) + **通义灵码** (Alibaba) all need configuration. Repos like `Mr-chen-05/rules-2.1-optimized` exist precisely to one-shot sync rules across Augment / Cursor / Claude Code / Trae.
+ただしCLAUDE.mdを長くすること自体が競争力になるわけではない。消えたAPIを参照するルールは作業を妨げる。価値は知識の量より、現在の作業に正しく接続されているかにある。
 
-**Bilingual skill structures**: `hong111109/humanizer` separates `zh/` and `en/` subdirectories, auto-detecting input language. A pattern that exists almost exclusively in the Chinese ecosystem.
+<span id="6-the-counterintuitive-patterns"></span>
 
-**"Use Chinese for replies"** is a near-standard line in nearly every Chinese developer's global CLAUDE.md — together with toolchain preferences ("Python uses uv; Node uses pnpm"). Pragmatic, terse, and load-bearing.
+## 6. 記憶と複数ファイルの運用
 
-**Baoyu (@dotey)** is the most-followed Chinese AI-coding voice. He recently spotlighted `shareAI-lab/learn-claude-code` — **30 lines of code that reproduce a nano Claude Code**, helping developers see through the harness. Another of his lines: "Vibe Coding is not magic." Make it work by hand first; iterate in small versions (scooter → bicycle → motorcycle → car). The metaphor maps neatly onto CLAUDE.md evolution: **rough first, refined later**, never expecting perfection in one shot.
+<span id="darwinian-memory-claude-evolve"></span>
 
-**WeChat publishing pipelines** — capturing trending topics, drafting, formatting, pushing to draft inbox — are a non-code use case with virtually no parallel in the English-speaking world. See `oaker-io/wewrite` and `geekjourneyx/md2wechat-skill`.
+### claude-evolveとルールの状態
 
----
+`jack60810/claude-evolve` は、ルールを評価して維持、休止、削除へ分ける実験として参考になる。これはClaude Code標準の指示読み込みそのものではない。
 
-## 10. The Practical Checklist
+採用するなら、active、dormant、deadの状態に相当する基準をチームで決める。繰り返し役に立つ手順をskillに移す場合も、どのタスクで呼ぶかと、更新の責任者まで決めておく。
 
-Take everything above and make it actionable.
+<span id="readwrite-separation-claudemd--memorymd"></span>
 
-### Global `~/.claude/CLAUDE.md`
+### CLAUDE.mdとMEMORY.mdを分ける
 
-Keep it minimal. Only **cross-project preferences**:
+Claude Codeのメモリー索引は通常 `~/.claude/projects/<project>/memory/MEMORY.md` にあり、開始時に読むのは先頭200行または25 KBの早い方まで。リポジトリのルートに同名ファイルを置くだけでは、この仕組みには参加しない。[1]
 
-1. Language ("Use Chinese for replies").
-2. Package manager defaults ("Python uses uv; Node uses pnpm").
-3. Privacy ("All pushed repos default to private").
-4. Collaboration baselines ("Interaction-detail changes require corresponding e2e tests").
-5. Self-improvement mechanism ("Append a pitfall rule after each failed bash command").
+観察や個人の好みは自動メモリーに、チームが合意した指示は共有ファイルに置く。詳細をテーマ別ファイルへ分けると、必要なときに読める。本機のメモリーだけで全員へルールを配布しようとしない。[1]
 
-Target line count: **under 10**. This file loads on every session. Shorter is better.
+覚えているコマンドも、実行前に現在のプロジェクトのスクリプトと照合する。メモリーを書いた時点で正しくても、移行後には古くなる。
 
-### Vault Root `CLAUDE.md`
+<span id="auto-dream-memory-hygiene"></span>
 
-For an Obsidian-style PARA vault, include:
+### 自動整理を前提にしない
 
-1. PARA semantics + classification decision tree.
-2. Frontmatter standards (title / date / tags / status / source).
-3. Language priority (Chinese first; preserve original quotes).
-4. No emoji (consistent with global rule).
-5. Weekly Inbox-clearing workflow.
+Auto Dreamのような名前の処理があると聞いても、自分の環境でメモリーを自動整理しているとは限らない。必要なら、相対日付を既知の絶対日付へ直し、解決済みの回避策を削除する作業として組み込む。
 
-### Code Project `AGENTS.md` + `CLAUDE.md`
+制約には理由となる決定を結び付ける。単なる作業ログが増え続ける状態より、次の判断に必要な情報を探せる状態を保つ方がよい。
 
-For a backend repo:
+<span id="the-two-strikes-rule"></span>
 
-- `AGENTS.md` is the main file: build commands, test commands, code style, common pitfalls, lessons learned.
-- `CLAUDE.md` is one line: `See @AGENTS.md`.
-- `.agents/decisions.md` versions architectural decisions.
-- `.claude/skills/meta/claude-md-editing.md` formalizes how to edit CLAUDE.md itself.
+### 二度目を待つべき場合
 
-### Adopt the Two-Strikes Rule
+Anthropicは、同じ間違いの再発をルール追加の理由の一つとして挙げている。コードレビューで見つかった問題や、新しい同僚に必要な情報も理由になる。重大な誤操作をもう一度起こすまで記録しない、という条件ではない。[1]
 
-Change "write a rule on every bash failure" to **"write a rule only on the second occurrence of the same failure"**. First occurrence: log it in MEMORY.md as "observed X". Second occurrence: promote it to AGENTS.md as a formal rule. Signal-to-noise ratio jumps significantly.
+一度だけの失敗は一時的な通信障害や誤ったコマンドかもしれない。まず診断し、繰り返し使える教訓かを判断する。回数よりも、影響の大きさと根拠が重要だ。
 
-### Oracle Mode (Optional)
+<span id="subagents-are-context-control-not-role-play"></span>
 
-For high-stakes architecture decisions, have Claude consult GPT. Declare the trigger in AGENTS.md:
+### subagentで調査の範囲を分ける
 
-> When deciding on system architecture that affects > 3 modules, consult the GPT oracle via the `oracle` tool, and record the exchange in `decisions.md`.
+subagentは担当を分けるだけでなく、大量の検索や読み取りを別のコンテキストへ移す手段にもなる。親には判断に必要な要約、根拠の場所、未解決点を返す。
 
-### Anti-Pattern Checklist
+役名を付けるだけでは作業は分離されない。変更可能なファイルを指定し、誰が統合するかを決めないと、複数のagentが同じファイルを書き換える問題が起きる。
 
-- ✗ Stuffing CLAUDE.md as if it were documentation (every line costs context every turn).
-- ✗ Hard-coding API keys or expired model IDs (`claude-3-opus`).
-- ✗ Scenario-specific rules ("how to design a new orders schema" — useless when you are not working on orders).
-- ✗ Repeating the README's project description.
-- ✗ Vague verbs ("be careful", "be nice").
-- ✓ Review and prune monthly.
-- ✓ Rules have a lifecycle: active / dormant / dead.
-- ✓ Failures into pitfalls; successes into lessons learned.
+<span id="oracle-mode"></span>
 
----
+### 別モデルへ相談する
 
-## 11. Predictions for 2026
+別モデルを相談用ツールとして呼ぶ構成は、設計の反例を探す用途に使える。AGENTS.mdに書くなら、呼び出す条件、利用できるツール、戻してほしい根拠を明記する。
 
-If 2025 was the inception year for files-written-for-AI, what does 2026 look like? Three loosely-held but directionally-confident guesses.
+ツールを設定せず「oracleに相談する」と書いても実行できない。回答が一致したことを、テストに代わる証明にも使わない。
 
-**One: CLAUDE.md fragments into layered files.** Just as code fragmented from "one file" into "source + config + tests + migrations", CLAUDE.md will split into persona / rules / memory / decisions / pitfalls — five layers, each with its own lifecycle and maintenance cadence.
+<span id="anti-sycophancy-in-three-modes"></span>
 
-**Two: rules get formally versioned and signed.** Like Docker images with tags and hashes, future AGENTS.md will carry semver and checksums. "This agent decision was made under AGENTS.md v2.3.1" becomes auditable. Critical for compliance domains — finance, medical.
+### 反論と確認を使い分ける
 
-**Three: a marketplace for CLAUDE.md emerges.** `awesome-claude-code` and `aitmpl.com` are the free-sharing layer today. Next: paid AGENTS.md packs targeting specific stacks — Stripe integrations, Supabase, Next.js + Drizzle + Clerk — required like npm packages.
+提案の前提を疑う、質問を一つずつ行う、最も強い反対案を考える、といった依頼は目的が異なる。毎回反論する人格を設定するより、どの判断で反例を求めるかを書く方が作業に結び付きやすい。
 
----
+たとえば不可逆なデータ移行では失敗条件の列挙を求め、既存の文言修正では不要な議論を増やさない。考え方を選ぶ基準を残す。
 
-## 12. Closing: From Prompt to Context, From File to System
+<span id="path-scoped-rules"></span>
 
-Back to the opening question: how much CLAUDE.md should you write?
+### パスで対象を限定する
 
-If 2024's answer was "as detailed as possible," the 2026 answer is **"as little as possible, but as alive as possible."** Little, because every line consumes the agent's attention budget. Alive, because rules are not a static contract but **continuously evolving institutional knowledge.**
+`.claude/rules/` のYAML `paths:` は対象ファイルを限定できる。普通のAGENTS.mdへ同名の見出しを書くだけでは機能しない。コンポーネントの規則を別ファイルへ置き、対象ファイルを読む操作で確かめる。[1]
 
-Karpathy says Markdown is source code. Huntley says you are programming the LLM. Chase says context is the team's moat. They are saying the same thing: **how you write CLAUDE.md is, fundamentally, the contract you sign with your AI collaborator.** Sign it well and the agent is a competent new colleague. Sign it badly and the agent is an amnesiac, sycophantic, occasionally rogue intern.
+この仕組みは無関係な指示の読み込みを減らす。大きなルートCLAUDE.mdやそのインポートの費用がなくなるわけではない。
 
-So do not treat it as a config file. Treat it as **the most important specification document in your team or project**. Review it like code. Refactor it like code. Test it like code. Retire stale parts like code.
+<span id="versioned-changelog-at-the-top"></span>
 
-Here is to writing a CLAUDE.md that lasts three years.
+### 変更理由を残す
 
----
+冒頭の変更記録は、なぜ規則を変えたかを説明できる。しかし `## Changelog` という見出しは、前回のセッションとの自動比較を起動しない。
 
-## References
+比較が必要ならGitの差分を調べるよう明示する。現在の指示は、全履歴を読み直さなくても実行できる文章にする。
 
-- [agents.md — official site](https://agents.md/)
-- [Anthropic Claude Code Best Practices](https://code.claude.com/docs/en/best-practices)
+<span id="7-the-team-engineering-layer"></span>
+
+## 7. チームで保守する
+
+人数が増えると、個人の書き方よりも、共有内容の重複、バージョン差、変更の責任が問題になる。読み込みに成功した人と失敗した人を、指示への従順さの違いとして評価してはいけない。
+
+<span id="agentsmd-as-a-cross-tool-contract"></span>
+
+### 共有内容と読み込み経路
+
+AGENTS.mdは内容の重複を減らせるが、ClaudeのインポートはCodexを設定せず、Codexのoverride名はClaudeへ適用されない。ウェブに公開したファイルも、ローカルの会話へ自動では入らない。[1] [2] [3]
+
+共通のコマンドと制約はAGENTS.mdへ置き、CLAUDE.mdのインポートの下にClaude専用の指示を書く。直接両方を読む設定でも、矛盾する規則は解消しておく。[1]
+
+<span id="claudelocalmd-is-deprecated-use-imports"></span>
+
+### CLAUDE.local.mdは使用できるがフォールバックに影響する
+
+現在の公式文書は、個人のプロジェクト指示として `CLAUDE.local.md` をサポートしている。`.gitignore` に追加し、共有しない。ただし存在すると既定のAGENTSフォールバックを止めるので、明示的なインポートか両方を読む設定を使う。[1]
+
+複数のworktreeで個人指示を共有するなら外部 `@path` インポートも選べるが、承認やセッションの条件を確認する。現在の再帰上限は4段階だ。[1]
+
+<span id="spec-driven-team-level-agent-os"></span>
+
+### 仕様を使う開発手順
+
+Spec Kit、BMAD、Kiroは、仕様や計画をコード変更につなぐ別々の設計例である。Spec Kitは仕様と計画の成果物、BMADは役割を持つ作業手順、KiroはIDE内の仕様と設計を比較する観点になる。
+
+Martin Fowlerのサイトにある比較記事は、こうした方法を検討する出発点になる。小さな修正にも一律に長い工程を要求するより、関係者間の合意が必要な変更に手順を使いたい。指示ファイルには、どの規模や影響でその工程を開始するかを残す。
+
+<span id="eval-driven-claudemd"></span>
+
+### 指示自体を検証する
+
+指示を変えた前後で同じ小さなタスクを実行し、成果物や実行コマンドを比較する。ファイルが生成されたかは機械的に確認できるが、説明が妥当かは別の判断が必要になる。
+
+エージェント自身に指示を書き直させる場合も、成功の基準を勝手に緩めさせない。共通のテスト、比較可能な環境、元の指示をGitに残すことで、何が改善したかを確認できる。
+
+<span id="observability-rule-roi"></span>
+
+### 実行の観測
+
+トレース、hook、コマンドログは、いつ何が実行されたかを調べる材料だ。ただしモデルが「ルールを守った」と述べることと、実行記録があることは違う。
+
+読み込みの観測にも例外がある。前述のとおり、直接読むAGENTSとCLAUDE経由のインポートでは `InstructionsLoaded` の扱いが異なる。観測していない経路を失敗と誤判定しない。[1]
+
+<span id="meta-claudemd"></span>
+
+### 指示を編集するためのルール
+
+指示ファイルの編集が頻繁なら、検証方法、リンク確認、変更理由の残し方をskillへまとめる意味がある。そのskillを誰がどの場面で読むかも決める。
+
+`.claude/skills/meta/` という名前を作るだけでは、編集時の呼び出しは保証されない。自動化したい検査はスクリプトやCIへ移し、文章の規則を増やす前に、機械で防げる間違いを減らす。
+
+<span id="github-squads-decisionsmd"></span>
+
+### decisions.mdで判断を共有する
+
+GitHubのSquadに関する記事は、複数のagentが決定を共有する方法の参考になる。`decisions.md` に判断を残すなら、背景、採用した案、見送った案、見直す条件を記す。
+
+これはADRと共通する考え方である。ファイル名そのものに自動読み込みの効果はないので、新しい判断の前に読む経路を手順へ組み込む。
+
+<span id="8-non-code-repositories-para-obsidian-academic-writing"></span>
+
+## 8. コード以外のリポジトリ
+
+指示ファイルは、文章、研究、講義資料、ブログにも使える。ただしコード用のテストコマンドをそのまま流用せず、その成果物に合う確認を定義する。
+
+<span id="para--obsidian-vaults"></span>
+
+### PARAとObsidian
+
+PARAではProjects、Areas、Resources、Archiveの区別と、Inboxをどこへ移すかの基準が重要になる。指示には、期限のある活動と継続的な責任をどう区別するか、frontmatterの必須項目、週次レビューの対象を記す。
+
+日記、調査メモ、公開文書で文体が違うなら、その違いも残す。`ballred/obsidian-claude-pkm`、`AgriciDaniel/claude-obsidian`、`danielrosehill/Claude-Code-Projects-Index` は用途を比較する材料になる。フォルダー構成が変わったら、分類ルールも更新する。
+
+<span id="academic-writing"></span>
+
+### 学術文書
+
+既存の論文を文体の参考にすることと、内容の出典として使うことを分ける。分野の慣習、投稿先の規定、個人の好みが食い違う場合の扱いも明確にする。
+
+引用は主張を裏付ける箇所まで確認し、未確認のBibTeXを作らない。AIの利用を明示する必要がある場合は投稿規定に従う。`K-Dense-AI/claude-scientific-writer`、`Galaxy-Dawn/claude-scholar`、`Imbad0202/academic-research-skills` などの例も、こうした検証を自分の手順へどう接続するかという観点で読む。
+
+<span id="blog-and-content-repos"></span>
+
+### ブログとコンテンツ
+
+文章の指示には、想定読者、用語、見出しの構造、引用の扱いを具体化する。禁止語の一覧だけでは、何を伝える記事かは決まらない。
+
+たとえばタイトルをテンプレートがH1として出力するサイトでは、Markdown本文に重複するH1を書かない。公開時のリンク確認も検証項目に含める。固定の行数より、編集者が同じ判断を再現できる内容かを重視する。
+
+<span id="9-the-chinese-community-lens"></span>
+
+## 9. 中国語の作業環境から見える課題
+
+中国語の指示では、返答言語とツールチェーンの好みが同じファイルに置かれることが多い。たとえば「中国語で返答する」「Pythonはuv、Nodeはpnpm」という設定は、複数プロジェクトへ適用するか、個別例外を認めるかまで書くと使いやすい。
+
+文字数の目安を英語の行数へ換算しても、指示の密度や内容は比較できない。短縮の判断は、その指示を削ったときに何が失敗するかで行う。
+
+Cursor、Claude Code、Trae、通義霊碼などを併用すると、共有したい文章と各ツールの設定形式が分かれる。同期ツールを導入しても、同じ文章が本当に読み込まれるかの確認は必要だ。
+
+`hong111109/humanizer` のように言語別の構成を分ける例も、同じ判断を各言語へどう移すかを考える材料になる。宝玉が紹介する `shareAI-lab/learn-claude-code` のような実装例は、ツール呼び出しと反復の仕組みを理解する助けになる。
+
+`oaker-io/wewrite` や `geekjourneyx/md2wechat-skill` のようなWeChat向け制作手順では、下書き、整形、公開を区別したい。指示ファイルがあることは、送信や公開への許可を意味しない。作業範囲を明記するという原則は、コードでも文章でも共通する。
+
+<span id="10-the-practical-checklist"></span>
+
+## 10. 全体設定からプロジェクトへ
+
+<span id="global-claudeclaudemd"></span>
+
+### ユーザー全体の指示
+
+`~/.claude/CLAUDE.md` には、返答言語、パッケージ管理の既定、公開範囲、検証の基本方針など、プロジェクトをまたぐ内容だけを置く。全体設定が個別の要件と矛盾しないよう、どちらを優先するかを明確にする。
+
+一度のコマンド失敗を必ず永久ルールにするのではなく、繰り返す問題と不要になった回避策を見直す方針を記す。
+
+<span id="vault-root-claudemd"></span>
+
+### ナレッジ管理のルート
+
+PARA型の保管庫では、各フォルダーの意味、分類基準、frontmatter、引用の言語、Inboxの整理手順を記す。名称を変更したときは、移動ルールとリンク検査も更新する。
+
+<span id="code-project-agentsmd--claudemd"></span>
+
+### コードプロジェクト
+
+AGENTS.mdに共通の構築、テスト、制約、既知の問題を置く。CLAUDE.mdはコードブロック外の `@AGENTS.md` と必要な専用指示だけにする。設計判断はdecisions.mdなどへまとめ、読む手順を明示する。
+
+深いディレクトリの例外を追加したら、その場所からCodexを起動する場合と、Claudeがそこを読む場合の両方を検証する。片方の結果をもう片方へ一般化しない。[1] [2]
+
+<span id="adopt-the-two-strikes-rule"></span>
+
+### 偶発的な失敗と重要な制約
+
+偶発的な失敗は観察として記録してから再発を調べる。破壊的な操作やレビューで明らかになった制約は、その時点で共有する。チームの方針を一人の自動メモリーにだけ保存しない。
+
+<span id="oracle-mode-optional"></span>
+
+### 相談を組み込む場合
+
+複数モジュールへ影響する設計で別モデルを使うなら、利用可能なツール、相談する論点、決定記録を定める。相談先の回答も、実装や検査と突き合わせる。
+
+<span id="anti-pattern-checklist"></span>
+
+### 見直す項目
+
+秘密情報を含めない。READMEの紹介文を繰り返さない。存在しないコマンドやモデル指定を残さない。狭い場面だけの指示を毎回ロードする根ファイルへ積み上げない。
+
+定期的に、実行できるコマンドか、リンク先があるか、二つのファイルで同じ判断を矛盾して書いていないかを確認する。自動検査に移せる条件は、文章だけに頼らない。
+
+<span id="11-predictions-for-2026"></span>
+
+## 11. これから検証したい設計
+
+当初の記事で挙げた方向は、指示の階層化、版管理、再利用可能な規則の配布だった。これらは実現が保証された予測ではなく、今の構成を評価する問いとして使える。
+
+階層化では、読み込み条件と担当者が明確になったかを確認する。版管理では、どの指示の下で作業したかを追えるかを見る。再利用では、他人の規則を持ち込む前に、依存するコマンドとプロジェクト固有の前提を点検する。
+
+署名やバージョン番号を加えても、古い指示が正しくなるわけではない。現在の作業に適用できるかを検査する方が先だ。
+
+<span id="12-closing-from-prompt-to-context-from-file-to-system"></span>
+
+## 12. ファイルと検証を一緒に保守する
+
+必要なのは、モデルが推測しにくい決定を短く残し、使われる経路と結果を確かめることだ。構成を複雑にする前に、起動場所を変えても必要なルールが読めるか、同じ作業で期待する検証が実行されるかを試す。
+
+共通内容はAGENTS.mdへ、Claude専用の内容はCLAUDE.mdへ分ける。その上で、クライアントの更新、個人設定の追加、worktreeの移動をしたら、もう一度読み込みを確認する。指示の文章だけでなく、実行する環境まで含めて保守したい。
+
+<span id="references"></span>
+
+## 参考資料
+
+[1]: https://code.claude.com/docs/en/memory "Claude Codeのメモリーと読み込み規則"
+[2]: https://developers.openai.com/codex/guides/agents-md/ "Codexの指示探索"
+[3]: https://agents.md/ "AGENTS.md形式"
+
+- [1. Claude Codeのメモリー、バージョン、インポート](https://code.claude.com/docs/en/memory)
+- [2. Codexのカスタム指示とfallback](https://developers.openai.com/codex/guides/agents-md/)
+- [3. AGENTS.md公式仕様とFAQ](https://agents.md/)
+- [Anthropicのベストプラクティス](https://code.claude.com/docs/en/best-practices)
 - [HumanLayer: Writing a good CLAUDE.md](https://www.humanlayer.dev/blog/writing-a-good-claude-md)
-- [Karpathy on context engineering (X)](https://x.com/karpathy/status/1937902205765607626)
-- [karpathy/autoresearch — program.md paradigm](https://github.com/karpathy/autoresearch)
-- [karpathy/llm-council CLAUDE.md](https://github.com/karpathy/llm-council/blob/master/CLAUDE.md)
+- [Karpathyのcontext engineeringに関する投稿](https://x.com/karpathy/status/1937902205765607626)
+- [karpathy/autoresearch](https://github.com/karpathy/autoresearch)
+- [karpathy/llm-council](https://github.com/karpathy/llm-council/blob/master/CLAUDE.md)
 - [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills)
-- [Armin Ronacher — Agentic Coding Recommendations](https://lucumr.pocoo.org/2025/6/12/agentic-coding/)
-- [Geoffrey Huntley — stdlib](https://ghuntley.com/stdlib/) and [Ralph](https://ghuntley.com/ralph/)
-- [Simon Willison — async code research](https://simonwillison.net/2025/Nov/6/async-code-research/)
-- [Hamel Husain — Evals Skills for Coding Agents](https://hamel.dev/blog/posts/evals-skills/)
-- [Harrison Chase on Context Engineering (Sequoia)](https://sequoiacap.com/podcast/context-engineering-our-way-to-long-horizon-agents-langchains-harrison-chase/)
+- [Armin Ronacherのagentic codingに関する記事](https://lucumr.pocoo.org/2025/6/12/agentic-coding/)
+- [Geoffrey Huntleyのstdlib](https://ghuntley.com/stdlib/) と [Ralph](https://ghuntley.com/ralph/)
+- [Simon Willisonの調査リポジトリに関する記事](https://simonwillison.net/2025/Nov/6/async-code-research/)
+- [Hamel Husainの評価に関する記事](https://hamel.dev/blog/posts/evals-skills/)
+- [Harrison Chaseのインタビュー](https://sequoiacap.com/podcast/context-engineering-our-way-to-long-horizon-agents-langchains-harrison-chase/)
 - [jack60810/claude-evolve](https://github.com/jack60810/claude-evolve)
-- [Martin Fowler — SDD Tools Comparison](https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html)
+- [仕様駆動開発ツールの比較](https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html)
 - [GitHub Spec Kit](https://github.com/github/spec-kit)
 - [BMAD-METHOD](https://github.com/bmadcode/BMAD-METHOD)
-- [GitHub Blog — How Squad coordinates AI agents](https://github.blog/ai-and-ml/github-copilot/how-squad-runs-coordinated-ai-agents-inside-your-repository/)
+- [GitHub Squadの協調作業](https://github.blog/ai-and-ml/github-copilot/how-squad-runs-coordinated-ai-agents-inside-your-repository/)
 - [ballred/obsidian-claude-pkm](https://github.com/ballred/obsidian-claude-pkm)
 - [Mr-chen-05/rules-2.1-optimized](https://github.com/Mr-chen-05/rules-2.1-optimized)
-- [Baoyu: shareAI-lab/learn-claude-code](https://github.com/shareAI-lab/learn-claude-code)
+- [shareAI-lab/learn-claude-code](https://github.com/shareAI-lab/learn-claude-code)

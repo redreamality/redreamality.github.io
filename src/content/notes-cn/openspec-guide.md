@@ -11,7 +11,9 @@ lang: "zh"
 
 先理解一个区别：`openspec/specs/` 记录已经接受的系统行为，`openspec/changes/<name>/` 记录准备如何改变这些行为。完成实现和测试后，再把变更中的规范增量合并回主规范并归档。
 
-需要直接安装并完成第一个示例，可以进入[OpenSpec CLI 教程](/cn/blog/openspec-tutorial-cli-commands-agents-md-examples/)。这里先解释是否值得引入、实际会留下哪些文件，以及每个环节需要检查什么。下文以 npm 已发布的 **OpenSpec 1.13.2** 为基线，核验日期为 **2026-09-25 UTC**；官方 main 或其他版本可能不同。
+需要安装、排查 PATH 或查命令，进入[OpenSpec CLI 教程](/cn/blog/openspec-tutorial-cli-commands-agents-md-examples/)。需要共享规范、分别维护组件任务，进入[Stores 双仓库示例](/cn/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice)。截至 2026 年 10 月 26 日，npm `latest` 已发布 **1.15.0**，独立程序安装不需要 Node.js；其中包含 Stores，但功能仍标为 Beta。
+
+本页解释是否值得引入及应评审哪些文件。以下 **1.13.2** 示例保留 **2026-09-25 UTC** 核验的历史基线，不代表安装最新版。CLI 教程保留这套练习，并在前部补充当前安装选项。
 
 ## 适合什么任务，什么时候可以不用
 
@@ -32,6 +34,8 @@ OpenSpec 比较适合已有项目中的持续变更。例如增加一种登录�
 
 以新增邮件魔法链接登录为例。我们希望保留原来的密码登录，只增加一条使用一次性链接的路径。
 
+<div class="content-table-scroll" role="region" aria-label="环节 / 实际动作和产物 / 人工检查" tabindex="0">
+
 | 环节 | 实际动作和产物 | 人工检查 |
 | --- | --- | --- |
 | 澄清意图 | 在 `proposal.md` 记录原因、范围、能力和影响 | 是否误把注册、账单或整页改版也包括进来 |
@@ -39,6 +43,8 @@ OpenSpec 比较适合已有项目中的持续变更。例如增加一种登录�
 | 设计与拆解 | 在 `design.md` 记录方案，在 `tasks.md` 列任务 | token 存储、失效和测试策略是否具体 |
 | 验证与实现 | CLI 检查规范结构，开发者或编码助手实现并运行测试 | 结构验证通过不等于安全性或功能测试通过 |
 | 评审与归档 | 将规范增量合并到主规范，移动变更到 archive | 实现是否已经完成，主规范是否准确反映接受的行为 |
+
+</div>
 
 这是一种工作顺序，不是不可回头的状态机。实现时发现新约束，可以返回修改提案、规范和任务，再检查受影响的测试。不要因为任务清单已经有勾选，就把新决定留在聊天里。
 
@@ -90,7 +96,7 @@ The system SHALL reject a magic link that has already been used.
 
 ## CLI 与编码助手里的命令
 
-在新建的空练习目录里，安装了 Node.js 20.19.0 或更高版本及 pnpm 后，可以运行：
+以下固定 npm 包练习需要 Node.js 20.19.0 或更高版本及 pnpm，请在新建空目录中运行。这不是当前独立程序的运行要求：
 
 ```bash
 pnpm dlx @fission-ai/openspec@1.13.2 --help

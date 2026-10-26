@@ -1,10 +1,50 @@
 ---
 title: '什么是规格驱动开发 (SDD)？开源框架深度对比：BMAD vs spec-kit vs OpenSpec vs PromptX'
 pubDate: 2025-10-21T16:12:17.943Z
-description: '本文将深入探讨规格驱动开发（Spec-Driven Development, SDD）这一变革性方法，并对四个引领潮流的开源项目——BMAD-METHOD、GitHub的spec-kit、OpenSpec和PromptX——进行深度解构与战略比较。'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: '用同一个 Python 小改动比较 BMAD、Spec Kit、OpenSpec 与 PromptX：需要哪些决定、留下哪些产物、怎样验收，以及何时值得引入规格流程。'
 author: 'Remy'
 tags: ['vibe-coding', 'sdd', 'openspec', 'spec-kit', 'bmad']
 ---
+
+## 先用同一个小改动选择流程
+
+选择工具之前，先确定团队缺的是任务澄清、可持续维护的规格，还是可复用的角色上下文。对一个小函数，这些需求的成本差别比功能数量更有用。2026-10-26 的实践补充放在这里；后面的原始论述保留用于理解方法背景，其中社区数字属于旧稿快照，不是当前排名或选型依据。
+
+共同任务是新增 `normalize_name(value)`：去除首尾空白，把中间连续空白压成一个普通空格，空字符串返回空字符串，非字符串抛出 `TypeError`。采用 Python `str.split()` 的 Unicode 空白规则，保留其他文字、大小写与标点，不做身份校验或音译。[完整任务](/assets/jev-bmad-search-repair/small-change-task.md)、[参考实现](/assets/jev-bmad-search-repair/normalize_name.py)和[七项验收测试](/assets/jev-bmad-search-repair/test_normalize_name.py)均可下载。
+
+对这个任务，决定必须先于工具：`None` 是错误还是空值？不换行空格算不算空白？姓名中的标点是否保留？这些都是用户能观察到的行为，不能靠某个角色名称替我们回答。确认上述规则后，各工具应承接同一份输入，不能给一个工具更详细的需求再比较结果。
+
+<div class="content-table-scroll" role="region" aria-label="工具与当前入口 / 本题需要留下的产物 / 人要决定什么 / 怎样确认完成" tabindex="0">
+
+| 工具与当前入口 | 本题需要留下的产物 | 人要决定什么 | 怎样确认完成 |
+| --- | --- | --- | --- |
+| BMAD 6.12.4，宿主内 `bmad-help`、`bmad-build` | 配置的 implementation_artifacts 下 `spec-<slug>.md`，实现和测试；简化路径可省部分规划章节 | 是否只做一个低风险小变更；未明确的输入行为 | 将 spec 的行为对照七项测试，检查真实 diff 和评审记录 |
+| Spec Kit，constitution、specify、plan、tasks、implement、converge | 项目原则及此功能的 `spec.md`、`plan.md`、`tasks.md`，代码与测试 | 已有项目原则是否适用；计划是否仍限定标准库与两个代码文件 | 运行测试，检查跨文档一致性，再通过 converge 查找未完成任务 |
+| OpenSpec，`/opsx:propose normalize-name`、`/opsx:apply`、`/opsx:archive` | `openspec/changes/normalize-name/` 中的 proposal、design、tasks 与 specs，完成后更新主规格 | 是新增能力还是修改既有行为；哪些规则需要长期维护 | 对照变更场景跑测试，核对任务和差异后归档 |
+| PromptX，发现并激活合适的角色 | 本题仍要显式要求任务约定、代码与测试文件；角色状态本身不是功能规格 | 是否已有可复用的角色知识；是否值得为这个函数引入 MCP 服务 | 用同一测试与 diff 验收，不能用角色已激活或记忆已保存代替 |
+
+</div>
+
+表中路径和流程依据分别是 [BMAD 版本化模板](https://github.com/bmad-code-org/BMAD-METHOD/blob/v6.12.4/src/bmm-skills/ship/bmad-build/spec-template.md)、[Spec Kit 当前 SDD 参考](https://github.github.io/spec-kit/reference/agentic-sdd.html)、[OpenSpec 官方工作流](https://github.com/Fission-AI/OpenSpec)和 [PromptX 官方说明](https://github.com/Deepractice/PromptX)。这是同题的产物与决策比较，不是四个模型运行的性能测评。
+
+Spec Kit 当前 README 还提供独立的 bug fixing 与 idea assessment 入口，不必先走完整 SDD。本题是新功能，因此选 SDD 路径。其 Copilot 示例采用 `/speckit-specify` 等连字符写法，其他集成可能使用 `/speckit.specify`；以所安装宿主实际提供的入口为准，不要把聊天技能当作终端命令。`converge` 检查代码与规格、计划、任务的符合程度，发现缺口时追加任务，再回到实现，不会替我们直接完成修复。
+
+OpenSpec 当前默认流程包含 propose、apply、archive；扩展 profile 才提供部分额外入口，例如 verify。不要按旧截图判断命令缺失，也不要在测试尚未通过时归档。PromptX 的角色、记忆和工具能力适合补上下文，但本文没有发现可直接等同于上述变更规格的统一产物约定，因此表中任务文档属于本题的交付要求。
+
+### 本地验收证明了什么
+
+本次确实在仓库外空目录安装 BMAD 6.12.4，并调用安装后的渲染脚本，得到 workflow 和其引用的首步文件。作者编写的参考实现也实际通过下面的命令，结果为 `Ran 7 tests`、`OK`：
+
+```bash
+uv run --no-project python -B -m unittest -v test_normalize_name.py
+```
+
+七项检查覆盖连续空白、空输入、tab 与换行、Unicode 空白、中文保留、非法类型和重复调用结果不变。没有调用四个工具的宿主模型，因此没有任何一个工具“自动完成本题”的实测结论，也没有比较 token、耗时或成功率。BMAD 的具体安装、文件检查与故障定位见[现有入门指南](/cn/garden/notes/bmad-method-guide/)。
+
+如果想在团队里复现比较，为每个工具准备独立目录，只放共同任务和验收测试。让助手产出实现与相应文档，记下额外澄清的问题、最终文件、测试命令及退出码。参考实现留到最后再看，否则检验的只是复制能力。测试通过后还要读 diff，确认没有增加依赖、修改其他模块或静默改变异常约定。
+
+我的选择是：已有 BMAD 的团队直接用小变更路径；需要把行为持续维护在现有规格里时选择 OpenSpec；已有项目原则并需要计划与任务逐步收敛时选择 Spec Kit。若只缺角色知识才考虑 PromptX。这个函数本身不需要多人分工，也不值得单独引入一整套平台。保留规格的价值在于下一次修改还能找回意图，而不是这一次生成了多少 Markdown。
 
 ## **导言：超越“Vibe Coding”——AI驱动开发中结构化的必然性**
 
@@ -43,7 +83,7 @@ tags: ['vibe-coding', 'sdd', 'openspec', 'spec-kit', 'bmad']
 * **工作流与特性**：BMAD采用一个独特的两阶段流程：  
   1. **智能体规划（Agentic Planning）**：由分析师（Analyst）、产品经理（PM）和架构师（Architect）等专业智能体与用户协作，创建详细的产品需求文档（PRD）和架构文档。这种多角色协作模式确保了规划的深度和一致性[^10]。  
   2. **上下文工程化开发（Context-Engineered Development）**：由Scrum Master智能体将规划文档转化为“超详细的开发故事”。这些故事文件内嵌了开发智能体所需的一切上下文、实现细节和架构指导，确保开发智能体在动手前就对任务有完整的理解[^10]。  
-* **技术实现**：项目基于Node.js v20+，主要使用JavaScript。它拥有清晰的版本迭代策略，目前稳定版为v4.x，同时正在对v6-alpha版本进行完全重写，显示出其活跃和雄心勃勃的开发路线图[^10]。  
+* **技术实现**：旧稿讨论了 v4 与早期 v6 的组织方式。2026-10-26 实际验证的是已发布的 6.12.4；当前小改动入口与文件路径见本文前部，不再把 v6 统称为 alpha。
 * **社区与成熟度**：该项目拥有极高的社区参与度，GitHub上获得了19.1k星标和2.8k分叉，并拥有一个活跃的Discord社区，为用户提供支持和交流平台[^10]。
 
 ### **2.2. GitHub的spec-kit：务实的企业级工具包**
@@ -94,6 +134,8 @@ tags: ['vibe-coding', 'sdd', 'openspec', 'spec-kit', 'bmad']
 
 为了帮助技术领导者做出明智的决策，下表从多个维度对这五个项目进行了深入的比较。一个简单的功能列表是不足以支撑战略决策的，因为工具背后的哲学决定了它与企业文化的契合度及长期可行性。此表将每个工具的核心理念、工作流和上下文策略提炼为可直接比较的格式，并通过映射到具体的“理想用例”和“SDD成熟度等级”，将抽象分析转化为一个实用的决策矩阵。
 
+<div class="content-table-scroll" role="region" aria-label="维度 / BMAD-METHOD / spec-kit / OpenSpec / PromptX / GTPlanner" tabindex="0">
+
 | 维度 | BMAD-METHOD | spec-kit | OpenSpec | PromptX | GTPlanner |
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | **核心理念** | **智能体敏捷**：AI团队模拟人类角色，确保深层上下文理解[^10]。 | **可执行规格**：结构化的门控流程，确保可验证和可重复的产出[^4]。 | **轻量级变更管理**：专注于迭代变更的可审计性和确定性[^12]。 | **自然对话**：将AI视为角色驱动的专家，抽象化技术交互[^13]。 | **确定性PRD生成**：通过清晰SOP消除AI模糊性，Prefab模块化组合[^25]。 |
@@ -103,6 +145,8 @@ tags: ['vibe-coding', 'sdd', 'openspec', 'spec-kit', 'bmad']
 | **理想用例** | 需要深度领域规划的复杂绿地项目；创意写作或商业策略等非技术领域。 | 新的企业级项目；在现有系统中添加大型、明确定义的功能，且过程严谨性至关重要。 | 在成熟、复杂的代码库中进行持续、迭代的变更和功能添加，且审计性要求高。 | 希望为现有AI助手（如Claude, Cursor）增强定制化、领域特定工具和专业知识的团队。 | 快速原型设计和PRD生成；需要通过模块化Prefabs快速构建AI工作流的团队。 |
 | **SDD成熟度等级** | 目标为**规格锚定**，其愿景具备达到**规格即源码**的潜力。 | 主要是**规格锚定**。 | 主要是**规格锚定**，并极度关注锚定过程本身。 | 一个元级别工具，用于增强**规格先行**和**规格锚定**的工作流。 | 目标为**规格先行**，通过PRD标准化快速启动项目。 |
 | **社区与成熟度** | 非常高 (19.1k星标)[^10]。 | 非常高 (39.3k星标)[^8]。 | 高 (4.1k星标)[^12]。 | 中等 (3k星标)[^13]。 | 新兴 (122星标)[^25]。 |
+
+</div>
 
 ### **3.2. 采纳框架：因地制宜，人尽其才**
 

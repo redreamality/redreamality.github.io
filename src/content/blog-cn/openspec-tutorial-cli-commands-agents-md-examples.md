@@ -1,14 +1,100 @@
 ---
 title: 'OpenSpec 教程：CLI 安装、命令、AGENTS.md 与实战示例'
 pubDate: 2026-06-16T08:15:00.000Z
-description: '面向 AI 原生规范驱动开发的 OpenSpec 实用教程：安装 CLI、初始化项目、创建变更、验证规范、使用 AGENTS.md，以及棕地项目工作流实战。'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: '在 Windows、macOS 和 Linux 安装 OpenSpec，排查 PATH 与多版本冲突，按任务查 CLI 命令，并用固定版本示例完成变更验证与归档。'
 author: 'Remy'
 tags: ['openspec', 'sdd', 'ai-coding', 'agents.md', 'cli', '规范驱动开发', 'AI 编码']
 lang: 'zh'
 translatedFrom: 'openspec-tutorial-cli-commands-agents-md-examples'
 ---
 
+## 在 Windows、macOS 和 Linux 安装 OpenSpec
+
+2026 年 10 月 26 日更新：npm 的 `latest` 已发布 **1.15.0**。独立程序不需要 Node.js；npm 包需要 Node.js **20.19.0+**。选择一种安装方式即可，平台要求见[官方安装文档](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/installation.md)。
+
+Windows PowerShell 使用官方独立程序安装脚本：
+
+```powershell
+irm https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/scripts/binary/install.ps1 | iex
+```
+
+macOS 或 Linux 使用：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/scripts/binary/install.sh | sh
+```
+
+这些命令执行 `main` 分支上的官方安装器，下载发布版二进制并核对 SHA256SUMS，不是编译 `main`。要固定二进制版本，先在当前 shell 设置环境变量 `OPENSPEC_VERSION=v1.15.0`。Windows 默认安装到 `%LOCALAPPDATA%\Programs\openspec` 并加入用户 PATH；macOS 和 Linux 默认安装到 `~/.local/bin`。安装后打开新终端。
+
+已有 Node.js 和 pnpm 时，也可以选择发布包：
+
+```bash
+node --version
+pnpm add -g @fission-ai/openspec@1.15.0
+openspec --version
+```
+
+固定安装成功后，最后一条命令应输出 `1.15.0`。不想全局安装，可运行 `pnpm dlx @fission-ai/openspec@1.15.0 --version`。`dlx` 成功不代表裸命令 `openspec` 已经可用。
+
+### 排查找不到命令或版本不对
+
+Windows 先检查匹配到的程序，再直接运行独立程序：
+
+```powershell
+Get-Command openspec -All
+where.exe openspec
+& "$env:LOCALAPPDATA\Programs\openspec\openspec.exe" --version
+```
+
+完整路径能运行、裸命令找不到时，重新打开终端并检查用户 PATH。裸命令输出旧版本时，通常是较早的 PATH 项或 shell 别名选中了另一份程序。pnpm 安装可用 `pnpm bin -g` 找到全局可执行目录；缺少 global bin 的错误需要修复 pnpm 设置，练习期间可先使用 `dlx`。
+
+macOS 或 Linux 使用：
+
+```bash
+command -v openspec
+which -a openspec
+"$HOME/.local/bin/openspec" --version
+```
+
+按实际安装位置补充 shell 的 PATH。使用 nvm 或 fnm 时，先确认当前 Node 版本，因为全局包可能属于另一个版本；版本管理器的 shim 也可能需要刷新。确定程序归哪个安装方式管理后，再处理重复副本。
+
+### 按原安装方式升级和卸载
+
+`openspec version --check` 查询更新。pnpm 安装使用 `pnpm add -g @fission-ai/openspec@latest` 升级，再进入每个项目运行 `openspec update`，刷新已配置工具的集成文件并检查差异。选择 CLI 包版本和更新项目指令是两个步骤。
+
+独立程序重新运行安装器即可升级。`openspec install` 会把包管理器安装切换为独立程序，并提示如何移除旧副本；操作后在新终端确认实际选中的可执行文件。
+
+卸载 pnpm 安装用 `pnpm remove -g @fission-ai/openspec`。独立程序只删除已核实安装路径下的可执行文件和对应 PATH 项。没有 `openspec uninstall` 命令。需要保留规格历史时，留下 `openspec/specs/` 和 `openspec/changes/archive/`；卸载 CLI 不要求删除项目文档。
+
+## 按任务查 OpenSpec CLI 命令
+
+下面是 1.15.0 的终端命令，请在目标项目中执行。没有全局安装时，把 `openspec` 前缀换成 `pnpm dlx @fission-ai/openspec@1.15.0`。
+
+<div class="content-table-scroll" role="region" aria-label="任务 / 命令 / 检查什么" tabindex="0">
+
+| 任务 | 命令 | 检查什么 |
+| --- | --- | --- |
+| 确认版本 | `openspec --version` | 当前运行的版本 |
+| 查参数 | `openspec new change --help` | 当前安装版本支持的选项 |
+| 不生成助手文件地初始化 | `openspec init . --tools none` | `openspec/` 结构和配置 |
+| 创建变更 | `openspec new change add-magic-link-login` | 变更目录，不是完整提案 |
+| 列出变更 | `openspec list --json` | 活跃变更 |
+| 检查产物状态 | `openspec status --change add-magic-link-login --json` | 文档状态，不是应用测试结果 |
+| 取得提案指令 | `openspec instructions proposal --change add-magic-link-login --json` | 模板与依赖 |
+| 验证增量 | `openspec validate add-magic-link-login --strict --json --no-interactive` | 验证结果与退出码 |
+| 查看主规范 | `openspec show auth --type spec` | 主规范内容 |
+| 归档已评审的工作 | `openspec archive add-magic-link-login` | 归档位置和主规范更新 |
+
+</div>
+
+`/opsx:propose`、`/opsx:apply` 应输入助手聊天框，不是 PowerShell 或 Bash。调用形式因集成而异，例如 Codex 使用 `$openspec-propose` 这样的技能名；以实际生成的文件为准，不要假设所有工具使用同一套斜杠命令。完整选项见[1.15.0 CLI 参考](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/cli.md)。
+
+多个代码仓库共享规范时，接着看[Stores 双仓库流程](/cn/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice)。1.15.0 发布包包含 Stores，但功能仍标为 Beta；npm 的 `beta` 标签是另一条分发渠道，使用 Stores 不需要安装它。
+
 ## OpenSpec 快速开始
+
+以下练习保留 **1.13.2** 固定版本，方便已有读者复现，不直接替换原命令。相同的 proposal、delta、design 和 tasks 也已在 1.15.0 下验证。[可下载的 CLI 检查脚本](/assets/openspec-search-repair/check-examples.mjs)只执行本地文件流程，不调用模型；安装器和助手实施需要单独验证。
 
 本文使用 npm 已发布的 **OpenSpec 1.13.2**，需要 Node.js **20.19.0+** 和 pnpm。验证环境为 Node.js 26.7.0、pnpm 10.28.2；在仓库外空目录验证文件工作流，没有调用模型。先进入新建的练习目录，再运行：
 
@@ -440,6 +526,8 @@ delta 中的 `## Purpose` 会在首次创建能力规范时提供用途说明。
 
 ## OpenSpec 命令速查表
 
+<div class="content-table-scroll" role="region" aria-label="任务 / 命令" tabindex="0">
+
 | 任务 | 命令 |
 |---|---|
 | 显示 CLI 帮助 | `openspec --help` |
@@ -455,6 +543,8 @@ delta 中的 `## Purpose` 会在首次创建能力规范时提供用途说明。
 | 归档已完成变更 | `openspec archive <name>` |
 | 归档（跳过提示） | `openspec archive <name> --yes` |
 | 更新指令文件 | `openspec update .` |
+
+</div>
 
 ## OpenSpec 最佳实践
 

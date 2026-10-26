@@ -16,8 +16,8 @@
  */
 import { execFileSync } from 'node:child_process';
 import { readFileSync, readdirSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createInterface } from 'node:readline';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -85,7 +85,7 @@ function parseFrontmatterSlug(filePath) {
 }
 
 /** Mirror scripts/content-slug.mjs without importing github-slugger (CI-friendly). */
-function contentSlugFromEntry(entry, dataSlug) {
+export function contentSlugFromEntry(entry, dataSlug) {
   if (dataSlug) return String(dataSlug);
   return entry
     .replaceAll('\\', '/')
@@ -95,9 +95,7 @@ function contentSlugFromEntry(entry, dataSlug) {
       segment
         .trim()
         .toLowerCase()
-        .replace(/[^\p{L}\p{N}\-_./]+/gu, '-')
-        .replace(/-+/g, '-')
-        .replace(/^-|-$/g, ''),
+        .replace(/[^\p{L}\p{N}\-_./]+/gu, '-'),
     )
     .filter(Boolean)
     .join('/')
@@ -241,23 +239,29 @@ async function submit(urls) {
   return { status: res.status, text };
 }
 
-const { urls, dryRun } = await collectUrls(process.argv.slice(2));
-if (urls.length === 0) process.exit(0);
+async function main() {
+  const { urls, dryRun } = await collectUrls(process.argv.slice(2));
+  if (urls.length === 0) return;
 
-console.log(`IndexNow: ${urls.length} URL(s) → ${ENDPOINT}`);
-for (const u of urls) console.log(`  ${u}`);
+  console.log(`IndexNow: ${urls.length} URL(s) → ${ENDPOINT}`);
+  for (const u of urls) console.log(`  ${u}`);
 
-if (dryRun) {
-  console.log('Dry run; nothing submitted.');
-  process.exit(0);
+  if (dryRun) {
+    console.log('Dry run; nothing submitted.');
+    return;
+  }
+
+  const { status, text } = await submit(urls);
+  // 200 OK, 202 Accepted (key validation pending) are success.
+  if (status === 200 || status === 202) {
+    console.log(`OK HTTP ${status}${text ? `: ${text.slice(0, 200)}` : ''}`);
+    return;
+  }
+
+  console.error(`IndexNow failed HTTP ${status}${text ? `: ${text.slice(0, 500)}` : ''}`);
+  process.exitCode = 1;
 }
 
-const { status, text } = await submit(urls);
-// 200 OK, 202 Accepted (key validation pending) are success.
-if (status === 200 || status === 202) {
-  console.log(`OK HTTP ${status}${text ? `: ${text.slice(0, 200)}` : ''}`);
-  process.exit(0);
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  await main();
 }
-
-console.error(`IndexNow failed HTTP ${status}${text ? `: ${text.slice(0, 500)}` : ''}`);
-process.exit(1);

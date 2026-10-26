@@ -1,6 +1,6 @@
 ---
 title: "BMAD Method 入门：安装、首个工作流与产物检查"
-description: "按 BMAD Method 6.12.0 已发布版本介绍安装、bmad-help、bmad-build 和真实目录，演示如何定义首个小变更，并说明角色约定与权限控制的区别。"
+description: "BMAD Method 安装与首个小改动：6.12.4 隔离安装和技能渲染检查、可下载练习与七项验收测试、安装后排错，并保留 6.12.0 的版本化说明。"
 date: 2026-01-10
 source: "https://github.com/bmad-code-org/BMAD-METHOD"
 tags: ["ai-development", "敏捷开发", "bmad", "规格驱动开发", "多智能体系统"]
@@ -10,6 +10,50 @@ lang: "zh"
 **BMAD Method 是一套让 AI 编码助手按明确需求、计划和评审流程工作的开源方法与工具。** [官方仓库](https://github.com/bmad-code-org/BMAD-METHOD)提供安装器和技能定义，产品、架构、开发等角色帮助团队从不同角度讨论问题。它适合需要保留决策、分阶段完成的变更；角色名称本身不提供文件权限隔离。
 
 先完成一个范围小、结果容易检查的工作流，再决定是否引入更多规划。本文使用 npm 已发布的 **bmad-method 6.12.0**，于 **2026-09-25 UTC** 核验。安装和本地技能渲染已在仓库外空目录验证；没有启动真实模型、调用付费服务或实现下文示例功能。
+
+## 从安装走到首个可验收的小改动
+
+2026-10-26 补充核验时，npm `latest` 是 **6.12.4**。本次在仓库外新建空目录，安装 BMM 与 Claude Code 集成，实际生成了 29 个技能入口和可读取的 build workflow。下面的旧章节保留 6.12.0 的版本化记录；不要把九月的标签当作今天的最新版本。
+
+```bash
+pnpm dlx bmad-method@6.12.4 install --directory . --modules bmm --tools claude-code --yes
+```
+
+先切换到新的练习目录再运行，不要在现有产品仓库中试装。安装后打开 `.claude/skills/bmad-build/SKILL.md`，按其中的绝对路径调用渲染脚本。本次检查命令的形式如下，路径占位符需换成练习目录的实际路径：
+
+```bash
+uv run --no-cache "<practice>/_bmad/scripts/render_skill.py" --project-root "<practice>" --skill "<practice>/.claude/skills/bmad-build"
+```
+
+成功输出指向 `_bmad/render/bmad-build/.../workflow.md`。该文件还引用了实际存在的 `step-01-clarify-and-route.md`；这能确认安装后的工作流文件可以加载，不能证明模型已经完成需求分析、实现或评审。
+
+小改动统一使用[完整任务与验收条件](/assets/jev-bmad-search-repair/small-change-task.md)：添加姓名显示文本的空白归一化函数。给已在练习目录打开的助手发送 `/bmad-build`，附上任务正文。任务明确了 Python 的 Unicode 空白语义，空字符串原样返回，非字符串抛出 `TypeError`，不做姓名身份校验或音译。这样可以避免模型自行把 `None` 变成字符串，或只处理 ASCII 空格。
+
+下载[验收测试](/assets/jev-bmad-search-repair/test_normalize_name.py)，等助手生成 `normalize_name.py` 后运行：
+
+```bash
+uv run --no-project python -B -m unittest -v test_normalize_name.py
+```
+
+七项测试检查首尾与连续空白、空输入、换行和 tab、Unicode 空白、中文文本保留、非法类型及幂等性。另附[作者编写的参考实现](/assets/jev-bmad-search-repair/normalize_name.py)，本次实际运行得到 `Ran 7 tests`、`OK`。这是参考实现通过验收，不是 BMAD 模型运行记录。评估助手时先只给任务和测试，完成后再对照参考实现。
+
+检查助手实际留下的 `spec-<slug>.md`，把每项输入行为与代码、测试结果对应起来。6.12.4 的模板仍包含意图、状态、实现记录与评审记录，简化路径可能删除部分规划章节。不要手工创建一个标记 `done` 的文件来代替模型工作流，也不要仅凭任务复选框就认定行为正确。
+
+安装后常见阻塞可按下表定位：
+
+<div class="content-table-scroll" role="region" aria-label="症状 / 下一步" tabindex="0">
+
+| 症状 | 下一步 |
+| --- | --- |
+| 聊天里找不到 `bmad-build` | 核对宿主启动目录与 `.claude/skills/bmad-build/SKILL.md`，重新打开助手 |
+| 安装成功，但渲染命令失败 | 检查 `uv --version`、实际路径和脚本报错；尚未进入模型阶段 |
+| workflow 已生成，spec 或代码没有生成 | 检查是否真的在聊天中调用技能，以及宿主模型服务是否可用 |
+| 测试模块不存在 | 等待或修正实现步骤，不能把安装成功计作功能完成 |
+| Unicode 或非法类型测试失败 | 回到任务的行为约定，不要删掉失败用例让结果变绿 |
+
+</div>
+
+当前依据为 [6.12.4 build 入口](https://github.com/bmad-code-org/BMAD-METHOD/blob/v6.12.4/src/bmm-skills/ship/bmad-build/SKILL.md)、[spec 模板](https://github.com/bmad-code-org/BMAD-METHOD/blob/v6.12.4/src/bmm-skills/ship/bmad-build/spec-template.md)与实际安装产物。没有启动宿主模型；同题的工具选择见 [SDD 比较](/cn/blog/-sddbmad-vs-spec-kit-vs-openspec-vs-promptx/)。
 
 ## 安装哪个版本
 

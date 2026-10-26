@@ -1,45 +1,54 @@
 import { test, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+import { parseFrontmatter } from '@astrojs/markdown-remark';
+import { z } from 'astro/zod';
+import { resolveDocumentTitle, resolveMetaDescription } from '../src/utils/seo';
+
+const metadataSchema = z.object({
+  title: z.string().min(1),
+  description: z.string().min(1),
+  seoTitle: z.string().optional(),
+  seoDescription: z.string().optional(),
+});
 
 const pages = [
   {
     slug: 'pythonpathvs-code',
-    title: 'How to Set PYTHONPATH on Windows, Linux, macOS and VS Code',
     answer: 'What is PYTHONPATH?',
     content: 'python.terminal.useEnvFile',
-    description: 'Set and check PYTHONPATH with PowerShell or export commands. Configure VS Code terminals and debugging, and diagnose Python import errors.',
   },
   {
     slug: 'who-starred-my-github-repo-how-to-view',
-    title: 'How to See Who Starred Your GitHub Repository',
     answer: 'Open the Stargazers Page',
     content: 'a public repository does not guarantee public access to its stargazers',
-    description: 'See who starred a GitHub repository using its Stargazers page. Find the URL, understand access limits, and distinguish stars from watchers.',
   },
   {
     slug: 'openspec-tutorial-cli-commands-agents-md-examples',
-    title: 'OpenSpec Tutorial: Install the CLI and Run Your First Change',
     answer: 'OpenSpec Quick Start',
     content: 'pnpm dlx @fission-ai/openspec@1.13.2 init . --tools none',
-    description: 'Install and initialize OpenSpec, create your first change, validate specs, and archive completed work. Includes CLI commands and AGENTS.md examples.',
   },
   {
     slug: 'browser-extension-development',
-    title: 'What Is a Browser Extension? Build Your First One with WXT',
     answer: 'What Is a Browser Extension?',
     content: 'A browser extension is software installed in a web browser',
-    description: 'Learn what browser extensions do, how popups and content scripts work, and how to start building an extension with WXT, TypeScript and pnpm.',
   },
 ];
 
 for (const article of pages) {
   test(`GSC content preserves SEO contract: ${article.slug}`, async ({ page }) => {
+    const { frontmatter } = parseFrontmatter(readFileSync(
+      new URL(`../src/content/blog-en/${article.slug}.md`, import.meta.url), 'utf8',
+    ));
+    const metadata = metadataSchema.parse(frontmatter);
+    const description = metadata.seoDescription ?? metadata.description;
     const path = `/blog/${article.slug}/`;
     const response = await page.goto(path, { waitUntil: 'domcontentloaded' });
     expect(response?.status()).toBe(200);
-    await expect(page).toHaveTitle(new RegExp(article.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    await expect(page).toHaveTitle(resolveDocumentTitle(metadata.seoTitle ?? metadata.title, 'en', undefined, { description }));
     await expect(page.locator('h1')).toHaveCount(1);
-    await expect(page.locator('h1')).toHaveText(article.title);
-    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', article.description);
+    await expect(page.locator('h1')).toHaveText(metadata.title);
+    await expect(page.locator('meta[name="description"]'))
+      .toHaveAttribute('content', resolveMetaDescription(description, metadata.title, 'en'));
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://redreamality.com${path}`);
     await expect(page.getByRole('heading', { level: 2, name: article.answer, exact: true })).toHaveCount(1);
     await expect(page.locator('main article')).toContainText(article.content);

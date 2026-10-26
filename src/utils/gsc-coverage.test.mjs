@@ -51,6 +51,21 @@ describe('GSC coverage evidence boundaries', () => {
     }
   });
 
+  it('accepts the current Web label without accepting other search reports', () => {
+    const snapshot = {
+      url: 'https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Aredreamality.com&breakdown=page&start_date=20261001&end_date=20261023',
+      text: 'Search type: Web\nChart, containing counts from October 1, 2026 to October 23, 2026\n1-1 of 1',
+      tables: [[['Top pages', 'Clicks', 'Impressions'], ['https://redreamality.com/blog/example/', '2', '100']]],
+    };
+    expect(readGscSnapshot(snapshot).records).toEqual([
+      { url: 'https://redreamality.com/blog/example/', clicks: 2, impressions: 100 },
+    ]);
+    for (const label of ['Image', 'Web images', 'Discover']) {
+      expect(() => readGscSnapshot({ ...snapshot, text: snapshot.text.replace('Search type: Web', `Search type: ${label}`) }))
+        .toThrow('Web (text)');
+    }
+  });
+
   it('does not confuse hreflang alternatives with sitemap loc entries', () => {
     const parsed = parseSitemap('<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url><loc>https://redreamality.com/blog/a/</loc><xhtml:link rel="alternate" href="https://redreamality.com/cn/blog/a/"/></url></urlset>');
     expect(parsed).toEqual({ kind: 'urlset', urls: ['https://redreamality.com/blog/a/'] });
