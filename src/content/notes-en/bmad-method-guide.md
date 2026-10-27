@@ -1,6 +1,6 @@
 ---
 title: "BMAD Method Guide: Install, Run a Workflow, and Inspect the Outputs"
-description: "Get started with the published BMAD Method 6.12.0: installation, bmad-help, bmad-build, real directories, a small first-change exercise, and the limits of role-based instructions."
+description: "Install BMAD and verify a first small change: isolated 6.12.4 installation and skill rendering, a downloadable exercise with seven tests, troubleshooting, and preserved 6.12.0 version notes."
 date: 2026-01-10
 source: "https://github.com/bmad-code-org/BMAD-METHOD"
 tags: ["ai-development", "Agile", "bmad", "sdd", "multi-agent-systems"]
@@ -11,6 +11,50 @@ translatedFrom: "bmad-method-guide"
 **BMAD Method is an open-source method and toolkit for guiding AI coding assistants through requirements, planning, and review.** The [official repository](https://github.com/bmad-code-org/BMAD-METHOD) supplies an installer and skill definitions. Product, architecture, and development roles bring different questions to the work. It fits changes that need durable decisions and several stages of delivery; role names do not provide filesystem isolation.
 
 Start with a small workflow whose results are easy to inspect before adopting more planning. This guide uses the published npm package **bmad-method 6.12.0**, checked on **2026-09-25 UTC**. Installation and local skill rendering were verified in an empty directory outside the repository. No live model, paid service, or implementation of the exercise below was run.
+
+## Go from installation to a verifiable small change
+
+On October 26, 2026, npm's `latest` was **6.12.4**. A fresh directory outside the repository was used to install BMM and the Claude Code integration. It produced 29 skill entry points and a readable build workflow. The older sections below preserve the 6.12.0 record; September's distribution tags are not today's latest version.
+
+```bash
+pnpm dlx bmad-method@6.12.4 install --directory . --modules bmm --tools claude-code --yes
+```
+
+Change into a new practice directory before running this command. After installation, read `.claude/skills/bmad-build/SKILL.md` and run its rendering command with the actual absolute paths. The command checked here has this form:
+
+```bash
+uv run --no-cache "<practice>/_bmad/scripts/render_skill.py" --project-root "<practice>" --skill "<practice>/.claude/skills/bmad-build"
+```
+
+The successful output points to `_bmad/render/bmad-build/.../workflow.md`. That file references an existing `step-01-clarify-and-route.md`. This confirms that the installed workflow can be loaded, not that a model completed clarification, implementation, or review.
+
+Use the [complete shared task and acceptance contract](/assets/jev-bmad-search-repair/small-change-task.md): add a whitespace-normalization function for display names. Invoke `/bmad-build` in the assistant opened in the practice directory and supply the task. It explicitly uses Python's Unicode whitespace semantics, returns an empty string for empty input, and raises `TypeError` for non-strings. Identity validation and transliteration are outside its scope. These decisions prevent an implementation from converting `None` to text or handling only ASCII spaces.
+
+Download the [acceptance tests](/assets/jev-bmad-search-repair/test_normalize_name.py). Once the assistant creates `normalize_name.py`, run:
+
+```bash
+uv run --no-project python -B -m unittest -v test_normalize_name.py
+```
+
+Seven tests cover trimming and collapsing, empty input, newlines and tabs, Unicode whitespace, Chinese text preservation, invalid types, and idempotence. An [author-written reference implementation](/assets/jev-bmad-search-repair/normalize_name.py) is also provided. Its actual local run returned `Ran 7 tests` and `OK`. This demonstrates the reference passing acceptance tests, not a BMAD model run. To evaluate an assistant, supply the task and tests first, then compare its result with the reference.
+
+Read the assistant's actual `spec-<slug>.md` and connect each behavior to code and test evidence. The 6.12.4 template retains intent, status, implementation notes, and review records; simplified routes can omit planning sections. Creating a file marked `done` is not a substitute for executing a workflow, and checked task boxes alone do not prove correct behavior.
+
+Use these checks when installation does not lead to a completed change:
+
+<div class="content-table-scroll" role="region" aria-label="Symptom / Next check" tabindex="0">
+
+| Symptom | Next check |
+| --- | --- |
+| Chat cannot find `bmad-build` | Verify the host's working directory and `.claude/skills/bmad-build/SKILL.md`, then reopen it |
+| Installation passes but rendering fails | Check `uv --version`, actual paths, and the script error; model work has not begun |
+| Workflow exists but no spec or code appears | Check whether the skill was invoked in chat and whether the host model service is available |
+| Test module is missing | Complete or repair implementation; installation is not feature completion |
+| Unicode or invalid-type checks fail | Resolve the behavior against the task instead of deleting failing cases |
+
+</div>
+
+Sources are the [6.12.4 build entry point](https://github.com/bmad-code-org/BMAD-METHOD/blob/v6.12.4/src/bmm-skills/ship/bmad-build/SKILL.md), [spec template](https://github.com/bmad-code-org/BMAD-METHOD/blob/v6.12.4/src/bmm-skills/ship/bmad-build/spec-template.md), and the installed files. No host model was started. For tool selection on this same task, read the [SDD comparison](/blog/-sddbmad-vs-spec-kit-vs-openspec-vs-promptx/).
 
 ## Which Version to Install
 

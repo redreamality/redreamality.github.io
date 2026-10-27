@@ -1,13 +1,59 @@
 ---
-title: '设置PYTHONPATH环境变量：一份全平台&VS Code开发指南'
+title: 'PYTHONPATH 设置与不生效排查：Windows、Linux、macOS 和 VS Code'
 pubDate: 2025-08-21T09:24:07.954Z
-description: '本文将详细介绍在Windows、macOS和Linux系统上设置PYTHONPATH的多种方法，以及在Visual Studio Code (VS Code) 中为Python项目设置模块搜索路径有几种非常方便且推荐的方法。
-'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: '设置并验证 PYTHONPATH，定位 ModuleNotFoundError，区分 VS Code 终端、调试器与 Pylance 的路径配置，附无需依赖的运行时检查脚本。'
 author: 'Remy'
 tags: ['python']
 ---
 
-## 全局PYTHONPATH 
+`PYTHONPATH` 把目录加入 Python 的模块搜索路径 `sys.path`，不负责选择 Python 解释器。项目结构为 `src/my_package/` 时应加入 `src`，而不是 `src/my_package` 或某个 `.py` 文件；工作目录可能变化时使用绝对路径。
+
+## 先检查导入失败的进程
+
+环境变量的修改影响之后启动的子进程，不会更新已经运行的 Python、其他终端或父级 VS Code 进程。修改用户环境变量后，如果 VS Code 仍继承旧值，需要重启 VS Code 和终端。shell 配置文件也只影响实际读取它的 shell，不会自动影响所有应用。
+
+<div class="content-table-scroll" role="region" aria-label="现象 / 在失败进程中检查" tabindex="0">
+
+| 现象 | 在失败进程中检查 |
+| --- | --- |
+| 变量打印正确，导入仍失败 | `sys.executable`、`sys.path`，以及是否配置了包的父目录 |
+| 终端成功，调试失败 | 调试配置的 `env` 或 `envFile`、工作目录与解释器 |
+| 编辑器不报错，运行报错 | `python.analysis.extraPaths` 只配置 Pylance，不改变运行时导入 |
+| 正在运行的 notebook 不接受修改 | 用目标环境重启内核 |
+| 环境变量可见，却没进入 `sys.path` | `sys.flags.ignore_environment` 和 `sys.flags.isolated`；`-E`、`-I` 会忽略它 |
+
+</div>
+
+[下载只使用标准库的进程探针](/assets/tutorial-search-repair/pythonpath_probe.py)，在项目中运行 `python pythonpath_probe.py my_package`。它打印解释器、工作目录、环境变量、启动标志、搜索路径及实际导入文件。诊断信息后出现 traceback 表示导入失败；如果文件来自其他目录，可能导入了意外安装的同名包。
+
+运行 `python pythonpath_probe.py --self-test` 可在临时目录中检查七种情况：未设置路径、正确父目录、错误的包目录、工作目录变化及忽略环境变量的启动标志。最后应显示 `7 local checks passed; no VS Code process was exercised`。无需安装依赖，也不访问模型；这验证 Python 行为，不代表验证了你的 VS Code 设置。
+
+对照调试器时，把下载文件放到项目根目录，并创建 `src/my_package/__init__.py`，内容可以为空。完整的 `.vscode/launch.json` 如下：
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Check Python imports",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/pythonpath_probe.py",
+            "args": ["my_package"],
+            "cwd": "${workspaceFolder}",
+            "env": {"PYTHONPATH": "${workspaceFolder}/src"},
+            "console": "integratedTerminal"
+        }
+    ]
+}
+```
+
+选定目标 Python 解释器后启动此配置，`module_file` 应以 `src/my_package/__init__.py` 结尾。这里的 `env` 仅属于这次调试启动，不会配置所有集成终端；同名变量由 `env` 覆盖 `envFile`。排错时先只用一个明确来源，确认后再采用项目的常用配置。
+
+当前 [VS Code 环境设置](https://code.visualstudio.com/docs/python/environments)通过 `python.terminal.useEnvFile` 显式启用终端 `.env` 加载，[调试配置](https://code.visualstudio.com/docs/python/debugging)则单独控制每次调试启动。[Python 命令行参考](https://docs.python.org/3/using/cmdline.html)说明了忽略环境变量的启动标志。
+
+## 全局PYTHONPATH
 
 PYTHONPATH是一个环境变量，它允许用户将额外的目录添加到Python解释器搜索模块和包的路径列表中。这在开发过程中尤其有用，当你需要导入不在标准库路径或已安装包目录中的自定义模块时。本文将详细介绍在Windows、macOS和Linux系统上设置PYTHONPATH的多种方法。
 
@@ -243,19 +289,19 @@ python -c "import sys, my_package; print(sys.executable); print(my_package.__fil
     ```json
     {
         "terminal.integrated.env.windows": {
-            "PYTHONPATH": "${workspaceFolder}\\src;${env:PYTHONPATH}"
+            "PYTHONPATH": "${workspaceFolder}/src"
         },
         "terminal.integrated.env.linux": {
-            "PYTHONPATH": "${workspaceFolder}/src:${env:PYTHONPATH}"
+            "PYTHONPATH": "${workspaceFolder}/src"
         },
         "terminal.integrated.env.osx": {
-            "PYTHONPATH": "${workspaceFolder}/src:${env:PYTHONPATH}"
+            "PYTHONPATH": "${workspaceFolder}/src"
         }
     }
     ```
 
       * `${workspaceFolder}` 指向你的项目根目录。
-      * `${env:PYTHONPATH}` 会保留任何已存在的系统级PYTHONPATH设置。
+      * 这些值替换新终端中的 PYTHONPATH。需要其他目录时用平台分隔符明确添加，不要拼接空变量而意外加入工作目录。
 
 ### 3\. 选择正确的Python解释器（管理虚拟环境）
 
@@ -267,8 +313,7 @@ python -c "import sys, my_package; print(sys.executable); print(my_package.__fil
     在你的项目根目录下打开终端，运行：
 
     ```bash
-    # 使用 venv
-    python -m venv .venv
+    uv venv
     ```
 
     这会创建一个名为`.venv`的文件夹，其中包含一个独立的Python环境。
@@ -284,11 +329,15 @@ python -c "import sys, my_package; print(sys.executable); print(my_package.__fil
 
 ### 总结与对比
 
+<div class="content-table-scroll" role="region" aria-label="方法 / 优点 / 缺点 / 最佳适用场景" tabindex="0">
+
 | 方法 | 优点 | 缺点 | 最佳适用场景 |
 | :--- | :--- | :--- | :--- |
-| **`.env` 文件** | **项目隔离**，配置简单，不影响系统环境，便于团队协作（可将`.env.example`加入版本控制）。 | 需要重启终端或调试会话才能生效。 | 开发时需要引用项目内部的非安装模块。 |
+| **`.env` 文件** | 变量保存在项目内，可共享不含凭据的 `.env.example`。 | 必须由调试器或显式启用的终端加载，Python 自身不会读取。 | 开发时需要引用项目内部的非安装模块。 |
 | **`settings.json`** | 直接集成在VS Code工作区设置中。 | 配置稍微复杂，主要影响VS Code的集成终端。 | 需要为VS Code终端自定义复杂的环境变量。 |
 | **选择解释器 (虚拟环境)** | 隔离各项目安装的依赖。 | 本地包仍需安装或显式配置搜索路径。 | 有独立依赖的 Python 项目。 |
+
+</div>
 
 对已有打包配置的项目，优先使用虚拟环境和可编辑安装。需要临时引用未安装源码时，再选择项目级 `PYTHONPATH`。排错时检查失败进程的 `sys.executable`、`sys.path` 和当前工作目录。
 

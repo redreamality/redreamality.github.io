@@ -35,7 +35,7 @@ export function readGscSnapshot(snapshot) {
     if (url.searchParams.has(key)) throw new Error(`Remove the ${key} filter before a site coverage audit.`);
   }
   const searchType = url.searchParams.get('type') ?? 'web';
-  if (searchType !== 'web' || !snapshot.text?.includes('Search type: Web (text)')) {
+  if (searchType !== 'web' || !/^Search type: Web(?: \(text\))?$/m.test(snapshot.text ?? '')) {
     throw new Error('This audit requires the Web (text) search report.');
   }
   const table = snapshot.tables?.[0];

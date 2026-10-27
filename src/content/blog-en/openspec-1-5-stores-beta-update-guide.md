@@ -1,14 +1,138 @@
 ---
-title: 'OpenSpec 1.5 Explained: Stores Beta, Explore-first Workflow, and Team-scale Spec Collaboration'
+title: 'OpenSpec Stores and Multi-repo Workflow: Setup, References, and Sync'
 pubDate: 2026-07-02T01:30:00.000Z
-description: 'A detailed update and usage guide for OpenSpec 1.5.0, covering Stores Beta, /opsx:explore, brownfield adoption, command frontmatter fixes, and the shift from repo-local specs to shared planning context.'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: 'Use OpenSpec Stores with two code repositories: setup, local tasks, shared spec references, Git synchronization, root selection, and Beta limits in release 1.15.0.'
 author: 'Remy'
 tags: ['openspec', 'sdd', 'ai-coding', 'stores', 'ai-agents', 'cli']
 lang: 'en'
 translatedFrom: 'openspec-1-5-stores-beta-update-guide'
 ---
 
-OpenSpec’s recent updates are not just a collection of small CLI improvements. The larger story is a shift in its operating model: OpenSpec is moving from a lightweight repo-local spec workflow toward a shared specification collaboration layer for multiple repositories, teams, and AI coding agents.
+## Use Stores across two code repositories
+
+Updated October 26, 2026. **1.15.0 is the published npm `latest`; Stores are included but remain a Beta feature.** The npm `beta` tag currently points to `1.6.0-beta.1`, an older prerelease. Do not install that tag merely because the feature is called Stores Beta. The commands below target 1.15.0, not an unreleased checkout of `main`.
+
+A Store lets an API repository and a web repository read the same specification while keeping their implementation changes separate. It does not split tasks between repositories, grant filesystem permissions, or synchronize Git. I would keep component changes local whenever they need independent tests and reviews. Use a default external Store only when the team intentionally owns one shared planning lifecycle.
+
+The [official 1.15.0 Stores guide](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/stores-beta/user-guide.md) and [CLI reference](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/cli.md) define this behavior. For installation and PATH problems, start with the [CLI installation tutorial](/blog/openspec-tutorial-cli-commands-agents-md-examples/). The original 1.5 discussion remains below as historical context, with its section links preserved.
+
+<a id="multi-repo-practice"></a>
+
+### Create a shared contract and two local changes
+
+Use three new sibling directories: `team-contracts`, `checkout-api`, and `checkout-web`. The following terminal commands assume 1.15.0 is installed. Alternatively, replace `openspec` with `pnpm dlx @fission-ai/openspec@1.15.0`. Start in their parent directory:
+
+```bash
+openspec --version
+openspec store setup team-contracts --path ./team-contracts --no-init-git --json
+git init checkout-api
+git init checkout-web
+```
+
+`--no-init-git` keeps this practice Store free of automatic Git initialization and commits. Setup creates `.openspec-store/store.yaml`, an OpenSpec root, and a machine-local registration. It does not create or publish a remote repository. In a real team, keep the shared Store in a private repository unless you intend to publish its requirements.
+
+Create `team-contracts/openspec/specs/promotion/spec.md` with this complete practice contract:
+
+```markdown
+## Purpose
+Define the shared response used by the checkout API and web client.
+
+## Requirements
+
+### Requirement: Promotion eligibility
+The API SHALL return an eligible boolean and a reason string for a promotion.
+
+#### Scenario: Ineligible promotion
+- **WHEN** the promotion cannot be used
+- **THEN** eligible is false and reason explains why
+```
+
+This starts from an accepted practice specification. In production, review a proposed contract before treating it as accepted behavior. Validate the file:
+
+```bash
+openspec validate promotion --type spec --store team-contracts --strict --json --no-interactive
+cd checkout-api
+openspec init . --tools none
+cd ../checkout-web
+openspec init . --tools none
+```
+
+In both code repositories, merge the following fields into `openspec/config.yaml`. Preserve any existing context and rules:
+
+```yaml
+schema: spec-driven
+references:
+  - team-contracts
+```
+
+Create each component's work from its own directory:
+
+```bash
+cd ../checkout-api
+openspec new change implement-promotion-api
+openspec instructions proposal --change implement-promotion-api --json
+openspec context --json
+cd ../checkout-web
+openspec new change implement-promotion-ui
+openspec instructions proposal --change implement-promotion-ui --json
+openspec context --json
+openspec show promotion --type spec --store team-contracts
+```
+
+Check the returned `root.path` before continuing. It must name the current component repository. The `references` array should list `promotion` and a fetch command containing `--store team-contracts`. The change directories belong under each component's `openspec/changes/`; neither belongs in the Store. These are file and routing checks, not evidence of an implemented API or UI.
+
+Each local proposal should cite `promotion` and identify the Store commit it implements. API tasks should define response behavior and tests. UI tasks should define how `eligible: false` and `reason` appear to the user. Add each component's design and spec delta, validate it, and run its application tests before review and archive. The [first-change tutorial](/blog/openspec-tutorial-cli-commands-agents-md-examples/) supplies the complete artifact format.
+
+To change the shared contract itself, select the Store explicitly:
+
+```bash
+openspec new change revise-promotion-contract --store team-contracts
+openspec status --change revise-promotion-contract --store team-contracts --json
+```
+
+References index accepted files in `openspec/specs/`, not active Store changes. If implementation must follow a pending contract, fetch it explicitly with `openspec show revise-promotion-contract --store team-contracts` after its artifacts exist, and link the Store branch and component reviews. Opening all directories in a workset helps an editor see them; it does not assign component tasks to agents.
+
+### Share and synchronize the contract with Git
+
+For real collaboration, initialize and commit the Store through your normal Git workflow, then add your actual private remote. Another developer clones that repository and runs `openspec store register <local-path> --id team-contracts`. Registration is required on each machine. A `remote:` declaration provides clone instructions; it does not download the repository.
+
+Before reading a shared contract, inspect the checkout. These commands assume a Git Store with `origin` and an upstream tracking branch already configured:
+
+```bash
+git -C team-contracts status --short
+git -C team-contracts fetch origin
+git -C team-contracts log --oneline HEAD..@{upstream}
+git -C team-contracts pull --ff-only
+git -C team-contracts rev-parse HEAD
+openspec doctor --store team-contracts --json
+```
+
+This block uses Bash syntax; in PowerShell quote `'HEAD..@{upstream}'`. If the working tree has changes, resolve them through your branch workflow before pulling. If fast-forward fails, review the diverging commits and merge or rebase deliberately. Never overwrite one branch's specification just to clear a conflict. Record the resulting Store commit in both component proposals so reviewers can compare the same contract.
+
+`doctor` sees locally fetched Git information. It does not contact the remote, synchronize files, or repair findings. A stale checkout produces stale reference summaries. `/opsx:sync` merges specification deltas into main specs; it is not a Git synchronization command.
+
+### Diagnose missing references and wrong roots
+
+<div class="content-table-scroll" role="region" aria-label="Symptom / Check and fix" tabindex="0">
+
+| Symptom | Check and fix |
+| --- | --- |
+| Reference is missing | Run `openspec doctor --json` in the component; clone if needed, then register the actual checkout |
+| Same Store ID, another checkout | Keep one checkout per ID per machine; inspect both paths before unregistering and registering the intended one |
+| Change appears in the Store | Check an explicit `--store`, a config `store:` pointer, and global `defaultStore`; use a local root plus `references` for separate component tasks |
+| Reference shows old text | Inspect the Store branch and commit, fetch and review Git updates, then rerun instructions |
+| Missing reference but exit code is zero | Inspect `references[].status`; health findings do not make `doctor` fail |
+
+</div>
+
+In 1.15.0, selection order is explicit `--store`, nearest real planning root, project `store:` pointer, then global `defaultStore`. If none applies, registered Stores trigger a selection error; with none registered, classic current-directory behavior remains. A reference never selects the write root.
+
+The [downloadable check script](/assets/openspec-search-repair/check-examples.mjs) creates this fixture in a temporary directory and isolates its registry with `XDG_DATA_HOME` and `XDG_CONFIG_HOME`. Run `node check-examples.mjs` with Node.js, pnpm, and Git available. On Windows, pass the full path to pnpm's `bin/pnpm.cjs` as the first argument. An optional second argument points to this site's checkout to replay the three-language tutorial snippets too. The script makes no model calls or remote Git operations.
+
+## Background to the 1.5 release
+
+OpenSpec 1.5 introduced Stores for shared planning outside a code repository. The following sections explain that release's design and integration changes; use the pinned exercise above for current setup and root-selection behavior.
 
 If there is one keyword to remember, it is **Stores**. If there is one workflow to remember, it is:
 
@@ -16,7 +140,7 @@ If there is one keyword to remember, it is **Stores**. If there is one workflow 
 explore → propose → apply → archive
 ```
 
-This article is based on the `Fission-AI/OpenSpec` `v1.5.0` source code, `CHANGELOG`, `docs/cli.md`, `docs/commands.md`, `docs/explore.md`, `docs/existing-projects.md`, and the related command implementations. It explains what changed, how to use the new features, and what the changes mean for real engineering teams.
+The historical sections draw on the [1.5.0 changelog](https://github.com/Fission-AI/OpenSpec/blob/v1.5.0/CHANGELOG.md) and that tag's CLI, command, exploration, and existing-project documentation. They explain why Stores were introduced and how the integration fixes affect teams.
 
 If you are new to OpenSpec, start with the practical tutorial first: [OpenSpec Tutorial: CLI Install, Commands, AGENTS.md, and Real-World Examples](/blog/openspec-tutorial-cli-commands-agents-md-examples/). This article focuses on what changed around 1.5 and how to reason about it.
 
@@ -33,7 +157,7 @@ In practice, OpenSpec is trying to answer harder questions than “how do I gene
 
 ## OpenSpec 1.5.0: Stores Beta is the main event
 
-The current package is `@fission-ai/openspec@1.5.0`, described as:
+The historical release discussed here is `@fission-ai/openspec@1.5.0`, described as:
 
 > AI-native system for spec-driven development
 
@@ -191,12 +315,13 @@ With Stores, many commands must first answer: **which OpenSpec root should this 
 
 Commands such as `list`, `show`, `validate`, `status`, `instructions`, `new change`, `archive`, `doctor`, and `context` resolve one root before acting.
 
-A practical mental model is:
+A practical model for the current 1.15.0 release is:
 
 1. explicit `--store <id>` wins;
 2. otherwise use the local repo OpenSpec root when present;
 3. otherwise use the default `store:` declared in `openspec/config.yaml`;
-4. otherwise fail with diagnostics.
+4. otherwise use global `defaultStore`, if configured;
+5. otherwise show a selection error when Stores are registered, or use the current directory when none are registered.
 
 This matters a lot for AI agents. Without explicit root selection, an agent may run a command in the wrong directory or confuse a repo-local root with an external planning context. The newer JSON outputs and diagnostics carry root/store information so agents can verify where they are operating.
 
@@ -297,8 +422,8 @@ A typical flow looks like this:
 
 ```bash
 # terminal
-npx -y @fission-ai/openspec@latest init .
-npx -y @fission-ai/openspec@latest update
+pnpm dlx @fission-ai/openspec@1.15.0 init .
+pnpm dlx @fission-ai/openspec@1.15.0 update
 ```
 
 Then in your AI tool:
@@ -430,7 +555,7 @@ During daily work:
 ```bash
 openspec doctor --json
 openspec context --json
-openspec instructions --change add-billing-api --json
+openspec instructions proposal --change add-billing-api --json
 ```
 
 In the AI chat:
@@ -448,7 +573,7 @@ If the change itself belongs to the team Store rather than the local repo:
 openspec new change update-billing-contract --store team-context
 ```
 
-Then let the AI agent continue generating artifacts against that change.
+The local instructions command assumes `add-billing-api` already exists in that repository. For Store-owned changes, keep `--store team-context` on subsequent workflow commands. Neither setup nor these instructions create application code.
 
 ## Product direction: what OpenSpec is becoming
 

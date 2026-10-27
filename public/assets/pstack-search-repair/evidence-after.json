@@ -1,0 +1,156 @@
+{
+  "recordedAt": "2026-10-26T09:39:13.223Z",
+  "node": "v26.7.0",
+  "platform": "win32",
+  "arch": "x64",
+  "target": "task-cli.mjs",
+  "targetSha256": "06541034cfd8af56cc364cb09c61f83db57ee8f7ca5009148a6693a7a12be170",
+  "fixtureSha256": "8a128440fed105112ec34d3be4e1bf3f492a205e0dc0df6f190458281f396771",
+  "fixtureUnchanged": true,
+  "scope": "Local CLI execution only; no pstack model workflow was executed.",
+  "results": [
+    {
+      "id": "open",
+      "command": [
+        "node",
+        "task-cli.mjs",
+        "tasks.json",
+        "--status",
+        "open"
+      ],
+      "expected": {
+        "code": 0,
+        "stdout": "[{\"id\":1,\"title\":\"Write release notes\",\"done\":false}]\n",
+        "stderr": ""
+      },
+      "actual": {
+        "code": 0,
+        "stdout": "[{\"id\":1,\"title\":\"Write release notes\",\"done\":false}]\n",
+        "stderr": ""
+      },
+      "passed": true
+    },
+    {
+      "id": "done",
+      "command": [
+        "node",
+        "task-cli.mjs",
+        "tasks.json",
+        "--status",
+        "done"
+      ],
+      "expected": {
+        "code": 0,
+        "stdout": "[{\"id\":2,\"title\":\"Publish release\",\"done\":true}]\n",
+        "stderr": ""
+      },
+      "actual": {
+        "code": 0,
+        "stdout": "[{\"id\":2,\"title\":\"Publish release\",\"done\":true}]\n",
+        "stderr": ""
+      },
+      "passed": true
+    },
+    {
+      "id": "default",
+      "command": [
+        "node",
+        "task-cli.mjs",
+        "tasks.json"
+      ],
+      "expected": {
+        "code": 0,
+        "stdout": "[{\"id\":1,\"title\":\"Write release notes\",\"done\":false},{\"id\":2,\"title\":\"Publish release\",\"done\":true}]\n",
+        "stderr": ""
+      },
+      "actual": {
+        "code": 0,
+        "stdout": "[{\"id\":1,\"title\":\"Write release notes\",\"done\":false},{\"id\":2,\"title\":\"Publish release\",\"done\":true}]\n",
+        "stderr": ""
+      },
+      "passed": true
+    },
+    {
+      "id": "all",
+      "command": [
+        "node",
+        "task-cli.mjs",
+        "tasks.json",
+        "--status",
+        "all"
+      ],
+      "expected": {
+        "code": 0,
+        "stdout": "[{\"id\":1,\"title\":\"Write release notes\",\"done\":false},{\"id\":2,\"title\":\"Publish release\",\"done\":true}]\n",
+        "stderr": ""
+      },
+      "actual": {
+        "code": 0,
+        "stdout": "[{\"id\":1,\"title\":\"Write release notes\",\"done\":false},{\"id\":2,\"title\":\"Publish release\",\"done\":true}]\n",
+        "stderr": ""
+      },
+      "passed": true
+    },
+    {
+      "id": "invalid-status",
+      "command": [
+        "node",
+        "task-cli.mjs",
+        "tasks.json",
+        "--status",
+        "pending"
+      ],
+      "expected": {
+        "code": 2,
+        "stdout": "",
+        "stderr": "Usage: node task-cli.mjs <file.json> [--status all|open|done]\n"
+      },
+      "actual": {
+        "code": 2,
+        "stdout": "",
+        "stderr": "Usage: node task-cli.mjs <file.json> [--status all|open|done]\n"
+      },
+      "passed": true
+    },
+    {
+      "id": "missing-status",
+      "command": [
+        "node",
+        "task-cli.mjs",
+        "tasks.json",
+        "--status"
+      ],
+      "expected": {
+        "code": 2,
+        "stdout": "",
+        "stderr": "Usage: node task-cli.mjs <file.json> [--status all|open|done]\n"
+      },
+      "actual": {
+        "code": 2,
+        "stdout": "",
+        "stderr": "Usage: node task-cli.mjs <file.json> [--status all|open|done]\n"
+      },
+      "passed": true
+    },
+    {
+      "id": "invalid-data",
+      "command": [
+        "node",
+        "task-cli.mjs",
+        "verify.mjs"
+      ],
+      "expected": {
+        "code": 2,
+        "stdout": "",
+        "stderr": "Cannot read a valid task list\n"
+      },
+      "actual": {
+        "code": 2,
+        "stdout": "",
+        "stderr": "Cannot read a valid task list\n"
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}

@@ -1,18 +1,109 @@
 ---
-title: '一万字讲透 CLAUDE.md/AGENTS.md：从基础到反直觉'
+title: 'AGENTS.md 与 CLAUDE.md 怎么选：加载规则、共存配置与模板'
 pubDate: 2026-04-25T00:00:00.000Z
-description: '从 Anthropic 官方规范到 Karpathy 的 program.md 范式，从"两次原则"到达尔文式记忆，从 Spec-Driven 到 Eval-Driven——一篇梳理 AI 编程代理指令文件的来龙去脉与反直觉心智模型。'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: '按 Claude Code 版本说明 AGENTS.md 与 CLAUDE.md 的读取、共存和回退，区分 Codex 加载规则，提供验证步骤与可复用模板。'
 author: 'Remy'
 tags: ['claude-code', 'ai-agents', 'Context Engineering']
 ---
 
+## AGENTS.md 和 CLAUDE.md 该用哪个？
+
+**跨工具共享的仓库规则，以及给 Codex 的规则，放 AGENTS.md；Claude Code 专用规则放 CLAUDE.md。** 两种工具都用时，我建议把共同规则写在 `AGENTS.md`，再用一个很短的 `CLAUDE.md` 通过 `@AGENTS.md` 导入。这样只维护一份共同规则，也不依赖每位同事的 Claude 版本和回退设置。[1] [2] [3]
+
+**Claude Code 会直接读 AGENTS.md 吗？** 从 **v2.1.277** 起，支持该功能的会话可以直接读取，但默认情况下，工作目录或祖先目录只要存在 `CLAUDE.md`、`.claude/CLAUDE.md` 或 `CLAUDE.local.md`，就会阻止 AGENTS 回退。用户级 `~/.claude/CLAUDE.md`、组织管理的指令和 `.claude/rules/` 不阻止回退。两个文件都在，不代表两个都会读。[1]
+
+先运行 `claude --version`，再看 `/config` 的 **Project instructions** 和 `/context`，用 `/memory` 检查 AGENTS 路径。旧客户端或混合团队直接用下面的[导入模板](#可复制的共同规则与导入模板)；想让两个文件直接共存，查看[版本与共存条件](#不同版本与文件布局会加载什么)。Codex 使用[另一套发现规则](#codex-的发现与回退规则)。
+
+## 不同版本与文件布局会加载什么
+
+以下按 **2026 年 10 月 26 日核对的官方文档**说明，不能套用到所有历史版本。[1]
+
+| 版本或配置 | 实际行为 |
+| --- | --- |
+| 早于 v2.1.277、关闭 AGENTS 内置插件，或部分从 v2.1.276 及更早版本升级后的首次会话 | 不能直接加载 AGENTS；使用 CLAUDE 导入。升级后另开新会话。 |
+| v2.1.277 至 v2.1.280 | 已有直接读取能力，但 Bedrock、关闭遥测等部分会话仍需升级或导入。 |
+| 支持该功能，默认 `claude-md-or-agents-md` | 工作目录和祖先目录没有阻断回退的 CLAUDE 文件时，才读 AGENTS。 |
+| `claude-md-and-agents-md` | 两种都读；每个目录先 CLAUDE、后 AGENTS；已被导入的 AGENTS 会去重。 |
+| `claude-md` | 只直接读 CLAUDE；显式 `@AGENTS.md` 导入仍可用。 |
+| `managed-only` | 启动时只读组织管理指令和自动记忆；子目录及按路径匹配的规则仍可按需加载，不是全面禁用项目规则。 |
+
+在 `/config` 设置 **Project instructions**。要直接改用户配置，把下面片段合入 `~/.claude/settings.json`，保留已有设置：
+
+```json
+{
+  "pluginConfigs": {
+    "cc-plugin-agents-md@builtin": {
+      "options": { "instructionFiles": "claude-md-and-agents-md" }
+    }
+  }
+}
+```
+
+**v2.1.285 之前**要用 `agents-md@builtin` 作为键；v2.1.285 起两种 ID 都接受。此选项从用户设置、`--settings` 或组织管理设置读取，**项目和 local 设置文件里的值会被忽略**，修改从下一条消息起生效。因此，把它写进 `.claude/settings.json` 不会让全团队自动切换到双文件加载。[1]
+
+Claude 的原生支持会读 `AGENTS.md` 和 `.claude/AGENTS.md`，不读 `AGENTS.override.md`、`AGENTS.local.md` 或 `.agents/` 目录中的指令文件。满足回退条件时，Claude 用 Read 工具打开子目录文件，才会按需加载该目录的 AGENTS。这个规则与 Codex 的 override 规则不同；加载先后也不意味着冲突的自然语言规则一定有确定结果，应直接消除冲突。[1] [2]
+
+## 可复制的共同规则与导入模板
+
+下面适用于已有 `pnpm build` 和 `pnpm test` 脚本的仓库。采用前把命令和生成目录替换成项目实际使用的值。根目录 `AGENTS.md`：
+
+```markdown
+## 工作约定
+- Node 依赖使用 pnpm，Python 依赖使用 uv。
+- 保留工作区中与本次任务无关的改动。
+- 修改源文件，不直接编辑生成的 dist/ 目录。
+
+## 验证
+- 修改代码后运行 pnpm test 和 pnpm build。
+- 检查无法运行时，说明具体命令及阻塞原因。
+- 交付时说明行为变化、已做检查和剩余限制。
+```
+
+在同一目录的 `CLAUDE.md` 写：
+
+```markdown
+@AGENTS.md
+
+## Claude Code
+- 修改计费行为前，先提出受影响的场景和测试。
+```
+
+文章用代码块展示内容，但在**实际文件中**，`@AGENTS.md` 不能包在反引号或代码块里。"请读取 AGENTS.md"只是让模型执行一个请求；`@AGENTS.md` 则由 Claude Code 的导入机制处理。相对路径以导入文件为基准，所以 `.claude/CLAUDE.md` 应写 `@../AGENTS.md`。当前递归导入上限是四跳。有 Windows 同事时，导入比符号链接更容易保持一致。[1]
+
+## 怎样确认规则真的加载了
+
+1. 在终端运行 `claude --version` 和 `codex --version`，记下启动目录与相关设置。
+2. 从仓库启动新的 Claude 会话，查看 `/context` 的 **Memory files**，再用 `/memory` 找 AGENTS 路径。v2.1.280 之前，直接读取的 AGENTS 不出现在这两个列表里；升级或改用导入更容易诊断。
+3. 在临时测试仓库加入无副作用的独特指令，例如"询问验证标签时，回复 `instruction-check-26`"。提问时不要重复标签，观察回答，并同时检查文件加载路径。
+4. 验证嵌套规则时，让 Claude 读取该目录中的普通文件，查看终端的 `Loaded` 提示。仅看启动列表，不能判断按需加载的文件是否失效。
+5. 修改 Codex 指令后重新启动，让它列出指令来源和验证命令，再与实际文件核对；必要时查看 TUI 日志。
+
+这几步把"是否加载"和"是否执行"分开检查。文件加载成功，模糊的要求仍可能执行不一致。Claude 的 `InstructionsLoaded` hook 能跟踪 CLAUDE 导入及规则，但**不会**为插件直接读取的 AGENTS 触发；没有 hook 事件，不能据此认定 AGENTS 没读到。[1] [2]
+
+## Codex 的发现与回退规则
+
+Codex 在启动时，从自己的 home 目录，以及项目根目录到当前工作目录构建指令链。项目路径上每层最多选择一个非空文件，顺序为 `AGENTS.override.md`、`AGENTS.md`、配置的 fallback 文件名，较深目录内容排在后面。与 Claude 的回退算法不同，Codex 还用 `project_doc_max_bytes` 限制合计长度，默认上限是 **32 KiB**。[2]
+
+只有 CLAUDE.md 的旧仓库，可以在 `~/.codex/config.toml` 合入：
+
+```toml
+project_doc_fallback_filenames = ["CLAUDE.md"]
+```
+
+重新启动 Codex 后，CLAUDE.md 是**回退候选**，不是同目录 AGENTS.md 的附加文件。也不要假设 Codex 会展开 Claude 的 `@` 导入。两种工具共用项目时，共同规则直接放 AGENTS.md 更好检查。验证嵌套目录可以运行：
+
+```bash
+codex --cd services/payments "列出当前生效的指令来源和验证命令，不要修改文件。"
+```
+
+目录须实际存在。预期启动链包括全局文件、仓库文件及沿途选中的文件，并不代表所有兄弟包都在启动时加载。需要进一步查证时，用 `codex -c log_dir=./.codex-log` 启动，检查 `codex-tui.log`；日志可能包含项目私有内容。[2]
+
 ## 写在前面
 
-如果你用过 Claude Code、Cursor、Codex、Aider、Jules、Amp、Windsurf 中的任何一个，你大概率已经写过 `CLAUDE.md` 或者 `AGENTS.md`，甚至两个都写过。你也许纠结过：到底要写多少？是写成 README 那种娓娓道来，还是写成一条条命令？能不能让这些文件在多个工具之间复用？写完之后，agent 到底有没有听话？
+为什么同样的规则换一个文件名，执行结果就不同？因为文件名、启动目录、客户端版本和设置共同决定模型能看到什么，文字本身写得好不好，是加载成功之后的问题。
 
-这篇文章想把 2025—2026 年这一年多以来，英语世界和中文世界关于"写给 AI 看的项目文件"的讨论梳理清楚。它不是一份操作手册，而更像一份**心智模型的演化史**——从 Anthropic 的早期最佳实践，到 Karpathy 的 `program.md` 范式，再到 ghuntley 的 Ralph Wiggum 循环，以及 claude-evolve 这样的"达尔文式记忆"实验。最后回到我们自己的工作台，落到 PARA 知识库和后端仓库这两种真实场景。
-
-全文约一万字，分十二节。前六节是基础与现状，后六节是反直觉观点与落地建议。如果你只想看重点，跳到第六节开始读。
+下面保留十二节讨论，继续解释上下文、记忆、团队协作和非代码仓库。我更看重能让下一次任务少走弯路的具体决定，以及能检查结果的办法。堆积规则不能补上验证缺口。
 
 ---
 
@@ -22,9 +113,9 @@ tags: ['claude-code', 'ai-agents', 'Context Engineering']
 
 **README.md** 是写给人看的。它的受众是"**第一次打开你的仓库的人类开发者**"，目的是让他们在五分钟内理解项目做什么、怎么跑起来、怎么贡献。它的语气是说明性、营销性的，内容组织遵循金字塔原理：**是什么 → 怎么用 → 怎么参与**。
 
-**CLAUDE.md** 是写给 Claude Code 看的。它的受众是一个**每次都要从零理解仓库的 AI 代理**。这个代理没有记忆，没法直观扫一遍代码结构，每次进来都像失忆的侦探。它真正关心的，是这些问题：我要执行什么命令才能构建？怎么跑测试？这个仓库里有没有什么坑必须知道才不会踩？修改完怎么验证？
+**CLAUDE.md** 给 Claude Code 提供持久指令。新会话有新的上下文窗口，并不等于没有记忆：指令文件和自动记忆能把信息带到下一次会话。项目文件适合记录验证命令、仓库限制，以及从代码中看不出的决定。[1]
 
-**AGENTS.md** 则是 2025 年 8 月 OpenAI、Google、Cursor、Factory、Sourcegraph 等公司联合推出的开放标准，2025 年 11 月由 Linux 基金会下属的 Agentic AI Foundation 托管。它的定位是"**跨 AI 工具的统一指令文件**"——一份文件，同时被 Codex、Cursor、Aider、Jules、Copilot、Claude Code、Amp、Windsurf、Zed 读取。截至目前，采纳仓库已超过 6 万个。
+**AGENTS.md** 是由 Linux 基金会下属 Agentic AI Foundation 管理的开放 Markdown 格式，没有必填字段或固定 schema。不同工具可以共享内容，但文件发现、设置及继承方式仍然不同。Claude Code 和 Codex 应分别按上面的加载规则配置，不能把生态支持理解为所有工具行为相同。[3]
 
 这三个文件互补而非替代。README.md 回答"是什么"，CLAUDE.md 和 AGENTS.md 回答"怎么做"。区别在于前者是面向人类的营销页，后者是面向机器的运行手册。
 
@@ -40,9 +131,9 @@ tags: ['claude-code', 'ai-agents', 'Context Engineering']
 
 这是最没有争议也最容易做错的部分。
 
-HumanLayer 的 Dexter Horthy 在《Writing a good CLAUDE.md》里给出过一个很具体的基准：**他们主仓库的根 CLAUDE.md 在 60 行以内**。知乎上一位作者做过严谨实验，把三千字砍到一千字有所改善，砍到八百字明显变好，但砍到四百字时关键信息丢失——最终他稳定在八百字左右。vercel/vercel 这种复杂 monorepo 的 AGENTS.md 是 247 行。openai/codex 的 AGENTS.md 接近 800 行，但通过严格的二级标题分区避免了阅读障碍。
+HumanLayer 署名 Kyle 的《Writing a good CLAUDE.md》建议缩短根指令，把细节拆到独立文档。大型仓库的行数不是自己项目的目标：检查方式、目录结构和加载预算都不同，不能仅按字符数判断效果。
 
-社区共识大致是：**普通项目根文件 ≤250 行；大型 monorepo 按子模块分片，>500 行必须严格分区**。Anthropic 官方在若干公开分享里提到一个更本质的数字——**前沿模型稳定遵循的指令总量在 150—200 条上下**。超过这个数，模型遵守率会快速衰减。
+Anthropic 当前建议每份 CLAUDE.md 少于 200 行。这是写作建议，不是所有模型都适用的指令数量上限。导入文件会和父文件一起加载，拆成 `@` 导入本身不节省上下文。只对部分代码生效的要求，应放到对应目录或按路径匹配的规则中，再验证触发条件。[1]
 
 ### 结构
 
@@ -62,7 +153,7 @@ vercel/vercel 的做法很有启发：它专门有一节 "Common Pitfalls"，收
 
 指令式、强约束词、具体路径、具体命令。写 `ALWAYS run pnpm typecheck before claiming the task is done`，不要写 `please check code quality`。写 `Never import from src/internal/*`，不要写 `be careful about imports`。
 
-Anthropic 官方和社区共识一致指出：**可靠性大约 70%**——CLAUDE.md 里的规则约 70% 被遵守。所以真正的红线不能只靠 CLAUDE.md 约束，而要用 hooks（PreToolUse 返回 exit code 2 直接阻断）把 30% 的漏洞补上。
+不存在一个通用遵守率，可以证明 Markdown 规则足以保障操作安全。必须阻止的操作，需要权限、沙盒或阻断式 hook。写"不要部署"是在给模型指令；权限边界才决定它能不能部署。[1]
 
 ---
 
@@ -74,7 +165,7 @@ Anthropic 官方和社区共识一致指出：**可靠性大约 70%**——CLAUD
 800 行的 AGENTS.md，按 `codex-core` crate、TUI style、TUI code、text wrapping、tests、snapshot tests、app-server API 等子领域严格分区。最有价值的一句是"**Resist adding code to codex-core**"——抵制往核心包塞东西。这种带"反向意图"的规则比"保持代码简洁"这种正向空话有效得多。它还写死了单文件 500 LoC 目标，超过 800 LoC 必须拆分，用 `insta` 做快照测试、用 `pretty_assertions` 做深度比较。
 
 **2. vercel/vercel**
-247 行，是大型 monorepo 的黄金模板。结构清晰：Repository Structure / Essential Commands / Changesets / Code Style / Testing Patterns / Package Development / Runtime Packages / CLI Development / **Common Pitfalls**。Pitfalls 章节是活的避坑手册。
+可以重点看它如何区分仓库结构、常用命令、changeset、测试和包开发，再把常见问题集中到 Common Pitfalls。值得借鉴的是分类方式，不是某一时刻的行数。
 
 **3. openai/openai-agents-python**
 约 480 行，最有趣的是它把指令写成**显式 skill 调用**——例如 `$code-change-verification`、`$pr-draft-summary`。修改 runtime 前必须调用 `$implementation-strategy`，doc-only / meta 变更允许跳过全量校验。这种"指令即工作流图"的写法把 Markdown 变成了小型 DSL。
@@ -140,7 +231,7 @@ Karpathy 在 forrestchang/andrej-karpathy-skills 这个被一周下载 43k 次�
 
 Flask 作者 Armin Ronacher 在《Agentic Coding Recommendations》和《Agent Design Is Still Hard》两篇博客里提出两个金律。
 
-**日志即 API**。调试模式下，把注册邮件直接打到 stdout。CLAUDE.md 告诉 agent 去读日志。于是 agent 就能自己完成"注册 → 等邮件 → 提取链接 → 点击链接"的完整闭环，**不需要人类搭桥**。这个技巧的适用面远不止邮件——任何异步副作用都能用同样的方式暴露给 agent。
+在开发环境把注册邮件输出到 stdout，并在指令中说明日志位置，agent 就有机会完成注册、提取确认链接和访问链接的验证流程。这里重要的是给出可观察的结果，而不是只写一句"确认注册成功"；其他异步操作也应提供对应的检查入口。
 
 **No dead ends**（无死胡同）。图像生成工具必须写到代码执行工具能读到的同一虚拟文件系统。**工具链必须形成闭环**。否则 agent 就会卡在"我生成了图，但我下一步读不到它"的悖论里。
 
@@ -158,7 +249,7 @@ ghuntley.com 的 Geoffrey Huntley 把**团队约定当成编程语言的标准�
 while :; do cat PROMPT.md | npx --yes @anthropic-ai/claude-code-cli ...; done
 ```
 
-单进程、单仓库、每轮只做一件事。PROMPT.md 成为协调中枢。他还指出——**不存在完美提示**。那些在 Hacker News 上被疯狂复制的 "CURSED 提示词"逐字抄过去没用，因为它们是基于对具体 LLM 行为的持续观察演化出来的。
+每轮限定一个仓库和一项任务，并通过 PROMPT.md 传递要求，可以减少循环中不必要的范围变化。复制别人的提示时仍要检查它依赖的工具和测试，因为别人在特定环境观察出来的规则，未必适用于当前项目。
 
 他的另一个核心指标：**上下文窗口利用率目标 40—60%**。超过就产出质量下降。整个 advanced context engineering for coding agents 工作流都围绕"频繁的、有意的 compaction"设计。
 
@@ -172,7 +263,7 @@ Simon Willison 在 simonw/research 仓库的 AGENTS.md 里专门针对**沙盒�
 
 Hamel Husain 提出一个让整个评测领域尴尬的观点：**好的 eval prompt 本身就是活的 PRD**——它实时、持续地测试 AI 行为。他反对把 prompt 放进 LangSmith 等"一层额外的平台"，主张**把 prompts 存进 Git、像软件制品一样版本化**。
 
-这个观点对 CLAUDE.md 的启示是：**CLAUDE.md 本身需要 eval**。你怎么知道你写的"ALWAYS run typecheck"真的被执行了？你需要一套可重复的测试来验证。Fireworks、LangChain、MLflow 都已经在这个方向做集成，下一节会讲到。
+这个观点对 CLAUDE.md 的启示是，指令本身也需要验证。例如写了"ALWAYS run typecheck"之后，应在可重复的任务中检查命令是否真的执行，而不是只看最终回答有没有说"已验证"。
 
 ### Harrison Chase：Model/Harness/Context 三层
 
@@ -198,23 +289,23 @@ jack60810/claude-evolve 把规则按 0—10 评分，用 EMA（30% 新、70% 历
 
 ### 双文件读写权分离（CLAUDE.md + MEMORY.md）
 
-业内开始流行一个区分：`CLAUDE.md` 是**人类写、给 agent 看**的显式规则；`MEMORY.md` 是 **agent 自己写、启动时 200 行自动加载**的观察积累。
+Claude Code 区分团队维护的指令和自动记忆。记忆索引通常位于 `~/.claude/projects/<project>/memory/MEMORY.md`，启动时读取前 **200 行或 25 KB，先到者为准**。随便在仓库根目录放一个 MEMORY.md，不会因为文件名相同就获得这种行为。[1]
 
-这个结构的反直觉点在于：**一半的文件是 agent 写给自己看的**。你在会话里告诉它"下次记住 X"，它就把 X 写进 MEMORY.md；下一次启动，它在读完 CLAUDE.md 之后立即读 MEMORY.md 的前 200 行。agent 开始维护自己的知识库。
+自动记忆适合观察和偏好，团队确认的决定放共享指令。细节可以放按需读取的主题文件。本机记忆不是向所有同事分发仓库规则的可靠办法。[1]
 
-Claude 系统提示里有一句自我防御：**"把自己的记忆当作 hint 而非事实"**——写入前要对真实代码二次验证。避免 agent 记错了还一错再错。
+记住的命令在执行前仍要与当前项目脚本核对。迁移前正确的记录，可能在记忆文件完全没改动时就过期了。
 
 ### Auto Dream：记忆卫生
 
-还有一个后台进程叫 Auto Dream。它定期扫描 MEMORY.md，把"昨天的部署问题"自动改写成"2026-03-28 的部署问题"，把相对时间锚点改为绝对日期。这样当这条记忆在几个月后被读到时，不会因为"昨天"已经变成几十天前而误导 agent。
+自动清理记忆可以作为可选工作流，不能仅凭文件名就假设后台已经在做。可执行的维护包括把相对日期改成已知的绝对日期、删除失效的临时修复，以及为一个限制补上当初的决策依据。
 
 记忆需要卫生——这是我看到过最反直觉的一条。记忆不是只增不减的日志，而是**需要持续清洗的活数据**。
 
 ### "两次原则"（Two Strikes Rule）
 
-Anthropic 官方最佳实践提到一个反直觉的规则：**只有同一个错误第二次发生，才把它写进 CLAUDE.md**。
+Anthropic 把重复错误列为添加规则的理由之一，也包括代码审查发现和新同事需要知道的信息。等第二次发生适合筛选偶发故障，不意味着必须让一次代价很高的错误再发生，才有资格记录。[1]
 
-为什么？因为第一次可能只是偶发。如果你每次 agent 出错就写一条规则，CLAUDE.md 会被一次性教训塞满，噪声压过信号。**两次 = 模式，一次 = 噪声**。这和传统"尽早文档化"的直觉是完全相反的。
+单次失败可能来自临时网络问题或命令输错，应先诊断，再决定是否增加永久规则。重复发生更可能说明有可复用的教训，但严重程度和审查证据，比凑够某个次数更重要。
 
 ### Subagent 是上下文控制，不是角色扮演
 
@@ -238,11 +329,11 @@ Claude 有个众所周知的毛病：对用户过于恭维。社区已经沉淀�
 
 ### Path-Scoped Rules
 
-YAML frontmatter 加一个 `paths:` 字段，规则仅在匹配文件时加载，默认 0-token。例如一条关于 React 组件的规则只在 `src/components/*.tsx` 被触及时注入 context。这把"全量加载"变成了"按需加载"，直接让 CLAUDE.md 可以膨胀到几千行而不增加单次请求的 token 成本。
+在 `.claude/rules/` 中，YAML 的 `paths:` 可以把规则限定到匹配文件。普通 AGENTS.md 里写一个 `paths:` 标题不会获得这套机制。根文件仍应简短，组件规则放到独立规则文件，再通过读取匹配文件验证。按需加载减少无关内容，不代表几千行根 CLAUDE.md 没有成本。[1]
 
 ### Versioned Changelog 顶置
 
-CLAUDE.md 顶部写一段 `## Changelog v2026-04-25`，agent 启动时会主动跟上次 session 做 diff，发现"规则变了"。这是一种让 agent 主动感知规则演化的机制。
+变更记录可以解释规则为什么改变，但标题本身不会触发与上一会话的自动比较。需要比较时，明确要求检查 Git diff。当前规则应能直接读懂，不必重建全部历史才能执行。
 
 ---
 
@@ -252,13 +343,15 @@ CLAUDE.md 顶部写一段 `## Changelog v2026-04-25`，agent 启动时会主动�
 
 ### AGENTS.md 是跨工具契约
 
-再强调一次：AGENTS.md 已经是 Linux Foundation 托管的正式开放标准，被 20+ 工具原生支持。**Vercel Agent Readability Spec** 更进一步，把 AGENTS.md 纳入站点可达性规范，推荐在 `/AGENTS.md`、`/.well-known/agents.md`、`/CLAUDE.md`、`/.cursor/rules` 等多路径同时暴露。这就像 robots.txt 和 sitemap.xml 之于搜索引擎——AGENTS.md 之于 AI agents。
+跨工具协作既需要共同内容，也需要验证加载方式。开放格式减少重复维护，但 Claude 的导入不会配置 Codex，Codex 的 override 文件也不是 Claude 的覆盖文件。把文件发布到网站上，同样不会自动配置本地编码会话。[1] [2] [3]
 
-团队层面的建议：**主文件写 AGENTS.md，CLAUDE.md 只写一行 `See @AGENTS.md`**（Anthropic 推荐的 import stub 模式）。所有工具共享同一份，Claude 专属的小众特性单独放 CLAUDE.md。这样切换工具不用改配置，Claude 专属优化也不会流失。
+混合团队把共同命令和限制放 AGENTS.md，CLAUDE.md 使用前面的显式导入，Claude 专用指令写在导入下面。若客户端配置成原生双文件加载，仍须检查规则冲突，不能假定后加载的文本一定严格覆盖前者。[1]
 
-### CLAUDE.local.md 已废弃，用 @imports
+<span id="claudelocalmd-已废弃用-imports"></span>
 
-注意：`CLAUDE.local.md` 这个文件已经被 Anthropic 官方废弃（见 anthropics/claude-code issue #2950）。推荐用 `@path/to/file` 语法（最多 5 跳递归）。个人私货建议用 `@~/.claude/personal-overrides.md` + `.gitignore` 一行，替代旧版 local 文件。
+### CLAUDE.local.md 仍受支持，但影响回退
+
+当前官方文档仍支持 `CLAUDE.local.md`，用于项目内个人指令。把它加入 `.gitignore`。它会阻止默认 AGENTS 回退，因此同时保留显式导入，或开启双文件加载。要跨 worktree 复用个人指令，可以改用外部 `@path` 导入，但要满足批准和会话限制；当前递归上限是四跳。[1]
 
 ### Spec-Driven：团队级 Agent OS
 
@@ -282,7 +375,7 @@ MindStudio 甚至做了一个自改循环：让 Claude Code 自己改 CLAUDE.md 
 
 ### 可观测性：规则 ROI 度量
 
-Harrison Chase 的团队把 LangSmith 接入 Claude Code，**可以看到哪些规则被调用、哪些被忽略**——这是规则 ROI 度量的唯一手段。结合 PostToolUse hook 和 LSP 诊断（文件编辑后自动回灌 type error），把"是否遵守规则"变成**可观测信号**。
+追踪、hook 和命令日志可以显示哪些检查确实执行了，却不能证明每条指令都影响了模型。还要检查观测方式：原生 AGENTS 加载不会触发 `InstructionsLoaded`，CLAUDE 导入则会。应对照文件发现、实际命令与产物，不能只信模型说自己遵守了规则。[1]
 
 ### Meta-CLAUDE.md
 
@@ -367,7 +460,7 @@ HumanLayer 建议博客 AGENTS.md **< 60 行**；共识上限 < 300 行。
 2. 包管理器默认值（"python 用 uv，node 用 pnpm"）
 3. 隐私（"所有推送仓库默认 private"）
 4. 协作底线（"修改交互细节必须加 e2e 测试"）
-5. 自改进机制（"每次会话失败要追加避坑规则"）
+5. 维护约定（"检查重复故障，删除过时的临时处理办法"）
 
 行数控制在 **10 行以内**。它每次会话都被加载，越短越好。
 
@@ -386,13 +479,13 @@ HumanLayer 建议博客 AGENTS.md **< 60 行**；共识上限 < 300 行。
 以 AOE 后端为例：
 
 - `AGENTS.md` 为主文件（构建命令、测试命令、Code Style、Common Pitfalls、Lessons Learned）
-- `CLAUDE.md` 只一行：`See @AGENTS.md`
+- `CLAUDE.md` 使用实际的 `@AGENTS.md` 导入，不能放在代码块中；Claude 专用指令写在下面
 - `.agents/decisions.md` 版本化记录架构决策
 - `.claude/skills/meta/claude-md-editing.md` 规范如何编辑 CLAUDE.md 本身
 
 ### 引入"两次原则"
 
-把"每次 bash 失败都写规则"改为"**同一失败第二次才写规则**"。第一次发生时，在 MEMORY.md 里记一笔"观察到 X"；第二次发生时，把它提升为 AGENTS.md 里的正式规则。这样信号/噪声比显著上升。
+偶发失败先记下观察，再检查是否重复；已知有破坏性的操作或审查发现，应立即记录限制。团队规则应写进共享文件，不能依赖某位开发者本机的自动记忆。
 
 ### Oracle 模式（可选）
 
@@ -427,19 +520,21 @@ HumanLayer 建议博客 AGENTS.md **< 60 行**；共识上限 < 300 行。
 
 ## 十二、结语：从提示到上下文，从文件到系统
 
-回到开头那个问题：到底要写多少 CLAUDE.md？
+记录模型难以自行推断的决定，让加载路径可以检查，再验证实际结果。增加层级之前，先确认团队从常用目录启动时，必要的指令是否都能读到。
 
-如果 2024 年的答案是"尽量详细"，那 2026 年的答案是"**尽量少，但尽量活**"。少——因为每一行都在消耗 agent 的注意力预算；活——因为规则不是静态合同，而是**持续演化的机构知识**。
-
-Karpathy 说 Markdown 是源代码，ghuntley 说你在给 LLM 编程，Chase 说 Context 是团队护城河。这三句话说的是同一件事——**你写 CLAUDE.md 的方式，本质上是在定义你和 AI 的协作契约**。这份契约写得好，agent 像一个专业的新同事；写得不好，agent 像一个健忘、恭维、动不动就自作主张的实习生。
-
-所以不要把它当作"配置文件"。把它当作**你团队/项目最重要的那份规范文档**。像代码一样 review，像代码一样重构，像代码一样测试，像代码一样淘汰过时的部分。
-
-祝你写出一份能用三年的 CLAUDE.md。
+共同内容放 AGENTS.md，Claude 专用内容放 CLAUDE.md。更新客户端、增加个人设置或换到另一个 worktree 后，再检查一次加载情况。维护指令时，也要考虑真正执行它的环境。
 
 ---
 
 ## 参考资料
+
+[1]: https://code.claude.com/docs/en/memory "Claude Code 记忆、加载、导入与版本边界"
+[2]: https://developers.openai.com/codex/guides/agents-md/ "Codex 官方指令发现规则"
+[3]: https://agents.md/ "AGENTS.md 开放格式"
+
+- [1. Claude Code 记忆与 AGENTS.md 加载](https://code.claude.com/docs/en/memory)
+- [2. Codex 自定义指令与回退文件名](https://developers.openai.com/codex/guides/agents-md/)
+- [3. AGENTS.md 格式与常见问题](https://agents.md/)
 
 - [agents.md 官方标准](https://agents.md/)
 - [Anthropic Claude Code Best Practices](https://code.claude.com/docs/en/best-practices)

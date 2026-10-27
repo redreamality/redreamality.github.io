@@ -1,20 +1,111 @@
 ---
-title: 'CLAUDE.md and AGENTS.md, In Depth: From Basics to Counterintuitive Patterns'
+title: 'AGENTS.md vs CLAUDE.md: Which file loads, coexistence, and templates'
 pubDate: 2026-04-26T00:00:00.000Z
-description: "From Anthropic's official guidance to Karpathy's program.md paradigm, from the two-strikes rule to Darwinian memory, from Spec-Driven to Eval-Driven — a long-form survey of how we write project files for AI coding agents, and the counterintuitive mental models worth borrowing."
+updatedDate: 2026-10-26T00:00:00.000Z
+description: 'Choose AGENTS.md or CLAUDE.md, check Claude Code version-specific loading and Codex fallback rules, verify active instructions, and reuse working templates.'
 author: 'Remy'
 tags: ['claude-code', 'ai-agents', 'Context Engineering']
 lang: 'en'
 translatedFrom: 'claude-md-agents-md-deep-dive'
 ---
 
+## Which file should you use?
+
+Use **AGENTS.md for shared repository instructions and Codex**. Use **CLAUDE.md for Claude Code-specific instructions**. For a team using both tools, my default is one shared `AGENTS.md` and a small `CLAUDE.md` that imports it with `@AGENTS.md`. This keeps the common rules in one place without depending on every teammate's Claude version and fallback settings. [1] [2] [3]
+
+**Does Claude Code read AGENTS.md?** Since **v2.1.277**, supported sessions can read it directly. By default, a project or ancestor `CLAUDE.md`, `.claude/CLAUDE.md`, or `CLAUDE.local.md` prevents that fallback. Your user-level `~/.claude/CLAUDE.md`, managed instructions, and `.claude/rules/` do not prevent it. Having both filenames does not, by itself, mean both load. [1]
+
+Check `claude --version`, then `/config` → **Project instructions** and `/context`. Use `/memory` to inspect the AGENTS path. For older clients or mixed teams, use the [import template](#copyable-templates). For both-file loading, use the [version matrix](#loading-and-coexistence). For Codex, inspect its [separate discovery rules](#codex-discovery).
+
+## Loading and coexistence
+
+The following describes official documentation checked on **October 26, 2026**, rather than every historical Claude Code release. [1]
+
+| Version or layout | What happens |
+| --- | --- |
+| Before v2.1.277, disabled AGENTS plugin, or some first sessions after upgrading from v2.1.276 or earlier | Direct AGENTS loading is unavailable. Use a CLAUDE import; after upgrading, start a new session. |
+| v2.1.277–v2.1.280 | Direct support exists, but some sessions, including Bedrock or telemetry-disabled sessions, still require an upgrade or import. |
+| Supported session, default `claude-md-or-agents-md` | AGENTS files load only when no blocking CLAUDE file exists in the working directory or ancestors. |
+| `claude-md-and-agents-md` | Both load; within each directory CLAUDE content precedes AGENTS content. Already imported AGENTS files are deduplicated. |
+| `claude-md` | Only CLAUDE files load directly; an explicit `@AGENTS.md` import still works. |
+| `managed-only` | Managed instructions and auto memory load at startup. This is not a blanket ban on later on-demand subdirectory or path-scoped rules. |
+
+Set **Project instructions** in `/config`. For a shared user settings file, merge this fragment into `~/.claude/settings.json`, preserving other settings:
+
+```json
+{
+  "pluginConfigs": {
+    "cc-plugin-agents-md@builtin": {
+      "options": { "instructionFiles": "claude-md-and-agents-md" }
+    }
+  }
+}
+```
+
+Before **v2.1.285**, the key is `agents-md@builtin`; v2.1.285 and later accept either ID. This option is read from user settings, `--settings`, or managed settings, **not project or local settings**. The change applies from the next message. Do not paste it into `.claude/settings.json` and assume the whole team now loads both files. [1]
+
+Claude's native AGENTS support reads `AGENTS.md` and `.claude/AGENTS.md`, but not `AGENTS.override.md`, `AGENTS.local.md`, or files under `.agents/`. A nested AGENTS file can load when Claude reads a file there, provided that directory has no blocking CLAUDE file. This differs from Codex's override convention. Load order also does not make contradictory natural-language rules deterministic; remove the contradiction. [1] [2]
+
+## Copyable templates
+
+For a repository with `pnpm build` and `pnpm test` scripts, use this as the root `AGENTS.md`. Replace commands and generated-file paths to match the repository before adopting it:
+
+```markdown
+## Working agreements
+- Use pnpm for Node dependencies and uv for Python dependencies.
+- Preserve unrelated changes in the working tree.
+- Edit source files; do not edit generated dist/ output.
+
+## Verification
+- After code changes, run pnpm test and pnpm build.
+- If a check cannot run, report the command and blocker.
+- Report changed behavior, checks performed, and remaining limitations.
+```
+
+In a neighboring root `CLAUDE.md`, put:
+
+```markdown
+@AGENTS.md
+
+## Claude Code
+- Before changing billing behavior, propose the affected cases and tests.
+```
+
+The article displays a code block so you can copy its contents. In the **actual file**, `@AGENTS.md` must be outside backticks and fenced code. A sentence saying "read AGENTS.md" is a request to the model, whereas `@AGENTS.md` is an import processed by Claude Code. Relative imports resolve from the importing file; `.claude/CLAUDE.md` would need `@../AGENTS.md`. Current import recursion is limited to four hops. Prefer the import to a symlink for teams with Windows users. [1]
+
+## Verify what actually loaded
+
+1. Run `claude --version` and `codex --version` in your terminal. Record the starting directory and relevant settings.
+2. Start a fresh Claude session in the repository. Use `/context` to inspect **Memory files**, and `/memory` to locate AGENTS files. Before v2.1.280, directly loaded AGENTS files were absent from those lists; upgrade or use the import route to make diagnosis clearer.
+3. Test a harmless, distinctive instruction in a scratch repository, such as "When asked for the verification label, reply `instruction-check-26`." Ask for that label without repeating it in your prompt. Check the loaded file path as well as the answer.
+4. For a nested rule, ask Claude to read an ordinary file in that directory. Check the terminal's `Loaded` notice. A startup list alone cannot prove a lazily loaded file was missed.
+5. In Codex, start a new run after edits and ask it to list instruction sources and summarize the verification commands. Compare the answer with the files and, when needed, the TUI log.
+
+These checks separate discovery from behavior: a file can load correctly while a vague instruction is still followed inconsistently. For Claude, `InstructionsLoaded` hooks can trace CLAUDE imports and rules, but do **not** fire for AGENTS files read directly through the plugin. A missing hook event is therefore not proof that a native AGENTS file was skipped. [1] [2]
+
+## Codex discovery
+
+Codex builds its startup instruction chain from its home directory and from the project root down to the working directory. At each project directory it selects at most one non-empty file: `AGENTS.override.md`, then `AGENTS.md`, then configured fallback names. Deeper guidance comes later. The default combined budget is **32 KiB**, controlled by `project_doc_max_bytes`. This is not Claude's fallback algorithm. [2]
+
+For a legacy repository containing only CLAUDE.md, merge this into `~/.codex/config.toml`:
+
+```toml
+project_doc_fallback_filenames = ["CLAUDE.md"]
+```
+
+Restart Codex. This makes CLAUDE.md a **fallback**, not an additional file beside AGENTS.md in the same directory. Do not assume Codex expands Claude's `@` imports. For mixed-tool projects, the shared AGENTS file above is easier to inspect than a chain of tool-specific fallback files. To test a nested directory:
+
+```bash
+codex --cd services/payments "List the active instruction sources and verification commands. Do not edit files."
+```
+
+Use an existing directory. The expected startup chain is the global file, the repository file, then any selected files along that path. Do not infer that all sibling packages loaded at startup. For deeper diagnosis, launch with `codex -c log_dir=./.codex-log` and inspect `codex-tui.log`; logs may contain private project context. [2]
+
 ## Why Bother
 
-If you have used Claude Code, Cursor, Codex, Aider, Jules, Amp, Windsurf, or any of the dozen-odd AI coding tools that shipped over the last twelve months, you have almost certainly written a `CLAUDE.md` or an `AGENTS.md`. Maybe both. Maybe in seven repos. And you have probably wondered: how long should this thing be? Should it read like a README, or like a list of commands? Can I share one file across multiple tools? After I write it, does the agent actually follow it?
+Why can two files containing identical instructions produce different results? The filename, working directory, client version, and configuration decide which text reaches the model. The quality of that text matters only after discovery succeeds.
 
-This is a long survey of what the English-speaking and Chinese-speaking communities have learned about "writing project files for AI" between mid-2025 and early 2026. It is not a how-to guide. It is closer to a **history of mental models** — from Anthropic's early best practices, through Karpathy's `program.md` paradigm, through Geoffrey Huntley's Ralph Wiggum loop, all the way to claude-evolve's "Darwinian memory" experiments. The last few sections turn back to the desk and offer a concrete checklist for a knowledge vault and a backend repo.
-
-Twelve sections, roughly six thousand words. The first six are foundations and current state. The last six are counterintuitive patterns and practical wiring. If you only have time for the strange and useful parts, jump to section six.
+The twelve sections below retain the broader discussion of context, memory, team workflows, and non-code repositories. My view is that a useful instruction file records decisions the agent cannot reliably infer from source code, then points to a way to verify the work. More rules do not compensate for missing evidence.
 
 ---
 
@@ -24,9 +115,9 @@ Before any "file written for AI" can mature, the three files have to be cleanly 
 
 **README.md** is for humans. The audience is the developer who just opened your repo for the first time. The goal is to get them to "what does this project do, how do I run it, how do I contribute" within five minutes. The voice is descriptive and a little promotional. The shape is the pyramid principle: **what → how → how to participate**.
 
-**CLAUDE.md** is for Claude Code. The audience is an AI agent that **starts every session from zero**. It has no memory of last time, no intuitive sense of the directory structure, no shared culture with the team. It is a freshly amnesiac detective. What that detective actually needs is operational: which command builds, which command tests, which traps must be known to avoid them, how to verify the change.
+**CLAUDE.md** supplies persistent instructions to Claude Code. A fresh context window does not mean an absence of memory: instruction files and auto memory can carry information across sessions. What belongs in the project file is operational knowledge such as verification commands, repository constraints, and decisions that the code does not explain. [1]
 
-**AGENTS.md** is the open standard published in August 2025 by OpenAI, Google, Cursor, Factory, Sourcegraph and others. It is now hosted by the Linux Foundation through the Agentic AI Foundation. The promise is one file, read natively by Codex, Cursor, Aider, Jules, Copilot, Claude Code, Amp, Windsurf, Zed and twenty-odd other tools. Adoption is past sixty thousand repos at the time of writing.
+**AGENTS.md** is an open Markdown format stewarded by the Agentic AI Foundation under the Linux Foundation. It has no required fields or fixed schema. Tools can share its content while differing in discovery, configuration, and inheritance. Use the loading rules above for Claude Code and Codex instead of treating ecosystem adoption as a promise of identical behavior. [3]
 
 The three files are complementary, not substitutes. README.md answers "what". CLAUDE.md and AGENTS.md answer "how". The first is a marketing page for humans; the others are an operations manual for machines.
 
@@ -42,9 +133,9 @@ The second failure mode is treating CLAUDE.md as written-once. Anthropic's best 
 
 This is the least controversial and most-often-violated dimension.
 
-Dexter Horthy of HumanLayer published a piece called *Writing a good CLAUDE.md* in which he gives a very specific anchor: their main repository's root CLAUDE.md is **under 60 lines**. A Chinese-speaking author ran a careful experiment: cutting from 3,000 characters to 1,000 produced clear improvement; cutting to 800 was the sweet spot; cutting to 400 lost critical information. He stabilized at around 800 Chinese characters. `vercel/vercel`, a complex monorepo, lives at 247 lines. `openai/codex` is roughly 800 lines, but it survives only because of strict heading discipline.
+HumanLayer's *Writing a good CLAUDE.md*, credited to Kyle, recommends keeping the root instructions small and moving detail into separate documents. A large repository's line count is not a target for your project: its checks, directory structure, and instruction-loading budget differ.
 
-Rough community consensus: **typical projects ≤ 250 lines; large monorepos shard by sub-package; anything > 500 lines must be aggressively partitioned.** The deeper number Anthropic has hinted at in public talks: frontier models reliably follow somewhere in the range of **150 to 200 instructions**. Past that, compliance decays fast.
+Anthropic currently recommends fewer than 200 lines per CLAUDE.md file. That is guidance, not a measured universal instruction limit. Imports organize text but load with their parent; they do not save context by themselves. Move narrow rules to appropriate directories or path-scoped rules, then verify that they load when needed. [1]
 
 ### Structure
 
@@ -64,7 +155,7 @@ The `vercel/vercel` AGENTS.md is instructive: it has a dedicated *Common Pitfall
 
 Imperative, strong modals, concrete paths and commands. Write `ALWAYS run pnpm typecheck before claiming the task is done`, not "please verify code quality". Write `Never import from src/internal/*`, not "be careful with imports".
 
-The frequently-cited number is **70%** — about seventy percent of CLAUDE.md rules get followed. Which means real red lines cannot rely on CLAUDE.md alone. Red lines need hooks: `PreToolUse` returning exit code 2 is the only way to actually block a forbidden action. The other thirty percent is what hooks are for.
+There is no universal compliance percentage that makes a Markdown rule safe to rely on. Use permissions, sandboxing, or a blocking hook when an action must be prevented. A reminder to avoid deployment can guide the model; a permission boundary determines whether deployment can happen. [1]
 
 ---
 
@@ -190,23 +281,23 @@ When enough similar rules mature, they "graduate" into formal skill files under 
 
 ### Read/Write Separation (CLAUDE.md + MEMORY.md)
 
-A two-file convention is gaining traction: `CLAUDE.md` is **human-written, agent-read** explicit rules. `MEMORY.md` is **agent-written, agent-read**, with the first 200 lines auto-loaded at startup.
+Claude Code separates maintained instructions from auto memory. Its memory index normally lives at `~/.claude/projects/<project>/memory/MEMORY.md`; startup reads the first **200 lines or 25 KB, whichever comes first**. A random repository-root MEMORY.md does not acquire that behavior from its name. [1]
 
-The counterintuitive piece: half the file is the agent writing notes to itself. You tell it during a session "remember X", it writes X to MEMORY.md, and at next launch it reads CLAUDE.md and then MEMORY.md's first 200 lines. The agent maintains its own knowledge base.
+Use auto memory for observations and preferences, and shared instructions for decisions the team has adopted. Details can live in topic files read on demand. Machine-local memory is not a reliable way to distribute repository policy to teammates. [1]
 
-A built-in self-defense in Claude's system prompt: **"Treat your own memory as a hint, not a fact."** Verify against the actual code before acting on a memory. This guards against the agent confidently doubling down on a stale recollection.
+Check a remembered command against the current package scripts before running it. A note that was correct before a migration can become wrong without any change to the memory file.
 
 ### Auto Dream: Memory Hygiene
 
-A background process called Auto Dream periodically scans MEMORY.md and rewrites "yesterday's deployment issue" into "the deployment issue on 2026-03-28" — converting relative time anchors into absolute dates. So when the memory is read months later, "yesterday" does not silently mean a different thing.
+Treat automatic memory cleanup as an optional workflow, not a property you can assume from the filename. A useful maintenance task is to replace relative dates with known absolute dates, remove resolved workarounds, and link a remembered constraint to the decision that established it.
 
 Memory needs hygiene. Memory is not an append-only log. It is **live data that requires continuous cleaning.**
 
 ### The Two-Strikes Rule
 
-Anthropic's best-practice doc carries a counterintuitive rule: **only write a CLAUDE.md rule on the second occurrence of the same error.**
+Anthropic lists a repeated mistake as one reason to add a rule, alongside review findings and information a new teammate needs. Waiting for a second occurrence is a useful filter for incidental failures, not a requirement to repeat a costly mistake before documenting it. [1]
 
-Why? Because the first time might be a fluke. If you commit a rule on every error, your CLAUDE.md drowns in one-off lessons and the signal-to-noise ratio collapses. **Twice = pattern. Once = noise.** This inverts the classic instinct of "document early".
+An isolated failure can come from a temporary network problem or an incorrect command. Diagnose it before adding a permanent rule. Repetition makes a reusable lesson more likely, but severity and review evidence matter more than an arbitrary count.
 
 ### Subagents Are Context Control, Not Role Play
 
@@ -230,11 +321,11 @@ The counterintuitive piece: not one persona, but **three explicitly summonable t
 
 ### Path-Scoped Rules
 
-YAML frontmatter with a `paths:` field lets a rule load only when matching files are touched — zero token cost otherwise. A React-component rule only injects when `src/components/*.tsx` is in play. This turns "load everything" into "load on demand", and lets CLAUDE.md grow to thousands of lines without inflating any single request's token cost.
+In `.claude/rules/`, YAML `paths:` frontmatter scopes a rule to matching files. Putting a `paths:` heading into an ordinary AGENTS.md does not create that mechanism. Keep the root file short, put the component rule in a separate rules file, and exercise a matching file to test discovery. This reduces irrelevant loading; it does not make an oversized root CLAUDE.md free. [1]
 
 ### Versioned Changelog at the Top
 
-A `## Changelog v2026-04-26` block at the head of CLAUDE.md prompts the agent to diff against last session and notice rule changes. A small mechanism, but it puts the agent in the loop of rule evolution rather than being blind to it.
+A changelog can explain why a rule changed. Its heading does not trigger an automatic comparison with the previous session. If that comparison matters, ask for it explicitly or inspect the Git diff. Keep the current instruction readable without reconstructing its entire history.
 
 ---
 
@@ -244,13 +335,15 @@ Solo best practices and team best practices are different problems. Scale up to 
 
 ### AGENTS.md as a Cross-Tool Contract
 
-AGENTS.md is now a Linux Foundation-hosted open standard with first-class support across twenty-plus tools. **Vercel's Agent Readability Spec** goes further: it folds AGENTS.md into a site reachability convention, recommending exposure at `/AGENTS.md`, `/.well-known/agents.md`, `/CLAUDE.md`, `/.cursor/rules`, and other paths simultaneously. Like robots.txt and sitemap.xml for search engines — AGENTS.md for AI agents.
+A cross-tool contract needs both shared text and a tested loading path. The open format reduces duplicate writing, but tool-specific discovery still matters. A Claude import does not configure Codex, and a Codex override filename is not a Claude override. Publishing the file on a website does not configure a local coding session. [1] [2] [3]
 
-Team-level recommendation: **AGENTS.md is the source of truth; CLAUDE.md is a one-line stub: `See @AGENTS.md`** (Anthropic's "import stub" pattern). All tools share one file. Claude-specific quirks live separately. Switching tools requires no reconfiguration. Claude-specific optimizations are not lost.
+For a mixed team, maintain common commands and constraints in AGENTS.md, with the explicit CLAUDE import shown above. Keep Claude-only instructions below that import. On clients configured for native both-file loading, check for contradictory rules rather than assuming the later file enforces a strict override. [1]
 
-### CLAUDE.local.md is Deprecated; Use @imports
+<span id="claudelocalmd-is-deprecated-use-imports"></span>
 
-Note: `CLAUDE.local.md` has been officially deprecated by Anthropic (`anthropics/claude-code` issue #2950). The replacement is `@path/to/file` syntax (up to 5 hops of recursion). The clean pattern for personal overrides is `@~/.claude/personal-overrides.md` plus a `.gitignore` line.
+### CLAUDE.local.md remains supported and affects fallback
+
+Current official documentation supports `CLAUDE.local.md` for personal project instructions. Add it to `.gitignore`. Its presence blocks default native AGENTS fallback, so retain the explicit import or enable both-file loading. An external `@path` import is an alternative for sharing personal instructions across worktrees, subject to approval and session restrictions. The current recursion limit is four hops. [1]
 
 ### Spec-Driven: Team-Level Agent OS
 
@@ -274,7 +367,7 @@ MindStudio took it further: a self-modification loop where Claude Code rewrites 
 
 ### Observability: Rule ROI
 
-Harrison Chase's team wires LangSmith into Claude Code so they can see **which rules were invoked, which were ignored**. This is the only honest way to measure rule ROI. Combined with PostToolUse hooks and LSP diagnostics (re-injecting type errors after each edit), "did the agent comply" becomes an **observable signal**.
+Traces, hooks, and command logs can show which checks actually ran. They do not prove every instruction influenced the model. Check the observation mechanism as well: native AGENTS loading does not emit `InstructionsLoaded`, while a CLAUDE import does. Compare file discovery, executed commands, and resulting artifacts instead of relying on the model's claim that it complied. [1]
 
 ### Meta-CLAUDE.md
 
@@ -359,7 +452,7 @@ Keep it minimal. Only **cross-project preferences**:
 2. Package manager defaults ("Python uses uv; Node uses pnpm").
 3. Privacy ("All pushed repos default to private").
 4. Collaboration baselines ("Interaction-detail changes require corresponding e2e tests").
-5. Self-improvement mechanism ("Append a pitfall rule after each failed bash command").
+5. Maintenance ("Review recurring failures and remove obsolete workarounds").
 
 Target line count: **under 10**. This file loads on every session. Shorter is better.
 
@@ -378,13 +471,13 @@ For an Obsidian-style PARA vault, include:
 For a backend repo:
 
 - `AGENTS.md` is the main file: build commands, test commands, code style, common pitfalls, lessons learned.
-- `CLAUDE.md` is one line: `See @AGENTS.md`.
+- `CLAUDE.md` contains the actual `@AGENTS.md` import, outside a code fence, with any Claude-only instructions below it.
 - `.agents/decisions.md` versions architectural decisions.
 - `.claude/skills/meta/claude-md-editing.md` formalizes how to edit CLAUDE.md itself.
 
 ### Adopt the Two-Strikes Rule
 
-Change "write a rule on every bash failure" to **"write a rule only on the second occurrence of the same failure"**. First occurrence: log it in MEMORY.md as "observed X". Second occurrence: promote it to AGENTS.md as a formal rule. Signal-to-noise ratio jumps significantly.
+For an incidental failure, record the observation and check whether it recurs before adding a permanent rule. For a known damaging action or a review finding, document the constraint immediately. Put team policy in the shared file rather than relying on one developer's auto memory.
 
 ### Oracle Mode (Optional)
 
@@ -419,19 +512,21 @@ If 2025 was the inception year for files-written-for-AI, what does 2026 look lik
 
 ## 12. Closing: From Prompt to Context, From File to System
 
-Back to the opening question: how much CLAUDE.md should you write?
+Record decisions the model cannot infer reliably, keep the loading path inspectable, and test the resulting work. Before adding more layers, check whether the necessary instructions load from the directories your team actually uses.
 
-If 2024's answer was "as detailed as possible," the 2026 answer is **"as little as possible, but as alive as possible."** Little, because every line consumes the agent's attention budget. Alive, because rules are not a static contract but **continuously evolving institutional knowledge.**
-
-Karpathy says Markdown is source code. Huntley says you are programming the LLM. Chase says context is the team's moat. They are saying the same thing: **how you write CLAUDE.md is, fundamentally, the contract you sign with your AI collaborator.** Sign it well and the agent is a competent new colleague. Sign it badly and the agent is an amnesiac, sycophantic, occasionally rogue intern.
-
-So do not treat it as a config file. Treat it as **the most important specification document in your team or project**. Review it like code. Refactor it like code. Test it like code. Retire stale parts like code.
-
-Here is to writing a CLAUDE.md that lasts three years.
+Put shared content in AGENTS.md and Claude-specific content in CLAUDE.md. After a client upgrade, a personal configuration change, or a move to another worktree, verify discovery again. Maintain the instructions together with the environment that executes them.
 
 ---
 
 ## References
+
+[1]: https://code.claude.com/docs/en/memory "Claude Code memory, loading, imports, and version boundaries"
+[2]: https://developers.openai.com/codex/guides/agents-md/ "Official Codex instruction discovery"
+[3]: https://agents.md/ "AGENTS.md open format"
+
+- [1. Claude Code memory and AGENTS.md loading](https://code.claude.com/docs/en/memory)
+- [2. Codex custom instructions and fallback filenames](https://developers.openai.com/codex/guides/agents-md/)
+- [3. AGENTS.md format and FAQ](https://agents.md/)
 
 - [agents.md — official site](https://agents.md/)
 - [Anthropic Claude Code Best Practices](https://code.claude.com/docs/en/best-practices)

@@ -1,6 +1,6 @@
 ---
-title: "pstack の 51 個の skill：poteto の Cursor エンジニアリングワークフローの使い方"
-description: "Lauren Tan（poteto）がオープンソース化したプラグイン pstack には 51 個の skill がある。入口のコマンド、1 つのタスクの流れ、検証・修正系 skill と講演の五層の修正との対応、24 の原則、そしてこのプラグインにできないことを整理する。"
+title: "pstack skills の使い方：最初のタスク、ホスト対応、feature map の実例"
+description: "実行できる CLI で最初の pstack タスクを進め、Cursor と Claude Code の対応範囲を確認する。feature map と実際の失敗・成功記録で修正を検証する。"
 date: 2026-10-08
 source: "https://github.com/cursor/plugins/tree/main/pstack"
 tags: ["ai-agents", "agent-harness", "ai-coding", "code-review", "Cursor"]
@@ -8,11 +8,106 @@ lang: "ja"
 translatedFrom: "pstack-skills-guide"
 ---
 
-pstack は Lauren Tan（[@poteto](https://x.com/poteto)）が作った Cursor / Grok Bot 向けプラグインで、入れると 51 個の skill が使えるようになる。中身は、彼女自身が毎日コードを書くときに使っているエンジニアリングのやり方だ。agent でコードを書いてはいるが、まだ任せきりにする勇気はない、という人向けだと思う。彼女は講演で「信頼が先、並列はその後」と話し、修正をどの層に置くべきかを整理していた。その内容はこちらにまとめてある：[信頼が先、並列はその後](/ja/blog/lauren-tan-poteto-trust-before-parallel/)。pstack は、その考え方を skill の形に落としたものとして読める。講演では、このプラグインについてはその日は深入りしないと本人が断っていたので、このノートで補う。
+pstack は Lauren Tan（[@poteto](https://x.com/poteto)）がまとめたエンジニアリング用の skill 集だ。最初は、自分で結果を確かめられる小さなタスクを選ぶ。ここではタスク一覧 CLI の不具合を再現し、修正を依頼して、正しい出力を検証する。ローカルの例には依存パッケージも API 認証情報も必要ない。
 
-まず範囲をはっきりさせておく。以下の細部は公開リポジトリ [cursor/plugins の pstack ディレクトリ](https://github.com/cursor/plugins/tree/main/pstack) に基づく。確認時点のプラグインのバージョンは 0.15.15、ライセンスは MIT。リポジトリの更新は頻繁なので、デフォルトのモデルや playbook の数といった細部は今後変わりうる。
+[ホストの対応範囲](#host-compatibility)、[最初のタスク](#first-task)、[feature map の実例](#feature-map-example)から始められる。従来の skill 解説とその節へのリンクは後半に残している。
+
+インストール説明は 2026 年 10 月 26 日に[公式 pstack 0.15.32](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/.cursor-plugin/plugin.json)で確認した。後半の一覧は以前の 0.15.15 の記録であり、51 個の skill と 24 の原則は現在の完全な一覧ではない。考え方の背景は[信頼が先、並列はその後](/ja/blog/lauren-tan-poteto-trust-before-parallel/)を参照してほしい。
+
+<a id="host-compatibility"></a>
+
+## インストール前にホストの対応範囲を確認する
+
+[公式 README](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/README.md)には Cursor と Claude Code のインストール方法がある。Claude Code が外部マーケットプレイスを third-party と呼んでも、pstack 本家のアダプターが非公式移植になるわけではない。
+
+<div class="content-table-scroll" role="region" aria-label="ホスト / インストールと入口 / 制限" tabindex="0">
+
+| ホスト | インストールと入口 | 制限 |
+| --- | --- | --- |
+| Cursor | `/add-plugin pstack` の後、`/setup-pstack` と `/poteto-mode` | モデル設定は `~/.cursor/rules/pstack-models.mdc`。使えるモデルはアカウントに依存する。 |
+| Claude Code | `/plugin marketplace add cursor/plugins` の後、`/plugin install pstack@cursor-plugins` | `/pstack:setup-pstack` と `/pstack:poteto-mode` を使う。設定は `~/.claude/rules/pstack-models.md`。 |
+| Codex など | 導入したパッケージの出所とホストの skill 読み込み方法を確認する | 確認した本家 README に Codex の導入手順はない。skill のコピーやコミュニティ移植だけでは完全な互換性を確認できない。 |
+
+</div>
+
+[公式 Claude Code アダプター](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/docs/harness/claude-code.md)は、非対応の非 Claude モデル名を現在のセッションモデルに置き換え、使えない Cursor 機能を必要とする手順をスキップする。Grok のレビューや Cursor Automations、クラウド agent が同じように動くとは限らない。第三者の移植を使うときは、本家のどの版に対応するか、ツールとモデルをどう扱うか、未対応の手順をどう報告するかを調べてから並列実行を始める。`SKILL.md` が読めることは最初の確認にすぎない。
+
+<a id="first-task"></a>
+
+## ローカル CLI で最初のタスクを完了する
+
+Node.js 22 以降を用意する。再現にはパッケージマネージャー、サーバー、アカウント、モデル呼び出しは不要だ。空のディレクトリに[不具合のある CLI](/assets/pstack-search-repair/task-cli.before.mjs)、[タスクデータ](/assets/pstack-search-repair/tasks.json)、[検証スクリプト](/assets/pstack-search-repair/verify.mjs)を同じファイル名で配置する。[修正の参考実装](/assets/pstack-search-repair/task-cli.mjs)は別に用意した。
+
+1. そのディレクトリでターミナルを開き、実行環境を確認して不具合を再現する。
+
+   ```sh
+   node --version
+   node task-cli.before.mjs tasks.json --status open
+   node verify.mjs task-cli.before.mjs evidence-before.json
+   ```
+
+   CLI は ID 2 の `Publish release` を返し、`done` は `true` になっている。検証スクリプトは `FAIL open` と表示し、終了コードは 1 になる。他の六つのコマンド検証は通る。未完了の一覧で返すべきなのは ID 1 の `Write release notes` だ。
+
+2. 対応するホストでこのディレクトリを開き、前節に従って pstack を導入・設定してから、次を送る。Claude Code では `/poteto-mode` を `/pstack:poteto-mode` に置き換える。
+
+   ```text
+   /poteto-mode タスク一覧の open フィルターを修正してください。
+   task-cli.before.mjs を読み、原本を残して修正版を task-cli.mjs に作成する。
+   tasks.json と verify.mjs は変更しない。open はタスク 1 だけ、
+   done はタスク 2 だけを返し、既定と all は両方を返す。
+   未対応または欠落した状態値では終了コード 2 と空の stdout が必要。
+   変更前に再現し、付属の検証スクリプトを前後の版で実行して、
+   コマンド、出力、終了コード、証拠ファイルのパスを報告する。
+   ローカルのみで作業し、commit、PR 作成、公開、有料外部 API 呼び出しはしない。
+   ```
+
+   ホスト内のモデル利用はアカウントの利用枠を消費する場合がある。ローカルの例を直接実行するだけならモデルは呼ばない。コマンドを実行できない agent は、その理由を報告し、検証済みと扱わない。
+
+3. 差分を確認する。参考実装では open 分岐の `task.done` を `!task.done` に変更している。修正版を実行する。
+
+   ```sh
+   node task-cli.mjs tasks.json --status open
+   node verify.mjs task-cli.mjs evidence-after.json
+   ```
+
+   期待する出力は `[{"id":1,"title":"Write release notes","done":false}]` だ。七つのコマンド検証と `PASS fixture unchanged` が通り、終了コードは 0 になる。モデルを使った練習を省く場合は、参考実装を同じディレクトリに置けば、この二つのコマンドを自分で実行できる。
+
+成果物は修正済み CLI と前後二つの証拠 JSON だ。2026 年 10 月 26 日に Windows と Node.js v26.7.0 で実行した[失敗記録](/assets/pstack-search-repair/evidence-before.json)と[成功記録](/assets/pstack-search-repair/evidence-after.json)には、引数、stdout、stderr、終了コード、ファイルのハッシュが入っている。これは実際の CLI 実行結果であり、上のプロンプトを使って pstack のモデルワークフローを実行したという意味ではない。
+
+<a id="feature-map-example"></a>
+
+## 不具合を検出できる feature map を書く
+
+feature map は、ユーザーが機能へ到達する方法と、成功を示す観察可能な結果を記録する。この例では次のファイルを用意する。
+
+```text
+task-cli.before.mjs
+task-cli.mjs
+tasks.json
+verify.mjs
+feature-map/
+  README.md
+  list-tasks.md
+evidence-before.json
+evidence-after.json
+```
+
+[索引](/assets/pstack-search-repair/feature-map/README.md)と[機能の完全な記述](/assets/pstack-search-repair/feature-map/list-tasks.md)は当サイトが書いた英語の例だ。四つの節は[公式 feature map の例](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/skills/create-verification-skill/references/feature-map-example/create-note.md)に従うが、skill が自動生成した結果ではない。
+
+| 節 | このプロジェクトで記録する内容 |
+| --- | --- |
+| Sub-features | 既定、all、open、done、不正な状態、状態の欠落、不正な入力 |
+| How to get to it (user POV) | ターミナルで `node task-cli.mjs tasks.json` を実行し、状態オプションで絞り込む |
+| Driving it with Node.js | 固定データ、正確なコマンド、期待する JSON、終了コード、証拠のパス |
+| Gotchas | 終了 0 だけでは絞り込みの正しさを証明できない。データは変更せず、証拠を残す |
+
+フィルターがなかった時点の記述は、既定の一覧で ID 1 と 2 が返ることだけを確認していてもよい。`--status` を追加した後は足りない。不具合のある版でもその検証は通るからだ。open の操作と「ID 1 だけを返す」という判定を追加して実行すると、失敗が見える。製品が意図してオプション名を変えたなら、記述と検証スクリプトを同時に更新して再実行する。同じコマンドが誤ったタスクを返すなら製品を直し、期待する ID を 2 に変えて失敗を隠さない。
+
+Cursor でプロジェクト用の検証 skill を生成するには、`/create-verification-skill` にこの CLI、データ、検証スクリプトを使うよう依頼する。ローカル実行に限定し、commit と PR は行わない条件を付ける。Claude Code では `/pstack:create-verification-skill` を使う。生成された起動、doctor による環境確認、操作、証拠、クリーンアップの手順を確認し、最初から最後まで実行する。本例には常駐サーバーもデータ変更もない。永続化するアプリなら、保存結果を読み取り専用で再確認し、使い捨ての実行環境を片付ける手順も加える。
 
 ## 何を解決しようとしているか
+
+この節から「できないこと」までは、Cursor 向け pstack 0.15.15 の記録を残している。コマンド、モデルの既定値、カスタムモード、ワークフローの推奨は当時の説明であり、現在の版や別のホストで同じ機能が使えるという意味ではない。導入と最初のタスクには、前半の[ホスト別説明](#host-compatibility)と[実行手順](#first-task)を使ってほしい。
 
 README の冒頭は "if you want to go fast, go deep first" だ。速くしたいなら、まず一つのことを深くやれ、という意味になる。彼女の見立てでは、いまの agent は数合わせのコードを書きすぎていて、スループットはあっても品質がない。それは望まない、という。pstack の目標はコード行数を増やすことではなく、むしろ逆で、書く量を減らして品質を上げることだ。
 
@@ -20,13 +115,13 @@ README の冒頭は "if you want to go fast, go deep first" だ。速くした�
 
 三つ目はモデルだ。pstack は特定のモデルに縛られず、しかも多くの skill はもともとマルチモデル前提で作られている。同じ仕事を異なる系統のモデルにやらせたりレビューさせたりして、それぞれの得意分野を活かす。
 
-もう一つ、別に取り上げておきたい立場がある。pstack には「計画を書く」系の skill がない。README で彼女は、自分は先に計画を書くやり方を信じていないと書き、"the best spec is code"、つまり最良の仕様はコードだ、と言っている。どうしても計画が欲しければ `/poteto-mode` に対応する playbook はあるが、デフォルトの手順ではない。
+もう一つ、別に取り上げておきたい立場がある。0.15.15 には計画専用の skill がなかった。当時の README で彼女は、先に計画を書くやり方を信じていないと書き、"the best spec is code"、つまり最良の仕様はコードだ、と述べていた。その版の `/poteto-mode` には計画用の playbook があったが、既定の手順ではなかった。
 
 利用量については、2026 年 5 月にオープンソース化したその週に、エンジニアリングチームがこれらの skill を約 1 万回使ったと、本人が投稿で述べている。これは彼女自身の説明で、独立した集計ではない。
 
 ## インストールと 2 つの入口コマンド
 
-Cursor のチャットでプラグインを入れる：
+0.15.15 のガイドは、Cursor のチャットで使う導入コマンドを次のように示していた。
 
 ```text
 /add-plugin pstack
@@ -34,11 +129,11 @@ Cursor のチャットでプラグインを入れる：
 
 入れたあとに覚えるコマンドは 2 つだけだ。
 
-1 つ目は `/setup-pstack`。まずアカウントで実際に呼べるモデルを検出し、推論予算の大きさを尋ね（unlimited、large、medium、small の 4 段階。デフォルトは large 相当で、xhigh）、各ロールにどのモデルを使うかを一覧にして確認を求める。ロールはコードを書く役、判断と文章の役、いくつかのレビューパネルなどに分かれる。確定すると always-applied ルール（毎回のセッションに自動で読み込まれるルール）を `~/.cursor/rules/pstack-models.mdc` に書き出し、すべての skill がそれを読む。記述のないロールは skill 側のデフォルトに戻る。ロールを `auto` か `inherit-parent` にすると、そのサブエージェントはいま使っているチャットのモデルをそのまま使う。現在の README によると、デフォルトではコードの仕事は Grok に、いちばん難しい変更と文章と判断は Opus 5.5 に回り、レビューパネルはデフォルトでこの 2 系統から 1 つずつ出す。
+1 つ目は `/setup-pstack` だった。この版では利用可能なモデルを検出し、unlimited、large、medium、small の四段階の推論予算を提示していた。既定は large 相当の xhigh で、その後に各ロールのモデルを確認した。ロールはコード、判断と文章、レビューパネルに分かれ、設定は毎回読み込まれる `~/.cursor/rules/pstack-models.mdc` に保存された。未設定のロールは skill 内の既定値を使い、`auto` と `inherit-parent` はセッションモデルを使う指定だった。当時の README では、コードは Grok、最も難しい変更と文章と判断は Opus 5.5、既定のレビューパネルは両系統から一つずつという割り当てだった。
 
 setup の最後には、プロジェクトにアプリの振る舞いを証明する手段があるかも確認する。なければ、`/create-verification-skill` で生成するかを一度だけ聞いてくる。ガイドは、初めての人は素直に受け入れるよう勧めている。この一手がいちばん効くからで、詳しくは後で触れる。
 
-2 つ目は `/poteto-mode` で、タスクの最初に使う。普通に Enter を押すと、そのメッセージ 1 件にだけ効く。スラッシュメニューで選ぶときに Option+Enter（Mac）か Alt+Enter（Windows）を押すと custom mode（カスタムモード）になり、抜けるまで毎ターンコンテキストに残る。このモードは現在、Cursor の agents ウィンドウと CLI で使える。
+2 つ目は、タスクの最初に呼び出す `/poteto-mode` だった。当時のガイドでは、通常の Enter は一つのメッセージだけに適用すると説明していた。スラッシュメニューで Option+Enter（Mac）または Alt+Enter（Windows）を押すと custom mode（カスタムモード）になり、終了するまで毎ターン残るという説明だった。これは当時の Cursor agents ウィンドウと CLI についての記述だ。
 
 どの skill を使えばいいか迷ったら `/poteto-help` に聞く。質問に答え、そのまま送れる prompt を 1 つ渡し、答えの出典ファイルを示してくれる。ただし代わりに作業を始めることはしない。pstack を一回走らせるとそれなりに token を使うからだ。
 
@@ -191,6 +286,8 @@ prompt の書き方について、ガイドは 5 つの要素を挙げている�
 
 使う側にとって原則がいちばん役立つのは、軌道修正に使うときだ。呼び出す必要はなく、名前を言うだけでいい。agent が古いアダプター 3 つの上に 4 つ目を足そうとしていたら、「subtract before you add、まず古いアダプターを消して」と言う。ビルドが通ったから完了だと言ってきたら、「prove it works、本物のインポート処理を走らせて、書き込まれたレコードを見せて」と言う。それぞれの名前の裏には agent がすでに読んだ完全なルールがあるので、一言のほうが段落一つ分の指示より正確に効く。それでも agent は返答の中で、その原則がどの判断を変えたかを説明しなければならない。
 
+<div class="content-table-scroll" role="region" aria-label="グループ / 原則 / ひとことで" tabindex="0">
+
 | グループ | 原則 | ひとことで |
 | --- | --- | --- |
 | コア | `laziness-protocol` | リファクタリングや diff の大きさを考えるときは削除と最小の変更に寄せ、抽象化の層を足さない |
@@ -217,6 +314,8 @@ prompt の書き方について、ガイドは 5 つの要素を挙げている�
 | 委任 | `guard-the-context-window` | コンテキストが埋まりそうなら大量の読み込みはサブエージェントに任せ、メインには要約だけを残す |
 | 委任 | `never-block-on-the-human` | 元に戻せる仕事で「やっていいか」を聞かない。やって、結果を見せ、人にあとから直してもらう |
 | メタ | `encode-lessons-in-structure` | 同じ指示を 2 回書いたら、lint、メタデータ、ランタイムチェック、スクリプトのいずれかに変える |
+
+</div>
 
 ガイドの勧めは、この表を暗記しないことだ。一度ざっと目を通し、ある名前があれば防げたはずのことを agent がやったのを見た日に、戻ってきて引けばいい。
 
@@ -252,7 +351,7 @@ prompt の書き方について、ガイドは 5 つの要素を挙げている�
 
 **token がかかる。** サブエージェントとレビューパネルはどれも追加のコストだ。ガイドが挙げる節約法は、推論予算を下げるか安いモデルに替える、コードのロールには速いモデルを使う、パネルのリストを短くする、小さくて明白な変更には `poteto-mode` を使わない、の 4 つ。
 
-**これは彼女のスタイルだ。** デフォルトの playbook、口調、原則は一人の人間の習慣から来ている。丸ごと受け入れたくなければ、`automate-me` で自分のモードを作ればいい。デフォルトのモデルは現行バージョンに基づいており、Cursor のモデルのラインナップが変われば変わる。リポジトリには、デフォルトでは無効の自動化パック benny も同梱されている。Slack に来た問題報告を仕分けし、再現して直すためのものだ。これは 51 個の skill には数えておらず、`poteto-agent` と Comment Sicko という 2 つのサブエージェントも数に入れていない。
+**これは彼女のスタイルだ。** 既定の playbook、口調、原則は一人の習慣に基づいていた。その版には、自分のモードを作るための `automate-me` があった。ここに記録したモデルの既定値は 0.15.15 のもので、導入済みの版とは異なる場合がある。当時のリポジトリには、Slack の問題報告を仕分けし、再現して修正する、既定で無効の自動化パック benny もあった。51 個の skill には含めず、`poteto-agent` と Comment Sicko の二つのサブエージェントも含めていなかった。
 
 ## リンク
 

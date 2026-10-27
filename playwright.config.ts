@@ -8,6 +8,7 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) {
 // E2E config: serves the static build via `astro preview` and drives Chromium.
 export default defineConfig({
   testDir: './e2e',
+  outputDir: './test-results/playwright',
   fullyParallel: true,
   retries: 0,
   reporter: [['list']],

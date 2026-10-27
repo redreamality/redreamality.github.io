@@ -1,12 +1,52 @@
 ---
 title: 'スペック駆動開発（SDD）とは？オープンソースフレームワークの詳細比較：BMAD vs spec-kit vs OpenSpec vs PromptX'
 pubDate: 2025-10-21T16:12:17.943Z
-description: '本記事では、スペック駆動開発（SDD）の革新的な方法論を深く掘り下げ、4つのトレンドを設定するオープンソースプロジェクト—BMAD-METHOD、GitHubのspec-kit、OpenSpec、PromptX—の詳細な分析と戦略的比較を提供します。'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: '同じ Python の小変更で BMAD、Spec Kit、OpenSpec、PromptX を比較。必要な判断、成果物、受け入れテストと、仕様ワークフローを採用する条件を説明します。'
 author: 'Remy'
 tags: ['vibe-coding', 'sdd', 'openspec', 'spec-kit', 'bmad']
 lang: 'ja'
 translatedFrom: '-sddbmad-vs-spec-kit-vs-openspec-vs-promptx'
 ---
+
+## 同じ小変更でワークフローを選ぶ
+
+最初に、チームに必要なのが要求の整理、維持できる仕様、再利用できる役割の知識のどれかを決める。小さな関数では機能数より、そのために増える作業の違いが重要だ。この実践部分は2026年10月26日に確認した。後半の旧稿は方法の背景として残し、コミュニティの数字は過去の記録として扱う。現在の順位や選定根拠ではない。
+
+共通課題は `normalize_name(value)` の追加だ。前後の空白を除き、内部の連続空白を普通の空白一つにし、空入力には空文字列、非文字列には `TypeError` を返す。Python `str.split()` の Unicode 空白規則を使い、他の文字、大小文字、句読点を保持する。本人確認や音訳はしない。[完全な課題](/assets/jev-bmad-search-repair/small-change-task.md)、[参考実装](/assets/jev-bmad-search-repair/normalize_name.py)、[七つの受け入れテスト](/assets/jev-bmad-search-repair/test_normalize_name.py)をダウンロードできる。
+
+判断はツール選択より先に必要になる。`None` はエラーか空値か。改行しない空白も処理するか。名前の句読点を残すか。これらは観測できる動作なので、役割名に決めてもらうことはできない。合意した課題は各ツールに同じ形で渡し、一つだけ詳細な要件を与えて結果を比較しない。
+
+<div class="content-table-scroll" role="region" aria-label="ツールと現在の入口 / 本題で残す成果物 / 人が決めること / 完了の確認" tabindex="0">
+
+| ツールと現在の入口 | 本題で残す成果物 | 人が決めること | 完了の確認 |
+| --- | --- | --- | --- |
+| BMAD 6.12.4、宿主の `bmad-help` と `bmad-build` | 設定された implementation_artifacts の `spec-<slug>.md`、実装、テスト。簡略経路では計画節を省略できる | 一つの低リスク変更に限定し、入力動作を確定する | spec と七つのテストを対応させ、実際の diff とレビュー記録を読む |
+| Spec Kit、constitution、specify、plan、tasks、implement、converge | プロジェクト原則、機能の `spec.md`、`plan.md`、`tasks.md`、コード、テスト | 既存原則を適用するか。標準ライブラリと二つのコードファイルに収めるか | テストと文書間整合性を確認し、converge で未完了作業を探す |
+| OpenSpec、`/opsx:propose normalize-name`、`/opsx:apply`、`/opsx:archive` | `openspec/changes/normalize-name/` 内の proposal、design、tasks、specs と完了後の主仕様 | 新しい動作か既存動作の変更か。何を継続して維持するか | シナリオのテスト、タスクと差分の確認後にアーカイブする |
+| PromptX、適切な役割の発見と有効化 | 課題の約束、コード、テストを明示的に要求する。役割の状態は機能仕様ではない | 再利用する役割知識があり、MCP サービス導入に見合うか | 同じテストと diff を確認する。役割の有効化や記憶保存では代替できない |
+
+</div>
+
+表の根拠は [BMAD の版付きテンプレート](https://github.com/bmad-code-org/BMAD-METHOD/blob/v6.12.4/src/bmm-skills/ship/bmad-build/spec-template.md)、[Spec Kit の現在の SDD 参考](https://github.github.io/spec-kit/reference/agentic-sdd.html)、[OpenSpec 公式ワークフロー](https://github.com/Fission-AI/OpenSpec)、[PromptX 公式説明](https://github.com/Deepractice/PromptX)である。同じ課題の成果物と判断を比べており、四つのモデル実行の性能比較ではない。
+
+現在の Spec Kit README には独立した不具合修正とアイデア評価の入口もあり、先に SDD を終える必要はない。本題は機能追加なので SDD を選ぶ。Copilot の例は `/speckit-specify` のようにハイフンを使い、他の連携では `/speckit.specify` の場合もある。導入した宿主の入口を使い、チャットの指示と端末コマンドを区別する。`converge` は実装と仕様、計画、タスクの対応を確認し、不足があればタスクを追加して実装へ戻す。コードを直接修正する処理ではない。
+
+OpenSpec の既定フローは propose、apply、archive を含む。verify などの追加入口には拡張 profile が必要だ。古い画面だけでコマンド消失と判断せず、テスト前にアーカイブしない。PromptX の役割、記憶、ツールはコンテキストに使えるが、この課題の変更仕様に直接対応する統一成果物は公式説明から確認できない。表の課題文書は、今回の明示的な納品条件である。
+
+### ローカル確認で分かった範囲
+
+BMAD 6.12.4 をリポジトリ外の空ディレクトリに実際に導入し、描画スクリプトから workflow と存在する最初のステップ参照を得た。筆者作成の参考実装も次のコマンドを通り、`Ran 7 tests`、`OK` となった。
+
+```bash
+uv run --no-project python -B -m unittest -v test_normalize_name.py
+```
+
+連続空白、空入力、tab と改行、Unicode 空白、中国語の保持、不正型、繰り返しても結果が変わらない性質を確認する。四ツールとも宿主モデルは呼び出していないので、自動で課題を完了したという実測結果はなく、token、時間、成功率も比較していない。導入とファイル確認、問題切り分けは[既存 BMAD ガイド](/ja/garden/notes/bmad-method-guide/)を参照できる。
+
+チームで比較する場合、各ツールに別のディレクトリを用意し、共通課題と受け入れテストだけを置く。助手に実装と各種文書を作らせ、追加で聞かれた質問、最終ファイル、テストコマンドと終了コードを記録する。参考実装は最後に見る。先に渡すとコピーの確認になる。テスト通過後も diff を読み、依存追加、無関係な変更、例外規則の変更がないかを調べる。
+
+既に BMAD を使うチームなら小変更経路を選ぶ。既存仕様で動作を維持するなら OpenSpec、プロジェクト原則から計画とタスクを整合させるなら Spec Kit が候補になる。PromptX は再利用できる役割知識が足りないときに検討する。この関数だけのために複数エージェントや新しいプラットフォームは要らない。仕様を残す意味は次の変更で元の意図を確認できることで、Markdown の量ではない。
 
 ## **導入：「バイブコーディング」を超えて — AI駆動開発における構造の必然性**
 
@@ -54,7 +94,7 @@ translatedFrom: '-sddbmad-vs-spec-kit-vs-openspec-vs-promptx'
 * **ワークフローと機能**：
   1. **エージェント的計画**：アナリスト、PM、アーキテクトエージェントがユーザーと協力して詳細なPRDとアーキテクチャドキュメントを作成します。
   2. **コンテキストエンジニアリング開発**：スクラムマスターエージェントが計画ドキュメントを**超詳細な開発ストーリー**に変換し、すべてのコンテキスト、実装の詳細、アーキテクチャガイダンスを埋め込みます。
-* **技術実装**：Node.js v20+、JavaScript。安定版v4.x、v6-alphaは完全な書き直し[^10]。
+* **技術実装**：旧稿は v4 と初期 v6 の構成を扱っていた。2026年10月26日に確認した公開版は 6.12.4 であり、現在の小変更の入口は前半を参照する。v6 全体を alpha とは扱わない。
 * **コミュニティと成熟度**：19.1k ⭐、2.8k 🍴、アクティブなDiscord[^10]。
 
 ### **2.2. GitHubのspec-kit：実用的なエンタープライズツールキット**
@@ -94,6 +134,8 @@ translatedFrom: '-sddbmad-vs-spec-kit-vs-openspec-vs-promptx'
 
 ### **3.1. 並列比較：4つのツール、4つの哲学**
 
+<div class="content-table-scroll" role="region" aria-label="次元 / BMAD-METHOD / spec-kit / OpenSpec / PromptX" tabindex="0">
+
 | 次元 | BMAD-METHOD | spec-kit | OpenSpec | PromptX |
 | :---- | :---- | :---- | :---- | :---- |
 | **コア哲学** | **エージェント的アジャイル**：AIチームが人間のロールをシミュレートして深いコンテキストを実現[^10]。 | **実行可能な仕様**：ゲート制御された、検証可能で、再現可能なフロー[^4]。 | **軽量な変更管理**：反復的なブラウンフィールド作業のための監査可能性[^12]。 | **会話的**：ロール駆動の専門家、技術的インタラクションを抽象化[^13]。 |
@@ -103,6 +145,8 @@ translatedFrom: '-sddbmad-vs-spec-kit-vs-openspec-vs-promptx'
 | **理想的なユースケース** | 深いドメイン計画が必要な複雑なグリーンフィールド、非技術領域（例：クリエイティブライティング）。 | 新しいエンタープライズプロジェクト、厳密さが重要な既存システムの大規模で明確に定義された機能。 | 高い監査ニーズを持つ成熟した複雑なコードベースでの継続的で反復的な変更。 | 現在のAIアシスタントに満足しているが、より深いカスタムコンテキストが必要なチーム。 |
 | **SDD成熟度ターゲット** | **スペックアンカード**を対象、**スペックアズソース**の可能性あり。 | 主に**スペックアンカード**。 | 主に**スペックアンカード**、アンカリングプロセスに執着。 | **スペックファースト**と**スペックアンカード**ワークフローを強化するメタツール。 |
 | **コミュニティと成熟度** | 非常に高い（19.1k ⭐）[^10]。 | 非常に高い（39.3k ⭐）[^8]。 | 高い（4.1k ⭐）[^12]。 | 中程度（3k ⭐）[^13]。 |
+
+</div>
 
 ### **3.2. 導入フレームワーク：適材適所**
 

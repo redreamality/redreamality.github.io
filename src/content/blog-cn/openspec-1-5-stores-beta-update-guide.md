@@ -1,14 +1,138 @@
 ---
-title: 'OpenSpec 1.5 更新详解：Stores Beta、Explore-first 工作流与团队级规格协作'
+title: 'OpenSpec Stores 多仓库实战：配置、共享规范与同步排错'
 pubDate: 2026-07-02T01:30:00.000Z
-description: '基于 OpenSpec 1.5.0 源码与官方文档，详细介绍 Stores Beta、/opsx:explore 工作流、既有项目引入方式、AI 工具适配修复，以及从单仓库规范到团队级规格协作层的产品方向。'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: '用 OpenSpec Stores 连接两个代码仓库，配置共享规范引用和本地任务，处理 Git 同步、根目录选择与冲突，并区分 1.15.0 发布版和 Beta 功能边界。'
 author: 'Remy'
 tags: ['openspec', 'sdd', 'ai-coding', 'stores', 'ai-agents', 'cli', '规范驱动开发']
 lang: 'zh'
 translatedFrom: 'openspec-1-5-stores-beta-update-guide'
 ---
 
-OpenSpec 近期最重要的变化不是某个单点命令，而是一次组织模型升级：它正在从“给单个仓库生成 spec workflow 的轻量 CLI”，向“可以被多个项目、多个团队、多个 AI agent 共享的规格协作层”演进。
+## 在两个代码仓库中使用 Stores
+
+2026 年 10 月 26 日更新：**npm `latest` 已发布 1.15.0，其中包含 Stores，但 Stores 功能仍标为 Beta。** npm 的 `beta` 标签目前指向更早的 `1.6.0-beta.1`，不要因为功能叫 Stores Beta 就安装该标签。下面的命令使用 1.15.0 发布包，不依赖尚未发布的 `main`。
+
+Store 让 API 仓库和 Web 仓库读取同一份规范，同时各自维护实现变更。它不会把任务分发给不同仓库，不授予文件权限，也不自动同步 Git。我建议把需要独立测试和评审的组件任务留在本地；只有团队确实希望共用一套规划生命周期时，才把默认规划位置指向外部 Store。
+
+这些行为以[官方 1.15.0 Stores 指南](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/stores-beta/user-guide.md)和[CLI 参考](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/cli.md)为准。安装或 PATH 有问题，先看[CLI 安装教程](/cn/blog/openspec-tutorial-cli-commands-agents-md-examples/)。原有 1.5 版本分析保留在后文，章节链接不变。
+
+<a id="multi-repo-practice"></a>
+
+### 建立共享契约和两个本地变更
+
+先进入一个练习目录，下面会在其中创建同级的 `team-contracts`、`checkout-api` 和 `checkout-web`。终端命令假定已安装 1.15.0；尚未全局安装时，把 `openspec` 换成 `pnpm dlx @fission-ai/openspec@1.15.0`：
+
+```bash
+openspec --version
+openspec store setup team-contracts --path ./team-contracts --no-init-git --json
+git init checkout-api
+git init checkout-web
+```
+
+`--no-init-git` 让练习 Store 不自动初始化 Git 或创建提交。setup 会生成 `.openspec-store/store.yaml`、OpenSpec 根目录和本机注册，不会创建或发布远程仓库。实际团队默认使用私有仓库保存共享规范，除非明确希望公开。
+
+创建 `team-contracts/openspec/specs/promotion/spec.md`，写入完整练习契约：
+
+```markdown
+## Purpose
+Define the shared response used by the checkout API and web client.
+
+## Requirements
+
+### Requirement: Promotion eligibility
+The API SHALL return an eligible boolean and a reason string for a promotion.
+
+#### Scenario: Ineligible promotion
+- **WHEN** the promotion cannot be used
+- **THEN** eligible is false and reason explains why
+```
+
+这份契约要求 API 返回 `eligible` 布尔值和 `reason` 字符串，优惠不可用时返回 false 并说明原因。示例从已接受的练习规范起步；生产项目应先评审契约提案，再把它视为已接受的行为。验证文件并初始化两个组件：
+
+```bash
+openspec validate promotion --type spec --store team-contracts --strict --json --no-interactive
+cd checkout-api
+openspec init . --tools none
+cd ../checkout-web
+openspec init . --tools none
+```
+
+在两个代码仓库的 `openspec/config.yaml` 中合并以下字段，保留已有 context 和 rules：
+
+```yaml
+schema: spec-driven
+references:
+  - team-contracts
+```
+
+进入各自目录创建组件任务：
+
+```bash
+cd ../checkout-api
+openspec new change implement-promotion-api
+openspec instructions proposal --change implement-promotion-api --json
+openspec context --json
+cd ../checkout-web
+openspec new change implement-promotion-ui
+openspec instructions proposal --change implement-promotion-ui --json
+openspec context --json
+openspec show promotion --type spec --store team-contracts
+```
+
+继续之前检查返回的 `root.path`，它必须是当前组件仓库。`references` 数组应包含 `promotion` 和带 `--store team-contracts` 的读取命令。两个变更目录分别位于组件自己的 `openspec/changes/`，不能出现在 Store 中。这些检查证明文件位置和引用关系正确，不证明 API 或界面已经实现。
+
+各组件 proposal 应引用 `promotion`，并记录采用的 Store 提交。API 任务定义响应行为及测试；UI 任务定义用户如何看到 `eligible: false` 和 `reason`。然后补齐各自 design 与规范增量，验证格式，运行应用测试，再评审和归档。[首个变更教程](/cn/blog/openspec-tutorial-cli-commands-agents-md-examples/)提供完整产物格式。
+
+需要修改共享契约本身时，显式选择 Store：
+
+```bash
+openspec new change revise-promotion-contract --store team-contracts
+openspec status --change revise-promotion-contract --store team-contracts --json
+```
+
+引用索引只包含 `openspec/specs/` 中的主规范，不包含 Store 内尚未归档的活跃变更。实施必须跟随未完成契约时，等变更产物存在后，用 `openspec show revise-promotion-contract --store team-contracts` 显式读取，并关联 Store 分支和两个组件的评审。workset 可以把目录一起打开供编辑器读取，但不会给 agent 分派组件任务。
+
+### 用 Git 共享和同步契约
+
+真实协作时，通过正常 Git 流程初始化并提交 Store，再添加实际的私有远端。其他成员克隆后运行 `openspec store register <local-path> --id team-contracts`。每台机器都需要注册；`remote:` 声明只是提供克隆指引，不会自动下载仓库。
+
+读取共享契约前先检查检出状态。以下命令要求 Store 已有 Git 仓库、`origin` 和上游跟踪分支：
+
+```bash
+git -C team-contracts status --short
+git -C team-contracts fetch origin
+git -C team-contracts log --oneline HEAD..@{upstream}
+git -C team-contracts pull --ff-only
+git -C team-contracts rev-parse HEAD
+openspec doctor --store team-contracts --json
+```
+
+这段使用 Bash 语法；PowerShell 中把范围写成 `'HEAD..@{upstream}'`。工作区已有修改时，先按团队分支流程处理，再拉取。无法快进时，检查两边提交，明确选择合并或变基；不要为清掉冲突直接覆盖另一边规范。把最终 Store 提交记入两个组件 proposal，评审者才能核对同一版契约。
+
+`doctor` 只能看到本地已取得的 Git 信息，不访问远端、不同步文件，也不修复问题。检出目录过旧，引用摘要就会过旧。`/opsx:sync` 是把规范增量合并到主规范，不是 Git 同步命令。
+
+### 排查引用缺失和写错目录
+
+<div class="content-table-scroll" role="region" aria-label="现象 / 检查与处理" tabindex="0">
+
+| 现象 | 检查与处理 |
+| --- | --- |
+| 找不到引用 | 在组件中运行 `openspec doctor --json`，按需克隆，再注册实际目录 |
+| 同一 Store ID 对应另一个目录 | 每台机器每个 ID 只对应一个检出目录；核对两边路径后，再 unregister 并注册目标目录 |
+| 组件变更写进 Store | 检查显式 `--store`、配置中的 `store:` 和全局 `defaultStore`；独立组件任务使用本地根目录加 `references` |
+| 引用仍是旧内容 | 核对 Store 分支和提交，取得并评审 Git 更新，再运行 instructions |
+| 引用缺失但退出码为 0 | 检查 `references[].status`，`doctor` 不会因健康检查发现问题就返回失败 |
+
+</div>
+
+1.15.0 的选择顺序是显式 `--store`、最近的真实规划根目录、项目 `store:` 指针、全局 `defaultStore`。都不适用时，有已注册 Store 就要求明确选择，没有注册则保持当前目录的传统行为。引用不会选择写入位置。
+
+[可下载的检查脚本](/assets/openspec-search-repair/check-examples.mjs)在临时目录创建本例，并通过 `XDG_DATA_HOME`、`XDG_CONFIG_HOME` 隔离注册表。准备 Node.js、pnpm 和 Git 后运行 `node check-examples.mjs`；Windows 把 pnpm 的 `bin/pnpm.cjs` 完整路径作为第一个参数。可选第二个参数指向本站检出目录，额外重放三语教程片段。脚本不调用模型，也不访问 Git 远端。
+
+## 1.5 版本的历史背景
+
+OpenSpec 1.5 引入了把共享规划放到代码仓库外的 Stores。以下章节保留该版本的设计与工具适配分析；当前配置和根目录选择以开头的固定版本练习为准。
 
 如果只看一个关键词，就是 **Stores**。如果只看一条工作流，就是：
 
@@ -16,9 +140,9 @@ OpenSpec 近期最重要的变化不是某个单点命令，而是一次组织�
 explore → propose → apply → archive
 ```
 
-本文基于 `Fission-AI/OpenSpec` 的 `v1.5.0` 源码、`CHANGELOG`、`docs/cli.md`、`docs/commands.md`、`docs/explore.md`、`docs/existing-projects.md` 以及相关命令实现，整理这次更新的含义、使用方式和工程上的注意点。
+历史章节依据[1.5.0 更新记录](https://github.com/Fission-AI/OpenSpec/blob/v1.5.0/CHANGELOG.md)及该标签下的 CLI、命令、探索和既有项目文档，解释引入 Stores 的原因及工具适配修复对团队的影响。
 
-如果你还不熟悉 OpenSpec 的基础用法，可以先读这篇教程：[OpenSpec 教程：CLI 安装、命令、AGENTS.md 与实战示例](/blog/openspec-tutorial-cli-commands-agents-md-examples/)。本文不重复基础安装，而是聚焦 1.5 之后的新能力和实际落地方式。
+如果你还不熟悉 OpenSpec 的基础用法，可以先读这篇教程：[OpenSpec 教程：CLI 安装、命令、AGENTS.md 与实战示例](/cn/blog/openspec-tutorial-cli-commands-agents-md-examples/)。后文解释 1.5 引入这些能力的背景。
 
 ## 一句话总结
 
@@ -33,7 +157,7 @@ OpenSpec 1.5 的主线是：**用 Stores Beta 把 specs、changes 和 planning c
 
 ## OpenSpec 1.5.0：Stores Beta 是核心变化
 
-`@fission-ai/openspec` 当前发布版本为 `1.5.0`，npm 包描述是：
+这里回顾的历史版本是 `@fission-ai/openspec@1.5.0`，npm 包描述是：
 
 > AI-native system for spec-driven development
 
@@ -191,12 +315,13 @@ OpenSpec 1.5 之后，很多命令都需要先回答一个问题：**当前命�
 
 文档中提到，`list`、`show`、`validate`、`status`、`instructions`、`new change`、`archive`、`doctor`、`context` 等命令都会解析一个 root。
 
-一般优先级可以理解为：
+当前 1.15.0 的优先级是：
 
 1. 显式 `--store <id>`；
 2. 当前 repo 的本地 OpenSpec root；
 3. `openspec/config.yaml` 中声明的默认 `store:`；
-4. 失败时输出诊断。
+4. 全局配置的 `defaultStore`；
+5. 都不适用时，有已注册 Store 就提示选择；没有则使用当前目录。
 
 这对 AI agent 很关键。过去 agent 很容易在错误的目录下执行命令，或者把当前 repo 的 `openspec/` 和外部 workspace 状态混在一起。现在 JSON 输出和错误诊断会携带 root/store 信息，让 agent 更容易判断“我到底在改哪里”。
 
@@ -227,7 +352,7 @@ references:
 openspec show <spec-id> --type spec --store team-context
 ```
 
-需要注意：**references 是只读上下文**。它不会改变命令实际写入的位置。当前 repo 的工作仍写在当前 root；如果要写入 Store，必须显式使用 `--store <id>`。
+`references` 提供只读上下文，不改变命令的写入位置。在这个已有本地规划根目录的例子里，工作仍写在当前仓库；需要修改引用 Store 时，显式使用 `--store <id>`。
 
 这个设计很重要：它避免了“引用上下文”和“生命周期归属”混在一起。一个 change 仍属于一个 root，reference 只是帮助 agent 理解背景。
 
@@ -299,8 +424,8 @@ OpenSpec 文档反复强调一个容易混淆的点：
 
 ```bash
 # terminal
-npx -y @fission-ai/openspec@latest init .
-npx -y @fission-ai/openspec@latest update
+pnpm dlx @fission-ai/openspec@1.15.0 init .
+pnpm dlx @fission-ai/openspec@1.15.0 update
 ```
 
 然后在 AI 工具中：
@@ -440,7 +565,7 @@ references:
 ```bash
 openspec doctor --json
 openspec context --json
-openspec instructions --change add-billing-api --json
+openspec instructions proposal --change add-billing-api --json
 ```
 
 AI 聊天中：
@@ -458,7 +583,7 @@ AI 聊天中：
 openspec new change update-billing-contract --store team-context
 ```
 
-然后让 AI agent 基于这个 change 继续生成 artifacts。
+上面的本地 instructions 命令要求当前仓库已经存在 `add-billing-api`。变更归 Store 所有时，后续工作流命令继续带 `--store team-context`。setup 和 instructions 都不会创建应用代码。
 
 ## 对 OpenSpec 产品方向的判断
 

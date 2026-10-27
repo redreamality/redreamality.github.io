@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 
 const locales = [
   {
-    folder: 'en', prefix: '', title: 'Claude Agent SDK (Python) Learning Guide',
+    folder: 'en', prefix: '', title: 'Claude Agent SDK Python: lifecycle, cancellation and timeouts',
     headings: [
       'Installation and Version Check', 'Query and Message Types',
       'ClaudeSDKClient Lifecycle and Cleanup', 'Hooks and Permission Decisions',
@@ -17,7 +17,7 @@ const locales = [
     table: 'Timeout layers comparison',
   },
   {
-    folder: 'cn', prefix: '/cn', title: 'Claude Agent SDK (Python) 学习指南',
+    folder: 'cn', prefix: '/cn', title: 'Claude Agent SDK Python：生命周期、取消与超时排障',
     headings: [
       '安装与版本检查', 'Query 与消息类型', 'ClaudeSDKClient 生命周期与清理',
       'Hooks 与权限决定', '模块级 Query 的流式 Hooks', '不同层次的超时',
@@ -28,7 +28,7 @@ const locales = [
     table: '超时层次对照表',
   },
   {
-    folder: 'ja', prefix: '/ja', title: 'Claude Agent SDK (Python) 学習ガイド',
+    folder: 'ja', prefix: '/ja', title: 'Claude Agent SDK Python：ライフサイクル、キャンセル、タイムアウト',
     headings: [
       'インストールとバージョン確認', 'Query とメッセージ型',
       'ClaudeSDKClient のライフサイクルと後処理', 'Hooks と権限判断',
@@ -54,6 +54,7 @@ from claude_agent_sdk import Transport
 
 for package, expected in [
     ("claude-agent-sdk", "0.1.3"), ("mcp", "1.18.0"), ("anyio", "4.11.0"),
+    ("pydantic", "2.11.7"),
 ]:
     assert version(package) == expected, (package, version(package))
 
@@ -192,7 +193,7 @@ test('SDK cleanup completes under external cancellation with the pinned runtime'
     : execFileSync('uv', [
       'run', '--no-project', '--python', '3.12',
       '--with', 'claude-agent-sdk==0.1.3', '--with', 'mcp==1.18.0',
-      '--with', 'anyio==4.11.0', 'python', ...args,
+      '--with', 'anyio==4.11.0', '--with', 'pydantic==2.11.7', 'python', ...args,
     ], { encoding: 'utf8', timeout: 90_000 });
   for (const { folder } of locales) {
     expect(output).toContain(`PASS cleanup completed and cancellation preserved: blog-${folder}`);
@@ -280,7 +281,7 @@ for (const locale of locales) {
     await expect(mcp).toContainText('allowed_tools=["mcp__math__calculate_sum"]');
     await expect(mcp).toContainText('await calculate_sum.handler({"a": 15.0, "b": 27.0})');
     await expect(blocks.filter({ hasText: 'uv pip install' }))
-      .toContainText('"claude-agent-sdk==0.1.3" "mcp==1.18.0" "anyio==4.11.0"');
+      .toContainText('"claude-agent-sdk==0.1.3" "mcp==1.18.0" "anyio==4.11.0" "pydantic==2.11.7"');
     expect((await blocks.allTextContents()).join('\n'))
       .not.toMatch(/AsyncClaudeSDKClient|@client\.hook|HookMatcher\([^)]*timeout=/);
     const targets = await article.locator('a[href*="to="]').evaluateAll((links) =>

@@ -1,6 +1,6 @@
 ---
 title: "BMAD Method入門：インストール、最初のワークフロー、成果物の確認"
-description: "公開版BMAD Method 6.12.0の導入、bmad-help、bmad-build、実際のディレクトリを解説。小さな変更の進め方と、役割の指示が権限制御ではないことを説明します。"
+description: "BMAD 6.12.4 の隔離インストールとスキル描画を確認。小変更のダウンロード例、七つの受け入れテスト、導入後の問題切り分けと 6.12.0 の版別説明を提供します。"
 date: 2026-01-10
 source: "https://github.com/bmad-code-org/BMAD-METHOD"
 tags: ["ai-development", "アジャイル開発", "bmad", "sdd", "マルチエージェントシステム"]
@@ -11,6 +11,50 @@ translatedFrom: "bmad-method-guide"
 **BMAD Method は、AI コーディングアシスタントが明確な要件、計画、レビューに沿って作業するためのオープンソースの手法とツールです。** [公式リポジトリ](https://github.com/bmad-code-org/BMAD-METHOD)はインストーラーとスキル定義を提供します。製品、アーキテクチャ、開発などの役割から、異なる観点で問題を検討できます。判断を残し、段階的に進める変更に適していますが、役割名そのものはファイル権限を分離しません。
 
 最初は結果を確認しやすい小さなワークフローを完了し、それから計画の範囲を広げます。本記事は npm 公開版 **bmad-method 6.12.0** を **2026-09-25 UTC** に確認したものです。インストールとローカルのスキル描画はリポジトリ外の空ディレクトリで検証しました。実際のモデル、有料サービス、以下の例の機能実装は実行していません。
+
+## インストールから検証できる小変更へ
+
+2026年10月26日の追加確認では npm の `latest` は **6.12.4** だった。リポジトリ外の新しい空ディレクトリに BMM と Claude Code 連携を導入し、29 個のスキル入口と読み取り可能な build workflow を確認した。後半の旧節は 6.12.0 の記録として残している。九月のタグを現在の最新版として使わない。
+
+```bash
+pnpm dlx bmad-method@6.12.4 install --directory . --modules bmm --tools claude-code --yes
+```
+
+既存製品のリポジトリではなく、新しい練習用ディレクトリへ移動して実行する。導入後は `.claude/skills/bmad-build/SKILL.md` を読み、実際の絶対パスで描画スクリプトを実行する。今回確認したコマンドの形は次のとおり。
+
+```bash
+uv run --no-cache "<practice>/_bmad/scripts/render_skill.py" --project-root "<practice>" --skill "<practice>/.claude/skills/bmad-build"
+```
+
+成功すると `_bmad/render/bmad-build/.../workflow.md` の場所が返る。そのファイルが参照する `step-01-clarify-and-route.md` も存在した。確認できるのはワークフローを読み込めることまでで、モデルによる要件整理、実装、レビューの完了ではない。
+
+小変更には[共通タスクと受け入れ条件](/assets/jev-bmad-search-repair/small-change-task.md)を使う。表示名の空白を正規化する関数を追加する課題だ。同じディレクトリで開いた助手に `/bmad-build` と課題を渡す。Python の Unicode 空白規則を使い、空文字列は空のまま返し、非文字列には `TypeError` を送出する。本人確認や音訳は対象外である。この指定で `None` の文字列化や ASCII 空白だけの処理を防ぐ。
+
+[受け入れテスト](/assets/jev-bmad-search-repair/test_normalize_name.py)を用意し、助手が `normalize_name.py` を生成したら実行する。
+
+```bash
+uv run --no-project python -B -m unittest -v test_normalize_name.py
+```
+
+七つのテストは前後と連続した空白、空入力、改行と tab、Unicode 空白、中国語の文字保持、不正な型、冪等性を確認する。[筆者が作成した参考実装](/assets/jev-bmad-search-repair/normalize_name.py)もあり、今回の実行では `Ran 7 tests` と `OK` を得た。これは参考実装の検証で、BMAD モデルの実行結果ではない。助手を評価するときは先に課題とテストだけを渡し、完了後に参考実装と比較する。
+
+助手が実際に保存した `spec-<slug>.md` を読み、各入力の振る舞いをコードとテスト結果に対応させる。6.12.4 のテンプレートには意図、状態、実装記録、レビュー記録があり、簡略経路では一部の計画節が省かれる。`done` と書いたファイルを手で置いてもワークフロー実行にはならず、チェック済みタスクだけでも動作は証明できない。
+
+導入後の問題は次の順で切り分けられる。
+
+<div class="content-table-scroll" role="region" aria-label="症状 / 次に確認すること" tabindex="0">
+
+| 症状 | 次に確認すること |
+| --- | --- |
+| チャットに `bmad-build` がない | 宿主の起動場所と `.claude/skills/bmad-build/SKILL.md` を確認し、開き直す |
+| 導入成功後に描画が失敗する | `uv --version`、実際のパス、スクリプトのエラーを確認する。モデル段階には入っていない |
+| workflow はあるが spec やコードがない | チャットでスキルを呼び出したか、モデルサービスを利用できるかを確認する |
+| テストモジュールがない | 実装を完了または修正する。導入成功を機能完成と扱わない |
+| Unicode や不正型のテストが失敗する | 失敗ケースを削除せず、課題の振る舞いに戻って修正する |
+
+</div>
+
+根拠は [6.12.4 build 入口](https://github.com/bmad-code-org/BMAD-METHOD/blob/v6.12.4/src/bmm-skills/ship/bmad-build/SKILL.md)、[spec テンプレート](https://github.com/bmad-code-org/BMAD-METHOD/blob/v6.12.4/src/bmm-skills/ship/bmad-build/spec-template.md)、実際の導入ファイルである。宿主モデルは起動していない。同じ課題での選択は [SDD 比較](/ja/blog/-sddbmad-vs-spec-kit-vs-openspec-vs-promptx/)にまとめた。
 
 ## インストールするバージョン
 

@@ -1,7 +1,8 @@
 ---
-title: 'Claude Agent SDK (Python) Learning Guide'
+title: 'Claude Agent SDK Python: lifecycle, cancellation and timeouts'
 pubDate: 2025-10-17T00:00:00.000Z
-description: 'A version-pinned Python guide to query(), ClaudeSDKClient lifecycle, hooks, MCP tools, timeouts and cleanup, with runnable examples and offline verification boundaries.'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: 'Diagnose ClaudeSDKClient hangs, cancellation and cleanup. Runnable Python SDK 0.1.3 examples, offline checks and explicit boundaries against current timeout APIs.'
 author: 'Remy'
 tags: ['claude-code', 'vibe-coding', 'python']
 ---
@@ -14,11 +15,23 @@ The examples below separate local checks from requests that contact a model. The
 
 ## Installation and Version Check
 
+If you arrived with an error, start with the matching section:
+
+- A call returns `None`, or text arrives without completion: [query and message types](#query-and-message-types).
+- Cancellation raises a scope error, or shutdown stalls: [client lifecycle and cleanup](#claudesdkclient-lifecycle-and-cleanup).
+- A turn hangs, or `timeout=` raises `TypeError`: [timeouts at different layers](#timeouts-at-different-layers).
+- A hook never fires: [hooks and permission decisions](#hooks-and-permission-decisions), then [streaming input](#module-query-with-streaming-hooks).
+- The CLI fails to connect: [troubleshooting and verification boundaries](#troubleshooting-and-verification-boundaries).
+
+The [current Python reference](https://code.claude.com/docs/en/agent-sdk/python) includes `HookMatcher.timeout` in seconds; the 0.1.3 baseline below does not. Current `API_TIMEOUT_MS` limits waiting for response headers on each request attempt, not the whole streaming turn. Neither setting is a replacement for an application deadline and cleanup policy. Check the installed version before copying a current parameter into this historical example.
+
+[Download the offline version and signature check](/assets/tutorial-search-repair/sdk_offline_check.py). Run `uv run --python 3.12 sdk_offline_check.py`; its embedded dependency pins create an isolated script environment. The last line should be `PASS imports and signatures; no CLI or model was started`. Initial package resolution can access the package registry; the check itself never starts Claude Code or contacts a model.
+
 The [v0.1.3 README](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/README.md) specifies Python 3.10+, Node.js and Claude Code 2.0.0+. That is the release's historical prerequisite, not proof that every later CLI works with this old SDK. Install the Python package in a disposable directory with [uv](https://docs.astral.sh/uv/pip/environments/), which manages virtual environments and Python packages:
 
 ```bash
 uv venv --python 3.12 .venv
-uv pip install --python .venv "claude-agent-sdk==0.1.3" "mcp==1.18.0" "anyio==4.11.0"
+uv pip install --python .venv "claude-agent-sdk==0.1.3" "mcp==1.18.0" "anyio==4.11.0" "pydantic==2.11.7"
 ```
 
 On Windows run the following files with `.venv\Scripts\python.exe`; on macOS or Linux use `.venv/bin/python`. These explicit paths avoid accidentally using a globally installed SDK. Do not activate several environments and infer the version from whichever `python` happens to resolve first.
@@ -53,6 +66,8 @@ if __name__ == "__main__":
 Expected local output is `SDK 0.1.3: imports and signatures OK`. This establishes imports and selected signatures, not network connectivity, model access or tool permissions. Package metadata is a clearer version check than assuming every package exposes a particular module attribute.
 
 The MCP and AnyIO pins are intentional. Installing only SDK 0.1.3 in the verification environment resolved MCP 2.2.0; creating an SDK MCP server then failed because `Server.list_tools` was absent. The local examples use MCP 1.18.0 and AnyIO 4.11.0 instead. A successful package installation is not a compatibility test. These historical pins reproduce the tutorial, not a security or support recommendation for a new service.
+
+If importing the SDK fails with `cannot import name 'eval_type_backport'`, the model has not been contacted. [MCP 1.18.0 imports this Pydantic internal helper](https://github.com/modelcontextprotocol/python-sdk/blob/v1.18.0/src/mcp/server/fastmcp/utilities/func_metadata.py); newer Pydantic releases can remove it. Pinning Pydantic to 2.11.7 restores the historical combination tested here. The three-language cleanup fixture passed with that pin on October 26, 2026. This dependency repair does not require changing `run_turns()`.
 
 Before a live run, record `claude --version` and its resolved executable alongside the Python dependency versions. Follow the [official authentication guidance](https://code.claude.com/docs/en/agent-sdk/overview) for your environment; do not place credentials in the script or a committed shell profile. No credentials need to be inspected for the local tests in this article. If the CLI is absent, stop at local validation rather than installing an unrelated package named `claude`.
 

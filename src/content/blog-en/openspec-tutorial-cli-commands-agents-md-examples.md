@@ -1,12 +1,98 @@
 ---
 title: 'OpenSpec Tutorial: Install the CLI and Run Your First Change'
 pubDate: 2026-06-16T08:15:00.000Z
-description: 'Install and initialize OpenSpec, create your first change, validate specs, and archive completed work with CLI examples for Agents.md workflows.'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: 'Install OpenSpec on Windows, macOS, or Linux, fix PATH conflicts, look up CLI commands, and validate your first change with version-pinned examples.'
 author: 'Remy'
 tags: ['openspec', 'sdd', 'ai-coding', 'agents.md', 'cli']
 ---
 
+## Install OpenSpec on Windows, macOS, or Linux
+
+Updated October 26, 2026. The published npm `latest` is **1.15.0**. The standalone program needs no Node.js; the npm package needs Node.js **20.19.0+**. Choose one installation method. The [official installation guide](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/installation.md) covers the supported platforms.
+
+For Windows PowerShell, the official standalone installer is:
+
+```powershell
+irm https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/scripts/binary/install.ps1 | iex
+```
+
+For macOS or Linux:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/scripts/binary/install.sh | sh
+```
+
+These commands execute the official installer from `main`. It selects a release binary and checks its SHA256SUMS; it does not compile `main`. To pin the binary, set `OPENSPEC_VERSION=v1.15.0` in that shell first. The Windows destination is `%LOCALAPPDATA%\Programs\openspec`; macOS and Linux use `~/.local/bin`. Windows adds the directory to the user PATH. Open a new terminal after installation.
+
+If you already use Node.js and pnpm, install the published package instead:
+
+```bash
+node --version
+pnpm add -g @fission-ai/openspec@1.15.0
+openspec --version
+```
+
+The last command should print `1.15.0` for this pin. Without a global installation, use `pnpm dlx @fission-ai/openspec@1.15.0 --version`. A successful `dlx` call does not make the bare `openspec` command available.
+
+### Fix a missing command or an unexpected version
+
+On Windows, check every matching executable, then try the standalone file directly:
+
+```powershell
+Get-Command openspec -All
+where.exe openspec
+& "$env:LOCALAPPDATA\Programs\openspec\openspec.exe" --version
+```
+
+If the direct path works but the bare command does not, reopen the terminal and check the user PATH. If the bare command prints an older version, an earlier PATH entry or shell alias is selecting another copy. For pnpm, `pnpm bin -g` identifies its global executable directory. A missing global-bin error concerns pnpm setup; use `dlx` for the exercise while resolving that setup.
+
+On macOS or Linux:
+
+```bash
+command -v openspec
+which -a openspec
+"$HOME/.local/bin/openspec" --version
+```
+
+If necessary, add the actual installation directory to your shell's PATH. With nvm or fnm, check the active Node version before reinstalling a global package. A version-manager shim may need refreshing. Do not remove an executable until you know which installation owns it.
+
+### Upgrade or uninstall the installation you chose
+
+`openspec version --check` reports update availability. Upgrade a pnpm installation with `pnpm add -g @fission-ai/openspec@latest`, then run `openspec update` inside each project to refresh its generated integrations. Review the resulting diff. `update` is not the same operation as choosing a new package version.
+
+For standalone installations, rerun the installer. `openspec install` explicitly switches an existing package-manager installation to standalone and prints removal guidance for the old copy. Verify the selected executable in a new terminal afterward.
+
+To uninstall a pnpm copy, use `pnpm remove -g @fission-ai/openspec`. For standalone, remove only the executable at the verified installation path and its PATH entry. There is no `openspec uninstall` command. Keep `openspec/specs/` and `openspec/changes/archive/` if you need their history; removing the CLI does not require deleting project documents.
+
+## Find the CLI command for your task
+
+These are terminal commands for 1.15.0. Run them in the intended project; replace the bare `openspec` prefix with `pnpm dlx @fission-ai/openspec@1.15.0` if you did not install globally.
+
+<div class="content-table-scroll" role="region" aria-label="Task / Command / What to inspect" tabindex="0">
+
+| Task | Command | What to inspect |
+| --- | --- | --- |
+| Check the version | `openspec --version` | Installed version |
+| Look up flags | `openspec new change --help` | Options for this installed version |
+| Initialize without agent files | `openspec init . --tools none` | `openspec/` structure and config |
+| Create a change | `openspec new change add-magic-link-login` | Change directory, not a finished proposal |
+| List changes | `openspec list --json` | Active changes |
+| Check artifact readiness | `openspec status --change add-magic-link-login --json` | Artifact state, not application test results |
+| Get proposal instructions | `openspec instructions proposal --change add-magic-link-login --json` | Template and dependencies |
+| Validate the delta | `openspec validate add-magic-link-login --strict --json --no-interactive` | Validation findings and exit status |
+| Inspect a spec | `openspec show auth --type spec` | Main specification |
+| Archive reviewed work | `openspec archive add-magic-link-login` | Archive location and main-spec updates |
+
+</div>
+
+`/opsx:propose` and `/opsx:apply` belong in an assistant chat, not PowerShell or Bash. Invocation spelling depends on the integration; Codex uses skills such as `$openspec-propose`. Use the files generated for your tool rather than assuming every host accepts the same slash command. See the [1.15.0 CLI reference](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/cli.md).
+
+For shared specifications across code repositories, use the [Stores and multi-repo workflow](/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice). Stores ship in 1.15.0 but remain Beta. The npm `beta` tag is a separate distribution tag, not a requirement for using Stores.
+
 ## OpenSpec Quick Start
+
+The following exercise deliberately keeps its **1.13.2** pin. It gives existing readers a reproducible workflow without silently changing their commands. The same proposal, delta, design, and task snippets are also checked against 1.15.0. The [downloadable CLI check script](/assets/openspec-search-repair/check-examples.mjs) exercises local file operations without an AI model; installation scripts and agent implementation are separate steps.
 
 This tutorial covers the OpenSpec CLI workflow: initialize a repository, create a change, write its proposal and specifications, then validate and archive the completed work. The examples use the published **1.13.2** package, Node.js **20.19.0+**, and pnpm. Validation was checked with Node.js 26.7.0 and pnpm 10.28.2 in an empty directory, without model calls. Start in a new practice directory outside your application:
 
@@ -438,6 +524,8 @@ The delta's `## Purpose` supplies the purpose when this new capability is create
 
 ## OpenSpec command cheat sheet
 
+<div class="content-table-scroll" role="region" aria-label="Task / Command" tabindex="0">
+
 | Task | Command |
 |---|---|
 | Show CLI help | `openspec --help` |
@@ -453,6 +541,8 @@ The delta's `## Purpose` supplies the purpose when this new capability is create
 | Archive completed change | `openspec archive <name>` |
 | Archive without prompts | `openspec archive <name> --yes` |
 | Update instruction files | `openspec update .` |
+
+</div>
 
 ## Best practices for OpenSpec
 

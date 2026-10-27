@@ -1,14 +1,100 @@
 ---
 title: 'OpenSpecチュートリアル：CLIの導入、コマンド、AGENTS.md、実践例'
 pubDate: 2026-06-16T08:15:00.000Z
-description: 'AIネイティブなspec-driven developmentのための実践的なOpenSpecチュートリアル。CLIの導入、プロジェクト初期化、変更作成、仕様検証、AGENTS.mdの活用、そしてbrownfieldワークフローまでを解説します。'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: 'Windows、macOS、Linux に OpenSpec を導入し、PATH と複数バージョンの問題を確認。目的別 CLI コマンドと固定バージョンの変更・検証・アーカイブ例を紹介します。'
 author: 'Remy'
 tags: ['openspec', 'sdd', 'ai-coding', 'agents.md', 'cli']
 lang: 'ja'
 translatedFrom: 'openspec-tutorial-cli-commands-agents-md-examples'
 ---
 
+## Windows、macOS、Linux に OpenSpec をインストールする
+
+2026 年 10 月 26 日更新。npm の `latest` は **1.15.0** です。単体実行ファイルは Node.js を必要としません。npm パッケージには Node.js **20.19.0+** が必要です。インストール方法は一つ選びます。対応環境は[公式インストール文書](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/installation.md)で確認できます。
+
+Windows PowerShell では公式の単体版インストーラーを使います。
+
+```powershell
+irm https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/scripts/binary/install.ps1 | iex
+```
+
+macOS または Linux では次を使います。
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/scripts/binary/install.sh | sh
+```
+
+これらは `main` の公式インストーラーを実行し、公開済みバイナリを取得して SHA256SUMS と照合します。`main` をビルドする操作ではありません。バイナリを固定するには、先にそのシェルで環境変数 `OPENSPEC_VERSION=v1.15.0` を設定します。既定の保存先は Windows が `%LOCALAPPDATA%\Programs\openspec`、macOS と Linux が `~/.local/bin` です。Windows ではユーザー PATH に追加されます。導入後に新しいターミナルを開きます。
+
+Node.js と pnpm を使っている場合は、公開パッケージも選べます。
+
+```bash
+node --version
+pnpm add -g @fission-ai/openspec@1.15.0
+openspec --version
+```
+
+この固定版なら最後の出力は `1.15.0` です。グローバルに導入しない場合は `pnpm dlx @fission-ai/openspec@1.15.0 --version` を使います。`dlx` の成功だけでは、裸の `openspec` コマンドは利用可能になりません。
+
+### コマンドが見つからない場合と版が違う場合
+
+Windows では一致する実行ファイルを調べ、単体版を直接実行します。
+
+```powershell
+Get-Command openspec -All
+where.exe openspec
+& "$env:LOCALAPPDATA\Programs\openspec\openspec.exe" --version
+```
+
+完全なパスでは動くのに裸のコマンドが見つからない場合、新しいターミナルでユーザー PATH を確認します。古い版が動く場合は、先にある PATH 項目やシェルの別名が別のコピーを選んでいます。pnpm の実行ファイルの場所は `pnpm bin -g` で確認できます。global bin が未設定なら pnpm の設定を直し、その間の練習には `dlx` を使えます。
+
+macOS または Linux では次を実行します。
+
+```bash
+command -v openspec
+which -a openspec
+"$HOME/.local/bin/openspec" --version
+```
+
+必要なら実際のインストール先をシェルの PATH に追加します。nvm や fnm では有効な Node バージョンを確認してください。グローバルパッケージが別のバージョンに属している場合があります。バージョン管理ツールの shim の更新が必要なこともあります。どの方法で導入したコピーか確認してから削除します。
+
+### 同じ導入方法で更新・削除する
+
+`openspec version --check` で更新を確認します。pnpm 版は `pnpm add -g @fission-ai/openspec@latest` で更新し、各プロジェクト内で `openspec update` を実行して連携ファイルを更新します。生成された差分も確認します。CLI の版の変更とプロジェクトの指示ファイルの更新は別の操作です。
+
+単体版はインストーラーを再実行します。`openspec install` はパッケージ管理版から単体版へ切り替える操作で、古いコピーの削除方法を表示します。終了後、新しいターミナルで選ばれる実行ファイルを確認します。
+
+pnpm 版の削除は `pnpm remove -g @fission-ai/openspec` です。単体版では、確認した場所の実行ファイルと対応する PATH 項目だけを削除します。`openspec uninstall` コマンドはありません。履歴が必要なら `openspec/specs/` と `openspec/changes/archive/` を残してください。CLI の削除にプロジェクト文書の削除は不要です。
+
+## 目的から CLI コマンドを探す
+
+以下は 1.15.0 のターミナル用コマンドです。対象プロジェクトで実行します。グローバルに導入していなければ、`openspec` を `pnpm dlx @fission-ai/openspec@1.15.0` に置き換えます。
+
+<div class="content-table-scroll" role="region" aria-label="目的 / コマンド / 確認する結果" tabindex="0">
+
+| 目的 | コマンド | 確認する結果 |
+| --- | --- | --- |
+| バージョン確認 | `openspec --version` | 実際に動く版 |
+| 引数の確認 | `openspec new change --help` | その版の対応オプション |
+| 助手ファイルなしで初期化 | `openspec init . --tools none` | `openspec/` と設定 |
+| 変更の作成 | `openspec new change add-magic-link-login` | 変更ディレクトリ。完成した提案ではない |
+| 変更の一覧 | `openspec list --json` | 進行中の変更 |
+| 成果物の状態 | `openspec status --change add-magic-link-login --json` | 文書の状態。アプリのテスト結果ではない |
+| 提案用の指示 | `openspec instructions proposal --change add-magic-link-login --json` | テンプレートと依存関係 |
+| 差分の検証 | `openspec validate add-magic-link-login --strict --json --no-interactive` | 検証結果と終了コード |
+| 主要仕様の確認 | `openspec show auth --type spec` | 主要仕様の内容 |
+| レビュー済み変更の保存 | `openspec archive add-magic-link-login` | 保存先と主要仕様の更新 |
+
+</div>
+
+`/opsx:propose` と `/opsx:apply` は助手のチャットに入力します。PowerShell や Bash のコマンドではありません。呼び出し方は連携ごとに異なり、Codex は `$openspec-propose` などのスキル名を使います。生成されたファイルを確認し、全ツールが同じ表記を受け付けると考えないでください。詳細は[1.15.0 CLI リファレンス](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/cli.md)を参照してください。
+
+複数のコードリポジトリで仕様を共有する場合は、[Stores の二つのリポジトリを使う例](/ja/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice)へ進みます。Stores は 1.15.0 に含まれますが、機能は Beta 扱いです。npm の `beta` タグは別の配布タグであり、Stores を使うために必要な版ではありません。
+
 ## OpenSpecクイックスタート
+
+以下の練習は再現用に **1.13.2** を維持します。既存のコマンドを変更せず、同じ proposal、delta、design、tasks を 1.15.0 でも検証済みです。[ダウンロードできる CLI 検証スクリプト](/assets/openspec-search-repair/check-examples.mjs)はモデルを呼び出さず、ローカルのファイル操作だけを実行します。インストーラーと助手による実装は別途検証が必要です。
 
 本記事は npm 公開版の **OpenSpec 1.13.2** を使用します。必要環境は Node.js **20.19.0+** と pnpm です。Node.js 26.7.0、pnpm 10.28.2 を使い、リポジトリ外の空ディレクトリでファイル操作を検証しました。モデルは呼び出していません。新しい練習用ディレクトリで実行してください。
 
@@ -439,6 +525,8 @@ delta の `## Purpose` は、新しい機能の主要仕様を作成するとき
 
 ## OpenSpecコマンド早見表
 
+<div class="content-table-scroll" role="region" aria-label="Task / Command" tabindex="0">
+
 | Task | Command |
 |---|---|
 | CLI help を表示 | `openspec --help` |
@@ -454,6 +542,8 @@ delta の `## Purpose` は、新しい機能の主要仕様を作成するとき
 | 完了した変更をアーカイブ | `openspec archive <name>` |
 | プロンプトなしでアーカイブ | `openspec archive <name> --yes` |
 | 指示ファイルを更新 | `openspec update .` |
+
+</div>
 
 ## OpenSpecのベストプラクティス
 

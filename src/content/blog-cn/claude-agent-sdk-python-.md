@@ -1,7 +1,8 @@
 ---
-title: 'Claude Agent SDK (Python) 学习指南'
+title: 'Claude Agent SDK Python：生命周期、取消与超时排障'
 pubDate: 2025-10-15T03:15:48.639Z
-description: '固定 Python SDK 0.1.3，说明 query、ClaudeSDKClient 生命周期、hooks、MCP 工具、超时和清理，并提供完整示例及离线验证边界。'
+updatedDate: 2026-10-26T00:00:00.000Z
+description: '定位 ClaudeSDKClient 卡住、取消及清理失败，提供 Python SDK 0.1.3 完整示例和离线检查，区分当前超时接口与旧版行为。'
 author: 'Remy'
 tags: ['claude-code', 'vibe-coding', 'python']
 ---
@@ -14,11 +15,23 @@ tags: ['claude-code', 'vibe-coding', 'python']
 
 ## 安装与版本检查
 
+如果已经遇到错误，可以直接从对应章节开始：
+
+- 调用返回 `None`，或只有文本没有完成结果：[Query 与消息类型](#query-与消息类型)。
+- 取消时报作用域错误，或关闭一直等待：[生命周期与清理](#claudesdkclient-生命周期与清理)。
+- 单轮卡住，或 `timeout=` 引发 `TypeError`：[不同层次的超时](#不同层次的超时)。
+- Hook 没有触发：[Hooks 与权限决定](#hooks-与权限决定)，再查[流式输入](#模块级-query-的流式-hooks)。
+- CLI 连接失败：[排障与验证边界](#排障与验证边界)。
+
+[当前 Python 参考](https://code.claude.com/docs/en/agent-sdk/python)提供以秒计的 `HookMatcher.timeout`，下面的 0.1.3 基线没有这个字段。当前 `API_TIMEOUT_MS` 限制每次请求尝试等待响应头的时间，不限制整个流式回合。这两项都不能代替应用截止时间和清理策略；复制当前参数前先核对安装版本。
+
+[下载离线版本与签名检查](/assets/tutorial-search-repair/sdk_offline_check.py)，运行 `uv run --python 3.12 sdk_offline_check.py`，脚本内的固定依赖会建立隔离环境。末行应为 `PASS imports and signatures; no CLI or model was started`。首次解析依赖可能访问包仓库，但检查本身不会启动 Claude Code 或访问模型。
+
 [v0.1.3 官方 README](https://github.com/anthropics/claude-agent-sdk-python/blob/v0.1.3/README.md) 要求 Python 3.10+、Node.js 和 Claude Code 2.0.0+。这是当时的前置条件，不能据此保证所有后续 CLI 都兼容旧 SDK。在临时目录中使用管理 Python 环境和依赖的 [uv](https://docs.astral.sh/uv/pip/environments/)：
 
 ```bash
 uv venv --python 3.12 .venv
-uv pip install --python .venv "claude-agent-sdk==0.1.3" "mcp==1.18.0" "anyio==4.11.0"
+uv pip install --python .venv "claude-agent-sdk==0.1.3" "mcp==1.18.0" "anyio==4.11.0" "pydantic==2.11.7"
 ```
 
 Windows 使用 `.venv\Scripts\python.exe` 运行以下文件，macOS 或 Linux 使用 `.venv/bin/python`。明确解释器路径可以避免意外导入全局版本，不要仅凭终端已经激活环境就推断实际使用的包。
@@ -53,6 +66,8 @@ if __name__ == "__main__":
 预期输出是 `SDK 0.1.3: imports and signatures OK`。它只证明导入和所检查的签名成立，不能证明网络、模型权限或工具权限正常。读取包元数据，也比假定每个包都提供某个版本属性更明确。
 
 这里同时固定 MCP 和 AnyIO 有实际原因：验证环境仅安装 SDK 0.1.3 时解析到了 MCP 2.2.0，创建工具服务器随即出现 `Server.list_tools` 不存在的错误。本文示例改用 MCP 1.18.0 和 AnyIO 4.11.0。安装成功不等于接口兼容，这组旧依赖只用于复现，不代表安全性或长期支持保证。
+
+导入 SDK 就出现 `cannot import name 'eval_type_backport'` 时，还没有访问模型。[MCP 1.18.0 导入了这个 Pydantic 内部函数](https://github.com/modelcontextprotocol/python-sdk/blob/v1.18.0/src/mcp/server/fastmcp/utilities/func_metadata.py)，新版 Pydantic 可能移除它。将 Pydantic 固定为 2.11.7 可恢复这里验证的历史组合；2026 年 10 月 26 日，三语文章的清理 fixture 在此组合下全部通过。这个依赖问题不需要修改 `run_turns()`。
 
 在线运行前记录 `claude --version`、实际执行文件及 Python 依赖版本，并按[官方认证说明](https://code.claude.com/docs/en/agent-sdk/overview) 配置环境。不要把密钥放进脚本或提交到仓库。本地检查不需要读取任何凭据；没有 CLI 时先停在离线验证，不要安装一个名称相近的 `claude` 包代替。
 
