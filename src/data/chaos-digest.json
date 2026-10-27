@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-27T10:12:16+08:00",
+  "updatedAt": "2026-10-27T16:04:09+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,13 +13,286 @@
   "themeCounts": {
     "models": 10,
     "coding-tools": 18,
-    "agents-oss": 13,
+    "agents-oss": 12,
     "security": 11,
-    "research": 39,
+    "research": 43,
     "product-news": 0,
     "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-10-27T16:00:00+08:00",
+      "label": {
+        "zh": "10月27日 16:00",
+        "en": "Oct 27 16:00",
+        "ja": "10月27日 16:00"
+      },
+      "items": [
+        {
+          "id": "t350",
+          "theme": "research",
+          "title": {
+            "zh": "Harness Learning：可泛化的测试时 harness 适应",
+            "en": "Harness Learning",
+            "ja": "Harness Learning"
+          },
+          "summary": {
+            "zh": "把 harness 修订做成可迁移 meta-learning：RL 训 proposer 据执行反馈改 harness 代码，测试时冻结模型只改 harness；4B proposer 在 21 未见 Reasoning Gym 族均值超 35B teacher——harness 优化升为可泛化适应程序 10-13 站长确认：单篇论文解读候选，开写当天测主词（主词：Harness Learning）。续源：GEAR harness 自演化。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "把 harness 修订做成可迁移 meta-learning：RL 训 proposer 据执行反馈改 harness 代码，测试时冻结模型只改 harness；4B proposer 在 21 未见 Reasoning Gym 族均值超 35B teacher——harness 优化升为可泛化适应程序 10-13 站长确认：单篇论文解读候选，开写当天测主词（主词：Harness Learning）。续源：GEAR harness 自演化。",
+            "en": "Harness Learning turns harness edits into transferable meta-learning: an RL-trained proposer rewrites harness code from execution feedback while freezing the model at test time; a 4B proposer beats a 35B teacher mean on 21 unseen Reasoning Gym families. Oct 13 (site owner): valid single-paper deep-read candidate; test own main term \"Harness Learning\" on the writing day (status stays inbox). Follow-up: GEAR, a recursively self-improving harness architecture.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.35738",
+              "title": "Harness Learning Enables Generalizable Test-Time Adaptation",
+              "brief": {
+                "zh": "「深耕：harness/TTA」用 RL 训 proposer 根据执行反馈改 harness；测试时冻结模型只改 harness；4B proposer 在 21 未见族上均值 0.62 vs 35B teacher 0.56，HotpotQA 修订可迁移 MuSiQue/2Wiki。",
+                "en": "Trains a proposer with RL to edit harness code from execution feedback; at test time the model stays frozen. A 4B proposer averages 0.62 vs a 35B teacher’s 0.56 on 21 unseen Reasoning Gym families, with HotpotQA edits transferring to MuSiQue/2Wiki.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/spaces/WizardTY/GEAR",
+              "title": "WizardTY/GEAR",
+              "brief": {
+                "zh": "GEAR 是一篇 10/26 发布论文的静态展示页，提出一套开放的通用演化架构，让 LLM agent 的 harness 能递归自我改进，附论文 PDF、项目主页和源码链接。与近期 Ornith 把自我改进闭环扩展到脚手架的思路相呼应。",
+                "en": "WizardTY/GEAR",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "huggingface"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.35738",
+            "https://huggingface.co/spaces/WizardTY/GEAR"
+          ]
+        },
+        {
+          "id": "t723",
+          "theme": "research",
+          "title": {
+            "zh": "RLVR 的域外增益多少只是答案格式：7B SimpleRL 约 82% 的域外选择题提升只是把答案挪进 \\boxed{}",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。续源：RL 不发明「wait」，与格式增益论文成两篇综合。续源：RL 后训练增益拆解与熵漂移两篇，成四篇论文簇。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。续源：RL 不发明「wait」，与格式增益论文成两篇综合。续源：RL 后训练增益拆解与熵漂移两篇，成四篇论文簇。",
+            "en": "Single-paper candidate: much of RLVR out-of-domain gain is answer formatting; awaiting Trends bot. 10-17 Trends (trends bot): \"RLVR\" 7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 — not passed, stays inbox. Follow-up: RL gains come from ~4% divergent tokens; pairs with the answer-format paper. Follow-up: the \"wait\" marker is inherited from training data, not invented by RL; two-paper synthesis, term RLVR. Follow-up: outcome RL gains decomposed into finishing, reliability and reach, and the sign law of entropy drift; now a four-paper cluster.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.20639",
+              "title": "Same Answer, New Box: How Much of RLVR's Out-of-Domain Gain Is Answer Format?",
+              "brief": {
+                "zh": "深耕候选：RLVR 号称数学训练能迁移到 MMLU/ARC，但这篇用同一批输出换个答案抽取器重新打分，发现 7B SimpleRL 模型约 82% 的域外选择题增益只是把答案挪进了 \\boxed{}，答案本身没变好。机制一句话就能讲清，又直接打在\"RL 泛化\"这个热门叙事上，很适合写成评测方法论文章。",
+                "en": "Re-scoring the same outputs with a different answer extractor shows ~82% of a 7B SimpleRL model's out-of-domain multiple-choice gain is just moving answers into \\boxed{}.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.24663",
+              "title": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
+              "brief": {
+                "zh": "深耕候选：RLVR 到底教会了模型什么？这篇给了很干净的答案——只在约 4% 与 base 模型分歧的位置借用 RL 模型的 token，就能找回 90.5% 的 pass@1 增益，单个开头词“Alright”就贡献 35%，而硬插“Wait”无效。“RL 只是改了少数关键岔路口”的机制非常适合配 SVG 讲 token 分叉图。",
+                "en": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.30882",
+              "title": "Inherited, Not Invented: Tracing the Provenance of Wait in Reasoning Models",
+              "brief": {
+                "zh": "深耕候选：大家都说RL让推理模型“学会了说wait、学会了反思”，这篇沿OLMo-3/MiMo训练史追溯发现wait其实来自mid-training和SFT数据，zero-RL几乎从不“发明”它，只会放大已有的。直接拆穿“aha moment”叙事，还提醒LLM评审的反思指标会把趋势判反，机制清楚、很适合画训练阶段溯源图。",
+                "en": "Inherited, Not Invented: Tracing the Provenance of Wait in Reasoning Models",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.34044",
+              "title": "A Sign Law for Entropy Drift under Sampler Mismatch in RLVR",
+              "brief": {
+                "zh": "「新芽：RLVR 里熵为什么会莫名其妙涨/跌——『符号定律』：采样器和学习器不一致时，常数 advantage 偏移改变熵的方向由采样器决定」做 RLVR 的人都碰到过：超长回答是 mask 掉还是算失败，熵曲线就往不同方向走。作者把原因追到 sampler mismatch（rollout 用了 top-k/top-p/低温，而学习器没这么算），证明了一阶期望下常数 advantage 偏移会改变 softmax 策略的熵，符号由采样器决定：只要采样器相对策略的似然比随 token 概率递增（top-k、top-p、min-p、温度<1），正偏移就让策略变尖，更平的采样器则相反。2B 模型上",
+                "en": "A Sign Law for Entropy Drift under Sampler Mismatch in RLVR",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.34894",
+              "title": "What Outcome RL Buys: Finishing, Reliability, Rarely Reach",
+              "brief": {
+                "zh": "「深耕候选：Outcome RL 到底买到了什么——把 pass@1 的涨幅拆成 Finishing / Reliability / Reach 三块」作者拿 20 个公开的 RL 模型（1.5B–32B）和它们的 thinking 基座，在固定 token 预算下比 pass@1，把增益拆成三部分：Finishing（预算耗尽前能不能把答案写出来）、Reliability（写完之后答对的概率）、Reach（RL 能解而基座 8 次全错的题，减去反过来的）。结论很干净：基座经常撞预算的场景里，82% 的变化只是 finishing，给基座更多 token 它自己就能补上大半；预算够的时候涨的是",
+                "en": "What Outcome RL Buys: Finishing, Reliability, Rarely Reach",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.20639",
+            "https://arxiv.org/abs/2610.24663",
+            "https://arxiv.org/abs/2610.30882",
+            "https://arxiv.org/abs/2610.34044",
+            "https://arxiv.org/abs/2610.34894"
+          ]
+        },
+        {
+          "id": "t772",
+          "theme": "research",
+          "title": {
+            "zh": "coding agent 基准到底在测什么：specification-oracle gap——任务描述没说、上游测试却依赖的常量名/模块路径/报错文本；五语言静态审计，带此依赖的单元失败率 80.6% vs 48.4%，以 release notes/LLM 摘要构造的基准三分之一以上受影响",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：概念可命名、数字清楚，站内评测线；主词「SWE-bench」待测。续源：Epoch 真实工作评测，对照 t720。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：概念可命名、数字清楚，站内评测线；主词「SWE-bench」待测。续源：Epoch 真实工作评测，对照 t720。",
+            "en": "Single-paper candidate: specification-oracle gaps in test-graded coding-agent benchmarks; candidate term \"SWE-bench\". Follow-up: Epoch Automation Reports, real-work evaluation; cf. t720.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.30635",
+              "title": "What the Specification Did Not Say: Specification-Oracle Gaps in Test-Graded Coding-Agent Benchmarks",
+              "brief": {
+                "zh": "新芽：编码智能体基准用自然语言描述任务、却用上游测试打分，测试常依赖描述里根本没说的常量名/模块路径/报错文本——作者称之为specification-oracle gap，并做了五语言静态审计：带这种依赖的单元失败率80.6% vs 48.4%。不是又一个agent评测，而是给“基准到底在测什么”一个可命名的概念，release-notes式构造的基准受害最重。",
+                "en": "Coding-agent benchmarks grade with upstream tests that depend on names, paths and messages the task never states; units with such gaps fail 80.6% vs 48.4%, and benchmarks built from release notes or LLM summaries are hit hardest.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://epochai.substack.com/p/can-ai-automate-epoch",
+              "title": "Epoch Automation Reports / We tried to automate Epoch：真实内部工作任务评测，头部 agent 仅 65%",
+              "brief": {
+                "zh": "站内积累线 evals + agent harness：真实工作评测而非可验证 benchmark，harness 与模型混淆（各用自家 harness）、memory/skill 关闭作为控制变量、agent 把自身 scaffolding 错误当结论的失败模式——可与 harness/eval 线交叉。Aihot 条目 403，本次读了 Epoch substack 摘要全文 + epoch.ai benchmark 页全文（primary，非镜像）；完整 report 页（epoch.ai 'Can AI automate Epoch?'）该 URL 404 未读，只读摘要+benchm",
+                "en": "Aihot 目 403，本次读了 Epoch substack 摘要全文 + epoch.ai benchmark 页全文（primary，非镜像）；完整 report 页（epoch.ai 'Can AI automate Epoch?'）该 URL 404 未读，只读摘要+benchmark 方法页。去重：inbox/archive 20261024-27 未见同题。上午遗留重试项。",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.30635",
+            "https://epochai.substack.com/p/can-ai-automate-epoch"
+          ]
+        },
+        {
+          "id": "t787",
+          "theme": "research",
+          "title": {
+            "zh": "同数据同安全训练、换个预训练种子，被打穿的 jailbreak 就变了：150 个 1B 级模型（25 种数据配方 × 3 预训练种子 × 2 后训练种子）逐 prompt 非拒绝率相关——同一次预训练的两个后训练副本 0.984，换预训练种子 0.811，换数据配方 0.779；单 checkpoint 上最优攻击模板换预训练种子后仍最优仅 27%；3,211 个 prompt 的非拒绝向量可 100% 认出是哪个预训练 run",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：对照干净、数字漂亮、直指评测范式；缺单义核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：对照干净、数字漂亮、直指评测范式；缺单义核心词。",
+            "en": "Single-paper candidate: jailbreak vulnerability is set mostly by the pretraining run (0.984 vs 0.811 correlation across seeds) and carries a run fingerprint; no unambiguous core term.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.34074",
+              "title": "Identically Trained Language Models Break on Different Jailbreaks",
+              "brief": {
+                "zh": "「深耕候选：同数据同安全训练，换个预训练种子，被打穿的 jailbreak 就变了」作者做了个很扎实的对照：25 种预训练数据配方 × 3 个预训练种子 × 2 个后训练种子，共 150 个 1B 级模型，用同一批 jailbreak prompt 算逐 prompt 的非拒绝率再两两求相关。同一次预训练的两个后训练副本相关性 0.984；换预训练种子掉到 0.811；换数据配方只再掉到 0.779。也就是说「哪些 jailbreak 能打穿一个 checkpoint」主要由那一次预训练 run 决定，而不是数据或安全训练。实用后果：在一个 checkpoint 上找到的最佳攻击模板，换预训练",
+                "en": "150 1B-scale models (25 data recipes x 3 pretraining seeds x 2 post-training seeds): per-prompt non-refusal correlates 0.984 across post-training copies, 0.811 across pretraining seeds, 0.779 across data recipes; best attack template survives a pretraining-seed change only 27% of the time; a non-ref",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.34074"
+          ]
+        },
+        {
+          "id": "t788",
+          "theme": "research",
+          "title": {
+            "zh": "Transformer 能背多少事实：容量随宽度指数增长，所需维度只随事实数 N 取对数（N 从 45 到 49,920 共 11 档，对数拟合不被拒绝、幂律被拒绝；固定宽度下深度方向次线性）——修正「记住的事实数 ∝ 参数量」的线性结论，结构化数据（对称关系、两跳）还会再抬高容量",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：结论反直觉、一图可讲；缺核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：结论反直觉、一图可讲；缺核心词。",
+            "en": "Single-paper candidate: transformer memorization capacity grows exponentially with width (required dimension is logarithmic in the number of facts); no clean core term.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.34553",
+              "title": "How Much Information Can We Fit inside a Transformer?",
+              "brief": {
+                "zh": "「新芽：Transformer 能记多少事实？容量随宽度指数增长，所需维度只随 N 取对数」重新审视「记住的事实数 ∝ 参数量」那个线性结论：作者用贝叶斯优化把超参搜满，在随机 (主语, 关系, 宾语) 三元组上找『能完全背下来的最小模型』，发现记忆容量随 transformer 维度指数增长，即 d_min 对事实数 N 是对数关系（N 从 45 到 49,920 共 11 档，lack-of-fit F 检验不拒绝对数拟合，但拒绝包括幂律在内的其它形式）；深度方向在固定宽度下则是次线性增长。再往结构化数据（对称关系、两跳组合）扩展，模型会利用规律进一步抬高容量。这是对「模型是怎么存知识的」",
+                "en": "Searching hyperparameters with Bayesian optimization for the smallest model that memorizes random triples, the authors find the needed dimension grows logarithmically with the number of facts (45 to 49,920 across 11 levels); depth at fixed width grows sublinearly; structure raises capacity further.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.34553"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-27T10:00:00+08:00",
       "label": {
@@ -6139,102 +6412,6 @@
           "blog": {
             "zh": "/cn/blog/llm-agents-tamper-own-traces-append-only-audit/",
             "en": "/blog/llm-agents-tamper-own-traces-append-only-audit/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-27T10:00:00+08:00",
-      "label": {
-        "zh": "9月27日 10:00",
-        "en": "Sep 27 10:00",
-        "ja": "9月27日 10:00"
-      },
-      "items": [
-        {
-          "id": "t246",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Claude Science harness：无人值守算出九圈振幅",
-            "en": "Claude Science harness: unattended nine-loop amplitudes",
-            "ja": "Claude Science harness: unattended nine-loop amplitudes"
-          },
-          "summary": {
-            "zh": "长程科学 agent 用显式 harness + 最小人类干预刷新计算前沿——harness×agent-loop 而非更大模型",
-            "en": "Reading Anthropic’s guest post on Fable 5.1 inside Claude Science: planar N=4 SYM nine-loop hexagon amplitudes via an explicit science harness and minimal human intervention—harness × agent-loop, not a bigger-model story.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "长程科学 agent 用显式 harness + 最小人类干预刷新计算前沿——harness×agent-loop 而非更大模型",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "anthropic",
-              "url": "https://www.anthropic.com/research/yes-claude-can-do-nine-loops",
-              "title": "Yes, Claude can do nine loops",
-              "brief": {
-                "zh": "「深耕候选：harness / 科研 agent」Anthropic 用 Fable 5.1 + Claude Science（文中明确定义为 harness）单提示启动、多日无人监督算出 N=4 SYM 六粒子九圈振幅；端到端约 $1–2k。长程科学 agent 用显式 harness 刷新计算前沿，对照酶发现/Grow Harness/SoL-Pi。",
-                "en": "Anthropic guest research: Fable 5.1 plus an explicit Claude Science harness ran multi-day unsupervised bootstrap/form-factor routes to compute six-particle nine-loop N=4 SYM amplitudes (~$1–2k end-to-end)—long-horizon science agents via harness, not bigger models.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "anthropic"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://www.anthropic.com/research/yes-claude-can-do-nine-loops"
-          ],
-          "blog": {
-            "zh": "/cn/blog/claude-science-harness-nine-loop-amplitudes/",
-            "en": "/blog/claude-science-harness-nine-loop-amplitudes/"
-          }
-        },
-        {
-          "id": "t248",
-          "theme": "research",
-          "title": {
-            "zh": "Control the Harness, Control the Cost：企业 coding-agent 路由与治理",
-            "en": "Control the Harness, Control the Cost: Enterprise Coding-Agent Routing and Governance",
-            "ja": "Control the Harness, Control the Cost: Enterprise Coding-Agent Routing and Governance"
-          },
-          "summary": {
-            "zh": "企业 coding-agent 账单归因 harness 默认；Jev 缓存安全路由收回 14–21% 花费——harness 治理/主权阶梯",
-            "en": "A deep read of Accenture arXiv:2609.28919—enterprise coding-agent bills are often blamed on “expensive models,” but the paper moves the blame to harness defaults; cache-safe routing with Jev recovers about 14–21% of model spend in a 10k-seat emulation, with a sovereignty ladder from observe to own.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "企业 coding-agent 账单归因 harness 默认；Jev 缓存安全路由收回 14–21% 花费——harness 治理/主权阶梯",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.28919",
-              "title": "Control the Harness, Control the Cost: Routing and Governing AI Coding Agents in the Enterprise",
-              "brief": {
-                "zh": "「深耕候选：harness / coding-agent」把企业 coding-agent 账单归因到 harness 默认（模型选择、prompt cache、subagent），并用 Jev 做缓存安全路由：1 万席仿真可收回 14–21% 模型花费（约 $3.3–5.0M/年），并给出从网关控制平面到是否自建 harness 的主权阶梯。",
-                "en": "Accenture paper: attribute enterprise coding-agent spend to harness defaults (model choice, prompt cache, subagents); a cache-safe Jev router recovers 14–21% of agentic model spend in a 10k-seat emulation, with a harness-sovereignty ladder from gateway control planes to build-vs-buy.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.28919"
-          ],
-          "blog": {
-            "zh": "/cn/blog/control-the-harness-control-the-cost/",
-            "en": "/blog/control-the-harness-control-the-cost/"
           }
         }
       ]
