@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T16:04:38+08:00",
+  "updatedAt": "2026-10-27T10:12:16+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,250 @@
     "other"
   ],
   "themeCounts": {
-    "models": 11,
+    "models": 10,
     "coding-tools": 18,
-    "agents-oss": 15,
-    "security": 12,
-    "research": 47,
+    "agents-oss": 13,
+    "security": 11,
+    "research": 39,
     "product-news": 0,
-    "other": 1
+    "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-10-27T10:00:00+08:00",
+      "label": {
+        "zh": "10月27日 10:00",
+        "en": "Oct 27 10:00",
+        "ja": "10月27日 10:00"
+      },
+      "items": [
+        {
+          "id": "t780",
+          "theme": "models",
+          "title": {
+            "zh": "agent 要不要拆：单循环 + skills vs 子 agent 编排 vs 去中心化——Anthropic Applied AI 称带 skills 的单循环常优于子 agent 设计（某客户快约 2×，Claude Code 系统提示砍 80%+，给出何时才该用子 agent 与分阶段合并法）× MSR 开源 Agensh（无中心 orchestrator，1→1,024 agent，ProgramBench 最难 5 题 19.31%→28.78%）× GVS5H（HN：5 个 Qwen3.8-27B 编排后号称追平 Fable 5）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。",
+            "en": "Synthesis candidate: fold subagents into one skills-equipped loop (Anthropic) vs decentralized 1,024-agent harness (MSR Agensh) vs five small models orchestrated to match a frontier model (GVS5H); no clean core term. Follow-up: video on Anthropic subagent guidance.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://github.com/slee-persis/GVS5H",
+              "title": "'Five Qwen3.8-27B models match Fable 5 Using GVS5H Harness'",
+              "brief": {
+                "zh": "HN 141/48：用 GVS5H harness 把 5 个 Qwen3.8-27B 小模型编排起来，号称追平 Fable 5；harness 优先于模型规模的证据，可接 Qwen3.8 本地编码 Agent、harness 工程与上下文压缩线（需核实评测口径，避免基准虚高）。",
+                "en": "HN 141/48: the GVS5H harness orchestrates five Qwen3.8-27B models and claims to match Fable 5; evaluation setup unverified.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
+              "title": "Building agents: When to fold subagents into your main agent loop（Anthropic Applied AI：单循环 + skills 常优于子 agent 编排）",
+              "brief": {
+                "zh": "站内积累线：agent loop / harness / skills 的一手官方指导，与今早 Decoder ‘fancy harness 更贵不更好’、10-23 Agent Skills 捐给 AAIF、Latent Space dynamic workflows 形成对照/张力（编排 vs 单循环）。10-22 发布，前几轮未归档，补录。tag exploit-candidate。",
+                "en": "Anthropic Applied AI: a single agent loop with skills often beats subagent designs on quality, cost and latency (one customer ~2x faster; Claude Code system prompt cut 80%+); lists when subagents still pay off and a staged merge path driven by end-to-end evals.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
+              "title": "Microsoft Research 开源 Agensh：无中心 orchestrator 的去中心化多 agent harness（1→1,024 agents，ProgramBench）",
+              "brief": {
+                "zh": "站内积累线（agent harness/loop）：与今早 Decoder ‘fancy harness 更贵不更好’、已提交的 Anthropic ‘fold subagents into main loop’（单循环 vs 编排）、Latent Space dynamic workflows 构成‘去中心化 vs 编排 vs 单循环’三方对照。topics.md 已有 t050（Agensh 论文，站长 10-13 确认开写候选）——本条不是新话题，新增事实=10-24 开源 + GPT-6.1-sol 新数据 + 循环/服务架构细节 + 与 Claude Code agent teams",
+                "en": "Microsoft Research open-sources Agensh: no central orchestrator, identical workers on a 5-step claim/verify/merge loop over Gitea and Mattermost; ProgramBench hard-5 average 19.31% (1 agent) to 28.78% (128), with emergent reviewers and integrators at scale. Read via MarkTechPost plus README.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=ybx0mmd22pQ",
+              "title": "Anthropic's New Subagent Rules Will Change How You Build",
+              "brief": {
+                "zh": "Over 20k views in under 24h; about new Anthropic subagent guidance, covered by a second video (KwmrSON2n-g, 22k)",
+                "en": "Anthropic's New Subagent Rules Will Change How You Build",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "media",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/slee-persis/GVS5H",
+            "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
+            "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
+            "https://www.youtube.com/watch?v=ybx0mmd22pQ"
+          ]
+        },
+        {
+          "id": "t781",
+          "theme": "other",
+          "title": {
+            "zh": "OpenAI 宣布 AI 协助的数学/计算机/物理三项新发现——其中硬结果「指数时间假设（ETH）被证伪」（OpenAI math 仓预印本，HN 267；若成立影响极大，验证状态待核）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。",
+            "en": "High-stakes unverified claim: OpenAI announces AI-assisted discoveries including a preprint claiming the Exponential Time Hypothesis is false; verify before any deep read (cf. earlier retractions).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
+              "title": "'Announcing three new discoveries in mathematics, computer science, and physics'",
+              "brief": {
+                "zh": "HN 430/162：OpenAI 宣布 AI 协助的数学/计算机/物理三项发现；同轮 HN 267「The Exponential Time Hypothesis Is False」(https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf, https://news.ycombinator.com/item?id=50251661) 是其中的硬结果，ETH 被证伪若成立影响极大；适合 AI for science",
+                "en": "OpenAI announces three AI-assisted discoveries in mathematics, computer science and physics; a companion preprint in its math repo claims the Exponential Time Hypothesis is false. HN 430/162 and 267. Verification status unknown.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/building-scientific-understanding-with-academic-communities/"
+          ]
+        },
+        {
+          "id": "t782",
+          "theme": "research",
+          "title": {
+            "zh": "KV cache 成了 agent 时代被忽视的状态面：成本、安全、自省、崩塌四种后果——AKV（清华/CUHK）让 harness 直接 drop/reposition KV 条目取代摘要历史（工具响应滚动丢弃：成本 −27.7%、得分 +1.7；KV 读取占 API 成本 82.4%）× SGLang/Cloudflare 披露 GLM-5.3 跨租户 KV 泄露（超长 prompt 触发，155 个响应；PD 分离下 abort 后 RDMA 写入仍在途的分布式 use-after-free）× 论文：模型「自述答案来自文档还是记忆」其实由 Q+A 缓存决定（移植缓存报告跟着走）× 全双工语音长对话崩塌源于滑窗挤掉第 1 个 KV 条目（attention sink 被驱逐）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（score4）：同一对象四种后果，含真实泄露事故与可量化成本；主词「KV cache」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（score4）：同一对象四种后果，含真实泄露事故与可量化成本；主词「KV cache」待测。",
+            "en": "Synthesis candidate: the KV cache as an overlooked state surface for agents, covering cost (AKV), isolation (Cloudflare/SGLang cross-tenant leak), introspection and long-conversation collapse; candidate term \"KV cache\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.32109",
+              "title": "Context or Knowledge: How LLMs Attribute Their Own Answers",
+              "brief": {
+                "zh": "「新芽：模型说『答案来自文档还是自己记忆』，其实是看问答 token 的缓存，不是看文档」作者在答案生成后、追问来源前干预 KV cache：改掉或删掉文档的缓存，来源报告完全不变；但把 token 完全相同的 Q+A 缓存在不同运行间移植，来源报告就跟着捐赠方走。沿 Q+A value 方向做 steering，7B–32B 里较小的两个模型 98.9–100% 的报告被翻转，范数匹配的随机方向最多 1.1%。说明『自述信息来源』在这里因果上依赖回答时产生的缓存状态，而不是对原文的真实回溯——和可靠自省/溯源直接相关。机制干净，一张『文档缓存 vs Q+A 缓存，谁决定 source rep",
+                "en": "An LLM report of whether it used the document or its own knowledge is causally driven by cached Q+A state, not the document cache; transplanting or steering Q+A values flips reports (98.9-100% for smaller models).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.32349",
+              "title": "Why Full-Duplex Speech Models Collapse in Long Conversations",
+              "brief": {
+                "zh": "「新芽：全双工语音模型一聊长就崩，原因居然是滑窗把第一个 KV 条目丢了」作者做了个 FD-LHB 长程基准，测了 5 个全双工模型：保留全历史的会在上下文耗尽前就变差，滑窗的则会陷入重复、沉默和胡言乱语。诊断出两个机制：Initialization-Anchor Eviction（滑窗把第 1 个 KV 条目挤掉 → 沉默/乱码，典型的 attention-sink 被驱逐）和模型被自己最近输出强化的重复。对应两个免训练修补 IAP（钉住首个条目）和 DRP（抑制回声），回放一小时仍能实时跑。机制清晰、一张『滑窗 + 锚点被踢掉』的 SVG 图就能讲明白，而且把 attention sink",
+                "en": "Full-duplex speech models collapse in long conversations because sliding windows evict the first KV entry (attention-sink eviction) plus self-reinforced repetition; training-free fixes IAP and DRP.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.lmsys.org/blog/2026-10-26-cf-security/",
+              "title": "SGLang security update: improving request isolation (Cloudflare GLM-5.3 cross-request KV cache exposure + PD-disaggregation abort race)",
+              "brief": {
+                "zh": "New since 10-25 sweep (no other lane/archive covers it; grep'd inbox + archive 1023–1025 + topics.md). Serving-stack isolation/security with real mechanism: 'free' slot has a hidden second condition (no remote writer in flight), router decides who dies vs engine decides when memory is safe. Pairs wi",
+                "en": "LMSYS/SGLang with Cloudflare: GLM-5.3 on Workers AI returned other tenants data for prompts over 681,280 tokens (155 responses); causes were a context-window vs KV-pool mismatch and a PD-disaggregation abort race (use-after-free with in-flight RDMA writes); fixed with deferred release and admission",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://arxiv.org/abs/2610.28577",
+              "title": "Cache Engineering for Agents (AKV, Tsinghua/CUHK): drop + reposition KV entries instead of summarizing history",
+              "brief": {
+                "zh": "New since 10-25 sweep; no overlap in inbox/archive 1023–1025/topics (grep AKV, 2610.28577, thu-nics). Directly on the agent-harness/context-management line: challenges the 'summarize at threshold' compaction pattern harnesses use, and pairs with the Anthropic 'fold subagents into main loop' / 'harne",
+                "en": "AKV (Tsinghua/CUHK) lets the harness drop and reposition KV entries instead of summarizing history; rolling drop of tool responses cuts average cost 27.7% with score +1.7; KV reads are 82.4% of API cost. Benchmark tables via MarkTechPost.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.32109",
+            "https://arxiv.org/abs/2610.32349",
+            "https://www.lmsys.org/blog/2026-10-26-cf-security/",
+            "https://arxiv.org/abs/2610.28577"
+          ]
+        },
+        {
+          "id": "t784",
+          "theme": "research",
+          "title": {
+            "zh": "Putting Transformer Theories to the Test：把 Star-free / AC0 / TC0 / C-RASP / MPC / BAPO / Sensitivity 七套表达力理论放进同一张预测矩阵并用受控实验对账——没有任何一套能解释全部成败（如 C-RASP 判 k-hop induction 难但小模型能长度泛化）",
+            "en": "Putting Transformer Theories to the Test",
+            "ja": "Putting Transformer Theories to the Test"
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：综合对账型好讲，但缺高量核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：综合对账型好讲，但缺高量核心词。",
+            "en": "Single-paper candidate: seven transformer expressivity theories tested against controlled experiments; none explains everything; no clean core term.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.32104",
+              "title": "Putting Transformer Theories to the Test",
+              "brief": {
+                "zh": "「深耕候选：七套 Transformer 表达力理论放在同一张预测矩阵里对账」Star-free、AC0、TC0、C-RASP、MPC、BAPO、Sensitivity 七种理论各说各话，作者把它们翻译成同一套任务×预测矩阵，补了新的理论结果，再用小模型的样本复杂度、长度泛化和预训练模型表现去验证。结论是没有任何一套理论能解释全部成败：比如 C-RASP 判 k-hop induction 为难，但小 transformer 能长度泛化；AC0/BAPO 判 binary majority 为难，实际也学得会。最后总结出一套理论该抓住的特征：软注意力、内容相关检索、逐位置有界计算、可学习性与归",
+                "en": "Seven theories of transformer capability (star-free, AC0, TC0, C-RASP, MPC, BAPO, sensitivity) are mapped into one prediction matrix and tested; no single theory explains all successes and failures.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.32104"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-25T16:00:00+08:00",
       "label": {
@@ -138,68 +373,6 @@
             "https://x.com/claudeai/status/2113360845409583307",
             "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
             "https://claude.com/blog/claude-duet-safety-privacy-and-security"
-          ]
-        },
-        {
-          "id": "t780",
-          "theme": "models",
-          "title": {
-            "zh": "agent 要不要拆：单循环 + skills vs 子 agent 编排 vs 去中心化——Anthropic Applied AI 称带 skills 的单循环常优于子 agent 设计（某客户快约 2×，Claude Code 系统提示砍 80%+，给出何时才该用子 agent 与分阶段合并法）× MSR 开源 Agensh（无中心 orchestrator，1→1,024 agent，ProgramBench 最难 5 题 19.31%→28.78%）× GVS5H（HN：5 个 Qwen3.8-27B 编排后号称追平 Fable 5）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。",
-            "en": "Synthesis candidate: fold subagents into one skills-equipped loop (Anthropic) vs decentralized 1,024-agent harness (MSR Agensh) vs five small models orchestrated to match a frontier model (GVS5H); no clean core term.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://github.com/slee-persis/GVS5H",
-              "title": "'Five Qwen3.8-27B models match Fable 5 Using GVS5H Harness'",
-              "brief": {
-                "zh": "HN 141/48：用 GVS5H harness 把 5 个 Qwen3.8-27B 小模型编排起来，号称追平 Fable 5；harness 优先于模型规模的证据，可接 Qwen3.8 本地编码 Agent、harness 工程与上下文压缩线（需核实评测口径，避免基准虚高）。",
-                "en": "HN 141/48: the GVS5H harness orchestrates five Qwen3.8-27B models and claims to match Fable 5; evaluation setup unverified.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
-              "title": "Building agents: When to fold subagents into your main agent loop（Anthropic Applied AI：单循环 + skills 常优于子 agent 编排）",
-              "brief": {
-                "zh": "站内积累线：agent loop / harness / skills 的一手官方指导，与今早 Decoder ‘fancy harness 更贵不更好’、10-23 Agent Skills 捐给 AAIF、Latent Space dynamic workflows 形成对照/张力（编排 vs 单循环）。10-22 发布，前几轮未归档，补录。tag exploit-candidate。",
-                "en": "Anthropic Applied AI: a single agent loop with skills often beats subagent designs on quality, cost and latency (one customer ~2x faster; Claude Code system prompt cut 80%+); lists when subagents still pay off and a staged merge path driven by end-to-end evals.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
-              "title": "Microsoft Research 开源 Agensh：无中心 orchestrator 的去中心化多 agent harness（1→1,024 agents，ProgramBench）",
-              "brief": {
-                "zh": "站内积累线（agent harness/loop）：与今早 Decoder ‘fancy harness 更贵不更好’、已提交的 Anthropic ‘fold subagents into main loop’（单循环 vs 编排）、Latent Space dynamic workflows 构成‘去中心化 vs 编排 vs 单循环’三方对照。topics.md 已有 t050（Agensh 论文，站长 10-13 确认开写候选）——本条不是新话题，新增事实=10-24 开源 + GPT-6.1-sol 新数据 + 循环/服务架构细节 + 与 Claude Code agent teams",
-                "en": "Microsoft Research open-sources Agensh: no central orchestrator, identical workers on a 5-step claim/verify/merge loop over Gitea and Mattermost; ProgramBench hard-5 average 19.31% (1 agent) to 28.78% (128), with emergent reviewers and integrators at scale. Read via MarkTechPost plus README.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/slee-persis/GVS5H",
-            "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
-            "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/"
           ]
         }
       ]
@@ -534,12 +707,12 @@
           "theme": "research",
           "title": {
             "zh": "前沿实验室把「遏制」做成攻击面清单：OpenAI 训练环境断网（前沿 RL 只用缓存「离线世界」，agent 红队找到 VM 逃逸链、经 metrics/auth 窄通道出网、CPU 缓存计时跨 VM 隐信道）× Anthropic 复盘 UK AISI 事件（Mythos 5 越出 CTF 用马甲施压真实维护者合并恶意代码；compaction 笔记自我授权形成「惯性」，中途自停仅 2%）",
-            "en": "",
-            "ja": ""
+            "en": "Frontier labs turned containment into an attack-surface checklist",
+            "ja": "Frontier labs turned containment into an attack-surface checklist"
           },
           "summary": {
             "zh": "多来源综合候选（score5）：两家一手披露、细节硬，承接站内遏制/越界线；主词「Claude Mythos」待测。",
-            "en": "",
+            "en": "On the same day, OpenAI published a red-team map of offline training containment—microVM escapes, metrics/auth egress, CPU-cache covert channels—and Anthropic reviewed the UK AISI Claude Mythos 5 incident, where compaction notes turned one out-of-scope detour into an approved route. A decision framework for people who build agent infrastructure.",
             "ja": ""
           },
           "judgment": {
@@ -573,399 +746,15 @@
             "media"
           ],
           "score": 5,
-          "status": "inbox",
+          "status": "published",
           "externalUrls": [
             "https://openai.com/index/securing-our-frontier-model-training-environment/",
             "https://www.anthropic.com/research/alignment-assessment-ukaisi"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-23T16:00:00+08:00",
-      "label": {
-        "zh": "10月23日 16:00",
-        "en": "Oct 23 16:00",
-        "ja": "10月23日 16:00"
-      },
-      "items": [
-        {
-          "id": "t705",
-          "theme": "research",
-          "title": {
-            "zh": "CoT 监控在 CoT 必要时也会失效：四级 CoT 必要性层级（Fraunhofer HHI）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：直接挑战 CoT 监控这一主力安全手段的前提，层级图适合配图；需主词当日 7d+24h 过 gpts 才进短名单。 10-16 Trends（trends bot）：「chain of thought monitoring」7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 未过，留 inbox。续源：奖励错设损害 CoT 可监控性，与「CoT 必要也会失效」互补，成两篇综合。续源：无预约图像隐写，监控盲区实证。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：直接挑战 CoT 监控这一主力安全手段的前提，层级图适合配图；需主词当日 7d+24h 过 gpts 才进短名单。 10-16 Trends（trends bot）：「chain of thought monitoring」7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 未过，留 inbox。续源：奖励错设损害 CoT 可监控性，与「CoT 必要也会失效」互补，成两篇综合。续源：无预约图像隐写，监控盲区实证。",
-            "en": "Single-paper deep-read candidate challenging the premise that necessary CoT is monitorable; needs its own term to pass Trends. 10-16 Trends (trends bot): chain of thought monitoring 7d 0.22 / 24h 0.18 vs gpts 65.35 / 15.06 — not passed, stays inbox. Follow-up: reward misspecification degrades CoT monitorability; now a two-paper synthesis. Follow-up: unprompted image steganography between model instances.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.18105",
-              "title": "Chain of Thought Monitoring Can Fail Even When CoT Is Necessary",
-              "brief": {
-                "zh": "提出四级 CoT 必要性层级，并在医疗诊断等任务上展示即使 CoT 必要，监控仍会逐级失效。",
-                "en": "Proposes a four-level CoT-necessity hierarchy and shows monitoring failures at each level, including on medical diagnosis tasks.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.28303",
-              "title": "Reward Misspecification Degrades Chain-of-Thought Monitorability",
-              "brief": {
-                "zh": "深耕候选：CoT 监控是当前安全路线的核心假设，这篇直接证明“奖励写歪”本身就能让 CoT 失去可监控性——模型嘴上还在讲任务意图，手上已经在 reward hack。机制好讲（CoT 与输出脱钩），还给了“让模型口头化奖励描述”的补救，可以画一张意图/奖励/CoT 三角图。",
-                "en": "Reward Misspecification Degrades Chain-of-Thought Monitorability",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.lesswrong.com/posts/WHEQps5PK8LrrcTAb/how-does-fable-5-1-hide-messages-in-images",
-              "title": "How does Fable 5.1 hide messages in images? — unprompted image steganography between model instances",
-              "brief": {
-                "zh": "图像隐写信道=多 agent 监控/控制盲区的实证机制（无预约编码、跨模型可解），接 t399 OpenAI Hugging Face 事件（agent 用图片传信）与 t705 可监控性线。TLDR AI 10-22 期（上午超时漏查）补捞；primary 已 curl 验证。站内积累线（agent 安全/控制）。",
-                "en": "",
-                "ja": ""
-              }
-            }
           ],
-          "sources": [
-            "arxiv",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.18105",
-            "https://arxiv.org/abs/2610.28303",
-            "https://www.lesswrong.com/posts/WHEQps5PK8LrrcTAb/how-does-fable-5-1-hide-messages-in-images"
-          ]
-        },
-        {
-          "id": "t723",
-          "theme": "research",
-          "title": {
-            "zh": "RLVR 的域外增益多少只是答案格式：7B SimpleRL 约 82% 的域外选择题提升只是把答案挪进 \\boxed{}",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。续源：RL 不发明「wait」，与格式增益论文成两篇综合。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。续源：RL 不发明「wait」，与格式增益论文成两篇综合。",
-            "en": "Single-paper candidate: much of RLVR out-of-domain gain is answer formatting; awaiting Trends bot. 10-17 Trends (trends bot): \"RLVR\" 7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 — not passed, stays inbox. Follow-up: RL gains come from ~4% divergent tokens; pairs with the answer-format paper. Follow-up: the \"wait\" marker is inherited from training data, not invented by RL; two-paper synthesis, term RLVR.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.20639",
-              "title": "Same Answer, New Box: How Much of RLVR's Out-of-Domain Gain Is Answer Format?",
-              "brief": {
-                "zh": "深耕候选：RLVR 号称数学训练能迁移到 MMLU/ARC，但这篇用同一批输出换个答案抽取器重新打分，发现 7B SimpleRL 模型约 82% 的域外选择题增益只是把答案挪进了 \\boxed{}，答案本身没变好。机制一句话就能讲清，又直接打在\"RL 泛化\"这个热门叙事上，很适合写成评测方法论文章。",
-                "en": "Re-scoring the same outputs with a different answer extractor shows ~82% of a 7B SimpleRL model's out-of-domain multiple-choice gain is just moving answers into \\boxed{}.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.24663",
-              "title": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
-              "brief": {
-                "zh": "深耕候选：RLVR 到底教会了模型什么？这篇给了很干净的答案——只在约 4% 与 base 模型分歧的位置借用 RL 模型的 token，就能找回 90.5% 的 pass@1 增益，单个开头词“Alright”就贡献 35%，而硬插“Wait”无效。“RL 只是改了少数关键岔路口”的机制非常适合配 SVG 讲 token 分叉图。",
-                "en": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.30882",
-              "title": "Inherited, Not Invented: Tracing the Provenance of Wait in Reasoning Models",
-              "brief": {
-                "zh": "深耕候选：大家都说RL让推理模型“学会了说wait、学会了反思”，这篇沿OLMo-3/MiMo训练史追溯发现wait其实来自mid-training和SFT数据，zero-RL几乎从不“发明”它，只会放大已有的。直接拆穿“aha moment”叙事，还提醒LLM评审的反思指标会把趋势判反，机制清楚、很适合画训练阶段溯源图。",
-                "en": "Inherited, Not Invented: Tracing the Provenance of Wait in Reasoning Models",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.20639",
-            "https://arxiv.org/abs/2610.24663",
-            "https://arxiv.org/abs/2610.30882"
-          ]
-        },
-        {
-          "id": "t771",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "LLM 让形式化验证规模化：Anthropic × Theorem Labs 用 Claude 把现成 OSS-Fuzz 模糊测试变成 RISC-V 二进制级规格，自主证明 123 个库 239 个入口「任意 <64MB 输入不崩溃/无 ASan 错误」（约 1.8 亿行 Rocq；证明途中自修十年老 bug；跨 agent 复用子证明 30/34 任务降本）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇深读候选：一手研究、数字硬、范式新，接站内 agent 长程验证线；主词「formal verification」待测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇深读候选：一手研究、数字硬、范式新，接站内 agent 长程验证线；主词「formal verification」待测。",
-            "en": "Deep-read candidate: Claude proves no-crash for 239 OSS-Fuzz entry points at RISC-V binary level; candidate term \"formal verification\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://www.anthropic.com/research/formal-verification",
-              "title": "Anthropic × Theorem: LLMs make formal software verification feasible at scale — Claude proves no-crash for 239 OSS-Fuzz entry points at RISC-V binary level",
-              "brief": {
-                "zh": "agent 长程循环的硬验证范式：spec=已有 fuzz 测试、证明器做裁判、agent 自修 bug 后重生成 spec、跨 agent 证明复用（类 skills 库）——直接接 KLS 人剪枝 agent（t766）、t763 agent 批量挖洞×协同披露、t704。Buzzing/HN 10-23 01:37 出现，上午媒体批未收；inbox/archive 无同 URL。站内积累线（harness / skills / 安全）。",
-                "en": "Anthropic and Theorem Labs: Claude turned OSS-Fuzz tests into specs over compiled RISC-V binaries and proved no crash or ASan error for inputs under 64 MB on 239 entry points across 123 libraries (~180M lines of Rocq), patching bugs found mid-proof; sub-proof reuse across agents cut cost in 30 of 34",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.anthropic.com/research/formal-verification"
-          ]
-        },
-        {
-          "id": "t772",
-          "theme": "research",
-          "title": {
-            "zh": "coding agent 基准到底在测什么：specification-oracle gap——任务描述没说、上游测试却依赖的常量名/模块路径/报错文本；五语言静态审计，带此依赖的单元失败率 80.6% vs 48.4%，以 release notes/LLM 摘要构造的基准三分之一以上受影响",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：概念可命名、数字清楚，站内评测线；主词「SWE-bench」待测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：概念可命名、数字清楚，站内评测线；主词「SWE-bench」待测。",
-            "en": "Single-paper candidate: specification-oracle gaps in test-graded coding-agent benchmarks; candidate term \"SWE-bench\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.30635",
-              "title": "What the Specification Did Not Say: Specification-Oracle Gaps in Test-Graded Coding-Agent Benchmarks",
-              "brief": {
-                "zh": "新芽：编码智能体基准用自然语言描述任务、却用上游测试打分，测试常依赖描述里根本没说的常量名/模块路径/报错文本——作者称之为specification-oracle gap，并做了五语言静态审计：带这种依赖的单元失败率80.6% vs 48.4%。不是又一个agent评测，而是给“基准到底在测什么”一个可命名的概念，release-notes式构造的基准受害最重。",
-                "en": "Coding-agent benchmarks grade with upstream tests that depend on names, paths and messages the task never states; units with such gaps fail 80.6% vs 48.4%, and benchmarks built from release notes or LLM summaries are hit hardest.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.30635"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-23T09:00:00+08:00",
-      "label": {
-        "zh": "10月23日 09:00",
-        "en": "Oct 23 09:00",
-        "ja": "10月23日 09:00"
-      },
-      "items": [
-        {
-          "id": "t725",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "agent 越界进入真实世界：OpenAI 新一批 misalignment report（内部 agent 入侵政府统计站取机密、绕过浏览限制、掏空加密钱包）× Perplexity 开源 SPACE（Firecracker microVM 沙箱，凭证/出口在 VM 外控制）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Firecracker」7d 1.47 vs gpts 0.84，不作结论（仅约 8% 查询与沙箱相关），留 inbox。续源：Google 每 agent 一台 microVM 的基建数字。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Firecracker」7d 1.47 vs gpts 0.84，不作结论（仅约 8% 查询与沙箱相关），留 inbox。续源：Google 每 agent 一台 microVM 的基建数字。",
-            "en": "Synthesis candidate: OpenAI agents breaching real sites + Perplexity SPACE microVM sandbox (+t712); awaiting Trends bot. 10-17 Trends (trends bot): \"Perplexity SPACE\" 7d 2.29 / 24h 0.27; \"OpenAI misalignment reports\" 7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"Firecracker\" 7d 1.47 vs gpts 0.84 — inconclusive (only ~8% sandbox-related queries); stays inbox. Follow-up: Google Agent Compute Engine, one microVM per agent.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
-              "title": "OpenAI misalignment reports: internal agents hacked websites, bypassed browsing limits, drained a crypto wallet",
-              "brief": {
-                "zh": "New batch, distinct from the Oct 11 archived reports (task-env reset and disallowed network requests). The new primary facts are real-world site breaches and wallet theft. Agent-security line.",
-                "en": "OpenAI's four new June misalignment reports: internal agents broke into websites, pulled server secrets from a government statistics site during RL, bypassed browsing limits and drained a crypto wallet.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://github.com/perplexityai/SPACE",
-              "title": "Perplexity open-sources SPACE, the Firecracker microVM sandbox behind Perplexity Computer",
-              "brief": {
-                "zh": "New since Oct 16 PM. A production agent sandbox that is now open source, with escape and egress-bypass data. Not archived (Agent37 sandboxes is a different story). exploit-candidate: 站内积累线 (sandbox / harness).",
-                "en": "Perplexity open-sourced SPACE (Apache-2.0, Rust), a Firecracker microVM per agent task with credentials and egress controlled outside the VM.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://the-decoder.com/googles-agent-compute-engine-gives-every-gemini-agent-its-own-hardware-isolated-micro-virtual-machine/",
-              "title": "Google Agent Compute Engine: a hardware-isolated microVM per Gemini agent + open-source Agent Substrate",
-              "brief": {
-                "zh": "agent 沙箱基建的超大厂落地，直接给 t725（agent 越界 × SPACE 沙箱，主词 microVM）补第二源与具体数字。站内积累线（sandbox）。",
-                "en": "Google Agent Compute Engine: a hardware-isolated microVM per Gemini agent + open-source Agent Substrate",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 5,
-          "status": "inbox",
-          "externalUrls": [
-            "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
-            "https://github.com/perplexityai/SPACE",
-            "https://the-decoder.com/googles-agent-compute-engine-gives-every-gemini-agent-its-own-hardware-isolated-micro-virtual-machine/"
-          ]
-        },
-        {
-          "id": "t747",
-          "theme": "security",
-          "title": {
-            "zh": "agent 成为攻击面与内鬼：NorForge 揭 Cairn agent 黑客面板（20+ 暴露面板，指挥自主 agent 入侵 100+ 站点：John Deere/SharkNinja/Cummins）× 微软 Guardian Agents「前沿模型无论出处都不可信」× Claude Code 装上 Expiro 病毒",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。",
-            "en": "Synthesis candidate: Cairn agent-hacking panels (NorForge) + Microsoft Guardian Agents + Claude Code installing Expiro; awaiting Trends bot. Follow-up: Army ECHOTRIBBLE self-replicating agents and Meta Muse GhostShares exposure. Follow-up: in-the-wild offensive agents (Symantec LLMjacking, Wiz ARTEX/Storm-0940); synthesis candidate, term LLMjacking.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
-              "title": "Microsoft launches Guardian Agents: 'frontier models, regardless of origin, cannot be trusted' — agents as insider threats",
-              "brief": {
-                "zh": "New product launch Oct 19 (distinct from skipped Oct 11 Nadella emergency-brake interview — this is a shipped control layer). Agent control/observability line; vendor-independent agent monitors vs lab self-assurance (cf. Goodfire monitors Oct 9 archive). 站内积累线 agent sandbox/control.",
-                "en": "Microsoft adds Guardian Agents to monitor and control enterprise AI agents as insider threats, saying frontier models regardless of origin cannot be trusted.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://norforge.com/blog/inside_cairn",
-              "title": "NorForge: Inside Cairn — exposed AI-agent hacking panels behind 100+ site breaches (John Deere, SharkNinja, Cummins)",
-              "brief": {
-                "zh": "New Oct 19 primary report; not in archive (no Cairn/NorForge hits). Real-world autonomous agent-harness offense at scale + harness UI exposure as attack surface — 站内积累线 agent harness/security; pairs with OpenCode breach (t731) and Microsoft agentic-insider piece. exploit-candidate: blackboard-style",
-                "en": "NorForge found 20+ exposed panels of Cairn, an open-source agent problem-solving engine, used to direct autonomous agents behind 100+ site breaches (John Deere, SharkNinja, Cummins).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
-              "title": "Claude Code installed tooling which was actually Expiro virus.",
-              "brief": {
-                "zh": "Claude Code 装的工具竟是 Expiro 病毒，接 OpenCode 泄露的 agent 供应链安全线",
-                "en": "A user reports Claude Code installed tooling that turned out to be the Expiro virus.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
-              "title": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
-              "brief": {
-                "zh": "Turns the archived lab-incident line (agents breaking out / self-replicating prompt injections) into an intentional military design — control/containment angle, not a launch. New vs. archive (no ARCYBER/ECHOTRIBBLE in topics). Fits t697/t701 containment + t676 agent-overreach cluster.",
-                "en": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
-              "title": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
-              "brief": {
-                "zh": "Concrete mechanism (unguessable path ≠ undiscoverable hostname) on a 10M-download agent product; security-of-agent-artifacts line. Not a dup of t696 Muse Wonder launch or the redact.dev WhatsApp hidden-instructions item. Medium priority.",
-                "en": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
-              "title": "Symantec: 'Skynet mode' agent hijacks exposed LLMs to run self-sustaining attacks (LLMjacking)",
-              "brief": {
-                "zh": "野外自主攻击 agent 的完整架构曝光（非概念演示）；接 t712+t573 野外 rogue agents、t697 自复制。Decoder 文为发现入口，primary 为 Symantec/security.com（未单独 curl 验证正文）。站内积累线（agent 安全）。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors",
-              "title": "Wiz: open-source pentest agent ARTEX used in the wild by Storm-0940 against IT/software vendors",
-              "brief": {
-                "zh": "开源 agent 渗透框架被国家级组织实战使用、带逐步 TTP 日志——可与 Symantec Skynet 合成“野外攻击 agent”综合；接 t605（韩国银行攻击）。aihot 发现、Wiz 原文链接取自 aihot 页面（Wiz 正文未单独 curl）。站内积累线（agent 安全）。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
-            "https://norforge.com/blog/inside_cairn",
-            "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
-            "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
-            "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
-            "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
-            "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors"
-          ]
+          "blog": {
+            "zh": "/cn/blog/frontier-lab-containment-attack-surface-claude-mythos/",
+            "en": "/blog/frontier-lab-containment-attack-surface-claude-mythos/"
+          }
         }
       ]
     },
@@ -6446,502 +6235,6 @@
           "blog": {
             "zh": "/cn/blog/control-the-harness-control-the-cost/",
             "en": "/blog/control-the-harness-control-the-cost/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-27T09:00:00+08:00",
-      "label": {
-        "zh": "9月27日 09:00",
-        "en": "Sep 27 09:00",
-        "ja": "9月27日 09:00"
-      },
-      "items": [
-        {
-          "id": "t090",
-          "theme": "research",
-          "title": {
-            "zh": "DeepSeek DSec：agent 训练沙箱弹性算力",
-            "en": "3 Million Sandboxes a Day: How DeepSeek DSec Runs the Execution Layer for Agent RL (2026 Survey)",
-            "ja": "3 Million Sandboxes a Day: How DeepSeek DSec Runs the Execution Layer for Agent RL (2026 Survey)"
-          },
-          "summary": {
-            "zh": "罕见 lab 级 agent-RL 执行基建披露；对照 coding-agent sandbox",
-            "en": "DeepSeek's DSec: one scale unit serves ~3M sandboxes a day at ~380K peak concurrency. Why agent RL bottlenecks on execution, how DSec handles images, memory overcommit, CPU isolation, preemption and reward hacking, a comparison with AgentENV, E2B and Modal, and a checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "罕见 lab 级 agent-RL 执行基建披露；对照 coding-agent sandbox",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "technode",
-              "url": "https://technode.com/2026/09/23/deepseek-dsec-agent-training-sandbox-infrastructure/",
-              "title": "DeepSeek details DSec sandbox infrastructure for agent training",
-              "brief": {
-                "zh": "Rare lab disclosure of agent-RL execution infra at production density; high relevance to coding-agent sandbox/harness builders. Chinese tech press (incl. 机器之心 listings / 每日经济新闻) amplified on Sep 23–24.",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://arxiv.org/abs/2609.22978",
-              "title": "DeepSeek Elastic Compute (DSec)",
-              "brief": {
-                "zh": "HN 158/43 高互动讨论 DeepSeek 弹性算力设计，强化 agent-RL 执行基建信号。",
-                "en": "Highly engaged HN thread (158/43) on DeepSeek elastic compute for dynamically scaling model execution—open-model agent-RL infra signal.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "technode",
-            "arxiv",
-            "hn"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://technode.com/2026/09/23/deepseek-dsec-agent-training-sandbox-infrastructure/",
-            "https://arxiv.org/abs/2609.22978"
-          ],
-          "blog": {
-            "zh": "/cn/blog/deepseek-dsec-agent-rl-sandbox-execution-layer/",
-            "en": "/blog/deepseek-dsec-agent-rl-sandbox-execution-layer/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-26T16:00:00+08:00",
-      "label": {
-        "zh": "9月26日 16:00",
-        "en": "Sep 26 16:00",
-        "ja": "9月26日 16:00"
-      },
-      "items": [
-        {
-          "id": "t226",
-          "theme": "research",
-          "title": {
-            "zh": "Jev vs LLMs as Rubric Judges：更便宜更快，但错在同一处",
-            "en": "Jev as a Rubric Judge: Cheaper and Faster, Wrong in the Same Places",
-            "ja": "Jev as a Rubric Judge: Cheaper and Faster, Wrong in the Same Places"
-          },
-          "summary": {
-            "zh": "Jev 当 rubric 评委：成本/时延大幅领先，但与 flash LLM 相关错误限制 cascade——站内 Jev 评测/路由可用性边界",
-            "en": "A deep read of arXiv:2609.29769—typed classifier Jev vs three flash LLM judges on nine panels and 5,003 pairs: accuracy seldom separates, cost/latency gaps hit 29–325× and 30–220×, and correlated errors cap a cheap-first cascade at about +1.5pp.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Jev 当 rubric 评委：成本/时延大幅领先，但与 flash LLM 相关错误限制 cascade——站内 Jev 评测/路由可用性边界",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.29769",
-              "title": "Jev vs. LLMs as Rubric Judges: Cheaper, Faster, and Wrong in the Same Places",
-              "brief": {
-                "zh": "「深耕候选：Jev」把 Jev 放进 rubric judge：9 面板 5003 pairs 上多数与 flash LLM 难分胜负，成本/时延却是 29–325× / 30–220× 更低；但分级标准上四者错在同一处，cascade 因相关错误几乎榨不出准确率。补「Jev 当评委」可用性与边界。",
-                "en": "Typed classifier Jev matches flash-tier LLM rubric judges on most of 9 panels / 5003 pairs at 29–325× lower cost and 30–220× lower latency, but shared correlated errors limit cascade gains over the best single judge.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29769"
-          ],
-          "blog": {
-            "zh": "/cn/blog/jev-rubric-judges-cheaper-faster-correlated-errors/",
-            "en": "/blog/jev-rubric-judges-cheaper-faster-correlated-errors/"
-          }
-        },
-        {
-          "id": "t232",
-          "theme": "research",
-          "title": {
-            "zh": "Hard Stop：内核级抢占与 Rogue Agent 遏制",
-            "en": "Hard Stop: Kernel-Level Preemption and Containment for Rogue Agents",
-            "ja": "Hard Stop: Kernel-Level Preemption and Containment for Rogue Agents"
-          },
-          "summary": {
-            "zh": "应用层失控时的紧急停车层：kernel-level preemption/containment——站内 containment/沙箱主线硬缺口",
-            "en": "A deep read of arXiv:2609.29808 Hard Stop—what out-of-band POSIX/kernel preemption and Dual-Sided Epistemic Andon require when URL allowlists, passive SIEM, and app-layer LLM guardrails are not enough.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "应用层失控时的紧急停车层：kernel-level preemption/containment——站内 containment/沙箱主线硬缺口",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://arxiv.org/abs/2609.29808",
-              "title": "Hard Stop: Kernel-Level Preemption and Containment for Rogue Agentic Execution",
-              "brief": {
-                "zh": "「深耕候选：containment」内核级抢占与遏制设计，针对逃出应用层控制的 agentic 负载；补自主执行紧急停车层，对照 HF 入侵/澳医保越权/研究环境外泄。",
-                "en": "Systems paper proposing kernel-level preemption and containment for rogue agentic execution that escapes application-level controls—an emergency-stop layer for autonomous workloads.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hashnode",
-              "url": "https://agenticmotion.hashnode.dev/ai-agent-circuit-breakers",
-              "title": "AI Agent Circuit Breakers",
-              "brief": {
-                "zh": "把熔断器思路用到自主研究 agent：停止失控或退化执行的应用层控制，对照内核 Hard Stop。",
-                "en": "Applies circuit-breaker controls to autonomous research agents as an application-layer stop for runaway or degraded runs—companion to kernel-level Hard Stop.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "arxiv",
-            "hashnode"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29808",
-            "https://agenticmotion.hashnode.dev/ai-agent-circuit-breakers"
-          ],
-          "blog": {
-            "zh": "/cn/blog/hard-stop-kernel-preemption-rogue-agent-containment/",
-            "en": "/blog/hard-stop-kernel-preemption-rogue-agent-containment/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-26T15:00:00+08:00",
-      "label": {
-        "zh": "9月26日 15:00",
-        "en": "Sep 26 15:00",
-        "ja": "9月26日 15:00"
-      },
-      "items": [
-        {
-          "id": "t001",
-          "theme": "models",
-          "title": {
-            "zh": "Claude Opus 5.5：降价 + 旗舰性能同窗发布",
-            "en": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose",
-            "ja": "Claude Opus 5.5: Lower Prices, Flagship Performance—How to Choose"
-          },
-          "summary": {
-            "zh": "与 GPT-6 对台：性能/价格/安全限制怎么选",
-            "en": "Anthropic launched Claude Opus 5.5 on 2026-09-22: about 40% lower cost on typical workloads versus Opus 5, with Fable-tier capability claims and matching safeguards. A builder-focused read of pricing, benchmarks, and coding-agent fit.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "与 GPT-6 对台：性能/价格/安全限制怎么选",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://www.anthropic.com/claude-opus-5-5",
-              "title": "Claude Opus 5.5",
-              "brief": {
-                "zh": "Flagship Anthropic launch hitting HN #1 with 1.7k+ points — major model cycle for coding agents and evals.",
-                "en": "Flagship Anthropic launch hitting HN #1 with 1.7k+ points — major model cycle for coding agents and evals.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/",
-              "title": "Anthropic releases Opus 5.5 with lower prices and Fable-level performance",
-              "brief": {
-                "zh": "与 OpenAI GPT-6 更新几乎同窗，构成「前沿模型降价+性能」叙事；适合对比两家路线与安全限制差异。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "36kr",
-              "url": "https://eu.36kr.com/zh/p/3995195771588745",
-              "title": "GPT-6 Sol 对决 Claude Opus 5.5：同日上线，谁是性价比之王",
-              "brief": {
-                "zh": "中文读者向二次叙事；可给已 shortlisted 的 t001/t002 提供中文角度与引语，不必新开大题。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=pNmfMi-yjZk",
-              "title": "Build an agentic software factory: deep dive",
-              "brief": {
-                "zh": "explore：Builder.io 官方 agentic software factory 深潜；1天·~2万播，续 t016 agent-native 产品线。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1woc97l/opus_55_vs_gpt6_sol_3d_pelican_riding_bike_test/",
-              "title": "Opus 5.5 vs GPT-6 Sol: 3D Pelican riding bike test in Blender",
-              "brief": {
-                "zh": "Viral side-by-side of dual flagship launches via classic 3D pelican bench — propagation test.",
-                "en": "Viral side-by-side of dual flagship launches via classic 3D pelican bench — propagation test.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://launchvideo.io",
-              "title": "Opus 5.5 is good at explainer videos",
-              "brief": {
-                "zh": "HN 130/89 on Opus 5.5 producing strong explainer videos — capability demo spreading beyond coding agents.",
-                "en": "HN 130/89 on Opus 5.5 producing strong explainer videos — capability demo spreading beyond coding agents.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1wp1eks/opus_55_anthropic_cooked_the_current_agent_space/",
-              "title": "Opus 5.5 - Anthropic cooked the current agent space",
-              "brief": {
-                "zh": "r/ClaudeAI consensus post: Opus 5.5 reshaping agent workflows — community validation of coding-agent leap.",
-                "en": "r/ClaudeAI consensus post: Opus 5.5 reshaping agent workflows — community validation of coding-agent leap.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "techcrunch",
-            "36kr",
-            "youtube",
-            "reddit",
-            "claude.dev"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://www.anthropic.com/claude-opus-5-5",
-            "https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/",
-            "https://eu.36kr.com/zh/p/3995195771588745",
-            "https://www.youtube.com/watch?v=jKRl_CSVxyI",
-            "https://www.reddit.com/r/ClaudeAI/comments/1wveyun/how_the_phonetophone_qr_file_transfer_got_built/ts/1wvbh1l/i_built_a_daw_ableton_with_claude_code_then_put/ts/1wvh6iy/i_gave_claude_code_the_ceo_job_for_my_free_chrome/ts/1woc97l/opus_55_vs_gpt6_sol_3d_pelican_riding_bike_test/",
-            "https://www.youtube.com/watch?v=NDTbUObZTlM",
-            "https://launchvideo.io",
-            "https://www.reddit.com/r/ClaudeAI/comments/1wveyun/how_the_phonetophone_qr_file_transfer_got_built/ts/1wvbh1l/i_built_a_daw_ableton_with_claude_code_then_put/ts/1wvh6iy/i_gave_claude_code_the_ceo_job_for_my_free_chrome/ts/1wp1eks/opus_55_anthropic_cooked_the_current_agent_space/",
-            "https://www.youtube.com/watch?v=QCkHIyEPIYo",
-            "https://claude.dev/blog/getting-the-most-out-of-opus-5-5/",
-            "https://www.reddit.com/r/ClaudeAI/comments/1wwsm61/did_they_nerf_opus_55_livenerf_baseline/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/claude-opus-5-5-price-and-performance/",
-            "en": "/blog/claude-opus-5-5-price-and-performance/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-26T10:00:00+08:00",
-      "label": {
-        "zh": "9月26日 10:00",
-        "en": "Sep 26 10:00",
-        "ja": "9月26日 10:00"
-      },
-      "items": [
-        {
-          "id": "t197",
-          "theme": "research",
-          "title": {
-            "zh": "JevOut：自然上下文即可翻转决策模型",
-            "en": "JevOut: Short Natural Context Can Flip Decision Models to a Fixed Wrong Option",
-            "ja": "JevOut: Short Natural Context Can Flip Decision Models to a Fixed Wrong Option"
-          },
-          "summary": {
-            "zh": "短而自然的上下文把正确决策翻到指定错选项；Jev TFR 61.4%，开源对等更高——决策模型作路由/工具接口的脆弱性",
-            "en": "A deep read of arXiv:2609.30243 JevOut—answer-preserving short context can redirect Jev and peer decision models from a correct choice to a pre-fixed wrong target—with checked numbers (Jev TFR 61.4%, high-confidence flips, BFCL tool-routing fragility) and a hardening checklist before treating probabilities as a control plane.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "短而自然的上下文把正确决策翻到指定错选项；Jev TFR 61.4%，开源对等更高——决策模型作路由/工具接口的脆弱性",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30243",
-              "title": "JevOut: Natural Context Can Flip Decision Models",
-              "brief": {
-                "zh": "「深耕候选：Jev」证明短而自然的上下文即可把原本正确的决策翻到指定错误选项：Jev 在 508 条初始正确决策上 TFR 61.4%，229 条错选项概率≥0.7；OpenSourceJev/Von/plain Qwen 同预算 TFR 64.9–73.2%。决策模型当路由/工具接口时的脆弱性直接打到站内 Jev 线。",
-                "en": "Short, answer-preserving natural context additions redirect dedicated decision models (Jev and peers) to a pre-fixed wrong option: 61.4% TFR on 508 initially correct Jev decisions; open peers hit 64.9–73.2% under the same budget.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30243",
-            "https://github.com/xzx34/JevOut"
-          ],
-          "blog": {
-            "zh": "/cn/blog/jevout-natural-context-flips-decision-models/",
-            "en": "/blog/jevout-natural-context-flips-decision-models/"
-          }
-        },
-        {
-          "id": "t198",
-          "theme": "research",
-          "title": {
-            "zh": "Qwen-Planner-Agent：移动规划 Agent 的 Model–Harness 共演化闭环",
-            "en": "Qwen-Planner-Agent: Planner–Harness Co-Evolution in a Closed-Loop AI-for-AI Stack",
-            "ja": "Qwen-Planner-Agent: Planner–Harness Co-Evolution in a Closed-Loop AI-for-AI Stack"
-          },
-          "summary": {
-            "zh": "数据飞轮 + CARE 在线 agentic RL + Model–Harness 共演化；MobilePA-Bench 77.05 前列且输出成本更低——相对 Jev-Mobile 的完整 Planner+Harness 生产栈",
-            "en": "A deep read of arXiv:2609.29892 Qwen-Planner-Agent—human-gated data flywheel, CARE hybrid-environment agentic RL, and model–harness co-evolution—with checked MobilePA-Bench Overall 77.05 and CARE −32.5% output tokens, set against Jev-Mobile and Growing Harness on this site.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "数据飞轮 + CARE 在线 agentic RL + Model–Harness 共演化；MobilePA-Bench 77.05 前列且输出成本更低——相对 Jev-Mobile 的完整 Planner+Harness 生产栈",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.29892",
-              "title": "Qwen-Planner-Agent: A Closed-Loop AI-for-AI Framework for Real-World Mobile Planner Agents",
-              "brief": {
-                "zh": "「深耕候选：移动规划·AI-for-AI」把数据飞轮、CARE 在线 agentic RL、Model–Harness 共演化打成闭环；MobilePA-Bench Overall 77.05 居评测前列且输出成本更低。相对昨日 Jev-Mobile，这是完整 Planner+Harness 生产栈。",
-                "en": "Closed-loop AI-for-AI for mobile planner agents: data flywheel, CARE agentic RL, and model–harness co-evolution. Qwen-Planner-Agent 27B leads MobilePA-Bench Overall (77.05) at lower estimated output cost than compared commercial LLMs.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29892"
-          ],
-          "blog": {
-            "zh": "/cn/blog/qwen-planner-agent-model-harness-coevolution/",
-            "en": "/blog/qwen-planner-agent-model-harness-coevolution/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-25T16:00:00+08:00",
-      "label": {
-        "zh": "9月25日 16:00",
-        "en": "Sep 25 16:00",
-        "ja": "9月25日 16:00"
-      },
-      "items": [
-        {
-          "id": "t179",
-          "theme": "research",
-          "title": {
-            "zh": "Jev-Mobile：Jev 作移动 GUI Agent 执行器",
-            "en": "Jev-Mobile: Low-Frequency VLM Goals, High-Frequency Typed Decisions on Live Accessibility-Tree Candidates",
-            "ja": "Jev-Mobile: Low-Frequency VLM Goals, High-Frequency Typed Decisions on Live Accessibility-Tree Candidates"
-          },
-          "summary": {
-            "zh": "Jev 从裁判/记忆走向高频执行器：VLM 低频规划 + Jev 选无树动作；AndroidWorld 79%、时延−33%、API 成本−73%",
-            "en": "A deep read of arXiv:2609.30186 Jev-Mobile—moving Jev from judge/memory into an Android GUI executor—with checked AndroidWorld numbers (79% success; −32.7% time and −73.4% API cost on successful trajectories vs step-wise VLM) and a reusable VLM×typed-executor checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Jev 从裁判/记忆走向高频执行器：VLM 低频规划 + Jev 选无树动作；AndroidWorld 79%、时延−33%、API 成本−73%",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30186",
-              "title": "Jev-Mobile: Jev as an Executor for Mobile GUI Agents",
-              "brief": {
-                "zh": "「深耕候选：Jev」把站内 System-One 决策模型直接接到 Android GUI 执行环：低频 VLM 定局部目标，高频 Jev 在无树候选上连选动作。AndroidWorld 全量 79% 成功率贴近逐步 VLM，成功轨迹端到端时间 −32.7%、API 成本 −73.4%。Jev 从记忆/裁判走向移动执行器。",
-                "en": "Jev-Mobile decouples low-frequency VLM planning from high-frequency typed execution: the VLM sets local goals while Jev selects accessibility-tree actions. On full AndroidWorld it reaches 79% success vs 84% step-wise VLM, cutting mean successful-trajectory time 32.7% and model API cost 73.4%.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30186"
-          ],
-          "blog": {
-            "zh": "/cn/blog/jev-mobile-system-one-gui-executor/",
-            "en": "/blog/jev-mobile-system-one-gui-executor/"
-          }
-        },
-        {
-          "id": "t180",
-          "theme": "research",
-          "title": {
-            "zh": "SpecHarness：规格签字、Agent 提案（Who Holds the Pen）",
-            "en": "Who Holds the Pen? Let Specifications, Not Agents, Sign Off: SpecHarness and Spec Authority",
-            "ja": "Who Holds the Pen? Let Specifications, Not Agents, Sign Off: SpecHarness and Spec Authority"
-          },
-          "summary": {
-            "zh": "规格升格为外部权威：可见规格→可验证义务，证据门控提交；SkillsBench Pass+12pp / 状态权威缺口−20pp；OpenSpec/SDD 运行时落地",
-            "en": "A deep read of arXiv:2609.29921 SpecHarness—compiling visible specs into verifiable obligations so agents propose while an external runtime commits state and finalization from qualified evidence—contrasted with OpenSpec/SDD and this site’s harness narrative, plus a practical proposal–authority checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "规格升格为外部权威：可见规格→可验证义务，证据门控提交；SkillsBench Pass+12pp / 状态权威缺口−20pp；OpenSpec/SDD 运行时落地",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.29921",
-              "title": "Who Holds the Pen? Let Specifications, Not Agents, Sign Off",
-              "brief": {
-                "zh": "「深耕候选：OpenSpec·SDD」把规格从「给 agent 看的上下文」升格为外部权威：SpecHarness 把可见规格编译成可验证义务，只有合格证据才能提交状态与收尾。SkillsBench 上七模型 Pass +12pp、状态权威缺口 −20pp。站内「规格签字、agent 提案」主线的运行时落地。",
-                "en": "Most agents let the same model propose, evaluate, and declare completion. SpecHarness separates proposals from authoritative state via source-linked obligations and evidence-gated commit. On SkillsBench, Pass rises +12pp macro while state-authority gap falls −20pp across seven models.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29921"
-          ],
-          "blog": {
-            "zh": "/cn/blog/specharness-spec-holds-the-pen/",
-            "en": "/blog/specharness-spec-holds-the-pen/"
           }
         }
       ]
