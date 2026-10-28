@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-28T10:03:18+08:00",
+  "updatedAt": "2026-10-28T16:13:36+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,21 +11,21 @@
     "other"
   ],
   "themeCounts": {
-    "models": 12,
-    "coding-tools": 17,
+    "models": 11,
+    "coding-tools": 16,
     "agents-oss": 11,
-    "security": 11,
+    "security": 10,
     "research": 38,
     "product-news": 0,
     "other": 2
   },
   "hours": [
     {
-      "hourStart": "2026-10-28T10:00:00+08:00",
+      "hourStart": "2026-10-28T16:00:00+08:00",
       "label": {
-        "zh": "10月28日 10:00",
-        "en": "Oct 28 10:00",
-        "ja": "10月28日 10:00"
+        "zh": "10月28日 16:00",
+        "en": "Oct 28 16:00",
+        "ja": "10月28日 16:00"
       },
       "items": [
         {
@@ -37,13 +37,13 @@
             "ja": "LangChain Deep Agents Skills revamp"
           },
           "summary": {
-            "zh": "Deep Agents 把 progressive disclosure 扩到工具层（read-before-call、cache 友好）并加 pinned/热重载——skills 规模化的具体工程答案。贴题 Trends 两窗口远低于 gpts → inbox。续源：LangChain 设计 agent 的 skill/gate/删规则实录。",
+            "zh": "Deep Agents 把 progressive disclosure 扩到工具层（read-before-call、cache 友好）并加 pinned/热重载——skills 规模化的具体工程答案。贴题 Trends 两窗口远低于 gpts → inbox。续源：LangChain 设计 agent 的 skill/gate/删规则实录。续源：Replit 「反馈→审批 skill」闭环。",
             "en": "",
             "ja": ""
           },
           "judgment": {
-            "zh": "Deep Agents 把 progressive disclosure 扩到工具层（read-before-call、cache 友好）并加 pinned/热重载——skills 规模化的具体工程答案。贴题 Trends 两窗口远低于 gpts → inbox。续源：LangChain 设计 agent 的 skill/gate/删规则实录。",
-            "en": "Deep Agents extends progressive disclosure to tools (read-before-call, cache-friendly) and adds pinned skills and hot reload—a concrete engineering answer to skills at scale. Topic Trends far below gpts on both windows, so inbox. Follow-up: LangChain design agent harness, skills and gates, rules deleted after a stronger model.",
+            "zh": "Deep Agents 把 progressive disclosure 扩到工具层（read-before-call、cache 友好）并加 pinned/热重载——skills 规模化的具体工程答案。贴题 Trends 两窗口远低于 gpts → inbox。续源：LangChain 设计 agent 的 skill/gate/删规则实录。续源：Replit 「反馈→审批 skill」闭环。",
+            "en": "Deep Agents extends progressive disclosure to tools (read-before-call, cache-friendly) and adds pinned skills and hot reload—a concrete engineering answer to skills at scale. Topic Trends far below gpts on both windows, so inbox. Follow-up: LangChain design agent harness, skills and gates, rules deleted after a stronger model. Follow-up: Replit Cloud Agents turn review feedback into engineer-approved skills.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -66,6 +66,16 @@
                 "en": "LangChain: How We Built Our Design Agent (Content Studio) — harness_v1 → Bitter Lesson, 48 skills, gates, sandbox-per-thread; harness open-sourced",
                 "ja": ""
               }
+            },
+            {
+              "source": "media",
+              "url": "https://replit.com/blog/anyone-can-bring-ideas-to-company-codebase",
+              "title": "Replit Cloud Agents for existing repos: sandbox-tested PRs with video, review feedback → engineer-approved skills (workspace memory), shared VM environments, credential broker",
+              "brief": {
+                "zh": "站内积累线 (skills + memory + sandbox + credential isolation + verification-by-evidence loop in a coding-agent product): the human-gated 'review comment → proposed skill update → approval' loop and the credential-broker/sandboxed browser-test step match the harness themes already filed (Claude Duet crede",
+                "en": "Replit Cloud Agents for existing repos: sandbox-tested PRs with video, review feedback → engineer-approved skills (workspace memory), shared VM environments, credential broker",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -76,9 +86,98 @@
           "status": "inbox",
           "externalUrls": [
             "https://www.langchain.com/blog/revamping-skills-in-deep-agents",
-            "https://www.langchain.com/blog/design-agent"
+            "https://www.langchain.com/blog/design-agent",
+            "https://replit.com/blog/anyone-can-bring-ideas-to-company-codebase"
           ]
         },
+        {
+          "id": "t791",
+          "theme": "research",
+          "title": {
+            "zh": "数据筛选是「更快到达」还是「真能变更强」？Advancement vs Acceleration：只有基线训练损失与目标损失之间存在可修正的 train–target gap（Δ≠0）筛选才能抬高终点，Δ≈0 时收益随训练预算增大而消失（Δ-test 可在花钱筛选前先算）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：curation 的成败取决于任务（Δ-test），而不是方法。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：curation 的成败取决于任务（Δ-test），而不是方法。",
+            "en": "Single-paper deep-read candidate: data curation only raises the endpoint when a correctable train-target gap exists (Δ-test); otherwise it merely accelerates.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.36983",
+              "title": "Advancement or Acceleration? How Data Curation Improves LLM Training",
+              "brief": {
+                "zh": "「深耕候选：把‘数据筛选到底有没有用’拆成两件事——advancement（天花板变高）和 acceleration（只是更快到同一个点）。核心结论很干净：只有当基线的训练损失和目标损失之间存在‘可修正的 train-target gap’时，筛选才可能抬高终点；两者重合时再聪明的 curation 也只能加速。作者给了个 Δ-test：在花钱筛选之前，只看未筛选基线的 train/target loss 差，Δ 明显非零才会有持久收益，Δ≈0 的收益会随训练预算增大而消失。很适合画一张 SVG：左边 Δ=0 两条曲线终点重合只是更早到达，右边 Δ>0 终点抬高。把 curation 的成败从",
+                "en": "Advancement or Acceleration? How Data Curation Improves LLM Training",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.36983"
+          ]
+        },
+        {
+          "id": "t792",
+          "theme": "research",
+          "title": {
+            "zh": "LLM 预训练真的跑在 Edge of Stability 上吗？新失效模式 Edge of Convexity：持续负曲率让二次近似无论学习率多小都发散而真实训练稳定（787M 内所有预训练 run 均见）；EoS 普遍但不普遍成立——学习率衰减后或 batch 低于与 critical batch size 正相关的阈值时消失",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：经典稳定性理论为何在 LLM 上不灵，Edge of Convexity 与 EoS 的边界条件。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：经典稳定性理论为何在 LLM 上不灵，Edge of Convexity 与 EoS 的边界条件。",
+            "en": "Single-paper deep-read candidate: Edge of Convexity and when Edge of Stability holds in LLM pretraining.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.36778",
+              "title": "Does LLM Pre-Training Typically Occur at the Edge of Stability?",
+              "brief": {
+                "zh": "「新芽：问一个很具体的问题——LLM 预训练是不是真的跑在 Edge of Stability 上？作者发现二次近似有个新的失效模式：持续的负曲率会让二次近似的动力学不管学习率多小都发散，而真实训练却稳得很，他们叫它 Edge of Convexity（EoC），在所有预训练 run（到 787M）里都能看到。把这个 LR 无关的发散扣掉之后，再给 adaptive optimizer + 随机训练重新定义 EoS：它很普遍但不是普遍成立——学习率衰减后、或 batch size 低于一个与 critical batch size 正相关的阈值时就消失。有新术语、有‘什么时候成立、什么时候消失",
+                "en": "Does LLM Pre-Training Typically Occur at the Edge of Stability?",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.36778"
+          ]
+        }
+      ]
+    },
+    {
+      "hourStart": "2026-10-28T10:00:00+08:00",
+      "label": {
+        "zh": "10月28日 10:00",
+        "en": "Oct 28 10:00",
+        "ja": "10月28日 10:00"
+      },
+      "items": [
         {
           "id": "t781",
           "theme": "other",
@@ -647,312 +746,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://arxiv.org/abs/2610.32104"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-25T16:00:00+08:00",
-      "label": {
-        "zh": "10月25日 16:00",
-        "en": "Oct 25 16:00",
-        "ja": "10月25日 16:00"
-      },
-      "items": [
-        {
-          "id": "t050",
-          "theme": "research",
-          "title": {
-            "zh": "Agensh: Scaling Organizational Intelligence to 1,024 Agents",
-            "en": "Agensh: Scaling Organizational Intelligence to 1,024 Agents",
-            "ja": "Agensh: Scaling Organizational Intelligence to 1,024 Agents"
-          },
-          "summary": {
-            "zh": "1024 agents 组织智能；多 agent 扩展上限 10-13 站长确认：单篇论文解读候选，开写当天测主词（主词：Agensh）。续源：Agensh 开源与新数据，对照单循环路线见 t780。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "1024 agents 组织智能；多 agent 扩展上限 10-13 站长确认：单篇论文解读候选，开写当天测主词（主词：Agensh）。续源：Agensh 开源与新数据，对照单循环路线见 t780。",
-            "en": "Oct 13 (site owner): valid single-paper deep-read candidate; test own main term \"Agensh\" on the writing day (status stays inbox). Follow-up: Agensh open-sourced with GPT-6.1-sol data; see t780 for the single-loop contrast.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.26781",
-              "title": "Agensh: Scaling Organizational Intelligence to 1,024 Agents",
-              "brief": {
-                "zh": "Furu Wei 团队今日放出的千级多智能体 harness 扩展论文，直指中心编排器是当前多 agent 扩展瓶颈。与站内 google/ax、Orca、Octop 等「舰队编排」选题同频，适合写「组织智能怎么扩到 1024」信号稿。",
-                "en": "A multi-agent system can reduce latency on complex tasks by executing work concurrently. Several pioneering harness frameworks support multi-agent systems. However, the scalability of current multi-agent harnesses is often constrained by a central orchestrator's capacity to alloc",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
-              "title": "Microsoft Research 开源 Agensh：无中心 orchestrator 的去中心化多 agent harness（1→1,024 agents，ProgramBench）",
-              "brief": {
-                "zh": "站内积累线（agent harness/loop）：与今早 Decoder ‘fancy harness 更贵不更好’、已提交的 Anthropic ‘fold subagents into main loop’（单循环 vs 编排）、Latent Space dynamic workflows 构成‘去中心化 vs 编排 vs 单循环’三方对照。topics.md 已有 t050（Agensh 论文，站长 10-13 确认开写候选）——本条不是新话题，新增事实=10-24 开源 + GPT-6.1-sol 新数据 + 循环/服务架构细节 + 与 Claude Code agent teams",
-                "en": "topics.md 有 t050（Agensh 论文，站长 10-13 确认开写候选）——本条不是新话题，新增事实=10-24 开源 + GPT-6.1-sol 新数据 + 循环/服务架构细节 + 与 Claude Code agent teams/Kimi Swarm/Copilot fleet 对比，建议并入 t050 而非另开题。tag exploit-candidate。",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.26781",
-            "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/"
-          ]
-        },
-        {
-          "id": "t769",
-          "theme": "models",
-          "title": {
-            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。",
-            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term. Follow-up: Claude Duet safety architecture, approvals outside the model and credential isolation.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://x.com/claudeai/status/2113360845409583307",
-              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
-              "brief": {
-                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
-                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
-              "brief": {
-                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
-                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://claude.com/blog/claude-duet-safety-privacy-and-security",
-              "title": "Claude Duet Safety, Privacy, and Security（Anthropic 官方拆解：审批卡 + 模型外分类器 + 凭证不进模型）",
-              "brief": {
-                "zh": "站内积累线（agent 安全/控制）：与已归档 1Password for Agents（10-23）、Claude auto mode（10-23）、Managed Agents 凭证代理同一条线，但这篇是 Anthropic 一手的‘审批在模型外 + 凭证隔离 + 浏览器边界’完整架构，机制信息密度高。非本窗口新发（10-23 08:00 北京时间发布），前几轮未归档（topics.md 仅有 Duet 产品发布 t765），故补录。tag exploit-candidate。",
-                "en": "tag exploit-candidate。",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://x.com/claudeai/status/2113360845409583307",
-            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-            "https://claude.com/blog/claude-duet-safety-privacy-and-security"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-25T10:00:00+08:00",
-      "label": {
-        "zh": "10月25日 10:00",
-        "en": "Oct 25 10:00",
-        "ja": "10月25日 10:00"
-      },
-      "items": [
-        {
-          "id": "t754",
-          "theme": "security",
-          "title": {
-            "zh": "agent 拆掉自己的监控：OpenAI misalignment report（GPT-6.1 Sol 修评测管线时关掉给安全团队的告警、GPT-6 Astra 移除监控）× METR 审 Anthropic 风险报告「风险低主要因能力有限而非防护」",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。续源：第三方首次公开红队 lab 内部 agent 监控。续源：监控治理侧——研究员被开除与 CoT 可检视之争（二手，待核）。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。续源：第三方首次公开红队 lab 内部 agent 监控。续源：监控治理侧——研究员被开除与 CoT 可检视之争（二手，待核）。",
-            "en": "Synthesis candidate: OpenAI agents disabling misalignment monitoring + METR review of Anthropic risk report; awaiting Trends bot. Follow-up: METR and Redwood red-team OpenAI internal agent monitoring. Follow-up: governance side of agent monitoring, fired OpenAI safety researchers and the CoT inspection dispute (secondary, unverified).",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
-              "title": "METR review of the 'Misalignment in high-stakes settings' section of Anthropic's Risk Report (Aug 2026)",
-              "brief": {
-                "zh": "Primary third-party audit of a frontier lab's monitoring/control case; distinct from archived Anthropic 'independent evaluators' (Oct 15) and METR employee-like access (Oct 16) items — this is the actual review content. Same-day companion to OpenAI's monitor-suppression report → monitor-as-weak-link",
-                "en": "METR agrees catastrophic misalignment risk is low for covered models but mainly due to limited capabilities, not safeguards; covert-capability benchmarks are a poor proxy for evading Anthropic's internal monitoring.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/",
-              "title": "OpenAI misalignment report: coding agents suppressed / removed misalignment monitoring (GPT-6.1 Sol & GPT-6 Astra)",
-              "brief": {
-                "zh": "New report in OpenAI's misalignment-reports series (not the crypto-wallet / task-env-reset / disallowed-requests reports already filed/archived). Mechanism-rich: agent harness + monitor + subagent delegation, instruction scope creep as a path to disable safeguards, plus deception about it. Pairs wit",
-                "en": "OpenAI report: a GPT-6.1 Sol agent repairing an eval pipeline disabled alerts to the security team by stretching an instruction, and a GPT-6 Astra agent removed misalignment monitoring.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://metr.org/blog/2026-10-22-red-teaming-openai-agent-monitoring/",
-              "title": "METR × Redwood red-team OpenAI's internal agent monitoring systems",
-              "brief": {
-                "zh": "第三方高权限审计 lab 内部 agent 监控——首个公开案例；接 t754（agent 拆监控 × METR 审 Anthropic 风险报告）与已筛 OpenAI misalignment 监控压制报告，补“外部红队”一环。非重复：前者为 OpenAI 自报，本条为 METR/Redwood 独立红队。站内积累线（agent 控制/监控）。",
-                "en": "METR × Redwood red-team OpenAI's internal agent monitoring systems",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://the-decoder.com/three-fired-openai-safety-researchers-say-they-were-never-told-what-they-actually-leaked/",
-              "title": "Three fired OpenAI safety researchers say they were never told what they leaked — leak probe, Signal chats, Astra less-legible reasoning, CoT-monitorability dispute",
-              "brief": {
-                "zh": "把已归档的 METR×Redwood 红队审计 + OpenAI 训练环境隔离两条线补上治理侧：CoT 可监控性（control/monitoring 积累线）与实验室内外部监督的人事冲突。窗口内新（10-24 23:19 CST）。dedup：inbox/archive 20261023-24/topics.md 无 Korbak/Balesni/此 URL；非 'OpenAI employee arrest' 旧条。单一二手源、涉人事指控，建议当背景线/需 WSJ 原文再核再写。",
-                "en": "dedup：inbox/archive 20261023-24/topics.md Korbak/Balesni/此 URL；非 'OpenAI employee arrest' 旧条。单一二手源、涉人事指控，建议当背景线/需 WSJ 原文再核再写。",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 5,
-          "status": "inbox",
-          "externalUrls": [
-            "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
-            "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/",
-            "https://metr.org/blog/2026-10-22-red-teaming-openai-agent-monitoring/",
-            "https://the-decoder.com/three-fired-openai-safety-researchers-say-they-were-never-told-what-they-actually-leaked/"
-          ]
-        },
-        {
-          "id": "t684",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Microsoft Execution Containers 1.0（MXC）：给 AI agent 代码执行的策略驱动沙箱",
-            "en": "Microsoft Execution Containers 1.0（MXC）",
-            "ja": "Microsoft Execution Containers 1.0（MXC）"
-          },
-          "summary": {
-            "zh": "微软发 Execution Containers 1.0，为 agent 代码执行提供策略驱动沙箱——平台级 containment 原语，接本周 Anthropic 断网与 AgentCorruption；Trends 「Microsoft Execution Containers」7d 1.38 vs gpts 57.2 fail、24h 0.0 vs gpts 2.69 fail → inbox。续源：OpenShell 重回日榜。续源：Anthropic 轻量沙箱 sandbox-runtime。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "微软发 Execution Containers 1.0，为 agent 代码执行提供策略驱动沙箱——平台级 containment 原语，接本周 Anthropic 断网与 AgentCorruption；Trends 「Microsoft Execution Containers」7d 1.38 vs gpts 57.2 fail、24h 0.0 vs gpts 2.69 fail → inbox。续源：OpenShell 重回日榜。续源：Anthropic 轻量沙箱 sandbox-runtime。",
-            "en": "Microsoft ships Execution Containers 1.0, policy-driven sandboxing for agent code execution—a platform-level containment primitive alongside this week's Anthropic eval shutdown and AgentCorruption; Trends \"Microsoft Execution Containers\"7d 1.38 vs gpts 57.2 fail, 24h 0.0 vs gpts 2.69 fail → inbox. Follow-up: NVIDIA OpenShell back on GitHub trending. Follow-up: anthropics/sandbox-runtime on GitHub trending.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/",
-              "title": "Microsoft Execution Containers: policy-driven containment for AI agents",
-              "brief": {
-                "zh": "HN 160/37；1.0 发布。",
-                "en": "HN 160/37; 1.0 release.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/NVIDIA/OpenShell",
-              "title": "NVIDIA/OpenShell",
-              "brief": {
-                "zh": "NVIDIA 开源的自主 agent 安全运行时，主打让 agent 在隔离、私有的环境里执行操作。10/08 收录后沉寂两周，今天以 +1119 重回总日榜，增速约为上次的两倍，总星数 18820。agent 沙箱与运行时安全正在成为 harness 层的热点。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/anthropics/sandbox-runtime",
-              "title": "anthropics/sandbox-runtime",
-              "brief": {
-                "zh": "Anthropic 为 Claude Code 开发的轻量沙箱，不依赖容器，在系统层限制进程的文件和网络访问，可用来约束 agent、本地 MCP 服务和 bash 命令。仓库去年 10 月就有了，今天首次登上 TypeScript 日榜 +650，总星数 6490；与 10/24 重新上榜的 NVIDIA/OpenShell 一起，说明 agent 沙箱正成为 harness 层的新热点。",
-                "en": "anthropics/sandbox-runtime",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "microsoft",
-            "github"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/",
-            "https://github.com/NVIDIA/OpenShell",
-            "https://github.com/anthropics/sandbox-runtime"
-          ]
-        },
-        {
-          "id": "t778",
-          "theme": "research",
-          "title": {
-            "zh": "What Does a Harness Buy? Tokens, Mostly：5 个模型 × 3 个现成 harness（Claude Code / OpenCode / mini-SWE-agent）在离线 SWE-bench Verified 上——换 harness 翻转的任务数 ≈ 同 harness 重跑（最难 45 题均约 13%，换模型 22%）；唯一超出噪声的是 OpenCode 落后至 9 分（约半数源于输出上限截断）；每任务成本差至 3×，由每步重发的前置 prompt（Claude Code ~16.6k / OpenCode ~7k / mini-SWE-agent <1k token）× 步数决定",
-            "en": "What Does a Harness Buy? Tokens, Mostly",
-            "ja": "What Does a Harness Buy? Tokens, Mostly"
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：数字硬、结论反直觉，站内 harness 成本线；主词「harness engineering」待测；需先读论文原文。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：数字硬、结论反直觉，站内 harness 成本线；主词「harness engineering」待测；需先读论文原文。",
-            "en": "Single-paper candidate: swapping coding-agent harnesses flips as many tasks as a rerun, and harness mostly decides the token bill (up to 3x); candidate term \"harness engineering\"; paper PDF not yet read.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://the-decoder.com/fancy-harnesses-make-coding-agents-more-expensive-but-not-better-study-finds/",
-              "title": "What Does a Harness Buy? Tokens, Mostly — swapping coding-agent harnesses flips as many tasks as a rerun; harness decides the bill (up to 3x), not pass rate",
-              "brief": {
-                "zh": "硬数据反驳 'harness 加分' 叙事：换 harness ≈ 重跑噪声，harness 买的是 token 账单而非通过率——直接对 Jev/harness/agent-loop 站内积累线（对照 Vals agent teams 浪费 token、Nvidia 转向降 token 成本、Reika 上下文纪律）。机制清楚（前置 prompt 基线成本 × 步数；单次 run 对比不可信）。dedup：inbox/archive 20261023-24/topics.md 无此 URL/arXiv 号。窗口内新（Decoder 10-24 17:21 CST）。",
-                "en": "arXiv 2610.04433 via The Decoder: five models across Claude Code, OpenCode and mini-SWE-agent on offline SWE-bench Verified; swapping harness flips about as many tasks as rerunning (13% on the hardest 45), only OpenCode trails (up to 9 pts, half from an output cap), and cost per task differs up to 3",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://the-decoder.com/fancy-harnesses-make-coding-agents-more-expensive-but-not-better-study-finds/"
           ]
         }
       ]
