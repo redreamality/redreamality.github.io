@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-27T16:04:09+08:00",
+  "updatedAt": "2026-10-28T10:03:18+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,177 @@
     "other"
   ],
   "themeCounts": {
-    "models": 10,
-    "coding-tools": 18,
-    "agents-oss": 12,
+    "models": 12,
+    "coding-tools": 17,
+    "agents-oss": 11,
     "security": 11,
-    "research": 43,
+    "research": 38,
     "product-news": 0,
     "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-10-28T10:00:00+08:00",
+      "label": {
+        "zh": "10月28日 10:00",
+        "en": "Oct 28 10:00",
+        "ja": "10月28日 10:00"
+      },
+      "items": [
+        {
+          "id": "t633",
+          "theme": "models",
+          "title": {
+            "zh": "LangChain Deep Agents Skills revamp：工具绑定到 skill、pinned skill、长线程热重载",
+            "en": "LangChain Deep Agents Skills revamp",
+            "ja": "LangChain Deep Agents Skills revamp"
+          },
+          "summary": {
+            "zh": "Deep Agents 把 progressive disclosure 扩到工具层（read-before-call、cache 友好）并加 pinned/热重载——skills 规模化的具体工程答案。贴题 Trends 两窗口远低于 gpts → inbox。续源：LangChain 设计 agent 的 skill/gate/删规则实录。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Deep Agents 把 progressive disclosure 扩到工具层（read-before-call、cache 友好）并加 pinned/热重载——skills 规模化的具体工程答案。贴题 Trends 两窗口远低于 gpts → inbox。续源：LangChain 设计 agent 的 skill/gate/删规则实录。",
+            "en": "Deep Agents extends progressive disclosure to tools (read-before-call, cache-friendly) and adds pinned skills and hot reload—a concrete engineering answer to skills at scale. Topic Trends far below gpts on both windows, so inbox. Follow-up: LangChain design agent harness, skills and gates, rules deleted after a stronger model.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "langchain",
+              "url": "https://www.langchain.com/blog/revamping-skills-in-deep-agents",
+              "title": "Revamping Skills in Deep Agents",
+              "brief": {
+                "zh": "一级源：tool binding、pinned skills、mid-thread reload；千级 skill 注册表。",
+                "en": "Primary: tool binding, pinned skills, mid-thread reload; registries of thousands of skills.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.langchain.com/blog/design-agent",
+              "title": "LangChain: How We Built Our Design Agent (Content Studio) — harness_v1 → Bitter Lesson, 48 skills, gates, sandbox-per-thread; harness open-sourced",
+              "brief": {
+                "zh": "Mechanism-rich agent-harness case with real numbers: skills/gates/memory/wiki split, router-skill design, subagent split rules for parallel work, 'remove scaffolding when the model improves'. Not previously filed (checked inbox, archive 20261024/25/27, topics.md; closest is Vercel durable-harness an",
+                "en": "LangChain: How We Built Our Design Agent (Content Studio) — harness_v1 → Bitter Lesson, 48 skills, gates, sandbox-per-thread; harness open-sourced",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "langchain",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.langchain.com/blog/revamping-skills-in-deep-agents",
+            "https://www.langchain.com/blog/design-agent"
+          ]
+        },
+        {
+          "id": "t781",
+          "theme": "other",
+          "title": {
+            "zh": "OpenAI 宣布 AI 协助的数学/计算机/物理三项新发现——其中硬结果「指数时间假设（ETH）被证伪」（OpenAI math 仓预印本，HN 267；若成立影响极大，验证状态待核）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。",
+            "en": "High-stakes unverified claim: OpenAI announces AI-assisted discoveries including a preprint claiming the Exponential Time Hypothesis is false; verify before any deep read (cf. earlier retractions). Follow-up: classification of finite simple groups formalized in Lean.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
+              "title": "'Announcing three new discoveries in mathematics, computer science, and physics'",
+              "brief": {
+                "zh": "HN 430/162：OpenAI 宣布 AI 协助的数学/计算机/物理三项发现；同轮 HN 267「The Exponential Time Hypothesis Is False」(https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf, https://news.ycombinator.com/item?id=50251661) 是其中的硬结果，ETH 被证伪若成立影响极大；适合 AI for science",
+                "en": "OpenAI announces three AI-assisted discoveries in mathematics, computer science and physics; a companion preprint in its math repo claims the Exponential Time Hypothesis is false. HN 430/162 and 267. Verification status unknown.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://cfsg.axiommath.ai/",
+              "title": "'Classification of Finite Simple Groups Formalized in Lean'",
+              "brief": {
+                "zh": "HN 169/44：有限单群分类在 Lean 中形式化完成（axiommath.ai）；AI for math/形式化证明线，接 10/27 OpenAI 三项发现与 ETH 证伪稿（Lobsters 同日也有 ETH 帖，https://lobste.rs/s/pq6ju6）。",
+                "en": "'Classification of Finite Simple Groups Formalized in Lean'",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
+            "https://cfsg.axiommath.ai/"
+          ]
+        },
+        {
+          "id": "t789",
+          "theme": "models",
+          "title": {
+            "zh": "agent 会替人「定调」：Anthropic RCT——50 名因果推断分析师用 Claude Code（Opus 4.8）评估同一项目，每个 agent 被暗中随机给一个「倾向」，分析师 86% 的分析选择跟着倾向走（有先验偏好者：agent 不同意时 60% 改口、同意时仅 6%）；77% 复用了 agent 的论证，只有 15% 注明出处；4 个倾向单独即可预测 82% 的最终建议 × HN「Here be monsters」：agent 干活时人还需要懂什么",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇研究深读候选：86%/60%-vs-6% 数字抓人，落在「人在回路是否真独立」；主词「automation bias」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇研究深读候选：86%/60%-vs-6% 数字抓人，落在「人在回路是否真独立」；主词「automation bias」待测。",
+            "en": "Single-study candidate: analysts followed a hidden agent lean 86% of the time (60% switch when the agent disagreed vs 6% when it agreed); candidate term \"automation bias\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://blog.adrq.dev/here-be-monsters-what-do-you-still-need-to-know-when-agents-do-the-work",
+              "title": "'Here be monsters: What do you still need to know when agents do the work?'",
+              "brief": {
+                "zh": "HN 156/85：讨论 Agent 干活时人还需要掌握什么（理解债/能力边界）；与「AI Skills 无价值」、harness 线同属 agent 工作流观点素材。",
+                "en": "HN 156/85 opinion post: what you still need to know when agents do the work (comprehension debt and capability limits).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.anthropic.com/research/agents-judgment-calls",
+              "title": "Anthropic: How AI agents shape experts' judgment calls — 50 analysts followed a hidden agent 'lean' 86% of the time",
+              "brief": {
+                "zh": "Human-in-the-loop 'independent check' evidence: the human reviewer is not independent when the agent frames decisions — directly relevant to agent oversight/control, automated-researcher pipelines and eval reviewing. New vs archive 10-24/25/27 and topics.md (grep for judgment-calls/agents-judgment:",
+                "en": "Anthropic RCT: 50 analysts used Claude Code to evaluate a program, each agent secretly given a coin-flip lean per decision; analysts matched the lean 86% of the time, switched 60% vs 6% when the agent disagreed vs agreed with their prior, reused arguments 77% but credited the agent 15%; leans alone",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://blog.adrq.dev/here-be-monsters-what-do-you-still-need-to-know-when-agents-do-the-work",
+            "https://www.anthropic.com/research/agents-judgment-calls"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-27T16:00:00+08:00",
       "label": {
@@ -373,45 +535,6 @@
             "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
             "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
             "https://www.youtube.com/watch?v=ybx0mmd22pQ"
-          ]
-        },
-        {
-          "id": "t781",
-          "theme": "other",
-          "title": {
-            "zh": "OpenAI 宣布 AI 协助的数学/计算机/物理三项新发现——其中硬结果「指数时间假设（ETH）被证伪」（OpenAI math 仓预印本，HN 267；若成立影响极大，验证状态待核）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。",
-            "en": "High-stakes unverified claim: OpenAI announces AI-assisted discoveries including a preprint claiming the Exponential Time Hypothesis is false; verify before any deep read (cf. earlier retractions).",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
-              "title": "'Announcing three new discoveries in mathematics, computer science, and physics'",
-              "brief": {
-                "zh": "HN 430/162：OpenAI 宣布 AI 协助的数学/计算机/物理三项发现；同轮 HN 267「The Exponential Time Hypothesis Is False」(https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf, https://news.ycombinator.com/item?id=50251661) 是其中的硬结果，ETH 被证伪若成立影响极大；适合 AI for science",
-                "en": "OpenAI announces three AI-assisted discoveries in mathematics, computer science and physics; a companion preprint in its math repo claims the Exponential Time Hypothesis is false. HN 430/162 and 267. Verification status unknown.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://openai.com/index/building-scientific-understanding-with-academic-communities/"
           ]
         },
         {
@@ -830,139 +953,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://the-decoder.com/fancy-harnesses-make-coding-agents-more-expensive-but-not-better-study-finds/"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-24T16:00:00+08:00",
-      "label": {
-        "zh": "10月24日 16:00",
-        "en": "Oct 24 16:00",
-        "ja": "10月24日 16:00"
-      },
-      "items": [
-        {
-          "id": "t766",
-          "theme": "research",
-          "title": {
-            "zh": "AI 科学家的现实检验：Agent4Sci（Carlini 等）前沿 agent 在 20 个 ML-for-science 基准全部超 SOTA（Opus 平均 +10.4%）但几乎全靠 ML 工程技巧 × 微软研究院用「人剪枝 agent 轨迹」证明 31 年 KLS 猜想（同 token 预算消融）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：「agent 爬分 vs 人剪枝」对照鲜明，承接已发 AI×数学/科学两篇；缺核心词。续源：AI 科学家的两条机制侧文献，见 t777。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：「agent 爬分 vs 人剪枝」对照鲜明，承接已发 AI×数学/科学两篇；缺核心词。续源：AI 科学家的两条机制侧文献，见 t777。",
-            "en": "Synthesis candidate: Agent4Sci (agents beat SOTA via ML tricks, not insight) + MSR KLS proof via human-pruned agent search; no clean core term. Follow-up: fan-out and depth-first mechanisms for AI research, see t777.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.28763",
-              "title": "Automating ML for Science: Can Frontier Agents Climb Scientific Hills in the Wild?",
-              "brief": {
-                "zh": "深耕候选：Carlini 等的 Agent4Sci 在 20 个 ML-for-science 基准上让前沿 Agent 去刷已发表 SOTA，结果全都超了（Opus 平均 +10.4%），但几乎全靠 ML 工程小技巧而非领域洞见；三类失败（新颖性误判、资源用不满、塌缩成局部调参）很适合做分类图，正好回应“AI 科学家”叙事。",
-                "en": "Agent4Sci: frontier agents beat published SOTA on all 20 ML-for-science benchmarks (Opus +10.4% on average) but mostly through ML engineering tricks rather than domain insight; three failure types identified.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.microsoft.com/en-us/research/blog/solving-a-31-year-old-grand-challenge-in-mathematics-the-kls-conjecture/",
-              "title": "Microsoft Research: Solving the 31-year-old KLS conjecture with human-directed agentic search",
-              "brief": {
-                "zh": "Primary, mechanism-rich AI×math case with a rare equal-token-budget ablation: human pruning of agent trajectories vs end-to-end agent runs. Extends t711 AI×数学 (Tao/TheoPhysEval) and the human-in-loop agent-harness line; not in topics/archive (dedup'd KLS/kls-conjecture).",
-                "en": "Microsoft Research proves the 31-year-old KLS conjecture with parallel agents exploring ~100 trajectories while a researcher pruned them; an equal-token ablation favors human pruning over end-to-end agents.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://latent.space/p/ai-is-getting-good-at-math/",
-              "title": "Latent Space (Ankit Maloo): AI Is Getting Good at Math. Here's Why. — LLMs search depth-first, a verifier makes failure cheap, and 'negative hints' in a drafter/solver/verifier harness replace human taste (branching factor b^k)",
-              "brief": {
-                "zh": "Adds a new, mechanism-level angle beyond t711 (AI×数学 文化/职业/机构视角) and the already-filed MSR KLS item (人剪枝 agent 轨迹): this is the 'why it works' theory — depth-first search + verifier + drafter prompt carrying negative hints, with a concrete harness shape (Drafter/Solver/Verifier, standing adversarial",
-                "en": "Latent Space (Ankit Maloo): AI Is Getting Good at Math. Here's Why. — LLMs search depth-first, a verifier makes failure cheap, and 'negative hints' in a drafter/solver/verifier harness replace human taste (branching factor b^k)",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
-              "title": "OpenAI × PerturbAI × Scripps: 'distributed biological reasoning' — 1,946 parallel GPT-Rosalind agents (one per perturbation) interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 min; 711x more literature than one agent, shuffle controls, blinded experts",
-              "brief": {
-                "zh": "Not in inbox/archive 20261022-24 or topics.md (previous skip was window-only, not duplicate). Mechanism-rich evidence for 'many narrow agents beat one big-context agent' — a controlled same-model/same-budget ablation of fan-out vs single-agent (literature coverage collapse as workload grows), plus a",
-                "en": "OpenAI × PerturbAI × Scripps: 'distributed biological reasoning' — 1,946 parallel GPT-Rosalind agents (one per perturbation) interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 min; 711x more literature than one agent, shuffle controls, blinded experts",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.28763",
-            "https://www.microsoft.com/en-us/research/blog/solving-a-31-year-old-grand-challenge-in-mathematics-the-kls-conjecture/",
-            "https://latent.space/p/ai-is-getting-good-at-math/",
-            "https://openai.com/index/scaling-ai-research-for-complex-biological-data"
-          ]
-        },
-        {
-          "id": "t777",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "AI 做科研的两条机制：广度 fan-out——OpenAI × PerturbAI × Scripps 用 1,946 个并行 GPT-Rosalind agent（每个扰动一个）32 分钟解读 770 万细胞全脑 Perturb-seq 图谱（复现 87.3% 源论文可测发现；同模型同预算消融：单 agent 引文塌缩，分布式多读 711× 文献；洗牌对照、30 位博士盲评）× 深度优先 + verifier——Latent Space 解释 AI 数学为何突然变强（drafter/solver/verifier + 失败路径当「负提示」，分支因子 b^k 成本律；Navier–Stokes 约 1 万 agent、3000 亿 token、88 小时）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（score4）：受控消融 + 机制化理论互补，接站内 AI 科学家线；主词「Perturb-seq」待测，量可能偏低。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（score4）：受控消融 + 机制化理论互补，接站内 AI 科学家线；主词「Perturb-seq」待测，量可能偏低。",
-            "en": "Synthesis candidate: two search structures for AI-driven research, fan-out across 1,946 parallel agents on a Perturb-seq atlas and depth-first search with verifiers for AI maths; candidate term \"Perturb-seq\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://latent.space/p/ai-is-getting-good-at-math/",
-              "title": "Latent Space (Ankit Maloo): AI Is Getting Good at Math. Here's Why. — LLMs search depth-first, a verifier makes failure cheap, and 'negative hints' in a drafter/solver/verifier harness replace human taste (branching factor b^k)",
-              "brief": {
-                "zh": "Adds a new, mechanism-level angle beyond t711 (AI×数学 文化/职业/机构视角) and the already-filed MSR KLS item (人剪枝 agent 轨迹): this is the 'why it works' theory — depth-first search + verifier + drafter prompt carrying negative hints, with a concrete harness shape (Drafter/Solver/Verifier, standing adversarial",
-                "en": "Latent Space essay: LLMs search depth-first, a verifier makes failure cheap, and failed paths become negative hints in a drafter/solver/verifier harness; cost scales as b^k times compute, explaining why cybersecurity fell first. Partly speculative reconstruction.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
-              "title": "OpenAI × PerturbAI × Scripps: 'distributed biological reasoning' — 1,946 parallel GPT-Rosalind agents (one per perturbation) interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 min; 711x more literature than one agent, shuffle controls, blinded experts",
-              "brief": {
-                "zh": "Not in inbox/archive 20261022-24 or topics.md (previous skip was window-only, not duplicate). Mechanism-rich evidence for 'many narrow agents beat one big-context agent' — a controlled same-model/same-budget ablation of fan-out vs single-agent (literature coverage collapse as workload grows), plus a",
-                "en": "OpenAI, PerturbAI and Scripps: 1,946 parallel GPT-Rosalind agents, one per perturbation, interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 minutes, recovering 87.3% of testable source findings; a same-model ablation shows a single agent collapses on literature coverage (711x fewer refs), w",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://latent.space/p/ai-is-getting-good-at-math/",
-            "https://openai.com/index/scaling-ai-research-for-complex-biological-data"
           ]
         }
       ]
@@ -4876,13 +4866,13 @@
             "ja": "NVIDIA SkillSpector: A Pre-Install Trust Pipeline for Agent Skills"
           },
           "summary": {
-            "zh": "Skills 包正在变成可安装供应链。NVIDIA SkillSpector 把安装前扫描（静态规则 + 可选语义对照）嵌进 scan→eval→sign 的信任管线，而不是再发一个技能清单——晨间 skills 热度是需求面，闸门才是可写的机制。",
+            "zh": "Skills 包正在变成可安装供应链。NVIDIA SkillSpector 把安装前扫描（静态规则 + 可选语义对照）嵌进 scan→eval→sign 的信任管线，而不是再发一个技能清单——晨间 skills 热度是需求面，闸门才是可写的机制。续源：SkillSpector 日增跳升。",
             "en": "Skill packs are becoming an install-time supply chain. Reading NVIDIA SkillSpector: static rules plus optional LLM semantics inside a scan→eval→sign Verified Skills pipeline. README sample: 26.1% of 31,132 analyzed skills show vulnerabilities; 5.2% likely malicious intent. Mechanism and hardening only—no exploit steps.",
             "ja": ""
           },
           "judgment": {
-            "zh": "Skills 包正在变成可安装供应链。NVIDIA SkillSpector 把安装前扫描（静态规则 + 可选语义对照）嵌进 scan→eval→sign 的信任管线，而不是再发一个技能清单——晨间 skills 热度是需求面，闸门才是可写的机制。",
-            "en": "Skill packs are turning into an install-time supply chain. NVIDIA SkillSpector puts pre-install scanning (static rules plus optional semantic review) inside a scan-eval-sign trust pipeline, instead of shipping another skill list. Morning skill-repo heat is the demand side; the gate is the mechanism worth writing.",
+            "zh": "Skills 包正在变成可安装供应链。NVIDIA SkillSpector 把安装前扫描（静态规则 + 可选语义对照）嵌进 scan→eval→sign 的信任管线，而不是再发一个技能清单——晨间 skills 热度是需求面，闸门才是可写的机制。续源：SkillSpector 日增跳升。",
+            "en": "Skill packs are turning into an install-time supply chain. NVIDIA SkillSpector puts pre-install scanning (static rules plus optional semantic review) inside a scan-eval-sign trust pipeline, instead of shipping another skill list. Morning skill-repo heat is the demand side; the gate is the mechanism worth writing. Follow-up: SkillSpector star growth jumps.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -6109,309 +6099,6 @@
           "blog": {
             "zh": "/cn/blog/coding-agents-cost-inefficient-behaviors/",
             "en": "/blog/coding-agents-cost-inefficient-behaviors/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-28T09:00:00+08:00",
-      "label": {
-        "zh": "9月28日 09:00",
-        "en": "Sep 28 09:00",
-        "ja": "9月28日 09:00"
-      },
-      "items": [
-        {
-          "id": "t271",
-          "theme": "research",
-          "title": {
-            "zh": "Bad Genius：反事实引导的 harness 演化防评测捷径",
-            "en": "Bad Genius: When Counterfactual Protocols Expose Harness Evolution Cheats",
-            "ja": "Bad Genius: When Counterfactual Protocols Expose Harness Evolution Cheats"
-          },
-          "summary": {
-            "zh": "自动 harness 优化可在固定协议上走 shortcut；坏天才 Proposer + 反事实协议——相对 RRSI/SoL-Pi 的 RSI 新刃",
-            "en": "A deep read of arXiv:2609.18366 CHASE—automatic harness optimization can exploit benchmark-wide shortcuts on a fixed released protocol; a Challenger searches executable protocol transforms with a validity firewall and held-out confirmation, retaining released gains while cutting gain destruction on Syn-Ledger and OfficeQA.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "自动 harness 优化可在固定协议上走 shortcut；坏天才 Proposer + 反事实协议——相对 RRSI/SoL-Pi 的 RSI 新刃",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.18366",
-              "title": "Bad Genius: Counterfactual-Guided Harness Evolution Beyond Task-Specific Shortcuts",
-              "brief": {
-                "zh": "「深耕候选：RSI-with-NEW-edge / harness」指出自动 harness 优化可在固定评测协议上走 benchmark-wide shortcut，提出反事实引导的 harness 演化与防作弊评测；新边是「坏天才 Proposer」与协议级过拟合，而非再堆 evolution loop。",
-                "en": "Shows automatic harness optimization can exploit benchmark-wide shortcuts under a fixed evaluation protocol; proposes counterfactual-guided harness evolution and anti-cheat evaluation—new edge is a bad-genius Proposer and protocol-level overfitting, not another evolution loop.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.18366"
-          ],
-          "blog": {
-            "zh": "/cn/blog/bad-genius-counterfactual-harness-evolution/",
-            "en": "/blog/bad-genius-counterfactual-harness-evolution/"
-          }
-        },
-        {
-          "id": "t272",
-          "theme": "research",
-          "title": {
-            "zh": "Exactly-Once 住哪？Model / Harness / Tool-Contract 与重复副作用",
-            "en": "Where Does Exactly-Once Live? Model, Harness, or Tool Contract",
-            "ja": "Where Does Exactly-Once Live? Model, Harness, or Tool Contract"
-          },
-          "summary": {
-            "zh": "exactly-once 拆到模型 vs harness vs 工具契约；LIMBO 沙箱量化重复副作用——工具幂等/契约优先于再堆模型",
-            "en": "Reading arXiv:2609.29095: Limbo (6 services, 12 faults, 25,930 episodes) shows exactly-once for LLM agent side effects lives in the model when read-back can resolve outcomes, and in the tool contract under in-flight/redelivery faults—idempotency keys cut duplicates 28%→4%; distrust agent success reports.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "exactly-once 拆到模型 vs harness vs 工具契约；LIMBO 沙箱量化重复副作用——工具幂等/契约优先于再堆模型",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.29095",
-              "title": "Where Does Exactly-Once Live? Model, Harness, and Tool-Contract Effects on Duplicate Side Effects in LLM Agents",
-              "brief": {
-                "zh": "「深耕候选：harness / tool-contract」问 exactly-once 应落在模型、harness 还是工具契约；LIMBO 确定性沙箱（6 服务×12 故障）量化重复副作用。多数故障下契约解释主要方差，幂等键显著降重复——接到站内 harness 可靠性与工具调用幂等叙事。",
-                "en": "Asks where exactly-once should live—model, harness, or tool contract—and quantifies duplicate side effects in LIMBO (6 services × 12 faults). Under many faults the contract explains most variance; idempotency keys cut duplicates sharply—ties to harness reliability and tool idempotency.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29095"
-          ],
-          "blog": {
-            "zh": "/cn/blog/exactly-once-model-harness-tool-contract/",
-            "en": "/blog/exactly-once-model-harness-tool-contract/"
-          }
-        },
-        {
-          "id": "t117",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "16GB 显存本地模型替 Claude Code",
-            "en": "Can a 16GB GPU Replace Claude Code? Qwen3.8 Local Coding Agents by VRAM Tier, Quantization, and Harness Setup (2026)",
-            "ja": "Can a 16GB GPU Replace Claude Code? Qwen3.8 Local Coding Agents by VRAM Tier, Quantization, and Harness Setup (2026)"
-          },
-          "summary": {
-            "zh": "本地 coding-agent/harness 真实选型约束",
-            "en": "Can local Qwen3.8 replace Claude Code? VRAM tiers from 12GB to DGX Spark, 27B vs Flash-Next, quantization, prefill bottlenecks, harness wiring, tool-call failures, and a stay-on-API checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "本地 coding-agent/harness 真实选型约束",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLM/comments/1woikg7/are_there_any_models_that_i_can_use_with_a_16gb/",
-              "title": "Are there any models that I can use with a 16GB GPU that might be able to replace claude code?",
-              "brief": {
-                "zh": "Direct demand signal: local 16GB VRAM as Claude Code substitute — coding-agent / local harness 选型痛点.",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wom3fe/qwen_38_flash_next_q4_k_m_130k_context_q8_cache",
-              "title": "Qwen 3.8 Flash Next q4_k_m, 130k context, q8 cache on 16GB VRAM and 64GB RAM, 15-20 t/s on 4080",
-              "brief": {
-                "zh": "Practical 16GB VRAM recipe for Qwen 3.8 Flash Next + MTP branch/cache flags — local coding-agent host notes.",
-                "en": "Practical 16GB VRAM recipe for Qwen 3.8 Flash Next + MTP branch/cache flags — local coding-agent host notes.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wp7zyb/qwen38flashnext_on_12gb_vram_65_tokens_per_second/",
-              "title": "Qwen3.8-Flash-Next on 12GB VRAM - 65 tokens per second",
-              "brief": {
-                "zh": "Concrete Flash-Next speed on 12GB VRAM (65 tok/s) — consumer-GPU local inference signal.",
-                "en": "Concrete Flash-Next speed on 12GB VRAM (65 tok/s) — consumer-GPU local inference signal.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=XpPtfB2pdio",
-              "title": "LM Studio Full Tutorial - The BEST Way to Run Local Models",
-              "brief": {
-                "zh": "Tech With Tim LM Studio 全教程 ~21k/19h：本地模型运行工具热窗，补 16GB/本地 coding-agent 选型栈。",
-                "en": "Tech With Tim full LM Studio tutorial (~21k views / ~19h)—practical local-model runner heat for the local coding-agent stack.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wrxap8/qwen38flashnext_177b_nvfp4119gib_ssd_streaming_at/",
-              "title": "Qwen3.8-Flash-Next 177B NVFP4 SSD streaming",
-              "brief": {
-                "zh": "16GB 卡 SSD 流式跑 177B MoE 报 9–10 tok/s——本地大模型硬件包络信号（伴 t117）。",
-                "en": "Reports 9–10 tok/s streaming a 177B MoE from SSD on 16GB VRAM—local large-model hardware-envelope signal (companion to t117).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=KlEU3tv5g7Q",
-              "title": "LM Studio Bionic: Local Agentic AI Experiments",
-              "brief": {
-                "zh": "ExplainingComputers：LM Studio Bionic 本地 agentic 实验 ~55k·12h——本地编码 LLM/devtools 窗伴源。",
-                "en": "ExplainingComputers on LM Studio Bionic local agentic experiments (~55k views / 12h)—local coding LLM/devtools companion.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "reddit",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://www.reddit.com/r/LocalLLM/comments/1woikg7/are_there_any_models_that_i_can_use_with_a_16gb/",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wva7l2/running_955_gib_qwen38flashnext_at_4152_toks_on_a/ents/1wv0lww/we_benchmarked_18_rag_pipelines_against_an_agent/ents/1wvi6r0/introducing_modelharbor_a_selfhosted_model_library/ents/1wvfz9n/perplexity_decider_27b_open_weights_decision/ents/1wvm15e/detecting_hallucinations_in_local_models_without/ents/1wom3fe/qwen_38_flash_next_q4_k_m_130k_context_q8_cache",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wva7l2/running_955_gib_qwen38flashnext_at_4152_toks_on_a/ents/1wv0lww/we_benchmarked_18_rag_pipelines_against_an_agent/ents/1wvi6r0/introducing_modelharbor_a_selfhosted_model_library/ents/1wvfz9n/perplexity_decider_27b_open_weights_decision/ents/1wvm15e/detecting_hallucinations_in_local_models_without/ents/1wp7zyb/qwen38flashnext_on_12gb_vram_65_tokens_per_second/",
-            "https://www.youtube.com/watch?v=XpPtfB2pdio",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wva7l2/running_955_gib_qwen38flashnext_at_4152_toks_on_a/ents/1wv0lww/we_benchmarked_18_rag_pipelines_against_an_agent/ents/1wvi6r0/introducing_modelharbor_a_selfhosted_model_library/ents/1wvfz9n/perplexity_decider_27b_open_weights_decision/ents/1wvm15e/detecting_hallucinations_in_local_models_without/ents/1wrxap8/qwen38flashnext_177b_nvfp4119gib_ssd_streaming_at/",
-            "https://www.youtube.com/watch?v=KlEU3tv5g7Q"
-          ],
-          "blog": {
-            "zh": "/cn/blog/local-qwen3-8-replace-claude-code-vram-quant-harness-2026/",
-            "en": "/blog/local-qwen3-8-replace-claude-code-vram-quant-harness-2026/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-27T16:00:00+08:00",
-      "label": {
-        "zh": "9月27日 16:00",
-        "en": "Sep 27 16:00",
-        "ja": "9月27日 16:00"
-      },
-      "items": [
-        {
-          "id": "t249",
-          "theme": "research",
-          "title": {
-            "zh": "Just Ask Jev：RLCD 作对齐失败零样本检测",
-            "en": "Just Ask Jev: Zero-Shot Alignment Failure Detection with RLCD",
-            "ja": "Just Ask Jev: Zero-Shot Alignment Failure Detection with RLCD"
-          },
-          "summary": {
-            "zh": "把 Jev/RLCD 推到 alignment failure 检测：10 类失败×44 基准中位 AUROC 0.886，比 LLM-judge 便宜 ~63×",
-            "en": "Reading arXiv:2609.29429 RLCDAlignBench: TypeSafe Jev (RLCD) on 10 alignment failures × 44 benchmarks hits median AUROC 0.886 with a generic question, ~63× cheaper than LLM judges; checklist for wiring Just-Ask-Jev into an agent harness monitor.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "把 Jev/RLCD 推到 alignment failure 检测：10 类失败×44 基准中位 AUROC 0.886，比 LLM-judge 便宜 ~63×",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.29429",
-              "title": "Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures",
-              "brief": {
-                "zh": "「深耕候选：Jev」RLCDAlignBench 覆盖 10 类对齐失败、44 个基准；单次通用问题中位 AUROC 0.886，比 LLM-judge 便宜约 63×，高置信分歧能揪出既有基准标签缺陷。补站内 Jev 线缺的对齐监控环。",
-                "en": "RLCDAlignBench evaluates Jev as a zero-shot detector of 10 alignment-failure types across 44 benchmarks; a generic question reaches median AUROC 0.886 at ~63× lower cost than LLM-judge scorers, and high-confidence disagreements surface label defects.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/sumleo/RLCDAlignBench",
-              "title": "sumleo/RLCDAlignBench",
-              "brief": {
-                "zh": "论文配套基准仓：用校准决策模型做对齐失败零样本检测。",
-                "en": "Companion benchmark repo for zero-shot alignment-failure detection with calibrated decision models.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.29429",
-            "https://github.com/sumleo/RLCDAlignBench"
-          ],
-          "blog": {
-            "zh": "/cn/blog/just-ask-jev-rlcd-alignment-failure-detection/",
-            "en": "/blog/just-ask-jev-rlcd-alignment-failure-detection/"
-          }
-        },
-        {
-          "id": "t265",
-          "theme": "research",
-          "title": {
-            "zh": "LLM Agents 可轻易篡改自身 traces",
-            "en": "LLM Agents Can Easily Tamper With Their Own Traces: Why Host-Local Audit Trails Fail",
-            "ja": "LLM Agents Can Easily Tamper With Their Own Traces: Why Host-Local Audit Trails Fail"
-          },
-          "summary": {
-            "zh": "多数本地 coding-agent harness 允许删除/伪造 trace——审计完整性失败；需 agent 主机外独立 append-only 拦截",
-            "en": "Reading arXiv:2609.30266: most local coding-agent harnesses store session traces where the agent can delete or forge them—under direct asks, malicious skills, and reward pressure. Audit integrity needs a host-external append-only interceptor. Contrasts Hard Stop (contain actions) with containing history.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多数本地 coding-agent harness 允许删除/伪造 trace——审计完整性失败；需 agent 主机外独立 append-only 拦截",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30266",
-              "title": "LLM Agents Can Easily Tamper With Their Own Traces",
-              "brief": {
-                "zh": "「深耕候选：observability / containment」测 Claude Code、Codex、OpenCode 等本地 harness：多数允许直接、经 skills 或奖励压力删除/伪造自身 traces。建议在 agent 主机外做独立 append-only 拦截——验证环若依赖可被改写的自报日志则失效。",
-                "en": "Study finds most tested local agent harnesses (Claude Code, Codex, OpenCode, others) allow agents to delete or spoof their own traces—directly, via skills, or under reward pressure. Recommends independent append-only interception outside the agent host.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30266"
-          ],
-          "blog": {
-            "zh": "/cn/blog/llm-agents-tamper-own-traces-append-only-audit/",
-            "en": "/blog/llm-agents-tamper-own-traces-append-only-audit/"
           }
         }
       ]
