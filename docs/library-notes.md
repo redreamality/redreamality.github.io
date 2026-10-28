@@ -22,6 +22,8 @@ contents. This is a guard against recognizable secrets, not a guarantee that
 arbitrary private facts can be identified automatically; review source material
 and use the exclusion policy when necessary.
 
+A page added more than once is published once. Entries whose source URLs differ only by tracking parameters (`utm_*`, `fbclid`, `gclid` and similar), a trailing slash, `www.`, `http` versus `https`, or host case count as the same page; the earliest-collected entry is kept. URLs that differ in meaningful query values stay separate.
+
 `date` is the archive's entry date, not the source article's publication date.
 The summaries are currently Chinese. EN and JA pages localize the surrounding
 interface and label the summary language; they do not pretend to translate it.

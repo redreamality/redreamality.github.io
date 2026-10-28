@@ -132,6 +132,46 @@ describe('private archive public projection', () => {
     expect(() => projectArchive(archive, policy)).toThrow('invalid_coverage');
   });
 
+  it('publishes a page once when it was added under cosmetic URL variants', () => {
+    const base = 'https://example.com/article';
+    const variants = [
+      [base, '2026-10-01T12:00:00+00:00'],
+      [`${base}/`, '2026-10-02T12:00:00+00:00'],
+      [`${base}?utm_source=x&fbclid=y`, '2026-10-03T12:00:00+00:00'],
+      ['http://www.example.com/article', '2026-10-04T12:00:00+00:00'],
+    ];
+    const archive = fixture(base);
+    const template = first(archive);
+    archive.entries = {};
+    for (const [url, created_at] of variants) {
+      archive.entries[createHash('sha256').update(url).digest('hex')] = { ...template, url, created_at };
+    }
+    const feed = projectArchive(archive, policy);
+    expect(feed.entries).toHaveLength(1);
+    expect(feed.entries[0].url).toBe(base);
+  });
+
+  it('keeps genuinely different pages, including differing meaningful query values', () => {
+    const urls = ['https://example.com/a', 'https://example.com/b', 'https://example.com/a?id=1', 'https://example.com/a?id=2'];
+    const archive = fixture(urls[0]);
+    const template = first(archive);
+    archive.entries = {};
+    for (const url of urls) archive.entries[createHash('sha256').update(url).digest('hex')] = { ...template, url };
+    expect(projectArchive(archive, policy).entries).toHaveLength(4);
+  });
+
+  it('does not let an excluded duplicate hide the published variant', () => {
+    const a = 'https://example.com/article';
+    const b = `${a}/`;
+    const archive = fixture(a);
+    const template = first(archive);
+    archive.entries = {};
+    for (const url of [a, b]) archive.entries[createHash('sha256').update(url).digest('hex')] = { ...template, url };
+    const excludedId = createHash('sha256').update(a).digest('hex');
+    const feed = projectArchive(archive, { version: 1, excludedIds: [excludedId] });
+    expect(feed.entries.map(e => e.url)).toEqual([b]);
+  });
+
   it('has deterministic ordering and does not change when only private state changes', () => {
     const one = fixture('https://example.com/one');
     const two = fixture('https://example.com/two');

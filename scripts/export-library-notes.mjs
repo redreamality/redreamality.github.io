@@ -57,6 +57,22 @@ function sourceURL(value, depth = 0) {
   return input;
 }
 
+const trackingParameter = /^(utm_[a-z0-9_]+|fbclid|gclid|dclid|msclkid|mc_cid|mc_eid|igshid|spm)$/i;
+
+// Same page added twice under cosmetic URL variants (tracking parameters, trailing
+// slash, www, http vs https, host case) must be published once.
+export function canonicalSourceKey(value) {
+  const url = new URL(value);
+  const host = url.hostname.toLowerCase().replace(/\.$/, '').replace(/^www\./, '');
+  const path = url.pathname.replace(/\/+$/, '') || '/';
+  const query = [...url.searchParams]
+    .filter(([key]) => !trackingParameter.test(key))
+    .sort(([a, x], [b, y]) => a.localeCompare(b) || x.localeCompare(y))
+    .map(([key, val]) => `${key}=${val}`)
+    .join('&');
+  return `${host}${path}${query ? `?${query}` : ''}`;
+}
+
 export function projectArchive(archive, policy) {
   requireValue(
     archive && archive.version === 1 && archive.entries &&
@@ -116,8 +132,17 @@ export function projectArchive(archive, policy) {
       },
     });
   }
-  entries.sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
-  return { version: 1, entries };
+  // Keep the earliest-collected entry for each canonical source (ties: lowest id).
+  const earliest = new Map();
+  for (const entry of entries) {
+    const key = canonicalSourceKey(entry.url);
+    const kept = earliest.get(key);
+    if (!kept || entry.date.localeCompare(kept.date) < 0 ||
+      (entry.date === kept.date && entry.id.localeCompare(kept.id) < 0)) earliest.set(key, entry);
+  }
+  const unique = [...earliest.values()];
+  unique.sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
+  return { version: 1, entries: unique };
 }
 
 export async function writePublicFeed(archive, policy, output) {
