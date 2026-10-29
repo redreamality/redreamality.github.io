@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-29T10:03:21+08:00",
+  "updatedAt": "2026-10-29T16:03:15+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,97 @@
     "other"
   ],
   "themeCounts": {
-    "models": 11,
+    "models": 12,
     "coding-tools": 16,
     "agents-oss": 11,
     "security": 10,
-    "research": 39,
+    "research": 38,
     "product-news": 0,
     "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-10-29T16:00:00+08:00",
+      "label": {
+        "zh": "10月29日 16:00",
+        "en": "Oct 29 16:00",
+        "ja": "10月29日 16:00"
+      },
+      "items": [
+        {
+          "id": "t769",
+          "theme": "models",
+          "title": {
+            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。",
+            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term. Follow-up: Claude Duet safety architecture, approvals outside the model and credential isolation. Follow-up: Claude Code adds an undocumented env var that lifts the last hard blocks under skip-permissions.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://x.com/claudeai/status/2113360845409583307",
+              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
+              "brief": {
+                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
+                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
+              "brief": {
+                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
+                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://claude.com/blog/claude-duet-safety-privacy-and-security",
+              "title": "Claude Duet Safety, Privacy, and Security（Anthropic 官方拆解：审批卡 + 模型外分类器 + 凭证不进模型）",
+              "brief": {
+                "zh": "站内积累线（agent 安全/控制）：与已归档 1Password for Agents（10-23）、Claude auto mode（10-23）、Managed Agents 凭证代理同一条线，但这篇是 Anthropic 一手的‘审批在模型外 + 凭证隔离 + 浏览器边界’完整架构，机制信息密度高。非本窗口新发（10-23 08:00 北京时间发布），前几轮未归档（topics.md 仅有 Duet 产品发布 t765），故补录。tag exploit-candidate。",
+                "en": "tag exploit-candidate。",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.ithome.com/1/019/476.htm",
+              "title": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
+              "brief": {
+                "zh": "站内积累线 (sandbox/security-control, coding-agent permission layers). It gives a concrete look at the layering inside a harness: the 'skip permissions' mode still had a hidden denylist, and now that denylist has its own off switch, which is undocumented. It pairs with t769 (auto-mode classifier / approv",
+                "en": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://x.com/claudeai/status/2113360845409583307",
+            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+            "https://claude.com/blog/claude-duet-safety-privacy-and-security",
+            "https://www.ithome.com/1/019/476.htm"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-29T10:00:00+08:00",
       "label": {
@@ -5947,55 +6029,6 @@
             "zh": "/cn/blog/progressive-disclosure-agent-skills/",
             "en": "/blog/progressive-disclosure-agent-skills/"
           }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-29T10:00:00+08:00",
-      "label": {
-        "zh": "9月29日 10:00",
-        "en": "Sep 29 10:00",
-        "ja": "9月29日 10:00"
-      },
-      "items": [
-        {
-          "id": "t326",
-          "theme": "research",
-          "title": {
-            "zh": "LLM Parkinsonism / GEC：执行控制失灵与停不住",
-            "en": "LLM Parkinsonism / GEC",
-            "ja": "LLM Parkinsonism / GEC"
-          },
-          "summary": {
-            "zh": "把 agent-loop「停不住」命名为 Parkinsonism；GEC 拆提案与项目级停止权——近同等成功率下砍 ~36% token",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "把 agent-loop「停不住」命名为 Parkinsonism；GEC 拆提案与项目级停止权——近同等成功率下砍 ~36% token",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30662",
-              "title": "LLM Parkinsonism: Executive-Control Failure, Token-Inefficient Persistence, and an Uncertainty-Aware Global Executive Control Architecture for Autonomous Language-Model Agents",
-              "brief": {
-                "zh": "「深耕：executive-control」用非临床隐喻命名目标漂移/复杂度堆积/终止失败；GEC 把提案生成与项目级停止权拆开，matched-candidate 基准上成功率近平、均 token 降约 36%。",
-                "en": "Names token-inefficient post-goal persistence as LLM Parkinsonism and proposes GEC to separate proposal generation from project-level stopping; matched-candidate sims keep success while cutting mean tokens ~36%.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30662"
-          ]
         }
       ]
     }
