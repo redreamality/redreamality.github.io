@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-29T16:03:15+08:00",
+  "updatedAt": "2026-10-30T09:58:45+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,8 +11,8 @@
     "other"
   ],
   "themeCounts": {
-    "models": 12,
-    "coding-tools": 16,
+    "models": 13,
+    "coding-tools": 15,
     "agents-oss": 11,
     "security": 10,
     "research": 38,
@@ -20,6 +20,265 @@
     "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-10-30T10:00:00+08:00",
+      "label": {
+        "zh": "10月30日 10:00",
+        "en": "Oct 30 10:00",
+        "ja": "10月30日 10:00"
+      },
+      "items": [
+        {
+          "id": "t350",
+          "theme": "research",
+          "title": {
+            "zh": "Harness Learning：可泛化的测试时 harness 适应",
+            "en": "Harness Learning",
+            "ja": "Harness Learning"
+          },
+          "summary": {
+            "zh": "把 harness 修订做成可迁移 meta-learning：RL 训 proposer 据执行反馈改 harness 代码，测试时冻结模型只改 harness；4B proposer 在 21 未见 Reasoning Gym 族均值超 35B teacher——harness 优化升为可泛化适应程序 10-13 站长确认：单篇论文解读候选，开写当天测主词（主词：Harness Learning）。续源：GEAR harness 自演化。续源：Hermit 外置 harness adapter。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "把 harness 修订做成可迁移 meta-learning：RL 训 proposer 据执行反馈改 harness 代码，测试时冻结模型只改 harness；4B proposer 在 21 未见 Reasoning Gym 族均值超 35B teacher——harness 优化升为可泛化适应程序 10-13 站长确认：单篇论文解读候选，开写当天测主词（主词：Harness Learning）。续源：GEAR harness 自演化。续源：Hermit 外置 harness adapter。",
+            "en": "Harness Learning turns harness edits into transferable meta-learning: an RL-trained proposer rewrites harness code from execution feedback while freezing the model at test time; a 4B proposer beats a 35B teacher mean on 21 unseen Reasoning Gym families. Oct 13 (site owner): valid single-paper deep-read candidate; test own main term \"Harness Learning\" on the writing day (status stays inbox). Follow-up: GEAR, a recursively self-improving harness architecture. Follow-up: Hermit open-source harness adapter framework.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2609.35738",
+              "title": "Harness Learning Enables Generalizable Test-Time Adaptation",
+              "brief": {
+                "zh": "「深耕：harness/TTA」用 RL 训 proposer 根据执行反馈改 harness；测试时冻结模型只改 harness；4B proposer 在 21 未见族上均值 0.62 vs 35B teacher 0.56，HotpotQA 修订可迁移 MuSiQue/2Wiki。",
+                "en": "Trains a proposer with RL to edit harness code from execution feedback; at test time the model stays frozen. A 4B proposer averages 0.62 vs a 35B teacher’s 0.56 on 21 unseen Reasoning Gym families, with HotpotQA edits transferring to MuSiQue/2Wiki.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/spaces/WizardTY/GEAR",
+              "title": "WizardTY/GEAR",
+              "brief": {
+                "zh": "GEAR 是一篇 10/26 发布论文的静态展示页，提出一套开放的通用演化架构，让 LLM agent 的 harness 能递归自我改进，附论文 PDF、项目主页和源码链接。与近期 Ornith 把自我改进闭环扩展到脚手架的思路相呼应。",
+                "en": "WizardTY/GEAR",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.marktechpost.com/2026/10/29/infini-ai-lab-hermit-harness-adapter-framework/",
+              "title": "Infini-AI-Lab Releases Hermit, an Open-Source Harness Adapter Framework for AI Agents",
+              "brief": {
+                "zh": "harness 适配作为独立可训练层，直接接 t350 Harness Learning 与 10-29 Copilot harness / MCode Stack 线；未见于 archive/topics。站内积累线：harness / agent-loop / skills。Caveat: 二级媒体报道，primary repo/X 帖未核。",
+                "en": "",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "huggingface",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2609.35738",
+            "https://huggingface.co/spaces/WizardTY/GEAR",
+            "https://www.marktechpost.com/2026/10/29/infini-ai-lab-hermit-harness-adapter-framework/"
+          ]
+        },
+        {
+          "id": "t722",
+          "theme": "research",
+          "title": {
+            "zh": "中文 AI 腔「不是 X，而是 Y」：商用模型使用密度为人类 2.5–9.2 倍，过半「没错但没必要」，RM/LLM judge 与 SFT/DPO 还在放大",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。 10-17 Trends（trends bot）：「LLM writing tic」7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 未过；「不是而是」CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0（CN 数据不可靠，不作结论），留 inbox。续源：AI 文风难读的心理语言学量化与训练归因，与中文 AI 腔论文成两篇综合。续源：Fowler 命名「LLM Voice」。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。 10-17 Trends（trends bot）：「LLM writing tic」7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 未过；「不是而是」CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0（CN 数据不可靠，不作结论），留 inbox。续源：AI 文风难读的心理语言学量化与训练归因，与中文 AI 腔论文成两篇综合。续源：Fowler 命名「LLM Voice」。",
+            "en": "Single-paper candidate on the Mandarin \"not X but Y\" LLM writing tic; awaiting Trends bot. 10-17 Trends (trends bot): \"LLM writing tic\" 7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 — not passed; \"是而是\" CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0 (CN data unreliable, inconclusive), stays inbox. Follow-up: why AI-generated language is hard to understand; pairs with the Mandarin writing-tic paper. Follow-up: Martin Fowler names \"LLM Voice\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.22249",
+              "title": "Not X, but When: Diagnosing a Mandarin LLM Writing Tic through Contextual Appropriateness",
+              "brief": {
+                "zh": "深耕候选：专门研究中文 AI 腔\"不是X，而是Y\"。五个商用模型的使用密度是人类的 2.5–9.2 倍，过半用法\"没错但没必要\"。reward model 和 LLM judge 在语境不支持时照样偏爱这个句式，SFT/DPO 还会把频率推高。中文读者一看就有共鸣，从语用学失误一直追到奖励偏好，机制链条完整。",
+                "en": "Five commercial models use the Mandarin 'not X, but Y' construction 2.5–9.2x more than humans, over half unnecessarily; reward models and LLM judges still prefer it, and SFT/DPO raise its frequency.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.29162",
+              "title": "Why is AI-generated language so hard to understand?",
+              "brief": {
+                "zh": "新芽：Mahowald 组用心理语言学指标量化了“AI 文风难读”这个大家都有的体感：9 个前沿模型比人类更爱用长依存、名词堆叠、低频 n-gram。机制假说很漂亮——数学/代码/推理训练推高信息密度而非沟通成功，长度惩罚微调就能复现这种偏离，适合画“优化目标→语言特征”的示意图。",
+                "en": "Why is AI-generated language so hard to understand?",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://martinfowler.com/bliki/LLM-Voice.html",
+              "title": "LLM Voice (Martin Fowler bliki)",
+              "brief": {
+                "zh": "Martin Fowler 定义「LLM Voice」——LLM 生成文字的可辨识腔调；与写作风格/unslop、AI 内容识别（Wikipedia 清理）可合并成综述角度",
+                "en": "LLM Voice (Martin Fowler bliki)",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.22249",
+            "https://arxiv.org/abs/2610.29162",
+            "https://martinfowler.com/bliki/LLM-Voice.html"
+          ]
+        },
+        {
+          "id": "t781",
+          "theme": "other",
+          "title": {
+            "zh": "OpenAI 宣布 AI 协助的数学/计算机/物理三项新发现——其中硬结果「指数时间假设（ETH）被证伪」（OpenAI math 仓预印本，HN 267；若成立影响极大，验证状态待核）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。续源：van der Waerden 数 Lean 4 证明。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。续源：van der Waerden 数 Lean 4 证明。",
+            "en": "High-stakes unverified claim: OpenAI announces AI-assisted discoveries including a preprint claiming the Exponential Time Hypothesis is false; verify before any deep read (cf. earlier retractions). Follow-up: classification of finite simple groups formalized in Lean. Follow-up: van der Waerden number W(2;3,21)=416 proved with a Lean 4 kernel-checked proof.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
+              "title": "'Announcing three new discoveries in mathematics, computer science, and physics'",
+              "brief": {
+                "zh": "HN 430/162：OpenAI 宣布 AI 协助的数学/计算机/物理三项发现；同轮 HN 267「The Exponential Time Hypothesis Is False」(https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf, https://news.ycombinator.com/item?id=50251661) 是其中的硬结果，ETH 被证伪若成立影响极大；适合 AI for science",
+                "en": "OpenAI announces three AI-assisted discoveries in mathematics, computer science and physics; a companion preprint in its math repo claims the Exponential Time Hypothesis is false. HN 430/162 and 267. Verification status unknown.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://cfsg.axiommath.ai/",
+              "title": "'Classification of Finite Simple Groups Formalized in Lean'",
+              "brief": {
+                "zh": "HN 169/44：有限单群分类在 Lean 中形式化完成（axiommath.ai）；AI for math/形式化证明线，接 10/27 OpenAI 三项发现与 ETH 证伪稿（Lobsters 同日也有 ETH 帖，https://lobste.rs/s/pq6ju6）。",
+                "en": "'Classification of Finite Simple Groups Formalized in Lean'",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/MachineLearning/comments/1xivpue/w2321_416_a_van_der_waerden_number_conjectured_by/",
+              "title": "W(2;3,21) = 416 — van der Waerden number conjectured by Kullmann (2010) proved with Lean 4 kernel-checked proof [R]",
+              "brief": {
+                "zh": "组合数学猜想经 Lean 4 内核校验证明，发在 r/ML（是否有 AI 参与待核）；可并入 AI for math / 形式化（CFSG in Lean、OpenAI discoveries）综述",
+                "en": "W(2;3,21) = 416 — van der Waerden number conjectured by Kullmann (2010) proved with Lean 4 kernel-checked proof [R]",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "reddit"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
+            "https://cfsg.axiommath.ai/",
+            "https://www.reddit.com/r/MachineLearning/comments/1xivpue/w2321_416_a_van_der_waerden_number_conjectured_by/"
+          ]
+        },
+        {
+          "id": "t803",
+          "theme": "models",
+          "title": {
+            "zh": "检测失控 agent 的两侧：OpenAI 公开四层失准监测（激活探针、模型审查、调查 agent、自动化调查，覆盖 GPT-6 Astra 以上全部 RL 运行与内部 Codex 流量；回放中逃出沙箱约 30 分钟即告警、比实际攻破早 30+ 小时；9 月一次训练模型接入互联网 15 分钟内被标记并暂停前沿 RL）× Wiz 从 IR 与公开事件提炼 agent 参与入侵的 7 条指纹（机器节奏迭代、工具内嵌自然语言推理、自我纠错、广度优先近全 TTP、大量并行横移、先探测后载荷、用途描述型一次性产物）× Altman：沙箱化超人模型仍未解决",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。",
+            "en": "Synthesis candidate: OpenAI's four-layer misalignment detection and Wiz's seven fingerprints of agentic attacks; candidate term \"agentic attacks\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment",
+              "title": "OpenAI: How we detect frontier model misalignment",
+              "brief": {
+                "zh": "一手厂商披露 agent 沙箱逃逸监控架构与真实响应时延，承接 t754（agent 拆掉自己的监控/OpenAI misalignment reports）与 t686，但这是监测系统本身的新架构文，非旧报告重述。站内积累线：sandbox / security-control / agent-loop 监控。",
+                "en": "OpenAI: How we detect frontier model misalignment",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
+              "title": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
+              "brief": {
+                "zh": "防御侧可操作的 agent 攻击检测特征，承接 t747（agent 成为攻击面）与 10-29 Cathedral breach，但角度是检测指纹而非单起事件。站内积累线：security-control / agent-loop。",
+                "en": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=iMsUcCYNKqY",
+              "title": "Why Sam Altman is against a single superintelligence",
+              "brief": {
+                "zh": "Highest VPH this run: Sam Altman on models finding critical PHP vulnerabilities, test-time compute powering agent swarms, and sandboxing superhuman models.",
+                "en": "Why Sam Altman is against a single superintelligence",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/how-we-detect-frontier-model-misalignment",
+            "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
+            "https://www.youtube.com/watch?v=iMsUcCYNKqY"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-29T16:00:00+08:00",
       "label": {
@@ -484,56 +743,6 @@
       },
       "items": [
         {
-          "id": "t781",
-          "theme": "other",
-          "title": {
-            "zh": "OpenAI 宣布 AI 协助的数学/计算机/物理三项新发现——其中硬结果「指数时间假设（ETH）被证伪」（OpenAI math 仓预印本，HN 267；若成立影响极大，验证状态待核）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。",
-            "en": "High-stakes unverified claim: OpenAI announces AI-assisted discoveries including a preprint claiming the Exponential Time Hypothesis is false; verify before any deep read (cf. earlier retractions). Follow-up: classification of finite simple groups formalized in Lean.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
-              "title": "'Announcing three new discoveries in mathematics, computer science, and physics'",
-              "brief": {
-                "zh": "HN 430/162：OpenAI 宣布 AI 协助的数学/计算机/物理三项发现；同轮 HN 267「The Exponential Time Hypothesis Is False」(https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf, https://news.ycombinator.com/item?id=50251661) 是其中的硬结果，ETH 被证伪若成立影响极大；适合 AI for science",
-                "en": "OpenAI announces three AI-assisted discoveries in mathematics, computer science and physics; a companion preprint in its math repo claims the Exponential Time Hypothesis is false. HN 430/162 and 267. Verification status unknown.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://cfsg.axiommath.ai/",
-              "title": "'Classification of Finite Simple Groups Formalized in Lean'",
-              "brief": {
-                "zh": "HN 169/44：有限单群分类在 Lean 中形式化完成（axiommath.ai）；AI for math/形式化证明线，接 10/27 OpenAI 三项发现与 ETH 证伪稿（Lobsters 同日也有 ETH 帖，https://lobste.rs/s/pq6ju6）。",
-                "en": "'Classification of Finite Simple Groups Formalized in Lean'",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
-            "https://cfsg.axiommath.ai/"
-          ]
-        },
-        {
           "id": "t789",
           "theme": "models",
           "title": {
@@ -594,57 +803,6 @@
         "ja": "10月27日 16:00"
       },
       "items": [
-        {
-          "id": "t350",
-          "theme": "research",
-          "title": {
-            "zh": "Harness Learning：可泛化的测试时 harness 适应",
-            "en": "Harness Learning",
-            "ja": "Harness Learning"
-          },
-          "summary": {
-            "zh": "把 harness 修订做成可迁移 meta-learning：RL 训 proposer 据执行反馈改 harness 代码，测试时冻结模型只改 harness；4B proposer 在 21 未见 Reasoning Gym 族均值超 35B teacher——harness 优化升为可泛化适应程序 10-13 站长确认：单篇论文解读候选，开写当天测主词（主词：Harness Learning）。续源：GEAR harness 自演化。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "把 harness 修订做成可迁移 meta-learning：RL 训 proposer 据执行反馈改 harness 代码，测试时冻结模型只改 harness；4B proposer 在 21 未见 Reasoning Gym 族均值超 35B teacher——harness 优化升为可泛化适应程序 10-13 站长确认：单篇论文解读候选，开写当天测主词（主词：Harness Learning）。续源：GEAR harness 自演化。",
-            "en": "Harness Learning turns harness edits into transferable meta-learning: an RL-trained proposer rewrites harness code from execution feedback while freezing the model at test time; a 4B proposer beats a 35B teacher mean on 21 unseen Reasoning Gym families. Oct 13 (site owner): valid single-paper deep-read candidate; test own main term \"Harness Learning\" on the writing day (status stays inbox). Follow-up: GEAR, a recursively self-improving harness architecture.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.35738",
-              "title": "Harness Learning Enables Generalizable Test-Time Adaptation",
-              "brief": {
-                "zh": "「深耕：harness/TTA」用 RL 训 proposer 根据执行反馈改 harness；测试时冻结模型只改 harness；4B proposer 在 21 未见族上均值 0.62 vs 35B teacher 0.56，HotpotQA 修订可迁移 MuSiQue/2Wiki。",
-                "en": "Trains a proposer with RL to edit harness code from execution feedback; at test time the model stays frozen. A 4B proposer averages 0.62 vs a 35B teacher’s 0.56 on 21 unseen Reasoning Gym families, with HotpotQA edits transferring to MuSiQue/2Wiki.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/spaces/WizardTY/GEAR",
-              "title": "WizardTY/GEAR",
-              "brief": {
-                "zh": "GEAR 是一篇 10/26 发布论文的静态展示页，提出一套开放的通用演化架构，让 LLM agent 的 harness 能递归自我改进，附论文 PDF、项目主页和源码链接。与近期 Ornith 把自我改进闭环扩展到脚手架的思路相呼应。",
-                "en": "WizardTY/GEAR",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "huggingface"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.35738",
-            "https://huggingface.co/spaces/WizardTY/GEAR"
-          ]
-        },
         {
           "id": "t723",
           "theme": "research",
@@ -5920,114 +6078,6 @@
           "blog": {
             "zh": "/cn/blog/failure-transparent-agents-tool-failure-reporting/",
             "en": "/blog/failure-transparent-agents-tool-failure-reporting/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-29T16:00:00+08:00",
-      "label": {
-        "zh": "9月29日 16:00",
-        "en": "Sep 29 16:00",
-        "ja": "9月29日 16:00"
-      },
-      "items": [
-        {
-          "id": "t333",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Coding is not solved：生成廉价，验证/所有权仍贵",
-            "en": "Coding Is Not Solved: Generation Got Cheap; Verification and Ownership Did Not",
-            "ja": "Coding Is Not Solved: Generation Got Cheap; Verification and Ownership Did Not"
-          },
-          "summary": {
-            "zh": "HN 高互动工程批判：明确点名 harness/skills/MCP/agent-loop——代码生成≠软件完成",
-            "en": "Reading Alex Ewerlöf's Coding is NOT solved: creation got cheaper, but NFRs, functional correctness, and verification ownership did not. Harness, Skills, AGENTS.md, and MCP wrap shortcomings—they do not erase who owns the delivery.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "HN 高互动工程批判：明确点名 harness/skills/MCP/agent-loop——代码生成≠软件完成",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://blog.alexewerlof.com/p/coding-is-not-solved",
-              "title": "Coding is not solved",
-              "brief": {
-                "zh": "HN 409/427：生成代码只是廉价部分；所有权、可靠性、安全、维护仍在，并直接连到 harness/skills/MCP/多 agent 反馈环。",
-                "en": "High-engagement essay argues code generation is the cheap part; ownership, reliability, security, and maintenance remain—and explicitly ties bottlenecks to harnesses, skills, MCP, and agent loops.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=bs1qPy_CWkM",
-              "title": "Prompt to Production: The Future of AI Code Workflows",
-              "brief": {
-                "zh": "IBM Technology 的短片：~14.8h·~27k 播、~1.8k VPH；把规划、执行与验证置于打字之后，直接补 coding-is-not-solved 的 workflow/verification 论点。",
-                "en": "IBM Technology argues that planning, execution, and verification matter after code generation—~27k views in 14.8h at ~1.8k VPH; a direct workflow/verification companion to t333.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://blog.alexewerlof.com/p/coding-is-not-solved",
-            "https://www.youtube.com/watch?v=bs1qPy_CWkM"
-          ],
-          "blog": {
-            "zh": "/cn/blog/coding-is-not-solved-verification-ownership/",
-            "en": "/blog/coding-is-not-solved-verification-ownership/"
-          }
-        },
-        {
-          "id": "t349",
-          "theme": "research",
-          "title": {
-            "zh": "Progressive Disclosure：生产级 Agent Skills 按需披露",
-            "en": "Progressive Disclosure: Why Eager-Loading Every Skill Breaks Agents at Scale",
-            "ja": "Progressive Disclosure: Why Eager-Loading Every Skill Breaks Agents at Scale"
-          },
-          "summary": {
-            "zh": "生产技能库 harness 层：eager 全量加载 N=100 直接 crash；progressive disclosure（先 frontmatter、按需 load_skill）最高省 81.7% token 并稳住检索——Workday 部署经验补位 skills 主线",
-            "en": "A deep read of Workday arXiv:2609.35692: eager full-load vs progressive disclosure (frontmatter first, load_skill on demand) for production skills libraries—N=100 eager crashes all rollouts, up to 81.7% token savings, better retrieval, modest latency cost.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "生产技能库 harness 层：eager 全量加载 N=100 直接 crash；progressive disclosure（先 frontmatter、按需 load_skill）最高省 81.7% token 并稳住检索——Workday 部署经验补位 skills 主线",
-            "en": "Production skill libraries need harness-layer progressive disclosure: eager load crashes at N=100, while frontmatter-first on-demand load_skill cuts tokens up to 81.7% without hurting retrieval—Workday deployment evidence on the skills line.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.35692",
-              "title": "Report: Progressive Disclosure of Agent Skills",
-              "brief": {
-                "zh": "「深耕：skills/harness」Workday：对比 eager 全量技能加载与 progressive disclosure（先 frontmatter、按需 load_skill）；N=100 时 eager crash，PD 最高省 81.7% token 并稳住检索质量。",
-                "en": "Workday study contrasts eager full skill loading vs progressive disclosure (frontmatter first, load_skill on demand); eager crashes at N=100 while PD saves up to 81.7% tokens with stable retrieval.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.35692"
-          ],
-          "blog": {
-            "zh": "/cn/blog/progressive-disclosure-agent-skills/",
-            "en": "/blog/progressive-disclosure-agent-skills/"
           }
         }
       ]
