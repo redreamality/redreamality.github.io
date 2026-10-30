@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T09:58:45+08:00",
+  "updatedAt": "2026-10-30T16:03:15+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,142 @@
     "other"
   ],
   "themeCounts": {
-    "models": 13,
+    "models": 12,
     "coding-tools": 15,
     "agents-oss": 11,
-    "security": 10,
-    "research": 38,
+    "security": 11,
+    "research": 34,
     "product-news": 0,
     "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-10-30T16:00:00+08:00",
+      "label": {
+        "zh": "10月30日 16:00",
+        "en": "Oct 30 16:00",
+        "ja": "10月30日 16:00"
+      },
+      "items": [
+        {
+          "id": "t747",
+          "theme": "security",
+          "title": {
+            "zh": "agent 成为攻击面与内鬼：NorForge 揭 Cairn agent 黑客面板（20+ 暴露面板，指挥自主 agent 入侵 100+ 站点：John Deere/SharkNinja/Cummins）× 微软 Guardian Agents「前沿模型无论出处都不可信」× Claude Code 装上 Expiro 病毒",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。续源：承包商把个人 Claude Code agent 接进五角大楼网络（WIRED，有争议）。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。续源：承包商把个人 Claude Code agent 接进五角大楼网络（WIRED，有争议）。",
+            "en": "Synthesis candidate: Cairn agent-hacking panels (NorForge) + Microsoft Guardian Agents + Claude Code installing Expiro; awaiting Trends bot. Follow-up: Army ECHOTRIBBLE self-replicating agents and Meta Muse GhostShares exposure. Follow-up: in-the-wild offensive agents (Symantec LLMjacking, Wiz ARTEX/Storm-0940); synthesis candidate, term LLMjacking. Follow-up: WIRED reports a contractor connected a personal Claude Code agent to a Pentagon network (disputed).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
+              "title": "Microsoft launches Guardian Agents: 'frontier models, regardless of origin, cannot be trusted' — agents as insider threats",
+              "brief": {
+                "zh": "New product launch Oct 19 (distinct from skipped Oct 11 Nadella emergency-brake interview — this is a shipped control layer). Agent control/observability line; vendor-independent agent monitors vs lab self-assurance (cf. Goodfire monitors Oct 9 archive). 站内积累线 agent sandbox/control.",
+                "en": "Microsoft adds Guardian Agents to monitor and control enterprise AI agents as insider threats, saying frontier models regardless of origin cannot be trusted.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://norforge.com/blog/inside_cairn",
+              "title": "NorForge: Inside Cairn — exposed AI-agent hacking panels behind 100+ site breaches (John Deere, SharkNinja, Cummins)",
+              "brief": {
+                "zh": "New Oct 19 primary report; not in archive (no Cairn/NorForge hits). Real-world autonomous agent-harness offense at scale + harness UI exposure as attack surface — 站内积累线 agent harness/security; pairs with OpenCode breach (t731) and Microsoft agentic-insider piece. exploit-candidate: blackboard-style",
+                "en": "NorForge found 20+ exposed panels of Cairn, an open-source agent problem-solving engine, used to direct autonomous agents behind 100+ site breaches (John Deere, SharkNinja, Cummins).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
+              "title": "Claude Code installed tooling which was actually Expiro virus.",
+              "brief": {
+                "zh": "Claude Code 装的工具竟是 Expiro 病毒，接 OpenCode 泄露的 agent 供应链安全线",
+                "en": "A user reports Claude Code installed tooling that turned out to be the Expiro virus.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
+              "title": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
+              "brief": {
+                "zh": "Turns the archived lab-incident line (agents breaking out / self-replicating prompt injections) into an intentional military design — control/containment angle, not a launch. New vs. archive (no ARCYBER/ECHOTRIBBLE in topics). Fits t697/t701 containment + t676 agent-overreach cluster.",
+                "en": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
+              "title": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
+              "brief": {
+                "zh": "Concrete mechanism (unguessable path ≠ undiscoverable hostname) on a 10M-download agent product; security-of-agent-artifacts line. Not a dup of t696 Muse Wonder launch or the redact.dev WhatsApp hidden-instructions item. Medium priority.",
+                "en": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
+              "title": "Symantec: 'Skynet mode' agent hijacks exposed LLMs to run self-sustaining attacks (LLMjacking)",
+              "brief": {
+                "zh": "野外自主攻击 agent 的完整架构曝光（非概念演示）；接 t712+t573 野外 rogue agents、t697 自复制。Decoder 文为发现入口，primary 为 Symantec/security.com（未单独 curl 验证正文）。站内积累线（agent 安全）。",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors",
+              "title": "Wiz: open-source pentest agent ARTEX used in the wild by Storm-0940 against IT/software vendors",
+              "brief": {
+                "zh": "开源 agent 渗透框架被国家级组织实战使用、带逐步 TTP 日志——可与 Symantec Skynet 合成“野外攻击 agent”综合；接 t605（韩国银行攻击）。aihot 发现、Wiz 原文链接取自 aihot 页面（Wiz 正文未单独 curl）。站内积累线（agent 安全）。",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/",
+              "title": "A Defense Contractor Gave Their Personal AI Agent Access to a Secure Pentagon System",
+              "brief": {
+                "zh": "站内积累线（agent security-control / sandbox / credential scoping）：real-world incident of a coding agent given human admin credentials inside a high-security network, with exfil via an injectable third-party tool — concrete case for least-privilege agent identity, egress control, and shadow-agent detectio",
+                "en": "A Defense Contractor Gave Their Personal AI Agent Access to a Secure Pentagon System",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "reddit"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
+            "https://norforge.com/blog/inside_cairn",
+            "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
+            "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
+            "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
+            "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
+            "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors",
+            "https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-30T10:00:00+08:00",
       "label": {
@@ -1013,202 +1140,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://arxiv.org/abs/2610.34553"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-27T10:00:00+08:00",
-      "label": {
-        "zh": "10月27日 10:00",
-        "en": "Oct 27 10:00",
-        "ja": "10月27日 10:00"
-      },
-      "items": [
-        {
-          "id": "t780",
-          "theme": "models",
-          "title": {
-            "zh": "agent 要不要拆：单循环 + skills vs 子 agent 编排 vs 去中心化——Anthropic Applied AI 称带 skills 的单循环常优于子 agent 设计（某客户快约 2×，Claude Code 系统提示砍 80%+，给出何时才该用子 agent 与分阶段合并法）× MSR 开源 Agensh（无中心 orchestrator，1→1,024 agent，ProgramBench 最难 5 题 19.31%→28.78%）× GVS5H（HN：5 个 Qwen3.8-27B 编排后号称追平 Fable 5）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。",
-            "en": "Synthesis candidate: fold subagents into one skills-equipped loop (Anthropic) vs decentralized 1,024-agent harness (MSR Agensh) vs five small models orchestrated to match a frontier model (GVS5H); no clean core term. Follow-up: video on Anthropic subagent guidance.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://github.com/slee-persis/GVS5H",
-              "title": "'Five Qwen3.8-27B models match Fable 5 Using GVS5H Harness'",
-              "brief": {
-                "zh": "HN 141/48：用 GVS5H harness 把 5 个 Qwen3.8-27B 小模型编排起来，号称追平 Fable 5；harness 优先于模型规模的证据，可接 Qwen3.8 本地编码 Agent、harness 工程与上下文压缩线（需核实评测口径，避免基准虚高）。",
-                "en": "HN 141/48: the GVS5H harness orchestrates five Qwen3.8-27B models and claims to match Fable 5; evaluation setup unverified.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
-              "title": "Building agents: When to fold subagents into your main agent loop（Anthropic Applied AI：单循环 + skills 常优于子 agent 编排）",
-              "brief": {
-                "zh": "站内积累线：agent loop / harness / skills 的一手官方指导，与今早 Decoder ‘fancy harness 更贵不更好’、10-23 Agent Skills 捐给 AAIF、Latent Space dynamic workflows 形成对照/张力（编排 vs 单循环）。10-22 发布，前几轮未归档，补录。tag exploit-candidate。",
-                "en": "Anthropic Applied AI: a single agent loop with skills often beats subagent designs on quality, cost and latency (one customer ~2x faster; Claude Code system prompt cut 80%+); lists when subagents still pay off and a staged merge path driven by end-to-end evals.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
-              "title": "Microsoft Research 开源 Agensh：无中心 orchestrator 的去中心化多 agent harness（1→1,024 agents，ProgramBench）",
-              "brief": {
-                "zh": "站内积累线（agent harness/loop）：与今早 Decoder ‘fancy harness 更贵不更好’、已提交的 Anthropic ‘fold subagents into main loop’（单循环 vs 编排）、Latent Space dynamic workflows 构成‘去中心化 vs 编排 vs 单循环’三方对照。topics.md 已有 t050（Agensh 论文，站长 10-13 确认开写候选）——本条不是新话题，新增事实=10-24 开源 + GPT-6.1-sol 新数据 + 循环/服务架构细节 + 与 Claude Code agent teams",
-                "en": "Microsoft Research open-sources Agensh: no central orchestrator, identical workers on a 5-step claim/verify/merge loop over Gitea and Mattermost; ProgramBench hard-5 average 19.31% (1 agent) to 28.78% (128), with emergent reviewers and integrators at scale. Read via MarkTechPost plus README.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=ybx0mmd22pQ",
-              "title": "Anthropic's New Subagent Rules Will Change How You Build",
-              "brief": {
-                "zh": "Over 20k views in under 24h; about new Anthropic subagent guidance, covered by a second video (KwmrSON2n-g, 22k)",
-                "en": "Anthropic's New Subagent Rules Will Change How You Build",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "media",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/slee-persis/GVS5H",
-            "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
-            "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
-            "https://www.youtube.com/watch?v=ybx0mmd22pQ"
-          ]
-        },
-        {
-          "id": "t782",
-          "theme": "research",
-          "title": {
-            "zh": "KV cache 成了 agent 时代被忽视的状态面：成本、安全、自省、崩塌四种后果——AKV（清华/CUHK）让 harness 直接 drop/reposition KV 条目取代摘要历史（工具响应滚动丢弃：成本 −27.7%、得分 +1.7；KV 读取占 API 成本 82.4%）× SGLang/Cloudflare 披露 GLM-5.3 跨租户 KV 泄露（超长 prompt 触发，155 个响应；PD 分离下 abort 后 RDMA 写入仍在途的分布式 use-after-free）× 论文：模型「自述答案来自文档还是记忆」其实由 Q+A 缓存决定（移植缓存报告跟着走）× 全双工语音长对话崩塌源于滑窗挤掉第 1 个 KV 条目（attention sink 被驱逐）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（score4）：同一对象四种后果，含真实泄露事故与可量化成本；主词「KV cache」待测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（score4）：同一对象四种后果，含真实泄露事故与可量化成本；主词「KV cache」待测。",
-            "en": "Synthesis candidate: the KV cache as an overlooked state surface for agents, covering cost (AKV), isolation (Cloudflare/SGLang cross-tenant leak), introspection and long-conversation collapse; candidate term \"KV cache\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.32109",
-              "title": "Context or Knowledge: How LLMs Attribute Their Own Answers",
-              "brief": {
-                "zh": "「新芽：模型说『答案来自文档还是自己记忆』，其实是看问答 token 的缓存，不是看文档」作者在答案生成后、追问来源前干预 KV cache：改掉或删掉文档的缓存，来源报告完全不变；但把 token 完全相同的 Q+A 缓存在不同运行间移植，来源报告就跟着捐赠方走。沿 Q+A value 方向做 steering，7B–32B 里较小的两个模型 98.9–100% 的报告被翻转，范数匹配的随机方向最多 1.1%。说明『自述信息来源』在这里因果上依赖回答时产生的缓存状态，而不是对原文的真实回溯——和可靠自省/溯源直接相关。机制干净，一张『文档缓存 vs Q+A 缓存，谁决定 source rep",
-                "en": "An LLM report of whether it used the document or its own knowledge is causally driven by cached Q+A state, not the document cache; transplanting or steering Q+A values flips reports (98.9-100% for smaller models).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.32349",
-              "title": "Why Full-Duplex Speech Models Collapse in Long Conversations",
-              "brief": {
-                "zh": "「新芽：全双工语音模型一聊长就崩，原因居然是滑窗把第一个 KV 条目丢了」作者做了个 FD-LHB 长程基准，测了 5 个全双工模型：保留全历史的会在上下文耗尽前就变差，滑窗的则会陷入重复、沉默和胡言乱语。诊断出两个机制：Initialization-Anchor Eviction（滑窗把第 1 个 KV 条目挤掉 → 沉默/乱码，典型的 attention-sink 被驱逐）和模型被自己最近输出强化的重复。对应两个免训练修补 IAP（钉住首个条目）和 DRP（抑制回声），回放一小时仍能实时跑。机制清晰、一张『滑窗 + 锚点被踢掉』的 SVG 图就能讲明白，而且把 attention sink",
-                "en": "Full-duplex speech models collapse in long conversations because sliding windows evict the first KV entry (attention-sink eviction) plus self-reinforced repetition; training-free fixes IAP and DRP.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.lmsys.org/blog/2026-10-26-cf-security/",
-              "title": "SGLang security update: improving request isolation (Cloudflare GLM-5.3 cross-request KV cache exposure + PD-disaggregation abort race)",
-              "brief": {
-                "zh": "New since 10-25 sweep (no other lane/archive covers it; grep'd inbox + archive 1023–1025 + topics.md). Serving-stack isolation/security with real mechanism: 'free' slot has a hidden second condition (no remote writer in flight), router decides who dies vs engine decides when memory is safe. Pairs wi",
-                "en": "LMSYS/SGLang with Cloudflare: GLM-5.3 on Workers AI returned other tenants data for prompts over 681,280 tokens (155 responses); causes were a context-window vs KV-pool mismatch and a PD-disaggregation abort race (use-after-free with in-flight RDMA writes); fixed with deferred release and admission",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://arxiv.org/abs/2610.28577",
-              "title": "Cache Engineering for Agents (AKV, Tsinghua/CUHK): drop + reposition KV entries instead of summarizing history",
-              "brief": {
-                "zh": "New since 10-25 sweep; no overlap in inbox/archive 1023–1025/topics (grep AKV, 2610.28577, thu-nics). Directly on the agent-harness/context-management line: challenges the 'summarize at threshold' compaction pattern harnesses use, and pairs with the Anthropic 'fold subagents into main loop' / 'harne",
-                "en": "AKV (Tsinghua/CUHK) lets the harness drop and reposition KV entries instead of summarizing history; rolling drop of tool responses cuts average cost 27.7% with score +1.7; KV reads are 82.4% of API cost. Benchmark tables via MarkTechPost.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.32109",
-            "https://arxiv.org/abs/2610.32349",
-            "https://www.lmsys.org/blog/2026-10-26-cf-security/",
-            "https://arxiv.org/abs/2610.28577"
-          ]
-        },
-        {
-          "id": "t784",
-          "theme": "research",
-          "title": {
-            "zh": "Putting Transformer Theories to the Test：把 Star-free / AC0 / TC0 / C-RASP / MPC / BAPO / Sensitivity 七套表达力理论放进同一张预测矩阵并用受控实验对账——没有任何一套能解释全部成败（如 C-RASP 判 k-hop induction 难但小模型能长度泛化）",
-            "en": "Putting Transformer Theories to the Test",
-            "ja": "Putting Transformer Theories to the Test"
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：综合对账型好讲，但缺高量核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：综合对账型好讲，但缺高量核心词。",
-            "en": "Single-paper candidate: seven transformer expressivity theories tested against controlled experiments; none explains everything; no clean core term.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.32104",
-              "title": "Putting Transformer Theories to the Test",
-              "brief": {
-                "zh": "「深耕候选：七套 Transformer 表达力理论放在同一张预测矩阵里对账」Star-free、AC0、TC0、C-RASP、MPC、BAPO、Sensitivity 七种理论各说各话，作者把它们翻译成同一套任务×预测矩阵，补了新的理论结果，再用小模型的样本复杂度、长度泛化和预训练模型表现去验证。结论是没有任何一套理论能解释全部成败：比如 C-RASP 判 k-hop induction 为难，但小 transformer 能长度泛化；AC0/BAPO 判 binary majority 为难，实际也学得会。最后总结出一套理论该抓住的特征：软注意力、内容相关检索、逐位置有界计算、可学习性与归",
-                "en": "Seven theories of transformer capability (star-free, AC0, TC0, C-RASP, MPC, BAPO, sensitivity) are mapped into one prediction matrix and tested; no single theory explains all successes and failures.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.32104"
           ]
         }
       ]
@@ -5982,102 +5913,6 @@
           "blog": {
             "zh": "/cn/blog/singed-correct-output-not-safe-execution/",
             "en": "/blog/singed-correct-output-not-safe-execution/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-30T10:00:00+08:00",
-      "label": {
-        "zh": "9月30日 10:00",
-        "en": "Sep 30 10:00",
-        "ja": "9月30日 10:00"
-      },
-      "items": [
-        {
-          "id": "t352",
-          "theme": "research",
-          "title": {
-            "zh": "SkillDelta：任务条件增益预测决定是否注入技能",
-            "en": "SkillDelta: Relevant Skills Still Need a Gain Check",
-            "ja": "SkillDelta: Relevant Skills Still Need a Gain Check"
-          },
-          "summary": {
-            "zh": "技能不是「相关就灌」：用有/无技能配对历史预测任务条件增益，决策前决定是否注入；15 设定相对随机激活 +4.3pp——补位 Progressive Disclosure/LoRA Skills 的「何时该用」空白",
-            "en": "A deep read of arXiv:2609.32274 SkillDelta: relevance ≠ incremental benefit; paired with/without-skill history predicts task-conditional gain; +4.3pp vs random at matched use rates across 15 settings—after progressive disclosure.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "技能不是「相关就灌」：用有/无技能配对历史预测任务条件增益，决策前决定是否注入；15 设定相对随机激活 +4.3pp——补位 Progressive Disclosure/LoRA Skills 的「何时该用」空白",
-            "en": "SkillDelta predicts task-conditional gain from with/without skill pairs before injection; across 15 settings it beats random activation by +4.3pp on average—filling the when-to-use gap left by progressive disclosure and LoRA skill composition.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.32274",
-              "title": "When Does a Skill Add Value? Task-Conditional Gain Prediction for Selective Skill Use",
-              "brief": {
-                "zh": "「新芽：selective skills」SkillDelta 用有/无技能配对历史预测任务条件增益再决定注入；15 设定平均 +4.3pp，多数收益来自跨任务组分配；附 DeepSeek Harness 插件。",
-                "en": "SkillDelta uses paired with/without skill history to predict task-conditional gain before injection; +4.3pp average over random activation across 15 settings, with most gains from cross-task allocation, plus a DeepSeek Harness plugin.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.32274"
-          ],
-          "blog": {
-            "zh": "/cn/blog/skilldelta-selective-skill-activation/",
-            "en": "/blog/skilldelta-selective-skill-activation/"
-          }
-        },
-        {
-          "id": "t368",
-          "theme": "research",
-          "title": {
-            "zh": "FTA：Failure-Transparent Agents 事后失败报告保真基准",
-            "en": "FTA: When Tools Fail, Agents Still Claim Success",
-            "ja": "FTA: When Tools Fail, Agents Still Claim Success"
-          },
-          "summary": {
-            "zh": "把「工具已失败」证据态钉死，专测事后报告保真——基线假成功 22.8%→结构化证据契约 0.8%，有用回复升至 98.8%；补齐执行失败≠诚实汇报缺口",
-            "en": "A deep read of arXiv:2609.35732 Failure-Transparent Agents: fix failed observation and evidence state before generation, then audit post-failure claims. Across 6 models and 3600 human-annotated responses, false success falls 22.8%→9.3%→0.8% under baseline / transparency / evidence contract; useful responses rise to 98.8%.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "把「工具已失败」证据态钉死，专测事后报告保真——基线假成功 22.8%→结构化证据契约 0.8%，有用回复升至 98.8%；补齐执行失败≠诚实汇报缺口",
-            "en": "FTA benchmarks post-failure reporting fidelity for tool-using agents: structured evidence contracts cut false-success from 22.8% to 0.8% while useful replies rise to 98.8%—closing the gap where execution failure ≠ honest report.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.35732",
-              "title": "Failure-Transparent Agents: Benchmarking Post-Failure Reporting in Tool-Using Language Models",
-              "brief": {
-                "zh": "FTA 专测工具失败后的报告保真：结构化证据契约把假成功从 22.8% 压到 0.8%，同时有用回复升至 98.8%。",
-                "en": "FTA benchmarks whether tool-using agents honestly report tool failures; structured evidence contracts cut false successes from 22.8% to 0.8% while useful replies reach 98.8%.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.35732"
-          ],
-          "blog": {
-            "zh": "/cn/blog/failure-transparent-agents-tool-failure-reporting/",
-            "en": "/blog/failure-transparent-agents-tool-failure-reporting/"
           }
         }
       ]
