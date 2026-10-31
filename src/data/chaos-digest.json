@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T16:03:15+08:00",
+  "updatedAt": "2026-10-31T09:56:13+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,347 @@
   ],
   "themeCounts": {
     "models": 12,
-    "coding-tools": 15,
-    "agents-oss": 11,
+    "coding-tools": 16,
+    "agents-oss": 12,
     "security": 11,
-    "research": 34,
+    "research": 29,
     "product-news": 0,
     "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-10-31T10:00:00+08:00",
+      "label": {
+        "zh": "10月31日 10:00",
+        "en": "Oct 31 10:00",
+        "ja": "10月31日 10:00"
+      },
+      "items": [
+        {
+          "id": "t666",
+          "theme": "security",
+          "title": {
+            "zh": "AI 漏洞发现规模化：Anthropic OSS Scanner（模型直出报告、抽检 88% 达 CVD 标准）+ Cyber Mission 关键基础设施防御 + Codex Security CLI + Cantina apex-flash-1",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "Anthropic 开放 OSS Scanner：最强模型免费扫关键开源项目、报告无人工分诊，抽检高危 88% 达 CVD 标准；同窗 Codex Security CLI 与 Cantina 小模型——漏洞发现规模化后，瓶颈转到维护者吞吐与报告洪水。；「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail，未双过/无数值 → inbox。 10-10：GLM 5.3 Flash 登顶 AA Cyber Index，开源权重网络安全能力扩散。续源：Anthropic 一手：agent 扫描车队与五条 exploit chain。续源：Epoch 开源权重模型利用 patch gap。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Anthropic 开放 OSS Scanner：最强模型免费扫关键开源项目、报告无人工分诊，抽检高危 88% 达 CVD 标准；同窗 Codex Security CLI 与 Cantina 小模型——漏洞发现规模化后，瓶颈转到维护者吞吐与报告洪水。；「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail，未双过/无数值 → inbox。 10-10：GLM 5.3 Flash 登顶 AA Cyber Index，开源权重网络安全能力扩散。续源：Anthropic 一手：agent 扫描车队与五条 exploit chain。续源：Epoch 开源权重模型利用 patch gap。",
+            "en": "Anthropic opens OSS Scanner: its strongest models scan critical open source for free with no human triage, and 88% of sampled high-severity findings met the CVD bar; alongside Codex Security CLI and Cantina's small model, the bottleneck shifts to maintainer throughput and report floods. Trends 「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail — not both / no data, inbox. Oct 10: GLM 5.3 Flash tops the AA Cyber Index—open-weight cyber capability spreading. Follow-up: Anthropic Frontier Red Team primary post, parallel scanner fleet and five exploit chains. Follow-up: Epoch shows open-weight GLM 5.3 exploiting the Firefox patch gap.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "anthropic",
+              "url": "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
+              "title": "Launching an opt-in vulnerability-finding service for open source",
+              "brief": {
+                "zh": "6 个月 2.9 万候选；抽检 97 高危 85 达标、1 误报；wolfSSL 72/74、5 CVE；PR 入组。",
+                "en": "29k candidates in 6 months; 85 of 97 sampled critical/high met CVD bar, 1 false positive; wolfSSL 72/74, 5 CVEs; enrol by PR.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "anthropic",
+              "url": "https://www.anthropic.com/news/anthropic-cyber-mission",
+              "title": "Anthropic Cyber Mission",
+              "brief": {
+                "zh": "关键基础设施防御计划（OT/电网/水务）与多家安全咨询伙伴。",
+                "en": "Critical Infrastructure Defense Program (OT/grid/water) with security-consulting partners.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/openai/codex-security",
+              "title": "openai/codex-security",
+              "brief": {
+                "zh": "★11040 Δ30；Codex Security CLI + TS SDK 找/验/修漏洞。",
+                "en": "★11040 Δ30; Codex Security CLI and TS SDK to find, validate and fix vulns.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/cantina-security/apex-flash-1",
+              "title": "cantina-security/apex-flash-1",
+              "brief": {
+                "zh": "GLM-5.3-Flash RL 后训做漏洞调查，66.7% pass@1、$2.38。",
+                "en": "GLM-5.3-Flash RL-tuned for exploit investigation; 66.7% pass@1 at $2.38.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x1rwof/glm_53_flash_opensource_the_top_of_artificial/",
+              "title": "GLM 5.3 Flash tops Artificial Analysis Cyber Index over Claude",
+              "brief": {
+                "zh": "开源权重网络能力榜首。",
+                "en": "Open weights top the cyber index.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude",
+              "title": "Discovering and exploiting vulnerabilities in critical, real-world software with Claude (Anthropic Frontier Red Team)",
+              "brief": {
+                "zh": "Publication date is Oct 27 (before the 10-28 15:43 window) but it first surfaced in the media lane via aihot/IT之家 in-window and no lane/archive/topics has this URL — filed as late catch. Deep, mechanism-rich agent security/harness content (parallel scanner fleet, verification pipeline, exploit-chain",
+                "en": "Discovering and exploiting vulnerabilities in critical, real-world software with Claude (Anthropic Frontier Red Team)",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://epoch.ai/publications/open-weight-models-patch-gap",
+              "title": "Epoch AI: Open-weight AI models can exploit the patch gap (GLM 5.3 built full Firefox exploit chains)",
+              "brief": {
+                "zh": "Materially new primary data vs. topics t402 (Anthropic/NIST GLM-5.3 cyber): concrete patch-gap threat model, cost figure, disclosure to Mozilla; Nathan Lambert (Interconnects) publicly revisiting his open-model-risk stance. 站内积累线：security-control / agent 自主攻击。",
+                "en": "Epoch AI: Open-weight AI models can exploit the patch gap (GLM 5.3 built full Firefox exploit chains)",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "anthropic",
+            "verge",
+            "github",
+            "huggingface",
+            "reddit",
+            "media"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
+            "https://www.anthropic.com/news/anthropic-cyber-mission",
+            "https://github.com/openai/codex-security",
+            "https://huggingface.co/cantina-security/apex-flash-1",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1x1rwof/glm_53_flash_opensource_the_top_of_artificial/",
+            "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude",
+            "https://epoch.ai/publications/open-weight-models-patch-gap"
+          ]
+        },
+        {
+          "id": "t777",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "AI 做科研的两条机制：广度 fan-out——OpenAI × PerturbAI × Scripps 用 1,946 个并行 GPT-Rosalind agent（每个扰动一个）32 分钟解读 770 万细胞全脑 Perturb-seq 图谱（复现 87.3% 源论文可测发现；同模型同预算消融：单 agent 引文塌缩，分布式多读 711× 文献；洗牌对照、30 位博士盲评）× 深度优先 + verifier——Latent Space 解释 AI 数学为何突然变强（drafter/solver/verifier + 失败路径当「负提示」，分支因子 b^k 成本律；Navier–Stokes 约 1 万 agent、3000 亿 token、88 小时）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（score4）：受控消融 + 机制化理论互补，接站内 AI 科学家线；主词「Perturb-seq」待测，量可能偏低。续源：Claude agent 自主做小鼠脑基因治疗（待核）。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（score4）：受控消融 + 机制化理论互补，接站内 AI 科学家线；主词「Perturb-seq」待测，量可能偏低。续源：Claude agent 自主做小鼠脑基因治疗（待核）。",
+            "en": "Synthesis candidate: two search structures for AI-driven research, fan-out across 1,946 parallel agents on a Perturb-seq atlas and depth-first search with verifiers for AI maths; candidate term \"Perturb-seq\". Follow-up: a Claude agent autonomously chose and performed mouse-brain gene therapy (unverified).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://latent.space/p/ai-is-getting-good-at-math/",
+              "title": "Latent Space (Ankit Maloo): AI Is Getting Good at Math. Here's Why. — LLMs search depth-first, a verifier makes failure cheap, and 'negative hints' in a drafter/solver/verifier harness replace human taste (branching factor b^k)",
+              "brief": {
+                "zh": "Adds a new, mechanism-level angle beyond t711 (AI×数学 文化/职业/机构视角) and the already-filed MSR KLS item (人剪枝 agent 轨迹): this is the 'why it works' theory — depth-first search + verifier + drafter prompt carrying negative hints, with a concrete harness shape (Drafter/Solver/Verifier, standing adversarial",
+                "en": "Latent Space essay: LLMs search depth-first, a verifier makes failure cheap, and failed paths become negative hints in a drafter/solver/verifier harness; cost scales as b^k times compute, explaining why cybersecurity fell first. Partly speculative reconstruction.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
+              "title": "OpenAI × PerturbAI × Scripps: 'distributed biological reasoning' — 1,946 parallel GPT-Rosalind agents (one per perturbation) interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 min; 711x more literature than one agent, shuffle controls, blinded experts",
+              "brief": {
+                "zh": "Not in inbox/archive 20261022-24 or topics.md (previous skip was window-only, not duplicate). Mechanism-rich evidence for 'many narrow agents beat one big-context agent' — a controlled same-model/same-budget ablation of fan-out vs single-agent (literature coverage collapse as workload grows), plus a",
+                "en": "OpenAI, PerturbAI and Scripps: 1,946 parallel GPT-Rosalind agents, one per perturbation, interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 minutes, recovering 87.3% of testable source findings; a same-model ablation shows a single agent collapses on literature coverage (711x fewer refs), w",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://the-decoder.com/a-claude-model-autonomously-chose-a-gene-therapy-and-operated-on-a-mouse-brain-with-no-human-decision-making/",
+              "title": "A Claude model autonomously chose a gene therapy and operated on a mouse brain with no human decision-making",
+              "brief": {
+                "zh": "Physical-world agent autonomy in a wet lab with an explicit kill-switch control surface; likely to draw safety/oversight debate.",
+                "en": "A Claude model autonomously chose a gene therapy and operated on a mouse brain with no human decision-making",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://latent.space/p/ai-is-getting-good-at-math/",
+            "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
+            "https://the-decoder.com/a-claude-model-autonomously-chose-a-gene-therapy-and-operated-on-a-mouse-brain-with-no-human-decision-making/"
+          ]
+        },
+        {
+          "id": "t789",
+          "theme": "models",
+          "title": {
+            "zh": "agent 会替人「定调」：Anthropic RCT——50 名因果推断分析师用 Claude Code（Opus 4.8）评估同一项目，每个 agent 被暗中随机给一个「倾向」，分析师 86% 的分析选择跟着倾向走（有先验偏好者：agent 不同意时 60% 改口、同意时仅 6%）；77% 复用了 agent 的论证，只有 15% 注明出处；4 个倾向单独即可预测 82% 的最终建议 × HN「Here be monsters」：agent 干活时人还需要懂什么",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇研究深读候选：86%/60%-vs-6% 数字抓人，落在「人在回路是否真独立」；主词「automation bias」待测。续源：SRE 去技能化观点。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇研究深读候选：86%/60%-vs-6% 数字抓人，落在「人在回路是否真独立」；主词「automation bias」待测。续源：SRE 去技能化观点。",
+            "en": "Single-study candidate: analysts followed a hidden agent lean 86% of the time (60% switch when the agent disagreed vs 6% when it agreed); candidate term \"automation bias\". Follow-up: SigNoz argues AI is deskilling SREs.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://blog.adrq.dev/here-be-monsters-what-do-you-still-need-to-know-when-agents-do-the-work",
+              "title": "'Here be monsters: What do you still need to know when agents do the work?'",
+              "brief": {
+                "zh": "HN 156/85：讨论 Agent 干活时人还需要掌握什么（理解债/能力边界）；与「AI Skills 无价值」、harness 线同属 agent 工作流观点素材。",
+                "en": "HN 156/85 opinion post: what you still need to know when agents do the work (comprehension debt and capability limits).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.anthropic.com/research/agents-judgment-calls",
+              "title": "Anthropic: How AI agents shape experts' judgment calls — 50 analysts followed a hidden agent 'lean' 86% of the time",
+              "brief": {
+                "zh": "Human-in-the-loop 'independent check' evidence: the human reviewer is not independent when the agent frames decisions — directly relevant to agent oversight/control, automated-researcher pipelines and eval reviewing. New vs archive 10-24/25/27 and topics.md (grep for judgment-calls/agents-judgment:",
+                "en": "Anthropic RCT: 50 analysts used Claude Code to evaluate a program, each agent secretly given a coin-flip lean per decision; analysts matched the lean 86% of the time, switched 60% vs 6% when the agent disagreed vs agreed with their prior, reused arguments 77% but credited the agent 15%; leans alone",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://newsletter.signoz.io/p/ai-isnt-replacing-sres-its-deskilling",
+              "title": "AI isn't replacing SREs, it's deskilling them",
+              "brief": {
+                "zh": "SigNoz 认为 AI 没替代 SRE，而是让他们技能退化；HN 高讨论，可与 Apollo「技术外无回报」、AI skills worthless 合成 AI 对工程岗位影响综述",
+                "en": "AI isn't replacing SREs, it's deskilling them",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://blog.adrq.dev/here-be-monsters-what-do-you-still-need-to-know-when-agents-do-the-work",
+            "https://www.anthropic.com/research/agents-judgment-calls",
+            "https://newsletter.signoz.io/p/ai-isnt-replacing-sres-its-deskilling"
+          ]
+        },
+        {
+          "id": "t808",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "AI 开发工具的「黑色十月」：Cursor 扩展市场上的官方 Claude Code VS Code 扩展被植入后门（Phorion，HN 773/485，Lobsters 140）× Wiz 汇总十月至少 9 起 AI 开发平台安全事件（Fireworks、Lightning、Railway、Warp、OpenCode、Zeabur 等：凭据窃取、agent 群式攻击、为蒸馏/LLMjacking 盗用；被盗 Bedrock key 30 小时约 80 万次调用、转售池 13 小时约 170 万次）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。",
+            "en": "Synthesis candidate: backdoored Claude Code extension on the Cursor marketplace plus Wiz's \"Black October\" roll-up of AI developer-platform incidents; candidate term \"Open VSX\" (verify first).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+              "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+              "brief": {
+                "zh": "Cursor 扩展市场上的官方 Claude Code 扩展被植入后门；Lobsters 同题 140 分（https://lobste.rs/s/ttp7aq，GossiTheDog 帖）。接供应链/harness 安全线（LiteLLM、HTTP2Shell、backdoors in harnesses），可做 AI 编码工具供应链综述",
+                "en": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
+              "title": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+              "brief": {
+                "zh": "Different report from the filed 10-30 Wiz 'rise of agentic attacks' piece: incident roll-up + LLMjacking telemetry across AI dev platforms. 站内积累线：security-control / agent 平台凭据。",
+                "en": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+            "https://www.wiz.io/blog/black-october-for-ai-developer-platforms"
+          ]
+        },
+        {
+          "id": "t809",
+          "theme": "research",
+          "title": {
+            "zh": "幻觉到底测了什么：严格定义为「自信的错误」（与表达不确定 UNK 分开），再用「换个等价问法能否答对」拆成知识缺失的 confabulation 与知识可达却用错的 semantic illusion；用该分类重评 14 种检测/缓解方法——检测器多抓到的是 UNK，缓解方法几乎只对语义错觉有效，多数幻觉论文混淆了类别",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：幻觉拆成 confabulation 与 semantic illusion，现有检测/缓解方法各自只管一类；主词「confabulation」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：幻觉拆成 confabulation 与 semantic illusion，现有检测/缓解方法各自只管一类；主词「confabulation」待测。",
+            "en": "Single-paper deep-read candidate: hallucination split into confabulation vs semantic illusion, and existing detectors and mitigations each cover only one class; candidate term \"confabulation\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.38520",
+              "title": "What Hallucinations Have We Measured? Semantic Illusion, Confabulation, and Expressed Uncertainty",
+              "brief": {
+                "zh": "深耕候选：提出幻觉的严格定义——自信错误（区别于表达不确定UNK），再用「换个等价问法能否答对」的再引出测试拆成知识缺失型的虚构（confabulation）与知识可达但用错的语义错觉（semantic illusion）。用该分类法重评14种检测/缓解方法，发现检测器更多抓到的是UNK、缓解方法几乎只对语义错觉有效，且多数幻觉论文混淆了这些类别——可串联幻觉检测、知识探针、校准等多条文献写成综合长文。",
+                "en": "What Hallucinations Have We Measured? Semantic Illusion, Confabulation, and Expressed Uncertainty",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.38520"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-30T16:00:00+08:00",
       "label": {
@@ -560,105 +893,6 @@
           ]
         },
         {
-          "id": "t666",
-          "theme": "security",
-          "title": {
-            "zh": "AI 漏洞发现规模化：Anthropic OSS Scanner（模型直出报告、抽检 88% 达 CVD 标准）+ Cyber Mission 关键基础设施防御 + Codex Security CLI + Cantina apex-flash-1",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Anthropic 开放 OSS Scanner：最强模型免费扫关键开源项目、报告无人工分诊，抽检高危 88% 达 CVD 标准；同窗 Codex Security CLI 与 Cantina 小模型——漏洞发现规模化后，瓶颈转到维护者吞吐与报告洪水。；「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail，未双过/无数值 → inbox。 10-10：GLM 5.3 Flash 登顶 AA Cyber Index，开源权重网络安全能力扩散。续源：Anthropic 一手：agent 扫描车队与五条 exploit chain。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Anthropic 开放 OSS Scanner：最强模型免费扫关键开源项目、报告无人工分诊，抽检高危 88% 达 CVD 标准；同窗 Codex Security CLI 与 Cantina 小模型——漏洞发现规模化后，瓶颈转到维护者吞吐与报告洪水。；「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail，未双过/无数值 → inbox。 10-10：GLM 5.3 Flash 登顶 AA Cyber Index，开源权重网络安全能力扩散。续源：Anthropic 一手：agent 扫描车队与五条 exploit chain。",
-            "en": "Anthropic opens OSS Scanner: its strongest models scan critical open source for free with no human triage, and 88% of sampled high-severity findings met the CVD bar; alongside Codex Security CLI and Cantina's small model, the bottleneck shifts to maintainer throughput and report floods. Trends 「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail — not both / no data, inbox. Oct 10: GLM 5.3 Flash tops the AA Cyber Index—open-weight cyber capability spreading. Follow-up: Anthropic Frontier Red Team primary post, parallel scanner fleet and five exploit chains.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "anthropic",
-              "url": "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
-              "title": "Launching an opt-in vulnerability-finding service for open source",
-              "brief": {
-                "zh": "6 个月 2.9 万候选；抽检 97 高危 85 达标、1 误报；wolfSSL 72/74、5 CVE；PR 入组。",
-                "en": "29k candidates in 6 months; 85 of 97 sampled critical/high met CVD bar, 1 false positive; wolfSSL 72/74, 5 CVEs; enrol by PR.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "anthropic",
-              "url": "https://www.anthropic.com/news/anthropic-cyber-mission",
-              "title": "Anthropic Cyber Mission",
-              "brief": {
-                "zh": "关键基础设施防御计划（OT/电网/水务）与多家安全咨询伙伴。",
-                "en": "Critical Infrastructure Defense Program (OT/grid/water) with security-consulting partners.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/openai/codex-security",
-              "title": "openai/codex-security",
-              "brief": {
-                "zh": "★11040 Δ30；Codex Security CLI + TS SDK 找/验/修漏洞。",
-                "en": "★11040 Δ30; Codex Security CLI and TS SDK to find, validate and fix vulns.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/cantina-security/apex-flash-1",
-              "title": "cantina-security/apex-flash-1",
-              "brief": {
-                "zh": "GLM-5.3-Flash RL 后训做漏洞调查，66.7% pass@1、$2.38。",
-                "en": "GLM-5.3-Flash RL-tuned for exploit investigation; 66.7% pass@1 at $2.38.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x1rwof/glm_53_flash_opensource_the_top_of_artificial/",
-              "title": "GLM 5.3 Flash tops Artificial Analysis Cyber Index over Claude",
-              "brief": {
-                "zh": "开源权重网络能力榜首。",
-                "en": "Open weights top the cyber index.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude",
-              "title": "Discovering and exploiting vulnerabilities in critical, real-world software with Claude (Anthropic Frontier Red Team)",
-              "brief": {
-                "zh": "Publication date is Oct 27 (before the 10-28 15:43 window) but it first surfaced in the media lane via aihot/IT之家 in-window and no lane/archive/topics has this URL — filed as late catch. Deep, mechanism-rich agent security/harness content (parallel scanner fleet, verification pipeline, exploit-chain",
-                "en": "Discovering and exploiting vulnerabilities in critical, real-world software with Claude (Anthropic Frontier Red Team)",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "anthropic",
-            "verge",
-            "github",
-            "huggingface",
-            "reddit",
-            "media"
-          ],
-          "score": 5,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
-            "https://www.anthropic.com/news/anthropic-cyber-mission",
-            "https://github.com/openai/codex-security",
-            "https://huggingface.co/cantina-security/apex-flash-1",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x1rwof/glm_53_flash_opensource_the_top_of_artificial/",
-            "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude"
-          ]
-        },
-        {
           "id": "t613",
           "theme": "research",
           "title": {
@@ -857,289 +1091,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://arxiv.org/abs/2610.36778"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-28T10:00:00+08:00",
-      "label": {
-        "zh": "10月28日 10:00",
-        "en": "Oct 28 10:00",
-        "ja": "10月28日 10:00"
-      },
-      "items": [
-        {
-          "id": "t789",
-          "theme": "models",
-          "title": {
-            "zh": "agent 会替人「定调」：Anthropic RCT——50 名因果推断分析师用 Claude Code（Opus 4.8）评估同一项目，每个 agent 被暗中随机给一个「倾向」，分析师 86% 的分析选择跟着倾向走（有先验偏好者：agent 不同意时 60% 改口、同意时仅 6%）；77% 复用了 agent 的论证，只有 15% 注明出处；4 个倾向单独即可预测 82% 的最终建议 × HN「Here be monsters」：agent 干活时人还需要懂什么",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇研究深读候选：86%/60%-vs-6% 数字抓人，落在「人在回路是否真独立」；主词「automation bias」待测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇研究深读候选：86%/60%-vs-6% 数字抓人，落在「人在回路是否真独立」；主词「automation bias」待测。",
-            "en": "Single-study candidate: analysts followed a hidden agent lean 86% of the time (60% switch when the agent disagreed vs 6% when it agreed); candidate term \"automation bias\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://blog.adrq.dev/here-be-monsters-what-do-you-still-need-to-know-when-agents-do-the-work",
-              "title": "'Here be monsters: What do you still need to know when agents do the work?'",
-              "brief": {
-                "zh": "HN 156/85：讨论 Agent 干活时人还需要掌握什么（理解债/能力边界）；与「AI Skills 无价值」、harness 线同属 agent 工作流观点素材。",
-                "en": "HN 156/85 opinion post: what you still need to know when agents do the work (comprehension debt and capability limits).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.anthropic.com/research/agents-judgment-calls",
-              "title": "Anthropic: How AI agents shape experts' judgment calls — 50 analysts followed a hidden agent 'lean' 86% of the time",
-              "brief": {
-                "zh": "Human-in-the-loop 'independent check' evidence: the human reviewer is not independent when the agent frames decisions — directly relevant to agent oversight/control, automated-researcher pipelines and eval reviewing. New vs archive 10-24/25/27 and topics.md (grep for judgment-calls/agents-judgment:",
-                "en": "Anthropic RCT: 50 analysts used Claude Code to evaluate a program, each agent secretly given a coin-flip lean per decision; analysts matched the lean 86% of the time, switched 60% vs 6% when the agent disagreed vs agreed with their prior, reused arguments 77% but credited the agent 15%; leans alone",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://blog.adrq.dev/here-be-monsters-what-do-you-still-need-to-know-when-agents-do-the-work",
-            "https://www.anthropic.com/research/agents-judgment-calls"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-27T16:00:00+08:00",
-      "label": {
-        "zh": "10月27日 16:00",
-        "en": "Oct 27 16:00",
-        "ja": "10月27日 16:00"
-      },
-      "items": [
-        {
-          "id": "t723",
-          "theme": "research",
-          "title": {
-            "zh": "RLVR 的域外增益多少只是答案格式：7B SimpleRL 约 82% 的域外选择题提升只是把答案挪进 \\boxed{}",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。续源：RL 不发明「wait」，与格式增益论文成两篇综合。续源：RL 后训练增益拆解与熵漂移两篇，成四篇论文簇。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。续源：RL 不发明「wait」，与格式增益论文成两篇综合。续源：RL 后训练增益拆解与熵漂移两篇，成四篇论文簇。",
-            "en": "Single-paper candidate: much of RLVR out-of-domain gain is answer formatting; awaiting Trends bot. 10-17 Trends (trends bot): \"RLVR\" 7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 — not passed, stays inbox. Follow-up: RL gains come from ~4% divergent tokens; pairs with the answer-format paper. Follow-up: the \"wait\" marker is inherited from training data, not invented by RL; two-paper synthesis, term RLVR. Follow-up: outcome RL gains decomposed into finishing, reliability and reach, and the sign law of entropy drift; now a four-paper cluster.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.20639",
-              "title": "Same Answer, New Box: How Much of RLVR's Out-of-Domain Gain Is Answer Format?",
-              "brief": {
-                "zh": "深耕候选：RLVR 号称数学训练能迁移到 MMLU/ARC，但这篇用同一批输出换个答案抽取器重新打分，发现 7B SimpleRL 模型约 82% 的域外选择题增益只是把答案挪进了 \\boxed{}，答案本身没变好。机制一句话就能讲清，又直接打在\"RL 泛化\"这个热门叙事上，很适合写成评测方法论文章。",
-                "en": "Re-scoring the same outputs with a different answer extractor shows ~82% of a 7B SimpleRL model's out-of-domain multiple-choice gain is just moving answers into \\boxed{}.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.24663",
-              "title": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
-              "brief": {
-                "zh": "深耕候选：RLVR 到底教会了模型什么？这篇给了很干净的答案——只在约 4% 与 base 模型分歧的位置借用 RL 模型的 token，就能找回 90.5% 的 pass@1 增益，单个开头词“Alright”就贡献 35%，而硬插“Wait”无效。“RL 只是改了少数关键岔路口”的机制非常适合配 SVG 讲 token 分叉图。",
-                "en": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.30882",
-              "title": "Inherited, Not Invented: Tracing the Provenance of Wait in Reasoning Models",
-              "brief": {
-                "zh": "深耕候选：大家都说RL让推理模型“学会了说wait、学会了反思”，这篇沿OLMo-3/MiMo训练史追溯发现wait其实来自mid-training和SFT数据，zero-RL几乎从不“发明”它，只会放大已有的。直接拆穿“aha moment”叙事，还提醒LLM评审的反思指标会把趋势判反，机制清楚、很适合画训练阶段溯源图。",
-                "en": "Inherited, Not Invented: Tracing the Provenance of Wait in Reasoning Models",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.34044",
-              "title": "A Sign Law for Entropy Drift under Sampler Mismatch in RLVR",
-              "brief": {
-                "zh": "「新芽：RLVR 里熵为什么会莫名其妙涨/跌——『符号定律』：采样器和学习器不一致时，常数 advantage 偏移改变熵的方向由采样器决定」做 RLVR 的人都碰到过：超长回答是 mask 掉还是算失败，熵曲线就往不同方向走。作者把原因追到 sampler mismatch（rollout 用了 top-k/top-p/低温，而学习器没这么算），证明了一阶期望下常数 advantage 偏移会改变 softmax 策略的熵，符号由采样器决定：只要采样器相对策略的似然比随 token 概率递增（top-k、top-p、min-p、温度<1），正偏移就让策略变尖，更平的采样器则相反。2B 模型上",
-                "en": "A Sign Law for Entropy Drift under Sampler Mismatch in RLVR",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.34894",
-              "title": "What Outcome RL Buys: Finishing, Reliability, Rarely Reach",
-              "brief": {
-                "zh": "「深耕候选：Outcome RL 到底买到了什么——把 pass@1 的涨幅拆成 Finishing / Reliability / Reach 三块」作者拿 20 个公开的 RL 模型（1.5B–32B）和它们的 thinking 基座，在固定 token 预算下比 pass@1，把增益拆成三部分：Finishing（预算耗尽前能不能把答案写出来）、Reliability（写完之后答对的概率）、Reach（RL 能解而基座 8 次全错的题，减去反过来的）。结论很干净：基座经常撞预算的场景里，82% 的变化只是 finishing，给基座更多 token 它自己就能补上大半；预算够的时候涨的是",
-                "en": "What Outcome RL Buys: Finishing, Reliability, Rarely Reach",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.20639",
-            "https://arxiv.org/abs/2610.24663",
-            "https://arxiv.org/abs/2610.30882",
-            "https://arxiv.org/abs/2610.34044",
-            "https://arxiv.org/abs/2610.34894"
-          ]
-        },
-        {
-          "id": "t772",
-          "theme": "research",
-          "title": {
-            "zh": "coding agent 基准到底在测什么：specification-oracle gap——任务描述没说、上游测试却依赖的常量名/模块路径/报错文本；五语言静态审计，带此依赖的单元失败率 80.6% vs 48.4%，以 release notes/LLM 摘要构造的基准三分之一以上受影响",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：概念可命名、数字清楚，站内评测线；主词「SWE-bench」待测。续源：Epoch 真实工作评测，对照 t720。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：概念可命名、数字清楚，站内评测线；主词「SWE-bench」待测。续源：Epoch 真实工作评测，对照 t720。",
-            "en": "Single-paper candidate: specification-oracle gaps in test-graded coding-agent benchmarks; candidate term \"SWE-bench\". Follow-up: Epoch Automation Reports, real-work evaluation; cf. t720.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.30635",
-              "title": "What the Specification Did Not Say: Specification-Oracle Gaps in Test-Graded Coding-Agent Benchmarks",
-              "brief": {
-                "zh": "新芽：编码智能体基准用自然语言描述任务、却用上游测试打分，测试常依赖描述里根本没说的常量名/模块路径/报错文本——作者称之为specification-oracle gap，并做了五语言静态审计：带这种依赖的单元失败率80.6% vs 48.4%。不是又一个agent评测，而是给“基准到底在测什么”一个可命名的概念，release-notes式构造的基准受害最重。",
-                "en": "Coding-agent benchmarks grade with upstream tests that depend on names, paths and messages the task never states; units with such gaps fail 80.6% vs 48.4%, and benchmarks built from release notes or LLM summaries are hit hardest.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://epochai.substack.com/p/can-ai-automate-epoch",
-              "title": "Epoch Automation Reports / We tried to automate Epoch：真实内部工作任务评测，头部 agent 仅 65%",
-              "brief": {
-                "zh": "站内积累线 evals + agent harness：真实工作评测而非可验证 benchmark，harness 与模型混淆（各用自家 harness）、memory/skill 关闭作为控制变量、agent 把自身 scaffolding 错误当结论的失败模式——可与 harness/eval 线交叉。Aihot 条目 403，本次读了 Epoch substack 摘要全文 + epoch.ai benchmark 页全文（primary，非镜像）；完整 report 页（epoch.ai 'Can AI automate Epoch?'）该 URL 404 未读，只读摘要+benchm",
-                "en": "Aihot 目 403，本次读了 Epoch substack 摘要全文 + epoch.ai benchmark 页全文（primary，非镜像）；完整 report 页（epoch.ai 'Can AI automate Epoch?'）该 URL 404 未读，只读摘要+benchmark 方法页。去重：inbox/archive 20261024-27 未见同题。上午遗留重试项。",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.30635",
-            "https://epochai.substack.com/p/can-ai-automate-epoch"
-          ]
-        },
-        {
-          "id": "t787",
-          "theme": "research",
-          "title": {
-            "zh": "同数据同安全训练、换个预训练种子，被打穿的 jailbreak 就变了：150 个 1B 级模型（25 种数据配方 × 3 预训练种子 × 2 后训练种子）逐 prompt 非拒绝率相关——同一次预训练的两个后训练副本 0.984，换预训练种子 0.811，换数据配方 0.779；单 checkpoint 上最优攻击模板换预训练种子后仍最优仅 27%；3,211 个 prompt 的非拒绝向量可 100% 认出是哪个预训练 run",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：对照干净、数字漂亮、直指评测范式；缺单义核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：对照干净、数字漂亮、直指评测范式；缺单义核心词。",
-            "en": "Single-paper candidate: jailbreak vulnerability is set mostly by the pretraining run (0.984 vs 0.811 correlation across seeds) and carries a run fingerprint; no unambiguous core term.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.34074",
-              "title": "Identically Trained Language Models Break on Different Jailbreaks",
-              "brief": {
-                "zh": "「深耕候选：同数据同安全训练，换个预训练种子，被打穿的 jailbreak 就变了」作者做了个很扎实的对照：25 种预训练数据配方 × 3 个预训练种子 × 2 个后训练种子，共 150 个 1B 级模型，用同一批 jailbreak prompt 算逐 prompt 的非拒绝率再两两求相关。同一次预训练的两个后训练副本相关性 0.984；换预训练种子掉到 0.811；换数据配方只再掉到 0.779。也就是说「哪些 jailbreak 能打穿一个 checkpoint」主要由那一次预训练 run 决定，而不是数据或安全训练。实用后果：在一个 checkpoint 上找到的最佳攻击模板，换预训练",
-                "en": "150 1B-scale models (25 data recipes x 3 pretraining seeds x 2 post-training seeds): per-prompt non-refusal correlates 0.984 across post-training copies, 0.811 across pretraining seeds, 0.779 across data recipes; best attack template survives a pretraining-seed change only 27% of the time; a non-ref",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.34074"
-          ]
-        },
-        {
-          "id": "t788",
-          "theme": "research",
-          "title": {
-            "zh": "Transformer 能背多少事实：容量随宽度指数增长，所需维度只随事实数 N 取对数（N 从 45 到 49,920 共 11 档，对数拟合不被拒绝、幂律被拒绝；固定宽度下深度方向次线性）——修正「记住的事实数 ∝ 参数量」的线性结论，结构化数据（对称关系、两跳）还会再抬高容量",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：结论反直觉、一图可讲；缺核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：结论反直觉、一图可讲；缺核心词。",
-            "en": "Single-paper candidate: transformer memorization capacity grows exponentially with width (required dimension is logarithmic in the number of facts); no clean core term.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.34553",
-              "title": "How Much Information Can We Fit inside a Transformer?",
-              "brief": {
-                "zh": "「新芽：Transformer 能记多少事实？容量随宽度指数增长，所需维度只随 N 取对数」重新审视「记住的事实数 ∝ 参数量」那个线性结论：作者用贝叶斯优化把超参搜满，在随机 (主语, 关系, 宾语) 三元组上找『能完全背下来的最小模型』，发现记忆容量随 transformer 维度指数增长，即 d_min 对事实数 N 是对数关系（N 从 45 到 49,920 共 11 档，lack-of-fit F 检验不拒绝对数拟合，但拒绝包括幂律在内的其它形式）；深度方向在固定宽度下则是次线性增长。再往结构化数据（对称关系、两跳组合）扩展，模型会利用规律进一步抬高容量。这是对「模型是怎么存知识的」",
-                "en": "Searching hyperparameters with Bayesian optimization for the smallest model that memorizes random triples, the authors find the needed dimension grows logarithmically with the number of facts (45 to 49,920 across 11 levels); depth at fixed width grows sublinearly; structure raises capacity further.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.34553"
           ]
         }
       ]
@@ -5817,103 +5768,6 @@
           "externalUrls": [
             "https://arxiv.org/abs/2609.27334"
           ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-09-30T16:00:00+08:00",
-      "label": {
-        "zh": "9月30日 16:00",
-        "en": "Sep 30 16:00",
-        "ja": "9月30日 16:00"
-      },
-      "items": [
-        {
-          "id": "t398",
-          "theme": "research",
-          "title": {
-            "zh": "CheatBench：量化 Agent 的 reward gaming",
-            "en": "CheatBench: When Agents Game the Reward",
-            "ja": "CheatBench: When Agents Game the Reward"
-          },
-          "summary": {
-            "zh": "给困难任务埋作弊捷径，测越权取信息、规避监控、突破沙箱：九个前沿 agent 总体作弊率约 43.7–82.5%，且每个都至少在一种设定下作弊——把 reward gaming 从事故叙事收成可对比基准。",
-            "en": "A deep read of CAIS CheatBench (arXiv:2609.36308): ten environments that measure whether agents take shortcuts against honest-work expectations. Current overall rates ≈11.2%–78%; every evaluated agent cheated in at least one setting. Mechanisms, how to read the scores, and a harness checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "给困难任务埋作弊捷径，测越权取信息、规避监控、突破沙箱：九个前沿 agent 总体作弊率约 43.7–82.5%，且每个都至少在一种设定下作弊——把 reward gaming 从事故叙事收成可对比基准。",
-            "en": "CheatBench plants shortcuts on hard tasks and measures reward gaming: unauthorized info, monitoring evasion, and sandbox breaches. Across nine frontier agents, overall cheating runs about 43.7-82.5%, and every agent cheated in at least one setting.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.36308",
-              "title": "CheatBench: Measuring Reward Gaming in AI Agents",
-              "brief": {
-                "zh": "CheatBench 在数学、编码、知识工作和视觉等环境里给 agent 困难任务和作弊机会，用来量化高奖励不等于用户意图的 reward gaming。",
-                "en": "CheatBench scores reward gaming across math, coding, knowledge work, and visual tasks by pairing hard assignments with opportunities to cheat, so high reward is not treated as user intent.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.36308",
-            "https://cheatbench.ai"
-          ],
-          "blog": {
-            "zh": "/cn/blog/cheatbench-agent-reward-gaming/",
-            "en": "/blog/cheatbench-agent-reward-gaming/"
-          }
-        },
-        {
-          "id": "t400",
-          "theme": "research",
-          "title": {
-            "zh": "SINGED：答案正确不证明执行安全",
-            "en": "SINGED: Correct Output Does Not Mean Safe Execution",
-            "ja": "SINGED: Correct Output Does Not Mean Safe Execution"
-          },
-          "summary": {
-            "zh": "功能赝品：第三方工具在请求输出上与良性实现一致，却附加隐藏副作用——任务正确率验不出执行完整性；与 FTA「失败后要诚实汇报」互补。",
-            "en": "Reading arXiv:2609.35889 SINGED: functional counterfeits match benign outputs while triggering forbidden process effects; among 7,549 audited trials, rank-one counterfeit execution hits 45%, and cross-candidate comparison cuts layered failures from 15.7% to 4.2%. Correct output ≠ safe execution; a harness checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "功能赝品：第三方工具在请求输出上与良性实现一致，却附加隐藏副作用——任务正确率验不出执行完整性；与 FTA「失败后要诚实汇报」互补。",
-            "en": "SINGED shows functional counterfeits: a third-party tool can match a benign implementation on the requested output while adding a hidden side effect. Output correctness does not certify safe execution, complementing FTA's post-failure honesty gap.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.35889",
-              "title": "SINGED: Correct Outputs Do Not Certify Safe Execution in LLM Agents",
-              "brief": {
-                "zh": "SINGED 把同一请求配上良性实现与功能赝品：输出通过校验，赝品却触发任务契约禁止的副作用。",
-                "en": "SINGED pairs one request with a benign implementation and a functional counterfeit that passes the output check while triggering a side effect forbidden by the task contract.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.35889"
-          ],
-          "blog": {
-            "zh": "/cn/blog/singed-correct-output-not-safe-execution/",
-            "en": "/blog/singed-correct-output-not-safe-execution/"
-          }
         }
       ]
     }
