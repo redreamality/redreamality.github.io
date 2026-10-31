@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-31T09:56:13+08:00",
+  "updatedAt": "2026-10-31T15:56:04+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,197 @@
     "other"
   ],
   "themeCounts": {
-    "models": 12,
+    "models": 11,
     "coding-tools": 16,
-    "agents-oss": 12,
-    "security": 11,
+    "agents-oss": 11,
+    "security": 10,
     "research": 29,
     "product-news": 0,
     "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-10-31T16:00:00+08:00",
+      "label": {
+        "zh": "10月31日 16:00",
+        "en": "Oct 31 16:00",
+        "ja": "10月31日 16:00"
+      },
+      "items": [
+        {
+          "id": "t769",
+          "theme": "models",
+          "title": {
+            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。",
+            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term. Follow-up: Claude Duet safety architecture, approvals outside the model and credential isolation. Follow-up: Claude Code adds an undocumented env var that lifts the last hard blocks under skip-permissions. Follow-up: Claude Code receives a remotely pushed, non-disableable prompt rule via a server-side flag.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://x.com/claudeai/status/2113360845409583307",
+              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
+              "brief": {
+                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
+                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
+              "brief": {
+                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
+                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://claude.com/blog/claude-duet-safety-privacy-and-security",
+              "title": "Claude Duet Safety, Privacy, and Security（Anthropic 官方拆解：审批卡 + 模型外分类器 + 凭证不进模型）",
+              "brief": {
+                "zh": "站内积累线（agent 安全/控制）：与已归档 1Password for Agents（10-23）、Claude auto mode（10-23）、Managed Agents 凭证代理同一条线，但这篇是 Anthropic 一手的‘审批在模型外 + 凭证隔离 + 浏览器边界’完整架构，机制信息密度高。非本窗口新发（10-23 08:00 北京时间发布），前几轮未归档（topics.md 仅有 Duet 产品发布 t765），故补录。tag exploit-candidate。",
+                "en": "tag exploit-candidate。",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.ithome.com/1/019/476.htm",
+              "title": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
+              "brief": {
+                "zh": "站内积累线 (sandbox/security-control, coding-agent permission layers). It gives a concrete look at the layering inside a harness: the 'skip permissions' mode still had a hidden denylist, and now that denylist has its own off switch, which is undocumented. It pairs with t769 (auto-mode classifier / approv",
+                "en": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
+              "title": "Anthropic 在 Claude Code 的 Opus 5.5 提示中加入「不复刻具体现有游戏」规则，经服务端 tengu_heron_brook 下发、无法关闭",
+              "brief": {
+                "zh": "站内积累线（harness / security-control）：编码 agent 的行为约束不在模型权重也不在用户配置，而是厂商通过服务端 flag 远程注入 harness 系统提示、按模型分包、用户不可关——是 harness 层策略控制面的一手样本；也牵出反编译/静态重编译灰区与提示级护栏可绕过的问题。接 t690（Opus 5.5 反编译/移植、500B token 反编译 FPS）。",
+                "en": "",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://x.com/claudeai/status/2113360845409583307",
+            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+            "https://claude.com/blog/claude-duet-safety-privacy-and-security",
+            "https://www.ithome.com/1/019/476.htm",
+            "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games"
+          ]
+        },
+        {
+          "id": "t815",
+          "theme": "research",
+          "title": {
+            "zh": "harness 层管成本与质量：Microsoft TokenEconomizer（UC Berkeley + MSR，外置控制器插件，支持 Claude Code/Codex/Copilot CLI/Pi：从已完成会话学仓库级 micro-skill 并在三次确认后注入、裁剪长期未用工具定义、judge 判定陷入失败循环时注入一次 redirect；277 个 SWE-Bench 任务 × 5 种 agent×模型组合成本降 18.4–30.9%，30 格全部更便宜、4/5 组合 Pass@1 上升）× GitHub Copilot Fusion GA（运行时多模型路由：Single / Cascade 便宜模型起草 + judge 决定升级 / Critique 多模型并行评审再修订；VentureBeat 引 AA 称接近 Opus 5.5 编码、单任务成本约一半）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：harness 外层控成本（TokenEconomizer）与运行时多模型编排（Copilot Fusion）；主词「Copilot Fusion」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：harness 外层控成本（TokenEconomizer）与运行时多模型编排（Copilot Fusion）；主词「Copilot Fusion」待测。",
+            "en": "Synthesis candidate: harness-level cost control (TokenEconomizer) and runtime multi-model orchestration (Copilot Fusion); candidate term \"Copilot Fusion\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://github.com/microsoft/TokenEconomizer",
+              "title": "Microsoft TokenEconomizer：经验驱动的编码 agent 黑盒成本控制插件（micro-skills / 工具裁剪 / 失败循环干预）",
+              "brief": {
+                "zh": "站内积累线（harness / skills / memory / agent-loop）：不改 agent 本体，在 harness 外层用跨会话经验做记忆注入、工具面裁剪和循环守卫——正好是 skills+memory+loop control 的可测量样本，且给出逐仓库成本数据。上午因仅 MarkTechPost 二手而跳过，现已有 repo/论文一手源。",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion/",
+              "title": "GitHub Copilot Fusion GA：运行时多模型路由与编排（Single / Cascade / Critique）",
+              "brief": {
+                "zh": "站内积累线（harness / agent-loop）：把「起草-评审-升级」的多模型 loop 做进产品级 harness 运行时，成本/质量权衡由编排层而非用户承担——与今日 TokenEconomizer（外层成本控制）、Factory Droid 1.0 frontier harness 同线可对照。",
+                "en": "GitHub Copilot Fusion GA：行时多模型路由与编排（Single / Cascade / Critique）",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/microsoft/TokenEconomizer",
+            "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion/"
+          ]
+        },
+        {
+          "id": "t816",
+          "theme": "research",
+          "title": {
+            "zh": "把「柏拉图表征假说」证成定理：分模态训练的 JEPA 只要正样本是同一场景的两次观测（好视角），学到的表征只差一个旋转；next-token prediction 是「坏视角」的 JEPA，所以语言模型只能靠规模与视觉对齐——同等对齐好视角少用 42 倍样本（Balestriero × LeCun）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：柏拉图表征定理与 next-token 预测是「坏视角」；主词「JEPA」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：柏拉图表征定理与 next-token 预测是「坏视角」；主词「JEPA」待测。",
+            "en": "Single-paper deep-read candidate: a Platonic Representation Theorem for JEPAs, with next-token prediction as bad views; candidate term \"JEPA\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "pwc",
+              "url": "https://arxiv.org/abs/2610.39302",
+              "title": "Proving and Improving the Platonic Representation Hypothesis with JEPAs",
+              "brief": {
+                "zh": "深耕候选：把「柏拉图表征假说」（不同模态模型随规模收敛到同一世界表征）证成定理——分模态训练的 JEPA 在「好视角」正样本下只差一个旋转；并指出 next-token prediction 是「坏视角」的 JEPA，解释了语言模型为何只能靠规模与视觉对齐（同等对齐需 42 倍样本）。LeCun 署名、HF 54 赞，概念有搜索词，机制适合画 SVG，可串联 PRH 原论文、JEPA 路线与 LLM 对齐争论做综述。",
+                "en": "",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "pwc"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.39302"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-31T10:00:00+08:00",
       "label": {
@@ -735,88 +917,6 @@
             "https://openai.com/index/how-we-detect-frontier-model-misalignment",
             "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
             "https://www.youtube.com/watch?v=iMsUcCYNKqY"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-29T16:00:00+08:00",
-      "label": {
-        "zh": "10月29日 16:00",
-        "en": "Oct 29 16:00",
-        "ja": "10月29日 16:00"
-      },
-      "items": [
-        {
-          "id": "t769",
-          "theme": "models",
-          "title": {
-            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。",
-            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term. Follow-up: Claude Duet safety architecture, approvals outside the model and credential isolation. Follow-up: Claude Code adds an undocumented env var that lifts the last hard blocks under skip-permissions.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://x.com/claudeai/status/2113360845409583307",
-              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
-              "brief": {
-                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
-                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
-              "brief": {
-                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
-                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://claude.com/blog/claude-duet-safety-privacy-and-security",
-              "title": "Claude Duet Safety, Privacy, and Security（Anthropic 官方拆解：审批卡 + 模型外分类器 + 凭证不进模型）",
-              "brief": {
-                "zh": "站内积累线（agent 安全/控制）：与已归档 1Password for Agents（10-23）、Claude auto mode（10-23）、Managed Agents 凭证代理同一条线，但这篇是 Anthropic 一手的‘审批在模型外 + 凭证隔离 + 浏览器边界’完整架构，机制信息密度高。非本窗口新发（10-23 08:00 北京时间发布），前几轮未归档（topics.md 仅有 Duet 产品发布 t765），故补录。tag exploit-candidate。",
-                "en": "tag exploit-candidate。",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.ithome.com/1/019/476.htm",
-              "title": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
-              "brief": {
-                "zh": "站内积累线 (sandbox/security-control, coding-agent permission layers). It gives a concrete look at the layering inside a harness: the 'skip permissions' mode still had a hidden denylist, and now that denylist has its own off switch, which is undocumented. It pairs with t769 (auto-mode classifier / approv",
-                "en": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://x.com/claudeai/status/2113360845409583307",
-            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-            "https://claude.com/blog/claude-duet-safety-privacy-and-security",
-            "https://www.ithome.com/1/019/476.htm"
           ]
         }
       ]
@@ -1946,20 +2046,20 @@
       "items": [
         {
           "id": "t704",
-          "theme": "agents-oss",
+          "theme": "models",
           "title": {
             "zh": "AI 逆向与 clean-room 重写：REA「Reverse-Engineer Anything」× ArtCraft/PhotoCraft 重写 Photoshop（及 Wordcraft）× chardet 用 Claude 重写改许可 × Malus「洁净室即服务」讽刺",
             "en": "AI Reverse Engineering and Clean-Room Rewrites: REA, PhotoCraft, chardet and Malus Side by Side",
             "ja": "AI Reverse Engineering and Clean-Room Rewrites: REA, PhotoCraft, chardet and Malus Side by Side"
           },
           "summary": {
-            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。10-14 15:45 主词「reverse engineer anything」7d/24h 均过 gpts，进正式短名单，Top 3 #1。",
+            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。10-14 15:45 主词「reverse engineer anything」7d/24h 均过 gpts，进正式短名单，Top 3 #1。续源：EEVblog 实测 AI 逆向万用表固件。",
             "en": "REA's agent reverse-engineering toolkit, ArtCraft PhotoCraft's \\\"clean-room Photoshop\\\", chardet 7's Claude rewrite and relicensing, and the Malus satire, read together: how AI reverse engineering and rewriting work, how the AI version differs from a classic clean room, the licensing and copyright risk layers, and a decision framework for using these tools.",
             "ja": ""
           },
           "judgment": {
-            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。10-14 15:45 主词「reverse engineer anything」7d/24h 均过 gpts，进正式短名单，Top 3 #1。",
-            "en": "REA lets coding agents reverse-engineer binaries and runtimes and rebuild features; PhotoCraft claims a clean-room Photoshop rewrite; chardet's Claude rewrite and relicensing sparked a derivative-work fight—a multi-source synthesis on the mechanism, legal risk and methods of AI reverse engineering and clean-room rewrites. Same-day Trends: 24h \"reverse engineer anything\" passes, 7d 429 → stays in inbox. 10-14 15:45: own term passes 7d (28.98 vs 7.46) and 24h (67.89 vs 4.48) → shortlisted, Top 3 #1.",
+            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。10-14 15:45 主词「reverse engineer anything」7d/24h 均过 gpts，进正式短名单，Top 3 #1。续源：EEVblog 实测 AI 逆向万用表固件。",
+            "en": "REA lets coding agents reverse-engineer binaries and runtimes and rebuild features; PhotoCraft claims a clean-room Photoshop rewrite; chardet's Claude rewrite and relicensing sparked a derivative-work fight—a multi-source synthesis on the mechanism, legal risk and methods of AI reverse engineering and clean-room rewrites. Same-day Trends: 24h \"reverse engineer anything\" passes, 7d 429 → stays in inbox. 10-14 15:45: own term passes 7d (28.98 vs 7.46) and 24h (67.89 vs 4.48) → shortlisted, Top 3 #1. Follow-up: EEVblog tests AI reverse-engineering of multimeter firmware.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -2122,6 +2222,16 @@
                 "en": "Satirical \"clean room as a service\" laundering OSS licenses (FOSDEM 2026 companion), HN 1433/531 (Mar 2026).",
                 "ja": ""
               }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=BEKRoZj6otc",
+              "title": "EEVblog 1783 - Can AI Reverse Engineer the 121GW Multimeter Firmware?",
+              "brief": {
+                "zh": "Fastest-rising on-topic video this run: a well-known hardware channel tests coding agents and an MCP server on reverse-engineering real multimeter firmware.",
+                "en": "EEVblog 1783 - Can AI Reverse Engineer the 121GW Multimeter Firmware?",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -2155,7 +2265,8 @@
             "https://lwn.net/Articles/1061534/",
             "https://simonwillison.net/2026/Mar/5/chardet/",
             "https://arstechnica.com/ai/2026/03/ai-can-rewrite-open-source-code-but-can-it-rewrite-the-license-too/",
-            "https://malus.sh"
+            "https://malus.sh",
+            "https://www.youtube.com/watch?v=BEKRoZj6otc"
           ],
           "blog": {
             "zh": "/cn/blog/ai-reverse-engineering-clean-room-rewrite-licensing/",
@@ -5358,415 +5469,6 @@
           "externalUrls": [
             "https://arxiv.org/abs/2609.37153",
             "https://github.com/turambar928/Toxic_Tool_Bench"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-01T15:00:00+08:00",
-      "label": {
-        "zh": "10月1日 15:00",
-        "en": "Oct 1 15:00",
-        "ja": "10月1日 15:00"
-      },
-      "items": [
-        {
-          "id": "t003",
-          "theme": "models",
-          "title": {
-            "zh": "Jev × Claude Code：爆款工作流与 25 行最小实现",
-            "en": "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Build",
-            "ja": "Jev × Claude Code: Four Real Integration Paths and a 25-Line Minimal Build"
-          },
-          "summary": {
-            "zh": "站内 Jev 刚需：实操 10x + 最小实现 + OpenAI 跟进压力",
-            "en": "A viral YouTube clip ties Jev to Claude Code, but Jev cannot be the CLI chat model. This post covers the official skill, boundary hooks, MCP, and per-turn routing, contrasts NobodyWho’s 25-line minimal build, and discusses OpenAI fast-follow pressure.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "站内 Jev 刚需：实操 10x + 最小实现 + OpenAI 跟进压力",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=pNmfMi-yjZk",
-              "title": "Build an agentic software factory: deep dive",
-              "brief": {
-                "zh": "explore：Builder.io 官方 agentic software factory 深潜；1天·~2万播，续 t016 agent-native 产品线。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.nobodywho.ai/posts/jev-in-25-lines/",
-              "title": "Jev in 25 Lines of Python",
-              "brief": {
-                "zh": "Minimal reference implementation of the hot ‘Jev’ typed-decision/agent pattern — teachable agent architecture.",
-                "en": "Minimal reference implementation of the hot ‘Jev’ typed-decision/agent pattern — teachable agent architecture.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://arcturus-labs.com/blog/2026/09/21/will-openai-eat-jevs-lunch/",
-              "title": "OpenAI is well positioned to fast-follow Jev",
-              "brief": {
-                "zh": "Competitive analysis of OpenAI vs emerging Jev decision-agent paradigm — strategic agent-market signal.",
-                "en": "Competitive analysis of OpenAI vs emerging Jev decision-agent paradigm — strategic agent-market signal.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1woe70t/jev_isnt_new_tech_its_marketing_targets_people/",
-              "title": "Jev isn't new tech. Its marketing targets people who think AI started with LLMs.",
-              "brief": {
-                "zh": "LocalLLaMA pushback on Jev narrative — community stress-test for站内 Jev 线 (exploit candidate).",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "devto",
-              "url": "https://dev.to/valyuai/how-to-use-jev-a-practical-guide-to-typesafes-system-one-model-g5e",
-              "title": "How to Use Jev: A practical guide to TypeSafe's System One model",
-              "brief": {
-                "zh": "Dev.to ~230 reactions practical Jev guide — direct hit on站内 Jev exploit line (t003/t074).",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "devto",
-              "url": "https://dev.to/gde/plain-gemma-4-26b-vs-jev-on-one-ec2-l4-21-points-behind-overall-level-on-yesno-45-behind-on-15k6",
-              "title": "Plain Gemma 4 26B vs Jev on One EC2 L4: 2.1 Points Behind Overall, Level on Yes/No",
-              "brief": {
-                "zh": "Head-to-head Gemma 4 26B vs Jev on single L4 — model-vs-decision-index bakeoff on exploit track.",
-                "en": "Head-to-head Gemma 4 26B vs Jev on single L4 — model-vs-decision-index bakeoff on exploit track.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "devto",
-              "url": "https://dev.to/devopsdaily/we-measured-the-200x-claim-and-got-it-wrong-twice-first-5ch5",
-              "title": "We Measured the 200x Claim, and Got It Wrong Twice First",
-              "brief": {
-                "zh": "Dev.to jev-tagged post revisiting a 200x productivity claim with measurement corrections.",
-                "en": "Dev.to jev-tagged post revisiting a 200x productivity claim with measurement corrections.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "devto",
-              "url": "https://dev.to/kike/how-i-went-from-trust-me-bro-to-boomer-with-receipts-using-jev-2141",
-              "title": "RAG ranking is not the same as judging with Jev",
-              "brief": {
-                "zh": "Explicit Jev-vs-RAG-ranking framing —站内 Jev exploit companion.",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wo6o0f/mods_can_we_do_something_about_half_the_forum/",
-              "title": "Mods: can we do something about half the forum getting filled with these advertising posts for Jev?",
-              "brief": {
-                "zh": "Community backlash against perceived Jev shill/ads on LocalLLaMA — marketing pressure signal next to technical Jev debates.",
-                "en": "Community backlash against perceived Jev shill/ads on LocalLLaMA — marketing pressure signal next to technical Jev debates.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://github.com/egma-ai/jev-code-reviewer",
-              "title": "Jev Based Code Review",
-              "brief": {
-                "zh": "This Jev-based code-review project is a concrete example of applying a judge model to repository review rather than treating model output as final. It is directly relevant to agent verification and coding-harness design.",
-                "en": "This Jev-based code-review project is a concrete example of applying a judge model to repository review rather than treating model output as final. It is directly relevant to agent verification and coding-harness design.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=EOdXR6lU5ZA",
-              "title": "This NEW Jev + Claude OS Just Changed Every AI Workflow",
-              "brief": {
-                "zh": "YT Chase AI：Jev×Claude 工作流二创；~70k·1天·~2.9k VPH；published 伴源，不改 status。",
-                "en": "Chase AI Jev×Claude workflow remix—~70k views in 1 day; companion to published Jev line.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=_U-O5lYhJ7Q",
-              "title": "10 Levels of Jev For Agentic Engineers",
-              "brief": {
-                "zh": "IndyDevDan 的 Jev 十级实操：~12.8h·~36k 播、~2.8k VPH；补充站内 Jev/harness 工作流续热，仅作已发 t003 的伴源。",
-                "en": "IndyDevDan’s ten-level Jev tutorial—~36k views in 12.8h at ~2.8k VPH; a practical Jev/harness companion signal for published t003.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://github.com/firelex/jeff",
-              "title": "Jeff – Jev-compatible 0.8B decision models",
-              "brief": {
-                "zh": "HN Show：Jeff 家训 Jev 兼容 0.8B/~30ms；主记 t357，本周不催 Jev 撰稿。",
-                "en": "Show HN Jeff: home-trainable Jev-compatible 0.8B/~30ms; primary topic t357, no Jev draft push this week.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "youtube",
-            "hn",
-            "reddit",
-            "devto"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://www.youtube.com/watch?v=tTnUcSj-QPA",
-            "https://www.nobodywho.ai/posts/jev-in-25-lines/",
-            "https://arcturus-labs.com/blog/2026/09/21/will-openai-eat-jevs-lunch/",
-            "https://www.youtube.com/watch?v=VE5dsWll06M",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wva7l2/running_955_gib_qwen38flashnext_at_4152_toks_on_a/ents/1wv0lww/we_benchmarked_18_rag_pipelines_against_an_agent/ents/1wvi6r0/introducing_modelharbor_a_selfhosted_model_library/ents/1wvfz9n/perplexity_decider_27b_open_weights_decision/ents/1wvm15e/detecting_hallucinations_in_local_models_without/ents/1woe70t/jev_isnt_new_tech_its_marketing_targets_people/",
-            "https://dev.to/valyuai/how-to-use-jev-a-practical-guide-to-typesafes-system-one-model-g5e",
-            "https://dev.to/gde/plain-gemma-4-26b-vs-jev-on-one-ec2-l4-21-points-behind-overall-level-on-yesno-45-behind-on-15k6",
-            "https://dev.to/devopsdaily/we-measured-the-200x-claim-and-got-it-wrong-twice-first-5ch5",
-            "https://dev.to/kike/how-i-went-from-trust-me-bro-to-boomer-with-receipts-using-jev-2141",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wva7l2/running_955_gib_qwen38flashnext_at_4152_toks_on_a/ents/1wv0lww/we_benchmarked_18_rag_pipelines_against_an_agent/ents/1wvi6r0/introducing_modelharbor_a_selfhosted_model_library/ents/1wvfz9n/perplexity_decider_27b_open_weights_decision/ents/1wvm15e/detecting_hallucinations_in_local_models_without/ents/1wo6o0f/mods_can_we_do_something_about_half_the_forum/",
-            "https://www.youtube.com/watch?v=HHUsHkYhkcM",
-            "https://www.youtube.com/watch?v=fsEssFc-WhU",
-            "https://www.youtube.com/watch?v=0zFfcEr1e9U",
-            "https://github.com/egma-ai/jev-code-reviewer",
-            "https://www.youtube.com/watch?v=EOdXR6lU5ZA",
-            "https://www.youtube.com/watch?v=q35Yy_JY5Bw",
-            "https://www.youtube.com/watch?v=_U-O5lYhJ7Q",
-            "https://github.com/firelex/jeff",
-            "https://www.youtube.com/watch?v=xpfuSPG71XI",
-            "https://www.youtube.com/watch?v=zaLQ0AnY9dI",
-            "https://www.youtube.com/watch?v=Ut3LOjKNJaE",
-            "https://dev.to/composiodev/how-to-moderate-live-chat-in-real-time-with-jev-and-composio-discord-twitch-5ab0",
-            "https://huggingface.co/autotrust/JEV-27B-VL"
-          ],
-          "blog": {
-            "zh": "/cn/blog/jev-claude-code-10x-and-25-lines/",
-            "en": "/blog/jev-claude-code-10x-and-25-lines/"
-          }
-        },
-        {
-          "id": "t331",
-          "theme": "security",
-          "title": {
-            "zh": "Nvidia Open Agent Safety：OpenShell + 硅级 Sentry 看门狗",
-            "en": "Nvidia Open Agent Safety",
-            "ja": "Nvidia Open Agent Safety"
-          },
-          "summary": {
-            "zh": "把 sandbox 边界做到 harness 外开源 runtime + BlueField 硅级隔离——接 DNS/METR/breakout 主线的硬件验收件",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "把 sandbox 边界做到 harness 外开源 runtime + BlueField 硅级隔离——接 DNS/METR/breakout 主线的硬件验收件",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/28/nvidia-launches-new-platform-for-reining-in-rogue-ai-agents/",
-              "title": "Nvidia launches platform for reining in rogue AI agents",
-              "brief": {
-                "zh": "Nvidia Open Agent Safety：OpenShell 开源安全 runtime（模型+harness 外边界）+ Sentry 在 BlueField-4 上毫秒级隔离越界 agent。",
-                "en": "Nvidia’s Open Agent Safety Platform pairs open-source OpenShell runtime boundaries outside the model/harness with Sentry on BlueField-4 for millisecond quarantine of breakout behavior.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.cnbc.com/2026/09/28/nvidia-releases.html",
-              "title": "Nvidia wants to put a watchdog chip next to every AI agent",
-              "brief": {
-                "zh": "HN/CNBC：把「看门狗芯片」叙事推到每个 agent 旁——containment 从软件护栏扩到主机/网络强制。",
-                "en": "HN/CNBC coverage frames a hardware watchdog beside each agent, extending containment from model safeguards to host/network enforcement.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "techcrunch",
-            "hn",
-            "nvidia",
-            "github"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://techcrunch.com/2026/09/28/nvidia-launches-new-platform-for-reining-in-rogue-ai-agents/",
-            "https://www.cnbc.com/2026/09/28/nvidia-releases.html",
-            "https://developer.nvidia.com/blog/nvidia-open-agent-safety-platform-a-reference-for-continuous-in-silicon-agent-monitoring/",
-            "https://github.com/NVIDIA/OpenShell",
-            "https://techcrunch.com/2026/09/29/heres-why-openai-is-absent-from-nvidias-industry-wide-effort-to-end-rogue-ai-agents"
-          ]
-        },
-        {
-          "id": "t038",
-          "theme": "models",
-          "title": {
-            "zh": "strands-agents/harness-sdk（含 Strands Harness 产品公告）",
-            "en": "Strands Harness: Productizing Agent-Loop Control as a Shippable SDK",
-            "ja": "Strands Harness: Productizing Agent-Loop Control as a Shippable SDK"
-          },
-          "summary": {
-            "zh": "生产级 harness SDK + 显式 harness 产品化公告",
-            "en": "A source-checked read of Strands harness and the Harness SDK—how they turn context management, sessions, tool gates, and loop control into a product—plus a selection checklist against ECC, Growing Harness, and Claude Code harness.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "生产级 harness SDK + 显式 harness 产品化公告",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/strands-agents/harness-sdk",
-              "title": "strands-agents/harness-sdk",
-              "brief": {
-                "zh": "生产级 agent harness SDK（Python/TS，多模型多云），与 harness 话题直接相关。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://strandsagents.com/blog/introducing-strands-harness/",
-              "title": "Strands Harness",
-              "brief": {
-                "zh": "Dedicated agent harness announcement — aligns with站内 harness / agent-loop / Strands SDK 线.",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "devto",
-              "url": "https://dev.to/sunnydachs/what-happens-when-enterprise-requirements-hit-strands-langgraph-and-crewai-45-runs-measured-ocg",
-              "title": "What happens when enterprise requirements hit Strands, LangGraph, and CrewAI (45 runs measured)",
-              "brief": {
-                "zh": "Measured enterprise-req bakeoff across Strands / LangGraph / CrewAI — harness SDK compare (t038).",
-                "en": "Measured enterprise-req bakeoff across Strands / LangGraph / CrewAI — harness SDK compare (t038).",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github",
-            "hn",
-            "devto"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://github.com/strands-agents/harness-sdk",
-            "https://strandsagents.com/blog/introducing-strands-harness/",
-            "https://dev.to/sunnydachs/what-happens-when-enterprise-requirements-hit-strands-langgraph-and-crewai-45-runs-measured-ocg"
-          ],
-          "blog": {
-            "zh": "/cn/blog/strands-harness-sdk-production-agent-runtime/",
-            "en": "/blog/strands-harness-sdk-production-agent-runtime/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-01T10:00:00+08:00",
-      "label": {
-        "zh": "10月1日 10:00",
-        "en": "Oct 1 10:00",
-        "ja": "10月1日 10:00"
-      },
-      "items": [
-        {
-          "id": "t227",
-          "theme": "research",
-          "title": {
-            "zh": "HEXIS：把 Agent Skills 编译成扩展 FSM",
-            "en": "HEXIS",
-            "ja": "HEXIS"
-          },
-          "summary": {
-            "zh": "Skills 不靠再塞上下文：知识留状态内指令、控制流由转移强制；相对 SkillOpt/文档改写的清晰新角",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Skills 不靠再塞上下文：知识留状态内指令、控制流由转移强制；相对 SkillOpt/文档改写的清晰新角",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30123",
-              "title": "HEXIS: Compiling Agent Skills into Extended Finite State Machines",
-              "brief": {
-                "zh": "「新芽/深耕：skills」agent skills 编译成扩展 FSM：知识留在状态内指令，控制流由转移条件强制。四基准四执行器相对 Skill+ReAct 平均 +16.1pp，Qwen3.8-27B token 降 38–89%。对读 SkillOpt/OpenSpec。",
-                "en": "HEXIS compiles skill documents into extended FSMs that separate knowledge from control flow—+16.1pp avg vs Skill+ReAct across four benchmarks/executors, with 38–89% token cuts on Qwen3.8-27B.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30123"
-          ]
-        },
-        {
-          "id": "t094",
-          "theme": "research",
-          "title": {
-            "zh": "JitMem: Just-in-Time Memory for LLM Agents",
-            "en": "JitMem: Just-in-Time Memory for LLM Agents",
-            "ja": "JitMem: Just-in-Time Memory for LLM Agents"
-          },
-          "summary": {
-            "zh": "读时策展记忆 vs 写时蒸馏；对照 Jev-Mem/GBrain 记忆层",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "读时策展记忆 vs 写时蒸馏；对照 Jev-Mem/GBrain 记忆层",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.27334",
-              "title": "Just-in-Time Memory: Learning to Curate Task-Adaptive Memory for LLM Agents",
-              "brief": {
-                "zh": "把 agent 记忆从「写入时蒸馏」翻转为「读取时按当前任务再策展」：原始轨迹无损入库，curator 在读时生成任务自适应 payload，并用同任务即时奖励做 GRPO。ALFWorld/WebShop 上相对最强基线绝对成功率 +16pp 级，且未训练 curator 已可竞争写时记忆方法——范式层面冲击大。",
-                "en": "We retain raw trajectories and defer curation until read time. A memory curator synthesizes a compact, task-adaptive payload from retrieved traces and the current task, trained from immediate task success. Across ALFWorld, WebShop, and τ²-bench, JitMem improves over the strongest baseline by 16.2, 16.3, and 3.9 absolute success-rate points.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.27334"
           ]
         }
       ]
