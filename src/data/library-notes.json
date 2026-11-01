@@ -2,6 +2,134 @@
   "version": 1,
   "entries": [
     {
+      "id": "37c494331c25cb9fe8d995867a87715371f7f9431191e86b981769819f0a84c4",
+      "title": "AgriciDaniel/jev-seo",
+      "url": "https://github.com/AgriciDaniel/jev-seo",
+      "date": "2026-11-01T05:25:04.143Z",
+      "language": "zh",
+      "sentence": "jev-seo 是一个从首页 URL 生成实时 SEO 审计和 PDF、XLSX、Markdown 报告的开源工具，结合爬取、规则检查、Core Web Vitals 与 Jev 判断。",
+      "bullets": [
+        {
+          "heading": "项目定位",
+          "details": [
+            "jev-seo 是一个从单个首页 URL 对任意网站进行实时 SEO 审计的开源项目。",
+            "它会爬取网站、按 52 条与 Google Search Central 相关的规则检查，并测量 Core Web Vitals。",
+            "它使用 TypeSafe 的 Jev 模型对每个页面提出类型化问题，并由代码对修复项评分和排序。"
+          ]
+        },
+        {
+          "heading": "报告输出",
+          "details": [
+            "输出包括 PDF、XLSX 和 Markdown 三种格式，均基于同一份 audit.json 数据生成。",
+            "PDF 面向客户，XLSX 用作可编辑的行动跟踪表，Markdown 可用于 GitHub 和 Obsidian。",
+            "示例报告包含评分卡、优先级、关键词机会、Jev 判断卡、质量热图和投资建议等内容。"
+          ]
+        },
+        {
+          "heading": "运行方式",
+          "details": [
+            "可作为 Claude Code skill 运行，也可通过命令行运行，例如 bin/jevseo run https://example.com。",
+            "标准模式无需 SEO 数据订阅，Jev 成本约为每个站点 1 美分。",
+            "可选 --full 模式会加入 DataForSEO 的排名、关键词和反向链接数据，成本约为 0.30 美元。"
+          ]
+        },
+        {
+          "heading": "成本与依赖",
+          "details": [
+            "爬取、规则、评分、图表和报告渲染在本地运行，免费。",
+            "Jev API 按输入 token 计费，约每页 0.00015 美元；DataForSEO 按调用计费，约每站点 0.30 美元。",
+            "需要 Python 3.10+，PDF 生成依赖 WeasyPrint 和 Pango；可选 Playwright 用于渲染 JavaScript 页面。"
+          ]
+        },
+        {
+          "heading": "可信度与限制",
+          "details": [
+            "文档记录了 2026-09-22 的评估：规则与爬取事实、DataForSEO 内部一致性、PageSpeed 独立运行和 Jev 可重复性均得到验证。",
+            "Jev 与盲测第二模型在部分判断上高度一致，但盲测模型不是人类，因此只说明一致性和合理性，不证明绝对正确。",
+            "大型站点默认按 60 页上限采样；Jev 阈值尚未针对人工标签调优；DataForSEO 数据为估计值。"
+          ]
+        },
+        {
+          "heading": "许可",
+          "details": [
+            "项目采用 MIT 许可证。",
+            "捆绑字体 Inter 和 JetBrains Mono 采用 SIL Open Font License。",
+            "Jev、DataForSEO 和 PageSpeed Insights 是第三方服务，适用各自条款。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 15360,
+        "totalChars": 15360
+      }
+    },
+    {
+      "id": "21d5466eb30dde01744215cf6c3b4af30dc9c0b3748017c5c20cc1dbf0aa3179",
+      "title": "诊断 · 中小学·高中知识图谱",
+      "url": "https://math.pansgo.com/diagnose/?target=cnm_221&demo=1",
+      "date": "2026-11-01T04:27:27.144Z",
+      "language": "zh",
+      "sentence": "该诊断围绕配方法，指出完全平方公式为薄弱根因、多项式乘多项式不稳，并给出从八上整式乘法到九上配方法的学习路径。",
+      "bullets": [
+        {
+          "heading": "诊断概览",
+          "details": [
+            "诊断目标为配方法，页面显示已答题数为15。",
+            "统计卡片显示薄弱2、不稳1、已掌握108、未测0。",
+            "诊断结论为发现1个薄弱根因和1个不稳知识点。",
+            "生成时间为2026/11/1 04:27:28。"
+          ]
+        },
+        {
+          "heading": "薄弱根因",
+          "details": [
+            "薄弱根因是完全平方公式，位于八上第十六章整式的乘法16.3。",
+            "掌握标准是能写出公式且不漏中间项。",
+            "对应课标条目为cms-2022:4.NA.19。"
+          ]
+        },
+        {
+          "heading": "不稳知识点",
+          "details": [
+            "不稳知识点是多项式乘多项式，位于八上第十六章整式的乘法16.2。",
+            "掌握标准是能展开(a+b)(c+d)且不漏项不错号。",
+            "对应课标条目为cms-2022:4.NA.18。"
+          ]
+        },
+        {
+          "heading": "学习路径",
+          "details": [
+            "推荐顺序为多项式乘多项式、完全平方公式、配方法。",
+            "配方法是目标知识点，位于九上第二十五章一元二次方程25.2。",
+            "配方法掌握标准是能完成配方并能用配方法解方程。",
+            "对应课标条目为cms-2022:4.NA.27。"
+          ]
+        },
+        {
+          "heading": "掌握情况",
+          "details": [
+            "已掌握知识点共108个，未测知识点为0。",
+            "页面列出的已掌握知识点包括小学一年级上册至九年级上册的多个条目。",
+            "部分已掌握点标注为由后续知识点答对推断。"
+          ]
+        },
+        {
+          "heading": "答题与课标",
+          "details": [
+            "答题记录共15题，可更正并会重新计算诊断。",
+            "题目涉及配方法、完全平方公式、多项式乘多项式、长方形和正方形面积、平方差公式、直接开平方法。",
+            "相关课标条目包括cms-2022:4.NA.18、cms-2022:4.NA.19、cms-2022:4.NA.27。"
+          ]
+        }
+      ],
+      "coverage": {
+        "complete": true,
+        "summarizedChars": 28918,
+        "totalChars": 28918
+      }
+    },
+    {
       "id": "4f06424ecf4859f67d60771a1c6db5b3372ea913f63660b8dd853ad870cded67",
       "title": "Every Joule: a 3D physics book about energy",
       "url": "https://iamtechartist.com/every-joule/",
