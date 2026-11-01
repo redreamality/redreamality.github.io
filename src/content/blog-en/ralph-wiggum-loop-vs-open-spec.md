@@ -237,7 +237,7 @@ Geoffrey Huntley, creator of the Ralph loop, argues that "software development a
 The term "Gas Town" (a reference to the chaotic, resource-driven settlement in *Mad Max*) describes a future where developers maintain their own swarms of autonomous agents[^4].
 
 * **Token Economics:** Critics argue that Ralph Loops are inefficient because they "burn" tokens by re-reading context every iteration.
-* **The Counter-Argument:** The cost of tokens is plummeting toward zero. The cost of human labor is high. If a Ralph Loop burns $5.00 worth of tokens to fix a bug while the human sleeps, it is vastly more economical than paying a human developer $100/hour to fix it manually[^12].
+* **The Counter-Argument:** The cost of tokens is plummeting toward zero. The cost of human labor is high. If a Ralph Loop burns \$5.00 worth of tokens to fix a bug while the human sleeps, it is vastly more economical than paying a human developer \$100/hour to fix it manually[^12].
 * **Deterministic Badness:** The "deterministically bad" nature of Ralph is acceptable because it is *cheap*. You can afford to have an agent fail 10 times if the 11th success costs pennies.
 
 ### **6.3 Labor Market Impact**

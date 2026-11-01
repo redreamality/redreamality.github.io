@@ -187,6 +187,11 @@
     margin-bottom: 1rem;
   }
 
+  /* 移动端防横向溢出：超长不可断行的文本（URL、未渲染的 LaTeX 等）在溢出时允许断开 */
+  .prose {
+    overflow-wrap: break-word;
+  }
+
   .prose .content-table-scroll:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 2px;
@@ -220,6 +225,17 @@
 
   .prose .katex-html {
     @apply overflow-x-auto overflow-y-hidden;
+  }
+
+  /* 窄屏下过长的行内公式在自身内部横向滚动，而不是把整页撑宽 */
+  @media (max-width: 767px) {
+    .prose :not(.katex-display) > .katex {
+      display: inline-block;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      vertical-align: middle;
+    }
   }
   
   /* 水平线样式 */

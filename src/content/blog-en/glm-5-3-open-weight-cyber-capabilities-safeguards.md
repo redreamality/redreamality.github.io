@@ -147,7 +147,7 @@ Abliteration is more direct. It builds on an existing observation: in many model
 
 - On JailbreakBench, HarmBench, and StrongREJECT, three public benchmarks that measure compliance with clearly harmful requests, the refusal rate fell from above 90% to about 3%, 2%, and 12%.
 - Capability barely moved: GPQA-Diamond scores were identical to the original, and on a subset of CyberGym the abliterated version scored only a few percent lower.
-- Cost: a team that had never done this before spent about 2,200 GPU hours, roughly $4,400, mostly on exploring variants in parallel and testing capabilities after modification. They estimate an experienced team starting from scratch would need closer to 600 GPU hours (about $1,200). GLM-5.3-Flash took about 600 GPU hours.
+- Cost: a team that had never done this before spent about 2,200 GPU hours, roughly \$4,400, mostly on exploring variants in parallel and testing capabilities after modification. They estimate an experienced team starting from scratch would need closer to 600 GPU hours (about \$1,200). GLM-5.3-Flash took about 600 GPU hours.
 - In practice you don't even need to do it yourself: within days of the release, several developers had published abliterated versions.
 
 ### Bottom line: refusal is a factory default, not a boundary

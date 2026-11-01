@@ -237,7 +237,7 @@ Ralph loop の creator Geoffrey Huntley argues that"software development as prof
 "Gas Town"term（*Mad Max* の chaotic、resource-driven settlement への reference）は developers maintain their own swarms of autonomous agents の future を describes[^4]。
 
 * **トークン経済学：**Critics argue Ralph Loops が inefficient である because they"burn"tokens by re-reading context every iteration。
-* **反論：**Cost of tokens is plummeting toward zero。Cost of human labor is high。If Ralph Loop burns $5.00 worth of tokens to fix bug while human sleeps、it is vastly more economical than paying human developer $100/hour to fix manually[^12]。
+* **反論：**Cost of tokens is plummeting toward zero。Cost of human labor is high。If Ralph Loop burns \$5.00 worth of tokens to fix bug while human sleeps、it is vastly more economical than paying human developer \$100/hour to fix manually[^12]。
 * **確定的悪：**Ralph の「確定的悪」nature は acceptable です because it is *cheap*。Agent が 10 回 fail しても 11th success が pennies costs である場合 afford できます。
 
 ### **6.3 労働市場への影響」**

@@ -9,6 +9,7 @@ import robotsTxt from 'astro-robots-txt';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeOutboundLinks from './src/plugins/rehype-outbound-links.ts';
+import rehypeTableScroll from './src/plugins/rehype-table-scroll.ts';
 import remarkDemoteH1 from './src/plugins/remark-demote-h1.ts';
 import remarkCitations from './src/plugins/remark-citations.ts';
 import visualManifest from './src/data/visuals-manifest.json';
@@ -83,6 +84,7 @@ const sharedRemarkPlugins = [remarkMath, remarkDemoteH1, remarkCitations];
 const sharedRehypePlugins = [
   [rehypeKatex, katexOptions],
   rehypeOutboundLinks,
+  rehypeTableScroll,
 ];
 
 // https://astro.build/config

@@ -7,7 +7,7 @@ tags: ["claude-code", "anthropic", "openai", "agent-harness", "developer-tools"]
 lang: "en"
 ---
 
-Over the past two weeks, several Claude Code quota changes landed at once. On September 26 (Beijing time), Anthropic's developer account announced that when a task hits the 5-hour limit midway, Claude Code will no longer cut off mid-edit; it borrows a small, fixed allowance from your weekly limit and looks for a sensible place to stop.[1][2] On September 29, OpenAI launched a $500 Pro tier at DevDay and cut the $200 tier's Codex allowance from 20x Plus to 10x.[22] On October 7, Anthropic shipped Haiku 5.5, halved Sonnet 5.5's cache-read price, and added a monthly API credit to Max and Team.[9][8]
+Over the past two weeks, several Claude Code quota changes landed at once. On September 26 (Beijing time), Anthropic's developer account announced that when a task hits the 5-hour limit midway, Claude Code will no longer cut off mid-edit; it borrows a small, fixed allowance from your weekly limit and looks for a sensible place to stop.[1][2] On September 29, OpenAI launched a \$500 Pro tier at DevDay and cut the \$200 tier's Codex allowance from 20x Plus to 10x.[22] On October 7, Anthropic shipped Haiku 5.5, halved Sonnet 5.5's cache-read price, and added a monthly API credit to Max and Team.[9][8]
 
 The questions that follow are always the same: where did my quota go, does `claude -p` count against my subscription, how much does a Haiku subagent save. Instead of a news recap, this post maps the metering: which accounts usage draws from, how two clocks run at once, what happens at the limit, where tokens go, how Codex tiers compare, and a checklist.
 
@@ -64,7 +64,7 @@ Judgment: the wind-down is **an advance on your weekly budget**. Max users stop 
 
 The answer depends on the credential, not the command. From the help center page on monthly API credits:[8]
 
-- Amounts: Max 5x $100/month, Max 20x $200; Team $20 per Standard seat and $100 per Premium seat, pooled, capped at $500. Not Pro or Enterprise. Claimable after seven days on the plan.
+- Amounts: Max 5x \$100/month, Max 20x \$200; Team \$20 per Standard seat and \$100 per Premium seat, pooled, capped at $500. Not Pro or Enterprise. Claimable after seven days on the plan.
 - Covered: Messages and Batches API, the Console Playground, Claude Managed Agents, the Claude Agent SDK.
 - Not covered: interactive Claude Code (terminal, IDE, desktop, web), extra usage in Claude, Claude Code, or Cowork, and Bedrock, Vertex AI, or Foundry.
 - `claude -p`: run with an API key from the linked Console organization, it counts as Agent SDK usage and is covered; signed in with your plan, `claude -p` and the Agent SDK still draw plan limits. Runs from the GitHub Action, IDE extensions, or the desktop app count as Claude Code usage and aren't covered, even with `-p`.
@@ -97,7 +97,7 @@ Things the docs state that many miss:
 - `default` resolves to Opus 5.5 on subscriptions and the API,[11] while the cost docs say Sonnet handles most coding well for less and Opus is for complex architecture and multi-step reasoning.[3] That gap between default and advice drains a lot of quota.
 - Opus 5.5, Sonnet 5.5, and Haiku 5.5 default to `medium` effort (levels: low, medium, high, xhigh, max), and **thinking can't be turned off** on them; thinking bills as output.[11][3] The docs warn `max` may show diminishing returns and overthink.[11]
 - `opusplan` plans on Opus and executes on Sonnet.[11]
-- Fast mode makes Opus up to 2.5x faster at $8/$40 on Opus 5.5, exactly double. Subscribers **pay only via usage credits**; it isn't in plan limits. The first time you enable it in a conversation, the whole context is charged at the uncached fast-mode input rate, so late is expensive.[12]
+- Fast mode makes Opus up to 2.5x faster at \$8/\$40 on Opus 5.5, exactly double. Subscribers **pay only via usage credits**; it isn't in plan limits. The first time you enable it in a conversation, the whole context is charged at the uncached fast-mode input rate, so late is expensive.[12]
 
 **Haiku 5.5.** Anthropic positions it for summaries, compaction, classification, and as a coding subagent for Opus and Sonnet 5.5, and says Sonnet and Opus remain better for complex agentic coding: Terminal-Bench 4.0 is 39.2% for Haiku 5.5 versus 70.6% for Sonnet 5.5.[9] It's the first Haiku with adjustable effort and runs with 1M context on the Anthropic API.[9][11] Hidden costs: prompts over 100K cost 5x per token, and Simon Willison measured about 1.25x the tokens of Haiku 4.5 for the same long prompt due to the new tokenizer.[10] Anthropic says the tokenizer effect is already in its "around 75% less on average" figure.[9] Claude Code needs v2.1.293+; the `haiku` alias means Haiku 5.5 on the Anthropic API but Haiku 4.5 on Bedrock, Agent Platform, and Foundry.[11]
 
@@ -117,9 +117,9 @@ The cost docs' "why usage climbs in a long session" reads like a leak list:[3]
 4. **Subagents, workflows, teammates.** Each sends its own requests. Agent teams use about 7x the tokens of a normal session in plan mode.
 5. **Compaction.** `/compact` reads what it summarizes; `/clear` costs nothing.
 
-A worked example (arithmetic, not measurement): a 300K-token context on Opus 5.5 costs about $0.06 per request at the cache-read rate, so a hundred tool round trips is $6. Sonnet 5.5 is half; Haiku 5.5, in its over-100K tier, is $0.015. If the cache is cold, those 300K tokens are re-charged at the cache-write rate, about $1.50 on Opus 5.5, 25x a warm read. Subscription quota isn't published in tokens, but the docs say re-read history draws usage "at the cached token rate," so the ratios carry over.[3][6]
+A worked example (arithmetic, not measurement): a 300K-token context on Opus 5.5 costs about \$0.06 per request at the cache-read rate, so a hundred tool round trips is \$6. Sonnet 5.5 is half; Haiku 5.5, in its over-100K tier, is \$0.015. If the cache is cold, those 300K tokens are re-charged at the cache-write rate, about \$1.50 on Opus 5.5, 25x a warm read. Subscription quota isn't published in tokens, but the docs say re-read history draws usage "at the cached token rate," so the ratios carry over.[3][6]
 
-For scale, enterprise deployments average about $13 per developer per active day and $150–250 per month, with 90% of users under $30 per active day.[3]
+For scale, enterprise deployments average about \$13 per developer per active day and \$150–250 per month, with 90% of users under $30 per active day.[3]
 
 **Waste inside trajectories.** The Purdue paper analyzed 1,200 SWE-bench Verified trajectories and found three wastes: re-reading code already read, regenerating near-identical scripts, rerunning tests without changing the patch. Together they hit 79%–98% of tasks and up to 22.75% of task cost; Claude Code (Sonnet 4.6 main, Haiku 4.5 subagents) was leanest at 79.00% of tasks and 6.86% of cost.[18] Two findings matter for quota:
 
@@ -133,14 +133,14 @@ Details are in [that post](/blog/coding-agents-cost-inefficient-behaviors/).
 | | Claude (Anthropic) | Codex (OpenAI) |
 | --- | --- | --- |
 | Entry tier | Pro, $20/month [6] | Plus, $20/month [20] |
-| Higher tiers | Max 5x ($100), Max 20x ($200) [6][8] | Pro $100 / $200 / $500 [20] |
+| Higher tiers | Max 5x (\$100), Max 20x (\$200) [6][8] | Pro \$100 / \$200 / $500 [20] |
 | 5-hour window | All plans [6] | Plus, Standard Business; Pro tiers currently none [20] |
 | Weekly limit | Paid plans; numbers unpublished [6] | May apply; numbers unpublished [20] |
 | Speed-up | Fast mode: usage credits only, 2x Opus 5.5 rate [12] | Fast: 2.5x included, 2x credits; Astra Ultrafast: 8x included, 6x credits [20][21] |
 | At the limit | Wind-down from weekly allowance; Pro once a week [1][2] | Active turn may finish, subject to fair use [20] |
 | Bundled API credit | Max/Team, $100–500/month [8] | No official page found |
 
-On the OpenAI side, Plus's estimated local messages per five hours are 5–45 for GPT-6 Astra, 15–160 for GPT-6.1 Sol, and 350–3,000 for GPT-6 Luna, explicitly estimates rather than limits.[20] Ultrafast is only on Pro $500 and eligible Enterprise and Edu, generates tokens up to 8x faster, uses included usage before credits, and can't be bought onto other self-serve plans.[21] Per TNW, from October 30 Pro 200's Work and Codex usage falls from 20x to 10x Plus; existing subscribers keep old limits through October 29 plus a one-time $2,500 credit grant; OpenAI won't bring back Pro 200's five-hour limit.[22]
+On the OpenAI side, Plus's estimated local messages per five hours are 5–45 for GPT-6 Astra, 15–160 for GPT-6.1 Sol, and 350–3,000 for GPT-6 Luna, explicitly estimates rather than limits.[20] Ultrafast is only on Pro \$500 and eligible Enterprise and Edu, generates tokens up to 8x faster, uses included usage before credits, and can't be bought onto other self-serve plans.[21] Per TNW, from October 30 Pro 200's Work and Codex usage falls from 20x to 10x Plus; existing subscribers keep old limits through October 29 plus a one-time \$2,500 credit grant; OpenAI won't bring back Pro 200's five-hour limit.[22]
 
 Theo's (t3.gg) video description says Ultrafast can make your weekly limit disappear in 2 hours.[23] That's his claim; I didn't watch the video and can't check it. At 8x, two Ultrafast hours equal sixteen standard hours, a plausible order of magnitude (Judgment).
 
