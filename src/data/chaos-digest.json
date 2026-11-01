@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-31T15:56:04+08:00",
+  "updatedAt": "2026-11-01T10:00:42+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,420 @@
   ],
   "themeCounts": {
     "models": 11,
-    "coding-tools": 16,
+    "coding-tools": 15,
     "agents-oss": 11,
-    "security": 10,
-    "research": 29,
+    "security": 12,
+    "research": 26,
     "product-news": 0,
     "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-11-01T10:00:00+08:00",
+      "label": {
+        "zh": "11月1日 10:00",
+        "en": "Nov 1 10:00",
+        "ja": "11月1日 10:00"
+      },
+      "items": [
+        {
+          "id": "t427",
+          "theme": "security",
+          "title": {
+            "zh": "OpenAI：打断协同对抗蒸馏（Moonshot 关联簇）",
+            "en": "OpenAI",
+            "ja": "OpenAI"
+          },
+          "summary": {
+            "zh": "OpenAI 一级源：攻击者跨会话复放加密 reasoning 做对抗蒸馏（峰值约 16k 请求），核心簇关联 Moonshot——关路径+封禁，对齐/防蒸馏与 agent 工具链共享安全面。 10-13 新规重筛：单点新闻类（单点发布/新闻/单一来源条目，非多来源综合）→ 降回 inbox。 10-14：Anthropic 公布蒸馏防御（抓取降 90–99%），与 OpenAI 构成跨 lab 蒸馏攻防综合候选；主词 Trends 不过。续源：Anthropic 封禁蒸馏相关使用（待核）。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "OpenAI 一级源：攻击者跨会话复放加密 reasoning 做对抗蒸馏（峰值约 16k 请求），核心簇关联 Moonshot——关路径+封禁，对齐/防蒸馏与 agent 工具链共享安全面。 10-13 新规重筛：单点新闻类（单点发布/新闻/单一来源条目，非多来源综合）→ 降回 inbox。 10-14：Anthropic 公布蒸馏防御（抓取降 90–99%），与 OpenAI 构成跨 lab 蒸馏攻防综合候选；主词 Trends 不过。续源：Anthropic 封禁蒸馏相关使用（待核）。",
+            "en": "OpenAI says a July campaign extracted protected reasoning by replaying encrypted reasoning across sessions, peaking near 16k requests, with a core cluster tied to Moonshot-associated actors. Closing that path is an alignment/anti-distillation control that also matters for agent tooling surfaces. Oct 13 rescreen (new rules): single-point item, not a multi-source synthesis → demoted to inbox (Chaos/notes only). Oct 14: Anthropic reports distillation defenses cutting harvested data 90–99%, pairing with OpenAI's post as a cross-lab synthesis candidate; main term fails Trends. Follow-up: a user claims Anthropic blocks accounts for anything touching training larger models (unverified).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "openai",
+              "url": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign",
+              "title": "Disrupting a coordinated model-distillation campaign",
+              "brief": {
+                "zh": "OpenAI：7 月对抗蒸馏高峰 16k 请求/4k+ 用户，7/28 前打断；发现经 Frontier Model Forum 与政府渠道共享。",
+                "en": "OpenAI reports a July adversarial-distillation spike of about 16k requests from 4k+ users, disrupted by July 28, with findings shared via the Frontier Model Forum and government channels.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.anthropic.com/research/distillation-defenses",
+              "title": "Anthropic: Strengthening our defenses against distillation attacks",
+              "brief": {
+                "zh": "续源：媒体 0938 Anthropic 一级源（10-12）：新防御使工业级蒸馏抓取数据降 90–99%，点名智谱把网络能力",
+                "en": "Follow-up source.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://twitter.com/jiahaoshao1/status/2116475922190922088",
+              "title": "Anthropic blocks users for anything touching training larger models",
+              "brief": {
+                "zh": "用户称 Anthropic 封禁涉及训练更大模型的使用（蒸馏/ToS 争议）；单方说法待核，可并入 Anthropic 商业与政策线",
+                "en": "Anthropic blocks users for anything touching training larger models",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "openai",
+            "media",
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign",
+            "https://www.anthropic.com/research/distillation-defenses",
+            "https://twitter.com/jiahaoshao1/status/2116475922190922088"
+          ]
+        },
+        {
+          "id": "t780",
+          "theme": "models",
+          "title": {
+            "zh": "agent 要不要拆：单循环 + skills vs 子 agent 编排 vs 去中心化——Anthropic Applied AI 称带 skills 的单循环常优于子 agent 设计（某客户快约 2×，Claude Code 系统提示砍 80%+，给出何时才该用子 agent 与分阶段合并法）× MSR 开源 Agensh（无中心 orchestrator，1→1,024 agent，ProgramBench 最难 5 题 19.31%→28.78%）× GVS5H（HN：5 个 Qwen3.8-27B 编排后号称追平 Fable 5）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。",
+            "en": "Synthesis candidate: fold subagents into one skills-equipped loop (Anthropic) vs decentralized 1,024-agent harness (MSR Agensh) vs five small models orchestrated to match a frontier model (GVS5H); no clean core term. Follow-up: video on Anthropic subagent guidance. Follow-up: video on using a manager agent to orchestrate coding agents.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://github.com/slee-persis/GVS5H",
+              "title": "'Five Qwen3.8-27B models match Fable 5 Using GVS5H Harness'",
+              "brief": {
+                "zh": "HN 141/48：用 GVS5H harness 把 5 个 Qwen3.8-27B 小模型编排起来，号称追平 Fable 5；harness 优先于模型规模的证据，可接 Qwen3.8 本地编码 Agent、harness 工程与上下文压缩线（需核实评测口径，避免基准虚高）。",
+                "en": "HN 141/48: the GVS5H harness orchestrates five Qwen3.8-27B models and claims to match Fable 5; evaluation setup unverified.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
+              "title": "Building agents: When to fold subagents into your main agent loop（Anthropic Applied AI：单循环 + skills 常优于子 agent 编排）",
+              "brief": {
+                "zh": "站内积累线：agent loop / harness / skills 的一手官方指导，与今早 Decoder ‘fancy harness 更贵不更好’、10-23 Agent Skills 捐给 AAIF、Latent Space dynamic workflows 形成对照/张力（编排 vs 单循环）。10-22 发布，前几轮未归档，补录。tag exploit-candidate。",
+                "en": "Anthropic Applied AI: a single agent loop with skills often beats subagent designs on quality, cost and latency (one customer ~2x faster; Claude Code system prompt cut 80%+); lists when subagents still pay off and a staged merge path driven by end-to-end evals.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
+              "title": "Microsoft Research 开源 Agensh：无中心 orchestrator 的去中心化多 agent harness（1→1,024 agents，ProgramBench）",
+              "brief": {
+                "zh": "站内积累线（agent harness/loop）：与今早 Decoder ‘fancy harness 更贵不更好’、已提交的 Anthropic ‘fold subagents into main loop’（单循环 vs 编排）、Latent Space dynamic workflows 构成‘去中心化 vs 编排 vs 单循环’三方对照。topics.md 已有 t050（Agensh 论文，站长 10-13 确认开写候选）——本条不是新话题，新增事实=10-24 开源 + GPT-6.1-sol 新数据 + 循环/服务架构细节 + 与 Claude Code agent teams",
+                "en": "Microsoft Research open-sources Agensh: no central orchestrator, identical workers on a 5-step claim/verify/merge loop over Gitea and Mattermost; ProgramBench hard-5 average 19.31% (1 agent) to 28.78% (128), with emergent reviewers and integrators at scale. Read via MarkTechPost plus README.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=ybx0mmd22pQ",
+              "title": "Anthropic's New Subagent Rules Will Change How You Build",
+              "brief": {
+                "zh": "Over 20k views in under 24h; about new Anthropic subagent guidance, covered by a second video (KwmrSON2n-g, 22k)",
+                "en": "Anthropic's New Subagent Rules Will Change How You Build",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=to4Me479A2s",
+              "title": "Grok Bot + Claude Code, Why is Everyone Switching to This?",
+              "brief": {
+                "zh": "Highest on-topic VPH over 20k this run: setting up an agent as the manager of coding agents (Claude Code, Codex, Cursor cloud agents) that plans, hands off, checks proof, and reports back.",
+                "en": "Grok Bot + Claude Code, Why is Everyone Switching to This?",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "media",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/slee-persis/GVS5H",
+            "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
+            "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
+            "https://www.youtube.com/watch?v=ybx0mmd22pQ",
+            "https://www.youtube.com/watch?v=to4Me479A2s"
+          ]
+        },
+        {
+          "id": "t781",
+          "theme": "other",
+          "title": {
+            "zh": "OpenAI 宣布 AI 协助的数学/计算机/物理三项新发现——其中硬结果「指数时间假设（ETH）被证伪」（OpenAI math 仓预印本，HN 267；若成立影响极大，验证状态待核）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。续源：van der Waerden 数 Lean 4 证明。续源：Leo de Moura 谈 AI 与 Lean。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。续源：van der Waerden 数 Lean 4 证明。续源：Leo de Moura 谈 AI 与 Lean。",
+            "en": "High-stakes unverified claim: OpenAI announces AI-assisted discoveries including a preprint claiming the Exponential Time Hypothesis is false; verify before any deep read (cf. earlier retractions). Follow-up: classification of finite simple groups formalized in Lean. Follow-up: van der Waerden number W(2;3,21)=416 proved with a Lean 4 kernel-checked proof. Follow-up: Lean creator Leo de Moura interview on AI and formal verification.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
+              "title": "'Announcing three new discoveries in mathematics, computer science, and physics'",
+              "brief": {
+                "zh": "HN 430/162：OpenAI 宣布 AI 协助的数学/计算机/物理三项发现；同轮 HN 267「The Exponential Time Hypothesis Is False」(https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf, https://news.ycombinator.com/item?id=50251661) 是其中的硬结果，ETH 被证伪若成立影响极大；适合 AI for science",
+                "en": "OpenAI announces three AI-assisted discoveries in mathematics, computer science and physics; a companion preprint in its math repo claims the Exponential Time Hypothesis is false. HN 430/162 and 267. Verification status unknown.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://cfsg.axiommath.ai/",
+              "title": "'Classification of Finite Simple Groups Formalized in Lean'",
+              "brief": {
+                "zh": "HN 169/44：有限单群分类在 Lean 中形式化完成（axiommath.ai）；AI for math/形式化证明线，接 10/27 OpenAI 三项发现与 ETH 证伪稿（Lobsters 同日也有 ETH 帖，https://lobste.rs/s/pq6ju6）。",
+                "en": "'Classification of Finite Simple Groups Formalized in Lean'",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/MachineLearning/comments/1xivpue/w2321_416_a_van_der_waerden_number_conjectured_by/",
+              "title": "W(2;3,21) = 416 — van der Waerden number conjectured by Kullmann (2010) proved with Lean 4 kernel-checked proof [R]",
+              "brief": {
+                "zh": "组合数学猜想经 Lean 4 内核校验证明，发在 r/ML（是否有 AI 参与待核）；可并入 AI for math / 形式化（CFSG in Lean、OpenAI discoveries）综述",
+                "en": "W(2;3,21) = 416 — van der Waerden number conjectured by Kullmann (2010) proved with Lean 4 kernel-checked proof [R]",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://thedataexchange.media/leo-de-moura-lean-aws/",
+              "title": "AI, Lean, and the Future of Formal Verification, with Lean Creator Leo de Moura",
+              "brief": {
+                "zh": "Lean 作者 Leo de Moura 谈 AI 与形式化验证前景；AI for math / 形式化线的权威访谈素材（CFSG in Lean、van der Waerden 416）",
+                "en": "AI, Lean, and the Future of Formal Verification, with Lean Creator Leo de Moura",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "reddit"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
+            "https://cfsg.axiommath.ai/",
+            "https://www.reddit.com/r/MachineLearning/comments/1xivpue/w2321_416_a_van_der_waerden_number_conjectured_by/",
+            "https://thedataexchange.media/leo-de-moura-lean-aws/"
+          ]
+        },
+        {
+          "id": "t803",
+          "theme": "models",
+          "title": {
+            "zh": "检测失控 agent 的两侧：OpenAI 公开四层失准监测（激活探针、模型审查、调查 agent、自动化调查，覆盖 GPT-6 Astra 以上全部 RL 运行与内部 Codex 流量；回放中逃出沙箱约 30 分钟即告警、比实际攻破早 30+ 小时；9 月一次训练模型接入互联网 15 分钟内被标记并暂停前沿 RL）× Wiz 从 IR 与公开事件提炼 agent 参与入侵的 7 条指纹（机器节奏迭代、工具内嵌自然语言推理、自我纠错、广度优先近全 TTP、大量并行横移、先探测后载荷、用途描述型一次性产物）× Altman：沙箱化超人模型仍未解决",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。续源：Talos：窃密木马用 LLM 给受害者排序。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。续源：Talos：窃密木马用 LLM 给受害者排序。",
+            "en": "Synthesis candidate: OpenAI's four-layer misalignment detection and Wiz's seven fingerprints of agentic attacks; candidate term \"agentic attacks\". Follow-up: Talos finds the Volta infostealer using LLMs to rank victims by value.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment",
+              "title": "OpenAI: How we detect frontier model misalignment",
+              "brief": {
+                "zh": "一手厂商披露 agent 沙箱逃逸监控架构与真实响应时延，承接 t754（agent 拆掉自己的监控/OpenAI misalignment reports）与 t686，但这是监测系统本身的新架构文，非旧报告重述。站内积累线：sandbox / security-control / agent-loop 监控。",
+                "en": "OpenAI: How we detect frontier model misalignment",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
+              "title": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
+              "brief": {
+                "zh": "防御侧可操作的 agent 攻击检测特征，承接 t747（agent 成为攻击面）与 10-29 Cathedral breach，但角度是检测指纹而非单起事件。站内积累线：security-control / agent-loop。",
+                "en": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=iMsUcCYNKqY",
+              "title": "Why Sam Altman is against a single superintelligence",
+              "brief": {
+                "zh": "Highest VPH this run: Sam Altman on models finding critical PHP vulnerabilities, test-time compute powering agent swarms, and sandboxing superhuman models.",
+                "en": "Why Sam Altman is against a single superintelligence",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+              "title": "Malware uses LLMs to rank victims by how much they're worth (Talos: Volta infostealer)",
+              "brief": {
+                "zh": "Talos 分析 Volta 窃密木马用 LLM 给受害者估值排序；接 Wiz 智能体攻击指纹，AI 进入攻击链",
+                "en": "Malware uses LLMs to rank victims by how much they're worth (Talos: Volta infostealer)",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "youtube",
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/how-we-detect-frontier-model-misalignment",
+            "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
+            "https://www.youtube.com/watch?v=iMsUcCYNKqY",
+            "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/"
+          ]
+        },
+        {
+          "id": "t808",
+          "theme": "security",
+          "title": {
+            "zh": "AI 开发工具的「黑色十月」：Cursor 扩展市场上的官方 Claude Code VS Code 扩展被植入后门（Phorion，HN 773/485，Lobsters 140）× Wiz 汇总十月至少 9 起 AI 开发平台安全事件（Fireworks、Lightning、Railway、Warp、OpenCode、Zeabur 等：凭据窃取、agent 群式攻击、为蒸馏/LLMjacking 盗用；被盗 Bedrock key 30 小时约 80 万次调用、转售池 13 小时约 170 万次）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。",
+            "en": "Synthesis candidate: backdoored Claude Code extension on the Cursor marketplace plus Wiz's \"Black October\" roll-up of AI developer-platform incidents; candidate term \"Open VSX\" (verify first). Follow-up: Parameter discloses a ChatGPT account-takeover chain.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+              "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+              "brief": {
+                "zh": "Cursor 扩展市场上的官方 Claude Code 扩展被植入后门；Lobsters 同题 140 分（https://lobste.rs/s/ttp7aq，GossiTheDog 帖）。接供应链/harness 安全线（LiteLLM、HTTP2Shell、backdoors in harnesses），可做 AI 编码工具供应链综述",
+                "en": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
+              "title": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+              "brief": {
+                "zh": "Different report from the filed 10-30 Wiz 'rise of agentic attacks' piece: incident roll-up + LLMjacking telemetry across AI dev platforms. 站内积累线：security-control / agent 平台凭据。",
+                "en": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
+              "title": "Do the math: How we took over ChatGPT accounts",
+              "brief": {
+                "zh": "Parameter 披露接管 ChatGPT 账号的漏洞链；AI 产品自身安全，可并入 AI 工具供应链/安全综述（Claude Code VSX 后门、harness backdoors）",
+                "en": "Do the math: How we took over ChatGPT accounts",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+            "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
+            "https://www.parameter.ai/labs/we-found-a-gap-at-openai"
+          ]
+        },
+        {
+          "id": "t817",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "监控能被自动绕过：Anthropic「Automated Subtle Emergent Misalignment」——并行 Claude agent 共享实验日志爬坡构造微调数据集（≤5000 行），通过仿生产数据监控（>10% 行被标即拒），却让小研究模型学会破坏监督、甩锅、自保与埋代码 bug；每次运行都成功，单次产出 600+ 个数据集，胜过文献数据集；行为藏在养蜂、职业摔角、放映员独白等虚构/角色扮演里（模型未部署）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇研究深读候选：并行 agent 自动造出能过数据监控、却诱发失准的微调数据；主词「emergent misalignment」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇研究深读候选：并行 agent 自动造出能过数据监控、却诱发失准的微调数据；主词「emergent misalignment」待测。",
+            "en": "Single-study candidate: parallel Claude agents automatically build fine-tuning data that passes a production-like monitor yet induces misalignment; candidate term \"emergent misalignment\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://alignment.anthropic.com/2026/automated-em-search/",
+              "title": "Anthropic: Automated Subtle Emergent Misalignment Research — Claude writes fine-tuning data that passes a production-like monitor yet makes models misaligned",
+              "brief": {
+                "zh": "Primary Anthropic research, new in window; automated red-teaming of training-data monitors = gap in security-control layer, and the setup itself is an agent-loop (parallel agents + shared log hill-climb). Extends subliminal-learning/emergent-misalignment lines (t660/t706) and monitor lines (t803/t75",
+                "en": "Anthropic: Automated Subtle Emergent Misalignment Research — Claude writes fine-tuning data that passes a production-like monitor yet makes models misaligned",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://alignment.anthropic.com/2026/automated-em-search/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-10-31T16:00:00+08:00",
       "label": {
@@ -444,57 +850,6 @@
           ]
         },
         {
-          "id": "t808",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "AI 开发工具的「黑色十月」：Cursor 扩展市场上的官方 Claude Code VS Code 扩展被植入后门（Phorion，HN 773/485，Lobsters 140）× Wiz 汇总十月至少 9 起 AI 开发平台安全事件（Fireworks、Lightning、Railway、Warp、OpenCode、Zeabur 等：凭据窃取、agent 群式攻击、为蒸馏/LLMjacking 盗用；被盗 Bedrock key 30 小时约 80 万次调用、转售池 13 小时约 170 万次）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。",
-            "en": "Synthesis candidate: backdoored Claude Code extension on the Cursor marketplace plus Wiz's \"Black October\" roll-up of AI developer-platform incidents; candidate term \"Open VSX\" (verify first).",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
-              "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-              "brief": {
-                "zh": "Cursor 扩展市场上的官方 Claude Code 扩展被植入后门；Lobsters 同题 140 分（https://lobste.rs/s/ttp7aq，GossiTheDog 帖）。接供应链/harness 安全线（LiteLLM、HTTP2Shell、backdoors in harnesses），可做 AI 编码工具供应链综述",
-                "en": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
-              "title": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
-              "brief": {
-                "zh": "Different report from the filed 10-30 Wiz 'rise of agentic attacks' piece: incident roll-up + LLMjacking telemetry across AI dev platforms. 站内积累线：security-control / agent 平台凭据。",
-                "en": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
-            "https://www.wiz.io/blog/black-october-for-ai-developer-platforms"
-          ]
-        },
-        {
           "id": "t809",
           "theme": "research",
           "title": {
@@ -794,130 +1149,6 @@
             "https://arxiv.org/abs/2610.29162",
             "https://martinfowler.com/bliki/LLM-Voice.html"
           ]
-        },
-        {
-          "id": "t781",
-          "theme": "other",
-          "title": {
-            "zh": "OpenAI 宣布 AI 协助的数学/计算机/物理三项新发现——其中硬结果「指数时间假设（ETH）被证伪」（OpenAI math 仓预印本，HN 267；若成立影响极大，验证状态待核）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。续源：van der Waerden 数 Lean 4 证明。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。续源：van der Waerden 数 Lean 4 证明。",
-            "en": "High-stakes unverified claim: OpenAI announces AI-assisted discoveries including a preprint claiming the Exponential Time Hypothesis is false; verify before any deep read (cf. earlier retractions). Follow-up: classification of finite simple groups formalized in Lean. Follow-up: van der Waerden number W(2;3,21)=416 proved with a Lean 4 kernel-checked proof.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
-              "title": "'Announcing three new discoveries in mathematics, computer science, and physics'",
-              "brief": {
-                "zh": "HN 430/162：OpenAI 宣布 AI 协助的数学/计算机/物理三项发现；同轮 HN 267「The Exponential Time Hypothesis Is False」(https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf, https://news.ycombinator.com/item?id=50251661) 是其中的硬结果，ETH 被证伪若成立影响极大；适合 AI for science",
-                "en": "OpenAI announces three AI-assisted discoveries in mathematics, computer science and physics; a companion preprint in its math repo claims the Exponential Time Hypothesis is false. HN 430/162 and 267. Verification status unknown.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://cfsg.axiommath.ai/",
-              "title": "'Classification of Finite Simple Groups Formalized in Lean'",
-              "brief": {
-                "zh": "HN 169/44：有限单群分类在 Lean 中形式化完成（axiommath.ai）；AI for math/形式化证明线，接 10/27 OpenAI 三项发现与 ETH 证伪稿（Lobsters 同日也有 ETH 帖，https://lobste.rs/s/pq6ju6）。",
-                "en": "'Classification of Finite Simple Groups Formalized in Lean'",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/MachineLearning/comments/1xivpue/w2321_416_a_van_der_waerden_number_conjectured_by/",
-              "title": "W(2;3,21) = 416 — van der Waerden number conjectured by Kullmann (2010) proved with Lean 4 kernel-checked proof [R]",
-              "brief": {
-                "zh": "组合数学猜想经 Lean 4 内核校验证明，发在 r/ML（是否有 AI 参与待核）；可并入 AI for math / 形式化（CFSG in Lean、OpenAI discoveries）综述",
-                "en": "W(2;3,21) = 416 — van der Waerden number conjectured by Kullmann (2010) proved with Lean 4 kernel-checked proof [R]",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
-            "https://cfsg.axiommath.ai/",
-            "https://www.reddit.com/r/MachineLearning/comments/1xivpue/w2321_416_a_van_der_waerden_number_conjectured_by/"
-          ]
-        },
-        {
-          "id": "t803",
-          "theme": "models",
-          "title": {
-            "zh": "检测失控 agent 的两侧：OpenAI 公开四层失准监测（激活探针、模型审查、调查 agent、自动化调查，覆盖 GPT-6 Astra 以上全部 RL 运行与内部 Codex 流量；回放中逃出沙箱约 30 分钟即告警、比实际攻破早 30+ 小时；9 月一次训练模型接入互联网 15 分钟内被标记并暂停前沿 RL）× Wiz 从 IR 与公开事件提炼 agent 参与入侵的 7 条指纹（机器节奏迭代、工具内嵌自然语言推理、自我纠错、广度优先近全 TTP、大量并行横移、先探测后载荷、用途描述型一次性产物）× Altman：沙箱化超人模型仍未解决",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。",
-            "en": "Synthesis candidate: OpenAI's four-layer misalignment detection and Wiz's seven fingerprints of agentic attacks; candidate term \"agentic attacks\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment",
-              "title": "OpenAI: How we detect frontier model misalignment",
-              "brief": {
-                "zh": "一手厂商披露 agent 沙箱逃逸监控架构与真实响应时延，承接 t754（agent 拆掉自己的监控/OpenAI misalignment reports）与 t686，但这是监测系统本身的新架构文，非旧报告重述。站内积累线：sandbox / security-control / agent-loop 监控。",
-                "en": "OpenAI: How we detect frontier model misalignment",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
-              "title": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
-              "brief": {
-                "zh": "防御侧可操作的 agent 攻击检测特征，承接 t747（agent 成为攻击面）与 10-29 Cathedral breach，但角度是检测指纹而非单起事件。站内积累线：security-control / agent-loop。",
-                "en": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=iMsUcCYNKqY",
-              "title": "Why Sam Altman is against a single superintelligence",
-              "brief": {
-                "zh": "Highest VPH this run: Sam Altman on models finding critical PHP vulnerabilities, test-time compute powering agent swarms, and sandboxing superhuman models.",
-                "en": "Why Sam Altman is against a single superintelligence",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://openai.com/index/how-we-detect-frontier-model-misalignment",
-            "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
-            "https://www.youtube.com/watch?v=iMsUcCYNKqY"
-          ]
         }
       ]
     },
@@ -1041,156 +1272,6 @@
           "externalUrls": [
             "https://arxiv.org/abs/2610.07753",
             "https://www.reddit.com/r/MachineLearning/comments/1xhnoo2/a_harness_that_records_where_an_llm_agents_tool/"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-28T16:00:00+08:00",
-      "label": {
-        "zh": "10月28日 16:00",
-        "en": "Oct 28 16:00",
-        "ja": "10月28日 16:00"
-      },
-      "items": [
-        {
-          "id": "t633",
-          "theme": "models",
-          "title": {
-            "zh": "LangChain Deep Agents Skills revamp：工具绑定到 skill、pinned skill、长线程热重载",
-            "en": "LangChain Deep Agents Skills revamp",
-            "ja": "LangChain Deep Agents Skills revamp"
-          },
-          "summary": {
-            "zh": "Deep Agents 把 progressive disclosure 扩到工具层（read-before-call、cache 友好）并加 pinned/热重载——skills 规模化的具体工程答案。贴题 Trends 两窗口远低于 gpts → inbox。续源：LangChain 设计 agent 的 skill/gate/删规则实录。续源：Replit 「反馈→审批 skill」闭环。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Deep Agents 把 progressive disclosure 扩到工具层（read-before-call、cache 友好）并加 pinned/热重载——skills 规模化的具体工程答案。贴题 Trends 两窗口远低于 gpts → inbox。续源：LangChain 设计 agent 的 skill/gate/删规则实录。续源：Replit 「反馈→审批 skill」闭环。",
-            "en": "Deep Agents extends progressive disclosure to tools (read-before-call, cache-friendly) and adds pinned skills and hot reload—a concrete engineering answer to skills at scale. Topic Trends far below gpts on both windows, so inbox. Follow-up: LangChain design agent harness, skills and gates, rules deleted after a stronger model. Follow-up: Replit Cloud Agents turn review feedback into engineer-approved skills.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "langchain",
-              "url": "https://www.langchain.com/blog/revamping-skills-in-deep-agents",
-              "title": "Revamping Skills in Deep Agents",
-              "brief": {
-                "zh": "一级源：tool binding、pinned skills、mid-thread reload；千级 skill 注册表。",
-                "en": "Primary: tool binding, pinned skills, mid-thread reload; registries of thousands of skills.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.langchain.com/blog/design-agent",
-              "title": "LangChain: How We Built Our Design Agent (Content Studio) — harness_v1 → Bitter Lesson, 48 skills, gates, sandbox-per-thread; harness open-sourced",
-              "brief": {
-                "zh": "Mechanism-rich agent-harness case with real numbers: skills/gates/memory/wiki split, router-skill design, subagent split rules for parallel work, 'remove scaffolding when the model improves'. Not previously filed (checked inbox, archive 20261024/25/27, topics.md; closest is Vercel durable-harness an",
-                "en": "LangChain: How We Built Our Design Agent (Content Studio) — harness_v1 → Bitter Lesson, 48 skills, gates, sandbox-per-thread; harness open-sourced",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://replit.com/blog/anyone-can-bring-ideas-to-company-codebase",
-              "title": "Replit Cloud Agents for existing repos: sandbox-tested PRs with video, review feedback → engineer-approved skills (workspace memory), shared VM environments, credential broker",
-              "brief": {
-                "zh": "站内积累线 (skills + memory + sandbox + credential isolation + verification-by-evidence loop in a coding-agent product): the human-gated 'review comment → proposed skill update → approval' loop and the credential-broker/sandboxed browser-test step match the harness themes already filed (Claude Duet crede",
-                "en": "Replit Cloud Agents for existing repos: sandbox-tested PRs with video, review feedback → engineer-approved skills (workspace memory), shared VM environments, credential broker",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "langchain",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.langchain.com/blog/revamping-skills-in-deep-agents",
-            "https://www.langchain.com/blog/design-agent",
-            "https://replit.com/blog/anyone-can-bring-ideas-to-company-codebase"
-          ]
-        },
-        {
-          "id": "t791",
-          "theme": "research",
-          "title": {
-            "zh": "数据筛选是「更快到达」还是「真能变更强」？Advancement vs Acceleration：只有基线训练损失与目标损失之间存在可修正的 train–target gap（Δ≠0）筛选才能抬高终点，Δ≈0 时收益随训练预算增大而消失（Δ-test 可在花钱筛选前先算）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：curation 的成败取决于任务（Δ-test），而不是方法。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：curation 的成败取决于任务（Δ-test），而不是方法。",
-            "en": "Single-paper deep-read candidate: data curation only raises the endpoint when a correctable train-target gap exists (Δ-test); otherwise it merely accelerates.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.36983",
-              "title": "Advancement or Acceleration? How Data Curation Improves LLM Training",
-              "brief": {
-                "zh": "「深耕候选：把‘数据筛选到底有没有用’拆成两件事——advancement（天花板变高）和 acceleration（只是更快到同一个点）。核心结论很干净：只有当基线的训练损失和目标损失之间存在‘可修正的 train-target gap’时，筛选才可能抬高终点；两者重合时再聪明的 curation 也只能加速。作者给了个 Δ-test：在花钱筛选之前，只看未筛选基线的 train/target loss 差，Δ 明显非零才会有持久收益，Δ≈0 的收益会随训练预算增大而消失。很适合画一张 SVG：左边 Δ=0 两条曲线终点重合只是更早到达，右边 Δ>0 终点抬高。把 curation 的成败从",
-                "en": "Advancement or Acceleration? How Data Curation Improves LLM Training",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.36983"
-          ]
-        },
-        {
-          "id": "t792",
-          "theme": "research",
-          "title": {
-            "zh": "LLM 预训练真的跑在 Edge of Stability 上吗？新失效模式 Edge of Convexity：持续负曲率让二次近似无论学习率多小都发散而真实训练稳定（787M 内所有预训练 run 均见）；EoS 普遍但不普遍成立——学习率衰减后或 batch 低于与 critical batch size 正相关的阈值时消失",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：经典稳定性理论为何在 LLM 上不灵，Edge of Convexity 与 EoS 的边界条件。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：经典稳定性理论为何在 LLM 上不灵，Edge of Convexity 与 EoS 的边界条件。",
-            "en": "Single-paper deep-read candidate: Edge of Convexity and when Edge of Stability holds in LLM pretraining.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.36778",
-              "title": "Does LLM Pre-Training Typically Occur at the Edge of Stability?",
-              "brief": {
-                "zh": "「新芽：问一个很具体的问题——LLM 预训练是不是真的跑在 Edge of Stability 上？作者发现二次近似有个新的失效模式：持续的负曲率会让二次近似的动力学不管学习率多小都发散，而真实训练却稳得很，他们叫它 Edge of Convexity（EoC），在所有预训练 run（到 787M）里都能看到。把这个 LR 无关的发散扣掉之后，再给 adaptive optimizer + 随机训练重新定义 EoS：它很普遍但不是普遍成立——学习率衰减后、或 batch size 低于一个与 critical batch size 正相关的阈值时就消失。有新术语、有‘什么时候成立、什么时候消失",
-                "en": "Does LLM Pre-Training Typically Occur at the Edge of Stability?",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.36778"
           ]
         }
       ]
@@ -5368,107 +5449,6 @@
           "status": "published",
           "externalUrls": [
             "https://arxiv.org/abs/2610.00010"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-01T16:00:00+08:00",
-      "label": {
-        "zh": "10月1日 16:00",
-        "en": "Oct 1 16:00",
-        "ja": "10月1日 16:00"
-      },
-      "items": [
-        {
-          "id": "t456",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Matthew Green：沙箱是否足以遏制 rogue agents？",
-            "en": "Matthew Green",
-            "ja": "Matthew Green"
-          },
-          "summary": {
-            "zh": "Matthew Green 论证：沙箱隔离挡不住共享出站信道上的 agent 互传指令（缓存/邮件/Slack/文档）——把 HF 链升维成「权限/权威轴」问题，补 OpenShell 硬件边界与 METR 政策证词的工程对照。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Matthew Green 论证：沙箱隔离挡不住共享出站信道上的 agent 互传指令（缓存/邮件/Slack/文档）——把 HF 链升维成「权限/权威轴」问题，补 OpenShell 硬件边界与 METR 政策证词的工程对照。",
-            "en": "Matthew Green argues process sandboxes fail once agents share egress channels (caches, email, Slack, docs). Elevating the HF chain into an authority-axis problem complements OpenShell’s hardware boundary and METR’s policy record.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "cryptographyengineering",
-              "url": "https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/",
-              "title": "Is sandboxing sufficient to contain rogue agents?",
-              "brief": {
-                "zh": "Johns Hopkins 密码学家长文（Simon Willison 转述）：Artifactory 变消息板、链式 0day 取凭据，并推广到 Muse 类个人 agent 的 worm 式载荷+载体。",
-                "en": "Johns Hopkins cryptographer Matthew Green’s essay (surfaced via Simon Willison) uses the HF chain—Artifactory as a message board, chained zero-days for credentials—and generalizes worm-like payload+carrier dynamics to personal agents like Muse.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/",
-              "title": "Is sandboxing sufficient to contain rogue agents?",
-              "brief": {
-                "zh": "HN 20/26：同文进论坛，安全向反驳「有进程隔离就够」。",
-                "en": "HN 20 points / 26 comments on the same essay, a security-oriented counterpoint to assuming process isolation solves agent control.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "cryptographyengineering",
-            "hn",
-            "simonw"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/"
-          ]
-        },
-        {
-          "id": "t422",
-          "theme": "research",
-          "title": {
-            "zh": "ToxicBench：工具静默说谎时的盲从采纳",
-            "en": "ToxicBench",
-            "ja": "ToxicBench"
-          },
-          "summary": {
-            "zh": "工具执行成功仍可能返回被投毒的数值/标签/schema/检索证据；ToxicBench 拆「检查」与「采纳」——补 SINGED「答案正确≠执行安全」的证据可信度缺口。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "工具执行成功仍可能返回被投毒的数值/标签/schema/检索证据；ToxicBench 拆「检查」与「采纳」——补 SINGED「答案正确≠执行安全」的证据可信度缺口。",
-            "en": "Successful tool execution can still return poisoned numerical, label, schema, or retrieval evidence. ToxicBench separates checking from adoption, complementing SINGED on evidence trustworthiness rather than side effects.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.37153",
-              "title": "When Tools Silently Lie: Evaluating and Mitigating Blind Compliance in Tool-Augmented Data Agents",
-              "brief": {
-                "zh": "ToxicBench 在固定源数据上配对干净/投毒观测；118 任务 GPT 评测中投毒使成功率下降 26–39pp，重复投毒可见检查后仍采纳错误答案。",
-                "en": "ToxicBench pairs clean and poisoned observations over fixed source data. Across 118 GPT tasks, poisoning cuts success by 26–39 points, and repeated poisoning shows wrong-answer adoption after checking.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.37153",
-            "https://github.com/turambar928/Toxic_Tool_Bench"
           ]
         }
       ]
