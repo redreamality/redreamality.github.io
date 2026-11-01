@@ -141,7 +141,7 @@ const strings = {
               class="block rounded-lg border border-surface-200 p-4 transition-shadow hover:shadow-md dark:border-surface-700"
             >
               <div class="mb-1 flex flex-wrap items-center gap-3 text-xs text-surface-500 dark:text-surface-400">
-                <span class="font-semibold text-brand-600 dark:text-brand-300">{strings.day(getSeriesDay(entry, entries))}</span>
+                <span class="font-semibold text-brand-600 dark:text-brand-300">{entry.data.seriesLabel ?? strings.day(getSeriesDay(entry, entries))}</span>
                 <time datetime={entry.data.pubDate.toISOString()}>{fmt(entry.data.pubDate)}</time>
               </div>
               <h3 class="text-base font-semibold text-surface-900 dark:text-white">{entry.data.title}</h3>

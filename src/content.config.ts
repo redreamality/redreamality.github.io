@@ -95,6 +95,7 @@ const nightlySchema = z.object({
   updatedDate: z.date().optional(),
   lang: z.enum(['zh', 'en', 'ja']).optional(),
   seriesDay: z.number().int().nonnegative().optional(), // day number shown in column nav/index
+  seriesLabel: z.string().optional(), // overrides the day label, e.g. 周报第 1 期
   humanInterventions: z.number().int().nonnegative().optional(), // summed on the column index
 });
 

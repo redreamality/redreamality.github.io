@@ -10,6 +10,7 @@ export interface SeriesFields {
   pubDate: Date;
   title?: string;
   seriesDay?: number;
+  seriesLabel?: string;
   humanInterventions?: number;
 }
 
