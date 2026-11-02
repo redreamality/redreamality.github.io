@@ -22,7 +22,7 @@ To understand why bond prices fall when interest rates rise, imagine this scenar
 
 ### The Coupon Rate vs. Market Rate
 
-When you buy a bond, you're essentially locking in a fixed interest rate for the life of the bond. This is called the **coupon rate**. For example, if you buy a 10-year bond with a $1,000 face value and a 5% coupon rate, you'll receive $50 per year in interest payments.
+When you buy a bond, you're essentially locking in a fixed interest rate for the life of the bond. This is called the **coupon rate**. For example, if you buy a 10-year bond with a \$1,000 face value and a 5% coupon rate, you'll receive \$50 per year in interest payments.
 
 However, the **market interest rate** - the rate that new bonds are offering - can change after you buy your bond. This is what creates the inverse relationship.
 
@@ -42,7 +42,7 @@ The price of your 5% bond when market rates are 6% can be calculated:
 New Price = $50 / 0.06 = $833.33
 ```
 
-Your bond's price has fallen from $1,000 to about $833 - a loss of nearly 17% - just because market rates rose by 1%.
+Your bond's price has fallen from \$1,000 to about \$833 - a loss of nearly 17% - just because market rates rose by 1%.
 
 This is why bond prices fall when interest rates rise. Existing bonds with lower coupon rates become less valuable when new, higher-rate bonds are available.
 
@@ -64,7 +64,7 @@ When market rates are 4%, your 5% bond would trade at:
 New Price = $50 / 0.04 = $1,250
 ```
 
-Your bond's price has risen from $1,000 to about $1,250 - a gain of 25% - just because market rates fell by 1%.
+Your bond's price has risen from \$1,000 to about \$1,250 - a gain of 25% - just because market rates fell by 1%.
 
 This is why bond prices rise when interest rates fall. Existing bonds with higher coupon rates become more valuable when new, lower-rate bonds are available.
 

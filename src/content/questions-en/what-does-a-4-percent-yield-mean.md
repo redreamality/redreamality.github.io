@@ -12,7 +12,7 @@ If you're new to investing, you might see investments advertised with "4% yield"
 At its core, a **4% yield** means that the investment is currently generating a return of 4% per year based on its current price or value.
 
 For bonds, this typically means:
-- For every $1,000 invested, you receive $40 in annual interest
+- For every \$1,000 invested, you receive \$40 in annual interest
 - The yield is calculated as: Annual Interest ÷ Current Price = 4%
 
 But there's more to understanding yield than just this simple calculation. Let me dive deeper.
@@ -26,9 +26,9 @@ Yield = Annual Income ÷ Current Investment Value
 ```
 
 For a bond with a 4% yield:
-- If the bond costs $1,000, annual interest = $40
-- If the bond costs $2,000, annual interest = $80
-- If the bond costs $500, annual interest = $20
+- If the bond costs \$1,000, annual interest = \$40
+- If the bond costs \$2,000, annual interest = \$80
+- If the bond costs \$500, annual interest = \$20
 
 In each case, the yield is 4%.
 
@@ -284,7 +284,7 @@ It depends on your goals:
 A 4% yield means:
 
 1. **Basic meaning:** The investment is generating 4% annual return based on current value
-2. **For bonds:** Typically $40 per $1,000 invested, paid as interest
+2. **For bonds:** Typically \$40 per \$1,000 invested, paid as interest
 3. **For stocks:** Usually dividend income, which is less certain
 4. **Context matters:** Whether 4% is "good" depends on rates, risk, and your goals
 5. **Taxes matter:** The after-tax yield is what really matters

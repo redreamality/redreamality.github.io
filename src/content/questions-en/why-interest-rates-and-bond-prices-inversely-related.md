@@ -11,7 +11,7 @@ The inverse relationship between interest rates and bond prices is one of the mo
 
 To understand why interest rates and bond prices move in opposite directions, we first need to understand the **time value of money**. This is the principle that a dollar received today is worth more than a dollar received in the future. Why? Because money you have today can be invested and earn interest, making it worth more over time.
 
-Think about it this way: if someone offered you $100 today or $100 one year from now, which would you choose? Most people would take the $100 today. You could put it in a savings account and earn interest, so one year from now, you'd have more than $100. To make someone indifferent between receiving $100 today or $100 in a year, you'd need to offer them more than $100 in the future to compensate for the delay.
+Think about it this way: if someone offered you \$100 today or \$100 one year from now, which would you choose? Most people would take the \$100 today. You could put it in a savings account and earn interest, so one year from now, you'd have more than \$100. To make someone indifferent between receiving \$100 today or \$100 in a year, you'd need to offer them more than $100 in the future to compensate for the delay.
 
 This is exactly what interest rates represent - they're the price of time, the compensation investors demand for deferring consumption.
 
@@ -54,43 +54,43 @@ Imagine a bond with these characteristics:
 
 When the market interest rate equals the coupon rate, the bond trades at **par** (face value). Let's calculate the present value:
 
-Year 1: $50 / (1.05)^1 = $47.62
-Year 2: $50 / (1.05)^2 = $45.35
-Year 3: $50 / (1.05)^3 = $43.19
-Year 4: $50 / (1.05)^4 = $41.13
-Year 5: $50 / (1.05)^5 = $39.17
-Year 6: $50 / (1.05)^6 = $37.30
-Year 7: $50 / (1.05)^7 = $35.53
-Year 8: $50 / (1.05)^8 = $33.84
-Year 9: $50 / (1.05)^9 = $32.23
-Year 10: $1,050 / (1.05)^10 = $646.32
+Year 1: \$50 / (1.05)^1 = \$47.62
+Year 2: \$50 / (1.05)^2 = \$45.35
+Year 3: \$50 / (1.05)^3 = \$43.19
+Year 4: \$50 / (1.05)^4 = \$41.13
+Year 5: \$50 / (1.05)^5 = \$39.17
+Year 6: \$50 / (1.05)^6 = \$37.30
+Year 7: \$50 / (1.05)^7 = \$35.53
+Year 8: \$50 / (1.05)^8 = \$33.84
+Year 9: \$50 / (1.05)^9 = \$32.23
+Year 10: \$1,050 / (1.05)^10 = \$646.32
 
-Sum: $1,000.08 ≈ $1,000 (allowing for rounding)
+Sum: \$1,000.08 ≈ \$1,000 (allowing for rounding)
 
 Now, suppose market interest rates rise to 6%. Let's recalculate:
 
-Year 1: $50 / (1.06)^1 = $47.17
-Year 2: $50 / (1.06)^2 = $44.50
-Year 3: $50 / (1.06)^3 = $41.98
-Year 4: $50 / (1.06)^4 = $39.60
-Year 5: $50 / (1.06)^5 = $37.36
-Year 6: $50 / (1.06)^6 = $35.25
-Year 7: $50 / (1.06)^7 = $33.25
-Year 8: $50 / (1.06)^8 = $31.37
-Year 9: $50 / (1.06)^9 = $29.59
-Year 10: $1,050 / (1.06)^10 = $586.25
+Year 1: \$50 / (1.06)^1 = \$47.17
+Year 2: \$50 / (1.06)^2 = \$44.50
+Year 3: \$50 / (1.06)^3 = \$41.98
+Year 4: \$50 / (1.06)^4 = \$39.60
+Year 5: \$50 / (1.06)^5 = \$37.36
+Year 6: \$50 / (1.06)^6 = \$35.25
+Year 7: \$50 / (1.06)^7 = \$33.25
+Year 8: \$50 / (1.06)^8 = \$31.37
+Year 9: \$50 / (1.06)^9 = \$29.59
+Year 10: \$1,050 / (1.06)^10 = \$586.25
 
 Sum: $926.32
 
-The bond price has fallen from $1,000 to about $926. That's a price decline of 7.4% just from a 1% increase in interest rates!
+The bond price has fallen from \$1,000 to about \$926. That's a price decline of 7.4% just from a 1% increase in interest rates!
 
 ## The Coupon Rate vs. Yield Distinction
 
 Here's a crucial distinction that often confuses people: the **coupon rate** and the **yield** are not the same thing.
 
-- **Coupon rate**: The fixed interest rate specified on the bond when it's issued, expressed as a percentage of face value. If a bond has a $1,000 face value and a 5% coupon rate, it pays $50 per year, period.
+- **Coupon rate**: The fixed interest rate specified on the bond when it's issued, expressed as a percentage of face value. If a bond has a \$1,000 face value and a 5% coupon rate, it pays \$50 per year, period.
 
-- **Yield** (or **current yield**): The annual return based on the current market price. If that same 5% bond is trading at $900, the yield is $50 / $900 = 5.56%.
+- **Yield** (or **current yield**): The annual return based on the current market price. If that same 5% bond is trading at \$900, the yield is \$50 / $900 = 5.56%.
 
 When interest rates rise, existing bond prices fall, which increases their yields. When interest rates fall, existing bond prices rise, which decreases their yields.
 
@@ -98,7 +98,7 @@ When interest rates rise, existing bond prices fall, which increases their yield
 
 Another way to understand this relationship is through **arbitrage**. If bonds with identical risk characteristics offered different yields, investors would immediately buy the cheaper one and sell the expensive one, driving their prices back into alignment.
 
-Imagine two bonds that are identical in every way (same issuer, same maturity, same risk). Bond A trades at $950 and offers a 6% yield. Bond B trades at $1,000 and offers a 5.7% yield. Investors would swarm to buy Bond A (higher yield for same risk) and sell Bond B. This buying pressure would raise Bond A's price and selling pressure would lower Bond B's price, until their yields converged.
+Imagine two bonds that are identical in every way (same issuer, same maturity, same risk). Bond A trades at \$950 and offers a 6% yield. Bond B trades at \$1,000 and offers a 5.7% yield. Investors would swarm to buy Bond A (higher yield for same risk) and sell Bond B. This buying pressure would raise Bond A's price and selling pressure would lower Bond B's price, until their yields converged.
 
 The market ensures that bonds with similar characteristics have similar yields. When market interest rates change, all bond prices must adjust to maintain these yield relationships.
 

@@ -65,7 +65,7 @@ TypeSafe 的 Jev 走的是另一条接口：对同一份 `state` 挂一组有类
 
 ## 成本：相对 LLM-judge 约 63×
 
-在 19 条带 API LLM judge 的基准上，论文按标价算一整遍：Jev 约 **$0.30**，对应 judge 约 **$18.96**，合起来约 **63×**。Jev 在其中 18/19 条上比参考 judge 便宜。保守重定价——所有 judge 按 GPT-4o-mini 价、Jev 只问通用句——仍约 **12×** 便宜，中位约 **3.3×**。[1]
+在 19 条带 API LLM judge 的基准上，论文按标价算一整遍：Jev 约 **\$0.30**，对应 judge 约 **\$18.96**，合起来约 **63×**。Jev 在其中 18/19 条上比参考 judge 便宜。保守重定价——所有 judge 按 GPT-4o-mini 价、Jev 只问通用句——仍约 **12×** 便宜，中位约 **3.3×**。[1]
 
 这和站内 [rubric 评委文](/cn/blog/jev-rubric-judges-cheaper-faster-correlated-errors/) 的方向一致：typed 决策在「按输入计费、一次多问、不解码长文」上天然省。但任务不同——那边是 (unit, criterion) 打分与相关错误；这里是对齐失败二分类与基率/阈值。两边可以共用「第一层用便宜决策、不确定再升级」的架子，不要共用「相关错误 ≈0、cascade 还能大幅涨分」的幻想。
 

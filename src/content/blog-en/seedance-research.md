@@ -99,7 +99,7 @@ Merges AI generation with post-production editing, allowing users to directly mo
 | Premium | ~$45 USD/month (Pro) | More credits | Commercial license included |
 
 - Generating a 15-second video costs ~90 credits, roughly **0.77 CNY per second**
-- Basic access at ~**$9.60 USD/month**, significantly lower than Sora 2's $20~$200/month
+- Basic access at ~**\$9.60 USD/month**, significantly lower than Sora 2's \$20~$200/month
 - Pro tier at ~$45 USD/month with commercial license, 50%+ cheaper than Sora 2's equivalent
 
 #### Free Trial
@@ -148,16 +148,16 @@ Major players in the current AI video generation market:
 - Native synchronized audio (dialogue, sound effects, background music)
 
 **Weaknesses:**
-- Expensive: Plus $20/month (480p unlimited only), Pro $200/month
+- Expensive: Plus \$20/month (480p unlimited only), Pro \$200/month
 - Slow generation (~50 min per batch)
 - Free users locked out since January 2026
-- API pricing $0.10~$0.50/sec
+- API pricing \$0.10~\$0.50/sec
 - Max 1080p (Pro), standard only 720p
 
 **Pricing:**
 - ChatGPT Plus: $20/month (480p unlimited)
 - ChatGPT Pro: $200/month (10,000 credits/month, 1080p)
-- API: $0.10/sec (720p) ~ $0.50/sec (1024p)
+- API: \$0.10/sec (720p) ~ \$0.50/sec (1024p)
 
 #### Kuaishou Kling 3.0
 
@@ -259,7 +259,7 @@ Major players in the current AI video generation market:
 
 **Pricing:**
 - Free: Limited credits
-- Starter: $8~$10/month (700 credits)
+- Starter: \$8~\$10/month (700 credits)
 
 #### Luma Dream Machine (Ray3)
 
@@ -398,10 +398,10 @@ Major players in the current AI video generation market:
 ### 4.1 Market Size & Growth
 
 - 2026 AI video generation tools market expected to exceed **$30 billion**, with ~**40%** annual growth
-- AI video tools market reached $4.2B in 2025, projected $12.8B by 2027
-- AI video analytics market projected from $32B (2025) to $133.3B (2030) at 33% CAGR
+- AI video tools market reached \$4.2B in 2025, projected \$12.8B by 2027
+- AI video analytics market projected from \$32B (2025) to \$133.3B (2030) at 33% CAGR
 - Global AI market expected to reach $826B by 2030, with video generation as a major driver
-- Video production costs reduced **80~95%** by AI ($50~200/month AI tools vs $50~150/hour traditional editing)
+- Video production costs reduced **80~95%** by AI (\$50~200/month AI tools vs \$50~150/hour traditional editing)
 
 ### 4.2 Six Core Trends
 

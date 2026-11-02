@@ -99,8 +99,8 @@ Table 1 (success over all evaluated instances; time and dollars over the success
 Align with the paper’s prose:
 
 - **Success:** Jev-Mobile **79%**, SeeAct-V **78%**, step-wise VLM **84%**. Five points below step-wise VLM; close to SeeAct-V.[1]
-- **Versus step-wise VLM (successful trajectories):** mean end-to-end time 132.67 vs 197.21 (**−32.7%**); mean model API cost $0.072744 vs $0.273694 (**−73.4%**); execution-model time 5.16 vs 94.30 s (body also notes ~94.5% relative reduction in executor time).[1]
-- **Versus SeeAct-V (successful trajectories):** time 132.67 vs 162.63 (**−18.4%**); cost $0.072744 vs $0.193207.[1]
+- **Versus step-wise VLM (successful trajectories):** mean end-to-end time 132.67 vs 197.21 (**−32.7%**); mean model API cost \$0.072744 vs \$0.273694 (**−73.4%**); execution-model time 5.16 vs 94.30 s (body also notes ~94.5% relative reduction in executor time).[1]
+- **Versus SeeAct-V (successful trajectories):** time 132.67 vs 162.63 (**−18.4%**); cost \$0.072744 vs \$0.193207.[1]
 
 Accounting for secondary citation: executor time counts Qwen / UI-TARS / Jev respectively; the summed executor-cost row is a **cohort sum**, not a unit price; mean model API cost averages **all model roles** per success. Time and cost are **conditional on success**—with a lower success rate the success subset may be easier; the paper does not claim difficulty-matched correction.[1]
 

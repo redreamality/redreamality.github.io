@@ -90,7 +90,7 @@ Table 1 关键行（Overall 与分项，百分制）：
 
 同 backbone 的阶梯很清楚：**27B Baseline 67.22 → Planner-Model 71.90 → Agent(+Harness) 77.05**；**35B-A3B Baseline 54.90 → Model 64.79 → Agent 69.91**。固定 27B checkpoint 时，Harness 单独贡献 Overall +5.15pp（71.90→77.05），Skills 从 79.25 到 86.25 的跳变尤其明显。评测表中 Agent 27B Overall 第一，略高于 GPT-6 Astra 76.84 与 Claude Opus 5 75.71；Sub-agent 与 Claude Opus 5 并列 59.55，Skills 仍低于 Astra 的 93.25——读「全面领先」时要按分项留余地。[1]
 
-成本：图中估计输出成本（含 thinking token）约 **$2.41 / 1000 tasks**，对照其他模型约 **$3.06–$67.76**。口径是均输出 token × 输出单价，**不含**输入 token、外部工具、设备执行与额外 Harness 处理。传播时写清「仅输出侧估算」，避免被读成端到端账单。[1]
+成本：图中估计输出成本（含 thinking token）约 **\$2.41 / 1000 tasks**，对照其他模型约 **\$3.06–$67.76**。口径是均输出 token × 输出单价，**不含**输入 token、外部工具、设备执行与额外 Harness 处理。传播时写清「仅输出侧估算」，避免被读成端到端账单。[1]
 
 长历史（Table 3）：无 Harness 时 BEAM 随历史变长明显掉；加 Harness 后匹配的 Qwen 对在 BEAM-500K/1M/10M 上全面抬升。例如 **27B Planner：BEAM-10M 21.99→67.24**（Agent 带 Memory Harness）。短历史基准上变化不大、个别对还有小幅回退——收益集中在「相关证据超出活跃上下文」的设定，而不是万能加分。[1]
 

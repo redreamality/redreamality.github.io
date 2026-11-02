@@ -26,15 +26,15 @@ Current Yield = Annual Interest Payment ÷ Current Price
 
 ### Example
 
-Imagine you bought a bond for $1,000 that pays $50 in interest each year.
+Imagine you bought a bond for \$1,000 that pays \$50 in interest each year.
 
-**Current Yield = $50 ÷ $1,000 = 0.05 = 5%**
+**Current Yield = \$50 ÷ \$1,000 = 0.05 = 5%**
 
 So your current yield is 5%.
 
-Now, what if you bought that same bond for $900 instead of $1,000?
+Now, what if you bought that same bond for \$900 instead of \$1,000?
 
-**Current Yield = $50 ÷ $900 = 0.0556 = 5.56%**
+**Current Yield = \$50 ÷ \$900 = 0.0556 = 5.56%**
 
 Even though the bond pays the same $50, your yield is higher because you paid less for it.
 
@@ -51,14 +51,14 @@ YTM takes into account:
 
 ### Example of YTM
 
-Imagine you bought a 10-year bond for $900 that pays $50 per year and has a $1,000 face value.
+Imagine you bought a 10-year bond for \$900 that pays \$50 per year and has a $1,000 face value.
 
-With current yield, we just calculate $50 ÷ $900 = 5.56%.
+With current yield, we just calculate \$50 ÷ \$900 = 5.56%.
 
 But YTM is more complete. It recognizes that:
-- You'll receive $50 per year for 10 years = $500 total
-- You'll receive $1,000 at maturity, but you only paid $900, so you gain $100
-- But the $1,000 you get in 10 years is worth less than $1,000 today
+- You'll receive \$50 per year for 10 years = \$500 total
+- You'll receive \$1,000 at maturity, but you only paid \$900, so you gain $100
+- But the \$1,000 you get in 10 years is worth less than \$1,000 today
 
 YTM calculation considers all these factors and gives you an annualized return that accounts for everything.
 
@@ -83,11 +83,11 @@ The coupon rate is the interest rate written on the bond when it was issued. It'
 
 ### Example
 
-A bond with a 5% coupon rate and $1,000 face value will always pay $50 per year - that's fixed.
+A bond with a 5% coupon rate and \$1,000 face value will always pay \$50 per year - that's fixed.
 
-But if you buy that bond for $800, your yield is $50 ÷ $800 = 6.25%.
+But if you buy that bond for \$800, your yield is \$50 ÷ $800 = 6.25%.
 
-If you buy it for $1,200, your yield is $50 ÷ $1,200 = 4.17%.
+If you buy it for \$1,200, your yield is \$50 ÷ $1,200 = 4.17%.
 
 The coupon rate stays 5%, but the yield changes based on what you paid.
 
@@ -107,7 +107,7 @@ When you hear that "bond yields rose," it means prices fell. When "yields fell,"
 
 ### 3. Planning Income
 
-If you need $10,000 per year in bond income and bonds are yielding 5%, you need about $200,000 invested. If yields drop to 4%, you'd need $250,000 to get the same income.
+If you need \$10,000 per year in bond income and bonds are yielding 5%, you need about \$200,000 invested. If yields drop to 4%, you'd need $250,000 to get the same income.
 
 ### 4. Assessing Risk
 
@@ -186,7 +186,7 @@ If many investors want bonds, prices rise and yields fall. If few want bonds, pr
 
 ### "A higher coupon rate always means a better investment"
 
-Not true! A bond with an 8% coupon might be a bad deal if you paid $1,500 for it (yield of only 5.3%). A bond with a 4% coupon might be great if you paid $800 for it (yield of 5%).
+Not true! A bond with an 8% coupon might be a bad deal if you paid \$1,500 for it (yield of only 5.3%). A bond with a 4% coupon might be great if you paid \$800 for it (yield of 5%).
 
 ### "The yield I buy at is the yield I'll get"
 

@@ -29,7 +29,7 @@ This pattern is sometimes called "the seesaw effect" because it's like a playgro
 
 Let me explain this with an everyday example that doesn't involve finance at all.
 
-Imagine your favorite artist is having a concert, and tickets cost $100. You buy a ticket at $100. But then, just before the concert, the artist announces they're doing a limited tour and tickets are now selling for $300 on the resale market.
+Imagine your favorite artist is having a concert, and tickets cost \$100. You buy a ticket at \$100. But then, just before the concert, the artist announces they're doing a limited tour and tickets are now selling for $300 on the resale market.
 
 Now, what if instead the artist announces they're adding many more shows, and tickets are now selling for $50 on resale?
 
@@ -47,7 +47,7 @@ This is the key insight that unlocks the entire relationship. Yes, your bond's p
 
 When market interest rates rise, investors demand a higher return on their money. Since your bond's payments are fixed, the only way to make its yield match the new higher required return is to lower its price.
 
-Think of it this way: if you have a bond paying $50 per year on a $1,000 investment (5% yield), and suddenly investors want 6% returns, you need to find a way to make that bond yield 6%. Since the $50 payment can't change, the only way is to lower the price to about $833 (because $50/$833 = 6%).
+Think of it this way: if you have a bond paying \$50 per year on a \$1,000 investment (5% yield), and suddenly investors want 6% returns, you need to find a way to make that bond yield 6%. Since the \$50 payment can't change, the only way is to lower the price to about \$833 (because \$50/\$833 = 6%).
 
 ## The Mathematical Reality: Present Value Calculations
 
@@ -70,20 +70,20 @@ Where "r" is the market interest rate.
 Let's calculate the price of a 10-year bond with a $1,000 face value and 5% coupon rate:
 
 **At 5% market interest rate:**
-Year 1: $50 ÷ 1.05 = $47.62
-Year 2: $50 ÷ 1.1025 = $45.35
+Year 1: \$50 ÷ 1.05 = \$47.62
+Year 2: \$50 ÷ 1.1025 = \$45.35
 ...
-Year 10: $1,050 ÷ 1.6289 = $644.61
+Year 10: \$1,050 ÷ 1.6289 = \$644.61
 Total: Approximately $1,000
 
 **At 6% market interest rate:**
-Year 1: $50 ÷ 1.06 = $47.17
-Year 2: $50 ÷ 1.1236 = $44.50
+Year 1: \$50 ÷ 1.06 = \$47.17
+Year 2: \$50 ÷ 1.1236 = \$44.50
 ...
-Year 10: $1,050 ÷ 1.7908 = $586.25
+Year 10: \$1,050 ÷ 1.7908 = \$586.25
 Total: Approximately $926
 
-The price fell from $1,000 to $926 when interest rates rose from 5% to 6%.
+The price fell from \$1,000 to \$926 when interest rates rose from 5% to 6%.
 
 ## Why This Makes Economic Sense
 

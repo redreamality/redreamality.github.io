@@ -40,7 +40,7 @@ When you buy a bond, you're purchasing a promise:
 - The issuer will return your principal (face value) when the bond matures
 - These payments are set at the time of issuance and don't change
 
-For example, if you buy a 10-year bond with a $1,000 face value and a 5% coupon rate, you receive $50 per year for 10 years, plus your $1,000 at maturity. These payments are "fixed" - they're written into the bond contract and won't change regardless of what happens in the economy.
+For example, if you buy a 10-year bond with a \$1,000 face value and a 5% coupon rate, you receive \$50 per year for 10 years, plus your $1,000 at maturity. These payments are "fixed" - they're written into the bond contract and won't change regardless of what happens in the economy.
 
 ### What Interest Rates Represent
 
@@ -107,7 +107,7 @@ PV = 50/(1.06) + 50/(1.06)² + ... + 50/(1.06)^10 + 1000/(1.06)^10
 PV = $926 (approximately)
 ```
 
-Price **fell** from $1,000 to $926 when the interest rate **rose** from 5% to 6%.
+Price **fell** from \$1,000 to \$926 when the interest rate **rose** from 5% to 6%.
 
 **At 4% market rate:**
 ```
@@ -115,7 +115,7 @@ PV = 50/(1.04) + 50/(1.04)² + ... + 50/(1.04)^10 + 1000/(1.04)^10
 PV = $1,081 (approximately)
 ```
 
-Price **rose** from $1,000 to $1,081 when the interest rate **fell** from 5% to 4%.
+Price **rose** from \$1,000 to \$1,081 when the interest rate **fell** from 5% to 4%.
 
 This mathematical demonstration shows that the negative correlation is not just an observation - it's a mathematical necessity.
 

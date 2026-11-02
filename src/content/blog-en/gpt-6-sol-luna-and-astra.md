@@ -19,8 +19,8 @@ Names are product tiers, not slogans:
 | Model | Official role (per OpenAI) | API id | List price this round (per 1M tokens) |
 | --- | --- | --- | --- |
 | GPT-6 Astra | Best overall; still for the hardest projects | `gpt-6-astra` (earlier launch) | No new absolute Astra table in the Sol/Luna post—we do not invent one |
-| GPT-6 Sol | Strong mid-tier for hard work including coding | `gpt-6-sol` | $2 input / $10 output (halved from 5.6 Sol’s $4 / $20) |
-| GPT-6 Luna | High-volume, clear-goal work (summarize, extract, quick Q&A) | `gpt-6-luna` | $0.10 input / $0.50 output (from 5.6 Luna’s $0.20 / $1.20) |
+| GPT-6 Sol | Strong mid-tier for hard work including coding | `gpt-6-sol` | \$2 input / \$10 output (halved from 5.6 Sol’s \$4 / \$20) |
+| GPT-6 Luna | High-volume, clear-goal work (summarize, extract, quick Q&A) | `gpt-6-luna` | \$0.10 input / \$0.50 output (from 5.6 Luna’s \$0.20 / \$1.20) |
 
 Prices and the 50% cut come from OpenAI’s announcement table.[1] TechCrunch adds product intuition—Sol for complex work such as coding, Luna for clerical/high-volume clear goals—and notes Anthropic’s Opus 5.5 landed about 90 minutes earlier.[3]
 
@@ -81,7 +81,7 @@ On an internal eval from de-identified chats where users had flagged prior mista
 - **FrontierCode 1.1 Main:** Sol improves substantially over 5.6 Sol and can match Claude Fable 5.1 xhigh at much lower cost (OpenAI’s wording).[1]
 - **DeepSWE v1.1:** Sol max 68.8%, within 1.1 points of Claude Fable 5’s 69.9% at xhigh, at ~80% lower cost per task; Luna max 66.6%, comparable to Opus 5 / Fable 5 at medium; Luna ~93% / ~96% cheaper per task than Opus 5 / Fable 5 in those comparisons.[1]
 
-OpenAI also cites internal usage valued at API prices: median researcher daily token spend above $600, 90th percentile above $7,000—arguing that as coding agents grow longer, **sustained cost decides how ambitious you dare to be**.[1]
+OpenAI also cites internal usage valued at API prices: median researcher daily token spend above \$600, 90th percentile above \$7,000—arguing that as coding agents grow longer, **sustained cost decides how ambitious you dare to be**.[1]
 
 ### Computer use
 
@@ -110,7 +110,7 @@ Procurement and platform teams need different routing fields. OpenAI stacks ofte
 
 ## Coding agents: from “dare we go big?” to “how we go big”
 
-OpenAI’s internal spend vignette ($600 median / $7,000 p90 daily) marks a shift: when sessions are measured in hours and repositories, **sustained cost gates product ambition**.[1] Sol/Luna pricing plus caching act directly on that constraint.
+OpenAI’s internal spend vignette (\$600 median / \$7,000 p90 daily) marks a shift: when sessions are measured in hours and repositories, **sustained cost gates product ambition**.[1] Sol/Luna pricing plus caching act directly on that constraint.
 
 Product tactics:
 
@@ -205,7 +205,7 @@ Launch day is more than one `model=` edit:
 | Dimension | GPT-6 Sol / Luna (this post) | Claude Opus 5.5 (summary) |
 | --- | --- | --- |
 | Role | Spread Astra-generation capability to mid/low price | One SKU chasing Fable-class capability at Opus-band economics |
-| List price | Sol $2/$10, Luna $0.10/$0.50 (−50% vs 5.6 promo) | $4 in / $20 out / $0.20 cache reads (~−40% typical vs Opus 5) |
+| List price | Sol \$2/\$10, Luna \$0.10/\$0.50 (−50% vs 5.6 promo) | \$4 in / \$20 out / $0.20 cache reads (~−40% typical vs Opus 5) |
 | Coding narrative | DeepSWE / FrontierCode / Codex usage + cache | Terminal-Bench / FrontierCode / CursorBench (vendor) |
 | Safety narrative | Inherit Astra alignment; Astra’s Critical cyber story separate | Bio/cyber gates + verification + preserved thinking |
 | Default intuition | OpenAI/Codex: daily Sol, batch Luna, peak Astra | Claude Code: trial Opus 5.5 at default effort |

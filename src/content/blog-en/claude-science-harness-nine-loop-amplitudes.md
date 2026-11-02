@@ -35,7 +35,7 @@ Public materials do **not** ship the full Claude Science source, a default Skill
 
 1. **Long unattended loops.** Work can span hours to days; humans keep autonomy alive with continue/sleep-style instructions rather than line-by-line tutoring.[1]
 2. **Tool-backed execution.** The bootstrap route used **Python + SymPy**; the numerical side corresponded to roughly **96 CPUs for a week**, about **$100** of the end-to-end budget.[1]
-3. **Two crossing paths.** The same target was done via the **direct bootstrap** and the **indirect form-factor / antipodal-duality** approach; either path cost an end user about **$1,000–$2,000**, dominated by long Claude runtime rather than cluster CPUs.[1][4]
+3. **Two crossing paths.** The same target was done via the **direct bootstrap** and the **indirect form-factor / antipodal-duality** approach; either path cost an end user about **\$1,000–\$2,000**, dominated by long Claude runtime rather than cluster CPUs.[1][4]
 4. **External authority validation.** Dixon checked the result; humans will publish and interpret; Claude’s role is done for now.[1][3]
 5. **Public comparable artifacts.** The nine-loop result was released in the format used at lower loops; Song He, Jirong Jing, and Xiang Li concurrently obtained nine-loop results with GPT-6 help on some constraints—not Anthropic’s nearly hands-off one-shot style.[1] Mishra-Sharma’s Cosmic9 page further publishes symbol-level files, validation records, and a methods note, while stating that **the programs of the computation are not distributed**.[5][6]
 
@@ -57,7 +57,7 @@ On this site, [Hard Stop](/blog/hard-stop-kernel-preemption-rogue-agent-containm
 
 - **Object:** the nine-loop six-gluon MHV amplitude in planar N=4 SYM (guest post and Dixon addendum wording).[1][3]
 - **Methods:** the known bootstrap recipe plus the form-factor / antipodal-duality route; Dixon was especially impressed that Claude did the amplitude **directly**, against his expectation that a more indirect campaign was required.[3]
-- **Budget:** about **$1k–$2k** end-to-end; roughly **$100 / 96 CPU-weeks** for the Python/SymPy bootstrap compute slice.[1]
+- **Budget:** about **\$1k–\$2k** end-to-end; roughly **$100 / 96 CPU-weeks** for the Python/SymPy bootstrap compute slice.[1]
 - **Timeline:** challenge post 2026-08-07; Anthropic contacted von Hippel late August; Dixon dates being told on 2026-09-01; Anthropic Research guest post dated 2026-09-25.[1][2][3]
 - **Independence:** Song He’s group obtained the nine-loop symbol around the same time with a different AI-assist profile; Dixon jokes he was scooped by a machine and by humans-plus-a-machine within two weeks.[3]
 - **Public data:** Cosmic9 ships quintuple-coproduct and septuple-coproduct representations and records agreement on every coefficient compared; the form-factor computation was carried out by Claude; programs are not distributed.[5][6]
@@ -183,7 +183,7 @@ von Hippel’s challenge hoped for a trailer of the future in which exotic metho
 For people building agent systems, this is not soft news that “physics got shocked by AI.” It is a field experiment you can cite:
 
 - **Claim:** harness × agent-loop moved a computational frontier;
-- **Evidence:** Fable 5.1 + Claude Science, dual paths, $1k–$2k, Dixon’s validation, Cosmic9;
+- **Evidence:** Fable 5.1 + Claude Science, dual paths, \$1k–\$2k, Dixon’s validation, Cosmic9;
 - **Bounds:** known methods, programs not fully public, no new physical principle, generalization radius still open.
 
 Long-horizon editorial work only needs those three lines. Leave the rest of the heat on the timeline.

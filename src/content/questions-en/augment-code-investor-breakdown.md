@@ -6,7 +6,7 @@ tags: ["ai", "startup", "vc", "coding-assistant"]
 lang: "en"
 ---
 
-Augment Code raised $227M in April 2024 at a $977M post-money valuation, putting it in the same tier as Cursor and Cognition. But unlike Cursor, Augment has almost no consumer mindshare. So what are the investors actually buying?
+Augment Code raised \$227M in April 2024 at a \$977M post-money valuation, putting it in the same tier as Cursor and Cognition. But unlike Cursor, Augment has almost no consumer mindshare. So what are the investors actually buying?
 
 This is a question I went looking for an answer to. The most revealing signal turned out not to be the product, but the cap table.
 
@@ -14,9 +14,9 @@ This is a question I went looking for an answer to. The most revealing signal tu
 
 - **Revenue**: ~$20M ARR as of October 2025 (per Latka; unofficial)
 - **Team**: ~188 people (Feb 2026)
-- **Total raised**: ~$252M across Series A ($25M, early 2024) and Series B ($227M, Apr 2024 + Nov 2024 extension)
+- **Total raised**: ~\$252M across Series A (\$25M, early 2024) and Series B ($227M, Apr 2024 + Nov 2024 extension)
 - **Valuation**: $977M post-money (2024-04); no Series C reported yet
-- **Pricing** (restructured Oct 2025 to a credits model): Indie $20/mo, Standard $60/user/mo, Max $200/user/mo, Enterprise custom
+- **Pricing** (restructured Oct 2025 to a credits model): Indie \$20/mo, Standard \$60/user/mo, Max $200/user/mo, Enterprise custom
 - **Users**: total user count is **not public**. Disclosed enterprise coverage includes DXC (~50K developers), Pure Storage (~2K), Tekion (~1.3K)
 
 For context, GitHub Copilot had 1.3M+ paid users in the same period. Augment isn't playing that game.
@@ -37,7 +37,7 @@ Augment is reportedly Sutter Hill's **first major AI bet**. Pattern-match what t
 
 **Index Ventures** brought in **Shardul Shah**, a Forbes Midas List partner whose track record reads like a security hall of fame: **Datadog, Wiz, Duo Security (→ Cisco), Adallom (→ Microsoft), Signal Sciences, Coalition, Expel**. Index's stake in Wiz alone is expected to return ~$3.5B if the Google acquisition closes.
 
-**Evolution Equity Partners** led the November 2024 B-round extension. They're the **largest cybersecurity-focused VC in the world** ($2.5B AUM, $1.1B fund closed April 2024). Augment's CEO explicitly cited Evolution's security expertise as the reason for the round.
+**Evolution Equity Partners** led the November 2024 B-round extension. They're the **largest cybersecurity-focused VC in the world** (\$2.5B AUM, \$1.1B fund closed April 2024). Augment's CEO explicitly cited Evolution's security expertise as the reason for the round.
 
 The message: Augment is positioning as **enterprise code security + AI coding**, not as a Copilot competitor. Think codebase governance, permissions, audit, compliance — the kind of thing a Fortune 500 CISO can sign off on.
 

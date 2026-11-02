@@ -70,12 +70,12 @@ Imagine a 10-year bond is issued at 4% when 10-year Treasury yields are 4%. You 
 Over the next two years, rates rise to 6%. Your bond's price drops to about $850 (to yield 6%).
 
 **If you sell now:**
-- You've received 2 years of $40 coupons = $80
-- You sell at $850, realizing a $150 loss
+- You've received 2 years of \$40 coupons = \$80
+- You sell at \$850, realizing a \$150 loss
 - Total return: -$70 (a loss)
 
 **If you hold to maturity:**
-- You'll receive $40 per year for 10 years = $400
+- You'll receive \$40 per year for 10 years = \$400
 - You'll get $1,000 back at maturity
 - Total nominal return: $480 (48% over 10 years)
 - But this is less than you could have earned if rates had stayed low
@@ -87,12 +87,12 @@ Imagine rates are 6% when you buy a 10-year bond at 4% coupon. You pay about $85
 Over the next two years, rates fall to 4%. Your bond's price rises to $1,000.
 
 **If you sell now:**
-- You've received 2 years of $40 coupons = $80
-- You sell at $1,000, realizing a $150 gain
+- You've received 2 years of \$40 coupons = \$80
+- You sell at \$1,000, realizing a \$150 gain
 - Total return: +$230
 
 **If you hold to maturity:**
-- You'll receive $40 per year for 10 years = $400
+- You'll receive \$40 per year for 10 years = \$400
 - You'll get $1,000 back at maturity
 - But you paid only $850, so your effective return is higher
 

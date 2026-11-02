@@ -177,7 +177,7 @@ This is the path most often mistaken for “run Claude Code on Jev.” In realit
 3. **Treating confidence as accuracy.** Confidence describes how peaked the distribution is—and therefore when to auto-act or escalate. It is not a percentage that “this judgment is correct.” Calibration is valuable because it tells you when *not* to trust blindly.[3][5]
 4. **Hooks without fail-open.** Freezing the CLI when the judgment layer fails is usually worse than one false allow. More mature community implementations put the failure path in the README.[3]
 5. **Stars ≠ maturity.** A compaction plugin can have thousands of stars and still be days old. Validate on your own task set, not on a leaderboard.[3]
-6. **Reseller prices are only as good as the check date.** APIMaster checked routes such as `jev-latest` on 2026-09-21 (for example, claiming about $0.042 / 1M input and $0 output) and stressed that channel prices move with supply—the live card is what counts. Cite with a date caveat; do not treat any reseller price as a permanent tariff.[3]
+6. **Reseller prices are only as good as the check date.** APIMaster checked routes such as `jev-latest` on 2026-09-21 (for example, claiming about \$0.042 / 1M input and \$0 output) and stressed that channel prices move with supply—the live card is what counts. Cite with a date caveat; do not treat any reseller price as a permanent tariff.[3]
 7. **Keep arithmetic, dates, and counting in your own code.** TypeSafe documents those regions as unreliable; clever routing does not make a snap-judgment model a calculator.[3][5]
 
 ## A minimal experiment after the skill is installed

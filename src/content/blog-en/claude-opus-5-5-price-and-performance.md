@@ -35,7 +35,7 @@ Official prices per 1M tokens:[1]
 | Output | $20 | $25 |
 | Cache writes | $5 | $6.25 |
 
-**Fast mode** (Claude Code and Claude Platform) is $8 input / $40 output per million, with up to about 2.5× speed per Anthropic.[1]
+**Fast mode** (Claude Code and Claude Platform) is \$8 input / \$40 output per million, with up to about 2.5× speed per Anthropic.[1]
 
 Input/output alone is roughly a 20% cut. The wider gap comes from:
 
@@ -166,7 +166,7 @@ TechCrunch aligns: same-class limits on discovering exploits in compiled program
 Launch-week misreads usually mix three different kinds of money:
 
 1. **Lower list price vs higher usage.** Higher five-hour caps and spendable resets can encourage longer jobs; unit price falls while totals rise. Use successful merges / closed tickets as the denominator, not raw daily dollars.
-2. **Fast mode leakage.** Fine for interactive latency; disastrous if CI fleets and overnight migrations silently take $8/$40. Make Fast mode an explicit opt-in.[1]
+2. **Fast mode leakage.** Fine for interactive latency; disastrous if CI fleets and overnight migrations silently take \$8/\$40. Make Fast mode an explicit opt-in.[1]
 3. **Cloud and reseller markups.** After AWS/GCP/Azure availability, marketplace and proxy SKUs add their own floors. Budgeting from anthropic.com while buying elsewhere creates fake contradictions with the announcement.[1]
 
 None of this is about IQ; all of it shows up in the first finance meeting after launch. Write denominators and channels into the acceptance script before you paste another benchmark chart.
@@ -178,7 +178,7 @@ The sibling post expands Sol / Luna / Astra.[2] Here is enough structure for Opu
 | Dimension | Opus 5.5 (this post) | GPT-6 side (summary) |
 | --- | --- | --- |
 | Role | New Anthropic flagship Opus; Fable-tier capability claims at Opus-band pricing | Astra for peak; Sol/Luna spread generation intelligence down the cost curve |
-| List-price signal | vs Opus 5: ~−20% I/O, −60% cache reads; ~−40% typical task cost | Sol/Luna **−50%** vs GPT-5.6 promo API (Sol $2/$10, Luna $0.10/$0.50)[2] |
+| List-price signal | vs Opus 5: ~−20% I/O, −60% cache reads; ~−40% typical task cost | Sol/Luna **−50%** vs GPT-5.6 promo API (Sol \$2/\$10, Luna \$0.10/\$0.50)[2] |
 | Coding narrative | Self-reported Terminal-Bench / FrontierCode / CursorBench strength or cost wins | DeepSWE, FrontierCode, Codex usage, cache hit rates |
 | Safety narrative | Bio/cyber gates + verification programs + preserved thinking | Astra’s alignment/Preparedness story; Sol/Luna inherit alignment gains |
 | Selection intuition | Claude stack, long repos, steady default flagship | Peak → Astra; high-volume iteration → Sol/Luna |
@@ -205,7 +205,7 @@ A same-day 36Kr / Jiqizhixin contrast piece frames the week as a unit-task-cost 
 ## Unverified or deliberately omitted claims
 
 - YouTube demos and social screenshots without official or reproducible repos: no numeric scores cited here.
-- Secondary mentions of absolute Fable 5.1 dollar list prices and per-task curves such as “medium ~$0.8 / max ~$6.19” were **not** copied into conclusions because we could not match those exact tables on the Opus 5.5 primary announcement; use Anthropic’s pricing page and console.
+- Secondary mentions of absolute Fable 5.1 dollar list prices and per-task curves such as “medium ~\$0.8 / max ~\$6.19” were **not** copied into conclusions because we could not match those exact tables on the Opus 5.5 primary announcement; use Anthropic’s pricing page and console.
 - “680k lines in a day” and similar early-tester stories are directional, not reproducible environments.
 - We do not predict Sonnet 5.5 / Haiku 5.5 dates or prices.
 - HN rumors (including unconfirmed later Fable timelines) are not treated as fact.

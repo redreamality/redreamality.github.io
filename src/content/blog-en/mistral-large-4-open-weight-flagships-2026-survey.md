@@ -23,7 +23,7 @@ The rest of this post works through six threads: parameter accounting and hardwa
 | Trained from scratch on 3,800 NVIDIA Grace Blackwell GPUs in Mistral's own European datacenters; the preview is served on the same infrastructure | Announcement [1] |
 | Training data spans more than 160 languages, including every official EU language | Announcement [1] |
 | The RL run is still in flight with "no signs of saturation"; at the current scale of about 3k GPUs, a run produces roughly 33B tokens per day, about 16B of them trainable after filtering | Announcement [1] |
-| Preview API pricing: list price $1.36 per million input tokens and $4.18 per million output tokens, currently on sale at half price | Docs [2] |
+| Preview API pricing: list price \$1.36 per million input tokens and \$4.18 per million output tokens, currently on sale at half price | Docs [2] |
 
 | Not yet published | Why it matters |
 | --- | --- |
@@ -97,7 +97,7 @@ An HN commenter complained that open models "keep getting bigger and bigger." [3
 
 In its Beam post, Reflection gives a rough formula: generation compute is about 2 × active parameters × generated tokens, counting only per-token active parameters for MoE models and excluding prefill, attention, and serving overhead. [4] By that formula, each generated token costs roughly 104 GFLOP for Mistral Large 4, 46 for Beam, 7 for Kolibri, 208 for Kimi K3, and 190 for Qwen3.8.
 
-The other half is **how long the answers are**. When AA ran its Intelligence Index, Mistral Large 4 Preview emitted about 200M output tokens, against a median of 81M among comparable models according to AA; GLM-5.3 (max) emitted 210M and DeepSeek V4.1 Flash (max) 250M. [6][19][20] Cheap tokens still add up if the model is chatty. AA's cost-per-task figure is closer to what you actually pay: $1.13 for Mistral Large 4 Preview, $2.01 for GLM-5.3 (max), $0.27 for DeepSeek V4.1 Flash (max), and $2.00 for Kimi K3 (max). [6][19][20][21]
+The other half is **how long the answers are**. When AA ran its Intelligence Index, Mistral Large 4 Preview emitted about 200M output tokens, against a median of 81M among comparable models according to AA; GLM-5.3 (max) emitted 210M and DeepSeek V4.1 Flash (max) 250M. [6][19][20] Cheap tokens still add up if the model is chatty. AA's cost-per-task figure is closer to what you actually pay: \$1.13 for Mistral Large 4 Preview, \$2.01 for GLM-5.3 (max), \$0.27 for DeepSeek V4.1 Flash (max), and \$2.00 for Kimi K3 (max). [6][19][20][21]
 
 Long-context memory depends mostly on attention design, not parameter count. Kolibri's post has a good example: Aleph Alpha tried scaling from 32B to 123B and kept getting better results, but 123B could handle only three concurrent 256k-token queries on two H100s, while 78B handled 18 and decoded 28% faster, so they chose 78B. Only 10 of its 50 layers attend to the full context; the other 40 use a 512-token window, which keeps decode compute and memory in those layers flat as context grows. [5] Mistral Large 4's attention design is not public yet, so you cannot currently estimate how many concurrent 1M-context requests it can serve on your hardware.
 
@@ -135,8 +135,8 @@ People skip this during selection and regret it later. I read each LICENSE file 
 | DeepSeek V4.1 Flash / V4-Pro-0813 | MIT [12] | No revenue threshold |
 | GLM-5.3-Flash | MIT [11][15] | No revenue threshold |
 | GLM-5.3 | GLM-5.3 License [10] | If you run a "Model as a Service" business (an API that lets third parties meaningfully control inputs, parameters, or training data) and your group's revenue exceeds $10B over any 12 consecutive months, you must pass Z.ai's security review before commercial use |
-| Kimi K3 | Kimi K3 License [13] | Model-as-a-Service with more than $20M revenue over 12 months requires a separate agreement before commercial use; products with more than 100M monthly active users or more than $20M monthly revenue must display "Kimi K3" prominently; purely internal use and use through Moonshot's official products or certified inference partners are exempt from both |
-| Qwen3.8-2.4T-A95B | Qwen3.8-Max License [14] | More than 100M MAU or $20M monthly revenue requires displaying the model name; Model-as-a-Service or "AI Work Assistant" (standalone coding or office-productivity products) businesses above $50M revenue over 12 months need a separate license; purely internal use is exempt |
+| Kimi K3 | Kimi K3 License [13] | Model-as-a-Service with more than \$20M revenue over 12 months requires a separate agreement before commercial use; products with more than 100M monthly active users or more than \$20M monthly revenue must display "Kimi K3" prominently; purely internal use and use through Moonshot's official products or certified inference partners are exempt from both |
+| Qwen3.8-2.4T-A95B | Qwen3.8-Max License [14] | More than 100M MAU or \$20M monthly revenue requires displaying the model name; Model-as-a-Service or "AI Work Assistant" (standalone coding or office-productivity products) businesses above \$50M revenue over 12 months need a separate license; purely internal use is exempt |
 | Mistral Medium 3.5 (reference) | Modified MIT [23] | If your company's (or your employer's) global consolidated monthly revenue exceeded $20M in the preceding month, you may not exercise any rights under the license and must seek a commercial license from Mistral |
 | Mistral Small 4 (reference) | Apache 2.0 [15] | No revenue threshold |
 | Mistral Large 4 | Not announced | — |
@@ -198,7 +198,7 @@ Mistral Large 4 is one of the few models in this set with image input, which AA 
 - Fetching the Reddit LocalLLaMA thread was blocked, so nothing in this post cites it.
 - GLM-5.3's active parameter count is not on its model card; an HN commenter says 40B, [3] but I found no primary source, so the table leaves it blank.
 - Mistral Large 4's pre-training duration, architecture details, license, and weight precision are all unpublished.
-- On the claim that Mistral Large 4 costs half as much as GLM-5.3 [3], I could only verify AA's cost per task ($1.13 versus $2.01) [6][19], not an official comparison.
+- On the claim that Mistral Large 4 costs half as much as GLM-5.3 [3], I could only verify AA's cost per task (\$1.13 versus \$2.01) [6][19], not an official comparison.
 
 ## Closing
 

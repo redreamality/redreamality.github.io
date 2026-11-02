@@ -66,7 +66,7 @@ Engineering translation: be honest about monitor vision. Fields you do not have 
 
 ## Cost: about 63× cheaper than LLM judges
 
-On the 19 benchmarks with an API LLM judge, one full pass at list prices costs about **$0.30** for Jev versus **$18.96** for the judges—about **63×** pooled. Jev is cheaper than the reference judge on 18 of 19. A conservative reprice—every judge at GPT-4o-mini rates, Jev asked only the generic question—still leaves Jev about **12×** cheaper pooled (median ~**3.3×**).[1]
+On the 19 benchmarks with an API LLM judge, one full pass at list prices costs about **\$0.30** for Jev versus **\$18.96** for the judges—about **63×** pooled. Jev is cheaper than the reference judge on 18 of 19. A conservative reprice—every judge at GPT-4o-mini rates, Jev asked only the generic question—still leaves Jev about **12×** cheaper pooled (median ~**3.3×**).[1]
 
 That matches the direction of our [rubric-judge post](/blog/jev-rubric-judges-cheaper-faster-correlated-errors/): typed decisions win on input-token billing, multi-question packing, and no long decode. The tasks differ—there, (unit, criterion) grading and correlated errors; here, binary alignment failure and base-rate/threshold behaviour. You can share the scaffold “cheap decision first, escalate when unsure,” not the fantasy that correlated errors are ~0 and cascades will buy large accuracy gains.
 

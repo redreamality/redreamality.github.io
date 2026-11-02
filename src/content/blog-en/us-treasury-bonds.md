@@ -19,7 +19,7 @@ US Treasury Bonds are among the most important financial instruments globally, a
 
 ## The Principle of Inverse Relationship
 
-Suppose there's a 10-year US Treasury bond with a face value of $100 and a coupon rate of 3%, paying $3 in interest annually. When market interest rates change:
+Suppose there's a 10-year US Treasury bond with a face value of \$100 and a coupon rate of 3%, paying \$3 in interest annually. When market interest rates change:
 
 1. **When market rates rise**:
    - Newly issued bonds offer higher interest
@@ -59,8 +59,8 @@ $$ = 24.3327 + 67.556 $$
   = $91.89
 
 This shows:
-1. Bond price drops from $100 to $91.89, a decline of about 8.11%
-2. New buyers purchasing this bond at $91.89 receive $3 annual interest
+1. Bond price drops from \$100 to \$91.89, a decline of about 8.11%
+2. New buyers purchasing this bond at \$91.89 receive \$3 annual interest
 3. Actual yield = 3/91.89 + (100-91.89)/(91.89×10) = 4%
 4. This way new buyers can obtain a 4% yield comparable to market rates
 

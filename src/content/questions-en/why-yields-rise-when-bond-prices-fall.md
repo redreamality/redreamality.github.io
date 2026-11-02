@@ -69,7 +69,7 @@ If investors worry about a bond issuer's ability to repay:
 - This pushes the price down
 - The lower price creates a higher yield
 
-For example, if a company's financial situation deteriorates, its bond price might fall from $1,000 to $900. The yield rises from 5% to 5.56% to compensate investors for the increased risk.
+For example, if a company's financial situation deteriorates, its bond price might fall from \$1,000 to \$900. The yield rises from 5% to 5.56% to compensate investors for the increased risk.
 
 ### Reason 3: Inflation Expectations
 
@@ -136,12 +136,12 @@ Imagine a bond with:
 - Current price: $900
 
 **Simple calculation:**
-Current yield = $50 ÷ $900 = 5.56%
+Current yield = \$50 ÷ \$900 = 5.56%
 
 **YTM calculation:**
 This considers that:
-- You'll receive $50/year for 10 years = $500
-- You'll receive $1,000 at maturity, but you paid $900, so you gain $100
+- You'll receive \$50/year for 10 years = \$500
+- You'll receive \$1,000 at maturity, but you paid \$900, so you gain $100
 - But money received in the future is worth less than money today
 
 The YTM for this bond would be approximately 6.6% - higher than the 5.56% current yield because you're getting your $100 principal gain over time.

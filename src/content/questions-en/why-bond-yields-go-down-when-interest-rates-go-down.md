@@ -36,13 +36,13 @@ Suppose you have a bond with:
 
 **Scenario A: Market rates are 5%**
 - The bond trades at par ($1,000)
-- Yield = $50 / $1,000 = 5%
+- Yield = \$50 / \$1,000 = 5%
 
 **Scenario B: Market rates fall to 4%**
 - New bonds are issued at 4%
 - Your 5% bond is now more valuable
 - It trades at a premium, say $1,050 (I'll explain why this specific price shortly)
-- Yield = $50 / $1,050 = 4.76%
+- Yield = \$50 / \$1,050 = 4.76%
 
 Notice how the yield dropped from 5% to 4.76% even though the coupon payment remained $50. The only thing that changed was the price.
 
@@ -61,9 +61,9 @@ For both bonds to coexist in the market, the 5% bond must trade at a price that 
 
 While current yield is simple, most bond investors look at **yield to maturity (YTM)**, which is more comprehensive. YTM considers not just the coupon payments but also the difference between the purchase price and face value.
 
-For example, if you buy a 5% coupon bond at $1,050 and hold it to maturity (assuming 10 years left and $1,000 face value), you'll:
+For example, if you buy a 5% coupon bond at \$1,050 and hold it to maturity (assuming 10 years left and \$1,000 face value), you'll:
 - Receive $50 per year for 10 years
-- Receive $1,000 at maturity (but you paid $1,050, so you lose $50)
+- Receive \$1,000 at maturity (but you paid \$1,050, so you lose $50)
 
 The YTM calculation accounts for both these cash flows and gives you an annualized return that accounts for the capital loss.
 

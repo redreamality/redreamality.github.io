@@ -9,7 +9,7 @@ This is one of the most fundamental questions in bond investing, and the answer 
 
 ## The Simple Answer
 
-If you have a bond with a **7% coupon rate** and a **$1,000 face value**, you will receive **$70 in interest each year**.
+If you have a bond with a **7% coupon rate** and a **\$1,000 face value**, you will receive **\$70 in interest each year**.
 
 The calculation is simple:
 ```
@@ -30,7 +30,7 @@ The **face value** (also called par value or principal) is the amount the bond w
 For most bonds, the face value is:
 - $1,000 for individual (retail) bonds
 - $10,000 or more for larger institutional bonds
-- $100 or even $1,000 for some government savings bonds
+- \$100 or even \$1,000 for some government savings bonds
 
 The face value is important because coupon rates are quoted as a percentage of face value, not the market price.
 
@@ -42,7 +42,7 @@ The name "coupon" comes from the old days when bonds had physical coupons that i
 
 ### Annual Interest Payment
 
-The **annual interest payment** is the actual dollar amount you'll receive each year. For most bonds, this is paid in two installments (semi-annually), so you'd receive $35 every six months instead of $70 all at once.
+The **annual interest payment** is the actual dollar amount you'll receive each year. For most bonds, this is paid in two installments (semi-annually), so you'd receive \$35 every six months instead of \$70 all at once.
 
 ## Why the Coupon Rate Is Based on Face Value
 
@@ -52,19 +52,19 @@ The answer is **no** - your interest payment is always calculated based on the f
 
 ### Example: Buying at a Premium
 
-Imagine you buy a 7% coupon, $1,000 face value bond for $1,100 (paying a premium).
+Imagine you buy a 7% coupon, \$1,000 face value bond for \$1,100 (paying a premium).
 
-- Your interest payment is still $1,000 × 7% = $70 per year
+- Your interest payment is still \$1,000 × 7% = \$70 per year
 - But you paid $1,100, so your actual return (yield) is less than 7%
-- Your current yield is $70 ÷ $1,100 = 6.36%
+- Your current yield is \$70 ÷ \$1,100 = 6.36%
 
 ### Example: Buying at a Discount
 
-Imagine you buy a 7% coupon, $1,000 face value bond for $900 (buying at a discount).
+Imagine you buy a 7% coupon, \$1,000 face value bond for \$900 (buying at a discount).
 
-- Your interest payment is still $1,000 × 7% = $70 per year
+- Your interest payment is still \$1,000 × 7% = \$70 per year
 - But you only paid $900, so your actual return (yield) is more than 7%
-- Your current yield is $70 ÷ $900 = 7.78%
+- Your current yield is \$70 ÷ \$900 = 7.78%
 
 The coupon payment stays the same, but your effective return changes based on what you paid.
 
@@ -76,7 +76,7 @@ Most bonds pay interest **semi-annually** (twice a year), not annually. This aff
 
 For a 7% coupon bond with $1,000 face value:
 - Annual interest = $70
-- Semi-annual payment = $70 ÷ 2 = $35
+- Semi-annual payment = \$70 ÷ 2 = \$35
 - You receive $35 every 6 months
 
 This is standard for:
@@ -98,7 +98,7 @@ This is more common for:
 ### Quarterly Payments
 
 A few bonds pay interest quarterly (four times per year):
-- Quarterly payment = $70 ÷ 4 = $17.50
+- Quarterly payment = \$70 ÷ 4 = \$17.50
 - You receive $17.50 every 3 months
 
 ## The Difference Between Coupon Rate and Yield
@@ -125,10 +125,10 @@ This is where many new investors get confused. The **coupon rate** and **yield**
 - Market price: $950
 
 **Coupon rate calculation:**
-- Annual interest = $1,000 × 7% = $70
+- Annual interest = \$1,000 × 7% = \$70
 
 **Yield calculation:**
-- Current yield = $70 ÷ $950 = 7.37%
+- Current yield = \$70 ÷ \$950 = 7.37%
 
 The coupon rate stays 7%, but the yield is 7.37% because you bought the bond at a discount.
 
@@ -156,7 +156,7 @@ If you buy bonds denominated in foreign currency:
 ### 4. Inflation
 
 Inflation erodes the purchasing power of your interest payments:
-- At 3% inflation, your $70 in year 10 is worth only about $52 in today's dollars
+- At 3% inflation, your \$70 in year 10 is worth only about \$52 in today's dollars
 - This affects your real (inflation-adjusted) return
 
 ## Real-World Examples
@@ -168,7 +168,7 @@ You buy a 10-year Treasury bond:
 - Coupon rate: 7%
 - You pay: $10,000 (at par)
 
-Annual interest = $10,000 × 7% = $700
+Annual interest = \$10,000 × 7% = \$700
 You receive: $350 every 6 months
 
 ### Example 2: Corporate Bond
@@ -178,9 +178,9 @@ You buy a corporate bond:
 - Coupon rate: 7%
 - You pay: $1,050 (at a premium)
 
-Annual interest = $1,000 × 7% = $70
-You receive: $35 every 6 months
-Your current yield = $70 ÷ $1,050 = 6.67%
+Annual interest = \$1,000 × 7% = \$70
+You receive: \$35 every 6 months
+Your current yield = \$70 ÷ $1,050 = 6.67%
 
 ### Example 3: Municipal Bond
 
@@ -189,7 +189,7 @@ You buy a tax-free municipal bond:
 - Coupon rate: 7%
 - You pay: $5,000
 
-Annual interest = $5,000 × 7% = $350
+Annual interest = \$5,000 × 7% = \$350
 This interest is generally free from federal (and sometimes state) income tax
 
 ## How to Calculate for Different Face Values
@@ -220,7 +220,7 @@ Remember: the coupon rate tells you what interest payment you'll receive, based 
 
 ### Mistake 2: Forgetting Payment Frequency
 
-Most bonds pay semi-annually, not annually. If you're counting on $70 per year, remember you'll probably receive it as two $35 payments.
+Most bonds pay semi-annually, not annually. If you're counting on \$70 per year, remember you'll probably receive it as two \$35 payments.
 
 ### Mistake 3: Ignoring Credit Risk
 

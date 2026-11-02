@@ -17,7 +17,7 @@ This relationship might seem counterintuitive at first. After all, if bonds are 
 
 To really grasp this relationship, we need to understand how bonds work. When you buy a bond, you're essentially lending money to the issuer (whether that's a corporation, a government, or a municipality). In return, the issuer promises to pay you interest on that loan at regular intervals (usually semi-annually or annually), and then return your principal ( "par valuethe face value or") when the bond matures.
 
-Let's say you buy a 10-year government bond with a face value of $1,000 and a coupon rate of 5%. This means you'll receive $50 in interest payments every year (5% of $1,000) for the next 10 years, and then get your $1,000 back at the end. These payments are "fixed" - they don't change regardless of what happens to interest rates in the broader economy.
+Let's say you buy a 10-year government bond with a face value of \$1,000 and a coupon rate of 5%. This means you'll receive \$50 in interest payments every year (5% of \$1,000) for the next 10 years, and then get your \$1,000 back at the end. These payments are "fixed" - they don't change regardless of what happens to interest rates in the broader economy.
 
 ## The Market Price: Where Supply and Demand Meet
 
@@ -29,7 +29,7 @@ The market price of a bond is determined by the present value of all future cash
 
 Now, let's get to the heart of the matter: why do bond prices fall when interest rates rise?
 
-Imagine you've just purchased a 10-year bond with a 5% coupon rate and a $1,000 face value. You paid $1,000 for this bond, which means you're getting a yield (return) of approximately 5%.
+Imagine you've just purchased a 10-year bond with a 5% coupon rate and a \$1,000 face value. You paid \$1,000 for this bond, which means you're getting a yield (return) of approximately 5%.
 
 Then, the Federal Reserve raises interest rates by 1%. Suddenly, new bonds are being issued with coupon rates of 6%. This is great news for new investors, but not so great for you. Your bond is still paying only 5%, which is now below market rates.
 
@@ -45,13 +45,13 @@ Let me give you a concrete example. Suppose you have a bond with:
 - Years to maturity: 10
 - Current price: $1,000
 
-Your current yield is $50 / $1,000 = 5%.
+Your current yield is \$50 / \$1,000 = 5%.
 
 Now, interest rates rise, and new bonds offer 6% coupon rates. What should your bond's price be to offer the same 6% yield?
 
-If the bond pays $50 annually and we want a 6% yield, the price should be approximately $50 / 0.06 = $833.33.
+If the bond pays \$50 annually and we want a 6% yield, the price should be approximately \$50 / 0.06 = $833.33.
 
-So, the bond's price dropped from $1,000 to about $833 - a decline of about 16.7%. That's a significant loss for an investor who bought at $1,000!
+So, the bond's price dropped from \$1,000 to about \$833 - a decline of about 16.7%. That's a significant loss for an investor who bought at $1,000!
 
 ## Duration: Measuring Sensitivity to Interest Rate Changes
 

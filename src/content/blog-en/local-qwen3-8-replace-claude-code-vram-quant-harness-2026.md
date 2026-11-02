@@ -165,7 +165,7 @@ One rare same-task comparison: a one-line prompt (five physics scenes on one pag
 
 Reversed—Qwen plans, Sonnet codes—it got 4/5 in 14 minutes but cost more than Sonnet alone, since every cloud worker re-read the context.[43] One task, one team, but a typical shape: local saves money and pays in time and some quality.
 
-Usage itself also changes. The RTX PRO 6000 poster saw that without per-token billing, people stop trimming context and stop killing runs early; two users burned about 950M and 900M tokens in a week.[13] Local compute is a fixed cost: worth it when kept busy, rarely at a few days a month. Hardware prices exist only as forum quotes: a 128GB Strix Halo at $3,149, about $5,000 with an R9700;[44] two 64GB CMP 170HX cards at roughly $6,000–7,000 in Europe.[45]
+Usage itself also changes. The RTX PRO 6000 poster saw that without per-token billing, people stop trimming context and stop killing runs early; two users burned about 950M and 900M tokens in a week.[13] Local compute is a fixed cost: worth it when kept busy, rarely at a few days a month. Hardware prices exist only as forum quotes: a 128GB Strix Halo at \$3,149, about \$5,000 with an R9700;[44] two 64GB CMP 170HX cards at roughly $6,000–7,000 in Europe.[45]
 
 A billing rule for hybrids: when Claude Code uses a gateway credential, requests drop the subscription login and its limits; if the gateway forwards to a paid upstream, the credential owner pays per token.[36] For "hard tasks on the subscription, easy ones local," keep two separate configurations rather than mixing them.
 
