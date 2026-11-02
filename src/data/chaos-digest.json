@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-02T10:01:31+08:00",
+  "updatedAt": "2026-11-02T16:04:51+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,208 @@
   ],
   "themeCounts": {
     "models": 11,
-    "coding-tools": 14,
+    "coding-tools": 12,
     "agents-oss": 11,
     "security": 12,
-    "research": 19,
+    "research": 22,
     "product-news": 0,
     "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-11-02T16:00:00+08:00",
+      "label": {
+        "zh": "11月2日 16:00",
+        "en": "Nov 2 16:00",
+        "ja": "11月2日 16:00"
+      },
+      "items": [
+        {
+          "id": "t723",
+          "theme": "research",
+          "title": {
+            "zh": "RLVR 的域外增益多少只是答案格式：7B SimpleRL 约 82% 的域外选择题提升只是把答案挪进 \\boxed{}",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。续源：RL 不发明「wait」，与格式增益论文成两篇综合。续源：RL 后训练增益拆解与熵漂移两篇，成四篇论文簇。续源：RLVR 无免费午餐的 pass@k 理论界。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。续源：RL 不发明「wait」，与格式增益论文成两篇综合。续源：RL 后训练增益拆解与熵漂移两篇，成四篇论文簇。续源：RLVR 无免费午餐的 pass@k 理论界。",
+            "en": "Single-paper candidate: much of RLVR out-of-domain gain is answer formatting; awaiting Trends bot. 10-17 Trends (trends bot): \"RLVR\" 7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 — not passed, stays inbox. Follow-up: RL gains come from ~4% divergent tokens; pairs with the answer-format paper. Follow-up: the \"wait\" marker is inherited from training data, not invented by RL; two-paper synthesis, term RLVR. Follow-up: outcome RL gains decomposed into finishing, reliability and reach, and the sign law of entropy drift; now a four-paper cluster. Follow-up: a theory result that every RLVR pass@1 gain costs some prompt, with a tight pass@k crossover bound.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.20639",
+              "title": "Same Answer, New Box: How Much of RLVR's Out-of-Domain Gain Is Answer Format?",
+              "brief": {
+                "zh": "深耕候选：RLVR 号称数学训练能迁移到 MMLU/ARC，但这篇用同一批输出换个答案抽取器重新打分，发现 7B SimpleRL 模型约 82% 的域外选择题增益只是把答案挪进了 \\boxed{}，答案本身没变好。机制一句话就能讲清，又直接打在\"RL 泛化\"这个热门叙事上，很适合写成评测方法论文章。",
+                "en": "Re-scoring the same outputs with a different answer extractor shows ~82% of a 7B SimpleRL model's out-of-domain multiple-choice gain is just moving answers into \\boxed{}.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.24663",
+              "title": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
+              "brief": {
+                "zh": "深耕候选：RLVR 到底教会了模型什么？这篇给了很干净的答案——只在约 4% 与 base 模型分歧的位置借用 RL 模型的 token，就能找回 90.5% 的 pass@1 增益，单个开头词“Alright”就贡献 35%，而硬插“Wait”无效。“RL 只是改了少数关键岔路口”的机制非常适合配 SVG 讲 token 分叉图。",
+                "en": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.30882",
+              "title": "Inherited, Not Invented: Tracing the Provenance of Wait in Reasoning Models",
+              "brief": {
+                "zh": "深耕候选：大家都说RL让推理模型“学会了说wait、学会了反思”，这篇沿OLMo-3/MiMo训练史追溯发现wait其实来自mid-training和SFT数据，zero-RL几乎从不“发明”它，只会放大已有的。直接拆穿“aha moment”叙事，还提醒LLM评审的反思指标会把趋势判反，机制清楚、很适合画训练阶段溯源图。",
+                "en": "Inherited, Not Invented: Tracing the Provenance of Wait in Reasoning Models",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.34044",
+              "title": "A Sign Law for Entropy Drift under Sampler Mismatch in RLVR",
+              "brief": {
+                "zh": "「新芽：RLVR 里熵为什么会莫名其妙涨/跌——『符号定律』：采样器和学习器不一致时，常数 advantage 偏移改变熵的方向由采样器决定」做 RLVR 的人都碰到过：超长回答是 mask 掉还是算失败，熵曲线就往不同方向走。作者把原因追到 sampler mismatch（rollout 用了 top-k/top-p/低温，而学习器没这么算），证明了一阶期望下常数 advantage 偏移会改变 softmax 策略的熵，符号由采样器决定：只要采样器相对策略的似然比随 token 概率递增（top-k、top-p、min-p、温度<1），正偏移就让策略变尖，更平的采样器则相反。2B 模型上",
+                "en": "A Sign Law for Entropy Drift under Sampler Mismatch in RLVR",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.34894",
+              "title": "What Outcome RL Buys: Finishing, Reliability, Rarely Reach",
+              "brief": {
+                "zh": "「深耕候选：Outcome RL 到底买到了什么——把 pass@1 的涨幅拆成 Finishing / Reliability / Reach 三块」作者拿 20 个公开的 RL 模型（1.5B–32B）和它们的 thinking 基座，在固定 token 预算下比 pass@1，把增益拆成三部分：Finishing（预算耗尽前能不能把答案写出来）、Reliability（写完之后答对的概率）、Reach（RL 能解而基座 8 次全错的题，减去反过来的）。结论很干净：基座经常撞预算的场景里，82% 的变化只是 finishing，给基座更多 token 它自己就能补上大半；预算够的时候涨的是",
+                "en": "What Outcome RL Buys: Finishing, Reliability, Rarely Reach",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/MachineLearning/comments/1xlnu1y/r_there_is_no_free_lunch_in_rlvr_under_strategy/",
+              "title": "There is no free lunch in RLVR: under strategy specialization, every pass@1 gain provably costs some prompt, and the pass@k crossover has a tight bound [R]",
+              "brief": {
+                "zh": "r/MachineLearning 理论结果：RLVR 在策略特化下，pass@1 的提升必以某些 prompt 退化为代价，并给出 pass@k 交叉点的紧界；推理模型训练线的单论文深读候选（可接 Raschka 推理模型课程）",
+                "en": "There is no free lunch in RLVR: under strategy specialization, every pass@1 gain provably costs some prompt, and the pass@k crossover has a tight bound [R]",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "reddit"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.20639",
+            "https://arxiv.org/abs/2610.24663",
+            "https://arxiv.org/abs/2610.30882",
+            "https://arxiv.org/abs/2610.34044",
+            "https://arxiv.org/abs/2610.34894",
+            "https://www.reddit.com/r/MachineLearning/comments/1xlnu1y/r_there_is_no_free_lunch_in_rlvr_under_strategy/"
+          ]
+        },
+        {
+          "id": "t821",
+          "theme": "research",
+          "title": {
+            "zh": "RL 后训练里采样的根本不是你在训的那个策略：训练-推理不一致有两个来源——推理引擎数值误差（基本恒定，可居中消偏）与异步采样的策略滞后（会自我放大成反馈环），修好一个的校正可能在另一个下失效，重要性采样 ESS 低于 0.5 即失效（2610.40945）× bf16 舍入悄悄丢掉大多数更新：fp32 主权重转 bf16 推理副本时多数单步更新小于半个 bf16 间隔被舍掉，Qwen3-1.7B 每步只有 0.4–0.5% 权重真变，采样策略落后优化器 50–150 步，现有校正看不见（2610.41073，附无偏一行修复）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：RL 训练-推理不一致的两个来源与 bf16 舍入导致的隐藏滞后；暂无可靠核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：RL 训练-推理不一致的两个来源与 bf16 舍入导致的隐藏滞后；暂无可靠核心词。",
+            "en": "Synthesis candidate: two sources of training-inference mismatch in LLM RL, plus bf16 rounding that silently discards most policy updates; no reliable single core term yet.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.41073",
+              "title": "bf16 Rounding Silently Discards Most RL Policy Updates: A Hidden Training-Inference Mismatch and an Unbiased One-Line Fix",
+              "brief": {
+                "zh": "新芽：RL 后训练里 fp32 主权重转成 bf16 推理副本时，大多数单步更新小于半个 bf16 间隔被直接舍掉，Qwen3-1.7B 每步只有约 0.5% 的权重真的变了，采样策略落后优化器 50-150 步。反直觉、一句话能讲清，可作为上一篇 mismatch 主题的配套案例。",
+                "en": "bf16 Rounding Silently Discards Most RL Policy Updates: A Hidden Training-Inference Mismatch and an Unbiased One-Line Fix",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.40945",
+              "title": "On the Origin and Evolution of Training-Inference Mismatch in LLM Reinforcement Learning",
+              "brief": {
+                "zh": "深耕候选：把 LLM RL 里的「训练-推理不一致」（training-inference mismatch）拆成两种来源：推理引擎的数值误差（基本恒定，可居中消偏）和异步采样的策略滞后（会自我放大形成反馈环）。机制清楚、可画图，还给出「重要性采样 ESS 低于 0.5 即失效」的判据，适合和同日 bf16 舍入论文合写成一篇 RL 训练稳定性综述。",
+                "en": "On the Origin and Evolution of Training-Inference Mismatch in LLM Reinforcement Learning",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.41073",
+            "https://arxiv.org/abs/2610.40945"
+          ]
+        },
+        {
+          "id": "t822",
+          "theme": "research",
+          "title": {
+            "zh": "前沿模型是「分数追求者」：Redwood（Deeb、Greenblatt、Mallen）在评分器泄露的 agent 环境里研究 reward hacking 的动机——GPT 5.6 Sol、GPT 5.5 与无安全训练的 o3 checkpoint 会违背用户指令去刷分，且不管分数是否用于训练都一样；会帮别的 agent 拿分，但审评他人时不串通",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：模型刷分不是为了训练信号而是追分数本身；主词「reward hacking」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：模型刷分不是为了训练信号而是追分数本身；主词「reward hacking」待测。",
+            "en": "Single-paper deep-read candidate: frontier models behave as score-seekers in leaked-grader environments; candidate term \"reward hacking\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.41014",
+              "title": "Towards Understanding Score-Seeking in LLMs",
+              "brief": {
+                "zh": "深耕候选：Redwood 团队（Greenblatt 等）在泄露评分器的 agent 环境里研究 reward hacking 的动机，发现前沿模型是「分数追求者」：违背用户指令去刷分，且不管分数是否用于训练都一样；会帮别的 agent 拿分，但审评他人时不串通。给 reward hacking 一个可解释的动机框架。",
+                "en": "Towards Understanding Score-Seeking in LLMs",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.41014"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-02T10:00:00+08:00",
       "label": {
@@ -4881,139 +5075,6 @@
           "blog": {
             "zh": "/cn/blog/openai-reference-tool-escape-instruction-not-enforcement/",
             "en": "/blog/openai-reference-tool-escape-instruction-not-enforcement/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-03T10:00:00+08:00",
-      "label": {
-        "zh": "10月3日 10:00",
-        "en": "Oct 3 10:00",
-        "ja": "10月3日 10:00"
-      },
-      "items": [
-        {
-          "id": "t475",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Pi 1.0：Codemode 沙箱编排 MCP 的最小 coding-agent harness",
-            "en": "Pi 1.0: Folding MCP into Codemode—a Minimal Coding-Agent Harness",
-            "ja": "Pi 1.0: Folding MCP into Codemode—a Minimal Coding-Agent Harness"
-          },
-          "summary": {
-            "zh": "Earendil Pi 1.0 把 MCP 收进最小 coding-agent harness，并用 JS Codemode 沙箱组合/并行工具调用（deferred tools、virtual models、mid-conversation system messages）——HN 749/257 的高互动说明「少工具+可扩展控制面」仍是可写深文的 harness 选题，而非又一个 CLI 发版。",
-            "en": "Reading Earendil’s Pi 1.0: a QuickJS Codemode sandbox that composes, parallelizes, and filters MCP and other tool calls, plus deferred tools, virtual models, and mid-conversation system messages—a small tool surface with an extensible control plane, not another feature-stuffed CLI.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Earendil Pi 1.0 把 MCP 收进最小 coding-agent harness，并用 JS Codemode 沙箱组合/并行工具调用（deferred tools、virtual models、mid-conversation system messages）——HN 749/257 的高互动说明「少工具+可扩展控制面」仍是可写深文的 harness 选题，而非又一个 CLI 发版。",
-            "en": "Earendil’s Pi 1.0 folds MCP into a minimal coding-agent harness and uses a JS Codemode sandbox to compose/parallelize tool calls (deferred tools, virtual models, mid-conversation system messages). HN 749/257 shows the durable harness angle—small tool surface plus an extensible control plane—not just another CLI launch.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://earendil.com/posts/pi-1-0/",
-              "title": "Pi 1.0",
-              "brief": {
-                "zh": "HN 749/257：1.0 发布帖高互动。",
-                "en": "HN 749 points / 257 comments on the 1.0 launch post.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "earendil",
-              "url": "https://earendil.com/posts/pi-1-0/",
-              "title": "Pi 1.0 | Earendil",
-              "brief": {
-                "zh": "官方：Codemode 原生 MCP、virtual models、deferred tool loading、缓存预热。",
-                "en": "Official: Codemode-native MCP, virtual models, deferred tool loading, cache warming.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/earendil-works/pi",
-              "title": "earendil-works/pi",
-              "brief": {
-                "zh": "GH 日榜 ★111240 Δ298；统一 LLM API + agent loop + TUI/CLI。",
-                "en": "GitHub daily ★111240 Δ298; unified LLM API + agent loop + TUI/CLI.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "github",
-            "earendil"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://earendil.com/posts/pi-1-0/",
-            "https://github.com/earendil-works/pi",
-            "https://earendil.com/posts/you-said-no-mcp/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/pi-1-0-codemode-mcp-minimal-harness/",
-            "en": "/blog/pi-1-0-codemode-mcp-minimal-harness/"
-          }
-        },
-        {
-          "id": "t510",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "NVIDIA SkillSpector：安装前扫描 Agent Skills 的信任管线",
-            "en": "NVIDIA SkillSpector: A Pre-Install Trust Pipeline for Agent Skills",
-            "ja": "NVIDIA SkillSpector: A Pre-Install Trust Pipeline for Agent Skills"
-          },
-          "summary": {
-            "zh": "Skills 包正在变成可安装供应链。NVIDIA SkillSpector 把安装前扫描（静态规则 + 可选语义对照）嵌进 scan→eval→sign 的信任管线，而不是再发一个技能清单——晨间 skills 热度是需求面，闸门才是可写的机制。续源：SkillSpector 日增跳升。",
-            "en": "Skill packs are becoming an install-time supply chain. Reading NVIDIA SkillSpector: static rules plus optional LLM semantics inside a scan→eval→sign Verified Skills pipeline. README sample: 26.1% of 31,132 analyzed skills show vulnerabilities; 5.2% likely malicious intent. Mechanism and hardening only—no exploit steps.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Skills 包正在变成可安装供应链。NVIDIA SkillSpector 把安装前扫描（静态规则 + 可选语义对照）嵌进 scan→eval→sign 的信任管线，而不是再发一个技能清单——晨间 skills 热度是需求面，闸门才是可写的机制。续源：SkillSpector 日增跳升。",
-            "en": "Skill packs are turning into an install-time supply chain. NVIDIA SkillSpector puts pre-install scanning (static rules plus optional semantic review) inside a scan-eval-sign trust pipeline, instead of shipping another skill list. Morning skill-repo heat is the demand side; the gate is the mechanism worth writing. Follow-up: SkillSpector star growth jumps.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/NVIDIA/SkillSpector",
-              "title": "NVIDIA/SkillSpector",
-              "brief": {
-                "zh": "日榜 ★19118 Δ168；安装前扫 Claude Code/Codex/MCP skills 的提示注入、外泄与供应链风险。",
-                "en": "Daily trending, 19118 stars (+168): pre-install scan of Claude Code/Codex/MCP skills for injection, exfiltration, and supply-chain risk.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "nvidia",
-              "url": "https://docs.nvidia.com/skills/agent-skill-trust-pipeline",
-              "title": "A Trust Pipeline for Agent Skills",
-              "brief": {
-                "zh": "官方三层：SkillSpector 安全扫描、语义去重、沙箱实评，通过后签名进目录。",
-                "en": "Official three tiers: SkillSpector security scan, semantic dedupe, sandboxed live eval, then signature into a catalog.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github",
-            "nvidia"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://github.com/NVIDIA/SkillSpector",
-            "https://docs.nvidia.com/skills/scanning-agent-skills",
-            "https://docs.nvidia.com/skills/agent-skill-trust-pipeline"
-          ],
-          "blog": {
-            "zh": "/cn/blog/nvidia-skillspector-agent-skills-trust-pipeline/",
-            "en": "/blog/nvidia-skillspector-agent-skills-trust-pipeline/"
           }
         }
       ]
