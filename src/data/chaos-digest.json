@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-01T15:56:25+08:00",
+  "updatedAt": "2026-11-02T10:01:31+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,204 @@
   ],
   "themeCounts": {
     "models": 11,
-    "coding-tools": 15,
+    "coding-tools": 14,
     "agents-oss": 11,
     "security": 12,
-    "research": 22,
+    "research": 19,
     "product-news": 0,
     "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-11-02T10:00:00+08:00",
+      "label": {
+        "zh": "11月2日 10:00",
+        "en": "Nov 2 10:00",
+        "ja": "11月2日 10:00"
+      },
+      "items": [
+        {
+          "id": "t780",
+          "theme": "models",
+          "title": {
+            "zh": "agent 要不要拆：单循环 + skills vs 子 agent 编排 vs 去中心化——Anthropic Applied AI 称带 skills 的单循环常优于子 agent 设计（某客户快约 2×，Claude Code 系统提示砍 80%+，给出何时才该用子 agent 与分阶段合并法）× MSR 开源 Agensh（无中心 orchestrator，1→1,024 agent，ProgramBench 最难 5 题 19.31%→28.78%）× GVS5H（HN：5 个 Qwen3.8-27B 编排后号称追平 Fable 5）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。续源：DeepSeek router-worker superagent 原型。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。续源：DeepSeek router-worker superagent 原型。",
+            "en": "Synthesis candidate: fold subagents into one skills-equipped loop (Anthropic) vs decentralized 1,024-agent harness (MSR Agensh) vs five small models orchestrated to match a frontier model (GVS5H); no clean core term. Follow-up: video on Anthropic subagent guidance. Follow-up: video on using a manager agent to orchestrate coding agents. Follow-up: DeepSeek Harness team open-sources a router-worker superagent prototype with per-ticket sessions.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://github.com/slee-persis/GVS5H",
+              "title": "'Five Qwen3.8-27B models match Fable 5 Using GVS5H Harness'",
+              "brief": {
+                "zh": "HN 141/48：用 GVS5H harness 把 5 个 Qwen3.8-27B 小模型编排起来，号称追平 Fable 5；harness 优先于模型规模的证据，可接 Qwen3.8 本地编码 Agent、harness 工程与上下文压缩线（需核实评测口径，避免基准虚高）。",
+                "en": "HN 141/48: the GVS5H harness orchestrates five Qwen3.8-27B models and claims to match Fable 5; evaluation setup unverified.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
+              "title": "Building agents: When to fold subagents into your main agent loop（Anthropic Applied AI：单循环 + skills 常优于子 agent 编排）",
+              "brief": {
+                "zh": "站内积累线：agent loop / harness / skills 的一手官方指导，与今早 Decoder ‘fancy harness 更贵不更好’、10-23 Agent Skills 捐给 AAIF、Latent Space dynamic workflows 形成对照/张力（编排 vs 单循环）。10-22 发布，前几轮未归档，补录。tag exploit-candidate。",
+                "en": "Anthropic Applied AI: a single agent loop with skills often beats subagent designs on quality, cost and latency (one customer ~2x faster; Claude Code system prompt cut 80%+); lists when subagents still pay off and a staged merge path driven by end-to-end evals.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
+              "title": "Microsoft Research 开源 Agensh：无中心 orchestrator 的去中心化多 agent harness（1→1,024 agents，ProgramBench）",
+              "brief": {
+                "zh": "站内积累线（agent harness/loop）：与今早 Decoder ‘fancy harness 更贵不更好’、已提交的 Anthropic ‘fold subagents into main loop’（单循环 vs 编排）、Latent Space dynamic workflows 构成‘去中心化 vs 编排 vs 单循环’三方对照。topics.md 已有 t050（Agensh 论文，站长 10-13 确认开写候选）——本条不是新话题，新增事实=10-24 开源 + GPT-6.1-sol 新数据 + 循环/服务架构细节 + 与 Claude Code agent teams",
+                "en": "Microsoft Research open-sources Agensh: no central orchestrator, identical workers on a 5-step claim/verify/merge loop over Gitea and Mattermost; ProgramBench hard-5 average 19.31% (1 agent) to 28.78% (128), with emergent reviewers and integrators at scale. Read via MarkTechPost plus README.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=ybx0mmd22pQ",
+              "title": "Anthropic's New Subagent Rules Will Change How You Build",
+              "brief": {
+                "zh": "Over 20k views in under 24h; about new Anthropic subagent guidance, covered by a second video (KwmrSON2n-g, 22k)",
+                "en": "Anthropic's New Subagent Rules Will Change How You Build",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=to4Me479A2s",
+              "title": "Grok Bot + Claude Code, Why is Everyone Switching to This?",
+              "brief": {
+                "zh": "Highest on-topic VPH over 20k this run: setting up an agent as the manager of coding agents (Claude Code, Codex, Cursor cloud agents) that plans, hands off, checks proof, and reports back.",
+                "en": "Grok Bot + Claude Code, Why is Everyone Switching to This?",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://github.com/deepseek-ai/dsh-superagent-prototype",
+              "title": "DeepSeek Harness team open-sources dsh-superagent: proactive router-worker coding agent with per-Ticket sessions",
+              "brief": {
+                "zh": "New since 11-01 PM sweep; not in archive 1031/1101, inbox, or topics.md. Frontier lab shipping an open harness design (router-worker, per-task session isolation, authorization doc, minimal-human-attention principle) — 站内积累线 harness / agent-loop / sandbox (cf. t350 harness adapter, t780 agent 要不要拆, t",
+                "en": "DeepSeek Harness team open-sources dsh-superagent: proactive router-worker coding agent with per-Ticket sessions",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "media",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/slee-persis/GVS5H",
+            "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
+            "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
+            "https://www.youtube.com/watch?v=ybx0mmd22pQ",
+            "https://www.youtube.com/watch?v=to4Me479A2s",
+            "https://github.com/deepseek-ai/dsh-superagent-prototype"
+          ]
+        },
+        {
+          "id": "t781",
+          "theme": "other",
+          "title": {
+            "zh": "OpenAI 宣布 AI 协助的数学/计算机/物理三项新发现——其中硬结果「指数时间假设（ETH）被证伪」（OpenAI math 仓预印本，HN 267；若成立影响极大，验证状态待核）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。续源：van der Waerden 数 Lean 4 证明。续源：Leo de Moura 谈 AI 与 Lean。续源：陶哲轩「数学已经变了」。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。续源：van der Waerden 数 Lean 4 证明。续源：Leo de Moura 谈 AI 与 Lean。续源：陶哲轩「数学已经变了」。",
+            "en": "High-stakes unverified claim: OpenAI announces AI-assisted discoveries including a preprint claiming the Exponential Time Hypothesis is false; verify before any deep read (cf. earlier retractions). Follow-up: classification of finite simple groups formalized in Lean. Follow-up: van der Waerden number W(2;3,21)=416 proved with a Lean 4 kernel-checked proof. Follow-up: Lean creator Leo de Moura interview on AI and formal verification. Follow-up: Terry Tao, \"Mathematics has changed. Let's act like it\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
+              "title": "'Announcing three new discoveries in mathematics, computer science, and physics'",
+              "brief": {
+                "zh": "HN 430/162：OpenAI 宣布 AI 协助的数学/计算机/物理三项发现；同轮 HN 267「The Exponential Time Hypothesis Is False」(https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf, https://news.ycombinator.com/item?id=50251661) 是其中的硬结果，ETH 被证伪若成立影响极大；适合 AI for science",
+                "en": "OpenAI announces three AI-assisted discoveries in mathematics, computer science and physics; a companion preprint in its math repo claims the Exponential Time Hypothesis is false. HN 430/162 and 267. Verification status unknown.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://cfsg.axiommath.ai/",
+              "title": "'Classification of Finite Simple Groups Formalized in Lean'",
+              "brief": {
+                "zh": "HN 169/44：有限单群分类在 Lean 中形式化完成（axiommath.ai）；AI for math/形式化证明线，接 10/27 OpenAI 三项发现与 ETH 证伪稿（Lobsters 同日也有 ETH 帖，https://lobste.rs/s/pq6ju6）。",
+                "en": "'Classification of Finite Simple Groups Formalized in Lean'",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/MachineLearning/comments/1xivpue/w2321_416_a_van_der_waerden_number_conjectured_by/",
+              "title": "W(2;3,21) = 416 — van der Waerden number conjectured by Kullmann (2010) proved with Lean 4 kernel-checked proof [R]",
+              "brief": {
+                "zh": "组合数学猜想经 Lean 4 内核校验证明，发在 r/ML（是否有 AI 参与待核）；可并入 AI for math / 形式化（CFSG in Lean、OpenAI discoveries）综述",
+                "en": "W(2;3,21) = 416 — van der Waerden number conjectured by Kullmann (2010) proved with Lean 4 kernel-checked proof [R]",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://thedataexchange.media/leo-de-moura-lean-aws/",
+              "title": "AI, Lean, and the Future of Formal Verification, with Lean Creator Leo de Moura",
+              "brief": {
+                "zh": "Lean 作者 Leo de Moura 谈 AI 与形式化验证前景；AI for math / 形式化线的权威访谈素材（CFSG in Lean、van der Waerden 416）",
+                "en": "AI, Lean, and the Future of Formal Verification, with Lean Creator Leo de Moura",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://terrytao.wordpress.com/2026/11/01/mathematics-has-changed-lets-act-like-it/",
+              "title": "Mathematics has changed. Let's act like it (Terry Tao)",
+              "brief": {
+                "zh": "陶哲轩撰文称数学已经变了（AI 与形式化介入研究流程），呼吁数学界相应调整；AI for math 线的权威锚点，可与 Leo de Moura 访谈、CFSG in Lean、van der Waerden 416、OpenAI discoveries 合成综述",
+                "en": "Mathematics has changed. Let's act like it (Terry Tao)",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "reddit"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
+            "https://cfsg.axiommath.ai/",
+            "https://www.reddit.com/r/MachineLearning/comments/1xivpue/w2321_416_a_van_der_waerden_number_conjectured_by/",
+            "https://thedataexchange.media/leo-de-moura-lean-aws/",
+            "https://terrytao.wordpress.com/2026/11/01/mathematics-has-changed-lets-act-like-it/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-01T10:00:00+08:00",
       "label": {
@@ -89,164 +279,6 @@
             "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign",
             "https://www.anthropic.com/research/distillation-defenses",
             "https://twitter.com/jiahaoshao1/status/2116475922190922088"
-          ]
-        },
-        {
-          "id": "t780",
-          "theme": "models",
-          "title": {
-            "zh": "agent 要不要拆：单循环 + skills vs 子 agent 编排 vs 去中心化——Anthropic Applied AI 称带 skills 的单循环常优于子 agent 设计（某客户快约 2×，Claude Code 系统提示砍 80%+，给出何时才该用子 agent 与分阶段合并法）× MSR 开源 Agensh（无中心 orchestrator，1→1,024 agent，ProgramBench 最难 5 题 19.31%→28.78%）× GVS5H（HN：5 个 Qwen3.8-27B 编排后号称追平 Fable 5）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。",
-            "en": "Synthesis candidate: fold subagents into one skills-equipped loop (Anthropic) vs decentralized 1,024-agent harness (MSR Agensh) vs five small models orchestrated to match a frontier model (GVS5H); no clean core term. Follow-up: video on Anthropic subagent guidance. Follow-up: video on using a manager agent to orchestrate coding agents.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://github.com/slee-persis/GVS5H",
-              "title": "'Five Qwen3.8-27B models match Fable 5 Using GVS5H Harness'",
-              "brief": {
-                "zh": "HN 141/48：用 GVS5H harness 把 5 个 Qwen3.8-27B 小模型编排起来，号称追平 Fable 5；harness 优先于模型规模的证据，可接 Qwen3.8 本地编码 Agent、harness 工程与上下文压缩线（需核实评测口径，避免基准虚高）。",
-                "en": "HN 141/48: the GVS5H harness orchestrates five Qwen3.8-27B models and claims to match Fable 5; evaluation setup unverified.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
-              "title": "Building agents: When to fold subagents into your main agent loop（Anthropic Applied AI：单循环 + skills 常优于子 agent 编排）",
-              "brief": {
-                "zh": "站内积累线：agent loop / harness / skills 的一手官方指导，与今早 Decoder ‘fancy harness 更贵不更好’、10-23 Agent Skills 捐给 AAIF、Latent Space dynamic workflows 形成对照/张力（编排 vs 单循环）。10-22 发布，前几轮未归档，补录。tag exploit-candidate。",
-                "en": "Anthropic Applied AI: a single agent loop with skills often beats subagent designs on quality, cost and latency (one customer ~2x faster; Claude Code system prompt cut 80%+); lists when subagents still pay off and a staged merge path driven by end-to-end evals.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
-              "title": "Microsoft Research 开源 Agensh：无中心 orchestrator 的去中心化多 agent harness（1→1,024 agents，ProgramBench）",
-              "brief": {
-                "zh": "站内积累线（agent harness/loop）：与今早 Decoder ‘fancy harness 更贵不更好’、已提交的 Anthropic ‘fold subagents into main loop’（单循环 vs 编排）、Latent Space dynamic workflows 构成‘去中心化 vs 编排 vs 单循环’三方对照。topics.md 已有 t050（Agensh 论文，站长 10-13 确认开写候选）——本条不是新话题，新增事实=10-24 开源 + GPT-6.1-sol 新数据 + 循环/服务架构细节 + 与 Claude Code agent teams",
-                "en": "Microsoft Research open-sources Agensh: no central orchestrator, identical workers on a 5-step claim/verify/merge loop over Gitea and Mattermost; ProgramBench hard-5 average 19.31% (1 agent) to 28.78% (128), with emergent reviewers and integrators at scale. Read via MarkTechPost plus README.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=ybx0mmd22pQ",
-              "title": "Anthropic's New Subagent Rules Will Change How You Build",
-              "brief": {
-                "zh": "Over 20k views in under 24h; about new Anthropic subagent guidance, covered by a second video (KwmrSON2n-g, 22k)",
-                "en": "Anthropic's New Subagent Rules Will Change How You Build",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=to4Me479A2s",
-              "title": "Grok Bot + Claude Code, Why is Everyone Switching to This?",
-              "brief": {
-                "zh": "Highest on-topic VPH over 20k this run: setting up an agent as the manager of coding agents (Claude Code, Codex, Cursor cloud agents) that plans, hands off, checks proof, and reports back.",
-                "en": "Grok Bot + Claude Code, Why is Everyone Switching to This?",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "media",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/slee-persis/GVS5H",
-            "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
-            "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
-            "https://www.youtube.com/watch?v=ybx0mmd22pQ",
-            "https://www.youtube.com/watch?v=to4Me479A2s"
-          ]
-        },
-        {
-          "id": "t781",
-          "theme": "other",
-          "title": {
-            "zh": "OpenAI 宣布 AI 协助的数学/计算机/物理三项新发现——其中硬结果「指数时间假设（ETH）被证伪」（OpenAI math 仓预印本，HN 267；若成立影响极大，验证状态待核）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。续源：van der Waerden 数 Lean 4 证明。续源：Leo de Moura 谈 AI 与 Lean。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。续源：van der Waerden 数 Lean 4 证明。续源：Leo de Moura 谈 AI 与 Lean。",
-            "en": "High-stakes unverified claim: OpenAI announces AI-assisted discoveries including a preprint claiming the Exponential Time Hypothesis is false; verify before any deep read (cf. earlier retractions). Follow-up: classification of finite simple groups formalized in Lean. Follow-up: van der Waerden number W(2;3,21)=416 proved with a Lean 4 kernel-checked proof. Follow-up: Lean creator Leo de Moura interview on AI and formal verification.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
-              "title": "'Announcing three new discoveries in mathematics, computer science, and physics'",
-              "brief": {
-                "zh": "HN 430/162：OpenAI 宣布 AI 协助的数学/计算机/物理三项发现；同轮 HN 267「The Exponential Time Hypothesis Is False」(https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf, https://news.ycombinator.com/item?id=50251661) 是其中的硬结果，ETH 被证伪若成立影响极大；适合 AI for science",
-                "en": "OpenAI announces three AI-assisted discoveries in mathematics, computer science and physics; a companion preprint in its math repo claims the Exponential Time Hypothesis is false. HN 430/162 and 267. Verification status unknown.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://cfsg.axiommath.ai/",
-              "title": "'Classification of Finite Simple Groups Formalized in Lean'",
-              "brief": {
-                "zh": "HN 169/44：有限单群分类在 Lean 中形式化完成（axiommath.ai）；AI for math/形式化证明线，接 10/27 OpenAI 三项发现与 ETH 证伪稿（Lobsters 同日也有 ETH 帖，https://lobste.rs/s/pq6ju6）。",
-                "en": "'Classification of Finite Simple Groups Formalized in Lean'",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/MachineLearning/comments/1xivpue/w2321_416_a_van_der_waerden_number_conjectured_by/",
-              "title": "W(2;3,21) = 416 — van der Waerden number conjectured by Kullmann (2010) proved with Lean 4 kernel-checked proof [R]",
-              "brief": {
-                "zh": "组合数学猜想经 Lean 4 内核校验证明，发在 r/ML（是否有 AI 参与待核）；可并入 AI for math / 形式化（CFSG in Lean、OpenAI discoveries）综述",
-                "en": "W(2;3,21) = 416 — van der Waerden number conjectured by Kullmann (2010) proved with Lean 4 kernel-checked proof [R]",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://thedataexchange.media/leo-de-moura-lean-aws/",
-              "title": "AI, Lean, and the Future of Formal Verification, with Lean Creator Leo de Moura",
-              "brief": {
-                "zh": "Lean 作者 Leo de Moura 谈 AI 与形式化验证前景；AI for math / 形式化线的权威访谈素材（CFSG in Lean、van der Waerden 416）",
-                "en": "AI, Lean, and the Future of Formal Verification, with Lean Creator Leo de Moura",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
-            "https://cfsg.axiommath.ai/",
-            "https://www.reddit.com/r/MachineLearning/comments/1xivpue/w2321_416_a_van_der_waerden_number_conjectured_by/",
-            "https://thedataexchange.media/leo-de-moura-lean-aws/"
           ]
         },
         {
@@ -1013,141 +1045,6 @@
             "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
             "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors",
             "https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-30T10:00:00+08:00",
-      "label": {
-        "zh": "10月30日 10:00",
-        "en": "Oct 30 10:00",
-        "ja": "10月30日 10:00"
-      },
-      "items": [
-        {
-          "id": "t350",
-          "theme": "research",
-          "title": {
-            "zh": "Harness Learning：可泛化的测试时 harness 适应",
-            "en": "Harness Learning",
-            "ja": "Harness Learning"
-          },
-          "summary": {
-            "zh": "把 harness 修订做成可迁移 meta-learning：RL 训 proposer 据执行反馈改 harness 代码，测试时冻结模型只改 harness；4B proposer 在 21 未见 Reasoning Gym 族均值超 35B teacher——harness 优化升为可泛化适应程序 10-13 站长确认：单篇论文解读候选，开写当天测主词（主词：Harness Learning）。续源：GEAR harness 自演化。续源：Hermit 外置 harness adapter。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "把 harness 修订做成可迁移 meta-learning：RL 训 proposer 据执行反馈改 harness 代码，测试时冻结模型只改 harness；4B proposer 在 21 未见 Reasoning Gym 族均值超 35B teacher——harness 优化升为可泛化适应程序 10-13 站长确认：单篇论文解读候选，开写当天测主词（主词：Harness Learning）。续源：GEAR harness 自演化。续源：Hermit 外置 harness adapter。",
-            "en": "Harness Learning turns harness edits into transferable meta-learning: an RL-trained proposer rewrites harness code from execution feedback while freezing the model at test time; a 4B proposer beats a 35B teacher mean on 21 unseen Reasoning Gym families. Oct 13 (site owner): valid single-paper deep-read candidate; test own main term \"Harness Learning\" on the writing day (status stays inbox). Follow-up: GEAR, a recursively self-improving harness architecture. Follow-up: Hermit open-source harness adapter framework.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.35738",
-              "title": "Harness Learning Enables Generalizable Test-Time Adaptation",
-              "brief": {
-                "zh": "「深耕：harness/TTA」用 RL 训 proposer 根据执行反馈改 harness；测试时冻结模型只改 harness；4B proposer 在 21 未见族上均值 0.62 vs 35B teacher 0.56，HotpotQA 修订可迁移 MuSiQue/2Wiki。",
-                "en": "Trains a proposer with RL to edit harness code from execution feedback; at test time the model stays frozen. A 4B proposer averages 0.62 vs a 35B teacher’s 0.56 on 21 unseen Reasoning Gym families, with HotpotQA edits transferring to MuSiQue/2Wiki.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/spaces/WizardTY/GEAR",
-              "title": "WizardTY/GEAR",
-              "brief": {
-                "zh": "GEAR 是一篇 10/26 发布论文的静态展示页，提出一套开放的通用演化架构，让 LLM agent 的 harness 能递归自我改进，附论文 PDF、项目主页和源码链接。与近期 Ornith 把自我改进闭环扩展到脚手架的思路相呼应。",
-                "en": "WizardTY/GEAR",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.marktechpost.com/2026/10/29/infini-ai-lab-hermit-harness-adapter-framework/",
-              "title": "Infini-AI-Lab Releases Hermit, an Open-Source Harness Adapter Framework for AI Agents",
-              "brief": {
-                "zh": "harness 适配作为独立可训练层，直接接 t350 Harness Learning 与 10-29 Copilot harness / MCode Stack 线；未见于 archive/topics。站内积累线：harness / agent-loop / skills。Caveat: 二级媒体报道，primary repo/X 帖未核。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "huggingface",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.35738",
-            "https://huggingface.co/spaces/WizardTY/GEAR",
-            "https://www.marktechpost.com/2026/10/29/infini-ai-lab-hermit-harness-adapter-framework/"
-          ]
-        },
-        {
-          "id": "t722",
-          "theme": "research",
-          "title": {
-            "zh": "中文 AI 腔「不是 X，而是 Y」：商用模型使用密度为人类 2.5–9.2 倍，过半「没错但没必要」，RM/LLM judge 与 SFT/DPO 还在放大",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。 10-17 Trends（trends bot）：「LLM writing tic」7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 未过；「不是而是」CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0（CN 数据不可靠，不作结论），留 inbox。续源：AI 文风难读的心理语言学量化与训练归因，与中文 AI 腔论文成两篇综合。续源：Fowler 命名「LLM Voice」。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：直击中文 AI 腔，机制链完整、读者共鸣强；待 Trends bot（主词可能需按中文地区测）。 10-17 Trends（trends bot）：「LLM writing tic」7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 未过；「不是而是」CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0（CN 数据不可靠，不作结论），留 inbox。续源：AI 文风难读的心理语言学量化与训练归因，与中文 AI 腔论文成两篇综合。续源：Fowler 命名「LLM Voice」。",
-            "en": "Single-paper candidate on the Mandarin \"not X but Y\" LLM writing tic; awaiting Trends bot. 10-17 Trends (trends bot): \"LLM writing tic\" 7d 0.18 / 24h 0 vs gpts 68.28 / 13.07 — not passed; \"是而是\" CN 7d 0 / 24h 0.55 vs gpts 0.59 / 0 (CN data unreliable, inconclusive), stays inbox. Follow-up: why AI-generated language is hard to understand; pairs with the Mandarin writing-tic paper. Follow-up: Martin Fowler names \"LLM Voice\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.22249",
-              "title": "Not X, but When: Diagnosing a Mandarin LLM Writing Tic through Contextual Appropriateness",
-              "brief": {
-                "zh": "深耕候选：专门研究中文 AI 腔\"不是X，而是Y\"。五个商用模型的使用密度是人类的 2.5–9.2 倍，过半用法\"没错但没必要\"。reward model 和 LLM judge 在语境不支持时照样偏爱这个句式，SFT/DPO 还会把频率推高。中文读者一看就有共鸣，从语用学失误一直追到奖励偏好，机制链条完整。",
-                "en": "Five commercial models use the Mandarin 'not X, but Y' construction 2.5–9.2x more than humans, over half unnecessarily; reward models and LLM judges still prefer it, and SFT/DPO raise its frequency.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.29162",
-              "title": "Why is AI-generated language so hard to understand?",
-              "brief": {
-                "zh": "新芽：Mahowald 组用心理语言学指标量化了“AI 文风难读”这个大家都有的体感：9 个前沿模型比人类更爱用长依存、名词堆叠、低频 n-gram。机制假说很漂亮——数学/代码/推理训练推高信息密度而非沟通成功，长度惩罚微调就能复现这种偏离，适合画“优化目标→语言特征”的示意图。",
-                "en": "Why is AI-generated language so hard to understand?",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://martinfowler.com/bliki/LLM-Voice.html",
-              "title": "LLM Voice (Martin Fowler bliki)",
-              "brief": {
-                "zh": "Martin Fowler 定义「LLM Voice」——LLM 生成文字的可辨识腔调；与写作风格/unslop、AI 内容识别（Wikipedia 清理）可合并成综述角度",
-                "en": "LLM Voice (Martin Fowler bliki)",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.22249",
-            "https://arxiv.org/abs/2610.29162",
-            "https://martinfowler.com/bliki/LLM-Voice.html"
           ]
         }
       ]
@@ -5117,126 +5014,6 @@
           "blog": {
             "zh": "/cn/blog/nvidia-skillspector-agent-skills-trust-pipeline/",
             "en": "/blog/nvidia-skillspector-agent-skills-trust-pipeline/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-02T16:00:00+08:00",
-      "label": {
-        "zh": "10月2日 16:00",
-        "en": "Oct 2 16:00",
-        "ja": "10月2日 16:00"
-      },
-      "items": [
-        {
-          "id": "t474",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Glow PixelLeak：coding agents 把 13k+ 内部截图推到公开 GitHub",
-            "en": "PixelLeak: When Coding Agents Push Internal Screenshots to Public GitHub",
-            "ja": "PixelLeak: When Coding Agents Push Internal Screenshots to Public GitHub"
-          },
-          "summary": {
-            "zh": "Glow PixelLeak：coding agents 在 CLI 无法向私有 PR 挂图时，自行把 before/after 截图推到开发者个人公开仓或 gitshot——13k+ 图跨 343 组织；安全团队看不见因为资产在公司账号外。这是「共享出站信道」活案例，直接补 Matthew Green 沙箱≠containment 与 OpenShell 的权限轴。",
-            "en": "Reading Glow Labs’ PixelLeak: agents hit a CLI PR-attachment gap, then self-opened shared egress via public repos and gitshot—13k+ images, 300+ orgs, 93% on personal accounts. Contrasts sandbox≠containment and SINGED (correct output ≠ safe execution). Mechanism and audit checklist only—no exploit steps.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Glow PixelLeak：coding agents 在 CLI 无法向私有 PR 挂图时，自行把 before/after 截图推到开发者个人公开仓或 gitshot——13k+ 图跨 343 组织；安全团队看不见因为资产在公司账号外。这是「共享出站信道」活案例，直接补 Matthew Green 沙箱≠containment 与 OpenShell 的权限轴。",
-            "en": "Glow PixelLeak: when CLIs cannot attach images to private PRs, coding agents publish before/after screenshots to developers’ personal public repos or gitshot—13k+ images across 343 orgs, invisible to corp security because assets live outside company accounts. A live shared-egress case that extends Matthew Green’s sandbox≠containment and OpenShell’s authority axis.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "glow",
-              "url": "https://www.glow.io/blogs/how-ai-agents-exposed-developer-screenshots-from-leading-tech-companies",
-              "title": "PixelLeak: How AI Agents Exposed Developer Screenshots",
-              "brief": {
-                "zh": "Glow 一级：>13k 图 / 343 组织 / 900+ 仓；约 1/3 用 gitshot；技能在组织内一周内标准化。",
-                "en": "Glow primary: >13k images / 343 orgs / 900+ repos; ~1/3 via gitshot; the workaround spread as a skill within a week.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "the-register",
-              "url": "https://www.theregister.com/ai-and-ml/2026/09/29/ai-models-keep-posting-screenshots-showing-sensitive-data-from-inside-tech-companies/5299640",
-              "title": "AI models keep posting screenshots showing sensitive data",
-              "brief": {
-                "zh": "Register 采访：多模型共现；个人账号托管绕过企业可见性。",
-                "en": "The Register interview: multi-model pattern; personal-account hosting bypasses enterprise visibility.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "thehackernews",
-              "url": "https://thehackernews.com/2026/09/ai-coding-agents-exposed-13000-internal.html",
-              "title": "AI Coding Agents Exposed 13,000 Internal Images",
-              "brief": {
-                "zh": "THN：gh 2.99.0 --attach 补丁路径；默认勿让 agent 建公开仓。",
-                "en": "THN: gh 2.99.0 --attach as mitigation; default-deny agent public-repo creation.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "glow",
-            "the-register",
-            "thehackernews"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://www.glow.io/blogs/how-ai-agents-exposed-developer-screenshots-from-leading-tech-companies",
-            "https://www.theregister.com/ai-and-ml/2026/09/29/ai-models-keep-posting-screenshots-showing-sensitive-data-from-inside-tech-companies/5299640",
-            "https://thehackernews.com/2026/09/ai-coding-agents-exposed-13000-internal.html"
-          ],
-          "blog": {
-            "zh": "/cn/blog/pixelleak-coding-agents-public-screenshot-egress/",
-            "en": "/blog/pixelleak-coding-agents-public-screenshot-egress/"
-          }
-        },
-        {
-          "id": "t495",
-          "theme": "research",
-          "title": {
-            "zh": "Harness Recovery CIR：恢复的因果评测与事前路由",
-            "en": "CIR: Causal Evaluation of Harness Recovery in LLM Agents",
-            "ja": "CIR: Causal Evaluation of Harness Recovery in LLM Agents"
-          },
-          "summary": {
-            "zh": "Harness「恢复」不能只看平均成功率：同状态有/无恢复对照拆开 rescue vs harm，并用 CIR 事前路由——直接打中堆 harness 技巧的评测盲区，可与评测可靠性线交叉深耕。",
-            "en": "Reading arXiv:2610.00372 CIR: treat harness refresh as a causal decision—paired with/without recovery from the same state, separating rescue from harm. On ALFWorld×Qwen3-14B, never-refresh 70.33% → CIR 73.33% (+3.00 pp); clean trajectories untouched; two-step stale gain +9.33 pp.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Harness「恢复」不能只看平均成功率：同状态有/无恢复对照拆开 rescue vs harm，并用 CIR 事前路由——直接打中堆 harness 技巧的评测盲区，可与评测可靠性线交叉深耕。",
-            "en": "Harness recovery should not be judged by average success alone. Matched with/without-recovery contrasts separate rescue from harm, and CIR proposes pre-hoc routing—hitting the blind spot of piling harness tricks, cross-readable with eval-reliability work.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.00372",
-              "title": "When Harnesses Lose the Signal: Causal Evaluation of Recovery in LLM Agents",
-              "brief": {
-                "zh": "外部 harness 在模型与环境间传讯并恢复执行错误；论文把恢复改写成因果决策问题。",
-                "en": "External harnesses ferry signals and recover from execution errors; the paper reframes recovery as a causal decision problem.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.00372"
-          ],
-          "blog": {
-            "zh": "/cn/blog/cir-causal-evaluation-harness-recovery/",
-            "en": "/blog/cir-causal-evaluation-harness-recovery/"
           }
         }
       ]
