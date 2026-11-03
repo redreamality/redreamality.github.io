@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-03T10:06:55+08:00",
+  "updatedAt": "2026-11-03T16:00:47+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,221 @@
   ],
   "themeCounts": {
     "models": 10,
-    "coding-tools": 12,
+    "coding-tools": 11,
     "agents-oss": 10,
     "security": 9,
-    "research": 22,
+    "research": 23,
     "product-news": 0,
     "other": 3
   },
   "hours": [
+    {
+      "hourStart": "2026-11-03T16:00:00+08:00",
+      "label": {
+        "zh": "11月3日 16:00",
+        "en": "Nov 3 16:00",
+        "ja": "11月3日 16:00"
+      },
+      "items": [
+        {
+          "id": "t777",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "AI 做科研的两条机制：广度 fan-out——OpenAI × PerturbAI × Scripps 用 1,946 个并行 GPT-Rosalind agent（每个扰动一个）32 分钟解读 770 万细胞全脑 Perturb-seq 图谱（复现 87.3% 源论文可测发现；同模型同预算消融：单 agent 引文塌缩，分布式多读 711× 文献；洗牌对照、30 位博士盲评）× 深度优先 + verifier——Latent Space 解释 AI 数学为何突然变强（drafter/solver/verifier + 失败路径当「负提示」，分支因子 b^k 成本律；Navier–Stokes 约 1 万 agent、3000 亿 token、88 小时）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（score4）：受控消融 + 机制化理论互补，接站内 AI 科学家线；主词「Perturb-seq」待测，量可能偏低。续源：Claude agent 自主做小鼠脑基因治疗（待核）。续源：Hyra 2.0——agent 造科学工具与模型。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（score4）：受控消融 + 机制化理论互补，接站内 AI 科学家线；主词「Perturb-seq」待测，量可能偏低。续源：Claude agent 自主做小鼠脑基因治疗（待核）。续源：Hyra 2.0——agent 造科学工具与模型。",
+            "en": "Synthesis candidate: two search structures for AI-driven research, fan-out across 1,946 parallel agents on a Perturb-seq atlas and depth-first search with verifiers for AI maths; candidate term \"Perturb-seq\". Follow-up: a Claude agent autonomously chose and performed mouse-brain gene therapy (unverified). Follow-up: Tencent Hyra 2.0, where agents build scientific models and tools (force fields, protein models, math results; self-reported).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://latent.space/p/ai-is-getting-good-at-math/",
+              "title": "Latent Space (Ankit Maloo): AI Is Getting Good at Math. Here's Why. — LLMs search depth-first, a verifier makes failure cheap, and 'negative hints' in a drafter/solver/verifier harness replace human taste (branching factor b^k)",
+              "brief": {
+                "zh": "Adds a new, mechanism-level angle beyond t711 (AI×数学 文化/职业/机构视角) and the already-filed MSR KLS item (人剪枝 agent 轨迹): this is the 'why it works' theory — depth-first search + verifier + drafter prompt carrying negative hints, with a concrete harness shape (Drafter/Solver/Verifier, standing adversarial",
+                "en": "Latent Space essay: LLMs search depth-first, a verifier makes failure cheap, and failed paths become negative hints in a drafter/solver/verifier harness; cost scales as b^k times compute, explaining why cybersecurity fell first. Partly speculative reconstruction.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
+              "title": "OpenAI × PerturbAI × Scripps: 'distributed biological reasoning' — 1,946 parallel GPT-Rosalind agents (one per perturbation) interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 min; 711x more literature than one agent, shuffle controls, blinded experts",
+              "brief": {
+                "zh": "Not in inbox/archive 20261022-24 or topics.md (previous skip was window-only, not duplicate). Mechanism-rich evidence for 'many narrow agents beat one big-context agent' — a controlled same-model/same-budget ablation of fan-out vs single-agent (literature coverage collapse as workload grows), plus a",
+                "en": "OpenAI, PerturbAI and Scripps: 1,946 parallel GPT-Rosalind agents, one per perturbation, interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 minutes, recovering 87.3% of testable source findings; a same-model ablation shows a single agent collapses on literature coverage (711x fewer refs), w",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://the-decoder.com/a-claude-model-autonomously-chose-a-gene-therapy-and-operated-on-a-mouse-brain-with-no-human-decision-making/",
+              "title": "A Claude model autonomously chose a gene therapy and operated on a mouse brain with no human decision-making",
+              "brief": {
+                "zh": "Physical-world agent autonomy in a wet lab with an explicit kill-switch control surface; likely to draw safety/oversight debate.",
+                "en": "A Claude model autonomously chose a gene therapy and operated on a mouse brain with no human decision-making",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://github.com/Tencent-Hunyuan/Hyra-results",
+              "title": "腾讯混元 Hyra 2.0（Hunyuan Research Agent）：agent 研发可复用科学工具与模型，11-02 公开 HyFF 力场、蛋白模型权重与 Petty/Yau 猜想结果",
+              "brief": {
+                "zh": "AI 科研 agent 从『解题』转到『造工具/造模型』的一手产物（权重+代码+论文目录），可与 t711 AI×数学、t777 AI 科研机制（并行 agent / verifier）合用作素材；早于 09:42 窗口（aihot 11-02 18:06 CST）但上午标为未查且未入任何 lane。核实情况：三层架构与『接入企业微信等环境』来自 aihot 对公众号的转述（二级）；模型数字与猜想结果来自官方 GitHub README（一手）；官方发布页 hy.tencent.com/research/hyra 为 JS 壳，未读到正文；数学结果未经同行评审，仅 README 自述。去重：i",
+                "en": "",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://latent.space/p/ai-is-getting-good-at-math/",
+            "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
+            "https://the-decoder.com/a-claude-model-autonomously-chose-a-gene-therapy-and-operated-on-a-mouse-brain-with-no-human-decision-making/",
+            "https://github.com/Tencent-Hunyuan/Hyra-results"
+          ]
+        },
+        {
+          "id": "t808",
+          "theme": "security",
+          "title": {
+            "zh": "AI 开发工具的「黑色十月」：Cursor 扩展市场上的官方 Claude Code VS Code 扩展被植入后门（Phorion，HN 773/485，Lobsters 140）× Wiz 汇总十月至少 9 起 AI 开发平台安全事件（Fireworks、Lightning、Railway、Warp、OpenCode、Zeabur 等：凭据窃取、agent 群式攻击、为蒸馏/LLMjacking 盗用；被盗 Bedrock key 30 小时约 80 万次调用、转售池 13 小时约 170 万次）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。",
+            "en": "Synthesis candidate: backdoored Claude Code extension on the Cursor marketplace plus Wiz's \"Black October\" roll-up of AI developer-platform incidents; candidate term \"Open VSX\" (verify first). Follow-up: Parameter discloses a ChatGPT account-takeover chain. Primary source added: Cursor's notice confirms the backdoor was served from Cursor's own marketplace (not Open VSX), with timeline, IOCs and remediation. Re-heat: the malicious Claude Code extension story spreads across YouTube.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+              "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+              "brief": {
+                "zh": "Cursor 扩展市场上的官方 Claude Code 扩展被植入后门；Lobsters 同题 140 分（https://lobste.rs/s/ttp7aq，GossiTheDog 帖）。接供应链/harness 安全线（LiteLLM、HTTP2Shell、backdoors in harnesses），可做 AI 编码工具供应链综述",
+                "en": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
+              "title": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+              "brief": {
+                "zh": "Different report from the filed 10-30 Wiz 'rise of agentic attacks' piece: incident roll-up + LLMjacking telemetry across AI dev platforms. 站内积累线：security-control / agent 平台凭据。",
+                "en": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
+              "title": "Do the math: How we took over ChatGPT accounts",
+              "brief": {
+                "zh": "Parameter 披露接管 ChatGPT 账号的漏洞链；AI 产品自身安全，可并入 AI 工具供应链/安全综述（Claude Code VSX 后门、harness backdoors）",
+                "en": "Do the math: How we took over ChatGPT accounts",
+                "ja": ""
+              }
+            },
+            {
+              "source": "cursor-blog",
+              "url": "https://cursor.com/blog/claude-code-extension-security-notice",
+              "title": "Security notice — malicious version of Anthropic.claude-code (2.1.312 and 2.1.313) identified in the Cursor VS Code Extension Marketplace",
+              "brief": {
+                "zh": "Cursor 官方公告（10-29，10-30 11:30 PT 更新 IOC）：10-29 约 2:27–13:35 PT，Cursor 自家 VS Code 扩展市场上架了被篡改的 Anthropic.claude-code 2.1.312/2.1.313（Win/macOS），非 Anthropic 开发；植入持久 SSH 后门——收集主机信息、向 authorized_keys 加攻击者公钥（svc-telemetry）、尝试开 SSH 并建反向隧道，LaunchAgent/计划任务持久化；多数主机因无管理员权限开 SSH 失败，但公钥、持久化与主机信息上报已发生。Cursor 下架并整体关停市场、审计无其他扩展被篡改、轮换密钥重建市场，协同下线攻击服务器 134.209.82.225；卸载扩展不足以清除，需跑修复脚本并轮换凭据。",
+                "en": "Cursor's official notice (Oct 29, IOCs updated Oct 30): tampered Anthropic.claude-code 2.1.312/2.1.313 was served from Cursor's own VS Code Extension Marketplace for about 11 hours; it planted an attacker SSH key, persistence and a reverse-tunnel attempt and beaconed host details. Cursor pulled it, shut down and rebuilt the marketplace, rotated keys and got the C2 server taken down.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=yIvaF0HI5wo",
+              "title": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
+              "brief": {
+                "zh": "The malicious Claude Code extension story broke out across several channels: malicious Anthropic.claude-code 2.1.312/2.1.313 builds were found in Cursor's VS Code extension marketplace.",
+                "en": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "media",
+            "cursor-blog",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+            "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
+            "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
+            "https://cursor.com/blog/claude-code-extension-security-notice",
+            "https://www.youtube.com/watch?v=yIvaF0HI5wo"
+          ]
+        },
+        {
+          "id": "t828",
+          "theme": "research",
+          "title": {
+            "zh": "Zyphra Hierarchical Attention（ZHA）：树状索引器让稀疏注意力真正次二次——现有稀疏注意力的 indexer 仍扫全上下文、只拿常数倍加速；ZHA 把 key 摘要递归压成树、查询自顶向下取稀疏子集；只加 81,920 个参数蒸馏进冻结的 Qwen3.6-35B-A3B，RULER-13 @256K 96.2% vs dense 96.0%（arXiv 2610.42112）",
+            "en": "Zyphra Hierarchical Attention",
+            "ja": "Zyphra Hierarchical Attention"
+          },
+          "summary": {
+            "zh": "单篇深读候选：树状索引让稀疏注意力真正次二次，可改装冻结模型；主词「sparse attention」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：树状索引让稀疏注意力真正次二次，可改装冻结模型；主词「sparse attention」待测。",
+            "en": "Single-paper deep-read candidate: a tree-structured indexer makes sparse attention truly subquadratic and retrofits a frozen model; candidate term \"sparse attention\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://zyphra.com/our-work/zyphra-hierarchical-attention",
+              "title": "Zyphra Hierarchical Attention (ZHA)：树状索引器让稀疏注意力真正次二次，8 万参数蒸馏进冻结的 Qwen3.6-35B-A3B",
+              "brief": {
+                "zh": "长上下文 / KV cache 方向的一手研究（接 t782『KV cache 作为 agent 时代被忽视的状态面』，以及 agent 长程上下文成本线）；改装冻结模型、极少参数这一点对开源模型落地有实际意义。限制：加速是建模推算而非实测 kernel，评测为自报。去重：inbox/archive 1030–1103 与 topics.md 无 Zyphra/ZHA。MarkTechPost 发布时间 09:09 CST，略早于 09:42 窗口，未入任何 lane。",
+                "en": "",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://zyphra.com/our-work/zyphra-hierarchical-attention"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-03T10:00:00+08:00",
       "label": {
@@ -122,80 +329,6 @@
             "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
             "https://alignment.openai.com/training-activation-classifiers/",
             "https://www.lesswrong.com/posts/dbStc8ZFESqfihwAd/lessons-from-red-teaming-auto-review-openai-s-blocking-1"
-          ]
-        },
-        {
-          "id": "t808",
-          "theme": "security",
-          "title": {
-            "zh": "AI 开发工具的「黑色十月」：Cursor 扩展市场上的官方 Claude Code VS Code 扩展被植入后门（Phorion，HN 773/485，Lobsters 140）× Wiz 汇总十月至少 9 起 AI 开发平台安全事件（Fireworks、Lightning、Railway、Warp、OpenCode、Zeabur 等：凭据窃取、agent 群式攻击、为蒸馏/LLMjacking 盗用；被盗 Bedrock key 30 小时约 80 万次调用、转售池 13 小时约 170 万次）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。",
-            "en": "Synthesis candidate: backdoored Claude Code extension on the Cursor marketplace plus Wiz's \"Black October\" roll-up of AI developer-platform incidents; candidate term \"Open VSX\" (verify first). Follow-up: Parameter discloses a ChatGPT account-takeover chain. Primary source added: Cursor's notice confirms the backdoor was served from Cursor's own marketplace (not Open VSX), with timeline, IOCs and remediation.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
-              "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-              "brief": {
-                "zh": "Cursor 扩展市场上的官方 Claude Code 扩展被植入后门；Lobsters 同题 140 分（https://lobste.rs/s/ttp7aq，GossiTheDog 帖）。接供应链/harness 安全线（LiteLLM、HTTP2Shell、backdoors in harnesses），可做 AI 编码工具供应链综述",
-                "en": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
-              "title": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
-              "brief": {
-                "zh": "Different report from the filed 10-30 Wiz 'rise of agentic attacks' piece: incident roll-up + LLMjacking telemetry across AI dev platforms. 站内积累线：security-control / agent 平台凭据。",
-                "en": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
-              "title": "Do the math: How we took over ChatGPT accounts",
-              "brief": {
-                "zh": "Parameter 披露接管 ChatGPT 账号的漏洞链；AI 产品自身安全，可并入 AI 工具供应链/安全综述（Claude Code VSX 后门、harness backdoors）",
-                "en": "Do the math: How we took over ChatGPT accounts",
-                "ja": ""
-              }
-            },
-            {
-              "source": "cursor-blog",
-              "url": "https://cursor.com/blog/claude-code-extension-security-notice",
-              "title": "Security notice — malicious version of Anthropic.claude-code (2.1.312 and 2.1.313) identified in the Cursor VS Code Extension Marketplace",
-              "brief": {
-                "zh": "Cursor 官方公告（10-29，10-30 11:30 PT 更新 IOC）：10-29 约 2:27–13:35 PT，Cursor 自家 VS Code 扩展市场上架了被篡改的 Anthropic.claude-code 2.1.312/2.1.313（Win/macOS），非 Anthropic 开发；植入持久 SSH 后门——收集主机信息、向 authorized_keys 加攻击者公钥（svc-telemetry）、尝试开 SSH 并建反向隧道，LaunchAgent/计划任务持久化；多数主机因无管理员权限开 SSH 失败，但公钥、持久化与主机信息上报已发生。Cursor 下架并整体关停市场、审计无其他扩展被篡改、轮换密钥重建市场，协同下线攻击服务器 134.209.82.225；卸载扩展不足以清除，需跑修复脚本并轮换凭据。",
-                "en": "Cursor's official notice (Oct 29, IOCs updated Oct 30): tampered Anthropic.claude-code 2.1.312/2.1.313 was served from Cursor's own VS Code Extension Marketplace for about 11 hours; it planted an attacker SSH key, persistence and a reverse-tunnel attempt and beaconed host details. Cursor pulled it, shut down and rebuilt the marketplace, rotated keys and got the C2 server taken down.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "media",
-            "cursor-blog"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
-            "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
-            "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
-            "https://cursor.com/blog/claude-code-extension-security-notice"
           ]
         },
         {
@@ -1841,13 +1974,13 @@
             "ja": "AI Reverse Engineering and Clean-Room Rewrites: REA, PhotoCraft, chardet and Malus Side by Side"
           },
           "summary": {
-            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。10-14 15:45 主词「reverse engineer anything」7d/24h 均过 gpts，进正式短名单，Top 3 #1。续源：EEVblog 实测 AI 逆向万用表固件。",
+            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。10-14 15:45 主词「reverse engineer anything」7d/24h 均过 gpts，进正式短名单，Top 3 #1。续源：EEVblog 实测 AI 逆向万用表固件。续热：EEVblog 1784 Claude Code 逆向整套固件。",
             "en": "REA's agent reverse-engineering toolkit, ArtCraft PhotoCraft's \\\"clean-room Photoshop\\\", chardet 7's Claude rewrite and relicensing, and the Malus satire, read together: how AI reverse engineering and rewriting work, how the AI version differs from a classic clean room, the licensing and copyright risk layers, and a decision framework for using these tools.",
             "ja": ""
           },
           "judgment": {
-            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。10-14 15:45 主词「reverse engineer anything」7d/24h 均过 gpts，进正式短名单，Top 3 #1。续源：EEVblog 实测 AI 逆向万用表固件。",
-            "en": "REA lets coding agents reverse-engineer binaries and runtimes and rebuild features; PhotoCraft claims a clean-room Photoshop rewrite; chardet's Claude rewrite and relicensing sparked a derivative-work fight—a multi-source synthesis on the mechanism, legal risk and methods of AI reverse engineering and clean-room rewrites. Same-day Trends: 24h \"reverse engineer anything\" passes, 7d 429 → stays in inbox. 10-14 15:45: own term passes 7d (28.98 vs 7.46) and 24h (67.89 vs 4.48) → shortlisted, Top 3 #1. Follow-up: EEVblog tests AI reverse-engineering of multimeter firmware.",
+            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。10-14 15:45 主词「reverse engineer anything」7d/24h 均过 gpts，进正式短名单，Top 3 #1。续源：EEVblog 实测 AI 逆向万用表固件。续热：EEVblog 1784 Claude Code 逆向整套固件。",
+            "en": "REA lets coding agents reverse-engineer binaries and runtimes and rebuild features; PhotoCraft claims a clean-room Photoshop rewrite; chardet's Claude rewrite and relicensing sparked a derivative-work fight—a multi-source synthesis on the mechanism, legal risk and methods of AI reverse engineering and clean-room rewrites. Same-day Trends: 24h \"reverse engineer anything\" passes, 7d 429 → stays in inbox. 10-14 15:45: own term passes 7d (28.98 vs 7.46) and 24h (67.89 vs 4.48) → shortlisted, Top 3 #1. Follow-up: EEVblog tests AI reverse-engineering of multimeter firmware. Re-heat: EEVblog 1784, Claude Code reverse-engineers full 121GW firmware (unverified).",
             "ja": ""
           },
           "sourceBriefs": [
@@ -2020,6 +2153,16 @@
                 "en": "EEVblog 1783 - Can AI Reverse Engineer the 121GW Multimeter Firmware?",
                 "ja": ""
               }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=2tUC0DuPjaM",
+              "title": "EEVblog 1784 - Claude Code Reverse Engineer 121GW Firmware SUCCESS!",
+              "brief": {
+                "zh": "Steepest on-topic riser: follow-up to EEVblog 1783 (BEKRoZj6otc, 10-31). Dave Jones says Claude Code reverse engineered the whole 121GW firmware into C from one prompt in under 24h, and it works.",
+                "en": "EEVblog 1784 - Claude Code Reverse Engineer 121GW Firmware SUCCESS!",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -2054,7 +2197,8 @@
             "https://simonwillison.net/2026/Mar/5/chardet/",
             "https://arstechnica.com/ai/2026/03/ai-can-rewrite-open-source-code-but-can-it-rewrite-the-license-too/",
             "https://malus.sh",
-            "https://www.youtube.com/watch?v=BEKRoZj6otc"
+            "https://www.youtube.com/watch?v=BEKRoZj6otc",
+            "https://www.youtube.com/watch?v=2tUC0DuPjaM"
           ],
           "blog": {
             "zh": "/cn/blog/ai-reverse-engineering-clean-room-rewrite-licensing/",
@@ -4595,151 +4739,6 @@
           "blog": {
             "zh": "/cn/blog/global-coherence-local-right-team-wrong/",
             "en": "/blog/global-coherence-local-right-team-wrong/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-04T10:00:00+08:00",
-      "label": {
-        "zh": "10月4日 10:00",
-        "en": "Oct 4 10:00",
-        "ja": "10月4日 10:00"
-      },
-      "items": [
-        {
-          "id": "t509",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Apple 收紧 macOS Full Disk Access：同意不等于最小权限",
-            "en": "macOS Full Disk Access: Consent Friction Is Not Least Privilege",
-            "ja": "macOS Full Disk Access: Consent Friction Is Not Least Privilege"
-          },
-          "summary": {
-            "zh": "Apple 把 macOS Full Disk Access 从备份例外收紧，理由直接写成 agent 更自主之后风险会大增。但公告只加「非常明确的用户动作」，没有范围化能力、时间表或收回存量授权——同意摩擦不等于最小权限，桌面 agent 的权限轴仍敞着。",
-            "en": "Apple’s 2026-10-02 developer notice will tighten how macOS Full Disk Access is granted, stressing “very explicit user action” as AI-agent risk grows. This post maps the TCC/FDA mechanism and argues: stronger consent friction is not least privilege scoped by path, time, or task.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Apple 把 macOS Full Disk Access 从备份例外收紧，理由直接写成 agent 更自主之后风险会大增。但公告只加「非常明确的用户动作」，没有范围化能力、时间表或收回存量授权——同意摩擦不等于最小权限，桌面 agent 的权限轴仍敞着。",
-            "en": "Apple is tightening macOS Full Disk Access because more autonomous agents raise the risk, but the notice only adds “very explicit user action.” No scoped capability, timeline, or revocation of existing grants—consent friction is not least privilege, and the desktop-agent authority axis stays open.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "apple",
-              "url": "https://developer.apple.com/news/?id=p6zjojqw",
-              "title": "Updates to Full Disk Access in macOS",
-              "brief": {
-                "zh": "开发者新闻：FDA 可绕过常规隐私控制，读文件/邮件/消息/浏览历史；后续授权要非常明确的用户动作。",
-                "en": "Developer news: FDA sidesteps normal privacy controls (files, mail, messages, browsing history); future grants need very explicit user action.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "ars",
-              "url": "https://arstechnica.com/security/2026/10/apple-changes-full-disk-access-permissions-to-curb-abuse-from-ai-agents/",
-              "title": "Apple changes full-disk access permissions to curb abuse from AI agents",
-              "brief": {
-                "zh": "Ars：紧接 Muse Mac 读消息争议；Apple 点名 agent 自主性，但未给上线日期。",
-                "en": "Ars: follows the Muse Mac messages dispute; Apple names agent autonomy and gives no ship date.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/",
-              "title": "Apple says it's tightening macOS Full Disk Access controls due to new risks from AI agents",
-              "brief": {
-                "zh": "TC 同日：桌面 agent 靠 FDA 扩大本地数据面；对照 PixelLeak 的出站泄密是另一轴。",
-                "en": "Same-day TC: desktop agents use FDA to widen local data access; a different axis from PixelLeak egress.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "apple",
-            "ars",
-            "techcrunch",
-            "lobsters"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://developer.apple.com/news/?id=p6zjojqw",
-            "https://arstechnica.com/security/2026/10/apple-changes-full-disk-access-permissions-to-curb-abuse-from-ai-agents/",
-            "https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/",
-            "https://forgeeks.net/apple-agent-consent-not-least-privilege/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/macos-full-disk-access-consent-not-least-privilege/",
-            "en": "/blog/macos-full-disk-access-consent-not-least-privilege/"
-          }
-        },
-        {
-          "id": "t541",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "默认硬预算帽：coding agent 会在你睡着时烧穿账单",
-            "en": "Default Hard Budget Caps: Services Agents Deploy Need Kill Switches",
-            "ja": "Default Hard Budget Caps: Services Agents Deploy Need Kill Switches"
-          },
-          "summary": {
-            "zh": "Coding agent 把睡着时仍在烧账单变成默认故障。硬预算帽应当是付费用量 API 的默认：超过 $X 就停并返回错误，而不是只发警告邮件。这和已经写过的轨迹浪费、企业路由不是同一层——被 agent 部署出去的服务本身要有停机线。 10-10：夜间批处理烧 $2,500 的新样本。",
-            "en": "Pay-by-usage services need default hard budget caps—cut off and return errors past $X/month, not a midnight warning email. Coding and personal agents lower the friction of spinning up billable downstream APIs, storage, and compute; AWS project spend limits and Google Cloud Spend Caps are moving hard-stop into the product. This essay separates the agent token ledger from bills for services agents deploy, and closes with a builder checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Coding agent 把睡着时仍在烧账单变成默认故障。硬预算帽应当是付费用量 API 的默认：超过 $X 就停并返回错误，而不是只发警告邮件。这和已经写过的轨迹浪费、企业路由不是同一层——被 agent 部署出去的服务本身要有停机线。 10-10：夜间批处理烧 $2,500 的新样本。",
-            "en": "Coding agents make an overnight bill blowup the default failure. A hard budget cap should be the default on pay-by-usage APIs: past $X, stop and return an error, not a warning email. That is a different layer from trajectory waste or enterprise routing. The services an agent deploys need their own hard stop. Oct 10: a new $2,500 overnight batch-spend sample.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "simonw",
-              "url": "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/",
-              "title": "We're going to need default hard budget caps on pretty much everything",
-              "brief": {
-                "zh": "2026-10-03 主张超额即停；点名 AWS 项目月度 spend limit 与 Google Cloud Spend Caps，并希望 agent 默认推荐带硬帽的供应商。",
-                "en": "3 Oct 2026 argument for stop-and-error past a monthly cap. Names AWS project spend limits and Google Cloud Spend Caps, and wants agents to prefer providers that ship a hard cap.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/",
-              "title": "We're going to need default hard budget caps on pretty much everything",
-              "brief": {
-                "zh": "HN 137 分 / 59 评论，讨论硬帽相对警告邮件是否挡得住无人值守的 agent 账单。",
-                "en": "Hacker News 137 points / 59 comments on whether a hard cap, unlike a warning email, stops an unattended agent bill.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1x1oxol/i_gave_claude_a_batch_job_overnight_woke_up_to_96/",
-              "title": "Overnight batch: 96 clips and $2,500",
-              "brief": {
-                "zh": "无上限批处理的账单教训。",
-                "en": "Uncapped batch bill lesson.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "simonw",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/",
-            "https://www.reddit.com/r/ClaudeAI/comments/1x1oxol/i_gave_claude_a_batch_job_overnight_woke_up_to_96/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/default-hard-budget-caps-agent-deployed-services/",
-            "en": "/blog/default-hard-budget-caps-agent-deployed-services/"
           }
         }
       ]
