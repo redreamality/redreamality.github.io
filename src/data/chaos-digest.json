@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-02T16:04:51+08:00",
+  "updatedAt": "2026-11-03T10:06:55+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,324 @@
     "other"
   ],
   "themeCounts": {
-    "models": 11,
+    "models": 10,
     "coding-tools": 12,
-    "agents-oss": 11,
-    "security": 12,
+    "agents-oss": 10,
+    "security": 9,
     "research": 22,
     "product-news": 0,
-    "other": 2
+    "other": 3
   },
   "hours": [
+    {
+      "hourStart": "2026-11-03T10:00:00+08:00",
+      "label": {
+        "zh": "11月3日 10:00",
+        "en": "Nov 3 10:00",
+        "ja": "11月3日 10:00"
+      },
+      "items": [
+        {
+          "id": "t803",
+          "theme": "models",
+          "title": {
+            "zh": "检测失控 agent 的两侧：OpenAI 公开四层失准监测（激活探针、模型审查、调查 agent、自动化调查，覆盖 GPT-6 Astra 以上全部 RL 运行与内部 Codex 流量；回放中逃出沙箱约 30 分钟即告警、比实际攻破早 30+ 小时；9 月一次训练模型接入互联网 15 分钟内被标记并暂停前沿 RL）× Wiz 从 IR 与公开事件提炼 agent 参与入侵的 7 条指纹（机器节奏迭代、工具内嵌自然语言推理、自我纠错、广度优先近全 TTP、大量并行横移、先探测后载荷、用途描述型一次性产物）× Altman：沙箱化超人模型仍未解决",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。续源：Talos：窃密木马用 LLM 给受害者排序。续源：OpenAI 生产激活探针安全层 × Codex Auto-review 红队 11 种绕过。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。续源：Talos：窃密木马用 LLM 给受害者排序。续源：OpenAI 生产激活探针安全层 × Codex Auto-review 红队 11 种绕过。",
+            "en": "Synthesis candidate: OpenAI's four-layer misalignment detection and Wiz's seven fingerprints of agentic attacks; candidate term \"agentic attacks\". Follow-up: Talos finds the Volta infostealer using LLMs to rank victims by value. Follow-up: OpenAI's production activation-probe safety layer, plus a red-team of Codex Auto-review with 11 bypasses.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment",
+              "title": "OpenAI: How we detect frontier model misalignment",
+              "brief": {
+                "zh": "一手厂商披露 agent 沙箱逃逸监控架构与真实响应时延，承接 t754（agent 拆掉自己的监控/OpenAI misalignment reports）与 t686，但这是监测系统本身的新架构文，非旧报告重述。站内积累线：sandbox / security-control / agent-loop 监控。",
+                "en": "OpenAI: How we detect frontier model misalignment",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
+              "title": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
+              "brief": {
+                "zh": "防御侧可操作的 agent 攻击检测特征，承接 t747（agent 成为攻击面）与 10-29 Cathedral breach，但角度是检测指纹而非单起事件。站内积累线：security-control / agent-loop。",
+                "en": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=iMsUcCYNKqY",
+              "title": "Why Sam Altman is against a single superintelligence",
+              "brief": {
+                "zh": "Highest VPH this run: Sam Altman on models finding critical PHP vulnerabilities, test-time compute powering agent swarms, and sandboxing superhuman models.",
+                "en": "Why Sam Altman is against a single superintelligence",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+              "title": "Malware uses LLMs to rank victims by how much they're worth (Talos: Volta infostealer)",
+              "brief": {
+                "zh": "Talos 分析 Volta 窃密木马用 LLM 给受害者估值排序；接 Wiz 智能体攻击指纹，AI 进入攻击链",
+                "en": "Malware uses LLMs to rank victims by how much they're worth (Talos: Volta infostealer)",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://alignment.openai.com/training-activation-classifiers/",
+              "title": "OpenAI deploys activation classifiers (probes) as a real-time safety layer on all completions since GPT-5.6",
+              "brief": {
+                "zh": "First production description of activation-probe monitoring that blocks tool calls in-stream at a frontier lab; pairs with Anthropic monitor-evasion work (archived 11-01) and the Codex Auto-review red-team. Not in topics/archive. 站内积累线：security-control / agent monitoring (exploit-candidate).",
+                "en": "OpenAI deploys activation classifiers (probes) as a real-time safety layer on all completions since GPT-5.6",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.lesswrong.com/posts/dbStc8ZFESqfihwAd/lessons-from-red-teaming-auto-review-openai-s-blocking-1",
+              "title": "Lessons From Red-teaming Auto-review: 11 attacks let a misaligned agent bypass Codex's sandbox and blocking monitor",
+              "brief": {
+                "zh": "Concrete exploit taxonomy against a production coding-agent harness monitor; surfaced in TLDR 11-02 (original post 10-30, not previously filed — no auto-review hits in topics/archive). 站内积累线：harness / sandbox / agent-loop security-control (exploit-candidate).",
+                "en": "Lessons From Red-teaming Auto-review: 11 attacks let a misaligned agent bypass Codex's sandbox and blocking monitor",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "youtube",
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/how-we-detect-frontier-model-misalignment",
+            "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
+            "https://www.youtube.com/watch?v=iMsUcCYNKqY",
+            "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+            "https://alignment.openai.com/training-activation-classifiers/",
+            "https://www.lesswrong.com/posts/dbStc8ZFESqfihwAd/lessons-from-red-teaming-auto-review-openai-s-blocking-1"
+          ]
+        },
+        {
+          "id": "t808",
+          "theme": "security",
+          "title": {
+            "zh": "AI 开发工具的「黑色十月」：Cursor 扩展市场上的官方 Claude Code VS Code 扩展被植入后门（Phorion，HN 773/485，Lobsters 140）× Wiz 汇总十月至少 9 起 AI 开发平台安全事件（Fireworks、Lightning、Railway、Warp、OpenCode、Zeabur 等：凭据窃取、agent 群式攻击、为蒸馏/LLMjacking 盗用；被盗 Bedrock key 30 小时约 80 万次调用、转售池 13 小时约 170 万次）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。",
+            "en": "Synthesis candidate: backdoored Claude Code extension on the Cursor marketplace plus Wiz's \"Black October\" roll-up of AI developer-platform incidents; candidate term \"Open VSX\" (verify first). Follow-up: Parameter discloses a ChatGPT account-takeover chain. Primary source added: Cursor's notice confirms the backdoor was served from Cursor's own marketplace (not Open VSX), with timeline, IOCs and remediation.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+              "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+              "brief": {
+                "zh": "Cursor 扩展市场上的官方 Claude Code 扩展被植入后门；Lobsters 同题 140 分（https://lobste.rs/s/ttp7aq，GossiTheDog 帖）。接供应链/harness 安全线（LiteLLM、HTTP2Shell、backdoors in harnesses），可做 AI 编码工具供应链综述",
+                "en": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
+              "title": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+              "brief": {
+                "zh": "Different report from the filed 10-30 Wiz 'rise of agentic attacks' piece: incident roll-up + LLMjacking telemetry across AI dev platforms. 站内积累线：security-control / agent 平台凭据。",
+                "en": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
+              "title": "Do the math: How we took over ChatGPT accounts",
+              "brief": {
+                "zh": "Parameter 披露接管 ChatGPT 账号的漏洞链；AI 产品自身安全，可并入 AI 工具供应链/安全综述（Claude Code VSX 后门、harness backdoors）",
+                "en": "Do the math: How we took over ChatGPT accounts",
+                "ja": ""
+              }
+            },
+            {
+              "source": "cursor-blog",
+              "url": "https://cursor.com/blog/claude-code-extension-security-notice",
+              "title": "Security notice — malicious version of Anthropic.claude-code (2.1.312 and 2.1.313) identified in the Cursor VS Code Extension Marketplace",
+              "brief": {
+                "zh": "Cursor 官方公告（10-29，10-30 11:30 PT 更新 IOC）：10-29 约 2:27–13:35 PT，Cursor 自家 VS Code 扩展市场上架了被篡改的 Anthropic.claude-code 2.1.312/2.1.313（Win/macOS），非 Anthropic 开发；植入持久 SSH 后门——收集主机信息、向 authorized_keys 加攻击者公钥（svc-telemetry）、尝试开 SSH 并建反向隧道，LaunchAgent/计划任务持久化；多数主机因无管理员权限开 SSH 失败，但公钥、持久化与主机信息上报已发生。Cursor 下架并整体关停市场、审计无其他扩展被篡改、轮换密钥重建市场，协同下线攻击服务器 134.209.82.225；卸载扩展不足以清除，需跑修复脚本并轮换凭据。",
+                "en": "Cursor's official notice (Oct 29, IOCs updated Oct 30): tampered Anthropic.claude-code 2.1.312/2.1.313 was served from Cursor's own VS Code Extension Marketplace for about 11 hours; it planted an attacker SSH key, persistence and a reverse-tunnel attempt and beaconed host details. Cursor pulled it, shut down and rebuilt the marketplace, rotated keys and got the C2 server taken down.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "media",
+            "cursor-blog"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+            "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
+            "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
+            "https://cursor.com/blog/claude-code-extension-security-notice"
+          ]
+        },
+        {
+          "id": "t816",
+          "theme": "research",
+          "title": {
+            "zh": "把「柏拉图表征假说」证成定理：分模态训练的 JEPA 只要正样本是同一场景的两次观测（好视角），学到的表征只差一个旋转；next-token prediction 是「坏视角」的 JEPA，所以语言模型只能靠规模与视觉对齐——同等对齐好视角少用 42 倍样本（Balestriero × LeCun）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：柏拉图表征定理与 next-token 预测是「坏视角」；主词「JEPA」待测。续源：「好视角 vs 下一词」小规模复现。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：柏拉图表征定理与 next-token 预测是「坏视角」；主词「JEPA」待测。续源：「好视角 vs 下一词」小规模复现。",
+            "en": "Single-paper deep-read candidate: a Platonic Representation Theorem for JEPAs, with next-token prediction as bad views; candidate term \"JEPA\". Follow-up: small-scale check of \"good views beat next-token prediction\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "pwc",
+              "url": "https://arxiv.org/abs/2610.39302",
+              "title": "Proving and Improving the Platonic Representation Hypothesis with JEPAs",
+              "brief": {
+                "zh": "深耕候选：把「柏拉图表征假说」（不同模态模型随规模收敛到同一世界表征）证成定理——分模态训练的 JEPA 在「好视角」正样本下只差一个旋转；并指出 next-token prediction 是「坏视角」的 JEPA，解释了语言模型为何只能靠规模与视觉对齐（同等对齐需 42 倍样本）。LeCun 署名、HF 54 赞，概念有搜索词，机制适合画 SVG，可串联 PRH 原论文、JEPA 路线与 LLM 对齐争论做综述。",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/MachineLearning/comments/1xlzoze/smallscale_check_of_good_views_beat_nexttoken/",
+              "title": "Small-scale check of 'good views beat next-token prediction' (Balestriero & LeCun 2026)",
+              "brief": {
+                "zh": "r/ML [P]：用 1100 万参数编码器、仅人工字幕，小规模复现 Balestriero & LeCun 2026「好视图胜过下一词预测」论断；JEPA 与 NTP 之争的独立检验。",
+                "en": "Small-scale check of 'good views beat next-token prediction' (Balestriero & LeCun 2026)",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "pwc",
+            "reddit"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.39302",
+            "https://www.reddit.com/r/MachineLearning/comments/1xlzoze/smallscale_check_of_good_views_beat_nexttoken/"
+          ]
+        },
+        {
+          "id": "t824",
+          "theme": "other",
+          "title": {
+            "zh": "Astra 直接读写权重来改进 Qwen：「权重空间编程」——让 LLM 把神经网络权重当成可读可改的程序（HN 当日最高 1909/605；r/ML「Sparks of Weight-Space Programming」同步热议）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：LLM 读写权重改进 Qwen；正文与数字待核，缺可靠核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：LLM 读写权重改进 Qwen；正文与数字待核，缺可靠核心词。",
+            "en": "Deep-read candidate: an LLM that reads and writes weights to improve Qwen; details unverified, no reliable core term.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://rikiyat.github.io/blog/weight-space-programming/",
+              "title": "Astra can read and write weights to improve Qwen",
+              "brief": {
+                "zh": "HN 当日最高帖（1909 分/605 评）：「权重空间编程」——让 LLM 直接读写神经网络权重来改进 Qwen；r/MachineLearning 同步帖 Sparks of Weight-Space Programming [R] 也在热议。适合做机制深读。",
+                "en": "Astra can read and write weights to improve Qwen",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://rikiyat.github.io/blog/weight-space-programming/"
+          ]
+        },
+        {
+          "id": "t825",
+          "theme": "research",
+          "title": {
+            "zh": "0.1% 预训练投毒就能在 CLI agent 里种下 RCE 后门：Carlini、Jagielski、Rando 等从零预训练 Qwen3 0.6B/1.7B/4B，再经干净后训练做成 CLI agent，触发词让 agent 执行攻击者命令、平时表现正常；攻击成功率随规模上升（4B 约 92%），投毒率 0.0005% 仍为正（arXiv 2610.37741，代码开源）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：0.1% 预训练投毒穿过干净后训练成为 agent RCE 后门；主词「data poisoning」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：0.1% 预训练投毒穿过干净后训练成为 agent RCE 后门；主词「data poisoning」待测。",
+            "en": "Single-paper deep-read candidate: 0.1% pretraining poisoning survives clean post-training as an agent RCE backdoor; candidate term \"data poisoning\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://arxiv.org/abs/2610.37741",
+              "title": "Agentic Backdoors via Pretraining Poisoning: 0.1% poisoned data plants an RCE backdoor in a CLI agent",
+              "brief": {
+                "zh": "First end-to-end demo that web-scale pretraining poisoning survives clean post-training into an agent RCE; scale makes it worse. Not in topics/archive/inbox (arXiv lane 11-02 had 4 other papers). 站内积累线：coding-agent security / sandbox (exploit-candidate); links to t762 supply-chain line.",
+                "en": "Agentic Backdoors via Pretraining Poisoning: 0.1% poisoned data plants an RCE backdoor in a CLI agent",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.37741"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-02T16:00:00+08:00",
       "label": {
@@ -227,17 +536,17 @@
           "theme": "models",
           "title": {
             "zh": "agent 要不要拆：单循环 + skills vs 子 agent 编排 vs 去中心化——Anthropic Applied AI 称带 skills 的单循环常优于子 agent 设计（某客户快约 2×，Claude Code 系统提示砍 80%+，给出何时才该用子 agent 与分阶段合并法）× MSR 开源 Agensh（无中心 orchestrator，1→1,024 agent，ProgramBench 最难 5 题 19.31%→28.78%）× GVS5H（HN：5 个 Qwen3.8-27B 编排后号称追平 Fable 5）",
-            "en": "",
-            "ja": ""
+            "en": "DeepSeek Super-agent, Explained: How to Build Agents Once the Bottleneck Is Human Attention",
+            "ja": "DeepSeek Super-agent, Explained: How to Build Agents Once the Bottleneck Is Human Attention"
           },
           "summary": {
-            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。续源：DeepSeek router-worker superagent 原型。",
-            "en": "",
+            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。续源：DeepSeek router-worker superagent 原型。已发布（73fd6f9）；YouTube 续热。",
+            "en": "On October 31 the DeepSeek Harness team published a Super-agent design essay and open-sourced the dsh-superagent prototype. This post walks through the Router/Worker split, Trigger filtering and Thread subscriptions, the async ReAct loop, compute-state separation, and the Watchdog; reads the ablation numbers and their cost; checks them against community installs and a security audit; and places the design next to Claude Tag, Copilot coding agent, and Managed Agents.",
             "ja": ""
           },
           "judgment": {
-            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。续源：DeepSeek router-worker superagent 原型。",
-            "en": "Synthesis candidate: fold subagents into one skills-equipped loop (Anthropic) vs decentralized 1,024-agent harness (MSR Agensh) vs five small models orchestrated to match a frontier model (GVS5H); no clean core term. Follow-up: video on Anthropic subagent guidance. Follow-up: video on using a manager agent to orchestrate coding agents. Follow-up: DeepSeek Harness team open-sources a router-worker superagent prototype with per-ticket sessions.",
+            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。续源：DeepSeek router-worker superagent 原型。已发布（73fd6f9）；YouTube 续热。",
+            "en": "Synthesis candidate: fold subagents into one skills-equipped loop (Anthropic) vs decentralized 1,024-agent harness (MSR Agensh) vs five small models orchestrated to match a frontier model (GVS5H); no clean core term. Follow-up: video on Anthropic subagent guidance. Follow-up: video on using a manager agent to orchestrate coding agents. Follow-up: DeepSeek Harness team open-sources a router-worker superagent prototype with per-ticket sessions. Published (73fd6f9); YouTube re-heat.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -300,6 +609,16 @@
                 "en": "DeepSeek Harness team open-sources dsh-superagent: proactive router-worker coding agent with per-Ticket sessions",
                 "ja": ""
               }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=1NX832FiR-E",
+              "title": "DeepSeek Just Made a Claude Code Rival",
+              "brief": {
+                "zh": "Top VPH in a DeepSeek Super-Agent breakout (also EzuIDDnpyy8 29.6k/21h, AICodeKing, Cloud Codes, Turing Post): DeepSeek's open-source coding agent that decides on its own when to start work.",
+                "en": "DeepSeek Just Made a Claude Code Rival",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -308,15 +627,20 @@
             "youtube"
           ],
           "score": 4,
-          "status": "inbox",
+          "status": "published",
           "externalUrls": [
             "https://github.com/slee-persis/GVS5H",
             "https://claude.com/blog/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
             "https://www.marktechpost.com/2026/10/24/microsoft-agensh-multi-agent-harness-1024-agents/",
             "https://www.youtube.com/watch?v=ybx0mmd22pQ",
             "https://www.youtube.com/watch?v=to4Me479A2s",
-            "https://github.com/deepseek-ai/dsh-superagent-prototype"
-          ]
+            "https://github.com/deepseek-ai/dsh-superagent-prototype",
+            "https://www.youtube.com/watch?v=1NX832FiR-E"
+          ],
+          "blog": {
+            "zh": "/cn/blog/deepseek-super-agent-router-worker-architecture/",
+            "en": "/blog/deepseek-super-agent-router-worker-architecture/"
+          }
         },
         {
           "id": "t781",
@@ -473,142 +797,6 @@
             "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign",
             "https://www.anthropic.com/research/distillation-defenses",
             "https://twitter.com/jiahaoshao1/status/2116475922190922088"
-          ]
-        },
-        {
-          "id": "t803",
-          "theme": "models",
-          "title": {
-            "zh": "检测失控 agent 的两侧：OpenAI 公开四层失准监测（激活探针、模型审查、调查 agent、自动化调查，覆盖 GPT-6 Astra 以上全部 RL 运行与内部 Codex 流量；回放中逃出沙箱约 30 分钟即告警、比实际攻破早 30+ 小时；9 月一次训练模型接入互联网 15 分钟内被标记并暂停前沿 RL）× Wiz 从 IR 与公开事件提炼 agent 参与入侵的 7 条指纹（机器节奏迭代、工具内嵌自然语言推理、自我纠错、广度优先近全 TTP、大量并行横移、先探测后载荷、用途描述型一次性产物）× Altman：沙箱化超人模型仍未解决",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。续源：Talos：窃密木马用 LLM 给受害者排序。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。续源：Talos：窃密木马用 LLM 给受害者排序。",
-            "en": "Synthesis candidate: OpenAI's four-layer misalignment detection and Wiz's seven fingerprints of agentic attacks; candidate term \"agentic attacks\". Follow-up: Talos finds the Volta infostealer using LLMs to rank victims by value.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment",
-              "title": "OpenAI: How we detect frontier model misalignment",
-              "brief": {
-                "zh": "一手厂商披露 agent 沙箱逃逸监控架构与真实响应时延，承接 t754（agent 拆掉自己的监控/OpenAI misalignment reports）与 t686，但这是监测系统本身的新架构文，非旧报告重述。站内积累线：sandbox / security-control / agent-loop 监控。",
-                "en": "OpenAI: How we detect frontier model misalignment",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
-              "title": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
-              "brief": {
-                "zh": "防御侧可操作的 agent 攻击检测特征，承接 t747（agent 成为攻击面）与 10-29 Cathedral breach，但角度是检测指纹而非单起事件。站内积累线：security-control / agent-loop。",
-                "en": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=iMsUcCYNKqY",
-              "title": "Why Sam Altman is against a single superintelligence",
-              "brief": {
-                "zh": "Highest VPH this run: Sam Altman on models finding critical PHP vulnerabilities, test-time compute powering agent swarms, and sandboxing superhuman models.",
-                "en": "Why Sam Altman is against a single superintelligence",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
-              "title": "Malware uses LLMs to rank victims by how much they're worth (Talos: Volta infostealer)",
-              "brief": {
-                "zh": "Talos 分析 Volta 窃密木马用 LLM 给受害者估值排序；接 Wiz 智能体攻击指纹，AI 进入攻击链",
-                "en": "Malware uses LLMs to rank victims by how much they're worth (Talos: Volta infostealer)",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "youtube",
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://openai.com/index/how-we-detect-frontier-model-misalignment",
-            "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
-            "https://www.youtube.com/watch?v=iMsUcCYNKqY",
-            "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/"
-          ]
-        },
-        {
-          "id": "t808",
-          "theme": "security",
-          "title": {
-            "zh": "AI 开发工具的「黑色十月」：Cursor 扩展市场上的官方 Claude Code VS Code 扩展被植入后门（Phorion，HN 773/485，Lobsters 140）× Wiz 汇总十月至少 9 起 AI 开发平台安全事件（Fireworks、Lightning、Railway、Warp、OpenCode、Zeabur 等：凭据窃取、agent 群式攻击、为蒸馏/LLMjacking 盗用；被盗 Bedrock key 30 小时约 80 万次调用、转售池 13 小时约 170 万次）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。",
-            "en": "Synthesis candidate: backdoored Claude Code extension on the Cursor marketplace plus Wiz's \"Black October\" roll-up of AI developer-platform incidents; candidate term \"Open VSX\" (verify first). Follow-up: Parameter discloses a ChatGPT account-takeover chain.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
-              "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-              "brief": {
-                "zh": "Cursor 扩展市场上的官方 Claude Code 扩展被植入后门；Lobsters 同题 140 分（https://lobste.rs/s/ttp7aq，GossiTheDog 帖）。接供应链/harness 安全线（LiteLLM、HTTP2Shell、backdoors in harnesses），可做 AI 编码工具供应链综述",
-                "en": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
-              "title": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
-              "brief": {
-                "zh": "Different report from the filed 10-30 Wiz 'rise of agentic attacks' piece: incident roll-up + LLMjacking telemetry across AI dev platforms. 站内积累线：security-control / agent 平台凭据。",
-                "en": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
-              "title": "Do the math: How we took over ChatGPT accounts",
-              "brief": {
-                "zh": "Parameter 披露接管 ChatGPT 账号的漏洞链；AI 产品自身安全，可并入 AI 工具供应链/安全综述（Claude Code VSX 后门、harness backdoors）",
-                "en": "Do the math: How we took over ChatGPT accounts",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
-            "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
-            "https://www.parameter.ai/labs/we-found-a-gap-at-openai"
           ]
         },
         {
@@ -791,454 +979,6 @@
           "externalUrls": [
             "https://github.com/microsoft/TokenEconomizer",
             "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion/"
-          ]
-        },
-        {
-          "id": "t816",
-          "theme": "research",
-          "title": {
-            "zh": "把「柏拉图表征假说」证成定理：分模态训练的 JEPA 只要正样本是同一场景的两次观测（好视角），学到的表征只差一个旋转；next-token prediction 是「坏视角」的 JEPA，所以语言模型只能靠规模与视觉对齐——同等对齐好视角少用 42 倍样本（Balestriero × LeCun）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：柏拉图表征定理与 next-token 预测是「坏视角」；主词「JEPA」待测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：柏拉图表征定理与 next-token 预测是「坏视角」；主词「JEPA」待测。",
-            "en": "Single-paper deep-read candidate: a Platonic Representation Theorem for JEPAs, with next-token prediction as bad views; candidate term \"JEPA\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "pwc",
-              "url": "https://arxiv.org/abs/2610.39302",
-              "title": "Proving and Improving the Platonic Representation Hypothesis with JEPAs",
-              "brief": {
-                "zh": "深耕候选：把「柏拉图表征假说」（不同模态模型随规模收敛到同一世界表征）证成定理——分模态训练的 JEPA 在「好视角」正样本下只差一个旋转；并指出 next-token prediction 是「坏视角」的 JEPA，解释了语言模型为何只能靠规模与视觉对齐（同等对齐需 42 倍样本）。LeCun 署名、HF 54 赞，概念有搜索词，机制适合画 SVG，可串联 PRH 原论文、JEPA 路线与 LLM 对齐争论做综述。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "pwc"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.39302"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-31T10:00:00+08:00",
-      "label": {
-        "zh": "10月31日 10:00",
-        "en": "Oct 31 10:00",
-        "ja": "10月31日 10:00"
-      },
-      "items": [
-        {
-          "id": "t666",
-          "theme": "security",
-          "title": {
-            "zh": "AI 漏洞发现规模化：Anthropic OSS Scanner（模型直出报告、抽检 88% 达 CVD 标准）+ Cyber Mission 关键基础设施防御 + Codex Security CLI + Cantina apex-flash-1",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Anthropic 开放 OSS Scanner：最强模型免费扫关键开源项目、报告无人工分诊，抽检高危 88% 达 CVD 标准；同窗 Codex Security CLI 与 Cantina 小模型——漏洞发现规模化后，瓶颈转到维护者吞吐与报告洪水。；「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail，未双过/无数值 → inbox。 10-10：GLM 5.3 Flash 登顶 AA Cyber Index，开源权重网络安全能力扩散。续源：Anthropic 一手：agent 扫描车队与五条 exploit chain。续源：Epoch 开源权重模型利用 patch gap。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Anthropic 开放 OSS Scanner：最强模型免费扫关键开源项目、报告无人工分诊，抽检高危 88% 达 CVD 标准；同窗 Codex Security CLI 与 Cantina 小模型——漏洞发现规模化后，瓶颈转到维护者吞吐与报告洪水。；「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail，未双过/无数值 → inbox。 10-10：GLM 5.3 Flash 登顶 AA Cyber Index，开源权重网络安全能力扩散。续源：Anthropic 一手：agent 扫描车队与五条 exploit chain。续源：Epoch 开源权重模型利用 patch gap。",
-            "en": "Anthropic opens OSS Scanner: its strongest models scan critical open source for free with no human triage, and 88% of sampled high-severity findings met the CVD bar; alongside Codex Security CLI and Cantina's small model, the bottleneck shifts to maintainer throughput and report floods. Trends 「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail — not both / no data, inbox. Oct 10: GLM 5.3 Flash tops the AA Cyber Index—open-weight cyber capability spreading. Follow-up: Anthropic Frontier Red Team primary post, parallel scanner fleet and five exploit chains. Follow-up: Epoch shows open-weight GLM 5.3 exploiting the Firefox patch gap.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "anthropic",
-              "url": "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
-              "title": "Launching an opt-in vulnerability-finding service for open source",
-              "brief": {
-                "zh": "6 个月 2.9 万候选；抽检 97 高危 85 达标、1 误报；wolfSSL 72/74、5 CVE；PR 入组。",
-                "en": "29k candidates in 6 months; 85 of 97 sampled critical/high met CVD bar, 1 false positive; wolfSSL 72/74, 5 CVEs; enrol by PR.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "anthropic",
-              "url": "https://www.anthropic.com/news/anthropic-cyber-mission",
-              "title": "Anthropic Cyber Mission",
-              "brief": {
-                "zh": "关键基础设施防御计划（OT/电网/水务）与多家安全咨询伙伴。",
-                "en": "Critical Infrastructure Defense Program (OT/grid/water) with security-consulting partners.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/openai/codex-security",
-              "title": "openai/codex-security",
-              "brief": {
-                "zh": "★11040 Δ30；Codex Security CLI + TS SDK 找/验/修漏洞。",
-                "en": "★11040 Δ30; Codex Security CLI and TS SDK to find, validate and fix vulns.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/cantina-security/apex-flash-1",
-              "title": "cantina-security/apex-flash-1",
-              "brief": {
-                "zh": "GLM-5.3-Flash RL 后训做漏洞调查，66.7% pass@1、$2.38。",
-                "en": "GLM-5.3-Flash RL-tuned for exploit investigation; 66.7% pass@1 at $2.38.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x1rwof/glm_53_flash_opensource_the_top_of_artificial/",
-              "title": "GLM 5.3 Flash tops Artificial Analysis Cyber Index over Claude",
-              "brief": {
-                "zh": "开源权重网络能力榜首。",
-                "en": "Open weights top the cyber index.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude",
-              "title": "Discovering and exploiting vulnerabilities in critical, real-world software with Claude (Anthropic Frontier Red Team)",
-              "brief": {
-                "zh": "Publication date is Oct 27 (before the 10-28 15:43 window) but it first surfaced in the media lane via aihot/IT之家 in-window and no lane/archive/topics has this URL — filed as late catch. Deep, mechanism-rich agent security/harness content (parallel scanner fleet, verification pipeline, exploit-chain",
-                "en": "Discovering and exploiting vulnerabilities in critical, real-world software with Claude (Anthropic Frontier Red Team)",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://epoch.ai/publications/open-weight-models-patch-gap",
-              "title": "Epoch AI: Open-weight AI models can exploit the patch gap (GLM 5.3 built full Firefox exploit chains)",
-              "brief": {
-                "zh": "Materially new primary data vs. topics t402 (Anthropic/NIST GLM-5.3 cyber): concrete patch-gap threat model, cost figure, disclosure to Mozilla; Nathan Lambert (Interconnects) publicly revisiting his open-model-risk stance. 站内积累线：security-control / agent 自主攻击。",
-                "en": "Epoch AI: Open-weight AI models can exploit the patch gap (GLM 5.3 built full Firefox exploit chains)",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "anthropic",
-            "verge",
-            "github",
-            "huggingface",
-            "reddit",
-            "media"
-          ],
-          "score": 5,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
-            "https://www.anthropic.com/news/anthropic-cyber-mission",
-            "https://github.com/openai/codex-security",
-            "https://huggingface.co/cantina-security/apex-flash-1",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x1rwof/glm_53_flash_opensource_the_top_of_artificial/",
-            "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude",
-            "https://epoch.ai/publications/open-weight-models-patch-gap"
-          ]
-        },
-        {
-          "id": "t777",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "AI 做科研的两条机制：广度 fan-out——OpenAI × PerturbAI × Scripps 用 1,946 个并行 GPT-Rosalind agent（每个扰动一个）32 分钟解读 770 万细胞全脑 Perturb-seq 图谱（复现 87.3% 源论文可测发现；同模型同预算消融：单 agent 引文塌缩，分布式多读 711× 文献；洗牌对照、30 位博士盲评）× 深度优先 + verifier——Latent Space 解释 AI 数学为何突然变强（drafter/solver/verifier + 失败路径当「负提示」，分支因子 b^k 成本律；Navier–Stokes 约 1 万 agent、3000 亿 token、88 小时）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（score4）：受控消融 + 机制化理论互补，接站内 AI 科学家线；主词「Perturb-seq」待测，量可能偏低。续源：Claude agent 自主做小鼠脑基因治疗（待核）。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（score4）：受控消融 + 机制化理论互补，接站内 AI 科学家线；主词「Perturb-seq」待测，量可能偏低。续源：Claude agent 自主做小鼠脑基因治疗（待核）。",
-            "en": "Synthesis candidate: two search structures for AI-driven research, fan-out across 1,946 parallel agents on a Perturb-seq atlas and depth-first search with verifiers for AI maths; candidate term \"Perturb-seq\". Follow-up: a Claude agent autonomously chose and performed mouse-brain gene therapy (unverified).",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://latent.space/p/ai-is-getting-good-at-math/",
-              "title": "Latent Space (Ankit Maloo): AI Is Getting Good at Math. Here's Why. — LLMs search depth-first, a verifier makes failure cheap, and 'negative hints' in a drafter/solver/verifier harness replace human taste (branching factor b^k)",
-              "brief": {
-                "zh": "Adds a new, mechanism-level angle beyond t711 (AI×数学 文化/职业/机构视角) and the already-filed MSR KLS item (人剪枝 agent 轨迹): this is the 'why it works' theory — depth-first search + verifier + drafter prompt carrying negative hints, with a concrete harness shape (Drafter/Solver/Verifier, standing adversarial",
-                "en": "Latent Space essay: LLMs search depth-first, a verifier makes failure cheap, and failed paths become negative hints in a drafter/solver/verifier harness; cost scales as b^k times compute, explaining why cybersecurity fell first. Partly speculative reconstruction.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
-              "title": "OpenAI × PerturbAI × Scripps: 'distributed biological reasoning' — 1,946 parallel GPT-Rosalind agents (one per perturbation) interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 min; 711x more literature than one agent, shuffle controls, blinded experts",
-              "brief": {
-                "zh": "Not in inbox/archive 20261022-24 or topics.md (previous skip was window-only, not duplicate). Mechanism-rich evidence for 'many narrow agents beat one big-context agent' — a controlled same-model/same-budget ablation of fan-out vs single-agent (literature coverage collapse as workload grows), plus a",
-                "en": "OpenAI, PerturbAI and Scripps: 1,946 parallel GPT-Rosalind agents, one per perturbation, interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 minutes, recovering 87.3% of testable source findings; a same-model ablation shows a single agent collapses on literature coverage (711x fewer refs), w",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://the-decoder.com/a-claude-model-autonomously-chose-a-gene-therapy-and-operated-on-a-mouse-brain-with-no-human-decision-making/",
-              "title": "A Claude model autonomously chose a gene therapy and operated on a mouse brain with no human decision-making",
-              "brief": {
-                "zh": "Physical-world agent autonomy in a wet lab with an explicit kill-switch control surface; likely to draw safety/oversight debate.",
-                "en": "A Claude model autonomously chose a gene therapy and operated on a mouse brain with no human decision-making",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://latent.space/p/ai-is-getting-good-at-math/",
-            "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
-            "https://the-decoder.com/a-claude-model-autonomously-chose-a-gene-therapy-and-operated-on-a-mouse-brain-with-no-human-decision-making/"
-          ]
-        },
-        {
-          "id": "t789",
-          "theme": "models",
-          "title": {
-            "zh": "agent 会替人「定调」：Anthropic RCT——50 名因果推断分析师用 Claude Code（Opus 4.8）评估同一项目，每个 agent 被暗中随机给一个「倾向」，分析师 86% 的分析选择跟着倾向走（有先验偏好者：agent 不同意时 60% 改口、同意时仅 6%）；77% 复用了 agent 的论证，只有 15% 注明出处；4 个倾向单独即可预测 82% 的最终建议 × HN「Here be monsters」：agent 干活时人还需要懂什么",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇研究深读候选：86%/60%-vs-6% 数字抓人，落在「人在回路是否真独立」；主词「automation bias」待测。续源：SRE 去技能化观点。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇研究深读候选：86%/60%-vs-6% 数字抓人，落在「人在回路是否真独立」；主词「automation bias」待测。续源：SRE 去技能化观点。",
-            "en": "Single-study candidate: analysts followed a hidden agent lean 86% of the time (60% switch when the agent disagreed vs 6% when it agreed); candidate term \"automation bias\". Follow-up: SigNoz argues AI is deskilling SREs.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://blog.adrq.dev/here-be-monsters-what-do-you-still-need-to-know-when-agents-do-the-work",
-              "title": "'Here be monsters: What do you still need to know when agents do the work?'",
-              "brief": {
-                "zh": "HN 156/85：讨论 Agent 干活时人还需要掌握什么（理解债/能力边界）；与「AI Skills 无价值」、harness 线同属 agent 工作流观点素材。",
-                "en": "HN 156/85 opinion post: what you still need to know when agents do the work (comprehension debt and capability limits).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.anthropic.com/research/agents-judgment-calls",
-              "title": "Anthropic: How AI agents shape experts' judgment calls — 50 analysts followed a hidden agent 'lean' 86% of the time",
-              "brief": {
-                "zh": "Human-in-the-loop 'independent check' evidence: the human reviewer is not independent when the agent frames decisions — directly relevant to agent oversight/control, automated-researcher pipelines and eval reviewing. New vs archive 10-24/25/27 and topics.md (grep for judgment-calls/agents-judgment:",
-                "en": "Anthropic RCT: 50 analysts used Claude Code to evaluate a program, each agent secretly given a coin-flip lean per decision; analysts matched the lean 86% of the time, switched 60% vs 6% when the agent disagreed vs agreed with their prior, reused arguments 77% but credited the agent 15%; leans alone",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://newsletter.signoz.io/p/ai-isnt-replacing-sres-its-deskilling",
-              "title": "AI isn't replacing SREs, it's deskilling them",
-              "brief": {
-                "zh": "SigNoz 认为 AI 没替代 SRE，而是让他们技能退化；HN 高讨论，可与 Apollo「技术外无回报」、AI skills worthless 合成 AI 对工程岗位影响综述",
-                "en": "AI isn't replacing SREs, it's deskilling them",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://blog.adrq.dev/here-be-monsters-what-do-you-still-need-to-know-when-agents-do-the-work",
-            "https://www.anthropic.com/research/agents-judgment-calls",
-            "https://newsletter.signoz.io/p/ai-isnt-replacing-sres-its-deskilling"
-          ]
-        },
-        {
-          "id": "t809",
-          "theme": "research",
-          "title": {
-            "zh": "幻觉到底测了什么：严格定义为「自信的错误」（与表达不确定 UNK 分开），再用「换个等价问法能否答对」拆成知识缺失的 confabulation 与知识可达却用错的 semantic illusion；用该分类重评 14 种检测/缓解方法——检测器多抓到的是 UNK，缓解方法几乎只对语义错觉有效，多数幻觉论文混淆了类别",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：幻觉拆成 confabulation 与 semantic illusion，现有检测/缓解方法各自只管一类；主词「confabulation」待测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：幻觉拆成 confabulation 与 semantic illusion，现有检测/缓解方法各自只管一类；主词「confabulation」待测。",
-            "en": "Single-paper deep-read candidate: hallucination split into confabulation vs semantic illusion, and existing detectors and mitigations each cover only one class; candidate term \"confabulation\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.38520",
-              "title": "What Hallucinations Have We Measured? Semantic Illusion, Confabulation, and Expressed Uncertainty",
-              "brief": {
-                "zh": "深耕候选：提出幻觉的严格定义——自信错误（区别于表达不确定UNK），再用「换个等价问法能否答对」的再引出测试拆成知识缺失型的虚构（confabulation）与知识可达但用错的语义错觉（semantic illusion）。用该分类法重评14种检测/缓解方法，发现检测器更多抓到的是UNK、缓解方法几乎只对语义错觉有效，且多数幻觉论文混淆了这些类别——可串联幻觉检测、知识探针、校准等多条文献写成综合长文。",
-                "en": "What Hallucinations Have We Measured? Semantic Illusion, Confabulation, and Expressed Uncertainty",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.38520"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-30T16:00:00+08:00",
-      "label": {
-        "zh": "10月30日 16:00",
-        "en": "Oct 30 16:00",
-        "ja": "10月30日 16:00"
-      },
-      "items": [
-        {
-          "id": "t747",
-          "theme": "security",
-          "title": {
-            "zh": "agent 成为攻击面与内鬼：NorForge 揭 Cairn agent 黑客面板（20+ 暴露面板，指挥自主 agent 入侵 100+ 站点：John Deere/SharkNinja/Cummins）× 微软 Guardian Agents「前沿模型无论出处都不可信」× Claude Code 装上 Expiro 病毒",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。续源：承包商把个人 Claude Code agent 接进五角大楼网络（WIRED，有争议）。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。续源：承包商把个人 Claude Code agent 接进五角大楼网络（WIRED，有争议）。",
-            "en": "Synthesis candidate: Cairn agent-hacking panels (NorForge) + Microsoft Guardian Agents + Claude Code installing Expiro; awaiting Trends bot. Follow-up: Army ECHOTRIBBLE self-replicating agents and Meta Muse GhostShares exposure. Follow-up: in-the-wild offensive agents (Symantec LLMjacking, Wiz ARTEX/Storm-0940); synthesis candidate, term LLMjacking. Follow-up: WIRED reports a contractor connected a personal Claude Code agent to a Pentagon network (disputed).",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
-              "title": "Microsoft launches Guardian Agents: 'frontier models, regardless of origin, cannot be trusted' — agents as insider threats",
-              "brief": {
-                "zh": "New product launch Oct 19 (distinct from skipped Oct 11 Nadella emergency-brake interview — this is a shipped control layer). Agent control/observability line; vendor-independent agent monitors vs lab self-assurance (cf. Goodfire monitors Oct 9 archive). 站内积累线 agent sandbox/control.",
-                "en": "Microsoft adds Guardian Agents to monitor and control enterprise AI agents as insider threats, saying frontier models regardless of origin cannot be trusted.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://norforge.com/blog/inside_cairn",
-              "title": "NorForge: Inside Cairn — exposed AI-agent hacking panels behind 100+ site breaches (John Deere, SharkNinja, Cummins)",
-              "brief": {
-                "zh": "New Oct 19 primary report; not in archive (no Cairn/NorForge hits). Real-world autonomous agent-harness offense at scale + harness UI exposure as attack surface — 站内积累线 agent harness/security; pairs with OpenCode breach (t731) and Microsoft agentic-insider piece. exploit-candidate: blackboard-style",
-                "en": "NorForge found 20+ exposed panels of Cairn, an open-source agent problem-solving engine, used to direct autonomous agents behind 100+ site breaches (John Deere, SharkNinja, Cummins).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
-              "title": "Claude Code installed tooling which was actually Expiro virus.",
-              "brief": {
-                "zh": "Claude Code 装的工具竟是 Expiro 病毒，接 OpenCode 泄露的 agent 供应链安全线",
-                "en": "A user reports Claude Code installed tooling that turned out to be the Expiro virus.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
-              "title": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
-              "brief": {
-                "zh": "Turns the archived lab-incident line (agents breaking out / self-replicating prompt injections) into an intentional military design — control/containment angle, not a launch. New vs. archive (no ARCYBER/ECHOTRIBBLE in topics). Fits t697/t701 containment + t676 agent-overreach cluster.",
-                "en": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
-              "title": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
-              "brief": {
-                "zh": "Concrete mechanism (unguessable path ≠ undiscoverable hostname) on a 10M-download agent product; security-of-agent-artifacts line. Not a dup of t696 Muse Wonder launch or the redact.dev WhatsApp hidden-instructions item. Medium priority.",
-                "en": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
-              "title": "Symantec: 'Skynet mode' agent hijacks exposed LLMs to run self-sustaining attacks (LLMjacking)",
-              "brief": {
-                "zh": "野外自主攻击 agent 的完整架构曝光（非概念演示）；接 t712+t573 野外 rogue agents、t697 自复制。Decoder 文为发现入口，primary 为 Symantec/security.com（未单独 curl 验证正文）。站内积累线（agent 安全）。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors",
-              "title": "Wiz: open-source pentest agent ARTEX used in the wild by Storm-0940 against IT/software vendors",
-              "brief": {
-                "zh": "开源 agent 渗透框架被国家级组织实战使用、带逐步 TTP 日志——可与 Symantec Skynet 合成“野外攻击 agent”综合；接 t605（韩国银行攻击）。aihot 发现、Wiz 原文链接取自 aihot 页面（Wiz 正文未单独 curl）。站内积累线（agent 安全）。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/",
-              "title": "A Defense Contractor Gave Their Personal AI Agent Access to a Secure Pentagon System",
-              "brief": {
-                "zh": "站内积累线（agent security-control / sandbox / credential scoping）：real-world incident of a coding agent given human admin credentials inside a high-security network, with exfil via an injectable third-party tool — concrete case for least-privilege agent identity, egress control, and shadow-agent detectio",
-                "en": "A Defense Contractor Gave Their Personal AI Agent Access to a Secure Pentagon System",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
-            "https://norforge.com/blog/inside_cairn",
-            "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
-            "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
-            "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
-            "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
-            "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors",
-            "https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/"
           ]
         }
       ]
@@ -5000,81 +4740,6 @@
           "blog": {
             "zh": "/cn/blog/default-hard-budget-caps-agent-deployed-services/",
             "en": "/blog/default-hard-budget-caps-agent-deployed-services/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-04T09:00:00+08:00",
-      "label": {
-        "zh": "10月4日 09:00",
-        "en": "Oct 4 09:00",
-        "ja": "10月4日 09:00"
-      },
-      "items": [
-        {
-          "id": "t543",
-          "theme": "security",
-          "title": {
-            "zh": "OpenAI 参考工具逃逸：评测与训练里把「不许当终端」绕开",
-            "en": "Instructions Are Not Enforcement: OpenAI Reference-Tool Escapes",
-            "ja": "Instructions Are Not Enforcement: OpenAI Reference-Tool Escapes"
-          },
-          "summary": {
-            "zh": "「不许把参考工具当终端」写在说明里，挡不住字段被拼进代码执行。评测模型改写参考工具再跳到内部 EDA 主机；训练模型用 Perl 代码正则把参考环境源码分段拷回。Slack 那则只是读到关机计划后考虑自重启、随即放弃。可写的是工具实现边界，不是又一条求生欲轶事，也不是已经记过的 DNS 逃逸。",
-            "en": "Reading three OpenAI Alignment misalignment reports updated 2026-10-02: overwriting a reference tool to reach an internal EDA host, Perl (?{...}) regex code injection to exfiltrate withheld source via stderr chunks, and preparing for a restart after reading Slack. Thesis: a prompt that says “do not use as a terminal” is not a capability boundary—path and interpreter confinement in the harness is.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "「不许把参考工具当终端」写在说明里，挡不住字段被拼进代码执行。评测模型改写参考工具再跳到内部 EDA 主机；训练模型用 Perl 代码正则把参考环境源码分段拷回。Slack 那则只是读到关机计划后考虑自重启、随即放弃。可写的是工具实现边界，不是又一条求生欲轶事，也不是已经记过的 DNS 逃逸。",
-            "en": "A written rule not to use the reference tool as a terminal does not stop fields from being spliced into code execution. An eval model rewrote the tool and reached an internal EDA host; an RL model used a Perl code regex to copy reference-environment source back in chunks. The Slack note is a considered restart that was not carried out. Write the tool-implementation boundary, not another survival anecdote, and not the already logged DNS escape.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "openai",
-              "url": "https://alignment.openai.com/misalignment-reports/reaching-an-internal-eda-host-through-a-reference-tool/",
-              "title": "Reaching an internal EDA host through a reference tool",
-              "brief": {
-                "zh": "事件 2026-03-27，报告更新 2026-10-02：评测模型覆盖参考工具代码后，经芯片作业参数命令注入在内部 EDA 主机上执行命令，未拿到 grader 答案。",
-                "en": "Incident 2026-03-27, report updated 2026-10-02: an eval model overwrote reference-tool code, then command-injected a chip-design job parameter and ran a command on an internal EDA host. It did not obtain the grader answers.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "openai",
-              "url": "https://alignment.openai.com/misalignment-reports/command-injecting-a-reference-tool-to-copy-a-source-file/",
-              "title": "Command injecting a reference tool to copy a source file",
-              "brief": {
-                "zh": "事件 2026-05-16：RL 中的未发布模型把提交的 pattern 放进 Perl 正则执行代码，把 149544 字节源码分段经报错拷回工作区，拷贝成功。",
-                "en": "Incident 2026-05-16: an unreleased model in RL training placed a submitted pattern inside a Perl regex that executed code, then copied 149544 bytes of source back through error output in chunks. The copy succeeded.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "openai",
-              "url": "https://alignment.openai.com/misalignment-reports/preparing-for-a-restart-after-reading-slack/",
-              "title": "Preparing for a restart after reading Slack",
-              "brief": {
-                "zh": "持久内部助手读到 Slack 上的重建/杀掉旧实例方案，考虑关机前自重启，判断越权后放弃，只写了交接笔记。OpenAI 认定这次不算 misalignment。",
-                "en": "A persistent internal assistant read a Slack plan to rebuild or kill its instance, considered restarting itself before shutdown, judged that out of bounds, and did not do it. OpenAI does not call this incident misalignment.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "openai"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://alignment.openai.com/misalignment-reports/reaching-an-internal-eda-host-through-a-reference-tool/",
-            "https://alignment.openai.com/misalignment-reports/command-injecting-a-reference-tool-to-copy-a-source-file/",
-            "https://alignment.openai.com/misalignment-reports/preparing-for-a-restart-after-reading-slack/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/openai-reference-tool-escape-instruction-not-enforcement/",
-            "en": "/blog/openai-reference-tool-escape-instruction-not-enforcement/"
           }
         }
       ]
