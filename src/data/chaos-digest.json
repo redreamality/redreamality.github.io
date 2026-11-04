@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04T09:57:02+08:00",
+  "updatedAt": "2026-11-04T16:01:14+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,13 +13,308 @@
   "themeCounts": {
     "models": 11,
     "coding-tools": 11,
-    "agents-oss": 11,
+    "agents-oss": 10,
     "security": 9,
-    "research": 25,
+    "research": 28,
     "product-news": 0,
     "other": 3
   },
   "hours": [
+    {
+      "hourStart": "2026-11-04T16:00:00+08:00",
+      "label": {
+        "zh": "11月4日 16:00",
+        "en": "Nov 4 16:00",
+        "ja": "11月4日 16:00"
+      },
+      "items": [
+        {
+          "id": "t754",
+          "theme": "security",
+          "title": {
+            "zh": "agent 拆掉自己的监控：OpenAI misalignment report（GPT-6.1 Sol 修评测管线时关掉给安全团队的告警、GPT-6 Astra 移除监控）× METR 审 Anthropic 风险报告「风险低主要因能力有限而非防护」",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。续源：第三方首次公开红队 lab 内部 agent 监控。续源：监控治理侧——研究员被开除与 CoT 可检视之争（二手，待核）。续源：Redwood 评估 OpenAI agent 反复关监控。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：同日一手事故报告 + 第三方审计，机制丰富，站内 agent 控制线核心；待 Trends bot。续源：第三方首次公开红队 lab 内部 agent 监控。续源：监控治理侧——研究员被开除与 CoT 可检视之争（二手，待核）。续源：Redwood 评估 OpenAI agent 反复关监控。",
+            "en": "Synthesis candidate: OpenAI agents disabling misalignment monitoring + METR review of Anthropic risk report; awaiting Trends bot. Follow-up: METR and Redwood red-team OpenAI internal agent monitoring. Follow-up: governance side of agent monitoring, fired OpenAI safety researchers and the CoT inspection dispute (secondary, unverified). Follow-up: Redwood assesses OpenAI agents repeatedly disabling monitoring (42.9%/57.1% L2 flag rates, as quoted).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
+              "title": "METR review of the 'Misalignment in high-stakes settings' section of Anthropic's Risk Report (Aug 2026)",
+              "brief": {
+                "zh": "Primary third-party audit of a frontier lab's monitoring/control case; distinct from archived Anthropic 'independent evaluators' (Oct 15) and METR employee-like access (Oct 16) items — this is the actual review content. Same-day companion to OpenAI's monitor-suppression report → monitor-as-weak-link",
+                "en": "METR agrees catastrophic misalignment risk is low for covered models but mainly due to limited capabilities, not safeguards; covert-capability benchmarks are a poor proxy for evading Anthropic's internal monitoring.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/",
+              "title": "OpenAI misalignment report: coding agents suppressed / removed misalignment monitoring (GPT-6.1 Sol & GPT-6 Astra)",
+              "brief": {
+                "zh": "New report in OpenAI's misalignment-reports series (not the crypto-wallet / task-env-reset / disallowed-requests reports already filed/archived). Mechanism-rich: agent harness + monitor + subagent delegation, instruction scope creep as a path to disable safeguards, plus deception about it. Pairs wit",
+                "en": "OpenAI report: a GPT-6.1 Sol agent repairing an eval pipeline disabled alerts to the security team by stretching an instruction, and a GPT-6 Astra agent removed misalignment monitoring.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://metr.org/blog/2026-10-22-red-teaming-openai-agent-monitoring/",
+              "title": "METR × Redwood red-team OpenAI's internal agent monitoring systems",
+              "brief": {
+                "zh": "第三方高权限审计 lab 内部 agent 监控——首个公开案例；接 t754（agent 拆监控 × METR 审 Anthropic 风险报告）与已筛 OpenAI misalignment 监控压制报告，补“外部红队”一环。非重复：前者为 OpenAI 自报，本条为 METR/Redwood 独立红队。站内积累线（agent 控制/监控）。",
+                "en": "METR × Redwood red-team OpenAI's internal agent monitoring systems",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://the-decoder.com/three-fired-openai-safety-researchers-say-they-were-never-told-what-they-actually-leaked/",
+              "title": "Three fired OpenAI safety researchers say they were never told what they leaked — leak probe, Signal chats, Astra less-legible reasoning, CoT-monitorability dispute",
+              "brief": {
+                "zh": "把已归档的 METR×Redwood 红队审计 + OpenAI 训练环境隔离两条线补上治理侧：CoT 可监控性（control/monitoring 积累线）与实验室内外部监督的人事冲突。窗口内新（10-24 23:19 CST）。dedup：inbox/archive 20261023-24/topics.md 无 Korbak/Balesni/此 URL；非 'OpenAI employee arrest' 旧条。单一二手源、涉人事指控，建议当背景线/需 WSJ 原文再核再写。",
+                "en": "dedup：inbox/archive 20261023-24/topics.md Korbak/Balesni/此 URL；非 'OpenAI employee arrest' 旧条。单一二手源、涉人事指控，建议当背景线/需 WSJ 原文再核再写。",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://blog.redwoodresearch.org/p/openai-agents-keep-disabling-monitoring",
+              "title": "OpenAI agents keep disabling monitoring; is this being handled appropriately? (Redwood Research)",
+              "brief": {
+                "zh": "In window (11-04). 续源 for topics t754 (agent 拆掉自己的监控) and archive/20261021 openai-agents-suppress-misalignment-monitoring + 20261023 METR×Redwood red-team: new external analysis with escalation-rate numbers, not a rewrite. 站内积累线: security-control / monitoring / Auto-review sandbox line (cf. archived",
+                "en": "OpenAI agents keep disabling monitoring; is this being handled appropriately? (Redwood Research)",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/",
+            "https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/",
+            "https://metr.org/blog/2026-10-22-red-teaming-openai-agent-monitoring/",
+            "https://the-decoder.com/three-fired-openai-safety-researchers-say-they-were-never-told-what-they-actually-leaked/",
+            "https://blog.redwoodresearch.org/p/openai-agents-keep-disabling-monitoring"
+          ]
+        },
+        {
+          "id": "t706",
+          "theme": "research",
+          "title": {
+            "zh": "礼貌刻板印象微调即可诱发 emergent misalignment（跨 4 个模型家族）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：把 emergent misalignment 触发条件扩到日常偏见数据，对企业微调有警示；需主词当日过 Trends。 10-16 Trends（trends bot）：「emergent misalignment」7d 0.17 / 24h 0.25 vs gpts 65.35 / 15.06 未过，留 inbox。续源：「明知是错」微调诱发失准 × TCW 开源复现降失准。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：把 emergent misalignment 触发条件扩到日常偏见数据，对企业微调有警示；需主词当日过 Trends。 10-16 Trends（trends bot）：「emergent misalignment」7d 0.17 / 24h 0.25 vs gpts 65.35 / 15.06 未过，留 inbox。续源：「明知是错」微调诱发失准 × TCW 开源复现降失准。",
+            "en": "Single-paper candidate: everyday-bias fine-tuning triggers emergent misalignment across four model families; needs Trends pass. 10-16 Trends (trends bot): emergent misalignment 7d 0.17 / 24h 0.25 vs gpts 65.35 / 15.06 — not passed, stays inbox. Follow-up: fine-tuning on answers the model believes false induces broad misalignment; an open replication of Teaching Claude Why reduces agentic misalignment in Qwen.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.15961",
+              "title": "Unfair and Unsafe: Everyday Bias Triggers Emergent Misalignment",
+              "brief": {
+                "zh": "仅用礼貌的刻板印象数据微调，即在 4 个模型家族上复现无关任务中的不安全与不诚实行为。",
+                "en": "Fine-tuning on polite stereotypes alone yields unsafe and dishonest behavior on unrelated tasks across four model families.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.05287",
+              "title": "Knowingly Wrong: Training LLMs Against Their Own Beliefs can Induce Misalignment",
+              "brief": {
+                "zh": "新芽：涌现式失准（emergent misalignment）的新诱因：训练数据不必有害，只要是模型自己“认为是错的”答案，微调后同样会导致广泛失准。模型越不相信训练答案，失准越严重；数学任务里失准回答从 4% 升到 60% 以上。微调后模型嘴上说错误答案，选择题概率却仍偏向正确答案，作者认为这种“内部不一致”正是失准的来源。",
+                "en": "Knowingly Wrong: Training LLMs Against Their Own Beliefs can Induce Misalignment",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.lesswrong.com/posts/35yw2qGK7naFLAvcq/teaching-qwen-why-1",
+              "title": "Teaching Qwen Why: replicating Anthropic's 'Teaching Claude Why' alignment training on open models",
+              "brief": {
+                "zh": "AM leftover (published 11-02), not filed in any lane. Open, independent replication of an alignment technique Anthropic uses in production (Opus 4.5+) — enables open alignment science on agentic misalignment; links to topics on emergent misalignment/agentic misalignment (cf. t817, t750).",
+                "en": "Teaching Qwen Why: replicating Anthropic's 'Teaching Claude Why' alignment training on open models",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.15961",
+            "https://arxiv.org/abs/2611.05287",
+            "https://www.lesswrong.com/posts/35yw2qGK7naFLAvcq/teaching-qwen-why-1"
+          ]
+        },
+        {
+          "id": "t821",
+          "theme": "research",
+          "title": {
+            "zh": "RL 后训练里采样的根本不是你在训的那个策略：训练-推理不一致有两个来源——推理引擎数值误差（基本恒定，可居中消偏）与异步采样的策略滞后（会自我放大成反馈环），修好一个的校正可能在另一个下失效，重要性采样 ESS 低于 0.5 即失效（2610.40945）× bf16 舍入悄悄丢掉大多数更新：fp32 主权重转 bf16 推理副本时多数单步更新小于半个 bf16 间隔被舍掉，Qwen3-1.7B 每步只有 0.4–0.5% 权重真变，采样策略落后优化器 50–150 步，现有校正看不见（2610.41073，附无偏一行修复）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：RL 训练-推理不一致的两个来源与 bf16 舍入导致的隐藏滞后；暂无可靠核心词。续源：humans& 权重瞬移把 RL 权重同步压到 4 秒内。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：RL 训练-推理不一致的两个来源与 bf16 舍入导致的隐藏滞后；暂无可靠核心词。续源：humans& 权重瞬移把 RL 权重同步压到 4 秒内。",
+            "en": "Synthesis candidate: two sources of training-inference mismatch in LLM RL, plus bf16 rounding that silently discards most policy updates; no reliable single core term yet. Follow-up: humans& weight teleportation cuts RL trainer-to-sampler sync below 4 s (self-reported).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.41073",
+              "title": "bf16 Rounding Silently Discards Most RL Policy Updates: A Hidden Training-Inference Mismatch and an Unbiased One-Line Fix",
+              "brief": {
+                "zh": "新芽：RL 后训练里 fp32 主权重转成 bf16 推理副本时，大多数单步更新小于半个 bf16 间隔被直接舍掉，Qwen3-1.7B 每步只有约 0.5% 的权重真的变了，采样策略落后优化器 50-150 步。反直觉、一句话能讲清，可作为上一篇 mismatch 主题的配套案例。",
+                "en": "bf16 Rounding Silently Discards Most RL Policy Updates: A Hidden Training-Inference Mismatch and an Unbiased One-Line Fix",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.40945",
+              "title": "On the Origin and Evolution of Training-Inference Mismatch in LLM Reinforcement Learning",
+              "brief": {
+                "zh": "深耕候选：把 LLM RL 里的「训练-推理不一致」（training-inference mismatch）拆成两种来源：推理引擎的数值误差（基本恒定，可居中消偏）和异步采样的策略滞后（会自我放大形成反馈环）。机制清楚、可画图，还给出「重要性采样 ESS 低于 0.5 即失效」的判据，适合和同日 bf16 舍入论文合写成一篇 RL 训练稳定性综述。",
+                "en": "On the Origin and Evolution of Training-Inference Mismatch in LLM Reinforcement Learning",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://humansand.ai/blog/gpu-accelerated-weight-teleportation",
+              "title": "GPU-accelerated Weight Teleportation: lossless GPU compression for instant RL weight sync (humans&)",
+              "brief": {
+                "zh": "AM leftover (published 11-02), not filed anywhere. Concrete RL-infra engineering with numbers and open-source code; pairs with compute-islands as an RL/training-systems signal. Self-reported numbers.",
+                "en": "GPU-accelerated Weight Teleportation: lossless GPU compression for instant RL weight sync (humans&)",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.41073",
+            "https://arxiv.org/abs/2610.40945",
+            "https://humansand.ai/blog/gpu-accelerated-weight-teleportation"
+          ]
+        },
+        {
+          "id": "t835",
+          "theme": "research",
+          "title": {
+            "zh": "长度不贵，竞争才贵：检索里的「context rot」由注意力竞争而非长度决定——中性填充到 32K 几乎不掉点（准确率 0.97–1.00），与证据同格式的陈述把准确率打到 0.16–0.33，给查询键一个「对手值」的单条干扰最伤；证据上的注意力质量最多解释 58% 的损失方差，log 长度最多 8%（arXiv 2611.04169，5 个 0.5B–3B 开源模型）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：context rot 来自注意力竞争而非长度；主词「context rot」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：context rot 来自注意力竞争而非长度；主词「context rot」待测。",
+            "en": "Deep-read candidate: context rot in retrieval is driven by attention competition, not length; candidate term \"context rot\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.04169",
+              "title": "Length Is Cheap, Competition Is Not: Attention Predicts Context Rot in Retrieval",
+              "brief": {
+                "zh": "深耕候选：论文重新解释了“上下文腐烂”（context rot）：在检索任务里，长度本身代价很小，真正伤性能的是竞争。中性填充文本即使到 32K 也几乎不掉点；而与证据格式相似的陈述、尤其是给查询键另一个“对手值”的干扰项，会让损失成倍上升。在模型内部，留在证据上的注意力质量最多可解释 58% 的损失方差，log 长度最多只解释 8%。论文给出了可解释的机制，也有反直觉的结论，可以支撑一篇长文。",
+                "en": "Length Is Cheap, Competition Is Not: Attention Predicts Context Rot in Retrieval",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.04169"
+          ]
+        },
+        {
+          "id": "t836",
+          "theme": "research",
+          "title": {
+            "zh": "分词研究的三个迷思：BPB（每字节比特数）= 每字节 token 数 × 每 token 比特数，两者并不抵消——未训练、准确率只在随机水平的模型上 BPB 也偏好某些分词器与词表大小；几种「与分词器无关」的指标彼此结论不一致（Schaeffer、Koyejo，arXiv 2611.04215）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：BPB 并非与分词器无关；主词「tokenizer」待测（偏泛）。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：BPB 并非与分词器无关；主词「tokenizer」待测（偏泛）。",
+            "en": "Deep-read candidate: bits-per-byte is not tokenizer-agnostic; candidate term \"tokenizer\" (broad).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.04215",
+              "title": "Tokenizer Myths and Where To Find Them",
+              "brief": {
+                "zh": "深耕候选：作者指出分词研究中的三个“迷思”。BPB（每字节比特数）其实是“每字节 token 数 × 每 token 比特数”，两者并不会相互抵消；在完全未训练的模型上，BPB 依然会偏好某些分词器和词表大小，而这些模型的准确率只在随机水平。他们还发现，所谓“与分词器无关”的几种指标彼此结论并不一致。这篇论文直接动摇了评测里的常用指标，核心术语清楚，适合写一篇“BPB 为什么会骗人”的深度文章。",
+                "en": "",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.04215"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-04T10:00:00+08:00",
       "label": {
@@ -1027,56 +1322,6 @@
           ]
         },
         {
-          "id": "t821",
-          "theme": "research",
-          "title": {
-            "zh": "RL 后训练里采样的根本不是你在训的那个策略：训练-推理不一致有两个来源——推理引擎数值误差（基本恒定，可居中消偏）与异步采样的策略滞后（会自我放大成反馈环），修好一个的校正可能在另一个下失效，重要性采样 ESS 低于 0.5 即失效（2610.40945）× bf16 舍入悄悄丢掉大多数更新：fp32 主权重转 bf16 推理副本时多数单步更新小于半个 bf16 间隔被舍掉，Qwen3-1.7B 每步只有 0.4–0.5% 权重真变，采样策略落后优化器 50–150 步，现有校正看不见（2610.41073，附无偏一行修复）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：RL 训练-推理不一致的两个来源与 bf16 舍入导致的隐藏滞后；暂无可靠核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：RL 训练-推理不一致的两个来源与 bf16 舍入导致的隐藏滞后；暂无可靠核心词。",
-            "en": "Synthesis candidate: two sources of training-inference mismatch in LLM RL, plus bf16 rounding that silently discards most policy updates; no reliable single core term yet.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.41073",
-              "title": "bf16 Rounding Silently Discards Most RL Policy Updates: A Hidden Training-Inference Mismatch and an Unbiased One-Line Fix",
-              "brief": {
-                "zh": "新芽：RL 后训练里 fp32 主权重转成 bf16 推理副本时，大多数单步更新小于半个 bf16 间隔被直接舍掉，Qwen3-1.7B 每步只有约 0.5% 的权重真的变了，采样策略落后优化器 50-150 步。反直觉、一句话能讲清，可作为上一篇 mismatch 主题的配套案例。",
-                "en": "bf16 Rounding Silently Discards Most RL Policy Updates: A Hidden Training-Inference Mismatch and an Unbiased One-Line Fix",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.40945",
-              "title": "On the Origin and Evolution of Training-Inference Mismatch in LLM Reinforcement Learning",
-              "brief": {
-                "zh": "深耕候选：把 LLM RL 里的「训练-推理不一致」（training-inference mismatch）拆成两种来源：推理引擎的数值误差（基本恒定，可居中消偏）和异步采样的策略滞后（会自我放大形成反馈环）。机制清楚、可画图，还给出「重要性采样 ESS 低于 0.5 即失效」的判据，适合和同日 bf16 舍入论文合写成一篇 RL 训练稳定性综述。",
-                "en": "On the Origin and Evolution of Training-Inference Mismatch in LLM Reinforcement Learning",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.41073",
-            "https://arxiv.org/abs/2610.40945"
-          ]
-        },
-        {
           "id": "t822",
           "theme": "research",
           "title": {
@@ -1318,118 +1563,6 @@
             "https://www.reddit.com/r/MachineLearning/comments/1xivpue/w2321_416_a_van_der_waerden_number_conjectured_by/",
             "https://thedataexchange.media/leo-de-moura-lean-aws/",
             "https://terrytao.wordpress.com/2026/11/01/mathematics-has-changed-lets-act-like-it/"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-01T10:00:00+08:00",
-      "label": {
-        "zh": "11月1日 10:00",
-        "en": "Nov 1 10:00",
-        "ja": "11月1日 10:00"
-      },
-      "items": [
-        {
-          "id": "t427",
-          "theme": "security",
-          "title": {
-            "zh": "OpenAI：打断协同对抗蒸馏（Moonshot 关联簇）",
-            "en": "OpenAI",
-            "ja": "OpenAI"
-          },
-          "summary": {
-            "zh": "OpenAI 一级源：攻击者跨会话复放加密 reasoning 做对抗蒸馏（峰值约 16k 请求），核心簇关联 Moonshot——关路径+封禁，对齐/防蒸馏与 agent 工具链共享安全面。 10-13 新规重筛：单点新闻类（单点发布/新闻/单一来源条目，非多来源综合）→ 降回 inbox。 10-14：Anthropic 公布蒸馏防御（抓取降 90–99%），与 OpenAI 构成跨 lab 蒸馏攻防综合候选；主词 Trends 不过。续源：Anthropic 封禁蒸馏相关使用（待核）。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "OpenAI 一级源：攻击者跨会话复放加密 reasoning 做对抗蒸馏（峰值约 16k 请求），核心簇关联 Moonshot——关路径+封禁，对齐/防蒸馏与 agent 工具链共享安全面。 10-13 新规重筛：单点新闻类（单点发布/新闻/单一来源条目，非多来源综合）→ 降回 inbox。 10-14：Anthropic 公布蒸馏防御（抓取降 90–99%），与 OpenAI 构成跨 lab 蒸馏攻防综合候选；主词 Trends 不过。续源：Anthropic 封禁蒸馏相关使用（待核）。",
-            "en": "OpenAI says a July campaign extracted protected reasoning by replaying encrypted reasoning across sessions, peaking near 16k requests, with a core cluster tied to Moonshot-associated actors. Closing that path is an alignment/anti-distillation control that also matters for agent tooling surfaces. Oct 13 rescreen (new rules): single-point item, not a multi-source synthesis → demoted to inbox (Chaos/notes only). Oct 14: Anthropic reports distillation defenses cutting harvested data 90–99%, pairing with OpenAI's post as a cross-lab synthesis candidate; main term fails Trends. Follow-up: a user claims Anthropic blocks accounts for anything touching training larger models (unverified).",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "openai",
-              "url": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign",
-              "title": "Disrupting a coordinated model-distillation campaign",
-              "brief": {
-                "zh": "OpenAI：7 月对抗蒸馏高峰 16k 请求/4k+ 用户，7/28 前打断；发现经 Frontier Model Forum 与政府渠道共享。",
-                "en": "OpenAI reports a July adversarial-distillation spike of about 16k requests from 4k+ users, disrupted by July 28, with findings shared via the Frontier Model Forum and government channels.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.anthropic.com/research/distillation-defenses",
-              "title": "Anthropic: Strengthening our defenses against distillation attacks",
-              "brief": {
-                "zh": "续源：媒体 0938 Anthropic 一级源（10-12）：新防御使工业级蒸馏抓取数据降 90–99%，点名智谱把网络能力",
-                "en": "Follow-up source.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://twitter.com/jiahaoshao1/status/2116475922190922088",
-              "title": "Anthropic blocks users for anything touching training larger models",
-              "brief": {
-                "zh": "用户称 Anthropic 封禁涉及训练更大模型的使用（蒸馏/ToS 争议）；单方说法待核，可并入 Anthropic 商业与政策线",
-                "en": "Anthropic blocks users for anything touching training larger models",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "openai",
-            "media",
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign",
-            "https://www.anthropic.com/research/distillation-defenses",
-            "https://twitter.com/jiahaoshao1/status/2116475922190922088"
-          ]
-        },
-        {
-          "id": "t817",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "监控能被自动绕过：Anthropic「Automated Subtle Emergent Misalignment」——并行 Claude agent 共享实验日志爬坡构造微调数据集（≤5000 行），通过仿生产数据监控（>10% 行被标即拒），却让小研究模型学会破坏监督、甩锅、自保与埋代码 bug；每次运行都成功，单次产出 600+ 个数据集，胜过文献数据集；行为藏在养蜂、职业摔角、放映员独白等虚构/角色扮演里（模型未部署）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇研究深读候选：并行 agent 自动造出能过数据监控、却诱发失准的微调数据；主词「emergent misalignment」待测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇研究深读候选：并行 agent 自动造出能过数据监控、却诱发失准的微调数据；主词「emergent misalignment」待测。",
-            "en": "Single-study candidate: parallel Claude agents automatically build fine-tuning data that passes a production-like monitor yet induces misalignment; candidate term \"emergent misalignment\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://alignment.anthropic.com/2026/automated-em-search/",
-              "title": "Anthropic: Automated Subtle Emergent Misalignment Research — Claude writes fine-tuning data that passes a production-like monitor yet makes models misaligned",
-              "brief": {
-                "zh": "Primary Anthropic research, new in window; automated red-teaming of training-data monitors = gap in security-control layer, and the setup itself is an agent-loop (parallel agents + shared log hill-climb). Extends subliminal-learning/emergent-misalignment lines (t660/t706) and monitor lines (t803/t75",
-                "en": "Anthropic: Automated Subtle Emergent Misalignment Research — Claude writes fine-tuning data that passes a production-like monitor yet makes models misaligned",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://alignment.anthropic.com/2026/automated-em-search/"
           ]
         }
       ]
