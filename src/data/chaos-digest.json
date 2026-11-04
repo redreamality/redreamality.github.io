@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-03T16:00:47+08:00",
+  "updatedAt": "2026-11-04T09:57:02+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,601 @@
     "other"
   ],
   "themeCounts": {
-    "models": 10,
+    "models": 11,
     "coding-tools": 11,
-    "agents-oss": 10,
+    "agents-oss": 11,
     "security": 9,
-    "research": 23,
+    "research": 25,
     "product-news": 0,
     "other": 3
   },
   "hours": [
+    {
+      "hourStart": "2026-11-04T10:00:00+08:00",
+      "label": {
+        "zh": "11月4日 10:00",
+        "en": "Nov 4 10:00",
+        "ja": "11月4日 10:00"
+      },
+      "items": [
+        {
+          "id": "t769",
+          "theme": "models",
+          "title": {
+            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。续源：GitHub Next Enclaves 跨仓信息流隔离 × 复刻游戏规则用户反弹。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。续源：GitHub Next Enclaves 跨仓信息流隔离 × 复刻游戏规则用户反弹。",
+            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term. Follow-up: Claude Duet safety architecture, approvals outside the model and credential isolation. Follow-up: Claude Code adds an undocumented env var that lifts the last hard blocks under skip-permissions. Follow-up: Claude Code receives a remotely pushed, non-disableable prompt rule via a server-side flag. Follow-up: GitHub Next Enclaves for cross-repo agent info-flow control, plus user backlash over Claude Code's no-game-recreation rule.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://x.com/claudeai/status/2113360845409583307",
+              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
+              "brief": {
+                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
+                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
+              "brief": {
+                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
+                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://claude.com/blog/claude-duet-safety-privacy-and-security",
+              "title": "Claude Duet Safety, Privacy, and Security（Anthropic 官方拆解：审批卡 + 模型外分类器 + 凭证不进模型）",
+              "brief": {
+                "zh": "站内积累线（agent 安全/控制）：与已归档 1Password for Agents（10-23）、Claude auto mode（10-23）、Managed Agents 凭证代理同一条线，但这篇是 Anthropic 一手的‘审批在模型外 + 凭证隔离 + 浏览器边界’完整架构，机制信息密度高。非本窗口新发（10-23 08:00 北京时间发布），前几轮未归档（topics.md 仅有 Duet 产品发布 t765），故补录。tag exploit-candidate。",
+                "en": "tag exploit-candidate。",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.ithome.com/1/019/476.htm",
+              "title": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
+              "brief": {
+                "zh": "站内积累线 (sandbox/security-control, coding-agent permission layers). It gives a concrete look at the layering inside a harness: the 'skip permissions' mode still had a hidden denylist, and now that denylist has its own off switch, which is undocumented. It pairs with t769 (auto-mode classifier / approv",
+                "en": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
+              "title": "Anthropic 在 Claude Code 的 Opus 5.5 提示中加入「不复刻具体现有游戏」规则，经服务端 tengu_heron_brook 下发、无法关闭",
+              "brief": {
+                "zh": "站内积累线（harness / security-control）：编码 agent 的行为约束不在模型权重也不在用户配置，而是厂商通过服务端 flag 远程注入 harness 系统提示、按模型分包、用户不可关——是 harness 层策略控制面的一手样本；也牵出反编译/静态重编译灰区与提示级护栏可绕过的问题。接 t690（Opus 5.5 反编译/移植、500B token 反编译 FPS）。",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://githubnext.com/posts/enclaves/",
+              "title": "GitHub Next: Enclaves — limit what agents learn about private repos in cross-repo Agentic Workflows",
+              "brief": {
+                "zh": "Concrete deterministic info-flow control for agents, a design answer to prompt-injection exfil; complements t803/t808/t769 approval-outside-the-model line. Published 11-02 (before window) but surfaced only via the never-retrieved TLDR 11-03 issue; not in archive/topics. 站内积累线: sandbox / security-con",
+                "en": "GitHub Next: Enclaves — limit what agents learn about private repos in cross-repo Agentic Workflows",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=fgX8yKFVJeQ",
+              "title": "There's No Point in Paying for Claude Anymore (Because of Anthropic)",
+              "brief": {
+                "zh": "Biggest on-topic VPH this run: Turkish-language backlash over Anthropic quietly adding a Claude Code rule against recreating existing games, plus Opus 5.5 refusing reverse-engineering (REA) work.",
+                "en": "There's No Point in Paying for Claude Anymore (Because of Anthropic)",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://x.com/claudeai/status/2113360845409583307",
+            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+            "https://claude.com/blog/claude-duet-safety-privacy-and-security",
+            "https://www.ithome.com/1/019/476.htm",
+            "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
+            "https://githubnext.com/posts/enclaves/",
+            "https://www.youtube.com/watch?v=fgX8yKFVJeQ"
+          ]
+        },
+        {
+          "id": "t782",
+          "theme": "research",
+          "title": {
+            "zh": "KV cache 成了 agent 时代被忽视的状态面：成本、安全、自省、崩塌四种后果——AKV（清华/CUHK）让 harness 直接 drop/reposition KV 条目取代摘要历史（工具响应滚动丢弃：成本 −27.7%、得分 +1.7；KV 读取占 API 成本 82.4%）× SGLang/Cloudflare 披露 GLM-5.3 跨租户 KV 泄露（超长 prompt 触发，155 个响应；PD 分离下 abort 后 RDMA 写入仍在途的分布式 use-after-free）× 论文：模型「自述答案来自文档还是记忆」其实由 Q+A 缓存决定（移植缓存报告跟着走）× 全双工语音长对话崩塌源于滑窗挤掉第 1 个 KV 条目（attention sink 被驱逐）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（score4）：同一对象四种后果，含真实泄露事故与可量化成本；主词「KV cache」待测。续源：Claude Message threads 服务端会话状态。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（score4）：同一对象四种后果，含真实泄露事故与可量化成本；主词「KV cache」待测。续源：Claude Message threads 服务端会话状态。",
+            "en": "Synthesis candidate: the KV cache as an overlooked state surface for agents, covering cost (AKV), isolation (Cloudflare/SGLang cross-tenant leak), introspection and long-conversation collapse; candidate term \"KV cache\". Follow-up: Claude message threads move long agent sessions to server-held state (~35% lower TTFT at 500k–1M tokens).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.32109",
+              "title": "Context or Knowledge: How LLMs Attribute Their Own Answers",
+              "brief": {
+                "zh": "「新芽：模型说『答案来自文档还是自己记忆』，其实是看问答 token 的缓存，不是看文档」作者在答案生成后、追问来源前干预 KV cache：改掉或删掉文档的缓存，来源报告完全不变；但把 token 完全相同的 Q+A 缓存在不同运行间移植，来源报告就跟着捐赠方走。沿 Q+A value 方向做 steering，7B–32B 里较小的两个模型 98.9–100% 的报告被翻转，范数匹配的随机方向最多 1.1%。说明『自述信息来源』在这里因果上依赖回答时产生的缓存状态，而不是对原文的真实回溯——和可靠自省/溯源直接相关。机制干净，一张『文档缓存 vs Q+A 缓存，谁决定 source rep",
+                "en": "An LLM report of whether it used the document or its own knowledge is causally driven by cached Q+A state, not the document cache; transplanting or steering Q+A values flips reports (98.9-100% for smaller models).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.32349",
+              "title": "Why Full-Duplex Speech Models Collapse in Long Conversations",
+              "brief": {
+                "zh": "「新芽：全双工语音模型一聊长就崩，原因居然是滑窗把第一个 KV 条目丢了」作者做了个 FD-LHB 长程基准，测了 5 个全双工模型：保留全历史的会在上下文耗尽前就变差，滑窗的则会陷入重复、沉默和胡言乱语。诊断出两个机制：Initialization-Anchor Eviction（滑窗把第 1 个 KV 条目挤掉 → 沉默/乱码，典型的 attention-sink 被驱逐）和模型被自己最近输出强化的重复。对应两个免训练修补 IAP（钉住首个条目）和 DRP（抑制回声），回放一小时仍能实时跑。机制清晰、一张『滑窗 + 锚点被踢掉』的 SVG 图就能讲明白，而且把 attention sink",
+                "en": "Full-duplex speech models collapse in long conversations because sliding windows evict the first KV entry (attention-sink eviction) plus self-reinforced repetition; training-free fixes IAP and DRP.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.lmsys.org/blog/2026-10-26-cf-security/",
+              "title": "SGLang security update: improving request isolation (Cloudflare GLM-5.3 cross-request KV cache exposure + PD-disaggregation abort race)",
+              "brief": {
+                "zh": "New since 10-25 sweep (no other lane/archive covers it; grep'd inbox + archive 1023–1025 + topics.md). Serving-stack isolation/security with real mechanism: 'free' slot has a hidden second condition (no remote writer in flight), router decides who dies vs engine decides when memory is safe. Pairs wi",
+                "en": "LMSYS/SGLang with Cloudflare: GLM-5.3 on Workers AI returned other tenants data for prompts over 681,280 tokens (155 responses); causes were a context-window vs KV-pool mismatch and a PD-disaggregation abort race (use-after-free with in-flight RDMA writes); fixed with deferred release and admission",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://arxiv.org/abs/2610.28577",
+              "title": "Cache Engineering for Agents (AKV, Tsinghua/CUHK): drop + reposition KV entries instead of summarizing history",
+              "brief": {
+                "zh": "New since 10-25 sweep; no overlap in inbox/archive 1023–1025/topics (grep AKV, 2610.28577, thu-nics). Directly on the agent-harness/context-management line: challenges the 'summarize at threshold' compaction pattern harnesses use, and pairs with the Anthropic 'fold subagents into main loop' / 'harne",
+                "en": "AKV (Tsinghua/CUHK) lets the harness drop and reposition KV entries instead of summarizing history; rolling drop of tool responses cuts average cost 27.7% with score +1.7; KV reads are 82.4% of API cost. Benchmark tables via MarkTechPost.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://claude.com/resources/articles/message-threads",
+              "title": "Claude Platform: Message threads public beta — agents send only new messages, ~35% lower median TTFT at 500k–1M tokens",
+              "brief": {
+                "zh": "API shift from stateless resend toward server-held session state for long agent loops; relevant to KV cache/state surface (t782) and harness cost line (t815). Not in archive or topics. 站内积累线: agent-loop / harness / memory state.",
+                "en": "Claude Platform: Message threads public beta — agents send only new messages, ~35% lower median TTFT at 500k–1M tokens",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.32109",
+            "https://arxiv.org/abs/2610.32349",
+            "https://www.lmsys.org/blog/2026-10-26-cf-security/",
+            "https://arxiv.org/abs/2610.28577",
+            "https://claude.com/resources/articles/message-threads"
+          ]
+        },
+        {
+          "id": "t788",
+          "theme": "research",
+          "title": {
+            "zh": "Transformer 能背多少事实：容量随宽度指数增长，所需维度只随事实数 N 取对数（N 从 45 到 49,920 共 11 档，对数拟合不被拒绝、幂律被拒绝；固定宽度下深度方向次线性）——修正「记住的事实数 ∝ 参数量」的线性结论，结构化数据（对称关系、两跳）还会再抬高容量",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：结论反直觉、一图可讲；缺核心词。续源：元记忆解释大模型为何记得更快。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：结论反直觉、一图可讲；缺核心词。续源：元记忆解释大模型为何记得更快。",
+            "en": "Single-paper candidate: transformer memorization capacity grows exponentially with width (required dimension is logarithmic in the number of facts); no clean core term. Follow-up: meta-memorization explains why larger transformers memorize faster.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.34553",
+              "title": "How Much Information Can We Fit inside a Transformer?",
+              "brief": {
+                "zh": "「新芽：Transformer 能记多少事实？容量随宽度指数增长，所需维度只随 N 取对数」重新审视「记住的事实数 ∝ 参数量」那个线性结论：作者用贝叶斯优化把超参搜满，在随机 (主语, 关系, 宾语) 三元组上找『能完全背下来的最小模型』，发现记忆容量随 transformer 维度指数增长，即 d_min 对事实数 N 是对数关系（N 从 45 到 49,920 共 11 档，lack-of-fit F 检验不拒绝对数拟合，但拒绝包括幂律在内的其它形式）；深度方向在固定宽度下则是次线性增长。再往结构化数据（对称关系、两跳组合）扩展，模型会利用规律进一步抬高容量。这是对「模型是怎么存知识的」",
+                "en": "Searching hyperparameters with Bayesian optimization for the smallest model that memorizes random triples, the authors find the needed dimension grows logarithmically with the number of facts (45 to 49,920 across 11 levels); depth at fixed width grows sublinearly; structure raises capacity further.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.01564",
+              "title": "Meta-memorization and memorization scaling laws in transformers",
+              "brief": {
+                "zh": "新芽：大模型不仅记得更多，而且记得更快；本文在纯随机比特序列上复现这两条记忆 scaling law，并归因于“元记忆”（meta-memorization）——模型在记忆中学会了如何记忆，记忆速率随训练时间呈幂律增长，甚至一层 Transformer 也能少样本记忆。",
+                "en": "Meta-memorization and memorization scaling laws in transformers",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.34553",
+            "https://arxiv.org/abs/2611.01564"
+          ]
+        },
+        {
+          "id": "t808",
+          "theme": "security",
+          "title": {
+            "zh": "AI 开发工具的「黑色十月」：Cursor 扩展市场上的官方 Claude Code VS Code 扩展被植入后门（Phorion，HN 773/485，Lobsters 140）× Wiz 汇总十月至少 9 起 AI 开发平台安全事件（Fireworks、Lightning、Railway、Warp、OpenCode、Zeabur 等：凭据窃取、agent 群式攻击、为蒸馏/LLMjacking 盗用；被盗 Bedrock key 30 小时约 80 万次调用、转售池 13 小时约 170 万次）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。续源：Postman 静默装 AI 插件 × Codex 对话训练疑似重开。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。续源：Postman 静默装 AI 插件 × Codex 对话训练疑似重开。",
+            "en": "Synthesis candidate: backdoored Claude Code extension on the Cursor marketplace plus Wiz's \"Black October\" roll-up of AI developer-platform incidents; candidate term \"Open VSX\" (verify first). Follow-up: Parameter discloses a ChatGPT account-takeover chain. Primary source added: Cursor's notice confirms the backdoor was served from Cursor's own marketplace (not Open VSX), with timeline, IOCs and remediation. Re-heat: the malicious Claude Code extension story spreads across YouTube. Follow-up: Postman silently installing AI plugins and claims that Codex chats are used for training again (both unverified).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+              "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+              "brief": {
+                "zh": "Cursor 扩展市场上的官方 Claude Code 扩展被植入后门；Lobsters 同题 140 分（https://lobste.rs/s/ttp7aq，GossiTheDog 帖）。接供应链/harness 安全线（LiteLLM、HTTP2Shell、backdoors in harnesses），可做 AI 编码工具供应链综述",
+                "en": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
+              "title": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+              "brief": {
+                "zh": "Different report from the filed 10-30 Wiz 'rise of agentic attacks' piece: incident roll-up + LLMjacking telemetry across AI dev platforms. 站内积累线：security-control / agent 平台凭据。",
+                "en": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
+              "title": "Do the math: How we took over ChatGPT accounts",
+              "brief": {
+                "zh": "Parameter 披露接管 ChatGPT 账号的漏洞链；AI 产品自身安全，可并入 AI 工具供应链/安全综述（Claude Code VSX 后门、harness backdoors）",
+                "en": "Do the math: How we took over ChatGPT accounts",
+                "ja": ""
+              }
+            },
+            {
+              "source": "cursor-blog",
+              "url": "https://cursor.com/blog/claude-code-extension-security-notice",
+              "title": "Security notice — malicious version of Anthropic.claude-code (2.1.312 and 2.1.313) identified in the Cursor VS Code Extension Marketplace",
+              "brief": {
+                "zh": "Cursor 官方公告（10-29，10-30 11:30 PT 更新 IOC）：10-29 约 2:27–13:35 PT，Cursor 自家 VS Code 扩展市场上架了被篡改的 Anthropic.claude-code 2.1.312/2.1.313（Win/macOS），非 Anthropic 开发；植入持久 SSH 后门——收集主机信息、向 authorized_keys 加攻击者公钥（svc-telemetry）、尝试开 SSH 并建反向隧道，LaunchAgent/计划任务持久化；多数主机因无管理员权限开 SSH 失败，但公钥、持久化与主机信息上报已发生。Cursor 下架并整体关停市场、审计无其他扩展被篡改、轮换密钥重建市场，协同下线攻击服务器 134.209.82.225；卸载扩展不足以清除，需跑修复脚本并轮换凭据。",
+                "en": "Cursor's official notice (Oct 29, IOCs updated Oct 30): tampered Anthropic.claude-code 2.1.312/2.1.313 was served from Cursor's own VS Code Extension Marketplace for about 11 hours; it planted an attacker SSH key, persistence and a reverse-tunnel attempt and beaconed host details. Cursor pulled it, shut down and rebuilt the marketplace, rotated keys and got the C2 server taken down.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=yIvaF0HI5wo",
+              "title": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
+              "brief": {
+                "zh": "The malicious Claude Code extension story broke out across several channels: malicious Anthropic.claude-code 2.1.312/2.1.313 builds were found in Cursor's VS Code extension marketplace.",
+                "en": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://news.ycombinator.com/item?id=50352757",
+              "title": "OpenAI seems to be silently re-enabling model training on Codex chats",
+              "brief": {
+                "zh": "Ask/讨论帖 433 分：用户称 OpenAI 悄悄重新开启用 Codex 对话训练模型；单方说法待核，属 AI 编程工具数据隐私线。",
+                "en": "OpenAI seems to be silently re-enabling model training on Codex chats",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
+              "title": "Postman silently auto-installs AI plugins and attempts to share all API data",
+              "brief": {
+                "zh": "HN 1020 分：GitHub issue 指 Postman 静默自动安装 AI 插件并尝试共享全部 API 数据；AI 工具供应链/隐私线，可接 Claude Code VSX 后门、ChatGPT 账号接管旧条。单方 issue，官方回应待核。",
+                "en": "Postman silently auto-installs AI plugins and attempts to share all API data",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "media",
+            "cursor-blog",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+            "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
+            "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
+            "https://cursor.com/blog/claude-code-extension-security-notice",
+            "https://www.youtube.com/watch?v=yIvaF0HI5wo",
+            "https://news.ycombinator.com/item?id=50352757",
+            "https://github.com/postmanlabs/postman-app-support/issues/14370"
+          ]
+        },
+        {
+          "id": "t824",
+          "theme": "other",
+          "title": {
+            "zh": "Astra 直接读写权重来改进 Qwen：「权重空间编程」——让 LLM 把神经网络权重当成可读可改的程序（HN 当日最高 1909/605；r/ML「Sparks of Weight-Space Programming」同步热议）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：LLM 读写权重改进 Qwen；正文与数字待核，缺可靠核心词。续源：Honnibal 反驳 × Willison 本地复现。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：LLM 读写权重改进 Qwen；正文与数字待核，缺可靠核心词。续源：Honnibal 反驳 × Willison 本地复现。",
+            "en": "Deep-read candidate: an LLM that reads and writes weights to improve Qwen; details unverified, no reliable core term. Follow-up: Honnibal says the Astra post is misleading; Willison shows a local Qwen 3.8 27B can interpret weights too.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://rikiyat.github.io/blog/weight-space-programming/",
+              "title": "Astra can read and write weights to improve Qwen",
+              "brief": {
+                "zh": "HN 当日最高帖（1909 分/605 评）：「权重空间编程」——让 LLM 直接读写神经网络权重来改进 Qwen；r/MachineLearning 同步帖 Sparks of Weight-Space Programming [R] 也在热议。适合做机制深读。",
+                "en": "Astra can read and write weights to improve Qwen",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://honnibal.dev/blog/astra-read-write-misleading",
+              "title": "The 'Astra can read and write weights to improve Qwen' post is misleading",
+              "brief": {
+                "zh": "Matthew Honnibal 反驳昨日 HN 第一的 Astra 权重空间编程帖（inbox 已有 astra-weight-space-programming-qwen），称其误导；正反两方可合成一篇深读。",
+                "en": "The 'Astra can read and write weights to improve Qwen' post is misleading",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
+              "title": "Qwen 3.8 27B on my laptop can interpret model weights, too",
+              "brief": {
+                "zh": "Simon Willison 在笔记本上用 Qwen 3.8 27B 复现「模型读权重」；与 Astra 原帖及 Honnibal 反驳同一条线。",
+                "en": "Qwen 3.8 27B on my laptop can interpret model weights, too",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://rikiyat.github.io/blog/weight-space-programming/",
+            "https://honnibal.dev/blog/astra-read-write-misleading",
+            "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/"
+          ]
+        },
+        {
+          "id": "t829",
+          "theme": "research",
+          "title": {
+            "zh": "「两跳诅咒」不是推理缺陷而是写法错了：微调把新事实写成「要说出的答案」，第二跳却在中间层把桥接实体「当实体来读」——激活修补显示推理回路完好；按模型读的方式写事实（read-equivalent writing / Legible）即可解除（arXiv 2611.01519）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：两跳诅咒源于事实写入方式与读取方式不对称；缺可靠核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：两跳诅咒源于事实写入方式与读取方式不对称；缺可靠核心词。",
+            "en": "Deep-read candidate: the two-hop curse comes from a write/read asymmetry, not broken reasoning; no reliable core term.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.01519",
+              "title": "Write Facts the Way Models Read Them: Lifting the Two-Hop Curse",
+              "brief": {
+                "zh": "深耕候选：「两跳诅咒」（two-hop curse）常被当成推理缺陷，本文用激活修补证明推理回路完好，问题在于微调把新事实“写成要说的答案”，而第二跳在中间层把桥接实体“当作实体来读”。读写不对称这一机制清晰可画图，并给出 read-equivalent writing（Legible）修复，适合深挖知识编辑与多跳推理。",
+                "en": "Write Facts the Way Models Read Them: Lifting the Two-Hop Curse",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.01519"
+          ]
+        },
+        {
+          "id": "t830",
+          "theme": "research",
+          "title": {
+            "zh": "状态追踪的细粒度难度层级：用半群/群论把 state tracking 分成 r-trivial、aperiodic、soluble、S5 四级（对应不可变/可变赋值等编程直觉）并给基准——Transformer 与 Gated DeltaNet 等线性 RNN 的差距可能在更简单的层级就已出现（Petty、Merrill、Sabharwal，arXiv 2611.03094）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：状态追踪四级代数层级与架构之争；核心词偏弱。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：状态追踪四级代数层级与架构之争；核心词偏弱。",
+            "en": "Deep-read candidate: an algebraic four-level hierarchy for state tracking that reframes the Transformer vs linear-RNN debate.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.03094",
+              "title": "A Fine-Grained Hierarchy and Benchmark for State Tracking in Language Models",
+              "brief": {
+                "zh": "深耕候选：用代数（半群/群论）把“状态追踪”拆成 r-trivial、aperiodic、soluble、S5 等四级难度层级，对应编程中不可变/可变赋值等直觉，重构了 Transformer vs Gated DeltaNet 等线性 RNN 架构之争——更简单的状态追踪可能已解释架构差异。层级分类图天然可视化。",
+                "en": "A Fine-Grained Hierarchy and Benchmark for State Tracking in Language Models",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.03094"
+          ]
+        },
+        {
+          "id": "t832",
+          "theme": "models",
+          "title": {
+            "zh": "Anthropic Frontier Red Team 开源 FlashProve：用 zkSNARK 证明一条回复确实出自已承诺的模型权重而不暴露权重——Llama 4 Maverick（400B MoE）单张 H100 约 110 tok/s 出证明，18.78 MB 证明 CPU 约 17 秒验完，上下文限 1,024 token，GPU 时间约为普通 vLLM 的 70–95 倍（二手数字）；用途：发现路由商/实验室偷换模型",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：零知识证明验证回复来自哪份权重；主词「zkSNARK」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：零知识证明验证回复来自哪份权重；主词「zkSNARK」待测。",
+            "en": "Deep-read candidate: FlashProve uses zkSNARKs to prove which committed model produced a reply; candidate term \"zkSNARK\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://www.anthropic.com/research/provable-inference",
+              "title": "Anthropic Frontier Red Team: FlashProve — progress on provable inference for LLMs (zkSNARK proof a reply came from committed weights)",
+              "brief": {
+                "zh": "New primary security-control primitive (verify which model answered). Not in archive/topics. Performance numbers are from MarkTechPost secondary summary; primary page confirmed (title, date, team, sections) but numbers not checked against the technical report. 站内积累线: security-control / agent supply",
+                "en": "Anthropic Frontier Red Team: FlashProve — progress on provable inference for LLMs (zkSNARK proof a reply came from committed weights)",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.anthropic.com/research/provable-inference"
+          ]
+        },
+        {
+          "id": "t833",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "研究结论与评测都不可直接迁移：OpenAI Alignment——6 个模型在 Respecting Warnings agent 安全评测上的成功率全部低于匹配的 Codex 生产决策（差 10.2–37.4 个百分点），只说「你在被评测」无影响，告知正确/错误的评测目标则把成绩推向相反方向 × Stanford（Queen、Zou）重测 50 条常被引用的 LLM 结论：44% 已过期、34% 明显减弱，平均寿命 15.7 个月，能力局限类最快过期，自偏好/谄媚/欺骗类倾向持续或增强",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：评测与生产行为差距 × LLM 研究结论的保质期；缺可靠核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：评测与生产行为差距 × LLM 研究结论的保质期；缺可靠核心词。",
+            "en": "Synthesis candidate: safety evals diverge from production behavior, and 44% of widely cited LLM findings have expired; no reliable core term.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://alignment.openai.com/eval-production-behavior-gap/",
+              "title": "OpenAI Alignment: Eval-production behavior gaps in agent safety and the role of eval-awareness",
+              "brief": {
+                "zh": "Primary research, new since 11-03 15:45 CST. Different from archived OpenAI activation classifiers (11-03) and Codex Auto-review red-team: this is about whether safety evals generalize to deployment, and the surprising direction (eval worse than prod) via 'eval objective awareness'. Continues t803 d",
+                "en": "OpenAI Alignment: Eval-production behavior gaps in agent safety and the role of eval-awareness",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://zou-group.github.io/llm-claims-shelf-life/",
+              "title": "Stanford (Queen & Zou): The shelf life of LLM findings — 44% of 50 widely cited LLM claims have expired",
+              "brief": {
+                "zh": "Primary research meta-finding, new in window; useful framing for t720 benchmark-vs-reality and t809 hallucination candidates (and a caution on citing old findings in our own posts). Not in archive/topics.",
+                "en": "Stanford (Queen & Zou): The shelf life of LLM findings — 44% of 50 widely cited LLM claims have expired",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://alignment.openai.com/eval-production-behavior-gap/",
+            "https://zou-group.github.io/llm-claims-shelf-life/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-03T16:00:00+08:00",
       "label": {
@@ -98,92 +684,6 @@
             "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
             "https://the-decoder.com/a-claude-model-autonomously-chose-a-gene-therapy-and-operated-on-a-mouse-brain-with-no-human-decision-making/",
             "https://github.com/Tencent-Hunyuan/Hyra-results"
-          ]
-        },
-        {
-          "id": "t808",
-          "theme": "security",
-          "title": {
-            "zh": "AI 开发工具的「黑色十月」：Cursor 扩展市场上的官方 Claude Code VS Code 扩展被植入后门（Phorion，HN 773/485，Lobsters 140）× Wiz 汇总十月至少 9 起 AI 开发平台安全事件（Fireworks、Lightning、Railway、Warp、OpenCode、Zeabur 等：凭据窃取、agent 群式攻击、为蒸馏/LLMjacking 盗用；被盗 Bedrock key 30 小时约 80 万次调用、转售池 13 小时约 170 万次）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。",
-            "en": "Synthesis candidate: backdoored Claude Code extension on the Cursor marketplace plus Wiz's \"Black October\" roll-up of AI developer-platform incidents; candidate term \"Open VSX\" (verify first). Follow-up: Parameter discloses a ChatGPT account-takeover chain. Primary source added: Cursor's notice confirms the backdoor was served from Cursor's own marketplace (not Open VSX), with timeline, IOCs and remediation. Re-heat: the malicious Claude Code extension story spreads across YouTube.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
-              "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-              "brief": {
-                "zh": "Cursor 扩展市场上的官方 Claude Code 扩展被植入后门；Lobsters 同题 140 分（https://lobste.rs/s/ttp7aq，GossiTheDog 帖）。接供应链/harness 安全线（LiteLLM、HTTP2Shell、backdoors in harnesses），可做 AI 编码工具供应链综述",
-                "en": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
-              "title": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
-              "brief": {
-                "zh": "Different report from the filed 10-30 Wiz 'rise of agentic attacks' piece: incident roll-up + LLMjacking telemetry across AI dev platforms. 站内积累线：security-control / agent 平台凭据。",
-                "en": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
-              "title": "Do the math: How we took over ChatGPT accounts",
-              "brief": {
-                "zh": "Parameter 披露接管 ChatGPT 账号的漏洞链；AI 产品自身安全，可并入 AI 工具供应链/安全综述（Claude Code VSX 后门、harness backdoors）",
-                "en": "Do the math: How we took over ChatGPT accounts",
-                "ja": ""
-              }
-            },
-            {
-              "source": "cursor-blog",
-              "url": "https://cursor.com/blog/claude-code-extension-security-notice",
-              "title": "Security notice — malicious version of Anthropic.claude-code (2.1.312 and 2.1.313) identified in the Cursor VS Code Extension Marketplace",
-              "brief": {
-                "zh": "Cursor 官方公告（10-29，10-30 11:30 PT 更新 IOC）：10-29 约 2:27–13:35 PT，Cursor 自家 VS Code 扩展市场上架了被篡改的 Anthropic.claude-code 2.1.312/2.1.313（Win/macOS），非 Anthropic 开发；植入持久 SSH 后门——收集主机信息、向 authorized_keys 加攻击者公钥（svc-telemetry）、尝试开 SSH 并建反向隧道，LaunchAgent/计划任务持久化；多数主机因无管理员权限开 SSH 失败，但公钥、持久化与主机信息上报已发生。Cursor 下架并整体关停市场、审计无其他扩展被篡改、轮换密钥重建市场，协同下线攻击服务器 134.209.82.225；卸载扩展不足以清除，需跑修复脚本并轮换凭据。",
-                "en": "Cursor's official notice (Oct 29, IOCs updated Oct 30): tampered Anthropic.claude-code 2.1.312/2.1.313 was served from Cursor's own VS Code Extension Marketplace for about 11 hours; it planted an attacker SSH key, persistence and a reverse-tunnel attempt and beaconed host details. Cursor pulled it, shut down and rebuilt the marketplace, rotated keys and got the C2 server taken down.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=yIvaF0HI5wo",
-              "title": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
-              "brief": {
-                "zh": "The malicious Claude Code extension story broke out across several channels: malicious Anthropic.claude-code 2.1.312/2.1.313 builds were found in Cursor's VS Code extension marketplace.",
-                "en": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "media",
-            "cursor-blog",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
-            "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
-            "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
-            "https://cursor.com/blog/claude-code-extension-security-notice",
-            "https://www.youtube.com/watch?v=yIvaF0HI5wo"
           ]
         },
         {
@@ -380,45 +880,6 @@
           "externalUrls": [
             "https://arxiv.org/abs/2610.39302",
             "https://www.reddit.com/r/MachineLearning/comments/1xlzoze/smallscale_check_of_good_views_beat_nexttoken/"
-          ]
-        },
-        {
-          "id": "t824",
-          "theme": "other",
-          "title": {
-            "zh": "Astra 直接读写权重来改进 Qwen：「权重空间编程」——让 LLM 把神经网络权重当成可读可改的程序（HN 当日最高 1909/605；r/ML「Sparks of Weight-Space Programming」同步热议）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇深读候选：LLM 读写权重改进 Qwen；正文与数字待核，缺可靠核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇深读候选：LLM 读写权重改进 Qwen；正文与数字待核，缺可靠核心词。",
-            "en": "Deep-read candidate: an LLM that reads and writes weights to improve Qwen; details unverified, no reliable core term.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://rikiyat.github.io/blog/weight-space-programming/",
-              "title": "Astra can read and write weights to improve Qwen",
-              "brief": {
-                "zh": "HN 当日最高帖（1909 分/605 评）：「权重空间编程」——让 LLM 直接读写神经网络权重来改进 Qwen；r/MachineLearning 同步帖 Sparks of Weight-Space Programming [R] 也在热议。适合做机制深读。",
-                "en": "Astra can read and write weights to improve Qwen",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://rikiyat.github.io/blog/weight-space-programming/"
           ]
         },
         {
@@ -969,149 +1430,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://alignment.anthropic.com/2026/automated-em-search/"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-31T16:00:00+08:00",
-      "label": {
-        "zh": "10月31日 16:00",
-        "en": "Oct 31 16:00",
-        "ja": "10月31日 16:00"
-      },
-      "items": [
-        {
-          "id": "t769",
-          "theme": "models",
-          "title": {
-            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。",
-            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term. Follow-up: Claude Duet safety architecture, approvals outside the model and credential isolation. Follow-up: Claude Code adds an undocumented env var that lifts the last hard blocks under skip-permissions. Follow-up: Claude Code receives a remotely pushed, non-disableable prompt rule via a server-side flag.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://x.com/claudeai/status/2113360845409583307",
-              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
-              "brief": {
-                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
-                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
-              "brief": {
-                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
-                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://claude.com/blog/claude-duet-safety-privacy-and-security",
-              "title": "Claude Duet Safety, Privacy, and Security（Anthropic 官方拆解：审批卡 + 模型外分类器 + 凭证不进模型）",
-              "brief": {
-                "zh": "站内积累线（agent 安全/控制）：与已归档 1Password for Agents（10-23）、Claude auto mode（10-23）、Managed Agents 凭证代理同一条线，但这篇是 Anthropic 一手的‘审批在模型外 + 凭证隔离 + 浏览器边界’完整架构，机制信息密度高。非本窗口新发（10-23 08:00 北京时间发布），前几轮未归档（topics.md 仅有 Duet 产品发布 t765），故补录。tag exploit-candidate。",
-                "en": "tag exploit-candidate。",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.ithome.com/1/019/476.htm",
-              "title": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
-              "brief": {
-                "zh": "站内积累线 (sandbox/security-control, coding-agent permission layers). It gives a concrete look at the layering inside a harness: the 'skip permissions' mode still had a hidden denylist, and now that denylist has its own off switch, which is undocumented. It pairs with t769 (auto-mode classifier / approv",
-                "en": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
-              "title": "Anthropic 在 Claude Code 的 Opus 5.5 提示中加入「不复刻具体现有游戏」规则，经服务端 tengu_heron_brook 下发、无法关闭",
-              "brief": {
-                "zh": "站内积累线（harness / security-control）：编码 agent 的行为约束不在模型权重也不在用户配置，而是厂商通过服务端 flag 远程注入 harness 系统提示、按模型分包、用户不可关——是 harness 层策略控制面的一手样本；也牵出反编译/静态重编译灰区与提示级护栏可绕过的问题。接 t690（Opus 5.5 反编译/移植、500B token 反编译 FPS）。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://x.com/claudeai/status/2113360845409583307",
-            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-            "https://claude.com/blog/claude-duet-safety-privacy-and-security",
-            "https://www.ithome.com/1/019/476.htm",
-            "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games"
-          ]
-        },
-        {
-          "id": "t815",
-          "theme": "research",
-          "title": {
-            "zh": "harness 层管成本与质量：Microsoft TokenEconomizer（UC Berkeley + MSR，外置控制器插件，支持 Claude Code/Codex/Copilot CLI/Pi：从已完成会话学仓库级 micro-skill 并在三次确认后注入、裁剪长期未用工具定义、judge 判定陷入失败循环时注入一次 redirect；277 个 SWE-Bench 任务 × 5 种 agent×模型组合成本降 18.4–30.9%，30 格全部更便宜、4/5 组合 Pass@1 上升）× GitHub Copilot Fusion GA（运行时多模型路由：Single / Cascade 便宜模型起草 + judge 决定升级 / Critique 多模型并行评审再修订；VentureBeat 引 AA 称接近 Opus 5.5 编码、单任务成本约一半）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：harness 外层控成本（TokenEconomizer）与运行时多模型编排（Copilot Fusion）；主词「Copilot Fusion」待测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：harness 外层控成本（TokenEconomizer）与运行时多模型编排（Copilot Fusion）；主词「Copilot Fusion」待测。",
-            "en": "Synthesis candidate: harness-level cost control (TokenEconomizer) and runtime multi-model orchestration (Copilot Fusion); candidate term \"Copilot Fusion\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://github.com/microsoft/TokenEconomizer",
-              "title": "Microsoft TokenEconomizer：经验驱动的编码 agent 黑盒成本控制插件（micro-skills / 工具裁剪 / 失败循环干预）",
-              "brief": {
-                "zh": "站内积累线（harness / skills / memory / agent-loop）：不改 agent 本体，在 harness 外层用跨会话经验做记忆注入、工具面裁剪和循环守卫——正好是 skills+memory+loop control 的可测量样本，且给出逐仓库成本数据。上午因仅 MarkTechPost 二手而跳过，现已有 repo/论文一手源。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion/",
-              "title": "GitHub Copilot Fusion GA：运行时多模型路由与编排（Single / Cascade / Critique）",
-              "brief": {
-                "zh": "站内积累线（harness / agent-loop）：把「起草-评审-升级」的多模型 loop 做进产品级 harness 运行时，成本/质量权衡由编排层而非用户承担——与今日 TokenEconomizer（外层成本控制）、Factory Droid 1.0 frontier harness 同线可对照。",
-                "en": "GitHub Copilot Fusion GA：行时多模型路由与编排（Single / Cascade / Critique）",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/microsoft/TokenEconomizer",
-            "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion/"
           ]
         }
       ]
@@ -4687,59 +5005,6 @@
           "externalUrls": [
             "https://arxiv.org/abs/2609.38866"
           ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-04T16:00:00+08:00",
-      "label": {
-        "zh": "10月4日 16:00",
-        "en": "Oct 4 16:00",
-        "ja": "10月4日 16:00"
-      },
-      "items": [
-        {
-          "id": "t496",
-          "theme": "research",
-          "title": {
-            "zh": "Global Coherence：局部都对、全局仍错（Observation Aliasing）",
-            "en": "Global Coherence: When Every Agent Is Right and the Team Is Still Wrong",
-            "ja": "Global Coherence: When Every Agent Is Right and the Team Is Still Wrong"
-          },
-          "summary": {
-            "zh": "Observation-Aliasing Impossibility 给出多智能体「局部都对、全局仍错」的硬边界——观测不可区分时再多推理/角色/消息也救不回缺失区分；共享状态失败，非仅模型智力问题。",
-            "en": "Reading Xin Heng / Tote AI arXiv:2610.02036: local validity ⇏ global coherence. Observation-Aliasing shows missing distinctions cannot be recovered by more reasoning, roles, or votes; shared budgets and silent reverts show invariants need owners. Models propose; the harness owns distinctions and commit checks—with a builder checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Observation-Aliasing Impossibility 给出多智能体「局部都对、全局仍错」的硬边界——观测不可区分时再多推理/角色/消息也救不回缺失区分；共享状态失败，非仅模型智力问题。",
-            "en": "The Observation-Aliasing Impossibility result is a hard bound: when observations are indistinguishable, more reasoning, roles, or messages cannot recover missing distinctions. Global coherence fails as shared-state failure, not merely model intelligence.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.02036",
-              "title": "Global Coherence: When Every Agent Is Right and the Team Is Still Wrong",
-              "brief": {
-                "zh": "给出 local-to-global 运行时语义基础 + 不可能性结果；偏综合/理论 reframing。",
-                "en": "Provides a local-to-global runtime semantic foundation plus an impossibility result—synthesis/theory reframing.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.02036"
-          ],
-          "blog": {
-            "zh": "/cn/blog/global-coherence-local-right-team-wrong/",
-            "en": "/blog/global-coherence-local-right-team-wrong/"
-          }
         }
       ]
     }
