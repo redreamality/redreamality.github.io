@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T10:02:26+08:00",
+  "updatedAt": "2026-11-05T15:56:53+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,225 @@
   ],
   "themeCounts": {
     "models": 11,
-    "coding-tools": 11,
+    "coding-tools": 10,
     "agents-oss": 9,
     "security": 11,
-    "research": 27,
+    "research": 29,
     "product-news": 0,
     "other": 3
   },
   "hours": [
+    {
+      "hourStart": "2026-11-05T16:00:00+08:00",
+      "label": {
+        "zh": "11月5日 16:00",
+        "en": "Nov 5 16:00",
+        "ja": "11月5日 16:00"
+      },
+      "items": [
+        {
+          "id": "t649",
+          "theme": "research",
+          "title": {
+            "zh": "On-Policy Distillation 教技能不教知识：reverse-KL 只教组合，forward-KL 才传事实",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "可控实验显示 reverse-KL OPD 只教学生组合已有知识，不往参数塞新事实；换 forward KL 才传事实——可把站内 OPD 线串成「蒸馏蒸了什么」综述。贴题「on-policy distillation」Trends 两窗口远低于 gpts（7d 1.82 vs 62.67；24h 0.00 vs 25.43）→ inbox。续源：OPD 分布外泛化失败。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "可控实验显示 reverse-KL OPD 只教学生组合已有知识，不往参数塞新事实；换 forward KL 才传事实——可把站内 OPD 线串成「蒸馏蒸了什么」综述。贴题「on-policy distillation」Trends 两窗口远低于 gpts（7d 1.82 vs 62.67；24h 0.00 vs 25.43）→ inbox。续源：OPD 分布外泛化失败。",
+            "en": "Controlled experiments show reverse-KL OPD teaches students to compose what they already know but adds no new facts; forward KL restores factual transfer—enough to stitch the OPD line into a \"what does distillation actually transfer\" survey. Topic query \"on-policy distillation\" far below gpts on both windows (7d 1.82 vs 62.67; 24h 0.00 vs 25.43), so inbox. Follow-up: OPD/MOPD hits near-teacher scores in-distribution but underperforms the base model out of distribution.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.09639",
+              "title": "On-Policy Distillation Teaches New Skills but Not New Knowledge",
+              "brief": {
+                "zh": "合成框架分离技能/知识；reverse-KL 迁移组合技能但几乎不迁移事实，forward-KL 恢复事实迁移；学生 rollout 改善多步执行。",
+                "en": "Synthetic framework separates skill from knowledge; reverse-KL transfers compositional skill but little factual knowledge, forward-KL restores facts; student rollouts improve multi-step execution.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.05609",
+              "title": "On the Generalization Limitation of On-Policy Distillation for Post-RL Consolidation",
+              "brief": {
+                "zh": "新芽：多教师在线策略蒸馏（OPD/MOPD）在分布内能达到教师96%–103%的分数，但在分布外反而比基座模型低2.45%–16.25%，说明“蒸馏合并RL能力”只是表面完美，泛化能力并未被真正转移。这对当前流行的“分别RL再蒸馏合并”后训练范式是一个有力的反例，可写一篇短评。",
+                "en": "On the Generalization Limitation of On-Policy Distillation for Post-RL Consolidation",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.09639",
+            "https://arxiv.org/abs/2611.05609"
+          ]
+        },
+        {
+          "id": "t706",
+          "theme": "research",
+          "title": {
+            "zh": "礼貌刻板印象微调即可诱发 emergent misalignment（跨 4 个模型家族）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇论文深读候选：把 emergent misalignment 触发条件扩到日常偏见数据，对企业微调有警示；需主词当日过 Trends。 10-16 Trends（trends bot）：「emergent misalignment」7d 0.17 / 24h 0.25 vs gpts 65.35 / 15.06 未过，留 inbox。续源：「明知是错」微调诱发失准 × TCW 开源复现降失准。续源：自动挖掘「有意外副作用的训练数据集」（DSSE）。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇论文深读候选：把 emergent misalignment 触发条件扩到日常偏见数据，对企业微调有警示；需主词当日过 Trends。 10-16 Trends（trends bot）：「emergent misalignment」7d 0.17 / 24h 0.25 vs gpts 65.35 / 15.06 未过，留 inbox。续源：「明知是错」微调诱发失准 × TCW 开源复现降失准。续源：自动挖掘「有意外副作用的训练数据集」（DSSE）。",
+            "en": "Single-paper candidate: everyday-bias fine-tuning triggers emergent misalignment across four model families; needs Trends pass. 10-16 Trends (trends bot): emergent misalignment 7d 0.17 / 24h 0.25 vs gpts 65.35 / 15.06 — not passed, stays inbox. Follow-up: fine-tuning on answers the model believes false induces broad misalignment; an open replication of Teaching Claude Why reduces agentic misalignment in Qwen. Follow-up: automated discovery of datasets with surprising side effects (DSSE), 6,575 datasets across 8 behaviors.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.15961",
+              "title": "Unfair and Unsafe: Everyday Bias Triggers Emergent Misalignment",
+              "brief": {
+                "zh": "仅用礼貌的刻板印象数据微调，即在 4 个模型家族上复现无关任务中的不安全与不诚实行为。",
+                "en": "Fine-tuning on polite stereotypes alone yields unsafe and dishonest behavior on unrelated tasks across four model families.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.05287",
+              "title": "Knowingly Wrong: Training LLMs Against Their Own Beliefs can Induce Misalignment",
+              "brief": {
+                "zh": "新芽：涌现式失准（emergent misalignment）的新诱因：训练数据不必有害，只要是模型自己“认为是错的”答案，微调后同样会导致广泛失准。模型越不相信训练答案，失准越严重；数学任务里失准回答从 4% 升到 60% 以上。微调后模型嘴上说错误答案，选择题概率却仍偏向正确答案，作者认为这种“内部不一致”正是失准的来源。",
+                "en": "Knowingly Wrong: Training LLMs Against Their Own Beliefs can Induce Misalignment",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.lesswrong.com/posts/35yw2qGK7naFLAvcq/teaching-qwen-why-1",
+              "title": "Teaching Qwen Why: replicating Anthropic's 'Teaching Claude Why' alignment training on open models",
+              "brief": {
+                "zh": "AM leftover (published 11-02), not filed in any lane. Open, independent replication of an alignment technique Anthropic uses in production (Opus 4.5+) — enables open alignment science on agentic misalignment; links to topics on emergent misalignment/agentic misalignment (cf. t817, t750).",
+                "en": "Teaching Qwen Why: replicating Anthropic's 'Teaching Claude Why' alignment training on open models",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.06324",
+              "title": "Mass Producing Training Data with Surprising Side Effects",
+              "brief": {
+                "zh": "新芽：Steinhardt团队把“训练数据的意外副作用”（如不安全代码诱发广泛失准、旧鸟名诱发19世纪人格）从零散手工案例变成可自动批量挖掘的对象（DSSE），通过演化搜索、RL等找出看似普通却诱发目标行为的数据集，产出8种行为共6575个数据集。核心术语“datasets with surprising side effects”可搜索，适合作为涌现失准/数据审计话题的短文。",
+                "en": "Mass Producing Training Data with Surprising Side Effects",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.15961",
+            "https://arxiv.org/abs/2611.05287",
+            "https://www.lesswrong.com/posts/35yw2qGK7naFLAvcq/teaching-qwen-why-1",
+            "https://arxiv.org/abs/2611.06324"
+          ]
+        },
+        {
+          "id": "t840",
+          "theme": "research",
+          "title": {
+            "zh": "模型坍缩是 Rogers 悖论：群体越依赖模仿（用模型输出训练模型），整体并不比从不模仿更好——复制品会过期，除非有人持续独立学习；仅用纯合成训练拟合的 Rogers 模型，就能在几个百分点内预测从三元语法到预训练 Transformer 在不同新鲜数据比例下保留多少稀有知识（arXiv 2611.06022）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：模型坍缩即 Rogers 悖论——模仿依赖越高、稀有知识越丢；主词「model collapse」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：模型坍缩即 Rogers 悖论——模仿依赖越高、稀有知识越丢；主词「model collapse」待测。",
+            "en": "Deep-read candidate: model collapse as Rogers' paradox — imitation without independent learning loses rare knowledge; candidate term \"model collapse\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.06022",
+              "title": "Who Pays for the Knowledge Models Copy? Model Collapse as Rogers' Paradox",
+              "brief": {
+                "zh": "深耕候选：作者把模型坍缩重新解读为文化演化中的“Rogers悖论”：当群体越来越依赖模仿（用模型输出训练模型），整体并不比从不模仿更好，因为复制品会过时，除非有人持续独立学习。仅用纯合成训练数据拟合的Rogers模型，就能在几个百分点内预测从三元语法到预训练Transformer在不同新鲜数据比例下保留多少稀有知识。这把“谁来为被复制的知识买单”变成了一个可解释的经济学/演化机制，非常适合写成连接AI数据生态与文化演化理论的深度文章。",
+                "en": "Who Pays for the Knowledge Models Copy? Model Collapse as Rogers' Paradox",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.06022"
+          ]
+        },
+        {
+          "id": "t841",
+          "theme": "research",
+          "title": {
+            "zh": "「验证了但什么都没证明」：LLM 驱动的形式化验证代码生成有三层失败面——验证器接受（A）、证明义务是否绑定到规约（B）、规约是否忠实于自然语言需求（C）；复现的 Dafny 流水线在 HumanEval 上 99.1% 验证通过，但只有 1.9% 的证书真正绑定到规约谓词（arXiv 2611.05590）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：形式化验证通过率虚高——三层失败面；缺新核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：形式化验证通过率虚高——三层失败面；缺新核心词。",
+            "en": "Deep-read candidate: LLM verified-code pipelines can pass the verifier while proving almost nothing; no new reliable core term (\"formal verification\" already failed).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.05590",
+              "title": "Verified but Vacuous: Three Failure Surfaces of LLM-Driven Verified Code Generation",
+              "brief": {
+                "zh": "深耕候选：论文把“形式化验证通过”拆成三层失败面：验证器接受（A）、证明义务是否真正绑定到规约（B）、规约是否忠实于自然语言需求（C）。复现的Dafny中间表示流水线在HumanEval上达到99.1%验证通过率，但只有1.9%的证书真正绑定到规约定义的谓词——“验证了但什么都没证明”。这是一个清晰的失败模式分类，可支撑一篇关于“LLM+形式化验证”指标虚高的深度文章。",
+                "en": "Verified but Vacuous: Three Failure Surfaces of LLM-Driven Verified Code Generation",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.05590"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-05T10:00:00+08:00",
       "label": {
@@ -566,68 +777,6 @@
             "https://metr.org/blog/2026-10-22-red-teaming-openai-agent-monitoring/",
             "https://the-decoder.com/three-fired-openai-safety-researchers-say-they-were-never-told-what-they-actually-leaked/",
             "https://blog.redwoodresearch.org/p/openai-agents-keep-disabling-monitoring"
-          ]
-        },
-        {
-          "id": "t706",
-          "theme": "research",
-          "title": {
-            "zh": "礼貌刻板印象微调即可诱发 emergent misalignment（跨 4 个模型家族）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：把 emergent misalignment 触发条件扩到日常偏见数据，对企业微调有警示；需主词当日过 Trends。 10-16 Trends（trends bot）：「emergent misalignment」7d 0.17 / 24h 0.25 vs gpts 65.35 / 15.06 未过，留 inbox。续源：「明知是错」微调诱发失准 × TCW 开源复现降失准。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：把 emergent misalignment 触发条件扩到日常偏见数据，对企业微调有警示；需主词当日过 Trends。 10-16 Trends（trends bot）：「emergent misalignment」7d 0.17 / 24h 0.25 vs gpts 65.35 / 15.06 未过，留 inbox。续源：「明知是错」微调诱发失准 × TCW 开源复现降失准。",
-            "en": "Single-paper candidate: everyday-bias fine-tuning triggers emergent misalignment across four model families; needs Trends pass. 10-16 Trends (trends bot): emergent misalignment 7d 0.17 / 24h 0.25 vs gpts 65.35 / 15.06 — not passed, stays inbox. Follow-up: fine-tuning on answers the model believes false induces broad misalignment; an open replication of Teaching Claude Why reduces agentic misalignment in Qwen.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.15961",
-              "title": "Unfair and Unsafe: Everyday Bias Triggers Emergent Misalignment",
-              "brief": {
-                "zh": "仅用礼貌的刻板印象数据微调，即在 4 个模型家族上复现无关任务中的不安全与不诚实行为。",
-                "en": "Fine-tuning on polite stereotypes alone yields unsafe and dishonest behavior on unrelated tasks across four model families.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.05287",
-              "title": "Knowingly Wrong: Training LLMs Against Their Own Beliefs can Induce Misalignment",
-              "brief": {
-                "zh": "新芽：涌现式失准（emergent misalignment）的新诱因：训练数据不必有害，只要是模型自己“认为是错的”答案，微调后同样会导致广泛失准。模型越不相信训练答案，失准越严重；数学任务里失准回答从 4% 升到 60% 以上。微调后模型嘴上说错误答案，选择题概率却仍偏向正确答案，作者认为这种“内部不一致”正是失准的来源。",
-                "en": "Knowingly Wrong: Training LLMs Against Their Own Beliefs can Induce Misalignment",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.lesswrong.com/posts/35yw2qGK7naFLAvcq/teaching-qwen-why-1",
-              "title": "Teaching Qwen Why: replicating Anthropic's 'Teaching Claude Why' alignment training on open models",
-              "brief": {
-                "zh": "AM leftover (published 11-02), not filed in any lane. Open, independent replication of an alignment technique Anthropic uses in production (Opus 4.5+) — enables open alignment science on agentic misalignment; links to topics on emergent misalignment/agentic misalignment (cf. t817, t750).",
-                "en": "Teaching Qwen Why: replicating Anthropic's 'Teaching Claude Why' alignment training on open models",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.15961",
-            "https://arxiv.org/abs/2611.05287",
-            "https://www.lesswrong.com/posts/35yw2qGK7naFLAvcq/teaching-qwen-why-1"
           ]
         },
         {
@@ -5136,119 +5285,6 @@
           "blog": {
             "zh": "/cn/blog/meta-muse-allow-always-agent-permission-defaults/",
             "en": "/blog/meta-muse-allow-always-agent-permission-defaults/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-06T11:00:00+08:00",
-      "label": {
-        "zh": "10月6日 11:00",
-        "en": "Oct 6 11:00",
-        "ja": "10月6日 11:00"
-      },
-      "items": [
-        {
-          "id": "t581",
-          "theme": "research",
-          "title": {
-            "zh": "Agent Skills 2026 综述：从静态清单到按需加载、可训练、可验收、可签名",
-            "en": "Agent Skills in 2026: A Survey from SKILL.md to On-Demand Loading, Training, Acceptance Gates, and Signing",
-            "ja": "Agent Skills in 2026: A Survey from SKILL.md to On-Demand Loading, Training, Acceptance Gates, and Signing"
-          },
-          "summary": {
-            "zh": "把 Agent Skills 从静态清单写成按需加载、可训练、可验收、可签名的工程面：progressive disclosure、演化验收、安装前扫描同窗对照。",
-            "en": "A 2026 survey of Agent Skills organized as a lifecycle—write, install, select, execute, learn, accept, govern—covering the SKILL.md spec, pre-install scanning and signing, on-demand loading, HEXIS state machines, SkillOpt/SkillGym training, and SAGE acceptance gates, with a comparison table and a checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "把 Agent Skills 从静态清单写成按需加载、可训练、可验收、可签名的工程面：progressive disclosure、演化验收、安装前扫描同窗对照。",
-            "en": "Frames Agent Skills as an engineering surface: progressive disclosure, trainable evolution with acceptance gates, and install-time scanning—not a static checklist.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "blog",
-              "url": "https://redreamality.com/cn/blog/",
-              "title": "Agent Skills 2026 survey",
-              "brief": {
-                "zh": "站内已发综述，串联 skills 主线。",
-                "en": "Published site survey tying together the skills line.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "site",
-            "arxiv",
-            "nvidia",
-            "techcrunch"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://microsoft.github.io/SkillOpt/",
-            "https://arxiv.org/abs/2609.35692",
-            "https://github.com/NVIDIA/SkillSpector"
-          ],
-          "blog": {
-            "zh": "/cn/blog/agent-skills-2026-survey-lifecycle-map/",
-            "en": "/blog/agent-skills-2026-survey-lifecycle-map/"
-          }
-        },
-        {
-          "id": "t570",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Cowork：推理与 VM 都迁到按会话隔离的云 sandbox",
-            "en": "Claude Cowork Moves Execution to the Cloud: Should an Agent's Hands Run in a Local VM, a Per-Session Sandbox, or Its Own Cloud Computer?",
-            "ja": "Claude Cowork Moves Execution to the Cloud: Should an Agent's Hands Run in a Local VM, a Per-Session Sandbox, or Its Own Cloud Computer?"
-          },
-          "summary": {
-            "zh": "Cowork 把工具执行从本机 VM 改成云端按会话隔离的 sandbox，本机文件改由桌面代理。这是 sandbox 产品架构换挡，不是又一个插件。Trends 主词 Claude Cowork 两窗口都高于 gpts，升短名单。",
-            "en": "From October 6, new Claude Cowork tasks on Pro/Max run in per-session cloud sandboxes by default, with local files proxied through the desktop app. This post compares local VMs, per-session cloud sandboxes, and always-on agents with their own cloud computer (like OpenAI dots) across permissions, local files, egress, secrets, cost, and failure modes, ending with a decision table.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Cowork 把工具执行从本机 VM 改成云端按会话隔离的 sandbox，本机文件改由桌面代理。这是 sandbox 产品架构换挡，不是又一个插件。Trends 主词 Claude Cowork 两窗口都高于 gpts，升短名单。",
-            "en": "Cowork moves tool execution from a local VM into a per-session cloud sandbox, with desktop-app proxying for local files. A sandbox product-architecture shift, not another plugin. Trends for Claude Cowork beat gpts in both windows, so this is shortlisted.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "simonw",
-              "url": "https://simonwillison.net/2026/Oct/5/felix-rieseberg/",
-              "title": "Cowork moves inference and the VM to the cloud",
-              "brief": {
-                "zh": "Simon 引 Felix：旧版云推理+本机 VM；新版推理与 VM 都在云端，会话互不共享状态。",
-                "en": "Simon quoting Felix: old Cowork ran tools in a local VM; the new design moves inference and the VM to the cloud with no shared session state.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "anthropic",
-              "url": "https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile",
-              "title": "Use Claude Cowork on web, desktop, and mobile",
-              "brief": {
-                "zh": "帮助中心：2026-10-06 起 Pro/Max 新建 Cowork 任务默认云端，「Only on your computer」移除。",
-                "en": "Help Center: from 2026-10-06, new Pro/Max Cowork tasks run in the cloud and the on-your-computer option is removed.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "simonw",
-            "anthropic"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://simonwillison.net/2026/Oct/5/felix-rieseberg/",
-            "https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile"
-          ],
-          "blog": {
-            "zh": "/cn/blog/claude-cowork-cloud-sandbox-where-agents-run/",
-            "en": "/blog/claude-cowork-cloud-sandbox-where-agents-run/"
           }
         }
       ]
