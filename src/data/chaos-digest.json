@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T10:00:16+08:00",
+  "updatedAt": "2026-11-06T15:59:27+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -12,14 +12,152 @@
   ],
   "themeCounts": {
     "models": 10,
-    "coding-tools": 10,
-    "agents-oss": 6,
-    "security": 10,
-    "research": 25,
+    "coding-tools": 9,
+    "agents-oss": 5,
+    "security": 11,
+    "research": 27,
     "product-news": 1,
     "other": 3
   },
   "hours": [
+    {
+      "hourStart": "2026-11-06T16:00:00+08:00",
+      "label": {
+        "zh": "11月6日 16:00",
+        "en": "Nov 6 16:00",
+        "ja": "11月6日 16:00"
+      },
+      "items": [
+        {
+          "id": "t845",
+          "theme": "research",
+          "title": {
+            "zh": "同一答案，不同未来：模型在「看过结果 / 读摘要 / 接指令 / 激活干预」后可以给出相近的下一 token 概率，但这不等于更新了同一套信念——当前预测一致 ≠ 后续证据到来时的信念更新一致（Bernoulli 推断任务对照贝叶斯参考；arXiv 2611.07913）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：预测一致不等于信念更新一致；缺可靠核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：预测一致不等于信念更新一致；缺可靠核心词。",
+            "en": "Deep-read candidate: matched predictions do not imply matched belief updating; no reliable core term.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.07913",
+              "title": "Same Answer, Different Future: Matched Predictions Do Not Imply Matched Belief Updating in Language Models",
+              "brief": {
+                "zh": "深耕候选：模型在「看过结果 / 读摘要 / 接指令 / 激活干预」后可以给出相近的下一 token 概率，但这并不等于它们更新了同一套信念。本文在 Bernoulli 推断任务上对照贝叶斯参考，证明当前预测一致 ≠ 后续证据到来时的信念更新一致（Same Answer, Different Future）。把「概率表面一致」和「内部信念动力学」拆开，适合深耕。",
+                "en": "Same Answer, Different Future: Matched Predictions Do Not Imply Matched Belief Updating in Language Models",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.07913"
+          ]
+        },
+        {
+          "id": "t846",
+          "theme": "research",
+          "title": {
+            "zh": "越大越脆：压缩（量化/剪枝）造成的损伤与网络代偿在基准分数里混在一起——锁定 in-context retrieval 等少数注意力头承载的能力后发现，模型越大代偿越弱、压缩越伤（arXiv 2611.07891）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：规模越大压缩越脆；缺可靠核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：规模越大压缩越脆；缺可靠核心词。",
+            "en": "Deep-read candidate: larger models compensate less under compression, so they get more brittle; no reliable core term.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.07891",
+              "title": "When Bigger Becomes Brittle: Why Compression Hurts More as Language Models Scale",
+              "brief": {
+                "zh": "深耕候选：量化/剪枝通常只报基准掉分，但掉分是「损伤」与「网络其余部分代偿」的混合，分数分不开二者。本文锁定 in-context retrieval 这一可由少数注意力头承载的能力，把压缩造成的头损伤与代偿拆开，发现模型越大，代偿越弱、压缩越脆——「Bigger Becomes Brittle」。可检索核心词明确，适合写成「规模越大压缩越伤」的机制帖。",
+                "en": "When Bigger Becomes Brittle: Why Compression Hurts More as Language Models Scale",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.07891"
+          ]
+        },
+        {
+          "id": "t847",
+          "theme": "security",
+          "title": {
+            "zh": "METR 审计 Anthropic 研发加速（2026-08～10）：主观判断截至 10 月 Anthropic 在明确任务上的能力提升约为 2024-03～2025-10 速率的约 2 倍（不会惊讶于 1.3–3×）；AECI 自 2025-10 起 1.9× 加速（95% CI 1.5–2.8）；多数加速猜约 80% 可归因于 AI（不确定性大）× 同日审 Anthropic 2026-08 风险报告「自动化研发风险」——认同当时灾难风险低、未过 Full Substitution，但质疑公开「RSP 2× Acceleration 早期预警阈值显然未过」：私报领先指标约 1.97×，「不到 2 倍」说轻了",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：METR 评 Anthropic 研发约 2× 加速 × 质疑 RSP 2× 阈值公开表述；缺可靠核心词。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：METR 评 Anthropic 研发约 2× 加速 × 质疑 RSP 2× 阈值公开表述；缺可靠核心词。",
+            "en": "Synthesis candidate: METR finds ~2x Anthropic R&D acceleration and contests the public \"2x threshold clearly not crossed\" claim; no reliable core term.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/",
+              "title": "METR: Independent Assessment of AI R&D Acceleration at Anthropic (Oct 2026) — ~2x pace, majority attributed to AI, no clear near-term bottlenecks",
+              "brief": {
+                "zh": "Highest-signal independent lab audit of frontier AI R&D acceleration this week; primary METR page (m-metr P1). Not in archive/20261104–06 media or inbox. Published 2026-11-05 (before this PM window start 09:45 CST); missed earlier sweeps because metr.org atom.xml 404 and blog listing was not caught",
+                "en": "METR: Independent Assessment of AI R&D Acceleration at Anthropic (Oct 2026) — ~2x pace, majority attributed to AI, no clear near-term bottlenecks",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://metr.org/blog/2026-11-05-rd-section-anthropic-risk-report-august-2026-review/",
+              "title": "METR review of Anthropic August 2026 Risk Report (Automated R&D): agree risk was low on Jul 15, but 2x early-warning threshold plausibly crossed",
+              "brief": {
+                "zh": "Companion primary to the METR Anthropic R&D acceleration assessment filed same sweep — RSP threshold transparency / public-vs-private report gap. Not previously in archive or inbox. Same Nov-5 date / AM-miss catch-up caveat. 站内积累线: eval / preparedness / security-control (RSP thresholds, risk-report",
+                "en": "METR review of Anthropic August 2026 Risk Report (Automated R&D): agree risk was low on Jul 15, but 2x early-warning threshold plausibly crossed",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/",
+            "https://metr.org/blog/2026-11-05-rd-section-anthropic-risk-report-august-2026-review/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-06T10:00:00+08:00",
       "label": {
@@ -4783,114 +4921,6 @@
           "blog": {
             "zh": "/cn/blog/mcp-server-sprawl-tool-selection-at-scale/",
             "en": "/blog/mcp-server-sprawl-tool-selection-at-scale/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-07T11:00:00+08:00",
-      "label": {
-        "zh": "10月7日 11:00",
-        "en": "Oct 7 11:00",
-        "ja": "10月7日 11:00"
-      },
-      "items": [
-        {
-          "id": "t372",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "OpenAI Dots：常驻 agent + 自有云机（Astra）",
-            "en": "OpenAI Dots, Unpacked: Who Wakes an Always-On Agent and Who Pays",
-            "ja": "OpenAI Dots, Unpacked: Who Wakes an Always-On Agent and Who Pays"
-          },
-          "summary": {
-            "zh": "一级源把常驻 agent + 自有云机产品化——授权/插件/可检视电脑同窗",
-            "en": "OpenAI's dots are always-on agents with their own cloud computer that decide when to wake up. Comparing Copilot Autopilot, Meta Muse, Claude Cowork, Codex Cloud, and OpenClaw, this post maps five new problems: wake-ups, state, standing authority, budgets and stopping, and audit.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "一级源把常驻 agent + 自有云机产品化——授权/插件/可检视电脑同窗",
-            "en": "OpenAI Dots productizes always-on agents with their own cloud computers, plugins, and inspectable sessions—cloud-brain/local-hands plus an authorization surface.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "openai",
-              "url": "https://openai.com/index/introducing-dots/",
-              "title": "Introducing Dots",
-              "brief": {
-                "zh": "Dots：Astra 驱动的常驻个人/组织 agent，自带云机与浏览器，经 ChatGPT/Slack/Teams 可达，连 4k+ 应用。",
-                "en": "Dots are Astra-powered always-on personal/org agents with their own cloud computer and browser, reachable from ChatGPT/Slack/Teams and 4k+ apps via plugins.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "openai"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://openai.com/index/introducing-dots/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/openai-dots-always-on-agent-engineering/",
-            "en": "/blog/openai-dots-always-on-agent-engineering/"
-          }
-        },
-        {
-          "id": "t354",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Latent Space×Thariq：Claude Code Next Era（Mods/Plugins/Projects/Tag）",
-            "en": "Claude Code Extensions Mapped: CLAUDE.md to Mods, What to Add First",
-            "ja": "Claude Code Extensions Mapped: CLAUDE.md to Mods, What to Add First"
-          },
-          "summary": {
-            "zh": "一级源长访谈：把 coding-agent 产品面写成 Mods/Plugins/Projects/Tag 可组合 harness，并明示「agent 改写自己的 harness」——cloud-brain/local-hands + sandbox/prompt-injection 工程题续源：harness 反转/平台化新角度，可作已发文增量。",
-            "en": "How the Claude Code extension stack fits together in 2026, from CLAUDE.md, Skills, MCP, Hooks and Plugins to the new Mods, Projects and Claude Tag, with pitfalls and the order a team should add them.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "一级源长访谈：把 coding-agent 产品面写成 Mods/Plugins/Projects/Tag 可组合 harness，并明示「agent 改写自己的 harness」——cloud-brain/local-hands + sandbox/prompt-injection 工程题续源：harness 反转/平台化新角度，可作已发文增量。",
-            "en": "Primary-source Latent Space interview frames Claude Code’s next era as composable Mods/Plugins/Projects/Tag harness surfaces, including agents rewriting their own harnesses—plus cloud-brain/local-hands and sandbox/prompt-injection engineering stakes. Follow-up: Claude Mods as harness middleware; possible update to the published post.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "latent-space",
-              "url": "https://www.latent.space/p/thariq",
-              "title": "Claude Code’s Next Era — Thariq Shihipar",
-              "brief": {
-                "zh": "Sep29 Latent Space×Anthropic Thariq：Claude Mods（改 harness 本身）、Plugins、Projects（并行云会话）、Claude Tag 多人协作；明示 agent 改写自身 harness 与 sandbox/注入安全。",
-                "en": "Sep 29 Latent Space with Anthropic’s Thariq covers Claude Mods (customize the harness), Plugins, Projects (parallel cloud sessions), and Claude Tag multiplayer—explicitly agents rewriting their own harnesses plus sandbox/prompt-injection risk.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.latent.space/p/claude-mods",
-              "title": "Claude Mods: Flipping the Harness Inside Out",
-              "brief": {
-                "zh": "续源 t354（Claude Code Mods/Plugins，已发 claude-code-extension-stack-mods-plugins）：新角度为 Attention Interface / harness 反转 / harness 平台化论点，并非产品发布复述；站内积累线 harness 演化。新 URL，未归档。",
-                "en": "Claude Mods: Flipping the Harness Inside Out",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "latent-space",
-            "media"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://www.latent.space/p/thariq",
-            "https://www.latent.space/p/claude-mods"
-          ],
-          "blog": {
-            "zh": "/cn/blog/claude-code-extension-stack-mods-plugins/",
-            "en": "/blog/claude-code-extension-stack-mods-plugins/"
           }
         }
       ]
