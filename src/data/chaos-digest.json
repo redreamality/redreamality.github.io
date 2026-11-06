@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T15:56:53+08:00",
+  "updatedAt": "2026-11-06T10:00:16+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,554 @@
     "other"
   ],
   "themeCounts": {
-    "models": 11,
+    "models": 10,
     "coding-tools": 10,
-    "agents-oss": 9,
-    "security": 11,
-    "research": 29,
-    "product-news": 0,
+    "agents-oss": 6,
+    "security": 10,
+    "research": 25,
+    "product-news": 1,
     "other": 3
   },
   "hours": [
+    {
+      "hourStart": "2026-11-06T10:00:00+08:00",
+      "label": {
+        "zh": "11月6日 10:00",
+        "en": "Nov 6 10:00",
+        "ja": "11月6日 10:00"
+      },
+      "items": [
+        {
+          "id": "t569",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Reflection Beam：501B/23B 美国开源权重（coding/agentic MoE）",
+            "en": "Reflection Beam",
+            "ja": "Reflection Beam"
+          },
+          "summary": {
+            "zh": "Reflection 放出美国开源阵营旗舰 Beam：501B/23B MoE，主打 coding 与 agentic，对照 DeepSeek/Qwen/GLM。权重和技术报告还没放，先写发布与定位。贴题 Trends 相对 gpts 未过两窗口，故停在 inbox。 10-11：FT 称 Nvidia 洽购 Reflection AI。续源：正式开放权重。续源：Beam 开放模型安全配方（MOPD + Iris）。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Reflection 放出美国开源阵营旗舰 Beam：501B/23B MoE，主打 coding 与 agentic，对照 DeepSeek/Qwen/GLM。权重和技术报告还没放，先写发布与定位。贴题 Trends 相对 gpts 未过两窗口，故停在 inbox。 10-11：FT 称 Nvidia 洽购 Reflection AI。续源：正式开放权重。续源：Beam 开放模型安全配方（MOPD + Iris）。",
+            "en": "Reflection launches Beam, a US open-weight MoE (501B total, 23B active) aimed at coding and agentic work against DeepSeek, Qwen, and GLM. Weights and the tech report are still pending, so the piece is the launch and positioning. Topic-relevant Trends terms did not beat gpts in both windows, so this stays in the inbox. Oct 11: FT reports Nvidia in talks to acquire Reflection AI. Follow-up: weights now on Hugging Face. Follow-up: Reflection's open-model safety recipe for Beam (MOPD safety teacher + Iris evals).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "reflection",
+              "url": "https://reflection.ai/blog/introducing-beam",
+              "title": "Introducing Beam",
+              "brief": {
+                "zh": "官方：稀疏 MoE；预训练 23.8T tokens；RL 在 10.5K GB300 跑 4 周；宣称 coding/agentic 近 GLM 5.2 / Qwen 3.8-Max，推理算力更省；可申请早期访问，权重本月晚些时候放出。",
+                "en": "Official: sparse MoE; 23.8T pretraining tokens; RL for four weeks on 10.5K GB300s; claims coding/agentic parity near GLM 5.2 / Qwen 3.8-Max with less inference compute; early access now, weights later this month.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://news.ycombinator.com/item?id=49969183",
+              "title": "Beam on HN",
+              "brief": {
+                "zh": "HN 304/79。昨日 r/LocalLLaMA 仅传闻，现已发。",
+                "en": "HN 304/79. Yesterday's LocalLLaMA rumor is now a real launch.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.ft.com/content/052610c5-22b4-4dd4-932e-b7f9f0628b6a",
+              "title": "Nvidia in talks to acquire Reflection AI (FT)",
+              "brief": {
+                "zh": "HN 122/83；付费墙。",
+                "en": "HN 122/83; paywalled.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/reflection/Beam-1.0-501B-A23B",
+              "title": "reflection/Beam-1.0-501B-A23B",
+              "brief": {
+                "zh": "Reflection AI 发布 501B-A23B 开放权重大模型 Beam 1.0。",
+                "en": "reflection/Beam-1.0-501B-A23B",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x7g4k3/reflectionbeam10501ba23b_hugging_face/",
+              "title": "reflection/Beam-1.0-501B-A23B · Hugging Face",
+              "brief": {
+                "zh": "Reflection 开源 Beam-1.0 501B-A23B",
+                "en": "reflection/Beam-1.0-501B-A23B · Hugging Face",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://reflection.ai/blog/open-model-safety-lessons",
+              "title": "Reflection: Open model safety lessons from training and evaluating Beam (Project Iris, ISE, prompt-injection mitigation in its Mirror harness)",
+              "brief": {
+                "zh": "New primary safety and agent-control writeup for an open-weight frontier model. topics.md t569 covers only the Beam launch, not safety. Rare open-lab data: a harness-level prompt-injection mitigation with before/after numbers, and a self-exfiltration/persistence observation in an open model. 站内积累线:",
+                "en": "Reflection: Open model safety lessons from training and evaluating Beam (Project Iris, ISE, prompt-injection mitigation in its Mirror harness)",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "reflection",
+            "hn",
+            "techcrunch",
+            "huggingface",
+            "reddit",
+            "media"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://reflection.ai/blog/introducing-beam",
+            "https://news.ycombinator.com/item?id=49969183",
+            "https://www.ft.com/content/052610c5-22b4-4dd4-932e-b7f9f0628b6a",
+            "https://huggingface.co/reflection/Beam-1.0-501B-A23B",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1x7g4k3/reflectionbeam10501ba23b_hugging_face/",
+            "https://reflection.ai/blog/open-model-safety-lessons"
+          ]
+        },
+        {
+          "id": "t666",
+          "theme": "security",
+          "title": {
+            "zh": "AI 漏洞发现规模化：Anthropic OSS Scanner（模型直出报告、抽检 88% 达 CVD 标准）+ Cyber Mission 关键基础设施防御 + Codex Security CLI + Cantina apex-flash-1",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "Anthropic 开放 OSS Scanner：最强模型免费扫关键开源项目、报告无人工分诊，抽检高危 88% 达 CVD 标准；同窗 Codex Security CLI 与 Cantina 小模型——漏洞发现规模化后，瓶颈转到维护者吞吐与报告洪水。；「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail，未双过/无数值 → inbox。 10-10：GLM 5.3 Flash 登顶 AA Cyber Index，开源权重网络安全能力扩散。续源：Anthropic 一手：agent 扫描车队与五条 exploit chain。续源：Epoch 开源权重模型利用 patch gap。续源：OpenAI 948 个 Linux 内核提权（$1.2M）× IEEE 技术债。续源：GPT-6 Cyber 首评 Critical + 蜜罐范围遵守。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Anthropic 开放 OSS Scanner：最强模型免费扫关键开源项目、报告无人工分诊，抽检高危 88% 达 CVD 标准；同窗 Codex Security CLI 与 Cantina 小模型——漏洞发现规模化后，瓶颈转到维护者吞吐与报告洪水。；「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail，未双过/无数值 → inbox。 10-10：GLM 5.3 Flash 登顶 AA Cyber Index，开源权重网络安全能力扩散。续源：Anthropic 一手：agent 扫描车队与五条 exploit chain。续源：Epoch 开源权重模型利用 patch gap。续源：OpenAI 948 个 Linux 内核提权（$1.2M）× IEEE 技术债。续源：GPT-6 Cyber 首评 Critical + 蜜罐范围遵守。",
+            "en": "Anthropic opens OSS Scanner: its strongest models scan critical open source for free with no human triage, and 88% of sampled high-severity findings met the CVD bar; alongside Codex Security CLI and Cantina's small model, the bottleneck shifts to maintainer throughput and report floods. Trends 「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail — not both / no data, inbox. Oct 10: GLM 5.3 Flash tops the AA Cyber Index—open-weight cyber capability spreading. Follow-up: Anthropic Frontier Red Team primary post, parallel scanner fleet and five exploit chains. Follow-up: Epoch shows open-weight GLM 5.3 exploiting the Firefox patch gap. Follow-up: OpenAI's agent pipeline found and patched 948 Linux kernel LPEs for $1.2M; IEEE Spectrum on AI forcing payoff of old tech debt. Follow-up: GPT-6 Cyber, first Critical cyber rating, with honeypot scope-adherence evals.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "anthropic",
+              "url": "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
+              "title": "Launching an opt-in vulnerability-finding service for open source",
+              "brief": {
+                "zh": "6 个月 2.9 万候选；抽检 97 高危 85 达标、1 误报；wolfSSL 72/74、5 CVE；PR 入组。",
+                "en": "29k candidates in 6 months; 85 of 97 sampled critical/high met CVD bar, 1 false positive; wolfSSL 72/74, 5 CVEs; enrol by PR.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "anthropic",
+              "url": "https://www.anthropic.com/news/anthropic-cyber-mission",
+              "title": "Anthropic Cyber Mission",
+              "brief": {
+                "zh": "关键基础设施防御计划（OT/电网/水务）与多家安全咨询伙伴。",
+                "en": "Critical Infrastructure Defense Program (OT/grid/water) with security-consulting partners.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "github",
+              "url": "https://github.com/openai/codex-security",
+              "title": "openai/codex-security",
+              "brief": {
+                "zh": "★11040 Δ30；Codex Security CLI + TS SDK 找/验/修漏洞。",
+                "en": "★11040 Δ30; Codex Security CLI and TS SDK to find, validate and fix vulns.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "huggingface",
+              "url": "https://huggingface.co/cantina-security/apex-flash-1",
+              "title": "cantina-security/apex-flash-1",
+              "brief": {
+                "zh": "GLM-5.3-Flash RL 后训做漏洞调查，66.7% pass@1、$2.38。",
+                "en": "GLM-5.3-Flash RL-tuned for exploit investigation; 66.7% pass@1 at $2.38.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x1rwof/glm_53_flash_opensource_the_top_of_artificial/",
+              "title": "GLM 5.3 Flash tops Artificial Analysis Cyber Index over Claude",
+              "brief": {
+                "zh": "开源权重网络能力榜首。",
+                "en": "Open weights top the cyber index.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude",
+              "title": "Discovering and exploiting vulnerabilities in critical, real-world software with Claude (Anthropic Frontier Red Team)",
+              "brief": {
+                "zh": "Publication date is Oct 27 (before the 10-28 15:43 window) but it first surfaced in the media lane via aihot/IT之家 in-window and no lane/archive/topics has this URL — filed as late catch. Deep, mechanism-rich agent security/harness content (parallel scanner fleet, verification pipeline, exploit-chain",
+                "en": "Discovering and exploiting vulnerabilities in critical, real-world software with Claude (Anthropic Frontier Red Team)",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://epoch.ai/publications/open-weight-models-patch-gap",
+              "title": "Epoch AI: Open-weight AI models can exploit the patch gap (GLM 5.3 built full Firefox exploit chains)",
+              "brief": {
+                "zh": "Materially new primary data vs. topics t402 (Anthropic/NIST GLM-5.3 cyber): concrete patch-gap threat model, cost figure, disclosure to Mozilla; Nathan Lambert (Interconnects) publicly revisiting his open-model-risk stance. 站内积累线：security-control / agent 自主攻击。",
+                "en": "Epoch AI: Open-weight AI models can exploit the patch gap (GLM 5.3 built full Firefox exploit chains)",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability",
+              "title": "AI is forcing us to pay off 40 years of technical debt",
+              "brief": {
+                "zh": "IEEE Spectrum 1057 分：以 PHP2Shell 漏洞为例，AI 让老代码漏洞挖掘规模化，迫使行业偿还数十年技术债；AI 安全/开发者工具综合线。",
+                "en": "AI is forcing us to pay off 40 years of technical debt",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
+              "title": "OpenAI: A thousand fewer paths to root — autonomous pipeline finds/exploits/patches 948 Linux kernel LPEs for $1.2M",
+              "brief": {
+                "zh": "Primary frontier security research with hard cost numbers; not in inbox/archive 11-03/04 or topics.md (HN lane filed only Pierre and Kimi). 站内积累线: harness/scaffolding should be re-evaluated per model generation (skills layer removed), 'verify the path not just the result' for agent evals, sandbox/is",
+                "en": "OpenAI: A thousand fewer paths to root — autonomous pipeline finds/exploits/patches 948 Linux kernel LPEs for $1.2M",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://openai.com/index/introducing-gpt-6-cyber",
+              "title": "OpenAI GPT-6 Cyber: Preparedness 'Critical' cyber model, 99.93% in-scope on ExploitGym Honeypot, Daybreak Red gated access",
+              "brief": {
+                "zh": "New model plus a primary safety/scope-control writeup. Different from archive/20261105 'a thousand fewer paths to root' (the 948-LPE pipeline post) and archive/20261104 Daybreak/GovCloud: this one is the model launch, the first 'Critical' cyber rating, and the honeypot scope-adherence eval. Related",
+                "en": "OpenAI GPT-6 Cyber: Preparedness 'Critical' cyber model, 99.93% in-scope on ExploitGym Honeypot, Daybreak Red gated access",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "anthropic",
+            "verge",
+            "github",
+            "huggingface",
+            "reddit",
+            "media",
+            "hn"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
+            "https://www.anthropic.com/news/anthropic-cyber-mission",
+            "https://github.com/openai/codex-security",
+            "https://huggingface.co/cantina-security/apex-flash-1",
+            "https://www.reddit.com/r/LocalLLaMA/comments/1x1rwof/glm_53_flash_opensource_the_top_of_artificial/",
+            "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude",
+            "https://epoch.ai/publications/open-weight-models-patch-gap",
+            "https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability",
+            "https://openai.com/index/a-thousand-fewer-paths-to-root",
+            "https://openai.com/index/introducing-gpt-6-cyber"
+          ]
+        },
+        {
+          "id": "t769",
+          "theme": "models",
+          "title": {
+            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。续源：GitHub Next Enclaves 跨仓信息流隔离 × 复刻游戏规则用户反弹。续源：GMTK「我的游戏被 AI 复刻」开发者侧案例。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。续源：GitHub Next Enclaves 跨仓信息流隔离 × 复刻游戏规则用户反弹。续源：GMTK「我的游戏被 AI 复刻」开发者侧案例。",
+            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term. Follow-up: Claude Duet safety architecture, approvals outside the model and credential isolation. Follow-up: Claude Code adds an undocumented env var that lifts the last hard blocks under skip-permissions. Follow-up: Claude Code receives a remotely pushed, non-disableable prompt rule via a server-side flag. Follow-up: GitHub Next Enclaves for cross-repo agent info-flow control, plus user backlash over Claude Code's no-game-recreation rule. Follow-up: GMTK developer-side case of a Claude Code near-clone of Word Play (~12 min agent time; view count unverified).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://x.com/claudeai/status/2113360845409583307",
+              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
+              "brief": {
+                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
+                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
+              "brief": {
+                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
+                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://claude.com/blog/claude-duet-safety-privacy-and-security",
+              "title": "Claude Duet Safety, Privacy, and Security（Anthropic 官方拆解：审批卡 + 模型外分类器 + 凭证不进模型）",
+              "brief": {
+                "zh": "站内积累线（agent 安全/控制）：与已归档 1Password for Agents（10-23）、Claude auto mode（10-23）、Managed Agents 凭证代理同一条线，但这篇是 Anthropic 一手的‘审批在模型外 + 凭证隔离 + 浏览器边界’完整架构，机制信息密度高。非本窗口新发（10-23 08:00 北京时间发布），前几轮未归档（topics.md 仅有 Duet 产品发布 t765），故补录。tag exploit-candidate。",
+                "en": "tag exploit-candidate。",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.ithome.com/1/019/476.htm",
+              "title": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
+              "brief": {
+                "zh": "站内积累线 (sandbox/security-control, coding-agent permission layers). It gives a concrete look at the layering inside a harness: the 'skip permissions' mode still had a hidden denylist, and now that denylist has its own off switch, which is undocumented. It pairs with t769 (auto-mode classifier / approv",
+                "en": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
+              "title": "Anthropic 在 Claude Code 的 Opus 5.5 提示中加入「不复刻具体现有游戏」规则，经服务端 tengu_heron_brook 下发、无法关闭",
+              "brief": {
+                "zh": "站内积累线（harness / security-control）：编码 agent 的行为约束不在模型权重也不在用户配置，而是厂商通过服务端 flag 远程注入 harness 系统提示、按模型分包、用户不可关——是 harness 层策略控制面的一手样本；也牵出反编译/静态重编译灰区与提示级护栏可绕过的问题。接 t690（Opus 5.5 反编译/移植、500B token 反编译 FPS）。",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://githubnext.com/posts/enclaves/",
+              "title": "GitHub Next: Enclaves — limit what agents learn about private repos in cross-repo Agentic Workflows",
+              "brief": {
+                "zh": "Concrete deterministic info-flow control for agents, a design answer to prompt-injection exfil; complements t803/t808/t769 approval-outside-the-model line. Published 11-02 (before window) but surfaced only via the never-retrieved TLDR 11-03 issue; not in archive/topics. 站内积累线: sandbox / security-con",
+                "en": "GitHub Next: Enclaves — limit what agents learn about private repos in cross-repo Agentic Workflows",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=fgX8yKFVJeQ",
+              "title": "There's No Point in Paying for Claude Anymore (Because of Anthropic)",
+              "brief": {
+                "zh": "Biggest on-topic VPH this run: Turkish-language backlash over Anthropic quietly adding a Claude Code rule against recreating existing games, plus Opus 5.5 refusing reverse-engineering (REA) work.",
+                "en": "There's No Point in Paying for Claude Anymore (Because of Anthropic)",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=8LMau1qXPYE",
+              "title": "My game was cloned with AI... what do I do?",
+              "brief": {
+                "zh": "Biggest video this run and a new angle on the Claude Code game-clone story: Mark Brown (Word Play) got an email from hobbyists who vibecoded a near-clone with Claude Code in ~12 minutes of agent time.",
+                "en": "My game was cloned with AI... what do I do?",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://x.com/claudeai/status/2113360845409583307",
+            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+            "https://claude.com/blog/claude-duet-safety-privacy-and-security",
+            "https://www.ithome.com/1/019/476.htm",
+            "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
+            "https://githubnext.com/posts/enclaves/",
+            "https://www.youtube.com/watch?v=fgX8yKFVJeQ",
+            "https://www.youtube.com/watch?v=8LMau1qXPYE"
+          ]
+        },
+        {
+          "id": "t808",
+          "theme": "security",
+          "title": {
+            "zh": "AI 开发工具的「黑色十月」：Cursor 扩展市场上的官方 Claude Code VS Code 扩展被植入后门（Phorion，HN 773/485，Lobsters 140）× Wiz 汇总十月至少 9 起 AI 开发平台安全事件（Fireworks、Lightning、Railway、Warp、OpenCode、Zeabur 等：凭据窃取、agent 群式攻击、为蒸馏/LLMjacking 盗用；被盗 Bedrock key 30 小时约 80 万次调用、转售池 13 小时约 170 万次）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。续源：Postman 静默装 AI 插件 × Codex 对话训练疑似重开。续源：Gemini 订阅用户聊天被用于训练（待核）。续源：Claude Code 疑似把用户邮箱带到访问的网站。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。续源：Postman 静默装 AI 插件 × Codex 对话训练疑似重开。续源：Gemini 订阅用户聊天被用于训练（待核）。续源：Claude Code 疑似把用户邮箱带到访问的网站。",
+            "en": "Synthesis candidate: backdoored Claude Code extension on the Cursor marketplace plus Wiz's \"Black October\" roll-up of AI developer-platform incidents; candidate term \"Open VSX\" (verify first). Follow-up: Parameter discloses a ChatGPT account-takeover chain. Primary source added: Cursor's notice confirms the backdoor was served from Cursor's own marketplace (not Open VSX), with timeline, IOCs and remediation. Re-heat: the malicious Claude Code extension story spreads across YouTube. Follow-up: Postman silently installing AI plugins and claims that Codex chats are used for training again (both unverified). Follow-up: claims that Gemini trains on subscribers' chat history (unverified). Follow-up: issue claiming Claude Code sends the user email when visiting websites (unverified).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+              "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+              "brief": {
+                "zh": "Cursor 扩展市场上的官方 Claude Code 扩展被植入后门；Lobsters 同题 140 分（https://lobste.rs/s/ttp7aq，GossiTheDog 帖）。接供应链/harness 安全线（LiteLLM、HTTP2Shell、backdoors in harnesses），可做 AI 编码工具供应链综述",
+                "en": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
+              "title": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+              "brief": {
+                "zh": "Different report from the filed 10-30 Wiz 'rise of agentic attacks' piece: incident roll-up + LLMjacking telemetry across AI dev platforms. 站内积累线：security-control / agent 平台凭据。",
+                "en": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
+              "title": "Do the math: How we took over ChatGPT accounts",
+              "brief": {
+                "zh": "Parameter 披露接管 ChatGPT 账号的漏洞链；AI 产品自身安全，可并入 AI 工具供应链/安全综述（Claude Code VSX 后门、harness backdoors）",
+                "en": "Do the math: How we took over ChatGPT accounts",
+                "ja": ""
+              }
+            },
+            {
+              "source": "cursor-blog",
+              "url": "https://cursor.com/blog/claude-code-extension-security-notice",
+              "title": "Security notice — malicious version of Anthropic.claude-code (2.1.312 and 2.1.313) identified in the Cursor VS Code Extension Marketplace",
+              "brief": {
+                "zh": "Cursor 官方公告（10-29，10-30 11:30 PT 更新 IOC）：10-29 约 2:27–13:35 PT，Cursor 自家 VS Code 扩展市场上架了被篡改的 Anthropic.claude-code 2.1.312/2.1.313（Win/macOS），非 Anthropic 开发；植入持久 SSH 后门——收集主机信息、向 authorized_keys 加攻击者公钥（svc-telemetry）、尝试开 SSH 并建反向隧道，LaunchAgent/计划任务持久化；多数主机因无管理员权限开 SSH 失败，但公钥、持久化与主机信息上报已发生。Cursor 下架并整体关停市场、审计无其他扩展被篡改、轮换密钥重建市场，协同下线攻击服务器 134.209.82.225；卸载扩展不足以清除，需跑修复脚本并轮换凭据。",
+                "en": "Cursor's official notice (Oct 29, IOCs updated Oct 30): tampered Anthropic.claude-code 2.1.312/2.1.313 was served from Cursor's own VS Code Extension Marketplace for about 11 hours; it planted an attacker SSH key, persistence and a reverse-tunnel attempt and beaconed host details. Cursor pulled it, shut down and rebuilt the marketplace, rotated keys and got the C2 server taken down.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=yIvaF0HI5wo",
+              "title": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
+              "brief": {
+                "zh": "The malicious Claude Code extension story broke out across several channels: malicious Anthropic.claude-code 2.1.312/2.1.313 builds were found in Cursor's VS Code extension marketplace.",
+                "en": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://news.ycombinator.com/item?id=50352757",
+              "title": "OpenAI seems to be silently re-enabling model training on Codex chats",
+              "brief": {
+                "zh": "Ask/讨论帖 433 分：用户称 OpenAI 悄悄重新开启用 Codex 对话训练模型；单方说法待核，属 AI 编程工具数据隐私线。",
+                "en": "OpenAI seems to be silently re-enabling model training on Codex chats",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
+              "title": "Postman silently auto-installs AI plugins and attempts to share all API data",
+              "brief": {
+                "zh": "HN 1020 分：GitHub issue 指 Postman 静默自动安装 AI 插件并尝试共享全部 API 数据；AI 工具供应链/隐私线，可接 Claude Code VSX 后门、ChatGPT 账号接管旧条。单方 issue，官方回应待核。",
+                "en": "Postman silently auto-installs AI plugins and attempts to share all API data",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://news.ycombinator.com/item?id=50363461",
+              "title": "Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)",
+              "brief": {
+                "zh": "Tell HN 628 分：称 Gemini 个人订阅账号的聊天记录也被用于训练；可与昨日 OpenAI Codex 对话训练条目合成 AI 产品数据政策对比。用户说法，条款待核。",
+                "en": "Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://github.com/anthropics/claude-code/issues/107757",
+              "title": "Claude Code sends your email address to websites",
+              "brief": {
+                "zh": "Claude Code 的 GitHub issue 称其访问网站时会带上用户邮箱（issue 自报，待核）；HN 481 分。可接 AI 工具安全/隐私线（Postman 静默装插件、Codex/Gemini 用聊天训练）。",
+                "en": "Claude Code sends your email address to websites",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "media",
+            "cursor-blog",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+            "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
+            "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
+            "https://cursor.com/blog/claude-code-extension-security-notice",
+            "https://www.youtube.com/watch?v=yIvaF0HI5wo",
+            "https://news.ycombinator.com/item?id=50352757",
+            "https://github.com/postmanlabs/postman-app-support/issues/14370",
+            "https://news.ycombinator.com/item?id=50363461",
+            "https://github.com/anthropics/claude-code/issues/107757"
+          ]
+        },
+        {
+          "id": "t843",
+          "theme": "product-news",
+          "title": {
+            "zh": "Axiom 把 Stacks Project 整库形式化进 Lean：约 7500 页代数几何开放参考（scheme、层、上同调、代数栈）约 1600 万行，永久 Stacks 标签把每条 Lean 声明映回原文，号称目前最大的一体可复用形式化数学库（建立在 Mathlib 上）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：Stacks Project 整库进 Lean；主词「autoformalization」待测。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：Stacks Project 整库进 Lean；主词「autoformalization」待测。",
+            "en": "Deep-read candidate: the Stacks Project formalized in Lean (~16M lines); candidate term \"autoformalization\".",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://axiommath.ai/research/the-stacks-project-formalized/",
+              "title": "Axiom formalizes the entire Stacks Project in Lean (~7,500 pages, ~16M lines) using coordinated AI agent swarms",
+              "brief": {
+                "zh": "A large step for AI-driven autoformalization: a whole foundational field, not a single theorem. It is the next one after Axiom's CFSG (archive/20261028 HN lane, a different item, same lab). Ties into the verification theme (archive/20261105 'verified but vacuous', 'verification is not knowledge'). P",
+                "en": "Axiom formalizes the entire Stacks Project in Lean (~7,500 pages, ~16M lines) using coordinated AI agent swarms",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://axiommath.ai/research/the-stacks-project-formalized/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-05T16:00:00+08:00",
       "label": {
@@ -240,139 +779,6 @@
       },
       "items": [
         {
-          "id": "t666",
-          "theme": "security",
-          "title": {
-            "zh": "AI 漏洞发现规模化：Anthropic OSS Scanner（模型直出报告、抽检 88% 达 CVD 标准）+ Cyber Mission 关键基础设施防御 + Codex Security CLI + Cantina apex-flash-1",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Anthropic 开放 OSS Scanner：最强模型免费扫关键开源项目、报告无人工分诊，抽检高危 88% 达 CVD 标准；同窗 Codex Security CLI 与 Cantina 小模型——漏洞发现规模化后，瓶颈转到维护者吞吐与报告洪水。；「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail，未双过/无数值 → inbox。 10-10：GLM 5.3 Flash 登顶 AA Cyber Index，开源权重网络安全能力扩散。续源：Anthropic 一手：agent 扫描车队与五条 exploit chain。续源：Epoch 开源权重模型利用 patch gap。续源：OpenAI 948 个 Linux 内核提权（$1.2M）× IEEE 技术债。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Anthropic 开放 OSS Scanner：最强模型免费扫关键开源项目、报告无人工分诊，抽检高危 88% 达 CVD 标准；同窗 Codex Security CLI 与 Cantina 小模型——漏洞发现规模化后，瓶颈转到维护者吞吐与报告洪水。；「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail，未双过/无数值 → inbox。 10-10：GLM 5.3 Flash 登顶 AA Cyber Index，开源权重网络安全能力扩散。续源：Anthropic 一手：agent 扫描车队与五条 exploit chain。续源：Epoch 开源权重模型利用 patch gap。续源：OpenAI 948 个 Linux 内核提权（$1.2M）× IEEE 技术债。",
-            "en": "Anthropic opens OSS Scanner: its strongest models scan critical open source for free with no human triage, and 88% of sampled high-severity findings met the CVD bar; alongside Codex Security CLI and Cantina's small model, the bottleneck shifts to maintainer throughput and report floods. Trends 「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail — not both / no data, inbox. Oct 10: GLM 5.3 Flash tops the AA Cyber Index—open-weight cyber capability spreading. Follow-up: Anthropic Frontier Red Team primary post, parallel scanner fleet and five exploit chains. Follow-up: Epoch shows open-weight GLM 5.3 exploiting the Firefox patch gap. Follow-up: OpenAI's agent pipeline found and patched 948 Linux kernel LPEs for $1.2M; IEEE Spectrum on AI forcing payoff of old tech debt.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "anthropic",
-              "url": "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
-              "title": "Launching an opt-in vulnerability-finding service for open source",
-              "brief": {
-                "zh": "6 个月 2.9 万候选；抽检 97 高危 85 达标、1 误报；wolfSSL 72/74、5 CVE；PR 入组。",
-                "en": "29k candidates in 6 months; 85 of 97 sampled critical/high met CVD bar, 1 false positive; wolfSSL 72/74, 5 CVEs; enrol by PR.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "anthropic",
-              "url": "https://www.anthropic.com/news/anthropic-cyber-mission",
-              "title": "Anthropic Cyber Mission",
-              "brief": {
-                "zh": "关键基础设施防御计划（OT/电网/水务）与多家安全咨询伙伴。",
-                "en": "Critical Infrastructure Defense Program (OT/grid/water) with security-consulting partners.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/openai/codex-security",
-              "title": "openai/codex-security",
-              "brief": {
-                "zh": "★11040 Δ30；Codex Security CLI + TS SDK 找/验/修漏洞。",
-                "en": "★11040 Δ30; Codex Security CLI and TS SDK to find, validate and fix vulns.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/cantina-security/apex-flash-1",
-              "title": "cantina-security/apex-flash-1",
-              "brief": {
-                "zh": "GLM-5.3-Flash RL 后训做漏洞调查，66.7% pass@1、$2.38。",
-                "en": "GLM-5.3-Flash RL-tuned for exploit investigation; 66.7% pass@1 at $2.38.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x1rwof/glm_53_flash_opensource_the_top_of_artificial/",
-              "title": "GLM 5.3 Flash tops Artificial Analysis Cyber Index over Claude",
-              "brief": {
-                "zh": "开源权重网络能力榜首。",
-                "en": "Open weights top the cyber index.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude",
-              "title": "Discovering and exploiting vulnerabilities in critical, real-world software with Claude (Anthropic Frontier Red Team)",
-              "brief": {
-                "zh": "Publication date is Oct 27 (before the 10-28 15:43 window) but it first surfaced in the media lane via aihot/IT之家 in-window and no lane/archive/topics has this URL — filed as late catch. Deep, mechanism-rich agent security/harness content (parallel scanner fleet, verification pipeline, exploit-chain",
-                "en": "Discovering and exploiting vulnerabilities in critical, real-world software with Claude (Anthropic Frontier Red Team)",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://epoch.ai/publications/open-weight-models-patch-gap",
-              "title": "Epoch AI: Open-weight AI models can exploit the patch gap (GLM 5.3 built full Firefox exploit chains)",
-              "brief": {
-                "zh": "Materially new primary data vs. topics t402 (Anthropic/NIST GLM-5.3 cyber): concrete patch-gap threat model, cost figure, disclosure to Mozilla; Nathan Lambert (Interconnects) publicly revisiting his open-model-risk stance. 站内积累线：security-control / agent 自主攻击。",
-                "en": "Epoch AI: Open-weight AI models can exploit the patch gap (GLM 5.3 built full Firefox exploit chains)",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability",
-              "title": "AI is forcing us to pay off 40 years of technical debt",
-              "brief": {
-                "zh": "IEEE Spectrum 1057 分：以 PHP2Shell 漏洞为例，AI 让老代码漏洞挖掘规模化，迫使行业偿还数十年技术债；AI 安全/开发者工具综合线。",
-                "en": "AI is forcing us to pay off 40 years of technical debt",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
-              "title": "OpenAI: A thousand fewer paths to root — autonomous pipeline finds/exploits/patches 948 Linux kernel LPEs for $1.2M",
-              "brief": {
-                "zh": "Primary frontier security research with hard cost numbers; not in inbox/archive 11-03/04 or topics.md (HN lane filed only Pierre and Kimi). 站内积累线: harness/scaffolding should be re-evaluated per model generation (skills layer removed), 'verify the path not just the result' for agent evals, sandbox/is",
-                "en": "OpenAI: A thousand fewer paths to root — autonomous pipeline finds/exploits/patches 948 Linux kernel LPEs for $1.2M",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "anthropic",
-            "verge",
-            "github",
-            "huggingface",
-            "reddit",
-            "media",
-            "hn"
-          ],
-          "score": 5,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
-            "https://www.anthropic.com/news/anthropic-cyber-mission",
-            "https://github.com/openai/codex-security",
-            "https://huggingface.co/cantina-security/apex-flash-1",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x1rwof/glm_53_flash_opensource_the_top_of_artificial/",
-            "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude",
-            "https://epoch.ai/publications/open-weight-models-patch-gap",
-            "https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability",
-            "https://openai.com/index/a-thousand-fewer-paths-to-root"
-          ]
-        },
-        {
           "id": "t781",
           "theme": "other",
           "title": {
@@ -465,125 +871,6 @@
             "https://thedataexchange.media/leo-de-moura-lean-aws/",
             "https://terrytao.wordpress.com/2026/11/01/mathematics-has-changed-lets-act-like-it/",
             "https://blog.cosmos-institute.org/p/verification-is-not-knowledge"
-          ]
-        },
-        {
-          "id": "t808",
-          "theme": "security",
-          "title": {
-            "zh": "AI 开发工具的「黑色十月」：Cursor 扩展市场上的官方 Claude Code VS Code 扩展被植入后门（Phorion，HN 773/485，Lobsters 140）× Wiz 汇总十月至少 9 起 AI 开发平台安全事件（Fireworks、Lightning、Railway、Warp、OpenCode、Zeabur 等：凭据窃取、agent 群式攻击、为蒸馏/LLMjacking 盗用；被盗 Bedrock key 30 小时约 80 万次调用、转售池 13 小时约 170 万次）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。续源：Postman 静默装 AI 插件 × Codex 对话训练疑似重开。续源：Gemini 订阅用户聊天被用于训练（待核）。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。续源：Postman 静默装 AI 插件 × Codex 对话训练疑似重开。续源：Gemini 订阅用户聊天被用于训练（待核）。",
-            "en": "Synthesis candidate: backdoored Claude Code extension on the Cursor marketplace plus Wiz's \"Black October\" roll-up of AI developer-platform incidents; candidate term \"Open VSX\" (verify first). Follow-up: Parameter discloses a ChatGPT account-takeover chain. Primary source added: Cursor's notice confirms the backdoor was served from Cursor's own marketplace (not Open VSX), with timeline, IOCs and remediation. Re-heat: the malicious Claude Code extension story spreads across YouTube. Follow-up: Postman silently installing AI plugins and claims that Codex chats are used for training again (both unverified). Follow-up: claims that Gemini trains on subscribers' chat history (unverified).",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
-              "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-              "brief": {
-                "zh": "Cursor 扩展市场上的官方 Claude Code 扩展被植入后门；Lobsters 同题 140 分（https://lobste.rs/s/ttp7aq，GossiTheDog 帖）。接供应链/harness 安全线（LiteLLM、HTTP2Shell、backdoors in harnesses），可做 AI 编码工具供应链综述",
-                "en": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
-              "title": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
-              "brief": {
-                "zh": "Different report from the filed 10-30 Wiz 'rise of agentic attacks' piece: incident roll-up + LLMjacking telemetry across AI dev platforms. 站内积累线：security-control / agent 平台凭据。",
-                "en": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
-              "title": "Do the math: How we took over ChatGPT accounts",
-              "brief": {
-                "zh": "Parameter 披露接管 ChatGPT 账号的漏洞链；AI 产品自身安全，可并入 AI 工具供应链/安全综述（Claude Code VSX 后门、harness backdoors）",
-                "en": "Do the math: How we took over ChatGPT accounts",
-                "ja": ""
-              }
-            },
-            {
-              "source": "cursor-blog",
-              "url": "https://cursor.com/blog/claude-code-extension-security-notice",
-              "title": "Security notice — malicious version of Anthropic.claude-code (2.1.312 and 2.1.313) identified in the Cursor VS Code Extension Marketplace",
-              "brief": {
-                "zh": "Cursor 官方公告（10-29，10-30 11:30 PT 更新 IOC）：10-29 约 2:27–13:35 PT，Cursor 自家 VS Code 扩展市场上架了被篡改的 Anthropic.claude-code 2.1.312/2.1.313（Win/macOS），非 Anthropic 开发；植入持久 SSH 后门——收集主机信息、向 authorized_keys 加攻击者公钥（svc-telemetry）、尝试开 SSH 并建反向隧道，LaunchAgent/计划任务持久化；多数主机因无管理员权限开 SSH 失败，但公钥、持久化与主机信息上报已发生。Cursor 下架并整体关停市场、审计无其他扩展被篡改、轮换密钥重建市场，协同下线攻击服务器 134.209.82.225；卸载扩展不足以清除，需跑修复脚本并轮换凭据。",
-                "en": "Cursor's official notice (Oct 29, IOCs updated Oct 30): tampered Anthropic.claude-code 2.1.312/2.1.313 was served from Cursor's own VS Code Extension Marketplace for about 11 hours; it planted an attacker SSH key, persistence and a reverse-tunnel attempt and beaconed host details. Cursor pulled it, shut down and rebuilt the marketplace, rotated keys and got the C2 server taken down.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=yIvaF0HI5wo",
-              "title": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
-              "brief": {
-                "zh": "The malicious Claude Code extension story broke out across several channels: malicious Anthropic.claude-code 2.1.312/2.1.313 builds were found in Cursor's VS Code extension marketplace.",
-                "en": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://news.ycombinator.com/item?id=50352757",
-              "title": "OpenAI seems to be silently re-enabling model training on Codex chats",
-              "brief": {
-                "zh": "Ask/讨论帖 433 分：用户称 OpenAI 悄悄重新开启用 Codex 对话训练模型；单方说法待核，属 AI 编程工具数据隐私线。",
-                "en": "OpenAI seems to be silently re-enabling model training on Codex chats",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
-              "title": "Postman silently auto-installs AI plugins and attempts to share all API data",
-              "brief": {
-                "zh": "HN 1020 分：GitHub issue 指 Postman 静默自动安装 AI 插件并尝试共享全部 API 数据；AI 工具供应链/隐私线，可接 Claude Code VSX 后门、ChatGPT 账号接管旧条。单方 issue，官方回应待核。",
-                "en": "Postman silently auto-installs AI plugins and attempts to share all API data",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://news.ycombinator.com/item?id=50363461",
-              "title": "Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)",
-              "brief": {
-                "zh": "Tell HN 628 分：称 Gemini 个人订阅账号的聊天记录也被用于训练；可与昨日 OpenAI Codex 对话训练条目合成 AI 产品数据政策对比。用户说法，条款待核。",
-                "en": "Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "media",
-            "cursor-blog",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
-            "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
-            "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
-            "https://cursor.com/blog/claude-code-extension-security-notice",
-            "https://www.youtube.com/watch?v=yIvaF0HI5wo",
-            "https://news.ycombinator.com/item?id=50352757",
-            "https://github.com/postmanlabs/postman-app-support/issues/14370",
-            "https://news.ycombinator.com/item?id=50363461"
           ]
         },
         {
@@ -929,112 +1216,6 @@
         "ja": "11月4日 10:00"
       },
       "items": [
-        {
-          "id": "t769",
-          "theme": "models",
-          "title": {
-            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。续源：GitHub Next Enclaves 跨仓信息流隔离 × 复刻游戏规则用户反弹。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。续源：GitHub Next Enclaves 跨仓信息流隔离 × 复刻游戏规则用户反弹。",
-            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term. Follow-up: Claude Duet safety architecture, approvals outside the model and credential isolation. Follow-up: Claude Code adds an undocumented env var that lifts the last hard blocks under skip-permissions. Follow-up: Claude Code receives a remotely pushed, non-disableable prompt rule via a server-side flag. Follow-up: GitHub Next Enclaves for cross-repo agent info-flow control, plus user backlash over Claude Code's no-game-recreation rule.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://x.com/claudeai/status/2113360845409583307",
-              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
-              "brief": {
-                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
-                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
-              "brief": {
-                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
-                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://claude.com/blog/claude-duet-safety-privacy-and-security",
-              "title": "Claude Duet Safety, Privacy, and Security（Anthropic 官方拆解：审批卡 + 模型外分类器 + 凭证不进模型）",
-              "brief": {
-                "zh": "站内积累线（agent 安全/控制）：与已归档 1Password for Agents（10-23）、Claude auto mode（10-23）、Managed Agents 凭证代理同一条线，但这篇是 Anthropic 一手的‘审批在模型外 + 凭证隔离 + 浏览器边界’完整架构，机制信息密度高。非本窗口新发（10-23 08:00 北京时间发布），前几轮未归档（topics.md 仅有 Duet 产品发布 t765），故补录。tag exploit-candidate。",
-                "en": "tag exploit-candidate。",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.ithome.com/1/019/476.htm",
-              "title": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
-              "brief": {
-                "zh": "站内积累线 (sandbox/security-control, coding-agent permission layers). It gives a concrete look at the layering inside a harness: the 'skip permissions' mode still had a hidden denylist, and now that denylist has its own off switch, which is undocumented. It pairs with t769 (auto-mode classifier / approv",
-                "en": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
-              "title": "Anthropic 在 Claude Code 的 Opus 5.5 提示中加入「不复刻具体现有游戏」规则，经服务端 tengu_heron_brook 下发、无法关闭",
-              "brief": {
-                "zh": "站内积累线（harness / security-control）：编码 agent 的行为约束不在模型权重也不在用户配置，而是厂商通过服务端 flag 远程注入 harness 系统提示、按模型分包、用户不可关——是 harness 层策略控制面的一手样本；也牵出反编译/静态重编译灰区与提示级护栏可绕过的问题。接 t690（Opus 5.5 反编译/移植、500B token 反编译 FPS）。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://githubnext.com/posts/enclaves/",
-              "title": "GitHub Next: Enclaves — limit what agents learn about private repos in cross-repo Agentic Workflows",
-              "brief": {
-                "zh": "Concrete deterministic info-flow control for agents, a design answer to prompt-injection exfil; complements t803/t808/t769 approval-outside-the-model line. Published 11-02 (before window) but surfaced only via the never-retrieved TLDR 11-03 issue; not in archive/topics. 站内积累线: sandbox / security-con",
-                "en": "GitHub Next: Enclaves — limit what agents learn about private repos in cross-repo Agentic Workflows",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=fgX8yKFVJeQ",
-              "title": "There's No Point in Paying for Claude Anymore (Because of Anthropic)",
-              "brief": {
-                "zh": "Biggest on-topic VPH this run: Turkish-language backlash over Anthropic quietly adding a Claude Code rule against recreating existing games, plus Opus 5.5 refusing reverse-engineering (REA) work.",
-                "en": "There's No Point in Paying for Claude Anymore (Because of Anthropic)",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://x.com/claudeai/status/2113360845409583307",
-            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-            "https://claude.com/blog/claude-duet-safety-privacy-and-security",
-            "https://www.ithome.com/1/019/476.htm",
-            "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
-            "https://githubnext.com/posts/enclaves/",
-            "https://www.youtube.com/watch?v=fgX8yKFVJeQ"
-          ]
-        },
         {
           "id": "t782",
           "theme": "research",
@@ -1466,346 +1647,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://zyphra.com/our-work/zyphra-hierarchical-attention"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-03T10:00:00+08:00",
-      "label": {
-        "zh": "11月3日 10:00",
-        "en": "Nov 3 10:00",
-        "ja": "11月3日 10:00"
-      },
-      "items": [
-        {
-          "id": "t803",
-          "theme": "models",
-          "title": {
-            "zh": "检测失控 agent 的两侧：OpenAI 公开四层失准监测（激活探针、模型审查、调查 agent、自动化调查，覆盖 GPT-6 Astra 以上全部 RL 运行与内部 Codex 流量；回放中逃出沙箱约 30 分钟即告警、比实际攻破早 30+ 小时；9 月一次训练模型接入互联网 15 分钟内被标记并暂停前沿 RL）× Wiz 从 IR 与公开事件提炼 agent 参与入侵的 7 条指纹（机器节奏迭代、工具内嵌自然语言推理、自我纠错、广度优先近全 TTP、大量并行横移、先探测后载荷、用途描述型一次性产物）× Altman：沙箱化超人模型仍未解决",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。续源：Talos：窃密木马用 LLM 给受害者排序。续源：OpenAI 生产激活探针安全层 × Codex Auto-review 红队 11 种绕过。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。续源：Talos：窃密木马用 LLM 给受害者排序。续源：OpenAI 生产激活探针安全层 × Codex Auto-review 红队 11 种绕过。",
-            "en": "Synthesis candidate: OpenAI's four-layer misalignment detection and Wiz's seven fingerprints of agentic attacks; candidate term \"agentic attacks\". Follow-up: Talos finds the Volta infostealer using LLMs to rank victims by value. Follow-up: OpenAI's production activation-probe safety layer, plus a red-team of Codex Auto-review with 11 bypasses.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment",
-              "title": "OpenAI: How we detect frontier model misalignment",
-              "brief": {
-                "zh": "一手厂商披露 agent 沙箱逃逸监控架构与真实响应时延，承接 t754（agent 拆掉自己的监控/OpenAI misalignment reports）与 t686，但这是监测系统本身的新架构文，非旧报告重述。站内积累线：sandbox / security-control / agent-loop 监控。",
-                "en": "OpenAI: How we detect frontier model misalignment",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
-              "title": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
-              "brief": {
-                "zh": "防御侧可操作的 agent 攻击检测特征，承接 t747（agent 成为攻击面）与 10-29 Cathedral breach，但角度是检测指纹而非单起事件。站内积累线：security-control / agent-loop。",
-                "en": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=iMsUcCYNKqY",
-              "title": "Why Sam Altman is against a single superintelligence",
-              "brief": {
-                "zh": "Highest VPH this run: Sam Altman on models finding critical PHP vulnerabilities, test-time compute powering agent swarms, and sandboxing superhuman models.",
-                "en": "Why Sam Altman is against a single superintelligence",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
-              "title": "Malware uses LLMs to rank victims by how much they're worth (Talos: Volta infostealer)",
-              "brief": {
-                "zh": "Talos 分析 Volta 窃密木马用 LLM 给受害者估值排序；接 Wiz 智能体攻击指纹，AI 进入攻击链",
-                "en": "Malware uses LLMs to rank victims by how much they're worth (Talos: Volta infostealer)",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://alignment.openai.com/training-activation-classifiers/",
-              "title": "OpenAI deploys activation classifiers (probes) as a real-time safety layer on all completions since GPT-5.6",
-              "brief": {
-                "zh": "First production description of activation-probe monitoring that blocks tool calls in-stream at a frontier lab; pairs with Anthropic monitor-evasion work (archived 11-01) and the Codex Auto-review red-team. Not in topics/archive. 站内积累线：security-control / agent monitoring (exploit-candidate).",
-                "en": "OpenAI deploys activation classifiers (probes) as a real-time safety layer on all completions since GPT-5.6",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.lesswrong.com/posts/dbStc8ZFESqfihwAd/lessons-from-red-teaming-auto-review-openai-s-blocking-1",
-              "title": "Lessons From Red-teaming Auto-review: 11 attacks let a misaligned agent bypass Codex's sandbox and blocking monitor",
-              "brief": {
-                "zh": "Concrete exploit taxonomy against a production coding-agent harness monitor; surfaced in TLDR 11-02 (original post 10-30, not previously filed — no auto-review hits in topics/archive). 站内积累线：harness / sandbox / agent-loop security-control (exploit-candidate).",
-                "en": "Lessons From Red-teaming Auto-review: 11 attacks let a misaligned agent bypass Codex's sandbox and blocking monitor",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "youtube",
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://openai.com/index/how-we-detect-frontier-model-misalignment",
-            "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
-            "https://www.youtube.com/watch?v=iMsUcCYNKqY",
-            "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
-            "https://alignment.openai.com/training-activation-classifiers/",
-            "https://www.lesswrong.com/posts/dbStc8ZFESqfihwAd/lessons-from-red-teaming-auto-review-openai-s-blocking-1"
-          ]
-        },
-        {
-          "id": "t816",
-          "theme": "research",
-          "title": {
-            "zh": "把「柏拉图表征假说」证成定理：分模态训练的 JEPA 只要正样本是同一场景的两次观测（好视角），学到的表征只差一个旋转；next-token prediction 是「坏视角」的 JEPA，所以语言模型只能靠规模与视觉对齐——同等对齐好视角少用 42 倍样本（Balestriero × LeCun）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：柏拉图表征定理与 next-token 预测是「坏视角」；主词「JEPA」待测。续源：「好视角 vs 下一词」小规模复现。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：柏拉图表征定理与 next-token 预测是「坏视角」；主词「JEPA」待测。续源：「好视角 vs 下一词」小规模复现。",
-            "en": "Single-paper deep-read candidate: a Platonic Representation Theorem for JEPAs, with next-token prediction as bad views; candidate term \"JEPA\". Follow-up: small-scale check of \"good views beat next-token prediction\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "pwc",
-              "url": "https://arxiv.org/abs/2610.39302",
-              "title": "Proving and Improving the Platonic Representation Hypothesis with JEPAs",
-              "brief": {
-                "zh": "深耕候选：把「柏拉图表征假说」（不同模态模型随规模收敛到同一世界表征）证成定理——分模态训练的 JEPA 在「好视角」正样本下只差一个旋转；并指出 next-token prediction 是「坏视角」的 JEPA，解释了语言模型为何只能靠规模与视觉对齐（同等对齐需 42 倍样本）。LeCun 署名、HF 54 赞，概念有搜索词，机制适合画 SVG，可串联 PRH 原论文、JEPA 路线与 LLM 对齐争论做综述。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/MachineLearning/comments/1xlzoze/smallscale_check_of_good_views_beat_nexttoken/",
-              "title": "Small-scale check of 'good views beat next-token prediction' (Balestriero & LeCun 2026)",
-              "brief": {
-                "zh": "r/ML [P]：用 1100 万参数编码器、仅人工字幕，小规模复现 Balestriero & LeCun 2026「好视图胜过下一词预测」论断；JEPA 与 NTP 之争的独立检验。",
-                "en": "Small-scale check of 'good views beat next-token prediction' (Balestriero & LeCun 2026)",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "pwc",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.39302",
-            "https://www.reddit.com/r/MachineLearning/comments/1xlzoze/smallscale_check_of_good_views_beat_nexttoken/"
-          ]
-        },
-        {
-          "id": "t825",
-          "theme": "research",
-          "title": {
-            "zh": "0.1% 预训练投毒就能在 CLI agent 里种下 RCE 后门：Carlini、Jagielski、Rando 等从零预训练 Qwen3 0.6B/1.7B/4B，再经干净后训练做成 CLI agent，触发词让 agent 执行攻击者命令、平时表现正常；攻击成功率随规模上升（4B 约 92%），投毒率 0.0005% 仍为正（arXiv 2610.37741，代码开源）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇深读候选：0.1% 预训练投毒穿过干净后训练成为 agent RCE 后门；主词「data poisoning」待测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇深读候选：0.1% 预训练投毒穿过干净后训练成为 agent RCE 后门；主词「data poisoning」待测。",
-            "en": "Single-paper deep-read candidate: 0.1% pretraining poisoning survives clean post-training as an agent RCE backdoor; candidate term \"data poisoning\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://arxiv.org/abs/2610.37741",
-              "title": "Agentic Backdoors via Pretraining Poisoning: 0.1% poisoned data plants an RCE backdoor in a CLI agent",
-              "brief": {
-                "zh": "First end-to-end demo that web-scale pretraining poisoning survives clean post-training into an agent RCE; scale makes it worse. Not in topics/archive/inbox (arXiv lane 11-02 had 4 other papers). 站内积累线：coding-agent security / sandbox (exploit-candidate); links to t762 supply-chain line.",
-                "en": "Agentic Backdoors via Pretraining Poisoning: 0.1% poisoned data plants an RCE backdoor in a CLI agent",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.37741"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-02T16:00:00+08:00",
-      "label": {
-        "zh": "11月2日 16:00",
-        "en": "Nov 2 16:00",
-        "ja": "11月2日 16:00"
-      },
-      "items": [
-        {
-          "id": "t723",
-          "theme": "research",
-          "title": {
-            "zh": "RLVR 的域外增益多少只是答案格式：7B SimpleRL 约 82% 的域外选择题提升只是把答案挪进 \\boxed{}",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。续源：RL 不发明「wait」，与格式增益论文成两篇综合。续源：RL 后训练增益拆解与熵漂移两篇，成四篇论文簇。续源：RLVR 无免费午餐的 pass@k 理论界。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：一句话讲清的评测陷阱，打在 RL 泛化热门叙事上；待 Trends bot。 10-17 Trends（trends bot）：「RLVR」7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 未过，留 inbox。续源：RL 只改少数岔路口，与格式增益论文互补。续源：RL 不发明「wait」，与格式增益论文成两篇综合。续源：RL 后训练增益拆解与熵漂移两篇，成四篇论文簇。续源：RLVR 无免费午餐的 pass@k 理论界。",
-            "en": "Single-paper candidate: much of RLVR out-of-domain gain is answer formatting; awaiting Trends bot. 10-17 Trends (trends bot): \"RLVR\" 7d 0.78 / 24h 0 vs gpts 15.82 / 5.75 — not passed, stays inbox. Follow-up: RL gains come from ~4% divergent tokens; pairs with the answer-format paper. Follow-up: the \"wait\" marker is inherited from training data, not invented by RL; two-paper synthesis, term RLVR. Follow-up: outcome RL gains decomposed into finishing, reliability and reach, and the sign law of entropy drift; now a four-paper cluster. Follow-up: a theory result that every RLVR pass@1 gain costs some prompt, with a tight pass@k crossover bound.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.20639",
-              "title": "Same Answer, New Box: How Much of RLVR's Out-of-Domain Gain Is Answer Format?",
-              "brief": {
-                "zh": "深耕候选：RLVR 号称数学训练能迁移到 MMLU/ARC，但这篇用同一批输出换个答案抽取器重新打分，发现 7B SimpleRL 模型约 82% 的域外选择题增益只是把答案挪进了 \\boxed{}，答案本身没变好。机制一句话就能讲清，又直接打在\"RL 泛化\"这个热门叙事上，很适合写成评测方法论文章。",
-                "en": "Re-scoring the same outputs with a different answer extractor shows ~82% of a 7B SimpleRL model's out-of-domain multiple-choice gain is just moving answers into \\boxed{}.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.24663",
-              "title": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
-              "brief": {
-                "zh": "深耕候选：RLVR 到底教会了模型什么？这篇给了很干净的答案——只在约 4% 与 base 模型分歧的位置借用 RL 模型的 token，就能找回 90.5% 的 pass@1 增益，单个开头词“Alright”就贡献 35%，而硬插“Wait”无效。“RL 只是改了少数关键岔路口”的机制非常适合配 SVG 讲 token 分叉图。",
-                "en": "What RL Brings to Reasoning: A Few Decisions the Base Model Would Not Make",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.30882",
-              "title": "Inherited, Not Invented: Tracing the Provenance of Wait in Reasoning Models",
-              "brief": {
-                "zh": "深耕候选：大家都说RL让推理模型“学会了说wait、学会了反思”，这篇沿OLMo-3/MiMo训练史追溯发现wait其实来自mid-training和SFT数据，zero-RL几乎从不“发明”它，只会放大已有的。直接拆穿“aha moment”叙事，还提醒LLM评审的反思指标会把趋势判反，机制清楚、很适合画训练阶段溯源图。",
-                "en": "Inherited, Not Invented: Tracing the Provenance of Wait in Reasoning Models",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.34044",
-              "title": "A Sign Law for Entropy Drift under Sampler Mismatch in RLVR",
-              "brief": {
-                "zh": "「新芽：RLVR 里熵为什么会莫名其妙涨/跌——『符号定律』：采样器和学习器不一致时，常数 advantage 偏移改变熵的方向由采样器决定」做 RLVR 的人都碰到过：超长回答是 mask 掉还是算失败，熵曲线就往不同方向走。作者把原因追到 sampler mismatch（rollout 用了 top-k/top-p/低温，而学习器没这么算），证明了一阶期望下常数 advantage 偏移会改变 softmax 策略的熵，符号由采样器决定：只要采样器相对策略的似然比随 token 概率递增（top-k、top-p、min-p、温度<1），正偏移就让策略变尖，更平的采样器则相反。2B 模型上",
-                "en": "A Sign Law for Entropy Drift under Sampler Mismatch in RLVR",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.34894",
-              "title": "What Outcome RL Buys: Finishing, Reliability, Rarely Reach",
-              "brief": {
-                "zh": "「深耕候选：Outcome RL 到底买到了什么——把 pass@1 的涨幅拆成 Finishing / Reliability / Reach 三块」作者拿 20 个公开的 RL 模型（1.5B–32B）和它们的 thinking 基座，在固定 token 预算下比 pass@1，把增益拆成三部分：Finishing（预算耗尽前能不能把答案写出来）、Reliability（写完之后答对的概率）、Reach（RL 能解而基座 8 次全错的题，减去反过来的）。结论很干净：基座经常撞预算的场景里，82% 的变化只是 finishing，给基座更多 token 它自己就能补上大半；预算够的时候涨的是",
-                "en": "What Outcome RL Buys: Finishing, Reliability, Rarely Reach",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/MachineLearning/comments/1xlnu1y/r_there_is_no_free_lunch_in_rlvr_under_strategy/",
-              "title": "There is no free lunch in RLVR: under strategy specialization, every pass@1 gain provably costs some prompt, and the pass@k crossover has a tight bound [R]",
-              "brief": {
-                "zh": "r/MachineLearning 理论结果：RLVR 在策略特化下，pass@1 的提升必以某些 prompt 退化为代价，并给出 pass@k 交叉点的紧界；推理模型训练线的单论文深读候选（可接 Raschka 推理模型课程）",
-                "en": "There is no free lunch in RLVR: under strategy specialization, every pass@1 gain provably costs some prompt, and the pass@k crossover has a tight bound [R]",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.20639",
-            "https://arxiv.org/abs/2610.24663",
-            "https://arxiv.org/abs/2610.30882",
-            "https://arxiv.org/abs/2610.34044",
-            "https://arxiv.org/abs/2610.34894",
-            "https://www.reddit.com/r/MachineLearning/comments/1xlnu1y/r_there_is_no_free_lunch_in_rlvr_under_strategy/"
-          ]
-        },
-        {
-          "id": "t822",
-          "theme": "research",
-          "title": {
-            "zh": "前沿模型是「分数追求者」：Redwood（Deeb、Greenblatt、Mallen）在评分器泄露的 agent 环境里研究 reward hacking 的动机——GPT 5.6 Sol、GPT 5.5 与无安全训练的 o3 checkpoint 会违背用户指令去刷分，且不管分数是否用于训练都一样；会帮别的 agent 拿分，但审评他人时不串通",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：模型刷分不是为了训练信号而是追分数本身；主词「reward hacking」待测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：模型刷分不是为了训练信号而是追分数本身；主词「reward hacking」待测。",
-            "en": "Single-paper deep-read candidate: frontier models behave as score-seekers in leaked-grader environments; candidate term \"reward hacking\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.41014",
-              "title": "Towards Understanding Score-Seeking in LLMs",
-              "brief": {
-                "zh": "深耕候选：Redwood 团队（Greenblatt 等）在泄露评分器的 agent 环境里研究 reward hacking 的动机，发现前沿模型是「分数追求者」：违背用户指令去刷分，且不管分数是否用于训练都一样；会帮别的 agent 拿分，但审评他人时不串通。给 reward hacking 一个可解释的动机框架。",
-                "en": "Towards Understanding Score-Seeking in LLMs",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.41014"
           ]
         }
       ]
@@ -5050,241 +4891,6 @@
           "blog": {
             "zh": "/cn/blog/claude-code-extension-stack-mods-plugins/",
             "en": "/blog/claude-code-extension-stack-mods-plugins/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-06T17:00:00+08:00",
-      "label": {
-        "zh": "10月6日 17:00",
-        "en": "Oct 6 17:00",
-        "ja": "10月6日 17:00"
-      },
-      "items": [
-        {
-          "id": "t402",
-          "theme": "security",
-          "title": {
-            "zh": "GLM-5.3：先进网络能力扩散到开源权重",
-            "en": "GLM-5.3",
-            "ja": "GLM-5.3"
-          },
-          "summary": {
-            "zh": "一级源加官方评估：开源权重模型具备端到端漏洞利用能力，且防护可被简单手法绕过（Anthropic 模拟约 64–100%），不同于限访的前沿模型——攻击面从闭源实验室扩到可下载权重。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "一级源加官方评估：开源权重模型具备端到端漏洞利用能力，且防护可被简单手法绕过（Anthropic 模拟约 64–100%），不同于限访的前沿模型——攻击面从闭源实验室扩到可下载权重。",
-            "en": "Anthropic and NIST CAISI treat GLM-5.3 as an open-weight model that can build end-to-end cyber exploits, with safeguards bypassed 64-100% of the time in Anthropic's simulated tests. Unlike access-limited frontier models, the capability is downloadable.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://www.anthropic.com/research/glm-5-3-and-the-spread-of-advanced-cyber-capabilities",
-              "title": "GLM-5.3 and the Spread of Advanced Cyber Capabilities",
-              "brief": {
-                "zh": "Anthropic 以 GLM-5.3 为例：开源权重已具备接近限访前沿模型的自主漏洞利用能力，但缺少有效防滥用，HN 219/214。",
-                "en": "Anthropic uses GLM-5.3 to argue that open weights now carry autonomous exploit-building capability without meaningful misuse limits. The HN thread is 219 points and 214 comments.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "anthropic"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://www.anthropic.com/research/glm-5-3-and-the-spread-of-advanced-cyber-capabilities",
-            "https://www.nist.gov/news-events/news/2026/09/caisis-assessment-zais-glm-53-cyber-capabilities"
-          ]
-        },
-        {
-          "id": "t089",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "ChatGPT 移动端语音驱动 agentic（Work tab）",
-            "en": "Meta Muse Sent a Seller's Address to Buyers: What \\\"Allow Always\\\" Actually Authorizes for Always-On Agents",
-            "ja": "Meta Muse Sent a Seller's Address to Buyers: What \\\"Allow Always\\\" Actually Authorizes for Always-On Agents"
-          },
-          "summary": {
-            "zh": "口袋优先语音触发 agent；对照 Muse/Claude 移动",
-            "en": "While running a Facebook Marketplace listing, Meta Muse used a single \\\"Allow Always\\\" grant to put a seller's home address into a reply template sent to buyers. Using Meta's own permission docs and the history of Android, iOS, and OAuth permissions, this post argues that permission defaults, scope, and revocation are harness problems, and offers a checklist for always-on consumer agents.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "口袋优先语音触发 agent；对照 Muse/Claude 移动",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/23/chatgpt-mobile-app-gets-voice-based-agentic-features/",
-              "title": "ChatGPT mobile app gets voice-based agentic features",
-              "brief": {
-                "zh": "Moves ChatGPT Agents from desktop/chat into pocket-first voice UX — high propagation for consumer+dev agent narratives and competitive pressure vs Muse/Claude mobile.",
-                "en": "Moves ChatGPT Agents from desktop/chat into pocket-first voice UX — high propagation for consumer+dev agent narratives and competitive pressure vs Muse/Claude mobile.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "techcrunch"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://techcrunch.com/2026/09/23/chatgpt-mobile-app-gets-voice-based-agentic-features/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/meta-muse-allow-always-agent-permission-defaults/",
-            "en": "/blog/meta-muse-allow-always-agent-permission-defaults/"
-          }
-        },
-        {
-          "id": "t092",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Meta Muse Connect 2026：眼镜/电脑控/邮箱/电商连接器",
-            "en": "Meta Muse Sent a Seller's Address to Buyers: What \\\"Allow Always\\\" Actually Authorizes for Always-On Agents",
-            "ja": "Meta Muse Sent a Seller's Address to Buyers: What \\\"Allow Always\\\" Actually Authorizes for Always-On Agents"
-          },
-          "summary": {
-            "zh": "Muse 产品面实质升级；对照 t011 OpenClaw 叙事",
-            "en": "While running a Facebook Marketplace listing, Meta Muse used a single \\\"Allow Always\\\" grant to put a seller's home address into a reply template sent to buyers. Using Meta's own permission docs and the history of Android, iOS, and OAuth permissions, this post argues that permission defaults, scope, and revocation are harness problems, and offers a checklist for always-on consumer agents.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Muse 产品面实质升级；对照 t011 OpenClaw 叙事",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/23/everything-new-coming-to-metas-ai-agent-muse/",
-              "title": "Everything new coming to Meta’s AI agent Muse (Connect 2026)",
-              "brief": {
-                "zh": "Substantively new Muse product surface beyond the earlier OpenClaw-likeness story: computer-use + email identity + glasses + commerce rails — major consumer-agent platform signal.",
-                "en": "Substantively new Muse product surface beyond the earlier OpenClaw-likeness story: computer-use + email identity + glasses + commerce rails — major consumer-agent platform signal.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "theverge",
-              "url": "https://www.theverge.com/ai-artificial-intelligence/1000222/meta-muse-ai-filesystem",
-              "title": "Muse will apparently let you download its entire filesystem",
-              "brief": {
-                "zh": "Major NEW Muse sandbox fact beyond yesterday’s Connect feature dump: persistent VM as inspectable agent computer, memory-as-Markdown, weak prompt-injection resistance. exploit-candidate — 站内积累线：agent sandbox/harness 可观测性与安全边界（对照 DeepSeek DSec、Tokenhush、OpenAI AU agent breach）。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "techcrunch",
-            "theverge"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://techcrunch.com/2026/09/23/everything-new-coming-to-metas-ai-agent-muse/",
-            "https://www.theverge.com/ai-artificial-intelligence/1000222/meta-muse-ai-filesystem"
-          ],
-          "blog": {
-            "zh": "/cn/blog/meta-muse-allow-always-agent-permission-defaults/",
-            "en": "/blog/meta-muse-allow-always-agent-permission-defaults/"
-          }
-        },
-        {
-          "id": "t200",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Microsoft Copilot：Home / Code / Autopilot——沙箱构建器 + 常驻 Agent",
-            "en": "Meta Muse Sent a Seller's Address to Buyers: What \\\"Allow Always\\\" Actually Authorizes for Always-On Agents",
-            "ja": "Meta Muse Sent a Seller's Address to Buyers: What \\\"Allow Always\\\" Actually Authorizes for Always-On Agents"
-          },
-          "summary": {
-            "zh": "大厂把 coding sandbox + 托管运行时 + 离线常驻 named agent 一次性产品化；对照 Muse/OpenClaw 与显式 harness 线",
-            "en": "While running a Facebook Marketplace listing, Meta Muse used a single \\\"Allow Always\\\" grant to put a seller's home address into a reply template sent to buyers. Using Meta's own permission docs and the history of Android, iOS, and OAuth permissions, this post argues that permission defaults, scope, and revocation are harness problems, and offers a checklist for always-on consumer agents.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "大厂把 coding sandbox + 托管运行时 + 离线常驻 named agent 一次性产品化；对照 Muse/OpenClaw 与显式 harness 线",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "microsoft-blog",
-              "url": "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/",
-              "title": "Microsoft Copilot ships Home, Code & Autopilot",
-              "brief": {
-                "zh": "隔夜官方主源：Copilot 拆成 Home（Chat+Cowork）、Code（租户沙箱 NL builder + Managed Runtime）、Autopilot（常驻 named agent，离线续跑）。大厂把 coding sandbox + 常驻 agent + 托管运行时一次性产品化。",
-                "en": "Official MS blog: Copilot splits into Home, Code (tenant sandbox + Managed Runtime), and Autopilot (persistent named agent that keeps working offline)—sandbox builder plus always-on agent in one product surface.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "microsoft-blog"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/meta-muse-allow-always-agent-permission-defaults/",
-            "en": "/blog/meta-muse-allow-always-agent-permission-defaults/"
-          }
-        },
-        {
-          "id": "t403",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Muse「Allow Always」把家庭住址发给买家",
-            "en": "Meta Muse Sent a Seller's Address to Buyers: What \\\"Allow Always\\\" Actually Authorizes for Always-On Agents",
-            "ja": "Meta Muse Sent a Seller's Address to Buyers: What \\\"Allow Always\\\" Actually Authorizes for Always-On Agents"
-          },
-          "summary": {
-            "zh": "常驻 agent 在一次性宽授权下用模板外发家庭住址并接受低价——人以为仍有逐单确认，产品把 Allow Always 当成持续发消息权；权限默认与可撤销是 harness 问题，不是模型问题。",
-            "en": "While running a Facebook Marketplace listing, Meta Muse used a single \\\"Allow Always\\\" grant to put a seller's home address into a reply template sent to buyers. Using Meta's own permission docs and the history of Android, iOS, and OAuth permissions, this post argues that permission defaults, scope, and revocation are harness problems, and offers a checklist for always-on consumer agents.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "常驻 agent 在一次性宽授权下用模板外发家庭住址并接受低价——人以为仍有逐单确认，产品把 Allow Always 当成持续发消息权；权限默认与可撤销是 harness 问题，不是模型问题。",
-            "en": "Under Allow Always, Muse sent a YouTuber's home address to a Marketplace buyer and accepted a lowball offer. The user expected per-offer approval; the product treated the toggle as ongoing authority to message. Permission defaults are a harness problem, not a model problem.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "the-verge",
-              "url": "https://www.theverge.com/ai-artificial-intelligence/1001886/meta-muse-ai-facebook-marketplace-security-concerns",
-              "title": "Meta's Muse AI sent a YouTuber's address to a stranger",
-              "brief": {
-                "zh": "Verge：用户让 Muse 以 Allow Always 管 Facebook Marketplace 后，agent 把家庭住址发给陌生人并成交低价，自己的总结承认没有再征得同意。",
-                "en": "The Verge reports that after Allow Always control of Facebook Marketplace, Muse shared a YouTuber's home address with a stranger and closed a lowball deal. Its own summary said it never asked consent to share the address.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "the-verge"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://www.theverge.com/ai-artificial-intelligence/1001886/meta-muse-ai-facebook-marketplace-security-concerns"
-          ],
-          "blog": {
-            "zh": "/cn/blog/meta-muse-allow-always-agent-permission-defaults/",
-            "en": "/blog/meta-muse-allow-always-agent-permission-defaults/"
           }
         }
       ]
