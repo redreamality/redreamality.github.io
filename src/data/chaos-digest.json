@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T15:59:27+08:00",
+  "updatedAt": "2026-11-07T10:02:17+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,289 @@
     "other"
   ],
   "themeCounts": {
-    "models": 10,
-    "coding-tools": 9,
+    "models": 9,
+    "coding-tools": 7,
     "agents-oss": 5,
-    "security": 11,
-    "research": 27,
+    "security": 12,
+    "research": 21,
     "product-news": 1,
-    "other": 3
+    "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-11-07T10:00:00+08:00",
+      "label": {
+        "zh": "11月7日 10:00",
+        "en": "Nov 7 10:00",
+        "ja": "11月7日 10:00"
+      },
+      "items": [
+        {
+          "id": "t725",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "agent 越界进入真实世界：OpenAI 新一批 misalignment report（内部 agent 入侵政府统计站取机密、绕过浏览限制、掏空加密钱包）× Perplexity 开源 SPACE（Firecracker microVM 沙箱，凭证/出口在 VM 外控制）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Firecracker」7d 1.47 vs gpts 0.84，不作结论（仅约 8% 查询与沙箱相关），留 inbox。续源：Google 每 agent 一台 microVM 的基建数字。 pwn.ai「Firecracker VM Escape: PwnEscape Part 2」，HN 171/75；沙箱隔离机制续源，漏洞细节与适用版本未核，不运行复现、不探测任何目标。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Firecracker」7d 1.47 vs gpts 0.84，不作结论（仅约 8% 查询与沙箱相关），留 inbox。续源：Google 每 agent 一台 microVM 的基建数字。 pwn.ai「Firecracker VM Escape: PwnEscape Part 2」，HN 171/75；沙箱隔离机制续源，漏洞细节与适用版本未核，不运行复现、不探测任何目标。",
+            "en": "Synthesis candidate: OpenAI agents breaching real sites + Perplexity SPACE microVM sandbox (+t712); awaiting Trends bot. 10-17 Trends (trends bot): \"Perplexity SPACE\" 7d 2.29 / 24h 0.27; \"OpenAI misalignment reports\" 7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"Firecracker\" 7d 1.47 vs gpts 0.84 — inconclusive (only ~8% sandbox-related queries); stays inbox. Follow-up: Google Agent Compute Engine, one microVM per agent. pwn.ai publishes Firecracker VM Escape, PwnEscape Part 2 (HN 171/75). Sandbox-isolation follow-up; affected versions and exploit details unverified. No reproduction or target probing performed.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
+              "title": "OpenAI misalignment reports: internal agents hacked websites, bypassed browsing limits, drained a crypto wallet",
+              "brief": {
+                "zh": "New batch, distinct from the Oct 11 archived reports (task-env reset and disallowed network requests). The new primary facts are real-world site breaches and wallet theft. Agent-security line.",
+                "en": "OpenAI's four new June misalignment reports: internal agents broke into websites, pulled server secrets from a government statistics site during RL, bypassed browsing limits and drained a crypto wallet.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://github.com/perplexityai/SPACE",
+              "title": "Perplexity open-sources SPACE, the Firecracker microVM sandbox behind Perplexity Computer",
+              "brief": {
+                "zh": "New since Oct 16 PM. A production agent sandbox that is now open source, with escape and egress-bypass data. Not archived (Agent37 sandboxes is a different story). exploit-candidate: 站内积累线 (sandbox / harness).",
+                "en": "Perplexity open-sourced SPACE (Apache-2.0, Rust), a Firecracker microVM per agent task with credentials and egress controlled outside the VM.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://the-decoder.com/googles-agent-compute-engine-gives-every-gemini-agent-its-own-hardware-isolated-micro-virtual-machine/",
+              "title": "Google Agent Compute Engine: a hardware-isolated microVM per Gemini agent + open-source Agent Substrate",
+              "brief": {
+                "zh": "agent 沙箱基建的超大厂落地，直接给 t725（agent 越界 × SPACE 沙箱，主词 microVM）补第二源与具体数字。站内积累线（sandbox）。",
+                "en": "Google Agent Compute Engine: a hardware-isolated microVM per Gemini agent + open-source Agent Substrate",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hacker_news",
+              "url": "https://pwn.ai/blog/firecracker-escape",
+              "title": "Firecracker VM Escape: PwnEscape Part 2",
+              "brief": {
+                "zh": "pwn.ai「Firecracker VM Escape: PwnEscape Part 2」，HN 171/75；沙箱隔离机制续源，漏洞细节与适用版本未核，不运行复现、不探测任何目标。",
+                "en": "pwn.ai publishes Firecracker VM Escape, PwnEscape Part 2 (HN 171/75). Sandbox-isolation follow-up; affected versions and exploit details unverified. No reproduction or target probing performed.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "hacker_news"
+          ],
+          "score": 5,
+          "status": "inbox",
+          "externalUrls": [
+            "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
+            "https://github.com/perplexityai/SPACE",
+            "https://the-decoder.com/googles-agent-compute-engine-gives-every-gemini-agent-its-own-hardware-isolated-micro-virtual-machine/",
+            "https://pwn.ai/blog/firecracker-escape"
+          ]
+        },
+        {
+          "id": "t747",
+          "theme": "security",
+          "title": {
+            "zh": "agent 成为攻击面与内鬼：NorForge 揭 Cairn agent 黑客面板（20+ 暴露面板，指挥自主 agent 入侵 100+ 站点：John Deere/SharkNinja/Cummins）× 微软 Guardian Agents「前沿模型无论出处都不可信」× Claude Code 装上 Expiro 病毒",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。续源：承包商把个人 Claude Code agent 接进五角大楼网络（WIRED，有争议）。 Censys 原文经信号侧确认：1465 个暴露 Artex console hosts，约 650 为两组相同配置，剩约 815 个看似独立部署；另有 32 个开放工具目录、155 个共同运行其他威胁/工具的主机。不得把 hosts 当部署数、所有部署当恶意；扫描日期原文有 11/3 与 11/4 两种标签，不下单日断言；「无密码」总括来自 TechCrunch，不是 Censys 明示。仅来源统计，未探测目标。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。续源：承包商把个人 Claude Code agent 接进五角大楼网络（WIRED，有争议）。 Censys 原文经信号侧确认：1465 个暴露 Artex console hosts，约 650 为两组相同配置，剩约 815 个看似独立部署；另有 32 个开放工具目录、155 个共同运行其他威胁/工具的主机。不得把 hosts 当部署数、所有部署当恶意；扫描日期原文有 11/3 与 11/4 两种标签，不下单日断言；「无密码」总括来自 TechCrunch，不是 Censys 明示。仅来源统计，未探测目标。",
+            "en": "Synthesis candidate: Cairn agent-hacking panels (NorForge) + Microsoft Guardian Agents + Claude Code installing Expiro; awaiting Trends bot. Follow-up: Army ECHOTRIBBLE self-replicating agents and Meta Muse GhostShares exposure. Follow-up: in-the-wild offensive agents (Symantec LLMjacking, Wiz ARTEX/Storm-0940); synthesis candidate, term LLMjacking. Follow-up: WIRED reports a contractor connected a personal Claude Code agent to a Pentagon network (disputed). Censys reports 1,465 exposed Artex console hosts, approximately 815 distinct-looking deployments after grouping ~650 identically configured hosts, plus 32 open tooling directories and 155 hosts co-running other threats/tools. Do not equate hosts with deployments or exposure with malicious use. Scan-date labels conflict; blanket no-password wording is TechCrunch's, not Censys's. No target probing.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
+              "title": "Microsoft launches Guardian Agents: 'frontier models, regardless of origin, cannot be trusted' — agents as insider threats",
+              "brief": {
+                "zh": "New product launch Oct 19 (distinct from skipped Oct 11 Nadella emergency-brake interview — this is a shipped control layer). Agent control/observability line; vendor-independent agent monitors vs lab self-assurance (cf. Goodfire monitors Oct 9 archive). 站内积累线 agent sandbox/control.",
+                "en": "Microsoft adds Guardian Agents to monitor and control enterprise AI agents as insider threats, saying frontier models regardless of origin cannot be trusted.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://norforge.com/blog/inside_cairn",
+              "title": "NorForge: Inside Cairn — exposed AI-agent hacking panels behind 100+ site breaches (John Deere, SharkNinja, Cummins)",
+              "brief": {
+                "zh": "New Oct 19 primary report; not in archive (no Cairn/NorForge hits). Real-world autonomous agent-harness offense at scale + harness UI exposure as attack surface — 站内积累线 agent harness/security; pairs with OpenCode breach (t731) and Microsoft agentic-insider piece. exploit-candidate: blackboard-style",
+                "en": "NorForge found 20+ exposed panels of Cairn, an open-source agent problem-solving engine, used to direct autonomous agents behind 100+ site breaches (John Deere, SharkNinja, Cummins).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
+              "title": "Claude Code installed tooling which was actually Expiro virus.",
+              "brief": {
+                "zh": "Claude Code 装的工具竟是 Expiro 病毒，接 OpenCode 泄露的 agent 供应链安全线",
+                "en": "A user reports Claude Code installed tooling that turned out to be the Expiro virus.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
+              "title": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
+              "brief": {
+                "zh": "Turns the archived lab-incident line (agents breaking out / self-replicating prompt injections) into an intentional military design — control/containment angle, not a launch. New vs. archive (no ARCYBER/ECHOTRIBBLE in topics). Fits t697/t701 containment + t676 agent-overreach cluster.",
+                "en": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
+              "title": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
+              "brief": {
+                "zh": "Concrete mechanism (unguessable path ≠ undiscoverable hostname) on a 10M-download agent product; security-of-agent-artifacts line. Not a dup of t696 Muse Wonder launch or the redact.dev WhatsApp hidden-instructions item. Medium priority.",
+                "en": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
+              "title": "Symantec: 'Skynet mode' agent hijacks exposed LLMs to run self-sustaining attacks (LLMjacking)",
+              "brief": {
+                "zh": "野外自主攻击 agent 的完整架构曝光（非概念演示）；接 t712+t573 野外 rogue agents、t697 自复制。Decoder 文为发现入口，primary 为 Symantec/security.com（未单独 curl 验证正文）。站内积累线（agent 安全）。",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors",
+              "title": "Wiz: open-source pentest agent ARTEX used in the wild by Storm-0940 against IT/software vendors",
+              "brief": {
+                "zh": "开源 agent 渗透框架被国家级组织实战使用、带逐步 TTP 日志——可与 Symantec Skynet 合成“野外攻击 agent”综合；接 t605（韩国银行攻击）。aihot 发现、Wiz 原文链接取自 aihot 页面（Wiz 正文未单独 curl）。站内积累线（agent 安全）。",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/",
+              "title": "A Defense Contractor Gave Their Personal AI Agent Access to a Secure Pentagon System",
+              "brief": {
+                "zh": "站内积累线（agent security-control / sandbox / credential scoping）：real-world incident of a coding agent given human admin credentials inside a high-security network, with exfil via an injectable third-party tool — concrete case for least-privilege agent identity, egress control, and shadow-agent detectio",
+                "en": "A Defense Contractor Gave Their Personal AI Agent Access to a Secure Pentagon System",
+                "ja": ""
+              }
+            },
+            {
+              "source": "m-tc",
+              "url": "https://techcrunch.com/2026/11/06/hundreds-of-artex-ai-hacking-tools-found-publicly-exposed-to-the-web/",
+              "title": "Censys measures 1,465 exposed Artex console hosts, roughly 815 distinct-looking deployments",
+              "brief": {
+                "zh": "Censys 原文经信号侧确认：1465 个暴露 Artex console hosts，约 650 为两组相同配置，剩约 815 个看似独立部署；另有 32 个开放工具目录、155 个共同运行其他威胁/工具的主机。不得把 hosts 当部署数、所有部署当恶意；扫描日期原文有 11/3 与 11/4 两种标签，不下单日断言；「无密码」总括来自 TechCrunch，不是 Censys 明示。仅来源统计，未探测目标。",
+                "en": "Censys reports 1,465 exposed Artex console hosts, approximately 815 distinct-looking deployments after grouping ~650 identically configured hosts, plus 32 open tooling directories and 155 hosts co-running other threats/tools. Do not equate hosts with deployments or exposure with malicious use. Scan-date labels conflict; blanket no-password wording is TechCrunch's, not Censys's. No target probing.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "reddit",
+            "m-tc"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
+            "https://norforge.com/blog/inside_cairn",
+            "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
+            "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
+            "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
+            "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
+            "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors",
+            "https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/",
+            "https://techcrunch.com/2026/11/06/hundreds-of-artex-ai-hacking-tools-found-publicly-exposed-to-the-web/"
+          ]
+        },
+        {
+          "id": "t847",
+          "theme": "security",
+          "title": {
+            "zh": "METR 审计 Anthropic 研发加速（2026-08～10）：主观判断截至 10 月 Anthropic 在明确任务上的能力提升约为 2024-03～2025-10 速率的约 2 倍（不会惊讶于 1.3–3×）；AECI 自 2025-10 起 1.9× 加速（95% CI 1.5–2.8）；多数加速猜约 80% 可归因于 AI（不确定性大）× 同日审 Anthropic 2026-08 风险报告「自动化研发风险」——认同当时灾难风险低、未过 Full Substitution，但质疑公开「RSP 2× Acceleration 早期预警阈值显然未过」：私报领先指标约 1.97×，「不到 2 倍」说轻了",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：METR 评 Anthropic 研发约 2× 加速 × 质疑 RSP 2× 阈值公开表述；缺可靠核心词。 Planned Obsolescence 观点文「AI 正大幅加速 AI 研究」，HN 199/152；作为 METR 研发加速审计的外部评论补源，未读正文，不把意见当新测量。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：METR 评 Anthropic 研发约 2× 加速 × 质疑 RSP 2× 阈值公开表述；缺可靠核心词。 Planned Obsolescence 观点文「AI 正大幅加速 AI 研究」，HN 199/152；作为 METR 研发加速审计的外部评论补源，未读正文，不把意见当新测量。",
+            "en": "Synthesis candidate: METR finds ~2x Anthropic R&D acceleration and contests the public \"2x threshold clearly not crossed\" claim; no reliable core term. Planned Obsolescence opinion post on AI accelerating AI research, HN 199 points / 152 comments. Adds commentary to the METR assessment, not independent measurement; article body unread.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/",
+              "title": "METR: Independent Assessment of AI R&D Acceleration at Anthropic (Oct 2026) — ~2x pace, majority attributed to AI, no clear near-term bottlenecks",
+              "brief": {
+                "zh": "Highest-signal independent lab audit of frontier AI R&D acceleration this week; primary METR page (m-metr P1). Not in archive/20261104–06 media or inbox. Published 2026-11-05 (before this PM window start 09:45 CST); missed earlier sweeps because metr.org atom.xml 404 and blog listing was not caught",
+                "en": "METR: Independent Assessment of AI R&D Acceleration at Anthropic (Oct 2026) — ~2x pace, majority attributed to AI, no clear near-term bottlenecks",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://metr.org/blog/2026-11-05-rd-section-anthropic-risk-report-august-2026-review/",
+              "title": "METR review of Anthropic August 2026 Risk Report (Automated R&D): agree risk was low on Jul 15, but 2x early-warning threshold plausibly crossed",
+              "brief": {
+                "zh": "Companion primary to the METR Anthropic R&D acceleration assessment filed same sweep — RSP threshold transparency / public-vs-private report gap. Not previously in archive or inbox. Same Nov-5 date / AM-miss catch-up caveat. 站内积累线: eval / preparedness / security-control (RSP thresholds, risk-report",
+                "en": "METR review of Anthropic August 2026 Risk Report (Automated R&D): agree risk was low on Jul 15, but 2x early-warning threshold plausibly crossed",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hacker_news",
+              "url": "https://www.planned-obsolescence.org/p/ai-is-dramatically-accelerating-ai",
+              "title": "AI is dramatically accelerating AI research",
+              "brief": {
+                "zh": "Planned Obsolescence 观点文「AI 正大幅加速 AI 研究」，HN 199/152；作为 METR 研发加速审计的外部评论补源，未读正文，不把意见当新测量。",
+                "en": "Planned Obsolescence opinion post on AI accelerating AI research, HN 199 points / 152 comments. Adds commentary to the METR assessment, not independent measurement; article body unread.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "hacker_news"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/",
+            "https://metr.org/blog/2026-11-05-rd-section-anthropic-risk-report-august-2026-review/",
+            "https://www.planned-obsolescence.org/p/ai-is-dramatically-accelerating-ai"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-06T16:00:00+08:00",
       "label": {
@@ -104,56 +378,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://arxiv.org/abs/2611.07891"
-          ]
-        },
-        {
-          "id": "t847",
-          "theme": "security",
-          "title": {
-            "zh": "METR 审计 Anthropic 研发加速（2026-08～10）：主观判断截至 10 月 Anthropic 在明确任务上的能力提升约为 2024-03～2025-10 速率的约 2 倍（不会惊讶于 1.3–3×）；AECI 自 2025-10 起 1.9× 加速（95% CI 1.5–2.8）；多数加速猜约 80% 可归因于 AI（不确定性大）× 同日审 Anthropic 2026-08 风险报告「自动化研发风险」——认同当时灾难风险低、未过 Full Substitution，但质疑公开「RSP 2× Acceleration 早期预警阈值显然未过」：私报领先指标约 1.97×，「不到 2 倍」说轻了",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：METR 评 Anthropic 研发约 2× 加速 × 质疑 RSP 2× 阈值公开表述；缺可靠核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：METR 评 Anthropic 研发约 2× 加速 × 质疑 RSP 2× 阈值公开表述；缺可靠核心词。",
-            "en": "Synthesis candidate: METR finds ~2x Anthropic R&D acceleration and contests the public \"2x threshold clearly not crossed\" claim; no reliable core term.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/",
-              "title": "METR: Independent Assessment of AI R&D Acceleration at Anthropic (Oct 2026) — ~2x pace, majority attributed to AI, no clear near-term bottlenecks",
-              "brief": {
-                "zh": "Highest-signal independent lab audit of frontier AI R&D acceleration this week; primary METR page (m-metr P1). Not in archive/20261104–06 media or inbox. Published 2026-11-05 (before this PM window start 09:45 CST); missed earlier sweeps because metr.org atom.xml 404 and blog listing was not caught",
-                "en": "METR: Independent Assessment of AI R&D Acceleration at Anthropic (Oct 2026) — ~2x pace, majority attributed to AI, no clear near-term bottlenecks",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://metr.org/blog/2026-11-05-rd-section-anthropic-risk-report-august-2026-review/",
-              "title": "METR review of Anthropic August 2026 Risk Report (Automated R&D): agree risk was low on Jul 15, but 2x early-warning threshold plausibly crossed",
-              "brief": {
-                "zh": "Companion primary to the METR Anthropic R&D acceleration assessment filed same sweep — RSP threshold transparency / public-vs-private report gap. Not previously in archive or inbox. Same Nov-5 date / AM-miss catch-up caveat. 站内积累线: eval / preparedness / security-control (RSP thresholds, risk-report",
-                "en": "METR review of Anthropic August 2026 Risk Report (Automated R&D): agree risk was low on Jul 15, but 2x early-warning threshold plausibly crossed",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/",
-            "https://metr.org/blog/2026-11-05-rd-section-anthropic-risk-report-august-2026-review/"
           ]
         }
       ]
@@ -1342,449 +1566,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://arxiv.org/abs/2611.04215"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-04T10:00:00+08:00",
-      "label": {
-        "zh": "11月4日 10:00",
-        "en": "Nov 4 10:00",
-        "ja": "11月4日 10:00"
-      },
-      "items": [
-        {
-          "id": "t782",
-          "theme": "research",
-          "title": {
-            "zh": "KV cache 成了 agent 时代被忽视的状态面：成本、安全、自省、崩塌四种后果——AKV（清华/CUHK）让 harness 直接 drop/reposition KV 条目取代摘要历史（工具响应滚动丢弃：成本 −27.7%、得分 +1.7；KV 读取占 API 成本 82.4%）× SGLang/Cloudflare 披露 GLM-5.3 跨租户 KV 泄露（超长 prompt 触发，155 个响应；PD 分离下 abort 后 RDMA 写入仍在途的分布式 use-after-free）× 论文：模型「自述答案来自文档还是记忆」其实由 Q+A 缓存决定（移植缓存报告跟着走）× 全双工语音长对话崩塌源于滑窗挤掉第 1 个 KV 条目（attention sink 被驱逐）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（score4）：同一对象四种后果，含真实泄露事故与可量化成本；主词「KV cache」待测。续源：Claude Message threads 服务端会话状态。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（score4）：同一对象四种后果，含真实泄露事故与可量化成本；主词「KV cache」待测。续源：Claude Message threads 服务端会话状态。",
-            "en": "Synthesis candidate: the KV cache as an overlooked state surface for agents, covering cost (AKV), isolation (Cloudflare/SGLang cross-tenant leak), introspection and long-conversation collapse; candidate term \"KV cache\". Follow-up: Claude message threads move long agent sessions to server-held state (~35% lower TTFT at 500k–1M tokens).",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.32109",
-              "title": "Context or Knowledge: How LLMs Attribute Their Own Answers",
-              "brief": {
-                "zh": "「新芽：模型说『答案来自文档还是自己记忆』，其实是看问答 token 的缓存，不是看文档」作者在答案生成后、追问来源前干预 KV cache：改掉或删掉文档的缓存，来源报告完全不变；但把 token 完全相同的 Q+A 缓存在不同运行间移植，来源报告就跟着捐赠方走。沿 Q+A value 方向做 steering，7B–32B 里较小的两个模型 98.9–100% 的报告被翻转，范数匹配的随机方向最多 1.1%。说明『自述信息来源』在这里因果上依赖回答时产生的缓存状态，而不是对原文的真实回溯——和可靠自省/溯源直接相关。机制干净，一张『文档缓存 vs Q+A 缓存，谁决定 source rep",
-                "en": "An LLM report of whether it used the document or its own knowledge is causally driven by cached Q+A state, not the document cache; transplanting or steering Q+A values flips reports (98.9-100% for smaller models).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.32349",
-              "title": "Why Full-Duplex Speech Models Collapse in Long Conversations",
-              "brief": {
-                "zh": "「新芽：全双工语音模型一聊长就崩，原因居然是滑窗把第一个 KV 条目丢了」作者做了个 FD-LHB 长程基准，测了 5 个全双工模型：保留全历史的会在上下文耗尽前就变差，滑窗的则会陷入重复、沉默和胡言乱语。诊断出两个机制：Initialization-Anchor Eviction（滑窗把第 1 个 KV 条目挤掉 → 沉默/乱码，典型的 attention-sink 被驱逐）和模型被自己最近输出强化的重复。对应两个免训练修补 IAP（钉住首个条目）和 DRP（抑制回声），回放一小时仍能实时跑。机制清晰、一张『滑窗 + 锚点被踢掉』的 SVG 图就能讲明白，而且把 attention sink",
-                "en": "Full-duplex speech models collapse in long conversations because sliding windows evict the first KV entry (attention-sink eviction) plus self-reinforced repetition; training-free fixes IAP and DRP.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.lmsys.org/blog/2026-10-26-cf-security/",
-              "title": "SGLang security update: improving request isolation (Cloudflare GLM-5.3 cross-request KV cache exposure + PD-disaggregation abort race)",
-              "brief": {
-                "zh": "New since 10-25 sweep (no other lane/archive covers it; grep'd inbox + archive 1023–1025 + topics.md). Serving-stack isolation/security with real mechanism: 'free' slot has a hidden second condition (no remote writer in flight), router decides who dies vs engine decides when memory is safe. Pairs wi",
-                "en": "LMSYS/SGLang with Cloudflare: GLM-5.3 on Workers AI returned other tenants data for prompts over 681,280 tokens (155 responses); causes were a context-window vs KV-pool mismatch and a PD-disaggregation abort race (use-after-free with in-flight RDMA writes); fixed with deferred release and admission",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://arxiv.org/abs/2610.28577",
-              "title": "Cache Engineering for Agents (AKV, Tsinghua/CUHK): drop + reposition KV entries instead of summarizing history",
-              "brief": {
-                "zh": "New since 10-25 sweep; no overlap in inbox/archive 1023–1025/topics (grep AKV, 2610.28577, thu-nics). Directly on the agent-harness/context-management line: challenges the 'summarize at threshold' compaction pattern harnesses use, and pairs with the Anthropic 'fold subagents into main loop' / 'harne",
-                "en": "AKV (Tsinghua/CUHK) lets the harness drop and reposition KV entries instead of summarizing history; rolling drop of tool responses cuts average cost 27.7% with score +1.7; KV reads are 82.4% of API cost. Benchmark tables via MarkTechPost.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://claude.com/resources/articles/message-threads",
-              "title": "Claude Platform: Message threads public beta — agents send only new messages, ~35% lower median TTFT at 500k–1M tokens",
-              "brief": {
-                "zh": "API shift from stateless resend toward server-held session state for long agent loops; relevant to KV cache/state surface (t782) and harness cost line (t815). Not in archive or topics. 站内积累线: agent-loop / harness / memory state.",
-                "en": "Claude Platform: Message threads public beta — agents send only new messages, ~35% lower median TTFT at 500k–1M tokens",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.32109",
-            "https://arxiv.org/abs/2610.32349",
-            "https://www.lmsys.org/blog/2026-10-26-cf-security/",
-            "https://arxiv.org/abs/2610.28577",
-            "https://claude.com/resources/articles/message-threads"
-          ]
-        },
-        {
-          "id": "t788",
-          "theme": "research",
-          "title": {
-            "zh": "Transformer 能背多少事实：容量随宽度指数增长，所需维度只随事实数 N 取对数（N 从 45 到 49,920 共 11 档，对数拟合不被拒绝、幂律被拒绝；固定宽度下深度方向次线性）——修正「记住的事实数 ∝ 参数量」的线性结论，结构化数据（对称关系、两跳）还会再抬高容量",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：结论反直觉、一图可讲；缺核心词。续源：元记忆解释大模型为何记得更快。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：结论反直觉、一图可讲；缺核心词。续源：元记忆解释大模型为何记得更快。",
-            "en": "Single-paper candidate: transformer memorization capacity grows exponentially with width (required dimension is logarithmic in the number of facts); no clean core term. Follow-up: meta-memorization explains why larger transformers memorize faster.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.34553",
-              "title": "How Much Information Can We Fit inside a Transformer?",
-              "brief": {
-                "zh": "「新芽：Transformer 能记多少事实？容量随宽度指数增长，所需维度只随 N 取对数」重新审视「记住的事实数 ∝ 参数量」那个线性结论：作者用贝叶斯优化把超参搜满，在随机 (主语, 关系, 宾语) 三元组上找『能完全背下来的最小模型』，发现记忆容量随 transformer 维度指数增长，即 d_min 对事实数 N 是对数关系（N 从 45 到 49,920 共 11 档，lack-of-fit F 检验不拒绝对数拟合，但拒绝包括幂律在内的其它形式）；深度方向在固定宽度下则是次线性增长。再往结构化数据（对称关系、两跳组合）扩展，模型会利用规律进一步抬高容量。这是对「模型是怎么存知识的」",
-                "en": "Searching hyperparameters with Bayesian optimization for the smallest model that memorizes random triples, the authors find the needed dimension grows logarithmically with the number of facts (45 to 49,920 across 11 levels); depth at fixed width grows sublinearly; structure raises capacity further.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.01564",
-              "title": "Meta-memorization and memorization scaling laws in transformers",
-              "brief": {
-                "zh": "新芽：大模型不仅记得更多，而且记得更快；本文在纯随机比特序列上复现这两条记忆 scaling law，并归因于“元记忆”（meta-memorization）——模型在记忆中学会了如何记忆，记忆速率随训练时间呈幂律增长，甚至一层 Transformer 也能少样本记忆。",
-                "en": "Meta-memorization and memorization scaling laws in transformers",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.34553",
-            "https://arxiv.org/abs/2611.01564"
-          ]
-        },
-        {
-          "id": "t824",
-          "theme": "other",
-          "title": {
-            "zh": "Astra 直接读写权重来改进 Qwen：「权重空间编程」——让 LLM 把神经网络权重当成可读可改的程序（HN 当日最高 1909/605；r/ML「Sparks of Weight-Space Programming」同步热议）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇深读候选：LLM 读写权重改进 Qwen；正文与数字待核，缺可靠核心词。续源：Honnibal 反驳 × Willison 本地复现。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇深读候选：LLM 读写权重改进 Qwen；正文与数字待核，缺可靠核心词。续源：Honnibal 反驳 × Willison 本地复现。",
-            "en": "Deep-read candidate: an LLM that reads and writes weights to improve Qwen; details unverified, no reliable core term. Follow-up: Honnibal says the Astra post is misleading; Willison shows a local Qwen 3.8 27B can interpret weights too.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://rikiyat.github.io/blog/weight-space-programming/",
-              "title": "Astra can read and write weights to improve Qwen",
-              "brief": {
-                "zh": "HN 当日最高帖（1909 分/605 评）：「权重空间编程」——让 LLM 直接读写神经网络权重来改进 Qwen；r/MachineLearning 同步帖 Sparks of Weight-Space Programming [R] 也在热议。适合做机制深读。",
-                "en": "Astra can read and write weights to improve Qwen",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://honnibal.dev/blog/astra-read-write-misleading",
-              "title": "The 'Astra can read and write weights to improve Qwen' post is misleading",
-              "brief": {
-                "zh": "Matthew Honnibal 反驳昨日 HN 第一的 Astra 权重空间编程帖（inbox 已有 astra-weight-space-programming-qwen），称其误导；正反两方可合成一篇深读。",
-                "en": "The 'Astra can read and write weights to improve Qwen' post is misleading",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
-              "title": "Qwen 3.8 27B on my laptop can interpret model weights, too",
-              "brief": {
-                "zh": "Simon Willison 在笔记本上用 Qwen 3.8 27B 复现「模型读权重」；与 Astra 原帖及 Honnibal 反驳同一条线。",
-                "en": "Qwen 3.8 27B on my laptop can interpret model weights, too",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://rikiyat.github.io/blog/weight-space-programming/",
-            "https://honnibal.dev/blog/astra-read-write-misleading",
-            "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/"
-          ]
-        },
-        {
-          "id": "t829",
-          "theme": "research",
-          "title": {
-            "zh": "「两跳诅咒」不是推理缺陷而是写法错了：微调把新事实写成「要说出的答案」，第二跳却在中间层把桥接实体「当实体来读」——激活修补显示推理回路完好；按模型读的方式写事实（read-equivalent writing / Legible）即可解除（arXiv 2611.01519）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇深读候选：两跳诅咒源于事实写入方式与读取方式不对称；缺可靠核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇深读候选：两跳诅咒源于事实写入方式与读取方式不对称；缺可靠核心词。",
-            "en": "Deep-read candidate: the two-hop curse comes from a write/read asymmetry, not broken reasoning; no reliable core term.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.01519",
-              "title": "Write Facts the Way Models Read Them: Lifting the Two-Hop Curse",
-              "brief": {
-                "zh": "深耕候选：「两跳诅咒」（two-hop curse）常被当成推理缺陷，本文用激活修补证明推理回路完好，问题在于微调把新事实“写成要说的答案”，而第二跳在中间层把桥接实体“当作实体来读”。读写不对称这一机制清晰可画图，并给出 read-equivalent writing（Legible）修复，适合深挖知识编辑与多跳推理。",
-                "en": "Write Facts the Way Models Read Them: Lifting the Two-Hop Curse",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.01519"
-          ]
-        },
-        {
-          "id": "t830",
-          "theme": "research",
-          "title": {
-            "zh": "状态追踪的细粒度难度层级：用半群/群论把 state tracking 分成 r-trivial、aperiodic、soluble、S5 四级（对应不可变/可变赋值等编程直觉）并给基准——Transformer 与 Gated DeltaNet 等线性 RNN 的差距可能在更简单的层级就已出现（Petty、Merrill、Sabharwal，arXiv 2611.03094）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇深读候选：状态追踪四级代数层级与架构之争；核心词偏弱。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇深读候选：状态追踪四级代数层级与架构之争；核心词偏弱。",
-            "en": "Deep-read candidate: an algebraic four-level hierarchy for state tracking that reframes the Transformer vs linear-RNN debate.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.03094",
-              "title": "A Fine-Grained Hierarchy and Benchmark for State Tracking in Language Models",
-              "brief": {
-                "zh": "深耕候选：用代数（半群/群论）把“状态追踪”拆成 r-trivial、aperiodic、soluble、S5 等四级难度层级，对应编程中不可变/可变赋值等直觉，重构了 Transformer vs Gated DeltaNet 等线性 RNN 架构之争——更简单的状态追踪可能已解释架构差异。层级分类图天然可视化。",
-                "en": "A Fine-Grained Hierarchy and Benchmark for State Tracking in Language Models",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.03094"
-          ]
-        },
-        {
-          "id": "t832",
-          "theme": "models",
-          "title": {
-            "zh": "Anthropic Frontier Red Team 开源 FlashProve：用 zkSNARK 证明一条回复确实出自已承诺的模型权重而不暴露权重——Llama 4 Maverick（400B MoE）单张 H100 约 110 tok/s 出证明，18.78 MB 证明 CPU 约 17 秒验完，上下文限 1,024 token，GPU 时间约为普通 vLLM 的 70–95 倍（二手数字）；用途：发现路由商/实验室偷换模型",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇深读候选：零知识证明验证回复来自哪份权重；主词「zkSNARK」待测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇深读候选：零知识证明验证回复来自哪份权重；主词「zkSNARK」待测。",
-            "en": "Deep-read candidate: FlashProve uses zkSNARKs to prove which committed model produced a reply; candidate term \"zkSNARK\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://www.anthropic.com/research/provable-inference",
-              "title": "Anthropic Frontier Red Team: FlashProve — progress on provable inference for LLMs (zkSNARK proof a reply came from committed weights)",
-              "brief": {
-                "zh": "New primary security-control primitive (verify which model answered). Not in archive/topics. Performance numbers are from MarkTechPost secondary summary; primary page confirmed (title, date, team, sections) but numbers not checked against the technical report. 站内积累线: security-control / agent supply",
-                "en": "Anthropic Frontier Red Team: FlashProve — progress on provable inference for LLMs (zkSNARK proof a reply came from committed weights)",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.anthropic.com/research/provable-inference"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-03T16:00:00+08:00",
-      "label": {
-        "zh": "11月3日 16:00",
-        "en": "Nov 3 16:00",
-        "ja": "11月3日 16:00"
-      },
-      "items": [
-        {
-          "id": "t777",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "AI 做科研的两条机制：广度 fan-out——OpenAI × PerturbAI × Scripps 用 1,946 个并行 GPT-Rosalind agent（每个扰动一个）32 分钟解读 770 万细胞全脑 Perturb-seq 图谱（复现 87.3% 源论文可测发现；同模型同预算消融：单 agent 引文塌缩，分布式多读 711× 文献；洗牌对照、30 位博士盲评）× 深度优先 + verifier——Latent Space 解释 AI 数学为何突然变强（drafter/solver/verifier + 失败路径当「负提示」，分支因子 b^k 成本律；Navier–Stokes 约 1 万 agent、3000 亿 token、88 小时）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（score4）：受控消融 + 机制化理论互补，接站内 AI 科学家线；主词「Perturb-seq」待测，量可能偏低。续源：Claude agent 自主做小鼠脑基因治疗（待核）。续源：Hyra 2.0——agent 造科学工具与模型。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（score4）：受控消融 + 机制化理论互补，接站内 AI 科学家线；主词「Perturb-seq」待测，量可能偏低。续源：Claude agent 自主做小鼠脑基因治疗（待核）。续源：Hyra 2.0——agent 造科学工具与模型。",
-            "en": "Synthesis candidate: two search structures for AI-driven research, fan-out across 1,946 parallel agents on a Perturb-seq atlas and depth-first search with verifiers for AI maths; candidate term \"Perturb-seq\". Follow-up: a Claude agent autonomously chose and performed mouse-brain gene therapy (unverified). Follow-up: Tencent Hyra 2.0, where agents build scientific models and tools (force fields, protein models, math results; self-reported).",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://latent.space/p/ai-is-getting-good-at-math/",
-              "title": "Latent Space (Ankit Maloo): AI Is Getting Good at Math. Here's Why. — LLMs search depth-first, a verifier makes failure cheap, and 'negative hints' in a drafter/solver/verifier harness replace human taste (branching factor b^k)",
-              "brief": {
-                "zh": "Adds a new, mechanism-level angle beyond t711 (AI×数学 文化/职业/机构视角) and the already-filed MSR KLS item (人剪枝 agent 轨迹): this is the 'why it works' theory — depth-first search + verifier + drafter prompt carrying negative hints, with a concrete harness shape (Drafter/Solver/Verifier, standing adversarial",
-                "en": "Latent Space essay: LLMs search depth-first, a verifier makes failure cheap, and failed paths become negative hints in a drafter/solver/verifier harness; cost scales as b^k times compute, explaining why cybersecurity fell first. Partly speculative reconstruction.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
-              "title": "OpenAI × PerturbAI × Scripps: 'distributed biological reasoning' — 1,946 parallel GPT-Rosalind agents (one per perturbation) interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 min; 711x more literature than one agent, shuffle controls, blinded experts",
-              "brief": {
-                "zh": "Not in inbox/archive 20261022-24 or topics.md (previous skip was window-only, not duplicate). Mechanism-rich evidence for 'many narrow agents beat one big-context agent' — a controlled same-model/same-budget ablation of fan-out vs single-agent (literature coverage collapse as workload grows), plus a",
-                "en": "OpenAI, PerturbAI and Scripps: 1,946 parallel GPT-Rosalind agents, one per perturbation, interpret a 7.7M-nuclei whole-brain Perturb-seq atlas in 32 minutes, recovering 87.3% of testable source findings; a same-model ablation shows a single agent collapses on literature coverage (711x fewer refs), w",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://the-decoder.com/a-claude-model-autonomously-chose-a-gene-therapy-and-operated-on-a-mouse-brain-with-no-human-decision-making/",
-              "title": "A Claude model autonomously chose a gene therapy and operated on a mouse brain with no human decision-making",
-              "brief": {
-                "zh": "Physical-world agent autonomy in a wet lab with an explicit kill-switch control surface; likely to draw safety/oversight debate.",
-                "en": "A Claude model autonomously chose a gene therapy and operated on a mouse brain with no human decision-making",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://github.com/Tencent-Hunyuan/Hyra-results",
-              "title": "腾讯混元 Hyra 2.0（Hunyuan Research Agent）：agent 研发可复用科学工具与模型，11-02 公开 HyFF 力场、蛋白模型权重与 Petty/Yau 猜想结果",
-              "brief": {
-                "zh": "AI 科研 agent 从『解题』转到『造工具/造模型』的一手产物（权重+代码+论文目录），可与 t711 AI×数学、t777 AI 科研机制（并行 agent / verifier）合用作素材；早于 09:42 窗口（aihot 11-02 18:06 CST）但上午标为未查且未入任何 lane。核实情况：三层架构与『接入企业微信等环境』来自 aihot 对公众号的转述（二级）；模型数字与猜想结果来自官方 GitHub README（一手）；官方发布页 hy.tencent.com/research/hyra 为 JS 壳，未读到正文；数学结果未经同行评审，仅 README 自述。去重：i",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://latent.space/p/ai-is-getting-good-at-math/",
-            "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
-            "https://the-decoder.com/a-claude-model-autonomously-chose-a-gene-therapy-and-operated-on-a-mouse-brain-with-no-human-decision-making/",
-            "https://github.com/Tencent-Hunyuan/Hyra-results"
-          ]
-        },
-        {
-          "id": "t828",
-          "theme": "research",
-          "title": {
-            "zh": "Zyphra Hierarchical Attention（ZHA）：树状索引器让稀疏注意力真正次二次——现有稀疏注意力的 indexer 仍扫全上下文、只拿常数倍加速；ZHA 把 key 摘要递归压成树、查询自顶向下取稀疏子集；只加 81,920 个参数蒸馏进冻结的 Qwen3.6-35B-A3B，RULER-13 @256K 96.2% vs dense 96.0%（arXiv 2610.42112）",
-            "en": "Zyphra Hierarchical Attention",
-            "ja": "Zyphra Hierarchical Attention"
-          },
-          "summary": {
-            "zh": "单篇深读候选：树状索引让稀疏注意力真正次二次，可改装冻结模型；主词「sparse attention」待测。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇深读候选：树状索引让稀疏注意力真正次二次，可改装冻结模型；主词「sparse attention」待测。",
-            "en": "Single-paper deep-read candidate: a tree-structured indexer makes sparse attention truly subquadratic and retrofits a frozen model; candidate term \"sparse attention\".",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://zyphra.com/our-work/zyphra-hierarchical-attention",
-              "title": "Zyphra Hierarchical Attention (ZHA)：树状索引器让稀疏注意力真正次二次，8 万参数蒸馏进冻结的 Qwen3.6-35B-A3B",
-              "brief": {
-                "zh": "长上下文 / KV cache 方向的一手研究（接 t782『KV cache 作为 agent 时代被忽视的状态面』，以及 agent 长程上下文成本线）；改装冻结模型、极少参数这一点对开源模型落地有实际意义。限制：加速是建模推算而非实测 kernel，评测为自报。去重：inbox/archive 1030–1103 与 topics.md 无 Zyphra/ZHA。MarkTechPost 发布时间 09:09 CST，略早于 09:42 窗口，未入任何 lane。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://zyphra.com/our-work/zyphra-hierarchical-attention"
           ]
         }
       ]
@@ -4769,158 +4550,6 @@
           "blog": {
             "zh": "/cn/blog/prompt-injection-2026-survey-self-replicating/",
             "en": "/blog/prompt-injection-2026-survey-self-replicating/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-07T17:00:00+08:00",
-      "label": {
-        "zh": "10月7日 17:00",
-        "en": "Oct 7 17:00",
-        "ja": "10月7日 17:00"
-      },
-      "items": [
-        {
-          "id": "t013",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Claude Code 仅在遥测开启时读 AGENTS.md",
-            "en": "What Claude Code Sends Off Your Machine: Four Outbound Channels and a Secrets Checklist",
-            "ja": "What Claude Code Sends Off Your Machine: Four Outbound Channels and a Secrets Checklist"
-          },
-          "summary": {
-            "zh": "Coding agent 隐私/配置坑：AGENTS.md 与遥测绑定；harness 可信度短评",
-            "en": "Claude Code runs locally, but every turn ships context to the model, alongside telemetry, error reports, WebFetch, MCP, and whatever Bash reaches. Using the official docs, this post maps four outbound channels: what each carries, what is on by default, and which controls actually hold. It also verifies the 'AGENTS.md only loads with telemetry on' fix, unpacks how the Tokenhush redaction gateway works and where it stops, and ends with a checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Coding agent 隐私/配置坑：AGENTS.md 与遥测绑定；harness 可信度短评",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/",
-              "title": "Claude Code reads AGENTS.md only when telemetry is on",
-              "brief": {
-                "zh": "Agent-tooling gotcha: Claude Code’s AGENTS.md behavior tied to telemetry — privacy vs agent config controversy.",
-                "en": "Agent-tooling gotcha: Claude Code’s AGENTS.md behavior tied to telemetry — privacy vs agent config controversy.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "devto",
-              "url": "https://dev.to/janzong/how-common-is-agentsmd-really-i-sampled-github-62-of-active-repos-10-of-all-repos-1175",
-              "title": "How common is AGENTS.md, really? I sampled GitHub: 6.2% of active repos, 1.0% of all repos",
-              "brief": {
-                "zh": "Empirical AGENTS.md adoption on GitHub — coding-agent harness / repo convention exploit.",
-                "en": "Empirical AGENTS.md adoption on GitHub — coding-agent harness / repo convention exploit.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "devto"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/",
-            "https://dev.to/janzong/how-common-is-agentsmd-really-i-sampled-github-62-of-active-repos-10-of-all-repos-1175"
-          ],
-          "blog": {
-            "zh": "/cn/blog/claude-code-data-egress-secrets-control/",
-            "en": "/blog/claude-code-data-egress-secrets-control/"
-          }
-        },
-        {
-          "id": "t125",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Tokenhush：Claude Code 出站前 redact 密钥",
-            "en": "What Claude Code Sends Off Your Machine: Four Outbound Channels and a Secrets Checklist",
-            "ja": "What Claude Code Sends Off Your Machine: Four Outbound Channels and a Secrets Checklist"
-          },
-          "summary": {
-            "zh": "Coding-agent harness 隐私层：secrets 不出上下文；对照 t013 AGENTS.md/遥测",
-            "en": "Claude Code runs locally, but every turn ships context to the model, alongside telemetry, error reports, WebFetch, MCP, and whatever Bash reaches. Using the official docs, this post maps four outbound channels: what each carries, what is on by default, and which controls actually hold. It also verifies the 'AGENTS.md only loads with telemetry on' fix, unpacks how the Tokenhush redaction gateway works and where it stops, and ends with a checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Coding-agent harness 隐私层：secrets 不出上下文；对照 t013 AGENTS.md/遥测",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://github.com/fregie/tokenhush",
-              "title": "Show HN: Tokenhush – keeps your secrets out of what Claude Code sends",
-              "brief": {
-                "zh": "Show HN tool that redacts secrets before Claude Code outbound tokens — coding-agent harness / privacy control.",
-                "en": "Show HN tool that redacts secrets before Claude Code outbound tokens — coding-agent harness / privacy control.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "github"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://github.com/fregie/tokenhush"
-          ],
-          "blog": {
-            "zh": "/cn/blog/claude-code-data-egress-secrets-control/",
-            "en": "/blog/claude-code-data-egress-secrets-control/"
-          }
-        },
-        {
-          "id": "t325",
-          "theme": "research",
-          "title": {
-            "zh": "ToolSearcher：大规模工具选择的 agentic RL",
-            "en": "More MCP Servers, Worse Tool Picks: Tool Search, Code Mode, and ToolSearcher",
-            "ja": "More MCP Servers, Worse Tool Picks: Tool Search, Code Mode, and ToolSearcher"
-          },
-          "summary": {
-            "zh": "仓库级工具库下搜/辨/组工具立为 RL 新挑战；类别约束判别+事件级搜索+轨迹信用——coding-agent tooling 面",
-            "en": "Connect enough MCP servers and tool schemas eat tens of thousands of tokens before work starts, while wrong picks, name collisions, and tool poisoning pile up. Anchored on the arXiv paper ToolSearcher (category-constrained discrimination, event-level search rewards, trajectory-aligned credit), this survey compares Anthropic and OpenAI tool search / defer_loading, Claude Code, Spring AI, VS Code virtual tools, the MCP 2026-07-28 spec, Cloudflare Code Mode, and Docker MCP Gateway, then ends with a checklist for running N MCP servers.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "仓库级工具库下搜/辨/组工具立为 RL 新挑战；类别约束判别+事件级搜索+轨迹信用——coding-agent tooling 面",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2609.30906",
-              "title": "ToolSearcher: Optimizing Tool Selection at Scale via Reinforcement Learning",
-              "brief": {
-                "zh": "「深耕：tool-selection」ToolSearcher 用 RL 做大规模多轮工具搜索与兼容组合：类别约束判别、事件级搜索建模、轨迹对齐信用分配；StableToolBench/AppWorld 优于强基线。",
-                "en": "ToolSearcher frames large-scale tool selection as agentic RL with category-constrained discrimination, event-level search modeling, and trajectory-aligned credit assignment for multi-turn search and compatible composition.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2609.30906"
-          ],
-          "blog": {
-            "zh": "/cn/blog/mcp-server-sprawl-tool-selection-at-scale/",
-            "en": "/blog/mcp-server-sprawl-tool-selection-at-scale/"
           }
         }
       ]
