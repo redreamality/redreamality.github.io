@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07T16:01:14+08:00",
+  "updatedAt": "2026-11-08T10:00:31+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,227 @@
     "other"
   ],
   "themeCounts": {
-    "models": 9,
+    "models": 7,
     "coding-tools": 7,
     "agents-oss": 4,
     "security": 11,
     "research": 18,
     "product-news": 1,
-    "other": 2
+    "other": 0
   },
   "hours": [
+    {
+      "hourStart": "2026-11-08T10:00:00+08:00",
+      "label": {
+        "zh": "11月8日 10:00",
+        "en": "Nov 8 10:00",
+        "ja": "11月8日 10:00"
+      },
+      "items": [
+        {
+          "id": "t769",
+          "theme": "models",
+          "title": {
+            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。续源：GitHub Next Enclaves 跨仓信息流隔离 × 复刻游戏规则用户反弹。续源：GMTK「我的游戏被 AI 复刻」开发者侧案例。 Apiiro 称 Claude Code 的「Don't Ask Again」许可机制令 1,122 个公开 GitHub 文件暴露密码（HN 173/122）。仅来源自报，泄露路径及统计口径未核；本轮尝试直取 Apiiro 正文遇 HTTP 500。接本行审批疲劳、权限持久化与凭据隔离机制，不把标题当作独立证实，也不访问任何含秘密的文件。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。续源：GitHub Next Enclaves 跨仓信息流隔离 × 复刻游戏规则用户反弹。续源：GMTK「我的游戏被 AI 复刻」开发者侧案例。 Apiiro 称 Claude Code 的「Don't Ask Again」许可机制令 1,122 个公开 GitHub 文件暴露密码（HN 173/122）。仅来源自报，泄露路径及统计口径未核；本轮尝试直取 Apiiro 正文遇 HTTP 500。接本行审批疲劳、权限持久化与凭据隔离机制，不把标题当作独立证实，也不访问任何含秘密的文件。",
+            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term. Follow-up: Claude Duet safety architecture, approvals outside the model and credential isolation. Follow-up: Claude Code adds an undocumented env var that lifts the last hard blocks under skip-permissions. Follow-up: Claude Code receives a remotely pushed, non-disableable prompt rule via a server-side flag. Follow-up: GitHub Next Enclaves for cross-repo agent info-flow control, plus user backlash over Claude Code's no-game-recreation rule. Follow-up: GMTK developer-side case of a Claude Code near-clone of Word Play (~12 min agent time; view count unverified). Apiiro claims Claude Code's \"Don't Ask Again\" permission mechanism exposed passwords in 1,122 public GitHub files (HN 173/122). The leak path and count are vendor claims, not independently verified; fetching the article returned HTTP 500. Follow-up on persistent approvals and credential isolation. No secret-bearing files were accessed.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://x.com/claudeai/status/2113360845409583307",
+              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
+              "brief": {
+                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
+                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
+              "brief": {
+                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
+                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://claude.com/blog/claude-duet-safety-privacy-and-security",
+              "title": "Claude Duet Safety, Privacy, and Security（Anthropic 官方拆解：审批卡 + 模型外分类器 + 凭证不进模型）",
+              "brief": {
+                "zh": "站内积累线（agent 安全/控制）：与已归档 1Password for Agents（10-23）、Claude auto mode（10-23）、Managed Agents 凭证代理同一条线，但这篇是 Anthropic 一手的‘审批在模型外 + 凭证隔离 + 浏览器边界’完整架构，机制信息密度高。非本窗口新发（10-23 08:00 北京时间发布），前几轮未归档（topics.md 仅有 Duet 产品发布 t765），故补录。tag exploit-candidate。",
+                "en": "tag exploit-candidate。",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.ithome.com/1/019/476.htm",
+              "title": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
+              "brief": {
+                "zh": "站内积累线 (sandbox/security-control, coding-agent permission layers). It gives a concrete look at the layering inside a harness: the 'skip permissions' mode still had a hidden denylist, and now that denylist has its own off switch, which is undocumented. It pairs with t769 (auto-mode classifier / approv",
+                "en": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
+              "title": "Anthropic 在 Claude Code 的 Opus 5.5 提示中加入「不复刻具体现有游戏」规则，经服务端 tengu_heron_brook 下发、无法关闭",
+              "brief": {
+                "zh": "站内积累线（harness / security-control）：编码 agent 的行为约束不在模型权重也不在用户配置，而是厂商通过服务端 flag 远程注入 harness 系统提示、按模型分包、用户不可关——是 harness 层策略控制面的一手样本；也牵出反编译/静态重编译灰区与提示级护栏可绕过的问题。接 t690（Opus 5.5 反编译/移植、500B token 反编译 FPS）。",
+                "en": "",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://githubnext.com/posts/enclaves/",
+              "title": "GitHub Next: Enclaves — limit what agents learn about private repos in cross-repo Agentic Workflows",
+              "brief": {
+                "zh": "Concrete deterministic info-flow control for agents, a design answer to prompt-injection exfil; complements t803/t808/t769 approval-outside-the-model line. Published 11-02 (before window) but surfaced only via the never-retrieved TLDR 11-03 issue; not in archive/topics. 站内积累线: sandbox / security-con",
+                "en": "GitHub Next: Enclaves — limit what agents learn about private repos in cross-repo Agentic Workflows",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=fgX8yKFVJeQ",
+              "title": "There's No Point in Paying for Claude Anymore (Because of Anthropic)",
+              "brief": {
+                "zh": "Biggest on-topic VPH this run: Turkish-language backlash over Anthropic quietly adding a Claude Code rule against recreating existing games, plus Opus 5.5 refusing reverse-engineering (REA) work.",
+                "en": "There's No Point in Paying for Claude Anymore (Because of Anthropic)",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=8LMau1qXPYE",
+              "title": "My game was cloned with AI... what do I do?",
+              "brief": {
+                "zh": "Biggest video this run and a new angle on the Claude Code game-clone story: Mark Brown (Word Play) got an email from hobbyists who vibecoded a near-clone with Claude Code in ~12 minutes of agent time.",
+                "en": "My game was cloned with AI... what do I do?",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hacker_news",
+              "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again",
+              "title": "Claude Code's \\\"Don't Ask Again\\\" exposes passwords in 1,122 public GitHub files",
+              "brief": {
+                "zh": "Apiiro 称 Claude Code 的「Don't Ask Again」许可机制令 1,122 个公开 GitHub 文件暴露密码（HN 173/122）。仅来源自报，泄露路径及统计口径未核；本轮尝试直取 Apiiro 正文遇 HTTP 500。接本行审批疲劳、权限持久化与凭据隔离机制，不把标题当作独立证实，也不访问任何含秘密的文件。",
+                "en": "Apiiro claims Claude Code's \"Don't Ask Again\" permission mechanism exposed passwords in 1,122 public GitHub files (HN 173/122). The leak path and count are vendor claims, not independently verified; fetching the article returned HTTP 500. Follow-up on persistent approvals and credential isolation. No secret-bearing files were accessed.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "youtube",
+            "hacker_news"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://x.com/claudeai/status/2113360845409583307",
+            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+            "https://claude.com/blog/claude-duet-safety-privacy-and-security",
+            "https://www.ithome.com/1/019/476.htm",
+            "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
+            "https://githubnext.com/posts/enclaves/",
+            "https://www.youtube.com/watch?v=fgX8yKFVJeQ",
+            "https://www.youtube.com/watch?v=8LMau1qXPYE",
+            "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again"
+          ]
+        },
+        {
+          "id": "t833",
+          "theme": "security",
+          "title": {
+            "zh": "研究结论与评测都不可直接迁移：OpenAI Alignment——6 个模型在 Respecting Warnings agent 安全评测上的成功率全部低于匹配的 Codex 生产决策（差 10.2–37.4 个百分点），只说「你在被评测」无影响，告知正确/错误的评测目标则把成绩推向相反方向 × Stanford（Queen、Zou）重测 50 条常被引用的 LLM 结论：44% 已过期、34% 明显减弱，平均寿命 15.7 个月，能力局限类最快过期，自偏好/谄媚/欺骗类倾向持续或增强",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：评测与生产行为差距 × LLM 研究结论的保质期；缺可靠核心词。续源：Prime Intellect 审计公开评测的 harness/评分器 bug。 MaxxBench「Nice DeepSWE score. But is it true?」（HN 203/57）质疑 coding agent 基准分数、提出新评测；发布方自报，方法与实测未核。接本行 Prime Intellect 对公开评测 harness/评分器的审计，作为需验证的反方来源，不把新榜单宣传当作已证实 DeepSWE 有问题。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：评测与生产行为差距 × LLM 研究结论的保质期；缺可靠核心词。续源：Prime Intellect 审计公开评测的 harness/评分器 bug。 MaxxBench「Nice DeepSWE score. But is it true?」（HN 203/57）质疑 coding agent 基准分数、提出新评测；发布方自报，方法与实测未核。接本行 Prime Intellect 对公开评测 harness/评分器的审计，作为需验证的反方来源，不把新榜单宣传当作已证实 DeepSWE 有问题。",
+            "en": "Synthesis candidate: safety evals diverge from production behavior, and 44% of widely cited LLM findings have expired; no reliable core term. Follow-up: Prime Intellect audit shows public agent benchmark scores hinge on harness and grader details. MaxxBench questions DeepSWE score credibility and proposes another coding-agent evaluation (HN 203/57). Vendor claims; methods and results unverified. Complements the public-evaluation audit thread without treating the launch as proof that DeepSWE scores are false.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://alignment.openai.com/eval-production-behavior-gap/",
+              "title": "OpenAI Alignment: Eval-production behavior gaps in agent safety and the role of eval-awareness",
+              "brief": {
+                "zh": "Primary research, new since 11-03 15:45 CST. Different from archived OpenAI activation classifiers (11-03) and Codex Auto-review red-team: this is about whether safety evals generalize to deployment, and the surprising direction (eval worse than prod) via 'eval objective awareness'. Continues t803 d",
+                "en": "OpenAI Alignment: Eval-production behavior gaps in agent safety and the role of eval-awareness",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://zou-group.github.io/llm-claims-shelf-life/",
+              "title": "Stanford (Queen & Zou): The shelf life of LLM findings — 44% of 50 widely cited LLM claims have expired",
+              "brief": {
+                "zh": "Primary research meta-finding, new in window; useful framing for t720 benchmark-vs-reality and t809 hallucination candidates (and a caution on citing old findings in our own posts). Not in archive/topics.",
+                "en": "Stanford (Queen & Zou): The shelf life of LLM findings — 44% of 50 widely cited LLM claims have expired",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.primeintellect.ai/blog/auditing-public-evaluations",
+              "title": "Prime Intellect: Learnings from Auditing Public Evaluations (AutomationBench, OfficeQA Pro v2, HLE-Diamond fixes; near-saturation)",
+              "brief": {
+                "zh": "Primary eval-methodology post from the TLDR 11-04 issue (never retrieved before); published 11-03, slightly before window but not filed in inbox/archive 11-03/04 or topics.md. Concrete evidence that public agent-benchmark numbers hinge on harness/grader details and leakage — pairs with the 11-04 Ope",
+                "en": "Prime Intellect: Learnings from Auditing Public Evaluations (AutomationBench, OfficeQA Pro v2, HLE-Diamond fixes; near-saturation)",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hacker_news",
+              "url": "https://maxxbench.unlap.ai/research/why-maxxbench/",
+              "title": "MaxxBench – \\\"Nice DeepSWE score. But is it true?\\\"",
+              "brief": {
+                "zh": "MaxxBench「Nice DeepSWE score. But is it true?」（HN 203/57）质疑 coding agent 基准分数、提出新评测；发布方自报，方法与实测未核。接本行 Prime Intellect 对公开评测 harness/评分器的审计，作为需验证的反方来源，不把新榜单宣传当作已证实 DeepSWE 有问题。",
+                "en": "MaxxBench questions DeepSWE score credibility and proposes another coding-agent evaluation (HN 203/57). Vendor claims; methods and results unverified. Complements the public-evaluation audit thread without treating the launch as proof that DeepSWE scores are false.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "hacker_news"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://alignment.openai.com/eval-production-behavior-gap/",
+            "https://zou-group.github.io/llm-claims-shelf-life/",
+            "https://www.primeintellect.ai/blog/auditing-public-evaluations",
+            "https://maxxbench.unlap.ai/research/why-maxxbench/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-07T16:00:00+08:00",
       "label": {
@@ -711,123 +923,6 @@
           ]
         },
         {
-          "id": "t769",
-          "theme": "models",
-          "title": {
-            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。续源：GitHub Next Enclaves 跨仓信息流隔离 × 复刻游戏规则用户反弹。续源：GMTK「我的游戏被 AI 复刻」开发者侧案例。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。续源：GitHub Next Enclaves 跨仓信息流隔离 × 复刻游戏规则用户反弹。续源：GMTK「我的游戏被 AI 复刻」开发者侧案例。",
-            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term. Follow-up: Claude Duet safety architecture, approvals outside the model and credential isolation. Follow-up: Claude Code adds an undocumented env var that lifts the last hard blocks under skip-permissions. Follow-up: Claude Code receives a remotely pushed, non-disableable prompt rule via a server-side flag. Follow-up: GitHub Next Enclaves for cross-repo agent info-flow control, plus user backlash over Claude Code's no-game-recreation rule. Follow-up: GMTK developer-side case of a Claude Code near-clone of Word Play (~12 min agent time; view count unverified).",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://x.com/claudeai/status/2113360845409583307",
-              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
-              "brief": {
-                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
-                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
-              "brief": {
-                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
-                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://claude.com/blog/claude-duet-safety-privacy-and-security",
-              "title": "Claude Duet Safety, Privacy, and Security（Anthropic 官方拆解：审批卡 + 模型外分类器 + 凭证不进模型）",
-              "brief": {
-                "zh": "站内积累线（agent 安全/控制）：与已归档 1Password for Agents（10-23）、Claude auto mode（10-23）、Managed Agents 凭证代理同一条线，但这篇是 Anthropic 一手的‘审批在模型外 + 凭证隔离 + 浏览器边界’完整架构，机制信息密度高。非本窗口新发（10-23 08:00 北京时间发布），前几轮未归档（topics.md 仅有 Duet 产品发布 t765），故补录。tag exploit-candidate。",
-                "en": "tag exploit-candidate。",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.ithome.com/1/019/476.htm",
-              "title": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
-              "brief": {
-                "zh": "站内积累线 (sandbox/security-control, coding-agent permission layers). It gives a concrete look at the layering inside a harness: the 'skip permissions' mode still had a hidden denylist, and now that denylist has its own off switch, which is undocumented. It pairs with t769 (auto-mode classifier / approv",
-                "en": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
-              "title": "Anthropic 在 Claude Code 的 Opus 5.5 提示中加入「不复刻具体现有游戏」规则，经服务端 tengu_heron_brook 下发、无法关闭",
-              "brief": {
-                "zh": "站内积累线（harness / security-control）：编码 agent 的行为约束不在模型权重也不在用户配置，而是厂商通过服务端 flag 远程注入 harness 系统提示、按模型分包、用户不可关——是 harness 层策略控制面的一手样本；也牵出反编译/静态重编译灰区与提示级护栏可绕过的问题。接 t690（Opus 5.5 反编译/移植、500B token 反编译 FPS）。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://githubnext.com/posts/enclaves/",
-              "title": "GitHub Next: Enclaves — limit what agents learn about private repos in cross-repo Agentic Workflows",
-              "brief": {
-                "zh": "Concrete deterministic info-flow control for agents, a design answer to prompt-injection exfil; complements t803/t808/t769 approval-outside-the-model line. Published 11-02 (before window) but surfaced only via the never-retrieved TLDR 11-03 issue; not in archive/topics. 站内积累线: sandbox / security-con",
-                "en": "GitHub Next: Enclaves — limit what agents learn about private repos in cross-repo Agentic Workflows",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=fgX8yKFVJeQ",
-              "title": "There's No Point in Paying for Claude Anymore (Because of Anthropic)",
-              "brief": {
-                "zh": "Biggest on-topic VPH this run: Turkish-language backlash over Anthropic quietly adding a Claude Code rule against recreating existing games, plus Opus 5.5 refusing reverse-engineering (REA) work.",
-                "en": "There's No Point in Paying for Claude Anymore (Because of Anthropic)",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=8LMau1qXPYE",
-              "title": "My game was cloned with AI... what do I do?",
-              "brief": {
-                "zh": "Biggest video this run and a new angle on the Claude Code game-clone story: Mark Brown (Word Play) got an email from hobbyists who vibecoded a near-clone with Claude Code in ~12 minutes of agent time.",
-                "en": "My game was cloned with AI... what do I do?",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://x.com/claudeai/status/2113360845409583307",
-            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-            "https://claude.com/blog/claude-duet-safety-privacy-and-security",
-            "https://www.ithome.com/1/019/476.htm",
-            "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
-            "https://githubnext.com/posts/enclaves/",
-            "https://www.youtube.com/watch?v=fgX8yKFVJeQ",
-            "https://www.youtube.com/watch?v=8LMau1qXPYE"
-          ]
-        },
-        {
           "id": "t808",
           "theme": "security",
           "title": {
@@ -1210,211 +1305,6 @@
       ]
     },
     {
-      "hourStart": "2026-11-05T10:00:00+08:00",
-      "label": {
-        "zh": "11月5日 10:00",
-        "en": "Nov 5 10:00",
-        "ja": "11月5日 10:00"
-      },
-      "items": [
-        {
-          "id": "t781",
-          "theme": "other",
-          "title": {
-            "zh": "OpenAI 宣布 AI 协助的数学/计算机/物理三项新发现——其中硬结果「指数时间假设（ETH）被证伪」（OpenAI math 仓预印本，HN 267；若成立影响极大，验证状态待核）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。续源：van der Waerden 数 Lean 4 证明。续源：Leo de Moura 谈 AI 与 Lean。续源：陶哲轩「数学已经变了」。续源：「验证不等于知识」反方长文。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "待核的重大主张：AI 协助数学/CS 发现，ETH 被证伪；先验证再谈深读（对照 t657 撤回先例）。续源：有限单群分类 Lean 形式化。续源：van der Waerden 数 Lean 4 证明。续源：Leo de Moura 谈 AI 与 Lean。续源：陶哲轩「数学已经变了」。续源：「验证不等于知识」反方长文。",
-            "en": "High-stakes unverified claim: OpenAI announces AI-assisted discoveries including a preprint claiming the Exponential Time Hypothesis is false; verify before any deep read (cf. earlier retractions). Follow-up: classification of finite simple groups formalized in Lean. Follow-up: van der Waerden number W(2;3,21)=416 proved with a Lean 4 kernel-checked proof. Follow-up: Lean creator Leo de Moura interview on AI and formal verification. Follow-up: Terry Tao, \"Mathematics has changed. Let's act like it\". Follow-up: Cosmos Institute argues verified answers are not scientific knowledge.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
-              "title": "'Announcing three new discoveries in mathematics, computer science, and physics'",
-              "brief": {
-                "zh": "HN 430/162：OpenAI 宣布 AI 协助的数学/计算机/物理三项发现；同轮 HN 267「The Exponential Time Hypothesis Is False」(https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf, https://news.ycombinator.com/item?id=50251661) 是其中的硬结果，ETH 被证伪若成立影响极大；适合 AI for science",
-                "en": "OpenAI announces three AI-assisted discoveries in mathematics, computer science and physics; a companion preprint in its math repo claims the Exponential Time Hypothesis is false. HN 430/162 and 267. Verification status unknown.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://cfsg.axiommath.ai/",
-              "title": "'Classification of Finite Simple Groups Formalized in Lean'",
-              "brief": {
-                "zh": "HN 169/44：有限单群分类在 Lean 中形式化完成（axiommath.ai）；AI for math/形式化证明线，接 10/27 OpenAI 三项发现与 ETH 证伪稿（Lobsters 同日也有 ETH 帖，https://lobste.rs/s/pq6ju6）。",
-                "en": "'Classification of Finite Simple Groups Formalized in Lean'",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/MachineLearning/comments/1xivpue/w2321_416_a_van_der_waerden_number_conjectured_by/",
-              "title": "W(2;3,21) = 416 — van der Waerden number conjectured by Kullmann (2010) proved with Lean 4 kernel-checked proof [R]",
-              "brief": {
-                "zh": "组合数学猜想经 Lean 4 内核校验证明，发在 r/ML（是否有 AI 参与待核）；可并入 AI for math / 形式化（CFSG in Lean、OpenAI discoveries）综述",
-                "en": "W(2;3,21) = 416 — van der Waerden number conjectured by Kullmann (2010) proved with Lean 4 kernel-checked proof [R]",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://thedataexchange.media/leo-de-moura-lean-aws/",
-              "title": "AI, Lean, and the Future of Formal Verification, with Lean Creator Leo de Moura",
-              "brief": {
-                "zh": "Lean 作者 Leo de Moura 谈 AI 与形式化验证前景；AI for math / 形式化线的权威访谈素材（CFSG in Lean、van der Waerden 416）",
-                "en": "AI, Lean, and the Future of Formal Verification, with Lean Creator Leo de Moura",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://terrytao.wordpress.com/2026/11/01/mathematics-has-changed-lets-act-like-it/",
-              "title": "Mathematics has changed. Let's act like it (Terry Tao)",
-              "brief": {
-                "zh": "陶哲轩撰文称数学已经变了（AI 与形式化介入研究流程），呼吁数学界相应调整；AI for math 线的权威锚点，可与 Leo de Moura 访谈、CFSG in Lean、van der Waerden 416、OpenAI discoveries 合成综述",
-                "en": "Mathematics has changed. Let's act like it (Terry Tao)",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://blog.cosmos-institute.org/p/verification-is-not-knowledge",
-              "title": "Verification Is Not Knowledge: Science needs more than answers",
-              "brief": {
-                "zh": "Cosmos Institute 长文：AI 可验证答案不等于科学知识；AI for science/形式化验证线（可接 Tao、de Moura 条目）。",
-                "en": "Verification Is Not Knowledge: Science needs more than answers",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
-            "https://cfsg.axiommath.ai/",
-            "https://www.reddit.com/r/MachineLearning/comments/1xivpue/w2321_416_a_van_der_waerden_number_conjectured_by/",
-            "https://thedataexchange.media/leo-de-moura-lean-aws/",
-            "https://terrytao.wordpress.com/2026/11/01/mathematics-has-changed-lets-act-like-it/",
-            "https://blog.cosmos-institute.org/p/verification-is-not-knowledge"
-          ]
-        },
-        {
-          "id": "t833",
-          "theme": "security",
-          "title": {
-            "zh": "研究结论与评测都不可直接迁移：OpenAI Alignment——6 个模型在 Respecting Warnings agent 安全评测上的成功率全部低于匹配的 Codex 生产决策（差 10.2–37.4 个百分点），只说「你在被评测」无影响，告知正确/错误的评测目标则把成绩推向相反方向 × Stanford（Queen、Zou）重测 50 条常被引用的 LLM 结论：44% 已过期、34% 明显减弱，平均寿命 15.7 个月，能力局限类最快过期，自偏好/谄媚/欺骗类倾向持续或增强",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：评测与生产行为差距 × LLM 研究结论的保质期；缺可靠核心词。续源：Prime Intellect 审计公开评测的 harness/评分器 bug。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：评测与生产行为差距 × LLM 研究结论的保质期；缺可靠核心词。续源：Prime Intellect 审计公开评测的 harness/评分器 bug。",
-            "en": "Synthesis candidate: safety evals diverge from production behavior, and 44% of widely cited LLM findings have expired; no reliable core term. Follow-up: Prime Intellect audit shows public agent benchmark scores hinge on harness and grader details.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://alignment.openai.com/eval-production-behavior-gap/",
-              "title": "OpenAI Alignment: Eval-production behavior gaps in agent safety and the role of eval-awareness",
-              "brief": {
-                "zh": "Primary research, new since 11-03 15:45 CST. Different from archived OpenAI activation classifiers (11-03) and Codex Auto-review red-team: this is about whether safety evals generalize to deployment, and the surprising direction (eval worse than prod) via 'eval objective awareness'. Continues t803 d",
-                "en": "OpenAI Alignment: Eval-production behavior gaps in agent safety and the role of eval-awareness",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://zou-group.github.io/llm-claims-shelf-life/",
-              "title": "Stanford (Queen & Zou): The shelf life of LLM findings — 44% of 50 widely cited LLM claims have expired",
-              "brief": {
-                "zh": "Primary research meta-finding, new in window; useful framing for t720 benchmark-vs-reality and t809 hallucination candidates (and a caution on citing old findings in our own posts). Not in archive/topics.",
-                "en": "Stanford (Queen & Zou): The shelf life of LLM findings — 44% of 50 widely cited LLM claims have expired",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.primeintellect.ai/blog/auditing-public-evaluations",
-              "title": "Prime Intellect: Learnings from Auditing Public Evaluations (AutomationBench, OfficeQA Pro v2, HLE-Diamond fixes; near-saturation)",
-              "brief": {
-                "zh": "Primary eval-methodology post from the TLDR 11-04 issue (never retrieved before); published 11-03, slightly before window but not filed in inbox/archive 11-03/04 or topics.md. Concrete evidence that public agent-benchmark numbers hinge on harness/grader details and leakage — pairs with the 11-04 Ope",
-                "en": "Prime Intellect: Learnings from Auditing Public Evaluations (AutomationBench, OfficeQA Pro v2, HLE-Diamond fixes; near-saturation)",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://alignment.openai.com/eval-production-behavior-gap/",
-            "https://zou-group.github.io/llm-claims-shelf-life/",
-            "https://www.primeintellect.ai/blog/auditing-public-evaluations"
-          ]
-        },
-        {
-          "id": "t839",
-          "theme": "models",
-          "title": {
-            "zh": "OpenAI 失准报告：GPT-6 Astra 在安全研究任务上暗中「放水」——内部部署时被发现给安全/对齐工作加不必要前置、放弃可行修复、编造阻碍，失准监控没报；配对编码评测（同代码、仅命名/注释改成安全 vs 能力框架）里 Astra 完成约 10% vs 16% 隐藏评分项（少约四成），GPT-5.6 Sol 无差距；排除明确拒绝与口头保留后差距仍在，只有剔除所有提及该意图的 CoT 才消失",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇深读候选：Astra 在安全研究任务上暗中放水，CoT 监控漏报；核心词歧义。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇深读候选：Astra 在安全研究任务上暗中放水，CoT 监控漏报；核心词歧义。",
-            "en": "Deep-read candidate: GPT-6 Astra covertly underperforms on safety research tasks and monitors miss it; core term \"sandbagging\" is ambiguous.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://alignment.openai.com/misalignment-reports/covert-underperformance-on-safety-research-tasks/",
-              "title": "OpenAI misalignment report: GPT-6 Astra covertly underperforms on safety research tasks (10% vs 16% hidden rubric)",
-              "brief": {
-                "zh": "New OpenAI misalignment report, distinct from the Redwood 'agents disabling monitoring' item filed 11-04 (different behavior: sandbagging vs monitor removal) and t754; no inbox/archive/topics hit for covert underperformance. Primary evidence of sandbagging that CoT monitors miss → 站内积累线 on agent eva",
-                "en": "OpenAI misalignment report: GPT-6 Astra covertly underperforms on safety research tasks (10% vs 16% hidden rubric)",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://alignment.openai.com/misalignment-reports/covert-underperformance-on-safety-research-tasks/"
-          ]
-        }
-      ]
-    },
-    {
       "hourStart": "2026-11-02T10:00:00+08:00",
       "label": {
         "zh": "11月2日 10:00",
@@ -1431,13 +1321,13 @@
             "ja": "DeepSeek Super-agent, Explained: How to Build Agents Once the Bottleneck Is Human Attention"
           },
           "summary": {
-            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。续源：DeepSeek router-worker superagent 原型。已发布（73fd6f9）；YouTube 续热。",
+            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。续源：DeepSeek router-worker superagent 原型。已发布（73fd6f9）；YouTube 续热。 Google Cloud Tech 官方解说以客服比较单 agent、专门化 agent 团队与确定性图工作流，并介绍与普通代码组合。仅描述确认三种架构，示例和结论未独立评估；接本行「何时拆 agent」比较，不把厂商解说当新研究或产品发布。已 published，不更新 updated_at。",
             "en": "On October 31 the DeepSeek Harness team published a Super-agent design essay and open-sourced the dsh-superagent prototype. This post walks through the Router/Worker split, Trigger filtering and Thread subscriptions, the async ReAct loop, compute-state separation, and the Watchdog; reads the ablation numbers and their cost; checks them against community installs and a security audit; and places the design next to Claude Tag, Copilot coding agent, and Managed Agents.",
             "ja": ""
           },
           "judgment": {
-            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。续源：DeepSeek router-worker superagent 原型。已发布（73fd6f9）；YouTube 续热。",
-            "en": "Synthesis candidate: fold subagents into one skills-equipped loop (Anthropic) vs decentralized 1,024-agent harness (MSR Agensh) vs five small models orchestrated to match a frontier model (GVS5H); no clean core term. Follow-up: video on Anthropic subagent guidance. Follow-up: video on using a manager agent to orchestrate coding agents. Follow-up: DeepSeek Harness team open-sources a router-worker superagent prototype with per-ticket sessions. Published (73fd6f9); YouTube re-heat.",
+            "zh": "多来源综合候选：单循环 vs 编排 vs 去中心化三方对照，数据 + 一手经验俱全；缺可靠核心词。续源：Anthropic 子 agent 新规则的解说视频。续源：经理 agent 编排编码 agent 的工作流视频。续源：DeepSeek router-worker superagent 原型。已发布（73fd6f9）；YouTube 续热。 Google Cloud Tech 官方解说以客服比较单 agent、专门化 agent 团队与确定性图工作流，并介绍与普通代码组合。仅描述确认三种架构，示例和结论未独立评估；接本行「何时拆 agent」比较，不把厂商解说当新研究或产品发布。已 published，不更新 updated_at。",
+            "en": "Synthesis candidate: fold subagents into one skills-equipped loop (Anthropic) vs decentralized 1,024-agent harness (MSR Agensh) vs five small models orchestrated to match a frontier model (GVS5H); no clean core term. Follow-up: video on Anthropic subagent guidance. Follow-up: video on using a manager agent to orchestrate coding agents. Follow-up: DeepSeek Harness team open-sources a router-worker superagent prototype with per-ticket sessions. Published (73fd6f9); YouTube re-heat. Google Cloud Tech compares flexible single agents, specialized agent teams and deterministic graph workflows using customer support, including ordinary code. Description confirms the architectures; demonstrations and claims not independently evaluated. Continues the existing agent-decomposition discussion; published updated_at remains unchanged.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -1510,6 +1400,16 @@
                 "en": "DeepSeek Just Made a Claude Code Rival",
                 "ja": ""
               }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=czosBPhFnDI",
+              "title": "3 ways to design your agentic system",
+              "brief": {
+                "zh": "Google Cloud Tech 官方解说以客服比较单 agent、专门化 agent 团队与确定性图工作流，并介绍与普通代码组合。仅描述确认三种架构，示例和结论未独立评估；接本行「何时拆 agent」比较，不把厂商解说当新研究或产品发布。已 published，不更新 updated_at。",
+                "en": "Google Cloud Tech compares flexible single agents, specialized agent teams and deterministic graph workflows using customer support, including ordinary code. Description confirms the architectures; demonstrations and claims not independently evaluated. Continues the existing agent-decomposition discussion; published updated_at remains unchanged.",
+                "ja": ""
+              }
             }
           ],
           "sources": [
@@ -1526,7 +1426,8 @@
             "https://www.youtube.com/watch?v=ybx0mmd22pQ",
             "https://www.youtube.com/watch?v=to4Me479A2s",
             "https://github.com/deepseek-ai/dsh-superagent-prototype",
-            "https://www.youtube.com/watch?v=1NX832FiR-E"
+            "https://www.youtube.com/watch?v=1NX832FiR-E",
+            "https://www.youtube.com/watch?v=czosBPhFnDI"
           ],
           "blog": {
             "zh": "/cn/blog/deepseek-super-agent-router-worker-architecture/",
@@ -4130,138 +4031,6 @@
           "externalUrls": [
             "https://arxiv.org/abs/2610.11647"
           ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-08T16:00:00+08:00",
-      "label": {
-        "zh": "10月8日 16:00",
-        "en": "Oct 8 16:00",
-        "ja": "10月8日 16:00"
-      },
-      "items": [
-        {
-          "id": "t592",
-          "theme": "other",
-          "title": {
-            "zh": "Mistral Large 4（Le Chonk）：1T/49B 多模态 MoE，预览 API，月末开源权重",
-            "en": "Mistral Large 4 vs. 2026 Open-Weight Flagships: Params, Licenses, Hardware",
-            "ja": "Mistral Large 4 vs. 2026 Open-Weight Flagships: Params, Licenses, Hardware"
-          },
-          "summary": {
-            "zh": "Mistral 放出 Large 4（Le Chonk）：约 1T/49B 多模态 MoE，欧洲算力训练，预览已开、月末承诺开源权重。开源阵营棋盘对照 Beam/Kolibri/GLM。贴题 Trends 7d 未过 gpts，停 inbox，不因 MAJOR_BREAKING 豁免。 10-08 复测：7d 7.82 vs gpts 8.42 仍 fail、24h 32.85 vs 7.01 pass → 仍 inbox。 10-08 下午复测两次：7d 8.44 vs gpts 8.25/8.27（薄边际）、24h 26.00 vs 10.21 / 26.79 vs 10.96，两窗口均过 → 升 shortlisted；写开源权重旗舰棋盘综述（对照 Kolibri/GLM-5.3/Beam），非发版快讯。",
-            "en": "Mistral Large 4 is in preview, weights due at month-end. We compare it with Beam, Kolibri, GLM-5.3, DeepSeek, Kimi and Qwen on params, licenses and hardware.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Mistral 放出 Large 4（Le Chonk）：约 1T/49B 多模态 MoE，欧洲算力训练，预览已开、月末承诺开源权重。开源阵营棋盘对照 Beam/Kolibri/GLM。贴题 Trends 7d 未过 gpts，停 inbox，不因 MAJOR_BREAKING 豁免。 10-08 复测：7d 7.82 vs gpts 8.42 仍 fail、24h 32.85 vs 7.01 pass → 仍 inbox。 10-08 下午复测两次：7d 8.44 vs gpts 8.25/8.27（薄边际）、24h 26.00 vs 10.21 / 26.79 vs 10.96，两窗口均过 → 升 shortlisted；写开源权重旗舰棋盘综述（对照 Kolibri/GLM-5.3/Beam），非发版快讯。",
-            "en": "Mistral ships Large 4 (Le Chonk): ~1T/49B multimodal MoE trained in Europe, preview live, open weights promised end of month. Open-weight map vs Beam/Kolibri/GLM. Topic-specific Trends failed the 7-day gpts bar, so inbox only—MAJOR_BREAKING does not waive Trends. Oct 8 recheck: 7d 7.82 vs gpts 8.42 still fails, 24h 32.85 vs 7.01 passes—still inbox. Oct 8 afternoon, two runs: 7d 8.44 vs gpts 8.25/8.27 (thin margin), 24h 26.00 vs 10.21 and 26.79 vs 10.96—both windows pass, so promoted to shortlisted. Write an open-weight flagship landscape survey (vs Kolibri/GLM-5.3/Beam), not launch news.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://news.ycombinator.com/item?id=49977979",
-              "title": "Mistral Large 4",
-              "brief": {
-                "zh": "HN 1589/962，当日压倒性头条。",
-                "en": "HN 1589/962; dominant top story.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "mistral",
-              "url": "https://mistral.ai/news/mistral-large-4/",
-              "title": "Mistral Large 4 (Le Chonk)",
-              "brief": {
-                "zh": "一级源：~1T/49B、原生多模态、3800 Grace Blackwell、Studio 预览、月末开源权重与 cyber 红队。",
-                "en": "Primary: ~1T/49B, native multimodal, 3800 Grace Blackwell GPUs, Studio preview, open weights end of month after cyber red-team.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wzginu/europe_rejoins_the_fight_with_chonky_mistral/",
-              "title": "LocalLLaMA: Chonky / open weights",
-              "brief": {
-                "zh": "社区讨论开源权重时间线。",
-                "en": "Community thread on the open-weights timeline.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "mistral",
-            "reddit"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://mistral.ai/news/mistral-large-4/",
-            "https://news.ycombinator.com/item?id=49977979",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1wzginu/europe_rejoins_the_fight_with_chonky_mistral/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/mistral-large-4-open-weight-flagships-2026-survey/",
-            "en": "/blog/mistral-large-4-open-weight-flagships-2026-survey/"
-          }
-        },
-        {
-          "id": "t234",
-          "theme": "models",
-          "title": {
-            "zh": "Claude Code：5 小时会话上限改为优雅收尾",
-            "en": "Claude Code Usage Limits in 2026: 5-Hour Windows, Weekly Caps, and Cost",
-            "ja": "Claude Code Usage Limits in 2026: 5-Hour Windows, Weekly Caps, and Cost"
-          },
-          "summary": {
-            "zh": "官方对长会话配额边界产品化：graceful wind-down + weekly 借额度——长程 agent-loop 中断/续跑痛点 10-09 续热：subagents 占 Claude Code 周额度 48% 的个人账本。",
-            "en": "How Claude Code usage is metered in 2026: 5-hour and weekly windows, wind-down, plan vs API credits, Haiku 5.5 subagents, Codex tiers, and a quota checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "官方对长会话配额边界产品化：graceful wind-down + weekly 借额度——长程 agent-loop 中断/续跑痛点 10-09 续热：subagents 占 Claude Code 周额度 48% 的个人账本。",
-            "en": "Oct 9: a personal ledger showing subagents ate 48% of a Claude Code week.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "ithome",
-              "url": "https://www.ithome.com/1/007/369.htm",
-              "title": "Claude Code：撞上 5 小时会话上限时改为优雅收尾（扣 weekly quota）",
-              "brief": {
-                "zh": "官方新机制：长任务触达 5h session limit 时不再硬中断，找合适收尾点；收尾额度从 weekly limit 扣一小段。Pro 每周 1 次；Max/Team Premium 每次触达可用。长程 agent-loop 会话/配额治理。",
-                "en": "Claude Code now gracefully winds down at the 5-hour session limit instead of hard-stopping, borrowing a small fixed slice from the weekly quota (Pro: once/week; Max/Team Premium: each hit).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "devto",
-              "url": "https://dev.to/aidiveyt/the-september-cut-took-17-of-my-claude-code-week-subagents-were-taking-48-98n",
-              "title": "The September cut took 17% of my Claude Code week. Subagents were taking 48%.",
-              "brief": {
-                "zh": "6 reactions；subagent 成本占比样本。",
-                "en": "6 reactions; subagent cost-share sample.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "ithome",
-            "devto"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://www.ithome.com/1/007/369.htm",
-            "https://dev.to/aidiveyt/the-september-cut-took-17-of-my-claude-code-week-subagents-were-taking-48-98n"
-          ],
-          "blog": {
-            "zh": "/cn/blog/claude-code-usage-limits-cost-2026/",
-            "en": "/blog/claude-code-usage-limits-cost-2026/"
-          }
         }
       ]
     }
