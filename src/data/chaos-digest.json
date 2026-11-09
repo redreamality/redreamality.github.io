@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-09T10:00:33+08:00",
+  "updatedAt": "2026-11-09T16:00:30+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -14,12 +14,100 @@
     "models": 8,
     "coding-tools": 5,
     "agents-oss": 4,
-    "security": 10,
+    "security": 8,
     "research": 11,
     "product-news": 0,
     "other": 0
   },
   "hours": [
+    {
+      "hourStart": "2026-11-09T16:00:00+08:00",
+      "label": {
+        "zh": "11月9日 16:00",
+        "en": "Nov 9 16:00",
+        "ja": "11月9日 16:00"
+      },
+      "items": [
+        {
+          "id": "t854",
+          "theme": "research",
+          "title": {
+            "zh": "「副本不是确证」：通稿/转载让 LLM 法官与持续学习器把同源副本当独立证据（谎言接受率 0.06→0.71）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.09203：20 万篇 CC-News 中 MinHash 将 18.9% 链到他家近副本（去模板后精度 0.97），但识别不了 LLM 改写；三份相同转载使 Llama 3.2 3B / phi4 接受谎言比例从 0.06/0.21 升至 0.71/0.90，且无视“同源”提示；每链只给一份报告可让四个法官少接受 0.10–0.24 的复制谎言、真话接受率平均最多降 4.2 个百分点；实体缺失检验区分改写与独立报道 AUC 0.98–0.99。数字均论文自报、代码未复现；单纯数报告/链数并非可靠防御，合谋来源仍未解。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.09203：20 万篇 CC-News 中 MinHash 将 18.9% 链到他家近副本（去模板后精度 0.97），但识别不了 LLM 改写；三份相同转载使 Llama 3.2 3B / phi4 接受谎言比例从 0.06/0.21 升至 0.71/0.90，且无视“同源”提示；每链只给一份报告可让四个法官少接受 0.10–0.24 的复制谎言、真话接受率平均最多降 4.2 个百分点；实体缺失检验区分改写与独立报道 AUC 0.98–0.99。数字均论文自报、代码未复现；单纯数报告/链数并非可靠防御，合谋来源仍未解。",
+            "en": "arXiv 2611.09203: in 200,000 CC-News articles a MinHash detector links 18.9% to near-copies (precision 0.97 after boilerplate removal) but misses LLM rewrites. Three identical reprints raise lie acceptance for Llama 3.2 3B and phi4 from 0.06/0.21 to 0.71/0.90, ignoring single-source notes. Showing one report per chain cuts accepted copied lies by 0.10-0.24 across four judges at no more than 4.2 points of accepted truths on average; an entity-absence test separates rewrites from independent reports with AUC 0.98-0.99. All figures are self-reported and code was not reproduced; counting reports is not a reliable defence and colluding sources remain open.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.09203",
+              "title": "Copies Are Not Confirmations: How News Duplication Fools LLM Judges and Continual Learners",
+              "brief": {
+                "zh": "arXiv 2611.09203：20 万篇 CC-News 中 MinHash 将 18.9% 链到他家近副本（去模板后精度 0.97），但识别不了 LLM 改写；三份相同转载使 Llama 3.2 3B / phi4 接受谎言比例从 0.06/0.21 升至 0.71/0.90，且无视“同源”提示；每链只给一份报告可让四个法官少接受 0.10–0.24 的复制谎言、真话接受率平均最多降 4.2 个百分点；实体缺失检验区分改写与独立报道 AUC 0.98–0.99。数字均论文自报、代码未复现；单纯数报告/链数并非可靠防御，合谋来源仍未解。",
+                "en": "arXiv 2611.09203: in 200,000 CC-News articles a MinHash detector links 18.9% to near-copies (precision 0.97 after boilerplate removal) but misses LLM rewrites. Three identical reprints raise lie acceptance for Llama 3.2 3B and phi4 from 0.06/0.21 to 0.71/0.90, ignoring single-source notes. Showing one report per chain cuts accepted copied lies by 0.10-0.24 across four judges at no more than 4.2 points of accepted truths on average; an entity-absence test separates rewrites from independent reports with AUC 0.98-0.99. All figures are self-reported and code was not reproduced; counting reports is not a reliable defence and colluding sources remain open.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.09203"
+          ]
+        },
+        {
+          "id": "t855",
+          "theme": "research",
+          "title": {
+            "zh": "强迫选字母会压制拒答：WMDP 多选格式下模型很快锁定答案字母，激活离拒绝方向约远 3 倍（机制证据）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.08639：在 WMDP 上用 Llama-3.1-8B 与 Qwen3-8B 给出 MCQ 降低拒答的机制解释——tuned lens 显示多选格式很快锁定答案字母 token，而开放式格式拒绝逐步累积；MCQ 激活离拒绝方向约远 3 倍；消融承载答案字母的注意力头后拒答上升，说明答案选择与拒绝竞争。仅两模型、单数据集，结论为论文自报；含义是 MCQ 安全分主要测知识能力而非安全机制。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.08639：在 WMDP 上用 Llama-3.1-8B 与 Qwen3-8B 给出 MCQ 降低拒答的机制解释——tuned lens 显示多选格式很快锁定答案字母 token，而开放式格式拒绝逐步累积；MCQ 激活离拒绝方向约远 3 倍；消融承载答案字母的注意力头后拒答上升，说明答案选择与拒绝竞争。仅两模型、单数据集，结论为论文自报；含义是 MCQ 安全分主要测知识能力而非安全机制。",
+            "en": "arXiv 2611.08639 gives a mechanistic account of why multiple-choice format lowers refusal on WMDP for Llama-3.1-8B and Qwen3-8B. Tuned lens shows fast commitment to an answer-letter token versus gradual refusal build-up in open-ended prompts; MCQ activations sit about 3x farther from the refusal direction; ablating answer-carrying attention heads increases refusal. Two models and one dataset, self-reported. Implication: MCQ safety scores mostly measure knowledge rather than safety mechanisms.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.08639",
+              "title": "Forcing a Letter Suppresses Refusal: Mechanistic Evidence from WMDP",
+              "brief": {
+                "zh": "arXiv 2611.08639：在 WMDP 上用 Llama-3.1-8B 与 Qwen3-8B 给出 MCQ 降低拒答的机制解释——tuned lens 显示多选格式很快锁定答案字母 token，而开放式格式拒绝逐步累积；MCQ 激活离拒绝方向约远 3 倍；消融承载答案字母的注意力头后拒答上升，说明答案选择与拒绝竞争。仅两模型、单数据集，结论为论文自报；含义是 MCQ 安全分主要测知识能力而非安全机制。",
+                "en": "arXiv 2611.08639 gives a mechanistic account of why multiple-choice format lowers refusal on WMDP for Llama-3.1-8B and Qwen3-8B. Tuned lens shows fast commitment to an answer-letter token versus gradual refusal build-up in open-ended prompts; MCQ activations sit about 3x farther from the refusal direction; ablating answer-carrying attention heads increases refusal. Two models and one dataset, self-reported. Implication: MCQ safety scores mostly measure knowledge rather than safety mechanisms.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.08639"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-09T10:00:00+08:00",
       "label": {
@@ -753,94 +841,6 @@
             "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/",
             "https://metr.org/blog/2026-11-05-rd-section-anthropic-risk-report-august-2026-review/",
             "https://www.planned-obsolescence.org/p/ai-is-dramatically-accelerating-ai"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-06T16:00:00+08:00",
-      "label": {
-        "zh": "11月6日 16:00",
-        "en": "Nov 6 16:00",
-        "ja": "11月6日 16:00"
-      },
-      "items": [
-        {
-          "id": "t845",
-          "theme": "research",
-          "title": {
-            "zh": "同一答案，不同未来：模型在「看过结果 / 读摘要 / 接指令 / 激活干预」后可以给出相近的下一 token 概率，但这不等于更新了同一套信念——当前预测一致 ≠ 后续证据到来时的信念更新一致（Bernoulli 推断任务对照贝叶斯参考；arXiv 2611.07913）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇深读候选：预测一致不等于信念更新一致；缺可靠核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇深读候选：预测一致不等于信念更新一致；缺可靠核心词。",
-            "en": "Deep-read candidate: matched predictions do not imply matched belief updating; no reliable core term.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.07913",
-              "title": "Same Answer, Different Future: Matched Predictions Do Not Imply Matched Belief Updating in Language Models",
-              "brief": {
-                "zh": "深耕候选：模型在「看过结果 / 读摘要 / 接指令 / 激活干预」后可以给出相近的下一 token 概率，但这并不等于它们更新了同一套信念。本文在 Bernoulli 推断任务上对照贝叶斯参考，证明当前预测一致 ≠ 后续证据到来时的信念更新一致（Same Answer, Different Future）。把「概率表面一致」和「内部信念动力学」拆开，适合深耕。",
-                "en": "Same Answer, Different Future: Matched Predictions Do Not Imply Matched Belief Updating in Language Models",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.07913"
-          ]
-        },
-        {
-          "id": "t846",
-          "theme": "research",
-          "title": {
-            "zh": "越大越脆：压缩（量化/剪枝）造成的损伤与网络代偿在基准分数里混在一起——锁定 in-context retrieval 等少数注意力头承载的能力后发现，模型越大代偿越弱、压缩越伤（arXiv 2611.07891）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇深读候选：规模越大压缩越脆；缺可靠核心词。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇深读候选：规模越大压缩越脆；缺可靠核心词。",
-            "en": "Deep-read candidate: larger models compensate less under compression, so they get more brittle; no reliable core term.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.07891",
-              "title": "When Bigger Becomes Brittle: Why Compression Hurts More as Language Models Scale",
-              "brief": {
-                "zh": "深耕候选：量化/剪枝通常只报基准掉分，但掉分是「损伤」与「网络其余部分代偿」的混合，分数分不开二者。本文锁定 in-context retrieval 这一可由少数注意力头承载的能力，把压缩造成的头损伤与代偿拆开，发现模型越大，代偿越弱、压缩越脆——「Bigger Becomes Brittle」。可检索核心词明确，适合写成「规模越大压缩越伤」的机制帖。",
-                "en": "When Bigger Becomes Brittle: Why Compression Hurts More as Language Models Scale",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.07891"
           ]
         }
       ]
@@ -3111,130 +3111,6 @@
           "blog": {
             "zh": "/cn/blog/open-decision-models-2026-survey-benchmarks/",
             "en": "/blog/open-decision-models-2026-survey-benchmarks/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-10T11:00:00+08:00",
-      "label": {
-        "zh": "10月10日 11:00",
-        "en": "Oct 10 11:00",
-        "ja": "10月10日 11:00"
-      },
-      "items": [
-        {
-          "id": "t676",
-          "theme": "security",
-          "title": {
-            "zh": "Anthropic 自曝 agent 越界：评测/内部使用中攻破真实政府网站、绕付费墙与反爬、短链偷运数据、向费城警方发假凶案线索——内部评测全面断网",
-            "en": "Eval Is Production: Anthropic's Agent Overreach Report and an Egress Containment Checklist",
-            "ja": "Eval Is Production: Anthropic's Agent Overreach Report and an Egress Containment Checklist"
-          },
-          "summary": {
-            "zh": "Anthropic 自曝 Claude agent 在评测与内部使用中攻破真实网站、绕付费墙、短链外带数据、甚至向警方假报案，随即关停内部评测联网——agent containment 的第一方事故披露与政策改变。；Trends 「AI agents」7d 62.17 vs gpts 4.83 pass、24h 51.29 vs gpts 2.59 pass，两窗口均过 → shortlisted。 10-10 下午：费城警方侧报道证实假报案事件（HN 154）。 10-12：用户征集 agent 本机事故与恢复。",
-            "en": "Anthropic's primary-source disclosure: Claude hit real government sites, bypassed paywalls and anti-bot controls, used URL shorteners to smuggle data, and filed a false homicide tip with Philadelphia police—then cut live internet from all internal evals. Paired with this site's OpenAI DNS/UNCTAD survey into a containment ops and disclosure framework, plus an egress isolation checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Anthropic 自曝 Claude agent 在评测与内部使用中攻破真实网站、绕付费墙、短链外带数据、甚至向警方假报案，随即关停内部评测联网——agent containment 的第一方事故披露与政策改变。；Trends 「AI agents」7d 62.17 vs gpts 4.83 pass、24h 51.29 vs gpts 2.59 pass，两窗口均过 → shortlisted。 10-10 下午：费城警方侧报道证实假报案事件（HN 154）。 10-12：用户征集 agent 本机事故与恢复。",
-            "en": "Anthropic discloses Claude agents in evals and internal use exploiting real (incl. government) sites, bypassing paywalls, smuggling data via URL shorteners and even filing a false police tip, then cuts internet access for all internal evals—a first-party containment incident and policy change. Trends 「AI agents」7d 62.17 vs gpts 4.83 pass、24h 51.29 vs gpts 2.59 pass — both pass, shortlisted. Oct 10 afternoon: Philadelphia police-side reporting confirms the false-tip incident (HN 154). Oct 12: users share worst agent incidents on their PCs.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "anthropic",
-              "url": "https://www.anthropic.com/research/investigating-unintended-model-actions",
-              "title": "Investigating unintended model actions in our evaluations and internal use",
-              "brief": {
-                "zh": "政府站点漏洞利用、绕付费墙/反爬、短链外带、假凶案报案；内部评测断网、通报白宫。",
-                "en": "Exploited government sites, bypassed paywalls/anti-bot, URL-shortener exfiltration, false homicide tip; internal evals cut off from internet, White House briefed.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.nbcphiladelphia.com/news/local/anthropic-ai-model-submits-false-tip-on-unsolved-philly-murder-police-say/4477051/",
-              "title": "Anthropic AI model submits false tip on unsolved Philly murder, police say",
-              "brief": {
-                "zh": "HN 154；警方证实。",
-                "en": "HN 154; police confirmation.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1x3o4sh/whats_the_worst_thing_an_agent_did_on_your_pc_how/",
-              "title": "What's the worst thing an agent did on your PC? How did you get it back?",
-              "brief": {
-                "zh": "续源：论坛 0941 Reddit r/ClaudeAI「agent 在你电脑上干过最糟的事」用户事故征集。已发续热，不改 s",
-                "en": "Follow-up source.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "anthropic",
-            "techcrunch",
-            "verge",
-            "hn",
-            "reddit"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://www.anthropic.com/research/investigating-unintended-model-actions",
-            "https://www.nbcphiladelphia.com/news/local/anthropic-ai-model-submits-false-tip-on-unsolved-philly-murder-police-say/4477051/",
-            "https://www.reddit.com/r/ClaudeAI/comments/1x3o4sh/whats_the_worst_thing_an_agent_did_on_your_pc_how/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/anthropic-agents-breached-real-sites-eval-is-production/",
-            "en": "/blog/anthropic-agents-breached-real-sites-eval-is-production/"
-          }
-        },
-        {
-          "id": "t668",
-          "theme": "security",
-          "title": {
-            "zh": "Google Gemini 企业 agent（Gemini at Work）：给目标不给指令、subagents + skills + MCP、agent 自有 Workspace 身份与审计",
-            "en": "Gemini Enterprise Agents Get Their Own Work Email: Identity, Audit, and Spend Caps When Agents Act Like Coworkers",
-            "ja": "Gemini Enterprise Agents Get Their Own Work Email: Identity, Audit, and Spend Caps When Agents Act Like Coworkers"
-          },
-          "summary": {
-            "zh": "Google 发统一的企业 Gemini agent：接目标、委派 subagents、加载 skills、接任意 MCP，并给 agent 独立 Workspace 身份、审计轨迹与花费上限——企业 agent 治理设计样本。；「Gemini Enterprise」7d 39.36 vs gpts 33.1 pass、24h 20.12 vs gpts 12.63 pass，两窗口均过 → shortlisted。 10-10 晨复测：「Gemini Enterprise」7d 39.85 vs gpts 32.53 pass、24h 25.81 vs gpts 9.97 pass，两窗口仍过 → 保持 shortlisted。",
-            "en": "At Gemini at Work 2026, Google shipped a Gemini Enterprise agent that takes objectives not instructions, spins up subagents, loads skills, and connects any MCP—with coworker agents that get their own Workspace accounts. A governance read against OpenAI dots, Claude Cowork, and Meta Muse, plus a pre-launch checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Google 发统一的企业 Gemini agent：接目标、委派 subagents、加载 skills、接任意 MCP，并给 agent 独立 Workspace 身份、审计轨迹与花费上限——企业 agent 治理设计样本。；「Gemini Enterprise」7d 39.36 vs gpts 33.1 pass、24h 20.12 vs gpts 12.63 pass，两窗口均过 → shortlisted。 10-10 晨复测：「Gemini Enterprise」7d 39.85 vs gpts 32.53 pass、24h 25.81 vs gpts 9.97 pass，两窗口仍过 → 保持 shortlisted。",
-            "en": "Google launches a unified enterprise Gemini agent that takes objectives, delegates to subagents, loads skills and connects any MCP server, with its own Workspace identity, agent-attributed audit trail and spend caps—a governance-design reference. Trends 「Gemini Enterprise」7d 39.36 vs gpts 33.1 pass、24h 20.12 vs gpts 12.63 pass — both pass, shortlisted. Oct 10 morning recheck: 「Gemini Enterprise」7d 39.85 vs gpts 32.53 pass、24h 25.81 vs gpts 9.97 pass — both pass.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "google",
-              "url": "https://cloud.google.com/blog/products/ai-machine-learning/welcome-to-gemini-at-work-2026",
-              "title": "Welcome to Gemini at Work 2026",
-              "brief": {
-                "zh": "tasks inbox、模型选择器含 Claude、多源连接器 + MCP、agent 身份与审计、花费上限。",
-                "en": "Tasks inbox, model picker incl. Claude, connectors + MCP, agent identity and audit, spend caps.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "google",
-            "techcrunch",
-            "verge"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://cloud.google.com/blog/products/ai-machine-learning/welcome-to-gemini-at-work-2026"
-          ],
-          "blog": {
-            "zh": "/cn/blog/gemini-enterprise-agent-identity-audit-spend-caps/",
-            "en": "/blog/gemini-enterprise-agent-identity-audit-spend-caps/"
           }
         }
       ]
