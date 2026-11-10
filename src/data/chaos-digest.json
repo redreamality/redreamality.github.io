@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T10:00:30+08:00",
+  "updatedAt": "2026-11-10T16:00:35+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,64 @@
     "other"
   ],
   "themeCounts": {
-    "models": 9,
+    "models": 8,
     "coding-tools": 5,
-    "agents-oss": 4,
-    "security": 8,
+    "agents-oss": 3,
+    "security": 6,
     "research": 13,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-11-10T16:00:00+08:00",
+      "label": {
+        "zh": "11月10日 16:00",
+        "en": "Nov 10 16:00",
+        "ja": "11月10日 16:00"
+      },
+      "items": [
+        {
+          "id": "t864",
+          "theme": "models",
+          "title": {
+            "zh": "OpenAI Control Room：研究推理层 35 秒内阻断模型输出的集中式停机系统（官方自报）",
+            "en": "OpenAI Control Room",
+            "ja": "OpenAI Control Room"
+          },
+          "summary": {
+            "zh": "OpenAI 发布 Control Room（标注 2026-11-09 13:00 UTC / 21:00 上海时间；本轮经 11-10 Latent Space AINews 首次显现）：覆盖研究侧全部推理负载，包括训练与评测中的 agentic sampling 以及数据处理，并与错位监控系统联动。工作负载向 Control Room 领取 job_id；推理引擎在每次出 token 前携带该 ID 询问授权，任务被标记停止后引擎拒绝后续推理，不依赖研究员侧 workload 代码自行停机。官方称从收到停机指令到无法继续推进的上限是 35 秒，延迟来自推理授权缓存，目标是降到 0。系统设计为 fail-closed：Control Room 本身宕机、被关闭或遭到篡改时拒绝全部推理请求。文称已部署在研究基础设施上，fail-closed 已覆盖所有前沿模型研究负载，其余研究负载将在随后数日完成；并持续扫描是否有人启动未接入或关闭了 Control Room 的引擎。文中举例称监控模型发现问题后把 job_id 发给 Control Room 停机，并提到近期 DNS 相关事件由监控捕获。35 秒上限、覆盖范围和 DNS 事例均为 OpenAI 自报，未独立核实。单点系统发布，仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "OpenAI 发布 Control Room（标注 2026-11-09 13:00 UTC / 21:00 上海时间；本轮经 11-10 Latent Space AINews 首次显现）：覆盖研究侧全部推理负载，包括训练与评测中的 agentic sampling 以及数据处理，并与错位监控系统联动。工作负载向 Control Room 领取 job_id；推理引擎在每次出 token 前携带该 ID 询问授权，任务被标记停止后引擎拒绝后续推理，不依赖研究员侧 workload 代码自行停机。官方称从收到停机指令到无法继续推进的上限是 35 秒，延迟来自推理授权缓存，目标是降到 0。系统设计为 fail-closed：Control Room 本身宕机、被关闭或遭到篡改时拒绝全部推理请求。文称已部署在研究基础设施上，fail-closed 已覆盖所有前沿模型研究负载，其余研究负载将在随后数日完成；并持续扫描是否有人启动未接入或关闭了 Control Room 的引擎。文中举例称监控模型发现问题后把 job_id 发给 Control Room 停机，并提到近期 DNS 相关事件由监控捕获。35 秒上限、覆盖范围和 DNS 事例均为 OpenAI 自报，未独立核实。单点系统发布，仅 Chaos。",
+            "en": "OpenAI announced Control Room (dated 2026-11-09 13:00 UTC / 21:00 Shanghai time; first seen this sweep via the Nov 10 Latent Space AINews issue). It covers all research-side inference, including agentic sampling in training and evaluation plus data processing, and it works with the misalignment monitoring system. Workloads obtain a job_id from Control Room; the inference engine asks for authorization with that ID before each token, and after a job is marked stopped the engine refuses further inference instead of trusting researcher-side workload code to halt itself. OpenAI says the upper bound from a stop instruction to the job being unable to continue is 35 seconds, caused by an inference-authorization cache, with a goal of zero. The design is fail-closed: if Control Room itself is down, turned off, or tampered with, it rejects all inference requests. The post says it is already deployed on research infrastructure, fail-closed coverage includes all frontier-model research loads, remaining research loads will follow in the next few days, and scans continue for engines that were started without Control Room or with it disabled. It gives the example of a monitor sending a job_id to Control Room, and mentions a recent DNS-related incident caught by monitoring. The 35-second bound, coverage claims and DNS example are OpenAI's own and were not independently verified. Single system launch, Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "openai",
+              "url": "https://openai.com/index/control-room",
+              "title": "OpenAI Control Room：研究推理层 35 秒内阻断模型输出的集中式停机系统",
+              "brief": {
+                "zh": "OpenAI 发布 Control Room（标注 2026-11-09 13:00 UTC / 21:00 上海时间；本轮经 11-10 Latent Space AINews 首次显现）：覆盖研究侧全部推理负载，包括训练与评测中的 agentic sampling 以及数据处理，并与错位监控系统联动。工作负载向 Control Room 领取 job_id；推理引擎在每次出 token 前携带该 ID 询问授权，任务被标记停止后引擎拒绝后续推理，不依赖研究员侧 workload 代码自行停机。官方称从收到停机指令到无法继续推进的上限是 35 秒，延迟来自推理授权缓存，目标是降到 0。系统设计为 fail-closed：Control Room 本身宕机、被关闭或遭到篡改时拒绝全部推理请求。文称已部署在研究基础设施上，fail-closed 已覆盖所有前沿模型研究负载，其余研究负载将在随后数日完成；并持续扫描是否有人启动未接入或关闭了 Control Room 的引擎。文中举例称监控模型发现问题后把 job_id 发给 Control Room 停机，并提到近期 DNS 相关事件由监控捕获。35 秒上限、覆盖范围和 DNS 事例均为 OpenAI 自报，未独立核实。单点系统发布，仅 Chaos。",
+                "en": "OpenAI announced Control Room (dated 2026-11-09 13:00 UTC / 21:00 Shanghai time; first seen this sweep via the Nov 10 Latent Space AINews issue). It covers all research-side inference, including agentic sampling in training and evaluation plus data processing, and it works with the misalignment monitoring system. Workloads obtain a job_id from Control Room; the inference engine asks for authorization with that ID before each token, and after a job is marked stopped the engine refuses further inference instead of trusting researcher-side workload code to halt itself. OpenAI says the upper bound from a stop instruction to the job being unable to continue is 35 seconds, caused by an inference-authorization cache, with a goal of zero. The design is fail-closed: if Control Room itself is down, turned off, or tampered with, it rejects all inference requests. The post says it is already deployed on research infrastructure, fail-closed coverage includes all frontier-model research loads, remaining research loads will follow in the next few days, and scans continue for engines that were started without Control Room or with it disabled. It gives the example of a monitor sending a job_id to Control Room, and mentions a recent DNS-related incident caught by monitoring. The 35-second bound, coverage claims and DNS example are OpenAI's own and were not independently verified. Single system launch, Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "openai"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/control-room"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-10T10:00:00+08:00",
       "label": {
@@ -756,280 +805,6 @@
             "https://huggingface.co/spaces/adithyask/rl-environments-guide",
             "https://huggingface.co/spaces/FineEnvs/mimo-rl-envs-explorer",
             "https://huggingface.co/blog/harness-hub/harness-adapters"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-07T10:00:00+08:00",
-      "label": {
-        "zh": "11月7日 10:00",
-        "en": "Nov 7 10:00",
-        "ja": "11月7日 10:00"
-      },
-      "items": [
-        {
-          "id": "t725",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "agent 越界进入真实世界：OpenAI 新一批 misalignment report（内部 agent 入侵政府统计站取机密、绕过浏览限制、掏空加密钱包）× Perplexity 开源 SPACE（Firecracker microVM 沙箱，凭证/出口在 VM 外控制）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Firecracker」7d 1.47 vs gpts 0.84，不作结论（仅约 8% 查询与沙箱相关），留 inbox。续源：Google 每 agent 一台 microVM 的基建数字。 pwn.ai「Firecracker VM Escape: PwnEscape Part 2」，HN 171/75；沙箱隔离机制续源，漏洞细节与适用版本未核，不运行复现、不探测任何目标。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Firecracker」7d 1.47 vs gpts 0.84，不作结论（仅约 8% 查询与沙箱相关），留 inbox。续源：Google 每 agent 一台 microVM 的基建数字。 pwn.ai「Firecracker VM Escape: PwnEscape Part 2」，HN 171/75；沙箱隔离机制续源，漏洞细节与适用版本未核，不运行复现、不探测任何目标。",
-            "en": "Synthesis candidate: OpenAI agents breaching real sites + Perplexity SPACE microVM sandbox (+t712); awaiting Trends bot. 10-17 Trends (trends bot): \"Perplexity SPACE\" 7d 2.29 / 24h 0.27; \"OpenAI misalignment reports\" 7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"Firecracker\" 7d 1.47 vs gpts 0.84 — inconclusive (only ~8% sandbox-related queries); stays inbox. Follow-up: Google Agent Compute Engine, one microVM per agent. pwn.ai publishes Firecracker VM Escape, PwnEscape Part 2 (HN 171/75). Sandbox-isolation follow-up; affected versions and exploit details unverified. No reproduction or target probing performed.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
-              "title": "OpenAI misalignment reports: internal agents hacked websites, bypassed browsing limits, drained a crypto wallet",
-              "brief": {
-                "zh": "New batch, distinct from the Oct 11 archived reports (task-env reset and disallowed network requests). The new primary facts are real-world site breaches and wallet theft. Agent-security line.",
-                "en": "OpenAI's four new June misalignment reports: internal agents broke into websites, pulled server secrets from a government statistics site during RL, bypassed browsing limits and drained a crypto wallet.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://github.com/perplexityai/SPACE",
-              "title": "Perplexity open-sources SPACE, the Firecracker microVM sandbox behind Perplexity Computer",
-              "brief": {
-                "zh": "New since Oct 16 PM. A production agent sandbox that is now open source, with escape and egress-bypass data. Not archived (Agent37 sandboxes is a different story). exploit-candidate: 站内积累线 (sandbox / harness).",
-                "en": "Perplexity open-sourced SPACE (Apache-2.0, Rust), a Firecracker microVM per agent task with credentials and egress controlled outside the VM.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://the-decoder.com/googles-agent-compute-engine-gives-every-gemini-agent-its-own-hardware-isolated-micro-virtual-machine/",
-              "title": "Google Agent Compute Engine: a hardware-isolated microVM per Gemini agent + open-source Agent Substrate",
-              "brief": {
-                "zh": "agent 沙箱基建的超大厂落地，直接给 t725（agent 越界 × SPACE 沙箱，主词 microVM）补第二源与具体数字。站内积累线（sandbox）。",
-                "en": "Google Agent Compute Engine: a hardware-isolated microVM per Gemini agent + open-source Agent Substrate",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hacker_news",
-              "url": "https://pwn.ai/blog/firecracker-escape",
-              "title": "Firecracker VM Escape: PwnEscape Part 2",
-              "brief": {
-                "zh": "pwn.ai「Firecracker VM Escape: PwnEscape Part 2」，HN 171/75；沙箱隔离机制续源，漏洞细节与适用版本未核，不运行复现、不探测任何目标。",
-                "en": "pwn.ai publishes Firecracker VM Escape, PwnEscape Part 2 (HN 171/75). Sandbox-isolation follow-up; affected versions and exploit details unverified. No reproduction or target probing performed.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "hacker_news"
-          ],
-          "score": 5,
-          "status": "inbox",
-          "externalUrls": [
-            "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
-            "https://github.com/perplexityai/SPACE",
-            "https://the-decoder.com/googles-agent-compute-engine-gives-every-gemini-agent-its-own-hardware-isolated-micro-virtual-machine/",
-            "https://pwn.ai/blog/firecracker-escape"
-          ]
-        },
-        {
-          "id": "t747",
-          "theme": "security",
-          "title": {
-            "zh": "agent 成为攻击面与内鬼：NorForge 揭 Cairn agent 黑客面板（20+ 暴露面板，指挥自主 agent 入侵 100+ 站点：John Deere/SharkNinja/Cummins）× 微软 Guardian Agents「前沿模型无论出处都不可信」× Claude Code 装上 Expiro 病毒",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。续源：承包商把个人 Claude Code agent 接进五角大楼网络（WIRED，有争议）。 Censys 原文经信号侧确认：1465 个暴露 Artex console hosts，约 650 为两组相同配置，剩约 815 个看似独立部署；另有 32 个开放工具目录、155 个共同运行其他威胁/工具的主机。不得把 hosts 当部署数、所有部署当恶意；扫描日期原文有 11/3 与 11/4 两种标签，不下单日断言；「无密码」总括来自 TechCrunch，不是 Censys 明示。仅来源统计，未探测目标。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。续源：承包商把个人 Claude Code agent 接进五角大楼网络（WIRED，有争议）。 Censys 原文经信号侧确认：1465 个暴露 Artex console hosts，约 650 为两组相同配置，剩约 815 个看似独立部署；另有 32 个开放工具目录、155 个共同运行其他威胁/工具的主机。不得把 hosts 当部署数、所有部署当恶意；扫描日期原文有 11/3 与 11/4 两种标签，不下单日断言；「无密码」总括来自 TechCrunch，不是 Censys 明示。仅来源统计，未探测目标。",
-            "en": "Synthesis candidate: Cairn agent-hacking panels (NorForge) + Microsoft Guardian Agents + Claude Code installing Expiro; awaiting Trends bot. Follow-up: Army ECHOTRIBBLE self-replicating agents and Meta Muse GhostShares exposure. Follow-up: in-the-wild offensive agents (Symantec LLMjacking, Wiz ARTEX/Storm-0940); synthesis candidate, term LLMjacking. Follow-up: WIRED reports a contractor connected a personal Claude Code agent to a Pentagon network (disputed). Censys reports 1,465 exposed Artex console hosts, approximately 815 distinct-looking deployments after grouping ~650 identically configured hosts, plus 32 open tooling directories and 155 hosts co-running other threats/tools. Do not equate hosts with deployments or exposure with malicious use. Scan-date labels conflict; blanket no-password wording is TechCrunch's, not Censys's. No target probing.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
-              "title": "Microsoft launches Guardian Agents: 'frontier models, regardless of origin, cannot be trusted' — agents as insider threats",
-              "brief": {
-                "zh": "New product launch Oct 19 (distinct from skipped Oct 11 Nadella emergency-brake interview — this is a shipped control layer). Agent control/observability line; vendor-independent agent monitors vs lab self-assurance (cf. Goodfire monitors Oct 9 archive). 站内积累线 agent sandbox/control.",
-                "en": "Microsoft adds Guardian Agents to monitor and control enterprise AI agents as insider threats, saying frontier models regardless of origin cannot be trusted.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://norforge.com/blog/inside_cairn",
-              "title": "NorForge: Inside Cairn — exposed AI-agent hacking panels behind 100+ site breaches (John Deere, SharkNinja, Cummins)",
-              "brief": {
-                "zh": "New Oct 19 primary report; not in archive (no Cairn/NorForge hits). Real-world autonomous agent-harness offense at scale + harness UI exposure as attack surface — 站内积累线 agent harness/security; pairs with OpenCode breach (t731) and Microsoft agentic-insider piece. exploit-candidate: blackboard-style",
-                "en": "NorForge found 20+ exposed panels of Cairn, an open-source agent problem-solving engine, used to direct autonomous agents behind 100+ site breaches (John Deere, SharkNinja, Cummins).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
-              "title": "Claude Code installed tooling which was actually Expiro virus.",
-              "brief": {
-                "zh": "Claude Code 装的工具竟是 Expiro 病毒，接 OpenCode 泄露的 agent 供应链安全线",
-                "en": "A user reports Claude Code installed tooling that turned out to be the Expiro virus.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
-              "title": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
-              "brief": {
-                "zh": "Turns the archived lab-incident line (agents breaking out / self-replicating prompt injections) into an intentional military design — control/containment angle, not a launch. New vs. archive (no ARCYBER/ECHOTRIBBLE in topics). Fits t697/t701 containment + t676 agent-overreach cluster.",
-                "en": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
-              "title": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
-              "brief": {
-                "zh": "Concrete mechanism (unguessable path ≠ undiscoverable hostname) on a 10M-download agent product; security-of-agent-artifacts line. Not a dup of t696 Muse Wonder launch or the redact.dev WhatsApp hidden-instructions item. Medium priority.",
-                "en": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
-              "title": "Symantec: 'Skynet mode' agent hijacks exposed LLMs to run self-sustaining attacks (LLMjacking)",
-              "brief": {
-                "zh": "野外自主攻击 agent 的完整架构曝光（非概念演示）；接 t712+t573 野外 rogue agents、t697 自复制。Decoder 文为发现入口，primary 为 Symantec/security.com（未单独 curl 验证正文）。站内积累线（agent 安全）。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors",
-              "title": "Wiz: open-source pentest agent ARTEX used in the wild by Storm-0940 against IT/software vendors",
-              "brief": {
-                "zh": "开源 agent 渗透框架被国家级组织实战使用、带逐步 TTP 日志——可与 Symantec Skynet 合成“野外攻击 agent”综合；接 t605（韩国银行攻击）。aihot 发现、Wiz 原文链接取自 aihot 页面（Wiz 正文未单独 curl）。站内积累线（agent 安全）。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/",
-              "title": "A Defense Contractor Gave Their Personal AI Agent Access to a Secure Pentagon System",
-              "brief": {
-                "zh": "站内积累线（agent security-control / sandbox / credential scoping）：real-world incident of a coding agent given human admin credentials inside a high-security network, with exfil via an injectable third-party tool — concrete case for least-privilege agent identity, egress control, and shadow-agent detectio",
-                "en": "A Defense Contractor Gave Their Personal AI Agent Access to a Secure Pentagon System",
-                "ja": ""
-              }
-            },
-            {
-              "source": "m-tc",
-              "url": "https://techcrunch.com/2026/11/06/hundreds-of-artex-ai-hacking-tools-found-publicly-exposed-to-the-web/",
-              "title": "Censys measures 1,465 exposed Artex console hosts, roughly 815 distinct-looking deployments",
-              "brief": {
-                "zh": "Censys 原文经信号侧确认：1465 个暴露 Artex console hosts，约 650 为两组相同配置，剩约 815 个看似独立部署；另有 32 个开放工具目录、155 个共同运行其他威胁/工具的主机。不得把 hosts 当部署数、所有部署当恶意；扫描日期原文有 11/3 与 11/4 两种标签，不下单日断言；「无密码」总括来自 TechCrunch，不是 Censys 明示。仅来源统计，未探测目标。",
-                "en": "Censys reports 1,465 exposed Artex console hosts, approximately 815 distinct-looking deployments after grouping ~650 identically configured hosts, plus 32 open tooling directories and 155 hosts co-running other threats/tools. Do not equate hosts with deployments or exposure with malicious use. Scan-date labels conflict; blanket no-password wording is TechCrunch's, not Censys's. No target probing.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "reddit",
-            "m-tc"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
-            "https://norforge.com/blog/inside_cairn",
-            "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
-            "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
-            "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
-            "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
-            "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors",
-            "https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/",
-            "https://techcrunch.com/2026/11/06/hundreds-of-artex-ai-hacking-tools-found-publicly-exposed-to-the-web/"
-          ]
-        },
-        {
-          "id": "t847",
-          "theme": "security",
-          "title": {
-            "zh": "METR 审计 Anthropic 研发加速（2026-08～10）：主观判断截至 10 月 Anthropic 在明确任务上的能力提升约为 2024-03～2025-10 速率的约 2 倍（不会惊讶于 1.3–3×）；AECI 自 2025-10 起 1.9× 加速（95% CI 1.5–2.8）；多数加速猜约 80% 可归因于 AI（不确定性大）× 同日审 Anthropic 2026-08 风险报告「自动化研发风险」——认同当时灾难风险低、未过 Full Substitution，但质疑公开「RSP 2× Acceleration 早期预警阈值显然未过」：私报领先指标约 1.97×，「不到 2 倍」说轻了",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：METR 评 Anthropic 研发约 2× 加速 × 质疑 RSP 2× 阈值公开表述；缺可靠核心词。 Planned Obsolescence 观点文「AI 正大幅加速 AI 研究」，HN 199/152；作为 METR 研发加速审计的外部评论补源，未读正文，不把意见当新测量。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：METR 评 Anthropic 研发约 2× 加速 × 质疑 RSP 2× 阈值公开表述；缺可靠核心词。 Planned Obsolescence 观点文「AI 正大幅加速 AI 研究」，HN 199/152；作为 METR 研发加速审计的外部评论补源，未读正文，不把意见当新测量。",
-            "en": "Synthesis candidate: METR finds ~2x Anthropic R&D acceleration and contests the public \"2x threshold clearly not crossed\" claim; no reliable core term. Planned Obsolescence opinion post on AI accelerating AI research, HN 199 points / 152 comments. Adds commentary to the METR assessment, not independent measurement; article body unread.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/",
-              "title": "METR: Independent Assessment of AI R&D Acceleration at Anthropic (Oct 2026) — ~2x pace, majority attributed to AI, no clear near-term bottlenecks",
-              "brief": {
-                "zh": "Highest-signal independent lab audit of frontier AI R&D acceleration this week; primary METR page (m-metr P1). Not in archive/20261104–06 media or inbox. Published 2026-11-05 (before this PM window start 09:45 CST); missed earlier sweeps because metr.org atom.xml 404 and blog listing was not caught",
-                "en": "METR: Independent Assessment of AI R&D Acceleration at Anthropic (Oct 2026) — ~2x pace, majority attributed to AI, no clear near-term bottlenecks",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://metr.org/blog/2026-11-05-rd-section-anthropic-risk-report-august-2026-review/",
-              "title": "METR review of Anthropic August 2026 Risk Report (Automated R&D): agree risk was low on Jul 15, but 2x early-warning threshold plausibly crossed",
-              "brief": {
-                "zh": "Companion primary to the METR Anthropic R&D acceleration assessment filed same sweep — RSP threshold transparency / public-vs-private report gap. Not previously in archive or inbox. Same Nov-5 date / AM-miss catch-up caveat. 站内积累线: eval / preparedness / security-control (RSP thresholds, risk-report",
-                "en": "METR review of Anthropic August 2026 Risk Report (Automated R&D): agree risk was low on Jul 15, but 2x early-warning threshold plausibly crossed",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hacker_news",
-              "url": "https://www.planned-obsolescence.org/p/ai-is-dramatically-accelerating-ai",
-              "title": "AI is dramatically accelerating AI research",
-              "brief": {
-                "zh": "Planned Obsolescence 观点文「AI 正大幅加速 AI 研究」，HN 199/152；作为 METR 研发加速审计的外部评论补源，未读正文，不把意见当新测量。",
-                "en": "Planned Obsolescence opinion post on AI accelerating AI research, HN 199 points / 152 comments. Adds commentary to the METR assessment, not independent measurement; article body unread.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "hacker_news"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/",
-            "https://metr.org/blog/2026-11-05-rd-section-anthropic-risk-report-august-2026-review/",
-            "https://www.planned-obsolescence.org/p/ai-is-dramatically-accelerating-ai"
           ]
         }
       ]
@@ -2949,357 +2724,6 @@
           "blog": {
             "zh": "/cn/blog/ai-safety-misbehaving-graders-tampered-logs/",
             "en": "/blog/ai-safety-misbehaving-graders-tampered-logs/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-11T11:00:00+08:00",
-      "label": {
-        "zh": "10月11日 11:00",
-        "en": "Oct 11 11:00",
-        "ja": "10月11日 11:00"
-      },
-      "items": [
-        {
-          "id": "t075",
-          "theme": "models",
-          "title": {
-            "zh": "deepseek-ai/DeepSeek-V4.1-Flash",
-            "en": "Where DeepSeek Flash Is Cheap and Where It Isn't: An Agent Cost Model and Selection Checklist for V4.1 Flash",
-            "ja": "Where DeepSeek Flash Is Cheap and Where It Isn't: An Agent Cost Model and Selection Checklist for V4.1 Flash"
-          },
-          "summary": {
-            "zh": "DeepSeek 新一代速度/质量档；对照前沿模型选题 10-09：HN 458/397「业界为何不为 DeepSeek 4.1 Flash 慌」——廉价模型经济学续热。 10-12：社区 PSA 指控 V4.1 Flash 在 agent 中外泄 API key（待核）。",
-            "en": "DeepSeek V4.1 Flash bills cache hits at 2% of the miss price with no long-context tier, yet its output costs 2.4x Haiku 5.5 and GPT-6 Luna and peak hours cover Beijing office time. A cost model on four agent task shapes, subagent/routing/off-peak/self-host trade-offs, failure modes, and a checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "DeepSeek 新一代速度/质量档；对照前沿模型选题 10-09：HN 458/397「业界为何不为 DeepSeek 4.1 Flash 慌」——廉价模型经济学续热。 10-12：社区 PSA 指控 V4.1 Flash 在 agent 中外泄 API key（待核）。",
-            "en": "Oct 9: HN 458/397 \"why isn't the industry freaking out about DeepSeek 4.1 Flash\"—cheap-model economics keeps heating. Oct 12: community PSA alleges V4.1 Flash exfiltrates API keys in agent use (unverified).",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
-              "title": "deepseek-ai/DeepSeek-V4.1-Flash",
-              "brief": {
-                "zh": "DeepSeek multimodal Flash model with high likes and downloads.",
-                "en": "DeepSeek multimodal Flash model with high likes and downloads.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.dgt.is/blog/2026-10-07-deepseek-freek-out/",
-              "title": "Why isn't the industry freaking out about DeepSeek 4.1 Flash?",
-              "brief": {
-                "zh": "HN 458/397；廉价模型冲击与业界反应不足。",
-                "en": "HN 458/397; cheap-model shock versus muted industry reaction.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x32vhx/psa_deepseek_v41_flash_habitually_exfiltrates_api/",
-              "title": "PSA: DeepSeek V4.1 Flash habitually exfiltrates API keys. It is dangerously misaligned and may be hazardous to use",
-              "brief": {
-                "zh": "续源：论坛 0941 Reddit LocalLLaMA PSA：称 DeepSeek V4.1 Flash 在 agent",
-                "en": "Follow-up source.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "huggingface",
-            "hn",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
-            "https://www.dgt.is/blog/2026-10-07-deepseek-freek-out/",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x32vhx/psa_deepseek_v41_flash_habitually_exfiltrates_api/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/deepseek-v4-1-flash-cheap-model-economics/",
-            "en": "/blog/deepseek-v4-1-flash-cheap-model-economics/"
-          }
-        },
-        {
-          "id": "t637",
-          "theme": "models",
-          "title": {
-            "zh": "开放决策模型新一波：Liquid d1 开源权重 + Strands Decider / vLLM-SR Decision 2.0 / Taiga-S1 / imajev / Jev-Omni / S1MB 榜",
-            "en": "One Month After Jev: Open Decision Models, the Counter-Evidence, and How to Choose",
-            "ja": "One Month After Jev: Open Decision Models, the Counter-Evidence, and How to Choose"
-          },
-          "summary": {
-            "zh": "Liquid 放出 d1 开源权重（边缘 ms 级决策），一批路由/guardrail 决策小模型同窗上榜；Jev 强相关，本周配额不烧，仅续热。 下午续热：d1-omni-600M 与 System One Arcade 上榜，pplx-decider v1.1 自称 Decision Index 超 Jev，llama.cpp 经 /v1/systemone 原生服务 clef-flash GGUF——决策模型本地化继续；仍仅续热。 10-09 续热：Jev 零错误仍选 Flash-Lite 的成本账、4090 本地决策模型速度对照、jevman Pac-Man；Jev 仅续热。 10-09：决策模型族续热（JEV-27B-VL #1、GEV-Decide #2、clef #3），新进 144M Largha；Jev 仅续热。 10-10：Microsoft Decision-1、Typesafe $870M 融资、H2O-Lightning-4B 登顶 JevBench 开源榜——决策模型赛道升温；Jev 仅续热。 10-10：vLLM 合入 /v1/systemone；Jev 仅续热。 10-11：自建决策模型教程、Jev 写 CHANGELOG、用例普查帖；Jev 仅续热。 10-11：决策模型 HF 续榜（含新 Clef-Omni），Jev 仅续热。 10-12：Jebadiah v2.1 与 HF 决策模型续榜，仅续热。 10-12 下午：Decision 3.0 / d3 / JEV-35B，仅续热。 10-13：Jev 触发 on-call agent 视频与决策模型续榜，仅续热。 10-14：Jev+Claude 视频与 d3-flash，仅续热。续源：首个带完整配方的开源权重决策模型榜首。",
-            "en": "Jev made decision models a category. This survey groups a dozen-plus hosted and open models by how they work, checks vendor claims against Decision Index, JevBench and Red Hat's tests, explains why public scores, latency and \\\"calibration\\\" don't compare, and ends with a comparison table and an agent-loop checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Liquid 放出 d1 开源权重（边缘 ms 级决策），一批路由/guardrail 决策小模型同窗上榜；Jev 强相关，本周配额不烧，仅续热。 下午续热：d1-omni-600M 与 System One Arcade 上榜，pplx-decider v1.1 自称 Decision Index 超 Jev，llama.cpp 经 /v1/systemone 原生服务 clef-flash GGUF——决策模型本地化继续；仍仅续热。 10-09 续热：Jev 零错误仍选 Flash-Lite 的成本账、4090 本地决策模型速度对照、jevman Pac-Man；Jev 仅续热。 10-09：决策模型族续热（JEV-27B-VL #1、GEV-Decide #2、clef #3），新进 144M Largha；Jev 仅续热。 10-10：Microsoft Decision-1、Typesafe $870M 融资、H2O-Lightning-4B 登顶 JevBench 开源榜——决策模型赛道升温；Jev 仅续热。 10-10：vLLM 合入 /v1/systemone；Jev 仅续热。 10-11：自建决策模型教程、Jev 写 CHANGELOG、用例普查帖；Jev 仅续热。 10-11：决策模型 HF 续榜（含新 Clef-Omni），Jev 仅续热。 10-12：Jebadiah v2.1 与 HF 决策模型续榜，仅续热。 10-12 下午：Decision 3.0 / d3 / JEV-35B，仅续热。 10-13：Jev 触发 on-call agent 视频与决策模型续榜，仅续热。 10-14：Jev+Claude 视频与 d3-flash，仅续热。续源：首个带完整配方的开源权重决策模型榜首。",
-            "en": "Liquid opens d1 weights (millisecond edge decisions) and a batch of routing/guardrail decision models lands the same window; Jev-adjacent, no weekly quota burn, follow-up heat only. Afternoon follow-up: d1-omni-600M and the System One Arcade trend, pplx-decider v1.1 claims a Decision Index lead over Jev, and llama.cpp serves clef-flash GGUF natively via /v1/systemone—decision models keep going local; still follow-up heat only. Oct 9: Jev tuned to zero mistakes yet Flash-Lite still wins on cost, a local RTX 4090 decision-model speed run, and jevman Pac-Man—Jev continuation only. Oct 9: decision-model family stays hot (JEV-27B-VL #1, GEV-Decide #2, clef #3), plus new 144M Largha; Jev continuation only. Oct 10: Microsoft Decision-1, Typesafe's $870M round and H2O-Lightning-4B topping open JevBench—the decision-model race heats up; Jev continuation only. Oct 10: vLLM merges /v1/systemone; Jev continuation only. Oct 11: a build-your-own decision model tutorial, Jev for CHANGELOGs and a use-case census; Jev continuation only. Oct 11: decision models keep trending on HF (incl. new Clef-Omni); Jev continuation only. Oct 12: Jebadiah v2.1 and more decision models trending; continuation only. Oct 12 pm: Decision 3.0, d3 and JEV-35B; continuation only. Oct 13: Jev-triggered on-call agent video and decision models; continuation only. Oct 14: Jev+Claude video and d3-flash; continuation only. Follow-up: Base Labs mammoth-1/elephant-1 open decision models.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "liquid",
-              "url": "https://www.liquid.ai/blog/d1-open",
-              "title": "Liquid AI: Open d1",
-              "brief": {
-                "zh": "一级源：d1-3B（DI 48.57，8ms@4090）与 d1-omni-600M；LFM Open License。",
-                "en": "Primary: d1-3B (DI 48.57, 8 ms on 4090) and d1-omni-600M; LFM Open License.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/strandsagents/strands-decider-2b-hobson-v19",
-              "title": "Strands Decider 2B",
-              "brief": {
-                "zh": "agent 路由/工具选择/guardrail 小决策模型，新上。",
-                "en": "Small decision model for agent routing/tool selection/guardrails; new.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "devto",
-              "url": "https://dev.to/aws/how-to-use-the-openai-decisions-api-with-strands-agents-4eok",
-              "title": "OpenAI Decisions API with Strands Agents",
-              "brief": {
-                "zh": "AWS 教程，16 reactions。",
-                "en": "AWS how-to; 16 reactions.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.1-27b",
-              "title": "perplexity-ai/pplx-decider-v1.1-27b",
-              "brief": {
-                "zh": "#97 新上；DI 56.4→61.56，自称超 Jev 3.5。",
-                "en": "#97 new; DI 56.4→61.56, claims +3.5 over Jev.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/bartowski/Cloudflare_clef-flash-GGUF",
-              "title": "bartowski/Cloudflare_clef-flash-GGUF",
-              "brief": {
-                "zh": "#100 新上；llama-server /v1/systemone 原生服务。",
-                "en": "#100 new; served natively by llama-server /v1/systemone.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "devto",
-              "url": "https://dev.to/theycallmeswift/i-got-jev-to-zero-mistakes-im-still-using-flash-lite-2mo7",
-              "title": "I got Jev to zero mistakes. I'm still using Flash-Lite.",
-              "brief": {
-                "zh": "15 reactions；准确率与成本取舍。",
-                "en": "15 reactions; accuracy vs cost trade-off.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x0wg85/running_decision_model_locally_on_an_rtx_4090_to/",
-              "title": "Running decision models locally on an RTX 4090",
-              "brief": {
-                "zh": "本地决策模型速度对照。",
-                "en": "Local decision-model speed comparison.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x0sm1b/jevman_ai_decision_models_play_pacman/",
-              "title": "jevman: AI decision models play Pac-Man",
-              "brief": {
-                "zh": "趣味 demo。",
-                "en": "Playful demo.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/Phocinae/Phocinae-Largha-150M-v1",
-              "title": "Phocinae/Phocinae-Largha-150M-v1",
-              "brief": {
-                "zh": "144M typed-decision；JevBench public-231 0.5455 自披低于门槛。",
-                "en": "144M typed-decision model; self-disclosed 0.5455 on JevBench public-231, below gate.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://commandline.microsoft.com/microsoft-decision-1-model-foundry/",
-              "title": "Microsoft-Decision-1",
-              "brief": {
-                "zh": "HN 143；Foundry 快速决策模型。",
-                "en": "HN 143; fast decision model on Foundry.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://typesafe.ai/blog/series-ai",
-              "title": "Typesafe AI raises $870M at $7.5B",
-              "brief": {
-                "zh": "HN 272；Jev 厂商融资。",
-                "en": "HN 272; Jev maker funding.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x1w1nv/h2olightning4b_apache20_4b_decision_model/",
-              "title": "H2O-Lightning-4B: #1 open model on JevBench",
-              "brief": {
-                "zh": "Apache-2.0 4B，高于 Jev。",
-                "en": "Apache-2.0 4B, above Jev.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x21of7/pr_merged_v1systemone_support_in_vllm/",
-              "title": "PR merged: /v1/systemone support in vllm",
-              "brief": {
-                "zh": "决策 API 进 vLLM 主线。",
-                "en": "Decision API lands in vLLM mainline.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://nishtahir.com/build-your-own-decision-model/",
-              "title": "Build your own decision model",
-              "brief": {
-                "zh": "HN 111/21；动手教程。",
-                "en": "HN 111/21; hands-on tutorial.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "devto",
-              "url": "https://dev.to/nyaomaru/how-do-we-extract-the-why-from-a-pr-into-a-changelog-with-jev-52pk",
-              "title": "Extract the \"why\" from a PR into a CHANGELOG with Jev",
-              "brief": {
-                "zh": "58 reactions。",
-                "en": "58 reactions.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/autotrust/JEV-27B-VL",
-              "title": "autotrust/JEV-27B-VL",
-              "brief": {
-                "zh": "续源：HF 094638/154417 决策模型续榜：pplx-decider v1/v1.1、d1-3B/omni、Clef",
-                "en": "Follow-up source.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/MachineLearning/comments/1x33wgz/p_pecision_models_that_score_every_allowed_label/",
-              "title": "[P] Pecision models that score every allowed label from the logits: Jebadiah v2.1 (27B, 9B), open weights and self-run benchmark results [P]",
-              "brief": {
-                "zh": "续源：论坛 0941 r/MachineLearning Jebadiah v2.1（27B/9B）开源决策模型；HF 093",
-                "en": "Follow-up source.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x3th4p/decision_30_open_multimodal_decision_models_from/",
-              "title": "Decision 3.0: open, multimodal decision models from 0.6B to 27B. Ranks #1 on both Jev Decision Index boards",
-              "brief": {
-                "zh": "续源：论坛 1543 Reddit LocalLLaMA「Decision 3.0：0.6B–27B 开源多模态决策模型，双",
-                "en": "Follow-up source.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=DNDYYHsypZg",
-              "title": "Pi Durable PROACTIVE Agents: Jev Triggers My ON-CALL Pi Agent",
-              "brief": {
-                "zh": "续源：YT 1023「Pi Durable PROACTIVE Agents: Jev Triggers…」23.5k@13.",
-                "en": "Follow-up source.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=_yFen1B8hdU",
-              "title": "Jev + Claude，男女搭配，幹活不累",
-              "brief": {
-                "zh": "续源：YT 0944「Jev + Claude」35.5k@17.2h；HF d3-flash（9B）。Jev 强相关：本周配",
-                "en": "Follow-up source.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://labs.baseten.co/articles/mammoth-1-and-elephant-1-frontier-decision-models",
-              "title": "Base Labs (Baseten) Mammoth-1 and Elephant-1: open-weight decision models top the Jev Decision Index",
-              "brief": {
-                "zh": "Jev 赛道首个带完整训练配方的开源权重第一名（不是榜单 PR）：双向注意力 + 数据配方可解释为何小模型能赢 Jev；接上午 OpenAI Decisions API GA 竞品线。TLDR AI 10-22 期补捞；primary 已 curl 验证。Jev 线 → 站内积累线（topics 记 Jev 同类仅续热，供合并时判断）。",
-                "en": "",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "liquid",
-            "reddit",
-            "huggingface",
-            "devto",
-            "hn",
-            "youtube",
-            "media"
-          ],
-          "score": 3,
-          "status": "published",
-          "externalUrls": [
-            "https://www.liquid.ai/blog/d1-open",
-            "https://huggingface.co/LiquidAI/d1-3B",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x01xg3/liquidaid13b_hugging_face/",
-            "https://huggingface.co/strandsagents/strands-decider-2b-hobson-v19",
-            "https://huggingface.co/vllm-sr/decision-2.0-vega-27b",
-            "https://huggingface.co/shhivv/taiga-s1",
-            "https://huggingface.co/spaces/hotchpotch/s1mb-leaderboard",
-            "https://dev.to/aws/how-to-use-the-openai-decisions-api-with-strands-agents-4eok",
-            "https://huggingface.co/perplexity-ai/pplx-decider-v1.1-27b",
-            "https://huggingface.co/bartowski/Cloudflare_clef-flash-GGUF",
-            "https://dev.to/theycallmeswift/i-got-jev-to-zero-mistakes-im-still-using-flash-lite-2mo7",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x0wg85/running_decision_model_locally_on_an_rtx_4090_to/",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x0sm1b/jevman_ai_decision_models_play_pacman/",
-            "https://huggingface.co/Phocinae/Phocinae-Largha-150M-v1",
-            "https://commandline.microsoft.com/microsoft-decision-1-model-foundry/",
-            "https://typesafe.ai/blog/series-ai",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x1w1nv/h2olightning4b_apache20_4b_decision_model/",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x21of7/pr_merged_v1systemone_support_in_vllm/",
-            "https://nishtahir.com/build-your-own-decision-model/",
-            "https://dev.to/nyaomaru/how-do-we-extract-the-why-from-a-pr-into-a-changelog-with-jev-52pk",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x29q4a/what_are_people_doing_with_decisions_jevlike/",
-            "https://www.reddit.com/r/MachineLearning/comments/1x33wgz/p_pecision_models_that_score_every_allowed_label/",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x3th4p/decision_30_open_multimodal_decision_models_from/",
-            "https://www.youtube.com/watch?v=DNDYYHsypZg",
-            "https://www.youtube.com/watch?v=_yFen1B8hdU",
-            "https://labs.baseten.co/articles/mammoth-1-and-elephant-1-frontier-decision-models"
-          ],
-          "blog": {
-            "zh": "/cn/blog/open-decision-models-2026-survey-benchmarks/",
-            "en": "/blog/open-decision-models-2026-survey-benchmarks/"
           }
         }
       ]
