@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-11T10:00:22+08:00",
+  "updatedAt": "2026-11-11T16:00:33+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -15,11 +15,99 @@
     "coding-tools": 3,
     "agents-oss": 2,
     "security": 8,
-    "research": 14,
+    "research": 16,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-11-11T16:00:00+08:00",
+      "label": {
+        "zh": "11月11日 16:00",
+        "en": "Nov 11 16:00",
+        "ja": "11月11日 16:00"
+      },
+      "items": [
+        {
+          "id": "t874",
+          "theme": "research",
+          "title": {
+            "zh": "失败分类占比是测量程序的属性：同一 Compositional Collapse 在六种判别顺序下可从 26.4% 到 76.4%，人对标签几乎无一致",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.13140：Beesetty 等把「失败分类占比」本身当成测量对象。他们定义 Compositional Collapse（模型注意到问题的必要子部分，随后丢掉或误用），并在公开多语数学基准的 2,316 条已评分记录上测了十二个模型、十一种语言。第一，50.1% 的失败同时带有多类证据，报告的多数类取决于分类器的检验顺序：对调两个检验会改变十二个模型中十一个的多数类，六种排序下 Collapse 占比从 26.4% 拉到 76.4%。第二，人对答案对错的一致 κ=0.932，对 Collapse 标签只有 κ=0.093；第二名母语者在 121 对可判定样本上彼此 κ=0.659，但各自与检验器 κ≤0.094。用人类说明原文重跑同一检验器后，与 Human 2 的 κ 从 0.147 升到 0.636，差距主要来自提示而非模型。第三，检验器给 Collapse 的频率是母语者的 1.81 倍，剔除孟加拉语与中文译本中一条被删从句的缺陷题后降到 1.17 倍。作者建议在跨模型比较失败模式占比前做四条廉价检查：报告标签共现、打乱平局、在共享独立样本上校验、审计系统分歧。数字均论文自报，未复现。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.13140：Beesetty 等把「失败分类占比」本身当成测量对象。他们定义 Compositional Collapse（模型注意到问题的必要子部分，随后丢掉或误用），并在公开多语数学基准的 2,316 条已评分记录上测了十二个模型、十一种语言。第一，50.1% 的失败同时带有多类证据，报告的多数类取决于分类器的检验顺序：对调两个检验会改变十二个模型中十一个的多数类，六种排序下 Collapse 占比从 26.4% 拉到 76.4%。第二，人对答案对错的一致 κ=0.932，对 Collapse 标签只有 κ=0.093；第二名母语者在 121 对可判定样本上彼此 κ=0.659，但各自与检验器 κ≤0.094。用人类说明原文重跑同一检验器后，与 Human 2 的 κ 从 0.147 升到 0.636，差距主要来自提示而非模型。第三，检验器给 Collapse 的频率是母语者的 1.81 倍，剔除孟加拉语与中文译本中一条被删从句的缺陷题后降到 1.17 倍。作者建议在跨模型比较失败模式占比前做四条廉价检查：报告标签共现、打乱平局、在共享独立样本上校验、审计系统分歧。数字均论文自报，未复现。",
+            "en": "arXiv 2611.13140: Beesetty et al. treat the reported share of a failure category as itself an object of measurement. They define Compositional Collapse (a model notices a required sub-part of a problem, then drops or misapplies it) and measure it across twelve models and eleven languages on a public multilingual math benchmark (2,316 graded records). First, 50.1% of failures carry evidence for more than one category, so the reported plurality depends on the order in which the classifier tests them: reversing two tests changes the plurality in eleven of twelve models, and across six orderings Collapse share spans 26.4% to 76.4%. Second, native speakers of all eleven languages agreed with the inspector at kappa = 0.932 on answer correctness but only kappa = 0.093 on Collapse. A second native speaker per language re-rated items; on 121 determinate pairs the two humans agree with each other at kappa = 0.659, while each agrees with the inspector at kappa <= 0.094. Re-running the same inspector with the human instructions verbatim raises kappa against Human 2 from 0.147 to 0.636, so the gap is largely attributable to the prompt, not the model. Third, the inspector labels Collapse 1.81 times as often as native speakers, but only 1.17 times once a defective benchmark item (a deleted clause in the Bengali and Chinese translations) is excluded. The authors recommend four cheap checks before comparing failure-mode rates across models: report label co-occurrence, permute the tie-break, validate on a shared independent sample, and audit systematic disagreements. Self-reported, not reproduced.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.13140",
+              "title": "Agreeing on the Answer but Not the Reason: Measurement Limits of LLM Reasoning Failure Taxonomies",
+              "brief": {
+                "zh": "arXiv 2611.13140：Beesetty 等把「失败分类占比」本身当成测量对象。他们定义 Compositional Collapse（模型注意到问题的必要子部分，随后丢掉或误用），并在公开多语数学基准的 2,316 条已评分记录上测了十二个模型、十一种语言。第一，50.1% 的失败同时带有多类证据，报告的多数类取决于分类器的检验顺序：对调两个检验会改变十二个模型中十一个的多数类，六种排序下 Collapse 占比从 26.4% 拉到 76.4%。第二，人对答案对错的一致 κ=0.932，对 Collapse 标签只有 κ=0.093；第二名母语者在 121 对可判定样本上彼此 κ=0.659，但各自与检验器 κ≤0.094。用人类说明原文重跑同一检验器后，与 Human 2 的 κ 从 0.147 升到 0.636，差距主要来自提示而非模型。第三，检验器给 Collapse 的频率是母语者的 1.81 倍，剔除孟加拉语与中文译本中一条被删从句的缺陷题后降到 1.17 倍。作者建议在跨模型比较失败模式占比前做四条廉价检查：报告标签共现、打乱平局、在共享独立样本上校验、审计系统分歧。数字均论文自报，未复现。",
+                "en": "arXiv 2611.13140: Beesetty et al. treat the reported share of a failure category as itself an object of measurement. They define Compositional Collapse (a model notices a required sub-part of a problem, then drops or misapplies it) and measure it across twelve models and eleven languages on a public multilingual math benchmark (2,316 graded records). First, 50.1% of failures carry evidence for more than one category, so the reported plurality depends on the order in which the classifier tests them: reversing two tests changes the plurality in eleven of twelve models, and across six orderings Collapse share spans 26.4% to 76.4%. Second, native speakers of all eleven languages agreed with the inspector at kappa = 0.932 on answer correctness but only kappa = 0.093 on Collapse. A second native speaker per language re-rated items; on 121 determinate pairs the two humans agree with each other at kappa = 0.659, while each agrees with the inspector at kappa <= 0.094. Re-running the same inspector with the human instructions verbatim raises kappa against Human 2 from 0.147 to 0.636, so the gap is largely attributable to the prompt, not the model. Third, the inspector labels Collapse 1.81 times as often as native speakers, but only 1.17 times once a defective benchmark item (a deleted clause in the Bengali and Chinese translations) is excluded. The authors recommend four cheap checks before comparing failure-mode rates across models: report label co-occurrence, permute the tie-break, validate on a shared independent sample, and audit systematic disagreements. Self-reported, not reproduced.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.13140"
+          ]
+        },
+        {
+          "id": "t875",
+          "theme": "research",
+          "title": {
+            "zh": "海量激活会带偏稀疏自编码器：最多 99.9% 的方差堆在第一主成分，解释方差与消融损伤两项指标都被扭曲",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.13548：Delisle 与 Tan 指出海量激活（massive activations）会把最多 99.9% 的激活方差堆到第一主成分，从而同时带偏稀疏自编码器常用的「解释方差」和「消融损伤」。因 PC1 没有唯一稀疏分解，每次训练会用不同特征去重建它：最重要的 50 个特征里平均有 47 个对不上另一次独立训练（随机抽 50 个约 27 个对不上）。一本词典可以报 99.96% 解释方差，却仍漏掉 PC1 以外 33% 的方差。作者先去掉 PC1 再训练 SAE、重建时把 PC1 加回：受影响模型上 top-50 特征共享率从 4–39.5% 升到 73–99.5%；同等 TopK 稀疏下对模型的损伤最多少 44%，内容重建误差最多降 33.9%。配套代码 github.com/nathandelisle/massive-saes。数字均论文自报，未复现。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.13548：Delisle 与 Tan 指出海量激活（massive activations）会把最多 99.9% 的激活方差堆到第一主成分，从而同时带偏稀疏自编码器常用的「解释方差」和「消融损伤」。因 PC1 没有唯一稀疏分解，每次训练会用不同特征去重建它：最重要的 50 个特征里平均有 47 个对不上另一次独立训练（随机抽 50 个约 27 个对不上）。一本词典可以报 99.96% 解释方差，却仍漏掉 PC1 以外 33% 的方差。作者先去掉 PC1 再训练 SAE、重建时把 PC1 加回：受影响模型上 top-50 特征共享率从 4–39.5% 升到 73–99.5%；同等 TopK 稀疏下对模型的损伤最多少 44%，内容重建误差最多降 33.9%。配套代码 github.com/nathandelisle/massive-saes。数字均论文自报，未复现。",
+            "en": "arXiv 2611.13548: Delisle and Tan show that massive activations put up to 99.9% of activation variance along the first principal component (PC1), which undermines the two metrics commonly used to evaluate sparse autoencoders: variance explained and ablation damage. Because PC1 has no unique sparse decomposition, each SAE run rebuilds it from a different set of features. On average, 47 of the 50 most important features are unmatched in a separate run, compared with about 27 of a random 50. A dictionary can report 99.96% of variance explained while leaving 33% of the variance outside PC1 unexplained. The authors train the SAE on activations with PC1 removed, then add PC1 back to the reconstruction. In affected models, the top-50 feature sharing rate rises from 4-39.5% to 73-99.5%. At the same TopK sparsity, the resulting SAE degrades the model up to 44% less and reduces content reconstruction error by up to 33.9%. Code is at github.com/nathandelisle/massive-saes. Self-reported, not reproduced.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.13548",
+              "title": "Massive Activations Confound Sparse Autoencoders",
+              "brief": {
+                "zh": "arXiv 2611.13548：Delisle 与 Tan 指出海量激活（massive activations）会把最多 99.9% 的激活方差堆到第一主成分，从而同时带偏稀疏自编码器常用的「解释方差」和「消融损伤」。因 PC1 没有唯一稀疏分解，每次训练会用不同特征去重建它：最重要的 50 个特征里平均有 47 个对不上另一次独立训练（随机抽 50 个约 27 个对不上）。一本词典可以报 99.96% 解释方差，却仍漏掉 PC1 以外 33% 的方差。作者先去掉 PC1 再训练 SAE、重建时把 PC1 加回：受影响模型上 top-50 特征共享率从 4–39.5% 升到 73–99.5%；同等 TopK 稀疏下对模型的损伤最多少 44%，内容重建误差最多降 33.9%。配套代码 github.com/nathandelisle/massive-saes。数字均论文自报，未复现。",
+                "en": "arXiv 2611.13548: Delisle and Tan show that massive activations put up to 99.9% of activation variance along the first principal component (PC1), which undermines the two metrics commonly used to evaluate sparse autoencoders: variance explained and ablation damage. Because PC1 has no unique sparse decomposition, each SAE run rebuilds it from a different set of features. On average, 47 of the 50 most important features are unmatched in a separate run, compared with about 27 of a random 50. A dictionary can report 99.96% of variance explained while leaving 33% of the variance outside PC1 unexplained. The authors train the SAE on activations with PC1 removed, then add PC1 back to the reconstruction. In affected models, the top-50 feature sharing rate rises from 4-39.5% to 73-99.5%. At the same TopK sparsity, the resulting SAE degrades the model up to 44% less and reduces content reconstruction error by up to 33.9%. Code is at github.com/nathandelisle/massive-saes. Self-reported, not reproduced.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.13548"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-11T10:00:00+08:00",
       "label": {
