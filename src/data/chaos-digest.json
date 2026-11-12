@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-11T16:00:33+08:00",
+  "updatedAt": "2026-11-12T10:00:23+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,323 @@
     "other"
   ],
   "themeCounts": {
-    "models": 6,
+    "models": 7,
     "coding-tools": 3,
-    "agents-oss": 2,
+    "agents-oss": 1,
     "security": 8,
-    "research": 16,
+    "research": 17,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-11-12T10:00:00+08:00",
+      "label": {
+        "zh": "11月12日 10:00",
+        "en": "Nov 12 10:00",
+        "ja": "11月12日 10:00"
+      },
+      "items": [
+        {
+          "id": "t708",
+          "theme": "research",
+          "title": {
+            "zh": "可解释性三连：SAE 批判性综述（138 篇）× Goodfire「Neural networks are clean」× 追溯并切除 LLM「slop」文风",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "多来源综合候选：综述 + 产业研究 + 社区实证三角，能写「SAE/可解释性是否已可用于改行为」；待 Trends bot 测主词。 10-16 Trends（trends bot）：「sparse autoencoders」7d 0.21 / 24h 0.45 vs gpts 65.33 / 13.50 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Goodfire」7d 0.10 vs gpts 0.84 未过。 Goodfire 研究文（11-10，Tigges、Kowal、McGrath、Lewis、Cammarata）《Neurons as an interpretable basis》挑战「MLP 神经元天然多义、不可解释」的通行看法：以 SwiGLU 神经元为对象，论证按激活强度稀疏化后神经元处于可解释区间；用子电路把神经元计算聚成若干「模式」（含双负激活恢复推理、地名多义消歧等案例，并与随机方向基线对比）；用 agentic neuron science 自动生成描述，并以检测、模式分类、模拟、输入合成评估；配套公开神经元图谱。主张直接用神经元替代 SAE 字典作分析单位，与本行 SAE 批判综述及 Goodfire「Neural networks are clean」同一条线，也可对照 t875（海量激活带偏 SAE）。本轮只读到摘要、作者、日期与目录，数据表未读，结论未核。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "多来源综合候选：综述 + 产业研究 + 社区实证三角，能写「SAE/可解释性是否已可用于改行为」；待 Trends bot 测主词。 10-16 Trends（trends bot）：「sparse autoencoders」7d 0.21 / 24h 0.45 vs gpts 65.33 / 13.50 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Goodfire」7d 0.10 vs gpts 0.84 未过。 Goodfire 研究文（11-10，Tigges、Kowal、McGrath、Lewis、Cammarata）《Neurons as an interpretable basis》挑战「MLP 神经元天然多义、不可解释」的通行看法：以 SwiGLU 神经元为对象，论证按激活强度稀疏化后神经元处于可解释区间；用子电路把神经元计算聚成若干「模式」（含双负激活恢复推理、地名多义消歧等案例，并与随机方向基线对比）；用 agentic neuron science 自动生成描述，并以检测、模式分类、模拟、输入合成评估；配套公开神经元图谱。主张直接用神经元替代 SAE 字典作分析单位，与本行 SAE 批判综述及 Goodfire「Neural networks are clean」同一条线，也可对照 t875（海量激活带偏 SAE）。本轮只读到摘要、作者、日期与目录，数据表未读，结论未核。",
+            "en": "Synthesis candidate: SAE critical survey + Goodfire + slop-tracing; awaiting Trends bot on its own term. 10-16 Trends (trends bot): sparse autoencoders 7d 0.21 / 24h 0.45 vs gpts 65.33 / 13.50 — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"Goodfire\" 7d 0.10 vs gpts 0.84 — not passed. Goodfire research post (Nov 10; Tigges, Kowal, McGrath, Lewis, Cammarata), \"Neurons as an interpretable basis,\" challenges the common view that MLP neurons are inherently polysemantic and uninterpretable. Working with SwiGLU neurons, it argues that once sparsified by activation strength they fall in an interpretable regime; it groups neuron computation into a few modes via subcircuits (with cases such as double-negative activations restoring reasoning and place-name disambiguation, compared against random-direction baselines); it generates descriptions with an agentic neuron-science pipeline evaluated by detection, mode classification, simulation and input synthesis; and it releases a public neuron atlas. The post proposes neurons rather than SAE dictionaries as the unit of analysis, continuing this row's SAE critique and Goodfire's \"Neural networks are clean,\" and contrasting with t875 on massive activations confounding SAEs. Only the abstract, authors, date and contents were read this sweep; data tables were not, and claims are unverified.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.20139",
+              "title": "Sparse Autoencoders for Mechanistic Interpretability in NLP: A Critical Survey of Recoverability, Interpretability, and Utility",
+              "brief": {
+                "zh": "深耕候选：梳理138篇 SAE 研究的批判性综述，给出任务导向的分类法，并分别审视可恢复性、可解释性、机制忠实度和行为效用的证据，正好借此做一篇「SAE 到底靠不靠谱」的综合解读。",
+                "en": "Critical survey of 138 SAE papers with a task-oriented taxonomy, assessing recoverability, interpretability, mechanistic faithfulness and behavioral utility.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://already-clean.goodfire.com/",
+              "title": "Neural networks are clean",
+              "brief": {
+                "zh": "Goodfire 可解释性研究，HN 501 分",
+                "en": "Goodfire interpretability essay \"Neural networks are clean\"; HN 501 points / 196 comments.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/MachineLearning/comments/1x64lbk/tracing_where_llm_slop_style_comes_from_in_the/",
+              "title": "Tracing where LLM 'slop' style comes from in the model and in training, and cutting it out [R]",
+              "brief": {
+                "zh": "追溯 LLM「slop」文风在模型与训练中的来源并切除",
+                "en": "r/MachineLearning research post tracing where LLM 'slop' style originates in the model and training, and removing it.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.goodfire.com/research/neurons-as-an-interpretable-basis",
+              "title": "Goodfire：MLP 神经元本身就是可解释基——稀疏、可简洁描述、可预测（附神经元图谱与 agentic 描述流程）",
+              "brief": {
+                "zh": "Goodfire 研究文（11-10，Tigges、Kowal、McGrath、Lewis、Cammarata）《Neurons as an interpretable basis》挑战「MLP 神经元天然多义、不可解释」的通行看法：以 SwiGLU 神经元为对象，论证按激活强度稀疏化后神经元处于可解释区间；用子电路把神经元计算聚成若干「模式」（含双负激活恢复推理、地名多义消歧等案例，并与随机方向基线对比）；用 agentic neuron science 自动生成描述，并以检测、模式分类、模拟、输入合成评估；配套公开神经元图谱。主张直接用神经元替代 SAE 字典作分析单位，与本行 SAE 批判综述及 Goodfire「Neural networks are clean」同一条线，也可对照 t875（海量激活带偏 SAE）。本轮只读到摘要、作者、日期与目录，数据表未读，结论未核。",
+                "en": "Goodfire research post (Nov 10; Tigges, Kowal, McGrath, Lewis, Cammarata), \"Neurons as an interpretable basis,\" challenges the common view that MLP neurons are inherently polysemantic and uninterpretable. Working with SwiGLU neurons, it argues that once sparsified by activation strength they fall in an interpretable regime; it groups neuron computation into a few modes via subcircuits (with cases such as double-negative activations restoring reasoning and place-name disambiguation, compared against random-direction baselines); it generates descriptions with an agentic neuron-science pipeline evaluated by detection, mode classification, simulation and input synthesis; and it releases a public neuron atlas. The post proposes neurons rather than SAE dictionaries as the unit of analysis, continuing this row's SAE critique and Goodfire's \"Neural networks are clean,\" and contrasting with t875 on massive activations confounding SAEs. Only the abstract, authors, date and contents were read this sweep; data tables were not, and claims are unverified.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "hn",
+            "reddit",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.20139",
+            "https://already-clean.goodfire.com/",
+            "https://www.reddit.com/r/MachineLearning/comments/1x64lbk/tracing_where_llm_slop_style_comes_from_in_the/",
+            "https://www.goodfire.com/research/neurons-as-an-interpretable-basis"
+          ]
+        },
+        {
+          "id": "t824",
+          "theme": "models",
+          "title": {
+            "zh": "Astra 直接读写权重来改进 Qwen：「权重空间编程」——让 LLM 把神经网络权重当成可读可改的程序（HN 当日最高 1909/605；r/ML「Sparks of Weight-Space Programming」同步热议）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "单篇深读候选：LLM 读写权重改进 Qwen；正文与数字待核，缺可靠核心词。续源：Honnibal 反驳 × Willison 本地复现。 Nathan Barry 博客（11-09，HN 241/36）《Can a Linear Program Do Weight-Space Programming?》复读 MIT CSAIL「Sparks of Weight-Space Programming」中 GPT-6 Astra 改 Qwen3.5-0.8B 权重的公开日志：该编辑本质是修复思维死循环（基座在 MATH-500 上 93% 答案撞到 32,768 token 上限），做法是在第 15、19 层 down_proj 上沿「循环方向」u 做秩 1 修改；Astra 找 u 用 15 分钟，选哪些列、改多少花了约 8 小时。作者把选列问题写成最小化 L1 的线性规划，用自写 GPU PDHG 求解器约一分钟一次：用 Astra 的方向，改动权重从 130,188 降到 16,291（约 1/8），GSM8K 69.6、MATH-500 51.7、IFEval 59.7，与 Astra 的 68.2/50.9/61.9 在噪声内持平；不用 LLM、改用重复检测器得到的启发式方向，可达约 93%。随机方向无效。进一步发现该编辑接近对每个 token 的恒定推力，同等强度的 steering vector 在 1× 时几乎复现全部效果（0.5× 循环回来，2× 推理崩坏）。作者自认局限：只测一个模型，层仍沿用 Astra 的选择，只测了去循环。补本行正反材料：「权重空间编程」这次的成果在机制上可还原为一个方向加一个 LP，支持「不是 Astra 独有能力」的读法。数字为作者自报，未复现。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "单篇深读候选：LLM 读写权重改进 Qwen；正文与数字待核，缺可靠核心词。续源：Honnibal 反驳 × Willison 本地复现。 Nathan Barry 博客（11-09，HN 241/36）《Can a Linear Program Do Weight-Space Programming?》复读 MIT CSAIL「Sparks of Weight-Space Programming」中 GPT-6 Astra 改 Qwen3.5-0.8B 权重的公开日志：该编辑本质是修复思维死循环（基座在 MATH-500 上 93% 答案撞到 32,768 token 上限），做法是在第 15、19 层 down_proj 上沿「循环方向」u 做秩 1 修改；Astra 找 u 用 15 分钟，选哪些列、改多少花了约 8 小时。作者把选列问题写成最小化 L1 的线性规划，用自写 GPU PDHG 求解器约一分钟一次：用 Astra 的方向，改动权重从 130,188 降到 16,291（约 1/8），GSM8K 69.6、MATH-500 51.7、IFEval 59.7，与 Astra 的 68.2/50.9/61.9 在噪声内持平；不用 LLM、改用重复检测器得到的启发式方向，可达约 93%。随机方向无效。进一步发现该编辑接近对每个 token 的恒定推力，同等强度的 steering vector 在 1× 时几乎复现全部效果（0.5× 循环回来，2× 推理崩坏）。作者自认局限：只测一个模型，层仍沿用 Astra 的选择，只测了去循环。补本行正反材料：「权重空间编程」这次的成果在机制上可还原为一个方向加一个 LP，支持「不是 Astra 独有能力」的读法。数字为作者自报，未复现。",
+            "en": "Deep-read candidate: an LLM that reads and writes weights to improve Qwen; details unverified, no reliable core term. Follow-up: Honnibal says the Astra post is misleading; Willison shows a local Qwen 3.8 27B can interpret weights too. Nathan Barry's post (Nov 9, HN 241/36), \"Can a Linear Program Do Weight-Space Programming?\", rereads the released logs of GPT-6 Astra editing Qwen3.5-0.8B in MIT CSAIL's \"Sparks of Weight-Space Programming.\" The edit mainly fixes thinking loops (93% of base-model MATH-500 answers hit the 32,768-token limit) through a rank-1 change along a loop direction u in the down_proj of layers 15 and 19; Astra found u in 15 minutes but spent about 8 hours choosing which columns to change and by how much. Barry casts that choice as an L1-minimizing linear program solved in about a minute with a custom GPU PDHG solver. Using Astra's direction, changed weights fall from 130,188 to 16,291 (about 8x fewer) with GSM8K 69.6, MATH-500 51.7 and IFEval 59.7, matching Astra's 68.2, 50.9 and 61.9 within noise; a heuristic direction from a repetition detector, with no LLM, gets about 93% of the way. A random direction does nothing. The edit turns out to be close to a constant push on every token, and a steering vector of the same average strength recovers essentially the whole fix at 1x (loops return at 0.5x, reasoning breaks at 2x). Stated limits: one model, layers still taken from Astra, only loop removal tested. Adds evidence to this row that the headline result reduces to one direction plus an LP, supporting the reading that it is not a capability unique to Astra. Self-reported, not reproduced.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://rikiyat.github.io/blog/weight-space-programming/",
+              "title": "Astra can read and write weights to improve Qwen",
+              "brief": {
+                "zh": "HN 当日最高帖（1909 分/605 评）：「权重空间编程」——让 LLM 直接读写神经网络权重来改进 Qwen；r/MachineLearning 同步帖 Sparks of Weight-Space Programming [R] 也在热议。适合做机制深读。",
+                "en": "Astra can read and write weights to improve Qwen",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://honnibal.dev/blog/astra-read-write-misleading",
+              "title": "The 'Astra can read and write weights to improve Qwen' post is misleading",
+              "brief": {
+                "zh": "Matthew Honnibal 反驳昨日 HN 第一的 Astra 权重空间编程帖（inbox 已有 astra-weight-space-programming-qwen），称其误导；正反两方可合成一篇深读。",
+                "en": "The 'Astra can read and write weights to improve Qwen' post is misleading",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
+              "title": "Qwen 3.8 27B on my laptop can interpret model weights, too",
+              "brief": {
+                "zh": "Simon Willison 在笔记本上用 Qwen 3.8 27B 复现「模型读权重」；与 Astra 原帖及 Honnibal 反驳同一条线。",
+                "en": "Qwen 3.8 27B on my laptop can interpret model weights, too",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://nathan.rs/posts/weight-space-lp/",
+              "title": "Can a Linear Program Do Weight-Space Programming?",
+              "brief": {
+                "zh": "Nathan Barry 博客（11-09，HN 241/36）《Can a Linear Program Do Weight-Space Programming?》复读 MIT CSAIL「Sparks of Weight-Space Programming」中 GPT-6 Astra 改 Qwen3.5-0.8B 权重的公开日志：该编辑本质是修复思维死循环（基座在 MATH-500 上 93% 答案撞到 32,768 token 上限），做法是在第 15、19 层 down_proj 上沿「循环方向」u 做秩 1 修改；Astra 找 u 用 15 分钟，选哪些列、改多少花了约 8 小时。作者把选列问题写成最小化 L1 的线性规划，用自写 GPU PDHG 求解器约一分钟一次：用 Astra 的方向，改动权重从 130,188 降到 16,291（约 1/8），GSM8K 69.6、MATH-500 51.7、IFEval 59.7，与 Astra 的 68.2/50.9/61.9 在噪声内持平；不用 LLM、改用重复检测器得到的启发式方向，可达约 93%。随机方向无效。进一步发现该编辑接近对每个 token 的恒定推力，同等强度的 steering vector 在 1× 时几乎复现全部效果（0.5× 循环回来，2× 推理崩坏）。作者自认局限：只测一个模型，层仍沿用 Astra 的选择，只测了去循环。补本行正反材料：「权重空间编程」这次的成果在机制上可还原为一个方向加一个 LP，支持「不是 Astra 独有能力」的读法。数字为作者自报，未复现。",
+                "en": "Nathan Barry's post (Nov 9, HN 241/36), \"Can a Linear Program Do Weight-Space Programming?\", rereads the released logs of GPT-6 Astra editing Qwen3.5-0.8B in MIT CSAIL's \"Sparks of Weight-Space Programming.\" The edit mainly fixes thinking loops (93% of base-model MATH-500 answers hit the 32,768-token limit) through a rank-1 change along a loop direction u in the down_proj of layers 15 and 19; Astra found u in 15 minutes but spent about 8 hours choosing which columns to change and by how much. Barry casts that choice as an L1-minimizing linear program solved in about a minute with a custom GPU PDHG solver. Using Astra's direction, changed weights fall from 130,188 to 16,291 (about 8x fewer) with GSM8K 69.6, MATH-500 51.7 and IFEval 59.7, matching Astra's 68.2, 50.9 and 61.9 within noise; a heuristic direction from a repetition detector, with no LLM, gets about 93% of the way. A random direction does nothing. The edit turns out to be close to a constant push on every token, and a steering vector of the same average strength recovers essentially the whole fix at 1x (loops return at 0.5x, reasoning breaks at 2x). Stated limits: one model, layers still taken from Astra, only loop removal tested. Adds evidence to this row that the headline result reduces to one direction plus an LP, supporting the reading that it is not a capability unique to Astra. Self-reported, not reproduced.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://rikiyat.github.io/blog/weight-space-programming/",
+            "https://honnibal.dev/blog/astra-read-write-misleading",
+            "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
+            "https://nathan.rs/posts/weight-space-lp/"
+          ]
+        },
+        {
+          "id": "t857",
+          "theme": "models",
+          "title": {
+            "zh": "Anthropic 发布 Claude Fable 5.2 与 Mythos 5.2：同一底层模型，Fable 全面开放、Mythos 经核验项目提供（官方自报）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "Anthropic 官方发布 Claude Fable 5.2 与 Mythos 5.2（标注 Nov 9）：同一底层模型，Fable 带网络安全/生物学防护对全员开放，Mythos 经生命科学与 Cyber Verification Program 向受审组织提供。自称编码/推理/视觉提升，输出较 5.1 最多快 30%，定价每百万 token $8/$40，可选 fast mode（生成最多快 2.5 倍，$16/$80）。建议日常编码仍用 Opus 5.5，更难或更长程的工作再用 Fable/Mythos；Fable 可作 Advisor 或 Orchestrator。官网还给出一系列未独立核实的成果与基准，包括 FrontierCode 2.0 Xhigh 49.1%、早期版本将生产服务从 Python 迁到 Rust 后启动约快 26 倍、一千余 subagent 八天做出可在笔记本启动的操作系统、三件可工作电子原型、两个黑洞物理未解问题、约一千个 agent 在 30 小时内形式化费马大定理等。HN 944/568。单点发布，仅 Chaos。 Artificial Analysis 页面标题称 Claude Fable 5.2 得分 65、为目前最高；第三方榜单单方口径，方法与复现均未核。HN 276/199。补本行第三方评测传播，不把 65 分写成官方或已核实的第一。 Claude 官方频道视频 Introducing Claude Fable 5.2；搜索列表显示约 15.5 万次观看、约 6 小时，观看页返回 LOGIN_REQUIRED，播放量与精确发布时间未核，不把搜索列表播放量当成已证实数字。内容为同一发布说明，无独立实验。 Claude 官方频道视频《Fable 5.2 or Opus? When to use each model in Claude Code》（11-12 01:30 Asia/Shanghai 发布，抓取时约 18.5 万次观看 / 约 8.2 小时）。页面简介：在 Claude Code 里先用 Opus 5.5，更有野心或开放式的技术工作升到 Fable 5.2，范围清楚的工作降到 Sonnet 5.5 或 Haiku 5.5 以省钱，并可把一件工作拆给不同模型；附官方书面指南 claude.dev/blog/which-claude-model-should-you-build-with，可用性与用量限制因套餐而异。补本行「发布后怎么选模型」的官方用法建议，与已收的发布视频 6a1QSJlsYpU 不同。视频正文未看，播放量为抓取时页面数字。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Anthropic 官方发布 Claude Fable 5.2 与 Mythos 5.2（标注 Nov 9）：同一底层模型，Fable 带网络安全/生物学防护对全员开放，Mythos 经生命科学与 Cyber Verification Program 向受审组织提供。自称编码/推理/视觉提升，输出较 5.1 最多快 30%，定价每百万 token $8/$40，可选 fast mode（生成最多快 2.5 倍，$16/$80）。建议日常编码仍用 Opus 5.5，更难或更长程的工作再用 Fable/Mythos；Fable 可作 Advisor 或 Orchestrator。官网还给出一系列未独立核实的成果与基准，包括 FrontierCode 2.0 Xhigh 49.1%、早期版本将生产服务从 Python 迁到 Rust 后启动约快 26 倍、一千余 subagent 八天做出可在笔记本启动的操作系统、三件可工作电子原型、两个黑洞物理未解问题、约一千个 agent 在 30 小时内形式化费马大定理等。HN 944/568。单点发布，仅 Chaos。 Artificial Analysis 页面标题称 Claude Fable 5.2 得分 65、为目前最高；第三方榜单单方口径，方法与复现均未核。HN 276/199。补本行第三方评测传播，不把 65 分写成官方或已核实的第一。 Claude 官方频道视频 Introducing Claude Fable 5.2；搜索列表显示约 15.5 万次观看、约 6 小时，观看页返回 LOGIN_REQUIRED，播放量与精确发布时间未核，不把搜索列表播放量当成已证实数字。内容为同一发布说明，无独立实验。 Claude 官方频道视频《Fable 5.2 or Opus? When to use each model in Claude Code》（11-12 01:30 Asia/Shanghai 发布，抓取时约 18.5 万次观看 / 约 8.2 小时）。页面简介：在 Claude Code 里先用 Opus 5.5，更有野心或开放式的技术工作升到 Fable 5.2，范围清楚的工作降到 Sonnet 5.5 或 Haiku 5.5 以省钱，并可把一件工作拆给不同模型；附官方书面指南 claude.dev/blog/which-claude-model-should-you-build-with，可用性与用量限制因套餐而异。补本行「发布后怎么选模型」的官方用法建议，与已收的发布视频 6a1QSJlsYpU 不同。视频正文未看，播放量为抓取时页面数字。",
+            "en": "Anthropic launched Claude Fable 5.2 and Mythos 5.2 (dated Nov 9): the same underlying model, with Fable generally available under cyber and biology safeguards and Mythos offered to vetted organizations through the Life Sciences and Cyber Verification Programs. The company claims gains in coding, reasoning and vision, up to 30% faster output than 5.1, pricing of $8/$40 per million tokens, and an optional fast mode up to 2.5x at $16/$80. It recommends Opus 5.5 for everyday coding and Fable or Mythos for harder or longer-horizon work; Fable can act as Advisor or Orchestrator. Benchmarks and demos (FrontierCode 2.0 at 49.1% Xhigh, a Python-to-Rust migration with about 26x faster startup, a laptop-bootable OS from 1,000-plus subagents over eight days, three working electronics prototypes, two open black-hole physics problems, and formalizing Fermat Last Theorem in about 30 hours) are Anthropic claims and were not independently verified. HN 944/568. Single launch, Chaos only. An Artificial Analysis page titles Claude Fable 5.2 at 65, calling it the highest so far. Third-party leaderboard, method and reproduction unverified. HN 276/199. Coverage of an external score, not an official or confirmed first-place result. Official Claude channel video introducing Claude Fable 5.2. Search listings show about 155,000 views over roughly six hours; the watch page returned LOGIN_REQUIRED, so view counts and the exact publish time are unverified and are not treated as confirmed. Same launch announcement, no independent experiment. Official Claude channel video \"Fable 5.2 or Opus? When to use each model in Claude Code\" (published 01:30 Nov 12 Asia/Shanghai; about 185,000 views over roughly 8.2 hours when captured). The page description advises starting on Opus 5.5 in Claude Code, moving up to Fable 5.2 for more ambitious or open-ended technical work, stepping down to Sonnet 5.5 or Haiku 5.5 for well-scoped work at lower cost, and splitting one job across models; it links an official written guide at claude.dev/blog/which-claude-model-should-you-build-with and notes that availability and usage limits vary by plan. Adds official model-selection guidance to this launch row, distinct from the earlier launch video 6a1QSJlsYpU. The video itself was not watched; view counts are as shown at capture.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+              "title": "Claude Fable 5.2 and Mythos 5.2",
+              "brief": {
+                "zh": "Anthropic 官方发布 Claude Fable 5.2 与 Mythos 5.2（标注 Nov 9）：同一底层模型，Fable 带网络安全/生物学防护对全员开放，Mythos 经生命科学与 Cyber Verification Program 向受审组织提供。自称编码/推理/视觉提升，输出较 5.1 最多快 30%，定价每百万 token $8/$40，可选 fast mode（生成最多快 2.5 倍，$16/$80）。建议日常编码仍用 Opus 5.5，更难或更长程的工作再用 Fable/Mythos；Fable 可作 Advisor 或 Orchestrator。官网还给出一系列未独立核实的成果与基准，包括 FrontierCode 2.0 Xhigh 49.1%、早期版本将生产服务从 Python 迁到 Rust 后启动约快 26 倍、一千余 subagent 八天做出可在笔记本启动的操作系统、三件可工作电子原型、两个黑洞物理未解问题、约一千个 agent 在 30 小时内形式化费马大定理等。HN 944/568。单点发布，仅 Chaos。",
+                "en": "Anthropic launched Claude Fable 5.2 and Mythos 5.2 (dated Nov 9): the same underlying model, with Fable generally available under cyber and biology safeguards and Mythos offered to vetted organizations through the Life Sciences and Cyber Verification Programs. The company claims gains in coding, reasoning and vision, up to 30% faster output than 5.1, pricing of $8/$40 per million tokens, and an optional fast mode up to 2.5x at $16/$80. It recommends Opus 5.5 for everyday coding and Fable or Mythos for harder or longer-horizon work; Fable can act as Advisor or Orchestrator. Benchmarks and demos (FrontierCode 2.0 at 49.1% Xhigh, a Python-to-Rust migration with about 26x faster startup, a laptop-bootable OS from 1,000-plus subagents over eight days, three working electronics prototypes, two open black-hole physics problems, and formalizing Fermat Last Theorem in about 30 hours) are Anthropic claims and were not independently verified. HN 944/568. Single launch, Chaos only.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://artificialanalysis.ai/models/claude-fable-5-2",
+              "title": "Claude Fable 5.2 Scores 65 on Artificial Analysis, Highest So Far",
+              "brief": {
+                "zh": "Artificial Analysis 页面标题称 Claude Fable 5.2 得分 65、为目前最高；第三方榜单单方口径，方法与复现均未核。HN 276/199。补本行第三方评测传播，不把 65 分写成官方或已核实的第一。",
+                "en": "An Artificial Analysis page titles Claude Fable 5.2 at 65, calling it the highest so far. Third-party leaderboard, method and reproduction unverified. HN 276/199. Coverage of an external score, not an official or confirmed first-place result.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=6a1QSJlsYpU",
+              "title": "Introducing Claude Fable 5.2",
+              "brief": {
+                "zh": "Claude 官方频道视频 Introducing Claude Fable 5.2；搜索列表显示约 15.5 万次观看、约 6 小时，观看页返回 LOGIN_REQUIRED，播放量与精确发布时间未核，不把搜索列表播放量当成已证实数字。内容为同一发布说明，无独立实验。",
+                "en": "Official Claude channel video introducing Claude Fable 5.2. Search listings show about 155,000 views over roughly six hours; the watch page returned LOGIN_REQUIRED, so view counts and the exact publish time are unverified and are not treated as confirmed. Same launch announcement, no independent experiment.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=C33hJGt-ySg",
+              "title": "Fable 5.2 or Opus? When to use each model in Claude Code",
+              "brief": {
+                "zh": "Claude 官方频道视频《Fable 5.2 or Opus? When to use each model in Claude Code》（11-12 01:30 Asia/Shanghai 发布，抓取时约 18.5 万次观看 / 约 8.2 小时）。页面简介：在 Claude Code 里先用 Opus 5.5，更有野心或开放式的技术工作升到 Fable 5.2，范围清楚的工作降到 Sonnet 5.5 或 Haiku 5.5 以省钱，并可把一件工作拆给不同模型；附官方书面指南 claude.dev/blog/which-claude-model-should-you-build-with，可用性与用量限制因套餐而异。补本行「发布后怎么选模型」的官方用法建议，与已收的发布视频 6a1QSJlsYpU 不同。视频正文未看，播放量为抓取时页面数字。",
+                "en": "Official Claude channel video \"Fable 5.2 or Opus? When to use each model in Claude Code\" (published 01:30 Nov 12 Asia/Shanghai; about 185,000 views over roughly 8.2 hours when captured). The page description advises starting on Opus 5.5 in Claude Code, moving up to Fable 5.2 for more ambitious or open-ended technical work, stepping down to Sonnet 5.5 or Haiku 5.5 for well-scoped work at lower cost, and splitting one job across models; it links an official written guide at claude.dev/blog/which-claude-model-should-you-build-with and notes that availability and usage limits vary by plan. Adds official model-selection guidance to this launch row, distinct from the earlier launch video 6a1QSJlsYpU. The video itself was not watched; view counts are as shown at capture.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+            "https://artificialanalysis.ai/models/claude-fable-5-2",
+            "https://www.youtube.com/watch?v=6a1QSJlsYpU",
+            "https://www.youtube.com/watch?v=C33hJGt-ySg"
+          ]
+        },
+        {
+          "id": "t878",
+          "theme": "models",
+          "title": {
+            "zh": "Google A2UI 1.0：智能体生成式 UI 开放协议首个稳定版（双向函数调用、可在 MCP Apps 内渲染）",
+            "en": "Google A2UI 1.0",
+            "ja": "Google A2UI 1.0"
+          },
+          "summary": {
+            "zh": "Google A2UI Team（11-11 美西）在 Google Developers Blog 发布 A2UI 1.0，自称生成式 UI 开放协议的首个稳定版：agent 只描述要显示什么，各端用原生组件渲染。1.0 新增双向函数调用（UI 与 agent 互调，例如实时查询可用性的选择器）、可访问性与元数据扩展；渲染器覆盖 React/Angular/Lit、Flutter、SwiftUI（Compose 仍为 0.9.1）；Web 与 Flutter 渲染器可在 MCP Apps 中运行，因而能出现在 Claude、Gemini 等宿主里；Python/TypeScript/Dart Agent SDK 可为 agent harness 生成 skills、翻译消息并纠错。路线图提到对 Jev 等决策模型的官方 SDK 支持；自称 Atlassian、Alation、Bloomberg、字节跳动已在用。官方正文本轮只经搜索摘要读到，IT之家为二手转述；采用方与能力均为自报，未核。单点发布，仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Google A2UI Team（11-11 美西）在 Google Developers Blog 发布 A2UI 1.0，自称生成式 UI 开放协议的首个稳定版：agent 只描述要显示什么，各端用原生组件渲染。1.0 新增双向函数调用（UI 与 agent 互调，例如实时查询可用性的选择器）、可访问性与元数据扩展；渲染器覆盖 React/Angular/Lit、Flutter、SwiftUI（Compose 仍为 0.9.1）；Web 与 Flutter 渲染器可在 MCP Apps 中运行，因而能出现在 Claude、Gemini 等宿主里；Python/TypeScript/Dart Agent SDK 可为 agent harness 生成 skills、翻译消息并纠错。路线图提到对 Jev 等决策模型的官方 SDK 支持；自称 Atlassian、Alation、Bloomberg、字节跳动已在用。官方正文本轮只经搜索摘要读到，IT之家为二手转述；采用方与能力均为自报，未核。单点发布，仅 Chaos。",
+            "en": "The Google A2UI Team announced A2UI 1.0 on the Google Developers Blog (Nov 11, US Pacific), calling it the first stable release of an open protocol for agent-generated UI: the agent describes what to show and each client renders it with native components. Version 1.0 adds bidirectional function calls between UI and agent (for example a picker that checks availability live), plus accessibility and metadata extensions. Renderers cover React, Angular, Lit, Flutter and SwiftUI (Compose remains at 0.9.1); the web and Flutter renderers can run inside MCP Apps, so A2UI surfaces can appear in hosts such as Claude and Gemini. Python, TypeScript and Dart Agent SDKs can generate skills for an agent harness, translate messages and repair errors. The roadmap mentions official SDK support for decision models such as Jev, and Google names Atlassian, Alation, Bloomberg and ByteDance as users. The official post was read only through a search excerpt this sweep, and the ITHome piece is a secondary rewrite; adopters and capabilities are self-reported and unverified. Single release, Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://developers.googleblog.com/a2ui-10-build-delightful-fast-reliable-agentic-experiences/",
+              "title": "Google A2UI 1.0：智能体生成式 UI 开放协议首个稳定版（双向函数调用、MCP Apps 内渲染、Agent SDK 生成 skills）",
+              "brief": {
+                "zh": "Google A2UI Team（11-11 美西）在 Google Developers Blog 发布 A2UI 1.0，自称生成式 UI 开放协议的首个稳定版：agent 只描述要显示什么，各端用原生组件渲染。1.0 新增双向函数调用（UI 与 agent 互调，例如实时查询可用性的选择器）、可访问性与元数据扩展；渲染器覆盖 React/Angular/Lit、Flutter、SwiftUI（Compose 仍为 0.9.1）；Web 与 Flutter 渲染器可在 MCP Apps 中运行，因而能出现在 Claude、Gemini 等宿主里；Python/TypeScript/Dart Agent SDK 可为 agent harness 生成 skills、翻译消息并纠错。路线图提到对 Jev 等决策模型的官方 SDK 支持；自称 Atlassian、Alation、Bloomberg、字节跳动已在用。官方正文本轮只经搜索摘要读到，IT之家为二手转述；采用方与能力均为自报，未核。单点发布，仅 Chaos。",
+                "en": "The Google A2UI Team announced A2UI 1.0 on the Google Developers Blog (Nov 11, US Pacific), calling it the first stable release of an open protocol for agent-generated UI: the agent describes what to show and each client renders it with native components. Version 1.0 adds bidirectional function calls between UI and agent (for example a picker that checks availability live), plus accessibility and metadata extensions. Renderers cover React, Angular, Lit, Flutter and SwiftUI (Compose remains at 0.9.1); the web and Flutter renderers can run inside MCP Apps, so A2UI surfaces can appear in hosts such as Claude and Gemini. Python, TypeScript and Dart Agent SDKs can generate skills for an agent harness, translate messages and repair errors. The roadmap mentions official SDK support for decision models such as Jev, and Google names Atlassian, Alation, Bloomberg and ByteDance as users. The official post was read only through a search excerpt this sweep, and the ITHome piece is a secondary rewrite; adopters and capabilities are self-reported and unverified. Single release, Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://developers.googleblog.com/a2ui-10-build-delightful-fast-reliable-agentic-experiences/"
+          ]
+        },
+        {
+          "id": "t879",
+          "theme": "security",
+          "title": {
+            "zh": "Google 发布 Gemini Decisions API 与 Gemini Decision 1：单次前向给封闭选项打分，$0.10/百万输入、输出不计费（官方自报）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "Google 官方博客（11-11，DeepMind 的 Min Choi 与 Felix Yu）发布 Gemini Decisions API，由新模型 Gemini Decision 1（gemini-decision-1）驱动，经 Google AI Studio 的 Gemini API 提供。它面向工具选择、策略检查、模型路由、上下文评分这类封闭选择：一份多模态输入（文本、图像、音频、视频、PDF，最长 256K token）可同时挂最多 1,000 个独立问题，题型为是/否（noul）、2–255 选一（choice）与有序评分（score），每个答案带 0–1 置信度。模型不逐 token 生成，而是单次前向给候选打分；官方称端到端延迟 150–250 ms，1 到 100 个问题几乎不变，价格 $0.10/百万输入 token、输出不计费，在共享基准上比 Gemini 3.5 Flash-Lite 走 Interactions API 便宜近 5 倍，并称在 agent 路由、推理、排序、多模态基准上领先、校准误差最低。内部用例包括 Gemini Notebook 的模型路由（日常查询延迟最多降 40%）、Stitch 快速线框、CC 的表情选择、Search 中 MCP 工具的安全层。OpenRouter、LangChain、Vercel、LiteLLM、OpenCode 等集成在推进。HN 266/82。基准与延迟均为 Google 自报，未独立核实。单点发布，仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Google 官方博客（11-11，DeepMind 的 Min Choi 与 Felix Yu）发布 Gemini Decisions API，由新模型 Gemini Decision 1（gemini-decision-1）驱动，经 Google AI Studio 的 Gemini API 提供。它面向工具选择、策略检查、模型路由、上下文评分这类封闭选择：一份多模态输入（文本、图像、音频、视频、PDF，最长 256K token）可同时挂最多 1,000 个独立问题，题型为是/否（noul）、2–255 选一（choice）与有序评分（score），每个答案带 0–1 置信度。模型不逐 token 生成，而是单次前向给候选打分；官方称端到端延迟 150–250 ms，1 到 100 个问题几乎不变，价格 $0.10/百万输入 token、输出不计费，在共享基准上比 Gemini 3.5 Flash-Lite 走 Interactions API 便宜近 5 倍，并称在 agent 路由、推理、排序、多模态基准上领先、校准误差最低。内部用例包括 Gemini Notebook 的模型路由（日常查询延迟最多降 40%）、Stitch 快速线框、CC 的表情选择、Search 中 MCP 工具的安全层。OpenRouter、LangChain、Vercel、LiteLLM、OpenCode 等集成在推进。HN 266/82。基准与延迟均为 Google 自报，未独立核实。单点发布，仅 Chaos。",
+            "en": "A Google blog post dated Nov 11 (Min Choi and Felix Yu of Google DeepMind) introduces the Gemini Decisions API, powered by a new Gemini Decision 1 model (gemini-decision-1) in the Gemini API via Google AI Studio. It targets bounded choices such as tool selection, policy checks, model routing and context grading: one multimodal input (text, images, audio, video or PDF, up to 256K tokens) can carry up to 1,000 independent questions of three types, yes/no (noul), multiple choice over 2 to 255 options, and ordered rubric scores, each returned with a 0-1 confidence. The model scores options in a single forward pass instead of decoding tokens; Google claims 150-250 ms end-to-end latency that stays nearly flat from 1 to 100 questions, pricing of $0.10 per million input tokens with no output tokens billed, nearly 5x lower cost than Gemini 3.5 Flash-Lite through the Interactions API on a shared suite, and leading accuracy with the lowest calibration error on routing, reasoning, ranking and multimodal benchmarks. Internal uses include model routing in Gemini Notebook (up to 40% lower latency for everyday queries), rapid wireframes in Stitch, emoji picking in CC, and a safety layer for MCP tools in Search. Integrations with OpenRouter, LangChain, Vercel, LiteLLM, OpenCode and others are rolling out. HN 266/82. Benchmarks, latency and cost claims are Google's own and were not independently verified. Single launch, Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+              "title": "Gemini Decisions API",
+              "brief": {
+                "zh": "Google 官方博客（11-11，DeepMind 的 Min Choi 与 Felix Yu）发布 Gemini Decisions API，由新模型 Gemini Decision 1（gemini-decision-1）驱动，经 Google AI Studio 的 Gemini API 提供。它面向工具选择、策略检查、模型路由、上下文评分这类封闭选择：一份多模态输入（文本、图像、音频、视频、PDF，最长 256K token）可同时挂最多 1,000 个独立问题，题型为是/否（noul）、2–255 选一（choice）与有序评分（score），每个答案带 0–1 置信度。模型不逐 token 生成，而是单次前向给候选打分；官方称端到端延迟 150–250 ms，1 到 100 个问题几乎不变，价格 $0.10/百万输入 token、输出不计费，在共享基准上比 Gemini 3.5 Flash-Lite 走 Interactions API 便宜近 5 倍，并称在 agent 路由、推理、排序、多模态基准上领先、校准误差最低。内部用例包括 Gemini Notebook 的模型路由（日常查询延迟最多降 40%）、Stitch 快速线框、CC 的表情选择、Search 中 MCP 工具的安全层。OpenRouter、LangChain、Vercel、LiteLLM、OpenCode 等集成在推进。HN 266/82。基准与延迟均为 Google 自报，未独立核实。单点发布，仅 Chaos。",
+                "en": "A Google blog post dated Nov 11 (Min Choi and Felix Yu of Google DeepMind) introduces the Gemini Decisions API, powered by a new Gemini Decision 1 model (gemini-decision-1) in the Gemini API via Google AI Studio. It targets bounded choices such as tool selection, policy checks, model routing and context grading: one multimodal input (text, images, audio, video or PDF, up to 256K tokens) can carry up to 1,000 independent questions of three types, yes/no (noul), multiple choice over 2 to 255 options, and ordered rubric scores, each returned with a 0-1 confidence. The model scores options in a single forward pass instead of decoding tokens; Google claims 150-250 ms end-to-end latency that stays nearly flat from 1 to 100 questions, pricing of $0.10 per million input tokens with no output tokens billed, nearly 5x lower cost than Gemini 3.5 Flash-Lite through the Interactions API on a shared suite, and leading accuracy with the lowest calibration error on routing, reasoning, ranking and multimodal benchmarks. Internal uses include model routing in Gemini Notebook (up to 40% lower latency for everyday queries), rapid wireframes in Stitch, emoji picking in CC, and a safety layer for MCP tools in Search. Integrations with OpenRouter, LangChain, Vercel, LiteLLM, OpenCode and others are rolling out. HN 266/82. Benchmarks, latency and cost claims are Google's own and were not independently verified. Single launch, Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-11T16:00:00+08:00",
       "label": {
@@ -893,68 +1201,6 @@
       },
       "items": [
         {
-          "id": "t857",
-          "theme": "models",
-          "title": {
-            "zh": "Anthropic 发布 Claude Fable 5.2 与 Mythos 5.2：同一底层模型，Fable 全面开放、Mythos 经核验项目提供（官方自报）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Anthropic 官方发布 Claude Fable 5.2 与 Mythos 5.2（标注 Nov 9）：同一底层模型，Fable 带网络安全/生物学防护对全员开放，Mythos 经生命科学与 Cyber Verification Program 向受审组织提供。自称编码/推理/视觉提升，输出较 5.1 最多快 30%，定价每百万 token $8/$40，可选 fast mode（生成最多快 2.5 倍，$16/$80）。建议日常编码仍用 Opus 5.5，更难或更长程的工作再用 Fable/Mythos；Fable 可作 Advisor 或 Orchestrator。官网还给出一系列未独立核实的成果与基准，包括 FrontierCode 2.0 Xhigh 49.1%、早期版本将生产服务从 Python 迁到 Rust 后启动约快 26 倍、一千余 subagent 八天做出可在笔记本启动的操作系统、三件可工作电子原型、两个黑洞物理未解问题、约一千个 agent 在 30 小时内形式化费马大定理等。HN 944/568。单点发布，仅 Chaos。 Artificial Analysis 页面标题称 Claude Fable 5.2 得分 65、为目前最高；第三方榜单单方口径，方法与复现均未核。HN 276/199。补本行第三方评测传播，不把 65 分写成官方或已核实的第一。 Claude 官方频道视频 Introducing Claude Fable 5.2；搜索列表显示约 15.5 万次观看、约 6 小时，观看页返回 LOGIN_REQUIRED，播放量与精确发布时间未核，不把搜索列表播放量当成已证实数字。内容为同一发布说明，无独立实验。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Anthropic 官方发布 Claude Fable 5.2 与 Mythos 5.2（标注 Nov 9）：同一底层模型，Fable 带网络安全/生物学防护对全员开放，Mythos 经生命科学与 Cyber Verification Program 向受审组织提供。自称编码/推理/视觉提升，输出较 5.1 最多快 30%，定价每百万 token $8/$40，可选 fast mode（生成最多快 2.5 倍，$16/$80）。建议日常编码仍用 Opus 5.5，更难或更长程的工作再用 Fable/Mythos；Fable 可作 Advisor 或 Orchestrator。官网还给出一系列未独立核实的成果与基准，包括 FrontierCode 2.0 Xhigh 49.1%、早期版本将生产服务从 Python 迁到 Rust 后启动约快 26 倍、一千余 subagent 八天做出可在笔记本启动的操作系统、三件可工作电子原型、两个黑洞物理未解问题、约一千个 agent 在 30 小时内形式化费马大定理等。HN 944/568。单点发布，仅 Chaos。 Artificial Analysis 页面标题称 Claude Fable 5.2 得分 65、为目前最高；第三方榜单单方口径，方法与复现均未核。HN 276/199。补本行第三方评测传播，不把 65 分写成官方或已核实的第一。 Claude 官方频道视频 Introducing Claude Fable 5.2；搜索列表显示约 15.5 万次观看、约 6 小时，观看页返回 LOGIN_REQUIRED，播放量与精确发布时间未核，不把搜索列表播放量当成已证实数字。内容为同一发布说明，无独立实验。",
-            "en": "Anthropic launched Claude Fable 5.2 and Mythos 5.2 (dated Nov 9): the same underlying model, with Fable generally available under cyber and biology safeguards and Mythos offered to vetted organizations through the Life Sciences and Cyber Verification Programs. The company claims gains in coding, reasoning and vision, up to 30% faster output than 5.1, pricing of $8/$40 per million tokens, and an optional fast mode up to 2.5x at $16/$80. It recommends Opus 5.5 for everyday coding and Fable or Mythos for harder or longer-horizon work; Fable can act as Advisor or Orchestrator. Benchmarks and demos (FrontierCode 2.0 at 49.1% Xhigh, a Python-to-Rust migration with about 26x faster startup, a laptop-bootable OS from 1,000-plus subagents over eight days, three working electronics prototypes, two open black-hole physics problems, and formalizing Fermat Last Theorem in about 30 hours) are Anthropic claims and were not independently verified. HN 944/568. Single launch, Chaos only. An Artificial Analysis page titles Claude Fable 5.2 at 65, calling it the highest so far. Third-party leaderboard, method and reproduction unverified. HN 276/199. Coverage of an external score, not an official or confirmed first-place result. Official Claude channel video introducing Claude Fable 5.2. Search listings show about 155,000 views over roughly six hours; the watch page returned LOGIN_REQUIRED, so view counts and the exact publish time are unverified and are not treated as confirmed. Same launch announcement, no independent experiment.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
-              "title": "Claude Fable 5.2 and Mythos 5.2",
-              "brief": {
-                "zh": "Anthropic 官方发布 Claude Fable 5.2 与 Mythos 5.2（标注 Nov 9）：同一底层模型，Fable 带网络安全/生物学防护对全员开放，Mythos 经生命科学与 Cyber Verification Program 向受审组织提供。自称编码/推理/视觉提升，输出较 5.1 最多快 30%，定价每百万 token $8/$40，可选 fast mode（生成最多快 2.5 倍，$16/$80）。建议日常编码仍用 Opus 5.5，更难或更长程的工作再用 Fable/Mythos；Fable 可作 Advisor 或 Orchestrator。官网还给出一系列未独立核实的成果与基准，包括 FrontierCode 2.0 Xhigh 49.1%、早期版本将生产服务从 Python 迁到 Rust 后启动约快 26 倍、一千余 subagent 八天做出可在笔记本启动的操作系统、三件可工作电子原型、两个黑洞物理未解问题、约一千个 agent 在 30 小时内形式化费马大定理等。HN 944/568。单点发布，仅 Chaos。",
-                "en": "Anthropic launched Claude Fable 5.2 and Mythos 5.2 (dated Nov 9): the same underlying model, with Fable generally available under cyber and biology safeguards and Mythos offered to vetted organizations through the Life Sciences and Cyber Verification Programs. The company claims gains in coding, reasoning and vision, up to 30% faster output than 5.1, pricing of $8/$40 per million tokens, and an optional fast mode up to 2.5x at $16/$80. It recommends Opus 5.5 for everyday coding and Fable or Mythos for harder or longer-horizon work; Fable can act as Advisor or Orchestrator. Benchmarks and demos (FrontierCode 2.0 at 49.1% Xhigh, a Python-to-Rust migration with about 26x faster startup, a laptop-bootable OS from 1,000-plus subagents over eight days, three working electronics prototypes, two open black-hole physics problems, and formalizing Fermat Last Theorem in about 30 hours) are Anthropic claims and were not independently verified. HN 944/568. Single launch, Chaos only.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://artificialanalysis.ai/models/claude-fable-5-2",
-              "title": "Claude Fable 5.2 Scores 65 on Artificial Analysis, Highest So Far",
-              "brief": {
-                "zh": "Artificial Analysis 页面标题称 Claude Fable 5.2 得分 65、为目前最高；第三方榜单单方口径，方法与复现均未核。HN 276/199。补本行第三方评测传播，不把 65 分写成官方或已核实的第一。",
-                "en": "An Artificial Analysis page titles Claude Fable 5.2 at 65, calling it the highest so far. Third-party leaderboard, method and reproduction unverified. HN 276/199. Coverage of an external score, not an official or confirmed first-place result.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=6a1QSJlsYpU",
-              "title": "Introducing Claude Fable 5.2",
-              "brief": {
-                "zh": "Claude 官方频道视频 Introducing Claude Fable 5.2；搜索列表显示约 15.5 万次观看、约 6 小时，观看页返回 LOGIN_REQUIRED，播放量与精确发布时间未核，不把搜索列表播放量当成已证实数字。内容为同一发布说明，无独立实验。",
-                "en": "Official Claude channel video introducing Claude Fable 5.2. Search listings show about 155,000 views over roughly six hours; the watch page returned LOGIN_REQUIRED, so view counts and the exact publish time are unverified and are not treated as confirmed. Same launch announcement, no independent experiment.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.anthropic.com/claude-fable-and-mythos-5-2",
-            "https://artificialanalysis.ai/models/claude-fable-5-2",
-            "https://www.youtube.com/watch?v=6a1QSJlsYpU"
-          ]
-        },
-        {
           "id": "t860",
           "theme": "research",
           "title": {
@@ -1157,167 +1403,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://arxiv.org/abs/2611.08639"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-09T10:00:00+08:00",
-      "label": {
-        "zh": "11月9日 10:00",
-        "en": "Nov 9 10:00",
-        "ja": "11月9日 10:00"
-      },
-      "items": [
-        {
-          "id": "t769",
-          "theme": "models",
-          "title": {
-            "zh": "agent 权限控制面从「人逐步批准」转向「机器把关 + 凭据不进上下文」：Claude 全端默认 auto mode（分类器拦危险命令 89% vs 人工审批 14%）× 1Password for Agents（agent 凭密钥证明身份、凭据由 1Password 代填，银行同日封禁凭据型 agent）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。续源：GitHub Next Enclaves 跨仓信息流隔离 × 复刻游戏规则用户反弹。续源：GMTK「我的游戏被 AI 复刻」开发者侧案例。 Apiiro 称 Claude Code 的「Don't Ask Again」许可机制令 1,122 个公开 GitHub 文件暴露密码（HN 173/122）。仅来源自报，泄露路径及统计口径未核；本轮尝试直取 Apiiro 正文遇 HTTP 500。接本行审批疲劳、权限持久化与凭据隔离机制，不把标题当作独立证实，也不访问任何含秘密的文件。 SavvyNik 对 Claude Code「Don't Ask Again」持续授权与密钥暴露风险的评论视频；视频未看、未复现，引 Apiiro 研究及权限文档。与上午 Apiiro 同一证据链，非独立验证；Apiiro 正文抓取此前 HTTP 500，泄露路径、数量、触发条件均未经核实，绝不写作已证实漏洞。与此前 Cursor 扩展市场恶意包事件不同。仅权限边界讨论续源，不以播放量或二次评论提升证据等级。 Stripe Developers官方Link agent wallet演示（视频未看）：浏览器agent经WebMCP请求绑定单一商户与金额的Link pay token，Link CLI可为订阅建立周期支出请求；每次支出都要人批准。补本行“凭据委派+模型外审批”的具体支付实现；文档/CLI/演示效果未独立核验，不处理任何实际支付、订阅或卡资料，单产品发布不另立正式题。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：89% vs 14% 是硬数据，凭据委派给出机制解；缺核心词。续源：Claude Duet 完整安全架构（补录）。续源：skip-permissions 隐藏拒绝清单也有了关闭开关。续源：Claude Code 经服务端 flag 远程注入系统提示规则。续源：GitHub Next Enclaves 跨仓信息流隔离 × 复刻游戏规则用户反弹。续源：GMTK「我的游戏被 AI 复刻」开发者侧案例。 Apiiro 称 Claude Code 的「Don't Ask Again」许可机制令 1,122 个公开 GitHub 文件暴露密码（HN 173/122）。仅来源自报，泄露路径及统计口径未核；本轮尝试直取 Apiiro 正文遇 HTTP 500。接本行审批疲劳、权限持久化与凭据隔离机制，不把标题当作独立证实，也不访问任何含秘密的文件。 SavvyNik 对 Claude Code「Don't Ask Again」持续授权与密钥暴露风险的评论视频；视频未看、未复现，引 Apiiro 研究及权限文档。与上午 Apiiro 同一证据链，非独立验证；Apiiro 正文抓取此前 HTTP 500，泄露路径、数量、触发条件均未经核实，绝不写作已证实漏洞。与此前 Cursor 扩展市场恶意包事件不同。仅权限边界讨论续源，不以播放量或二次评论提升证据等级。 Stripe Developers官方Link agent wallet演示（视频未看）：浏览器agent经WebMCP请求绑定单一商户与金额的Link pay token，Link CLI可为订阅建立周期支出请求；每次支出都要人批准。补本行“凭据委派+模型外审批”的具体支付实现；文档/CLI/演示效果未独立核验，不处理任何实际支付、订阅或卡资料，单产品发布不另立正式题。",
-            "en": "Synthesis candidate: classifier-gated auto mode (89% vs 14% for manual approval) plus credential delegation that keeps secrets out of agent context; no clean core term. Follow-up: Claude Duet safety architecture, approvals outside the model and credential isolation. Follow-up: Claude Code adds an undocumented env var that lifts the last hard blocks under skip-permissions. Follow-up: Claude Code receives a remotely pushed, non-disableable prompt rule via a server-side flag. Follow-up: GitHub Next Enclaves for cross-repo agent info-flow control, plus user backlash over Claude Code's no-game-recreation rule. Follow-up: GMTK developer-side case of a Claude Code near-clone of Word Play (~12 min agent time; view count unverified). Apiiro claims Claude Code's \"Don't Ask Again\" permission mechanism exposed passwords in 1,122 public GitHub files (HN 173/122). The leak path and count are vendor claims, not independently verified; fetching the article returned HTTP 500. Follow-up on persistent approvals and credential isolation. No secret-bearing files were accessed. SavvyNik comments on persistent Claude Code permission grants and alleged secret exposure, citing Apiiro and permission docs. Video unwatched, no reproduction; this repeats the morning Apiiro evidence chain rather than independently confirming it. The primary article previously returned HTTP 500; leak paths, counts and exploit conditions remain unverified, not an established vulnerability. Distinct from the Cursor marketplace malicious extension incident. Commentary follow-up only; view count does not strengthen evidence. Stripe Developers describes Link agent wallet: browser agents request merchant-and-amount-scoped Link pay tokens via WebMCP, and Link CLI creates recurring-spend requests for subscriptions; each spend requires human approval. A concrete credential-delegation and external-approval example. Video unwatched and docs/CLI/demo not independently tested. No payments, subscriptions or card data were handled; product-release follow-up only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://x.com/claudeai/status/2113360845409583307",
-              "title": "Claude apps (web/desktop/mobile) switch to auto mode by default — classifier-gated actions instead of step approvals",
-              "brief": {
-                "zh": "权限模型从人工审批转向分类器把关并扩到消费端，89% vs 14% 是可引用的 harness 安全数据点；接 t700/t698 harness 默认值。来源 aihot 摘录，推文未经 fetcher 点查验证。站内积累线（harness / 控制）。",
-                "en": "Claude web, desktop and mobile switch to auto mode by default next week; a separate classifier blocks risky actions, catching 89% of dangerous commands in testing vs 14% for manual approval (via aihot, tweet not verified).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-              "title": "1Password for Agents: agents log in on your behalf without ever seeing the password",
-              "brief": {
-                "zh": "agent 凭据委派的机制级方案 × 银行封禁凭据型 agent，构成 agent 身份/凭据一组；接 t731 OpenCode 凭据安全综合候选。站内积累线（agent 安全/控制）。",
-                "en": "1Password for Agents lets an agent prove identity with a unique key; after user approval 1Password fills credentials so the secret never enters agent context. Same day, major US banks lock out agents logging in with customer credentials.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://claude.com/blog/claude-duet-safety-privacy-and-security",
-              "title": "Claude Duet Safety, Privacy, and Security（Anthropic 官方拆解：审批卡 + 模型外分类器 + 凭证不进模型）",
-              "brief": {
-                "zh": "站内积累线（agent 安全/控制）：与已归档 1Password for Agents（10-23）、Claude auto mode（10-23）、Managed Agents 凭证代理同一条线，但这篇是 Anthropic 一手的‘审批在模型外 + 凭证隔离 + 浏览器边界’完整架构，机制信息密度高。非本窗口新发（10-23 08:00 北京时间发布），前几轮未归档（topics.md 仅有 Duet 产品发布 t765），故补录。tag exploit-candidate。",
-                "en": "tag exploit-candidate。",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.ithome.com/1/019/476.htm",
-              "title": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
-              "brief": {
-                "zh": "站内积累线 (sandbox/security-control, coding-agent permission layers). It gives a concrete look at the layering inside a harness: the 'skip permissions' mode still had a hidden denylist, and now that denylist has its own off switch, which is undocumented. It pairs with t769 (auto-mode classifier / approv",
-                "en": "Claude Code v2.1.311 adds CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS, lifting the last hard blocks (e.g. rm -rf ~) under --dangerously-skip-permissions",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
-              "title": "Anthropic 在 Claude Code 的 Opus 5.5 提示中加入「不复刻具体现有游戏」规则，经服务端 tengu_heron_brook 下发、无法关闭",
-              "brief": {
-                "zh": "站内积累线（harness / security-control）：编码 agent 的行为约束不在模型权重也不在用户配置，而是厂商通过服务端 flag 远程注入 harness 系统提示、按模型分包、用户不可关——是 harness 层策略控制面的一手样本；也牵出反编译/静态重编译灰区与提示级护栏可绕过的问题。接 t690（Opus 5.5 反编译/移植、500B token 反编译 FPS）。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://githubnext.com/posts/enclaves/",
-              "title": "GitHub Next: Enclaves — limit what agents learn about private repos in cross-repo Agentic Workflows",
-              "brief": {
-                "zh": "Concrete deterministic info-flow control for agents, a design answer to prompt-injection exfil; complements t803/t808/t769 approval-outside-the-model line. Published 11-02 (before window) but surfaced only via the never-retrieved TLDR 11-03 issue; not in archive/topics. 站内积累线: sandbox / security-con",
-                "en": "GitHub Next: Enclaves — limit what agents learn about private repos in cross-repo Agentic Workflows",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=fgX8yKFVJeQ",
-              "title": "There's No Point in Paying for Claude Anymore (Because of Anthropic)",
-              "brief": {
-                "zh": "Biggest on-topic VPH this run: Turkish-language backlash over Anthropic quietly adding a Claude Code rule against recreating existing games, plus Opus 5.5 refusing reverse-engineering (REA) work.",
-                "en": "There's No Point in Paying for Claude Anymore (Because of Anthropic)",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=8LMau1qXPYE",
-              "title": "My game was cloned with AI... what do I do?",
-              "brief": {
-                "zh": "Biggest video this run and a new angle on the Claude Code game-clone story: Mark Brown (Word Play) got an email from hobbyists who vibecoded a near-clone with Claude Code in ~12 minutes of agent time.",
-                "en": "My game was cloned with AI... what do I do?",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hacker_news",
-              "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again",
-              "title": "Claude Code's \\\"Don't Ask Again\\\" exposes passwords in 1,122 public GitHub files",
-              "brief": {
-                "zh": "Apiiro 称 Claude Code 的「Don't Ask Again」许可机制令 1,122 个公开 GitHub 文件暴露密码（HN 173/122）。仅来源自报，泄露路径及统计口径未核；本轮尝试直取 Apiiro 正文遇 HTTP 500。接本行审批疲劳、权限持久化与凭据隔离机制，不把标题当作独立证实，也不访问任何含秘密的文件。",
-                "en": "Apiiro claims Claude Code's \"Don't Ask Again\" permission mechanism exposed passwords in 1,122 public GitHub files (HN 173/122). The leak path and count are vendor claims, not independently verified; fetching the article returned HTTP 500. Follow-up on persistent approvals and credential isolation. No secret-bearing files were accessed.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=_BCQ7qbFXGA",
-              "title": "Claude Code's \\\"Don't Ask Again\\\" Is a Security Nightmare..",
-              "brief": {
-                "zh": "SavvyNik 对 Claude Code「Don't Ask Again」持续授权与密钥暴露风险的评论视频；视频未看、未复现，引 Apiiro 研究及权限文档。与上午 Apiiro 同一证据链，非独立验证；Apiiro 正文抓取此前 HTTP 500，泄露路径、数量、触发条件均未经核实，绝不写作已证实漏洞。与此前 Cursor 扩展市场恶意包事件不同。仅权限边界讨论续源，不以播放量或二次评论提升证据等级。",
-                "en": "SavvyNik comments on persistent Claude Code permission grants and alleged secret exposure, citing Apiiro and permission docs. Video unwatched, no reproduction; this repeats the morning Apiiro evidence chain rather than independently confirming it. The primary article previously returned HTTP 500; leak paths, counts and exploit conditions remain unverified, not an established vulnerability. Distinct from the Cursor marketplace malicious extension incident. Commentary follow-up only; view count does not strengthen evidence.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=_sksSrRhQjE",
-              "title": "AI agents can now check out and subscribe with Stripe's Link agent wallet",
-              "brief": {
-                "zh": "Stripe Developers官方Link agent wallet演示（视频未看）：浏览器agent经WebMCP请求绑定单一商户与金额的Link pay token，Link CLI可为订阅建立周期支出请求；每次支出都要人批准。补本行“凭据委派+模型外审批”的具体支付实现；文档/CLI/演示效果未独立核验，不处理任何实际支付、订阅或卡资料，单产品发布不另立正式题。",
-                "en": "Stripe Developers describes Link agent wallet: browser agents request merchant-and-amount-scoped Link pay tokens via WebMCP, and Link CLI creates recurring-spend requests for subscriptions; each spend requires human approval. A concrete credential-delegation and external-approval example. Video unwatched and docs/CLI/demo not independently tested. No payments, subscriptions or card data were handled; product-release follow-up only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "youtube",
-            "hacker_news"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://x.com/claudeai/status/2113360845409583307",
-            "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-            "https://claude.com/blog/claude-duet-safety-privacy-and-security",
-            "https://www.ithome.com/1/019/476.htm",
-            "https://www.gamedeveloper.com/programming/anthropic-appears-to-have-ordered-ai-tool-claude-to-stop-remaking-video-games",
-            "https://githubnext.com/posts/enclaves/",
-            "https://www.youtube.com/watch?v=fgX8yKFVJeQ",
-            "https://www.youtube.com/watch?v=8LMau1qXPYE",
-            "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again",
-            "https://www.youtube.com/watch?v=_BCQ7qbFXGA",
-            "https://www.youtube.com/watch?v=_sksSrRhQjE"
           ]
         }
       ]
@@ -2675,149 +2760,6 @@
           "blog": {
             "zh": "/cn/blog/openrouter-agent-model-selection-eval-gates-escalation-routing/",
             "en": "/blog/openrouter-agent-model-selection-eval-gates-escalation-routing/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-12T17:00:00+08:00",
-      "label": {
-        "zh": "10月12日 17:00",
-        "en": "Oct 12 17:00",
-        "ja": "10月12日 17:00"
-      },
-      "items": [
-        {
-          "id": "t371",
-          "theme": "security",
-          "title": {
-            "zh": "OpenAI DevDay：Codex 云环境 + Security Cloud + Decisions/Agents API",
-            "en": "Codex Moves to the Cloud: Reusable Environments, Codex Security Cloud, and the Agents API with Computer Use (DevDay 2026)",
-            "ja": "Codex Moves to the Cloud: Reusable Environments, Codex Security Cloud, and the Agents API with Computer Use (DevDay 2026)"
-          },
-          "summary": {
-            "zh": "一级源把 coding-agent harness 写成可复用云环境+安全扫描+Decisions 路由+Agents API Computer Use 10-13：Codex code review GitHub GA。 OpenAI 官方 DevDay 2026 讲座 Harness-as-a-Service：经 Agents API 使用 Codex harness，由 OpenAI 管理编排，应用侧提供环境。页面简介称可在自己的环境里跑 agent、维持长任务，并说明哪些基础设施由 OpenAI 管理。观看页显示约 8 次观看 / 14 分钟（官方早期上传）。讲座内容未独立核实。补本行 Agents API / Codex harness 的官方场次视频；published 不 bump。 OpenAI 官方 DevDay 2026 讲座 Codex Security: From Vulnerability to Verified Fix。公开简介称 Codex Security / Defense Factory 覆盖情境化、扫描、 enrichment、修补与集成，包括回放攻击路径以确认修复，并由人决定何时继续。相关公开页包括 DevDay recap 与 github.com/openai/codex-security。搜索列表约 3 次观看，观看页曾返回 LOGIN_REQUIRED，播放量与时间戳未核。讲座与演示结果未独立核实。补本行 Security Cloud / Codex Security 的官方场次视频；published 不 bump。",
-            "en": "OpenAI DevDay 2026, read as one harness story: Codex Cloud's reusable environments, Codex Security Cloud's scan–validate–fix loop, and the Agents API's computer use and multi-agent support—compared with Claude Cowork's cloud sandbox and the local CLI, plus a selection checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "一级源把 coding-agent harness 写成可复用云环境+安全扫描+Decisions 路由+Agents API Computer Use 10-13：Codex code review GitHub GA。 OpenAI 官方 DevDay 2026 讲座 Harness-as-a-Service：经 Agents API 使用 Codex harness，由 OpenAI 管理编排，应用侧提供环境。页面简介称可在自己的环境里跑 agent、维持长任务，并说明哪些基础设施由 OpenAI 管理。观看页显示约 8 次观看 / 14 分钟（官方早期上传）。讲座内容未独立核实。补本行 Agents API / Codex harness 的官方场次视频；published 不 bump。 OpenAI 官方 DevDay 2026 讲座 Codex Security: From Vulnerability to Verified Fix。公开简介称 Codex Security / Defense Factory 覆盖情境化、扫描、 enrichment、修补与集成，包括回放攻击路径以确认修复，并由人决定何时继续。相关公开页包括 DevDay recap 与 github.com/openai/codex-security。搜索列表约 3 次观看，观看页曾返回 LOGIN_REQUIRED，播放量与时间戳未核。讲座与演示结果未独立核实。补本行 Security Cloud / Codex Security 的官方场次视频；published 不 bump。",
-            "en": "OpenAI DevDay packages coding-agent harness as reusable cloud envs, Security Cloud scans, a Decisions API for next-action routing, and Agents API Computer Use—harness, sandbox, and decision control in one ship. Oct 13: Codex code review GA on GitHub. Official OpenAI DevDay 2026 talk, Harness-as-a-Service: Building with the Agents API, on using the Codex harness through the Agents API while OpenAI manages orchestration and the app supplies the environment. The page description mentions running agents in your own environment, keeping long-running tasks going, and seeing which infrastructure OpenAI manages. The watch page showed about 8 views / 14 minutes (official early upload). Talk contents were not independently verified. Adds an official session video to this DevDay / Agents API row; preserve published updated_at. Official OpenAI DevDay 2026 talk, Codex Security: From Vulnerability to Verified Fix. Public recaps describe Codex Security / Defense Factory as contextualize, scan, enrich, patch and integrate, including replaying an attack path to confirm a fix, with a human deciding when to proceed. Related public pages include the DevDay recap and github.com/openai/codex-security. Search listings showed about 3 views; a watch-page fetch returned LOGIN_REQUIRED, so view counts and timestamps are unverified. Talk contents and demo results were not independently verified. Adds an official session video to this Security Cloud / Codex Security row; preserve published updated_at.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "openai",
-              "url": "https://openai.com/index/devday-2026-recap/",
-              "title": "DevDay 2026 recap",
-              "brief": {
-                "zh": "DevDay：Codex 可复用云环境、Security Cloud、Decisions API、Agents API Computer Use 与 Ultrafast。",
-                "en": "DevDay ships Codex reusable cloud environments, Security Cloud, Decisions API, Agents API Computer Use, and Ultrafast token generation.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=7Bv68f5szSU",
-              "title": "Meet the all new Codex Cloud",
-              "brief": {
-                "zh": "OpenAI 官方 Codex Cloud 发布片，~7h·3万播。",
-                "en": "Official OpenAI Codex Cloud launch video (~30.7k views in ~7h).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=IZXv6a78NDw",
-              "title": "Code review is no longer the bottleneck",
-              "brief": {
-                "zh": "续源：YT 1023 OpenAI 官方「Code review is no longer the bottleneck」29",
-                "en": "Follow-up source.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=b7l_Dhe1h8M",
-              "title": "Harness-as-a-Service: Building with the Agents API | DevDay 2026",
-              "brief": {
-                "zh": "OpenAI 官方 DevDay 2026 讲座 Harness-as-a-Service：经 Agents API 使用 Codex harness，由 OpenAI 管理编排，应用侧提供环境。页面简介称可在自己的环境里跑 agent、维持长任务，并说明哪些基础设施由 OpenAI 管理。观看页显示约 8 次观看 / 14 分钟（官方早期上传）。讲座内容未独立核实。补本行 Agents API / Codex harness 的官方场次视频；published 不 bump。",
-                "en": "Official OpenAI DevDay 2026 talk, Harness-as-a-Service: Building with the Agents API, on using the Codex harness through the Agents API while OpenAI manages orchestration and the app supplies the environment. The page description mentions running agents in your own environment, keeping long-running tasks going, and seeing which infrastructure OpenAI manages. The watch page showed about 8 views / 14 minutes (official early upload). Talk contents were not independently verified. Adds an official session video to this DevDay / Agents API row; preserve published updated_at.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=gUQN7juxvVI",
-              "title": "Codex Security: From Vulnerability to Verified Fix | DevDay 2026",
-              "brief": {
-                "zh": "OpenAI 官方 DevDay 2026 讲座 Codex Security: From Vulnerability to Verified Fix。公开简介称 Codex Security / Defense Factory 覆盖情境化、扫描、 enrichment、修补与集成，包括回放攻击路径以确认修复，并由人决定何时继续。相关公开页包括 DevDay recap 与 github.com/openai/codex-security。搜索列表约 3 次观看，观看页曾返回 LOGIN_REQUIRED，播放量与时间戳未核。讲座与演示结果未独立核实。补本行 Security Cloud / Codex Security 的官方场次视频；published 不 bump。",
-                "en": "Official OpenAI DevDay 2026 talk, Codex Security: From Vulnerability to Verified Fix. Public recaps describe Codex Security / Defense Factory as contextualize, scan, enrich, patch and integrate, including replaying an attack path to confirm a fix, with a human deciding when to proceed. Related public pages include the DevDay recap and github.com/openai/codex-security. Search listings showed about 3 views; a watch-page fetch returned LOGIN_REQUIRED, so view counts and timestamps are unverified. Talk contents and demo results were not independently verified. Adds an official session video to this Security Cloud / Codex Security row; preserve published updated_at.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "openai",
-            "youtube",
-            "techcrunch"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://openai.com/index/devday-2026-recap/",
-            "https://www.youtube.com/watch?v=7Bv68f5szSU",
-            "https://techcrunch.com/2026/09/30/openais-jev-clone-could-help-the-frontier-lab-stop-its-swarming-agents/",
-            "https://www.youtube.com/watch?v=IZXv6a78NDw",
-            "https://www.youtube.com/watch?v=b7l_Dhe1h8M",
-            "https://www.youtube.com/watch?v=gUQN7juxvVI"
-          ],
-          "blog": {
-            "zh": "/cn/blog/openai-devday-codex-cloud-security-agents-api-2026/",
-            "en": "/blog/openai-devday-codex-cloud-security-agents-api-2026/"
-          }
-        },
-        {
-          "id": "t332",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Google Gemini：Gems → skills（11/17 迁移）",
-            "en": "Gemini Gems Become Skills on Nov 17: Custom Assistants Turn into Stackable Slash Commands — What to Check Before Migration",
-            "ja": "Gemini Gems Become Skills on Nov 17: Custom Assistants Turn into Stackable Slash Commands — What to Check Before Migration"
-          },
-          "summary": {
-            "zh": "大厂把自定义 agent 人设收成可组合 slash-skills——与站内 SkillOpt/SkillGym/CF skill 同构产品化",
-            "en": "Gemini Gems auto-migrate to skills from Nov 17, 2026 (Workspace 2027). What changes in invocation, stacking, files, sharing and age, what migration doesn't guarantee, and a checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "大厂把自定义 agent 人设收成可组合 slash-skills——与站内 SkillOpt/SkillGym/CF skill 同构产品化",
-            "en": "",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "techcrunch",
-              "url": "https://techcrunch.com/2026/09/28/google-is-killing-off-geminis-gems-in-favor-of-skills/",
-              "title": "Google is killing off Gemini’s Gems in favor of skills",
-              "brief": {
-                "zh": "Gemini App 将于 2026-11-17 起用 skills 取代 Gems：可 slash 调用、可组合，自动迁移——任务 agent 人设收成 skills 层。",
-                "en": "Gemini will replace Gems with slash-invocable, composable skills starting Nov 17, 2026, with auto-migration—consolidating task-agent personas into a skills layer.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "techcrunch"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://techcrunch.com/2026/09/28/google-is-killing-off-geminis-gems-in-favor-of-skills/"
-          ],
-          "blog": {
-            "zh": "/cn/blog/gemini-gems-to-skills-migration-2026/",
-            "en": "/blog/gemini-gems-to-skills-migration-2026/"
           }
         }
       ]
