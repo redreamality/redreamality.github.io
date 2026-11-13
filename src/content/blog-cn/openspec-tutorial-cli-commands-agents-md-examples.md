@@ -11,7 +11,9 @@ translatedFrom: 'openspec-tutorial-cli-commands-agents-md-examples'
 
 ## 在 Windows、macOS 和 Linux 安装 OpenSpec
 
-2026 年 10 月 26 日更新：npm 的 `latest` 已发布 **1.15.0**。独立程序不需要 Node.js；npm 包需要 Node.js **20.19.0+**。选择一种安装方式即可，平台要求见[官方安装文档](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/installation.md)。
+以下安装说明保留 2026 年 10 月 26 日更新时的 **1.15.0**，它是当时 npm 的 `latest`。该版本的独立程序不需要 Node.js；npm 包需要 Node.js **20.19.0+**。选择一种安装方式即可，平台要求见[官方安装文档](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/installation.md)。
+
+2026 年 11 月 13 日，[npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) 的 `latest` 是 **2.0.0**，其 npm 包需要 Node.js **22.12.0+**。安装示例仍固定为 1.15.0，练习仍固定为 1.13.2。运行下面的独立程序安装命令前，PowerShell 中先运行 `$env:OPENSPEC_VERSION = 'v1.15.0'`，macOS/Linux 中先运行 `export OPENSPEC_VERSION=v1.15.0`，才能保留该版本。
 
 Windows PowerShell 使用官方独立程序安装脚本：
 
@@ -25,7 +27,7 @@ macOS 或 Linux 使用：
 curl -fsSL https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/scripts/binary/install.sh | sh
 ```
 
-这些命令执行 `main` 分支上的官方安装器，下载发布版二进制并核对 SHA256SUMS，不是编译 `main`。要固定二进制版本，先在当前 shell 设置环境变量 `OPENSPEC_VERSION=v1.15.0`。Windows 默认安装到 `%LOCALAPPDATA%\Programs\openspec` 并加入用户 PATH；macOS 和 Linux 默认安装到 `~/.local/bin`。安装后打开新终端。
+这些命令执行 `main` 分支上的官方安装器，下载发布版二进制并核对 SHA256SUMS，不是编译 `main`。请在上面设置版本的同一个 shell 中运行安装器。Windows 默认安装到 `%LOCALAPPDATA%\Programs\openspec` 并加入用户 PATH；macOS 和 Linux 默认安装到 `~/.local/bin`。安装后打开新终端。
 
 已有 Node.js 和 pnpm 时，也可以选择发布包：
 
@@ -61,9 +63,11 @@ which -a openspec
 
 ### 按原安装方式升级和卸载
 
-`openspec version --check` 查询更新。pnpm 安装使用 `pnpm add -g @fission-ai/openspec@latest` 升级，再进入每个项目运行 `openspec update`，刷新已配置工具的集成文件并检查差异。选择 CLI 包版本和更新项目指令是两个步骤。
+`openspec version --check` 查询更新。若要留在 1.x，保留上面的精确版本，或使用 `pnpm add -g @fission-ai/openspec@1` 获取 1.x 内的更新。拒绝 `openspec update` 提出的 CLI 升级；设置 `OPENSPEC_NO_UPDATE_CHECK=1` 可关闭这类提示。
 
-独立程序重新运行安装器即可升级。`openspec install` 会把包管理器安装切换为独立程序，并提示如何移除旧副本；操作后在新终端确认实际选中的可执行文件。
+若选择 2.0，npm 安装需要 Node.js 22.12.0+，请先阅读[官方 2.0 迁移指南](https://openspec.dev/llms.mdx/docs/upgrade-to-2/content.md)。先保存并提交自定义修改，再用 `pnpm add -g @fission-ai/openspec@2.0.0` 安装，并在各项目运行 `openspec update`。2.0 将技能统一放到 `.agents/skills/`，删除未经修改的生成命令文件，改用技能。修改过的旧命令文件和工具目录内的技能副本会保留，但 `.agents/skills/` 中由 OpenSpec 安装的技能会被覆盖，自定义修改没有备份。更新前用 `openspec update --dry-run` 检查影响，更新后审查差异。本教程尚未实测 2.0 迁移。
+
+独立程序应先用 `OPENSPEC_VERSION` 选择目标版本，再运行安装器。`openspec install` 会把包管理器安装切换为独立程序，并提示如何移除旧副本；操作后在新终端确认实际选中的可执行文件。
 
 卸载 pnpm 安装用 `pnpm remove -g @fission-ai/openspec`。独立程序只删除已核实安装路径下的可执行文件和对应 PATH 项。没有 `openspec uninstall` 命令。需要保留规格历史时，留下 `openspec/specs/` 和 `openspec/changes/archive/`；卸载 CLI 不要求删除项目文档。
 
@@ -459,7 +463,7 @@ pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login --json --deltas-o
 
 许多 AI 编码工具会读取仓库指令文件。`AGENTS.md` 已成为告知 Agent 如何在代码库中行为的通用约定。
 
-OpenSpec 生成的是工具对应的 skills 和命令文件。例如，另一次 1.13.2 初始化选择 `--tools claude` 后，会生成 `.claude/skills/openspec-propose/SKILL.md` 和 `.claude/commands/opsx/propose.md`，不要求存在自动生成的 `openspec/AGENTS.md`。下面这些是可以手写的可选项目约束：
+OpenSpec 1.x 生成的是工具对应的 skills 和命令文件。例如，另一次 1.13.2 初始化选择 `--tools claude` 后，会生成 `.claude/skills/openspec-propose/SKILL.md` 和 `.claude/commands/opsx/propose.md`，不要求存在自动生成的 `openspec/AGENTS.md`。下面这些是可以手写的可选项目约束：
 
 - 在阅读变更提案之前不要实现。
 - 将实现范围限定在已批准的变更内。

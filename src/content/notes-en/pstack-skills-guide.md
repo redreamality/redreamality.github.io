@@ -20,15 +20,11 @@ The installation guidance was checked on October 26, 2026 against [official psta
 
 The [official README](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/README.md) now documents both Cursor and Claude Code installation. "Third-party marketplace" in Claude Code means an external marketplace; it does not make this upstream pstack adapter an unofficial port.
 
-<div class="content-table-scroll" role="region" aria-label="Host / Installation and entry / Boundary" tabindex="0">
-
 | Host | Installation and entry | Boundary |
 | --- | --- | --- |
 | Cursor | `/add-plugin pstack`, then `/setup-pstack` and `/poteto-mode` | The model rule is `~/.cursor/rules/pstack-models.mdc`. Available models depend on your account. |
 | Claude Code | `/plugin marketplace add cursor/plugins`, then `/plugin install pstack@cursor-plugins` | Use `/pstack:setup-pstack` and `/pstack:poteto-mode`. The rule is `~/.claude/rules/pstack-models.md`. |
 | Codex or another host | Check the installed package's origin and the host's skill loader | The checked upstream README does not give a Codex installation recipe. A copied skill or a community port does not establish full compatibility. |
-
-</div>
 
 The [official Claude Code adapter](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/docs/harness/claude-code.md) maps unsupported non-Claude model names to the session model. It also skips steps requiring unavailable Cursor capabilities. Do not assume a Grok review panel, Cursor Automations, or a cloud agent runs unchanged there. For a third-party port, inspect its upstream revision, tool mappings, model selection, and missing-feature behavior before using parallel workflows. Being able to read `SKILL.md` is only the first check.
 
@@ -175,8 +171,6 @@ This group covers how work is split up before and during implementation.
 
 `show-me-your-work` is that decision log: one TSV file, one row per decision, with columns for time, phase, what was done, why, evidence (a pointer such as a commit, PR number, file and line, or screenshot path, never a paragraph), and result. It stays local by default. Commit it when the work is big enough that a reviewer needs the trail to trust the result.
 
-<div class="content-table-scroll" role="region" aria-label="skill / in one line" tabindex="0">
-
 | skill | in one line |
 | --- | --- |
 | `architect` | Settle caller usage, types, signatures, and module structure before implementing; start over if implementation proves the design wrong |
@@ -187,15 +181,11 @@ This group covers how work is split up before and during implementation.
 | `show-me-your-work` | A TSV decision log for long or unattended work, one row per decision |
 | `make-bot-ui` | Build a small page whose buttons wake a Grok Bot over a webhook, keeping the key on a local server |
 
-</div>
-
 ## Verification and correction, mapped to the talk's five layers
 
 This is the most interesting group in pstack, because it runs along the same line as the five correction layers in the talk. A quick recap of those layers, strongest first. Layer one is the codebase and architecture: make the bad pattern impossible to write as a category. Layer two is static analysis: lint, compilers, CI. Layer three is rules, Bugbot, and skills, where things move from enforcement to guidance. Layer four is style guides and human review. Layer five is verification skills, which can prove whether a feature works but don't prove performance or code quality.
 
 The mapping below is this note's own arrangement by what each skill does. It isn't a table she has published:
-
-<div class="content-table-scroll" role="region" aria-label="Layer in the talk / Matching pstack skills" tabindex="0">
 
 | Layer in the talk | Matching pstack skills |
 | --- | --- |
@@ -204,8 +194,6 @@ The mapping below is this note's own arrangement by what each skill does. It isn
 | Layer 3: rules and skills | `reflect` turning one session's lessons into skill edits; pstack as a whole also lives here |
 | Layer 4: human review | `interrogate` running adversarial review across several models; Comment Sicko inside `no-comments` is also a reviewer |
 | Layer 5: verification | `create-verification-skill`, `maintain-verification-skill`, the `prove-it-works` principle |
-
-</div>
 
 ### correct: move repeated corrections out of the prompt and into the repo
 
@@ -241,8 +229,6 @@ The talk pointed out that a verification skill proves whether something works, n
 
 `/reflect` is for after a task: it spawns three parallel review subagents over the current conversation, each drawing lessons from a different angle (judgment, tooling, divergent), and a synthesizer sorts them into accepted, rejected, and backlog. Items that could be enforced by a lint, a script, or metadata get moved to the backlog, to be fixed at a higher layer. Accepted items wait for your approval before any skill changes, because changing a skill affects every future agent. The guide draws the line clearly: `/reflect` improves skills from one session, and `/correct` changes the repo so a class of mistake can't come back.
 
-<div class="content-table-scroll" role="region" aria-label="skill / in one line" tabindex="0">
-
 | skill | in one line |
 | --- | --- |
 | `create-verification-skill` | Generates a project-local skill that drives the app like a user, with a feature map, self-tested before handoff |
@@ -253,8 +239,6 @@ The talk pointed out that a verification skill proves whether something works, n
 | `no-comments` | Sends Comment Sicko to review comments, deletes what should go, turns claimed constraints into code constraints |
 | `interrogate` | Models from different families adversarially review a diff; the lead sorts the verdict and changes nothing automatically |
 | `reflect` | Three subagents mine the current conversation for lessons; once you approve, they become edits to existing skills |
-
-</div>
 
 ## Understanding code: how, why, teach, recall, bro
 
@@ -298,8 +282,6 @@ The principles are 24 very short skills, one rule each. `poteto-mode` keeps an i
 
 For users, the most practical use of the principles is steering. You don't call them; you just say the name. If the agent is about to add a fourth adapter on top of three old ones, say "subtract before you add, delete the obsolete adapters first." If it claims it's done because the build passed, say "prove it works, run the real import flow and show me the written records." Each name points at a complete rule the agent has already read, so one phrase is more precise than a paragraph of instructions. It still has to say in its reply which decision the principle changed.
 
-<div class="content-table-scroll" role="region" aria-label="group / principle / in one line" tabindex="0">
-
 | group | principle | in one line |
 | --- | --- | --- |
 | core | `laziness-protocol` | When refactoring or sizing a diff, lean toward deletion and the smallest change; don't add layers of abstraction |
@@ -326,8 +308,6 @@ For users, the most practical use of the principles is steering. You don't call 
 | delegation | `guard-the-context-window` | When context is filling up, hand bulk reading to subagents and keep only summaries in the main thread |
 | delegation | `never-block-on-the-human` | Don't ask "should I?" on reversible work; do it, show the result, let the human correct afterwards |
 | meta | `encode-lessons-in-structure` | The second time you write the same instruction, turn it into a lint, metadata, a runtime check, or a script |
-
-</div>
 
 The guide's advice is not to memorize this table. Skim it, and come back the day you see the agent do something one of these names would have prevented.
 

@@ -19,15 +19,11 @@ pstack 是 Lauren Tan（[@poteto](https://x.com/poteto)）整理的一组工程 
 
 [官方 README](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/README.md)已经同时给出 Cursor 和 Claude Code 的安装入口。Claude Code 把外部插件市场称为第三方市场，并不代表 pstack 上游提供的适配就是非官方移植。
 
-<div class="content-table-scroll" role="region" aria-label="宿主 / 安装和入口 / 边界" tabindex="0">
-
 | 宿主 | 安装和入口 | 边界 |
 | --- | --- | --- |
 | Cursor | `/add-plugin pstack`，然后运行 `/setup-pstack` 和 `/poteto-mode` | 模型规则写入 `~/.cursor/rules/pstack-models.mdc`；能用哪些模型取决于账号。 |
 | Claude Code | `/plugin marketplace add cursor/plugins`，再执行 `/plugin install pstack@cursor-plugins` | 使用 `/pstack:setup-pstack` 和 `/pstack:poteto-mode`；规则路径为 `~/.claude/rules/pstack-models.md`。 |
 | Codex 或其他宿主 | 先核对已装包的来源和宿主的 skill 加载方式 | 本次核对的上游 README 没有提供 Codex 安装步骤。复制 skill 或安装社区移植不等于完整兼容。 |
-
-</div>
 
 [官方 Claude Code 适配说明](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/docs/harness/claude-code.md)把不支持的非 Claude 模型名回落到当前会话模型，并跳过依赖不可用 Cursor 能力的步骤。因此不能承诺 Grok 评审面板、Cursor Automations 或云端 agent 原样运行。使用第三方移植前，检查它对应的上游版本、工具映射、模型选择和缺失能力的处理，再决定是否并行执行。能读到 `SKILL.md` 只是第一步。
 
@@ -285,8 +281,6 @@ prompt 怎么写，指南给了五样东西：目标、能判对错的完成条�
 
 对用户来说，原则最实用的地方是拿来纠偏。你不用调用它们，直接说名字就行。agent 想在三个旧适配器上再加第四个，你说一句「subtract before you add，先删掉过时的适配器」；它说构建过了就算完成，你说「prove it works，跑真实的导入流程，把写进去的记录给我看」。每个名字背后是一条它已经读过的完整规则，一句话比一段说明更准。不过它仍然要在回复里说明这条原则改变了哪个决定。
 
-<div class="content-table-scroll" role="region" aria-label="组 / 原则 / 一句话" tabindex="0">
-
 | 组 | 原则 | 一句话 |
 | --- | --- | --- |
 | 核心 | `laziness-protocol` | 重构或掂量 diff 时偏向删除和最小改动，别加抽象层 |
@@ -313,8 +307,6 @@ prompt 怎么写，指南给了五样东西：目标、能判对错的完成条�
 | 分派 | `guard-the-context-window` | 上下文快满时把大块读取交给子 agent，主线只留摘要 |
 | 分派 | `never-block-on-the-human` | 可逆的事别问「要不要做」，先做、给结果、让人事后纠正 |
 | 元 | `encode-lessons-in-structure` | 同一条指令写到第二次，就把它变成 lint、元数据、运行时检查或脚本 |
-
-</div>
 
 指南的建议是别背这张表，扫一遍，等哪天看到 agent 做了某个名字本可以拦住的事，再回来查。
 

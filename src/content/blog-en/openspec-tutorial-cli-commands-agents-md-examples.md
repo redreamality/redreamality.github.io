@@ -9,7 +9,9 @@ tags: ['openspec', 'sdd', 'ai-coding', 'agents.md', 'cli']
 
 ## Install OpenSpec on Windows, macOS, or Linux
 
-Updated October 26, 2026. The published npm `latest` is **1.15.0**. The standalone program needs no Node.js; the npm package needs Node.js **20.19.0+**. Choose one installation method. The [official installation guide](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/installation.md) covers the supported platforms.
+The October 26, 2026 installation instructions below retain **1.15.0**, the npm `latest` at that time. That version's standalone program needs no Node.js; its npm package needs Node.js **20.19.0+**. Choose one installation method. The [official installation guide](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/installation.md) covers the supported platforms.
+
+On November 13, 2026, the [npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) listed **2.0.0** as `latest`, requiring Node.js **22.12.0+** for the npm package. The installation examples remain pinned to 1.15.0 and the exercise to 1.13.2. Before running the standalone commands below, run `$env:OPENSPEC_VERSION = 'v1.15.0'` in PowerShell or `export OPENSPEC_VERSION=v1.15.0` on macOS/Linux to retain that version.
 
 For Windows PowerShell, the official standalone installer is:
 
@@ -23,7 +25,7 @@ For macOS or Linux:
 curl -fsSL https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/scripts/binary/install.sh | sh
 ```
 
-These commands execute the official installer from `main`. It selects a release binary and checks its SHA256SUMS; it does not compile `main`. To pin the binary, set `OPENSPEC_VERSION=v1.15.0` in that shell first. The Windows destination is `%LOCALAPPDATA%\Programs\openspec`; macOS and Linux use `~/.local/bin`. Windows adds the directory to the user PATH. Open a new terminal after installation.
+These commands execute the official installer from `main`. It selects a release binary and checks its SHA256SUMS; it does not compile `main`. Run the installer in the same shell where you set the version above. The Windows destination is `%LOCALAPPDATA%\Programs\openspec`; macOS and Linux use `~/.local/bin`. Windows adds the directory to the user PATH. Open a new terminal after installation.
 
 If you already use Node.js and pnpm, install the published package instead:
 
@@ -59,9 +61,11 @@ If necessary, add the actual installation directory to your shell's PATH. With n
 
 ### Upgrade or uninstall the installation you chose
 
-`openspec version --check` reports update availability. Upgrade a pnpm installation with `pnpm add -g @fission-ai/openspec@latest`, then run `openspec update` inside each project to refresh its generated integrations. Review the resulting diff. `update` is not the same operation as choosing a new package version.
+`openspec version --check` reports update availability. To stay on 1.x, keep the exact pins above or use `pnpm add -g @fission-ai/openspec@1` for updates within 1.x. Decline CLI upgrade offers from `openspec update`; `OPENSPEC_NO_UPDATE_CHECK=1` disables those offers.
 
-For standalone installations, rerun the installer. `openspec install` explicitly switches an existing package-manager installation to standalone and prints removal guidance for the old copy. Verify the selected executable in a new terminal afterward.
+If you choose 2.0, use Node.js 22.12.0+ for npm and read the [official 2.0 migration guide](https://openspec.dev/llms.mdx/docs/upgrade-to-2/content.md) first. Save and commit customizations before installing `pnpm add -g @fission-ai/openspec@2.0.0` and running `openspec update` in each project. Version 2.0 shares skills in `.agents/skills/` and removes unchanged generated command files in favor of skills. Edited old command files and tool-specific skill copies are kept, but edits to OpenSpec-installed skills in `.agents/skills/` are overwritten without a backup. Inspect `openspec update --dry-run` before updating and review the resulting diff. The 2.0 migration has not been tested for this tutorial.
+
+For standalone installations, select the intended release with `OPENSPEC_VERSION` before rerunning the installer. `openspec install` explicitly switches an existing package-manager installation to standalone and prints removal guidance for the old copy. Verify the selected executable in a new terminal afterward.
 
 To uninstall a pnpm copy, use `pnpm remove -g @fission-ai/openspec`. For standalone, remove only the executable at the verified installation path and its PATH entry. There is no `openspec uninstall` command. Keep `openspec/specs/` and `openspec/changes/archive/` if you need their history; removing the CLI does not require deleting project documents.
 
@@ -457,7 +461,7 @@ pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login --json --deltas-o
 
 Many AI coding tools read repository instruction files. `AGENTS.md` has become a common convention for telling agents how to behave inside a codebase.
 
-OpenSpec generates tool-specific skills and command files. For example, a separate 1.13.2 initialization with `--tools claude` creates `.claude/skills/openspec-propose/SKILL.md` and `.claude/commands/opsx/propose.md`. It does not require a generated `openspec/AGENTS.md`. The following rules are optional, handwritten project policy:
+OpenSpec 1.x generates tool-specific skills and command files. For example, a separate 1.13.2 initialization with `--tools claude` creates `.claude/skills/openspec-propose/SKILL.md` and `.claude/commands/opsx/propose.md`. It does not require a generated `openspec/AGENTS.md`. The following rules are optional, handwritten project policy:
 
 - Do not implement before reading the change proposal.
 - Keep implementation scoped to the approved change.
