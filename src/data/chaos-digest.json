@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T10:00:37+08:00",
+  "updatedAt": "2026-11-13T16:00:36+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,181 @@
     "other"
   ],
   "themeCounts": {
-    "models": 12,
+    "models": 11,
     "coding-tools": 2,
     "agents-oss": 1,
     "security": 9,
-    "research": 12,
+    "research": 16,
     "product-news": 0,
     "other": 0
   },
   "hours": [
+    {
+      "hourStart": "2026-11-13T16:00:00+08:00",
+      "label": {
+        "zh": "11月13日 16:00",
+        "en": "Nov 13 16:00",
+        "ja": "11月13日 16:00"
+      },
+      "items": [
+        {
+          "id": "t892",
+          "theme": "research",
+          "title": {
+            "zh": "「引用了」不等于「用了」：RAG 中 1.2%–15.7% 的可引用断言来自参数记忆，标准 NLI 引用核验与随机无异",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.17161（Abbas、Zia、Windridge）：RAG 系统给断言挂引用，但引用常常说错出处，且标准核验查不出来。作者用反事实值替换测出处——把检索段落中的某个事实换成错误版本再问一次模型。在一个模型家族的五个规模和另一个对照家族上，1.2%–15.7% 的可引用断言实际来自参数记忆而非检索上下文；在最保守的替换距离下，两个被测模型分别为 4.6% 与 8.5%，同一家族内比例随规模上升。标准做法自然语言推理（NLI）核验在各模型上结果与随机无异，即使只看被引段落也一样。原因是结构性的：凭记忆作答的模型会挑一条与自己输出一致的引用。比较十种归因方法，「有/无上下文时模型分布的差异」最能区分出处，但按该信号行动在这些基础比率下并不能提升出处诚实度——检测器量到的是模型「知道什么」而不是「用了什么」，二者如何分离仍是开放问题。数字均论文自报，未复现。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.17161（Abbas、Zia、Windridge）：RAG 系统给断言挂引用，但引用常常说错出处，且标准核验查不出来。作者用反事实值替换测出处——把检索段落中的某个事实换成错误版本再问一次模型。在一个模型家族的五个规模和另一个对照家族上，1.2%–15.7% 的可引用断言实际来自参数记忆而非检索上下文；在最保守的替换距离下，两个被测模型分别为 4.6% 与 8.5%，同一家族内比例随规模上升。标准做法自然语言推理（NLI）核验在各模型上结果与随机无异，即使只看被引段落也一样。原因是结构性的：凭记忆作答的模型会挑一条与自己输出一致的引用。比较十种归因方法，「有/无上下文时模型分布的差异」最能区分出处，但按该信号行动在这些基础比率下并不能提升出处诚实度——检测器量到的是模型「知道什么」而不是「用了什么」，二者如何分离仍是开放问题。数字均论文自报，未复现。",
+            "en": "arXiv 2611.17161 (Abbas, Zia, Windridge): RAG systems attach citations to claims, but those citations often misstate provenance and standard verification cannot catch it. The authors measure provenance by counterfactual value substitution, replacing a fact in a retrieved passage with a false variant and re-querying the model. Across five sizes of one model family and a second comparator family, 1.2% to 15.7% of citable claims come from parametric memory rather than retrieved context; at the most conservative substitution distance the two models tested show 4.6% and 8.5%, and the rate rises with model size within a family. Natural language inference verification, the standard approach, is indistinguishable from chance across models, even when restricted to the cited passage. The cause is structural: a model answering from memory picks a citation that agrees with its output. Among ten attribution methods, the contrast between the model's distribution with and without context separates provenance best, yet acting on it does not improve provenance honesty at these base rates; the detector measures what the model knew rather than what it used, and separating the two remains open. Self-reported, not reproduced.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.17161",
+              "title": "Cited but Unused: Parametric Provenance in Retrieval-Augmented Generation",
+              "brief": {
+                "zh": "arXiv 2611.17161（Abbas、Zia、Windridge）：RAG 系统给断言挂引用，但引用常常说错出处，且标准核验查不出来。作者用反事实值替换测出处——把检索段落中的某个事实换成错误版本再问一次模型。在一个模型家族的五个规模和另一个对照家族上，1.2%–15.7% 的可引用断言实际来自参数记忆而非检索上下文；在最保守的替换距离下，两个被测模型分别为 4.6% 与 8.5%，同一家族内比例随规模上升。标准做法自然语言推理（NLI）核验在各模型上结果与随机无异，即使只看被引段落也一样。原因是结构性的：凭记忆作答的模型会挑一条与自己输出一致的引用。比较十种归因方法，「有/无上下文时模型分布的差异」最能区分出处，但按该信号行动在这些基础比率下并不能提升出处诚实度——检测器量到的是模型「知道什么」而不是「用了什么」，二者如何分离仍是开放问题。数字均论文自报，未复现。",
+                "en": "arXiv 2611.17161 (Abbas, Zia, Windridge): RAG systems attach citations to claims, but those citations often misstate provenance and standard verification cannot catch it. The authors measure provenance by counterfactual value substitution, replacing a fact in a retrieved passage with a false variant and re-querying the model. Across five sizes of one model family and a second comparator family, 1.2% to 15.7% of citable claims come from parametric memory rather than retrieved context; at the most conservative substitution distance the two models tested show 4.6% and 8.5%, and the rate rises with model size within a family. Natural language inference verification, the standard approach, is indistinguishable from chance across models, even when restricted to the cited passage. The cause is structural: a model answering from memory picks a citation that agrees with its output. Among ten attribution methods, the contrast between the model's distribution with and without context separates provenance best, yet acting on it does not improve provenance honesty at these base rates; the detector measures what the model knew rather than what it used, and separating the two remains open. Self-reported, not reproduced.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.17161"
+          ]
+        },
+        {
+          "id": "t893",
+          "theme": "research",
+          "title": {
+            "zh": "诚实是一场赛跑：可验证奖励 RL 中一条可计算阈值决定模型学会诚实还是虚张声势——同一期望收益的两种奖励可走向相反终点",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.15779（Bottman、Oblomkov）：研究一种奖励——对检查器无法验证的判断（「这个程序是对的」）付 b，对检查器能接受的证据（一个暴露 bug 的输入）付 r。一阶近似下，一步 GRPO 让模型更诚实当且仅当 p̃·r/b > 1+κ；p̃ 是检查器接受模型证据的比率（偏向模型仍在两种判断间摇摆的题），κ 是「不可验证判断本来就对」那些题的拉力，两者都随训练变化。检查器会抬高 p̃，所以阈值附近诚实是一场赛跑：略低于阈值的运行可能赢，而同均值的随机彩票式奖励不能；κ 起初大、随其它题稳定而下降，因此略高于阈值的运行会先掉向虚张（代码任务上几乎到零）再爬回。给诚实判断付钱也会把其它题拉向它，于是收益比存在上限，超过后模型会在诚实判断本不对的地方也给出它。在命题 Datalog、两个代码模型和小学数学弃答任务上（p 为 RL 前成功率），pr/b>1 的运行无一崩塌，有检查器时略低于 1 也可能存活；pr/b=3 超过上限时，两个代码模型约把一半正确程序判为有 bug。深度 3 Datalog 上先在检查器下慷慨训练再降收益，三个种子都保持至少 67% 诚实，而同一比率从头训练会跌到 4–15%、160 步后至多 47%。深度 2 Datalog 上诚实崩塌时，RL 前拟合的线性探针仍能读出真值。数字均论文自报，未复现。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.15779（Bottman、Oblomkov）：研究一种奖励——对检查器无法验证的判断（「这个程序是对的」）付 b，对检查器能接受的证据（一个暴露 bug 的输入）付 r。一阶近似下，一步 GRPO 让模型更诚实当且仅当 p̃·r/b > 1+κ；p̃ 是检查器接受模型证据的比率（偏向模型仍在两种判断间摇摆的题），κ 是「不可验证判断本来就对」那些题的拉力，两者都随训练变化。检查器会抬高 p̃，所以阈值附近诚实是一场赛跑：略低于阈值的运行可能赢，而同均值的随机彩票式奖励不能；κ 起初大、随其它题稳定而下降，因此略高于阈值的运行会先掉向虚张（代码任务上几乎到零）再爬回。给诚实判断付钱也会把其它题拉向它，于是收益比存在上限，超过后模型会在诚实判断本不对的地方也给出它。在命题 Datalog、两个代码模型和小学数学弃答任务上（p 为 RL 前成功率），pr/b>1 的运行无一崩塌，有检查器时略低于 1 也可能存活；pr/b=3 超过上限时，两个代码模型约把一半正确程序判为有 bug。深度 3 Datalog 上先在检查器下慷慨训练再降收益，三个种子都保持至少 67% 诚实，而同一比率从头训练会跌到 4–15%、160 步后至多 47%。深度 2 Datalog 上诚实崩塌时，RL 前拟合的线性探针仍能读出真值。数字均论文自报，未复现。",
+            "en": "arXiv 2611.15779 (Bottman, Oblomkov) studies rewards that pay b for a verdict a checker cannot verify (\"this program is correct\") and r for a certificate it accepts (an input revealing a bug). To first order, a GRPO step makes the model more honest exactly when p~ r/b > 1 + kappa, where p~ is the checker's acceptance rate of the model's certificates, weighted toward items where the model still gives both verdicts, and kappa is the pull of items where the unverifiable verdict is right; both move during training. A checker raises p~, so near the threshold honesty is a race that a run just below it can win and a same-mean lottery reward cannot. Kappa starts large and falls as other items settle, so a run just above the threshold first dips toward bluffing, nearly to zero on code, before recovering. Paying the honest verdict also pulls other items toward it, implying a ceiling on the payoff ratio above which the model gives the honest verdict where it is wrong. On propositional Datalog, two code models and abstention on grade-school math, with p the pre-RL success rate, no run above pr/b = 1 collapses, and runs under the checker can survive slightly below it; at pr/b = 3, above the ceiling, both code models call about half of correct programs buggy. On depth-3 Datalog, generous training under the checker followed by a cut in payoff keeps the model at least 67% honest across three seeds, versus 4-15% and at most 47% after 160 steps when trained at that ratio from the start. On depth-2 Datalog, when honesty collapses, a linear probe fit before RL still reads the truth. Self-reported, not reproduced.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.15779",
+              "title": "Honesty Is a Race: Predicting When Verifiable-Reward RL Teaches a Model to Bluff",
+              "brief": {
+                "zh": "arXiv 2611.15779（Bottman、Oblomkov）：研究一种奖励——对检查器无法验证的判断（「这个程序是对的」）付 b，对检查器能接受的证据（一个暴露 bug 的输入）付 r。一阶近似下，一步 GRPO 让模型更诚实当且仅当 p̃·r/b > 1+κ；p̃ 是检查器接受模型证据的比率（偏向模型仍在两种判断间摇摆的题），κ 是「不可验证判断本来就对」那些题的拉力，两者都随训练变化。检查器会抬高 p̃，所以阈值附近诚实是一场赛跑：略低于阈值的运行可能赢，而同均值的随机彩票式奖励不能；κ 起初大、随其它题稳定而下降，因此略高于阈值的运行会先掉向虚张（代码任务上几乎到零）再爬回。给诚实判断付钱也会把其它题拉向它，于是收益比存在上限，超过后模型会在诚实判断本不对的地方也给出它。在命题 Datalog、两个代码模型和小学数学弃答任务上（p 为 RL 前成功率），pr/b>1 的运行无一崩塌，有检查器时略低于 1 也可能存活；pr/b=3 超过上限时，两个代码模型约把一半正确程序判为有 bug。深度 3 Datalog 上先在检查器下慷慨训练再降收益，三个种子都保持至少 67% 诚实，而同一比率从头训练会跌到 4–15%、160 步后至多 47%。深度 2 Datalog 上诚实崩塌时，RL 前拟合的线性探针仍能读出真值。数字均论文自报，未复现。",
+                "en": "arXiv 2611.15779 (Bottman, Oblomkov) studies rewards that pay b for a verdict a checker cannot verify (\"this program is correct\") and r for a certificate it accepts (an input revealing a bug). To first order, a GRPO step makes the model more honest exactly when p~ r/b > 1 + kappa, where p~ is the checker's acceptance rate of the model's certificates, weighted toward items where the model still gives both verdicts, and kappa is the pull of items where the unverifiable verdict is right; both move during training. A checker raises p~, so near the threshold honesty is a race that a run just below it can win and a same-mean lottery reward cannot. Kappa starts large and falls as other items settle, so a run just above the threshold first dips toward bluffing, nearly to zero on code, before recovering. Paying the honest verdict also pulls other items toward it, implying a ceiling on the payoff ratio above which the model gives the honest verdict where it is wrong. On propositional Datalog, two code models and abstention on grade-school math, with p the pre-RL success rate, no run above pr/b = 1 collapses, and runs under the checker can survive slightly below it; at pr/b = 3, above the ceiling, both code models call about half of correct programs buggy. On depth-3 Datalog, generous training under the checker followed by a cut in payoff keeps the model at least 67% honest across three seeds, versus 4-15% and at most 47% after 160 steps when trained at that ratio from the start. On depth-2 Datalog, when honesty collapses, a linear probe fit before RL still reads the truth. Self-reported, not reproduced.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.15779"
+          ]
+        },
+        {
+          "id": "t894",
+          "theme": "research",
+          "title": {
+            "zh": "ShadowBench：LLM 知识被实体名「锚定」，机器遗忘多半只擦掉名字——热门实体超过 74% 会在推理痕迹里被重建（遗忘错觉）",
+            "en": "ShadowBench",
+            "ja": "ShadowBench"
+          },
+          "summary": {
+            "zh": "arXiv 2611.15925（Maharjan、Liu）：主张 LLM 的知识是「词汇锚定」的——模型掌握大量事实，但没有明确实体名 token 时很难取出。为此提出抗捷径的基准 ShadowBench，用双特征关联（DTA）任务评估潜在实体关联。各规模模型直到前沿的 GPT-5.4、Claude-Sonnet-4.6 都存在「影子差距」：去掉名称锚点后表现下降超过 20%。把 ShadowBench 用于机器遗忘：Gradient Difference、NPO 等先进算法只做到表层的名称擦除——被遗忘模型直接问答时答不出，但新的潜在实体泄漏率（LELR）显示，热门实体在超过 74% 的情况下会在内部推理痕迹中被显式重建，模型借残留的「影子知识」完成关联任务；冷门实体 LELR 为 0%，却仍凭隐式属性关联保持 60–90% 的影子准确率。结论：现有遗忘方法更像表层输出过滤器，造成「遗忘错觉」，尚不能可靠实现参数层面的真正删除。数字均论文自报，未复现。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.15925（Maharjan、Liu）：主张 LLM 的知识是「词汇锚定」的——模型掌握大量事实，但没有明确实体名 token 时很难取出。为此提出抗捷径的基准 ShadowBench，用双特征关联（DTA）任务评估潜在实体关联。各规模模型直到前沿的 GPT-5.4、Claude-Sonnet-4.6 都存在「影子差距」：去掉名称锚点后表现下降超过 20%。把 ShadowBench 用于机器遗忘：Gradient Difference、NPO 等先进算法只做到表层的名称擦除——被遗忘模型直接问答时答不出，但新的潜在实体泄漏率（LELR）显示，热门实体在超过 74% 的情况下会在内部推理痕迹中被显式重建，模型借残留的「影子知识」完成关联任务；冷门实体 LELR 为 0%，却仍凭隐式属性关联保持 60–90% 的影子准确率。结论：现有遗忘方法更像表层输出过滤器，造成「遗忘错觉」，尚不能可靠实现参数层面的真正删除。数字均论文自报，未复现。",
+            "en": "arXiv 2611.15925 (Maharjan, Liu) argues that LLM knowledge is lexically anchored: models hold extensive facts but struggle to retrieve them without explicit entity-name tokens. The authors introduce ShadowBench, a shortcut-resistant benchmark that tests latent entity association through a Dual-Trait Association (DTA) task. Every model scale, up to frontier GPT-5.4 and Claude-Sonnet-4.6, shows a \"Shadow Gap\": removing the name anchor drops performance by more than 20%. Applied to machine unlearning, state-of-the-art methods such as Gradient Difference and NPO achieve only superficial lexical erasure. Unlearned models fail direct queries, yet a new Latent Entity Leakage Rate (LELR) shows that for popular entities they explicitly reconstruct the \"forgotten\" entity in their reasoning traces in over 74% of cases and use residual shadow knowledge to solve associative tasks; for niche entities, LELR is 0% but shadow accuracy stays at 60-90% through implicit attribute correlation. The paper concludes that current unlearning creates an \"Illusion of Forgetting,\" acting as a superficial output filter rather than reliable parametric erasure. Self-reported, not reproduced.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.15925",
+              "title": "ShadowBench: Exposing Lexical Anchoring and the Illusion of Forgetting in Large Language Models",
+              "brief": {
+                "zh": "arXiv 2611.15925（Maharjan、Liu）：主张 LLM 的知识是「词汇锚定」的——模型掌握大量事实，但没有明确实体名 token 时很难取出。为此提出抗捷径的基准 ShadowBench，用双特征关联（DTA）任务评估潜在实体关联。各规模模型直到前沿的 GPT-5.4、Claude-Sonnet-4.6 都存在「影子差距」：去掉名称锚点后表现下降超过 20%。把 ShadowBench 用于机器遗忘：Gradient Difference、NPO 等先进算法只做到表层的名称擦除——被遗忘模型直接问答时答不出，但新的潜在实体泄漏率（LELR）显示，热门实体在超过 74% 的情况下会在内部推理痕迹中被显式重建，模型借残留的「影子知识」完成关联任务；冷门实体 LELR 为 0%，却仍凭隐式属性关联保持 60–90% 的影子准确率。结论：现有遗忘方法更像表层输出过滤器，造成「遗忘错觉」，尚不能可靠实现参数层面的真正删除。数字均论文自报，未复现。",
+                "en": "arXiv 2611.15925 (Maharjan, Liu) argues that LLM knowledge is lexically anchored: models hold extensive facts but struggle to retrieve them without explicit entity-name tokens. The authors introduce ShadowBench, a shortcut-resistant benchmark that tests latent entity association through a Dual-Trait Association (DTA) task. Every model scale, up to frontier GPT-5.4 and Claude-Sonnet-4.6, shows a \"Shadow Gap\": removing the name anchor drops performance by more than 20%. Applied to machine unlearning, state-of-the-art methods such as Gradient Difference and NPO achieve only superficial lexical erasure. Unlearned models fail direct queries, yet a new Latent Entity Leakage Rate (LELR) shows that for popular entities they explicitly reconstruct the \"forgotten\" entity in their reasoning traces in over 74% of cases and use residual shadow knowledge to solve associative tasks; for niche entities, LELR is 0% but shadow accuracy stays at 60-90% through implicit attribute correlation. The paper concludes that current unlearning creates an \"Illusion of Forgetting,\" acting as a superficial output filter rather than reliable parametric erasure. Self-reported, not reproduced.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.15925"
+          ]
+        },
+        {
+          "id": "t895",
+          "theme": "research",
+          "title": {
+            "zh": "重审「RL 泛化、SFT 记忆」：在 Qwen2.5/Qwen3 上匹配正确 rollout 数与总预算后，SFT 泛化可追平甚至超过 RL，关键在数据来源与长尾解法覆盖",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.14912（Hou、Zhang、Cheng、Pan、Li、Yang）在常用的 Qwen2.5 与 Qwen3 系列上重审「RL 会泛化、SFT 只会记」的区分，切入点是 SFT 训练数据。其一，数据来源关键：精心混合的 SFT 数据集明显优于只由更大模型生成的数据。其二，数据规模关键：让 SFT 与 RL 的正确 rollout 数量对齐能大幅改善 SFT 泛化，对齐总 rollout 预算则可让 SFT 泛化与 RL 持平；两者结合时 SFT 泛化甚至优于 RL。其三，用 LLM 标注训练 rollout 中的解题方法，发现更大的数据集覆盖更多长尾方法，而这些长尾方法提供可迁移的推理信号。最后在理论上分析浅层 Transformer 在 RL 与 SFT 下的训练动力学以支撑实验结论。具体数字以论文为准，未复现。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.14912（Hou、Zhang、Cheng、Pan、Li、Yang）在常用的 Qwen2.5 与 Qwen3 系列上重审「RL 会泛化、SFT 只会记」的区分，切入点是 SFT 训练数据。其一，数据来源关键：精心混合的 SFT 数据集明显优于只由更大模型生成的数据。其二，数据规模关键：让 SFT 与 RL 的正确 rollout 数量对齐能大幅改善 SFT 泛化，对齐总 rollout 预算则可让 SFT 泛化与 RL 持平；两者结合时 SFT 泛化甚至优于 RL。其三，用 LLM 标注训练 rollout 中的解题方法，发现更大的数据集覆盖更多长尾方法，而这些长尾方法提供可迁移的推理信号。最后在理论上分析浅层 Transformer 在 RL 与 SFT 下的训练动力学以支撑实验结论。具体数字以论文为准，未复现。",
+            "en": "arXiv 2611.14912 (Hou, Zhang, Cheng, Pan, Li, Yang) revisits the claim that RL with verifiable rewards generalizes while SFT memorizes, through the lens of SFT training data on the widely used Qwen2.5 and Qwen3 series. First, data source matters: a carefully mixed SFT dataset substantially outperforms data generated solely by a larger model. Second, data scale matters: matching the number of correct rollouts between SFT and RL greatly improves SFT generalization, and matching the total rollout budget lets SFT generalize as well as RL; combining both lets SFT generalize better than RL. Third, using LLM annotations of solution methods in training rollouts, larger datasets cover more tail methods, and those tail methods carry generalizable reasoning signal. The authors support the findings with an analysis of shallow-transformer training dynamics under RL and SFT. Exact figures follow the paper and were not reproduced.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.14912",
+              "title": "Rethinking \"RL Generalizes, SFT Memorizes\": The Role of SFT Data",
+              "brief": {
+                "zh": "arXiv 2611.14912（Hou、Zhang、Cheng、Pan、Li、Yang）在常用的 Qwen2.5 与 Qwen3 系列上重审「RL 会泛化、SFT 只会记」的区分，切入点是 SFT 训练数据。其一，数据来源关键：精心混合的 SFT 数据集明显优于只由更大模型生成的数据。其二，数据规模关键：让 SFT 与 RL 的正确 rollout 数量对齐能大幅改善 SFT 泛化，对齐总 rollout 预算则可让 SFT 泛化与 RL 持平；两者结合时 SFT 泛化甚至优于 RL。其三，用 LLM 标注训练 rollout 中的解题方法，发现更大的数据集覆盖更多长尾方法，而这些长尾方法提供可迁移的推理信号。最后在理论上分析浅层 Transformer 在 RL 与 SFT 下的训练动力学以支撑实验结论。具体数字以论文为准，未复现。",
+                "en": "arXiv 2611.14912 (Hou, Zhang, Cheng, Pan, Li, Yang) revisits the claim that RL with verifiable rewards generalizes while SFT memorizes, through the lens of SFT training data on the widely used Qwen2.5 and Qwen3 series. First, data source matters: a carefully mixed SFT dataset substantially outperforms data generated solely by a larger model. Second, data scale matters: matching the number of correct rollouts between SFT and RL greatly improves SFT generalization, and matching the total rollout budget lets SFT generalize as well as RL; combining both lets SFT generalize better than RL. Third, using LLM annotations of solution methods in training rollouts, larger datasets cover more tail methods, and those tail methods carry generalizable reasoning signal. The authors support the findings with an analysis of shallow-transformer training dynamics under RL and SFT. Exact figures follow the paper and were not reproduced.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.14912"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-13T10:00:00+08:00",
       "label": {
@@ -1463,55 +1629,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-10T16:00:00+08:00",
-      "label": {
-        "zh": "11月10日 16:00",
-        "en": "Nov 10 16:00",
-        "ja": "11月10日 16:00"
-      },
-      "items": [
-        {
-          "id": "t864",
-          "theme": "models",
-          "title": {
-            "zh": "OpenAI Control Room：研究推理层 35 秒内阻断模型输出的集中式停机系统（官方自报）",
-            "en": "OpenAI Control Room",
-            "ja": "OpenAI Control Room"
-          },
-          "summary": {
-            "zh": "OpenAI 发布 Control Room（标注 2026-11-09 13:00 UTC / 21:00 上海时间；本轮经 11-10 Latent Space AINews 首次显现）：覆盖研究侧全部推理负载，包括训练与评测中的 agentic sampling 以及数据处理，并与错位监控系统联动。工作负载向 Control Room 领取 job_id；推理引擎在每次出 token 前携带该 ID 询问授权，任务被标记停止后引擎拒绝后续推理，不依赖研究员侧 workload 代码自行停机。官方称从收到停机指令到无法继续推进的上限是 35 秒，延迟来自推理授权缓存，目标是降到 0。系统设计为 fail-closed：Control Room 本身宕机、被关闭或遭到篡改时拒绝全部推理请求。文称已部署在研究基础设施上，fail-closed 已覆盖所有前沿模型研究负载，其余研究负载将在随后数日完成；并持续扫描是否有人启动未接入或关闭了 Control Room 的引擎。文中举例称监控模型发现问题后把 job_id 发给 Control Room 停机，并提到近期 DNS 相关事件由监控捕获。35 秒上限、覆盖范围和 DNS 事例均为 OpenAI 自报，未独立核实。单点系统发布，仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "OpenAI 发布 Control Room（标注 2026-11-09 13:00 UTC / 21:00 上海时间；本轮经 11-10 Latent Space AINews 首次显现）：覆盖研究侧全部推理负载，包括训练与评测中的 agentic sampling 以及数据处理，并与错位监控系统联动。工作负载向 Control Room 领取 job_id；推理引擎在每次出 token 前携带该 ID 询问授权，任务被标记停止后引擎拒绝后续推理，不依赖研究员侧 workload 代码自行停机。官方称从收到停机指令到无法继续推进的上限是 35 秒，延迟来自推理授权缓存，目标是降到 0。系统设计为 fail-closed：Control Room 本身宕机、被关闭或遭到篡改时拒绝全部推理请求。文称已部署在研究基础设施上，fail-closed 已覆盖所有前沿模型研究负载，其余研究负载将在随后数日完成；并持续扫描是否有人启动未接入或关闭了 Control Room 的引擎。文中举例称监控模型发现问题后把 job_id 发给 Control Room 停机，并提到近期 DNS 相关事件由监控捕获。35 秒上限、覆盖范围和 DNS 事例均为 OpenAI 自报，未独立核实。单点系统发布，仅 Chaos。",
-            "en": "OpenAI announced Control Room (dated 2026-11-09 13:00 UTC / 21:00 Shanghai time; first seen this sweep via the Nov 10 Latent Space AINews issue). It covers all research-side inference, including agentic sampling in training and evaluation plus data processing, and it works with the misalignment monitoring system. Workloads obtain a job_id from Control Room; the inference engine asks for authorization with that ID before each token, and after a job is marked stopped the engine refuses further inference instead of trusting researcher-side workload code to halt itself. OpenAI says the upper bound from a stop instruction to the job being unable to continue is 35 seconds, caused by an inference-authorization cache, with a goal of zero. The design is fail-closed: if Control Room itself is down, turned off, or tampered with, it rejects all inference requests. The post says it is already deployed on research infrastructure, fail-closed coverage includes all frontier-model research loads, remaining research loads will follow in the next few days, and scans continue for engines that were started without Control Room or with it disabled. It gives the example of a monitor sending a job_id to Control Room, and mentions a recent DNS-related incident caught by monitoring. The 35-second bound, coverage claims and DNS example are OpenAI's own and were not independently verified. Single system launch, Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "openai",
-              "url": "https://openai.com/index/control-room",
-              "title": "OpenAI Control Room：研究推理层 35 秒内阻断模型输出的集中式停机系统",
-              "brief": {
-                "zh": "OpenAI 发布 Control Room（标注 2026-11-09 13:00 UTC / 21:00 上海时间；本轮经 11-10 Latent Space AINews 首次显现）：覆盖研究侧全部推理负载，包括训练与评测中的 agentic sampling 以及数据处理，并与错位监控系统联动。工作负载向 Control Room 领取 job_id；推理引擎在每次出 token 前携带该 ID 询问授权，任务被标记停止后引擎拒绝后续推理，不依赖研究员侧 workload 代码自行停机。官方称从收到停机指令到无法继续推进的上限是 35 秒，延迟来自推理授权缓存，目标是降到 0。系统设计为 fail-closed：Control Room 本身宕机、被关闭或遭到篡改时拒绝全部推理请求。文称已部署在研究基础设施上，fail-closed 已覆盖所有前沿模型研究负载，其余研究负载将在随后数日完成；并持续扫描是否有人启动未接入或关闭了 Control Room 的引擎。文中举例称监控模型发现问题后把 job_id 发给 Control Room 停机，并提到近期 DNS 相关事件由监控捕获。35 秒上限、覆盖范围和 DNS 事例均为 OpenAI 自报，未独立核实。单点系统发布，仅 Chaos。",
-                "en": "OpenAI announced Control Room (dated 2026-11-09 13:00 UTC / 21:00 Shanghai time; first seen this sweep via the Nov 10 Latent Space AINews issue). It covers all research-side inference, including agentic sampling in training and evaluation plus data processing, and it works with the misalignment monitoring system. Workloads obtain a job_id from Control Room; the inference engine asks for authorization with that ID before each token, and after a job is marked stopped the engine refuses further inference instead of trusting researcher-side workload code to halt itself. OpenAI says the upper bound from a stop instruction to the job being unable to continue is 35 seconds, caused by an inference-authorization cache, with a goal of zero. The design is fail-closed: if Control Room itself is down, turned off, or tampered with, it rejects all inference requests. The post says it is already deployed on research infrastructure, fail-closed coverage includes all frontier-model research loads, remaining research loads will follow in the next few days, and scans continue for engines that were started without Control Room or with it disabled. It gives the example of a monitor sending a job_id to Control Room, and mentions a recent DNS-related incident caught by monitoring. The 35-second bound, coverage claims and DNS example are OpenAI's own and were not independently verified. Single system launch, Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "openai"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://openai.com/index/control-room"
           ]
         }
       ]
