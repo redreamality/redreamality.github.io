@@ -20,15 +20,11 @@ pstack は Lauren Tan（[@poteto](https://x.com/poteto)）がまとめたエン�
 
 [公式 README](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/README.md)には Cursor と Claude Code のインストール方法がある。Claude Code が外部マーケットプレイスを third-party と呼んでも、pstack 本家のアダプターが非公式移植になるわけではない。
 
-<div class="content-table-scroll" role="region" aria-label="ホスト / インストールと入口 / 制限" tabindex="0">
-
 | ホスト | インストールと入口 | 制限 |
 | --- | --- | --- |
 | Cursor | `/add-plugin pstack` の後、`/setup-pstack` と `/poteto-mode` | モデル設定は `~/.cursor/rules/pstack-models.mdc`。使えるモデルはアカウントに依存する。 |
 | Claude Code | `/plugin marketplace add cursor/plugins` の後、`/plugin install pstack@cursor-plugins` | `/pstack:setup-pstack` と `/pstack:poteto-mode` を使う。設定は `~/.claude/rules/pstack-models.md`。 |
 | Codex など | 導入したパッケージの出所とホストの skill 読み込み方法を確認する | 確認した本家 README に Codex の導入手順はない。skill のコピーやコミュニティ移植だけでは完全な互換性を確認できない。 |
-
-</div>
 
 [公式 Claude Code アダプター](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/docs/harness/claude-code.md)は、非対応の非 Claude モデル名を現在のセッションモデルに置き換え、使えない Cursor 機能を必要とする手順をスキップする。Grok のレビューや Cursor Automations、クラウド agent が同じように動くとは限らない。第三者の移植を使うときは、本家のどの版に対応するか、ツールとモデルをどう扱うか、未対応の手順をどう報告するかを調べてから並列実行を始める。`SKILL.md` が読めることは最初の確認にすぎない。
 
@@ -286,8 +282,6 @@ prompt の書き方について、ガイドは 5 つの要素を挙げている�
 
 使う側にとって原則がいちばん役立つのは、軌道修正に使うときだ。呼び出す必要はなく、名前を言うだけでいい。agent が古いアダプター 3 つの上に 4 つ目を足そうとしていたら、「subtract before you add、まず古いアダプターを消して」と言う。ビルドが通ったから完了だと言ってきたら、「prove it works、本物のインポート処理を走らせて、書き込まれたレコードを見せて」と言う。それぞれの名前の裏には agent がすでに読んだ完全なルールがあるので、一言のほうが段落一つ分の指示より正確に効く。それでも agent は返答の中で、その原則がどの判断を変えたかを説明しなければならない。
 
-<div class="content-table-scroll" role="region" aria-label="グループ / 原則 / ひとことで" tabindex="0">
-
 | グループ | 原則 | ひとことで |
 | --- | --- | --- |
 | コア | `laziness-protocol` | リファクタリングや diff の大きさを考えるときは削除と最小の変更に寄せ、抽象化の層を足さない |
@@ -314,8 +308,6 @@ prompt の書き方について、ガイドは 5 つの要素を挙げている�
 | 委任 | `guard-the-context-window` | コンテキストが埋まりそうなら大量の読み込みはサブエージェントに任せ、メインには要約だけを残す |
 | 委任 | `never-block-on-the-human` | 元に戻せる仕事で「やっていいか」を聞かない。やって、結果を見せ、人にあとから直してもらう |
 | メタ | `encode-lessons-in-structure` | 同じ指示を 2 回書いたら、lint、メタデータ、ランタイムチェック、スクリプトのいずれかに変える |
-
-</div>
 
 ガイドの勧めは、この表を暗記しないことだ。一度ざっと目を通し、ある名前があれば防げたはずのことを agent がやったのを見た日に、戻ってきて引けばいい。
 

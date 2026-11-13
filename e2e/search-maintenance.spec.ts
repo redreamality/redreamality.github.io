@@ -58,17 +58,30 @@ for (const prefix of ['', '/cn', '/ja']) {
   });
 }
 
-test('pstack comparison table scrolls by keyboard without moving the page', async ({ page }) => {
-  await page.setViewportSize({ width: 320, height: 844 });
-  await page.goto('/garden/notes/pstack-skills-guide/', { waitUntil: 'domcontentloaded' });
-  const table = page.getByRole('region', { name: 'Host / Installation and entry / Boundary', exact: true });
-  await table.focus();
-  await expect(table).toBeFocused();
-  expect(await table.evaluate(element => element.scrollWidth > element.clientWidth)).toBe(true);
-  await page.keyboard.press('ArrowRight');
-  await expect.poll(() => table.evaluate(element => element.scrollLeft)).toBeGreaterThan(0);
-  expect(await page.evaluate(() => window.scrollX)).toBe(0);
-});
+for (const [prefix, name] of [
+  ['', 'Host / Installation and entry / Boundary'],
+  ['/cn', '宿主 / 安装和入口 / 边界'],
+  ['/ja', 'ホスト / インストールと入口 / 制限'],
+]) {
+  test(`pstack comparison table scrolls by keyboard without moving the page: ${prefix || 'en'}`, async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 844 });
+    await page.goto(`${prefix}/garden/notes/pstack-skills-guide/`, { waitUntil: 'domcontentloaded' });
+    const article = page.locator('main article > div.prose');
+    await expect(article.locator('.content-table-scroll .content-table-scroll')).toHaveCount(0);
+    const tableCount = await article.locator('table').count();
+    expect(tableCount).toBeGreaterThan(0);
+    await expect(article.getByRole('region')).toHaveCount(tableCount);
+    const table = page.getByRole('region', { name, exact: true });
+    await expect(table).toHaveCount(1);
+    await expect(table.locator('table')).toHaveCount(1);
+    await table.focus();
+    await expect(table).toBeFocused();
+    expect(await table.evaluate(element => element.scrollWidth > element.clientWidth)).toBe(true);
+    await page.keyboard.press('ArrowRight');
+    await expect.poll(() => table.evaluate(element => element.scrollLeft)).toBeGreaterThan(0);
+    expect(await page.evaluate(() => window.scrollX)).toBe(0);
+  });
+}
 
 for (const prefix of ['', '/cn', '/ja']) {
   test(`instruction comparison remains readable on mobile: ${prefix || 'en'}`, async ({ page }) => {

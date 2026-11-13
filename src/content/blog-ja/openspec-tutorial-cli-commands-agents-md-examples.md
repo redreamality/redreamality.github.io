@@ -11,7 +11,9 @@ translatedFrom: 'openspec-tutorial-cli-commands-agents-md-examples'
 
 ## Windows、macOS、Linux に OpenSpec をインストールする
 
-2026 年 10 月 26 日更新。npm の `latest` は **1.15.0** です。単体実行ファイルは Node.js を必要としません。npm パッケージには Node.js **20.19.0+** が必要です。インストール方法は一つ選びます。対応環境は[公式インストール文書](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/installation.md)で確認できます。
+以下の導入手順は、2026 年 10 月 26 日の更新時に npm の `latest` だった **1.15.0** を維持しています。この版の単体実行ファイルは Node.js を必要としません。npm パッケージには Node.js **20.19.0+** が必要です。インストール方法は一つ選びます。対応環境は[公式インストール文書](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/installation.md)で確認できます。
+
+2026 年 11 月 13 日時点の [npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) の `latest` は **2.0.0** で、npm パッケージには Node.js **22.12.0+** が必要です。導入例は 1.15.0、練習は 1.13.2 に固定したままです。以下の単体版インストールコマンドの前に、PowerShell では `$env:OPENSPEC_VERSION = 'v1.15.0'`、macOS/Linux では `export OPENSPEC_VERSION=v1.15.0` を実行して、その版を維持してください。
 
 Windows PowerShell では公式の単体版インストーラーを使います。
 
@@ -25,7 +27,7 @@ macOS または Linux では次を使います。
 curl -fsSL https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/scripts/binary/install.sh | sh
 ```
 
-これらは `main` の公式インストーラーを実行し、公開済みバイナリを取得して SHA256SUMS と照合します。`main` をビルドする操作ではありません。バイナリを固定するには、先にそのシェルで環境変数 `OPENSPEC_VERSION=v1.15.0` を設定します。既定の保存先は Windows が `%LOCALAPPDATA%\Programs\openspec`、macOS と Linux が `~/.local/bin` です。Windows ではユーザー PATH に追加されます。導入後に新しいターミナルを開きます。
+これらは `main` の公式インストーラーを実行し、公開済みバイナリを取得して SHA256SUMS と照合します。`main` をビルドする操作ではありません。上記の版を設定した同じシェルでインストーラーを実行してください。既定の保存先は Windows が `%LOCALAPPDATA%\Programs\openspec`、macOS と Linux が `~/.local/bin` です。Windows ではユーザー PATH に追加されます。導入後に新しいターミナルを開きます。
 
 Node.js と pnpm を使っている場合は、公開パッケージも選べます。
 
@@ -61,9 +63,11 @@ which -a openspec
 
 ### 同じ導入方法で更新・削除する
 
-`openspec version --check` で更新を確認します。pnpm 版は `pnpm add -g @fission-ai/openspec@latest` で更新し、各プロジェクト内で `openspec update` を実行して連携ファイルを更新します。生成された差分も確認します。CLI の版の変更とプロジェクトの指示ファイルの更新は別の操作です。
+`openspec version --check` で更新を確認します。1.x を使い続けるなら、上記の固定版を維持するか、`pnpm add -g @fission-ai/openspec@1` で 1.x 内の更新を取得します。`openspec update` が提案する CLI のアップグレードは断ります。`OPENSPEC_NO_UPDATE_CHECK=1` を設定すると、この提案を無効にできます。
 
-単体版はインストーラーを再実行します。`openspec install` はパッケージ管理版から単体版へ切り替える操作で、古いコピーの削除方法を表示します。終了後、新しいターミナルで選ばれる実行ファイルを確認します。
+2.0 を選ぶ場合、npm での導入には Node.js 22.12.0+ が必要です。先に[公式 2.0 移行ガイド](https://openspec.dev/llms.mdx/docs/upgrade-to-2/content.md)を読んでください。カスタマイズを保存してコミットしてから、`pnpm add -g @fission-ai/openspec@2.0.0` で導入し、各プロジェクトで `openspec update` を実行します。2.0 はスキルを `.agents/skills/` に共有し、未変更の生成コマンドファイルを削除してスキルに置き換えます。編集済みの旧コマンドファイルやツール別のスキルコピーは残りますが、`.agents/skills/` 内の OpenSpec が導入するスキルへの編集は、バックアップなしで上書きされます。更新前に `openspec update --dry-run` で影響を確認し、更新後に差分を確認してください。本記事では 2.0 への移行を実測していません。
+
+単体版は `OPENSPEC_VERSION` で対象の版を選んでからインストーラーを再実行します。`openspec install` はパッケージ管理版から単体版へ切り替える操作で、古いコピーの削除方法を表示します。終了後、新しいターミナルで選ばれる実行ファイルを確認します。
 
 pnpm 版の削除は `pnpm remove -g @fission-ai/openspec` です。単体版では、確認した場所の実行ファイルと対応する PATH 項目だけを削除します。`openspec uninstall` コマンドはありません。履歴が必要なら `openspec/specs/` と `openspec/changes/archive/` を残してください。CLI の削除にプロジェクト文書の削除は不要です。
 
@@ -458,7 +462,7 @@ pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login --json --deltas-o
 
 多くの AI コーディングツールは、リポジトリ内の指示ファイルを読みます。`AGENTS.md` は、コードベース内でエージェントにどう振る舞うべきかを伝える、一般的な慣習になっています。
 
-OpenSpec はツール別の skills とコマンドファイルを生成します。たとえば別の 1.13.2 初期化で `--tools claude` を選ぶと、`.claude/skills/openspec-propose/SKILL.md` と `.claude/commands/opsx/propose.md` が生成されます。自動生成の `openspec/AGENTS.md` は必須ではありません。以下は手書きできる任意のプロジェクト規約です。
+OpenSpec 1.x はツール別の skills とコマンドファイルを生成します。たとえば別の 1.13.2 初期化で `--tools claude` を選ぶと、`.claude/skills/openspec-propose/SKILL.md` と `.claude/commands/opsx/propose.md` が生成されます。自動生成の `openspec/AGENTS.md` は必須ではありません。以下は手書きできる任意のプロジェクト規約です。
 
 - 変更提案を読む前に実装しない。
 - 実装は承認済みの変更に限定する。
