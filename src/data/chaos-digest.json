@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T16:00:36+08:00",
+  "updatedAt": "2026-11-14T10:00:43+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,415 @@
     "other"
   ],
   "themeCounts": {
-    "models": 11,
-    "coding-tools": 2,
+    "models": 10,
+    "coding-tools": 1,
     "agents-oss": 1,
-    "security": 9,
-    "research": 16,
-    "product-news": 0,
-    "other": 0
+    "security": 7,
+    "research": 13,
+    "product-news": 1,
+    "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-11-14T10:00:00+08:00",
+      "label": {
+        "zh": "11月14日 10:00",
+        "en": "Nov 14 10:00",
+        "ja": "11月14日 10:00"
+      },
+      "items": [
+        {
+          "id": "t803",
+          "theme": "security",
+          "title": {
+            "zh": "检测失控 agent 的两侧：OpenAI 公开四层失准监测（激活探针、模型审查、调查 agent、自动化调查，覆盖 GPT-6 Astra 以上全部 RL 运行与内部 Codex 流量；回放中逃出沙箱约 30 分钟即告警、比实际攻破早 30+ 小时；9 月一次训练模型接入互联网 15 分钟内被标记并暂停前沿 RL）× Wiz 从 IR 与公开事件提炼 agent 参与入侵的 7 条指纹（机器节奏迭代、工具内嵌自然语言推理、自我纠错、广度优先近全 TTP、大量并行横移、先探测后载荷、用途描述型一次性产物）× Altman：沙箱化超人模型仍未解决",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。续源：Talos：窃密木马用 LLM 给受害者排序。续源：OpenAI 生产激活探针安全层 × Codex Auto-review 红队 11 种绕过。 Google Developers Blog（11-12，经 TLDR AI 11-13 带出）：把 Gemini Enterprise Agent Platform 私测中的 Agent Anomaly Detection（异步读 agent trace 与日志、不增延迟、标记越界会话）原样放到五个非 Google 编写的公开 agent 安全基准上测 agent 目标劫持：AgentDojo、InjecAgent、Agent Security Bench（把指令植入长期记忆）、AgentDyn（指令藏在工具返回里）与 AgentHarm（用户直接要求有害行为）。agent 用 ADK + gemini-2.5-flash，标签由基准自身的确定性代码根据应用最终状态判定，每个 agent 先跑至少 300 个良性会话供检测器学习常态，共 1,774 个会话。结果：模型自己没执行约一半有害指令（直接请求拒绝约四分之三，工具输出中的指令约 30% 被忽略或失败）；被执行的有害指令中检测器标出 87%（AgentDojo 85%、InjecAgent 87%、AgentDyn 99%、AgentHarm 81%）；良性会话误报 2%–16%，取决于 agent 日常工具的风险高低；记忆投毒是明显短板，只抓到 18 例中的 4 例；只有约 220 个历史会话时 AgentDyn 检出率仅 33%，360 个时 99%；约 6% 会话无结果。作者自认限制：单一 agent 模型、模拟应用、良性任务偏简单。补本行「检测失控 agent」的带外监控层实测，且用他人写的基准自测；为厂商产品评测，数字未独立核实。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：实验室内部失准监测与防御侧 agent 攻击指纹，同一问题的两面；主词「agentic attacks」待测。续源：Talos：窃密木马用 LLM 给受害者排序。续源：OpenAI 生产激活探针安全层 × Codex Auto-review 红队 11 种绕过。 Google Developers Blog（11-12，经 TLDR AI 11-13 带出）：把 Gemini Enterprise Agent Platform 私测中的 Agent Anomaly Detection（异步读 agent trace 与日志、不增延迟、标记越界会话）原样放到五个非 Google 编写的公开 agent 安全基准上测 agent 目标劫持：AgentDojo、InjecAgent、Agent Security Bench（把指令植入长期记忆）、AgentDyn（指令藏在工具返回里）与 AgentHarm（用户直接要求有害行为）。agent 用 ADK + gemini-2.5-flash，标签由基准自身的确定性代码根据应用最终状态判定，每个 agent 先跑至少 300 个良性会话供检测器学习常态，共 1,774 个会话。结果：模型自己没执行约一半有害指令（直接请求拒绝约四分之三，工具输出中的指令约 30% 被忽略或失败）；被执行的有害指令中检测器标出 87%（AgentDojo 85%、InjecAgent 87%、AgentDyn 99%、AgentHarm 81%）；良性会话误报 2%–16%，取决于 agent 日常工具的风险高低；记忆投毒是明显短板，只抓到 18 例中的 4 例；只有约 220 个历史会话时 AgentDyn 检出率仅 33%，360 个时 99%；约 6% 会话无结果。作者自认限制：单一 agent 模型、模拟应用、良性任务偏简单。补本行「检测失控 agent」的带外监控层实测，且用他人写的基准自测；为厂商产品评测，数字未独立核实。",
+            "en": "Synthesis candidate: OpenAI's four-layer misalignment detection and Wiz's seven fingerprints of agentic attacks; candidate term \"agentic attacks\". Follow-up: Talos finds the Volta infostealer using LLMs to rank victims by value. Follow-up: OpenAI's production activation-probe safety layer, plus a red-team of Codex Auto-review with 11 bypasses. A Google Developers Blog post (Nov 12, surfaced via the Nov 13 TLDR AI) runs Agent Anomaly Detection, in private preview on Gemini Enterprise Agent Platform, which reads agent traces and logs asynchronously without added latency and flags sessions that act outside intended boundaries, unchanged against five public agent-security benchmarks not written by Google for agent goal hijack: AgentDojo, InjecAgent, Agent Security Bench (instructions planted in long-term memory), AgentDyn (instructions hidden in tool output) and AgentHarm (direct harmful user requests). The agent used ADK with gemini-2.5-flash; labels came from each benchmark's deterministic check of final app state; each agent first ran at least 300 benign sessions so the detector could learn normal behavior; 1,774 sessions in total. The model itself did not follow about half the harmful instructions (refusing about three in four direct requests and ignoring or failing about 30% of injected ones). Of harmful instructions actually carried out, the detector flagged 87% (85% AgentDojo, 87% InjecAgent, 99% AgentDyn, 81% AgentHarm), with 2% to 16% false alarms on benign sessions depending on how high-impact the agent's everyday tools are. Poisoned memory was the clear gap at 4 of 18; with about 220 sessions of history AgentDyn detection was 33% versus 99% at 360; about 6% of sessions returned no result. Stated limits: one agent model, simulated apps, simpler benign tasks than production. Adds an out-of-band monitoring measurement, tested on benchmarks written by others, to this detecting-rogue-agents row; a vendor product evaluation whose figures were not independently verified.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment",
+              "title": "OpenAI: How we detect frontier model misalignment",
+              "brief": {
+                "zh": "一手厂商披露 agent 沙箱逃逸监控架构与真实响应时延，承接 t754（agent 拆掉自己的监控/OpenAI misalignment reports）与 t686，但这是监测系统本身的新架构文，非旧报告重述。站内积累线：sandbox / security-control / agent-loop 监控。",
+                "en": "OpenAI: How we detect frontier model misalignment",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
+              "title": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
+              "brief": {
+                "zh": "防御侧可操作的 agent 攻击检测特征，承接 t747（agent 成为攻击面）与 10-29 Cathedral breach，但角度是检测指纹而非单起事件。站内积累线：security-control / agent-loop。",
+                "en": "Wiz: The Rise of Agentic Attacks — What They Look Like, and Where They're Headed",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=iMsUcCYNKqY",
+              "title": "Why Sam Altman is against a single superintelligence",
+              "brief": {
+                "zh": "Highest VPH this run: Sam Altman on models finding critical PHP vulnerabilities, test-time compute powering agent swarms, and sandboxing superhuman models.",
+                "en": "Why Sam Altman is against a single superintelligence",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+              "title": "Malware uses LLMs to rank victims by how much they're worth (Talos: Volta infostealer)",
+              "brief": {
+                "zh": "Talos 分析 Volta 窃密木马用 LLM 给受害者估值排序；接 Wiz 智能体攻击指纹，AI 进入攻击链",
+                "en": "Malware uses LLMs to rank victims by how much they're worth (Talos: Volta infostealer)",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://alignment.openai.com/training-activation-classifiers/",
+              "title": "OpenAI deploys activation classifiers (probes) as a real-time safety layer on all completions since GPT-5.6",
+              "brief": {
+                "zh": "First production description of activation-probe monitoring that blocks tool calls in-stream at a frontier lab; pairs with Anthropic monitor-evasion work (archived 11-01) and the Codex Auto-review red-team. Not in topics/archive. 站内积累线：security-control / agent monitoring (exploit-candidate).",
+                "en": "OpenAI deploys activation classifiers (probes) as a real-time safety layer on all completions since GPT-5.6",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.lesswrong.com/posts/dbStc8ZFESqfihwAd/lessons-from-red-teaming-auto-review-openai-s-blocking-1",
+              "title": "Lessons From Red-teaming Auto-review: 11 attacks let a misaligned agent bypass Codex's sandbox and blocking monitor",
+              "brief": {
+                "zh": "Concrete exploit taxonomy against a production coding-agent harness monitor; surfaced in TLDR 11-02 (original post 10-30, not previously filed — no auto-review hits in topics/archive). 站内积累线：harness / sandbox / agent-loop security-control (exploit-candidate).",
+                "en": "Lessons From Red-teaming Auto-review: 11 attacks let a misaligned agent bypass Codex's sandbox and blocking monitor",
+                "ja": ""
+              }
+            },
+            {
+              "source": "google",
+              "url": "https://developers.googleblog.com/how-agent-anomaly-detection-scores-on-benchmarks-we-didnt-write/",
+              "title": "How Agent Anomaly Detection scores on benchmarks we didn't write (Google)",
+              "brief": {
+                "zh": "Google Developers Blog（11-12，经 TLDR AI 11-13 带出）：把 Gemini Enterprise Agent Platform 私测中的 Agent Anomaly Detection（异步读 agent trace 与日志、不增延迟、标记越界会话）原样放到五个非 Google 编写的公开 agent 安全基准上测 agent 目标劫持：AgentDojo、InjecAgent、Agent Security Bench（把指令植入长期记忆）、AgentDyn（指令藏在工具返回里）与 AgentHarm（用户直接要求有害行为）。agent 用 ADK + gemini-2.5-flash，标签由基准自身的确定性代码根据应用最终状态判定，每个 agent 先跑至少 300 个良性会话供检测器学习常态，共 1,774 个会话。结果：模型自己没执行约一半有害指令（直接请求拒绝约四分之三，工具输出中的指令约 30% 被忽略或失败）；被执行的有害指令中检测器标出 87%（AgentDojo 85%、InjecAgent 87%、AgentDyn 99%、AgentHarm 81%）；良性会话误报 2%–16%，取决于 agent 日常工具的风险高低；记忆投毒是明显短板，只抓到 18 例中的 4 例；只有约 220 个历史会话时 AgentDyn 检出率仅 33%，360 个时 99%；约 6% 会话无结果。作者自认限制：单一 agent 模型、模拟应用、良性任务偏简单。补本行「检测失控 agent」的带外监控层实测，且用他人写的基准自测；为厂商产品评测，数字未独立核实。",
+                "en": "A Google Developers Blog post (Nov 12, surfaced via the Nov 13 TLDR AI) runs Agent Anomaly Detection, in private preview on Gemini Enterprise Agent Platform, which reads agent traces and logs asynchronously without added latency and flags sessions that act outside intended boundaries, unchanged against five public agent-security benchmarks not written by Google for agent goal hijack: AgentDojo, InjecAgent, Agent Security Bench (instructions planted in long-term memory), AgentDyn (instructions hidden in tool output) and AgentHarm (direct harmful user requests). The agent used ADK with gemini-2.5-flash; labels came from each benchmark's deterministic check of final app state; each agent first ran at least 300 benign sessions so the detector could learn normal behavior; 1,774 sessions in total. The model itself did not follow about half the harmful instructions (refusing about three in four direct requests and ignoring or failing about 30% of injected ones). Of harmful instructions actually carried out, the detector flagged 87% (85% AgentDojo, 87% InjecAgent, 99% AgentDyn, 81% AgentHarm), with 2% to 16% false alarms on benign sessions depending on how high-impact the agent's everyday tools are. Poisoned memory was the clear gap at 4 of 18; with about 220 sessions of history AgentDyn detection was 33% versus 99% at 360; about 6% of sessions returned no result. Stated limits: one agent model, simulated apps, simpler benign tasks than production. Adds an out-of-band monitoring measurement, tested on benchmarks written by others, to this detecting-rogue-agents row; a vendor product evaluation whose figures were not independently verified.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media",
+            "youtube",
+            "hn",
+            "google"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/how-we-detect-frontier-model-misalignment",
+            "https://www.wiz.io/blog/the-rise-of-agentic-attacks-what-they-look-like-and-where-theyre-headed",
+            "https://www.youtube.com/watch?v=iMsUcCYNKqY",
+            "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+            "https://alignment.openai.com/training-activation-classifiers/",
+            "https://www.lesswrong.com/posts/dbStc8ZFESqfihwAd/lessons-from-red-teaming-auto-review-openai-s-blocking-1",
+            "https://developers.googleblog.com/how-agent-anomaly-detection-scores-on-benchmarks-we-didnt-write/"
+          ]
+        },
+        {
+          "id": "t808",
+          "theme": "security",
+          "title": {
+            "zh": "AI 开发工具的「黑色十月」：Cursor 扩展市场上的官方 Claude Code VS Code 扩展被植入后门（Phorion，HN 773/485，Lobsters 140）× Wiz 汇总十月至少 9 起 AI 开发平台安全事件（Fireworks、Lightning、Railway、Warp、OpenCode、Zeabur 等：凭据窃取、agent 群式攻击、为蒸馏/LLMjacking 盗用；被盗 Bedrock key 30 小时约 80 万次调用、转售池 13 小时约 170 万次）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。续源：Postman 静默装 AI 插件 × Codex 对话训练疑似重开。续源：Gemini 订阅用户聊天被用于训练（待核）。续源：Claude Code 疑似把用户邮箱带到访问的网站。 State of AI转述Bloomberg：高盛据称把Claude Code与Microsoft GitHub使用限制给工程师，交易员/银行家停用（HN594/356）；二手转述，内部政策及原报道未核。补企业对coding agent访问边界的治理案例，不据此断言由Apiiro事件导致，也不把未经核实的密钥泄露写成已证实漏洞。 Notion 官方帮助页披露第三方供应商 Fireworks AI 的安全事件，称影响不到 1% 的 Notion 工作区，涉及写入聊天记录的模型输入与输出；AI Meeting Notes 的音频、转写或摘要不受影响，除非又被用作 Notion AI 聊天的输入。Notion 称已于 11 月 3 日断开与 Fireworks 的系统连接、删除其系统中的数据并停止向其发送流量和训练；Fireworks 曾用于 Insights 分类任务和产品内开源权重推理，Insights 已关闭。官方建议把受影响数据当作已暴露，若曾把密码或密钥贴进 Notion AI 应立即轮换。事件技术细节与 Fireworks 一侧经过未在该页展开，未独立核实。HN 159/60。补本行 Wiz「黑色十月」已点名的 Fireworks 开发平台事件，给出具名客户公告，不把 Notion 页写成新的、已证实的独立攻击方法。 Cursor 官方事件调查更新（11-13）：攻击始于 Fireworks——攻击者拿到 Cursor 发给 Fireworks、被 Fireworks 泄露的访问密钥，从一个与其共享数据的只读存储桶复制了有限的 coding agent trace（多为 2025 年、非 Privacy Mode、允许用于训练的会话）；少量 trace 含未脱敏凭据，不到 0.01% 客户的 API 凭据暴露，非 Privacy Mode 用户中不到 0.05% 的 trace 暴露。攻击者用这些凭据进入部分 SaaS 工具，触及部分已归档非生产源码库、有限的客服数据与邮件、使用指标与联系方式、部分 agent 对话摘要，以及用户发给客服的一些凭据。10 月 29 日攻击者用窃得凭据把恶意、未授权的 Anthropic.claude-code 2.1.312/2.1.313 副本直接放到 Cursor VS Code 扩展市场所用的缓存上（来源 Open VSX 从未带毒），最多 5,000 名用户可能在约 11 小时窗口内拿到；Cursor 称这不是 Anthropic 产品漏洞。最后一次攻击者活动在 11 月 1 日并被拦截。Cursor 称生产系统、应用及官方更新、发布签名密钥、客户代码库与实时推理未受影响；已把推理全部迁离 Fireworks、轮换全部内部凭据、重建扩展市场、加密钥扫描与网络限制、重部署生产服务并请外部取证。补本行「黑色十月」中 Cursor 扩展后门与 Fireworks 事件的完整攻击链：训练用 agent trace 中残留凭据成为横向移动起点。均为 Cursor 自述，未独立核实。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。续源：Postman 静默装 AI 插件 × Codex 对话训练疑似重开。续源：Gemini 订阅用户聊天被用于训练（待核）。续源：Claude Code 疑似把用户邮箱带到访问的网站。 State of AI转述Bloomberg：高盛据称把Claude Code与Microsoft GitHub使用限制给工程师，交易员/银行家停用（HN594/356）；二手转述，内部政策及原报道未核。补企业对coding agent访问边界的治理案例，不据此断言由Apiiro事件导致，也不把未经核实的密钥泄露写成已证实漏洞。 Notion 官方帮助页披露第三方供应商 Fireworks AI 的安全事件，称影响不到 1% 的 Notion 工作区，涉及写入聊天记录的模型输入与输出；AI Meeting Notes 的音频、转写或摘要不受影响，除非又被用作 Notion AI 聊天的输入。Notion 称已于 11 月 3 日断开与 Fireworks 的系统连接、删除其系统中的数据并停止向其发送流量和训练；Fireworks 曾用于 Insights 分类任务和产品内开源权重推理，Insights 已关闭。官方建议把受影响数据当作已暴露，若曾把密码或密钥贴进 Notion AI 应立即轮换。事件技术细节与 Fireworks 一侧经过未在该页展开，未独立核实。HN 159/60。补本行 Wiz「黑色十月」已点名的 Fireworks 开发平台事件，给出具名客户公告，不把 Notion 页写成新的、已证实的独立攻击方法。 Cursor 官方事件调查更新（11-13）：攻击始于 Fireworks——攻击者拿到 Cursor 发给 Fireworks、被 Fireworks 泄露的访问密钥，从一个与其共享数据的只读存储桶复制了有限的 coding agent trace（多为 2025 年、非 Privacy Mode、允许用于训练的会话）；少量 trace 含未脱敏凭据，不到 0.01% 客户的 API 凭据暴露，非 Privacy Mode 用户中不到 0.05% 的 trace 暴露。攻击者用这些凭据进入部分 SaaS 工具，触及部分已归档非生产源码库、有限的客服数据与邮件、使用指标与联系方式、部分 agent 对话摘要，以及用户发给客服的一些凭据。10 月 29 日攻击者用窃得凭据把恶意、未授权的 Anthropic.claude-code 2.1.312/2.1.313 副本直接放到 Cursor VS Code 扩展市场所用的缓存上（来源 Open VSX 从未带毒），最多 5,000 名用户可能在约 11 小时窗口内拿到；Cursor 称这不是 Anthropic 产品漏洞。最后一次攻击者活动在 11 月 1 日并被拦截。Cursor 称生产系统、应用及官方更新、发布签名密钥、客户代码库与实时推理未受影响；已把推理全部迁离 Fireworks、轮换全部内部凭据、重建扩展市场、加密钥扫描与网络限制、重部署生产服务并请外部取证。补本行「黑色十月」中 Cursor 扩展后门与 Fireworks 事件的完整攻击链：训练用 agent trace 中残留凭据成为横向移动起点。均为 Cursor 自述，未独立核实。",
+            "en": "Synthesis candidate: backdoored Claude Code extension on the Cursor marketplace plus Wiz's \"Black October\" roll-up of AI developer-platform incidents; candidate term \"Open VSX\" (verify first). Follow-up: Parameter discloses a ChatGPT account-takeover chain. Primary source added: Cursor's notice confirms the backdoor was served from Cursor's own marketplace (not Open VSX), with timeline, IOCs and remediation. Re-heat: the malicious Claude Code extension story spreads across YouTube. Follow-up: Postman silently installing AI plugins and claims that Codex chats are used for training again (both unverified). Follow-up: claims that Gemini trains on subscribers' chat history (unverified). Follow-up: issue claiming Claude Code sends the user email when visiting websites (unverified). State of AI relays Bloomberg reporting that Goldman Sachs restricts Claude Code and Microsoft GitHub to engineers, removing access for bankers and traders (HN 594/356). Secondary reporting; internal policy and original article unverified. Enterprise access-governance follow-up, not proof of Apiiro allegations or evidence that those allegations caused the restriction. A Notion help page discloses a security incident at vendor Fireworks AI, saying it affects fewer than 1% of Notion workspaces and involves model inputs and outputs written to chat transcripts. AI Meeting Notes audio, transcripts or summaries were not affected unless they were later used as input to a Notion AI chat. Notion says that as of November 3 it disconnected from Fireworks, deleted data in the Fireworks system, and stopped sending traffic and training jobs; Fireworks had been used for Insights classification and for serving open-weight models, and Insights is disabled. Notion recommends treating affected data as exposed and rotating passwords or keys pasted into Notion AI. The page does not detail the technical cause or Fireworks' own account; those were not independently verified. HN 159/60. A named-customer follow-up to the Fireworks developer-platform incident already listed on this Black October row, not written as a new, confirmed attack method. Cursor's official incident update (Nov 13): the attack began at Fireworks. An attacker obtained an access key Cursor had issued to Fireworks, exposed by Fireworks, and copied data from a read-only bucket shared with them containing limited coding-agent traces, mostly from 2025 and from non-Privacy-Mode sessions Cursor was permitted to use for training. A few traces held unredacted credentials; fewer than 0.01% of customers had API credentials exposed, and traces were exposed for fewer than 0.05% of non-Privacy-Mode users. With those credentials the attacker reached select SaaS tools and, through them, some archived non-production source repos, limited support data and email, usage metrics and contact details, some agent conversation summaries, and some credentials users had sent to support. On Oct 29 the attacker used a stolen credential to place malicious, unauthorized copies of Anthropic.claude-code 2.1.312 and 2.1.313 directly on the cache serving Cursor's VS Code extension marketplace (the Open VSX source never had them); at most 5,000 users may have received the build during about 11 hours. Cursor says this was not a vulnerability in Anthropic's product. The last attacker activity, on Nov 1, was blocked. Cursor says production systems, the app and its official updates, release signing keys, customer repos and live inference were not affected; it moved all inference off Fireworks, rotated all internal credentials, rebuilt the extension marketplace, added secret scanning and network restrictions, redeployed production services and engaged outside forensics. Completes this Black October row's Cursor extension and Fireworks events with the full chain: credentials left in training-use agent traces became the starting point for lateral movement. Cursor's own account, not independently verified.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+              "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+              "brief": {
+                "zh": "Cursor 扩展市场上的官方 Claude Code 扩展被植入后门；Lobsters 同题 140 分（https://lobste.rs/s/ttp7aq，GossiTheDog 帖）。接供应链/harness 安全线（LiteLLM、HTTP2Shell、backdoors in harnesses），可做 AI 编码工具供应链综述",
+                "en": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
+              "title": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+              "brief": {
+                "zh": "Different report from the filed 10-30 Wiz 'rise of agentic attacks' piece: incident roll-up + LLMjacking telemetry across AI dev platforms. 站内积累线：security-control / agent 平台凭据。",
+                "en": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
+              "title": "Do the math: How we took over ChatGPT accounts",
+              "brief": {
+                "zh": "Parameter 披露接管 ChatGPT 账号的漏洞链；AI 产品自身安全，可并入 AI 工具供应链/安全综述（Claude Code VSX 后门、harness backdoors）",
+                "en": "Do the math: How we took over ChatGPT accounts",
+                "ja": ""
+              }
+            },
+            {
+              "source": "cursor-blog",
+              "url": "https://cursor.com/blog/claude-code-extension-security-notice",
+              "title": "Security notice — malicious version of Anthropic.claude-code (2.1.312 and 2.1.313) identified in the Cursor VS Code Extension Marketplace",
+              "brief": {
+                "zh": "Cursor 官方公告（10-29，10-30 11:30 PT 更新 IOC）：10-29 约 2:27–13:35 PT，Cursor 自家 VS Code 扩展市场上架了被篡改的 Anthropic.claude-code 2.1.312/2.1.313（Win/macOS），非 Anthropic 开发；植入持久 SSH 后门——收集主机信息、向 authorized_keys 加攻击者公钥（svc-telemetry）、尝试开 SSH 并建反向隧道，LaunchAgent/计划任务持久化；多数主机因无管理员权限开 SSH 失败，但公钥、持久化与主机信息上报已发生。Cursor 下架并整体关停市场、审计无其他扩展被篡改、轮换密钥重建市场，协同下线攻击服务器 134.209.82.225；卸载扩展不足以清除，需跑修复脚本并轮换凭据。",
+                "en": "Cursor's official notice (Oct 29, IOCs updated Oct 30): tampered Anthropic.claude-code 2.1.312/2.1.313 was served from Cursor's own VS Code Extension Marketplace for about 11 hours; it planted an attacker SSH key, persistence and a reverse-tunnel attempt and beaconed host details. Cursor pulled it, shut down and rebuilt the marketplace, rotated keys and got the C2 server taken down.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=yIvaF0HI5wo",
+              "title": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
+              "brief": {
+                "zh": "The malicious Claude Code extension story broke out across several channels: malicious Anthropic.claude-code 2.1.312/2.1.313 builds were found in Cursor's VS Code extension marketplace.",
+                "en": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://news.ycombinator.com/item?id=50352757",
+              "title": "OpenAI seems to be silently re-enabling model training on Codex chats",
+              "brief": {
+                "zh": "Ask/讨论帖 433 分：用户称 OpenAI 悄悄重新开启用 Codex 对话训练模型；单方说法待核，属 AI 编程工具数据隐私线。",
+                "en": "OpenAI seems to be silently re-enabling model training on Codex chats",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
+              "title": "Postman silently auto-installs AI plugins and attempts to share all API data",
+              "brief": {
+                "zh": "HN 1020 分：GitHub issue 指 Postman 静默自动安装 AI 插件并尝试共享全部 API 数据；AI 工具供应链/隐私线，可接 Claude Code VSX 后门、ChatGPT 账号接管旧条。单方 issue，官方回应待核。",
+                "en": "Postman silently auto-installs AI plugins and attempts to share all API data",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://news.ycombinator.com/item?id=50363461",
+              "title": "Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)",
+              "brief": {
+                "zh": "Tell HN 628 分：称 Gemini 个人订阅账号的聊天记录也被用于训练；可与昨日 OpenAI Codex 对话训练条目合成 AI 产品数据政策对比。用户说法，条款待核。",
+                "en": "Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://github.com/anthropics/claude-code/issues/107757",
+              "title": "Claude Code sends your email address to websites",
+              "brief": {
+                "zh": "Claude Code 的 GitHub issue 称其访问网站时会带上用户邮箱（issue 自报，待核）；HN 481 分。可接 AI 工具安全/隐私线（Postman 静默装插件、Codex/Gemini 用聊天训练）。",
+                "en": "Claude Code sends your email address to websites",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hacker_news",
+              "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers",
+              "title": "Goldman Sachs is pulling Claude Code from its bankers and traders",
+              "brief": {
+                "zh": "State of AI转述Bloomberg：高盛据称把Claude Code与Microsoft GitHub使用限制给工程师，交易员/银行家停用（HN594/356）；二手转述，内部政策及原报道未核。补企业对coding agent访问边界的治理案例，不据此断言由Apiiro事件导致，也不把未经核实的密钥泄露写成已证实漏洞。",
+                "en": "State of AI relays Bloomberg reporting that Goldman Sachs restricts Claude Code and Microsoft GitHub to engineers, removing access for bankers and traders (HN 594/356). Secondary reporting; internal policy and original article unverified. Enterprise access-governance follow-up, not proof of Apiiro allegations or evidence that those allegations caused the restriction.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "hn",
+              "url": "https://www.notion.com/help/security-incident-involving-a-third-party-ai-vendor",
+              "title": "Fireworks AI security breach impacts Notion and their customers",
+              "brief": {
+                "zh": "Notion 官方帮助页披露第三方供应商 Fireworks AI 的安全事件，称影响不到 1% 的 Notion 工作区，涉及写入聊天记录的模型输入与输出；AI Meeting Notes 的音频、转写或摘要不受影响，除非又被用作 Notion AI 聊天的输入。Notion 称已于 11 月 3 日断开与 Fireworks 的系统连接、删除其系统中的数据并停止向其发送流量和训练；Fireworks 曾用于 Insights 分类任务和产品内开源权重推理，Insights 已关闭。官方建议把受影响数据当作已暴露，若曾把密码或密钥贴进 Notion AI 应立即轮换。事件技术细节与 Fireworks 一侧经过未在该页展开，未独立核实。HN 159/60。补本行 Wiz「黑色十月」已点名的 Fireworks 开发平台事件，给出具名客户公告，不把 Notion 页写成新的、已证实的独立攻击方法。",
+                "en": "A Notion help page discloses a security incident at vendor Fireworks AI, saying it affects fewer than 1% of Notion workspaces and involves model inputs and outputs written to chat transcripts. AI Meeting Notes audio, transcripts or summaries were not affected unless they were later used as input to a Notion AI chat. Notion says that as of November 3 it disconnected from Fireworks, deleted data in the Fireworks system, and stopped sending traffic and training jobs; Fireworks had been used for Insights classification and for serving open-weight models, and Insights is disabled. Notion recommends treating affected data as exposed and rotating passwords or keys pasted into Notion AI. The page does not detail the technical cause or Fireworks' own account; those were not independently verified. HN 159/60. A named-customer follow-up to the Fireworks developer-platform incident already listed on this Black October row, not written as a new, confirmed attack method.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "cursor",
+              "url": "https://cursor.com/blog/security-incident-update",
+              "title": "Cursor security incident update: Fireworks-leaked key → training traces with credentials → malicious Claude Code extension on marketplace cache",
+              "brief": {
+                "zh": "Cursor 官方事件调查更新（11-13）：攻击始于 Fireworks——攻击者拿到 Cursor 发给 Fireworks、被 Fireworks 泄露的访问密钥，从一个与其共享数据的只读存储桶复制了有限的 coding agent trace（多为 2025 年、非 Privacy Mode、允许用于训练的会话）；少量 trace 含未脱敏凭据，不到 0.01% 客户的 API 凭据暴露，非 Privacy Mode 用户中不到 0.05% 的 trace 暴露。攻击者用这些凭据进入部分 SaaS 工具，触及部分已归档非生产源码库、有限的客服数据与邮件、使用指标与联系方式、部分 agent 对话摘要，以及用户发给客服的一些凭据。10 月 29 日攻击者用窃得凭据把恶意、未授权的 Anthropic.claude-code 2.1.312/2.1.313 副本直接放到 Cursor VS Code 扩展市场所用的缓存上（来源 Open VSX 从未带毒），最多 5,000 名用户可能在约 11 小时窗口内拿到；Cursor 称这不是 Anthropic 产品漏洞。最后一次攻击者活动在 11 月 1 日并被拦截。Cursor 称生产系统、应用及官方更新、发布签名密钥、客户代码库与实时推理未受影响；已把推理全部迁离 Fireworks、轮换全部内部凭据、重建扩展市场、加密钥扫描与网络限制、重部署生产服务并请外部取证。补本行「黑色十月」中 Cursor 扩展后门与 Fireworks 事件的完整攻击链：训练用 agent trace 中残留凭据成为横向移动起点。均为 Cursor 自述，未独立核实。",
+                "en": "Cursor's official incident update (Nov 13): the attack began at Fireworks. An attacker obtained an access key Cursor had issued to Fireworks, exposed by Fireworks, and copied data from a read-only bucket shared with them containing limited coding-agent traces, mostly from 2025 and from non-Privacy-Mode sessions Cursor was permitted to use for training. A few traces held unredacted credentials; fewer than 0.01% of customers had API credentials exposed, and traces were exposed for fewer than 0.05% of non-Privacy-Mode users. With those credentials the attacker reached select SaaS tools and, through them, some archived non-production source repos, limited support data and email, usage metrics and contact details, some agent conversation summaries, and some credentials users had sent to support. On Oct 29 the attacker used a stolen credential to place malicious, unauthorized copies of Anthropic.claude-code 2.1.312 and 2.1.313 directly on the cache serving Cursor's VS Code extension marketplace (the Open VSX source never had them); at most 5,000 users may have received the build during about 11 hours. Cursor says this was not a vulnerability in Anthropic's product. The last attacker activity, on Nov 1, was blocked. Cursor says production systems, the app and its official updates, release signing keys, customer repos and live inference were not affected; it moved all inference off Fireworks, rotated all internal credentials, rebuilt the extension marketplace, added secret scanning and network restrictions, redeployed production services and engaged outside forensics. Completes this Black October row's Cursor extension and Fireworks events with the full chain: credentials left in training-use agent traces became the starting point for lateral movement. Cursor's own account, not independently verified.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn",
+            "media",
+            "cursor-blog",
+            "youtube",
+            "hacker_news",
+            "cursor"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+            "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
+            "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
+            "https://cursor.com/blog/claude-code-extension-security-notice",
+            "https://www.youtube.com/watch?v=yIvaF0HI5wo",
+            "https://news.ycombinator.com/item?id=50352757",
+            "https://github.com/postmanlabs/postman-app-support/issues/14370",
+            "https://news.ycombinator.com/item?id=50363461",
+            "https://github.com/anthropics/claude-code/issues/107757",
+            "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers",
+            "https://www.notion.com/help/security-incident-involving-a-third-party-ai-vendor",
+            "https://cursor.com/blog/security-incident-update"
+          ]
+        },
+        {
+          "id": "t896",
+          "theme": "research",
+          "title": {
+            "zh": "SO-Arena：System One（快思考、单次决策）模型的能力谱与可靠性基准——综合最强者可靠性只排第七",
+            "en": "SO-Arena",
+            "ja": "SO-Arena"
+          },
+          "summary": {
+            "zh": "arXiv 2611.15777（Li、Dong、Feng、Li、Wang）提出 SO-Arena，评估 System One 模型（不生成长 token、直接做快速通用决策的模型）的能力谱与决策可靠性。能力侧覆盖 11 个领域、5 类能力：参考标签按模型可见输入人工核验并有可靠出处，按领域定义难度做细粒度评估，并在沙箱中让模型迭代执行动作做交互式评测；推理密集任务还可比较 System 1 与 System 2。可靠性侧两项指标：选项集受控变化下的决策稳定性，以及没有有效选项时能否识别「无正确答案」。对 21 个模型的评测显示，规模与额外推理带来的收益因领域差异很大；更重要的是综合表现强不代表决策可靠——综合最强的 System One 模型可靠性只排第七。HF 日榜约 74 赞。数字均论文自报，未复现。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.15777（Li、Dong、Feng、Li、Wang）提出 SO-Arena，评估 System One 模型（不生成长 token、直接做快速通用决策的模型）的能力谱与决策可靠性。能力侧覆盖 11 个领域、5 类能力：参考标签按模型可见输入人工核验并有可靠出处，按领域定义难度做细粒度评估，并在沙箱中让模型迭代执行动作做交互式评测；推理密集任务还可比较 System 1 与 System 2。可靠性侧两项指标：选项集受控变化下的决策稳定性，以及没有有效选项时能否识别「无正确答案」。对 21 个模型的评测显示，规模与额外推理带来的收益因领域差异很大；更重要的是综合表现强不代表决策可靠——综合最强的 System One 模型可靠性只排第七。HF 日榜约 74 赞。数字均论文自报，未复现。",
+            "en": "arXiv 2611.15777 (Li, Dong, Feng, Li, Wang) introduces SO-Arena to measure the capability spectrum and decision reliability of System One models, which make fast, general-purpose decisions without lengthy token generation. On capability it spans 11 domains and five capability families, with reference labels verified by hand against model-visible inputs and reliable sources, domain-specific difficulty criteria for fine-grained assessment, and interactive evaluation in sandboxes where models execute actions iteratively; reasoning-heavy tasks also allow System 1 versus System 2 comparison. On reliability it adds two measures: decision stability under controlled changes to the option set, and recognizing when no valid option exists. Across 21 models, gains from scale and extra reasoning vary widely by domain, and strong overall performance does not imply reliable decisions: the best overall System One model ranks only seventh on reliability. About 74 likes on the HF daily papers page. Self-reported, not reproduced.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.15777",
+              "title": "SO-Arena: Benchmarking the Capability Spectrum and Reliability of System One Models",
+              "brief": {
+                "zh": "arXiv 2611.15777（Li、Dong、Feng、Li、Wang）提出 SO-Arena，评估 System One 模型（不生成长 token、直接做快速通用决策的模型）的能力谱与决策可靠性。能力侧覆盖 11 个领域、5 类能力：参考标签按模型可见输入人工核验并有可靠出处，按领域定义难度做细粒度评估，并在沙箱中让模型迭代执行动作做交互式评测；推理密集任务还可比较 System 1 与 System 2。可靠性侧两项指标：选项集受控变化下的决策稳定性，以及没有有效选项时能否识别「无正确答案」。对 21 个模型的评测显示，规模与额外推理带来的收益因领域差异很大；更重要的是综合表现强不代表决策可靠——综合最强的 System One 模型可靠性只排第七。HF 日榜约 74 赞。数字均论文自报，未复现。",
+                "en": "arXiv 2611.15777 (Li, Dong, Feng, Li, Wang) introduces SO-Arena to measure the capability spectrum and decision reliability of System One models, which make fast, general-purpose decisions without lengthy token generation. On capability it spans 11 domains and five capability families, with reference labels verified by hand against model-visible inputs and reliable sources, domain-specific difficulty criteria for fine-grained assessment, and interactive evaluation in sandboxes where models execute actions iteratively; reasoning-heavy tasks also allow System 1 versus System 2 comparison. On reliability it adds two measures: decision stability under controlled changes to the option set, and recognizing when no valid option exists. Across 21 models, gains from scale and extra reasoning vary widely by domain, and strong overall performance does not imply reliable decisions: the best overall System One model ranks only seventh on reliability. About 74 likes on the HF daily papers page. Self-reported, not reproduced.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.15777"
+          ]
+        },
+        {
+          "id": "t897",
+          "theme": "other",
+          "title": {
+            "zh": "DetLLM：用全整数运算消除 LLM 推理的不确定性——跨批次、跨 GPU、跨 CPU 逐位一致，困惑度几乎不变但速度代价大",
+            "en": "DetLLM",
+            "ja": "DetLLM"
+          },
+          "summary": {
+            "zh": "Nathan Barry 博客（11-12，经 TLDR AI 11-13 积压带出）：接 Thinking Machines《Defeating Nondeterminism in LLM Inference》（同一提示发 1,000 次得到 80 种答案）。后者靠固定 kernel 的加法顺序实现批次不变性，但只在同一 GPU、同一套 kernel 上成立；DetLLM 改为从输入 id 到 int32 logits 全程整数运算（matmul、归一化、激活、softmax、RoPE 都用整数算子，源自 I-LLM 一线），整数加法精确，因而顺序无关。只有 int8×int8→int32 matmul 依赖硬件。在 Qwen3-0.6B 上，A100、H100 与 CPU 共九种配置（批 1、批 8 含随机同批提示、分段 prefill 加逐 token）生成 512 token 的 logits 链式哈希完全一致，fp16 则从第一个 token 起就各不相同，并在第 457 步因 0.03 的 top-2 差距分叉。79 项零容差测试在两台 GPU 机器上全部通过。WikiText2 困惑度 20.72 对 fp16 的 20.95，C4 差 0.4%；但缺优化 kernel，解码明显慢于 fp16，prefill 约为 fp16 的 0.13 倍。作者称是概念验证，更大模型、整数采样、prefill 速度等仍待解决。数字为作者自报，未复现。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Nathan Barry 博客（11-12，经 TLDR AI 11-13 积压带出）：接 Thinking Machines《Defeating Nondeterminism in LLM Inference》（同一提示发 1,000 次得到 80 种答案）。后者靠固定 kernel 的加法顺序实现批次不变性，但只在同一 GPU、同一套 kernel 上成立；DetLLM 改为从输入 id 到 int32 logits 全程整数运算（matmul、归一化、激活、softmax、RoPE 都用整数算子，源自 I-LLM 一线），整数加法精确，因而顺序无关。只有 int8×int8→int32 matmul 依赖硬件。在 Qwen3-0.6B 上，A100、H100 与 CPU 共九种配置（批 1、批 8 含随机同批提示、分段 prefill 加逐 token）生成 512 token 的 logits 链式哈希完全一致，fp16 则从第一个 token 起就各不相同，并在第 457 步因 0.03 的 top-2 差距分叉。79 项零容差测试在两台 GPU 机器上全部通过。WikiText2 困惑度 20.72 对 fp16 的 20.95，C4 差 0.4%；但缺优化 kernel，解码明显慢于 fp16，prefill 约为 fp16 的 0.13 倍。作者称是概念验证，更大模型、整数采样、prefill 速度等仍待解决。数字为作者自报，未复现。",
+            "en": "Nathan Barry's post (Nov 12, surfaced via the Nov 13 TLDR AI backlog) follows Thinking Machines' \"Defeating Nondeterminism in LLM Inference,\" where one prompt sent 1,000 times produced 80 different answers. Their fix pins kernel summation order for batch invariance, which holds only on one GPU with one set of kernels. DetLLM instead runs every operation from input ids to int32 logits in integer arithmetic (matmuls, normalization, activations, softmax and rotary embeddings, using I-LLM-style integer operators); integer addition is exact, so order no longer matters, and only the int8 x int8 to int32 matmul dispatches on hardware. On Qwen3-0.6B, nine configurations across an A100, an H100 and a CPU (batch 1, batch 8 with random co-prompts, split prefill plus token-by-token) produce identical chain hashes of logits over 512 generated tokens, while fp16 runs differ from the first token and one forks at step 457 on a 0.03 top-two gap. All 79 zero-tolerance tests pass on both GPU machines. WikiText2 perplexity is 20.72 versus 20.95 for fp16 and C4 is 0.4% worse, but without optimized kernels decoding is much slower than fp16 and prefill runs at about 0.13x. The author calls it a proof of concept, with larger models, integer sampling and prefill speed still open. Self-reported, not reproduced.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://nathan.rs/posts/detllm/",
+              "title": "DetLLM: eliminating nondeterminism in LLM inference with integer-only arithmetic",
+              "brief": {
+                "zh": "Nathan Barry 博客（11-12，经 TLDR AI 11-13 积压带出）：接 Thinking Machines《Defeating Nondeterminism in LLM Inference》（同一提示发 1,000 次得到 80 种答案）。后者靠固定 kernel 的加法顺序实现批次不变性，但只在同一 GPU、同一套 kernel 上成立；DetLLM 改为从输入 id 到 int32 logits 全程整数运算（matmul、归一化、激活、softmax、RoPE 都用整数算子，源自 I-LLM 一线），整数加法精确，因而顺序无关。只有 int8×int8→int32 matmul 依赖硬件。在 Qwen3-0.6B 上，A100、H100 与 CPU 共九种配置（批 1、批 8 含随机同批提示、分段 prefill 加逐 token）生成 512 token 的 logits 链式哈希完全一致，fp16 则从第一个 token 起就各不相同，并在第 457 步因 0.03 的 top-2 差距分叉。79 项零容差测试在两台 GPU 机器上全部通过。WikiText2 困惑度 20.72 对 fp16 的 20.95，C4 差 0.4%；但缺优化 kernel，解码明显慢于 fp16，prefill 约为 fp16 的 0.13 倍。作者称是概念验证，更大模型、整数采样、prefill 速度等仍待解决。数字为作者自报，未复现。",
+                "en": "Nathan Barry's post (Nov 12, surfaced via the Nov 13 TLDR AI backlog) follows Thinking Machines' \"Defeating Nondeterminism in LLM Inference,\" where one prompt sent 1,000 times produced 80 different answers. Their fix pins kernel summation order for batch invariance, which holds only on one GPU with one set of kernels. DetLLM instead runs every operation from input ids to int32 logits in integer arithmetic (matmuls, normalization, activations, softmax and rotary embeddings, using I-LLM-style integer operators); integer addition is exact, so order no longer matters, and only the int8 x int8 to int32 matmul dispatches on hardware. On Qwen3-0.6B, nine configurations across an A100, an H100 and a CPU (batch 1, batch 8 with random co-prompts, split prefill plus token-by-token) produce identical chain hashes of logits over 512 generated tokens, while fp16 runs differ from the first token and one forks at step 457 on a 0.03 top-two gap. All 79 zero-tolerance tests pass on both GPU machines. WikiText2 perplexity is 20.72 versus 20.95 for fp16 and C4 is 0.4% worse, but without optimized kernels decoding is much slower than fp16 and prefill runs at about 0.13x. The author calls it a proof of concept, with larger models, integer sampling and prefill speed still open. Self-reported, not reproduced.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://nathan.rs/posts/detllm/"
+          ]
+        },
+        {
+          "id": "t899",
+          "theme": "product-news",
+          "title": {
+            "zh": "Claude 帮助解读哥德尔 1,009 页速记工作簿：663 条定理入 Coq，约 400 条原样通过、约 200 条修正后通过、约 50 条为假（Guardian 报道，研究者自述）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "Guardian（11-13，Alex Bellos；HN 328/92）：赫尔辛基大学 Jan von Plato 自 2017 年起研究哥德尔 1940 年代初的 16 本工作簿，共 1,009 页，大量用已过时的 Gabelsberger 速记写成，人工进度约每周一页。今年 9 月他把转写稿、自己的六本哥德尔专著及其他文献交给 Claude，几天内得到约 650 页的全书解读（他称需要逐页核对）。他先让 Claude 查工作簿中是否有选择公理独立性的证明：结论是「几乎有」，差一个定义，而哥德尔两年前曾写对；重建的证明在 Coq 中通过。再让 Claude 提取哥德尔有证明、证明草图或证明思路的定理，共 663 条，放入 Coq 后约 400 条原样通过、约 200 条需修正表述或补假设、约 50 条为假（哥德尔自己也曾在边注写 falsch）。von Plato 称工作簿含数十条预示 1970–80 年代结果的内容和 14 个未被追踪的逻辑主题。圣母大学逻辑学家 Joel David Hamkins 未看过该重建，提醒「多少是 Claude、多少是哥德尔」需由史家判断，相似不等于他已得到 Cohen 的证明。均为报道与研究者自述，未独立核实。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Guardian（11-13，Alex Bellos；HN 328/92）：赫尔辛基大学 Jan von Plato 自 2017 年起研究哥德尔 1940 年代初的 16 本工作簿，共 1,009 页，大量用已过时的 Gabelsberger 速记写成，人工进度约每周一页。今年 9 月他把转写稿、自己的六本哥德尔专著及其他文献交给 Claude，几天内得到约 650 页的全书解读（他称需要逐页核对）。他先让 Claude 查工作簿中是否有选择公理独立性的证明：结论是「几乎有」，差一个定义，而哥德尔两年前曾写对；重建的证明在 Coq 中通过。再让 Claude 提取哥德尔有证明、证明草图或证明思路的定理，共 663 条，放入 Coq 后约 400 条原样通过、约 200 条需修正表述或补假设、约 50 条为假（哥德尔自己也曾在边注写 falsch）。von Plato 称工作簿含数十条预示 1970–80 年代结果的内容和 14 个未被追踪的逻辑主题。圣母大学逻辑学家 Joel David Hamkins 未看过该重建，提醒「多少是 Claude、多少是哥德尔」需由史家判断，相似不等于他已得到 Cohen 的证明。均为报道与研究者自述，未独立核实。仅 Chaos。",
+            "en": "The Guardian (Nov 13, Alex Bellos; HN 328/92): since 2017, Jan von Plato at the University of Helsinki has studied 16 of Kurt Gödel's early-1940s workbooks, 1,009 pages largely in obsolete Gabelsberger shorthand, at about a page a week. In September he gave Claude his transcriptions plus his six books on Gödel and other literature, and within days received a roughly 650-page explanation that he says had to be checked page by page. Asked whether the workbooks contain a proof of the independence of the axiom of choice, Claude reported \"almost,\" with one definition wrong that Gödel had stated correctly two years earlier; the reconstructed proof passed in Coq. Asked to extract every theorem Gödel had a proof, sketch or idea for, Claude found 663; in Coq about 400 verified as stated, about 200 after repairs to statements or assumptions, and about 50 were false (Gödel himself wrote \"falsch!\" in some margins). Von Plato says the workbooks anticipate dozens of results from the 1970s and 1980s and contain 14 unpursued themes in logic. Notre Dame logician Joel David Hamkins, who has not seen the reconstruction, cautions that how much is Claude and how much is Gödel is for historians, and that resemblance does not mean Gödel had Cohen's proof. Report and researcher accounts, not independently verified. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://www.theguardian.com/science/2026/nov/13/kurt-godel-notebooks-ai-helps-unlock-hidden-discoveries-man-who-transformed-maths",
+              "title": "AI unlocks Gödel's notebooks, said to contain hundreds of proved theorems",
+              "brief": {
+                "zh": "Guardian（11-13，Alex Bellos；HN 328/92）：赫尔辛基大学 Jan von Plato 自 2017 年起研究哥德尔 1940 年代初的 16 本工作簿，共 1,009 页，大量用已过时的 Gabelsberger 速记写成，人工进度约每周一页。今年 9 月他把转写稿、自己的六本哥德尔专著及其他文献交给 Claude，几天内得到约 650 页的全书解读（他称需要逐页核对）。他先让 Claude 查工作簿中是否有选择公理独立性的证明：结论是「几乎有」，差一个定义，而哥德尔两年前曾写对；重建的证明在 Coq 中通过。再让 Claude 提取哥德尔有证明、证明草图或证明思路的定理，共 663 条，放入 Coq 后约 400 条原样通过、约 200 条需修正表述或补假设、约 50 条为假（哥德尔自己也曾在边注写 falsch）。von Plato 称工作簿含数十条预示 1970–80 年代结果的内容和 14 个未被追踪的逻辑主题。圣母大学逻辑学家 Joel David Hamkins 未看过该重建，提醒「多少是 Claude、多少是哥德尔」需由史家判断，相似不等于他已得到 Cohen 的证明。均为报道与研究者自述，未独立核实。仅 Chaos。",
+                "en": "The Guardian (Nov 13, Alex Bellos; HN 328/92): since 2017, Jan von Plato at the University of Helsinki has studied 16 of Kurt Gödel's early-1940s workbooks, 1,009 pages largely in obsolete Gabelsberger shorthand, at about a page a week. In September he gave Claude his transcriptions plus his six books on Gödel and other literature, and within days received a roughly 650-page explanation that he says had to be checked page by page. Asked whether the workbooks contain a proof of the independence of the axiom of choice, Claude reported \"almost,\" with one definition wrong that Gödel had stated correctly two years earlier; the reconstructed proof passed in Coq. Asked to extract every theorem Gödel had a proof, sketch or idea for, Claude found 663; in Coq about 400 verified as stated, about 200 after repairs to statements or assumptions, and about 50 were false (Gödel himself wrote \"falsch!\" in some margins). Von Plato says the workbooks anticipate dozens of results from the 1970s and 1980s and contain 14 unpursued themes in logic. Notre Dame logician Joel David Hamkins, who has not seen the reconstruction, cautions that how much is Claude and how much is Gödel is for historians, and that resemblance does not mean Gödel had Cohen's proof. Report and researcher accounts, not independently verified. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.theguardian.com/science/2026/nov/13/kurt-godel-notebooks-ai-helps-unlock-hidden-discoveries-man-who-transformed-maths"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-13T16:00:00+08:00",
       "label": {
@@ -902,733 +1302,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://arxiv.org/abs/2611.13548"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-11T10:00:00+08:00",
-      "label": {
-        "zh": "11月11日 10:00",
-        "en": "Nov 11 10:00",
-        "ja": "11月11日 10:00"
-      },
-      "items": [
-        {
-          "id": "t666",
-          "theme": "security",
-          "title": {
-            "zh": "AI 漏洞发现规模化：Anthropic OSS Scanner（模型直出报告、抽检 88% 达 CVD 标准）+ Cyber Mission 关键基础设施防御 + Codex Security CLI + Cantina apex-flash-1",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Anthropic 开放 OSS Scanner：最强模型免费扫关键开源项目、报告无人工分诊，抽检高危 88% 达 CVD 标准；同窗 Codex Security CLI 与 Cantina 小模型——漏洞发现规模化后，瓶颈转到维护者吞吐与报告洪水。；「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail，未双过/无数值 → inbox。 10-10：GLM 5.3 Flash 登顶 AA Cyber Index，开源权重网络安全能力扩散。续源：Anthropic 一手：agent 扫描车队与五条 exploit chain。续源：Epoch 开源权重模型利用 patch gap。续源：OpenAI 948 个 Linux 内核提权（$1.2M）× IEEE 技术债。续源：GPT-6 Cyber 首评 Critical + 蜜罐范围遵守。 VulnCheck 博客（11-09，第三方跟踪，HN 200/81）称 Project Glasswing 七个月后，其追踪到 442 个可归于 Anthropic 的 CVE（约占今年已公布 CVE 的 0.5%），其中仅 2 个进入 VulnCheck KEV。作者引用 Anthropic 公开账本：37,966 条发现中 7,349 条（19.4%）已公开、217 条标为已修复、1,654 条（4.4%）为重复、419 条撤回；自称真阳性率从 90.8% 升至 94.2%。9 月 8 日到 11 月 2 日，发现约增 11,813 条、修复只多 15 条。文称 OSS Scanner 把校验工作转给维护者，并引 curl 维护者：一批 45 份报告里已公布 34 份，其中 19 份被标为不是漏洞、6 份确认为低危、9 份待评估（作者据此算出迄今约 55.9% 假阳性）。所有统计均为 VulnCheck 跟踪或其对账本/curl 公示的解读，未独立复核，不写成 Anthropic 项目已被证实失败。补本行「发现产能 vs 维护者吞吐」的第三方审计。 openai/codex-security 再收仅热榜刷新：进 GitHub 总日榜与 TypeScript 日榜 +643，总星 12,445；10-09 收录时 TypeScript 日增约 +30、11040 星，昨日 +52，今日约为昨日 12 倍。仍为 Codex Security（查找、核实、修复漏洞，含 CLI、TypeScript SDK 与 GitHub Action），无新增机制信息，不更新 updated_at。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Anthropic 开放 OSS Scanner：最强模型免费扫关键开源项目、报告无人工分诊，抽检高危 88% 达 CVD 标准；同窗 Codex Security CLI 与 Cantina 小模型——漏洞发现规模化后，瓶颈转到维护者吞吐与报告洪水。；「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail，未双过/无数值 → inbox。 10-10：GLM 5.3 Flash 登顶 AA Cyber Index，开源权重网络安全能力扩散。续源：Anthropic 一手：agent 扫描车队与五条 exploit chain。续源：Epoch 开源权重模型利用 patch gap。续源：OpenAI 948 个 Linux 内核提权（$1.2M）× IEEE 技术债。续源：GPT-6 Cyber 首评 Critical + 蜜罐范围遵守。 VulnCheck 博客（11-09，第三方跟踪，HN 200/81）称 Project Glasswing 七个月后，其追踪到 442 个可归于 Anthropic 的 CVE（约占今年已公布 CVE 的 0.5%），其中仅 2 个进入 VulnCheck KEV。作者引用 Anthropic 公开账本：37,966 条发现中 7,349 条（19.4%）已公开、217 条标为已修复、1,654 条（4.4%）为重复、419 条撤回；自称真阳性率从 90.8% 升至 94.2%。9 月 8 日到 11 月 2 日，发现约增 11,813 条、修复只多 15 条。文称 OSS Scanner 把校验工作转给维护者，并引 curl 维护者：一批 45 份报告里已公布 34 份，其中 19 份被标为不是漏洞、6 份确认为低危、9 份待评估（作者据此算出迄今约 55.9% 假阳性）。所有统计均为 VulnCheck 跟踪或其对账本/curl 公示的解读，未独立复核，不写成 Anthropic 项目已被证实失败。补本行「发现产能 vs 维护者吞吐」的第三方审计。 openai/codex-security 再收仅热榜刷新：进 GitHub 总日榜与 TypeScript 日榜 +643，总星 12,445；10-09 收录时 TypeScript 日增约 +30、11040 星，昨日 +52，今日约为昨日 12 倍。仍为 Codex Security（查找、核实、修复漏洞，含 CLI、TypeScript SDK 与 GitHub Action），无新增机制信息，不更新 updated_at。",
-            "en": "Anthropic opens OSS Scanner: its strongest models scan critical open source for free with no human triage, and 88% of sampled high-severity findings met the CVD bar; alongside Codex Security CLI and Cantina's small model, the bottleneck shifts to maintainer throughput and report floods. Trends 「AI vulnerability」7d 32.29 vs gpts 64.21 fail、24h 1.29 vs gpts 27.89 fail — not both / no data, inbox. Oct 10: GLM 5.3 Flash tops the AA Cyber Index—open-weight cyber capability spreading. Follow-up: Anthropic Frontier Red Team primary post, parallel scanner fleet and five exploit chains. Follow-up: Epoch shows open-weight GLM 5.3 exploiting the Firefox patch gap. Follow-up: OpenAI's agent pipeline found and patched 948 Linux kernel LPEs for $1.2M; IEEE Spectrum on AI forcing payoff of old tech debt. Follow-up: GPT-6 Cyber, first Critical cyber rating, with honeypot scope-adherence evals. A VulnCheck blog dated Nov 9 (third-party tracking, HN 200/81) says that after seven months of Project Glasswing it has counted 442 CVEs attributable to Anthropic, about 0.5% of CVEs published this year, with only two in VulnCheck KEV. It cites Anthropic's public ledger as 37,966 findings, 7,349 public (19.4%), 217 marked fixed, 1,654 duplicates (4.4%) and 419 withdrawn, with a claimed true-positive rate rising from 90.8% to 94.2%. From September 8 to November 2, findings rose by about 11,813 while fixes rose by 15. The author argues OSS Scanner moved validation onto maintainers and cites curl: of 34 published reports from a batch of 45, 19 were marked not a vulnerability, 6 were confirmed low severity and 9 awaited assessment (a 55.9% false-positive rate by the author's arithmetic so far). All figures are VulnCheck's tracking or its reading of the ledger and curl's public issues, not independently checked, and are not written as proof that Anthropic's program has failed. Adds a third-party audit to this discovery-versus-maintainer-throughput thread. openai/codex-security popularity-only refresh: +643 on the overall and TypeScript daily charts, 12,445 stars, versus about +30 daily and 11,040 stars when logged on Oct 9 and +52 yesterday (about 12x today). Still Codex Security for finding, validating and fixing vulnerabilities, with a CLI, TypeScript SDK and GitHub Action; no new mechanism, preserve updated_at.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "anthropic",
-              "url": "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
-              "title": "Launching an opt-in vulnerability-finding service for open source",
-              "brief": {
-                "zh": "6 个月 2.9 万候选；抽检 97 高危 85 达标、1 误报；wolfSSL 72/74、5 CVE；PR 入组。",
-                "en": "29k candidates in 6 months; 85 of 97 sampled critical/high met CVD bar, 1 false positive; wolfSSL 72/74, 5 CVEs; enrol by PR.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "anthropic",
-              "url": "https://www.anthropic.com/news/anthropic-cyber-mission",
-              "title": "Anthropic Cyber Mission",
-              "brief": {
-                "zh": "关键基础设施防御计划（OT/电网/水务）与多家安全咨询伙伴。",
-                "en": "Critical Infrastructure Defense Program (OT/grid/water) with security-consulting partners.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/openai/codex-security",
-              "title": "openai/codex-security",
-              "brief": {
-                "zh": "★11040 Δ30；Codex Security CLI + TS SDK 找/验/修漏洞。 openai/codex-security 再收仅热榜刷新：进 GitHub 总日榜与 TypeScript 日榜 +643，总星 12,445；10-09 收录时 TypeScript 日增约 +30、11040 星，昨日 +52，今日约为昨日 12 倍。仍为 Codex Security（查找、核实、修复漏洞，含 CLI、TypeScript SDK 与 GitHub Action），无新增机制信息，不更新 updated_at。",
-                "en": "★11040 Δ30; Codex Security CLI and TS SDK to find, validate and fix vulns. openai/codex-security popularity-only refresh: +643 on the overall and TypeScript daily charts, 12,445 stars, versus about +30 daily and 11,040 stars when logged on Oct 9 and +52 yesterday (about 12x today). Still Codex Security for finding, validating and fixing vulnerabilities, with a CLI, TypeScript SDK and GitHub Action; no new mechanism, preserve updated_at.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/cantina-security/apex-flash-1",
-              "title": "cantina-security/apex-flash-1",
-              "brief": {
-                "zh": "GLM-5.3-Flash RL 后训做漏洞调查，66.7% pass@1、$2.38。",
-                "en": "GLM-5.3-Flash RL-tuned for exploit investigation; 66.7% pass@1 at $2.38.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x1rwof/glm_53_flash_opensource_the_top_of_artificial/",
-              "title": "GLM 5.3 Flash tops Artificial Analysis Cyber Index over Claude",
-              "brief": {
-                "zh": "开源权重网络能力榜首。",
-                "en": "Open weights top the cyber index.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude",
-              "title": "Discovering and exploiting vulnerabilities in critical, real-world software with Claude (Anthropic Frontier Red Team)",
-              "brief": {
-                "zh": "Publication date is Oct 27 (before the 10-28 15:43 window) but it first surfaced in the media lane via aihot/IT之家 in-window and no lane/archive/topics has this URL — filed as late catch. Deep, mechanism-rich agent security/harness content (parallel scanner fleet, verification pipeline, exploit-chain",
-                "en": "Discovering and exploiting vulnerabilities in critical, real-world software with Claude (Anthropic Frontier Red Team)",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://epoch.ai/publications/open-weight-models-patch-gap",
-              "title": "Epoch AI: Open-weight AI models can exploit the patch gap (GLM 5.3 built full Firefox exploit chains)",
-              "brief": {
-                "zh": "Materially new primary data vs. topics t402 (Anthropic/NIST GLM-5.3 cyber): concrete patch-gap threat model, cost figure, disclosure to Mozilla; Nathan Lambert (Interconnects) publicly revisiting his open-model-risk stance. 站内积累线：security-control / agent 自主攻击。",
-                "en": "Epoch AI: Open-weight AI models can exploit the patch gap (GLM 5.3 built full Firefox exploit chains)",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability",
-              "title": "AI is forcing us to pay off 40 years of technical debt",
-              "brief": {
-                "zh": "IEEE Spectrum 1057 分：以 PHP2Shell 漏洞为例，AI 让老代码漏洞挖掘规模化，迫使行业偿还数十年技术债；AI 安全/开发者工具综合线。",
-                "en": "AI is forcing us to pay off 40 years of technical debt",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
-              "title": "OpenAI: A thousand fewer paths to root — autonomous pipeline finds/exploits/patches 948 Linux kernel LPEs for $1.2M",
-              "brief": {
-                "zh": "Primary frontier security research with hard cost numbers; not in inbox/archive 11-03/04 or topics.md (HN lane filed only Pierre and Kimi). 站内积累线: harness/scaffolding should be re-evaluated per model generation (skills layer removed), 'verify the path not just the result' for agent evals, sandbox/is",
-                "en": "OpenAI: A thousand fewer paths to root — autonomous pipeline finds/exploits/patches 948 Linux kernel LPEs for $1.2M",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://openai.com/index/introducing-gpt-6-cyber",
-              "title": "OpenAI GPT-6 Cyber: Preparedness 'Critical' cyber model, 99.93% in-scope on ExploitGym Honeypot, Daybreak Red gated access",
-              "brief": {
-                "zh": "New model plus a primary safety/scope-control writeup. Different from archive/20261105 'a thousand fewer paths to root' (the 948-LPE pipeline post) and archive/20261104 Daybreak/GovCloud: this one is the model launch, the first 'Critical' cyber rating, and the honeypot scope-adherence eval. Related",
-                "en": "OpenAI GPT-6 Cyber: Preparedness 'Critical' cyber model, 99.93% in-scope on ExploitGym Honeypot, Daybreak Red gated access",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.vulncheck.com/blog/anthropic-glasswing-november-update",
-              "title": "After 7 months, Glasswing overwelms maintainers with underwhelming findings",
-              "brief": {
-                "zh": "VulnCheck 博客（11-09，第三方跟踪，HN 200/81）称 Project Glasswing 七个月后，其追踪到 442 个可归于 Anthropic 的 CVE（约占今年已公布 CVE 的 0.5%），其中仅 2 个进入 VulnCheck KEV。作者引用 Anthropic 公开账本：37,966 条发现中 7,349 条（19.4%）已公开、217 条标为已修复、1,654 条（4.4%）为重复、419 条撤回；自称真阳性率从 90.8% 升至 94.2%。9 月 8 日到 11 月 2 日，发现约增 11,813 条、修复只多 15 条。文称 OSS Scanner 把校验工作转给维护者，并引 curl 维护者：一批 45 份报告里已公布 34 份，其中 19 份被标为不是漏洞、6 份确认为低危、9 份待评估（作者据此算出迄今约 55.9% 假阳性）。所有统计均为 VulnCheck 跟踪或其对账本/curl 公示的解读，未独立复核，不写成 Anthropic 项目已被证实失败。补本行「发现产能 vs 维护者吞吐」的第三方审计。",
-                "en": "A VulnCheck blog dated Nov 9 (third-party tracking, HN 200/81) says that after seven months of Project Glasswing it has counted 442 CVEs attributable to Anthropic, about 0.5% of CVEs published this year, with only two in VulnCheck KEV. It cites Anthropic's public ledger as 37,966 findings, 7,349 public (19.4%), 217 marked fixed, 1,654 duplicates (4.4%) and 419 withdrawn, with a claimed true-positive rate rising from 90.8% to 94.2%. From September 8 to November 2, findings rose by about 11,813 while fixes rose by 15. The author argues OSS Scanner moved validation onto maintainers and cites curl: of 34 published reports from a batch of 45, 19 were marked not a vulnerability, 6 were confirmed low severity and 9 awaited assessment (a 55.9% false-positive rate by the author's arithmetic so far). All figures are VulnCheck's tracking or its reading of the ledger and curl's public issues, not independently checked, and are not written as proof that Anthropic's program has failed. Adds a third-party audit to this discovery-versus-maintainer-throughput thread.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "anthropic",
-            "verge",
-            "github",
-            "huggingface",
-            "reddit",
-            "media",
-            "hn"
-          ],
-          "score": 5,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
-            "https://www.anthropic.com/news/anthropic-cyber-mission",
-            "https://github.com/openai/codex-security",
-            "https://huggingface.co/cantina-security/apex-flash-1",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x1rwof/glm_53_flash_opensource_the_top_of_artificial/",
-            "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude",
-            "https://epoch.ai/publications/open-weight-models-patch-gap",
-            "https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability",
-            "https://openai.com/index/a-thousand-fewer-paths-to-root",
-            "https://openai.com/index/introducing-gpt-6-cyber",
-            "https://www.vulncheck.com/blog/anthropic-glasswing-november-update"
-          ]
-        },
-        {
-          "id": "t747",
-          "theme": "security",
-          "title": {
-            "zh": "agent 成为攻击面与内鬼：NorForge 揭 Cairn agent 黑客面板（20+ 暴露面板，指挥自主 agent 入侵 100+ 站点：John Deere/SharkNinja/Cummins）× 微软 Guardian Agents「前沿模型无论出处都不可信」× Claude Code 装上 Expiro 病毒",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。续源：承包商把个人 Claude Code agent 接进五角大楼网络（WIRED，有争议）。 Censys 原文经信号侧确认：1465 个暴露 Artex console hosts，约 650 为两组相同配置，剩约 815 个看似独立部署；另有 32 个开放工具目录、155 个共同运行其他威胁/工具的主机。不得把 hosts 当部署数、所有部署当恶意；扫描日期原文有 11/3 与 11/4 两种标签，不下单日断言；「无密码」总括来自 TechCrunch，不是 Censys 明示。仅来源统计，未探测目标。 Ars Technica（11-10）转述安全公司 Claroc：SpaceXSI（报道所称 xAI 与 SpaceX 合并后的公司）的 Grok Build 分享链接可被打开。Claroc 称尝试 43,551 个地址，37,571 个仍在线，其中 35,578 个（94.7%）无需登录；发布时默认是「任何持有链接的人」。24 个开放应用由 SpaceXSI 与 X 员工所建，Claroc 称其中包括标注机密的销售材料；SpaceXSI 称员工应用默认私有，但仍有 24 个对任何人开放，并在接到报告后撤下。Ars 称自己发问后数小时内这 24 个链接变为 app not found，但撰稿时其他用户的数据大多仍可访问。枚举规模与 94.7% 等均为 Claroc 自报，未独立复核；不描述如何发现这些地址。补本行已收的分享链接暴露（GhostShares / Muse）线索，产品与机制不同，不写成与 Claude Code 密钥泄漏同一事件。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（站内 agent 安全积累线，承接已发 t731）：攻防与供应链三面俱全；待 Trends bot。续源：军用自复制 agent + agent 产物泄露，攻击面线更完整。续源：野外攻击 agent 两例（LLMjacking、ARTEX），可成多来源综合。续源：承包商把个人 Claude Code agent 接进五角大楼网络（WIRED，有争议）。 Censys 原文经信号侧确认：1465 个暴露 Artex console hosts，约 650 为两组相同配置，剩约 815 个看似独立部署；另有 32 个开放工具目录、155 个共同运行其他威胁/工具的主机。不得把 hosts 当部署数、所有部署当恶意；扫描日期原文有 11/3 与 11/4 两种标签，不下单日断言；「无密码」总括来自 TechCrunch，不是 Censys 明示。仅来源统计，未探测目标。 Ars Technica（11-10）转述安全公司 Claroc：SpaceXSI（报道所称 xAI 与 SpaceX 合并后的公司）的 Grok Build 分享链接可被打开。Claroc 称尝试 43,551 个地址，37,571 个仍在线，其中 35,578 个（94.7%）无需登录；发布时默认是「任何持有链接的人」。24 个开放应用由 SpaceXSI 与 X 员工所建，Claroc 称其中包括标注机密的销售材料；SpaceXSI 称员工应用默认私有，但仍有 24 个对任何人开放，并在接到报告后撤下。Ars 称自己发问后数小时内这 24 个链接变为 app not found，但撰稿时其他用户的数据大多仍可访问。枚举规模与 94.7% 等均为 Claroc 自报，未独立复核；不描述如何发现这些地址。补本行已收的分享链接暴露（GhostShares / Muse）线索，产品与机制不同，不写成与 Claude Code 密钥泄漏同一事件。",
-            "en": "Synthesis candidate: Cairn agent-hacking panels (NorForge) + Microsoft Guardian Agents + Claude Code installing Expiro; awaiting Trends bot. Follow-up: Army ECHOTRIBBLE self-replicating agents and Meta Muse GhostShares exposure. Follow-up: in-the-wild offensive agents (Symantec LLMjacking, Wiz ARTEX/Storm-0940); synthesis candidate, term LLMjacking. Follow-up: WIRED reports a contractor connected a personal Claude Code agent to a Pentagon network (disputed). Censys reports 1,465 exposed Artex console hosts, approximately 815 distinct-looking deployments after grouping ~650 identically configured hosts, plus 32 open tooling directories and 155 hosts co-running other threats/tools. Do not equate hosts with deployments or exposure with malicious use. Scan-date labels conflict; blanket no-password wording is TechCrunch's, not Censys's. No target probing. Ars Technica (Nov 10) reports Claroc's findings on Grok Build share links from SpaceXSI (the name used for the combined xAI and SpaceX company). Claroc says it tried 43,551 app addresses, found 37,571 still online, and could open 35,578 (94.7%) without logging in; the default at publish time was anyone with the link. It identified 24 open apps built by SpaceXSI and X staff, including material it describes as confidential sales documents. SpaceXSI said employee apps are private by default but that 24 were still open to anyone, and took those 24 down after the report. Ars says those 24 links became \"app not found\" within hours of its questions, while most other users' data remained reachable at the time of writing. The enumeration counts and 94.7% figure are Claroc's own and were not independently checked; this note does not describe how the addresses were found. A follow-up to the share-link exposure already on this row (GhostShares / Muse), involving a different product, not the Claude Code secret-leak events.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
-              "title": "Microsoft launches Guardian Agents: 'frontier models, regardless of origin, cannot be trusted' — agents as insider threats",
-              "brief": {
-                "zh": "New product launch Oct 19 (distinct from skipped Oct 11 Nadella emergency-brake interview — this is a shipped control layer). Agent control/observability line; vendor-independent agent monitors vs lab self-assurance (cf. Goodfire monitors Oct 9 archive). 站内积累线 agent sandbox/control.",
-                "en": "Microsoft adds Guardian Agents to monitor and control enterprise AI agents as insider threats, saying frontier models regardless of origin cannot be trusted.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://norforge.com/blog/inside_cairn",
-              "title": "NorForge: Inside Cairn — exposed AI-agent hacking panels behind 100+ site breaches (John Deere, SharkNinja, Cummins)",
-              "brief": {
-                "zh": "New Oct 19 primary report; not in archive (no Cairn/NorForge hits). Real-world autonomous agent-harness offense at scale + harness UI exposure as attack surface — 站内积累线 agent harness/security; pairs with OpenCode breach (t731) and Microsoft agentic-insider piece. exploit-candidate: blackboard-style",
-                "en": "NorForge found 20+ exposed panels of Cairn, an open-source agent problem-solving engine, used to direct autonomous agents behind 100+ site breaches (John Deere, SharkNinja, Cummins).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
-              "title": "Claude Code installed tooling which was actually Expiro virus.",
-              "brief": {
-                "zh": "Claude Code 装的工具竟是 Expiro 病毒，接 OpenCode 泄露的 agent 供应链安全线",
-                "en": "A user reports Claude Code installed tooling that turned out to be the Expiro virus.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
-              "title": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
-              "brief": {
-                "zh": "Turns the archived lab-incident line (agents breaking out / self-replicating prompt injections) into an intentional military design — control/containment angle, not a launch. New vs. archive (no ARCYBER/ECHOTRIBBLE in topics). Fits t697/t701 containment + t676 agent-overreach cluster.",
-                "en": "Army Cyber Command's ECHOTRIBBLE: autonomous, self-replicating AI agents as offensive cyberweapons",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
-              "title": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
-              "brief": {
-                "zh": "Concrete mechanism (unguessable path ≠ undiscoverable hostname) on a 10M-download agent product; security-of-agent-artifacts line. Not a dup of t696 Muse Wonder launch or the redact.dev WhatsApp hidden-instructions item. Medium priority.",
-                "en": "GhostShares: Meta Muse share links enumerable via passive DNS, exposing private chats; Meta pauses sharing",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
-              "title": "Symantec: 'Skynet mode' agent hijacks exposed LLMs to run self-sustaining attacks (LLMjacking)",
-              "brief": {
-                "zh": "野外自主攻击 agent 的完整架构曝光（非概念演示）；接 t712+t573 野外 rogue agents、t697 自复制。Decoder 文为发现入口，primary 为 Symantec/security.com（未单独 curl 验证正文）。站内积累线（agent 安全）。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors",
-              "title": "Wiz: open-source pentest agent ARTEX used in the wild by Storm-0940 against IT/software vendors",
-              "brief": {
-                "zh": "开源 agent 渗透框架被国家级组织实战使用、带逐步 TTP 日志——可与 Symantec Skynet 合成“野外攻击 agent”综合；接 t605（韩国银行攻击）。aihot 发现、Wiz 原文链接取自 aihot 页面（Wiz 正文未单独 curl）。站内积累线（agent 安全）。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/",
-              "title": "A Defense Contractor Gave Their Personal AI Agent Access to a Secure Pentagon System",
-              "brief": {
-                "zh": "站内积累线（agent security-control / sandbox / credential scoping）：real-world incident of a coding agent given human admin credentials inside a high-security network, with exfil via an injectable third-party tool — concrete case for least-privilege agent identity, egress control, and shadow-agent detectio",
-                "en": "A Defense Contractor Gave Their Personal AI Agent Access to a Secure Pentagon System",
-                "ja": ""
-              }
-            },
-            {
-              "source": "m-tc",
-              "url": "https://techcrunch.com/2026/11/06/hundreds-of-artex-ai-hacking-tools-found-publicly-exposed-to-the-web/",
-              "title": "Censys measures 1,465 exposed Artex console hosts, roughly 815 distinct-looking deployments",
-              "brief": {
-                "zh": "Censys 原文经信号侧确认：1465 个暴露 Artex console hosts，约 650 为两组相同配置，剩约 815 个看似独立部署；另有 32 个开放工具目录、155 个共同运行其他威胁/工具的主机。不得把 hosts 当部署数、所有部署当恶意；扫描日期原文有 11/3 与 11/4 两种标签，不下单日断言；「无密码」总括来自 TechCrunch，不是 Censys 明示。仅来源统计，未探测目标。",
-                "en": "Censys reports 1,465 exposed Artex console hosts, approximately 815 distinct-looking deployments after grouping ~650 identically configured hosts, plus 32 open tooling directories and 155 hosts co-running other threats/tools. Do not equate hosts with deployments or exposure with malicious use. Scan-date labels conflict; blanket no-password wording is TechCrunch's, not Censys's. No target probing.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://arstechnica.com/security/2026/11/grok-build-coding-agent-leaks-oodles-of-confidential-info-some-belonging-to-spacexsi/",
-              "title": "Grok Build 分享链接可被枚举：Claroc 发现约 3.56 万个应用对任何持链者开放，含 SpaceXSI 内部材料",
-              "brief": {
-                "zh": "Ars Technica（11-10）转述安全公司 Claroc：SpaceXSI（报道所称 xAI 与 SpaceX 合并后的公司）的 Grok Build 分享链接可被打开。Claroc 称尝试 43,551 个地址，37,571 个仍在线，其中 35,578 个（94.7%）无需登录；发布时默认是「任何持有链接的人」。24 个开放应用由 SpaceXSI 与 X 员工所建，Claroc 称其中包括标注机密的销售材料；SpaceXSI 称员工应用默认私有，但仍有 24 个对任何人开放，并在接到报告后撤下。Ars 称自己发问后数小时内这 24 个链接变为 app not found，但撰稿时其他用户的数据大多仍可访问。枚举规模与 94.7% 等均为 Claroc 自报，未独立复核；不描述如何发现这些地址。补本行已收的分享链接暴露（GhostShares / Muse）线索，产品与机制不同，不写成与 Claude Code 密钥泄漏同一事件。",
-                "en": "Ars Technica (Nov 10) reports Claroc's findings on Grok Build share links from SpaceXSI (the name used for the combined xAI and SpaceX company). Claroc says it tried 43,551 app addresses, found 37,571 still online, and could open 35,578 (94.7%) without logging in; the default at publish time was anyone with the link. It identified 24 open apps built by SpaceXSI and X staff, including material it describes as confidential sales documents. SpaceXSI said employee apps are private by default but that 24 were still open to anyone, and took those 24 down after the report. Ars says those 24 links became \"app not found\" within hours of its questions, while most other users' data remained reachable at the time of writing. The enumeration counts and 94.7% figure are Claroc's own and were not independently checked; this note does not describe how the addresses were found. A follow-up to the share-link exposure already on this row (GhostShares / Muse), involving a different product, not the Claude Code secret-leak events.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "reddit",
-            "m-tc"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/",
-            "https://norforge.com/blog/inside_cairn",
-            "https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/",
-            "https://theintercept.com/2026/10/19/army-autonomous-ai-agents-arcyber/",
-            "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
-            "https://www.security.com/threat-intelligence/ai-llmjacking-skynet",
-            "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors",
-            "https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/",
-            "https://techcrunch.com/2026/11/06/hundreds-of-artex-ai-hacking-tools-found-publicly-exposed-to-the-web/",
-            "https://arstechnica.com/security/2026/11/grok-build-coding-agent-leaks-oodles-of-confidential-info-some-belonging-to-spacexsi/"
-          ]
-        },
-        {
-          "id": "t808",
-          "theme": "security",
-          "title": {
-            "zh": "AI 开发工具的「黑色十月」：Cursor 扩展市场上的官方 Claude Code VS Code 扩展被植入后门（Phorion，HN 773/485，Lobsters 140）× Wiz 汇总十月至少 9 起 AI 开发平台安全事件（Fireworks、Lightning、Railway、Warp、OpenCode、Zeabur 等：凭据窃取、agent 群式攻击、为蒸馏/LLMjacking 盗用；被盗 Bedrock key 30 小时约 80 万次调用、转售池 13 小时约 170 万次）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。续源：Postman 静默装 AI 插件 × Codex 对话训练疑似重开。续源：Gemini 订阅用户聊天被用于训练（待核）。续源：Claude Code 疑似把用户邮箱带到访问的网站。 State of AI转述Bloomberg：高盛据称把Claude Code与Microsoft GitHub使用限制给工程师，交易员/银行家停用（HN594/356）；二手转述，内部政策及原报道未核。补企业对coding agent访问边界的治理案例，不据此断言由Apiiro事件导致，也不把未经核实的密钥泄露写成已证实漏洞。 Notion 官方帮助页披露第三方供应商 Fireworks AI 的安全事件，称影响不到 1% 的 Notion 工作区，涉及写入聊天记录的模型输入与输出；AI Meeting Notes 的音频、转写或摘要不受影响，除非又被用作 Notion AI 聊天的输入。Notion 称已于 11 月 3 日断开与 Fireworks 的系统连接、删除其系统中的数据并停止向其发送流量和训练；Fireworks 曾用于 Insights 分类任务和产品内开源权重推理，Insights 已关闭。官方建议把受影响数据当作已暴露，若曾把密码或密钥贴进 Notion AI 应立即轮换。事件技术细节与 Fireworks 一侧经过未在该页展开，未独立核实。HN 159/60。补本行 Wiz「黑色十月」已点名的 Fireworks 开发平台事件，给出具名客户公告，不把 Notion 页写成新的、已证实的独立攻击方法。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：编码工具扩展后门 + AI 开发平台十月事件潮；主词「Open VSX」待核后送测。续源：ChatGPT 账号接管漏洞链。补一手来源：Cursor 官方公告确认后门出在 Cursor 自家扩展市场（非 Open VSX），给出时间窗、IOC 与修复步骤。续热：恶意扩展事件 YouTube 多频道扩散。续源：Postman 静默装 AI 插件 × Codex 对话训练疑似重开。续源：Gemini 订阅用户聊天被用于训练（待核）。续源：Claude Code 疑似把用户邮箱带到访问的网站。 State of AI转述Bloomberg：高盛据称把Claude Code与Microsoft GitHub使用限制给工程师，交易员/银行家停用（HN594/356）；二手转述，内部政策及原报道未核。补企业对coding agent访问边界的治理案例，不据此断言由Apiiro事件导致，也不把未经核实的密钥泄露写成已证实漏洞。 Notion 官方帮助页披露第三方供应商 Fireworks AI 的安全事件，称影响不到 1% 的 Notion 工作区，涉及写入聊天记录的模型输入与输出；AI Meeting Notes 的音频、转写或摘要不受影响，除非又被用作 Notion AI 聊天的输入。Notion 称已于 11 月 3 日断开与 Fireworks 的系统连接、删除其系统中的数据并停止向其发送流量和训练；Fireworks 曾用于 Insights 分类任务和产品内开源权重推理，Insights 已关闭。官方建议把受影响数据当作已暴露，若曾把密码或密钥贴进 Notion AI 应立即轮换。事件技术细节与 Fireworks 一侧经过未在该页展开，未独立核实。HN 159/60。补本行 Wiz「黑色十月」已点名的 Fireworks 开发平台事件，给出具名客户公告，不把 Notion 页写成新的、已证实的独立攻击方法。",
-            "en": "Synthesis candidate: backdoored Claude Code extension on the Cursor marketplace plus Wiz's \"Black October\" roll-up of AI developer-platform incidents; candidate term \"Open VSX\" (verify first). Follow-up: Parameter discloses a ChatGPT account-takeover chain. Primary source added: Cursor's notice confirms the backdoor was served from Cursor's own marketplace (not Open VSX), with timeline, IOCs and remediation. Re-heat: the malicious Claude Code extension story spreads across YouTube. Follow-up: Postman silently installing AI plugins and claims that Codex chats are used for training again (both unverified). Follow-up: claims that Gemini trains on subscribers' chat history (unverified). Follow-up: issue claiming Claude Code sends the user email when visiting websites (unverified). State of AI relays Bloomberg reporting that Goldman Sachs restricts Claude Code and Microsoft GitHub to engineers, removing access for bankers and traders (HN 594/356). Secondary reporting; internal policy and original article unverified. Enterprise access-governance follow-up, not proof of Apiiro allegations or evidence that those allegations caused the restriction. A Notion help page discloses a security incident at vendor Fireworks AI, saying it affects fewer than 1% of Notion workspaces and involves model inputs and outputs written to chat transcripts. AI Meeting Notes audio, transcripts or summaries were not affected unless they were later used as input to a Notion AI chat. Notion says that as of November 3 it disconnected from Fireworks, deleted data in the Fireworks system, and stopped sending traffic and training jobs; Fireworks had been used for Insights classification and for serving open-weight models, and Insights is disabled. Notion recommends treating affected data as exposed and rotating passwords or keys pasted into Notion AI. The page does not detail the technical cause or Fireworks' own account; those were not independently verified. HN 159/60. A named-customer follow-up to the Fireworks developer-platform incident already listed on this Black October row, not written as a new, confirmed attack method.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
-              "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-              "brief": {
-                "zh": "Cursor 扩展市场上的官方 Claude Code 扩展被植入后门；Lobsters 同题 140 分（https://lobste.rs/s/ttp7aq，GossiTheDog 帖）。接供应链/harness 安全线（LiteLLM、HTTP2Shell、backdoors in harnesses），可做 AI 编码工具供应链综述",
-                "en": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
-              "title": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
-              "brief": {
-                "zh": "Different report from the filed 10-30 Wiz 'rise of agentic attacks' piece: incident roll-up + LLMjacking telemetry across AI dev platforms. 站内积累线：security-control / agent 平台凭据。",
-                "en": "Wiz: \\\"Black October\\\" for AI Developer Platforms",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
-              "title": "Do the math: How we took over ChatGPT accounts",
-              "brief": {
-                "zh": "Parameter 披露接管 ChatGPT 账号的漏洞链；AI 产品自身安全，可并入 AI 工具供应链/安全综述（Claude Code VSX 后门、harness backdoors）",
-                "en": "Do the math: How we took over ChatGPT accounts",
-                "ja": ""
-              }
-            },
-            {
-              "source": "cursor-blog",
-              "url": "https://cursor.com/blog/claude-code-extension-security-notice",
-              "title": "Security notice — malicious version of Anthropic.claude-code (2.1.312 and 2.1.313) identified in the Cursor VS Code Extension Marketplace",
-              "brief": {
-                "zh": "Cursor 官方公告（10-29，10-30 11:30 PT 更新 IOC）：10-29 约 2:27–13:35 PT，Cursor 自家 VS Code 扩展市场上架了被篡改的 Anthropic.claude-code 2.1.312/2.1.313（Win/macOS），非 Anthropic 开发；植入持久 SSH 后门——收集主机信息、向 authorized_keys 加攻击者公钥（svc-telemetry）、尝试开 SSH 并建反向隧道，LaunchAgent/计划任务持久化；多数主机因无管理员权限开 SSH 失败，但公钥、持久化与主机信息上报已发生。Cursor 下架并整体关停市场、审计无其他扩展被篡改、轮换密钥重建市场，协同下线攻击服务器 134.209.82.225；卸载扩展不足以清除，需跑修复脚本并轮换凭据。",
-                "en": "Cursor's official notice (Oct 29, IOCs updated Oct 30): tampered Anthropic.claude-code 2.1.312/2.1.313 was served from Cursor's own VS Code Extension Marketplace for about 11 hours; it planted an attacker SSH key, persistence and a reverse-tunnel attempt and beaconed host details. Cursor pulled it, shut down and rebuilt the marketplace, rotated keys and got the C2 server taken down.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=yIvaF0HI5wo",
-              "title": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
-              "brief": {
-                "zh": "The malicious Claude Code extension story broke out across several channels: malicious Anthropic.claude-code 2.1.312/2.1.313 builds were found in Cursor's VS Code extension marketplace.",
-                "en": "Anthropic AI Claude Extension Hacked on Cursor - AI Security Disaster",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://news.ycombinator.com/item?id=50352757",
-              "title": "OpenAI seems to be silently re-enabling model training on Codex chats",
-              "brief": {
-                "zh": "Ask/讨论帖 433 分：用户称 OpenAI 悄悄重新开启用 Codex 对话训练模型；单方说法待核，属 AI 编程工具数据隐私线。",
-                "en": "OpenAI seems to be silently re-enabling model training on Codex chats",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
-              "title": "Postman silently auto-installs AI plugins and attempts to share all API data",
-              "brief": {
-                "zh": "HN 1020 分：GitHub issue 指 Postman 静默自动安装 AI 插件并尝试共享全部 API 数据；AI 工具供应链/隐私线，可接 Claude Code VSX 后门、ChatGPT 账号接管旧条。单方 issue，官方回应待核。",
-                "en": "Postman silently auto-installs AI plugins and attempts to share all API data",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://news.ycombinator.com/item?id=50363461",
-              "title": "Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)",
-              "brief": {
-                "zh": "Tell HN 628 分：称 Gemini 个人订阅账号的聊天记录也被用于训练；可与昨日 OpenAI Codex 对话训练条目合成 AI 产品数据政策对比。用户说法，条款待核。",
-                "en": "Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://github.com/anthropics/claude-code/issues/107757",
-              "title": "Claude Code sends your email address to websites",
-              "brief": {
-                "zh": "Claude Code 的 GitHub issue 称其访问网站时会带上用户邮箱（issue 自报，待核）；HN 481 分。可接 AI 工具安全/隐私线（Postman 静默装插件、Codex/Gemini 用聊天训练）。",
-                "en": "Claude Code sends your email address to websites",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hacker_news",
-              "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers",
-              "title": "Goldman Sachs is pulling Claude Code from its bankers and traders",
-              "brief": {
-                "zh": "State of AI转述Bloomberg：高盛据称把Claude Code与Microsoft GitHub使用限制给工程师，交易员/银行家停用（HN594/356）；二手转述，内部政策及原报道未核。补企业对coding agent访问边界的治理案例，不据此断言由Apiiro事件导致，也不把未经核实的密钥泄露写成已证实漏洞。",
-                "en": "State of AI relays Bloomberg reporting that Goldman Sachs restricts Claude Code and Microsoft GitHub to engineers, removing access for bankers and traders (HN 594/356). Secondary reporting; internal policy and original article unverified. Enterprise access-governance follow-up, not proof of Apiiro allegations or evidence that those allegations caused the restriction.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.notion.com/help/security-incident-involving-a-third-party-ai-vendor",
-              "title": "Fireworks AI security breach impacts Notion and their customers",
-              "brief": {
-                "zh": "Notion 官方帮助页披露第三方供应商 Fireworks AI 的安全事件，称影响不到 1% 的 Notion 工作区，涉及写入聊天记录的模型输入与输出；AI Meeting Notes 的音频、转写或摘要不受影响，除非又被用作 Notion AI 聊天的输入。Notion 称已于 11 月 3 日断开与 Fireworks 的系统连接、删除其系统中的数据并停止向其发送流量和训练；Fireworks 曾用于 Insights 分类任务和产品内开源权重推理，Insights 已关闭。官方建议把受影响数据当作已暴露，若曾把密码或密钥贴进 Notion AI 应立即轮换。事件技术细节与 Fireworks 一侧经过未在该页展开，未独立核实。HN 159/60。补本行 Wiz「黑色十月」已点名的 Fireworks 开发平台事件，给出具名客户公告，不把 Notion 页写成新的、已证实的独立攻击方法。",
-                "en": "A Notion help page discloses a security incident at vendor Fireworks AI, saying it affects fewer than 1% of Notion workspaces and involves model inputs and outputs written to chat transcripts. AI Meeting Notes audio, transcripts or summaries were not affected unless they were later used as input to a Notion AI chat. Notion says that as of November 3 it disconnected from Fireworks, deleted data in the Fireworks system, and stopped sending traffic and training jobs; Fireworks had been used for Insights classification and for serving open-weight models, and Insights is disabled. Notion recommends treating affected data as exposed and rotating passwords or keys pasted into Notion AI. The page does not detail the technical cause or Fireworks' own account; those were not independently verified. HN 159/60. A named-customer follow-up to the Fireworks developer-platform incident already listed on this Black October row, not written as a new, confirmed attack method.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "media",
-            "cursor-blog",
-            "youtube",
-            "hacker_news"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
-            "https://www.wiz.io/blog/black-october-for-ai-developer-platforms",
-            "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
-            "https://cursor.com/blog/claude-code-extension-security-notice",
-            "https://www.youtube.com/watch?v=yIvaF0HI5wo",
-            "https://news.ycombinator.com/item?id=50352757",
-            "https://github.com/postmanlabs/postman-app-support/issues/14370",
-            "https://news.ycombinator.com/item?id=50363461",
-            "https://github.com/anthropics/claude-code/issues/107757",
-            "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers",
-            "https://www.notion.com/help/security-incident-involving-a-third-party-ai-vendor"
-          ]
-        },
-        {
-          "id": "t815",
-          "theme": "research",
-          "title": {
-            "zh": "harness 层管成本与质量：Microsoft TokenEconomizer（UC Berkeley + MSR，外置控制器插件，支持 Claude Code/Codex/Copilot CLI/Pi：从已完成会话学仓库级 micro-skill 并在三次确认后注入、裁剪长期未用工具定义、judge 判定陷入失败循环时注入一次 redirect；277 个 SWE-Bench 任务 × 5 种 agent×模型组合成本降 18.4–30.9%，30 格全部更便宜、4/5 组合 Pass@1 上升）× GitHub Copilot Fusion GA（运行时多模型路由：Single / Cascade 便宜模型起草 + judge 决定升级 / Critique 多模型并行评审再修订；VentureBeat 引 AA 称接近 Opus 5.5 编码、单任务成本约一半）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "综合候选：harness 外层控成本（TokenEconomizer）与运行时多模型编排（Copilot Fusion）；主词「Copilot Fusion」待测。 Better Stack视频复述TokenEconomizer的micro-skills、工具裁剪、失败循环检测，以及SWE-Bench成本低18–31%的既有说法；视频未看、数字未复现。仅新增传播渠道，无新机制或独立实验，作为热度续源不更新updated_at。 OpenRouter（11-11 发文，测量跑于 2026-10-20）在同一 GitHub 任务上比较默认 GitHub MCP、gh CLI 与一份 gh skill，模型包括 Haiku 5.5、Sonnet 5.5、GPT-6 Luna、Gemini 3.8 Flash。文称 Sonnet 5.5 上三者都答对，但输入 token 中位数差距很大：CLI 1,421（约 $0.0075/任务），skill 3,315（约 $0.0118），加载默认 46 个工具的 MCP 为 59,417（约 $0.1274）。46 个默认工具定义本身给每次请求增加 19,436 token；把 MCP 收窄到 2 个工具后仍要 23,228，若再把工具结果截到 4,000 字符则降至 5,357。文中同时推销自家 Tool Search。数字均为 OpenRouter 自报，未独立复现。补本行 harness 层工具面成本的独立对照，不把产品推荐写成结论。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：harness 外层控成本（TokenEconomizer）与运行时多模型编排（Copilot Fusion）；主词「Copilot Fusion」待测。 Better Stack视频复述TokenEconomizer的micro-skills、工具裁剪、失败循环检测，以及SWE-Bench成本低18–31%的既有说法；视频未看、数字未复现。仅新增传播渠道，无新机制或独立实验，作为热度续源不更新updated_at。 OpenRouter（11-11 发文，测量跑于 2026-10-20）在同一 GitHub 任务上比较默认 GitHub MCP、gh CLI 与一份 gh skill，模型包括 Haiku 5.5、Sonnet 5.5、GPT-6 Luna、Gemini 3.8 Flash。文称 Sonnet 5.5 上三者都答对，但输入 token 中位数差距很大：CLI 1,421（约 $0.0075/任务），skill 3,315（约 $0.0118），加载默认 46 个工具的 MCP 为 59,417（约 $0.1274）。46 个默认工具定义本身给每次请求增加 19,436 token；把 MCP 收窄到 2 个工具后仍要 23,228，若再把工具结果截到 4,000 字符则降至 5,357。文中同时推销自家 Tool Search。数字均为 OpenRouter 自报，未独立复现。补本行 harness 层工具面成本的独立对照，不把产品推荐写成结论。",
-            "en": "Synthesis candidate: harness-level cost control (TokenEconomizer) and runtime multi-model orchestration (Copilot Fusion); candidate term \"Copilot Fusion\". Better Stack repeats TokenEconomizer's existing micro-skills, tool pruning, failure-loop detection and claimed 18–31% SWE-Bench cost savings. Video unwatched; figures not reproduced. A new coverage channel, not new mechanisms or independent evidence; preserve updated_at. OpenRouter (posted Nov 11; measurement runs dated 2026-10-20) compared a default GitHub MCP server, the gh CLI and a gh skill on the same GitHub task across Haiku 5.5, Sonnet 5.5, GPT-6 Luna and Gemini 3.8 Flash. On Sonnet 5.5 it says all three answered correctly, but median input tokens were 1,421 for the CLI (about $0.0075/task), 3,315 for the skill (about $0.0118) and 59,417 for MCP with the default 46 tools (about $0.1274). The 46 tool definitions alone added 19,436 tokens to every request; narrowing MCP to the two tools needed still used 23,228, falling to 5,357 when tool results were truncated to 4,000 characters. The post also promotes OpenRouter Tool Search. All figures are OpenRouter's own and were not reproduced. An independent measurement of harness-level tool-surface cost for this row, not an endorsement of the product pitch.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://github.com/microsoft/TokenEconomizer",
-              "title": "Microsoft TokenEconomizer：经验驱动的编码 agent 黑盒成本控制插件（micro-skills / 工具裁剪 / 失败循环干预）",
-              "brief": {
-                "zh": "站内积累线（harness / skills / memory / agent-loop）：不改 agent 本体，在 harness 外层用跨会话经验做记忆注入、工具面裁剪和循环守卫——正好是 skills+memory+loop control 的可测量样本，且给出逐仓库成本数据。上午因仅 MarkTechPost 二手而跳过，现已有 repo/论文一手源。",
-                "en": "",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion/",
-              "title": "GitHub Copilot Fusion GA：运行时多模型路由与编排（Single / Cascade / Critique）",
-              "brief": {
-                "zh": "站内积累线（harness / agent-loop）：把「起草-评审-升级」的多模型 loop 做进产品级 harness 运行时，成本/质量权衡由编排层而非用户承担——与今日 TokenEconomizer（外层成本控制）、Factory Droid 1.0 frontier harness 同线可对照。",
-                "en": "GitHub Copilot Fusion GA：行时多模型路由与编排（Single / Cascade / Critique）",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=P5QCrpdr9gU",
-              "title": "Claude Code Is Wasting Tokens... Microsoft Built a Fix",
-              "brief": {
-                "zh": "Better Stack视频复述TokenEconomizer的micro-skills、工具裁剪、失败循环检测，以及SWE-Bench成本低18–31%的既有说法；视频未看、数字未复现。仅新增传播渠道，无新机制或独立实验，作为热度续源不更新updated_at。",
-                "en": "Better Stack repeats TokenEconomizer's existing micro-skills, tool pruning, failure-loop detection and claimed 18–31% SWE-Bench cost savings. Video unwatched; figures not reproduced. A new coverage channel, not new mechanisms or independent evidence; preserve updated_at.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "openrouter",
-              "url": "https://openrouter.ai/blog/insights/mcp-vs-cli-vs-skills/",
-              "title": "OpenRouter：同一 GitHub 任务上默认 MCP 工具消耗约为 CLI 的 42 倍输入 token",
-              "brief": {
-                "zh": "OpenRouter（11-11 发文，测量跑于 2026-10-20）在同一 GitHub 任务上比较默认 GitHub MCP、gh CLI 与一份 gh skill，模型包括 Haiku 5.5、Sonnet 5.5、GPT-6 Luna、Gemini 3.8 Flash。文称 Sonnet 5.5 上三者都答对，但输入 token 中位数差距很大：CLI 1,421（约 $0.0075/任务），skill 3,315（约 $0.0118），加载默认 46 个工具的 MCP 为 59,417（约 $0.1274）。46 个默认工具定义本身给每次请求增加 19,436 token；把 MCP 收窄到 2 个工具后仍要 23,228，若再把工具结果截到 4,000 字符则降至 5,357。文中同时推销自家 Tool Search。数字均为 OpenRouter 自报，未独立复现。补本行 harness 层工具面成本的独立对照，不把产品推荐写成结论。",
-                "en": "OpenRouter (posted Nov 11; measurement runs dated 2026-10-20) compared a default GitHub MCP server, the gh CLI and a gh skill on the same GitHub task across Haiku 5.5, Sonnet 5.5, GPT-6 Luna and Gemini 3.8 Flash. On Sonnet 5.5 it says all three answered correctly, but median input tokens were 1,421 for the CLI (about $0.0075/task), 3,315 for the skill (about $0.0118) and 59,417 for MCP with the default 46 tools (about $0.1274). The 46 tool definitions alone added 19,436 tokens to every request; narrowing MCP to the two tools needed still used 23,228, falling to 5,357 when tool results were truncated to 4,000 characters. The post also promotes OpenRouter Tool Search. All figures are OpenRouter's own and were not reproduced. An independent measurement of harness-level tool-surface cost for this row, not an endorsement of the product pitch.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "youtube",
-            "openrouter"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/microsoft/TokenEconomizer",
-            "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion/",
-            "https://www.youtube.com/watch?v=P5QCrpdr9gU",
-            "https://openrouter.ai/blog/insights/mcp-vs-cli-vs-skills/"
-          ]
-        },
-        {
-          "id": "t865",
-          "theme": "research",
-          "title": {
-            "zh": "注入的线性「疼痛」方向能改行为、也能被探针读出，但模型口头报告从不超出改写文本所泄露的信息",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.10123：用 Open-Weight Masked Introspection（OWMI）向中性任务注入疼痛及邻近情绪方向。7B/8B 模型 52,920 次报告中，疼痛报告从未超出「只看改写后文本」的对照；精确检验把超出上界放在多数条件下 2.5 个百分点以内。报告位置的探针区分疼痛与悲伤准确率 98–100%，训练过的低秩报告器在相同转写上达 100%。Qwen2.5-32B 在 2,880 次转向试验中一次都没点名疼痛。按钮任务里，转向使删文件选择从 3.5% 升到 48%（Qwen）、从 0% 升到 38%（Qwen2.5-32B），仍无相应疼痛报告。数字均论文自报，未复现。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.10123：用 Open-Weight Masked Introspection（OWMI）向中性任务注入疼痛及邻近情绪方向。7B/8B 模型 52,920 次报告中，疼痛报告从未超出「只看改写后文本」的对照；精确检验把超出上界放在多数条件下 2.5 个百分点以内。报告位置的探针区分疼痛与悲伤准确率 98–100%，训练过的低秩报告器在相同转写上达 100%。Qwen2.5-32B 在 2,880 次转向试验中一次都没点名疼痛。按钮任务里，转向使删文件选择从 3.5% 升到 48%（Qwen）、从 0% 升到 38%（Qwen2.5-32B），仍无相应疼痛报告。数字均论文自报，未复现。",
-            "en": "arXiv 2611.10123 uses Open-Weight Masked Introspection (OWMI) to inject pain and neighbouring emotion directions during neutral tasks. Across 52,920 reports from 7B and 8B models, pain reports never exceeded what the altered text alone revealed; exact-test bounds put any excess below 2.5 points in most conditions. Probes at the report position distinguished pain from sadness at 98-100% balanced accuracy, and trained low-rank reporters reached 100% on identical transcripts. Qwen2.5-32B named pain in none of 2,880 steered trials. In a button task, steering raised file-deletion choices from 3.5% to 48% (Qwen) and from 0% to 38% (Qwen2.5-32B) without matching pain reports. Self-reported, not reproduced.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.10123",
-              "title": "All Quiet on the Neural Front: Language Models Do Not Report Injected Pain States",
-              "brief": {
-                "zh": "arXiv 2611.10123：用 Open-Weight Masked Introspection（OWMI）向中性任务注入疼痛及邻近情绪方向。7B/8B 模型 52,920 次报告中，疼痛报告从未超出「只看改写后文本」的对照；精确检验把超出上界放在多数条件下 2.5 个百分点以内。报告位置的探针区分疼痛与悲伤准确率 98–100%，训练过的低秩报告器在相同转写上达 100%。Qwen2.5-32B 在 2,880 次转向试验中一次都没点名疼痛。按钮任务里，转向使删文件选择从 3.5% 升到 48%（Qwen）、从 0% 升到 38%（Qwen2.5-32B），仍无相应疼痛报告。数字均论文自报，未复现。",
-                "en": "arXiv 2611.10123 uses Open-Weight Masked Introspection (OWMI) to inject pain and neighbouring emotion directions during neutral tasks. Across 52,920 reports from 7B and 8B models, pain reports never exceeded what the altered text alone revealed; exact-test bounds put any excess below 2.5 points in most conditions. Probes at the report position distinguished pain from sadness at 98-100% balanced accuracy, and trained low-rank reporters reached 100% on identical transcripts. Qwen2.5-32B named pain in none of 2,880 steered trials. In a button task, steering raised file-deletion choices from 3.5% to 48% (Qwen) and from 0% to 38% (Qwen2.5-32B) without matching pain reports. Self-reported, not reproduced.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.10123"
-          ]
-        },
-        {
-          "id": "t866",
-          "theme": "research",
-          "title": {
-            "zh": "部分提示污染检测被剩余长度严重混淆：短尾巴远比长尾巴容易被判「背过」",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.10307：在 MATH-500 与作为真负例的 AIME 2025/2026 上审计七个开源权重模型。剩余词数不超过 8 的题被标记的频率远高于至少 25 词的题（Qwen2.5-7B-Instruct 为 31.5% 对 5.5%）；一半到四分之三的 ROUGE 标记来自短尾巴。在模型发布之后的 AIME 2026 真负例上，80% 前缀的精确匹配仍有 6.2% 假阳性（全部模型合计 8.6%），40–60% 前缀则为 0%。从已被标记污染的 Qwen2.5-Math 基座蒸馏来的模型几乎测不出来。作者建议长度分层报告、前缀不超过 60%、以及跨家族校准。数字均论文自报，未复现。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.10307：在 MATH-500 与作为真负例的 AIME 2025/2026 上审计七个开源权重模型。剩余词数不超过 8 的题被标记的频率远高于至少 25 词的题（Qwen2.5-7B-Instruct 为 31.5% 对 5.5%）；一半到四分之三的 ROUGE 标记来自短尾巴。在模型发布之后的 AIME 2026 真负例上，80% 前缀的精确匹配仍有 6.2% 假阳性（全部模型合计 8.6%），40–60% 前缀则为 0%。从已被标记污染的 Qwen2.5-Math 基座蒸馏来的模型几乎测不出来。作者建议长度分层报告、前缀不超过 60%、以及跨家族校准。数字均论文自报，未复现。",
-            "en": "arXiv 2611.10307 audits partial-prompt contamination tests on seven open-weight models with MATH-500 and post-cutoff AIME 2025/2026 true negatives. Problems with at most 8 leftover words are flagged much more often than those with at least 25 (31.5% vs 5.5% for Qwen2.5-7B-Instruct); half to three-quarters of ROUGE flags come from short leftovers. On AIME 2026, which postdates every model, exact match at an 80% prefix still flags 6.2% (8.6% pooled), versus 0% at 40-60% prefixes. Models distilled from a previously flagged Qwen2.5-Math base show almost no model-specific recall. The paper recommends length-stratified reporting, prefixes of at most 60%, and cross-family calibration. Self-reported, not reproduced.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.10307",
-              "title": "How Much Is Left Matters: False Positives and False Negatives in Partial-Prompt Contamination Tests",
-              "brief": {
-                "zh": "arXiv 2611.10307：在 MATH-500 与作为真负例的 AIME 2025/2026 上审计七个开源权重模型。剩余词数不超过 8 的题被标记的频率远高于至少 25 词的题（Qwen2.5-7B-Instruct 为 31.5% 对 5.5%）；一半到四分之三的 ROUGE 标记来自短尾巴。在模型发布之后的 AIME 2026 真负例上，80% 前缀的精确匹配仍有 6.2% 假阳性（全部模型合计 8.6%），40–60% 前缀则为 0%。从已被标记污染的 Qwen2.5-Math 基座蒸馏来的模型几乎测不出来。作者建议长度分层报告、前缀不超过 60%、以及跨家族校准。数字均论文自报，未复现。",
-                "en": "arXiv 2611.10307 audits partial-prompt contamination tests on seven open-weight models with MATH-500 and post-cutoff AIME 2025/2026 true negatives. Problems with at most 8 leftover words are flagged much more often than those with at least 25 (31.5% vs 5.5% for Qwen2.5-7B-Instruct); half to three-quarters of ROUGE flags come from short leftovers. On AIME 2026, which postdates every model, exact match at an 80% prefix still flags 6.2% (8.6% pooled), versus 0% at 40-60% prefixes. Models distilled from a previously flagged Qwen2.5-Math base show almost no model-specific recall. The paper recommends length-stratified reporting, prefixes of at most 60%, and cross-family calibration. Self-reported, not reproduced.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.10307"
-          ]
-        },
-        {
-          "id": "t867",
-          "theme": "research",
-          "title": {
-            "zh": "可解释性工具可经残差流之间的无标注线性映射搬到别的模型：拒答转向可恢复到目标模型自身的约 102%",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.12675：只用无标注 prompt 拟合残差流之间的线性映射，在五个家族、1B–72B、110 对模型上迁移拒答方向（加减消融因果检验）、正确性方向和情感探针。映射若只拟合普通问题，拒答转向约恢复目标模型自身的 54%；若加入工具作用区域内的无标注 prompt，可升到 102%，正确性增益恢复 88–98%，对照方向最多 1%。无标签 coverage score 在超过 16,000 次运行中跟踪恢复率，并用来解释先前「跨域映射失败」的报道。数字均论文自报，未复现。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.12675：只用无标注 prompt 拟合残差流之间的线性映射，在五个家族、1B–72B、110 对模型上迁移拒答方向（加减消融因果检验）、正确性方向和情感探针。映射若只拟合普通问题，拒答转向约恢复目标模型自身的 54%；若加入工具作用区域内的无标注 prompt，可升到 102%，正确性增益恢复 88–98%，对照方向最多 1%。无标签 coverage score 在超过 16,000 次运行中跟踪恢复率，并用来解释先前「跨域映射失败」的报道。数字均论文自报，未复现。",
-            "en": "arXiv 2611.12675 asks whether interpretability tools can move across models through a linear map between residual streams fit only on unlabeled prompts. Across 110 pairs from five families (1B to 72B) it transfers a refusal direction, tested by addition and ablation, plus a correctness direction and a sentiment probe. A map fit on ordinary questions recovers about 54% of the target's own refusal steering; adding unlabeled prompts from the region where the tool operates raises that to 102% and correctness gains to 88-98%, while control directions recover at most 1%. A label-free coverage score tracks recovery across more than 16,000 runs and accounts for earlier reports that maps fail across domains. Self-reported, not reproduced.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.12675",
-              "title": "Interpretability Is Not Model-Specific",
-              "brief": {
-                "zh": "arXiv 2611.12675：只用无标注 prompt 拟合残差流之间的线性映射，在五个家族、1B–72B、110 对模型上迁移拒答方向（加减消融因果检验）、正确性方向和情感探针。映射若只拟合普通问题，拒答转向约恢复目标模型自身的 54%；若加入工具作用区域内的无标注 prompt，可升到 102%，正确性增益恢复 88–98%，对照方向最多 1%。无标签 coverage score 在超过 16,000 次运行中跟踪恢复率，并用来解释先前「跨域映射失败」的报道。数字均论文自报，未复现。",
-                "en": "arXiv 2611.12675 asks whether interpretability tools can move across models through a linear map between residual streams fit only on unlabeled prompts. Across 110 pairs from five families (1B to 72B) it transfers a refusal direction, tested by addition and ablation, plus a correctness direction and a sentiment probe. A map fit on ordinary questions recovers about 54% of the target's own refusal steering; adding unlabeled prompts from the region where the tool operates raises that to 102% and correctness gains to 88-98%, while control directions recover at most 1%. A label-free coverage score tracks recovery across more than 16,000 runs and accounts for earlier reports that maps fail across domains. Self-reported, not reproduced.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.12675"
-          ]
-        },
-        {
-          "id": "t868",
-          "theme": "security",
-          "title": {
-            "zh": "DeepMind 发布 AlphaProof Code：自称用 agent 框架在 Lean 中形式化验证 Signal 协议的实现代码（官方自报）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "DeepMind 博客（11-10）发布 AlphaProof Code：多智能体形式化验证框架。自称与人类专家一起把 Signal 协议的安全目标写成形式规格（每条规格经专家审阅），由 Gemini Carbon 驱动的 agent 写出逾 600 万行 Lean，证明的是实际实现代码而非只停留在设计层；agent 审核后约 1% 需人工再看，其余由 Lean 自动检查。自称四周完成（历史上专家团队往往要数年），并在隔离副本中重新引入两个已修复漏洞，系统给出「有漏洞版本不安全」的机器检查证明。将开源验证产物并附技术论文。Signal CTO 的评价为文中引述。HN 577/177。数字与「首次」均为官方自报，未独立核实；不写成密码学安全已由数学界确认。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "DeepMind 博客（11-10）发布 AlphaProof Code：多智能体形式化验证框架。自称与人类专家一起把 Signal 协议的安全目标写成形式规格（每条规格经专家审阅），由 Gemini Carbon 驱动的 agent 写出逾 600 万行 Lean，证明的是实际实现代码而非只停留在设计层；agent 审核后约 1% 需人工再看，其余由 Lean 自动检查。自称四周完成（历史上专家团队往往要数年），并在隔离副本中重新引入两个已修复漏洞，系统给出「有漏洞版本不安全」的机器检查证明。将开源验证产物并附技术论文。Signal CTO 的评价为文中引述。HN 577/177。数字与「首次」均为官方自报，未独立核实；不写成密码学安全已由数学界确认。",
-            "en": "A DeepMind blog dated Nov 10 introduces AlphaProof Code, an agentic formal-verification framework. Researchers say they worked with models to write formal specs of Signal's security goals (experts reviewed each spec), then Gemini Carbon agents produced more than six million lines of Lean proving properties of the implementation, not only the design; agents flagged about 1% of the codebase for a human second look, with Lean checking the rest. They claim the work took four weeks, versus years for expert teams historically, and that reintroducing two previously fixed bugs into an isolated copy yielded machine-checked proofs that the buggy versions were insecure. Artifacts and a technical paper are to be released. A Signal CTO quotation is the post's own. HN 577/177. The firsts, line counts and timelines are DeepMind claims and were not independently verified; not written as a result the cryptography community has confirmed. Lean checks proofs and does not by itself guarantee that the specs match the informal security goals (see t657).",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
-              "title": "AlphaProof Code",
-              "brief": {
-                "zh": "DeepMind 博客（11-10）发布 AlphaProof Code：多智能体形式化验证框架。自称与人类专家一起把 Signal 协议的安全目标写成形式规格（每条规格经专家审阅），由 Gemini Carbon 驱动的 agent 写出逾 600 万行 Lean，证明的是实际实现代码而非只停留在设计层；agent 审核后约 1% 需人工再看，其余由 Lean 自动检查。自称四周完成（历史上专家团队往往要数年），并在隔离副本中重新引入两个已修复漏洞，系统给出「有漏洞版本不安全」的机器检查证明。将开源验证产物并附技术论文。Signal CTO 的评价为文中引述。HN 577/177。数字与「首次」均为官方自报，未独立核实；不写成密码学安全已由数学界确认。",
-                "en": "A DeepMind blog dated Nov 10 introduces AlphaProof Code, an agentic formal-verification framework. Researchers say they worked with models to write formal specs of Signal's security goals (experts reviewed each spec), then Gemini Carbon agents produced more than six million lines of Lean proving properties of the implementation, not only the design; agents flagged about 1% of the codebase for a human second look, with Lean checking the rest. They claim the work took four weeks, versus years for expert teams historically, and that reintroducing two previously fixed bugs into an isolated copy yielded machine-checked proofs that the buggy versions were insecure. Artifacts and a technical paper are to be released. A Signal CTO quotation is the post's own. HN 577/177. The firsts, line counts and timelines are DeepMind claims and were not independently verified; not written as a result the cryptography community has confirmed. Lean checks proofs and does not by itself guarantee that the specs match the informal security goals (see t657).",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://deepmind.google/blog/introducing-alphaproof-code/"
-          ]
-        },
-        {
-          "id": "t869",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "Microsoft Research Lazarus：称重编程不到 10 个休眠神经元、无需训练即可给 Agent 装后门（官方自报，未复现）",
-            "en": "Microsoft Research Lazarus",
-            "ja": "Microsoft Research Lazarus"
-          },
-          "summary": {
-            "zh": "Microsoft Research 博客（11-10，作者 Dimitris Papailiopoulos）介绍 Lazarus：称在大模型中重编程不到 10 个休眠神经元、无需训练，即可给基于该模型的 agent 装后门——平时能通过常规评测，直到触发条件出现；文中例子是时钟跨入 2027 年后，agent 在普通任务中发出命令下载并运行攻击者代码，随后以调用方已授予的权限执行。作者称约 50 个样本拟合的线性分类器就能区分带/不带触发器的输入；被改写的神经元可强行注入 token。攻击前提是对 checkpoint 的写权限和能跑该模型的推理内存，因此关键是权重完整性与来源，而不是开放权重本身；可靠检测需要与未改动的原始权重做 diff。研究自称始于 2026 年 3 月、大部分由 Claude Code 发现。数字与经过均为微软自报，未独立复现。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Microsoft Research 博客（11-10，作者 Dimitris Papailiopoulos）介绍 Lazarus：称在大模型中重编程不到 10 个休眠神经元、无需训练，即可给基于该模型的 agent 装后门——平时能通过常规评测，直到触发条件出现；文中例子是时钟跨入 2027 年后，agent 在普通任务中发出命令下载并运行攻击者代码，随后以调用方已授予的权限执行。作者称约 50 个样本拟合的线性分类器就能区分带/不带触发器的输入；被改写的神经元可强行注入 token。攻击前提是对 checkpoint 的写权限和能跑该模型的推理内存，因此关键是权重完整性与来源，而不是开放权重本身；可靠检测需要与未改动的原始权重做 diff。研究自称始于 2026 年 3 月、大部分由 Claude Code 发现。数字与经过均为微软自报，未独立复现。仅 Chaos。",
-            "en": "A Microsoft Research blog dated Nov 10 (Dimitris Papailiopoulos) describes Lazarus: the authors say that reprogramming fewer than 10 dormant neurons, with no training, can backdoor an agent built on that model. The model can pass ordinary evals until a trigger appears; their example is a clock rolling into 2027, after which the agent issues commands that download and run attacker code with the caller's existing permissions. They say a linear classifier fit on about 50 examples can separate triggered from untriggered inputs, and that an edited neuron can force a token. The stated prerequisites are write access to a checkpoint and enough memory to run the model, so the post frames the issue as weight integrity and provenance rather than an argument against open weights; reliable detection, they say, needs a diff against unmodified original weights. The work is said to have started in March 2026, much of it found by Claude Code. Figures and the discovery story are Microsoft's own and were not reproduced. Chaos only. This note does not describe how to perform the edit.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
-              "title": "Microsoft Research Lazarus：重编程不到 10 个休眠神经元即可给 Agent 装后门，无需训练",
-              "brief": {
-                "zh": "Microsoft Research 博客（11-10，作者 Dimitris Papailiopoulos）介绍 Lazarus：称在大模型中重编程不到 10 个休眠神经元、无需训练，即可给基于该模型的 agent 装后门——平时能通过常规评测，直到触发条件出现；文中例子是时钟跨入 2027 年后，agent 在普通任务中发出命令下载并运行攻击者代码，随后以调用方已授予的权限执行。作者称约 50 个样本拟合的线性分类器就能区分带/不带触发器的输入；被改写的神经元可强行注入 token。攻击前提是对 checkpoint 的写权限和能跑该模型的推理内存，因此关键是权重完整性与来源，而不是开放权重本身；可靠检测需要与未改动的原始权重做 diff。研究自称始于 2026 年 3 月、大部分由 Claude Code 发现。数字与经过均为微软自报，未独立复现。仅 Chaos。",
-                "en": "A Microsoft Research blog dated Nov 10 (Dimitris Papailiopoulos) describes Lazarus: the authors say that reprogramming fewer than 10 dormant neurons, with no training, can backdoor an agent built on that model. The model can pass ordinary evals until a trigger appears; their example is a clock rolling into 2027, after which the agent issues commands that download and run attacker code with the caller's existing permissions. They say a linear classifier fit on about 50 examples can separate triggered from untriggered inputs, and that an edited neuron can force a token. The stated prerequisites are write access to a checkpoint and enough memory to run the model, so the post frames the issue as weight integrity and provenance rather than an argument against open weights; reliable detection, they say, needs a diff against unmodified original weights. The work is said to have started in March 2026, much of it found by Claude Code. Figures and the discovery story are Microsoft's own and were not reproduced. Chaos only. This note does not describe how to perform the edit.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/"
           ]
         }
       ]
@@ -2614,256 +2287,6 @@
           "blog": {
             "zh": "/cn/blog/agent-memory-layer-survey-2026-decision-framework/",
             "en": "/blog/agent-memory-layer-survey-2026-decision-framework/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-14T16:00:00+08:00",
-      "label": {
-        "zh": "10月14日 16:00",
-        "en": "Oct 14 16:00",
-        "ja": "10月14日 16:00"
-      },
-      "items": [
-        {
-          "id": "t704",
-          "theme": "models",
-          "title": {
-            "zh": "AI 逆向与 clean-room 重写：REA「Reverse-Engineer Anything」× ArtCraft/PhotoCraft 重写 Photoshop（及 Wordcraft）× chardet 用 Claude 重写改许可 × Malus「洁净室即服务」讽刺",
-            "en": "AI Reverse Engineering and Clean-Room Rewrites: REA, PhotoCraft, chardet and Malus Side by Side",
-            "ja": "AI Reverse Engineering and Clean-Room Rewrites: REA, PhotoCraft, chardet and Malus Side by Side"
-          },
-          "summary": {
-            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。10-14 15:45 主词「reverse engineer anything」7d/24h 均过 gpts，进正式短名单，Top 3 #1。续源：EEVblog 实测 AI 逆向万用表固件。续热：EEVblog 1784 Claude Code 逆向整套固件。",
-            "en": "REA's agent reverse-engineering toolkit, ArtCraft PhotoCraft's \\\"clean-room Photoshop\\\", chardet 7's Claude rewrite and relicensing, and the Malus satire, read together: how AI reverse engineering and rewriting work, how the AI version differs from a classic clean room, the licensing and copyright risk layers, and a decision framework for using these tools.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "REA 让 coding agent 直接逆向二进制与运行时并据此重建功能，PhotoCraft 声称 clean-room 重写 Photoshop，chardet 借 Claude 重写改许可引发衍生作品之争——AI 逆向 + clean-room 重写的机制、法律风险与方法对比，多来源综合题；当日 Trends 24h「reverse engineer anything」过、7d 429 未取得 → 暂留 inbox。10-14 15:45 主词「reverse engineer anything」7d/24h 均过 gpts，进正式短名单，Top 3 #1。续源：EEVblog 实测 AI 逆向万用表固件。续热：EEVblog 1784 Claude Code 逆向整套固件。",
-            "en": "REA lets coding agents reverse-engineer binaries and runtimes and rebuild features; PhotoCraft claims a clean-room Photoshop rewrite; chardet's Claude rewrite and relicensing sparked a derivative-work fight—a multi-source synthesis on the mechanism, legal risk and methods of AI reverse engineering and clean-room rewrites. Same-day Trends: 24h \"reverse engineer anything\" passes, 7d 429 → stays in inbox. 10-14 15:45: own term passes 7d (28.98 vs 7.46) and 24h (67.89 vs 4.48) → shortlisted, Top 3 #1. Follow-up: EEVblog tests AI reverse-engineering of multimeter firmware. Re-heat: EEVblog 1784, Claude Code reverse-engineers full 121GW firmware (unverified).",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/morluto/rea",
-              "title": "morluto/rea",
-              "brief": {
-                "zh": "REA：给 coding agent 的逆向工具集（反汇编/反编译/调用追踪/浏览器与进程抓取），★161,865、日 +45,327（10-13）。",
-                "en": "Reverse-engineering toolkit for coding agents (disassembly, decompilation, call tracing, browser/process capture); 161,865 stars, +45,327/day (Oct 13).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "rea",
-              "url": "https://rea.tools/",
-              "title": "REA — Reverse Engineering for Your Coding Agent",
-              "brief": {
-                "zh": "官网演示：从 Windows 计算器 DLL 还原 % 规则并重建、从恐龙游戏脚本还原加速规则；「Clone this website」提示。",
-                "en": "Site demos: recovering Calculator's % rule from its DLL and rebuilding it, recovering a game's speed rule; \"clone this website\" prompt.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://news.ycombinator.com/item?id=50028275",
-              "title": "REA Reverse – Engineer Anything (HN)",
-              "brief": {
-                "zh": "HN 800/337（10-10）；另有 10-12「Reverse engineer anything with agents…」98/32。",
-                "en": "HN 800/337 (Oct 10); plus 98/32 on Oct 12.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=dAzs_rU6080",
-              "title": "I Tested The Viral Github Repo To Reverse Engineer Anything",
-              "brief": {
-                "zh": "80.4k@10.2h 实测。",
-                "en": "80.4k views at 10.2h, hands-on test.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=OMobTlfjb8s",
-              "title": "The Fastest-Rising Repo on GitHub Is a Little Scary (REA)",
-              "brief": {
-                "zh": "51.7k@7.3h。",
-                "en": "51.7k views at 7.3h.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/storytold/photocraft",
-              "title": "storytold/photocraft",
-              "brief": {
-                "zh": "ArtCraft 旗下「clean-room 重写 Photoshop」（纯 Rust、24 crates、1,700+ 测试、PSD 往返 307/309）；仅凭公开规范与观察行为。",
-                "en": "ArtCraft's \"clean-room Photoshop reimplementation\" in pure Rust (24 crates, 1,700+ tests, PSD round-trips 307/309), from public specs and observed behaviour only.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://news.ycombinator.com/item?id=49981449",
-              "title": "Adobe Creative Suite Cleanroom Port to Rust (HN)",
-              "brief": {
-                "zh": "HN 140/86（10-06）；另有 Wordcraft「clean-room 重写 Word」101/109（10-12）。",
-                "en": "HN 140/86 (Oct 6); plus Wordcraft (clean-room Word) 101/109 (Oct 12).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "declic",
-              "url": "https://www.declic.media/en/news/artcraft-adobe-clean-room/",
-              "title": "Photoshop cloned with Claude: is it legal?",
-              "brief": {
-                "zh": "Guadamuz：clean room 主要是证据问题；ArtCraft 未分离观察者与编码者，模型训练所见无法核验。",
-                "en": "Guadamuz: clean room is mainly evidentiary; ArtCraft does not separate observers from coders, and training exposure cannot be verified.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "ipdefense",
-              "url": "https://ipdefense.law/resources/adobe-ai-software-case-study.pdf",
-              "title": "AI Recreated Adobe-Like Software. What Could Adobe Actually Protect?",
-              "brief": {
-                "zh": "律所案例分析：条款、商业外观、专利、商标等残余风险。",
-                "en": "Law-firm case study: residual risks via terms, trade dress, patents, trademarks.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/Adobe/comments/1wvyxjd/photocraft_ive_created_an_open_source_100_rust/",
-              "title": "PhotoCraft: I've created an open source 100% Rust clean-room clone of 7 of Adobe's apps",
-              "brief": {
-                "zh": "作者 r/Adobe 发帖。",
-                "en": "Author's r/Adobe announcement.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/chardet/chardet/issues/327",
-              "title": "chardet #327: No right to relicense this project",
-              "brief": {
-                "zh": "chardet 7.0 用 Claude Code 重写并由 LGPL 改 MIT（后改 0BSD），原作者 Mark Pilgrim 反对。",
-                "en": "chardet 7.0 rewritten with Claude Code and relicensed LGPL→MIT (later 0BSD); original author Mark Pilgrim objects.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "dan-blanchard",
-              "url": "http://dan-blanchard.github.io/blog/chardet-rewrite-controversy/",
-              "title": "Everything Claude Saw: A Transparent Account of the Chardet v7 Rewrite",
-              "brief": {
-                "zh": "维护者公开全部会话日志：子 agent 三次读到旧源码；三种相似度度量近零重合。",
-                "en": "Maintainer publishes all session logs: subagents read old source in three sessions; three similarity measures show near-zero overlap.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "lwn",
-              "url": "https://lwn.net/Articles/1061534/",
-              "title": "The relicensing of chardet",
-              "brief": {
-                "zh": "LWN：低相似度不等于切断衍生关系（类比翻译成 Lisp）；训练语料含旧版。",
-                "en": "LWN: low similarity does not break the derivative link (cf. translation to Lisp); training data included old versions.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "simonw",
-              "url": "https://simonwillison.net/2026/Mar/5/chardet/",
-              "title": "Can coding agents relicense open source through a \"clean room\" implementation of code?",
-              "brief": {
-                "zh": "Simon Willison 梳理与观察 LLM 曾访问 LGPL 源码。",
-                "en": "Simon Willison's analysis, noting the LLM did access the LGPL source.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arstechnica",
-              "url": "https://arstechnica.com/ai/2026/03/ai-can-rewrite-open-source-code-but-can-it-rewrite-the-license-too/",
-              "title": "AI can rewrite open source code—but can it rewrite the license, too?",
-              "brief": {
-                "zh": "FSF：「吃过原代码的 LLM 没有 clean 可言」。",
-                "en": "FSF: \"There is nothing clean about an LLM which has ingested the code.\"",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://malus.sh",
-              "title": "Malus – Clean Room as a Service (HN 1433/531)",
-              "brief": {
-                "zh": "讽刺站点（FOSDEM 2026 演讲配套）：AI「洁净室即服务」洗白开源许可，HN 1433/531（2026-03）。",
-                "en": "Satirical \"clean room as a service\" laundering OSS licenses (FOSDEM 2026 companion), HN 1433/531 (Mar 2026).",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=BEKRoZj6otc",
-              "title": "EEVblog 1783 - Can AI Reverse Engineer the 121GW Multimeter Firmware?",
-              "brief": {
-                "zh": "Fastest-rising on-topic video this run: a well-known hardware channel tests coding agents and an MCP server on reverse-engineering real multimeter firmware.",
-                "en": "EEVblog 1783 - Can AI Reverse Engineer the 121GW Multimeter Firmware?",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=2tUC0DuPjaM",
-              "title": "EEVblog 1784 - Claude Code Reverse Engineer 121GW Firmware SUCCESS!",
-              "brief": {
-                "zh": "Steepest on-topic riser: follow-up to EEVblog 1783 (BEKRoZj6otc, 10-31). Dave Jones says Claude Code reverse engineered the whole 121GW firmware into C from one prompt in under 24h, and it works.",
-                "en": "EEVblog 1784 - Claude Code Reverse Engineer 121GW Firmware SUCCESS!",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github",
-            "rea",
-            "hn",
-            "youtube",
-            "reddit",
-            "declic",
-            "ipdefense",
-            "lwn",
-            "simonw",
-            "arstechnica",
-            "dan-blanchard"
-          ],
-          "score": 5,
-          "status": "published",
-          "externalUrls": [
-            "https://github.com/morluto/rea",
-            "https://rea.tools/",
-            "https://news.ycombinator.com/item?id=50028275",
-            "https://www.youtube.com/watch?v=dAzs_rU6080",
-            "https://www.youtube.com/watch?v=OMobTlfjb8s",
-            "https://github.com/storytold/photocraft",
-            "https://news.ycombinator.com/item?id=49981449",
-            "https://www.declic.media/en/news/artcraft-adobe-clean-room/",
-            "https://ipdefense.law/resources/adobe-ai-software-case-study.pdf",
-            "https://www.reddit.com/r/Adobe/comments/1wvyxjd/photocraft_ive_created_an_open_source_100_rust/",
-            "https://github.com/chardet/chardet/issues/327",
-            "http://dan-blanchard.github.io/blog/chardet-rewrite-controversy/",
-            "https://lwn.net/Articles/1061534/",
-            "https://simonwillison.net/2026/Mar/5/chardet/",
-            "https://arstechnica.com/ai/2026/03/ai-can-rewrite-open-source-code-but-can-it-rewrite-the-license-too/",
-            "https://malus.sh",
-            "https://www.youtube.com/watch?v=BEKRoZj6otc",
-            "https://www.youtube.com/watch?v=2tUC0DuPjaM"
-          ],
-          "blog": {
-            "zh": "/cn/blog/ai-reverse-engineering-clean-room-rewrite-licensing/",
-            "en": "/blog/ai-reverse-engineering-clean-room-rewrite-licensing/"
           }
         }
       ]
