@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T10:00:43+08:00",
+  "updatedAt": "2026-11-14T15:49:12+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -17,9 +17,58 @@
     "security": 7,
     "research": 13,
     "product-news": 1,
-    "other": 1
+    "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-11-14T15:00:00+08:00",
+      "label": {
+        "zh": "11月14日 15:00",
+        "en": "Nov 14 15:00",
+        "ja": "11月14日 15:00"
+      },
+      "items": [
+        {
+          "id": "t901",
+          "theme": "other",
+          "title": {
+            "zh": "Helion：编译期启发式替代 autotune——按 IR/数据流将 kernel 分为 matmul/reduction/pointwise，直接给出 block/warp/stage，接近调参速度且几乎不增加编译时间",
+            "en": "Helion",
+            "ja": "Helion"
+          },
+          "summary": {
+            "zh": "PyTorch 官方博客（2026-11-12，Kim、Che、Choi、Ansel；本轮经 TLDR AI 11-13 首次进入窗口）。Helion（PyTorch 的 kernel DSL）此前严重依赖 autotune：文中举例，单个 paged-attention kernel 在 72 个 shape 上，快速模式约 10 小时、全力模式约 25 小时。新做法在编译期读取 kernel 的 IR 与数据流，按所含运算分成 matmul / reduction / pointwise 三类（matmul 启发式覆盖任何含 hl.dot 或 torch.baddbmm 的 kernel，不限于标准 m-n-k），直接给出 block size、num_warps、num_stages 等，无需搜索。自报数字（均未复现）：在 H100 上，9 种线性注意力变体、96 个 kernel×shape 单元，计算出的配置比 Flash Linear Attention 手写 Triton 前向快 1.18×、含反向 1.12×，比 Helion 以往无 autotune 默认快 2.13×；6 个 vLLM 生产 kernel、153 个单元，比 vLLM 手写 CUDA/C++ 快 1.27×，比以往默认快 2.2×。分析本身只增加数十毫秒，淹没在 Triton 编译噪声里。autotune 开启时，辅助启发式会提供约 5–20 个相关配置作种子。已合并，并在 H100/B200 的 Triton 后端默认开启。单篇官方博客，数字为作者自报，仅 Chaos/notes。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "PyTorch 官方博客（2026-11-12，Kim、Che、Choi、Ansel；本轮经 TLDR AI 11-13 首次进入窗口）。Helion（PyTorch 的 kernel DSL）此前严重依赖 autotune：文中举例，单个 paged-attention kernel 在 72 个 shape 上，快速模式约 10 小时、全力模式约 25 小时。新做法在编译期读取 kernel 的 IR 与数据流，按所含运算分成 matmul / reduction / pointwise 三类（matmul 启发式覆盖任何含 hl.dot 或 torch.baddbmm 的 kernel，不限于标准 m-n-k），直接给出 block size、num_warps、num_stages 等，无需搜索。自报数字（均未复现）：在 H100 上，9 种线性注意力变体、96 个 kernel×shape 单元，计算出的配置比 Flash Linear Attention 手写 Triton 前向快 1.18×、含反向 1.12×，比 Helion 以往无 autotune 默认快 2.13×；6 个 vLLM 生产 kernel、153 个单元，比 vLLM 手写 CUDA/C++ 快 1.27×，比以往默认快 2.2×。分析本身只增加数十毫秒，淹没在 Triton 编译噪声里。autotune 开启时，辅助启发式会提供约 5–20 个相关配置作种子。已合并，并在 H100/B200 的 Triton 后端默认开启。单篇官方博客，数字为作者自报，仅 Chaos/notes。",
+            "en": "Official PyTorch blog (2026-11-12, Kim, Che, Choi, Ansel; first reached this window via the TLDR AI 11-13 backlog exception). Helion, PyTorch’s kernel DSL, had relied heavily on autotuning: the post says tuning one paged-attention kernel across 72 shapes took about 10 hours in quick mode and 25 hours at full effort. The new path reads a kernel’s IR and dataflow at compile time, classifies it as matmul, reduction, or pointwise (the matmul heuristic applies to any kernel that contains an operation such as hl.dot or torch.baddbmm, not only standard m-n-k GEMMs), and emits block sizes, num_warps, and num_stages directly, with no search. Self-reported figures, not reproduced: on H100, across 96 kernel-and-shape cells of nine linear-attention variants, the computed config is 1.18× faster than hand-written Triton in Flash Linear Attention on the forward pass and 1.12× with the backward included, and 2.13× faster than Helion’s previous no-autotune default; across 153 cells of six production vLLM kernels it is 1.27× faster than vLLM’s own handwritten CUDA/C++ and 2.2× faster than the previous Helion default. The analysis itself adds only tens of milliseconds, lost in Triton compilation noise. When autotuning is on, helper heuristics seed about 5–20 related configs. The heuristics are merged and enabled by default on H100 and B200 with the Triton backend. Single official blog; numbers are the authors’ own; Chaos/notes only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://pytorch.org/blog/fast-by-default-compile-time-heuristics-for-helion-kernels/",
+              "title": "Fast by Default: compile-time heuristics replace autotuning for Helion kernels (PyTorch)",
+              "brief": {
+                "zh": "PyTorch 官方博客（2026-11-12，Kim、Che、Choi、Ansel；本轮经 TLDR AI 11-13 首次进入窗口）。Helion（PyTorch 的 kernel DSL）此前严重依赖 autotune：文中举例，单个 paged-attention kernel 在 72 个 shape 上，快速模式约 10 小时、全力模式约 25 小时。新做法在编译期读取 kernel 的 IR 与数据流，按所含运算分成 matmul / reduction / pointwise 三类（matmul 启发式覆盖任何含 hl.dot 或 torch.baddbmm 的 kernel，不限于标准 m-n-k），直接给出 block size、num_warps、num_stages 等，无需搜索。自报数字（均未复现）：在 H100 上，9 种线性注意力变体、96 个 kernel×shape 单元，计算出的配置比 Flash Linear Attention 手写 Triton 前向快 1.18×、含反向 1.12×，比 Helion 以往无 autotune 默认快 2.13×；6 个 vLLM 生产 kernel、153 个单元，比 vLLM 手写 CUDA/C++ 快 1.27×，比以往默认快 2.2×。分析本身只增加数十毫秒，淹没在 Triton 编译噪声里。autotune 开启时，辅助启发式会提供约 5–20 个相关配置作种子。已合并，并在 H100/B200 的 Triton 后端默认开启。单篇官方博客，数字为作者自报，仅 Chaos/notes。",
+                "en": "Official PyTorch blog (2026-11-12, Kim, Che, Choi, Ansel; first reached this window via the TLDR AI 11-13 backlog exception). Helion, PyTorch’s kernel DSL, had relied heavily on autotuning: the post says tuning one paged-attention kernel across 72 shapes took about 10 hours in quick mode and 25 hours at full effort. The new path reads a kernel’s IR and dataflow at compile time, classifies it as matmul, reduction, or pointwise (the matmul heuristic applies to any kernel that contains an operation such as hl.dot or torch.baddbmm, not only standard m-n-k GEMMs), and emits block sizes, num_warps, and num_stages directly, with no search. Self-reported figures, not reproduced: on H100, across 96 kernel-and-shape cells of nine linear-attention variants, the computed config is 1.18× faster than hand-written Triton in Flash Linear Attention on the forward pass and 1.12× with the backward included, and 2.13× faster than Helion’s previous no-autotune default; across 153 cells of six production vLLM kernels it is 1.27× faster than vLLM’s own handwritten CUDA/C++ and 2.2× faster than the previous Helion default. The analysis itself adds only tens of milliseconds, lost in Triton compilation noise. When autotuning is on, helper heuristics seed about 5–20 related configs. The heuristics are merged and enabled by default on H100 and B200 with the Triton backend. Single official blog; numbers are the authors’ own; Chaos/notes only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://pytorch.org/blog/fast-by-default-compile-time-heuristics-for-helion-kernels/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-14T10:00:00+08:00",
       "label": {
