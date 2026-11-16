@@ -15,7 +15,7 @@ Together they are cross-sections of one pipeline: use an agent to understand a p
 
 1. **Reverse engineering is not new; the cost is.** Recovering a business rule used to mean assembly, Ghidra and weeks of work. Now it takes a prompt and a few minutes, which is the scale of REA's Calculator demo. [2]
 2. **AI clean rooms usually have no wall.** The classic method separates the people who read the original from the people who write code, and that separation is the evidence. In both chardet 7 and PhotoCraft, one person observes, writes the spec and reviews the code, and the model may have seen the original in training. [8][12]
-3. **Low similarity proves exactly one thing.** It shows literal code was not carried over. It does not show the derivative link is broken, and it says nothing about terms of use, trademarks, trade dress or patents. [8][9][13]
+3. **Low similarity does not establish provenance.** It means the comparison method detected little overlap, not that no literal code was copied or that every part was independently produced. It does not show the derivative link is broken, and it says nothing about terms of use, trademarks, trade dress or patents. [8][9][13]
 4. **Relicensing is the riskiest step.** The same rewrite under a new package name would barely have been noticed. Keeping the old name and swapping copyleft for a permissive license is what made it a fight. [13]
 
 ## What REA actually does
@@ -72,7 +72,7 @@ A few details from that write-up are worth keeping:
 
 - **The model already knew chardet.** With no source and no web access, Claude could describe chardet's two-table state machines, per-encoding byte classes and the use of frequency distributions to break ties between structurally valid encodings. Not perfectly: it got the class hierarchy wrong, omitted several probers and invented names for intermediate states that are bare integers in the source. [12]
 - **Old source entered the model's context in three sessions.** On day one a subagent tried to glob the old repository and was denied. Twice he directed the model to files he had written himself. The biggest exposure came when a subagent, working on API compatibility, read the full 567-line `universaldetector.py` from 6.0.0 via GitHub on its own initiative, two days after the detection engine had been committed. By git blame, 510 of those lines are Blanchard's and 32 are Pilgrim's. [12]
-- **Three similarity measures came out near zero.** `git blame -C -C -C` attributes none of 7.0.0's 3,931 lines to Pilgrim. JPlag between 6.0.0 and 7.0.0 gives 0.04% average and 1.30% max, with three matches totaling 47 tokens, all import statements and argparse boilerplate; for comparison, 5.2.0 vs. 6.0.0 peaks at 80%. Copydetect's maximum of 59% falls on a three-line `__main__.py`. [12]
+- **Blanchard reports line attribution and two kinds of similarity checks.** His `git blame -C -C -C` check attributes none of 7.0.0's 3,931 lines to Pilgrim; this tracks line attribution in Git history, not a similarity percentage. His token-level JPlag comparison between 6.0.0 and 7.0.0 gives 0.04% average and 1.30% max, with three matches totaling 47 tokens: import syntax, argparse boilerplate, and a 14-token match between language codes and unrelated boolean initializations that he describes as a false positive on comma-separated values. For comparison, he reports a maximum of 80% between 5.2.0 and 6.0.0. His per-file Copydetect fingerprint comparison reaches a maximum of 59% on a three-line `__main__.py`. These results describe different checks, not three near-zero similarity scores. [12]
 - **The architecture really did change.** The old version runs dozens of stateful probers in parallel; 7.0.0 is a 12-stage pipeline of stateless functions, and scoring moved from four ordinal buckets to IDF-weighted cosine similarity. [12]
 
 On that basis he invokes the Abstraction-Filtration-Comparison (AFC) test from Computer Associates v. Altai: filter out ideas, standard idioms and elements dictated by the problem, then ask whether protected structure survives. [12] Richard Fontana, a co-author of GPLv3 and LGPLv3, said he sees no basis for requiring 7.0.0 to be LGPL, because nobody has identified copyrightable expression from earlier versions persisting in it. [14]
@@ -142,7 +142,7 @@ This is the riskiest step. Decision points:
 - **Use a new name.** LWN is explicit: a new module called, say, "detectchar" implementing the same API would have raised far fewer eyebrows. [13] Blanchard kept the name so 130 million monthly downloads would get the speedup automatically [12]; that benefit is real, and so is the cost.
 - **Weigh the original author's position.** If they object, the community cost counts even if the law is on your side.
 - **Consider 0BSD or public domain.** If you do not care how downstream users use it, waiving rights is cleaner than claiming a copyright that may not exist. [12]
-- **Do not expect a similarity report to settle it.** It shows you did not copy literal code; it cannot show you did not translate. [13]
+- **Do not expect a similarity report to settle it.** Low measured overlap does not prove that no literal code was copied or establish how every part of a rewrite was produced; it also cannot rule out translation. [13]
 
 ### You are the one being cloned
 
