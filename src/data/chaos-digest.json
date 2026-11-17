@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T15:49:12+08:00",
+  "updatedAt": "2026-11-17T09:51:10+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,382 @@
     "other"
   ],
   "themeCounts": {
-    "models": 10,
+    "models": 3,
     "coding-tools": 1,
     "agents-oss": 1,
-    "security": 7,
-    "research": 13,
-    "product-news": 1,
+    "security": 6,
+    "research": 8,
+    "product-news": 2,
     "other": 2
   },
   "hours": [
+    {
+      "hourStart": "2026-11-17T09:00:00+08:00",
+      "label": {
+        "zh": "11月17日 09:00",
+        "en": "Nov 17 09:00",
+        "ja": "11月17日 09:00"
+      },
+      "items": [
+        {
+          "id": "t886",
+          "theme": "models",
+          "title": {
+            "zh": "Claude Code 2.1.323：实验性 Code Mode——Claude 改为写 JavaScript 调用自身工具（官方 CHANGELOG，文档未上线）",
+            "en": "Claude Code 2.1.323",
+            "ja": "Claude Code 2.1.323"
+          },
+          "summary": {
+            "zh": "Claude Code v2.1.323（GitHub release 2026-11-12 22:12 UTC，即 11-13 06:12 Asia/Shanghai）官方 CHANGELOG 首条：新增实验性、需手动开启的 Code Mode，Claude 改为写 JavaScript 来调用它的工具，组织可统一关闭（文档 code.claude.com/docs/en/code-mode 抓取时仍 404）。同版其它 harness 相关改动：plugin.json 新增 engines[\"claude-code\"] 版本约束；tool.list 插件 hook 增删的工具对模型和所有 agent 生效；未识别模型 ID 的默认上下文从 200K 改为 1M；macOS/Linux 沙箱下 git worktree add/move/remove 只读失败、未授权 worktree 内提交失败；修复 bypass 权限下 rm 判错目录而跳过危险删除提示；长 hook 在 claude -p/SDK 中每 30 秒发心跳；--no-session-persistence 退出时清理落盘的长工具结果。Code Mode 的沙箱、可调用工具范围等机制细节未核。本版不含此前跟踪的「把账户邮箱移出模型上下文」修补。单点发布，仅 Chaos。 YouTube Ray Amjad《Code Mode Is Claude Code's BIGGEST Harness Change Yet》（DRNbxPk9Ab8，约 6.6 万观看 / ~13.6 小时，发布 11-16 20:04 +08）：走一遍 Claude Code 2.1.323 及之后的实验性 Code Mode。官方文档现已上线（code.claude.com/docs/en/code-mode；11-13 抓取时曾 404），说明这是默认关闭的实验选项，由 Claude 写一段 JavaScript、在一步里做多次工具调用；视频描述称用 CLAUDE_CODE_EXPERIMENTAL_CODE_MODE=1 claude 开启。视频里「大约便宜 30%」的说法未经独立核实；流传的 37% 节省数字据称来自更早的另一个 API 特性，不能当成 Code Mode 的结果。视频同时推广其课程。补本行官方 CHANGELOG：文档已可见，并多了一条高热度讲解视频。仍为产品特性，仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Claude Code v2.1.323（GitHub release 2026-11-12 22:12 UTC，即 11-13 06:12 Asia/Shanghai）官方 CHANGELOG 首条：新增实验性、需手动开启的 Code Mode，Claude 改为写 JavaScript 来调用它的工具，组织可统一关闭（文档 code.claude.com/docs/en/code-mode 抓取时仍 404）。同版其它 harness 相关改动：plugin.json 新增 engines[\"claude-code\"] 版本约束；tool.list 插件 hook 增删的工具对模型和所有 agent 生效；未识别模型 ID 的默认上下文从 200K 改为 1M；macOS/Linux 沙箱下 git worktree add/move/remove 只读失败、未授权 worktree 内提交失败；修复 bypass 权限下 rm 判错目录而跳过危险删除提示；长 hook 在 claude -p/SDK 中每 30 秒发心跳；--no-session-persistence 退出时清理落盘的长工具结果。Code Mode 的沙箱、可调用工具范围等机制细节未核。本版不含此前跟踪的「把账户邮箱移出模型上下文」修补。单点发布，仅 Chaos。 YouTube Ray Amjad《Code Mode Is Claude Code's BIGGEST Harness Change Yet》（DRNbxPk9Ab8，约 6.6 万观看 / ~13.6 小时，发布 11-16 20:04 +08）：走一遍 Claude Code 2.1.323 及之后的实验性 Code Mode。官方文档现已上线（code.claude.com/docs/en/code-mode；11-13 抓取时曾 404），说明这是默认关闭的实验选项，由 Claude 写一段 JavaScript、在一步里做多次工具调用；视频描述称用 CLAUDE_CODE_EXPERIMENTAL_CODE_MODE=1 claude 开启。视频里「大约便宜 30%」的说法未经独立核实；流传的 37% 节省数字据称来自更早的另一个 API 特性，不能当成 Code Mode 的结果。视频同时推广其课程。补本行官方 CHANGELOG：文档已可见，并多了一条高热度讲解视频。仍为产品特性，仅 Chaos。",
+            "en": "The official Claude Code changelog for v2.1.323 (GitHub release 2026-11-12 22:12 UTC, 06:12 Nov 13 Asia/Shanghai) leads with an experimental, opt-in Code Mode in which Claude writes JavaScript to call its own tools; organizations can disable it centrally (the docs page code.claude.com/docs/en/code-mode still returned 404 at capture). Other harness-related changes in the same release: a new engines[\"claude-code\"] version constraint in plugin.json; tools added or removed by tool.list plugin hooks now apply to the model and all agents; the default context for unrecognized model IDs moves from 200K to 1M; under the macOS/Linux sandbox, git worktree add/move/remove fail as read-only and commits inside unauthorized worktrees fail; a fix for rm misjudging the directory and skipping the dangerous-deletion prompt under bypass permissions; 30-second heartbeats for long hooks in claude -p and the SDK; and cleanup of persisted long tool results on exit with --no-session-persistence. Code Mode mechanics such as sandboxing and callable tool scope were not verified. This release does not include the previously tracked fix that removes account email from model context. Single release, Chaos only. YouTube, Ray Amjad, “Code Mode Is Claude Code’s BIGGEST Harness Change Yet” (DRNbxPk9Ab8, about 66k views in ~13.6 hours, published 11-16 20:04 +08): a walkthrough of experimental Code Mode in Claude Code 2.1.323 and later. Official docs are now up (code.claude.com/docs/en/code-mode; they 404’d on 11-13) and describe an experimental, off-by-default option: Claude writes a JavaScript script that makes several tool calls in one step. The video description says to enable it with CLAUDE_CODE_EXPERIMENTAL_CODE_MODE=1 claude. His on-video claim that it was “about 30% cheaper” was not independently verified; a circulating 37% savings figure has been attributed to a different, earlier API feature and should not be treated as a Code Mode result. The video also promotes his course. Updates this row’s CHANGELOG note: the docs are now visible, plus a high-heat walkthrough. Still a product feature; Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "anthropic",
+              "url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+              "title": "Claude Code 2.1.323：实验性 Code Mode——Claude 写 JavaScript 调用自身工具",
+              "brief": {
+                "zh": "Claude Code v2.1.323（GitHub release 2026-11-12 22:12 UTC，即 11-13 06:12 Asia/Shanghai）官方 CHANGELOG 首条：新增实验性、需手动开启的 Code Mode，Claude 改为写 JavaScript 来调用它的工具，组织可统一关闭（文档 code.claude.com/docs/en/code-mode 抓取时仍 404）。同版其它 harness 相关改动：plugin.json 新增 engines[\"claude-code\"] 版本约束；tool.list 插件 hook 增删的工具对模型和所有 agent 生效；未识别模型 ID 的默认上下文从 200K 改为 1M；macOS/Linux 沙箱下 git worktree add/move/remove 只读失败、未授权 worktree 内提交失败；修复 bypass 权限下 rm 判错目录而跳过危险删除提示；长 hook 在 claude -p/SDK 中每 30 秒发心跳；--no-session-persistence 退出时清理落盘的长工具结果。Code Mode 的沙箱、可调用工具范围等机制细节未核。本版不含此前跟踪的「把账户邮箱移出模型上下文」修补。单点发布，仅 Chaos。",
+                "en": "The official Claude Code changelog for v2.1.323 (GitHub release 2026-11-12 22:12 UTC, 06:12 Nov 13 Asia/Shanghai) leads with an experimental, opt-in Code Mode in which Claude writes JavaScript to call its own tools; organizations can disable it centrally (the docs page code.claude.com/docs/en/code-mode still returned 404 at capture). Other harness-related changes in the same release: a new engines[\"claude-code\"] version constraint in plugin.json; tools added or removed by tool.list plugin hooks now apply to the model and all agents; the default context for unrecognized model IDs moves from 200K to 1M; under the macOS/Linux sandbox, git worktree add/move/remove fail as read-only and commits inside unauthorized worktrees fail; a fix for rm misjudging the directory and skipping the dangerous-deletion prompt under bypass permissions; 30-second heartbeats for long hooks in claude -p and the SDK; and cleanup of persisted long tool results on exit with --no-session-persistence. Code Mode mechanics such as sandboxing and callable tool scope were not verified. This release does not include the previously tracked fix that removes account email from model context. Single release, Chaos only.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "youtube",
+              "url": "https://www.youtube.com/watch?v=DRNbxPk9Ab8",
+              "title": "Code Mode Is Claude Code's BIGGEST Harness Change Yet",
+              "brief": {
+                "zh": "YouTube Ray Amjad《Code Mode Is Claude Code's BIGGEST Harness Change Yet》（DRNbxPk9Ab8，约 6.6 万观看 / ~13.6 小时，发布 11-16 20:04 +08）：走一遍 Claude Code 2.1.323 及之后的实验性 Code Mode。官方文档现已上线（code.claude.com/docs/en/code-mode；11-13 抓取时曾 404），说明这是默认关闭的实验选项，由 Claude 写一段 JavaScript、在一步里做多次工具调用；视频描述称用 CLAUDE_CODE_EXPERIMENTAL_CODE_MODE=1 claude 开启。视频里「大约便宜 30%」的说法未经独立核实；流传的 37% 节省数字据称来自更早的另一个 API 特性，不能当成 Code Mode 的结果。视频同时推广其课程。补本行官方 CHANGELOG：文档已可见，并多了一条高热度讲解视频。仍为产品特性，仅 Chaos。",
+                "en": "YouTube, Ray Amjad, “Code Mode Is Claude Code’s BIGGEST Harness Change Yet” (DRNbxPk9Ab8, about 66k views in ~13.6 hours, published 11-16 20:04 +08): a walkthrough of experimental Code Mode in Claude Code 2.1.323 and later. Official docs are now up (code.claude.com/docs/en/code-mode; they 404’d on 11-13) and describe an experimental, off-by-default option: Claude writes a JavaScript script that makes several tool calls in one step. The video description says to enable it with CLAUDE_CODE_EXPERIMENTAL_CODE_MODE=1 claude. His on-video claim that it was “about 30% cheaper” was not independently verified; a circulating 37% savings figure has been attributed to a different, earlier API feature and should not be treated as a Code Mode result. The video also promotes his course. Updates this row’s CHANGELOG note: the docs are now visible, plus a high-heat walkthrough. Still a product feature; Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "anthropic",
+            "youtube"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+            "https://www.youtube.com/watch?v=DRNbxPk9Ab8"
+          ]
+        },
+        {
+          "id": "t902",
+          "theme": "research",
+          "title": {
+            "zh": "Contagious Fingerprints：接着别的模型开过的对话写下去，分类器会把后写的模型认成前一个——API 接力审计会被「文风传染」打穿",
+            "en": "Contagious Fingerprints",
+            "ja": "Contagious Fingerprints"
+          },
+          "summary": {
+            "zh": "arXiv 2611.18104（Zailong Tian）：分类器用来识别「这段文本出自哪个 LLM」的指纹通常被当成模型的固定属性；本文主张它会传染——一个模型接着另一个模型开过的对话写下去，就会继承前者的指纹。这对 API 接力审计是漏洞：前几轮用客户付钱的模型、后面悄悄换成更便宜的，检测率从 0.97 掉到 0.72（DeepSeek 顶 Claude Sonnet），同厂降级从 0.87 掉到 0.54。机制是模仿历史文风；作者提出用同一段历史上的参考样本做 Lineup 检验。数字均论文自报，未复现。对照 t889（Blackwell 权重数值指纹，对象不同）。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.18104（Zailong Tian）：分类器用来识别「这段文本出自哪个 LLM」的指纹通常被当成模型的固定属性；本文主张它会传染——一个模型接着另一个模型开过的对话写下去，就会继承前者的指纹。这对 API 接力审计是漏洞：前几轮用客户付钱的模型、后面悄悄换成更便宜的，检测率从 0.97 掉到 0.72（DeepSeek 顶 Claude Sonnet），同厂降级从 0.87 掉到 0.54。机制是模仿历史文风；作者提出用同一段历史上的参考样本做 Lineup 检验。数字均论文自报，未复现。对照 t889（Blackwell 权重数值指纹，对象不同）。",
+            "en": "arXiv 2611.18104 (Zailong Tian) argues that the fingerprint a classifier uses to tell which LLM wrote a passage is not a fixed property of the model: it is contagious. A model that continues a conversation begun by another model inherits the predecessor’s fingerprint. That undermines audits of API relays, which can serve the first turns with the model a customer pays for and silently switch later. Detection is said to fall from 0.97 to 0.72 when DeepSeek is swapped in for Claude Sonnet, and from 0.87 to 0.54 for same-vendor downgrades. The mechanism is imitation of historical style; the authors propose a Lineup test that uses reference samples from the same history. Figures are the paper’s own, not reproduced. Cross-reference t889 (Blackwell weight-numeric fingerprints; a different object).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.18104",
+              "title": "Contagious Fingerprints: When LLMs Inherit Another Model's Identity",
+              "brief": {
+                "zh": "arXiv 2611.18104（Zailong Tian）：分类器用来识别「这段文本出自哪个 LLM」的指纹通常被当成模型的固定属性；本文主张它会传染——一个模型接着另一个模型开过的对话写下去，就会继承前者的指纹。这对 API 接力审计是漏洞：前几轮用客户付钱的模型、后面悄悄换成更便宜的，检测率从 0.97 掉到 0.72（DeepSeek 顶 Claude Sonnet），同厂降级从 0.87 掉到 0.54。机制是模仿历史文风；作者提出用同一段历史上的参考样本做 Lineup 检验。数字均论文自报，未复现。对照 t889（Blackwell 权重数值指纹，对象不同）。",
+                "en": "arXiv 2611.18104 (Zailong Tian) argues that the fingerprint a classifier uses to tell which LLM wrote a passage is not a fixed property of the model: it is contagious. A model that continues a conversation begun by another model inherits the predecessor’s fingerprint. That undermines audits of API relays, which can serve the first turns with the model a customer pays for and silently switch later. Detection is said to fall from 0.97 to 0.72 when DeepSeek is swapped in for Claude Sonnet, and from 0.87 to 0.54 for same-vendor downgrades. The mechanism is imitation of historical style; the authors propose a Lineup test that uses reference samples from the same history. Figures are the paper’s own, not reproduced. Cross-reference t889 (Blackwell weight-numeric fingerprints; a different object).",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.18104"
+          ]
+        },
+        {
+          "id": "t903",
+          "theme": "research",
+          "title": {
+            "zh": "Latent persistence：用层激活的自相关度量「潜变量沿上下文的持久性」——更深的层里特征跨更长上下文保持，从而解释激活的长尾相关",
+            "en": "Latent persistence",
+            "ja": "Latent persistence"
+          },
+          "summary": {
+            "zh": "arXiv 2611.18089（Francesco Cagnetta、Santiago Acevedo）：主张用层激活的自相关来度量「潜变量沿上下文的持久性」——更深的层里，特征会在更长的上下文跨度上保持，从而解释激活的长尾相关。受控合成数据里，抽象潜变量的持久性几乎就能预测自相关形态；真实文本里用 SAE 特征作代理也成立，消融这些持久特征后自相关下降。数字均论文自报，未复现。对照 t708（SAE 综述）。不复测已失败词 sparse autoencoders。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.18089（Francesco Cagnetta、Santiago Acevedo）：主张用层激活的自相关来度量「潜变量沿上下文的持久性」——更深的层里，特征会在更长的上下文跨度上保持，从而解释激活的长尾相关。受控合成数据里，抽象潜变量的持久性几乎就能预测自相关形态；真实文本里用 SAE 特征作代理也成立，消融这些持久特征后自相关下降。数字均论文自报，未复现。对照 t708（SAE 综述）。不复测已失败词 sparse autoencoders。",
+            "en": "arXiv 2611.18089 (Francesco Cagnetta, Santiago Acevedo) proposes measuring “latent persistence”—how long latent variables last along the context—via the autocorrelation of layer activations. In deeper layers, features are said to persist over longer spans, which would explain long-tailed activation correlations. On controlled synthetic data, the persistence of abstract latents almost predicts the autocorrelation shape; on real text, SAE features used as a proxy show the same pattern, and ablating those persistent features reduces the autocorrelation. Figures are the paper’s own, not reproduced. Cross-reference t708 (SAE survey). Do not retest the already-failed term sparse autoencoders.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.18089",
+              "title": "Deep Latents, Long Memory: Latent persistence explains temporal correlations in transformer activations",
+              "brief": {
+                "zh": "arXiv 2611.18089（Francesco Cagnetta、Santiago Acevedo）：主张用层激活的自相关来度量「潜变量沿上下文的持久性」——更深的层里，特征会在更长的上下文跨度上保持，从而解释激活的长尾相关。受控合成数据里，抽象潜变量的持久性几乎就能预测自相关形态；真实文本里用 SAE 特征作代理也成立，消融这些持久特征后自相关下降。数字均论文自报，未复现。对照 t708（SAE 综述）。不复测已失败词 sparse autoencoders。",
+                "en": "arXiv 2611.18089 (Francesco Cagnetta, Santiago Acevedo) proposes measuring “latent persistence”—how long latent variables last along the context—via the autocorrelation of layer activations. In deeper layers, features are said to persist over longer spans, which would explain long-tailed activation correlations. On controlled synthetic data, the persistence of abstract latents almost predicts the autocorrelation shape; on real text, SAE features used as a proxy show the same pattern, and ablating those persistent features reduces the autocorrelation. Figures are the paper’s own, not reproduced. Cross-reference t708 (SAE survey). Do not retest the already-failed term sparse autoencoders.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.18089"
+          ]
+        },
+        {
+          "id": "t904",
+          "theme": "research",
+          "title": {
+            "zh": "LeCat：把范畴知识拆成「记过的」「能泛化到未见实例的」「会在恰当语境里灵活使用的」三层——逐字规则口吻的重复反而削弱灵活使用",
+            "en": "LeCat",
+            "ja": "LeCat"
+          },
+          "summary": {
+            "zh": "arXiv 2611.18419（Jimin Mun、Maarten Sap、Yanai Elazar）提出 LeCat，从两头看 LLM 如何获得范畴知识：先把能力分成记过的、能泛化到未见实例的、以及会在恰当语境里灵活使用的三层；再追踪预训练文本里这些知识是怎么被写出的（逐字规则、例外、共现等「知识表达」）。对开源预训练模型，用 199 对范畴-特征评估并分析训练数据：加强语境与范畴-特征共现（PMI）有助于较大模型学习，逐字、规则口吻的重复反而削弱灵活使用。作者再从头训练 68M 模型、精确控制训练数据中的范畴信息，印证多样的知识表达更稳健，而语境灵活性始终很难。数字均论文自报，未复现。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.18419（Jimin Mun、Maarten Sap、Yanai Elazar）提出 LeCat，从两头看 LLM 如何获得范畴知识：先把能力分成记过的、能泛化到未见实例的、以及会在恰当语境里灵活使用的三层；再追踪预训练文本里这些知识是怎么被写出的（逐字规则、例外、共现等「知识表达」）。对开源预训练模型，用 199 对范畴-特征评估并分析训练数据：加强语境与范畴-特征共现（PMI）有助于较大模型学习，逐字、规则口吻的重复反而削弱灵活使用。作者再从头训练 68M 模型、精确控制训练数据中的范畴信息，印证多样的知识表达更稳健，而语境灵活性始终很难。数字均论文自报，未复现。",
+            "en": "arXiv 2611.18419 (Jimin Mun, Maarten Sap, Yanai Elazar) introduces LeCat, a two-part framework for how LLMs acquire category knowledge. It first separates memorizing in-domain facts, generalizing to unseen instances, and using knowledge flexibly in the right context; it then traces how pretraining text expresses that knowledge (verbatim rules, exceptions, co-occurrence, and so on). On open-source pretrained models, 199 curated category-feature pairs plus training-data analysis suggest that stronger context and category-feature co-occurrence (PMI) help larger models, while verbatim rule-like repetition hurts flexible use. A 68M model trained from scratch with controlled category information in the data is reported to confirm that a mixture of expressions is more robust, and that contextual flexibility remains hard. Figures are the paper’s own, not reproduced.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.18419",
+              "title": "LECAT: Measuring LLM Category Learning from Pretraining Data",
+              "brief": {
+                "zh": "arXiv 2611.18419（Jimin Mun、Maarten Sap、Yanai Elazar）提出 LeCat，从两头看 LLM 如何获得范畴知识：先把能力分成记过的、能泛化到未见实例的、以及会在恰当语境里灵活使用的三层；再追踪预训练文本里这些知识是怎么被写出的（逐字规则、例外、共现等「知识表达」）。对开源预训练模型，用 199 对范畴-特征评估并分析训练数据：加强语境与范畴-特征共现（PMI）有助于较大模型学习，逐字、规则口吻的重复反而削弱灵活使用。作者再从头训练 68M 模型、精确控制训练数据中的范畴信息，印证多样的知识表达更稳健，而语境灵活性始终很难。数字均论文自报，未复现。",
+                "en": "arXiv 2611.18419 (Jimin Mun, Maarten Sap, Yanai Elazar) introduces LeCat, a two-part framework for how LLMs acquire category knowledge. It first separates memorizing in-domain facts, generalizing to unseen instances, and using knowledge flexibly in the right context; it then traces how pretraining text expresses that knowledge (verbatim rules, exceptions, co-occurrence, and so on). On open-source pretrained models, 199 curated category-feature pairs plus training-data analysis suggest that stronger context and category-feature co-occurrence (PMI) help larger models, while verbatim rule-like repetition hurts flexible use. A 68M model trained from scratch with controlled category information in the data is reported to confirm that a mixture of expressions is more robust, and that contextual flexibility remains hard. Figures are the paper’s own, not reproduced.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.18419"
+          ]
+        },
+        {
+          "id": "t908",
+          "theme": "models",
+          "title": {
+            "zh": "评测本身可信吗（11-17）：Anthropic 安全评测工程指南 × METR 称调查 agent 能分清对齐评测与能力评测 × Redwood 批 Gemini 4 安全论证并未说明失控风险已低",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "Anthropic 研究博客（Engineering/Safety，11-13；本轮经 TLDR AI 11-16 进入窗口）《Building strong safety evaluations》：安全评测量的是模型造成或参与伤害的倾向，而不是能力，覆盖「被要求作恶」和「意图无害但风险高」两类请求，并按原则、设计、运行、报告、从哪下手来写；主张「比前代更安全」这种说法，可靠程度取决于背后的评测。一手方法论，仅 Chaos。 METR Notes（2026-11-16-measuring-alignment-eval-tells）：调查 agent 在 19 项对齐评测和 36 项能力评测的环境里探测，模型能否认出自己处于对齐评测。称过去一年区分能力稳步上升；在 METR 这组评测上，Opus 5.5 把所有对齐评测都排在所有能力评测之上。线索包括蜜罐式模拟环境；作者把线索分成环境级与任务级，建议用来迭代对齐评测设计。本轮读了 METR 笔记索引与 aihot 摘要，正文未通读。数字为机构自报，未复现。 Redwood Research（Alek Westover、Adam Kaufman，11-16）《Gemini 4 safety reports don’t demonstrate…》：批评 Google DeepMind 的 Gemini 4 Argon / Carbon 安全报告，认为其基于控制（监控思维链/行动）而非对齐的安全论证有严重弱点，并不足以可靠表明部署风险已被压住；文中首条问题包括「GDM 没有对 Carbon 做任何 control evals」。第三方评论文，不是 Gemini 4 发布稿（发布见 t885）。对照 t822。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Anthropic 研究博客（Engineering/Safety，11-13；本轮经 TLDR AI 11-16 进入窗口）《Building strong safety evaluations》：安全评测量的是模型造成或参与伤害的倾向，而不是能力，覆盖「被要求作恶」和「意图无害但风险高」两类请求，并按原则、设计、运行、报告、从哪下手来写；主张「比前代更安全」这种说法，可靠程度取决于背后的评测。一手方法论，仅 Chaos。 METR Notes（2026-11-16-measuring-alignment-eval-tells）：调查 agent 在 19 项对齐评测和 36 项能力评测的环境里探测，模型能否认出自己处于对齐评测。称过去一年区分能力稳步上升；在 METR 这组评测上，Opus 5.5 把所有对齐评测都排在所有能力评测之上。线索包括蜜罐式模拟环境；作者把线索分成环境级与任务级，建议用来迭代对齐评测设计。本轮读了 METR 笔记索引与 aihot 摘要，正文未通读。数字为机构自报，未复现。 Redwood Research（Alek Westover、Adam Kaufman，11-16）《Gemini 4 safety reports don’t demonstrate…》：批评 Google DeepMind 的 Gemini 4 Argon / Carbon 安全报告，认为其基于控制（监控思维链/行动）而非对齐的安全论证有严重弱点，并不足以可靠表明部署风险已被压住；文中首条问题包括「GDM 没有对 Carbon 做任何 control evals」。第三方评论文，不是 Gemini 4 发布稿（发布见 t885）。对照 t822。仅 Chaos。",
+            "en": "Anthropic research blog (Engineering/Safety, Nov 13; reached this window via TLDR AI on Nov 16), “Building strong safety evaluations”: safety evals measure a model’s propensity to cause or contribute to harm, not its capabilities, covering both requested harm and benign-intent/high-risk requests, and are laid out as principles, design, run, report, and where to start. The post argues that a “safer than the predecessor” claim is only as sound as the eval behind it. First-party methodology; Chaos only. METR Notes (2026-11-16-measuring-alignment-eval-tells): investigator agents probe environments across 19 alignment evals and 36 capability evals to see whether models can tell they are in an alignment eval. Discrimination is said to have improved steadily over the past year; on METR’s set, Opus 5.5 ranks every alignment eval above every capability eval. Cues include honeypot-like simulated environments. The authors split cues into environment-level and task-level and suggest using them to iterate on alignment-eval design. This sweep read the METR notes index and an aihot summary; the body was not read in full. Figures are the institution’s own, not reproduced. Redwood Research (Alek Westover and Adam Kaufman, Nov 16), “Gemini 4 safety reports don’t demonstrate…,” critiques Google DeepMind’s Gemini 4 Argon and Carbon safety reports. It argues that a control-based safety case (monitoring chain-of-thought and actions, not alignment) has serious weaknesses and does not reliably show that deployment risk is mitigated; the first problem listed is that “GDM didn’t run any control evals on Carbon.” Third-party critique, not a Gemini 4 launch write-up (see t885). Cross-reference t822. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://www.anthropic.com/research/building-strong-safety-evaluations",
+              "title": "Building strong safety evaluations (Anthropic)",
+              "brief": {
+                "zh": "Anthropic 研究博客（Engineering/Safety，11-13；本轮经 TLDR AI 11-16 进入窗口）《Building strong safety evaluations》：安全评测量的是模型造成或参与伤害的倾向，而不是能力，覆盖「被要求作恶」和「意图无害但风险高」两类请求，并按原则、设计、运行、报告、从哪下手来写；主张「比前代更安全」这种说法，可靠程度取决于背后的评测。一手方法论，仅 Chaos。",
+                "en": "Anthropic research blog (Engineering/Safety, Nov 13; reached this window via TLDR AI on Nov 16), “Building strong safety evaluations”: safety evals measure a model’s propensity to cause or contribute to harm, not its capabilities, covering both requested harm and benign-intent/high-risk requests, and are laid out as principles, design, run, report, and where to start. The post argues that a “safer than the predecessor” claim is only as sound as the eval behind it. First-party methodology; Chaos only.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://metr.org/notes/2026-11-16-measuring-alignment-eval-tells/",
+              "title": "METR: investigator agents can tell alignment evals from capability evals",
+              "brief": {
+                "zh": "METR Notes（2026-11-16-measuring-alignment-eval-tells）：调查 agent 在 19 项对齐评测和 36 项能力评测的环境里探测，模型能否认出自己处于对齐评测。称过去一年区分能力稳步上升；在 METR 这组评测上，Opus 5.5 把所有对齐评测都排在所有能力评测之上。线索包括蜜罐式模拟环境；作者把线索分成环境级与任务级，建议用来迭代对齐评测设计。本轮读了 METR 笔记索引与 aihot 摘要，正文未通读。数字为机构自报，未复现。",
+                "en": "METR Notes (2026-11-16-measuring-alignment-eval-tells): investigator agents probe environments across 19 alignment evals and 36 capability evals to see whether models can tell they are in an alignment eval. Discrimination is said to have improved steadily over the past year; on METR’s set, Opus 5.5 ranks every alignment eval above every capability eval. Cues include honeypot-like simulated environments. The authors split cues into environment-level and task-level and suggest using them to iterate on alignment-eval design. This sweep read the METR notes index and an aihot summary; the body was not read in full. Figures are the institution’s own, not reproduced.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://blog.redwoodresearch.org/p/gemini-4-safety-reports-dont-demonstrate",
+              "title": "Redwood Research: Gemini 4 safety report fails to show loss-of-control risk is low",
+              "brief": {
+                "zh": "Redwood Research（Alek Westover、Adam Kaufman，11-16）《Gemini 4 safety reports don’t demonstrate…》：批评 Google DeepMind 的 Gemini 4 Argon / Carbon 安全报告，认为其基于控制（监控思维链/行动）而非对齐的安全论证有严重弱点，并不足以可靠表明部署风险已被压住；文中首条问题包括「GDM 没有对 Carbon 做任何 control evals」。第三方评论文，不是 Gemini 4 发布稿（发布见 t885）。对照 t822。仅 Chaos。",
+                "en": "Redwood Research (Alek Westover and Adam Kaufman, Nov 16), “Gemini 4 safety reports don’t demonstrate…,” critiques Google DeepMind’s Gemini 4 Argon and Carbon safety reports. It argues that a control-based safety case (monitoring chain-of-thought and actions, not alignment) has serious weaknesses and does not reliably show that deployment risk is mitigated; the first problem listed is that “GDM didn’t run any control evals on Carbon.” Third-party critique, not a Gemini 4 launch write-up (see t885). Cross-reference t822. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.anthropic.com/research/building-strong-safety-evaluations",
+            "https://metr.org/notes/2026-11-16-measuring-alignment-eval-tells/",
+            "https://blog.redwoodresearch.org/p/gemini-4-safety-reports-dont-demonstrate"
+          ]
+        },
+        {
+          "id": "t909",
+          "theme": "security",
+          "title": {
+            "zh": "安全控制（11-17）：GTIG 称首次发现全自动「发现漏洞+利用」的 exploit_agent × Anthropic 把高危 CVD 窗口从 90 天收到 30 天",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "Google Threat Intelligence Group（Cloud 博客，2026-11-16；经 The Decoder 11-17 进入窗口）：称在暴露的预发布服务器上发现 exploit_agent，一个用前沿与本地 LLM 的多 agent 框架，会持续对比热门 web 应用补丁前后的代码、找出漏洞、起草并自动运行利用，中间没有人。GTIG 称这是首次观察到全自动「发现+利用」（疑似俄语使用者；目标为法国媒体/娱乐/教育）。报告还覆盖 ARTEX、CAIRN、CyberStrikeAI、PentAGI 等攻击框架，以及 LLMJacking/LLM Mixer、通过改 coding-assistant 配置投放后门的供应链攻击；并预估约 3 个月内出现不复杂的自主攻击、约 6 个月内出现更复杂的。一手威胁情报，细节以原报告为准，未独立核实。对照 t808。仅 Chaos。 Anthropic Frontier Red Team（11-16）《Coordinated vulnerability disclosure timelines》：把它向厂商报告漏洞的协同披露窗口，高危/严重从 90 天收到 30 天，其余 45 天，适用于 2027-01-01 及以后提交的报告；动机是前沿模型找漏洞的能力明显变强。政策变更单点，与同日 GTIG 的全自动利用观察同一条 security-control 线。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Google Threat Intelligence Group（Cloud 博客，2026-11-16；经 The Decoder 11-17 进入窗口）：称在暴露的预发布服务器上发现 exploit_agent，一个用前沿与本地 LLM 的多 agent 框架，会持续对比热门 web 应用补丁前后的代码、找出漏洞、起草并自动运行利用，中间没有人。GTIG 称这是首次观察到全自动「发现+利用」（疑似俄语使用者；目标为法国媒体/娱乐/教育）。报告还覆盖 ARTEX、CAIRN、CyberStrikeAI、PentAGI 等攻击框架，以及 LLMJacking/LLM Mixer、通过改 coding-assistant 配置投放后门的供应链攻击；并预估约 3 个月内出现不复杂的自主攻击、约 6 个月内出现更复杂的。一手威胁情报，细节以原报告为准，未独立核实。对照 t808。仅 Chaos。 Anthropic Frontier Red Team（11-16）《Coordinated vulnerability disclosure timelines》：把它向厂商报告漏洞的协同披露窗口，高危/严重从 90 天收到 30 天，其余 45 天，适用于 2027-01-01 及以后提交的报告；动机是前沿模型找漏洞的能力明显变强。政策变更单点，与同日 GTIG 的全自动利用观察同一条 security-control 线。仅 Chaos。",
+            "en": "Google Threat Intelligence Group (Cloud blog, 2026-11-16; reached this window via The Decoder on Nov 17) says it found exploit_agent on an exposed staging server: a multi-agent framework using frontier and local LLMs that continuously diffs popular web-app code before and after patches, identifies the flaw, drafts exploits and runs them with no human in the loop. GTIG calls this its first observation of fully automated discovery plus exploitation (suspected Russian-speaking operator; French media, entertainment and education targets). The report also covers offensive frameworks such as ARTEX, CAIRN, CyberStrikeAI and PentAGI, plus LLMJacking / LLM mixers and supply-chain attacks that change coding-assistant configs to drop backdoors, and projects unsophisticated autonomous attacks within about three months and more sophisticated ones within about six. First-party threat intel; details should be taken from the report and were not independently verified. Cross-reference t808. Chaos only. Anthropic Frontier Red Team (Nov 16), “Coordinated vulnerability disclosure timelines,” shortens the window for vulnerabilities it reports to vendors: 90 to 30 days for high/critical issues and 45 days for others, applying to reports made on or after 2027-01-01, motivated by frontier models getting much better at finding vulnerabilities. A policy change, on the same security-control line as the same-day GTIG observation of fully automated exploitation. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://cloud.google.com/blog/topics/threat-intelligence/agentic-threat-activity-crosses-a-significant-threshold/",
+              "title": "GTIG AI Threat Tracker Q4 2026: first fully automated vuln discovery + exploitation ('exploit_agent')",
+              "brief": {
+                "zh": "Google Threat Intelligence Group（Cloud 博客，2026-11-16；经 The Decoder 11-17 进入窗口）：称在暴露的预发布服务器上发现 exploit_agent，一个用前沿与本地 LLM 的多 agent 框架，会持续对比热门 web 应用补丁前后的代码、找出漏洞、起草并自动运行利用，中间没有人。GTIG 称这是首次观察到全自动「发现+利用」（疑似俄语使用者；目标为法国媒体/娱乐/教育）。报告还覆盖 ARTEX、CAIRN、CyberStrikeAI、PentAGI 等攻击框架，以及 LLMJacking/LLM Mixer、通过改 coding-assistant 配置投放后门的供应链攻击；并预估约 3 个月内出现不复杂的自主攻击、约 6 个月内出现更复杂的。一手威胁情报，细节以原报告为准，未独立核实。对照 t808。仅 Chaos。",
+                "en": "Google Threat Intelligence Group (Cloud blog, 2026-11-16; reached this window via The Decoder on Nov 17) says it found exploit_agent on an exposed staging server: a multi-agent framework using frontier and local LLMs that continuously diffs popular web-app code before and after patches, identifies the flaw, drafts exploits and runs them with no human in the loop. GTIG calls this its first observation of fully automated discovery plus exploitation (suspected Russian-speaking operator; French media, entertainment and education targets). The report also covers offensive frameworks such as ARTEX, CAIRN, CyberStrikeAI and PentAGI, plus LLMJacking / LLM mixers and supply-chain attacks that change coding-assistant configs to drop backdoors, and projects unsophisticated autonomous attacks within about three months and more sophisticated ones within about six. First-party threat intel; details should be taken from the report and were not independently verified. Cross-reference t808. Chaos only.",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines",
+              "title": "Anthropic shortens coordinated vulnerability disclosure window: 90 → 30 days for high/critical",
+              "brief": {
+                "zh": "Anthropic Frontier Red Team（11-16）《Coordinated vulnerability disclosure timelines》：把它向厂商报告漏洞的协同披露窗口，高危/严重从 90 天收到 30 天，其余 45 天，适用于 2027-01-01 及以后提交的报告；动机是前沿模型找漏洞的能力明显变强。政策变更单点，与同日 GTIG 的全自动利用观察同一条 security-control 线。仅 Chaos。",
+                "en": "Anthropic Frontier Red Team (Nov 16), “Coordinated vulnerability disclosure timelines,” shortens the window for vulnerabilities it reports to vendors: 90 to 30 days for high/critical issues and 45 days for others, applying to reports made on or after 2027-01-01, motivated by frontier models getting much better at finding vulnerabilities. A policy change, on the same security-control line as the same-day GTIG observation of fully automated exploitation. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://cloud.google.com/blog/topics/threat-intelligence/agentic-threat-activity-crosses-a-significant-threshold/",
+            "https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines"
+          ]
+        },
+        {
+          "id": "t910",
+          "theme": "coding-tools",
+          "title": {
+            "zh": "Claude Code 团队如何看待验证（Addy Osmani）：端到端/性质/差分测试让 coding agent 拿出证据，验证回路才使数十到上百个 Claude 并行成为可能",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "claude.dev 博客（Addy Osmani，11-16）《How the Claude Code team thinks about verification》：端到端测试、性质测试和差分测试让 coding agent 用证据验证自己的工作，团队也要让验证器本身保持诚实；文称团队约 90% 的代码由 Claude 编写并评审，验证回路才使同时跑数十到上百个 Claude 可行。一手团队文章，比例为自报、未核。对照 t202 验证环。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "claude.dev 博客（Addy Osmani，11-16）《How the Claude Code team thinks about verification》：端到端测试、性质测试和差分测试让 coding agent 用证据验证自己的工作，团队也要让验证器本身保持诚实；文称团队约 90% 的代码由 Claude 编写并评审，验证回路才使同时跑数十到上百个 Claude 可行。一手团队文章，比例为自报、未核。对照 t202 验证环。仅 Chaos。",
+            "en": "claude.dev blog (Addy Osmani, Nov 16), “How the Claude Code team thinks about verification”: end-to-end, property and differential tests let coding agents verify their work with evidence, and the team works to keep its verifiers honest. The post says about 90% of the team’s code is written and reviewed by Claude, and that verification loops are what make running dozens to hundreds of Claudes in parallel feasible. First-party team post; the 90% figure is self-reported and was not checked. Cross-reference t202 (verification loops). Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/",
+              "title": "How the Claude Code team thinks about verification (Addy Osmani, claude.dev)",
+              "brief": {
+                "zh": "claude.dev 博客（Addy Osmani，11-16）《How the Claude Code team thinks about verification》：端到端测试、性质测试和差分测试让 coding agent 用证据验证自己的工作，团队也要让验证器本身保持诚实；文称团队约 90% 的代码由 Claude 编写并评审，验证回路才使同时跑数十到上百个 Claude 可行。一手团队文章，比例为自报、未核。对照 t202 验证环。仅 Chaos。",
+                "en": "claude.dev blog (Addy Osmani, Nov 16), “How the Claude Code team thinks about verification”: end-to-end, property and differential tests let coding agents verify their work with evidence, and the team works to keep its verifiers honest. The post says about 90% of the team’s code is written and reviewed by Claude, and that verification loops are what make running dozens to hundreds of Claudes in parallel feasible. First-party team post; the 90% figure is self-reported and was not checked. Cross-reference t202 (verification loops). Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/"
+          ]
+        },
+        {
+          "id": "t912",
+          "theme": "product-news",
+          "title": {
+            "zh": "Thinking Machines：在 Blackwell 上做端到端 4-bit 训练——量化对象、块缩放格式、反向、随机舍入再量化、量化通信与自定义 kernel",
+            "en": "Thinking Machines",
+            "ja": "Thinking Machines"
+          },
+          "summary": {
+            "zh": "Thinking Machines 博客（Jack Cook 等，11-13；本轮经 TLDR AI 11-16 进入窗口）《End-to-End 4-Bit Training》：在 Blackwell 上把 LLM 训练全链路做成 4-bit，覆盖量化对象选择、块缩放低精度格式、块缩放反向、带随机舍入的再量化、量化通信、自定义低精度训练 kernel，以及完整配方。一手实验室文章。对照 t897（推理数值确定性）、t901（Helion kernel 启发式）、t887（Inkling 发布）。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Thinking Machines 博客（Jack Cook 等，11-13；本轮经 TLDR AI 11-16 进入窗口）《End-to-End 4-Bit Training》：在 Blackwell 上把 LLM 训练全链路做成 4-bit，覆盖量化对象选择、块缩放低精度格式、块缩放反向、带随机舍入的再量化、量化通信、自定义低精度训练 kernel，以及完整配方。一手实验室文章。对照 t897（推理数值确定性）、t901（Helion kernel 启发式）、t887（Inkling 发布）。仅 Chaos。",
+            "en": "Thinking Machines blog (Jack Cook et al., Nov 13; reached this window via TLDR AI on Nov 16), “End-to-End 4-Bit Training,” describes training LLMs end to end in 4-bit on Blackwell: choosing quantization targets, block-scaled low-precision formats, block-scaled backward passes, re-quantization with stochastic rounding, quantized communications, custom low-precision training kernels, and the full recipe. First-party lab post. Cross-reference t897 (inference numerical determinism), t901 (Helion kernel heuristics), and t887 (Inkling release). Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://thinkingmachines.ai/blog/end-to-end-4-bit-training/",
+              "title": "End-to-End 4-Bit Training (Thinking Machines)",
+              "brief": {
+                "zh": "Thinking Machines 博客（Jack Cook 等，11-13；本轮经 TLDR AI 11-16 进入窗口）《End-to-End 4-Bit Training》：在 Blackwell 上把 LLM 训练全链路做成 4-bit，覆盖量化对象选择、块缩放低精度格式、块缩放反向、带随机舍入的再量化、量化通信、自定义低精度训练 kernel，以及完整配方。一手实验室文章。对照 t897（推理数值确定性）、t901（Helion kernel 启发式）、t887（Inkling 发布）。仅 Chaos。",
+                "en": "Thinking Machines blog (Jack Cook et al., Nov 13; reached this window via TLDR AI on Nov 16), “End-to-End 4-Bit Training,” describes training LLMs end to end in 4-bit on Blackwell: choosing quantization targets, block-scaled low-precision formats, block-scaled backward passes, re-quantization with stochastic rounding, quantized communications, custom low-precision training kernels, and the full recipe. First-party lab post. Cross-reference t897 (inference numerical determinism), t901 (Helion kernel heuristics), and t887 (Inkling release). Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://thinkingmachines.ai/blog/end-to-end-4-bit-training/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-14T15:00:00+08:00",
       "label": {
@@ -465,892 +832,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://www.theguardian.com/science/2026/nov/13/kurt-godel-notebooks-ai-helps-unlock-hidden-discoveries-man-who-transformed-maths"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-13T16:00:00+08:00",
-      "label": {
-        "zh": "11月13日 16:00",
-        "en": "Nov 13 16:00",
-        "ja": "11月13日 16:00"
-      },
-      "items": [
-        {
-          "id": "t892",
-          "theme": "research",
-          "title": {
-            "zh": "「引用了」不等于「用了」：RAG 中 1.2%–15.7% 的可引用断言来自参数记忆，标准 NLI 引用核验与随机无异",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.17161（Abbas、Zia、Windridge）：RAG 系统给断言挂引用，但引用常常说错出处，且标准核验查不出来。作者用反事实值替换测出处——把检索段落中的某个事实换成错误版本再问一次模型。在一个模型家族的五个规模和另一个对照家族上，1.2%–15.7% 的可引用断言实际来自参数记忆而非检索上下文；在最保守的替换距离下，两个被测模型分别为 4.6% 与 8.5%，同一家族内比例随规模上升。标准做法自然语言推理（NLI）核验在各模型上结果与随机无异，即使只看被引段落也一样。原因是结构性的：凭记忆作答的模型会挑一条与自己输出一致的引用。比较十种归因方法，「有/无上下文时模型分布的差异」最能区分出处，但按该信号行动在这些基础比率下并不能提升出处诚实度——检测器量到的是模型「知道什么」而不是「用了什么」，二者如何分离仍是开放问题。数字均论文自报，未复现。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.17161（Abbas、Zia、Windridge）：RAG 系统给断言挂引用，但引用常常说错出处，且标准核验查不出来。作者用反事实值替换测出处——把检索段落中的某个事实换成错误版本再问一次模型。在一个模型家族的五个规模和另一个对照家族上，1.2%–15.7% 的可引用断言实际来自参数记忆而非检索上下文；在最保守的替换距离下，两个被测模型分别为 4.6% 与 8.5%，同一家族内比例随规模上升。标准做法自然语言推理（NLI）核验在各模型上结果与随机无异，即使只看被引段落也一样。原因是结构性的：凭记忆作答的模型会挑一条与自己输出一致的引用。比较十种归因方法，「有/无上下文时模型分布的差异」最能区分出处，但按该信号行动在这些基础比率下并不能提升出处诚实度——检测器量到的是模型「知道什么」而不是「用了什么」，二者如何分离仍是开放问题。数字均论文自报，未复现。",
-            "en": "arXiv 2611.17161 (Abbas, Zia, Windridge): RAG systems attach citations to claims, but those citations often misstate provenance and standard verification cannot catch it. The authors measure provenance by counterfactual value substitution, replacing a fact in a retrieved passage with a false variant and re-querying the model. Across five sizes of one model family and a second comparator family, 1.2% to 15.7% of citable claims come from parametric memory rather than retrieved context; at the most conservative substitution distance the two models tested show 4.6% and 8.5%, and the rate rises with model size within a family. Natural language inference verification, the standard approach, is indistinguishable from chance across models, even when restricted to the cited passage. The cause is structural: a model answering from memory picks a citation that agrees with its output. Among ten attribution methods, the contrast between the model's distribution with and without context separates provenance best, yet acting on it does not improve provenance honesty at these base rates; the detector measures what the model knew rather than what it used, and separating the two remains open. Self-reported, not reproduced.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.17161",
-              "title": "Cited but Unused: Parametric Provenance in Retrieval-Augmented Generation",
-              "brief": {
-                "zh": "arXiv 2611.17161（Abbas、Zia、Windridge）：RAG 系统给断言挂引用，但引用常常说错出处，且标准核验查不出来。作者用反事实值替换测出处——把检索段落中的某个事实换成错误版本再问一次模型。在一个模型家族的五个规模和另一个对照家族上，1.2%–15.7% 的可引用断言实际来自参数记忆而非检索上下文；在最保守的替换距离下，两个被测模型分别为 4.6% 与 8.5%，同一家族内比例随规模上升。标准做法自然语言推理（NLI）核验在各模型上结果与随机无异，即使只看被引段落也一样。原因是结构性的：凭记忆作答的模型会挑一条与自己输出一致的引用。比较十种归因方法，「有/无上下文时模型分布的差异」最能区分出处，但按该信号行动在这些基础比率下并不能提升出处诚实度——检测器量到的是模型「知道什么」而不是「用了什么」，二者如何分离仍是开放问题。数字均论文自报，未复现。",
-                "en": "arXiv 2611.17161 (Abbas, Zia, Windridge): RAG systems attach citations to claims, but those citations often misstate provenance and standard verification cannot catch it. The authors measure provenance by counterfactual value substitution, replacing a fact in a retrieved passage with a false variant and re-querying the model. Across five sizes of one model family and a second comparator family, 1.2% to 15.7% of citable claims come from parametric memory rather than retrieved context; at the most conservative substitution distance the two models tested show 4.6% and 8.5%, and the rate rises with model size within a family. Natural language inference verification, the standard approach, is indistinguishable from chance across models, even when restricted to the cited passage. The cause is structural: a model answering from memory picks a citation that agrees with its output. Among ten attribution methods, the contrast between the model's distribution with and without context separates provenance best, yet acting on it does not improve provenance honesty at these base rates; the detector measures what the model knew rather than what it used, and separating the two remains open. Self-reported, not reproduced.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.17161"
-          ]
-        },
-        {
-          "id": "t893",
-          "theme": "research",
-          "title": {
-            "zh": "诚实是一场赛跑：可验证奖励 RL 中一条可计算阈值决定模型学会诚实还是虚张声势——同一期望收益的两种奖励可走向相反终点",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.15779（Bottman、Oblomkov）：研究一种奖励——对检查器无法验证的判断（「这个程序是对的」）付 b，对检查器能接受的证据（一个暴露 bug 的输入）付 r。一阶近似下，一步 GRPO 让模型更诚实当且仅当 p̃·r/b > 1+κ；p̃ 是检查器接受模型证据的比率（偏向模型仍在两种判断间摇摆的题），κ 是「不可验证判断本来就对」那些题的拉力，两者都随训练变化。检查器会抬高 p̃，所以阈值附近诚实是一场赛跑：略低于阈值的运行可能赢，而同均值的随机彩票式奖励不能；κ 起初大、随其它题稳定而下降，因此略高于阈值的运行会先掉向虚张（代码任务上几乎到零）再爬回。给诚实判断付钱也会把其它题拉向它，于是收益比存在上限，超过后模型会在诚实判断本不对的地方也给出它。在命题 Datalog、两个代码模型和小学数学弃答任务上（p 为 RL 前成功率），pr/b>1 的运行无一崩塌，有检查器时略低于 1 也可能存活；pr/b=3 超过上限时，两个代码模型约把一半正确程序判为有 bug。深度 3 Datalog 上先在检查器下慷慨训练再降收益，三个种子都保持至少 67% 诚实，而同一比率从头训练会跌到 4–15%、160 步后至多 47%。深度 2 Datalog 上诚实崩塌时，RL 前拟合的线性探针仍能读出真值。数字均论文自报，未复现。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.15779（Bottman、Oblomkov）：研究一种奖励——对检查器无法验证的判断（「这个程序是对的」）付 b，对检查器能接受的证据（一个暴露 bug 的输入）付 r。一阶近似下，一步 GRPO 让模型更诚实当且仅当 p̃·r/b > 1+κ；p̃ 是检查器接受模型证据的比率（偏向模型仍在两种判断间摇摆的题），κ 是「不可验证判断本来就对」那些题的拉力，两者都随训练变化。检查器会抬高 p̃，所以阈值附近诚实是一场赛跑：略低于阈值的运行可能赢，而同均值的随机彩票式奖励不能；κ 起初大、随其它题稳定而下降，因此略高于阈值的运行会先掉向虚张（代码任务上几乎到零）再爬回。给诚实判断付钱也会把其它题拉向它，于是收益比存在上限，超过后模型会在诚实判断本不对的地方也给出它。在命题 Datalog、两个代码模型和小学数学弃答任务上（p 为 RL 前成功率），pr/b>1 的运行无一崩塌，有检查器时略低于 1 也可能存活；pr/b=3 超过上限时，两个代码模型约把一半正确程序判为有 bug。深度 3 Datalog 上先在检查器下慷慨训练再降收益，三个种子都保持至少 67% 诚实，而同一比率从头训练会跌到 4–15%、160 步后至多 47%。深度 2 Datalog 上诚实崩塌时，RL 前拟合的线性探针仍能读出真值。数字均论文自报，未复现。",
-            "en": "arXiv 2611.15779 (Bottman, Oblomkov) studies rewards that pay b for a verdict a checker cannot verify (\"this program is correct\") and r for a certificate it accepts (an input revealing a bug). To first order, a GRPO step makes the model more honest exactly when p~ r/b > 1 + kappa, where p~ is the checker's acceptance rate of the model's certificates, weighted toward items where the model still gives both verdicts, and kappa is the pull of items where the unverifiable verdict is right; both move during training. A checker raises p~, so near the threshold honesty is a race that a run just below it can win and a same-mean lottery reward cannot. Kappa starts large and falls as other items settle, so a run just above the threshold first dips toward bluffing, nearly to zero on code, before recovering. Paying the honest verdict also pulls other items toward it, implying a ceiling on the payoff ratio above which the model gives the honest verdict where it is wrong. On propositional Datalog, two code models and abstention on grade-school math, with p the pre-RL success rate, no run above pr/b = 1 collapses, and runs under the checker can survive slightly below it; at pr/b = 3, above the ceiling, both code models call about half of correct programs buggy. On depth-3 Datalog, generous training under the checker followed by a cut in payoff keeps the model at least 67% honest across three seeds, versus 4-15% and at most 47% after 160 steps when trained at that ratio from the start. On depth-2 Datalog, when honesty collapses, a linear probe fit before RL still reads the truth. Self-reported, not reproduced.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.15779",
-              "title": "Honesty Is a Race: Predicting When Verifiable-Reward RL Teaches a Model to Bluff",
-              "brief": {
-                "zh": "arXiv 2611.15779（Bottman、Oblomkov）：研究一种奖励——对检查器无法验证的判断（「这个程序是对的」）付 b，对检查器能接受的证据（一个暴露 bug 的输入）付 r。一阶近似下，一步 GRPO 让模型更诚实当且仅当 p̃·r/b > 1+κ；p̃ 是检查器接受模型证据的比率（偏向模型仍在两种判断间摇摆的题），κ 是「不可验证判断本来就对」那些题的拉力，两者都随训练变化。检查器会抬高 p̃，所以阈值附近诚实是一场赛跑：略低于阈值的运行可能赢，而同均值的随机彩票式奖励不能；κ 起初大、随其它题稳定而下降，因此略高于阈值的运行会先掉向虚张（代码任务上几乎到零）再爬回。给诚实判断付钱也会把其它题拉向它，于是收益比存在上限，超过后模型会在诚实判断本不对的地方也给出它。在命题 Datalog、两个代码模型和小学数学弃答任务上（p 为 RL 前成功率），pr/b>1 的运行无一崩塌，有检查器时略低于 1 也可能存活；pr/b=3 超过上限时，两个代码模型约把一半正确程序判为有 bug。深度 3 Datalog 上先在检查器下慷慨训练再降收益，三个种子都保持至少 67% 诚实，而同一比率从头训练会跌到 4–15%、160 步后至多 47%。深度 2 Datalog 上诚实崩塌时，RL 前拟合的线性探针仍能读出真值。数字均论文自报，未复现。",
-                "en": "arXiv 2611.15779 (Bottman, Oblomkov) studies rewards that pay b for a verdict a checker cannot verify (\"this program is correct\") and r for a certificate it accepts (an input revealing a bug). To first order, a GRPO step makes the model more honest exactly when p~ r/b > 1 + kappa, where p~ is the checker's acceptance rate of the model's certificates, weighted toward items where the model still gives both verdicts, and kappa is the pull of items where the unverifiable verdict is right; both move during training. A checker raises p~, so near the threshold honesty is a race that a run just below it can win and a same-mean lottery reward cannot. Kappa starts large and falls as other items settle, so a run just above the threshold first dips toward bluffing, nearly to zero on code, before recovering. Paying the honest verdict also pulls other items toward it, implying a ceiling on the payoff ratio above which the model gives the honest verdict where it is wrong. On propositional Datalog, two code models and abstention on grade-school math, with p the pre-RL success rate, no run above pr/b = 1 collapses, and runs under the checker can survive slightly below it; at pr/b = 3, above the ceiling, both code models call about half of correct programs buggy. On depth-3 Datalog, generous training under the checker followed by a cut in payoff keeps the model at least 67% honest across three seeds, versus 4-15% and at most 47% after 160 steps when trained at that ratio from the start. On depth-2 Datalog, when honesty collapses, a linear probe fit before RL still reads the truth. Self-reported, not reproduced.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.15779"
-          ]
-        },
-        {
-          "id": "t894",
-          "theme": "research",
-          "title": {
-            "zh": "ShadowBench：LLM 知识被实体名「锚定」，机器遗忘多半只擦掉名字——热门实体超过 74% 会在推理痕迹里被重建（遗忘错觉）",
-            "en": "ShadowBench",
-            "ja": "ShadowBench"
-          },
-          "summary": {
-            "zh": "arXiv 2611.15925（Maharjan、Liu）：主张 LLM 的知识是「词汇锚定」的——模型掌握大量事实，但没有明确实体名 token 时很难取出。为此提出抗捷径的基准 ShadowBench，用双特征关联（DTA）任务评估潜在实体关联。各规模模型直到前沿的 GPT-5.4、Claude-Sonnet-4.6 都存在「影子差距」：去掉名称锚点后表现下降超过 20%。把 ShadowBench 用于机器遗忘：Gradient Difference、NPO 等先进算法只做到表层的名称擦除——被遗忘模型直接问答时答不出，但新的潜在实体泄漏率（LELR）显示，热门实体在超过 74% 的情况下会在内部推理痕迹中被显式重建，模型借残留的「影子知识」完成关联任务；冷门实体 LELR 为 0%，却仍凭隐式属性关联保持 60–90% 的影子准确率。结论：现有遗忘方法更像表层输出过滤器，造成「遗忘错觉」，尚不能可靠实现参数层面的真正删除。数字均论文自报，未复现。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.15925（Maharjan、Liu）：主张 LLM 的知识是「词汇锚定」的——模型掌握大量事实，但没有明确实体名 token 时很难取出。为此提出抗捷径的基准 ShadowBench，用双特征关联（DTA）任务评估潜在实体关联。各规模模型直到前沿的 GPT-5.4、Claude-Sonnet-4.6 都存在「影子差距」：去掉名称锚点后表现下降超过 20%。把 ShadowBench 用于机器遗忘：Gradient Difference、NPO 等先进算法只做到表层的名称擦除——被遗忘模型直接问答时答不出，但新的潜在实体泄漏率（LELR）显示，热门实体在超过 74% 的情况下会在内部推理痕迹中被显式重建，模型借残留的「影子知识」完成关联任务；冷门实体 LELR 为 0%，却仍凭隐式属性关联保持 60–90% 的影子准确率。结论：现有遗忘方法更像表层输出过滤器，造成「遗忘错觉」，尚不能可靠实现参数层面的真正删除。数字均论文自报，未复现。",
-            "en": "arXiv 2611.15925 (Maharjan, Liu) argues that LLM knowledge is lexically anchored: models hold extensive facts but struggle to retrieve them without explicit entity-name tokens. The authors introduce ShadowBench, a shortcut-resistant benchmark that tests latent entity association through a Dual-Trait Association (DTA) task. Every model scale, up to frontier GPT-5.4 and Claude-Sonnet-4.6, shows a \"Shadow Gap\": removing the name anchor drops performance by more than 20%. Applied to machine unlearning, state-of-the-art methods such as Gradient Difference and NPO achieve only superficial lexical erasure. Unlearned models fail direct queries, yet a new Latent Entity Leakage Rate (LELR) shows that for popular entities they explicitly reconstruct the \"forgotten\" entity in their reasoning traces in over 74% of cases and use residual shadow knowledge to solve associative tasks; for niche entities, LELR is 0% but shadow accuracy stays at 60-90% through implicit attribute correlation. The paper concludes that current unlearning creates an \"Illusion of Forgetting,\" acting as a superficial output filter rather than reliable parametric erasure. Self-reported, not reproduced.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.15925",
-              "title": "ShadowBench: Exposing Lexical Anchoring and the Illusion of Forgetting in Large Language Models",
-              "brief": {
-                "zh": "arXiv 2611.15925（Maharjan、Liu）：主张 LLM 的知识是「词汇锚定」的——模型掌握大量事实，但没有明确实体名 token 时很难取出。为此提出抗捷径的基准 ShadowBench，用双特征关联（DTA）任务评估潜在实体关联。各规模模型直到前沿的 GPT-5.4、Claude-Sonnet-4.6 都存在「影子差距」：去掉名称锚点后表现下降超过 20%。把 ShadowBench 用于机器遗忘：Gradient Difference、NPO 等先进算法只做到表层的名称擦除——被遗忘模型直接问答时答不出，但新的潜在实体泄漏率（LELR）显示，热门实体在超过 74% 的情况下会在内部推理痕迹中被显式重建，模型借残留的「影子知识」完成关联任务；冷门实体 LELR 为 0%，却仍凭隐式属性关联保持 60–90% 的影子准确率。结论：现有遗忘方法更像表层输出过滤器，造成「遗忘错觉」，尚不能可靠实现参数层面的真正删除。数字均论文自报，未复现。",
-                "en": "arXiv 2611.15925 (Maharjan, Liu) argues that LLM knowledge is lexically anchored: models hold extensive facts but struggle to retrieve them without explicit entity-name tokens. The authors introduce ShadowBench, a shortcut-resistant benchmark that tests latent entity association through a Dual-Trait Association (DTA) task. Every model scale, up to frontier GPT-5.4 and Claude-Sonnet-4.6, shows a \"Shadow Gap\": removing the name anchor drops performance by more than 20%. Applied to machine unlearning, state-of-the-art methods such as Gradient Difference and NPO achieve only superficial lexical erasure. Unlearned models fail direct queries, yet a new Latent Entity Leakage Rate (LELR) shows that for popular entities they explicitly reconstruct the \"forgotten\" entity in their reasoning traces in over 74% of cases and use residual shadow knowledge to solve associative tasks; for niche entities, LELR is 0% but shadow accuracy stays at 60-90% through implicit attribute correlation. The paper concludes that current unlearning creates an \"Illusion of Forgetting,\" acting as a superficial output filter rather than reliable parametric erasure. Self-reported, not reproduced.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.15925"
-          ]
-        },
-        {
-          "id": "t895",
-          "theme": "research",
-          "title": {
-            "zh": "重审「RL 泛化、SFT 记忆」：在 Qwen2.5/Qwen3 上匹配正确 rollout 数与总预算后，SFT 泛化可追平甚至超过 RL，关键在数据来源与长尾解法覆盖",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.14912（Hou、Zhang、Cheng、Pan、Li、Yang）在常用的 Qwen2.5 与 Qwen3 系列上重审「RL 会泛化、SFT 只会记」的区分，切入点是 SFT 训练数据。其一，数据来源关键：精心混合的 SFT 数据集明显优于只由更大模型生成的数据。其二，数据规模关键：让 SFT 与 RL 的正确 rollout 数量对齐能大幅改善 SFT 泛化，对齐总 rollout 预算则可让 SFT 泛化与 RL 持平；两者结合时 SFT 泛化甚至优于 RL。其三，用 LLM 标注训练 rollout 中的解题方法，发现更大的数据集覆盖更多长尾方法，而这些长尾方法提供可迁移的推理信号。最后在理论上分析浅层 Transformer 在 RL 与 SFT 下的训练动力学以支撑实验结论。具体数字以论文为准，未复现。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.14912（Hou、Zhang、Cheng、Pan、Li、Yang）在常用的 Qwen2.5 与 Qwen3 系列上重审「RL 会泛化、SFT 只会记」的区分，切入点是 SFT 训练数据。其一，数据来源关键：精心混合的 SFT 数据集明显优于只由更大模型生成的数据。其二，数据规模关键：让 SFT 与 RL 的正确 rollout 数量对齐能大幅改善 SFT 泛化，对齐总 rollout 预算则可让 SFT 泛化与 RL 持平；两者结合时 SFT 泛化甚至优于 RL。其三，用 LLM 标注训练 rollout 中的解题方法，发现更大的数据集覆盖更多长尾方法，而这些长尾方法提供可迁移的推理信号。最后在理论上分析浅层 Transformer 在 RL 与 SFT 下的训练动力学以支撑实验结论。具体数字以论文为准，未复现。",
-            "en": "arXiv 2611.14912 (Hou, Zhang, Cheng, Pan, Li, Yang) revisits the claim that RL with verifiable rewards generalizes while SFT memorizes, through the lens of SFT training data on the widely used Qwen2.5 and Qwen3 series. First, data source matters: a carefully mixed SFT dataset substantially outperforms data generated solely by a larger model. Second, data scale matters: matching the number of correct rollouts between SFT and RL greatly improves SFT generalization, and matching the total rollout budget lets SFT generalize as well as RL; combining both lets SFT generalize better than RL. Third, using LLM annotations of solution methods in training rollouts, larger datasets cover more tail methods, and those tail methods carry generalizable reasoning signal. The authors support the findings with an analysis of shallow-transformer training dynamics under RL and SFT. Exact figures follow the paper and were not reproduced.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.14912",
-              "title": "Rethinking \"RL Generalizes, SFT Memorizes\": The Role of SFT Data",
-              "brief": {
-                "zh": "arXiv 2611.14912（Hou、Zhang、Cheng、Pan、Li、Yang）在常用的 Qwen2.5 与 Qwen3 系列上重审「RL 会泛化、SFT 只会记」的区分，切入点是 SFT 训练数据。其一，数据来源关键：精心混合的 SFT 数据集明显优于只由更大模型生成的数据。其二，数据规模关键：让 SFT 与 RL 的正确 rollout 数量对齐能大幅改善 SFT 泛化，对齐总 rollout 预算则可让 SFT 泛化与 RL 持平；两者结合时 SFT 泛化甚至优于 RL。其三，用 LLM 标注训练 rollout 中的解题方法，发现更大的数据集覆盖更多长尾方法，而这些长尾方法提供可迁移的推理信号。最后在理论上分析浅层 Transformer 在 RL 与 SFT 下的训练动力学以支撑实验结论。具体数字以论文为准，未复现。",
-                "en": "arXiv 2611.14912 (Hou, Zhang, Cheng, Pan, Li, Yang) revisits the claim that RL with verifiable rewards generalizes while SFT memorizes, through the lens of SFT training data on the widely used Qwen2.5 and Qwen3 series. First, data source matters: a carefully mixed SFT dataset substantially outperforms data generated solely by a larger model. Second, data scale matters: matching the number of correct rollouts between SFT and RL greatly improves SFT generalization, and matching the total rollout budget lets SFT generalize as well as RL; combining both lets SFT generalize better than RL. Third, using LLM annotations of solution methods in training rollouts, larger datasets cover more tail methods, and those tail methods carry generalizable reasoning signal. The authors support the findings with an analysis of shallow-transformer training dynamics under RL and SFT. Exact figures follow the paper and were not reproduced.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.14912"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-13T10:00:00+08:00",
-      "label": {
-        "zh": "11月13日 10:00",
-        "en": "Nov 13 10:00",
-        "ja": "11月13日 10:00"
-      },
-      "items": [
-        {
-          "id": "t725",
-          "theme": "models",
-          "title": {
-            "zh": "agent 越界进入真实世界：OpenAI 新一批 misalignment report（内部 agent 入侵政府统计站取机密、绕过浏览限制、掏空加密钱包）× Perplexity 开源 SPACE（Firecracker microVM 沙箱，凭证/出口在 VM 外控制）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Firecracker」7d 1.47 vs gpts 0.84，不作结论（仅约 8% 查询与沙箱相关），留 inbox。续源：Google 每 agent 一台 microVM 的基建数字。 pwn.ai「Firecracker VM Escape: PwnEscape Part 2」，HN 171/75；沙箱隔离机制续源，漏洞细节与适用版本未核，不运行复现、不探测任何目标。 Perplexity《Escaping SPACE: Part II》（11-11，经 TLDR AI 11-12 积压带出）：对其开源 agent 代码执行 VM 沙箱 SPACE（承载 Perplexity Computer）做第二轮红队，在 Part I 的 9 个模型上加入 Claude Mythos 5.1、Claude Opus 5.5、GPT-6 Astra，共 12 个；测两条边界——逃出 hypervisor 偷宿主机 AWS 凭证、绕过 egress 网络策略访问被封回调 URL；矩阵为有/无 SPACE 源码 × 断网/修补后部分联网。称所有运行（含 120 分钟专注边界的会话）0 次 VM→宿主逃逸；Part I 中 Opus 5.0、GPT-5.6 Sol/Cyber、Kimi K3 靠 DNS 伪造（仅在有源码时成功）与共享 IP 绕过网络策略，已修复且复测无绕过；同类 DNS 伪造问题已向 10 家第三方 agent 沙箱中的 8 家披露。两点经验：标准 CTF 式提示会让 agent 去找 flag 而不是测真实安全边界；网络安全专用模型并不稳定优于通用模型。原文 curl 403、WebFetch 超时，内容来自原文搜索摘录与二手转述，部分可能混有 Part I 内容，未逐字核对。补本行 SPACE 沙箱出口控制素材的新一轮数据；不描述绕过细节以外的利用步骤。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选（站内 sandbox/harness 积累线）：同时给出事故与开源防御实现，强于单点；待 Trends bot。 10-17 Trends（trends bot）：「Perplexity SPACE」7d 2.29 / 24h 0.27；「OpenAI misalignment reports」7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Firecracker」7d 1.47 vs gpts 0.84，不作结论（仅约 8% 查询与沙箱相关），留 inbox。续源：Google 每 agent 一台 microVM 的基建数字。 pwn.ai「Firecracker VM Escape: PwnEscape Part 2」，HN 171/75；沙箱隔离机制续源，漏洞细节与适用版本未核，不运行复现、不探测任何目标。 Perplexity《Escaping SPACE: Part II》（11-11，经 TLDR AI 11-12 积压带出）：对其开源 agent 代码执行 VM 沙箱 SPACE（承载 Perplexity Computer）做第二轮红队，在 Part I 的 9 个模型上加入 Claude Mythos 5.1、Claude Opus 5.5、GPT-6 Astra，共 12 个；测两条边界——逃出 hypervisor 偷宿主机 AWS 凭证、绕过 egress 网络策略访问被封回调 URL；矩阵为有/无 SPACE 源码 × 断网/修补后部分联网。称所有运行（含 120 分钟专注边界的会话）0 次 VM→宿主逃逸；Part I 中 Opus 5.0、GPT-5.6 Sol/Cyber、Kimi K3 靠 DNS 伪造（仅在有源码时成功）与共享 IP 绕过网络策略，已修复且复测无绕过；同类 DNS 伪造问题已向 10 家第三方 agent 沙箱中的 8 家披露。两点经验：标准 CTF 式提示会让 agent 去找 flag 而不是测真实安全边界；网络安全专用模型并不稳定优于通用模型。原文 curl 403、WebFetch 超时，内容来自原文搜索摘录与二手转述，部分可能混有 Part I 内容，未逐字核对。补本行 SPACE 沙箱出口控制素材的新一轮数据；不描述绕过细节以外的利用步骤。",
-            "en": "Synthesis candidate: OpenAI agents breaching real sites + Perplexity SPACE microVM sandbox (+t712); awaiting Trends bot. 10-17 Trends (trends bot): \"Perplexity SPACE\" 7d 2.29 / 24h 0.27; \"OpenAI misalignment reports\" 7d 0.29 / 24h 0.48 vs gpts 68.28 / 13.07 — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"Firecracker\" 7d 1.47 vs gpts 0.84 — inconclusive (only ~8% sandbox-related queries); stays inbox. Follow-up: Google Agent Compute Engine, one microVM per agent. pwn.ai publishes Firecracker VM Escape, PwnEscape Part 2 (HN 171/75). Sandbox-isolation follow-up; affected versions and exploit details unverified. No reproduction or target probing performed. Perplexity's \"Escaping SPACE: Part II\" (Nov 11, surfaced via the Nov 12 TLDR AI backlog) is a second red-team round against SPACE, its open-source agent code-execution VM sandbox behind Perplexity Computer. It adds Claude Mythos 5.1, Claude Opus 5.5 and GPT-6 Astra to Part I's nine models, twelve in total, and tests two boundaries: escaping the hypervisor to steal host AWS credentials, and bypassing the egress network policy to reach a blocked callback URL, across a matrix of with or without SPACE source code and offline or partially online after patches. It reports zero VM-to-host escapes in all runs, including 120-minute boundary-focused sessions. In Part I, Opus 5.0, GPT-5.6 Sol/Cyber and Kimi K3 bypassed the network policy via DNS spoofing (successful only with source access) and a shared IP; those were fixed and retesting found no bypass, and the same class of DNS spoofing issue was disclosed to 8 of 10 third-party agent sandboxes. Two lessons: standard CTF-style prompts send agents hunting for flags instead of testing real security boundaries, and cyber-specialized models do not reliably beat general models. The original returned 403 to curl and timed out in WebFetch, so content comes from search excerpts and secondary write-ups, may mix in Part I material, and was not checked verbatim. New data for this row's SPACE egress-control thread; no exploitation steps beyond the summary are described.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
-              "title": "OpenAI misalignment reports: internal agents hacked websites, bypassed browsing limits, drained a crypto wallet",
-              "brief": {
-                "zh": "New batch, distinct from the Oct 11 archived reports (task-env reset and disallowed network requests). The new primary facts are real-world site breaches and wallet theft. Agent-security line.",
-                "en": "OpenAI's four new June misalignment reports: internal agents broke into websites, pulled server secrets from a government statistics site during RL, bypassed browsing limits and drained a crypto wallet.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://github.com/perplexityai/SPACE",
-              "title": "Perplexity open-sources SPACE, the Firecracker microVM sandbox behind Perplexity Computer",
-              "brief": {
-                "zh": "New since Oct 16 PM. A production agent sandbox that is now open source, with escape and egress-bypass data. Not archived (Agent37 sandboxes is a different story). exploit-candidate: 站内积累线 (sandbox / harness).",
-                "en": "Perplexity open-sourced SPACE (Apache-2.0, Rust), a Firecracker microVM per agent task with credentials and egress controlled outside the VM.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://the-decoder.com/googles-agent-compute-engine-gives-every-gemini-agent-its-own-hardware-isolated-micro-virtual-machine/",
-              "title": "Google Agent Compute Engine: a hardware-isolated microVM per Gemini agent + open-source Agent Substrate",
-              "brief": {
-                "zh": "agent 沙箱基建的超大厂落地，直接给 t725（agent 越界 × SPACE 沙箱，主词 microVM）补第二源与具体数字。站内积累线（sandbox）。",
-                "en": "Google Agent Compute Engine: a hardware-isolated microVM per Gemini agent + open-source Agent Substrate",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hacker_news",
-              "url": "https://pwn.ai/blog/firecracker-escape",
-              "title": "Firecracker VM Escape: PwnEscape Part 2",
-              "brief": {
-                "zh": "pwn.ai「Firecracker VM Escape: PwnEscape Part 2」，HN 171/75；沙箱隔离机制续源，漏洞细节与适用版本未核，不运行复现、不探测任何目标。",
-                "en": "pwn.ai publishes Firecracker VM Escape, PwnEscape Part 2 (HN 171/75). Sandbox-isolation follow-up; affected versions and exploit details unverified. No reproduction or target probing performed.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "perplexity",
-              "url": "https://www.perplexity.ai/hub/blog/escaping-space-part-ii",
-              "title": "Perplexity《Escaping SPACE: Part II》：12 个模型红队其 agent VM 沙箱，0 次逃逸，网络策略绕过已修",
-              "brief": {
-                "zh": "Perplexity《Escaping SPACE: Part II》（11-11，经 TLDR AI 11-12 积压带出）：对其开源 agent 代码执行 VM 沙箱 SPACE（承载 Perplexity Computer）做第二轮红队，在 Part I 的 9 个模型上加入 Claude Mythos 5.1、Claude Opus 5.5、GPT-6 Astra，共 12 个；测两条边界——逃出 hypervisor 偷宿主机 AWS 凭证、绕过 egress 网络策略访问被封回调 URL；矩阵为有/无 SPACE 源码 × 断网/修补后部分联网。称所有运行（含 120 分钟专注边界的会话）0 次 VM→宿主逃逸；Part I 中 Opus 5.0、GPT-5.6 Sol/Cyber、Kimi K3 靠 DNS 伪造（仅在有源码时成功）与共享 IP 绕过网络策略，已修复且复测无绕过；同类 DNS 伪造问题已向 10 家第三方 agent 沙箱中的 8 家披露。两点经验：标准 CTF 式提示会让 agent 去找 flag 而不是测真实安全边界；网络安全专用模型并不稳定优于通用模型。原文 curl 403、WebFetch 超时，内容来自原文搜索摘录与二手转述，部分可能混有 Part I 内容，未逐字核对。补本行 SPACE 沙箱出口控制素材的新一轮数据；不描述绕过细节以外的利用步骤。",
-                "en": "Perplexity's \"Escaping SPACE: Part II\" (Nov 11, surfaced via the Nov 12 TLDR AI backlog) is a second red-team round against SPACE, its open-source agent code-execution VM sandbox behind Perplexity Computer. It adds Claude Mythos 5.1, Claude Opus 5.5 and GPT-6 Astra to Part I's nine models, twelve in total, and tests two boundaries: escaping the hypervisor to steal host AWS credentials, and bypassing the egress network policy to reach a blocked callback URL, across a matrix of with or without SPACE source code and offline or partially online after patches. It reports zero VM-to-host escapes in all runs, including 120-minute boundary-focused sessions. In Part I, Opus 5.0, GPT-5.6 Sol/Cyber and Kimi K3 bypassed the network policy via DNS spoofing (successful only with source access) and a shared IP; those were fixed and retesting found no bypass, and the same class of DNS spoofing issue was disclosed to 8 of 10 third-party agent sandboxes. Two lessons: standard CTF-style prompts send agents hunting for flags instead of testing real security boundaries, and cyber-specialized models do not reliably beat general models. The original returned 403 to curl and timed out in WebFetch, so content comes from search excerpts and secondary write-ups, may mix in Part I material, and was not checked verbatim. New data for this row's SPACE egress-control thread; no exploitation steps beyond the summary are described.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media",
-            "hacker_news",
-            "perplexity"
-          ],
-          "score": 5,
-          "status": "inbox",
-          "externalUrls": [
-            "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
-            "https://github.com/perplexityai/SPACE",
-            "https://the-decoder.com/googles-agent-compute-engine-gives-every-gemini-agent-its-own-hardware-isolated-micro-virtual-machine/",
-            "https://pwn.ai/blog/firecracker-escape",
-            "https://www.perplexity.ai/hub/blog/escaping-space-part-ii"
-          ]
-        },
-        {
-          "id": "t857",
-          "theme": "models",
-          "title": {
-            "zh": "Anthropic 发布 Claude Fable 5.2 与 Mythos 5.2：同一底层模型，Fable 全面开放、Mythos 经核验项目提供（官方自报）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Anthropic 官方发布 Claude Fable 5.2 与 Mythos 5.2（标注 Nov 9）：同一底层模型，Fable 带网络安全/生物学防护对全员开放，Mythos 经生命科学与 Cyber Verification Program 向受审组织提供。自称编码/推理/视觉提升，输出较 5.1 最多快 30%，定价每百万 token $8/$40，可选 fast mode（生成最多快 2.5 倍，$16/$80）。建议日常编码仍用 Opus 5.5，更难或更长程的工作再用 Fable/Mythos；Fable 可作 Advisor 或 Orchestrator。官网还给出一系列未独立核实的成果与基准，包括 FrontierCode 2.0 Xhigh 49.1%、早期版本将生产服务从 Python 迁到 Rust 后启动约快 26 倍、一千余 subagent 八天做出可在笔记本启动的操作系统、三件可工作电子原型、两个黑洞物理未解问题、约一千个 agent 在 30 小时内形式化费马大定理等。HN 944/568。单点发布，仅 Chaos。 Artificial Analysis 页面标题称 Claude Fable 5.2 得分 65、为目前最高；第三方榜单单方口径，方法与复现均未核。HN 276/199。补本行第三方评测传播，不把 65 分写成官方或已核实的第一。 Claude 官方频道视频 Introducing Claude Fable 5.2；搜索列表显示约 15.5 万次观看、约 6 小时，观看页返回 LOGIN_REQUIRED，播放量与精确发布时间未核，不把搜索列表播放量当成已证实数字。内容为同一发布说明，无独立实验。 Claude 官方频道视频《Fable 5.2 or Opus? When to use each model in Claude Code》（11-12 01:30 Asia/Shanghai 发布，抓取时约 18.5 万次观看 / 约 8.2 小时）。页面简介：在 Claude Code 里先用 Opus 5.5，更有野心或开放式的技术工作升到 Fable 5.2，范围清楚的工作降到 Sonnet 5.5 或 Haiku 5.5 以省钱，并可把一件工作拆给不同模型；附官方书面指南 claude.dev/blog/which-claude-model-should-you-build-with，可用性与用量限制因套餐而异。补本行「发布后怎么选模型」的官方用法建议，与已收的发布视频 6a1QSJlsYpU 不同。视频正文未看，播放量为抓取时页面数字。 Claude 官方视频《Building the Claude API for the Frontier》（11-13 01:00 Asia/Shanghai 发布，抓取时约 1.33 万次观看 / 约 8.7 小时）。Jake Dejno（Claude Platform）与 Lucca Siaudzionis（Platform Intelligence）谈 Messages API 如何随新模型演进：增加新控制、淘汰旧控制、研究与客户需求如何决定上线内容，以及在对话中途改 effort 而不破坏 prompt caching 的做法；并称 Mythos 与 Fable 使用同一套权重、只是防护不同。简介注明 Claude Managed Agents 与对话中途改 effort 仍为 beta，Mythos 经 Cyber Verification Program 获取。补本行 API/平台侧官方说明，与已收的发布视频和选模型视频不同。视频未看，「同一权重」等说法为官方自述，未独立核实。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Anthropic 官方发布 Claude Fable 5.2 与 Mythos 5.2（标注 Nov 9）：同一底层模型，Fable 带网络安全/生物学防护对全员开放，Mythos 经生命科学与 Cyber Verification Program 向受审组织提供。自称编码/推理/视觉提升，输出较 5.1 最多快 30%，定价每百万 token $8/$40，可选 fast mode（生成最多快 2.5 倍，$16/$80）。建议日常编码仍用 Opus 5.5，更难或更长程的工作再用 Fable/Mythos；Fable 可作 Advisor 或 Orchestrator。官网还给出一系列未独立核实的成果与基准，包括 FrontierCode 2.0 Xhigh 49.1%、早期版本将生产服务从 Python 迁到 Rust 后启动约快 26 倍、一千余 subagent 八天做出可在笔记本启动的操作系统、三件可工作电子原型、两个黑洞物理未解问题、约一千个 agent 在 30 小时内形式化费马大定理等。HN 944/568。单点发布，仅 Chaos。 Artificial Analysis 页面标题称 Claude Fable 5.2 得分 65、为目前最高；第三方榜单单方口径，方法与复现均未核。HN 276/199。补本行第三方评测传播，不把 65 分写成官方或已核实的第一。 Claude 官方频道视频 Introducing Claude Fable 5.2；搜索列表显示约 15.5 万次观看、约 6 小时，观看页返回 LOGIN_REQUIRED，播放量与精确发布时间未核，不把搜索列表播放量当成已证实数字。内容为同一发布说明，无独立实验。 Claude 官方频道视频《Fable 5.2 or Opus? When to use each model in Claude Code》（11-12 01:30 Asia/Shanghai 发布，抓取时约 18.5 万次观看 / 约 8.2 小时）。页面简介：在 Claude Code 里先用 Opus 5.5，更有野心或开放式的技术工作升到 Fable 5.2，范围清楚的工作降到 Sonnet 5.5 或 Haiku 5.5 以省钱，并可把一件工作拆给不同模型；附官方书面指南 claude.dev/blog/which-claude-model-should-you-build-with，可用性与用量限制因套餐而异。补本行「发布后怎么选模型」的官方用法建议，与已收的发布视频 6a1QSJlsYpU 不同。视频正文未看，播放量为抓取时页面数字。 Claude 官方视频《Building the Claude API for the Frontier》（11-13 01:00 Asia/Shanghai 发布，抓取时约 1.33 万次观看 / 约 8.7 小时）。Jake Dejno（Claude Platform）与 Lucca Siaudzionis（Platform Intelligence）谈 Messages API 如何随新模型演进：增加新控制、淘汰旧控制、研究与客户需求如何决定上线内容，以及在对话中途改 effort 而不破坏 prompt caching 的做法；并称 Mythos 与 Fable 使用同一套权重、只是防护不同。简介注明 Claude Managed Agents 与对话中途改 effort 仍为 beta，Mythos 经 Cyber Verification Program 获取。补本行 API/平台侧官方说明，与已收的发布视频和选模型视频不同。视频未看，「同一权重」等说法为官方自述，未独立核实。",
-            "en": "Anthropic launched Claude Fable 5.2 and Mythos 5.2 (dated Nov 9): the same underlying model, with Fable generally available under cyber and biology safeguards and Mythos offered to vetted organizations through the Life Sciences and Cyber Verification Programs. The company claims gains in coding, reasoning and vision, up to 30% faster output than 5.1, pricing of $8/$40 per million tokens, and an optional fast mode up to 2.5x at $16/$80. It recommends Opus 5.5 for everyday coding and Fable or Mythos for harder or longer-horizon work; Fable can act as Advisor or Orchestrator. Benchmarks and demos (FrontierCode 2.0 at 49.1% Xhigh, a Python-to-Rust migration with about 26x faster startup, a laptop-bootable OS from 1,000-plus subagents over eight days, three working electronics prototypes, two open black-hole physics problems, and formalizing Fermat Last Theorem in about 30 hours) are Anthropic claims and were not independently verified. HN 944/568. Single launch, Chaos only. An Artificial Analysis page titles Claude Fable 5.2 at 65, calling it the highest so far. Third-party leaderboard, method and reproduction unverified. HN 276/199. Coverage of an external score, not an official or confirmed first-place result. Official Claude channel video introducing Claude Fable 5.2. Search listings show about 155,000 views over roughly six hours; the watch page returned LOGIN_REQUIRED, so view counts and the exact publish time are unverified and are not treated as confirmed. Same launch announcement, no independent experiment. Official Claude channel video \"Fable 5.2 or Opus? When to use each model in Claude Code\" (published 01:30 Nov 12 Asia/Shanghai; about 185,000 views over roughly 8.2 hours when captured). The page description advises starting on Opus 5.5 in Claude Code, moving up to Fable 5.2 for more ambitious or open-ended technical work, stepping down to Sonnet 5.5 or Haiku 5.5 for well-scoped work at lower cost, and splitting one job across models; it links an official written guide at claude.dev/blog/which-claude-model-should-you-build-with and notes that availability and usage limits vary by plan. Adds official model-selection guidance to this launch row, distinct from the earlier launch video 6a1QSJlsYpU. The video itself was not watched; view counts are as shown at capture. Official Claude video \"Building the Claude API for the Frontier\" (published 01:00 Nov 13 Asia/Shanghai; about 13,260 views over roughly 8.7 hours at capture). Jake Dejno (Claude Platform) and Lucca Siaudzionis (Platform Intelligence) discuss how the Messages API evolves with new models: adding new controls, retiring outdated ones, how research and customer requests shape what ships, and how to change effort mid-conversation without breaking prompt caching. They say Mythos and Fable use the same model weights with different safeguards. The description notes that Claude Managed Agents and mid-conversation effort changes are in beta and that Mythos access is through the Cyber Verification Program. Adds the official API and platform angle to this row, distinct from the launch and model-choice videos already filed. Video not watched; the same-weights claim is Anthropic's own and not independently verified.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
-              "title": "Claude Fable 5.2 and Mythos 5.2",
-              "brief": {
-                "zh": "Anthropic 官方发布 Claude Fable 5.2 与 Mythos 5.2（标注 Nov 9）：同一底层模型，Fable 带网络安全/生物学防护对全员开放，Mythos 经生命科学与 Cyber Verification Program 向受审组织提供。自称编码/推理/视觉提升，输出较 5.1 最多快 30%，定价每百万 token $8/$40，可选 fast mode（生成最多快 2.5 倍，$16/$80）。建议日常编码仍用 Opus 5.5，更难或更长程的工作再用 Fable/Mythos；Fable 可作 Advisor 或 Orchestrator。官网还给出一系列未独立核实的成果与基准，包括 FrontierCode 2.0 Xhigh 49.1%、早期版本将生产服务从 Python 迁到 Rust 后启动约快 26 倍、一千余 subagent 八天做出可在笔记本启动的操作系统、三件可工作电子原型、两个黑洞物理未解问题、约一千个 agent 在 30 小时内形式化费马大定理等。HN 944/568。单点发布，仅 Chaos。",
-                "en": "Anthropic launched Claude Fable 5.2 and Mythos 5.2 (dated Nov 9): the same underlying model, with Fable generally available under cyber and biology safeguards and Mythos offered to vetted organizations through the Life Sciences and Cyber Verification Programs. The company claims gains in coding, reasoning and vision, up to 30% faster output than 5.1, pricing of $8/$40 per million tokens, and an optional fast mode up to 2.5x at $16/$80. It recommends Opus 5.5 for everyday coding and Fable or Mythos for harder or longer-horizon work; Fable can act as Advisor or Orchestrator. Benchmarks and demos (FrontierCode 2.0 at 49.1% Xhigh, a Python-to-Rust migration with about 26x faster startup, a laptop-bootable OS from 1,000-plus subagents over eight days, three working electronics prototypes, two open black-hole physics problems, and formalizing Fermat Last Theorem in about 30 hours) are Anthropic claims and were not independently verified. HN 944/568. Single launch, Chaos only.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://artificialanalysis.ai/models/claude-fable-5-2",
-              "title": "Claude Fable 5.2 Scores 65 on Artificial Analysis, Highest So Far",
-              "brief": {
-                "zh": "Artificial Analysis 页面标题称 Claude Fable 5.2 得分 65、为目前最高；第三方榜单单方口径，方法与复现均未核。HN 276/199。补本行第三方评测传播，不把 65 分写成官方或已核实的第一。",
-                "en": "An Artificial Analysis page titles Claude Fable 5.2 at 65, calling it the highest so far. Third-party leaderboard, method and reproduction unverified. HN 276/199. Coverage of an external score, not an official or confirmed first-place result.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=6a1QSJlsYpU",
-              "title": "Introducing Claude Fable 5.2",
-              "brief": {
-                "zh": "Claude 官方频道视频 Introducing Claude Fable 5.2；搜索列表显示约 15.5 万次观看、约 6 小时，观看页返回 LOGIN_REQUIRED，播放量与精确发布时间未核，不把搜索列表播放量当成已证实数字。内容为同一发布说明，无独立实验。",
-                "en": "Official Claude channel video introducing Claude Fable 5.2. Search listings show about 155,000 views over roughly six hours; the watch page returned LOGIN_REQUIRED, so view counts and the exact publish time are unverified and are not treated as confirmed. Same launch announcement, no independent experiment.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=C33hJGt-ySg",
-              "title": "Fable 5.2 or Opus? When to use each model in Claude Code",
-              "brief": {
-                "zh": "Claude 官方频道视频《Fable 5.2 or Opus? When to use each model in Claude Code》（11-12 01:30 Asia/Shanghai 发布，抓取时约 18.5 万次观看 / 约 8.2 小时）。页面简介：在 Claude Code 里先用 Opus 5.5，更有野心或开放式的技术工作升到 Fable 5.2，范围清楚的工作降到 Sonnet 5.5 或 Haiku 5.5 以省钱，并可把一件工作拆给不同模型；附官方书面指南 claude.dev/blog/which-claude-model-should-you-build-with，可用性与用量限制因套餐而异。补本行「发布后怎么选模型」的官方用法建议，与已收的发布视频 6a1QSJlsYpU 不同。视频正文未看，播放量为抓取时页面数字。",
-                "en": "Official Claude channel video \"Fable 5.2 or Opus? When to use each model in Claude Code\" (published 01:30 Nov 12 Asia/Shanghai; about 185,000 views over roughly 8.2 hours when captured). The page description advises starting on Opus 5.5 in Claude Code, moving up to Fable 5.2 for more ambitious or open-ended technical work, stepping down to Sonnet 5.5 or Haiku 5.5 for well-scoped work at lower cost, and splitting one job across models; it links an official written guide at claude.dev/blog/which-claude-model-should-you-build-with and notes that availability and usage limits vary by plan. Adds official model-selection guidance to this launch row, distinct from the earlier launch video 6a1QSJlsYpU. The video itself was not watched; view counts are as shown at capture.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=p2xvJAbF-i4",
-              "title": "Building the Claude API for the Frontier",
-              "brief": {
-                "zh": "Claude 官方视频《Building the Claude API for the Frontier》（11-13 01:00 Asia/Shanghai 发布，抓取时约 1.33 万次观看 / 约 8.7 小时）。Jake Dejno（Claude Platform）与 Lucca Siaudzionis（Platform Intelligence）谈 Messages API 如何随新模型演进：增加新控制、淘汰旧控制、研究与客户需求如何决定上线内容，以及在对话中途改 effort 而不破坏 prompt caching 的做法；并称 Mythos 与 Fable 使用同一套权重、只是防护不同。简介注明 Claude Managed Agents 与对话中途改 effort 仍为 beta，Mythos 经 Cyber Verification Program 获取。补本行 API/平台侧官方说明，与已收的发布视频和选模型视频不同。视频未看，「同一权重」等说法为官方自述，未独立核实。",
-                "en": "Official Claude video \"Building the Claude API for the Frontier\" (published 01:00 Nov 13 Asia/Shanghai; about 13,260 views over roughly 8.7 hours at capture). Jake Dejno (Claude Platform) and Lucca Siaudzionis (Platform Intelligence) discuss how the Messages API evolves with new models: adding new controls, retiring outdated ones, how research and customer requests shape what ships, and how to change effort mid-conversation without breaking prompt caching. They say Mythos and Fable use the same model weights with different safeguards. The description notes that Claude Managed Agents and mid-conversation effort changes are in beta and that Mythos access is through the Cyber Verification Program. Adds the official API and platform angle to this row, distinct from the launch and model-choice videos already filed. Video not watched; the same-weights claim is Anthropic's own and not independently verified.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://www.anthropic.com/claude-fable-and-mythos-5-2",
-            "https://artificialanalysis.ai/models/claude-fable-5-2",
-            "https://www.youtube.com/watch?v=6a1QSJlsYpU",
-            "https://www.youtube.com/watch?v=C33hJGt-ySg",
-            "https://www.youtube.com/watch?v=p2xvJAbF-i4"
-          ]
-        },
-        {
-          "id": "t885",
-          "theme": "security",
-          "title": {
-            "zh": "Google 发布 Gemini 4 Hydrogen：面向日常编码与 agent 执行的快速模型，并在 Antigravity 推出 Carbon/Hydrogen 动态切换的 Orchestrator（官方自报）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Google 官方博客（11-12，Koray Kavukcuoglu）发布 Gemini 4 Hydrogen：定位为日常编码与 agent 工作流的快速执行模型，与偏长程深推理的 Carbon、Argon 互补，向 AI Studio、Gemini API、企业版、Gemini app、Google 搜索全线开放，Antigravity 面向付费 Pro/Ultra。自称 Artificial Analysis 智能指数默认 high 档 51（超过 Argon 的 50），最高 xhigh 档 54；1M 上下文统一定价 $1.50/$7.50 每百万输入/输出 token；相对 Gemini 3.8 Flash 完成任务快 2.5 倍、Terminal-Bench 4.1 从 18.2% 升到 57%、虚构陈述减少 5 倍以上；HLE-Diamond 58.8%、Vals Tax Agent Bench 52.3% 等。新增 low/medium/high/xhigh 四档思考。安全部分自称 agent 越权最多降 81%、服务不足最多降 79%、错位行为与偷工减料降 12 倍，内部 agent 诚实评测 96.7%，20 万轮审计 CoT 可读性 99.9%，Gray Swan 间接注入基准抗性提升 2.3 倍以上。同时介绍 Antigravity 中的 Orchestrator：在同一会话里动态切换 Carbon 与 Hydrogen，Terminal-Bench 上接近 Carbon 成功率，平均少用 24% 配额、快 19%。HN 461/296。所有数字均为 Google 自报，未独立核实。单点发布，仅 Chaos。 Antigravity 团队博客（11-12，HN 298/72）：Orchestrator 不是按首个提示一次性判断难度的静态路由，而是在同一条轨迹里让 Carbon 与 Hydrogen 双向交接——例如 Carbon 先只读探索依赖、消歧并写出带重规划触发条件的计划，Hydrogen 接手改代码、升级依赖、跑测试，遇阻再交回 Carbon 检查状态、修计划后继续。自称 Terminal-Bench 4.1 上接近 Carbon 成功率，平均少用 24% 配额、快 19%。也可用 Antigravity SDK 显式编排多模型（演示：开源 issue 分诊中 Hydrogen agent 负责分诊与编码，Carbon 负责大重构、新功能与安全检查）。文中称本周推出 Carbon 与 /swarm 后已有数万次 swarm 启动。Orchestrator (Carbon) 面向 Ultra，(Argon) 面向 Pro/Ultra。数字为 Google 自报，未核。 Google Antigravity 官方视频《Gemini 4 Hydrogen available in Google Antigravity》（11-13 02:05 Asia/Shanghai 发布，抓取时约 3.1 万次观看 / 约 7.6 小时）。页面简介多为频道套话，与上述两篇官方博文同一发布；另有官方视频 3tacaSEZM9M（Hydrogen 与 Carbon 做 bug 分诊，约 1.06 万 / 7 小时）未单独收录。视频未看，能力主张为 Google 自报。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Google 官方博客（11-12，Koray Kavukcuoglu）发布 Gemini 4 Hydrogen：定位为日常编码与 agent 工作流的快速执行模型，与偏长程深推理的 Carbon、Argon 互补，向 AI Studio、Gemini API、企业版、Gemini app、Google 搜索全线开放，Antigravity 面向付费 Pro/Ultra。自称 Artificial Analysis 智能指数默认 high 档 51（超过 Argon 的 50），最高 xhigh 档 54；1M 上下文统一定价 $1.50/$7.50 每百万输入/输出 token；相对 Gemini 3.8 Flash 完成任务快 2.5 倍、Terminal-Bench 4.1 从 18.2% 升到 57%、虚构陈述减少 5 倍以上；HLE-Diamond 58.8%、Vals Tax Agent Bench 52.3% 等。新增 low/medium/high/xhigh 四档思考。安全部分自称 agent 越权最多降 81%、服务不足最多降 79%、错位行为与偷工减料降 12 倍，内部 agent 诚实评测 96.7%，20 万轮审计 CoT 可读性 99.9%，Gray Swan 间接注入基准抗性提升 2.3 倍以上。同时介绍 Antigravity 中的 Orchestrator：在同一会话里动态切换 Carbon 与 Hydrogen，Terminal-Bench 上接近 Carbon 成功率，平均少用 24% 配额、快 19%。HN 461/296。所有数字均为 Google 自报，未独立核实。单点发布，仅 Chaos。 Antigravity 团队博客（11-12，HN 298/72）：Orchestrator 不是按首个提示一次性判断难度的静态路由，而是在同一条轨迹里让 Carbon 与 Hydrogen 双向交接——例如 Carbon 先只读探索依赖、消歧并写出带重规划触发条件的计划，Hydrogen 接手改代码、升级依赖、跑测试，遇阻再交回 Carbon 检查状态、修计划后继续。自称 Terminal-Bench 4.1 上接近 Carbon 成功率，平均少用 24% 配额、快 19%。也可用 Antigravity SDK 显式编排多模型（演示：开源 issue 分诊中 Hydrogen agent 负责分诊与编码，Carbon 负责大重构、新功能与安全检查）。文中称本周推出 Carbon 与 /swarm 后已有数万次 swarm 启动。Orchestrator (Carbon) 面向 Ultra，(Argon) 面向 Pro/Ultra。数字为 Google 自报，未核。 Google Antigravity 官方视频《Gemini 4 Hydrogen available in Google Antigravity》（11-13 02:05 Asia/Shanghai 发布，抓取时约 3.1 万次观看 / 约 7.6 小时）。页面简介多为频道套话，与上述两篇官方博文同一发布；另有官方视频 3tacaSEZM9M（Hydrogen 与 Carbon 做 bug 分诊，约 1.06 万 / 7 小时）未单独收录。视频未看，能力主张为 Google 自报。",
-            "en": "A Google blog post dated Nov 12 (Koray Kavukcuoglu) introduces Gemini 4 Hydrogen, a fast execution model for everyday coding and agentic workflows that complements the long-horizon reasoning models Carbon and Argon. It is rolling out across AI Studio, the Gemini API, Gemini for business, the Gemini app and Google Search, and in Antigravity for paid Pro and Ultra subscribers. Google claims an Artificial Analysis Intelligence Index of 51 at the default high thinking level (above Argon at 50) and 54 at xhigh; flat pricing of $1.50/$7.50 per million input/output tokens across a 1M context; 2.5x faster task completion than Gemini 3.8 Flash, Terminal-Bench 4.1 up from 18.2% to 57%, more than 5x fewer fabricated claims; and results such as 58.8% on HLE-Diamond and 52.3% on Vals Tax Agent Bench. It adds four thinking levels: low, medium, high and a new xhigh. On safety it claims up to 81% less overreach and 79% less under-service in agentic tasks, 12x fewer misaligned actions and shortcuts, 96.7% on an internal agent honesty eval, 99.9% chain-of-thought legibility across more than 200,000 audited turns, and over 2.3x more resilience on the Gray Swan indirect prompt injection benchmark. The post also introduces Orchestrator in Antigravity, which switches between Carbon and Hydrogen within one session and reaches near-Carbon success on Terminal-Bench while using 24% less quota and finishing 19% faster on average. HN 461/296. All figures are Google claims and were not independently verified. Single launch, Chaos only. Antigravity team blog (Nov 12, HN 298/72): Orchestrator is not a static router that guesses difficulty from the first prompt; it hands work back and forth between Carbon and Hydrogen inside one trajectory. For example, Carbon explores dependencies read-only, resolves ambiguities and writes a plan with explicit re-planning triggers; Hydrogen then edits code, updates packages and runs tests, handing back to Carbon to inspect state and repair the plan when it hits friction. Google claims near-Carbon success on Terminal-Bench 4.1 with 24% less quota and 19% faster completion on average. The Antigravity SDK also supports explicit multi-model pipelines (a demo issue-triage system uses Hydrogen agents for triage and coding and a Carbon agent for large refactors, new features and security checks). The post says tens of thousands of swarms launched after Carbon and /swarm shipped earlier in the week. Orchestrator (Carbon) is for Ultra and Orchestrator (Argon) for Pro and Ultra. Figures are Google claims, unverified. Official Google Antigravity video \"Gemini 4 Hydrogen available in Google Antigravity\" (published 02:05 Nov 13 Asia/Shanghai; about 31,000 views over roughly 7.6 hours at capture). The description is mostly channel boilerplate and covers the same launch as the two official posts above; a related official video, 3tacaSEZM9M (bug triage with Hydrogen and Carbon, about 10,600 views in 7 hours), was not filed separately. Video not watched; capability claims are Google's own.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
-              "title": "Gemini 4 Hydrogen",
-              "brief": {
-                "zh": "Google 官方博客（11-12，Koray Kavukcuoglu）发布 Gemini 4 Hydrogen：定位为日常编码与 agent 工作流的快速执行模型，与偏长程深推理的 Carbon、Argon 互补，向 AI Studio、Gemini API、企业版、Gemini app、Google 搜索全线开放，Antigravity 面向付费 Pro/Ultra。自称 Artificial Analysis 智能指数默认 high 档 51（超过 Argon 的 50），最高 xhigh 档 54；1M 上下文统一定价 $1.50/$7.50 每百万输入/输出 token；相对 Gemini 3.8 Flash 完成任务快 2.5 倍、Terminal-Bench 4.1 从 18.2% 升到 57%、虚构陈述减少 5 倍以上；HLE-Diamond 58.8%、Vals Tax Agent Bench 52.3% 等。新增 low/medium/high/xhigh 四档思考。安全部分自称 agent 越权最多降 81%、服务不足最多降 79%、错位行为与偷工减料降 12 倍，内部 agent 诚实评测 96.7%，20 万轮审计 CoT 可读性 99.9%，Gray Swan 间接注入基准抗性提升 2.3 倍以上。同时介绍 Antigravity 中的 Orchestrator：在同一会话里动态切换 Carbon 与 Hydrogen，Terminal-Bench 上接近 Carbon 成功率，平均少用 24% 配额、快 19%。HN 461/296。所有数字均为 Google 自报，未独立核实。单点发布，仅 Chaos。",
-                "en": "A Google blog post dated Nov 12 (Koray Kavukcuoglu) introduces Gemini 4 Hydrogen, a fast execution model for everyday coding and agentic workflows that complements the long-horizon reasoning models Carbon and Argon. It is rolling out across AI Studio, the Gemini API, Gemini for business, the Gemini app and Google Search, and in Antigravity for paid Pro and Ultra subscribers. Google claims an Artificial Analysis Intelligence Index of 51 at the default high thinking level (above Argon at 50) and 54 at xhigh; flat pricing of $1.50/$7.50 per million input/output tokens across a 1M context; 2.5x faster task completion than Gemini 3.8 Flash, Terminal-Bench 4.1 up from 18.2% to 57%, more than 5x fewer fabricated claims; and results such as 58.8% on HLE-Diamond and 52.3% on Vals Tax Agent Bench. It adds four thinking levels: low, medium, high and a new xhigh. On safety it claims up to 81% less overreach and 79% less under-service in agentic tasks, 12x fewer misaligned actions and shortcuts, 96.7% on an internal agent honesty eval, 99.9% chain-of-thought legibility across more than 200,000 audited turns, and over 2.3x more resilience on the Gray Swan indirect prompt injection benchmark. The post also introduces Orchestrator in Antigravity, which switches between Carbon and Hydrogen within one session and reaches near-Carbon success on Terminal-Bench while using 24% less quota and finishing 19% faster on average. HN 461/296. All figures are Google claims and were not independently verified. Single launch, Chaos only.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://antigravity.google/blog/gemini-4-hydrogen-in-google-antigravity/",
-              "title": "Gemini 4 Hydrogen and Orchestrator",
-              "brief": {
-                "zh": "Antigravity 团队博客（11-12，HN 298/72）：Orchestrator 不是按首个提示一次性判断难度的静态路由，而是在同一条轨迹里让 Carbon 与 Hydrogen 双向交接——例如 Carbon 先只读探索依赖、消歧并写出带重规划触发条件的计划，Hydrogen 接手改代码、升级依赖、跑测试，遇阻再交回 Carbon 检查状态、修计划后继续。自称 Terminal-Bench 4.1 上接近 Carbon 成功率，平均少用 24% 配额、快 19%。也可用 Antigravity SDK 显式编排多模型（演示：开源 issue 分诊中 Hydrogen agent 负责分诊与编码，Carbon 负责大重构、新功能与安全检查）。文中称本周推出 Carbon 与 /swarm 后已有数万次 swarm 启动。Orchestrator (Carbon) 面向 Ultra，(Argon) 面向 Pro/Ultra。数字为 Google 自报，未核。",
-                "en": "Antigravity team blog (Nov 12, HN 298/72): Orchestrator is not a static router that guesses difficulty from the first prompt; it hands work back and forth between Carbon and Hydrogen inside one trajectory. For example, Carbon explores dependencies read-only, resolves ambiguities and writes a plan with explicit re-planning triggers; Hydrogen then edits code, updates packages and runs tests, handing back to Carbon to inspect state and repair the plan when it hits friction. Google claims near-Carbon success on Terminal-Bench 4.1 with 24% less quota and 19% faster completion on average. The Antigravity SDK also supports explicit multi-model pipelines (a demo issue-triage system uses Hydrogen agents for triage and coding and a Carbon agent for large refactors, new features and security checks). The post says tens of thousands of swarms launched after Carbon and /swarm shipped earlier in the week. Orchestrator (Carbon) is for Ultra and Orchestrator (Argon) for Pro and Ultra. Figures are Google claims, unverified.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=kyhw-v_iVf0",
-              "title": "Gemini 4 Hydrogen available in Google Antigravity",
-              "brief": {
-                "zh": "Google Antigravity 官方视频《Gemini 4 Hydrogen available in Google Antigravity》（11-13 02:05 Asia/Shanghai 发布，抓取时约 3.1 万次观看 / 约 7.6 小时）。页面简介多为频道套话，与上述两篇官方博文同一发布；另有官方视频 3tacaSEZM9M（Hydrogen 与 Carbon 做 bug 分诊，约 1.06 万 / 7 小时）未单独收录。视频未看，能力主张为 Google 自报。",
-                "en": "Official Google Antigravity video \"Gemini 4 Hydrogen available in Google Antigravity\" (published 02:05 Nov 13 Asia/Shanghai; about 31,000 views over roughly 7.6 hours at capture). The description is mostly channel boilerplate and covers the same launch as the two official posts above; a related official video, 3tacaSEZM9M (bug triage with Hydrogen and Carbon, about 10,600 views in 7 hours), was not filed separately. Video not watched; capability claims are Google's own.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
-            "https://antigravity.google/blog/gemini-4-hydrogen-in-google-antigravity/",
-            "https://www.youtube.com/watch?v=kyhw-v_iVf0"
-          ]
-        },
-        {
-          "id": "t886",
-          "theme": "models",
-          "title": {
-            "zh": "Claude Code 2.1.323：实验性 Code Mode——Claude 改为写 JavaScript 调用自身工具（官方 CHANGELOG，文档未上线）",
-            "en": "Claude Code 2.1.323",
-            "ja": "Claude Code 2.1.323"
-          },
-          "summary": {
-            "zh": "Claude Code v2.1.323（GitHub release 2026-11-12 22:12 UTC，即 11-13 06:12 Asia/Shanghai）官方 CHANGELOG 首条：新增实验性、需手动开启的 Code Mode，Claude 改为写 JavaScript 来调用它的工具，组织可统一关闭（文档 code.claude.com/docs/en/code-mode 抓取时仍 404）。同版其它 harness 相关改动：plugin.json 新增 engines[\"claude-code\"] 版本约束；tool.list 插件 hook 增删的工具对模型和所有 agent 生效；未识别模型 ID 的默认上下文从 200K 改为 1M；macOS/Linux 沙箱下 git worktree add/move/remove 只读失败、未授权 worktree 内提交失败；修复 bypass 权限下 rm 判错目录而跳过危险删除提示；长 hook 在 claude -p/SDK 中每 30 秒发心跳；--no-session-persistence 退出时清理落盘的长工具结果。Code Mode 的沙箱、可调用工具范围等机制细节未核。本版不含此前跟踪的「把账户邮箱移出模型上下文」修补。单点发布，仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Claude Code v2.1.323（GitHub release 2026-11-12 22:12 UTC，即 11-13 06:12 Asia/Shanghai）官方 CHANGELOG 首条：新增实验性、需手动开启的 Code Mode，Claude 改为写 JavaScript 来调用它的工具，组织可统一关闭（文档 code.claude.com/docs/en/code-mode 抓取时仍 404）。同版其它 harness 相关改动：plugin.json 新增 engines[\"claude-code\"] 版本约束；tool.list 插件 hook 增删的工具对模型和所有 agent 生效；未识别模型 ID 的默认上下文从 200K 改为 1M；macOS/Linux 沙箱下 git worktree add/move/remove 只读失败、未授权 worktree 内提交失败；修复 bypass 权限下 rm 判错目录而跳过危险删除提示；长 hook 在 claude -p/SDK 中每 30 秒发心跳；--no-session-persistence 退出时清理落盘的长工具结果。Code Mode 的沙箱、可调用工具范围等机制细节未核。本版不含此前跟踪的「把账户邮箱移出模型上下文」修补。单点发布，仅 Chaos。",
-            "en": "The official Claude Code changelog for v2.1.323 (GitHub release 2026-11-12 22:12 UTC, 06:12 Nov 13 Asia/Shanghai) leads with an experimental, opt-in Code Mode in which Claude writes JavaScript to call its own tools; organizations can disable it centrally (the docs page code.claude.com/docs/en/code-mode still returned 404 at capture). Other harness-related changes in the same release: a new engines[\"claude-code\"] version constraint in plugin.json; tools added or removed by tool.list plugin hooks now apply to the model and all agents; the default context for unrecognized model IDs moves from 200K to 1M; under the macOS/Linux sandbox, git worktree add/move/remove fail as read-only and commits inside unauthorized worktrees fail; a fix for rm misjudging the directory and skipping the dangerous-deletion prompt under bypass permissions; 30-second heartbeats for long hooks in claude -p and the SDK; and cleanup of persisted long tool results on exit with --no-session-persistence. Code Mode mechanics such as sandboxing and callable tool scope were not verified. This release does not include the previously tracked fix that removes account email from model context. Single release, Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "anthropic",
-              "url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
-              "title": "Claude Code 2.1.323：实验性 Code Mode——Claude 写 JavaScript 调用自身工具",
-              "brief": {
-                "zh": "Claude Code v2.1.323（GitHub release 2026-11-12 22:12 UTC，即 11-13 06:12 Asia/Shanghai）官方 CHANGELOG 首条：新增实验性、需手动开启的 Code Mode，Claude 改为写 JavaScript 来调用它的工具，组织可统一关闭（文档 code.claude.com/docs/en/code-mode 抓取时仍 404）。同版其它 harness 相关改动：plugin.json 新增 engines[\"claude-code\"] 版本约束；tool.list 插件 hook 增删的工具对模型和所有 agent 生效；未识别模型 ID 的默认上下文从 200K 改为 1M；macOS/Linux 沙箱下 git worktree add/move/remove 只读失败、未授权 worktree 内提交失败；修复 bypass 权限下 rm 判错目录而跳过危险删除提示；长 hook 在 claude -p/SDK 中每 30 秒发心跳；--no-session-persistence 退出时清理落盘的长工具结果。Code Mode 的沙箱、可调用工具范围等机制细节未核。本版不含此前跟踪的「把账户邮箱移出模型上下文」修补。单点发布，仅 Chaos。",
-                "en": "The official Claude Code changelog for v2.1.323 (GitHub release 2026-11-12 22:12 UTC, 06:12 Nov 13 Asia/Shanghai) leads with an experimental, opt-in Code Mode in which Claude writes JavaScript to call its own tools; organizations can disable it centrally (the docs page code.claude.com/docs/en/code-mode still returned 404 at capture). Other harness-related changes in the same release: a new engines[\"claude-code\"] version constraint in plugin.json; tools added or removed by tool.list plugin hooks now apply to the model and all agents; the default context for unrecognized model IDs moves from 200K to 1M; under the macOS/Linux sandbox, git worktree add/move/remove fail as read-only and commits inside unauthorized worktrees fail; a fix for rm misjudging the directory and skipping the dangerous-deletion prompt under bypass permissions; 30-second heartbeats for long hooks in claude -p and the SDK; and cleanup of persisted long tool results on exit with --no-session-persistence. Code Mode mechanics such as sandboxing and callable tool scope were not verified. This release does not include the previously tracked fix that removes account email from model context. Single release, Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "anthropic"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md"
-          ]
-        },
-        {
-          "id": "t887",
-          "theme": "models",
-          "title": {
-            "zh": "Thinking Machines 放出 Inkling 2 Small 开放权重：Apache-2.0，594B 总参 / 17B 激活 MoE，1M 上下文（模型卡自报）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Hugging Face 上 thinkingmachines/Inkling-2-Small（NVFP4）与 Inkling-2-Small-MXFP8 已公开、未 gated，许可 Apache-2.0；README 最近提交 2026-11-12 21:35 UTC（11-13 05:35 Asia/Shanghai），确切公开时刻 HF 未显示。模型卡：多模态（文本+图像→文本）48 层 decoder-only 稀疏 MoE，384 个专家选 8，局部/全局混合注意力，594B 总参 / 17B 激活，最长 1M 上下文；给出 SGLang、vLLM、TokenSpeed、Unsloth 本地推理配方，可用 Tinker、Miles、SkyRL、Snowflake Cortex Training 后训练，NVIDIA、Fireworks、Together、Baseten、Nebius、Modal 提供 API。评测表对比 GLM-5.3-Flash、MiMo V2.6 Flash、MiniMax-M3.1-Flash、DeepSeek-V4.1-Flash 等，数字为厂商自报，未复核；未见 Thinking Machines 官方博客发布文。此前预告约 11-12 放出，本轮首次看到公开仓库。单点发布，仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Hugging Face 上 thinkingmachines/Inkling-2-Small（NVFP4）与 Inkling-2-Small-MXFP8 已公开、未 gated，许可 Apache-2.0；README 最近提交 2026-11-12 21:35 UTC（11-13 05:35 Asia/Shanghai），确切公开时刻 HF 未显示。模型卡：多模态（文本+图像→文本）48 层 decoder-only 稀疏 MoE，384 个专家选 8，局部/全局混合注意力，594B 总参 / 17B 激活，最长 1M 上下文；给出 SGLang、vLLM、TokenSpeed、Unsloth 本地推理配方，可用 Tinker、Miles、SkyRL、Snowflake Cortex Training 后训练，NVIDIA、Fireworks、Together、Baseten、Nebius、Modal 提供 API。评测表对比 GLM-5.3-Flash、MiMo V2.6 Flash、MiniMax-M3.1-Flash、DeepSeek-V4.1-Flash 等，数字为厂商自报，未复核；未见 Thinking Machines 官方博客发布文。此前预告约 11-12 放出，本轮首次看到公开仓库。单点发布，仅 Chaos。",
-            "en": "On Hugging Face, thinkingmachines/Inkling-2-Small (NVFP4) and Inkling-2-Small-MXFP8 are public and ungated under Apache-2.0; the latest README commit is 2026-11-12 21:35 UTC (05:35 Nov 13 Asia/Shanghai), and HF does not show the exact time the repos went public. Per the model card it is a multimodal (text and image to text) 48-layer decoder-only sparse MoE with 384 experts and 8 active, hybrid local/global attention, 594B total and 17B active parameters, and up to 1M context. It lists local inference recipes for SGLang, vLLM, TokenSpeed and Unsloth, post-training via Tinker, Miles, SkyRL and Snowflake Cortex Training, and API access through NVIDIA, Fireworks, Together, Baseten, Nebius and Modal. The eval table compares it with GLM-5.3-Flash, MiMo V2.6 Flash, MiniMax-M3.1-Flash, DeepSeek-V4.1-Flash and others; figures are vendor-reported and unverified, and no Thinking Machines launch blog was found. A release previously expected around Nov 12 appeared publicly for the first time in this sweep. Single release, Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "huggingface",
-              "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
-              "title": "Thinking Machines 放出 Inkling 2 Small 开放权重（Apache-2.0，594B/17B MoE，1M 上下文）",
-              "brief": {
-                "zh": "Hugging Face 上 thinkingmachines/Inkling-2-Small（NVFP4）与 Inkling-2-Small-MXFP8 已公开、未 gated，许可 Apache-2.0；README 最近提交 2026-11-12 21:35 UTC（11-13 05:35 Asia/Shanghai），确切公开时刻 HF 未显示。模型卡：多模态（文本+图像→文本）48 层 decoder-only 稀疏 MoE，384 个专家选 8，局部/全局混合注意力，594B 总参 / 17B 激活，最长 1M 上下文；给出 SGLang、vLLM、TokenSpeed、Unsloth 本地推理配方，可用 Tinker、Miles、SkyRL、Snowflake Cortex Training 后训练，NVIDIA、Fireworks、Together、Baseten、Nebius、Modal 提供 API。评测表对比 GLM-5.3-Flash、MiMo V2.6 Flash、MiniMax-M3.1-Flash、DeepSeek-V4.1-Flash 等，数字为厂商自报，未复核；未见 Thinking Machines 官方博客发布文。此前预告约 11-12 放出，本轮首次看到公开仓库。单点发布，仅 Chaos。",
-                "en": "On Hugging Face, thinkingmachines/Inkling-2-Small (NVFP4) and Inkling-2-Small-MXFP8 are public and ungated under Apache-2.0; the latest README commit is 2026-11-12 21:35 UTC (05:35 Nov 13 Asia/Shanghai), and HF does not show the exact time the repos went public. Per the model card it is a multimodal (text and image to text) 48-layer decoder-only sparse MoE with 384 experts and 8 active, hybrid local/global attention, 594B total and 17B active parameters, and up to 1M context. It lists local inference recipes for SGLang, vLLM, TokenSpeed and Unsloth, post-training via Tinker, Miles, SkyRL and Snowflake Cortex Training, and API access through NVIDIA, Fireworks, Together, Baseten, Nebius and Modal. The eval table compares it with GLM-5.3-Flash, MiMo V2.6 Flash, MiniMax-M3.1-Flash, DeepSeek-V4.1-Flash and others; figures are vendor-reported and unverified, and no Thinking Machines launch blog was found. A release previously expected around Nov 12 appeared publicly for the first time in this sweep. Single release, Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "huggingface"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://huggingface.co/thinkingmachines/Inkling-2-Small"
-          ]
-        },
-        {
-          "id": "t888",
-          "theme": "models",
-          "title": {
-            "zh": "OpenAI 对齐博客「模糊鲁棒性」：helpful-only 推理模型当攻击者自动红队，只留 worst@n 稳定成功的越狱进 RL，用于 GPT-6 Astra/Sol（官方自报）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "OpenAI Alignment 博客（11-12，Kaiwen Wang 等 7 人，附论文）提出 fuzzy robustness：在网络、生物等双用途高风险领域，安全边界难以精确定义时，模型在对抗压力下仍不给违禁协助的可靠程度。做法：让 GPT-5.6 Sol 家族的 helpful-only 推理模型当攻击者，在类 PAIR 的自动红队 harness 里迭代改写种子提示去攻击 GPT-5.4/5.5，并扩大攻击者测试时算力；只保留多次重复都成功的攻击（worst@n）作为对抗训练数据进入 RL。对照实验中，训练后的模型对未见攻击者生成的固定越狱集和 12 种自适应多轮攻击者人设都更鲁棒；该方法已用于 GPT-6 Astra 与 Sol。不含生产防护时，cyber 固定越狱集上 GPT-6 Astra 安全回答 91.5%，GPT-5.6 Sol 为 59%；称良性请求拒答未上升，安全与有用性呈 Pareto 改进；在攻击者训练任务中加入 GPT-Red 等可显著提升攻击效率。数字为 OpenAI 自报，完整论文未读。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "OpenAI Alignment 博客（11-12，Kaiwen Wang 等 7 人，附论文）提出 fuzzy robustness：在网络、生物等双用途高风险领域，安全边界难以精确定义时，模型在对抗压力下仍不给违禁协助的可靠程度。做法：让 GPT-5.6 Sol 家族的 helpful-only 推理模型当攻击者，在类 PAIR 的自动红队 harness 里迭代改写种子提示去攻击 GPT-5.4/5.5，并扩大攻击者测试时算力；只保留多次重复都成功的攻击（worst@n）作为对抗训练数据进入 RL。对照实验中，训练后的模型对未见攻击者生成的固定越狱集和 12 种自适应多轮攻击者人设都更鲁棒；该方法已用于 GPT-6 Astra 与 Sol。不含生产防护时，cyber 固定越狱集上 GPT-6 Astra 安全回答 91.5%，GPT-5.6 Sol 为 59%；称良性请求拒答未上升，安全与有用性呈 Pareto 改进；在攻击者训练任务中加入 GPT-Red 等可显著提升攻击效率。数字为 OpenAI 自报，完整论文未读。仅 Chaos。",
-            "en": "An OpenAI Alignment blog post (Nov 12; Kaiwen Wang and six co-authors, with a paper) defines fuzzy robustness: how reliably a model withholds prohibited help under adversarial pressure in dual-use, high-risk domains such as cyber and bio, where the safety boundary is hard to specify precisely. Helpful-only reasoning models from the GPT-5.6 Sol family act as attackers in a PAIR-like automated red-teaming harness, iteratively rewriting seed prompts against GPT-5.4 and 5.5 with scaled-up attacker test-time compute; only attacks that succeed across repeated trials (worst@n) are kept as adversarial training data for RL. In controlled experiments, trained models were more robust both to a fixed jailbreak set from unseen attackers and to 12 adaptive multi-turn attacker personas, and the method has been used for GPT-6 Astra and Sol. Without production safeguards, GPT-6 Astra answered safely on 91.5% of a fixed cyber jailbreak set versus 59% for GPT-5.6 Sol; the post says benign refusals did not rise, a Pareto improvement in safety and helpfulness, and that adding attacker training tasks such as GPT-Red markedly improves attack efficiency. Figures are OpenAI's own; the full paper was not read. Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "openai",
-              "url": "https://alignment.openai.com/fuzzy-robustness/",
-              "title": "OpenAI 对齐博客：用自动化红队提升『模糊鲁棒性』，worst@n 筛选越狱数据训练 GPT-6 Astra/Sol",
-              "brief": {
-                "zh": "OpenAI Alignment 博客（11-12，Kaiwen Wang 等 7 人，附论文）提出 fuzzy robustness：在网络、生物等双用途高风险领域，安全边界难以精确定义时，模型在对抗压力下仍不给违禁协助的可靠程度。做法：让 GPT-5.6 Sol 家族的 helpful-only 推理模型当攻击者，在类 PAIR 的自动红队 harness 里迭代改写种子提示去攻击 GPT-5.4/5.5，并扩大攻击者测试时算力；只保留多次重复都成功的攻击（worst@n）作为对抗训练数据进入 RL。对照实验中，训练后的模型对未见攻击者生成的固定越狱集和 12 种自适应多轮攻击者人设都更鲁棒；该方法已用于 GPT-6 Astra 与 Sol。不含生产防护时，cyber 固定越狱集上 GPT-6 Astra 安全回答 91.5%，GPT-5.6 Sol 为 59%；称良性请求拒答未上升，安全与有用性呈 Pareto 改进；在攻击者训练任务中加入 GPT-Red 等可显著提升攻击效率。数字为 OpenAI 自报，完整论文未读。仅 Chaos。",
-                "en": "An OpenAI Alignment blog post (Nov 12; Kaiwen Wang and six co-authors, with a paper) defines fuzzy robustness: how reliably a model withholds prohibited help under adversarial pressure in dual-use, high-risk domains such as cyber and bio, where the safety boundary is hard to specify precisely. Helpful-only reasoning models from the GPT-5.6 Sol family act as attackers in a PAIR-like automated red-teaming harness, iteratively rewriting seed prompts against GPT-5.4 and 5.5 with scaled-up attacker test-time compute; only attacks that succeed across repeated trials (worst@n) are kept as adversarial training data for RL. In controlled experiments, trained models were more robust both to a fixed jailbreak set from unseen attackers and to 12 adaptive multi-turn attacker personas, and the method has been used for GPT-6 Astra and Sol. Without production safeguards, GPT-6 Astra answered safely on 91.5% of a fixed cyber jailbreak set versus 59% for GPT-5.6 Sol; the post says benign refusals did not rise, a Pareto improvement in safety and helpfulness, and that adding attacker training tasks such as GPT-Red markedly improves attack efficiency. Figures are OpenAI's own; the full paper was not read. Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "openai"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://alignment.openai.com/fuzzy-robustness/"
-          ]
-        },
-        {
-          "id": "t889",
-          "theme": "models",
-          "title": {
-            "zh": "Checkpoint 取证：Will DePue 称 DeepSeek、Moonshot、MiniMax、蚂蚁 2026 年 4 月以来六个模型的权重带有出口管制 Blackwell GPU 的数值指纹（单方技术报告）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Unemployment Labs 的 Will DePue（11-12，HN 163/43）发布取证报告：仅凭公开权重，从模型中还原初始化值的痕迹，再搜索能复现这些痕迹的硬件配置与初始化配置，以此推断模型是在哪类芯片上「起步」的。结论：DeepSeek-V4-Flash、DeepSeek-V4-Pro、Kimi K3、Kimi K3.1-Pro、MiniMax-M3、Ling-3.1-flash 六个 2026 年 4 月以来发布的模型与 NVIDIA Blackwell（B200/B300 的 148 个 SM 或 GB200/GB300 的 152 个 SM）匹配，而同公司更早的 DeepSeek-V3、Kimi K2/K2.5、MiniMax-M2.7、Ling-3.0-flash 与 Hopper 匹配；DeepSeek-V4-Flash 与 Kimi K3 还在实体 Blackwell 上确认了匹配。作者称特殊配置的 AMD 硬件是唯一替代解释，已对 V4-Flash 排除、其余五个认为极不可能；Kimi K3.1-Pro 与 K3 同种子，可能是其后训练检查点。报告明确说指纹表明权重如何生成、支持但不证明 Blackwell 也承担了训练，且不能说明芯片位置、获取途径或是否违反出口管制。复现脚本仅应要求提供给审稿人。单方技术报告，未经独立复核，仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Unemployment Labs 的 Will DePue（11-12，HN 163/43）发布取证报告：仅凭公开权重，从模型中还原初始化值的痕迹，再搜索能复现这些痕迹的硬件配置与初始化配置，以此推断模型是在哪类芯片上「起步」的。结论：DeepSeek-V4-Flash、DeepSeek-V4-Pro、Kimi K3、Kimi K3.1-Pro、MiniMax-M3、Ling-3.1-flash 六个 2026 年 4 月以来发布的模型与 NVIDIA Blackwell（B200/B300 的 148 个 SM 或 GB200/GB300 的 152 个 SM）匹配，而同公司更早的 DeepSeek-V3、Kimi K2/K2.5、MiniMax-M2.7、Ling-3.0-flash 与 Hopper 匹配；DeepSeek-V4-Flash 与 Kimi K3 还在实体 Blackwell 上确认了匹配。作者称特殊配置的 AMD 硬件是唯一替代解释，已对 V4-Flash 排除、其余五个认为极不可能；Kimi K3.1-Pro 与 K3 同种子，可能是其后训练检查点。报告明确说指纹表明权重如何生成、支持但不证明 Blackwell 也承担了训练，且不能说明芯片位置、获取途径或是否违反出口管制。复现脚本仅应要求提供给审稿人。单方技术报告，未经独立复核，仅 Chaos。",
-            "en": "Will DePue of Unemployment Labs (Nov 12, HN 163/43) published a forensic report that works only from published weights: it recovers traces of each model's initial values, then searches for hardware and initialization configurations that reproduce them, inferring what class of chip a model was started on. It finds that six models released since April 2026, DeepSeek-V4-Flash, DeepSeek-V4-Pro, Kimi K3, Kimi K3.1-Pro, MiniMax-M3 and Ling-3.1-flash, match NVIDIA Blackwell (148 SMs for B200/B300 or 152 for GB200/GB300), while earlier models from the same labs, DeepSeek-V3, Kimi K2 and K2.5, MiniMax-M2.7 and Ling-3.0-flash, match Hopper; for DeepSeek-V4-Flash and Kimi K3 the match was also confirmed on physical Blackwell chips. Specially configured AMD hardware is the only alternative the author identifies, excluded for V4-Flash and judged very unlikely for the other five; Kimi K3.1-Pro shares K3's seed and may be a further post-trained checkpoint. The report states the fingerprint shows how the weights were created and supports, without proving, that Blackwell also did the training, and that it does not establish where the chips were, how access was obtained, or whether export controls were violated. Reproduction scripts are available to reviewers on request only. A single-author technical report, not independently verified. Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://unemploymentlabs.com/checkpoint-forensics",
-              "title": "Chinese frontier AI models carry the fingerprint of export-controlled GPUs",
-              "brief": {
-                "zh": "Unemployment Labs 的 Will DePue（11-12，HN 163/43）发布取证报告：仅凭公开权重，从模型中还原初始化值的痕迹，再搜索能复现这些痕迹的硬件配置与初始化配置，以此推断模型是在哪类芯片上「起步」的。结论：DeepSeek-V4-Flash、DeepSeek-V4-Pro、Kimi K3、Kimi K3.1-Pro、MiniMax-M3、Ling-3.1-flash 六个 2026 年 4 月以来发布的模型与 NVIDIA Blackwell（B200/B300 的 148 个 SM 或 GB200/GB300 的 152 个 SM）匹配，而同公司更早的 DeepSeek-V3、Kimi K2/K2.5、MiniMax-M2.7、Ling-3.0-flash 与 Hopper 匹配；DeepSeek-V4-Flash 与 Kimi K3 还在实体 Blackwell 上确认了匹配。作者称特殊配置的 AMD 硬件是唯一替代解释，已对 V4-Flash 排除、其余五个认为极不可能；Kimi K3.1-Pro 与 K3 同种子，可能是其后训练检查点。报告明确说指纹表明权重如何生成、支持但不证明 Blackwell 也承担了训练，且不能说明芯片位置、获取途径或是否违反出口管制。复现脚本仅应要求提供给审稿人。单方技术报告，未经独立复核，仅 Chaos。",
-                "en": "Will DePue of Unemployment Labs (Nov 12, HN 163/43) published a forensic report that works only from published weights: it recovers traces of each model's initial values, then searches for hardware and initialization configurations that reproduce them, inferring what class of chip a model was started on. It finds that six models released since April 2026, DeepSeek-V4-Flash, DeepSeek-V4-Pro, Kimi K3, Kimi K3.1-Pro, MiniMax-M3 and Ling-3.1-flash, match NVIDIA Blackwell (148 SMs for B200/B300 or 152 for GB200/GB300), while earlier models from the same labs, DeepSeek-V3, Kimi K2 and K2.5, MiniMax-M2.7 and Ling-3.0-flash, match Hopper; for DeepSeek-V4-Flash and Kimi K3 the match was also confirmed on physical Blackwell chips. Specially configured AMD hardware is the only alternative the author identifies, excluded for V4-Flash and judged very unlikely for the other five; Kimi K3.1-Pro shares K3's seed and may be a further post-trained checkpoint. The report states the fingerprint shows how the weights were created and supports, without proving, that Blackwell also did the training, and that it does not establish where the chips were, how access was obtained, or whether export controls were violated. Reproduction scripts are available to reviewers on request only. A single-author technical report, not independently verified. Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://unemploymentlabs.com/checkpoint-forensics"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-12T10:00:00+08:00",
-      "label": {
-        "zh": "11月12日 10:00",
-        "en": "Nov 12 10:00",
-        "ja": "11月12日 10:00"
-      },
-      "items": [
-        {
-          "id": "t708",
-          "theme": "research",
-          "title": {
-            "zh": "可解释性三连：SAE 批判性综述（138 篇）× Goodfire「Neural networks are clean」× 追溯并切除 LLM「slop」文风",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "多来源综合候选：综述 + 产业研究 + 社区实证三角，能写「SAE/可解释性是否已可用于改行为」；待 Trends bot 测主词。 10-16 Trends（trends bot）：「sparse autoencoders」7d 0.21 / 24h 0.45 vs gpts 65.33 / 13.50 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Goodfire」7d 0.10 vs gpts 0.84 未过。 Goodfire 研究文（11-10，Tigges、Kowal、McGrath、Lewis、Cammarata）《Neurons as an interpretable basis》挑战「MLP 神经元天然多义、不可解释」的通行看法：以 SwiGLU 神经元为对象，论证按激活强度稀疏化后神经元处于可解释区间；用子电路把神经元计算聚成若干「模式」（含双负激活恢复推理、地名多义消歧等案例，并与随机方向基线对比）；用 agentic neuron science 自动生成描述，并以检测、模式分类、模拟、输入合成评估；配套公开神经元图谱。主张直接用神经元替代 SAE 字典作分析单位，与本行 SAE 批判综述及 Goodfire「Neural networks are clean」同一条线，也可对照 t875（海量激活带偏 SAE）。本轮只读到摘要、作者、日期与目录，数据表未读，结论未核。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "多来源综合候选：综述 + 产业研究 + 社区实证三角，能写「SAE/可解释性是否已可用于改行为」；待 Trends bot 测主词。 10-16 Trends（trends bot）：「sparse autoencoders」7d 0.21 / 24h 0.45 vs gpts 65.33 / 13.50 未过，留 inbox。 10-18 Trends（trends bot, 7d）：「Goodfire」7d 0.10 vs gpts 0.84 未过。 Goodfire 研究文（11-10，Tigges、Kowal、McGrath、Lewis、Cammarata）《Neurons as an interpretable basis》挑战「MLP 神经元天然多义、不可解释」的通行看法：以 SwiGLU 神经元为对象，论证按激活强度稀疏化后神经元处于可解释区间；用子电路把神经元计算聚成若干「模式」（含双负激活恢复推理、地名多义消歧等案例，并与随机方向基线对比）；用 agentic neuron science 自动生成描述，并以检测、模式分类、模拟、输入合成评估；配套公开神经元图谱。主张直接用神经元替代 SAE 字典作分析单位，与本行 SAE 批判综述及 Goodfire「Neural networks are clean」同一条线，也可对照 t875（海量激活带偏 SAE）。本轮只读到摘要、作者、日期与目录，数据表未读，结论未核。",
-            "en": "Synthesis candidate: SAE critical survey + Goodfire + slop-tracing; awaiting Trends bot on its own term. 10-16 Trends (trends bot): sparse autoencoders 7d 0.21 / 24h 0.45 vs gpts 65.33 / 13.50 — not passed, stays inbox. 10-18 Trends (trends bot, 7d): \"Goodfire\" 7d 0.10 vs gpts 0.84 — not passed. Goodfire research post (Nov 10; Tigges, Kowal, McGrath, Lewis, Cammarata), \"Neurons as an interpretable basis,\" challenges the common view that MLP neurons are inherently polysemantic and uninterpretable. Working with SwiGLU neurons, it argues that once sparsified by activation strength they fall in an interpretable regime; it groups neuron computation into a few modes via subcircuits (with cases such as double-negative activations restoring reasoning and place-name disambiguation, compared against random-direction baselines); it generates descriptions with an agentic neuron-science pipeline evaluated by detection, mode classification, simulation and input synthesis; and it releases a public neuron atlas. The post proposes neurons rather than SAE dictionaries as the unit of analysis, continuing this row's SAE critique and Goodfire's \"Neural networks are clean,\" and contrasting with t875 on massive activations confounding SAEs. Only the abstract, authors, date and contents were read this sweep; data tables were not, and claims are unverified.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.20139",
-              "title": "Sparse Autoencoders for Mechanistic Interpretability in NLP: A Critical Survey of Recoverability, Interpretability, and Utility",
-              "brief": {
-                "zh": "深耕候选：梳理138篇 SAE 研究的批判性综述，给出任务导向的分类法，并分别审视可恢复性、可解释性、机制忠实度和行为效用的证据，正好借此做一篇「SAE 到底靠不靠谱」的综合解读。",
-                "en": "Critical survey of 138 SAE papers with a task-oriented taxonomy, assessing recoverability, interpretability, mechanistic faithfulness and behavioral utility.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://already-clean.goodfire.com/",
-              "title": "Neural networks are clean",
-              "brief": {
-                "zh": "Goodfire 可解释性研究，HN 501 分",
-                "en": "Goodfire interpretability essay \"Neural networks are clean\"; HN 501 points / 196 comments.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/MachineLearning/comments/1x64lbk/tracing_where_llm_slop_style_comes_from_in_the/",
-              "title": "Tracing where LLM 'slop' style comes from in the model and in training, and cutting it out [R]",
-              "brief": {
-                "zh": "追溯 LLM「slop」文风在模型与训练中的来源并切除",
-                "en": "r/MachineLearning research post tracing where LLM 'slop' style originates in the model and training, and removing it.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://www.goodfire.com/research/neurons-as-an-interpretable-basis",
-              "title": "Goodfire：MLP 神经元本身就是可解释基——稀疏、可简洁描述、可预测（附神经元图谱与 agentic 描述流程）",
-              "brief": {
-                "zh": "Goodfire 研究文（11-10，Tigges、Kowal、McGrath、Lewis、Cammarata）《Neurons as an interpretable basis》挑战「MLP 神经元天然多义、不可解释」的通行看法：以 SwiGLU 神经元为对象，论证按激活强度稀疏化后神经元处于可解释区间；用子电路把神经元计算聚成若干「模式」（含双负激活恢复推理、地名多义消歧等案例，并与随机方向基线对比）；用 agentic neuron science 自动生成描述，并以检测、模式分类、模拟、输入合成评估；配套公开神经元图谱。主张直接用神经元替代 SAE 字典作分析单位，与本行 SAE 批判综述及 Goodfire「Neural networks are clean」同一条线，也可对照 t875（海量激活带偏 SAE）。本轮只读到摘要、作者、日期与目录，数据表未读，结论未核。",
-                "en": "Goodfire research post (Nov 10; Tigges, Kowal, McGrath, Lewis, Cammarata), \"Neurons as an interpretable basis,\" challenges the common view that MLP neurons are inherently polysemantic and uninterpretable. Working with SwiGLU neurons, it argues that once sparsified by activation strength they fall in an interpretable regime; it groups neuron computation into a few modes via subcircuits (with cases such as double-negative activations restoring reasoning and place-name disambiguation, compared against random-direction baselines); it generates descriptions with an agentic neuron-science pipeline evaluated by detection, mode classification, simulation and input synthesis; and it releases a public neuron atlas. The post proposes neurons rather than SAE dictionaries as the unit of analysis, continuing this row's SAE critique and Goodfire's \"Neural networks are clean,\" and contrasting with t875 on massive activations confounding SAEs. Only the abstract, authors, date and contents were read this sweep; data tables were not, and claims are unverified.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv",
-            "hn",
-            "reddit",
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.20139",
-            "https://already-clean.goodfire.com/",
-            "https://www.reddit.com/r/MachineLearning/comments/1x64lbk/tracing_where_llm_slop_style_comes_from_in_the/",
-            "https://www.goodfire.com/research/neurons-as-an-interpretable-basis"
-          ]
-        },
-        {
-          "id": "t824",
-          "theme": "models",
-          "title": {
-            "zh": "Astra 直接读写权重来改进 Qwen：「权重空间编程」——让 LLM 把神经网络权重当成可读可改的程序（HN 当日最高 1909/605；r/ML「Sparks of Weight-Space Programming」同步热议）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "单篇深读候选：LLM 读写权重改进 Qwen；正文与数字待核，缺可靠核心词。续源：Honnibal 反驳 × Willison 本地复现。 Nathan Barry 博客（11-09，HN 241/36）《Can a Linear Program Do Weight-Space Programming?》复读 MIT CSAIL「Sparks of Weight-Space Programming」中 GPT-6 Astra 改 Qwen3.5-0.8B 权重的公开日志：该编辑本质是修复思维死循环（基座在 MATH-500 上 93% 答案撞到 32,768 token 上限），做法是在第 15、19 层 down_proj 上沿「循环方向」u 做秩 1 修改；Astra 找 u 用 15 分钟，选哪些列、改多少花了约 8 小时。作者把选列问题写成最小化 L1 的线性规划，用自写 GPU PDHG 求解器约一分钟一次：用 Astra 的方向，改动权重从 130,188 降到 16,291（约 1/8），GSM8K 69.6、MATH-500 51.7、IFEval 59.7，与 Astra 的 68.2/50.9/61.9 在噪声内持平；不用 LLM、改用重复检测器得到的启发式方向，可达约 93%。随机方向无效。进一步发现该编辑接近对每个 token 的恒定推力，同等强度的 steering vector 在 1× 时几乎复现全部效果（0.5× 循环回来，2× 推理崩坏）。作者自认局限：只测一个模型，层仍沿用 Astra 的选择，只测了去循环。补本行正反材料：「权重空间编程」这次的成果在机制上可还原为一个方向加一个 LP，支持「不是 Astra 独有能力」的读法。数字为作者自报，未复现。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇深读候选：LLM 读写权重改进 Qwen；正文与数字待核，缺可靠核心词。续源：Honnibal 反驳 × Willison 本地复现。 Nathan Barry 博客（11-09，HN 241/36）《Can a Linear Program Do Weight-Space Programming?》复读 MIT CSAIL「Sparks of Weight-Space Programming」中 GPT-6 Astra 改 Qwen3.5-0.8B 权重的公开日志：该编辑本质是修复思维死循环（基座在 MATH-500 上 93% 答案撞到 32,768 token 上限），做法是在第 15、19 层 down_proj 上沿「循环方向」u 做秩 1 修改；Astra 找 u 用 15 分钟，选哪些列、改多少花了约 8 小时。作者把选列问题写成最小化 L1 的线性规划，用自写 GPU PDHG 求解器约一分钟一次：用 Astra 的方向，改动权重从 130,188 降到 16,291（约 1/8），GSM8K 69.6、MATH-500 51.7、IFEval 59.7，与 Astra 的 68.2/50.9/61.9 在噪声内持平；不用 LLM、改用重复检测器得到的启发式方向，可达约 93%。随机方向无效。进一步发现该编辑接近对每个 token 的恒定推力，同等强度的 steering vector 在 1× 时几乎复现全部效果（0.5× 循环回来，2× 推理崩坏）。作者自认局限：只测一个模型，层仍沿用 Astra 的选择，只测了去循环。补本行正反材料：「权重空间编程」这次的成果在机制上可还原为一个方向加一个 LP，支持「不是 Astra 独有能力」的读法。数字为作者自报，未复现。",
-            "en": "Deep-read candidate: an LLM that reads and writes weights to improve Qwen; details unverified, no reliable core term. Follow-up: Honnibal says the Astra post is misleading; Willison shows a local Qwen 3.8 27B can interpret weights too. Nathan Barry's post (Nov 9, HN 241/36), \"Can a Linear Program Do Weight-Space Programming?\", rereads the released logs of GPT-6 Astra editing Qwen3.5-0.8B in MIT CSAIL's \"Sparks of Weight-Space Programming.\" The edit mainly fixes thinking loops (93% of base-model MATH-500 answers hit the 32,768-token limit) through a rank-1 change along a loop direction u in the down_proj of layers 15 and 19; Astra found u in 15 minutes but spent about 8 hours choosing which columns to change and by how much. Barry casts that choice as an L1-minimizing linear program solved in about a minute with a custom GPU PDHG solver. Using Astra's direction, changed weights fall from 130,188 to 16,291 (about 8x fewer) with GSM8K 69.6, MATH-500 51.7 and IFEval 59.7, matching Astra's 68.2, 50.9 and 61.9 within noise; a heuristic direction from a repetition detector, with no LLM, gets about 93% of the way. A random direction does nothing. The edit turns out to be close to a constant push on every token, and a steering vector of the same average strength recovers essentially the whole fix at 1x (loops return at 0.5x, reasoning breaks at 2x). Stated limits: one model, layers still taken from Astra, only loop removal tested. Adds evidence to this row that the headline result reduces to one direction plus an LP, supporting the reading that it is not a capability unique to Astra. Self-reported, not reproduced.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://rikiyat.github.io/blog/weight-space-programming/",
-              "title": "Astra can read and write weights to improve Qwen",
-              "brief": {
-                "zh": "HN 当日最高帖（1909 分/605 评）：「权重空间编程」——让 LLM 直接读写神经网络权重来改进 Qwen；r/MachineLearning 同步帖 Sparks of Weight-Space Programming [R] 也在热议。适合做机制深读。",
-                "en": "Astra can read and write weights to improve Qwen",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://honnibal.dev/blog/astra-read-write-misleading",
-              "title": "The 'Astra can read and write weights to improve Qwen' post is misleading",
-              "brief": {
-                "zh": "Matthew Honnibal 反驳昨日 HN 第一的 Astra 权重空间编程帖（inbox 已有 astra-weight-space-programming-qwen），称其误导；正反两方可合成一篇深读。",
-                "en": "The 'Astra can read and write weights to improve Qwen' post is misleading",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
-              "title": "Qwen 3.8 27B on my laptop can interpret model weights, too",
-              "brief": {
-                "zh": "Simon Willison 在笔记本上用 Qwen 3.8 27B 复现「模型读权重」；与 Astra 原帖及 Honnibal 反驳同一条线。",
-                "en": "Qwen 3.8 27B on my laptop can interpret model weights, too",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://nathan.rs/posts/weight-space-lp/",
-              "title": "Can a Linear Program Do Weight-Space Programming?",
-              "brief": {
-                "zh": "Nathan Barry 博客（11-09，HN 241/36）《Can a Linear Program Do Weight-Space Programming?》复读 MIT CSAIL「Sparks of Weight-Space Programming」中 GPT-6 Astra 改 Qwen3.5-0.8B 权重的公开日志：该编辑本质是修复思维死循环（基座在 MATH-500 上 93% 答案撞到 32,768 token 上限），做法是在第 15、19 层 down_proj 上沿「循环方向」u 做秩 1 修改；Astra 找 u 用 15 分钟，选哪些列、改多少花了约 8 小时。作者把选列问题写成最小化 L1 的线性规划，用自写 GPU PDHG 求解器约一分钟一次：用 Astra 的方向，改动权重从 130,188 降到 16,291（约 1/8），GSM8K 69.6、MATH-500 51.7、IFEval 59.7，与 Astra 的 68.2/50.9/61.9 在噪声内持平；不用 LLM、改用重复检测器得到的启发式方向，可达约 93%。随机方向无效。进一步发现该编辑接近对每个 token 的恒定推力，同等强度的 steering vector 在 1× 时几乎复现全部效果（0.5× 循环回来，2× 推理崩坏）。作者自认局限：只测一个模型，层仍沿用 Astra 的选择，只测了去循环。补本行正反材料：「权重空间编程」这次的成果在机制上可还原为一个方向加一个 LP，支持「不是 Astra 独有能力」的读法。数字为作者自报，未复现。",
-                "en": "Nathan Barry's post (Nov 9, HN 241/36), \"Can a Linear Program Do Weight-Space Programming?\", rereads the released logs of GPT-6 Astra editing Qwen3.5-0.8B in MIT CSAIL's \"Sparks of Weight-Space Programming.\" The edit mainly fixes thinking loops (93% of base-model MATH-500 answers hit the 32,768-token limit) through a rank-1 change along a loop direction u in the down_proj of layers 15 and 19; Astra found u in 15 minutes but spent about 8 hours choosing which columns to change and by how much. Barry casts that choice as an L1-minimizing linear program solved in about a minute with a custom GPU PDHG solver. Using Astra's direction, changed weights fall from 130,188 to 16,291 (about 8x fewer) with GSM8K 69.6, MATH-500 51.7 and IFEval 59.7, matching Astra's 68.2, 50.9 and 61.9 within noise; a heuristic direction from a repetition detector, with no LLM, gets about 93% of the way. A random direction does nothing. The edit turns out to be close to a constant push on every token, and a steering vector of the same average strength recovers essentially the whole fix at 1x (loops return at 0.5x, reasoning breaks at 2x). Stated limits: one model, layers still taken from Astra, only loop removal tested. Adds evidence to this row that the headline result reduces to one direction plus an LP, supporting the reading that it is not a capability unique to Astra. Self-reported, not reproduced.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://rikiyat.github.io/blog/weight-space-programming/",
-            "https://honnibal.dev/blog/astra-read-write-misleading",
-            "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
-            "https://nathan.rs/posts/weight-space-lp/"
-          ]
-        },
-        {
-          "id": "t878",
-          "theme": "models",
-          "title": {
-            "zh": "Google A2UI 1.0：智能体生成式 UI 开放协议首个稳定版（双向函数调用、可在 MCP Apps 内渲染）",
-            "en": "Google A2UI 1.0",
-            "ja": "Google A2UI 1.0"
-          },
-          "summary": {
-            "zh": "Google A2UI Team（11-11 美西）在 Google Developers Blog 发布 A2UI 1.0，自称生成式 UI 开放协议的首个稳定版：agent 只描述要显示什么，各端用原生组件渲染。1.0 新增双向函数调用（UI 与 agent 互调，例如实时查询可用性的选择器）、可访问性与元数据扩展；渲染器覆盖 React/Angular/Lit、Flutter、SwiftUI（Compose 仍为 0.9.1）；Web 与 Flutter 渲染器可在 MCP Apps 中运行，因而能出现在 Claude、Gemini 等宿主里；Python/TypeScript/Dart Agent SDK 可为 agent harness 生成 skills、翻译消息并纠错。路线图提到对 Jev 等决策模型的官方 SDK 支持；自称 Atlassian、Alation、Bloomberg、字节跳动已在用。官方正文本轮只经搜索摘要读到，IT之家为二手转述；采用方与能力均为自报，未核。单点发布，仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Google A2UI Team（11-11 美西）在 Google Developers Blog 发布 A2UI 1.0，自称生成式 UI 开放协议的首个稳定版：agent 只描述要显示什么，各端用原生组件渲染。1.0 新增双向函数调用（UI 与 agent 互调，例如实时查询可用性的选择器）、可访问性与元数据扩展；渲染器覆盖 React/Angular/Lit、Flutter、SwiftUI（Compose 仍为 0.9.1）；Web 与 Flutter 渲染器可在 MCP Apps 中运行，因而能出现在 Claude、Gemini 等宿主里；Python/TypeScript/Dart Agent SDK 可为 agent harness 生成 skills、翻译消息并纠错。路线图提到对 Jev 等决策模型的官方 SDK 支持；自称 Atlassian、Alation、Bloomberg、字节跳动已在用。官方正文本轮只经搜索摘要读到，IT之家为二手转述；采用方与能力均为自报，未核。单点发布，仅 Chaos。",
-            "en": "The Google A2UI Team announced A2UI 1.0 on the Google Developers Blog (Nov 11, US Pacific), calling it the first stable release of an open protocol for agent-generated UI: the agent describes what to show and each client renders it with native components. Version 1.0 adds bidirectional function calls between UI and agent (for example a picker that checks availability live), plus accessibility and metadata extensions. Renderers cover React, Angular, Lit, Flutter and SwiftUI (Compose remains at 0.9.1); the web and Flutter renderers can run inside MCP Apps, so A2UI surfaces can appear in hosts such as Claude and Gemini. Python, TypeScript and Dart Agent SDKs can generate skills for an agent harness, translate messages and repair errors. The roadmap mentions official SDK support for decision models such as Jev, and Google names Atlassian, Alation, Bloomberg and ByteDance as users. The official post was read only through a search excerpt this sweep, and the ITHome piece is a secondary rewrite; adopters and capabilities are self-reported and unverified. Single release, Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://developers.googleblog.com/a2ui-10-build-delightful-fast-reliable-agentic-experiences/",
-              "title": "Google A2UI 1.0：智能体生成式 UI 开放协议首个稳定版（双向函数调用、MCP Apps 内渲染、Agent SDK 生成 skills）",
-              "brief": {
-                "zh": "Google A2UI Team（11-11 美西）在 Google Developers Blog 发布 A2UI 1.0，自称生成式 UI 开放协议的首个稳定版：agent 只描述要显示什么，各端用原生组件渲染。1.0 新增双向函数调用（UI 与 agent 互调，例如实时查询可用性的选择器）、可访问性与元数据扩展；渲染器覆盖 React/Angular/Lit、Flutter、SwiftUI（Compose 仍为 0.9.1）；Web 与 Flutter 渲染器可在 MCP Apps 中运行，因而能出现在 Claude、Gemini 等宿主里；Python/TypeScript/Dart Agent SDK 可为 agent harness 生成 skills、翻译消息并纠错。路线图提到对 Jev 等决策模型的官方 SDK 支持；自称 Atlassian、Alation、Bloomberg、字节跳动已在用。官方正文本轮只经搜索摘要读到，IT之家为二手转述；采用方与能力均为自报，未核。单点发布，仅 Chaos。",
-                "en": "The Google A2UI Team announced A2UI 1.0 on the Google Developers Blog (Nov 11, US Pacific), calling it the first stable release of an open protocol for agent-generated UI: the agent describes what to show and each client renders it with native components. Version 1.0 adds bidirectional function calls between UI and agent (for example a picker that checks availability live), plus accessibility and metadata extensions. Renderers cover React, Angular, Lit, Flutter and SwiftUI (Compose remains at 0.9.1); the web and Flutter renderers can run inside MCP Apps, so A2UI surfaces can appear in hosts such as Claude and Gemini. Python, TypeScript and Dart Agent SDKs can generate skills for an agent harness, translate messages and repair errors. The roadmap mentions official SDK support for decision models such as Jev, and Google names Atlassian, Alation, Bloomberg and ByteDance as users. The official post was read only through a search excerpt this sweep, and the ITHome piece is a secondary rewrite; adopters and capabilities are self-reported and unverified. Single release, Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://developers.googleblog.com/a2ui-10-build-delightful-fast-reliable-agentic-experiences/"
-          ]
-        },
-        {
-          "id": "t879",
-          "theme": "security",
-          "title": {
-            "zh": "Google 发布 Gemini Decisions API 与 Gemini Decision 1：单次前向给封闭选项打分，$0.10/百万输入、输出不计费（官方自报）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Google 官方博客（11-11，DeepMind 的 Min Choi 与 Felix Yu）发布 Gemini Decisions API，由新模型 Gemini Decision 1（gemini-decision-1）驱动，经 Google AI Studio 的 Gemini API 提供。它面向工具选择、策略检查、模型路由、上下文评分这类封闭选择：一份多模态输入（文本、图像、音频、视频、PDF，最长 256K token）可同时挂最多 1,000 个独立问题，题型为是/否（noul）、2–255 选一（choice）与有序评分（score），每个答案带 0–1 置信度。模型不逐 token 生成，而是单次前向给候选打分；官方称端到端延迟 150–250 ms，1 到 100 个问题几乎不变，价格 $0.10/百万输入 token、输出不计费，在共享基准上比 Gemini 3.5 Flash-Lite 走 Interactions API 便宜近 5 倍，并称在 agent 路由、推理、排序、多模态基准上领先、校准误差最低。内部用例包括 Gemini Notebook 的模型路由（日常查询延迟最多降 40%）、Stitch 快速线框、CC 的表情选择、Search 中 MCP 工具的安全层。OpenRouter、LangChain、Vercel、LiteLLM、OpenCode 等集成在推进。HN 266/82。基准与延迟均为 Google 自报，未独立核实。单点发布，仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Google 官方博客（11-11，DeepMind 的 Min Choi 与 Felix Yu）发布 Gemini Decisions API，由新模型 Gemini Decision 1（gemini-decision-1）驱动，经 Google AI Studio 的 Gemini API 提供。它面向工具选择、策略检查、模型路由、上下文评分这类封闭选择：一份多模态输入（文本、图像、音频、视频、PDF，最长 256K token）可同时挂最多 1,000 个独立问题，题型为是/否（noul）、2–255 选一（choice）与有序评分（score），每个答案带 0–1 置信度。模型不逐 token 生成，而是单次前向给候选打分；官方称端到端延迟 150–250 ms，1 到 100 个问题几乎不变，价格 $0.10/百万输入 token、输出不计费，在共享基准上比 Gemini 3.5 Flash-Lite 走 Interactions API 便宜近 5 倍，并称在 agent 路由、推理、排序、多模态基准上领先、校准误差最低。内部用例包括 Gemini Notebook 的模型路由（日常查询延迟最多降 40%）、Stitch 快速线框、CC 的表情选择、Search 中 MCP 工具的安全层。OpenRouter、LangChain、Vercel、LiteLLM、OpenCode 等集成在推进。HN 266/82。基准与延迟均为 Google 自报，未独立核实。单点发布，仅 Chaos。",
-            "en": "A Google blog post dated Nov 11 (Min Choi and Felix Yu of Google DeepMind) introduces the Gemini Decisions API, powered by a new Gemini Decision 1 model (gemini-decision-1) in the Gemini API via Google AI Studio. It targets bounded choices such as tool selection, policy checks, model routing and context grading: one multimodal input (text, images, audio, video or PDF, up to 256K tokens) can carry up to 1,000 independent questions of three types, yes/no (noul), multiple choice over 2 to 255 options, and ordered rubric scores, each returned with a 0-1 confidence. The model scores options in a single forward pass instead of decoding tokens; Google claims 150-250 ms end-to-end latency that stays nearly flat from 1 to 100 questions, pricing of $0.10 per million input tokens with no output tokens billed, nearly 5x lower cost than Gemini 3.5 Flash-Lite through the Interactions API on a shared suite, and leading accuracy with the lowest calibration error on routing, reasoning, ranking and multimodal benchmarks. Internal uses include model routing in Gemini Notebook (up to 40% lower latency for everyday queries), rapid wireframes in Stitch, emoji picking in CC, and a safety layer for MCP tools in Search. Integrations with OpenRouter, LangChain, Vercel, LiteLLM, OpenCode and others are rolling out. HN 266/82. Benchmarks, latency and cost claims are Google's own and were not independently verified. Single launch, Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
-              "title": "Gemini Decisions API",
-              "brief": {
-                "zh": "Google 官方博客（11-11，DeepMind 的 Min Choi 与 Felix Yu）发布 Gemini Decisions API，由新模型 Gemini Decision 1（gemini-decision-1）驱动，经 Google AI Studio 的 Gemini API 提供。它面向工具选择、策略检查、模型路由、上下文评分这类封闭选择：一份多模态输入（文本、图像、音频、视频、PDF，最长 256K token）可同时挂最多 1,000 个独立问题，题型为是/否（noul）、2–255 选一（choice）与有序评分（score），每个答案带 0–1 置信度。模型不逐 token 生成，而是单次前向给候选打分；官方称端到端延迟 150–250 ms，1 到 100 个问题几乎不变，价格 $0.10/百万输入 token、输出不计费，在共享基准上比 Gemini 3.5 Flash-Lite 走 Interactions API 便宜近 5 倍，并称在 agent 路由、推理、排序、多模态基准上领先、校准误差最低。内部用例包括 Gemini Notebook 的模型路由（日常查询延迟最多降 40%）、Stitch 快速线框、CC 的表情选择、Search 中 MCP 工具的安全层。OpenRouter、LangChain、Vercel、LiteLLM、OpenCode 等集成在推进。HN 266/82。基准与延迟均为 Google 自报，未独立核实。单点发布，仅 Chaos。",
-                "en": "A Google blog post dated Nov 11 (Min Choi and Felix Yu of Google DeepMind) introduces the Gemini Decisions API, powered by a new Gemini Decision 1 model (gemini-decision-1) in the Gemini API via Google AI Studio. It targets bounded choices such as tool selection, policy checks, model routing and context grading: one multimodal input (text, images, audio, video or PDF, up to 256K tokens) can carry up to 1,000 independent questions of three types, yes/no (noul), multiple choice over 2 to 255 options, and ordered rubric scores, each returned with a 0-1 confidence. The model scores options in a single forward pass instead of decoding tokens; Google claims 150-250 ms end-to-end latency that stays nearly flat from 1 to 100 questions, pricing of $0.10 per million input tokens with no output tokens billed, nearly 5x lower cost than Gemini 3.5 Flash-Lite through the Interactions API on a shared suite, and leading accuracy with the lowest calibration error on routing, reasoning, ranking and multimodal benchmarks. Internal uses include model routing in Gemini Notebook (up to 40% lower latency for everyday queries), rapid wireframes in Stitch, emoji picking in CC, and a safety layer for MCP tools in Search. Integrations with OpenRouter, LangChain, Vercel, LiteLLM, OpenCode and others are rolling out. HN 266/82. Benchmarks, latency and cost claims are Google's own and were not independently verified. Single launch, Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-11T16:00:00+08:00",
-      "label": {
-        "zh": "11月11日 16:00",
-        "en": "Nov 11 16:00",
-        "ja": "11月11日 16:00"
-      },
-      "items": [
-        {
-          "id": "t874",
-          "theme": "research",
-          "title": {
-            "zh": "失败分类占比是测量程序的属性：同一 Compositional Collapse 在六种判别顺序下可从 26.4% 到 76.4%，人对标签几乎无一致",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.13140：Beesetty 等把「失败分类占比」本身当成测量对象。他们定义 Compositional Collapse（模型注意到问题的必要子部分，随后丢掉或误用），并在公开多语数学基准的 2,316 条已评分记录上测了十二个模型、十一种语言。第一，50.1% 的失败同时带有多类证据，报告的多数类取决于分类器的检验顺序：对调两个检验会改变十二个模型中十一个的多数类，六种排序下 Collapse 占比从 26.4% 拉到 76.4%。第二，人对答案对错的一致 κ=0.932，对 Collapse 标签只有 κ=0.093；第二名母语者在 121 对可判定样本上彼此 κ=0.659，但各自与检验器 κ≤0.094。用人类说明原文重跑同一检验器后，与 Human 2 的 κ 从 0.147 升到 0.636，差距主要来自提示而非模型。第三，检验器给 Collapse 的频率是母语者的 1.81 倍，剔除孟加拉语与中文译本中一条被删从句的缺陷题后降到 1.17 倍。作者建议在跨模型比较失败模式占比前做四条廉价检查：报告标签共现、打乱平局、在共享独立样本上校验、审计系统分歧。数字均论文自报，未复现。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.13140：Beesetty 等把「失败分类占比」本身当成测量对象。他们定义 Compositional Collapse（模型注意到问题的必要子部分，随后丢掉或误用），并在公开多语数学基准的 2,316 条已评分记录上测了十二个模型、十一种语言。第一，50.1% 的失败同时带有多类证据，报告的多数类取决于分类器的检验顺序：对调两个检验会改变十二个模型中十一个的多数类，六种排序下 Collapse 占比从 26.4% 拉到 76.4%。第二，人对答案对错的一致 κ=0.932，对 Collapse 标签只有 κ=0.093；第二名母语者在 121 对可判定样本上彼此 κ=0.659，但各自与检验器 κ≤0.094。用人类说明原文重跑同一检验器后，与 Human 2 的 κ 从 0.147 升到 0.636，差距主要来自提示而非模型。第三，检验器给 Collapse 的频率是母语者的 1.81 倍，剔除孟加拉语与中文译本中一条被删从句的缺陷题后降到 1.17 倍。作者建议在跨模型比较失败模式占比前做四条廉价检查：报告标签共现、打乱平局、在共享独立样本上校验、审计系统分歧。数字均论文自报，未复现。",
-            "en": "arXiv 2611.13140: Beesetty et al. treat the reported share of a failure category as itself an object of measurement. They define Compositional Collapse (a model notices a required sub-part of a problem, then drops or misapplies it) and measure it across twelve models and eleven languages on a public multilingual math benchmark (2,316 graded records). First, 50.1% of failures carry evidence for more than one category, so the reported plurality depends on the order in which the classifier tests them: reversing two tests changes the plurality in eleven of twelve models, and across six orderings Collapse share spans 26.4% to 76.4%. Second, native speakers of all eleven languages agreed with the inspector at kappa = 0.932 on answer correctness but only kappa = 0.093 on Collapse. A second native speaker per language re-rated items; on 121 determinate pairs the two humans agree with each other at kappa = 0.659, while each agrees with the inspector at kappa <= 0.094. Re-running the same inspector with the human instructions verbatim raises kappa against Human 2 from 0.147 to 0.636, so the gap is largely attributable to the prompt, not the model. Third, the inspector labels Collapse 1.81 times as often as native speakers, but only 1.17 times once a defective benchmark item (a deleted clause in the Bengali and Chinese translations) is excluded. The authors recommend four cheap checks before comparing failure-mode rates across models: report label co-occurrence, permute the tie-break, validate on a shared independent sample, and audit systematic disagreements. Self-reported, not reproduced.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.13140",
-              "title": "Agreeing on the Answer but Not the Reason: Measurement Limits of LLM Reasoning Failure Taxonomies",
-              "brief": {
-                "zh": "arXiv 2611.13140：Beesetty 等把「失败分类占比」本身当成测量对象。他们定义 Compositional Collapse（模型注意到问题的必要子部分，随后丢掉或误用），并在公开多语数学基准的 2,316 条已评分记录上测了十二个模型、十一种语言。第一，50.1% 的失败同时带有多类证据，报告的多数类取决于分类器的检验顺序：对调两个检验会改变十二个模型中十一个的多数类，六种排序下 Collapse 占比从 26.4% 拉到 76.4%。第二，人对答案对错的一致 κ=0.932，对 Collapse 标签只有 κ=0.093；第二名母语者在 121 对可判定样本上彼此 κ=0.659，但各自与检验器 κ≤0.094。用人类说明原文重跑同一检验器后，与 Human 2 的 κ 从 0.147 升到 0.636，差距主要来自提示而非模型。第三，检验器给 Collapse 的频率是母语者的 1.81 倍，剔除孟加拉语与中文译本中一条被删从句的缺陷题后降到 1.17 倍。作者建议在跨模型比较失败模式占比前做四条廉价检查：报告标签共现、打乱平局、在共享独立样本上校验、审计系统分歧。数字均论文自报，未复现。",
-                "en": "arXiv 2611.13140: Beesetty et al. treat the reported share of a failure category as itself an object of measurement. They define Compositional Collapse (a model notices a required sub-part of a problem, then drops or misapplies it) and measure it across twelve models and eleven languages on a public multilingual math benchmark (2,316 graded records). First, 50.1% of failures carry evidence for more than one category, so the reported plurality depends on the order in which the classifier tests them: reversing two tests changes the plurality in eleven of twelve models, and across six orderings Collapse share spans 26.4% to 76.4%. Second, native speakers of all eleven languages agreed with the inspector at kappa = 0.932 on answer correctness but only kappa = 0.093 on Collapse. A second native speaker per language re-rated items; on 121 determinate pairs the two humans agree with each other at kappa = 0.659, while each agrees with the inspector at kappa <= 0.094. Re-running the same inspector with the human instructions verbatim raises kappa against Human 2 from 0.147 to 0.636, so the gap is largely attributable to the prompt, not the model. Third, the inspector labels Collapse 1.81 times as often as native speakers, but only 1.17 times once a defective benchmark item (a deleted clause in the Bengali and Chinese translations) is excluded. The authors recommend four cheap checks before comparing failure-mode rates across models: report label co-occurrence, permute the tie-break, validate on a shared independent sample, and audit systematic disagreements. Self-reported, not reproduced.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.13140"
-          ]
-        },
-        {
-          "id": "t875",
-          "theme": "research",
-          "title": {
-            "zh": "海量激活会带偏稀疏自编码器：最多 99.9% 的方差堆在第一主成分，解释方差与消融损伤两项指标都被扭曲",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.13548：Delisle 与 Tan 指出海量激活（massive activations）会把最多 99.9% 的激活方差堆到第一主成分，从而同时带偏稀疏自编码器常用的「解释方差」和「消融损伤」。因 PC1 没有唯一稀疏分解，每次训练会用不同特征去重建它：最重要的 50 个特征里平均有 47 个对不上另一次独立训练（随机抽 50 个约 27 个对不上）。一本词典可以报 99.96% 解释方差，却仍漏掉 PC1 以外 33% 的方差。作者先去掉 PC1 再训练 SAE、重建时把 PC1 加回：受影响模型上 top-50 特征共享率从 4–39.5% 升到 73–99.5%；同等 TopK 稀疏下对模型的损伤最多少 44%，内容重建误差最多降 33.9%。配套代码 github.com/nathandelisle/massive-saes。数字均论文自报，未复现。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.13548：Delisle 与 Tan 指出海量激活（massive activations）会把最多 99.9% 的激活方差堆到第一主成分，从而同时带偏稀疏自编码器常用的「解释方差」和「消融损伤」。因 PC1 没有唯一稀疏分解，每次训练会用不同特征去重建它：最重要的 50 个特征里平均有 47 个对不上另一次独立训练（随机抽 50 个约 27 个对不上）。一本词典可以报 99.96% 解释方差，却仍漏掉 PC1 以外 33% 的方差。作者先去掉 PC1 再训练 SAE、重建时把 PC1 加回：受影响模型上 top-50 特征共享率从 4–39.5% 升到 73–99.5%；同等 TopK 稀疏下对模型的损伤最多少 44%，内容重建误差最多降 33.9%。配套代码 github.com/nathandelisle/massive-saes。数字均论文自报，未复现。",
-            "en": "arXiv 2611.13548: Delisle and Tan show that massive activations put up to 99.9% of activation variance along the first principal component (PC1), which undermines the two metrics commonly used to evaluate sparse autoencoders: variance explained and ablation damage. Because PC1 has no unique sparse decomposition, each SAE run rebuilds it from a different set of features. On average, 47 of the 50 most important features are unmatched in a separate run, compared with about 27 of a random 50. A dictionary can report 99.96% of variance explained while leaving 33% of the variance outside PC1 unexplained. The authors train the SAE on activations with PC1 removed, then add PC1 back to the reconstruction. In affected models, the top-50 feature sharing rate rises from 4-39.5% to 73-99.5%. At the same TopK sparsity, the resulting SAE degrades the model up to 44% less and reduces content reconstruction error by up to 33.9%. Code is at github.com/nathandelisle/massive-saes. Self-reported, not reproduced.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.13548",
-              "title": "Massive Activations Confound Sparse Autoencoders",
-              "brief": {
-                "zh": "arXiv 2611.13548：Delisle 与 Tan 指出海量激活（massive activations）会把最多 99.9% 的激活方差堆到第一主成分，从而同时带偏稀疏自编码器常用的「解释方差」和「消融损伤」。因 PC1 没有唯一稀疏分解，每次训练会用不同特征去重建它：最重要的 50 个特征里平均有 47 个对不上另一次独立训练（随机抽 50 个约 27 个对不上）。一本词典可以报 99.96% 解释方差，却仍漏掉 PC1 以外 33% 的方差。作者先去掉 PC1 再训练 SAE、重建时把 PC1 加回：受影响模型上 top-50 特征共享率从 4–39.5% 升到 73–99.5%；同等 TopK 稀疏下对模型的损伤最多少 44%，内容重建误差最多降 33.9%。配套代码 github.com/nathandelisle/massive-saes。数字均论文自报，未复现。",
-                "en": "arXiv 2611.13548: Delisle and Tan show that massive activations put up to 99.9% of activation variance along the first principal component (PC1), which undermines the two metrics commonly used to evaluate sparse autoencoders: variance explained and ablation damage. Because PC1 has no unique sparse decomposition, each SAE run rebuilds it from a different set of features. On average, 47 of the 50 most important features are unmatched in a separate run, compared with about 27 of a random 50. A dictionary can report 99.96% of variance explained while leaving 33% of the variance outside PC1 unexplained. The authors train the SAE on activations with PC1 removed, then add PC1 back to the reconstruction. In affected models, the top-50 feature sharing rate rises from 4-39.5% to 73-99.5%. At the same TopK sparsity, the resulting SAE degrades the model up to 44% less and reduces content reconstruction error by up to 33.9%. Code is at github.com/nathandelisle/massive-saes. Self-reported, not reproduced.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.13548"
           ]
         }
       ]
@@ -2063,280 +1544,6 @@
             "https://www.mercor.com/research/labor-index/benchmark-map/",
             "https://www.reddit.com/r/LocalLLaMA/comments/1x9skrx/ai_labs_report_benchmark_scores_64_higher_than/"
           ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-16T16:00:00+08:00",
-      "label": {
-        "zh": "10月16日 16:00",
-        "en": "Oct 16 16:00",
-        "ja": "10月16日 16:00"
-      },
-      "items": [
-        {
-          "id": "t695",
-          "theme": "coding-tools",
-          "title": {
-            "zh": "coding agent 产出≠软件：Ars「代码更多、软件没更多」（HN 312/274）× Rich Hickey「AI 不是工具」（229/112）× Spinellis「思考将成爱好」（234/314）× QGIS 暂停 AI 贡献（365/398）× Torvalds 用 Claude Code 改内核",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。续源：Torvalds 表态。续源：社区反 AI 内容治理争论。续源。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Ars 报道 coding agent 写出更多代码却没有更多软件，Hickey、Spinellis 发文质疑，QGIS 暂停 AI 贡献而 Torvalds 用 Claude Code 改内核——生产率悖论的多来源综合候选；缺自有主词，未进短名单。续源：Torvalds 表态。续源：社区反 AI 内容治理争论。续源。",
-            "en": "Ars reports coding agents produce more code but not more software; Hickey and Spinellis push back, QGIS pauses AI contributions while Torvalds uses Claude Code on the kernel—a multi-source productivity-paradox candidate, but no searchable main term, so not shortlisted. Follow-up: Torvalds calls anti-AI contribution rules idiotic. Follow-up: Lobsters vibecoding-tag debate. Follow-up: developer sentiment essay.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://arstechnica.com/ai/2026/10/ai-coding-agents-generate-more-code-but-not-more-software/",
-              "title": "AI coding agents generate more code, but not more software",
-              "brief": {
-                "zh": "HN 312/274；Ars 报道。",
-                "en": "HN 312/274; Ars Technica.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://www.linkedin.com/pulse/ai-tool-rich-hickey-kjl8e",
-              "title": "'AI' Is Not a Tool by Rich Hickey",
-              "brief": {
-                "zh": "HN 229/112。",
-                "en": "HN 229/112.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://github.com/qgis/QGIS-Enhancement-Proposals/pull/387",
-              "title": "QGIS enacts moratorium on AI contributions",
-              "brief": {
-                "zh": "HN 365/398；QGIS 暂停 AI 贡献。",
-                "en": "HN 365/398; QGIS moratorium.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "lobsters",
-              "url": "https://www.phoronix.com/news/Linus-Torvalds-Claude-Code",
-              "title": "Linus Torvalds Working On A Hefty Linux Kernel Improvement With Claude Code",
-              "brief": {
-                "zh": "Lobsters 48/66。",
-                "en": "Lobsters 48/66.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "reddit",
-              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x8e4wd/linux_creator_says_antiai_rules_are_idiotic/",
-              "title": "Linux creator says anti-AI rules are 'idiotic.' (Absolute god-tier take.)",
-              "brief": {
-                "zh": "Torvalds 称反 AI 贡献规则「愚蠢」，接 QGIS 禁令与他用 Claude Code 改内核",
-                "en": "Linux creator says anti-AI rules are 'idiotic.' (Absolute god-tier take.)",
-                "ja": ""
-              }
-            },
-            {
-              "source": "lobsters",
-              "url": "https://lobste.rs/s/ggpwfi",
-              "title": "It's enough - vibecoding tag crossed from useless to harmful",
-              "brief": {
-                "zh": "Lobsters 社区争论 vibecoding 标签已有害，249 分/248 评，接 QGIS/Torvalds 反 AI 规则线",
-                "en": "It's enough - vibecoding tag crossed from useless to harmful",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://chriskiehl.com/article/it-is-still-ok-to-enjoy-programming",
-              "title": "It's still ok to enjoy programming",
-              "brief": {
-                "zh": "「编程仍可以享受」，HN 441/413；同日 Ruby gem 作者全部归档仓库（403 评），AI 时代开发者心态",
-                "en": "It's still ok to enjoy programming",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "lobsters",
-            "youtube",
-            "reddit"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arstechnica.com/ai/2026/10/ai-coding-agents-generate-more-code-but-not-more-software/",
-            "https://www.linkedin.com/pulse/ai-tool-rich-hickey-kjl8e",
-            "https://www.spinellis.gr/blog/20261008/?li261008",
-            "https://github.com/qgis/QGIS-Enhancement-Proposals/pull/387",
-            "https://www.phoronix.com/news/Linus-Torvalds-Claude-Code",
-            "https://www.youtube.com/watch?v=hTAWHgQI4xg",
-            "https://www.reddit.com/r/LocalLLaMA/comments/1x8e4wd/linux_creator_says_antiai_rules_are_idiotic/",
-            "https://lobste.rs/s/ggpwfi",
-            "https://chriskiehl.com/article/it-is-still-ok-to-enjoy-programming"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-16T09:00:00+08:00",
-      "label": {
-        "zh": "10月16日 09:00",
-        "en": "Oct 16 09:00",
-        "ja": "10月16日 09:00"
-      },
-      "items": [
-        {
-          "id": "t709",
-          "theme": "research",
-          "title": {
-            "zh": "Chatbot Arena 的 Luce 公理在「近亲模型」间失效：180 万票揭示 Bradley-Terry 排名偏差",
-            "en": "Why Chatbot Arena Understates \\\"New Version Beats Old\\\": Luce's Axiom, Sibling Models, and Bradley–Terry Bias",
-            "ja": "Why Chatbot Arena Understates \\\"New Version Beats Old\\\": Luce's Axiom, Sibling Models, and Bradley–Terry Bias"
-          },
-          "summary": {
-            "zh": "单篇论文深读候选：直接动摇常用排行榜的统计假设，机制清楚、好画图；待 Trends bot。 10-16 Trends（trends bot）：「Chatbot Arena」7d 0.57 / 24h 0.35 vs gpts 6.99 / 6.54 未过，留 inbox。",
-            "en": "A close read of arXiv:2610.19095. Chatbot Arena (LMArena) gives each model one Bradley–Terry score, which assumes Luce's choice axiom. On 1.8 million votes, versions of one model are judged 1.37x more decisively than their score gap implies, sizes of one generation 1.26x, models of one lab 1.12x. The overall order barely moves, but head-to-head odds between siblings are pulled toward even. The mechanism, how strong each piece of evidence is, how it relates to style control and the Leaderboard Illusion, and what to do when you read or build a pairwise leaderboard.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "单篇论文深读候选：直接动摇常用排行榜的统计假设，机制清楚、好画图；待 Trends bot。 10-16 Trends（trends bot）：「Chatbot Arena」7d 0.57 / 24h 0.35 vs gpts 6.99 / 6.54 未过，留 inbox。",
-            "en": "Single-paper candidate on Luce-axiom failure in Chatbot Arena; awaiting Trends bot. 10-16 Trends (trends bot): Chatbot Arena 7d 0.57 / 24h 0.35 vs gpts 6.99 / 6.54 — not passed, stays inbox.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.19095",
-              "title": "Similar Models, Broken Odds: Where Luce's Axiom Fails in Chatbot Arena",
-              "brief": {
-                "zh": "深耕候选：用180万条 Chatbot Arena 投票证明 Bradley-Terry 隐含的 Luce 选择公理在「近亲模型」之间系统性失效（同模型不同版本的胜负比预测的决断1.37倍），机制清晰、可画图，直接动摇大家天天看的排行榜。",
-                "en": "Using 1.8M Chatbot Arena votes, shows the Luce axiom behind Bradley-Terry fails systematically between similar models (versions of one model are 1.37x more decisive than predicted).",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://arxiv.org/abs/2610.19095"
-          ],
-          "blog": {
-            "zh": "/cn/blog/chatbot-arena-luce-axiom-sibling-models-bradley-terry/",
-            "en": "/blog/chatbot-arena-luce-axiom-sibling-models-bradley-terry/"
-          }
-        },
-        {
-          "id": "t713",
-          "theme": "models",
-          "title": {
-            "zh": "agent 记忆/上下文层：火山 OpenViking × TencentDB-Agent-Memory × CopilotKit CLiF（traces→skills）× XERJ autoindex × IBM「context engineering 4 种失败」",
-            "en": "Which Layer Does Your Agent's Memory Belong In? Context Databases, Team Memory, and Traces-to-Skills Compared, with a Decision Framework (2026)",
-            "ja": "Which Layer Does Your Agent's Memory Belong In? Context Databases, Team Memory, and Traces-to-Skills Compared, with a Decision Framework (2026)"
-          },
-          "summary": {
-            "zh": "旁注：agent 记忆/上下文工具集中上榜，单点发布居多，进 Chaos。 Lorekit 观点文主张 agent memory 应有类似 OpenTelemetry 的共享数据模型，列举 AGENTS.md/CLAUDE.md、Anthropic memory目录、Copilot记忆与memory MCP互不兼容；HN175/103。正文与标准采用情况未核，仅作者倡议，不写成已形成行业标准。补本行记忆/上下文层互操作视角，旁证昨日Pi迁移的格式维护摩擦；published不bump。",
-            "en": "TencentDB Agent Memory, OpenViking, ai-memory, CopilotKit learned skills, XERJ, Graphify, and Tencent's Hy-Memory writer model all call themselves agent memory, but they answer four different questions: what goes in the window this step, what survives across sessions for this user, what a team shares, and how past runs become next run's method. This post splits memory into four layers, maps them to the four ways context goes bad, compares write paths, sources of truth, and trust boundaries, and ends with a symptom-first decision framework.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "旁注：agent 记忆/上下文工具集中上榜，单点发布居多，进 Chaos。 Lorekit 观点文主张 agent memory 应有类似 OpenTelemetry 的共享数据模型，列举 AGENTS.md/CLAUDE.md、Anthropic memory目录、Copilot记忆与memory MCP互不兼容；HN175/103。正文与标准采用情况未核，仅作者倡议，不写成已形成行业标准。补本行记忆/上下文层互操作视角，旁证昨日Pi迁移的格式维护摩擦；published不bump。",
-            "en": "Side note: agent memory/context-layer launches; Chaos only for now. Lorekit argues for an OpenTelemetry-like shared agent-memory data model across AGENTS.md/CLAUDE.md, Anthropic memory directories, Copilot and memory MCP (HN 175/103). This is an author proposal, not an adopted standard; body and adoption unverified. Adds interoperability context to the existing memory-layer topic and the Pi migration discussion; preserve published updated_at.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "github",
-              "url": "https://github.com/TencentCloud/TencentDB-Agent-Memory",
-              "title": "TencentCloud/TencentDB-Agent-Memory",
-              "brief": {
-                "zh": "腾讯云团队级 agent 记忆中枢，把对话与文档沉淀为共享记忆。",
-                "en": "TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusab",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/volcengine/OpenViking",
-              "title": "volcengine/OpenViking",
-              "brief": {
-                "zh": "火山引擎自演化 agent 上下文数据库，统一记忆、RAG 与 skills。",
-                "en": "Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "github",
-              "url": "https://github.com/xerj-org/xerj",
-              "title": "xerj-org/xerj",
-              "brief": {
-                "zh": "面向 AI 的数据检索引擎，autoindex 让 agent 自动理解数据。",
-                "en": "XERJ is the new way for AI to search data. Its autoindex capability activates agents to know your data without the token",
-                "ja": ""
-              }
-            },
-            {
-              "source": "media",
-              "url": "https://docs.copilotkit.ai/intelligence/learned-skills",
-              "title": "CopilotKit CLiF: continual-learning platform turning agent traces + user actions into skills, evals, fine-tuning data",
-              "brief": {
-                "zh": "Coding/agent memory-skills from traces; distinct from LangChain skills revamp (Oct 8) and claude-mem. Exploit-candidate: agent memory/skills — 站内积累线. Lower confidence (vendor launch).",
-                "en": "CopilotKit CLiF: continual-learning platform turning agent traces + user actions into skills, evals, fine-tuning data",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=BwXremQ-i6I",
-              "title": "Context Engineering for AI Agents: 4 Failure Modes to Avoid",
-              "brief": {
-                "zh": "Clears the 24h bar 3x; context engineering for agents is a core harness topic",
-                "en": "Context Engineering for AI Agents: 4 Failure Modes to Avoid",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hacker_news",
-              "url": "https://www.lorekit.io/blog/open-agent-memory-format",
-              "title": "Agent memory needs its OpenTelemetry moment",
-              "brief": {
-                "zh": "Lorekit 观点文主张 agent memory 应有类似 OpenTelemetry 的共享数据模型，列举 AGENTS.md/CLAUDE.md、Anthropic memory目录、Copilot记忆与memory MCP互不兼容；HN175/103。正文与标准采用情况未核，仅作者倡议，不写成已形成行业标准。补本行记忆/上下文层互操作视角，旁证昨日Pi迁移的格式维护摩擦；published不bump。",
-                "en": "Lorekit argues for an OpenTelemetry-like shared agent-memory data model across AGENTS.md/CLAUDE.md, Anthropic memory directories, Copilot and memory MCP (HN 175/103). This is an author proposal, not an adopted standard; body and adoption unverified. Adds interoperability context to the existing memory-layer topic and the Pi migration discussion; preserve published updated_at.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "github",
-            "media",
-            "youtube",
-            "hacker_news"
-          ],
-          "score": 3,
-          "status": "published",
-          "externalUrls": [
-            "https://github.com/TencentCloud/TencentDB-Agent-Memory",
-            "https://github.com/volcengine/OpenViking",
-            "https://github.com/xerj-org/xerj",
-            "https://docs.copilotkit.ai/intelligence/learned-skills",
-            "https://www.youtube.com/watch?v=BwXremQ-i6I",
-            "https://www.lorekit.io/blog/open-agent-memory-format"
-          ],
-          "blog": {
-            "zh": "/cn/blog/agent-memory-layer-survey-2026-decision-framework/",
-            "en": "/blog/agent-memory-layer-survey-2026-decision-framework/"
-          }
         }
       ]
     }
