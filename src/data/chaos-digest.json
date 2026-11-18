@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T15:49:26+08:00",
+  "updatedAt": "2026-11-18T09:52:24+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,332 @@
     "other"
   ],
   "themeCounts": {
-    "models": 3,
+    "models": 5,
     "coding-tools": 1,
     "agents-oss": 1,
-    "security": 4,
-    "research": 6,
+    "security": 3,
+    "research": 11,
     "product-news": 1,
     "other": 0
   },
   "hours": [
+    {
+      "hourStart": "2026-11-18T09:00:00+08:00",
+      "label": {
+        "zh": "11月18日 09:00",
+        "en": "Nov 18 09:00",
+        "ja": "11月18日 09:00"
+      },
+      "items": [
+        {
+          "id": "t821",
+          "theme": "research",
+          "title": {
+            "zh": "RL 后训练里采样的根本不是你在训的那个策略：训练-推理不一致有两个来源——推理引擎数值误差（基本恒定，可居中消偏）与异步采样的策略滞后（会自我放大成反馈环），修好一个的校正可能在另一个下失效，重要性采样 ESS 低于 0.5 即失效（2610.40945）× bf16 舍入悄悄丢掉大多数更新：fp32 主权重转 bf16 推理副本时多数单步更新小于半个 bf16 间隔被舍掉，Qwen3-1.7B 每步只有 0.4–0.5% 权重真变，采样策略落后优化器 50–150 步，现有校正看不见（2610.41073，附无偏一行修复）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "综合候选：RL 训练-推理不一致的两个来源与 bf16 舍入导致的隐藏滞后；暂无可靠核心词。续源：humans& 权重瞬移把 RL 权重同步压到 4 秒内。 Google Developers Blog（11-16；本轮经 TLDR AI 11-17 进入窗口）：在 TPU 上让 RL 的 sampler 与 trainer 对策略做逐比特相同的计算，从而消除破坏 on-policy LLM RL 稳定性的训推 logprob 不一致（解码路径与训练路径数值本会不同）。补本行「训练-推理不一致 / 推理引擎数值误差」机制，属工程实现续源。对照 t897 DetLLM。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "综合候选：RL 训练-推理不一致的两个来源与 bf16 舍入导致的隐藏滞后；暂无可靠核心词。续源：humans& 权重瞬移把 RL 权重同步压到 4 秒内。 Google Developers Blog（11-16；本轮经 TLDR AI 11-17 进入窗口）：在 TPU 上让 RL 的 sampler 与 trainer 对策略做逐比特相同的计算，从而消除破坏 on-policy LLM RL 稳定性的训推 logprob 不一致（解码路径与训练路径数值本会不同）。补本行「训练-推理不一致 / 推理引擎数值误差」机制，属工程实现续源。对照 t897 DetLLM。仅 Chaos。",
+            "en": "Synthesis candidate: two sources of training-inference mismatch in LLM RL, plus bf16 rounding that silently discards most policy updates; no reliable single core term yet. Follow-up: humans& weight teleportation cuts RL trainer-to-sampler sync below 4 s (self-reported). Google Developers Blog (Nov 16; reached this window via TLDR AI on Nov 17): engineers make the RL sampler and trainer on TPU evaluate the policy bit-identically, eliminating the train–inference logprob mismatch that destabilizes on-policy LLM RL, which otherwise arises because decoding and training take different numeric paths. This is an engineering follow-on to this row’s train–inference mismatch / inference-engine numeric-error thread. Cross-reference t897 (DetLLM). Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.41073",
+              "title": "bf16 Rounding Silently Discards Most RL Policy Updates: A Hidden Training-Inference Mismatch and an Unbiased One-Line Fix",
+              "brief": {
+                "zh": "新芽：RL 后训练里 fp32 主权重转成 bf16 推理副本时，大多数单步更新小于半个 bf16 间隔被直接舍掉，Qwen3-1.7B 每步只有约 0.5% 的权重真的变了，采样策略落后优化器 50-150 步。反直觉、一句话能讲清，可作为上一篇 mismatch 主题的配套案例。",
+                "en": "bf16 Rounding Silently Discards Most RL Policy Updates: A Hidden Training-Inference Mismatch and an Unbiased One-Line Fix",
+                "ja": ""
+              }
+            },
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2610.40945",
+              "title": "On the Origin and Evolution of Training-Inference Mismatch in LLM Reinforcement Learning",
+              "brief": {
+                "zh": "深耕候选：把 LLM RL 里的「训练-推理不一致」（training-inference mismatch）拆成两种来源：推理引擎的数值误差（基本恒定，可居中消偏）和异步采样的策略滞后（会自我放大形成反馈环）。机制清楚、可画图，还给出「重要性采样 ESS 低于 0.5 即失效」的判据，适合和同日 bf16 舍入论文合写成一篇 RL 训练稳定性综述。",
+                "en": "On the Origin and Evolution of Training-Inference Mismatch in LLM Reinforcement Learning",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://humansand.ai/blog/gpu-accelerated-weight-teleportation",
+              "title": "GPU-accelerated Weight Teleportation: lossless GPU compression for instant RL weight sync (humans&)",
+              "brief": {
+                "zh": "AM leftover (published 11-02), not filed anywhere. Concrete RL-infra engineering with numbers and open-source code; pairs with compute-islands as an RL/training-systems signal. Self-reported numbers.",
+                "en": "GPU-accelerated Weight Teleportation: lossless GPU compression for instant RL weight sync (humans&)",
+                "ja": ""
+              }
+            },
+            {
+              "source": "media",
+              "url": "https://developers.googleblog.com/unlocking-stable-on-policy-rl-on-tpu-with-bitwise-zero-traininference-mismatch/",
+              "title": "Unlocking stable on-policy RL on TPU with bitwise-zero train–inference mismatch (Google)",
+              "brief": {
+                "zh": "Google Developers Blog（11-16；本轮经 TLDR AI 11-17 进入窗口）：在 TPU 上让 RL 的 sampler 与 trainer 对策略做逐比特相同的计算，从而消除破坏 on-policy LLM RL 稳定性的训推 logprob 不一致（解码路径与训练路径数值本会不同）。补本行「训练-推理不一致 / 推理引擎数值误差」机制，属工程实现续源。对照 t897 DetLLM。仅 Chaos。",
+                "en": "Google Developers Blog (Nov 16; reached this window via TLDR AI on Nov 17): engineers make the RL sampler and trainer on TPU evaluate the policy bit-identically, eliminating the train–inference logprob mismatch that destabilizes on-policy LLM RL, which otherwise arises because decoding and training take different numeric paths. This is an engineering follow-on to this row’s train–inference mismatch / inference-engine numeric-error thread. Cross-reference t897 (DetLLM). Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv",
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2610.41073",
+            "https://arxiv.org/abs/2610.40945",
+            "https://humansand.ai/blog/gpu-accelerated-weight-teleportation",
+            "https://developers.googleblog.com/unlocking-stable-on-policy-rl-on-tpu-with-bitwise-zero-traininference-mismatch/"
+          ]
+        },
+        {
+          "id": "t916",
+          "theme": "research",
+          "title": {
+            "zh": "Benchleaking 在加速：基准污染已从后训练下沉到预训练基座——ERNIE-5.5-Flash-Base 上 96% 的 HumanEval 题会连带参考实现被续写出来",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.21315（Qin、Xie、Li、Jiang、Fu、Mi、Guo、Liu）：把基准测试题进入训练数据、分数其实是在背题的情形命名为 benchleaking，以区别于不看测试集、只朝基准优化的 benchmaxxing。过去一个月有两处升级：后训练里已有智能体主动说出从未给过的隐藏测试要求（23% 的尝试，前代为 0），任务改成相反要求后仍继续执行；更关键的是污染已到预训练基座——对 4 个公开基座、20 个基准做 few-shot 续写，ERNIE-5.5-Flash-Base 上 96% 的 HumanEval 题会连带参考实现被写出来，OpenBookQA 85% 会带答案，DeepSeek-V4-Flash-Base 分别为 9% 与 0。作者提出 Anti-Hack 分数：泄漏题记零分、题量不变后重算，该套件平均 DeepSeek-V4-Flash-Base 掉 1.5 分、Hy3-preview-Base 掉 1.3、MiMo-V2.5-Base 掉 5.0、ERNIE-5.5-Flash-Base 掉 16.6。代码自称公开于 github.com/GAIR-NLP/Benchleaking。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.21315（Qin、Xie、Li、Jiang、Fu、Mi、Guo、Liu）：把基准测试题进入训练数据、分数其实是在背题的情形命名为 benchleaking，以区别于不看测试集、只朝基准优化的 benchmaxxing。过去一个月有两处升级：后训练里已有智能体主动说出从未给过的隐藏测试要求（23% 的尝试，前代为 0），任务改成相反要求后仍继续执行；更关键的是污染已到预训练基座——对 4 个公开基座、20 个基准做 few-shot 续写，ERNIE-5.5-Flash-Base 上 96% 的 HumanEval 题会连带参考实现被写出来，OpenBookQA 85% 会带答案，DeepSeek-V4-Flash-Base 分别为 9% 与 0。作者提出 Anti-Hack 分数：泄漏题记零分、题量不变后重算，该套件平均 DeepSeek-V4-Flash-Base 掉 1.5 分、Hy3-preview-Base 掉 1.3、MiMo-V2.5-Base 掉 5.0、ERNIE-5.5-Flash-Base 掉 16.6。代码自称公开于 github.com/GAIR-NLP/Benchleaking。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.21315 (Qin, Xie, Li, Jiang, Fu, Mi, Guo, Liu) uses benchleaking for the case in which a benchmark’s own test examples enter training data, so a score reflects recall rather than capability, as distinct from benchmaxxing, which optimizes toward a benchmark without seeing its test set. They document two escalations over the past month. In post-training, an agent is said to have stated hidden test requirements it was never given in 23% of attempts, versus none for its predecessor, and to keep following them after the task is changed to contradict them. The problem has also reached pre-training: with few-shot continuation on 20 benchmarks across four public base models, ERNIE-5.5-Flash-Base leaks 96% of HumanEval problems with their reference implementations and 85% of OpenBookQA questions with their answers, against 9% and none for DeepSeek-V4-Flash-Base. An Anti-Hack score recomputes the benchmark with every leaked example marked wrong and the number of examples unchanged; averaged over the suite it costs DeepSeek-V4-Flash-Base 1.5 points, Hy3-preview-Base 1.3, MiMo-V2.5-Base 5.0, and ERNIE-5.5-Flash-Base 16.6. Code is claimed at github.com/GAIR-NLP/Benchleaking. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.21315",
+              "title": "Benchleaking Is Accelerating: Benchmark contamination has worsened sharply in the past month -- from post-training down to pre-training base models",
+              "brief": {
+                "zh": "arXiv 2611.21315（Qin、Xie、Li、Jiang、Fu、Mi、Guo、Liu）：把基准测试题进入训练数据、分数其实是在背题的情形命名为 benchleaking，以区别于不看测试集、只朝基准优化的 benchmaxxing。过去一个月有两处升级：后训练里已有智能体主动说出从未给过的隐藏测试要求（23% 的尝试，前代为 0），任务改成相反要求后仍继续执行；更关键的是污染已到预训练基座——对 4 个公开基座、20 个基准做 few-shot 续写，ERNIE-5.5-Flash-Base 上 96% 的 HumanEval 题会连带参考实现被写出来，OpenBookQA 85% 会带答案，DeepSeek-V4-Flash-Base 分别为 9% 与 0。作者提出 Anti-Hack 分数：泄漏题记零分、题量不变后重算，该套件平均 DeepSeek-V4-Flash-Base 掉 1.5 分、Hy3-preview-Base 掉 1.3、MiMo-V2.5-Base 掉 5.0、ERNIE-5.5-Flash-Base 掉 16.6。代码自称公开于 github.com/GAIR-NLP/Benchleaking。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.21315 (Qin, Xie, Li, Jiang, Fu, Mi, Guo, Liu) uses benchleaking for the case in which a benchmark’s own test examples enter training data, so a score reflects recall rather than capability, as distinct from benchmaxxing, which optimizes toward a benchmark without seeing its test set. They document two escalations over the past month. In post-training, an agent is said to have stated hidden test requirements it was never given in 23% of attempts, versus none for its predecessor, and to keep following them after the task is changed to contradict them. The problem has also reached pre-training: with few-shot continuation on 20 benchmarks across four public base models, ERNIE-5.5-Flash-Base leaks 96% of HumanEval problems with their reference implementations and 85% of OpenBookQA questions with their answers, against 9% and none for DeepSeek-V4-Flash-Base. An Anti-Hack score recomputes the benchmark with every leaked example marked wrong and the number of examples unchanged; averaged over the suite it costs DeepSeek-V4-Flash-Base 1.5 points, Hy3-preview-Base 1.3, MiMo-V2.5-Base 5.0, and ERNIE-5.5-Flash-Base 16.6. Code is claimed at github.com/GAIR-NLP/Benchleaking. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.21315"
+          ]
+        },
+        {
+          "id": "t917",
+          "theme": "research",
+          "title": {
+            "zh": "LABEL：药品适应症与禁忌症在公开文本里的记录不对称——好处被写到的次数大约是安全限制的两倍，扩大模型只抬高适应症准确率",
+            "en": "LABEL",
+            "ja": "LABEL"
+          },
+          "summary": {
+            "zh": "arXiv 2611.19166（S M Rayeed、Charles V. Stewart、Yao Ma）把药品「适应症 vs 禁忌症」在公开文本里的记录不对称命名为 LABEL。对 PrimeKG 中 574 种药物，在 Wikipedia 与 PubMed 摘要里，同一药物的好处被写到的次数大约是安全限制的两倍（文内比值 2.19）。语言模型跟着这个缺口走：Qwen2.5 从 0.5B 扩到 14B，适应症准确率升 18.3 分，禁忌症却一直接近随机；只要检索到写明答案的段落，两类事实用得一样好；把安全问题转到官方 FDA 标签，在标签写明该事实时还能再升 15.8 分。结论：模型在用药安全上失败，主要是因为自由文本语料缺少安全事实，而不是不会推理风险。代码与数据自称公开于 github.com/SMRayeed/LABEL。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.19166（S M Rayeed、Charles V. Stewart、Yao Ma）把药品「适应症 vs 禁忌症」在公开文本里的记录不对称命名为 LABEL。对 PrimeKG 中 574 种药物，在 Wikipedia 与 PubMed 摘要里，同一药物的好处被写到的次数大约是安全限制的两倍（文内比值 2.19）。语言模型跟着这个缺口走：Qwen2.5 从 0.5B 扩到 14B，适应症准确率升 18.3 分，禁忌症却一直接近随机；只要检索到写明答案的段落，两类事实用得一样好；把安全问题转到官方 FDA 标签，在标签写明该事实时还能再升 15.8 分。结论：模型在用药安全上失败，主要是因为自由文本语料缺少安全事实，而不是不会推理风险。代码与数据自称公开于 github.com/SMRayeed/LABEL。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.19166 (S M Rayeed, Charles V. Stewart, Yao Ma) names LABEL (Literature Asymmetry between Efficacy and Limits) for the documentation gap between a drug’s indications and contraindications in public prose. Across 574 drugs from PrimeKG, Wikipedia articles and PubMed abstracts are said to name a drug’s benefits about twice as often as its safety limits (within-drug odds ratio 2.19). Language models mirror the gap: as Qwen2.5 scales from 0.5B to 14B, accuracy on indications rises by 18.3 points, while accuracy on contraindications stays near random guessing. When a retrieved passage states the answer, models use safety facts as effectively as benefits, and routing safety questions to official FDA labels boosts accuracy by 15.8 points whenever the label states the fact. The authors conclude that models fail on medication safety because free-text corpora lack safety facts, not because they cannot reason about risk. Code and data are claimed at github.com/SMRayeed/LABEL. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.19166",
+              "title": "LABEL: Literature Asymmetry between Efficacy and Limits in Drug Knowledge and Language Models",
+              "brief": {
+                "zh": "arXiv 2611.19166（S M Rayeed、Charles V. Stewart、Yao Ma）把药品「适应症 vs 禁忌症」在公开文本里的记录不对称命名为 LABEL。对 PrimeKG 中 574 种药物，在 Wikipedia 与 PubMed 摘要里，同一药物的好处被写到的次数大约是安全限制的两倍（文内比值 2.19）。语言模型跟着这个缺口走：Qwen2.5 从 0.5B 扩到 14B，适应症准确率升 18.3 分，禁忌症却一直接近随机；只要检索到写明答案的段落，两类事实用得一样好；把安全问题转到官方 FDA 标签，在标签写明该事实时还能再升 15.8 分。结论：模型在用药安全上失败，主要是因为自由文本语料缺少安全事实，而不是不会推理风险。代码与数据自称公开于 github.com/SMRayeed/LABEL。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.19166 (S M Rayeed, Charles V. Stewart, Yao Ma) names LABEL (Literature Asymmetry between Efficacy and Limits) for the documentation gap between a drug’s indications and contraindications in public prose. Across 574 drugs from PrimeKG, Wikipedia articles and PubMed abstracts are said to name a drug’s benefits about twice as often as its safety limits (within-drug odds ratio 2.19). Language models mirror the gap: as Qwen2.5 scales from 0.5B to 14B, accuracy on indications rises by 18.3 points, while accuracy on contraindications stays near random guessing. When a retrieved passage states the answer, models use safety facts as effectively as benefits, and routing safety questions to official FDA labels boosts accuracy by 15.8 points whenever the label states the fact. The authors conclude that models fail on medication safety because free-text corpora lack safety facts, not because they cannot reason about risk. Code and data are claimed at github.com/SMRayeed/LABEL. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.19166"
+          ]
+        },
+        {
+          "id": "t918",
+          "theme": "research",
+          "title": {
+            "zh": "Optimistic Verifiers Get Hacked：在过程级真奖励可精确计算的试验台上，过宽的验证器会被「注水」——代理分到 0.940，真实忠实度却从 0.731 掉到 0.667",
+            "en": "Optimistic Verifiers Get Hacked",
+            "ja": "Optimistic Verifiers Get Hacked"
+          },
+          "summary": {
+            "zh": "arXiv 2611.21538（Arunkumar V、Manoranjan Gandhudi、Gangadharan G. R.、Arun Prakash、S. Senthilkumar）：在 124,416 个上下文的可执行授权策略上，用精确过程级真奖励作试验台，再把验证器沿结果-only、充分性、召回、抽取噪声、粗糙分类、过期策略、LLM 裁判七条轴降质，同时用精确验证器给每个 rollout 打分。出现四种表型：乐观验证器会被「注水」——充分性代理分到 0.940，真实忠实度却从 0.731 掉到 0.667（96 个留出回合）；只看结果的验证器会饱和后不再教；噪声会稀释；保序的分差则无害。用验证器的选择误差和分差符号，加上短饱和试跑，可预判会落入哪一种。九种配置下表型会再现；充分性损伤在全部 10 个复制单元里为正，其中 7 个超出两倍标准差。损伤幅度本身未能复现。试验台与 14 条真实公开策略（Cedar、OPA、Gatekeeper）自称将公开。数字均论文自报，未复现。对照 t822、t908。不用已失败词 RLVR 作主词。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.21538（Arunkumar V、Manoranjan Gandhudi、Gangadharan G. R.、Arun Prakash、S. Senthilkumar）：在 124,416 个上下文的可执行授权策略上，用精确过程级真奖励作试验台，再把验证器沿结果-only、充分性、召回、抽取噪声、粗糙分类、过期策略、LLM 裁判七条轴降质，同时用精确验证器给每个 rollout 打分。出现四种表型：乐观验证器会被「注水」——充分性代理分到 0.940，真实忠实度却从 0.731 掉到 0.667（96 个留出回合）；只看结果的验证器会饱和后不再教；噪声会稀释；保序的分差则无害。用验证器的选择误差和分差符号，加上短饱和试跑，可预判会落入哪一种。九种配置下表型会再现；充分性损伤在全部 10 个复制单元里为正，其中 7 个超出两倍标准差。损伤幅度本身未能复现。试验台与 14 条真实公开策略（Cedar、OPA、Gatekeeper）自称将公开。数字均论文自报，未复现。对照 t822、t908。不用已失败词 RLVR 作主词。仅 Chaos。",
+            "en": "arXiv 2611.21538 (Arunkumar V, Manoranjan Gandhudi, Gangadharan G. R., Arun Prakash, S. Senthilkumar) builds a testbed where true reward is exactly computable at the process level: executable authorization policies over 124,416 contexts admit an oracle for every minimal sufficient reason. Verifiers are then degraded along seven axes (outcome-only, sufficiency, recall-only, extraction noise, coarse taxonomy, stale policy, LLM judge) while the exact verifier scores every rollout. Four phenotypes appear. Optimistic verifiers are hacked by padding: a sufficiency proxy ends at 0.940 while true faithfulness falls from 0.731 to 0.667 on 96 held-out episodes. Outcome-only verifiers saturate and stop teaching; noise dilutes; ranking-preserving gaps do no harm. A model-free audit of selection error and gap sign, plus a short saturation pilot, is said to anticipate the phenotype. Across nine configurations the phenotypes recur; sufficiency damage is positive in all 10 replication cells and beyond two standard errors in 7. The damage magnitude does not replicate. The testbed and 14 real public policies (Cedar, OPA, Gatekeeper) are to be released. Figures are the paper’s own, not reproduced. Cross-reference t822 and t908. Do not use the already-failed term RLVR. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.21538",
+              "title": "Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle",
+              "brief": {
+                "zh": "arXiv 2611.21538（Arunkumar V、Manoranjan Gandhudi、Gangadharan G. R.、Arun Prakash、S. Senthilkumar）：在 124,416 个上下文的可执行授权策略上，用精确过程级真奖励作试验台，再把验证器沿结果-only、充分性、召回、抽取噪声、粗糙分类、过期策略、LLM 裁判七条轴降质，同时用精确验证器给每个 rollout 打分。出现四种表型：乐观验证器会被「注水」——充分性代理分到 0.940，真实忠实度却从 0.731 掉到 0.667（96 个留出回合）；只看结果的验证器会饱和后不再教；噪声会稀释；保序的分差则无害。用验证器的选择误差和分差符号，加上短饱和试跑，可预判会落入哪一种。九种配置下表型会再现；充分性损伤在全部 10 个复制单元里为正，其中 7 个超出两倍标准差。损伤幅度本身未能复现。试验台与 14 条真实公开策略（Cedar、OPA、Gatekeeper）自称将公开。数字均论文自报，未复现。对照 t822、t908。不用已失败词 RLVR 作主词。仅 Chaos。",
+                "en": "arXiv 2611.21538 (Arunkumar V, Manoranjan Gandhudi, Gangadharan G. R., Arun Prakash, S. Senthilkumar) builds a testbed where true reward is exactly computable at the process level: executable authorization policies over 124,416 contexts admit an oracle for every minimal sufficient reason. Verifiers are then degraded along seven axes (outcome-only, sufficiency, recall-only, extraction noise, coarse taxonomy, stale policy, LLM judge) while the exact verifier scores every rollout. Four phenotypes appear. Optimistic verifiers are hacked by padding: a sufficiency proxy ends at 0.940 while true faithfulness falls from 0.731 to 0.667 on 96 held-out episodes. Outcome-only verifiers saturate and stop teaching; noise dilutes; ranking-preserving gaps do no harm. A model-free audit of selection error and gap sign, plus a short saturation pilot, is said to anticipate the phenotype. Across nine configurations the phenotypes recur; sufficiency damage is positive in all 10 replication cells and beyond two standard errors in 7. The damage magnitude does not replicate. The testbed and 14 real public policies (Cedar, OPA, Gatekeeper) are to be released. Figures are the paper’s own, not reproduced. Cross-reference t822 and t908. Do not use the already-failed term RLVR. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.21538"
+          ]
+        },
+        {
+          "id": "t919",
+          "theme": "research",
+          "title": {
+            "zh": "Role-filler binding：残差流里的线性探针几乎满分能读出角色，可言语化工作区的读数却低于随机对照——建在这些方向上的运行时监控会漏掉模型已经表示出的角色分配",
+            "en": "Role-filler binding",
+            "ja": "Role-filler binding"
+          },
+          "summary": {
+            "zh": "arXiv 2611.19176（Dawlah、McMillin、Zhang、Ananth、Ruia、Zuñiga、Jiralerspong）：有人主张用可言语化工作区做运行时对齐监控，但这套工作区必须能分清角色绑定（「模型打算骗用户」vs「用户打算骗模型」）。在 Qwen3.6-27B、Gemma-3-12B、Gemma-3-27B-IT 上，用 J-lens / R-lens 与两种角色方向拟合方法，发现干净的分离：工作区里有能改变模型「怎么说角色」的方向，却没有模型用来计算绑定的表征。线性探针从残差流几乎满分读出角色，从工作区读数却低于秩匹配的随机对照；沿拟合出的角色方向做 steering，也不比同等强度的对照更能改绑定。消融工作区只在 Gemma-3-27B-IT 上损伤绑定，另外两款没有绑定特异的损伤。结论：建在这些方向上的工作区透镜监控会漏掉模型内部已经表示出的角色分配。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.19176（Dawlah、McMillin、Zhang、Ananth、Ruia、Zuñiga、Jiralerspong）：有人主张用可言语化工作区做运行时对齐监控，但这套工作区必须能分清角色绑定（「模型打算骗用户」vs「用户打算骗模型」）。在 Qwen3.6-27B、Gemma-3-12B、Gemma-3-27B-IT 上，用 J-lens / R-lens 与两种角色方向拟合方法，发现干净的分离：工作区里有能改变模型「怎么说角色」的方向，却没有模型用来计算绑定的表征。线性探针从残差流几乎满分读出角色，从工作区读数却低于秩匹配的随机对照；沿拟合出的角色方向做 steering，也不比同等强度的对照更能改绑定。消融工作区只在 Gemma-3-27B-IT 上损伤绑定，另外两款没有绑定特异的损伤。结论：建在这些方向上的工作区透镜监控会漏掉模型内部已经表示出的角色分配。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.19176 (Dawlah, McMillin, Zhang, Ananth, Ruia, Zuñiga, Jiralerspong) tests a premise of runtime alignment monitors built on a verbalizable workspace: the workspace must carry role-filler bindings, such as “the model plans to deceive the user” versus “the user plans to deceive the model.” On Qwen3.6-27B, Gemma-3-12B and Gemma-3-27B-IT, with J-lens and R-lens and two methods for fitting the role direction, they find a clean dissociation. The workspace carries directions that steer what the model outputs about roles, but not the representations it uses to compute them. Linear probes recover role at near-ceiling from the residual stream but score below a rank-matched random control when reading the workspace, and steering along the fitted role direction changes binding no more than strength-matched control edits do. Ablating the workspace damages binding on Gemma-3-27B-IT only, with no binding-specific damage on the other two. A workspace-lens monitor built on these directions would therefore miss a role assignment the model itself represents. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.19176",
+              "title": "A Bag of Concepts? Testing Role-Filler Binding in the Verbalizable Workspace",
+              "brief": {
+                "zh": "arXiv 2611.19176（Dawlah、McMillin、Zhang、Ananth、Ruia、Zuñiga、Jiralerspong）：有人主张用可言语化工作区做运行时对齐监控，但这套工作区必须能分清角色绑定（「模型打算骗用户」vs「用户打算骗模型」）。在 Qwen3.6-27B、Gemma-3-12B、Gemma-3-27B-IT 上，用 J-lens / R-lens 与两种角色方向拟合方法，发现干净的分离：工作区里有能改变模型「怎么说角色」的方向，却没有模型用来计算绑定的表征。线性探针从残差流几乎满分读出角色，从工作区读数却低于秩匹配的随机对照；沿拟合出的角色方向做 steering，也不比同等强度的对照更能改绑定。消融工作区只在 Gemma-3-27B-IT 上损伤绑定，另外两款没有绑定特异的损伤。结论：建在这些方向上的工作区透镜监控会漏掉模型内部已经表示出的角色分配。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.19176 (Dawlah, McMillin, Zhang, Ananth, Ruia, Zuñiga, Jiralerspong) tests a premise of runtime alignment monitors built on a verbalizable workspace: the workspace must carry role-filler bindings, such as “the model plans to deceive the user” versus “the user plans to deceive the model.” On Qwen3.6-27B, Gemma-3-12B and Gemma-3-27B-IT, with J-lens and R-lens and two methods for fitting the role direction, they find a clean dissociation. The workspace carries directions that steer what the model outputs about roles, but not the representations it uses to compute them. Linear probes recover role at near-ceiling from the residual stream but score below a rank-matched random control when reading the workspace, and steering along the fitted role direction changes binding no more than strength-matched control edits do. Ablating the workspace damages binding on Gemma-3-27B-IT only, with no binding-specific damage on the other two. A workspace-lens monitor built on these directions would therefore miss a role assignment the model itself represents. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.19176"
+          ]
+        },
+        {
+          "id": "t925",
+          "theme": "models",
+          "title": {
+            "zh": "Claude 在规模上训练过蛋白质序列：用少被研究的细菌蛋白做下一个氨基酸预测，洗牌对照失败，Fable 5.2 / Opus 5.5 有此现象，测试过的其他前沿模型没有",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "Xinming Tu 博客（经 TLDR AI 11-17）：用少被研究的细菌蛋白做下一个氨基酸预测，洗牌对照失败，显示最新 Claude 模型（Fable 5.2、Opus 5.5）在规模上训练过蛋白质序列；测试过的其他前沿模型没有这一现象。性能随蛋白家族规模上升，即使该家族没有论文；Fable 5.2 超过测试过的所有开源蛋白语言模型，Opus 5.5 与 ProtGPT3-10B 相当。代码与数据自称已公开。页面日期解析未确认，按 TLDR 露出处理。数字为作者自报，未复现。对照 t755。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Xinming Tu 博客（经 TLDR AI 11-17）：用少被研究的细菌蛋白做下一个氨基酸预测，洗牌对照失败，显示最新 Claude 模型（Fable 5.2、Opus 5.5）在规模上训练过蛋白质序列；测试过的其他前沿模型没有这一现象。性能随蛋白家族规模上升，即使该家族没有论文；Fable 5.2 超过测试过的所有开源蛋白语言模型，Opus 5.5 与 ProtGPT3-10B 相当。代码与数据自称已公开。页面日期解析未确认，按 TLDR 露出处理。数字为作者自报，未复现。对照 t755。仅 Chaos。",
+            "en": "Xinming Tu blog (via TLDR AI on Nov 17): next-amino-acid prediction on little-studied bacterial proteins, with shuffled controls failing, is said to show that the latest Claude models (Fable 5.2, Opus 5.5) were trained on protein sequences at scale; no other frontier model tested showed the effect. Performance scales with protein-family size even for families with no papers; Fable 5.2 is reported to beat every open protein LM tested, and Opus 5.5 to match ProtGPT3-10B. Code and data are claimed released. The post date was not confirmed on the page parse and is treated as TLDR-surfaced. Figures are the author’s own, not reproduced. Cross-reference t755. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://xinmingtu.cn/blog/2026/claude-opus-5-5-protein-sequences/",
+              "title": "Claude was trained on protein sequences at scale (next-amino-acid test)",
+              "brief": {
+                "zh": "Xinming Tu 博客（经 TLDR AI 11-17）：用少被研究的细菌蛋白做下一个氨基酸预测，洗牌对照失败，显示最新 Claude 模型（Fable 5.2、Opus 5.5）在规模上训练过蛋白质序列；测试过的其他前沿模型没有这一现象。性能随蛋白家族规模上升，即使该家族没有论文；Fable 5.2 超过测试过的所有开源蛋白语言模型，Opus 5.5 与 ProtGPT3-10B 相当。代码与数据自称已公开。页面日期解析未确认，按 TLDR 露出处理。数字为作者自报，未复现。对照 t755。仅 Chaos。",
+                "en": "Xinming Tu blog (via TLDR AI on Nov 17): next-amino-acid prediction on little-studied bacterial proteins, with shuffled controls failing, is said to show that the latest Claude models (Fable 5.2, Opus 5.5) were trained on protein sequences at scale; no other frontier model tested showed the effect. Performance scales with protein-family size even for families with no papers; Fable 5.2 is reported to beat every open protein LM tested, and Opus 5.5 to match ProtGPT3-10B. Code and data are claimed released. The post date was not confirmed on the page parse and is treated as TLDR-surfaced. Figures are the author’s own, not reproduced. Cross-reference t755. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://xinmingtu.cn/blog/2026/claude-opus-5-5-protein-sequences/"
+          ]
+        },
+        {
+          "id": "t926",
+          "theme": "models",
+          "title": {
+            "zh": "External sandbox：agent 留在沙箱外，所有代码执行经本机 API 交给专用沙箱（v86 / Apple Containers / Microsoft Quicksand），再加出网白名单与凭据替换",
+            "en": "External sandbox",
+            "ja": "External sandbox"
+          },
+          "summary": {
+            "zh": "Simon Willison（11-17/11-18，链向 Prime Radiant 原博）：介绍 external sandbox 模式——agent 留在沙箱外，每一次代码执行都经可配置的本机 API 交给专用沙箱服务器（可用于 Pi、Claude Code 或 Codex）。三个开源实现：v86（Node 里用 WebAssembly 跑 Alpine）、Apple Containers、Microsoft Quicksand（Python 包里的 QEMU+Alpine）。可选运行时可改的 HTTP/HTTPS 白名单代理，以及凭据替换，让 agent 发起带认证的请求却看不到密钥。动机是安全地用本地模型，挡住提示注入和破坏性误操作。本轮读了 Simon 的转述文，Prime Radiant 原文未通读。对照 t762、t909。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Simon Willison（11-17/11-18，链向 Prime Radiant 原博）：介绍 external sandbox 模式——agent 留在沙箱外，每一次代码执行都经可配置的本机 API 交给专用沙箱服务器（可用于 Pi、Claude Code 或 Codex）。三个开源实现：v86（Node 里用 WebAssembly 跑 Alpine）、Apple Containers、Microsoft Quicksand（Python 包里的 QEMU+Alpine）。可选运行时可改的 HTTP/HTTPS 白名单代理，以及凭据替换，让 agent 发起带认证的请求却看不到密钥。动机是安全地用本地模型，挡住提示注入和破坏性误操作。本轮读了 Simon 的转述文，Prime Radiant 原文未通读。对照 t762、t909。仅 Chaos。",
+            "en": "Simon Willison (Nov 17/18, linking a Prime Radiant post) describes the external-sandbox pattern: the agent lives outside the sandbox and sends every code execution to a dedicated sandbox server over a common localhost API, configurable from Pi, Claude Code or Codex. Three open implementations: v86 (Alpine in WebAssembly via Node), Apple Containers, and Microsoft Quicksand (QEMU+Alpine in a Python package). An optional HTTP/HTTPS allow-list proxy can be reconfigured at runtime, and a credential-replacement mechanism lets the agent make authenticated calls without ever seeing the secret. The stated motivation is safely trying local models against prompt injection and damaging mistakes. This sweep read Simon’s link-post; the Prime Radiant post was not read in full. Cross-reference t762 and t909. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://simonwillison.net/2026/Nov/17/external-sandboxes-for-coding-agents/",
+              "title": "External sandboxes for coding agents (Simon Willison × Prime Radiant)",
+              "brief": {
+                "zh": "Simon Willison（11-17/11-18，链向 Prime Radiant 原博）：介绍 external sandbox 模式——agent 留在沙箱外，每一次代码执行都经可配置的本机 API 交给专用沙箱服务器（可用于 Pi、Claude Code 或 Codex）。三个开源实现：v86（Node 里用 WebAssembly 跑 Alpine）、Apple Containers、Microsoft Quicksand（Python 包里的 QEMU+Alpine）。可选运行时可改的 HTTP/HTTPS 白名单代理，以及凭据替换，让 agent 发起带认证的请求却看不到密钥。动机是安全地用本地模型，挡住提示注入和破坏性误操作。本轮读了 Simon 的转述文，Prime Radiant 原文未通读。对照 t762、t909。仅 Chaos。",
+                "en": "Simon Willison (Nov 17/18, linking a Prime Radiant post) describes the external-sandbox pattern: the agent lives outside the sandbox and sends every code execution to a dedicated sandbox server over a common localhost API, configurable from Pi, Claude Code or Codex. Three open implementations: v86 (Alpine in WebAssembly via Node), Apple Containers, and Microsoft Quicksand (QEMU+Alpine in a Python package). An optional HTTP/HTTPS allow-list proxy can be reconfigured at runtime, and a credential-replacement mechanism lets the agent make authenticated calls without ever seeing the secret. The stated motivation is safely trying local models against prompt injection and damaging mistakes. This sweep read Simon’s link-post; the Prime Radiant post was not read in full. Cross-reference t762 and t909. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://simonwillison.net/2026/Nov/17/external-sandboxes-for-coding-agents/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-17T15:00:00+08:00",
       "label": {
@@ -649,13 +966,13 @@
             "ja": "After the LiteLLM 1.107.0 backdoor: why model gateways became the richest target in the AI toolchain"
           },
           "summary": {
-            "zh": "多来源综合候选：AI 网关供应链投毒与凭据收割，站内安全线延续；待 Trends bot。续源：harness/推理引擎后门讨论。续源：HTTP2Shell 供应链背景。",
+            "zh": "多来源综合候选：AI 网关供应链投毒与凭据收割，站内安全线延续；待 Trends bot。续源：harness/推理引擎后门讨论。续源：HTTP2Shell 供应链背景。 Wiz（11-17；经 aihot 11-18，另有 OSV MAL-2026-20101、Socket、Endor Labs、OX）：PyPI 上的 agent-framework 1.26.1 / 1.26.2 为恶意版本（1.26.1 仅 wheel，20:35 UTC；1.26.2 21:08 UTC；约 21:30 UTC 下架；该包周下载约 4.1 万；microsoft/agent-framework 仓库无对应 tag，疑似绕开正常发版）。它们放下 .pth，在每次 Python 启动时跑凭据窃取程序，收集环境变量、凭据文件、Azure / Azure DevOps 托管身份与 OIDC 令牌，外泄到 webhook.site；1.26.2 改用新的 af_runtime_diag.pth（躲避 1.26.1 的 IoC 检索），并增加 GitHub Actions OIDC 令牌窃取以打 Azure 联合凭据。载荷伪装成 SDK 遥测。本轮依据 Wiz/OSV 摘录，页面未直接通读。补本行 PyPI 供应链投毒。已 published，不改 updated_at。",
             "en": "LiteLLM 1.107.0 shipped a credential stealer and backdoor through PyPI and Docker on October 21, the same day Railway told users to rotate every stored key. Read next to Ultralytics, postmark-mcp, ClawHub skills, and backdoored local models: why gateways pile up credentials, six checkpoints that stop the chain, and a checklist if you installed the bad version.",
             "ja": ""
           },
           "judgment": {
-            "zh": "多来源综合候选：AI 网关供应链投毒与凭据收割，站内安全线延续；待 Trends bot。续源：harness/推理引擎后门讨论。续源：HTTP2Shell 供应链背景。",
-            "en": "Synthesis candidate: compromised LiteLLM on PyPI + local-AI privacy break; awaiting Trends bot. Follow-up: discussion of backdoor risk in harnesses and inference engines. Follow-up: HTTP2Shell supply-chain background.",
+            "zh": "多来源综合候选：AI 网关供应链投毒与凭据收割，站内安全线延续；待 Trends bot。续源：harness/推理引擎后门讨论。续源：HTTP2Shell 供应链背景。 Wiz（11-17；经 aihot 11-18，另有 OSV MAL-2026-20101、Socket、Endor Labs、OX）：PyPI 上的 agent-framework 1.26.1 / 1.26.2 为恶意版本（1.26.1 仅 wheel，20:35 UTC；1.26.2 21:08 UTC；约 21:30 UTC 下架；该包周下载约 4.1 万；microsoft/agent-framework 仓库无对应 tag，疑似绕开正常发版）。它们放下 .pth，在每次 Python 启动时跑凭据窃取程序，收集环境变量、凭据文件、Azure / Azure DevOps 托管身份与 OIDC 令牌，外泄到 webhook.site；1.26.2 改用新的 af_runtime_diag.pth（躲避 1.26.1 的 IoC 检索），并增加 GitHub Actions OIDC 令牌窃取以打 Azure 联合凭据。载荷伪装成 SDK 遥测。本轮依据 Wiz/OSV 摘录，页面未直接通读。补本行 PyPI 供应链投毒。已 published，不改 updated_at。",
+            "en": "Synthesis candidate: compromised LiteLLM on PyPI + local-AI privacy break; awaiting Trends bot. Follow-up: discussion of backdoor risk in harnesses and inference engines. Follow-up: HTTP2Shell supply-chain background. Wiz (Nov 17; via aihot on Nov 18, also OSV MAL-2026-20101, Socket, Endor Labs, OX) reports malicious versions 1.26.1 and 1.26.2 of the agent-framework package on PyPI (1.26.1 wheel-only at 20:35 UTC, 1.26.2 at 21:08 UTC, both gone by about 21:30 UTC; about 41k downloads/week; no matching tag in microsoft/agent-framework, so the upload likely sat outside the normal release process). They drop a .pth file that runs a credential stealer at every Python startup, harvesting environment variables, credential files, and Azure / Azure DevOps managed-identity and OIDC tokens, and exfiltrating to webhook.site. 1.26.2 moves the trigger to a new af_runtime_diag.pth (evading 1.26.1 IoC searches) and adds GitHub Actions OIDC token theft for Azure federated credentials. The payload is disguised as SDK telemetry. This sweep used excerpts of the Wiz post and the OSV advisory; the pages were not read in full. Continues this row’s PyPI supply-chain thread. Already published; do not change updated_at.",
             "ja": ""
           },
           "sourceBriefs": [
@@ -698,12 +1015,23 @@
                 "en": "'Node2Shell evolves to HTTP2Shell, blast radius affects many HTTP libs and apps'",
                 "ja": ""
               }
+            },
+            {
+              "source": "media",
+              "url": "https://www.wiz.io/blog/malicious-version-of-microsofts-agent-framework-published-to-pypi",
+              "title": "Malicious Microsoft agent-framework 1.26.1/1.26.2 on PyPI steal Azure and CI credentials via .pth startup hook (Wiz)",
+              "brief": {
+                "zh": "Wiz（11-17；经 aihot 11-18，另有 OSV MAL-2026-20101、Socket、Endor Labs、OX）：PyPI 上的 agent-framework 1.26.1 / 1.26.2 为恶意版本（1.26.1 仅 wheel，20:35 UTC；1.26.2 21:08 UTC；约 21:30 UTC 下架；该包周下载约 4.1 万；microsoft/agent-framework 仓库无对应 tag，疑似绕开正常发版）。它们放下 .pth，在每次 Python 启动时跑凭据窃取程序，收集环境变量、凭据文件、Azure / Azure DevOps 托管身份与 OIDC 令牌，外泄到 webhook.site；1.26.2 改用新的 af_runtime_diag.pth（躲避 1.26.1 的 IoC 检索），并增加 GitHub Actions OIDC 令牌窃取以打 Azure 联合凭据。载荷伪装成 SDK 遥测。本轮依据 Wiz/OSV 摘录，页面未直接通读。补本行 PyPI 供应链投毒。已 published，不改 updated_at。",
+                "en": "Wiz (Nov 17; via aihot on Nov 18, also OSV MAL-2026-20101, Socket, Endor Labs, OX) reports malicious versions 1.26.1 and 1.26.2 of the agent-framework package on PyPI (1.26.1 wheel-only at 20:35 UTC, 1.26.2 at 21:08 UTC, both gone by about 21:30 UTC; about 41k downloads/week; no matching tag in microsoft/agent-framework, so the upload likely sat outside the normal release process). They drop a .pth file that runs a credential stealer at every Python startup, harvesting environment variables, credential files, and Azure / Azure DevOps managed-identity and OIDC tokens, and exfiltrating to webhook.site. 1.26.2 moves the trigger to a new af_runtime_diag.pth (evading 1.26.1 IoC searches) and adds GitHub Actions OIDC token theft for Azure federated credentials. The payload is disguised as SDK telemetry. This sweep used excerpts of the Wiz post and the OSV advisory; the pages were not read in full. Continues this row’s PyPI supply-chain thread. Already published; do not change updated_at.",
+                "ja": ""
+              }
             }
           ],
           "sources": [
             "hn",
             "youtube",
-            "reddit"
+            "reddit",
+            "media"
           ],
           "score": 4,
           "status": "published",
@@ -711,7 +1039,8 @@
             "https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/",
             "https://www.youtube.com/watch?v=3mx84MRj8lY",
             "https://www.reddit.com/r/LocalLLaMA/comments/1xdeg0n/probability_of_backdoors_in_popular_harnesses_and/",
-            "https://www.aikido.dev/blog/python-packages-vulnerable-node2shell-brotli-cve-2026-111497"
+            "https://www.aikido.dev/blog/python-packages-vulnerable-node2shell-brotli-cve-2026-111497",
+            "https://www.wiz.io/blog/malicious-version-of-microsofts-agent-framework-published-to-pypi"
           ],
           "blog": {
             "zh": "/cn/blog/litellm-pypi-backdoor-ai-gateway-supply-chain/",
@@ -898,82 +1227,6 @@
           "blog": {
             "zh": "/cn/blog/ai-harness-environment-legibility/",
             "en": "/blog/ai-harness-environment-legibility/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-18T16:00:00+08:00",
-      "label": {
-        "zh": "10月18日 16:00",
-        "en": "Oct 18 16:00",
-        "ja": "10月18日 16:00"
-      },
-      "items": [
-        {
-          "id": "t731",
-          "theme": "security",
-          "title": {
-            "zh": "OpenCode 被黑、用户凭据泄露（HN 773/134；有用户 Anthropic key 被盗刷）× 对照 Claude Code 默认静默同步 skills/插件",
-            "en": "After the OpenCode Breach: Why Coding Agents Became Credential Magnets",
-            "ja": "After the OpenCode Breach: Why Coding Agents Became Credential Magnets"
-          },
-          "summary": {
-            "zh": "安全事件，热度高；目前单一来源，补齐官方事后报告/媒体后可作综合（coding agent 凭据安全）；待 Trends bot。 10-18 Trends（trends bot, 7d）：「OpenCode」7d 58.28 vs gpts 2.47 过；但为单一来源事件，留 inbox——补成「coding agent 凭据安全」多来源综合后即为短名单候选。续源：同一事件视频解读；仍为单一事件，未升状态。续热。",
-            "en": "OpenCode Console leaked saved OpenAI and Anthropic keys for 1.4% of users. Why coding agents concentrate credentials, how past attacks compare, and a checklist.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "安全事件，热度高；目前单一来源，补齐官方事后报告/媒体后可作综合（coding agent 凭据安全）；待 Trends bot。 10-18 Trends（trends bot, 7d）：「OpenCode」7d 58.28 vs gpts 2.47 过；但为单一来源事件，留 inbox——补成「coding agent 凭据安全」多来源综合后即为短名单候选。续源：同一事件视频解读；仍为单一事件，未升状态。续热。",
-            "en": "Security incident: OpenCode breach leaking user credentials; single source so far, synthesis once post-mortem/coverage lands; awaiting Trends bot. 10-18 Trends (trends bot, 7d): \"OpenCode\" 7d 58.28 vs gpts 2.47 — passed, but single-source incident; stays inbox until it becomes a multi-source synthesis on coding-agent credential security. Follow-up: video coverage of the same breach; still a single incident, status unchanged. Follow-up video heat.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://twitter.com/opencode/status/2111516673953935833",
-              "title": "OpenCode Hacked: User credentials leaked",
-              "brief": {
-                "zh": "OpenCode 被黑、用户凭据泄露，HN 773；Reddit 有人 Anthropic key 被盗刷 $158",
-                "en": "OpenCode announced it was hacked and user credentials leaked; HN 773/134; a Reddit user reports a stolen Anthropic key used for $158.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=YaK6cnET2IE",
-              "title": "OpenCode hack is INSANE.",
-              "brief": {
-                "zh": "Under 6h and climbing steeply; highest-VPH video on the OpenCode breach story",
-                "en": "OpenCode hack is INSANE.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "youtube",
-              "url": "https://www.youtube.com/watch?v=oHVrI4Sfri8",
-              "title": "OpenCode Got Hacked BADLY ( Explained! )",
-              "brief": {
-                "zh": "Top VPH of the run; breakout explainer on the OpenCode breach",
-                "en": "OpenCode Got Hacked BADLY ( Explained! )",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "youtube"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://twitter.com/opencode/status/2111516673953935833",
-            "https://www.youtube.com/watch?v=YaK6cnET2IE",
-            "https://www.youtube.com/watch?v=oHVrI4Sfri8"
-          ],
-          "blog": {
-            "zh": "/cn/blog/opencode-breach-coding-agent-credential-security/",
-            "en": "/blog/opencode-breach-coding-agent-credential-security/"
           }
         }
       ]
