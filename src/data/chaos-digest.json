@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T09:52:24+08:00",
+  "updatedAt": "2026-11-18T16:00:34+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -15,11 +15,177 @@
     "coding-tools": 1,
     "agents-oss": 1,
     "security": 3,
-    "research": 11,
+    "research": 15,
     "product-news": 1,
     "other": 0
   },
   "hours": [
+    {
+      "hourStart": "2026-11-18T16:00:00+08:00",
+      "label": {
+        "zh": "11月18日 16:00",
+        "en": "Nov 18 16:00",
+        "ja": "11月18日 16:00"
+      },
+      "items": [
+        {
+          "id": "t928",
+          "theme": "research",
+          "title": {
+            "zh": "偏见头测到的也许根本不是偏见：头级偏见归因里，选头统计量无法被识别为在测偏见，消融所谓偏见头也降不了不公平率",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.23218（S.M Seefat Alam）：把社会偏见定位到个别注意力头、再靠消融来「去偏见」的方法，其实是用公平指标的事后效果来验证，从未证明那个选头统计量在测偏见。作者在 Qwen-2.5-7B-Instruct 与 Llama-3.1-8B-Instruct 上审计：头图虽与标签盲的回复长度图高度相关（ρ=-0.950 与 -0.768），好像找到了表层混杂；但固定提示后，长度只解释该统计量 1% 的方差，真正解释 64% 的是提示身份，且排序并不随长度单调。同一提示内，公平标签、回复长度与受保护群体词几乎共线（φ=0.95），部分是标注规则本身使然，观察分析无法归因，这一家族的方法也没有做能做此区分的实验。实质主张同样不成立：两种读法下偏见选择性都不集中在后层；测试过的头集合消融后都不能降低不公平率；而其补集（按相反标签计分）却能稳定破坏拒答（p=2.7×10⁻⁵），说明这套管线在该尺度上确实能测到效应，只是测到的不是「偏见头」。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.23218（S.M Seefat Alam）：把社会偏见定位到个别注意力头、再靠消融来「去偏见」的方法，其实是用公平指标的事后效果来验证，从未证明那个选头统计量在测偏见。作者在 Qwen-2.5-7B-Instruct 与 Llama-3.1-8B-Instruct 上审计：头图虽与标签盲的回复长度图高度相关（ρ=-0.950 与 -0.768），好像找到了表层混杂；但固定提示后，长度只解释该统计量 1% 的方差，真正解释 64% 的是提示身份，且排序并不随长度单调。同一提示内，公平标签、回复长度与受保护群体词几乎共线（φ=0.95），部分是标注规则本身使然，观察分析无法归因，这一家族的方法也没有做能做此区分的实验。实质主张同样不成立：两种读法下偏见选择性都不集中在后层；测试过的头集合消融后都不能降低不公平率；而其补集（按相反标签计分）却能稳定破坏拒答（p=2.7×10⁻⁵），说明这套管线在该尺度上确实能测到效应，只是测到的不是「偏见头」。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.23218 (S.M Seefat Alam) audits methods that localise social bias to individual attention heads and “debias” by ablating them. Those methods are validated by their effect on a fairness metric, never by evidence that the statistic used to choose the heads measures bias. On Qwen-2.5-7B-Instruct and Llama-3.1-8B-Instruct, the head map correlates at ρ = -0.950 and -0.768 with a label-blind response-length map, which looks like a surface confound; an intervention that holds the prompt fixed rejects that reading, because length then explains only 1% of the statistic’s variance. Prompt identity explains 64%, in an ordering that is not monotonic in length. Within any fixed prompt the fairness label, response length and the presence of a protected-group token are collinear at φ = 0.95, partly by definition of the labelling rule, so no observational analysis can attribute the map, and no method in this family runs an experiment that could. The substantive claims fail independently: bias selectivity is not late-layer-concentrated under either reference reading, and no head set tested reduces the unfairness rate when ablated. Its complement, scored on the opposite label, reliably destroys refusal (p = 2.7×10⁻⁵), so the pipeline detects effects at this scale, but not a bias head. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.23218",
+              "title": "What Does a Bias Head Measure? Non-Identifiability in Head-Level Bias Attribution",
+              "brief": {
+                "zh": "arXiv 2611.23218（S.M Seefat Alam）：把社会偏见定位到个别注意力头、再靠消融来「去偏见」的方法，其实是用公平指标的事后效果来验证，从未证明那个选头统计量在测偏见。作者在 Qwen-2.5-7B-Instruct 与 Llama-3.1-8B-Instruct 上审计：头图虽与标签盲的回复长度图高度相关（ρ=-0.950 与 -0.768），好像找到了表层混杂；但固定提示后，长度只解释该统计量 1% 的方差，真正解释 64% 的是提示身份，且排序并不随长度单调。同一提示内，公平标签、回复长度与受保护群体词几乎共线（φ=0.95），部分是标注规则本身使然，观察分析无法归因，这一家族的方法也没有做能做此区分的实验。实质主张同样不成立：两种读法下偏见选择性都不集中在后层；测试过的头集合消融后都不能降低不公平率；而其补集（按相反标签计分）却能稳定破坏拒答（p=2.7×10⁻⁵），说明这套管线在该尺度上确实能测到效应，只是测到的不是「偏见头」。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.23218 (S.M Seefat Alam) audits methods that localise social bias to individual attention heads and “debias” by ablating them. Those methods are validated by their effect on a fairness metric, never by evidence that the statistic used to choose the heads measures bias. On Qwen-2.5-7B-Instruct and Llama-3.1-8B-Instruct, the head map correlates at ρ = -0.950 and -0.768 with a label-blind response-length map, which looks like a surface confound; an intervention that holds the prompt fixed rejects that reading, because length then explains only 1% of the statistic’s variance. Prompt identity explains 64%, in an ordering that is not monotonic in length. Within any fixed prompt the fairness label, response length and the presence of a protected-group token are collinear at φ = 0.95, partly by definition of the labelling rule, so no observational analysis can attribute the map, and no method in this family runs an experiment that could. The substantive claims fail independently: bias selectivity is not late-layer-concentrated under either reference reading, and no head set tested reduces the unfairness rate when ablated. Its complement, scored on the opposite label, reliably destroys refusal (p = 2.7×10⁻⁵), so the pipeline detects effects at this scale, but not a bias head. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.23218"
+          ]
+        },
+        {
+          "id": "t929",
+          "theme": "research",
+          "title": {
+            "zh": "能排出先后，并不等于知道落在哪一格：语言模型可以把政党立场排好序，却无法把单个政党放到同一尺度上",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.21878（Yousef Attia、Jarosław A. Chudziak）：现有基准几乎都在问「单个实体打几分」，并把它当成模型掌握了该领域；但文本里比较远多于测量，模型可能只有可靠排序、没有锚定的刻度。作者以日韩政党立场为试验台（比较宣言计划的编码数据作外部答案键）：给四个政党排序时，模型超过最强固定答案基线一倍以上；把单个政党放到同一尺度上，则低于该基线。失败的绝对定位里排序仍然保留，补上编码数值后定位接近天花板。因此，对同一事实的比较问题与绝对问题在这里测的不是同一件事，用其中一种建成的基准不能代表另一种。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.21878（Yousef Attia、Jarosław A. Chudziak）：现有基准几乎都在问「单个实体打几分」，并把它当成模型掌握了该领域；但文本里比较远多于测量，模型可能只有可靠排序、没有锚定的刻度。作者以日韩政党立场为试验台（比较宣言计划的编码数据作外部答案键）：给四个政党排序时，模型超过最强固定答案基线一倍以上；把单个政党放到同一尺度上，则低于该基线。失败的绝对定位里排序仍然保留，补上编码数值后定位接近天花板。因此，对同一事实的比较问题与绝对问题在这里测的不是同一件事，用其中一种建成的基准不能代表另一种。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.21878 (Yousef Attia, Jarosław A. Chudziak) argues that nearly every benchmark of gradable social positions asks about one entity at a time and then reads that score as the model’s knowledge of the domain. Text about social entities carries far more comparison than measurement, so a model may hold a dependable ordering with no anchored scale. On party positions in Japan and South Korea, with the Comparative Manifesto Project’s coded data as an external answer key, models beat the strongest fixed-answer baseline by more than a factor of two when asked to order four parties, and fall below that baseline when asked to place one party on the same scale. The ordering survives inside those failed placements, and supplying the coded values lifts placement to near ceiling. Comparative and absolute questions about the same fact therefore measure different things here, and a benchmark built from one cannot speak for the other. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.21878",
+              "title": "Knowing Which, Not How Much: Language Models Order Party Positions They Cannot Place",
+              "brief": {
+                "zh": "arXiv 2611.21878（Yousef Attia、Jarosław A. Chudziak）：现有基准几乎都在问「单个实体打几分」，并把它当成模型掌握了该领域；但文本里比较远多于测量，模型可能只有可靠排序、没有锚定的刻度。作者以日韩政党立场为试验台（比较宣言计划的编码数据作外部答案键）：给四个政党排序时，模型超过最强固定答案基线一倍以上；把单个政党放到同一尺度上，则低于该基线。失败的绝对定位里排序仍然保留，补上编码数值后定位接近天花板。因此，对同一事实的比较问题与绝对问题在这里测的不是同一件事，用其中一种建成的基准不能代表另一种。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.21878 (Yousef Attia, Jarosław A. Chudziak) argues that nearly every benchmark of gradable social positions asks about one entity at a time and then reads that score as the model’s knowledge of the domain. Text about social entities carries far more comparison than measurement, so a model may hold a dependable ordering with no anchored scale. On party positions in Japan and South Korea, with the Comparative Manifesto Project’s coded data as an external answer key, models beat the strongest fixed-answer baseline by more than a factor of two when asked to order four parties, and fall below that baseline when asked to place one party on the same scale. The ordering survives inside those failed placements, and supplying the coded values lifts placement to near ceiling. Comparative and absolute questions about the same fact therefore measure different things here, and a benchmark built from one cannot speak for the other. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.21878"
+          ]
+        },
+        {
+          "id": "t930",
+          "theme": "research",
+          "title": {
+            "zh": "所谓「道德回路」可能只是通用评价回路，定位到的特征则主要响应提示里的单词 morally",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.21705（Davide Liga、Liuwen Yu、Matteo Magnini）：可解释性方法能找到改变道德提示续写的注意力头和 SAE 特征，但该成分可能在响应道德内容、任何规范对行为的判断，或提示里的单词 morally。作者用 227 对经五人标注的最小对立（道德标准、谨慎/礼仪/审美/证据等其他规范，或描述性差异），在 14 个开源模型（Llama、Gemma、Qwen，1B–14B，基座与指令微调）上，分别带或不带 morally 一词进行检验。在每个模型里，改变道德答案的头属于模型做各类规范判断都要用的评价回路：有该提示词时，这些头在道德对立与其他规范对立上的效应份额比约为 1.00（97.5% 置信区间 [0.92, 1.07]；不带该词时为 0.90，[0.84, 0.96]），模型对两类判断同样依赖它们；提示并不要求判断时也需要这些头。在 ETHICS 基准的 400 个情景上，去掉它们会拿走可接受与不可接受情景之差的 37–39%，随机十个头只有 1–3%。定位到的 SAE 特征则主要响应单词 morally，而不是短语在说什么。隐藏状态里可以读出对立对的规范类别；在测试过的八个模型上，去掉承载该方向的向量会把道德裁决减弱几个百分点，其中七个模型里对道德裁决的削弱大于其他裁决。配对、评分、代码、训练好的 SAE 词典与结果文件自称将公开。数字均论文自报，未复现。对照 t708。不复测已失败词 sparse autoencoders。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.21705（Davide Liga、Liuwen Yu、Matteo Magnini）：可解释性方法能找到改变道德提示续写的注意力头和 SAE 特征，但该成分可能在响应道德内容、任何规范对行为的判断，或提示里的单词 morally。作者用 227 对经五人标注的最小对立（道德标准、谨慎/礼仪/审美/证据等其他规范，或描述性差异），在 14 个开源模型（Llama、Gemma、Qwen，1B–14B，基座与指令微调）上，分别带或不带 morally 一词进行检验。在每个模型里，改变道德答案的头属于模型做各类规范判断都要用的评价回路：有该提示词时，这些头在道德对立与其他规范对立上的效应份额比约为 1.00（97.5% 置信区间 [0.92, 1.07]；不带该词时为 0.90，[0.84, 0.96]），模型对两类判断同样依赖它们；提示并不要求判断时也需要这些头。在 ETHICS 基准的 400 个情景上，去掉它们会拿走可接受与不可接受情景之差的 37–39%，随机十个头只有 1–3%。定位到的 SAE 特征则主要响应单词 morally，而不是短语在说什么。隐藏状态里可以读出对立对的规范类别；在测试过的八个模型上，去掉承载该方向的向量会把道德裁决减弱几个百分点，其中七个模型里对道德裁决的削弱大于其他裁决。配对、评分、代码、训练好的 SAE 词典与结果文件自称将公开。数字均论文自报，未复现。对照 t708。不复测已失败词 sparse autoencoders。仅 Chaos。",
+            "en": "arXiv 2611.21705 (Davide Liga, Liuwen Yu, Matteo Magnini) asks whether the attention heads and SAE features that change a model’s answer to a moral prompt respond to moral content, to the judgment of conduct by any norm, or to the word “morally” in the prompt. They built 227 minimal pairs, validated by five annotators, that differ in a moral standard, in another kind of norm (prudence, etiquette, aesthetics or evidence), or in a descriptive quality, and tested 14 open-weight models (Llama, Gemma and Qwen, 1B to 14B, base and instruction-tuned) with and without the word “morally”. In every model, the heads that change the moral answer belong to an evaluation circuit used for every kind of normative judgment tested: with the cue word, these heads carry the same share of the effect for moral as for other normative pairs (pooled ratio 1.00, 97.5% CI [0.92, 1.07]; 0.90, [0.84, 0.96] without it), and the models need them as much for both, including when the prompt does not ask for a judgment. On 400 ETHICS scenarios, removing them takes away 37 to 39% of the gap between acceptable and unacceptable scenarios, against 1 to 3% for ten random heads. The SAE features located respond mostly to the word “morally” rather than to what the phrase is about. The category of a pair can be read from hidden states; in the eight models tested, removing the direction that carries it weakens the moral verdict by a few percent, and more than the other verdicts in seven of them. The pairs, ratings, code, trained SAE dictionaries and result files are to be released. Figures are the paper’s own, not reproduced. Cross-reference t708. Do not retest the already-failed term sparse autoencoders. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.21705",
+              "title": "Disambiguating Moral Circuits and Moral Features in Language Models: Moral content, normative judgment or cue words? Evidence from 14 models",
+              "brief": {
+                "zh": "arXiv 2611.21705（Davide Liga、Liuwen Yu、Matteo Magnini）：可解释性方法能找到改变道德提示续写的注意力头和 SAE 特征，但该成分可能在响应道德内容、任何规范对行为的判断，或提示里的单词 morally。作者用 227 对经五人标注的最小对立（道德标准、谨慎/礼仪/审美/证据等其他规范，或描述性差异），在 14 个开源模型（Llama、Gemma、Qwen，1B–14B，基座与指令微调）上，分别带或不带 morally 一词进行检验。在每个模型里，改变道德答案的头属于模型做各类规范判断都要用的评价回路：有该提示词时，这些头在道德对立与其他规范对立上的效应份额比约为 1.00（97.5% 置信区间 [0.92, 1.07]；不带该词时为 0.90，[0.84, 0.96]），模型对两类判断同样依赖它们；提示并不要求判断时也需要这些头。在 ETHICS 基准的 400 个情景上，去掉它们会拿走可接受与不可接受情景之差的 37–39%，随机十个头只有 1–3%。定位到的 SAE 特征则主要响应单词 morally，而不是短语在说什么。隐藏状态里可以读出对立对的规范类别；在测试过的八个模型上，去掉承载该方向的向量会把道德裁决减弱几个百分点，其中七个模型里对道德裁决的削弱大于其他裁决。配对、评分、代码、训练好的 SAE 词典与结果文件自称将公开。数字均论文自报，未复现。对照 t708。不复测已失败词 sparse autoencoders。仅 Chaos。",
+                "en": "arXiv 2611.21705 (Davide Liga, Liuwen Yu, Matteo Magnini) asks whether the attention heads and SAE features that change a model’s answer to a moral prompt respond to moral content, to the judgment of conduct by any norm, or to the word “morally” in the prompt. They built 227 minimal pairs, validated by five annotators, that differ in a moral standard, in another kind of norm (prudence, etiquette, aesthetics or evidence), or in a descriptive quality, and tested 14 open-weight models (Llama, Gemma and Qwen, 1B to 14B, base and instruction-tuned) with and without the word “morally”. In every model, the heads that change the moral answer belong to an evaluation circuit used for every kind of normative judgment tested: with the cue word, these heads carry the same share of the effect for moral as for other normative pairs (pooled ratio 1.00, 97.5% CI [0.92, 1.07]; 0.90, [0.84, 0.96] without it), and the models need them as much for both, including when the prompt does not ask for a judgment. On 400 ETHICS scenarios, removing them takes away 37 to 39% of the gap between acceptable and unacceptable scenarios, against 1 to 3% for ten random heads. The SAE features located respond mostly to the word “morally” rather than to what the phrase is about. The category of a pair can be read from hidden states; in the eight models tested, removing the direction that carries it weakens the moral verdict by a few percent, and more than the other verdicts in seven of them. The pairs, ratings, code, trained SAE dictionaries and result files are to be released. Figures are the paper’s own, not reproduced. Cross-reference t708. Do not retest the already-failed term sparse autoencoders. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.21705"
+          ]
+        },
+        {
+          "id": "t931",
+          "theme": "research",
+          "title": {
+            "zh": "Conserved Verdicts：推理模型已经答对之后继续想，仍可能把正确答案想丢——该不该停，要看承诺与裁决之差，而不是最终正确性探针",
+            "en": "Conserved Verdicts",
+            "ja": "Conserved Verdicts"
+          },
+          "summary": {
+            "zh": "arXiv 2611.21946（Jianghong Zhou、Hao Rong、Chen Lin）：推理模型已经答对之后继续想，仍可能把正确答案想丢。作者把链上同一时刻的两个概率分开：现在停下答案正确的概率叫承诺（commitment），最终答案正确的概率叫裁决（verdict）；仅用裁决——也就是最终正确性探针所估计的量——无法决定该不该停，因为它作为对既定结果的预报没有可预期的漂移；承诺–裁决差才等于继续思考还预期改变多少质量，也等于现在停下能拿到的准确率增益。第二条恒等式再把准确率随预算变化的曲线拆成「链内答案变化」与「还在跑的是哪些链」。在 MATH-500 上，DeepSeek-R1-Distill-Qwen-1.5B 在已持有正确答案的 379 个点（选取时不考虑链条如何结束）继续想，平均再丢 3.6 分（95% CI [2.2, 5.2]），损失集中在少数题。六个推理模型、MATH-500 与 OlympiadBench、预算至 16,384 token 时，准确率随预算下降主要来自「还在跑的是哪些链」，而仍在推理的链本身往往保住或改进答案。神谕式停止规则在 1.5B 与 7B 上最多只再得 +1.8 与 +2.5 分。框架要先说明该测什么，再去造停止规则。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.21946（Jianghong Zhou、Hao Rong、Chen Lin）：推理模型已经答对之后继续想，仍可能把正确答案想丢。作者把链上同一时刻的两个概率分开：现在停下答案正确的概率叫承诺（commitment），最终答案正确的概率叫裁决（verdict）；仅用裁决——也就是最终正确性探针所估计的量——无法决定该不该停，因为它作为对既定结果的预报没有可预期的漂移；承诺–裁决差才等于继续思考还预期改变多少质量，也等于现在停下能拿到的准确率增益。第二条恒等式再把准确率随预算变化的曲线拆成「链内答案变化」与「还在跑的是哪些链」。在 MATH-500 上，DeepSeek-R1-Distill-Qwen-1.5B 在已持有正确答案的 379 个点（选取时不考虑链条如何结束）继续想，平均再丢 3.6 分（95% CI [2.2, 5.2]），损失集中在少数题。六个推理模型、MATH-500 与 OlympiadBench、预算至 16,384 token 时，准确率随预算下降主要来自「还在跑的是哪些链」，而仍在推理的链本身往往保住或改进答案。神谕式停止规则在 1.5B 与 7B 上最多只再得 +1.8 与 +2.5 分。框架要先说明该测什么，再去造停止规则。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.21946 (Jianghong Zhou, Hao Rong, Chen Lin) notes that a reasoning model that has reached a correct answer can lose it by continuing to think. At a point on a chain, commitment is the probability that the answer the model would give if stopped now is correct, and verdict is the probability that the answer it will finish with is correct. The verdict alone, which is what final-correctness probes estimate, cannot decide whether to stop: as a forecast of a fixed outcome it has no predictable drift. The commitment-verdict gap equals the expected remaining change in answer quality and the accuracy gained by stopping. A second identity splits any accuracy-versus-budget curve into answer change within chains and change in which chains are still running. On MATH-500, at all 379 points where DeepSeek-R1-Distill-Qwen-1.5B holds a correct answer, selected without regard to how its chain ends, continuing loses 3.6 points on average (95% CI [2.2, 5.2]), and the loss concentrates in a few problems. In six reasoning models from three families, on MATH-500 and OlympiadBench and with budgets up to 16,384 tokens, declining accuracy curves come from which chains remain, while the chains still reasoning keep or improve their answers. An oracle stopping rule gains at most +1.8 and +2.5 points at 1.5B and 7B. The framework says what to measure before building a stopping rule. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.21946",
+              "title": "Conserved Verdicts, Drifting Commitments: Identifying Harmful Overthinking",
+              "brief": {
+                "zh": "arXiv 2611.21946（Jianghong Zhou、Hao Rong、Chen Lin）：推理模型已经答对之后继续想，仍可能把正确答案想丢。作者把链上同一时刻的两个概率分开：现在停下答案正确的概率叫承诺（commitment），最终答案正确的概率叫裁决（verdict）；仅用裁决——也就是最终正确性探针所估计的量——无法决定该不该停，因为它作为对既定结果的预报没有可预期的漂移；承诺–裁决差才等于继续思考还预期改变多少质量，也等于现在停下能拿到的准确率增益。第二条恒等式再把准确率随预算变化的曲线拆成「链内答案变化」与「还在跑的是哪些链」。在 MATH-500 上，DeepSeek-R1-Distill-Qwen-1.5B 在已持有正确答案的 379 个点（选取时不考虑链条如何结束）继续想，平均再丢 3.6 分（95% CI [2.2, 5.2]），损失集中在少数题。六个推理模型、MATH-500 与 OlympiadBench、预算至 16,384 token 时，准确率随预算下降主要来自「还在跑的是哪些链」，而仍在推理的链本身往往保住或改进答案。神谕式停止规则在 1.5B 与 7B 上最多只再得 +1.8 与 +2.5 分。框架要先说明该测什么，再去造停止规则。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.21946 (Jianghong Zhou, Hao Rong, Chen Lin) notes that a reasoning model that has reached a correct answer can lose it by continuing to think. At a point on a chain, commitment is the probability that the answer the model would give if stopped now is correct, and verdict is the probability that the answer it will finish with is correct. The verdict alone, which is what final-correctness probes estimate, cannot decide whether to stop: as a forecast of a fixed outcome it has no predictable drift. The commitment-verdict gap equals the expected remaining change in answer quality and the accuracy gained by stopping. A second identity splits any accuracy-versus-budget curve into answer change within chains and change in which chains are still running. On MATH-500, at all 379 points where DeepSeek-R1-Distill-Qwen-1.5B holds a correct answer, selected without regard to how its chain ends, continuing loses 3.6 points on average (95% CI [2.2, 5.2]), and the loss concentrates in a few problems. In six reasoning models from three families, on MATH-500 and OlympiadBench and with budgets up to 16,384 tokens, declining accuracy curves come from which chains remain, while the chains still reasoning keep or improve their answers. An oracle stopping rule gains at most +1.8 and +2.5 points at 1.5B and 7B. The framework says what to measure before building a stopping rule. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.21946"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-18T09:00:00+08:00",
       "label": {
