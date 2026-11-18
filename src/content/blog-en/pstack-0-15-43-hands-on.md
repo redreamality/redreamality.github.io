@@ -1,5 +1,5 @@
 ---
-title: "pstack 0.15.43 hands-on: routing capped at xhigh, unlimited becomes large, and where Orchestrate went"
+title: "pstack 0.15.43 in Claude Code, hands-on: routing capped at xhigh, unlimited becomes large, and where Orchestrate went"
 description: "pstack 0.15.43 cuts about a fifth of its skill text, routes work to Opus 5.5 with no role above xhigh, removes the Orchestrate playbook, and adds worker.md. This report installs it in Claude Code, counts the text change from 0.15.32, walks an old rule file through the /setup-pstack migration, and runs the repo's own checks."
 author: Remy
 pubDate: 2026-11-17T09:30:00+08:00

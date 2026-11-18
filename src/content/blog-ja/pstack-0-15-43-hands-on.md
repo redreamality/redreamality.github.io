@@ -1,5 +1,5 @@
 ---
-title: "pstack 0.15.43 実地検証：ルーティングは xhigh が上限、unlimited は large に、Orchestrate の行き先"
+title: "Claude Code で pstack 0.15.43 を実地検証：ルーティングは xhigh が上限、unlimited は large に、Orchestrate の行き先"
 description: "pstack 0.15.43 は skill の本文を約 2 割削り、既定のルーティングを Opus 5.5 中心にしてどの役割も xhigh を超えないようにし、Orchestrate playbook を削除して worker.md を追加した。Claude Code に実際に入れ、0.15.32 からの語数の変化を数え、/setup-pstack による旧ルールの移行をたどり、リポジトリ付属のチェックとテストを走らせた。"
 author: Remy
 pubDate: 2026-11-17T09:30:00+08:00

@@ -1,5 +1,5 @@
 ---
-title: "pstack 0.15.43 实测：路由封顶 xhigh、unlimited 变 large、Orchestrate 去了哪"
+title: "Claude Code 装 pstack 0.15.43 实测：路由封顶 xhigh、unlimited 变 large、Orchestrate 去了哪"
 description: "pstack 0.15.43 把 skill 文本砍掉约两成，默认路由改成 Opus 5.5 且任何角色不超过 xhigh，删除 Orchestrate playbook，新增 worker.md。本文在 Claude Code 里真装一遍，统计 0.15.32 到 0.15.43 的字数变化，走一遍 /setup-pstack 的旧规则迁移，并跑仓库自带的检查和测试。"
 author: Remy
 pubDate: 2026-11-17T09:30:00+08:00
