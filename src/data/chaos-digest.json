@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T16:00:34+08:00",
+  "updatedAt": "2026-11-19T10:00:41+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,13 +13,140 @@
   "themeCounts": {
     "models": 5,
     "coding-tools": 1,
-    "agents-oss": 1,
+    "agents-oss": 2,
     "security": 3,
-    "research": 15,
+    "research": 16,
     "product-news": 1,
     "other": 0
   },
   "hours": [
+    {
+      "hourStart": "2026-11-19T10:00:00+08:00",
+      "label": {
+        "zh": "11月19日 10:00",
+        "en": "Nov 19 10:00",
+        "ja": "11月19日 10:00"
+      },
+      "items": [
+        {
+          "id": "t933",
+          "theme": "research",
+          "title": {
+            "zh": "Energy-Based Reasoners：把循环推理做成潜在状态上的能量下降，Sudoku-Extreme 上 1.8M 参数、99.9% 准确率，推理计算据称比次优模型少 345 倍",
+            "en": "Energy-Based Reasoners",
+            "ja": "Energy-Based Reasoners"
+          },
+          "summary": {
+            "zh": "项目页 energy-based-reasoners.github.io（HN 300/52）与 arXiv 2611.08977（William Chen、Alexi Gladstone、Zeyu Li、Heng Ji、Yilun Du；Duke / UIUC / Harvard）：Energy-Based Reasoners（EBR）在潜在推理状态上学习能量函数，把循环更新写成对该能量的梯度下降——能量用来给候选打分（不需要外部验证器），梯度用来 refinement，并在梯度范数低于阈值时停止。作者还引入基于探索的训练，以发现更多模态、在更宽的状态集上塑造能量面。四个算法推理基准上，1.8M 参数的 EBR 在 Sudoku-Extreme 上单样本 99.4%、5 次采样 99.9%，并称比次优模型（文中为 EqR）少用 345 倍推理 FLOPs，训练计算相当；自适应停止比固定深度 EBR 少约 10.9 倍 FLOPs 仍保持 99.9%。N-Queens 与 Graph Coloring 上称覆盖率领先，单样本准确率接近 100%。HN 条目标题写「385x」，与项目页/论文的 345× 不符，以项目页为准。数字均作者自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "项目页 energy-based-reasoners.github.io（HN 300/52）与 arXiv 2611.08977（William Chen、Alexi Gladstone、Zeyu Li、Heng Ji、Yilun Du；Duke / UIUC / Harvard）：Energy-Based Reasoners（EBR）在潜在推理状态上学习能量函数，把循环更新写成对该能量的梯度下降——能量用来给候选打分（不需要外部验证器），梯度用来 refinement，并在梯度范数低于阈值时停止。作者还引入基于探索的训练，以发现更多模态、在更宽的状态集上塑造能量面。四个算法推理基准上，1.8M 参数的 EBR 在 Sudoku-Extreme 上单样本 99.4%、5 次采样 99.9%，并称比次优模型（文中为 EqR）少用 345 倍推理 FLOPs，训练计算相当；自适应停止比固定深度 EBR 少约 10.9 倍 FLOPs 仍保持 99.9%。N-Queens 与 Graph Coloring 上称覆盖率领先，单样本准确率接近 100%。HN 条目标题写「385x」，与项目页/论文的 345× 不符，以项目页为准。数字均作者自报，未复现。仅 Chaos。",
+            "en": "Project page energy-based-reasoners.github.io (HN 300/52) and arXiv 2611.08977 (William Chen, Alexi Gladstone, Zeyu Li, Heng Ji, Yilun Du; Duke / UIUC / Harvard): Energy-Based Reasoners (EBRs) learn an energy function over latent reasoning states and treat looped updates as gradient descent on that energy. The energy scores candidates without an external verifier; its gradient guides refinement and, once its norm falls below a threshold, stopping. Exploration-based training is used to find more modes and shape the energy landscape over a broader set of states. On four algorithmic reasoning benchmarks, a 1.8M-parameter EBR is reported to reach 99.4% single-sample and 99.9% with 5 samples on Sudoku-Extreme, using 345× less inference FLOPs than the next-best model (EqR in the write-up) at comparable training compute; adaptive stopping is said to keep 99.9% with about 10.9× fewer FLOPs than a fixed-depth EBR. On N-Queens and Graph Coloring the authors claim state-of-the-art coverage of distinct valid solutions with near-100% single-sample accuracy. The HN item is titled “385x”; that figure does not match the 345× on the project page and paper, which are treated as authoritative here. Figures are the authors’ own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://energy-based-reasoners.github.io/",
+              "title": "Energy-Based Reasoners: 385x more efficient inference",
+              "brief": {
+                "zh": "项目页 energy-based-reasoners.github.io（HN 300/52）与 arXiv 2611.08977（William Chen、Alexi Gladstone、Zeyu Li、Heng Ji、Yilun Du；Duke / UIUC / Harvard）：Energy-Based Reasoners（EBR）在潜在推理状态上学习能量函数，把循环更新写成对该能量的梯度下降——能量用来给候选打分（不需要外部验证器），梯度用来 refinement，并在梯度范数低于阈值时停止。作者还引入基于探索的训练，以发现更多模态、在更宽的状态集上塑造能量面。四个算法推理基准上，1.8M 参数的 EBR 在 Sudoku-Extreme 上单样本 99.4%、5 次采样 99.9%，并称比次优模型（文中为 EqR）少用 345 倍推理 FLOPs，训练计算相当；自适应停止比固定深度 EBR 少约 10.9 倍 FLOPs 仍保持 99.9%。N-Queens 与 Graph Coloring 上称覆盖率领先，单样本准确率接近 100%。HN 条目标题写「385x」，与项目页/论文的 345× 不符，以项目页为准。数字均作者自报，未复现。仅 Chaos。",
+                "en": "Project page energy-based-reasoners.github.io (HN 300/52) and arXiv 2611.08977 (William Chen, Alexi Gladstone, Zeyu Li, Heng Ji, Yilun Du; Duke / UIUC / Harvard): Energy-Based Reasoners (EBRs) learn an energy function over latent reasoning states and treat looped updates as gradient descent on that energy. The energy scores candidates without an external verifier; its gradient guides refinement and, once its norm falls below a threshold, stopping. Exploration-based training is used to find more modes and shape the energy landscape over a broader set of states. On four algorithmic reasoning benchmarks, a 1.8M-parameter EBR is reported to reach 99.4% single-sample and 99.9% with 5 samples on Sudoku-Extreme, using 345× less inference FLOPs than the next-best model (EqR in the write-up) at comparable training compute; adaptive stopping is said to keep 99.9% with about 10.9× fewer FLOPs than a fixed-depth EBR. On N-Queens and Graph Coloring the authors claim state-of-the-art coverage of distinct valid solutions with near-100% single-sample accuracy. The HN item is titled “385x”; that figure does not match the 345× on the project page and paper, which are treated as authoritative here. Figures are the authors’ own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://energy-based-reasoners.github.io/"
+          ]
+        },
+        {
+          "id": "t934",
+          "theme": "security",
+          "title": {
+            "zh": "OpenAI 第二份研发加速报告：编码 agent 在内部 AI 研究上的自主成功率上升，但按领域很不均（jagged frontier）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "OpenAI 官方页《Research acceleration — the jagged frontier》（经官方 RSS 2026-11-18 16:00 CST 与 aihot 摘要）：第二份关于编码 agent 在内部 AI 研发中作用的报告。aihot 转述称，3 月至 10 月，在 2–4 小时人类任务上的自主成功率从 23% 升到 46%，4–8 小时任务从 13% 升到 35%；按领域很不均（监控/训练约 79%，推理与 serving 栈编码约 25%），并讨论对递归自我改进的含义。本轮直取官网为 403，正文未读，上述数字未在一级源核对。对照 t847、t054。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "OpenAI 官方页《Research acceleration — the jagged frontier》（经官方 RSS 2026-11-18 16:00 CST 与 aihot 摘要）：第二份关于编码 agent 在内部 AI 研发中作用的报告。aihot 转述称，3 月至 10 月，在 2–4 小时人类任务上的自主成功率从 23% 升到 46%，4–8 小时任务从 13% 升到 35%；按领域很不均（监控/训练约 79%，推理与 serving 栈编码约 25%），并讨论对递归自我改进的含义。本轮直取官网为 403，正文未读，上述数字未在一级源核对。对照 t847、t054。仅 Chaos。",
+            "en": "OpenAI official page, “Research acceleration — the jagged frontier” (via the official RSS at 2026-11-18 16:00 CST and an aihot summary): a second report on how coding agents speed up internal AI research. aihot says autonomous success on 2–4 hour human tasks rose from 23% to 46% from March to October, and on 4–8 hour tasks from 13% to 35%, with large differences by area (about 79% on monitoring/training versus about 25% on inference-and-serving-stack coding), and discusses implications for recursive self-improvement. A direct fetch of the official page returned 403, so the body was not read and those figures were not checked against the primary source. Cross-reference t847 and t054. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://openai.com/index/research-acceleration-jagged-frontier",
+              "title": "OpenAI: Research acceleration — the jagged frontier (2nd report on coding agents in AI R&D)",
+              "brief": {
+                "zh": "OpenAI 官方页《Research acceleration — the jagged frontier》（经官方 RSS 2026-11-18 16:00 CST 与 aihot 摘要）：第二份关于编码 agent 在内部 AI 研发中作用的报告。aihot 转述称，3 月至 10 月，在 2–4 小时人类任务上的自主成功率从 23% 升到 46%，4–8 小时任务从 13% 升到 35%；按领域很不均（监控/训练约 79%，推理与 serving 栈编码约 25%），并讨论对递归自我改进的含义。本轮直取官网为 403，正文未读，上述数字未在一级源核对。对照 t847、t054。仅 Chaos。",
+                "en": "OpenAI official page, “Research acceleration — the jagged frontier” (via the official RSS at 2026-11-18 16:00 CST and an aihot summary): a second report on how coding agents speed up internal AI research. aihot says autonomous success on 2–4 hour human tasks rose from 23% to 46% from March to October, and on 4–8 hour tasks from 13% to 35%, with large differences by area (about 79% on monitoring/training versus about 25% on inference-and-serving-stack coding), and discusses implications for recursive self-improvement. A direct fetch of the official page returned 403, so the body was not read and those figures were not checked against the primary source. Cross-reference t847 and t054. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/research-acceleration-jagged-frontier"
+          ]
+        },
+        {
+          "id": "t935",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "OpenAI《Inside the Codex sandbox》：在用户本机环境里跑命令，同时用用户可控的文件系统与网络限制，并给出 macOS / Linux / Windows 实现",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "OpenAI 官方页《Inside the Codex sandbox》（经官方 RSS 2026-11-18 16:00 CST 与 aihot 摘要）：长篇工程文，讲 Codex 如何在用户自己的环境里运行命令，同时又执行用户可控的文件系统与网络限制，并分别说明 macOS、Linux、Windows 上的实现。本轮直取官网为 403，正文未读，实现细节未核。对照 t926（外置沙箱）、t684（MXC / OpenShell / sandbox-runtime）。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "OpenAI 官方页《Inside the Codex sandbox》（经官方 RSS 2026-11-18 16:00 CST 与 aihot 摘要）：长篇工程文，讲 Codex 如何在用户自己的环境里运行命令，同时又执行用户可控的文件系统与网络限制，并分别说明 macOS、Linux、Windows 上的实现。本轮直取官网为 403，正文未读，实现细节未核。对照 t926（外置沙箱）、t684（MXC / OpenShell / sandbox-runtime）。仅 Chaos。",
+            "en": "OpenAI official page, “Inside the Codex sandbox” (via the official RSS at 2026-11-18 16:00 CST and an aihot summary): a long engineering post on how Codex runs commands in the user’s own environment while enforcing user-controlled filesystem and network limits, with per-platform implementations on macOS, Linux and Windows. A direct fetch of the official page returned 403, so the body was not read and implementation details were not verified. Cross-reference t926 (external sandboxes) and t684 (MXC / OpenShell / sandbox-runtime). Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://openai.com/index/inside-the-codex-sandbox",
+              "title": "OpenAI: Inside the Codex sandbox — permission design and macOS/Linux/Windows implementations",
+              "brief": {
+                "zh": "OpenAI 官方页《Inside the Codex sandbox》（经官方 RSS 2026-11-18 16:00 CST 与 aihot 摘要）：长篇工程文，讲 Codex 如何在用户自己的环境里运行命令，同时又执行用户可控的文件系统与网络限制，并分别说明 macOS、Linux、Windows 上的实现。本轮直取官网为 403，正文未读，实现细节未核。对照 t926（外置沙箱）、t684（MXC / OpenShell / sandbox-runtime）。仅 Chaos。",
+                "en": "OpenAI official page, “Inside the Codex sandbox” (via the official RSS at 2026-11-18 16:00 CST and an aihot summary): a long engineering post on how Codex runs commands in the user’s own environment while enforcing user-controlled filesystem and network limits, with per-platform implementations on macOS, Linux and Windows. A direct fetch of the official page returned 403, so the body was not read and implementation details were not verified. Cross-reference t926 (external sandboxes) and t684 (MXC / OpenShell / sandbox-runtime). Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://openai.com/index/inside-the-codex-sandbox"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-18T16:00:00+08:00",
       "label": {
@@ -1329,70 +1456,6 @@
           "blog": {
             "zh": "/cn/blog/claude-science-scorpion-toxin-binder-design/",
             "en": "/blog/claude-science-scorpion-toxin-binder-design/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-19T17:00:00+08:00",
-      "label": {
-        "zh": "10月19日 17:00",
-        "en": "Oct 19 17:00",
-        "ja": "10月19日 17:00"
-      },
-      "items": [
-        {
-          "id": "t700",
-          "theme": "security",
-          "title": {
-            "zh": "agent 时代的工程基建：Anthropic「为 agent 重做源码管理」（HN 545/523）+「为游戏开发设计 AI harness」（132/58）",
-            "en": "The AI Harness Is Moving Into the Environment: Anthropic's Source Control, a Game Built as a Harness, and OpenAI's Codex Repo",
-            "ja": "The AI Harness Is Moving Into the Environment: Anthropic's Source Control, a Game Built as a Harness, and OpenAI's Codex Repo"
-          },
-          "summary": {
-            "zh": "Anthropic 公开为 agent 时代重做源码管理，另有游戏开发 harness 工程实践——agent 工程基建的一级源复盘。",
-            "en": "Anthropic rebuilt source control for agent scale (Scion), an indie developer turned a game into a harness, and OpenAI made a Codex-built repo legible to agents. Three cases orders of magnitude apart reach one conclusion: once code is cheap, the bottleneck is whether agents can query, reproduce, measure, and be stopped by their environment. This post maps the mechanisms, weighs the objections and the Mononoke attribution dispute, and gives an investment order by scale plus a list of traps.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "Anthropic 公开为 agent 时代重做源码管理，另有游戏开发 harness 工程实践——agent 工程基建的一级源复盘。",
-            "en": "Anthropic describes redesigning source control for the agent era, alongside a game-dev harness engineering write-up—first-party agent infrastructure retrospectives.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "anthropic",
-              "url": "https://www.anthropic.com/engineering/redesigning-source-control",
-              "title": "Redesigning source control at Anthropic",
-              "brief": {
-                "zh": "HN 545/523。",
-                "en": "HN 545/523.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "hn",
-              "url": "https://kylekukshtel.com/ai-harness-engineering-game-development-claude-code",
-              "title": "How to engineer an AI harness for game development",
-              "brief": {
-                "zh": "HN 132/58。",
-                "en": "HN 132/58.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://www.anthropic.com/engineering/redesigning-source-control",
-            "https://kylekukshtel.com/ai-harness-engineering-game-development-claude-code"
-          ],
-          "blog": {
-            "zh": "/cn/blog/ai-harness-environment-legibility/",
-            "en": "/blog/ai-harness-environment-legibility/"
           }
         }
       ]
