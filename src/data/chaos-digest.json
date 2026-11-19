@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T10:00:41+08:00",
+  "updatedAt": "2026-11-19T16:00:43+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -15,11 +15,177 @@
     "coding-tools": 1,
     "agents-oss": 2,
     "security": 3,
-    "research": 16,
+    "research": 20,
     "product-news": 1,
     "other": 0
   },
   "hours": [
+    {
+      "hourStart": "2026-11-19T16:00:00+08:00",
+      "label": {
+        "zh": "11月19日 16:00",
+        "en": "Nov 19 16:00",
+        "ja": "11月19日 16:00"
+      },
+      "items": [
+        {
+          "id": "t941",
+          "theme": "research",
+          "title": {
+            "zh": "Jeveration：System One 的并行快决策也可以在单次前向中生成图像，用共享随机状态协调各位置以保持全局一致",
+            "en": "Jeveration",
+            "ja": "Jeveration"
+          },
+          "summary": {
+            "zh": "arXiv 2611.24738（Yuhe Liu、Qi Li、Shihua Zhang、Xinchao Wang）：Jeveration 表明，Jev 这类 System One 模型的并行快决策范式，也可以在单次前向中生成图像。它建立在冻结的视觉-语言模型上，把视觉-语义知识改用于整体图像生成。关键困难是全局一致：同一提示允许许多有效图像，但各位置的并行预测必须收敛成一张完整图。作者因此用共享随机状态协调各位置的并行预测，使每次采样得到不同但自洽的图像；由于在直接图像监督下模型倾向忽略该状态，他们先学习离散图像码的分布来引导单次生成。同一检查点还统一了图生图与稠密预测，三种任务都是一次前向。实验称 512×512 图像生成约 78 毫秒，比现有统一模型最快可达 122 倍，质量与稠密预测仍有竞争力。代码自称公开于 github.com/Carol-lyh/Jeveration。数字均论文自报，未复现。对照 t896。本周 Jev 配额不因本条占用。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.24738（Yuhe Liu、Qi Li、Shihua Zhang、Xinchao Wang）：Jeveration 表明，Jev 这类 System One 模型的并行快决策范式，也可以在单次前向中生成图像。它建立在冻结的视觉-语言模型上，把视觉-语义知识改用于整体图像生成。关键困难是全局一致：同一提示允许许多有效图像，但各位置的并行预测必须收敛成一张完整图。作者因此用共享随机状态协调各位置的并行预测，使每次采样得到不同但自洽的图像；由于在直接图像监督下模型倾向忽略该状态，他们先学习离散图像码的分布来引导单次生成。同一检查点还统一了图生图与稠密预测，三种任务都是一次前向。实验称 512×512 图像生成约 78 毫秒，比现有统一模型最快可达 122 倍，质量与稠密预测仍有竞争力。代码自称公开于 github.com/Carol-lyh/Jeveration。数字均论文自报，未复现。对照 t896。本周 Jev 配额不因本条占用。仅 Chaos。",
+            "en": "arXiv 2611.24738 (Yuhe Liu, Qi Li, Shihua Zhang, Xinchao Wang) introduces Jeveration, showing that the fast, parallel decision paradigm of System One models such as Jev can also generate images in a single forward pass. It builds on a frozen vision-language model and repurposes visual-semantic knowledge for holistic image generation. The key challenge is global consistency: a single prompt admits many valid images, yet parallel predictions must converge on a coherent whole. All positions are therefore conditioned on a shared random state, so that each draw yields a different but coherent image. Because the model tends to ignore this state under direct image supervision, the authors first learn a distribution over discrete image codes to guide single-pass generation. The same checkpoint also unifies image-to-image generation and dense prediction, so all three tasks run in one forward pass. They report 78 ms for a 512×512 image, up to 122× faster than existing unified models, with competitive image quality and dense-prediction performance. Code is claimed at github.com/Carol-lyh/Jeveration. Figures are the paper’s own, not reproduced. Cross-reference t896. This item does not occupy the weekly Jev formal-post quota. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.24738",
+              "title": "Jeveration: System One Models Now Generate",
+              "brief": {
+                "zh": "arXiv 2611.24738（Yuhe Liu、Qi Li、Shihua Zhang、Xinchao Wang）：Jeveration 表明，Jev 这类 System One 模型的并行快决策范式，也可以在单次前向中生成图像。它建立在冻结的视觉-语言模型上，把视觉-语义知识改用于整体图像生成。关键困难是全局一致：同一提示允许许多有效图像，但各位置的并行预测必须收敛成一张完整图。作者因此用共享随机状态协调各位置的并行预测，使每次采样得到不同但自洽的图像；由于在直接图像监督下模型倾向忽略该状态，他们先学习离散图像码的分布来引导单次生成。同一检查点还统一了图生图与稠密预测，三种任务都是一次前向。实验称 512×512 图像生成约 78 毫秒，比现有统一模型最快可达 122 倍，质量与稠密预测仍有竞争力。代码自称公开于 github.com/Carol-lyh/Jeveration。数字均论文自报，未复现。对照 t896。本周 Jev 配额不因本条占用。仅 Chaos。",
+                "en": "arXiv 2611.24738 (Yuhe Liu, Qi Li, Shihua Zhang, Xinchao Wang) introduces Jeveration, showing that the fast, parallel decision paradigm of System One models such as Jev can also generate images in a single forward pass. It builds on a frozen vision-language model and repurposes visual-semantic knowledge for holistic image generation. The key challenge is global consistency: a single prompt admits many valid images, yet parallel predictions must converge on a coherent whole. All positions are therefore conditioned on a shared random state, so that each draw yields a different but coherent image. Because the model tends to ignore this state under direct image supervision, the authors first learn a distribution over discrete image codes to guide single-pass generation. The same checkpoint also unifies image-to-image generation and dense prediction, so all three tasks run in one forward pass. They report 78 ms for a 512×512 image, up to 122× faster than existing unified models, with competitive image quality and dense-prediction performance. Code is claimed at github.com/Carol-lyh/Jeveration. Figures are the paper’s own, not reproduced. Cross-reference t896. This item does not occupy the weekly Jev formal-post quota. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.24738"
+          ]
+        },
+        {
+          "id": "t942",
+          "theme": "research",
+          "title": {
+            "zh": "语言模型会把尚未研究的问题说成已经有人做过，并夸大相关论文实际证明了什么——判断往往对，普通回答却说不清",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.23546（Guy Zyskind）：研究者越来越多用大模型来检验研究问题是否已有人做。作者发现，模型会把尚未研究的问题说成已经有人做过，并夸大相关论文实际证明了什么；若单独去核对被引论文全文，多数夸大会被模型自己认出。在 40 道取自新接收论文的开放问题上，GPT-6-Astra 能正确判断 98% 尚未被研究，但在普通回答里只有 8% 会把这一状态说清楚；六个前沿系统的报告缺口都在 30–90 个百分点。在 22 个模型、同一批论文上，能力越强，判断越准，缺口反而越大。这一失败是不对称的：当提供已有答案的论文时，模型在普通回答里能以 88–100% 正确标出「已有研究」。把判断与对引用论文的单独核对拼成固定答案后，Astra 的清楚报告率从 8% 升到 95%，六个系统都有改进。作者还用多个模型的书面评分加一条从已评分样本学到的规则，预测审稿人的新颖性分数，达到 Think-Probe-Respond 报告的表现区间，且不需要权重或内部激活，因而也适用于闭源前沿模型。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.23546（Guy Zyskind）：研究者越来越多用大模型来检验研究问题是否已有人做。作者发现，模型会把尚未研究的问题说成已经有人做过，并夸大相关论文实际证明了什么；若单独去核对被引论文全文，多数夸大会被模型自己认出。在 40 道取自新接收论文的开放问题上，GPT-6-Astra 能正确判断 98% 尚未被研究，但在普通回答里只有 8% 会把这一状态说清楚；六个前沿系统的报告缺口都在 30–90 个百分点。在 22 个模型、同一批论文上，能力越强，判断越准，缺口反而越大。这一失败是不对称的：当提供已有答案的论文时，模型在普通回答里能以 88–100% 正确标出「已有研究」。把判断与对引用论文的单独核对拼成固定答案后，Astra 的清楚报告率从 8% 升到 95%，六个系统都有改进。作者还用多个模型的书面评分加一条从已评分样本学到的规则，预测审稿人的新颖性分数，达到 Think-Probe-Respond 报告的表现区间，且不需要权重或内部激活，因而也适用于闭源前沿模型。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.23546 (Guy Zyskind) finds that researchers increasingly use LLMs to validate research questions, and that the models make open questions sound partly studied and overstate what related papers establish. The models recognize most of those overstatements when asked to check the papers’ full texts separately. On 40 questions drawn from newly accepted papers, GPT-6-Astra correctly judges 98% to be unstudied, but states that status plainly in only 8% of ordinary answers. All six frontier systems show reporting gaps of 30–90 percentage points. Across 22 models given identical papers, higher capability is associated with more accurate judgments and larger reporting gaps. The failure is asymmetric: when the answering papers are supplied, models correctly identify studied questions in 88–100% of ordinary answers. Building a fixed answer from each model’s judgment and separate checks of cited papers raises Astra’s clear reporting of open status from 8% to 95%, with improvements in all six systems. Combining several models’ written ratings with a rule learned from graded examples is said to predict reviewers’ novelty grades in the performance range reported by Think-Probe-Respond, without access to weights or internal activations, so it also works with closed-weight frontier models. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.23546",
+              "title": "Language Models Make New Research Sound Old",
+              "brief": {
+                "zh": "arXiv 2611.23546（Guy Zyskind）：研究者越来越多用大模型来检验研究问题是否已有人做。作者发现，模型会把尚未研究的问题说成已经有人做过，并夸大相关论文实际证明了什么；若单独去核对被引论文全文，多数夸大会被模型自己认出。在 40 道取自新接收论文的开放问题上，GPT-6-Astra 能正确判断 98% 尚未被研究，但在普通回答里只有 8% 会把这一状态说清楚；六个前沿系统的报告缺口都在 30–90 个百分点。在 22 个模型、同一批论文上，能力越强，判断越准，缺口反而越大。这一失败是不对称的：当提供已有答案的论文时，模型在普通回答里能以 88–100% 正确标出「已有研究」。把判断与对引用论文的单独核对拼成固定答案后，Astra 的清楚报告率从 8% 升到 95%，六个系统都有改进。作者还用多个模型的书面评分加一条从已评分样本学到的规则，预测审稿人的新颖性分数，达到 Think-Probe-Respond 报告的表现区间，且不需要权重或内部激活，因而也适用于闭源前沿模型。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.23546 (Guy Zyskind) finds that researchers increasingly use LLMs to validate research questions, and that the models make open questions sound partly studied and overstate what related papers establish. The models recognize most of those overstatements when asked to check the papers’ full texts separately. On 40 questions drawn from newly accepted papers, GPT-6-Astra correctly judges 98% to be unstudied, but states that status plainly in only 8% of ordinary answers. All six frontier systems show reporting gaps of 30–90 percentage points. Across 22 models given identical papers, higher capability is associated with more accurate judgments and larger reporting gaps. The failure is asymmetric: when the answering papers are supplied, models correctly identify studied questions in 88–100% of ordinary answers. Building a fixed answer from each model’s judgment and separate checks of cited papers raises Astra’s clear reporting of open status from 8% to 95%, with improvements in all six systems. Combining several models’ written ratings with a rule learned from graded examples is said to predict reviewers’ novelty grades in the performance range reported by Think-Probe-Respond, without access to weights or internal activations, so it also works with closed-weight frontier models. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.23546"
+          ]
+        },
+        {
+          "id": "t943",
+          "theme": "research",
+          "title": {
+            "zh": "总体进步可以替代被扣住的训练数据：数据过滤只能推迟能力，学会该技能所需的补训数据会随模型进步而减少",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.24844（Mark Marosi、Peter Antal）：开发者会在训练中扣住某些数据，以免模型学会可能被滥用的能力，但推迟多久、之后要多少数据才能重新获得，此前并不清楚。作者表明，模型在其余数据上取得的总体进步，可以替代被扣住的样本。这一规律在国际象棋、奥赛罗、分子串、括号语言和网页文本上均成立；延迟可从较小模型预测到较大模型。一个从未被明确训练「应对将军」的象棋模型，对合法应着的排序几乎与受过训练的模型相当。之后再用被扣数据补训时，学会该技能所需的数据只是从头训练的一小部分，且模型越进步，这一比例越低；同等难度的对照规则则学得慢得多。从 70 亿参数模型的训练文本中扣住一门编程语言，同样可以按此方式被重新获得。因此数据过滤只能推迟能力，无法永久阻断。代码自称公开于 github.com/Mapika/progress-substitutes-data。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.24844（Mark Marosi、Peter Antal）：开发者会在训练中扣住某些数据，以免模型学会可能被滥用的能力，但推迟多久、之后要多少数据才能重新获得，此前并不清楚。作者表明，模型在其余数据上取得的总体进步，可以替代被扣住的样本。这一规律在国际象棋、奥赛罗、分子串、括号语言和网页文本上均成立；延迟可从较小模型预测到较大模型。一个从未被明确训练「应对将军」的象棋模型，对合法应着的排序几乎与受过训练的模型相当。之后再用被扣数据补训时，学会该技能所需的数据只是从头训练的一小部分，且模型越进步，这一比例越低；同等难度的对照规则则学得慢得多。从 70 亿参数模型的训练文本中扣住一门编程语言，同样可以按此方式被重新获得。因此数据过滤只能推迟能力，无法永久阻断。代码自称公开于 github.com/Mapika/progress-substitutes-data。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.24844 (Mark Marosi, Peter Antal) asks how long withholding training data delays a capability, and how much data is needed to acquire it later. The authors show that the general progress a model makes on the rest of its training data substitutes for the withheld samples. The pattern holds for chess, Othello, molecular strings, bracket languages and web text, and the delay of a withheld skill in larger models was predicted from smaller ones. A chess model never explicitly trained to respond to check ranked the legal responses almost as well as a model that was. When the withheld data was then restored, the models acquired the skill with a small fraction of the data needed from initialization, and that fraction decreased as the models progressed; a control rule of equal difficulty was learned much more slowly. A programming language withheld from the training text of a 7-billion-parameter model was regained in the same way. Data filtering therefore delays a capability rather than blocking it permanently. Code is claimed at github.com/Mapika/progress-substitutes-data. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.24844",
+              "title": "General progress substitutes for specific training data in language models",
+              "brief": {
+                "zh": "arXiv 2611.24844（Mark Marosi、Peter Antal）：开发者会在训练中扣住某些数据，以免模型学会可能被滥用的能力，但推迟多久、之后要多少数据才能重新获得，此前并不清楚。作者表明，模型在其余数据上取得的总体进步，可以替代被扣住的样本。这一规律在国际象棋、奥赛罗、分子串、括号语言和网页文本上均成立；延迟可从较小模型预测到较大模型。一个从未被明确训练「应对将军」的象棋模型，对合法应着的排序几乎与受过训练的模型相当。之后再用被扣数据补训时，学会该技能所需的数据只是从头训练的一小部分，且模型越进步，这一比例越低；同等难度的对照规则则学得慢得多。从 70 亿参数模型的训练文本中扣住一门编程语言，同样可以按此方式被重新获得。因此数据过滤只能推迟能力，无法永久阻断。代码自称公开于 github.com/Mapika/progress-substitutes-data。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.24844 (Mark Marosi, Peter Antal) asks how long withholding training data delays a capability, and how much data is needed to acquire it later. The authors show that the general progress a model makes on the rest of its training data substitutes for the withheld samples. The pattern holds for chess, Othello, molecular strings, bracket languages and web text, and the delay of a withheld skill in larger models was predicted from smaller ones. A chess model never explicitly trained to respond to check ranked the legal responses almost as well as a model that was. When the withheld data was then restored, the models acquired the skill with a small fraction of the data needed from initialization, and that fraction decreased as the models progressed; a control rule of equal difficulty was learned much more slowly. A programming language withheld from the training text of a 7-billion-parameter model was regained in the same way. Data filtering therefore delays a capability rather than blocking it permanently. Code is claimed at github.com/Mapika/progress-substitutes-data. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.24844"
+          ]
+        },
+        {
+          "id": "t944",
+          "theme": "research",
+          "title": {
+            "zh": "可塑性与稳定性并不互为镜像：学新程序时更新 QK 能保住一半以上已存的陈述记忆，更新 VO 则会丢掉大约五分之四",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.23427（Jinjun Peng、Wailiang Zhao、Baishakhi Ray、Zhou Yu、Jufeng Yang）：持续学习里的可塑性与稳定性通常按整模型和与任务无关的方式来研究，不同设定下结论并不一致。作者受陈述性记忆与程序性记忆的区分启发，在可干净测量的受控合成环境里，按 Transformer 模块和任务类型分开看。结果是双重分离：程序学习时查询-键（QK）与值-输出（VO）投影可塑性最强，陈述性记忆则是 MLP 最可塑。但稳定性并不只是可塑性的镜像——学新程序时，只更新 QK 能保留一半以上已存储的陈述记忆，更新 MLP 保留得少得多，更新 VO 则会丢掉大约五分之四。定向的模块重置与恢复实验解释了这种不对称：可塑性取决于哪个模块最适合该任务的主计算或存储，稳定性则取决于已有能力对这个模块的全部依赖方式，包括访问存在其他模块里的信息。在更现实的模型与任务上，这种不对称大体同样出现。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.23427（Jinjun Peng、Wailiang Zhao、Baishakhi Ray、Zhou Yu、Jufeng Yang）：持续学习里的可塑性与稳定性通常按整模型和与任务无关的方式来研究，不同设定下结论并不一致。作者受陈述性记忆与程序性记忆的区分启发，在可干净测量的受控合成环境里，按 Transformer 模块和任务类型分开看。结果是双重分离：程序学习时查询-键（QK）与值-输出（VO）投影可塑性最强，陈述性记忆则是 MLP 最可塑。但稳定性并不只是可塑性的镜像——学新程序时，只更新 QK 能保留一半以上已存储的陈述记忆，更新 MLP 保留得少得多，更新 VO 则会丢掉大约五分之四。定向的模块重置与恢复实验解释了这种不对称：可塑性取决于哪个模块最适合该任务的主计算或存储，稳定性则取决于已有能力对这个模块的全部依赖方式，包括访问存在其他模块里的信息。在更现实的模型与任务上，这种不对称大体同样出现。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.23427 (Jinjun Peng, Wailiang Zhao, Baishakhi Ray, Zhou Yu, Jufeng Yang) notes that plasticity and stability in continual learning are usually studied at the whole-model level and in a task-agnostic way, with divergent conclusions across settings. Inspired by the distinction between declarative and procedural memory, they measure both across transformer modules and task types in a controlled synthetic environment. They find a double dissociation: query-key (QK) and value-output (VO) projections are the most plastic on procedural tasks, whereas MLPs are the most plastic on declarative memorization. Stability does not simply mirror plasticity: when learning a new procedure, updating QK retains over half of the stored declarative memory, while updating MLPs retains far less and updating VO loses roughly four-fifths. Targeted module reset-and-recovery experiments explain the asymmetry: plasticity tracks which module is best suited to a task’s primary computation or storage, whereas stability depends on all the ways the existing capability relies on that module, including access to information stored in other modules. Experiments on a more realistic model and tasks broadly echo these dynamics. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.23427",
+              "title": "Stability Does Not Mirror Plasticity: A Module-Level View of Declarative and Procedural Learning in Transformers",
+              "brief": {
+                "zh": "arXiv 2611.23427（Jinjun Peng、Wailiang Zhao、Baishakhi Ray、Zhou Yu、Jufeng Yang）：持续学习里的可塑性与稳定性通常按整模型和与任务无关的方式来研究，不同设定下结论并不一致。作者受陈述性记忆与程序性记忆的区分启发，在可干净测量的受控合成环境里，按 Transformer 模块和任务类型分开看。结果是双重分离：程序学习时查询-键（QK）与值-输出（VO）投影可塑性最强，陈述性记忆则是 MLP 最可塑。但稳定性并不只是可塑性的镜像——学新程序时，只更新 QK 能保留一半以上已存储的陈述记忆，更新 MLP 保留得少得多，更新 VO 则会丢掉大约五分之四。定向的模块重置与恢复实验解释了这种不对称：可塑性取决于哪个模块最适合该任务的主计算或存储，稳定性则取决于已有能力对这个模块的全部依赖方式，包括访问存在其他模块里的信息。在更现实的模型与任务上，这种不对称大体同样出现。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.23427 (Jinjun Peng, Wailiang Zhao, Baishakhi Ray, Zhou Yu, Jufeng Yang) notes that plasticity and stability in continual learning are usually studied at the whole-model level and in a task-agnostic way, with divergent conclusions across settings. Inspired by the distinction between declarative and procedural memory, they measure both across transformer modules and task types in a controlled synthetic environment. They find a double dissociation: query-key (QK) and value-output (VO) projections are the most plastic on procedural tasks, whereas MLPs are the most plastic on declarative memorization. Stability does not simply mirror plasticity: when learning a new procedure, updating QK retains over half of the stored declarative memory, while updating MLPs retains far less and updating VO loses roughly four-fifths. Targeted module reset-and-recovery experiments explain the asymmetry: plasticity tracks which module is best suited to a task’s primary computation or storage, whereas stability depends on all the ways the existing capability relies on that module, including access to information stored in other modules. Experiments on a more realistic model and tasks broadly echo these dynamics. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.23427"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-19T10:00:00+08:00",
       "label": {
