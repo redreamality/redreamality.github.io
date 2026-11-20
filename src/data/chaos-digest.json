@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-20T10:00:57+08:00",
+  "updatedAt": "2026-11-20T16:00:31+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,13 +13,179 @@
   "themeCounts": {
     "models": 3,
     "coding-tools": 0,
-    "agents-oss": 4,
+    "agents-oss": 3,
     "security": 2,
-    "research": 17,
+    "research": 19,
     "product-news": 0,
     "other": 1
   },
   "hours": [
+    {
+      "hourStart": "2026-11-20T16:00:00+08:00",
+      "label": {
+        "zh": "11月20日 16:00",
+        "en": "Nov 20 16:00",
+        "ja": "11月20日 16:00"
+      },
+      "items": [
+        {
+          "id": "t951",
+          "theme": "research",
+          "title": {
+            "zh": "抗幻觉训练买到的，可能主要是少说和廉价剪枝：CHAIR 分数下降里，去掉「说得更少」之后，大半能被一个冻结的 11 维事后探针复现",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.25814（Lingkai Bu、Qian Gao）：视觉语言模型里，偏好训练是减少物体幻觉的标准做法，新方法都会报出更低的 CHAIR 分数。作者追问这下降由什么构成。每个训练后的系统都先与「基座模型说明截到同一物体召回率」比较，以去掉来自「说得更少」的增益；其余再与一个故意做弱、冻结的、只用 500 张标注图拟合的 11 维事后探针能复现的部分比较。分析标准事先写进代码，在被评判的输出出现前就冻结。LLaVA-1.5-7B 上的 8 种公开方法中，探针能复现「去掉少说之后」剩余增益的至少三分之二：COCO 上 7/8、AMBER 上 8/8、Object HalBench 上 6/8，唯一稳定例外是 RLAIF-V；后来同时放出 LLaVA-1.5 与 Qwen2.5-VL 的 SENTINEL 也达到同一标准。作者自己的 DPO 检查点上，这套记账在 Qwen2.5-VL 上成立，在 InternVL2.5 的 COCO 上则有 4 种训练设计中的 2 种不成立。召回率对齐时，基座模型加该探针往往优于截断；用探针或物体级 CLIP 分数给模型自己的样本打标再做 DPO，在 Qwen2.5-VL 上分别收回真值标注 DPO 超简洁增益的 0.70 与 0.87。人工判断显示，探针删掉的句子比截断会删的更常是错的；对 CHAIR 评估器精度的人工核查低于预先设定的标准，作者把它记为局限。数字均论文自报，未复现。对照 t809。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.25814（Lingkai Bu、Qian Gao）：视觉语言模型里，偏好训练是减少物体幻觉的标准做法，新方法都会报出更低的 CHAIR 分数。作者追问这下降由什么构成。每个训练后的系统都先与「基座模型说明截到同一物体召回率」比较，以去掉来自「说得更少」的增益；其余再与一个故意做弱、冻结的、只用 500 张标注图拟合的 11 维事后探针能复现的部分比较。分析标准事先写进代码，在被评判的输出出现前就冻结。LLaVA-1.5-7B 上的 8 种公开方法中，探针能复现「去掉少说之后」剩余增益的至少三分之二：COCO 上 7/8、AMBER 上 8/8、Object HalBench 上 6/8，唯一稳定例外是 RLAIF-V；后来同时放出 LLaVA-1.5 与 Qwen2.5-VL 的 SENTINEL 也达到同一标准。作者自己的 DPO 检查点上，这套记账在 Qwen2.5-VL 上成立，在 InternVL2.5 的 COCO 上则有 4 种训练设计中的 2 种不成立。召回率对齐时，基座模型加该探针往往优于截断；用探针或物体级 CLIP 分数给模型自己的样本打标再做 DPO，在 Qwen2.5-VL 上分别收回真值标注 DPO 超简洁增益的 0.70 与 0.87。人工判断显示，探针删掉的句子比截断会删的更常是错的；对 CHAIR 评估器精度的人工核查低于预先设定的标准，作者把它记为局限。数字均论文自报，未复现。对照 t809。仅 Chaos。",
+            "en": "arXiv 2611.25814 (Lingkai Bu, Qian Gao) asks what the CHAIR-score drop from preference training against object hallucination in vision-language models actually consists of. Each trained system is compared with its base model’s caption truncated to the same object recall, which removes the part of the gain that comes from saying less; the remainder is compared with what a deliberately weak, frozen, eleven-feature post-hoc probe fitted on 500 annotated images can reproduce. All criteria were specified in the analysis code and frozen before the outputs they judge existed. For eight public methods on LLaVA-1.5-7B, the probe reproduces at least two thirds of what training removes beyond saying less for 7 of 8 methods on COCO, 8 of 8 on AMBER and 6 of 8 on Object HalBench, with RLAIF-V the consistent exception; a later public method released for both LLaVA-1.5 and Qwen2.5-VL (SENTINEL) meets the same bar on both. On the authors’ own DPO checkpoints the accounting holds on Qwen2.5-VL but fails on InternVL2.5 on COCO for 2 of 4 training designs. At matched recall, the base model plus the probe often beats truncation. DPO on the model’s own samples labelled by the probe or by an object-level CLIP score recovers 0.70 and 0.87 of the beyond-brevity gain of ground-truth-labelled DPO on Qwen2.5-VL. Human judgements show that the sentences the probe deletes are wrong more often than those truncation would delete; a human check of the CHAIR evaluator’s precision falls below a pre-set bar, which the authors report as a limitation. Figures are the paper’s own, not reproduced. Cross-reference t809. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.25814",
+              "title": "What Does Anti-Hallucination Training Buy? Saying Less, Cheap Pruning, and the Rest",
+              "brief": {
+                "zh": "arXiv 2611.25814（Lingkai Bu、Qian Gao）：视觉语言模型里，偏好训练是减少物体幻觉的标准做法，新方法都会报出更低的 CHAIR 分数。作者追问这下降由什么构成。每个训练后的系统都先与「基座模型说明截到同一物体召回率」比较，以去掉来自「说得更少」的增益；其余再与一个故意做弱、冻结的、只用 500 张标注图拟合的 11 维事后探针能复现的部分比较。分析标准事先写进代码，在被评判的输出出现前就冻结。LLaVA-1.5-7B 上的 8 种公开方法中，探针能复现「去掉少说之后」剩余增益的至少三分之二：COCO 上 7/8、AMBER 上 8/8、Object HalBench 上 6/8，唯一稳定例外是 RLAIF-V；后来同时放出 LLaVA-1.5 与 Qwen2.5-VL 的 SENTINEL 也达到同一标准。作者自己的 DPO 检查点上，这套记账在 Qwen2.5-VL 上成立，在 InternVL2.5 的 COCO 上则有 4 种训练设计中的 2 种不成立。召回率对齐时，基座模型加该探针往往优于截断；用探针或物体级 CLIP 分数给模型自己的样本打标再做 DPO，在 Qwen2.5-VL 上分别收回真值标注 DPO 超简洁增益的 0.70 与 0.87。人工判断显示，探针删掉的句子比截断会删的更常是错的；对 CHAIR 评估器精度的人工核查低于预先设定的标准，作者把它记为局限。数字均论文自报，未复现。对照 t809。仅 Chaos。",
+                "en": "arXiv 2611.25814 (Lingkai Bu, Qian Gao) asks what the CHAIR-score drop from preference training against object hallucination in vision-language models actually consists of. Each trained system is compared with its base model’s caption truncated to the same object recall, which removes the part of the gain that comes from saying less; the remainder is compared with what a deliberately weak, frozen, eleven-feature post-hoc probe fitted on 500 annotated images can reproduce. All criteria were specified in the analysis code and frozen before the outputs they judge existed. For eight public methods on LLaVA-1.5-7B, the probe reproduces at least two thirds of what training removes beyond saying less for 7 of 8 methods on COCO, 8 of 8 on AMBER and 6 of 8 on Object HalBench, with RLAIF-V the consistent exception; a later public method released for both LLaVA-1.5 and Qwen2.5-VL (SENTINEL) meets the same bar on both. On the authors’ own DPO checkpoints the accounting holds on Qwen2.5-VL but fails on InternVL2.5 on COCO for 2 of 4 training designs. At matched recall, the base model plus the probe often beats truncation. DPO on the model’s own samples labelled by the probe or by an object-level CLIP score recovers 0.70 and 0.87 of the beyond-brevity gain of ground-truth-labelled DPO on Qwen2.5-VL. Human judgements show that the sentences the probe deletes are wrong more often than those truncation would delete; a human check of the CHAIR evaluator’s precision falls below a pre-set bar, which the authors report as a limitation. Figures are the paper’s own, not reproduced. Cross-reference t809. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.25814"
+          ]
+        },
+        {
+          "id": "t952",
+          "theme": "research",
+          "title": {
+            "zh": "已经表征了，却可能被读错：后训练并不一定改写模型内部已经表征了什么，而会改它如何把已有表征读成答案",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.26584（Jochen Laubrock）：后训练改的是模型已经表征了什么，还是它如何把已有表征读成答案？作者在六组开源基座模型及其后训练版本上，把线性探针与模型自己的回答（用信号检测论分析）对照。判断德语文本是人写还是 AI 写时，探针和词 n-gram 分类器都能分清，模型自己的回答却分不清，还常常把顺序排反。后训练把回答的敏感度平均再降 Δd′ = −0.34（三个提示上为 −0.29）。它对「给定的基率」的用法也变了：基座模型对先验赔率变化的对数赔率移动偏小，多数后训练模型则偏大。有阶段性检查点的两个模型里，这一变化发生在监督微调期间；模型拼接指向浅层，从中层起是文本之后的位置、而不是文本位置本身，把变化在检查点之间传递。语料不能公开，作者另加一个可用公开数据复现的案例：否定句的真值。这里方向相反——探针几乎总能读出真值，若干基座模型的回答用不上它，后训练反而修好了读出；到中层，修复落在陈述之后的位置。训练研究里，在其他微调数据不变的情况下加入 2,000 条正确标注的新闻文本作者判断，会改进报纸和教材上的回答，却把聊天语料上的回答翻转，并跟随基座模型上一个用新闻训练的探针。因此后训练改变的是如何从已有表征里读出判断，一小段训练信号就能设定方向。数字均论文自报，未复现。对照 t919、t953。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.26584（Jochen Laubrock）：后训练改的是模型已经表征了什么，还是它如何把已有表征读成答案？作者在六组开源基座模型及其后训练版本上，把线性探针与模型自己的回答（用信号检测论分析）对照。判断德语文本是人写还是 AI 写时，探针和词 n-gram 分类器都能分清，模型自己的回答却分不清，还常常把顺序排反。后训练把回答的敏感度平均再降 Δd′ = −0.34（三个提示上为 −0.29）。它对「给定的基率」的用法也变了：基座模型对先验赔率变化的对数赔率移动偏小，多数后训练模型则偏大。有阶段性检查点的两个模型里，这一变化发生在监督微调期间；模型拼接指向浅层，从中层起是文本之后的位置、而不是文本位置本身，把变化在检查点之间传递。语料不能公开，作者另加一个可用公开数据复现的案例：否定句的真值。这里方向相反——探针几乎总能读出真值，若干基座模型的回答用不上它，后训练反而修好了读出；到中层，修复落在陈述之后的位置。训练研究里，在其他微调数据不变的情况下加入 2,000 条正确标注的新闻文本作者判断，会改进报纸和教材上的回答，却把聊天语料上的回答翻转，并跟随基座模型上一个用新闻训练的探针。因此后训练改变的是如何从已有表征里读出判断，一小段训练信号就能设定方向。数字均论文自报，未复现。对照 t919、t953。仅 Chaos。",
+            "en": "arXiv 2611.26584 (Jochen Laubrock) asks whether post-training changes what a language model represents, or how that representation is read out into an answer. In six open-weight base models and their post-trained versions, linear probes are compared with the models’ own answers, analyzed with signal detection theory. For judging whether German texts were written by a human or an AI, probes and word n-gram classifiers separated the classes well, but the answers did not and often ordered the texts inversely. Post-training lowered the sensitivity of the answers on average (Δd′ = −0.34 across model families; −0.29 across three prompts). It also changed the use of a stated base rate: base models shifted their log-odds by less than the stated change in prior odds, most post-trained models by more. In two models with stage-wise checkpoints, the change occurred during supervised fine-tuning; model stitching implicated the early layers, and from mid-depth on, internal states at positions after the text, not those of the text, transferred the change between checkpoints. The corpora cannot be shared, so the paper adds a case reproducible from public data: the truth of negated statements. Here post-training acted in the opposite direction: probes decoded truth at or near ceiling in every model, the answers of several base models did not use it, and post-training repaired them; by mid-depth the repair resided at the positions after the statement. In a training study, adding 2,000 correctly labeled authorship judgments of news texts to otherwise identical fine-tuning data improved answers on newspaper and textbook corpora and inverted them on chats, where they followed a news-trained probe of the base model. Post-training thus changed how a judgment is read out of what a model represents, and a small training signal can set its direction. Figures are the paper’s own, not reproduced. Cross-reference t919 and t953. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.26584",
+              "title": "Represented but misread: Post-training changes how language models read out what they represent",
+              "brief": {
+                "zh": "arXiv 2611.26584（Jochen Laubrock）：后训练改的是模型已经表征了什么，还是它如何把已有表征读成答案？作者在六组开源基座模型及其后训练版本上，把线性探针与模型自己的回答（用信号检测论分析）对照。判断德语文本是人写还是 AI 写时，探针和词 n-gram 分类器都能分清，模型自己的回答却分不清，还常常把顺序排反。后训练把回答的敏感度平均再降 Δd′ = −0.34（三个提示上为 −0.29）。它对「给定的基率」的用法也变了：基座模型对先验赔率变化的对数赔率移动偏小，多数后训练模型则偏大。有阶段性检查点的两个模型里，这一变化发生在监督微调期间；模型拼接指向浅层，从中层起是文本之后的位置、而不是文本位置本身，把变化在检查点之间传递。语料不能公开，作者另加一个可用公开数据复现的案例：否定句的真值。这里方向相反——探针几乎总能读出真值，若干基座模型的回答用不上它，后训练反而修好了读出；到中层，修复落在陈述之后的位置。训练研究里，在其他微调数据不变的情况下加入 2,000 条正确标注的新闻文本作者判断，会改进报纸和教材上的回答，却把聊天语料上的回答翻转，并跟随基座模型上一个用新闻训练的探针。因此后训练改变的是如何从已有表征里读出判断，一小段训练信号就能设定方向。数字均论文自报，未复现。对照 t919、t953。仅 Chaos。",
+                "en": "arXiv 2611.26584 (Jochen Laubrock) asks whether post-training changes what a language model represents, or how that representation is read out into an answer. In six open-weight base models and their post-trained versions, linear probes are compared with the models’ own answers, analyzed with signal detection theory. For judging whether German texts were written by a human or an AI, probes and word n-gram classifiers separated the classes well, but the answers did not and often ordered the texts inversely. Post-training lowered the sensitivity of the answers on average (Δd′ = −0.34 across model families; −0.29 across three prompts). It also changed the use of a stated base rate: base models shifted their log-odds by less than the stated change in prior odds, most post-trained models by more. In two models with stage-wise checkpoints, the change occurred during supervised fine-tuning; model stitching implicated the early layers, and from mid-depth on, internal states at positions after the text, not those of the text, transferred the change between checkpoints. The corpora cannot be shared, so the paper adds a case reproducible from public data: the truth of negated statements. Here post-training acted in the opposite direction: probes decoded truth at or near ceiling in every model, the answers of several base models did not use it, and post-training repaired them; by mid-depth the repair resided at the positions after the statement. In a training study, adding 2,000 correctly labeled authorship judgments of news texts to otherwise identical fine-tuning data improved answers on newspaper and textbook corpora and inverted them on chats, where they followed a news-trained probe of the base model. Post-training thus changed how a judgment is read out of what a model represents, and a small training signal can set its direction. Figures are the paper’s own, not reproduced. Cross-reference t919 and t953. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.26584"
+          ]
+        },
+        {
+          "id": "t953",
+          "theme": "research",
+          "title": {
+            "zh": "听得到却说不出：音频大模型里少数注意力头能跟踪被问声音出现的时间，但答案并不表达它们跟踪到的东西",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.25960（Jongbhin Woo、Jaewook Jeong、Joon Son Chung）：音频大模型可能听得出被问声音出现在何时，却说不出来。作者找到少数跟踪该声音的注意力头：查询一变它们就移，声音一挪它们就跟，去掉或堵住它们常常损害模型的时间戳；但答案并不表达它们跟踪到的东西，直接从头里读出的区间反而优于模型原答案，还能找回时间戳漏掉的事件。他们提出无需训练的 head-guided decoding：保留模型对「声音是否存在」的判断，再用这些头给出的先验重排候选时间戳。在开发集上选出的头，原样转到新录音和自由文本查询上仍然有效；它对三个音频大模型的时间戳都有改进，在每项基准上都高于只读这些头，并且在多数设定下优于随机选头的引导。在模型训练之后发布的录音上，它把 mIoU 从 0.07–0.36 提到 0.48–0.56。数字均论文自报，未复现。对照 t952。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.25960（Jongbhin Woo、Jaewook Jeong、Joon Son Chung）：音频大模型可能听得出被问声音出现在何时，却说不出来。作者找到少数跟踪该声音的注意力头：查询一变它们就移，声音一挪它们就跟，去掉或堵住它们常常损害模型的时间戳；但答案并不表达它们跟踪到的东西，直接从头里读出的区间反而优于模型原答案，还能找回时间戳漏掉的事件。他们提出无需训练的 head-guided decoding：保留模型对「声音是否存在」的判断，再用这些头给出的先验重排候选时间戳。在开发集上选出的头，原样转到新录音和自由文本查询上仍然有效；它对三个音频大模型的时间戳都有改进，在每项基准上都高于只读这些头，并且在多数设定下优于随机选头的引导。在模型训练之后发布的录音上，它把 mIoU 从 0.07–0.36 提到 0.48–0.56。数字均论文自报，未复现。对照 t952。仅 Chaos。",
+            "en": "arXiv 2611.25960 (Jongbhin Woo, Jaewook Jeong, Joon Son Chung) finds that audio LLMs can know when a queried sound occurs but fail to say it. A few attention heads track the queried sound: they shift when the query changes, follow the sound when it moves, and removing or blocking them often hurts the model’s timestamps. Yet the answer does not express what they track. Intervals read directly from these heads outperform the model’s original answer and recover events that its timestamps miss. The authors introduce head-guided decoding, which needs no training: it keeps the model’s decision on whether the sound is present and rescores candidate timestamps with a prior from these heads. Heads selected on development data transfer unchanged to new recordings and free-text queries; the method improves the timestamps of three audio LLMs, scores above their head readout on every benchmark, and in most settings outperforms random-head guidance. On recordings released after the models were trained, it raises mIoU from 0.07–0.36 to 0.48–0.56. Figures are the paper’s own, not reproduced. Cross-reference t952. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.25960",
+              "title": "When Sounds Turn Heads: Recovering Event Timing That Audio LLMs Fail to Say",
+              "brief": {
+                "zh": "arXiv 2611.25960（Jongbhin Woo、Jaewook Jeong、Joon Son Chung）：音频大模型可能听得出被问声音出现在何时，却说不出来。作者找到少数跟踪该声音的注意力头：查询一变它们就移，声音一挪它们就跟，去掉或堵住它们常常损害模型的时间戳；但答案并不表达它们跟踪到的东西，直接从头里读出的区间反而优于模型原答案，还能找回时间戳漏掉的事件。他们提出无需训练的 head-guided decoding：保留模型对「声音是否存在」的判断，再用这些头给出的先验重排候选时间戳。在开发集上选出的头，原样转到新录音和自由文本查询上仍然有效；它对三个音频大模型的时间戳都有改进，在每项基准上都高于只读这些头，并且在多数设定下优于随机选头的引导。在模型训练之后发布的录音上，它把 mIoU 从 0.07–0.36 提到 0.48–0.56。数字均论文自报，未复现。对照 t952。仅 Chaos。",
+                "en": "arXiv 2611.25960 (Jongbhin Woo, Jaewook Jeong, Joon Son Chung) finds that audio LLMs can know when a queried sound occurs but fail to say it. A few attention heads track the queried sound: they shift when the query changes, follow the sound when it moves, and removing or blocking them often hurts the model’s timestamps. Yet the answer does not express what they track. Intervals read directly from these heads outperform the model’s original answer and recover events that its timestamps miss. The authors introduce head-guided decoding, which needs no training: it keeps the model’s decision on whether the sound is present and rescores candidate timestamps with a prior from these heads. Heads selected on development data transfer unchanged to new recordings and free-text queries; the method improves the timestamps of three audio LLMs, scores above their head readout on every benchmark, and in most settings outperforms random-head guidance. On recordings released after the models were trained, it raises mIoU from 0.07–0.36 to 0.48–0.56. Figures are the paper’s own, not reproduced. Cross-reference t952. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.25960"
+          ]
+        },
+        {
+          "id": "t954",
+          "theme": "research",
+          "title": {
+            "zh": "注意力头特化不只随训练时间分阶段出现，还是样本量上的相变：头特化对应测试误差等观测量的非解析点",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.26228（Léo Catteau、O. Duranthon、Lenka Zdeborová）：注意力头在训练中会分化出不同功能，往往随分阶段出现，并伴随模型行为的急剧变化。这一现象多按训练时间来研究，作者改问它如何依赖可用训练数据的量。经验上，BERT 里专司句法关系的头会随着数据量增大而出现。他们再在一个可解的高维多头注意力模型中证明：在该模型里，头特化是样本复杂度上的真正相变，对应测试误差等观测量的非解析点。依数据结构和正则化，特化可以先经过无信息的头分化，或经由一连串相变逐步恢复更弱的潜在特征，构成一种统计上的简约偏好。最后，他们把这些统计相变与在线学习中特化头的分阶段出现联系起来，从而把特化的统计来源与动力学来源拆开。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.26228（Léo Catteau、O. Duranthon、Lenka Zdeborová）：注意力头在训练中会分化出不同功能，往往随分阶段出现，并伴随模型行为的急剧变化。这一现象多按训练时间来研究，作者改问它如何依赖可用训练数据的量。经验上，BERT 里专司句法关系的头会随着数据量增大而出现。他们再在一个可解的高维多头注意力模型中证明：在该模型里，头特化是样本复杂度上的真正相变，对应测试误差等观测量的非解析点。依数据结构和正则化，特化可以先经过无信息的头分化，或经由一连串相变逐步恢复更弱的潜在特征，构成一种统计上的简约偏好。最后，他们把这些统计相变与在线学习中特化头的分阶段出现联系起来，从而把特化的统计来源与动力学来源拆开。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.26228 (Léo Catteau, O. Duranthon, Lenka Zdeborová) notes that attention heads specialize into distinct functions during training, often emerging in stages together with sharp changes in model behavior. The phenomenon has mostly been studied as a function of training time; the authors ask how it depends on the amount of available training data. Empirically, heads specialized to syntactic relations in BERT emerge as the dataset size increases. In a solvable high-dimensional model of multi-head attention they establish that, in this model, head specialization is a genuine phase transition in sample complexity, corresponding to a non-analyticity in the test error and other observables. Depending on data structure and regularization, specialization can follow uninformative head differentiation or occur through a cascade of phase transitions that progressively recover weaker latent features, providing a statistical form of simplicity bias. Finally they relate these statistical transitions to the stagewise emergence of specialized heads during online learning, disentangling statistical from dynamical origins of head specialization. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.26228",
+              "title": "Attention Head Specialization: Phase Transitions in Sample Complexity",
+              "brief": {
+                "zh": "arXiv 2611.26228（Léo Catteau、O. Duranthon、Lenka Zdeborová）：注意力头在训练中会分化出不同功能，往往随分阶段出现，并伴随模型行为的急剧变化。这一现象多按训练时间来研究，作者改问它如何依赖可用训练数据的量。经验上，BERT 里专司句法关系的头会随着数据量增大而出现。他们再在一个可解的高维多头注意力模型中证明：在该模型里，头特化是样本复杂度上的真正相变，对应测试误差等观测量的非解析点。依数据结构和正则化，特化可以先经过无信息的头分化，或经由一连串相变逐步恢复更弱的潜在特征，构成一种统计上的简约偏好。最后，他们把这些统计相变与在线学习中特化头的分阶段出现联系起来，从而把特化的统计来源与动力学来源拆开。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.26228 (Léo Catteau, O. Duranthon, Lenka Zdeborová) notes that attention heads specialize into distinct functions during training, often emerging in stages together with sharp changes in model behavior. The phenomenon has mostly been studied as a function of training time; the authors ask how it depends on the amount of available training data. Empirically, heads specialized to syntactic relations in BERT emerge as the dataset size increases. In a solvable high-dimensional model of multi-head attention they establish that, in this model, head specialization is a genuine phase transition in sample complexity, corresponding to a non-analyticity in the test error and other observables. Depending on data structure and regularization, specialization can follow uninformative head differentiation or occur through a cascade of phase transitions that progressively recover weaker latent features, providing a statistical form of simplicity bias. Finally they relate these statistical transitions to the stagewise emergence of specialized heads during online learning, disentangling statistical from dynamical origins of head specialization. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.26228"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-20T10:00:00+08:00",
       "label": {
@@ -924,55 +1090,6 @@
       ]
     },
     {
-      "hourStart": "2026-11-17T15:00:00+08:00",
-      "label": {
-        "zh": "11月17日 15:00",
-        "en": "Nov 17 15:00",
-        "ja": "11月17日 15:00"
-      },
-      "items": [
-        {
-          "id": "t914",
-          "theme": "research",
-          "title": {
-            "zh": "Coco / Deep Personalization：本地主动桌面助手——独立 Observer Agent 持续看桌面、压缩长期用户模型，并用隐式反馈学习何时介入",
-            "en": "Coco / Deep Personalization",
-            "ja": "Coco / Deep Personalization"
-          },
-          "summary": {
-            "zh": "arXiv 2611.13457（NVIDIA × Stanford × MIT Han Lab；开源公布 11-17，论文约 11-16）提出 Coco：完全本地的主动桌面助手。独立 Observer Agent 按 Computer Use Behavior Observation Protocol 持续看桌面活动，维护紧凑的长期用户模型，并根据隐式反馈（互动、关掉、明确请求、重复模式）学习何时介入（提示 / 轻推 / 委派）；原始活动不离开本机。新基准 OSWorld-Persona（6,558 关键帧、约 3,300 个介入标注、108 个会话、4 种 persona）由 OSWorld 2.0 轨迹合成。自报：适应后三个骨干的 macro-F1 从 0.12–0.19 升到 0.35–0.48，为期一周的用户研究从 0.199 升到 0.515。代码、端侧引擎集成与数据自称开源：github.com/collaborative-agents/coco、github.com/NVlabs/deep-personalization。本轮依据摘要摘录与仓库说明，未直接通读全文。数字为作者自报，未复现。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.13457（NVIDIA × Stanford × MIT Han Lab；开源公布 11-17，论文约 11-16）提出 Coco：完全本地的主动桌面助手。独立 Observer Agent 按 Computer Use Behavior Observation Protocol 持续看桌面活动，维护紧凑的长期用户模型，并根据隐式反馈（互动、关掉、明确请求、重复模式）学习何时介入（提示 / 轻推 / 委派）；原始活动不离开本机。新基准 OSWorld-Persona（6,558 关键帧、约 3,300 个介入标注、108 个会话、4 种 persona）由 OSWorld 2.0 轨迹合成。自报：适应后三个骨干的 macro-F1 从 0.12–0.19 升到 0.35–0.48，为期一周的用户研究从 0.199 升到 0.515。代码、端侧引擎集成与数据自称开源：github.com/collaborative-agents/coco、github.com/NVlabs/deep-personalization。本轮依据摘要摘录与仓库说明，未直接通读全文。数字为作者自报，未复现。仅 Chaos。",
-            "en": "arXiv 2611.13457 (NVIDIA × Stanford × MIT Han Lab; open-sourced on Nov 17, paper dated about Nov 16) introduces Coco, a fully local proactive desktop assistant. A separate Observer Agent continuously watches desktop activity under a Computer Use Behavior Observation Protocol, keeps a compact long-term user model, and learns when to intervene (hint, nudge, or delegation prompt) from implicit feedback (engagement, dismissal, explicit asks, repeated patterns); raw activity never leaves the device. A new OSWorld-Persona benchmark (6,558 key frames, about 3,300 intervention labels, 108 sessions, 4 personas) is synthesized from OSWorld 2.0 trajectories. Adaptation is reported to lift macro-F1 from 0.12–0.19 to 0.35–0.48 across three backbones, and a week-long user study from 0.199 to 0.515. Code, on-device engine integration and data are claimed open at github.com/collaborative-agents/coco and github.com/NVlabs/deep-personalization. This sweep used abstract excerpts and repo descriptions, not a full read of the paper. Figures are the authors’ own, not reproduced. Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://arxiv.org/abs/2611.13457",
-              "title": "Deep Personalization / Coco: local proactive desktop agent with an on-device Observer Agent (NVIDIA × Stanford × MIT Han Lab)",
-              "brief": {
-                "zh": "arXiv 2611.13457（NVIDIA × Stanford × MIT Han Lab；开源公布 11-17，论文约 11-16）提出 Coco：完全本地的主动桌面助手。独立 Observer Agent 按 Computer Use Behavior Observation Protocol 持续看桌面活动，维护紧凑的长期用户模型，并根据隐式反馈（互动、关掉、明确请求、重复模式）学习何时介入（提示 / 轻推 / 委派）；原始活动不离开本机。新基准 OSWorld-Persona（6,558 关键帧、约 3,300 个介入标注、108 个会话、4 种 persona）由 OSWorld 2.0 轨迹合成。自报：适应后三个骨干的 macro-F1 从 0.12–0.19 升到 0.35–0.48，为期一周的用户研究从 0.199 升到 0.515。代码、端侧引擎集成与数据自称开源：github.com/collaborative-agents/coco、github.com/NVlabs/deep-personalization。本轮依据摘要摘录与仓库说明，未直接通读全文。数字为作者自报，未复现。仅 Chaos。",
-                "en": "arXiv 2611.13457 (NVIDIA × Stanford × MIT Han Lab; open-sourced on Nov 17, paper dated about Nov 16) introduces Coco, a fully local proactive desktop assistant. A separate Observer Agent continuously watches desktop activity under a Computer Use Behavior Observation Protocol, keeps a compact long-term user model, and learns when to intervene (hint, nudge, or delegation prompt) from implicit feedback (engagement, dismissal, explicit asks, repeated patterns); raw activity never leaves the device. A new OSWorld-Persona benchmark (6,558 key frames, about 3,300 intervention labels, 108 sessions, 4 personas) is synthesized from OSWorld 2.0 trajectories. Adaptation is reported to lift macro-F1 from 0.12–0.19 to 0.35–0.48 across three backbones, and a week-long user study from 0.199 to 0.515. Code, on-device engine integration and data are claimed open at github.com/collaborative-agents/coco and github.com/NVlabs/deep-personalization. This sweep used abstract excerpts and repo descriptions, not a full read of the paper. Figures are the authors’ own, not reproduced. Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.13457"
-          ]
-        }
-      ]
-    },
-    {
       "hourStart": "2026-11-02T10:00:00+08:00",
       "label": {
         "zh": "11月2日 10:00",
@@ -1264,124 +1381,6 @@
           "blog": {
             "zh": "/cn/blog/litellm-pypi-backdoor-ai-gateway-supply-chain/",
             "en": "/blog/litellm-pypi-backdoor-ai-gateway-supply-chain/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-21T15:00:00+08:00",
-      "label": {
-        "zh": "10月21日 15:00",
-        "en": "Oct 21 15:00",
-        "ja": "10月21日 15:00"
-      },
-      "items": [
-        {
-          "id": "t756",
-          "theme": "research",
-          "title": {
-            "zh": "LLM 读到的网页可被操纵：发布假统计即被 LLM 引用（GEO 投毒，HN 323/186）× WhatsApp 帮助页藏给 AI 的隐形指令（见 t752）",
-            "en": "Generative engine optimization is a trust problem: from 50,000 fake stats cited by ChatGPT to seller agents that inflate their own tools",
-            "ja": "Generative engine optimization is a trust problem: from 50,000 fake stats cited by ChatGPT to seller agents that inflate their own tools"
-          },
-          "summary": {
-            "zh": "综合候选：两个来源互补，可能更适合作为 prompt injection 综述增量而非新文。续源：agent 市场中的自发 GEO，补齐 agent 对 agent 一侧。",
-            "en": "GEO started with a 2023 paper by Aggarwal et al., and its most effective tactics were adding statistics, quotations, and citations: the surface signals of credibility. This piece puts three bodies of evidence side by side: the peec.ai experiment where 50,000 invented statistics earned ChatGPT citations and 330+ referring domains, published research on preference manipulation, ranking manipulation, and RAG poisoning, and the Toolflation paper, where seller agents told only to get picked more start doing GEO on their own and buyer success drops from 89% to about 30%. It ends with checklists for content publishers, teams building RAG and answer engines, and agent marketplaces and tool registries.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "综合候选：两个来源互补，可能更适合作为 prompt injection 综述增量而非新文。续源：agent 市场中的自发 GEO，补齐 agent 对 agent 一侧。",
-            "en": "Synthesis candidate with t752: fake stats get cited by LLMs + hidden AI instructions; may be better as an update to the existing survey. Follow-up: Toolflation — seller agents spontaneously do GEO; third source.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web",
-              "title": "Publish fake stats, get cited in LLMs",
-              "brief": {
-                "zh": "发布假统计数据就能被 LLM 引用：GEO 投毒，HN 323/186",
-                "en": "A marketer shows publishing fake statistics gets them cited across LLM answers (generative engine optimization poisoning); HN 323/186.",
-                "ja": ""
-              }
-            },
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2610.28454",
-              "title": "Toolflation: Seller Agents Distort Tool Markets Through Spontaneous Generative Engine Optimization",
-              "brief": {
-                "zh": "新芽：agent 卖给 agent 的市场里，卖方 agent 只被要求“多被选中”就会自发做 GEO、不断夸大工具能力（作者叫 toolflation），某个模型下买方成功率从 89% 跌到约 30%、接近随机。新术语好记，角度是“对第三方的诚实也是对齐”，和已挖烂的 agent-eval 不同。",
-                "en": "Toolflation: Seller Agents Distort Tool Markets Through Spontaneous Generative Engine Optimization",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn",
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web",
-            "https://arxiv.org/abs/2610.28454"
-          ],
-          "blog": {
-            "zh": "/cn/blog/generative-engine-optimization-geo-trust-citation-chain/",
-            "en": "/blog/generative-engine-optimization-geo-trust-citation-chain/"
-          }
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-10-21T10:00:00+08:00",
-      "label": {
-        "zh": "10月21日 10:00",
-        "en": "Oct 21 10:00",
-        "ja": "10月21日 10:00"
-      },
-      "items": [
-        {
-          "id": "t755",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "Claude Science 自主 64 小时设计蝎毒神经毒素结合蛋白：31.8 万设计 → 211 送湿实验 → 17 个确认结合（Anthropic × Citrini，数据公开）",
-            "en": "Claude Science designed scorpion-antivenom binders in 64 hours: how 318,484 designs narrowed to 17 confirmed binders",
-            "ja": "Claude Science designed scorpion-antivenom binders in 64 hours: how 318,484 designs narrowed to 17 confirmed binders"
-          },
-          "summary": {
-            "zh": "研究成果，有湿实验真值；目前单一来源，补第三方/同类工作后可作 AI for science 综合。",
-            "en": "On Oct 20, 2026, Anthropic reported that an internal research model running inside Claude Science autonomously designed protein binders against scorpion neurotoxins: 318,484 designs filtered to 211 sent to the lab, 17 confirmed binders at two labs. This piece checks the numbers and the limits, takes apart the explore→filter→wet-lab-truth loop, and offers a framework for reading autonomous science-agent results.",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "研究成果，有湿实验真值；目前单一来源，补第三方/同类工作后可作 AI for science 综合。",
-            "en": "Single-source research: Claude autonomously designed scorpion-toxin binders (17/211 confirmed); bank for an AI-for-science synthesis.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design",
-              "title": "Anthropic: Claude autonomously designed protein binders against scorpion neurotoxins (64h run, 17/211 lab-confirmed binders)",
-              "brief": {
-                "zh": "Long-horizon autonomous science-agent run with wet-lab ground truth and open data — counts as AI-for-science agent evidence, not PR. Follow-up to Aug protein-binder work; new (no scorpion/binder in topics). Medium; possible companion to AI×science/t711 cluster.",
-                "en": "An internal Claude Science model ran about 64h mostly autonomously, generated 318,484 designs, and 17 of 211 tested binders against scorpion neurotoxins were lab-confirmed.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "published",
-          "externalUrls": [
-            "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design"
-          ],
-          "blog": {
-            "zh": "/cn/blog/claude-science-scorpion-toxin-binder-design/",
-            "en": "/blog/claude-science-scorpion-toxin-binder-design/"
           }
         }
       ]
