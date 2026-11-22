@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21T16:00:32+08:00",
+  "updatedAt": "2026-11-22T10:00:48+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -13,13 +13,62 @@
   "themeCounts": {
     "models": 1,
     "coding-tools": 0,
-    "agents-oss": 4,
+    "agents-oss": 3,
     "security": 3,
-    "research": 12,
+    "research": 11,
     "product-news": 0,
     "other": 3
   },
   "hours": [
+    {
+      "hourStart": "2026-11-22T10:00:00+08:00",
+      "label": {
+        "zh": "11月22日 10:00",
+        "en": "Nov 22 10:00",
+        "ja": "11月22日 10:00"
+      },
+      "items": [
+        {
+          "id": "t971",
+          "theme": "security",
+          "title": {
+            "zh": "语言模型可以从 hex dump 逐字节读、改、写可执行文件：一次无工具的机器码编程实验",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "Sotiris Giannopoulos、George Xenos 的实验博文《Programming in the Machine Code Space》（HN 192/125）：在没有反汇编器、编译器、汇编器，也不给任何工具的情况下，把 xxd 的 hex dump 贴进提示，看语言模型能否直接对可执行文件的字节做推理。作者称为 Machine Code Programming，并对照先前把权重当程序来读写的工作。主实验用 GPT-6.1 Sol（effort high）经 Codex CLI，本地中继去掉全部工具，并审计事件流；除从描述从头写程序的那一组外，输入都是 hex。作者自报：只看字节就讲清了他们给出的全部五个二进制，包括一个去掉符号的开源统计工具 ministat，还在上游代码里找到了一个真实缺陷；对一份未知恶意软件样本，正确说明了行为并抽出了正确的 IOC；后来又通过直接改字节给三个二进制加了功能，并从零写出了三个能跑的程序。作为初步对照，DeepSeek V4.1 Flash 对那份恶意软件也得到了相同结论。扩展和从头编写用 qemu-x86_64 跑测试，要求标准输出和退出码与参考 GCC 构建逐字节一致；阅读和恶意软件分析没有同样的形式化评分。这是个人实验，主模型只有一个，而且多数任务只试一次。数字与结论均作者自报，未复现。对照 t824。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Sotiris Giannopoulos、George Xenos 的实验博文《Programming in the Machine Code Space》（HN 192/125）：在没有反汇编器、编译器、汇编器，也不给任何工具的情况下，把 xxd 的 hex dump 贴进提示，看语言模型能否直接对可执行文件的字节做推理。作者称为 Machine Code Programming，并对照先前把权重当程序来读写的工作。主实验用 GPT-6.1 Sol（effort high）经 Codex CLI，本地中继去掉全部工具，并审计事件流；除从描述从头写程序的那一组外，输入都是 hex。作者自报：只看字节就讲清了他们给出的全部五个二进制，包括一个去掉符号的开源统计工具 ministat，还在上游代码里找到了一个真实缺陷；对一份未知恶意软件样本，正确说明了行为并抽出了正确的 IOC；后来又通过直接改字节给三个二进制加了功能，并从零写出了三个能跑的程序。作为初步对照，DeepSeek V4.1 Flash 对那份恶意软件也得到了相同结论。扩展和从头编写用 qemu-x86_64 跑测试，要求标准输出和退出码与参考 GCC 构建逐字节一致；阅读和恶意软件分析没有同样的形式化评分。这是个人实验，主模型只有一个，而且多数任务只试一次。数字与结论均作者自报，未复现。对照 t824。仅 Chaos。",
+            "en": "Sotiris Giannopoulos and George Xenos, “Programming in the Machine Code Space” (HN 192/125): they ask whether a language model can reason directly about an executable’s bytes, given only an xxd hex dump in the prompt, with no disassembler, compiler, assembler or tools. They call this Machine Code Programming, and set it beside earlier work on reading and writing neural-network weights as programs. The main runs use GPT-6.1 Sol (effort high) through Codex CLI; a local relay strips every tool, and the event stream is audited. Except for the from-scratch writing condition, the input is hex. The authors report that the model explained all five binaries they gave it from bytes alone, including a stripped open-source statistics tool, ministat, where it also found a real bug in the upstream code; that it correctly described the behavior of an unknown malware sample and extracted the right IOCs; that it later added a feature to three binaries by editing their bytes; and that it wrote three working programs from scratch. As preliminary evidence this is not limited to closed models, DeepSeek V4.1 Flash reached the same conclusion about the malware. Builds in the extend and write experiments were run under qemu-x86_64 and had to match a reference GCC build byte for byte on stdout and exit code; the reading and malware analyses were not formally scored in the same way. This is a personal experiment, mainly on one model, and most tasks got a single attempt. Figures and conclusions are the authors’ own, not reproduced. Cross-reference t824. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://sgiannopoulos.github.io/blog/machine-code-programming/",
+              "title": "LLMs can read and write executables byte by byte from a hex dump",
+              "brief": {
+                "zh": "Sotiris Giannopoulos、George Xenos 的实验博文《Programming in the Machine Code Space》（HN 192/125）：在没有反汇编器、编译器、汇编器，也不给任何工具的情况下，把 xxd 的 hex dump 贴进提示，看语言模型能否直接对可执行文件的字节做推理。作者称为 Machine Code Programming，并对照先前把权重当程序来读写的工作。主实验用 GPT-6.1 Sol（effort high）经 Codex CLI，本地中继去掉全部工具，并审计事件流；除从描述从头写程序的那一组外，输入都是 hex。作者自报：只看字节就讲清了他们给出的全部五个二进制，包括一个去掉符号的开源统计工具 ministat，还在上游代码里找到了一个真实缺陷；对一份未知恶意软件样本，正确说明了行为并抽出了正确的 IOC；后来又通过直接改字节给三个二进制加了功能，并从零写出了三个能跑的程序。作为初步对照，DeepSeek V4.1 Flash 对那份恶意软件也得到了相同结论。扩展和从头编写用 qemu-x86_64 跑测试，要求标准输出和退出码与参考 GCC 构建逐字节一致；阅读和恶意软件分析没有同样的形式化评分。这是个人实验，主模型只有一个，而且多数任务只试一次。数字与结论均作者自报，未复现。对照 t824。仅 Chaos。",
+                "en": "Sotiris Giannopoulos and George Xenos, “Programming in the Machine Code Space” (HN 192/125): they ask whether a language model can reason directly about an executable’s bytes, given only an xxd hex dump in the prompt, with no disassembler, compiler, assembler or tools. They call this Machine Code Programming, and set it beside earlier work on reading and writing neural-network weights as programs. The main runs use GPT-6.1 Sol (effort high) through Codex CLI; a local relay strips every tool, and the event stream is audited. Except for the from-scratch writing condition, the input is hex. The authors report that the model explained all five binaries they gave it from bytes alone, including a stripped open-source statistics tool, ministat, where it also found a real bug in the upstream code; that it correctly described the behavior of an unknown malware sample and extracted the right IOCs; that it later added a feature to three binaries by editing their bytes; and that it wrote three working programs from scratch. As preliminary evidence this is not limited to closed models, DeepSeek V4.1 Flash reached the same conclusion about the malware. Builds in the extend and write experiments were run under qemu-x86_64 and had to match a reference GCC build byte for byte on stdout and exit code; the reading and malware analyses were not formally scored in the same way. This is a personal experiment, mainly on one model, and most tasks got a single attempt. Figures and conclusions are the authors’ own, not reproduced. Cross-reference t824. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://sgiannopoulos.github.io/blog/machine-code-programming/"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-21T16:00:00+08:00",
       "label": {
@@ -803,133 +852,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://arxiv.org/abs/2611.23427"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-19T10:00:00+08:00",
-      "label": {
-        "zh": "11月19日 10:00",
-        "en": "Nov 19 10:00",
-        "ja": "11月19日 10:00"
-      },
-      "items": [
-        {
-          "id": "t933",
-          "theme": "research",
-          "title": {
-            "zh": "Energy-Based Reasoners：把循环推理做成潜在状态上的能量下降，Sudoku-Extreme 上 1.8M 参数、99.9% 准确率，推理计算据称比次优模型少 345 倍",
-            "en": "Energy-Based Reasoners",
-            "ja": "Energy-Based Reasoners"
-          },
-          "summary": {
-            "zh": "项目页 energy-based-reasoners.github.io（HN 300/52）与 arXiv 2611.08977（William Chen、Alexi Gladstone、Zeyu Li、Heng Ji、Yilun Du；Duke / UIUC / Harvard）：Energy-Based Reasoners（EBR）在潜在推理状态上学习能量函数，把循环更新写成对该能量的梯度下降——能量用来给候选打分（不需要外部验证器），梯度用来 refinement，并在梯度范数低于阈值时停止。作者还引入基于探索的训练，以发现更多模态、在更宽的状态集上塑造能量面。四个算法推理基准上，1.8M 参数的 EBR 在 Sudoku-Extreme 上单样本 99.4%、5 次采样 99.9%，并称比次优模型（文中为 EqR）少用 345 倍推理 FLOPs，训练计算相当；自适应停止比固定深度 EBR 少约 10.9 倍 FLOPs 仍保持 99.9%。N-Queens 与 Graph Coloring 上称覆盖率领先，单样本准确率接近 100%。HN 条目标题写「385x」，与项目页/论文的 345× 不符，以项目页为准。数字均作者自报，未复现。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "项目页 energy-based-reasoners.github.io（HN 300/52）与 arXiv 2611.08977（William Chen、Alexi Gladstone、Zeyu Li、Heng Ji、Yilun Du；Duke / UIUC / Harvard）：Energy-Based Reasoners（EBR）在潜在推理状态上学习能量函数，把循环更新写成对该能量的梯度下降——能量用来给候选打分（不需要外部验证器），梯度用来 refinement，并在梯度范数低于阈值时停止。作者还引入基于探索的训练，以发现更多模态、在更宽的状态集上塑造能量面。四个算法推理基准上，1.8M 参数的 EBR 在 Sudoku-Extreme 上单样本 99.4%、5 次采样 99.9%，并称比次优模型（文中为 EqR）少用 345 倍推理 FLOPs，训练计算相当；自适应停止比固定深度 EBR 少约 10.9 倍 FLOPs 仍保持 99.9%。N-Queens 与 Graph Coloring 上称覆盖率领先，单样本准确率接近 100%。HN 条目标题写「385x」，与项目页/论文的 345× 不符，以项目页为准。数字均作者自报，未复现。仅 Chaos。",
-            "en": "Project page energy-based-reasoners.github.io (HN 300/52) and arXiv 2611.08977 (William Chen, Alexi Gladstone, Zeyu Li, Heng Ji, Yilun Du; Duke / UIUC / Harvard): Energy-Based Reasoners (EBRs) learn an energy function over latent reasoning states and treat looped updates as gradient descent on that energy. The energy scores candidates without an external verifier; its gradient guides refinement and, once its norm falls below a threshold, stopping. Exploration-based training is used to find more modes and shape the energy landscape over a broader set of states. On four algorithmic reasoning benchmarks, a 1.8M-parameter EBR is reported to reach 99.4% single-sample and 99.9% with 5 samples on Sudoku-Extreme, using 345× less inference FLOPs than the next-best model (EqR in the write-up) at comparable training compute; adaptive stopping is said to keep 99.9% with about 10.9× fewer FLOPs than a fixed-depth EBR. On N-Queens and Graph Coloring the authors claim state-of-the-art coverage of distinct valid solutions with near-100% single-sample accuracy. The HN item is titled “385x”; that figure does not match the 345× on the project page and paper, which are treated as authoritative here. Figures are the authors’ own, not reproduced. Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "hn",
-              "url": "https://energy-based-reasoners.github.io/",
-              "title": "Energy-Based Reasoners: 385x more efficient inference",
-              "brief": {
-                "zh": "项目页 energy-based-reasoners.github.io（HN 300/52）与 arXiv 2611.08977（William Chen、Alexi Gladstone、Zeyu Li、Heng Ji、Yilun Du；Duke / UIUC / Harvard）：Energy-Based Reasoners（EBR）在潜在推理状态上学习能量函数，把循环更新写成对该能量的梯度下降——能量用来给候选打分（不需要外部验证器），梯度用来 refinement，并在梯度范数低于阈值时停止。作者还引入基于探索的训练，以发现更多模态、在更宽的状态集上塑造能量面。四个算法推理基准上，1.8M 参数的 EBR 在 Sudoku-Extreme 上单样本 99.4%、5 次采样 99.9%，并称比次优模型（文中为 EqR）少用 345 倍推理 FLOPs，训练计算相当；自适应停止比固定深度 EBR 少约 10.9 倍 FLOPs 仍保持 99.9%。N-Queens 与 Graph Coloring 上称覆盖率领先，单样本准确率接近 100%。HN 条目标题写「385x」，与项目页/论文的 345× 不符，以项目页为准。数字均作者自报，未复现。仅 Chaos。",
-                "en": "Project page energy-based-reasoners.github.io (HN 300/52) and arXiv 2611.08977 (William Chen, Alexi Gladstone, Zeyu Li, Heng Ji, Yilun Du; Duke / UIUC / Harvard): Energy-Based Reasoners (EBRs) learn an energy function over latent reasoning states and treat looped updates as gradient descent on that energy. The energy scores candidates without an external verifier; its gradient guides refinement and, once its norm falls below a threshold, stopping. Exploration-based training is used to find more modes and shape the energy landscape over a broader set of states. On four algorithmic reasoning benchmarks, a 1.8M-parameter EBR is reported to reach 99.4% single-sample and 99.9% with 5 samples on Sudoku-Extreme, using 345× less inference FLOPs than the next-best model (EqR in the write-up) at comparable training compute; adaptive stopping is said to keep 99.9% with about 10.9× fewer FLOPs than a fixed-depth EBR. On N-Queens and Graph Coloring the authors claim state-of-the-art coverage of distinct valid solutions with near-100% single-sample accuracy. The HN item is titled “385x”; that figure does not match the 345× on the project page and paper, which are treated as authoritative here. Figures are the authors’ own, not reproduced. Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "hn"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://energy-based-reasoners.github.io/"
-          ]
-        },
-        {
-          "id": "t934",
-          "theme": "security",
-          "title": {
-            "zh": "OpenAI 第二份研发加速报告：编码 agent 在内部 AI 研究上的自主成功率上升，但按领域很不均（jagged frontier）",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "OpenAI 官方页《Research acceleration — the jagged frontier》（经官方 RSS 2026-11-18 16:00 CST 与 aihot 摘要）：第二份关于编码 agent 在内部 AI 研发中作用的报告。aihot 转述称，3 月至 10 月，在 2–4 小时人类任务上的自主成功率从 23% 升到 46%，4–8 小时任务从 13% 升到 35%；按领域很不均（监控/训练约 79%，推理与 serving 栈编码约 25%），并讨论对递归自我改进的含义。本轮直取官网为 403，正文未读，上述数字未在一级源核对。对照 t847、t054。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "OpenAI 官方页《Research acceleration — the jagged frontier》（经官方 RSS 2026-11-18 16:00 CST 与 aihot 摘要）：第二份关于编码 agent 在内部 AI 研发中作用的报告。aihot 转述称，3 月至 10 月，在 2–4 小时人类任务上的自主成功率从 23% 升到 46%，4–8 小时任务从 13% 升到 35%；按领域很不均（监控/训练约 79%，推理与 serving 栈编码约 25%），并讨论对递归自我改进的含义。本轮直取官网为 403，正文未读，上述数字未在一级源核对。对照 t847、t054。仅 Chaos。",
-            "en": "OpenAI official page, “Research acceleration — the jagged frontier” (via the official RSS at 2026-11-18 16:00 CST and an aihot summary): a second report on how coding agents speed up internal AI research. aihot says autonomous success on 2–4 hour human tasks rose from 23% to 46% from March to October, and on 4–8 hour tasks from 13% to 35%, with large differences by area (about 79% on monitoring/training versus about 25% on inference-and-serving-stack coding), and discusses implications for recursive self-improvement. A direct fetch of the official page returned 403, so the body was not read and those figures were not checked against the primary source. Cross-reference t847 and t054. Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://openai.com/index/research-acceleration-jagged-frontier",
-              "title": "OpenAI: Research acceleration — the jagged frontier (2nd report on coding agents in AI R&D)",
-              "brief": {
-                "zh": "OpenAI 官方页《Research acceleration — the jagged frontier》（经官方 RSS 2026-11-18 16:00 CST 与 aihot 摘要）：第二份关于编码 agent 在内部 AI 研发中作用的报告。aihot 转述称，3 月至 10 月，在 2–4 小时人类任务上的自主成功率从 23% 升到 46%，4–8 小时任务从 13% 升到 35%；按领域很不均（监控/训练约 79%，推理与 serving 栈编码约 25%），并讨论对递归自我改进的含义。本轮直取官网为 403，正文未读，上述数字未在一级源核对。对照 t847、t054。仅 Chaos。",
-                "en": "OpenAI official page, “Research acceleration — the jagged frontier” (via the official RSS at 2026-11-18 16:00 CST and an aihot summary): a second report on how coding agents speed up internal AI research. aihot says autonomous success on 2–4 hour human tasks rose from 23% to 46% from March to October, and on 4–8 hour tasks from 13% to 35%, with large differences by area (about 79% on monitoring/training versus about 25% on inference-and-serving-stack coding), and discusses implications for recursive self-improvement. A direct fetch of the official page returned 403, so the body was not read and those figures were not checked against the primary source. Cross-reference t847 and t054. Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://openai.com/index/research-acceleration-jagged-frontier"
-          ]
-        },
-        {
-          "id": "t935",
-          "theme": "agents-oss",
-          "title": {
-            "zh": "OpenAI《Inside the Codex sandbox》：在用户本机环境里跑命令，同时用用户可控的文件系统与网络限制，并给出 macOS / Linux / Windows 实现",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "OpenAI 官方页《Inside the Codex sandbox》（经官方 RSS 2026-11-18 16:00 CST 与 aihot 摘要）：长篇工程文，讲 Codex 如何在用户自己的环境里运行命令，同时又执行用户可控的文件系统与网络限制，并分别说明 macOS、Linux、Windows 上的实现。本轮直取官网为 403，正文未读，实现细节未核。对照 t926（外置沙箱）、t684（MXC / OpenShell / sandbox-runtime）。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "OpenAI 官方页《Inside the Codex sandbox》（经官方 RSS 2026-11-18 16:00 CST 与 aihot 摘要）：长篇工程文，讲 Codex 如何在用户自己的环境里运行命令，同时又执行用户可控的文件系统与网络限制，并分别说明 macOS、Linux、Windows 上的实现。本轮直取官网为 403，正文未读，实现细节未核。对照 t926（外置沙箱）、t684（MXC / OpenShell / sandbox-runtime）。仅 Chaos。",
-            "en": "OpenAI official page, “Inside the Codex sandbox” (via the official RSS at 2026-11-18 16:00 CST and an aihot summary): a long engineering post on how Codex runs commands in the user’s own environment while enforcing user-controlled filesystem and network limits, with per-platform implementations on macOS, Linux and Windows. A direct fetch of the official page returned 403, so the body was not read and implementation details were not verified. Cross-reference t926 (external sandboxes) and t684 (MXC / OpenShell / sandbox-runtime). Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "media",
-              "url": "https://openai.com/index/inside-the-codex-sandbox",
-              "title": "OpenAI: Inside the Codex sandbox — permission design and macOS/Linux/Windows implementations",
-              "brief": {
-                "zh": "OpenAI 官方页《Inside the Codex sandbox》（经官方 RSS 2026-11-18 16:00 CST 与 aihot 摘要）：长篇工程文，讲 Codex 如何在用户自己的环境里运行命令，同时又执行用户可控的文件系统与网络限制，并分别说明 macOS、Linux、Windows 上的实现。本轮直取官网为 403，正文未读，实现细节未核。对照 t926（外置沙箱）、t684（MXC / OpenShell / sandbox-runtime）。仅 Chaos。",
-                "en": "OpenAI official page, “Inside the Codex sandbox” (via the official RSS at 2026-11-18 16:00 CST and an aihot summary): a long engineering post on how Codex runs commands in the user’s own environment while enforcing user-controlled filesystem and network limits, with per-platform implementations on macOS, Linux and Windows. A direct fetch of the official page returned 403, so the body was not read and implementation details were not verified. Cross-reference t926 (external sandboxes) and t684 (MXC / OpenShell / sandbox-runtime). Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "media"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://openai.com/index/inside-the-codex-sandbox"
           ]
         }
       ]
