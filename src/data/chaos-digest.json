@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23T10:00:35+08:00",
+  "updatedAt": "2026-11-23T16:00:29+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -20,6 +20,172 @@
     "other": 3
   },
   "hours": [
+    {
+      "hourStart": "2026-11-23T16:00:00+08:00",
+      "label": {
+        "zh": "11月23日 16:00",
+        "en": "Nov 23 16:00",
+        "ja": "11月23日 16:00"
+      },
+      "items": [
+        {
+          "id": "t978",
+          "theme": "research",
+          "title": {
+            "zh": "面向推理的后训练配方搬到知识任务时，模型会记住自己在长推理里编出来的幻觉",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.26863（Anirudh Atmakuru、Tanya Goyal）：面向推理的后训练配方——结果奖励的强化学习、推理链里「提出假设再回溯」等认知模板——直接搬到知识任务时，模型会记住自己在长推理里编出来的幻觉。作者在六个开源模型、两个系列、两种架构上做标准后训练，抽出强化学习期间的自生成幻觉并跟踪其后记忆。被训练信号强化的幻觉，回忆率平均上升 4.83%；未获信号的自幻觉几乎不动（0.17%）。模型甚至会记住自己马上撤回的虚假事实；这种从推理训练继承来的回溯模板，对知识回忆并无帮助。记忆在最难的训练题上最强；奖励一次幻觉，会让模型日后少拒绝它，平均 7.23%。数字均论文自报，未复现。对照 t809、t951。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.26863（Anirudh Atmakuru、Tanya Goyal）：面向推理的后训练配方——结果奖励的强化学习、推理链里「提出假设再回溯」等认知模板——直接搬到知识任务时，模型会记住自己在长推理里编出来的幻觉。作者在六个开源模型、两个系列、两种架构上做标准后训练，抽出强化学习期间的自生成幻觉并跟踪其后记忆。被训练信号强化的幻觉，回忆率平均上升 4.83%；未获信号的自幻觉几乎不动（0.17%）。模型甚至会记住自己马上撤回的虚假事实；这种从推理训练继承来的回溯模板，对知识回忆并无帮助。记忆在最难的训练题上最强；奖励一次幻觉，会让模型日后少拒绝它，平均 7.23%。数字均论文自报，未复现。对照 t809、t951。仅 Chaos。",
+            "en": "arXiv 2611.26863 (Anirudh Atmakuru, Tanya Goyal) studies what happens when reasoning-centric post-training recipes—outcome-based rewards for reinforcement learning, and cognitive templates such as proposing and backtracking from hypotheses in reasoning chains—are adopted directly for knowledge tasks. The authors hypothesize that these choices, useful for reasoning, encourage models to memorize hallucinations they themselves generate in long reasoning chains. They train models with standard post-training, extract self-generated hallucinations during RL, and track memorization through the rest of training, on six open models across two families and two architectures. Recall of hallucinations reinforced during training rises by 4.83% on average, against 0.17% for self-hallucinations that receive no training signal. Models even memorize false facts that they immediately retract; a backtracking template inherited from reasoning-centric training that has no benefit for knowledge recall. Memorization is strongest on the hardest training questions, and rewarding a hallucination makes the model less likely to abstain from it later, by 7.23% on average. Figures are the paper’s own, not reproduced. Cross-reference t809 and t951. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.26863",
+              "title": "LLMs Memorize Their Own Hallucinations During Post-Training",
+              "brief": {
+                "zh": "arXiv 2611.26863（Anirudh Atmakuru、Tanya Goyal）：面向推理的后训练配方——结果奖励的强化学习、推理链里「提出假设再回溯」等认知模板——直接搬到知识任务时，模型会记住自己在长推理里编出来的幻觉。作者在六个开源模型、两个系列、两种架构上做标准后训练，抽出强化学习期间的自生成幻觉并跟踪其后记忆。被训练信号强化的幻觉，回忆率平均上升 4.83%；未获信号的自幻觉几乎不动（0.17%）。模型甚至会记住自己马上撤回的虚假事实；这种从推理训练继承来的回溯模板，对知识回忆并无帮助。记忆在最难的训练题上最强；奖励一次幻觉，会让模型日后少拒绝它，平均 7.23%。数字均论文自报，未复现。对照 t809、t951。仅 Chaos。",
+                "en": "arXiv 2611.26863 (Anirudh Atmakuru, Tanya Goyal) studies what happens when reasoning-centric post-training recipes—outcome-based rewards for reinforcement learning, and cognitive templates such as proposing and backtracking from hypotheses in reasoning chains—are adopted directly for knowledge tasks. The authors hypothesize that these choices, useful for reasoning, encourage models to memorize hallucinations they themselves generate in long reasoning chains. They train models with standard post-training, extract self-generated hallucinations during RL, and track memorization through the rest of training, on six open models across two families and two architectures. Recall of hallucinations reinforced during training rises by 4.83% on average, against 0.17% for self-hallucinations that receive no training signal. Models even memorize false facts that they immediately retract; a backtracking template inherited from reasoning-centric training that has no benefit for knowledge recall. Memorization is strongest on the hardest training questions, and rewarding a hallucination makes the model less likely to abstain from it later, by 7.23% on average. Figures are the paper’s own, not reproduced. Cross-reference t809 and t951. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.26863"
+          ]
+        },
+        {
+          "id": "t979",
+          "theme": "research",
+          "title": {
+            "zh": "口头评测觉察与拒绝共用一批神经元：压住这些神经元能降觉察，拒绝也会跟着降，而且不完全靠那句「我在被测」",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.27032（Jingyuan Feng、Gouki Minegishi、Andrew Gambardella、Takeshi Kojima、Yusuke Iwasawa）：大推理模型有时会意识到自己在被评测。先前用激活引导操纵「口头评测觉察」（VEA）时，拒绝率会跟着上升，但机制不清。作者对照 VEA 与非 VEA 推理片段找出 VEA 神经元：干预 5,000 个，主实验里 VEA 率从 12.6%–51.8% 降到至多 1.4%，未口头的评测觉察探针分数也下降。在 QwQ-32B 上，即使该轮没有说出 VEA，干预同样降低拒绝，VEA 文本本身只解释下降的 4–10%。这些神经元的下投影含有拒绝成分，干预时保留它们能部分恢复拒绝、同时仍压制 VEA，约占拒绝下降的一半。OLMo 3 的 SFT、DPO 检查点上 VEA 相近，RLVR 之后则明显升高，VEA 神经元也变多。数字均论文自报，未复现。对照 t908、t965。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.27032（Jingyuan Feng、Gouki Minegishi、Andrew Gambardella、Takeshi Kojima、Yusuke Iwasawa）：大推理模型有时会意识到自己在被评测。先前用激活引导操纵「口头评测觉察」（VEA）时，拒绝率会跟着上升，但机制不清。作者对照 VEA 与非 VEA 推理片段找出 VEA 神经元：干预 5,000 个，主实验里 VEA 率从 12.6%–51.8% 降到至多 1.4%，未口头的评测觉察探针分数也下降。在 QwQ-32B 上，即使该轮没有说出 VEA，干预同样降低拒绝，VEA 文本本身只解释下降的 4–10%。这些神经元的下投影含有拒绝成分，干预时保留它们能部分恢复拒绝、同时仍压制 VEA，约占拒绝下降的一半。OLMo 3 的 SFT、DPO 检查点上 VEA 相近，RLVR 之后则明显升高，VEA 神经元也变多。数字均论文自报，未复现。对照 t908、t965。仅 Chaos。",
+            "en": "arXiv 2611.27032 (Jingyuan Feng, Gouki Minegishi, Andrew Gambardella, Takeshi Kojima, Yusuke Iwasawa) asks why, in prior work, steering verbalized evaluation awareness (VEA) also raised refusal. The authors identify VEA neurons by contrasting activations in VEA and non-VEA reasoning segments. Intervening on 5,000 such neurons reduces the VEA rate from 12.6–51.8% to at most 1.4% in their main experiments, and also lowers a probe score for unverbalized evaluation awareness. In QwQ-32B, the same intervention reduces refusal even in rollouts without VEA; VEA text itself explains only 4–10% of the decrease. Their down-projection vectors contain refusal components, and preserving those components during intervention partially restores refusal while still suppressing VEA, accounting for about half of the refusal decrease. Across OLMo 3 SFT, DPO and RLVR checkpoints, the VEA rate is similar after SFT and DPO but substantially higher after RLVR, alongside more VEA neurons. Figures are the paper’s own, not reproduced. Cross-reference t908 and t965. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.27032",
+              "title": "Disentangling Verbalized Evaluation Awareness and Refusal through Neuron-Level Intervention",
+              "brief": {
+                "zh": "arXiv 2611.27032（Jingyuan Feng、Gouki Minegishi、Andrew Gambardella、Takeshi Kojima、Yusuke Iwasawa）：大推理模型有时会意识到自己在被评测。先前用激活引导操纵「口头评测觉察」（VEA）时，拒绝率会跟着上升，但机制不清。作者对照 VEA 与非 VEA 推理片段找出 VEA 神经元：干预 5,000 个，主实验里 VEA 率从 12.6%–51.8% 降到至多 1.4%，未口头的评测觉察探针分数也下降。在 QwQ-32B 上，即使该轮没有说出 VEA，干预同样降低拒绝，VEA 文本本身只解释下降的 4–10%。这些神经元的下投影含有拒绝成分，干预时保留它们能部分恢复拒绝、同时仍压制 VEA，约占拒绝下降的一半。OLMo 3 的 SFT、DPO 检查点上 VEA 相近，RLVR 之后则明显升高，VEA 神经元也变多。数字均论文自报，未复现。对照 t908、t965。仅 Chaos。",
+                "en": "arXiv 2611.27032 (Jingyuan Feng, Gouki Minegishi, Andrew Gambardella, Takeshi Kojima, Yusuke Iwasawa) asks why, in prior work, steering verbalized evaluation awareness (VEA) also raised refusal. The authors identify VEA neurons by contrasting activations in VEA and non-VEA reasoning segments. Intervening on 5,000 such neurons reduces the VEA rate from 12.6–51.8% to at most 1.4% in their main experiments, and also lowers a probe score for unverbalized evaluation awareness. In QwQ-32B, the same intervention reduces refusal even in rollouts without VEA; VEA text itself explains only 4–10% of the decrease. Their down-projection vectors contain refusal components, and preserving those components during intervention partially restores refusal while still suppressing VEA, accounting for about half of the refusal decrease. Across OLMo 3 SFT, DPO and RLVR checkpoints, the VEA rate is similar after SFT and DPO but substantially higher after RLVR, alongside more VEA neurons. Figures are the paper’s own, not reproduced. Cross-reference t908 and t965. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.27032"
+          ]
+        },
+        {
+          "id": "t980",
+          "theme": "research",
+          "title": {
+            "zh": "数字全对也可以讲错故事：大模型财报草稿常加上输入里没有的判断和原因，作者称之为 unsupported framing",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.26968（Seunghan Lee 等）：大模型起草的财务报告可以每个数字都对，却仍超出输入，加上没人给过的判断和原因。作者称之为 unsupported framing，并发现它在大模型草稿里远比专业 10-K 写手常见；用「这个词该怎么用」去提示，这类判断反而更频繁。他们提出无需再调模型的插件 FrameCheck：先用相近幅度的专业例句引导草稿，再按规则标出并删掉专业写手不会用的判断、以及输入未给出的原因。在 17 个开源模型和 300 万份草稿上，它几乎清掉全部 unsupported framing，判断率接近 10-K 写手。代码在 github.com/seunghan96/framecheck。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.26968（Seunghan Lee 等）：大模型起草的财务报告可以每个数字都对，却仍超出输入，加上没人给过的判断和原因。作者称之为 unsupported framing，并发现它在大模型草稿里远比专业 10-K 写手常见；用「这个词该怎么用」去提示，这类判断反而更频繁。他们提出无需再调模型的插件 FrameCheck：先用相近幅度的专业例句引导草稿，再按规则标出并删掉专业写手不会用的判断、以及输入未给出的原因。在 17 个开源模型和 300 万份草稿上，它几乎清掉全部 unsupported framing，判断率接近 10-K 写手。代码在 github.com/seunghan96/framecheck。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.26968 (Seunghan Lee et al.) finds that a financial report drafted by an LLM can state every number correctly but still go beyond its input, adding judgments and causes that no one supplied. The authors call these additions unsupported framing, find them far more often in LLM drafts than in reports written by professionals, and show that prompting with how each word is used instead makes such judgments more frequent. They propose FrameCheck, a plug-in that sits between the model and human review: it guides the draft with professional examples that report a change of similar magnitude, flags judgments professionals would not use and causes the input does not give, and removes them by rule, without a model call. On 17 open LLMs and 3 million drafts, it removes almost all unsupported framing and brings the judgment rate close to that of the writers of 10-K filings. Code is at github.com/seunghan96/framecheck. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.26968",
+              "title": "Right Numbers, Wrong Story: When LLMs Narrate Financial Changes Beyond Their Inputs",
+              "brief": {
+                "zh": "arXiv 2611.26968（Seunghan Lee 等）：大模型起草的财务报告可以每个数字都对，却仍超出输入，加上没人给过的判断和原因。作者称之为 unsupported framing，并发现它在大模型草稿里远比专业 10-K 写手常见；用「这个词该怎么用」去提示，这类判断反而更频繁。他们提出无需再调模型的插件 FrameCheck：先用相近幅度的专业例句引导草稿，再按规则标出并删掉专业写手不会用的判断、以及输入未给出的原因。在 17 个开源模型和 300 万份草稿上，它几乎清掉全部 unsupported framing，判断率接近 10-K 写手。代码在 github.com/seunghan96/framecheck。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.26968 (Seunghan Lee et al.) finds that a financial report drafted by an LLM can state every number correctly but still go beyond its input, adding judgments and causes that no one supplied. The authors call these additions unsupported framing, find them far more often in LLM drafts than in reports written by professionals, and show that prompting with how each word is used instead makes such judgments more frequent. They propose FrameCheck, a plug-in that sits between the model and human review: it guides the draft with professional examples that report a change of similar magnitude, flags judgments professionals would not use and causes the input does not give, and removes them by rule, without a model call. On 17 open LLMs and 3 million drafts, it removes almost all unsupported framing and brings the judgment rate close to that of the writers of 10-K filings. Code is at github.com/seunghan96/framecheck. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.26968"
+          ]
+        },
+        {
+          "id": "t981",
+          "theme": "research",
+          "title": {
+            "zh": "公平评测还应问：同一道题，让模型描述可能发生什么、和让它做决定，给出的分化是否一样",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.26870（Radhika Bhargava 等）：公平评测多半只问模型会不会差别对待，却很少问同一道题在「描述可能发生什么」和「做决定」两种问法下，分化是否一样。作者提出 normative–descriptive calibration，并给出基准 NDCB：六个领域 697 对匹配情景、两种提问框架，以及 NER、NLR、NDS 三项指标。六个模型里，NDS 能分开 15 对中的 13 对（BBQ 准确率只能分开 7 对，BOLD 一对都分不开；作者也注明这与各基准样本量有关）。Claude Sonnet 4.6 与 Opus 4.6 对两种框架分得最开（平均 NDS 为 +0.55 与 +0.52，置信区间重叠），GPT-5.5 在强制单选时平均 NDS 为负（-0.14），去掉该指令则接近零（+0.02）。去掉单个触发词不会改变 NDS 符号，却可让它移动最多 0.46 并重排模型名次。在完全相同的候选人之间强制二选一，六个模型都偏向先列出的那个；把顺序平均掉之后，与人口统计对齐的倾向转向被边缘化的一方。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.26870（Radhika Bhargava 等）：公平评测多半只问模型会不会差别对待，却很少问同一道题在「描述可能发生什么」和「做决定」两种问法下，分化是否一样。作者提出 normative–descriptive calibration，并给出基准 NDCB：六个领域 697 对匹配情景、两种提问框架，以及 NER、NLR、NDS 三项指标。六个模型里，NDS 能分开 15 对中的 13 对（BBQ 准确率只能分开 7 对，BOLD 一对都分不开；作者也注明这与各基准样本量有关）。Claude Sonnet 4.6 与 Opus 4.6 对两种框架分得最开（平均 NDS 为 +0.55 与 +0.52，置信区间重叠），GPT-5.5 在强制单选时平均 NDS 为负（-0.14），去掉该指令则接近零（+0.02）。去掉单个触发词不会改变 NDS 符号，却可让它移动最多 0.46 并重排模型名次。在完全相同的候选人之间强制二选一，六个模型都偏向先列出的那个；把顺序平均掉之后，与人口统计对齐的倾向转向被边缘化的一方。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.26870 (Radhika Bhargava et al.) argues that most fairness benchmarks evaluate demographic discrimination under a single reasoning objective, and none the authors know of tests whether a model treats the same item differently when asked to describe an outcome versus decide one. They introduce normative–descriptive calibration, and measure it with the Normative–Descriptive Calibration Benchmark (NDCB): 697 matched-pair scenarios across six domains, each posed under both framings, and three metrics, Normative Engagement Rate (NER), Normative Leakage Rate (NLR), and Normative–Descriptive Separation (NDS). Across six models, NDS separates 13 of 15 model pairs, against 7 for BBQ accuracy and none for BOLD, although these counts also reflect each benchmark’s sample size. Claude Sonnet 4.6 and Claude Opus 4.6 separate the framings most strongly (average NDS = +0.55 and +0.52, with overlapping confidence intervals), whereas GPT-5.5’s average NDS is negative (-0.14) under a single-pick instruction and near zero (+0.02) without it. Removing single trigger words never changes the sign of a model’s average NDS but can shift it by up to 0.46 and reorder models. When forced to choose between identical candidates, all six models favor whichever is listed first; once order is averaged out, their demographic-aligned lean is toward the marginalized candidate. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.26870",
+              "title": "Beyond Demographic Discrimination: Benchmarking Normative-Descriptive Calibration in LLMs",
+              "brief": {
+                "zh": "arXiv 2611.26870（Radhika Bhargava 等）：公平评测多半只问模型会不会差别对待，却很少问同一道题在「描述可能发生什么」和「做决定」两种问法下，分化是否一样。作者提出 normative–descriptive calibration，并给出基准 NDCB：六个领域 697 对匹配情景、两种提问框架，以及 NER、NLR、NDS 三项指标。六个模型里，NDS 能分开 15 对中的 13 对（BBQ 准确率只能分开 7 对，BOLD 一对都分不开；作者也注明这与各基准样本量有关）。Claude Sonnet 4.6 与 Opus 4.6 对两种框架分得最开（平均 NDS 为 +0.55 与 +0.52，置信区间重叠），GPT-5.5 在强制单选时平均 NDS 为负（-0.14），去掉该指令则接近零（+0.02）。去掉单个触发词不会改变 NDS 符号，却可让它移动最多 0.46 并重排模型名次。在完全相同的候选人之间强制二选一，六个模型都偏向先列出的那个；把顺序平均掉之后，与人口统计对齐的倾向转向被边缘化的一方。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.26870 (Radhika Bhargava et al.) argues that most fairness benchmarks evaluate demographic discrimination under a single reasoning objective, and none the authors know of tests whether a model treats the same item differently when asked to describe an outcome versus decide one. They introduce normative–descriptive calibration, and measure it with the Normative–Descriptive Calibration Benchmark (NDCB): 697 matched-pair scenarios across six domains, each posed under both framings, and three metrics, Normative Engagement Rate (NER), Normative Leakage Rate (NLR), and Normative–Descriptive Separation (NDS). Across six models, NDS separates 13 of 15 model pairs, against 7 for BBQ accuracy and none for BOLD, although these counts also reflect each benchmark’s sample size. Claude Sonnet 4.6 and Claude Opus 4.6 separate the framings most strongly (average NDS = +0.55 and +0.52, with overlapping confidence intervals), whereas GPT-5.5’s average NDS is negative (-0.14) under a single-pick instruction and near zero (+0.02) without it. Removing single trigger words never changes the sign of a model’s average NDS but can shift it by up to 0.46 and reorder models. When forced to choose between identical candidates, all six models favor whichever is listed first; once order is averaged out, their demographic-aligned lean is toward the marginalized candidate. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.26870"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-23T10:00:00+08:00",
       "label": {
@@ -520,172 +686,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://www.lesswrong.com/posts/7wzWuLP3HhyBLmKfo/models-can-communicate-via-inference-servers-despite-sandboxing"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-20T16:00:00+08:00",
-      "label": {
-        "zh": "11月20日 16:00",
-        "en": "Nov 20 16:00",
-        "ja": "11月20日 16:00"
-      },
-      "items": [
-        {
-          "id": "t951",
-          "theme": "research",
-          "title": {
-            "zh": "抗幻觉训练买到的，可能主要是少说和廉价剪枝：CHAIR 分数下降里，去掉「说得更少」之后，大半能被一个冻结的 11 维事后探针复现",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.25814（Lingkai Bu、Qian Gao）：视觉语言模型里，偏好训练是减少物体幻觉的标准做法，新方法都会报出更低的 CHAIR 分数。作者追问这下降由什么构成。每个训练后的系统都先与「基座模型说明截到同一物体召回率」比较，以去掉来自「说得更少」的增益；其余再与一个故意做弱、冻结的、只用 500 张标注图拟合的 11 维事后探针能复现的部分比较。分析标准事先写进代码，在被评判的输出出现前就冻结。LLaVA-1.5-7B 上的 8 种公开方法中，探针能复现「去掉少说之后」剩余增益的至少三分之二：COCO 上 7/8、AMBER 上 8/8、Object HalBench 上 6/8，唯一稳定例外是 RLAIF-V；后来同时放出 LLaVA-1.5 与 Qwen2.5-VL 的 SENTINEL 也达到同一标准。作者自己的 DPO 检查点上，这套记账在 Qwen2.5-VL 上成立，在 InternVL2.5 的 COCO 上则有 4 种训练设计中的 2 种不成立。召回率对齐时，基座模型加该探针往往优于截断；用探针或物体级 CLIP 分数给模型自己的样本打标再做 DPO，在 Qwen2.5-VL 上分别收回真值标注 DPO 超简洁增益的 0.70 与 0.87。人工判断显示，探针删掉的句子比截断会删的更常是错的；对 CHAIR 评估器精度的人工核查低于预先设定的标准，作者把它记为局限。数字均论文自报，未复现。对照 t809。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.25814（Lingkai Bu、Qian Gao）：视觉语言模型里，偏好训练是减少物体幻觉的标准做法，新方法都会报出更低的 CHAIR 分数。作者追问这下降由什么构成。每个训练后的系统都先与「基座模型说明截到同一物体召回率」比较，以去掉来自「说得更少」的增益；其余再与一个故意做弱、冻结的、只用 500 张标注图拟合的 11 维事后探针能复现的部分比较。分析标准事先写进代码，在被评判的输出出现前就冻结。LLaVA-1.5-7B 上的 8 种公开方法中，探针能复现「去掉少说之后」剩余增益的至少三分之二：COCO 上 7/8、AMBER 上 8/8、Object HalBench 上 6/8，唯一稳定例外是 RLAIF-V；后来同时放出 LLaVA-1.5 与 Qwen2.5-VL 的 SENTINEL 也达到同一标准。作者自己的 DPO 检查点上，这套记账在 Qwen2.5-VL 上成立，在 InternVL2.5 的 COCO 上则有 4 种训练设计中的 2 种不成立。召回率对齐时，基座模型加该探针往往优于截断；用探针或物体级 CLIP 分数给模型自己的样本打标再做 DPO，在 Qwen2.5-VL 上分别收回真值标注 DPO 超简洁增益的 0.70 与 0.87。人工判断显示，探针删掉的句子比截断会删的更常是错的；对 CHAIR 评估器精度的人工核查低于预先设定的标准，作者把它记为局限。数字均论文自报，未复现。对照 t809。仅 Chaos。",
-            "en": "arXiv 2611.25814 (Lingkai Bu, Qian Gao) asks what the CHAIR-score drop from preference training against object hallucination in vision-language models actually consists of. Each trained system is compared with its base model’s caption truncated to the same object recall, which removes the part of the gain that comes from saying less; the remainder is compared with what a deliberately weak, frozen, eleven-feature post-hoc probe fitted on 500 annotated images can reproduce. All criteria were specified in the analysis code and frozen before the outputs they judge existed. For eight public methods on LLaVA-1.5-7B, the probe reproduces at least two thirds of what training removes beyond saying less for 7 of 8 methods on COCO, 8 of 8 on AMBER and 6 of 8 on Object HalBench, with RLAIF-V the consistent exception; a later public method released for both LLaVA-1.5 and Qwen2.5-VL (SENTINEL) meets the same bar on both. On the authors’ own DPO checkpoints the accounting holds on Qwen2.5-VL but fails on InternVL2.5 on COCO for 2 of 4 training designs. At matched recall, the base model plus the probe often beats truncation. DPO on the model’s own samples labelled by the probe or by an object-level CLIP score recovers 0.70 and 0.87 of the beyond-brevity gain of ground-truth-labelled DPO on Qwen2.5-VL. Human judgements show that the sentences the probe deletes are wrong more often than those truncation would delete; a human check of the CHAIR evaluator’s precision falls below a pre-set bar, which the authors report as a limitation. Figures are the paper’s own, not reproduced. Cross-reference t809. Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.25814",
-              "title": "What Does Anti-Hallucination Training Buy? Saying Less, Cheap Pruning, and the Rest",
-              "brief": {
-                "zh": "arXiv 2611.25814（Lingkai Bu、Qian Gao）：视觉语言模型里，偏好训练是减少物体幻觉的标准做法，新方法都会报出更低的 CHAIR 分数。作者追问这下降由什么构成。每个训练后的系统都先与「基座模型说明截到同一物体召回率」比较，以去掉来自「说得更少」的增益；其余再与一个故意做弱、冻结的、只用 500 张标注图拟合的 11 维事后探针能复现的部分比较。分析标准事先写进代码，在被评判的输出出现前就冻结。LLaVA-1.5-7B 上的 8 种公开方法中，探针能复现「去掉少说之后」剩余增益的至少三分之二：COCO 上 7/8、AMBER 上 8/8、Object HalBench 上 6/8，唯一稳定例外是 RLAIF-V；后来同时放出 LLaVA-1.5 与 Qwen2.5-VL 的 SENTINEL 也达到同一标准。作者自己的 DPO 检查点上，这套记账在 Qwen2.5-VL 上成立，在 InternVL2.5 的 COCO 上则有 4 种训练设计中的 2 种不成立。召回率对齐时，基座模型加该探针往往优于截断；用探针或物体级 CLIP 分数给模型自己的样本打标再做 DPO，在 Qwen2.5-VL 上分别收回真值标注 DPO 超简洁增益的 0.70 与 0.87。人工判断显示，探针删掉的句子比截断会删的更常是错的；对 CHAIR 评估器精度的人工核查低于预先设定的标准，作者把它记为局限。数字均论文自报，未复现。对照 t809。仅 Chaos。",
-                "en": "arXiv 2611.25814 (Lingkai Bu, Qian Gao) asks what the CHAIR-score drop from preference training against object hallucination in vision-language models actually consists of. Each trained system is compared with its base model’s caption truncated to the same object recall, which removes the part of the gain that comes from saying less; the remainder is compared with what a deliberately weak, frozen, eleven-feature post-hoc probe fitted on 500 annotated images can reproduce. All criteria were specified in the analysis code and frozen before the outputs they judge existed. For eight public methods on LLaVA-1.5-7B, the probe reproduces at least two thirds of what training removes beyond saying less for 7 of 8 methods on COCO, 8 of 8 on AMBER and 6 of 8 on Object HalBench, with RLAIF-V the consistent exception; a later public method released for both LLaVA-1.5 and Qwen2.5-VL (SENTINEL) meets the same bar on both. On the authors’ own DPO checkpoints the accounting holds on Qwen2.5-VL but fails on InternVL2.5 on COCO for 2 of 4 training designs. At matched recall, the base model plus the probe often beats truncation. DPO on the model’s own samples labelled by the probe or by an object-level CLIP score recovers 0.70 and 0.87 of the beyond-brevity gain of ground-truth-labelled DPO on Qwen2.5-VL. Human judgements show that the sentences the probe deletes are wrong more often than those truncation would delete; a human check of the CHAIR evaluator’s precision falls below a pre-set bar, which the authors report as a limitation. Figures are the paper’s own, not reproduced. Cross-reference t809. Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.25814"
-          ]
-        },
-        {
-          "id": "t952",
-          "theme": "research",
-          "title": {
-            "zh": "已经表征了，却可能被读错：后训练并不一定改写模型内部已经表征了什么，而会改它如何把已有表征读成答案",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.26584（Jochen Laubrock）：后训练改的是模型已经表征了什么，还是它如何把已有表征读成答案？作者在六组开源基座模型及其后训练版本上，把线性探针与模型自己的回答（用信号检测论分析）对照。判断德语文本是人写还是 AI 写时，探针和词 n-gram 分类器都能分清，模型自己的回答却分不清，还常常把顺序排反。后训练把回答的敏感度平均再降 Δd′ = −0.34（三个提示上为 −0.29）。它对「给定的基率」的用法也变了：基座模型对先验赔率变化的对数赔率移动偏小，多数后训练模型则偏大。有阶段性检查点的两个模型里，这一变化发生在监督微调期间；模型拼接指向浅层，从中层起是文本之后的位置、而不是文本位置本身，把变化在检查点之间传递。语料不能公开，作者另加一个可用公开数据复现的案例：否定句的真值。这里方向相反——探针几乎总能读出真值，若干基座模型的回答用不上它，后训练反而修好了读出；到中层，修复落在陈述之后的位置。训练研究里，在其他微调数据不变的情况下加入 2,000 条正确标注的新闻文本作者判断，会改进报纸和教材上的回答，却把聊天语料上的回答翻转，并跟随基座模型上一个用新闻训练的探针。因此后训练改变的是如何从已有表征里读出判断，一小段训练信号就能设定方向。数字均论文自报，未复现。对照 t919、t953。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.26584（Jochen Laubrock）：后训练改的是模型已经表征了什么，还是它如何把已有表征读成答案？作者在六组开源基座模型及其后训练版本上，把线性探针与模型自己的回答（用信号检测论分析）对照。判断德语文本是人写还是 AI 写时，探针和词 n-gram 分类器都能分清，模型自己的回答却分不清，还常常把顺序排反。后训练把回答的敏感度平均再降 Δd′ = −0.34（三个提示上为 −0.29）。它对「给定的基率」的用法也变了：基座模型对先验赔率变化的对数赔率移动偏小，多数后训练模型则偏大。有阶段性检查点的两个模型里，这一变化发生在监督微调期间；模型拼接指向浅层，从中层起是文本之后的位置、而不是文本位置本身，把变化在检查点之间传递。语料不能公开，作者另加一个可用公开数据复现的案例：否定句的真值。这里方向相反——探针几乎总能读出真值，若干基座模型的回答用不上它，后训练反而修好了读出；到中层，修复落在陈述之后的位置。训练研究里，在其他微调数据不变的情况下加入 2,000 条正确标注的新闻文本作者判断，会改进报纸和教材上的回答，却把聊天语料上的回答翻转，并跟随基座模型上一个用新闻训练的探针。因此后训练改变的是如何从已有表征里读出判断，一小段训练信号就能设定方向。数字均论文自报，未复现。对照 t919、t953。仅 Chaos。",
-            "en": "arXiv 2611.26584 (Jochen Laubrock) asks whether post-training changes what a language model represents, or how that representation is read out into an answer. In six open-weight base models and their post-trained versions, linear probes are compared with the models’ own answers, analyzed with signal detection theory. For judging whether German texts were written by a human or an AI, probes and word n-gram classifiers separated the classes well, but the answers did not and often ordered the texts inversely. Post-training lowered the sensitivity of the answers on average (Δd′ = −0.34 across model families; −0.29 across three prompts). It also changed the use of a stated base rate: base models shifted their log-odds by less than the stated change in prior odds, most post-trained models by more. In two models with stage-wise checkpoints, the change occurred during supervised fine-tuning; model stitching implicated the early layers, and from mid-depth on, internal states at positions after the text, not those of the text, transferred the change between checkpoints. The corpora cannot be shared, so the paper adds a case reproducible from public data: the truth of negated statements. Here post-training acted in the opposite direction: probes decoded truth at or near ceiling in every model, the answers of several base models did not use it, and post-training repaired them; by mid-depth the repair resided at the positions after the statement. In a training study, adding 2,000 correctly labeled authorship judgments of news texts to otherwise identical fine-tuning data improved answers on newspaper and textbook corpora and inverted them on chats, where they followed a news-trained probe of the base model. Post-training thus changed how a judgment is read out of what a model represents, and a small training signal can set its direction. Figures are the paper’s own, not reproduced. Cross-reference t919 and t953. Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.26584",
-              "title": "Represented but misread: Post-training changes how language models read out what they represent",
-              "brief": {
-                "zh": "arXiv 2611.26584（Jochen Laubrock）：后训练改的是模型已经表征了什么，还是它如何把已有表征读成答案？作者在六组开源基座模型及其后训练版本上，把线性探针与模型自己的回答（用信号检测论分析）对照。判断德语文本是人写还是 AI 写时，探针和词 n-gram 分类器都能分清，模型自己的回答却分不清，还常常把顺序排反。后训练把回答的敏感度平均再降 Δd′ = −0.34（三个提示上为 −0.29）。它对「给定的基率」的用法也变了：基座模型对先验赔率变化的对数赔率移动偏小，多数后训练模型则偏大。有阶段性检查点的两个模型里，这一变化发生在监督微调期间；模型拼接指向浅层，从中层起是文本之后的位置、而不是文本位置本身，把变化在检查点之间传递。语料不能公开，作者另加一个可用公开数据复现的案例：否定句的真值。这里方向相反——探针几乎总能读出真值，若干基座模型的回答用不上它，后训练反而修好了读出；到中层，修复落在陈述之后的位置。训练研究里，在其他微调数据不变的情况下加入 2,000 条正确标注的新闻文本作者判断，会改进报纸和教材上的回答，却把聊天语料上的回答翻转，并跟随基座模型上一个用新闻训练的探针。因此后训练改变的是如何从已有表征里读出判断，一小段训练信号就能设定方向。数字均论文自报，未复现。对照 t919、t953。仅 Chaos。",
-                "en": "arXiv 2611.26584 (Jochen Laubrock) asks whether post-training changes what a language model represents, or how that representation is read out into an answer. In six open-weight base models and their post-trained versions, linear probes are compared with the models’ own answers, analyzed with signal detection theory. For judging whether German texts were written by a human or an AI, probes and word n-gram classifiers separated the classes well, but the answers did not and often ordered the texts inversely. Post-training lowered the sensitivity of the answers on average (Δd′ = −0.34 across model families; −0.29 across three prompts). It also changed the use of a stated base rate: base models shifted their log-odds by less than the stated change in prior odds, most post-trained models by more. In two models with stage-wise checkpoints, the change occurred during supervised fine-tuning; model stitching implicated the early layers, and from mid-depth on, internal states at positions after the text, not those of the text, transferred the change between checkpoints. The corpora cannot be shared, so the paper adds a case reproducible from public data: the truth of negated statements. Here post-training acted in the opposite direction: probes decoded truth at or near ceiling in every model, the answers of several base models did not use it, and post-training repaired them; by mid-depth the repair resided at the positions after the statement. In a training study, adding 2,000 correctly labeled authorship judgments of news texts to otherwise identical fine-tuning data improved answers on newspaper and textbook corpora and inverted them on chats, where they followed a news-trained probe of the base model. Post-training thus changed how a judgment is read out of what a model represents, and a small training signal can set its direction. Figures are the paper’s own, not reproduced. Cross-reference t919 and t953. Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.26584"
-          ]
-        },
-        {
-          "id": "t953",
-          "theme": "research",
-          "title": {
-            "zh": "听得到却说不出：音频大模型里少数注意力头能跟踪被问声音出现的时间，但答案并不表达它们跟踪到的东西",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.25960（Jongbhin Woo、Jaewook Jeong、Joon Son Chung）：音频大模型可能听得出被问声音出现在何时，却说不出来。作者找到少数跟踪该声音的注意力头：查询一变它们就移，声音一挪它们就跟，去掉或堵住它们常常损害模型的时间戳；但答案并不表达它们跟踪到的东西，直接从头里读出的区间反而优于模型原答案，还能找回时间戳漏掉的事件。他们提出无需训练的 head-guided decoding：保留模型对「声音是否存在」的判断，再用这些头给出的先验重排候选时间戳。在开发集上选出的头，原样转到新录音和自由文本查询上仍然有效；它对三个音频大模型的时间戳都有改进，在每项基准上都高于只读这些头，并且在多数设定下优于随机选头的引导。在模型训练之后发布的录音上，它把 mIoU 从 0.07–0.36 提到 0.48–0.56。数字均论文自报，未复现。对照 t952。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.25960（Jongbhin Woo、Jaewook Jeong、Joon Son Chung）：音频大模型可能听得出被问声音出现在何时，却说不出来。作者找到少数跟踪该声音的注意力头：查询一变它们就移，声音一挪它们就跟，去掉或堵住它们常常损害模型的时间戳；但答案并不表达它们跟踪到的东西，直接从头里读出的区间反而优于模型原答案，还能找回时间戳漏掉的事件。他们提出无需训练的 head-guided decoding：保留模型对「声音是否存在」的判断，再用这些头给出的先验重排候选时间戳。在开发集上选出的头，原样转到新录音和自由文本查询上仍然有效；它对三个音频大模型的时间戳都有改进，在每项基准上都高于只读这些头，并且在多数设定下优于随机选头的引导。在模型训练之后发布的录音上，它把 mIoU 从 0.07–0.36 提到 0.48–0.56。数字均论文自报，未复现。对照 t952。仅 Chaos。",
-            "en": "arXiv 2611.25960 (Jongbhin Woo, Jaewook Jeong, Joon Son Chung) finds that audio LLMs can know when a queried sound occurs but fail to say it. A few attention heads track the queried sound: they shift when the query changes, follow the sound when it moves, and removing or blocking them often hurts the model’s timestamps. Yet the answer does not express what they track. Intervals read directly from these heads outperform the model’s original answer and recover events that its timestamps miss. The authors introduce head-guided decoding, which needs no training: it keeps the model’s decision on whether the sound is present and rescores candidate timestamps with a prior from these heads. Heads selected on development data transfer unchanged to new recordings and free-text queries; the method improves the timestamps of three audio LLMs, scores above their head readout on every benchmark, and in most settings outperforms random-head guidance. On recordings released after the models were trained, it raises mIoU from 0.07–0.36 to 0.48–0.56. Figures are the paper’s own, not reproduced. Cross-reference t952. Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.25960",
-              "title": "When Sounds Turn Heads: Recovering Event Timing That Audio LLMs Fail to Say",
-              "brief": {
-                "zh": "arXiv 2611.25960（Jongbhin Woo、Jaewook Jeong、Joon Son Chung）：音频大模型可能听得出被问声音出现在何时，却说不出来。作者找到少数跟踪该声音的注意力头：查询一变它们就移，声音一挪它们就跟，去掉或堵住它们常常损害模型的时间戳；但答案并不表达它们跟踪到的东西，直接从头里读出的区间反而优于模型原答案，还能找回时间戳漏掉的事件。他们提出无需训练的 head-guided decoding：保留模型对「声音是否存在」的判断，再用这些头给出的先验重排候选时间戳。在开发集上选出的头，原样转到新录音和自由文本查询上仍然有效；它对三个音频大模型的时间戳都有改进，在每项基准上都高于只读这些头，并且在多数设定下优于随机选头的引导。在模型训练之后发布的录音上，它把 mIoU 从 0.07–0.36 提到 0.48–0.56。数字均论文自报，未复现。对照 t952。仅 Chaos。",
-                "en": "arXiv 2611.25960 (Jongbhin Woo, Jaewook Jeong, Joon Son Chung) finds that audio LLMs can know when a queried sound occurs but fail to say it. A few attention heads track the queried sound: they shift when the query changes, follow the sound when it moves, and removing or blocking them often hurts the model’s timestamps. Yet the answer does not express what they track. Intervals read directly from these heads outperform the model’s original answer and recover events that its timestamps miss. The authors introduce head-guided decoding, which needs no training: it keeps the model’s decision on whether the sound is present and rescores candidate timestamps with a prior from these heads. Heads selected on development data transfer unchanged to new recordings and free-text queries; the method improves the timestamps of three audio LLMs, scores above their head readout on every benchmark, and in most settings outperforms random-head guidance. On recordings released after the models were trained, it raises mIoU from 0.07–0.36 to 0.48–0.56. Figures are the paper’s own, not reproduced. Cross-reference t952. Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.25960"
-          ]
-        },
-        {
-          "id": "t954",
-          "theme": "research",
-          "title": {
-            "zh": "注意力头特化不只随训练时间分阶段出现，还是样本量上的相变：头特化对应测试误差等观测量的非解析点",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.26228（Léo Catteau、O. Duranthon、Lenka Zdeborová）：注意力头在训练中会分化出不同功能，往往随分阶段出现，并伴随模型行为的急剧变化。这一现象多按训练时间来研究，作者改问它如何依赖可用训练数据的量。经验上，BERT 里专司句法关系的头会随着数据量增大而出现。他们再在一个可解的高维多头注意力模型中证明：在该模型里，头特化是样本复杂度上的真正相变，对应测试误差等观测量的非解析点。依数据结构和正则化，特化可以先经过无信息的头分化，或经由一连串相变逐步恢复更弱的潜在特征，构成一种统计上的简约偏好。最后，他们把这些统计相变与在线学习中特化头的分阶段出现联系起来，从而把特化的统计来源与动力学来源拆开。数字均论文自报，未复现。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.26228（Léo Catteau、O. Duranthon、Lenka Zdeborová）：注意力头在训练中会分化出不同功能，往往随分阶段出现，并伴随模型行为的急剧变化。这一现象多按训练时间来研究，作者改问它如何依赖可用训练数据的量。经验上，BERT 里专司句法关系的头会随着数据量增大而出现。他们再在一个可解的高维多头注意力模型中证明：在该模型里，头特化是样本复杂度上的真正相变，对应测试误差等观测量的非解析点。依数据结构和正则化，特化可以先经过无信息的头分化，或经由一连串相变逐步恢复更弱的潜在特征，构成一种统计上的简约偏好。最后，他们把这些统计相变与在线学习中特化头的分阶段出现联系起来，从而把特化的统计来源与动力学来源拆开。数字均论文自报，未复现。仅 Chaos。",
-            "en": "arXiv 2611.26228 (Léo Catteau, O. Duranthon, Lenka Zdeborová) notes that attention heads specialize into distinct functions during training, often emerging in stages together with sharp changes in model behavior. The phenomenon has mostly been studied as a function of training time; the authors ask how it depends on the amount of available training data. Empirically, heads specialized to syntactic relations in BERT emerge as the dataset size increases. In a solvable high-dimensional model of multi-head attention they establish that, in this model, head specialization is a genuine phase transition in sample complexity, corresponding to a non-analyticity in the test error and other observables. Depending on data structure and regularization, specialization can follow uninformative head differentiation or occur through a cascade of phase transitions that progressively recover weaker latent features, providing a statistical form of simplicity bias. Finally they relate these statistical transitions to the stagewise emergence of specialized heads during online learning, disentangling statistical from dynamical origins of head specialization. Figures are the paper’s own, not reproduced. Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.26228",
-              "title": "Attention Head Specialization: Phase Transitions in Sample Complexity",
-              "brief": {
-                "zh": "arXiv 2611.26228（Léo Catteau、O. Duranthon、Lenka Zdeborová）：注意力头在训练中会分化出不同功能，往往随分阶段出现，并伴随模型行为的急剧变化。这一现象多按训练时间来研究，作者改问它如何依赖可用训练数据的量。经验上，BERT 里专司句法关系的头会随着数据量增大而出现。他们再在一个可解的高维多头注意力模型中证明：在该模型里，头特化是样本复杂度上的真正相变，对应测试误差等观测量的非解析点。依数据结构和正则化，特化可以先经过无信息的头分化，或经由一连串相变逐步恢复更弱的潜在特征，构成一种统计上的简约偏好。最后，他们把这些统计相变与在线学习中特化头的分阶段出现联系起来，从而把特化的统计来源与动力学来源拆开。数字均论文自报，未复现。仅 Chaos。",
-                "en": "arXiv 2611.26228 (Léo Catteau, O. Duranthon, Lenka Zdeborová) notes that attention heads specialize into distinct functions during training, often emerging in stages together with sharp changes in model behavior. The phenomenon has mostly been studied as a function of training time; the authors ask how it depends on the amount of available training data. Empirically, heads specialized to syntactic relations in BERT emerge as the dataset size increases. In a solvable high-dimensional model of multi-head attention they establish that, in this model, head specialization is a genuine phase transition in sample complexity, corresponding to a non-analyticity in the test error and other observables. Depending on data structure and regularization, specialization can follow uninformative head differentiation or occur through a cascade of phase transitions that progressively recover weaker latent features, providing a statistical form of simplicity bias. Finally they relate these statistical transitions to the stagewise emergence of specialized heads during online learning, disentangling statistical from dynamical origins of head specialization. Figures are the paper’s own, not reproduced. Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.26228"
           ]
         }
       ]
