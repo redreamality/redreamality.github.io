@@ -7,6 +7,7 @@ author: "Remy"
 tags: ["rsi", "ai-agents", "agent-harness", "agent-loop", "feedback-loops"]
 lang: "ja"
 translatedFrom: "agent-evolution-resolution-hypothesis-elite"
+series: rsi
 ---
 
 **結論から：** 今週の再帰的自己改善（RSI）で最も重要だったのは、自分をうまく書き換える新しいエージェントではなく、「誰が受け入れを判断するか」を扱った 2 本の論文だった。上海科技大学と ByteDance の Resolution Hypothesis は 7 つの自己進化手法を監査し、ボトルネックは提案ではなく選択にあると示した。候補の中には本当に良い変更があるのに、1 回の実行結果で選ぶと良い方を選ぶ確率は 49.7%、つまりコイン投げと同じだ。文献にある 10〜40 ポイントの大きな伸びの多くは、採点器に合わせた 1 文のルールで再現でき、採点器を直すと伸びの中央値は 17.6 ポイントから 0.8 ポイントに落ちる。[1] Jürgen Schmidhuber のグループによる ELITE は逆の道を選んだ。進化ループの中ではベンチマークを一切回さず、コードを読んで変更を統合し、動くかどうかだけを確かめる。SWE-bench Pro の 60 問の部分集合では DGM・HGM と並び、2 つの転移先ベンチマークでは 5〜10 ポイント上回り、費用は 1/4〜1/6 だった。[2]

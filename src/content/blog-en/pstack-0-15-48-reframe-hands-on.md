@@ -11,6 +11,7 @@ tags:
   - ai-coding
   - claude-code
   - software-engineering
+series: pstack
 ---
 
 **Short answer:** of the five pstack releases from 0.15.43 to 0.15.48, two changes deserve your attention. The first is a new skill, `/reframe`. When you know what you want but not what your field calls it, it teaches you 8 to 12 expert terms, borrows words from neighboring fields, and rewrites your description with them. Since 0.15.48 it also lists the two or three problems a vague description could be before it picks one. [1][2] The second is the Gemini seat in the review and design panels, which moved from `gemini-4-carbon-high` to `gemini-4-neon-xhigh`. If you saved a rule file, rerun `/setup-pstack` yourself. Nothing will remind you. [4][5]

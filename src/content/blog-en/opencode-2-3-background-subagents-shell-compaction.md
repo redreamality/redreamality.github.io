@@ -11,6 +11,7 @@ tags:
   - ai-coding
   - opencode
   - claude-code
+series: agent-harness
 ---
 
 **Short answer:** OpenCode 2.3.0 (November 13) and 2.3.1 (November 18, 00:17 UTC) stop making you wait in three places. A subagent call returns immediately, and the result arrives when the subagent goes idle. A shell command that reaches its timeout moves to the background instead of being killed. When a session nears automatic compaction, the summary is already written in the background, so the swap is instant.[1][2] Most setups need no changes. Check these cases:

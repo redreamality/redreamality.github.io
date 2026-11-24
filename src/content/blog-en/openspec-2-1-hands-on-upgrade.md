@@ -11,6 +11,7 @@ tags:
   - ai-coding
   - ai-agents
   - cli
+series: openspec
 ---
 
 **Short answer:** the OpenSpec workflow hasn't changed. Proposals, delta specs, tasks and archive work as they did in 1.x, and the CLI commands are almost all the same. What changed is how the skills get installed and where they live. 2.0.0 removed the `/opsx:*` slash commands and gave every tool one shared copy of the skills in `.agents/skills/`. 2.1.0 added a machine-wide (global) install and made it the default for `init` in a new repo. 2.1.1 bundles the skills inside the CLI package, so installing them no longer needs Git or a network connection.[1][2][3] Upgrade straight to 2.1.1, skip 2.1.0, and do it as a team. Before you run `openspec update`, save any edits you made to the built-in skills: update replaces them wholesale and doesn't tell you.

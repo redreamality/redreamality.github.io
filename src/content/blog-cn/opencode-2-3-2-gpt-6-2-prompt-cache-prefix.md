@@ -11,6 +11,7 @@ tags:
   - opencode
   - claude-code
   - prompt-caching
+series: agent-harness
 ---
 
 **结论先说：** 从 GPT-6.2 开始，Responses API 会把请求顶层的 `instructions` 放到 `input` 后面，落在缓存断点之外。哪怕每次内容一字不差，这部分也按未缓存的价格算。[4][5] OpenCode 的 system prompt 一直放在 `instructions` 里，所以用 GPT-6.2 时每一步都要把一万多 token 的 system prompt 重新付一遍全价。2.3.2（北京时间 11 月 18 日 09:35 发布）把它挪成了 `input` 里的第一条 developer 消息，从第二步起就能命中缓存。GitHub Copilot 的 `gpt-6.2-sol` 上，每步未缓存输入从 14,163 token 降到 3。[1][3]

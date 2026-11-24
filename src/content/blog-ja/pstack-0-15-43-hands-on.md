@@ -11,6 +11,7 @@ tags:
   - ai-coding
   - claude-code
   - software-engineering
+series: pstack
 ---
 
 **結論：** pstack 0.15.43（上海時間 2026-11-17 にマージ）は skill の本文を約 2 割削った。既定のモデルルーティングは「Opus 5.5 が基本で、どの役割も xhigh を超えない」に変わり、Orchestrate playbook は削除され、`/poteto-mode` が起動するすべての agent が最初に読む `worker.md` が加わった。[1] 既存ユーザーがやるべきことは、ほぼ一つだけだ。プラグインを更新して `/setup-pstack` をもう一度実行する。

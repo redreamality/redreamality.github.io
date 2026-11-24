@@ -1,0 +1,118 @@
+---
+/**
+ * Series navigation for blog posts that set `series` in frontmatter.
+ * - xl and up: fixed left sidebar (the TOC already owns the right side).
+ * - below xl: collapsible card at the top of the article.
+ * Lists only this locale's posts in the series; renders nothing for posts
+ * without a series or for a series with fewer than two posts in this locale.
+ */
+import type { Language } from '../../utils/i18n';
+import { getCollection } from '../../utils/content-collections';
+import { BLOG_SERIES, type BlogSeriesKey } from '../../data/blog-series';
+
+interface Props {
+  lang: Language;
+  slug: string;
+  series?: BlogSeriesKey;
+}
+
+const { lang, slug, series } = Astro.props;
+
+const collection = lang === 'zh' ? 'blog-cn' : lang === 'ja' ? 'blog-ja' : 'blog-en';
+const basePath = lang === 'zh' ? '/cn' : lang === 'ja' ? '/ja' : '';
+const entries = series
+  ? (await getCollection(collection))
+      .filter((e) => e.data.series === series)
+      .sort((a, b) =>
+        (a.data.seriesOrder ?? a.data.pubDate.getTime()) - (b.data.seriesOrder ?? b.data.pubDate.getTime()) ||
+        a.data.pubDate.getTime() - b.data.pubDate.getTime())
+  : [];
+const show = series && entries.length >= 2;
+
+const strings = {
+  zh: { label: '系列导航', part: (n: number) => `第 ${n} 期`, inSeries: '本文属于系列', of: (n: number, t: number) => `第 ${n} / ${t} 期` },
+  en: { label: 'Series navigation', part: (n: number) => `Part ${n}`, inSeries: 'Part of the series', of: (n: number, t: number) => `Part ${n} of ${t}` },
+  ja: { label: 'シリーズナビゲーション', part: (n: number) => `第 ${n} 回`, inSeries: 'シリーズ', of: (n: number, t: number) => `全 ${t} 回中 第 ${n} 回` },
+}[lang];
+const title = series ? BLOG_SERIES[series].title[lang] : '';
+const currentIndex = entries.findIndex((e) => e.slug === slug);
+const items = entries.map((e, i) => ({
+  href: `${basePath}/blog/${e.slug}/`,
+  title: e.data.title,
+  part: strings.part(i + 1),
+  current: e.slug === slug,
+}));
+---
+
+{show && (
+  <>
+    <aside
+      aria-label={strings.label}
+      data-blog-series={series}
+      class="blog-series-side not-prose fixed left-4 top-24 z-40 hidden w-60 max-h-[calc(100vh-8rem)] overflow-y-auto rounded-lg border border-gray-100 bg-white/95 p-4 shadow-lg backdrop-blur-sm dark:border-gray-700 dark:bg-gray-800/95 xl:block"
+    >
+      <p class="mb-1 text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">{strings.inSeries}</p>
+      <p class="mb-3 border-b border-gray-200 pb-2 text-base font-bold text-gray-900 dark:border-gray-700 dark:text-gray-100">{title}</p>
+      <ol class="space-y-2 text-sm">
+        {items.map((item) => (
+          <li>
+            {item.current ? (
+              <span aria-current="page" class="block rounded border-l-4 border-blue-600 bg-blue-50 px-2 py-1.5 text-gray-900 dark:border-blue-400 dark:bg-gray-700 dark:text-white">
+                <span class="block text-xs font-semibold text-blue-700 dark:text-blue-300">{item.part}</span>
+                <span class="block font-medium leading-snug">{item.title}</span>
+              </span>
+            ) : (
+              <a href={item.href} class="block rounded border-l-4 border-transparent px-2 py-1.5 text-gray-700 hover:border-gray-300 hover:bg-gray-50 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-blue-400">
+                <span class="block text-xs text-gray-500 dark:text-gray-400">{item.part}</span>
+                <span class="block leading-snug">{item.title}</span>
+              </a>
+            )}
+          </li>
+        ))}
+      </ol>
+    </aside>
+
+    <details data-blog-series-card={series} class="blog-series-card not-prose mb-8 rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/60 xl:hidden">
+      <summary class="cursor-pointer select-none px-4 py-3 text-sm text-gray-700 dark:text-gray-200">
+        {strings.inSeries} <strong class="text-gray-900 dark:text-white">{title}</strong>
+        <span class="text-gray-500 dark:text-gray-400"> · {strings.of(currentIndex + 1, items.length)}</span>
+      </summary>
+      <nav aria-label={strings.label} class="border-t border-gray-200 px-4 py-3 dark:border-gray-700">
+        <ol class="space-y-2 text-sm">
+          {items.map((item) => (
+            <li>
+              {item.current ? (
+                <span aria-current="page" class="font-semibold text-blue-700 dark:text-blue-300">{item.part} · {item.title}</span>
+              ) : (
+                <a href={item.href} class="text-gray-700 hover:text-blue-600 hover:underline dark:text-gray-300 dark:hover:text-blue-400">{item.part} · {item.title}</a>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </details>
+  </>
+)}
+
+<style>
+  /* Override the global `.prose ol` numbering: each item already shows its part label. */
+  .blog-series-side ol,
+  .blog-series-card ol {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  }
+  .blog-series-side li,
+  .blog-series-card li {
+    margin-bottom: 0;
+  }
+</style>
+
+<style is:global>
+  /* The series sidebar is fixed on xl screens, so reserve its column (mirrors TableOfContents). */
+  @media (min-width: 1280px) {
+    body:has(.blog-series-side) > main > main {
+      padding-left: 17rem;
+    }
+  }
+</style>

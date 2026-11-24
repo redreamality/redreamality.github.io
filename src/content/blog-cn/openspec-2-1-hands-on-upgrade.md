@@ -10,6 +10,7 @@ tags:
   - ai-coding
   - ai-agents
   - cli
+series: openspec
 ---
 
 **结论先说：** OpenSpec 的工作流本身没变，proposal、delta spec、tasks、archive 这一套和 1.x 一样，CLI 命令也基本没动。变的是 skill 怎么装、装在哪：2.0.0 删掉了 `/opsx:*` 斜杠命令，所有工具共用 `.agents/skills/` 里的一份 skill；2.1.0 允许把 skill 装到本机全局，新仓库 `init` 默认就装全局；2.1.1 把 skill 打进 CLI 包，安装不再需要 Git 和网络。[1][2][3] 我的建议是直接升到 2.1.1，跳过 2.1.0，全队一起升。升级前先把改过的内置 skill 存到别处，因为 `openspec update` 会整份覆盖它们，而且不提示。

@@ -12,6 +12,7 @@ tags:
   - opencode
   - claude-code
   - prompt-caching
+series: agent-harness
 ---
 
 **Short answer:** starting with GPT-6.2, the Responses API appends the top-level `instructions` field after `input`, beyond the cache breakpoints. Even when the text is identical every time, it is billed at the uncached rate.[4][5] OpenCode had always sent its system prompt in `instructions`, so on GPT-6.2 every step paid full price for more than ten thousand tokens of system prompt. Version 2.3.2 (released November 18, 01:35 UTC) sends it as the first developer message in `input` instead, which caches from the second step on. On GitHub Copilot's `gpt-6.2-sol`, uncached input per step dropped from 14,163 tokens to 3.[1][3]

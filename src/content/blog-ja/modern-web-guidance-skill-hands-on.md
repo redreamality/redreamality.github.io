@@ -7,6 +7,7 @@ author: "Remy"
 tags: ["ai-agents", "agent-harness", "developer-tools", "Agent Skills", "frontend-development", "opencode"]
 lang: "ja"
 translatedFrom: "modern-web-guidance-skill-hands-on"
+series: hot-skill
 ---
 
 **結論から：** coding agent にフロントエンドを書かせていて、特に安いモデルや無料モデルを使っているなら、GoogleChrome の modern-web-guidance は入れる価値がある。agent が賢くなるわけではない。ダイアログ、メニュー、フォームのようなコードを書く前に、Chrome、Edge、Firefox、MDN のチームが管理する guide を引かせる。agent はその guide に従い、div とキーイベントを手で組む代わりに、ネイティブの `<dialog>`、`popover`、CSS anchor positioning を使う。同じ小さなタスクで、3 つの無料モデルは skill ありでブラウザ検査 16 項目すべてに合格した。skill なしでは mimo-v2.6-flash が 2 項目、hy4-flash が 3 項目を落とした。deepseek-v4.1-flash は skill なしでも全項目に合格したので、このモデルでは skill は実装の書き方を変えただけだった。コストもはっきりしている。毎回数十 KB の guide を読み、所要時間は数倍になり、オプトアウトしない限り検索クエリは Google に送られる。

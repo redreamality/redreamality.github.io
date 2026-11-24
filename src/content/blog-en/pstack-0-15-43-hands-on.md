@@ -11,6 +11,7 @@ tags:
   - ai-coding
   - claude-code
   - software-engineering
+series: pstack
 ---
 
 **Short answer:** pstack 0.15.43 (merged November 17, 2026, Shanghai time) cuts about 20% of its skill text. It routes work to Opus 5.5 by default, caps every role at xhigh, removes the Orchestrate playbook, and gives every agent that `/poteto-mode` starts a `worker.md` file to read first. [1] If you already use pstack, the one thing to do is update the plugin and rerun `/setup-pstack`.

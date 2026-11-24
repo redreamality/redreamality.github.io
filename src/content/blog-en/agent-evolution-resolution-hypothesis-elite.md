@@ -7,6 +7,7 @@ author: "Remy"
 tags: ["rsi", "ai-agents", "agent-harness", "agent-loop", "feedback-loops"]
 lang: "en"
 translatedFrom: "agent-evolution-resolution-hypothesis-elite"
+series: rsi
 ---
 
 **Short answer:** The most important recursive self-improvement (RSI) work this week is not a new agent that rewrites itself better. It is two papers about who signs off on a change. The Resolution Hypothesis, from ShanghaiTech and ByteDance, audits 7 agent-evolution methods and finds that the bottleneck is selection, not proposal. The candidate pools contain real improvements, but a selector that looks at one run picks the better candidate 49.7% of the time, which is a coin flip. Most of the 10 to 40 point gains in the literature can be reproduced by one sentence that suits the grader, and once the graders are repaired the median gain drops from 17.6 to 0.8 points.[1] ELITE, from Jürgen Schmidhuber's group, goes the other way. It runs no benchmark inside the evolution loop. It merges changes by reading code and checks only that the result runs. On a 60-task SWE-bench Pro subset it ties DGM and HGM, it scores 5 to 10 points higher on two transfer benchmarks, and it costs 1/4 to 1/6 as much.[2]

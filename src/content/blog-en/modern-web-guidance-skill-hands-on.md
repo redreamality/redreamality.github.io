@@ -7,6 +7,7 @@ author: "Remy"
 tags: ["ai-agents", "agent-harness", "developer-tools", "Agent Skills", "frontend-development", "opencode"]
 lang: "en"
 translatedFrom: "modern-web-guidance-skill-hands-on"
+series: hot-skill
 ---
 
 **Short answer:** If a coding agent writes front-end code for you, and especially if it runs on a cheap or free model, install GoogleChrome's modern-web-guidance. It does not make the agent smarter. Before the agent writes a dialog, a menu, or a form, the skill makes it look up a guide that the Chrome, Edge, Firefox, and MDN teams maintain. The agent then uses native `<dialog>`, `popover`, and CSS anchor positioning instead of hand-rolled divs and key listeners. On one small task, three free models passed all 16 browser checks with the skill. Without it, mimo-v2.6-flash dropped 2 checks and hy4-flash dropped 3. deepseek-v4.1-flash passed everything without the skill, so for that model the skill only changed the implementation. The costs are clear too: each run reads tens of KB of guide text, wall time goes up several times, and search queries go to Google unless you opt out.

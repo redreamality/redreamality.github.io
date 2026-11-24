@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { BLOG_SERIES_KEYS } from './data/blog-series';
 
 const blogSchema = z.object({
   title: z.string(),
@@ -14,6 +15,8 @@ const blogSchema = z.object({
   updatedDate: z.date().optional(),
   lang: z.enum(['zh', 'en', 'ja']).optional(),
   translatedFrom: z.string().optional(), // Reference to original post slug
+  series: z.enum(BLOG_SERIES_KEYS).optional(), // see src/data/blog-series.ts
+  seriesOrder: z.number().optional(), // order within the series; defaults to pubDate
 });
 
 const chaosSchema = blogSchema;

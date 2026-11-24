@@ -10,6 +10,7 @@ tags:
   - ai-coding
   - claude-code
   - software-engineering
+series: pstack
 ---
 
 **结论先说：** pstack 从 0.15.43 到 0.15.48 的五个版本里，值得你动手的只有两件事。一是新 skill `/reframe`：你知道自己想要什么、却说不出这一行管它叫什么的时候，它教你 8 到 12 个专业术语，从相邻领域借词，再用这些词重写你的描述；0.15.48 又让它在描述含糊时先列出两三个「它可能是的问题」。[1][2] 二是评审和设计面板里的 Gemini 座位从 `gemini-4-carbon-high` 换成了 `gemini-4-neon-xhigh`，存过规则文件的人要自己重跑一次 `/setup-pstack`，因为没有任何东西会提醒你。[4][5]

@@ -10,6 +10,7 @@ tags:
   - ai-coding
   - claude-code
   - software-engineering
+series: pstack
 ---
 
 **结论先说：** pstack 0.15.43（2026-11-17 合并）把 skill 文本砍掉了约两成，默认模型路由改成「Opus 5.5 打底，任何角色不超过 xhigh」，删掉了 Orchestrate playbook，并给 `/poteto-mode` 启动的每个 agent 加了一份必读的 `worker.md`。[1] 老用户要做的事基本只有一件：更新插件后重跑一次 `/setup-pstack`。

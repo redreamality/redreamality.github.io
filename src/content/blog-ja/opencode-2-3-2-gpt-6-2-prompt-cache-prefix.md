@@ -12,6 +12,7 @@ tags:
   - opencode
   - claude-code
   - prompt-caching
+series: agent-harness
 ---
 
 **結論：** GPT-6.2 から、Responses API はリクエストのトップレベルにある `instructions` を `input` の後ろに付け、キャッシュのブレークポイントの外に置くようになった。中身が毎回まったく同じでも、この部分はキャッシュなしの料金になる。[4][5] OpenCode は system prompt をずっと `instructions` に入れていたので、GPT-6.2 では毎ステップ 1 万トークンを超える system prompt に正規料金を払っていた。2.3.2（日本時間 11 月 18 日 10 時 35 分公開）はこれを `input` の最初の developer メッセージに移し、2 ステップ目からキャッシュに乗るようにした。GitHub Copilot の `gpt-6.2-sol` では、1 ステップあたりのキャッシュなし入力が 14,163 トークンから 3 に減った。[1][3]

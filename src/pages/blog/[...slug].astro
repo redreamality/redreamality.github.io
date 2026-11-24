@@ -2,6 +2,7 @@
 import { normalizeTag } from '../../utils/tag-taxonomy';
 import Layout from '../../layouts/Layout.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
+import BlogSeriesNav from '../../components/series/BlogSeriesNav.astro';
 import RelatedContent from '../../components/RelatedContent.astro';
 import { getCollection } from '../../utils/content-collections';
 import { type Language, getTagCounts } from '../../utils/i18n';
@@ -95,6 +96,7 @@ const relatedItems = relatedPosts.map((relatedPost) => ({
     <div class="max-w-4xl mx-auto">
       {headings && headings.length > 0 && <TableOfContents headings={headings} />}
       <article class="prose dark:prose-invert lg:prose-xl mx-auto">
+        <BlogSeriesNav lang={lang} slug={post.slug} series={post.data.series} />
         <header class="mb-8">
           <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{post.data.title}</h1>
           <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">

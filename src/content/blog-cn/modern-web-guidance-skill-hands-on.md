@@ -6,6 +6,7 @@ pubDate: 2026-11-21T09:00:00+08:00
 author: "Remy"
 tags: ["ai-agents", "agent-harness", "developer-tools", "Agent Skills", "frontend-development", "opencode"]
 lang: "zh"
+series: hot-skill
 ---
 
 **结论先说：** 如果你让 coding agent 写前端，尤其用的是便宜或免费的小模型，GoogleChrome 的 modern-web-guidance 值得装。它不会让 agent 变聪明，作用是在写弹窗、菜单、表单这类代码之前，先去查一份 Chrome、Edge、Firefox 和 MDN 团队维护的 guide，然后照着用浏览器原生的 `<dialog>`、`popover`、CSS anchor positioning，而不是手写一套 div 加键盘监听。在同一个小任务上，三个免费模型装了 skill 都过了全部 16 项浏览器检查；不装时，mimo-v2.6-flash 和 hy4-flash 分别掉了 2 项和 3 项。deepseek-v4.1-flash 不装也全过，对它来说 skill 只是换了一种实现。代价也很明确：装了以后每次多读几十 KB 的 guide，运行时间长了好几倍，查询词默认发给 Google。
