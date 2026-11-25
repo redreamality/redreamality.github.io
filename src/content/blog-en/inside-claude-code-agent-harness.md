@@ -181,6 +181,8 @@ Strip away Claude Code specifics and the Agent Harness Pattern looks like this:
 └──────────────────────────────────────────────┘
 ```
 
+Latest: [OpenCode 2.3 hands-on: subagents, timed-out commands, and compaction now run in the background](/blog/opencode-2-3-background-subagents-shell-compaction/) compares how the major harnesses moved work to the background. For the request-prefix layout in Claude Code 2.1.330 (three system blocks, cache breakpoints, and where environment data sits), see [OpenCode 2.3.2 Tested: GPT-6.2 Doesn't Cache instructions, So the System Prompt Moves to a Leading Developer Message](/blog/opencode-2-3-2-gpt-6-2-prompt-cache-prefix/).
+
 ## Why This Matters
 
 If you're building an AI agent — whether a coding assistant, a data pipeline orchestrator, or an autonomous research tool — you'll eventually need to solve the same problems Claude Code solves:

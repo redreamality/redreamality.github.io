@@ -13,6 +13,8 @@ translatedFrom: 'openspec-1-5-stores-beta-update-guide'
 
 2026 年 10 月 26 日更新：**npm `latest` 已发布 1.15.0，其中包含 Stores，但 Stores 功能仍标为 Beta。** npm 的 `beta` 标签目前指向更早的 `1.6.0-beta.1`，不要因为功能叫 Stores Beta 就安装该标签。下面的命令使用 1.15.0 发布包，不依赖尚未发布的 `main`。
 
+最新进展见[OpenSpec 2.1 实测：/opsx 命令取消，skill 改放 .agents 和全局，1.x 项目怎么升级](/cn/blog/openspec-2-1-hands-on-upgrade/)：2.1.1 下 Stores 命令没有变，但代码仓库 `init` 默认改为全局，需要项目内 skill 时要加 `--scope project`。
+
 Store 让 API 仓库和 Web 仓库读取同一份规范，同时各自维护实现变更。它不会把任务分发给不同仓库，不授予文件权限，也不自动同步 Git。我建议把需要独立测试和评审的组件任务留在本地；只有团队确实希望共用一套规划生命周期时，才把默认规划位置指向外部 Store。
 
 这些行为以[官方 1.15.0 Stores 指南](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/stores-beta/user-guide.md)和[CLI 参考](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/cli.md)为准。安装或 PATH 有问题，先看[CLI 安装教程](/cn/blog/openspec-tutorial-cli-commands-agents-md-examples/)。原有 1.5 版本分析保留在后文，章节链接不变。
@@ -419,6 +421,8 @@ OpenSpec 文档反复强调一个容易混淆的点：
 
 - `openspec init/update/list/validate/status/...` 是终端 CLI；
 - `/opsx:explore`、`/opsx:propose`、`/opsx:apply`、`/opsx:archive` 是在 AI assistant 聊天里输入的命令。
+
+从 2.0 起，`/opsx` 命令已删除，改用 `/openspec-propose` 等 skill，见[OpenSpec 2.1 实测](/cn/blog/openspec-2-1-hands-on-upgrade/)。
 
 一个典型流程是：
 

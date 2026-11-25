@@ -50,6 +50,8 @@ API cache lifetime is often **five minutes**. In the two public corpora, **17–
 
 Cold returns: for 10,000 returns to 300k context on Opus (5-minute cache), full re-send ~\$18,750; prune to 30k ~\$1,875 (−90%); Sonnet summary about halves the return versus Opus summary that can cost more than re-send (Table 6). Chat roles: prune/summarize cheaply and new-conversation per deliverable. Engineering: keep in-task reasoning, batch-clear stale tool results, compact at boundaries. Org-managed settings should outrank personal defaults.[1]
 
+Latest: [OpenCode 2.3.2 Tested: GPT-6.2 Doesn't Cache instructions, So the System Prompt Moves to a Leading Developer Message](/blog/opencode-2-3-2-gpt-6-2-prompt-cache-prefix/). On GPT-6.2, the `instructions` field is not cached, a regression that does not raise an error.
+
 ## Method: cache-safe routing + Jev calibrated probabilities + move only when sure
 
 ### Three seams that do not touch running work

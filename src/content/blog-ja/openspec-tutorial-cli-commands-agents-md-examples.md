@@ -15,6 +15,8 @@ translatedFrom: 'openspec-tutorial-cli-commands-agents-md-examples'
 
 2026 年 11 月 13 日時点の [npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) の `latest` は **2.0.0** で、npm パッケージには Node.js **22.12.0+** が必要です。導入例は 1.15.0、練習は 1.13.2 に固定したままです。以下の単体版インストールコマンドの前に、PowerShell では `$env:OPENSPEC_VERSION = 'v1.15.0'`、macOS/Linux では `export OPENSPEC_VERSION=v1.15.0` を実行して、その版を維持してください。
 
+最新の動向は[OpenSpec 2.1 実地検証：/opsx コマンドは廃止、skill は .agents とグローバルへ。1.x プロジェクトの移行手順](/ja/blog/openspec-2-1-hands-on-upgrade/)を参照。現在の npm `latest` は 2.1.1 で、`/opsx` は削除済み。アップグレード手順はそこに書いてある。
+
 Windows PowerShell では公式の単体版インストーラーを使います。
 
 ```powershell
@@ -65,7 +67,7 @@ which -a openspec
 
 `openspec version --check` で更新を確認します。1.x を使い続けるなら、上記の固定版を維持するか、`pnpm add -g @fission-ai/openspec@1` で 1.x 内の更新を取得します。`openspec update` が提案する CLI のアップグレードは断ります。`OPENSPEC_NO_UPDATE_CHECK=1` を設定すると、この提案を無効にできます。
 
-2.0 を選ぶ場合、npm での導入には Node.js 22.12.0+ が必要です。先に[公式 2.0 移行ガイド](https://openspec.dev/llms.mdx/docs/upgrade-to-2/content.md)を読んでください。カスタマイズを保存してコミットしてから、`pnpm add -g @fission-ai/openspec@2.0.0` で導入し、各プロジェクトで `openspec update` を実行します。2.0 はスキルを `.agents/skills/` に共有し、未変更の生成コマンドファイルを削除してスキルに置き換えます。編集済みの旧コマンドファイルやツール別のスキルコピーは残りますが、`.agents/skills/` 内の OpenSpec が導入するスキルへの編集は、バックアップなしで上書きされます。更新前に `openspec update --dry-run` で影響を確認し、更新後に差分を確認してください。本記事では 2.0 への移行を実測していません。
+2.0 を選ぶ場合、npm での導入には Node.js 22.12.0+ が必要です。現在の 2.1.x には Node.js 22.20.0+ が必要です。先に[公式 2.0 移行ガイド](https://openspec.dev/llms.mdx/docs/upgrade-to-2/content.md)を読んでください。カスタマイズを保存してコミットしてから、`pnpm add -g @fission-ai/openspec@2.0.0` で導入し、各プロジェクトで `openspec update` を実行します。2.0 はスキルを `.agents/skills/` に共有し、未変更の生成コマンドファイルを削除してスキルに置き換えます。編集済みの旧コマンドファイルやツール別のスキルコピーは残りますが、`.agents/skills/` 内の OpenSpec が導入するスキルへの編集は、バックアップなしで上書きされます。更新前に `openspec update --dry-run` で影響を確認し、更新後に差分を確認してください。本記事では 2.0 への移行を実測していません。
 
 単体版は `OPENSPEC_VERSION` で対象の版を選んでからインストーラーを再実行します。`openspec install` はパッケージ管理版から単体版へ切り替える操作で、古いコピーの削除方法を表示します。終了後、新しいターミナルで選ばれる実行ファイルを確認します。
 
@@ -93,6 +95,8 @@ pnpm 版の削除は `pnpm remove -g @fission-ai/openspec` です。単体版で
 </div>
 
 `/opsx:propose` と `/opsx:apply` は助手のチャットに入力します。PowerShell や Bash のコマンドではありません。呼び出し方は連携ごとに異なり、Codex は `$openspec-propose` などのスキル名を使います。生成されたファイルを確認し、全ツールが同じ表記を受け付けると考えないでください。詳細は[1.15.0 CLI リファレンス](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/cli.md)を参照してください。
+
+2.0 以降、これらの入口は `/openspec-propose` などの skill に変わった。詳しくは[OpenSpec 2.1 実地検証](/ja/blog/openspec-2-1-hands-on-upgrade/)を参照。
 
 複数のコードリポジトリで仕様を共有する場合は、[Stores の二つのリポジトリを使う例](/ja/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice)へ進みます。Stores は 1.15.0 に含まれますが、機能は Beta 扱いです。npm の `beta` タグは別の配布タグであり、Stores を使うために必要な版ではありません。
 
@@ -463,6 +467,8 @@ pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login --json --deltas-o
 多くの AI コーディングツールは、リポジトリ内の指示ファイルを読みます。`AGENTS.md` は、コードベース内でエージェントにどう振る舞うべきかを伝える、一般的な慣習になっています。
 
 OpenSpec 1.x はツール別の skills とコマンドファイルを生成します。たとえば別の 1.13.2 初期化で `--tools claude` を選ぶと、`.claude/skills/openspec-propose/SKILL.md` と `.claude/commands/opsx/propose.md` が生成されます。自動生成の `openspec/AGENTS.md` は必須ではありません。以下は手書きできる任意のプロジェクト規約です。
+
+2.x では `.agents/skills/` だけを生成し、本機のグローバルにも入れられる。詳しくは[OpenSpec 2.1 実地検証](/ja/blog/openspec-2-1-hands-on-upgrade/)を参照。
 
 - 変更提案を読む前に実装しない。
 - 実装は承認済みの変更に限定する。

@@ -181,6 +181,8 @@ On September 28, 2026 (PDT), TechCrunch reported that Google is shutting down Ge
 
 Only material whose primary source I read. The SkillsBench figure (curated skills lifting average pass rate from 33.9% to 50.5% on 87 tasks) is cited via HEXIS [9]; I did not read the original and treat it as background. Skills versus MCP, real client support for `allowed-tools`, and skill-marketplace economics are not covered.
 
+Latest: [Modern Web Guidance hands-on: Chrome's front-end skill gets small models to use native dialog and popover](/blog/modern-web-guidance-skill-hands-on/), a Chrome team front-end skill tested with and without the skill on smaller models.
+
 ## References
 
 1. Agent Skills Specification. agentskills.io. https://agentskills.io/specification

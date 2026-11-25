@@ -1440,6 +1440,8 @@ AI agent skills are transforming how we interact with AI systems. In 2026 and be
 
 The future is agentic - AI systems that can actually help us accomplish tasks, not just answer questions. Start building your intelligent agents today!
 
+Latest: [Modern Web Guidance hands-on: Chrome's front-end skill gets small models to use native dialog and popover](/blog/modern-web-guidance-skill-hands-on/), a hands-on comparison of an installable front-end skill.
+
 ---
 
 ## Additional Resources

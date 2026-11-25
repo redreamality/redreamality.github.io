@@ -94,6 +94,8 @@ EvoPathBench 冻结每个检查点的产物，在留出任务上追踪单项能�
 
 所以衡量自进化，至少要做到三件事：在 agent 看不到的留出任务上测；按检查点追踪过程，而不是只看终点；新旧版本在同一批题目上做成对比较。
 
+最新进展见[自进化 agent 卡在验收](/cn/blog/agent-evolution-resolution-hypothesis-elite/)：一篇审计发现选择器选对率约等于抛硬币，修好评分器后涨分中位数从 17.6 降到 0.8 pp。
+
 ## 四个瓶颈
 
 ### Reward hacking：改不动任务，就改裁判

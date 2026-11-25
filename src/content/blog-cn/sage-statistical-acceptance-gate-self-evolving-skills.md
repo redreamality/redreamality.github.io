@@ -109,6 +109,8 @@ Table 2 还拆了组件。**C1**（+ paired）只用逐项配对准则（折扣�
 
 代码与数据在投稿期指向匿名仓库 [github.com/anonymous-github-repo-123/SAGE](https://github.com/anonymous-github-repo-123/SAGE)——若你复现前仍看到 anonymous 占位，以 arXiv HTML / abs 更新为准。PACE（[arXiv:2606.08106](https://arxiv.org/abs/2606.08106)）用 testing-by-betting 的 anytime-valid 门在提示词自进化小测试床上压假提交与有害编辑；与 SAGE 同属「acceptor 觉醒」同窗，设定与技能文档环不同，正文不抢戏。[1]
 
+最新进展见[自进化 agent 卡在验收](/cn/blog/agent-evolution-resolution-hypothesis-elite/)：本文涨分最大的 LiveMath 和 OfficeQA，恰是 Resolution Hypothesis 找到评测捷径的两个基准，修好评测后 SAGE 还剩多少尚无人测。
+
 ## 小结
 
 自进化技能文档环里，优化器已经开始有学习率、拒绝缓冲和慢更新；若门控仍是「验证总分涨了就合并」，你会系统性地买入两类错误——**用已掌握行为换平均分**，以及**把噪声里的幸运编辑写进主文档**。SAGE 用逐项配对账本暴露回归，用不对称惩罚与单侧检验要求增益可靠，并在边界参数上精确回到 SkillOpt 朴素门，便于对照。等预算下 20 设定：回归率 19/20 下降（LiveMath 36.5%→0%、OfficeQA DeepSeek-V4 42.8%→0%），终分全场最高（LiveMath 34.15→48.78）；配对 alone（C1）平均 +6.20，完整 SAGE 再 +2.53。收益随回归风险变大——门控本该如此。下一次 skill 合并前，先问账本上的回归，再问涨分是否过检验；总分绿灯，不够当合并键。[1]

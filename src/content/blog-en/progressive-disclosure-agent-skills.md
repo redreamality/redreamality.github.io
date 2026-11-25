@@ -185,6 +185,8 @@ Skills turn domain procedure into installable patches—that is good. The bad ne
 
 For harness designers, skills management is not “write more Markdown”; **disclosure policy is part of product and cost architecture**—on the same control-plane map as growing the harness, controlling routing, and holding stop authority. Libraries will keep growing; the question to ask before the next skill is not only “what should it say,” but “on the next call, how many manuals should we see.”
 
+Latest: [Modern Web Guidance hands-on: Chrome's front-end skill gets small models to use native dialog and popover](/blog/modern-web-guidance-skill-hands-on/). Once installed, the agent fetches guides remotely on demand; the local 2.5 MB guides directory is unused by default.
+
 ## Sources
 
 1. Zhang G, Zhao K, Mudgal P, Ammar W, Cui X, Chu X, Blanken A. *Report: Progressive Disclosure of Agent Skills*. arXiv:2609.35692, 2026-09-28. <https://arxiv.org/abs/2609.35692> · PDF <https://arxiv.org/pdf/2609.35692> · Agent Skills standard <https://agentskills.io>

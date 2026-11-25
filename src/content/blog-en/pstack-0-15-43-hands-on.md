@@ -201,6 +201,8 @@ What I did not test:
 
 My conclusion is that the upgrade is worth it. The shorter text mostly saves context on each invocation. The cap puts a ceiling on worst-case cost. `worker.md` closes the gap where started agents never saw the operator's rules. After you upgrade, the work is small: rerun `/setup-pstack`, read which values it replaced, and check `worker.md` against your team's PR rules.
 
+Latest: [pstack 0.15.48 hands-on: /reframe teaches you what your problem is called](/blog/pstack-0-15-48-reframe-hands-on/).
+
 ## References
 
 1. cursor/plugins PR #1249, feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh: <https://github.com/cursor/plugins/pull/1249>

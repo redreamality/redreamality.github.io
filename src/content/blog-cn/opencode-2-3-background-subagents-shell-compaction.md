@@ -96,6 +96,8 @@ series: agent-harness
 - 换模型之后，或者停顿超过 prompt cache 的有效期，起点推迟到下一次回答之后。
 - 摘要请求会复用 prompt cache，但用不上的摘要也要付钱。比如会话没到阈值就结束了，这笔 token 就白花了。
 
+最新进展见[OpenCode 2.3.2 实测：GPT-6.2 不缓存 instructions，system prompt 改放开头的 developer 消息](/cn/blog/opencode-2-3-2-gpt-6-2-prompt-cache-prefix/)：在 GPT-6.2 上，2.3.1 及以前的 system prompt 不进缓存，请升到 2.3.2。
+
 为了在几轮之内触发压缩，测试把 `mimo-v2.6-flash-free` 的上下文窗口在项目配置里改成 48000。这样 buffer 取下限 16k，阈值大约是 32k。第一轮附上一份发布说明，第二轮再附三份文件，上下文到了约 23k。停 40 秒后第三轮附一段约 11k token 的 JSON，总量越过阈值。同样三轮，在另一个目录里加上 `"compaction": { "background": false }` 再跑一遍。两次都跑在后台服务里，因为 `--standalone` 每次退出都会带走内存里的摘要。
 
 ![两个会话的消息时间线：默认配置下 compaction 记录出现后 0.03 秒助手就开始回答；background 为 false 时，compaction 记录之后过了 5.3 秒助手才开始](/assets/opencode-2-3-background-subagents-shell-compaction/background-compaction.webp)

@@ -225,6 +225,8 @@ The paper's prescription: score exclusive constraints separately, guard the firs
 
 The replication package has the 312 cases, core functions and checks, the harness, and all run logs [1][11].
 
+Latest: [Modern Web Guidance hands-on: Chrome's front-end skill gets small models to use native dialog and popover](/blog/modern-web-guidance-skill-hands-on/). Its description tells the agent to run first on every front-end task, which can compete with other skills of the same kind.
+
 ## Sources
 
 [1] Chaoliang Yan, Zihao Xu, Yuekang Li, Shangzhi Xu, Yi Liu, Gelei Deng, Siqi Ma. *One Skill Too Many: How Co-Installed Skills Conflict in Coding Agents*. arXiv:2610.11647, 2026-10-08. https://arxiv.org/abs/2610.11647

@@ -101,6 +101,8 @@ Limits (§5.2): binary verifier assumed; graded rewards need another paired stat
 
 Code at submission: anonymous [github.com/anonymous-github-repo-123/SAGE](https://github.com/anonymous-github-repo-123/SAGE)—trust arXiv abs/HTML for updates. Sister acceptor PACE ([arXiv:2606.08106](https://arxiv.org/abs/2606.08106)) uses anytime-valid e-processes on a prompt self-evolution testbed; mentioned lightly, not the main act.[1]
 
+Latest: [Self-evolving agents are stuck at acceptance](/blog/agent-evolution-resolution-hypothesis-elite/). LiveMath and OfficeQA, where this post shows the largest gains, are the two benchmarks where the Resolution Hypothesis found evaluation shortcuts.
+
 ## Takeaway
 
 In self-evolving skill-document loops, optimizers already have learning rates, rejection buffers, and slow updates. If the gate is still “merge whenever the validation total rises,” you systematically buy two errors: **trading mastered behavior for average score**, and **writing lucky noisy edits into the main document**. SAGE exposes regressions with a per-item paired ledger, demands reliability with asymmetric penalties and a one-sided test, and recovers the SkillOpt naive gate exactly at a boundary setting for clean comparison. Under equal budget across 20 settings: regressions down in 19/20 (LiveMath 36.5%→0%, OfficeQA DeepSeek-V4 42.8%→0%), highest finals everywhere (LiveMath 34.15→48.78); pairing alone (C1) averages +6.20, full SAGE adds another +2.53. Benefit grows with regression risk—as a gate should. Before the next skill merge, ask the ledger about regressions, then ask whether the rise clears the test. A green total is not a merge key.[1]

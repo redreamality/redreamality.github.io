@@ -945,6 +945,8 @@ AI 代理技能正在改变我们与 AI 系统交互的方式。在 2026 年及�
 
 未来是代理化的 - 能够真正帮助我们完成任务的 AI 系统，而不仅仅是回答问题。今天就开始构建你的智能代理吧！
 
+最新进展见[Modern Web Guidance 实测：Chrome 团队的前端 skill，让弱模型也写出原生 dialog 和 popover](/cn/blog/modern-web-guidance-skill-hands-on/)：这是一个可安装前端 skill 的真机对照。
+
 ---
 
 ## 附加资源

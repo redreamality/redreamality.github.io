@@ -95,6 +95,8 @@ The same holds for real tools. Treude and Baltes had Claude Code review itself a
 
 So measuring self-evolution takes at least three things: test on held-out tasks the agent cannot see, track the process checkpoint by checkpoint rather than only the endpoint, and compare old and new versions pairwise on the same items.
 
+Latest: [the Resolution Hypothesis and ELITE](/blog/agent-evolution-resolution-hypothesis-elite/), where selection is close to a coin flip and repaired graders cut the median gain from 17.6 to 0.8 pp.
+
 ## Four bottlenecks
 
 ### Reward hacking: if you can't change the task, change the judge

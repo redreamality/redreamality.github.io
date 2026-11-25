@@ -142,6 +142,8 @@ The danger is less “a few more agent LOC” than **ungrounded closed evaluatio
 
 Product-ready compression: **2026 RSI’s main field is bounded loops + stronger verifiers + harness/algorithm feedback into AI stacks. Open-ended evaluator rewrite and closed-loop successor training remain rare cells.**
 
+Latest: [Self-evolving agents are stuck at acceptance](/blog/agent-evolution-resolution-hypothesis-elite/). Score gains should first pass the σ/τ test and the one-rule test; after graders were repaired, the median gain fell from 17.6 to 0.8 pp.
+
 ## Hype cheat sheet
 
 | Common claim | More accurate reading | Anchor |

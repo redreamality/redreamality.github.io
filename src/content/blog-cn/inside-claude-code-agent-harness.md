@@ -177,6 +177,8 @@ type State = {
 └──────────────────────────────────────────────┘
 ```
 
+最新进展见[OpenCode 2.3 实测：子 agent、超时命令和上下文压缩都改到后台跑](/cn/blog/opencode-2-3-background-subagents-shell-compaction/)：各家 harness 的后台化对照写在那里。Claude Code 2.1.330 的请求前缀怎么排（system 分成三块、缓存断点、环境信息放在哪），见[OpenCode 2.3.2 实测：GPT-6.2 不缓存 instructions，system prompt 改放开头的 developer 消息](/cn/blog/opencode-2-3-2-gpt-6-2-prompt-cache-prefix/)。
+
 ## 为什么这很重要
 
 如果你正在构建 AI Agent——无论是代码助手、数据管道编排器，还是自主研究工具——你终将面对和 Claude Code 相同的问题：

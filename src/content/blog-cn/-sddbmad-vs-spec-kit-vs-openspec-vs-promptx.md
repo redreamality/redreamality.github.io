@@ -26,6 +26,8 @@ tags: ['vibe-coding', 'sdd', 'openspec', 'spec-kit', 'bmad']
 
 </div>
 
+从 OpenSpec 2.0 起，表中的入口改为 `/openspec-propose`、`/openspec-apply-change`、`/openspec-archive-change` 等 skill，见[OpenSpec 2.1 实测](/cn/blog/openspec-2-1-hands-on-upgrade/)。
+
 表中路径和流程依据分别是 [BMAD 版本化模板](https://github.com/bmad-code-org/BMAD-METHOD/blob/v6.12.4/src/bmm-skills/ship/bmad-build/spec-template.md)、[Spec Kit 当前 SDD 参考](https://github.github.io/spec-kit/reference/agentic-sdd.html)、[OpenSpec 官方工作流](https://github.com/Fission-AI/OpenSpec)和 [PromptX 官方说明](https://github.com/Deepractice/PromptX)。这是同题的产物与决策比较，不是四个模型运行的性能测评。
 
 Spec Kit 当前 README 还提供独立的 bug fixing 与 idea assessment 入口，不必先走完整 SDD。本题是新功能，因此选 SDD 路径。其 Copilot 示例采用 `/speckit-specify` 等连字符写法，其他集成可能使用 `/speckit.specify`；以所安装宿主实际提供的入口为准，不要把聊天技能当作终端命令。`converge` 检查代码与规格、计划、任务的符合程度，发现缺口时追加任务，再回到实现，不会替我们直接完成修复。

@@ -181,6 +181,8 @@ SAGE 管最后一道门。它指出，SkillOpt 这类自进化环把优化器做
 
 只写了我读过原文的材料。SkillsBench 的数据（87 个任务上精选 skill 把平均通过率从 33.9% 提到 50.5%）是 HEXIS 转引的 [9]，没读原文，只当背景。skill 与 MCP 的分工、各客户端对 `allowed-tools` 的实际支持、skill 市场机制，都没有展开。
 
+最新进展见[Modern Web Guidance 实测：Chrome 团队的前端 skill，让弱模型也写出原生 dialog 和 popover](/cn/blog/modern-web-guidance-skill-hands-on/)：Chrome 团队的前端 skill，在小模型上做了装与不装的对照。
+
 ## 参考
 
 1. Agent Skills Specification. agentskills.io. https://agentskills.io/specification

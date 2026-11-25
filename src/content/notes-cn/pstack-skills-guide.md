@@ -13,6 +13,8 @@ pstack 是 Lauren Tan（[@poteto](https://x.com/poteto)）整理的一组工程 
 
 安装说明于 2026 年 10 月 26 日按[官方 pstack 0.15.32](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/.cursor-plugin/plugin.json)核对。后半部分的技能目录描述的是原先 0.15.15 的快照，其中的 51 个 skill、24 条原则不能当作当前完整清单。工作流背后的判断见[信任够了才谈得上并行](/cn/blog/lauren-tan-poteto-trust-before-parallel/)。
 
+最新进展见[pstack 0.15.48 实测 /reframe：说不清要做什么时，先学会这一行怎么叫它](/cn/blog/pstack-0-15-48-reframe-hands-on/)。
+
 <a id="host-compatibility"></a>
 
 ## 先确认自己的宿主能做什么

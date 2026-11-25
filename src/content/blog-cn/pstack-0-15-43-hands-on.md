@@ -200,6 +200,8 @@ Orchestrate 是分两步消失的。0.15.36 删掉了 `orch` 脚本，playbook �
 
 我的结论是值得升级。文本变短，主要省在每次调用的上下文上。路由封顶让最坏情况下的花费有了上限。`worker.md` 补上了子 agent 收不到规矩的缺口。升级后要做的事很少：重跑一次 `/setup-pstack`，看它替换了哪些值，再对照 `worker.md` 检查团队的 PR 规范。
 
+最新进展见[pstack 0.15.48 实测 /reframe：说不清要做什么时，先学会这一行怎么叫它](/cn/blog/pstack-0-15-48-reframe-hands-on/)。
+
 ## 参考来源
 
 1. cursor/plugins PR #1249，feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh：<https://github.com/cursor/plugins/pull/1249>

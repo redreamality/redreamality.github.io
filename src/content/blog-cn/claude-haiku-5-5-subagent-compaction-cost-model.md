@@ -194,6 +194,8 @@ subagent 的模型按这个顺序决定：单次调用传入的 `model` 参数 �
 
 另外两点：subagent 会继承主会话的思考设置；`haiku` 别名在 Bedrock、Google Cloud Agent Platform、Foundry 和 Claude Platform on AWS 上仍指向 Haiku 4.5。[5][6]
 
+最新进展见[OpenCode 2.3 实测：子 agent、超时命令和上下文压缩都改到后台跑](/cn/blog/opencode-2-3-background-subagents-shell-compaction/)：OpenCode 2.3 默认后台压缩，用不上的摘要也要计费。各家压缩之后前缀还留多少，见[OpenCode 2.3.2 实测：GPT-6.2 不缓存 instructions，system prompt 改放开头的 developer 消息](/cn/blog/opencode-2-3-2-gpt-6-2-prompt-cache-prefix/)。
+
 ## 反方样本：它在哪些地方不省钱
 
 **一、「比 Luna 贵 12 倍」。** r/ClaudeAI 上有帖子用同一个体素宝塔（voxel pagoda）任务比较，Haiku 5.5 在 xhigh 下用了 2.688 亿输入 token（其中 2.627 亿是缓存读）、446 万输出，折合 24.96 美元；Luna 约 1.91–1.96 美元。[14][15][16] Reddit 原帖我这边抓不到，数字来自两家转述。按价目表反推：全程在 10 万以下应是 2.627 亿 × 0.01 + 610 万 × 0.10 + 446 万 × 0.50 ≈ 5.47 美元；全程在高档应是 ≈ 27.34 美元。24.96 落在两者之间、靠近上限，说明这次会话很早就跨了线。可以拆成两个因子：同样的 token 留在低档也要约 5.47 美元，是 Luna 的约 2.9 倍，这是 token 用量的差距；跨线又乘了约 4.6 倍。这是一次创作任务，用的是 xhigh 而不是默认 medium，不能当通用比例，但它把两种风险叠在一起演示得很清楚。

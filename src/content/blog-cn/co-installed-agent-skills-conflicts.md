@@ -225,6 +225,8 @@ Claude Code 文档自己也建议：每次都必须成立的规则，放进 hook
 
 作者公开了复现包，含 312 对实验用例、核心功能和检查脚本、实验 harness 以及全部运行日志 [1][11]。
 
+最新进展见[Modern Web Guidance 实测：Chrome 团队的前端 skill，让弱模型也写出原生 dialog 和 popover](/cn/blog/modern-web-guidance-skill-hands-on/)：它的 description 要求所有前端任务先执行，会和同类 skill 抢优先级。
+
 ## 参考来源
 
 [1] Chaoliang Yan, Zihao Xu, Yuekang Li, Shangzhi Xu, Yi Liu, Gelei Deng, Siqi Ma. *One Skill Too Many: How Co-Installed Skills Conflict in Coding Agents*. arXiv:2610.11647, 2026-10-08. https://arxiv.org/abs/2610.11647

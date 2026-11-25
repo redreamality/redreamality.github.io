@@ -68,6 +68,8 @@ lang: "zh"
 
 麻烦在于两条路会交叉。Noma Security 提醒，CLI 也可以在 `/connect` 里选一个 Console workspace，直接用 workspace 托管的 provider。[9] 所以「我只用终端」回答不了你有没有暴露，要看的是这把 provider key 当初是填在本机，还是填进了 Console。
 
+最新进展见[OpenCode 2.3 实测：子 agent、超时命令和上下文压缩都改到后台跑](/cn/blog/opencode-2-3-background-subagents-shell-compaction/)：2.x 已换成 `@opencode/cli` 包，并改成后台服务架构。
+
 ## 被偷的 key 为什么这么好卖
 
 模型 API key 是 bearer 凭据，谁拿着谁就能用，费用记在主人头上。它和数据库密码不一样：拿到以后既不用横向移动，也不用费心找数据外传的出口，发 HTTPS 请求就能直接换成算力。一个托管网关里存着几家厂商、很多客户的 key，攻破一次的产出就是这几项相乘。

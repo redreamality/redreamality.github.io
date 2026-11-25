@@ -26,6 +26,8 @@ Decisions come before tools. Is `None` an error or an empty value? Does a nonbre
 
 </div>
 
+From OpenSpec 2.0 on, the table's entry points became skills such as `/openspec-propose`, `/openspec-apply-change`, and `/openspec-archive-change`. See [OpenSpec 2.1 hands-on](/blog/openspec-2-1-hands-on-upgrade/).
+
 These paths and processes come from the [versioned BMAD template](https://github.com/bmad-code-org/BMAD-METHOD/blob/v6.12.4/src/bmm-skills/ship/bmad-build/spec-template.md), [current Spec Kit SDD reference](https://github.github.io/spec-kit/reference/agentic-sdd.html), [official OpenSpec workflow](https://github.com/Fission-AI/OpenSpec), and [official PromptX documentation](https://github.com/Deepractice/PromptX). This compares artifacts and decisions for one task, not the performance of four model runs.
 
 Spec Kit's current README also offers independent bug-fixing and idea-assessment entry points. Neither requires completing SDD first. This task adds a feature, so the table uses SDD. The Copilot example uses hyphenated skills such as `/speckit-specify`; other integrations may use `/speckit.specify`. Follow the installed host's entry points and keep chat invocations separate from terminal commands. `converge` checks implementation against the specification, plan, and tasks. It appends tasks for gaps, then returns work to implementation rather than directly fixing the code.

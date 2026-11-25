@@ -25,6 +25,8 @@ AIエージェントスキル（「ツール」または「機能」とも呼ば
 - **OpenAI**: 関数呼び出し、コードインタープリター、ファイル検索
 - **オープンソース**: LangChainツール、AutoGPT、カスタム実装
 
+最新の動向は[Modern Web Guidance 実地検証：Chrome チームのフロントエンド skill で、小さなモデルもネイティブの dialog と popover を使うようになる](/ja/blog/modern-web-guidance-skill-hands-on/)を参照。インストールできるフロントエンド skill の実地比較がある。
+
 ## 2026年におけるエージェントスキルの重要性
 
 ### チャットボットからエージェントへの進化

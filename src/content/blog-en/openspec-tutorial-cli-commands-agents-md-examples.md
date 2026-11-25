@@ -13,6 +13,8 @@ The October 26, 2026 installation instructions below retain **1.15.0**, the npm 
 
 On November 13, 2026, the [npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) listed **2.0.0** as `latest`, requiring Node.js **22.12.0+** for the npm package. The installation examples remain pinned to 1.15.0 and the exercise to 1.13.2. Before running the standalone commands below, run `$env:OPENSPEC_VERSION = 'v1.15.0'` in PowerShell or `export OPENSPEC_VERSION=v1.15.0` on macOS/Linux to retain that version.
 
+Latest: [OpenSpec 2.1 hands-on: /opsx commands are gone, skills move to .agents and global, and how to upgrade a 1.x project](/blog/openspec-2-1-hands-on-upgrade/). npm `latest` is now 2.1.1, `/opsx` has been removed, and the upgrade steps are in that post.
+
 For Windows PowerShell, the official standalone installer is:
 
 ```powershell
@@ -63,7 +65,7 @@ If necessary, add the actual installation directory to your shell's PATH. With n
 
 `openspec version --check` reports update availability. To stay on 1.x, keep the exact pins above or use `pnpm add -g @fission-ai/openspec@1` for updates within 1.x. Decline CLI upgrade offers from `openspec update`; `OPENSPEC_NO_UPDATE_CHECK=1` disables those offers.
 
-If you choose 2.0, use Node.js 22.12.0+ for npm and read the [official 2.0 migration guide](https://openspec.dev/llms.mdx/docs/upgrade-to-2/content.md) first. Save and commit customizations before installing `pnpm add -g @fission-ai/openspec@2.0.0` and running `openspec update` in each project. Version 2.0 shares skills in `.agents/skills/` and removes unchanged generated command files in favor of skills. Edited old command files and tool-specific skill copies are kept, but edits to OpenSpec-installed skills in `.agents/skills/` are overwritten without a backup. Inspect `openspec update --dry-run` before updating and review the resulting diff. The 2.0 migration has not been tested for this tutorial.
+If you choose 2.0, use Node.js 22.12.0+ for npm; current 2.1.x needs 22.20.0+. Read the [official 2.0 migration guide](https://openspec.dev/llms.mdx/docs/upgrade-to-2/content.md) first. Save and commit customizations before installing `pnpm add -g @fission-ai/openspec@2.0.0` and running `openspec update` in each project. Version 2.0 shares skills in `.agents/skills/` and removes unchanged generated command files in favor of skills. Edited old command files and tool-specific skill copies are kept, but edits to OpenSpec-installed skills in `.agents/skills/` are overwritten without a backup. Inspect `openspec update --dry-run` before updating and review the resulting diff. The 2.0 migration has not been tested for this tutorial.
 
 For standalone installations, select the intended release with `OPENSPEC_VERSION` before rerunning the installer. `openspec install` explicitly switches an existing package-manager installation to standalone and prints removal guidance for the old copy. Verify the selected executable in a new terminal afterward.
 
@@ -91,6 +93,8 @@ These are terminal commands for 1.15.0. Run them in the intended project; replac
 </div>
 
 `/opsx:propose` and `/opsx:apply` belong in an assistant chat, not PowerShell or Bash. Invocation spelling depends on the integration; Codex uses skills such as `$openspec-propose`. Use the files generated for your tool rather than assuming every host accepts the same slash command. See the [1.15.0 CLI reference](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/cli.md).
+
+From 2.0 on, these entry points became skills such as `/openspec-propose`. See [OpenSpec 2.1 hands-on](/blog/openspec-2-1-hands-on-upgrade/).
 
 For shared specifications across code repositories, use the [Stores and multi-repo workflow](/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice). Stores ship in 1.15.0 but remain Beta. The npm `beta` tag is a separate distribution tag, not a requirement for using Stores.
 
@@ -462,6 +466,8 @@ pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login --json --deltas-o
 Many AI coding tools read repository instruction files. `AGENTS.md` has become a common convention for telling agents how to behave inside a codebase.
 
 OpenSpec 1.x generates tool-specific skills and command files. For example, a separate 1.13.2 initialization with `--tools claude` creates `.claude/skills/openspec-propose/SKILL.md` and `.claude/commands/opsx/propose.md`. It does not require a generated `openspec/AGENTS.md`. The following rules are optional, handwritten project policy:
+
+Version 2.x generates only `.agents/skills/` and can also install skills globally. See [OpenSpec 2.1 hands-on](/blog/openspec-2-1-hands-on-upgrade/).
 
 - Do not implement before reading the change proposal.
 - Keep implementation scoped to the approved change.

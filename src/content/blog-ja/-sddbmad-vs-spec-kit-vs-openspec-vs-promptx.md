@@ -28,6 +28,8 @@ translatedFrom: '-sddbmad-vs-spec-kit-vs-openspec-vs-promptx'
 
 </div>
 
+OpenSpec 2.0 以降、表の入口は `/openspec-propose`、`/openspec-apply-change`、`/openspec-archive-change` などの skill に変わった。詳しくは[OpenSpec 2.1 実地検証](/ja/blog/openspec-2-1-hands-on-upgrade/)を参照。
+
 表の根拠は [BMAD の版付きテンプレート](https://github.com/bmad-code-org/BMAD-METHOD/blob/v6.12.4/src/bmm-skills/ship/bmad-build/spec-template.md)、[Spec Kit の現在の SDD 参考](https://github.github.io/spec-kit/reference/agentic-sdd.html)、[OpenSpec 公式ワークフロー](https://github.com/Fission-AI/OpenSpec)、[PromptX 公式説明](https://github.com/Deepractice/PromptX)である。同じ課題の成果物と判断を比べており、四つのモデル実行の性能比較ではない。
 
 現在の Spec Kit README には独立した不具合修正とアイデア評価の入口もあり、先に SDD を終える必要はない。本題は機能追加なので SDD を選ぶ。Copilot の例は `/speckit-specify` のようにハイフンを使い、他の連携では `/speckit.specify` の場合もある。導入した宿主の入口を使い、チャットの指示と端末コマンドを区別する。`converge` は実装と仕様、計画、タスクの対応を確認し、不足があればタスクを追加して実装へ戻す。コードを直接修正する処理ではない。

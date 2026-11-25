@@ -97,6 +97,8 @@ series: agent-harness
 - モデルを切り替えた直後や、prompt cache の有効期限を超えて間が空いた後は、次の応答から数え直す。
 - 要約のリクエストは prompt cache を再利用するが、使われなかった要約にも課金される。しきい値に届く前にセッションが終われば、そのトークンは無駄になる。
 
+最新の動向は[OpenCode 2.3.2 実地検証：GPT-6.2 は instructions をキャッシュしないので、system prompt は先頭の developer メッセージへ](/ja/blog/opencode-2-3-2-gpt-6-2-prompt-cache-prefix/)を参照。GPT-6.2 では、2.3.1 以前の system prompt はキャッシュに入らない。2.3.2 に上げてほしい。
+
 数ターンで圧縮まで届かせるため、テストではプロジェクト設定で `mimo-v2.6-flash-free` のコンテキストウィンドウを 48000 にした。buffer は最低値の 16k になり、しきい値は約 32k になる。1 ターン目でリリースノートを 1 つ添付し、2 ターン目でさらに 3 ファイルを添付して約 23k まで増やした。40 秒置いて 3 ターン目に約 11k トークンの JSON を添付し、しきい値を越えた。同じ 3 ターンを、`"compaction": { "background": false }` を加えた別のディレクトリでもう一度流した。どちらもバックグラウンドサービス上で動かした。`--standalone` だと終了のたびにメモリ上の要約が消えるからだ。
 
 ![2 つのセッションのメッセージ時系列。既定の設定では compaction レコードの 0.03 秒後にアシスタントが回答を始め、background を false にすると compaction レコードから 5.3 秒後に始まる](/assets/opencode-2-3-background-subagents-shell-compaction/background-compaction.webp)

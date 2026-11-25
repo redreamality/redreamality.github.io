@@ -97,6 +97,8 @@ The docs spell out the edges:[4]
 - After a model switch, or after a break longer than the prompt cache lifetime, the summary starts from the next response instead.
 - The summary request reuses the prompt cache, but an unused summary is still billed. If the session ends before the threshold, those tokens bought nothing.
 
+Latest: [OpenCode 2.3.2 Tested: GPT-6.2 Doesn't Cache instructions, So the System Prompt Moves to a Leading Developer Message](/blog/opencode-2-3-2-gpt-6-2-prompt-cache-prefix/). On GPT-6.2, the system prompt was not cached in 2.3.1 and earlier; upgrade to 2.3.2.
+
 To reach compaction in a few turns, the test set the context window of `mimo-v2.6-flash-free` to 48000 in the project config. The buffer then falls back to its 16k minimum, so the threshold is about 32k. Turn one attached a release-notes file. Turn two attached three more files and brought the context to about 23k. After a 40-second pause, turn three attached about 11k tokens of JSON and crossed the threshold. The same three turns then ran in a second directory with `"compaction": { "background": false }`. Both sessions ran through the background service, because `--standalone` would discard the held summary on every exit.
 
 ![Message timelines for both sessions: with the default setting the assistant starts 0.03 seconds after the compaction record, with background set to false it starts 5.3 seconds after](/assets/opencode-2-3-background-subagents-shell-compaction/background-compaction.webp)

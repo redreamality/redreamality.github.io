@@ -194,6 +194,8 @@ Three ways to change it: [6]
 
 Two more details: subagents inherit the main conversation's thinking configuration, and the `haiku` alias still points to Haiku 4.5 on Bedrock, Google Cloud's Agent Platform, Foundry, and Claude Platform on AWS. [5][6]
 
+Latest: [OpenCode 2.3 hands-on: subagents, timed-out commands, and compaction now run in the background](/blog/opencode-2-3-background-subagents-shell-compaction/). OpenCode 2.3 turns on background compaction by default, and unused summaries are still billed. For how much of the prefix each harness keeps after compaction, see [OpenCode 2.3.2 Tested: GPT-6.2 Doesn't Cache instructions, So the System Prompt Moves to a Leading Developer Message](/blog/opencode-2-3-2-gpt-6-2-prompt-cache-prefix/).
+
 ## Counter-cases: where it doesn't save money
 
 **1. "12x more than Luna."** An r/ClaudeAI post compared the two on the same voxel pagoda build. Haiku 5.5 at xhigh used 268.8M input tokens (262.7M of them cache reads) and 4.46M output, for \$24.96; Luna cost about \$1.91–\$1.96. [14][15][16] I couldn't fetch the Reddit post; the figures come from two secondary write-ups. Back-solving from the price sheet: all requests under 100K would cost 262.7M × 0.01 + 6.1M × 0.10 + 4.46M × 0.50 ≈ \$5.47; all in the upper tier, ≈ \$27.34. \$24.96 sits near the ceiling, so the session crossed the line early. Two factors: in the lower tier the same tokens would still cost about 2.9x Luna (token volume); crossing the line multiplied that by about 4.6x. It's one creative task at xhigh, not the default medium, so not a general ratio, but it shows both risks stacked clearly.

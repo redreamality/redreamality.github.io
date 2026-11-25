@@ -15,6 +15,8 @@ translatedFrom: 'openspec-tutorial-cli-commands-agents-md-examples'
 
 2026 年 11 月 13 日，[npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) 的 `latest` 是 **2.0.0**，其 npm 包需要 Node.js **22.12.0+**。安装示例仍固定为 1.15.0，练习仍固定为 1.13.2。运行下面的独立程序安装命令前，PowerShell 中先运行 `$env:OPENSPEC_VERSION = 'v1.15.0'`，macOS/Linux 中先运行 `export OPENSPEC_VERSION=v1.15.0`，才能保留该版本。
 
+最新进展见[OpenSpec 2.1 实测：/opsx 命令取消，skill 改放 .agents 和全局，1.x 项目怎么升级](/cn/blog/openspec-2-1-hands-on-upgrade/)：目前 npm `latest` 已是 2.1.1，`/opsx` 已删除，升级步骤写在那里。
+
 Windows PowerShell 使用官方独立程序安装脚本：
 
 ```powershell
@@ -65,7 +67,7 @@ which -a openspec
 
 `openspec version --check` 查询更新。若要留在 1.x，保留上面的精确版本，或使用 `pnpm add -g @fission-ai/openspec@1` 获取 1.x 内的更新。拒绝 `openspec update` 提出的 CLI 升级；设置 `OPENSPEC_NO_UPDATE_CHECK=1` 可关闭这类提示。
 
-若选择 2.0，npm 安装需要 Node.js 22.12.0+，请先阅读[官方 2.0 迁移指南](https://openspec.dev/llms.mdx/docs/upgrade-to-2/content.md)。先保存并提交自定义修改，再用 `pnpm add -g @fission-ai/openspec@2.0.0` 安装，并在各项目运行 `openspec update`。2.0 将技能统一放到 `.agents/skills/`，删除未经修改的生成命令文件，改用技能。修改过的旧命令文件和工具目录内的技能副本会保留，但 `.agents/skills/` 中由 OpenSpec 安装的技能会被覆盖，自定义修改没有备份。更新前用 `openspec update --dry-run` 检查影响，更新后审查差异。本教程尚未实测 2.0 迁移。
+若选择 2.0，npm 安装需要 Node.js 22.12.0+；目前的 2.1.x 需要 Node.js 22.20.0+。请先阅读[官方 2.0 迁移指南](https://openspec.dev/llms.mdx/docs/upgrade-to-2/content.md)。先保存并提交自定义修改，再用 `pnpm add -g @fission-ai/openspec@2.0.0` 安装，并在各项目运行 `openspec update`。2.0 将技能统一放到 `.agents/skills/`，删除未经修改的生成命令文件，改用技能。修改过的旧命令文件和工具目录内的技能副本会保留，但 `.agents/skills/` 中由 OpenSpec 安装的技能会被覆盖，自定义修改没有备份。更新前用 `openspec update --dry-run` 检查影响，更新后审查差异。本教程尚未实测 2.0 迁移。
 
 独立程序应先用 `OPENSPEC_VERSION` 选择目标版本，再运行安装器。`openspec install` 会把包管理器安装切换为独立程序，并提示如何移除旧副本；操作后在新终端确认实际选中的可执行文件。
 
@@ -93,6 +95,8 @@ which -a openspec
 </div>
 
 `/opsx:propose`、`/opsx:apply` 应输入助手聊天框，不是 PowerShell 或 Bash。调用形式因集成而异，例如 Codex 使用 `$openspec-propose` 这样的技能名；以实际生成的文件为准，不要假设所有工具使用同一套斜杠命令。完整选项见[1.15.0 CLI 参考](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/cli.md)。
+
+从 2.0 起，这些入口改成了 `/openspec-propose` 等 skill，详见[OpenSpec 2.1 实测](/cn/blog/openspec-2-1-hands-on-upgrade/)。
 
 多个代码仓库共享规范时，接着看[Stores 双仓库流程](/cn/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice)。1.15.0 发布包包含 Stores，但功能仍标为 Beta；npm 的 `beta` 标签是另一条分发渠道，使用 Stores 不需要安装它。
 
@@ -464,6 +468,8 @@ pnpm dlx @fission-ai/openspec@1.13.2 show add-magic-link-login --json --deltas-o
 许多 AI 编码工具会读取仓库指令文件。`AGENTS.md` 已成为告知 Agent 如何在代码库中行为的通用约定。
 
 OpenSpec 1.x 生成的是工具对应的 skills 和命令文件。例如，另一次 1.13.2 初始化选择 `--tools claude` 后，会生成 `.claude/skills/openspec-propose/SKILL.md` 和 `.claude/commands/opsx/propose.md`，不要求存在自动生成的 `openspec/AGENTS.md`。下面这些是可以手写的可选项目约束：
+
+2.x 只生成 `.agents/skills/`，也可以装到本机全局，见[OpenSpec 2.1 实测](/cn/blog/openspec-2-1-hands-on-upgrade/)。
 
 - 在阅读变更提案之前不要实现。
 - 将实现范围限定在已批准的变更内。

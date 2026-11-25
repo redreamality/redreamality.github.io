@@ -181,6 +181,8 @@ Claude Code固有の要素を取り除くと、エージェント・ハーネス
 └──────────────────────────────────────────────────────┘
 ```
 
+最新の動向は[OpenCode 2.3 実地検証：サブエージェント、タイムアウトしたコマンド、コンテキスト圧縮がバックグラウンドへ](/ja/blog/opencode-2-3-background-subagents-shell-compaction/)を参照。各社 harness のバックグラウンド化の対照がある。Claude Code 2.1.330 のリクエストプレフィックスの配置（system が 3 ブロック、キャッシュの断点、環境情報の位置）は[OpenCode 2.3.2 実地検証：GPT-6.2 は instructions をキャッシュしないので、system prompt は先頭の developer メッセージへ](/ja/blog/opencode-2-3-2-gpt-6-2-prompt-cache-prefix/)を参照。
+
 ## なぜこれが重要か
 
 コーディングアシスタント、データパイプラインオーケストレーター、自律型調査ツールなど——AIエージェントを構築するなら、最終的にClaude Codeが解決した同じ問題に直面するだろう：

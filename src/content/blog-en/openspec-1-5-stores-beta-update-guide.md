@@ -13,6 +13,8 @@ translatedFrom: 'openspec-1-5-stores-beta-update-guide'
 
 Updated October 26, 2026. **1.15.0 is the published npm `latest`; Stores are included but remain a Beta feature.** The npm `beta` tag currently points to `1.6.0-beta.1`, an older prerelease. Do not install that tag merely because the feature is called Stores Beta. The commands below target 1.15.0, not an unreleased checkout of `main`.
 
+Latest: [OpenSpec 2.1 hands-on: /opsx commands are gone, skills move to .agents and global, and how to upgrade a 1.x project](/blog/openspec-2-1-hands-on-upgrade/). In 2.1.1 the Stores commands are unchanged, but `init` in a code repository now defaults to global skills; use `--scope project` when you want skills in the repo.
+
 A Store lets an API repository and a web repository read the same specification while keeping their implementation changes separate. It does not split tasks between repositories, grant filesystem permissions, or synchronize Git. I would keep component changes local whenever they need independent tests and reviews. Use a default external Store only when the team intentionally owns one shared planning lifecycle.
 
 The [official 1.15.0 Stores guide](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/stores-beta/user-guide.md) and [CLI reference](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/cli.md) define this behavior. For installation and PATH problems, start with the [CLI installation tutorial](/blog/openspec-tutorial-cli-commands-agents-md-examples/). The original 1.5 discussion remains below as historical context, with its section links preserved.
@@ -417,6 +419,8 @@ The docs repeatedly clarify a common source of confusion:
 
 - `openspec init/update/list/validate/status/...` are terminal commands;
 - `/opsx:explore`, `/opsx:propose`, `/opsx:apply`, and `/opsx:archive` are typed in the AI assistant chat.
+
+From 2.0 on, the `/opsx` commands are gone and are replaced by skills such as `/openspec-propose`. See [OpenSpec 2.1 hands-on](/blog/openspec-2-1-hands-on-upgrade/).
 
 A typical flow looks like this:
 

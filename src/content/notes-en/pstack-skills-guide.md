@@ -14,6 +14,8 @@ Jump to [host compatibility](#host-compatibility), [your first task](#first-task
 
 The installation guidance was checked on October 26, 2026 against [official pstack 0.15.32](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/.cursor-plugin/plugin.json). The later skill inventory describes the earlier 0.15.15 snapshot, including its 51 skills and 24 principles; it is not a current exhaustive list. For the reasoning behind the workflow, see [Trust First, Then Parallel](/blog/lauren-tan-poteto-trust-before-parallel/).
 
+Latest: [pstack 0.15.48 hands-on: /reframe teaches you what your problem is called](/blog/pstack-0-15-48-reframe-hands-on/).
+
 <a id="host-compatibility"></a>
 
 ## Check your host before installing

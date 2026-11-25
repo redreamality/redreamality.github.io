@@ -201,6 +201,8 @@ Orchestrate は 2 段階で消えた。0.15.36 で `orch` スクリプトが削�
 
 私の結論は、アップグレードする価値がある、だ。本文が短くなった効果は主に呼び出しごとのコンテキストに出る。ルーティングの上限で、最悪の場合のコストに天井ができた。`worker.md` は、子 agent が operator のルールを受け取れないという穴をふさいだ。アップグレード後にやることは少ない。`/setup-pstack` を再実行し、置き換えられた値を確認し、`worker.md` をチームの PR ルールと照らし合わせる。
 
+最新の動向は[pstack 0.15.48 を実地検証：/reframe は「それが業界で何と呼ばれているか」を教えてくれる](/ja/blog/pstack-0-15-48-reframe-hands-on/)を参照。
+
 ## 参考資料
 
 1. cursor/plugins PR #1249、feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh：<https://github.com/cursor/plugins/pull/1249>

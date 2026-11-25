@@ -13,6 +13,8 @@ translatedFrom: 'openspec-1-5-stores-beta-update-guide'
 
 2026 年 10 月 26 日更新。**npm の `latest` は 1.15.0 です。Stores は含まれますが、機能は引き続き Beta 扱いです。** npm の `beta` タグは、より古い `1.6.0-beta.1` を指しています。Stores Beta という名前だけを理由に、そのタグを選ばないでください。以下は 1.15.0 公開版を対象とし、未公開の `main` には依存しません。
 
+最新の動向は[OpenSpec 2.1 実地検証：/opsx コマンドは廃止、skill は .agents とグローバルへ。1.x プロジェクトの移行手順](/ja/blog/openspec-2-1-hands-on-upgrade/)を参照。2.1.1 でも Stores のコマンドは変わっていない。ただしコードリポジトリの `init` の既定はグローバルになり、リポジトリ内に skill を置くなら `--scope project` が必要だ。
+
 Store を使うと、API と Web のリポジトリが同じ仕様を読みながら、実装の変更を別々に管理できます。Store はタスクをリポジトリへ割り当てず、ファイル権限を付与せず、Git も同期しません。独立したテストとレビューが必要なら、実装タスクは各リポジトリに残すことを勧めます。外部 Store を既定の計画先にするのは、計画のライフサイクル自体を共有したい場合です。
 
 動作の根拠は[公式 1.15.0 Stores ガイド](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/stores-beta/user-guide.md)と[CLI リファレンス](https://github.com/Fission-AI/OpenSpec/blob/v1.15.0/docs/cli.md)です。導入や PATH の問題は[CLI インストール記事](/ja/blog/openspec-tutorial-cli-commands-agents-md-examples/)を参照してください。元の 1.5 解説は、既存の節リンクを維持して後半に残しています。
@@ -419,6 +421,8 @@ Stores 以外で大きなシグナルは、`/opsx:explore` の位置づけが強
 
 - `openspec init/update/list/validate/status/...` は terminal CLI；
 - `/opsx:explore`、`/opsx:propose`、`/opsx:apply`、`/opsx:archive` は AI assistant の chat に入力するコマンド。
+
+2.0 以降、`/opsx` コマンドは削除され、`/openspec-propose` などの skill に変わった。詳しくは[OpenSpec 2.1 実地検証](/ja/blog/openspec-2-1-hands-on-upgrade/)を参照。
 
 典型的な流れは次のようになります。
 

@@ -14,6 +14,8 @@ pstack は Lauren Tan（[@poteto](https://x.com/poteto)）がまとめたエン�
 
 インストール説明は 2026 年 10 月 26 日に[公式 pstack 0.15.32](https://github.com/cursor/plugins/blob/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/pstack/.cursor-plugin/plugin.json)で確認した。後半の一覧は以前の 0.15.15 の記録であり、51 個の skill と 24 の原則は現在の完全な一覧ではない。考え方の背景は[信頼が先、並列はその後](/ja/blog/lauren-tan-poteto-trust-before-parallel/)を参照してほしい。
 
+最新の動向は[pstack 0.15.48 を実地検証：/reframe は「それが業界で何と呼ばれているか」を教えてくれる](/ja/blog/pstack-0-15-48-reframe-hands-on/)を参照。
+
 <a id="host-compatibility"></a>
 
 ## インストール前にホストの対応範囲を確認する

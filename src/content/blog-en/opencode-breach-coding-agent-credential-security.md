@@ -68,6 +68,8 @@ The local CLI works differently. Keys added with `/connect` or `opencode auth lo
 
 The catch is that the paths cross. Noma Security points out that the CLI can also use a Console-backed provider by picking a workspace in `/connect`.[9] "I only use the terminal" does not settle whether you were exposed. The question is whether the provider key was configured on your device or handed to Console.
 
+Latest: [OpenCode 2.3 hands-on: subagents, timed-out commands, and compaction now run in the background](/blog/opencode-2-3-background-subagents-shell-compaction/). Version 2 ships as the `@opencode/cli` package and runs as a background service.
+
 ## Why a stolen model key sells so well
 
 A model API key is a bearer credential: whoever holds it can use it, and the bill goes to the owner. Unlike a database password, there is no lateral movement to do and no exfiltration channel to build. You send HTTPS requests and the key turns into compute. A gateway holding several vendors' keys for many customers multiplies the payoff of one intrusion.

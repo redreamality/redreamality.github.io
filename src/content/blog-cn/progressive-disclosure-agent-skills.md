@@ -208,6 +208,8 @@ Skills 把领域流程变成可安装补丁——这很好。坏消息是：补�
 
 回看站内主线：写 skill 降低的是「如何做」的重复发明成本；progressive disclosure 降低的是「不相关如何做」进入上下文的概率；路由与缓存谈的是按哪一档费率买 token；停止权谈的是何时不再买下一步。四件事叠在同一张账单上，却不该合成一句空话「再省一点」。Workday 这张表给出的，是 skills 披露这一层可以单独验收的标尺。[1]
 
+最新进展见[Modern Web Guidance 实测：Chrome 团队的前端 skill，让弱模型也写出原生 dialog 和 popover](/cn/blog/modern-web-guidance-skill-hands-on/)：装上后会按需远程取 guide，本地 2.5 MB 的 guides 目录默认用不上。
+
 ## 参考来源
 
 1. Zhang G, Zhao K, Mudgal P, Ammar W, Cui X, Chu X, Blanken A. *Report: Progressive Disclosure of Agent Skills*. arXiv:2609.35692, 2026-09-28. <https://arxiv.org/abs/2609.35692> · PDF <https://arxiv.org/pdf/2609.35692> · Agent Skills 标准 <https://agentskills.io>
