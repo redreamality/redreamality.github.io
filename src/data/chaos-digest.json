@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T10:01:36+08:00",
+  "updatedAt": "2026-11-25T16:03:20+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -15,11 +15,255 @@
     "coding-tools": 0,
     "agents-oss": 0,
     "security": 4,
-    "research": 10,
+    "research": 15,
     "product-news": 0,
-    "other": 3
+    "other": 4
   },
   "hours": [
+    {
+      "hourStart": "2026-11-25T16:00:00+08:00",
+      "label": {
+        "zh": "11月25日 16:00",
+        "en": "Nov 25 16:00",
+        "ja": "11月25日 16:00"
+      },
+      "items": [
+        {
+          "id": "t1002",
+          "theme": "research",
+          "title": {
+            "zh": "NormAd-ETI 的三分分数把「规范是否适用」和「行为是否符合规范」绑在一起，只给国家名时适用性判断掉到接近随机",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.32614（Aarav Singh、Animesh Pathak、Christian Hoang、Navyansh Singh、Avantika Singh）：NormAd-ETI 用「可接受 / 不可接受 / 中立」三分分数衡量模型在文化语境收缩时的判断，但这一分数把「规范是否适用」与「行为是否符合规范」绑在同一个答案里。只给出国家名时，适用性判断掉到接近随机，符合性仍明显高于随机；总分跟着更稳的符合性走，把更弱的适用性藏了起来，且没有一种提示能把两者拆开。专用的强制选择探针能把前沿模型上的两项分开，但在小开源模型上，适用性判断仍跟着被藏起来的可接受标签走。加上书面理由可以减轻这种混淆，但不能消除。论文建议分开报告两项结果，并测量混淆差距（conflation gap）。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.32614（Aarav Singh、Animesh Pathak、Christian Hoang、Navyansh Singh、Avantika Singh）：NormAd-ETI 用「可接受 / 不可接受 / 中立」三分分数衡量模型在文化语境收缩时的判断，但这一分数把「规范是否适用」与「行为是否符合规范」绑在同一个答案里。只给出国家名时，适用性判断掉到接近随机，符合性仍明显高于随机；总分跟着更稳的符合性走，把更弱的适用性藏了起来，且没有一种提示能把两者拆开。专用的强制选择探针能把前沿模型上的两项分开，但在小开源模型上，适用性判断仍跟着被藏起来的可接受标签走。加上书面理由可以减轻这种混淆，但不能消除。论文建议分开报告两项结果，并测量混淆差距（conflation gap）。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.32614 (Aarav Singh, Animesh Pathak, Christian Hoang, Navyansh Singh, Avantika Singh) audits NormAd-ETI, which scores a model’s judgment of everyday actions as acceptable, unacceptable, or neither as the cultural context shrinks from a specific rule to a country name. That three-way score combines two decisions: whether a supplied norm applies, and whether the action conforms to it. When only a country is shown, applicability falls to near chance while conformity stays well above it, because the prompt withholds the rule a Neutral label depends on. The combined score follows the steadier conformity and hides the weaker applicability, and no single prompt recovers the two separately. Dedicated forced-choice probes separate them for frontier models but not for small open models, where applicability still tracks the hidden acceptability label. Adding a written rationale reduces that conflation without removing it. The authors recommend reporting the two results separately and measuring the conflation gap. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.32614",
+              "title": "When \"Neutral\" Means Irrelevant: A Construct-Validity Audit of NormAd-ETI",
+              "brief": {
+                "zh": "arXiv 2611.32614（Aarav Singh、Animesh Pathak、Christian Hoang、Navyansh Singh、Avantika Singh）：NormAd-ETI 用「可接受 / 不可接受 / 中立」三分分数衡量模型在文化语境收缩时的判断，但这一分数把「规范是否适用」与「行为是否符合规范」绑在同一个答案里。只给出国家名时，适用性判断掉到接近随机，符合性仍明显高于随机；总分跟着更稳的符合性走，把更弱的适用性藏了起来，且没有一种提示能把两者拆开。专用的强制选择探针能把前沿模型上的两项分开，但在小开源模型上，适用性判断仍跟着被藏起来的可接受标签走。加上书面理由可以减轻这种混淆，但不能消除。论文建议分开报告两项结果，并测量混淆差距（conflation gap）。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.32614 (Aarav Singh, Animesh Pathak, Christian Hoang, Navyansh Singh, Avantika Singh) audits NormAd-ETI, which scores a model’s judgment of everyday actions as acceptable, unacceptable, or neither as the cultural context shrinks from a specific rule to a country name. That three-way score combines two decisions: whether a supplied norm applies, and whether the action conforms to it. When only a country is shown, applicability falls to near chance while conformity stays well above it, because the prompt withholds the rule a Neutral label depends on. The combined score follows the steadier conformity and hides the weaker applicability, and no single prompt recovers the two separately. Dedicated forced-choice probes separate them for frontier models but not for small open models, where applicability still tracks the hidden acceptability label. Adding a written rationale reduces that conflation without removing it. The authors recommend reporting the two results separately and measuring the conflation gap. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.32614"
+          ]
+        },
+        {
+          "id": "t1003",
+          "theme": "research",
+          "title": {
+            "zh": "微调更新里对所有输入共享的分量就能保住大部分适应增益：每层一个常向量（shift adapter）可接近 LoRA 乃至全参数微调",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.32991（Fabian Gröger、Shuo Wen、Maria Brbić）：微调更新可分解为对所有输入共享的分量，与随输入变化的残差。在 18 个模型、17 项任务上，只保留共享分量即可保住平均 85% 的适应增益；每层一个与输入无关的常向量（shift adapter）就能匹配 LoRA 乃至全参数微调，参数少约两个数量级。作者称之为基础模型的「潜能—实现」原则（potentiality principle）：任务专长已在基座里，适应只是把它沿一个固定方向实现出来，并以此来解释 neural thickets。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.32991（Fabian Gröger、Shuo Wen、Maria Brbić）：微调更新可分解为对所有输入共享的分量，与随输入变化的残差。在 18 个模型、17 项任务上，只保留共享分量即可保住平均 85% 的适应增益；每层一个与输入无关的常向量（shift adapter）就能匹配 LoRA 乃至全参数微调，参数少约两个数量级。作者称之为基础模型的「潜能—实现」原则（potentiality principle）：任务专长已在基座里，适应只是把它沿一个固定方向实现出来，并以此来解释 neural thickets。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.32991 (Fabian Gröger, Shuo Wen, Maria Brbić) decomposes the update from adaptation into a component shared across all inputs and a residual that varies with the input. Across 18 models and 17 tasks, the shared component alone keeps 85% of the adaptation gain on average; a shift adapter that learns one input-independent constant vector per layer matches LoRA and even full fine-tuning, with about two orders of magnitude fewer parameters. The authors call this the potentiality principle of foundation models: task-specific expertise is already in the base model, and adaptation actualizes it along a fixed direction. They also use this to explain neural thickets. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.32991",
+              "title": "On Potentiality and Actuality Of Foundation Models",
+              "brief": {
+                "zh": "arXiv 2611.32991（Fabian Gröger、Shuo Wen、Maria Brbić）：微调更新可分解为对所有输入共享的分量，与随输入变化的残差。在 18 个模型、17 项任务上，只保留共享分量即可保住平均 85% 的适应增益；每层一个与输入无关的常向量（shift adapter）就能匹配 LoRA 乃至全参数微调，参数少约两个数量级。作者称之为基础模型的「潜能—实现」原则（potentiality principle）：任务专长已在基座里，适应只是把它沿一个固定方向实现出来，并以此来解释 neural thickets。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.32991 (Fabian Gröger, Shuo Wen, Maria Brbić) decomposes the update from adaptation into a component shared across all inputs and a residual that varies with the input. Across 18 models and 17 tasks, the shared component alone keeps 85% of the adaptation gain on average; a shift adapter that learns one input-independent constant vector per layer matches LoRA and even full fine-tuning, with about two orders of magnitude fewer parameters. The authors call this the potentiality principle of foundation models: task-specific expertise is already in the base model, and adaptation actualizes it along a fixed direction. They also use this to explain neural thickets. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.32991"
+          ]
+        },
+        {
+          "id": "t1004",
+          "theme": "research",
+          "title": {
+            "zh": "系统提示里自动填入的当天日期是评测里的隐藏变量：两个看似合理的日期就会让中位数 6.6% 的题目在对错之间翻转",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.31254（Noureldin Zahran、Mohammed E. Fouda、Khaled N. Khasawneh）：许多指令模型会在系统提示里自动填入当天日期，评测设置看似不变，实际每天的输入都不同。六模型、四基准上，两个看似合理的日期（2024–2026）会让中位数 6.6% 的题目在对错之间翻转；隔一天重跑，翻转的题目数量大约相当于改批次大小，尽管其余设置都没变。用受语法约束的 GCG 搜索任意年份，Llama-3.x 的持出准确率最多掉 36.5 分；换一个合理日期还会改写 LLM 裁判判定，并撤销 Llama-3.2-3B 上 15–32% 已复现的越狱成功。作者审计的 11 套评测栈无一固定该日期；把日期和其余设置钉死后，重跑可逐字节复现。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.31254（Noureldin Zahran、Mohammed E. Fouda、Khaled N. Khasawneh）：许多指令模型会在系统提示里自动填入当天日期，评测设置看似不变，实际每天的输入都不同。六模型、四基准上，两个看似合理的日期（2024–2026）会让中位数 6.6% 的题目在对错之间翻转；隔一天重跑，翻转的题目数量大约相当于改批次大小，尽管其余设置都没变。用受语法约束的 GCG 搜索任意年份，Llama-3.x 的持出准确率最多掉 36.5 分；换一个合理日期还会改写 LLM 裁判判定，并撤销 Llama-3.2-3B 上 15–32% 已复现的越狱成功。作者审计的 11 套评测栈无一固定该日期；把日期和其余设置钉死后，重跑可逐字节复现。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.31254 (Noureldin Zahran, Mohammed E. Fouda, Khaled N. Khasawneh) shows that many instruction-tuned models put a date, usually today’s, in the system prompt automatically, so an unchanged evaluation can send a different prompt each day. Across six models and four benchmarks, with prompts, decoding and configuration fixed, two plausible dates (2024–2026) switch a median 6.6% of test items between correct and incorrect; rerunning one day later flips about as many items as changing the batch size. A grammar-constrained GCG search over dates of any year costs Llama-3.x models up to 36.5 points of held-out accuracy. Switching to another plausible date also alters LLM-judge verdicts and undoes 15–32% of reproduced jailbreak successes on Llama-3.2-3B. None of the eleven evaluation stacks the authors audit pins the date. With the date and the rest of the setup fixed, reruns reproduce byte-for-byte. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.31254",
+              "title": "The Date You Didn't Set: The System-Prompt Date as a Hidden Variable in LLM Evaluation",
+              "brief": {
+                "zh": "arXiv 2611.31254（Noureldin Zahran、Mohammed E. Fouda、Khaled N. Khasawneh）：许多指令模型会在系统提示里自动填入当天日期，评测设置看似不变，实际每天的输入都不同。六模型、四基准上，两个看似合理的日期（2024–2026）会让中位数 6.6% 的题目在对错之间翻转；隔一天重跑，翻转的题目数量大约相当于改批次大小，尽管其余设置都没变。用受语法约束的 GCG 搜索任意年份，Llama-3.x 的持出准确率最多掉 36.5 分；换一个合理日期还会改写 LLM 裁判判定，并撤销 Llama-3.2-3B 上 15–32% 已复现的越狱成功。作者审计的 11 套评测栈无一固定该日期；把日期和其余设置钉死后，重跑可逐字节复现。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.31254 (Noureldin Zahran, Mohammed E. Fouda, Khaled N. Khasawneh) shows that many instruction-tuned models put a date, usually today’s, in the system prompt automatically, so an unchanged evaluation can send a different prompt each day. Across six models and four benchmarks, with prompts, decoding and configuration fixed, two plausible dates (2024–2026) switch a median 6.6% of test items between correct and incorrect; rerunning one day later flips about as many items as changing the batch size. A grammar-constrained GCG search over dates of any year costs Llama-3.x models up to 36.5 points of held-out accuracy. Switching to another plausible date also alters LLM-judge verdicts and undoes 15–32% of reproduced jailbreak successes on Llama-3.2-3B. None of the eleven evaluation stacks the authors audit pins the date. With the date and the rest of the setup fixed, reruns reproduce byte-for-byte. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.31254"
+          ]
+        },
+        {
+          "id": "t1005",
+          "theme": "research",
+          "title": {
+            "zh": "即使重要性分数是删掉该位置对下一词的精确影响，按单个位置做 Top-K 仍选不出最佳组合",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.32324（Irmaan Mirzanejad）：长上下文模型常按单个位置的重要性做 Top-K 保留，但注意力会在入选集合上重新归一化，单独最重要的位置并不构成最佳组合。即使重要性分数是「删掉该位置对下一词预测的精确影响」，独立排序仍不够：一个四位置构造里，按排序取对的 KL 散度是最优对的 133.2 倍，且这一倍数可以任意大。在冻结的 SmolLM2、Gemma、Qwen 上，精确单点 Top-4 分别在 55/60、49/60、60/60 的情形中，仍能在 24 个候选位置的穷举池里找到至少 10% 的相对改进。作者还给出同预算的一次交换审计 SwapCert，以及把支持集保真度与下一词稳定性联系起来的 KL 间隔证书。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.32324（Irmaan Mirzanejad）：长上下文模型常按单个位置的重要性做 Top-K 保留，但注意力会在入选集合上重新归一化，单独最重要的位置并不构成最佳组合。即使重要性分数是「删掉该位置对下一词预测的精确影响」，独立排序仍不够：一个四位置构造里，按排序取对的 KL 散度是最优对的 133.2 倍，且这一倍数可以任意大。在冻结的 SmolLM2、Gemma、Qwen 上，精确单点 Top-4 分别在 55/60、49/60、60/60 的情形中，仍能在 24 个候选位置的穷举池里找到至少 10% 的相对改进。作者还给出同预算的一次交换审计 SwapCert，以及把支持集保真度与下一词稳定性联系起来的 KL 间隔证书。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.32324 (Irmaan Mirzanejad) asks whether independently ranking past token positions is enough for Top-K sparse attention, even when each importance score is the exact change in next-token predictions caused by deleting that position alone. It is not, because attention weights are renormalized over the chosen set. A four-position construction makes the ranked pair incur 133.2 times the KL divergence of the optimal pair, and a parametric family shows that this multiplicative gap is unbounded. In exhaustive frozen-model audits of SmolLM2, Gemma and Qwen, exact-singleton Top-4 still leaves at least 10% relative improvement inside a fully enumerated 24-position pool in 55/60, 49/60 and 60/60 cases. The author also presents SwapCert, a same-budget one-swap audit, and a KL-margin certificate that relates support fidelity to next-token stability. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.32324",
+              "title": "When Exact Token Importance Is Not Enough: Limits of Top-K Selection in LLM Attention",
+              "brief": {
+                "zh": "arXiv 2611.32324（Irmaan Mirzanejad）：长上下文模型常按单个位置的重要性做 Top-K 保留，但注意力会在入选集合上重新归一化，单独最重要的位置并不构成最佳组合。即使重要性分数是「删掉该位置对下一词预测的精确影响」，独立排序仍不够：一个四位置构造里，按排序取对的 KL 散度是最优对的 133.2 倍，且这一倍数可以任意大。在冻结的 SmolLM2、Gemma、Qwen 上，精确单点 Top-4 分别在 55/60、49/60、60/60 的情形中，仍能在 24 个候选位置的穷举池里找到至少 10% 的相对改进。作者还给出同预算的一次交换审计 SwapCert，以及把支持集保真度与下一词稳定性联系起来的 KL 间隔证书。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.32324 (Irmaan Mirzanejad) asks whether independently ranking past token positions is enough for Top-K sparse attention, even when each importance score is the exact change in next-token predictions caused by deleting that position alone. It is not, because attention weights are renormalized over the chosen set. A four-position construction makes the ranked pair incur 133.2 times the KL divergence of the optimal pair, and a parametric family shows that this multiplicative gap is unbounded. In exhaustive frozen-model audits of SmolLM2, Gemma and Qwen, exact-singleton Top-4 still leaves at least 10% relative improvement inside a fully enumerated 24-position pool in 55/60, 49/60 and 60/60 cases. The author also presents SwapCert, a same-budget one-swap audit, and a KL-margin certificate that relates support fidelity to next-token stability. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.32324"
+          ]
+        },
+        {
+          "id": "t1006",
+          "theme": "other",
+          "title": {
+            "zh": "OpenAI math 仓库预印本主张矩阵乘法指数为 9/4，即 Θ(n^2.25)（单方主张，尚未经同行评审，待核）",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "HN 510 分 251 评：OpenAI GitHub 组织下 math 仓库的预印本 PDF，标题称矩阵乘法指数为 9/4，即 Θ(n^2.25)。结论尚未经同行评审，属单方主张，本轮未读全文、未核实证明，不写成既成事实。AI 在其中起了什么作用需读原文确认，不从标题推断。这与 t781（同一仓库此前主张证伪指数时间假设）和 t985（Anthropic formal-math 的 VP≠VNP 目录）不是同一命题，只是同一条未核验的 AI for science / 数学主张线索。对照 t781、t985。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "HN 510 分 251 评：OpenAI GitHub 组织下 math 仓库的预印本 PDF，标题称矩阵乘法指数为 9/4，即 Θ(n^2.25)。结论尚未经同行评审，属单方主张，本轮未读全文、未核实证明，不写成既成事实。AI 在其中起了什么作用需读原文确认，不从标题推断。这与 t781（同一仓库此前主张证伪指数时间假设）和 t985（Anthropic formal-math 的 VP≠VNP 目录）不是同一命题，只是同一条未核验的 AI for science / 数学主张线索。对照 t781、t985。仅 Chaos。",
+            "en": "Hacker News 510 points / 251 comments: a preprint PDF in OpenAI’s math GitHub repository is titled as if the matrix-multiplication exponent were 9/4, that is Θ(n^2.25). The claim has not been peer-reviewed, was not read in full or verified this turn, and is not recorded here as fact. What role, if any, AI played should be taken from the paper itself and not inferred from the title. This is not the same claim as t781 (an earlier ETH-falsification preprint in the same repository) or t985 (the VP ≠ VNP directory in Anthropic formal-math); they are contemporaneous, unverified mathematical claims. Cross-reference t781 and t985. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "hn",
+              "url": "https://github.com/openai/math/blob/main/preprints/The-matrix-multiplication-exponent-is-nine-fourths-November-24-2026/paper.pdf",
+              "title": "Matrix Multiplication is Θ(n^2.25) [pdf]",
+              "brief": {
+                "zh": "HN 510 分 251 评：OpenAI GitHub 组织下 math 仓库的预印本 PDF，标题称矩阵乘法指数为 9/4，即 Θ(n^2.25)。结论尚未经同行评审，属单方主张，本轮未读全文、未核实证明，不写成既成事实。AI 在其中起了什么作用需读原文确认，不从标题推断。这与 t781（同一仓库此前主张证伪指数时间假设）和 t985（Anthropic formal-math 的 VP≠VNP 目录）不是同一命题，只是同一条未核验的 AI for science / 数学主张线索。对照 t781、t985。仅 Chaos。",
+                "en": "Hacker News 510 points / 251 comments: a preprint PDF in OpenAI’s math GitHub repository is titled as if the matrix-multiplication exponent were 9/4, that is Θ(n^2.25). The claim has not been peer-reviewed, was not read in full or verified this turn, and is not recorded here as fact. What role, if any, AI played should be taken from the paper itself and not inferred from the title. This is not the same claim as t781 (an earlier ETH-falsification preprint in the same repository) or t985 (the VP ≠ VNP directory in Anthropic formal-math); they are contemporaneous, unverified mathematical claims. Cross-reference t781 and t985. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "hn"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://github.com/openai/math/blob/main/preprints/The-matrix-multiplication-exponent-is-nine-fourths-November-24-2026/paper.pdf"
+          ]
+        },
+        {
+          "id": "t1009",
+          "theme": "research",
+          "title": {
+            "zh": "SELFWRITE：模型在持久 Python 会话里检查自身权重与激活，写程序构造低秩权重编辑并自我合并（无梯度；官方数字自报）",
+            "en": "SELFWRITE",
+            "ja": "SELFWRITE"
+          },
+          "summary": {
+            "zh": "arXiv 2611.29513（Linghua Zhang、Yunhe Li；经 11-24 TLDR AI 进入本线。本轮读了摘要页，正文未读）。SELFWRITE 把递归自我改进的「改写者」从梯度下降换成模型本身：每代模型研读自己在新训练题上的推理，在持久 Python 会话中检查自身权重与激活，用白盒原语（奇异方向、对错答案间激活对比、秩一投影、张量运算）写出构造低秩权重编辑的程序，不给训练或梯度工具。每个候选在隐藏 gate 集上对当前模型只评一次，严格提升的最优编辑被并入权重，再由新模型写下一代。论文自报：Qwen3.8-27B + DAPO-Math，五代后 gate 准确率 73.95→76.45%，循环从未见过的留出集 avg@4 76.30→77.75%、pass@4 82.60→84.80%，全程零梯度步。数字均论文自报，未复现。这与 t960（另一篇 27B 无梯度自改权重论文，2611.21885）不是同一工作。对照 t960、t824。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.29513（Linghua Zhang、Yunhe Li；经 11-24 TLDR AI 进入本线。本轮读了摘要页，正文未读）。SELFWRITE 把递归自我改进的「改写者」从梯度下降换成模型本身：每代模型研读自己在新训练题上的推理，在持久 Python 会话中检查自身权重与激活，用白盒原语（奇异方向、对错答案间激活对比、秩一投影、张量运算）写出构造低秩权重编辑的程序，不给训练或梯度工具。每个候选在隐藏 gate 集上对当前模型只评一次，严格提升的最优编辑被并入权重，再由新模型写下一代。论文自报：Qwen3.8-27B + DAPO-Math，五代后 gate 准确率 73.95→76.45%，循环从未见过的留出集 avg@4 76.30→77.75%、pass@4 82.60→84.80%，全程零梯度步。数字均论文自报，未复现。这与 t960（另一篇 27B 无梯度自改权重论文，2611.21885）不是同一工作。对照 t960、t824。仅 Chaos。",
+            "en": "arXiv 2611.29513 (Linghua Zhang, Yunhe Li; first reached this pipeline via the 11-24 TLDR AI issue. The abstract page was read this turn; the body was not.) introduces SELFWRITE, which replaces gradient descent as the “rewriter” in recursive self-improvement with the model itself. Each generation studies its own reasoning on new training questions, inspects its weights and activations in a persistent Python session, and writes a program that constructs a low-rank weight edit from white-box primitives (singular directions, activation contrasts between right and wrong answers, rank-one projections, tensor ops), with no training or gradient tools. Each candidate is scored once on a hidden gate set against the current model; the best strictly improving edit is merged, and the new model writes the next generation. The paper reports that on Qwen3.8-27B with DAPO-Math, after five generations, gate accuracy rose from 73.95% to 76.45%, and on a held-out set never seen in the loop, avg@4 went from 76.30% to 77.75% and pass@4 from 82.60% to 84.80%, with zero gradient steps. Figures are the paper’s own, not reproduced. This is not the same work as t960 (a different 27B no-gradient self-weight-edit paper, 2611.21885). Cross-reference t960 and t824. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://arxiv.org/abs/2611.29513",
+              "title": "SELFWRITE（arXiv 2611.29513）：模型在持久 Python 会话里检查自身权重与激活，写程序构造低秩权重编辑并自我合并——无梯度，五代后 Qwen3.8-27B 数学留出集 76.30→77.75%",
+              "brief": {
+                "zh": "arXiv 2611.29513（Linghua Zhang、Yunhe Li；经 11-24 TLDR AI 进入本线。本轮读了摘要页，正文未读）。SELFWRITE 把递归自我改进的「改写者」从梯度下降换成模型本身：每代模型研读自己在新训练题上的推理，在持久 Python 会话中检查自身权重与激活，用白盒原语（奇异方向、对错答案间激活对比、秩一投影、张量运算）写出构造低秩权重编辑的程序，不给训练或梯度工具。每个候选在隐藏 gate 集上对当前模型只评一次，严格提升的最优编辑被并入权重，再由新模型写下一代。论文自报：Qwen3.8-27B + DAPO-Math，五代后 gate 准确率 73.95→76.45%，循环从未见过的留出集 avg@4 76.30→77.75%、pass@4 82.60→84.80%，全程零梯度步。数字均论文自报，未复现。这与 t960（另一篇 27B 无梯度自改权重论文，2611.21885）不是同一工作。对照 t960、t824。仅 Chaos。",
+                "en": "arXiv 2611.29513 (Linghua Zhang, Yunhe Li; first reached this pipeline via the 11-24 TLDR AI issue. The abstract page was read this turn; the body was not.) introduces SELFWRITE, which replaces gradient descent as the “rewriter” in recursive self-improvement with the model itself. Each generation studies its own reasoning on new training questions, inspects its weights and activations in a persistent Python session, and writes a program that constructs a low-rank weight edit from white-box primitives (singular directions, activation contrasts between right and wrong answers, rank-one projections, tensor ops), with no training or gradient tools. Each candidate is scored once on a hidden gate set against the current model; the best strictly improving edit is merged, and the new model writes the next generation. The paper reports that on Qwen3.8-27B with DAPO-Math, after five generations, gate accuracy rose from 73.95% to 76.45%, and on a held-out set never seen in the loop, avg@4 went from 76.30% to 77.75% and pass@4 from 82.60% to 84.80%, with zero gradient steps. Figures are the paper’s own, not reproduced. This is not the same work as t960 (a different 27B no-gradient self-weight-edit paper, 2611.21885). Cross-reference t960 and t824. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.29513"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-25T10:00:00+08:00",
       "label": {
