@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-26T10:00:21+08:00",
+  "updatedAt": "2026-11-26T16:00:13+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -20,6 +20,172 @@
     "other": 4
   },
   "hours": [
+    {
+      "hourStart": "2026-11-26T16:00:00+08:00",
+      "label": {
+        "zh": "11月26日 16:00",
+        "en": "Nov 26 16:00",
+        "ja": "11月26日 16:00"
+      },
+      "items": [
+        {
+          "id": "t1020",
+          "theme": "research",
+          "title": {
+            "zh": "程序性逻辑题的标称证明深度会高估真正所需步骤；作者给出带独立可验证证书的无捷径数据",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.33303（Baptiste Juran、Dimitri Kachler、Damien Sileo；代码仓库 sileod/semforge）：程序性逻辑题常用「植入证明深度」来标定难度，但这只是诸多可能证明中的一条，标称深度会高估真正所需步骤。对八个数据集的审计显示：ProofWriter 与 Blocksworld 的深度是被迫的，FLDx2 中标为深度 5 的题目大约只强制两步特定规则应用，而 ZebraLogic 的答案甚至不依赖任何特定步骤。作者据此构造带独立可验证证书的无捷径数据；等量混合后，认证题型对 Qwen3（0.6B–8B）的迁移优于 FLDx2 式推导数据。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.33303（Baptiste Juran、Dimitri Kachler、Damien Sileo；代码仓库 sileod/semforge）：程序性逻辑题常用「植入证明深度」来标定难度，但这只是诸多可能证明中的一条，标称深度会高估真正所需步骤。对八个数据集的审计显示：ProofWriter 与 Blocksworld 的深度是被迫的，FLDx2 中标为深度 5 的题目大约只强制两步特定规则应用，而 ZebraLogic 的答案甚至不依赖任何特定步骤。作者据此构造带独立可验证证书的无捷径数据；等量混合后，认证题型对 Qwen3（0.6B–8B）的迁移优于 FLDx2 式推导数据。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.33303 (Baptiste Juran, Dimitri Kachler, Damien Sileo; code at sileod/semforge) argues that procedurally generated logic problems usually set difficulty by planting a proof of the desired depth, but a planted proof is only one possible proof, so the stated depth can overstate what solving the problem requires. Audits of eight datasets find depth that is forced (ProofWriter, Blocksworld), problems labelled depth 5 that require about two specific rule applications (FLDx2), and answers that need no particular step (ZebraLogic). The authors then construct shortcut-free problems whose every proof has a requested structure, each with a certificate an independent checker verifies. At equal size, mixtures of these certified problem types transfer better than FLDx2-style derivation data for Qwen3 models from 0.6B to 8B. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.33303",
+              "title": "Certify What You Plant: Shortcut-Free Proof Depth in Logical Reasoning Data",
+              "brief": {
+                "zh": "arXiv 2611.33303（Baptiste Juran、Dimitri Kachler、Damien Sileo；代码仓库 sileod/semforge）：程序性逻辑题常用「植入证明深度」来标定难度，但这只是诸多可能证明中的一条，标称深度会高估真正所需步骤。对八个数据集的审计显示：ProofWriter 与 Blocksworld 的深度是被迫的，FLDx2 中标为深度 5 的题目大约只强制两步特定规则应用，而 ZebraLogic 的答案甚至不依赖任何特定步骤。作者据此构造带独立可验证证书的无捷径数据；等量混合后，认证题型对 Qwen3（0.6B–8B）的迁移优于 FLDx2 式推导数据。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.33303 (Baptiste Juran, Dimitri Kachler, Damien Sileo; code at sileod/semforge) argues that procedurally generated logic problems usually set difficulty by planting a proof of the desired depth, but a planted proof is only one possible proof, so the stated depth can overstate what solving the problem requires. Audits of eight datasets find depth that is forced (ProofWriter, Blocksworld), problems labelled depth 5 that require about two specific rule applications (FLDx2), and answers that need no particular step (ZebraLogic). The authors then construct shortcut-free problems whose every proof has a requested structure, each with a certificate an independent checker verifies. At equal size, mixtures of these certified problem types transfer better than FLDx2-style derivation data for Qwen3 models from 0.6B to 8B. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.33303"
+          ]
+        },
+        {
+          "id": "t1021",
+          "theme": "research",
+          "title": {
+            "zh": "SkillsBench 源码级审计：被后来研究用来按任务增益门控技能的「平均提升约 16.6 个百分点」，很大一部分来自评分器依赖和噪声",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.33943（Haozhe Zhang、Zhen Long；代码仓库 rrrrr4788/skillsbench-lift-reanalysis）：SkillsBench 称人工技能平均可把通过率提高约 16.6 个百分点，并已被后来研究用来按任务增益门控或淘汰技能。源码级审计与 1,421 个配对单元格的再分析发现：两处评分器依赖与一处操作定义缺口上的平均增益达 74.6 个百分点，并把全量平均抬到 18.7；另有四项任务使用占位技能目录，某种执行框架还在多数运行中额外注入 48 个内置技能。经多重检验校正后，没有任何任务级下降具有统计显著性，且 58% 的单元格在算术上甚至不可能显示出下降；按无技能分数门控在日志里看似再升 2–3 个百分点，但打乱条件标签后仍有 4–7 个百分点的「提升」，在未参与拟合的保留运行上并不显著。数字均论文自报，未复现。这与同批 t1022（soft-prompt 技能组合失败）不是同一项工作。对照 t1022。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.33943（Haozhe Zhang、Zhen Long；代码仓库 rrrrr4788/skillsbench-lift-reanalysis）：SkillsBench 称人工技能平均可把通过率提高约 16.6 个百分点，并已被后来研究用来按任务增益门控或淘汰技能。源码级审计与 1,421 个配对单元格的再分析发现：两处评分器依赖与一处操作定义缺口上的平均增益达 74.6 个百分点，并把全量平均抬到 18.7；另有四项任务使用占位技能目录，某种执行框架还在多数运行中额外注入 48 个内置技能。经多重检验校正后，没有任何任务级下降具有统计显著性，且 58% 的单元格在算术上甚至不可能显示出下降；按无技能分数门控在日志里看似再升 2–3 个百分点，但打乱条件标签后仍有 4–7 个百分点的「提升」，在未参与拟合的保留运行上并不显著。数字均论文自报，未复现。这与同批 t1022（soft-prompt 技能组合失败）不是同一项工作。对照 t1022。仅 Chaos。",
+            "en": "arXiv 2611.33943 (Haozhe Zhang, Zhen Long; code at rrrrr4788/skillsbench-lift-reanalysis) audits SkillsBench, which reported that human-curated skills raise the passing rate by about 16.6 percentage points on average and has been used by later work to gate or drop skills by per-task gain. A source-code audit and a reanalysis of 1,421 paired cells find that two cases of grader dependence and one operational-definition gap show an average lift of 74.6 points and pull the overall average up to 18.7; four tasks used placeholder skill directories, and one harness injected 48 built-in skills in most runs. After multiple-testing correction, no task-level drop is statistically significant, and 58% of the cells could not arithmetically have shown a decrease. A gating rule based on the skill-free score appears to add 2–3 points in the logs, but still shows a 4–7 point “lift” after condition labels are shuffled, and is not significant on held-out runs. Figures are the paper’s own, not reproduced. This is not the same work as same-batch t1022 (soft-prompt skills failing to compose). Cross-reference t1022. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.33943",
+              "title": "What Does Skill Lift Actually Measure? A Source-Code-Level Audit and Noise-Aware Reanalysis of SkillsBench",
+              "brief": {
+                "zh": "arXiv 2611.33943（Haozhe Zhang、Zhen Long；代码仓库 rrrrr4788/skillsbench-lift-reanalysis）：SkillsBench 称人工技能平均可把通过率提高约 16.6 个百分点，并已被后来研究用来按任务增益门控或淘汰技能。源码级审计与 1,421 个配对单元格的再分析发现：两处评分器依赖与一处操作定义缺口上的平均增益达 74.6 个百分点，并把全量平均抬到 18.7；另有四项任务使用占位技能目录，某种执行框架还在多数运行中额外注入 48 个内置技能。经多重检验校正后，没有任何任务级下降具有统计显著性，且 58% 的单元格在算术上甚至不可能显示出下降；按无技能分数门控在日志里看似再升 2–3 个百分点，但打乱条件标签后仍有 4–7 个百分点的「提升」，在未参与拟合的保留运行上并不显著。数字均论文自报，未复现。这与同批 t1022（soft-prompt 技能组合失败）不是同一项工作。对照 t1022。仅 Chaos。",
+                "en": "arXiv 2611.33943 (Haozhe Zhang, Zhen Long; code at rrrrr4788/skillsbench-lift-reanalysis) audits SkillsBench, which reported that human-curated skills raise the passing rate by about 16.6 percentage points on average and has been used by later work to gate or drop skills by per-task gain. A source-code audit and a reanalysis of 1,421 paired cells find that two cases of grader dependence and one operational-definition gap show an average lift of 74.6 points and pull the overall average up to 18.7; four tasks used placeholder skill directories, and one harness injected 48 built-in skills in most runs. After multiple-testing correction, no task-level drop is statistically significant, and 58% of the cells could not arithmetically have shown a decrease. A gating rule based on the skill-free score appears to add 2–3 points in the logs, but still shows a 4–7 point “lift” after condition labels are shuffled, and is not significant on held-out runs. Figures are the paper’s own, not reproduced. This is not the same work as same-batch t1022 (soft-prompt skills failing to compose). Cross-reference t1022. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.33943"
+          ]
+        },
+        {
+          "id": "t1022",
+          "theme": "research",
+          "title": {
+            "zh": "冻结模型上独立学到的 soft-prompt 技能很难组合：单次调用平均准确率最高只有 7.6%，拆成两次调用则可到 88.2%–100%",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.34398（Yan Lin、Zhongliang Guo、Jingyu Sun、Qiyan Zhao、Ruihong Zeng、Ying Chen、Zhengtao Yao、Yan Wen、Kunyu Peng、Yuxia Wang；代码仓库 YanLin-Quinne/SkillCompatibility）：在冻结语言模型上独立学到的 soft-prompt 技能，即便技能身份与执行顺序都已给定，单次调用的平均组合准确率最高只有 7.6%，而拆成两次调用并写出中间结果则可到 88.2%–100%。在两个 Qwen 基底上，用独立学得、单独准确率均不低于 90% 的同操作块替换原先搭档后，组合准确率中位数从 98.0% 与 95.3% 降到 12.7% 与 0.5%。修复组合可能损害原技能；作者未找到统一的失败机制，但提出要把兼容性、保持与迁移与习得一并评估。数字均论文自报，未复现。这与同批 t1021（SkillsBench 的 skill lift 审计）不是同一项工作。对照 t1021。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.34398（Yan Lin、Zhongliang Guo、Jingyu Sun、Qiyan Zhao、Ruihong Zeng、Ying Chen、Zhengtao Yao、Yan Wen、Kunyu Peng、Yuxia Wang；代码仓库 YanLin-Quinne/SkillCompatibility）：在冻结语言模型上独立学到的 soft-prompt 技能，即便技能身份与执行顺序都已给定，单次调用的平均组合准确率最高只有 7.6%，而拆成两次调用并写出中间结果则可到 88.2%–100%。在两个 Qwen 基底上，用独立学得、单独准确率均不低于 90% 的同操作块替换原先搭档后，组合准确率中位数从 98.0% 与 95.3% 降到 12.7% 与 0.5%。修复组合可能损害原技能；作者未找到统一的失败机制，但提出要把兼容性、保持与迁移与习得一并评估。数字均论文自报，未复现。这与同批 t1021（SkillsBench 的 skill lift 审计）不是同一项工作。对照 t1021。仅 Chaos。",
+            "en": "arXiv 2611.34398 (Yan Lin, Zhongliang Guo, Jingyu Sun, Qiyan Zhao, Ruihong Zeng, Ying Chen, Zhengtao Yao, Yan Wen, Kunyu Peng, Yuxia Wang; code at YanLin-Quinne/SkillCompatibility) studies independently learned soft-prompt skills on frozen language models, with skill identities and execution order supplied. Mean composition accuracy in one call is at most 7.6%, compared with 88.2% to 100% over two calls that write out an intermediate result. On two Qwen bases, replacing learned partners with independently trained blocks of the same operations — each at least 90% accurate alone — drops median composition accuracy from 98.0% and 95.3% to 12.7% and 0.5%. Repairing a composition can impair the original skill. The authors do not find a single failure mechanism, and argue that compatibility, retention and transfer should be evaluated alongside acquisition. Figures are the paper’s own, not reproduced. This is not the same work as same-batch t1021 (the SkillsBench lift audit). Cross-reference t1021. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.34398",
+              "title": "When Skills Fail to Compose: Compatibility and Retention in Language Models",
+              "brief": {
+                "zh": "arXiv 2611.34398（Yan Lin、Zhongliang Guo、Jingyu Sun、Qiyan Zhao、Ruihong Zeng、Ying Chen、Zhengtao Yao、Yan Wen、Kunyu Peng、Yuxia Wang；代码仓库 YanLin-Quinne/SkillCompatibility）：在冻结语言模型上独立学到的 soft-prompt 技能，即便技能身份与执行顺序都已给定，单次调用的平均组合准确率最高只有 7.6%，而拆成两次调用并写出中间结果则可到 88.2%–100%。在两个 Qwen 基底上，用独立学得、单独准确率均不低于 90% 的同操作块替换原先搭档后，组合准确率中位数从 98.0% 与 95.3% 降到 12.7% 与 0.5%。修复组合可能损害原技能；作者未找到统一的失败机制，但提出要把兼容性、保持与迁移与习得一并评估。数字均论文自报，未复现。这与同批 t1021（SkillsBench 的 skill lift 审计）不是同一项工作。对照 t1021。仅 Chaos。",
+                "en": "arXiv 2611.34398 (Yan Lin, Zhongliang Guo, Jingyu Sun, Qiyan Zhao, Ruihong Zeng, Ying Chen, Zhengtao Yao, Yan Wen, Kunyu Peng, Yuxia Wang; code at YanLin-Quinne/SkillCompatibility) studies independently learned soft-prompt skills on frozen language models, with skill identities and execution order supplied. Mean composition accuracy in one call is at most 7.6%, compared with 88.2% to 100% over two calls that write out an intermediate result. On two Qwen bases, replacing learned partners with independently trained blocks of the same operations — each at least 90% accurate alone — drops median composition accuracy from 98.0% and 95.3% to 12.7% and 0.5%. Repairing a composition can impair the original skill. The authors do not find a single failure mechanism, and argue that compatibility, retention and transfer should be evaluated alongside acquisition. Figures are the paper’s own, not reproduced. This is not the same work as same-batch t1021 (the SkillsBench lift audit). Cross-reference t1021. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.34398"
+          ]
+        },
+        {
+          "id": "t1023",
+          "theme": "research",
+          "title": {
+            "zh": "命题分解后「某候选是否属于原句」可以核验，但分解前「该句应拆成几条」很难预测：两条问题不在同一个表征空间",
+            "en": "",
+            "ja": ""
+          },
+          "summary": {
+            "zh": "arXiv 2611.33668（Qingan Li、Tianxiao Wu、Xiling Cui）：命题分解后的「某候选命题是否属于原句」与分解前的「该句应拆成几条」，落在不同的表征空间。NLI 判别器核验准确率 92.8%、AUC 0.977，而向量几何无法核验：余弦相似度饱和，句向量也不是其命题向量的线性组合。预测条数时，词数、CPIDR 想法密度与新戴维森谓词数在控制词数后都只是长度代理；只有句向量上的线性 ridge 探测还保留真实计数信号，与人工计数的偏相关为 0.40–0.49，对等长句对的排序正确率 67–71%，接近标注者间一致性上限。该信号在 INT8 与 256 维截断下仍在，但对长句系统性拆得过少。数字均论文自报，未复现。仅 Chaos。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "arXiv 2611.33668（Qingan Li、Tianxiao Wu、Xiling Cui）：命题分解后的「某候选命题是否属于原句」与分解前的「该句应拆成几条」，落在不同的表征空间。NLI 判别器核验准确率 92.8%、AUC 0.977，而向量几何无法核验：余弦相似度饱和，句向量也不是其命题向量的线性组合。预测条数时，词数、CPIDR 想法密度与新戴维森谓词数在控制词数后都只是长度代理；只有句向量上的线性 ridge 探测还保留真实计数信号，与人工计数的偏相关为 0.40–0.49，对等长句对的排序正确率 67–71%，接近标注者间一致性上限。该信号在 INT8 与 256 维截断下仍在，但对长句系统性拆得过少。数字均论文自报，未复现。仅 Chaos。",
+            "en": "arXiv 2611.33668 (Qingan Li, Tianxiao Wu, Xiling Cui) asks two asymmetric questions about proposition decomposition: after the fact, does a candidate proposition belong to the sentence; beforehand, how many propositions should the sentence yield? On PropSegmEnt, the two questions live in different representational spaces. An NLI judge verifies membership with 92.8% accuracy and an AUC of 0.977, while vector geometry cannot verify: cosine similarity saturates, and a sentence embedding is not a linear combination of its propositions’ embeddings. For prediction, token count, CPIDR idea density and a Neo-Davidsonian predicate count all reduce to a length proxy once token count is controlled. A linear ridge probe on sentence embeddings is the only predictor that keeps genuine count signal, with a length-partialled correlation of 0.40–0.49 with human counts and 67–71% accuracy at ordering length-matched pairs, near the inter-annotator ceiling. The signal survives INT8 quantization and truncation to 256 dimensions, but systematically under-splits long sentences. Figures are the paper’s own, not reproduced. Chaos only.",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "arxiv",
+              "url": "https://arxiv.org/abs/2611.33668",
+              "title": "Verifiable but Not Predictable: What Sentence Embeddings Know About Propositional Decomposition",
+              "brief": {
+                "zh": "arXiv 2611.33668（Qingan Li、Tianxiao Wu、Xiling Cui）：命题分解后的「某候选命题是否属于原句」与分解前的「该句应拆成几条」，落在不同的表征空间。NLI 判别器核验准确率 92.8%、AUC 0.977，而向量几何无法核验：余弦相似度饱和，句向量也不是其命题向量的线性组合。预测条数时，词数、CPIDR 想法密度与新戴维森谓词数在控制词数后都只是长度代理；只有句向量上的线性 ridge 探测还保留真实计数信号，与人工计数的偏相关为 0.40–0.49，对等长句对的排序正确率 67–71%，接近标注者间一致性上限。该信号在 INT8 与 256 维截断下仍在，但对长句系统性拆得过少。数字均论文自报，未复现。仅 Chaos。",
+                "en": "arXiv 2611.33668 (Qingan Li, Tianxiao Wu, Xiling Cui) asks two asymmetric questions about proposition decomposition: after the fact, does a candidate proposition belong to the sentence; beforehand, how many propositions should the sentence yield? On PropSegmEnt, the two questions live in different representational spaces. An NLI judge verifies membership with 92.8% accuracy and an AUC of 0.977, while vector geometry cannot verify: cosine similarity saturates, and a sentence embedding is not a linear combination of its propositions’ embeddings. For prediction, token count, CPIDR idea density and a Neo-Davidsonian predicate count all reduce to a length proxy once token count is controlled. A linear ridge probe on sentence embeddings is the only predictor that keeps genuine count signal, with a length-partialled correlation of 0.40–0.49 with human counts and 67–71% accuracy at ordering length-matched pairs, near the inter-annotator ceiling. The signal survives INT8 quantization and truncation to 256 dimensions, but systematically under-splits long sentences. Figures are the paper’s own, not reproduced. Chaos only.",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "arxiv"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://arxiv.org/abs/2611.33668"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-26T10:00:00+08:00",
       "label": {
@@ -988,172 +1154,6 @@
           "status": "inbox",
           "externalUrls": [
             "https://openai.com/index/introducing-shirudo"
-          ]
-        }
-      ]
-    },
-    {
-      "hourStart": "2026-11-23T16:00:00+08:00",
-      "label": {
-        "zh": "11月23日 16:00",
-        "en": "Nov 23 16:00",
-        "ja": "11月23日 16:00"
-      },
-      "items": [
-        {
-          "id": "t978",
-          "theme": "research",
-          "title": {
-            "zh": "面向推理的后训练配方搬到知识任务时，模型会记住自己在长推理里编出来的幻觉",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.26863（Anirudh Atmakuru、Tanya Goyal）：面向推理的后训练配方——结果奖励的强化学习、推理链里「提出假设再回溯」等认知模板——直接搬到知识任务时，模型会记住自己在长推理里编出来的幻觉。作者在六个开源模型、两个系列、两种架构上做标准后训练，抽出强化学习期间的自生成幻觉并跟踪其后记忆。被训练信号强化的幻觉，回忆率平均上升 4.83%；未获信号的自幻觉几乎不动（0.17%）。模型甚至会记住自己马上撤回的虚假事实；这种从推理训练继承来的回溯模板，对知识回忆并无帮助。记忆在最难的训练题上最强；奖励一次幻觉，会让模型日后少拒绝它，平均 7.23%。数字均论文自报，未复现。对照 t809、t951。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.26863（Anirudh Atmakuru、Tanya Goyal）：面向推理的后训练配方——结果奖励的强化学习、推理链里「提出假设再回溯」等认知模板——直接搬到知识任务时，模型会记住自己在长推理里编出来的幻觉。作者在六个开源模型、两个系列、两种架构上做标准后训练，抽出强化学习期间的自生成幻觉并跟踪其后记忆。被训练信号强化的幻觉，回忆率平均上升 4.83%；未获信号的自幻觉几乎不动（0.17%）。模型甚至会记住自己马上撤回的虚假事实；这种从推理训练继承来的回溯模板，对知识回忆并无帮助。记忆在最难的训练题上最强；奖励一次幻觉，会让模型日后少拒绝它，平均 7.23%。数字均论文自报，未复现。对照 t809、t951。仅 Chaos。",
-            "en": "arXiv 2611.26863 (Anirudh Atmakuru, Tanya Goyal) studies what happens when reasoning-centric post-training recipes—outcome-based rewards for reinforcement learning, and cognitive templates such as proposing and backtracking from hypotheses in reasoning chains—are adopted directly for knowledge tasks. The authors hypothesize that these choices, useful for reasoning, encourage models to memorize hallucinations they themselves generate in long reasoning chains. They train models with standard post-training, extract self-generated hallucinations during RL, and track memorization through the rest of training, on six open models across two families and two architectures. Recall of hallucinations reinforced during training rises by 4.83% on average, against 0.17% for self-hallucinations that receive no training signal. Models even memorize false facts that they immediately retract; a backtracking template inherited from reasoning-centric training that has no benefit for knowledge recall. Memorization is strongest on the hardest training questions, and rewarding a hallucination makes the model less likely to abstain from it later, by 7.23% on average. Figures are the paper’s own, not reproduced. Cross-reference t809 and t951. Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.26863",
-              "title": "LLMs Memorize Their Own Hallucinations During Post-Training",
-              "brief": {
-                "zh": "arXiv 2611.26863（Anirudh Atmakuru、Tanya Goyal）：面向推理的后训练配方——结果奖励的强化学习、推理链里「提出假设再回溯」等认知模板——直接搬到知识任务时，模型会记住自己在长推理里编出来的幻觉。作者在六个开源模型、两个系列、两种架构上做标准后训练，抽出强化学习期间的自生成幻觉并跟踪其后记忆。被训练信号强化的幻觉，回忆率平均上升 4.83%；未获信号的自幻觉几乎不动（0.17%）。模型甚至会记住自己马上撤回的虚假事实；这种从推理训练继承来的回溯模板，对知识回忆并无帮助。记忆在最难的训练题上最强；奖励一次幻觉，会让模型日后少拒绝它，平均 7.23%。数字均论文自报，未复现。对照 t809、t951。仅 Chaos。",
-                "en": "arXiv 2611.26863 (Anirudh Atmakuru, Tanya Goyal) studies what happens when reasoning-centric post-training recipes—outcome-based rewards for reinforcement learning, and cognitive templates such as proposing and backtracking from hypotheses in reasoning chains—are adopted directly for knowledge tasks. The authors hypothesize that these choices, useful for reasoning, encourage models to memorize hallucinations they themselves generate in long reasoning chains. They train models with standard post-training, extract self-generated hallucinations during RL, and track memorization through the rest of training, on six open models across two families and two architectures. Recall of hallucinations reinforced during training rises by 4.83% on average, against 0.17% for self-hallucinations that receive no training signal. Models even memorize false facts that they immediately retract; a backtracking template inherited from reasoning-centric training that has no benefit for knowledge recall. Memorization is strongest on the hardest training questions, and rewarding a hallucination makes the model less likely to abstain from it later, by 7.23% on average. Figures are the paper’s own, not reproduced. Cross-reference t809 and t951. Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.26863"
-          ]
-        },
-        {
-          "id": "t979",
-          "theme": "research",
-          "title": {
-            "zh": "口头评测觉察与拒绝共用一批神经元：压住这些神经元能降觉察，拒绝也会跟着降，而且不完全靠那句「我在被测」",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.27032（Jingyuan Feng、Gouki Minegishi、Andrew Gambardella、Takeshi Kojima、Yusuke Iwasawa）：大推理模型有时会意识到自己在被评测。先前用激活引导操纵「口头评测觉察」（VEA）时，拒绝率会跟着上升，但机制不清。作者对照 VEA 与非 VEA 推理片段找出 VEA 神经元：干预 5,000 个，主实验里 VEA 率从 12.6%–51.8% 降到至多 1.4%，未口头的评测觉察探针分数也下降。在 QwQ-32B 上，即使该轮没有说出 VEA，干预同样降低拒绝，VEA 文本本身只解释下降的 4–10%。这些神经元的下投影含有拒绝成分，干预时保留它们能部分恢复拒绝、同时仍压制 VEA，约占拒绝下降的一半。OLMo 3 的 SFT、DPO 检查点上 VEA 相近，RLVR 之后则明显升高，VEA 神经元也变多。数字均论文自报，未复现。对照 t908、t965。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.27032（Jingyuan Feng、Gouki Minegishi、Andrew Gambardella、Takeshi Kojima、Yusuke Iwasawa）：大推理模型有时会意识到自己在被评测。先前用激活引导操纵「口头评测觉察」（VEA）时，拒绝率会跟着上升，但机制不清。作者对照 VEA 与非 VEA 推理片段找出 VEA 神经元：干预 5,000 个，主实验里 VEA 率从 12.6%–51.8% 降到至多 1.4%，未口头的评测觉察探针分数也下降。在 QwQ-32B 上，即使该轮没有说出 VEA，干预同样降低拒绝，VEA 文本本身只解释下降的 4–10%。这些神经元的下投影含有拒绝成分，干预时保留它们能部分恢复拒绝、同时仍压制 VEA，约占拒绝下降的一半。OLMo 3 的 SFT、DPO 检查点上 VEA 相近，RLVR 之后则明显升高，VEA 神经元也变多。数字均论文自报，未复现。对照 t908、t965。仅 Chaos。",
-            "en": "arXiv 2611.27032 (Jingyuan Feng, Gouki Minegishi, Andrew Gambardella, Takeshi Kojima, Yusuke Iwasawa) asks why, in prior work, steering verbalized evaluation awareness (VEA) also raised refusal. The authors identify VEA neurons by contrasting activations in VEA and non-VEA reasoning segments. Intervening on 5,000 such neurons reduces the VEA rate from 12.6–51.8% to at most 1.4% in their main experiments, and also lowers a probe score for unverbalized evaluation awareness. In QwQ-32B, the same intervention reduces refusal even in rollouts without VEA; VEA text itself explains only 4–10% of the decrease. Their down-projection vectors contain refusal components, and preserving those components during intervention partially restores refusal while still suppressing VEA, accounting for about half of the refusal decrease. Across OLMo 3 SFT, DPO and RLVR checkpoints, the VEA rate is similar after SFT and DPO but substantially higher after RLVR, alongside more VEA neurons. Figures are the paper’s own, not reproduced. Cross-reference t908 and t965. Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.27032",
-              "title": "Disentangling Verbalized Evaluation Awareness and Refusal through Neuron-Level Intervention",
-              "brief": {
-                "zh": "arXiv 2611.27032（Jingyuan Feng、Gouki Minegishi、Andrew Gambardella、Takeshi Kojima、Yusuke Iwasawa）：大推理模型有时会意识到自己在被评测。先前用激活引导操纵「口头评测觉察」（VEA）时，拒绝率会跟着上升，但机制不清。作者对照 VEA 与非 VEA 推理片段找出 VEA 神经元：干预 5,000 个，主实验里 VEA 率从 12.6%–51.8% 降到至多 1.4%，未口头的评测觉察探针分数也下降。在 QwQ-32B 上，即使该轮没有说出 VEA，干预同样降低拒绝，VEA 文本本身只解释下降的 4–10%。这些神经元的下投影含有拒绝成分，干预时保留它们能部分恢复拒绝、同时仍压制 VEA，约占拒绝下降的一半。OLMo 3 的 SFT、DPO 检查点上 VEA 相近，RLVR 之后则明显升高，VEA 神经元也变多。数字均论文自报，未复现。对照 t908、t965。仅 Chaos。",
-                "en": "arXiv 2611.27032 (Jingyuan Feng, Gouki Minegishi, Andrew Gambardella, Takeshi Kojima, Yusuke Iwasawa) asks why, in prior work, steering verbalized evaluation awareness (VEA) also raised refusal. The authors identify VEA neurons by contrasting activations in VEA and non-VEA reasoning segments. Intervening on 5,000 such neurons reduces the VEA rate from 12.6–51.8% to at most 1.4% in their main experiments, and also lowers a probe score for unverbalized evaluation awareness. In QwQ-32B, the same intervention reduces refusal even in rollouts without VEA; VEA text itself explains only 4–10% of the decrease. Their down-projection vectors contain refusal components, and preserving those components during intervention partially restores refusal while still suppressing VEA, accounting for about half of the refusal decrease. Across OLMo 3 SFT, DPO and RLVR checkpoints, the VEA rate is similar after SFT and DPO but substantially higher after RLVR, alongside more VEA neurons. Figures are the paper’s own, not reproduced. Cross-reference t908 and t965. Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.27032"
-          ]
-        },
-        {
-          "id": "t980",
-          "theme": "research",
-          "title": {
-            "zh": "数字全对也可以讲错故事：大模型财报草稿常加上输入里没有的判断和原因，作者称之为 unsupported framing",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.26968（Seunghan Lee 等）：大模型起草的财务报告可以每个数字都对，却仍超出输入，加上没人给过的判断和原因。作者称之为 unsupported framing，并发现它在大模型草稿里远比专业 10-K 写手常见；用「这个词该怎么用」去提示，这类判断反而更频繁。他们提出无需再调模型的插件 FrameCheck：先用相近幅度的专业例句引导草稿，再按规则标出并删掉专业写手不会用的判断、以及输入未给出的原因。在 17 个开源模型和 300 万份草稿上，它几乎清掉全部 unsupported framing，判断率接近 10-K 写手。代码在 github.com/seunghan96/framecheck。数字均论文自报，未复现。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.26968（Seunghan Lee 等）：大模型起草的财务报告可以每个数字都对，却仍超出输入，加上没人给过的判断和原因。作者称之为 unsupported framing，并发现它在大模型草稿里远比专业 10-K 写手常见；用「这个词该怎么用」去提示，这类判断反而更频繁。他们提出无需再调模型的插件 FrameCheck：先用相近幅度的专业例句引导草稿，再按规则标出并删掉专业写手不会用的判断、以及输入未给出的原因。在 17 个开源模型和 300 万份草稿上，它几乎清掉全部 unsupported framing，判断率接近 10-K 写手。代码在 github.com/seunghan96/framecheck。数字均论文自报，未复现。仅 Chaos。",
-            "en": "arXiv 2611.26968 (Seunghan Lee et al.) finds that a financial report drafted by an LLM can state every number correctly but still go beyond its input, adding judgments and causes that no one supplied. The authors call these additions unsupported framing, find them far more often in LLM drafts than in reports written by professionals, and show that prompting with how each word is used instead makes such judgments more frequent. They propose FrameCheck, a plug-in that sits between the model and human review: it guides the draft with professional examples that report a change of similar magnitude, flags judgments professionals would not use and causes the input does not give, and removes them by rule, without a model call. On 17 open LLMs and 3 million drafts, it removes almost all unsupported framing and brings the judgment rate close to that of the writers of 10-K filings. Code is at github.com/seunghan96/framecheck. Figures are the paper’s own, not reproduced. Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.26968",
-              "title": "Right Numbers, Wrong Story: When LLMs Narrate Financial Changes Beyond Their Inputs",
-              "brief": {
-                "zh": "arXiv 2611.26968（Seunghan Lee 等）：大模型起草的财务报告可以每个数字都对，却仍超出输入，加上没人给过的判断和原因。作者称之为 unsupported framing，并发现它在大模型草稿里远比专业 10-K 写手常见；用「这个词该怎么用」去提示，这类判断反而更频繁。他们提出无需再调模型的插件 FrameCheck：先用相近幅度的专业例句引导草稿，再按规则标出并删掉专业写手不会用的判断、以及输入未给出的原因。在 17 个开源模型和 300 万份草稿上，它几乎清掉全部 unsupported framing，判断率接近 10-K 写手。代码在 github.com/seunghan96/framecheck。数字均论文自报，未复现。仅 Chaos。",
-                "en": "arXiv 2611.26968 (Seunghan Lee et al.) finds that a financial report drafted by an LLM can state every number correctly but still go beyond its input, adding judgments and causes that no one supplied. The authors call these additions unsupported framing, find them far more often in LLM drafts than in reports written by professionals, and show that prompting with how each word is used instead makes such judgments more frequent. They propose FrameCheck, a plug-in that sits between the model and human review: it guides the draft with professional examples that report a change of similar magnitude, flags judgments professionals would not use and causes the input does not give, and removes them by rule, without a model call. On 17 open LLMs and 3 million drafts, it removes almost all unsupported framing and brings the judgment rate close to that of the writers of 10-K filings. Code is at github.com/seunghan96/framecheck. Figures are the paper’s own, not reproduced. Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.26968"
-          ]
-        },
-        {
-          "id": "t981",
-          "theme": "research",
-          "title": {
-            "zh": "公平评测还应问：同一道题，让模型描述可能发生什么、和让它做决定，给出的分化是否一样",
-            "en": "",
-            "ja": ""
-          },
-          "summary": {
-            "zh": "arXiv 2611.26870（Radhika Bhargava 等）：公平评测多半只问模型会不会差别对待，却很少问同一道题在「描述可能发生什么」和「做决定」两种问法下，分化是否一样。作者提出 normative–descriptive calibration，并给出基准 NDCB：六个领域 697 对匹配情景、两种提问框架，以及 NER、NLR、NDS 三项指标。六个模型里，NDS 能分开 15 对中的 13 对（BBQ 准确率只能分开 7 对，BOLD 一对都分不开；作者也注明这与各基准样本量有关）。Claude Sonnet 4.6 与 Opus 4.6 对两种框架分得最开（平均 NDS 为 +0.55 与 +0.52，置信区间重叠），GPT-5.5 在强制单选时平均 NDS 为负（-0.14），去掉该指令则接近零（+0.02）。去掉单个触发词不会改变 NDS 符号，却可让它移动最多 0.46 并重排模型名次。在完全相同的候选人之间强制二选一，六个模型都偏向先列出的那个；把顺序平均掉之后，与人口统计对齐的倾向转向被边缘化的一方。数字均论文自报，未复现。仅 Chaos。",
-            "en": "",
-            "ja": ""
-          },
-          "judgment": {
-            "zh": "arXiv 2611.26870（Radhika Bhargava 等）：公平评测多半只问模型会不会差别对待，却很少问同一道题在「描述可能发生什么」和「做决定」两种问法下，分化是否一样。作者提出 normative–descriptive calibration，并给出基准 NDCB：六个领域 697 对匹配情景、两种提问框架，以及 NER、NLR、NDS 三项指标。六个模型里，NDS 能分开 15 对中的 13 对（BBQ 准确率只能分开 7 对，BOLD 一对都分不开；作者也注明这与各基准样本量有关）。Claude Sonnet 4.6 与 Opus 4.6 对两种框架分得最开（平均 NDS 为 +0.55 与 +0.52，置信区间重叠），GPT-5.5 在强制单选时平均 NDS 为负（-0.14），去掉该指令则接近零（+0.02）。去掉单个触发词不会改变 NDS 符号，却可让它移动最多 0.46 并重排模型名次。在完全相同的候选人之间强制二选一，六个模型都偏向先列出的那个；把顺序平均掉之后，与人口统计对齐的倾向转向被边缘化的一方。数字均论文自报，未复现。仅 Chaos。",
-            "en": "arXiv 2611.26870 (Radhika Bhargava et al.) argues that most fairness benchmarks evaluate demographic discrimination under a single reasoning objective, and none the authors know of tests whether a model treats the same item differently when asked to describe an outcome versus decide one. They introduce normative–descriptive calibration, and measure it with the Normative–Descriptive Calibration Benchmark (NDCB): 697 matched-pair scenarios across six domains, each posed under both framings, and three metrics, Normative Engagement Rate (NER), Normative Leakage Rate (NLR), and Normative–Descriptive Separation (NDS). Across six models, NDS separates 13 of 15 model pairs, against 7 for BBQ accuracy and none for BOLD, although these counts also reflect each benchmark’s sample size. Claude Sonnet 4.6 and Claude Opus 4.6 separate the framings most strongly (average NDS = +0.55 and +0.52, with overlapping confidence intervals), whereas GPT-5.5’s average NDS is negative (-0.14) under a single-pick instruction and near zero (+0.02) without it. Removing single trigger words never changes the sign of a model’s average NDS but can shift it by up to 0.46 and reorder models. When forced to choose between identical candidates, all six models favor whichever is listed first; once order is averaged out, their demographic-aligned lean is toward the marginalized candidate. Figures are the paper’s own, not reproduced. Chaos only.",
-            "ja": ""
-          },
-          "sourceBriefs": [
-            {
-              "source": "arxiv",
-              "url": "https://arxiv.org/abs/2611.26870",
-              "title": "Beyond Demographic Discrimination: Benchmarking Normative-Descriptive Calibration in LLMs",
-              "brief": {
-                "zh": "arXiv 2611.26870（Radhika Bhargava 等）：公平评测多半只问模型会不会差别对待，却很少问同一道题在「描述可能发生什么」和「做决定」两种问法下，分化是否一样。作者提出 normative–descriptive calibration，并给出基准 NDCB：六个领域 697 对匹配情景、两种提问框架，以及 NER、NLR、NDS 三项指标。六个模型里，NDS 能分开 15 对中的 13 对（BBQ 准确率只能分开 7 对，BOLD 一对都分不开；作者也注明这与各基准样本量有关）。Claude Sonnet 4.6 与 Opus 4.6 对两种框架分得最开（平均 NDS 为 +0.55 与 +0.52，置信区间重叠），GPT-5.5 在强制单选时平均 NDS 为负（-0.14），去掉该指令则接近零（+0.02）。去掉单个触发词不会改变 NDS 符号，却可让它移动最多 0.46 并重排模型名次。在完全相同的候选人之间强制二选一，六个模型都偏向先列出的那个；把顺序平均掉之后，与人口统计对齐的倾向转向被边缘化的一方。数字均论文自报，未复现。仅 Chaos。",
-                "en": "arXiv 2611.26870 (Radhika Bhargava et al.) argues that most fairness benchmarks evaluate demographic discrimination under a single reasoning objective, and none the authors know of tests whether a model treats the same item differently when asked to describe an outcome versus decide one. They introduce normative–descriptive calibration, and measure it with the Normative–Descriptive Calibration Benchmark (NDCB): 697 matched-pair scenarios across six domains, each posed under both framings, and three metrics, Normative Engagement Rate (NER), Normative Leakage Rate (NLR), and Normative–Descriptive Separation (NDS). Across six models, NDS separates 13 of 15 model pairs, against 7 for BBQ accuracy and none for BOLD, although these counts also reflect each benchmark’s sample size. Claude Sonnet 4.6 and Claude Opus 4.6 separate the framings most strongly (average NDS = +0.55 and +0.52, with overlapping confidence intervals), whereas GPT-5.5’s average NDS is negative (-0.14) under a single-pick instruction and near zero (+0.02) without it. Removing single trigger words never changes the sign of a model’s average NDS but can shift it by up to 0.46 and reorder models. When forced to choose between identical candidates, all six models favor whichever is listed first; once order is averaged out, their demographic-aligned lean is toward the marginalized candidate. Figures are the paper’s own, not reproduced. Chaos only.",
-                "ja": ""
-              }
-            }
-          ],
-          "sources": [
-            "arxiv"
-          ],
-          "score": 4,
-          "status": "inbox",
-          "externalUrls": [
-            "https://arxiv.org/abs/2611.26870"
           ]
         }
       ]
