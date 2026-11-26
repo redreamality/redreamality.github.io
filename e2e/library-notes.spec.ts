@@ -1,6 +1,7 @@
 import { readdirSync } from 'node:fs';
 import { test, expect, type Page, type TestInfo } from '@playwright/test';
 import feed from '../src/data/library-notes.json' with { type: 'json' };
+import { assignLibrarySlugs, parseLibraryNotes } from '../src/utils/library-notes';
 import { notesCopy } from '../src/utils/library-notes-i18n';
 import { serializeJsonForScript } from '../src/utils/json-script';
 import { isInternalHref } from '../src/utils/outbound';
@@ -10,7 +11,7 @@ const locales = [
   { lang: 'zh', prefix: '/cn', htmlLang: 'zh-CN', collection: 'notes-cn' },
   { lang: 'ja', prefix: '/ja', htmlLang: 'ja', collection: 'notes-ja' },
 ] as const;
-const entries = feed.entries;
+const entries = assignLibrarySlugs(parseLibraryNotes(feed));
 const sample = entries[0];
 
 test('JSON-LD preserves untrusted summary text without executing HTML', async ({ page }) => {
@@ -57,7 +58,7 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
 
 for (const locale of locales) {
   const index = `${locale.prefix}/garden/notes/`;
-  const detail = (id: string) => `${index}library/${id}/`;
+  const detail = (slug: string) => `${index}library/${slug}/`;
   const c = notesCopy[locale.lang];
   const manualSlugs = readdirSync(new URL(`../src/content/${locale.collection}/`, import.meta.url))
     .filter((name) => /\.mdx?$/.test(name)).map((name) => name.replace(/\.mdx?$/, ''));
@@ -76,7 +77,7 @@ for (const locale of locales) {
     expect(dates).toEqual([...dates].sort((a, b) => b - a));
     for (const note of entries) {
       const row = page.locator('[data-note-kind="library"]').filter({
-        has: page.locator(`a[href="${detail(note.id)}"]`),
+        has: page.locator(`a[href="${detail(note.slug)}"]`),
       });
       await expect(row.locator('h2 a')).toHaveText(note.title);
       await expect(row.locator('p[lang="zh-CN"]')).toHaveText(note.sentence);
@@ -132,7 +133,7 @@ for (const locale of locales) {
     await expect(visible).toHaveCount(total);
     if (sample) {
       await search.fill(sample.title);
-      await expect(page.locator(`[data-note-link][href="${detail(sample.id)}"]`)).toBeVisible();
+      await expect(page.locator(`[data-note-link][href="${detail(sample.slug)}"]`)).toBeVisible();
       const query = sample.title.normalize('NFKC').toLocaleLowerCase();
       const expected = await page.locator('[data-note-kind]').evaluateAll((rows, query) =>
         rows.filter((row) => (row as HTMLElement).dataset.noteSearch!
@@ -157,22 +158,23 @@ for (const locale of locales) {
   test(`${locale.lang}: keyboard opens escaped Chinese summary with source confirmation`, async ({ page }) => {
     test.skip(!sample, 'The public feed has no detail entries.');
     await page.goto(index);
-    const link = page.locator(`[data-note-link][href="${detail(sample.id)}"]`);
+    const link = page.locator(`[data-note-link][href="${detail(sample.slug)}"]`);
     await link.focus();
     await page.keyboard.press('Enter');
-    await expect(page).toHaveURL(new RegExp(`${detail(sample.id)}$`));
+    await expect(page).toHaveURL(new RegExp(`${detail(sample.slug)}$`));
     await shell(page, locale.htmlLang);
     await expect(page.locator('h1')).toHaveText(sample.title);
     const structured = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent())!);
     expect(structured.headline).toBe(sample.title);
-    expect(structured.description).toBe(sample.sentence);
+    expect(structured.description).toContain(sample.sentence);
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', structured.description);
     await expect(page.locator('[data-library-summary]')).toHaveAttribute('lang', 'zh-CN');
     await expect(page.locator('[data-library-summary] > p')).toHaveText(sample.sentence);
     await expect(page.locator('[data-library-summary] h2')).toHaveText(sample.bullets.map((bullet) => bullet.heading));
     await expect(page.locator('[data-library-summary] li')).toHaveText(sample.bullets.flatMap((bullet) => bullet.details));
     await expect(page.locator('[data-library-summary] script, [data-library-summary] iframe')).toHaveCount(0);
     await expect(page.locator('meta[property="article:published_time"]')).toHaveCount(0);
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://redreamality.com${detail(sample.id)}`);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://redreamality.com${detail(sample.slug)}`);
     const destination = new URL(sample.url).toString();
     if (isInternalHref(sample.url)) {
       await expect(page.locator('[data-library-source]')).toHaveAttribute('href', sample.url);
@@ -184,14 +186,14 @@ for (const locale of locales) {
     await expect(page.locator('#outbound-continue')).toHaveAttribute('href', destination);
   });
 
-  test(`${locale.lang}: partial coverage and language switching keep stable full IDs`, async ({ page }) => {
+  test(`${locale.lang}: partial coverage and language switching keep stable readable slugs`, async ({ page }) => {
     test.skip(!sample, 'The public feed has no detail entries.');
     const note = entries.find((entry) => !entry.coverage.complete) ?? sample;
-    await page.goto(detail(note.id));
+    await page.goto(detail(note.slug));
     await expect(page.locator('[data-note-partial]')).toHaveCount(note.coverage.complete ? 0 : 1);
     if (!note.coverage.complete) await expect(page.locator('[data-note-partial]')).toContainText(c.partial);
     for (const target of locales.filter((target) => target.lang !== locale.lang)) {
-      const path = `${target.prefix}/garden/notes/library/${note.id}/`;
+      const path = `${target.prefix}/garden/notes/library/${note.slug}/`;
       await page.locator('#language-toggle-btn-desktop').click();
       await page.locator(`#language-dropdown-desktop a[href="${path}"]`).click();
       await expect(page).toHaveURL(new RegExp(`${path}$`));
@@ -211,7 +213,7 @@ for (const locale of locales) {
       await expect(page.locator('[data-note-kind]:visible')).toHaveCount(total);
       await expect(page.locator('[data-notes-controls]')).toBeHidden();
       if (sample) {
-        await page.locator(`[data-note-link][href="${detail(sample.id)}"]`).click();
+        await page.locator(`[data-note-link][href="${detail(sample.slug)}"]`).click();
         await expect(page.locator('[data-library-summary] > p')).toHaveText(sample.sentence);
       }
     } finally {
@@ -229,7 +231,7 @@ for (const locale of locales) {
       await expect(page.locator('html')).toHaveClass(/dark/);
       await capture(page, testInfo, 'notes-list-dark');
       if (sample) {
-        await page.goto(detail(sample.id));
+        await page.goto(detail(sample.slug));
         await expect(page.locator('html')).toHaveClass(/dark/);
         await capture(page, testInfo, 'notes-detail-dark');
         await page.locator('.theme-toggle:visible').click();
@@ -245,17 +247,21 @@ for (const locale of locales) {
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://redreamality.com${index}`);
   });
 
-  test(`${locale.lang}: library alias redirects with the full stable ID`, async ({ page }) => {
-    test.skip(!sample, 'The public feed has no detail entries.');
-    await page.goto(`${locale.prefix}/notes/library/${sample.id}/`);
-    await expect(page).toHaveURL(new RegExp(`${detail(sample.id)}$`));
-    await shell(page, locale.htmlLang);
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://redreamality.com${detail(sample.id)}`);
-    await expect(page.locator('[data-library-summary] > p')).toHaveText(sample.sentence);
-  });
+  for (const legacyRoot of ['/notes/library/', '/garden/notes/library/']) {
+    test(`${locale.lang}: legacy ${legacyRoot} full ID redirects to the readable slug`, async ({ page }) => {
+      test.skip(!sample, 'The public feed has no detail entries.');
+      expect(sample.id).toMatch(/^[a-f0-9]{64}$/);
+      expect(sample.slug).not.toBe(sample.id);
+      await page.goto(`${locale.prefix}${legacyRoot}${sample.id}/`);
+      await expect(page).toHaveURL(new RegExp(`${detail(sample.slug)}$`));
+      await shell(page, locale.htmlLang);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://redreamality.com${detail(sample.slug)}`);
+      await expect(page.locator('[data-library-summary] > p')).toHaveText(sample.sentence);
+    });
+  }
 }
 
-test('sitemap includes all public library details and excludes notes aliases', async ({ page, request }) => {
+test('sitemap includes readable library details and excludes legacy IDs and notes aliases', async ({ page, request }) => {
   const response = await request.get('/sitemap-index.xml');
   expect(response.ok()).toBeTruthy();
   const sitemaps = await page.evaluate((xml) => [...new DOMParser()
@@ -274,7 +280,8 @@ test('sitemap includes all public library details and excludes notes aliases', a
     expect(paths).not.toContain(`${locale.prefix}/notes/`);
     expect(paths).toContain(`${locale.prefix}/garden/notes/`);
     for (const note of entries) {
-      expect(paths.filter((path) => path === `${locale.prefix}/garden/notes/library/${note.id}/`)).toHaveLength(1);
+      expect(paths.filter((path) => path === `${locale.prefix}/garden/notes/library/${note.slug}/`)).toHaveLength(1);
+      expect(paths).not.toContain(`${locale.prefix}/garden/notes/library/${note.id}/`);
     }
   }
   expect(paths.some((path) => /^\/(?:cn\/|ja\/)?notes\/library\//.test(path))).toBe(false);
@@ -286,7 +293,7 @@ test('desktop notes list and summary remain readable', async ({ page }, testInfo
   await page.goto('/cn/garden/notes/');
   await capture(page, testInfo, 'notes-desktop-list');
   if (sample) {
-    await page.goto(`/cn/garden/notes/library/${sample.id}/`);
+    await page.goto(`/cn/garden/notes/library/${sample.slug}/`);
     await capture(page, testInfo, 'notes-desktop-detail');
   }
 });

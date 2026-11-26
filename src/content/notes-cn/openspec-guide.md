@@ -11,9 +11,19 @@ lang: "zh"
 
 先理解一个区别：`openspec/specs/` 记录已经接受的系统行为，`openspec/changes/<name>/` 记录准备如何改变这些行为。完成实现和测试后，再把变更中的规范增量合并回主规范并归档。
 
-需要安装、排查 PATH 或查命令，进入[OpenSpec CLI 教程](/cn/blog/openspec-tutorial-cli-commands-agents-md-examples/)。需要共享规范、分别维护组件任务，进入[Stores 双仓库示例](/cn/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice)。截至 2026 年 10 月 26 日，npm `latest` 已发布 **1.15.0**，独立程序安装不需要 Node.js；其中包含 Stores，但功能仍标为 Beta。
+需要安装、排查 PATH 或查命令，进入[OpenSpec CLI 教程](/cn/blog/openspec-tutorial-cli-commands-agents-md-examples/)。需要共享规范、分别维护组件任务，进入[Stores 双仓库示例](/cn/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice)。2026 年 10 月 26 日，npm `latest` 是 **1.15.0**；该版本的独立程序不需要 Node.js，包含的 Stores 功能标为 Beta。
 
-本页解释是否值得引入及应评审哪些文件。以下 **1.13.2** 示例保留 **2026-09-25 UTC** 核验的历史基线，不代表安装最新版。CLI 教程保留这套练习，并在前部补充当前安装选项。
+本页解释是否值得引入及应评审哪些文件。以下 **1.13.2** 示例保留 **2026-09-25 UTC** 核验的历史基线。根据要跟随的步骤选择版本：
+
+| 目的 | 版本与日期 | 使用哪份说明 |
+| --- | --- | --- |
+| 复现本页练习 | 1.13.2，2026 年 9 月 25 日 UTC 核验 | 保留下面命令中的固定版本 |
+| 跟随历史安装示例 | 1.15.0，2026 年 10 月 26 日 | 保留教程的安装版本固定设置 |
+| 阅读教程中的 2.0 迁移说明 | 2.0.0，2026 年 11 月 13 日记录 | 参照[教程的升级章节](/cn/blog/openspec-tutorial-cli-commands-agents-md-examples/#按原安装方式升级和卸载) |
+| 跟随已实测的 1.x 升级过程 | 2.1.1，报告发布于 2026 年 11 月 23 日 | 阅读[OpenSpec 2.1 升级实测](/cn/blog/openspec-2-1-hands-on-upgrade/) |
+| 选择 2026 年 11 月 26 日核验的 npm `latest` | 2.2.0；npm 安装需要 Node.js ≥22.20.0 | 核对 [npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) 和[官方安装文档](https://github.com/Fission-AI/OpenSpec/blob/main/docs/installation.md) |
+
+2.0.0 和 2.1.1 对应各自日期的说明，不代表今天的 `latest`。下文的 `/opsx:*` 示例属于 1.13.2；改用技能以及选择项目内或全局安装时，参照升级实测文章。该文实测的是 2.1.1，不是 2.2.0。
 
 ## 适合什么任务，什么时候可以不用
 

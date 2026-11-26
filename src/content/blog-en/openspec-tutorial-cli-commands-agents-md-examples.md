@@ -13,7 +13,7 @@ The October 26, 2026 installation instructions below retain **1.15.0**, the npm 
 
 On November 13, 2026, the [npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) listed **2.0.0** as `latest`, requiring Node.js **22.12.0+** for the npm package. The installation examples remain pinned to 1.15.0 and the exercise to 1.13.2. Before running the standalone commands below, run `$env:OPENSPEC_VERSION = 'v1.15.0'` in PowerShell or `export OPENSPEC_VERSION=v1.15.0` on macOS/Linux to retain that version.
 
-Latest: [OpenSpec 2.1 hands-on: /opsx commands are gone, skills move to .agents and global, and how to upgrade a 1.x project](/blog/openspec-2-1-hands-on-upgrade/). npm `latest` is now 2.1.1, `/opsx` has been removed, and the upgrade steps are in that post.
+The November 23, 2026 report, [OpenSpec 2.1 hands-on: /opsx commands are gone, skills move to .agents and global, and how to upgrade a 1.x project](/blog/openspec-2-1-hands-on-upgrade/), tests 2.1.1 and documents the removal of `/opsx` and the upgrade steps. On November 26, 2026, the [npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) lists 2.2.0 as `latest`, requiring Node.js ≥22.20.0 for the npm package. The report's migration tests cover 2.1.1.
 
 For Windows PowerShell, the official standalone installer is:
 

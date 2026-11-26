@@ -12,9 +12,19 @@ translatedFrom: "openspec-guide"
 
 Start with one distinction: `openspec/specs/` describes accepted system behavior, while `openspec/changes/<name>/` describes a proposed change to that behavior. After implementation and testing, you merge the change's spec deltas into the main specifications and archive the change.
 
-For installation, PATH troubleshooting, and command lookup, use the [OpenSpec CLI tutorial](/blog/openspec-tutorial-cli-commands-agents-md-examples/). For shared specifications and separate component tasks, use the [Stores multi-repo example](/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice). As of October 26, 2026, the published npm `latest` is **1.15.0**; its standalone installer does not require Node.js. Stores are included but remain Beta.
+For installation, PATH troubleshooting, and command lookup, use the [OpenSpec CLI tutorial](/blog/openspec-tutorial-cli-commands-agents-md-examples/). For shared specifications and separate component tasks, use the [Stores multi-repo example](/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice). On October 26, 2026, npm `latest` was **1.15.0**; that release's standalone program needs no Node.js and includes Stores as a Beta feature.
 
-This note explains whether the tool fits and which files to review. Its **1.13.2** examples retain the historical baseline checked on **2026-09-25 UTC**, rather than claiming to install the newest release. The CLI tutorial keeps that fixture and adds current installation choices.
+This note explains whether the tool fits and which files to review. Its **1.13.2** examples retain the historical baseline checked on **2026-09-25 UTC**. Choose a version according to the instructions you intend to follow:
+
+| Purpose | Version and date | What to use |
+| --- | --- | --- |
+| Reproduce this note's exercise | 1.13.2, checked September 25, 2026 UTC | Keep the commands below pinned |
+| Follow the historical installation examples | 1.15.0, October 26, 2026 | Keep the tutorial's installation pins |
+| Read the tutorial's 2.0 migration instructions | 2.0.0, documented November 13, 2026 | See the [tutorial's upgrade section](/blog/openspec-tutorial-cli-commands-agents-md-examples/#upgrade-or-uninstall-the-installation-you-chose) |
+| Follow a tested 1.x upgrade | 2.1.1, report published November 23, 2026 | Use the [OpenSpec 2.1 hands-on upgrade report](/blog/openspec-2-1-hands-on-upgrade/) |
+| Choose the npm `latest` checked November 26, 2026 | 2.2.0; npm requires Node.js ≥22.20.0 | Check the [npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) and [official installation docs](https://github.com/Fission-AI/OpenSpec/blob/main/docs/installation.md) |
+
+The 2.0.0 and 2.1.1 references describe dated instructions, not today's `latest`. The `/opsx:*` examples below belong to 1.13.2; for the switch to skills and the choice between project and global installation, follow the hands-on report. Its tests cover 2.1.1, not 2.2.0.
 
 ## When OpenSpec Fits
 
