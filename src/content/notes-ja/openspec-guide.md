@@ -12,9 +12,19 @@ translatedFrom: 'openspec-guide'
 
 まず区別したいのは、`openspec/specs/` が受け入れ済みのシステムの振る舞いを記録し、`openspec/changes/<name>/` がその変更案を記録することです。実装とテストを終えてから、変更の仕様差分を主要仕様へ反映し、変更をアーカイブします。
 
-導入、PATH の問題、コマンド検索には[OpenSpec CLI チュートリアル](/ja/blog/openspec-tutorial-cli-commands-agents-md-examples/)を使います。共有仕様と独立した実装タスクには[Stores の二つのリポジトリを使う例](/ja/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice)を参照してください。2026 年 10 月 26 日時点の npm `latest` は **1.15.0** で、単体実行ファイルには Node.js が不要です。Stores も含まれますが、機能は Beta 扱いです。
+導入、PATH の問題、コマンド検索には[OpenSpec CLI チュートリアル](/ja/blog/openspec-tutorial-cli-commands-agents-md-examples/)を使います。共有仕様と独立した実装タスクには[Stores の二つのリポジトリを使う例](/ja/blog/openspec-1-5-stores-beta-update-guide/#multi-repo-practice)を参照してください。2026 年 10 月 26 日時点の npm `latest` は **1.15.0** でした。この版の単体実行ファイルには Node.js が不要で、Stores は Beta 機能として含まれています。
 
-本ノートは導入の適否とレビューするファイルを説明します。以下の **1.13.2** の例は **2026-09-25 UTC** に確認した過去の基準を維持し、最新版の導入を示すものではありません。CLI 記事はその練習を残し、冒頭に現在の導入方法を追加しています。
+本ノートは導入の適否とレビューするファイルを説明します。以下の **1.13.2** の例は **2026-09-25 UTC** に確認した過去の基準を維持しています。利用する手順に合わせて版を選んでください。
+
+| 目的 | 版と日付 | 参照する手順 |
+| --- | --- | --- |
+| 本ノートの練習を再現する | 1.13.2、2026 年 9 月 25 日 UTC に確認 | 以下のコマンドの固定版を維持 |
+| 過去の導入例に従う | 1.15.0、2026 年 10 月 26 日 | チュートリアルの導入版を固定したまま利用 |
+| チュートリアルの 2.0 移行手順を読む | 2.0.0、2026 年 11 月 13 日の記録 | [チュートリアルの更新節](/ja/blog/openspec-tutorial-cli-commands-agents-md-examples/#同じ導入方法で更新削除する)を参照 |
+| 検証済みの 1.x 移行手順に従う | 2.1.1、2026 年 11 月 23 日公開の報告 | [OpenSpec 2.1 移行の実地検証](/ja/blog/openspec-2-1-hands-on-upgrade/)を参照 |
+| 2026 年 11 月 26 日に確認した npm `latest` を選ぶ | 2.2.0。npm には Node.js ≥22.20.0 が必要 | [npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest)と[公式導入ドキュメント](https://github.com/Fission-AI/OpenSpec/blob/main/docs/installation.md)を確認 |
+
+2.0.0 と 2.1.1 はそれぞれの日付の手順であり、今日の `latest` ではありません。以下の `/opsx:*` の例は 1.13.2 用です。スキルへの移行とプロジェクト内・グローバル導入の選択は実地検証記事を参照してください。同記事の検証対象は 2.1.1 であり、2.2.0 ではありません。
 
 ## 適した用途と、導入を急がなくてよい場面
 

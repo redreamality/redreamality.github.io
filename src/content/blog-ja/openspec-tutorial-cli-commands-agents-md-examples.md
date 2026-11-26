@@ -15,7 +15,7 @@ translatedFrom: 'openspec-tutorial-cli-commands-agents-md-examples'
 
 2026 年 11 月 13 日時点の [npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) の `latest` は **2.0.0** で、npm パッケージには Node.js **22.12.0+** が必要です。導入例は 1.15.0、練習は 1.13.2 に固定したままです。以下の単体版インストールコマンドの前に、PowerShell では `$env:OPENSPEC_VERSION = 'v1.15.0'`、macOS/Linux では `export OPENSPEC_VERSION=v1.15.0` を実行して、その版を維持してください。
 
-最新の動向は[OpenSpec 2.1 実地検証：/opsx コマンドは廃止、skill は .agents とグローバルへ。1.x プロジェクトの移行手順](/ja/blog/openspec-2-1-hands-on-upgrade/)を参照。現在の npm `latest` は 2.1.1 で、`/opsx` は削除済み。アップグレード手順はそこに書いてある。
+2026 年 11 月 23 日公開の[OpenSpec 2.1 実地検証：/opsx コマンドは廃止、skill は .agents とグローバルへ。1.x プロジェクトの移行手順](/ja/blog/openspec-2-1-hands-on-upgrade/)は 2.1.1 を検証し、`/opsx` の廃止と移行手順を説明しています。2026 年 11 月 26 日の [npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) の `latest` は 2.2.0 で、npm パッケージには Node.js ≥22.20.0 が必要です。同記事の移行検証は 2.1.1 が対象です。
 
 Windows PowerShell では公式の単体版インストーラーを使います。
 

@@ -15,7 +15,7 @@ translatedFrom: 'openspec-tutorial-cli-commands-agents-md-examples'
 
 2026 年 11 月 13 日，[npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) 的 `latest` 是 **2.0.0**，其 npm 包需要 Node.js **22.12.0+**。安装示例仍固定为 1.15.0，练习仍固定为 1.13.2。运行下面的独立程序安装命令前，PowerShell 中先运行 `$env:OPENSPEC_VERSION = 'v1.15.0'`，macOS/Linux 中先运行 `export OPENSPEC_VERSION=v1.15.0`，才能保留该版本。
 
-最新进展见[OpenSpec 2.1 实测：/opsx 命令取消，skill 改放 .agents 和全局，1.x 项目怎么升级](/cn/blog/openspec-2-1-hands-on-upgrade/)：目前 npm `latest` 已是 2.1.1，`/opsx` 已删除，升级步骤写在那里。
+2026 年 11 月 23 日发布的[OpenSpec 2.1 实测：/opsx 命令取消，skill 改放 .agents 和全局，1.x 项目怎么升级](/cn/blog/openspec-2-1-hands-on-upgrade/)实测了 2.1.1，并说明 `/opsx` 的取消和升级步骤。2026 年 11 月 26 日，[npm registry](https://registry.npmjs.org/@fission-ai/openspec/latest) 的 `latest` 是 2.2.0，其 npm 包需要 Node.js ≥22.20.0；该文的迁移实测仍对应 2.1.1。
 
 Windows PowerShell 使用官方独立程序安装脚本：
 

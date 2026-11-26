@@ -7,7 +7,8 @@
  * Exit code 1 when any dead target is found.
  */
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, relative, sep } from 'node:path';
+import { join, relative, resolve, sep } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const SITE_ORIGIN = 'https://redreamality.com';
 
@@ -120,7 +121,7 @@ export function checkDist(root = distDir) {
   return report;
 }
 
-const isMain = import.meta.url === `file://${process.argv[1]}`;
+const isMain = process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (isMain) {
   if (!existsSync(distDir)) {
     console.error(`dist directory not found: ${distDir}`);
