@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-27T16:01:35+08:00",
+  "updatedAt": "2026-11-28T10:00:17+08:00",
   "timezone": "Asia/Shanghai",
   "themes": [
     "models",
@@ -11,15 +11,103 @@
     "other"
   ],
   "themeCounts": {
-    "models": 4,
+    "models": 5,
     "coding-tools": 0,
-    "agents-oss": 1,
+    "agents-oss": 2,
     "security": 2,
     "research": 13,
     "product-news": 1,
     "other": 3
   },
   "hours": [
+    {
+      "hourStart": "2026-11-28T10:00:00+08:00",
+      "label": {
+        "zh": "11月28日 10:00",
+        "en": "Nov 28 10:00",
+        "ja": "11月28日 10:00"
+      },
+      "items": [
+        {
+          "id": "t1037",
+          "theme": "models",
+          "title": {
+            "zh": "Philipp Schmid：换到 Gemini 4 Neon 后的五条 context engineering 改法——少写死规则、工具规则放进接口、按需加载 skills、用图像验收、用交接文件代替压缩",
+            "en": "Philipp Schmid",
+            "ja": "Philipp Schmid"
+          },
+          "summary": {
+            "zh": "Philipp Schmid 博文（2026-11-25；经 11-26 TLDR AI 进入本线；原文已读）。称在日常用 Gemini 4 Neon 做编码 agent 并跑评测数周后，给旧模型写的护栏、skills 和规则会拖慢它，或让它在本可独立处理的边界情况下失败。五条改法：删掉互相打架的死规则，改成跟周围代码风格对齐这类判断提示，用户级 GEMINI.md 只留一屏；工具用法只写进清晰接口（自定义 agent 则写入 JSON schema），删掉系统提示里的重复规则和 few-shot；几乎删光项目级 AGENTS.md/GEMINI.md，领域工作流改成带一行索引的 skills 并按需加载；UI 与动画用截图或短录屏作参考，并让 agent 渲染后自己看图验收；长会话在阶段切换时写短交接文件再开新会话，而不是中途压缩（压缩会打穿 prompt cache、丢掉行级细节）。即便 1M 窗口，长会话仍会变吵；若仍保留自动压缩作兜底，他的经验是大约 50 万 token 再压。这是实践方法文，不是 Google 的发布单点，与 t936（Gemini 4 Neon 官方发布）不是同一条，不折进 t936，只作对照。需 Trends，本轮不查、不设 shortlisted。暂无足够窄、且不在禁测词表里的单义核心词（context engineering 过宽，Gemini 4 Neon 是厂商名）。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Philipp Schmid 博文（2026-11-25；经 11-26 TLDR AI 进入本线；原文已读）。称在日常用 Gemini 4 Neon 做编码 agent 并跑评测数周后，给旧模型写的护栏、skills 和规则会拖慢它，或让它在本可独立处理的边界情况下失败。五条改法：删掉互相打架的死规则，改成跟周围代码风格对齐这类判断提示，用户级 GEMINI.md 只留一屏；工具用法只写进清晰接口（自定义 agent 则写入 JSON schema），删掉系统提示里的重复规则和 few-shot；几乎删光项目级 AGENTS.md/GEMINI.md，领域工作流改成带一行索引的 skills 并按需加载；UI 与动画用截图或短录屏作参考，并让 agent 渲染后自己看图验收；长会话在阶段切换时写短交接文件再开新会话，而不是中途压缩（压缩会打穿 prompt cache、丢掉行级细节）。即便 1M 窗口，长会话仍会变吵；若仍保留自动压缩作兜底，他的经验是大约 50 万 token 再压。这是实践方法文，不是 Google 的发布单点，与 t936（Gemini 4 Neon 官方发布）不是同一条，不折进 t936，只作对照。需 Trends，本轮不查、不设 shortlisted。暂无足够窄、且不在禁测词表里的单义核心词（context engineering 过宽，Gemini 4 Neon 是厂商名）。",
+            "en": "Philipp Schmid’s post (2026-11-25; reached this lane via the 11-26 TLDR AI issue; the original was read). After using Gemini 4 Neon for weeks as a coding agent and running evals, he found that guardrails, skills, and rules written for older models slowed it down or made it fail on edge cases it could otherwise handle. His five changes: drop accumulating, conflicting hard rules in favor of judgment prompts that follow nearby style, and keep the user-level GEMINI.md to one screen; write tool usage once into a clear interface (or into a JSON schema for a custom agent) and delete repeated rules and few-shots from the system prompt; almost delete project-level AGENTS.md/GEMINI.md files, turning domain workflows into skills with a one-line index and loading them on demand; use screenshots or short recordings as references for UI and motion, and have the agent inspect its own rendering; at a phase change, write a short handoff file and start a new session instead of compacting mid-thread (compaction breaks the prompt cache and drops line-level detail). Even with a 1M window, long sessions get noisy; if automatic compaction is kept as a fallback, his experience is to wait until about 500k tokens. This is a practice note, not Google’s launch, so it is not folded into t936 (the official Gemini 4 Neon announcement); that row is a cross-reference only. Needs Trends; not queried and not shortlisted this turn. No narrow single core term that is also off the no-retest list (context engineering is too broad; Gemini 4 Neon is a vendor name).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://www.philschmid.de/gemini-4-neon-context-engineering",
+              "title": "Philipp Schmid：换到 Gemini 4 Neon 后的五条 context engineering 改法——删死规则、工具规则只写进接口、按需加载 skills、用图像验收、交接上下文而不是压缩",
+              "brief": {
+                "zh": "Philipp Schmid 博文（2026-11-25；经 11-26 TLDR AI 进入本线；原文已读）。称在日常用 Gemini 4 Neon 做编码 agent 并跑评测数周后，给旧模型写的护栏、skills 和规则会拖慢它，或让它在本可独立处理的边界情况下失败。五条改法：删掉互相打架的死规则，改成跟周围代码风格对齐这类判断提示，用户级 GEMINI.md 只留一屏；工具用法只写进清晰接口（自定义 agent 则写入 JSON schema），删掉系统提示里的重复规则和 few-shot；几乎删光项目级 AGENTS.md/GEMINI.md，领域工作流改成带一行索引的 skills 并按需加载；UI 与动画用截图或短录屏作参考，并让 agent 渲染后自己看图验收；长会话在阶段切换时写短交接文件再开新会话，而不是中途压缩（压缩会打穿 prompt cache、丢掉行级细节）。即便 1M 窗口，长会话仍会变吵；若仍保留自动压缩作兜底，他的经验是大约 50 万 token 再压。这是实践方法文，不是 Google 的发布单点，与 t936（Gemini 4 Neon 官方发布）不是同一条，不折进 t936，只作对照。需 Trends，本轮不查、不设 shortlisted。暂无足够窄、且不在禁测词表里的单义核心词（context engineering 过宽，Gemini 4 Neon 是厂商名）。",
+                "en": "Philipp Schmid’s post (2026-11-25; reached this lane via the 11-26 TLDR AI issue; the original was read). After using Gemini 4 Neon for weeks as a coding agent and running evals, he found that guardrails, skills, and rules written for older models slowed it down or made it fail on edge cases it could otherwise handle. His five changes: drop accumulating, conflicting hard rules in favor of judgment prompts that follow nearby style, and keep the user-level GEMINI.md to one screen; write tool usage once into a clear interface (or into a JSON schema for a custom agent) and delete repeated rules and few-shots from the system prompt; almost delete project-level AGENTS.md/GEMINI.md files, turning domain workflows into skills with a one-line index and loading them on demand; use screenshots or short recordings as references for UI and motion, and have the agent inspect its own rendering; at a phase change, write a short handoff file and start a new session instead of compacting mid-thread (compaction breaks the prompt cache and drops line-level detail). Even with a 1M window, long sessions get noisy; if automatic compaction is kept as a fallback, his experience is to wait until about 500k tokens. This is a practice note, not Google’s launch, so it is not folded into t936 (the official Gemini 4 Neon announcement); that row is a cross-reference only. Needs Trends; not queried and not shortlisted this turn. No narrow single core term that is also off the no-retest list (context engineering is too broad; Gemini 4 Neon is a vendor name).",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://www.philschmid.de/gemini-4-neon-context-engineering"
+          ]
+        },
+        {
+          "id": "t1039",
+          "theme": "agents-oss",
+          "title": {
+            "zh": "Andrew Trask：测强递归自我改进不能只看算力分配和无人复核合并率，还需要样本复杂度与反事实测量",
+            "en": "Andrew Trask",
+            "ja": "Andrew Trask"
+          },
+          "summary": {
+            "zh": "Andrew Trask 在 Cautiously Optimistic 的文章《Measuring RSI》（2026-11-27；经 11-27 TLDR AI 进入本线；原文已读；文首声明仅代表个人，不代表 DeepMind 或 Oxford 等）。回应 Dean W. Ball 的主张：弱递归（用工具造更好的同类工具）自古有之，真正需要监管的是强递归（AI 自主开发更强的后继模型）。Ball 建议用算力分配决策、以及「无实质人工复核即合并的代码占比」做法定定义；Trask 认为这两项必要但不充分——它们既不证明训练算法本身变好了，也不能把「人过一眼」和「改进来自 AI」因果连上，更无法在训出下一代更强模型之前发现强递归。他提议两项补足指标：样本复杂度（达到固定、低于前沿的能力阈值所需的 pre/post-training token 及推理算力，把样本复杂度当作缩放定律的除数，以便「验证而不升级」）；以及反事实测量（把 AI 对研发生产率的贡献从人类贡献里拆开，编码环节可事后让第二名工程师不用 AI 重做同一改动，构思环节则更贵，需抽出部分研究组在一段时间内完全不用 AI 工具来校准）。并建议做「改进训练脚本样本复杂度」的 AI 研究基准，提到 Karpathy 的 autoresearch 已有雏形。这与 t054（研究 agent 递归自改进论文）、t353（RSI-Master）、t990（METR Q4 能力更新）、t1001（METR 解读预训练损失加速）不是同一条，不折进这些行，只作对照。站内 RSI 前沿系列尚无独立选题行，本轮仍不另建行，也不把此文折进不存在的行。需 Trends，本轮不查、不设 shortlisted。暂无足够窄的单义核心词（sample complexity 过宽，RSI 也过宽且曾测过相关词）。",
+            "en": "",
+            "ja": ""
+          },
+          "judgment": {
+            "zh": "Andrew Trask 在 Cautiously Optimistic 的文章《Measuring RSI》（2026-11-27；经 11-27 TLDR AI 进入本线；原文已读；文首声明仅代表个人，不代表 DeepMind 或 Oxford 等）。回应 Dean W. Ball 的主张：弱递归（用工具造更好的同类工具）自古有之，真正需要监管的是强递归（AI 自主开发更强的后继模型）。Ball 建议用算力分配决策、以及「无实质人工复核即合并的代码占比」做法定定义；Trask 认为这两项必要但不充分——它们既不证明训练算法本身变好了，也不能把「人过一眼」和「改进来自 AI」因果连上，更无法在训出下一代更强模型之前发现强递归。他提议两项补足指标：样本复杂度（达到固定、低于前沿的能力阈值所需的 pre/post-training token 及推理算力，把样本复杂度当作缩放定律的除数，以便「验证而不升级」）；以及反事实测量（把 AI 对研发生产率的贡献从人类贡献里拆开，编码环节可事后让第二名工程师不用 AI 重做同一改动，构思环节则更贵，需抽出部分研究组在一段时间内完全不用 AI 工具来校准）。并建议做「改进训练脚本样本复杂度」的 AI 研究基准，提到 Karpathy 的 autoresearch 已有雏形。这与 t054（研究 agent 递归自改进论文）、t353（RSI-Master）、t990（METR Q4 能力更新）、t1001（METR 解读预训练损失加速）不是同一条，不折进这些行，只作对照。站内 RSI 前沿系列尚无独立选题行，本轮仍不另建行，也不把此文折进不存在的行。需 Trends，本轮不查、不设 shortlisted。暂无足够窄的单义核心词（sample complexity 过宽，RSI 也过宽且曾测过相关词）。",
+            "en": "Andrew Trask’s Cautiously Optimistic post Measuring RSI (2026-11-27; reached this lane via the 11-27 TLDR AI issue; the original was read; the opening says it is a personal view, not DeepMind’s or Oxford’s). He replies to Dean W. Ball: weak recursion (using tools to build better tools of the same kind) is old, and the thing that may need regulation is strong recursion (AI autonomously developing a stronger successor). Ball’s proposed legal tests — compute-allocation decisions, and the share of code merged without meaningful human review — are, in Trask’s view, necessary but not sufficient: they do not show that the training algorithm itself improved, they do not causally tie a human glance to an AI-driven improvement, and they cannot detect strong recursion before the next, stronger model is trained. He offers two complementary metrics: sample complexity (pre- and post-training tokens, and inference compute, needed to reach a fixed, below-frontier capability threshold, treating sample complexity as the divisor of a scaling law so one can verify without upgrading); and counterfactual measurement (separating AI’s contribution to R&D productivity from humans’, for example by having a second engineer redo a training-script change without AI, or, more expensively, by holding out some research groups from AI tools for a period to calibrate cheaper proxies). He also suggests a benchmark on the sample complexity of improving training scripts, and notes that Karpathy’s autoresearch is an early example. This is not the same item as t054 (a paper on recursively self-improving research agents), t353 (RSI-Master), t990 (METR’s Q4 capability update), or t1001 (METR on faster pretraining-loss decline), so it is not folded into those rows; they are cross-references only. The site’s RSI frontier series still has no dedicated topic row; this turn does not create one, and does not fold this essay into a row that does not exist. Needs Trends; not queried and not shortlisted this turn. No narrow single core term (sample complexity is too broad; RSI is also broad, and related terms have been tested).",
+            "ja": ""
+          },
+          "sourceBriefs": [
+            {
+              "source": "media",
+              "url": "https://andrewtrask.substack.com/p/measuring-rsi",
+              "title": "Andrew Trask：测强递归自我改进（strong RSI）不能只看算力分配和无人复核合并率，还需要样本复杂度与反事实测量",
+              "brief": {
+                "zh": "Andrew Trask 在 Cautiously Optimistic 的文章《Measuring RSI》（2026-11-27；经 11-27 TLDR AI 进入本线；原文已读；文首声明仅代表个人，不代表 DeepMind 或 Oxford 等）。回应 Dean W. Ball 的主张：弱递归（用工具造更好的同类工具）自古有之，真正需要监管的是强递归（AI 自主开发更强的后继模型）。Ball 建议用算力分配决策、以及「无实质人工复核即合并的代码占比」做法定定义；Trask 认为这两项必要但不充分——它们既不证明训练算法本身变好了，也不能把「人过一眼」和「改进来自 AI」因果连上，更无法在训出下一代更强模型之前发现强递归。他提议两项补足指标：样本复杂度（达到固定、低于前沿的能力阈值所需的 pre/post-training token 及推理算力，把样本复杂度当作缩放定律的除数，以便「验证而不升级」）；以及反事实测量（把 AI 对研发生产率的贡献从人类贡献里拆开，编码环节可事后让第二名工程师不用 AI 重做同一改动，构思环节则更贵，需抽出部分研究组在一段时间内完全不用 AI 工具来校准）。并建议做「改进训练脚本样本复杂度」的 AI 研究基准，提到 Karpathy 的 autoresearch 已有雏形。这与 t054（研究 agent 递归自改进论文）、t353（RSI-Master）、t990（METR Q4 能力更新）、t1001（METR 解读预训练损失加速）不是同一条，不折进这些行，只作对照。站内 RSI 前沿系列尚无独立选题行，本轮仍不另建行，也不把此文折进不存在的行。需 Trends，本轮不查、不设 shortlisted。暂无足够窄的单义核心词（sample complexity 过宽，RSI 也过宽且曾测过相关词）。",
+                "en": "Andrew Trask’s Cautiously Optimistic post Measuring RSI (2026-11-27; reached this lane via the 11-27 TLDR AI issue; the original was read; the opening says it is a personal view, not DeepMind’s or Oxford’s). He replies to Dean W. Ball: weak recursion (using tools to build better tools of the same kind) is old, and the thing that may need regulation is strong recursion (AI autonomously developing a stronger successor). Ball’s proposed legal tests — compute-allocation decisions, and the share of code merged without meaningful human review — are, in Trask’s view, necessary but not sufficient: they do not show that the training algorithm itself improved, they do not causally tie a human glance to an AI-driven improvement, and they cannot detect strong recursion before the next, stronger model is trained. He offers two complementary metrics: sample complexity (pre- and post-training tokens, and inference compute, needed to reach a fixed, below-frontier capability threshold, treating sample complexity as the divisor of a scaling law so one can verify without upgrading); and counterfactual measurement (separating AI’s contribution to R&D productivity from humans’, for example by having a second engineer redo a training-script change without AI, or, more expensively, by holding out some research groups from AI tools for a period to calibrate cheaper proxies). He also suggests a benchmark on the sample complexity of improving training scripts, and notes that Karpathy’s autoresearch is an early example. This is not the same item as t054 (a paper on recursively self-improving research agents), t353 (RSI-Master), t990 (METR’s Q4 capability update), or t1001 (METR on faster pretraining-loss decline), so it is not folded into those rows; they are cross-references only. The site’s RSI frontier series still has no dedicated topic row; this turn does not create one, and does not fold this essay into a row that does not exist. Needs Trends; not queried and not shortlisted this turn. No narrow single core term (sample complexity is too broad; RSI is also broad, and related terms have been tested).",
+                "ja": ""
+              }
+            }
+          ],
+          "sources": [
+            "media"
+          ],
+          "score": 4,
+          "status": "inbox",
+          "externalUrls": [
+            "https://andrewtrask.substack.com/p/measuring-rsi"
+          ]
+        }
+      ]
+    },
     {
       "hourStart": "2026-11-27T16:00:00+08:00",
       "label": {
